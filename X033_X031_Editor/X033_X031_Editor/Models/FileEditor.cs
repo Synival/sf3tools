@@ -2,7 +2,7 @@
 using System.Text;
 using System.IO;
 
-namespace STHAEditor.Models
+namespace SF3.X033_X031_Editor.Models
 {
     static class FileEditor
     {

@@ -1,4 +1,4 @@
-﻿namespace STHAEditor.Forms
+﻿namespace SF3.X033_X031_Editor.Forms
 {
     partial class frmMain
     {

@@ -7,17 +7,17 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
-using STHAEditor.Models;
-using STHAEditor.Models.Presets;
-using STHAEditor.Models.Items;
-using STHAEditor.Models.WeaponLevel;
-//using STHAEditor.Models.Characters;
-//using STHAEditor.Models.Blacksmith;
-//using STHAEditor.Models.StoreItems;
-//using STHAEditor.Models.SpellTable;
-//using STHAEditor.Models.StatTypes;
-//using STHAEditor.Models.Classes;
-//using STHAEditor.Models.Spells;
+using SF3.X033_X031_Editor.Models;
+using SF3.X033_X031_Editor.Models.Presets;
+using SF3.X033_X031_Editor.Models.Items;
+using SF3.X033_X031_Editor.Models.WeaponLevel;
+//using SF3.X033_X031_Editor.Models.Characters;
+//using SF3.X033_X031_Editor.Models.Blacksmith;
+//using SF3.X033_X031_Editor.Models.StoreItems;
+//using SF3.X033_X031_Editor.Models.SpellTable;
+//using SF3.X033_X031_Editor.Models.StatTypes;
+//using SF3.X033_X031_Editor.Models.Classes;
+//using SF3.X033_X031_Editor.Models.Spells;
 using BrightIdeasSoftware;
 //using BrightIdeasSoftware.Design;
 
@@ -27,7 +27,7 @@ using BrightIdeasSoftware;
 */
 
 
-namespace STHAEditor.Forms
+namespace SF3.X033_X031_Editor.Forms
 {
 
     public partial class frmMain : Form

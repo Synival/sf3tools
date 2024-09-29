@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace STHAEditor
+namespace SF3.X033_X031_Editor
 {
     static class Program
     {
