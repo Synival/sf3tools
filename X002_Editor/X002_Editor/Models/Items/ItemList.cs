@@ -2,9 +2,9 @@
 //using System.Text;
 using System.Xml;
 using System.IO;
-using static STHAEditor.Forms.frmMain;
+using static SF3.X002_Editor.Forms.frmMain;
 
-namespace STHAEditor.Models.Items
+namespace SF3.X002_Editor.Models.Items
 {
     public static class ItemList
     {

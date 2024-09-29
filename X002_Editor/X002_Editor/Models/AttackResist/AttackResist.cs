@@ -1,11 +1,11 @@
-﻿//using STHAEditor.Forms;
-//using STHAEditor.Models;
-using static STHAEditor.Forms.frmMain;
+﻿//using SF3.X002_Editor.Forms;
+//using SF3.X002_Editor.Models;
+using static SF3.X002_Editor.Forms.frmMain;
 
-//using STHAEditor.Models.StatTypes;
+//using SF3.X002_Editor.Models.StatTypes;
 
 
-namespace STHAEditor.Models.AttackResist
+namespace SF3.X002_Editor.Models.AttackResist
 {
     public class AttackResist
     {

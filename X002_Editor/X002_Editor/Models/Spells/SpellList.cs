@@ -2,9 +2,9 @@
 //using System.Text;
 using System.Xml;
 using System.IO;
-using static STHAEditor.Forms.frmMain;
+using static SF3.X002_Editor.Forms.frmMain;
 
-namespace STHAEditor.Models.Spells
+namespace SF3.X002_Editor.Models.Spells
 {
     public static class SpellList
     {
