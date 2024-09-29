@@ -2,10 +2,10 @@
 //using System.Text;
 using System.Xml;
 using System.IO;
-using static STHAEditor.Forms.frmMain;
+using static SF3.X1_Editor.Forms.frmMain;
 using System.Runtime.InteropServices.ComTypes;
 
-namespace STHAEditor.Models.Warps
+namespace SF3.X1_Editor.Models.Warps
 {
     public static class WarpList
     {
@@ -108,9 +108,9 @@ using System;
 using System.Xml;
 using System.IO;
 using System.Collections.Generic;
-using static STHAEditor.Forms.frmMain;
+using static SF3.X1_Editor.Forms.frmMain;
 
-namespace STHAEditor.Models.Treasures
+namespace SF3.X1_Editor.Models.Treasures
 {
     public static class TreasureList
     {

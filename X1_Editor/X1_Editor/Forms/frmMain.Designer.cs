@@ -1,6 +1,6 @@
 ﻿using System.Drawing.Text;
 
-namespace STHAEditor.Forms
+namespace SF3.X1_Editor.Forms
 {
     partial class frmMain
     {

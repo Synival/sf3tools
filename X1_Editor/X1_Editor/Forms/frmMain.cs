@@ -7,27 +7,27 @@ using System.Drawing;
 using System.Windows.Forms;
 //using System.Reflection;
 using System.IO;
-using STHAEditor.Models;
-//using STHAEditor.Models.Spells;
-using STHAEditor.Models.Presets;
-using STHAEditor.Models.Items;
-using STHAEditor.Models.AI;
-using STHAEditor.Models.UnknownAI;
-using STHAEditor.Models.BattlePointers;
-using STHAEditor.Models.Treasures;
-using STHAEditor.Models.CustomMovement;
-using STHAEditor.Models.Warps;
-using STHAEditor.Models.Tiles;
-using STHAEditor.Models.Npcs;
-using STHAEditor.Models.Enters;
-using STHAEditor.Models.Arrows;
-//using STHAEditor.Models.Characters;
-//using STHAEditor.Models.Blacksmith;
-//using STHAEditor.Models.StoreItems;
-//using STHAEditor.Models.SpellTable;
-//using STHAEditor.Models.StatTypes;
-//using STHAEditor.Models.Classes;
-//using STHAEditor.Models.Spells;
+using SF3.X1_Editor.Models;
+//using SF3.X1_Editor.Models.Spells;
+using SF3.X1_Editor.Models.Presets;
+using SF3.X1_Editor.Models.Items;
+using SF3.X1_Editor.Models.AI;
+using SF3.X1_Editor.Models.UnknownAI;
+using SF3.X1_Editor.Models.BattlePointers;
+using SF3.X1_Editor.Models.Treasures;
+using SF3.X1_Editor.Models.CustomMovement;
+using SF3.X1_Editor.Models.Warps;
+using SF3.X1_Editor.Models.Tiles;
+using SF3.X1_Editor.Models.Npcs;
+using SF3.X1_Editor.Models.Enters;
+using SF3.X1_Editor.Models.Arrows;
+//using SF3.X1_Editor.Models.Characters;
+//using SF3.X1_Editor.Models.Blacksmith;
+//using SF3.X1_Editor.Models.StoreItems;
+//using SF3.X1_Editor.Models.SpellTable;
+//using SF3.X1_Editor.Models.StatTypes;
+//using SF3.X1_Editor.Models.Classes;
+//using SF3.X1_Editor.Models.Spells;
 using BrightIdeasSoftware;
 //using System.Security.Cryptography.X509Certificates;
 //using BrightIdeasSoftware.Design;
@@ -38,7 +38,7 @@ using BrightIdeasSoftware;
 */
 
 
-namespace STHAEditor.Forms
+namespace SF3.X1_Editor.Forms
 {
 
     public partial class frmMain : Form

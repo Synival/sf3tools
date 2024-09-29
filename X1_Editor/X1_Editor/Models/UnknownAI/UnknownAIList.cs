@@ -2,9 +2,9 @@
 //using System.Text;
 using System.Xml;
 using System.IO;
-using static STHAEditor.Forms.frmMain;
+using static SF3.X1_Editor.Forms.frmMain;
 
-namespace STHAEditor.Models.UnknownAI
+namespace SF3.X1_Editor.Models.UnknownAI
 {
     public static class UnknownAIList
     {

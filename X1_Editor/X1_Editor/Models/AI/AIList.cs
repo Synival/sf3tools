@@ -2,9 +2,9 @@
 //using System.Text;
 using System.Xml;
 using System.IO;
-using static STHAEditor.Forms.frmMain;
+using static SF3.X1_Editor.Forms.frmMain;
 
-namespace STHAEditor.Models.AI
+namespace SF3.X1_Editor.Models.AI
 {
     public static class AIList
     {

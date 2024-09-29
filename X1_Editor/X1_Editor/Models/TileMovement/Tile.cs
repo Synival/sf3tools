@@ -1,13 +1,13 @@
-﻿//using STHAEditor.Forms;
-//using STHAEditor.Models;
-using STHAEditor.Models.UnknownAI;
+﻿//using SF3.X1_Editor.Forms;
+//using SF3.X1_Editor.Models;
+using SF3.X1_Editor.Models.UnknownAI;
 using System;
-using static STHAEditor.Forms.frmMain;
+using static SF3.X1_Editor.Forms.frmMain;
 
-//using STHAEditor.Models.StatTypes;
+//using SF3.X1_Editor.Models.StatTypes;
 
 
-namespace STHAEditor.Models.Tiles
+namespace SF3.X1_Editor.Models.Tiles
 {
     public class Tile
     {
