@@ -2,11 +2,11 @@
 //using System.Text;
 using System.Xml;
 using System.IO;
-using static STHAEditor.Forms.frmMain;
+using static SF3.X013_Editor.Forms.frmMain;
 using System.Runtime.InteropServices.ComTypes;
 using BrightIdeasSoftware;
 
-namespace STHAEditor.Models.StatusEffects
+namespace SF3.X013_Editor.Models.StatusEffects
 {
     public static class StatusEffectList
     {
@@ -115,9 +115,9 @@ using System;
 using System.Xml;
 using System.IO;
 using System.Collections.Generic;
-using static STHAEditor.Forms.frmMain;
+using static SF3.X013_Editor.Forms.frmMain;
 
-namespace STHAEditor.Models.Treasures
+namespace SF3.X013_Editor.Models.Treasures
 {
     public static class TreasureList
     {

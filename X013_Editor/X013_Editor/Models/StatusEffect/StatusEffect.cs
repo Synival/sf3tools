@@ -1,13 +1,13 @@
-﻿//using STHAEditor.Forms;
-//using STHAEditor.Models;
+﻿//using SF3.X013_Editor.Forms;
+//using SF3.X013_Editor.Models;
 using BrightIdeasSoftware;
 using System;
-using static STHAEditor.Forms.frmMain;
+using static SF3.X013_Editor.Forms.frmMain;
 
-//using STHAEditor.Models.StatTypes;
+//using SF3.X013_Editor.Models.StatTypes;
 
 
-namespace STHAEditor.Models.StatusEffects
+namespace SF3.X013_Editor.Models.StatusEffects
 {
     public class StatusEffect
     {

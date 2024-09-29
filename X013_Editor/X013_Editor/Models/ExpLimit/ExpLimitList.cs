@@ -2,9 +2,9 @@
 //using System.Text;
 using System.Xml;
 using System.IO;
-using static STHAEditor.Forms.frmMain;
+using static SF3.X013_Editor.Forms.frmMain;
 
-namespace STHAEditor.Models.ExpLimit
+namespace SF3.X013_Editor.Models.ExpLimit
 {
     public static class ExpLimitList
     {

@@ -1,12 +1,12 @@
-﻿//using STHAEditor.Forms;
-//using STHAEditor.Models;
+﻿//using SF3.X013_Editor.Forms;
+//using SF3.X013_Editor.Models;
 using System;
-using static STHAEditor.Forms.frmMain;
+using static SF3.X013_Editor.Forms.frmMain;
 
-//using STHAEditor.Models.StatTypes;
+//using SF3.X013_Editor.Models.StatTypes;
 
 
-namespace STHAEditor.Models.Items
+namespace SF3.X013_Editor.Models.Items
 {
     public class Item
     {
