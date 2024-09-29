@@ -2,10 +2,10 @@
 //using System.Text;
 using System.Xml;
 using System.IO;
-using static STHAEditor.Forms.frmMain;
+using static SF3.IconPointerEditor.Forms.frmMain;
 using System.Windows.Forms;
 
-namespace STHAEditor.Models.Items
+namespace SF3.IconPointerEditor.Models.Items
 {
     public static class ItemList
     {

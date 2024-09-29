@@ -2,9 +2,9 @@
 //using System.Text;
 using System.Xml;
 using System.IO;
-using static STHAEditor.Forms.frmMain;
+using static SF3.IconPointerEditor.Forms.frmMain;
 
-namespace STHAEditor.Models.Presets
+namespace SF3.IconPointerEditor.Models.Presets
 {
     public static class PresetList
     {

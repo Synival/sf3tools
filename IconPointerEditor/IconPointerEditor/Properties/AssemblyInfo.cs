@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("STHAEditor")]
+[assembly: AssemblyTitle("SF3.IconPointerEditor")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("STHAEditor")]
+[assembly: AssemblyProduct("SF3.IconPointerEditor")]
 [assembly: AssemblyCopyright("Copyright © Boneidol and RikaPSO  2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1,14 +1,14 @@
-﻿//using STHAEditor.Forms;
-//using STHAEditor.Models;
+﻿//using SF3.IconPointerEditor.Forms;
+//using SF3.IconPointerEditor.Models;
 using System.Threading;
 using System;
 using System.Windows.Forms;
-using static STHAEditor.Forms.frmMain;
+using static SF3.IconPointerEditor.Forms.frmMain;
 
-//using STHAEditor.Models.StatTypes;
+//using SF3.IconPointerEditor.Models.StatTypes;
 
 
-namespace STHAEditor.Models.Items
+namespace SF3.IconPointerEditor.Models.Items
 {
     public class Item
     {

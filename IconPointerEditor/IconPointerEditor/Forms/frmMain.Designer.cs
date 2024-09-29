@@ -1,4 +1,4 @@
-﻿namespace STHAEditor.Forms
+﻿namespace SF3.IconPointerEditor.Forms
 {
     partial class frmMain
     {

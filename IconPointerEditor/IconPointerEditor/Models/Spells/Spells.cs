@@ -1,11 +1,11 @@
-﻿//using STHAEditor.Forms;
-//using STHAEditor.Models;
-using static STHAEditor.Forms.frmMain;
+﻿//using SF3.IconPointerEditor.Forms;
+//using SF3.IconPointerEditor.Models;
+using static SF3.IconPointerEditor.Forms.frmMain;
 
-//using STHAEditor.Models.StatTypes;
+//using SF3.IconPointerEditor.Models.StatTypes;
 
 
-namespace STHAEditor.Models.Spells
+namespace SF3.IconPointerEditor.Models.Spells
 {
     public class Spell
     {
