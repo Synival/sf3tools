@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0A7802B2-7A65-415B-91C9-549E40348493}</ProjectGuid>
+    <ProjectGuid>{36A41AB8-4D61-4C80-806E-F74EAAB17794}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>STHAAbilityEditor</RootNamespace>
+    <RootNamespace>SF3.IconPointerEditor</RootNamespace>
     <AssemblyName>SF3 Icon pointer editor</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
