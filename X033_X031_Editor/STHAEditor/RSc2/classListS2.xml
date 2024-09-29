@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+	<item value="0x00" name="Synbios U" />
+	<item value="0x01" name="Dantares U" />
+	<item value="0x02" name="Masqurin U" />
+	<item value="0x03" name="Grace U" />
+	<item value="0x04" name="Hayward U" />
+	<item value="0x05" name="Obright U" />
+	<item value="0x06" name="Irene U" />
+	<item value="0x07" name="Julian U" />
+	<item value="0x08" name="Cybel U" />
+	<item value="0x09" name="Eldar U" />
+	<item value="0x0A" name="Kahn U" />
+	<item value="0x0B" name="Noon P1" />
+	<item value="0x0C" name="Justin P1" />
+	<item value="0x0D" name="Horst P1" />
+	<item value="0x0E" name="Penn U" />
+	<item value="0x0F" name="Ratchet P1" />
+	<item value="0x10" name="Frank P1" />
+	<item value="0x11" name="Hagane P1" />
+	<item value="0x12" name="Murasame P1" />
+	<item value="0x13" name="Fynnding P1" />
+	<item value="0x14" name="Synbios P1" />
+	<item value="0x15" name="Dantares P1" />
+	<item value="0x16" name="Masqurin P1" />
+	<item value="0x17" name="Grace P1" />
+	<item value="0x18" name="Hayward P1" />
+	<item value="0x19" name="Obright P1" />
+	<item value="0x1A" name="Irene P1" />
+	<item value="0x1B" name="Julian P1" />
+	<item value="0x1C" name="Cybel P1" />
+	<item value="0x1D" name="Eldar P1" />
+	<item value="0x1E" name="Kahn P1" />
+	<item value="0x1F" name="Penn P1" />
+	<item value="0x20" name="Medion U" />
+  <item value="0x21" name="Campbell U" />
+  <item value="0x22" name="Syntesis U" />
+  <item value="0x23" name="Uryudo U" />
+  <item value="0x24" name="Waltz U" />
+  <item value="0x25" name="Rock U" />
+  <item value="0x26" name="Barnard U" />
+  <item value="0x27" name="Zero U" />
+  <item value="0x28" name="Hazuki U" />
+  <item value="0x29" name="David U" />
+  <item value="0x2A" name="Hedoba U" />
+  <item value="0x2B" name="Julian U Scn2" />
+  <item value="0x2C" name="Donhort P1 Scn2" />
+  <item value="0x2D" name="Hera P1" />
+  <item value="0x2E" name="Robbie P1" />
+  <item value="0x2F" name="Arthur P1" />
+  <item value="0x30" name="Garosh P1" />
+  <item value="0x31" name="Jade P1" />
+  <item value="0x32" name="Penko U" />
+  <item value="0x33" name="Papesh P1" />
+  <item value="0x34" name="Medion P1" />
+  <item value="0x35" name="Campbell P1" />
+  <item value="0x36" name="Snytesis P1" />
+  <item value="0x37" name="Uryudo P1" />
+  <item value="0x38" name="Waltz P1" />
+  <item value="0x39" name="Rock P1" />
+  <item value="0x3A" name="Barnard P1" />
+  <item value="0x3B" name="Zero P1" />
+  <item value="0x3C" name="Hazuki P1" />
+  <item value="0x3D" name="David P1" />
+  <item value="0x3E" name="Hedoba P1" />
+  <item value="0x3F" name="Julian P1 Scn2" />
+  <item value="0x40" name="Penko P1" />
+  <item value="0x41" name="Unused" />
+  
+</items>

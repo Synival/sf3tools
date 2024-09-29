@@ -1,0 +1,3221 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+	<item value="0x00" name="Dantares - Synbios" />
+	<item value="0x01" name="Masqurin - Synbios" />
+	<item value="0x02" name="Masqurin - Dantares" />
+	<item value="0x03" name="Grace - Synbios" />
+	<item value="0x04" name="Grace - Dantares" />
+	<item value="0x05" name="Grace - Masqurin" />
+	<item value="0x06" name="Hayward - Synbios" />
+	<item value="0x07" name="Hayward - Dantares" />
+	<item value="0x08" name="Hayward - Masqurin" />
+	<item value="0x09" name="Hayward - Grace" />
+	<item value="0x0a" name="Obright - Synbios" />
+	<item value="0x0b" name="Obright - Dantares" />
+	<item value="0x0c" name="Obright - Masqurin" />
+	<item value="0x0d" name="Obright - Grace" />
+	<item value="0x0e" name="Obright - Hayward" />
+	<item value="0x0f" name="Irene - Synbios" />
+	<item value="0x10" name="Irene - Dantares" />
+	<item value="0x11" name="Irene - Masqurin" />
+	<item value="0x12" name="Irene - Grace" />
+	<item value="0x13" name="Irene - Hayward" />
+	<item value="0x14" name="Irene - Obright" />
+	<item value="0x15" name="Julian (Scenario 1) - Synbios" />
+	<item value="0x16" name="Julian (Scenario 1) - Dantares" />
+	<item value="0x17" name="Julian (Scenario 1) - Masqurin" />
+	<item value="0x18" name="Julian (Scenario 1) - Grace" />
+	<item value="0x19" name="Julian (Scenario 1) - Hayward" />
+	<item value="0x1a" name="Julian (Scenario 1) - Obright" />
+	<item value="0x1b" name="Julian (Scenario 1) - Irene" />
+	<item value="0x1c" name="Cybel - Synbios" />
+	<item value="0x1d" name="Cybel - Dantares" />
+	<item value="0x1e" name="Cybel - Masqurin" />
+	<item value="0x1f" name="Cybel - Grace" />
+	<item value="0x20" name="Cybel - Hayward" />
+	<item value="0x21" name="Cybel - Obright" />
+	<item value="0x22" name="Cybel - Irene" />
+	<item value="0x23" name="Cybel - Julian" />
+	<item value="0x24" name="Eldar - Synbios" />
+	<item value="0x25" name="Eldar - Dantares" />
+	<item value="0x26" name="Eldar - Masqurin" />
+	<item value="0x27" name="Eldar - Grace" />
+	<item value="0x28" name="Eldar - Hayward" />
+	<item value="0x29" name="Eldar - Obright" />
+	<item value="0x2a" name="Eldar - Irene" />
+	<item value="0x2b" name="Eldar - Julian" />
+	<item value="0x2c" name="Eldar - Cybel" />
+	<item value="0x2d" name="Kahn - Synbios" />
+	<item value="0x2e" name="Kahn - Dantares" />
+	<item value="0x2f" name="Kahn - Masqurin" />
+	<item value="0x30" name="Kahn - Grace" />
+	<item value="0x31" name="Kahn - Hayward" />
+	<item value="0x32" name="Kahn - Obright" />
+	<item value="0x33" name="Kahn - Irene" />
+	<item value="0x34" name="Kahn - Julian" />
+	<item value="0x35" name="Kahn - Cybel" />
+	<item value="0x36" name="Kahn - Eldar" />
+	<item value="0x37" name="Noon - Synbios" />
+	<item value="0x38" name="Noon - Dantares" />
+	<item value="0x39" name="Noon - Masqurin" />
+	<item value="0x3a" name="Noon - Grace" />
+	<item value="0x3b" name="Noon - Hayward" />
+	<item value="0x3c" name="Noon - Obright" />
+	<item value="0x3d" name="Noon - Irene" />
+	<item value="0x3e" name="Noon - Julian" />
+	<item value="0x3f" name="Noon - Cybel" />
+	<item value="0x40" name="Noon - Eldar" />
+	<item value="0x41" name="Noon - Kahn" />
+	<item value="0x42" name="Justin - Synbios" />
+	<item value="0x43" name="Justin - Dantares" />
+	<item value="0x44" name="Justin - Masqurin" />
+	<item value="0x45" name="Justin - Grace" />
+	<item value="0x46" name="Justin - Hayward" />
+	<item value="0x47" name="Justin - Obright" />
+	<item value="0x48" name="Justin - Irene" />
+	<item value="0x49" name="Justin - Julian" />
+	<item value="0x4a" name="Justin - Cybel" />
+	<item value="0x4b" name="Justin - Eldar" />
+	<item value="0x4c" name="Justin - Kahn" />
+	<item value="0x4d" name="Justin - Noon" />
+	<item value="0x4e" name="Horst - Synbios" />
+	<item value="0x4f" name="Horst - Dantares" />
+	<item value="0x50" name="Horst - Masqurin" />
+	<item value="0x51" name="Horst - Grace" />
+	<item value="0x52" name="Horst - Hayward" />
+	<item value="0x53" name="Horst - Obright" />
+	<item value="0x54" name="Horst - Irene" />
+	<item value="0x55" name="Horst - Julian" />
+	<item value="0x56" name="Horst - Cybel" />
+	<item value="0x57" name="Horst - Eldar" />
+	<item value="0x58" name="Horst - Kahn" />
+	<item value="0x59" name="Horst - Noon" />
+	<item value="0x5a" name="Horst - Justin" />
+	<item value="0x5b" name="Penn - Synbios" />
+	<item value="0x5c" name="Penn - Dantares" />
+	<item value="0x5d" name="Penn - Masqurin" />
+	<item value="0x5e" name="Penn - Grace" />
+	<item value="0x5f" name="Penn - Hayward" />
+	<item value="0x60" name="Penn - Obright" />
+	<item value="0x61" name="Penn - Irene" />
+	<item value="0x62" name="Penn - Julian" />
+	<item value="0x63" name="Penn - Cybel" />
+	<item value="0x64" name="Penn - Eldar" />
+	<item value="0x65" name="Penn - Kahn" />
+	<item value="0x66" name="Penn - Noon" />
+	<item value="0x67" name="Penn - Justin" />
+	<item value="0x68" name="Penn - Horst" />
+	<item value="0x69" name="Rattchet - Synbios" />
+	<item value="0x6a" name="Rattchet - Dantares" />
+	<item value="0x6b" name="Rattchet - Masqurin" />
+	<item value="0x6c" name="Rattchet - Grace" />
+	<item value="0x6d" name="Rattchet - Hayward" />
+	<item value="0x6e" name="Rattchet - Obright" />
+	<item value="0x6f" name="Rattchet - Irene" />
+	<item value="0x70" name="Rattchet - Julian" />
+	<item value="0x71" name="Rattchet - Cybel" />
+	<item value="0x72" name="Rattchet - Eldar" />
+	<item value="0x73" name="Rattchet - Kahn" />
+	<item value="0x74" name="Rattchet - Noon" />
+	<item value="0x75" name="Rattchet - Justin" />
+	<item value="0x76" name="Rattchet - Horst" />
+	<item value="0x77" name="Rattchet - Penn" />
+	<item value="0x78" name="Frank - Synbios" />
+	<item value="0x79" name="Frank - Dantares" />
+	<item value="0x7a" name="Frank - Masqurin" />
+	<item value="0x7b" name="Frank - Grace" />
+	<item value="0x7c" name="Frank - Hayward" />
+	<item value="0x7d" name="Frank - Obright" />
+	<item value="0x7e" name="Frank - Irene" />
+	<item value="0x7f" name="Frank - Julian" />
+	<item value="0x80" name="Frank - Cybel" />
+	<item value="0x81" name="Frank - Eldar" />
+	<item value="0x82" name="Frank - Kahn" />
+	<item value="0x83" name="Frank - Noon" />
+	<item value="0x84" name="Frank - Justin" />
+	<item value="0x85" name="Frank - Horst" />
+	<item value="0x86" name="Frank - Penn" />
+	<item value="0x87" name="Frank - Rattchet" />
+	<item value="0x88" name="Hagane - Synbios" />
+	<item value="0x89" name="Hagane - Dantares" />
+	<item value="0x8a" name="Hagane - Masqurin" />
+	<item value="0x8b" name="Hagane - Grace" />
+	<item value="0x8c" name="Hagane - Hayward" />
+	<item value="0x8d" name="Hagane - Obright" />
+	<item value="0x8e" name="Hagane - Irene" />
+	<item value="0x8f" name="Hagane - Julian" />
+	<item value="0x90" name="Hagane - Cybel" />
+	<item value="0x91" name="Hagane - Eldar" />
+	<item value="0x92" name="Hagane - Kahn" />
+	<item value="0x93" name="Hagane - Noon" />
+	<item value="0x94" name="Hagane - Justin" />
+	<item value="0x95" name="Hagane - Horst" />
+	<item value="0x96" name="Hagane - Penn" />
+	<item value="0x97" name="Hagane - Rattchet" />
+	<item value="0x98" name="Hagane - Frank" />
+	<item value="0x99" name="Murasame - Synbios" />
+	<item value="0x9a" name="Murasame - Dantares" />
+	<item value="0x9b" name="Murasame - Masqurin" />
+	<item value="0x9c" name="Murasame - Grace" />
+	<item value="0x9d" name="Murasame - Hayward" />
+	<item value="0x9e" name="Murasame - Obright" />
+	<item value="0x9f" name="Murasame - Irene" />
+	<item value="0xa0" name="Murasame - Julian" />
+	<item value="0xa1" name="Murasame - Cybel" />
+	<item value="0xa2" name="Murasame - Eldar" />
+	<item value="0xa3" name="Murasame - Kahn" />
+	<item value="0xa4" name="Murasame - Noon" />
+	<item value="0xa5" name="Murasame - Justin" />
+	<item value="0xa6" name="Murasame - Horst" />
+	<item value="0xa7" name="Murasame - Penn" />
+	<item value="0xa8" name="Murasame - Rattchet" />
+	<item value="0xa9" name="Murasame - Frank" />
+	<item value="0xaa" name="Murasame - Hagane" />
+	<item value="0xab" name="Fynnding - Synbios" />
+	<item value="0xac" name="Fynnding - Dantares" />
+	<item value="0xad" name="Fynnding - Masqurin" />
+	<item value="0xae" name="Fynnding - Grace" />
+	<item value="0xaf" name="Fynnding - Hayward" />
+	<item value="0xb0" name="Fynnding - Obright" />
+	<item value="0xb1" name="Fynnding - Irene" />
+	<item value="0xb2" name="Fynnding - Julian" />
+	<item value="0xb3" name="Fynnding - Cybel" />
+	<item value="0xb4" name="Fynnding - Eldar" />
+	<item value="0xb5" name="Fynnding - Kahn" />
+	<item value="0xb6" name="Fynnding - Noon" />
+	<item value="0xb7" name="Fynnding - Justin" />
+	<item value="0xb8" name="Fynnding - Horst" />
+	<item value="0xb9" name="Fynnding - Penn" />
+	<item value="0xba" name="Fynnding - Rattchet" />
+	<item value="0xbb" name="Fynnding - Frank" />
+	<item value="0xbc" name="Fynnding - Hagane" />
+	<item value="0xbd" name="Fynnding - Murasame" />
+	<item value="0xbe" name="Medion - Synbios" />
+	<item value="0xbf" name="Medion - Dantares" />
+	<item value="0xc0" name="Medion - Masqurin" />
+	<item value="0xc1" name="Medion - Grace" />
+	<item value="0xc2" name="Medion - Hayward" />
+	<item value="0xc3" name="Medion - Obright" />
+	<item value="0xc4" name="Medion - Irene" />
+	<item value="0xc5" name="Medion - Julian (Scenario 1)" />
+	<item value="0xc6" name="Medion - Cybel" />
+	<item value="0xc7" name="Medion - Eldar" />
+	<item value="0xc8" name="Medion - Kahn" />
+	<item value="0xc9" name="Medion - Noon" />
+	<item value="0xca" name="Medion - Justin" />
+	<item value="0xcb" name="Medion - Horst" />
+	<item value="0xcc" name="Medion - Penn" />
+	<item value="0xcd" name="Medion - Rattchet" />
+	<item value="0xce" name="Medion - Frank" />
+	<item value="0xcf" name="Medion - Hagane" />
+	<item value="0xd0" name="Medion - Murasame" />
+	<item value="0xd1" name="Medion - Fynnding" />
+	<item value="0xd2" name="Cambell - Synbios" />
+	<item value="0xd3" name="Cambell - Dantares" />
+	<item value="0xd4" name="Cambell - Masqurin" />
+	<item value="0xd5" name="Cambell - Grace" />
+	<item value="0xd6" name="Cambell - Hayward" />
+	<item value="0xd7" name="Cambell - Obright" />
+	<item value="0xd8" name="Cambell - Irene" />
+	<item value="0xd9" name="Cambell - Julian (Scenario 1)" />
+	<item value="0xda" name="Cambell - Cybel" />
+	<item value="0xdb" name="Cambell - Eldar" />
+	<item value="0xdc" name="Cambell - Kahn" />
+	<item value="0xdd" name="Cambell - Noon" />
+	<item value="0xde" name="Cambell - Justin" />
+	<item value="0xdf" name="Cambell - Horst" />
+	<item value="0xe0" name="Cambell - Penn" />
+	<item value="0xe1" name="Cambell - Rattchet" />
+	<item value="0xe2" name="Cambell - Frank" />
+	<item value="0xe3" name="Cambell - Hagane" />
+	<item value="0xe4" name="Cambell - Murasame" />
+	<item value="0xe5" name="Cambell - Fynnding" />
+	<item value="0xe6" name="Cambell - Medion" />
+	<item value="0xe7" name="Syntesis - Synbios" />
+	<item value="0xe8" name="Syntesis - Dantares" />
+	<item value="0xe9" name="Syntesis - Masqurin" />
+	<item value="0xea" name="Syntesis - Grace" />
+	<item value="0xeb" name="Syntesis - Hayward" />
+	<item value="0xec" name="Syntesis - Obright" />
+	<item value="0xed" name="Syntesis - Irene" />
+	<item value="0xee" name="Syntesis - Julian (Scenario 1)" />
+	<item value="0xef" name="Syntesis - Cybel" />
+	<item value="0xf0" name="Syntesis - Eldar" />
+	<item value="0xf1" name="Syntesis - Kahn" />
+	<item value="0xf2" name="Syntesis - Noon" />
+	<item value="0xf3" name="Syntesis - Justin" />
+	<item value="0xf4" name="Syntesis - Horst" />
+	<item value="0xf5" name="Syntesis - Penn" />
+	<item value="0xf6" name="Syntesis - Rattchet" />
+	<item value="0xf7" name="Syntesis - Frank" />
+	<item value="0xf8" name="Syntesis - Hagane" />
+	<item value="0xf9" name="Syntesis - Murasame" />
+	<item value="0xfa" name="Syntesis - Fynnding" />
+	<item value="0xfb" name="Syntesis - Medion" />
+	<item value="0xfc" name="Syntesis - Cambell" />
+	<item value="0xfd" name="Uryudo - Synbios" />
+	<item value="0xfe" name="Uryudo - Dantares" />
+	<item value="0xff" name="Uryudo - Masqurin" />
+	<item value="0x100" name="Uryudo - Grace" />
+	<item value="0x101" name="Uryudo - Hayward" />
+	<item value="0x102" name="Uryudo - Obright" />
+	<item value="0x103" name="Uryudo - Irene" />
+	<item value="0x104" name="Uryudo - Julian (Scenario 1)" />
+	<item value="0x105" name="Uryudo - Cybel" />
+	<item value="0x106" name="Uryudo - Eldar" />
+	<item value="0x107" name="Uryudo - Kahn" />
+	<item value="0x108" name="Uryudo - Noon" />
+	<item value="0x109" name="Uryudo - Justin" />
+	<item value="0x10a" name="Uryudo - Horst" />
+	<item value="0x10b" name="Uryudo - Penn" />
+	<item value="0x10c" name="Uryudo - Rattchet" />
+	<item value="0x10d" name="Uryudo - Frank" />
+	<item value="0x10e" name="Uryudo - Hagane" />
+	<item value="0x10f" name="Uryudo - Murasame" />
+	<item value="0x110" name="Uryudo - Fynnding" />
+	<item value="0x111" name="Uryudo - Medion" />
+	<item value="0x112" name="Uryudo - Cambell" />
+	<item value="0x113" name="Uryudo - Syntesis" /> //
+	<item value="0x114" name="Irene - Obright" />
+	<item value="0x115" name="Julian (Scenario 1) - Synbios" />
+	<item value="0x116" name="Julian (Scenario 1) - Dantares" />
+	<item value="0x117" name="Julian (Scenario 1) - Masqurin" />
+	<item value="0x118" name="Julian (Scenario 1) - Grace" />
+	<item value="0x119" name="Julian (Scenario 1) - Hayward" />
+	<item value="0x11a" name="Julian (Scenario 1) - Obright" />
+	<item value="0x11b" name="Julian (Scenario 1) - Irene" />
+	<item value="0x11c" name="Cybel - Synbios" />
+	<item value="0x11d" name="Cybel - Dantares" />
+	<item value="0x11e" name="Cybel - Masqurin" />
+	<item value="0x11f" name="Cybel - Grace" />
+	<item value="0x120" name="Cybel - Hayward" />
+	<item value="0x121" name="Cybel - Obright" />
+	<item value="0x122" name="Cybel - Irene" />
+	<item value="0x123" name="Cybel - Julian" />
+	<item value="0x124" name="Eldar - Synbios" />
+	<item value="0x125" name="Eldar - Dantares" />
+	<item value="0x126" name="Eldar - Masqurin" />
+	<item value="0x127" name="Eldar - Grace" />
+	<item value="0x128" name="Eldar - Hayward" />
+	<item value="0x129" name="Eldar - Obright" />
+	<item value="0x12a" name="Eldar - Irene" />
+	<item value="0x12b" name="Eldar - Julian" />
+	<item value="0x12c" name="Eldar - Cybel" />
+	<item value="0x12d" name="Kahn - Synbios" />
+	<item value="0x12e" name="Kahn - Dantares" />
+	<item value="0x12f" name="Kahn - Masqurin" />
+	<item value="0x130" name="Kahn - Grace" />
+	<item value="0x131" name="Kahn - Hayward" />
+	<item value="0x132" name="Kahn - Obright" />
+	<item value="0x133" name="Kahn - Irene" />
+	<item value="0x134" name="Kahn - Julian" />
+	<item value="0x135" name="Kahn - Cybel" />
+	<item value="0x136" name="Kahn - Eldar" />
+	<item value="0x137" name="Noon - Synbios" />
+	<item value="0x138" name="Noon - Dantares" />
+	<item value="0x139" name="Noon - Masqurin" />
+	<item value="0x13a" name="Noon - Grace" />
+	<item value="0x13b" name="Noon - Hayward" />
+	<item value="0x13c" name="Noon - Obright" />
+	<item value="0x13d" name="Noon - Irene" />
+	<item value="0x13e" name="Noon - Julian" />
+	<item value="0x13f" name="Noon - Cybel" />
+	<item value="0x140" name="Noon - Eldar" />
+	<item value="0x141" name="Noon - Kahn" />
+	<item value="0x142" name="Justin - Synbios" />
+	<item value="0x143" name="Justin - Dantares" />
+	<item value="0x144" name="Justin - Masqurin" />
+	<item value="0x145" name="Justin - Grace" />
+	<item value="0x146" name="Justin - Hayward" />
+	<item value="0x147" name="Justin - Obright" />
+	<item value="0x148" name="Justin - Irene" />
+	<item value="0x149" name="Justin - Julian" />
+	<item value="0x14a" name="Justin - Cybel" />
+	<item value="0x14b" name="Justin - Eldar" />
+	<item value="0x14c" name="Justin - Kahn" />
+	<item value="0x14d" name="Justin - Noon" />
+	<item value="0x14e" name="Horst - Synbios" />
+	<item value="0x14f" name="Horst - Dantares" />
+	<item value="0x150" name="Horst - Masqurin" />
+	<item value="0x151" name="Horst - Grace" />
+	<item value="0x152" name="Horst - Hayward" />
+	<item value="0x153" name="Horst - Obright" />
+	<item value="0x154" name="Horst - Irene" />
+	<item value="0x155" name="Horst - Julian" />
+	<item value="0x156" name="Horst - Cybel" />
+	<item value="0x157" name="Horst - Eldar" />
+	<item value="0x158" name="Horst - Kahn" />
+	<item value="0x159" name="Horst - Noon" />
+	<item value="0x15a" name="Horst - Justin" />
+	<item value="0x15b" name="Penn - Synbios" />
+	<item value="0x15c" name="Penn - Dantares" />
+	<item value="0x15d" name="Penn - Masqurin" />
+	<item value="0x15e" name="Penn - Grace" />
+	<item value="0x15f" name="Penn - Hayward" />
+	<item value="0x160" name="Penn - Obright" />
+	<item value="0x161" name="Penn - Irene" />
+	<item value="0x162" name="Penn - Julian" />
+	<item value="0x163" name="Penn - Cybel" />
+	<item value="0x164" name="Penn - Eldar" />
+	<item value="0x165" name="Penn - Kahn" />
+	<item value="0x166" name="Penn - Noon" />
+	<item value="0x167" name="Penn - Justin" />
+	<item value="0x168" name="Penn - Horst" />
+	<item value="0x169" name="Rattchet - Synbios" />
+	<item value="0x16a" name="Rattchet - Dantares" />
+	<item value="0x16b" name="Rattchet - Masqurin" />
+	<item value="0x16c" name="Rattchet - Grace" />
+	<item value="0x16d" name="Rattchet - Hayward" />
+	<item value="0x16e" name="Rattchet - Obright" />
+	<item value="0x16f" name="Rattchet - Irene" />
+	<item value="0x170" name="Rattchet - Julian" />
+	<item value="0x171" name="Rattchet - Cybel" />
+	<item value="0x172" name="Rattchet - Eldar" />
+	<item value="0x173" name="Rattchet - Kahn" />
+	<item value="0x174" name="Rattchet - Noon" />
+	<item value="0x175" name="Rattchet - Justin" />
+	<item value="0x176" name="Rattchet - Horst" />
+	<item value="0x177" name="Rattchet - Penn" />
+	<item value="0x178" name="Frank - Synbios" />
+	<item value="0x179" name="Frank - Dantares" />
+	<item value="0x17a" name="Frank - Masqurin" />
+	<item value="0x17b" name="Frank - Grace" />
+	<item value="0x17c" name="Frank - Hayward" />
+	<item value="0x17d" name="Frank - Obright" />
+	<item value="0x17e" name="Frank - Irene" />
+	<item value="0x17f" name="Frank - Julian" />
+	<item value="0x180" name="Frank - Cybel" />
+	<item value="0x181" name="Frank - Eldar" />
+	<item value="0x182" name="Frank - Kahn" />
+	<item value="0x183" name="Frank - Noon" />
+	<item value="0x184" name="Frank - Justin" />
+	<item value="0x185" name="Frank - Horst" />
+	<item value="0x186" name="Frank - Penn" />
+	<item value="0x187" name="Frank - Rattchet" />
+	<item value="0x188" name="Hagane - Synbios" />
+	<item value="0x189" name="Hagane - Dantares" />
+	<item value="0x18a" name="Hagane - Masqurin" />
+	<item value="0x18b" name="Hagane - Grace" />
+	<item value="0x18c" name="Hagane - Hayward" />
+	<item value="0x18d" name="Hagane - Obright" />
+	<item value="0x18e" name="Hagane - Irene" />
+	<item value="0x18f" name="Hagane - Julian" />
+	<item value="0x190" name="Hagane - Cybel" />
+	<item value="0x191" name="Hagane - Eldar" />
+	<item value="0x192" name="Hagane - Kahn" />
+	<item value="0x193" name="Hagane - Noon" />
+	<item value="0x194" name="Hagane - Justin" />
+	<item value="0x195" name="Hagane - Horst" />
+	<item value="0x196" name="Hagane - Penn" />
+	<item value="0x197" name="Hagane - Rattchet" />
+	<item value="0x198" name="Hagane - Frank" />
+	<item value="0x199" name="Murasame - Synbios" />
+	<item value="0x19a" name="Murasame - Dantares" />
+	<item value="0x19b" name="Murasame - Masqurin" />
+	<item value="0x19c" name="Murasame - Grace" />
+	<item value="0x19d" name="Murasame - Hayward" />
+	<item value="0x19e" name="Murasame - Obright" />
+	<item value="0x19f" name="Murasame - Irene" />
+	<item value="0x1a0" name="Murasame - Julian" />
+	<item value="0x1a1" name="Murasame - Cybel" />
+	<item value="0x1a2" name="Murasame - Eldar" />
+	<item value="0x1a3" name="Murasame - Kahn" />
+	<item value="0x1a4" name="Murasame - Noon" />
+	<item value="0x1a5" name="Murasame - Justin" />
+	<item value="0x1a6" name="Murasame - Horst" />
+	<item value="0x1a7" name="Murasame - Penn" />
+	<item value="0x1a8" name="Murasame - Rattchet" />
+	<item value="0x1a9" name="Murasame - Frank" />
+	<item value="0x1aa" name="Murasame - Hagane" />
+	<item value="0x1ab" name="Fynnding - Synbios" />
+	<item value="0x1ac" name="Fynnding - Dantares" />
+	<item value="0x1ad" name="Fynnding - Masqurin" />
+	<item value="0x1ae" name="Fynnding - Grace" />
+	<item value="0x1af" name="Fynnding - Hayward" />
+	<item value="0x1b0" name="Fynnding - Obright" />
+	<item value="0x1b1" name="Fynnding - Irene" />
+	<item value="0x1b2" name="Fynnding - Julian" />
+	<item value="0x1b3" name="Fynnding - Cybel" />
+	<item value="0x1b4" name="Fynnding - Eldar" />
+	<item value="0x1b5" name="Fynnding - Kahn" />
+	<item value="0x1b6" name="Fynnding - Noon" />
+	<item value="0x1b7" name="Fynnding - Justin" />
+	<item value="0x1b8" name="Fynnding - Horst" />
+	<item value="0x1b9" name="Fynnding - Penn" />
+	<item value="0x1ba" name="Fynnding - Rattchet" />
+	<item value="0x1bb" name="Fynnding - Frank" />
+	<item value="0x1bc" name="Fynnding - Hagane" />
+	<item value="0x1bd" name="Fynnding - Murasame" />
+	<item value="0x1be" name="Medion - Synbios" />
+	<item value="0x1bf" name="Medion - Dantares" />
+	<item value="0x1c0" name="Medion - Masqurin" />
+	<item value="0x1c1" name="Medion - Grace" />
+	<item value="0x1c2" name="Medion - Hayward" />
+	<item value="0x1c3" name="Medion - Obright" />
+	<item value="0x1c4" name="Medion - Irene" />
+	<item value="0x1c5" name="Medion - Julian (Scenario 1)" />
+	<item value="0x1c6" name="Medion - Cybel" />
+	<item value="0x1c7" name="Medion - Eldar" />
+	<item value="0x1c8" name="Medion - Kahn" />
+	<item value="0x1c9" name="Medion - Noon" />
+	<item value="0x1ca" name="Medion - Justin" />
+	<item value="0x1cb" name="Medion - Horst" />
+	<item value="0x1cc" name="Medion - Penn" />
+	<item value="0x1cd" name="Medion - Rattchet" />
+	<item value="0x1ce" name="Medion - Frank" />
+	<item value="0x1cf" name="Medion - Hagane" />
+	<item value="0x1d0" name="Medion - Murasame" />
+	<item value="0x1d1" name="Medion - Fynnding" />
+	<item value="0x1d2" name="Cambell - Synbios" />
+	<item value="0x1d3" name="Cambell - Dantares" />
+	<item value="0x1d4" name="Cambell - Masqurin" />
+	<item value="0x1d5" name="Cambell - Grace" />
+	<item value="0x1d6" name="Cambell - Hayward" />
+	<item value="0x1d7" name="Cambell - Obright" />
+	<item value="0x1d8" name="Cambell - Irene" />
+	<item value="0x1d9" name="Cambell - Julian (Scenario 1)" />
+	<item value="0x1da" name="Cambell - Cybel" />
+	<item value="0x1db" name="Cambell - Eldar" />
+	<item value="0x1dc" name="Cambell - Kahn" />
+	<item value="0x1dd" name="Cambell - Noon" />
+	<item value="0x1de" name="Cambell - Justin" />
+	<item value="0x1df" name="Cambell - Horst" />
+	<item value="0x1e0" name="Cambell - Penn" />
+	<item value="0x1e1" name="Cambell - Rattchet" />
+	<item value="0x1e2" name="Cambell - Frank" />
+	<item value="0x1e3" name="Cambell - Hagane" />
+	<item value="0x1e4" name="Cambell - Murasame" />
+	<item value="0x1e5" name="Cambell - Fynnding" />
+	<item value="0x1e6" name="Cambell - Medion" />
+	<item value="0x1e7" name="Syntesis - Synbios" />
+	<item value="0x1e8" name="Syntesis - Dantares" />
+	<item value="0x1e9" name="Syntesis - Masqurin" />
+	<item value="0x1ea" name="Syntesis - Grace" />
+	<item value="0x1eb" name="Syntesis - Hayward" />
+	<item value="0x1ec" name="Syntesis - Obright" />
+	<item value="0x1ed" name="Syntesis - Irene" />
+	<item value="0x1ee" name="Syntesis - Julian (Scenario 1)" />
+	<item value="0x1ef" name="Syntesis - Cybel" />
+	<item value="0x1f0" name="Syntesis - Eldar" />
+	<item value="0x1f1" name="Syntesis - Kahn" />
+	<item value="0x1f2" name="Syntesis - Noon" />
+	<item value="0x1f3" name="Syntesis - Justin" />
+	<item value="0x1f4" name="Syntesis - Horst" />
+	<item value="0x1f5" name="Syntesis - Penn" />
+	<item value="0x1f6" name="Syntesis - Rattchet" />
+	<item value="0x1f7" name="Syntesis - Frank" />
+	<item value="0x1f8" name="Syntesis - Hagane" />
+	<item value="0x1f9" name="Syntesis - Murasame" />
+	<item value="0x1fa" name="Syntesis - Fynnding" />
+	<item value="0x1fb" name="Syntesis - Medion" />
+	<item value="0x1fc" name="Syntesis - Cambell" />
+	<item value="0x1fd" name="Uryudo - Synbios" />
+	<item value="0x1fe" name="Uryudo - Dantares" />
+	<item value="0x1ff" name="Uryudo - Masqurin" />
+	<item value="0x200" name="Dantares - Synbios" />
+	<item value="0x201" name="Masqurin - Synbios" />
+	<item value="0x202" name="Masqurin - Dantares" />
+	<item value="0x203" name="Grace - Synbios" />
+	<item value="0x204" name="Grace - Dantares" />
+	<item value="0x205" name="Grace - Masqurin" />
+	<item value="0x206" name="Hayward - Synbios" />
+	<item value="0x207" name="Hayward - Dantares" />
+	<item value="0x208" name="Hayward - Masqurin" />
+	<item value="0x209" name="Hayward - Grace" />
+	<item value="0x20a" name="Obright - Synbios" />
+	<item value="0x20b" name="Obright - Dantares" />
+	<item value="0x20c" name="Obright - Masqurin" />
+	<item value="0x20d" name="Obright - Grace" />
+	<item value="0x20e" name="Obright - Hayward" />
+	<item value="0x20f" name="Irene - Synbios" />
+	<item value="0x210" name="Irene - Dantares" />
+	<item value="0x211" name="Irene - Masqurin" />
+	<item value="0x212" name="Irene - Grace" />
+	<item value="0x213" name="Irene - Hayward" />
+	<item value="0x214" name="Irene - Obright" />
+	<item value="0x215" name="Julian (Scenario 1) - Synbios" />
+	<item value="0x216" name="Julian (Scenario 1) - Dantares" />
+	<item value="0x217" name="Julian (Scenario 1) - Masqurin" />
+	<item value="0x218" name="Julian (Scenario 1) - Grace" />
+	<item value="0x219" name="Julian (Scenario 1) - Hayward" />
+	<item value="0x21a" name="Julian (Scenario 1) - Obright" />
+	<item value="0x21b" name="Julian (Scenario 1) - Irene" />
+	<item value="0x21c" name="Cybel - Synbios" />
+	<item value="0x21d" name="Cybel - Dantares" />
+	<item value="0x21e" name="Cybel - Masqurin" />
+	<item value="0x21f" name="Cybel - Grace" />
+	<item value="0x220" name="Cybel - Hayward" />
+	<item value="0x221" name="Cybel - Obright" />
+	<item value="0x222" name="Cybel - Irene" />
+	<item value="0x223" name="Cybel - Julian" />
+	<item value="0x224" name="Eldar - Synbios" />
+	<item value="0x225" name="Eldar - Dantares" />
+	<item value="0x226" name="Eldar - Masqurin" />
+	<item value="0x227" name="Eldar - Grace" />
+	<item value="0x228" name="Eldar - Hayward" />
+	<item value="0x229" name="Eldar - Obright" />
+	<item value="0x22a" name="Eldar - Irene" />
+	<item value="0x22b" name="Eldar - Julian" />
+	<item value="0x22c" name="Eldar - Cybel" />
+	<item value="0x22d" name="Kahn - Synbios" />
+	<item value="0x22e" name="Kahn - Dantares" />
+	<item value="0x22f" name="Kahn - Masqurin" />
+	<item value="0x230" name="Kahn - Grace" />
+	<item value="0x231" name="Kahn - Hayward" />
+	<item value="0x232" name="Kahn - Obright" />
+	<item value="0x233" name="Kahn - Irene" />
+	<item value="0x234" name="Kahn - Julian" />
+	<item value="0x235" name="Kahn - Cybel" />
+	<item value="0x236" name="Kahn - Eldar" />
+	<item value="0x237" name="Noon - Synbios" />
+	<item value="0x238" name="Noon - Dantares" />
+	<item value="0x239" name="Noon - Masqurin" />
+	<item value="0x23a" name="Noon - Grace" />
+	<item value="0x23b" name="Noon - Hayward" />
+	<item value="0x23c" name="Noon - Obright" />
+	<item value="0x23d" name="Noon - Irene" />
+	<item value="0x23e" name="Noon - Julian" />
+	<item value="0x23f" name="Noon - Cybel" />
+	<item value="0x240" name="Noon - Eldar" />
+	<item value="0x241" name="Noon - Kahn" />
+	<item value="0x242" name="Justin - Synbios" />
+	<item value="0x243" name="Justin - Dantares" />
+	<item value="0x244" name="Justin - Masqurin" />
+	<item value="0x245" name="Justin - Grace" />
+	<item value="0x246" name="Justin - Hayward" />
+	<item value="0x247" name="Justin - Obright" />
+	<item value="0x248" name="Justin - Irene" />
+	<item value="0x249" name="Justin - Julian" />
+	<item value="0x24a" name="Justin - Cybel" />
+	<item value="0x24b" name="Justin - Eldar" />
+	<item value="0x24c" name="Justin - Kahn" />
+	<item value="0x24d" name="Justin - Noon" />
+	<item value="0x24e" name="Horst - Synbios" />
+	<item value="0x24f" name="Horst - Dantares" />
+	<item value="0x250" name="Horst - Masqurin" />
+	<item value="0x251" name="Horst - Grace" />
+	<item value="0x252" name="Horst - Hayward" />
+	<item value="0x253" name="Horst - Obright" />
+	<item value="0x254" name="Horst - Irene" />
+	<item value="0x255" name="Horst - Julian" />
+	<item value="0x256" name="Horst - Cybel" />
+	<item value="0x257" name="Horst - Eldar" />
+	<item value="0x258" name="Horst - Kahn" />
+	<item value="0x259" name="Horst - Noon" />
+	<item value="0x25a" name="Horst - Justin" />
+	<item value="0x25b" name="Penn - Synbios" />
+	<item value="0x25c" name="Penn - Dantares" />
+	<item value="0x25d" name="Penn - Masqurin" />
+	<item value="0x25e" name="Penn - Grace" />
+	<item value="0x25f" name="Penn - Hayward" />
+	<item value="0x260" name="Penn - Obright" />
+	<item value="0x261" name="Penn - Irene" />
+	<item value="0x262" name="Penn - Julian" />
+	<item value="0x263" name="Penn - Cybel" />
+	<item value="0x264" name="Penn - Eldar" />
+	<item value="0x265" name="Penn - Kahn" />
+	<item value="0x266" name="Penn - Noon" />
+	<item value="0x267" name="Penn - Justin" />
+	<item value="0x268" name="Penn - Horst" />
+	<item value="0x269" name="Rattchet - Synbios" />
+	<item value="0x26a" name="Rattchet - Dantares" />
+	<item value="0x26b" name="Rattchet - Masqurin" />
+	<item value="0x26c" name="Rattchet - Grace" />
+	<item value="0x26d" name="Rattchet - Hayward" />
+	<item value="0x26e" name="Rattchet - Obright" />
+	<item value="0x26f" name="Rattchet - Irene" />
+	<item value="0x270" name="Rattchet - Julian" />
+	<item value="0x271" name="Rattchet - Cybel" />
+	<item value="0x272" name="Rattchet - Eldar" />
+	<item value="0x273" name="Rattchet - Kahn" />
+	<item value="0x274" name="Rattchet - Noon" />
+	<item value="0x275" name="Rattchet - Justin" />
+	<item value="0x276" name="Rattchet - Horst" />
+	<item value="0x277" name="Rattchet - Penn" />
+	<item value="0x278" name="Frank - Synbios" />
+	<item value="0x279" name="Frank - Dantares" />
+	<item value="0x27a" name="Frank - Masqurin" />
+	<item value="0x27b" name="Frank - Grace" />
+	<item value="0x27c" name="Frank - Hayward" />
+	<item value="0x27d" name="Frank - Obright" />
+	<item value="0x27e" name="Frank - Irene" />
+	<item value="0x27f" name="Frank - Julian" />
+	<item value="0x280" name="Frank - Cybel" />
+	<item value="0x281" name="Frank - Eldar" />
+	<item value="0x282" name="Frank - Kahn" />
+	<item value="0x283" name="Frank - Noon" />
+	<item value="0x284" name="Frank - Justin" />
+	<item value="0x285" name="Frank - Horst" />
+	<item value="0x286" name="Frank - Penn" />
+	<item value="0x287" name="Frank - Rattchet" />
+	<item value="0x288" name="Hagane - Synbios" />
+	<item value="0x289" name="Hagane - Dantares" />
+	<item value="0x28a" name="Hagane - Masqurin" />
+	<item value="0x28b" name="Hagane - Grace" />
+	<item value="0x28c" name="Hagane - Hayward" />
+	<item value="0x28d" name="Hagane - Obright" />
+	<item value="0x28e" name="Hagane - Irene" />
+	<item value="0x28f" name="Hagane - Julian" />
+	<item value="0x290" name="Hagane - Cybel" />
+	<item value="0x291" name="Hagane - Eldar" />
+	<item value="0x292" name="Hagane - Kahn" />
+	<item value="0x293" name="Hagane - Noon" />
+	<item value="0x294" name="Hagane - Justin" />
+	<item value="0x295" name="Hagane - Horst" />
+	<item value="0x296" name="Hagane - Penn" />
+	<item value="0x297" name="Hagane - Rattchet" />
+	<item value="0x298" name="Hagane - Frank" />
+	<item value="0x299" name="Murasame - Synbios" />
+	<item value="0x29a" name="Murasame - Dantares" />
+	<item value="0x29b" name="Murasame - Masqurin" />
+	<item value="0x29c" name="Murasame - Grace" />
+	<item value="0x29d" name="Murasame - Hayward" />
+	<item value="0x29e" name="Murasame - Obright" />
+	<item value="0x29f" name="Murasame - Irene" />
+	<item value="0x2a0" name="Murasame - Julian" />
+	<item value="0x2a1" name="Murasame - Cybel" />
+	<item value="0x2a2" name="Murasame - Eldar" />
+	<item value="0x2a3" name="Murasame - Kahn" />
+	<item value="0x2a4" name="Murasame - Noon" />
+	<item value="0x2a5" name="Murasame - Justin" />
+	<item value="0x2a6" name="Murasame - Horst" />
+	<item value="0x2a7" name="Murasame - Penn" />
+	<item value="0x2a8" name="Murasame - Rattchet" />
+	<item value="0x2a9" name="Murasame - Frank" />
+	<item value="0x2aa" name="Murasame - Hagane" />
+	<item value="0x2ab" name="Fynnding - Synbios" />
+	<item value="0x2ac" name="Fynnding - Dantares" />
+	<item value="0x2ad" name="Fynnding - Masqurin" />
+	<item value="0x2ae" name="Fynnding - Grace" />
+	<item value="0x2af" name="Fynnding - Hayward" />
+	<item value="0x2b0" name="Fynnding - Obright" />
+	<item value="0x2b1" name="Fynnding - Irene" />
+	<item value="0x2b2" name="Fynnding - Julian" />
+	<item value="0x2b3" name="Fynnding - Cybel" />
+	<item value="0x2b4" name="Fynnding - Eldar" />
+	<item value="0x2b5" name="Fynnding - Kahn" />
+	<item value="0x2b6" name="Fynnding - Noon" />
+	<item value="0x2b7" name="Fynnding - Justin" />
+	<item value="0x2b8" name="Fynnding - Horst" />
+	<item value="0x2b9" name="Fynnding - Penn" />
+	<item value="0x2ba" name="Fynnding - Rattchet" />
+	<item value="0x2bb" name="Fynnding - Frank" />
+	<item value="0x2bc" name="Fynnding - Hagane" />
+	<item value="0x2bd" name="Fynnding - Murasame" />
+	<item value="0x2be" name="Medion - Synbios" />
+	<item value="0x2bf" name="Medion - Dantares" />
+	<item value="0x2c0" name="Medion - Masqurin" />
+	<item value="0x2c1" name="Medion - Grace" />
+	<item value="0x2c2" name="Medion - Hayward" />
+	<item value="0x2c3" name="Medion - Obright" />
+	<item value="0x2c4" name="Medion - Irene" />
+	<item value="0x2c5" name="Medion - Julian (Scenario 1)" />
+	<item value="0x2c6" name="Medion - Cybel" />
+	<item value="0x2c7" name="Medion - Eldar" />
+	<item value="0x2c8" name="Medion - Kahn" />
+	<item value="0x2c9" name="Medion - Noon" />
+	<item value="0x2ca" name="Medion - Justin" />
+	<item value="0x2cb" name="Medion - Horst" />
+	<item value="0x2cc" name="Medion - Penn" />
+	<item value="0x2cd" name="Medion - Rattchet" />
+	<item value="0x2ce" name="Medion - Frank" />
+	<item value="0x2cf" name="Medion - Hagane" />
+	<item value="0x2d0" name="Medion - Murasame" />
+	<item value="0x2d1" name="Medion - Fynnding" />
+	<item value="0x2d2" name="Cambell - Synbios" />
+	<item value="0x2d3" name="Cambell - Dantares" />
+	<item value="0x2d4" name="Cambell - Masqurin" />
+	<item value="0x2d5" name="Cambell - Grace" />
+	<item value="0x2d6" name="Cambell - Hayward" />
+	<item value="0x2d7" name="Cambell - Obright" />
+	<item value="0x2d8" name="Cambell - Irene" />
+	<item value="0x2d9" name="Cambell - Julian (Scenario 1)" />
+	<item value="0x2da" name="Cambell - Cybel" />
+	<item value="0x2db" name="Cambell - Eldar" />
+	<item value="0x2dc" name="Cambell - Kahn" />
+	<item value="0x2dd" name="Cambell - Noon" />
+	<item value="0x2de" name="Cambell - Justin" />
+	<item value="0x2df" name="Cambell - Horst" />
+	<item value="0x2e0" name="Cambell - Penn" />
+	<item value="0x2e1" name="Cambell - Rattchet" />
+	<item value="0x2e2" name="Cambell - Frank" />
+	<item value="0x2e3" name="Cambell - Hagane" />
+	<item value="0x2e4" name="Cambell - Murasame" />
+	<item value="0x2e5" name="Cambell - Fynnding" />
+	<item value="0x2e6" name="Cambell - Medion" />
+	<item value="0x2e7" name="Syntesis - Synbios" />
+	<item value="0x2e8" name="Syntesis - Dantares" />
+	<item value="0x2e9" name="Syntesis - Masqurin" />
+	<item value="0x2ea" name="Syntesis - Grace" />
+	<item value="0x2eb" name="Syntesis - Hayward" />
+	<item value="0x2ec" name="Syntesis - Obright" />
+	<item value="0x2ed" name="Syntesis - Irene" />
+	<item value="0x2ee" name="Syntesis - Julian (Scenario 1)" />
+	<item value="0x2ef" name="Syntesis - Cybel" />
+	<item value="0x2f0" name="Syntesis - Eldar" />
+	<item value="0x2f1" name="Syntesis - Kahn" />
+	<item value="0x2f2" name="Syntesis - Noon" />
+	<item value="0x2f3" name="Syntesis - Justin" />
+	<item value="0x2f4" name="Syntesis - Horst" />
+	<item value="0x2f5" name="Syntesis - Penn" />
+	<item value="0x2f6" name="Syntesis - Rattchet" />
+	<item value="0x2f7" name="Syntesis - Frank" />
+	<item value="0x2f8" name="Syntesis - Hagane" />
+	<item value="0x2f9" name="Syntesis - Murasame" />
+	<item value="0x2fa" name="Syntesis - Fynnding" />
+	<item value="0x2fb" name="Syntesis - Medion" />
+	<item value="0x2fc" name="Syntesis - Cambell" />
+	<item value="0x2fd" name="Uryudo - Synbios" />
+	<item value="0x2fe" name="Uryudo - Dantares" />
+	<item value="0x2ff" name="Uryudo - Masqurin" />
+	<item value="0x300" name="Dantares - Synbios" />
+	<item value="0x301" name="Masqurin - Synbios" />
+	<item value="0x302" name="Masqurin - Dantares" />
+	<item value="0x303" name="Grace - Synbios" />
+	<item value="0x304" name="Grace - Dantares" />
+	<item value="0x305" name="Grace - Masqurin" />
+	<item value="0x306" name="Hayward - Synbios" />
+	<item value="0x307" name="Hayward - Dantares" />
+	<item value="0x308" name="Hayward - Masqurin" />
+	<item value="0x309" name="Hayward - Grace" />
+	<item value="0x30a" name="Obright - Synbios" />
+	<item value="0x30b" name="Obright - Dantares" />
+	<item value="0x30c" name="Obright - Masqurin" />
+	<item value="0x30d" name="Obright - Grace" />
+	<item value="0x30e" name="Obright - Hayward" />
+	<item value="0x30f" name="Irene - Synbios" />
+	<item value="0x310" name="Irene - Dantares" />
+	<item value="0x311" name="Irene - Masqurin" />
+	<item value="0x312" name="Irene - Grace" />
+	<item value="0x313" name="Irene - Hayward" />
+	<item value="0x314" name="Irene - Obright" />
+	<item value="0x315" name="Julian (Scenario 1) - Synbios" />
+	<item value="0x316" name="Julian (Scenario 1) - Dantares" />
+	<item value="0x317" name="Julian (Scenario 1) - Masqurin" />
+	<item value="0x318" name="Julian (Scenario 1) - Grace" />
+	<item value="0x319" name="Julian (Scenario 1) - Hayward" />
+	<item value="0x31a" name="Julian (Scenario 1) - Obright" />
+	<item value="0x31b" name="Julian (Scenario 1) - Irene" />
+	<item value="0x31c" name="Cybel - Synbios" />
+	<item value="0x31d" name="Cybel - Dantares" />
+	<item value="0x31e" name="Cybel - Masqurin" />
+	<item value="0x31f" name="Cybel - Grace" />
+	<item value="0x320" name="Cybel - Hayward" />
+	<item value="0x321" name="Cybel - Obright" />
+	<item value="0x322" name="Cybel - Irene" />
+	<item value="0x323" name="Cybel - Julian" />
+	<item value="0x324" name="Eldar - Synbios" />
+	<item value="0x325" name="Eldar - Dantares" />
+	<item value="0x326" name="Eldar - Masqurin" />
+	<item value="0x327" name="Eldar - Grace" />
+	<item value="0x328" name="Eldar - Hayward" />
+	<item value="0x329" name="Eldar - Obright" />
+	<item value="0x32a" name="Eldar - Irene" />
+	<item value="0x32b" name="Eldar - Julian" />
+	<item value="0x32c" name="Eldar - Cybel" />
+	<item value="0x32d" name="Kahn - Synbios" />
+	<item value="0x32e" name="Kahn - Dantares" />
+	<item value="0x32f" name="Kahn - Masqurin" />
+	<item value="0x330" name="Kahn - Grace" />
+	<item value="0x331" name="Kahn - Hayward" />
+	<item value="0x332" name="Kahn - Obright" />
+	<item value="0x333" name="Kahn - Irene" />
+	<item value="0x334" name="Kahn - Julian" />
+	<item value="0x335" name="Kahn - Cybel" />
+	<item value="0x336" name="Kahn - Eldar" />
+	<item value="0x337" name="Noon - Synbios" />
+	<item value="0x338" name="Noon - Dantares" />
+	<item value="0x339" name="Noon - Masqurin" />
+	<item value="0x33a" name="Noon - Grace" />
+	<item value="0x33b" name="Noon - Hayward" />
+	<item value="0x33c" name="Noon - Obright" />
+	<item value="0x33d" name="Noon - Irene" />
+	<item value="0x33e" name="Noon - Julian" />
+	<item value="0x33f" name="Noon - Cybel" />
+	<item value="0x340" name="Noon - Eldar" />
+	<item value="0x341" name="Noon - Kahn" />
+	<item value="0x342" name="Justin - Synbios" />
+	<item value="0x343" name="Justin - Dantares" />
+	<item value="0x344" name="Justin - Masqurin" />
+	<item value="0x345" name="Justin - Grace" />
+	<item value="0x346" name="Justin - Hayward" />
+	<item value="0x347" name="Justin - Obright" />
+	<item value="0x348" name="Justin - Irene" />
+	<item value="0x349" name="Justin - Julian" />
+	<item value="0x34a" name="Justin - Cybel" />
+	<item value="0x34b" name="Justin - Eldar" />
+	<item value="0x34c" name="Justin - Kahn" />
+	<item value="0x34d" name="Justin - Noon" />
+	<item value="0x34e" name="Horst - Synbios" />
+	<item value="0x34f" name="Horst - Dantares" />
+	<item value="0x350" name="Horst - Masqurin" />
+	<item value="0x351" name="Horst - Grace" />
+	<item value="0x352" name="Horst - Hayward" />
+	<item value="0x353" name="Horst - Obright" />
+	<item value="0x354" name="Horst - Irene" />
+	<item value="0x355" name="Horst - Julian" />
+	<item value="0x356" name="Horst - Cybel" />
+	<item value="0x357" name="Horst - Eldar" />
+	<item value="0x358" name="Horst - Kahn" />
+	<item value="0x359" name="Horst - Noon" />
+	<item value="0x35a" name="Horst - Justin" />
+	<item value="0x35b" name="Penn - Synbios" />
+	<item value="0x35c" name="Penn - Dantares" />
+	<item value="0x35d" name="Penn - Masqurin" />
+	<item value="0x35e" name="Penn - Grace" />
+	<item value="0x35f" name="Penn - Hayward" />
+	<item value="0x360" name="Penn - Obright" />
+	<item value="0x361" name="Penn - Irene" />
+	<item value="0x362" name="Penn - Julian" />
+	<item value="0x363" name="Penn - Cybel" />
+	<item value="0x364" name="Penn - Eldar" />
+	<item value="0x365" name="Penn - Kahn" />
+	<item value="0x366" name="Penn - Noon" />
+	<item value="0x367" name="Penn - Justin" />
+	<item value="0x368" name="Penn - Horst" />
+	<item value="0x369" name="Rattchet - Synbios" />
+	<item value="0x36a" name="Rattchet - Dantares" />
+	<item value="0x36b" name="Rattchet - Masqurin" />
+	<item value="0x36c" name="Rattchet - Grace" />
+	<item value="0x36d" name="Rattchet - Hayward" />
+	<item value="0x36e" name="Rattchet - Obright" />
+	<item value="0x36f" name="Rattchet - Irene" />
+	<item value="0x370" name="Rattchet - Julian" />
+	<item value="0x371" name="Rattchet - Cybel" />
+	<item value="0x372" name="Rattchet - Eldar" />
+	<item value="0x373" name="Rattchet - Kahn" />
+	<item value="0x374" name="Rattchet - Noon" />
+	<item value="0x375" name="Rattchet - Justin" />
+	<item value="0x376" name="Rattchet - Horst" />
+	<item value="0x377" name="Rattchet - Penn" />
+	<item value="0x378" name="Frank - Synbios" />
+	<item value="0x379" name="Frank - Dantares" />
+	<item value="0x37a" name="Frank - Masqurin" />
+	<item value="0x37b" name="Frank - Grace" />
+	<item value="0x37c" name="Frank - Hayward" />
+	<item value="0x37d" name="Frank - Obright" />
+	<item value="0x37e" name="Frank - Irene" />
+	<item value="0x37f" name="Frank - Julian" />
+	<item value="0x380" name="Frank - Cybel" />
+	<item value="0x381" name="Frank - Eldar" />
+	<item value="0x382" name="Frank - Kahn" />
+	<item value="0x383" name="Frank - Noon" />
+	<item value="0x384" name="Frank - Justin" />
+	<item value="0x385" name="Frank - Horst" />
+	<item value="0x386" name="Frank - Penn" />
+	<item value="0x387" name="Frank - Rattchet" />
+	<item value="0x388" name="Hagane - Synbios" />
+	<item value="0x389" name="Hagane - Dantares" />
+	<item value="0x38a" name="Hagane - Masqurin" />
+	<item value="0x38b" name="Hagane - Grace" />
+	<item value="0x38c" name="Hagane - Hayward" />
+	<item value="0x38d" name="Hagane - Obright" />
+	<item value="0x38e" name="Hagane - Irene" />
+	<item value="0x38f" name="Hagane - Julian" />
+	<item value="0x390" name="Hagane - Cybel" />
+	<item value="0x391" name="Hagane - Eldar" />
+	<item value="0x392" name="Hagane - Kahn" />
+	<item value="0x393" name="Hagane - Noon" />
+	<item value="0x394" name="Hagane - Justin" />
+	<item value="0x395" name="Hagane - Horst" />
+	<item value="0x396" name="Hagane - Penn" />
+	<item value="0x397" name="Hagane - Rattchet" />
+	<item value="0x398" name="Hagane - Frank" />
+	<item value="0x399" name="Murasame - Synbios" />
+	<item value="0x39a" name="Murasame - Dantares" />
+	<item value="0x39b" name="Murasame - Masqurin" />
+	<item value="0x39c" name="Murasame - Grace" />
+	<item value="0x39d" name="Murasame - Hayward" />
+	<item value="0x39e" name="Murasame - Obright" />
+	<item value="0x39f" name="Murasame - Irene" />
+	<item value="0x3a0" name="Murasame - Julian" />
+	<item value="0x3a1" name="Murasame - Cybel" />
+	<item value="0x3a2" name="Murasame - Eldar" />
+	<item value="0x3a3" name="Murasame - Kahn" />
+	<item value="0x3a4" name="Murasame - Noon" />
+	<item value="0x3a5" name="Murasame - Justin" />
+	<item value="0x3a6" name="Murasame - Horst" />
+	<item value="0x3a7" name="Murasame - Penn" />
+	<item value="0x3a8" name="Murasame - Rattchet" />
+	<item value="0x3a9" name="Murasame - Frank" />
+	<item value="0x3aa" name="Murasame - Hagane" />
+	<item value="0x3ab" name="Fynnding - Synbios" />
+	<item value="0x3ac" name="Fynnding - Dantares" />
+	<item value="0x3ad" name="Fynnding - Masqurin" />
+	<item value="0x3ae" name="Fynnding - Grace" />
+	<item value="0x3af" name="Fynnding - Hayward" />
+	<item value="0x3b0" name="Fynnding - Obright" />
+	<item value="0x3b1" name="Fynnding - Irene" />
+	<item value="0x3b2" name="Fynnding - Julian" />
+	<item value="0x3b3" name="Fynnding - Cybel" />
+	<item value="0x3b4" name="Fynnding - Eldar" />
+	<item value="0x3b5" name="Fynnding - Kahn" />
+	<item value="0x3b6" name="Fynnding - Noon" />
+	<item value="0x3b7" name="Fynnding - Justin" />
+	<item value="0x3b8" name="Fynnding - Horst" />
+	<item value="0x3b9" name="Fynnding - Penn" />
+	<item value="0x3ba" name="Fynnding - Rattchet" />
+	<item value="0x3bb" name="Fynnding - Frank" />
+	<item value="0x3bc" name="Fynnding - Hagane" />
+	<item value="0x3bd" name="Fynnding - Murasame" />
+	<item value="0x3be" name="Medion - Synbios" />
+	<item value="0x3bf" name="Medion - Dantares" />
+	<item value="0x3c0" name="Medion - Masqurin" />
+	<item value="0x3c1" name="Medion - Grace" />
+	<item value="0x3c2" name="Medion - Hayward" />
+	<item value="0x3c3" name="Medion - Obright" />
+	<item value="0x3c4" name="Medion - Irene" />
+	<item value="0x3c5" name="Medion - Julian (Scenario 1)" />
+	<item value="0x3c6" name="Medion - Cybel" />
+	<item value="0x3c7" name="Medion - Eldar" />
+	<item value="0x3c8" name="Medion - Kahn" />
+	<item value="0x3c9" name="Medion - Noon" />
+	<item value="0x3ca" name="Medion - Justin" />
+	<item value="0x3cb" name="Medion - Horst" />
+	<item value="0x3cc" name="Medion - Penn" />
+	<item value="0x3cd" name="Medion - Rattchet" />
+	<item value="0x3ce" name="Medion - Frank" />
+	<item value="0x3cf" name="Medion - Hagane" />
+	<item value="0x3d0" name="Medion - Murasame" />
+	<item value="0x3d1" name="Medion - Fynnding" />
+	<item value="0x3d2" name="Cambell - Synbios" />
+	<item value="0x3d3" name="Cambell - Dantares" />
+	<item value="0x3d4" name="Cambell - Masqurin" />
+	<item value="0x3d5" name="Cambell - Grace" />
+	<item value="0x3d6" name="Cambell - Hayward" />
+	<item value="0x3d7" name="Cambell - Obright" />
+	<item value="0x3d8" name="Cambell - Irene" />
+	<item value="0x3d9" name="Cambell - Julian (Scenario 1)" />
+	<item value="0x3da" name="Cambell - Cybel" />
+	<item value="0x3db" name="Cambell - Eldar" />
+	<item value="0x3dc" name="Cambell - Kahn" />
+	<item value="0x3dd" name="Cambell - Noon" />
+	<item value="0x3de" name="Cambell - Justin" />
+	<item value="0x3df" name="Cambell - Horst" />
+	<item value="0x3e0" name="Cambell - Penn" />
+	<item value="0x3e1" name="Cambell - Rattchet" />
+	<item value="0x3e2" name="Cambell - Frank" />
+	<item value="0x3e3" name="Cambell - Hagane" />
+	<item value="0x3e4" name="Cambell - Murasame" />
+	<item value="0x3e5" name="Cambell - Fynnding" />
+	<item value="0x3e6" name="Cambell - Medion" />
+	<item value="0x3e7" name="Syntesis - Synbios" />
+	<item value="0x3e8" name="Syntesis - Dantares" />
+	<item value="0x3e9" name="Syntesis - Masqurin" />
+	<item value="0x3ea" name="Syntesis - Grace" />
+	<item value="0x3eb" name="Syntesis - Hayward" />
+	<item value="0x3ec" name="Syntesis - Obright" />
+	<item value="0x3ed" name="Syntesis - Irene" />
+	<item value="0x3ee" name="Syntesis - Julian (Scenario 1)" />
+	<item value="0x3ef" name="Syntesis - Cybel" />
+	<item value="0x3f0" name="Syntesis - Eldar" />
+	<item value="0x3f1" name="Syntesis - Kahn" />
+	<item value="0x3f2" name="Syntesis - Noon" />
+	<item value="0x3f3" name="Syntesis - Justin" />
+	<item value="0x3f4" name="Syntesis - Horst" />
+	<item value="0x3f5" name="Syntesis - Penn" />
+	<item value="0x3f6" name="Syntesis - Rattchet" />
+	<item value="0x3f7" name="Syntesis - Frank" />
+	<item value="0x3f8" name="Syntesis - Hagane" />
+	<item value="0x3f9" name="Syntesis - Murasame" />
+	<item value="0x3fa" name="Syntesis - Fynnding" />
+	<item value="0x3fb" name="Syntesis - Medion" />
+	<item value="0x3fc" name="Syntesis - Cambell" />
+	<item value="0x3fd" name="Uryudo - Synbios" />
+	<item value="0x3fe" name="Uryudo - Dantares" />
+	<item value="0x3ff" name="Uryudo - Masqurin" />
+	<item value="0x400" name="Dantares - Synbios" />
+	<item value="0x401" name="Masqurin - Synbios" />
+	<item value="0x402" name="Masqurin - Dantares" />
+	<item value="0x403" name="Grace - Synbios" />
+	<item value="0x404" name="Grace - Dantares" />
+	<item value="0x405" name="Grace - Masqurin" />
+	<item value="0x406" name="Hayward - Synbios" />
+	<item value="0x407" name="Hayward - Dantares" />
+	<item value="0x408" name="Hayward - Masqurin" />
+	<item value="0x409" name="Hayward - Grace" />
+	<item value="0x40a" name="Obright - Synbios" />
+	<item value="0x40b" name="Obright - Dantares" />
+	<item value="0x40c" name="Obright - Masqurin" />
+	<item value="0x40d" name="Obright - Grace" />
+	<item value="0x40e" name="Obright - Hayward" />
+	<item value="0x40f" name="Irene - Synbios" />
+	<item value="0x410" name="Irene - Dantares" />
+	<item value="0x411" name="Irene - Masqurin" />
+	<item value="0x412" name="Irene - Grace" />
+	<item value="0x413" name="Irene - Hayward" />
+	<item value="0x414" name="Irene - Obright" />
+	<item value="0x415" name="Julian (Scenario 1) - Synbios" />
+	<item value="0x416" name="Julian (Scenario 1) - Dantares" />
+	<item value="0x417" name="Julian (Scenario 1) - Masqurin" />
+	<item value="0x418" name="Julian (Scenario 1) - Grace" />
+	<item value="0x419" name="Julian (Scenario 1) - Hayward" />
+	<item value="0x41a" name="Julian (Scenario 1) - Obright" />
+	<item value="0x41b" name="Julian (Scenario 1) - Irene" />
+	<item value="0x41c" name="Cybel - Synbios" />
+	<item value="0x41d" name="Cybel - Dantares" />
+	<item value="0x41e" name="Cybel - Masqurin" />
+	<item value="0x41f" name="Cybel - Grace" />
+	<item value="0x420" name="Cybel - Hayward" />
+	<item value="0x421" name="Cybel - Obright" />
+	<item value="0x422" name="Cybel - Irene" />
+	<item value="0x423" name="Cybel - Julian" />
+	<item value="0x424" name="Eldar - Synbios" />
+	<item value="0x425" name="Eldar - Dantares" />
+	<item value="0x426" name="Eldar - Masqurin" />
+	<item value="0x427" name="Eldar - Grace" />
+	<item value="0x428" name="Eldar - Hayward" />
+	<item value="0x429" name="Eldar - Obright" />
+	<item value="0x42a" name="Eldar - Irene" />
+	<item value="0x42b" name="Eldar - Julian" />
+	<item value="0x42c" name="Eldar - Cybel" />
+	<item value="0x42d" name="Kahn - Synbios" />
+	<item value="0x42e" name="Kahn - Dantares" />
+	<item value="0x42f" name="Kahn - Masqurin" />
+	<item value="0x430" name="Kahn - Grace" />
+	<item value="0x431" name="Kahn - Hayward" />
+	<item value="0x432" name="Kahn - Obright" />
+	<item value="0x433" name="Kahn - Irene" />
+	<item value="0x434" name="Kahn - Julian" />
+	<item value="0x435" name="Kahn - Cybel" />
+	<item value="0x436" name="Kahn - Eldar" />
+	<item value="0x437" name="Noon - Synbios" />
+	<item value="0x438" name="Noon - Dantares" />
+	<item value="0x439" name="Noon - Masqurin" />
+	<item value="0x43a" name="Noon - Grace" />
+	<item value="0x43b" name="Noon - Hayward" />
+	<item value="0x43c" name="Noon - Obright" />
+	<item value="0x43d" name="Noon - Irene" />
+	<item value="0x43e" name="Noon - Julian" />
+	<item value="0x43f" name="Noon - Cybel" />
+	<item value="0x440" name="Noon - Eldar" />
+	<item value="0x441" name="Noon - Kahn" />
+	<item value="0x442" name="Justin - Synbios" />
+	<item value="0x443" name="Justin - Dantares" />
+	<item value="0x444" name="Justin - Masqurin" />
+	<item value="0x445" name="Justin - Grace" />
+	<item value="0x446" name="Justin - Hayward" />
+	<item value="0x447" name="Justin - Obright" />
+	<item value="0x448" name="Justin - Irene" />
+	<item value="0x449" name="Justin - Julian" />
+	<item value="0x44a" name="Justin - Cybel" />
+	<item value="0x44b" name="Justin - Eldar" />
+	<item value="0x44c" name="Justin - Kahn" />
+	<item value="0x44d" name="Justin - Noon" />
+	<item value="0x44e" name="Horst - Synbios" />
+	<item value="0x44f" name="Horst - Dantares" />
+	<item value="0x450" name="Horst - Masqurin" />
+	<item value="0x451" name="Horst - Grace" />
+	<item value="0x452" name="Horst - Hayward" />
+	<item value="0x453" name="Horst - Obright" />
+	<item value="0x454" name="Horst - Irene" />
+	<item value="0x455" name="Horst - Julian" />
+	<item value="0x456" name="Horst - Cybel" />
+	<item value="0x457" name="Horst - Eldar" />
+	<item value="0x458" name="Horst - Kahn" />
+	<item value="0x459" name="Horst - Noon" />
+	<item value="0x45a" name="Horst - Justin" />
+	<item value="0x45b" name="Penn - Synbios" />
+	<item value="0x45c" name="Penn - Dantares" />
+	<item value="0x45d" name="Penn - Masqurin" />
+	<item value="0x45e" name="Penn - Grace" />
+	<item value="0x45f" name="Penn - Hayward" />
+	<item value="0x460" name="Penn - Obright" />
+	<item value="0x461" name="Penn - Irene" />
+	<item value="0x462" name="Penn - Julian" />
+	<item value="0x463" name="Penn - Cybel" />
+	<item value="0x464" name="Penn - Eldar" />
+	<item value="0x465" name="Penn - Kahn" />
+	<item value="0x466" name="Penn - Noon" />
+	<item value="0x467" name="Penn - Justin" />
+	<item value="0x468" name="Penn - Horst" />
+	<item value="0x469" name="Rattchet - Synbios" />
+	<item value="0x46a" name="Rattchet - Dantares" />
+	<item value="0x46b" name="Rattchet - Masqurin" />
+	<item value="0x46c" name="Rattchet - Grace" />
+	<item value="0x46d" name="Rattchet - Hayward" />
+	<item value="0x46e" name="Rattchet - Obright" />
+	<item value="0x46f" name="Rattchet - Irene" />
+	<item value="0x470" name="Rattchet - Julian" />
+	<item value="0x471" name="Rattchet - Cybel" />
+	<item value="0x472" name="Rattchet - Eldar" />
+	<item value="0x473" name="Rattchet - Kahn" />
+	<item value="0x474" name="Rattchet - Noon" />
+	<item value="0x475" name="Rattchet - Justin" />
+	<item value="0x476" name="Rattchet - Horst" />
+	<item value="0x477" name="Rattchet - Penn" />
+	<item value="0x478" name="Frank - Synbios" />
+	<item value="0x479" name="Frank - Dantares" />
+	<item value="0x47a" name="Frank - Masqurin" />
+	<item value="0x47b" name="Frank - Grace" />
+	<item value="0x47c" name="Frank - Hayward" />
+	<item value="0x47d" name="Frank - Obright" />
+	<item value="0x47e" name="Frank - Irene" />
+	<item value="0x47f" name="Frank - Julian" />
+	<item value="0x480" name="Frank - Cybel" />
+	<item value="0x481" name="Frank - Eldar" />
+	<item value="0x482" name="Frank - Kahn" />
+	<item value="0x483" name="Frank - Noon" />
+	<item value="0x484" name="Frank - Justin" />
+	<item value="0x485" name="Frank - Horst" />
+	<item value="0x486" name="Frank - Penn" />
+	<item value="0x487" name="Frank - Rattchet" />
+	<item value="0x488" name="Hagane - Synbios" />
+	<item value="0x489" name="Hagane - Dantares" />
+	<item value="0x48a" name="Hagane - Masqurin" />
+	<item value="0x48b" name="Hagane - Grace" />
+	<item value="0x48c" name="Hagane - Hayward" />
+	<item value="0x48d" name="Hagane - Obright" />
+	<item value="0x48e" name="Hagane - Irene" />
+	<item value="0x48f" name="Hagane - Julian" />
+	<item value="0x490" name="Hagane - Cybel" />
+	<item value="0x491" name="Hagane - Eldar" />
+	<item value="0x492" name="Hagane - Kahn" />
+	<item value="0x493" name="Hagane - Noon" />
+	<item value="0x494" name="Hagane - Justin" />
+	<item value="0x495" name="Hagane - Horst" />
+	<item value="0x496" name="Hagane - Penn" />
+	<item value="0x497" name="Hagane - Rattchet" />
+	<item value="0x498" name="Hagane - Frank" />
+	<item value="0x499" name="Murasame - Synbios" />
+	<item value="0x49a" name="Murasame - Dantares" />
+	<item value="0x49b" name="Murasame - Masqurin" />
+	<item value="0x49c" name="Murasame - Grace" />
+	<item value="0x49d" name="Murasame - Hayward" />
+	<item value="0x49e" name="Murasame - Obright" />
+	<item value="0x49f" name="Murasame - Irene" />
+	<item value="0x4a0" name="Murasame - Julian" />
+	<item value="0x4a1" name="Murasame - Cybel" />
+	<item value="0x4a2" name="Murasame - Eldar" />
+	<item value="0x4a3" name="Murasame - Kahn" />
+	<item value="0x4a4" name="Murasame - Noon" />
+	<item value="0x4a5" name="Murasame - Justin" />
+	<item value="0x4a6" name="Murasame - Horst" />
+	<item value="0x4a7" name="Murasame - Penn" />
+	<item value="0x4a8" name="Murasame - Rattchet" />
+	<item value="0x4a9" name="Murasame - Frank" />
+	<item value="0x4aa" name="Murasame - Hagane" />
+	<item value="0x4ab" name="Fynnding - Synbios" />
+	<item value="0x4ac" name="Fynnding - Dantares" />
+	<item value="0x4ad" name="Fynnding - Masqurin" />
+	<item value="0x4ae" name="Fynnding - Grace" />
+	<item value="0x4af" name="Fynnding - Hayward" />
+	<item value="0x4b0" name="Fynnding - Obright" />
+	<item value="0x4b1" name="Fynnding - Irene" />
+	<item value="0x4b2" name="Fynnding - Julian" />
+	<item value="0x4b3" name="Fynnding - Cybel" />
+	<item value="0x4b4" name="Fynnding - Eldar" />
+	<item value="0x4b5" name="Fynnding - Kahn" />
+	<item value="0x4b6" name="Fynnding - Noon" />
+	<item value="0x4b7" name="Fynnding - Justin" />
+	<item value="0x4b8" name="Fynnding - Horst" />
+	<item value="0x4b9" name="Fynnding - Penn" />
+	<item value="0x4ba" name="Fynnding - Rattchet" />
+	<item value="0x4bb" name="Fynnding - Frank" />
+	<item value="0x4bc" name="Fynnding - Hagane" />
+	<item value="0x4bd" name="Fynnding - Murasame" />
+	<item value="0x4be" name="Medion - Synbios" />
+	<item value="0x4bf" name="Medion - Dantares" />
+	<item value="0x4c0" name="Medion - Masqurin" />
+	<item value="0x4c1" name="Medion - Grace" />
+	<item value="0x4c2" name="Medion - Hayward" />
+	<item value="0x4c3" name="Medion - Obright" />
+	<item value="0x4c4" name="Medion - Irene" />
+	<item value="0x4c5" name="Medion - Julian (Scenario 1)" />
+	<item value="0x4c6" name="Medion - Cybel" />
+	<item value="0x4c7" name="Medion - Eldar" />
+	<item value="0x4c8" name="Medion - Kahn" />
+	<item value="0x4c9" name="Medion - Noon" />
+	<item value="0x4ca" name="Medion - Justin" />
+	<item value="0x4cb" name="Medion - Horst" />
+	<item value="0x4cc" name="Medion - Penn" />
+	<item value="0x4cd" name="Medion - Rattchet" />
+	<item value="0x4ce" name="Medion - Frank" />
+	<item value="0x4cf" name="Medion - Hagane" />
+	<item value="0x4d0" name="Medion - Murasame" />
+	<item value="0x4d1" name="Medion - Fynnding" />
+	<item value="0x4d2" name="Cambell - Synbios" />
+	<item value="0x4d3" name="Cambell - Dantares" />
+	<item value="0x4d4" name="Cambell - Masqurin" />
+	<item value="0x4d5" name="Cambell - Grace" />
+	<item value="0x4d6" name="Cambell - Hayward" />
+	<item value="0x4d7" name="Cambell - Obright" />
+	<item value="0x4d8" name="Cambell - Irene" />
+	<item value="0x4d9" name="Cambell - Julian (Scenario 1)" />
+	<item value="0x4da" name="Cambell - Cybel" />
+	<item value="0x4db" name="Cambell - Eldar" />
+	<item value="0x4dc" name="Cambell - Kahn" />
+	<item value="0x4dd" name="Cambell - Noon" />
+	<item value="0x4de" name="Cambell - Justin" />
+	<item value="0x4df" name="Cambell - Horst" />
+	<item value="0x4e0" name="Cambell - Penn" />
+	<item value="0x4e1" name="Cambell - Rattchet" />
+	<item value="0x4e2" name="Cambell - Frank" />
+	<item value="0x4e3" name="Cambell - Hagane" />
+	<item value="0x4e4" name="Cambell - Murasame" />
+	<item value="0x4e5" name="Cambell - Fynnding" />
+	<item value="0x4e6" name="Cambell - Medion" />
+	<item value="0x4e7" name="Syntesis - Synbios" />
+	<item value="0x4e8" name="Syntesis - Dantares" />
+	<item value="0x4e9" name="Syntesis - Masqurin" />
+	<item value="0x4ea" name="Syntesis - Grace" />
+	<item value="0x4eb" name="Syntesis - Hayward" />
+	<item value="0x4ec" name="Syntesis - Obright" />
+	<item value="0x4ed" name="Syntesis - Irene" />
+	<item value="0x4ee" name="Syntesis - Julian (Scenario 1)" />
+	<item value="0x4ef" name="Syntesis - Cybel" />
+	<item value="0x4f0" name="Syntesis - Eldar" />
+	<item value="0x4f1" name="Syntesis - Kahn" />
+	<item value="0x4f2" name="Syntesis - Noon" />
+	<item value="0x4f3" name="Syntesis - Justin" />
+	<item value="0x4f4" name="Syntesis - Horst" />
+	<item value="0x4f5" name="Syntesis - Penn" />
+	<item value="0x4f6" name="Syntesis - Rattchet" />
+	<item value="0x4f7" name="Syntesis - Frank" />
+	<item value="0x4f8" name="Syntesis - Hagane" />
+	<item value="0x4f9" name="Syntesis - Murasame" />
+	<item value="0x4fa" name="Syntesis - Fynnding" />
+	<item value="0x4fb" name="Syntesis - Medion" />
+	<item value="0x4fc" name="Syntesis - Cambell" />
+	<item value="0x4fd" name="Uryudo - Synbios" />
+	<item value="0x4fe" name="Uryudo - Dantares" />
+	<item value="0x4ff" name="Uryudo - Masqurin" />
+	<item value="0x500" name="Dantares - Synbios" />
+	<item value="0x501" name="Masqurin - Synbios" />
+	<item value="0x502" name="Masqurin - Dantares" />
+	<item value="0x503" name="Grace - Synbios" />
+	<item value="0x504" name="Grace - Dantares" />
+	<item value="0x505" name="Grace - Masqurin" />
+	<item value="0x506" name="Hayward - Synbios" />
+	<item value="0x507" name="Hayward - Dantares" />
+	<item value="0x508" name="Hayward - Masqurin" />
+	<item value="0x509" name="Hayward - Grace" />
+	<item value="0x50a" name="Obright - Synbios" />
+	<item value="0x50b" name="Obright - Dantares" />
+	<item value="0x50c" name="Obright - Masqurin" />
+	<item value="0x50d" name="Obright - Grace" />
+	<item value="0x50e" name="Obright - Hayward" />
+	<item value="0x50f" name="Irene - Synbios" />
+	<item value="0x510" name="Irene - Dantares" />
+	<item value="0x511" name="Irene - Masqurin" />
+	<item value="0x512" name="Irene - Grace" />
+	<item value="0x513" name="Irene - Hayward" />
+	<item value="0x514" name="Irene - Obright" />
+	<item value="0x515" name="Julian (Scenario 1) - Synbios" />
+	<item value="0x516" name="Julian (Scenario 1) - Dantares" />
+	<item value="0x517" name="Julian (Scenario 1) - Masqurin" />
+	<item value="0x518" name="Julian (Scenario 1) - Grace" />
+	<item value="0x519" name="Julian (Scenario 1) - Hayward" />
+	<item value="0x51a" name="Julian (Scenario 1) - Obright" />
+	<item value="0x51b" name="Julian (Scenario 1) - Irene" />
+	<item value="0x51c" name="Cybel - Synbios" />
+	<item value="0x51d" name="Cybel - Dantares" />
+	<item value="0x51e" name="Cybel - Masqurin" />
+	<item value="0x51f" name="Cybel - Grace" />
+	<item value="0x520" name="Cybel - Hayward" />
+	<item value="0x521" name="Cybel - Obright" />
+	<item value="0x522" name="Cybel - Irene" />
+	<item value="0x523" name="Cybel - Julian" />
+	<item value="0x524" name="Eldar - Synbios" />
+	<item value="0x525" name="Eldar - Dantares" />
+	<item value="0x526" name="Eldar - Masqurin" />
+	<item value="0x527" name="Eldar - Grace" />
+	<item value="0x528" name="Eldar - Hayward" />
+	<item value="0x529" name="Eldar - Obright" />
+	<item value="0x52a" name="Eldar - Irene" />
+	<item value="0x52b" name="Eldar - Julian" />
+	<item value="0x52c" name="Eldar - Cybel" />
+	<item value="0x52d" name="Kahn - Synbios" />
+	<item value="0x52e" name="Kahn - Dantares" />
+	<item value="0x52f" name="Kahn - Masqurin" />
+	<item value="0x530" name="Kahn - Grace" />
+	<item value="0x531" name="Kahn - Hayward" />
+	<item value="0x532" name="Kahn - Obright" />
+	<item value="0x533" name="Kahn - Irene" />
+	<item value="0x534" name="Kahn - Julian" />
+	<item value="0x535" name="Kahn - Cybel" />
+	<item value="0x536" name="Kahn - Eldar" />
+	<item value="0x537" name="Noon - Synbios" />
+	<item value="0x538" name="Noon - Dantares" />
+	<item value="0x539" name="Noon - Masqurin" />
+	<item value="0x53a" name="Noon - Grace" />
+	<item value="0x53b" name="Noon - Hayward" />
+	<item value="0x53c" name="Noon - Obright" />
+	<item value="0x53d" name="Noon - Irene" />
+	<item value="0x53e" name="Noon - Julian" />
+	<item value="0x53f" name="Noon - Cybel" />
+	<item value="0x540" name="Noon - Eldar" />
+	<item value="0x541" name="Noon - Kahn" />
+	<item value="0x542" name="Justin - Synbios" />
+	<item value="0x543" name="Justin - Dantares" />
+	<item value="0x544" name="Justin - Masqurin" />
+	<item value="0x545" name="Justin - Grace" />
+	<item value="0x546" name="Justin - Hayward" />
+	<item value="0x547" name="Justin - Obright" />
+	<item value="0x548" name="Justin - Irene" />
+	<item value="0x549" name="Justin - Julian" />
+	<item value="0x54a" name="Justin - Cybel" />
+	<item value="0x54b" name="Justin - Eldar" />
+	<item value="0x54c" name="Justin - Kahn" />
+	<item value="0x54d" name="Justin - Noon" />
+	<item value="0x54e" name="Horst - Synbios" />
+	<item value="0x54f" name="Horst - Dantares" />
+	<item value="0x550" name="Horst - Masqurin" />
+	<item value="0x551" name="Horst - Grace" />
+	<item value="0x552" name="Horst - Hayward" />
+	<item value="0x553" name="Horst - Obright" />
+	<item value="0x554" name="Horst - Irene" />
+	<item value="0x555" name="Horst - Julian" />
+	<item value="0x556" name="Horst - Cybel" />
+	<item value="0x557" name="Horst - Eldar" />
+	<item value="0x558" name="Horst - Kahn" />
+	<item value="0x559" name="Horst - Noon" />
+	<item value="0x55a" name="Horst - Justin" />
+	<item value="0x55b" name="Penn - Synbios" />
+	<item value="0x55c" name="Penn - Dantares" />
+	<item value="0x55d" name="Penn - Masqurin" />
+	<item value="0x55e" name="Penn - Grace" />
+	<item value="0x55f" name="Penn - Hayward" />
+	<item value="0x560" name="Penn - Obright" />
+	<item value="0x561" name="Penn - Irene" />
+	<item value="0x562" name="Penn - Julian" />
+	<item value="0x563" name="Penn - Cybel" />
+	<item value="0x564" name="Penn - Eldar" />
+	<item value="0x565" name="Penn - Kahn" />
+	<item value="0x566" name="Penn - Noon" />
+	<item value="0x567" name="Penn - Justin" />
+	<item value="0x568" name="Penn - Horst" />
+	<item value="0x569" name="Rattchet - Synbios" />
+	<item value="0x56a" name="Rattchet - Dantares" />
+	<item value="0x56b" name="Rattchet - Masqurin" />
+	<item value="0x56c" name="Rattchet - Grace" />
+	<item value="0x56d" name="Rattchet - Hayward" />
+	<item value="0x56e" name="Rattchet - Obright" />
+	<item value="0x56f" name="Rattchet - Irene" />
+	<item value="0x570" name="Rattchet - Julian" />
+	<item value="0x571" name="Rattchet - Cybel" />
+	<item value="0x572" name="Rattchet - Eldar" />
+	<item value="0x573" name="Rattchet - Kahn" />
+	<item value="0x574" name="Rattchet - Noon" />
+	<item value="0x575" name="Rattchet - Justin" />
+	<item value="0x576" name="Rattchet - Horst" />
+	<item value="0x577" name="Rattchet - Penn" />
+	<item value="0x578" name="Frank - Synbios" />
+	<item value="0x579" name="Frank - Dantares" />
+	<item value="0x57a" name="Frank - Masqurin" />
+	<item value="0x57b" name="Frank - Grace" />
+	<item value="0x57c" name="Frank - Hayward" />
+	<item value="0x57d" name="Frank - Obright" />
+	<item value="0x57e" name="Frank - Irene" />
+	<item value="0x57f" name="Frank - Julian" />
+	<item value="0x580" name="Frank - Cybel" />
+	<item value="0x581" name="Frank - Eldar" />
+	<item value="0x582" name="Frank - Kahn" />
+	<item value="0x583" name="Frank - Noon" />
+	<item value="0x584" name="Frank - Justin" />
+	<item value="0x585" name="Frank - Horst" />
+	<item value="0x586" name="Frank - Penn" />
+	<item value="0x587" name="Frank - Rattchet" />
+	<item value="0x588" name="Hagane - Synbios" />
+	<item value="0x589" name="Hagane - Dantares" />
+	<item value="0x58a" name="Hagane - Masqurin" />
+	<item value="0x58b" name="Hagane - Grace" />
+	<item value="0x58c" name="Hagane - Hayward" />
+	<item value="0x58d" name="Hagane - Obright" />
+	<item value="0x58e" name="Hagane - Irene" />
+	<item value="0x58f" name="Hagane - Julian" />
+	<item value="0x590" name="Hagane - Cybel" />
+	<item value="0x591" name="Hagane - Eldar" />
+	<item value="0x592" name="Hagane - Kahn" />
+	<item value="0x593" name="Hagane - Noon" />
+	<item value="0x594" name="Hagane - Justin" />
+	<item value="0x595" name="Hagane - Horst" />
+	<item value="0x596" name="Hagane - Penn" />
+	<item value="0x597" name="Hagane - Rattchet" />
+	<item value="0x598" name="Hagane - Frank" />
+	<item value="0x599" name="Murasame - Synbios" />
+	<item value="0x59a" name="Murasame - Dantares" />
+	<item value="0x59b" name="Murasame - Masqurin" />
+	<item value="0x59c" name="Murasame - Grace" />
+	<item value="0x59d" name="Murasame - Hayward" />
+	<item value="0x59e" name="Murasame - Obright" />
+	<item value="0x59f" name="Murasame - Irene" />
+	<item value="0x5a0" name="Murasame - Julian" />
+	<item value="0x5a1" name="Murasame - Cybel" />
+	<item value="0x5a2" name="Murasame - Eldar" />
+	<item value="0x5a3" name="Murasame - Kahn" />
+	<item value="0x5a4" name="Murasame - Noon" />
+	<item value="0x5a5" name="Murasame - Justin" />
+	<item value="0x5a6" name="Murasame - Horst" />
+	<item value="0x5a7" name="Murasame - Penn" />
+	<item value="0x5a8" name="Murasame - Rattchet" />
+	<item value="0x5a9" name="Murasame - Frank" />
+	<item value="0x5aa" name="Murasame - Hagane" />
+	<item value="0x5ab" name="Fynnding - Synbios" />
+	<item value="0x5ac" name="Fynnding - Dantares" />
+	<item value="0x5ad" name="Fynnding - Masqurin" />
+	<item value="0x5ae" name="Fynnding - Grace" />
+	<item value="0x5af" name="Fynnding - Hayward" />
+	<item value="0x5b0" name="Fynnding - Obright" />
+	<item value="0x5b1" name="Fynnding - Irene" />
+	<item value="0x5b2" name="Fynnding - Julian" />
+	<item value="0x5b3" name="Fynnding - Cybel" />
+	<item value="0x5b4" name="Fynnding - Eldar" />
+	<item value="0x5b5" name="Fynnding - Kahn" />
+	<item value="0x5b6" name="Fynnding - Noon" />
+	<item value="0x5b7" name="Fynnding - Justin" />
+	<item value="0x5b8" name="Fynnding - Horst" />
+	<item value="0x5b9" name="Fynnding - Penn" />
+	<item value="0x5ba" name="Fynnding - Rattchet" />
+	<item value="0x5bb" name="Fynnding - Frank" />
+	<item value="0x5bc" name="Fynnding - Hagane" />
+	<item value="0x5bd" name="Fynnding - Murasame" />
+	<item value="0x5be" name="Medion - Synbios" />
+	<item value="0x5bf" name="Medion - Dantares" />
+	<item value="0x5c0" name="Medion - Masqurin" />
+	<item value="0x5c1" name="Medion - Grace" />
+	<item value="0x5c2" name="Medion - Hayward" />
+	<item value="0x5c3" name="Medion - Obright" />
+	<item value="0x5c4" name="Medion - Irene" />
+	<item value="0x5c5" name="Medion - Julian (Scenario 1)" />
+	<item value="0x5c6" name="Medion - Cybel" />
+	<item value="0x5c7" name="Medion - Eldar" />
+	<item value="0x5c8" name="Medion - Kahn" />
+	<item value="0x5c9" name="Medion - Noon" />
+	<item value="0x5ca" name="Medion - Justin" />
+	<item value="0x5cb" name="Medion - Horst" />
+	<item value="0x5cc" name="Medion - Penn" />
+	<item value="0x5cd" name="Medion - Rattchet" />
+	<item value="0x5ce" name="Medion - Frank" />
+	<item value="0x5cf" name="Medion - Hagane" />
+	<item value="0x5d0" name="Medion - Murasame" />
+	<item value="0x5d1" name="Medion - Fynnding" />
+	<item value="0x5d2" name="Cambell - Synbios" />
+	<item value="0x5d3" name="Cambell - Dantares" />
+	<item value="0x5d4" name="Cambell - Masqurin" />
+	<item value="0x5d5" name="Cambell - Grace" />
+	<item value="0x5d6" name="Cambell - Hayward" />
+	<item value="0x5d7" name="Cambell - Obright" />
+	<item value="0x5d8" name="Cambell - Irene" />
+	<item value="0x5d9" name="Cambell - Julian (Scenario 1)" />
+	<item value="0x5da" name="Cambell - Cybel" />
+	<item value="0x5db" name="Cambell - Eldar" />
+	<item value="0x5dc" name="Cambell - Kahn" />
+	<item value="0x5dd" name="Cambell - Noon" />
+	<item value="0x5de" name="Cambell - Justin" />
+	<item value="0x5df" name="Cambell - Horst" />
+	<item value="0x5e0" name="Cambell - Penn" />
+	<item value="0x5e1" name="Cambell - Rattchet" />
+	<item value="0x5e2" name="Cambell - Frank" />
+	<item value="0x5e3" name="Cambell - Hagane" />
+	<item value="0x5e4" name="Cambell - Murasame" />
+	<item value="0x5e5" name="Cambell - Fynnding" />
+	<item value="0x5e6" name="Cambell - Medion" />
+	<item value="0x5e7" name="Syntesis - Synbios" />
+	<item value="0x5e8" name="Syntesis - Dantares" />
+	<item value="0x5e9" name="Syntesis - Masqurin" />
+	<item value="0x5ea" name="Syntesis - Grace" />
+	<item value="0x5eb" name="Syntesis - Hayward" />
+	<item value="0x5ec" name="Syntesis - Obright" />
+	<item value="0x5ed" name="Syntesis - Irene" />
+	<item value="0x5ee" name="Syntesis - Julian (Scenario 1)" />
+	<item value="0x5ef" name="Syntesis - Cybel" />
+	<item value="0x5f0" name="Syntesis - Eldar" />
+	<item value="0x5f1" name="Syntesis - Kahn" />
+	<item value="0x5f2" name="Syntesis - Noon" />
+	<item value="0x5f3" name="Syntesis - Justin" />
+	<item value="0x5f4" name="Syntesis - Horst" />
+	<item value="0x5f5" name="Syntesis - Penn" />
+	<item value="0x5f6" name="Syntesis - Rattchet" />
+	<item value="0x5f7" name="Syntesis - Frank" />
+	<item value="0x5f8" name="Syntesis - Hagane" />
+	<item value="0x5f9" name="Syntesis - Murasame" />
+	<item value="0x5fa" name="Syntesis - Fynnding" />
+	<item value="0x5fb" name="Syntesis - Medion" />
+	<item value="0x5fc" name="Syntesis - Cambell" />
+	<item value="0x5fd" name="Uryudo - Synbios" />
+	<item value="0x5fe" name="Uryudo - Dantares" />
+	<item value="0x5ff" name="Uryudo - Masqurin" />
+	<item value="0x600" name="Dantares - Synbios" />
+	<item value="0x601" name="Masqurin - Synbios" />
+	<item value="0x602" name="Masqurin - Dantares" />
+	<item value="0x603" name="Grace - Synbios" />
+	<item value="0x604" name="Grace - Dantares" />
+	<item value="0x605" name="Grace - Masqurin" />
+	<item value="0x606" name="Hayward - Synbios" />
+	<item value="0x607" name="Hayward - Dantares" />
+	<item value="0x608" name="Hayward - Masqurin" />
+	<item value="0x609" name="Hayward - Grace" />
+	<item value="0x60a" name="Obright - Synbios" />
+	<item value="0x60b" name="Obright - Dantares" />
+	<item value="0x60c" name="Obright - Masqurin" />
+	<item value="0x60d" name="Obright - Grace" />
+	<item value="0x60e" name="Obright - Hayward" />
+	<item value="0x60f" name="Irene - Synbios" />
+	<item value="0x610" name="Irene - Dantares" />
+	<item value="0x611" name="Irene - Masqurin" />
+	<item value="0x612" name="Irene - Grace" />
+	<item value="0x613" name="Irene - Hayward" />
+	<item value="0x614" name="Irene - Obright" />
+	<item value="0x615" name="Julian (Scenario 1) - Synbios" />
+	<item value="0x616" name="Julian (Scenario 1) - Dantares" />
+	<item value="0x617" name="Julian (Scenario 1) - Masqurin" />
+	<item value="0x618" name="Julian (Scenario 1) - Grace" />
+	<item value="0x619" name="Julian (Scenario 1) - Hayward" />
+	<item value="0x61a" name="Julian (Scenario 1) - Obright" />
+	<item value="0x61b" name="Julian (Scenario 1) - Irene" />
+	<item value="0x61c" name="Cybel - Synbios" />
+	<item value="0x61d" name="Cybel - Dantares" />
+	<item value="0x61e" name="Cybel - Masqurin" />
+	<item value="0x61f" name="Cybel - Grace" />
+	<item value="0x620" name="Cybel - Hayward" />
+	<item value="0x621" name="Cybel - Obright" />
+	<item value="0x622" name="Cybel - Irene" />
+	<item value="0x623" name="Cybel - Julian" />
+	<item value="0x624" name="Eldar - Synbios" />
+	<item value="0x625" name="Eldar - Dantares" />
+	<item value="0x626" name="Eldar - Masqurin" />
+	<item value="0x627" name="Eldar - Grace" />
+	<item value="0x628" name="Eldar - Hayward" />
+	<item value="0x629" name="Eldar - Obright" />
+	<item value="0x62a" name="Eldar - Irene" />
+	<item value="0x62b" name="Eldar - Julian" />
+	<item value="0x62c" name="Eldar - Cybel" />
+	<item value="0x62d" name="Kahn - Synbios" />
+	<item value="0x62e" name="Kahn - Dantares" />
+	<item value="0x62f" name="Kahn - Masqurin" />
+	<item value="0x630" name="Kahn - Grace" />
+	<item value="0x631" name="Kahn - Hayward" />
+	<item value="0x632" name="Kahn - Obright" />
+	<item value="0x633" name="Kahn - Irene" />
+	<item value="0x634" name="Kahn - Julian" />
+	<item value="0x635" name="Kahn - Cybel" />
+	<item value="0x636" name="Kahn - Eldar" />
+	<item value="0x637" name="Noon - Synbios" />
+	<item value="0x638" name="Noon - Dantares" />
+	<item value="0x639" name="Noon - Masqurin" />
+	<item value="0x63a" name="Noon - Grace" />
+	<item value="0x63b" name="Noon - Hayward" />
+	<item value="0x63c" name="Noon - Obright" />
+	<item value="0x63d" name="Noon - Irene" />
+	<item value="0x63e" name="Noon - Julian" />
+	<item value="0x63f" name="Noon - Cybel" />
+	<item value="0x640" name="Noon - Eldar" />
+	<item value="0x641" name="Noon - Kahn" />
+	<item value="0x642" name="Justin - Synbios" />
+	<item value="0x643" name="Justin - Dantares" />
+	<item value="0x644" name="Justin - Masqurin" />
+	<item value="0x645" name="Justin - Grace" />
+	<item value="0x646" name="Justin - Hayward" />
+	<item value="0x647" name="Justin - Obright" />
+	<item value="0x648" name="Justin - Irene" />
+	<item value="0x649" name="Justin - Julian" />
+	<item value="0x64a" name="Justin - Cybel" />
+	<item value="0x64b" name="Justin - Eldar" />
+	<item value="0x64c" name="Justin - Kahn" />
+	<item value="0x64d" name="Justin - Noon" />
+	<item value="0x64e" name="Horst - Synbios" />
+	<item value="0x64f" name="Horst - Dantares" />
+	<item value="0x650" name="Horst - Masqurin" />
+	<item value="0x651" name="Horst - Grace" />
+	<item value="0x652" name="Horst - Hayward" />
+	<item value="0x653" name="Horst - Obright" />
+	<item value="0x654" name="Horst - Irene" />
+	<item value="0x655" name="Horst - Julian" />
+	<item value="0x656" name="Horst - Cybel" />
+	<item value="0x657" name="Horst - Eldar" />
+	<item value="0x658" name="Horst - Kahn" />
+	<item value="0x659" name="Horst - Noon" />
+	<item value="0x65a" name="Horst - Justin" />
+	<item value="0x65b" name="Penn - Synbios" />
+	<item value="0x65c" name="Penn - Dantares" />
+	<item value="0x65d" name="Penn - Masqurin" />
+	<item value="0x65e" name="Penn - Grace" />
+	<item value="0x65f" name="Penn - Hayward" />
+	<item value="0x660" name="Penn - Obright" />
+	<item value="0x661" name="Penn - Irene" />
+	<item value="0x662" name="Penn - Julian" />
+	<item value="0x663" name="Penn - Cybel" />
+	<item value="0x664" name="Penn - Eldar" />
+	<item value="0x665" name="Penn - Kahn" />
+	<item value="0x666" name="Penn - Noon" />
+	<item value="0x667" name="Penn - Justin" />
+	<item value="0x668" name="Penn - Horst" />
+	<item value="0x669" name="Rattchet - Synbios" />
+	<item value="0x66a" name="Rattchet - Dantares" />
+	<item value="0x66b" name="Rattchet - Masqurin" />
+	<item value="0x66c" name="Rattchet - Grace" />
+	<item value="0x66d" name="Rattchet - Hayward" />
+	<item value="0x66e" name="Rattchet - Obright" />
+	<item value="0x66f" name="Rattchet - Irene" />
+	<item value="0x670" name="Rattchet - Julian" />
+	<item value="0x671" name="Rattchet - Cybel" />
+	<item value="0x672" name="Rattchet - Eldar" />
+	<item value="0x673" name="Rattchet - Kahn" />
+	<item value="0x674" name="Rattchet - Noon" />
+	<item value="0x675" name="Rattchet - Justin" />
+	<item value="0x676" name="Rattchet - Horst" />
+	<item value="0x677" name="Rattchet - Penn" />
+	<item value="0x678" name="Frank - Synbios" />
+	<item value="0x679" name="Frank - Dantares" />
+	<item value="0x67a" name="Frank - Masqurin" />
+	<item value="0x67b" name="Frank - Grace" />
+	<item value="0x67c" name="Frank - Hayward" />
+	<item value="0x67d" name="Frank - Obright" />
+	<item value="0x67e" name="Frank - Irene" />
+	<item value="0x67f" name="Frank - Julian" />
+	<item value="0x680" name="Frank - Cybel" />
+	<item value="0x681" name="Frank - Eldar" />
+	<item value="0x682" name="Frank - Kahn" />
+	<item value="0x683" name="Frank - Noon" />
+	<item value="0x684" name="Frank - Justin" />
+	<item value="0x685" name="Frank - Horst" />
+	<item value="0x686" name="Frank - Penn" />
+	<item value="0x687" name="Frank - Rattchet" />
+	<item value="0x688" name="Hagane - Synbios" />
+	<item value="0x689" name="Hagane - Dantares" />
+	<item value="0x68a" name="Hagane - Masqurin" />
+	<item value="0x68b" name="Hagane - Grace" />
+	<item value="0x68c" name="Hagane - Hayward" />
+	<item value="0x68d" name="Hagane - Obright" />
+	<item value="0x68e" name="Hagane - Irene" />
+	<item value="0x68f" name="Hagane - Julian" />
+	<item value="0x690" name="Hagane - Cybel" />
+	<item value="0x691" name="Hagane - Eldar" />
+	<item value="0x692" name="Hagane - Kahn" />
+	<item value="0x693" name="Hagane - Noon" />
+	<item value="0x694" name="Hagane - Justin" />
+	<item value="0x695" name="Hagane - Horst" />
+	<item value="0x696" name="Hagane - Penn" />
+	<item value="0x697" name="Hagane - Rattchet" />
+	<item value="0x698" name="Hagane - Frank" />
+	<item value="0x699" name="Murasame - Synbios" />
+	<item value="0x69a" name="Murasame - Dantares" />
+	<item value="0x69b" name="Murasame - Masqurin" />
+	<item value="0x69c" name="Murasame - Grace" />
+	<item value="0x69d" name="Murasame - Hayward" />
+	<item value="0x69e" name="Murasame - Obright" />
+	<item value="0x69f" name="Murasame - Irene" />
+	<item value="0x6a0" name="Murasame - Julian" />
+	<item value="0x6a1" name="Murasame - Cybel" />
+	<item value="0x6a2" name="Murasame - Eldar" />
+	<item value="0x6a3" name="Murasame - Kahn" />
+	<item value="0x6a4" name="Murasame - Noon" />
+	<item value="0x6a5" name="Murasame - Justin" />
+	<item value="0x6a6" name="Murasame - Horst" />
+	<item value="0x6a7" name="Murasame - Penn" />
+	<item value="0x6a8" name="Murasame - Rattchet" />
+	<item value="0x6a9" name="Murasame - Frank" />
+	<item value="0x6aa" name="Murasame - Hagane" />
+	<item value="0x6ab" name="Fynnding - Synbios" />
+	<item value="0x6ac" name="Fynnding - Dantares" />
+	<item value="0x6ad" name="Fynnding - Masqurin" />
+	<item value="0x6ae" name="Fynnding - Grace" />
+	<item value="0x6af" name="Fynnding - Hayward" />
+	<item value="0x6b0" name="Fynnding - Obright" />
+	<item value="0x6b1" name="Fynnding - Irene" />
+	<item value="0x6b2" name="Fynnding - Julian" />
+	<item value="0x6b3" name="Fynnding - Cybel" />
+	<item value="0x6b4" name="Fynnding - Eldar" />
+	<item value="0x6b5" name="Fynnding - Kahn" />
+	<item value="0x6b6" name="Fynnding - Noon" />
+	<item value="0x6b7" name="Fynnding - Justin" />
+	<item value="0x6b8" name="Fynnding - Horst" />
+	<item value="0x6b9" name="Fynnding - Penn" />
+	<item value="0x6ba" name="Fynnding - Rattchet" />
+	<item value="0x6bb" name="Fynnding - Frank" />
+	<item value="0x6bc" name="Fynnding - Hagane" />
+	0x6D0: Waltz - Synbios
+	0x6D1: Waltz - Dantares
+	0x6D2: Waltz - Masqurin
+	0x6D3: Waltz - Grace
+	0x6D4: Waltz - Hayward
+	0x6D5: Waltz - Obright
+	0x6D6: Waltz - Irene
+	0x6D7: Waltz - Julian (Scenario 1)
+	0x6D8: Waltz - Cybel
+	0x6D9: Waltz - Eldar
+	0x6DA: Waltz - Kahn
+	0x6DB: Waltz - Noon
+	0x6DC: Waltz - Justin
+	0x6DD: Waltz - Horst
+	0x6DE: Waltz - Penn
+	0x6DF: Waltz - Rattchet
+	0x6E0: Waltz - Frank
+	0x6E1: Waltz - Hagane
+	0x6E2: Waltz - Murasame
+	0x6E3: Waltz - Fynnding
+	0x6E4: Waltz - Medion
+	0x6E5: Waltz - Cambell
+	0x6E6: Waltz - Syntesis
+	0x6E7: Waltz - Uryudo
+	0x6E8: Rock - Synbios
+	0x6E9: Rock - Dantares
+	0x6EA: Rock - Masqurin
+	0x6EB: Rock - Grace
+	0x6EC: Rock - Hayward
+	0x6ED: Rock - Obright
+	0x6EE: Rock - Irene
+	0x6EF: Rock - Julian (Scenario 1)
+	0x6F0: Rock - Cybel
+	0x6F1: Rock - Eldar
+	0x6F2: Rock - Kahn
+	0x6F3: Rock - Noon
+	0x6F4: Rock - Justin
+	0x6F5: Rock - Horst
+	0x6F6: Rock - Penn
+	0x6F7: Rock - Rattchet
+	0x6F8: Rock - Frank
+	0x6F9: Rock - Hagane
+	0x6FA: Rock - Murasame
+	0x6FB: Rock - Fynnding
+	0x6FC: Rock - Medion
+	0x6FD: Rock - Cambell
+	0x6FE: Rock - Syntesis
+	0x6FF: Rock - Uryudo
+	0x700: Rock - Waltz
+	0x701: Bernard - Synbios
+	0x702: Bernard - Dantares
+	0x703: Bernard - Masqurin
+	0x704: Bernard - Grace
+	0x705: Bernard - Hayward
+	0x706: Bernard - Obright
+	0x707: Bernard - Irene
+	0x708: Bernard - Julian (Scenario 1)
+	0x709: Bernard - Cybel
+	0x70A: Bernard - Eldar
+	0x70B: Bernard - Kahn
+	0x70C: Bernard - Noon
+	0x70D: Bernard - Justin
+	0x70E: Bernard - Horst
+	0x70F: Bernard - Penn
+	0x710: Bernard - Rattchet
+	0x711: Bernard - Frank
+	0x712: Bernard - Hagane
+	0x713: Bernard - Murasame
+	0x714: Bernard - Fynnding
+	0x715: Bernard - Medion
+	0x716: Bernard - Cambell
+	0x717: Bernard - Syntesis
+	0x718: Bernard - Uryudo
+
+	0x719: Bernard - Waltz
+	0x71A: Bernard - Rock
+	0x71B: Zero - Synbios
+	0x71C: Zero - Dantares
+	0x71D: Zero - Masqurin
+	0x71E: Zero - Grace
+	0x71F: Zero - Hayward
+	0x720: Zero - Obright
+	0x721: Zero - Irene
+	0x722: Zero - Julian (Scenario 1)
+	0x723: Zero - Cybel
+	0x724: Zero - Eldar
+	0x725: Zero - Kahn
+	0x726: Zero - Noon
+	0x727: Zero - Justin
+	0x728: Zero - Horst
+	0x729: Zero - Penn
+	0x72A: Zero - Rattchet
+	0x72B: Zero - Frank
+	0x72C: Zero - Hagane
+	0x72D: Zero - Murasame
+	0x72E: Zero - Fynnding
+	0x72F: Zero - Medion
+	0x730: Zero - Cambell
+	0x731: Zero - Syntesis
+	0x732: Zero - Uryudo
+	0x733: Zero - Waltz
+	0x734: Zero - Rock
+	0x735: Zero - Bernard
+	0x736: Hazuki - Synbios
+	0x737: Hazuki - Dantares
+	0x738: Hazuki - Masqurin
+	0x739: Hazuki - Grace
+	0x73A: Hazuki - Hayward
+	0x73B: Hazuki - Obright
+	0x73C: Hazuki - Irene
+	0x73D: Hazuki - Julian (Scenario 1)
+	0x73E: Hazuki - Cybel
+	0x73F: Hazuki - Eldar
+	0x740: Hazuki - Kahn
+	0x741: Hazuki - Noon
+	0x742: Hazuki - Justin
+	0x743: Hazuki - Horst
+	0x744: Hazuki - Penn
+	0x745: Hazuki - Rattchet
+	0x746: Hazuki - Frank
+	0x747: Hazuki - Hagane
+	0x748: Hazuki - Murasame
+	0x749: Hazuki - Fynnding
+	0x74A: Hazuki - Medion
+	0x74B: Hazuki - Cambell
+	0x74C: Hazuki - Syntesis
+	0x74D: Hazuki - Uryudo
+	0x74E: Hazuki - Waltz
+	0x74F: Hazuki - Rock
+	0x750: Hazuki - Bernard
+	0x751: Hazuki - Zero
+	0x752: David - Synbios
+	0x753: David - Dantares
+	0x754: David - Masqurin
+	0x755: David - Grace
+	0x756: David - Hayward
+	0x757: David - Obright
+	0x758: David - Irene
+	0x759: David - Julian (Scenario 1)
+	0x75A: David - Cybel
+	0x75B: David - Eldar
+	0x75C: David - Kahn
+	0x75D: David - Noon
+	0x75E: David - Justin
+	0x75F: David - Horst
+	0x760: David - Penn
+	0x761: David - Rattchet
+	0x762: David - Frank
+	0x763: David - Hagane
+	0x764: David - Murasame
+	0x765: David - Fynnding
+	0x766: David - Medion
+	0x767: David - Cambell
+	0x768: David - Syntesis
+	0x769: David - Uryudo
+	0x76A: David - Waltz
+	0x76B: David - Rock
+	0x76C: David - Bernard
+	0x76D: David - Zero
+	0x76E: David - Hazuki
+	0x76F: Hedoba - Synbios
+	0x770: Hedoba - Dantares
+	0x771: Hedoba - Masqurin
+	0x772: Hedoba - Grace
+	0x773: Hedoba - Hayward
+	0x774: Hedoba - Obright
+	0x775: Hedoba - Irene
+	0x776: Hedoba - Julian (Scenario 1)
+	0x777: Hedoba - Cybel
+	0x778: Hedoba - Eldar
+	0x779: Hedoba - Kahn
+	0x77A: Hedoba - Noon
+	0x77B: Hedoba - Justin
+	0x77C: Hedoba - Horst
+	0x77D: Hedoba - Penn
+	0x77E: Hedoba - Rattchet
+	0x77F: Hedoba - Frank
+	0x780: Hedoba - Hagane
+	0x781: Hedoba - Murasame
+	0x782: Hedoba - Fynnding
+	0x783: Hedoba - Medion
+	0x784: Hedoba - Cambell
+	0x785: Hedoba - Syntesis
+	0x786: Hedoba - Uryudo
+	0x787: Hedoba - Waltz
+	0x788: Hedoba - Rock
+	0x789: Hedoba - Bernard
+	0x78A: Hedoba - Zero
+	0x78B: Hedoba - Hazuki
+	0x78C: Hedoba - David
+	0x78E: Julian (Scenario 2) - Dantares
+	0x78F: Julian (Scenario 2) - Masqurin
+	0x790: Julian (Scenario 2) - Grace
+	0x791: Julian (Scenario 2) - Hayward
+	0x792: Julian (Scenario 2) - Obright
+	0x793: Julian (Scenario 2) - Irene
+	0x794: Julian (Scenario 2) - Julian (Scenario 1)
+	0x795: Julian (Scenario 2) - Cybel
+	0x796: Julian (Scenario 2) - Eldar
+	0x797: Julian (Scenario 2) - Kahn
+	0x798: Julian (Scenario 2) - Noon
+	0x799: Julian (Scenario 2) - Justin
+	0x79A: Julian (Scenario 2) - Horst
+	0x79B: Julian (Scenario 2) - Penn
+	0x79C: Julian (Scenario 2) - Rattchet
+	0x79D: Julian (Scenario 2) - Frank
+	0x79E: Julian (Scenario 2) - Hagane
+	0x79F: Julian (Scenario 2) - Murasame
+	0x7A0: Julian (Scenario 2) - Fynnding
+	0x7A1: Julian (Scenario 2) - Medion
+	0x7A2: Julian (Scenario 2) - Cambell
+	0x7A3: Julian (Scenario 2) - Syntesis
+	0x7A4: Julian (Scenario 2) - Uryudo
+	0x7A5: Julian (Scenario 2) - Waltz
+	0x7A6: Julian (Scenario 2) - Rock
+	0x7A7: Julian (Scenario 2) - Bernard
+	0x7A8: Julian (Scenario 2) - Zero
+	0x7A9: Julian (Scenario 2) - Hazuki
+	0x7AA: Julian (Scenario 2) - David
+	0x7AB: Julian (Scenario 2) - Hedoba
+	0x7AC: Donhort - Synbios
+	0x7AD: Donhort - Dantares
+	0x7AE: Donhort - Masqurin
+	0x7AF: Donhort - Grace
+	0x7B0: Donhort - Hayward
+	0x7B1: Donhort - Obright
+	0x7B2: Donhort - Irene
+	0x7B3: Donhort - Julian (Scenario 1)
+	0x7B4: Donhort - Cybel
+	0x7B5: Donhort - Eldar
+	0x7B6: Donhort - Kahn
+	0x7B7: Donhort - Noon
+	0x7B8: Donhort - Justin
+	0x7B9: Donhort - Horst
+	0x7BA: Donhort - Penn
+	0x7BB: Donhort - Rattchet
+	0x7BC: Donhort - Frank
+	0x7BD: Donhort - Hagane
+	0x7BE: Donhort - Murasame
+	0x7BF: Donhort - Fynnding
+	0x7C0: Donhort - Medion
+	0x7C1: Donhort - Cambell
+	0x7C2: Donhort - Syntesis
+	0x7C3: Donhort - Uryudo
+	0x7C4: Donhort - Waltz
+	0x7C5: Donhort - Rock
+	0x7C6: Donhort - Bernard
+	0x7C7: Donhort - Zero
+	0x7C8: Donhort - Hazuki
+	0x7C9: Donhort - David
+	0x7CA: Donhort - Hedoba
+	0x7CB: Donhort - Julian (Scenario 2)
+	0x7CC: Hera - Synbios
+	0x7CD: Hera - Dantares
+	0x7CE: Hera - Masqurin
+	0x7CF: Hera - Grace
+	0x7D0: Hera - Hayward
+	0x7D1: Hera - Obright
+	0x7D2: Hera - Irene
+	0x7D3: Hera - Julian (Scenario 1)
+	0x7D4: Hera - Cybel
+	0x7D5: Hera - Eldar
+	0x7D6: Hera - Kahn
+	0x7D7: Hera - Noon
+	0x7D8: Hera - Justin
+	0x7D9: Hera - Horst
+	0x7DA: Hera - Penn
+	0x7DB: Hera - Rattchet
+	0x7DC: Hera - Frank
+	0x7DD: Hera - Hagane
+	0x7DE: Hera - Murasame
+	0x7DF: Hera - Fynnding
+	0x7E0: Hera - Medion
+	0x7E1: Hera - Cambell
+	0x7E2: Hera - Syntesis
+	0x7E3: Hera - Uryudo
+	0x7E4: Hera - Waltz
+	0x7E5: Hera - Rock
+	0x7E6: Hera - Bernard
+	0x7E7: Hera - Zero
+	0x7E8: Hera - Hazuki
+	0x7E9: Hera - David
+	0x7EA: Hera - Hedoba
+	0x7EB: Hera - Julian (Scenario 2)
+	0x7EC: Hera - Donhort
+	0x7ED: Robby - Synbios
+	0x7EE: Robby - Dantares
+	0x7EF: Robby - Masqurin
+	0x7F0: Robby - Grace
+	0x7F1: Robby - Hayward
+	0x7F2: Robby - Obright
+	0x7F3: Robby - Irene
+	0x7F4: Robby - Julian (Scenario 1)
+	0x7F5: Robby - Cybel
+	0x7F6: Robby - Eldar
+	0x7F7: Robby - Kahn
+	0x7F8: Robby - Noon
+	0x7F9: Robby - Justin
+	0x7FA: Robby - Horst
+	0x7FB: Robby - Penn
+	0x7FC: Robby - Rattchet
+	0x7FD: Robby - Frank
+	0x7FE: Robby - Hagane
+	0x7FF: Robby - Murasame
+	0x800: Robby - Fynnding
+	0x801: Robby - Medion
+	0x802: Robby - Cambell
+	0x803: Robby - Syntesis
+	0x804: Robby - Uryudo
+	0x805: Robby - Waltz
+	0x806: Robby - Rock
+	0x807: Robby - Bernard
+	0x808: Robby - Zero
+	0x809: Robby - Hazuki
+	0x80A: Robby - David
+	0x80B: Robby - Hedoba
+	0x80C: Robby - Julian (Scenario 2)
+	0x80D: Robby - Donhort
+	0x80E: Robby - Hera
+	0x80F: Arthur - Synbios
+	0x810: Arthur - Dantares
+	0x811: Arthur - Masqurin
+	0x812: Arthur - Grace
+	0x813: Arthur - Hayward
+	0x814: Arthur - Obright
+	0x815: Arthur - Irene
+	0x816: Arthur - Julian (Scenario 1)
+	0x817: Arthur - Cybel
+	0x818: Arthur - Eldar
+	0x819: Arthur - Kahn
+	0x81A: Arthur - Noon
+	0x81B: Arthur - Justin
+	0x81C: Arthur - Horst
+	0x81D: Arthur - Penn
+	0x81E: Arthur - Rattchet
+	0x81F: Arthur - Frank
+	0x820: Arthur - Hagane
+	0x821: Arthur - Murasame
+	0x822: Arthur - Fynnding
+	0x823: Arthur - Medion
+	0x824: Arthur - Cambell
+	0x825: Arthur - Syntesis
+	0x826: Arthur - Uryudo
+	0x827: Arthur - Waltz
+	0x828: Arthur - Rock
+	0x829: Arthur - Bernard
+	0x82A: Arthur - Zero
+	0x82B: Arthur - Hazuki
+	0x82C: Arthur - David
+	0x82D: Arthur - Hedoba
+	0x82E: Arthur - Julian (Scenario 2)
+	0x82F: Arthur - Donhort
+	0x830: Arthur - Hera
+	0x831: Arthur - Robby
+	0x832: Garosh - Synbios
+	0x833: Garosh - Dantares
+	0x834: Garosh - Masqurin
+	0x835: Garosh - Grace
+	0x836: Garosh - Hayward
+	0x837: Garosh - Obright
+	0x838: Garosh - Irene
+	0x839: Garosh - Julian (Scenario 1)
+	0x83A: Garosh - Cybel
+	0x83B: Garosh - Eldar
+	0x83C: Garosh - Kahn
+	0x83D: Garosh - Noon
+	0x83E: Garosh - Justin
+	0x83F: Garosh - Horst
+	0x840: Garosh - Penn
+	0x841: Garosh - Rattchet
+	0x842: Garosh - Frank
+	0x843: Garosh - Hagane
+	0x844: Garosh - Murasame
+	0x845: Garosh - Fynnding
+	0x846: Garosh - Medion
+	0x847: Garosh - Cambell
+	0x848: Garosh - Syntesis
+	0x849: Garosh - Uryudo
+	0x84A: Garosh - Waltz
+	0x84B: Garosh - Rock
+	0x84C: Garosh - Bernard
+	0x84D: Garosh - Zero
+	0x84E: Garosh - Hazuki
+	0x84F: Garosh - David
+	0x850: Garosh - Hedoba
+	0x851: Garosh - Julian (Scenario 2)
+	0x852: Garosh - Donhort
+	0x853: Garosh - Hera
+	0x854: Garosh - Robby
+	0x855: Garosh - Arthur
+	0x856: Jade - Synbios
+	0x857: Jade - Dantares
+	0x858: Jade - Masqurin
+	0x859: Jade - Grace
+	0x85A: Jade - Hayward
+	0x85B: Jade - Obright
+	0x85C: Jade - Irene
+	0x85D: Jade - Julian (Scenario 1)
+	0x85E: Jade - Cybel
+	0x85F: Jade - Eldar
+	0x860: Jade - Kahn
+	0x861: Jade - Noon
+	0x862: Jade - Justin
+	0x863: Jade - Horst
+	0x864: Jade - Penn
+	0x865: Jade - Rattchet
+	0x866: Jade - Frank
+	0x867: Jade - Hagane
+	0x868: Jade - Murasame
+	0x869: Jade - Fynnding
+	0x86A: Jade - Medion
+	0x86B: Jade - Cambell
+	0x86C: Jade - Syntesis
+	0x86D: Jade - Uryudo
+	0x86E: Jade - Waltz
+	0x86F: Jade - Rock
+	0x870: Jade - Bernard
+	0x871: Jade - Zero
+	0x872: Jade - Hazuki
+	0x873: Jade - David
+	0x874: Jade - Hedoba
+	0x875: Jade - Julian (Scenario 2)
+	0x876: Jade - Donhort
+	0x877: Jade - Hera
+	0x878: Jade - Robby
+	0x879: Jade - Arthur
+	0x87A: Jade - Garosh
+	0x87B: Penko - Synbios
+	0x87C: Penko - Dantares
+	0x87D: Penko - Masqurin
+	0x87E: Penko - Grace
+	0x87F: Penko - Hayward
+	0x880: Penko - Obright
+	0x881: Penko - Irene
+	0x882: Penko - Julian (Scenario 1)
+	0x883: Penko - Cybel
+	0x884: Penko - Eldar
+	0x885: Penko - Kahn
+	0x886: Penko - Noon
+	0x887: Penko - Justin
+	0x888: Penko - Horst
+	0x889: Penko - Penn
+	0x88A: Penko - Rattchet
+	0x88B: Penko - Frank
+	0x88C: Penko - Hagane
+	0x88D: Penko - Murasame
+	0x88E: Penko - Fynnding
+	0x88F: Penko - Medion
+	0x890: Penko - Cambell
+	0x891: Penko - Syntesis
+	0x892: Penko - Uryudo
+	0x893: Penko - Waltz
+	0x894: Penko - Rock
+	0x895: Penko - Bernard
+	0x896: Penko - Zero
+	0x897: Penko - Hazuki
+	0x898: Penko - David
+	0x899: Penko - Hedoba
+	0x89A: Penko - Julian (Scenario 2)
+	0x89B: Penko - Donhort
+	0x89C: Penko - Hera
+	0x89D: Penko - Robby
+	0x89E: Penko - Arthur
+	0x89F: Penko - Garosh
+	0x8A0: Penko - Jade
+	0x8A1: Papetts - Synbios
+	0x8A2: Papetts - Dantares
+	0x8A3: Papetts - Masqurin
+	0x8A4: Papetts - Grace
+	0x8A5: Papetts - Hayward
+	0x8A6: Papetts - Obright
+	0x8A7: Papetts - Irene
+	0x8A8: Papetts - Julian (Scenario 1)
+	0x8A9: Papetts - Cybel
+	0x8AA: Papetts - Eldar
+	0x8AB: Papetts - Kahn
+	0x8AC: Papetts - Noon
+	0x8AD: Papetts - Justin
+	0x8AE: Papetts - Horst
+	0x8AF: Papetts - Penn
+	0x8B0: Papetts - Rattchet
+	0x8B1: Papetts - Frank
+	0x8B2: Papetts - Hagane
+	0x8B3: Papetts - Murasame
+	0x8B4: Papetts - Fynnding
+	0x8B5: Papetts - Medion
+	0x8B6: Papetts - Cambell
+	0x8B7: Papetts - Syntesis
+	0x8B8: Papetts - Uryudo
+	0x8B9: Papetts - Waltz
+	0x8BA: Papetts - Rock
+	0x8BB: Papetts - Bernard
+	0x8BC: Papetts - Zero
+	0x8BD: Papetts - Hazuki
+	0x8BE: Papetts - David
+	0x8BF: Papetts - Hedoba
+	0x8C0: Papetts - Julian (Scenario 2)
+	0x8C1: Papetts - Donhort
+	0x8C2: Papetts - Hera
+	0x8C3: Papetts - Robby
+	0x8C4: Papetts - Arthur
+	0x8C5: Papetts - Garosh
+	0x8C6: Papetts - Jade
+	0x8C7: Papetts - Penko
+	0x8C8: Kate - Synbios
+	0x8C9: Kate - Dantares
+	0x8CA: Kate - Masqurin
+	0x8CB: Kate - Grace
+	0x8CC: Kate - Hayward
+	0x8CD: Kate - Obright
+	0x8CE: Kate - Irene
+	0x8CF: Kate - Julian
+	0x8D0: Kate - Cybel
+	0x8D1: Kate - Eldar
+	0x8D2: Kate - Kahn
+	0x8D3: Kate - Noon
+	0x8D4: Kate - Justin
+	0x8D5: Kate - Horst
+	0x8D6: Kate - Penn
+	0x8D7: Kate - Rattchet
+	0x8D8: Kate - Frank
+	0x8D9: Kate - Hagane
+	0x8DA: Kate - Murasame
+	0x8DB: Kate - Fynnding
+	0x8DC: Kate - Medion
+	0x8DD: Kate - Cambell
+	0x8DE: Kate - Syntesis
+	0x8DF: Kate - Uryudo
+	0x8E0: Kate - Waltz
+	0x8E1: Kate - Rock
+	0x8E2: Kate - Bernard
+	0x8E3: Kate - Zero
+	0x8E4: Kate - Hazuki
+	0x8E5: Kate - David
+	0x8E6: Kate - Hedoba
+	0x8E7: Kate - Gracia
+	0x8E8: Kate - Donhort
+	0x8E9: Kate - Hera
+	0x8EA: Kate - Robby
+	0x8EB: Kate - Arthur
+	0x8EC: Kate - Garosh
+	0x8ED: Kate - Jade
+	0x8EE: Kate - Penko
+	0x8EF: Kate - Papetts
+	0x8F0: Rogan - Synbios
+	0x8F1: Rogan - Dantares
+	0x8F2: Rogan - Masqurin
+	0x8F3: Rogan - Grace
+	0x8F4: Rogan - Hayward
+	0x8F5: Rogan - Obright
+	0x8F6: Rogan - Irene
+	0x8F7: Rogan - Julian
+	0x8F8: Rogan - Cybel
+	0x8F9: Rogan - Eldar
+	0x8FA: Rogan - Kahn
+	0x8FB: Rogan - Noon
+	0x8FC: Rogan - Justin
+	0x8FD: Rogan - Horst
+	0x8FE: Rogan - Penn
+	0x8FF: Rogan - Rattchet
+	0x900: Rogan - Frank
+	0x901: Rogan - Hagane
+	0x902: Rogan - Murasame
+	0x903: Rogan - Fynnding
+	0x904: Rogan - Medion
+	0x905: Rogan - Cambell
+	0x906: Rogan - Syntesis
+	0x907: Rogan - Uryudo
+	0x908: Rogan - Waltz
+	0x909: Rogan - Rock
+	0x90A: Rogan - Bernard
+	0x90B: Rogan - Zero
+	0x90C: Rogan - Hazuki
+	0x90D: Rogan - David
+	0x90E: Rogan - Hedoba
+	0x90F: Rogan - Gracia
+	0x910: Rogan - Donhort
+	0x911: Rogan - Hera
+	0x912: Rogan - Robby
+	0x913: Rogan - Arthur
+	0x914: Rogan - Garosh
+	0x915: Rogan - Jade
+	0x916: Rogan - Penko
+	0x917: Rogan - Papetts
+	0x918: Rogan - Kate
+	0x919: Edmund - Synbios
+	0x91A: Edmund - Dantares
+	0x91B: Edmund - Masqurin
+	0x91C: Edmund - Grace
+	0x91D: Edmund - Hayward
+	0x91E: Edmund - Obright
+	0x91F: Edmund - Irene
+	0x920: Edmund - Julian
+	0x921: Edmund - Cybel
+	0x922: Edmund - Eldar
+	0x923: Edmund - Kahn
+	0x924: Edmund - Noon
+	0x925: Edmund - Justin
+	0x926: Edmund - Horst
+	0x927: Edmund - Penn
+	0x928: Edmund - Rattchet
+	0x929: Edmund - Frank
+	0x92A: Edmund - Hagane
+	0x92B: Edmund - Murasame
+	0x92C: Edmund - Fynnding
+	0x92D: Edmund - Medion
+	0x92E: Edmund - Cambell
+	0x92F: Edmund - Syntesis
+	0x930: Edmund - Uryudo
+	0x931: Edmund - Waltz
+	0x932: Edmund - Rock
+	0x933: Edmund - Bernard
+	0x934: Edmund - Zero
+	0x935: Edmund - Hazuki
+	0x936: Edmund - David
+	0x937: Edmund - Hedoba
+	0x938: Edmund - Gracia
+	0x939: Edmund - Donhort
+	0x93A: Edmund - Hera
+	0x93B: Edmund - Robby
+	0x93C: Edmund - Arthur
+	0x93D: Edmund - Garosh
+	0x93E: Edmund - Jade
+	0x93F: Edmund - Penko
+	0x940: Edmund - Papetts
+	0x941: Edmund - Kate
+	0x942: Edmund - Rogan
+	0x943: Isabella - Synbios
+	0x944: Isabella - Dantares
+	0x945: Isabella - Masqurin
+	0x946: Isabella - Grace
+	0x947: Isabella - Hayward
+	0x948: Isabella - Obright
+	0x949: Isabella - Irene
+	0x94A: Isabella - Julian
+	0x94B: Isabella - Cybel
+	0x94C: Isabella - Eldar
+	0x94D: Isabella - Kahn
+	0x94E: Isabella - Noon
+	0x94F: Isabella - Justin
+	0x950: Isabella - Horst
+	0x951: Isabella - Penn
+	0x952: Isabella - Rattchet
+	0x953: Isabella - Frank
+	0x954: Isabella - Hagane
+	0x955: Isabella - Murasame
+	0x956: Isabella - Fynnding
+	0x957: Isabella - Medion
+	0x958: Isabella - Cambell
+	0x959: Isabella - Syntesis
+	0x95A: Isabella - Uryudo
+	0x95B: Isabella - Waltz
+	0x95C: Isabella - Rock
+	0x95D: Isabella - Bernard
+	0x95E: Isabella - Zero
+	0x95F: Isabella - Hazuki
+	0x960: Isabella - David
+	0x961: Isabella - Hedoba
+	0x962: Isabella - Gracia
+	0x963: Isabella - Donhort
+	0x964: Isabella - Hera
+	0x965: Isabella - Robby
+	0x966: Isabella - Arthur
+	0x967: Isabella - Garosh
+	0x968: Isabella - Jade
+	0x969: Isabella - Penko
+	0x96A: Isabella - Papetts
+	0x96B: Isabella - Kate
+	0x96C: Isabella - Rogan
+	0x96D: Isabella - Edmund
+	0x96E: Brigit - Synbios
+	0x96F: Brigit - Dantares
+	0x970: Brigit - Masqurin
+	0x971: Brigit - Grace
+	0x972: Brigit - Hayward
+	0x973: Brigit - Obright
+	0x974: Brigit - Irene
+	0x975: Brigit - Julian
+	0x976: Brigit - Cybel
+	0x977: Brigit - Eldar
+	0x978: Brigit - Kahn
+	0x979: Brigit - Noon
+	0x97A: Brigit - Justin
+	0x97B: Brigit - Horst
+	0x97C: Brigit - Penn
+	0x97D: Brigit - Rattchet
+	0x97E: Brigit - Frank
+	0x97F: Brigit - Hagane
+	0x980: Brigit - Murasame
+	0x981: Brigit - Fynnding
+	0x982: Brigit - Medion
+	0x983: Brigit - Cambell
+	0x984: Brigit - Syntesis
+	0x985: Brigit - Uryudo
+	0x986: Brigit - Waltz
+	0x987: Brigit - Rock
+	0x988: Brigit - Bernard
+	0x989: Brigit - Zero
+	0x98A: Brigit - Hazuki
+	0x98B: Brigit - David
+	0x98C: Brigit - Hedoba
+	0x98D: Brigit - Gracia
+	0x98E: Brigit - Donhort
+	0x98F: Brigit - Hera
+	0x990: Brigit - Robby
+	0x991: Brigit - Arthur
+	0x992: Brigit - Garosh
+	0x993: Brigit - Jade
+	0x994: Brigit - Penko
+	0x995: Brigit - Papetts
+	0x996: Brigit - Kate
+	0x997: Brigit - Rogan
+	0x998: Brigit - Edmund
+	0x999: Brigit - Isabella
+	0x99A: Cyclops - Synbios
+	0x99B: Cyclops - Dantares
+	0x99C: Cyclops - Masqurin
+	0x99D: Cyclops - Grace
+	0x99E: Cyclops - Hayward
+	0x99F: Cyclops - Obright
+	0x9A0: Cyclops - Irene
+	0x9A1: Cyclops - Julian
+	0x9A2: Cyclops - Cybel
+	0x9A3: Cyclops - Eldar
+	0x9A4: Cyclops - Kahn
+	0x9A5: Cyclops - Noon
+	0x9A6: Cyclops - Justin
+	0x9A7: Cyclops - Horst
+	0x9A8: Cyclops - Penn
+	0x9A9: Cyclops - Rattchet
+	0x9AA: Cyclops - Frank
+	0x9AB: Cyclops - Hagane
+	0x9AC: Cyclops - Murasame
+	0x9AD: Cyclops - Fynnding
+	0x9AE: Cyclops - Medion
+	0x9AF: Cyclops - Cambell
+	0x9B0: Cyclops - Syntesis
+	0x9B1: Cyclops - Uryudo
+	0x9B2: Cyclops - Waltz
+	0x9B3: Cyclops - Rock
+	0x9B4: Cyclops - Bernard
+	0x9B5: Cyclops - Zero
+	0x9B6: Cyclops - Hazuki
+	0x9B7: Cyclops - David
+	0x9B8: Cyclops - Hedoba
+	0x9B9: Cyclops - Gracia
+	0x9BA: Cyclops - Donhort
+	0x9BB: Cyclops - Hera
+	0x9BC: Cyclops - Robby
+	0x9BD: Cyclops - Arthur
+	0x9BE: Cyclops - Garosh
+	0x9BF: Cyclops - Jade
+	0x9C0: Cyclops - Penko
+	0x9C1: Cyclops - Papetts
+	0x9C2: Cyclops - Kate
+	0x9C3: Cyclops - Rogan
+	0x9C4: Cyclops - Edmund
+	0x9C5: Cyclops - Isabella
+	0x9C6: Cyclops - Brigit
+	0x9C7: Rollie - Synbios
+	0x9C8: Rollie - Dantares
+	0x9C9: Rollie - Masqurin
+	0x9CA: Rollie - Grace
+	0x9CB: Rollie - Hayward
+	0x9CC: Rollie - Obright
+	0x9CD: Rollie - Irene
+	0x9CE: Rollie - Julian
+	0x9CF: Rollie - Cybel
+	0x9D0: Rollie - Eldar
+	0x9D1: Rollie - Kahn
+	0x9D2: Rollie - Noon
+	0x9D3: Rollie - Justin
+	0x9D4: Rollie - Horst
+	0x9D5: Rollie - Penn
+	0x9D6: Rollie - Rattchet
+	0x9D7: Rollie - Frank
+	0x9D8: Rollie - Hagane
+	0x9D9: Rollie - Murasame
+	0x9DA: Rollie - Fynnding
+	0x9DB: Rollie - Medion
+	0x9DC: Rollie - Cambell
+	0x9DD: Rollie - Syntesis
+	0x9DE: Rollie - Uryudo
+	0x9DF: Rollie - Waltz
+	0x9E0: Rollie - Rock
+	0x9E1: Rollie - Bernard
+	0x9E2: Rollie - Zero
+	0x9E3: Rollie - Hazuki
+	0x9E4: Rollie - David
+	0x9E5: Rollie - Hedoba
+	0x9E6: Rollie - Gracia
+	0x9E7: Rollie - Donhort
+	0x9E8: Rollie - Hera
+	0x9E9: Rollie - Robby
+	0x9EA: Rollie - Arthur
+	0x9EB: Rollie - Garosh
+	0x9EC: Rollie - Jade
+	0x9ED: Rollie - Penko
+	0x9EE: Rollie - Papetts
+	0x9EF: Rollie - Kate
+	0x9F0: Rollie - Rogan
+	0x9F1: Rollie - Edmund
+	0x9F2: Rollie - Isabella
+	0x9F3: Rollie - Brigit
+	0x9F4: Rollie - Cyclops
+	0x9F5: Thousand - Synbios
+	0x9F6: Thousand - Dantares
+	0x9F7: Thousand - Masqurin
+	0x9F8: Thousand - Grace
+	0x9F9: Thousand - Hayward
+	0x9FA: Thousand - Obright
+	0x9FB: Thousand - Irene
+	0x9FC: Thousand - Julian
+	0x9FD: Thousand - Cybel
+	0x9FE: Thousand - Eldar
+	0x9FF: Thousand - Kahn
+	0xA00: Thousand - Noon
+	0xA01: Thousand - Justin
+	0xA02: Thousand - Horst
+	0xA03: Thousand - Penn
+	0xA04: Thousand - Rattchet
+	0xA05: Thousand - Frank
+	0xA06: Thousand - Hagane
+	0xA07: Thousand - Murasame
+	0xA08: Thousand - Fynnding
+	0xA09: Thousand - Medion
+	0xA0A: Thousand - Cambell
+	0xA0B: Thousand - Syntesis
+	0xA0C: Thousand - Uryudo
+	0xA0D: Thousand - Waltz
+	0xA0E: Thousand - Rock
+	0xA0F: Thousand - Bernard
+	0xA10: Thousand - Zero
+	0xA11: Thousand - Hazuki
+	0xA12: Thousand - David
+	0xA13: Thousand - Hedoba
+	0xA14: Thousand - Gracia
+	0xA15: Thousand - Donhort
+	0xA16: Thousand - Hera
+	0xA17: Thousand - Robby
+	0xA18: Thousand - Arthur
+	0xA19: Thousand - Garosh
+	0xA1A: Thousand - Jade
+	0xA1B: Thousand - Penko
+	0xA1C: Thousand - Papetts
+	0xA1D: Thousand - Kate
+	0xA1E: Thousand - Rogan
+	0xA1F: Thousand - Edmund
+	0xA20: Thousand - Isabella
+	0xA21: Thousand - Brigit
+	0xA22: Thousand - Cyclops
+	0xA23: Thousand - Rollie
+	0xA24: Leon - Synbios
+	0xA25: Leon - Dantares
+	0xA26: Leon - Masqurin
+	0xA27: Leon - Grace
+	0xA28: Leon - Hayward
+	0xA29: Leon - Obright
+	0xA2A: Leon - Irene
+	0xA2B: Leon - Julian
+	0xA2C: Leon - Cybel
+	0xA2D: Leon - Eldar
+	0xA2E: Leon - Kahn
+	0xA2F: Leon - Noon
+	0xA30: Leon - Justin
+	0xA31: Leon - Horst
+	0xA32: Leon - Penn
+	0xA33: Leon - Rattchet
+	0xA34: Leon - Frank
+	0xA35: Leon - Hagane
+	0xA36: Leon - Murasame
+	0xA37: Leon - Fynnding
+	0xA38: Leon - Medion
+	0xA39: Leon - Cambell
+	0xA3A: Leon - Syntesis
+	0xA3B: Leon - Uryudo
+	0xA3C: Leon - Waltz
+	0xA3D: Leon - Rock
+	0xA3E: Leon - Bernard
+	0xA3F: Leon - Zero
+	0xA40: Leon - Hazuki
+	0xA41: Leon - David
+	0xA42: Leon - Hedoba
+	0xA43: Leon - Gracia
+	0xA44: Leon - Donhort
+	0xA45: Leon - Hera
+	0xA46: Leon - Robby
+	0xA47: Leon - Arthur
+	0xA48: Leon - Garosh
+	0xA49: Leon - Jade
+	0xA4A: Leon - Penko
+	0xA4B: Leon - Papetts
+	0xA4C: Leon - Kate
+	0xA4D: Leon - Rogan
+	0xA4E: Leon - Edmund
+	0xA4F: Leon - Isabella
+	0xA50: Leon - Brigit
+	0xA51: Leon - Cyclops
+	0xA52: Leon - Rollie
+	0xA53: Leon - Thousand
+	0xA54: Honesty - Synbios
+	0xA55: Honesty - Dantares
+	0xA56: Honesty - Masqurin
+	0xA57: Honesty - Grace
+	0xA58: Honesty - Hayward
+	0xA59: Honesty - Obright
+	0xA5A: Honesty - Irene
+	0xA5B: Honesty - Julian
+	0xA5C: Honesty - Cybel
+	0xA5D: Honesty - Eldar
+	0xA5E: Honesty - Kahn
+	0xA5F: Honesty - Noon
+	0xA60: Honesty - Justin
+	0xA61: Honesty - Horst
+	0xA62: Honesty - Penn
+	0xA63: Honesty - Rattchet
+	0xA64: Honesty - Frank
+	0xA65: Honesty - Hagane
+	0xA66: Honesty - Murasame
+	0xA67: Honesty - Fynnding
+	0xA68: Honesty - Medion
+	0xA69: Honesty - Cambell
+	0xA6A: Honesty - Syntesis
+	0xA6B: Honesty - Uryudo
+	0xA6C: Honesty - Waltz
+	0xA6D: Honesty - Rock
+	0xA6E: Honesty - Bernard
+	0xA6F: Honesty - Zero
+	0xA70: Honesty - Hazuki
+	0xA71: Honesty - David
+	0xA72: Honesty - Hedoba
+	0xA73: Honesty - Gracia
+	0xA74: Honesty - Donhort
+	0xA75: Honesty - Hera
+	0xA76: Honesty - Robby
+	0xA77: Honesty - Arthur
+	0xA78: Honesty - Garosh
+	0xA79: Honesty - Jade
+	0xA7A: Honesty - Penko
+	0xA7B: Honesty - Papetts
+	0xA7C: Honesty - Kate
+	0xA7D: Honesty - Rogan
+	0xA7E: Honesty - Edmund
+	0xA7F: Honesty - Isabella
+	0xA80: Honesty - Brigit
+	0xA81: Honesty - Cyclops
+	0xA82: Honesty - Rollie
+	0xA83: Honesty - Thousand
+	0xA84: Honesty - Leon
+	0xA85: Produn - Synbios
+	0xA86: Produn - Dantares
+	0xA87: Produn - Masqurin
+	0xA88: Produn - Grace
+	0xA89: Produn - Hayward
+	0xA8A: Produn - Obright
+	0xA8B: Produn - Irene
+	0xA8C: Produn - Julian
+	0xA8D: Produn - Cybel
+	0xA8E: Produn - Eldar
+	0xA8F: Produn - Kahn
+	0xA90: Produn - Noon
+	0xA91: Produn - Justin
+	0xA92: Produn - Horst
+	0xA93: Produn - Penn
+	0xA94: Produn - Rattchet
+	0xA95: Produn - Frank
+	0xA96: Produn - Hagane
+	0xA97: Produn - Murasame
+	0xA98: Produn - Fynnding
+	0xA99: Produn - Medion
+	0xA9A: Produn - Cambell
+	0xA9B: Produn - Syntesis
+	0xA9C: Produn - Uryudo
+	0xA9D: Produn - Waltz
+	0xA9E: Produn - Rock
+	0xA9F: Produn - Bernard
+	0xAA0: Produn - Zero
+	0xAA1: Produn - Hazuki
+	0xAA2: Produn - David
+	0xAA3: Produn - Hedoba
+	0xAA4: Produn - Gracia
+	0xAA5: Produn - Donhort
+	0xAA6: Produn - Hera
+	0xAA7: Produn - Robby
+	0xAA8: Produn - Arthur
+	0xAA9: Produn - Garosh
+	0xAAA: Produn - Jade
+	0xAAB: Produn - Penko
+	0xAAC: Produn - Papetts
+	0xAAD: Produn - Kate
+	0xAAE: Produn - Rogan
+	0xAAF: Produn - Edmund
+	0xAB0: Produn - Isabella
+	0xAB1: Produn - Brigit
+	0xAB2: Produn - Cyclops
+	0xAB3: Produn - Rollie
+	0xAB4: Produn - Thousand
+	0xAB5: Produn - Leon
+	0xAB6: Produn - Honesty
+	0xAB7: Harold - Synbios
+	0xAB8: Harold - Dantares
+	0xAB9: Harold - Masqurin
+	0xABA: Harold - Grace
+	0xABB: Harold - Hayward
+	0xABC: Harold - Obright
+	0xABD: Harold - Irene
+	0xABE: Harold - Julian
+	0xABF: Harold - Cybel
+	0xAC0: Harold - Eldar
+	0xAC1: Harold - Kahn
+	0xAC2: Harold - Noon
+	0xAC3: Harold - Justin
+	0xAC4: Harold - Horst
+	0xAC5: Harold - Penn
+	0xAC6: Harold - Rattchet
+	0xAC7: Harold - Frank
+	0xAC8: Harold - Hagane
+	0xAC9: Harold - Murasame
+	0xACA: Harold - Fynnding
+	0xACB: Harold - Medion
+	0xACC: Harold - Cambell
+	0xACD: Harold - Syntesis
+	0xACE: Harold - Uryudo
+	0xACF: Harold - Waltz
+	0xAD0: Harold - Rock
+	0xAD1: Harold - Bernard
+	0xAD2: Harold - Zero
+	0xAD3: Harold - Hazuki
+	0xAD4: Harold - David
+	0xAD5: Harold - Hedoba
+	0xAD6: Harold - Gracia
+	0xAD7: Harold - Donhort
+	0xAD8: Harold - Hera
+	0xAD9: Harold - Robby
+	0xADA: Harold - Arthur
+	0xADB: Harold - Garosh
+	0xADC: Harold - Jade
+	0xADD: Harold - Penko
+	0xADE: Harold - Papetts
+	0xADF: Harold - Kate
+	0xAE0: Harold - Rogan
+	0xAE1: Harold - Edmund
+	0xAE2: Harold - Isabella
+	0xAE3: Harold - Brigit
+	0xAE4: Harold - Cyclops
+	0xAE5: Harold - Rollie
+	0xAE6: Harold - Thousand
+	0xAE7: Harold - Leon
+	0xAE8: Harold - Honesty
+	0xAE9: Harold - Produn
+	0xAEA: Pendolf - Synbios
+	0xAEB: Pendolf - Dantares
+	0xAEC: Pendolf - Masqurin
+	0xAED: Pendolf - Grace
+	0xAEE: Pendolf - Hayward
+	0xAEF: Pendolf - Obright
+	0xAF0: Pendolf - Irene
+	0xAF1: Pendolf - Julian
+	0xAF2: Pendolf - Cybel
+	0xAF3: Pendolf - Eldar
+	0xAF4: Pendolf - Kahn
+	0xAF5: Pendolf - Noon
+	0xAF6: Pendolf - Justin
+	0xAF7: Pendolf - Horst
+	0xAF8: Pendolf - Penn
+	0xAF9: Pendolf - Rattchet
+	0xAFA: Pendolf - Frank
+	0xAFB: Pendolf - Hagane
+	0xAFC: Pendolf - Murasame
+	0xAFD: Pendolf - Fynnding
+	0xAFE: Pendolf - Medion
+	0xAFF: Pendolf - Cambell
+	0xB00: Pendolf - Syntesis
+	0xB01: Pendolf - Uryudo
+	0xB02: Pendolf - Waltz
+	0xB03: Pendolf - Rock
+	0xB04: Pendolf - Bernard
+	0xB05: Pendolf - Zero
+	0xB06: Pendolf - Hazuki
+	0xB07: Pendolf - David
+	0xB08: Pendolf - Hedoba
+	0xB09: Pendolf - Gracia
+	0xB0A: Pendolf - Donhort
+	0xB0B: Pendolf - Hera
+	0xB0C: Pendolf - Robby
+	0xB0D: Pendolf - Arthur
+	0xB0E: Pendolf - Garosh
+	0xB0F: Pendolf - Jade
+	0xB10: Pendolf - Penko
+	0xB11: Pendolf - Papetts
+	0xB12: Pendolf - Kate
+	0xB13: Pendolf - Rogan
+	0xB14: Pendolf - Edmund
+	0xB15: Pendolf - Isabella
+	0xB16: Pendolf - Brigit
+	0xB17: Pendolf - Cyclops
+	0xB18: Pendolf - Rollie
+	0xB19: Pendolf - Thousand
+	0xB1A: Pendolf - Leon
+	0xB1B: Pendolf - Honesty
+	0xB1C: Pendolf - Produn
+	0xB1D: Pendolf - Harold
+	0xB1E: Spiriel - Synbios
+	0xB1F: Spiriel - Dantares
+	0xB20: Spiriel - Masqurin
+	0xB21: Spiriel - Grace
+	0xB22: Spiriel - Hayward
+	0xB23: Spiriel - Obright
+	0xB24: Spiriel - Irene
+	0xB25: Spiriel - Julian
+	0xB26: Spiriel - Cybel
+	0xB27: Spiriel - Eldar
+	0xB28: Spiriel - Kahn
+	0xB29: Spiriel - Noon
+	0xB2A: Spiriel - Justin
+	0xB2B: Spiriel - Horst
+	0xB2C: Spiriel - Penn
+	0xB2D: Spiriel - Rattchet
+	0xB2E: Spiriel - Frank
+	0xB2F: Spiriel - Hagane
+	0xB30: Spiriel - Murasame
+	0xB31: Spiriel - Fynnding
+	0xB32: Spiriel - Medion
+	0xB33: Spiriel - Cambell
+	0xB34: Spiriel - Syntesis
+	0xB35: Spiriel - Uryudo
+	0xB36: Spiriel - Waltz
+	0xB37: Spiriel - Rock
+	0xB38: Spiriel - Bernard
+	0xB39: Spiriel - Zero
+	0xB3A: Spiriel - Hazuki
+	0xB3B: Spiriel - David
+	0xB3C: Spiriel - Hedoba
+	0xB3D: Spiriel - Gracia
+	0xB3E: Spiriel - Donhort
+	0xB3F: Spiriel - Hera
+	0xB40: Spiriel - Robby
+	0xB41: Spiriel - Arthur
+	0xB42: Spiriel - Garosh
+	0xB43: Spiriel - Jade
+	0xB44: Spiriel - Penko
+	0xB45: Spiriel - Papetts
+	0xB46: Spiriel - Kate
+	0xB47: Spiriel - Rogan
+	0xB48: Spiriel - Edmund
+	0xB49: Spiriel - Isabella
+	0xB4A: Spiriel - Brigit
+	0xB4B: Spiriel - Cyclops
+	0xB4C: Spiriel - Rollie
+	0xB4D: Spiriel - Thousand
+	0xB4E: Spiriel - Leon
+	0xB4F: Spiriel - Honesty
+	0xB50: Spiriel - Produn
+	0xB51: Spiriel - Harold
+	0xB52: Spiriel - Pendolf
+	0xB53: Jubei - Synbios
+	0xB54: Jubei - Dantares
+	0xB55: Jubei - Masqurin
+	0xB56: Jubei - Grace
+	0xB57: Jubei - Hayward
+	0xB58: Jubei - Obright
+	0xB59: Jubei - Irene
+	0xB5A: Jubei - Julian
+	0xB5B: Jubei - Cybel
+	0xB5C: Jubei - Eldar
+	0xB5D: Jubei - Kahn
+	0xB5E: Jubei - Noon
+	0xB5F: Jubei - Justin
+	0xB60: Jubei - Horst
+	0xB61: Jubei - Penn
+	0xB62: Jubei - Rattchet
+	0xB63: Jubei - Frank
+	0xB64: Jubei - Hagane
+	0xB65: Jubei - Murasame
+	0xB66: Jubei - Fynnding
+	0xB67: Jubei - Medion
+	0xB68: Jubei - Cambell
+	0xB69: Jubei - Syntesis
+	0xB6A: Jubei - Uryudo
+	0xB6B: Jubei - Waltz
+	0xB6C: Jubei - Rock
+	0xB6D: Jubei - Bernard
+	0xB6E: Jubei - Zero
+	0xB6F: Jubei - Hazuki
+	0xB70: Jubei - David
+	0xB71: Jubei - Hedoba
+	0xB72: Jubei - Gracia
+	0xB73: Jubei - Donhort
+	0xB74: Jubei - Hera
+	0xB75: Jubei - Robby
+	0xB76: Jubei - Arthur
+	0xB77: Jubei - Garosh
+	0xB78: Jubei - Jade
+	0xB79: Jubei - Penko
+	0xB7A: Jubei - Papetts
+	0xB7B: Jubei - Kate
+	0xB7C: Jubei - Rogan
+	0xB7D: Jubei - Edmund
+	0xB7E: Jubei - Isabella
+	0xB7F: Jubei - Brigit
+	0xB80: Jubei - Cyclops
+	0xB81: Jubei - Rollie
+	0xB82: Jubei - Thousand
+	0xB83: Jubei - Leon
+	0xB84: Jubei - Honesty
+	0xB85: Jubei - Produn
+	0xB86: Jubei - Harold
+	0xB87: Jubei - Pendolf
+	0xB88: Jubei - Spiriel
+	0xB89: Primula - Synbios
+	0xB8A: Primula - Dantares
+	0xB8B: Primula - Masqurin
+	0xB8C: Primula - Grace
+	0xB8D: Primula - Hayward
+	0xB8E: Primula - Obright
+	0xB8F: Primula - Irene
+	0xB90: Primula - Julian
+	0xB91: Primula - Cybel
+	0xB92: Primula - Eldar
+	0xB93: Primula - Kahn
+	0xB94: Primula - Noon
+	0xB95: Primula - Justin
+	0xB96: Primula - Horst
+	0xB97: Primula - Penn
+	0xB98: Primula - Rattchet
+	0xB99: Primula - Frank
+	0xB9A: Primula - Hagane
+	0xB9B: Primula - Murasame
+	0xB9C: Primula - Fynnding
+	0xB9D: Primula - Medion
+	0xB9E: Primula - Cambell
+	0xB9F: Primula - Syntesis
+	0xBA0: Primula - Uryudo
+	0xBA1: Primula - Waltz
+	0xBA2: Primula - Rock
+	0xBA3: Primula - Bernard
+	0xBA4: Primula - Zero
+	0xBA5: Primula - Hazuki
+	0xBA6: Primula - David
+	0xBA7: Primula - Hedoba
+	0xBA8: Primula - Gracia
+	0xBA9: Primula - Donhort
+	0xBAA: Primula - Hera
+	0xBAB: Primula - Robby
+	0xBAC: Primula - Arthur
+	0xBAD: Primula - Garosh
+	0xBAE: Primula - Jade
+	0xBAF: Primula - Penko
+	0xBB0: Primula - Papetts
+	0xBB1: Primula - Kate
+	0xBB2: Primula - Rogan
+	0xBB3: Primula - Edmund
+	0xBB4: Primula - Isabella
+	0xBB5: Primula - Brigit
+	0xBB6: Primula - Cyclops
+	0xBB7: Primula - Rollie
+	0xBB8: Primula - Thousand
+	0xBB9: Primula - Leon
+	0xBBA: Primula - Honesty
+	0xBBB: Primula - Produn
+	0xBBC: Primula - Harold
+	0xBBD: Primula - Pendolf
+	0xBBE: Primula - Spiriel
+	0xBBF: Primula - Jubei
+	0xBC0: Marky - Synbios
+	0xBC1: Marky - Dantares
+	0xBC2: Marky - Masqurin
+	0xBC3: Marky - Grace
+	0xBC4: Marky - Hayward
+	0xBC5: Marky - Obright
+	0xBC6: Marky - Irene
+	0xBC7: Marky - Julian
+	0xBC8: Marky - Cybel
+	0xBC9: Marky - Eldar
+	0xBCA: Marky - Kahn
+	0xBCB: Marky - Noon
+	0xBCC: Marky - Justin
+	0xBCD: Marky - Horst
+	0xBCE: Marky - Penn
+	0xBCF: Marky - Rattchet
+	0xBD0: Marky - Frank
+	0xBD1: Marky - Hagane
+	0xBD2: Marky - Murasame
+	0xBD3: Marky - Fynnding
+	0xBD4: Marky - Medion
+	0xBD5: Marky - Cambell
+	0xBD6: Marky - Syntesis
+	0xBD7: Marky - Uryudo
+	0xBD8: Marky - Waltz
+	0xBD9: Marky - Rock
+	0xBDA: Marky - Bernard
+	0xBDB: Marky - Zero
+	0xBDC: Marky - Hazuki
+	0xBDD: Marky - David
+	0xBDE: Marky - Hedoba
+	0xBDF: Marky - Gracia
+	0xBE0: Marky - Donhort
+	0xBE1: Marky - Hera
+	0xBE2: Marky - Robby
+	0xBE3: Marky - Arthur
+	0xBE4: Marky - Garosh
+	0xBE5: Marky - Jade
+	0xBE6: Marky - Penko
+	0xBE7: Marky - Papetts
+	0xBE8: Marky - Kate
+	0xBE9: Marky - Rogan
+	0xBEA: Marky - Edmund
+	0xBEB: Marky - Isabella
+	0xBEC: Marky - Brigit
+	0xBED: Marky - Cyclops
+	0xBEE: Marky - Rollie
+	0xBEF: Marky - Thousand
+	0xBF0: Marky - Leon
+	0xBF1: Marky - Honesty
+	0xBF2: Marky - Produn
+	0xBF3: Marky - Harold
+	0xBF4: Marky - Pendolf
+	0xBF5: Marky - Spiriel
+	0xBF6: Marky - Jubei
+	0xBF7: Marky - Primula
+	0xBF8: Turk - Synbios
+	0xBF9: Turk - Dantares
+	0xBFA: Turk - Masqurin
+	0xBFB: Turk - Grace
+	0xBFC: Turk - Hayward
+	0xBFD: Turk - Obright
+	0xBFE: Turk - Irene
+	0xBFF: Turk - Julian
+	0xC00: Turk - Cybel
+	0xC01: Turk - Eldar
+	0xC02: Turk - Kahn
+	0xC03: Turk - Noon
+	0xC04: Turk - Justin
+	0xC05: Turk - Horst
+	0xC06: Turk - Penn
+	0xC07: Turk - Rattchet
+	0xC08: Turk - Frank
+	0xC09: Turk - Hagane
+	0xC0A: Turk - Murasame
+	0xC0B: Turk - Fynnding
+	0xC0C: Turk - Medion
+	0xC0D: Turk - Cambell
+	0xC0E: Turk - Syntesis
+	0xC0F: Turk - Uryudo
+	0xC10: Turk - Waltz
+	0xC11: Turk - Rock
+	0xC12: Turk - Bernard
+	0xC13: Turk - Zero
+	0xC14: Turk - Hazuki
+	0xC15: Turk - David
+	0xC16: Turk - Hedoba
+	0xC17: Turk - Gracia
+	0xC18: Turk - Donhort
+	0xC19: Turk - Hera
+	0xC1A: Turk - Robby
+	0xC1B: Turk - Arthur
+	0xC1C: Turk - Garosh
+	0xC1D: Turk - Jade
+	0xC1E: Turk - Penko
+	0xC1F: Turk - Papetts
+	0xC20: Turk - Kate
+	0xC21: Turk - Rogan
+	0xC22: Turk - Edmund
+	0xC23: Turk - Isabella
+	0xC24: Turk - Brigit
+	0xC25: Turk - Cyclops
+	0xC26: Turk - Rollie
+	0xC27: Turk - Thousand
+	0xC28: Turk - Leon
+	0xC29: Turk - Honesty
+	0xC2A: Turk - Produn
+	0xC2B: Turk - Harold
+	0xC2C: Turk - Pendolf
+	0xC2D: Turk - Spiriel
+	0xC2E: Turk - Jubei
+	0xC2F: Turk - Primula
+	0xC30: Turk - Marky
+	0xC31: Unoma - Synbios
+	0xC32: Unoma - Dantares
+	0xC33: Unoma - Masqurin
+	0xC34: Unoma - Grace
+	0xC35: Unoma - Hayward
+	0xC36: Unoma - Obright
+	0xC37: Unoma - Irene
+	0xC38: Unoma - Julian
+	0xC39: Unoma - Cybel
+	0xC3A: Unoma - Eldar
+	0xC3B: Unoma - Kahn
+	0xC3C: Unoma - Noon
+	0xC3D: Unoma - Justin
+	0xC3E: Unoma - Horst
+	0xC3F: Unoma - Penn
+	0xC40: Unoma - Rattchet
+	0xC41: Unoma - Frank
+	0xC42: Unoma - Hagane
+	0xC43: Unoma - Murasame
+	0xC44: Unoma - Fynnding
+	0xC45: Unoma - Medion
+	0xC46: Unoma - Cambell
+	0xC47: Unoma - Syntesis
+	0xC48: Unoma - Uryudo
+	0xC49: Unoma - Waltz
+	0xC4A: Unoma - Rock
+	0xC4B: Unoma - Bernard
+	0xC4C: Unoma - Zero
+	0xC4D: Unoma - Hazuki
+	0xC4E: Unoma - David
+	0xC4F: Unoma - Hedoba
+	0xC50: Unoma - Gracia
+	0xC51: Unoma - Donhort
+	0xC52: Unoma - Hera
+	0xC53: Unoma - Robby
+	0xC54: Unoma - Arthur
+	0xC55: Unoma - Garosh
+	0xC56: Unoma - Jade
+	0xC57: Unoma - Penko
+	0xC58: Unoma - Papetts
+	0xC59: Unoma - Kate
+	0xC5A: Unoma - Rogan
+	0xC5B: Unoma - Edmund
+	0xC5C: Unoma - Isabella
+	0xC5D: Unoma - Brigit
+	0xC5E: Unoma - Cyclops
+	0xC5F: Unoma - Rollie
+	0xC60: Unoma - Thousand
+	0xC61: Unoma - Leon
+	0xC62: Unoma - Honesty
+	0xC63: Unoma - Produn
+	0xC64: Unoma - Harold
+	0xC65: Unoma - Pendolf
+	0xC66: Unoma - Spiriel
+	0xC67: Unoma - Jubei
+	0xC68: Unoma - Primula
+	0xC69: Unoma - Marky
+	0xC6A: Unoma - Turk
+	0xC6B: Jane - Synbios
+	0xC6C: Jane - Dantares
+	0xC6D: Jane - Masqurin
+	0xC6E: Jane - Grace
+	0xC6F: Jane - Hayward
+	0xC70: Jane - Obright
+	0xC71: Jane - Irene
+	0xC72: Jane - Julian
+	0xC73: Jane - Cybel
+	0xC74: Jane - Eldar
+	0xC75: Jane - Kahn
+	0xC76: Jane - Noon
+	0xC77: Jane - Justin
+	0xC78: Jane - Horst
+	0xC79: Jane - Penn
+	0xC7A: Jane - Rattchet
+	0xC7B: Jane - Frank
+	0xC7C: Jane - Hagane
+	0xC7D: Jane - Murasame
+	0xC7E: Jane - Fynnding
+	0xC7F: Jane - Medion
+	0xC80: Jane - Cambell
+	0xC81: Jane - Syntesis
+	0xC82: Jane - Uryudo
+	0xC83: Jane - Waltz
+	0xC84: Jane - Rock
+	0xC85: Jane - Bernard
+	0xC86: Jane - Zero
+	0xC87: Jane - Hazuki
+	0xC88: Jane - David
+	0xC89: Jane - Hedoba
+	0xC8A: Jane - Gracia
+	0xC8B: Jane - Donhort
+	0xC8C: Jane - Hera
+	0xC8D: Jane - Robby
+	0xC8E: Jane - Arthur
+	0xC8F: Jane - Garosh
+	0xC90: Jane - Jade
+	0xC91: Jane - Penko
+	0xC92: Jane - Papetts
+	0xC93: Jane - Kate
+	0xC94: Jane - Rogan
+	0xC95: Jane - Edmund
+	0xC96: Jane - Isabella
+	0xC97: Jane - Brigit
+	0xC98: Jane - Cyclops
+	0xC99: Jane - Rollie
+	0xC9A: Jane - Thousand
+	0xC9B: Jane - Leon
+	0xC9C: Jane - Honesty
+	0xC9D: Jane - Produn
+	0xC9E: Jane - Harold
+	0xC9F: Jane - Pendolf
+	0xCA0: Jane - Spiriel
+	0xCA1: Jane - Jubei
+	0xCA2: Jane - Primula
+	0xCA3: Jane - Marky
+	0xCA4: Jane - Turk
+	0xCA5: Jane - Unoma"</items>

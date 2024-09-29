@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+	<item value="0x00" name="Blank "/>
+	<item value="0x01" name="Bronze Knife"/>
+	<item value="0x02" name="Steel Knife "/>
+	<item value="0x03" name="Hunter Knife"/>
+	<item value="0x04" name="Steel Sword "/>
+	<item value="0x05" name="Broad Sword "/>
+	<item value="0x06" name="Bastard Sword "/>
+	<item value="0x07" name="Great Sword"/>
+	<item value="0x08" name="Epee"/>
+	<item value="0x09" name="Foil"/>
+	<item value="0x0A" name="Rapier"/>
+	<item value="0x0B" name="Iron Blade"/>
+	<item value="0x0C" name="Battle Blade"/>
+	<item value="0x0D" name="Steel blade"/>
+	<item value="0x0E" name="Booty Sword"/>
+	<item value="0x0F" name="Iron Ninjato"/>
+	<item value="0x10" name="Steel Ninjato"/>
+	<item value="0x11" name="Bronze Lance"/>
+	<item value="0x12" name="Iron Lance"/>
+	<item value="0x13" name="Heavy Lance"/>
+	<item value="0x14" name="Steel Lance"/>
+	<item value="0x15" name="Spear"/>
+	<item value="0x16" name="Power Spear"/>
+	<item value="0x17" name="Battle Spear"/>
+	<item value="0x18" name="Halberd"/>
+	<item value="0x19" name="Heavy Halberd"/>
+	<item value="0x1A" name="Poleaxe"/>
+	<item value="0x1B" name="Small Axe"/>
+	<item value="0x1C" name="Power Axe"/>
+	<item value="0x1D" name="Battle Axe"/>
+	<item value="0x1E" name="Great Axe"/>
+	<item value="0x1F" name="Hand Axe"/>
+	<item value="0x20" name="Iron hand axe"/>
+	<item value="0x21" name="Steel Hand Axe"/>
+	<item value="0x22" name="Mace"/>
+	<item value="0x23" name="Flail"/>
+	<item value="0x24" name="Maul"/>
+	<item value="0x25" name="Bronze Claw"/>
+	<item value="0x26" name="Iron Claw"/>
+	<item value="0x27" name="SteelClaw"/>
+	<item value="0x28" name="Battle Claw"/>
+	<item value="0x29" name="Cloth Glove"/>
+	<item value="0x2A" name="Iron Glove"/>
+	<item value="0x2B" name="Steel Glove"/>
+	<item value="0x2C" name="Cestus"/>
+	<item value="0x2D" name="Iron Cestus"/>
+	<item value="0x2E" name="Steel Cestus"/>
+	<item value="0x2F" name="Wooden Rod"/>
+	<item value="0x30" name="Bronze Rod"/>
+	<item value="0x31" name="Talisman Rod"/>
+	<item value="0x32" name="Small wand"/>
+	<item value="0x33" name="magic wand"/>
+	<item value="0x34" name="angel wand"/>
+	<item value="0x35" name="power ankh"/>
+	<item value="0x36" name="saint ankh"/>
+	<item value="0x37" name="misty ankh"/>
+	<item value="0x38" name="small bow"/>
+	<item value="0x39" name="short bow"/>
+	<item value="0x3A" name="faerie bow"/>
+	<item value="0x3B" name="king's bow"/>
+	<item value="0x3C" name="light crossbow"/>
+	<item value="0x3D" name="heavy crossbow"/>
+	<item value="0x3E" name="arbalest"/>
+	<item value="0x3F" name="long bow"/>
+	<item value="0x40" name="heavy long bow"/>
+	<item value="0x41" name="elven bow"/>
+	<item value="0x42" name="scimitar"/>
+	<item value="0x43" name="gladius"/>
+	<item value="0x44" name="power ring"/>
+	<item value="0x45" name="protect ring"/>
+	<item value="0x46" name="magic ring"/>
+	<item value="0x47" name="gale ring"/>
+	<item value="0x48" name="attack ring"/>
+	<item value="0x49" name="master ring"/>
+	<item value="0x4A" name="silver ring"/>
+	<item value="0x4B" name="life ring"/>
+	<item value="0x4C" name="nimble ring"/>
+	<item value="0x4D" name="white ring"/>
+	<item value="0x4E" name="black ring"/>
+	<item value="0x4F" name="iburu ring"/>
+	<item value="0x50" name="artimis pin"/>
+	<item value="0x51" name="apollo pin"/>
+	<item value="0x52" name="iron bracer"/>
+	<item value="0x53" name="steel bracer"/>
+	<item value="0x54" name="medical herb"/>
+	<item value="0x55" name="healing drop"/>
+	<item value="0x56" name="potion"/>
+	<item value="0x57" name="healing rain"/>
+	<item value="0x58" name="goddess tear"/>
+	<item value="0x59" name="light of hope"/>
+	<item value="0x5A" name="antidote herb"/>
+	<item value="0x5B" name="fairy powder"/>
+	<item value="0x5C" name="angel wing"/>
+	<item value="0x5D" name="power wine"/>
+	<item value="0x5E" name="armor milk"/>
+	<item value="0x5F" name="quick chicken"/>
+	<item value="0x60" name="nimble onion"/>
+	<item value="0x61" name="happy cookie"/>
+	<item value="0x62" name="health bread"/>
+	<item value="0x63" name="brain food"/>
+	<item value="0x64" name="brave apple"/>
+	<item value="0x65" name="large mithril"/>
+	<item value="0x66" name="small mithril"/>
+	<item value="0x67" name="dark matter"/>
+	<item value="0x68" name="iron circlet"/>
+	<item value="0x69" name="steel tiara"/>
+	<item value="0x6A" name="swift boots"/>
+	<item value="0x6B" name="shadow bowl"/>
+	<item value="0x6C" name="dark bowl"/>
+	<item value="0x6D" name="loincloth"/>
+	<item value="0x6E" name="power undies"/>
+	<item value="0x6F" name="mithril dirk"/>
+	<item value="0x70" name="butter knife"/>
+	<item value="0x71" name="killer knife"/>
+	<item value="0x72" name="sneaky knife"/>
+	<item value="0x73" name="joker knife"/>
+	<item value="0x74" name="counter sword"/>
+	<item value="0x75" name="shiva sword"/>
+	<item value="0x76" name="leviathan"/>
+	<item value="0x77" name="dark sword"/>
+	<item value="0x78" name="phoenix sword"/>
+	<item value="0x79" name="justice sword"/>
+	<item value="0x7A" name="magic rapier"/>
+	<item value="0x7B" name="mist rapier"/>
+	<item value="0x7C" name="shiny rapier"/>
+	<item value="0x7D" name="final rapier"/>
+	<item value="0x7E" name="Luster blade"/>
+	<item value="0x7F" name="Rune blade"/>
+	<item value="0x80" name="photon blade"/>
+	<item value="0x81" name="venom blade"/>
+	<item value="0x82" name="force blade"/>
+	<item value="0x83" name="nelson lance"/>
+	<item value="0x84" name="holy lance"/>
+	<item value="0x85" name="dragon lance"/>
+	<item value="0x86" name="ultra lance"/>
+	<item value="0x87" name="silver spear"/>
+	<item value="0x88" name="counter spear"/>
+	<item value="0x89" name="rune spear"/>
+	<item value="0x8A" name="beast spear"/>
+	<item value="0x8B" name="comet spear"/>
+	<item value="0x8C" name="holy halbard"/>
+	<item value="0x8D" name="star halbard"/>
+	<item value="0x8E" name="arc halbard"/>
+	<item value="0x8F" name="dark halbard"/>
+	<item value="0x90" name="fire axe"/>
+	<item value="0x91" name="gigantic axe"/>
+	<item value="0x92" name="sharp axe"/>
+	<item value="0x93" name="gaia axe"/>
+	<item value="0x94" name="sorrow axe"/>
+	<item value="0x95" name="accurate axe"/>
+	<item value="0x96" name="super axe"/>
+	<item value="0x97" name="arrow axe"/>
+	<item value="0x98" name="ultra axe"/>
+	<item value="0x99" name="saint's mace"/>
+	<item value="0x9A" name="revenge mace"/>
+	<item value="0x9B" name="power hammer"/>
+	<item value="0x9C" name="macho maul"/>
+	<item value="0x9D" name="mithril claw"/>
+	<item value="0x9E" name="tiger claw"/>
+	<item value="0x9F" name="berserk claw"/>
+	<item value="0xA0" name="pokey claw"/>
+	<item value="0xA1" name="spiked glove"/>
+	<item value="0xA2" name="muscle glove"/>
+	<item value="0xA3" name="spark glove"/>
+	<item value="0xA4" name="magna glove"/>
+	<item value="0xA5" name="pretty glove"/>
+	<item value="0xA6" name="giant cestus"/>
+	<item value="0xA7" name="mist cestus"/>
+	<item value="0xA8" name="wire cestus"/>
+	<item value="0xA9" name="holy cestus"/>
+	<item value="0xAA" name="torture rod"/>
+	<item value="0xAB" name="sleepy rod"/>
+	<item value="0xAC" name="soul rod"/>
+	<item value="0xAD" name="tiamat rod"/>
+	<item value="0xAE" name="demon rod"/>
+	<item value="0xAF" name="jester wand"/>
+	<item value="0xB0" name="jewel wand"/>
+	<item value="0xB1" name="witch wand"/>
+	<item value="0xB2" name="spark wand"/>
+	<item value="0xB3" name="wendigo wand"/>
+	<item value="0xB4" name="tornado ankh"/>
+	<item value="0xB5" name="silence ankh"/>
+	<item value="0xB6" name="blessed ankh"/>
+	<item value="0xB7" name="holy ankh"/>
+	<item value="0xB8" name="moon bow"/>
+	<item value="0xB9" name="dragon bow"/>
+	<item value="0xBA" name="breaker bow"/>
+	<item value="0xBB" name="kantar's bow"/>
+	<item value="0xBC" name="Caylon's bow"/>
+	<item value="0xBD" name="hunter crossbow"/>
+	<item value="0xBE" name="flame crossbow"/>
+	<item value="0xBF" name="sonic crossbow"/>
+	<item value="0xC0" name="needle crossbow"/>
+	<item value="0xC1" name="magnum bow"/>
+	<item value="0xC2" name="storm bow"/>
+	<item value="0xC3" name="meteor bow"/>
+	<item value="0xC4" name="cool braid"/>
+	<item value="0xC5" name="wind cutter"/>
+	<item value="0xC6" name="bone eater"/>
+	<item value="0xC7" name="rumbling sea"/>
+	<item value="0xC8" name="kusanagi"/>
+	<item value="0xC9" name="muramasa"/>
+	<item value="0xCA" name="cross star"/>
+	<item value="0xCB" name="fox suriken"/>
+	<item value="0xCC" name="shaken"/>
+	<item value="0xCD" name="deadly star"/>
+	<item value="0xCE" name="octagon star"/>
+	<item value="0xCF" name="wind star"/>
+	<item value="0xD0" name="metal wing"/>
+	<item value="0xD1" name="silver wing"/>
+	<item value="0xD2" name="battle wing"/>
+	<item value="0xD3" name="silk wing"/>
+	<item value="0xD4" name="sonic wing"/>
+	<item value="0xD5" name="cosmic wing"/>
+	<item value="0xD6" name="zero wing"/>
+	<item value="0xD7" name="stealth wing"/>
+	<item value="0xD8" name="light anchor"/>
+	<item value="0xD9" name="heavy anchor"/>
+	<item value="0xDA" name="power anchor"/>
+	<item value="0xDB" name="spin anchor"/>
+	<item value="0xDC" name="crash anchor"/>
+	<item value="0xDD" name="grav anchor"/>
+	<item value="0xDE" name="cut flowers"/>
+	<item value="0xDF" name="chicken feed"/>
+	<item value="0xE0" name="volcano wand"/>
+	<item value="0xE1" name="large egg"/>
+	<item value="0xE2" name="ship's key"/>
+	<item value="0xE3" name="statue gem"/>
+	<item value="0xE4" name="mitra ankh"/>
+	<item value="0xE5" name="elbesem orb"/>
+	<item value="0xE6" name="divine cane"/>
+	<item value="0xE7" name="negate cane"/>
+	<item value="0xE8" name="spark blade"/>
+	<item value="0xE9" name="ruin map"/>
+	<item value="0xEA" name="ruin map"/>
+	<item value="0xEB" name="ruin map"/>
+	<item value="0xEC" name="ruin map"/>
+	<item value="0xED" name="ruin map"/>
+	<item value="0xEE" name="ruin map"/>
+	<item value="0xEF" name="elbesem orb"/>
+  	<item value="0xF0" name="barrand prison key" />
+  	<item value="0xF1" name="robot eyes" />
+  	<item value="0xF2" name="crewart's key" />
+  	<item value="0xF3" name="freeze ball" />
+  	<item value="0xF4" name="god rapier" />
+  	<item value="0xF5" name="arc wand" />
+  	<item value="0xF6" name="dragon rod" />
+  	<item value="0xF7" name="earth rod" />
+  	<item value="0xF8" name="chain whip" />
+  	<item value="0xF9" name="queen whip" />
+  	<item value="0xFA" name="love whip" />
+  	<item value="0xFB" name="Double-headed Whip" />
+  	<item value="0xFC" name="silver beak" />
+  	<item value="0xFD" name="gold beak" />
+  	<item value="0xFE" name="penn beak" />
+  	<item value="0xFF" name="remove" />
+</items>

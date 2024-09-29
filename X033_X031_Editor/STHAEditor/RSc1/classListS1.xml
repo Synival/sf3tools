@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+  <item value="0x00" name="Synbios U" />
+  <item value="0x01" name="Dantares U" />
+  <item value="0x02" name="Masqurin U" />
+  <item value="0x03" name="Grace U" />
+  <item value="0x04" name="Hayward U" />
+  <item value="0x05" name="Obright U" />
+  <item value="0x06" name="Irene U" />
+  <item value="0x07" name="Julian U" />
+  <item value="0x08" name="Cybel U" />
+  <item value="0x09" name="Eldar U" />
+  <item value="0x0A" name="Kahn U" />
+  <item value="0x0B" name="Noon P1" />
+  <item value="0x0C" name="Justin P1" />
+  <item value="0x0D" name="Horst P1" />
+  <item value="0x0E" name="Penn U" />
+  <item value="0x0F" name="Ratchet P1" />
+  <item value="0x10" name="Frank P1" />
+  <item value="0x11" name="Hagane P1" />
+  <item value="0x12" name="Murasame P1" />
+  <item value="0x13" name="Fynnding P1" />
+  <item value="0x14" name="Synbios P1" />
+  <item value="0x15" name="Dantares P1" />
+  <item value="0x16" name="Masqurin P1" />
+  <item value="0x17" name="Grace P1" />
+  <item value="0x18" name="Hayward P1" />
+  <item value="0x19" name="Obright P1" />
+  <item value="0x1A" name="Irene P1" />
+  <item value="0x1B" name="Julian P1" />
+  <item value="0x1C" name="Cybel P1" />
+  <item value="0x1D" name="Eldar P1" />
+  <item value="0x1E" name="Kahn P1" />
+  <item value="0x1F" name="Penn P1" />
+  <item value="0x20" name="Unused" />
+</items>

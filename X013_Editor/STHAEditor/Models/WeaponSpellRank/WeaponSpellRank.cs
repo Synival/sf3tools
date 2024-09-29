@@ -1,0 +1,151 @@
+﻿//using STHAEditor.Forms;
+//using STHAEditor.Models;
+using static STHAEditor.Forms.frmMain;
+
+//using STHAEditor.Models.StatTypes;
+
+
+namespace STHAEditor.Models.WeaponSpellRank
+{
+    public class WeaponSpellRank
+    {
+        private int rankNone;
+        private int rankC;
+        private int rankB;
+        private int rankA;
+        private int rankS;
+        private int address;
+        private int offset;
+
+        private int index;
+        private string name;
+
+        public WeaponSpellRank(int id, string text)
+        {
+            if (Globals.scenario == 1)
+            {
+                offset = 0x000070F0; //scn1
+            }
+            else if (Globals.scenario == 2)
+            {
+                offset = 0x00006FC8; //scn2
+            }
+            else if (Globals.scenario == 3)
+            {
+                offset = 0x00006D04; //scn3
+            }
+            else
+                offset = 0x00006BE0; //pd
+            
+
+
+            //offset = 0x00002b28; scn1
+            //offset = 0x00002e9c; scn2
+            //offset = 0x0000354c; scn3
+            //offset = 0x000035fc; pd
+
+            index = id;
+            name = text;
+
+
+
+
+
+
+            //int start = 0x354c + (id * 24);
+            
+            int start = offset + (id * 5);
+            rankNone = start; //1 bytes
+            rankC = start + 1; //1 byte
+            rankB = start + 2; //1 byte
+            rankA = start + 3; //1 byte
+            rankS = start + 4;
+            address = offset + (id * 0x5);
+            //address = 0x0354c + (id * 0x18);
+
+        }
+
+        public int WeaponSpellRankID
+        {
+            get
+            {
+                return index;
+            }
+        }
+        public string WeaponSpellRankName
+        {
+            get
+            {
+                return name;
+            }
+        }
+
+        public int RankNone
+        {
+            get
+            {
+                return FileEditor.getByte(rankNone);
+            }
+            set
+            {
+                FileEditor.setByte(rankNone, (byte)value);
+            }
+        }
+        public int RankC
+        {
+            get
+            {
+                return FileEditor.getByte(rankC);
+            }
+            set
+            {
+                FileEditor.setByte(rankC, (byte)value);
+            }
+        }
+        public int RankB
+        {
+            get
+            {
+                return FileEditor.getByte(rankB);
+            }
+            set
+            {
+                FileEditor.setByte(rankB, (byte)value);
+            }
+        }
+        public int RankA
+        {
+            get
+            {
+                return FileEditor.getByte(rankA);
+            }
+            set
+            {
+                FileEditor.setByte(rankA, (byte)value);
+            }
+        }
+        public int RankS
+        {
+            get
+            {
+                return FileEditor.getByte(rankS);
+            }
+            set
+            {
+                FileEditor.setByte(rankS, (byte)value);
+            }
+        }
+
+
+        public int WeaponSpellRankAddress
+        {
+            get
+            {
+                return (address);
+            }
+        }
+
+
+
+    }
+}

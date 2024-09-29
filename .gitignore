@@ -1,0 +1,7 @@
+Backup/
+bin/
+obj/
+.vs/
+.metadata/
+*.sln.cache
+*.csproj.user
