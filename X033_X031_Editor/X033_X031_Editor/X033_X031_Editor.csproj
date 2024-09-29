@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0A7802B2-7A65-415B-91C9-549E40348493}</ProjectGuid>
+    <ProjectGuid>{6FB37163-9D36-425B-BBBC-339F2B98808F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>STHAAbilityEditor</RootNamespace>
+    <RootNamespace>SF3.X033_X031_Editor</RootNamespace>
     <AssemblyName>SF3 X033 and X031 Editor</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

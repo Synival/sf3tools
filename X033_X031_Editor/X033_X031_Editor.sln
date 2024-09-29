@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STHAEditor", "STHAEditor\STHAEditor.csproj", "{0A7802B2-7A65-415B-91C9-549E40348493}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X033_X031_Editor", "X033_X031_Editor\X033_X031_Editor.csproj", "{6FB37163-9D36-425B-BBBC-339F2B98808F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectListView2008", "ObjectListView\ObjectListView\ObjectListView2008.csproj", "{18FEDA0C-D147-4286-B39A-01204808106A}"
 EndProject
@@ -13,10 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0A7802B2-7A65-415B-91C9-549E40348493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A7802B2-7A65-415B-91C9-549E40348493}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A7802B2-7A65-415B-91C9-549E40348493}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A7802B2-7A65-415B-91C9-549E40348493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FB37163-9D36-425B-BBBC-339F2B98808F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FB37163-9D36-425B-BBBC-339F2B98808F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FB37163-9D36-425B-BBBC-339F2B98808F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FB37163-9D36-425B-BBBC-339F2B98808F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18FEDA0C-D147-4286-B39A-01204808106A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{18FEDA0C-D147-4286-B39A-01204808106A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18FEDA0C-D147-4286-B39A-01204808106A}.Release|Any CPU.ActiveCfg = Release|Any CPU
