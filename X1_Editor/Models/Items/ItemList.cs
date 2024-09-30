@@ -55,7 +55,6 @@ namespace SF3.X1_Editor.Models.Items
                         {
                             stop = 1;
                         }*/
-
                     }
                 }
                 stream.Close();

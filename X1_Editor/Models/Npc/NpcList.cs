@@ -59,9 +59,7 @@ namespace SF3.X1_Editor.Models.Npcs
                                 {
                                     myCount = 1 + myCount;
                                 }
-
                             }
-
                         }
                     }
                 }
@@ -86,9 +84,7 @@ namespace SF3.X1_Editor.Models.Npcs
                                 {
                                     myCount = 1 + myCount;
                                 }
-
                             }
-
                         }
                     }
                 }

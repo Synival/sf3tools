@@ -51,7 +51,6 @@ namespace SF3.X013_Editor.Models.Presets
             sLvl4 = start + 4; //1 byte
             address = offset + (id * 0x04);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int PresetID => index;

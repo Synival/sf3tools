@@ -367,7 +367,6 @@ namespace SF3.X033_X031_Editor.Forms
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.Hexadecimal = true;
                 //control.BackColor = Color.Aqua;
-
             }
             /*else if (e.Column.AspectToStringFormat == "{0:1}")
             {

@@ -387,7 +387,6 @@ namespace SF3.X002_Editor.Forms
             if (savefile.ShowDialog() == DialogResult.OK)
             {
                 FileEditor.saveFile(savefile.FileName);
-
             }
         }
 
@@ -433,7 +432,6 @@ namespace SF3.X002_Editor.Forms
             {
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.Hexadecimal = true;
-
             }
             /*else if (e.Column.AspectToStringFormat == "{0:1}")
             {

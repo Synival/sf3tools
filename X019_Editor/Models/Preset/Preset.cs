@@ -51,7 +51,6 @@ namespace SF3.X019_Editor.Models.Presets
             weaponLv3 = start + 4; //1 byte
             address = offset + (id * 0x05);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int PresetID => index;

@@ -54,9 +54,7 @@ namespace SF3.X1_Editor.Models.Warps
                             old.CopyTo(itemssorted, 0);
                             itemssorted[old.Length] = new Warp(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                             items[itemssorted[old.Length].WarpID] = itemssorted[old.Length];
-
                         }
-
                     }
                 }
 

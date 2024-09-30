@@ -77,7 +77,6 @@ namespace SF3.X013_Editor.Models.MagicBonus
             }
 
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int MagicID => index;

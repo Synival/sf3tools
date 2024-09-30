@@ -349,7 +349,6 @@ namespace SF3.X019_Editor.Forms
             {
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.Hexadecimal = true;
-
             }
             /*else if (e.Column.AspectToStringFormat == "{0:1}")
             {

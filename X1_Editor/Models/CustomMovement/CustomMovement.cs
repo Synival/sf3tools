@@ -123,7 +123,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
-
             }
             else if (Globals.scenario == 3)
             {
@@ -213,7 +212,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
                 offset = offset + 0xe9a;
                 offset = offset + 0x126;
                 offset = offset + 0x84; //size of AITargetPosition
-
             }
 
             //offset = 0x00002b28; scn1
@@ -240,7 +238,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
 
             address = offset + (id * 0x16);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int CustomMovementID => index;

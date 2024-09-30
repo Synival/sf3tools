@@ -2842,7 +2842,6 @@ namespace SF3.X1_Editor.Forms
             ((System.ComponentModel.ISupportInitialize)(this.objectListView11)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

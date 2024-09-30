@@ -125,7 +125,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
-
             }
             else if (Globals.scenario == 3)
             {
@@ -230,7 +229,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
             //unknown42 = start + 52;
             address = offset + (id * 0x12);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int UnknownAIID => index;

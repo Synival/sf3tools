@@ -57,7 +57,6 @@ namespace SF3.X002_Editor.Models.WeaponRank
 
             address = offset + (id * 0x04);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int WeaponRankID => index;

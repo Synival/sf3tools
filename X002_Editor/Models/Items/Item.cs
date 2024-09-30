@@ -94,7 +94,6 @@ namespace SF3.X002_Editor.Models.Items
             SpellLvOnUseLocation = start + 23;
             address = offset + (id * 0x18);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int ID => index;

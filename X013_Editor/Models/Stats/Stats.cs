@@ -49,7 +49,6 @@ namespace SF3.X013_Editor.Models.Stats
             sLvlStat4 = start + 3; //1 byte
             address = offset + (id * 0x4);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int StatID => index;

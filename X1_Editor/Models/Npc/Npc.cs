@@ -48,7 +48,6 @@ namespace SF3.X1_Editor.Models.Npcs
                 offset = FileEditor.getDouble(offset);
 
                 offset = offset - sub;
-
             }
             else if (Globals.scenario == 2)
             {
@@ -56,7 +55,6 @@ namespace SF3.X1_Editor.Models.Npcs
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
-
             }
             else if (Globals.scenario == 3)
             {
@@ -64,7 +62,6 @@ namespace SF3.X1_Editor.Models.Npcs
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
-
             }
             else if (Globals.scenario == 4)
             {
@@ -79,7 +76,6 @@ namespace SF3.X1_Editor.Models.Npcs
                 sub = 0x06060000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
-
             }*/
 
             //offset = 0x00002b28; scn1
@@ -108,7 +104,6 @@ namespace SF3.X1_Editor.Models.Npcs
             //unknown42 = start + 52;
             address = offset + (id * 0x18);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int NpcID => index;
@@ -131,7 +126,6 @@ namespace SF3.X1_Editor.Models.Npcs
                 {
                     return "";
                 }
-
             }
         }
 

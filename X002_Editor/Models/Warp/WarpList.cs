@@ -63,9 +63,7 @@ namespace SF3.X002_Editor.Models.Warps
                             myName = myName + myCount;
 
                             items[itemssorted[old.Length].WarpID] = itemssorted[old.Length];
-
                         }
-
                     }
                 }
 

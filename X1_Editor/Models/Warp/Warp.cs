@@ -43,7 +43,6 @@ namespace SF3.X1_Editor.Models.Warps
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
-
             }
             else if (Globals.scenario == 3)
             {
@@ -51,7 +50,6 @@ namespace SF3.X1_Editor.Models.Warps
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
-
             }
             else if (Globals.scenario == 4)
             {
@@ -80,7 +78,6 @@ namespace SF3.X1_Editor.Models.Warps
             //unknown42 = start + 52;
             address = offset + (id * 0x04);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int WarpID => index;

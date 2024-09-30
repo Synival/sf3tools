@@ -43,7 +43,6 @@ namespace SF3.X013_Editor.Models.HealExp
             healExp = start; //1 byte
             address = offset + (id * 0x1);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int HealExpID => index;

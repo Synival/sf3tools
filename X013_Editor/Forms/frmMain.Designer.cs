@@ -2016,7 +2016,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.objectListView13)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

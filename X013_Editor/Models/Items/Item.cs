@@ -54,7 +54,6 @@ namespace SF3.X013_Editor.Models.Items
             pow = start + 3; //1 byte
             address = offset + (id * 0x4);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int ID => index;
@@ -137,7 +136,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -167,7 +165,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -197,7 +194,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -227,7 +223,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -257,7 +252,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -287,7 +281,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -317,7 +310,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -347,7 +339,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -388,7 +379,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -422,7 +412,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -456,7 +445,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -490,7 +478,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -524,7 +511,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -558,7 +544,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 
@@ -592,7 +577,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
             }
         }
 

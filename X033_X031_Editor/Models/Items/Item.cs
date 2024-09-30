@@ -679,7 +679,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                 {
                     offset = 0x00000d74; //x031
                 }
-
             }
             else if (Globals.scenario == 2)
             {
@@ -693,7 +692,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     {
                         offset = 0x00000f08; //scn2
                     }
-
                 }
                 else //x031
                 {
@@ -705,7 +703,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     {
                         offset = 0x00000eb4;
                     }
-
                 }
             }
             else if (Globals.scenario == 3)
@@ -865,7 +862,6 @@ namespace SF3.X033_X031_Editor.Models.Items
 
             address = offset + (id * 0x7B);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int ID => index;
@@ -931,7 +927,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //return ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
                     value = ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
                     otherValue = value;
-
                 }
                 else
                 {
@@ -995,7 +990,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     value = ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1;
                     otherValue = value;
                     //* 0x10 / 0x28 is meant to similate multiplying by 0x66666667
-
                 }
                 else
                 {
@@ -1065,7 +1059,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     result = string.Format("{0:x}", value) + " || ";
                 }
                 return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
-
             }
         }
 
@@ -1126,7 +1119,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     value = ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x280 >> 2;
                     //*0x100 / 0x280 is to simulate *0x66666667
                     otherValue = value;
-
                 }
 
                 otherValue = otherValue % 0x100;
@@ -1175,7 +1167,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     result = string.Format("{0:x}", value) + " || ";
                 }
                 return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
-
             }
         }
 
@@ -1229,7 +1220,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //return ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
                     value = ((FileEditor.getByte(mpCurve6) - FileEditor.getByte(mpStart)) << 6); ;
                     otherValue = value;
-
                 }
                 else
                 {
@@ -1267,7 +1257,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     value = ((FileEditor.getByte(mpCurve11) - FileEditor.getByte(mpCurve6)) << 8) * 0x100 / 0x280 >> 1;
                     otherValue = value;
                     //* 0x10 / 0x28 is meant to similate multiplying by 0x66666667
-
                 }
                 else
                 {
@@ -1435,7 +1424,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     result = string.Format("{0:x}", value) + " || ";
                 }
                 return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
-
             }
         }
 
@@ -1489,7 +1477,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //return ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
                     value = ((FileEditor.getByte(atkCurve6) - FileEditor.getByte(atkStart)) << 6); ;
                     otherValue = value;
-
                 }
                 else
                 {
@@ -1527,7 +1514,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     value = ((FileEditor.getByte(atkCurve11) - FileEditor.getByte(atkCurve6)) << 8) * 0x100 / 0x280 >> 1;
                     otherValue = value;
                     //* 0x10 / 0x28 is meant to similate multiplying by 0x66666667
-
                 }
                 else
                 {
@@ -1695,7 +1681,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     result = string.Format("{0:x}", value) + " || ";
                 }
                 return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
-
             }
         }
 
@@ -1749,7 +1734,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //return ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
                     value = ((FileEditor.getByte(defCurve6) - FileEditor.getByte(defStart)) << 6); ;
                     otherValue = value;
-
                 }
                 else
                 {
@@ -1787,7 +1771,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     value = ((FileEditor.getByte(defCurve11) - FileEditor.getByte(defCurve6)) << 8) * 0x100 / 0x280 >> 1;
                     otherValue = value;
                     //* 0x10 / 0x28 is meant to similate multiplying by 0x66666667
-
                 }
                 else
                 {
@@ -1955,7 +1938,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     result = string.Format("{0:x}", value) + " || ";
                 }
                 return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
-
             }
         }
 
@@ -2009,7 +1991,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //return ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
                     value = ((FileEditor.getByte(agiCurve6) - FileEditor.getByte(agiStart)) << 6); ;
                     otherValue = value;
-
                 }
                 else
                 {
@@ -2047,7 +2028,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     value = ((FileEditor.getByte(agiCurve11) - FileEditor.getByte(agiCurve6)) << 8) * 0x100 / 0x280 >> 1;
                     otherValue = value;
                     //* 0x10 / 0x28 is meant to similate multiplying by 0x66666667
-
                 }
                 else
                 {
@@ -2215,7 +2195,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     result = string.Format("{0:x}", value) + " || ";
                 }
                 return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
-
             }
         }
 

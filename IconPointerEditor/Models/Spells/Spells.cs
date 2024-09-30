@@ -81,7 +81,6 @@ namespace SF3.IconPointerEditor.Models.Spells
             lv4Damage = start + 19;
             address = offset + (id * 0x14);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int SpellID => index;

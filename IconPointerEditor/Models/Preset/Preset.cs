@@ -69,7 +69,6 @@ namespace SF3.IconPointerEditor.Models.Presets
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
-
             }
             else if (Globals.scenario == 3)
             {
@@ -102,7 +101,6 @@ namespace SF3.IconPointerEditor.Models.Presets
 
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //pointer
-
             }
 
             //offset = 0x00002b28; scn1
@@ -131,7 +129,6 @@ namespace SF3.IconPointerEditor.Models.Presets
             }
 
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int SizeID => index;
@@ -149,7 +146,6 @@ namespace SF3.IconPointerEditor.Models.Presets
                 {
                     return FileEditor.getDouble(theItemIcon);
                 }
-
             }
             set
             {
@@ -161,7 +157,6 @@ namespace SF3.IconPointerEditor.Models.Presets
                 {
                     FileEditor.setDouble(theItemIcon, value);
                 }
-
             }
         }
 

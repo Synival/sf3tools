@@ -100,7 +100,6 @@ namespace SF3.X1_Editor.Models.Presets
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
-
             }
             else if (Globals.scenario == 3)
             {
@@ -155,7 +154,6 @@ namespace SF3.X1_Editor.Models.Presets
                     offset = FileEditor.getDouble(offset);
                     offset = offset - sub; //third pointer
                 }
-
             }
             else if (Globals.scenario == 5)
             {
@@ -167,7 +165,6 @@ namespace SF3.X1_Editor.Models.Presets
                 offset = offset - sub + Globals.map; //second pointer
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //third pointer
-
             }
 
             //offset = 0x00002b28; scn1
@@ -195,7 +192,6 @@ namespace SF3.X1_Editor.Models.Presets
 
             address = offset + (id * 0x0A);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int SizeID => index;

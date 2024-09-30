@@ -183,7 +183,6 @@ namespace SF3.X019_Editor.Models.Items
 
             address = offset + (id * 0x4C);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int ID => index;

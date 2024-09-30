@@ -506,7 +506,6 @@ namespace SF3.X013_Editor.Forms
             {
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.Hexadecimal = true;
-
             }
             /*else if (e.Column.AspectToStringFormat == "{0:1}")
             {
@@ -665,6 +664,5 @@ namespace SF3.X013_Editor.Forms
         {
             Globals.scenario = 4;
         }
-
     }
 }

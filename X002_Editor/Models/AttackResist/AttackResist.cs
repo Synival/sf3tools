@@ -30,7 +30,6 @@ namespace SF3.X002_Editor.Models.AttackResist
                 {
                     offset = offset - 0x40;
                 }
-
             }
             else if (Globals.scenario == 3)
             {
@@ -55,7 +54,6 @@ namespace SF3.X002_Editor.Models.AttackResist
 
             address = offset + (id * 0xd3);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int AttackResistID => index;

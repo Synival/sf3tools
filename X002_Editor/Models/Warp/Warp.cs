@@ -39,7 +39,6 @@ namespace SF3.X002_Editor.Models.Warps
             if (Globals.scenario == 1)
             {
                 offset = 0x000053cc; //scn1
-
             }
 
             index = id;
@@ -56,7 +55,6 @@ namespace SF3.X002_Editor.Models.Warps
             //unknown42 = start + 52;
             address = offset + (id * 0x04);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int WarpID => index;

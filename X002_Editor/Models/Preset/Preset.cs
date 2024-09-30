@@ -32,7 +32,6 @@ namespace SF3.X002_Editor.Models.Presets
                 {
                     offset = offset - 0x44;
                 }
-
             }
             else if (Globals.scenario == 3)
             {
@@ -59,7 +58,6 @@ namespace SF3.X002_Editor.Models.Presets
             weaponLv3 = start + 4; //1 byte
             address = offset + (id * 0x05);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int PresetID => index;

@@ -43,7 +43,6 @@ namespace SF3.X013_Editor.Models.Soulfail
             expLost = start; //1 bytes
             address = offset + (id * 0x1);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int SoulfailID => index;

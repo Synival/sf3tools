@@ -339,7 +339,6 @@ namespace SF3.IconPointerEditor.Forms
             {
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.Hexadecimal = true;
-
             }
             /*else if (e.Column.AspectToStringFormat == "{0:1}")
             {
@@ -528,7 +527,6 @@ namespace SF3.IconPointerEditor.Forms
                 //this.Text = "Sf3 Icon pointer Editor" + "          " + "X026 mode: Off";
                 Globals.toggle = "Off";
                 updateText();
-
             }
             else
             {

@@ -83,7 +83,6 @@ namespace SF3.IconPointerEditor.Models.Items
                 offset = offset - sub; //pointer
 
                 realOffset = 0xFC86;
-
             }
             else if (Globals.scenario == 3)
             {
@@ -154,7 +153,6 @@ namespace SF3.IconPointerEditor.Models.Items
             //address = 0x0354c + (id * 0x18);
             //MessageBox.Show("" + offset);
             //MessageBox.Show("" + address);
-
         }
 
         public int ID => index;
@@ -172,7 +170,6 @@ namespace SF3.IconPointerEditor.Models.Items
                 {
                     return FileEditor.getDouble(theSpellIcon);
                 }
-
             }
             set
             {
@@ -184,7 +181,6 @@ namespace SF3.IconPointerEditor.Models.Items
                 {
                     FileEditor.setDouble(theSpellIcon, value);
                 }
-
             }
         }
 
@@ -200,7 +196,6 @@ namespace SF3.IconPointerEditor.Models.Items
                 {
                     return FileEditor.getDouble(theSpellIcon) + realOffset;
                 }
-
             }
             set
             {
@@ -212,7 +207,6 @@ namespace SF3.IconPointerEditor.Models.Items
                 {
                     FileEditor.setDouble(theSpellIcon, value - realOffset);
                 }
-
             }
         }
 

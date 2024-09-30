@@ -158,7 +158,6 @@ namespace SF3.X1_Editor.Models.Items
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
-
             }
             else if (Globals.scenario == 3)
             {
@@ -233,7 +232,6 @@ namespace SF3.X1_Editor.Models.Items
                 offset = offset - sub; //third pointer
 
                 offset = offset + 10;
-
             }
 
             //offset = 0x00002b28; scn1
@@ -296,7 +294,6 @@ namespace SF3.X1_Editor.Models.Items
             //unknown42 = start + 52;
             address = offset + (id * 0x34);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int ID => index;

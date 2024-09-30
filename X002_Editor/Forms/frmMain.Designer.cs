@@ -1570,7 +1570,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.objectListView7)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

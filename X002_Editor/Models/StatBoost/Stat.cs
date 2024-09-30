@@ -50,7 +50,6 @@ namespace SF3.X002_Editor.Models.StatBoost
             stat = start; //1 bytes
             address = offset + (id * 0x01);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int StatID => index;

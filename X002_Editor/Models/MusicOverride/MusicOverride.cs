@@ -41,7 +41,6 @@ namespace SF3.X002_Editor.Models.MusicOverride
                 {
                     offset = offset - 0x44;
                 }
-
             }
             else if (Globals.scenario == 3)
             {
@@ -76,7 +75,6 @@ namespace SF3.X002_Editor.Models.MusicOverride
             extraChr = start + 0x22; //4 bytes chr extra?
             address = offset + (id * 0x28);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int MusicOverrideID => index;
@@ -97,7 +95,6 @@ namespace SF3.X002_Editor.Models.MusicOverride
             set
             {
                 FileEditor.setByte(synMusic, (byte)value);
-
             }
         }
 

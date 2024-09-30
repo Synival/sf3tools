@@ -62,7 +62,6 @@ namespace SF3.X1_Editor.Models.Tiles
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
-
             }
             else if (Globals.scenario == 3)
             {
@@ -87,7 +86,6 @@ namespace SF3.X1_Editor.Models.Tiles
                     offset = FileEditor.getDouble(offset);
                     offset = offset - sub; //first pointer
                     offset = offset + 0x14; //value we want is 0xac bytes later always
-
                 }
 
                 /*
@@ -176,7 +174,6 @@ namespace SF3.X1_Editor.Models.Tiles
 
             address = offset + (id * 0x10);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int TileID => index;

@@ -2383,7 +2383,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.objectListView6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

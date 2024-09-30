@@ -74,7 +74,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
-
             }
             else if (Globals.scenario == 3)
             {
@@ -86,7 +85,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
                 offset = offset - sub; //second pointer
 
                 //offset = FileEditor.getDouble(offset);
-
             }
             else if (Globals.scenario == 4)
             {
@@ -97,7 +95,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //second pointer
                                        //offset = FileEditor.getDouble(offset);
-
             }
             else if (Globals.scenario == 5)
             {
@@ -132,7 +129,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
             //unknown42 = start + 52;
             address = offset + (id * 0x4);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int BattleID => index;
@@ -143,7 +139,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
             get
             {
                 return FileEditor.getWord(battlePointer);
-
             }
             set
             {
@@ -156,7 +151,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
             get
             {
                 return FileEditor.getDouble(battlePointer);
-
             }
             set
             {
@@ -169,7 +163,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
             get
             {
                 return FileEditor.getWord(battlePointer2);
-
             }
             set
             {

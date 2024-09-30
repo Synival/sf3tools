@@ -76,7 +76,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
             //unknown42 = start + 52;
             address = offset + (id * 0x18);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int StatusEffectID => index;

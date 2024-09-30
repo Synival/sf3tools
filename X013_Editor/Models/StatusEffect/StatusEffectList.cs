@@ -57,9 +57,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
                             itemssorted[old.Length] = new StatusEffect(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
 
                             items[itemssorted[old.Length].StatusEffectID] = itemssorted[old.Length];
-
                         }
-
                     }
                 }
 

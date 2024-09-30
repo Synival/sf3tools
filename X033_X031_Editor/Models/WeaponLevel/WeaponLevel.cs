@@ -34,7 +34,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
                 {
                     offset = 0x00000d64; //x031
                 }
-
             }
             else if (Globals.scenario == 2)
             {
@@ -48,7 +47,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
                     {
                         offset = 0x00000ef8; //scn2
                     }
-
                 }
                 else
                 {
@@ -60,7 +58,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
                     {
                         offset = 0x00000ea4;
                     }
-
                 }
             }
             else if (Globals.scenario == 3)
@@ -105,7 +102,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 
             address = offset + (id * 0x11);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int WeaponLevelID => index;

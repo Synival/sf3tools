@@ -35,7 +35,6 @@ namespace SF3.X002_Editor.Models.Loading
                 {
                     offset = offset - 0x44;
                 }
-
             }
             else if (Globals.scenario == 3)
             {
@@ -65,7 +64,6 @@ namespace SF3.X002_Editor.Models.Loading
             chr = start + 0x0e; //2 bytes
             address = offset + (id * 0x10);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int LoadID => index;

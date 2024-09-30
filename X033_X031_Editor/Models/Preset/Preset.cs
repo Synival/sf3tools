@@ -50,7 +50,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
                 {
                     offset = 0x00001d50; //x031
                 }
-
             }
             else if (Globals.scenario == 2)
             {
@@ -64,7 +63,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
                     {
                         offset = 0x00002ebe; //scn2
                     }
-
                 }
                 else //x031
                 {
@@ -76,7 +74,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
                     {
                         offset = 0x00002e6a;
                     }
-
                 }
             }
             else if (Globals.scenario == 3)
@@ -137,7 +134,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
 
             address = offset + (id * 0x20);
             //address = 0x0354c + (id * 0x18);
-
         }
 
         public int PresetID => index;

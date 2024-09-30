@@ -1343,7 +1343,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.objectListView4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

@@ -260,7 +260,6 @@ namespace SF3.X1_Editor.Forms
 
                 this.battleToolStripMenuItem.Text = "Battle toggle: on";
                 Globals.battle = "battle";
-
             }
             else if (offset > 0x0605e000)
             {
@@ -505,7 +504,6 @@ namespace SF3.X1_Editor.Forms
                     Globals.fileName = lastWord;
                     updateText();
                     //Console.WriteLine(lastWord);
-
                 }
                 else
                 {
@@ -617,7 +615,6 @@ namespace SF3.X1_Editor.Forms
             {
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.Hexadecimal = true;
-
             }
             /*else if (e.Column.AspectToStringFormat == "{0:1}")
             {
@@ -729,7 +726,6 @@ namespace SF3.X1_Editor.Forms
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 Preset value = (Preset)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
-
             }*/ /*else if (e.Value is CharacterClass) {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 CharacterClass value = (CharacterClass)((ComboBox)e.Control).SelectedItem;
@@ -853,17 +849,14 @@ namespace SF3.X1_Editor.Forms
                 isBattle = true;
                 this.battleToolStripMenuItem.Text = "Battle toggle: on";
                 Globals.battle = "battle";
-
             }
             else
             {
                 isBattle = false;
                 this.battleToolStripMenuItem.Text = "Battle toggle: off";
                 Globals.battle = "town";
-
             }
             updateText();
-
         }
 
         private void treasureDebugToggleOffToolStripMenuItem_Click(object sender, EventArgs e)
@@ -873,14 +866,12 @@ namespace SF3.X1_Editor.Forms
                 Globals.treasureDebug = false;
                 this.treasureDebugToggleOffToolStripMenuItem.Text = "treasureDebug toggle: off";
                 Globals.debug = "off";
-
             }
             else
             {
                 Globals.treasureDebug = true;
                 this.treasureDebugToggleOffToolStripMenuItem.Text = "treasureDebug toggle: on";
                 Globals.debug = "on";
-
             }
             updateText();
         }
@@ -891,6 +882,5 @@ namespace SF3.X1_Editor.Forms
             //this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + Globals.fileName + "|          Current Loading info: Scenario: " + Globals.scn + " | Map: " + Globals.maps + " | MapType: " + Globals.battle + " | debug: " + Globals.debug;
             this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + Globals.fileName + "|          Current open settings: Scenario: " + Globals.scn + " | Map: " + Globals.maps + " | MapType: " + Globals.battle + " | debug: " + Globals.debug;
         }
-
     }
 }
