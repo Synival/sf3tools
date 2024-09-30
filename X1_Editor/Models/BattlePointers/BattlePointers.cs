@@ -136,39 +136,23 @@ namespace SF3.X1_Editor.Models.BattlePointers
 
         /*public int BattlePointer
         {
-            get
-            {
-                return FileEditor.getWord(battlePointer);
-            }
-            set
-            {
-                FileEditor.setWord(battlePointer, value);
-            }
-        }*/
+            get => FileEditor.getWord(battlePointer);
+            set => FileEditor.setWord(battlePointer, value);
+        }
+        */
 
         public int BattlePointer
         {
-            get
-            {
-                return FileEditor.getDouble(battlePointer);
-            }
-            set
-            {
-                FileEditor.setDouble(battlePointer, value);
-            }
+            get => FileEditor.getDouble(battlePointer);
+            set => FileEditor.setDouble(battlePointer, value);
         }
 
         /*public int BattlePointer2
         {
-            get
-            {
-                return FileEditor.getWord(battlePointer2);
-            }
-            set
-            {
-                FileEditor.setWord(battlePointer2, value);
-            }
-        }*/
+            get => FileEditor.getWord(battlePointer2);
+            set => FileEditor.setWord(battlePointer2, value);
+        }
+        */
 
         public int BattleAddress => (address);
     }

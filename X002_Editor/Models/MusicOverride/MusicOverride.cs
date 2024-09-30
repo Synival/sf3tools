@@ -88,14 +88,8 @@ namespace SF3.X002_Editor.Models.MusicOverride
 
         public int SynMusic
         {
-            get
-            {
-                return FileEditor.getByte(synMusic);
-            }
-            set
-            {
-                FileEditor.setByte(synMusic, (byte)value);
-            }
+            get => FileEditor.getByte(synMusic);
+            set => FileEditor.setByte(synMusic, (byte)value);
         }
 
         public int MedMusic

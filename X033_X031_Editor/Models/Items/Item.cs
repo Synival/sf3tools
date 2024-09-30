@@ -2500,179 +2500,89 @@ namespace SF3.X033_X031_Editor.Models.Items
         }
         public int LightRes
         {
-            get
-            {
-                return FileEditor.getByte(lightRes);
-            }
-            set
-            {
-                FileEditor.setByte(lightRes, (byte)value);
-            }
+            get => FileEditor.getByte(lightRes);
+            set => FileEditor.setByte(lightRes, (byte)value);
         }
         public int DarkRes
         {
-            get
-            {
-                return FileEditor.getByte(darkRes);
-            }
-            set
-            {
-                FileEditor.setByte(darkRes, (byte)value);
-            }
+            get => FileEditor.getByte(darkRes);
+            set => FileEditor.setByte(darkRes, (byte)value);
         }
         public int UnknownRes
         {
-            get
-            {
-                return FileEditor.getByte(unknownRes);
-            }
-            set
-            {
-                FileEditor.setByte(unknownRes, (byte)value);
-            }
+            get => FileEditor.getByte(unknownRes);
+            set => FileEditor.setByte(unknownRes, (byte)value);
         }
         public int Slow
         {
-            get
-            {
-                return FileEditor.getByte(slow);
-            }
-            set
-            {
-                FileEditor.setByte(slow, (byte)value);
-            }
+            get => FileEditor.getByte(slow);
+            set => FileEditor.setByte(slow, (byte)value);
         }
 
         public int Support
         {
-            get
-            {
-                return FileEditor.getByte(support);
-            }
-            set
-            {
-                FileEditor.setByte(support, (byte)value);
-            }
+            get => FileEditor.getByte(support);
+            set => FileEditor.setByte(support, (byte)value);
         }
 
         public int MagicBonus
         {
-            get
-            {
-                return FileEditor.getByte(magicBonus);
-            }
-            set
-            {
-                FileEditor.setByte(magicBonus, (byte)value);
-            }
+            get => FileEditor.getByte(magicBonus);
+            set => FileEditor.setByte(magicBonus, (byte)value);
         }
 
         public int MovementType
         {
-            get
-            {
-                return FileEditor.getByte(movementType);
-            }
-            set
-            {
-                FileEditor.setByte(movementType, (byte)value);
-            }
+            get => FileEditor.getByte(movementType);
+            set => FileEditor.setByte(movementType, (byte)value);
         }
 
         public int WeaponEquipable1
         {
-            get
-            {
-                return FileEditor.getByte(weaponEquipable1);
-            }
-            set
-            {
-                FileEditor.setByte(weaponEquipable1, (byte)value);
-            }
+            get => FileEditor.getByte(weaponEquipable1);
+            set => FileEditor.setByte(weaponEquipable1, (byte)value);
         }
 
         public int WeaponEquipable2
         {
-            get
-            {
-                return FileEditor.getByte(weaponEquipable2);
-            }
-            set
-            {
-                FileEditor.setByte(weaponEquipable2, (byte)value);
-            }
+            get => FileEditor.getByte(weaponEquipable2);
+            set => FileEditor.setByte(weaponEquipable2, (byte)value);
         }
 
         public int WeaponEquipable3
         {
-            get
-            {
-                return FileEditor.getByte(weaponEquipable3);
-            }
-            set
-            {
-                FileEditor.setByte(weaponEquipable3, (byte)value);
-            }
+            get => FileEditor.getByte(weaponEquipable3);
+            set => FileEditor.setByte(weaponEquipable3, (byte)value);
         }
 
         public int WeaponEquipable4
         {
-            get
-            {
-                return FileEditor.getByte(weaponEquipable4);
-            }
-            set
-            {
-                FileEditor.setByte(weaponEquipable4, (byte)value);
-            }
+            get => FileEditor.getByte(weaponEquipable4);
+            set => FileEditor.setByte(weaponEquipable4, (byte)value);
         }
 
         public int AccessoryEquipable1
         {
-            get
-            {
-                return FileEditor.getByte(accessoryEquipable1);
-            }
-            set
-            {
-                FileEditor.setByte(accessoryEquipable1, (byte)value);
-            }
+            get => FileEditor.getByte(accessoryEquipable1);
+            set => FileEditor.setByte(accessoryEquipable1, (byte)value);
         }
 
         public int AccessoryEquipable2
         {
-            get
-            {
-                return FileEditor.getByte(accessoryEquipable2);
-            }
-            set
-            {
-                FileEditor.setByte(accessoryEquipable2, (byte)value);
-            }
+            get => FileEditor.getByte(accessoryEquipable2);
+            set => FileEditor.setByte(accessoryEquipable2, (byte)value);
         }
 
         public int AccessoryEquipable3
         {
-            get
-            {
-                return FileEditor.getByte(accessoryEquipable3);
-            }
-            set
-            {
-                FileEditor.setByte(accessoryEquipable3, (byte)value);
-            }
+            get => FileEditor.getByte(accessoryEquipable3);
+            set => FileEditor.setByte(accessoryEquipable3, (byte)value);
         }
 
         public int AccessoryEquipable4
         {
-            get
-            {
-                return FileEditor.getByte(accessoryEquipable4);
-            }
-            set
-            {
-                FileEditor.setByte(accessoryEquipable4, (byte)value);
-            }
+            get => FileEditor.getByte(accessoryEquipable4);
+            set => FileEditor.setByte(accessoryEquipable4, (byte)value);
         }
 
         public int Address => (address);
