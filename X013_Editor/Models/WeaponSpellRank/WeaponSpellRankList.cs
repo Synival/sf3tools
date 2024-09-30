@@ -10,11 +10,7 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
         private static WeaponSpellRank[] itemssorted;
         private static WeaponSpellRank[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,8 +19,6 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
         public static bool loadWeaponSpellRankList()
         {
             r = "Resources/WeaponSpellRankList.xml";
-
-
 
             itemssorted = new WeaponSpellRank[0];
             items = new WeaponSpellRank[4]; //max size of itemList

@@ -10,11 +10,7 @@ namespace SF3.X002_Editor.Models.Loading
         private static Loading[] itemssorted;
         private static Loading[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -38,7 +34,6 @@ namespace SF3.X002_Editor.Models.Loading
             {
                 r = "RPD/loadListPD.xml";
             }
-
 
             itemssorted = new Loading[0];
             items = new Loading[300]; //max size of itemList

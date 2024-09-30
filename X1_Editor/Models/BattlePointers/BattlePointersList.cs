@@ -10,11 +10,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
         private static BattlePointers[] itemssorted;
         private static BattlePointers[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,7 +19,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
         public static bool loadBattlePointersList()
         {
             r = "Resources/BattlePointersList.xml";
-
 
             itemssorted = new BattlePointers[0];
             items = new BattlePointers[5]; //max size of itemList

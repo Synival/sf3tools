@@ -1,7 +1,5 @@
 ﻿using static SF3.X1_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X1_Editor.Models.AI
 {
     public class AI
@@ -26,7 +24,6 @@ namespace SF3.X1_Editor.Models.AI
                 offset = offset - sub; //first pointer
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
-
 
                 offset = FileEditor.getDouble(offset);
 
@@ -55,8 +52,6 @@ namespace SF3.X1_Editor.Models.AI
                     offset = offset + 0x126; //size of something else
                     //we're now at our offset after adding these
                 }
-
-
 
                 /*
                 offset = 0x00000018; //scn1 initial pointer
@@ -203,8 +198,6 @@ namespace SF3.X1_Editor.Models.AI
 
             }
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -212,11 +205,6 @@ namespace SF3.X1_Editor.Models.AI
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -272,8 +260,6 @@ namespace SF3.X1_Editor.Models.AI
                 return (address);
             }
         }
-
-
 
     }
 }

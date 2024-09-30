@@ -3,8 +3,6 @@ using System;
 using System.Windows.Forms;
 using static SF3.IconPointerEditor.Forms.frmMain;
 
-
-
 namespace SF3.IconPointerEditor.Models.Items
 {
     public class Item
@@ -12,7 +10,6 @@ namespace SF3.IconPointerEditor.Models.Items
         //SPELLS
         private int theSpellIcon;
         private int realOffset;
-
 
         //int pointerValue;
 
@@ -34,12 +31,6 @@ namespace SF3.IconPointerEditor.Models.Items
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-
-
-
-
-
-
         public Item(int id, string text)
         {
             if (Globals.scenario == 1)
@@ -60,9 +51,6 @@ namespace SF3.IconPointerEditor.Models.Items
 
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //pointer
-
-
-
 
                 realOffset = 0xFF8E;
 
@@ -90,7 +78,6 @@ namespace SF3.IconPointerEditor.Models.Items
                     sub = 0x06068000;
                 }
 
-
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //pointer
 
@@ -110,7 +97,6 @@ namespace SF3.IconPointerEditor.Models.Items
                     sub = 0x06068000;
                 }
 
-
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //pointer
 
@@ -129,14 +115,11 @@ namespace SF3.IconPointerEditor.Models.Items
                     sub = 0x06068000;
                 }
 
-
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //pointer
 
                 realOffset = 0x12A32;
             }
-
-
 
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
@@ -146,13 +129,7 @@ namespace SF3.IconPointerEditor.Models.Items
             index = id;
             name = text;
 
-
-
-
-
-
             //int start = 0x354c + (id * 24);
-
 
             if (Globals.x026 == true && (Globals.scenario == 1))
             {
@@ -168,7 +145,6 @@ namespace SF3.IconPointerEditor.Models.Items
                                       //unknown42 = start + 52;
                 address = offset + (id * 0x04);
             }
-
 
             /*int start = offset + (id * 0x04);
             theSpellIcon = start; //2 bytes  
@@ -208,11 +184,6 @@ namespace SF3.IconPointerEditor.Models.Items
                     return FileEditor.getDouble(theSpellIcon);
                 }
 
-
-
-
-
-
             }
             set
             {
@@ -241,13 +212,6 @@ namespace SF3.IconPointerEditor.Models.Items
                     return FileEditor.getDouble(theSpellIcon) + realOffset;
                 }
 
-
-
-
-
-
-
-
             }
             set
             {
@@ -260,21 +224,8 @@ namespace SF3.IconPointerEditor.Models.Items
                     FileEditor.setDouble(theSpellIcon, value - realOffset);
                 }
 
-
-
-
-
-
-
-
-
-
-
             }
         }
-
-
-
 
         public int Address
         {
@@ -283,8 +234,6 @@ namespace SF3.IconPointerEditor.Models.Items
                 return (address);
             }
         }
-
-
 
     }
 }

@@ -1,7 +1,5 @@
 ﻿using static SF3.X019_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X019_Editor.Models.Items
 {
     public class Item
@@ -75,7 +73,6 @@ namespace SF3.X019_Editor.Models.Items
         private int unknown20;
         private int spriteID;
 
-
         private int address;
         private int offset;
 
@@ -103,8 +100,6 @@ namespace SF3.X019_Editor.Models.Items
             else
                 offset = 0x00000eb0; //X044 pd
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -112,11 +107,6 @@ namespace SF3.X019_Editor.Models.Items
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -190,9 +180,6 @@ namespace SF3.X019_Editor.Models.Items
             unknown20 = start + 75;
             spriteID = id + 200;
 
-
-
-
             address = offset + (id * 0x4C);
             //address = 0x0354c + (id * 0x18);
 
@@ -232,8 +219,6 @@ namespace SF3.X019_Editor.Models.Items
                 FileEditor.setWord(maxHP, value);
             }
         }
-
-
 
         public int MaxMP
         {
@@ -459,7 +444,6 @@ namespace SF3.X019_Editor.Models.Items
             }
         }
 
-
         public int Spell1Level
         {
             get
@@ -483,7 +467,6 @@ namespace SF3.X019_Editor.Models.Items
                 FileEditor.setByte(spell2, (byte)value);
             }
         }
-
 
         public int Spell2Level
         {
@@ -509,7 +492,6 @@ namespace SF3.X019_Editor.Models.Items
             }
         }
 
-
         public int Spell3Level
         {
             get
@@ -533,7 +515,6 @@ namespace SF3.X019_Editor.Models.Items
                 FileEditor.setByte(spell4, (byte)value);
             }
         }
-
 
         public int Spell4Level
         {
@@ -1019,8 +1000,6 @@ namespace SF3.X019_Editor.Models.Items
                 return (address);
             }
         }
-
-
 
     }
 }

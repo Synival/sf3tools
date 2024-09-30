@@ -1,7 +1,5 @@
 ﻿using static SF3.IconPointerEditor.Forms.frmMain;
 
-
-
 namespace SF3.IconPointerEditor.Models.Presets
 {
     public class Preset
@@ -32,7 +30,6 @@ namespace SF3.IconPointerEditor.Models.Presets
                     sub = 0x06068000;
                 }
 
-
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //pointer
                 /*
@@ -58,8 +55,6 @@ namespace SF3.IconPointerEditor.Models.Presets
                     offset = 0x0000003C; //scn2 initial pointer
                     sub = 0x06068000;
                 }
-
-
 
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //pointer
@@ -88,7 +83,6 @@ namespace SF3.IconPointerEditor.Models.Presets
                     sub = 0x06068000;
                 }
 
-
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //pointer
             }
@@ -105,14 +99,10 @@ namespace SF3.IconPointerEditor.Models.Presets
                     sub = 0x06068000;
                 }
 
-
-
-
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //pointer
 
             }
-
 
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
@@ -122,19 +112,12 @@ namespace SF3.IconPointerEditor.Models.Presets
             index = id;
             name = text;
 
-
-
-
-
-
             //int start = 0x354c + (id * 24);
-
 
             if (Globals.x026 == true && (Globals.scenario == 1))
             {
                 int start = offset + (id * 0x02);
                 theItemIcon = start; //1 bytes
-
 
                 address = offset + (id * 0x02);
             }
@@ -143,10 +126,8 @@ namespace SF3.IconPointerEditor.Models.Presets
                 int start = offset + (id * 0x04);
                 theItemIcon = start; //1 bytes
 
-
                 address = offset + (id * 0x04);
             }
-
 
             //address = 0x0354c + (id * 0x18);
 
@@ -180,9 +161,6 @@ namespace SF3.IconPointerEditor.Models.Presets
                     return FileEditor.getDouble(theItemIcon);
                 }
 
-
-
-
             }
             set
             {
@@ -198,8 +176,6 @@ namespace SF3.IconPointerEditor.Models.Presets
             }
         }
 
-
-
         public int SizeAddress
         {
             get
@@ -207,8 +183,6 @@ namespace SF3.IconPointerEditor.Models.Presets
                 return (address);
             }
         }
-
-
 
     }
 }

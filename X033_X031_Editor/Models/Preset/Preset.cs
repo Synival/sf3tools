@@ -1,8 +1,6 @@
 ﻿using System;
 using static SF3.X033_X031_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X033_X031_Editor.Models.Presets
 {
     public class Preset
@@ -41,10 +39,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
             checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = FileEditor.getByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
 
-
-
-
-
             if (Globals.scenario == 1)
             {
                 if (checkType == 0x07)
@@ -55,7 +49,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
                 {
                     offset = 0x00001d50; //x031
                 }
-
 
             }
             else if (Globals.scenario == 2)
@@ -70,7 +63,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
                     {
                         offset = 0x00002ebe; //scn2
                     }
-
 
                 }
                 else //x031
@@ -111,8 +103,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
                 }
             }
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -120,11 +110,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -148,15 +133,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
             weapon3Exp = start + 0x1a; //2 bytes
             weapon4Type = start + 0x1c; // for exp
             weapon4Exp = start + 0x1e; //2 bytes
-
-
-
-
-
-
-
-
-
 
             address = offset + (id * 0x20);
             //address = 0x0354c + (id * 0x18);
@@ -213,7 +189,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
                 FileEditor.setByte(level, (byte)value);
             }
         }
-
 
         public int Sex
         {
@@ -391,7 +366,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
             }
         }
 
-
         public int PresetAddress
         {
             get
@@ -399,8 +373,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
                 return (address);
             }
         }
-
-
 
     }
 }

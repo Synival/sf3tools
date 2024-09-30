@@ -3,8 +3,6 @@ using SF3.X1_Editor.Models.UnknownAI;
 using System;
 using static SF3.X1_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X1_Editor.Models.Warps
 {
     public class Warp
@@ -13,9 +11,6 @@ namespace SF3.X1_Editor.Models.Warps
         private int unknown2;
         private int type;
         private int map;
-
-
-
 
         //int pointerValue;
 
@@ -37,16 +32,9 @@ namespace SF3.X1_Editor.Models.Warps
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-
-
-
-
-
-
         public Warp(int id, string text)
         {
             //no scn1 for this
-
 
             if (Globals.scenario == 2)
             {
@@ -55,7 +43,6 @@ namespace SF3.X1_Editor.Models.Warps
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
 
-
             }
             else if (Globals.scenario == 3)
             {
@@ -63,7 +50,6 @@ namespace SF3.X1_Editor.Models.Warps
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
-
 
             }
             else if (Globals.scenario == 4)
@@ -74,8 +60,6 @@ namespace SF3.X1_Editor.Models.Warps
                 offset = offset - sub;
             }
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -83,11 +67,6 @@ namespace SF3.X1_Editor.Models.Warps
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -142,7 +121,6 @@ namespace SF3.X1_Editor.Models.Warps
             }
         }
 
-
         public int WarpType
         {
             get
@@ -167,11 +145,6 @@ namespace SF3.X1_Editor.Models.Warps
             }
         }
 
-
-
-
-
-
         public int WarpAddress
         {
             get
@@ -179,8 +152,6 @@ namespace SF3.X1_Editor.Models.Warps
                 return (address);
             }
         }
-
-
 
     }
 }

@@ -20,9 +20,6 @@ namespace SF3.X1_Editor.Models.Presets
         {
             r = "Resources/X1Top.xml";
 
-
-
-
             presetssorted = new Preset[0];
             presets = new Preset[31]; //max size of spellIndexList
             try

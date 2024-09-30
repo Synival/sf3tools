@@ -10,11 +10,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
         private static SpecialChance[] itemssorted;
         private static SpecialChance[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,8 +19,6 @@ namespace SF3.X013_Editor.Models.SpecialChance
         public static bool loadSpecialChanceList()
         {
             r = "Resources/SpecialChanceList.xml";
-
-
 
             itemssorted = new SpecialChance[0];
             items = new SpecialChance[1]; //max size of itemList

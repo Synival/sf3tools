@@ -10,11 +10,7 @@ namespace SF3.X013_Editor.Models.CritMod
         private static CritMod[] itemssorted;
         private static CritMod[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,8 +19,6 @@ namespace SF3.X013_Editor.Models.CritMod
         public static bool loadCritModList()
         {
             r = "Resources/CritModList.xml";
-
-
 
             itemssorted = new CritMod[0];
             items = new CritMod[1]; //max size of itemList

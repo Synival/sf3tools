@@ -11,9 +11,7 @@ namespace SF3.X1_Editor.Models.Arrows
         private static Arrow[] itemssorted;
         private static Arrow[] items;
 
-
         private static string r = "";
-
 
         /// <summary>
         /// Initialises static class
@@ -22,8 +20,6 @@ namespace SF3.X1_Editor.Models.Arrows
         public static bool loadArrowList()
         {
             r = "Resources/X1Arrow.xml";
-
-
 
             itemssorted = new Arrow[0];
             items = new Arrow[100]; //max size of itemList
@@ -64,7 +60,6 @@ namespace SF3.X1_Editor.Models.Arrows
                                     myCount = 1 + myCount;
                                 }
 
-
                             }
 
                         }
@@ -92,18 +87,11 @@ namespace SF3.X1_Editor.Models.Arrows
                                     myCount = 1 + myCount;
                                 }
 
-
                             }
 
                         }
                     }
                 }
-
-
-
-
-
-
 
                 stream.Close();
             }
@@ -129,9 +117,6 @@ namespace SF3.X1_Editor.Models.Arrows
     }
 }
 
-
-
-
 /*
 using System;
 using System.Xml;
@@ -146,11 +131,7 @@ namespace SF3.X1_Editor.Models.Treasures
         private static List<Item> itemssorted;
         private static Dictionary<int, Item> items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -174,7 +155,6 @@ namespace SF3.X1_Editor.Models.Treasures
             {
                 r = "Resources/PDSpells.xml";
             }
-
 
             itemssorted = new List<Item>(256);
             items = new Dictionary<int, Item>(256); //max size of itemList

@@ -2,8 +2,6 @@
 using System;
 using static SF3.X013_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X013_Editor.Models.StatusEffects
 {
     public class StatusEffect
@@ -18,9 +16,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
         private int luck7;
         private int luck8;
         private int luck9;
-
-
-
 
         //int pointerValue;
 
@@ -42,12 +37,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-
-
-
-
-
-
         public StatusEffect(int id, string text)
         {
             if (Globals.scenario == 1)
@@ -65,15 +54,8 @@ namespace SF3.X013_Editor.Models.StatusEffects
             else
                 offset = 0x000070d8; //pd
 
-
-
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -231,10 +213,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
             }
         }
 
-
-
-
-
         public int StatusEffectAddress
         {
             get
@@ -242,8 +220,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
                 return (address);
             }
         }
-
-
 
     }
 }

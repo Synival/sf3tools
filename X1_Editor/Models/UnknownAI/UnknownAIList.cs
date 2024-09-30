@@ -10,11 +10,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
         private static UnknownAI[] itemssorted;
         private static UnknownAI[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,7 +19,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
         public static bool loadUnknownAIList()
         {
             r = "Resources/UnknownAIList.xml";
-
 
             itemssorted = new UnknownAI[0];
             items = new UnknownAI[30]; //max size of itemList

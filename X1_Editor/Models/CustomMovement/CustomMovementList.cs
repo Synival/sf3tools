@@ -20,7 +20,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
         {
             r = "Resources/X1AI.xml";
 
-
             /*
             if (Globals.scenario == 1)
             {
@@ -42,7 +41,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
             {
                 r = "Resources/X1AIOther.xml";
             }*/
-
 
             spellssorted = new CustomMovement[0];
             spells = new CustomMovement[130]; //max size of spellList

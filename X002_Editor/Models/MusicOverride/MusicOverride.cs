@@ -1,7 +1,5 @@
 ﻿using static SF3.X002_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X002_Editor.Models.MusicOverride
 {
     public class MusicOverride
@@ -43,7 +41,6 @@ namespace SF3.X002_Editor.Models.MusicOverride
                     offset = offset - 0x44;
                 }
 
-
             }
             else if (Globals.scenario == 3)
             {
@@ -52,8 +49,6 @@ namespace SF3.X002_Editor.Models.MusicOverride
             else
                 offset = 0x00005aa2; //pd. assumed location if it were to exist
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -61,11 +56,6 @@ namespace SF3.X002_Editor.Models.MusicOverride
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -124,7 +114,6 @@ namespace SF3.X002_Editor.Models.MusicOverride
             set
             {
                 FileEditor.setByte(synMusic, (byte)value);
-
 
             }
         }
@@ -268,8 +257,6 @@ namespace SF3.X002_Editor.Models.MusicOverride
                 return (address);
             }
         }
-
-
 
     }
 }

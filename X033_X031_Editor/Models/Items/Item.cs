@@ -2,8 +2,6 @@
 using System;
 using static SF3.X033_X031_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X033_X031_Editor.Models.Items
 {
     public class Item
@@ -130,7 +128,6 @@ namespace SF3.X033_X031_Editor.Models.Items
         private int accessoryEquipable2;
         private int accessoryEquipable3;
         private int accessoryEquipable4;
-
 
         int value;
         int otherValue;
@@ -395,7 +392,6 @@ namespace SF3.X033_X031_Editor.Models.Items
 ,16128
 ,16129 };*/
 
-
         //public static double[] arrayMath3 = { 0, 0, 2, arrayMath3[2]+ 3};
         public static double[] arrayMath ={0, 0
 ,0
@@ -652,16 +648,10 @@ namespace SF3.X033_X031_Editor.Models.Items
 ,16252
 ,16253 };
 
-
-
-
-
-
         int valueNumber = 16253; //16129; //16384
 
         //int[] arrayTwo = {arrayOne[0] =  1 };
         //arrayOne[0] = {2} ;
-
 
         private int address;
         private int offset;
@@ -678,8 +668,6 @@ namespace SF3.X033_X031_Editor.Models.Items
             //X031.BIN is during combat
             //X033.BIN is out of combat
 
-
-
             if (Globals.scenario == 1)
             {
                 if (checkType == 0x07)
@@ -690,7 +678,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                 {
                     offset = 0x00000d74; //x031
                 }
-
 
             }
             else if (Globals.scenario == 2)
@@ -705,7 +692,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     {
                         offset = 0x00000f08; //scn2
                     }
-
 
                 }
                 else //x031
@@ -744,8 +730,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
             }
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -753,11 +737,6 @@ namespace SF3.X033_X031_Editor.Models.Items
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -861,7 +840,6 @@ namespace SF3.X033_X031_Editor.Models.Items
             baseHPRegen = start + 0x5d;
             baseMPRegen = start + 0x5e;
 
-
             earthRes = start + 0x5f;
             fireRes = start + 0x60;
             iceRes = start + 0x61;
@@ -883,7 +861,6 @@ namespace SF3.X033_X031_Editor.Models.Items
             accessoryEquipable2 = start + 0x78;
             accessoryEquipable3 = start + 0x79;
             accessoryEquipable4 = start + 0x7a;
-
 
             address = offset + (id * 0x7B);
             //address = 0x0354c + (id * 0x18);
@@ -1016,7 +993,6 @@ namespace SF3.X033_X031_Editor.Models.Items
             }
         }
 
-
         public string HPgroup1
         {
             get
@@ -1035,7 +1011,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                     //return otherValue / 256 * 100 + "%";
                 }
-
 
                 //value = value & 0xf00;
                 otherValue = otherValue % 0x100;
@@ -1275,10 +1250,6 @@ namespace SF3.X033_X031_Editor.Models.Items
             }
         }
 
-
-
-
-
         public int MPPromote
         {
             get
@@ -1377,7 +1348,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //return ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
                     value = ((FileEditor.getByte(mpCurve6) - FileEditor.getByte(mpStart)) << 6); ;
                     otherValue = value;
-
 
                 }
                 else
@@ -1687,7 +1657,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     value = ((FileEditor.getByte(atkCurve6) - FileEditor.getByte(atkStart)) << 6); ;
                     otherValue = value;
 
-
                 }
                 else
                 {
@@ -1995,7 +1964,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //return ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
                     value = ((FileEditor.getByte(defCurve6) - FileEditor.getByte(defStart)) << 6); ;
                     otherValue = value;
-
 
                 }
                 else
@@ -2305,7 +2273,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                     value = ((FileEditor.getByte(agiCurve6) - FileEditor.getByte(agiStart)) << 6); ;
                     otherValue = value;
 
-
                 }
                 else
                 {
@@ -2515,8 +2482,6 @@ namespace SF3.X033_X031_Editor.Models.Items
             }
         }
 
-
-
         public int S1LearnedAt
         {
             get
@@ -2550,8 +2515,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                 FileEditor.setByte(s1LearnedLevel, (byte)value);
             }
         }
-
-
 
         public int S2LearnedAt
         {
@@ -2917,9 +2880,6 @@ namespace SF3.X033_X031_Editor.Models.Items
             }
         }
 
-
-
-
         public int Weapon1Special1
         {
             get
@@ -3024,7 +2984,6 @@ namespace SF3.X033_X031_Editor.Models.Items
             }
         }
 
-
         public int Weapon4Special1
         {
             get
@@ -3059,23 +3018,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                 FileEditor.setByte(weapon4Special3, (byte)value);
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public int BaseLuck
         {
@@ -3372,8 +3314,6 @@ namespace SF3.X033_X031_Editor.Models.Items
                 return (address);
             }
         }
-
-
 
     }
 }

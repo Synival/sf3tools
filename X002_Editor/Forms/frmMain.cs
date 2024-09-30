@@ -15,11 +15,9 @@ using SF3.X002_Editor.Models.Warps;
 using SF3.X002_Editor.Models.MusicOverride;
 using BrightIdeasSoftware;
 
-
 /*
 
 */
-
 
 namespace SF3.X002_Editor.Forms
 {
@@ -27,7 +25,6 @@ namespace SF3.X002_Editor.Forms
     {
         //Used to append to state names to stop program loading states from older versions
         private string Version = "19";
-
 
         public frmMain()
         {
@@ -188,7 +185,6 @@ namespace SF3.X002_Editor.Forms
             return ((MusicOverride)target).MusicOverrideName;
         }
 
-
         /*
         private string getStoreItemTypeName(object target)
         {
@@ -223,7 +219,6 @@ namespace SF3.X002_Editor.Forms
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
-
 
             if (!SpellList.loadSpellList())
             {
@@ -308,10 +303,6 @@ namespace SF3.X002_Editor.Forms
                 objectListView7.AddObjects(WarpList.getWarpList());
             }
 
-
-
-
-
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
             //olvStoreItems.AddObjects(StoreItemList.getStoreItemList());
@@ -335,7 +326,6 @@ namespace SF3.X002_Editor.Forms
                     {
                         //wrong x1 file was selected
                     }
-
 
                 }
                 else
@@ -536,7 +526,6 @@ namespace SF3.X002_Editor.Forms
                 e.Control = cb;
             }*/
 
-
             /*else if (e.Value is StatType) {
                 ComboBox cb = new ComboBox();
                 cb.Bounds = e.CellBounds;
@@ -635,7 +624,6 @@ namespace SF3.X002_Editor.Forms
                 property.SetValue(e.RowObject, value, null);
             }
 
-
             /*else if (e.Value is CharacterClass) {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 CharacterClass value = (CharacterClass)((ComboBox)e.Control).SelectedItem;
@@ -651,8 +639,6 @@ namespace SF3.X002_Editor.Forms
         {
             frmMonsterEditor_Resize(this, new EventArgs());
         }
-
-
 
         private void tabpage_Click(object sender, EventArgs e)
         {
@@ -671,7 +657,6 @@ namespace SF3.X002_Editor.Forms
             public static int scenario = 1;
             //public static int customOffset = 0x00000000;
         }
-
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {

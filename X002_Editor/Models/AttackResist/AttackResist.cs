@@ -1,7 +1,5 @@
 ﻿using static SF3.X002_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X002_Editor.Models.AttackResist
 {
     public class AttackResist
@@ -18,7 +16,6 @@ namespace SF3.X002_Editor.Models.AttackResist
         public AttackResist(int id, string text)
         {
             checkVersion2 = FileEditor.getByte(0x0000000B);
-
 
             if (Globals.scenario == 1)
             {
@@ -41,8 +38,6 @@ namespace SF3.X002_Editor.Models.AttackResist
             else
                 offset = 0x00000dd9; //pd
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -50,11 +45,6 @@ namespace SF3.X002_Editor.Models.AttackResist
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -105,8 +95,6 @@ namespace SF3.X002_Editor.Models.AttackResist
             }
         }
 
-
-
         public int AttackResistAddress
         {
             get
@@ -114,8 +102,6 @@ namespace SF3.X002_Editor.Models.AttackResist
                 return (address);
             }
         }
-
-
 
     }
 }

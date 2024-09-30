@@ -1688,7 +1688,6 @@
         private System.Windows.Forms.TabPage tabPage7;
         private BrightIdeasSoftware.ObjectListView objectListView7;
 
-
         private BrightIdeasSoftware.OLVColumn olvColumn56;
         private BrightIdeasSoftware.OLVColumn olvColumn57;
         private BrightIdeasSoftware.OLVColumn olvColumn58;
@@ -1716,4 +1715,5 @@
         private BrightIdeasSoftware.OLVColumn olvColumn78;
     }
 }
+
 

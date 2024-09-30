@@ -1,7 +1,5 @@
 ﻿using static SF3.X013_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X013_Editor.Models.HealExp
 {
     public class HealExp
@@ -30,8 +28,6 @@ namespace SF3.X013_Editor.Models.HealExp
             else
                 offset = 0x00004b01; //pd
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -39,11 +35,6 @@ namespace SF3.X013_Editor.Models.HealExp
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -81,8 +72,6 @@ namespace SF3.X013_Editor.Models.HealExp
             }
         }
 
-
-
         public int HealExpAddress
         {
             get
@@ -90,8 +79,6 @@ namespace SF3.X013_Editor.Models.HealExp
                 return (address);
             }
         }
-
-
 
     }
 }

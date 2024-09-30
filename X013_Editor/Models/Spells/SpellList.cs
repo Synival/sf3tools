@@ -35,7 +35,6 @@ namespace SF3.X013_Editor.Models.Spells
                 r = "RPD/charactersPD.xml";
             }
 
-
             spellssorted = new Spell[0];
             spells = new Spell[120]; //max size of spellList
             try

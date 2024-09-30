@@ -1,7 +1,5 @@
 ﻿using static SF3.X019_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X019_Editor.Models.Presets
 {
     public class Preset
@@ -34,8 +32,6 @@ namespace SF3.X019_Editor.Models.Presets
             else
                 offset = 0x00005820; //pd
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -43,11 +39,6 @@ namespace SF3.X019_Editor.Models.Presets
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -140,8 +131,6 @@ namespace SF3.X019_Editor.Models.Presets
                 return (address);
             }
         }
-
-
 
     }
 }

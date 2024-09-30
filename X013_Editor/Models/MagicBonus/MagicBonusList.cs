@@ -10,11 +10,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
         private static MagicBonus[] itemssorted;
         private static MagicBonus[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -38,7 +34,6 @@ namespace SF3.X013_Editor.Models.MagicBonus
             {
                 r = "RPD/magicBonusPD.xml";
             }
-
 
             itemssorted = new MagicBonus[0];
             items = new MagicBonus[256]; //max size of itemList

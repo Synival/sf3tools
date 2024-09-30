@@ -10,11 +10,7 @@ namespace SF3.X013_Editor.Models.HealExp
         private static HealExp[] itemssorted;
         private static HealExp[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,8 +19,6 @@ namespace SF3.X013_Editor.Models.HealExp
         public static bool loadHealExpList()
         {
             r = "Resources/HealExpList.xml";
-
-
 
             itemssorted = new HealExp[0];
             items = new HealExp[2]; //max size of itemList

@@ -2,8 +2,6 @@
 using System;
 using static SF3.X1_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X1_Editor.Models.Treasures
 {
     public class Treasure
@@ -14,9 +12,6 @@ namespace SF3.X1_Editor.Models.Treasures
         private int unknown;
         private int eventType;
         private int itemID;
-
-
-
 
         //int pointerValue;
 
@@ -38,12 +33,6 @@ namespace SF3.X1_Editor.Models.Treasures
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-
-
-
-
-
-
         public Treasure(int id, string text)
         {
             if (Globals.scenario == 1)
@@ -62,7 +51,6 @@ namespace SF3.X1_Editor.Models.Treasures
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
 
-
             }
             else if (Globals.scenario == 3)
             {
@@ -70,7 +58,6 @@ namespace SF3.X1_Editor.Models.Treasures
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
-
 
             }
             else if (Globals.scenario == 4)
@@ -89,8 +76,6 @@ namespace SF3.X1_Editor.Models.Treasures
 
             }
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -98,11 +83,6 @@ namespace SF3.X1_Editor.Models.Treasures
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -148,7 +128,6 @@ namespace SF3.X1_Editor.Models.Treasures
                     return "";
                 }
 
-
             }
         }
 
@@ -175,7 +154,6 @@ namespace SF3.X1_Editor.Models.Treasures
                 FileEditor.setWord(eventNumber, value);
             }
         }
-
 
         public int FlagUse
         {
@@ -225,11 +203,6 @@ namespace SF3.X1_Editor.Models.Treasures
             }
         }
 
-
-
-
-
-
         public int TreasureAddress
         {
             get
@@ -237,8 +210,6 @@ namespace SF3.X1_Editor.Models.Treasures
                 return (address);
             }
         }
-
-
 
     }
 }

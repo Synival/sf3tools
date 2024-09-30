@@ -1,7 +1,5 @@
 ﻿using static SF3.X1_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X1_Editor.Models.CustomMovement
 {
     public class CustomMovement
@@ -35,7 +33,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-
                 offset = FileEditor.getDouble(offset);
 
                 if (offset != 0)
@@ -65,8 +62,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
                     offset = offset + 0x84; //size of AITargetPosition
                     //we're now at our offset after adding these
                 }
-
-
 
                 /*
                 offset = 0x00000018; //scn1 initial pointer
@@ -220,8 +215,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
 
             }
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -229,11 +222,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -280,7 +268,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
                 FileEditor.setWord(unknown00, value);
             }
         }
-
 
         public int CustomMovementX1
         {
@@ -386,7 +373,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
             }
         }
 
-
         public int CustomMovementAddress
         {
             get
@@ -394,8 +380,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
                 return (address);
             }
         }
-
-
 
     }
 }

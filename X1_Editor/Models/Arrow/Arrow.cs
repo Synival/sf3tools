@@ -2,8 +2,6 @@
 using System;
 using static SF3.X1_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X1_Editor.Models.Arrows
 {
     public class Arrow
@@ -14,9 +12,6 @@ namespace SF3.X1_Editor.Models.Arrows
         private int warpInMPD; //2 byte
         private int unknown8; //2 byte
         private int unknownA; //2 byte
-
-
-
 
         //int pointerValue;
 
@@ -38,12 +33,6 @@ namespace SF3.X1_Editor.Models.Arrows
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-
-
-
-
-
-
         public Arrow(int id, string text)
         {
             if (Globals.scenario == 2)
@@ -53,7 +42,6 @@ namespace SF3.X1_Editor.Models.Arrows
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
 
-
             }
             else if (Globals.scenario == 3)
             {
@@ -61,7 +49,6 @@ namespace SF3.X1_Editor.Models.Arrows
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
-
 
             }
             else if (Globals.scenario == 4)
@@ -81,8 +68,6 @@ namespace SF3.X1_Editor.Models.Arrows
 
             }*/
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -90,11 +75,6 @@ namespace SF3.X1_Editor.Models.Arrows
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -105,11 +85,6 @@ namespace SF3.X1_Editor.Models.Arrows
             warpInMPD = start + 0x06;
             unknown8 = start + 0x08;
             unknownA = start + 0x0a;
-
-
-
-
-
 
             //unknown42 = start + 52;
             address = offset + (id * 0x0c);
@@ -131,8 +106,6 @@ namespace SF3.X1_Editor.Models.Arrows
                 return name;
             }
         }
-
-
 
         public int ArrowUnknown0
         {
@@ -157,7 +130,6 @@ namespace SF3.X1_Editor.Models.Arrows
                 FileEditor.setWord(textID, value);
             }
         }
-
 
         public int ArrowUnknown4
         {
@@ -207,8 +179,6 @@ namespace SF3.X1_Editor.Models.Arrows
             }
         }
 
-
-
         public int ArrowAddress
         {
             get
@@ -216,8 +186,6 @@ namespace SF3.X1_Editor.Models.Arrows
                 return (address);
             }
         }
-
-
 
     }
 }

@@ -9,11 +9,9 @@ using SF3.X019_Editor.Models.Presets;
 using SF3.X019_Editor.Models.Items;
 using BrightIdeasSoftware;
 
-
 /*
 
 */
-
 
 namespace SF3.X019_Editor.Forms
 {
@@ -21,7 +19,6 @@ namespace SF3.X019_Editor.Forms
     {
         //Used to append to state names to stop program loading states from older versions
         private string Version = "011";
-
 
         public frmMain()
         {
@@ -194,7 +191,6 @@ namespace SF3.X019_Editor.Forms
                 return false;
             }
 
-
             /*if (!SpellList.loadSpellList()) {
                 MessageBox.Show("Could not load Resources/spellList.xml.");
                 return false;
@@ -232,9 +228,6 @@ namespace SF3.X019_Editor.Forms
             objectListView2.AddObjects(ItemList.getItemList());
             objectListView3.AddObjects(ItemList.getItemList());
             objectListView4.AddObjects(ItemList.getItemList());
-
-
-
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -393,7 +386,6 @@ namespace SF3.X019_Editor.Forms
                 e.Control = cb;
             }*/
 
-
             /*else if (e.Value is StatType) {
                 ComboBox cb = new ComboBox();
                 cb.Bounds = e.CellBounds;
@@ -486,7 +478,6 @@ namespace SF3.X019_Editor.Forms
             public static int scenario = 1;
             //public static int customOffset = 0x00000000;
         }
-
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {

@@ -1,8 +1,6 @@
 ﻿using System;
 using static SF3.X013_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X013_Editor.Models.Items
 {
     public class Item
@@ -38,8 +36,6 @@ namespace SF3.X013_Editor.Models.Items
             else
                 offset = 0x00006bf4; //pd
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -47,11 +43,6 @@ namespace SF3.X013_Editor.Models.Items
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -145,7 +136,6 @@ namespace SF3.X013_Editor.Models.Items
                 //y = damageCalculation;
                 //ran is 1
 
-
                 if (FileEditor.getByte(damageCalculation) != 0x64)
                 {
                     r1 = FileEditor.getByte(extraPow); ;
@@ -176,10 +166,6 @@ namespace SF3.X013_Editor.Models.Items
                     r1 = r1 - r2;
                     r1 = r1 + FileEditor.getByte(damageCalculation);
 
-
-
-
-
                     return r1;
                 }
                 else
@@ -189,7 +175,6 @@ namespace SF3.X013_Editor.Models.Items
 
             }
         }
-
 
         public int ranResult1
         {
@@ -417,7 +402,6 @@ namespace SF3.X013_Editor.Models.Items
                     r1 = r3;
                     r1 = r1 - 7;
 
-
                     machh = r1 * r2;
 
                     r2 = machh;
@@ -440,8 +424,6 @@ namespace SF3.X013_Editor.Models.Items
                     return FileEditor.getByte(pow);
                 }
 
-
-
             }
         }
 
@@ -457,7 +439,6 @@ namespace SF3.X013_Editor.Models.Items
                     r3 = 9; //random number
                     r1 = r3;
                     r1 = r1 - 7;
-
 
                     machh = r1 * r2;
 
@@ -476,8 +457,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
-
 
             }
         }
@@ -495,7 +474,6 @@ namespace SF3.X013_Editor.Models.Items
                     r1 = r3;
                     r1 = r1 - 7;
 
-
                     machh = r1 * r2;
 
                     r2 = machh;
@@ -513,8 +491,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
-
 
             }
         }
@@ -532,7 +508,6 @@ namespace SF3.X013_Editor.Models.Items
                     r1 = r3;
                     r1 = r1 - 7;
 
-
                     machh = r1 * r2;
 
                     r2 = machh;
@@ -550,8 +525,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
-
 
             }
         }
@@ -569,7 +542,6 @@ namespace SF3.X013_Editor.Models.Items
                     r1 = r3;
                     r1 = r1 - 7;
 
-
                     machh = r1 * r2;
 
                     r2 = machh;
@@ -587,8 +559,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
-
 
             }
         }
@@ -606,7 +576,6 @@ namespace SF3.X013_Editor.Models.Items
                     r1 = r3;
                     r1 = r1 - 7;
 
-
                     machh = r1 * r2;
 
                     r2 = machh;
@@ -624,8 +593,6 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-
-
 
             }
         }
@@ -643,7 +610,6 @@ namespace SF3.X013_Editor.Models.Items
                     r1 = r3;
                     r1 = r1 - 7;
 
-
                     machh = r1 * r2;
 
                     r2 = machh;
@@ -662,12 +628,8 @@ namespace SF3.X013_Editor.Models.Items
                     return FileEditor.getByte(pow);
                 }
 
-
-
             }
         }
-
-
 
         public int Address
         {
@@ -676,8 +638,6 @@ namespace SF3.X013_Editor.Models.Items
                 return (address);
             }
         }
-
-
 
     }
 }

@@ -2,8 +2,6 @@
 using System;
 using static SF3.X002_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X002_Editor.Models.Warps
 {
     public class Warp
@@ -12,9 +10,6 @@ namespace SF3.X002_Editor.Models.Warps
         private int unknown2;
         private int type;
         private int map;
-
-
-
 
         //int pointerValue;
 
@@ -36,33 +31,18 @@ namespace SF3.X002_Editor.Models.Warps
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-
-
-
-
-
-
         public Warp(int id, string text)
         {
             //no scn1 for this
-
 
             if (Globals.scenario == 1)
             {
                 offset = 0x000053cc; //scn1
 
-
             }
-
-
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -117,7 +97,6 @@ namespace SF3.X002_Editor.Models.Warps
             }
         }
 
-
         public int WarpType
         {
             get
@@ -142,11 +121,6 @@ namespace SF3.X002_Editor.Models.Warps
             }
         }
 
-
-
-
-
-
         public int WarpAddress
         {
             get
@@ -154,8 +128,6 @@ namespace SF3.X002_Editor.Models.Warps
                 return (address);
             }
         }
-
-
 
     }
 }

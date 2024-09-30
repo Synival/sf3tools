@@ -2,8 +2,6 @@
 using System;
 using static SF3.X1_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X1_Editor.Models.Npcs
 {
     public class Npc
@@ -19,9 +17,6 @@ namespace SF3.X1_Editor.Models.Npcs
         private int unknownE;
         private int unknown12;
         private int unknown16;
-
-
-
 
         //int pointerValue;
 
@@ -43,12 +38,6 @@ namespace SF3.X1_Editor.Models.Npcs
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-
-
-
-
-
-
         public Npc(int id, string text)
         {
             if (Globals.scenario == 1)
@@ -67,7 +56,6 @@ namespace SF3.X1_Editor.Models.Npcs
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
 
-
             }
             else if (Globals.scenario == 3)
             {
@@ -75,7 +63,6 @@ namespace SF3.X1_Editor.Models.Npcs
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
-
 
             }
             else if (Globals.scenario == 4)
@@ -94,8 +81,6 @@ namespace SF3.X1_Editor.Models.Npcs
 
             }*/
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -103,11 +88,6 @@ namespace SF3.X1_Editor.Models.Npcs
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -123,11 +103,6 @@ namespace SF3.X1_Editor.Models.Npcs
             unknown12 = start + 0x12;
             direction = start + 0x14;
             unknown16 = start + 0x16;
-
-
-
-
-
 
             //unknown42 = start + 52;
             address = offset + (id * 0x18);
@@ -168,7 +143,6 @@ namespace SF3.X1_Editor.Models.Npcs
                     return "";
                 }
 
-
             }
         }
 
@@ -195,7 +169,6 @@ namespace SF3.X1_Editor.Models.Npcs
                 FileEditor.setWord(unknown1, value);
             }
         }
-
 
         public int NpcTable
         {
@@ -305,11 +278,6 @@ namespace SF3.X1_Editor.Models.Npcs
             }
         }
 
-
-
-
-
-
         public int NpcAddress
         {
             get
@@ -317,8 +285,6 @@ namespace SF3.X1_Editor.Models.Npcs
                 return (address);
             }
         }
-
-
 
     }
 }

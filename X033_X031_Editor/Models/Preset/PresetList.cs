@@ -35,8 +35,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
                 r = "RPD/classEquipPD.xml";
             }
 
-
-
             presetssorted = new Preset[0];
             presets = new Preset[100]; //max size of spellIndexList
             try

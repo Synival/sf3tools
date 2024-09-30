@@ -10,11 +10,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         private static WeaponLevel[] itemssorted;
         private static WeaponLevel[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,8 +19,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         public static bool loadWeaponLevelList()
         {
             r = "Resources/WeaponLevel.xml";
-
-
 
             itemssorted = new WeaponLevel[0];
             items = new WeaponLevel[2]; //max size of itemList

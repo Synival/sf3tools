@@ -35,7 +35,6 @@ namespace SF3.IconPointerEditor.Models.Spells
                 r = "RPD/spellListPD.xml";
             }
 
-
             spellssorted = new Spell[0];
             spells = new Spell[75]; //max size of spellList
             try

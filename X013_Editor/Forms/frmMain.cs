@@ -20,11 +20,9 @@ using SF3.X013_Editor.Models.WeaponSpellRank;
 using SF3.X013_Editor.Models.StatusEffects;
 using BrightIdeasSoftware;
 
-
 /*
 
 */
-
 
 namespace SF3.X013_Editor.Forms
 {
@@ -32,7 +30,6 @@ namespace SF3.X013_Editor.Forms
     {
         //Used to append to state names to stop program loading states from older versions
         private string Version = "16";
-
 
         public frmMain()
         {
@@ -252,7 +249,6 @@ namespace SF3.X013_Editor.Forms
                 return false;
             }
 
-
             if (!SpellList.loadSpellList())
             {
                 MessageBox.Show("Could not load Resources/characters.xml.");
@@ -327,7 +323,6 @@ namespace SF3.X013_Editor.Forms
                 return false;
             }
 
-
             //BlacksmithList.loadBlacksmithList();
             //StoreItemList.loadStoreItemList();
             //SpellEntryList.loadSpellEntryList();
@@ -371,7 +366,6 @@ namespace SF3.X013_Editor.Forms
             objectListView11.AddObjects(HealExpList.getHealExpList());
             objectListView12.AddObjects(WeaponSpellRankList.getWeaponSpellRankList());
             objectListView13.AddObjects(StatusEffectList.getStatusEffectList());
-
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -549,7 +543,6 @@ namespace SF3.X013_Editor.Forms
                 e.Control = cb;
             }*/
 
-
             /*else if (e.Value is StatType) {
                 ComboBox cb = new ComboBox();
                 cb.Bounds = e.CellBounds;
@@ -643,7 +636,6 @@ namespace SF3.X013_Editor.Forms
             //public static int customOffset = 0x00000000;
         }
 
-
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Globals.scenario = 1;
@@ -663,9 +655,6 @@ namespace SF3.X013_Editor.Forms
         {
             Globals.scenario = 4;
         }
-
-
-
 
     }
 }

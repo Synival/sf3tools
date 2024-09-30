@@ -10,11 +10,7 @@ namespace SF3.X013_Editor.Models.ExpLimit
         private static ExpLimit[] itemssorted;
         private static ExpLimit[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,8 +19,6 @@ namespace SF3.X013_Editor.Models.ExpLimit
         public static bool loadExpLimitList()
         {
             r = "Resources/ExpLimitList.xml";
-
-
 
             itemssorted = new ExpLimit[0];
             items = new ExpLimit[2]; //max size of itemList

@@ -9,11 +9,9 @@ using SF3.X033_X031_Editor.Models.Items;
 using SF3.X033_X031_Editor.Models.WeaponLevel;
 using BrightIdeasSoftware;
 
-
 /*
 
 */
-
 
 namespace SF3.X033_X031_Editor.Forms
 {
@@ -21,7 +19,6 @@ namespace SF3.X033_X031_Editor.Forms
     {
         //Used to append to state names to stop program loading states from older versions
         private string Version = "018";
-
 
         public frmMain()
         {
@@ -244,8 +241,6 @@ namespace SF3.X033_X031_Editor.Forms
             objectListView5.AddObjects(WeaponLevelList.getWeaponLevelList());
             objectListView6.AddObjects(ItemList.getItemList());
 
-
-
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
             //olvStoreItems.AddObjects(StoreItemList.getStoreItemList());
@@ -396,7 +391,6 @@ namespace SF3.X033_X031_Editor.Forms
                 e.Control = cb;
             }
 
-
             /*else if (e.Value is StatType) {
                 ComboBox cb = new ComboBox();
                 cb.Bounds = e.CellBounds;
@@ -493,7 +487,6 @@ namespace SF3.X033_X031_Editor.Forms
             public static int debugs = 0;
         }
 
-
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Globals.scenario = 1;
@@ -531,7 +524,6 @@ namespace SF3.X033_X031_Editor.Forms
             objectListView6.ClearObjects();
             objectListView6.AddObjects(ItemList.getItemList());
         }
-
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -2,8 +2,6 @@
 using System;
 using static SF3.X1_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X1_Editor.Models.Enters
 {
     public class Enter
@@ -16,9 +14,6 @@ namespace SF3.X1_Editor.Models.Enters
         private int direction; //2 byte
         private int camera; //2 byte
         private int unknownE; //2 byte
-
-
-
 
         //int pointerValue;
 
@@ -40,12 +35,6 @@ namespace SF3.X1_Editor.Models.Enters
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-
-
-
-
-
-
         public Enter(int id, string text)
         {
             if (Globals.scenario == 1)
@@ -64,7 +53,6 @@ namespace SF3.X1_Editor.Models.Enters
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
 
-
             }
             else if (Globals.scenario == 3)
             {
@@ -72,7 +60,6 @@ namespace SF3.X1_Editor.Models.Enters
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
-
 
             }
             else if (Globals.scenario == 4)
@@ -92,8 +79,6 @@ namespace SF3.X1_Editor.Models.Enters
 
             }*/
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -101,11 +86,6 @@ namespace SF3.X1_Editor.Models.Enters
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -118,11 +98,6 @@ namespace SF3.X1_Editor.Models.Enters
             direction = start + 0x0a;
             camera = start + 0x0c;
             unknownE = start + 0x0e;
-
-
-
-
-
 
             //unknown42 = start + 52;
             address = offset + (id * 0x10);
@@ -144,8 +119,6 @@ namespace SF3.X1_Editor.Models.Enters
                 return name;
             }
         }
-
-
 
         public int Entered
         {
@@ -170,7 +143,6 @@ namespace SF3.X1_Editor.Models.Enters
                 FileEditor.setWord(unknown2, value);
             }
         }
-
 
         public int EnterXPos
         {
@@ -244,8 +216,6 @@ namespace SF3.X1_Editor.Models.Enters
             }
         }
 
-
-
         public int EnterAddress
         {
             get
@@ -253,8 +223,6 @@ namespace SF3.X1_Editor.Models.Enters
                 return (address);
             }
         }
-
-
 
     }
 }

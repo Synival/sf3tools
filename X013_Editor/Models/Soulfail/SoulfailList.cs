@@ -10,11 +10,7 @@ namespace SF3.X013_Editor.Models.Soulfail
         private static Soulfail[] itemssorted;
         private static Soulfail[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,7 +19,6 @@ namespace SF3.X013_Editor.Models.Soulfail
         public static bool loadSoulfailList()
         {
             r = "Resources/Soulfail.xml";
-
 
             itemssorted = new Soulfail[0];
             items = new Soulfail[1]; //max size of itemList

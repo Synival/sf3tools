@@ -1,7 +1,5 @@
 ﻿using static SF3.X013_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X013_Editor.Models.ExpLimit
 {
     public class ExpLimit
@@ -31,8 +29,6 @@ namespace SF3.X013_Editor.Models.ExpLimit
             else
                 offset = 0x000021ab; //pd
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -40,11 +36,6 @@ namespace SF3.X013_Editor.Models.ExpLimit
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -94,7 +85,6 @@ namespace SF3.X013_Editor.Models.ExpLimit
             }
         }
 
-
         public int ExpLimitAddress
         {
             get
@@ -102,8 +92,6 @@ namespace SF3.X013_Editor.Models.ExpLimit
                 return (address);
             }
         }
-
-
 
     }
 }

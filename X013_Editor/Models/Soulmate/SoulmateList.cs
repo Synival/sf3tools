@@ -10,11 +10,7 @@ namespace SF3.X013_Editor.Models.Soulmate
         private static Soulmate[] itemssorted;
         private static Soulmate[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,7 +19,6 @@ namespace SF3.X013_Editor.Models.Soulmate
         public static bool loadSoulmateList()
         {
             r = "Resources/SoulmateList.xml";
-
 
             itemssorted = new Soulmate[0];
             items = new Soulmate[1771]; //max size of itemList

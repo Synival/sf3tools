@@ -1,7 +1,5 @@
 ﻿using static SF3.X013_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X013_Editor.Models.Critrate
 {
     public class Critrate
@@ -35,8 +33,6 @@ namespace SF3.X013_Editor.Models.Critrate
             else
                 offset = 0x000070b8; //pd
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -44,11 +40,6 @@ namespace SF3.X013_Editor.Models.Critrate
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -147,7 +138,6 @@ namespace SF3.X013_Editor.Models.Critrate
             }
         }
 
-
         public int CritrateAddress
         {
             get
@@ -155,8 +145,6 @@ namespace SF3.X013_Editor.Models.Critrate
                 return (address);
             }
         }
-
-
 
     }
 }

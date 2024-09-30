@@ -10,11 +10,7 @@ namespace SF3.X002_Editor.Models.WeaponRank
         private static WeaponRank[] itemssorted;
         private static WeaponRank[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,7 +19,6 @@ namespace SF3.X002_Editor.Models.WeaponRank
         public static bool loadWeaponRankList()
         {
             r = "Resources/WeaponRankList.xml";
-
 
             itemssorted = new WeaponRank[0];
             items = new WeaponRank[5]; //max size of itemList

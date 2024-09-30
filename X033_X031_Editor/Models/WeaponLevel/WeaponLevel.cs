@@ -1,7 +1,5 @@
 ﻿using static SF3.X033_X031_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X033_X031_Editor.Models.WeaponLevel
 {
     public class WeaponLevel
@@ -11,7 +9,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         private int level2;
         private int level3;
         private int level4;
-
 
         private int address;
         private int offset;
@@ -26,9 +23,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
             checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = FileEditor.getByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
 
-
-
-
             if (Globals.scenario == 1)
             {
                 if (checkType == 0x07)
@@ -39,7 +33,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
                 {
                     offset = 0x00000d64; //x031
                 }
-
 
             }
             else if (Globals.scenario == 2)
@@ -92,8 +85,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
                 }
             }
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -101,11 +92,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -115,8 +101,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
             level2 = start + 0x06;
             level3 = start + 0x0a;
             level4 = start + 0x0e;
-
-
 
             address = offset + (id * 0x11);
             //address = 0x0354c + (id * 0x18);
@@ -183,7 +167,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
             }
         }
 
-
         public int WeaponLevelAddress
         {
             get
@@ -191,8 +174,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
                 return (address);
             }
         }
-
-
 
     }
 }

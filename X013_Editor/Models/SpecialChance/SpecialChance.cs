@@ -1,7 +1,5 @@
 ﻿using static SF3.X013_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X013_Editor.Models.SpecialChance
 {
     public class SpecialChance
@@ -12,7 +10,6 @@ namespace SF3.X013_Editor.Models.SpecialChance
         private int fourSpecials4;
         private int fourSpecials3;
         private int fourSpecials2;
-
 
         private int address;
         private int offset;
@@ -37,8 +34,6 @@ namespace SF3.X013_Editor.Models.SpecialChance
             else
                 offset = 0x000027c2; //pd
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -46,11 +41,6 @@ namespace SF3.X013_Editor.Models.SpecialChance
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -102,8 +92,6 @@ namespace SF3.X013_Editor.Models.SpecialChance
 
                 address = offset + (id * 0x3a);
             }
-
-
 
             //address = 0x0354c + (id * 0x18);
 
@@ -193,8 +181,6 @@ namespace SF3.X013_Editor.Models.SpecialChance
             }
         }
 
-
-
         public int SpecialChanceAddress
         {
             get
@@ -202,8 +188,6 @@ namespace SF3.X013_Editor.Models.SpecialChance
                 return (address);
             }
         }
-
-
 
     }
 }

@@ -1,7 +1,5 @@
 ﻿using static SF3.X002_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X002_Editor.Models.Spells
 {
     public class Spell
@@ -56,8 +54,6 @@ namespace SF3.X002_Editor.Models.Spells
             else
                 offset = 0x0000521c; //pd
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -65,11 +61,6 @@ namespace SF3.X002_Editor.Models.Spells
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -342,8 +333,6 @@ namespace SF3.X002_Editor.Models.Spells
                 return (address);
             }
         }
-
-
 
     }
 }

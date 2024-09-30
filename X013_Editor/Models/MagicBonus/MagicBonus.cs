@@ -1,7 +1,5 @@
 ﻿using static SF3.X013_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X013_Editor.Models.MagicBonus
 {
     public class MagicBonus
@@ -14,7 +12,6 @@ namespace SF3.X013_Editor.Models.MagicBonus
         private int lightBonus;
         private int darkBonus;
         private int unknownBonus;
-
 
         private int address;
         private int offset;
@@ -39,8 +36,6 @@ namespace SF3.X013_Editor.Models.MagicBonus
             else
                 offset = 0x00006914; //pd
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -48,11 +43,6 @@ namespace SF3.X013_Editor.Models.MagicBonus
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -84,8 +74,6 @@ namespace SF3.X013_Editor.Models.MagicBonus
 
                 address = offset + (id * 0x8);
             }
-
-
 
             //address = 0x0354c + (id * 0x18);
 
@@ -199,7 +187,6 @@ namespace SF3.X013_Editor.Models.MagicBonus
             }
         }
 
-
         public int MagicAddress
         {
             get
@@ -207,8 +194,6 @@ namespace SF3.X013_Editor.Models.MagicBonus
                 return (address);
             }
         }
-
-
 
     }
 }

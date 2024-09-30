@@ -10,11 +10,7 @@ namespace SF3.X013_Editor.Models.Stats
         private static Stat[] itemssorted;
         private static Stat[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,8 +19,6 @@ namespace SF3.X013_Editor.Models.Stats
         public static bool loadStatList()
         {
             r = "Resources/StatList.xml";
-
-
 
             itemssorted = new Stat[0];
             items = new Stat[256]; //max size of itemList

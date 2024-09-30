@@ -17,11 +17,9 @@ using SF3.X1_Editor.Models.Enters;
 using SF3.X1_Editor.Models.Arrows;
 using BrightIdeasSoftware;
 
-
 /*
 
 */
-
 
 namespace SF3.X1_Editor.Forms
 {
@@ -31,15 +29,10 @@ namespace SF3.X1_Editor.Forms
         private string Version = "033";
         private bool isBattle = true;
 
-
         public frmMain()
         {
             InitializeComponent();
             frmMonsterEditor_Resize(this, new EventArgs());
-
-
-
-
 
             /*try {
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
@@ -221,11 +214,8 @@ namespace SF3.X1_Editor.Forms
         {
             saveAsToolStripMenuItem.Enabled = true;
 
-
-
             int offset = 0;
             int sub = 0;
-
 
             if (Globals.scenario == 1)
             {
@@ -289,12 +279,10 @@ namespace SF3.X1_Editor.Forms
 
             updateText();
 
-
             //attempt to detect scenario that failed
             /*if (offset > 0x06067fff || offset < 0x0605e000)
             {
                 //Console.WriteLine(offset.ToString("X"));
-
 
                 olvItems.ClearObjects();
                 objectListView1.ClearObjects();
@@ -313,9 +301,6 @@ namespace SF3.X1_Editor.Forms
                 return false;
             }    
             else*/
-
-
-
 
             /*if (!StoreItemTypeList.loadStoreItemTypeList()) {
                 MessageBox.Show("Could not load Resources/storeitemtypes.xml.");
@@ -342,7 +327,6 @@ namespace SF3.X1_Editor.Forms
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
-
 
             /*if (!SpellList.loadSpellList()) {
                 MessageBox.Show("Could not load Resources/spellList.xml.");
@@ -411,7 +395,6 @@ namespace SF3.X1_Editor.Forms
                 return false;
             }
 
-
             //BlacksmithList.loadBlacksmithList();
             //StoreItemList.loadStoreItemList();
             //SpellEntryList.loadSpellEntryList();
@@ -469,8 +452,6 @@ namespace SF3.X1_Editor.Forms
                 objectListView14.AddObjects(ArrowList.getArrowList());
             }
 
-
-
             if (Globals.scenario != 1 && Globals.scenario != 5)
             {
                 objectListView10.AddObjects(WarpList.getWarpList());
@@ -479,8 +460,6 @@ namespace SF3.X1_Editor.Forms
             {
                 objectListView11.AddObjects(TileList.getTileList());
             }
-
-
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -674,7 +653,6 @@ namespace SF3.X1_Editor.Forms
                 e.Control = cb;
             }*/
 
-
             /*else if (e.Value is StatType) {
                 ComboBox cb = new ComboBox();
                 cb.Bounds = e.CellBounds;
@@ -742,7 +720,6 @@ namespace SF3.X1_Editor.Forms
                 Preset value = (Preset)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
 
-
             }*/ /*else if (e.Value is CharacterClass) {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 CharacterClass value = (CharacterClass)((ComboBox)e.Control).SelectedItem;
@@ -776,7 +753,6 @@ namespace SF3.X1_Editor.Forms
 
             //public static int customOffset = 0x00000000;
         }
-
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -879,8 +855,6 @@ namespace SF3.X1_Editor.Forms
             updateText();
 
         }
-
-
 
         private void treasureDebugToggleOffToolStripMenuItem_Click(object sender, EventArgs e)
         {

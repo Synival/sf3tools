@@ -41,7 +41,6 @@ namespace SF3.X1_Editor.Models.AI
                 r = "Resources/X1AIOther.xml";
             }*/
 
-
             spellssorted = new AI[0];
             spells = new AI[130]; //max size of spellList
             try

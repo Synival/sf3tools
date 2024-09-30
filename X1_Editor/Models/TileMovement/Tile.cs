@@ -2,8 +2,6 @@
 using System;
 using static SF3.X1_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X1_Editor.Models.Tiles
 {
     public class Tile
@@ -27,7 +25,6 @@ namespace SF3.X1_Editor.Models.Tiles
         private int unknown0e;
         private int unknown0f;
 
-
         private int offset;
         private int address;
 
@@ -47,7 +44,6 @@ namespace SF3.X1_Editor.Models.Tiles
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //second pointer
 
-
                 /*offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
@@ -55,8 +51,6 @@ namespace SF3.X1_Editor.Models.Tiles
                 offset = FileEditor.getDouble(offset);
 
                 offset = offset - sub + 0x7c; //second pointer*/
-
-
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
@@ -95,14 +89,6 @@ namespace SF3.X1_Editor.Models.Tiles
 
                 }
 
-
-
-
-
-
-
-
-
                 /*
                 offset = 0x000001c4;
                     sub = 0x0605e000;
@@ -113,10 +99,6 @@ namespace SF3.X1_Editor.Models.Tiles
                     offset = FileEditor.getDouble(offset);
                     offset = offset - sub; //second pointer
                 /*
-
-
-
-
 
                 /*
                 //work around for x1btl330-339 not being consistant with everything else
@@ -129,8 +111,6 @@ namespace SF3.X1_Editor.Models.Tiles
                 //offset = FileEditor.getDouble(offset);
                 //offset = offset - sub; //second pointer
                 */
-
-
 
                 /*
                 offset = 0x00000024; //scn2 initial pointer
@@ -163,9 +143,6 @@ namespace SF3.X1_Editor.Models.Tiles
                 */
             }
 
-
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -174,16 +151,9 @@ namespace SF3.X1_Editor.Models.Tiles
             index = id;
             name = text;
 
-
-
-
-
-
             //int start = 0x354c + (id * 24);
 
             int start = offset + (id * 0x10);
-
-
 
             noEntry = start;
             unknown01 = start + 1;
@@ -202,7 +172,6 @@ namespace SF3.X1_Editor.Models.Tiles
             unknown0d = start + 0xd;
             unknown0e = start + 0xe;
             unknown0f = start + 0xf;
-
 
             address = offset + (id * 0x10);
             //address = 0x0354c + (id * 0x18);
@@ -412,7 +381,6 @@ namespace SF3.X1_Editor.Models.Tiles
             }
         }
 
-
         /*public int Map
         {
             get
@@ -421,7 +389,6 @@ namespace SF3.X1_Editor.Models.Tiles
             }
         }*/
 
-
         public int TileAddress
         {
             get
@@ -429,8 +396,6 @@ namespace SF3.X1_Editor.Models.Tiles
                 return (address);
             }
         }
-
-
 
     }
 }

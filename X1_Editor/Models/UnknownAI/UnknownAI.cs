@@ -1,7 +1,5 @@
 ﻿using static SF3.X1_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X1_Editor.Models.UnknownAI
 {
     public class UnknownAI
@@ -16,7 +14,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
         private int unknown0E;
         private int unknown10;
         //private int unknown42;
-
 
         //int pointerValue;
 
@@ -38,12 +35,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-
-
-
-
-
-
         public UnknownAI(int id, string text)
         {
             if (Globals.scenario == 1)
@@ -54,7 +45,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
                 offset = offset - sub; //first pointer
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
-
 
                 offset = FileEditor.getDouble(offset);
 
@@ -80,8 +70,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
                     offset = offset + 10;
                     offset = offset + 0xEa0;
                 }
-
-
 
                 /*
                 offset = 0x00000018; //scn1 initial pointer
@@ -218,8 +206,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
                 offset = offset + 0xea0;
             }
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -227,11 +213,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -381,8 +362,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
                 return (address);
             }
         }
-
-
 
     }
 }

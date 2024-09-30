@@ -10,11 +10,7 @@ namespace SF3.X019_Editor.Models.Items
         private static Item[] itemssorted;
         private static Item[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -42,7 +38,6 @@ namespace SF3.X019_Editor.Models.Items
             {
                 r = "RPDX44/X044List.xml";
             }
-
 
             itemssorted = new Item[0];
             items = new Item[256]; //max size of itemList

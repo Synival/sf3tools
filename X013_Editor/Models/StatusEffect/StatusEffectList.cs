@@ -12,9 +12,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
         private static StatusEffect[] itemssorted;
         private static StatusEffect[] items;
 
-
         private static string r = "";
-
 
         /// <summary>
         /// Initialises static class
@@ -23,8 +21,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
         public static bool loadStatusEffectList()
         {
             r = "Resources/StatusGroupList.xml";
-
-
 
             itemssorted = new StatusEffect[0];
             items = new StatusEffect[1000]; //max size of itemList
@@ -46,7 +42,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
                 //Globals.treasureDebug = true;
                 //while (!xml.EOF && (itemssorted.Length == 0 || itemssorted[itemssorted.Length - 1].Searched != 0xffff))
 
-
                 while (!xml.EOF)
                 //while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].Searched != 0xffff || itemssorted[itemssorted.Length - 1].EventNumber != 0xffff)))
                 //while (!xml.EOF && (itemssorted.Length == 0 || myCount <= 2))
@@ -61,26 +56,12 @@ namespace SF3.X013_Editor.Models.StatusEffects
                             old.CopyTo(itemssorted, 0);
                             itemssorted[old.Length] = new StatusEffect(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
 
-
-
-
-
-
-
                             items[itemssorted[old.Length].StatusEffectID] = itemssorted[old.Length];
-
-
 
                         }
 
                     }
                 }
-
-
-
-
-
-
 
                 stream.Close();
             }
@@ -106,9 +87,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
     }
 }
 
-
-
-
 /*
 using System;
 using System.Xml;
@@ -123,11 +101,7 @@ namespace SF3.X013_Editor.Models.Treasures
         private static List<Item> itemssorted;
         private static Dictionary<int, Item> items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -151,7 +125,6 @@ namespace SF3.X013_Editor.Models.Treasures
             {
                 r = "Resources/PDSpells.xml";
             }
-
 
             itemssorted = new List<Item>(256);
             items = new Dictionary<int, Item>(256); //max size of itemList

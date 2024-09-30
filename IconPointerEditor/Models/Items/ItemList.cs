@@ -11,11 +11,7 @@ namespace SF3.IconPointerEditor.Models.Items
         private static Item[] itemssorted;
         private static Item[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -39,7 +35,6 @@ namespace SF3.IconPointerEditor.Models.Items
             {
                 r = "Resources/PDSpells.xml";
             }
-
 
             itemssorted = new Item[0];
             items = new Item[256]; //max size of itemList

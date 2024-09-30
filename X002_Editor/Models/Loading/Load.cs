@@ -1,7 +1,5 @@
 ﻿using static SF3.X002_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X002_Editor.Models.Loading
 {
     public class Loading
@@ -37,7 +35,6 @@ namespace SF3.X002_Editor.Models.Loading
                     offset = offset - 0x44;
                 }
 
-
             }
             else if (Globals.scenario == 3)
             {
@@ -46,8 +43,6 @@ namespace SF3.X002_Editor.Models.Loading
             else
                 offset = 0x000058bc; //pd
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -55,11 +50,6 @@ namespace SF3.X002_Editor.Models.Loading
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -195,8 +185,6 @@ namespace SF3.X002_Editor.Models.Loading
                 return (address);
             }
         }
-
-
 
     }
 }

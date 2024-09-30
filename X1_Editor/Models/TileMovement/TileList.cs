@@ -20,9 +20,6 @@ namespace SF3.X1_Editor.Models.Tiles
         {
             r = "Resources/MovementTypes.xml";
 
-
-
-
             tilessorted = new Tile[0];
             tiles = new Tile[31]; //max size of spellIndexList
             try

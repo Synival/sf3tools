@@ -11,9 +11,7 @@ namespace SF3.X1_Editor.Models.Npcs
         private static Npc[] itemssorted;
         private static Npc[] items;
 
-
         private static string r = "";
-
 
         /// <summary>
         /// Initialises static class
@@ -22,8 +20,6 @@ namespace SF3.X1_Editor.Models.Npcs
         public static bool loadNpcList()
         {
             r = "Resources/X1Npc.xml";
-
-
 
             itemssorted = new Npc[0];
             items = new Npc[100]; //max size of itemList
@@ -64,7 +60,6 @@ namespace SF3.X1_Editor.Models.Npcs
                                     myCount = 1 + myCount;
                                 }
 
-
                             }
 
                         }
@@ -92,18 +87,11 @@ namespace SF3.X1_Editor.Models.Npcs
                                     myCount = 1 + myCount;
                                 }
 
-
                             }
 
                         }
                     }
                 }
-
-
-
-
-
-
 
                 stream.Close();
             }
@@ -129,9 +117,6 @@ namespace SF3.X1_Editor.Models.Npcs
     }
 }
 
-
-
-
 /*
 using System;
 using System.Xml;
@@ -146,11 +131,7 @@ namespace SF3.X1_Editor.Models.Treasures
         private static List<Item> itemssorted;
         private static Dictionary<int, Item> items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -174,7 +155,6 @@ namespace SF3.X1_Editor.Models.Treasures
             {
                 r = "Resources/PDSpells.xml";
             }
-
 
             itemssorted = new List<Item>(256);
             items = new Dictionary<int, Item>(256); //max size of itemList

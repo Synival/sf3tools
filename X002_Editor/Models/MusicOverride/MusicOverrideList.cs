@@ -10,11 +10,7 @@ namespace SF3.X002_Editor.Models.MusicOverride
         private static MusicOverride[] itemssorted;
         private static MusicOverride[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -38,7 +34,6 @@ namespace SF3.X002_Editor.Models.MusicOverride
             {
                 r = "RPD/musicOverrideListPD.xml";
             }
-
 
             itemssorted = new MusicOverride[0];
             items = new MusicOverride[300]; //max size of itemList

@@ -35,10 +35,6 @@ namespace SF3.IconPointerEditor.Models.Presets
                 r = "Resources/PDItems.xml";
             }
 
-
-
-
-
             presetssorted = new Preset[0];
             presets = new Preset[300]; //max size 
             try

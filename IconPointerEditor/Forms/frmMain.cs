@@ -8,11 +8,9 @@ using SF3.IconPointerEditor.Models.Presets;
 using SF3.IconPointerEditor.Models.Items;
 using BrightIdeasSoftware;
 
-
 /*
 
 */
-
 
 namespace SF3.IconPointerEditor.Forms
 {
@@ -20,7 +18,6 @@ namespace SF3.IconPointerEditor.Forms
     {
         //Used to append to state names to stop program loading states from older versions
         private string Version = "007";
-
 
         public frmMain()
         {
@@ -193,7 +190,6 @@ namespace SF3.IconPointerEditor.Forms
                 return false;
             }
 
-
             /*if (!SpellList.loadSpellList()) {
                 MessageBox.Show("Could not load Resources/spellList.xml.");
                 return false;
@@ -225,9 +221,6 @@ namespace SF3.IconPointerEditor.Forms
 
             olvItems.AddObjects(PresetList.getPresetList());
             objectListView1.AddObjects(ItemList.getItemList());
-
-
-
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -383,7 +376,6 @@ namespace SF3.IconPointerEditor.Forms
                 e.Control = cb;
             }
 
-
             /*else if (e.Value is StatType) {
                 ComboBox cb = new ComboBox();
                 cb.Bounds = e.CellBounds;
@@ -481,8 +473,6 @@ namespace SF3.IconPointerEditor.Forms
             public static string toggle = "Off";
         }
 
-
-
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Globals.scenario = 1;
@@ -515,7 +505,6 @@ namespace SF3.IconPointerEditor.Forms
         {
         }
 
-
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
         }
@@ -539,7 +528,6 @@ namespace SF3.IconPointerEditor.Forms
                 updateText();
             }
         }
-
 
         private void updateText()
         {

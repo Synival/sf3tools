@@ -1,7 +1,5 @@
 ﻿using static SF3.X013_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X013_Editor.Models.WeaponSpellRank
 {
     public class WeaponSpellRank
@@ -34,8 +32,6 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
             else
                 offset = 0x00006BE0; //pd
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -43,11 +39,6 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -133,7 +124,6 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
             }
         }
 
-
         public int WeaponSpellRankAddress
         {
             get
@@ -141,8 +131,6 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
                 return (address);
             }
         }
-
-
 
     }
 }

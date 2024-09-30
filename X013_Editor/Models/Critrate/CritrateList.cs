@@ -10,11 +10,7 @@ namespace SF3.X013_Editor.Models.Critrate
         private static Critrate[] itemssorted;
         private static Critrate[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,8 +19,6 @@ namespace SF3.X013_Editor.Models.Critrate
         public static bool loadCritrateList()
         {
             r = "Resources/CritrateList.xml";
-
-
 
             itemssorted = new Critrate[0];
             items = new Critrate[3]; //max size of itemList

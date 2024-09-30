@@ -35,8 +35,6 @@ namespace SF3.X019_Editor.Models.Presets
                 r = "RPD/spellListIndexPD.xml";
             }
 
-
-
             presetssorted = new Preset[0];
             presets = new Preset[31]; //max size of spellIndexList
             try

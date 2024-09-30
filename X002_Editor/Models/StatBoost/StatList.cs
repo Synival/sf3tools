@@ -10,11 +10,7 @@ namespace SF3.X002_Editor.Models.StatBoost
         private static StatBoost[] itemssorted;
         private static StatBoost[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,7 +19,6 @@ namespace SF3.X002_Editor.Models.StatBoost
         public static bool loadStatList()
         {
             r = "Resources/statList.xml";
-
 
             itemssorted = new StatBoost[0];
             items = new StatBoost[300]; //max size of itemList

@@ -10,11 +10,7 @@ namespace SF3.X002_Editor.Models.AttackResist
         private static AttackResist[] itemssorted;
         private static AttackResist[] items;
 
-
         private static string r = "";
-
-
-
 
         /// <summary>
         /// Initialises static class
@@ -23,7 +19,6 @@ namespace SF3.X002_Editor.Models.AttackResist
         public static bool loadAttackResistList()
         {
             r = "Resources/AttackResistList.xml";
-
 
             itemssorted = new AttackResist[0];
             items = new AttackResist[2]; //max size of itemList

@@ -1,7 +1,5 @@
 ﻿using static SF3.X1_Editor.Forms.frmMain;
 
-
-
 namespace SF3.X1_Editor.Models.Presets
 {
     public class Preset
@@ -53,8 +51,6 @@ namespace SF3.X1_Editor.Models.Presets
                     offset = FileEditor.getDouble(offset);
                     offset = offset - sub; //third pointer
                 }
-
-
 
                 /*
                 offset = 0x00000018; //scn1 initial pointer
@@ -116,7 +112,6 @@ namespace SF3.X1_Editor.Models.Presets
 
                 offset = FileEditor.getDouble(offset);
 
-
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -174,8 +169,6 @@ namespace SF3.X1_Editor.Models.Presets
 
             }
 
-
-
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
@@ -183,11 +176,6 @@ namespace SF3.X1_Editor.Models.Presets
 
             index = id;
             name = text;
-
-
-
-
-
 
             //int start = 0x354c + (id * 24);
 
@@ -203,7 +191,6 @@ namespace SF3.X1_Editor.Models.Presets
 
             unknown8 = start + 8;
             unknown9 = start + 9;
-
 
             address = offset + (id * 0x0A);
             //address = 0x0354c + (id * 0x18);
@@ -349,7 +336,6 @@ namespace SF3.X1_Editor.Models.Presets
             }
         }
 
-
         public int SizeAddress
         {
             get
@@ -357,8 +343,6 @@ namespace SF3.X1_Editor.Models.Presets
                 return (address);
             }
         }
-
-
 
     }
 }
