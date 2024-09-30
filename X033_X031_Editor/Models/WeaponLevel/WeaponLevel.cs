@@ -14,7 +14,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         private int level2;
         private int level3;
         private int level4;
-        
+
 
         private int address;
         private int offset;
@@ -75,7 +75,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
             else if (Globals.scenario == 3)
             {
 
-                
+
                 if (checkType == 0x07)
                 {
                     offset = 0x00001020; //scn3
@@ -113,14 +113,14 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 0x11);
 
             level1 = start + 0x02;
             level2 = start + 0x06;
             level3 = start + 0x0a;
             level4 = start + 0x0e;
-            
+
 
 
             address = offset + (id * 0x11);
@@ -187,7 +187,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
                 FileEditor.setWord(level4, value);
             }
         }
-        
+
 
         public int WeaponLevelAddress
         {

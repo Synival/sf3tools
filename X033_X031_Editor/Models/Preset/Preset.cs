@@ -41,7 +41,7 @@ namespace SF3.X033_X031_Editor.Models.Presets
 
         public Preset(int id, string text)
         {
-                
+
 
 
             checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
@@ -78,7 +78,7 @@ namespace SF3.X033_X031_Editor.Models.Presets
                         offset = 0x00002ebe; //scn2
                     }
 
-                    
+
                 }
                 else //x031
                 {
@@ -110,7 +110,7 @@ namespace SF3.X033_X031_Editor.Models.Presets
                 //Console.WriteLine(checkType);
                 if (checkType == 0x07) //x033
                 {
-                    
+
                     offset = 0x00005734; //pd
                 }
                 else
@@ -136,7 +136,7 @@ namespace SF3.X033_X031_Editor.Models.Presets
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 0x20);
 
             character = start + 0x00;
@@ -167,7 +167,7 @@ namespace SF3.X033_X031_Editor.Models.Presets
 
 
 
-        address = offset + (id * 0x20);
+            address = offset + (id * 0x20);
             //address = 0x0354c + (id * 0x18);
 
         }
@@ -195,7 +195,7 @@ namespace SF3.X033_X031_Editor.Models.Presets
             }
             set
             {
-                FileEditor.setByte(character, (byte) value);
+                FileEditor.setByte(character, (byte)value);
             }
         }
 
@@ -399,7 +399,7 @@ namespace SF3.X033_X031_Editor.Models.Presets
                 FileEditor.setWord(weapon4Exp, value);
             }
         }
-        
+
 
         public int PresetAddress
         {

@@ -134,7 +134,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         private int accessoryEquipable3;
         private int accessoryEquipable4;
 
-        
+
         int value;
         int otherValue;
         double percent = 0;
@@ -676,7 +676,7 @@ namespace SF3.X033_X031_Editor.Models.Items
 
         public Item(int id, string text)
         {
-            
+
 
 
             checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
@@ -703,7 +703,7 @@ namespace SF3.X033_X031_Editor.Models.Items
             {
                 if (checkType == 0x07) //x033
                 {
-                    if(checkVersion2 == 0x8c)
+                    if (checkVersion2 == 0x8c)
                     {
                         offset = 0x00000ee0; //scn2 ver 1.003
                     }
@@ -1024,7 +1024,7 @@ namespace SF3.X033_X031_Editor.Models.Items
             }
         }
 
-        
+
         public string HPgroup1
         {
 
@@ -1045,7 +1045,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //return otherValue / 256 * 100 + "%";
                 }
 
-                
+
                 //value = value & 0xf00;
                 otherValue = otherValue % 0x100;
                 if (otherValue < 0)
@@ -1056,7 +1056,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 //percent = arrayMath[0x80] / valueNumber;
 
                 result = "";
-                if(Debugs.debugs == 1)
+                if (Debugs.debugs == 1)
                 {
                     result = string.Format("{0:x}", value) + " || ";
                 }
@@ -1098,7 +1098,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1 ;
                     //return otherValue / 256 * 100 + "%";
-                    
+
                     value = ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1;
                     otherValue = value;
                     //* 0x10 / 0x28 is meant to similate multiplying by 0x66666667
@@ -1108,7 +1108,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1;
                     //return otherValue /256 * 100 + "%";
-                    
+
                     value = ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1;
                     otherValue = value;
                 }
@@ -1137,7 +1137,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 2) * 2 << 2;
                     //return otherValue / 256 * 100 + "%";
-                    
+
                     value = ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 4) * 2 << 2;
                     otherValue = value;
                 }
@@ -1145,7 +1145,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 8) * 0x100 / 0x280 >> 1;
                     //return otherValue / 256 * 100 + "%";
-                    
+
                     value = ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 8) * 0x100 / 0x280 >> 1;
                     otherValue = value;
                 }
@@ -1191,7 +1191,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 8) * 0x100 / 0x280 >> 1;
                     //return otherValue / 256 * 100 + "%";
-                    
+
                     value = ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 8) * 0x100 / 0x280 >> 1;
                     otherValue = value;
                 }
@@ -1220,7 +1220,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300;
                     //return otherValue / 256 * 100 + "%";
-                    
+
                     value = ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300;
                     otherValue = value;
                     //*0x100 / 0x300 is to simulate *0x55555556
@@ -1229,11 +1229,11 @@ namespace SF3.X033_X031_Editor.Models.Items
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x228 >> 2;
                     //return otherValue / 256 * 100 + "%";
-                    
+
                     value = ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x280 >> 2;
                     //*0x100 / 0x280 is to simulate *0x66666667
                     otherValue = value;
-                    
+
                 }
 
                 otherValue = otherValue % 0x100;
@@ -1258,14 +1258,14 @@ namespace SF3.X033_X031_Editor.Models.Items
             {
                 if (FileEditor.getByte(characterClass) < 0x20) //not promoted
                 {
-                    
+
                     value = ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x340 >> 2;
                     otherValue = value;
                     //*0x100 / 0x340 is to simulate *0x4ec4ec4f
                 }
                 else
                 {
-                    
+
                     value = ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x228 >> 5;
                     otherValue = value;
                     //*0x100 / 0x228 is to simulate *0x76b981d8
@@ -1288,7 +1288,7 @@ namespace SF3.X033_X031_Editor.Models.Items
             }
         }
 
-        
+
 
 
 
@@ -1472,7 +1472,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 8) * 0x100 / 0x280 >> 1;
                     //return otherValue / 256 * 100 + "%";
-                    
+
                     value = ((FileEditor.getByte(mpCurve13) - FileEditor.getByte(mpCurve11)) << 8) * 0x100 / 0x280 >> 1;
                     otherValue = value;
                 }
@@ -2546,7 +2546,7 @@ namespace SF3.X033_X031_Editor.Models.Items
             }
             set
             {
-                FileEditor.setByte(s1LearnedAt,(byte) value);
+                FileEditor.setByte(s1LearnedAt, (byte)value);
             }
         }
         public int S1LearnedID
@@ -2557,7 +2557,7 @@ namespace SF3.X033_X031_Editor.Models.Items
             }
             set
             {
-                FileEditor.setByte(s1LearnedID,(byte) value);
+                FileEditor.setByte(s1LearnedID, (byte)value);
             }
         }
         public int S1LearnedLevel
@@ -2568,7 +2568,7 @@ namespace SF3.X033_X031_Editor.Models.Items
             }
             set
             {
-                FileEditor.setByte(s1LearnedLevel, (byte) value);
+                FileEditor.setByte(s1LearnedLevel, (byte)value);
             }
         }
 
