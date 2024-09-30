@@ -65,7 +65,7 @@ namespace SF3.X019_Editor.Models.Items
         private int unknown9;
         private int unknown10;
         private int magicType;
-        private int movementType;       
+        private int movementType;
         private int unknown11;
         private int unknown12;
         private int unknown13;
@@ -105,7 +105,7 @@ namespace SF3.X019_Editor.Models.Items
             }
             else
                 offset = 0x00000eb0; //X044 pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -122,7 +122,7 @@ namespace SF3.X019_Editor.Models.Items
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 76);
             maxHP = start; //2 bytes
             maxMP = start + 2; //1 byte
@@ -196,7 +196,7 @@ namespace SF3.X019_Editor.Models.Items
 
 
 
-        address = offset + (id * 0x4C);
+            address = offset + (id * 0x4C);
             //address = 0x0354c + (id * 0x18);
 
         }

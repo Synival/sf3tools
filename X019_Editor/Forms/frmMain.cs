@@ -202,12 +202,13 @@ namespace SF3.X019_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!ItemList.loadItemList()) {
+            if (!ItemList.loadItemList())
+            {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
-            
-            
+
+
             /*if (!SpellList.loadSpellList()) {
                 MessageBox.Show("Could not load Resources/spellList.xml.");
                 return false;
@@ -260,8 +261,10 @@ namespace SF3.X019_Editor.Forms
         {
             OpenFileDialog openfile = new OpenFileDialog();
             openfile.Filter = "SF3 data (X019.bin)|X019.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            if (openfile.ShowDialog() == DialogResult.OK) {
-                if (FileEditor.loadFile(openfile.FileName)) {
+            if (openfile.ShowDialog() == DialogResult.OK)
+            {
+                if (FileEditor.loadFile(openfile.FileName))
+                {
                     try
                     {
                         initialise();
@@ -270,7 +273,9 @@ namespace SF3.X019_Editor.Forms
                     {
                         //wrong x1 file was selected
                     }
-                } else {
+                }
+                else
+                {
                     MessageBox.Show("Error trying to load file. It is probably in use by another process.");
                 }
             }
@@ -306,7 +311,8 @@ namespace SF3.X019_Editor.Forms
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 X019 (.bin)|X019.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             savefile.FileName = Path.GetFileName(FileEditor.Filename);
-            if (savefile.ShowDialog() == DialogResult.OK) {
+            if (savefile.ShowDialog() == DialogResult.OK)
+            {
                 FileEditor.saveFile(savefile.FileName);
             }
         }
@@ -319,13 +325,15 @@ namespace SF3.X019_Editor.Forms
                 stream.Write(data, 0, data.Length);
                 stream.Close();
             } catch (Exception) { }*/
-            try {
+            try
+            {
                 byte[] data = olvItems.SaveState();
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/itemstate." +
                      ".bin", FileMode.Create, FileAccess.Write);
                 stream.Write(data, 0, data.Length);
                 stream.Close();
-            } catch (Exception) { }
+            }
+            catch (Exception) { }
             /*try {
                 byte[] data = olvBlacksmith.SaveState();
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/blacksmithstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
@@ -348,17 +356,19 @@ namespace SF3.X019_Editor.Forms
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e)
         {
-            if (e.Column.AspectToStringFormat == "{0:X}") {
+            if (e.Column.AspectToStringFormat == "{0:X}")
+            {
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.Hexadecimal = true;
 
-            } 
+            }
             /*else if (e.Column.AspectToStringFormat == "{0:1}")
             {
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.binary? = true;
             } */
-            else if (e.Value is Item) {
+            else if (e.Value is Item)
+            {
                 ComboBox cb = new ComboBox();
                 cb.Bounds = e.CellBounds;
                 cb.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -452,18 +462,19 @@ namespace SF3.X019_Editor.Forms
                 Action value = (Action)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             } else*/
-            if (e.Value is Item) {
+            if (e.Value is Item)
+            {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 Item value = (Item)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
-            /*} else if (e.Value is Spell) {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                Spell value = (Spell)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            } else if (e.Value is Preset) {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                Preset value = (Preset)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);*/
+                /*} else if (e.Value is Spell) {
+                    PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
+                    Spell value = (Spell)((ComboBox)e.Control).SelectedItem;
+                    property.SetValue(e.RowObject, value, null);
+                } else if (e.Value is Preset) {
+                    PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
+                    Preset value = (Preset)((ComboBox)e.Control).SelectedItem;
+                    property.SetValue(e.RowObject, value, null);*/
             } /*else if (e.Value is CharacterClass) {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 CharacterClass value = (CharacterClass)((ComboBox)e.Control).SelectedItem;
