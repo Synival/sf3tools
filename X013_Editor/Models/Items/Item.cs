@@ -40,7 +40,7 @@ namespace SF3.X013_Editor.Models.Items
             }
             else
                 offset = 0x00006bf4; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -57,7 +57,7 @@ namespace SF3.X013_Editor.Models.Items
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 4);
             unknown1 = start; //2 bytes
             damageCalculation = start + 1; //1 byte
@@ -214,7 +214,7 @@ namespace SF3.X013_Editor.Models.Items
 
                     machh = r1 * r3;
 
-                    r2 = machh; 
+                    r2 = machh;
                     r1 = r2 / 7;
 
                     r2 = r2 << 2;
@@ -228,7 +228,7 @@ namespace SF3.X013_Editor.Models.Items
                 {
                     return FileEditor.getByte(pow);
                 }
-                
+
             }
         }
 

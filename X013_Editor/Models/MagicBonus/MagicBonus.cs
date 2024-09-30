@@ -41,7 +41,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
             }
             else
                 offset = 0x00006914; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -62,7 +62,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
             if (Globals.scenario == 1)
             {
                 int start = offset + (id * 0x20);
-                earthBonus = start +0x03; //1 bytes
+                earthBonus = start + 0x03; //1 bytes
                 fireBonus = start + 0x07; //1 byte
                 iceBonus = start + 0x0B; //1 byte
                 sparkBonus = start + 0x0F; //1 byte
@@ -89,7 +89,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
             }
 
 
-            
+
             //address = 0x0354c + (id * 0x18);
 
         }

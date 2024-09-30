@@ -32,7 +32,7 @@ namespace SF3.X013_Editor.Models.Soulfail
             }
             else
                 offset = 0x00005f37; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -49,7 +49,7 @@ namespace SF3.X013_Editor.Models.Soulfail
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 1);
             expLost = start; //1 bytes
             address = offset + (id * 0x1);
@@ -83,7 +83,7 @@ namespace SF3.X013_Editor.Models.Soulfail
                 FileEditor.setByte(expLost, (byte)value);
             }
         }
-        
+
         public int SoulfailAddress
         {
             get

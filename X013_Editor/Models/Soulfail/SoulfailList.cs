@@ -25,24 +25,27 @@ namespace SF3.X013_Editor.Models.Soulfail
         {
 
 
-            
-                r = "Resources/Soulfail.xml";
+
+            r = "Resources/Soulfail.xml";
 
 
             itemssorted = new Soulfail[0];
             items = new Soulfail[1]; //max size of itemList
-            try {
+            try
+            {
                 FileStream stream = new FileStream(r, FileMode.Open);
-                
+
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
                 Soulfail[] old;
-                while (!xml.EOF) {
+                while (!xml.EOF)
+                {
                     xml.Read();
-                    if (xml.HasAttributes) {
+                    if (xml.HasAttributes)
+                    {
                         old = new Soulfail[itemssorted.Length];
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Soulfail[old.Length + 1];
@@ -52,9 +55,13 @@ namespace SF3.X013_Editor.Models.Soulfail
                     }
                 }
                 stream.Close();
-            } catch (FileLoadException) {
+            }
+            catch (FileLoadException)
+            {
                 return false;
-            } catch (FileNotFoundException) {
+            }
+            catch (FileNotFoundException)
+            {
                 return false;
             }
             return true;

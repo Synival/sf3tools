@@ -35,7 +35,7 @@ namespace SF3.X013_Editor.Models.Stats
             }
             else
                 offset = 0x000071cd; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -52,7 +52,7 @@ namespace SF3.X013_Editor.Models.Stats
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 4);
             sLvlStat1 = start; //1 bytes
             sLvlStat2 = start + 1; //1 byte
@@ -122,7 +122,7 @@ namespace SF3.X013_Editor.Models.Stats
                 FileEditor.setByte(sLvlStat4, (byte)value);
             }
         }
-        
+
 
         public int StatAddress
         {

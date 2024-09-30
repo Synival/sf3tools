@@ -32,7 +32,7 @@ namespace SF3.X013_Editor.Models.HealExp
             }
             else
                 offset = 0x00004b01; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -49,7 +49,7 @@ namespace SF3.X013_Editor.Models.HealExp
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 1);
             healExp = start; //1 byte
             address = offset + (id * 0x1);
@@ -83,8 +83,8 @@ namespace SF3.X013_Editor.Models.HealExp
                 FileEditor.setByte(healExp, (byte)value);
             }
         }
-       
-        
+
+
 
         public int HealExpAddress
         {

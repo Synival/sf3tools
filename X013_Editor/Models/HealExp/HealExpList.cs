@@ -27,25 +27,28 @@ namespace SF3.X013_Editor.Models.HealExp
 
 
 
-            
-                r = "Resources/HealExpList.xml";
-            
+
+            r = "Resources/HealExpList.xml";
+
 
 
             itemssorted = new HealExp[0];
             items = new HealExp[2]; //max size of itemList
-            try {
+            try
+            {
                 FileStream stream = new FileStream(r, FileMode.Open);
-                
+
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
                 HealExp[] old;
-                while (!xml.EOF) {
+                while (!xml.EOF)
+                {
                     xml.Read();
-                    if (xml.HasAttributes) {
+                    if (xml.HasAttributes)
+                    {
                         old = new HealExp[itemssorted.Length];
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new HealExp[old.Length + 1];
@@ -55,9 +58,13 @@ namespace SF3.X013_Editor.Models.HealExp
                     }
                 }
                 stream.Close();
-            } catch (FileLoadException) {
+            }
+            catch (FileLoadException)
+            {
                 return false;
-            } catch (FileNotFoundException) {
+            }
+            catch (FileNotFoundException)
+            {
                 return false;
             }
             return true;

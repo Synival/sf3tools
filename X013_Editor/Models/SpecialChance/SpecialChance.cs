@@ -39,7 +39,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
             }
             else
                 offset = 0x000027c2; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -107,7 +107,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
             }
 
 
-            
+
             //address = 0x0354c + (id * 0x18);
 
         }
@@ -196,7 +196,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
             }
         }
 
-        
+
 
         public int SpecialChanceAddress
         {

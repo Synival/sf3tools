@@ -85,19 +85,19 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
             int start = offset + (id * 0x18);
 
-            luck0= start;
-            luck1= start + 2;
-            luck2= start + 4;
-            luck3= start + 6;
-            luck4= start + 8;
-            luck5= start + 10;
-            luck6= start + 12;
-            luck7= start + 14;
-            luck8= start + 16;
-            luck9= start + 18;
+            luck0 = start;
+            luck1 = start + 2;
+            luck2 = start + 4;
+            luck3 = start + 6;
+            luck4 = start + 8;
+            luck5 = start + 10;
+            luck6 = start + 12;
+            luck7 = start + 14;
+            luck8 = start + 16;
+            luck9 = start + 18;
 
-        //unknown42 = start + 52;
-        address = offset + (id * 0x18);
+            //unknown42 = start + 52;
+            address = offset + (id * 0x18);
             //address = 0x0354c + (id * 0x18);
 
         }
@@ -119,7 +119,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int StatusLuck0
         {
-            
+
             get
             {
                 return FileEditor.getByte(luck0);

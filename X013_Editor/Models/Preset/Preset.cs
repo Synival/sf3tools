@@ -36,7 +36,7 @@ namespace SF3.X013_Editor.Models.Presets
             }
             else
                 offset = 0x0000714c; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -53,7 +53,7 @@ namespace SF3.X013_Editor.Models.Presets
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 4);
             sLvl0 = start; //1 byte
             sLvl1 = start + 1; //1 byte
@@ -88,7 +88,7 @@ namespace SF3.X013_Editor.Models.Presets
             }
             set
             {
-                FileEditor.setByte(sLvl0, (byte) value);
+                FileEditor.setByte(sLvl0, (byte)value);
             }
         }
         public int SLvl1
@@ -134,7 +134,7 @@ namespace SF3.X013_Editor.Models.Presets
             {
                 FileEditor.setByte(sLvl4, (byte)value);
             }
-        }       
+        }
 
         public int PresetAddress
         {

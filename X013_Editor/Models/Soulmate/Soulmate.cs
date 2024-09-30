@@ -32,7 +32,7 @@ namespace SF3.X013_Editor.Models.Soulmate
             }
             else
                 offset = 0x00007248; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -49,7 +49,7 @@ namespace SF3.X013_Editor.Models.Soulmate
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 1);
             chance = start; //2 bytes
             address = offset + (id * 0x1);
@@ -83,7 +83,7 @@ namespace SF3.X013_Editor.Models.Soulmate
                 FileEditor.setByte(chance, (byte)value);
             }
         }
-        
+
         public int SoulmateAddress
         {
             get

@@ -33,7 +33,7 @@ namespace SF3.X013_Editor.Models.ExpLimit
             }
             else
                 offset = 0x000021ab; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -50,7 +50,7 @@ namespace SF3.X013_Editor.Models.ExpLimit
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 7);
             expCheck = start; //1 byte
             expReplacement = start + 6; //1 byte
@@ -96,7 +96,7 @@ namespace SF3.X013_Editor.Models.ExpLimit
                 FileEditor.setByte(expReplacement, (byte)value);
             }
         }
-        
+
 
         public int ExpLimitAddress
         {

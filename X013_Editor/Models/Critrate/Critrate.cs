@@ -37,7 +37,7 @@ namespace SF3.X013_Editor.Models.Critrate
             }
             else
                 offset = 0x000070b8; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -54,7 +54,7 @@ namespace SF3.X013_Editor.Models.Critrate
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 8);
             noSpecial = start; //1 bytes
             oneSpecial = start + 1; //1 byte

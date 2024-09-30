@@ -33,7 +33,7 @@ namespace SF3.X013_Editor.Models.Spells
             }
             else
                 offset = 0x00007154; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -50,11 +50,11 @@ namespace SF3.X013_Editor.Models.Spells
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 0x02);
             supportA = start; //1 byte
             supportB = start + 1;
-            
+
             address = offset + (id * 0x02);
             //address = 0x0354c + (id * 0x18);
 
@@ -83,7 +83,7 @@ namespace SF3.X013_Editor.Models.Spells
             }
             set
             {
-                FileEditor.setByte(supportA, (byte) value);
+                FileEditor.setByte(supportA, (byte)value);
             }
         }
         public int SupportB
@@ -97,7 +97,7 @@ namespace SF3.X013_Editor.Models.Spells
                 FileEditor.setByte(supportB, (byte)value);
             }
         }
-        
+
         public int SpellAddress
         {
             get

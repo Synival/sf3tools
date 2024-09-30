@@ -36,7 +36,7 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
             }
             else
                 offset = 0x00006BE0; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -53,7 +53,7 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 5);
             rankNone = start; //1 bytes
             rankC = start + 1; //1 byte

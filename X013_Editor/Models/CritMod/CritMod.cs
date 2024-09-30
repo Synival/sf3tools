@@ -33,7 +33,7 @@ namespace SF3.X013_Editor.Models.CritMod
             }
             else
                 offset = 0x00002d78; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -50,7 +50,7 @@ namespace SF3.X013_Editor.Models.CritMod
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 0x0b);
             advantage = start + 0x01; //1 bytes
             disadvantage = start + 0x11; //1 byte
@@ -96,7 +96,7 @@ namespace SF3.X013_Editor.Models.CritMod
                 FileEditor.setByte(disadvantage, (byte)value);
             }
         }
-        
+
 
         public int CritModAddress
         {
