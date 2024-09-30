@@ -14,6 +14,7 @@ using SF3.X002_Editor.Models.AttackResist;
 using SF3.X002_Editor.Models.Warps;
 using SF3.X002_Editor.Models.MusicOverride;
 using BrightIdeasSoftware;
+using SF3.Editor;
 
 /*
 

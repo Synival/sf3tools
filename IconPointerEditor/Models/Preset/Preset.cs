@@ -1,4 +1,5 @@
-﻿using static SF3.IconPointerEditor.Forms.frmMain;
+﻿using SF3.Editor;
+using static SF3.IconPointerEditor.Forms.frmMain;
 
 namespace SF3.IconPointerEditor.Models.Presets
 {

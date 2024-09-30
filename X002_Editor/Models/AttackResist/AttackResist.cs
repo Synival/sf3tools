@@ -1,4 +1,5 @@
-﻿using static SF3.X002_Editor.Forms.frmMain;
+﻿using SF3.Editor;
+using static SF3.X002_Editor.Forms.frmMain;
 
 namespace SF3.X002_Editor.Models.AttackResist
 {

@@ -8,6 +8,7 @@ using SF3.X019_Editor.Models.Spells;
 using SF3.X019_Editor.Models.Presets;
 using SF3.X019_Editor.Models.Items;
 using BrightIdeasSoftware;
+using SF3.Editor;
 
 /*
 

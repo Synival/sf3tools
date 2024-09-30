@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Forms;
 using static SF3.IconPointerEditor.Forms.frmMain;
+using SF3.Editor;
 
 namespace SF3.IconPointerEditor.Models.Items
 {

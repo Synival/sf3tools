@@ -1,4 +1,5 @@
 ﻿using BrightIdeasSoftware;
+using SF3.Editor;
 using System;
 using static SF3.X1_Editor.Forms.frmMain;
 

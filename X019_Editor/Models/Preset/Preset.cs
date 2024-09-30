@@ -1,4 +1,5 @@
-﻿using static SF3.X019_Editor.Forms.frmMain;
+﻿using SF3.Editor;
+using static SF3.X019_Editor.Forms.frmMain;
 
 namespace SF3.X019_Editor.Models.Presets
 {

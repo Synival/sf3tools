@@ -8,6 +8,7 @@ using SF3.X033_X031_Editor.Models.Presets;
 using SF3.X033_X031_Editor.Models.Items;
 using SF3.X033_X031_Editor.Models.WeaponLevel;
 using BrightIdeasSoftware;
+using SF3.Editor;
 
 /*
 

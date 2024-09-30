@@ -1,4 +1,5 @@
-﻿using static SF3.X033_X031_Editor.Forms.frmMain;
+﻿using SF3.Editor;
+using static SF3.X033_X031_Editor.Forms.frmMain;
 
 namespace SF3.X033_X031_Editor.Models.WeaponLevel
 {

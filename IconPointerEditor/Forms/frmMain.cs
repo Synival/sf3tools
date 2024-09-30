@@ -7,6 +7,7 @@ using SF3.IconPointerEditor.Models;
 using SF3.IconPointerEditor.Models.Presets;
 using SF3.IconPointerEditor.Models.Items;
 using BrightIdeasSoftware;
+using SF3.Editor;
 
 /*
 

@@ -72,7 +72,6 @@
     <Compile Include="Models\HealExp\HealExpList.cs" />
     <Compile Include="Models\ExpLimit\ExpLimit.cs" />
     <Compile Include="Models\ExpLimit\ExpLimitList.cs" />
-    <Compile Include="Models\FileEditor.cs" />
     <Compile Include="Models\Items\Item.cs" />
     <Compile Include="Models\Items\ItemList.cs" />
     <Compile Include="Models\MagicBonus\MagicBonus.cs" />
@@ -192,6 +191,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EditorLib\EditorLib.csproj">
+      <Project>{5fe40461-c218-45be-8947-9b4a8d8291fd}</Project>
+      <Name>EditorLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ObjectListView\ObjectListView\ObjectListView2008.csproj">
       <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
       <Name>ObjectListView2008</Name>

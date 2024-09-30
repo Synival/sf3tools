@@ -19,6 +19,7 @@ using SF3.X013_Editor.Models.HealExp;
 using SF3.X013_Editor.Models.WeaponSpellRank;
 using SF3.X013_Editor.Models.StatusEffects;
 using BrightIdeasSoftware;
+using SF3.Editor;
 
 /*
 

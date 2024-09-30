@@ -2,13 +2,13 @@
 using System.Text;
 using System.IO;
 
-namespace SF3.IconPointerEditor.Models
+namespace SF3.Editor
 {
-    class FileEditorReadException : Exception
+    public class FileEditorReadException : Exception
     {
     }
 
-    static class FileEditor
+    public static class FileEditor
     {
         private static byte[] data;
         public static int scenario = 0;

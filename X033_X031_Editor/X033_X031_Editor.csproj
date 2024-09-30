@@ -54,7 +54,6 @@
     <Compile Include="Forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\FileEditor.cs" />
     <Compile Include="Models\WeaponLevel\WeaponLevel.cs" />
     <Compile Include="Models\WeaponLevel\WeaponLevelList.cs" />
     <Compile Include="Models\Items\Item.cs" />
@@ -120,6 +119,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EditorLib\EditorLib.csproj">
+      <Project>{5fe40461-c218-45be-8947-9b4a8d8291fd}</Project>
+      <Name>EditorLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ObjectListView\ObjectListView\ObjectListView2008.csproj">
       <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
       <Name>ObjectListView2008</Name>
