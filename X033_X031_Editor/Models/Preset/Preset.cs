@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Editor.Values;
 using System;
 using static SF3.X033_X031_Editor.Forms.frmMain;
 
@@ -145,10 +146,10 @@ namespace SF3.X033_X031_Editor.Models.Presets
             set => FileEditor.setByte(character, (byte)value);
         }
 
-        public int CharacterClassE
+        public CharacterClassValue CharacterClassE
         {
-            get => FileEditor.getByte(characterClass);
-            set => FileEditor.setByte(characterClass, (byte)value);
+            get => new CharacterClassValue(FileEditor.getByte(characterClass));
+            set => FileEditor.setByte(characterClass, (byte)value.Value);
         }
 
         public int Level

@@ -1790,9 +1790,8 @@
             // olvColumn104
             // 
             this.olvColumn104.AspectName = "CharacterClassE";
-            this.olvColumn104.AspectToStringFormat = "{0:X}";
             this.olvColumn104.Text = "Class";
-            this.olvColumn104.Width = 50;
+            this.olvColumn104.Width = 150;
             // 
             // olvColumn105
             // 

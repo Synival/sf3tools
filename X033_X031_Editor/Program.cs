@@ -1,5 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using SF3.Editor;
+using SF3.Editor.Values;
 using SF3.X033_X031_Editor.Models.Items;
 using System;
 using System.Collections.Generic;

@@ -55,7 +55,6 @@
     <Compile Include="Forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Items\CharacterClassValue.cs" />
     <Compile Include="Models\WeaponLevel\WeaponLevel.cs" />
     <Compile Include="Models\WeaponLevel\WeaponLevelList.cs" />
     <Compile Include="Models\Items\Item.cs" />
