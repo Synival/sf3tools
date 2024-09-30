@@ -324,9 +324,17 @@ namespace SF3.X002_Editor.Forms
                     }
                     catch (System.Reflection.TargetInvocationException)
                     {
-                        //wrong x1 file was selected
+                        //wrong file was selected
+                        MessageBox.Show("Failed to read file:\n" +
+                                        "    " + openfile.FileName);
                     }
-
+                    catch (FileEditorReadException)
+                    {
+                        //wrong file was selected
+                        MessageBox.Show("Data appears corrupt or invalid:\n" +
+                                        "    " + openfile.FileName + "\n\n" +
+                                        "Is this the correct type of file?");
+                    }
                 }
                 else
                 {

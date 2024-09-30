@@ -4,6 +4,10 @@ using System.IO;
 
 namespace SF3.X1_Editor.Models
 {
+    class FileEditorReadException : Exception
+    {
+    }
+
     static class FileEditor
     {
         private static byte[] data;
@@ -38,47 +42,41 @@ namespace SF3.X1_Editor.Models
 
         public static int getByte(int location)
         {
-            return data[location];
-
-            /*try
+            try
             {
                 return data[location];
             }
             catch (IndexOutOfRangeException)
             {
                 //wrong kind of file was selected to load
-                return 0;
-            }*/
+                throw new FileEditorReadException();
+            }
         }
 
         public static int getWord(int location)
         {
-            return data[location] * 256 + data[location + 1];
-
-            /*try
+            try
             {
                 return data[location] * 256 + data[location + 1];
             }
             catch (IndexOutOfRangeException)
             {
                 //wrong kind of file was selected to load
-                return 0;
-            }*/
+                throw new FileEditorReadException();
+            }
         }
 
         public static int getDouble(int location)
         {
-            /*return (data[location] * 256 * 256 * 256) + (data[location + 1] * 256 * 256)
-                        + (data[location + 2] * 256) + data[location + 3];*/
             try
             {
                 return (data[location] * 256 * 256 * 256) + (data[location + 1] * 256 * 256)
-                        + (data[location + 2] * 256) + data[location + 3];
+                            + (data[location + 2] * 256) + data[location + 3];
             }
             catch (IndexOutOfRangeException)
             {
                 //wrong kind of file was selected to load
-                return 0;
+                throw new FileEditorReadException();
             }
         }
 
@@ -88,11 +86,19 @@ namespace SF3.X1_Editor.Models
             byte[] value = new byte[length];
             for (int i = 0; i < length; i++)
             {
-                if (data[location + i] == 0x0)
+                try
                 {
-                    break;
+                    if (data[location + i] == 0x0)
+                    {
+                        break;
+                    }
+                    value[i] = data[location + i];
                 }
-                value[i] = data[location + i];
+                catch (IndexOutOfRangeException)
+                {
+                    //wrong kind of file was selected to load
+                    throw new FileEditorReadException();
+                }
             }
             Encoding InputText = Encoding.GetEncoding("shift-jis");
             return InputText.GetString(value);
@@ -109,13 +115,6 @@ namespace SF3.X1_Editor.Models
         }
         public static void setDouble(int location, int value)
         {
-            /*
-            data[location] = (byte)(value >> 24);
-            data[location + 1] = (byte)(value >> 16);
-            data[location + 2] = (byte)(value >> 8);
-            data[location + 3] = (byte)(value % 256);
-            */
-
             byte[] converted = BitConverter.GetBytes(value);
             data[location] = converted[3];
             data[location + 1] = converted[2];
