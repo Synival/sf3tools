@@ -12,13 +12,16 @@ namespace SF3.IconPointerEditor.Models
 
         public static bool loadFile(string filename)
         {
-            try {
+            try
+            {
                 FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
                 data = new byte[stream.Length];
                 stream.Read(data, 0, (int)stream.Length);
                 Filename = filename;
                 stream.Close();
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 return false;
             }
             return true;
@@ -42,7 +45,7 @@ namespace SF3.IconPointerEditor.Models
         {
             return data[location] * 256 + data[location + 1];
         }
-        
+
         public static int getDouble(int location)
         {
             return (data[location] * 256 * 256 * 256) + (data[location + 1] * 256 * 256)
@@ -53,8 +56,10 @@ namespace SF3.IconPointerEditor.Models
         public static string getString(int location, int length)
         {
             byte[] value = new byte[length];
-            for (int i = 0; i < length; i++) {
-                if (data[location + i] == 0x0) {
+            for (int i = 0; i < length; i++)
+            {
+                if (data[location + i] == 0x0)
+                {
                     break;
                 }
                 value[i] = data[location + i];
@@ -85,11 +90,14 @@ namespace SF3.IconPointerEditor.Models
             byte[] name = new byte[12];
             Encoding OutputText = Encoding.GetEncoding("shift-jis");
             name = OutputText.GetBytes(value);
-            for (int i = 0; i < name.Length; i++) {
+            for (int i = 0; i < name.Length; i++)
+            {
                 data[location + i] = name[i];
             }
-            if (name.Length < length) {
-                for (int i = name.Length; i < length; i++) {
+            if (name.Length < length)
+            {
+                for (int i = name.Length; i < length; i++)
+                {
                     data[location + i] = 0x0;
                 }
             }
@@ -100,9 +108,12 @@ namespace SF3.IconPointerEditor.Models
         }
         public static void setBit(int location, int bit, bool value)
         {
-            if (value) {
+            if (value)
+            {
                 data[location] |= (byte)(1 << (bit - 1));
-            } else {
+            }
+            else
+            {
                 data[location] &= (byte)~(1 << (bit - 1));
             }
         }

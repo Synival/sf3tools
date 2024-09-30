@@ -49,7 +49,8 @@ namespace SF3.IconPointerEditor.Models.Presets
 
             presetssorted = new Preset[0];
             presets = new Preset[300]; //max size 
-            try {
+            try
+            {
                 FileStream stream = new FileStream(r, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
@@ -58,9 +59,11 @@ namespace SF3.IconPointerEditor.Models.Presets
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
                 Preset[] old;
-                while (!xml.EOF) {
+                while (!xml.EOF)
+                {
                     xml.Read();
-                    if (xml.HasAttributes) {
+                    if (xml.HasAttributes)
+                    {
                         old = new Preset[presetssorted.Length];
                         presetssorted.CopyTo(old, 0);
                         presetssorted = new Preset[old.Length + 1];
@@ -70,10 +73,12 @@ namespace SF3.IconPointerEditor.Models.Presets
                     }
                 }
                 stream.Close();
-            } catch (FileLoadException) {
+            }
+            catch (FileLoadException)
+            {
                 return false;
-            //} catch (FileNotFoundException) {
-              //  return false;
+                //} catch (FileNotFoundException) {
+                //  return false;
             }
             return true;
         }

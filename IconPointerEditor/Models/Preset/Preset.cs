@@ -21,24 +21,24 @@ namespace SF3.IconPointerEditor.Models.Presets
 
         public Preset(int id, string text)
         {
-                if (Globals.scenario == 1)
+            if (Globals.scenario == 1)
+            {
+
+                if (Globals.x026 == true)
                 {
-                
-                    if (Globals.x026 == true)
-                        {
                     offset = 0x08f0; //scn1 initial pointer
                     sub = 0x06078000;
                     //MessageBox.Show("Could not load Resources/itemList.xml.");
-                        }
-                    else
-                        {
+                }
+                else
+                {
                     offset = 0x0000003C; //scn1 initial pointer
                     sub = 0x06068000;
-                        }
+                }
 
 
-                    offset = FileEditor.getDouble(offset);
-                    offset = offset - sub; //pointer
+                offset = FileEditor.getDouble(offset);
+                offset = offset - sub; //pointer
                 /*
                 offset = 0x00000018; //scn1 initial pointer
                 npcOffset = offset;
@@ -49,11 +49,11 @@ namespace SF3.IconPointerEditor.Models.Presets
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
-                }
-                else if (Globals.scenario == 2)
-                {
+            }
+            else if (Globals.scenario == 2)
+            {
 
-                
+
 
                 if (Globals.x026 == true)
                 {
@@ -82,9 +82,9 @@ namespace SF3.IconPointerEditor.Models.Presets
                 */
 
             }
-                else if (Globals.scenario == 3)
-                {
-                
+            else if (Globals.scenario == 3)
+            {
+
 
                 if (Globals.x026 == true)
                 {
@@ -101,9 +101,9 @@ namespace SF3.IconPointerEditor.Models.Presets
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //pointer
             }
-                else if (Globals.scenario == 4)
-                {
-                
+            else if (Globals.scenario == 4)
+            {
+
 
                 if (Globals.x026 == true)
                 {
@@ -158,7 +158,7 @@ namespace SF3.IconPointerEditor.Models.Presets
                 address = offset + (id * 0x04);
             }
 
-            
+
             //address = 0x0354c + (id * 0x18);
 
         }
@@ -193,7 +193,7 @@ namespace SF3.IconPointerEditor.Models.Presets
 
 
 
-                
+
             }
             set
             {
@@ -207,7 +207,7 @@ namespace SF3.IconPointerEditor.Models.Presets
                 {
                     FileEditor.setDouble(theItemIcon, value);
                 }
-                
+
             }
         }
 

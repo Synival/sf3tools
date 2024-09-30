@@ -49,24 +49,24 @@ namespace SF3.IconPointerEditor.Models.Items
             if (Globals.scenario == 1)
             {
 
-                
+
                 if (Globals.x026 == true)
-                    {
+                {
                     offset = 0x0a30; //scn1 initial pointer
                     sub = 0x06078000;
                     //MessageBox.Show("Could not load Resources/itemList.xml.");
-                    }
+                }
                 else
-                    {
+                {
                     offset = 0x00000030; //scn1 initial pointer
                     sub = 0x06068000;
-                    }
+                }
 
                 //MessageBox.Show("" + FileEditor.getDouble(offset));
 
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //pointer
-               
+
 
 
 
@@ -86,7 +86,7 @@ namespace SF3.IconPointerEditor.Models.Items
             else if (Globals.scenario == 2)
             {
 
-                
+
 
                 if (Globals.x026 == true)
                 {
@@ -108,7 +108,7 @@ namespace SF3.IconPointerEditor.Models.Items
             }
             else if (Globals.scenario == 3)
             {
-                
+
 
                 if (Globals.x026 == true)
                 {
@@ -129,7 +129,7 @@ namespace SF3.IconPointerEditor.Models.Items
             }
             else if (Globals.scenario == 4)
             {
-                
+
 
                 if (Globals.x026 == true)
                 {
@@ -149,7 +149,7 @@ namespace SF3.IconPointerEditor.Models.Items
                 realOffset = 0x12A32;
             }
 
-            
+
 
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
@@ -225,7 +225,7 @@ namespace SF3.IconPointerEditor.Models.Items
 
 
 
-                
+
             }
             set
             {
@@ -256,7 +256,7 @@ namespace SF3.IconPointerEditor.Models.Items
 
 
 
-                
+
 
 
 
@@ -277,7 +277,7 @@ namespace SF3.IconPointerEditor.Models.Items
 
 
 
-                
+
 
 
 
