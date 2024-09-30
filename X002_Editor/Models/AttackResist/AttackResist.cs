@@ -57,20 +57,8 @@ namespace SF3.X002_Editor.Models.AttackResist
 
         }
 
-        public int AttackResistID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string AttackResistName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int AttackResistID => index;
+        public string AttackResistName => name;
 
         public int Attack
         {
@@ -95,13 +83,6 @@ namespace SF3.X002_Editor.Models.AttackResist
             }
         }
 
-        public int AttackResistAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int AttackResistAddress => (address);
     }
 }

@@ -79,20 +79,8 @@ namespace SF3.X013_Editor.Models.MagicBonus
 
         }
 
-        public int MagicID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string MagicName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int MagicID => index;
+        public string MagicName => name;
 
         public int EarthBonus
         {
@@ -187,13 +175,6 @@ namespace SF3.X013_Editor.Models.MagicBonus
             }
         }
 
-        public int MagicAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int MagicAddress => (address);
     }
 }

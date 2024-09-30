@@ -156,20 +156,8 @@ namespace SF3.IconPointerEditor.Models.Items
 
         }
 
-        public int ID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int ID => index;
+        public string Name => name;
 
         public int TheSpellIcon
         {
@@ -227,13 +215,6 @@ namespace SF3.IconPointerEditor.Models.Items
             }
         }
 
-        public int Address
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int Address => (address);
     }
 }

@@ -47,20 +47,8 @@ namespace SF3.X013_Editor.Models.ExpLimit
 
         }
 
-        public int ExpLimitID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string ExpLimitName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int ExpLimitID => index;
+        public string ExpLimitName => name;
 
         public int ExpCheck
         {
@@ -85,13 +73,6 @@ namespace SF3.X013_Editor.Models.ExpLimit
             }
         }
 
-        public int ExpLimitAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int ExpLimitAddress => (address);
     }
 }

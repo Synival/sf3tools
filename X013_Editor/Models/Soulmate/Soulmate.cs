@@ -45,20 +45,8 @@ namespace SF3.X013_Editor.Models.Soulmate
 
         }
 
-        public int SoulmateID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string SoulmateName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int SoulmateID => index;
+        public string SoulmateName => name;
 
         public int Chance
         {
@@ -72,13 +60,6 @@ namespace SF3.X013_Editor.Models.Soulmate
             }
         }
 
-        public int SoulmateAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int SoulmateAddress => (address);
     }
 }

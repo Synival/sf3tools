@@ -178,20 +178,8 @@ namespace SF3.X1_Editor.Models.Tiles
 
         }
 
-        public int TileID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string TileName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int TileID => index;
+        public string TileName => name;
 
         public int TileNoEntry
         {
@@ -381,21 +369,8 @@ namespace SF3.X1_Editor.Models.Tiles
             }
         }
 
-        /*public int Map
-        {
-            get
-            {
-                return Globals.map;
-            }
-        }*/
+        // public int Map => Globals.map;
 
-        public int TileAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int TileAddress => (address);
     }
 }

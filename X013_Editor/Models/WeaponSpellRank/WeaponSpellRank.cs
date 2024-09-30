@@ -53,20 +53,8 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
 
         }
 
-        public int WeaponSpellRankID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string WeaponSpellRankName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int WeaponSpellRankID => index;
+        public string WeaponSpellRankName => name;
 
         public int RankNone
         {
@@ -124,13 +112,6 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
             }
         }
 
-        public int WeaponSpellRankAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int WeaponSpellRankAddress => (address);
     }
 }

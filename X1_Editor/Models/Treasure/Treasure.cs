@@ -100,20 +100,8 @@ namespace SF3.X1_Editor.Models.Treasures
 
         }
 
-        public int TreasureID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string TreasureName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int TreasureID => index;
+        public string TreasureName => name;
 
         public string MPDTieIn
         {
@@ -203,13 +191,6 @@ namespace SF3.X1_Editor.Models.Treasures
             }
         }
 
-        public int TreasureAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int TreasureAddress => (address);
     }
 }

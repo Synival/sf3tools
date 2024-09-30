@@ -83,20 +83,8 @@ namespace SF3.X019_Editor.Models.Spells
 
         }
 
-        public int SpellID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string SpellName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int SpellID => index;
+        public string SpellName => name;
 
         public int SpellTarget
         {
@@ -319,13 +307,6 @@ namespace SF3.X019_Editor.Models.Spells
                 FileEditor.setByte(lv4Damage, (byte)value);
             }
         }
-        public int SpellAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int SpellAddress => (address);
     }
 }

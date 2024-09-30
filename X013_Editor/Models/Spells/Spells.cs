@@ -48,20 +48,8 @@ namespace SF3.X013_Editor.Models.Spells
 
         }
 
-        public int SpellID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string SpellName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int SpellID => index;
+        public string SpellName => name;
 
         public int SupportA
         {
@@ -86,13 +74,6 @@ namespace SF3.X013_Editor.Models.Spells
             }
         }
 
-        public int SpellAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int SpellAddress => (address);
     }
 }

@@ -53,20 +53,8 @@ namespace SF3.X013_Editor.Models.Presets
 
         }
 
-        public int PresetID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string PresetName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int PresetID => index;
+        public string PresetName => name;
 
         public int SLvl0
         {
@@ -124,13 +112,6 @@ namespace SF3.X013_Editor.Models.Presets
             }
         }
 
-        public int PresetAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int PresetAddress => (address);
     }
 }

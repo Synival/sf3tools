@@ -197,20 +197,8 @@ namespace SF3.X1_Editor.Models.Presets
 
         }
 
-        public int SizeID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string SizeName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int SizeID => index;
+        public string SizeName => name;
 
         public int SizeUnknown1
         {
@@ -328,21 +316,8 @@ namespace SF3.X1_Editor.Models.Presets
             }
         }
 
-        public int Map
-        {
-            get
-            {
-                return Globals.map;
-            }
-        }
+        public int Map => Globals.map;
 
-        public int SizeAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int SizeAddress => (address);
     }
 }

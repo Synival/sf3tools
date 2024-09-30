@@ -58,20 +58,8 @@ namespace SF3.X002_Editor.Models.Warps
 
         }
 
-        public int WarpID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string WarpName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int WarpID => index;
+        public string WarpName => name;
 
         public int WarpUnknown1
         {
@@ -121,13 +109,6 @@ namespace SF3.X002_Editor.Models.Warps
             }
         }
 
-        public int WarpAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int WarpAddress => (address);
     }
 }

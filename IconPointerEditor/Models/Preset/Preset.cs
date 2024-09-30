@@ -133,20 +133,8 @@ namespace SF3.IconPointerEditor.Models.Presets
 
         }
 
-        public int SizeID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string SizeName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int SizeID => index;
+        public string SizeName => name;
 
         public int TheItemIcon
         {
@@ -176,13 +164,6 @@ namespace SF3.IconPointerEditor.Models.Presets
             }
         }
 
-        public int SizeAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int SizeAddress => (address);
     }
 }

@@ -134,20 +134,8 @@ namespace SF3.X1_Editor.Models.BattlePointers
 
         }
 
-        public int BattleID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string BattleName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int BattleID => index;
+        public string BattleName => name;
 
         /*public int BattlePointer
         {
@@ -188,13 +176,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
             }
         }*/
 
-        public int BattleAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int BattleAddress => (address);
     }
 }

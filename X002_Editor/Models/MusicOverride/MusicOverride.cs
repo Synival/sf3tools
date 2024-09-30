@@ -78,20 +78,8 @@ namespace SF3.X002_Editor.Models.MusicOverride
 
         }
 
-        public int MusicOverrideID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string MusicOverrideName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int MusicOverrideID => index;
+        public string MusicOverrideName => name;
 
         public int MOMapID
         {
@@ -250,13 +238,6 @@ namespace SF3.X002_Editor.Models.MusicOverride
             }
         }
 
-        public int MusicOverrideAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int MusicOverrideAddress => (address);
     }
 }

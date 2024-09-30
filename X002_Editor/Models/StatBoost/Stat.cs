@@ -52,20 +52,8 @@ namespace SF3.X002_Editor.Models.StatBoost
 
         }
 
-        public int StatID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string StatName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int StatID => index;
+        public string StatName => name;
 
         public int Stat
         {
@@ -79,13 +67,6 @@ namespace SF3.X002_Editor.Models.StatBoost
             }
         }
 
-        public int StatAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int StatAddress => (address);
     }
 }

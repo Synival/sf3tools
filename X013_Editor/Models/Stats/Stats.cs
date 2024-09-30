@@ -51,20 +51,8 @@ namespace SF3.X013_Editor.Models.Stats
 
         }
 
-        public int StatID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string StatName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int StatID => index;
+        public string StatName => name;
 
         public int SLvlStat1
         {
@@ -111,13 +99,6 @@ namespace SF3.X013_Editor.Models.Stats
             }
         }
 
-        public int StatAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int StatAddress => (address);
     }
 }

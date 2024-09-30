@@ -45,20 +45,8 @@ namespace SF3.X013_Editor.Models.HealExp
 
         }
 
-        public int HealExpID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string HealExpName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int HealExpID => index;
+        public string HealExpName => name;
 
         public int HealBonus
         {
@@ -72,13 +60,6 @@ namespace SF3.X013_Editor.Models.HealExp
             }
         }
 
-        public int HealExpAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int HealExpAddress => (address);
     }
 }

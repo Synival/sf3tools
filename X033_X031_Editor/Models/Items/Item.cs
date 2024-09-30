@@ -867,20 +867,8 @@ namespace SF3.X033_X031_Editor.Models.Items
 
         }
 
-        public int ID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int ID => index;
+        public string Name => name;
 
         public int Character
         {
@@ -3307,13 +3295,6 @@ namespace SF3.X033_X031_Editor.Models.Items
             }
         }
 
-        public int Address
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int Address => (address);
     }
 }

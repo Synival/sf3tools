@@ -105,20 +105,8 @@ namespace SF3.X1_Editor.Models.Enters
 
         }
 
-        public int EnterID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string EnterName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int EnterID => index;
+        public string EnterName => name;
 
         public int Entered
         {
@@ -216,13 +204,6 @@ namespace SF3.X1_Editor.Models.Enters
             }
         }
 
-        public int EnterAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int EnterAddress => (address);
     }
 }

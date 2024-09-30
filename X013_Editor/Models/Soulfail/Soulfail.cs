@@ -45,20 +45,8 @@ namespace SF3.X013_Editor.Models.Soulfail
 
         }
 
-        public int SoulfailID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string SoulfailName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int SoulfailID => index;
+        public string SoulfailName => name;
 
         public int ExpLost
         {
@@ -72,13 +60,6 @@ namespace SF3.X013_Editor.Models.Soulfail
             }
         }
 
-        public int SoulfailAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int SoulfailAddress => (address);
     }
 }

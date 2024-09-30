@@ -59,20 +59,8 @@ namespace SF3.X002_Editor.Models.WeaponRank
 
         }
 
-        public int WeaponRankID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string WeaponRankName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int WeaponRankID => index;
+        public string WeaponRankName => name;
 
         public int Skill0
         {
@@ -119,13 +107,6 @@ namespace SF3.X002_Editor.Models.WeaponRank
             }
         }
 
-        public int WeaponRankAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int WeaponRankAddress => (address);
     }
 }

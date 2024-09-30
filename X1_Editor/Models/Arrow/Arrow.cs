@@ -92,20 +92,8 @@ namespace SF3.X1_Editor.Models.Arrows
 
         }
 
-        public int ArrowID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string ArrowName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int ArrowID => index;
+        public string ArrowName => name;
 
         public int ArrowUnknown0
         {
@@ -179,13 +167,6 @@ namespace SF3.X1_Editor.Models.Arrows
             }
         }
 
-        public int ArrowAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int ArrowAddress => (address);
     }
 }

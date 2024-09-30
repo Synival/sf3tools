@@ -242,20 +242,8 @@ namespace SF3.X1_Editor.Models.CustomMovement
 
         }
 
-        public int CustomMovementID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string CustomMovementName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int CustomMovementID => index;
+        public string CustomMovementName => name;
 
         public int CustomMovementUnknown
         {
@@ -373,13 +361,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
             }
         }
 
-        public int CustomMovementAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int CustomMovementAddress => (address);
     }
 }

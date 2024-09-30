@@ -110,20 +110,8 @@ namespace SF3.X1_Editor.Models.Npcs
 
         }
 
-        public int NpcID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string NpcName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int NpcID => index;
+        public string NpcName => name;
 
         public string NpcTieIn
         {
@@ -278,13 +266,6 @@ namespace SF3.X1_Editor.Models.Npcs
             }
         }
 
-        public int NpcAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int NpcAddress => (address);
     }
 }

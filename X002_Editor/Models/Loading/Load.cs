@@ -67,20 +67,8 @@ namespace SF3.X002_Editor.Models.Loading
 
         }
 
-        public int LoadID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string LoadName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int LoadID => index;
+        public string LoadName => name;
 
         public int LocationID
         {
@@ -178,13 +166,6 @@ namespace SF3.X002_Editor.Models.Loading
             }
         }
 
-        public int LoadAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int LoadAddress => (address);
     }
 }

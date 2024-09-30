@@ -185,28 +185,10 @@ namespace SF3.X019_Editor.Models.Items
 
         }
 
-        public int ID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int ID => index;
+        public string Name => name;
 
-        public int SpriteID
-        {
-            get
-            {
-                return spriteID;
-            }
-        }
+        public int SpriteID => spriteID;
 
         public int MaxHP
         {
@@ -993,13 +975,6 @@ namespace SF3.X019_Editor.Models.Items
             }
         }
 
-        public int Address
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int Address => (address);
     }
 }

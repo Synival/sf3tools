@@ -55,20 +55,8 @@ namespace SF3.X013_Editor.Models.Critrate
 
         }
 
-        public int CritrateID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string CritrateName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int CritrateID => index;
+        public string CritrateName => name;
 
         public int NoSpecial
         {
@@ -138,13 +126,6 @@ namespace SF3.X013_Editor.Models.Critrate
             }
         }
 
-        public int CritrateAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int CritrateAddress => (address);
     }
 }

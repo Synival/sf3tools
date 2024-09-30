@@ -47,20 +47,8 @@ namespace SF3.X013_Editor.Models.CritMod
 
         }
 
-        public int CritModID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string CritModName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int CritModID => index;
+        public string CritModName => name;
 
         public int Advantage
         {
@@ -85,13 +73,6 @@ namespace SF3.X013_Editor.Models.CritMod
             }
         }
 
-        public int CritModAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int CritModAddress => (address);
     }
 }

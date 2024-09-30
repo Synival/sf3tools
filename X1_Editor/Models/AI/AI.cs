@@ -216,20 +216,8 @@ namespace SF3.X1_Editor.Models.AI
 
         }
 
-        public int AIID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string AIName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int AIID => index;
+        public string AIName => name;
 
         public int TargetX
         {
@@ -253,13 +241,6 @@ namespace SF3.X1_Editor.Models.AI
                 FileEditor.setWord(targetY, value);
             }
         }
-        public int AIAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int AIAddress => (address);
     }
 }

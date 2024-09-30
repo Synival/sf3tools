@@ -78,20 +78,8 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         }
 
-        public int StatusEffectID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string StatusEffectName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int StatusEffectID => index;
+        public string StatusEffectName => name;
 
         public int StatusLuck0
         {
@@ -213,13 +201,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
             }
         }
 
-        public int StatusEffectAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int StatusEffectAddress => (address);
     }
 }

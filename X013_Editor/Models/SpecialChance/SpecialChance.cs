@@ -97,20 +97,8 @@ namespace SF3.X013_Editor.Models.SpecialChance
 
         }
 
-        public int SpecialChanceID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string SpecialChanceName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int SpecialChanceID => index;
+        public string SpecialChanceName => name;
 
         public int TwoSpecials2
         {
@@ -181,13 +169,6 @@ namespace SF3.X013_Editor.Models.SpecialChance
             }
         }
 
-        public int SpecialChanceAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int SpecialChanceAddress => (address);
     }
 }

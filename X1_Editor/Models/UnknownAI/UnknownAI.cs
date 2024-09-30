@@ -232,20 +232,8 @@ namespace SF3.X1_Editor.Models.UnknownAI
 
         }
 
-        public int UnknownAIID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string UnknownAIName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int UnknownAIID => index;
+        public string UnknownAIName => name;
 
         public int UnknownAI00
         {
@@ -355,13 +343,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
             }
         }
 
-        public int UnknownAIAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int UnknownAIAddress => (address);
     }
 }

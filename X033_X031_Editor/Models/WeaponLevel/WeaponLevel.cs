@@ -107,20 +107,8 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 
         }
 
-        public int WeaponLevelID
-        {
-            get
-            {
-                return index;
-            }
-        }
-        public string WeaponLevelName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public int WeaponLevelID => index;
+        public string WeaponLevelName => name;
 
         public int WLevel1
         {
@@ -167,13 +155,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
             }
         }
 
-        public int WeaponLevelAddress
-        {
-            get
-            {
-                return (address);
-            }
-        }
-
+        public int WeaponLevelAddress => (address);
     }
 }
