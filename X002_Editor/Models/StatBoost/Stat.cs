@@ -57,14 +57,8 @@ namespace SF3.X002_Editor.Models.StatBoost
 
         public int Stat
         {
-            get
-            {
-                return FileEditor.getByte(stat);
-            }
-            set
-            {
-                FileEditor.setByte(stat, (byte)value);
-            }
+            get => FileEditor.getByte(stat);
+            set => FileEditor.setByte(stat, (byte)value);
         }
 
         public int StatAddress => (address);

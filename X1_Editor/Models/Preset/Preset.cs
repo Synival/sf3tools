@@ -202,118 +202,58 @@ namespace SF3.X1_Editor.Models.Presets
 
         public int SizeUnknown1
         {
-            get
-            {
-                return FileEditor.getByte(unknown1);
-            }
-            set
-            {
-                FileEditor.setByte(unknown1, (byte)value);
-            }
+            get => FileEditor.getByte(unknown1);
+            set => FileEditor.setByte(unknown1, (byte)value);
         }
         public int TableSize
         {
-            get
-            {
-                return FileEditor.getByte(tableSize);
-            }
-            set
-            {
-                FileEditor.setByte(tableSize, (byte)value);
-            }
+            get => FileEditor.getByte(tableSize);
+            set => FileEditor.setByte(tableSize, (byte)value);
         }
         public int SizeUnknown2
         {
-            get
-            {
-                return FileEditor.getByte(unknown2);
-            }
-            set
-            {
-                FileEditor.setByte(unknown2, (byte)value);
-            }
+            get => FileEditor.getByte(unknown2);
+            set => FileEditor.setByte(unknown2, (byte)value);
         }
         public int SizeUnknown3
         {
-            get
-            {
-                return FileEditor.getByte(unknown3);
-            }
-            set
-            {
-                FileEditor.setByte(unknown3, (byte)value);
-            }
+            get => FileEditor.getByte(unknown3);
+            set => FileEditor.setByte(unknown3, (byte)value);
         }
         public int SizeUnknown4
         {
-            get
-            {
-                return FileEditor.getByte(unknown4);
-            }
-            set
-            {
-                FileEditor.setByte(unknown4, (byte)value);
-            }
+            get => FileEditor.getByte(unknown4);
+            set => FileEditor.setByte(unknown4, (byte)value);
         }
 
         public int SizeUnknown5
         {
-            get
-            {
-                return FileEditor.getByte(unknown5);
-            }
-            set
-            {
-                FileEditor.setByte(unknown5, (byte)value);
-            }
+            get => FileEditor.getByte(unknown5);
+            set => FileEditor.setByte(unknown5, (byte)value);
         }
 
         public int SizeUnknown6
         {
-            get
-            {
-                return FileEditor.getByte(unknown6);
-            }
-            set
-            {
-                FileEditor.setByte(unknown6, (byte)value);
-            }
+            get => FileEditor.getByte(unknown6);
+            set => FileEditor.setByte(unknown6, (byte)value);
         }
 
         public int SizeUnknown7
         {
-            get
-            {
-                return FileEditor.getByte(unknown7);
-            }
-            set
-            {
-                FileEditor.setByte(unknown7, (byte)value);
-            }
+            get => FileEditor.getByte(unknown7);
+            set => FileEditor.setByte(unknown7, (byte)value);
         }
 
         public int SizeUnknown8
         {
-            get
-            {
-                return FileEditor.getByte(unknown8);
-            }
-            set
-            {
-                FileEditor.setByte(unknown8, (byte)value);
-            }
+            get => FileEditor.getByte(unknown8);
+            set => FileEditor.setByte(unknown8, (byte)value);
         }
 
         public int SizeUnknown9
         {
-            get
-            {
-                return FileEditor.getByte(unknown9);
-            }
-            set
-            {
-                FileEditor.setByte(unknown9, (byte)value);
-            }
+            get => FileEditor.getByte(unknown9);
+            set => FileEditor.setByte(unknown9, (byte)value);
         }
 
         public int Map => Globals.map;

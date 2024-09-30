@@ -56,47 +56,23 @@ namespace SF3.X013_Editor.Models.Stats
 
         public int SLvlStat1
         {
-            get
-            {
-                return FileEditor.getByte(sLvlStat1);
-            }
-            set
-            {
-                FileEditor.setByte(sLvlStat1, (byte)value);
-            }
+            get => FileEditor.getByte(sLvlStat1);
+            set => FileEditor.setByte(sLvlStat1, (byte)value);
         }
         public int SLvlStat2
         {
-            get
-            {
-                return FileEditor.getByte(sLvlStat2);
-            }
-            set
-            {
-                FileEditor.setByte(sLvlStat2, (byte)value);
-            }
+            get => FileEditor.getByte(sLvlStat2);
+            set => FileEditor.setByte(sLvlStat2, (byte)value);
         }
         public int SLvlStat3
         {
-            get
-            {
-                return FileEditor.getByte(sLvlStat3);
-            }
-            set
-            {
-                FileEditor.setByte(sLvlStat3, (byte)value);
-            }
+            get => FileEditor.getByte(sLvlStat3);
+            set => FileEditor.setByte(sLvlStat3, (byte)value);
         }
         public int SLvlStat4
         {
-            get
-            {
-                return FileEditor.getByte(sLvlStat4);
-            }
-            set
-            {
-                FileEditor.setByte(sLvlStat4, (byte)value);
-            }
+            get => FileEditor.getByte(sLvlStat4);
+            set => FileEditor.setByte(sLvlStat4, (byte)value);
         }
 
         public int StatAddress => (address);

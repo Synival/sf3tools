@@ -58,58 +58,28 @@ namespace SF3.X019_Editor.Models.Presets
 
         public int SpellID2
         {
-            get
-            {
-                return FileEditor.getByte(spell);
-            }
-            set
-            {
-                FileEditor.setByte(spell, (byte)value);
-            }
+            get => FileEditor.getByte(spell);
+            set => FileEditor.setByte(spell, (byte)value);
         }
         public int Weapon0
         {
-            get
-            {
-                return FileEditor.getByte(weaponLv0);
-            }
-            set
-            {
-                FileEditor.setByte(weaponLv0, (byte)value);
-            }
+            get => FileEditor.getByte(weaponLv0);
+            set => FileEditor.setByte(weaponLv0, (byte)value);
         }
         public int Weapon1
         {
-            get
-            {
-                return FileEditor.getByte(weaponLv1);
-            }
-            set
-            {
-                FileEditor.setByte(weaponLv1, (byte)value);
-            }
+            get => FileEditor.getByte(weaponLv1);
+            set => FileEditor.setByte(weaponLv1, (byte)value);
         }
         public int Weapon2
         {
-            get
-            {
-                return FileEditor.getByte(weaponLv2);
-            }
-            set
-            {
-                FileEditor.setByte(weaponLv2, (byte)value);
-            }
+            get => FileEditor.getByte(weaponLv2);
+            set => FileEditor.setByte(weaponLv2, (byte)value);
         }
         public int Weapon3
         {
-            get
-            {
-                return FileEditor.getByte(weaponLv3);
-            }
-            set
-            {
-                FileEditor.setByte(weaponLv3, (byte)value);
-            }
+            get => FileEditor.getByte(weaponLv3);
+            set => FileEditor.setByte(weaponLv3, (byte)value);
         }
 
         public int PresetAddress => (address);

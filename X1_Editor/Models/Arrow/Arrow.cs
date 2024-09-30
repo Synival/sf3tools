@@ -97,74 +97,38 @@ namespace SF3.X1_Editor.Models.Arrows
 
         public int ArrowUnknown0
         {
-            get
-            {
-                return FileEditor.getWord(unknown0);
-            }
-            set
-            {
-                FileEditor.setWord(unknown0, value);
-            }
+            get => FileEditor.getWord(unknown0);
+            set => FileEditor.setWord(unknown0, value);
         }
 
         public int ArrowText
         {
-            get
-            {
-                return FileEditor.getWord(textID);
-            }
-            set
-            {
-                FileEditor.setWord(textID, value);
-            }
+            get => FileEditor.getWord(textID);
+            set => FileEditor.setWord(textID, value);
         }
 
         public int ArrowUnknown4
         {
-            get
-            {
-                return FileEditor.getWord(unknown4);
-            }
-            set
-            {
-                FileEditor.setWord(unknown4, value);
-            }
+            get => FileEditor.getWord(unknown4);
+            set => FileEditor.setWord(unknown4, value);
         }
 
         public int ArrowWarp
         {
-            get
-            {
-                return FileEditor.getWord(warpInMPD);
-            }
-            set
-            {
-                FileEditor.setWord(warpInMPD, value);
-            }
+            get => FileEditor.getWord(warpInMPD);
+            set => FileEditor.setWord(warpInMPD, value);
         }
 
         public int ArrowUnknown8
         {
-            get
-            {
-                return FileEditor.getWord(unknown8);
-            }
-            set
-            {
-                FileEditor.setWord(unknown8, value);
-            }
+            get => FileEditor.getWord(unknown8);
+            set => FileEditor.setWord(unknown8, value);
         }
 
         public int ArrowUnknownA
         {
-            get
-            {
-                return FileEditor.getWord(unknownA);
-            }
-            set
-            {
-                FileEditor.setWord(unknownA, value);
-            }
+            get => FileEditor.getWord(unknownA);
+            set => FileEditor.setWord(unknownA, value);
         }
 
         public int ArrowAddress => (address);

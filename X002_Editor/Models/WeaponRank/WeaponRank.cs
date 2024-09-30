@@ -64,47 +64,23 @@ namespace SF3.X002_Editor.Models.WeaponRank
 
         public int Skill0
         {
-            get
-            {
-                return FileEditor.getByte(skill0);
-            }
-            set
-            {
-                FileEditor.setByte(skill0, (byte)value);
-            }
+            get => FileEditor.getByte(skill0);
+            set => FileEditor.setByte(skill0, (byte)value);
         }
         public int Skill1
         {
-            get
-            {
-                return FileEditor.getByte(skill1);
-            }
-            set
-            {
-                FileEditor.setByte(skill1, (byte)value);
-            }
+            get => FileEditor.getByte(skill1);
+            set => FileEditor.setByte(skill1, (byte)value);
         }
         public int Skill2
         {
-            get
-            {
-                return FileEditor.getByte(skill2);
-            }
-            set
-            {
-                FileEditor.setByte(skill2, (byte)value);
-            }
+            get => FileEditor.getByte(skill2);
+            set => FileEditor.setByte(skill2, (byte)value);
         }
         public int Skill3
         {
-            get
-            {
-                return FileEditor.getByte(skill3);
-            }
-            set
-            {
-                FileEditor.setByte(skill3, (byte)value);
-            }
+            get => FileEditor.getByte(skill3);
+            set => FileEditor.setByte(skill3, (byte)value);
         }
 
         public int WeaponRankAddress => (address);

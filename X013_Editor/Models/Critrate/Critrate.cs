@@ -60,70 +60,34 @@ namespace SF3.X013_Editor.Models.Critrate
 
         public int NoSpecial
         {
-            get
-            {
-                return FileEditor.getByte(noSpecial);
-            }
-            set
-            {
-                FileEditor.setByte(noSpecial, (byte)value);
-            }
+            get => FileEditor.getByte(noSpecial);
+            set => FileEditor.setByte(noSpecial, (byte)value);
         }
         public int OneSpecial
         {
-            get
-            {
-                return FileEditor.getByte(oneSpecial);
-            }
-            set
-            {
-                FileEditor.setByte(oneSpecial, (byte)value);
-            }
+            get => FileEditor.getByte(oneSpecial);
+            set => FileEditor.setByte(oneSpecial, (byte)value);
         }
         public int TwoSpecial
         {
-            get
-            {
-                return FileEditor.getByte(twoSpecial);
-            }
-            set
-            {
-                FileEditor.setByte(twoSpecial, (byte)value);
-            }
+            get => FileEditor.getByte(twoSpecial);
+            set => FileEditor.setByte(twoSpecial, (byte)value);
         }
         public int ThreeSpecial
         {
-            get
-            {
-                return FileEditor.getByte(threeSpecial);
-            }
-            set
-            {
-                FileEditor.setByte(threeSpecial, (byte)value);
-            }
+            get => FileEditor.getByte(threeSpecial);
+            set => FileEditor.setByte(threeSpecial, (byte)value);
         }
         public int FourSpecial
         {
-            get
-            {
-                return FileEditor.getByte(fourSpecial);
-            }
-            set
-            {
-                FileEditor.setByte(fourSpecial, (byte)value);
-            }
+            get => FileEditor.getByte(fourSpecial);
+            set => FileEditor.setByte(fourSpecial, (byte)value);
         }
 
         public int FiveSpecial
         {
-            get
-            {
-                return FileEditor.getByte(fiveSpecial);
-            }
-            set
-            {
-                FileEditor.setByte(fiveSpecial, (byte)value);
-            }
+            get => FileEditor.getByte(fiveSpecial);
+            set => FileEditor.setByte(fiveSpecial, (byte)value);
         }
 
         public int CritrateAddress => (address);

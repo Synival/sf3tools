@@ -144,214 +144,106 @@ namespace SF3.X033_X031_Editor.Models.Presets
 
         public int CharacterE
         {
-            get
-            {
-                return FileEditor.getByte(character);
-            }
-            set
-            {
-                FileEditor.setByte(character, (byte)value);
-            }
+            get => FileEditor.getByte(character);
+            set => FileEditor.setByte(character, (byte)value);
         }
 
         public int CharacterClassE
         {
-            get
-            {
-                return FileEditor.getByte(characterClass);
-            }
-            set
-            {
-                FileEditor.setByte(characterClass, (byte)value);
-            }
+            get => FileEditor.getByte(characterClass);
+            set => FileEditor.setByte(characterClass, (byte)value);
         }
 
         public int Level
         {
-            get
-            {
-                return FileEditor.getByte(level);
-            }
-            set
-            {
-                FileEditor.setByte(level, (byte)value);
-            }
+            get => FileEditor.getByte(level);
+            set => FileEditor.setByte(level, (byte)value);
         }
 
         public int Sex
         {
-            get
-            {
-                return FileEditor.getByte(sex);
-            }
-            set
-            {
-                FileEditor.setByte(sex, (byte)value);
-            }
+            get => FileEditor.getByte(sex);
+            set => FileEditor.setByte(sex, (byte)value);
         }
 
         public int Weapon
         {
-            get
-            {
-                return FileEditor.getWord(weapon);
-            }
-            set
-            {
-                FileEditor.setWord(weapon, value);
-            }
+            get => FileEditor.getWord(weapon);
+            set => FileEditor.setWord(weapon, value);
         }
 
         public int Accessory
         {
-            get
-            {
-                return FileEditor.getWord(accessory);
-            }
-            set
-            {
-                FileEditor.setWord(accessory, value);
-            }
+            get => FileEditor.getWord(accessory);
+            set => FileEditor.setWord(accessory, value);
         }
 
         public int Item1
         {
-            get
-            {
-                return FileEditor.getWord(item1);
-            }
-            set
-            {
-                FileEditor.setWord(item1, value);
-            }
+            get => FileEditor.getWord(item1);
+            set => FileEditor.setWord(item1, value);
         }
 
         public int Item2
         {
-            get
-            {
-                return FileEditor.getWord(item2);
-            }
-            set
-            {
-                FileEditor.setWord(item2, value);
-            }
+            get => FileEditor.getWord(item2);
+            set => FileEditor.setWord(item2, value);
         }
         public int Item3
         {
-            get
-            {
-                return FileEditor.getWord(item3);
-            }
-            set
-            {
-                FileEditor.setWord(item3, value);
-            }
+            get => FileEditor.getWord(item3);
+            set => FileEditor.setWord(item3, value);
         }
         public int Item4
         {
-            get
-            {
-                return FileEditor.getWord(item4);
-            }
-            set
-            {
-                FileEditor.setWord(item4, value);
-            }
+            get => FileEditor.getWord(item4);
+            set => FileEditor.setWord(item4, value);
         }
 
         public int Weapon1Type
         {
-            get
-            {
-                return FileEditor.getByte(weapon1Type);
-            }
-            set
-            {
-                FileEditor.setByte(weapon1Type, (byte)value);
-            }
+            get => FileEditor.getByte(weapon1Type);
+            set => FileEditor.setByte(weapon1Type, (byte)value);
         }
 
         public int Weapon1Exp
         {
-            get
-            {
-                return FileEditor.getWord(weapon1Exp);
-            }
-            set
-            {
-                FileEditor.setWord(weapon1Exp, value);
-            }
+            get => FileEditor.getWord(weapon1Exp);
+            set => FileEditor.setWord(weapon1Exp, value);
         }
 
         public int Weapon2Type
         {
-            get
-            {
-                return FileEditor.getByte(weapon2Type);
-            }
-            set
-            {
-                FileEditor.setByte(weapon2Type, (byte)value);
-            }
+            get => FileEditor.getByte(weapon2Type);
+            set => FileEditor.setByte(weapon2Type, (byte)value);
         }
 
         public int Weapon2Exp
         {
-            get
-            {
-                return FileEditor.getWord(weapon2Exp);
-            }
-            set
-            {
-                FileEditor.setWord(weapon2Exp, value);
-            }
+            get => FileEditor.getWord(weapon2Exp);
+            set => FileEditor.setWord(weapon2Exp, value);
         }
         public int Weapon3Type
         {
-            get
-            {
-                return FileEditor.getByte(weapon3Type);
-            }
-            set
-            {
-                FileEditor.setByte(weapon3Type, (byte)value);
-            }
+            get => FileEditor.getByte(weapon3Type);
+            set => FileEditor.setByte(weapon3Type, (byte)value);
         }
 
         public int Weapon3Exp
         {
-            get
-            {
-                return FileEditor.getWord(weapon3Exp);
-            }
-            set
-            {
-                FileEditor.setWord(weapon3Exp, value);
-            }
+            get => FileEditor.getWord(weapon3Exp);
+            set => FileEditor.setWord(weapon3Exp, value);
         }
         public int Weapon4Type
         {
-            get
-            {
-                return FileEditor.getByte(weapon4Type);
-            }
-            set
-            {
-                FileEditor.setByte(weapon4Type, (byte)value);
-            }
+            get => FileEditor.getByte(weapon4Type);
+            set => FileEditor.setByte(weapon4Type, (byte)value);
         }
 
         public int Weapon4Exp
         {
-            get
-            {
-                return FileEditor.getWord(weapon4Exp);
-            }
-            set
-            {
-                FileEditor.setWord(weapon4Exp, value);
-            }
+            get => FileEditor.getWord(weapon4Exp);
+            set => FileEditor.setWord(weapon4Exp, value);
         }
 
         public int PresetAddress => (address);

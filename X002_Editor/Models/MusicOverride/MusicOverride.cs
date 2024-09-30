@@ -83,14 +83,8 @@ namespace SF3.X002_Editor.Models.MusicOverride
 
         public int MOMapID
         {
-            get
-            {
-                return FileEditor.getWord(mapID);
-            }
-            set
-            {
-                FileEditor.setWord(mapID, value);
-            }
+            get => FileEditor.getWord(mapID);
+            set => FileEditor.setWord(mapID, value);
         }
 
         public int SynMusic
@@ -108,134 +102,68 @@ namespace SF3.X002_Editor.Models.MusicOverride
 
         public int MedMusic
         {
-            get
-            {
-                return FileEditor.getByte(medMusic);
-            }
-            set
-            {
-                FileEditor.setByte(medMusic, (byte)value);
-            }
+            get => FileEditor.getByte(medMusic);
+            set => FileEditor.setByte(medMusic, (byte)value);
         }
 
         public int JulMusic
         {
-            get
-            {
-                return FileEditor.getByte(julMusic);
-            }
-            set
-            {
-                FileEditor.setByte(julMusic, (byte)value);
-            }
+            get => FileEditor.getByte(julMusic);
+            set => FileEditor.setByte(julMusic, (byte)value);
         }
 
         public int ExtraMusic
         {
-            get
-            {
-                return FileEditor.getByte(extraMusic);
-            }
-            set
-            {
-                FileEditor.setByte(extraMusic, (byte)value);
-            }
+            get => FileEditor.getByte(extraMusic);
+            set => FileEditor.setByte(extraMusic, (byte)value);
         }
 
         public int MOUnknown1
         {
-            get
-            {
-                return FileEditor.getDouble(unknown1);
-            }
-            set
-            {
-                FileEditor.setDouble(unknown1, value);
-            }
+            get => FileEditor.getDouble(unknown1);
+            set => FileEditor.setDouble(unknown1, value);
         }
 
         public int MOUnknown2
         {
-            get
-            {
-                return FileEditor.getDouble(unknown2);
-            }
-            set
-            {
-                FileEditor.setDouble(unknown2, value);
-            }
+            get => FileEditor.getDouble(unknown2);
+            set => FileEditor.setDouble(unknown2, value);
         }
 
         public int MOUnknown3
         {
-            get
-            {
-                return FileEditor.getDouble(unknown3);
-            }
-            set
-            {
-                FileEditor.setDouble(unknown3, value);
-            }
+            get => FileEditor.getDouble(unknown3);
+            set => FileEditor.setDouble(unknown3, value);
         }
 
         public int MOUnknown4
         {
-            get
-            {
-                return FileEditor.getDouble(unknown4);
-            }
-            set
-            {
-                FileEditor.setDouble(unknown4, value);
-            }
+            get => FileEditor.getDouble(unknown4);
+            set => FileEditor.setDouble(unknown4, value);
         }
 
         public int SynChr
         {
-            get
-            {
-                return FileEditor.getDouble(synChr);
-            }
-            set
-            {
-                FileEditor.setDouble(synChr, value);
-            }
+            get => FileEditor.getDouble(synChr);
+            set => FileEditor.setDouble(synChr, value);
         }
 
         public int MedChr
         {
-            get
-            {
-                return FileEditor.getDouble(medChr);
-            }
-            set
-            {
-                FileEditor.setDouble(medChr, value);
-            }
+            get => FileEditor.getDouble(medChr);
+            set => FileEditor.setDouble(medChr, value);
         }
 
         public int JulChr
         {
-            get
-            {
-                return FileEditor.getDouble(julChr);
-            }
-            set
-            {
-                FileEditor.setDouble(julChr, value);
-            }
+            get => FileEditor.getDouble(julChr);
+            set => FileEditor.setDouble(julChr, value);
         }
 
         public int ExtraChr
         {
-            get
-            {
-                return FileEditor.getDouble(extraChr);
-            }
-            set
-            {
-                FileEditor.setDouble(extraChr, value);
-            }
+            get => FileEditor.getDouble(extraChr);
+            set => FileEditor.setDouble(extraChr, value);
         }
 
         public int MusicOverrideAddress => (address);

@@ -52,25 +52,13 @@ namespace SF3.X013_Editor.Models.ExpLimit
 
         public int ExpCheck
         {
-            get
-            {
-                return FileEditor.getByte(expCheck);
-            }
-            set
-            {
-                FileEditor.setByte(expCheck, (byte)value);
-            }
+            get => FileEditor.getByte(expCheck);
+            set => FileEditor.setByte(expCheck, (byte)value);
         }
         public int ExpReplacement
         {
-            get
-            {
-                return FileEditor.getByte(expReplacement);
-            }
-            set
-            {
-                FileEditor.setByte(expReplacement, (byte)value);
-            }
+            get => FileEditor.getByte(expReplacement);
+            set => FileEditor.setByte(expReplacement, (byte)value);
         }
 
         public int ExpLimitAddress => (address);

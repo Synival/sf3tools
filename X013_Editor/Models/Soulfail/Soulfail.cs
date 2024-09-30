@@ -50,14 +50,8 @@ namespace SF3.X013_Editor.Models.Soulfail
 
         public int ExpLost
         {
-            get
-            {
-                return FileEditor.getByte(expLost);
-            }
-            set
-            {
-                FileEditor.setByte(expLost, (byte)value);
-            }
+            get => FileEditor.getByte(expLost);
+            set => FileEditor.setByte(expLost, (byte)value);
         }
 
         public int SoulfailAddress => (address);

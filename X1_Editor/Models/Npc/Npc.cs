@@ -136,134 +136,68 @@ namespace SF3.X1_Editor.Models.Npcs
 
         public int SpriteID
         {
-            get
-            {
-                return FileEditor.getWord(spriteID);
-            }
-            set
-            {
-                FileEditor.setWord(spriteID, value);
-            }
+            get => FileEditor.getWord(spriteID);
+            set => FileEditor.setWord(spriteID, value);
         }
 
         public int NpcUnknown
         {
-            get
-            {
-                return FileEditor.getWord(unknown1);
-            }
-            set
-            {
-                FileEditor.setWord(unknown1, value);
-            }
+            get => FileEditor.getWord(unknown1);
+            set => FileEditor.setWord(unknown1, value);
         }
 
         public int NpcTable
         {
-            get
-            {
-                return FileEditor.getDouble(table);
-            }
-            set
-            {
-                FileEditor.setDouble(table, value);
-            }
+            get => FileEditor.getDouble(table);
+            set => FileEditor.setDouble(table, value);
         }
 
         public int NpcXPos
         {
-            get
-            {
-                return FileEditor.getWord(xPos);
-            }
-            set
-            {
-                FileEditor.setWord(xPos, value);
-            }
+            get => FileEditor.getWord(xPos);
+            set => FileEditor.setWord(xPos, value);
         }
 
         public int NpcZPos
         {
-            get
-            {
-                return FileEditor.getWord(zPos);
-            }
-            set
-            {
-                FileEditor.setWord(zPos, value);
-            }
+            get => FileEditor.getWord(zPos);
+            set => FileEditor.setWord(zPos, value);
         }
 
         public int NpcDirection
         {
-            get
-            {
-                return FileEditor.getWord(direction);
-            }
-            set
-            {
-                FileEditor.setWord(direction, value);
-            }
+            get => FileEditor.getWord(direction);
+            set => FileEditor.setWord(direction, value);
         }
 
         public int NpcUnknownA
         {
-            get
-            {
-                return FileEditor.getWord(unknownA);
-            }
-            set
-            {
-                FileEditor.setWord(unknownA, value);
-            }
+            get => FileEditor.getWord(unknownA);
+            set => FileEditor.setWord(unknownA, value);
         }
 
         public int NpcUnknownC
         {
-            get
-            {
-                return FileEditor.getWord(unknownC);
-            }
-            set
-            {
-                FileEditor.setWord(unknownC, value);
-            }
+            get => FileEditor.getWord(unknownC);
+            set => FileEditor.setWord(unknownC, value);
         }
 
         public int NpcUnknownE
         {
-            get
-            {
-                return FileEditor.getWord(unknownE);
-            }
-            set
-            {
-                FileEditor.setWord(unknownE, value);
-            }
+            get => FileEditor.getWord(unknownE);
+            set => FileEditor.setWord(unknownE, value);
         }
 
         public int NpcUnknown12
         {
-            get
-            {
-                return FileEditor.getWord(unknown12);
-            }
-            set
-            {
-                FileEditor.setWord(unknown12, value);
-            }
+            get => FileEditor.getWord(unknown12);
+            set => FileEditor.setWord(unknown12, value);
         }
 
         public int NpcUnknown16
         {
-            get
-            {
-                return FileEditor.getWord(unknown16);
-            }
-            set
-            {
-                FileEditor.setWord(unknown16, value);
-            }
+            get => FileEditor.getWord(unknown16);
+            set => FileEditor.setWord(unknown16, value);
         }
 
         public int NpcAddress => (address);

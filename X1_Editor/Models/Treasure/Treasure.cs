@@ -121,74 +121,38 @@ namespace SF3.X1_Editor.Models.Treasures
 
         public int Searched
         {
-            get
-            {
-                return FileEditor.getWord(searched);
-            }
-            set
-            {
-                FileEditor.setWord(searched, value);
-            }
+            get => FileEditor.getWord(searched);
+            set => FileEditor.setWord(searched, value);
         }
 
         public int EventNumber
         {
-            get
-            {
-                return FileEditor.getWord(eventNumber);
-            }
-            set
-            {
-                FileEditor.setWord(eventNumber, value);
-            }
+            get => FileEditor.getWord(eventNumber);
+            set => FileEditor.setWord(eventNumber, value);
         }
 
         public int FlagUse
         {
-            get
-            {
-                return FileEditor.getWord(flagUsed);
-            }
-            set
-            {
-                FileEditor.setWord(flagUsed, value);
-            }
+            get => FileEditor.getWord(flagUsed);
+            set => FileEditor.setWord(flagUsed, value);
         }
 
         public int UnknownTreasure
         {
-            get
-            {
-                return FileEditor.getWord(unknown);
-            }
-            set
-            {
-                FileEditor.setWord(unknown, value);
-            }
+            get => FileEditor.getWord(unknown);
+            set => FileEditor.setWord(unknown, value);
         }
 
         public int EventType
         {
-            get
-            {
-                return FileEditor.getWord(eventType);
-            }
-            set
-            {
-                FileEditor.setWord(eventType, value);
-            }
+            get => FileEditor.getWord(eventType);
+            set => FileEditor.setWord(eventType, value);
         }
 
         public int TreasureItem
         {
-            get
-            {
-                return FileEditor.getWord(itemID);
-            }
-            set
-            {
-                FileEditor.setWord(itemID, value);
-            }
+            get => FileEditor.getWord(itemID);
+            set => FileEditor.setWord(itemID, value);
         }
 
         public int TreasureAddress => (address);

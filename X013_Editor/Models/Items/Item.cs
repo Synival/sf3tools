@@ -61,47 +61,23 @@ namespace SF3.X013_Editor.Models.Items
 
         public int Unknown1
         {
-            get
-            {
-                return FileEditor.getByte(unknown1);
-            }
-            set
-            {
-                FileEditor.setByte(unknown1, (byte)value);
-            }
+            get => FileEditor.getByte(unknown1);
+            set => FileEditor.setByte(unknown1, (byte)value);
         }
         public int DamageCalc
         {
-            get
-            {
-                return FileEditor.getByte(damageCalculation);
-            }
-            set
-            {
-                FileEditor.setByte(damageCalculation, (byte)value);
-            }
+            get => FileEditor.getByte(damageCalculation);
+            set => FileEditor.setByte(damageCalculation, (byte)value);
         }
         public int ExtraPow
         {
-            get
-            {
-                return FileEditor.getByte(extraPow);
-            }
-            set
-            {
-                FileEditor.setByte(extraPow, (byte)value);
-            }
+            get => FileEditor.getByte(extraPow);
+            set => FileEditor.setByte(extraPow, (byte)value);
         }
         public int Pow
         {
-            get
-            {
-                return FileEditor.getByte(pow);
-            }
-            set
-            {
-                FileEditor.setByte(pow, (byte)value);
-            }
+            get => FileEditor.getByte(pow);
+            set => FileEditor.setByte(pow, (byte)value);
         }
 
         /*public int ranResult0

@@ -101,257 +101,119 @@ namespace SF3.X002_Editor.Models.Items
 
         public int Price
         {
-            get
-            {
-                return FileEditor.getWord(PriceLocation);
-            }
-            set
-            {
-                FileEditor.setWord(PriceLocation, value);
-            }
+            get => FileEditor.getWord(PriceLocation);
+            set => FileEditor.setWord(PriceLocation, value);
         }
         public int WeaponType
         {
-            get
-            {
-                return FileEditor.getByte(WeaponTypeLocation);
-            }
-            set
-            {
-                FileEditor.setByte(WeaponTypeLocation, (byte)value);
-            }
+            get => FileEditor.getByte(WeaponTypeLocation);
+            set => FileEditor.setByte(WeaponTypeLocation, (byte)value);
         }
         public int EffectsEquip
         {
-            get
-            {
-                return FileEditor.getByte(EffectsEquipLocation);
-            }
-            set
-            {
-                FileEditor.setByte(EffectsEquipLocation, (byte)value);
-            }
+            get => FileEditor.getByte(EffectsEquipLocation);
+            set => FileEditor.setByte(EffectsEquipLocation, (byte)value);
         }
         public int Requirements
         {
-            get
-            {
-                return FileEditor.getByte(RequirementLocation);
-            }
-            set
-            {
-                FileEditor.setByte(RequirementLocation, (byte)value);
-            }
+            get => FileEditor.getByte(RequirementLocation);
+            set => FileEditor.setByte(RequirementLocation, (byte)value);
         }
         public int Range
         {
-            get
-            {
-                return FileEditor.getByte(RangeLocation);
-            }
-            set
-            {
-                FileEditor.setByte(RangeLocation, (byte)value);
-            }
+            get => FileEditor.getByte(RangeLocation);
+            set => FileEditor.setByte(RangeLocation, (byte)value);
         }
         public int Attack
         {
-            get
-            {
-                return FileEditor.getByte(AttackLocation);
-            }
-            set
-            {
-                FileEditor.setByte(AttackLocation, (byte)value);
-            }
+            get => FileEditor.getByte(AttackLocation);
+            set => FileEditor.setByte(AttackLocation, (byte)value);
         }
         public int Defense
         {
-            get
-            {
-                return FileEditor.getByte(DefenseLocation);
-            }
-            set
-            {
-                FileEditor.setByte(DefenseLocation, (byte)value);
-            }
+            get => FileEditor.getByte(DefenseLocation);
+            set => FileEditor.setByte(DefenseLocation, (byte)value);
         }
         public int AttackRank
         {
-            get
-            {
-                return FileEditor.getByte(AttackUpRankLocation);
-            }
-            set
-            {
-                FileEditor.setByte(AttackUpRankLocation, (byte)value);
-            }
+            get => FileEditor.getByte(AttackUpRankLocation);
+            set => FileEditor.setByte(AttackUpRankLocation, (byte)value);
         }
         public int SpellRank
         {
-            get
-            {
-                return FileEditor.getByte(SpellUpRankLocation);
-            }
-            set
-            {
-                FileEditor.setByte(SpellUpRankLocation, (byte)value);
-            }
+            get => FileEditor.getByte(SpellUpRankLocation);
+            set => FileEditor.setByte(SpellUpRankLocation, (byte)value);
         }
         public int PhysicalAttribute
         {
-            get
-            {
-                return FileEditor.getByte(PhysicalAttributeLocation);
-            }
-            set
-            {
-                FileEditor.setByte(PhysicalAttributeLocation, (byte)value);
-            }
+            get => FileEditor.getByte(PhysicalAttributeLocation);
+            set => FileEditor.setByte(PhysicalAttributeLocation, (byte)value);
         }
 
         public int Unknown1
         {
-            get
-            {
-                return FileEditor.getByte(Unknown1Location);
-            }
-            set
-            {
-                FileEditor.setByte(Unknown1Location, (byte)value);
-            }
+            get => FileEditor.getByte(Unknown1Location);
+            set => FileEditor.setByte(Unknown1Location, (byte)value);
         }
         public int MonsterType
         {
-            get
-            {
-                return FileEditor.getByte(MonsterTypeAttributeLocation);
-            }
-            set
-            {
-                FileEditor.setByte(MonsterTypeAttributeLocation, (byte)value);
-            }
+            get => FileEditor.getByte(MonsterTypeAttributeLocation);
+            set => FileEditor.setByte(MonsterTypeAttributeLocation, (byte)value);
         }
         public int Unknown2
         {
-            get
-            {
-                return FileEditor.getByte(Unknown2Location);
-            }
-            set
-            {
-                FileEditor.setByte(Unknown2Location, (byte)value);
-            }
+            get => FileEditor.getByte(Unknown2Location);
+            set => FileEditor.setByte(Unknown2Location, (byte)value);
         }
         public int StatType1
         {
-            get
-            {
-                return FileEditor.getByte(StatType1Location);
-            }
-            set
-            {
-                FileEditor.setByte(StatType1Location, (byte)value);
-            }
+            get => FileEditor.getByte(StatType1Location);
+            set => FileEditor.setByte(StatType1Location, (byte)value);
         }
         public int StatUp1
         {
-            get
-            {
-                return FileEditor.getByte(StatUp1Location);
-            }
-            set
-            {
-                FileEditor.setByte(StatUp1Location, (byte)value);
-            }
+            get => FileEditor.getByte(StatUp1Location);
+            set => FileEditor.setByte(StatUp1Location, (byte)value);
         }
         public int StatType2
         {
-            get
-            {
-                return FileEditor.getByte(StatType2Location);
-            }
-            set
-            {
-                FileEditor.setByte(StatType2Location, (byte)value);
-            }
+            get => FileEditor.getByte(StatType2Location);
+            set => FileEditor.setByte(StatType2Location, (byte)value);
         }
         public int StatUp2
         {
-            get
-            {
-                return FileEditor.getByte(StatUp2Location);
-            }
-            set
-            {
-                FileEditor.setByte(StatUp2Location, (byte)value);
-            }
+            get => FileEditor.getByte(StatUp2Location);
+            set => FileEditor.setByte(StatUp2Location, (byte)value);
         }
         public int StatType3
         {
-            get
-            {
-                return FileEditor.getByte(StatType3Location);
-            }
-            set
-            {
-                FileEditor.setByte(StatType3Location, (byte)value);
-            }
+            get => FileEditor.getByte(StatType3Location);
+            set => FileEditor.setByte(StatType3Location, (byte)value);
         }
         public int StatUp3
         {
-            get
-            {
-                return FileEditor.getByte(StatUp3Location);
-            }
-            set
-            {
-                FileEditor.setByte(StatUp3Location, (byte)value);
-            }
+            get => FileEditor.getByte(StatUp3Location);
+            set => FileEditor.setByte(StatUp3Location, (byte)value);
         }
         public int StatType4
         {
-            get
-            {
-                return FileEditor.getByte(StatType4Location);
-            }
-            set
-            {
-                FileEditor.setByte(StatType4Location, (byte)value);
-            }
+            get => FileEditor.getByte(StatType4Location);
+            set => FileEditor.setByte(StatType4Location, (byte)value);
         }
         public int StatUp4
         {
-            get
-            {
-                return FileEditor.getByte(StatUp4Location);
-            }
-            set
-            {
-                FileEditor.setByte(StatUp4Location, (byte)value);
-            }
+            get => FileEditor.getByte(StatUp4Location);
+            set => FileEditor.setByte(StatUp4Location, (byte)value);
         }
         public int SpellUse
         {
-            get
-            {
-                return FileEditor.getByte(SpellOnUseLocation);
-            }
-            set
-            {
-                FileEditor.setByte(SpellOnUseLocation, (byte)value);
-            }
+            get => FileEditor.getByte(SpellOnUseLocation);
+            set => FileEditor.setByte(SpellOnUseLocation, (byte)value);
         }
         public int SpellUseLv
         {
-            get
-            {
-                return FileEditor.getByte(SpellLvOnUseLocation);
-            }
-            set
-            {
-                FileEditor.setByte(SpellLvOnUseLocation, (byte)value);
-            }
+            get => FileEditor.getByte(SpellLvOnUseLocation);
+            set => FileEditor.setByte(SpellLvOnUseLocation, (byte)value);
         }
 
         public int Address => (address);

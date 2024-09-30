@@ -50,14 +50,8 @@ namespace SF3.X013_Editor.Models.HealExp
 
         public int HealBonus
         {
-            get
-            {
-                return FileEditor.getByte(healExp);
-            }
-            set
-            {
-                FileEditor.setByte(healExp, (byte)value);
-            }
+            get => FileEditor.getByte(healExp);
+            set => FileEditor.setByte(healExp, (byte)value);
         }
 
         public int HealExpAddress => (address);

@@ -183,190 +183,94 @@ namespace SF3.X1_Editor.Models.Tiles
 
         public int TileNoEntry
         {
-            get
-            {
-                return FileEditor.getByte(noEntry);
-            }
-            set
-            {
-                FileEditor.setByte(noEntry, (byte)value);
-            }
+            get => FileEditor.getByte(noEntry);
+            set => FileEditor.setByte(noEntry, (byte)value);
         }
         public int TileUnknown1
         {
-            get
-            {
-                return FileEditor.getByte(unknown01);
-            }
-            set
-            {
-                FileEditor.setByte(unknown01, (byte)value);
-            }
+            get => FileEditor.getByte(unknown01);
+            set => FileEditor.setByte(unknown01, (byte)value);
         }
         public int TileGrassland
         {
-            get
-            {
-                return FileEditor.getByte(grassland);
-            }
-            set
-            {
-                FileEditor.setByte(grassland, (byte)value);
-            }
+            get => FileEditor.getByte(grassland);
+            set => FileEditor.setByte(grassland, (byte)value);
         }
         public int TileDirt
         {
-            get
-            {
-                return FileEditor.getByte(dirt);
-            }
-            set
-            {
-                FileEditor.setByte(dirt, (byte)value);
-            }
+            get => FileEditor.getByte(dirt);
+            set => FileEditor.setByte(dirt, (byte)value);
         }
         public int TileDarkGrass
         {
-            get
-            {
-                return FileEditor.getByte(darkGrass);
-            }
-            set
-            {
-                FileEditor.setByte(darkGrass, (byte)value);
-            }
+            get => FileEditor.getByte(darkGrass);
+            set => FileEditor.setByte(darkGrass, (byte)value);
         }
 
         public int TileForest
         {
-            get
-            {
-                return FileEditor.getByte(forest);
-            }
-            set
-            {
-                FileEditor.setByte(forest, (byte)value);
-            }
+            get => FileEditor.getByte(forest);
+            set => FileEditor.setByte(forest, (byte)value);
         }
 
         public int TileBrownMountain
         {
-            get
-            {
-                return FileEditor.getByte(brownMountain);
-            }
-            set
-            {
-                FileEditor.setByte(brownMountain, (byte)value);
-            }
+            get => FileEditor.getByte(brownMountain);
+            set => FileEditor.setByte(brownMountain, (byte)value);
         }
 
         public int TileDesert
         {
-            get
-            {
-                return FileEditor.getByte(desert);
-            }
-            set
-            {
-                FileEditor.setByte(desert, (byte)value);
-            }
+            get => FileEditor.getByte(desert);
+            set => FileEditor.setByte(desert, (byte)value);
         }
 
         public int TileGreyMountain
         {
-            get
-            {
-                return FileEditor.getByte(greyMountain);
-            }
-            set
-            {
-                FileEditor.setByte(greyMountain, (byte)value);
-            }
+            get => FileEditor.getByte(greyMountain);
+            set => FileEditor.setByte(greyMountain, (byte)value);
         }
 
         public int TileUnknown9
         {
-            get
-            {
-                return FileEditor.getByte(unknown09);
-            }
-            set
-            {
-                FileEditor.setByte(unknown09, (byte)value);
-            }
+            get => FileEditor.getByte(unknown09);
+            set => FileEditor.setByte(unknown09, (byte)value);
         }
 
         public int TileUnknownA
         {
-            get
-            {
-                return FileEditor.getByte(unknown0a);
-            }
-            set
-            {
-                FileEditor.setByte(unknown0a, (byte)value);
-            }
+            get => FileEditor.getByte(unknown0a);
+            set => FileEditor.setByte(unknown0a, (byte)value);
         }
 
         public int TileUnknownB
         {
-            get
-            {
-                return FileEditor.getByte(unknown0b);
-            }
-            set
-            {
-                FileEditor.setByte(unknown0b, (byte)value);
-            }
+            get => FileEditor.getByte(unknown0b);
+            set => FileEditor.setByte(unknown0b, (byte)value);
         }
 
         public int TileUnknownC
         {
-            get
-            {
-                return FileEditor.getByte(unknown0c);
-            }
-            set
-            {
-                FileEditor.setByte(unknown0c, (byte)value);
-            }
+            get => FileEditor.getByte(unknown0c);
+            set => FileEditor.setByte(unknown0c, (byte)value);
         }
 
         public int TileUnknownD
         {
-            get
-            {
-                return FileEditor.getByte(unknown0d);
-            }
-            set
-            {
-                FileEditor.setByte(unknown0d, (byte)value);
-            }
+            get => FileEditor.getByte(unknown0d);
+            set => FileEditor.setByte(unknown0d, (byte)value);
         }
 
         public int TileUnknownE
         {
-            get
-            {
-                return FileEditor.getByte(unknown0e);
-            }
-            set
-            {
-                FileEditor.setByte(unknown0e, (byte)value);
-            }
+            get => FileEditor.getByte(unknown0e);
+            set => FileEditor.setByte(unknown0e, (byte)value);
         }
 
         public int TileUnknownF
         {
-            get
-            {
-                return FileEditor.getByte(unknown0f);
-            }
-            set
-            {
-                FileEditor.setByte(unknown0f, (byte)value);
-            }
+            get => FileEditor.getByte(unknown0f);
+            set => FileEditor.setByte(unknown0f, (byte)value);
         }
 
         // public int Map => Globals.map;

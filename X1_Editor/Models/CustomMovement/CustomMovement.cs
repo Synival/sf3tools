@@ -247,118 +247,58 @@ namespace SF3.X1_Editor.Models.CustomMovement
 
         public int CustomMovementUnknown
         {
-            get
-            {
-                return FileEditor.getWord(unknown00);
-            }
-            set
-            {
-                FileEditor.setWord(unknown00, value);
-            }
+            get => FileEditor.getWord(unknown00);
+            set => FileEditor.setWord(unknown00, value);
         }
 
         public int CustomMovementX1
         {
-            get
-            {
-                return FileEditor.getWord(xPos1);
-            }
-            set
-            {
-                FileEditor.setWord(xPos1, value);
-            }
+            get => FileEditor.getWord(xPos1);
+            set => FileEditor.setWord(xPos1, value);
         }
         public int CustomMovementZ1
         {
-            get
-            {
-                return FileEditor.getWord(zPos1);
-            }
-            set
-            {
-                FileEditor.setWord(zPos1, value);
-            }
+            get => FileEditor.getWord(zPos1);
+            set => FileEditor.setWord(zPos1, value);
         }
 
         public int CustomMovementX2
         {
-            get
-            {
-                return FileEditor.getWord(xPos2);
-            }
-            set
-            {
-                FileEditor.setWord(xPos2, value);
-            }
+            get => FileEditor.getWord(xPos2);
+            set => FileEditor.setWord(xPos2, value);
         }
         public int CustomMovementZ2
         {
-            get
-            {
-                return FileEditor.getWord(zPos2);
-            }
-            set
-            {
-                FileEditor.setWord(zPos2, value);
-            }
+            get => FileEditor.getWord(zPos2);
+            set => FileEditor.setWord(zPos2, value);
         }
 
         public int CustomMovementX3
         {
-            get
-            {
-                return FileEditor.getWord(xPos3);
-            }
-            set
-            {
-                FileEditor.setWord(xPos3, value);
-            }
+            get => FileEditor.getWord(xPos3);
+            set => FileEditor.setWord(xPos3, value);
         }
         public int CustomMovementZ3
         {
-            get
-            {
-                return FileEditor.getWord(zPos3);
-            }
-            set
-            {
-                FileEditor.setWord(zPos3, value);
-            }
+            get => FileEditor.getWord(zPos3);
+            set => FileEditor.setWord(zPos3, value);
         }
 
         public int CustomMovementX4
         {
-            get
-            {
-                return FileEditor.getWord(xPos4);
-            }
-            set
-            {
-                FileEditor.setWord(xPos4, value);
-            }
+            get => FileEditor.getWord(xPos4);
+            set => FileEditor.setWord(xPos4, value);
         }
         public int CustomMovementZ4
         {
-            get
-            {
-                return FileEditor.getWord(zPos4);
-            }
-            set
-            {
-                FileEditor.setWord(zPos4, value);
-            }
+            get => FileEditor.getWord(zPos4);
+            set => FileEditor.setWord(zPos4, value);
         }
 
         public int CustomMovementEnd
         {
-            get
-            {
-                return FileEditor.getDouble(ending);
-            }
-            set
-            {
-                FileEditor.setDouble(ending, value);
-            }
+            get => FileEditor.getDouble(ending);
+            set => FileEditor.setDouble(ending, value);
         }
 
         public int CustomMovementAddress => (address);

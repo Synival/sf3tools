@@ -50,14 +50,8 @@ namespace SF3.X013_Editor.Models.Soulmate
 
         public int Chance
         {
-            get
-            {
-                return FileEditor.getByte(chance);
-            }
-            set
-            {
-                FileEditor.setByte(chance, (byte)value);
-            }
+            get => FileEditor.getByte(chance);
+            set => FileEditor.setByte(chance, (byte)value);
         }
 
         public int SoulmateAddress => (address);

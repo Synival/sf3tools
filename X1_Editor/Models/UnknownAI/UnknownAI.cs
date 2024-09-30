@@ -237,110 +237,56 @@ namespace SF3.X1_Editor.Models.UnknownAI
 
         public int UnknownAI00
         {
-            get
-            {
-                return FileEditor.getWord(unknown00);
-            }
-            set
-            {
-                FileEditor.setWord(unknown00, value);
-            }
+            get => FileEditor.getWord(unknown00);
+            set => FileEditor.setWord(unknown00, value);
         }
 
         public int UnknownAI02
         {
-            get
-            {
-                return FileEditor.getWord(unknown02);
-            }
-            set
-            {
-                FileEditor.setWord(unknown02, value);
-            }
+            get => FileEditor.getWord(unknown02);
+            set => FileEditor.setWord(unknown02, value);
         }
 
         public int UnknownAI04
         {
-            get
-            {
-                return FileEditor.getWord(unknown04);
-            }
-            set
-            {
-                FileEditor.setWord(unknown04, value);
-            }
+            get => FileEditor.getWord(unknown04);
+            set => FileEditor.setWord(unknown04, value);
         }
 
         public int UnknownAI06
         {
-            get
-            {
-                return FileEditor.getWord(unknown06);
-            }
-            set
-            {
-                FileEditor.setWord(unknown06, value);
-            }
+            get => FileEditor.getWord(unknown06);
+            set => FileEditor.setWord(unknown06, value);
         }
 
         public int UnknownAI08
         {
-            get
-            {
-                return FileEditor.getWord(unknown08);
-            }
-            set
-            {
-                FileEditor.setWord(unknown08, value);
-            }
+            get => FileEditor.getWord(unknown08);
+            set => FileEditor.setWord(unknown08, value);
         }
 
         public int UnknownAI0A
         {
-            get
-            {
-                return FileEditor.getWord(unknown0A);
-            }
-            set
-            {
-                FileEditor.setWord(unknown0A, value);
-            }
+            get => FileEditor.getWord(unknown0A);
+            set => FileEditor.setWord(unknown0A, value);
         }
 
         public int UnknownAI0C
         {
-            get
-            {
-                return FileEditor.getWord(unknown0C);
-            }
-            set
-            {
-                FileEditor.setWord(unknown0C, value);
-            }
+            get => FileEditor.getWord(unknown0C);
+            set => FileEditor.setWord(unknown0C, value);
         }
 
         public int UnknownAI0E
         {
-            get
-            {
-                return FileEditor.getWord(unknown0E);
-            }
-            set
-            {
-                FileEditor.setWord(unknown0E, value);
-            }
+            get => FileEditor.getWord(unknown0E);
+            set => FileEditor.setWord(unknown0E, value);
         }
 
         public int UnknownAI10
         {
-            get
-            {
-                return FileEditor.getWord(unknown10);
-            }
-            set
-            {
-                FileEditor.setWord(unknown10, value);
-            }
+            get => FileEditor.getWord(unknown10);
+            set => FileEditor.setWord(unknown10, value);
         }
 
         public int UnknownAIAddress => (address);

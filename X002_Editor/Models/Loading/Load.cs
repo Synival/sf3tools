@@ -72,98 +72,50 @@ namespace SF3.X002_Editor.Models.Loading
 
         public int LocationID
         {
-            get
-            {
-                return FileEditor.getWord(locationID);
-            }
-            set
-            {
-                FileEditor.setWord(locationID, value);
-            }
+            get => FileEditor.getWord(locationID);
+            set => FileEditor.setWord(locationID, value);
         }
 
         public int X1
         {
-            get
-            {
-                return FileEditor.getWord(x1);
-            }
-            set
-            {
-                FileEditor.setWord(x1, value);
-            }
+            get => FileEditor.getWord(x1);
+            set => FileEditor.setWord(x1, value);
         }
 
         public int CHP
         {
-            get
-            {
-                return FileEditor.getWord(chp);
-            }
-            set
-            {
-                FileEditor.setWord(chp, value);
-            }
+            get => FileEditor.getWord(chp);
+            set => FileEditor.setWord(chp, value);
         }
 
         public int X5
         {
-            get
-            {
-                return FileEditor.getWord(x5);
-            }
-            set
-            {
-                FileEditor.setWord(x5, value);
-            }
+            get => FileEditor.getWord(x5);
+            set => FileEditor.setWord(x5, value);
         }
 
         public int Music
         {
-            get
-            {
-                return FileEditor.getWord(music);
-            }
-            set
-            {
-                FileEditor.setWord(music, value);
-            }
+            get => FileEditor.getWord(music);
+            set => FileEditor.setWord(music, value);
         }
 
         public int MPD
         {
-            get
-            {
-                return FileEditor.getWord(mpd);
-            }
-            set
-            {
-                FileEditor.setWord(mpd, value);
-            }
+            get => FileEditor.getWord(mpd);
+            set => FileEditor.setWord(mpd, value);
         }
 
         public int LoadUnknown
         {
-            get
-            {
-                return FileEditor.getWord(unknown);
-            }
-            set
-            {
-                FileEditor.setWord(unknown, value);
-            }
+            get => FileEditor.getWord(unknown);
+            set => FileEditor.setWord(unknown, value);
         }
 
         public int CHR
         {
-            get
-            {
-                return FileEditor.getWord(chr);
-            }
-            set
-            {
-                FileEditor.setWord(chr, value);
-            }
+            get => FileEditor.getWord(chr);
+            set => FileEditor.setWord(chr, value);
         }
 
         public int LoadAddress => (address);

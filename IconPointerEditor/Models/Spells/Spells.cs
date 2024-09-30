@@ -88,224 +88,104 @@ namespace SF3.IconPointerEditor.Models.Spells
 
         public int SpellTarget
         {
-            get
-            {
-                return FileEditor.getByte(targetType);
-            }
-            set
-            {
-                FileEditor.setByte(targetType, (byte)value);
-            }
+            get => FileEditor.getByte(targetType);
+            set => FileEditor.setByte(targetType, (byte)value);
         }
         public int SpellType
         {
-            get
-            {
-                return FileEditor.getByte(damageType);
-            }
-            set
-            {
-                FileEditor.setByte(damageType, (byte)value);
-            }
+            get => FileEditor.getByte(damageType);
+            set => FileEditor.setByte(damageType, (byte)value);
         }
         public int SpellUnknown1
         {
-            get
-            {
-                return FileEditor.getByte(unknown1);
-            }
-            set
-            {
-                FileEditor.setByte(unknown1, (byte)value);
-            }
+            get => FileEditor.getByte(unknown1);
+            set => FileEditor.setByte(unknown1, (byte)value);
         }
         public int SpellUnknown2
         {
-            get
-            {
-                return FileEditor.getByte(unknown2);
-            }
-            set
-            {
-                FileEditor.setByte(unknown2, (byte)value);
-            }
+            get => FileEditor.getByte(unknown2);
+            set => FileEditor.setByte(unknown2, (byte)value);
         }
         public int Lv1Distance
         {
-            get
-            {
-                return FileEditor.getByte(lv1Distance);
-            }
-            set
-            {
-                FileEditor.setByte(lv1Distance, (byte)value);
-            }
+            get => FileEditor.getByte(lv1Distance);
+            set => FileEditor.setByte(lv1Distance, (byte)value);
         }
         public int Lv1Targets
         {
-            get
-            {
-                return FileEditor.getByte(lv1Targets);
-            }
-            set
-            {
-                FileEditor.setByte(lv1Targets, (byte)value);
-            }
+            get => FileEditor.getByte(lv1Targets);
+            set => FileEditor.setByte(lv1Targets, (byte)value);
         }
         public int Lv1Cost
         {
-            get
-            {
-                return FileEditor.getByte(lv1Cost);
-            }
-            set
-            {
-                FileEditor.setByte(lv1Cost, (byte)value);
-            }
+            get => FileEditor.getByte(lv1Cost);
+            set => FileEditor.setByte(lv1Cost, (byte)value);
         }
         public int Lv1Damage
         {
-            get
-            {
-                return FileEditor.getByte(lv1Damage);
-            }
-            set
-            {
-                FileEditor.setByte(lv1Damage, (byte)value);
-            }
+            get => FileEditor.getByte(lv1Damage);
+            set => FileEditor.setByte(lv1Damage, (byte)value);
         }
         public int Lv2Distance
         {
-            get
-            {
-                return FileEditor.getByte(lv2Distance);
-            }
-            set
-            {
-                FileEditor.setByte(lv2Distance, (byte)value);
-            }
+            get => FileEditor.getByte(lv2Distance);
+            set => FileEditor.setByte(lv2Distance, (byte)value);
         }
         public int Lv2Targets
         {
-            get
-            {
-                return FileEditor.getByte(lv2Targets);
-            }
-            set
-            {
-                FileEditor.setByte(lv2Targets, (byte)value);
-            }
+            get => FileEditor.getByte(lv2Targets);
+            set => FileEditor.setByte(lv2Targets, (byte)value);
         }
 
         public int Lv2Cost
         {
-            get
-            {
-                return FileEditor.getByte(lv2Cost);
-            }
-            set
-            {
-                FileEditor.setByte(lv2Cost, (byte)value);
-            }
+            get => FileEditor.getByte(lv2Cost);
+            set => FileEditor.setByte(lv2Cost, (byte)value);
         }
         public int Lv2Damage
         {
-            get
-            {
-                return FileEditor.getByte(lv2Damage);
-            }
-            set
-            {
-                FileEditor.setByte(lv2Damage, (byte)value);
-            }
+            get => FileEditor.getByte(lv2Damage);
+            set => FileEditor.setByte(lv2Damage, (byte)value);
         }
         public int Lv3Distance
         {
-            get
-            {
-                return FileEditor.getByte(lv3Distance);
-            }
-            set
-            {
-                FileEditor.setByte(lv3Distance, (byte)value);
-            }
+            get => FileEditor.getByte(lv3Distance);
+            set => FileEditor.setByte(lv3Distance, (byte)value);
         }
         public int Lv3Targets
         {
-            get
-            {
-                return FileEditor.getByte(lv3Targets);
-            }
-            set
-            {
-                FileEditor.setByte(lv3Targets, (byte)value);
-            }
+            get => FileEditor.getByte(lv3Targets);
+            set => FileEditor.setByte(lv3Targets, (byte)value);
         }
         public int Lv3Cost
         {
-            get
-            {
-                return FileEditor.getByte(lv3Cost);
-            }
-            set
-            {
-                FileEditor.setByte(lv3Cost, (byte)value);
-            }
+            get => FileEditor.getByte(lv3Cost);
+            set => FileEditor.setByte(lv3Cost, (byte)value);
         }
         public int Lv3Damage
         {
-            get
-            {
-                return FileEditor.getByte(lv3Damage);
-            }
-            set
-            {
-                FileEditor.setByte(lv3Damage, (byte)value);
-            }
+            get => FileEditor.getByte(lv3Damage);
+            set => FileEditor.setByte(lv3Damage, (byte)value);
         }
         public int Lv4Distance
         {
-            get
-            {
-                return FileEditor.getByte(lv4Distance);
-            }
-            set
-            {
-                FileEditor.setByte(lv4Distance, (byte)value);
-            }
+            get => FileEditor.getByte(lv4Distance);
+            set => FileEditor.setByte(lv4Distance, (byte)value);
         }
         public int Lv4Targets
         {
-            get
-            {
-                return FileEditor.getByte(lv4Targets);
-            }
-            set
-            {
-                FileEditor.setByte(lv4Targets, (byte)value);
-            }
+            get => FileEditor.getByte(lv4Targets);
+            set => FileEditor.setByte(lv4Targets, (byte)value);
         }
         public int Lv4Cost
         {
-            get
-            {
-                return FileEditor.getByte(lv4Cost);
-            }
-            set
-            {
-                FileEditor.setByte(lv4Cost, (byte)value);
-            }
+            get => FileEditor.getByte(lv4Cost);
+            set => FileEditor.setByte(lv4Cost, (byte)value);
         }
         public int Lv4Damage
         {
-            get
-            {
-                return FileEditor.getByte(lv4Damage);
-            }
-            set
-            {
-                FileEditor.setByte(lv4Damage, (byte)value);
-            }
+            get => FileEditor.getByte(lv4Damage);
+            set => FileEditor.setByte(lv4Damage, (byte)value);
         }
         public int SpellAddress => (address);
     }

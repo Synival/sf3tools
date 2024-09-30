@@ -102,71 +102,35 @@ namespace SF3.X013_Editor.Models.SpecialChance
 
         public int TwoSpecials2
         {
-            get
-            {
-                return FileEditor.getByte(twoSpecials2);
-            }
-            set
-            {
-                FileEditor.setByte(twoSpecials2, (byte)value);
-            }
+            get => FileEditor.getByte(twoSpecials2);
+            set => FileEditor.setByte(twoSpecials2, (byte)value);
         }
         public int ThreeSpecials3
         {
-            get
-            {
-                return FileEditor.getByte(threeSpecials3);
-            }
-            set
-            {
-                FileEditor.setByte(threeSpecials3, (byte)value);
-            }
+            get => FileEditor.getByte(threeSpecials3);
+            set => FileEditor.setByte(threeSpecials3, (byte)value);
         }
         public int ThreeSpecials2
         {
-            get
-            {
-                return FileEditor.getByte(threeSpecials2);
-            }
-            set
-            {
-                FileEditor.setByte(threeSpecials2, (byte)value);
-            }
+            get => FileEditor.getByte(threeSpecials2);
+            set => FileEditor.setByte(threeSpecials2, (byte)value);
         }
         public int FourSpecials4
         {
-            get
-            {
-                return FileEditor.getByte(fourSpecials4);
-            }
-            set
-            {
-                FileEditor.setByte(fourSpecials4, (byte)value);
-            }
+            get => FileEditor.getByte(fourSpecials4);
+            set => FileEditor.setByte(fourSpecials4, (byte)value);
         }
 
         public int FourSpecials3
         {
-            get
-            {
-                return FileEditor.getByte(fourSpecials3);
-            }
-            set
-            {
-                FileEditor.setByte(fourSpecials3, (byte)value);
-            }
+            get => FileEditor.getByte(fourSpecials3);
+            set => FileEditor.setByte(fourSpecials3, (byte)value);
         }
 
         public int FourSpecials2
         {
-            get
-            {
-                return FileEditor.getByte(fourSpecials2);
-            }
-            set
-            {
-                FileEditor.setByte(fourSpecials2, (byte)value);
-            }
+            get => FileEditor.getByte(fourSpecials2);
+            set => FileEditor.setByte(fourSpecials2, (byte)value);
         }
 
         public int SpecialChanceAddress => (address);

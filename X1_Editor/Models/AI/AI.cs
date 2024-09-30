@@ -221,25 +221,13 @@ namespace SF3.X1_Editor.Models.AI
 
         public int TargetX
         {
-            get
-            {
-                return FileEditor.getWord(targetX);
-            }
-            set
-            {
-                FileEditor.setWord(targetX, value);
-            }
+            get => FileEditor.getWord(targetX);
+            set => FileEditor.setWord(targetX, value);
         }
         public int TargetY
         {
-            get
-            {
-                return FileEditor.getWord(targetY);
-            }
-            set
-            {
-                FileEditor.setWord(targetY, value);
-            }
+            get => FileEditor.getWord(targetY);
+            set => FileEditor.setWord(targetY, value);
         }
         public int AIAddress => (address);
     }

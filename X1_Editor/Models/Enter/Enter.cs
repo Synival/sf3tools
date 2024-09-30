@@ -110,98 +110,50 @@ namespace SF3.X1_Editor.Models.Enters
 
         public int Entered
         {
-            get
-            {
-                return FileEditor.getWord(enterID);
-            }
-            set
-            {
-                FileEditor.setWord(enterID, value);
-            }
+            get => FileEditor.getWord(enterID);
+            set => FileEditor.setWord(enterID, value);
         }
 
         public int EnterUnknown2
         {
-            get
-            {
-                return FileEditor.getWord(unknown2);
-            }
-            set
-            {
-                FileEditor.setWord(unknown2, value);
-            }
+            get => FileEditor.getWord(unknown2);
+            set => FileEditor.setWord(unknown2, value);
         }
 
         public int EnterXPos
         {
-            get
-            {
-                return FileEditor.getWord(xPos);
-            }
-            set
-            {
-                FileEditor.setWord(xPos, value);
-            }
+            get => FileEditor.getWord(xPos);
+            set => FileEditor.setWord(xPos, value);
         }
 
         public int EnterUnknown6
         {
-            get
-            {
-                return FileEditor.getWord(unknown6);
-            }
-            set
-            {
-                FileEditor.setWord(unknown6, value);
-            }
+            get => FileEditor.getWord(unknown6);
+            set => FileEditor.setWord(unknown6, value);
         }
 
         public int EnterZPos
         {
-            get
-            {
-                return FileEditor.getWord(zPos);
-            }
-            set
-            {
-                FileEditor.setWord(zPos, value);
-            }
+            get => FileEditor.getWord(zPos);
+            set => FileEditor.setWord(zPos, value);
         }
 
         public int EnterDirection
         {
-            get
-            {
-                return FileEditor.getWord(direction);
-            }
-            set
-            {
-                FileEditor.setWord(direction, value);
-            }
+            get => FileEditor.getWord(direction);
+            set => FileEditor.setWord(direction, value);
         }
 
         public int EnterCamera
         {
-            get
-            {
-                return FileEditor.getWord(camera);
-            }
-            set
-            {
-                FileEditor.setWord(camera, value);
-            }
+            get => FileEditor.getWord(camera);
+            set => FileEditor.setWord(camera, value);
         }
 
         public int EnterUnknownE
         {
-            get
-            {
-                return FileEditor.getWord(unknownE);
-            }
-            set
-            {
-                FileEditor.setWord(unknownE, value);
-            }
+            get => FileEditor.getWord(unknownE);
+            set => FileEditor.setWord(unknownE, value);
         }
 
         public int EnterAddress => (address);

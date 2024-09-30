@@ -84,95 +84,47 @@ namespace SF3.X013_Editor.Models.MagicBonus
 
         public int EarthBonus
         {
-            get
-            {
-                return FileEditor.getByte(earthBonus);
-            }
-            set
-            {
-                FileEditor.setByte(earthBonus, (byte)value);
-            }
+            get => FileEditor.getByte(earthBonus);
+            set => FileEditor.setByte(earthBonus, (byte)value);
         }
         public int FireBonus
         {
-            get
-            {
-                return FileEditor.getByte(fireBonus);
-            }
-            set
-            {
-                FileEditor.setByte(fireBonus, (byte)value);
-            }
+            get => FileEditor.getByte(fireBonus);
+            set => FileEditor.setByte(fireBonus, (byte)value);
         }
         public int IceBonus
         {
-            get
-            {
-                return FileEditor.getByte(iceBonus);
-            }
-            set
-            {
-                FileEditor.setByte(iceBonus, (byte)value);
-            }
+            get => FileEditor.getByte(iceBonus);
+            set => FileEditor.setByte(iceBonus, (byte)value);
         }
         public int SparkBonus
         {
-            get
-            {
-                return FileEditor.getByte(sparkBonus);
-            }
-            set
-            {
-                FileEditor.setByte(sparkBonus, (byte)value);
-            }
+            get => FileEditor.getByte(sparkBonus);
+            set => FileEditor.setByte(sparkBonus, (byte)value);
         }
 
         public int WindBonus
         {
-            get
-            {
-                return FileEditor.getByte(windBonus);
-            }
-            set
-            {
-                FileEditor.setByte(windBonus, (byte)value);
-            }
+            get => FileEditor.getByte(windBonus);
+            set => FileEditor.setByte(windBonus, (byte)value);
         }
 
         public int LightBonus
         {
-            get
-            {
-                return FileEditor.getByte(lightBonus);
-            }
-            set
-            {
-                FileEditor.setByte(lightBonus, (byte)value);
-            }
+            get => FileEditor.getByte(lightBonus);
+            set => FileEditor.setByte(lightBonus, (byte)value);
         }
 
         public int DarkBonus
         {
-            get
-            {
-                return FileEditor.getByte(darkBonus);
-            }
-            set
-            {
-                FileEditor.setByte(darkBonus, (byte)value);
-            }
+            get => FileEditor.getByte(darkBonus);
+            set => FileEditor.setByte(darkBonus, (byte)value);
         }
 
         public int UnknownBonus
         {
-            get
-            {
-                return FileEditor.getByte(unknownBonus);
-            }
-            set
-            {
-                FileEditor.setByte(unknownBonus, (byte)value);
-            }
+            get => FileEditor.getByte(unknownBonus);
+            set => FileEditor.setByte(unknownBonus, (byte)value);
         }
 
         public int MagicAddress => (address);

@@ -62,25 +62,13 @@ namespace SF3.X002_Editor.Models.AttackResist
 
         public int Attack
         {
-            get
-            {
-                return FileEditor.getByte(attack);
-            }
-            set
-            {
-                FileEditor.setByte(attack, (byte)value);
-            }
+            get => FileEditor.getByte(attack);
+            set => FileEditor.setByte(attack, (byte)value);
         }
         public int Resist
         {
-            get
-            {
-                return FileEditor.getByte(resist);
-            }
-            set
-            {
-                FileEditor.setByte(resist, (byte)value);
-            }
+            get => FileEditor.getByte(resist);
+            set => FileEditor.setByte(resist, (byte)value);
         }
 
         public int AttackResistAddress => (address);

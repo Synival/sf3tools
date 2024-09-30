@@ -83,122 +83,62 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int StatusLuck0
         {
-            get
-            {
-                return FileEditor.getByte(luck0);
-            }
-            set
-            {
-                FileEditor.setByte(luck0, (byte)value);
-            }
+            get => FileEditor.getByte(luck0);
+            set => FileEditor.setByte(luck0, (byte)value);
         }
 
         public int StatusLuck1
         {
-            get
-            {
-                return FileEditor.getByte(luck1);
-            }
-            set
-            {
-                FileEditor.setByte(luck1, (byte)value);
-            }
+            get => FileEditor.getByte(luck1);
+            set => FileEditor.setByte(luck1, (byte)value);
         }
 
         public int StatusLuck2
         {
-            get
-            {
-                return FileEditor.getByte(luck2);
-            }
-            set
-            {
-                FileEditor.setByte(luck2, (byte)value);
-            }
+            get => FileEditor.getByte(luck2);
+            set => FileEditor.setByte(luck2, (byte)value);
         }
 
         public int StatusLuck3
         {
-            get
-            {
-                return FileEditor.getByte(luck3);
-            }
-            set
-            {
-                FileEditor.setByte(luck3, (byte)value);
-            }
+            get => FileEditor.getByte(luck3);
+            set => FileEditor.setByte(luck3, (byte)value);
         }
 
         public int StatusLuck4
         {
-            get
-            {
-                return FileEditor.getByte(luck4);
-            }
-            set
-            {
-                FileEditor.setByte(luck4, (byte)value);
-            }
+            get => FileEditor.getByte(luck4);
+            set => FileEditor.setByte(luck4, (byte)value);
         }
 
         public int StatusLuck5
         {
-            get
-            {
-                return FileEditor.getByte(luck5);
-            }
-            set
-            {
-                FileEditor.setByte(luck5, (byte)value);
-            }
+            get => FileEditor.getByte(luck5);
+            set => FileEditor.setByte(luck5, (byte)value);
         }
 
         public int StatusLuck6
         {
-            get
-            {
-                return FileEditor.getByte(luck6);
-            }
-            set
-            {
-                FileEditor.setByte(luck6, (byte)value);
-            }
+            get => FileEditor.getByte(luck6);
+            set => FileEditor.setByte(luck6, (byte)value);
         }
 
         public int StatusLuck7
         {
-            get
-            {
-                return FileEditor.getByte(luck7);
-            }
-            set
-            {
-                FileEditor.setByte(luck7, (byte)value);
-            }
+            get => FileEditor.getByte(luck7);
+            set => FileEditor.setByte(luck7, (byte)value);
         }
 
         public int StatusLuck8
         {
-            get
-            {
-                return FileEditor.getByte(luck8);
-            }
-            set
-            {
-                FileEditor.setByte(luck8, (byte)value);
-            }
+            get => FileEditor.getByte(luck8);
+            set => FileEditor.setByte(luck8, (byte)value);
         }
 
         public int StatusLuck9
         {
-            get
-            {
-                return FileEditor.getByte(luck9);
-            }
-            set
-            {
-                FileEditor.setByte(luck9, (byte)value);
-            }
+            get => FileEditor.getByte(luck9);
+            set => FileEditor.setByte(luck9, (byte)value);
         }
 
         public int StatusEffectAddress => (address);

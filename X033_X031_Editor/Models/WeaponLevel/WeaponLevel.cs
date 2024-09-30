@@ -112,47 +112,23 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 
         public int WLevel1
         {
-            get
-            {
-                return FileEditor.getWord(level1);
-            }
-            set
-            {
-                FileEditor.setWord(level1, value);
-            }
+            get => FileEditor.getWord(level1);
+            set => FileEditor.setWord(level1, value);
         }
         public int WLevel2
         {
-            get
-            {
-                return FileEditor.getWord(level2);
-            }
-            set
-            {
-                FileEditor.setWord(level2, value);
-            }
+            get => FileEditor.getWord(level2);
+            set => FileEditor.setWord(level2, value);
         }
         public int WLevel3
         {
-            get
-            {
-                return FileEditor.getWord(level3);
-            }
-            set
-            {
-                FileEditor.setWord(level3, value);
-            }
+            get => FileEditor.getWord(level3);
+            set => FileEditor.setWord(level3, value);
         }
         public int WLevel4
         {
-            get
-            {
-                return FileEditor.getWord(level4);
-            }
-            set
-            {
-                FileEditor.setWord(level4, value);
-            }
+            get => FileEditor.getWord(level4);
+            set => FileEditor.setWord(level4, value);
         }
 
         public int WeaponLevelAddress => (address);

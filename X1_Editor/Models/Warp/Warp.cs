@@ -87,50 +87,26 @@ namespace SF3.X1_Editor.Models.Warps
 
         public int WarpUnknown1
         {
-            get
-            {
-                return FileEditor.getByte(unknown1);
-            }
-            set
-            {
-                FileEditor.setByte(unknown1, (byte)value);
-            }
+            get => FileEditor.getByte(unknown1);
+            set => FileEditor.setByte(unknown1, (byte)value);
         }
 
         public int WarpUnknown2
         {
-            get
-            {
-                return FileEditor.getByte(unknown2);
-            }
-            set
-            {
-                FileEditor.setByte(unknown2, (byte)value);
-            }
+            get => FileEditor.getByte(unknown2);
+            set => FileEditor.setByte(unknown2, (byte)value);
         }
 
         public int WarpType
         {
-            get
-            {
-                return FileEditor.getByte(type);
-            }
-            set
-            {
-                FileEditor.setByte(type, (byte)value);
-            }
+            get => FileEditor.getByte(type);
+            set => FileEditor.setByte(type, (byte)value);
         }
 
         public int WarpMap
         {
-            get
-            {
-                return FileEditor.getByte(map);
-            }
-            set
-            {
-                FileEditor.setByte(map, (byte)value);
-            }
+            get => FileEditor.getByte(map);
+            set => FileEditor.setByte(map, (byte)value);
         }
 
         public int WarpAddress => (address);
