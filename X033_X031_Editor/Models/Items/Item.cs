@@ -918,11 +918,13 @@ namespace SF3.X033_X031_Editor.Models.Items
             set => FileEditor.setByte(hpCurve20, (byte)value);
         }
 
+        public bool IsPromoted => FileEditor.getByte((int)characterClass) >= 0x20;
+
         public string HPgroup1
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20)//not promoted
+                if (!IsPromoted)
                 {
                     //return ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
                     value = ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
@@ -982,7 +984,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1 ;
                     //return otherValue / 256 * 100 + "%";
@@ -1020,7 +1022,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 2) * 2 << 2;
                     //return otherValue / 256 * 100 + "%";
@@ -1066,7 +1068,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 2) * 2 << 2;
                     //return otherValue / 256 * 100 + "%";
@@ -1102,7 +1104,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300;
                     //return otherValue / 256 * 100 + "%";
@@ -1141,7 +1143,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     value = ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x340 >> 2;
                     otherValue = value;
@@ -1215,7 +1217,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20)//not promoted
+                if (!IsPromoted)
                 {
                     //return ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
                     value = ((FileEditor.getByte(mpCurve6) - FileEditor.getByte(mpStart)) << 6); ;
@@ -1249,7 +1251,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1 ;
                     //return otherValue / 256 * 100 + "%";
@@ -1287,7 +1289,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 2) * 2 << 2;
                     //return otherValue / 256 * 100 + "%";
@@ -1324,7 +1326,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 2) * 2 << 2;
                     //return otherValue / 256 * 100 + "%";
@@ -1360,7 +1362,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300;
                     //return otherValue / 256 * 100 + "%";
@@ -1399,7 +1401,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     value = ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x340 >> 2;
                     otherValue = value;
@@ -1472,7 +1474,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20)//not promoted
+                if (!IsPromoted)
                 {
                     //return ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
                     value = ((FileEditor.getByte(atkCurve6) - FileEditor.getByte(atkStart)) << 6); ;
@@ -1506,7 +1508,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1 ;
                     //return otherValue / 256 * 100 + "%";
@@ -1544,7 +1546,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 2) * 2 << 2;
                     //return otherValue / 256 * 100 + "%";
@@ -1581,7 +1583,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 2) * 2 << 2;
                     //return otherValue / 256 * 100 + "%";
@@ -1617,7 +1619,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300;
                     //return otherValue / 256 * 100 + "%";
@@ -1656,7 +1658,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     value = ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x340 >> 2;
                     otherValue = value;
@@ -1729,7 +1731,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20)//not promoted
+                if (!IsPromoted)
                 {
                     //return ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
                     value = ((FileEditor.getByte(defCurve6) - FileEditor.getByte(defStart)) << 6); ;
@@ -1763,7 +1765,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1 ;
                     //return otherValue / 256 * 100 + "%";
@@ -1801,7 +1803,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 2) * 2 << 2;
                     //return otherValue / 256 * 100 + "%";
@@ -1838,7 +1840,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 2) * 2 << 2;
                     //return otherValue / 256 * 100 + "%";
@@ -1874,7 +1876,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300;
                     //return otherValue / 256 * 100 + "%";
@@ -1913,7 +1915,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     value = ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x340 >> 2;
                     otherValue = value;
@@ -1986,7 +1988,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20)//not promoted
+                if (!IsPromoted)
                 {
                     //return ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
                     value = ((FileEditor.getByte(agiCurve6) - FileEditor.getByte(agiStart)) << 6); ;
@@ -2020,7 +2022,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1 ;
                     //return otherValue / 256 * 100 + "%";
@@ -2058,7 +2060,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 2) * 2 << 2;
                     //return otherValue / 256 * 100 + "%";
@@ -2095,7 +2097,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 2) * 2 << 2;
                     //return otherValue / 256 * 100 + "%";
@@ -2131,7 +2133,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     //otherValue = ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300;
                     //return otherValue / 256 * 100 + "%";
@@ -2170,7 +2172,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                if (FileEditor.getByte(characterClass) < 0x20) //not promoted
+                if (!IsPromoted)
                 {
                     value = ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x340 >> 2;
                     otherValue = value;
