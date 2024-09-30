@@ -158,10 +158,10 @@ namespace SF3.X033_X031_Editor.Models.Presets
             set => FileEditor.setByte(level, (byte)value);
         }
 
-        public int Sex
+        public SexValue Sex
         {
-            get => FileEditor.getByte(sex);
-            set => FileEditor.setByte(sex, (byte)value);
+            get => new SexValue(FileEditor.getByte(sex));
+            set => FileEditor.setByte(sex, (byte)value.Value);
         }
 
         public int Weapon

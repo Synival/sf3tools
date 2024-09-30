@@ -16,9 +16,16 @@ namespace SF3.X033_X031_Editor
         [STAThread]
         static void Main()
         {
+            // TODO: generic method to prevent copy + paste
             ObjectListView.EditorRegistry.Register(
                 typeof(CharacterClassValue),
                 (Object model, OLVColumn column, Object value) => Utils.MakeNamedValueComboBox(CharacterClassValue.ComboBoxValues)
+            );
+
+            // TODO: generic method to prevent copy + paste
+            ObjectListView.EditorRegistry.Register(
+                typeof(SexValue),
+                (Object model, OLVColumn column, Object value) => Utils.MakeNamedValueComboBox(SexValue.ComboBoxValues)
             );
 
             Application.EnableVisualStyles();

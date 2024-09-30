@@ -1803,9 +1803,8 @@
             // olvColumn106
             // 
             this.olvColumn106.AspectName = "Sex";
-            this.olvColumn106.AspectToStringFormat = "{0:X}";
             this.olvColumn106.Text = "Sex";
-            this.olvColumn106.Width = 40;
+            this.olvColumn106.Width = 75;
             // 
             // olvColumn107
             // 
