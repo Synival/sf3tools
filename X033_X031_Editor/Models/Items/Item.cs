@@ -872,10 +872,10 @@ namespace SF3.X033_X031_Editor.Models.Items
             get => FileEditor.getByte(character);
             set => FileEditor.setByte(character, (byte)value);
         }
-        public int CharacterClass
+        public CharacterClassValue CharacterClass
         {
-            get => FileEditor.getByte(characterClass);
-            set => FileEditor.setByte(characterClass, (byte)value);
+            get => new CharacterClassValue(FileEditor.getByte(characterClass));
+            set => FileEditor.setByte(characterClass, (byte)value.Value);
         }
         public int HPPromote
         {
