@@ -30,8 +30,8 @@ namespace SF3.X002_Editor.Models.AttackResist
             else if (Globals.scenario == 2)
             {
                 offset = 0x00000d15; //scn2
-                
-                if(checkVersion2 == 0x2C)
+
+                if (checkVersion2 == 0x2C)
                 {
                     offset = offset - 0x40;
                 }
@@ -43,7 +43,7 @@ namespace SF3.X002_Editor.Models.AttackResist
             }
             else
                 offset = 0x00000dd9; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -60,11 +60,11 @@ namespace SF3.X002_Editor.Models.AttackResist
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 0xd3);
             attack = start; //1 byte
             resist = start + 0xd2; //1 byte
-            
+
             address = offset + (id * 0xd3);
             //address = 0x0354c + (id * 0x18);
 
@@ -107,8 +107,8 @@ namespace SF3.X002_Editor.Models.AttackResist
                 FileEditor.setByte(resist, (byte)value);
             }
         }
-        
-        
+
+
 
         public int AttackResistAddress
         {

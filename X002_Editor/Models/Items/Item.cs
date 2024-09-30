@@ -61,7 +61,7 @@ namespace SF3.X002_Editor.Models.Items
             }
             else
                 offset = 0x000035fc; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -78,7 +78,7 @@ namespace SF3.X002_Editor.Models.Items
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 24);
             PriceLocation = start; //2 bytes. only thing that is 2 bytes
             WeaponTypeLocation = start + 2; //1 byte
@@ -186,7 +186,7 @@ namespace SF3.X002_Editor.Models.Items
             }
             set
             {
-                FileEditor.setByte(AttackLocation,(byte)value);
+                FileEditor.setByte(AttackLocation, (byte)value);
             }
         }
         public int Defense
@@ -197,7 +197,7 @@ namespace SF3.X002_Editor.Models.Items
             }
             set
             {
-                FileEditor.setByte(DefenseLocation,(byte) value);
+                FileEditor.setByte(DefenseLocation, (byte)value);
             }
         }
         public int AttackRank
@@ -208,7 +208,7 @@ namespace SF3.X002_Editor.Models.Items
             }
             set
             {
-                FileEditor.setByte(AttackUpRankLocation,(byte) value);
+                FileEditor.setByte(AttackUpRankLocation, (byte)value);
             }
         }
         public int SpellRank
@@ -219,7 +219,7 @@ namespace SF3.X002_Editor.Models.Items
             }
             set
             {
-                FileEditor.setByte(SpellUpRankLocation, (byte) value);
+                FileEditor.setByte(SpellUpRankLocation, (byte)value);
             }
         }
         public int PhysicalAttribute

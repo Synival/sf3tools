@@ -42,7 +42,7 @@ namespace SF3.X002_Editor.Models.WeaponRank
             }
             else
                 offset = 0x0000344c; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -59,13 +59,13 @@ namespace SF3.X002_Editor.Models.WeaponRank
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 0x04);
             skill0 = start; //1 byte
             skill1 = start + 1; //1 byte
             skill2 = start + 2; //1 byte
             skill3 = start + 3; //1 byte
-            
+
             address = offset + (id * 0x04);
             //address = 0x0354c + (id * 0x18);
 
@@ -130,7 +130,7 @@ namespace SF3.X002_Editor.Models.WeaponRank
                 FileEditor.setByte(skill3, (byte)value);
             }
         }
-        
+
 
         public int WeaponRankAddress
         {

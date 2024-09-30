@@ -58,7 +58,7 @@ namespace SF3.X002_Editor.Models.Spells
             }
             else
                 offset = 0x0000521c; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -75,7 +75,7 @@ namespace SF3.X002_Editor.Models.Spells
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 20);
             targetType = start; //2 bytes
             damageType = start + 1;
@@ -125,7 +125,7 @@ namespace SF3.X002_Editor.Models.Spells
             }
             set
             {
-                FileEditor.setByte(targetType, (byte) value);
+                FileEditor.setByte(targetType, (byte)value);
             }
         }
         public int SpellType
@@ -191,7 +191,7 @@ namespace SF3.X002_Editor.Models.Spells
             }
             set
             {
-                FileEditor.setByte(lv1Cost, (byte) value);
+                FileEditor.setByte(lv1Cost, (byte)value);
             }
         }
         public int Lv1Damage
@@ -202,7 +202,7 @@ namespace SF3.X002_Editor.Models.Spells
             }
             set
             {
-                FileEditor.setByte(lv1Damage, (byte) value);
+                FileEditor.setByte(lv1Damage, (byte)value);
             }
         }
         public int Lv2Distance
@@ -213,7 +213,7 @@ namespace SF3.X002_Editor.Models.Spells
             }
             set
             {
-                FileEditor.setByte(lv2Distance, (byte) value);
+                FileEditor.setByte(lv2Distance, (byte)value);
             }
         }
         public int Lv2Targets

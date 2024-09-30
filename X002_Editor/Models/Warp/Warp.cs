@@ -51,7 +51,7 @@ namespace SF3.X002_Editor.Models.Warps
             //no scn1 for this
 
 
-             if (Globals.scenario == 1)
+            if (Globals.scenario == 1)
             {
 
                 offset = 0x000053cc; //scn1
@@ -72,13 +72,13 @@ namespace SF3.X002_Editor.Models.Warps
             //int start = 0x354c + (id * 24);
 
             int start = offset + (id * 0x04);
-            unknown1 = start; 
+            unknown1 = start;
             unknown2 = start + 1;
             type = start + 2;
             map = start + 3;
 
-        //unknown42 = start + 52;
-        address = offset + (id * 0x04);
+            //unknown42 = start + 52;
+            address = offset + (id * 0x04);
             //address = 0x0354c + (id * 0x18);
 
         }
@@ -100,7 +100,7 @@ namespace SF3.X002_Editor.Models.Warps
 
         public int WarpUnknown1
         {
-            
+
             get
             {
                 return FileEditor.getByte(unknown1);
@@ -149,9 +149,9 @@ namespace SF3.X002_Editor.Models.Warps
         }
 
 
-        
 
-        
+
+
 
         public int WarpAddress
         {

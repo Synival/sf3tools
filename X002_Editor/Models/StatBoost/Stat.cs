@@ -39,7 +39,7 @@ namespace SF3.X002_Editor.Models.StatBoost
             }
             else
                 offset = 0x0000542b; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -56,7 +56,7 @@ namespace SF3.X002_Editor.Models.StatBoost
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 0x01);
             stat = start; //1 bytes
             address = offset + (id * 0x01);
@@ -87,7 +87,7 @@ namespace SF3.X002_Editor.Models.StatBoost
             }
             set
             {
-                FileEditor.setByte(stat,(byte) value);
+                FileEditor.setByte(stat, (byte)value);
             }
         }
 

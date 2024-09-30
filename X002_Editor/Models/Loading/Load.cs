@@ -48,7 +48,7 @@ namespace SF3.X002_Editor.Models.Loading
             }
             else
                 offset = 0x000058bc; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -65,7 +65,7 @@ namespace SF3.X002_Editor.Models.Loading
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 0x10);
             locationID = start; //2 bytes
             x1 = start + 0x02; //2 byte

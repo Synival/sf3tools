@@ -54,7 +54,7 @@ namespace SF3.X002_Editor.Models.MusicOverride
             }
             else
                 offset = 0x00005aa2; //pd. assumed location if it were to exist
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -71,7 +71,7 @@ namespace SF3.X002_Editor.Models.MusicOverride
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 0x28);
             mapID = start; //2 bytes
             synMusic = start + 0x02; //1 byte
@@ -126,7 +126,7 @@ namespace SF3.X002_Editor.Models.MusicOverride
             }
             set
             {
-                FileEditor.setByte(synMusic, (byte)value); 
+                FileEditor.setByte(synMusic, (byte)value);
 
 
             }

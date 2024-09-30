@@ -40,7 +40,8 @@ namespace SF3.X002_Editor.Models.Spells
 
             spellssorted = new Spell[0];
             spells = new Spell[78]; //max size of spellList. 
-            try {
+            try
+            {
                 FileStream stream = new FileStream(r, FileMode.Open);
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
@@ -48,9 +49,11 @@ namespace SF3.X002_Editor.Models.Spells
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
                 Spell[] old;
-                while (!xml.EOF) {
+                while (!xml.EOF)
+                {
                     xml.Read();
-                    if (xml.HasAttributes) {
+                    if (xml.HasAttributes)
+                    {
                         old = new Spell[spellssorted.Length];
                         spellssorted.CopyTo(old, 0);
                         spellssorted = new Spell[old.Length + 1];
@@ -60,9 +63,13 @@ namespace SF3.X002_Editor.Models.Spells
                     }
                 }
                 stream.Close();
-            } catch (FileLoadException) {
+            }
+            catch (FileLoadException)
+            {
                 return false;
-            } catch (FileNotFoundException) {
+            }
+            catch (FileNotFoundException)
+            {
                 return false;
             }
             return true;

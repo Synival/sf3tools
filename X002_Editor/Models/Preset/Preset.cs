@@ -44,7 +44,7 @@ namespace SF3.X002_Editor.Models.Presets
             }
             else
                 offset = 0x00005820; //pd
-            
+
 
 
             //offset = 0x00002b28; scn1
@@ -61,7 +61,7 @@ namespace SF3.X002_Editor.Models.Presets
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 5);
             spell = start; //2 bytes
             weaponLv0 = start + 1; //1 byte
@@ -96,7 +96,7 @@ namespace SF3.X002_Editor.Models.Presets
             }
             set
             {
-                FileEditor.setByte(spell, (byte) value);
+                FileEditor.setByte(spell, (byte)value);
             }
         }
         public int Weapon0
@@ -142,7 +142,7 @@ namespace SF3.X002_Editor.Models.Presets
             {
                 FileEditor.setByte(weaponLv3, (byte)value);
             }
-        }       
+        }
 
         public int PresetAddress
         {

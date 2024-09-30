@@ -27,23 +27,26 @@ namespace SF3.X002_Editor.Models.AttackResist
 
 
 
-                r = "Resources/AttackResistList.xml";
+            r = "Resources/AttackResistList.xml";
 
 
             itemssorted = new AttackResist[0];
             items = new AttackResist[2]; //max size of itemList
-            try {
+            try
+            {
                 FileStream stream = new FileStream(r, FileMode.Open);
-                
+
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
                 AttackResist[] old;
-                while (!xml.EOF) {
+                while (!xml.EOF)
+                {
                     xml.Read();
-                    if (xml.HasAttributes) {
+                    if (xml.HasAttributes)
+                    {
                         old = new AttackResist[itemssorted.Length];
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new AttackResist[old.Length + 1];
@@ -53,9 +56,13 @@ namespace SF3.X002_Editor.Models.AttackResist
                     }
                 }
                 stream.Close();
-            } catch (FileLoadException) {
+            }
+            catch (FileLoadException)
+            {
                 return false;
-            } catch (FileNotFoundException) {
+            }
+            catch (FileNotFoundException)
+            {
                 return false;
             }
             return true;
