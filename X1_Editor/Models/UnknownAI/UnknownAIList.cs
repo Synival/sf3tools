@@ -25,23 +25,26 @@ namespace SF3.X1_Editor.Models.UnknownAI
         {
 
 
-                r = "Resources/UnknownAIList.xml";
+            r = "Resources/UnknownAIList.xml";
 
 
             itemssorted = new UnknownAI[0];
             items = new UnknownAI[30]; //max size of itemList
-            try {
+            try
+            {
                 FileStream stream = new FileStream(r, FileMode.Open);
-                
+
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
                 UnknownAI[] old;
-                while (!xml.EOF) {
+                while (!xml.EOF)
+                {
                     xml.Read();
-                    if (xml.HasAttributes) {
+                    if (xml.HasAttributes)
+                    {
                         old = new UnknownAI[itemssorted.Length];
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new UnknownAI[old.Length + 1];
@@ -51,9 +54,13 @@ namespace SF3.X1_Editor.Models.UnknownAI
                     }
                 }
                 stream.Close();
-            } catch (FileLoadException) {
+            }
+            catch (FileLoadException)
+            {
                 return false;
-            } catch (FileNotFoundException) {
+            }
+            catch (FileNotFoundException)
+            {
                 return false;
             }
             return true;

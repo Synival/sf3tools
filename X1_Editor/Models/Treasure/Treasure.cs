@@ -55,9 +55,9 @@ namespace SF3.X1_Editor.Models.Treasures
                 offset = 0x0000000C; //scn1 initial pointer
                 sub = 0x0605f000;
                 offset = FileEditor.getDouble(offset);
-                
-                offset = offset - sub; 
-                
+
+                offset = offset - sub;
+
             }
             else if (Globals.scenario == 2)
             {
@@ -117,11 +117,11 @@ namespace SF3.X1_Editor.Models.Treasures
             eventNumber = start + 2;
             flagUsed = start + 4;
             unknown = start + 6;
-            eventType = start +8;
+            eventType = start + 8;
             itemID = start + 10;
 
-        //unknown42 = start + 52;
-        address = offset + (id * 0x0c);
+            //unknown42 = start + 52;
+            address = offset + (id * 0x0c);
             //address = 0x0354c + (id * 0x18);
 
         }
@@ -154,7 +154,7 @@ namespace SF3.X1_Editor.Models.Treasures
                     return "";
                 }
 
-                
+
             }
         }
 
@@ -232,9 +232,9 @@ namespace SF3.X1_Editor.Models.Treasures
         }
 
 
-        
 
-        
+
+
 
         public int TreasureAddress
         {

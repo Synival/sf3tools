@@ -37,9 +37,10 @@ namespace SF3.X1_Editor.Models.Items
 
             itemssorted = new Item[0];
             items = new Item[256]; //max size of itemList
-            try {
+            try
+            {
                 FileStream stream = new FileStream(r, FileMode.Open);
-                
+
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
@@ -50,7 +51,8 @@ namespace SF3.X1_Editor.Models.Items
                 while (!xml.EOF)
                 {
                     xml.Read();
-                    if (xml.HasAttributes) {
+                    if (xml.HasAttributes)
+                    {
                         old = new Item[itemssorted.Length];
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Item[old.Length + 1];
@@ -69,9 +71,13 @@ namespace SF3.X1_Editor.Models.Items
                     }
                 }
                 stream.Close();
-            } catch (FileLoadException) {
+            }
+            catch (FileLoadException)
+            {
                 return false;
-            } catch (FileNotFoundException) {
+            }
+            catch (FileNotFoundException)
+            {
                 return false;
             }
             return true;

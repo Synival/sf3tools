@@ -61,7 +61,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
 
                 offset = FileEditor.getDouble(offset);
 
-                if(offset != 0)
+                if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
 
@@ -244,10 +244,10 @@ namespace SF3.X1_Editor.Models.UnknownAI
             unknown02 = start + 2; //2 byte
             unknown04 = start + 4; //2 byte
             unknown06 = start + 6; //2 byte
-            unknown08 = start + 8; 
-            unknown0A = start + 0x0a; 
+            unknown08 = start + 8;
+            unknown0A = start + 0x0a;
             unknown0C = start + 0x0c; //2 byte
-            unknown0E = start + 0x0e; 
+            unknown0E = start + 0x0e;
             unknown10 = start + 0x10;
             //unknown42 = start + 52;
             address = offset + (id * 0x12);

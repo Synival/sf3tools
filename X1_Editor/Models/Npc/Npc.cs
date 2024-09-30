@@ -60,9 +60,9 @@ namespace SF3.X1_Editor.Models.Npcs
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
                 offset = FileEditor.getDouble(offset);
-                
-                offset = offset - sub; 
-                
+
+                offset = offset - sub;
+
             }
             else if (Globals.scenario == 2)
             {

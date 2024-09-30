@@ -192,7 +192,7 @@ namespace SF3.X1_Editor.Models.AI
             }
             else if (Globals.scenario == 5)
             {
-                
+
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
                 offset = FileEditor.getDouble(offset);
@@ -205,7 +205,7 @@ namespace SF3.X1_Editor.Models.AI
                 offset = offset + 10;
                 offset = offset + 0xe9a;
                 offset = offset + 0x126;
-                
+
             }
 
 
@@ -224,7 +224,7 @@ namespace SF3.X1_Editor.Models.AI
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 4);
             targetX = start; //2 bytes
             targetY = start + 2; //2 bytes

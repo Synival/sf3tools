@@ -26,14 +26,15 @@ namespace SF3.X1_Editor.Models.Treasures
 
 
             r = "Resources/X1Treasure.xml";
-            
+
 
 
             itemssorted = new Treasure[0];
             items = new Treasure[255]; //max size of itemList
-            try {
+            try
+            {
                 FileStream stream = new FileStream(r, FileMode.Open);
-                
+
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
@@ -47,7 +48,7 @@ namespace SF3.X1_Editor.Models.Treasures
                 //Globals.treasureDebug = true;
                 //while (!xml.EOF && (itemssorted.Length == 0 || itemssorted[itemssorted.Length - 1].Searched != 0xffff))
 
-                if(Globals.treasureDebug == true)
+                if (Globals.treasureDebug == true)
                 {
                     //while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].Searched != 0xffff || itemssorted[itemssorted.Length - 1].EventNumber != 0xffff)))
                     while (!xml.EOF && (itemssorted.Length == 0 || myCount <= 2))
@@ -109,11 +110,15 @@ namespace SF3.X1_Editor.Models.Treasures
 
 
 
-                
+
                 stream.Close();
-            } catch (FileLoadException) {
+            }
+            catch (FileLoadException)
+            {
                 return false;
-            } catch (FileNotFoundException) {
+            }
+            catch (FileNotFoundException)
+            {
                 return false;
             }
             return true;

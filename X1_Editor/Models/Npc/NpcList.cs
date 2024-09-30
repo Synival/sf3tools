@@ -26,14 +26,15 @@ namespace SF3.X1_Editor.Models.Npcs
 
 
             r = "Resources/X1Npc.xml";
-            
+
 
 
             itemssorted = new Npc[0];
             items = new Npc[100]; //max size of itemList
-            try {
+            try
+            {
                 FileStream stream = new FileStream(r, FileMode.Open);
-                
+
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
@@ -109,11 +110,15 @@ namespace SF3.X1_Editor.Models.Npcs
 
 
 
-                
+
                 stream.Close();
-            } catch (FileLoadException) {
+            }
+            catch (FileLoadException)
+            {
                 return false;
-            } catch (FileNotFoundException) {
+            }
+            catch (FileNotFoundException)
+            {
                 return false;
             }
             return true;

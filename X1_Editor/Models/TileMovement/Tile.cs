@@ -49,7 +49,7 @@ namespace SF3.X1_Editor.Models.Tiles
                 offset = offset - sub; //first pointer
                 offset = offset + 0xac; //value we want is 0xac bytes later always
                 offset = FileEditor.getDouble(offset);
-                offset = offset - sub ; //second pointer
+                offset = offset - sub; //second pointer
 
 
                 /*offset = 0x00000024; //scn2 initial pointer
@@ -84,7 +84,7 @@ namespace SF3.X1_Editor.Models.Tiles
                 offset = FileEditor.getDouble(offset);
 
                 if (offset < 0x06070000 && offset > 0) //a valid pointer in this fille will always be positive up to 0x06070000
-                { 
+                {
                     //Console.WriteLine("finishing normal proceedure");
                     offset = offset - sub; //second pointer
                 }
@@ -100,11 +100,11 @@ namespace SF3.X1_Editor.Models.Tiles
                 }
 
 
-                
 
-                
-                    
-                
+
+
+
+
 
 
                 /*
@@ -166,7 +166,7 @@ namespace SF3.X1_Editor.Models.Tiles
                 offset = offset - sub + 0x7c; //second pointer
                 */
             }
-            
+
 
 
 
@@ -184,14 +184,14 @@ namespace SF3.X1_Editor.Models.Tiles
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 0x10);
 
 
 
             noEntry = start;
             unknown01 = start + 1;
-            grassland = start +2;
+            grassland = start + 2;
             dirt = start + 3;
             darkGrass = start + 4;
             forest = start + 5;
@@ -208,7 +208,7 @@ namespace SF3.X1_Editor.Models.Tiles
             unknown0f = start + 0xf;
 
 
-        address = offset + (id * 0x10);
+            address = offset + (id * 0x10);
             //address = 0x0354c + (id * 0x18);
 
         }
@@ -236,7 +236,7 @@ namespace SF3.X1_Editor.Models.Tiles
             }
             set
             {
-                FileEditor.setByte(noEntry, (byte) value);
+                FileEditor.setByte(noEntry, (byte)value);
             }
         }
         public int TileUnknown1
@@ -304,7 +304,7 @@ namespace SF3.X1_Editor.Models.Tiles
             }
             set
             {
-                FileEditor.setByte (brownMountain, (byte)value);
+                FileEditor.setByte(brownMountain, (byte)value);
             }
         }
 

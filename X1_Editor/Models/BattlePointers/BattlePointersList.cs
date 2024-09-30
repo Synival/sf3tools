@@ -25,23 +25,26 @@ namespace SF3.X1_Editor.Models.BattlePointers
         {
 
 
-                r = "Resources/BattlePointersList.xml";
+            r = "Resources/BattlePointersList.xml";
 
 
             itemssorted = new BattlePointers[0];
             items = new BattlePointers[5]; //max size of itemList
-            try {
+            try
+            {
                 FileStream stream = new FileStream(r, FileMode.Open);
-                
+
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
                 BattlePointers[] old;
-                while (!xml.EOF) {
+                while (!xml.EOF)
+                {
                     xml.Read();
-                    if (xml.HasAttributes) {
+                    if (xml.HasAttributes)
+                    {
                         old = new BattlePointers[itemssorted.Length];
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new BattlePointers[old.Length + 1];
@@ -51,9 +54,13 @@ namespace SF3.X1_Editor.Models.BattlePointers
                     }
                 }
                 stream.Close();
-            } catch (FileLoadException) {
+            }
+            catch (FileLoadException)
+            {
                 return false;
-            } catch (FileNotFoundException) {
+            }
+            catch (FileNotFoundException)
+            {
                 return false;
             }
             return true;

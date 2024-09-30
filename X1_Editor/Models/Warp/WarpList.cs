@@ -26,14 +26,15 @@ namespace SF3.X1_Editor.Models.Warps
 
 
             r = "Resources/X1Warp.xml";
-            
+
 
 
             itemssorted = new Warp[0];
             items = new Warp[255]; //max size of itemList
-            try {
+            try
+            {
                 FileStream stream = new FileStream(r, FileMode.Open);
-                
+
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
@@ -47,42 +48,46 @@ namespace SF3.X1_Editor.Models.Warps
                 //Globals.treasureDebug = true;
                 //while (!xml.EOF && (itemssorted.Length == 0 || itemssorted[itemssorted.Length - 1].Searched != 0xffff))
 
-                 
-                    while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].WarpType != 0x01 && itemssorted[itemssorted.Length - 1].WarpType != 0xff)))
-                    //while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].Searched != 0xffff || itemssorted[itemssorted.Length - 1].EventNumber != 0xffff)))
-                    //while (!xml.EOF && (itemssorted.Length == 0 || myCount <= 2))
+
+                while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].WarpType != 0x01 && itemssorted[itemssorted.Length - 1].WarpType != 0xff)))
+                //while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].Searched != 0xffff || itemssorted[itemssorted.Length - 1].EventNumber != 0xffff)))
+                //while (!xml.EOF && (itemssorted.Length == 0 || myCount <= 2))
+                {
+
                     {
-
+                        xml.Read();
+                        if (xml.HasAttributes)
                         {
-                            xml.Read();
-                            if (xml.HasAttributes)
-                            {
-                                old = new Warp[itemssorted.Length];
-                                itemssorted.CopyTo(old, 0);
-                                itemssorted = new Warp[old.Length + 1];
-                                old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Warp(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                items[itemssorted[old.Length].WarpID] = itemssorted[old.Length];
-                                
+                            old = new Warp[itemssorted.Length];
+                            itemssorted.CopyTo(old, 0);
+                            itemssorted = new Warp[old.Length + 1];
+                            old.CopyTo(itemssorted, 0);
+                            itemssorted[old.Length] = new Warp(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                            items[itemssorted[old.Length].WarpID] = itemssorted[old.Length];
 
 
-                            }
 
                         }
+
                     }
-
-                
-
+                }
 
 
 
 
 
-                
+
+
+
+
                 stream.Close();
-            } catch (FileLoadException) {
+            }
+            catch (FileLoadException)
+            {
                 return false;
-            } catch (FileNotFoundException) {
+            }
+            catch (FileNotFoundException)
+            {
                 return false;
             }
             return true;

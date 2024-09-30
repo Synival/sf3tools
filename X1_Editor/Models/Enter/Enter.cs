@@ -57,9 +57,9 @@ namespace SF3.X1_Editor.Models.Enters
                 offset = 0x00000024; //scn1 initial pointer
                 sub = 0x0605f000;
                 offset = FileEditor.getDouble(offset);
-                
-                offset = offset - sub; 
-                
+
+                offset = offset - sub;
+
             }
             else if (Globals.scenario == 2)
             {
@@ -130,8 +130,8 @@ namespace SF3.X1_Editor.Models.Enters
 
 
 
-        //unknown42 = start + 52;
-        address = offset + (id * 0x10);
+            //unknown42 = start + 52;
+            address = offset + (id * 0x10);
             //address = 0x0354c + (id * 0x18);
 
         }
@@ -151,7 +151,7 @@ namespace SF3.X1_Editor.Models.Enters
             }
         }
 
-        
+
 
         public int Entered
         {

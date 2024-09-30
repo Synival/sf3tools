@@ -54,7 +54,7 @@ namespace SF3.X1_Editor.Forms
             InitializeComponent();
             frmMonsterEditor_Resize(this, new EventArgs());
 
-            
+
 
 
 
@@ -244,7 +244,7 @@ namespace SF3.X1_Editor.Forms
             int sub = 0;
 
 
-            if(Globals.scenario == 1)
+            if (Globals.scenario == 1)
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
@@ -271,10 +271,10 @@ namespace SF3.X1_Editor.Forms
                 sub = 0x06060000;
             }
 
-                offset = FileEditor.getDouble(offset);
+            offset = FileEditor.getDouble(offset);
 
-                offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+            offset = offset - sub; //first pointer
+            offset = FileEditor.getDouble(offset);
 
             /*A value higher means a pointer is on the offset, meaning we are in a battle. If it is not a 
               pointer we are at our destination so we know a town is loaded.
@@ -355,7 +355,8 @@ namespace SF3.X1_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (isBattle && !ItemList.loadItemList()) {
+            if (isBattle && !ItemList.loadItemList())
+            {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
@@ -448,7 +449,7 @@ namespace SF3.X1_Editor.Forms
             objectListView8.ClearObjects();
             objectListView9.ClearObjects();
             objectListView10.ClearObjects();
-            objectListView11.ClearObjects(); 
+            objectListView11.ClearObjects();
             objectListView12.ClearObjects();
             objectListView13.ClearObjects();
             objectListView14.ClearObjects();
@@ -473,7 +474,7 @@ namespace SF3.X1_Editor.Forms
                 objectListView9.AddObjects(CustomMovementList.getCustomMovementList());
             }
 
-                objectListView8.AddObjects(TreasureList.getTreasureList());
+            objectListView8.AddObjects(TreasureList.getTreasureList());
 
             if (!isBattle)
             {
@@ -492,11 +493,11 @@ namespace SF3.X1_Editor.Forms
             {
                 objectListView10.AddObjects(WarpList.getWarpList());
             }
-            if(isBattle && Globals.scenario != 1 && Globals.scenario != 5)
+            if (isBattle && Globals.scenario != 1 && Globals.scenario != 5)
             {
                 objectListView11.AddObjects(TileList.getTileList());
             }
-                
+
 
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
@@ -513,8 +514,10 @@ namespace SF3.X1_Editor.Forms
 
             OpenFileDialog openfile = new OpenFileDialog();
             openfile.Filter = "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            if (openfile.ShowDialog() == DialogResult.OK) {
-                if (FileEditor.loadFile(openfile.FileName)) {
+            if (openfile.ShowDialog() == DialogResult.OK)
+            {
+                if (FileEditor.loadFile(openfile.FileName))
+                {
 
 
                     try
@@ -525,7 +528,7 @@ namespace SF3.X1_Editor.Forms
                     {
                         //wrong x1 file was selected
                     }
-                    
+
                     //string[] words = openfile.FileName.Split('\\');
                     //string lastWord = words[words.Length - 1];
                     words = openfile.FileName.Split('\\');
@@ -534,7 +537,9 @@ namespace SF3.X1_Editor.Forms
                     updateText();
                     //Console.WriteLine(lastWord);
 
-                } else {
+                }
+                else
+                {
                     MessageBox.Show("Error trying to load file. It is probably in use by another process.");
                 }
             }
@@ -594,7 +599,8 @@ namespace SF3.X1_Editor.Forms
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 X1* (.bin)|X1.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             savefile.FileName = Path.GetFileName(FileEditor.Filename);
-            if (savefile.ShowDialog() == DialogResult.OK) {
+            if (savefile.ShowDialog() == DialogResult.OK)
+            {
                 FileEditor.saveFile(savefile.FileName);
             }
         }
@@ -607,13 +613,15 @@ namespace SF3.X1_Editor.Forms
                 stream.Write(data, 0, data.Length);
                 stream.Close();
             } catch (Exception) { }*/
-            try {
+            try
+            {
                 byte[] data = olvItems.SaveState();
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/itemstate." +
                      ".bin", FileMode.Create, FileAccess.Write);
                 stream.Write(data, 0, data.Length);
                 stream.Close();
-            } catch (Exception) { }
+            }
+            catch (Exception) { }
             /*try {
                 byte[] data = olvBlacksmith.SaveState();
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/blacksmithstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
@@ -636,11 +644,12 @@ namespace SF3.X1_Editor.Forms
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e)
         {
-            if (e.Column.AspectToStringFormat == "{0:X}") {
+            if (e.Column.AspectToStringFormat == "{0:X}")
+            {
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.Hexadecimal = true;
 
-            } 
+            }
             /*else if (e.Column.AspectToStringFormat == "{0:1}")
             {
                 NumericUpDown control = (NumericUpDown)e.Control;
@@ -735,7 +744,7 @@ namespace SF3.X1_Editor.Forms
 
         private void olvCellEditFinishing(object sender, CellEditEventArgs e)
         {
-            
+
             /*if (e.Value is Action) {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 Action value = (Action)((ComboBox)e.Control).SelectedItem;
@@ -786,7 +795,7 @@ namespace SF3.X1_Editor.Forms
             public static string battle = "none";
             public static string debug = "off";
             public static string fileName = "None";
-            
+
             //public static int customOffset = 0x00000000;
         }
 
@@ -877,19 +886,19 @@ namespace SF3.X1_Editor.Forms
         private void battleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //battle
-            if(isBattle == false)
+            if (isBattle == false)
             {
                 isBattle = true;
                 this.battleToolStripMenuItem.Text = "Battle toggle: on";
                 Globals.battle = "battle";
-                
+
             }
             else
             {
                 isBattle = false;
                 this.battleToolStripMenuItem.Text = "Battle toggle: off";
                 Globals.battle = "town";
-                
+
             }
             updateText();
 
@@ -905,14 +914,14 @@ namespace SF3.X1_Editor.Forms
                 Globals.treasureDebug = false;
                 this.treasureDebugToggleOffToolStripMenuItem.Text = "treasureDebug toggle: off";
                 Globals.debug = "off";
-                
+
             }
             else
             {
                 Globals.treasureDebug = true;
                 this.treasureDebugToggleOffToolStripMenuItem.Text = "treasureDebug toggle: on";
                 Globals.debug = "on";
-                
+
             }
             updateText();
         }

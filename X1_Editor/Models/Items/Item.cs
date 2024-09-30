@@ -26,7 +26,7 @@ namespace SF3.X1_Editor.Models.Items
         private int unknown9;
         private int unknown10;
         private int unknown11;
-        private int unknown12;   
+        private int unknown12;
         private int unknown13;
         private int unknown14;
         private int unknown15;
@@ -98,7 +98,7 @@ namespace SF3.X1_Editor.Models.Items
 
                 offset = FileEditor.getDouble(offset);
 
-                if(offset != 0)
+                if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
 
@@ -238,7 +238,7 @@ namespace SF3.X1_Editor.Models.Items
             }
             else if (Globals.scenario == 5)
             {
-                
+
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
                 offset = FileEditor.getDouble(offset);
@@ -249,7 +249,7 @@ namespace SF3.X1_Editor.Models.Items
                 offset = offset - sub; //third pointer
 
                 offset = offset + 10;
-                
+
             }
 
 
@@ -293,13 +293,13 @@ namespace SF3.X1_Editor.Models.Items
             unknown15 = start + 25;
             unknown16 = start + 26;
             unknown17 = start + 27;
-            unknown18 = start + 28; 
-            unknown19 = start + 29; 
-            unknown20 = start + 30; 
+            unknown18 = start + 28;
+            unknown19 = start + 29;
+            unknown20 = start + 30;
             unknown21 = start + 31; //turn not skipped?
-            unknown22 = start + 32; 
-            unknown23 = start + 33; 
-            unknown24 = start + 34; 
+            unknown22 = start + 32;
+            unknown23 = start + 33;
+            unknown24 = start + 34;
             unknown25 = start + 35;//aitag1?
             unknown26 = start + 36; //aitype1?
             unknown27 = start + 37;//aiaggression 1?
@@ -312,8 +312,8 @@ namespace SF3.X1_Editor.Models.Items
             unknown34 = start + 44; //aitag4?
             unknown35 = start + 45; //aitype4?
             unknown36 = start + 46; //aiaggression 4?
-            unknown37 = start + 47; 
-            unknown38 = start + 48; 
+            unknown37 = start + 47;
+            unknown38 = start + 48;
             unknown39 = start + 49;
             unknown40 = start + 50; //2 bytes
             //unknown42 = start + 52;
@@ -433,7 +433,7 @@ namespace SF3.X1_Editor.Models.Items
                 FileEditor.setByte(unknown4, (byte)value);
             }
         }
-        
+
         public int Unknown5
         {
             get
@@ -889,7 +889,7 @@ namespace SF3.X1_Editor.Models.Items
             }
         }
 
-        
+
 
         public int Address
         {

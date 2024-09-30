@@ -30,8 +30,23 @@ namespace SF3.X1_Editor.Models.Presets
 
         public Preset(int id, string text)
         {
-                if (Globals.scenario == 1)
+            if (Globals.scenario == 1)
+            {
+                offset = 0x00000018; //scn1 initial pointer
+                sub = 0x0605f000;
+                offset = FileEditor.getDouble(offset);
+                offset = offset - sub; //first pointer
+                offset = FileEditor.getDouble(offset);
+                offset = offset - sub + Globals.map; //second pointer
+                offset = FileEditor.getDouble(offset);
+
+                if (offset != 0)
                 {
+                    offset = offset - sub; //third pointer
+                }
+                else
+                {
+                    Globals.map = 0;
                     offset = 0x00000018; //scn1 initial pointer
                     sub = 0x0605f000;
                     offset = FileEditor.getDouble(offset);
@@ -39,25 +54,10 @@ namespace SF3.X1_Editor.Models.Presets
                     offset = FileEditor.getDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
                     offset = FileEditor.getDouble(offset);
+                    offset = offset - sub; //third pointer
+                }
 
-                    if (offset != 0)
-                    {
-                        offset = offset - sub; //third pointer
-                    }
-                    else
-                    {
-                        Globals.map = 0;
-                        offset = 0x00000018; //scn1 initial pointer
-                        sub = 0x0605f000;
-                        offset = FileEditor.getDouble(offset);
-                        offset = offset - sub; //first pointer
-                        offset = FileEditor.getDouble(offset);
-                        offset = offset - sub + Globals.map; //second pointer
-                        offset = FileEditor.getDouble(offset);
-                        offset = offset - sub; //third pointer
-                    }
 
-                    
 
                 /*
                 offset = 0x00000018; //scn1 initial pointer
@@ -69,34 +69,34 @@ namespace SF3.X1_Editor.Models.Presets
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
-                }
-                else if (Globals.scenario == 2)
-                {
+            }
+            else if (Globals.scenario == 2)
+            {
 
+                offset = 0x00000024; //scn2 initial pointer
+                sub = 0x0605e000;
+                offset = FileEditor.getDouble(offset);
+                offset = offset - sub; //first pointer
+                offset = FileEditor.getDouble(offset);
+                offset = offset - sub + Globals.map; //second pointer
+
+                offset = FileEditor.getDouble(offset);
+                if (offset != 0)
+                {
+                    offset = offset - sub; //third pointer
+                }
+                else
+                {
+                    Globals.map = 4;
                     offset = 0x00000024; //scn2 initial pointer
                     sub = 0x0605e000;
                     offset = FileEditor.getDouble(offset);
                     offset = offset - sub; //first pointer
                     offset = FileEditor.getDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-
-                    offset = FileEditor.getDouble(offset); 
-                    if (offset != 0)
-                    {
-                        offset = offset - sub; //third pointer
-                    }
-                    else
-                    {
-                        Globals.map = 4;
-                        offset = 0x00000024; //scn2 initial pointer
-                        sub = 0x0605e000;
-                        offset = FileEditor.getDouble(offset);
-                        offset = offset - sub; //first pointer
-                        offset = FileEditor.getDouble(offset);
-                        offset = offset - sub + Globals.map; //second pointer
-                        offset = FileEditor.getDouble(offset);
-                        offset = offset - sub; //third pointer
-                    }
+                    offset = FileEditor.getDouble(offset);
+                    offset = offset - sub; //third pointer
+                }
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
@@ -108,9 +108,9 @@ namespace SF3.X1_Editor.Models.Presets
                 //offset value should now point to where npc placements are
                 */
 
-                }
-                else if (Globals.scenario == 3)
-                {
+            }
+            else if (Globals.scenario == 3)
+            {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
@@ -121,25 +121,39 @@ namespace SF3.X1_Editor.Models.Presets
                 offset = FileEditor.getDouble(offset);
 
 
-                    if (offset != 0)
-                    {
-                        offset = offset - sub; //third pointer
-                    }
-                    else
-                    {
-                        Globals.map = 8;
-                        offset = 0x00000024; //scn3 initial pointer
-                        sub = 0x0605e000;
-                        offset = FileEditor.getDouble(offset);
-                        offset = offset - sub; //first pointer
-                        offset = FileEditor.getDouble(offset);
-                        offset = offset - sub + Globals.map; //second pointer
-                        offset = FileEditor.getDouble(offset);
-                        offset = offset - sub; //third pointer
-                    }
-                }
-                else if (Globals.scenario == 4)
+                if (offset != 0)
                 {
+                    offset = offset - sub; //third pointer
+                }
+                else
+                {
+                    Globals.map = 8;
+                    offset = 0x00000024; //scn3 initial pointer
+                    sub = 0x0605e000;
+                    offset = FileEditor.getDouble(offset);
+                    offset = offset - sub; //first pointer
+                    offset = FileEditor.getDouble(offset);
+                    offset = offset - sub + Globals.map; //second pointer
+                    offset = FileEditor.getDouble(offset);
+                    offset = offset - sub; //third pointer
+                }
+            }
+            else if (Globals.scenario == 4)
+            {
+                offset = 0x00000024; //pd initial pointer
+                sub = 0x0605e000;
+                offset = FileEditor.getDouble(offset);
+                offset = offset - sub; //first pointer
+                offset = FileEditor.getDouble(offset);
+                offset = offset - sub + Globals.map; //second pointer
+                offset = FileEditor.getDouble(offset);
+                if (offset != 0)
+                {
+                    offset = offset - sub; //third pointer
+                }
+                else
+                {
+                    Globals.map = 0;
                     offset = 0x00000024; //pd initial pointer
                     sub = 0x0605e000;
                     offset = FileEditor.getDouble(offset);
@@ -147,36 +161,22 @@ namespace SF3.X1_Editor.Models.Presets
                     offset = FileEditor.getDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
                     offset = FileEditor.getDouble(offset);
-                    if (offset != 0)
-                    {
-                        offset = offset - sub; //third pointer
-                    }
-                    else
-                    {
-                        Globals.map = 0;
-                        offset = 0x00000024; //pd initial pointer
-                        sub = 0x0605e000;
-                        offset = FileEditor.getDouble(offset);
-                        offset = offset - sub; //first pointer
-                        offset = FileEditor.getDouble(offset);
-                        offset = offset - sub + Globals.map; //second pointer
-                        offset = FileEditor.getDouble(offset);
-                        offset = offset - sub; //third pointer
-                    }
-
-                }
-                else if (Globals.scenario == 5)
-                {
-                    offset = 0x00000018; //BTL99 initial pointer
-                    sub = 0x06060000;
-                    offset = FileEditor.getDouble(offset);
-                    offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
-                    offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
                     offset = offset - sub; //third pointer
-                
                 }
+
+            }
+            else if (Globals.scenario == 5)
+            {
+                offset = 0x00000018; //BTL99 initial pointer
+                sub = 0x06060000;
+                offset = FileEditor.getDouble(offset);
+                offset = offset - sub; //first pointer
+                offset = FileEditor.getDouble(offset);
+                offset = offset - sub + Globals.map; //second pointer
+                offset = FileEditor.getDouble(offset);
+                offset = offset - sub; //third pointer
+
+            }
 
 
 
@@ -194,7 +194,7 @@ namespace SF3.X1_Editor.Models.Presets
 
 
             //int start = 0x354c + (id * 24);
-            
+
             int start = offset + (id * 0x0A);
             unknown1 = start; //1 bytes
             tableSize = start + 1; //1 byte
@@ -237,7 +237,7 @@ namespace SF3.X1_Editor.Models.Presets
             }
             set
             {
-                FileEditor.setByte(unknown1, (byte) value);
+                FileEditor.setByte(unknown1, (byte)value);
             }
         }
         public int TableSize

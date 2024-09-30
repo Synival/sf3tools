@@ -80,7 +80,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
                 offset = offset - sub; //second pointer
 
                 //offset = FileEditor.getDouble(offset);
-                
+
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
@@ -103,7 +103,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
                 offset = offset - sub; //second pointer
 
                 //offset = FileEditor.getDouble(offset);
-                
+
             }
             else if (Globals.scenario == 4)
             {
@@ -113,8 +113,8 @@ namespace SF3.X1_Editor.Models.BattlePointers
                 offset = offset - sub; //first pointer
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //second pointer
-                //offset = FileEditor.getDouble(offset);
-                
+                                       //offset = FileEditor.getDouble(offset);
+
             }
             else if (Globals.scenario == 5)
             {

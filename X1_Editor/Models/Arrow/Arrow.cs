@@ -106,7 +106,7 @@ namespace SF3.X1_Editor.Models.Arrows
 
             int start = offset + (id * 0x0c);
             unknown0 = start; //2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
-            textID = start + 0x02; 
+            textID = start + 0x02;
             unknown4 = start + 0x04;
             warpInMPD = start + 0x06;
             unknown8 = start + 0x08;
@@ -117,8 +117,8 @@ namespace SF3.X1_Editor.Models.Arrows
 
 
 
-        //unknown42 = start + 52;
-        address = offset + (id * 0x0c);
+            //unknown42 = start + 52;
+            address = offset + (id * 0x0c);
             //address = 0x0354c + (id * 0x18);
 
         }
@@ -138,7 +138,7 @@ namespace SF3.X1_Editor.Models.Arrows
             }
         }
 
-        
+
 
         public int ArrowUnknown0
         {
