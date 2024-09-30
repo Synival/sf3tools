@@ -9,7 +9,6 @@ namespace SF3.IconPointerEditor.Models.Items
 {
     public class Item
     {
-
         //SPELLS
         private int theSpellIcon;
         private int realOffset;
@@ -45,8 +44,6 @@ namespace SF3.IconPointerEditor.Models.Items
         {
             if (Globals.scenario == 1)
             {
-
-
                 if (Globals.x026 == true)
                 {
                     offset = 0x0a30; //scn1 initial pointer
@@ -82,9 +79,6 @@ namespace SF3.IconPointerEditor.Models.Items
             }
             else if (Globals.scenario == 2)
             {
-
-
-
                 if (Globals.x026 == true)
                 {
                     offset = 0x0a1c; //scn2 x026 initial pointer
@@ -105,8 +99,6 @@ namespace SF3.IconPointerEditor.Models.Items
             }
             else if (Globals.scenario == 3)
             {
-
-
                 if (Globals.x026 == true)
                 {
                     offset = 0x09cc; //scn2 x026 initial pointer
@@ -126,8 +118,6 @@ namespace SF3.IconPointerEditor.Models.Items
             }
             else if (Globals.scenario == 4)
             {
-
-
                 if (Globals.x026 == true)
                 {
                     offset = 0x07a0; //pd x026 initial pointer

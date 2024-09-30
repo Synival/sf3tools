@@ -81,7 +81,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
             }
             else if (Globals.scenario == 2)
             {
-
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
@@ -205,7 +204,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
             }
             else if (Globals.scenario == 5)
             {
-
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
                 offset = FileEditor.getDouble(offset);

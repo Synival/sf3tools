@@ -8,7 +8,6 @@ namespace SF3.X1_Editor.Models.Arrows
 {
     public class Arrow
     {
-
         private int unknown0; //2 byte
         private int textID; //2 byte
         private int unknown4; //2 byte
@@ -49,7 +48,6 @@ namespace SF3.X1_Editor.Models.Arrows
         {
             if (Globals.scenario == 2)
             {
-
                 offset = 0x00000060; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
@@ -76,7 +74,6 @@ namespace SF3.X1_Editor.Models.Arrows
             /*
             else if (Globals.scenario == 5)
             {
-
                 offset = 0x00000030; //btl99 initial pointer
                 sub = 0x06060000;
                 offset = FileEditor.getDouble(offset);

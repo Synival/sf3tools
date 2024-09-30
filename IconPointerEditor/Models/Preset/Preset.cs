@@ -20,7 +20,6 @@ namespace SF3.IconPointerEditor.Models.Presets
         {
             if (Globals.scenario == 1)
             {
-
                 if (Globals.x026 == true)
                 {
                     offset = 0x08f0; //scn1 initial pointer
@@ -49,9 +48,6 @@ namespace SF3.IconPointerEditor.Models.Presets
             }
             else if (Globals.scenario == 2)
             {
-
-
-
                 if (Globals.x026 == true)
                 {
                     offset = 0x0a08; //scn2 x026 initial pointer
@@ -81,8 +77,6 @@ namespace SF3.IconPointerEditor.Models.Presets
             }
             else if (Globals.scenario == 3)
             {
-
-
                 if (Globals.x026 == true)
                 {
                     offset = 0x09b4; //scn3 x026 initial pointer
@@ -100,8 +94,6 @@ namespace SF3.IconPointerEditor.Models.Presets
             }
             else if (Globals.scenario == 4)
             {
-
-
                 if (Globals.x026 == true)
                 {
                     offset = 0x072c; //pd x026 initial pointer
@@ -194,8 +186,6 @@ namespace SF3.IconPointerEditor.Models.Presets
             }
             set
             {
-
-
                 if (Globals.x026 == true && (Globals.scenario == 1))
                 {
                     FileEditor.setWord(theItemIcon, value);

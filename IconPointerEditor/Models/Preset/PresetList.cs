@@ -18,27 +18,20 @@ namespace SF3.IconPointerEditor.Models.Presets
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadPresetList()
         {
-
-
-
             if (Globals.scenario == 1)
             {
-
                 r = "Resources/scenario1Items.xml";
             }
             if (Globals.scenario == 2)
             {
-
                 r = "Resources/scenario2Items.xml";
             }
             if (Globals.scenario == 3)
             {
-
                 r = "Resources/scenario3Items.xml";
             }
             if (Globals.scenario == 4)
             {
-
                 r = "Resources/PDItems.xml";
             }
 

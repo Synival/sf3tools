@@ -22,10 +22,6 @@ namespace SF3.X002_Editor.Models.MusicOverride
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadMusicOverrideList()
         {
-
-
-
-
             if (Globals.scenario == 1)
             {
                 r = "RSc1/musicOverrideListS1.xml";

@@ -68,7 +68,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
             }
             else if (Globals.scenario == 2)
             {
-
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);

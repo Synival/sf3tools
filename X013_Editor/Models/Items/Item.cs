@@ -127,8 +127,6 @@ namespace SF3.X013_Editor.Models.Items
 
         /*public int ranResult0
         {
-
-
             get
             {
                 return FileEditor.getByte(damageCalculation);
@@ -141,8 +139,6 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult0
         {
-
-
             get
             {
                 //x = extraPow;
@@ -197,12 +193,8 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult1
         {
-
-
             get
             {
-
-
                 if (FileEditor.getByte(damageCalculation) != 0x64)
                 {
                     r1 = FileEditor.getByte(extraPow); ;
@@ -231,12 +223,8 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult2
         {
-
-
             get
             {
-
-
                 if (FileEditor.getByte(damageCalculation) != 0x64)
                 {
                     r1 = FileEditor.getByte(extraPow); ;
@@ -265,12 +253,8 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult3
         {
-
-
             get
             {
-
-
                 if (FileEditor.getByte(damageCalculation) != 0x64)
                 {
                     r1 = FileEditor.getByte(extraPow); ;
@@ -299,12 +283,8 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult4
         {
-
-
             get
             {
-
-
                 if (FileEditor.getByte(damageCalculation) != 0x64)
                 {
                     r1 = FileEditor.getByte(extraPow); ;
@@ -333,12 +313,8 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult5
         {
-
-
             get
             {
-
-
                 if (FileEditor.getByte(damageCalculation) != 0x64)
                 {
                     r1 = FileEditor.getByte(extraPow); ;
@@ -367,12 +343,8 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult6
         {
-
-
             get
             {
-
-
                 if (FileEditor.getByte(damageCalculation) != 0x64)
                 {
                     r1 = FileEditor.getByte(extraPow); ;
@@ -401,12 +373,8 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult7
         {
-
-
             get
             {
-
-
                 if (FileEditor.getByte(damageCalculation) != 0x64)
                 {
                     r1 = FileEditor.getByte(extraPow); ;
@@ -435,8 +403,6 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult8
         {
-
-
             get
             {
                 //x = extraPow;
@@ -471,7 +437,6 @@ namespace SF3.X013_Editor.Models.Items
                 }
                 else
                 {
-
                     return FileEditor.getByte(pow);
                 }
 
@@ -482,8 +447,6 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult9
         {
-
-
             get
             {
                 if (FileEditor.getByte(damageCalculation) != 0x64)
@@ -511,7 +474,6 @@ namespace SF3.X013_Editor.Models.Items
                 }
                 else
                 {
-
                     return FileEditor.getByte(pow);
                 }
 
@@ -522,8 +484,6 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult10
         {
-
-
             get
             {
                 if (FileEditor.getByte(damageCalculation) != 0x64)
@@ -551,7 +511,6 @@ namespace SF3.X013_Editor.Models.Items
                 }
                 else
                 {
-
                     return FileEditor.getByte(pow);
                 }
 
@@ -562,8 +521,6 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult11
         {
-
-
             get
             {
                 if (FileEditor.getByte(damageCalculation) != 0x64)
@@ -591,7 +548,6 @@ namespace SF3.X013_Editor.Models.Items
                 }
                 else
                 {
-
                     return FileEditor.getByte(pow);
                 }
 
@@ -602,8 +558,6 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult12
         {
-
-
             get
             {
                 if (FileEditor.getByte(damageCalculation) != 0x64)
@@ -631,7 +585,6 @@ namespace SF3.X013_Editor.Models.Items
                 }
                 else
                 {
-
                     return FileEditor.getByte(pow);
                 }
 
@@ -642,8 +595,6 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult13
         {
-
-
             get
             {
                 if (FileEditor.getByte(damageCalculation) != 0x64)
@@ -671,7 +622,6 @@ namespace SF3.X013_Editor.Models.Items
                 }
                 else
                 {
-
                     return FileEditor.getByte(pow);
                 }
 
@@ -682,8 +632,6 @@ namespace SF3.X013_Editor.Models.Items
 
         public int ranResult14
         {
-
-
             get
             {
                 if (FileEditor.getByte(damageCalculation) != 0x64)
@@ -711,7 +659,6 @@ namespace SF3.X013_Editor.Models.Items
                 }
                 else
                 {
-
                     return FileEditor.getByte(pow);
                 }
 

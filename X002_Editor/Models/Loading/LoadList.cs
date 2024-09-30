@@ -22,10 +22,6 @@ namespace SF3.X002_Editor.Models.Loading
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadLoadList()
         {
-
-
-
-
             if (Globals.scenario == 1)
             {
                 r = "RSc1/loadListS1.xml";

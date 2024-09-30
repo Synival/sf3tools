@@ -38,9 +38,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
 
         public Preset(int id, string text)
         {
-
-
-
             checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = FileEditor.getByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
 
@@ -65,7 +62,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
             {
                 if (checkType == 0x07) //x033
                 {
-
                     if (checkVersion2 == 0x8c)
                     {
                         offset = 0x00002e96; //scn2 ver 1.003
@@ -85,7 +81,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
                     }
                     else
                     {
-
                         offset = 0x00002e6a;
                     }
 
@@ -107,7 +102,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
                 //Console.WriteLine(checkType);
                 if (checkType == 0x07) //x033
                 {
-
                     offset = 0x00005734; //pd
                 }
                 else

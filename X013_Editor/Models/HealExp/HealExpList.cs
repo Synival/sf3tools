@@ -22,11 +22,6 @@ namespace SF3.X013_Editor.Models.HealExp
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadHealExpList()
         {
-
-
-
-
-
             r = "Resources/HealExpList.xml";
 
 

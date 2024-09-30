@@ -8,7 +8,6 @@ namespace SF3.X002_Editor.Models.Warps
 {
     public class Warp
     {
-
         private int unknown1;
         private int unknown2;
         private int type;
@@ -50,7 +49,6 @@ namespace SF3.X002_Editor.Models.Warps
 
             if (Globals.scenario == 1)
             {
-
                 offset = 0x000053cc; //scn1
 
 
@@ -97,7 +95,6 @@ namespace SF3.X002_Editor.Models.Warps
 
         public int WarpUnknown1
         {
-
             get
             {
                 return FileEditor.getByte(unknown1);

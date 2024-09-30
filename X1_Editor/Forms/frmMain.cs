@@ -25,7 +25,6 @@ using BrightIdeasSoftware;
 
 namespace SF3.X1_Editor.Forms
 {
-
     public partial class frmMain : Form
     {
         //Used to append to state names to stop program loading states from older versions
@@ -35,7 +34,6 @@ namespace SF3.X1_Editor.Forms
 
         public frmMain()
         {
-
             InitializeComponent();
             frmMonsterEditor_Resize(this, new EventArgs());
 
@@ -295,7 +293,6 @@ namespace SF3.X1_Editor.Forms
             //attempt to detect scenario that failed
             /*if (offset > 0x06067fff || offset < 0x0605e000)
             {
-
                 //Console.WriteLine(offset.ToString("X"));
 
 
@@ -503,8 +500,6 @@ namespace SF3.X1_Editor.Forms
             {
                 if (FileEditor.loadFile(openfile.FileName))
                 {
-
-
                     try
                     {
                         initialise();
@@ -729,7 +724,6 @@ namespace SF3.X1_Editor.Forms
 
         private void olvCellEditFinishing(object sender, CellEditEventArgs e)
         {
-
             /*if (e.Value is Action) {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 Action value = (Action)((ComboBox)e.Control).SelectedItem;
@@ -767,7 +761,6 @@ namespace SF3.X1_Editor.Forms
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-
         }
 
         public static class Globals
@@ -860,12 +853,10 @@ namespace SF3.X1_Editor.Forms
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void toolStripTextBox1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void battleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -895,7 +886,6 @@ namespace SF3.X1_Editor.Forms
         {
             if (Globals.treasureDebug == true)
             {
-
                 Globals.treasureDebug = false;
                 this.treasureDebugToggleOffToolStripMenuItem.Text = "treasureDebug toggle: off";
                 Globals.debug = "off";

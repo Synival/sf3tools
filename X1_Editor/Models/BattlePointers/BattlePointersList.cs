@@ -22,8 +22,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadBattlePointersList()
         {
-
-
             r = "Resources/BattlePointersList.xml";
 
 

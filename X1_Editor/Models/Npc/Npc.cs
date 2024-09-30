@@ -8,7 +8,6 @@ namespace SF3.X1_Editor.Models.Npcs
 {
     public class Npc
     {
-
         private int spriteID;
         private int unknown1;
         private int table;
@@ -63,7 +62,6 @@ namespace SF3.X1_Editor.Models.Npcs
             }
             else if (Globals.scenario == 2)
             {
-
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
@@ -89,7 +87,6 @@ namespace SF3.X1_Editor.Models.Npcs
             }/*
             else if (Globals.scenario == 5)
             {
-
                 offset = 0x00000024; //btl99 initial pointer
                 sub = 0x06060000;
                 offset = FileEditor.getDouble(offset);

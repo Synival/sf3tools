@@ -22,10 +22,6 @@ namespace SF3.X013_Editor.Models.CritMod
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadCritModList()
         {
-
-
-
-
             r = "Resources/CritModList.xml";
 
 

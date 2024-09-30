@@ -18,7 +18,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadPresetList()
         {
-
             if (Globals.scenario == 1)
             {
                 r = "RSc1/classEquipS1.xml";

@@ -18,9 +18,6 @@ namespace SF3.X1_Editor.Models.Tiles
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadTileList()
         {
-
-
-
             r = "Resources/MovementTypes.xml";
 
 

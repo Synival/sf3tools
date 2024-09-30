@@ -18,9 +18,6 @@ namespace SF3.X1_Editor.Models.Presets
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadPresetList()
         {
-
-
-
             r = "Resources/X1Top.xml";
 
 

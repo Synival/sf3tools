@@ -22,10 +22,6 @@ namespace SF3.X002_Editor.Models.WeaponRank
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadWeaponRankList()
         {
-
-
-
-
             r = "Resources/WeaponRankList.xml";
 
 

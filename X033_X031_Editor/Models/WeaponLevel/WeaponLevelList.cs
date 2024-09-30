@@ -22,11 +22,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadWeaponLevelList()
         {
-
-
-
-
-
             r = "Resources/WeaponLevel.xml";
 
 

@@ -22,10 +22,6 @@ namespace SF3.X013_Editor.Models.MagicBonus
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadMagicBonusList()
         {
-
-
-
-
             if (Globals.scenario == 1)
             {
                 r = "RSc1/magicBonusS1.xml";

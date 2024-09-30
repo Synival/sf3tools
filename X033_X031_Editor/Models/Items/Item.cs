@@ -673,9 +673,6 @@ namespace SF3.X033_X031_Editor.Models.Items
 
         public Item(int id, string text)
         {
-
-
-
             checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = FileEditor.getByte(0x000000017); //to determine which version of scn2 we are using 
             //X031.BIN is during combat
@@ -726,8 +723,6 @@ namespace SF3.X033_X031_Editor.Models.Items
             }
             else if (Globals.scenario == 3)
             {
-
-
                 if (checkType == 0x07)
                 {
                     offset = 0x00001030; //scn3
@@ -1024,7 +1019,6 @@ namespace SF3.X033_X031_Editor.Models.Items
 
         public string HPgroup1
         {
-
             get
             {
                 if (FileEditor.getByte(characterClass) < 0x20)//not promoted
@@ -1066,10 +1060,8 @@ namespace SF3.X033_X031_Editor.Models.Items
 
                 for (int i = 0; i < (otherValue - 1); i++)
                 {
-
                     if (i > 0x80)
                     {
-
                         percent = percent + something;
                         something = something - 1;
                     }
@@ -1255,14 +1247,12 @@ namespace SF3.X033_X031_Editor.Models.Items
             {
                 if (FileEditor.getByte(characterClass) < 0x20) //not promoted
                 {
-
                     value = ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x340 >> 2;
                     otherValue = value;
                     //*0x100 / 0x340 is to simulate *0x4ec4ec4f
                 }
                 else
                 {
-
                     value = ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x228 >> 5;
                     otherValue = value;
                     //*0x100 / 0x228 is to simulate *0x76b981d8
@@ -1571,14 +1561,12 @@ namespace SF3.X033_X031_Editor.Models.Items
             {
                 if (FileEditor.getByte(characterClass) < 0x20) //not promoted
                 {
-
                     value = ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x340 >> 2;
                     otherValue = value;
                     //*0x100 / 0x340 is to simulate *0x4ec4ec4f
                 }
                 else
                 {
-
                     value = ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x228 >> 5;
                     otherValue = value;
                 }
@@ -1882,14 +1870,12 @@ namespace SF3.X033_X031_Editor.Models.Items
             {
                 if (FileEditor.getByte(characterClass) < 0x20) //not promoted
                 {
-
                     value = ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x340 >> 2;
                     otherValue = value;
                     //*0x100 / 0x340 is to simulate *0x4ec4ec4f
                 }
                 else
                 {
-
                     value = ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x228 >> 5;
                     otherValue = value;
                 }
@@ -2193,14 +2179,12 @@ namespace SF3.X033_X031_Editor.Models.Items
             {
                 if (FileEditor.getByte(characterClass) < 0x20) //not promoted
                 {
-
                     value = ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x340 >> 2;
                     otherValue = value;
                     //*0x100 / 0x340 is to simulate *0x4ec4ec4f
                 }
                 else
                 {
-
                     value = ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x228 >> 5;
                     otherValue = value;
                 }
@@ -2504,14 +2488,12 @@ namespace SF3.X033_X031_Editor.Models.Items
             {
                 if (FileEditor.getByte(characterClass) < 0x20) //not promoted
                 {
-
                     value = ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x340 >> 2;
                     otherValue = value;
                     //*0x100 / 0x340 is to simulate *0x4ec4ec4f
                 }
                 else
                 {
-
                     value = ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x228 >> 5;
                     otherValue = value;
                 }

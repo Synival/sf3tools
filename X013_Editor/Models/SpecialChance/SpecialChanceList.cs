@@ -22,10 +22,6 @@ namespace SF3.X013_Editor.Models.SpecialChance
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadSpecialChanceList()
         {
-
-
-
-
             r = "Resources/SpecialChanceList.xml";
 
 

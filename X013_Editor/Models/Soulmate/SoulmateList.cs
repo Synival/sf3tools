@@ -22,9 +22,6 @@ namespace SF3.X013_Editor.Models.Soulmate
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadSoulmateList()
         {
-
-
-
             r = "Resources/SoulmateList.xml";
 
 

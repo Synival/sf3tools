@@ -37,7 +37,6 @@ namespace SF3.X1_Editor.Models.Tiles
 
         public Tile(int id, string text)
         {
-
             if (Globals.scenario == 2)
             {
                 offset = 0x000001c4;

@@ -18,7 +18,6 @@ namespace SF3.X019_Editor.Models.Spells
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadSpellList()
         {
-
             if (Globals.scenario == 1)
             {
                 r = "RSc1/spellListS1.xml";

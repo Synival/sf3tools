@@ -16,7 +16,6 @@ using BrightIdeasSoftware;
 
 namespace SF3.IconPointerEditor.Forms
 {
-
     public partial class frmMain : Form
     {
         //Used to append to state names to stop program loading states from older versions
@@ -25,7 +24,6 @@ namespace SF3.IconPointerEditor.Forms
 
         public frmMain()
         {
-
             InitializeComponent();
             frmMonsterEditor_Resize(this, new EventArgs());
 
@@ -473,7 +471,6 @@ namespace SF3.IconPointerEditor.Forms
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-
         }
 
         public static class Globals
@@ -512,19 +509,15 @@ namespace SF3.IconPointerEditor.Forms
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void toolStripMenuItem5_Click_1(object sender, EventArgs e)
         {
-
         }
 
 
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
-
-
         }
 
         private void toolStripMenuItem6_Click_1(object sender, EventArgs e)

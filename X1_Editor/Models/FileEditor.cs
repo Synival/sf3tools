@@ -38,7 +38,6 @@ namespace SF3.X1_Editor.Models
 
         public static int getByte(int location)
         {
-
             return data[location];
 
             /*try
@@ -54,7 +53,6 @@ namespace SF3.X1_Editor.Models
 
         public static int getWord(int location)
         {
-
             return data[location] * 256 + data[location + 1];
 
             /*try

@@ -22,12 +22,8 @@ namespace SF3.X1_Editor.Models.Items
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadItemList()
         {
-
-
-
             if (Globals.scenario == 1)
             {
-
                 r = "Resources/X1List.xml";
             }
             else

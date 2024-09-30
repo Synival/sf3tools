@@ -22,10 +22,6 @@ namespace SF3.X013_Editor.Models.Critrate
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadCritrateList()
         {
-
-
-
-
             r = "Resources/CritrateList.xml";
 
 

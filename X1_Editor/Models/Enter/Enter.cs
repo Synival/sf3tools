@@ -8,7 +8,6 @@ namespace SF3.X1_Editor.Models.Enters
 {
     public class Enter
     {
-
         private int enterID; //2 byte
         private int unknown2; //2 byte
         private int xPos; //2 byte
@@ -60,7 +59,6 @@ namespace SF3.X1_Editor.Models.Enters
             }
             else if (Globals.scenario == 2)
             {
-
                 offset = 0x00000030; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
@@ -87,7 +85,6 @@ namespace SF3.X1_Editor.Models.Enters
             /*
             else if (Globals.scenario == 5)
             {
-
                 offset = 0x00000030; //btl99 initial pointer
                 sub = 0x06060000;
                 offset = FileEditor.getDouble(offset);

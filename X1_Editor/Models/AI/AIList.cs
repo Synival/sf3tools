@@ -18,7 +18,6 @@ namespace SF3.X1_Editor.Models.AI
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadAIList()
         {
-
             r = "Resources/X1AI.xml";
 
             /*if (Globals.scenario == 1)

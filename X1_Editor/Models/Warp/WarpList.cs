@@ -21,9 +21,6 @@ namespace SF3.X1_Editor.Models.Warps
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadWarpList()
         {
-
-
-
             r = "Resources/X1Warp.xml";
 
 
@@ -52,7 +49,6 @@ namespace SF3.X1_Editor.Models.Warps
                 //while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].Searched != 0xffff || itemssorted[itemssorted.Length - 1].EventNumber != 0xffff)))
                 //while (!xml.EOF && (itemssorted.Length == 0 || myCount <= 2))
                 {
-
                     {
                         xml.Read();
                         if (xml.HasAttributes)
@@ -132,27 +128,20 @@ namespace SF3.X1_Editor.Models.Treasures
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadTreasureList()
         {
-
-
-
             if (Globals.scenario == 1)
             {
-
                 r = "Resources/X1Treasure.xml";
             }
             if (Globals.scenario == 2)
             {
-
                 r = "Resources/scenario2Spells.xml";
             }
             if (Globals.scenario == 3)
             {
-
                 r = "Resources/scenario3Spells.xml";
             }
             if (Globals.scenario == 4)
             {
-
                 r = "Resources/PDSpells.xml";
             }
 

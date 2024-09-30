@@ -8,7 +8,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 {
     public class StatusEffect
     {
-
         private int luck0;
         private int luck1;
         private int luck2;
@@ -51,8 +50,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public StatusEffect(int id, string text)
         {
-
-
             if (Globals.scenario == 1)
             {
                 offset = 0x00007408; //scn1
@@ -116,7 +113,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int StatusLuck0
         {
-
             get
             {
                 return FileEditor.getByte(luck0);
@@ -129,7 +125,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int StatusLuck1
         {
-
             get
             {
                 return FileEditor.getByte(luck1);
@@ -142,7 +137,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int StatusLuck2
         {
-
             get
             {
                 return FileEditor.getByte(luck2);
@@ -155,7 +149,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int StatusLuck3
         {
-
             get
             {
                 return FileEditor.getByte(luck3);
@@ -168,7 +161,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int StatusLuck4
         {
-
             get
             {
                 return FileEditor.getByte(luck4);
@@ -181,7 +173,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int StatusLuck5
         {
-
             get
             {
                 return FileEditor.getByte(luck5);
@@ -194,7 +185,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int StatusLuck6
         {
-
             get
             {
                 return FileEditor.getByte(luck6);
@@ -207,7 +197,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int StatusLuck7
         {
-
             get
             {
                 return FileEditor.getByte(luck7);
@@ -220,7 +209,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int StatusLuck8
         {
-
             get
             {
                 return FileEditor.getByte(luck8);
@@ -233,7 +221,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int StatusLuck9
         {
-
             get
             {
                 return FileEditor.getByte(luck9);

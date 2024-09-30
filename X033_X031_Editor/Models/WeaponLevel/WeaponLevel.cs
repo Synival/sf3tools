@@ -71,8 +71,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
             }
             else if (Globals.scenario == 3)
             {
-
-
                 if (checkType == 0x07)
                 {
                     offset = 0x00001020; //scn3

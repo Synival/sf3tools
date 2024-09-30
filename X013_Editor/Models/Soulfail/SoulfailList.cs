@@ -22,9 +22,6 @@ namespace SF3.X013_Editor.Models.Soulfail
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadSoulfailList()
         {
-
-
-
             r = "Resources/Soulfail.xml";
 
 

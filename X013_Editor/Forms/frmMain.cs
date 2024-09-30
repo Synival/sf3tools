@@ -28,7 +28,6 @@ using BrightIdeasSoftware;
 
 namespace SF3.X013_Editor.Forms
 {
-
     public partial class frmMain : Form
     {
         //Used to append to state names to stop program loading states from older versions
@@ -37,7 +36,6 @@ namespace SF3.X013_Editor.Forms
 
         public frmMain()
         {
-
             InitializeComponent();
             frmMonsterEditor_Resize(this, new EventArgs());
 
@@ -637,7 +635,6 @@ namespace SF3.X013_Editor.Forms
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-
         }
 
         public static class Globals

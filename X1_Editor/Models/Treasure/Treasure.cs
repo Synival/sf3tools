@@ -8,7 +8,6 @@ namespace SF3.X1_Editor.Models.Treasures
 {
     public class Treasure
     {
-
         private int searched;
         private int eventNumber;
         private int flagUsed;
@@ -58,7 +57,6 @@ namespace SF3.X1_Editor.Models.Treasures
             }
             else if (Globals.scenario == 2)
             {
-
                 offset = 0x0000000C; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
@@ -84,7 +82,6 @@ namespace SF3.X1_Editor.Models.Treasures
             }
             else if (Globals.scenario == 5)
             {
-
                 offset = 0x0000000C; //btl99 initial pointer
                 sub = 0x06060000;
                 offset = FileEditor.getDouble(offset);

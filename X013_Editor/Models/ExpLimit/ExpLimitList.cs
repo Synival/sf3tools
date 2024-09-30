@@ -22,11 +22,6 @@ namespace SF3.X013_Editor.Models.ExpLimit
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadExpLimitList()
         {
-
-
-
-
-
             r = "Resources/ExpLimitList.xml";
 
 

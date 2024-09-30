@@ -23,27 +23,20 @@ namespace SF3.IconPointerEditor.Models.Items
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadItemList()
         {
-
-
-
             if (Globals.scenario == 1)
             {
-
                 r = "Resources/scenario1Spells.xml";
             }
             if (Globals.scenario == 2)
             {
-
                 r = "Resources/scenario2Spells.xml";
             }
             if (Globals.scenario == 3)
             {
-
                 r = "Resources/scenario3Spells.xml";
             }
             if (Globals.scenario == 4)
             {
-
                 r = "Resources/PDSpells.xml";
             }
 

@@ -22,8 +22,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public static bool loadUnknownAIList()
         {
-
-
             r = "Resources/UnknownAIList.xml";
 
 
