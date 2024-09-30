@@ -1,10 +1,7 @@
-﻿//using SF3.X002_Editor.Forms;
-//using SF3.X002_Editor.Models;
-using BrightIdeasSoftware;
+﻿using BrightIdeasSoftware;
 using System;
 using static SF3.X002_Editor.Forms.frmMain;
 
-//using SF3.X002_Editor.Models.StatTypes;
 
 
 namespace SF3.X002_Editor.Models.Warps

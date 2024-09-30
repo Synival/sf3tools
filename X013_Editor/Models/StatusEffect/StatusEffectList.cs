@@ -1,5 +1,4 @@
 ﻿using System;
-//using System.Text;
 using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
@@ -116,7 +115,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
 /*
 using System;
-//using System.Text;
 using System.Xml;
 using System.IO;
 using System.Collections.Generic;

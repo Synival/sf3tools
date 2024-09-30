@@ -1,5 +1,4 @@
 ﻿using System;
-//using System.Text;
 using System.Xml;
 using System.IO;
 using static SF3.X033_X031_Editor.Forms.frmMain;

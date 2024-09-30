@@ -1,9 +1,6 @@
-﻿//using SF3.X013_Editor.Forms;
-//using SF3.X013_Editor.Models;
-using System;
+﻿using System;
 using static SF3.X013_Editor.Forms.frmMain;
 
-//using SF3.X013_Editor.Models.StatTypes;
 
 
 namespace SF3.X013_Editor.Models.Items

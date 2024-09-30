@@ -1,9 +1,6 @@
-﻿//using SF3.X033_X031_Editor.Forms;
-//using SF3.X033_X031_Editor.Models;
-using System;
+﻿using System;
 using static SF3.X033_X031_Editor.Forms.frmMain;
 
-//using SF3.X033_X031_Editor.Models.StatTypes;
 
 
 namespace SF3.X033_X031_Editor.Models.Presets

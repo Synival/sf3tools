@@ -1,10 +1,7 @@
-﻿//using SF3.X1_Editor.Forms;
-//using SF3.X1_Editor.Models;
-using SF3.X1_Editor.Models.UnknownAI;
+﻿using SF3.X1_Editor.Models.UnknownAI;
 using System;
 using static SF3.X1_Editor.Forms.frmMain;
 
-//using SF3.X1_Editor.Models.StatTypes;
 
 
 namespace SF3.X1_Editor.Models.Tiles

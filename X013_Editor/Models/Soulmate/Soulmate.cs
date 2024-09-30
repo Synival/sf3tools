@@ -1,8 +1,5 @@
-﻿//using SF3.X013_Editor.Forms;
-//using SF3.X013_Editor.Models;
-using static SF3.X013_Editor.Forms.frmMain;
+﻿using static SF3.X013_Editor.Forms.frmMain;
 
-//using SF3.X013_Editor.Models.StatTypes;
 
 
 namespace SF3.X013_Editor.Models.Soulmate

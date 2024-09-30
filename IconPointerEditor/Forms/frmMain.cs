@@ -1,25 +1,12 @@
 ﻿using System;
-//using System.Collections.Generic;
-//using System.ComponentModel;
-//using System.Data;
 using System.Drawing;
-//using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
 using SF3.IconPointerEditor.Models;
-//using SF3.IconPointerEditor.Models.Spells;
 using SF3.IconPointerEditor.Models.Presets;
 using SF3.IconPointerEditor.Models.Items;
-//using SF3.IconPointerEditor.Models.Characters;
-//using SF3.IconPointerEditor.Models.Blacksmith;
-//using SF3.IconPointerEditor.Models.StoreItems;
-//using SF3.IconPointerEditor.Models.SpellTable;
-//using SF3.IconPointerEditor.Models.StatTypes;
-//using SF3.IconPointerEditor.Models.Classes;
-//using SF3.IconPointerEditor.Models.Spells;
 using BrightIdeasSoftware;
-//using BrightIdeasSoftware.Design;
 
 
 /*

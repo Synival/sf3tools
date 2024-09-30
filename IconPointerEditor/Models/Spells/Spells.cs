@@ -1,8 +1,5 @@
-﻿//using SF3.IconPointerEditor.Forms;
-//using SF3.IconPointerEditor.Models;
-using static SF3.IconPointerEditor.Forms.frmMain;
+﻿using static SF3.IconPointerEditor.Forms.frmMain;
 
-//using SF3.IconPointerEditor.Models.StatTypes;
 
 
 namespace SF3.IconPointerEditor.Models.Spells

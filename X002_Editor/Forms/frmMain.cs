@@ -1,9 +1,5 @@
 ﻿using System;
-//using System.Collections.Generic;
-//using System.ComponentModel;
-//using System.Data;
 using System.Drawing;
-//using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
@@ -17,15 +13,7 @@ using SF3.X002_Editor.Models.WeaponRank;
 using SF3.X002_Editor.Models.AttackResist;
 using SF3.X002_Editor.Models.Warps;
 using SF3.X002_Editor.Models.MusicOverride;
-//using SF3.X002_Editor.Models.Characters;
-//using SF3.X002_Editor.Models.Blacksmith;
-//using SF3.X002_Editor.Models.StoreItems;
-//using SF3.X002_Editor.Models.SpellTable;
-//using SF3.X002_Editor.Models.StatTypes;
-//using SF3.X002_Editor.Models.Classes;
-//using SF3.X002_Editor.Models.Spells;
 using BrightIdeasSoftware;
-//using BrightIdeasSoftware.Design;
 
 
 /*
