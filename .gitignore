@@ -5,3 +5,5 @@ obj/
 .metadata/
 *.sln.cache
 *.csproj.user
+/dist_src
+/dist
