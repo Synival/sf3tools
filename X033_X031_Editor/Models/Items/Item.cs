@@ -946,11 +946,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
 
                 //value = value & 0xf00;
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
                 //percent = arrayMath[0x80] / valueNumber;
 
@@ -1004,11 +1000,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1037,19 +1029,11 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
 
                 /*value = value & 0xf00;
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / 16384;
                 return string.Format("{0:0.##}", (percent + (value % 15)) * 100) + "%";*/
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1076,11 +1060,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1110,11 +1090,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1138,11 +1114,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //*0x100 / 0x228 is to simulate *0x76b981d8
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1208,11 +1180,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //return otherValue / 256 * 100 + "%";
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1241,11 +1209,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1273,11 +1237,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1304,11 +1264,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1338,11 +1294,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //*0x100 / 0x228 is to simulate *0x76b981d8
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1365,11 +1317,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1435,11 +1383,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //return otherValue / 256 * 100 + "%";
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1468,11 +1412,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1500,11 +1440,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1531,11 +1467,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1565,11 +1497,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //*0x100 / 0x228 is to simulate *0x76b981d8
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1592,11 +1520,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1662,11 +1586,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //return otherValue / 256 * 100 + "%";
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1695,11 +1615,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1727,11 +1643,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1758,11 +1670,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1792,11 +1700,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //*0x100 / 0x228 is to simulate *0x76b981d8
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1819,11 +1723,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1889,11 +1789,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //return otherValue / 256 * 100 + "%";
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1922,11 +1818,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1954,11 +1846,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -1985,11 +1873,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -2019,11 +1903,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     //*0x100 / 0x228 is to simulate *0x76b981d8
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
@@ -2046,11 +1926,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                     otherValue = value;
                 }
 
-                otherValue = otherValue % 0x100;
-                if (otherValue < 0)
-                {
-                    otherValue = 0;
-                }
+                otherValue = Math.Max(otherValue % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
 
                 return GroupPercentString(value, percent);
