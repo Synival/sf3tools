@@ -1,10 +1,9 @@
-﻿using SF3.Editor;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SF3.Editor.Values
+namespace SF3.Values
 {
     /// <summary>
     /// Named value for CharacterClass that can be bound to an ObjectListView.

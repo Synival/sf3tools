@@ -1,9 +1,6 @@
 ﻿using BrightIdeasSoftware;
-using SF3.Editor;
-using SF3.Editor.Values;
-using SF3.X033_X031_Editor.Models.Items;
+using SF3.Values;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SF3.X033_X031_Editor
@@ -19,19 +16,19 @@ namespace SF3.X033_X031_Editor
             // TODO: generic method to prevent copy + paste
             ObjectListView.EditorRegistry.Register(
                 typeof(CharacterClassValue),
-                (Object model, OLVColumn column, Object value) => Utils.MakeNamedValueComboBox(CharacterClassValue.ComboBoxValues)
+                (Object model, OLVColumn column, Object value) => Editor.Utils.MakeNamedValueComboBox(CharacterClassValue.ComboBoxValues)
             );
 
             // TODO: generic method to prevent copy + paste
             ObjectListView.EditorRegistry.Register(
                 typeof(SexValue),
-                (Object model, OLVColumn column, Object value) => Utils.MakeNamedValueComboBox(SexValue.ComboBoxValues)
+                (Object model, OLVColumn column, Object value) => Editor.Utils.MakeNamedValueComboBox(SexValue.ComboBoxValues)
             );
 
             // TODO: generic method to prevent copy + paste
             ObjectListView.EditorRegistry.Register(
                 typeof(WeaponTypeValue),
-                (Object model, OLVColumn column, Object value) => Utils.MakeNamedValueComboBox(WeaponTypeValue.ComboBoxValues)
+                (Object model, OLVColumn column, Object value) => Editor.Utils.MakeNamedValueComboBox(WeaponTypeValue.ComboBoxValues)
             );
 
             Application.EnableVisualStyles();

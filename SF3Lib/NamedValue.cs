@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SF3.Editor
+namespace SF3
 {
     /// <summary>
     /// Concrete type with both a Name (string) and a Value (int).

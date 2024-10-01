@@ -71,11 +71,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileEditor.cs" />
-    <Compile Include="NamedValue.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="Values\WeaponTypeValue.cs" />
-    <Compile Include="Values\SexValue.cs" />
-    <Compile Include="Values\CharacterClassValue.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Values\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SF3Lib\SF3Lib.csproj">
+      <Project>{e0fa4c78-8adf-4b68-a63b-74c76e868940}</Project>
+      <Name>SF3Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

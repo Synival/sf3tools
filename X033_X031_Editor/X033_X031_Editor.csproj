@@ -128,6 +128,10 @@
       <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
       <Name>ObjectListView2008</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SF3Lib\SF3Lib.csproj">
+      <Project>{E0FA4C78-8ADF-4B68-A63B-74C76E868940}</Project>
+      <Name>SF3Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
