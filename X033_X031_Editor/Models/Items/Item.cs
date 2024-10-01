@@ -1000,17 +1000,8 @@ namespace SF3.X033_X031_Editor.Models.Items
             get
             {
                 value = !IsPromoted
-                    ? ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300
-                    : ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x280 >> 2;
-
-                if (!IsPromoted)
-                {
-                    //*0x100 / 0x300 is to simulate *0x55555556
-                }
-                else
-                {
-                    //*0x100 / 0x280 is to simulate *0x66666667
-                }
+                    ? ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300       //*0x100 / 0x300 is to simulate *0x55555556
+                    : ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x280 >> 2; //*0x100 / 0x280 is to simulate *0x66666667
 
                 otherValue = Math.Max(value % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
@@ -1024,17 +1015,8 @@ namespace SF3.X033_X031_Editor.Models.Items
             get
             {
                 value = !IsPromoted
-                    ? ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x340 >> 2
-                    : ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x228 >> 5;
-
-                if (!IsPromoted)
-                {
-                    //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                }
-                else
-                {
-                    //*0x100 / 0x228 is to simulate *0x76b981d8
-                }
+                    ? ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x340 >> 2  //*0x100 / 0x340 is to simulate *0x4ec4ec4f
+                    : ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x228 >> 5; //*0x100 / 0x228 is to simulate *0x76b981d8
 
                 otherValue = Math.Max(value % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
@@ -1157,17 +1139,8 @@ namespace SF3.X033_X031_Editor.Models.Items
             get
             {
                 value = !IsPromoted
-                    ? ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x300
-                    : ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x280 >> 2;
-
-                if (!IsPromoted)
-                {
-                    //*0x100 / 0x300 is to simulate *0x55555556
-                }
-                else
-                {
-                    //*0x100 / 0x228 is to simulate *0x76b981d8
-                }
+                    ? ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x300       //*0x100 / 0x300 is to simulate *0x55555556
+                    : ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x280 >> 2; //*0x100 / 0x228 is to simulate *0x76b981d8
 
                 otherValue = Math.Max(value % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
@@ -1181,16 +1154,8 @@ namespace SF3.X033_X031_Editor.Models.Items
             get
             {
                 value = !IsPromoted
-                    ? ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x340 >> 2
+                    ? ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x340 >> 2 //*0x100 / 0x340 is to simulate *0x4ec4ec4f
                     : ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x228 >> 5;
-
-                if (!IsPromoted)
-                {
-                    //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                }
-                else
-                {
-                }
 
                 otherValue = Math.Max(value % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
@@ -1313,17 +1278,8 @@ namespace SF3.X033_X031_Editor.Models.Items
             get
             {
                 value = !IsPromoted
-                    ? ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x300
-                    : ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x280 >> 2;
-
-                if (!IsPromoted)
-                {
-                    //*0x100 / 0x300 is to simulate *0x55555556
-                }
-                else
-                {
-                    //*0x100 / 0x228 is to simulate *0x76b981d8
-                }
+                    ? ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x300       //*0x100 / 0x300 is to simulate *0x55555556
+                    : ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x280 >> 2; //*0x100 / 0x228 is to simulate *0x76b981d8
 
                 otherValue = Math.Max(value % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
@@ -1337,16 +1293,8 @@ namespace SF3.X033_X031_Editor.Models.Items
             get
             {
                 value = !IsPromoted
-                    ? ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x340 >> 2
+                    ? ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x340 >> 2 //*0x100 / 0x340 is to simulate *0x4ec4ec4f
                     : ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x228 >> 5;
-
-                if (!IsPromoted)
-                {
-                    //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                }
-                else
-                {
-                }
 
                 otherValue = Math.Max(value % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
@@ -1469,17 +1417,8 @@ namespace SF3.X033_X031_Editor.Models.Items
             get
             {
                 value = !IsPromoted
-                    ? ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x300
-                    : ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x280 >> 2;
-
-                if (!IsPromoted)
-                {
-                    //*0x100 / 0x300 is to simulate *0x55555556
-                }
-                else
-                {
-                    //*0x100 / 0x228 is to simulate *0x76b981d8
-                }
+                    ? ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x300       //*0x100 / 0x300 is to simulate *0x55555556
+                    : ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x280 >> 2; //*0x100 / 0x228 is to simulate *0x76b981d8
 
                 otherValue = Math.Max(value % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
@@ -1493,16 +1432,8 @@ namespace SF3.X033_X031_Editor.Models.Items
             get
             {
                 value = !IsPromoted
-                    ? ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x340 >> 2
+                    ? ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x340 >> 2 //*0x100 / 0x340 is to simulate *0x4ec4ec4f
                     : ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x228 >> 5;
-
-                if (!IsPromoted)
-                {
-                    //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                }
-                else
-                {
-                }
 
                 otherValue = Math.Max(value % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
@@ -1625,17 +1556,8 @@ namespace SF3.X033_X031_Editor.Models.Items
             get
             {
                 value = !IsPromoted
-                    ? ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x300
-                    : ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x280 >> 2;
-
-                if (!IsPromoted)
-                {
-                    //*0x100 / 0x300 is to simulate *0x55555556
-                }
-                else
-                {
-                    //*0x100 / 0x228 is to simulate *0x76b981d8
-                }
+                    ? ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x300       //*0x100 / 0x300 is to simulate *0x55555556
+                    : ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x280 >> 2; //*0x100 / 0x228 is to simulate *0x76b981d8
 
                 otherValue = Math.Max(value % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
@@ -1649,16 +1571,8 @@ namespace SF3.X033_X031_Editor.Models.Items
             get
             {
                 value = !IsPromoted
-                    ? ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x340 >> 2
+                    ? ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x340 >> 2 //*0x100 / 0x340 is to simulate *0x4ec4ec4f
                     : ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x228 >> 5;
-
-                if (!IsPromoted)
-                {
-                    //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                }
-                else
-                {
-                }
 
                 otherValue = Math.Max(value % 0x100, 0);
                 percent = arrayMath[otherValue] / valueNumber;
