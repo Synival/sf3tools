@@ -921,6 +921,12 @@ namespace SF3.X033_X031_Editor.Models.Items
 
         public bool IsPromoted => FileEditor.getByte((int)characterClass) >= 0x20;
 
+        private string GroupPercentString(int value, double percent)
+        {
+            return (Debugs.debugs == 1) ? result = string.Format("{0:x}", value) + " || " : "" +
+                   string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+        }
+
         public string HPgroup1
         {
             get
@@ -948,12 +954,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 percent = arrayMath[otherValue] / valueNumber;
                 //percent = arrayMath[0x80] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
 
                 /*
                 percent = 0;
@@ -1010,12 +1011,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1056,12 +1052,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1092,12 +1083,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1131,12 +1117,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1164,12 +1145,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1239,12 +1215,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1277,12 +1248,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1314,12 +1280,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1350,12 +1311,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1389,12 +1345,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1421,12 +1372,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1496,12 +1442,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1534,12 +1475,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1571,12 +1507,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1607,12 +1538,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1646,12 +1572,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1678,12 +1599,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1753,12 +1669,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1791,12 +1702,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1828,12 +1734,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1864,12 +1765,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1903,12 +1799,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -1935,12 +1826,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -2010,12 +1896,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -2048,12 +1929,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -2085,12 +1961,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -2121,12 +1992,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -2160,12 +2026,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
@@ -2192,12 +2053,7 @@ namespace SF3.X033_X031_Editor.Models.Items
                 }
                 percent = arrayMath[otherValue] / valueNumber;
 
-                result = "";
-                if (Debugs.debugs == 1)
-                {
-                    result = string.Format("{0:x}", value) + " || ";
-                }
-                return result + string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+                return GroupPercentString(value, percent);
             }
         }
 
