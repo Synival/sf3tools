@@ -869,46 +869,55 @@ namespace SF3.X033_X031_Editor.Models.Items
             get => FileEditor.getByte(character);
             set => FileEditor.setByte(character, (byte)value);
         }
+
         public CharacterClassValue CharacterClass
         {
             get => new CharacterClassValue(FileEditor.getByte(characterClass));
             set => FileEditor.setByte(characterClass, (byte)value.Value);
         }
+
         public int HPPromote
         {
             get => FileEditor.getByte(hpPromote);
             set => FileEditor.setByte(hpPromote, (byte)value);
         }
+
         public int HPStart
         {
             get => FileEditor.getByte(hpStart);
             set => FileEditor.setByte(hpStart, (byte)value);
         }
+
         public int HPCurve6
         {
             get => FileEditor.getByte(hpCurve6);
             set => FileEditor.setByte(hpCurve6, (byte)value);
         }
+
         public int HPCurve11
         {
             get => FileEditor.getByte(hpCurve11);
             set => FileEditor.setByte(hpCurve11, (byte)value);
         }
+
         public int HPCurve13
         {
             get => FileEditor.getByte(hpCurve13);
             set => FileEditor.setByte(hpCurve13, (byte)value);
         }
+
         public int HPCurve15
         {
             get => FileEditor.getByte(hpCurve15);
             set => FileEditor.setByte(hpCurve15, (byte)value);
         }
+
         public int HPCurve17
         {
             get => FileEditor.getByte(hpCurve17);
             set => FileEditor.setByte(hpCurve17, (byte)value);
         }
+
         public int HPCurve20
         {
             get => FileEditor.getByte(hpCurve20);
@@ -927,480 +936,330 @@ namespace SF3.X033_X031_Editor.Models.Items
                    string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
         }
 
-        public string HPgroup1
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6),
-                    ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6));
-            }
-        }
+        public string HPgroup1 => GroupPercentString(
+            ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6),
+            ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6));
 
-        public string HPgroup2
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
-                    ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string HPgroup2 => GroupPercentString(
+            ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
+            ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string HPgroup3
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 4) * 2 << 2,
-                    ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string HPgroup3 => GroupPercentString(
+            ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 4) * 2 << 2,
+            ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string HPgroup4
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 4) * 2 << 2,
-                    ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string HPgroup4 => GroupPercentString(
+            ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 4) * 2 << 2,
+            ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string HPgroup5
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300,      //*0x100 / 0x300 is to simulate *0x55555556
-                    ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x280 is to simulate *0x66666667
-            }
-        }
+        public string HPgroup5 => GroupPercentString(
+            ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
+            ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x280 is to simulate *0x66666667
 
-        public string HPgroup6
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                    ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x228 >> 5); //*0x100 / 0x228 is to simulate *0x76b981d8
-            }
-        }
+        public string HPgroup6 => GroupPercentString(
+            ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x340 >> 2,  //*0x100 / 0x340 is to simulate *0x4ec4ec4f
+            ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x228 >> 5); //*0x100 / 0x228 is to simulate *0x76b981d8
 
         public int MPPromote
         {
             get => FileEditor.getByte(mpPromote);
             set => FileEditor.setByte(mpPromote, (byte)value);
         }
+
         public int MPStart
         {
             get => FileEditor.getByte(mpStart);
             set => FileEditor.setByte(mpStart, (byte)value);
         }
+
         public int MPCurve6
         {
             get => FileEditor.getByte(mpCurve6);
             set => FileEditor.setByte(mpCurve6, (byte)value);
         }
+
         public int MPCurve11
         {
             get => FileEditor.getByte(mpCurve11);
             set => FileEditor.setByte(mpCurve11, (byte)value);
         }
+
         public int MPCurve13
         {
             get => FileEditor.getByte(mpCurve13);
             set => FileEditor.setByte(mpCurve13, (byte)value);
         }
+
         public int MPCurve15
         {
             get => FileEditor.getByte(mpCurve15);
             set => FileEditor.setByte(mpCurve15, (byte)value);
         }
+
         public int MPCurve17
         {
             get => FileEditor.getByte(mpCurve17);
             set => FileEditor.setByte(mpCurve17, (byte)value);
         }
+
         public int MPCurve20
         {
             get => FileEditor.getByte(mpCurve20);
             set => FileEditor.setByte(mpCurve20, (byte)value);
         }
 
-        public string MPgroup1
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(mpCurve6) - FileEditor.getByte(mpStart)) << 6),
-                    ((FileEditor.getByte(mpCurve6) - FileEditor.getByte(mpStart)) << 6));
-            }
-        }
+        public string MPgroup1 => GroupPercentString(
+            ((FileEditor.getByte(mpCurve6) - FileEditor.getByte(mpStart)) << 6),
+            ((FileEditor.getByte(mpCurve6) - FileEditor.getByte(mpStart)) << 6));
 
-        public string MPgroup2
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(mpCurve11) - FileEditor.getByte(mpCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
-                    ((FileEditor.getByte(mpCurve11) - FileEditor.getByte(mpCurve6)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string MPgroup2 => GroupPercentString(
+            ((FileEditor.getByte(mpCurve11) - FileEditor.getByte(mpCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
+            ((FileEditor.getByte(mpCurve11) - FileEditor.getByte(mpCurve6)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string MPgroup3
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(mpCurve13) - FileEditor.getByte(mpCurve11)) << 4) * 2 << 2,
-                    ((FileEditor.getByte(mpCurve13) - FileEditor.getByte(mpCurve11)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string MPgroup3 => GroupPercentString(
+            ((FileEditor.getByte(mpCurve13) - FileEditor.getByte(mpCurve11)) << 4) * 2 << 2,
+            ((FileEditor.getByte(mpCurve13) - FileEditor.getByte(mpCurve11)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string MPgroup4
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(mpCurve15) - FileEditor.getByte(mpCurve13)) << 4) * 2 << 2,
-                    ((FileEditor.getByte(mpCurve15) - FileEditor.getByte(mpCurve13)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string MPgroup4 => GroupPercentString(
+            ((FileEditor.getByte(mpCurve15) - FileEditor.getByte(mpCurve13)) << 4) * 2 << 2,
+            ((FileEditor.getByte(mpCurve15) - FileEditor.getByte(mpCurve13)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string MPgroup5
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
-                    ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x228 is to simulate *0x76b981d8
-            }
-        }
+        public string MPgroup5 => GroupPercentString(
+            ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
+            ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x228 is to simulate *0x76b981d8
 
-        public string MPgroup6
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                    ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x228 >> 5);
-            }
-        }
+        public string MPgroup6 => GroupPercentString(
+            ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
+            ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x228 >> 5);
 
         public int AtkPromote
         {
             get => FileEditor.getByte(atkPromote);
             set => FileEditor.setByte(atkPromote, (byte)value);
         }
+
         public int AtkStart
         {
             get => FileEditor.getByte(atkStart);
             set => FileEditor.setByte(atkStart, (byte)value);
         }
+
         public int AtkCurve6
         {
             get => FileEditor.getByte(atkCurve6);
             set => FileEditor.setByte(atkCurve6, (byte)value);
         }
+
         public int AtkCurve11
         {
             get => FileEditor.getByte(atkCurve11);
             set => FileEditor.setByte(atkCurve11, (byte)value);
         }
+
         public int AtkCurve13
         {
             get => FileEditor.getByte(atkCurve13);
             set => FileEditor.setByte(atkCurve13, (byte)value);
         }
+
         public int AtkCurve15
         {
             get => FileEditor.getByte(atkCurve15);
             set => FileEditor.setByte(atkCurve15, (byte)value);
         }
+
         public int AtkCurve17
         {
             get => FileEditor.getByte(atkCurve17);
             set => FileEditor.setByte(atkCurve17, (byte)value);
         }
+
         public int AtkCurve20
         {
             get => FileEditor.getByte(atkCurve20);
             set => FileEditor.setByte(atkCurve20, (byte)value);
         }
 
-        public string Atkgroup1
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(atkCurve6) - FileEditor.getByte(atkStart)) << 6),
-                    ((FileEditor.getByte(atkCurve6) - FileEditor.getByte(atkStart)) << 6));
-            }
-        }
+        public string Atkgroup1 => GroupPercentString(
+            ((FileEditor.getByte(atkCurve6) - FileEditor.getByte(atkStart)) << 6),
+            ((FileEditor.getByte(atkCurve6) - FileEditor.getByte(atkStart)) << 6));
 
-        public string Atkgroup2
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(atkCurve11) - FileEditor.getByte(atkCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
-                    ((FileEditor.getByte(atkCurve11) - FileEditor.getByte(atkCurve6)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string Atkgroup2 => GroupPercentString(
+            ((FileEditor.getByte(atkCurve11) - FileEditor.getByte(atkCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
+            ((FileEditor.getByte(atkCurve11) - FileEditor.getByte(atkCurve6)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string Atkgroup3
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(atkCurve13) - FileEditor.getByte(atkCurve11)) << 4) * 2 << 2,
-                    ((FileEditor.getByte(atkCurve13) - FileEditor.getByte(atkCurve11)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string Atkgroup3 => GroupPercentString(
+            ((FileEditor.getByte(atkCurve13) - FileEditor.getByte(atkCurve11)) << 4) * 2 << 2,
+            ((FileEditor.getByte(atkCurve13) - FileEditor.getByte(atkCurve11)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string Atkgroup4
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(atkCurve15) - FileEditor.getByte(atkCurve13)) << 4) * 2 << 2,
-                    ((FileEditor.getByte(atkCurve15) - FileEditor.getByte(atkCurve13)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string Atkgroup4 => GroupPercentString(
+            ((FileEditor.getByte(atkCurve15) - FileEditor.getByte(atkCurve13)) << 4) * 2 << 2,
+            ((FileEditor.getByte(atkCurve15) - FileEditor.getByte(atkCurve13)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string Atkgroup5
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
-                    ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x228 is to simulate *0x76b981d8
-            }
-        }
+        public string Atkgroup5 => GroupPercentString(
+            ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
+            ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x228 is to simulate *0x76b981d8
 
-        public string Atkgroup6
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                    ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x228 >> 5);
-            }
-        }
+        public string Atkgroup6 => GroupPercentString(
+            ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
+            ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x228 >> 5);
 
         public int DefPromote
         {
             get => FileEditor.getByte(defPromote);
             set => FileEditor.setByte(defPromote, (byte)value);
         }
+
         public int DefStart
         {
             get => FileEditor.getByte(defStart);
             set => FileEditor.setByte(defStart, (byte)value);
         }
+
         public int DefCurve6
         {
             get => FileEditor.getByte(defCurve6);
             set => FileEditor.setByte(defCurve6, (byte)value);
         }
+
         public int DefCurve11
         {
             get => FileEditor.getByte(defCurve11);
             set => FileEditor.setByte(defCurve11, (byte)value);
         }
+
         public int DefCurve13
         {
             get => FileEditor.getByte(defCurve13);
             set => FileEditor.setByte(defCurve13, (byte)value);
         }
+
         public int DefCurve15
         {
             get => FileEditor.getByte(defCurve15);
             set => FileEditor.setByte(defCurve15, (byte)value);
         }
+
         public int DefCurve17
         {
             get => FileEditor.getByte(defCurve17);
             set => FileEditor.setByte(defCurve17, (byte)value);
         }
+
         public int DefCurve20
         {
             get => FileEditor.getByte(defCurve20);
             set => FileEditor.setByte(defCurve20, (byte)value);
         }
 
-        public string Defgroup1
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(defCurve6) - FileEditor.getByte(defStart)) << 6),
-                    ((FileEditor.getByte(defCurve6) - FileEditor.getByte(defStart)) << 6));
-            }
-        }
+        public string Defgroup1 => GroupPercentString(
+            ((FileEditor.getByte(defCurve6) - FileEditor.getByte(defStart)) << 6),
+            ((FileEditor.getByte(defCurve6) - FileEditor.getByte(defStart)) << 6));
 
-        public string Defgroup2
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(defCurve11) - FileEditor.getByte(defCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
-                    ((FileEditor.getByte(defCurve11) - FileEditor.getByte(defCurve6)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string Defgroup2 => GroupPercentString(
+            ((FileEditor.getByte(defCurve11) - FileEditor.getByte(defCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
+            ((FileEditor.getByte(defCurve11) - FileEditor.getByte(defCurve6)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string Defgroup3
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(defCurve13) - FileEditor.getByte(defCurve11)) << 4) * 2 << 2,
-                    ((FileEditor.getByte(defCurve13) - FileEditor.getByte(defCurve11)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string Defgroup3 => GroupPercentString(
+            ((FileEditor.getByte(defCurve13) - FileEditor.getByte(defCurve11)) << 4) * 2 << 2,
+            ((FileEditor.getByte(defCurve13) - FileEditor.getByte(defCurve11)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string Defgroup4
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(defCurve15) - FileEditor.getByte(defCurve13)) << 4) * 2 << 2,
-                    ((FileEditor.getByte(defCurve15) - FileEditor.getByte(defCurve13)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string Defgroup4 => GroupPercentString(
+            ((FileEditor.getByte(defCurve15) - FileEditor.getByte(defCurve13)) << 4) * 2 << 2,
+            ((FileEditor.getByte(defCurve15) - FileEditor.getByte(defCurve13)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string Defgroup5
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
-                    ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x228 is to simulate *0x76b981d8
-            }
-        }
+        public string Defgroup5 => GroupPercentString(
+            ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
+            ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x228 is to simulate *0x76b981d8
 
-        public string Defgroup6
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                    ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x228 >> 5);
-            }
-        }
+        public string Defgroup6 => GroupPercentString(
+            ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
+            ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x228 >> 5);
 
         public int AgiPromote
         {
             get => FileEditor.getByte(agiPromote);
             set => FileEditor.setByte(agiPromote, (byte)value);
         }
+
         public int AgiStart
         {
             get => FileEditor.getByte(agiStart);
             set => FileEditor.setByte(agiStart, (byte)value);
         }
+
         public int AgiCurve6
         {
             get => FileEditor.getByte(agiCurve6);
             set => FileEditor.setByte(agiCurve6, (byte)value);
         }
+
         public int AgiCurve11
         {
             get => FileEditor.getByte(agiCurve11);
             set => FileEditor.setByte(agiCurve11, (byte)value);
         }
+
         public int AgiCurve13
         {
             get => FileEditor.getByte(agiCurve13);
             set => FileEditor.setByte(agiCurve13, (byte)value);
         }
+
         public int AgiCurve15
         {
             get => FileEditor.getByte(agiCurve15);
             set => FileEditor.setByte(agiCurve15, (byte)value);
         }
+
         public int AgiCurve17
         {
             get => FileEditor.getByte(agiCurve17);
             set => FileEditor.setByte(agiCurve17, (byte)value);
         }
+
         public int AgiCurve20
         {
             get => FileEditor.getByte(agiCurve20);
             set => FileEditor.setByte(agiCurve20, (byte)value);
         }
 
-        public string Agigroup1
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(agiCurve6) - FileEditor.getByte(agiStart)) << 6),
-                    ((FileEditor.getByte(agiCurve6) - FileEditor.getByte(agiStart)) << 6));
-            }
-        }
+        public string Agigroup1 => GroupPercentString(
+            ((FileEditor.getByte(agiCurve6) - FileEditor.getByte(agiStart)) << 6),
+            ((FileEditor.getByte(agiCurve6) - FileEditor.getByte(agiStart)) << 6));
 
-        public string Agigroup2
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(agiCurve11) - FileEditor.getByte(agiCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
-                    ((FileEditor.getByte(agiCurve11) - FileEditor.getByte(agiCurve6)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string Agigroup2 => GroupPercentString(
+            ((FileEditor.getByte(agiCurve11) - FileEditor.getByte(agiCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
+            ((FileEditor.getByte(agiCurve11) - FileEditor.getByte(agiCurve6)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string Agigroup3
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(agiCurve13) - FileEditor.getByte(agiCurve11)) << 4) * 2 << 2,
-                    ((FileEditor.getByte(agiCurve13) - FileEditor.getByte(agiCurve11)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string Agigroup3 => GroupPercentString(
+            ((FileEditor.getByte(agiCurve13) - FileEditor.getByte(agiCurve11)) << 4) * 2 << 2,
+            ((FileEditor.getByte(agiCurve13) - FileEditor.getByte(agiCurve11)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string Agigroup4
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(agiCurve15) - FileEditor.getByte(agiCurve13)) << 4) * 2 << 2,
-                    ((FileEditor.getByte(agiCurve15) - FileEditor.getByte(agiCurve13)) << 8) * 0x100 / 0x280 >> 1);
-            }
-        }
+        public string Agigroup4 => GroupPercentString(
+            ((FileEditor.getByte(agiCurve15) - FileEditor.getByte(agiCurve13)) << 4) * 2 << 2,
+            ((FileEditor.getByte(agiCurve15) - FileEditor.getByte(agiCurve13)) << 8) * 0x100 / 0x280 >> 1);
 
-        public string Agigroup5
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x300,      //*0x100 / 0x300 is to simulate *0x55555556
-                    ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x228 is to simulate *0x76b981d8
-            }
-        }
+        public string Agigroup5 => GroupPercentString(
+            ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
+            ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x228 is to simulate *0x76b981d8
 
-        public string Agigroup6
-        {
-            get
-            {
-                return GroupPercentString(
-                    ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                    ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x228 >> 5);
-            }
-        }
+        public string Agigroup6 => GroupPercentString(
+            ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
+            ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x228 >> 5);
 
         public int S1LearnedAt
         {
             get => FileEditor.getByte(s1LearnedAt);
             set => FileEditor.setByte(s1LearnedAt, (byte)value);
         }
+
         public int S1LearnedID
         {
             get => FileEditor.getByte(s1LearnedID);
             set => FileEditor.setByte(s1LearnedID, (byte)value);
         }
+
         public int S1LearnedLevel
         {
             get => FileEditor.getByte(s1LearnedLevel);
@@ -1412,161 +1271,193 @@ namespace SF3.X033_X031_Editor.Models.Items
             get => FileEditor.getByte(s2LearnedAt);
             set => FileEditor.setByte(s2LearnedAt, (byte)value);
         }
+
         public int S2LearnedID
         {
             get => FileEditor.getByte(s2LearnedID);
             set => FileEditor.setByte(s2LearnedID, (byte)value);
         }
+
         public int S2LearnedLevel
         {
             get => FileEditor.getByte(s2LearnedLevel);
             set => FileEditor.setByte(s2LearnedLevel, (byte)value);
         }
+
         public int S3LearnedAt
         {
             get => FileEditor.getByte(s3LearnedAt);
             set => FileEditor.setByte(s3LearnedAt, (byte)value);
         }
+
         public int S3LearnedID
         {
             get => FileEditor.getByte(s3LearnedID);
             set => FileEditor.setByte(s3LearnedID, (byte)value);
         }
+
         public int S3LearnedLevel
         {
             get => FileEditor.getByte(s3LearnedLevel);
             set => FileEditor.setByte(s3LearnedLevel, (byte)value);
         }
+
         public int S4LearnedAt
         {
             get => FileEditor.getByte(s4LearnedAt);
             set => FileEditor.setByte(s4LearnedAt, (byte)value);
         }
+
         public int S4LearnedID
         {
             get => FileEditor.getByte(s4LearnedID);
             set => FileEditor.setByte(s4LearnedID, (byte)value);
         }
+
         public int S4LearnedLevel
         {
             get => FileEditor.getByte(s4LearnedLevel);
             set => FileEditor.setByte(s4LearnedLevel, (byte)value);
         }
+
         public int S5LearnedAt
         {
             get => FileEditor.getByte(s5LearnedAt);
             set => FileEditor.setByte(s5LearnedAt, (byte)value);
         }
+
         public int S5LearnedID
         {
             get => FileEditor.getByte(s5LearnedID);
             set => FileEditor.setByte(s5LearnedID, (byte)value);
         }
+
         public int S5LearnedLevel
         {
             get => FileEditor.getByte(s5LearnedLevel);
             set => FileEditor.setByte(s5LearnedLevel, (byte)value);
         }
+
         public int S6LearnedAt
         {
             get => FileEditor.getByte(s6LearnedAt);
             set => FileEditor.setByte(s6LearnedAt, (byte)value);
         }
+
         public int S6LearnedID
         {
             get => FileEditor.getByte(s6LearnedID);
             set => FileEditor.setByte(s6LearnedID, (byte)value);
         }
+
         public int S6LearnedLevel
         {
             get => FileEditor.getByte(s6LearnedLevel);
             set => FileEditor.setByte(s6LearnedLevel, (byte)value);
         }
+
         public int S7LearnedAt
         {
             get => FileEditor.getByte(s7LearnedAt);
             set => FileEditor.setByte(s7LearnedAt, (byte)value);
         }
+
         public int S7LearnedID
         {
             get => FileEditor.getByte(s7LearnedID);
             set => FileEditor.setByte(s7LearnedID, (byte)value);
         }
+
         public int S7LearnedLevel
         {
             get => FileEditor.getByte(s7LearnedLevel);
             set => FileEditor.setByte(s7LearnedLevel, (byte)value);
         }
+
         public int S8LearnedAt
         {
             get => FileEditor.getByte(s8LearnedAt);
             set => FileEditor.setByte(s8LearnedAt, (byte)value);
         }
+
         public int S8LearnedID
         {
             get => FileEditor.getByte(s8LearnedID);
             set => FileEditor.setByte(s8LearnedID, (byte)value);
         }
+
         public int S8LearnedLevel
         {
             get => FileEditor.getByte(s8LearnedLevel);
             set => FileEditor.setByte(s8LearnedLevel, (byte)value);
         }
+
         public int S9LearnedAt
         {
             get => FileEditor.getByte(s9LearnedAt);
             set => FileEditor.setByte(s9LearnedAt, (byte)value);
         }
+
         public int S9LearnedID
         {
             get => FileEditor.getByte(s9LearnedID);
             set => FileEditor.setByte(s9LearnedID, (byte)value);
         }
+
         public int S9LearnedLevel
         {
             get => FileEditor.getByte(s9LearnedLevel);
             set => FileEditor.setByte(s9LearnedLevel, (byte)value);
         }
+
         public int S10LearnedAt
         {
             get => FileEditor.getByte(s10LearnedAt);
             set => FileEditor.setByte(s10LearnedAt, (byte)value);
         }
+
         public int S10LearnedID
         {
             get => FileEditor.getByte(s10LearnedID);
             set => FileEditor.setByte(s10LearnedID, (byte)value);
         }
+
         public int S10LearnedLevel
         {
             get => FileEditor.getByte(s10LearnedLevel);
             set => FileEditor.setByte(s10LearnedLevel, (byte)value);
         }
+
         public int S11LearnedAt
         {
             get => FileEditor.getByte(s11LearnedAt);
             set => FileEditor.setByte(s11LearnedAt, (byte)value);
         }
+
         public int S11LearnedID
         {
             get => FileEditor.getByte(s11LearnedID);
             set => FileEditor.setByte(s11LearnedID, (byte)value);
         }
+
         public int S11LearnedLevel
         {
             get => FileEditor.getByte(s11LearnedLevel);
             set => FileEditor.setByte(s11LearnedLevel, (byte)value);
         }
+
         public int S12LearnedAt
         {
             get => FileEditor.getByte(s12LearnedAt);
             set => FileEditor.setByte(s12LearnedAt, (byte)value);
         }
+
         public int S12LearnedID
         {
             get => FileEditor.getByte(s12LearnedID);
             set => FileEditor.setByte(s12LearnedID, (byte)value);
         }
+
         public int S12LearnedLevel
         {
             get => FileEditor.getByte(s12LearnedLevel);
@@ -1584,6 +1475,7 @@ namespace SF3.X033_X031_Editor.Models.Items
             get => FileEditor.getByte(weapon1Special2);
             set => FileEditor.setByte(weapon1Special2, (byte)value);
         }
+
         public int Weapon1Special3
         {
             get => FileEditor.getByte(weapon1Special3);
@@ -1601,11 +1493,13 @@ namespace SF3.X033_X031_Editor.Models.Items
             get => FileEditor.getByte(weapon2Special2);
             set => FileEditor.setByte(weapon2Special2, (byte)value);
         }
+
         public int Weapon2Special3
         {
             get => FileEditor.getByte(weapon2Special3);
             set => FileEditor.setByte(weapon2Special3, (byte)value);
         }
+
         public int Weapon3Special1
         {
             get => FileEditor.getByte(weapon3Special1);
@@ -1617,6 +1511,7 @@ namespace SF3.X033_X031_Editor.Models.Items
             get => FileEditor.getByte(weapon3Special2);
             set => FileEditor.setByte(weapon3Special2, (byte)value);
         }
+
         public int Weapon3Special3
         {
             get => FileEditor.getByte(weapon3Special3);
@@ -1634,6 +1529,7 @@ namespace SF3.X033_X031_Editor.Models.Items
             get => FileEditor.getByte(weapon4Special2);
             set => FileEditor.setByte(weapon4Special2, (byte)value);
         }
+
         public int Weapon4Special3
         {
             get => FileEditor.getByte(weapon4Special3);
@@ -1645,16 +1541,19 @@ namespace SF3.X033_X031_Editor.Models.Items
             get => FileEditor.getByte(baseLuck);
             set => FileEditor.setByte(baseLuck, (byte)value);
         }
+
         public int BaseMov
         {
             get => FileEditor.getByte(baseMov);
             set => FileEditor.setByte(baseMov, (byte)value);
         }
+
         public int BaseTurns
         {
             get => FileEditor.getByte(baseTurns);
             set => FileEditor.setByte(baseTurns, (byte)value);
         }
+
         public int BaseHPRegen
         {
             get => FileEditor.getByte(baseHPRegen);
@@ -1666,46 +1565,55 @@ namespace SF3.X033_X031_Editor.Models.Items
             get => FileEditor.getByte(baseMPRegen);
             set => FileEditor.setByte(baseMPRegen, (byte)value);
         }
+
         public int EarthRes
         {
             get => FileEditor.getByte(earthRes);
             set => FileEditor.setByte(earthRes, (byte)value);
         }
+
         public int FireRes
         {
             get => FileEditor.getByte(fireRes);
             set => FileEditor.setByte(fireRes, (byte)value);
         }
+
         public int IceRes
         {
             get => FileEditor.getByte(iceRes);
             set => FileEditor.setByte(iceRes, (byte)value);
         }
+
         public int SparkRes
         {
             get => FileEditor.getByte(sparkRes);
             set => FileEditor.setByte(sparkRes, (byte)value);
         }
+
         public int WindRes
         {
             get => FileEditor.getByte(windRes);
             set => FileEditor.setByte(windRes, (byte)value);
         }
+
         public int LightRes
         {
             get => FileEditor.getByte(lightRes);
             set => FileEditor.setByte(lightRes, (byte)value);
         }
+
         public int DarkRes
         {
             get => FileEditor.getByte(darkRes);
             set => FileEditor.setByte(darkRes, (byte)value);
         }
+
         public int UnknownRes
         {
             get => FileEditor.getByte(unknownRes);
             set => FileEditor.setByte(unknownRes, (byte)value);
         }
+
         public int Slow
         {
             get => FileEditor.getByte(slow);
