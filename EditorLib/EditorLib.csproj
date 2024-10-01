@@ -73,6 +73,7 @@
     <Compile Include="FileEditor.cs" />
     <Compile Include="NamedValue.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="Values\WeaponTypeValue.cs" />
     <Compile Include="Values\SexValue.cs" />
     <Compile Include="Values\CharacterClassValue.cs" />
   </ItemGroup>

@@ -1851,9 +1851,8 @@
             // olvColumn44
             // 
             this.olvColumn44.AspectName = "Weapon1Type";
-            this.olvColumn44.AspectToStringFormat = "{0:X}";
             this.olvColumn44.Text = "Weapon1Type";
-            this.olvColumn44.Width = 85;
+            this.olvColumn44.Width = 150;
             // 
             // olvColumn109
             // 
@@ -1865,9 +1864,8 @@
             // olvColumn110
             // 
             this.olvColumn110.AspectName = "Weapon2Type";
-            this.olvColumn110.AspectToStringFormat = "{0:X}";
             this.olvColumn110.Text = "Weapon2Type";
-            this.olvColumn110.Width = 85;
+            this.olvColumn110.Width = 150;
             // 
             // olvColumn111
             // 
@@ -1879,9 +1877,8 @@
             // olvColumn112
             // 
             this.olvColumn112.AspectName = "Weapon3Type";
-            this.olvColumn112.AspectToStringFormat = "{0:X}";
             this.olvColumn112.Text = "Weapon3Type";
-            this.olvColumn112.Width = 85;
+            this.olvColumn112.Width = 150;
             // 
             // olvColumn113
             // 
@@ -1893,9 +1890,8 @@
             // olvColumn114
             // 
             this.olvColumn114.AspectName = "Weapon4Type";
-            this.olvColumn114.AspectToStringFormat = "{0:X}";
             this.olvColumn114.Text = "Weapon4Type";
-            this.olvColumn114.Width = 85;
+            this.olvColumn114.Width = 150;
             // 
             // olvColumn115
             // 

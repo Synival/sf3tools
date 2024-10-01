@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Editor.Values;
 using static SF3.X002_Editor.Forms.frmMain;
 
 namespace SF3.X002_Editor.Models.Items
@@ -104,10 +105,10 @@ namespace SF3.X002_Editor.Models.Items
             get => FileEditor.getWord(PriceLocation);
             set => FileEditor.setWord(PriceLocation, value);
         }
-        public int WeaponType
+        public WeaponTypeValue WeaponType
         {
-            get => FileEditor.getByte(WeaponTypeLocation);
-            set => FileEditor.setByte(WeaponTypeLocation, (byte)value);
+            get => new WeaponTypeValue(FileEditor.getByte(WeaponTypeLocation));
+            set => FileEditor.setByte(WeaponTypeLocation, (byte)value.Value);
         }
         public int EffectsEquip
         {

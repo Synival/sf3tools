@@ -625,9 +625,8 @@
             // lvcWeaponType
             // 
             this.lvcWeaponType.AspectName = "WeaponType";
-            this.lvcWeaponType.AspectToStringFormat = "{0:X}";
             this.lvcWeaponType.Text = "WeaponType";
-            this.lvcWeaponType.Width = 80;
+            this.lvcWeaponType.Width = 150;
             // 
             // olvEffectsEquip
             // 

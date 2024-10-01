@@ -198,10 +198,10 @@ namespace SF3.X033_X031_Editor.Models.Presets
             set => FileEditor.setWord(item4, value);
         }
 
-        public int Weapon1Type
+        public WeaponTypeValue Weapon1Type
         {
-            get => FileEditor.getByte(weapon1Type);
-            set => FileEditor.setByte(weapon1Type, (byte)value);
+            get => new WeaponTypeValue(FileEditor.getByte(weapon1Type));
+            set => FileEditor.setByte(weapon1Type, (byte)value.Value);
         }
 
         public int Weapon1Exp
@@ -210,10 +210,10 @@ namespace SF3.X033_X031_Editor.Models.Presets
             set => FileEditor.setWord(weapon1Exp, value);
         }
 
-        public int Weapon2Type
+        public WeaponTypeValue Weapon2Type
         {
-            get => FileEditor.getByte(weapon2Type);
-            set => FileEditor.setByte(weapon2Type, (byte)value);
+            get => new WeaponTypeValue(FileEditor.getByte(weapon2Type));
+            set => FileEditor.setByte(weapon2Type, (byte)value.Value);
         }
 
         public int Weapon2Exp
@@ -221,10 +221,10 @@ namespace SF3.X033_X031_Editor.Models.Presets
             get => FileEditor.getWord(weapon2Exp);
             set => FileEditor.setWord(weapon2Exp, value);
         }
-        public int Weapon3Type
+        public WeaponTypeValue Weapon3Type
         {
-            get => FileEditor.getByte(weapon3Type);
-            set => FileEditor.setByte(weapon3Type, (byte)value);
+            get => new WeaponTypeValue(FileEditor.getByte(weapon3Type));
+            set => FileEditor.setByte(weapon3Type, (byte)value.Value);
         }
 
         public int Weapon3Exp
@@ -232,10 +232,10 @@ namespace SF3.X033_X031_Editor.Models.Presets
             get => FileEditor.getWord(weapon3Exp);
             set => FileEditor.setWord(weapon3Exp, value);
         }
-        public int Weapon4Type
+        public WeaponTypeValue Weapon4Type
         {
-            get => FileEditor.getByte(weapon4Type);
-            set => FileEditor.setByte(weapon4Type, (byte)value);
+            get => new WeaponTypeValue(FileEditor.getByte(weapon4Type));
+            set => FileEditor.setByte(weapon4Type, (byte)value.Value);
         }
 
         public int Weapon4Exp
