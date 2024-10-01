@@ -131,11 +131,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         private int accessoryEquipable3;
         private int accessoryEquipable4;
 
-        int value;
-        int otherValue;
-        double percent = 0;
         int something = 127;
-        String result = "";
         //public static int[] arrayOne = {1 ,2, 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,17,18,19,120,121,122,123,124,125,126,127,128,127,126,125,124,123,122,121,120,119,118,117,116,115,114,113,112,111,110,109,108,107,106,105,104,103,102,101,100,99, 98,97,96,95,94,93,92,91,90,89,88,87,86,85,84,83,82,81,80,79,78,77,76,75,74,73,72,71,70,69,68,67,66,65,64,63,62,61,60,59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1 };
         //public static double[] arrayMath = {0, 0, 1, 2, 3,  6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91, 105, 120, 136, 153, 171, 190, 210, 231, 253, 276, 300, 325, 351, 378, 406, 435, 465, 496, 528, 561, 595,630, 666, 703, 741, 780, 820, 861, 903, 946, 990, 1035, 1081, 1128, 1176, 1225, 1275, 1326, 1378, 1431, 1485, 1540, 1596, 1653, 1711, 1770, 1830, 1891, 1953, 2016, 2080};
         //public static double[] arrayMath2 = { 0, 0, 1, 2 ,4,7,11,16,22,29,37,46, 56, 67, 79, 92, 106, 121, 137, 154, 172, 191, 211, 232, 254, 277, 301, 326, 352, 379, 407, 436, 466, 497, 529, 562, 596, 631, 667, 704, 742, 781, 821, 862, 904, 947, 991, 1036, 1082, 1129, 1177, 1226, 1276, 1327, 1379, 1432, 1486, 1541, 1597, 1654, 1712, 1771, 1831, 1892, 1954, 2017, 2081, 2146, 2212, 2279, 2347, 2416, 2486, 2557, 2629, 2702, 2776, 2851, 2927, 3004, 3082, 3161, 3241, 3322, 3404, 3487, 3571, 3656, 3742, 3829, 3917, 4006, 4096, 4187, 4279, 4372, 4466, 4561, 4657, 4754, 4852, 4951, 5051, 5152, 5254, 5357, 5461, 5566, 5672, 5779, 5887, 5996, 6106, 6217, 6329, 6442, 6556, 6671, 6787, 6904, 7022, 7141, 7261, 7382, 7504, 7627, 7751, 7876, 8002, 8129, 8257, 8384,8510, 8635,8759, 8882, 9004, 9125, 9245, 9364, 9482, 9599, 9715, 9830, 9944, 10057, 10169, 10280, 10390, 10499, 10607, 10714, 10820, 10925, 11029, 11132, 11234, 11335, 11435, 11534, 11632, 11729, 11825, 11920, 12014, 12107, 12199, 12290, 12380, 12469, 12557, 12644, 12730, 12815, 12899, 12982, 13064, 13145, 13225, 13304, 13382, 13459, 13535, 13610, 13684, 13757, 13829, 13900, 13970, 14039, 14107, 14174, 14240, 14305, 14369, 14432, 14494, 14555, 14615, 14674, 14732, 14789, 14845, 14900, 14954, 15007, 15059, 15110, 15160, 15209, 15257, 15304, 15350, 15395, 15439, 15482, 15524, 15565, 15605, 15644, 15682, 15719, 15757, 15794, 15830, 15865, 15899, 15932, 15964, 15995, 16025, 16054, 16082, 16109, 16135, 16160, 16184, 16207, 16229, 16250, 16270, 16289, 16307, 16324, 16340, 16355, 16369, 16382, 16394, 16405, 16415, 16424, 16432, 16439, 16445, 16450, 16454, 16457, 16459, 16460};
@@ -921,9 +917,13 @@ namespace SF3.X033_X031_Editor.Models.Items
 
         public bool IsPromoted => FileEditor.getByte((int)characterClass) >= 0x20;
 
-        private string GroupPercentString(int value, double percent)
+        private string GroupPercentString(int unpromotedValue, int promotedValue)
         {
-            return (Debugs.debugs == 1) ? result = string.Format("{0:x}", value) + " || " : "" +
+            int value = !IsPromoted ? unpromotedValue : promotedValue;
+            int otherValue = Math.Max(value % 0x100, 0);
+            double percent = arrayMath[otherValue] / valueNumber;
+
+            return (Debugs.debugs == 1) ? string.Format("{0:x}", value) + " || " : "" +
                    string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
         }
 
@@ -931,14 +931,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6)
-                    : ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6);
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6),
+                    ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6));
             }
         }
 
@@ -946,22 +941,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1
-                    : ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1;
-
-                if (!IsPromoted)
-                {
-                    //* 0x10 / 0x28 is meant to similate multiplying by 0x66666667
-                }
-                else
-                {
-                }
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
+                    ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -969,14 +951,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 4) * 2 << 2
-                    : ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 8) * 0x100 / 0x280 >> 1;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 4) * 2 << 2,
+                    ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -984,14 +961,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 4) * 2 << 2
-                    : ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 8) * 0x100 / 0x280 >> 1;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 4) * 2 << 2,
+                    ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -999,14 +971,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300       //*0x100 / 0x300 is to simulate *0x55555556
-                    : ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x280 >> 2; //*0x100 / 0x280 is to simulate *0x66666667
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300,      //*0x100 / 0x300 is to simulate *0x55555556
+                    ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x280 is to simulate *0x66666667
             }
         }
 
@@ -1014,14 +981,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x340 >> 2  //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                    : ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x228 >> 5; //*0x100 / 0x228 is to simulate *0x76b981d8
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
+                    ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x228 >> 5); //*0x100 / 0x228 is to simulate *0x76b981d8
             }
         }
 
@@ -1070,14 +1032,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(mpCurve6) - FileEditor.getByte(mpStart)) << 6)
-                    : ((FileEditor.getByte(mpCurve6) - FileEditor.getByte(mpStart)) << 6);
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(mpCurve6) - FileEditor.getByte(mpStart)) << 6),
+                    ((FileEditor.getByte(mpCurve6) - FileEditor.getByte(mpStart)) << 6));
             }
         }
 
@@ -1085,22 +1042,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(mpCurve11) - FileEditor.getByte(mpCurve6)) << 8) * 0x100 / 0x280 >> 1
-                    : ((FileEditor.getByte(mpCurve11) - FileEditor.getByte(mpCurve6)) << 8) * 0x100 / 0x280 >> 1;
-
-                if (!IsPromoted)
-                {
-                    //* 0x10 / 0x28 is meant to similate multiplying by 0x66666667
-                }
-                else
-                {
-                }
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(mpCurve11) - FileEditor.getByte(mpCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
+                    ((FileEditor.getByte(mpCurve11) - FileEditor.getByte(mpCurve6)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -1108,14 +1052,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(mpCurve13) - FileEditor.getByte(mpCurve11)) << 4) * 2 << 2
-                    : ((FileEditor.getByte(mpCurve13) - FileEditor.getByte(mpCurve11)) << 8) * 0x100 / 0x280 >> 1;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(mpCurve13) - FileEditor.getByte(mpCurve11)) << 4) * 2 << 2,
+                    ((FileEditor.getByte(mpCurve13) - FileEditor.getByte(mpCurve11)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -1123,14 +1062,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(mpCurve15) - FileEditor.getByte(mpCurve13)) << 4) * 2 << 2
-                    : ((FileEditor.getByte(mpCurve15) - FileEditor.getByte(mpCurve13)) << 8) * 0x100 / 0x280 >> 1;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(mpCurve15) - FileEditor.getByte(mpCurve13)) << 4) * 2 << 2,
+                    ((FileEditor.getByte(mpCurve15) - FileEditor.getByte(mpCurve13)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -1138,14 +1072,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x300       //*0x100 / 0x300 is to simulate *0x55555556
-                    : ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x280 >> 2; //*0x100 / 0x228 is to simulate *0x76b981d8
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
+                    ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x228 is to simulate *0x76b981d8
             }
         }
 
@@ -1153,14 +1082,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x340 >> 2 //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                    : ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x228 >> 5;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
+                    ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x228 >> 5);
             }
         }
 
@@ -1209,14 +1133,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(atkCurve6) - FileEditor.getByte(atkStart)) << 6)
-                    : ((FileEditor.getByte(atkCurve6) - FileEditor.getByte(atkStart)) << 6);
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(atkCurve6) - FileEditor.getByte(atkStart)) << 6),
+                    ((FileEditor.getByte(atkCurve6) - FileEditor.getByte(atkStart)) << 6));
             }
         }
 
@@ -1224,22 +1143,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(atkCurve11) - FileEditor.getByte(atkCurve6)) << 8) * 0x100 / 0x280 >> 1
-                    : ((FileEditor.getByte(atkCurve11) - FileEditor.getByte(atkCurve6)) << 8) * 0x100 / 0x280 >> 1;
-
-                if (!IsPromoted)
-                {
-                    //* 0x10 / 0x28 is meant to similate multiplying by 0x66666667
-                }
-                else
-                {
-                }
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(atkCurve11) - FileEditor.getByte(atkCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
+                    ((FileEditor.getByte(atkCurve11) - FileEditor.getByte(atkCurve6)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -1247,14 +1153,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(atkCurve13) - FileEditor.getByte(atkCurve11)) << 4) * 2 << 2
-                    : ((FileEditor.getByte(atkCurve13) - FileEditor.getByte(atkCurve11)) << 8) * 0x100 / 0x280 >> 1;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(atkCurve13) - FileEditor.getByte(atkCurve11)) << 4) * 2 << 2,
+                    ((FileEditor.getByte(atkCurve13) - FileEditor.getByte(atkCurve11)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -1262,14 +1163,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(atkCurve15) - FileEditor.getByte(atkCurve13)) << 4) * 2 << 2
-                    : ((FileEditor.getByte(atkCurve15) - FileEditor.getByte(atkCurve13)) << 8) * 0x100 / 0x280 >> 1;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(atkCurve15) - FileEditor.getByte(atkCurve13)) << 4) * 2 << 2,
+                    ((FileEditor.getByte(atkCurve15) - FileEditor.getByte(atkCurve13)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -1277,14 +1173,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x300       //*0x100 / 0x300 is to simulate *0x55555556
-                    : ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x280 >> 2; //*0x100 / 0x228 is to simulate *0x76b981d8
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
+                    ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x228 is to simulate *0x76b981d8
             }
         }
 
@@ -1292,14 +1183,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x340 >> 2 //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                    : ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x228 >> 5;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
+                    ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x228 >> 5);
             }
         }
 
@@ -1348,14 +1234,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(defCurve6) - FileEditor.getByte(defStart)) << 6)
-                    : ((FileEditor.getByte(defCurve6) - FileEditor.getByte(defStart)) << 6);
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(defCurve6) - FileEditor.getByte(defStart)) << 6),
+                    ((FileEditor.getByte(defCurve6) - FileEditor.getByte(defStart)) << 6));
             }
         }
 
@@ -1363,22 +1244,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(defCurve11) - FileEditor.getByte(defCurve6)) << 8) * 0x100 / 0x280 >> 1
-                    : ((FileEditor.getByte(defCurve11) - FileEditor.getByte(defCurve6)) << 8) * 0x100 / 0x280 >> 1;
-
-                if (!IsPromoted)
-                {
-                    //* 0x10 / 0x28 is meant to similate multiplying by 0x66666667
-                }
-                else
-                {
-                }
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(defCurve11) - FileEditor.getByte(defCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
+                    ((FileEditor.getByte(defCurve11) - FileEditor.getByte(defCurve6)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -1386,14 +1254,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(defCurve13) - FileEditor.getByte(defCurve11)) << 4) * 2 << 2
-                    : ((FileEditor.getByte(defCurve13) - FileEditor.getByte(defCurve11)) << 8) * 0x100 / 0x280 >> 1;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(defCurve13) - FileEditor.getByte(defCurve11)) << 4) * 2 << 2,
+                    ((FileEditor.getByte(defCurve13) - FileEditor.getByte(defCurve11)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -1401,14 +1264,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(defCurve15) - FileEditor.getByte(defCurve13)) << 4) * 2 << 2
-                    : ((FileEditor.getByte(defCurve15) - FileEditor.getByte(defCurve13)) << 8) * 0x100 / 0x280 >> 1;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(defCurve15) - FileEditor.getByte(defCurve13)) << 4) * 2 << 2,
+                    ((FileEditor.getByte(defCurve15) - FileEditor.getByte(defCurve13)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -1416,14 +1274,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x300       //*0x100 / 0x300 is to simulate *0x55555556
-                    : ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x280 >> 2; //*0x100 / 0x228 is to simulate *0x76b981d8
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
+                    ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x228 is to simulate *0x76b981d8
             }
         }
 
@@ -1431,14 +1284,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x340 >> 2 //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                    : ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x228 >> 5;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
+                    ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x228 >> 5);
             }
         }
 
@@ -1487,14 +1335,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(agiCurve6) - FileEditor.getByte(agiStart)) << 6) 
-                    : ((FileEditor.getByte(agiCurve6) - FileEditor.getByte(agiStart)) << 6);
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(agiCurve6) - FileEditor.getByte(agiStart)) << 6),
+                    ((FileEditor.getByte(agiCurve6) - FileEditor.getByte(agiStart)) << 6));
             }
         }
 
@@ -1502,22 +1345,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(agiCurve11) - FileEditor.getByte(agiCurve6)) << 8) * 0x100 / 0x280 >> 1
-                    : ((FileEditor.getByte(agiCurve11) - FileEditor.getByte(agiCurve6)) << 8) * 0x100 / 0x280 >> 1;
-
-                if (!IsPromoted)
-                {
-                    //* 0x10 / 0x28 is meant to similate multiplying by 0x66666667
-                }
-                else
-                {
-                }
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(agiCurve11) - FileEditor.getByte(agiCurve6)) << 8) * 0x100 / 0x280 >> 1, //* 0x10 / 0x28 is meant to simulate multiplying by 0x66666667
+                    ((FileEditor.getByte(agiCurve11) - FileEditor.getByte(agiCurve6)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -1525,14 +1355,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(agiCurve13) - FileEditor.getByte(agiCurve11)) << 4) * 2 << 2
-                    : ((FileEditor.getByte(agiCurve13) - FileEditor.getByte(agiCurve11)) << 8) * 0x100 / 0x280 >> 1;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(agiCurve13) - FileEditor.getByte(agiCurve11)) << 4) * 2 << 2,
+                    ((FileEditor.getByte(agiCurve13) - FileEditor.getByte(agiCurve11)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -1540,14 +1365,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(agiCurve15) - FileEditor.getByte(agiCurve13)) << 4) * 2 << 2
-                    : ((FileEditor.getByte(agiCurve15) - FileEditor.getByte(agiCurve13)) << 8) * 0x100 / 0x280 >> 1;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(agiCurve15) - FileEditor.getByte(agiCurve13)) << 4) * 2 << 2,
+                    ((FileEditor.getByte(agiCurve15) - FileEditor.getByte(agiCurve13)) << 8) * 0x100 / 0x280 >> 1);
             }
         }
 
@@ -1555,14 +1375,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x300       //*0x100 / 0x300 is to simulate *0x55555556
-                    : ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x280 >> 2; //*0x100 / 0x228 is to simulate *0x76b981d8
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x300,      //*0x100 / 0x300 is to simulate *0x55555556
+                    ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x228 is to simulate *0x76b981d8
             }
         }
 
@@ -1570,14 +1385,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         {
             get
             {
-                value = !IsPromoted
-                    ? ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x340 >> 2 //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                    : ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x228 >> 5;
-
-                otherValue = Math.Max(value % 0x100, 0);
-                percent = arrayMath[otherValue] / valueNumber;
-
-                return GroupPercentString(value, percent);
+                return GroupPercentString(
+                    ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x340 >> 2, //*0x100 / 0x340 is to simulate *0x4ec4ec4f
+                    ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x228 >> 5);
             }
         }
 
