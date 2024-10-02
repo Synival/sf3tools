@@ -875,18 +875,22 @@ namespace SF3.X033_X031_Editor.Models.Items
 
         static private string Group1PercentString(int curveBegin, int curveEnd)
         {
+            // Levels 1 - 5
             return GroupPercentString(curveEnd - curveBegin << 6);
         }
 
         static private string Group2PercentString(int curveBegin, int curveEnd)
         {
+            // Levels 6 - 10
             return GroupPercentString((curveEnd - curveBegin << 8) * 0x100 / 0x280 >> 1); // * 0x100 / 0x280 is to simulate *0x66666667
         }
 
         static private string Group3PercentString(bool isPromoted, int curveBegin, int curveEnd)
         {
             return GroupPercentString(!isPromoted
+                // Levels 11-12
                 ? (curveEnd - curveBegin << 4) * 2 << 2
+                // Levels 11-15
                 : (curveEnd - curveBegin << 8) * 0x100 / 0x280 >> 1 //*0x100 / 0x280 is to simulate *0x66666667
             );
         }
@@ -894,7 +898,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         static private string Group4PercentString(bool isPromoted, int curveBegin, int curveEnd)
         {
             return GroupPercentString(!isPromoted
+                // Levels 13-14
                 ? (curveEnd - curveBegin << 4) * 2 << 2
+                // Levels 16-20
                 : (curveEnd - curveBegin << 8) * 0x100 / 0x280 >> 1 //*0x100 / 0x280 is to simulate *0x66666667
             );
         }
@@ -902,7 +908,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         static private string Group5PercentString(bool isPromoted, int curveBegin, int curveEnd)
         {
             return GroupPercentString(!isPromoted
+                // Levels 15-17
                 ? (curveEnd - curveBegin << 8) * 0x100 / 0x300      //*0x100 / 0x300 is to simulate *0x55555556
+                // Levels 21-30
                 : (curveEnd - curveBegin << 8) * 0x100 / 0x280 >> 2 //*0x100 / 0x280 is to simulate *0x66666667
             );
         }
@@ -910,7 +918,9 @@ namespace SF3.X033_X031_Editor.Models.Items
         static private string Group6PercentString(bool isPromoted, int curveBegin, int curveEnd)
         {
             return GroupPercentString(!isPromoted
+                // Levels 18-20
                 ? (curveEnd - curveBegin << 8) * 0x100 / 0x340 >> 2 //*0x100 / 0x340 is to simulate *0x4ec4ec4f
+                // Levels 31+
                 : (curveEnd - curveBegin << 8) * 0x100 / 0x228 >> 5 //*0x100 / 0x228 is to simulate *0x76b981d8
             );
         }
