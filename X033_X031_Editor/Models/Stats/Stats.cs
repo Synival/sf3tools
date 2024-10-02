@@ -4,9 +4,9 @@ using SF3.Values;
 using System;
 using static SF3.X033_X031_Editor.Forms.frmMain;
 
-namespace SF3.X033_X031_Editor.Models.Items
+namespace SF3.X033_X031_Editor.Models.Stats
 {
-    public class Item
+    public class Stats
     {
         //starting stat table
         private int character;
@@ -176,7 +176,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         private int index;
         private string name;
 
-        public Item(int id, string text)
+        public Stats(int id, string text)
         {
             checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = FileEditor.getByte(0x000000017); //to determine which version of scn2 we are using 
@@ -472,7 +472,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         public int ID => index;
         public string Name => name;
 
-        public int Character
+        public int CharacterID
         {
             get => FileEditor.getByte(character);
             set => FileEditor.setByte(character, (byte)value);

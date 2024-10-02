@@ -57,8 +57,8 @@
     </Compile>
     <Compile Include="Models\WeaponLevel\WeaponLevel.cs" />
     <Compile Include="Models\WeaponLevel\WeaponLevelList.cs" />
-    <Compile Include="Models\Items\Item.cs" />
-    <Compile Include="Models\Items\ItemList.cs" />
+    <Compile Include="Models\Stats\Stats.cs" />
+    <Compile Include="Models\Stats\StatsList.cs" />
     <Compile Include="Models\Preset\Preset.cs" />
     <Compile Include="Models\Preset\PresetList.cs" />
     <Compile Include="Program.cs" />

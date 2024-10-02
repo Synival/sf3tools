@@ -3,12 +3,12 @@ using System.Xml;
 using System.IO;
 using static SF3.X033_X031_Editor.Forms.frmMain;
 
-namespace SF3.X033_X031_Editor.Models.Items
+namespace SF3.X033_X031_Editor.Models.Stats
 {
-    public static class ItemList
+    public static class StatsList
     {
-        private static Item[] itemssorted;
-        private static Item[] items;
+        private static Stats[] statsSorted;
+        private static Stats[] stats;
 
         private static string r = "";
 
@@ -16,7 +16,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         /// Initialises static class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadItemList()
+        public static bool loadStatsList()
         {
             if (Globals.scenario == 1)
             {
@@ -35,8 +35,8 @@ namespace SF3.X033_X031_Editor.Models.Items
                 r = "RPD/classListPD.xml";
             }
 
-            itemssorted = new Item[0];
-            items = new Item[300]; //max size of itemList
+            statsSorted = new Stats[0];
+            stats = new Stats[300]; //max size of itemList
             try
             {
                 FileStream stream = new FileStream(r, FileMode.Open);
@@ -46,18 +46,18 @@ namespace SF3.X033_X031_Editor.Models.Items
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Item[] old;
+                Stats[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Item[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new Item[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Item(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].ID] = itemssorted[old.Length];
+                        old = new Stats[statsSorted.Length];
+                        statsSorted.CopyTo(old, 0);
+                        statsSorted = new Stats[old.Length + 1];
+                        old.CopyTo(statsSorted, 0);
+                        statsSorted[old.Length] = new Stats(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        stats[statsSorted[old.Length].ID] = statsSorted[old.Length];
                     }
                 }
                 stream.Close();
@@ -73,13 +73,14 @@ namespace SF3.X033_X031_Editor.Models.Items
             return true;
         }
 
-        public static Item[] getItemList()
+        public static Stats[] getStatsList()
         {
-            return itemssorted;
+            return statsSorted;
         }
-        public static Item getItem(int id)
+
+        public static Stats getStat(int id)
         {
-            return items[id];
+            return stats[id];
         }
     }
 }

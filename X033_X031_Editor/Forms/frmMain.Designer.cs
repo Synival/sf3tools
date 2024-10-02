@@ -920,7 +920,7 @@
             // 
             // lvcPrice
             // 
-            this.lvcPrice.AspectName = "Character";
+            this.lvcPrice.AspectName = "CharacterID";
             this.lvcPrice.AspectToStringFormat = "{0:X}";
             this.lvcPrice.HeaderForeColor = System.Drawing.Color.White;
             this.lvcPrice.Text = "characterID";

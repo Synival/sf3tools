@@ -5,7 +5,7 @@ using System.Reflection;
 using System.IO;
 using SF3.X033_X031_Editor.Models;
 using SF3.X033_X031_Editor.Models.Presets;
-using SF3.X033_X031_Editor.Models.Items;
+using SF3.X033_X031_Editor.Models.Stats;
 using SF3.X033_X031_Editor.Models.WeaponLevel;
 using BrightIdeasSoftware;
 using SF3.Editor;
@@ -147,7 +147,7 @@ namespace SF3.X033_X031_Editor.Forms
         }*/
         private string getItemName(object target)
         {
-            return ((Item)target).Name;
+            return ((Stats)target).Name;
         }
         private string getPresetName(object target)
         {
@@ -187,7 +187,7 @@ namespace SF3.X033_X031_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!ItemList.loadItemList())
+            if (!StatsList.loadStatsList())
             {
                 MessageBox.Show("Could not load Resources/classList.xml.");
                 return false;
@@ -234,13 +234,13 @@ namespace SF3.X033_X031_Editor.Forms
 
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
-            olvItems.AddObjects(ItemList.getItemList());
-            objectListView1.AddObjects(ItemList.getItemList());
-            objectListView2.AddObjects(ItemList.getItemList());
-            objectListView3.AddObjects(ItemList.getItemList());
+            olvItems.AddObjects(StatsList.getStatsList());
+            objectListView1.AddObjects(StatsList.getStatsList());
+            objectListView2.AddObjects(StatsList.getStatsList());
+            objectListView3.AddObjects(StatsList.getStatsList());
             objectListView4.AddObjects(PresetList.getPresetList());
             objectListView5.AddObjects(WeaponLevelList.getWeaponLevelList());
-            objectListView6.AddObjects(ItemList.getItemList());
+            objectListView6.AddObjects(StatsList.getStatsList());
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -373,7 +373,7 @@ namespace SF3.X033_X031_Editor.Forms
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.binary? = true;
             } */
-            else if (e.Value is Item)
+            else if (e.Value is Stats)
             {
                 ComboBox cb = new ComboBox();
                 cb.Bounds = e.CellBounds;
@@ -382,7 +382,7 @@ namespace SF3.X033_X031_Editor.Forms
                 cb.AutoCompleteMode = AutoCompleteMode.Append;
                 cb.ValueMember = "Value";
                 cb.DisplayMember = "Name";
-                cb.Items.AddRange(ItemList.getItemList());
+                cb.Items.AddRange(StatsList.getStatsList());
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }
@@ -454,10 +454,10 @@ namespace SF3.X033_X031_Editor.Forms
                 Action value = (Action)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             } else*/
-            if (e.Value is Item)
+            if (e.Value is Stats)
             {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                Item value = (Item)((ComboBox)e.Control).SelectedItem;
+                Stats value = (Stats)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             }
             else if (e.Value is Preset)
@@ -531,7 +531,7 @@ namespace SF3.X033_X031_Editor.Forms
         private void tabpage6_Click(object sender, EventArgs e)
         {
             objectListView6.ClearObjects();
-            objectListView6.AddObjects(ItemList.getItemList());
+            objectListView6.AddObjects(StatsList.getStatsList());
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
