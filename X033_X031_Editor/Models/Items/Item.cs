@@ -131,267 +131,7 @@ namespace SF3.X033_X031_Editor.Models.Items
         private int accessoryEquipable3;
         private int accessoryEquipable4;
 
-        int something = 127;
-        //public static int[] arrayOne = {1 ,2, 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,17,18,19,120,121,122,123,124,125,126,127,128,127,126,125,124,123,122,121,120,119,118,117,116,115,114,113,112,111,110,109,108,107,106,105,104,103,102,101,100,99, 98,97,96,95,94,93,92,91,90,89,88,87,86,85,84,83,82,81,80,79,78,77,76,75,74,73,72,71,70,69,68,67,66,65,64,63,62,61,60,59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1 };
-        //public static double[] arrayMath = {0, 0, 1, 2, 3,  6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91, 105, 120, 136, 153, 171, 190, 210, 231, 253, 276, 300, 325, 351, 378, 406, 435, 465, 496, 528, 561, 595,630, 666, 703, 741, 780, 820, 861, 903, 946, 990, 1035, 1081, 1128, 1176, 1225, 1275, 1326, 1378, 1431, 1485, 1540, 1596, 1653, 1711, 1770, 1830, 1891, 1953, 2016, 2080};
-        //public static double[] arrayMath2 = { 0, 0, 1, 2 ,4,7,11,16,22,29,37,46, 56, 67, 79, 92, 106, 121, 137, 154, 172, 191, 211, 232, 254, 277, 301, 326, 352, 379, 407, 436, 466, 497, 529, 562, 596, 631, 667, 704, 742, 781, 821, 862, 904, 947, 991, 1036, 1082, 1129, 1177, 1226, 1276, 1327, 1379, 1432, 1486, 1541, 1597, 1654, 1712, 1771, 1831, 1892, 1954, 2017, 2081, 2146, 2212, 2279, 2347, 2416, 2486, 2557, 2629, 2702, 2776, 2851, 2927, 3004, 3082, 3161, 3241, 3322, 3404, 3487, 3571, 3656, 3742, 3829, 3917, 4006, 4096, 4187, 4279, 4372, 4466, 4561, 4657, 4754, 4852, 4951, 5051, 5152, 5254, 5357, 5461, 5566, 5672, 5779, 5887, 5996, 6106, 6217, 6329, 6442, 6556, 6671, 6787, 6904, 7022, 7141, 7261, 7382, 7504, 7627, 7751, 7876, 8002, 8129, 8257, 8384,8510, 8635,8759, 8882, 9004, 9125, 9245, 9364, 9482, 9599, 9715, 9830, 9944, 10057, 10169, 10280, 10390, 10499, 10607, 10714, 10820, 10925, 11029, 11132, 11234, 11335, 11435, 11534, 11632, 11729, 11825, 11920, 12014, 12107, 12199, 12290, 12380, 12469, 12557, 12644, 12730, 12815, 12899, 12982, 13064, 13145, 13225, 13304, 13382, 13459, 13535, 13610, 13684, 13757, 13829, 13900, 13970, 14039, 14107, 14174, 14240, 14305, 14369, 14432, 14494, 14555, 14615, 14674, 14732, 14789, 14845, 14900, 14954, 15007, 15059, 15110, 15160, 15209, 15257, 15304, 15350, 15395, 15439, 15482, 15524, 15565, 15605, 15644, 15682, 15719, 15757, 15794, 15830, 15865, 15899, 15932, 15964, 15995, 16025, 16054, 16082, 16109, 16135, 16160, 16184, 16207, 16229, 16250, 16270, 16289, 16307, 16324, 16340, 16355, 16369, 16382, 16394, 16405, 16415, 16424, 16432, 16439, 16445, 16450, 16454, 16457, 16459, 16460};
-        /*public static double[] arrayMath ={ 0,
-0
-,3
-,6
-,10
-,15
-,21
-,28
-,36
-,45
-,55
-,66
-,78
-,91
-,105
-,120
-,136
-,153
-,171
-,190
-,210
-,231
-,253
-,276
-,300
-,325
-,351
-,378
-,406
-,435
-,465
-,496
-,528
-,561
-,595
-,630
-,666
-,703
-,741
-,780
-,820
-,861
-,903
-,946
-,990
-,1035
-,1081
-,1128
-,1176
-,1225
-,1275
-,1326
-,1378
-,1431
-,1485
-,1540
-,1596
-,1653
-,1711
-,1770
-,1830
-,1891
-,1953
-,2016
-,2080
-,2145
-,2211
-,2278
-,2346
-,2415
-,2485
-,2556
-,2628
-,2701
-,2775
-,2850
-,2926
-,3003
-,3081
-,3160
-,3240
-,3321
-,3403
-,3486
-,3570
-,3655
-,3741
-,3828
-,3916
-,4005
-,4095
-,4186
-,4278
-,4371
-,4465
-,4560
-,4656
-,4753
-,4851
-,4950
-,5050
-,5151
-,5253
-,5356
-,5460
-,5565
-,5671
-,5778
-,5886
-,5995
-,6105
-,6216
-,6328
-,6441
-,6555
-,6670
-,6786
-,6903
-,7021
-,7140
-,7260
-,7381
-,7503
-,7626
-,7750
-,7875
-,8001 //0x7e
-,8128 //8065 is 50% hm. 0x7f
-,8254 //0x80
-,8379
-,8503
-,8626
-,8748
-,8869
-,8989
-,9108
-,9226
-,9343
-,9459
-,9574
-,9688
-,9801
-,9913
-,10024
-,10134
-,10243
-,10351
-,10458
-,10564
-,10669
-,10773
-,10876
-,10978
-,11079
-,11179
-,11278
-,11376
-,11473
-,11569
-,11664
-,11758
-,11851
-,11943
-,12034
-,12124
-,12213
-,12301
-,12388
-,12474
-,12559
-,12643
-,12726
-,12808
-,12889
-,12969
-,13048
-,13126
-,13203
-,13279
-,13354
-,13428
-,13501
-,13573
-,13644
-,13714
-,13783
-,13851
-,13918
-,13984
-,14049
-,14113
-,14176
-,14238
-,14299
-,14359
-,14418
-,14476
-,14533
-,14589
-,14644
-,14698
-,14751
-,14803
-,14854
-,14904
-,14953
-,15001
-,15048
-,15094
-,15139
-,15183
-,15226
-,15268
-,15309
-,15349
-,15388
-,15426
-,15463
-,15499
-,15534
-,15568
-,15601
-,15633
-,15664
-,15694
-,15723
-,15751
-,15778
-,15804
-,15829
-,15853
-,15876
-,15898
-,15919
-,15939
-,15958
-,15976
-,15993
-,16009
-,16024
-,16038
-,16051
-,16063
-,16074
-,16084
-,16093
-,16101
-,16108
-,16114
-,16119
-,16123
-,16126
-,16128
-,16129 };*/
-
-        //public static double[] arrayMath3 = { 0, 0, 2, arrayMath3[2]+ 3};
-        public static double[] arrayMath ={0, 0
+        public static double[] numRngOutcomesToReachPlusOne ={0, 0
 ,0
 ,3
 ,7
@@ -646,10 +386,7 @@ namespace SF3.X033_X031_Editor.Models.Items
 ,16252
 ,16253 };
 
-        const int valueNumber = 16253; //16129; //16384
-
-        //int[] arrayTwo = {arrayOne[0] =  1 };
-        //arrayOne[0] = {2} ;
+        const int totalRngOutcomes = 16253;
 
         private int address;
         private int offset;
@@ -864,65 +601,92 @@ namespace SF3.X033_X031_Editor.Models.Items
 
         public bool IsPromoted => FileEditor.getByte((int)characterClass) >= 0x20;
 
-        static private string GroupPercentString(int value)
+        static private string GroupPercentString(int growthValue)
         {
-            int remainder = Math.Max(value % 0x100, 0);
-            double percent = arrayMath[remainder] / valueNumber;
+            int guaranteedStatBonus = (growthValue & 0xf00) % 15;
 
-            return ((Debugs.debugs == 1) ? string.Format("{0:x}", value) + " || " : "") +
-                   string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+            // The portion of growthValue % 0x100 is the starting point for the formula to determine whether
+            // we should add an additional stat point.
+            int growthValuePlusOneCalcStart = Math.Max(growthValue % 0x100, 0);
+
+            // Determine the odds that adding to random numbers range (0x00, 0x7F) will yield a result >= 100,
+            // which provides a bonus +1 stat boost.
+            double percentToReachPlusOne = numRngOutcomesToReachPlusOne[growthValuePlusOneCalcStart] / totalRngOutcomes;
+
+            return ((Debugs.debugs == 1) ? string.Format("{0:x}", growthValue) + " || " : "") +
+                   string.Format("{0:0.##}", (percentToReachPlusOne + guaranteedStatBonus) * 100) + "%";
+        }
+
+        static private string GroupPercentString(int growthDifference, int numLevels)
+        {
+            var growthDifferenceTimes0x100 = growthDifference << 8;
+            switch (numLevels)
+            {
+                case 2:
+                    return GroupPercentString(growthDifferenceTimes0x100 >> 1);
+                case 3:
+                    return GroupPercentString(growthDifferenceTimes0x100 * 0x100 / 0x300);
+                case 4:
+                    return GroupPercentString(growthDifferenceTimes0x100 >> 2);
+                case 5:
+                    return GroupPercentString(growthDifferenceTimes0x100 * 0x100 / 0x280 >> 1);
+                case 10:
+                    return GroupPercentString(growthDifferenceTimes0x100 * 0x100 / 0x280 >> 2);
+                case 13:
+                    return GroupPercentString(growthDifferenceTimes0x100 * 0x100 / 0x340 >> 2);
+                case 69:
+                    return GroupPercentString(growthDifferenceTimes0x100 * 0x100 / 0x228 >> 5);
+                default:
+                    return GroupPercentString(growthDifferenceTimes0x100 / numLevels);
+            }
         }
 
         static private string Group1PercentString(int curveBegin, int curveEnd)
         {
-            // Levels 1 - 5
-            return GroupPercentString(curveEnd - curveBegin << 6);
+            // From level 1 to 5 (+4 levels)
+            return GroupPercentString(curveEnd - curveBegin, 4);
         }
 
         static private string Group2PercentString(int curveBegin, int curveEnd)
         {
-            // Levels 6 - 10
-            return GroupPercentString((curveEnd - curveBegin << 8) * 0x100 / 0x280 >> 1); // * 0x100 / 0x280 is to simulate *0x66666667
+            // From level 5 to 10 (+5 levels)
+            return GroupPercentString(curveEnd - curveBegin, 5);
         }
 
         static private string Group3PercentString(bool isPromoted, int curveBegin, int curveEnd)
         {
-            return GroupPercentString(!isPromoted
-                // Levels 11-12
-                ? (curveEnd - curveBegin << 4) * 2 << 2
-                // Levels 11-15
-                : (curveEnd - curveBegin << 8) * 0x100 / 0x280 >> 1 //*0x100 / 0x280 is to simulate *0x66666667
-            );
+            return !isPromoted
+                // From level 10 to 12 (+2 levels)
+                ? GroupPercentString(curveEnd - curveBegin, 2)
+                // From level 10 to 15 (+5 levels)
+                : GroupPercentString(curveEnd - curveBegin, 5);
         }
 
         static private string Group4PercentString(bool isPromoted, int curveBegin, int curveEnd)
         {
-            return GroupPercentString(!isPromoted
-                // Levels 13-14
-                ? (curveEnd - curveBegin << 4) * 2 << 2
-                // Levels 16-20
-                : (curveEnd - curveBegin << 8) * 0x100 / 0x280 >> 1 //*0x100 / 0x280 is to simulate *0x66666667
-            );
+            return !isPromoted
+                // From level 12 to 14 (+2 levels)
+                ? GroupPercentString(curveEnd - curveBegin, 2)
+                // From level 15 to 20 (+5 levels)
+                : GroupPercentString(curveEnd - curveBegin, 5);
         }
 
         static private string Group5PercentString(bool isPromoted, int curveBegin, int curveEnd)
         {
-            return GroupPercentString(!isPromoted
-                // Levels 15-17
-                ? (curveEnd - curveBegin << 8) * 0x100 / 0x300      //*0x100 / 0x300 is to simulate *0x55555556
-                // Levels 21-30
-                : (curveEnd - curveBegin << 8) * 0x100 / 0x280 >> 2 //*0x100 / 0x280 is to simulate *0x66666667
-            );
+            return !isPromoted
+                // From level 14 to 17 (+3 levels)
+                ? GroupPercentString(curveEnd - curveBegin, 3)
+                // From level 20 to 30 (+10 levels)
+                : GroupPercentString(curveEnd - curveBegin, 10);
         }
 
         static private string Group6PercentString(bool isPromoted, int curveBegin, int curveEnd)
         {
-            return GroupPercentString(!isPromoted
-                // Levels 18-20
-                ? (curveEnd - curveBegin << 8) * 0x100 / 0x340 >> 2 //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-                // Levels 31+
-                : (curveEnd - curveBegin << 8) * 0x100 / 0x228 >> 5 //*0x100 / 0x228 is to simulate *0x76b981d8
-            );
+            return !isPromoted
+                // From level 17 to 30 (+13 levels)
+                ? GroupPercentString(curveEnd - curveBegin, 13)
+                // From level 30 up
+                : GroupPercentString(curveEnd - curveBegin, 69);
         }
 
         public int ID => index;
