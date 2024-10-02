@@ -646,7 +646,7 @@ namespace SF3.X033_X031_Editor.Models.Items
 ,16252
 ,16253 };
 
-        int valueNumber = 16253; //16129; //16384
+        const int valueNumber = 16253; //16129; //16384
 
         //int[] arrayTwo = {arrayOne[0] =  1 };
         //arrayOne[0] = {2} ;
@@ -861,6 +861,60 @@ namespace SF3.X033_X031_Editor.Models.Items
             //address = 0x0354c + (id * 0x18);
         }
 
+
+        public bool IsPromoted => FileEditor.getByte((int)characterClass) >= 0x20;
+
+        static private string GroupPercentString(int value)
+        {
+            int remainder = Math.Max(value % 0x100, 0);
+            double percent = arrayMath[remainder] / valueNumber;
+
+            return ((Debugs.debugs == 1) ? string.Format("{0:x}", value) + " || " : "") +
+                   string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
+        }
+
+        static private string Group1PercentString(int curveBegin, int curveEnd)
+        {
+            return GroupPercentString(curveEnd - curveBegin << 6);
+        }
+
+        static private string Group2PercentString(int curveBegin, int curveEnd)
+        {
+            return GroupPercentString((curveEnd - curveBegin << 8) * 0x100 / 0x280 >> 1); // * 0x100 / 0x280 is to simulate *0x66666667
+        }
+
+        static private string Group3PercentString(bool isPromoted, int curveBegin, int curveEnd)
+        {
+            return GroupPercentString(!isPromoted
+                ? (curveEnd - curveBegin << 4) * 2 << 2
+                : (curveEnd - curveBegin << 8) * 0x100 / 0x280 >> 1 //*0x100 / 0x280 is to simulate *0x66666667
+            );
+        }
+
+        static private string Group4PercentString(bool isPromoted, int curveBegin, int curveEnd)
+        {
+            return GroupPercentString(!isPromoted
+                ? (curveEnd - curveBegin << 4) * 2 << 2
+                : (curveEnd - curveBegin << 8) * 0x100 / 0x280 >> 1 //*0x100 / 0x280 is to simulate *0x66666667
+            );
+        }
+
+        static private string Group5PercentString(bool isPromoted, int curveBegin, int curveEnd)
+        {
+            return GroupPercentString(!isPromoted
+                ? (curveEnd - curveBegin << 8) * 0x100 / 0x300      //*0x100 / 0x300 is to simulate *0x55555556
+                : (curveEnd - curveBegin << 8) * 0x100 / 0x280 >> 2 //*0x100 / 0x280 is to simulate *0x66666667
+            );
+        }
+
+        static private string Group6PercentString(bool isPromoted, int curveBegin, int curveEnd)
+        {
+            return GroupPercentString(!isPromoted
+                ? (curveEnd - curveBegin << 8) * 0x100 / 0x340 >> 2 //*0x100 / 0x340 is to simulate *0x4ec4ec4f
+                : (curveEnd - curveBegin << 8) * 0x100 / 0x228 >> 5 //*0x100 / 0x228 is to simulate *0x76b981d8
+            );
+        }
+
         public int ID => index;
         public string Name => name;
 
@@ -924,41 +978,12 @@ namespace SF3.X033_X031_Editor.Models.Items
             set => FileEditor.setByte(hpCurve20, (byte)value);
         }
 
-        public bool IsPromoted => FileEditor.getByte((int)characterClass) >= 0x20;
-
-        private string GroupPercentString(int unpromotedValue, int promotedValue)
-        {
-            int value = !IsPromoted ? unpromotedValue : promotedValue;
-            int otherValue = Math.Max(value % 0x100, 0);
-            double percent = arrayMath[otherValue] / valueNumber;
-
-            return ((Debugs.debugs == 1) ? string.Format("{0:x}", value) + " || " : "") +
-                   string.Format("{0:0.##}", (percent + ((value & 0xf00) % 15)) * 100) + "%";
-        }
-
-        public string HPgroup1 => GroupPercentString(
-            ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6),
-            ((FileEditor.getByte(hpCurve6) - FileEditor.getByte(hpStart)) << 6));
-
-        public string HPgroup2 => GroupPercentString(
-            ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1,   //*0x100 / 0x280 is to simulate *0x66666667
-            ((FileEditor.getByte(hpCurve11) - FileEditor.getByte(hpCurve6)) << 8) * 0x100 / 0x280 >> 1);
-
-        public string HPgroup3 => GroupPercentString(
-            ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 4) * 2 << 2,
-            ((FileEditor.getByte(hpCurve13) - FileEditor.getByte(hpCurve11)) << 8) * 0x100 / 0x280 >> 1); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string HPgroup4 => GroupPercentString(
-            ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 4) * 2 << 2,
-            ((FileEditor.getByte(hpCurve15) - FileEditor.getByte(hpCurve13)) << 8) * 0x100 / 0x280 >> 1); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string HPgroup5 => GroupPercentString(
-            ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
-            ((FileEditor.getByte(hpCurve17) - FileEditor.getByte(hpCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string HPgroup6 => GroupPercentString(
-            ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x340 >> 2,  //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-            ((FileEditor.getByte(hpCurve20) - FileEditor.getByte(hpCurve17)) << 8) * 0x100 / 0x228 >> 5); //*0x100 / 0x228 is to simulate *0x76b981d8
+        public string HPgroup1 => Group1PercentString(FileEditor.getByte(hpStart), FileEditor.getByte(hpCurve6));
+        public string HPgroup2 => Group2PercentString(FileEditor.getByte(hpCurve6), FileEditor.getByte(hpCurve11));
+        public string HPgroup3 => Group3PercentString(IsPromoted, FileEditor.getByte(hpCurve11), FileEditor.getByte(hpCurve13));
+        public string HPgroup4 => Group4PercentString(IsPromoted, FileEditor.getByte(hpCurve13), FileEditor.getByte(hpCurve15));
+        public string HPgroup5 => Group5PercentString(IsPromoted, FileEditor.getByte(hpCurve15), FileEditor.getByte(hpCurve17));
+        public string HPgroup6 => Group6PercentString(IsPromoted, FileEditor.getByte(hpCurve17), FileEditor.getByte(hpCurve20));
 
         public int MPPromote
         {
@@ -1008,29 +1033,12 @@ namespace SF3.X033_X031_Editor.Models.Items
             set => FileEditor.setByte(mpCurve20, (byte)value);
         }
 
-        public string MPgroup1 => GroupPercentString(
-            ((FileEditor.getByte(mpCurve6) - FileEditor.getByte(mpStart)) << 6),
-            ((FileEditor.getByte(mpCurve6) - FileEditor.getByte(mpStart)) << 6));
-
-        public string MPgroup2 => GroupPercentString(
-            ((FileEditor.getByte(mpCurve11) - FileEditor.getByte(mpCurve6)) << 8) * 0x100 / 0x280 >> 1,  //*0x100 / 0x280 is to simulate *0x66666667
-            ((FileEditor.getByte(mpCurve11) - FileEditor.getByte(mpCurve6)) << 8) * 0x100 / 0x280 >> 1);
-
-        public string MPgroup3 => GroupPercentString(
-            ((FileEditor.getByte(mpCurve13) - FileEditor.getByte(mpCurve11)) << 4) * 2 << 2,
-            ((FileEditor.getByte(mpCurve13) - FileEditor.getByte(mpCurve11)) << 8) * 0x100 / 0x280 >> 1); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string MPgroup4 => GroupPercentString(
-            ((FileEditor.getByte(mpCurve15) - FileEditor.getByte(mpCurve13)) << 4) * 2 << 2,
-            ((FileEditor.getByte(mpCurve15) - FileEditor.getByte(mpCurve13)) << 8) * 0x100 / 0x280 >> 1); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string MPgroup5 => GroupPercentString(
-            ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
-            ((FileEditor.getByte(mpCurve17) - FileEditor.getByte(mpCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string MPgroup6 => GroupPercentString(
-            ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x340 >> 2,  //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-            ((FileEditor.getByte(mpCurve20) - FileEditor.getByte(mpCurve17)) << 8) * 0x100 / 0x228 >> 5); //*0x100 / 0x228 is to simulate *0x76b981d8
+        public string MPgroup1 => Group1PercentString(FileEditor.getByte(mpStart), FileEditor.getByte(mpCurve6));
+        public string MPgroup2 => Group2PercentString(FileEditor.getByte(mpCurve6), FileEditor.getByte(mpCurve11));
+        public string MPgroup3 => Group3PercentString(IsPromoted, FileEditor.getByte(mpCurve11), FileEditor.getByte(mpCurve13));
+        public string MPgroup4 => Group4PercentString(IsPromoted, FileEditor.getByte(mpCurve13), FileEditor.getByte(mpCurve15));
+        public string MPgroup5 => Group5PercentString(IsPromoted, FileEditor.getByte(mpCurve15), FileEditor.getByte(mpCurve17));
+        public string MPgroup6 => Group6PercentString(IsPromoted, FileEditor.getByte(mpCurve17), FileEditor.getByte(mpCurve20));
 
         public int AtkPromote
         {
@@ -1080,29 +1088,12 @@ namespace SF3.X033_X031_Editor.Models.Items
             set => FileEditor.setByte(atkCurve20, (byte)value);
         }
 
-        public string Atkgroup1 => GroupPercentString(
-            ((FileEditor.getByte(atkCurve6) - FileEditor.getByte(atkStart)) << 6),
-            ((FileEditor.getByte(atkCurve6) - FileEditor.getByte(atkStart)) << 6));
-
-        public string Atkgroup2 => GroupPercentString(
-            ((FileEditor.getByte(atkCurve11) - FileEditor.getByte(atkCurve6)) << 8) * 0x100 / 0x280 >> 1,  //*0x100 / 0x280 is to simulate *0x66666667
-            ((FileEditor.getByte(atkCurve11) - FileEditor.getByte(atkCurve6)) << 8) * 0x100 / 0x280 >> 1); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string Atkgroup3 => GroupPercentString(
-            ((FileEditor.getByte(atkCurve13) - FileEditor.getByte(atkCurve11)) << 4) * 2 << 2,
-            ((FileEditor.getByte(atkCurve13) - FileEditor.getByte(atkCurve11)) << 8) * 0x100 / 0x280 >> 1); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string Atkgroup4 => GroupPercentString(
-            ((FileEditor.getByte(atkCurve15) - FileEditor.getByte(atkCurve13)) << 4) * 2 << 2,
-            ((FileEditor.getByte(atkCurve15) - FileEditor.getByte(atkCurve13)) << 8) * 0x100 / 0x280 >> 1); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string Atkgroup5 => GroupPercentString(
-            ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
-            ((FileEditor.getByte(atkCurve17) - FileEditor.getByte(atkCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string Atkgroup6 => GroupPercentString(
-            ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x340 >> 2,  //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-            ((FileEditor.getByte(atkCurve20) - FileEditor.getByte(atkCurve17)) << 8) * 0x100 / 0x228 >> 5); //*0x100 / 0x228 is to simulate *0x76b981d8
+        public string Atkgroup1 => Group1PercentString(FileEditor.getByte(atkStart), FileEditor.getByte(atkCurve6));
+        public string Atkgroup2 => Group2PercentString(FileEditor.getByte(atkCurve6), FileEditor.getByte(atkCurve11));
+        public string Atkgroup3 => Group3PercentString(IsPromoted, FileEditor.getByte(atkCurve11), FileEditor.getByte(atkCurve13));
+        public string Atkgroup4 => Group4PercentString(IsPromoted, FileEditor.getByte(atkCurve13), FileEditor.getByte(atkCurve15));
+        public string Atkgroup5 => Group5PercentString(IsPromoted, FileEditor.getByte(atkCurve15), FileEditor.getByte(atkCurve17));
+        public string Atkgroup6 => Group6PercentString(IsPromoted, FileEditor.getByte(atkCurve17), FileEditor.getByte(atkCurve20));
 
         public int DefPromote
         {
@@ -1152,29 +1143,12 @@ namespace SF3.X033_X031_Editor.Models.Items
             set => FileEditor.setByte(defCurve20, (byte)value);
         }
 
-        public string Defgroup1 => GroupPercentString(
-            ((FileEditor.getByte(defCurve6) - FileEditor.getByte(defStart)) << 6),
-            ((FileEditor.getByte(defCurve6) - FileEditor.getByte(defStart)) << 6));
-
-        public string Defgroup2 => GroupPercentString(
-            ((FileEditor.getByte(defCurve11) - FileEditor.getByte(defCurve6)) << 8) * 0x100 / 0x280 >> 1,  //*0x100 / 0x280 is to simulate *0x66666667
-            ((FileEditor.getByte(defCurve11) - FileEditor.getByte(defCurve6)) << 8) * 0x100 / 0x280 >> 1); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string Defgroup3 => GroupPercentString(
-            ((FileEditor.getByte(defCurve13) - FileEditor.getByte(defCurve11)) << 4) * 2 << 2,
-            ((FileEditor.getByte(defCurve13) - FileEditor.getByte(defCurve11)) << 8) * 0x100 / 0x280 >> 1); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string Defgroup4 => GroupPercentString(
-            ((FileEditor.getByte(defCurve15) - FileEditor.getByte(defCurve13)) << 4) * 2 << 2,
-            ((FileEditor.getByte(defCurve15) - FileEditor.getByte(defCurve13)) << 8) * 0x100 / 0x280 >> 1); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string Defgroup5 => GroupPercentString(
-            ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
-            ((FileEditor.getByte(defCurve17) - FileEditor.getByte(defCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string Defgroup6 => GroupPercentString(
-            ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x340 >> 2,  //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-            ((FileEditor.getByte(defCurve20) - FileEditor.getByte(defCurve17)) << 8) * 0x100 / 0x228 >> 5); //*0x100 / 0x228 is to simulate *0x76b981d8
+        public string Defgroup1 => Group1PercentString(FileEditor.getByte(defStart), FileEditor.getByte(defCurve6));
+        public string Defgroup2 => Group2PercentString(FileEditor.getByte(defCurve6), FileEditor.getByte(defCurve11));
+        public string Defgroup3 => Group3PercentString(IsPromoted, FileEditor.getByte(defCurve11), FileEditor.getByte(defCurve13));
+        public string Defgroup4 => Group4PercentString(IsPromoted, FileEditor.getByte(defCurve13), FileEditor.getByte(defCurve15));
+        public string Defgroup5 => Group5PercentString(IsPromoted, FileEditor.getByte(defCurve15), FileEditor.getByte(defCurve17));
+        public string Defgroup6 => Group6PercentString(IsPromoted, FileEditor.getByte(defCurve17), FileEditor.getByte(defCurve20));
 
         public int AgiPromote
         {
@@ -1224,29 +1198,13 @@ namespace SF3.X033_X031_Editor.Models.Items
             set => FileEditor.setByte(agiCurve20, (byte)value);
         }
 
-        public string Agigroup1 => GroupPercentString(
-            ((FileEditor.getByte(agiCurve6) - FileEditor.getByte(agiStart)) << 6),
-            ((FileEditor.getByte(agiCurve6) - FileEditor.getByte(agiStart)) << 6));
+        public string Agigroup1 => Group1PercentString(FileEditor.getByte(agiStart), FileEditor.getByte(agiCurve6));
+        public string Agigroup2 => Group2PercentString(FileEditor.getByte(agiCurve6), FileEditor.getByte(agiCurve11));
+        public string Agigroup3 => Group3PercentString(IsPromoted, FileEditor.getByte(agiCurve11), FileEditor.getByte(agiCurve13));
+        public string Agigroup4 => Group4PercentString(IsPromoted, FileEditor.getByte(agiCurve13), FileEditor.getByte(agiCurve15));
+        public string Agigroup5 => Group5PercentString(IsPromoted, FileEditor.getByte(agiCurve15), FileEditor.getByte(agiCurve17));
+        public string Agigroup6 => Group6PercentString(IsPromoted, FileEditor.getByte(agiCurve17), FileEditor.getByte(agiCurve20));
 
-        public string Agigroup2 => GroupPercentString(
-            ((FileEditor.getByte(agiCurve11) - FileEditor.getByte(agiCurve6)) << 8) * 0x100 / 0x280 >> 1,  //*0x100 / 0x280 is to simulate *0x66666667
-            ((FileEditor.getByte(agiCurve11) - FileEditor.getByte(agiCurve6)) << 8) * 0x100 / 0x280 >> 1); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string Agigroup3 => GroupPercentString(
-            ((FileEditor.getByte(agiCurve13) - FileEditor.getByte(agiCurve11)) << 4) * 2 << 2,
-            ((FileEditor.getByte(agiCurve13) - FileEditor.getByte(agiCurve11)) << 8) * 0x100 / 0x280 >> 1); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string Agigroup4 => GroupPercentString(
-            ((FileEditor.getByte(agiCurve15) - FileEditor.getByte(agiCurve13)) << 4) * 2 << 2,
-            ((FileEditor.getByte(agiCurve15) - FileEditor.getByte(agiCurve13)) << 8) * 0x100 / 0x280 >> 1); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string Agigroup5 => GroupPercentString(
-            ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x300,       //*0x100 / 0x300 is to simulate *0x55555556
-            ((FileEditor.getByte(agiCurve17) - FileEditor.getByte(agiCurve15)) << 8) * 0x100 / 0x280 >> 2); //*0x100 / 0x280 is to simulate *0x66666667
-
-        public string Agigroup6 => GroupPercentString(
-            ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x340 >> 2,  //*0x100 / 0x340 is to simulate *0x4ec4ec4f
-            ((FileEditor.getByte(agiCurve20) - FileEditor.getByte(agiCurve17)) << 8) * 0x100 / 0x228 >> 5); //*0x100 / 0x228 is to simulate *0x76b981d8
         public int S1LearnedAt
         {
             get => FileEditor.getByte(s1LearnedAt);
