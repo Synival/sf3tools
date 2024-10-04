@@ -6,18 +6,18 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace SF3.X1_Editor.Models.Arrows
 {
-    public static class ArrowList
+    public class ArrowList
     {
-        private static Arrow[] itemssorted;
-        private static Arrow[] items;
+        private Arrow[] itemssorted;
+        private Arrow[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadArrowList()
+        public bool loadArrowList()
         {
             r = "Resources/X1Arrow.xml";
 
@@ -102,11 +102,11 @@ namespace SF3.X1_Editor.Models.Arrows
             return true;
         }
 
-        public static Arrow[] getArrowList()
+        public Arrow[] getArrowList()
         {
             return itemssorted;
         }
-        public static Arrow getArrowss(int id)
+        public Arrow getArrowss(int id)
         {
             return items[id];
         }
@@ -118,22 +118,22 @@ using System;
 using System.Xml;
 using System.IO;
 using System.Collections.Generic;
-using static SF3.X1_Editor.Forms.frmMain;
+using SF3.X1_Editor.Forms.frmMain;
 
 namespace SF3.X1_Editor.Models.Treasures
 {
-    public static class TreasureList
+    public class TreasureList
     {
-        private static List<Item> itemssorted;
-        private static Dictionary<int, Item> items;
+        private List<Item> itemssorted;
+        private Dictionary<int, Item> items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadTreasureList()
+        public bool loadTreasureList()
         {
             if (Globals.scenario == 1)
             {
@@ -190,11 +190,11 @@ namespace SF3.X1_Editor.Models.Treasures
             return true;
         }
 
-        public static Treasure[] getItemList()
+        public Treasure[] getItemList()
         {
             return itemssorted.ToArray();
         }
-        public static Treasure getItem(int id)
+        public Treasure getItem(int id)
         {
             return items[id];
         }

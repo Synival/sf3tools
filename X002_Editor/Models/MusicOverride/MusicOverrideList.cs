@@ -5,18 +5,18 @@ using static SF3.X002_Editor.Forms.frmMain;
 
 namespace SF3.X002_Editor.Models.MusicOverride
 {
-    public static class MusicOverrideList
+    public class MusicOverrideList
     {
-        private static MusicOverride[] itemssorted;
-        private static MusicOverride[] items;
+        private MusicOverride[] itemssorted;
+        private MusicOverride[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadMusicOverrideList()
+        public bool loadMusicOverrideList()
         {
             if (Globals.scenario == 1)
             {
@@ -73,11 +73,11 @@ namespace SF3.X002_Editor.Models.MusicOverride
             return true;
         }
 
-        public static MusicOverride[] getMusicOverrideList()
+        public MusicOverride[] getMusicOverrideList()
         {
             return itemssorted;
         }
-        public static MusicOverride getMusicOverride(int id)
+        public MusicOverride getMusicOverride(int id)
         {
             return items[id];
         }

@@ -5,18 +5,18 @@ using static SF3.X1_Editor.Forms.frmMain;
 
 namespace SF3.X1_Editor.Models.CustomMovement
 {
-    public static class CustomMovementList
+    public class CustomMovementList
     {
-        private static CustomMovement[] spellssorted;
-        private static CustomMovement[] spells;
+        private CustomMovement[] spellssorted;
+        private CustomMovement[] spells;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadCustomMovementList()
+        public bool loadCustomMovementList()
         {
             r = "Resources/X1AI.xml";
 
@@ -79,11 +79,11 @@ namespace SF3.X1_Editor.Models.CustomMovement
             return true;
         }
 
-        public static CustomMovement[] getCustomMovementList()
+        public CustomMovement[] getCustomMovementList()
         {
             return spellssorted;
         }
-        public static CustomMovement getCustomMovement(int id)
+        public CustomMovement getCustomMovement(int id)
         {
             return spells[id];
         }

@@ -30,6 +30,19 @@ namespace SF3.X1_Editor.Forms
         private string Version = "033";
         private bool isBattle = true;
 
+        private ItemList _itemList = new ItemList();
+        private PresetList _presetList = new PresetList();
+        private AIList _aiList = new AIList();
+        private UnknownAIList _unknownAIList = new UnknownAIList();
+        private BattlePointersList _battlePointersList = new BattlePointersList();
+        private TreasureList _treasureList = new TreasureList();
+        private CustomMovementList _customMovementList = new CustomMovementList();
+        private WarpList _warpList = new WarpList();
+        private TileList _tileList = new TileList();
+        private NpcList _npcList = new NpcList();
+        private EnterList _enterList = new EnterList();
+        private ArrowList _arrowList = new ArrowList();
+
         public frmMain()
         {
             InitializeComponent();
@@ -322,7 +335,7 @@ namespace SF3.X1_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (isBattle && !ItemList.loadItemList())
+            if (isBattle && !_itemList.loadItemList())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
@@ -333,63 +346,63 @@ namespace SF3.X1_Editor.Forms
                 return false;
             }*/
 
-            if (isBattle && !PresetList.loadPresetList())
+            if (isBattle && !_presetList.loadPresetList())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
                 return false;
             }
 
-            if (isBattle && !AIList.loadAIList())
+            if (isBattle && !_aiList.loadAIList())
             {
                 MessageBox.Show("Could not load Resources/AI.xml.");
                 return false;
             }
 
-            if (isBattle && !UnknownAIList.loadUnknownAIList())
+            if (isBattle && !_unknownAIList.loadUnknownAIList())
             {
                 MessageBox.Show("Could not load Resources/UnknownAI.xml.");
                 return false;
             }
 
-            if (isBattle && !BattlePointersList.loadBattlePointersList())
+            if (isBattle && !_battlePointersList.loadBattlePointersList())
             {
                 MessageBox.Show("Could not load Resources/BattlePointersList.xml.");
                 return false;
             }
 
-            if (!TreasureList.loadTreasureList())
+            if (!_treasureList.loadTreasureList())
             {
                 MessageBox.Show("Could not load Resources/X1Treasure.xml.");
                 return false;
             }
-            if (isBattle && !CustomMovementList.loadCustomMovementList())
+            if (isBattle && !_customMovementList.loadCustomMovementList())
             {
                 MessageBox.Show("Could not load Resources/X1AI.xml.");
                 return false;
             }
-            if (Globals.scenario != 1 && Globals.scenario != 5 && !WarpList.loadWarpList())
+            if (Globals.scenario != 1 && Globals.scenario != 5 && !_warpList.loadWarpList())
             {
                 MessageBox.Show("Could not load Resources/X1Warp.xml.");
                 return false;
             }
-            if (isBattle && Globals.scenario != 1 && Globals.scenario != 5 && !TileList.loadTileList())
+            if (isBattle && Globals.scenario != 1 && Globals.scenario != 5 && !_tileList.loadTileList())
             {
                 MessageBox.Show("Could not load Resources/MovementTypes.xml.");
                 return false;
             }
 
-            if (!isBattle && !NpcList.loadNpcList())
+            if (!isBattle && !_npcList.loadNpcList())
             {
                 MessageBox.Show("Could not load Resources/NpcList.xml.");
                 return false;
             }
 
-            if (!isBattle && !EnterList.loadEnterList())
+            if (!isBattle && !_enterList.loadEnterList())
             {
                 MessageBox.Show("Could not load Resources/EnterList.xml.");
                 return false;
             }
-            if (!isBattle && Globals.scenario != 1 && Globals.scenario != 5 && !ArrowList.loadArrowList())
+            if (!isBattle && Globals.scenario != 1 && Globals.scenario != 5 && !_arrowList.loadArrowList())
             {
                 MessageBox.Show("Could not load Resources/ArrowList.xml.");
                 return false;
@@ -428,37 +441,37 @@ namespace SF3.X1_Editor.Forms
 
             if (isBattle)
             {
-                olvItems.AddObjects(PresetList.getPresetList());
-                objectListView1.AddObjects(ItemList.getItemList());
-                objectListView2.AddObjects(ItemList.getItemList());
-                objectListView3.AddObjects(ItemList.getItemList());
-                objectListView4.AddObjects(ItemList.getItemList());
-                objectListView5.AddObjects(AIList.getAIList());
-                objectListView6.AddObjects(UnknownAIList.getUnknownAIList());
-                objectListView7.AddObjects(BattlePointersList.getBattlePointersList());
-                objectListView9.AddObjects(CustomMovementList.getCustomMovementList());
+                olvItems.AddObjects(_presetList.getPresetList());
+                objectListView1.AddObjects(_itemList.getItemList());
+                objectListView2.AddObjects(_itemList.getItemList());
+                objectListView3.AddObjects(_itemList.getItemList());
+                objectListView4.AddObjects(_itemList.getItemList());
+                objectListView5.AddObjects(_aiList.getAIList());
+                objectListView6.AddObjects(_unknownAIList.getUnknownAIList());
+                objectListView7.AddObjects(_battlePointersList.getBattlePointersList());
+                objectListView9.AddObjects(_customMovementList.getCustomMovementList());
             }
 
-            objectListView8.AddObjects(TreasureList.getTreasureList());
+            objectListView8.AddObjects(_treasureList.getTreasureList());
 
             if (!isBattle)
             {
-                objectListView12.AddObjects(NpcList.getNpcList());
-                objectListView13.AddObjects(EnterList.getEnterList());
+                objectListView12.AddObjects(_npcList.getNpcList());
+                objectListView13.AddObjects(_enterList.getEnterList());
             }
 
             if (!isBattle && Globals.scenario != 1 && Globals.scenario != 5)
             {
-                objectListView14.AddObjects(ArrowList.getArrowList());
+                objectListView14.AddObjects(_arrowList.getArrowList());
             }
 
             if (Globals.scenario != 1 && Globals.scenario != 5)
             {
-                objectListView10.AddObjects(WarpList.getWarpList());
+                objectListView10.AddObjects(_warpList.getWarpList());
             }
             if (isBattle && Globals.scenario != 1 && Globals.scenario != 5)
             {
-                objectListView11.AddObjects(TileList.getTileList());
+                objectListView11.AddObjects(_tileList.getTileList());
             }
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());

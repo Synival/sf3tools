@@ -5,18 +5,18 @@ using static SF3.X002_Editor.Forms.frmMain;
 
 namespace SF3.X002_Editor.Models.StatBoost
 {
-    public static class StatList
+    public class StatList
     {
-        private static StatBoost[] itemssorted;
-        private static StatBoost[] items;
+        private StatBoost[] itemssorted;
+        private StatBoost[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadStatList()
+        public bool loadStatList()
         {
             r = "Resources/statList.xml";
 
@@ -58,11 +58,11 @@ namespace SF3.X002_Editor.Models.StatBoost
             return true;
         }
 
-        public static StatBoost[] getStatList()
+        public StatBoost[] getStatList()
         {
             return itemssorted;
         }
-        public static StatBoost getStat(int id)
+        public StatBoost getStat(int id)
         {
             return items[id];
         }

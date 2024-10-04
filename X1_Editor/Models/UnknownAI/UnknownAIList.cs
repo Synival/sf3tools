@@ -5,18 +5,18 @@ using static SF3.X1_Editor.Forms.frmMain;
 
 namespace SF3.X1_Editor.Models.UnknownAI
 {
-    public static class UnknownAIList
+    public class UnknownAIList
     {
-        private static UnknownAI[] itemssorted;
-        private static UnknownAI[] items;
+        private UnknownAI[] itemssorted;
+        private UnknownAI[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadUnknownAIList()
+        public bool loadUnknownAIList()
         {
             r = "Resources/UnknownAIList.xml";
 
@@ -58,11 +58,11 @@ namespace SF3.X1_Editor.Models.UnknownAI
             return true;
         }
 
-        public static UnknownAI[] getUnknownAIList()
+        public UnknownAI[] getUnknownAIList()
         {
             return itemssorted;
         }
-        public static UnknownAI getUnknownAI(int id)
+        public UnknownAI getUnknownAI(int id)
         {
             return items[id];
         }

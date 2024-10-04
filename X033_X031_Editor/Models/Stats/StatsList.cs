@@ -5,18 +5,18 @@ using static SF3.X033_X031_Editor.Forms.frmMain;
 
 namespace SF3.X033_X031_Editor.Models.Stats
 {
-    public static class StatsList
+    public class StatsList
     {
-        private static Stats[] statsSorted;
-        private static Stats[] stats;
+        private Stats[] statsSorted;
+        private Stats[] stats;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises list
         /// </summary>
-        /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadStatsList()
+        /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
+        public bool loadStatsList()
         {
             if (Globals.scenario == 1)
             {
@@ -73,12 +73,12 @@ namespace SF3.X033_X031_Editor.Models.Stats
             return true;
         }
 
-        public static Stats[] getStatsList()
+        public Stats[] getStatsList()
         {
             return statsSorted;
         }
 
-        public static Stats getStat(int id)
+        public Stats getStat(int id)
         {
             return stats[id];
         }

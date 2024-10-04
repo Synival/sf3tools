@@ -5,18 +5,18 @@ using static SF3.X002_Editor.Forms.frmMain;
 
 namespace SF3.X002_Editor.Models.Loading
 {
-    public static class LoadList
+    public class LoadList
     {
-        private static Loading[] itemssorted;
-        private static Loading[] items;
+        private Loading[] itemssorted;
+        private Loading[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadLoadList()
+        public bool loadLoadList()
         {
             if (Globals.scenario == 1)
             {
@@ -73,11 +73,11 @@ namespace SF3.X002_Editor.Models.Loading
             return true;
         }
 
-        public static Loading[] getLoadList()
+        public Loading[] getLoadList()
         {
             return itemssorted;
         }
-        public static Loading getLoad(int id)
+        public Loading getLoad(int id)
         {
             return items[id];
         }

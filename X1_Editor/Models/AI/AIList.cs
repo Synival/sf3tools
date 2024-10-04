@@ -5,18 +5,18 @@ using static SF3.X1_Editor.Forms.frmMain;
 
 namespace SF3.X1_Editor.Models.AI
 {
-    public static class AIList
+    public class AIList
     {
-        private static AI[] spellssorted;
-        private static AI[] spells;
+        private AI[] spellssorted;
+        private AI[] spells;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadAIList()
+        public bool loadAIList()
         {
             r = "Resources/X1AI.xml";
 
@@ -78,11 +78,11 @@ namespace SF3.X1_Editor.Models.AI
             return true;
         }
 
-        public static AI[] getAIList()
+        public AI[] getAIList()
         {
             return spellssorted;
         }
-        public static AI getAI(int id)
+        public AI getAI(int id)
         {
             return spells[id];
         }

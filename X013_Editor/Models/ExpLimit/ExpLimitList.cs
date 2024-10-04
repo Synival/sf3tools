@@ -5,18 +5,18 @@ using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.ExpLimit
 {
-    public static class ExpLimitList
+    public class ExpLimitList
     {
-        private static ExpLimit[] itemssorted;
-        private static ExpLimit[] items;
+        private ExpLimit[] itemssorted;
+        private ExpLimit[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadExpLimitList()
+        public bool loadExpLimitList()
         {
             r = "Resources/ExpLimitList.xml";
 
@@ -58,11 +58,11 @@ namespace SF3.X013_Editor.Models.ExpLimit
             return true;
         }
 
-        public static ExpLimit[] getExpLimitList()
+        public ExpLimit[] getExpLimitList()
         {
             return itemssorted;
         }
-        public static ExpLimit getExpLimit(int id)
+        public ExpLimit getExpLimit(int id)
         {
             return items[id];
         }

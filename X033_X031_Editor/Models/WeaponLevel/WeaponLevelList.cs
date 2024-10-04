@@ -5,18 +5,18 @@ using static SF3.X033_X031_Editor.Forms.frmMain;
 
 namespace SF3.X033_X031_Editor.Models.WeaponLevel
 {
-    public static class WeaponLevelList
+    public class WeaponLevelList
     {
-        private static WeaponLevel[] itemssorted;
-        private static WeaponLevel[] items;
+        private WeaponLevel[] itemssorted;
+        private WeaponLevel[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises list
         /// </summary>
-        /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadWeaponLevelList()
+        /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
+        public bool loadWeaponLevelList()
         {
             r = "Resources/WeaponLevel.xml";
 
@@ -58,11 +58,11 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
             return true;
         }
 
-        public static WeaponLevel[] getWeaponLevelList()
+        public WeaponLevel[] getWeaponLevelList()
         {
             return itemssorted;
         }
-        public static WeaponLevel getWeaponLevel(int id)
+        public WeaponLevel getWeaponLevel(int id)
         {
             return items[id];
         }

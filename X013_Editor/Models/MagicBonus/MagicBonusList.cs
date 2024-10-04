@@ -5,18 +5,18 @@ using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.MagicBonus
 {
-    public static class MagicBonusList
+    public class MagicBonusList
     {
-        private static MagicBonus[] itemssorted;
-        private static MagicBonus[] items;
+        private MagicBonus[] itemssorted;
+        private MagicBonus[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadMagicBonusList()
+        public bool loadMagicBonusList()
         {
             if (Globals.scenario == 1)
             {
@@ -73,11 +73,11 @@ namespace SF3.X013_Editor.Models.MagicBonus
             return true;
         }
 
-        public static MagicBonus[] getMagicBonusList()
+        public MagicBonus[] getMagicBonusList()
         {
             return itemssorted;
         }
-        public static MagicBonus getMagicBonus(int id)
+        public MagicBonus getMagicBonus(int id)
         {
             return items[id];
         }

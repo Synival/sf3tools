@@ -5,18 +5,18 @@ using static SF3.X1_Editor.Forms.frmMain;
 
 namespace SF3.X1_Editor.Models.BattlePointers
 {
-    public static class BattlePointersList
+    public class BattlePointersList
     {
-        private static BattlePointers[] itemssorted;
-        private static BattlePointers[] items;
+        private BattlePointers[] itemssorted;
+        private BattlePointers[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadBattlePointersList()
+        public bool loadBattlePointersList()
         {
             r = "Resources/BattlePointersList.xml";
 
@@ -58,11 +58,11 @@ namespace SF3.X1_Editor.Models.BattlePointers
             return true;
         }
 
-        public static BattlePointers[] getBattlePointersList()
+        public BattlePointers[] getBattlePointersList()
         {
             return itemssorted;
         }
-        public static BattlePointers getBattlePointers(int id)
+        public BattlePointers getBattlePointers(int id)
         {
             return items[id];
         }

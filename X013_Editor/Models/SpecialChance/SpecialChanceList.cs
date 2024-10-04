@@ -5,18 +5,18 @@ using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.SpecialChance
 {
-    public static class SpecialChanceList
+    public class SpecialChanceList
     {
-        private static SpecialChance[] itemssorted;
-        private static SpecialChance[] items;
+        private SpecialChance[] itemssorted;
+        private SpecialChance[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadSpecialChanceList()
+        public bool loadSpecialChanceList()
         {
             r = "Resources/SpecialChanceList.xml";
 
@@ -58,11 +58,11 @@ namespace SF3.X013_Editor.Models.SpecialChance
             return true;
         }
 
-        public static SpecialChance[] getSpecialChanceList()
+        public SpecialChance[] getSpecialChanceList()
         {
             return itemssorted;
         }
-        public static SpecialChance getSpecialChance(int id)
+        public SpecialChance getSpecialChance(int id)
         {
             return items[id];
         }

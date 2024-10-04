@@ -5,18 +5,18 @@ using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.Soulmate
 {
-    public static class SoulmateList
+    public class SoulmateList
     {
-        private static Soulmate[] itemssorted;
-        private static Soulmate[] items;
+        private Soulmate[] itemssorted;
+        private Soulmate[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadSoulmateList()
+        public bool loadSoulmateList()
         {
             r = "Resources/SoulmateList.xml";
 
@@ -58,11 +58,11 @@ namespace SF3.X013_Editor.Models.Soulmate
             return true;
         }
 
-        public static Soulmate[] getSoulmateList()
+        public Soulmate[] getSoulmateList()
         {
             return itemssorted;
         }
-        public static Soulmate getSoulmate(int id)
+        public Soulmate getSoulmate(int id)
         {
             return items[id];
         }

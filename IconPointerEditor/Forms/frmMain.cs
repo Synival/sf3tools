@@ -20,6 +20,9 @@ namespace SF3.IconPointerEditor.Forms
         //Used to append to state names to stop program loading states from older versions
         private string Version = "007";
 
+        private ItemList _itemList = new ItemList();
+        private PresetList _presetList = new PresetList();
+
         public frmMain()
         {
             InitializeComponent();
@@ -185,7 +188,7 @@ namespace SF3.IconPointerEditor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!ItemList.loadItemList())
+            if (!_itemList.loadItemList())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
@@ -196,7 +199,7 @@ namespace SF3.IconPointerEditor.Forms
                 return false;
             }*/
 
-            if (!PresetList.loadPresetList())
+            if (!_presetList.loadPresetList())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
                 return false;
@@ -220,8 +223,8 @@ namespace SF3.IconPointerEditor.Forms
 
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
-            olvItems.AddObjects(PresetList.getPresetList());
-            objectListView1.AddObjects(ItemList.getItemList());
+            olvItems.AddObjects(_presetList.getPresetList());
+            objectListView1.AddObjects(_itemList.getItemList());
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -354,7 +357,7 @@ namespace SF3.IconPointerEditor.Forms
                 cb.AutoCompleteMode = AutoCompleteMode.Append;
                 cb.ValueMember = "Value";
                 cb.DisplayMember = "Name";
-                cb.Items.AddRange(ItemList.getItemList());
+                cb.Items.AddRange(_itemList.getItemList());
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }
@@ -380,7 +383,7 @@ namespace SF3.IconPointerEditor.Forms
                 cb.AutoCompleteMode = AutoCompleteMode.Append;
                 cb.ValueMember = "Value";
                 cb.DisplayMember = "Name";
-                cb.Items.AddRange(PresetList.getPresetList());
+                cb.Items.AddRange(_presetList.getPresetList());
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }

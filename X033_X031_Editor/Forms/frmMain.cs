@@ -21,6 +21,10 @@ namespace SF3.X033_X031_Editor.Forms
         //Used to append to state names to stop program loading states from older versions
         private string Version = "018";
 
+        private StatsList _statsList = new StatsList();
+        private PresetList _initialInfoList = new PresetList();
+        private WeaponLevelList _weaponLevelList = new WeaponLevelList();
+
         public frmMain()
         {
             InitializeComponent();
@@ -187,7 +191,7 @@ namespace SF3.X033_X031_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!StatsList.loadStatsList())
+            if (!_statsList.loadStatsList())
             {
                 MessageBox.Show("Could not load Resources/classList.xml.");
                 return false;
@@ -199,13 +203,13 @@ namespace SF3.X033_X031_Editor.Forms
                 return false;
             }*/
 
-            if (!PresetList.loadPresetList())
+            if (!_initialInfoList.loadPresetList())
             {
                 MessageBox.Show("Could not load Resources/classEquip.xml.");
                 return false;
             }
 
-            if (!WeaponLevelList.loadWeaponLevelList())
+            if (!_weaponLevelList.loadWeaponLevelList())
             {
                 MessageBox.Show("Could not load Resources/WeaponLevel.xml.");
                 return false;
@@ -234,13 +238,13 @@ namespace SF3.X033_X031_Editor.Forms
 
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
-            olvItems.AddObjects(StatsList.getStatsList());
-            objectListView1.AddObjects(StatsList.getStatsList());
-            objectListView2.AddObjects(StatsList.getStatsList());
-            objectListView3.AddObjects(StatsList.getStatsList());
-            objectListView4.AddObjects(PresetList.getPresetList());
-            objectListView5.AddObjects(WeaponLevelList.getWeaponLevelList());
-            objectListView6.AddObjects(StatsList.getStatsList());
+            olvItems.AddObjects(_statsList.getStatsList());
+            objectListView1.AddObjects(_statsList.getStatsList());
+            objectListView2.AddObjects(_statsList.getStatsList());
+            objectListView3.AddObjects(_statsList.getStatsList());
+            objectListView4.AddObjects(_initialInfoList.getPresetList());
+            objectListView5.AddObjects(_weaponLevelList.getWeaponLevelList());
+            objectListView6.AddObjects(_statsList.getStatsList());
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -382,7 +386,7 @@ namespace SF3.X033_X031_Editor.Forms
                 cb.AutoCompleteMode = AutoCompleteMode.Append;
                 cb.ValueMember = "Value";
                 cb.DisplayMember = "Name";
-                cb.Items.AddRange(StatsList.getStatsList());
+                cb.Items.AddRange(_statsList.getStatsList());
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }
@@ -395,7 +399,7 @@ namespace SF3.X033_X031_Editor.Forms
                 cb.AutoCompleteMode = AutoCompleteMode.Append;
                 cb.ValueMember = "Value";
                 cb.DisplayMember = "Name";
-                cb.Items.AddRange(PresetList.getPresetList());
+                cb.Items.AddRange(_initialInfoList.getPresetList());
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }
@@ -531,7 +535,7 @@ namespace SF3.X033_X031_Editor.Forms
         private void tabpage6_Click(object sender, EventArgs e)
         {
             objectListView6.ClearObjects();
-            objectListView6.AddObjects(StatsList.getStatsList());
+            objectListView6.AddObjects(_statsList.getStatsList());
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)

@@ -5,18 +5,18 @@ using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.Spells
 {
-    public static class SpellList
+    public class SpellList
     {
-        private static Spell[] spellssorted;
-        private static Spell[] spells;
+        private Spell[] spellssorted;
+        private Spell[] spells;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadSpellList()
+        public bool loadSpellList()
         {
             if (Globals.scenario == 1)
             {
@@ -72,11 +72,11 @@ namespace SF3.X013_Editor.Models.Spells
             return true;
         }
 
-        public static Spell[] getSpellList()
+        public Spell[] getSpellList()
         {
             return spellssorted;
         }
-        public static Spell getSpell(int id)
+        public Spell getSpell(int id)
         {
             return spells[id];
         }

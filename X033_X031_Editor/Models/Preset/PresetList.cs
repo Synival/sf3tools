@@ -5,18 +5,18 @@ using static SF3.X033_X031_Editor.Forms.frmMain;
 
 namespace SF3.X033_X031_Editor.Models.Presets
 {
-    public static class PresetList
+    public class PresetList
     {
-        private static Preset[] presetssorted;
-        private static Preset[] presets;
+        private Preset[] presetssorted;
+        private Preset[] presets;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises list
         /// </summary>
-        /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadPresetList()
+        /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
+        public bool loadPresetList()
         {
             if (Globals.scenario == 1)
             {
@@ -72,11 +72,11 @@ namespace SF3.X033_X031_Editor.Models.Presets
             return true;
         }
 
-        public static Preset[] getPresetList()
+        public Preset[] getPresetList()
         {
             return presetssorted;
         }
-        public static Preset getPreset(int id)
+        public Preset getPreset(int id)
         {
             return presets[id];
         }

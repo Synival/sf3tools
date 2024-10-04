@@ -5,18 +5,18 @@ using static SF3.X1_Editor.Forms.frmMain;
 
 namespace SF3.X1_Editor.Models.Tiles
 {
-    public static class TileList
+    public class TileList
     {
-        private static Tile[] tilessorted;
-        private static Tile[] tiles;
+        private Tile[] tilessorted;
+        private Tile[] tiles;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadTileList()
+        public bool loadTileList()
         {
             r = "Resources/MovementTypes.xml";
 
@@ -56,11 +56,11 @@ namespace SF3.X1_Editor.Models.Tiles
             return true;
         }
 
-        public static Tile[] getTileList()
+        public Tile[] getTileList()
         {
             return tilessorted;
         }
-        public static Tile getTile(int id)
+        public Tile getTile(int id)
         {
             return tiles[id];
         }

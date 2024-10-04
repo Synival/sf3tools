@@ -27,6 +27,16 @@ namespace SF3.X002_Editor.Forms
         //Used to append to state names to stop program loading states from older versions
         private string Version = "19";
 
+        private ItemList _itemList = new ItemList();
+        private SpellList _spellList = new SpellList();
+        private PresetList _presetList = new PresetList();
+        private LoadList _loadList = new LoadList();
+        private StatList _statList = new StatList();
+        private WeaponRankList _weaponRankList = new WeaponRankList();
+        private AttackResistList _attackResistList = new AttackResistList();
+        private WarpList _warpList = new WarpList();
+        private MusicOverrideList _musicOverrideList = new MusicOverrideList();
+
         public frmMain()
         {
             InitializeComponent();
@@ -215,51 +225,51 @@ namespace SF3.X002_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!ItemList.loadItemList())
+            if (!_itemList.loadItemList())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
 
-            if (!SpellList.loadSpellList())
+            if (!_spellList.loadSpellList())
             {
                 MessageBox.Show("Could not load Resources/spellList.xml.");
                 return false;
             }
 
-            if (!PresetList.loadPresetList())
+            if (!_presetList.loadPresetList())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
                 return false;
             }
 
-            if (!LoadList.loadLoadList())
+            if (!_loadList.loadLoadList())
             {
                 MessageBox.Show("Could not load Resources/loadList.xml.");
                 return false;
             }
 
-            if (!StatList.loadStatList())
+            if (!_statList.loadStatList())
             {
                 MessageBox.Show("Could not load Resources/statList.xml.");
                 return false;
             }
-            if (!WeaponRankList.loadWeaponRankList())
+            if (!_weaponRankList.loadWeaponRankList())
             {
                 MessageBox.Show("Could not load Resources/WeaponRankList.xml.");
                 return false;
             }
-            if (!AttackResistList.loadAttackResistList())
+            if (!_attackResistList.loadAttackResistList())
             {
                 MessageBox.Show("Could not load Resources/AttackResistList.xml.");
                 return false;
             }
-            if (Globals.scenario == 1 && !WarpList.loadWarpList())
+            if (Globals.scenario == 1 && !_warpList.loadWarpList())
             {
                 MessageBox.Show("Could not load Resources/WarpList.xml.");
                 return false;
             }
-            if (!MusicOverrideList.loadMusicOverrideList())
+            if (!_musicOverrideList.loadMusicOverrideList())
             {
                 MessageBox.Show("Could not load Resources/MusicOverrideList.xml.");
                 return false;
@@ -290,18 +300,18 @@ namespace SF3.X002_Editor.Forms
 
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
-            olvItems.AddObjects(ItemList.getItemList());
-            objectListView1.AddObjects(SpellList.getSpellList());
-            objectListView2.AddObjects(PresetList.getPresetList());
-            objectListView3.AddObjects(LoadList.getLoadList());
-            objectListView4.AddObjects(StatList.getStatList());
-            objectListView5.AddObjects(WeaponRankList.getWeaponRankList());
-            objectListView6.AddObjects(AttackResistList.getAttackResistList());
-            objectListView8.AddObjects(MusicOverrideList.getMusicOverrideList());
+            olvItems.AddObjects(_itemList.getItemList());
+            objectListView1.AddObjects(_spellList.getSpellList());
+            objectListView2.AddObjects(_presetList.getPresetList());
+            objectListView3.AddObjects(_loadList.getLoadList());
+            objectListView4.AddObjects(_statList.getStatList());
+            objectListView5.AddObjects(_weaponRankList.getWeaponRankList());
+            objectListView6.AddObjects(_attackResistList.getAttackResistList());
+            objectListView8.AddObjects(_musicOverrideList.getMusicOverrideList());
 
             if (Globals.scenario == 1)
             {
-                objectListView7.AddObjects(WarpList.getWarpList());
+                objectListView7.AddObjects(_warpList.getWarpList());
             }
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
@@ -650,9 +660,9 @@ namespace SF3.X002_Editor.Forms
         private void tabpage_Click(object sender, EventArgs e)
         {
             objectListView1.ClearObjects();
-            objectListView1.AddObjects(SpellList.getSpellList());
+            objectListView1.AddObjects(_spellList.getSpellList());
             objectListView4.ClearObjects();
-            objectListView4.AddObjects(StatList.getStatList());
+            objectListView4.AddObjects(_statList.getStatList());
         }
 
         private void frmMain_Load(object sender, EventArgs e)

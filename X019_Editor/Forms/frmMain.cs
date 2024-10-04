@@ -21,6 +21,8 @@ namespace SF3.X019_Editor.Forms
         //Used to append to state names to stop program loading states from older versions
         private string Version = "011";
 
+        private ItemList _itemList = new ItemList();
+
         public frmMain()
         {
             InitializeComponent();
@@ -186,7 +188,7 @@ namespace SF3.X019_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!ItemList.loadItemList())
+            if (!_itemList.loadItemList())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
@@ -224,11 +226,11 @@ namespace SF3.X019_Editor.Forms
 
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
-            olvItems.AddObjects(ItemList.getItemList());
-            objectListView1.AddObjects(ItemList.getItemList());
-            objectListView2.AddObjects(ItemList.getItemList());
-            objectListView3.AddObjects(ItemList.getItemList());
-            objectListView4.AddObjects(ItemList.getItemList());
+            olvItems.AddObjects(_itemList.getItemList());
+            objectListView1.AddObjects(_itemList.getItemList());
+            objectListView2.AddObjects(_itemList.getItemList());
+            objectListView3.AddObjects(_itemList.getItemList());
+            objectListView4.AddObjects(_itemList.getItemList());
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -364,7 +366,7 @@ namespace SF3.X019_Editor.Forms
                 cb.AutoCompleteMode = AutoCompleteMode.Append;
                 cb.ValueMember = "Value";
                 cb.DisplayMember = "Name";
-                cb.Items.AddRange(ItemList.getItemList());
+                cb.Items.AddRange(_itemList.getItemList());
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }

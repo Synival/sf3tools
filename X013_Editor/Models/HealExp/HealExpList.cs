@@ -5,18 +5,18 @@ using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.HealExp
 {
-    public static class HealExpList
+    public class HealExpList
     {
-        private static HealExp[] itemssorted;
-        private static HealExp[] items;
+        private HealExp[] itemssorted;
+        private HealExp[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadHealExpList()
+        public bool loadHealExpList()
         {
             r = "Resources/HealExpList.xml";
 
@@ -58,11 +58,11 @@ namespace SF3.X013_Editor.Models.HealExp
             return true;
         }
 
-        public static HealExp[] getHealExpList()
+        public HealExp[] getHealExpList()
         {
             return itemssorted;
         }
-        public static HealExp getHealExp(int id)
+        public HealExp getHealExp(int id)
         {
             return items[id];
         }

@@ -5,18 +5,18 @@ using static SF3.X002_Editor.Forms.frmMain;
 
 namespace SF3.X002_Editor.Models.WeaponRank
 {
-    public static class WeaponRankList
+    public class WeaponRankList
     {
-        private static WeaponRank[] itemssorted;
-        private static WeaponRank[] items;
+        private WeaponRank[] itemssorted;
+        private WeaponRank[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadWeaponRankList()
+        public bool loadWeaponRankList()
         {
             r = "Resources/WeaponRankList.xml";
 
@@ -58,11 +58,11 @@ namespace SF3.X002_Editor.Models.WeaponRank
             return true;
         }
 
-        public static WeaponRank[] getWeaponRankList()
+        public WeaponRank[] getWeaponRankList()
         {
             return itemssorted;
         }
-        public static WeaponRank getWeaponRank(int id)
+        public WeaponRank getWeaponRank(int id)
         {
             return items[id];
         }

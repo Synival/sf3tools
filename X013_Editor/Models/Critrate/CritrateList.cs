@@ -5,18 +5,18 @@ using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.Critrate
 {
-    public static class CritrateList
+    public class CritrateList
     {
-        private static Critrate[] itemssorted;
-        private static Critrate[] items;
+        private Critrate[] itemssorted;
+        private Critrate[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadCritrateList()
+        public bool loadCritrateList()
         {
             r = "Resources/CritrateList.xml";
 
@@ -58,11 +58,11 @@ namespace SF3.X013_Editor.Models.Critrate
             return true;
         }
 
-        public static Critrate[] getCritrateList()
+        public Critrate[] getCritrateList()
         {
             return itemssorted;
         }
-        public static Critrate getCritrate(int id)
+        public Critrate getCritrate(int id)
         {
             return items[id];
         }

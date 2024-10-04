@@ -5,18 +5,18 @@ using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.CritMod
 {
-    public static class CritModList
+    public class CritModList
     {
-        private static CritMod[] itemssorted;
-        private static CritMod[] items;
+        private CritMod[] itemssorted;
+        private CritMod[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadCritModList()
+        public bool loadCritModList()
         {
             r = "Resources/CritModList.xml";
 
@@ -58,11 +58,11 @@ namespace SF3.X013_Editor.Models.CritMod
             return true;
         }
 
-        public static CritMod[] getCritModList()
+        public CritMod[] getCritModList()
         {
             return itemssorted;
         }
-        public static CritMod getCritMod(int id)
+        public CritMod getCritMod(int id)
         {
             return items[id];
         }

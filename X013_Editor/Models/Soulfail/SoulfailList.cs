@@ -5,18 +5,18 @@ using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.Soulfail
 {
-    public static class SoulfailList
+    public class SoulfailList
     {
-        private static Soulfail[] itemssorted;
-        private static Soulfail[] items;
+        private Soulfail[] itemssorted;
+        private Soulfail[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadSoulfailList()
+        public bool loadSoulfailList()
         {
             r = "Resources/Soulfail.xml";
 
@@ -58,11 +58,11 @@ namespace SF3.X013_Editor.Models.Soulfail
             return true;
         }
 
-        public static Soulfail[] getSoulfailList()
+        public Soulfail[] getSoulfailList()
         {
             return itemssorted;
         }
-        public static Soulfail getSoulfail(int id)
+        public Soulfail getSoulfail(int id)
         {
             return items[id];
         }

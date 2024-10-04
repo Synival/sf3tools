@@ -5,18 +5,18 @@ using static SF3.X002_Editor.Forms.frmMain;
 
 namespace SF3.X002_Editor.Models.AttackResist
 {
-    public static class AttackResistList
+    public class AttackResistList
     {
-        private static AttackResist[] itemssorted;
-        private static AttackResist[] items;
+        private AttackResist[] itemssorted;
+        private AttackResist[] items;
 
-        private static string r = "";
+        private string r = "";
 
         /// <summary>
-        /// Initialises static class
+        /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadAttackResistList()
+        public bool loadAttackResistList()
         {
             r = "Resources/AttackResistList.xml";
 
@@ -58,11 +58,11 @@ namespace SF3.X002_Editor.Models.AttackResist
             return true;
         }
 
-        public static AttackResist[] getAttackResistList()
+        public AttackResist[] getAttackResistList()
         {
             return itemssorted;
         }
-        public static AttackResist getAttackResist(int id)
+        public AttackResist getAttackResist(int id)
         {
             return items[id];
         }
