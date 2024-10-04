@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X013_Editor.Models.Soulmate
 {
-    public class SoulmateList
+    public class SoulmateList : IModelArray<Soulmate>
     {
         private Soulmate[] itemssorted;
         private Soulmate[] items;
@@ -16,7 +17,7 @@ namespace SF3.X013_Editor.Models.Soulmate
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadSoulmateList()
+        public bool Load()
         {
             r = "Resources/SoulmateList.xml";
 
@@ -58,13 +59,6 @@ namespace SF3.X013_Editor.Models.Soulmate
             return true;
         }
 
-        public Soulmate[] getSoulmateList()
-        {
-            return itemssorted;
-        }
-        public Soulmate getSoulmate(int id)
-        {
-            return items[id];
-        }
+        public Soulmate[] Models => itemssorted;
     }
 }

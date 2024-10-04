@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X013_Editor.Models.Critrate
 {
-    public class CritrateList
+    public class CritrateList : IModelArray<Critrate>
     {
         private Critrate[] itemssorted;
         private Critrate[] items;
@@ -16,7 +17,7 @@ namespace SF3.X013_Editor.Models.Critrate
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadCritrateList()
+        public bool Load()
         {
             r = "Resources/CritrateList.xml";
 
@@ -58,13 +59,6 @@ namespace SF3.X013_Editor.Models.Critrate
             return true;
         }
 
-        public Critrate[] getCritrateList()
-        {
-            return itemssorted;
-        }
-        public Critrate getCritrate(int id)
-        {
-            return items[id];
-        }
+        public Critrate[] Models => itemssorted;
     }
 }

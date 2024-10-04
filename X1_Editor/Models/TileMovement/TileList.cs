@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X1_Editor.Models.Tiles
 {
-    public class TileList
+    public class TileList : IModelArray<Tile>
     {
         private Tile[] tilessorted;
         private Tile[] tiles;
@@ -16,7 +17,7 @@ namespace SF3.X1_Editor.Models.Tiles
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadTileList()
+        public bool Load()
         {
             r = "Resources/MovementTypes.xml";
 
@@ -56,13 +57,6 @@ namespace SF3.X1_Editor.Models.Tiles
             return true;
         }
 
-        public Tile[] getTileList()
-        {
-            return tilessorted;
-        }
-        public Tile getTile(int id)
-        {
-            return tiles[id];
-        }
+        public Tile[] Models => tilessorted;
     }
 }

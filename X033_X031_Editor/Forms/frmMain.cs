@@ -9,6 +9,7 @@ using SF3.X033_X031_Editor.Models.Stats;
 using SF3.X033_X031_Editor.Models.WeaponLevel;
 using BrightIdeasSoftware;
 using SF3.Editor;
+using System.Linq;
 
 /*
 
@@ -191,7 +192,7 @@ namespace SF3.X033_X031_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!_statsList.loadStatsList())
+            if (!_statsList.Load())
             {
                 MessageBox.Show("Could not load Resources/classList.xml.");
                 return false;
@@ -203,13 +204,13 @@ namespace SF3.X033_X031_Editor.Forms
                 return false;
             }*/
 
-            if (!_initialInfoList.loadPresetList())
+            if (!_initialInfoList.Load())
             {
                 MessageBox.Show("Could not load Resources/classEquip.xml.");
                 return false;
             }
 
-            if (!_weaponLevelList.loadWeaponLevelList())
+            if (!_weaponLevelList.Load())
             {
                 MessageBox.Show("Could not load Resources/WeaponLevel.xml.");
                 return false;
@@ -238,13 +239,13 @@ namespace SF3.X033_X031_Editor.Forms
 
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
-            olvItems.AddObjects(_statsList.getStatsList());
-            objectListView1.AddObjects(_statsList.getStatsList());
-            objectListView2.AddObjects(_statsList.getStatsList());
-            objectListView3.AddObjects(_statsList.getStatsList());
-            objectListView4.AddObjects(_initialInfoList.getPresetList());
-            objectListView5.AddObjects(_weaponLevelList.getWeaponLevelList());
-            objectListView6.AddObjects(_statsList.getStatsList());
+            olvItems.AddObjects(_statsList.Models);
+            objectListView1.AddObjects(_statsList.Models);
+            objectListView2.AddObjects(_statsList.Models);
+            objectListView3.AddObjects(_statsList.Models);
+            objectListView4.AddObjects(_initialInfoList.Models);
+            objectListView5.AddObjects(_weaponLevelList.Models);
+            objectListView6.AddObjects(_statsList.Models);
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -386,7 +387,7 @@ namespace SF3.X033_X031_Editor.Forms
                 cb.AutoCompleteMode = AutoCompleteMode.Append;
                 cb.ValueMember = "Value";
                 cb.DisplayMember = "Name";
-                cb.Items.AddRange(_statsList.getStatsList());
+                cb.Items.AddRange(_statsList.Models);
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }
@@ -399,7 +400,7 @@ namespace SF3.X033_X031_Editor.Forms
                 cb.AutoCompleteMode = AutoCompleteMode.Append;
                 cb.ValueMember = "Value";
                 cb.DisplayMember = "Name";
-                cb.Items.AddRange(_initialInfoList.getPresetList());
+                cb.Items.AddRange(_initialInfoList.Models);
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }
@@ -535,7 +536,7 @@ namespace SF3.X033_X031_Editor.Forms
         private void tabpage6_Click(object sender, EventArgs e)
         {
             objectListView6.ClearObjects();
-            objectListView6.AddObjects(_statsList.getStatsList());
+            objectListView6.AddObjects(_statsList.Models);
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)

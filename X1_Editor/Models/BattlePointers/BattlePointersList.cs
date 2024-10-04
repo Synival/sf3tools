@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X1_Editor.Models.BattlePointers
 {
-    public class BattlePointersList
+    public class BattlePointersList : IModelArray<BattlePointers>
     {
         private BattlePointers[] itemssorted;
         private BattlePointers[] items;
@@ -16,7 +17,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadBattlePointersList()
+        public bool Load()
         {
             r = "Resources/BattlePointersList.xml";
 
@@ -58,13 +59,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
             return true;
         }
 
-        public BattlePointers[] getBattlePointersList()
-        {
-            return itemssorted;
-        }
-        public BattlePointers getBattlePointers(int id)
-        {
-            return items[id];
-        }
+        public BattlePointers[] Models => itemssorted;
     }
 }

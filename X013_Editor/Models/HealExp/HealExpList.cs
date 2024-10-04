@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X013_Editor.Models.HealExp
 {
-    public class HealExpList
+    public class HealExpList : IModelArray<HealExp>
     {
         private HealExp[] itemssorted;
         private HealExp[] items;
@@ -16,7 +17,7 @@ namespace SF3.X013_Editor.Models.HealExp
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadHealExpList()
+        public bool Load()
         {
             r = "Resources/HealExpList.xml";
 
@@ -58,13 +59,6 @@ namespace SF3.X013_Editor.Models.HealExp
             return true;
         }
 
-        public HealExp[] getHealExpList()
-        {
-            return itemssorted;
-        }
-        public HealExp getHealExp(int id)
-        {
-            return items[id];
-        }
+        public HealExp[] Models => itemssorted;
     }
 }

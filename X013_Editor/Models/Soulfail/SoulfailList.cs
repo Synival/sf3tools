@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X013_Editor.Models.Soulfail
 {
-    public class SoulfailList
+    public class SoulfailList : IModelArray<Soulfail>
     {
         private Soulfail[] itemssorted;
         private Soulfail[] items;
@@ -16,7 +17,7 @@ namespace SF3.X013_Editor.Models.Soulfail
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadSoulfailList()
+        public bool Load()
         {
             r = "Resources/Soulfail.xml";
 
@@ -58,13 +59,6 @@ namespace SF3.X013_Editor.Models.Soulfail
             return true;
         }
 
-        public Soulfail[] getSoulfailList()
-        {
-            return itemssorted;
-        }
-        public Soulfail getSoulfail(int id)
-        {
-            return items[id];
-        }
+        public Soulfail[] Models => itemssorted;
     }
 }

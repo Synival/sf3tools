@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X013_Editor.Models.CritMod
 {
-    public class CritModList
+    public class CritModList : IModelArray<CritMod>
     {
         private CritMod[] itemssorted;
         private CritMod[] items;
@@ -16,7 +17,7 @@ namespace SF3.X013_Editor.Models.CritMod
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadCritModList()
+        public bool Load()
         {
             r = "Resources/CritModList.xml";
 
@@ -58,13 +59,6 @@ namespace SF3.X013_Editor.Models.CritMod
             return true;
         }
 
-        public CritMod[] getCritModList()
-        {
-            return itemssorted;
-        }
-        public CritMod getCritMod(int id)
-        {
-            return items[id];
-        }
+        public CritMod[] Models => itemssorted;
     }
 }

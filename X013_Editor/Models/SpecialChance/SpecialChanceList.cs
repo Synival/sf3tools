@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X013_Editor.Models.SpecialChance
 {
-    public class SpecialChanceList
+    public class SpecialChanceList : IModelArray<SpecialChance>
     {
         private SpecialChance[] itemssorted;
         private SpecialChance[] items;
@@ -16,7 +17,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadSpecialChanceList()
+        public bool Load()
         {
             r = "Resources/SpecialChanceList.xml";
 
@@ -58,13 +59,6 @@ namespace SF3.X013_Editor.Models.SpecialChance
             return true;
         }
 
-        public SpecialChance[] getSpecialChanceList()
-        {
-            return itemssorted;
-        }
-        public SpecialChance getSpecialChance(int id)
-        {
-            return items[id];
-        }
+        public SpecialChance[] Models => itemssorted;
     }
 }

@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X1_Editor.Models.AI
 {
-    public class AIList
+    public class AIList : IModelArray<AI>
     {
         private AI[] spellssorted;
         private AI[] spells;
@@ -16,7 +17,7 @@ namespace SF3.X1_Editor.Models.AI
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadAIList()
+        public bool Load()
         {
             r = "Resources/X1AI.xml";
 
@@ -78,13 +79,6 @@ namespace SF3.X1_Editor.Models.AI
             return true;
         }
 
-        public AI[] getAIList()
-        {
-            return spellssorted;
-        }
-        public AI getAI(int id)
-        {
-            return spells[id];
-        }
+        public AI[] Models => spellssorted;
     }
 }

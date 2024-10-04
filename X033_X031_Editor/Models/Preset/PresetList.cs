@@ -2,10 +2,14 @@
 using System.Xml;
 using System.IO;
 using static SF3.X033_X031_Editor.Forms.frmMain;
+using SF3.Models;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections;
 
 namespace SF3.X033_X031_Editor.Models.Presets
 {
-    public class PresetList
+    public class PresetList : IModelArray<Preset>
     {
         private Preset[] presetssorted;
         private Preset[] presets;
@@ -16,7 +20,7 @@ namespace SF3.X033_X031_Editor.Models.Presets
         /// Initialises list
         /// </summary>
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
-        public bool loadPresetList()
+        public bool Load()
         {
             if (Globals.scenario == 1)
             {
@@ -72,13 +76,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
             return true;
         }
 
-        public Preset[] getPresetList()
-        {
-            return presetssorted;
-        }
-        public Preset getPreset(int id)
-        {
-            return presets[id];
-        }
+        public Preset[] Models => presetssorted;
     }
 }

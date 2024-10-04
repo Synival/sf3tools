@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X1_Editor.Models.CustomMovement
 {
-    public class CustomMovementList
+    public class CustomMovementList : IModelArray<CustomMovement>
     {
         private CustomMovement[] spellssorted;
         private CustomMovement[] spells;
@@ -16,7 +17,7 @@ namespace SF3.X1_Editor.Models.CustomMovement
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadCustomMovementList()
+        public bool Load()
         {
             r = "Resources/X1AI.xml";
 
@@ -79,13 +80,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
             return true;
         }
 
-        public CustomMovement[] getCustomMovementList()
-        {
-            return spellssorted;
-        }
-        public CustomMovement getCustomMovement(int id)
-        {
-            return spells[id];
-        }
+        public CustomMovement[] Models => spellssorted;
     }
 }

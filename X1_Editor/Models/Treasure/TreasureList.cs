@@ -3,10 +3,11 @@ using System.Xml;
 using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
 using System.Runtime.InteropServices.ComTypes;
+using SF3.Models;
 
 namespace SF3.X1_Editor.Models.Treasures
 {
-    public class TreasureList
+    public class TreasureList : IModelArray<Treasure>
     {
         private Treasure[] itemssorted;
         private Treasure[] items;
@@ -17,7 +18,7 @@ namespace SF3.X1_Editor.Models.Treasures
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadTreasureList()
+        public bool Load()
         {
             r = "Resources/X1Treasure.xml";
 
@@ -102,14 +103,7 @@ namespace SF3.X1_Editor.Models.Treasures
             return true;
         }
 
-        public Treasure[] getTreasureList()
-        {
-            return itemssorted;
-        }
-        public Treasure getTreasures(int id)
-        {
-            return items[id];
-        }
+        public Treasure[] Models => itemssorted;
     }
 }
 

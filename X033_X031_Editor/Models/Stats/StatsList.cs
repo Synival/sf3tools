@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X033_X031_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X033_X031_Editor.Models.Stats
 {
-    public class StatsList
+    public class StatsList : IModelArray<Stats>
     {
         private Stats[] statsSorted;
         private Stats[] stats;
@@ -16,7 +17,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         /// Initialises list
         /// </summary>
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
-        public bool loadStatsList()
+        public bool Load()
         {
             if (Globals.scenario == 1)
             {
@@ -73,14 +74,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
             return true;
         }
 
-        public Stats[] getStatsList()
-        {
-            return statsSorted;
-        }
+        public Stats[] Models => statsSorted;
 
-        public Stats getStat(int id)
-        {
-            return stats[id];
-        }
     }
 }

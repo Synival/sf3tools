@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X033_X031_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X033_X031_Editor.Models.WeaponLevel
 {
-    public class WeaponLevelList
+    public class WeaponLevelList : IModelArray<WeaponLevel>
     {
         private WeaponLevel[] itemssorted;
         private WeaponLevel[] items;
@@ -16,7 +17,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         /// Initialises list
         /// </summary>
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
-        public bool loadWeaponLevelList()
+        public bool Load()
         {
             r = "Resources/WeaponLevel.xml";
 
@@ -58,13 +59,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
             return true;
         }
 
-        public WeaponLevel[] getWeaponLevelList()
-        {
-            return itemssorted;
-        }
-        public WeaponLevel getWeaponLevel(int id)
-        {
-            return items[id];
-        }
+        public WeaponLevel[] Models => itemssorted;
     }
 }

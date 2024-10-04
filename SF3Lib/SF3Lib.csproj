@@ -70,12 +70,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\IModelArray.cs" />
     <Compile Include="NamedValue.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Values\CharacterClassValue.cs" />
     <Compile Include="Values\SexValue.cs" />
     <Compile Include="Values\WeaponTypeValue.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

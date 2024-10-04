@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X013_Editor.Models.Presets
 {
-    public class PresetList
+    public class PresetList : IModelArray<Preset>
     {
         private Preset[] presetssorted;
         private Preset[] presets;
@@ -16,7 +17,7 @@ namespace SF3.X013_Editor.Models.Presets
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadPresetList()
+        public bool Load()
         {
             r = "Resources/ExpList.xml";
 
@@ -57,13 +58,6 @@ namespace SF3.X013_Editor.Models.Presets
             return true;
         }
 
-        public Preset[] getPresetList()
-        {
-            return presetssorted;
-        }
-        public Preset getPreset(int id)
-        {
-            return presets[id];
-        }
+        public Preset[] Models => presetssorted;
     }
 }

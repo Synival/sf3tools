@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X002_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X002_Editor.Models.AttackResist
 {
-    public class AttackResistList
+    public class AttackResistList : IModelArray<AttackResist>
     {
         private AttackResist[] itemssorted;
         private AttackResist[] items;
@@ -16,7 +17,7 @@ namespace SF3.X002_Editor.Models.AttackResist
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadAttackResistList()
+        public bool Load()
         {
             r = "Resources/AttackResistList.xml";
 
@@ -58,13 +59,6 @@ namespace SF3.X002_Editor.Models.AttackResist
             return true;
         }
 
-        public AttackResist[] getAttackResistList()
-        {
-            return itemssorted;
-        }
-        public AttackResist getAttackResist(int id)
-        {
-            return items[id];
-        }
+        public AttackResist[] Models => itemssorted;
     }
 }

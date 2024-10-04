@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X002_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X002_Editor.Models.Spells
 {
-    public class SpellList
+    public class SpellList : IModelArray<Spell>
     {
         private Spell[] spellssorted;
         private Spell[] spells;
@@ -16,7 +17,7 @@ namespace SF3.X002_Editor.Models.Spells
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadSpellList()
+        public bool Load()
         {
             if (Globals.scenario == 1)
             {
@@ -72,13 +73,6 @@ namespace SF3.X002_Editor.Models.Spells
             return true;
         }
 
-        public Spell[] getSpellList()
-        {
-            return spellssorted;
-        }
-        public Spell getSpell(int id)
-        {
-            return spells[id];
-        }
+        public Spell[] Models => spellssorted;
     }
 }

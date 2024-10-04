@@ -3,10 +3,11 @@ using System.Xml;
 using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
 using System.Runtime.InteropServices.ComTypes;
+using SF3.Models;
 
 namespace SF3.X1_Editor.Models.Npcs
 {
-    public class NpcList
+    public class NpcList : IModelArray<Npc>
     {
         private Npc[] itemssorted;
         private Npc[] items;
@@ -17,7 +18,7 @@ namespace SF3.X1_Editor.Models.Npcs
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadNpcList()
+        public bool Load()
         {
             r = "Resources/X1Npc.xml";
 
@@ -102,14 +103,7 @@ namespace SF3.X1_Editor.Models.Npcs
             return true;
         }
 
-        public Npc[] getNpcList()
-        {
-            return itemssorted;
-        }
-        public Npc getNpcs(int id)
-        {
-            return items[id];
-        }
+        public Npc[] Models => itemssorted;
     }
 }
 

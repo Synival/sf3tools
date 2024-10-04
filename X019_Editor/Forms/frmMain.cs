@@ -188,7 +188,7 @@ namespace SF3.X019_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!_itemList.loadItemList())
+            if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
@@ -226,11 +226,11 @@ namespace SF3.X019_Editor.Forms
 
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
-            olvItems.AddObjects(_itemList.getItemList());
-            objectListView1.AddObjects(_itemList.getItemList());
-            objectListView2.AddObjects(_itemList.getItemList());
-            objectListView3.AddObjects(_itemList.getItemList());
-            objectListView4.AddObjects(_itemList.getItemList());
+            olvItems.AddObjects(_itemList.Models);
+            objectListView1.AddObjects(_itemList.Models);
+            objectListView2.AddObjects(_itemList.Models);
+            objectListView3.AddObjects(_itemList.Models);
+            objectListView4.AddObjects(_itemList.Models);
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -366,7 +366,7 @@ namespace SF3.X019_Editor.Forms
                 cb.AutoCompleteMode = AutoCompleteMode.Append;
                 cb.ValueMember = "Value";
                 cb.DisplayMember = "Name";
-                cb.Items.AddRange(_itemList.getItemList());
+                cb.Items.AddRange(_itemList.Models);
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }

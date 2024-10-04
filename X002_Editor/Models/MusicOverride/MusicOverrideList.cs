@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X002_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X002_Editor.Models.MusicOverride
 {
-    public class MusicOverrideList
+    public class MusicOverrideList : IModelArray<MusicOverride>
     {
         private MusicOverride[] itemssorted;
         private MusicOverride[] items;
@@ -16,7 +17,7 @@ namespace SF3.X002_Editor.Models.MusicOverride
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadMusicOverrideList()
+        public bool Load()
         {
             if (Globals.scenario == 1)
             {
@@ -73,13 +74,6 @@ namespace SF3.X002_Editor.Models.MusicOverride
             return true;
         }
 
-        public MusicOverride[] getMusicOverrideList()
-        {
-            return itemssorted;
-        }
-        public MusicOverride getMusicOverride(int id)
-        {
-            return items[id];
-        }
+        public MusicOverride[] Models => itemssorted;
     }
 }

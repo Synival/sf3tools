@@ -225,51 +225,51 @@ namespace SF3.X002_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!_itemList.loadItemList())
+            if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
 
-            if (!_spellList.loadSpellList())
+            if (!_spellList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellList.xml.");
                 return false;
             }
 
-            if (!_presetList.loadPresetList())
+            if (!_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
                 return false;
             }
 
-            if (!_loadList.loadLoadList())
+            if (!_loadList.Load())
             {
                 MessageBox.Show("Could not load Resources/loadList.xml.");
                 return false;
             }
 
-            if (!_statList.loadStatList())
+            if (!_statList.Load())
             {
                 MessageBox.Show("Could not load Resources/statList.xml.");
                 return false;
             }
-            if (!_weaponRankList.loadWeaponRankList())
+            if (!_weaponRankList.Load())
             {
                 MessageBox.Show("Could not load Resources/WeaponRankList.xml.");
                 return false;
             }
-            if (!_attackResistList.loadAttackResistList())
+            if (!_attackResistList.Load())
             {
                 MessageBox.Show("Could not load Resources/AttackResistList.xml.");
                 return false;
             }
-            if (Globals.scenario == 1 && !_warpList.loadWarpList())
+            if (Globals.scenario == 1 && !_warpList.Load())
             {
                 MessageBox.Show("Could not load Resources/WarpList.xml.");
                 return false;
             }
-            if (!_musicOverrideList.loadMusicOverrideList())
+            if (!_musicOverrideList.Load())
             {
                 MessageBox.Show("Could not load Resources/MusicOverrideList.xml.");
                 return false;
@@ -300,18 +300,18 @@ namespace SF3.X002_Editor.Forms
 
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
-            olvItems.AddObjects(_itemList.getItemList());
-            objectListView1.AddObjects(_spellList.getSpellList());
-            objectListView2.AddObjects(_presetList.getPresetList());
-            objectListView3.AddObjects(_loadList.getLoadList());
-            objectListView4.AddObjects(_statList.getStatList());
-            objectListView5.AddObjects(_weaponRankList.getWeaponRankList());
-            objectListView6.AddObjects(_attackResistList.getAttackResistList());
-            objectListView8.AddObjects(_musicOverrideList.getMusicOverrideList());
+            olvItems.AddObjects(_itemList.Models);
+            objectListView1.AddObjects(_spellList.Models);
+            objectListView2.AddObjects(_presetList.Models);
+            objectListView3.AddObjects(_loadList.Models);
+            objectListView4.AddObjects(_statList.Models);
+            objectListView5.AddObjects(_weaponRankList.Models);
+            objectListView6.AddObjects(_attackResistList.Models);
+            objectListView8.AddObjects(_musicOverrideList.Models);
 
             if (Globals.scenario == 1)
             {
-                objectListView7.AddObjects(_warpList.getWarpList());
+                objectListView7.AddObjects(_warpList.Models);
             }
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
@@ -660,9 +660,9 @@ namespace SF3.X002_Editor.Forms
         private void tabpage_Click(object sender, EventArgs e)
         {
             objectListView1.ClearObjects();
-            objectListView1.AddObjects(_spellList.getSpellList());
+            objectListView1.AddObjects(_spellList.Models);
             objectListView4.ClearObjects();
-            objectListView4.AddObjects(_statList.getStatList());
+            objectListView4.AddObjects(_statList.Models);
         }
 
         private void frmMain_Load(object sender, EventArgs e)

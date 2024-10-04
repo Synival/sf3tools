@@ -259,81 +259,81 @@ namespace SF3.X013_Editor.Forms
                 return false;
             }*/
 
-            if (!_itemList.loadItemList())
+            if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
 
-            if (!_spellList.loadSpellList())
+            if (!_spellList.Load())
             {
                 MessageBox.Show("Could not load Resources/characters.xml.");
                 return false;
             }
 
-            if (!_presetList.loadPresetList())
+            if (!_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/ExpList.xml.");
                 return false;
             }
 
-            if (!_statsList.loadStatList())
+            if (!_statsList.Load())
             {
                 MessageBox.Show("Could not load Resources/StatList.xml.");
                 return false;
             }
 
-            if (!_soulmateList.loadSoulmateList())
+            if (!_soulmateList.Load())
             {
                 MessageBox.Show("Could not load Resources/SoulmateList.xml.");
                 return false;
             }
 
-            if (!_soulfailList.loadSoulfailList())
+            if (!_soulfailList.Load())
             {
                 MessageBox.Show("Could not load Resources/Soulfail.xml.");
                 return false;
             }
 
-            if (!_magicBonusList.loadMagicBonusList())
+            if (!_magicBonusList.Load())
             {
                 MessageBox.Show("Could not load Resources/MagicBonus.xml.");
                 return false;
             }
 
-            if (!_critModList.loadCritModList())
+            if (!_critModList.Load())
             {
                 MessageBox.Show("Could not load Resources/CritModList.xml.");
                 return false;
             }
 
-            if (!_critrateList.loadCritrateList())
+            if (!_critrateList.Load())
             {
                 MessageBox.Show("Could not load Resources/CritrateList.xml.");
                 return false;
             }
 
-            if (!_specialChanceList.loadSpecialChanceList())
+            if (!_specialChanceList.Load())
             {
                 MessageBox.Show("Could not load Resources/SpecialChanceList.xml.");
                 return false;
             }
-            if (!_expLimitList.loadExpLimitList())
+            if (!_expLimitList.Load())
             {
                 MessageBox.Show("Could not load Resources/ExpLimitList.xml.");
                 return false;
             }
-            if (!_healExpList.loadHealExpList())
+            if (!_healExpList.Load())
             {
                 MessageBox.Show("Could not load Resources/HealExpList.xml.");
                 return false;
             }
-            if (!_weaponSpellRankList.loadWeaponSpellRankList())
+            if (!_weaponSpellRankList.Load())
             {
                 MessageBox.Show("Could not load Resources/WeaponSpellRankListList.xml.");
                 return false;
             }
-            if (!_statusEffectList.loadStatusEffectList())
+            if (!_statusEffectList.Load())
             {
                 MessageBox.Show("Could not load Resources/StatusGroupList.xml.");
                 return false;
@@ -368,20 +368,20 @@ namespace SF3.X013_Editor.Forms
 
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
-            olvItems.AddObjects(_itemList.getItemList());
-            objectListView1.AddObjects(_presetList.getPresetList());
-            objectListView2.AddObjects(_spellList.getSpellList());
-            objectListView3.AddObjects(_statsList.getStatList());
-            objectListView4.AddObjects(_soulmateList.getSoulmateList());
-            objectListView5.AddObjects(_soulfailList.getSoulfailList());
-            objectListView6.AddObjects(_magicBonusList.getMagicBonusList());
-            objectListView7.AddObjects(_critModList.getCritModList());
-            objectListView8.AddObjects(_critrateList.getCritrateList());
-            objectListView9.AddObjects(_specialChanceList.getSpecialChanceList());
-            objectListView10.AddObjects(_expLimitList.getExpLimitList());
-            objectListView11.AddObjects(_healExpList.getHealExpList());
-            objectListView12.AddObjects(_weaponSpellRankList.getWeaponSpellRankList());
-            objectListView13.AddObjects(_statusEffectList.getStatusEffectList());
+            olvItems.AddObjects(_itemList.Models);
+            objectListView1.AddObjects(_presetList.Models);
+            objectListView2.AddObjects(_spellList.Models);
+            objectListView3.AddObjects(_statsList.Models);
+            objectListView4.AddObjects(_soulmateList.Models);
+            objectListView5.AddObjects(_soulfailList.Models);
+            objectListView6.AddObjects(_magicBonusList.Models);
+            objectListView7.AddObjects(_critModList.Models);
+            objectListView8.AddObjects(_critrateList.Models);
+            objectListView9.AddObjects(_specialChanceList.Models);
+            objectListView10.AddObjects(_expLimitList.Models);
+            objectListView11.AddObjects(_healExpList.Models);
+            objectListView12.AddObjects(_weaponSpellRankList.Models);
+            objectListView13.AddObjects(_statusEffectList.Models);
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -536,7 +536,7 @@ namespace SF3.X013_Editor.Forms
                 cb.AutoCompleteMode = AutoCompleteMode.Append;
                 cb.ValueMember = "Value";
                 cb.DisplayMember = "Name";
-                cb.Items.AddRange(_itemList.getItemList());
+                cb.Items.AddRange(_itemList.Models);
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }

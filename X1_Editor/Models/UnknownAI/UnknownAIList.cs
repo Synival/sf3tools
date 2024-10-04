@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X1_Editor.Models.UnknownAI
 {
-    public class UnknownAIList
+    public class UnknownAIList : IModelArray<UnknownAI>
     {
         private UnknownAI[] itemssorted;
         private UnknownAI[] items;
@@ -16,7 +17,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadUnknownAIList()
+        public bool Load()
         {
             r = "Resources/UnknownAIList.xml";
 
@@ -58,13 +59,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
             return true;
         }
 
-        public UnknownAI[] getUnknownAIList()
-        {
-            return itemssorted;
-        }
-        public UnknownAI getUnknownAI(int id)
-        {
-            return items[id];
-        }
+        public UnknownAI[] Models => itemssorted;
     }
 }

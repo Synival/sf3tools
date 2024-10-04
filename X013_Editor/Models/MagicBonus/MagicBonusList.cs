@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X013_Editor.Models.MagicBonus
 {
-    public class MagicBonusList
+    public class MagicBonusList : IModelArray<MagicBonus>
     {
         private MagicBonus[] itemssorted;
         private MagicBonus[] items;
@@ -16,7 +17,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadMagicBonusList()
+        public bool Load()
         {
             if (Globals.scenario == 1)
             {
@@ -73,13 +74,6 @@ namespace SF3.X013_Editor.Models.MagicBonus
             return true;
         }
 
-        public MagicBonus[] getMagicBonusList()
-        {
-            return itemssorted;
-        }
-        public MagicBonus getMagicBonus(int id)
-        {
-            return items[id];
-        }
+        public MagicBonus[] Models => itemssorted;
     }
 }

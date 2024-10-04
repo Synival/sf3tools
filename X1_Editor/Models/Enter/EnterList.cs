@@ -3,10 +3,11 @@ using System.Xml;
 using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
 using System.Runtime.InteropServices.ComTypes;
+using SF3.Models;
 
 namespace SF3.X1_Editor.Models.Enters
 {
-    public class EnterList
+    public class EnterList : IModelArray<Enter>
     {
         private Enter[] itemssorted;
         private Enter[] items;
@@ -17,7 +18,7 @@ namespace SF3.X1_Editor.Models.Enters
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadEnterList()
+        public bool Load()
         {
             r = "Resources/X1Enter.xml";
 
@@ -102,14 +103,7 @@ namespace SF3.X1_Editor.Models.Enters
             return true;
         }
 
-        public Enter[] getEnterList()
-        {
-            return itemssorted;
-        }
-        public Enter getEnters(int id)
-        {
-            return items[id];
-        }
+        public Enter[] Models => itemssorted;
     }
 }
 

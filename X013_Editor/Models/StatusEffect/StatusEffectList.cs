@@ -4,10 +4,11 @@ using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
 using System.Runtime.InteropServices.ComTypes;
 using BrightIdeasSoftware;
+using SF3.Models;
 
 namespace SF3.X013_Editor.Models.StatusEffects
 {
-    public class StatusEffectList
+    public class StatusEffectList : IModelArray<StatusEffect>
     {
         private StatusEffect[] itemssorted;
         private StatusEffect[] items;
@@ -18,7 +19,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadStatusEffectList()
+        public bool Load()
         {
             r = "Resources/StatusGroupList.xml";
 
@@ -74,14 +75,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
             return true;
         }
 
-        public StatusEffect[] getStatusEffectList()
-        {
-            return itemssorted;
-        }
-        public StatusEffect getStatusEffects(int id)
-        {
-            return items[id];
-        }
+        public StatusEffect[] Models => itemssorted;
     }
 }
 

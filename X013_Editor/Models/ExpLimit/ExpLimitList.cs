@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X013_Editor.Models.ExpLimit
 {
-    public class ExpLimitList
+    public class ExpLimitList : IModelArray<ExpLimit>
     {
         private ExpLimit[] itemssorted;
         private ExpLimit[] items;
@@ -16,7 +17,7 @@ namespace SF3.X013_Editor.Models.ExpLimit
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadExpLimitList()
+        public bool Load()
         {
             r = "Resources/ExpLimitList.xml";
 
@@ -58,13 +59,6 @@ namespace SF3.X013_Editor.Models.ExpLimit
             return true;
         }
 
-        public ExpLimit[] getExpLimitList()
-        {
-            return itemssorted;
-        }
-        public ExpLimit getExpLimit(int id)
-        {
-            return items[id];
-        }
+        public ExpLimit[] Models => itemssorted;
     }
 }

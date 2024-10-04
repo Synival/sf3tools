@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X1_Editor.Models.Items
 {
-    public class ItemList
+    public class ItemList : IModelArray<Item>
     {
         private Item[] itemssorted;
         private Item[] items;
@@ -16,7 +17,7 @@ namespace SF3.X1_Editor.Models.Items
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadItemList()
+        public bool Load()
         {
             if (Globals.scenario == 1)
             {
@@ -70,13 +71,6 @@ namespace SF3.X1_Editor.Models.Items
             return true;
         }
 
-        public Item[] getItemList()
-        {
-            return itemssorted;
-        }
-        public Item getItem(int id)
-        {
-            return items[id];
-        }
+        public Item[] Models => itemssorted;
     }
 }

@@ -3,10 +3,11 @@ using System.Xml;
 using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
 using System.Runtime.InteropServices.ComTypes;
+using SF3.Models;
 
 namespace SF3.X1_Editor.Models.Arrows
 {
-    public class ArrowList
+    public class ArrowList : IModelArray<Arrow>
     {
         private Arrow[] itemssorted;
         private Arrow[] items;
@@ -17,7 +18,7 @@ namespace SF3.X1_Editor.Models.Arrows
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadArrowList()
+        public bool Load()
         {
             r = "Resources/X1Arrow.xml";
 
@@ -102,14 +103,7 @@ namespace SF3.X1_Editor.Models.Arrows
             return true;
         }
 
-        public Arrow[] getArrowList()
-        {
-            return itemssorted;
-        }
-        public Arrow getArrowss(int id)
-        {
-            return items[id];
-        }
+        public Arrow[] Models => itemssorted;
     }
 }
 

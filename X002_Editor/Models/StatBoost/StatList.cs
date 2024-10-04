@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X002_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X002_Editor.Models.StatBoost
 {
-    public class StatList
+    public class StatList : IModelArray<StatBoost>
     {
         private StatBoost[] itemssorted;
         private StatBoost[] items;
@@ -16,7 +17,7 @@ namespace SF3.X002_Editor.Models.StatBoost
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadStatList()
+        public bool Load()
         {
             r = "Resources/statList.xml";
 
@@ -58,13 +59,6 @@ namespace SF3.X002_Editor.Models.StatBoost
             return true;
         }
 
-        public StatBoost[] getStatList()
-        {
-            return itemssorted;
-        }
-        public StatBoost getStat(int id)
-        {
-            return items[id];
-        }
+        public StatBoost[] Models => itemssorted;
     }
 }

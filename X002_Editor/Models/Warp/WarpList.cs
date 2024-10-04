@@ -4,10 +4,11 @@ using System.IO;
 using static SF3.X002_Editor.Forms.frmMain;
 using System.Runtime.InteropServices.ComTypes;
 using BrightIdeasSoftware;
+using SF3.Models;
 
 namespace SF3.X002_Editor.Models.Warps
 {
-    public class WarpList
+    public class WarpList : IModelArray<Warp>
     {
         private Warp[] itemssorted;
         private Warp[] items;
@@ -18,7 +19,7 @@ namespace SF3.X002_Editor.Models.Warps
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadWarpList()
+        public bool Load()
         {
             r = "Resources/X1Warp.xml";
 
@@ -80,14 +81,7 @@ namespace SF3.X002_Editor.Models.Warps
             return true;
         }
 
-        public Warp[] getWarpList()
-        {
-            return itemssorted;
-        }
-        public Warp getWarps(int id)
-        {
-            return items[id];
-        }
+        public Warp[] Models => itemssorted;
     }
 }
 

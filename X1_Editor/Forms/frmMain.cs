@@ -335,7 +335,7 @@ namespace SF3.X1_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (isBattle && !_itemList.loadItemList())
+            if (isBattle && !_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
@@ -346,63 +346,63 @@ namespace SF3.X1_Editor.Forms
                 return false;
             }*/
 
-            if (isBattle && !_presetList.loadPresetList())
+            if (isBattle && !_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
                 return false;
             }
 
-            if (isBattle && !_aiList.loadAIList())
+            if (isBattle && !_aiList.Load())
             {
                 MessageBox.Show("Could not load Resources/AI.xml.");
                 return false;
             }
 
-            if (isBattle && !_unknownAIList.loadUnknownAIList())
+            if (isBattle && !_unknownAIList.Load())
             {
                 MessageBox.Show("Could not load Resources/UnknownAI.xml.");
                 return false;
             }
 
-            if (isBattle && !_battlePointersList.loadBattlePointersList())
+            if (isBattle && !_battlePointersList.Load())
             {
                 MessageBox.Show("Could not load Resources/BattlePointersList.xml.");
                 return false;
             }
 
-            if (!_treasureList.loadTreasureList())
+            if (!_treasureList.Load())
             {
                 MessageBox.Show("Could not load Resources/X1Treasure.xml.");
                 return false;
             }
-            if (isBattle && !_customMovementList.loadCustomMovementList())
+            if (isBattle && !_customMovementList.Load())
             {
                 MessageBox.Show("Could not load Resources/X1AI.xml.");
                 return false;
             }
-            if (Globals.scenario != 1 && Globals.scenario != 5 && !_warpList.loadWarpList())
+            if (Globals.scenario != 1 && Globals.scenario != 5 && !_warpList.Load())
             {
                 MessageBox.Show("Could not load Resources/X1Warp.xml.");
                 return false;
             }
-            if (isBattle && Globals.scenario != 1 && Globals.scenario != 5 && !_tileList.loadTileList())
+            if (isBattle && Globals.scenario != 1 && Globals.scenario != 5 && !_tileList.Load())
             {
                 MessageBox.Show("Could not load Resources/MovementTypes.xml.");
                 return false;
             }
 
-            if (!isBattle && !_npcList.loadNpcList())
+            if (!isBattle && !_npcList.Load())
             {
                 MessageBox.Show("Could not load Resources/NpcList.xml.");
                 return false;
             }
 
-            if (!isBattle && !_enterList.loadEnterList())
+            if (!isBattle && !_enterList.Load())
             {
                 MessageBox.Show("Could not load Resources/EnterList.xml.");
                 return false;
             }
-            if (!isBattle && Globals.scenario != 1 && Globals.scenario != 5 && !_arrowList.loadArrowList())
+            if (!isBattle && Globals.scenario != 1 && Globals.scenario != 5 && !_arrowList.Load())
             {
                 MessageBox.Show("Could not load Resources/ArrowList.xml.");
                 return false;
@@ -441,37 +441,37 @@ namespace SF3.X1_Editor.Forms
 
             if (isBattle)
             {
-                olvItems.AddObjects(_presetList.getPresetList());
-                objectListView1.AddObjects(_itemList.getItemList());
-                objectListView2.AddObjects(_itemList.getItemList());
-                objectListView3.AddObjects(_itemList.getItemList());
-                objectListView4.AddObjects(_itemList.getItemList());
-                objectListView5.AddObjects(_aiList.getAIList());
-                objectListView6.AddObjects(_unknownAIList.getUnknownAIList());
-                objectListView7.AddObjects(_battlePointersList.getBattlePointersList());
-                objectListView9.AddObjects(_customMovementList.getCustomMovementList());
+                olvItems.AddObjects(_presetList.Models);
+                objectListView1.AddObjects(_itemList.Models);
+                objectListView2.AddObjects(_itemList.Models);
+                objectListView3.AddObjects(_itemList.Models);
+                objectListView4.AddObjects(_itemList.Models);
+                objectListView5.AddObjects(_aiList.Models);
+                objectListView6.AddObjects(_unknownAIList.Models);
+                objectListView7.AddObjects(_battlePointersList.Models);
+                objectListView9.AddObjects(_customMovementList.Models);
             }
 
-            objectListView8.AddObjects(_treasureList.getTreasureList());
+            objectListView8.AddObjects(_treasureList.Models);
 
             if (!isBattle)
             {
-                objectListView12.AddObjects(_npcList.getNpcList());
-                objectListView13.AddObjects(_enterList.getEnterList());
+                objectListView12.AddObjects(_npcList.Models);
+                objectListView13.AddObjects(_enterList.Models);
             }
 
             if (!isBattle && Globals.scenario != 1 && Globals.scenario != 5)
             {
-                objectListView14.AddObjects(_arrowList.getArrowList());
+                objectListView14.AddObjects(_arrowList.Models);
             }
 
             if (Globals.scenario != 1 && Globals.scenario != 5)
             {
-                objectListView10.AddObjects(_warpList.getWarpList());
+                objectListView10.AddObjects(_warpList.Models);
             }
             if (isBattle && Globals.scenario != 1 && Globals.scenario != 5)
             {
-                objectListView11.AddObjects(_tileList.getTileList());
+                objectListView11.AddObjects(_tileList.Models);
             }
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());

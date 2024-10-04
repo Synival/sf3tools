@@ -2,10 +2,11 @@
 using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
+using SF3.Models;
 
 namespace SF3.X013_Editor.Models.WeaponSpellRank
 {
-    public class WeaponSpellRankList
+    public class WeaponSpellRankList : IModelArray<WeaponSpellRank>
     {
         private WeaponSpellRank[] itemssorted;
         private WeaponSpellRank[] items;
@@ -16,7 +17,7 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadWeaponSpellRankList()
+        public bool Load()
         {
             r = "Resources/WeaponSpellRankList.xml";
 
@@ -58,13 +59,6 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
             return true;
         }
 
-        public WeaponSpellRank[] getWeaponSpellRankList()
-        {
-            return itemssorted;
-        }
-        public WeaponSpellRank getWeaponSpellRank(int id)
-        {
-            return items[id];
-        }
+        public WeaponSpellRank[] Models => itemssorted;
     }
 }
