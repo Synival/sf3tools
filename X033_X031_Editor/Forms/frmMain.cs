@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
 using SF3.X033_X031_Editor.Models;
-using SF3.X033_X031_Editor.Models.Presets;
+using SF3.X033_X031_Editor.Models.InitialInfos;
 using SF3.X033_X031_Editor.Models.Stats;
 using SF3.X033_X031_Editor.Models.WeaponLevel;
 using BrightIdeasSoftware;
@@ -23,7 +23,7 @@ namespace SF3.X033_X031_Editor.Forms
         private string Version = "018";
 
         private StatsList _statsList = new StatsList();
-        private PresetList _initialInfoList = new PresetList();
+        private InitialInfoList _initialInfoList = new InitialInfoList();
         private WeaponLevelList _weaponLevelList = new WeaponLevelList();
 
         public frmMain()
@@ -156,7 +156,7 @@ namespace SF3.X033_X031_Editor.Forms
         }
         private string getPresetName(object target)
         {
-            return ((Preset)target).PresetName;
+            return ((InitialInfo)target).PresetName;
         }
 
         private string getWeaponLevelName(object target)
@@ -391,7 +391,7 @@ namespace SF3.X033_X031_Editor.Forms
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }
-            else if (e.Value is Preset)
+            else if (e.Value is InitialInfo)
             {
                 ComboBox cb = new ComboBox();
                 cb.Bounds = e.CellBounds;
@@ -465,10 +465,10 @@ namespace SF3.X033_X031_Editor.Forms
                 Stats value = (Stats)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             }
-            else if (e.Value is Preset)
+            else if (e.Value is InitialInfo)
             {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                Preset value = (Preset)((ComboBox)e.Control).SelectedItem;
+                InitialInfo value = (InitialInfo)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             } /*else if (e.Value is CharacterClass) {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);

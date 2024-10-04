@@ -73,9 +73,7 @@
     <Compile Include="FileEditor.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Values\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\SF3Lib\SF3Lib.csproj">
       <Project>{e0fa4c78-8adf-4b68-a63b-74c76e868940}</Project>

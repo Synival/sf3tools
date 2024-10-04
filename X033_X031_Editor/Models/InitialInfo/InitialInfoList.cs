@@ -7,12 +7,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections;
 
-namespace SF3.X033_X031_Editor.Models.Presets
+namespace SF3.X033_X031_Editor.Models.InitialInfos
 {
-    public class PresetList : IModelArray<Preset>
+    public class InitialInfoList : IModelArray<InitialInfo>
     {
-        private Preset[] presetssorted;
-        private Preset[] presets;
+        private InitialInfo[] modelsSorted;
+        private InitialInfo[] models;
 
         private string r = "";
 
@@ -39,8 +39,8 @@ namespace SF3.X033_X031_Editor.Models.Presets
                 r = "RPD/classEquipPD.xml";
             }
 
-            presetssorted = new Preset[0];
-            presets = new Preset[100]; //max size of spellIndexList
+            modelsSorted = new InitialInfo[0];
+            models = new InitialInfo[100]; //max size of spellIndexList
             try
             {
                 FileStream stream = new FileStream(r, FileMode.Open);
@@ -49,18 +49,18 @@ namespace SF3.X033_X031_Editor.Models.Presets
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Preset[] old;
+                InitialInfo[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Preset[presetssorted.Length];
-                        presetssorted.CopyTo(old, 0);
-                        presetssorted = new Preset[old.Length + 1];
-                        old.CopyTo(presetssorted, 0);
-                        presetssorted[old.Length] = new Preset(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        presets[presetssorted[old.Length].PresetID] = presetssorted[old.Length];
+                        old = new InitialInfo[modelsSorted.Length];
+                        modelsSorted.CopyTo(old, 0);
+                        modelsSorted = new InitialInfo[old.Length + 1];
+                        old.CopyTo(modelsSorted, 0);
+                        modelsSorted[old.Length] = new InitialInfo(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[modelsSorted[old.Length].PresetID] = modelsSorted[old.Length];
                     }
                 }
                 stream.Close();
@@ -76,6 +76,6 @@ namespace SF3.X033_X031_Editor.Models.Presets
             return true;
         }
 
-        public Preset[] Models => presetssorted;
+        public InitialInfo[] Models => modelsSorted;
     }
 }

@@ -59,8 +59,8 @@
     <Compile Include="Models\WeaponLevel\WeaponLevelList.cs" />
     <Compile Include="Models\Stats\Stats.cs" />
     <Compile Include="Models\Stats\StatsList.cs" />
-    <Compile Include="Models\Preset\Preset.cs" />
-    <Compile Include="Models\Preset\PresetList.cs" />
+    <Compile Include="Models\InitialInfo\InitialInfo.cs" />
+    <Compile Include="Models\InitialInfo\InitialInfoList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmMain.resx">

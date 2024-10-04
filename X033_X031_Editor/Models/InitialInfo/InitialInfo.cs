@@ -3,9 +3,9 @@ using SF3.Values;
 using System;
 using static SF3.X033_X031_Editor.Forms.frmMain;
 
-namespace SF3.X033_X031_Editor.Models.Presets
+namespace SF3.X033_X031_Editor.Models.InitialInfos
 {
-    public class Preset
+    public class InitialInfo
     {
         //starting equipment table
         private int character;
@@ -36,7 +36,7 @@ namespace SF3.X033_X031_Editor.Models.Presets
         private int index;
         private string name;
 
-        public Preset(int id, string text)
+        public InitialInfo(int id, string text)
         {
             checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = FileEditor.getByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
