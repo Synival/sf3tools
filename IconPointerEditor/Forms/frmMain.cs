@@ -433,6 +433,8 @@ namespace SF3.IconPointerEditor.Forms
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }*/
+
+            Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
         }
 
         private void olvCellEditFinishing(object sender, CellEditEventArgs e)

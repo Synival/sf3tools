@@ -718,6 +718,8 @@ namespace SF3.X1_Editor.Forms
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }*/
+
+            Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
         }
 
         private void olvCellEditFinishing(object sender, CellEditEventArgs e)
