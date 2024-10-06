@@ -115,7 +115,7 @@
             this.olvStatUp4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSpellUse = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSpellUseLv = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvAtkCurve15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvAtkCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn46 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn47 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn48 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -821,7 +821,7 @@
             this.olvItems.AllColumns.Add(this.olvStatUp4);
             this.olvItems.AllColumns.Add(this.olvSpellUse);
             this.olvItems.AllColumns.Add(this.olvSpellUseLv);
-            this.olvItems.AllColumns.Add(this.olvAtkCurve15);
+            this.olvItems.AllColumns.Add(this.olvAtkCurve14_20);
             this.olvItems.AllColumns.Add(this.olvColumn46);
             this.olvItems.AllColumns.Add(this.olvColumn47);
             this.olvItems.AllColumns.Add(this.olvColumn48);
@@ -869,7 +869,7 @@
             this.olvStatUp4,
             this.olvSpellUse,
             this.olvSpellUseLv,
-            this.olvAtkCurve15,
+            this.olvAtkCurve14_20,
             this.olvColumn46,
             this.olvColumn47,
             this.olvColumn48,
@@ -949,52 +949,52 @@
             // 
             // lvcRequirements
             // 
-            this.lvcRequirements.AspectName = "HPStart";
+            this.lvcRequirements.AspectName = "HPCurve1";
             this.lvcRequirements.AspectToStringFormat = "{0:X}";
-            this.lvcRequirements.Text = "HPStart";
+            this.lvcRequirements.Text = "HPLv1";
             this.lvcRequirements.Width = 50;
             // 
             // lvcRange
             // 
-            this.lvcRange.AspectName = "HPCurve6";
+            this.lvcRange.AspectName = "HPCurve5";
             this.lvcRange.AspectToStringFormat = "{0:X}";
-            this.lvcRange.Text = "HPCurve1";
-            this.lvcRange.Width = 65;
+            this.lvcRange.Text = "HPLv5";
+            this.lvcRange.Width = 50;
             // 
             // lvcAttack
             // 
-            this.lvcAttack.AspectName = "HPCurve11";
+            this.lvcAttack.AspectName = "HPCurve10";
             this.lvcAttack.AspectToStringFormat = "{0:X}";
-            this.lvcAttack.Text = "HPCurve2";
-            this.lvcAttack.Width = 67;
+            this.lvcAttack.Text = "HPLv10";
+            this.lvcAttack.Width = 65;
             // 
             // lvcDefense
             // 
-            this.lvcDefense.AspectName = "HPCurve13";
+            this.lvcDefense.AspectName = "HPCurve12_15";
             this.lvcDefense.AspectToStringFormat = "{0:X}";
-            this.lvcDefense.Text = "HPCurve3";
-            this.lvcDefense.Width = 67;
+            this.lvcDefense.Text = "HPLv12/15";
+            this.lvcDefense.Width = 75;
             // 
             // olvAttackRank
             // 
-            this.olvAttackRank.AspectName = "HPCurve15";
+            this.olvAttackRank.AspectName = "HPCurve14_20";
             this.olvAttackRank.AspectToStringFormat = "{0:X}";
-            this.olvAttackRank.Text = "HPCurve4";
-            this.olvAttackRank.Width = 67;
+            this.olvAttackRank.Text = "HPLv14/20";
+            this.olvAttackRank.Width = 75;
             // 
             // olvSpellRank
             // 
-            this.olvSpellRank.AspectName = "HPCurve17";
+            this.olvSpellRank.AspectName = "HPCurve17_30";
             this.olvSpellRank.AspectToStringFormat = "{0:X}";
-            this.olvSpellRank.Text = "HPCurve5";
-            this.olvSpellRank.Width = 67;
+            this.olvSpellRank.Text = "HPLv17/30";
+            this.olvSpellRank.Width = 75;
             // 
             // olvPhysicalAttribute
             // 
-            this.olvPhysicalAttribute.AspectName = "HPCurve20";
+            this.olvPhysicalAttribute.AspectName = "HPCurve20_99";
             this.olvPhysicalAttribute.AspectToStringFormat = "{0:X}";
-            this.olvPhysicalAttribute.Text = "HPCurve6";
-            this.olvPhysicalAttribute.Width = 67;
+            this.olvPhysicalAttribute.Text = "HPLv20/99";
+            this.olvPhysicalAttribute.Width = 75;
             // 
             // olvUnknown1
             // 
@@ -1005,52 +1005,52 @@
             // 
             // olvMonsterType
             // 
-            this.olvMonsterType.AspectName = "MPStart";
+            this.olvMonsterType.AspectName = "MPCurve1";
             this.olvMonsterType.AspectToStringFormat = "{0:X}";
-            this.olvMonsterType.Text = "MPStart";
+            this.olvMonsterType.Text = "MPLv1";
             this.olvMonsterType.Width = 50;
             // 
             // olvUnknown2
             // 
-            this.olvUnknown2.AspectName = "MPCurve6";
+            this.olvUnknown2.AspectName = "MPCurve5";
             this.olvUnknown2.AspectToStringFormat = "{0:X}";
-            this.olvUnknown2.Text = "MPCurve1";
-            this.olvUnknown2.Width = 65;
+            this.olvUnknown2.Text = "MPLv5";
+            this.olvUnknown2.Width = 50;
             // 
             // olvStatType1
             // 
-            this.olvStatType1.AspectName = "MPCurve11";
+            this.olvStatType1.AspectName = "MPCurve10";
             this.olvStatType1.AspectToStringFormat = "{0:X}";
-            this.olvStatType1.Text = "MPCurve2";
-            this.olvStatType1.Width = 67;
+            this.olvStatType1.Text = "MPLv10";
+            this.olvStatType1.Width = 62;
             // 
             // olvStatUp1
             // 
-            this.olvStatUp1.AspectName = "MPCurve13";
+            this.olvStatUp1.AspectName = "MPCurve12_15";
             this.olvStatUp1.AspectToStringFormat = "{0:X}";
-            this.olvStatUp1.Text = "MPCurve3";
-            this.olvStatUp1.Width = 67;
+            this.olvStatUp1.Text = "MPLv12/15";
+            this.olvStatUp1.Width = 75;
             // 
             // olvStatType2
             // 
-            this.olvStatType2.AspectName = "MPCurve15";
+            this.olvStatType2.AspectName = "MPCurve14_20";
             this.olvStatType2.AspectToStringFormat = "{0:X}";
-            this.olvStatType2.Text = "MPCurve4";
-            this.olvStatType2.Width = 67;
+            this.olvStatType2.Text = "MPLv14/20";
+            this.olvStatType2.Width = 75;
             // 
             // olvStatUp2
             // 
-            this.olvStatUp2.AspectName = "MPCurve17";
+            this.olvStatUp2.AspectName = "MPCurve17_30";
             this.olvStatUp2.AspectToStringFormat = "{0:X}";
-            this.olvStatUp2.Text = "MPCurve5";
-            this.olvStatUp2.Width = 67;
+            this.olvStatUp2.Text = "MPLv17/30";
+            this.olvStatUp2.Width = 75;
             // 
             // olvStatType3
             // 
-            this.olvStatType3.AspectName = "MPCurve20";
+            this.olvStatType3.AspectName = "MPCurve20_99";
             this.olvStatType3.AspectToStringFormat = "{0:X}";
-            this.olvStatType3.Text = "MPCurve6";
-            this.olvStatType3.Width = 67;
+            this.olvStatType3.Text = "MPLv20/99";
+            this.olvStatType3.Width = 75;
             // 
             // olvStatUp3
             // 
@@ -1061,51 +1061,51 @@
             // 
             // olvStatType4
             // 
-            this.olvStatType4.AspectName = "AtkStart";
+            this.olvStatType4.AspectName = "AtkCurve1";
             this.olvStatType4.AspectToStringFormat = "{0:X}";
-            this.olvStatType4.Text = "AtkStart";
+            this.olvStatType4.Text = "AtkLv1";
             this.olvStatType4.Width = 53;
             // 
             // olvStatUp4
             // 
-            this.olvStatUp4.AspectName = "AtkCurve6";
+            this.olvStatUp4.AspectName = "AtkCurve5";
             this.olvStatUp4.AspectToStringFormat = "{0:X}";
-            this.olvStatUp4.Text = "AtkCurve1";
+            this.olvStatUp4.Text = "AtkLv5";
             this.olvStatUp4.Width = 67;
             // 
             // olvSpellUse
             // 
-            this.olvSpellUse.AspectName = "AtkCurve11";
+            this.olvSpellUse.AspectName = "AtkCurve10";
             this.olvSpellUse.AspectToStringFormat = "{0:X}";
-            this.olvSpellUse.Text = "AtkCurve2";
+            this.olvSpellUse.Text = "AtkLv10";
             this.olvSpellUse.Width = 70;
             // 
             // olvSpellUseLv
             // 
-            this.olvSpellUseLv.AspectName = "AtkCurve13";
+            this.olvSpellUseLv.AspectName = "AtkCurve12_15";
             this.olvSpellUseLv.AspectToStringFormat = "{0:X}";
-            this.olvSpellUseLv.Text = "AtkCurve3";
+            this.olvSpellUseLv.Text = "AtkLv12/15";
             this.olvSpellUseLv.Width = 70;
             // 
-            // olvAtkCurve15
+            // olvAtkCurve14_20
             // 
-            this.olvAtkCurve15.AspectName = "AtkCurve15";
-            this.olvAtkCurve15.AspectToStringFormat = "{0:X}";
-            this.olvAtkCurve15.Text = "AtkCurve4";
-            this.olvAtkCurve15.Width = 70;
+            this.olvAtkCurve14_20.AspectName = "AtkCurve14_20";
+            this.olvAtkCurve14_20.AspectToStringFormat = "{0:X}";
+            this.olvAtkCurve14_20.Text = "AtkLv14/20";
+            this.olvAtkCurve14_20.Width = 70;
             // 
             // olvColumn46
             // 
-            this.olvColumn46.AspectName = "AtkCurve17";
+            this.olvColumn46.AspectName = "AtkCurve17_30";
             this.olvColumn46.AspectToStringFormat = "{0:X}";
-            this.olvColumn46.Text = "AtkCurve5";
+            this.olvColumn46.Text = "AtkLv17/30";
             this.olvColumn46.Width = 70;
             // 
             // olvColumn47
             // 
-            this.olvColumn47.AspectName = "AtkCurve20";
+            this.olvColumn47.AspectName = "AtkCurve20_99";
             this.olvColumn47.AspectToStringFormat = "{0:X}";
-            this.olvColumn47.Text = "AtkCurve6";
+            this.olvColumn47.Text = "AtkLv20/99";
             this.olvColumn47.Width = 70;
             // 
             // olvColumn48
@@ -1117,51 +1117,51 @@
             // 
             // olvColumn49
             // 
-            this.olvColumn49.AspectName = "DefStart";
+            this.olvColumn49.AspectName = "DefCurve1";
             this.olvColumn49.AspectToStringFormat = "{0:X}";
-            this.olvColumn49.Text = "DefStart";
+            this.olvColumn49.Text = "DefLv1";
             this.olvColumn49.Width = 53;
             // 
             // olvColumn50
             // 
-            this.olvColumn50.AspectName = "DefCurve6";
+            this.olvColumn50.AspectName = "DefCurve5";
             this.olvColumn50.AspectToStringFormat = "{0:X}";
-            this.olvColumn50.Text = "DefCurve1";
+            this.olvColumn50.Text = "DefLv5";
             this.olvColumn50.Width = 67;
             // 
             // olvColumn51
             // 
-            this.olvColumn51.AspectName = "DefCurve11";
+            this.olvColumn51.AspectName = "DefCurve10";
             this.olvColumn51.AspectToStringFormat = "{0:X}";
-            this.olvColumn51.Text = "DefCurve2";
+            this.olvColumn51.Text = "DefLv2";
             this.olvColumn51.Width = 70;
             // 
             // olvColumn52
             // 
-            this.olvColumn52.AspectName = "DefCurve13";
+            this.olvColumn52.AspectName = "DefCurve12_15";
             this.olvColumn52.AspectToStringFormat = "{0:X}";
-            this.olvColumn52.Text = "DefCurve3";
+            this.olvColumn52.Text = "DefLv12/15";
             this.olvColumn52.Width = 70;
             // 
             // olvColumn53
             // 
-            this.olvColumn53.AspectName = "DefCurve15";
+            this.olvColumn53.AspectName = "DefCurve14_20";
             this.olvColumn53.AspectToStringFormat = "{0:X}";
-            this.olvColumn53.Text = "DefCurve4";
+            this.olvColumn53.Text = "DefLv14/20";
             this.olvColumn53.Width = 70;
             // 
             // olvColumn45
             // 
-            this.olvColumn45.AspectName = "DefCurve17";
+            this.olvColumn45.AspectName = "DefCurve17_30";
             this.olvColumn45.AspectToStringFormat = "{0:X}";
-            this.olvColumn45.Text = "DefCurve5";
+            this.olvColumn45.Text = "DefLv17/30";
             this.olvColumn45.Width = 70;
             // 
             // olvColumn54
             // 
-            this.olvColumn54.AspectName = "DefCurve20";
+            this.olvColumn54.AspectName = "DefCurve20_99";
             this.olvColumn54.AspectToStringFormat = "{0:X}";
-            this.olvColumn54.Text = "DefCurve6";
+            this.olvColumn54.Text = "DefLv20/99";
             this.olvColumn54.Width = 70;
             // 
             // olvColumn55
@@ -1173,51 +1173,51 @@
             // 
             // olvColumn56
             // 
-            this.olvColumn56.AspectName = "AgiStart";
+            this.olvColumn56.AspectName = "AgiCurve1";
             this.olvColumn56.AspectToStringFormat = "{0:X}";
-            this.olvColumn56.Text = "AgiStart";
+            this.olvColumn56.Text = "AgiLv1";
             this.olvColumn56.Width = 53;
             // 
             // olvColumn57
             // 
-            this.olvColumn57.AspectName = "AgiCurve6";
+            this.olvColumn57.AspectName = "AgiCurve5";
             this.olvColumn57.AspectToStringFormat = "{0:X}";
-            this.olvColumn57.Text = "AgiCurve1";
+            this.olvColumn57.Text = "AgiLv5";
             this.olvColumn57.Width = 67;
             // 
             // olvColumn58
             // 
-            this.olvColumn58.AspectName = "AgiCurve11";
+            this.olvColumn58.AspectName = "AgiCurve10";
             this.olvColumn58.AspectToStringFormat = "{0:X}";
-            this.olvColumn58.Text = "AgiCurve2";
+            this.olvColumn58.Text = "AgiLv10";
             this.olvColumn58.Width = 70;
             // 
             // olvColumn59
             // 
-            this.olvColumn59.AspectName = "AgiCurve13";
+            this.olvColumn59.AspectName = "AgiCurve12_15";
             this.olvColumn59.AspectToStringFormat = "{0:X}";
-            this.olvColumn59.Text = "AgiCurve3";
+            this.olvColumn59.Text = "AgiLv12/15";
             this.olvColumn59.Width = 70;
             // 
             // olvColumn60
             // 
-            this.olvColumn60.AspectName = "AgiCurve15";
+            this.olvColumn60.AspectName = "AgiCurve14_20";
             this.olvColumn60.AspectToStringFormat = "{0:X}";
-            this.olvColumn60.Text = "AgiCurve4";
+            this.olvColumn60.Text = "AgiLv14/20";
             this.olvColumn60.Width = 70;
             // 
             // olvColumn61
             // 
-            this.olvColumn61.AspectName = "AgiCurve17";
+            this.olvColumn61.AspectName = "AgiCurve17_30";
             this.olvColumn61.AspectToStringFormat = "{0:X}";
-            this.olvColumn61.Text = "AgiCurve5";
+            this.olvColumn61.Text = "AgiLv17/30";
             this.olvColumn61.Width = 70;
             // 
             // olvColumn62
             // 
-            this.olvColumn62.AspectName = "AgiCurve20";
+            this.olvColumn62.AspectName = "AgiCurve20_99";
             this.olvColumn62.AspectToStringFormat = "{0:X}";
-            this.olvColumn62.Text = "AgiCurve6";
+            this.olvColumn62.Text = "AgiLv20/99";
             this.olvColumn62.Width = 70;
             // 
             // tabMain
@@ -2525,7 +2525,7 @@
         private BrightIdeasSoftware.OLVColumn olvColumn38;
         private BrightIdeasSoftware.OLVColumn olvColumn39;
         internal System.Windows.Forms.TabControl tabMain;
-        private BrightIdeasSoftware.OLVColumn olvAtkCurve15;
+        private BrightIdeasSoftware.OLVColumn olvAtkCurve14_20;
         private BrightIdeasSoftware.OLVColumn olvColumn46;
         private BrightIdeasSoftware.OLVColumn olvColumn47;
         private BrightIdeasSoftware.OLVColumn olvColumn48;

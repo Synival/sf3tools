@@ -12,45 +12,45 @@ namespace SF3.X033_X031_Editor.Models.Stats
         private int character;
         private int characterClass;
         private int hpPromote;
-        private int hpStart;
-        private int hpCurve6;
-        private int hpCurve11;
-        private int hpCurve13;
-        private int hpCurve15;
-        private int hpCurve17;
-        private int hpCurve20;
+        private int hpCurve1;
+        private int hpCurve5;
+        private int hpCurve10;
+        private int hpCurve12_15;
+        private int hpCurve14_20;
+        private int hpCurve17_30;
+        private int hpCurve20_99;
         private int mpPromote;
-        private int mpStart;
-        private int mpCurve6;
-        private int mpCurve11;
-        private int mpCurve13;
-        private int mpCurve15;
-        private int mpCurve17;
-        private int mpCurve20;
+        private int mpCurve1;
+        private int mpCurve5;
+        private int mpCurve10;
+        private int mpCurve12_15;
+        private int mpCurve14_20;
+        private int mpCurve17_30;
+        private int mpCurve20_99;
         private int atkPromote;
-        private int atkStart;
-        private int atkCurve6;
-        private int atkCurve11;
-        private int atkCurve13;
-        private int atkCurve15;
-        private int atkCurve17;
-        private int atkCurve20;
+        private int atkCurve1;
+        private int atkCurve5;
+        private int atkCurve10;
+        private int atkCurve12_15;
+        private int atkCurve14_20;
+        private int atkCurve17_30;
+        private int atkCurve20_99;
         private int defPromote;
-        private int defStart;
-        private int defCurve6;
-        private int defCurve11;
-        private int defCurve13;
-        private int defCurve15;
-        private int defCurve17;
-        private int defCurve20;
+        private int defCurve1;
+        private int defCurve5;
+        private int defCurve10;
+        private int defCurve12_15;
+        private int defCurve14_20;
+        private int defCurve17_30;
+        private int defCurve20_99;
         private int agiPromote;
-        private int agiStart;
-        private int agiCurve6;
-        private int agiCurve11;
-        private int agiCurve13;
-        private int agiCurve15;
-        private int agiCurve17;
-        private int agiCurve20;
+        private int agiCurve1;
+        private int agiCurve5;
+        private int agiCurve10;
+        private int agiCurve12_15;
+        private int agiCurve14_20;
+        private int agiCurve17_30;
+        private int agiCurve20_99;
 
         private int s1LearnedAt;
         private int s1LearnedLevel;
@@ -257,45 +257,45 @@ namespace SF3.X033_X031_Editor.Models.Stats
             character = start + 0x00;
             characterClass = start + 0x01;
             hpPromote = start + 0x02;
-            hpStart = start + 0x03;
-            hpCurve6 = start + 0x04;
-            hpCurve11 = start + 0x05;
-            hpCurve13 = start + 0x06;
-            hpCurve15 = start + 0x07;
-            hpCurve17 = start + 0x08;
-            hpCurve20 = start + 0x09;
+            hpCurve1 = start + 0x03;
+            hpCurve5 = start + 0x04;
+            hpCurve10 = start + 0x05;
+            hpCurve12_15 = start + 0x06;
+            hpCurve14_20 = start + 0x07;
+            hpCurve17_30 = start + 0x08;
+            hpCurve20_99 = start + 0x09;
             mpPromote = start + 0x0A;
-            mpStart = start + 0x0B;
-            mpCurve6 = start + 0x0C;
-            mpCurve11 = start + 0x0D;
-            mpCurve13 = start + 0x0E;
-            mpCurve15 = start + 0x0F;
-            mpCurve17 = start + 0x10;
-            mpCurve20 = start + 0x11;
+            mpCurve1 = start + 0x0B;
+            mpCurve5 = start + 0x0C;
+            mpCurve10 = start + 0x0D;
+            mpCurve12_15 = start + 0x0E;
+            mpCurve14_20 = start + 0x0F;
+            mpCurve17_30 = start + 0x10;
+            mpCurve20_99 = start + 0x11;
             atkPromote = start + 0x12;
-            atkStart = start + 0x13;
-            atkCurve6 = start + 0x14;
-            atkCurve11 = start + 0x15;
-            atkCurve13 = start + 0x16;
-            atkCurve15 = start + 0x17;
-            atkCurve17 = start + 0x18;
-            atkCurve20 = start + 0x19;
+            atkCurve1 = start + 0x13;
+            atkCurve5 = start + 0x14;
+            atkCurve10 = start + 0x15;
+            atkCurve12_15 = start + 0x16;
+            atkCurve14_20 = start + 0x17;
+            atkCurve17_30 = start + 0x18;
+            atkCurve20_99 = start + 0x19;
             defPromote = start + 0x1a;
-            defStart = start + 0x1b;
-            defCurve6 = start + 0x1c;
-            defCurve11 = start + 0x1d;
-            defCurve13 = start + 0x1e;
-            defCurve15 = start + 0x1f;
-            defCurve17 = start + 0x20;
-            defCurve20 = start + 0x21;
+            defCurve1 = start + 0x1b;
+            defCurve5 = start + 0x1c;
+            defCurve10 = start + 0x1d;
+            defCurve12_15 = start + 0x1e;
+            defCurve14_20 = start + 0x1f;
+            defCurve17_30 = start + 0x20;
+            defCurve20_99 = start + 0x21;
             agiPromote = start + 0x22;
-            agiStart = start + 0x23;
-            agiCurve6 = start + 0x24;
-            agiCurve11 = start + 0x25;
-            agiCurve13 = start + 0x26;
-            agiCurve15 = start + 0x27;
-            agiCurve17 = start + 0x28;
-            agiCurve20 = start + 0x29;
+            agiCurve1 = start + 0x23;
+            agiCurve5 = start + 0x24;
+            agiCurve10 = start + 0x25;
+            agiCurve12_15 = start + 0x26;
+            agiCurve14_20 = start + 0x27;
+            agiCurve17_30 = start + 0x28;
+            agiCurve20_99 = start + 0x29;
 
             s1LearnedAt = start + 0x2a;
             s1LearnedLevel = start + 0x2b; //actually the ID
@@ -421,48 +421,48 @@ namespace SF3.X033_X031_Editor.Models.Stats
             }
         }
 
-        static private string Group1PercentString(int curveBegin, int curveEnd)
+        private string Group1PercentString(int curveBegin, int curveEnd)
         {
             // From level 1 to 5 (+4 levels)
             return GroupPercentString(curveEnd - curveBegin, 4);
         }
 
-        static private string Group2PercentString(int curveBegin, int curveEnd)
+        private string Group2PercentString(int curveBegin, int curveEnd)
         {
             // From level 5 to 10 (+5 levels)
             return GroupPercentString(curveEnd - curveBegin, 5);
         }
 
-        static private string Group3PercentString(bool isPromoted, int curveBegin, int curveEnd)
+        private string Group3PercentString(int curveBegin, int curveEnd)
         {
-            return !isPromoted
+            return !IsPromoted
                 // From level 10 to 12 (+2 levels)
                 ? GroupPercentString(curveEnd - curveBegin, 2)
                 // From level 10 to 15 (+5 levels)
                 : GroupPercentString(curveEnd - curveBegin, 5);
         }
 
-        static private string Group4PercentString(bool isPromoted, int curveBegin, int curveEnd)
+        private string Group4PercentString(int curveBegin, int curveEnd)
         {
-            return !isPromoted
+            return !IsPromoted
                 // From level 12 to 14 (+2 levels)
                 ? GroupPercentString(curveEnd - curveBegin, 2)
                 // From level 15 to 20 (+5 levels)
                 : GroupPercentString(curveEnd - curveBegin, 5);
         }
 
-        static private string Group5PercentString(bool isPromoted, int curveBegin, int curveEnd)
+        private string Group5PercentString(int curveBegin, int curveEnd)
         {
-            return !isPromoted
+            return !IsPromoted
                 // From level 14 to 17 (+3 levels)
                 ? GroupPercentString(curveEnd - curveBegin, 3)
                 // From level 20 to 30 (+10 levels)
                 : GroupPercentString(curveEnd - curveBegin, 10);
         }
 
-        static private string Group6PercentString(bool isPromoted, int curveBegin, int curveEnd)
+        private string Group6PercentString(int curveBegin, int curveEnd)
         {
-            return !isPromoted
+            return !IsPromoted
                 // From level 17 to 30 (+13 levels)
                 ? GroupPercentString(curveEnd - curveBegin, 13)
                 // From level 30 up
@@ -490,54 +490,54 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => FileEditor.setByte(hpPromote, (byte)value);
         }
 
-        public int HPStart
+        public int HPCurve1
         {
-            get => FileEditor.getByte(hpStart);
-            set => FileEditor.setByte(hpStart, (byte)value);
+            get => FileEditor.getByte(hpCurve1);
+            set => FileEditor.setByte(hpCurve1, (byte)value);
         }
 
-        public int HPCurve6
+        public int HPCurve5
         {
-            get => FileEditor.getByte(hpCurve6);
-            set => FileEditor.setByte(hpCurve6, (byte)value);
+            get => FileEditor.getByte(hpCurve5);
+            set => FileEditor.setByte(hpCurve5, (byte)value);
         }
 
-        public int HPCurve11
+        public int HPCurve10
         {
-            get => FileEditor.getByte(hpCurve11);
-            set => FileEditor.setByte(hpCurve11, (byte)value);
+            get => FileEditor.getByte(hpCurve10);
+            set => FileEditor.setByte(hpCurve10, (byte)value);
         }
 
-        public int HPCurve13
+        public int HPCurve12_15
         {
-            get => FileEditor.getByte(hpCurve13);
-            set => FileEditor.setByte(hpCurve13, (byte)value);
+            get => FileEditor.getByte(hpCurve12_15);
+            set => FileEditor.setByte(hpCurve12_15, (byte)value);
         }
 
-        public int HPCurve15
+        public int HPCurve14_20
         {
-            get => FileEditor.getByte(hpCurve15);
-            set => FileEditor.setByte(hpCurve15, (byte)value);
+            get => FileEditor.getByte(hpCurve14_20);
+            set => FileEditor.setByte(hpCurve14_20, (byte)value);
         }
 
-        public int HPCurve17
+        public int HPCurve17_30
         {
-            get => FileEditor.getByte(hpCurve17);
-            set => FileEditor.setByte(hpCurve17, (byte)value);
+            get => FileEditor.getByte(hpCurve17_30);
+            set => FileEditor.setByte(hpCurve17_30, (byte)value);
         }
 
-        public int HPCurve20
+        public int HPCurve20_99
         {
-            get => FileEditor.getByte(hpCurve20);
-            set => FileEditor.setByte(hpCurve20, (byte)value);
+            get => FileEditor.getByte(hpCurve20_99);
+            set => FileEditor.setByte(hpCurve20_99, (byte)value);
         }
 
-        public string HPgroup1 => Group1PercentString(FileEditor.getByte(hpStart), FileEditor.getByte(hpCurve6));
-        public string HPgroup2 => Group2PercentString(FileEditor.getByte(hpCurve6), FileEditor.getByte(hpCurve11));
-        public string HPgroup3 => Group3PercentString(IsPromoted, FileEditor.getByte(hpCurve11), FileEditor.getByte(hpCurve13));
-        public string HPgroup4 => Group4PercentString(IsPromoted, FileEditor.getByte(hpCurve13), FileEditor.getByte(hpCurve15));
-        public string HPgroup5 => Group5PercentString(IsPromoted, FileEditor.getByte(hpCurve15), FileEditor.getByte(hpCurve17));
-        public string HPgroup6 => Group6PercentString(IsPromoted, FileEditor.getByte(hpCurve17), FileEditor.getByte(hpCurve20));
+        public string HPgroup1 => Group1PercentString(FileEditor.getByte(hpCurve1), FileEditor.getByte(hpCurve5));
+        public string HPgroup2 => Group2PercentString(FileEditor.getByte(hpCurve5), FileEditor.getByte(hpCurve10));
+        public string HPgroup3 => Group3PercentString(FileEditor.getByte(hpCurve10), FileEditor.getByte(hpCurve12_15));
+        public string HPgroup4 => Group4PercentString(FileEditor.getByte(hpCurve12_15), FileEditor.getByte(hpCurve14_20));
+        public string HPgroup5 => Group5PercentString(FileEditor.getByte(hpCurve14_20), FileEditor.getByte(hpCurve17_30));
+        public string HPgroup6 => Group6PercentString(FileEditor.getByte(hpCurve17_30), FileEditor.getByte(hpCurve20_99));
 
         public int MPPromote
         {
@@ -545,54 +545,54 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => FileEditor.setByte(mpPromote, (byte)value);
         }
 
-        public int MPStart
+        public int MPCurve1
         {
-            get => FileEditor.getByte(mpStart);
-            set => FileEditor.setByte(mpStart, (byte)value);
+            get => FileEditor.getByte(mpCurve1);
+            set => FileEditor.setByte(mpCurve1, (byte)value);
         }
 
-        public int MPCurve6
+        public int MPCurve5
         {
-            get => FileEditor.getByte(mpCurve6);
-            set => FileEditor.setByte(mpCurve6, (byte)value);
+            get => FileEditor.getByte(mpCurve5);
+            set => FileEditor.setByte(mpCurve5, (byte)value);
         }
 
-        public int MPCurve11
+        public int MPCurve10
         {
-            get => FileEditor.getByte(mpCurve11);
-            set => FileEditor.setByte(mpCurve11, (byte)value);
+            get => FileEditor.getByte(mpCurve10);
+            set => FileEditor.setByte(mpCurve10, (byte)value);
         }
 
-        public int MPCurve13
+        public int MPCurve12_15
         {
-            get => FileEditor.getByte(mpCurve13);
-            set => FileEditor.setByte(mpCurve13, (byte)value);
+            get => FileEditor.getByte(mpCurve12_15);
+            set => FileEditor.setByte(mpCurve12_15, (byte)value);
         }
 
-        public int MPCurve15
+        public int MPCurve14_20
         {
-            get => FileEditor.getByte(mpCurve15);
-            set => FileEditor.setByte(mpCurve15, (byte)value);
+            get => FileEditor.getByte(mpCurve14_20);
+            set => FileEditor.setByte(mpCurve14_20, (byte)value);
         }
 
-        public int MPCurve17
+        public int MPCurve17_30
         {
-            get => FileEditor.getByte(mpCurve17);
-            set => FileEditor.setByte(mpCurve17, (byte)value);
+            get => FileEditor.getByte(mpCurve17_30);
+            set => FileEditor.setByte(mpCurve17_30, (byte)value);
         }
 
-        public int MPCurve20
+        public int MPCurve20_99
         {
-            get => FileEditor.getByte(mpCurve20);
-            set => FileEditor.setByte(mpCurve20, (byte)value);
+            get => FileEditor.getByte(mpCurve20_99);
+            set => FileEditor.setByte(mpCurve20_99, (byte)value);
         }
 
-        public string MPgroup1 => Group1PercentString(FileEditor.getByte(mpStart), FileEditor.getByte(mpCurve6));
-        public string MPgroup2 => Group2PercentString(FileEditor.getByte(mpCurve6), FileEditor.getByte(mpCurve11));
-        public string MPgroup3 => Group3PercentString(IsPromoted, FileEditor.getByte(mpCurve11), FileEditor.getByte(mpCurve13));
-        public string MPgroup4 => Group4PercentString(IsPromoted, FileEditor.getByte(mpCurve13), FileEditor.getByte(mpCurve15));
-        public string MPgroup5 => Group5PercentString(IsPromoted, FileEditor.getByte(mpCurve15), FileEditor.getByte(mpCurve17));
-        public string MPgroup6 => Group6PercentString(IsPromoted, FileEditor.getByte(mpCurve17), FileEditor.getByte(mpCurve20));
+        public string MPgroup1 => Group1PercentString(FileEditor.getByte(mpCurve1), FileEditor.getByte(mpCurve5));
+        public string MPgroup2 => Group2PercentString(FileEditor.getByte(mpCurve5), FileEditor.getByte(mpCurve10));
+        public string MPgroup3 => Group3PercentString(FileEditor.getByte(mpCurve10), FileEditor.getByte(mpCurve12_15));
+        public string MPgroup4 => Group4PercentString(FileEditor.getByte(mpCurve12_15), FileEditor.getByte(mpCurve14_20));
+        public string MPgroup5 => Group5PercentString(FileEditor.getByte(mpCurve14_20), FileEditor.getByte(mpCurve17_30));
+        public string MPgroup6 => Group6PercentString(FileEditor.getByte(mpCurve17_30), FileEditor.getByte(mpCurve20_99));
 
         public int AtkPromote
         {
@@ -600,54 +600,54 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => FileEditor.setByte(atkPromote, (byte)value);
         }
 
-        public int AtkStart
+        public int AtkCurve1
         {
-            get => FileEditor.getByte(atkStart);
-            set => FileEditor.setByte(atkStart, (byte)value);
+            get => FileEditor.getByte(atkCurve1);
+            set => FileEditor.setByte(atkCurve1, (byte)value);
         }
 
-        public int AtkCurve6
+        public int AtkCurve5
         {
-            get => FileEditor.getByte(atkCurve6);
-            set => FileEditor.setByte(atkCurve6, (byte)value);
+            get => FileEditor.getByte(atkCurve5);
+            set => FileEditor.setByte(atkCurve5, (byte)value);
         }
 
-        public int AtkCurve11
+        public int AtkCurve10
         {
-            get => FileEditor.getByte(atkCurve11);
-            set => FileEditor.setByte(atkCurve11, (byte)value);
+            get => FileEditor.getByte(atkCurve10);
+            set => FileEditor.setByte(atkCurve10, (byte)value);
         }
 
-        public int AtkCurve13
+        public int AtkCurve12_15
         {
-            get => FileEditor.getByte(atkCurve13);
-            set => FileEditor.setByte(atkCurve13, (byte)value);
+            get => FileEditor.getByte(atkCurve12_15);
+            set => FileEditor.setByte(atkCurve12_15, (byte)value);
         }
 
-        public int AtkCurve15
+        public int AtkCurve14_20
         {
-            get => FileEditor.getByte(atkCurve15);
-            set => FileEditor.setByte(atkCurve15, (byte)value);
+            get => FileEditor.getByte(atkCurve14_20);
+            set => FileEditor.setByte(atkCurve14_20, (byte)value);
         }
 
-        public int AtkCurve17
+        public int AtkCurve17_30
         {
-            get => FileEditor.getByte(atkCurve17);
-            set => FileEditor.setByte(atkCurve17, (byte)value);
+            get => FileEditor.getByte(atkCurve17_30);
+            set => FileEditor.setByte(atkCurve17_30, (byte)value);
         }
 
-        public int AtkCurve20
+        public int AtkCurve20_99
         {
-            get => FileEditor.getByte(atkCurve20);
-            set => FileEditor.setByte(atkCurve20, (byte)value);
+            get => FileEditor.getByte(atkCurve20_99);
+            set => FileEditor.setByte(atkCurve20_99, (byte)value);
         }
 
-        public string Atkgroup1 => Group1PercentString(FileEditor.getByte(atkStart), FileEditor.getByte(atkCurve6));
-        public string Atkgroup2 => Group2PercentString(FileEditor.getByte(atkCurve6), FileEditor.getByte(atkCurve11));
-        public string Atkgroup3 => Group3PercentString(IsPromoted, FileEditor.getByte(atkCurve11), FileEditor.getByte(atkCurve13));
-        public string Atkgroup4 => Group4PercentString(IsPromoted, FileEditor.getByte(atkCurve13), FileEditor.getByte(atkCurve15));
-        public string Atkgroup5 => Group5PercentString(IsPromoted, FileEditor.getByte(atkCurve15), FileEditor.getByte(atkCurve17));
-        public string Atkgroup6 => Group6PercentString(IsPromoted, FileEditor.getByte(atkCurve17), FileEditor.getByte(atkCurve20));
+        public string Atkgroup1 => Group1PercentString(FileEditor.getByte(atkCurve1), FileEditor.getByte(atkCurve5));
+        public string Atkgroup2 => Group2PercentString(FileEditor.getByte(atkCurve5), FileEditor.getByte(atkCurve10));
+        public string Atkgroup3 => Group3PercentString(FileEditor.getByte(atkCurve10), FileEditor.getByte(atkCurve12_15));
+        public string Atkgroup4 => Group4PercentString(FileEditor.getByte(atkCurve12_15), FileEditor.getByte(atkCurve14_20));
+        public string Atkgroup5 => Group5PercentString(FileEditor.getByte(atkCurve14_20), FileEditor.getByte(atkCurve17_30));
+        public string Atkgroup6 => Group6PercentString(FileEditor.getByte(atkCurve17_30), FileEditor.getByte(atkCurve20_99));
 
         public int DefPromote
         {
@@ -655,54 +655,54 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => FileEditor.setByte(defPromote, (byte)value);
         }
 
-        public int DefStart
+        public int DefCurve1
         {
-            get => FileEditor.getByte(defStart);
-            set => FileEditor.setByte(defStart, (byte)value);
+            get => FileEditor.getByte(defCurve1);
+            set => FileEditor.setByte(defCurve1, (byte)value);
         }
 
-        public int DefCurve6
+        public int DefCurve5
         {
-            get => FileEditor.getByte(defCurve6);
-            set => FileEditor.setByte(defCurve6, (byte)value);
+            get => FileEditor.getByte(defCurve5);
+            set => FileEditor.setByte(defCurve5, (byte)value);
         }
 
-        public int DefCurve11
+        public int DefCurve10
         {
-            get => FileEditor.getByte(defCurve11);
-            set => FileEditor.setByte(defCurve11, (byte)value);
+            get => FileEditor.getByte(defCurve10);
+            set => FileEditor.setByte(defCurve10, (byte)value);
         }
 
-        public int DefCurve13
+        public int DefCurve12_15
         {
-            get => FileEditor.getByte(defCurve13);
-            set => FileEditor.setByte(defCurve13, (byte)value);
+            get => FileEditor.getByte(defCurve12_15);
+            set => FileEditor.setByte(defCurve12_15, (byte)value);
         }
 
-        public int DefCurve15
+        public int DefCurve14_20
         {
-            get => FileEditor.getByte(defCurve15);
-            set => FileEditor.setByte(defCurve15, (byte)value);
+            get => FileEditor.getByte(defCurve14_20);
+            set => FileEditor.setByte(defCurve14_20, (byte)value);
         }
 
-        public int DefCurve17
+        public int DefCurve17_30
         {
-            get => FileEditor.getByte(defCurve17);
-            set => FileEditor.setByte(defCurve17, (byte)value);
+            get => FileEditor.getByte(defCurve17_30);
+            set => FileEditor.setByte(defCurve17_30, (byte)value);
         }
 
-        public int DefCurve20
+        public int DefCurve20_99
         {
-            get => FileEditor.getByte(defCurve20);
-            set => FileEditor.setByte(defCurve20, (byte)value);
+            get => FileEditor.getByte(defCurve20_99);
+            set => FileEditor.setByte(defCurve20_99, (byte)value);
         }
 
-        public string Defgroup1 => Group1PercentString(FileEditor.getByte(defStart), FileEditor.getByte(defCurve6));
-        public string Defgroup2 => Group2PercentString(FileEditor.getByte(defCurve6), FileEditor.getByte(defCurve11));
-        public string Defgroup3 => Group3PercentString(IsPromoted, FileEditor.getByte(defCurve11), FileEditor.getByte(defCurve13));
-        public string Defgroup4 => Group4PercentString(IsPromoted, FileEditor.getByte(defCurve13), FileEditor.getByte(defCurve15));
-        public string Defgroup5 => Group5PercentString(IsPromoted, FileEditor.getByte(defCurve15), FileEditor.getByte(defCurve17));
-        public string Defgroup6 => Group6PercentString(IsPromoted, FileEditor.getByte(defCurve17), FileEditor.getByte(defCurve20));
+        public string Defgroup1 => Group1PercentString(FileEditor.getByte(defCurve1), FileEditor.getByte(defCurve5));
+        public string Defgroup2 => Group2PercentString(FileEditor.getByte(defCurve5), FileEditor.getByte(defCurve10));
+        public string Defgroup3 => Group3PercentString(FileEditor.getByte(defCurve10), FileEditor.getByte(defCurve12_15));
+        public string Defgroup4 => Group4PercentString(FileEditor.getByte(defCurve12_15), FileEditor.getByte(defCurve14_20));
+        public string Defgroup5 => Group5PercentString(FileEditor.getByte(defCurve14_20), FileEditor.getByte(defCurve17_30));
+        public string Defgroup6 => Group6PercentString(FileEditor.getByte(defCurve17_30), FileEditor.getByte(defCurve20_99));
 
         public int AgiPromote
         {
@@ -710,54 +710,54 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => FileEditor.setByte(agiPromote, (byte)value);
         }
 
-        public int AgiStart
+        public int AgiCurve1
         {
-            get => FileEditor.getByte(agiStart);
-            set => FileEditor.setByte(agiStart, (byte)value);
+            get => FileEditor.getByte(agiCurve1);
+            set => FileEditor.setByte(agiCurve1, (byte)value);
         }
 
-        public int AgiCurve6
+        public int AgiCurve5
         {
-            get => FileEditor.getByte(agiCurve6);
-            set => FileEditor.setByte(agiCurve6, (byte)value);
+            get => FileEditor.getByte(agiCurve5);
+            set => FileEditor.setByte(agiCurve5, (byte)value);
         }
 
-        public int AgiCurve11
+        public int AgiCurve10
         {
-            get => FileEditor.getByte(agiCurve11);
-            set => FileEditor.setByte(agiCurve11, (byte)value);
+            get => FileEditor.getByte(agiCurve10);
+            set => FileEditor.setByte(agiCurve10, (byte)value);
         }
 
-        public int AgiCurve13
+        public int AgiCurve12_15
         {
-            get => FileEditor.getByte(agiCurve13);
-            set => FileEditor.setByte(agiCurve13, (byte)value);
+            get => FileEditor.getByte(agiCurve12_15);
+            set => FileEditor.setByte(agiCurve12_15, (byte)value);
         }
 
-        public int AgiCurve15
+        public int AgiCurve14_20
         {
-            get => FileEditor.getByte(agiCurve15);
-            set => FileEditor.setByte(agiCurve15, (byte)value);
+            get => FileEditor.getByte(agiCurve14_20);
+            set => FileEditor.setByte(agiCurve14_20, (byte)value);
         }
 
-        public int AgiCurve17
+        public int AgiCurve17_30
         {
-            get => FileEditor.getByte(agiCurve17);
-            set => FileEditor.setByte(agiCurve17, (byte)value);
+            get => FileEditor.getByte(agiCurve17_30);
+            set => FileEditor.setByte(agiCurve17_30, (byte)value);
         }
 
-        public int AgiCurve20
+        public int AgiCurve20_99
         {
-            get => FileEditor.getByte(agiCurve20);
-            set => FileEditor.setByte(agiCurve20, (byte)value);
+            get => FileEditor.getByte(agiCurve20_99);
+            set => FileEditor.setByte(agiCurve20_99, (byte)value);
         }
 
-        public string Agigroup1 => Group1PercentString(FileEditor.getByte(agiStart), FileEditor.getByte(agiCurve6));
-        public string Agigroup2 => Group2PercentString(FileEditor.getByte(agiCurve6), FileEditor.getByte(agiCurve11));
-        public string Agigroup3 => Group3PercentString(IsPromoted, FileEditor.getByte(agiCurve11), FileEditor.getByte(agiCurve13));
-        public string Agigroup4 => Group4PercentString(IsPromoted, FileEditor.getByte(agiCurve13), FileEditor.getByte(agiCurve15));
-        public string Agigroup5 => Group5PercentString(IsPromoted, FileEditor.getByte(agiCurve15), FileEditor.getByte(agiCurve17));
-        public string Agigroup6 => Group6PercentString(IsPromoted, FileEditor.getByte(agiCurve17), FileEditor.getByte(agiCurve20));
+        public string Agigroup1 => Group1PercentString(FileEditor.getByte(agiCurve1), FileEditor.getByte(agiCurve5));
+        public string Agigroup2 => Group2PercentString(FileEditor.getByte(agiCurve5), FileEditor.getByte(agiCurve10));
+        public string Agigroup3 => Group3PercentString(FileEditor.getByte(agiCurve10), FileEditor.getByte(agiCurve12_15));
+        public string Agigroup4 => Group4PercentString(FileEditor.getByte(agiCurve12_15), FileEditor.getByte(agiCurve14_20));
+        public string Agigroup5 => Group5PercentString(FileEditor.getByte(agiCurve14_20), FileEditor.getByte(agiCurve17_30));
+        public string Agigroup6 => Group6PercentString(FileEditor.getByte(agiCurve17_30), FileEditor.getByte(agiCurve20_99));
 
         public int S1LearnedAt
         {

@@ -597,31 +597,31 @@ namespace SF3.X033_X031_Editor.Forms
                     {
                         case 0:
                             level = 1;
-                            value = stats.HPStart;
+                            value = stats.HPCurve1;
                             break;
                         case 1:
                             level = 5;
-                            value = stats.HPCurve6;
+                            value = stats.HPCurve5;
                             break;
                         case 2:
                             level = 10;
-                            value = stats.HPCurve11;
+                            value = stats.HPCurve10;
                             break;
                         case 3:
                             level = isPromoted ? 15 : 12;
-                            value = stats.HPCurve13;
+                            value = stats.HPCurve12_15;
                             break;
                         case 4:
                             level = isPromoted ? 20 : 14;
-                            value = stats.HPCurve15;
+                            value = stats.HPCurve14_20;
                             break;
                         case 5:
                             level = isPromoted ? 30 : 17;
-                            value = stats.HPCurve17;
+                            value = stats.HPCurve17_30;
                             break;
                         case 6:
                             level = isPromoted ? 99 : 20;
-                            value = stats.HPCurve20;
+                            value = stats.HPCurve20_99;
                             break;
                         default:
                             throw new IndexOutOfRangeException();
