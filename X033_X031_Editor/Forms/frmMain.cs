@@ -42,7 +42,7 @@ namespace SF3.X033_X031_Editor.Forms
         public frmMain()
         {
             InitializeComponent();
-            frmMonsterEditor_Resize(this, new EventArgs());
+            frmMain_Resize(this, new EventArgs());
 
             // Set up curve graph controls
             cbCurveGraphCharacter.DataSource = _statsList.Models;
@@ -308,7 +308,7 @@ namespace SF3.X033_X031_Editor.Forms
             }
         }
 
-        private void frmMonsterEditor_Resize(object sender, EventArgs e)
+        private void frmMain_Resize(object sender, EventArgs e)
         {
             Size newsize = ClientSize;
             newsize.Height -= 24;
@@ -350,7 +350,7 @@ namespace SF3.X033_X031_Editor.Forms
             }
         }
 
-        private void frmMonsterEditor_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             /*try {
                 byte[] data = olvMonsters.SaveState();
@@ -506,11 +506,7 @@ namespace SF3.X033_X031_Editor.Forms
 
         private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            frmMonsterEditor_Resize(this, new EventArgs());
-        }
-
-        private void frmMain_Load(object sender, EventArgs e)
-        {
+            frmMain_Resize(this, new EventArgs());
         }
 
         public static class Globals
@@ -560,18 +556,6 @@ namespace SF3.X033_X031_Editor.Forms
         {
             olvCurveCalc.ClearObjects();
             olvCurveCalc.AddObjects(_statsList.Models);
-        }
-
-        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
         }
 
         private void CurveGraphCharacterComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshCurveGraph();
