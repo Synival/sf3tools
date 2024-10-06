@@ -13,17 +13,19 @@ namespace SF3.X013_Editor.Models.Soulfail
         private int index;
         private string name;
 
-        public Soulfail(int id, string text)
+        public Soulfail(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00005e5f; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x0000650f; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00006077; //scn3
             }
@@ -46,6 +48,7 @@ namespace SF3.X013_Editor.Models.Soulfail
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int SoulfailID => index;
         public string SoulfailName => name;
 

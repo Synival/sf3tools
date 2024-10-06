@@ -40,9 +40,11 @@ namespace SF3.X1_Editor.Models.Npcs
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Npc(int id, string text)
+        public Npc(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
@@ -50,28 +52,28 @@ namespace SF3.X1_Editor.Models.Npcs
 
                 offset = offset - sub;
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }/*
-            else if (Globals.scenario == ScenarioType.BTL99)
+            else if (Scenario == ScenarioType.BTL99)
             {
                 offset = 0x00000024; //btl99 initial pointer
                 sub = 0x06060000;
@@ -107,6 +109,7 @@ namespace SF3.X1_Editor.Models.Npcs
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int NpcID => index;
         public string NpcName => name;
 

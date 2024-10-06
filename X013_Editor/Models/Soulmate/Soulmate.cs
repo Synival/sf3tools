@@ -13,17 +13,19 @@ namespace SF3.X013_Editor.Models.Soulmate
         private int index;
         private string name;
 
-        public Soulmate(int id, string text)
+        public Soulmate(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00007530; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00007484; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x0000736c; //scn3
             }
@@ -46,6 +48,7 @@ namespace SF3.X013_Editor.Models.Soulmate
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int SoulmateID => index;
         public string SoulmateName => name;
 

@@ -33,6 +33,8 @@ namespace SF3.X013_Editor.Forms
         //Used to append to state names to stop program loading states from older versions
         private string Version = "16";
 
+        private ScenarioType _scenario = ScenarioType.Scenario1;
+
         private ItemList _itemList = new ItemList();
         private SpellList _spellList = new SpellList();
         private PresetList _presetList = new PresetList();
@@ -260,81 +262,81 @@ namespace SF3.X013_Editor.Forms
                 return false;
             }*/
 
-            if (!_itemList.Load())
+            if (!_itemList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
 
-            if (!_spellList.Load())
+            if (!_spellList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/characters.xml.");
                 return false;
             }
 
-            if (!_presetList.Load())
+            if (!_presetList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/ExpList.xml.");
                 return false;
             }
 
-            if (!_statsList.Load())
+            if (!_statsList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/StatList.xml.");
                 return false;
             }
 
-            if (!_soulmateList.Load())
+            if (!_soulmateList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/SoulmateList.xml.");
                 return false;
             }
 
-            if (!_soulfailList.Load())
+            if (!_soulfailList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/Soulfail.xml.");
                 return false;
             }
 
-            if (!_magicBonusList.Load())
+            if (!_magicBonusList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/MagicBonus.xml.");
                 return false;
             }
 
-            if (!_critModList.Load())
+            if (!_critModList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/CritModList.xml.");
                 return false;
             }
 
-            if (!_critrateList.Load())
+            if (!_critrateList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/CritrateList.xml.");
                 return false;
             }
 
-            if (!_specialChanceList.Load())
+            if (!_specialChanceList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/SpecialChanceList.xml.");
                 return false;
             }
-            if (!_expLimitList.Load())
+            if (!_expLimitList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/ExpLimitList.xml.");
                 return false;
             }
-            if (!_healExpList.Load())
+            if (!_healExpList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/HealExpList.xml.");
                 return false;
             }
-            if (!_weaponSpellRankList.Load())
+            if (!_weaponSpellRankList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/WeaponSpellRankListList.xml.");
                 return false;
             }
-            if (!_statusEffectList.Load())
+            if (!_statusEffectList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/StatusGroupList.xml.");
                 return false;
@@ -659,28 +661,27 @@ namespace SF3.X013_Editor.Forms
 
         public static class Globals
         {
-            public static ScenarioType scenario = ScenarioType.Scenario1;
             //public static int customOffset = 0x00000000;
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.Scenario1;
+            _scenario = ScenarioType.Scenario1;
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.Scenario2;
+            _scenario = ScenarioType.Scenario2;
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.Scenario3;
+            _scenario = ScenarioType.Scenario3;
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.PremiumDisk;
+            _scenario = ScenarioType.PremiumDisk;
         }
     }
 }

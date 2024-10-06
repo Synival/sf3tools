@@ -81,21 +81,23 @@ namespace SF3.X019_Editor.Models.Items
         private int index;
         private string name;
 
-        public Item(int id, string text)
+        public Item(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x0000000C; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x0000000C; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000eb0; //scn3
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000eb0; //pd
             }
@@ -186,6 +188,7 @@ namespace SF3.X019_Editor.Models.Items
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int ID => index;
         public string Name => name;
 

@@ -19,17 +19,19 @@ namespace SF3.X013_Editor.Models.SpecialChance
         private int index;
         private string name;
 
-        public SpecialChance(int id, string text)
+        public SpecialChance(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x000027ae; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x000029c6; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x000027a2; //scn3
             }
@@ -46,7 +48,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
 
             //int start = 0x354c + (id * 24);
 
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (Scenario == ScenarioType.Scenario1)
             {
                 int start = offset + (id * 0x4a);
                 twoSpecials2 = start + 0x01; //1 bytes
@@ -58,7 +60,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
 
                 address = offset + (id * 0x4a);
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 int start = offset + (id * 0x4a);
                 twoSpecials2 = start + 0x01; //1 bytes
@@ -70,7 +72,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
 
                 address = offset + (id * 0x4a);
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 int start = offset + (id * 0x3a);
                 twoSpecials2 = start + 0x01; //1 bytes
@@ -98,6 +100,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int SpecialChanceID => index;
         public string SpecialChanceName => name;
 

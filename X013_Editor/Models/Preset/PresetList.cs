@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
 using SF3.Models;
+using SF3.Types;
 
 namespace SF3.X013_Editor.Models.Presets
 {
@@ -17,7 +18,7 @@ namespace SF3.X013_Editor.Models.Presets
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
             r = "Resources/ExpList.xml";
 
@@ -41,7 +42,7 @@ namespace SF3.X013_Editor.Models.Presets
                         presetssorted.CopyTo(old, 0);
                         presetssorted = new Preset[old.Length + 1];
                         old.CopyTo(presetssorted, 0);
-                        presetssorted[old.Length] = new Preset(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        presetssorted[old.Length] = new Preset(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         presets[presetssorted[old.Length].PresetID] = presetssorted[old.Length];
                     }
                 }

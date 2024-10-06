@@ -2,7 +2,6 @@
 using SF3.Types;
 using SF3.Values;
 using System;
-using static SF3.X033_X031_Editor.Forms.frmMain;
 
 namespace SF3.X033_X031_Editor.Models.InitialInfos
 {
@@ -37,12 +36,13 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
         private int index;
         private string name;
 
-        public InitialInfo(int id, string text)
+        public InitialInfo(ScenarioType scenario, int id, string text)
         {
+            Scenario = scenario;
             checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = FileEditor.getByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
 
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (Scenario == ScenarioType.Scenario1)
             {
                 if (checkType == 0x07)
                 {
@@ -53,7 +53,7 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
                     offset = 0x00001d50; //x031
                 }
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 if (checkType == 0x07) //x033
                 {
@@ -78,7 +78,7 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
                     }
                 }
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 if (checkType == 0x07) //x033
                 {
@@ -89,7 +89,7 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
                     offset = 0x000054aa;
                 }
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 //Console.WriteLine(checkType);
                 if (checkType == 0x07) //x033
@@ -138,6 +138,7 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int PresetID => index;
         public string PresetName => name;
 

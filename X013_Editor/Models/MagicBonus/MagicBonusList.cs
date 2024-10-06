@@ -18,21 +18,21 @@ namespace SF3.X013_Editor.Models.MagicBonus
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (scenario == ScenarioType.Scenario1)
             {
                 r = "RSc1/magicBonusS1.xml";
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (scenario == ScenarioType.Scenario2)
             {
                 r = "RSc2/magicBonusS2.xml";
             }
-            if (Globals.scenario == ScenarioType.Scenario3)
+            if (scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/magicBonus.xml";
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (scenario == ScenarioType.PremiumDisk)
             {
                 r = "RPD/magicBonusPD.xml";
             }
@@ -58,7 +58,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new MagicBonus[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new MagicBonus(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new MagicBonus(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].MagicID] = itemssorted[old.Length];
                     }
                 }

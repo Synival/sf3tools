@@ -18,25 +18,25 @@ namespace SF3.X019_Editor.Models.Items
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (scenario == ScenarioType.Scenario1)
             {
                 r = "RSc1/X019List.xml";
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (scenario == ScenarioType.Scenario2)
             {
                 r = "RSc2/X019List.xml";
             }
-            if (Globals.scenario == ScenarioType.Scenario3)
+            if (scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/X019List.xml";
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (scenario == ScenarioType.PremiumDisk)
             {
                 r = "RPD/X019List.xml";
             }
-            else if (Globals.scenario == ScenarioType.BTL99)
+            else if (scenario == ScenarioType.BTL99)
             {
                 r = "RPDX44/X044List.xml";
             }
@@ -62,7 +62,7 @@ namespace SF3.X019_Editor.Models.Items
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Item[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Item(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Item(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].ID] = itemssorted[old.Length];
                     }
                 }

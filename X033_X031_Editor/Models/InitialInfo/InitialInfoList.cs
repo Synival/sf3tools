@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
-using static SF3.X033_X031_Editor.Forms.frmMain;
 using SF3.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,21 +20,21 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
         /// Initialises list
         /// </summary>
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (scenario == ScenarioType.Scenario1)
             {
                 r = "RSc1/classEquipS1.xml";
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (scenario == ScenarioType.Scenario2)
             {
                 r = "RSc2/classEquipS2.xml";
             }
-            if (Globals.scenario == ScenarioType.Scenario3)
+            if (scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/classEquip.xml";
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (scenario == ScenarioType.PremiumDisk)
             {
                 r = "RPD/classEquipPD.xml";
             }
@@ -60,7 +59,7 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
                         modelsSorted.CopyTo(old, 0);
                         modelsSorted = new InitialInfo[old.Length + 1];
                         old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new InitialInfo(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        modelsSorted[old.Length] = new InitialInfo(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         models[modelsSorted[old.Length].PresetID] = modelsSorted[old.Length];
                     }
                 }

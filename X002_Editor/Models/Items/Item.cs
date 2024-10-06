@@ -37,15 +37,17 @@ namespace SF3.X002_Editor.Models.Items
         private int index;
         private string name;
 
-        public Item(int id, string text)
+        public Item(ScenarioType scenario, int id, string text)
         {
+            Scenario = scenario;
+
             checkVersion2 = FileEditor.getByte(0x0000000B);
 
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00002b28; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00002e9c; //scn2
                 if (checkVersion2 == 0x2C)
@@ -53,7 +55,7 @@ namespace SF3.X002_Editor.Models.Items
                     offset = offset - 0x44;
                 }
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x0000354c; //scn3
             }
@@ -98,6 +100,7 @@ namespace SF3.X002_Editor.Models.Items
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int ID => index;
         public string Name => name;
 

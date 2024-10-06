@@ -18,21 +18,21 @@ namespace SF3.X033_X031_Editor.Models.Stats
         /// Initialises list
         /// </summary>
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (scenario == ScenarioType.Scenario1)
             {
                 r = "RSc1/classListS1.xml";
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (scenario == ScenarioType.Scenario2)
             {
                 r = "RSc2/classListS2.xml";
             }
-            if (Globals.scenario == ScenarioType.Scenario3)
+            if (scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/classList.xml";
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (scenario == ScenarioType.PremiumDisk)
             {
                 r = "RPD/classListPD.xml";
             }
@@ -58,7 +58,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                         statsSorted.CopyTo(old, 0);
                         statsSorted = new Stats[old.Length + 1];
                         old.CopyTo(statsSorted, 0);
-                        statsSorted[old.Length] = new Stats(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        statsSorted[old.Length] = new Stats(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         stats[statsSorted[old.Length].ID] = statsSorted[old.Length];
                     }
                 }

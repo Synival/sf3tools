@@ -35,9 +35,11 @@ namespace SF3.X1_Editor.Models.Treasures
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Treasure(int id, string text)
+        public Treasure(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x0000000C; //scn1 initial pointer
                 sub = 0x0605f000;
@@ -45,28 +47,28 @@ namespace SF3.X1_Editor.Models.Treasures
 
                 offset = offset - sub;
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x0000000C; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x0000000C; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x0000000C; //pd initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Globals.scenario == ScenarioType.BTL99)
+            else if (Scenario == ScenarioType.BTL99)
             {
                 offset = 0x0000000C; //btl99 initial pointer
                 sub = 0x06060000;
@@ -97,6 +99,7 @@ namespace SF3.X1_Editor.Models.Treasures
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int TreasureID => index;
         public string TreasureName => name;
 

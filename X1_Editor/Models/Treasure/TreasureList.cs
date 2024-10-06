@@ -4,6 +4,7 @@ using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
 using System.Runtime.InteropServices.ComTypes;
 using SF3.Models;
+using SF3.Types;
 
 namespace SF3.X1_Editor.Models.Treasures
 {
@@ -18,7 +19,7 @@ namespace SF3.X1_Editor.Models.Treasures
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
             r = "Resources/X1Treasure.xml";
 
@@ -54,7 +55,7 @@ namespace SF3.X1_Editor.Models.Treasures
                                 itemssorted.CopyTo(old, 0);
                                 itemssorted = new Treasure[old.Length + 1];
                                 old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Treasure(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                itemssorted[old.Length] = new Treasure(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 items[itemssorted[old.Length].TreasureID] = itemssorted[old.Length];
                                 if (itemssorted[itemssorted.Length - 1].Searched == 0xffff)
                                 {
@@ -79,7 +80,7 @@ namespace SF3.X1_Editor.Models.Treasures
                                 itemssorted.CopyTo(old, 0);
                                 itemssorted = new Treasure[old.Length + 1];
                                 old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Treasure(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                itemssorted[old.Length] = new Treasure(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 items[itemssorted[old.Length].TreasureID] = itemssorted[old.Length];
                                 if (itemssorted[itemssorted.Length - 1].Searched == 0xffff)
                                 {

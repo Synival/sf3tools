@@ -18,21 +18,21 @@ namespace SF3.X019_Editor.Models.Spells
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (scenario == ScenarioType.Scenario1)
             {
                 r = "RSc1/spellListS1.xml";
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (scenario == ScenarioType.Scenario2)
             {
                 r = "RSc2/spellListS2.xml";
             }
-            if (Globals.scenario == ScenarioType.Scenario3)
+            if (scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/spellList.xml";
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (scenario == ScenarioType.PremiumDisk)
             {
                 r = "RPD/spellListPD.xml";
             }
@@ -57,7 +57,7 @@ namespace SF3.X019_Editor.Models.Spells
                         spellssorted.CopyTo(old, 0);
                         spellssorted = new Spell[old.Length + 1];
                         old.CopyTo(spellssorted, 0);
-                        spellssorted[old.Length] = new Spell(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        spellssorted[old.Length] = new Spell(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         spells[spellssorted[old.Length].SpellID] = spellssorted[old.Length];
                     }
                 }

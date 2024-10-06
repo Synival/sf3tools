@@ -17,17 +17,19 @@ namespace SF3.X013_Editor.Models.Presets
         private int index;
         private string name;
 
-        public Preset(int id, string text)
+        public Preset(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x0000747c; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00007388; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00007270; //scn3
             }
@@ -54,6 +56,7 @@ namespace SF3.X013_Editor.Models.Presets
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int PresetID => index;
         public string PresetName => name;
 

@@ -5,6 +5,7 @@ using static SF3.X002_Editor.Forms.frmMain;
 using System.Runtime.InteropServices.ComTypes;
 using BrightIdeasSoftware;
 using SF3.Models;
+using SF3.Types;
 
 namespace SF3.X002_Editor.Models.Warps
 {
@@ -19,7 +20,7 @@ namespace SF3.X002_Editor.Models.Warps
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
             r = "Resources/X1Warp.xml";
 
@@ -57,7 +58,7 @@ namespace SF3.X002_Editor.Models.Warps
                             old.CopyTo(itemssorted, 0);
                             //itemssorted[old.Length] = new Warp(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
 
-                            itemssorted[old.Length] = new Warp(myCount, myName);
+                            itemssorted[old.Length] = new Warp(scenario, myCount, myName);
 
                             myCount++;
                             myName = "WarpIndex ";

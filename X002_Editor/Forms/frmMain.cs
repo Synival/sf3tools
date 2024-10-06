@@ -28,6 +28,8 @@ namespace SF3.X002_Editor.Forms
         //Used to append to state names to stop program loading states from older versions
         private string Version = "19";
 
+        private ScenarioType _scenario = ScenarioType.Scenario1;
+
         private ItemList _itemList = new ItemList();
         private SpellList _spellList = new SpellList();
         private PresetList _presetList = new PresetList();
@@ -226,51 +228,51 @@ namespace SF3.X002_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!_itemList.Load())
+            if (!_itemList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
 
-            if (!_spellList.Load())
+            if (!_spellList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/spellList.xml.");
                 return false;
             }
 
-            if (!_presetList.Load())
+            if (!_presetList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
                 return false;
             }
 
-            if (!_loadList.Load())
+            if (!_loadList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/loadList.xml.");
                 return false;
             }
 
-            if (!_statList.Load())
+            if (!_statList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/statList.xml.");
                 return false;
             }
-            if (!_weaponRankList.Load())
+            if (!_weaponRankList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/WeaponRankList.xml.");
                 return false;
             }
-            if (!_attackResistList.Load())
+            if (!_attackResistList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/AttackResistList.xml.");
                 return false;
             }
-            if (Globals.scenario == ScenarioType.Scenario1 && !_warpList.Load())
+            if (_scenario == ScenarioType.Scenario1 && !_warpList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/WarpList.xml.");
                 return false;
             }
-            if (!_musicOverrideList.Load())
+            if (!_musicOverrideList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/MusicOverrideList.xml.");
                 return false;
@@ -310,7 +312,7 @@ namespace SF3.X002_Editor.Forms
             objectListView6.AddObjects(_attackResistList.Models);
             objectListView8.AddObjects(_musicOverrideList.Models);
 
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (_scenario == ScenarioType.Scenario1)
             {
                 objectListView7.AddObjects(_warpList.Models);
             }
@@ -674,28 +676,27 @@ namespace SF3.X002_Editor.Forms
 
         public static class Globals
         {
-            public static ScenarioType scenario = ScenarioType.Scenario1;
             //public static int customOffset = 0x00000000;
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.Scenario1;
+            _scenario = ScenarioType.Scenario1;
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.Scenario2;
+            _scenario = ScenarioType.Scenario2;
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.Scenario3;
+            _scenario = ScenarioType.Scenario3;
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.PremiumDisk;
+            _scenario = ScenarioType.PremiumDisk;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

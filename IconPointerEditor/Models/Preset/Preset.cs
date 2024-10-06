@@ -16,9 +16,11 @@ namespace SF3.IconPointerEditor.Models.Presets
         private string name;
         private int sub;
 
-        public Preset(int id, string text)
+        public Preset(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 if (Globals.x026 == true)
                 {
@@ -45,7 +47,7 @@ namespace SF3.IconPointerEditor.Models.Presets
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 if (Globals.x026 == true)
                 {
@@ -71,7 +73,7 @@ namespace SF3.IconPointerEditor.Models.Presets
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 if (Globals.x026 == true)
                 {
@@ -87,7 +89,7 @@ namespace SF3.IconPointerEditor.Models.Presets
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub; //pointer
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 if (Globals.x026 == true)
                 {
@@ -114,7 +116,7 @@ namespace SF3.IconPointerEditor.Models.Presets
 
             //int start = 0x354c + (id * 24);
 
-            if (Globals.x026 == true && (Globals.scenario == ScenarioType.Scenario1))
+            if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
             {
                 int start = offset + (id * 0x02);
                 theItemIcon = start; //1 bytes
@@ -132,6 +134,7 @@ namespace SF3.IconPointerEditor.Models.Presets
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int SizeID => index;
         public string SizeName => name;
 
@@ -139,7 +142,7 @@ namespace SF3.IconPointerEditor.Models.Presets
         {
             get
             {
-                if (Globals.x026 == true && (Globals.scenario == ScenarioType.Scenario1))
+                if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
                     return FileEditor.getWord(theItemIcon);
                 }
@@ -150,7 +153,7 @@ namespace SF3.IconPointerEditor.Models.Presets
             }
             set
             {
-                if (Globals.x026 == true && (Globals.scenario == ScenarioType.Scenario1))
+                if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
                     FileEditor.setWord(theItemIcon, value);
                 }

@@ -14,17 +14,19 @@ namespace SF3.X013_Editor.Models.CritMod
         private int index;
         private string name;
 
-        public CritMod(int id, string text)
+        public CritMod(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00002e74; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00003050; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00002d58; //scn3
             }
@@ -48,6 +50,7 @@ namespace SF3.X013_Editor.Models.CritMod
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int CritModID => index;
         public string CritModName => name;
 

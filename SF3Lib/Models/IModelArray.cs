@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SF3.Types;
+using System;
 using System.Collections;
 using System.IO;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace SF3.Models
         /// Loads models from its respective XML file(s).
         /// </summary>
         /// <returns>Return 'true' on success, or 'false' if the .XML file(s) do not exist or are in use.</returns>
-        bool Load();
+        bool Load(ScenarioType scenario);
 
         /// <summary>
         /// A mutable array of models of type T.

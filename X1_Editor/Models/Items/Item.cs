@@ -74,9 +74,11 @@ namespace SF3.X1_Editor.Models.Items
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Item(int id, string text)
+        public Item(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
@@ -119,7 +121,7 @@ namespace SF3.X1_Editor.Models.Items
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
@@ -160,7 +162,7 @@ namespace SF3.X1_Editor.Models.Items
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
@@ -191,7 +193,7 @@ namespace SF3.X1_Editor.Models.Items
                     offset = offset + 10;
                 }
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
@@ -221,7 +223,7 @@ namespace SF3.X1_Editor.Models.Items
                     offset = offset + 10;
                 }
             }
-            else if (Globals.scenario == ScenarioType.BTL99)
+            else if (Scenario == ScenarioType.BTL99)
             {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
@@ -297,6 +299,7 @@ namespace SF3.X1_Editor.Models.Items
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int ID => index;
         public string Name => name;
 

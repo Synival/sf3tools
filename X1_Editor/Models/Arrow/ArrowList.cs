@@ -4,6 +4,7 @@ using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
 using System.Runtime.InteropServices.ComTypes;
 using SF3.Models;
+using SF3.Types;
 
 namespace SF3.X1_Editor.Models.Arrows
 {
@@ -18,7 +19,7 @@ namespace SF3.X1_Editor.Models.Arrows
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
             r = "Resources/X1Arrow.xml";
 
@@ -79,7 +80,7 @@ namespace SF3.X1_Editor.Models.Arrows
                                 itemssorted.CopyTo(old, 0);
                                 itemssorted = new Arrow[old.Length + 1];
                                 old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Arrow(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                itemssorted[old.Length] = new Arrow(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 items[itemssorted[old.Length].ArrowID] = itemssorted[old.Length];
                                 if (itemssorted[itemssorted.Length - 1].ArrowUnknown0 == 0xffff)
                                 {

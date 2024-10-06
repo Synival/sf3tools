@@ -13,17 +13,19 @@ namespace SF3.X013_Editor.Models.HealExp
         private int index;
         private string name;
 
-        public HealExp(int id, string text)
+        public HealExp(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00004c8b; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00004ebf; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00004aed; //scn3
             }
@@ -46,6 +48,7 @@ namespace SF3.X013_Editor.Models.HealExp
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int HealExpID => index;
         public string HealExpName => name;
 

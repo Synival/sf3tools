@@ -39,17 +39,19 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public StatusEffect(int id, string text)
+        public StatusEffect(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00007408; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00007314; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x000071fc; //scn3
             }
@@ -79,6 +81,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int StatusEffectID => index;
         public string StatusEffectName => name;
 

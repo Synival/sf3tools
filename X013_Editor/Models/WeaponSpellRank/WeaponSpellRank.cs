@@ -17,17 +17,19 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
         private int index;
         private string name;
 
-        public WeaponSpellRank(int id, string text)
+        public WeaponSpellRank(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x000070F0; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00006FC8; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00006D04; //scn3
             }
@@ -54,6 +56,7 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int WeaponSpellRankID => index;
         public string WeaponSpellRankName => name;
 

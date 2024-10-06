@@ -14,17 +14,19 @@ namespace SF3.X013_Editor.Models.ExpLimit
         private int index;
         private string name;
 
-        public ExpLimit(int id, string text)
+        public ExpLimit(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00002173; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x0000234f; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x0000218b; //scn3
             }
@@ -48,6 +50,7 @@ namespace SF3.X013_Editor.Models.ExpLimit
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int ExpLimitID => index;
         public string ExpLimitName => name;
 

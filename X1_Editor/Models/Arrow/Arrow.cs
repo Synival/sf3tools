@@ -35,23 +35,25 @@ namespace SF3.X1_Editor.Models.Arrows
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Arrow(int id, string text)
+        public Arrow(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario2)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00000060; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000060; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000060; //pd initial pointer
                 sub = 0x0605e000;
@@ -59,7 +61,7 @@ namespace SF3.X1_Editor.Models.Arrows
                 offset = offset - sub;
             }
             /*
-            else if (Globals.scenario == ScenarioType.BTL99)
+            else if (Scenario == ScenarioType.BTL99)
             {
                 offset = 0x00000030; //btl99 initial pointer
                 sub = 0x06060000;
@@ -90,6 +92,7 @@ namespace SF3.X1_Editor.Models.Arrows
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int ArrowID => index;
         public string ArrowName => name;
 

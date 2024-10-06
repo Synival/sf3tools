@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
 using SF3.Models;
+using SF3.Types;
 
 namespace SF3.X013_Editor.Models.Soulfail
 {
@@ -17,7 +18,7 @@ namespace SF3.X013_Editor.Models.Soulfail
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
             r = "Resources/Soulfail.xml";
 
@@ -42,7 +43,7 @@ namespace SF3.X013_Editor.Models.Soulfail
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Soulfail[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Soulfail(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Soulfail(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].SoulfailID] = itemssorted[old.Length];
                     }
                 }

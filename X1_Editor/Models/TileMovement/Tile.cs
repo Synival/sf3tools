@@ -34,9 +34,11 @@ namespace SF3.X1_Editor.Models.Tiles
         private string name;
         private int sub;
 
-        public Tile(int id, string text)
+        public Tile(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario2)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
@@ -64,7 +66,7 @@ namespace SF3.X1_Editor.Models.Tiles
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
@@ -122,7 +124,7 @@ namespace SF3.X1_Editor.Models.Tiles
                 offset = offset - sub + 0x7c; //second pointer*/
             }
 
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
@@ -177,6 +179,7 @@ namespace SF3.X1_Editor.Models.Tiles
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int TileID => index;
         public string TileName => name;
 

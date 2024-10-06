@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
 using SF3.Models;
+using SF3.Types;
 
 namespace SF3.X013_Editor.Models.ExpLimit
 {
@@ -17,7 +18,7 @@ namespace SF3.X013_Editor.Models.ExpLimit
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
             r = "Resources/ExpLimitList.xml";
 
@@ -42,7 +43,7 @@ namespace SF3.X013_Editor.Models.ExpLimit
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new ExpLimit[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new ExpLimit(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new ExpLimit(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].ExpLimitID] = itemssorted[old.Length];
                     }
                 }

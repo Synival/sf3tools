@@ -16,9 +16,11 @@ namespace SF3.X1_Editor.Models.AI
         private int index;
         private string name;
 
-        public AI(int id, string text)
+        public AI(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
@@ -66,7 +68,7 @@ namespace SF3.X1_Editor.Models.AI
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
@@ -113,7 +115,7 @@ namespace SF3.X1_Editor.Models.AI
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
@@ -148,7 +150,7 @@ namespace SF3.X1_Editor.Models.AI
                     offset = offset + 0x126;
                 }
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
@@ -182,7 +184,7 @@ namespace SF3.X1_Editor.Models.AI
                     offset = offset + 0x126;
                 }
             }
-            else if (Globals.scenario == ScenarioType.BTL99)
+            else if (Scenario == ScenarioType.BTL99)
             {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
@@ -215,6 +217,7 @@ namespace SF3.X1_Editor.Models.AI
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int AIID => index;
         public string AIName => name;
 

@@ -219,14 +219,15 @@ namespace SF3.X033_X031_Editor.Models.Stats
         private int index;
         private string name;
 
-        public Stats(int id, string text)
+        public Stats(ScenarioType scenario, int id, string text)
         {
+            Scenario = scenario;
             checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = FileEditor.getByte(0x000000017); //to determine which version of scn2 we are using 
             //X031.BIN is during combat
             //X033.BIN is out of combat
 
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (Scenario == ScenarioType.Scenario1)
             {
                 if (checkType == 0x07)
                 {
@@ -237,7 +238,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                     offset = 0x00000d74; //x031
                 }
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 if (checkType == 0x07) //x033
                 {
@@ -262,7 +263,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                     }
                 }
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 if (checkType == 0x07)
                 {
@@ -273,7 +274,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                     offset = 0x00000ff4;
                 }
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 if (checkType == 0x07)
                 {
@@ -421,7 +422,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
             //address = 0x0354c + (id * 0x18);
         }
 
-
+        public ScenarioType Scenario { get; }
         public bool IsPromoted => FileEditor.getByte((int)characterClass) >= 0x20;
 
         public PromotionLevelType PromotionLevel

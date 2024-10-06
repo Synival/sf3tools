@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
 using SF3.Models;
+using SF3.Types;
 
 namespace SF3.X1_Editor.Models.UnknownAI
 {
@@ -17,7 +18,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
             r = "Resources/UnknownAIList.xml";
 
@@ -42,7 +43,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new UnknownAI[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new UnknownAI(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new UnknownAI(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].UnknownAIID] = itemssorted[old.Length];
                     }
                 }

@@ -16,17 +16,19 @@ namespace SF3.X013_Editor.Models.Stats
         private int index;
         private string name;
 
-        public Stat(int id, string text)
+        public Stat(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x000074b5; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00007409; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x000072f1; //scn3
             }
@@ -52,6 +54,7 @@ namespace SF3.X013_Editor.Models.Stats
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int StatID => index;
         public string StatName => name;
 

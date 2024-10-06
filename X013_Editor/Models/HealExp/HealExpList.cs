@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
 using SF3.Models;
+using SF3.Types;
 
 namespace SF3.X013_Editor.Models.HealExp
 {
@@ -17,7 +18,7 @@ namespace SF3.X013_Editor.Models.HealExp
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
             r = "Resources/HealExpList.xml";
 
@@ -42,7 +43,7 @@ namespace SF3.X013_Editor.Models.HealExp
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new HealExp[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new HealExp(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new HealExp(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].HealExpID] = itemssorted[old.Length];
                     }
                 }

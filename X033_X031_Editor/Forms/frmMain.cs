@@ -24,6 +24,7 @@ namespace SF3.X033_X031_Editor.Forms
         //Used to append to state names to stop program loading states from older versions
         private string Version = "018";
 
+        private ScenarioType _scenario = ScenarioType.Scenario1;
         private StatsList _statsList = new StatsList();
         private InitialInfoList _initialInfoList = new InitialInfoList();
         private WeaponLevelList _weaponLevelList = new WeaponLevelList();
@@ -216,7 +217,7 @@ namespace SF3.X033_X031_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!_statsList.Load())
+            if (!_statsList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/classList.xml.");
                 return false;
@@ -228,13 +229,13 @@ namespace SF3.X033_X031_Editor.Forms
                 return false;
             }*/
 
-            if (!_initialInfoList.Load())
+            if (!_initialInfoList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/classEquip.xml.");
                 return false;
             }
 
-            if (!_weaponLevelList.Load())
+            if (!_weaponLevelList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/WeaponLevel.xml.");
                 return false;
@@ -516,12 +517,6 @@ namespace SF3.X033_X031_Editor.Forms
             frmMain_Resize(this, new EventArgs());
         }
 
-        public static class Globals
-        {
-            public static ScenarioType scenario = ScenarioType.Scenario1;
-            //public static int customOffset = 0x00000000;
-        }
-
         public static class Debugs
         {
             public static bool debugs = false;
@@ -529,22 +524,22 @@ namespace SF3.X033_X031_Editor.Forms
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.Scenario1;
+            _scenario = ScenarioType.Scenario1;
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.Scenario2;
+            _scenario = ScenarioType.Scenario2;
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.Scenario3;
+            _scenario = ScenarioType.Scenario3;
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.PremiumDisk;
+            _scenario = ScenarioType.PremiumDisk;
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)

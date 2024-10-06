@@ -21,17 +21,19 @@ namespace SF3.X013_Editor.Models.MagicBonus
         private int index;
         private string name;
 
-        public MagicBonus(int id, string text)
+        public MagicBonus(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00006e70; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00006ec8; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00006a40; //scn3
             }
@@ -48,7 +50,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
 
             //int start = 0x354c + (id * 24);
 
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (Scenario == ScenarioType.Scenario1)
             {
                 int start = offset + (id * 0x20);
                 earthBonus = start + 0x03; //1 bytes
@@ -80,6 +82,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int MagicID => index;
         public string MagicName => name;
 

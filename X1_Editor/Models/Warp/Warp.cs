@@ -34,25 +34,27 @@ namespace SF3.X1_Editor.Models.Warps
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Warp(int id, string text)
+        public Warp(ScenarioType scenario, int id, string text)
         {
+            Scenario = scenario;
+
             //no scn1 for this
 
-            if (Globals.scenario == ScenarioType.Scenario2)
+            if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00000018; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000018; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000018; //pd initial pointer
                 sub = 0x0605e000;
@@ -81,6 +83,7 @@ namespace SF3.X1_Editor.Models.Warps
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int WarpID => index;
         public string WarpName => name;
 

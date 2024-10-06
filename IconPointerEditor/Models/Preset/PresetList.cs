@@ -3,10 +3,11 @@ using System.Xml;
 using System.IO;
 using static SF3.IconPointerEditor.Forms.frmMain;
 using SF3.Types;
+using SF3.Models;
 
 namespace SF3.IconPointerEditor.Models.Presets
 {
-    public class PresetList
+    public class PresetList : IModelArray<Preset>
     {
         private Preset[] presetssorted;
         private Preset[] presets;
@@ -17,21 +18,21 @@ namespace SF3.IconPointerEditor.Models.Presets
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool loadPresetList()
+        public bool Load(ScenarioType scenario)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (scenario == ScenarioType.Scenario1)
             {
                 r = "Resources/scenario1Items.xml";
             }
-            if (Globals.scenario == ScenarioType.Scenario2)
+            if (scenario == ScenarioType.Scenario2)
             {
                 r = "Resources/scenario2Items.xml";
             }
-            if (Globals.scenario == ScenarioType.Scenario3)
+            if (scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/scenario3Items.xml";
             }
-            if (Globals.scenario == ScenarioType.PremiumDisk)
+            if (scenario == ScenarioType.PremiumDisk)
             {
                 r = "Resources/PDItems.xml";
             }
@@ -57,7 +58,7 @@ namespace SF3.IconPointerEditor.Models.Presets
                         presetssorted.CopyTo(old, 0);
                         presetssorted = new Preset[old.Length + 1];
                         old.CopyTo(presetssorted, 0);
-                        presetssorted[old.Length] = new Preset(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        presetssorted[old.Length] = new Preset(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         presets[presetssorted[old.Length].SizeID] = presetssorted[old.Length];
                     }
                 }
@@ -72,13 +73,6 @@ namespace SF3.IconPointerEditor.Models.Presets
             return true;
         }
 
-        public Preset[] getPresetList()
-        {
-            return presetssorted;
-        }
-        public Preset getPreset(int id)
-        {
-            return presets[id];
-        }
+        public Preset[] Models => presetssorted;
     }
 }

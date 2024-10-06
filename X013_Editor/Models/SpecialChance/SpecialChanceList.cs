@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
 using SF3.Models;
+using SF3.Types;
 
 namespace SF3.X013_Editor.Models.SpecialChance
 {
@@ -17,7 +18,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public bool Load(ScenarioType scenario)
         {
             r = "Resources/SpecialChanceList.xml";
 
@@ -42,7 +43,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new SpecialChance[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new SpecialChance(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new SpecialChance(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].SpecialChanceID] = itemssorted[old.Length];
                     }
                 }

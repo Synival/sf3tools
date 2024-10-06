@@ -18,17 +18,19 @@ namespace SF3.X013_Editor.Models.Critrate
         private int index;
         private string name;
 
-        public Critrate(int id, string text)
+        public Critrate(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x000073f8; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00007304; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x000071dc; //scn3
             }
@@ -56,6 +58,7 @@ namespace SF3.X013_Editor.Models.Critrate
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int CritrateID => index;
         public string CritrateName => name;
 

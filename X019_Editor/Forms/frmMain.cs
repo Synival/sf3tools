@@ -22,6 +22,8 @@ namespace SF3.X019_Editor.Forms
         //Used to append to state names to stop program loading states from older versions
         private string Version = "011";
 
+        private ScenarioType _scenario = ScenarioType.Scenario1;
+
         private ItemList _itemList = new ItemList();
 
         public frmMain()
@@ -189,7 +191,7 @@ namespace SF3.X019_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!_itemList.Load())
+            if (!_itemList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
@@ -489,32 +491,31 @@ namespace SF3.X019_Editor.Forms
 
         public static class Globals
         {
-            public static ScenarioType scenario = ScenarioType.Scenario1;
             //public static int customOffset = 0x00000000;
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.Scenario1;
+            _scenario = ScenarioType.Scenario1;
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.Scenario2;
+            _scenario = ScenarioType.Scenario2;
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.Scenario3;
+            _scenario = ScenarioType.Scenario3;
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.PremiumDisk;
+            _scenario = ScenarioType.PremiumDisk;
         }
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            Globals.scenario = ScenarioType.BTL99;
+            _scenario = ScenarioType.BTL99;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

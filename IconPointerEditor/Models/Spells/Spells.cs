@@ -32,17 +32,19 @@ namespace SF3.IconPointerEditor.Models.Spells
         private int index;
         private string name;
 
-        public Spell(int id, string text)
+        public Spell(ScenarioType scenario, int id, string text)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            Scenario = scenario;
+
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00004328; //scn1
             }
-            else if (Globals.scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x0000469c; //scn2
             }
-            else if (Globals.scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x0000516c; //scn3
             }
@@ -84,6 +86,7 @@ namespace SF3.IconPointerEditor.Models.Spells
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int SpellID => index;
         public string SpellName => name;
 

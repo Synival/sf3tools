@@ -33,11 +33,13 @@ namespace SF3.X002_Editor.Models.Warps
 
         public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Warp(int id, string text)
+        public Warp(ScenarioType scenario, int id, string text)
         {
+            Scenario = scenario;
+
             //no scn1 for this
 
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x000053cc; //scn1
             }
@@ -58,6 +60,7 @@ namespace SF3.X002_Editor.Models.Warps
             //address = 0x0354c + (id * 0x18);
         }
 
+        public ScenarioType Scenario { get; }
         public int WarpID => index;
         public string WarpName => name;
 

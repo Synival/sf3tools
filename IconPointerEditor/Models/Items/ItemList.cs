@@ -4,10 +4,11 @@ using System.IO;
 using static SF3.IconPointerEditor.Forms.frmMain;
 using System.Windows.Forms;
 using SF3.Types;
+using SF3.Models;
 
 namespace SF3.IconPointerEditor.Models.Items
 {
-    public class ItemList
+    public class ItemList : IModelArray<Item>
     {
         private Item[] itemssorted;
         private Item[] items;
@@ -18,21 +19,21 @@ namespace SF3.IconPointerEditor.Models.Items
         /// Initialises class
         /// </summary>
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
-        public bool loadItemList()
+        public bool Load(ScenarioType scenario)
         {
-            if (Globals.scenario == ScenarioType.Scenario1)
+            if (scenario == ScenarioType.Scenario1)
             {
                 r = "Resources/scenario1Spells.xml";
             }
-            if (Globals.scenario == ScenarioType.Scenario2)
+            if (scenario == ScenarioType.Scenario2)
             {
                 r = "Resources/scenario2Spells.xml";
             }
-            if (Globals.scenario == ScenarioType.Scenario3)
+            if (scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/scenario3Spells.xml";
             }
-            if (Globals.scenario == ScenarioType.PremiumDisk)
+            if (scenario == ScenarioType.PremiumDisk)
             {
                 r = "Resources/PDSpells.xml";
             }
@@ -58,7 +59,7 @@ namespace SF3.IconPointerEditor.Models.Items
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Item[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Item(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Item(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].ID] = itemssorted[old.Length];
                         //MessageBox.Show("" + FileEditor.getDouble(itemssorted[itemssorted.Length - 1].Address));
                     }
@@ -76,13 +77,6 @@ namespace SF3.IconPointerEditor.Models.Items
             return true;
         }
 
-        public Item[] getItemList()
-        {
-            return itemssorted;
-        }
-        public Item getItem(int id)
-        {
-            return items[id];
-        }
+        public Item[] Models => itemssorted;
     }
 }
