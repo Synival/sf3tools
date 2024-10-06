@@ -98,7 +98,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
                 offset = offset - sub; //second pointer
                                        //offset = FileEditor.getDouble(offset);
             }
-            else if (Scenario == ScenarioType.BTL99)
+            else if (Scenario == ScenarioType.Other)
             {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;

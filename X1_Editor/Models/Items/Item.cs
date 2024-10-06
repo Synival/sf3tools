@@ -223,7 +223,7 @@ namespace SF3.X1_Editor.Models.Items
                     offset = offset + 10;
                 }
             }
-            else if (Scenario == ScenarioType.BTL99)
+            else if (Scenario == ScenarioType.Other)
             {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;

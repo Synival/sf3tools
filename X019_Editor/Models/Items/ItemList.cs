@@ -35,7 +35,7 @@ namespace SF3.X019_Editor.Models.Items
             {
                 r = "RPD/X019List.xml";
             }
-            else if (scenario == ScenarioType.BTL99)
+            else if (scenario == ScenarioType.Other)
             {
                 r = "RPDX44/X044List.xml";
             }

@@ -255,7 +255,7 @@ namespace SF3.X1_Editor.Forms
                 sub = 0x0605e000;
             }
 
-            else if (_scenario == ScenarioType.BTL99)
+            else if (_scenario == ScenarioType.Other)
             {
                 offset = 0x00000018; //btl99 initial pointer
                 sub = 0x06060000;
@@ -383,12 +383,12 @@ namespace SF3.X1_Editor.Forms
                 MessageBox.Show("Could not load Resources/X1AI.xml.");
                 return false;
             }
-            if (_scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.BTL99 && !_warpList.Load(_scenario))
+            if (_scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other && !_warpList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/X1Warp.xml.");
                 return false;
             }
-            if (isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.BTL99 && !_tileList.Load(_scenario))
+            if (isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other && !_tileList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/MovementTypes.xml.");
                 return false;
@@ -405,7 +405,7 @@ namespace SF3.X1_Editor.Forms
                 MessageBox.Show("Could not load Resources/EnterList.xml.");
                 return false;
             }
-            if (!isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.BTL99 && !_arrowList.Load(_scenario))
+            if (!isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other && !_arrowList.Load(_scenario))
             {
                 MessageBox.Show("Could not load Resources/ArrowList.xml.");
                 return false;
@@ -463,16 +463,16 @@ namespace SF3.X1_Editor.Forms
                 objectListView13.AddObjects(_enterList.Models);
             }
 
-            if (!isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.BTL99)
+            if (!isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other)
             {
                 objectListView14.AddObjects(_arrowList.Models);
             }
 
-            if (_scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.BTL99)
+            if (_scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other)
             {
                 objectListView10.AddObjects(_warpList.Models);
             }
-            if (isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.BTL99)
+            if (isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other)
             {
                 objectListView11.AddObjects(_tileList.Models);
             }
@@ -815,7 +815,7 @@ namespace SF3.X1_Editor.Forms
         }
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.BTL99;
+            _scenario = ScenarioType.Other;
             Globals.scn = "BTL99";
             Globals.maps = "Synbios";
 

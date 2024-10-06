@@ -67,7 +67,7 @@ namespace SF3.X1_Editor.Models.Treasures
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Scenario == ScenarioType.BTL99)
+            else if (Scenario == ScenarioType.Other)
             {
                 offset = 0x0000000C; //btl99 initial pointer
                 sub = 0x06060000;

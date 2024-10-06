@@ -515,7 +515,7 @@ namespace SF3.X019_Editor.Forms
         }
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.BTL99;
+            _scenario = ScenarioType.Other;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
