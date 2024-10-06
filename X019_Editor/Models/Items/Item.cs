@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Types;
 using static SF3.X019_Editor.Forms.frmMain;
 
 namespace SF3.X019_Editor.Models.Items
@@ -82,19 +83,19 @@ namespace SF3.X019_Editor.Models.Items
 
         public Item(int id, string text)
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 offset = 0x0000000C; //scn1
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x0000000C; //scn2
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000eb0; //scn3
             }
-            else if (Globals.scenario == 4)
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000eb0; //pd
             }

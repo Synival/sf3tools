@@ -22,19 +22,19 @@ namespace SF3.X1_Editor.Models.CustomMovement
             r = "Resources/X1AI.xml";
 
             /*
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 r = "Resources/X1AIScn1.xml";
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 r = "Resources/X1AIOther.xml";
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/X1AIOther.xml";
             }
-            else if (Globals.scenario == 4)
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 r = "Resources/X1AIOther.xml";
             }

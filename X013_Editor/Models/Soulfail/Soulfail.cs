@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Types;
 using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.Soulfail
@@ -14,15 +15,15 @@ namespace SF3.X013_Editor.Models.Soulfail
 
         public Soulfail(int id, string text)
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00005e5f; //scn1
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x0000650f; //scn2
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00006077; //scn3
             }

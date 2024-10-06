@@ -6,6 +6,7 @@ using SF3.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections;
+using SF3.Types;
 
 namespace SF3.X033_X031_Editor.Models.InitialInfos
 {
@@ -22,19 +23,19 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
         public bool Load()
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 r = "RSc1/classEquipS1.xml";
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 r = "RSc2/classEquipS2.xml";
             }
-            if (Globals.scenario == 3)
+            if (Globals.scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/classEquip.xml";
             }
-            else if (Globals.scenario == 4)
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 r = "RPD/classEquipPD.xml";
             }

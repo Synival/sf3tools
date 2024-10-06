@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using static SF3.IconPointerEditor.Forms.frmMain;
 using SF3.Editor;
+using SF3.Types;
 
 namespace SF3.IconPointerEditor.Models.Items
 {
@@ -34,7 +35,7 @@ namespace SF3.IconPointerEditor.Models.Items
 
         public Item(int id, string text)
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 if (Globals.x026 == true)
                 {
@@ -66,7 +67,7 @@ namespace SF3.IconPointerEditor.Models.Items
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 if (Globals.x026 == true)
                 {
@@ -84,7 +85,7 @@ namespace SF3.IconPointerEditor.Models.Items
 
                 realOffset = 0xFC86;
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 if (Globals.x026 == true)
                 {
@@ -102,7 +103,7 @@ namespace SF3.IconPointerEditor.Models.Items
 
                 realOffset = 0x12A48;
             }
-            else if (Globals.scenario == 4)
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 if (Globals.x026 == true)
                 {
@@ -131,7 +132,7 @@ namespace SF3.IconPointerEditor.Models.Items
 
             //int start = 0x354c + (id * 24);
 
-            if (Globals.x026 == true && (Globals.scenario == 1))
+            if (Globals.x026 == true && (Globals.scenario == ScenarioType.Scenario1))
             {
                 int start = offset + (id * 0x02);
                 theSpellIcon = start; //2 bytes  
@@ -162,7 +163,7 @@ namespace SF3.IconPointerEditor.Models.Items
         {
             get
             {
-                if (Globals.x026 == true && (Globals.scenario == 1))
+                if (Globals.x026 == true && (Globals.scenario == ScenarioType.Scenario1))
                 {
                     return FileEditor.getWord(theSpellIcon);
                 }
@@ -173,7 +174,7 @@ namespace SF3.IconPointerEditor.Models.Items
             }
             set
             {
-                if (Globals.x026 == true && (Globals.scenario == 1))
+                if (Globals.x026 == true && (Globals.scenario == ScenarioType.Scenario1))
                 {
                     FileEditor.setWord(theSpellIcon, value);
                 }
@@ -188,7 +189,7 @@ namespace SF3.IconPointerEditor.Models.Items
         {
             get
             {
-                if (Globals.x026 == true && (Globals.scenario == 1))
+                if (Globals.x026 == true && (Globals.scenario == ScenarioType.Scenario1))
                 {
                     return FileEditor.getWord(theSpellIcon) + realOffset;
                 }
@@ -199,7 +200,7 @@ namespace SF3.IconPointerEditor.Models.Items
             }
             set
             {
-                if (Globals.x026 == true && (Globals.scenario == 1))
+                if (Globals.x026 == true && (Globals.scenario == ScenarioType.Scenario1))
                 {
                     FileEditor.setWord(theSpellIcon, value - realOffset);
                 }

@@ -1,5 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using SF3.Editor;
+using SF3.Types;
 using System;
 using static SF3.X1_Editor.Forms.frmMain;
 
@@ -38,7 +39,7 @@ namespace SF3.X1_Editor.Models.Enters
 
         public Enter(int id, string text)
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00000024; //scn1 initial pointer
                 sub = 0x0605f000;
@@ -46,21 +47,21 @@ namespace SF3.X1_Editor.Models.Enters
 
                 offset = offset - sub;
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00000030; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000030; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Globals.scenario == 4)
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000030; //pd initial pointer
                 sub = 0x0605e000;
@@ -68,7 +69,7 @@ namespace SF3.X1_Editor.Models.Enters
                 offset = offset - sub;
             }
             /*
-            else if (Globals.scenario == 5)
+            else if (Globals.scenario == ScenarioType.BTL99)
             {
                 offset = 0x00000030; //btl99 initial pointer
                 sub = 0x06060000;

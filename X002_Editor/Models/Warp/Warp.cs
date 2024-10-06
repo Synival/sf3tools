@@ -1,5 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using SF3.Editor;
+using SF3.Types;
 using System;
 using static SF3.X002_Editor.Forms.frmMain;
 
@@ -36,7 +37,7 @@ namespace SF3.X002_Editor.Models.Warps
         {
             //no scn1 for this
 
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 offset = 0x000053cc; //scn1
             }

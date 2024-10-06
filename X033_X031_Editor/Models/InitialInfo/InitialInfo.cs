@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Types;
 using SF3.Values;
 using System;
 using static SF3.X033_X031_Editor.Forms.frmMain;
@@ -41,7 +42,7 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
             checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = FileEditor.getByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
 
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 if (checkType == 0x07)
                 {
@@ -52,7 +53,7 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
                     offset = 0x00001d50; //x031
                 }
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 if (checkType == 0x07) //x033
                 {
@@ -77,7 +78,7 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
                     }
                 }
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 if (checkType == 0x07) //x033
                 {
@@ -88,7 +89,7 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
                     offset = 0x000054aa;
                 }
             }
-            else if (Globals.scenario == 4)
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 //Console.WriteLine(checkType);
                 if (checkType == 0x07) //x033

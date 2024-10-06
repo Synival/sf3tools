@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Types;
 using static SF3.X033_X031_Editor.Forms.frmMain;
 
 namespace SF3.X033_X031_Editor.Models.WeaponLevel
@@ -24,7 +25,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
             checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = FileEditor.getByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
 
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 if (checkType == 0x07)
                 {
@@ -35,7 +36,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
                     offset = 0x00000d64; //x031
                 }
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 if (checkType == 0x07)
                 {
@@ -60,7 +61,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
                     }
                 }
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 if (checkType == 0x07)
                 {
@@ -71,7 +72,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
                     offset = 0x00000fe4;
                 }
             }
-            else if (Globals.scenario == 4)
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 if (checkType == 0x07)
                 {

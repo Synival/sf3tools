@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Types;
 using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.WeaponSpellRank
@@ -18,15 +19,15 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
 
         public WeaponSpellRank(int id, string text)
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 offset = 0x000070F0; //scn1
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00006FC8; //scn2
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00006D04; //scn3
             }

@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Types;
 using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.HealExp
@@ -14,15 +15,15 @@ namespace SF3.X013_Editor.Models.HealExp
 
         public HealExp(int id, string text)
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00004c8b; //scn1
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00004ebf; //scn2
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00004aed; //scn3
             }

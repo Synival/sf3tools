@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Types;
 using static SF3.X002_Editor.Forms.frmMain;
 
 namespace SF3.X002_Editor.Models.Presets
@@ -21,11 +22,11 @@ namespace SF3.X002_Editor.Models.Presets
         {
             checkVersion2 = FileEditor.getByte(0x0000000B);
 
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00004738; //scn1
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00004b60; //scn2
                 if (checkVersion2 == 0x2C)
@@ -33,7 +34,7 @@ namespace SF3.X002_Editor.Models.Presets
                     offset = offset - 0x44;
                 }
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00005734; //scn3
             }

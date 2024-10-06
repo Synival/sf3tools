@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Types;
 using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.CritMod
@@ -15,15 +16,15 @@ namespace SF3.X013_Editor.Models.CritMod
 
         public CritMod(int id, string text)
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00002e74; //scn1
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00003050; //scn2
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00002d58; //scn3
             }

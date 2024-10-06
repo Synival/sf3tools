@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Types;
 using static SF3.X002_Editor.Forms.frmMain;
 
 namespace SF3.X002_Editor.Models.Loading
@@ -24,11 +25,11 @@ namespace SF3.X002_Editor.Models.Loading
         {
             checkVersion2 = FileEditor.getByte(0x0000000B);
 
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 offset = 0x000047A4; //scn1
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00004bd8; //scn2
                 if (checkVersion2 == 0x2C)
@@ -36,7 +37,7 @@ namespace SF3.X002_Editor.Models.Loading
                     offset = offset - 0x44;
                 }
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x000057d0; //scn3
             }

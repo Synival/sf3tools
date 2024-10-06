@@ -1,5 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using SF3.Editor;
+using SF3.Types;
 using SF3.X1_Editor.Models.UnknownAI;
 using System;
 using static SF3.X1_Editor.Forms.frmMain;
@@ -37,21 +38,21 @@ namespace SF3.X1_Editor.Models.Warps
         {
             //no scn1 for this
 
-            if (Globals.scenario == 2)
+            if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00000018; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000018; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = FileEditor.getDouble(offset);
                 offset = offset - sub;
             }
-            else if (Globals.scenario == 4)
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000018; //pd initial pointer
                 sub = 0x0605e000;

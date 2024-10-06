@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using static SF3.X1_Editor.Forms.frmMain;
 using SF3.Models;
+using SF3.Types;
 
 namespace SF3.X1_Editor.Models.Items
 {
@@ -19,7 +20,7 @@ namespace SF3.X1_Editor.Models.Items
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public bool Load()
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 r = "Resources/X1List.xml";
             }

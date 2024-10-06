@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using static SF3.X002_Editor.Forms.frmMain;
 using SF3.Models;
+using SF3.Types;
 
 namespace SF3.X002_Editor.Models.Loading
 {
@@ -19,19 +20,19 @@ namespace SF3.X002_Editor.Models.Loading
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public bool Load()
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 r = "RSc1/loadListS1.xml";
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 r = "RSc2/loadListS2.xml";
             }
-            if (Globals.scenario == 3)
+            if (Globals.scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/loadList.xml";
             }
-            else if (Globals.scenario == 4)
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 r = "RPD/loadListPD.xml";
             }

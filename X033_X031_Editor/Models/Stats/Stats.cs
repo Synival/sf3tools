@@ -1,5 +1,6 @@
 ﻿
 using SF3.Editor;
+using SF3.Types;
 using SF3.Values;
 using System;
 using System.Collections.Generic;
@@ -225,7 +226,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
             //X031.BIN is during combat
             //X033.BIN is out of combat
 
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 if (checkType == 0x07)
                 {
@@ -236,7 +237,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                     offset = 0x00000d74; //x031
                 }
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 if (checkType == 0x07) //x033
                 {
@@ -261,7 +262,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                     }
                 }
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 if (checkType == 0x07)
                 {
@@ -272,7 +273,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                     offset = 0x00000ff4;
                 }
             }
-            else if (Globals.scenario == 4)
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 if (checkType == 0x07)
                 {
@@ -451,7 +452,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
 
         static private string GetAverageStatGrowthPerLevelAsPercent(int growthValue)
         {
-            return ((Debugs.debugs == 1) ? string.Format("{0:x}", growthValue) + " || " : "") +
+            return (Debugs.debugs ? string.Format("{0:x}", growthValue) + " || " : "") +
                    string.Format("{0:0.##}", GetAverageStatGrowthPerLevel(growthValue) * 100) + "%";
         }
 

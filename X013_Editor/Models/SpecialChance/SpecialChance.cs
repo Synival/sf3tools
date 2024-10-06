@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Types;
 using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.SpecialChance
@@ -20,15 +21,15 @@ namespace SF3.X013_Editor.Models.SpecialChance
 
         public SpecialChance(int id, string text)
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 offset = 0x000027ae; //scn1
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x000029c6; //scn2
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x000027a2; //scn3
             }
@@ -45,7 +46,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
 
             //int start = 0x354c + (id * 24);
 
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 int start = offset + (id * 0x4a);
                 twoSpecials2 = start + 0x01; //1 bytes
@@ -57,7 +58,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
 
                 address = offset + (id * 0x4a);
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 int start = offset + (id * 0x4a);
                 twoSpecials2 = start + 0x01; //1 bytes
@@ -69,7 +70,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
 
                 address = offset + (id * 0x4a);
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 int start = offset + (id * 0x3a);
                 twoSpecials2 = start + 0x01; //1 bytes

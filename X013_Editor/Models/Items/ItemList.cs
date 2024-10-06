@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using static SF3.X013_Editor.Forms.frmMain;
 using SF3.Models;
+using SF3.Types;
 
 namespace SF3.X013_Editor.Models.Items
 {
@@ -19,19 +20,19 @@ namespace SF3.X013_Editor.Models.Items
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public bool Load()
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 r = "RSc1/SpecialListS1.xml";
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 r = "RSc2/SpecialListS2.xml";
             }
-            if (Globals.scenario == 3)
+            if (Globals.scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/SpecialList.xml";
             }
-            else if (Globals.scenario == 4)
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 r = "RPD/SpecialListPD.xml";
             }

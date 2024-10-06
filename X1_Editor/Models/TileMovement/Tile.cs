@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Types;
 using SF3.X1_Editor.Models.UnknownAI;
 using System;
 using static SF3.X1_Editor.Forms.frmMain;
@@ -35,7 +36,7 @@ namespace SF3.X1_Editor.Models.Tiles
 
         public Tile(int id, string text)
         {
-            if (Globals.scenario == 2)
+            if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
@@ -63,7 +64,7 @@ namespace SF3.X1_Editor.Models.Tiles
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
@@ -121,7 +122,7 @@ namespace SF3.X1_Editor.Models.Tiles
                 offset = offset - sub + 0x7c; //second pointer*/
             }
 
-            else if (Globals.scenario == 4)
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x000001c4;
                 sub = 0x0605e000;

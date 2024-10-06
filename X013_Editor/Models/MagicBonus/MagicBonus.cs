@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Types;
 using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.MagicBonus
@@ -22,15 +23,15 @@ namespace SF3.X013_Editor.Models.MagicBonus
 
         public MagicBonus(int id, string text)
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00006e70; //scn1
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00006ec8; //scn2
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00006a40; //scn3
             }
@@ -47,7 +48,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
 
             //int start = 0x354c + (id * 24);
 
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 int start = offset + (id * 0x20);
                 earthBonus = start + 0x03; //1 bytes

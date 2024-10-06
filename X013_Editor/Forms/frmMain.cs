@@ -20,6 +20,7 @@ using SF3.X013_Editor.Models.WeaponSpellRank;
 using SF3.X013_Editor.Models.StatusEffects;
 using BrightIdeasSoftware;
 using SF3.Editor;
+using SF3.Types;
 
 /*
 
@@ -658,28 +659,28 @@ namespace SF3.X013_Editor.Forms
 
         public static class Globals
         {
-            public static int scenario = 1;
+            public static ScenarioType scenario = ScenarioType.Scenario1;
             //public static int customOffset = 0x00000000;
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Globals.scenario = 1;
+            Globals.scenario = ScenarioType.Scenario1;
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            Globals.scenario = 2;
+            Globals.scenario = ScenarioType.Scenario2;
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            Globals.scenario = 3;
+            Globals.scenario = ScenarioType.Scenario3;
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            Globals.scenario = 4;
+            Globals.scenario = ScenarioType.PremiumDisk;
         }
     }
 }

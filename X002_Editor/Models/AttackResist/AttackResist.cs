@@ -1,4 +1,5 @@
 ﻿using SF3.Editor;
+using SF3.Types;
 using static SF3.X002_Editor.Forms.frmMain;
 
 namespace SF3.X002_Editor.Models.AttackResist
@@ -18,11 +19,11 @@ namespace SF3.X002_Editor.Models.AttackResist
         {
             checkVersion2 = FileEditor.getByte(0x0000000B);
 
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00000cb5; //scn1
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00000d15; //scn2
 
@@ -31,7 +32,7 @@ namespace SF3.X002_Editor.Models.AttackResist
                     offset = offset - 0x40;
                 }
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000dcd; //scn3
             }

@@ -17,6 +17,7 @@ using SF3.X1_Editor.Models.Enters;
 using SF3.X1_Editor.Models.Arrows;
 using BrightIdeasSoftware;
 using SF3.Editor;
+using SF3.Types;
 
 /*
 
@@ -231,28 +232,28 @@ namespace SF3.X1_Editor.Forms
             int offset = 0;
             int sub = 0;
 
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
             }
-            else if (Globals.scenario == 2)
+            else if (Globals.scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
             }
-            else if (Globals.scenario == 3)
+            else if (Globals.scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
             }
-            else if (Globals.scenario == 4)
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
             }
 
-            else if (Globals.scenario == 5)
+            else if (Globals.scenario == ScenarioType.BTL99)
             {
                 offset = 0x00000018; //btl99 initial pointer
                 sub = 0x06060000;
@@ -266,7 +267,7 @@ namespace SF3.X1_Editor.Forms
             /*A value higher means a pointer is on the offset, meaning we are in a battle. If it is not a 
               pointer we are at our destination so we know a town is loaded.
             */
-            if (Globals.scenario == 1 && offset > 0x0605F000)
+            if (Globals.scenario == ScenarioType.Scenario1 && offset > 0x0605F000)
             {
                 isBattle = true;
                 //Console.WriteLine(offset.ToString("X"));
@@ -380,12 +381,12 @@ namespace SF3.X1_Editor.Forms
                 MessageBox.Show("Could not load Resources/X1AI.xml.");
                 return false;
             }
-            if (Globals.scenario != 1 && Globals.scenario != 5 && !_warpList.Load())
+            if (Globals.scenario != ScenarioType.Scenario1 && Globals.scenario != ScenarioType.BTL99 && !_warpList.Load())
             {
                 MessageBox.Show("Could not load Resources/X1Warp.xml.");
                 return false;
             }
-            if (isBattle && Globals.scenario != 1 && Globals.scenario != 5 && !_tileList.Load())
+            if (isBattle && Globals.scenario != ScenarioType.Scenario1 && Globals.scenario != ScenarioType.BTL99 && !_tileList.Load())
             {
                 MessageBox.Show("Could not load Resources/MovementTypes.xml.");
                 return false;
@@ -402,7 +403,7 @@ namespace SF3.X1_Editor.Forms
                 MessageBox.Show("Could not load Resources/EnterList.xml.");
                 return false;
             }
-            if (!isBattle && Globals.scenario != 1 && Globals.scenario != 5 && !_arrowList.Load())
+            if (!isBattle && Globals.scenario != ScenarioType.Scenario1 && Globals.scenario != ScenarioType.BTL99 && !_arrowList.Load())
             {
                 MessageBox.Show("Could not load Resources/ArrowList.xml.");
                 return false;
@@ -460,16 +461,16 @@ namespace SF3.X1_Editor.Forms
                 objectListView13.AddObjects(_enterList.Models);
             }
 
-            if (!isBattle && Globals.scenario != 1 && Globals.scenario != 5)
+            if (!isBattle && Globals.scenario != ScenarioType.Scenario1 && Globals.scenario != ScenarioType.BTL99)
             {
                 objectListView14.AddObjects(_arrowList.Models);
             }
 
-            if (Globals.scenario != 1 && Globals.scenario != 5)
+            if (Globals.scenario != ScenarioType.Scenario1 && Globals.scenario != ScenarioType.BTL99)
             {
                 objectListView10.AddObjects(_warpList.Models);
             }
-            if (isBattle && Globals.scenario != 1 && Globals.scenario != 5)
+            if (isBattle && Globals.scenario != ScenarioType.Scenario1 && Globals.scenario != ScenarioType.BTL99)
             {
                 objectListView11.AddObjects(_tileList.Models);
             }
@@ -763,7 +764,7 @@ namespace SF3.X1_Editor.Forms
 
         public static class Globals
         {
-            public static int scenario = 1;
+            public static ScenarioType scenario = ScenarioType.Scenario1;
             public static int map = 0;
             public static bool treasureDebug = false;
             public static string scn = "1";
@@ -777,7 +778,7 @@ namespace SF3.X1_Editor.Forms
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Globals.scenario = 1;
+            Globals.scenario = ScenarioType.Scenario1;
             Globals.map = 0x00; //synbios lead by default
             Globals.scn = "1";
             Globals.maps = "Synbios";
@@ -786,7 +787,7 @@ namespace SF3.X1_Editor.Forms
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            Globals.scenario = 2;
+            Globals.scenario = ScenarioType.Scenario2;
             Globals.map = 0x04; //medion lead by default
             Globals.scn = "2";
             Globals.maps = "Medion";
@@ -795,7 +796,7 @@ namespace SF3.X1_Editor.Forms
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            Globals.scenario = 3;
+            Globals.scenario = ScenarioType.Scenario3;
             Globals.map = 0x08; //julian lead by default
             Globals.scn = "3";
             Globals.maps = "Julian";
@@ -804,7 +805,7 @@ namespace SF3.X1_Editor.Forms
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            Globals.scenario = 4;
+            Globals.scenario = ScenarioType.PremiumDisk;
             Globals.map = 0x00; //synbios lead by default
             Globals.scn = "PD";
             Globals.maps = "Synbios";
@@ -813,7 +814,7 @@ namespace SF3.X1_Editor.Forms
         }
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            Globals.scenario = 5;
+            Globals.scenario = ScenarioType.BTL99;
             Globals.scn = "BTL99";
             Globals.maps = "Synbios";
 

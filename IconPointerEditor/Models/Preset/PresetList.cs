@@ -2,6 +2,7 @@
 using System.Xml;
 using System.IO;
 using static SF3.IconPointerEditor.Forms.frmMain;
+using SF3.Types;
 
 namespace SF3.IconPointerEditor.Models.Presets
 {
@@ -18,19 +19,19 @@ namespace SF3.IconPointerEditor.Models.Presets
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public bool loadPresetList()
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 r = "Resources/scenario1Items.xml";
             }
-            if (Globals.scenario == 2)
+            if (Globals.scenario == ScenarioType.Scenario2)
             {
                 r = "Resources/scenario2Items.xml";
             }
-            if (Globals.scenario == 3)
+            if (Globals.scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/scenario3Items.xml";
             }
-            if (Globals.scenario == 4)
+            if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 r = "Resources/PDItems.xml";
             }

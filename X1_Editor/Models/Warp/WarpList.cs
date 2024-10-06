@@ -98,19 +98,19 @@ namespace SF3.X1_Editor.Models.Treasures
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public bool loadTreasureList()
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 r = "Resources/X1Treasure.xml";
             }
-            if (Globals.scenario == 2)
+            if (Globals.scenario == ScenarioType.Scenario2)
             {
                 r = "Resources/scenario2Spells.xml";
             }
-            if (Globals.scenario == 3)
+            if (Globals.scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/scenario3Spells.xml";
             }
-            if (Globals.scenario == 4)
+            if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 r = "Resources/PDSpells.xml";
             }

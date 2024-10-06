@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using static SF3.IconPointerEditor.Forms.frmMain;
 using System.Windows.Forms;
+using SF3.Types;
 
 namespace SF3.IconPointerEditor.Models.Items
 {
@@ -19,19 +20,19 @@ namespace SF3.IconPointerEditor.Models.Items
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
         public bool loadItemList()
         {
-            if (Globals.scenario == 1)
+            if (Globals.scenario == ScenarioType.Scenario1)
             {
                 r = "Resources/scenario1Spells.xml";
             }
-            if (Globals.scenario == 2)
+            if (Globals.scenario == ScenarioType.Scenario2)
             {
                 r = "Resources/scenario2Spells.xml";
             }
-            if (Globals.scenario == 3)
+            if (Globals.scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/scenario3Spells.xml";
             }
-            if (Globals.scenario == 4)
+            if (Globals.scenario == ScenarioType.PremiumDisk)
             {
                 r = "Resources/PDSpells.xml";
             }
