@@ -8,6 +8,13 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
 {
     public class WeaponSpellRankList : IModelArray<WeaponSpellRank>
     {
+        public WeaponSpellRankList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private WeaponSpellRank[] itemssorted;
         private WeaponSpellRank[] items;
 
@@ -17,7 +24,7 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/WeaponSpellRankList.xml";
 
@@ -42,7 +49,7 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new WeaponSpellRank[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new WeaponSpellRank(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new WeaponSpellRank(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].WeaponSpellRankID] = itemssorted[old.Length];
                     }
                 }

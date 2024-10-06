@@ -35,20 +35,20 @@ namespace SF3.X013_Editor.Forms
 
         private ScenarioType _scenario = ScenarioType.Scenario1;
 
-        private ItemList _itemList = new ItemList();
-        private SpellList _spellList = new SpellList();
-        private PresetList _presetList = new PresetList();
-        private StatsList _statsList = new StatsList();
-        private SoulmateList _soulmateList = new SoulmateList();
-        private SoulfailList _soulfailList = new SoulfailList();
-        private MagicBonusList _magicBonusList = new MagicBonusList();
-        private CritModList _critModList = new CritModList();
-        private CritrateList _critrateList = new CritrateList();
-        private SpecialChanceList _specialChanceList = new SpecialChanceList();
-        private ExpLimitList _expLimitList = new ExpLimitList();
-        private HealExpList _healExpList = new HealExpList();
-        private WeaponSpellRankList _weaponSpellRankList = new WeaponSpellRankList();
-        private StatusEffectList _statusEffectList = new StatusEffectList();
+        private ItemList _itemList;
+        private SpellList _spellList;
+        private PresetList _presetList;
+        private StatsList _statsList;
+        private SoulmateList _soulmateList;
+        private SoulfailList _soulfailList;
+        private MagicBonusList _magicBonusList;
+        private CritModList _critModList;
+        private CritrateList _critrateList;
+        private SpecialChanceList _specialChanceList;
+        private ExpLimitList _expLimitList;
+        private HealExpList _healExpList;
+        private WeaponSpellRankList _weaponSpellRankList;
+        private StatusEffectList _statusEffectList;
 
         public frmMain()
         {
@@ -262,81 +262,95 @@ namespace SF3.X013_Editor.Forms
                 return false;
             }*/
 
-            if (!_itemList.Load(_scenario))
+            _itemList = new ItemList(_scenario);
+            if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
 
-            if (!_spellList.Load(_scenario))
+            _spellList = new SpellList(_scenario);
+            if (!_spellList.Load())
             {
                 MessageBox.Show("Could not load Resources/characters.xml.");
                 return false;
             }
 
-            if (!_presetList.Load(_scenario))
+            _presetList = new PresetList(_scenario);
+            if (!_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/ExpList.xml.");
                 return false;
             }
 
-            if (!_statsList.Load(_scenario))
+            _statsList = new StatsList(_scenario);
+            if (!_statsList.Load())
             {
                 MessageBox.Show("Could not load Resources/StatList.xml.");
                 return false;
             }
 
-            if (!_soulmateList.Load(_scenario))
+            _soulmateList = new SoulmateList(_scenario);
+            if (!_soulmateList.Load())
             {
                 MessageBox.Show("Could not load Resources/SoulmateList.xml.");
                 return false;
             }
 
-            if (!_soulfailList.Load(_scenario))
+            _soulfailList = new SoulfailList(_scenario);
+            if (!_soulfailList.Load())
             {
                 MessageBox.Show("Could not load Resources/Soulfail.xml.");
                 return false;
             }
 
-            if (!_magicBonusList.Load(_scenario))
+            _magicBonusList = new MagicBonusList(_scenario);
+            if (!_magicBonusList.Load())
             {
                 MessageBox.Show("Could not load Resources/MagicBonus.xml.");
                 return false;
             }
 
-            if (!_critModList.Load(_scenario))
+            _critModList = new CritModList(_scenario);
+            if (!_critModList.Load())
             {
                 MessageBox.Show("Could not load Resources/CritModList.xml.");
                 return false;
             }
 
-            if (!_critrateList.Load(_scenario))
+            _critrateList = new CritrateList(_scenario);
+            if (!_critrateList.Load())
             {
                 MessageBox.Show("Could not load Resources/CritrateList.xml.");
                 return false;
             }
 
-            if (!_specialChanceList.Load(_scenario))
+            _specialChanceList = new SpecialChanceList(_scenario);
+            if (!_specialChanceList.Load())
             {
                 MessageBox.Show("Could not load Resources/SpecialChanceList.xml.");
                 return false;
             }
-            if (!_expLimitList.Load(_scenario))
+            _expLimitList = new ExpLimitList(_scenario);
+            if (!_expLimitList.Load())
             {
                 MessageBox.Show("Could not load Resources/ExpLimitList.xml.");
                 return false;
             }
-            if (!_healExpList.Load(_scenario))
+            _healExpList = new HealExpList(_scenario);
+            if (!_healExpList.Load())
             {
                 MessageBox.Show("Could not load Resources/HealExpList.xml.");
                 return false;
             }
-            if (!_weaponSpellRankList.Load(_scenario))
+            _weaponSpellRankList = new WeaponSpellRankList(_scenario);
+            if (!_weaponSpellRankList.Load())
             {
                 MessageBox.Show("Could not load Resources/WeaponSpellRankListList.xml.");
                 return false;
             }
-            if (!_statusEffectList.Load(_scenario))
+            _statusEffectList = new StatusEffectList(_scenario);
+            if (!_statusEffectList.Load())
             {
                 MessageBox.Show("Could not load Resources/StatusGroupList.xml.");
                 return false;

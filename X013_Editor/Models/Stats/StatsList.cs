@@ -8,6 +8,13 @@ namespace SF3.X013_Editor.Models.Stats
 {
     public class StatsList : IModelArray<Stat>
     {
+        public StatsList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private Stat[] itemssorted;
         private Stat[] items;
 
@@ -17,7 +24,7 @@ namespace SF3.X013_Editor.Models.Stats
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/StatList.xml";
 
@@ -42,7 +49,7 @@ namespace SF3.X013_Editor.Models.Stats
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Stat[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Stat(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Stat(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].StatID] = itemssorted[old.Length];
                     }
                 }

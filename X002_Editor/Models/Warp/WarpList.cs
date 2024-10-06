@@ -10,6 +10,13 @@ namespace SF3.X002_Editor.Models.Warps
 {
     public class WarpList : IModelArray<Warp>
     {
+        public WarpList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private Warp[] itemssorted;
         private Warp[] items;
 
@@ -19,7 +26,7 @@ namespace SF3.X002_Editor.Models.Warps
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/X1Warp.xml";
 
@@ -57,7 +64,7 @@ namespace SF3.X002_Editor.Models.Warps
                             old.CopyTo(itemssorted, 0);
                             //itemssorted[old.Length] = new Warp(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
 
-                            itemssorted[old.Length] = new Warp(scenario, myCount, myName);
+                            itemssorted[old.Length] = new Warp(Scenario, myCount, myName);
 
                             myCount++;
                             myName = "WarpIndex ";

@@ -8,6 +8,13 @@ namespace SF3.X1_Editor.Models.UnknownAI
 {
     public class UnknownAIList : IModelArray<UnknownAI>
     {
+        public UnknownAIList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private UnknownAI[] itemssorted;
         private UnknownAI[] items;
 
@@ -17,7 +24,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/UnknownAIList.xml";
 
@@ -42,7 +49,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new UnknownAI[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new UnknownAI(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new UnknownAI(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].UnknownAIID] = itemssorted[old.Length];
                     }
                 }

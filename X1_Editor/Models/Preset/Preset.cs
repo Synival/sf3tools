@@ -158,8 +158,7 @@ namespace SF3.X1_Editor.Models.Presets
                     offset = offset - sub; //third pointer
                 }
             }
-            // TODO: what is scenario 5???
-            else if (Scenario == (ScenarioType) 5)
+            else if (Scenario == ScenarioType.Other /* BTL99 */)
             {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;

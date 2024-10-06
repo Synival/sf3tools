@@ -8,6 +8,13 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 {
     public class WeaponLevelList : IModelArray<WeaponLevel>
     {
+        public WeaponLevelList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private WeaponLevel[] itemssorted;
         private WeaponLevel[] items;
 
@@ -17,7 +24,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         /// Initialises list
         /// </summary>
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/WeaponLevel.xml";
 
@@ -42,7 +49,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new WeaponLevel[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new WeaponLevel(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new WeaponLevel(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].WeaponLevelID] = itemssorted[old.Length];
                     }
                 }

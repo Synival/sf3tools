@@ -9,6 +9,13 @@ namespace SF3.IconPointerEditor.Models.Items
 {
     public class ItemList : IModelArray<Item>
     {
+        public ItemList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private Item[] itemssorted;
         private Item[] items;
 
@@ -18,21 +25,21 @@ namespace SF3.IconPointerEditor.Models.Items
         /// Initialises class
         /// </summary>
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
-            if (scenario == ScenarioType.Scenario1)
+            if (Scenario == ScenarioType.Scenario1)
             {
                 r = "Resources/scenario1Spells.xml";
             }
-            if (scenario == ScenarioType.Scenario2)
+            if (Scenario == ScenarioType.Scenario2)
             {
                 r = "Resources/scenario2Spells.xml";
             }
-            if (scenario == ScenarioType.Scenario3)
+            if (Scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/scenario3Spells.xml";
             }
-            if (scenario == ScenarioType.PremiumDisk)
+            if (Scenario == ScenarioType.PremiumDisk)
             {
                 r = "Resources/PDSpells.xml";
             }
@@ -58,7 +65,7 @@ namespace SF3.IconPointerEditor.Models.Items
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Item[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Item(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Item(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].ID] = itemssorted[old.Length];
                         //MessageBox.Show("" + FileEditor.getDouble(itemssorted[itemssorted.Length - 1].Address));
                     }

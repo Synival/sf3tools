@@ -8,6 +8,13 @@ namespace SF3.X013_Editor.Models.SpecialChance
 {
     public class SpecialChanceList : IModelArray<SpecialChance>
     {
+        public SpecialChanceList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private SpecialChance[] itemssorted;
         private SpecialChance[] items;
 
@@ -17,7 +24,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/SpecialChanceList.xml";
 
@@ -42,7 +49,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new SpecialChance[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new SpecialChance(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new SpecialChance(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].SpecialChanceID] = itemssorted[old.Length];
                     }
                 }

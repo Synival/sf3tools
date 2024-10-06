@@ -8,6 +8,13 @@ namespace SF3.X033_X031_Editor.Models.Stats
 {
     public class StatsList : IModelArray<Stats>
     {
+        public StatsList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private Stats[] statsSorted;
         private Stats[] stats;
 
@@ -17,21 +24,21 @@ namespace SF3.X033_X031_Editor.Models.Stats
         /// Initialises list
         /// </summary>
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
-            if (scenario == ScenarioType.Scenario1)
+            if (Scenario == ScenarioType.Scenario1)
             {
                 r = "RSc1/classListS1.xml";
             }
-            else if (scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 r = "RSc2/classListS2.xml";
             }
-            if (scenario == ScenarioType.Scenario3)
+            if (Scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/classList.xml";
             }
-            else if (scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 r = "RPD/classListPD.xml";
             }
@@ -57,7 +64,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                         statsSorted.CopyTo(old, 0);
                         statsSorted = new Stats[old.Length + 1];
                         old.CopyTo(statsSorted, 0);
-                        statsSorted[old.Length] = new Stats(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        statsSorted[old.Length] = new Stats(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         stats[statsSorted[old.Length].ID] = statsSorted[old.Length];
                     }
                 }

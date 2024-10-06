@@ -8,6 +8,13 @@ namespace SF3.X013_Editor.Models.Critrate
 {
     public class CritrateList : IModelArray<Critrate>
     {
+        public CritrateList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private Critrate[] itemssorted;
         private Critrate[] items;
 
@@ -17,7 +24,7 @@ namespace SF3.X013_Editor.Models.Critrate
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/CritrateList.xml";
 
@@ -42,7 +49,7 @@ namespace SF3.X013_Editor.Models.Critrate
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Critrate[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Critrate(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Critrate(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].CritrateID] = itemssorted[old.Length];
                     }
                 }

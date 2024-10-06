@@ -8,6 +8,13 @@ namespace SF3.X002_Editor.Models.WeaponRank
 {
     public class WeaponRankList : IModelArray<WeaponRank>
     {
+        public WeaponRankList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private WeaponRank[] itemssorted;
         private WeaponRank[] items;
 
@@ -17,7 +24,7 @@ namespace SF3.X002_Editor.Models.WeaponRank
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/WeaponRankList.xml";
 
@@ -42,7 +49,7 @@ namespace SF3.X002_Editor.Models.WeaponRank
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new WeaponRank[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new WeaponRank(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new WeaponRank(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].WeaponRankID] = itemssorted[old.Length];
                     }
                 }

@@ -8,6 +8,13 @@ namespace SF3.X002_Editor.Models.Presets
 {
     public class PresetList : IModelArray<Preset>
     {
+        public PresetList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private Preset[] presetssorted;
         private Preset[] presets;
 
@@ -17,21 +24,21 @@ namespace SF3.X002_Editor.Models.Presets
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
-            if (scenario == ScenarioType.Scenario1)
+            if (Scenario == ScenarioType.Scenario1)
             {
                 r = "RSc1/spellIndexListS1.xml";
             }
-            else if (scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 r = "RSc2/spellIndexListS2.xml";
             }
-            if (scenario == ScenarioType.Scenario3)
+            if (Scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/spellIndexList.xml";
             }
-            else if (scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 r = "RPD/spellIndexListPD.xml";
             }
@@ -56,7 +63,7 @@ namespace SF3.X002_Editor.Models.Presets
                         presetssorted.CopyTo(old, 0);
                         presetssorted = new Preset[old.Length + 1];
                         old.CopyTo(presetssorted, 0);
-                        presetssorted[old.Length] = new Preset(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        presetssorted[old.Length] = new Preset(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         presets[presetssorted[old.Length].PresetID] = presetssorted[old.Length];
                     }
                 }

@@ -30,15 +30,15 @@ namespace SF3.X002_Editor.Forms
 
         private ScenarioType _scenario = ScenarioType.Scenario1;
 
-        private ItemList _itemList = new ItemList();
-        private SpellList _spellList = new SpellList();
-        private PresetList _presetList = new PresetList();
-        private LoadList _loadList = new LoadList();
-        private StatList _statList = new StatList();
-        private WeaponRankList _weaponRankList = new WeaponRankList();
-        private AttackResistList _attackResistList = new AttackResistList();
-        private WarpList _warpList = new WarpList();
-        private MusicOverrideList _musicOverrideList = new MusicOverrideList();
+        private ItemList _itemList;
+        private SpellList _spellList;
+        private PresetList _presetList;
+        private LoadList _loadList;
+        private StatList _statList;
+        private WeaponRankList _weaponRankList;
+        private AttackResistList _attackResistList;
+        private WarpList _warpList;
+        private MusicOverrideList _musicOverrideList;
 
         public frmMain()
         {
@@ -228,51 +228,60 @@ namespace SF3.X002_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!_itemList.Load(_scenario))
+            _itemList = new ItemList(_scenario);
+            if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
 
-            if (!_spellList.Load(_scenario))
+            _spellList = new SpellList(_scenario);
+            if (!_spellList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellList.xml.");
                 return false;
             }
 
-            if (!_presetList.Load(_scenario))
+            _presetList = new PresetList(_scenario);
+            if (!_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
                 return false;
             }
 
-            if (!_loadList.Load(_scenario))
+            _loadList = new LoadList(_scenario);
+            if (!_loadList.Load())
             {
                 MessageBox.Show("Could not load Resources/loadList.xml.");
                 return false;
             }
 
-            if (!_statList.Load(_scenario))
+            _statList = new StatList(_scenario);
+            if (!_statList.Load())
             {
                 MessageBox.Show("Could not load Resources/statList.xml.");
                 return false;
             }
-            if (!_weaponRankList.Load(_scenario))
+            _weaponRankList = new WeaponRankList(_scenario);
+            if (!_weaponRankList.Load())
             {
                 MessageBox.Show("Could not load Resources/WeaponRankList.xml.");
                 return false;
             }
-            if (!_attackResistList.Load(_scenario))
+            _attackResistList = new AttackResistList(_scenario);
+            if (!_attackResistList.Load())
             {
                 MessageBox.Show("Could not load Resources/AttackResistList.xml.");
                 return false;
             }
-            if (_scenario == ScenarioType.Scenario1 && !_warpList.Load(_scenario))
+            _warpList = new WarpList(_scenario);
+            if (_scenario == ScenarioType.Scenario1 && !_warpList.Load())
             {
                 MessageBox.Show("Could not load Resources/WarpList.xml.");
                 return false;
             }
-            if (!_musicOverrideList.Load(_scenario))
+            _musicOverrideList = new MusicOverrideList(_scenario);
+            if (!_musicOverrideList.Load())
             {
                 MessageBox.Show("Could not load Resources/MusicOverrideList.xml.");
                 return false;
@@ -665,9 +674,16 @@ namespace SF3.X002_Editor.Forms
         private void tabpage_Click(object sender, EventArgs e)
         {
             objectListView1.ClearObjects();
-            objectListView1.AddObjects(_spellList.Models);
+            if (_spellList != null)
+            {
+                objectListView1.AddObjects(_spellList.Models);
+            }
+
             objectListView4.ClearObjects();
-            objectListView4.AddObjects(_statList.Models);
+            if (_statList != null)
+            {
+                objectListView4.AddObjects(_statList.Models);
+            }
         }
 
         private void frmMain_Load(object sender, EventArgs e)

@@ -10,6 +10,13 @@ namespace SF3.X013_Editor.Models.StatusEffects
 {
     public class StatusEffectList : IModelArray<StatusEffect>
     {
+        public StatusEffectList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private StatusEffect[] itemssorted;
         private StatusEffect[] items;
 
@@ -19,7 +26,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/StatusGroupList.xml";
 
@@ -55,7 +62,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
                             itemssorted.CopyTo(old, 0);
                             itemssorted = new StatusEffect[old.Length + 1];
                             old.CopyTo(itemssorted, 0);
-                            itemssorted[old.Length] = new StatusEffect(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                            itemssorted[old.Length] = new StatusEffect(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
 
                             items[itemssorted[old.Length].StatusEffectID] = itemssorted[old.Length];
                         }

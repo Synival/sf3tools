@@ -8,6 +8,13 @@ namespace SF3.X1_Editor.Models.CustomMovement
 {
     public class CustomMovementList : IModelArray<CustomMovement>
     {
+        public CustomMovementList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private CustomMovement[] spellssorted;
         private CustomMovement[] spells;
 
@@ -17,7 +24,7 @@ namespace SF3.X1_Editor.Models.CustomMovement
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/X1AI.xml";
 
@@ -63,7 +70,7 @@ namespace SF3.X1_Editor.Models.CustomMovement
                         spellssorted.CopyTo(old, 0);
                         spellssorted = new CustomMovement[old.Length + 1];
                         old.CopyTo(spellssorted, 0);
-                        spellssorted[old.Length] = new CustomMovement(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        spellssorted[old.Length] = new CustomMovement(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         spells[spellssorted[old.Length].CustomMovementID] = spellssorted[old.Length];
                     }
                 }

@@ -8,6 +8,13 @@ namespace SF3.X1_Editor.Models.Tiles
 {
     public class TileList : IModelArray<Tile>
     {
+        public TileList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private Tile[] tilessorted;
         private Tile[] tiles;
 
@@ -17,7 +24,7 @@ namespace SF3.X1_Editor.Models.Tiles
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/MovementTypes.xml";
 
@@ -42,7 +49,7 @@ namespace SF3.X1_Editor.Models.Tiles
                         tilessorted.CopyTo(old, 0);
                         tilessorted = new Tile[old.Length + 1];
                         old.CopyTo(tilessorted, 0);
-                        tilessorted[old.Length] = new Tile(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        tilessorted[old.Length] = new Tile(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         tiles[tilessorted[old.Length].TileID] = tilessorted[old.Length];
                     }
                 }

@@ -9,6 +9,13 @@ namespace SF3.X1_Editor.Models.Arrows
 {
     public class ArrowList : IModelArray<Arrow>
     {
+        public ArrowList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private Arrow[] itemssorted;
         private Arrow[] items;
 
@@ -18,7 +25,7 @@ namespace SF3.X1_Editor.Models.Arrows
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/X1Arrow.xml";
 
@@ -79,7 +86,7 @@ namespace SF3.X1_Editor.Models.Arrows
                                 itemssorted.CopyTo(old, 0);
                                 itemssorted = new Arrow[old.Length + 1];
                                 old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Arrow(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                itemssorted[old.Length] = new Arrow(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 items[itemssorted[old.Length].ArrowID] = itemssorted[old.Length];
                                 if (itemssorted[itemssorted.Length - 1].ArrowUnknown0 == 0xffff)
                                 {

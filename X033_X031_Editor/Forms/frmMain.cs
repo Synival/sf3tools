@@ -25,9 +25,9 @@ namespace SF3.X033_X031_Editor.Forms
         private string Version = "018";
 
         private ScenarioType _scenario = ScenarioType.Scenario1;
-        private StatsList _statsList = new StatsList();
-        private InitialInfoList _initialInfoList = new InitialInfoList();
-        private WeaponLevelList _weaponLevelList = new WeaponLevelList();
+        private StatsList _statsList;
+        private InitialInfoList _initialInfoList;
+        private WeaponLevelList _weaponLevelList;
 
         public class CurveGraphDataPoint
         {
@@ -51,10 +51,6 @@ namespace SF3.X033_X031_Editor.Forms
         {
             InitializeComponent();
             frmMain_Resize(this, new EventArgs());
-
-            // Set up curve graph controls
-            cbCurveGraphCharacter.DataSource = _statsList.Models;
-            cbCurveGraphCharacter.DisplayMember = "Name";
 
             /*try {
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
@@ -217,7 +213,8 @@ namespace SF3.X033_X031_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!_statsList.Load(_scenario))
+            _statsList = new StatsList(_scenario);
+            if (!_statsList.Load())
             {
                 MessageBox.Show("Could not load Resources/classList.xml.");
                 return false;
@@ -229,13 +226,15 @@ namespace SF3.X033_X031_Editor.Forms
                 return false;
             }*/
 
-            if (!_initialInfoList.Load(_scenario))
+            _initialInfoList = new InitialInfoList(_scenario);
+            if (!_initialInfoList.Load())
             {
                 MessageBox.Show("Could not load Resources/classEquip.xml.");
                 return false;
             }
 
-            if (!_weaponLevelList.Load(_scenario))
+            _weaponLevelList = new WeaponLevelList(_scenario);
+            if (!_weaponLevelList.Load())
             {
                 MessageBox.Show("Could not load Resources/WeaponLevel.xml.");
                 return false;
@@ -279,6 +278,7 @@ namespace SF3.X033_X031_Editor.Forms
 
             // Update curve graph controls.
             cbCurveGraphCharacter.DataSource = _statsList.Models;
+            cbCurveGraphCharacter.DisplayMember = "Name";
 
             return true;
         }
@@ -550,7 +550,10 @@ namespace SF3.X033_X031_Editor.Forms
         private void tabpage6_Click(object sender, EventArgs e)
         {
             olvCurveCalc.ClearObjects();
-            olvCurveCalc.AddObjects(_statsList.Models);
+            if (_statsList != null)
+            {
+                olvCurveCalc.AddObjects(_statsList.Models);
+            }
         }
 
         private void CurveGraphCharacterComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshCurveGraph();

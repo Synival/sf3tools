@@ -10,6 +10,13 @@ namespace SF3.X1_Editor.Models.Treasures
 {
     public class TreasureList : IModelArray<Treasure>
     {
+        public TreasureList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private Treasure[] itemssorted;
         private Treasure[] items;
 
@@ -19,7 +26,7 @@ namespace SF3.X1_Editor.Models.Treasures
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/X1Treasure.xml";
 
@@ -55,7 +62,7 @@ namespace SF3.X1_Editor.Models.Treasures
                                 itemssorted.CopyTo(old, 0);
                                 itemssorted = new Treasure[old.Length + 1];
                                 old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Treasure(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                itemssorted[old.Length] = new Treasure(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 items[itemssorted[old.Length].TreasureID] = itemssorted[old.Length];
                                 if (itemssorted[itemssorted.Length - 1].Searched == 0xffff)
                                 {
@@ -80,7 +87,7 @@ namespace SF3.X1_Editor.Models.Treasures
                                 itemssorted.CopyTo(old, 0);
                                 itemssorted = new Treasure[old.Length + 1];
                                 old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Treasure(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                itemssorted[old.Length] = new Treasure(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 items[itemssorted[old.Length].TreasureID] = itemssorted[old.Length];
                                 if (itemssorted[itemssorted.Length - 1].Searched == 0xffff)
                                 {

@@ -23,8 +23,8 @@ namespace SF3.IconPointerEditor.Forms
 
         private ScenarioType _scenario = ScenarioType.Scenario1;
 
-        private ItemList _itemList = new ItemList();
-        private PresetList _presetList = new PresetList();
+        private ItemList _itemList;
+        private PresetList _presetList;
 
         public frmMain()
         {
@@ -191,7 +191,8 @@ namespace SF3.IconPointerEditor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!_itemList.Load(_scenario))
+            _itemList = new ItemList(_scenario);
+            if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
@@ -202,7 +203,8 @@ namespace SF3.IconPointerEditor.Forms
                 return false;
             }*/
 
-            if (!_presetList.Load(_scenario))
+            _presetList = new PresetList(_scenario);
+            if (!_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
                 return false;

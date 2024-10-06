@@ -8,6 +8,13 @@ namespace SF3.X013_Editor.Models.MagicBonus
 {
     public class MagicBonusList : IModelArray<MagicBonus>
     {
+        public MagicBonusList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private MagicBonus[] itemssorted;
         private MagicBonus[] items;
 
@@ -17,21 +24,21 @@ namespace SF3.X013_Editor.Models.MagicBonus
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
-            if (scenario == ScenarioType.Scenario1)
+            if (Scenario == ScenarioType.Scenario1)
             {
                 r = "RSc1/magicBonusS1.xml";
             }
-            else if (scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 r = "RSc2/magicBonusS2.xml";
             }
-            if (scenario == ScenarioType.Scenario3)
+            if (Scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/magicBonus.xml";
             }
-            else if (scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 r = "RPD/magicBonusPD.xml";
             }
@@ -57,7 +64,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new MagicBonus[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new MagicBonus(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new MagicBonus(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].MagicID] = itemssorted[old.Length];
                     }
                 }

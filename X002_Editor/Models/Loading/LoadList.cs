@@ -8,6 +8,13 @@ namespace SF3.X002_Editor.Models.Loading
 {
     public class LoadList : IModelArray<Loading>
     {
+        public LoadList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private Loading[] itemssorted;
         private Loading[] items;
 
@@ -17,21 +24,21 @@ namespace SF3.X002_Editor.Models.Loading
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
-            if (scenario == ScenarioType.Scenario1)
+            if (Scenario == ScenarioType.Scenario1)
             {
                 r = "RSc1/loadListS1.xml";
             }
-            else if (scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 r = "RSc2/loadListS2.xml";
             }
-            if (scenario == ScenarioType.Scenario3)
+            if (Scenario == ScenarioType.Scenario3)
             {
                 r = "Resources/loadList.xml";
             }
-            else if (scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 r = "RPD/loadListPD.xml";
             }
@@ -57,7 +64,7 @@ namespace SF3.X002_Editor.Models.Loading
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Loading[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Loading(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Loading(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].LoadID] = itemssorted[old.Length];
                     }
                 }

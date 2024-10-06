@@ -8,6 +8,13 @@ namespace SF3.X013_Editor.Models.Soulmate
 {
     public class SoulmateList : IModelArray<Soulmate>
     {
+        public SoulmateList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private Soulmate[] itemssorted;
         private Soulmate[] items;
 
@@ -17,7 +24,7 @@ namespace SF3.X013_Editor.Models.Soulmate
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/SoulmateList.xml";
 
@@ -42,7 +49,7 @@ namespace SF3.X013_Editor.Models.Soulmate
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Soulmate[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Soulmate(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Soulmate(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].SoulmateID] = itemssorted[old.Length];
                     }
                 }

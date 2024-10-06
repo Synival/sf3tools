@@ -9,6 +9,13 @@ namespace SF3.X1_Editor.Models.Enters
 {
     public class EnterList : IModelArray<Enter>
     {
+        public EnterList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private Enter[] itemssorted;
         private Enter[] items;
 
@@ -18,7 +25,7 @@ namespace SF3.X1_Editor.Models.Enters
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/X1Enter.xml";
 
@@ -79,7 +86,7 @@ namespace SF3.X1_Editor.Models.Enters
                                 itemssorted.CopyTo(old, 0);
                                 itemssorted = new Enter[old.Length + 1];
                                 old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Enter(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                itemssorted[old.Length] = new Enter(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 items[itemssorted[old.Length].EnterID] = itemssorted[old.Length];
                                 if (itemssorted[itemssorted.Length - 1].Entered == 0xffff)
                                 {

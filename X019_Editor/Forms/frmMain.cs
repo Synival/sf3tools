@@ -24,7 +24,7 @@ namespace SF3.X019_Editor.Forms
 
         private ScenarioType _scenario = ScenarioType.Scenario1;
 
-        private ItemList _itemList = new ItemList();
+        private ItemList _itemList;
 
         public frmMain()
         {
@@ -191,7 +191,8 @@ namespace SF3.X019_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            if (!_itemList.Load(_scenario))
+            _itemList = new ItemList(_scenario);
+            if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;

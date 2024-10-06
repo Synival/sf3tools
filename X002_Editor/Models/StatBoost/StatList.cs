@@ -8,6 +8,13 @@ namespace SF3.X002_Editor.Models.StatBoost
 {
     public class StatList : IModelArray<StatBoost>
     {
+        public StatList(ScenarioType scenario)
+        {
+            Scenario = scenario;
+        }
+
+        public ScenarioType Scenario { get; }
+
         private StatBoost[] itemssorted;
         private StatBoost[] items;
 
@@ -17,7 +24,7 @@ namespace SF3.X002_Editor.Models.StatBoost
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load(ScenarioType scenario)
+        public bool Load()
         {
             r = "Resources/statList.xml";
 
@@ -42,7 +49,7 @@ namespace SF3.X002_Editor.Models.StatBoost
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new StatBoost[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new StatBoost(scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new StatBoost(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].StatID] = itemssorted[old.Length];
                     }
                 }
