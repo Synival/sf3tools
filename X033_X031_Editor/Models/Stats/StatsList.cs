@@ -45,9 +45,10 @@ namespace SF3.X033_X031_Editor.Models.Stats
 
             statsSorted = new Stats[0];
             stats = new Stats[300]; //max size of itemList
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(r, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
@@ -68,7 +69,6 @@ namespace SF3.X033_X031_Editor.Models.Stats
                         stats[statsSorted[old.Length].ID] = statsSorted[old.Length];
                     }
                 }
-                stream.Close();
             }
             catch (FileLoadException)
             {
@@ -77,6 +77,13 @@ namespace SF3.X033_X031_Editor.Models.Stats
             catch (FileNotFoundException)
             {
                 return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
             }
             return true;
         }

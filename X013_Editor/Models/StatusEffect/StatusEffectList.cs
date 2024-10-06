@@ -32,9 +32,10 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
             itemssorted = new StatusEffect[0];
             items = new StatusEffect[1000]; //max size of itemList
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(r, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
@@ -69,7 +70,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
                     }
                 }
 
-                stream.Close();
             }
             catch (FileLoadException)
             {
@@ -78,6 +78,13 @@ namespace SF3.X013_Editor.Models.StatusEffects
             catch (FileNotFoundException)
             {
                 return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
             }
             return true;
         }

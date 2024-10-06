@@ -30,9 +30,10 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
 
             itemssorted = new WeaponSpellRank[0];
             items = new WeaponSpellRank[4]; //max size of itemList
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(r, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
@@ -53,7 +54,6 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
                         items[itemssorted[old.Length].WeaponSpellRankID] = itemssorted[old.Length];
                     }
                 }
-                stream.Close();
             }
             catch (FileLoadException)
             {
@@ -62,6 +62,13 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
             catch (FileNotFoundException)
             {
                 return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
             }
             return true;
         }

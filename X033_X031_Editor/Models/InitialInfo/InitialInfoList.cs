@@ -48,9 +48,10 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 
             modelsSorted = new InitialInfo[0];
             models = new InitialInfo[100]; //max size of spellIndexList
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(r, FileMode.Open);
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
@@ -70,7 +71,6 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
                         models[modelsSorted[old.Length].PresetID] = modelsSorted[old.Length];
                     }
                 }
-                stream.Close();
             }
             catch (FileLoadException)
             {
@@ -79,6 +79,13 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
             catch (FileNotFoundException)
             {
                 return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
             }
             return true;
         }

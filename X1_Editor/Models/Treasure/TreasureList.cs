@@ -32,9 +32,10 @@ namespace SF3.X1_Editor.Models.Treasures
 
             itemssorted = new Treasure[0];
             items = new Treasure[255]; //max size of itemList
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(r, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
@@ -98,7 +99,6 @@ namespace SF3.X1_Editor.Models.Treasures
                     }
                 }
 
-                stream.Close();
             }
             catch (FileLoadException)
             {
@@ -107,6 +107,13 @@ namespace SF3.X1_Editor.Models.Treasures
             catch (FileNotFoundException)
             {
                 return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
             }
             return true;
         }

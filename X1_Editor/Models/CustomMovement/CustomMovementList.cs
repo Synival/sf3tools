@@ -52,9 +52,10 @@ namespace SF3.X1_Editor.Models.CustomMovement
 
             spellssorted = new CustomMovement[0];
             spells = new CustomMovement[130]; //max size of spellList
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(r, FileMode.Open);
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
@@ -74,7 +75,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
                         spells[spellssorted[old.Length].CustomMovementID] = spellssorted[old.Length];
                     }
                 }
-                stream.Close();
             }
             catch (FileLoadException)
             {
@@ -83,6 +83,13 @@ namespace SF3.X1_Editor.Models.CustomMovement
             catch (FileNotFoundException)
             {
                 return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
             }
             return true;
         }

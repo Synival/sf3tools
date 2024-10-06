@@ -46,9 +46,10 @@ namespace SF3.IconPointerEditor.Models.Items
 
             itemssorted = new Item[0];
             items = new Item[256]; //max size of itemList
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(r, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
@@ -70,7 +71,6 @@ namespace SF3.IconPointerEditor.Models.Items
                         //MessageBox.Show("" + FileEditor.getDouble(itemssorted[itemssorted.Length - 1].Address));
                     }
                 }
-                stream.Close();
             }
             catch (FileLoadException)
             {
@@ -79,6 +79,13 @@ namespace SF3.IconPointerEditor.Models.Items
             catch (FileNotFoundException)
             {
                 return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
             }
             return true;
         }

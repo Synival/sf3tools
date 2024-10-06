@@ -51,9 +51,10 @@ namespace SF3.X1_Editor.Models.AI
 
             spellssorted = new AI[0];
             spells = new AI[130]; //max size of spellList
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(r, FileMode.Open);
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
@@ -73,7 +74,6 @@ namespace SF3.X1_Editor.Models.AI
                         spells[spellssorted[old.Length].AIID] = spellssorted[old.Length];
                     }
                 }
-                stream.Close();
             }
             catch (FileLoadException)
             {
@@ -82,6 +82,13 @@ namespace SF3.X1_Editor.Models.AI
             catch (FileNotFoundException)
             {
                 return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
             }
             return true;
         }

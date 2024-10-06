@@ -31,9 +31,10 @@ namespace SF3.X1_Editor.Models.Warps
 
             itemssorted = new Warp[0];
             items = new Warp[255]; //max size of itemList
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(r, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
@@ -66,7 +67,6 @@ namespace SF3.X1_Editor.Models.Warps
                     }
                 }
 
-                stream.Close();
             }
             catch (FileLoadException)
             {
@@ -75,6 +75,13 @@ namespace SF3.X1_Editor.Models.Warps
             catch (FileNotFoundException)
             {
                 return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
             }
             return true;
         }

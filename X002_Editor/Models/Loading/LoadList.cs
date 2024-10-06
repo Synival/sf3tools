@@ -45,9 +45,10 @@ namespace SF3.X002_Editor.Models.Loading
 
             itemssorted = new Loading[0];
             items = new Loading[300]; //max size of itemList
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(r, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
@@ -68,7 +69,6 @@ namespace SF3.X002_Editor.Models.Loading
                         items[itemssorted[old.Length].LoadID] = itemssorted[old.Length];
                     }
                 }
-                stream.Close();
             }
             catch (FileLoadException)
             {
@@ -77,6 +77,13 @@ namespace SF3.X002_Editor.Models.Loading
             catch (FileNotFoundException)
             {
                 return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
             }
             return true;
         }

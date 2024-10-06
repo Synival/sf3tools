@@ -31,9 +31,10 @@ namespace SF3.X1_Editor.Models.Arrows
 
             itemssorted = new Arrow[0];
             items = new Arrow[100]; //max size of itemList
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(r, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
@@ -97,7 +98,6 @@ namespace SF3.X1_Editor.Models.Arrows
                     }
                 }
 
-                stream.Close();
             }
             catch (FileLoadException)
             {
@@ -106,6 +106,13 @@ namespace SF3.X1_Editor.Models.Arrows
             catch (FileNotFoundException)
             {
                 return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
             }
             return true;
         }

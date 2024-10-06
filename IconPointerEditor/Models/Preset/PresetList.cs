@@ -45,9 +45,10 @@ namespace SF3.IconPointerEditor.Models.Presets
 
             presetssorted = new Preset[0];
             presets = new Preset[300]; //max size 
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(r, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
@@ -68,13 +69,19 @@ namespace SF3.IconPointerEditor.Models.Presets
                         presets[presetssorted[old.Length].SizeID] = presetssorted[old.Length];
                     }
                 }
-                stream.Close();
             }
             catch (FileLoadException)
             {
                 return false;
                 //} catch (FileNotFoundException) {
                 //  return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
             }
             return true;
         }

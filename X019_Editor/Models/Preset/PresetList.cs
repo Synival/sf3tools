@@ -45,9 +45,10 @@ namespace SF3.X019_Editor.Models.Presets
 
             presetssorted = new Preset[0];
             presets = new Preset[31]; //max size of spellIndexList
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(r, FileMode.Open);
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
@@ -67,7 +68,6 @@ namespace SF3.X019_Editor.Models.Presets
                         presets[presetssorted[old.Length].PresetID] = presetssorted[old.Length];
                     }
                 }
-                stream.Close();
             }
             catch (FileLoadException)
             {
@@ -76,6 +76,13 @@ namespace SF3.X019_Editor.Models.Presets
             catch (FileNotFoundException)
             {
                 return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
             }
             return true;
         }
