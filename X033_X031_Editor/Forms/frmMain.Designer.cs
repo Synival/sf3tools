@@ -92,48 +92,48 @@
             this.lvcID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvEffectsEquip = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcRequirements = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcRange = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcAttack = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcDefense = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvAttackRank = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvSpellRank = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvPhysicalAttribute = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvUnknown1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvMonsterType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvUnknown2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatType1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatUp1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatType2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatUp2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatType3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatUp3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatType4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatUp4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvSpellUse = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvSpellUseLv = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvAtkCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn46 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn47 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn48 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn49 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn50 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn51 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn52 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn53 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn45 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn54 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn55 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn56 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn57 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn58 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn59 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn60 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn61 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn62 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCharacterID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCharacterClass = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHPPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHPCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHPCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHPCurve10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHPCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHPCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHPCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHPCurve20_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMPPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMPCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMPCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMPCurve10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMPCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMPCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMPCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMPCurve20_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAtkPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAtkCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAtkCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAtkCurve10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAtkCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAtkCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAtkCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAtkCurve20_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcDefPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcDefCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcDefCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcDefCurve10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcDefCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcDefCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcDefCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcDefCurve20_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAgiPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAgiCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAgiCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAgiCurve10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAgiCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAgiCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAgiCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAgiCurve20_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabEquipStatistics = new System.Windows.Forms.TabPage();
             this.olvEquipStatistics = new BrightIdeasSoftware.ObjectListView();
@@ -795,96 +795,96 @@
             this.olvStats.AllColumns.Add(this.lvcID);
             this.olvStats.AllColumns.Add(this.lvcAddress);
             this.olvStats.AllColumns.Add(this.lvcName);
-            this.olvStats.AllColumns.Add(this.lvcPrice);
-            this.olvStats.AllColumns.Add(this.lvcWeaponType);
-            this.olvStats.AllColumns.Add(this.olvEffectsEquip);
-            this.olvStats.AllColumns.Add(this.lvcRequirements);
-            this.olvStats.AllColumns.Add(this.lvcRange);
-            this.olvStats.AllColumns.Add(this.lvcAttack);
-            this.olvStats.AllColumns.Add(this.lvcDefense);
-            this.olvStats.AllColumns.Add(this.olvAttackRank);
-            this.olvStats.AllColumns.Add(this.olvSpellRank);
-            this.olvStats.AllColumns.Add(this.olvPhysicalAttribute);
-            this.olvStats.AllColumns.Add(this.olvUnknown1);
-            this.olvStats.AllColumns.Add(this.olvMonsterType);
-            this.olvStats.AllColumns.Add(this.olvUnknown2);
-            this.olvStats.AllColumns.Add(this.olvStatType1);
-            this.olvStats.AllColumns.Add(this.olvStatUp1);
-            this.olvStats.AllColumns.Add(this.olvStatType2);
-            this.olvStats.AllColumns.Add(this.olvStatUp2);
-            this.olvStats.AllColumns.Add(this.olvStatType3);
-            this.olvStats.AllColumns.Add(this.olvStatUp3);
-            this.olvStats.AllColumns.Add(this.olvStatType4);
-            this.olvStats.AllColumns.Add(this.olvStatUp4);
-            this.olvStats.AllColumns.Add(this.olvSpellUse);
-            this.olvStats.AllColumns.Add(this.olvSpellUseLv);
-            this.olvStats.AllColumns.Add(this.olvAtkCurve14_20);
-            this.olvStats.AllColumns.Add(this.olvColumn46);
-            this.olvStats.AllColumns.Add(this.olvColumn47);
-            this.olvStats.AllColumns.Add(this.olvColumn48);
-            this.olvStats.AllColumns.Add(this.olvColumn49);
-            this.olvStats.AllColumns.Add(this.olvColumn50);
-            this.olvStats.AllColumns.Add(this.olvColumn51);
-            this.olvStats.AllColumns.Add(this.olvColumn52);
-            this.olvStats.AllColumns.Add(this.olvColumn53);
-            this.olvStats.AllColumns.Add(this.olvColumn45);
-            this.olvStats.AllColumns.Add(this.olvColumn54);
-            this.olvStats.AllColumns.Add(this.olvColumn55);
-            this.olvStats.AllColumns.Add(this.olvColumn56);
-            this.olvStats.AllColumns.Add(this.olvColumn57);
-            this.olvStats.AllColumns.Add(this.olvColumn58);
-            this.olvStats.AllColumns.Add(this.olvColumn59);
-            this.olvStats.AllColumns.Add(this.olvColumn60);
-            this.olvStats.AllColumns.Add(this.olvColumn61);
-            this.olvStats.AllColumns.Add(this.olvColumn62);
+            this.olvStats.AllColumns.Add(this.lvcCharacterID);
+            this.olvStats.AllColumns.Add(this.lvcCharacterClass);
+            this.olvStats.AllColumns.Add(this.lvcHPPromote);
+            this.olvStats.AllColumns.Add(this.lvcHPCurve1);
+            this.olvStats.AllColumns.Add(this.lvcHPCurve5);
+            this.olvStats.AllColumns.Add(this.lvcHPCurve10);
+            this.olvStats.AllColumns.Add(this.lvcHPCurve12_15);
+            this.olvStats.AllColumns.Add(this.lvcHPCurve14_20);
+            this.olvStats.AllColumns.Add(this.lvcHPCurve17_30);
+            this.olvStats.AllColumns.Add(this.lvcHPCurve20_99);
+            this.olvStats.AllColumns.Add(this.lvcMPPromote);
+            this.olvStats.AllColumns.Add(this.lvcMPCurve1);
+            this.olvStats.AllColumns.Add(this.lvcMPCurve5);
+            this.olvStats.AllColumns.Add(this.lvcMPCurve10);
+            this.olvStats.AllColumns.Add(this.lvcMPCurve12_15);
+            this.olvStats.AllColumns.Add(this.lvcMPCurve14_20);
+            this.olvStats.AllColumns.Add(this.lvcMPCurve17_30);
+            this.olvStats.AllColumns.Add(this.lvcMPCurve20_99);
+            this.olvStats.AllColumns.Add(this.lvcAtkPromote);
+            this.olvStats.AllColumns.Add(this.lvcAtkCurve1);
+            this.olvStats.AllColumns.Add(this.lvcAtkCurve5);
+            this.olvStats.AllColumns.Add(this.lvcAtkCurve10);
+            this.olvStats.AllColumns.Add(this.lvcAtkCurve12_15);
+            this.olvStats.AllColumns.Add(this.lvcAtkCurve14_20);
+            this.olvStats.AllColumns.Add(this.lvcAtkCurve17_30);
+            this.olvStats.AllColumns.Add(this.lvcAtkCurve20_99);
+            this.olvStats.AllColumns.Add(this.lvcDefPromote);
+            this.olvStats.AllColumns.Add(this.lvcDefCurve1);
+            this.olvStats.AllColumns.Add(this.lvcDefCurve5);
+            this.olvStats.AllColumns.Add(this.lvcDefCurve10);
+            this.olvStats.AllColumns.Add(this.lvcDefCurve12_15);
+            this.olvStats.AllColumns.Add(this.lvcDefCurve14_20);
+            this.olvStats.AllColumns.Add(this.lvcDefCurve17_30);
+            this.olvStats.AllColumns.Add(this.lvcDefCurve20_99);
+            this.olvStats.AllColumns.Add(this.lvcAgiPromote);
+            this.olvStats.AllColumns.Add(this.lvcAgiCurve1);
+            this.olvStats.AllColumns.Add(this.lvcAgiCurve5);
+            this.olvStats.AllColumns.Add(this.lvcAgiCurve10);
+            this.olvStats.AllColumns.Add(this.lvcAgiCurve12_15);
+            this.olvStats.AllColumns.Add(this.lvcAgiCurve14_20);
+            this.olvStats.AllColumns.Add(this.lvcAgiCurve17_30);
+            this.olvStats.AllColumns.Add(this.lvcAgiCurve20_99);
             this.olvStats.AllowColumnReorder = true;
             this.olvStats.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvStats.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcID,
             this.lvcAddress,
             this.lvcName,
-            this.lvcPrice,
-            this.lvcWeaponType,
-            this.olvEffectsEquip,
-            this.lvcRequirements,
-            this.lvcRange,
-            this.lvcAttack,
-            this.lvcDefense,
-            this.olvAttackRank,
-            this.olvSpellRank,
-            this.olvPhysicalAttribute,
-            this.olvUnknown1,
-            this.olvMonsterType,
-            this.olvUnknown2,
-            this.olvStatType1,
-            this.olvStatUp1,
-            this.olvStatType2,
-            this.olvStatUp2,
-            this.olvStatType3,
-            this.olvStatUp3,
-            this.olvStatType4,
-            this.olvStatUp4,
-            this.olvSpellUse,
-            this.olvSpellUseLv,
-            this.olvAtkCurve14_20,
-            this.olvColumn46,
-            this.olvColumn47,
-            this.olvColumn48,
-            this.olvColumn49,
-            this.olvColumn50,
-            this.olvColumn51,
-            this.olvColumn52,
-            this.olvColumn53,
-            this.olvColumn45,
-            this.olvColumn54,
-            this.olvColumn55,
-            this.olvColumn56,
-            this.olvColumn57,
-            this.olvColumn58,
-            this.olvColumn59,
-            this.olvColumn60,
-            this.olvColumn61,
-            this.olvColumn62});
+            this.lvcCharacterID,
+            this.lvcCharacterClass,
+            this.lvcHPPromote,
+            this.lvcHPCurve1,
+            this.lvcHPCurve5,
+            this.lvcHPCurve10,
+            this.lvcHPCurve12_15,
+            this.lvcHPCurve14_20,
+            this.lvcHPCurve17_30,
+            this.lvcHPCurve20_99,
+            this.lvcMPPromote,
+            this.lvcMPCurve1,
+            this.lvcMPCurve5,
+            this.lvcMPCurve10,
+            this.lvcMPCurve12_15,
+            this.lvcMPCurve14_20,
+            this.lvcMPCurve17_30,
+            this.lvcMPCurve20_99,
+            this.lvcAtkPromote,
+            this.lvcAtkCurve1,
+            this.lvcAtkCurve5,
+            this.lvcAtkCurve10,
+            this.lvcAtkCurve12_15,
+            this.lvcAtkCurve14_20,
+            this.lvcAtkCurve17_30,
+            this.lvcAtkCurve20_99,
+            this.lvcDefPromote,
+            this.lvcDefCurve1,
+            this.lvcDefCurve5,
+            this.lvcDefCurve10,
+            this.lvcDefCurve12_15,
+            this.lvcDefCurve14_20,
+            this.lvcDefCurve17_30,
+            this.lvcDefCurve20_99,
+            this.lvcAgiPromote,
+            this.lvcAgiCurve1,
+            this.lvcAgiCurve5,
+            this.lvcAgiCurve10,
+            this.lvcAgiCurve12_15,
+            this.lvcAgiCurve14_20,
+            this.lvcAgiCurve17_30,
+            this.lvcAgiCurve20_99});
             this.olvStats.FullRowSelect = true;
             this.olvStats.GridLines = true;
             this.olvStats.HasCollapsibleGroups = false;
@@ -923,299 +923,299 @@
             this.lvcName.Text = "nameStatus";
             this.lvcName.Width = 90;
             // 
-            // lvcPrice
+            // lvcCharacterID
             // 
-            this.lvcPrice.AspectName = "CharacterID";
-            this.lvcPrice.AspectToStringFormat = "{0:X}";
-            this.lvcPrice.HeaderForeColor = System.Drawing.Color.White;
-            this.lvcPrice.Text = "characterID";
-            this.lvcPrice.Width = 80;
+            this.lvcCharacterID.AspectName = "CharacterID";
+            this.lvcCharacterID.AspectToStringFormat = "{0:X}";
+            this.lvcCharacterID.HeaderForeColor = System.Drawing.Color.White;
+            this.lvcCharacterID.Text = "characterID";
+            this.lvcCharacterID.Width = 80;
             // 
-            // lvcWeaponType
+            // lvcCharacterClass
             // 
-            this.lvcWeaponType.AspectName = "CharacterClass";
-            this.lvcWeaponType.Text = "Class";
-            this.lvcWeaponType.Width = 150;
+            this.lvcCharacterClass.AspectName = "CharacterClass";
+            this.lvcCharacterClass.Text = "Class";
+            this.lvcCharacterClass.Width = 150;
             // 
-            // olvEffectsEquip
+            // lvcHPPromote
             // 
-            this.olvEffectsEquip.AspectName = "HPPromote";
-            this.olvEffectsEquip.AspectToStringFormat = "{0:X}";
-            this.olvEffectsEquip.Text = "HPPromote";
-            this.olvEffectsEquip.Width = 70;
+            this.lvcHPPromote.AspectName = "HPPromote";
+            this.lvcHPPromote.AspectToStringFormat = "{0:X}";
+            this.lvcHPPromote.Text = "HPPromote";
+            this.lvcHPPromote.Width = 70;
             // 
-            // lvcRequirements
+            // lvcHPCurve1
             // 
-            this.lvcRequirements.AspectName = "HPCurve1";
-            this.lvcRequirements.AspectToStringFormat = "{0:X}";
-            this.lvcRequirements.Text = "HPLv1";
-            this.lvcRequirements.Width = 50;
+            this.lvcHPCurve1.AspectName = "HPCurve1";
+            this.lvcHPCurve1.AspectToStringFormat = "{0:X}";
+            this.lvcHPCurve1.Text = "HPLv1";
+            this.lvcHPCurve1.Width = 50;
             // 
-            // lvcRange
+            // lvcHPCurve5
             // 
-            this.lvcRange.AspectName = "HPCurve5";
-            this.lvcRange.AspectToStringFormat = "{0:X}";
-            this.lvcRange.Text = "HPLv5";
-            this.lvcRange.Width = 50;
+            this.lvcHPCurve5.AspectName = "HPCurve5";
+            this.lvcHPCurve5.AspectToStringFormat = "{0:X}";
+            this.lvcHPCurve5.Text = "HPLv5";
+            this.lvcHPCurve5.Width = 50;
             // 
-            // lvcAttack
+            // lvcHPCurve10
             // 
-            this.lvcAttack.AspectName = "HPCurve10";
-            this.lvcAttack.AspectToStringFormat = "{0:X}";
-            this.lvcAttack.Text = "HPLv10";
-            this.lvcAttack.Width = 65;
+            this.lvcHPCurve10.AspectName = "HPCurve10";
+            this.lvcHPCurve10.AspectToStringFormat = "{0:X}";
+            this.lvcHPCurve10.Text = "HPLv10";
+            this.lvcHPCurve10.Width = 65;
             // 
-            // lvcDefense
+            // lvcHPCurve12_15
             // 
-            this.lvcDefense.AspectName = "HPCurve12_15";
-            this.lvcDefense.AspectToStringFormat = "{0:X}";
-            this.lvcDefense.Text = "HPLv12/15";
-            this.lvcDefense.Width = 75;
+            this.lvcHPCurve12_15.AspectName = "HPCurve12_15";
+            this.lvcHPCurve12_15.AspectToStringFormat = "{0:X}";
+            this.lvcHPCurve12_15.Text = "HPLv12/15";
+            this.lvcHPCurve12_15.Width = 75;
             // 
-            // olvAttackRank
+            // lvcHPCurve14_20
             // 
-            this.olvAttackRank.AspectName = "HPCurve14_20";
-            this.olvAttackRank.AspectToStringFormat = "{0:X}";
-            this.olvAttackRank.Text = "HPLv14/20";
-            this.olvAttackRank.Width = 75;
+            this.lvcHPCurve14_20.AspectName = "HPCurve14_20";
+            this.lvcHPCurve14_20.AspectToStringFormat = "{0:X}";
+            this.lvcHPCurve14_20.Text = "HPLv14/20";
+            this.lvcHPCurve14_20.Width = 75;
             // 
-            // olvSpellRank
+            // lvcHPCurve17_30
             // 
-            this.olvSpellRank.AspectName = "HPCurve17_30";
-            this.olvSpellRank.AspectToStringFormat = "{0:X}";
-            this.olvSpellRank.Text = "HPLv17/30";
-            this.olvSpellRank.Width = 75;
+            this.lvcHPCurve17_30.AspectName = "HPCurve17_30";
+            this.lvcHPCurve17_30.AspectToStringFormat = "{0:X}";
+            this.lvcHPCurve17_30.Text = "HPLv17/30";
+            this.lvcHPCurve17_30.Width = 75;
             // 
-            // olvPhysicalAttribute
+            // lvcHPCurve20_99
             // 
-            this.olvPhysicalAttribute.AspectName = "HPCurve20_99";
-            this.olvPhysicalAttribute.AspectToStringFormat = "{0:X}";
-            this.olvPhysicalAttribute.Text = "HPLv20/99";
-            this.olvPhysicalAttribute.Width = 75;
+            this.lvcHPCurve20_99.AspectName = "HPCurve20_99";
+            this.lvcHPCurve20_99.AspectToStringFormat = "{0:X}";
+            this.lvcHPCurve20_99.Text = "HPLv20/99";
+            this.lvcHPCurve20_99.Width = 75;
             // 
-            // olvUnknown1
+            // lvcMPPromote
             // 
-            this.olvUnknown1.AspectName = "MPPromote";
-            this.olvUnknown1.AspectToStringFormat = "{0:X}";
-            this.olvUnknown1.Text = "MPPromote";
-            this.olvUnknown1.Width = 70;
+            this.lvcMPPromote.AspectName = "MPPromote";
+            this.lvcMPPromote.AspectToStringFormat = "{0:X}";
+            this.lvcMPPromote.Text = "MPPromote";
+            this.lvcMPPromote.Width = 70;
             // 
-            // olvMonsterType
+            // lvcMPCurve1
             // 
-            this.olvMonsterType.AspectName = "MPCurve1";
-            this.olvMonsterType.AspectToStringFormat = "{0:X}";
-            this.olvMonsterType.Text = "MPLv1";
-            this.olvMonsterType.Width = 50;
+            this.lvcMPCurve1.AspectName = "MPCurve1";
+            this.lvcMPCurve1.AspectToStringFormat = "{0:X}";
+            this.lvcMPCurve1.Text = "MPLv1";
+            this.lvcMPCurve1.Width = 50;
             // 
-            // olvUnknown2
+            // lvcMPCurve5
             // 
-            this.olvUnknown2.AspectName = "MPCurve5";
-            this.olvUnknown2.AspectToStringFormat = "{0:X}";
-            this.olvUnknown2.Text = "MPLv5";
-            this.olvUnknown2.Width = 50;
+            this.lvcMPCurve5.AspectName = "MPCurve5";
+            this.lvcMPCurve5.AspectToStringFormat = "{0:X}";
+            this.lvcMPCurve5.Text = "MPLv5";
+            this.lvcMPCurve5.Width = 50;
             // 
-            // olvStatType1
+            // lvcMPCurve10
             // 
-            this.olvStatType1.AspectName = "MPCurve10";
-            this.olvStatType1.AspectToStringFormat = "{0:X}";
-            this.olvStatType1.Text = "MPLv10";
-            this.olvStatType1.Width = 62;
+            this.lvcMPCurve10.AspectName = "MPCurve10";
+            this.lvcMPCurve10.AspectToStringFormat = "{0:X}";
+            this.lvcMPCurve10.Text = "MPLv10";
+            this.lvcMPCurve10.Width = 62;
             // 
-            // olvStatUp1
+            // lvcMPCurve12_15
             // 
-            this.olvStatUp1.AspectName = "MPCurve12_15";
-            this.olvStatUp1.AspectToStringFormat = "{0:X}";
-            this.olvStatUp1.Text = "MPLv12/15";
-            this.olvStatUp1.Width = 75;
+            this.lvcMPCurve12_15.AspectName = "MPCurve12_15";
+            this.lvcMPCurve12_15.AspectToStringFormat = "{0:X}";
+            this.lvcMPCurve12_15.Text = "MPLv12/15";
+            this.lvcMPCurve12_15.Width = 75;
             // 
-            // olvStatType2
+            // lvcMPCurve14_20
             // 
-            this.olvStatType2.AspectName = "MPCurve14_20";
-            this.olvStatType2.AspectToStringFormat = "{0:X}";
-            this.olvStatType2.Text = "MPLv14/20";
-            this.olvStatType2.Width = 75;
+            this.lvcMPCurve14_20.AspectName = "MPCurve14_20";
+            this.lvcMPCurve14_20.AspectToStringFormat = "{0:X}";
+            this.lvcMPCurve14_20.Text = "MPLv14/20";
+            this.lvcMPCurve14_20.Width = 75;
             // 
-            // olvStatUp2
+            // lvcMPCurve17_30
             // 
-            this.olvStatUp2.AspectName = "MPCurve17_30";
-            this.olvStatUp2.AspectToStringFormat = "{0:X}";
-            this.olvStatUp2.Text = "MPLv17/30";
-            this.olvStatUp2.Width = 75;
+            this.lvcMPCurve17_30.AspectName = "MPCurve17_30";
+            this.lvcMPCurve17_30.AspectToStringFormat = "{0:X}";
+            this.lvcMPCurve17_30.Text = "MPLv17/30";
+            this.lvcMPCurve17_30.Width = 75;
             // 
-            // olvStatType3
+            // lvcMPCurve20_99
             // 
-            this.olvStatType3.AspectName = "MPCurve20_99";
-            this.olvStatType3.AspectToStringFormat = "{0:X}";
-            this.olvStatType3.Text = "MPLv20/99";
-            this.olvStatType3.Width = 75;
+            this.lvcMPCurve20_99.AspectName = "MPCurve20_99";
+            this.lvcMPCurve20_99.AspectToStringFormat = "{0:X}";
+            this.lvcMPCurve20_99.Text = "MPLv20/99";
+            this.lvcMPCurve20_99.Width = 75;
             // 
-            // olvStatUp3
+            // lvcAtkPromote
             // 
-            this.olvStatUp3.AspectName = "AtkPromote";
-            this.olvStatUp3.AspectToStringFormat = "{0:X}";
-            this.olvStatUp3.Text = "AtkPromote";
-            this.olvStatUp3.Width = 73;
+            this.lvcAtkPromote.AspectName = "AtkPromote";
+            this.lvcAtkPromote.AspectToStringFormat = "{0:X}";
+            this.lvcAtkPromote.Text = "AtkPromote";
+            this.lvcAtkPromote.Width = 73;
             // 
-            // olvStatType4
+            // lvcAtkCurve1
             // 
-            this.olvStatType4.AspectName = "AtkCurve1";
-            this.olvStatType4.AspectToStringFormat = "{0:X}";
-            this.olvStatType4.Text = "AtkLv1";
-            this.olvStatType4.Width = 53;
+            this.lvcAtkCurve1.AspectName = "AtkCurve1";
+            this.lvcAtkCurve1.AspectToStringFormat = "{0:X}";
+            this.lvcAtkCurve1.Text = "AtkLv1";
+            this.lvcAtkCurve1.Width = 53;
             // 
-            // olvStatUp4
+            // lvcAtkCurve5
             // 
-            this.olvStatUp4.AspectName = "AtkCurve5";
-            this.olvStatUp4.AspectToStringFormat = "{0:X}";
-            this.olvStatUp4.Text = "AtkLv5";
-            this.olvStatUp4.Width = 67;
+            this.lvcAtkCurve5.AspectName = "AtkCurve5";
+            this.lvcAtkCurve5.AspectToStringFormat = "{0:X}";
+            this.lvcAtkCurve5.Text = "AtkLv5";
+            this.lvcAtkCurve5.Width = 67;
             // 
-            // olvSpellUse
+            // lvcAtkCurve10
             // 
-            this.olvSpellUse.AspectName = "AtkCurve10";
-            this.olvSpellUse.AspectToStringFormat = "{0:X}";
-            this.olvSpellUse.Text = "AtkLv10";
-            this.olvSpellUse.Width = 70;
+            this.lvcAtkCurve10.AspectName = "AtkCurve10";
+            this.lvcAtkCurve10.AspectToStringFormat = "{0:X}";
+            this.lvcAtkCurve10.Text = "AtkLv10";
+            this.lvcAtkCurve10.Width = 70;
             // 
-            // olvSpellUseLv
+            // lvcAtkCurve12_15
             // 
-            this.olvSpellUseLv.AspectName = "AtkCurve12_15";
-            this.olvSpellUseLv.AspectToStringFormat = "{0:X}";
-            this.olvSpellUseLv.Text = "AtkLv12/15";
-            this.olvSpellUseLv.Width = 70;
+            this.lvcAtkCurve12_15.AspectName = "AtkCurve12_15";
+            this.lvcAtkCurve12_15.AspectToStringFormat = "{0:X}";
+            this.lvcAtkCurve12_15.Text = "AtkLv12/15";
+            this.lvcAtkCurve12_15.Width = 70;
             // 
-            // olvAtkCurve14_20
+            // lvcAtkCurve14_20
             // 
-            this.olvAtkCurve14_20.AspectName = "AtkCurve14_20";
-            this.olvAtkCurve14_20.AspectToStringFormat = "{0:X}";
-            this.olvAtkCurve14_20.Text = "AtkLv14/20";
-            this.olvAtkCurve14_20.Width = 70;
+            this.lvcAtkCurve14_20.AspectName = "AtkCurve14_20";
+            this.lvcAtkCurve14_20.AspectToStringFormat = "{0:X}";
+            this.lvcAtkCurve14_20.Text = "AtkLv14/20";
+            this.lvcAtkCurve14_20.Width = 70;
             // 
-            // olvColumn46
+            // lvcAtkCurve17_30
             // 
-            this.olvColumn46.AspectName = "AtkCurve17_30";
-            this.olvColumn46.AspectToStringFormat = "{0:X}";
-            this.olvColumn46.Text = "AtkLv17/30";
-            this.olvColumn46.Width = 70;
+            this.lvcAtkCurve17_30.AspectName = "AtkCurve17_30";
+            this.lvcAtkCurve17_30.AspectToStringFormat = "{0:X}";
+            this.lvcAtkCurve17_30.Text = "AtkLv17/30";
+            this.lvcAtkCurve17_30.Width = 70;
             // 
-            // olvColumn47
+            // lvcAtkCurve20_99
             // 
-            this.olvColumn47.AspectName = "AtkCurve20_99";
-            this.olvColumn47.AspectToStringFormat = "{0:X}";
-            this.olvColumn47.Text = "AtkLv20/99";
-            this.olvColumn47.Width = 70;
+            this.lvcAtkCurve20_99.AspectName = "AtkCurve20_99";
+            this.lvcAtkCurve20_99.AspectToStringFormat = "{0:X}";
+            this.lvcAtkCurve20_99.Text = "AtkLv20/99";
+            this.lvcAtkCurve20_99.Width = 70;
             // 
-            // olvColumn48
+            // lvcDefPromote
             // 
-            this.olvColumn48.AspectName = "DefPromote";
-            this.olvColumn48.AspectToStringFormat = "{0:X}";
-            this.olvColumn48.Text = "DefPromote";
-            this.olvColumn48.Width = 73;
+            this.lvcDefPromote.AspectName = "DefPromote";
+            this.lvcDefPromote.AspectToStringFormat = "{0:X}";
+            this.lvcDefPromote.Text = "DefPromote";
+            this.lvcDefPromote.Width = 73;
             // 
-            // olvColumn49
+            // lvcDefCurve1
             // 
-            this.olvColumn49.AspectName = "DefCurve1";
-            this.olvColumn49.AspectToStringFormat = "{0:X}";
-            this.olvColumn49.Text = "DefLv1";
-            this.olvColumn49.Width = 53;
+            this.lvcDefCurve1.AspectName = "DefCurve1";
+            this.lvcDefCurve1.AspectToStringFormat = "{0:X}";
+            this.lvcDefCurve1.Text = "DefLv1";
+            this.lvcDefCurve1.Width = 53;
             // 
-            // olvColumn50
+            // lvcDefCurve5
             // 
-            this.olvColumn50.AspectName = "DefCurve5";
-            this.olvColumn50.AspectToStringFormat = "{0:X}";
-            this.olvColumn50.Text = "DefLv5";
-            this.olvColumn50.Width = 67;
+            this.lvcDefCurve5.AspectName = "DefCurve5";
+            this.lvcDefCurve5.AspectToStringFormat = "{0:X}";
+            this.lvcDefCurve5.Text = "DefLv5";
+            this.lvcDefCurve5.Width = 67;
             // 
-            // olvColumn51
+            // lvcDefCurve10
             // 
-            this.olvColumn51.AspectName = "DefCurve10";
-            this.olvColumn51.AspectToStringFormat = "{0:X}";
-            this.olvColumn51.Text = "DefLv2";
-            this.olvColumn51.Width = 70;
+            this.lvcDefCurve10.AspectName = "DefCurve10";
+            this.lvcDefCurve10.AspectToStringFormat = "{0:X}";
+            this.lvcDefCurve10.Text = "DefLv2";
+            this.lvcDefCurve10.Width = 70;
             // 
-            // olvColumn52
+            // lvcDefCurve12_15
             // 
-            this.olvColumn52.AspectName = "DefCurve12_15";
-            this.olvColumn52.AspectToStringFormat = "{0:X}";
-            this.olvColumn52.Text = "DefLv12/15";
-            this.olvColumn52.Width = 70;
+            this.lvcDefCurve12_15.AspectName = "DefCurve12_15";
+            this.lvcDefCurve12_15.AspectToStringFormat = "{0:X}";
+            this.lvcDefCurve12_15.Text = "DefLv12/15";
+            this.lvcDefCurve12_15.Width = 70;
             // 
-            // olvColumn53
+            // lvcDefCurve14_20
             // 
-            this.olvColumn53.AspectName = "DefCurve14_20";
-            this.olvColumn53.AspectToStringFormat = "{0:X}";
-            this.olvColumn53.Text = "DefLv14/20";
-            this.olvColumn53.Width = 70;
+            this.lvcDefCurve14_20.AspectName = "DefCurve14_20";
+            this.lvcDefCurve14_20.AspectToStringFormat = "{0:X}";
+            this.lvcDefCurve14_20.Text = "DefLv14/20";
+            this.lvcDefCurve14_20.Width = 70;
             // 
-            // olvColumn45
+            // lvcDefCurve17_30
             // 
-            this.olvColumn45.AspectName = "DefCurve17_30";
-            this.olvColumn45.AspectToStringFormat = "{0:X}";
-            this.olvColumn45.Text = "DefLv17/30";
-            this.olvColumn45.Width = 70;
+            this.lvcDefCurve17_30.AspectName = "DefCurve17_30";
+            this.lvcDefCurve17_30.AspectToStringFormat = "{0:X}";
+            this.lvcDefCurve17_30.Text = "DefLv17/30";
+            this.lvcDefCurve17_30.Width = 70;
             // 
-            // olvColumn54
+            // lvcDefCurve20_99
             // 
-            this.olvColumn54.AspectName = "DefCurve20_99";
-            this.olvColumn54.AspectToStringFormat = "{0:X}";
-            this.olvColumn54.Text = "DefLv20/99";
-            this.olvColumn54.Width = 70;
+            this.lvcDefCurve20_99.AspectName = "DefCurve20_99";
+            this.lvcDefCurve20_99.AspectToStringFormat = "{0:X}";
+            this.lvcDefCurve20_99.Text = "DefLv20/99";
+            this.lvcDefCurve20_99.Width = 70;
             // 
-            // olvColumn55
+            // lvcAgiPromote
             // 
-            this.olvColumn55.AspectName = "AgiPromote";
-            this.olvColumn55.AspectToStringFormat = "{0:X}";
-            this.olvColumn55.Text = "AgiPromote";
-            this.olvColumn55.Width = 73;
+            this.lvcAgiPromote.AspectName = "AgiPromote";
+            this.lvcAgiPromote.AspectToStringFormat = "{0:X}";
+            this.lvcAgiPromote.Text = "AgiPromote";
+            this.lvcAgiPromote.Width = 73;
             // 
-            // olvColumn56
+            // lvcAgiCurve1
             // 
-            this.olvColumn56.AspectName = "AgiCurve1";
-            this.olvColumn56.AspectToStringFormat = "{0:X}";
-            this.olvColumn56.Text = "AgiLv1";
-            this.olvColumn56.Width = 53;
+            this.lvcAgiCurve1.AspectName = "AgiCurve1";
+            this.lvcAgiCurve1.AspectToStringFormat = "{0:X}";
+            this.lvcAgiCurve1.Text = "AgiLv1";
+            this.lvcAgiCurve1.Width = 53;
             // 
-            // olvColumn57
+            // lvcAgiCurve5
             // 
-            this.olvColumn57.AspectName = "AgiCurve5";
-            this.olvColumn57.AspectToStringFormat = "{0:X}";
-            this.olvColumn57.Text = "AgiLv5";
-            this.olvColumn57.Width = 67;
+            this.lvcAgiCurve5.AspectName = "AgiCurve5";
+            this.lvcAgiCurve5.AspectToStringFormat = "{0:X}";
+            this.lvcAgiCurve5.Text = "AgiLv5";
+            this.lvcAgiCurve5.Width = 67;
             // 
-            // olvColumn58
+            // lvcAgiCurve10
             // 
-            this.olvColumn58.AspectName = "AgiCurve10";
-            this.olvColumn58.AspectToStringFormat = "{0:X}";
-            this.olvColumn58.Text = "AgiLv10";
-            this.olvColumn58.Width = 70;
+            this.lvcAgiCurve10.AspectName = "AgiCurve10";
+            this.lvcAgiCurve10.AspectToStringFormat = "{0:X}";
+            this.lvcAgiCurve10.Text = "AgiLv10";
+            this.lvcAgiCurve10.Width = 70;
             // 
-            // olvColumn59
+            // lvcAgiCurve12_15
             // 
-            this.olvColumn59.AspectName = "AgiCurve12_15";
-            this.olvColumn59.AspectToStringFormat = "{0:X}";
-            this.olvColumn59.Text = "AgiLv12/15";
-            this.olvColumn59.Width = 70;
+            this.lvcAgiCurve12_15.AspectName = "AgiCurve12_15";
+            this.lvcAgiCurve12_15.AspectToStringFormat = "{0:X}";
+            this.lvcAgiCurve12_15.Text = "AgiLv12/15";
+            this.lvcAgiCurve12_15.Width = 70;
             // 
-            // olvColumn60
+            // lvcAgiCurve14_20
             // 
-            this.olvColumn60.AspectName = "AgiCurve14_20";
-            this.olvColumn60.AspectToStringFormat = "{0:X}";
-            this.olvColumn60.Text = "AgiLv14/20";
-            this.olvColumn60.Width = 70;
+            this.lvcAgiCurve14_20.AspectName = "AgiCurve14_20";
+            this.lvcAgiCurve14_20.AspectToStringFormat = "{0:X}";
+            this.lvcAgiCurve14_20.Text = "AgiLv14/20";
+            this.lvcAgiCurve14_20.Width = 70;
             // 
-            // olvColumn61
+            // lvcAgiCurve17_30
             // 
-            this.olvColumn61.AspectName = "AgiCurve17_30";
-            this.olvColumn61.AspectToStringFormat = "{0:X}";
-            this.olvColumn61.Text = "AgiLv17/30";
-            this.olvColumn61.Width = 70;
+            this.lvcAgiCurve17_30.AspectName = "AgiCurve17_30";
+            this.lvcAgiCurve17_30.AspectToStringFormat = "{0:X}";
+            this.lvcAgiCurve17_30.Text = "AgiLv17/30";
+            this.lvcAgiCurve17_30.Width = 70;
             // 
-            // olvColumn62
+            // lvcAgiCurve20_99
             // 
-            this.olvColumn62.AspectName = "AgiCurve20_99";
-            this.olvColumn62.AspectToStringFormat = "{0:X}";
-            this.olvColumn62.Text = "AgiLv20/99";
-            this.olvColumn62.Width = 70;
+            this.lvcAgiCurve20_99.AspectName = "AgiCurve20_99";
+            this.lvcAgiCurve20_99.AspectToStringFormat = "{0:X}";
+            this.lvcAgiCurve20_99.Text = "AgiLv20/99";
+            this.lvcAgiCurve20_99.Width = 70;
             // 
             // tabMain
             // 
@@ -2474,29 +2474,29 @@
         private BrightIdeasSoftware.OLVColumn lvcID;
         private BrightIdeasSoftware.OLVColumn lvcAddress;
         private BrightIdeasSoftware.OLVColumn lvcName;
-        private BrightIdeasSoftware.OLVColumn lvcPrice;
-        private BrightIdeasSoftware.OLVColumn lvcWeaponType;
-        private BrightIdeasSoftware.OLVColumn olvEffectsEquip;
-        private BrightIdeasSoftware.OLVColumn lvcRequirements;
-        private BrightIdeasSoftware.OLVColumn lvcRange;
-        private BrightIdeasSoftware.OLVColumn lvcAttack;
-        private BrightIdeasSoftware.OLVColumn lvcDefense;
-        private BrightIdeasSoftware.OLVColumn olvAttackRank;
-        private BrightIdeasSoftware.OLVColumn olvSpellRank;
-        private BrightIdeasSoftware.OLVColumn olvPhysicalAttribute;
-        private BrightIdeasSoftware.OLVColumn olvUnknown1;
-        private BrightIdeasSoftware.OLVColumn olvMonsterType;
-        private BrightIdeasSoftware.OLVColumn olvUnknown2;
-        private BrightIdeasSoftware.OLVColumn olvStatType1;
-        private BrightIdeasSoftware.OLVColumn olvStatUp1;
-        private BrightIdeasSoftware.OLVColumn olvStatType2;
-        private BrightIdeasSoftware.OLVColumn olvStatUp2;
-        private BrightIdeasSoftware.OLVColumn olvStatType3;
-        private BrightIdeasSoftware.OLVColumn olvStatUp3;
-        private BrightIdeasSoftware.OLVColumn olvStatType4;
-        private BrightIdeasSoftware.OLVColumn olvStatUp4;
-        private BrightIdeasSoftware.OLVColumn olvSpellUse;
-        private BrightIdeasSoftware.OLVColumn olvSpellUseLv;
+        private BrightIdeasSoftware.OLVColumn lvcCharacterID;
+        private BrightIdeasSoftware.OLVColumn lvcCharacterClass;
+        private BrightIdeasSoftware.OLVColumn lvcHPPromote;
+        private BrightIdeasSoftware.OLVColumn lvcHPCurve1;
+        private BrightIdeasSoftware.OLVColumn lvcHPCurve5;
+        private BrightIdeasSoftware.OLVColumn lvcHPCurve10;
+        private BrightIdeasSoftware.OLVColumn lvcHPCurve12_15;
+        private BrightIdeasSoftware.OLVColumn lvcHPCurve14_20;
+        private BrightIdeasSoftware.OLVColumn lvcHPCurve17_30;
+        private BrightIdeasSoftware.OLVColumn lvcHPCurve20_99;
+        private BrightIdeasSoftware.OLVColumn lvcMPPromote;
+        private BrightIdeasSoftware.OLVColumn lvcMPCurve1;
+        private BrightIdeasSoftware.OLVColumn lvcMPCurve5;
+        private BrightIdeasSoftware.OLVColumn lvcMPCurve10;
+        private BrightIdeasSoftware.OLVColumn lvcMPCurve12_15;
+        private BrightIdeasSoftware.OLVColumn lvcMPCurve14_20;
+        private BrightIdeasSoftware.OLVColumn lvcMPCurve17_30;
+        private BrightIdeasSoftware.OLVColumn lvcMPCurve20_99;
+        private BrightIdeasSoftware.OLVColumn lvcAtkPromote;
+        private BrightIdeasSoftware.OLVColumn lvcAtkCurve1;
+        private BrightIdeasSoftware.OLVColumn lvcAtkCurve5;
+        private BrightIdeasSoftware.OLVColumn lvcAtkCurve10;
+        private BrightIdeasSoftware.OLVColumn lvcAtkCurve12_15;
         private System.Windows.Forms.TabPage tabEquipStatistics;
         private BrightIdeasSoftware.ObjectListView olvEquipStatistics;
         private BrightIdeasSoftware.OLVColumn olvColumn27;
@@ -2521,25 +2521,25 @@
         private BrightIdeasSoftware.OLVColumn olvColumn38;
         private BrightIdeasSoftware.OLVColumn olvColumn39;
         internal System.Windows.Forms.TabControl tabMain;
-        private BrightIdeasSoftware.OLVColumn olvAtkCurve14_20;
-        private BrightIdeasSoftware.OLVColumn olvColumn46;
-        private BrightIdeasSoftware.OLVColumn olvColumn47;
-        private BrightIdeasSoftware.OLVColumn olvColumn48;
-        private BrightIdeasSoftware.OLVColumn olvColumn49;
-        private BrightIdeasSoftware.OLVColumn olvColumn50;
-        private BrightIdeasSoftware.OLVColumn olvColumn51;
-        private BrightIdeasSoftware.OLVColumn olvColumn52;
-        private BrightIdeasSoftware.OLVColumn olvColumn53;
-        private BrightIdeasSoftware.OLVColumn olvColumn45;
-        private BrightIdeasSoftware.OLVColumn olvColumn54;
-        private BrightIdeasSoftware.OLVColumn olvColumn55;
-        private BrightIdeasSoftware.OLVColumn olvColumn56;
-        private BrightIdeasSoftware.OLVColumn olvColumn57;
-        private BrightIdeasSoftware.OLVColumn olvColumn58;
-        private BrightIdeasSoftware.OLVColumn olvColumn59;
-        private BrightIdeasSoftware.OLVColumn olvColumn60;
-        private BrightIdeasSoftware.OLVColumn olvColumn61;
-        private BrightIdeasSoftware.OLVColumn olvColumn62;
+        private BrightIdeasSoftware.OLVColumn lvcAtkCurve14_20;
+        private BrightIdeasSoftware.OLVColumn lvcAtkCurve17_30;
+        private BrightIdeasSoftware.OLVColumn lvcAtkCurve20_99;
+        private BrightIdeasSoftware.OLVColumn lvcDefPromote;
+        private BrightIdeasSoftware.OLVColumn lvcDefCurve1;
+        private BrightIdeasSoftware.OLVColumn lvcDefCurve5;
+        private BrightIdeasSoftware.OLVColumn lvcDefCurve10;
+        private BrightIdeasSoftware.OLVColumn lvcDefCurve12_15;
+        private BrightIdeasSoftware.OLVColumn lvcDefCurve14_20;
+        private BrightIdeasSoftware.OLVColumn lvcDefCurve17_30;
+        private BrightIdeasSoftware.OLVColumn lvcDefCurve20_99;
+        private BrightIdeasSoftware.OLVColumn lvcAgiPromote;
+        private BrightIdeasSoftware.OLVColumn lvcAgiCurve1;
+        private BrightIdeasSoftware.OLVColumn lvcAgiCurve5;
+        private BrightIdeasSoftware.OLVColumn lvcAgiCurve10;
+        private BrightIdeasSoftware.OLVColumn lvcAgiCurve12_15;
+        private BrightIdeasSoftware.OLVColumn lvcAgiCurve14_20;
+        private BrightIdeasSoftware.OLVColumn lvcAgiCurve17_30;
+        private BrightIdeasSoftware.OLVColumn lvcAgiCurve20_99;
         private BrightIdeasSoftware.OLVColumn olvColumn63;
         private BrightIdeasSoftware.OLVColumn olvColumn64;
         private BrightIdeasSoftware.OLVColumn olvColumn65;
