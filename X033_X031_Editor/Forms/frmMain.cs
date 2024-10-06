@@ -45,8 +45,8 @@ namespace SF3.X033_X031_Editor.Forms
             frmMonsterEditor_Resize(this, new EventArgs());
 
             // Set up curve graph controls
-            CurveGraphCharacterComboBox.DataSource = _statsList.Models;
-            CurveGraphCharacterComboBox.DisplayMember = "Name";
+            cbCurveGraphCharacter.DataSource = _statsList.Models;
+            cbCurveGraphCharacter.DisplayMember = "Name";
 
             /*try {
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
@@ -241,13 +241,13 @@ namespace SF3.X033_X031_Editor.Forms
             //olvCharacters.ClearObjects();
             //olvMonsters.ClearObjects();
 
-            olvItems.ClearObjects();
-            objectListView1.ClearObjects();
-            objectListView2.ClearObjects();
-            objectListView3.ClearObjects();
-            objectListView4.ClearObjects();
-            objectListView5.ClearObjects();
-            objectListView6.ClearObjects();
+            olvStats.ClearObjects();
+            olvSpells.ClearObjects();
+            olvEquipStatistics.ClearObjects();
+            olvMiscellaneous.ClearObjects();
+            olvInitialInfo.ClearObjects();
+            olvWeaponLevelReq.ClearObjects();
+            olvCurveCalc.ClearObjects();
 
             //olvPresets.ClearObjects();
             //olvSpells.ClearObjects();
@@ -256,13 +256,13 @@ namespace SF3.X033_X031_Editor.Forms
 
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
-            olvItems.AddObjects(_statsList.Models);
-            objectListView1.AddObjects(_statsList.Models);
-            objectListView2.AddObjects(_statsList.Models);
-            objectListView3.AddObjects(_statsList.Models);
-            objectListView4.AddObjects(_initialInfoList.Models);
-            objectListView5.AddObjects(_weaponLevelList.Models);
-            objectListView6.AddObjects(_statsList.Models);
+            olvStats.AddObjects(_statsList.Models);
+            olvSpells.AddObjects(_statsList.Models);
+            olvEquipStatistics.AddObjects(_statsList.Models);
+            olvMiscellaneous.AddObjects(_statsList.Models);
+            olvInitialInfo.AddObjects(_initialInfoList.Models);
+            olvWeaponLevelReq.AddObjects(_weaponLevelList.Models);
+            olvCurveCalc.AddObjects(_statsList.Models);
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -270,7 +270,7 @@ namespace SF3.X033_X031_Editor.Forms
             //olvSpells.AddObjects(SpellEntryList.getSpellEntryList());
 
             // Update curve graph controls.
-            CurveGraphCharacterComboBox.DataSource = _statsList.Models;
+            cbCurveGraphCharacter.DataSource = _statsList.Models;
 
             return true;
         }
@@ -315,13 +315,13 @@ namespace SF3.X033_X031_Editor.Forms
             tabMain.Size = newsize;
             //olvMonsters.Size = tabMonsters.ClientSize;
             //olvCharacters.Size = tabCharacters.ClientSize;
-            olvItems.Size = tabItems.ClientSize;
-            objectListView1.Size = tabPage1.ClientSize;
-            objectListView2.Size = tabPage2.ClientSize;
-            objectListView3.Size = tabPage3.ClientSize;
-            objectListView4.Size = tabPage4.ClientSize;
-            objectListView5.Size = tabPage5.ClientSize;
-            objectListView6.Size = tabPage6.ClientSize;
+            olvStats.Size = tabStats.ClientSize;
+            olvSpells.Size = tabSpells.ClientSize;
+            olvEquipStatistics.Size = tabEquipStatistics.ClientSize;
+            olvMiscellaneous.Size = tabMiscellaneous.ClientSize;
+            olvInitialInfo.Size = tabInitialInfo.ClientSize;
+            olvWeaponLevelReq.Size = tabWeaponLevelReq.ClientSize;
+            olvCurveCalc.Size = tabCurveCalc.ClientSize;
             //olvBlacksmith.Size = tabBlacksmith.ClientSize;
             //olvStoreItems.Size = tabShops.ClientSize;
             //olvSpells.Size = tabSpells.ClientSize;
@@ -332,13 +332,13 @@ namespace SF3.X033_X031_Editor.Forms
             //olvBlacksmith.FinishCellEdit();
             //olvMonsters.FinishCellEdit();
             //olvCharacters.FinishCellEdit();
-            olvItems.FinishCellEdit();
-            objectListView1.FinishCellEdit();
-            objectListView2.FinishCellEdit();
-            objectListView3.FinishCellEdit();
-            objectListView4.FinishCellEdit();
-            objectListView5.FinishCellEdit();
-            objectListView6.FinishCellEdit();
+            olvStats.FinishCellEdit();
+            olvSpells.FinishCellEdit();
+            olvEquipStatistics.FinishCellEdit();
+            olvMiscellaneous.FinishCellEdit();
+            olvInitialInfo.FinishCellEdit();
+            olvWeaponLevelReq.FinishCellEdit();
+            olvCurveCalc.FinishCellEdit();
             //olvStoreItems.FinishCellEdit();
             //olvSpells.FinishCellEdit();
             SaveFileDialog savefile = new SaveFileDialog();
@@ -558,8 +558,8 @@ namespace SF3.X033_X031_Editor.Forms
 
         private void tabpage6_Click(object sender, EventArgs e)
         {
-            objectListView6.ClearObjects();
-            objectListView6.AddObjects(_statsList.Models);
+            olvCurveCalc.ClearObjects();
+            olvCurveCalc.AddObjects(_statsList.Models);
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -580,7 +580,7 @@ namespace SF3.X033_X031_Editor.Forms
         {
             var curveGraphData = new List<CurveGraphDataPoint>();
 
-            int index = CurveGraphCharacterComboBox.SelectedIndex;
+            int index = cbCurveGraphCharacter.SelectedIndex;
             Stats stats = (index >= 0 && index < _statsList.Models.Length) ? _statsList.Models[index] : null;
 
             bool isPromoted = stats?.IsPromoted ?? false;
