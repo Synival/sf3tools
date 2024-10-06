@@ -72,6 +72,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProbableValueSet.cs" />
     <Compile Include="Models\IModelArray.cs" />
     <Compile Include="NamedValue.cs" />
     <Compile Include="Types\ScenarioType.cs" />
