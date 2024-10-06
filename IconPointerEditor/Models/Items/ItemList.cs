@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
-using static SF3.IconPointerEditor.Forms.frmMain;
 using System.Windows.Forms;
 using SF3.Types;
 using SF3.Models;

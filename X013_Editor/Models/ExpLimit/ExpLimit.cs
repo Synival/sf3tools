@@ -1,6 +1,5 @@
 ﻿using SF3.Editor;
 using SF3.Types;
-using static SF3.X013_Editor.Forms.frmMain;
 
 namespace SF3.X013_Editor.Models.ExpLimit
 {

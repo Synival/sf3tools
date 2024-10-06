@@ -2,7 +2,6 @@
 using SF3.Editor;
 using SF3.Types;
 using System;
-using static SF3.X1_Editor.Forms.frmMain;
 
 namespace SF3.X1_Editor.Models.Arrows
 {

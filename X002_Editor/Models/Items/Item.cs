@@ -1,7 +1,6 @@
 ﻿using SF3.Editor;
 using SF3.Types;
 using SF3.Values;
-using static SF3.X002_Editor.Forms.frmMain;
 
 namespace SF3.X002_Editor.Models.Items
 {

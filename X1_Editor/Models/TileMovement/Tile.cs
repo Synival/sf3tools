@@ -2,7 +2,6 @@
 using SF3.Types;
 using SF3.X1_Editor.Models.UnknownAI;
 using System;
-using static SF3.X1_Editor.Forms.frmMain;
 
 namespace SF3.X1_Editor.Models.Tiles
 {

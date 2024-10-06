@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System;
 using System.Windows.Forms;
-using static SF3.IconPointerEditor.Forms.frmMain;
 using SF3.Editor;
 using SF3.Types;
+using static SF3.IconPointerEditor.Forms.frmMain;
 
 namespace SF3.IconPointerEditor.Models.Items
 {

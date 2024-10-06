@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
-using static SF3.X1_Editor.Forms.frmMain;
 using SF3.Models;
 using SF3.Types;
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
-using static SF3.X002_Editor.Forms.frmMain;
 using System.Runtime.InteropServices.ComTypes;
 using BrightIdeasSoftware;
 using SF3.Models;
