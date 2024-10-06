@@ -2,12 +2,54 @@
 using SF3.Editor;
 using SF3.Values;
 using System;
+using System.Collections.Generic;
 using static SF3.X033_X031_Editor.Forms.frmMain;
 
 namespace SF3.X033_X031_Editor.Models.Stats
 {
     public class Stats
     {
+        public enum PromotionLevelType
+        {
+            Unpromoted = 0,
+            Promotion1 = 1,
+            Promotion2 = 2,
+        }
+
+        public enum StatType
+        {
+            HP = 0,
+            MP = 1,
+            Atk = 2,
+            Def = 3,
+            Agi = 4,
+        }
+
+        public struct StatCurveTargetLevel
+        {
+            public StatCurveTargetLevel(int groupIndex, int unpromoted, int promoted)
+            {
+                GroupIndex = groupIndex;
+                Unpromoted = unpromoted;
+                Promoted = promoted;
+            }
+
+            public int GroupIndex;
+            public int Unpromoted;
+            public int Promoted;
+        }
+
+        static public readonly StatCurveTargetLevel[] StatCurveTargetLevels =
+        {
+            new StatCurveTargetLevel(0, 1, 1),
+            new StatCurveTargetLevel(1, 5, 5),
+            new StatCurveTargetLevel(2, 10, 10),
+            new StatCurveTargetLevel(3, 12, 15),
+            new StatCurveTargetLevel(4, 14, 20),
+            new StatCurveTargetLevel(5, 17, 30),
+            new StatCurveTargetLevel(6, 20, 99)
+        };
+
         //starting stat table
         private int character;
         private int characterClass;
@@ -381,7 +423,18 @@ namespace SF3.X033_X031_Editor.Models.Stats
 
         public bool IsPromoted => FileEditor.getByte((int)characterClass) >= 0x20;
 
-        static private string GroupPercentString(int growthValue)
+        public PromotionLevelType PromotionLevel
+        {
+            get
+            {
+                int chClass = FileEditor.getByte((int)characterClass);
+                return chClass < 0x20 ? PromotionLevelType.Unpromoted :
+                       chClass < 0x48 ? PromotionLevelType.Promotion1 :
+                                        PromotionLevelType.Promotion2;
+            }
+        }
+
+        static private double GetAverageStatGrowthPerLevel(int growthValue)
         {
             int guaranteedStatBonus = (growthValue & 0xf00) % 15;
 
@@ -393,80 +446,128 @@ namespace SF3.X033_X031_Editor.Models.Stats
             // which provides a bonus +1 stat boost.
             double percentToReachPlusOne = numRngOutcomesToReachPlusOne[growthValuePlusOneCalcStart] / totalRngOutcomes;
 
-            return ((Debugs.debugs == 1) ? string.Format("{0:x}", growthValue) + " || " : "") +
-                   string.Format("{0:0.##}", (percentToReachPlusOne + guaranteedStatBonus) * 100) + "%";
+            return percentToReachPlusOne + guaranteedStatBonus;
         }
 
-        static private string GroupPercentString(int growthDifference, int numLevels)
+        static private string GetAverageStatGrowthPerLevelAsPercent(int growthValue)
         {
-            var growthDifferenceTimes0x100 = growthDifference << 8;
-            switch (numLevels)
+            return ((Debugs.debugs == 1) ? string.Format("{0:x}", growthValue) + " || " : "") +
+                   string.Format("{0:0.##}", GetAverageStatGrowthPerLevel(growthValue) * 100) + "%";
+        }
+
+        static private string GetAverageStatGrowthPerLevelAsPercent(int statRange, int levelRange)
+        {
+            var statRangeTimes0x100 = statRange << 8;
+            switch (levelRange)
             {
                 case 2:
-                    return GroupPercentString(growthDifferenceTimes0x100 >> 1);
+                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 >> 1);
                 case 3:
-                    return GroupPercentString(growthDifferenceTimes0x100 * 0x100 / 0x300);
+                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 * 0x100 / 0x300);
                 case 4:
-                    return GroupPercentString(growthDifferenceTimes0x100 >> 2);
+                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 >> 2);
                 case 5:
-                    return GroupPercentString(growthDifferenceTimes0x100 * 0x100 / 0x280 >> 1);
+                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 * 0x100 / 0x280 >> 1);
                 case 10:
-                    return GroupPercentString(growthDifferenceTimes0x100 * 0x100 / 0x280 >> 2);
+                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 * 0x100 / 0x280 >> 2);
                 case 13:
-                    return GroupPercentString(growthDifferenceTimes0x100 * 0x100 / 0x340 >> 2);
+                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 * 0x100 / 0x340 >> 2);
                 case 69:
-                    return GroupPercentString(growthDifferenceTimes0x100 * 0x100 / 0x228 >> 5);
+                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 * 0x100 / 0x228 >> 5);
                 default:
-                    return GroupPercentString(growthDifferenceTimes0x100 / numLevels);
+                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 / levelRange);
             }
         }
 
-        private string Group1PercentString(int curveBegin, int curveEnd)
+        public int GetStatTarget(StatType stat, int groupIndex)
         {
-            // From level 1 to 5 (+4 levels)
-            return GroupPercentString(curveEnd - curveBegin, 4);
+            switch (stat)
+            {
+                case StatType.HP:
+                    switch (groupIndex)
+                    {
+                        case 0: return HPCurve1;
+                        case 1: return HPCurve5;
+                        case 2: return HPCurve10;
+                        case 3: return HPCurve12_15;
+                        case 4: return HPCurve14_20;
+                        case 5: return HPCurve17_30;
+                        case 6: return HPCurve20_99;
+                        default: throw new ArgumentOutOfRangeException();
+                    }
+
+                case StatType.MP:
+                    switch (groupIndex)
+                    {
+                        case 0: return MPCurve1;
+                        case 1: return MPCurve5;
+                        case 2: return MPCurve10;
+                        case 3: return MPCurve12_15;
+                        case 4: return MPCurve14_20;
+                        case 5: return MPCurve17_30;
+                        case 6: return MPCurve20_99;
+                        default: throw new ArgumentOutOfRangeException();
+                    }
+
+                case StatType.Atk:
+                    switch (groupIndex)
+                    {
+                        case 0: return AtkCurve1;
+                        case 1: return AtkCurve5;
+                        case 2: return AtkCurve10;
+                        case 3: return AtkCurve12_15;
+                        case 4: return AtkCurve14_20;
+                        case 5: return AtkCurve17_30;
+                        case 6: return AtkCurve20_99;
+                        default: throw new ArgumentOutOfRangeException();
+                    }
+
+                case StatType.Def:
+                    switch (groupIndex)
+                    {
+                        case 0: return DefCurve1;
+                        case 1: return DefCurve5;
+                        case 2: return DefCurve10;
+                        case 3: return DefCurve12_15;
+                        case 4: return DefCurve14_20;
+                        case 5: return DefCurve17_30;
+                        case 6: return DefCurve20_99;
+                        default: throw new ArgumentOutOfRangeException();
+                    }
+
+                case StatType.Agi:
+                    switch (groupIndex)
+                    {
+                        case 0: return AgiCurve1;
+                        case 1: return AgiCurve5;
+                        case 2: return AgiCurve10;
+                        case 3: return AgiCurve12_15;
+                        case 4: return AgiCurve14_20;
+                        case 5: return AgiCurve17_30;
+                        case 6: return AgiCurve20_99;
+                        default: throw new ArgumentOutOfRangeException();
+                    }
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
-        private string Group2PercentString(int curveBegin, int curveEnd)
+        public string GetAverageStatGrowthPerLevelAsPercent(StatType stat, int groupIndex)
         {
-            // From level 5 to 10 (+5 levels)
-            return GroupPercentString(curveEnd - curveBegin, 5);
-        }
+            var statBegin = GetStatTarget(stat, groupIndex);
+            var statEnd = GetStatTarget(stat, groupIndex + 1);
+            var statRange = statEnd - statBegin;
 
-        private string Group3PercentString(int curveBegin, int curveEnd)
-        {
-            return !IsPromoted
-                // From level 10 to 12 (+2 levels)
-                ? GroupPercentString(curveEnd - curveBegin, 2)
-                // From level 10 to 15 (+5 levels)
-                : GroupPercentString(curveEnd - curveBegin, 5);
-        }
+            var levelsBegin = StatCurveTargetLevels[groupIndex];
+            var levelsEnd = StatCurveTargetLevels[groupIndex + 1];
 
-        private string Group4PercentString(int curveBegin, int curveEnd)
-        {
-            return !IsPromoted
-                // From level 12 to 14 (+2 levels)
-                ? GroupPercentString(curveEnd - curveBegin, 2)
-                // From level 15 to 20 (+5 levels)
-                : GroupPercentString(curveEnd - curveBegin, 5);
-        }
+            bool isPromoted = IsPromoted;
+            var levelBegin = isPromoted ? levelsBegin.Promoted : levelsBegin.Unpromoted;
+            var levelEnd = isPromoted ? levelsEnd.Promoted : levelsEnd.Unpromoted;
+            var levelRange = levelEnd - levelBegin;
 
-        private string Group5PercentString(int curveBegin, int curveEnd)
-        {
-            return !IsPromoted
-                // From level 14 to 17 (+3 levels)
-                ? GroupPercentString(curveEnd - curveBegin, 3)
-                // From level 20 to 30 (+10 levels)
-                : GroupPercentString(curveEnd - curveBegin, 10);
-        }
-
-        private string Group6PercentString(int curveBegin, int curveEnd)
-        {
-            return !IsPromoted
-                // From level 17 to 30 (+13 levels)
-                ? GroupPercentString(curveEnd - curveBegin, 13)
-                // From level 30 up
-                : GroupPercentString(curveEnd - curveBegin, 69);
+            return GetAverageStatGrowthPerLevelAsPercent(statRange, levelRange);
         }
 
         public int ID => index;
@@ -532,12 +633,12 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => FileEditor.setByte(hpCurve20_99, (byte)value);
         }
 
-        public string HPgroup1 => Group1PercentString(FileEditor.getByte(hpCurve1), FileEditor.getByte(hpCurve5));
-        public string HPgroup2 => Group2PercentString(FileEditor.getByte(hpCurve5), FileEditor.getByte(hpCurve10));
-        public string HPgroup3 => Group3PercentString(FileEditor.getByte(hpCurve10), FileEditor.getByte(hpCurve12_15));
-        public string HPgroup4 => Group4PercentString(FileEditor.getByte(hpCurve12_15), FileEditor.getByte(hpCurve14_20));
-        public string HPgroup5 => Group5PercentString(FileEditor.getByte(hpCurve14_20), FileEditor.getByte(hpCurve17_30));
-        public string HPgroup6 => Group6PercentString(FileEditor.getByte(hpCurve17_30), FileEditor.getByte(hpCurve20_99));
+        public string HPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 0);
+        public string HPgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 1);
+        public string HPgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 2);
+        public string HPgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 3);
+        public string HPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 4);
+        public string HPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 5);
 
         public int MPPromote
         {
@@ -587,12 +688,12 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => FileEditor.setByte(mpCurve20_99, (byte)value);
         }
 
-        public string MPgroup1 => Group1PercentString(FileEditor.getByte(mpCurve1), FileEditor.getByte(mpCurve5));
-        public string MPgroup2 => Group2PercentString(FileEditor.getByte(mpCurve5), FileEditor.getByte(mpCurve10));
-        public string MPgroup3 => Group3PercentString(FileEditor.getByte(mpCurve10), FileEditor.getByte(mpCurve12_15));
-        public string MPgroup4 => Group4PercentString(FileEditor.getByte(mpCurve12_15), FileEditor.getByte(mpCurve14_20));
-        public string MPgroup5 => Group5PercentString(FileEditor.getByte(mpCurve14_20), FileEditor.getByte(mpCurve17_30));
-        public string MPgroup6 => Group6PercentString(FileEditor.getByte(mpCurve17_30), FileEditor.getByte(mpCurve20_99));
+        public string MPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 0);
+        public string MPgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 1);
+        public string MPgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 2);
+        public string MPgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 3);
+        public string MPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 4);
+        public string MPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 5);
 
         public int AtkPromote
         {
@@ -642,12 +743,12 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => FileEditor.setByte(atkCurve20_99, (byte)value);
         }
 
-        public string Atkgroup1 => Group1PercentString(FileEditor.getByte(atkCurve1), FileEditor.getByte(atkCurve5));
-        public string Atkgroup2 => Group2PercentString(FileEditor.getByte(atkCurve5), FileEditor.getByte(atkCurve10));
-        public string Atkgroup3 => Group3PercentString(FileEditor.getByte(atkCurve10), FileEditor.getByte(atkCurve12_15));
-        public string Atkgroup4 => Group4PercentString(FileEditor.getByte(atkCurve12_15), FileEditor.getByte(atkCurve14_20));
-        public string Atkgroup5 => Group5PercentString(FileEditor.getByte(atkCurve14_20), FileEditor.getByte(atkCurve17_30));
-        public string Atkgroup6 => Group6PercentString(FileEditor.getByte(atkCurve17_30), FileEditor.getByte(atkCurve20_99));
+        public string Atkgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 0);
+        public string Atkgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 1);
+        public string Atkgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 2);
+        public string Atkgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 3);
+        public string Atkgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 4);
+        public string Atkgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 5);
 
         public int DefPromote
         {
@@ -697,12 +798,12 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => FileEditor.setByte(defCurve20_99, (byte)value);
         }
 
-        public string Defgroup1 => Group1PercentString(FileEditor.getByte(defCurve1), FileEditor.getByte(defCurve5));
-        public string Defgroup2 => Group2PercentString(FileEditor.getByte(defCurve5), FileEditor.getByte(defCurve10));
-        public string Defgroup3 => Group3PercentString(FileEditor.getByte(defCurve10), FileEditor.getByte(defCurve12_15));
-        public string Defgroup4 => Group4PercentString(FileEditor.getByte(defCurve12_15), FileEditor.getByte(defCurve14_20));
-        public string Defgroup5 => Group5PercentString(FileEditor.getByte(defCurve14_20), FileEditor.getByte(defCurve17_30));
-        public string Defgroup6 => Group6PercentString(FileEditor.getByte(defCurve17_30), FileEditor.getByte(defCurve20_99));
+        public string Defgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 0);
+        public string Defgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 1);
+        public string Defgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 2);
+        public string Defgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 3);
+        public string Defgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 4);
+        public string Defgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 5);
 
         public int AgiPromote
         {
@@ -752,12 +853,12 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => FileEditor.setByte(agiCurve20_99, (byte)value);
         }
 
-        public string Agigroup1 => Group1PercentString(FileEditor.getByte(agiCurve1), FileEditor.getByte(agiCurve5));
-        public string Agigroup2 => Group2PercentString(FileEditor.getByte(agiCurve5), FileEditor.getByte(agiCurve10));
-        public string Agigroup3 => Group3PercentString(FileEditor.getByte(agiCurve10), FileEditor.getByte(agiCurve12_15));
-        public string Agigroup4 => Group4PercentString(FileEditor.getByte(agiCurve12_15), FileEditor.getByte(agiCurve14_20));
-        public string Agigroup5 => Group5PercentString(FileEditor.getByte(agiCurve14_20), FileEditor.getByte(agiCurve17_30));
-        public string Agigroup6 => Group6PercentString(FileEditor.getByte(agiCurve17_30), FileEditor.getByte(agiCurve20_99));
+        public string Agigroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 0);
+        public string Agigroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 1);
+        public string Agigroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 2);
+        public string Agigroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 3);
+        public string Agigroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 4);
+        public string Agigroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 5);
 
         public int S1LearnedAt
         {

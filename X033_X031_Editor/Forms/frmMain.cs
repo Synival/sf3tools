@@ -29,14 +29,20 @@ namespace SF3.X033_X031_Editor.Forms
 
         public class CurveGraphDataPoint
         {
-            public CurveGraphDataPoint(int level, int target)
+            public CurveGraphDataPoint(int level, Dictionary<Stats.StatType, int> stats)
             {
                 Level = level;
-                Target = target;
+                Stats = stats;
             }
 
-            public int Level { get; set; }
-            public int Target { get; set; }
+            public int Level { get; }
+            public Dictionary<Stats.StatType, int> Stats { get; }
+
+            public int HP => Stats[Models.Stats.Stats.StatType.HP];
+            public int MP => Stats[Models.Stats.Stats.StatType.MP];
+            public int Atk => Stats[Models.Stats.Stats.StatType.Atk];
+            public int Def => Stats[Models.Stats.Stats.StatType.Def];
+            public int Agi => Stats[Models.Stats.Stats.StatType.Agi];
         }
 
         public frmMain()
@@ -567,57 +573,34 @@ namespace SF3.X033_X031_Editor.Forms
             int index = cbCurveGraphCharacter.SelectedIndex;
             Stats stats = (index >= 0 && index < _statsList.Models.Length) ? _statsList.Models[index] : null;
 
-            bool isPromoted = stats?.IsPromoted ?? false;
+            int promotionLevel = (int?) stats?.PromotionLevel ?? 0;
+            bool isPromoted = promotionLevel >= 1;
+            int maxLevel = 1;
+            int maxValue = promotionLevel == 0 ? 50 : promotionLevel == 1 ? 100 : 200;
 
             if (stats != null)
             {
-                int level;
-                int value;
-                for (int i = 0; i < 7; ++i)
+                foreach (var target in Stats.StatCurveTargetLevels)
                 {
-                    // TODO: Get stat from stat index
-                    // TODO: Don't hard-code level ranges
-                    switch (i)
+                    var statValues = new Dictionary<Stats.StatType, int>();
+                    foreach (var statType in (Stats.StatType[]) Enum.GetValues(typeof(Stats.StatType)))
                     {
-                        case 0:
-                            level = 1;
-                            value = stats.HPCurve1;
-                            break;
-                        case 1:
-                            level = 5;
-                            value = stats.HPCurve5;
-                            break;
-                        case 2:
-                            level = 10;
-                            value = stats.HPCurve10;
-                            break;
-                        case 3:
-                            level = isPromoted ? 15 : 12;
-                            value = stats.HPCurve12_15;
-                            break;
-                        case 4:
-                            level = isPromoted ? 20 : 14;
-                            value = stats.HPCurve14_20;
-                            break;
-                        case 5:
-                            level = isPromoted ? 30 : 17;
-                            value = stats.HPCurve17_30;
-                            break;
-                        case 6:
-                            level = isPromoted ? 99 : 20;
-                            value = stats.HPCurve20_99;
-                            break;
-                        default:
-                            throw new IndexOutOfRangeException();
+                        var targetStat = stats.GetStatTarget(statType, target.GroupIndex);
+                        statValues.Add(statType, targetStat);
+                        maxValue = Math.Max(maxValue, targetStat);
                     }
-                    curveGraphData.Add(new CurveGraphDataPoint(level, value));
+
+                    var level = isPromoted ? target.Promoted : target.Unpromoted;
+                    maxLevel = Math.Max(maxLevel, level);
+                    curveGraphData.Add(new CurveGraphDataPoint(level, statValues));
                 }
             }
 
-            CurveGraph.ChartAreas[0].AxisX.Maximum = isPromoted ? 101 : 21;
+            CurveGraph.ChartAreas[0].AxisX.Minimum = 0;
+            CurveGraph.ChartAreas[0].AxisX.Maximum = maxLevel;
             CurveGraph.ChartAreas[0].AxisX.Interval = isPromoted ? 10 : 5;
-            CurveGraph.ChartAreas[0].AxisY.Maximum = isPromoted ? 150 : 100;
-            CurveGraph.ChartAreas[0].AxisY.Interval = 10;
+            CurveGraph.ChartAreas[0].AxisY.Maximum = maxValue;
+            CurveGraph.ChartAreas[0].AxisY.Interval = promotionLevel == 0 ? 5 : promotionLevel == 1 ? 10 : 20;
             CurveGraph.DataSource = curveGraphData;
             CurveGraph.DataBind();
         }
