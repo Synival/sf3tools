@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -245,6 +248,9 @@
             this.olvColumn160 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn161 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn162 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.CurveGraphCharacterComboBox = new System.Windows.Forms.ComboBox();
+            this.CurveGraph = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.menuStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
@@ -261,6 +267,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.objectListView5)).BeginInit();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListView6)).BeginInit();
+            this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CurveGraph)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -1221,6 +1229,7 @@
             this.tabMain.Controls.Add(this.tabPage4);
             this.tabMain.Controls.Add(this.tabPage5);
             this.tabMain.Controls.Add(this.tabPage6);
+            this.tabMain.Controls.Add(this.tabPage7);
             this.tabMain.Location = new System.Drawing.Point(0, 27);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
@@ -2343,6 +2352,54 @@
             this.olvColumn162.Text = "Agigroup6";
             this.olvColumn162.Width = 67;
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.CurveGraphCharacterComboBox);
+            this.tabPage7.Controls.Add(this.CurveGraph);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(756, 480);
+            this.tabPage7.TabIndex = 10;
+            this.tabPage7.Text = "Curve graph";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // CurveGraphCharacterComboBox
+            // 
+            this.CurveGraphCharacterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CurveGraphCharacterComboBox.FormattingEnabled = true;
+            this.CurveGraphCharacterComboBox.Location = new System.Drawing.Point(4, 4);
+            this.CurveGraphCharacterComboBox.Name = "CurveGraphCharacterComboBox";
+            this.CurveGraphCharacterComboBox.Size = new System.Drawing.Size(133, 21);
+            this.CurveGraphCharacterComboBox.TabIndex = 1;
+            this.CurveGraphCharacterComboBox.SelectedIndexChanged += new System.EventHandler(this.CurveGraphCharacterComboBox_SelectedIndexChanged);
+            // 
+            // CurveGraph
+            // 
+            this.CurveGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.AxisX.Minimum = 1D;
+            chartArea1.Name = "ChartArea1";
+            this.CurveGraph.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.CurveGraph.Legends.Add(legend1);
+            this.CurveGraph.Location = new System.Drawing.Point(4, 31);
+            this.CurveGraph.Name = "CurveGraph";
+            series1.BorderWidth = 2;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.Color.Black;
+            series1.Legend = "Legend1";
+            series1.Name = "Target";
+            series1.XValueMember = "Level";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
+            series1.YValueMembers = "Target";
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
+            this.CurveGraph.Series.Add(series1);
+            this.CurveGraph.Size = new System.Drawing.Size(752, 449);
+            this.CurveGraph.TabIndex = 0;
+            this.CurveGraph.Text = "Curve graph";
+            // 
             // frmMain
             // 
             this.AllowDrop = true;
@@ -2374,8 +2431,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.objectListView5)).EndInit();
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.objectListView6)).EndInit();
+            this.tabPage7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CurveGraph)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
@@ -2595,6 +2655,9 @@
         private BrightIdeasSoftware.OLVColumn olvColumn161;
         private BrightIdeasSoftware.OLVColumn olvColumn162;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.ComboBox CurveGraphCharacterComboBox;
+        private System.Windows.Forms.DataVisualization.Charting.Chart CurveGraph;
     }
 }
 

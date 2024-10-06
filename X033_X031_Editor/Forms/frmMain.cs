@@ -10,6 +10,7 @@ using SF3.X033_X031_Editor.Models.WeaponLevel;
 using BrightIdeasSoftware;
 using SF3.Editor;
 using System.Linq;
+using System.Collections.Generic;
 
 /*
 
@@ -26,10 +27,26 @@ namespace SF3.X033_X031_Editor.Forms
         private InitialInfoList _initialInfoList = new InitialInfoList();
         private WeaponLevelList _weaponLevelList = new WeaponLevelList();
 
+        public class CurveGraphDataPoint
+        {
+            public CurveGraphDataPoint(int level, int target)
+            {
+                Level = level;
+                Target = target;
+            }
+
+            public int Level { get; set; }
+            public int Target { get; set; }
+        }
+
         public frmMain()
         {
             InitializeComponent();
             frmMonsterEditor_Resize(this, new EventArgs());
+
+            // Set up curve graph controls
+            CurveGraphCharacterComboBox.DataSource = _statsList.Models;
+            CurveGraphCharacterComboBox.DisplayMember = "Name";
 
             /*try {
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
@@ -251,6 +268,10 @@ namespace SF3.X033_X031_Editor.Forms
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
             //olvStoreItems.AddObjects(StoreItemList.getStoreItemList());
             //olvSpells.AddObjects(SpellEntryList.getSpellEntryList());
+
+            // Update curve graph controls.
+            CurveGraphCharacterComboBox.DataSource = _statsList.Models;
+
             return true;
         }
 
@@ -551,6 +572,70 @@ namespace SF3.X033_X031_Editor.Forms
 
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+        }
+
+        private void CurveGraphCharacterComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshCurveGraph();
+
+        private void RefreshCurveGraph()
+        {
+            var curveGraphData = new List<CurveGraphDataPoint>();
+
+            int index = CurveGraphCharacterComboBox.SelectedIndex;
+            Stats stats = (index >= 0 && index < _statsList.Models.Length) ? _statsList.Models[index] : null;
+
+            bool isPromoted = stats?.IsPromoted ?? false;
+
+            if (stats != null)
+            {
+                int level;
+                int value;
+                for (int i = 0; i < 7; ++i)
+                {
+                    // TODO: Get stat from stat index
+                    // TODO: Don't hard-code level ranges
+                    switch (i)
+                    {
+                        case 0:
+                            level = 1;
+                            value = stats.HPStart;
+                            break;
+                        case 1:
+                            level = 5;
+                            value = stats.HPCurve6;
+                            break;
+                        case 2:
+                            level = 10;
+                            value = stats.HPCurve11;
+                            break;
+                        case 3:
+                            level = isPromoted ? 15 : 12;
+                            value = stats.HPCurve13;
+                            break;
+                        case 4:
+                            level = isPromoted ? 20 : 14;
+                            value = stats.HPCurve15;
+                            break;
+                        case 5:
+                            level = isPromoted ? 30 : 17;
+                            value = stats.HPCurve17;
+                            break;
+                        case 6:
+                            level = isPromoted ? 99 : 20;
+                            value = stats.HPCurve20;
+                            break;
+                        default:
+                            throw new IndexOutOfRangeException();
+                    }
+                    curveGraphData.Add(new CurveGraphDataPoint(level, value));
+                }
+            }
+
+            CurveGraph.ChartAreas[0].AxisX.Maximum = isPromoted ? 101 : 21;
+            CurveGraph.ChartAreas[0].AxisX.Interval = isPromoted ? 10 : 5;
+            CurveGraph.ChartAreas[0].AxisY.Maximum = isPromoted ? 150 : 100;
+            CurveGraph.ChartAreas[0].AxisY.Interval = 10;
+            CurveGraph.DataSource = curveGraphData;
+            CurveGraph.DataBind();
         }
     }
 }
