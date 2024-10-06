@@ -115,11 +115,86 @@ namespace SF3.X002_Editor.Models.Items
             get => FileEditor.getByte(EffectsEquipLocation);
             set => FileEditor.setByte(EffectsEquipLocation, (byte)value);
         }
+
+        public bool Cursed
+        {
+            get => FileEditor.getBit(EffectsEquipLocation, 1);
+            set => FileEditor.setBit(EffectsEquipLocation, 1, value);
+        }
+
+        public bool CanCrack
+        {
+            get => FileEditor.getBit(EffectsEquipLocation, 2);
+            set => FileEditor.setBit(EffectsEquipLocation, 2, value);
+        }
+
+        public bool HealingItem
+        {
+            get => FileEditor.getBit(EffectsEquipLocation, 3);
+            set => FileEditor.setBit(EffectsEquipLocation, 3, value);
+        }
+
+        public bool CannotUnequip
+        {
+            get => FileEditor.getBit(EffectsEquipLocation, 4);
+            set => FileEditor.setBit(EffectsEquipLocation, 4, value);
+        }
+
+        public bool Rare
+        {
+            get => FileEditor.getBit(EffectsEquipLocation, 5);
+            set => FileEditor.setBit(EffectsEquipLocation, 5, value);
+        }
+
+        public bool FakeRare //shows rare message when selling, but does not add to deals
+        {
+            get => FileEditor.getBit(EffectsEquipLocation, 6);
+            set => FileEditor.setBit(EffectsEquipLocation, 6, value);
+        }
+
+        public bool HealingItem2 //higher tier healing has this
+        {
+            get => FileEditor.getBit(EffectsEquipLocation, 7);
+            set => FileEditor.setBit(EffectsEquipLocation, 7, value);
+        }
+
         public int Requirements
         {
             get => FileEditor.getByte(RequirementLocation);
             set => FileEditor.setByte(RequirementLocation, (byte)value);
         }
+
+        public bool RequiredPromo
+        {
+            get => FileEditor.getBit(RequirementLocation, 1);
+            set => FileEditor.setBit(RequirementLocation, 1, value);
+        }
+
+        public bool RequiredPromo2 //apostle of light
+        {
+            get => FileEditor.getBit(RequirementLocation, 2);
+            set => FileEditor.setBit(RequirementLocation, 2, value);
+        }
+
+        public bool RequiredHero //Synbios, Medion, Julian, Gracia, Cyclops
+        {
+            get => FileEditor.getBit(RequirementLocation, 3);
+            set => FileEditor.setBit(RequirementLocation, 3, value);
+        }
+
+        public bool RequiredMale
+        {
+            get => FileEditor.getBit(RequirementLocation, 4);
+            set => FileEditor.setBit(RequirementLocation, 4, value);
+        }
+
+        public bool RequiredFemale
+        {
+            get => FileEditor.getBit(RequirementLocation, 5);
+            set => FileEditor.setBit(RequirementLocation, 5, value);
+        }
+
+
         public int Range
         {
             get => FileEditor.getByte(RangeLocation);

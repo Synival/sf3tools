@@ -94,6 +94,7 @@
             this.olvStatUp4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSpellUse = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSpellUseLv = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn79 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.objectListView2 = new BrightIdeasSoftware.ObjectListView();
@@ -132,6 +133,10 @@
             this.olvColumn72 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn73 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn74 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn75 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn76 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn77 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn78 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.objectListView4 = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn40 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -163,10 +168,17 @@
             this.olvColumn60 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn61 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn62 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn75 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn76 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn77 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn78 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn80 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn81 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn82 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn83 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn84 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn85 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn86 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn87 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn88 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn89 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn90 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.menuStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
@@ -236,7 +248,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.aboutToolStripMenuItem.Text = "Version 0.19";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -547,6 +559,18 @@
             this.olvItems.AllColumns.Add(this.olvStatUp4);
             this.olvItems.AllColumns.Add(this.olvSpellUse);
             this.olvItems.AllColumns.Add(this.olvSpellUseLv);
+            this.olvItems.AllColumns.Add(this.olvColumn79);
+            this.olvItems.AllColumns.Add(this.olvColumn80);
+            this.olvItems.AllColumns.Add(this.olvColumn81);
+            this.olvItems.AllColumns.Add(this.olvColumn82);
+            this.olvItems.AllColumns.Add(this.olvColumn83);
+            this.olvItems.AllColumns.Add(this.olvColumn84);
+            this.olvItems.AllColumns.Add(this.olvColumn85);
+            this.olvItems.AllColumns.Add(this.olvColumn86);
+            this.olvItems.AllColumns.Add(this.olvColumn87);
+            this.olvItems.AllColumns.Add(this.olvColumn88);
+            this.olvItems.AllColumns.Add(this.olvColumn89);
+            this.olvItems.AllColumns.Add(this.olvColumn90);
             this.olvItems.AllowColumnReorder = true;
             this.olvItems.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -575,7 +599,19 @@
             this.olvStatType4,
             this.olvStatUp4,
             this.olvSpellUse,
-            this.olvSpellUseLv});
+            this.olvSpellUseLv,
+            this.olvColumn79,
+            this.olvColumn80,
+            this.olvColumn81,
+            this.olvColumn82,
+            this.olvColumn83,
+            this.olvColumn84,
+            this.olvColumn85,
+            this.olvColumn86,
+            this.olvColumn87,
+            this.olvColumn88,
+            this.olvColumn89,
+            this.olvColumn90});
             this.olvItems.FullRowSelect = true;
             this.olvItems.GridLines = true;
             this.olvItems.HasCollapsibleGroups = false;
@@ -632,20 +668,25 @@
             // 
             this.olvEffectsEquip.AspectName = "EffectsEquip";
             this.olvEffectsEquip.AspectToStringFormat = "{0:X}";
-            this.olvEffectsEquip.Text = "EffectsEquip";
+            this.olvEffectsEquip.DisplayIndex = 36;
+            this.olvEffectsEquip.IsEditable = false;
+            this.olvEffectsEquip.Text = "DebugEffectsEquip";
             this.olvEffectsEquip.Width = 77;
             // 
             // lvcRequirements
             // 
             this.lvcRequirements.AspectName = "Requirements";
             this.lvcRequirements.AspectToStringFormat = "{0:X}";
-            this.lvcRequirements.Text = "Requirements";
+            this.lvcRequirements.DisplayIndex = 37;
+            this.lvcRequirements.IsEditable = false;
+            this.lvcRequirements.Text = "DebugRequirements";
             this.lvcRequirements.Width = 77;
             // 
             // lvcRange
             // 
             this.lvcRange.AspectName = "Range";
             this.lvcRange.AspectToStringFormat = "{0:X}";
+            this.lvcRange.DisplayIndex = 5;
             this.lvcRange.Text = "Range";
             this.lvcRange.Width = 50;
             // 
@@ -653,6 +694,7 @@
             // 
             this.lvcAttack.AspectName = "Attack";
             this.lvcAttack.AspectToStringFormat = "{0:X}";
+            this.lvcAttack.DisplayIndex = 6;
             this.lvcAttack.Text = "Attack";
             this.lvcAttack.Width = 50;
             // 
@@ -660,6 +702,7 @@
             // 
             this.lvcDefense.AspectName = "Defense";
             this.lvcDefense.AspectToStringFormat = "{0:X}";
+            this.lvcDefense.DisplayIndex = 7;
             this.lvcDefense.Text = "Defense";
             this.lvcDefense.Width = 54;
             // 
@@ -667,6 +710,7 @@
             // 
             this.olvAttackRank.AspectName = "AttackRank";
             this.olvAttackRank.AspectToStringFormat = "{0:X}";
+            this.olvAttackRank.DisplayIndex = 8;
             this.olvAttackRank.Text = "AttackRank";
             this.olvAttackRank.Width = 75;
             // 
@@ -674,6 +718,7 @@
             // 
             this.olvSpellRank.AspectName = "SpellRank";
             this.olvSpellRank.AspectToStringFormat = "{0:X}";
+            this.olvSpellRank.DisplayIndex = 9;
             this.olvSpellRank.Text = "SpellRank";
             this.olvSpellRank.Width = 70;
             // 
@@ -681,86 +726,114 @@
             // 
             this.olvPhysicalAttribute.AspectName = "PhysicalAttribute";
             this.olvPhysicalAttribute.AspectToStringFormat = "{0:X}";
+            this.olvPhysicalAttribute.DisplayIndex = 10;
             this.olvPhysicalAttribute.Text = "Effective type 1";
+            this.olvPhysicalAttribute.Width = 90;
             // 
             // olvUnknown1
             // 
             this.olvUnknown1.AspectName = "Unknown1";
             this.olvUnknown1.AspectToStringFormat = "{0:X}";
+            this.olvUnknown1.DisplayIndex = 11;
             this.olvUnknown1.Text = "Effective 1 pow";
+            this.olvUnknown1.Width = 90;
             // 
             // olvMonsterType
             // 
             this.olvMonsterType.AspectName = "MonsterType";
             this.olvMonsterType.AspectToStringFormat = "{0:X}";
+            this.olvMonsterType.DisplayIndex = 12;
             this.olvMonsterType.Text = "Effective type 2";
+            this.olvMonsterType.Width = 90;
             // 
             // olvUnknown2
             // 
             this.olvUnknown2.AspectName = "Unknown2";
             this.olvUnknown2.AspectToStringFormat = "{0:X}";
+            this.olvUnknown2.DisplayIndex = 13;
             this.olvUnknown2.Text = "Effective 2 pow";
+            this.olvUnknown2.Width = 90;
             // 
             // olvStatType1
             // 
             this.olvStatType1.AspectName = "StatType1";
             this.olvStatType1.AspectToStringFormat = "{0:X}";
+            this.olvStatType1.DisplayIndex = 14;
             this.olvStatType1.Text = "StatType1";
-            this.olvStatType1.Width = 65;
+            this.olvStatType1.Width = 70;
             // 
             // olvStatUp1
             // 
             this.olvStatUp1.AspectName = "StatUp1";
             this.olvStatUp1.AspectToStringFormat = "{0:X}";
+            this.olvStatUp1.DisplayIndex = 15;
             this.olvStatUp1.Text = "StatUp1";
             // 
             // olvStatType2
             // 
             this.olvStatType2.AspectName = "StatType2";
             this.olvStatType2.AspectToStringFormat = "{0:X}";
+            this.olvStatType2.DisplayIndex = 16;
             this.olvStatType2.Text = "StatType2";
+            this.olvStatType2.Width = 70;
             // 
             // olvStatUp2
             // 
             this.olvStatUp2.AspectName = "StatUp2";
             this.olvStatUp2.AspectToStringFormat = "{0:X}";
+            this.olvStatUp2.DisplayIndex = 17;
             this.olvStatUp2.Text = "StatUp2";
             // 
             // olvStatType3
             // 
             this.olvStatType3.AspectName = "StatType3";
             this.olvStatType3.AspectToStringFormat = "{0:X}";
+            this.olvStatType3.DisplayIndex = 18;
             this.olvStatType3.Text = "StatType3";
+            this.olvStatType3.Width = 70;
             // 
             // olvStatUp3
             // 
             this.olvStatUp3.AspectName = "StatUp3";
             this.olvStatUp3.AspectToStringFormat = "{0:X}";
+            this.olvStatUp3.DisplayIndex = 19;
             this.olvStatUp3.Text = "StatUp3";
             // 
             // olvStatType4
             // 
             this.olvStatType4.AspectName = "StatType4";
             this.olvStatType4.AspectToStringFormat = "{0:X}";
+            this.olvStatType4.DisplayIndex = 20;
             this.olvStatType4.Text = "StatType4";
+            this.olvStatType4.Width = 70;
             // 
             // olvStatUp4
             // 
             this.olvStatUp4.AspectName = "StatUp4";
             this.olvStatUp4.AspectToStringFormat = "{0:X}";
+            this.olvStatUp4.DisplayIndex = 21;
             this.olvStatUp4.Text = "StatUp4";
             // 
             // olvSpellUse
             // 
             this.olvSpellUse.AspectName = "SpellUse";
             this.olvSpellUse.AspectToStringFormat = "{0:X}";
+            this.olvSpellUse.DisplayIndex = 22;
             this.olvSpellUse.Text = "SpellUse";
             // 
             // olvSpellUseLv
             // 
             this.olvSpellUseLv.AspectName = "SpellUseLv";
             this.olvSpellUseLv.AspectToStringFormat = "{0:X}";
+            this.olvSpellUseLv.DisplayIndex = 23;
             this.olvSpellUseLv.Text = "SpellUseLv";
+            this.olvSpellUseLv.Width = 70;
+            // 
+            // olvColumn79
+            // 
+            this.olvColumn79.AspectName = "Cursed";
+            this.olvColumn79.DisplayIndex = 24;
+            this.olvColumn79.Text = "isCursed";
             // 
             // tabMain
             // 
@@ -1163,6 +1236,31 @@
             this.olvColumn74.Text = "extraMPD";
             this.olvColumn74.Width = 70;
             // 
+            // olvColumn75
+            // 
+            this.olvColumn75.AspectName = "SynChr";
+            this.olvColumn75.AspectToStringFormat = "{0:X}";
+            this.olvColumn75.Text = "synCHR";
+            // 
+            // olvColumn76
+            // 
+            this.olvColumn76.AspectName = "MedChr";
+            this.olvColumn76.AspectToStringFormat = "{0:X}";
+            this.olvColumn76.Text = "medCHR";
+            // 
+            // olvColumn77
+            // 
+            this.olvColumn77.AspectName = "JulChr";
+            this.olvColumn77.AspectToStringFormat = "{0:X}";
+            this.olvColumn77.Text = "julCHR";
+            // 
+            // olvColumn78
+            // 
+            this.olvColumn78.AspectName = "ExtraChr";
+            this.olvColumn78.AspectToStringFormat = "{0:X}";
+            this.olvColumn78.Text = "extraCHR";
+            this.olvColumn78.Width = 70;
+            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.objectListView4);
@@ -1507,30 +1605,76 @@
             this.olvColumn62.AspectToStringFormat = "{0:X}";
             this.olvColumn62.Text = "Map";
             // 
-            // olvColumn75
+            // olvColumn80
             // 
-            this.olvColumn75.AspectName = "SynChr";
-            this.olvColumn75.AspectToStringFormat = "{0:X}";
-            this.olvColumn75.Text = "synCHR";
+            this.olvColumn80.AspectName = "CanCrack";
+            this.olvColumn80.DisplayIndex = 25;
+            this.olvColumn80.Text = "canCrack";
             // 
-            // olvColumn76
+            // olvColumn81
             // 
-            this.olvColumn76.AspectName = "MedChr";
-            this.olvColumn76.AspectToStringFormat = "{0:X}";
-            this.olvColumn76.Text = "medCHR";
+            this.olvColumn81.AspectName = "HealingItem";
+            this.olvColumn81.DisplayIndex = 26;
+            this.olvColumn81.Text = "healingItem";
+            this.olvColumn81.Width = 80;
             // 
-            // olvColumn77
+            // olvColumn82
             // 
-            this.olvColumn77.AspectName = "JulChr";
-            this.olvColumn77.AspectToStringFormat = "{0:X}";
-            this.olvColumn77.Text = "julCHR";
+            this.olvColumn82.AspectName = "CannotUnequip";
+            this.olvColumn82.DisplayIndex = 27;
+            this.olvColumn82.Text = "Can\'tUnequip";
+            this.olvColumn82.Width = 90;
             // 
-            // olvColumn78
+            // olvColumn83
             // 
-            this.olvColumn78.AspectName = "ExtraChr";
-            this.olvColumn78.AspectToStringFormat = "{0:X}";
-            this.olvColumn78.Text = "extraCHR";
-            this.olvColumn78.Width = 70;
+            this.olvColumn83.AspectName = "Rare";
+            this.olvColumn83.DisplayIndex = 28;
+            this.olvColumn83.Text = "Rare";
+            // 
+            // olvColumn84
+            // 
+            this.olvColumn84.AspectName = "FakeRare";
+            this.olvColumn84.DisplayIndex = 29;
+            this.olvColumn84.Text = "FakeRare";
+            // 
+            // olvColumn85
+            // 
+            this.olvColumn85.AspectName = "HealingItem2";
+            this.olvColumn85.DisplayIndex = 30;
+            this.olvColumn85.Text = "healingItem2";
+            this.olvColumn85.Width = 80;
+            // 
+            // olvColumn86
+            // 
+            this.olvColumn86.AspectName = "RequiredPromo";
+            this.olvColumn86.DisplayIndex = 31;
+            this.olvColumn86.Text = "requiresPromo";
+            this.olvColumn86.Width = 90;
+            // 
+            // olvColumn87
+            // 
+            this.olvColumn87.AspectName = "RequiredPromo2";
+            this.olvColumn87.DisplayIndex = 32;
+            this.olvColumn87.Text = "requiredPromo2";
+            this.olvColumn87.Width = 90;
+            // 
+            // olvColumn88
+            // 
+            this.olvColumn88.AspectName = "RequiredHero";
+            this.olvColumn88.DisplayIndex = 33;
+            this.olvColumn88.Text = "hero only";
+            // 
+            // olvColumn89
+            // 
+            this.olvColumn89.AspectName = "RequiredMale";
+            this.olvColumn89.DisplayIndex = 34;
+            this.olvColumn89.Text = "male";
+            // 
+            // olvColumn90
+            // 
+            this.olvColumn90.AspectName = "RequiredFemale";
+            this.olvColumn90.DisplayIndex = 35;
+            this.olvColumn90.Text = "female";
             // 
             // frmMain
             // 
@@ -1569,6 +1713,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.objectListView7)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
@@ -1711,6 +1856,18 @@
         private BrightIdeasSoftware.OLVColumn olvColumn76;
         private BrightIdeasSoftware.OLVColumn olvColumn77;
         private BrightIdeasSoftware.OLVColumn olvColumn78;
+        private BrightIdeasSoftware.OLVColumn olvColumn79;
+        private BrightIdeasSoftware.OLVColumn olvColumn80;
+        private BrightIdeasSoftware.OLVColumn olvColumn81;
+        private BrightIdeasSoftware.OLVColumn olvColumn82;
+        private BrightIdeasSoftware.OLVColumn olvColumn83;
+        private BrightIdeasSoftware.OLVColumn olvColumn84;
+        private BrightIdeasSoftware.OLVColumn olvColumn85;
+        private BrightIdeasSoftware.OLVColumn olvColumn86;
+        private BrightIdeasSoftware.OLVColumn olvColumn87;
+        private BrightIdeasSoftware.OLVColumn olvColumn88;
+        private BrightIdeasSoftware.OLVColumn olvColumn89;
+        private BrightIdeasSoftware.OLVColumn olvColumn90;
     }
 }
 
