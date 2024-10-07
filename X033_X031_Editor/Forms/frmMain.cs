@@ -13,12 +13,26 @@ using System.Linq;
 using System.Collections.Generic;
 using SF3.Types;
 
-/*
+namespace SF3.X033_X031_Editor.Forms
+{
+    public struct ProbableStats
+    {
+        public ProbableStats(double likely, double[] atPercentages)
+        {
+            Likely = likely;
+            AtPercentages = atPercentages;
+        }
 
-*/
+        public double Likely { get; }
+        public double[] AtPercentages { get; }
+    }
+}
 
 namespace SF3.X033_X031_Editor.Forms
 {
+    using StatDict = Dictionary<Stats.StatType, double>;
+    using ProbableStatsDict = Dictionary<Stats.StatType, ProbableStats>;
+
     public partial class frmMain : Form
     {
         //Used to append to state names to stop program loading states from older versions
@@ -29,22 +43,28 @@ namespace SF3.X033_X031_Editor.Forms
         private InitialInfoList _initialInfoList;
         private WeaponLevelList _weaponLevelList;
 
-        public class CurveGraphDataPoint
+        public class StatDataPoint
         {
-            public CurveGraphDataPoint(int level, Dictionary<Stats.StatType, int> stats)
+            public StatDataPoint(int level, StatDict stats)
             {
                 Level = level;
                 Stats = stats;
             }
 
             public int Level { get; }
-            public Dictionary<Stats.StatType, int> Stats { get; }
+            public StatDict Stats { get; }
+        }
 
-            public int HP => Stats[Models.Stats.Stats.StatType.HP];
-            public int MP => Stats[Models.Stats.Stats.StatType.MP];
-            public int Atk => Stats[Models.Stats.Stats.StatType.Atk];
-            public int Def => Stats[Models.Stats.Stats.StatType.Def];
-            public int Agi => Stats[Models.Stats.Stats.StatType.Agi];
+        public class ProbableStatsDataPoint
+        {
+            public ProbableStatsDataPoint(int level, ProbableStatsDict probableStats)
+            {
+                Level = level;
+                ProbableStats = probableStats;
+            }
+
+            public int Level { get; }
+            public ProbableStatsDict ProbableStats { get; }
         }
 
         public frmMain()
@@ -560,31 +580,89 @@ namespace SF3.X033_X031_Editor.Forms
 
         private void RefreshCurveGraph()
         {
-            var curveGraphData = new List<CurveGraphDataPoint>();
+            var targetStatDataPoints = new List<StatDataPoint>();
+            var probableStatsDataPoints = new List<ProbableStatsDataPoint>();
 
             int index = cbCurveGraphCharacter.SelectedIndex;
             Stats stats = (index >= 0 && index < _statsList.Models.Length) ? _statsList.Models[index] : null;
 
-            int promotionLevel = (int?) stats?.PromotionLevel ?? 0;
+            int promotionLevel = (int?)stats?.PromotionLevel ?? 0;
             bool isPromoted = promotionLevel >= 1;
             int maxLevel = 1;
             int maxValue = promotionLevel == 0 ? 50 : promotionLevel == 1 ? 100 : 200;
 
             if (stats != null)
             {
-                foreach (var target in Stats.StatCurveTargetLevels)
+                var currentProbableStatValues = new Dictionary<Stats.StatType, ProbableValueSet>();
+                foreach (var statType in (Stats.StatType[])Enum.GetValues(typeof(Stats.StatType)))
                 {
-                    var statValues = new Dictionary<Stats.StatType, int>();
-                    foreach (var statType in (Stats.StatType[]) Enum.GetValues(typeof(Stats.StatType)))
+                    currentProbableStatValues[statType] = new ProbableValueSet()
+                    {
+                        { stats.GetStatTarget(statType, 0), 1.00 }
+                    };
+                }
+
+                Func<Dictionary<Stats.StatType, ProbableValueSet>, ProbableStatsDict> GetProbableStats = (pvs) =>
+                {
+                    var probableStats = new ProbableStatsDict();
+                    foreach (var keyValue in pvs)
+                    {
+                        probableStats.Add(keyValue.Key, new ProbableStats(
+                            keyValue.Value.GetWeightedAverage(),
+                            new double[] {
+                                keyValue.Value.GetWeightedMedianAt(0.025),
+                                keyValue.Value.GetWeightedMedianAt(0.25),
+                                keyValue.Value.GetWeightedMedianAt(0.75),
+                                keyValue.Value.GetWeightedMedianAt(0.975)
+                            }
+                        ));
+                    }
+                    return probableStats;
+                };
+
+                for (int groupIndex = 0; groupIndex < Stats.StatCurveTargetLevels.Length; groupIndex++)
+                {
+                    var target = Stats.StatCurveTargetLevels[groupIndex];
+                    var nextTarget = (groupIndex < Stats.StatCurveTargetLevels.Length - 1)
+                        ? Stats.StatCurveTargetLevels[groupIndex + 1]
+                        : target;
+
+                    var level = isPromoted ? target.Promoted : target.Unpromoted;
+                    var nextLevel = isPromoted ? nextTarget.Promoted : nextTarget.Unpromoted;
+
+                    maxLevel = Math.Min(40, Math.Max(maxLevel, level));
+
+                    var statValues = new StatDict();
+
+                    int levelRange = nextLevel - level;
+                    foreach (var statType in (Stats.StatType[])Enum.GetValues(typeof(Stats.StatType)))
                     {
                         var targetStat = stats.GetStatTarget(statType, target.GroupIndex);
                         statValues.Add(statType, targetStat);
                         maxValue = Math.Max(maxValue, targetStat);
                     }
 
-                    var level = isPromoted ? target.Promoted : target.Unpromoted;
-                    maxLevel = Math.Max(maxLevel, level);
-                    curveGraphData.Add(new CurveGraphDataPoint(level, statValues));
+                    targetStatDataPoints.Add(new StatDataPoint(level, statValues));
+
+                    for (int lv = level; lv == level || lv < nextLevel; lv++)
+                    {
+                        probableStatsDataPoints.Add(new ProbableStatsDataPoint(lv, GetProbableStats(currentProbableStatValues)));
+
+                        if (levelRange > 0)
+                        {
+                            foreach (var statType in (Stats.StatType[])Enum.GetValues(typeof(Stats.StatType)))
+                            {
+                                var growthValue = stats.GetAverageStatGrowthPerLevel(statType, groupIndex);
+                                var guaranteedGrowth = (int)growthValue;
+                                var plusOneProbability = growthValue - (double)guaranteedGrowth;
+
+                                currentProbableStatValues[statType] = currentProbableStatValues[statType].RollNext(val => new ProbableValueSet() {
+                                    { val + guaranteedGrowth, 1.00 - plusOneProbability },
+                                    { val + guaranteedGrowth + 1, plusOneProbability }
+                                });
+                            }
+                        }
+                    }
                 }
             }
 
@@ -593,8 +671,39 @@ namespace SF3.X033_X031_Editor.Forms
             CurveGraph.ChartAreas[0].AxisX.Interval = isPromoted ? 10 : 5;
             CurveGraph.ChartAreas[0].AxisY.Maximum = maxValue;
             CurveGraph.ChartAreas[0].AxisY.Interval = promotionLevel == 0 ? 5 : promotionLevel == 1 ? 10 : 20;
-            CurveGraph.DataSource = curveGraphData;
-            CurveGraph.DataBind();
+
+            foreach (var statType in (Stats.StatType[])Enum.GetValues(typeof(Stats.StatType)))
+            {
+                var statTypeStr = statType.ToString();
+
+                var targetSeries = CurveGraph.Series[statTypeStr];
+                targetSeries.Points.Clear();
+                foreach (var dataPoint in targetStatDataPoints)
+                {
+                    targetSeries.Points.AddXY(dataPoint.Level, dataPoint.Stats[statType]);
+                }
+
+                var likelySeries = CurveGraph.Series["Likely " + statTypeStr];
+                likelySeries.Points.Clear();
+                foreach (var dataPoint in probableStatsDataPoints)
+                {
+                    likelySeries.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].Likely);
+                }
+
+                var range1Series = CurveGraph.Series[statTypeStr + " Range 1"];
+                range1Series.Points.Clear();
+                foreach (var dataPoint in probableStatsDataPoints)
+                {
+                    range1Series.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].AtPercentages[1], dataPoint.ProbableStats[statType].AtPercentages[2]);
+                }
+
+                var range2Series = CurveGraph.Series[statTypeStr + " Range 2"];
+                range2Series.Points.Clear();
+                foreach (var dataPoint in probableStatsDataPoints)
+                {
+                    range2Series.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].AtPercentages[0], dataPoint.ProbableStats[statType].AtPercentages[3]);
+                }
+            }
         }
     }
 }
