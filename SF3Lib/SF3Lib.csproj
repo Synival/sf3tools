@@ -76,7 +76,9 @@
     <Compile Include="Models\IModelArray.cs" />
     <Compile Include="NamedValue.cs" />
     <Compile Include="ValueRange.cs" />
+    <Compile Include="Stats.cs" />
     <Compile Include="Types\ScenarioType.cs" />
+    <Compile Include="Types\StatType.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Values\CharacterClassValue.cs" />
     <Compile Include="Values\SexValue.cs" />

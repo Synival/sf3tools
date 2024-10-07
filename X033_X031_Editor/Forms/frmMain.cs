@@ -30,8 +30,8 @@ namespace SF3.X033_X031_Editor.Forms
 
 namespace SF3.X033_X031_Editor.Forms
 {
-    using StatDict = Dictionary<Stats.StatType, double>;
-    using ProbableStatsDict = Dictionary<Stats.StatType, ProbableStats>;
+    using StatDict = Dictionary<StatType, double>;
+    using ProbableStatsDict = Dictionary<StatType, ProbableStats>;
 
     public partial class frmMain : Form
     {
@@ -193,7 +193,7 @@ namespace SF3.X033_X031_Editor.Forms
         }*/
         private string getItemName(object target)
         {
-            return ((Stats)target).Name;
+            return ((Models.Stats.Stats)target).Name;
         }
         private string getPresetName(object target)
         {
@@ -513,7 +513,7 @@ namespace SF3.X033_X031_Editor.Forms
             if (e.Value is Stats)
             {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                Stats value = (Stats)((ComboBox)e.Control).SelectedItem;
+                var value = (Models.Stats.Stats)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             }
             else if (e.Value is InitialInfo)
@@ -580,29 +580,27 @@ namespace SF3.X033_X031_Editor.Forms
 
         private void RefreshCurveGraph()
         {
+            // Data points for the chart.
             var targetStatDataPoints = new List<StatDataPoint>();
             var probableStatsDataPoints = new List<ProbableStatsDataPoint>();
 
+            // Get the stats model for the selected character.
             int index = cbCurveGraphCharacter.SelectedIndex;
-            Stats stats = (index >= 0 && index < _statsList.Models.Length) ? _statsList.Models[index] : null;
+            Models.Stats.Stats stats = (index >= 0 && index < _statsList.Models.Length) ? _statsList.Models[index] : null;
 
+            // We'll need to use some different values depending on the promotion level.
             int promotionLevel = (int?)stats?.PromotionLevel ?? 0;
             bool isPromoted = promotionLevel >= 1;
-            int maxLevel = 1;
+
+            // Default axis ranges.
+            int maxLevel = isPromoted ? 40 : 20;
             int maxValue = promotionLevel == 0 ? 50 : promotionLevel == 1 ? 100 : 200;
 
+            // Did we find stats? If so, populate our data sets.
             if (stats != null)
             {
-                var currentProbableStatValues = new Dictionary<Stats.StatType, ProbableValueSet>();
-                foreach (var statType in (Stats.StatType[])Enum.GetValues(typeof(Stats.StatType)))
-                {
-                    currentProbableStatValues[statType] = new ProbableValueSet()
-                    {
-                        { stats.GetStatTarget(statType, 0), 1.00 }
-                    };
-                }
-
-                Func<Dictionary<Stats.StatType, ProbableValueSet>, ProbableStatsDict> GetProbableStats = (pvs) =>
+                // Function to convert a ProbableValueSet to a ProbableStatsDict.
+                Func<Dictionary<StatType, ProbableValueSet>, ProbableStatsDict> GetProbableStats = (pvs) =>
                 {
                     var probableStats = new ProbableStatsDict();
                     foreach (var keyValue in pvs)
@@ -620,48 +618,55 @@ namespace SF3.X033_X031_Editor.Forms
                     return probableStats;
                 };
 
-                for (int groupIndex = 0; groupIndex < Stats.StatCurveTargetLevels.Length; groupIndex++)
+                // Add initial stats for level 1.
+                var startStatValues = new StatDict();
+                foreach (var statType in (StatType[])Enum.GetValues(typeof(StatType)))
                 {
-                    var target = Stats.StatCurveTargetLevels[groupIndex];
-                    var nextTarget = (groupIndex < Stats.StatCurveTargetLevels.Length - 1)
-                        ? Stats.StatCurveTargetLevels[groupIndex + 1]
-                        : target;
+                    var targetStat = stats.GetStatGrowthRange(statType, 0).Begin;
+                    startStatValues.Add(statType, targetStat);
+                    maxValue = Math.Max(maxValue, targetStat);
+                }
+                targetStatDataPoints.Add(new StatDataPoint(1, startStatValues));
 
-                    var level = isPromoted ? target.Promoted : target.Unpromoted;
-                    var nextLevel = isPromoted ? nextTarget.Promoted : nextTarget.Unpromoted;
-
-                    maxLevel = Math.Min(40, Math.Max(maxLevel, level));
-
-                    var statValues = new StatDict();
-
-                    int levelRange = nextLevel - level;
-                    foreach (var statType in (Stats.StatType[])Enum.GetValues(typeof(Stats.StatType)))
+                // Get initial probable stats for level 1 (which are the same as startStatValues).
+                var currentProbableStatValues = new Dictionary<StatType, ProbableValueSet>();
+                foreach (var statType in (StatType[])Enum.GetValues(typeof(StatType)))
+                {
+                    currentProbableStatValues[statType] = new ProbableValueSet()
                     {
-                        var targetStat = stats.GetStatTarget(statType, target.GroupIndex);
+                        { (int) startStatValues[statType], 1.00 }
+                    };
+                }
+                probableStatsDataPoints.Add(new ProbableStatsDataPoint(1, GetProbableStats(currentProbableStatValues)));
+
+                // Populate data points for all stat growth groups, until the max level.
+                foreach (var statGrowthGroup in Stats.StatGrowthGroups[isPromoted])
+                {
+                    // Add the next target stats.
+                    var statValues = new StatDict();
+                    foreach (var statType in (StatType[])Enum.GetValues(typeof(StatType)))
+                    {
+                        var targetStat = stats.GetStatGrowthRange(statType, statGrowthGroup.GroupIndex).End;
                         statValues.Add(statType, targetStat);
                         maxValue = Math.Max(maxValue, targetStat);
                     }
+                    targetStatDataPoints.Add(new StatDataPoint(statGrowthGroup.Range.End, statValues));
 
-                    targetStatDataPoints.Add(new StatDataPoint(level, statValues));
-
-                    for (int lv = level; lv == level || lv < nextLevel; lv++)
+                    // Add probable stat values for every level in this stat growth group.
+                    for (int lv = statGrowthGroup.Range.Begin + 1; lv <= statGrowthGroup.Range.End; lv++)
                     {
-                        probableStatsDataPoints.Add(new ProbableStatsDataPoint(lv, GetProbableStats(currentProbableStatValues)));
-
-                        if (levelRange > 0)
+                        foreach (var statType in (StatType[])Enum.GetValues(typeof(StatType)))
                         {
-                            foreach (var statType in (Stats.StatType[])Enum.GetValues(typeof(Stats.StatType)))
-                            {
-                                var growthValue = stats.GetAverageStatGrowthPerLevel(statType, groupIndex);
-                                var guaranteedGrowth = (int)growthValue;
-                                var plusOneProbability = growthValue - (double)guaranteedGrowth;
+                            var growthValue = stats.GetAverageStatGrowthPerLevel(statType, statGrowthGroup.GroupIndex);
+                            var guaranteedGrowth = (int)growthValue;
+                            var plusOneProbability = growthValue - (double)guaranteedGrowth;
 
-                                currentProbableStatValues[statType] = currentProbableStatValues[statType].RollNext(val => new ProbableValueSet() {
-                                    { val + guaranteedGrowth, 1.00 - plusOneProbability },
-                                    { val + guaranteedGrowth + 1, plusOneProbability }
-                                });
-                            }
+                            currentProbableStatValues[statType] = currentProbableStatValues[statType].RollNext(val => new ProbableValueSet() {
+                                { val + guaranteedGrowth, 1.00 - plusOneProbability },
+                                { val + guaranteedGrowth + 1, plusOneProbability }
+                            });
                         }
+                        probableStatsDataPoints.Add(new ProbableStatsDataPoint(lv, GetProbableStats(currentProbableStatValues)));
                     }
                 }
             }
@@ -672,7 +677,7 @@ namespace SF3.X033_X031_Editor.Forms
             CurveGraph.ChartAreas[0].AxisY.Maximum = maxValue;
             CurveGraph.ChartAreas[0].AxisY.Interval = promotionLevel == 0 ? 5 : promotionLevel == 1 ? 10 : 20;
 
-            foreach (var statType in (Stats.StatType[])Enum.GetValues(typeof(Stats.StatType)))
+            foreach (var statType in (StatType[])Enum.GetValues(typeof(StatType)))
             {
                 var statTypeStr = statType.ToString();
 

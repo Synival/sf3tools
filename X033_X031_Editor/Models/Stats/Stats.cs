@@ -17,40 +17,6 @@ namespace SF3.X033_X031_Editor.Models.Stats
             Promotion2 = 2,
         }
 
-        public enum StatType
-        {
-            HP = 0,
-            MP = 1,
-            Atk = 2,
-            Def = 3,
-            Agi = 4,
-        }
-
-        public struct StatCurveTargetLevel
-        {
-            public StatCurveTargetLevel(int groupIndex, int unpromoted, int promoted)
-            {
-                GroupIndex = groupIndex;
-                Unpromoted = unpromoted;
-                Promoted = promoted;
-            }
-
-            public int GroupIndex;
-            public int Unpromoted;
-            public int Promoted;
-        }
-
-        static public readonly StatCurveTargetLevel[] StatCurveTargetLevels =
-        {
-            new StatCurveTargetLevel(0, 1, 1),
-            new StatCurveTargetLevel(1, 5, 5),
-            new StatCurveTargetLevel(2, 10, 10),
-            new StatCurveTargetLevel(3, 12, 15),
-            new StatCurveTargetLevel(4, 14, 20),
-            new StatCurveTargetLevel(5, 17, 30),
-            new StatCurveTargetLevel(6, 20, 99)
-        };
-
         //starting stat table
         private int character;
         private int characterClass;
@@ -173,43 +139,6 @@ namespace SF3.X033_X031_Editor.Models.Stats
         private int accessoryEquipable2;
         private int accessoryEquipable3;
         private int accessoryEquipable4;
-
-        public static double[] numRngOutcomesToReachPlusOne = {
-                0,     0,     1,     3,     6,    10,    15,    21, // 0x00 - 0x07
-               28,    36,    45,    55,    66,    78,    91,   105, // 0x08 - 0x0F
-              120,   136,   153,   171,   190,   210,   231,   253, // 0x10 - 0x17
-              276,   300,   325,   351,   378,   406,   435,   465, // 0x18 - 0x1F
-              496,   528,   561,   595,   630,   666,   703,   741, // 0x20 - 0x27
-              780,   820,   861,   903,   946,   990,  1035,  1081, // 0x28 - 0x2F
-             1128,  1176,  1225,  1275,  1326,  1378,  1431,  1485, // 0x30 - 0x37
-             1540,  1596,  1653,  1711,  1770,  1830,  1891,  1953, // 0x38 - 0x3F
-             2016,  2080,  2145,  2211,  2278,  2346,  2415,  2485, // 0x40 - 0x47
-             2556,  2628,  2701,  2775,  2850,  2926,  3003,  3081, // 0x48 - 0x4F
-             3160,  3240,  3321,  3403,  3486,  3570,  3655,  3741, // 0x50 - 0x57
-             3828,  3916,  4005,  4095,  4186,  4278,  4371,  4465, // 0x58 - 0x5F
-             4560,  4656,  4753,  4851,  4950,  5050,  5151,  5253, // 0x60 - 0x67
-             5356,  5460,  5565,  5671,  5778,  5886,  5995,  6105, // 0x68 - 0x6F
-             6216,  6328,  6441,  6555,  6670,  6786,  6903,  7021, // 0x70 - 0x77
-             7140,  7260,  7381,  7503,  7626,  7750,  7875,  8001, // 0x78 - 0x7F
-             8128,  8256,  8383,  8509,  8634,  8758,  8881,  9003, // 0x80 - 0x87
-             9124,  9244,  9363,  9481,  9598,  9714,  9829,  9943, // 0x88 - 0x8F
-            10056, 10168, 10279, 10389, 10498, 10606, 10713, 10819, // 0x90 - 0x97
-            10924, 11028, 11131, 11233, 11334, 11434, 11533, 11631, // 0x98 - 0x9F
-            11728, 11824, 11919, 12013, 12106, 12198, 12289, 12379, // 0xA0 - 0xA7
-            12468, 12556, 12643, 12729, 12814, 12898, 12981, 13063, // 0xA8 - 0xAF
-            13144, 13224, 13303, 13381, 13458, 13534, 13609, 13683, // 0xB0 - 0xB7
-            13756, 13828, 13899, 13969, 14038, 14106, 14173, 14239, // 0xB8 - 0xBF
-            14304, 14368, 14431, 14493, 14554, 14614, 14673, 14731, // 0xC0 - 0xC7
-            14788, 14844, 14899, 14953, 15006, 15058, 15109, 15159, // 0xC8 - 0xCF
-            15208, 15256, 15303, 15349, 15394, 15438, 15481, 15523, // 0xD0 - 0xD7
-            15564, 15604, 15643, 15681, 15718, 15754, 15789, 15823, // 0xD8 - 0xDF
-            15856, 15888, 15919, 15949, 15978, 16006, 16033, 16059, // 0xE0 - 0xE7
-            16084, 16108, 16131, 16153, 16174, 16194, 16213, 16231, // 0xE8 - 0xEF
-            16248, 16264, 16279, 16293, 16306, 16318, 16329, 16339, // 0xF0 - 0xF7
-            16348, 16356, 16363, 16369, 16374, 16378, 16381, 16383, // 0xF8 - 0xFF
-        };
-
-        const int totalRngOutcomes = 16384;
 
         private int address;
         private int offset;
@@ -436,129 +365,67 @@ namespace SF3.X033_X031_Editor.Models.Stats
             }
         }
 
-        static private double GetAverageStatGrowthPerLevel(int growthValue)
-        {
-            int guaranteedStatBonus = (growthValue & 0xf00) % 15;
-
-            // The portion of growthValue % 0x100 is the starting point for the formula to determine whether
-            // we should add an additional stat point.
-            int growthValuePlusOneCalcStart = Math.Max(growthValue % 0x100, 0);
-
-            // Determine the odds that adding to random numbers range (0x00, 0x7F) will yield a result >= 100,
-            // which provides a bonus +1 stat boost.
-            double percentToReachPlusOne = numRngOutcomesToReachPlusOne[growthValuePlusOneCalcStart] / totalRngOutcomes;
-
-            return percentToReachPlusOne + guaranteedStatBonus;
-        }
-
-        static private string GetAverageStatGrowthPerLevelAsPercent(int growthValue)
-        {
-            return (Debugs.debugs ? string.Format("{0:x}", growthValue) + " || " : "") +
-                   string.Format("{0:0.##}", GetAverageStatGrowthPerLevel(growthValue) * 100) + "%";
-        }
-
-        static private int GetStatGrowthPerLevel(int statRange, int levelRange)
-        {
-            var statRangeTimes0x100 = statRange << 8;
-            switch (levelRange)
-            {
-                case 2:
-                    return statRangeTimes0x100 >> 1;
-                case 3:
-                    return statRangeTimes0x100 * 0x100 / 0x300;
-                case 4:
-                    return statRangeTimes0x100 >> 2;
-                case 5:
-                    return statRangeTimes0x100 * 0x100 / 0x280 >> 1;
-                case 10:
-                    return statRangeTimes0x100 * 0x100 / 0x280 >> 2;
-                case 13:
-                    return statRangeTimes0x100 * 0x100 / 0x340 >> 2;
-                case 69:
-                    return statRangeTimes0x100 * 0x100 / 0x228 >> 5;
-                default:
-                    return statRangeTimes0x100 / levelRange;
-            }
-        }
-
-        static private double GetAverageStatGrowthPerLevel(int statRange, int levelRange)
-        {
-            var growthValue = GetStatGrowthPerLevel(statRange, levelRange);
-            return GetAverageStatGrowthPerLevel(growthValue);
-        }
-
-        static private string GetAverageStatGrowthPerLevelAsPercent(int statRange, int levelRange)
-        {
-            var growthValue = GetStatGrowthPerLevel(statRange, levelRange);
-            return GetAverageStatGrowthPerLevelAsPercent(growthValue);
-        }
-
-        public int GetStatTarget(StatType stat, int groupIndex)
+        public ValueRange<int> GetStatGrowthRange(StatType stat, int groupIndex)
         {
             switch (stat)
             {
                 case StatType.HP:
                     switch (groupIndex)
                     {
-                        case 0: return HPCurve1;
-                        case 1: return HPCurve5;
-                        case 2: return HPCurve10;
-                        case 3: return HPCurve12_15;
-                        case 4: return HPCurve14_20;
-                        case 5: return HPCurve17_30;
-                        case 6: return HPCurve20_99;
+                        case 0: return new ValueRange<int>(HPCurve1, HPCurve5);
+                        case 1: return new ValueRange<int>(HPCurve5, HPCurve10);
+                        case 2: return new ValueRange<int>(HPCurve10, HPCurve12_15);
+                        case 3: return new ValueRange<int>(HPCurve12_15, HPCurve14_20);
+                        case 4: return new ValueRange<int>(HPCurve14_20, HPCurve17_30);
+                        case 5: return new ValueRange<int>(HPCurve17_30, HPCurve20_99);
                         default: throw new ArgumentOutOfRangeException();
                     }
 
                 case StatType.MP:
                     switch (groupIndex)
                     {
-                        case 0: return MPCurve1;
-                        case 1: return MPCurve5;
-                        case 2: return MPCurve10;
-                        case 3: return MPCurve12_15;
-                        case 4: return MPCurve14_20;
-                        case 5: return MPCurve17_30;
-                        case 6: return MPCurve20_99;
+                        case 0: return new ValueRange<int>(MPCurve1, MPCurve5);
+                        case 1: return new ValueRange<int>(MPCurve5, MPCurve10);
+                        case 2: return new ValueRange<int>(MPCurve10, MPCurve12_15);
+                        case 3: return new ValueRange<int>(MPCurve12_15, MPCurve14_20);
+                        case 4: return new ValueRange<int>(MPCurve14_20, MPCurve17_30);
+                        case 5: return new ValueRange<int>(MPCurve17_30, MPCurve20_99);
                         default: throw new ArgumentOutOfRangeException();
                     }
 
                 case StatType.Atk:
                     switch (groupIndex)
                     {
-                        case 0: return AtkCurve1;
-                        case 1: return AtkCurve5;
-                        case 2: return AtkCurve10;
-                        case 3: return AtkCurve12_15;
-                        case 4: return AtkCurve14_20;
-                        case 5: return AtkCurve17_30;
-                        case 6: return AtkCurve20_99;
+                        case 0: return new ValueRange<int>(AtkCurve1, AtkCurve5);
+                        case 1: return new ValueRange<int>(AtkCurve5, AtkCurve10);
+                        case 2: return new ValueRange<int>(AtkCurve10, AtkCurve12_15);
+                        case 3: return new ValueRange<int>(AtkCurve12_15, AtkCurve14_20);
+                        case 4: return new ValueRange<int>(AtkCurve14_20, AtkCurve17_30);
+                        case 5: return new ValueRange<int>(AtkCurve17_30, AtkCurve20_99);
                         default: throw new ArgumentOutOfRangeException();
                     }
 
                 case StatType.Def:
                     switch (groupIndex)
                     {
-                        case 0: return DefCurve1;
-                        case 1: return DefCurve5;
-                        case 2: return DefCurve10;
-                        case 3: return DefCurve12_15;
-                        case 4: return DefCurve14_20;
-                        case 5: return DefCurve17_30;
-                        case 6: return DefCurve20_99;
+                        case 0: return new ValueRange<int>(DefCurve1, DefCurve5);
+                        case 1: return new ValueRange<int>(DefCurve5, DefCurve10);
+                        case 2: return new ValueRange<int>(DefCurve10, DefCurve12_15);
+                        case 3: return new ValueRange<int>(DefCurve12_15, DefCurve14_20);
+                        case 4: return new ValueRange<int>(DefCurve14_20, DefCurve17_30);
+                        case 5: return new ValueRange<int>(DefCurve17_30, DefCurve20_99);
                         default: throw new ArgumentOutOfRangeException();
                     }
 
                 case StatType.Agi:
                     switch (groupIndex)
                     {
-                        case 0: return AgiCurve1;
-                        case 1: return AgiCurve5;
-                        case 2: return AgiCurve10;
-                        case 3: return AgiCurve12_15;
-                        case 4: return AgiCurve14_20;
-                        case 5: return AgiCurve17_30;
-                        case 6: return AgiCurve20_99;
+                        case 0: return new ValueRange<int>(AgiCurve1, AgiCurve5);
+                        case 1: return new ValueRange<int>(AgiCurve5, AgiCurve10);
+                        case 2: return new ValueRange<int>(AgiCurve10, AgiCurve12_15);
+                        case 3: return new ValueRange<int>(AgiCurve12_15, AgiCurve14_20);
+                        case 4: return new ValueRange<int>(AgiCurve14_20, AgiCurve17_30);
+                        case 5: return new ValueRange<int>(AgiCurve17_30, AgiCurve20_99);
                         default: throw new ArgumentOutOfRangeException();
                     }
 
@@ -567,33 +434,17 @@ namespace SF3.X033_X031_Editor.Models.Stats
             }
         }
 
-        public (int, int) GetStatAndLevelRangesForGroup(StatType stat, int groupIndex)
-        {
-            var statBegin = GetStatTarget(stat, groupIndex);
-            var statEnd = GetStatTarget(stat, groupIndex + 1);
-            var statRange = statEnd - statBegin;
-
-            var levelsBegin = StatCurveTargetLevels[groupIndex];
-            var levelsEnd = StatCurveTargetLevels[groupIndex + 1];
-
-            bool isPromoted = IsPromoted;
-            var levelBegin = isPromoted ? levelsBegin.Promoted : levelsBegin.Unpromoted;
-            var levelEnd = isPromoted ? levelsEnd.Promoted : levelsEnd.Unpromoted;
-            var levelRange = levelEnd - levelBegin;
-
-            return (statRange, levelRange);
-        }
-
         public double GetAverageStatGrowthPerLevel(StatType stat, int groupIndex)
         {
-            var ranges = GetStatAndLevelRangesForGroup(stat, groupIndex);
-            return GetAverageStatGrowthPerLevel(ranges.Item1, ranges.Item2);
+            var growthValue = SF3.Stats.GetStatGrowthValuePerLevel(GetStatGrowthRange(stat, groupIndex).Range, SF3.Stats.StatGrowthGroups[IsPromoted][groupIndex].Range.Range);
+            return SF3.Stats.GetAverageStatGrowthPerLevel(growthValue);
         }
 
         public string GetAverageStatGrowthPerLevelAsPercent(StatType stat, int groupIndex)
         {
-            var ranges = GetStatAndLevelRangesForGroup(stat, groupIndex);
-            return GetAverageStatGrowthPerLevelAsPercent(ranges.Item1, ranges.Item2);
+            var growthValue = SF3.Stats.GetStatGrowthValuePerLevel(GetStatGrowthRange(stat, groupIndex).Range, SF3.Stats.StatGrowthGroups[IsPromoted][groupIndex].Range.Range);
+            return (Debugs.debugs ? string.Format("{0:x}", growthValue) + " || " : "") +
+                    SF3.Stats.GetAverageStatGrowthPerLevelAsPercent(growthValue);
         }
 
         public int ID => index;
