@@ -73,5 +73,93 @@ namespace SF3LibTests
             // Act + Assert
             Assert.AreEqual(2.25, inputSet.GetWeightedAverage(), 0.001);
         }
+
+        [TestMethod]
+        public void GetWeightedMedian_WithCoinFlip_ReturnsBetween()
+        {
+            // Arrange
+            var inputSet = new ProbableValueSet()
+            {
+                { 10, 0.50 },
+                { 20, 0.50 }
+            };
+
+            // Act + Assert
+            Assert.AreEqual(15.0, inputSet.GetWeightedMedian(), 0.001);
+        }
+
+        [TestMethod]
+        public void GetWeightedMedianAt_WithCoinFlipAndZeroPercent_ReturnsTails()
+        {
+            // Arrange
+            var inputSet = new ProbableValueSet()
+            {
+                { 10, 0.50 },
+                { 20, 0.50 }
+            };
+
+            // Act + Assert
+            Assert.AreEqual(10.0, inputSet.GetWeightedMedianAt(0.00), 0.001);
+        }
+
+        [TestMethod]
+        public void GetWeightedMedianAt_WithCoinFlipAndFiftyPercent_ReturnsBetweens()
+        {
+            // Arrange
+            var inputSet = new ProbableValueSet()
+            {
+                { 10, 0.50 },
+                { 20, 0.50 }
+            };
+
+            // Act + Assert
+            Assert.AreEqual(15.0, inputSet.GetWeightedMedianAt(0.50), 0.001);
+        }
+
+        [TestMethod]
+        public void GetWeightedMedianAt_WithCoinFlipAndHundredPercent_ReturnsHeads()
+        {
+            // Arrange
+            var inputSet = new ProbableValueSet()
+            {
+                { 10, 0.50 },
+                { 20, 0.50 }
+            };
+
+            // Act + Assert
+            Assert.AreEqual(20.0, inputSet.GetWeightedMedianAt(1.00), 0.001);
+        }
+
+
+        [TestMethod]
+        public void GetWeightedMedianAt_WithThreeSidesFiftyPercent_ReturnsMiddle()
+        {
+            // Arrange
+            var inputSet = new ProbableValueSet()
+            {
+                { 10, 0.33333 },
+                { 20, 0.33333 },
+                { 30, 0.33334 }
+            };
+
+            // Act + Assert
+            Assert.AreEqual(20.0, inputSet.GetWeightedMedianAt(0.50), 0.001);
+        }
+
+
+        [TestMethod]
+        public void GetWeightedMedianAt_WithOneOneTwoFiftyPercent_ReturnsBetweenSecondAndThird()
+        {
+            // Arrange
+            var inputSet = new ProbableValueSet()
+            {
+                { 10, 0.25 },
+                { 20, 0.25 },
+                { 30, 0.50 }
+            };
+
+            // Act + Assert
+            Assert.AreEqual(23.333, inputSet.GetWeightedMedianAt(0.50), 0.001);
+        }
     }
 }
