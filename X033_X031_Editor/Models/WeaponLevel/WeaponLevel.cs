@@ -21,6 +21,8 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 
         public WeaponLevel(ScenarioType scenario, int id, string text)
         {
+            Scenario = scenario;
+
             checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = FileEditor.getByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
 

@@ -35,6 +35,8 @@ namespace SF3.IconPointerEditor.Models.Items
 
         public Item(ScenarioType scenario, int id, string text)
         {
+            Scenario = scenario;
+
             if (Scenario == ScenarioType.Scenario1)
             {
                 if (Globals.x026 == true)
