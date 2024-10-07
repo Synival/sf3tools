@@ -457,28 +457,40 @@ namespace SF3.X033_X031_Editor.Models.Stats
                    string.Format("{0:0.##}", GetAverageStatGrowthPerLevel(growthValue) * 100) + "%";
         }
 
-        static private string GetAverageStatGrowthPerLevelAsPercent(int statRange, int levelRange)
+        static private int GetStatGrowthPerLevel(int statRange, int levelRange)
         {
             var statRangeTimes0x100 = statRange << 8;
             switch (levelRange)
             {
                 case 2:
-                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 >> 1);
+                    return statRangeTimes0x100 >> 1;
                 case 3:
-                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 * 0x100 / 0x300);
+                    return statRangeTimes0x100 * 0x100 / 0x300;
                 case 4:
-                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 >> 2);
+                    return statRangeTimes0x100 >> 2;
                 case 5:
-                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 * 0x100 / 0x280 >> 1);
+                    return statRangeTimes0x100 * 0x100 / 0x280 >> 1;
                 case 10:
-                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 * 0x100 / 0x280 >> 2);
+                    return statRangeTimes0x100 * 0x100 / 0x280 >> 2;
                 case 13:
-                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 * 0x100 / 0x340 >> 2);
+                    return statRangeTimes0x100 * 0x100 / 0x340 >> 2;
                 case 69:
-                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 * 0x100 / 0x228 >> 5);
+                    return statRangeTimes0x100 * 0x100 / 0x228 >> 5;
                 default:
-                    return GetAverageStatGrowthPerLevelAsPercent(statRangeTimes0x100 / levelRange);
+                    return statRangeTimes0x100 / levelRange;
             }
+        }
+
+        static private double GetAverageStatGrowthPerLevel(int statRange, int levelRange)
+        {
+            var growthValue = GetStatGrowthPerLevel(statRange, levelRange);
+            return GetAverageStatGrowthPerLevel(growthValue);
+        }
+
+        static private string GetAverageStatGrowthPerLevelAsPercent(int statRange, int levelRange)
+        {
+            var growthValue = GetStatGrowthPerLevel(statRange, levelRange);
+            return GetAverageStatGrowthPerLevelAsPercent(growthValue);
         }
 
         public int GetStatTarget(StatType stat, int groupIndex)
@@ -555,7 +567,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
             }
         }
 
-        public string GetAverageStatGrowthPerLevelAsPercent(StatType stat, int groupIndex)
+        public (int, int) GetStatAndLevelRangesForGroup(StatType stat, int groupIndex)
         {
             var statBegin = GetStatTarget(stat, groupIndex);
             var statEnd = GetStatTarget(stat, groupIndex + 1);
@@ -569,7 +581,19 @@ namespace SF3.X033_X031_Editor.Models.Stats
             var levelEnd = isPromoted ? levelsEnd.Promoted : levelsEnd.Unpromoted;
             var levelRange = levelEnd - levelBegin;
 
-            return GetAverageStatGrowthPerLevelAsPercent(statRange, levelRange);
+            return (statRange, levelRange);
+        }
+
+        public double GetAverageStatGrowthPerLevel(StatType stat, int groupIndex)
+        {
+            var ranges = GetStatAndLevelRangesForGroup(stat, groupIndex);
+            return GetAverageStatGrowthPerLevel(ranges.Item1, ranges.Item2);
+        }
+
+        public string GetAverageStatGrowthPerLevelAsPercent(StatType stat, int groupIndex)
+        {
+            var ranges = GetStatAndLevelRangesForGroup(stat, groupIndex);
+            return GetAverageStatGrowthPerLevelAsPercent(ranges.Item1, ranges.Item2);
         }
 
         public int ID => index;
