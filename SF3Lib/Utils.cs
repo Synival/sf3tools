@@ -5,6 +5,9 @@ using System.Text;
 
 namespace SF3
 {
+    /// <summary>
+    /// Miscellaneous utility functions.
+    /// </summary>
     public static class Utils
     {
         /// <summary>
