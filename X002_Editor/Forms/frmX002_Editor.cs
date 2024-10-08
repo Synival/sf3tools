@@ -297,14 +297,14 @@ namespace SF3.X002_Editor.Forms
             //olvMonsters.ClearObjects();
 
             olvItems.ClearObjects();
-            objectListView1.ClearObjects();
-            objectListView2.ClearObjects();
-            objectListView3.ClearObjects();
-            objectListView4.ClearObjects();
-            objectListView5.ClearObjects();
-            objectListView6.ClearObjects();
-            objectListView7.ClearObjects();
-            objectListView8.ClearObjects();
+            olvSpells.ClearObjects();
+            olvPreset.ClearObjects();
+            olvLoaded.ClearObjects();
+            olvStatBoost.ClearObjects();
+            olvWeaponRankAttack.ClearObjects();
+            olvAttackResist.ClearObjects();
+            olvWarpTableScn1.ClearObjects();
+            olvLoadedOverride.ClearObjects();
 
             //olvPresets.ClearObjects();
             //olvSpells.ClearObjects();
@@ -314,17 +314,17 @@ namespace SF3.X002_Editor.Forms
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
             olvItems.AddObjects(_itemList.Models);
-            objectListView1.AddObjects(_spellList.Models);
-            objectListView2.AddObjects(_presetList.Models);
-            objectListView3.AddObjects(_loadList.Models);
-            objectListView4.AddObjects(_statList.Models);
-            objectListView5.AddObjects(_weaponRankList.Models);
-            objectListView6.AddObjects(_attackResistList.Models);
-            objectListView8.AddObjects(_musicOverrideList.Models);
+            olvSpells.AddObjects(_spellList.Models);
+            olvPreset.AddObjects(_presetList.Models);
+            olvLoaded.AddObjects(_loadList.Models);
+            olvStatBoost.AddObjects(_statList.Models);
+            olvWeaponRankAttack.AddObjects(_weaponRankList.Models);
+            olvAttackResist.AddObjects(_attackResistList.Models);
+            olvLoadedOverride.AddObjects(_musicOverrideList.Models);
 
             if (_scenario == ScenarioType.Scenario1)
             {
-                objectListView7.AddObjects(_warpList.Models);
+                olvWarpTableScn1.AddObjects(_warpList.Models);
             }
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
@@ -376,14 +376,14 @@ namespace SF3.X002_Editor.Forms
             //olvMonsters.Size = tabMonsters.ClientSize;
             //olvCharacters.Size = tabCharacters.ClientSize;
             olvItems.Size = tabItems.ClientSize;
-            objectListView1.Size = tabPage1.ClientSize;
-            objectListView2.Size = tabPage2.ClientSize;
-            objectListView3.Size = tabPage3.ClientSize;
-            objectListView4.Size = tabPage4.ClientSize;
-            objectListView5.Size = tabPage5.ClientSize;
-            objectListView6.Size = tabPage6.ClientSize;
-            objectListView7.Size = tabPage7.ClientSize;
-            objectListView8.Size = tabPage8.ClientSize;
+            olvSpells.Size = tabSpells.ClientSize;
+            olvPreset.Size = tabPreset.ClientSize;
+            olvLoaded.Size = tabLoaded.ClientSize;
+            olvStatBoost.Size = tabStatBoost.ClientSize;
+            olvWeaponRankAttack.Size = tabWeaponRankAttack.ClientSize;
+            olvAttackResist.Size = tabAttackResist.ClientSize;
+            olvWarpTableScn1.Size = tabWarpTableScn1.ClientSize;
+            olvLoadedOverride.Size = tabLoadedOverride.ClientSize;
             //olvBlacksmith.Size = tabBlacksmith.ClientSize;
             //olvStoreItems.Size = tabShops.ClientSize;
             //olvSpells.Size = tabSpells.ClientSize;
@@ -400,14 +400,14 @@ namespace SF3.X002_Editor.Forms
             //olvMonsters.FinishCellEdit();
             //olvCharacters.FinishCellEdit();
             olvItems.FinishCellEdit();
-            objectListView1.FinishCellEdit();
-            objectListView2.FinishCellEdit();
-            objectListView3.FinishCellEdit();
-            objectListView4.FinishCellEdit();
-            objectListView5.FinishCellEdit();
-            objectListView6.FinishCellEdit();
-            objectListView7.FinishCellEdit();
-            objectListView8.FinishCellEdit();
+            olvSpells.FinishCellEdit();
+            olvPreset.FinishCellEdit();
+            olvLoaded.FinishCellEdit();
+            olvStatBoost.FinishCellEdit();
+            olvWeaponRankAttack.FinishCellEdit();
+            olvAttackResist.FinishCellEdit();
+            olvWarpTableScn1.FinishCellEdit();
+            olvLoadedOverride.FinishCellEdit();
             //olvStoreItems.FinishCellEdit();
             //olvSpells.FinishCellEdit();
             SaveFileDialog savefile = new SaveFileDialog();
@@ -680,16 +680,16 @@ namespace SF3.X002_Editor.Forms
 
         private void tabpage_Click(object sender, EventArgs e)
         {
-            objectListView1.ClearObjects();
+            olvSpells.ClearObjects();
             if (_spellList != null)
             {
-                objectListView1.AddObjects(_spellList.Models);
+                olvSpells.AddObjects(_spellList.Models);
             }
 
-            objectListView4.ClearObjects();
+            olvStatBoost.ClearObjects();
             if (_statList != null)
             {
-                objectListView4.AddObjects(_statList.Models);
+                olvStatBoost.AddObjects(_statList.Models);
             }
         }
 
