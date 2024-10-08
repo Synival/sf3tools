@@ -6,16 +6,20 @@ using SF3.Types;
 
 namespace SF3.Editor
 {
-    public class FileEditor
+    /// <summary>
+    /// Used for loading, saving, reading, and modifying .BIN files.
+    /// </summary>
+    public class FileEditor : IFileEditor
     {
         private static byte[] data;
         public static string Filename;
 
         public bool LoadFile(string filename)
         {
+            FileStream stream = null;
             try
             {
-                FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
                 data = new byte[stream.Length];
                 stream.Read(data, 0, (int)stream.Length);
                 Filename = filename;
@@ -25,15 +29,38 @@ namespace SF3.Editor
             {
                 return false;
             }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
+            }
+
             return true;
         }
 
         public static bool SaveFile(string filename)
         {
-            FileStream stream = new FileStream(filename, FileMode.Create);
-            stream.Write(data, 0, data.Length);
-            Filename = filename;
-            stream.Close();
+            FileStream stream = null;
+            try
+            {
+                stream = new FileStream(filename, FileMode.Create);
+                stream.Write(data, 0, data.Length);
+                Filename = filename;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
+            }
+
             return true;
         }
 

@@ -52,7 +52,7 @@ namespace SF3.X013_Editor.Forms
         private WeaponSpellRankList _weaponSpellRankList;
         private StatusEffectList _statusEffectList;
 
-        private FileEditor _fileEditor;
+        private IFileEditor _fileEditor;
 
         public frmMain()
         {

@@ -45,7 +45,7 @@ namespace SF3.X033_X031_Editor.Forms
         private InitialInfoList _initialInfoList;
         private WeaponLevelList _weaponLevelList;
 
-        private FileEditor _fileEditor;
+        private IFileEditor _fileEditor;
 
         public class StatDataPoint
         {

@@ -41,7 +41,7 @@ namespace SF3.X002_Editor.Forms
         private WarpList _warpList;
         private MusicOverrideList _musicOverrideList;
 
-        private FileEditor _fileEditor;
+        private IFileEditor _fileEditor;
 
         public frmMain()
         {

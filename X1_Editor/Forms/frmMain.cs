@@ -47,7 +47,7 @@ namespace SF3.X1_Editor.Forms
         private EnterList _enterList;
         private ArrowList _arrowList;
 
-        private FileEditor _fileEditor;
+        private IFileEditor _fileEditor;
 
         public frmMain()
         {

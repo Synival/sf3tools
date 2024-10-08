@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\FileEditorReadException.cs" />
     <Compile Include="FileEditor.cs" />
+    <Compile Include="IFileEditor.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup />

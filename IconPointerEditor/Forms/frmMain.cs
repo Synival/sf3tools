@@ -27,7 +27,7 @@ namespace SF3.IconPointerEditor.Forms
         private ItemList _itemList;
         private PresetList _presetList;
 
-        private FileEditor _fileEditor;
+        private IFileEditor _fileEditor;
 
         public frmMain()
         {

@@ -27,7 +27,7 @@ namespace SF3.X019_Editor.Forms
 
         private ItemList _itemList;
 
-        private FileEditor _fileEditor;
+        private IFileEditor _fileEditor;
 
         public frmMain()
         {
