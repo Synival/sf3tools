@@ -2,7 +2,7 @@
 
 namespace SF3.X1_Editor.Forms
 {
-    partial class frmMain
+    partial class frmX1_Editor
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace SF3.X1_Editor.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX1_Editor));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -2791,7 +2791,7 @@ namespace SF3.X1_Editor.Forms
             this.olvSpellUseLv.DisplayIndex = 25;
             this.olvSpellUseLv.Text = "SpellUseLv";
             // 
-            // frmMain
+            // frmX1_Editor
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2801,12 +2801,12 @@ namespace SF3.X1_Editor.Forms
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "frmMain";
+            this.Name = "frmX1_Editor";
             this.Text = "Sf3 X1 editor          |OpenedFile: None|          Current open settings: Scenari" +
     "o: 1 | Map: Synbios | MapType: none | debug: off";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMonsterEditor_FormClosing);
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            this.Resize += new System.EventHandler(this.frmMonsterEditor_Resize);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmX1_Editor_FormClosing);
+            this.Load += new System.EventHandler(this.frmX1_Editor_Load);
+            this.Resize += new System.EventHandler(this.frmX1_Editor_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabItems.ResumeLayout(false);
@@ -2842,6 +2842,7 @@ namespace SF3.X1_Editor.Forms
             ((System.ComponentModel.ISupportInitialize)(this.objectListView11)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

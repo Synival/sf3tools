@@ -52,11 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\frmMain.cs">
+    <Compile Include="Forms\frmX1_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="Forms\frmX1_Editor.Designer.cs">
+      <DependentUpon>frmX1_Editor.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Arrow\Arrow.cs" />
     <Compile Include="Models\Arrow\ArrowList.cs" />
@@ -84,8 +84,9 @@
     <Compile Include="Models\Warp\WarpList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmX1_Editor.resx">
+      <DependentUpon>frmX1_Editor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

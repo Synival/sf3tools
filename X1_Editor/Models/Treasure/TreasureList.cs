@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices.ComTypes;
 using SF3.Models;
 using SF3.Types;
-using static SF3.X1_Editor.Forms.frmMain;
+using static SF3.X1_Editor.Forms.frmX1_Editor;
 
 namespace SF3.X1_Editor.Models.Treasures
 {
@@ -128,7 +128,7 @@ using System;
 using System.Xml;
 using System.IO;
 using System.Collections.Generic;
-using SF3.X1_Editor.Forms.frmMain;
+using SF3.X1_Editor.Forms.frmX1_Editor;
 
 namespace SF3.X1_Editor.Models.Treasures
 {

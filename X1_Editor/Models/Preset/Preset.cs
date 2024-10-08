@@ -1,6 +1,6 @@
 ﻿using SF3.Editor;
 using SF3.Types;
-using static SF3.X1_Editor.Forms.frmMain;
+using static SF3.X1_Editor.Forms.frmX1_Editor;
 
 namespace SF3.X1_Editor.Models.Presets
 {
