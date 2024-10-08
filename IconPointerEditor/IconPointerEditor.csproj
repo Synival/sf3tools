@@ -58,12 +58,10 @@
     <Compile Include="Forms\frmIconPointerEditor.Designer.cs">
       <DependentUpon>frmIconPointerEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Items\Item.cs" />
-    <Compile Include="Models\Items\ItemList.cs" />
-    <Compile Include="Models\Preset\Preset.cs" />
-    <Compile Include="Models\Preset\PresetList.cs" />
-    <Compile Include="Models\Spells\SpellList.cs" />
-    <Compile Include="Models\Spells\Spells.cs" />
+    <Compile Include="Models\SpellIcons\SpellIcon.cs" />
+    <Compile Include="Models\SpellIcons\SpellIconList.cs" />
+    <Compile Include="Models\ItemIcons\ItemIcon.cs" />
+    <Compile Include="Models\ItemIcons\ItemIconList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmIconPointerEditor.resx">

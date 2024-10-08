@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
-using System.Windows.Forms;
 using SF3.Types;
 using SF3.Models;
 
-namespace SF3.IconPointerEditor.Models.Items
+namespace SF3.IconPointerEditor.Models.ItemIcons
 {
-    public class ItemList : IModelArray<Item>
+    public class ItemIconList : IModelArray<ItemIcon>
     {
-        public ItemList(ISF3FileEditor fileEditor)
+        public ItemIconList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
 
-        private Item[] itemssorted;
-        private Item[] items;
+        private ItemIcon[] modelsSorted;
+        private ItemIcon[] models;
         private ISF3FileEditor _fileEditor;
 
         private string r = "";
@@ -25,28 +24,28 @@ namespace SF3.IconPointerEditor.Models.Items
         /// <summary>
         /// Initialises class
         /// </summary>
-        /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
+        /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public bool Load()
         {
             if (Scenario == ScenarioType.Scenario1)
             {
-                r = "Resources/scenario1Spells.xml";
+                r = "Resources/scenario1Items.xml";
             }
             if (Scenario == ScenarioType.Scenario2)
             {
-                r = "Resources/scenario2Spells.xml";
+                r = "Resources/scenario2Items.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                r = "Resources/scenario3Spells.xml";
+                r = "Resources/scenario3Items.xml";
             }
             if (Scenario == ScenarioType.PremiumDisk)
             {
-                r = "Resources/PDSpells.xml";
+                r = "Resources/PDItems.xml";
             }
 
-            itemssorted = new Item[0];
-            items = new Item[256]; //max size of itemList
+            modelsSorted = new ItemIcon[0];
+            models = new ItemIcon[300]; //max size 
             FileStream stream = null;
             try
             {
@@ -57,29 +56,26 @@ namespace SF3.IconPointerEditor.Models.Items
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Item[] old;
+                ItemIcon[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Item[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new Item[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Item(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].ID] = itemssorted[old.Length];
-                        //MessageBox.Show("" + _fileEditor.GetDouble(itemssorted[itemssorted.Length - 1].Address));
+                        old = new ItemIcon[modelsSorted.Length];
+                        modelsSorted.CopyTo(old, 0);
+                        modelsSorted = new ItemIcon[old.Length + 1];
+                        old.CopyTo(modelsSorted, 0);
+                        modelsSorted[old.Length] = new ItemIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[modelsSorted[old.Length].SizeID] = modelsSorted[old.Length];
                     }
                 }
             }
             catch (FileLoadException)
             {
                 return false;
-            }
-            catch (FileNotFoundException)
-            {
-                return false;
+                //} catch (FileNotFoundException) {
+                //  return false;
             }
             finally
             {
@@ -91,6 +87,6 @@ namespace SF3.IconPointerEditor.Models.Items
             return true;
         }
 
-        public Item[] Models => itemssorted;
+        public ItemIcon[] Models => modelsSorted;
     }
 }

@@ -2,9 +2,9 @@
 using SF3.Types;
 using static SF3.IconPointerEditor.Forms.frmIconPointerEditor;
 
-namespace SF3.IconPointerEditor.Models.Presets
+namespace SF3.IconPointerEditor.Models.ItemIcons
 {
-    public class Preset
+    public class ItemIcon
     {
         private ISF3FileEditor _fileEditor;
 
@@ -18,7 +18,7 @@ namespace SF3.IconPointerEditor.Models.Presets
         private string name;
         private int sub;
 
-        public Preset(ISF3FileEditor fileEditor, int id, string text)
+        public ItemIcon(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

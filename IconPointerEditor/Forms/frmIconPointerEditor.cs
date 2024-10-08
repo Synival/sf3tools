@@ -3,8 +3,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
-using SF3.IconPointerEditor.Models.Presets;
-using SF3.IconPointerEditor.Models.Items;
+using SF3.IconPointerEditor.Models.ItemIcons;
+using SF3.IconPointerEditor.Models.SpellIcons;
 using BrightIdeasSoftware;
 using SF3.Types;
 using SF3.Exceptions;
@@ -22,8 +22,8 @@ namespace SF3.IconPointerEditor.Forms
 
         private ScenarioType _scenario = ScenarioType.Scenario1;
 
-        private ItemList _itemList;
-        private PresetList _presetList;
+        private SpellIconList _itemList;
+        private ItemIconList _presetList;
 
         private ISF3FileEditor _fileEditor;
 
@@ -153,7 +153,7 @@ namespace SF3.IconPointerEditor.Forms
         }*/
         private string getItemName(object target)
         {
-            return ((Item)target).Name;
+            return ((SpellIcon)target).Name;
         }
         /*private string getSpellName(object target)
         {
@@ -161,7 +161,7 @@ namespace SF3.IconPointerEditor.Forms
         }*/
         private string getPresetName(object target)
         {
-            return ((Preset)target).SizeName;
+            return ((ItemIcon)target).SizeName;
         }
         /*
         private string getStoreItemTypeName(object target)
@@ -192,7 +192,7 @@ namespace SF3.IconPointerEditor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            _itemList = new ItemList(_fileEditor);
+            _itemList = new SpellIconList(_fileEditor);
             if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
@@ -204,7 +204,7 @@ namespace SF3.IconPointerEditor.Forms
                 return false;
             }*/
 
-            _presetList = new PresetList(_fileEditor);
+            _presetList = new ItemIconList(_fileEditor);
             if (!_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
@@ -360,7 +360,7 @@ namespace SF3.IconPointerEditor.Forms
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.binary? = true;
             } */
-            else if (e.Value is Item)
+            else if (e.Value is SpellIcon)
             {
                 ComboBox cb = new ComboBox();
                 cb.Bounds = e.CellBounds;
@@ -386,7 +386,7 @@ namespace SF3.IconPointerEditor.Forms
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }*/
-            else if (e.Value is Preset)
+            else if (e.Value is ItemIcon)
             {
                 ComboBox cb = new ComboBox();
                 cb.Bounds = e.CellBounds;
@@ -456,20 +456,20 @@ namespace SF3.IconPointerEditor.Forms
                 Action value = (Action)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             } else*/
-            if (e.Value is Item)
+            if (e.Value is SpellIcon)
             {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                Item value = (Item)((ComboBox)e.Control).SelectedItem;
+                SpellIcon value = (SpellIcon)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
                 /*} else if (e.Value is Spell) {
                     PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                     Spell value = (Spell)((ComboBox)e.Control).SelectedItem;
                     property.SetValue(e.RowObject, value, null);*/
             }
-            else if (e.Value is Preset)
+            else if (e.Value is ItemIcon)
             {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                Preset value = (Preset)((ComboBox)e.Control).SelectedItem;
+                ItemIcon value = (ItemIcon)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             } /*else if (e.Value is CharacterClass) {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);

@@ -5,9 +5,9 @@ using SF3.Editor;
 using SF3.Types;
 using static SF3.IconPointerEditor.Forms.frmIconPointerEditor;
 
-namespace SF3.IconPointerEditor.Models.Items
+namespace SF3.IconPointerEditor.Models.SpellIcons
 {
-    public class Item
+    public class SpellIcon
     {
         private ISF3FileEditor _fileEditor;
 
@@ -35,7 +35,7 @@ namespace SF3.IconPointerEditor.Models.Items
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Item(ISF3FileEditor fileEditor, int id, string text)
+        public SpellIcon(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 
