@@ -105,7 +105,7 @@ using System;
 using System.Xml;
 using System.IO;
 using System.Collections.Generic;
-using SF3.X002_Editor.Forms.frmMain;
+using SF3.X002_Editor.Forms.frmX002_Editor;
 
 namespace SF3.X002_Editor.Models.Treasures
 {

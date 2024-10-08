@@ -1,6 +1,6 @@
 ﻿namespace SF3.X002_Editor.Forms
 {
-    partial class frmMain
+    partial class frmX002_Editor
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX002_Editor));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,6 +95,17 @@
             this.olvSpellUse = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSpellUseLv = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn79 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn80 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn81 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn82 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn83 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn84 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn85 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn86 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn87 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn88 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn89 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn90 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.objectListView2 = new BrightIdeasSoftware.ObjectListView();
@@ -168,17 +179,6 @@
             this.olvColumn60 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn61 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn62 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn80 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn81 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn82 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn83 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn84 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn85 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn86 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn87 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn88 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn89 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn90 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.menuStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
@@ -834,6 +834,77 @@
             this.olvColumn79.AspectName = "Cursed";
             this.olvColumn79.DisplayIndex = 24;
             this.olvColumn79.Text = "isCursed";
+            // 
+            // olvColumn80
+            // 
+            this.olvColumn80.AspectName = "CanCrack";
+            this.olvColumn80.DisplayIndex = 25;
+            this.olvColumn80.Text = "canCrack";
+            // 
+            // olvColumn81
+            // 
+            this.olvColumn81.AspectName = "HealingItem";
+            this.olvColumn81.DisplayIndex = 26;
+            this.olvColumn81.Text = "healingItem";
+            this.olvColumn81.Width = 80;
+            // 
+            // olvColumn82
+            // 
+            this.olvColumn82.AspectName = "CannotUnequip";
+            this.olvColumn82.DisplayIndex = 27;
+            this.olvColumn82.Text = "Can\'tUnequip";
+            this.olvColumn82.Width = 90;
+            // 
+            // olvColumn83
+            // 
+            this.olvColumn83.AspectName = "Rare";
+            this.olvColumn83.DisplayIndex = 28;
+            this.olvColumn83.Text = "Rare";
+            // 
+            // olvColumn84
+            // 
+            this.olvColumn84.AspectName = "FakeRare";
+            this.olvColumn84.DisplayIndex = 29;
+            this.olvColumn84.Text = "FakeRare";
+            // 
+            // olvColumn85
+            // 
+            this.olvColumn85.AspectName = "HealingItem2";
+            this.olvColumn85.DisplayIndex = 30;
+            this.olvColumn85.Text = "healingItem2";
+            this.olvColumn85.Width = 80;
+            // 
+            // olvColumn86
+            // 
+            this.olvColumn86.AspectName = "RequiredPromo";
+            this.olvColumn86.DisplayIndex = 31;
+            this.olvColumn86.Text = "requiresPromo";
+            this.olvColumn86.Width = 90;
+            // 
+            // olvColumn87
+            // 
+            this.olvColumn87.AspectName = "RequiredPromo2";
+            this.olvColumn87.DisplayIndex = 32;
+            this.olvColumn87.Text = "requiredPromo2";
+            this.olvColumn87.Width = 90;
+            // 
+            // olvColumn88
+            // 
+            this.olvColumn88.AspectName = "RequiredHero";
+            this.olvColumn88.DisplayIndex = 33;
+            this.olvColumn88.Text = "hero only";
+            // 
+            // olvColumn89
+            // 
+            this.olvColumn89.AspectName = "RequiredMale";
+            this.olvColumn89.DisplayIndex = 34;
+            this.olvColumn89.Text = "male";
+            // 
+            // olvColumn90
+            // 
+            this.olvColumn90.AspectName = "RequiredFemale";
+            this.olvColumn90.DisplayIndex = 35;
+            this.olvColumn90.Text = "female";
             // 
             // tabMain
             // 
@@ -1605,78 +1676,7 @@
             this.olvColumn62.AspectToStringFormat = "{0:X}";
             this.olvColumn62.Text = "Map";
             // 
-            // olvColumn80
-            // 
-            this.olvColumn80.AspectName = "CanCrack";
-            this.olvColumn80.DisplayIndex = 25;
-            this.olvColumn80.Text = "canCrack";
-            // 
-            // olvColumn81
-            // 
-            this.olvColumn81.AspectName = "HealingItem";
-            this.olvColumn81.DisplayIndex = 26;
-            this.olvColumn81.Text = "healingItem";
-            this.olvColumn81.Width = 80;
-            // 
-            // olvColumn82
-            // 
-            this.olvColumn82.AspectName = "CannotUnequip";
-            this.olvColumn82.DisplayIndex = 27;
-            this.olvColumn82.Text = "Can\'tUnequip";
-            this.olvColumn82.Width = 90;
-            // 
-            // olvColumn83
-            // 
-            this.olvColumn83.AspectName = "Rare";
-            this.olvColumn83.DisplayIndex = 28;
-            this.olvColumn83.Text = "Rare";
-            // 
-            // olvColumn84
-            // 
-            this.olvColumn84.AspectName = "FakeRare";
-            this.olvColumn84.DisplayIndex = 29;
-            this.olvColumn84.Text = "FakeRare";
-            // 
-            // olvColumn85
-            // 
-            this.olvColumn85.AspectName = "HealingItem2";
-            this.olvColumn85.DisplayIndex = 30;
-            this.olvColumn85.Text = "healingItem2";
-            this.olvColumn85.Width = 80;
-            // 
-            // olvColumn86
-            // 
-            this.olvColumn86.AspectName = "RequiredPromo";
-            this.olvColumn86.DisplayIndex = 31;
-            this.olvColumn86.Text = "requiresPromo";
-            this.olvColumn86.Width = 90;
-            // 
-            // olvColumn87
-            // 
-            this.olvColumn87.AspectName = "RequiredPromo2";
-            this.olvColumn87.DisplayIndex = 32;
-            this.olvColumn87.Text = "requiredPromo2";
-            this.olvColumn87.Width = 90;
-            // 
-            // olvColumn88
-            // 
-            this.olvColumn88.AspectName = "RequiredHero";
-            this.olvColumn88.DisplayIndex = 33;
-            this.olvColumn88.Text = "hero only";
-            // 
-            // olvColumn89
-            // 
-            this.olvColumn89.AspectName = "RequiredMale";
-            this.olvColumn89.DisplayIndex = 34;
-            this.olvColumn89.Text = "male";
-            // 
-            // olvColumn90
-            // 
-            this.olvColumn90.AspectName = "RequiredFemale";
-            this.olvColumn90.DisplayIndex = 35;
-            this.olvColumn90.Text = "female";
-            // 
-            // frmMain
+            // frmX002_Editor
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1685,11 +1685,11 @@
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmMain";
+            this.Name = "frmX002_Editor";
             this.Text = "Sf3 X002 editor";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMonsterEditor_FormClosing);
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            this.Resize += new System.EventHandler(this.frmMonsterEditor_Resize);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmX002_Editor_FormClosing);
+            this.Load += new System.EventHandler(this.frmX002_Editor_Load);
+            this.Resize += new System.EventHandler(this.frmX002_Editor_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabPage1.ResumeLayout(false);

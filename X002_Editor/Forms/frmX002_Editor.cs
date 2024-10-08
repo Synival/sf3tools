@@ -22,7 +22,7 @@ using SF3.Exceptions;
 
 namespace SF3.X002_Editor.Forms
 {
-    public partial class frmMain : Form
+    public partial class frmX002_Editor : Form
     {
         //Used to append to state names to stop program loading states from older versions
         private string Version = "19";
@@ -41,10 +41,10 @@ namespace SF3.X002_Editor.Forms
 
         private ISF3FileEditor _fileEditor;
 
-        public frmMain()
+        public frmX002_Editor()
         {
             InitializeComponent();
-            frmMonsterEditor_Resize(this, new EventArgs());
+            frmX002_Editor_Resize(this, new EventArgs());
 
             /*try {
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
@@ -368,7 +368,7 @@ namespace SF3.X002_Editor.Forms
             }
         }
 
-        private void frmMonsterEditor_Resize(object sender, EventArgs e)
+        private void frmX002_Editor_Resize(object sender, EventArgs e)
         {
             Size newsize = ClientSize;
             newsize.Height -= 24;
@@ -419,7 +419,7 @@ namespace SF3.X002_Editor.Forms
             }
         }
 
-        private void frmMonsterEditor_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmX002_Editor_FormClosing(object sender, FormClosingEventArgs e)
         {
             /*try {
                 byte[] data = olvMonsters.SaveState();
@@ -675,7 +675,7 @@ namespace SF3.X002_Editor.Forms
 
         private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            frmMonsterEditor_Resize(this, new EventArgs());
+            frmX002_Editor_Resize(this, new EventArgs());
         }
 
         private void tabpage_Click(object sender, EventArgs e)
@@ -693,7 +693,7 @@ namespace SF3.X002_Editor.Forms
             }
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private void frmX002_Editor_Load(object sender, EventArgs e)
         {
         }
 

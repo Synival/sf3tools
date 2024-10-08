@@ -21,7 +21,7 @@ namespace SF3.X002_Editor
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.frmMain());
+            Application.Run(new Forms.frmX002_Editor());
         }
     }
 }
