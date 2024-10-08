@@ -124,7 +124,7 @@ namespace SF3.X1_Editor.Models.Npcs
 
             get
             {
-                if ((FileEditor.GetWord(spriteID) > 0x0f) && (FileEditor.GetWord(spriteID) != 0xffff))
+                if ((_fileEditor.GetWord(spriteID) > 0x0f) && (_fileEditor.GetWord(spriteID) != 0xffff))
                 {
                     return (index + 0x3D).ToString("X");
                 }
@@ -137,14 +137,14 @@ namespace SF3.X1_Editor.Models.Npcs
 
         public int SpriteID
         {
-            get => FileEditor.GetWord(spriteID);
-            set => FileEditor.SetWord(spriteID, value);
+            get => _fileEditor.GetWord(spriteID);
+            set => _fileEditor.SetWord(spriteID, value);
         }
 
         public int NpcUnknown
         {
-            get => FileEditor.GetWord(unknown1);
-            set => FileEditor.SetWord(unknown1, value);
+            get => _fileEditor.GetWord(unknown1);
+            set => _fileEditor.SetWord(unknown1, value);
         }
 
         public int NpcTable
@@ -155,50 +155,50 @@ namespace SF3.X1_Editor.Models.Npcs
 
         public int NpcXPos
         {
-            get => FileEditor.GetWord(xPos);
-            set => FileEditor.SetWord(xPos, value);
+            get => _fileEditor.GetWord(xPos);
+            set => _fileEditor.SetWord(xPos, value);
         }
 
         public int NpcZPos
         {
-            get => FileEditor.GetWord(zPos);
-            set => FileEditor.SetWord(zPos, value);
+            get => _fileEditor.GetWord(zPos);
+            set => _fileEditor.SetWord(zPos, value);
         }
 
         public int NpcDirection
         {
-            get => FileEditor.GetWord(direction);
-            set => FileEditor.SetWord(direction, value);
+            get => _fileEditor.GetWord(direction);
+            set => _fileEditor.SetWord(direction, value);
         }
 
         public int NpcUnknownA
         {
-            get => FileEditor.GetWord(unknownA);
-            set => FileEditor.SetWord(unknownA, value);
+            get => _fileEditor.GetWord(unknownA);
+            set => _fileEditor.SetWord(unknownA, value);
         }
 
         public int NpcUnknownC
         {
-            get => FileEditor.GetWord(unknownC);
-            set => FileEditor.SetWord(unknownC, value);
+            get => _fileEditor.GetWord(unknownC);
+            set => _fileEditor.SetWord(unknownC, value);
         }
 
         public int NpcUnknownE
         {
-            get => FileEditor.GetWord(unknownE);
-            set => FileEditor.SetWord(unknownE, value);
+            get => _fileEditor.GetWord(unknownE);
+            set => _fileEditor.SetWord(unknownE, value);
         }
 
         public int NpcUnknown12
         {
-            get => FileEditor.GetWord(unknown12);
-            set => FileEditor.SetWord(unknown12, value);
+            get => _fileEditor.GetWord(unknown12);
+            set => _fileEditor.SetWord(unknown12, value);
         }
 
         public int NpcUnknown16
         {
-            get => FileEditor.GetWord(unknown16);
-            set => FileEditor.SetWord(unknown16, value);
+            get => _fileEditor.GetWord(unknown16);
+            set => _fileEditor.SetWord(unknown16, value);
         }
 
         public int NpcAddress => (address);

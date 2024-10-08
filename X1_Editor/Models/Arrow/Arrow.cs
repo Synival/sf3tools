@@ -100,38 +100,38 @@ namespace SF3.X1_Editor.Models.Arrows
 
         public int ArrowUnknown0
         {
-            get => FileEditor.GetWord(unknown0);
-            set => FileEditor.SetWord(unknown0, value);
+            get => _fileEditor.GetWord(unknown0);
+            set => _fileEditor.SetWord(unknown0, value);
         }
 
         public int ArrowText
         {
-            get => FileEditor.GetWord(textID);
-            set => FileEditor.SetWord(textID, value);
+            get => _fileEditor.GetWord(textID);
+            set => _fileEditor.SetWord(textID, value);
         }
 
         public int ArrowUnknown4
         {
-            get => FileEditor.GetWord(unknown4);
-            set => FileEditor.SetWord(unknown4, value);
+            get => _fileEditor.GetWord(unknown4);
+            set => _fileEditor.SetWord(unknown4, value);
         }
 
         public int ArrowWarp
         {
-            get => FileEditor.GetWord(warpInMPD);
-            set => FileEditor.SetWord(warpInMPD, value);
+            get => _fileEditor.GetWord(warpInMPD);
+            set => _fileEditor.SetWord(warpInMPD, value);
         }
 
         public int ArrowUnknown8
         {
-            get => FileEditor.GetWord(unknown8);
-            set => FileEditor.SetWord(unknown8, value);
+            get => _fileEditor.GetWord(unknown8);
+            set => _fileEditor.SetWord(unknown8, value);
         }
 
         public int ArrowUnknownA
         {
-            get => FileEditor.GetWord(unknownA);
-            set => FileEditor.SetWord(unknownA, value);
+            get => _fileEditor.GetWord(unknownA);
+            set => _fileEditor.SetWord(unknownA, value);
         }
 
         public int ArrowAddress => (address);

@@ -109,9 +109,9 @@ namespace SF3.X1_Editor.Models.Treasures
         {
             get
             {
-                if (FileEditor.GetWord(eventNumber) <= 0x0f)
+                if (_fileEditor.GetWord(eventNumber) <= 0x0f)
                 {
-                    return (FileEditor.GetWord(eventNumber) + 0x30).ToString("X");
+                    return (_fileEditor.GetWord(eventNumber) + 0x30).ToString("X");
                 }
                 else
                 {
@@ -122,38 +122,38 @@ namespace SF3.X1_Editor.Models.Treasures
 
         public int Searched
         {
-            get => FileEditor.GetWord(searched);
-            set => FileEditor.SetWord(searched, value);
+            get => _fileEditor.GetWord(searched);
+            set => _fileEditor.SetWord(searched, value);
         }
 
         public int EventNumber
         {
-            get => FileEditor.GetWord(eventNumber);
-            set => FileEditor.SetWord(eventNumber, value);
+            get => _fileEditor.GetWord(eventNumber);
+            set => _fileEditor.SetWord(eventNumber, value);
         }
 
         public int FlagUse
         {
-            get => FileEditor.GetWord(flagUsed);
-            set => FileEditor.SetWord(flagUsed, value);
+            get => _fileEditor.GetWord(flagUsed);
+            set => _fileEditor.SetWord(flagUsed, value);
         }
 
         public int UnknownTreasure
         {
-            get => FileEditor.GetWord(unknown);
-            set => FileEditor.SetWord(unknown, value);
+            get => _fileEditor.GetWord(unknown);
+            set => _fileEditor.SetWord(unknown, value);
         }
 
         public int EventType
         {
-            get => FileEditor.GetWord(eventType);
-            set => FileEditor.SetWord(eventType, value);
+            get => _fileEditor.GetWord(eventType);
+            set => _fileEditor.SetWord(eventType, value);
         }
 
         public int TreasureItem
         {
-            get => FileEditor.GetWord(itemID);
-            set => FileEditor.SetWord(itemID, value);
+            get => _fileEditor.GetWord(itemID);
+            set => _fileEditor.SetWord(itemID, value);
         }
 
         public int TreasureAddress => (address);

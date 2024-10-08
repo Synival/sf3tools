@@ -320,26 +320,26 @@ namespace SF3.X1_Editor.Models.Items
 
         public int EnemyID
         {
-            get => FileEditor.GetWord(enemyID);
-            set => FileEditor.SetWord(enemyID, value);
+            get => _fileEditor.GetWord(enemyID);
+            set => _fileEditor.SetWord(enemyID, value);
         }
 
         public int EnemyX
         {
-            get => FileEditor.GetWord(x);
-            set => FileEditor.SetWord(x, value);
+            get => _fileEditor.GetWord(x);
+            set => _fileEditor.SetWord(x, value);
         }
 
         public int EnemyY
         {
-            get => FileEditor.GetWord(y);
-            set => FileEditor.SetWord(y, value);
+            get => _fileEditor.GetWord(y);
+            set => _fileEditor.SetWord(y, value);
         }
 
         public int ItemOverride
         {
-            get => FileEditor.GetWord(itemOverride);
-            set => FileEditor.SetWord(itemOverride, value);
+            get => _fileEditor.GetWord(itemOverride);
+            set => _fileEditor.SetWord(itemOverride, value);
         }
 
         public int Unknown3
@@ -361,8 +361,8 @@ namespace SF3.X1_Editor.Models.Items
 
         public int JoinID
         {
-            get => FileEditor.GetWord(joinID);
-            set => FileEditor.SetWord(joinID, value);
+            get => _fileEditor.GetWord(joinID);
+            set => _fileEditor.SetWord(joinID, value);
         }
 
         public int Unknown6
@@ -575,8 +575,8 @@ namespace SF3.X1_Editor.Models.Items
 
         public int Unknown40
         {
-            get => FileEditor.GetWord(unknown40);
-            set => FileEditor.SetWord(unknown40, value);
+            get => _fileEditor.GetWord(unknown40);
+            set => _fileEditor.SetWord(unknown40, value);
         }
 
         public int Address => (address);

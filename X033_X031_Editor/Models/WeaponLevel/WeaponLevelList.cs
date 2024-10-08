@@ -8,8 +8,11 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 {
     public class WeaponLevelList : IModelArray<WeaponLevel>
     {
-        public WeaponLevelList(ScenarioType scenario)
+        IFileEditor _fileEditor;
+
+        public WeaponLevelList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
@@ -50,7 +53,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new WeaponLevel[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new WeaponLevel(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new WeaponLevel(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].WeaponLevelID] = itemssorted[old.Length];
                     }
                 }

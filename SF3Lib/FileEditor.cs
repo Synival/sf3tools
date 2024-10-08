@@ -96,7 +96,11 @@ namespace SF3
             }
         }
 
-        public static int GetWord(int location)
+        /// <summary>
+        /// Gets the value of a 16-bit integer at a location.
+        /// </summary>
+        /// <param name="location">The address of the 16-bit integer.</param>
+        public int GetWord(int location)
         {
             if (data == null)
             {
@@ -180,7 +184,12 @@ namespace SF3
             data[location] = value;
         }
 
-        public static void SetWord(int location, int value)
+        /// <summary>
+        /// Sets the value of a 16-bit integer at a location.
+        /// </summary>
+        /// <param name="location">The address of the 16-bit integer.</param>
+        /// <param name="value">The new value of the 16-bit integer.</param>
+        public void SetWord(int location, int value)
         {
             if (data == null)
             {
@@ -192,7 +201,7 @@ namespace SF3
         }
 
         /// <summary>
-        /// Sets the value of 32-bit integer at a location.
+        /// Sets the value of a 32-bit integer at a location.
         /// </summary>
         /// <param name="location">The address of the 32-bit integer.</param>
         /// <param name="value">The new value of the 32-bit integer.</param>

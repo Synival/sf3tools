@@ -171,7 +171,7 @@ namespace SF3.IconPointerEditor.Models.Items
             {
                 if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
-                    return FileEditor.GetWord(theSpellIcon);
+                    return _fileEditor.GetWord(theSpellIcon);
                 }
                 else
                 {
@@ -182,7 +182,7 @@ namespace SF3.IconPointerEditor.Models.Items
             {
                 if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
-                    FileEditor.SetWord(theSpellIcon, value);
+                    _fileEditor.SetWord(theSpellIcon, value);
                 }
                 else
                 {
@@ -197,7 +197,7 @@ namespace SF3.IconPointerEditor.Models.Items
             {
                 if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
-                    return FileEditor.GetWord(theSpellIcon) + realOffset;
+                    return _fileEditor.GetWord(theSpellIcon) + realOffset;
                 }
                 else
                 {
@@ -208,7 +208,7 @@ namespace SF3.IconPointerEditor.Models.Items
             {
                 if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
-                    FileEditor.SetWord(theSpellIcon, value - realOffset);
+                    _fileEditor.SetWord(theSpellIcon, value - realOffset);
                 }
                 else
                 {

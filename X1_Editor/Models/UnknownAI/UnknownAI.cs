@@ -243,56 +243,56 @@ namespace SF3.X1_Editor.Models.UnknownAI
 
         public int UnknownAI00
         {
-            get => FileEditor.GetWord(unknown00);
-            set => FileEditor.SetWord(unknown00, value);
+            get => _fileEditor.GetWord(unknown00);
+            set => _fileEditor.SetWord(unknown00, value);
         }
 
         public int UnknownAI02
         {
-            get => FileEditor.GetWord(unknown02);
-            set => FileEditor.SetWord(unknown02, value);
+            get => _fileEditor.GetWord(unknown02);
+            set => _fileEditor.SetWord(unknown02, value);
         }
 
         public int UnknownAI04
         {
-            get => FileEditor.GetWord(unknown04);
-            set => FileEditor.SetWord(unknown04, value);
+            get => _fileEditor.GetWord(unknown04);
+            set => _fileEditor.SetWord(unknown04, value);
         }
 
         public int UnknownAI06
         {
-            get => FileEditor.GetWord(unknown06);
-            set => FileEditor.SetWord(unknown06, value);
+            get => _fileEditor.GetWord(unknown06);
+            set => _fileEditor.SetWord(unknown06, value);
         }
 
         public int UnknownAI08
         {
-            get => FileEditor.GetWord(unknown08);
-            set => FileEditor.SetWord(unknown08, value);
+            get => _fileEditor.GetWord(unknown08);
+            set => _fileEditor.SetWord(unknown08, value);
         }
 
         public int UnknownAI0A
         {
-            get => FileEditor.GetWord(unknown0A);
-            set => FileEditor.SetWord(unknown0A, value);
+            get => _fileEditor.GetWord(unknown0A);
+            set => _fileEditor.SetWord(unknown0A, value);
         }
 
         public int UnknownAI0C
         {
-            get => FileEditor.GetWord(unknown0C);
-            set => FileEditor.SetWord(unknown0C, value);
+            get => _fileEditor.GetWord(unknown0C);
+            set => _fileEditor.SetWord(unknown0C, value);
         }
 
         public int UnknownAI0E
         {
-            get => FileEditor.GetWord(unknown0E);
-            set => FileEditor.SetWord(unknown0E, value);
+            get => _fileEditor.GetWord(unknown0E);
+            set => _fileEditor.SetWord(unknown0E, value);
         }
 
         public int UnknownAI10
         {
-            get => FileEditor.GetWord(unknown10);
-            set => FileEditor.SetWord(unknown10, value);
+            get => _fileEditor.GetWord(unknown10);
+            set => _fileEditor.SetWord(unknown10, value);
         }
 
         public int UnknownAIAddress => (address);

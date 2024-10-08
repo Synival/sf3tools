@@ -112,50 +112,50 @@ namespace SF3.X1_Editor.Models.Enters
 
         public int Entered
         {
-            get => FileEditor.GetWord(enterID);
-            set => FileEditor.SetWord(enterID, value);
+            get => _fileEditor.GetWord(enterID);
+            set => _fileEditor.SetWord(enterID, value);
         }
 
         public int EnterUnknown2
         {
-            get => FileEditor.GetWord(unknown2);
-            set => FileEditor.SetWord(unknown2, value);
+            get => _fileEditor.GetWord(unknown2);
+            set => _fileEditor.SetWord(unknown2, value);
         }
 
         public int EnterXPos
         {
-            get => FileEditor.GetWord(xPos);
-            set => FileEditor.SetWord(xPos, value);
+            get => _fileEditor.GetWord(xPos);
+            set => _fileEditor.SetWord(xPos, value);
         }
 
         public int EnterUnknown6
         {
-            get => FileEditor.GetWord(unknown6);
-            set => FileEditor.SetWord(unknown6, value);
+            get => _fileEditor.GetWord(unknown6);
+            set => _fileEditor.SetWord(unknown6, value);
         }
 
         public int EnterZPos
         {
-            get => FileEditor.GetWord(zPos);
-            set => FileEditor.SetWord(zPos, value);
+            get => _fileEditor.GetWord(zPos);
+            set => _fileEditor.SetWord(zPos, value);
         }
 
         public int EnterDirection
         {
-            get => FileEditor.GetWord(direction);
-            set => FileEditor.SetWord(direction, value);
+            get => _fileEditor.GetWord(direction);
+            set => _fileEditor.SetWord(direction, value);
         }
 
         public int EnterCamera
         {
-            get => FileEditor.GetWord(camera);
-            set => FileEditor.SetWord(camera, value);
+            get => _fileEditor.GetWord(camera);
+            set => _fileEditor.SetWord(camera, value);
         }
 
         public int EnterUnknownE
         {
-            get => FileEditor.GetWord(unknownE);
-            set => FileEditor.SetWord(unknownE, value);
+            get => _fileEditor.GetWord(unknownE);
+            set => _fileEditor.SetWord(unknownE, value);
         }
 
         public int EnterAddress => (address);

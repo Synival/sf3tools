@@ -252,52 +252,52 @@ namespace SF3.X1_Editor.Models.CustomMovement
 
         public int CustomMovementUnknown
         {
-            get => FileEditor.GetWord(unknown00);
-            set => FileEditor.SetWord(unknown00, value);
+            get => _fileEditor.GetWord(unknown00);
+            set => _fileEditor.SetWord(unknown00, value);
         }
 
         public int CustomMovementX1
         {
-            get => FileEditor.GetWord(xPos1);
-            set => FileEditor.SetWord(xPos1, value);
+            get => _fileEditor.GetWord(xPos1);
+            set => _fileEditor.SetWord(xPos1, value);
         }
         public int CustomMovementZ1
         {
-            get => FileEditor.GetWord(zPos1);
-            set => FileEditor.SetWord(zPos1, value);
+            get => _fileEditor.GetWord(zPos1);
+            set => _fileEditor.SetWord(zPos1, value);
         }
 
         public int CustomMovementX2
         {
-            get => FileEditor.GetWord(xPos2);
-            set => FileEditor.SetWord(xPos2, value);
+            get => _fileEditor.GetWord(xPos2);
+            set => _fileEditor.SetWord(xPos2, value);
         }
         public int CustomMovementZ2
         {
-            get => FileEditor.GetWord(zPos2);
-            set => FileEditor.SetWord(zPos2, value);
+            get => _fileEditor.GetWord(zPos2);
+            set => _fileEditor.SetWord(zPos2, value);
         }
 
         public int CustomMovementX3
         {
-            get => FileEditor.GetWord(xPos3);
-            set => FileEditor.SetWord(xPos3, value);
+            get => _fileEditor.GetWord(xPos3);
+            set => _fileEditor.SetWord(xPos3, value);
         }
         public int CustomMovementZ3
         {
-            get => FileEditor.GetWord(zPos3);
-            set => FileEditor.SetWord(zPos3, value);
+            get => _fileEditor.GetWord(zPos3);
+            set => _fileEditor.SetWord(zPos3, value);
         }
 
         public int CustomMovementX4
         {
-            get => FileEditor.GetWord(xPos4);
-            set => FileEditor.SetWord(xPos4, value);
+            get => _fileEditor.GetWord(xPos4);
+            set => _fileEditor.SetWord(xPos4, value);
         }
         public int CustomMovementZ4
         {
-            get => FileEditor.GetWord(zPos4);
-            set => FileEditor.SetWord(zPos4, value);
+            get => _fileEditor.GetWord(zPos4);
+            set => _fileEditor.SetWord(zPos4, value);
         }
 
         public int CustomMovementEnd

@@ -5,6 +5,8 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 {
     public class WeaponLevel
     {
+        IFileEditor _fileEditor;
+
         //starting stat table
         private int level1;
         private int level2;
@@ -19,8 +21,9 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         private int index;
         private string name;
 
-        public WeaponLevel(ScenarioType scenario, int id, string text)
+        public WeaponLevel(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             checkType = FileEditor.GetByte(0x00000009); //if it's 0x07 we're in a x033.bin
@@ -112,23 +115,23 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 
         public int WLevel1
         {
-            get => FileEditor.GetWord(level1);
-            set => FileEditor.SetWord(level1, value);
+            get => _fileEditor.GetWord(level1);
+            set => _fileEditor.SetWord(level1, value);
         }
         public int WLevel2
         {
-            get => FileEditor.GetWord(level2);
-            set => FileEditor.SetWord(level2, value);
+            get => _fileEditor.GetWord(level2);
+            set => _fileEditor.SetWord(level2, value);
         }
         public int WLevel3
         {
-            get => FileEditor.GetWord(level3);
-            set => FileEditor.SetWord(level3, value);
+            get => _fileEditor.GetWord(level3);
+            set => _fileEditor.SetWord(level3, value);
         }
         public int WLevel4
         {
-            get => FileEditor.GetWord(level4);
-            set => FileEditor.SetWord(level4, value);
+            get => _fileEditor.GetWord(level4);
+            set => _fileEditor.SetWord(level4, value);
         }
 
         public int WeaponLevelAddress => (address);

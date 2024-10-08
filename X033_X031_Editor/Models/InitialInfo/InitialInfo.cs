@@ -7,6 +7,8 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 {
     public class InitialInfo
     {
+        IFileEditor _fileEditor;
+
         //starting equipment table
         private int character;
         private int characterClass;
@@ -36,8 +38,9 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
         private int index;
         private string name;
 
-        public InitialInfo(ScenarioType scenario, int id, string text)
+        public InitialInfo(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
             checkType = FileEditor.GetByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = FileEditor.GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
@@ -168,36 +171,36 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 
         public int Weapon
         {
-            get => FileEditor.GetWord(weapon);
-            set => FileEditor.SetWord(weapon, value);
+            get => _fileEditor.GetWord(weapon);
+            set => _fileEditor.SetWord(weapon, value);
         }
 
         public int Accessory
         {
-            get => FileEditor.GetWord(accessory);
-            set => FileEditor.SetWord(accessory, value);
+            get => _fileEditor.GetWord(accessory);
+            set => _fileEditor.SetWord(accessory, value);
         }
 
         public int Item1
         {
-            get => FileEditor.GetWord(item1);
-            set => FileEditor.SetWord(item1, value);
+            get => _fileEditor.GetWord(item1);
+            set => _fileEditor.SetWord(item1, value);
         }
 
         public int Item2
         {
-            get => FileEditor.GetWord(item2);
-            set => FileEditor.SetWord(item2, value);
+            get => _fileEditor.GetWord(item2);
+            set => _fileEditor.SetWord(item2, value);
         }
         public int Item3
         {
-            get => FileEditor.GetWord(item3);
-            set => FileEditor.SetWord(item3, value);
+            get => _fileEditor.GetWord(item3);
+            set => _fileEditor.SetWord(item3, value);
         }
         public int Item4
         {
-            get => FileEditor.GetWord(item4);
-            set => FileEditor.SetWord(item4, value);
+            get => _fileEditor.GetWord(item4);
+            set => _fileEditor.SetWord(item4, value);
         }
 
         public WeaponTypeValue Weapon1Type
@@ -208,8 +211,8 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 
         public int Weapon1Exp
         {
-            get => FileEditor.GetWord(weapon1Exp);
-            set => FileEditor.SetWord(weapon1Exp, value);
+            get => _fileEditor.GetWord(weapon1Exp);
+            set => _fileEditor.SetWord(weapon1Exp, value);
         }
 
         public WeaponTypeValue Weapon2Type
@@ -220,8 +223,8 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 
         public int Weapon2Exp
         {
-            get => FileEditor.GetWord(weapon2Exp);
-            set => FileEditor.SetWord(weapon2Exp, value);
+            get => _fileEditor.GetWord(weapon2Exp);
+            set => _fileEditor.SetWord(weapon2Exp, value);
         }
         public WeaponTypeValue Weapon3Type
         {
@@ -231,8 +234,8 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 
         public int Weapon3Exp
         {
-            get => FileEditor.GetWord(weapon3Exp);
-            set => FileEditor.SetWord(weapon3Exp, value);
+            get => _fileEditor.GetWord(weapon3Exp);
+            set => _fileEditor.SetWord(weapon3Exp, value);
         }
         public WeaponTypeValue Weapon4Type
         {
@@ -242,8 +245,8 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 
         public int Weapon4Exp
         {
-            get => FileEditor.GetWord(weapon4Exp);
-            set => FileEditor.SetWord(weapon4Exp, value);
+            get => _fileEditor.GetWord(weapon4Exp);
+            set => _fileEditor.SetWord(weapon4Exp, value);
         }
 
         public int PresetAddress => (address);

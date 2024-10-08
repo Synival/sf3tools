@@ -5,6 +5,8 @@ namespace SF3.X002_Editor.Models.Loading
 {
     public class Loading
     {
+        IFileEditor _fileEditor;
+
         private int locationID;
         private int x1;
         private int chp;
@@ -20,8 +22,9 @@ namespace SF3.X002_Editor.Models.Loading
         private int index;
         private string name;
 
-        public Loading(ScenarioType scenario, int id, string text)
+        public Loading(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             checkVersion2 = FileEditor.GetByte(0x0000000B);
@@ -74,50 +77,50 @@ namespace SF3.X002_Editor.Models.Loading
 
         public int LocationID
         {
-            get => FileEditor.GetWord(locationID);
-            set => FileEditor.SetWord(locationID, value);
+            get => _fileEditor.GetWord(locationID);
+            set => _fileEditor.SetWord(locationID, value);
         }
 
         public int X1
         {
-            get => FileEditor.GetWord(x1);
-            set => FileEditor.SetWord(x1, value);
+            get => _fileEditor.GetWord(x1);
+            set => _fileEditor.SetWord(x1, value);
         }
 
         public int CHP
         {
-            get => FileEditor.GetWord(chp);
-            set => FileEditor.SetWord(chp, value);
+            get => _fileEditor.GetWord(chp);
+            set => _fileEditor.SetWord(chp, value);
         }
 
         public int X5
         {
-            get => FileEditor.GetWord(x5);
-            set => FileEditor.SetWord(x5, value);
+            get => _fileEditor.GetWord(x5);
+            set => _fileEditor.SetWord(x5, value);
         }
 
         public int Music
         {
-            get => FileEditor.GetWord(music);
-            set => FileEditor.SetWord(music, value);
+            get => _fileEditor.GetWord(music);
+            set => _fileEditor.SetWord(music, value);
         }
 
         public int MPD
         {
-            get => FileEditor.GetWord(mpd);
-            set => FileEditor.SetWord(mpd, value);
+            get => _fileEditor.GetWord(mpd);
+            set => _fileEditor.SetWord(mpd, value);
         }
 
         public int LoadUnknown
         {
-            get => FileEditor.GetWord(unknown);
-            set => FileEditor.SetWord(unknown, value);
+            get => _fileEditor.GetWord(unknown);
+            set => _fileEditor.SetWord(unknown, value);
         }
 
         public int CHR
         {
-            get => FileEditor.GetWord(chr);
-            set => FileEditor.SetWord(chr, value);
+            get => _fileEditor.GetWord(chr);
+            set => _fileEditor.SetWord(chr, value);
         }
 
         public int LoadAddress => (address);

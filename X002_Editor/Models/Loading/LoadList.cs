@@ -8,8 +8,11 @@ namespace SF3.X002_Editor.Models.Loading
 {
     public class LoadList : IModelArray<Loading>
     {
-        public LoadList(ScenarioType scenario)
+        IFileEditor _fileEditor;
+
+        public LoadList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
@@ -65,7 +68,7 @@ namespace SF3.X002_Editor.Models.Loading
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Loading[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Loading(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Loading(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].LoadID] = itemssorted[old.Length];
                     }
                 }

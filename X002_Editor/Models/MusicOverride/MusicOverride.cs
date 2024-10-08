@@ -88,8 +88,8 @@ namespace SF3.X002_Editor.Models.MusicOverride
 
         public int MOMapID
         {
-            get => FileEditor.GetWord(mapID);
-            set => FileEditor.SetWord(mapID, value);
+            get => _fileEditor.GetWord(mapID);
+            set => _fileEditor.SetWord(mapID, value);
         }
 
         public int SynMusic

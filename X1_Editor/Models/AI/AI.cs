@@ -226,13 +226,13 @@ namespace SF3.X1_Editor.Models.AI
 
         public int TargetX
         {
-            get => FileEditor.GetWord(targetX);
-            set => FileEditor.SetWord(targetX, value);
+            get => _fileEditor.GetWord(targetX);
+            set => _fileEditor.SetWord(targetX, value);
         }
         public int TargetY
         {
-            get => FileEditor.GetWord(targetY);
-            set => FileEditor.SetWord(targetY, value);
+            get => _fileEditor.GetWord(targetY);
+            set => _fileEditor.SetWord(targetY, value);
         }
         public int AIAddress => (address);
     }

@@ -250,7 +250,7 @@ namespace SF3.X002_Editor.Forms
                 return false;
             }
 
-            _loadList = new LoadList(_scenario);
+            _loadList = new LoadList(_fileEditor, _scenario);
             if (!_loadList.Load())
             {
                 MessageBox.Show("Could not load Resources/loadList.xml.");

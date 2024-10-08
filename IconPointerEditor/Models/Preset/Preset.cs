@@ -147,7 +147,7 @@ namespace SF3.IconPointerEditor.Models.Presets
             {
                 if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
-                    return FileEditor.GetWord(theItemIcon);
+                    return _fileEditor.GetWord(theItemIcon);
                 }
                 else
                 {
@@ -158,7 +158,7 @@ namespace SF3.IconPointerEditor.Models.Presets
             {
                 if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
-                    FileEditor.SetWord(theItemIcon, value);
+                    _fileEditor.SetWord(theItemIcon, value);
                 }
                 else
                 {

@@ -8,8 +8,11 @@ namespace SF3.X019_Editor.Models.Items
 {
     public class ItemList : IModelArray<Item>
     {
-        public ItemList(ScenarioType scenario)
+        IFileEditor _fileEditor;
+
+        public ItemList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
@@ -69,7 +72,7 @@ namespace SF3.X019_Editor.Models.Items
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Item[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Item(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Item(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].ID] = itemssorted[old.Length];
                     }
                 }

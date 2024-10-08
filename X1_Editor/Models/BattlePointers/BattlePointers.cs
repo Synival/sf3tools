@@ -142,8 +142,8 @@ namespace SF3.X1_Editor.Models.BattlePointers
 
         /*public int BattlePointer
         {
-            get => FileEditor.GetWord(battlePointer);
-            set => FileEditor.SetWord(battlePointer, value);
+            get => _fileEditor.GetWord(battlePointer);
+            set => _fileEditor.SetWord(battlePointer, value);
         }
         */
 
@@ -155,8 +155,8 @@ namespace SF3.X1_Editor.Models.BattlePointers
 
         /*public int BattlePointer2
         {
-            get => FileEditor.GetWord(battlePointer2);
-            set => FileEditor.SetWord(battlePointer2, value);
+            get => _fileEditor.GetWord(battlePointer2);
+            set => _fileEditor.SetWord(battlePointer2, value);
         }
         */
 

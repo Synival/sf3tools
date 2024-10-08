@@ -5,6 +5,8 @@ namespace SF3.X019_Editor.Models.Items
 {
     public class Item
     {
+        IFileEditor _fileEditor;
+
         private int maxHP;
         private int maxMP;
         private int level;
@@ -80,8 +82,9 @@ namespace SF3.X019_Editor.Models.Items
         private int index;
         private string name;
 
-        public Item(ScenarioType scenario, int id, string text)
+        public Item(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -195,8 +198,8 @@ namespace SF3.X019_Editor.Models.Items
 
         public int MaxHP
         {
-            get => FileEditor.GetWord(maxHP);
-            set => FileEditor.SetWord(maxHP, value);
+            get => _fileEditor.GetWord(maxHP);
+            set => _fileEditor.SetWord(maxHP, value);
         }
 
         public int MaxMP
@@ -353,38 +356,38 @@ namespace SF3.X019_Editor.Models.Items
 
         public int Weapon
         {
-            get => FileEditor.GetWord(equippedWeapon);
-            set => FileEditor.SetWord(equippedWeapon, value);
+            get => _fileEditor.GetWord(equippedWeapon);
+            set => _fileEditor.SetWord(equippedWeapon, value);
         }
 
         public int Accessory
         {
-            get => FileEditor.GetWord(equippedAccessory);
-            set => FileEditor.SetWord(equippedAccessory, value);
+            get => _fileEditor.GetWord(equippedAccessory);
+            set => _fileEditor.SetWord(equippedAccessory, value);
         }
 
         public int ItemSlot1
         {
-            get => FileEditor.GetWord(itemSlot1);
-            set => FileEditor.SetWord(itemSlot1, value);
+            get => _fileEditor.GetWord(itemSlot1);
+            set => _fileEditor.SetWord(itemSlot1, value);
         }
 
         public int ItemSlot2
         {
-            get => FileEditor.GetWord(itemSlot2);
-            set => FileEditor.SetWord(itemSlot2, value);
+            get => _fileEditor.GetWord(itemSlot2);
+            set => _fileEditor.SetWord(itemSlot2, value);
         }
 
         public int ItemSlot3
         {
-            get => FileEditor.GetWord(itemSlot3);
-            set => FileEditor.SetWord(itemSlot3, value);
+            get => _fileEditor.GetWord(itemSlot3);
+            set => _fileEditor.SetWord(itemSlot3, value);
         }
 
         public int ItemSlot4
         {
-            get => FileEditor.GetWord(itemSlot4);
-            set => FileEditor.SetWord(itemSlot4, value);
+            get => _fileEditor.GetWord(itemSlot4);
+            set => _fileEditor.SetWord(itemSlot4, value);
         }
 
         public int Special1
@@ -473,14 +476,14 @@ namespace SF3.X019_Editor.Models.Items
 
         public int Gold
         {
-            get => FileEditor.GetWord(gold);
-            set => FileEditor.SetWord(gold, value);
+            get => _fileEditor.GetWord(gold);
+            set => _fileEditor.SetWord(gold, value);
         }
 
         public int Drop
         {
-            get => FileEditor.GetWord(drop);
-            set => FileEditor.SetWord(drop, value);
+            get => _fileEditor.GetWord(drop);
+            set => _fileEditor.SetWord(drop, value);
         }
 
         public int Unknown7

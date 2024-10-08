@@ -248,14 +248,14 @@ namespace SF3.X033_X031_Editor.Forms
                 return false;
             }*/
 
-            _initialInfoList = new InitialInfoList(_scenario);
+            _initialInfoList = new InitialInfoList(_fileEditor, _scenario);
             if (!_initialInfoList.Load())
             {
                 MessageBox.Show("Could not load Resources/classEquip.xml.");
                 return false;
             }
 
-            _weaponLevelList = new WeaponLevelList(_scenario);
+            _weaponLevelList = new WeaponLevelList(_fileEditor, _scenario);
             if (!_weaponLevelList.Load())
             {
                 MessageBox.Show("Could not load Resources/WeaponLevel.xml.");

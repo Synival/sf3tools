@@ -108,8 +108,8 @@ namespace SF3.X002_Editor.Models.Items
 
         public int Price
         {
-            get => FileEditor.GetWord(PriceLocation);
-            set => FileEditor.SetWord(PriceLocation, value);
+            get => _fileEditor.GetWord(PriceLocation);
+            set => _fileEditor.SetWord(PriceLocation, value);
         }
         public WeaponTypeValue WeaponType
         {

@@ -26,6 +26,12 @@ namespace SF3
         bool SaveFile(string filename);
 
         /// <summary>
+        /// Gets the value of a 16-bit integer at a location.
+        /// </summary>
+        /// <param name="location">The address of the 16-bit integer.</param>
+        int GetWord(int location);
+
+        /// <summary>
         /// Gets the value of a 32-bit integer at a location.
         /// </summary>
         /// <param name="location">The address of the 32-bit integer.</param>
@@ -45,6 +51,13 @@ namespace SF3
         /// <param name="bit">The position of the bit, in range (0, 7).</param>
         /// <returns>True if the bit is set, false if the bit is unset.</returns>
         bool GetBit(int location, int bit);
+
+        /// <summary>
+        /// Sets the value of a 16-bit integer at a location.
+        /// </summary>
+        /// <param name="location">The address of the 16-bit integer.</param>
+        /// <param name="value">The new value of the 16-bit integer.</param>
+        void SetWord(int location, int value);
 
         /// <summary>
         /// Sets the value of 32-bit integer at a location.
