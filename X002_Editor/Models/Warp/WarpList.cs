@@ -10,11 +10,13 @@ namespace SF3.X002_Editor.Models.Warps
 {
     public class WarpList : IModelArray<Warp>
     {
-        public WarpList(ScenarioType scenario)
+        public WarpList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
+        private IFileEditor _fileEditor;
         public ScenarioType Scenario { get; }
 
         private Warp[] itemssorted;
@@ -65,7 +67,7 @@ namespace SF3.X002_Editor.Models.Warps
                             old.CopyTo(itemssorted, 0);
                             //itemssorted[old.Length] = new Warp(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
 
-                            itemssorted[old.Length] = new Warp(Scenario, myCount, myName);
+                            itemssorted[old.Length] = new Warp(_fileEditor, Scenario, myCount, myName);
 
                             myCount++;
                             myName = "WarpIndex ";

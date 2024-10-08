@@ -263,94 +263,94 @@ namespace SF3.X013_Editor.Forms
                 return false;
             }*/
 
-            _itemList = new ItemList(_scenario);
+            _itemList = new ItemList(_fileEditor, _scenario);
             if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
 
-            _spellList = new SpellList(_scenario);
+            _spellList = new SpellList(_fileEditor, _scenario);
             if (!_spellList.Load())
             {
                 MessageBox.Show("Could not load Resources/characters.xml.");
                 return false;
             }
 
-            _presetList = new PresetList(_scenario);
+            _presetList = new PresetList(_fileEditor, _scenario);
             if (!_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/ExpList.xml.");
                 return false;
             }
 
-            _statsList = new StatsList(_scenario);
+            _statsList = new StatsList(_fileEditor, _scenario);
             if (!_statsList.Load())
             {
                 MessageBox.Show("Could not load Resources/StatList.xml.");
                 return false;
             }
 
-            _soulmateList = new SoulmateList(_scenario);
+            _soulmateList = new SoulmateList(_fileEditor, _scenario);
             if (!_soulmateList.Load())
             {
                 MessageBox.Show("Could not load Resources/SoulmateList.xml.");
                 return false;
             }
 
-            _soulfailList = new SoulfailList(_scenario);
+            _soulfailList = new SoulfailList(_fileEditor, _scenario);
             if (!_soulfailList.Load())
             {
                 MessageBox.Show("Could not load Resources/Soulfail.xml.");
                 return false;
             }
 
-            _magicBonusList = new MagicBonusList(_scenario);
+            _magicBonusList = new MagicBonusList(_fileEditor, _scenario);
             if (!_magicBonusList.Load())
             {
                 MessageBox.Show("Could not load Resources/MagicBonus.xml.");
                 return false;
             }
 
-            _critModList = new CritModList(_scenario);
+            _critModList = new CritModList(_fileEditor, _scenario);
             if (!_critModList.Load())
             {
                 MessageBox.Show("Could not load Resources/CritModList.xml.");
                 return false;
             }
 
-            _critrateList = new CritrateList(_scenario);
+            _critrateList = new CritrateList(_fileEditor, _scenario);
             if (!_critrateList.Load())
             {
                 MessageBox.Show("Could not load Resources/CritrateList.xml.");
                 return false;
             }
 
-            _specialChanceList = new SpecialChanceList(_scenario);
+            _specialChanceList = new SpecialChanceList(_fileEditor, _scenario);
             if (!_specialChanceList.Load())
             {
                 MessageBox.Show("Could not load Resources/SpecialChanceList.xml.");
                 return false;
             }
-            _expLimitList = new ExpLimitList(_scenario);
+            _expLimitList = new ExpLimitList(_fileEditor, _scenario);
             if (!_expLimitList.Load())
             {
                 MessageBox.Show("Could not load Resources/ExpLimitList.xml.");
                 return false;
             }
-            _healExpList = new HealExpList(_scenario);
+            _healExpList = new HealExpList(_fileEditor, _scenario);
             if (!_healExpList.Load())
             {
                 MessageBox.Show("Could not load Resources/HealExpList.xml.");
                 return false;
             }
-            _weaponSpellRankList = new WeaponSpellRankList(_scenario);
+            _weaponSpellRankList = new WeaponSpellRankList(_fileEditor, _scenario);
             if (!_weaponSpellRankList.Load())
             {
                 MessageBox.Show("Could not load Resources/WeaponSpellRankListList.xml.");
                 return false;
             }
-            _statusEffectList = new StatusEffectList(_scenario);
+            _statusEffectList = new StatusEffectList(_fileEditor, _scenario);
             if (!_statusEffectList.Load())
             {
                 MessageBox.Show("Could not load Resources/StatusGroupList.xml.");

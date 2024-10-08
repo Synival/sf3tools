@@ -5,6 +5,8 @@ namespace SF3.X013_Editor.Models.Presets
 {
     public class Preset
     {
+        private IFileEditor _fileEditor;
+
         private int sLvl0;
         private int sLvl1;
         private int sLvl2;
@@ -16,8 +18,9 @@ namespace SF3.X013_Editor.Models.Presets
         private int index;
         private string name;
 
-        public Preset(ScenarioType scenario, int id, string text)
+        public Preset(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -61,28 +64,28 @@ namespace SF3.X013_Editor.Models.Presets
 
         public int SLvl0
         {
-            get => FileEditor.GetByte(sLvl0);
-            set => FileEditor.SetByte(sLvl0, (byte)value);
+            get => _fileEditor.GetByte(sLvl0);
+            set => _fileEditor.SetByte(sLvl0, (byte)value);
         }
         public int SLvl1
         {
-            get => FileEditor.GetByte(sLvl1);
-            set => FileEditor.SetByte(sLvl1, (byte)value);
+            get => _fileEditor.GetByte(sLvl1);
+            set => _fileEditor.SetByte(sLvl1, (byte)value);
         }
         public int SLvl2
         {
-            get => FileEditor.GetByte(sLvl2);
-            set => FileEditor.SetByte(sLvl2, (byte)value);
+            get => _fileEditor.GetByte(sLvl2);
+            set => _fileEditor.SetByte(sLvl2, (byte)value);
         }
         public int SLvl3
         {
-            get => FileEditor.GetByte(sLvl3);
-            set => FileEditor.SetByte(sLvl3, (byte)value);
+            get => _fileEditor.GetByte(sLvl3);
+            set => _fileEditor.SetByte(sLvl3, (byte)value);
         }
         public int SLvl4
         {
-            get => FileEditor.GetByte(sLvl4);
-            set => FileEditor.SetByte(sLvl4, (byte)value);
+            get => _fileEditor.GetByte(sLvl4);
+            set => _fileEditor.SetByte(sLvl4, (byte)value);
         }
 
         public int PresetAddress => (address);

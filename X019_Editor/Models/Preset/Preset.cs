@@ -5,6 +5,8 @@ namespace SF3.X019_Editor.Models.Presets
 {
     public class Preset
     {
+        private IFileEditor _fileEditor;
+
         private int spell;
         private int weaponLv0;
         private int weaponLv1;
@@ -16,8 +18,9 @@ namespace SF3.X019_Editor.Models.Presets
         private int index;
         private string name;
 
-        public Preset(ScenarioType scenario, int id, string text)
+        public Preset(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -61,28 +64,28 @@ namespace SF3.X019_Editor.Models.Presets
 
         public int SpellID2
         {
-            get => FileEditor.GetByte(spell);
-            set => FileEditor.SetByte(spell, (byte)value);
+            get => _fileEditor.GetByte(spell);
+            set => _fileEditor.SetByte(spell, (byte)value);
         }
         public int Weapon0
         {
-            get => FileEditor.GetByte(weaponLv0);
-            set => FileEditor.SetByte(weaponLv0, (byte)value);
+            get => _fileEditor.GetByte(weaponLv0);
+            set => _fileEditor.SetByte(weaponLv0, (byte)value);
         }
         public int Weapon1
         {
-            get => FileEditor.GetByte(weaponLv1);
-            set => FileEditor.SetByte(weaponLv1, (byte)value);
+            get => _fileEditor.GetByte(weaponLv1);
+            set => _fileEditor.SetByte(weaponLv1, (byte)value);
         }
         public int Weapon2
         {
-            get => FileEditor.GetByte(weaponLv2);
-            set => FileEditor.SetByte(weaponLv2, (byte)value);
+            get => _fileEditor.GetByte(weaponLv2);
+            set => _fileEditor.SetByte(weaponLv2, (byte)value);
         }
         public int Weapon3
         {
-            get => FileEditor.GetByte(weaponLv3);
-            set => FileEditor.SetByte(weaponLv3, (byte)value);
+            get => _fileEditor.GetByte(weaponLv3);
+            set => _fileEditor.SetByte(weaponLv3, (byte)value);
         }
 
         public int PresetAddress => (address);

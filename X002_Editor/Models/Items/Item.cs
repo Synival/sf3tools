@@ -43,7 +43,7 @@ namespace SF3.X002_Editor.Models.Items
             _fileEditor = fileEditor;
             Scenario = scenario;
 
-            checkVersion2 = FileEditor.GetByte(0x0000000B);
+            checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -113,13 +113,13 @@ namespace SF3.X002_Editor.Models.Items
         }
         public WeaponTypeValue WeaponType
         {
-            get => new WeaponTypeValue(FileEditor.GetByte(WeaponTypeLocation));
-            set => FileEditor.SetByte(WeaponTypeLocation, (byte)value.Value);
+            get => new WeaponTypeValue(_fileEditor.GetByte(WeaponTypeLocation));
+            set => _fileEditor.SetByte(WeaponTypeLocation, (byte)value.Value);
         }
         public int EffectsEquip
         {
-            get => FileEditor.GetByte(EffectsEquipLocation);
-            set => FileEditor.SetByte(EffectsEquipLocation, (byte)value);
+            get => _fileEditor.GetByte(EffectsEquipLocation);
+            set => _fileEditor.SetByte(EffectsEquipLocation, (byte)value);
         }
 
         public bool Cursed
@@ -166,8 +166,8 @@ namespace SF3.X002_Editor.Models.Items
 
         public int Requirements
         {
-            get => FileEditor.GetByte(RequirementLocation);
-            set => FileEditor.SetByte(RequirementLocation, (byte)value);
+            get => _fileEditor.GetByte(RequirementLocation);
+            set => _fileEditor.SetByte(RequirementLocation, (byte)value);
         }
 
         public bool RequiredPromo
@@ -203,99 +203,99 @@ namespace SF3.X002_Editor.Models.Items
 
         public int Range
         {
-            get => FileEditor.GetByte(RangeLocation);
-            set => FileEditor.SetByte(RangeLocation, (byte)value);
+            get => _fileEditor.GetByte(RangeLocation);
+            set => _fileEditor.SetByte(RangeLocation, (byte)value);
         }
         public int Attack
         {
-            get => FileEditor.GetByte(AttackLocation);
-            set => FileEditor.SetByte(AttackLocation, (byte)value);
+            get => _fileEditor.GetByte(AttackLocation);
+            set => _fileEditor.SetByte(AttackLocation, (byte)value);
         }
         public int Defense
         {
-            get => FileEditor.GetByte(DefenseLocation);
-            set => FileEditor.SetByte(DefenseLocation, (byte)value);
+            get => _fileEditor.GetByte(DefenseLocation);
+            set => _fileEditor.SetByte(DefenseLocation, (byte)value);
         }
         public int AttackRank
         {
-            get => FileEditor.GetByte(AttackUpRankLocation);
-            set => FileEditor.SetByte(AttackUpRankLocation, (byte)value);
+            get => _fileEditor.GetByte(AttackUpRankLocation);
+            set => _fileEditor.SetByte(AttackUpRankLocation, (byte)value);
         }
         public int SpellRank
         {
-            get => FileEditor.GetByte(SpellUpRankLocation);
-            set => FileEditor.SetByte(SpellUpRankLocation, (byte)value);
+            get => _fileEditor.GetByte(SpellUpRankLocation);
+            set => _fileEditor.SetByte(SpellUpRankLocation, (byte)value);
         }
         public int PhysicalAttribute
         {
-            get => FileEditor.GetByte(PhysicalAttributeLocation);
-            set => FileEditor.SetByte(PhysicalAttributeLocation, (byte)value);
+            get => _fileEditor.GetByte(PhysicalAttributeLocation);
+            set => _fileEditor.SetByte(PhysicalAttributeLocation, (byte)value);
         }
 
         public int Unknown1
         {
-            get => FileEditor.GetByte(Unknown1Location);
-            set => FileEditor.SetByte(Unknown1Location, (byte)value);
+            get => _fileEditor.GetByte(Unknown1Location);
+            set => _fileEditor.SetByte(Unknown1Location, (byte)value);
         }
         public int MonsterType
         {
-            get => FileEditor.GetByte(MonsterTypeAttributeLocation);
-            set => FileEditor.SetByte(MonsterTypeAttributeLocation, (byte)value);
+            get => _fileEditor.GetByte(MonsterTypeAttributeLocation);
+            set => _fileEditor.SetByte(MonsterTypeAttributeLocation, (byte)value);
         }
         public int Unknown2
         {
-            get => FileEditor.GetByte(Unknown2Location);
-            set => FileEditor.SetByte(Unknown2Location, (byte)value);
+            get => _fileEditor.GetByte(Unknown2Location);
+            set => _fileEditor.SetByte(Unknown2Location, (byte)value);
         }
         public int StatType1
         {
-            get => FileEditor.GetByte(StatType1Location);
-            set => FileEditor.SetByte(StatType1Location, (byte)value);
+            get => _fileEditor.GetByte(StatType1Location);
+            set => _fileEditor.SetByte(StatType1Location, (byte)value);
         }
         public int StatUp1
         {
-            get => FileEditor.GetByte(StatUp1Location);
-            set => FileEditor.SetByte(StatUp1Location, (byte)value);
+            get => _fileEditor.GetByte(StatUp1Location);
+            set => _fileEditor.SetByte(StatUp1Location, (byte)value);
         }
         public int StatType2
         {
-            get => FileEditor.GetByte(StatType2Location);
-            set => FileEditor.SetByte(StatType2Location, (byte)value);
+            get => _fileEditor.GetByte(StatType2Location);
+            set => _fileEditor.SetByte(StatType2Location, (byte)value);
         }
         public int StatUp2
         {
-            get => FileEditor.GetByte(StatUp2Location);
-            set => FileEditor.SetByte(StatUp2Location, (byte)value);
+            get => _fileEditor.GetByte(StatUp2Location);
+            set => _fileEditor.SetByte(StatUp2Location, (byte)value);
         }
         public int StatType3
         {
-            get => FileEditor.GetByte(StatType3Location);
-            set => FileEditor.SetByte(StatType3Location, (byte)value);
+            get => _fileEditor.GetByte(StatType3Location);
+            set => _fileEditor.SetByte(StatType3Location, (byte)value);
         }
         public int StatUp3
         {
-            get => FileEditor.GetByte(StatUp3Location);
-            set => FileEditor.SetByte(StatUp3Location, (byte)value);
+            get => _fileEditor.GetByte(StatUp3Location);
+            set => _fileEditor.SetByte(StatUp3Location, (byte)value);
         }
         public int StatType4
         {
-            get => FileEditor.GetByte(StatType4Location);
-            set => FileEditor.SetByte(StatType4Location, (byte)value);
+            get => _fileEditor.GetByte(StatType4Location);
+            set => _fileEditor.SetByte(StatType4Location, (byte)value);
         }
         public int StatUp4
         {
-            get => FileEditor.GetByte(StatUp4Location);
-            set => FileEditor.SetByte(StatUp4Location, (byte)value);
+            get => _fileEditor.GetByte(StatUp4Location);
+            set => _fileEditor.SetByte(StatUp4Location, (byte)value);
         }
         public int SpellUse
         {
-            get => FileEditor.GetByte(SpellOnUseLocation);
-            set => FileEditor.SetByte(SpellOnUseLocation, (byte)value);
+            get => _fileEditor.GetByte(SpellOnUseLocation);
+            set => _fileEditor.SetByte(SpellOnUseLocation, (byte)value);
         }
         public int SpellUseLv
         {
-            get => FileEditor.GetByte(SpellLvOnUseLocation);
-            set => FileEditor.SetByte(SpellLvOnUseLocation, (byte)value);
+            get => _fileEditor.GetByte(SpellLvOnUseLocation);
+            set => _fileEditor.SetByte(SpellLvOnUseLocation, (byte)value);
         }
 
         public int Address => (address);

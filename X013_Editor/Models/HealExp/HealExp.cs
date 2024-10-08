@@ -5,6 +5,8 @@ namespace SF3.X013_Editor.Models.HealExp
 {
     public class HealExp
     {
+        private IFileEditor _fileEditor;
+
         private int healExp;
         private int address;
         private int offset;
@@ -12,8 +14,9 @@ namespace SF3.X013_Editor.Models.HealExp
         private int index;
         private string name;
 
-        public HealExp(ScenarioType scenario, int id, string text)
+        public HealExp(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -53,8 +56,8 @@ namespace SF3.X013_Editor.Models.HealExp
 
         public int HealBonus
         {
-            get => FileEditor.GetByte(healExp);
-            set => FileEditor.SetByte(healExp, (byte)value);
+            get => _fileEditor.GetByte(healExp);
+            set => _fileEditor.SetByte(healExp, (byte)value);
         }
 
         public int HealExpAddress => (address);

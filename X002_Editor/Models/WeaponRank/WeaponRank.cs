@@ -5,6 +5,8 @@ namespace SF3.X002_Editor.Models.WeaponRank
 {
     public class WeaponRank
     {
+        private IFileEditor _fileEditor;
+
         private int skill0;
         private int skill1;
         private int skill2;
@@ -16,11 +18,12 @@ namespace SF3.X002_Editor.Models.WeaponRank
         private int index;
         private string name;
 
-        public WeaponRank(ScenarioType scenario, int id, string text)
+        public WeaponRank(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
-            checkVersion2 = FileEditor.GetByte(0x0000000B);
+            checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -67,23 +70,23 @@ namespace SF3.X002_Editor.Models.WeaponRank
 
         public int Skill0
         {
-            get => FileEditor.GetByte(skill0);
-            set => FileEditor.SetByte(skill0, (byte)value);
+            get => _fileEditor.GetByte(skill0);
+            set => _fileEditor.SetByte(skill0, (byte)value);
         }
         public int Skill1
         {
-            get => FileEditor.GetByte(skill1);
-            set => FileEditor.SetByte(skill1, (byte)value);
+            get => _fileEditor.GetByte(skill1);
+            set => _fileEditor.SetByte(skill1, (byte)value);
         }
         public int Skill2
         {
-            get => FileEditor.GetByte(skill2);
-            set => FileEditor.SetByte(skill2, (byte)value);
+            get => _fileEditor.GetByte(skill2);
+            set => _fileEditor.SetByte(skill2, (byte)value);
         }
         public int Skill3
         {
-            get => FileEditor.GetByte(skill3);
-            set => FileEditor.SetByte(skill3, (byte)value);
+            get => _fileEditor.GetByte(skill3);
+            set => _fileEditor.SetByte(skill3, (byte)value);
         }
 
         public int WeaponRankAddress => (address);

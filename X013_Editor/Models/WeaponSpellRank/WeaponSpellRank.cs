@@ -5,6 +5,8 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
 {
     public class WeaponSpellRank
     {
+        private IFileEditor _fileEditor;
+
         private int rankNone;
         private int rankC;
         private int rankB;
@@ -16,8 +18,9 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
         private int index;
         private string name;
 
-        public WeaponSpellRank(ScenarioType scenario, int id, string text)
+        public WeaponSpellRank(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -61,28 +64,28 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
 
         public int RankNone
         {
-            get => FileEditor.GetByte(rankNone);
-            set => FileEditor.SetByte(rankNone, (byte)value);
+            get => _fileEditor.GetByte(rankNone);
+            set => _fileEditor.SetByte(rankNone, (byte)value);
         }
         public int RankC
         {
-            get => FileEditor.GetByte(rankC);
-            set => FileEditor.SetByte(rankC, (byte)value);
+            get => _fileEditor.GetByte(rankC);
+            set => _fileEditor.SetByte(rankC, (byte)value);
         }
         public int RankB
         {
-            get => FileEditor.GetByte(rankB);
-            set => FileEditor.SetByte(rankB, (byte)value);
+            get => _fileEditor.GetByte(rankB);
+            set => _fileEditor.SetByte(rankB, (byte)value);
         }
         public int RankA
         {
-            get => FileEditor.GetByte(rankA);
-            set => FileEditor.SetByte(rankA, (byte)value);
+            get => _fileEditor.GetByte(rankA);
+            set => _fileEditor.SetByte(rankA, (byte)value);
         }
         public int RankS
         {
-            get => FileEditor.GetByte(rankS);
-            set => FileEditor.SetByte(rankS, (byte)value);
+            get => _fileEditor.GetByte(rankS);
+            set => _fileEditor.SetByte(rankS, (byte)value);
         }
 
         public int WeaponSpellRankAddress => (address);

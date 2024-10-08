@@ -26,8 +26,8 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
             _fileEditor = fileEditor;
             Scenario = scenario;
 
-            checkType = FileEditor.GetByte(0x00000009); //if it's 0x07 we're in a x033.bin
-            checkVersion2 = FileEditor.GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
+            checkType = _fileEditor.GetByte(0x00000009); //if it's 0x07 we're in a x033.bin
+            checkVersion2 = _fileEditor.GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
 
             if (Scenario == ScenarioType.Scenario1)
             {

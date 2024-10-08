@@ -33,7 +33,7 @@ namespace SF3.X002_Editor.Models.MusicOverride
             _fileEditor = fileEditor;
             Scenario = scenario;
 
-            checkVersion2 = FileEditor.GetByte(0x0000000B);
+            checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -94,26 +94,26 @@ namespace SF3.X002_Editor.Models.MusicOverride
 
         public int SynMusic
         {
-            get => FileEditor.GetByte(synMusic);
-            set => FileEditor.SetByte(synMusic, (byte)value);
+            get => _fileEditor.GetByte(synMusic);
+            set => _fileEditor.SetByte(synMusic, (byte)value);
         }
 
         public int MedMusic
         {
-            get => FileEditor.GetByte(medMusic);
-            set => FileEditor.SetByte(medMusic, (byte)value);
+            get => _fileEditor.GetByte(medMusic);
+            set => _fileEditor.SetByte(medMusic, (byte)value);
         }
 
         public int JulMusic
         {
-            get => FileEditor.GetByte(julMusic);
-            set => FileEditor.SetByte(julMusic, (byte)value);
+            get => _fileEditor.GetByte(julMusic);
+            set => _fileEditor.SetByte(julMusic, (byte)value);
         }
 
         public int ExtraMusic
         {
-            get => FileEditor.GetByte(extraMusic);
-            set => FileEditor.SetByte(extraMusic, (byte)value);
+            get => _fileEditor.GetByte(extraMusic);
+            set => _fileEditor.SetByte(extraMusic, (byte)value);
         }
 
         public int MOUnknown1

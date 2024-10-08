@@ -236,14 +236,14 @@ namespace SF3.X002_Editor.Forms
                 return false;
             }
 
-            _spellList = new SpellList(_scenario);
+            _spellList = new SpellList(_fileEditor, _scenario);
             if (!_spellList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellList.xml.");
                 return false;
             }
 
-            _presetList = new PresetList(_scenario);
+            _presetList = new PresetList(_fileEditor, _scenario);
             if (!_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
@@ -257,25 +257,25 @@ namespace SF3.X002_Editor.Forms
                 return false;
             }
 
-            _statList = new StatList(_scenario);
+            _statList = new StatList(_fileEditor, _scenario);
             if (!_statList.Load())
             {
                 MessageBox.Show("Could not load Resources/statList.xml.");
                 return false;
             }
-            _weaponRankList = new WeaponRankList(_scenario);
+            _weaponRankList = new WeaponRankList(_fileEditor, _scenario);
             if (!_weaponRankList.Load())
             {
                 MessageBox.Show("Could not load Resources/WeaponRankList.xml.");
                 return false;
             }
-            _attackResistList = new AttackResistList(_scenario);
+            _attackResistList = new AttackResistList(_fileEditor, _scenario);
             if (!_attackResistList.Load())
             {
                 MessageBox.Show("Could not load Resources/AttackResistList.xml.");
                 return false;
             }
-            _warpList = new WarpList(_scenario);
+            _warpList = new WarpList(_fileEditor, _scenario);
             if (_scenario == ScenarioType.Scenario1 && !_warpList.Load())
             {
                 MessageBox.Show("Could not load Resources/WarpList.xml.");

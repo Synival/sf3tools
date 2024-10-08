@@ -187,94 +187,94 @@ namespace SF3.X1_Editor.Models.Tiles
 
         public int TileNoEntry
         {
-            get => FileEditor.GetByte(noEntry);
-            set => FileEditor.SetByte(noEntry, (byte)value);
+            get => _fileEditor.GetByte(noEntry);
+            set => _fileEditor.SetByte(noEntry, (byte)value);
         }
         public int TileUnknown1
         {
-            get => FileEditor.GetByte(unknown01);
-            set => FileEditor.SetByte(unknown01, (byte)value);
+            get => _fileEditor.GetByte(unknown01);
+            set => _fileEditor.SetByte(unknown01, (byte)value);
         }
         public int TileGrassland
         {
-            get => FileEditor.GetByte(grassland);
-            set => FileEditor.SetByte(grassland, (byte)value);
+            get => _fileEditor.GetByte(grassland);
+            set => _fileEditor.SetByte(grassland, (byte)value);
         }
         public int TileDirt
         {
-            get => FileEditor.GetByte(dirt);
-            set => FileEditor.SetByte(dirt, (byte)value);
+            get => _fileEditor.GetByte(dirt);
+            set => _fileEditor.SetByte(dirt, (byte)value);
         }
         public int TileDarkGrass
         {
-            get => FileEditor.GetByte(darkGrass);
-            set => FileEditor.SetByte(darkGrass, (byte)value);
+            get => _fileEditor.GetByte(darkGrass);
+            set => _fileEditor.SetByte(darkGrass, (byte)value);
         }
 
         public int TileForest
         {
-            get => FileEditor.GetByte(forest);
-            set => FileEditor.SetByte(forest, (byte)value);
+            get => _fileEditor.GetByte(forest);
+            set => _fileEditor.SetByte(forest, (byte)value);
         }
 
         public int TileBrownMountain
         {
-            get => FileEditor.GetByte(brownMountain);
-            set => FileEditor.SetByte(brownMountain, (byte)value);
+            get => _fileEditor.GetByte(brownMountain);
+            set => _fileEditor.SetByte(brownMountain, (byte)value);
         }
 
         public int TileDesert
         {
-            get => FileEditor.GetByte(desert);
-            set => FileEditor.SetByte(desert, (byte)value);
+            get => _fileEditor.GetByte(desert);
+            set => _fileEditor.SetByte(desert, (byte)value);
         }
 
         public int TileGreyMountain
         {
-            get => FileEditor.GetByte(greyMountain);
-            set => FileEditor.SetByte(greyMountain, (byte)value);
+            get => _fileEditor.GetByte(greyMountain);
+            set => _fileEditor.SetByte(greyMountain, (byte)value);
         }
 
         public int TileUnknown9
         {
-            get => FileEditor.GetByte(unknown09);
-            set => FileEditor.SetByte(unknown09, (byte)value);
+            get => _fileEditor.GetByte(unknown09);
+            set => _fileEditor.SetByte(unknown09, (byte)value);
         }
 
         public int TileUnknownA
         {
-            get => FileEditor.GetByte(unknown0a);
-            set => FileEditor.SetByte(unknown0a, (byte)value);
+            get => _fileEditor.GetByte(unknown0a);
+            set => _fileEditor.SetByte(unknown0a, (byte)value);
         }
 
         public int TileUnknownB
         {
-            get => FileEditor.GetByte(unknown0b);
-            set => FileEditor.SetByte(unknown0b, (byte)value);
+            get => _fileEditor.GetByte(unknown0b);
+            set => _fileEditor.SetByte(unknown0b, (byte)value);
         }
 
         public int TileUnknownC
         {
-            get => FileEditor.GetByte(unknown0c);
-            set => FileEditor.SetByte(unknown0c, (byte)value);
+            get => _fileEditor.GetByte(unknown0c);
+            set => _fileEditor.SetByte(unknown0c, (byte)value);
         }
 
         public int TileUnknownD
         {
-            get => FileEditor.GetByte(unknown0d);
-            set => FileEditor.SetByte(unknown0d, (byte)value);
+            get => _fileEditor.GetByte(unknown0d);
+            set => _fileEditor.SetByte(unknown0d, (byte)value);
         }
 
         public int TileUnknownE
         {
-            get => FileEditor.GetByte(unknown0e);
-            set => FileEditor.SetByte(unknown0e, (byte)value);
+            get => _fileEditor.GetByte(unknown0e);
+            set => _fileEditor.SetByte(unknown0e, (byte)value);
         }
 
         public int TileUnknownF
         {
-            get => FileEditor.GetByte(unknown0f);
-            set => FileEditor.SetByte(unknown0f, (byte)value);
+            get => _fileEditor.GetByte(unknown0f);
+            set => _fileEditor.SetByte(unknown0f, (byte)value);
         }
 
         // public int Map => Globals.map;

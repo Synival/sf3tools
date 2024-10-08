@@ -42,8 +42,8 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
         {
             _fileEditor = fileEditor;
             Scenario = scenario;
-            checkType = FileEditor.GetByte(0x00000009); //if it's 0x07 we're in a x033.bin
-            checkVersion2 = FileEditor.GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
+            checkType = _fileEditor.GetByte(0x00000009); //if it's 0x07 we're in a x033.bin
+            checkVersion2 = _fileEditor.GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -147,26 +147,26 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 
         public int CharacterE
         {
-            get => FileEditor.GetByte(character);
-            set => FileEditor.SetByte(character, (byte)value);
+            get => _fileEditor.GetByte(character);
+            set => _fileEditor.SetByte(character, (byte)value);
         }
 
         public CharacterClassValue CharacterClassE
         {
-            get => new CharacterClassValue(FileEditor.GetByte(characterClass));
-            set => FileEditor.SetByte(characterClass, (byte)value.Value);
+            get => new CharacterClassValue(_fileEditor.GetByte(characterClass));
+            set => _fileEditor.SetByte(characterClass, (byte)value.Value);
         }
 
         public int Level
         {
-            get => FileEditor.GetByte(level);
-            set => FileEditor.SetByte(level, (byte)value);
+            get => _fileEditor.GetByte(level);
+            set => _fileEditor.SetByte(level, (byte)value);
         }
 
         public SexValue Sex
         {
-            get => new SexValue(FileEditor.GetByte(sex));
-            set => FileEditor.SetByte(sex, (byte)value.Value);
+            get => new SexValue(_fileEditor.GetByte(sex));
+            set => _fileEditor.SetByte(sex, (byte)value.Value);
         }
 
         public int Weapon
@@ -205,8 +205,8 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 
         public WeaponTypeValue Weapon1Type
         {
-            get => new WeaponTypeValue(FileEditor.GetByte(weapon1Type));
-            set => FileEditor.SetByte(weapon1Type, (byte)value.Value);
+            get => new WeaponTypeValue(_fileEditor.GetByte(weapon1Type));
+            set => _fileEditor.SetByte(weapon1Type, (byte)value.Value);
         }
 
         public int Weapon1Exp
@@ -217,8 +217,8 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 
         public WeaponTypeValue Weapon2Type
         {
-            get => new WeaponTypeValue(FileEditor.GetByte(weapon2Type));
-            set => FileEditor.SetByte(weapon2Type, (byte)value.Value);
+            get => new WeaponTypeValue(_fileEditor.GetByte(weapon2Type));
+            set => _fileEditor.SetByte(weapon2Type, (byte)value.Value);
         }
 
         public int Weapon2Exp
@@ -228,8 +228,8 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
         }
         public WeaponTypeValue Weapon3Type
         {
-            get => new WeaponTypeValue(FileEditor.GetByte(weapon3Type));
-            set => FileEditor.SetByte(weapon3Type, (byte)value.Value);
+            get => new WeaponTypeValue(_fileEditor.GetByte(weapon3Type));
+            set => _fileEditor.SetByte(weapon3Type, (byte)value.Value);
         }
 
         public int Weapon3Exp
@@ -239,8 +239,8 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
         }
         public WeaponTypeValue Weapon4Type
         {
-            get => new WeaponTypeValue(FileEditor.GetByte(weapon4Type));
-            set => FileEditor.SetByte(weapon4Type, (byte)value.Value);
+            get => new WeaponTypeValue(_fileEditor.GetByte(weapon4Type));
+            set => _fileEditor.SetByte(weapon4Type, (byte)value.Value);
         }
 
         public int Weapon4Exp

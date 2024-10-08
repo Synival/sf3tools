@@ -8,11 +8,13 @@ namespace SF3.X013_Editor.Models.SpecialChance
 {
     public class SpecialChanceList : IModelArray<SpecialChance>
     {
-        public SpecialChanceList(ScenarioType scenario)
+        public SpecialChanceList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
+        private IFileEditor _fileEditor;
         public ScenarioType Scenario { get; }
 
         private SpecialChance[] itemssorted;
@@ -50,7 +52,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new SpecialChance[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new SpecialChance(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new SpecialChance(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].SpecialChanceID] = itemssorted[old.Length];
                     }
                 }

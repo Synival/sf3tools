@@ -5,6 +5,8 @@ namespace SF3.X013_Editor.Models.Soulfail
 {
     public class Soulfail
     {
+        private IFileEditor _fileEditor;
+
         private int expLost;
         private int address;
         private int offset;
@@ -12,8 +14,9 @@ namespace SF3.X013_Editor.Models.Soulfail
         private int index;
         private string name;
 
-        public Soulfail(ScenarioType scenario, int id, string text)
+        public Soulfail(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -53,8 +56,8 @@ namespace SF3.X013_Editor.Models.Soulfail
 
         public int ExpLost
         {
-            get => FileEditor.GetByte(expLost);
-            set => FileEditor.SetByte(expLost, (byte)value);
+            get => _fileEditor.GetByte(expLost);
+            set => _fileEditor.SetByte(expLost, (byte)value);
         }
 
         public int SoulfailAddress => (address);

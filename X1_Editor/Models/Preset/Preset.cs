@@ -206,58 +206,58 @@ namespace SF3.X1_Editor.Models.Presets
 
         public int SizeUnknown1
         {
-            get => FileEditor.GetByte(unknown1);
-            set => FileEditor.SetByte(unknown1, (byte)value);
+            get => _fileEditor.GetByte(unknown1);
+            set => _fileEditor.SetByte(unknown1, (byte)value);
         }
         public int TableSize
         {
-            get => FileEditor.GetByte(tableSize);
-            set => FileEditor.SetByte(tableSize, (byte)value);
+            get => _fileEditor.GetByte(tableSize);
+            set => _fileEditor.SetByte(tableSize, (byte)value);
         }
         public int SizeUnknown2
         {
-            get => FileEditor.GetByte(unknown2);
-            set => FileEditor.SetByte(unknown2, (byte)value);
+            get => _fileEditor.GetByte(unknown2);
+            set => _fileEditor.SetByte(unknown2, (byte)value);
         }
         public int SizeUnknown3
         {
-            get => FileEditor.GetByte(unknown3);
-            set => FileEditor.SetByte(unknown3, (byte)value);
+            get => _fileEditor.GetByte(unknown3);
+            set => _fileEditor.SetByte(unknown3, (byte)value);
         }
         public int SizeUnknown4
         {
-            get => FileEditor.GetByte(unknown4);
-            set => FileEditor.SetByte(unknown4, (byte)value);
+            get => _fileEditor.GetByte(unknown4);
+            set => _fileEditor.SetByte(unknown4, (byte)value);
         }
 
         public int SizeUnknown5
         {
-            get => FileEditor.GetByte(unknown5);
-            set => FileEditor.SetByte(unknown5, (byte)value);
+            get => _fileEditor.GetByte(unknown5);
+            set => _fileEditor.SetByte(unknown5, (byte)value);
         }
 
         public int SizeUnknown6
         {
-            get => FileEditor.GetByte(unknown6);
-            set => FileEditor.SetByte(unknown6, (byte)value);
+            get => _fileEditor.GetByte(unknown6);
+            set => _fileEditor.SetByte(unknown6, (byte)value);
         }
 
         public int SizeUnknown7
         {
-            get => FileEditor.GetByte(unknown7);
-            set => FileEditor.SetByte(unknown7, (byte)value);
+            get => _fileEditor.GetByte(unknown7);
+            set => _fileEditor.SetByte(unknown7, (byte)value);
         }
 
         public int SizeUnknown8
         {
-            get => FileEditor.GetByte(unknown8);
-            set => FileEditor.SetByte(unknown8, (byte)value);
+            get => _fileEditor.GetByte(unknown8);
+            set => _fileEditor.SetByte(unknown8, (byte)value);
         }
 
         public int SizeUnknown9
         {
-            get => FileEditor.GetByte(unknown9);
-            set => FileEditor.SetByte(unknown9, (byte)value);
+            get => _fileEditor.GetByte(unknown9);
+            set => _fileEditor.SetByte(unknown9, (byte)value);
         }
 
         public int Map => Globals.map;

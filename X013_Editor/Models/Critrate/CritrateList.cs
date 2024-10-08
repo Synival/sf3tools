@@ -8,11 +8,13 @@ namespace SF3.X013_Editor.Models.Critrate
 {
     public class CritrateList : IModelArray<Critrate>
     {
-        public CritrateList(ScenarioType scenario)
+        public CritrateList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
+        private IFileEditor _fileEditor;
         public ScenarioType Scenario { get; }
 
         private Critrate[] itemssorted;
@@ -50,7 +52,7 @@ namespace SF3.X013_Editor.Models.Critrate
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Critrate[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Critrate(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Critrate(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].CritrateID] = itemssorted[old.Length];
                     }
                 }

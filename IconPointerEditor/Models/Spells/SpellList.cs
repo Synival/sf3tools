@@ -8,8 +8,9 @@ namespace SF3.IconPointerEditor.Models.Spells
 {
     public class SpellList : IModelArray<Spell>
     {
-        public SpellList(ScenarioType scenario)
+        public SpellList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
@@ -17,6 +18,7 @@ namespace SF3.IconPointerEditor.Models.Spells
 
         private Spell[] spellssorted;
         private Spell[] spells;
+        private IFileEditor _fileEditor;
 
         private string r = "";
 
@@ -64,7 +66,7 @@ namespace SF3.IconPointerEditor.Models.Spells
                         spellssorted.CopyTo(old, 0);
                         spellssorted = new Spell[old.Length + 1];
                         old.CopyTo(spellssorted, 0);
-                        spellssorted[old.Length] = new Spell(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        spellssorted[old.Length] = new Spell(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         spells[spellssorted[old.Length].SpellID] = spellssorted[old.Length];
                     }
                 }

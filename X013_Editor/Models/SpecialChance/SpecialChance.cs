@@ -5,6 +5,8 @@ namespace SF3.X013_Editor.Models.SpecialChance
 {
     public class SpecialChance
     {
+        private IFileEditor _fileEditor;
+
         private int twoSpecials2;
         private int threeSpecials3;
         private int threeSpecials2;
@@ -18,8 +20,9 @@ namespace SF3.X013_Editor.Models.SpecialChance
         private int index;
         private string name;
 
-        public SpecialChance(ScenarioType scenario, int id, string text)
+        public SpecialChance(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -105,35 +108,35 @@ namespace SF3.X013_Editor.Models.SpecialChance
 
         public int TwoSpecials2
         {
-            get => FileEditor.GetByte(twoSpecials2);
-            set => FileEditor.SetByte(twoSpecials2, (byte)value);
+            get => _fileEditor.GetByte(twoSpecials2);
+            set => _fileEditor.SetByte(twoSpecials2, (byte)value);
         }
         public int ThreeSpecials3
         {
-            get => FileEditor.GetByte(threeSpecials3);
-            set => FileEditor.SetByte(threeSpecials3, (byte)value);
+            get => _fileEditor.GetByte(threeSpecials3);
+            set => _fileEditor.SetByte(threeSpecials3, (byte)value);
         }
         public int ThreeSpecials2
         {
-            get => FileEditor.GetByte(threeSpecials2);
-            set => FileEditor.SetByte(threeSpecials2, (byte)value);
+            get => _fileEditor.GetByte(threeSpecials2);
+            set => _fileEditor.SetByte(threeSpecials2, (byte)value);
         }
         public int FourSpecials4
         {
-            get => FileEditor.GetByte(fourSpecials4);
-            set => FileEditor.SetByte(fourSpecials4, (byte)value);
+            get => _fileEditor.GetByte(fourSpecials4);
+            set => _fileEditor.SetByte(fourSpecials4, (byte)value);
         }
 
         public int FourSpecials3
         {
-            get => FileEditor.GetByte(fourSpecials3);
-            set => FileEditor.SetByte(fourSpecials3, (byte)value);
+            get => _fileEditor.GetByte(fourSpecials3);
+            set => _fileEditor.SetByte(fourSpecials3, (byte)value);
         }
 
         public int FourSpecials2
         {
-            get => FileEditor.GetByte(fourSpecials2);
-            set => FileEditor.SetByte(fourSpecials2, (byte)value);
+            get => _fileEditor.GetByte(fourSpecials2);
+            set => _fileEditor.SetByte(fourSpecials2, (byte)value);
         }
 
         public int SpecialChanceAddress => (address);

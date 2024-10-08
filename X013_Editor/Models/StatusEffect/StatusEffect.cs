@@ -7,6 +7,8 @@ namespace SF3.X013_Editor.Models.StatusEffects
 {
     public class StatusEffect
     {
+        private IFileEditor _fileEditor;
+
         private int luck0;
         private int luck1;
         private int luck2;
@@ -38,8 +40,9 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public StatusEffect(ScenarioType scenario, int id, string text)
+        public StatusEffect(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -86,62 +89,62 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int StatusLuck0
         {
-            get => FileEditor.GetByte(luck0);
-            set => FileEditor.SetByte(luck0, (byte)value);
+            get => _fileEditor.GetByte(luck0);
+            set => _fileEditor.SetByte(luck0, (byte)value);
         }
 
         public int StatusLuck1
         {
-            get => FileEditor.GetByte(luck1);
-            set => FileEditor.SetByte(luck1, (byte)value);
+            get => _fileEditor.GetByte(luck1);
+            set => _fileEditor.SetByte(luck1, (byte)value);
         }
 
         public int StatusLuck2
         {
-            get => FileEditor.GetByte(luck2);
-            set => FileEditor.SetByte(luck2, (byte)value);
+            get => _fileEditor.GetByte(luck2);
+            set => _fileEditor.SetByte(luck2, (byte)value);
         }
 
         public int StatusLuck3
         {
-            get => FileEditor.GetByte(luck3);
-            set => FileEditor.SetByte(luck3, (byte)value);
+            get => _fileEditor.GetByte(luck3);
+            set => _fileEditor.SetByte(luck3, (byte)value);
         }
 
         public int StatusLuck4
         {
-            get => FileEditor.GetByte(luck4);
-            set => FileEditor.SetByte(luck4, (byte)value);
+            get => _fileEditor.GetByte(luck4);
+            set => _fileEditor.SetByte(luck4, (byte)value);
         }
 
         public int StatusLuck5
         {
-            get => FileEditor.GetByte(luck5);
-            set => FileEditor.SetByte(luck5, (byte)value);
+            get => _fileEditor.GetByte(luck5);
+            set => _fileEditor.SetByte(luck5, (byte)value);
         }
 
         public int StatusLuck6
         {
-            get => FileEditor.GetByte(luck6);
-            set => FileEditor.SetByte(luck6, (byte)value);
+            get => _fileEditor.GetByte(luck6);
+            set => _fileEditor.SetByte(luck6, (byte)value);
         }
 
         public int StatusLuck7
         {
-            get => FileEditor.GetByte(luck7);
-            set => FileEditor.SetByte(luck7, (byte)value);
+            get => _fileEditor.GetByte(luck7);
+            set => _fileEditor.SetByte(luck7, (byte)value);
         }
 
         public int StatusLuck8
         {
-            get => FileEditor.GetByte(luck8);
-            set => FileEditor.SetByte(luck8, (byte)value);
+            get => _fileEditor.GetByte(luck8);
+            set => _fileEditor.SetByte(luck8, (byte)value);
         }
 
         public int StatusLuck9
         {
-            get => FileEditor.GetByte(luck9);
-            set => FileEditor.SetByte(luck9, (byte)value);
+            get => _fileEditor.GetByte(luck9);
+            set => _fileEditor.SetByte(luck9, (byte)value);
         }
 
         public int StatusEffectAddress => (address);

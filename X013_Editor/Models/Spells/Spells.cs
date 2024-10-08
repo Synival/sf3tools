@@ -5,6 +5,8 @@ namespace SF3.X013_Editor.Models.Spells
 {
     public class Spell
     {
+        private IFileEditor _fileEditor;
+
         private int supportA;
         private int supportB;
         private int address;
@@ -13,8 +15,9 @@ namespace SF3.X013_Editor.Models.Spells
         private int index;
         private string name;
 
-        public Spell(ScenarioType scenario, int id, string text)
+        public Spell(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -56,13 +59,13 @@ namespace SF3.X013_Editor.Models.Spells
 
         public int SupportA
         {
-            get => FileEditor.GetByte(supportA);
-            set => FileEditor.SetByte(supportA, (byte)value);
+            get => _fileEditor.GetByte(supportA);
+            set => _fileEditor.SetByte(supportA, (byte)value);
         }
         public int SupportB
         {
-            get => FileEditor.GetByte(supportB);
-            set => FileEditor.SetByte(supportB, (byte)value);
+            get => _fileEditor.GetByte(supportB);
+            set => _fileEditor.SetByte(supportB, (byte)value);
         }
 
         public int SpellAddress => (address);

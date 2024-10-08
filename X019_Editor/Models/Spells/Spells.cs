@@ -5,6 +5,8 @@ namespace SF3.X019_Editor.Models.Spells
 {
     public class Spell
     {
+        private IFileEditor _fileEditor;
+
         private int targetType;
         private int damageType;
         private int unknown1;
@@ -31,8 +33,9 @@ namespace SF3.X019_Editor.Models.Spells
         private int index;
         private string name;
 
-        public Spell(ScenarioType scenario, int id, string text)
+        public Spell(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -91,104 +94,104 @@ namespace SF3.X019_Editor.Models.Spells
 
         public int SpellTarget
         {
-            get => FileEditor.GetByte(targetType);
-            set => FileEditor.SetByte(targetType, (byte)value);
+            get => _fileEditor.GetByte(targetType);
+            set => _fileEditor.SetByte(targetType, (byte)value);
         }
         public int SpellType
         {
-            get => FileEditor.GetByte(damageType);
-            set => FileEditor.SetByte(damageType, (byte)value);
+            get => _fileEditor.GetByte(damageType);
+            set => _fileEditor.SetByte(damageType, (byte)value);
         }
         public int SpellUnknown1
         {
-            get => FileEditor.GetByte(unknown1);
-            set => FileEditor.SetByte(unknown1, (byte)value);
+            get => _fileEditor.GetByte(unknown1);
+            set => _fileEditor.SetByte(unknown1, (byte)value);
         }
         public int SpellUnknown2
         {
-            get => FileEditor.GetByte(unknown2);
-            set => FileEditor.SetByte(unknown2, (byte)value);
+            get => _fileEditor.GetByte(unknown2);
+            set => _fileEditor.SetByte(unknown2, (byte)value);
         }
         public int Lv1Distance
         {
-            get => FileEditor.GetByte(lv1Distance);
-            set => FileEditor.SetByte(lv1Distance, (byte)value);
+            get => _fileEditor.GetByte(lv1Distance);
+            set => _fileEditor.SetByte(lv1Distance, (byte)value);
         }
         public int Lv1Targets
         {
-            get => FileEditor.GetByte(lv1Targets);
-            set => FileEditor.SetByte(lv1Targets, (byte)value);
+            get => _fileEditor.GetByte(lv1Targets);
+            set => _fileEditor.SetByte(lv1Targets, (byte)value);
         }
         public int Lv1Cost
         {
-            get => FileEditor.GetByte(lv1Cost);
-            set => FileEditor.SetByte(lv1Cost, (byte)value);
+            get => _fileEditor.GetByte(lv1Cost);
+            set => _fileEditor.SetByte(lv1Cost, (byte)value);
         }
         public int Lv1Damage
         {
-            get => FileEditor.GetByte(lv1Damage);
-            set => FileEditor.SetByte(lv1Damage, (byte)value);
+            get => _fileEditor.GetByte(lv1Damage);
+            set => _fileEditor.SetByte(lv1Damage, (byte)value);
         }
         public int Lv2Distance
         {
-            get => FileEditor.GetByte(lv2Distance);
-            set => FileEditor.SetByte(lv2Distance, (byte)value);
+            get => _fileEditor.GetByte(lv2Distance);
+            set => _fileEditor.SetByte(lv2Distance, (byte)value);
         }
         public int Lv2Targets
         {
-            get => FileEditor.GetByte(lv2Targets);
-            set => FileEditor.SetByte(lv2Targets, (byte)value);
+            get => _fileEditor.GetByte(lv2Targets);
+            set => _fileEditor.SetByte(lv2Targets, (byte)value);
         }
 
         public int Lv2Cost
         {
-            get => FileEditor.GetByte(lv2Cost);
-            set => FileEditor.SetByte(lv2Cost, (byte)value);
+            get => _fileEditor.GetByte(lv2Cost);
+            set => _fileEditor.SetByte(lv2Cost, (byte)value);
         }
         public int Lv2Damage
         {
-            get => FileEditor.GetByte(lv2Damage);
-            set => FileEditor.SetByte(lv2Damage, (byte)value);
+            get => _fileEditor.GetByte(lv2Damage);
+            set => _fileEditor.SetByte(lv2Damage, (byte)value);
         }
         public int Lv3Distance
         {
-            get => FileEditor.GetByte(lv3Distance);
-            set => FileEditor.SetByte(lv3Distance, (byte)value);
+            get => _fileEditor.GetByte(lv3Distance);
+            set => _fileEditor.SetByte(lv3Distance, (byte)value);
         }
         public int Lv3Targets
         {
-            get => FileEditor.GetByte(lv3Targets);
-            set => FileEditor.SetByte(lv3Targets, (byte)value);
+            get => _fileEditor.GetByte(lv3Targets);
+            set => _fileEditor.SetByte(lv3Targets, (byte)value);
         }
         public int Lv3Cost
         {
-            get => FileEditor.GetByte(lv3Cost);
-            set => FileEditor.SetByte(lv3Cost, (byte)value);
+            get => _fileEditor.GetByte(lv3Cost);
+            set => _fileEditor.SetByte(lv3Cost, (byte)value);
         }
         public int Lv3Damage
         {
-            get => FileEditor.GetByte(lv3Damage);
-            set => FileEditor.SetByte(lv3Damage, (byte)value);
+            get => _fileEditor.GetByte(lv3Damage);
+            set => _fileEditor.SetByte(lv3Damage, (byte)value);
         }
         public int Lv4Distance
         {
-            get => FileEditor.GetByte(lv4Distance);
-            set => FileEditor.SetByte(lv4Distance, (byte)value);
+            get => _fileEditor.GetByte(lv4Distance);
+            set => _fileEditor.SetByte(lv4Distance, (byte)value);
         }
         public int Lv4Targets
         {
-            get => FileEditor.GetByte(lv4Targets);
-            set => FileEditor.SetByte(lv4Targets, (byte)value);
+            get => _fileEditor.GetByte(lv4Targets);
+            set => _fileEditor.SetByte(lv4Targets, (byte)value);
         }
         public int Lv4Cost
         {
-            get => FileEditor.GetByte(lv4Cost);
-            set => FileEditor.SetByte(lv4Cost, (byte)value);
+            get => _fileEditor.GetByte(lv4Cost);
+            set => _fileEditor.SetByte(lv4Cost, (byte)value);
         }
         public int Lv4Damage
         {
-            get => FileEditor.GetByte(lv4Damage);
-            set => FileEditor.SetByte(lv4Damage, (byte)value);
+            get => _fileEditor.GetByte(lv4Damage);
+            set => _fileEditor.SetByte(lv4Damage, (byte)value);
         }
         public int SpellAddress => (address);
     }

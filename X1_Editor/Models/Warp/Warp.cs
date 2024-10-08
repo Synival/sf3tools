@@ -91,26 +91,26 @@ namespace SF3.X1_Editor.Models.Warps
 
         public int WarpUnknown1
         {
-            get => FileEditor.GetByte(unknown1);
-            set => FileEditor.SetByte(unknown1, (byte)value);
+            get => _fileEditor.GetByte(unknown1);
+            set => _fileEditor.SetByte(unknown1, (byte)value);
         }
 
         public int WarpUnknown2
         {
-            get => FileEditor.GetByte(unknown2);
-            set => FileEditor.SetByte(unknown2, (byte)value);
+            get => _fileEditor.GetByte(unknown2);
+            set => _fileEditor.SetByte(unknown2, (byte)value);
         }
 
         public int WarpType
         {
-            get => FileEditor.GetByte(type);
-            set => FileEditor.SetByte(type, (byte)value);
+            get => _fileEditor.GetByte(type);
+            set => _fileEditor.SetByte(type, (byte)value);
         }
 
         public int WarpMap
         {
-            get => FileEditor.GetByte(map);
-            set => FileEditor.SetByte(map, (byte)value);
+            get => _fileEditor.GetByte(map);
+            set => _fileEditor.SetByte(map, (byte)value);
         }
 
         public int WarpAddress => (address);

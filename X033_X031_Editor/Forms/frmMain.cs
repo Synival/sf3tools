@@ -235,7 +235,7 @@ namespace SF3.X033_X031_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            _statsList = new StatsList(_scenario);
+            _statsList = new StatsList(_fileEditor, _scenario);
             if (!_statsList.Load())
             {
                 MessageBox.Show("Could not load Resources/classList.xml.");

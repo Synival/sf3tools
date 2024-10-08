@@ -5,6 +5,8 @@ namespace SF3.X013_Editor.Models.Critrate
 {
     public class Critrate
     {
+        private IFileEditor _fileEditor;
+
         private int noSpecial;
         private int oneSpecial;
         private int twoSpecial;
@@ -17,8 +19,9 @@ namespace SF3.X013_Editor.Models.Critrate
         private int index;
         private string name;
 
-        public Critrate(ScenarioType scenario, int id, string text)
+        public Critrate(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -63,34 +66,34 @@ namespace SF3.X013_Editor.Models.Critrate
 
         public int NoSpecial
         {
-            get => FileEditor.GetByte(noSpecial);
-            set => FileEditor.SetByte(noSpecial, (byte)value);
+            get => _fileEditor.GetByte(noSpecial);
+            set => _fileEditor.SetByte(noSpecial, (byte)value);
         }
         public int OneSpecial
         {
-            get => FileEditor.GetByte(oneSpecial);
-            set => FileEditor.SetByte(oneSpecial, (byte)value);
+            get => _fileEditor.GetByte(oneSpecial);
+            set => _fileEditor.SetByte(oneSpecial, (byte)value);
         }
         public int TwoSpecial
         {
-            get => FileEditor.GetByte(twoSpecial);
-            set => FileEditor.SetByte(twoSpecial, (byte)value);
+            get => _fileEditor.GetByte(twoSpecial);
+            set => _fileEditor.SetByte(twoSpecial, (byte)value);
         }
         public int ThreeSpecial
         {
-            get => FileEditor.GetByte(threeSpecial);
-            set => FileEditor.SetByte(threeSpecial, (byte)value);
+            get => _fileEditor.GetByte(threeSpecial);
+            set => _fileEditor.SetByte(threeSpecial, (byte)value);
         }
         public int FourSpecial
         {
-            get => FileEditor.GetByte(fourSpecial);
-            set => FileEditor.SetByte(fourSpecial, (byte)value);
+            get => _fileEditor.GetByte(fourSpecial);
+            set => _fileEditor.SetByte(fourSpecial, (byte)value);
         }
 
         public int FiveSpecial
         {
-            get => FileEditor.GetByte(fiveSpecial);
-            set => FileEditor.SetByte(fiveSpecial, (byte)value);
+            get => _fileEditor.GetByte(fiveSpecial);
+            set => _fileEditor.SetByte(fiveSpecial, (byte)value);
         }
 
         public int CritrateAddress => (address);

@@ -308,14 +308,14 @@ namespace SF3.X1_Editor.Models.Items
 
         public int Unknown1
         {
-            get => FileEditor.GetByte(unknown1);
-            set => FileEditor.SetByte(unknown1, (byte)value);
+            get => _fileEditor.GetByte(unknown1);
+            set => _fileEditor.SetByte(unknown1, (byte)value);
         }
 
         public int Unknown2
         {
-            get => FileEditor.GetByte(unknown2);
-            set => FileEditor.SetByte(unknown2, (byte)value);
+            get => _fileEditor.GetByte(unknown2);
+            set => _fileEditor.SetByte(unknown2, (byte)value);
         }
 
         public int EnemyID
@@ -344,19 +344,19 @@ namespace SF3.X1_Editor.Models.Items
 
         public int Unknown3
         {
-            get => FileEditor.GetByte(unknown3);
-            set => FileEditor.SetByte(unknown3, (byte)value);
+            get => _fileEditor.GetByte(unknown3);
+            set => _fileEditor.SetByte(unknown3, (byte)value);
         }
         public int Unknown4
         {
-            get => FileEditor.GetByte(unknown4);
-            set => FileEditor.SetByte(unknown4, (byte)value);
+            get => _fileEditor.GetByte(unknown4);
+            set => _fileEditor.SetByte(unknown4, (byte)value);
         }
 
         public int Unknown5
         {
-            get => FileEditor.GetByte(unknown5);
-            set => FileEditor.SetByte(unknown5, (byte)value);
+            get => _fileEditor.GetByte(unknown5);
+            set => _fileEditor.SetByte(unknown5, (byte)value);
         }
 
         public int JoinID
@@ -367,210 +367,210 @@ namespace SF3.X1_Editor.Models.Items
 
         public int Unknown6
         {
-            get => FileEditor.GetByte(unknown6);
-            set => FileEditor.SetByte(unknown6, (byte)value);
+            get => _fileEditor.GetByte(unknown6);
+            set => _fileEditor.SetByte(unknown6, (byte)value);
         }
 
         public int Unknown7
         {
-            get => FileEditor.GetByte(unknown7);
-            set => FileEditor.SetByte(unknown7, (byte)value);
+            get => _fileEditor.GetByte(unknown7);
+            set => _fileEditor.SetByte(unknown7, (byte)value);
         }
         public int Unknown8
         {
-            get => FileEditor.GetByte(unknown8);
-            set => FileEditor.SetByte(unknown8, (byte)value);
+            get => _fileEditor.GetByte(unknown8);
+            set => _fileEditor.SetByte(unknown8, (byte)value);
         }
         public int Unknown9
         {
-            get => FileEditor.GetByte(unknown9);
-            set => FileEditor.SetByte(unknown9, (byte)value);
+            get => _fileEditor.GetByte(unknown9);
+            set => _fileEditor.SetByte(unknown9, (byte)value);
         }
 
         public int ControlType
         {
-            get => FileEditor.GetByte(controlType);
-            set => FileEditor.SetByte(controlType, (byte)value);
+            get => _fileEditor.GetByte(controlType);
+            set => _fileEditor.SetByte(controlType, (byte)value);
         }
 
         public int Unknown10
         {
-            get => FileEditor.GetByte(unknown10);
-            set => FileEditor.SetByte(unknown10, (byte)value);
+            get => _fileEditor.GetByte(unknown10);
+            set => _fileEditor.SetByte(unknown10, (byte)value);
         }
 
         public int Unknown11
         {
-            get => FileEditor.GetByte(unknown11);
-            set => FileEditor.SetByte(unknown11, (byte)value);
+            get => _fileEditor.GetByte(unknown11);
+            set => _fileEditor.SetByte(unknown11, (byte)value);
         }
 
         public int Unknown12
         {
-            get => FileEditor.GetByte(unknown12);
-            set => FileEditor.SetByte(unknown12, (byte)value);
+            get => _fileEditor.GetByte(unknown12);
+            set => _fileEditor.SetByte(unknown12, (byte)value);
         }
 
         public int Unknown13
         {
-            get => FileEditor.GetByte(unknown13);
-            set => FileEditor.SetByte(unknown13, (byte)value);
+            get => _fileEditor.GetByte(unknown13);
+            set => _fileEditor.SetByte(unknown13, (byte)value);
         }
 
         public int Unknown14
         {
-            get => FileEditor.GetByte(unknown14);
-            set => FileEditor.SetByte(unknown14, (byte)value);
+            get => _fileEditor.GetByte(unknown14);
+            set => _fileEditor.SetByte(unknown14, (byte)value);
         }
 
         public int Unknown15
         {
-            get => FileEditor.GetByte(unknown15);
-            set => FileEditor.SetByte(unknown15, (byte)value);
+            get => _fileEditor.GetByte(unknown15);
+            set => _fileEditor.SetByte(unknown15, (byte)value);
         }
 
         public int Unknown16
         {
-            get => FileEditor.GetByte(unknown16);
-            set => FileEditor.SetByte(unknown16, (byte)value);
+            get => _fileEditor.GetByte(unknown16);
+            set => _fileEditor.SetByte(unknown16, (byte)value);
         }
 
         public int Unknown17
         {
-            get => FileEditor.GetByte(unknown17);
-            set => FileEditor.SetByte(unknown17, (byte)value);
+            get => _fileEditor.GetByte(unknown17);
+            set => _fileEditor.SetByte(unknown17, (byte)value);
         }
 
         public int Unknown18
         {
-            get => FileEditor.GetByte(unknown18);
-            set => FileEditor.SetByte(unknown18, (byte)value);
+            get => _fileEditor.GetByte(unknown18);
+            set => _fileEditor.SetByte(unknown18, (byte)value);
         }
 
         public int Unknown19
         {
-            get => FileEditor.GetByte(unknown19);
-            set => FileEditor.SetByte(unknown19, (byte)value);
+            get => _fileEditor.GetByte(unknown19);
+            set => _fileEditor.SetByte(unknown19, (byte)value);
         }
 
         public int Unknown20
         {
-            get => FileEditor.GetByte(unknown20);
-            set => FileEditor.SetByte(unknown20, (byte)value);
+            get => _fileEditor.GetByte(unknown20);
+            set => _fileEditor.SetByte(unknown20, (byte)value);
         }
 
         public int Unknown21
         {
-            get => FileEditor.GetByte(unknown21);
-            set => FileEditor.SetByte(unknown21, (byte)value);
+            get => _fileEditor.GetByte(unknown21);
+            set => _fileEditor.SetByte(unknown21, (byte)value);
         }
 
         public int Unknown22
         {
-            get => FileEditor.GetByte(unknown22);
-            set => FileEditor.SetByte(unknown22, (byte)value);
+            get => _fileEditor.GetByte(unknown22);
+            set => _fileEditor.SetByte(unknown22, (byte)value);
         }
 
         public int Unknown23
         {
-            get => FileEditor.GetByte(unknown23);
-            set => FileEditor.SetByte(unknown23, (byte)value);
+            get => _fileEditor.GetByte(unknown23);
+            set => _fileEditor.SetByte(unknown23, (byte)value);
         }
 
         public int Unknown24
         {
-            get => FileEditor.GetByte(unknown24);
-            set => FileEditor.SetByte(unknown24, (byte)value);
+            get => _fileEditor.GetByte(unknown24);
+            set => _fileEditor.SetByte(unknown24, (byte)value);
         }
 
         public int Unknown25
         {
-            get => FileEditor.GetByte(unknown25);
-            set => FileEditor.SetByte(unknown25, (byte)value);
+            get => _fileEditor.GetByte(unknown25);
+            set => _fileEditor.SetByte(unknown25, (byte)value);
         }
 
         public int Unknown26
         {
-            get => FileEditor.GetByte(unknown26);
-            set => FileEditor.SetByte(unknown26, (byte)value);
+            get => _fileEditor.GetByte(unknown26);
+            set => _fileEditor.SetByte(unknown26, (byte)value);
         }
 
         public int Unknown27
         {
-            get => FileEditor.GetByte(unknown27);
-            set => FileEditor.SetByte(unknown27, (byte)value);
+            get => _fileEditor.GetByte(unknown27);
+            set => _fileEditor.SetByte(unknown27, (byte)value);
         }
 
         public int Unknown28
         {
-            get => FileEditor.GetByte(unknown28);
-            set => FileEditor.SetByte(unknown28, (byte)value);
+            get => _fileEditor.GetByte(unknown28);
+            set => _fileEditor.SetByte(unknown28, (byte)value);
         }
 
         public int Unknown29
         {
-            get => FileEditor.GetByte(unknown29);
-            set => FileEditor.SetByte(unknown29, (byte)value);
+            get => _fileEditor.GetByte(unknown29);
+            set => _fileEditor.SetByte(unknown29, (byte)value);
         }
 
         public int Unknown30
         {
-            get => FileEditor.GetByte(unknown30);
-            set => FileEditor.SetByte(unknown30, (byte)value);
+            get => _fileEditor.GetByte(unknown30);
+            set => _fileEditor.SetByte(unknown30, (byte)value);
         }
 
         public int Unknown31
         {
-            get => FileEditor.GetByte(unknown31);
-            set => FileEditor.SetByte(unknown31, (byte)value);
+            get => _fileEditor.GetByte(unknown31);
+            set => _fileEditor.SetByte(unknown31, (byte)value);
         }
 
         public int Unknown32
         {
-            get => FileEditor.GetByte(unknown32);
-            set => FileEditor.SetByte(unknown32, (byte)value);
+            get => _fileEditor.GetByte(unknown32);
+            set => _fileEditor.SetByte(unknown32, (byte)value);
         }
 
         public int Unknown33
         {
-            get => FileEditor.GetByte(unknown33);
-            set => FileEditor.SetByte(unknown33, (byte)value);
+            get => _fileEditor.GetByte(unknown33);
+            set => _fileEditor.SetByte(unknown33, (byte)value);
         }
 
         public int Unknown34
         {
-            get => FileEditor.GetByte(unknown34);
-            set => FileEditor.SetByte(unknown34, (byte)value);
+            get => _fileEditor.GetByte(unknown34);
+            set => _fileEditor.SetByte(unknown34, (byte)value);
         }
 
         public int Unknown35
         {
-            get => FileEditor.GetByte(unknown35);
-            set => FileEditor.SetByte(unknown35, (byte)value);
+            get => _fileEditor.GetByte(unknown35);
+            set => _fileEditor.SetByte(unknown35, (byte)value);
         }
 
         public int Unknown36
         {
-            get => FileEditor.GetByte(unknown36);
-            set => FileEditor.SetByte(unknown36, (byte)value);
+            get => _fileEditor.GetByte(unknown36);
+            set => _fileEditor.SetByte(unknown36, (byte)value);
         }
 
         public int Unknown37
         {
-            get => FileEditor.GetByte(unknown37);
-            set => FileEditor.SetByte(unknown37, (byte)value);
+            get => _fileEditor.GetByte(unknown37);
+            set => _fileEditor.SetByte(unknown37, (byte)value);
         }
 
         public int Unknown38
         {
-            get => FileEditor.GetByte(unknown38);
-            set => FileEditor.SetByte(unknown38, (byte)value);
+            get => _fileEditor.GetByte(unknown38);
+            set => _fileEditor.SetByte(unknown38, (byte)value);
         }
 
         public int Unknown39
         {
-            get => FileEditor.GetByte(unknown39);
-            set => FileEditor.SetByte(unknown39, (byte)value);
+            get => _fileEditor.GetByte(unknown39);
+            set => _fileEditor.SetByte(unknown39, (byte)value);
         }
 
         public int Unknown40

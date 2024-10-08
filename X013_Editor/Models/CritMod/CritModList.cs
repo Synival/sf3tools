@@ -8,11 +8,13 @@ namespace SF3.X013_Editor.Models.CritMod
 {
     public class CritModList : IModelArray<CritMod>
     {
-        public CritModList(ScenarioType scenario)
+        public CritModList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
+        private IFileEditor _fileEditor;
         public ScenarioType Scenario { get; }
 
         private CritMod[] itemssorted;
@@ -50,7 +52,7 @@ namespace SF3.X013_Editor.Models.CritMod
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new CritMod[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new CritMod(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new CritMod(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].CritModID] = itemssorted[old.Length];
                     }
                 }

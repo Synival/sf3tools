@@ -5,6 +5,8 @@ namespace SF3.X013_Editor.Models.Stats
 {
     public class Stat
     {
+        IFileEditor _fileEditor;
+
         private int sLvlStat1;
         private int sLvlStat2;
         private int sLvlStat3;
@@ -15,8 +17,9 @@ namespace SF3.X013_Editor.Models.Stats
         private int index;
         private string name;
 
-        public Stat(ScenarioType scenario, int id, string text)
+        public Stat(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -59,23 +62,23 @@ namespace SF3.X013_Editor.Models.Stats
 
         public int SLvlStat1
         {
-            get => FileEditor.GetByte(sLvlStat1);
-            set => FileEditor.SetByte(sLvlStat1, (byte)value);
+            get => _fileEditor.GetByte(sLvlStat1);
+            set => _fileEditor.SetByte(sLvlStat1, (byte)value);
         }
         public int SLvlStat2
         {
-            get => FileEditor.GetByte(sLvlStat2);
-            set => FileEditor.SetByte(sLvlStat2, (byte)value);
+            get => _fileEditor.GetByte(sLvlStat2);
+            set => _fileEditor.SetByte(sLvlStat2, (byte)value);
         }
         public int SLvlStat3
         {
-            get => FileEditor.GetByte(sLvlStat3);
-            set => FileEditor.SetByte(sLvlStat3, (byte)value);
+            get => _fileEditor.GetByte(sLvlStat3);
+            set => _fileEditor.SetByte(sLvlStat3, (byte)value);
         }
         public int SLvlStat4
         {
-            get => FileEditor.GetByte(sLvlStat4);
-            set => FileEditor.SetByte(sLvlStat4, (byte)value);
+            get => _fileEditor.GetByte(sLvlStat4);
+            set => _fileEditor.SetByte(sLvlStat4, (byte)value);
         }
 
         public int StatAddress => (address);

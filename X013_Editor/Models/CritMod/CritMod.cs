@@ -5,6 +5,8 @@ namespace SF3.X013_Editor.Models.CritMod
 {
     public class CritMod
     {
+        private IFileEditor _fileEditor;
+
         private int advantage;
         private int disadvantage;
         private int address;
@@ -13,8 +15,9 @@ namespace SF3.X013_Editor.Models.CritMod
         private int index;
         private string name;
 
-        public CritMod(ScenarioType scenario, int id, string text)
+        public CritMod(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -55,13 +58,13 @@ namespace SF3.X013_Editor.Models.CritMod
 
         public int Advantage
         {
-            get => FileEditor.GetByte(advantage);
-            set => FileEditor.SetByte(advantage, (byte)value);
+            get => _fileEditor.GetByte(advantage);
+            set => _fileEditor.SetByte(advantage, (byte)value);
         }
         public int Disadvantage
         {
-            get => FileEditor.GetByte(disadvantage);
-            set => FileEditor.SetByte(disadvantage, (byte)value);
+            get => _fileEditor.GetByte(disadvantage);
+            set => _fileEditor.SetByte(disadvantage, (byte)value);
         }
 
         public int CritModAddress => (address);

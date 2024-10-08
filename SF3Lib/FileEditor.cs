@@ -78,7 +78,11 @@ namespace SF3
             return true;
         }
 
-        public static int GetByte(int location)
+        /// <summary>
+        /// Gets the value of a byte at a location.
+        /// </summary>
+        /// <param name="location">The address of the byte.</param>
+        public int GetByte(int location)
         {
             if (data == null)
             {
@@ -174,7 +178,12 @@ namespace SF3
             return InputText.GetString(value);
         }
 
-        public static void SetByte(int location, byte value)
+        /// <summary>
+        /// Sets the value of a byte at a location.
+        /// </summary>
+        /// <param name="location">The address of the byte.</param>
+        /// <param name="value">The new value of the byte.</param>
+        public void SetByte(int location, byte value)
         {
             if (data == null)
             {

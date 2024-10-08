@@ -5,6 +5,8 @@ namespace SF3.X013_Editor.Models.Soulmate
 {
     public class Soulmate
     {
+        private IFileEditor _fileEditor;
+
         private int chance;
         private int address;
         private int offset;
@@ -12,8 +14,9 @@ namespace SF3.X013_Editor.Models.Soulmate
         private int index;
         private string name;
 
-        public Soulmate(ScenarioType scenario, int id, string text)
+        public Soulmate(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -53,8 +56,8 @@ namespace SF3.X013_Editor.Models.Soulmate
 
         public int Chance
         {
-            get => FileEditor.GetByte(chance);
-            set => FileEditor.SetByte(chance, (byte)value);
+            get => _fileEditor.GetByte(chance);
+            set => _fileEditor.SetByte(chance, (byte)value);
         }
 
         public int SoulmateAddress => (address);
