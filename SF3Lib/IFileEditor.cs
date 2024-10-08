@@ -17,5 +17,12 @@ namespace SF3
         /// <param name="filename">The file to load.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
         bool LoadFile(string filename);
+
+        /// <summary>
+        /// Saves a file's binary data for editing.
+        /// </summary>
+        /// <param name="filename">The file to load.</param>
+        /// <returns>'true' on success, 'false' on failure.</returns>
+        bool SaveFile(string filename);
     }
 }

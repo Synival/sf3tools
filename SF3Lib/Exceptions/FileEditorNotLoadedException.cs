@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SF3.Exceptions
 {
-    public class FileEditorReadException : FileEditorException
+    public class FileEditorNotLoadedException : FileEditorException
     {
     }
 }

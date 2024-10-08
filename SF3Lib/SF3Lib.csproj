@@ -70,6 +70,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\FileEditorException.cs" />
+    <Compile Include="Exceptions\FileEditorNotLoadedException.cs" />
     <Compile Include="Exceptions\FileEditorReadException.cs" />
     <Compile Include="FileEditor.cs" />
     <Compile Include="IFileEditor.cs" />

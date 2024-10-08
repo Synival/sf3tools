@@ -289,6 +289,11 @@ namespace SF3.IconPointerEditor.Forms
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (_fileEditor == null)
+            {
+                return;
+            }
+
             //olvBlacksmith.FinishCellEdit();
             //olvMonsters.FinishCellEdit();
             //olvCharacters.FinishCellEdit();
@@ -303,7 +308,7 @@ namespace SF3.IconPointerEditor.Forms
             savefile.FileName = Path.GetFileName(FileEditor.Filename);
             if (savefile.ShowDialog() == DialogResult.OK)
             {
-                FileEditor.SaveFile(savefile.FileName);
+                _fileEditor.SaveFile(savefile.FileName);
             }
         }
 

@@ -10,7 +10,7 @@ namespace SF3
     /// </summary>
     public class FileEditor : IFileEditor
     {
-        private static byte[] data;
+        private static byte[] data = null;
         public static string Filename;
 
         /// <summary>
@@ -44,8 +44,18 @@ namespace SF3
             return true;
         }
 
-        public static bool SaveFile(string filename)
+        /// <summary>
+        /// Saves a file's binary data for editing.
+        /// </summary>
+        /// <param name="filename">The file to load.</param>
+        /// <returns>'true' on success, 'false' on failure.</returns>
+        public bool SaveFile(string filename)
         {
+            if (data == null)
+            {
+                throw new FileEditorNotLoadedException();
+            }
+
             FileStream stream = null;
             try
             {
@@ -70,6 +80,11 @@ namespace SF3
 
         public static int GetByte(int location)
         {
+            if (data == null)
+            {
+                throw new FileEditorNotLoadedException();
+            }
+
             try
             {
                 return data[location];
@@ -83,6 +98,11 @@ namespace SF3
 
         public static int GetWord(int location)
         {
+            if (data == null)
+            {
+                throw new FileEditorNotLoadedException();
+            }
+
             try
             {
                 return data[location] * 256 + data[location + 1];
@@ -96,6 +116,11 @@ namespace SF3
 
         public static int GetDouble(int location)
         {
+            if (data == null)
+            {
+                throw new FileEditorNotLoadedException();
+            }
+
             try
             {
                 return (data[location] * 256 * 256 * 256) + (data[location + 1] * 256 * 256)
@@ -111,6 +136,11 @@ namespace SF3
         //Returns a string from values of location to location+length bytes
         public static string GetString(int location, int length)
         {
+            if (data == null)
+            {
+                throw new FileEditorNotLoadedException();
+            }
+
             byte[] value = new byte[length];
             for (int i = 0; i < length; i++)
             {
@@ -134,10 +164,20 @@ namespace SF3
 
         public static void SetByte(int location, byte value)
         {
+            if (data == null)
+            {
+                throw new FileEditorNotLoadedException();
+            }
+
             data[location] = value;
         }
         public static void SetWord(int location, int value)
         {
+            if (data == null)
+            {
+                throw new FileEditorNotLoadedException();
+            }
+
             data[location] = (byte)(value >> 8);
             data[location + 1] = (byte)(value % 256);
         }
@@ -152,6 +192,11 @@ namespace SF3
 
         public static void SetString(int location, int length, string value)
         {
+            if (data == null)
+            {
+                throw new FileEditorNotLoadedException();
+            }
+
             byte[] name = new byte[12];
             Encoding OutputText = Encoding.GetEncoding("shift-jis");
             name = OutputText.GetBytes(value);
@@ -169,10 +214,20 @@ namespace SF3
         }
         public static bool GetBit(int location, int bit)
         {
+            if (data == null)
+            {
+                throw new FileEditorNotLoadedException();
+            }
+
             return ((data[location] >> (bit - 1) & 0x01) == 1) ? true : false;
         }
         public static void SetBit(int location, int bit, bool value)
         {
+            if (data == null)
+            {
+                throw new FileEditorNotLoadedException();
+            }
+
             if (value)
             {
                 data[location] |= (byte)(1 << (bit - 1));
