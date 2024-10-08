@@ -3,14 +3,12 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
-using SF3.X019_Editor.Models;
 using SF3.X019_Editor.Models.Spells;
 using SF3.X019_Editor.Models.Presets;
 using SF3.X019_Editor.Models.Items;
 using BrightIdeasSoftware;
-using SF3.Editor;
 using SF3.Types;
-using SF3.Editor.Exceptions;
+using SF3.Exceptions;
 
 /*
 

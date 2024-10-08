@@ -60,8 +60,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +70,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\FileEditorReadException.cs" />
+    <Compile Include="FileEditor.cs" />
+    <Compile Include="IFileEditor.cs" />
     <Compile Include="ProbableValueSet.cs" />
     <Compile Include="Models\IModelArray.cs" />
     <Compile Include="NamedValue.cs" />

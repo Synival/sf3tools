@@ -3,16 +3,14 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
-using SF3.X033_X031_Editor.Models;
 using SF3.X033_X031_Editor.Models.InitialInfos;
 using SF3.X033_X031_Editor.Models.Stats;
 using SF3.X033_X031_Editor.Models.WeaponLevel;
 using BrightIdeasSoftware;
-using SF3.Editor;
 using System.Linq;
 using System.Collections.Generic;
 using SF3.Types;
-using SF3.Editor.Exceptions;
+using SF3.Exceptions;
 
 namespace SF3.X033_X031_Editor.Forms
 {

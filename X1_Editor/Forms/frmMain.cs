@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
-using SF3.X1_Editor.Models;
 using SF3.X1_Editor.Models.Presets;
 using SF3.X1_Editor.Models.Items;
 using SF3.X1_Editor.Models.AI;
@@ -16,9 +15,8 @@ using SF3.X1_Editor.Models.Npcs;
 using SF3.X1_Editor.Models.Enters;
 using SF3.X1_Editor.Models.Arrows;
 using BrightIdeasSoftware;
-using SF3.Editor;
 using SF3.Types;
-using SF3.Editor.Exceptions;
+using SF3.Exceptions;
 
 /*
 

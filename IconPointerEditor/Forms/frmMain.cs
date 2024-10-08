@@ -3,13 +3,11 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
-using SF3.IconPointerEditor.Models;
 using SF3.IconPointerEditor.Models.Presets;
 using SF3.IconPointerEditor.Models.Items;
 using BrightIdeasSoftware;
-using SF3.Editor;
 using SF3.Types;
-using SF3.Editor.Exceptions;
+using SF3.Exceptions;
 
 /*
 

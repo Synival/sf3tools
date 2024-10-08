@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
-using SF3.X013_Editor.Models;
 using SF3.X013_Editor.Models.Spells;
 using SF3.X013_Editor.Models.Presets;
 using SF3.X013_Editor.Models.Items;
@@ -19,10 +18,8 @@ using SF3.X013_Editor.Models.HealExp;
 using SF3.X013_Editor.Models.WeaponSpellRank;
 using SF3.X013_Editor.Models.StatusEffects;
 using BrightIdeasSoftware;
-using SF3.Editor;
 using SF3.Types;
-using SF3.Editor.Exceptions;
-using System.Diagnostics;
+using SF3.Exceptions;
 
 /*
 

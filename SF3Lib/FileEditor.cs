@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Text;
 using System.IO;
-using SF3.Editor.Exceptions;
-using SF3.Types;
+using SF3.Exceptions;
 
-namespace SF3.Editor
+namespace SF3
 {
     /// <summary>
     /// Used for loading, saving, reading, and modifying .BIN files.
@@ -14,6 +13,11 @@ namespace SF3.Editor
         private static byte[] data;
         public static string Filename;
 
+        /// <summary>
+        /// Loads a file's binary data for editing.
+        /// </summary>
+        /// <param name="filename">The file to load.</param>
+        /// <returns>'true' on success, 'false' on failure.</returns>
         public bool LoadFile(string filename)
         {
             FileStream stream = null;

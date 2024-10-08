@@ -72,12 +72,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\FileEditorReadException.cs" />
-    <Compile Include="FileEditor.cs" />
-    <Compile Include="IFileEditor.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ObjectListView\ObjectListView\ObjectListView2008.csproj">
       <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
