@@ -116,14 +116,12 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.aboutToolStripMenuItem.Text = "Version 0.08";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(219, 22);
             this.toolStripMenuItem5.Text = "Opens X011,X021, X026 files";
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click_1);
             // 
             // toolStripMenuItem6
             // 
@@ -345,8 +343,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmIconPointerEditor";
             this.Text = "Sf3 Icon pointer Editor          X026 mode: Off";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmIconPointerEditor_FormClosing);
-            this.Load += new System.EventHandler(this.frmIconPointerEditor_Load);
             this.Resize += new System.EventHandler(this.frmIconPointerEditor_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

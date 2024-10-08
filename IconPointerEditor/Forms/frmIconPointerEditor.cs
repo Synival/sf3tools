@@ -9,10 +9,6 @@ using BrightIdeasSoftware;
 using SF3.Types;
 using SF3.Exceptions;
 
-/*
-
-*/
-
 namespace SF3.IconPointerEditor.Forms
 {
     public partial class frmIconPointerEditor : Form
@@ -31,178 +27,18 @@ namespace SF3.IconPointerEditor.Forms
         {
             InitializeComponent();
             frmIconPointerEditor_Resize(this, new EventArgs());
-
-            /*try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvMonsters.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }*/
-            /*try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/itemstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvItems.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }*/
-
-            /*try
-            {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/spellsstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvItems.RestoreState(data);
-                stream.Close();
-            }/*
-            catch (Exception) { }
-            /*try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/blacksmithstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvBlacksmith.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }
-            try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/storesstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvStoreItems.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }
-            /*
-            try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/spellsstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvSpells.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }*/
-            //lvcAction1.AspectToStringConverter = getActionName;
-            //lvcAction2.AspectToStringConverter = getActionName;
-            //lvcAction3.AspectToStringConverter = getActionName;
-            //lvcAction4.AspectToStringConverter = getActionName;
-            //lvcAction5.AspectToStringConverter = getActionName;
-            //lvcAction6.AspectToStringConverter = getActionName;
-            //lvcAction7.AspectToStringConverter = getActionName;
-            //lvcAction8.AspectToStringConverter = getActionName;
-
-            //lvcItemStatType1.AspectToStringConverter += getStatTypeName;
-            //lvcItemStatType2.AspectToStringConverter += getStatTypeName;
-            //lvcItemStatType3.AspectToStringConverter += getStatTypeName;
-
-            //lvcCharacterItem1.AspectToStringConverter += getItemName;
-            //lvcCharacterItem2.AspectToStringConverter += getItemName;
-            //lvcCharacterItem3.AspectToStringConverter += getItemName;
-            //lvcCharacterItem4.AspectToStringConverter += getItemName;
-            //lvcCharacterItem5.AspectToStringConverter += getItemName;
-            //lvcCharacterItem6.AspectToStringConverter += getItemName;
-            //lvcCharacterItem7.AspectToStringConverter += getItemName;
-            //lvcCharacterItem8.AspectToStringConverter += getItemName;
-
-            //lvcItem.AspectToStringConverter += getItemName;
-
-            //lvcBlacksmithItem.AspectToStringConverter += getItemName;
-            //lvcStoreItem.AspectToStringConverter += getItemName;
-
-            //lvcSpellType.AspectToStringConverter += getSpellName;
-            //lvcSpellClass.AspectToStringConverter += getClassName;
-
-            //lvcStoreItemType.AspectToStringConverter += getStoreItemTypeName;
-
-            //Block the putter events for columns that use comboboxes
-            //we handle this in the cell edit finishing event to make things a TON easier
-            /*lvcItemStatType1.AspectPutter += blocker;
-            lvcItemStatType2.AspectPutter += blocker;
-            lvcItemStatType3.AspectPutter += blocker;
-            lvcAction1.AspectPutter += blocker;
-            lvcAction2.AspectPutter += blocker;
-            lvcAction3.AspectPutter += blocker;
-            lvcAction4.AspectPutter += blocker;
-            lvcAction5.AspectPutter += blocker;
-            lvcAction6.AspectPutter += blocker;
-            lvcAction7.AspectPutter += blocker;
-            lvcAction8.AspectPutter += blocker;
-            lvcCharacterItem1.AspectPutter += blocker;
-            lvcCharacterItem2.AspectPutter += blocker;
-            lvcCharacterItem3.AspectPutter += blocker;
-            lvcCharacterItem4.AspectPutter += blocker;
-            lvcCharacterItem5.AspectPutter += blocker;
-            lvcCharacterItem6.AspectPutter += blocker;
-            lvcCharacterItem7.AspectPutter += blocker;
-            lvcCharacterItem8.AspectPutter += blocker;
-
-            lvcItem.AspectPutter += blocker;
-            lvcBlacksmithItem.AspectPutter += blocker;
-            lvcStoreItem.AspectPutter += blocker;
-
-            lvcSpellClass.AspectPutter += blocker;
-            lvcSpellType.AspectPutter += blocker;
-            lvcStoreItemType.AspectPutter += blocker;*/
         }
-
-        private void blocker(object target, object newvalue) { }
-
-        /*private string getActionName(object target)
-        {
-            return ((Action)target).Name;
-        }*/
-        /*private string getStatTypeName(object target)
-        {
-            return ((StatType)target).Name;
-        }*/
-        private string getItemName(object target)
-        {
-            return ((SpellIcon)target).Name;
-        }
-        /*private string getSpellName(object target)
-        {
-            return ((Spell)target).SpellName;
-        }*/
-        private string getPresetName(object target)
-        {
-            return ((ItemIcon)target).SizeName;
-        }
-        /*
-        private string getStoreItemTypeName(object target)
-        {
-            return ((StoreItemType)target).Name;
-        }*/
 
         private bool initialise()
         {
             saveAsToolStripMenuItem.Enabled = true;
-            /*if (!StoreItemTypeList.loadStoreItemTypeList()) {
-                MessageBox.Show("Could not load Resources/storeitemtypes.xml.");
-                return false;
-            }
-            if (!SpellList.loadSpellList()) {
-                MessageBox.Show("Could not load Resources/spells.xml.");
-                return false;
-            }
-            if (!CharacterClassList.loadCharacterClassList()) {
-                MessageBox.Show("Could not load Resources/classes.xml.");
-                return false;
-            }*/
-            /*if (!ActionList.loadActionList()) {
-                MessageBox.Show("Could not load Resources/actions.xml.");
-                return false;
-            }*/
-            /*if (!StatTypeList.loadStatTypeList()) {
-                MessageBox.Show("Could not load Resources/stattypes.xml.");
-                return false;
-            }*/
+
             _itemList = new SpellIconList(_fileEditor);
             if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
-
-            /*if (!SpellList.loadSpellList()) {
-                MessageBox.Show("Could not load Resources/spellList.xml.");
-                return false;
-            }*/
 
             _presetList = new ItemIconList(_fileEditor);
             if (!_presetList.Load())
@@ -211,31 +47,12 @@ namespace SF3.IconPointerEditor.Forms
                 return false;
             }
 
-            //BlacksmithList.loadBlacksmithList();
-            //StoreItemList.loadStoreItemList();
-            //SpellEntryList.loadSpellEntryList();
-
-            //olvBlacksmith.ClearObjects();
-            //olvCharacters.ClearObjects();
-            //olvMonsters.ClearObjects();
-
             olvItemIcons.ClearObjects();
             olvSpellIcons.ClearObjects();
-
-            //olvPresets.ClearObjects();
-            //olvSpells.ClearObjects();
-            //olvSpells.ClearObjects();
-            //olvStoreItems.ClearObjects();
-
-            //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
             olvItemIcons.AddObjects(_presetList.Models);
             olvSpellIcons.AddObjects(_itemList.Models);
 
-            //olvCharacters.AddObjects(CharacterList.getCharacterList());
-            //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
-            //olvStoreItems.AddObjects(StoreItemList.getStoreItemList());
-            //olvSpells.AddObjects(SpellEntryList.getSpellEntryList());
             return true;
         }
 
@@ -278,13 +95,8 @@ namespace SF3.IconPointerEditor.Forms
             Size newsize = ClientSize;
             newsize.Height -= 24;
             tabMain.Size = newsize;
-            //olvMonsters.Size = tabMonsters.ClientSize;
-            //olvCharacters.Size = tabCharacters.ClientSize;
             olvItemIcons.Size = tabItemIcons.ClientSize;
             olvSpellIcons.Size = tabSpellIcons.ClientSize;
-            //olvBlacksmith.Size = tabBlacksmith.ClientSize;
-            //olvStoreItems.Size = tabShops.ClientSize;
-            //olvSpells.Size = tabSpells.ClientSize;
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -294,15 +106,9 @@ namespace SF3.IconPointerEditor.Forms
                 return;
             }
 
-            //olvBlacksmith.FinishCellEdit();
-            //olvMonsters.FinishCellEdit();
-            //olvCharacters.FinishCellEdit();
             olvItemIcons.FinishCellEdit();
             olvSpellIcons.FinishCellEdit();
-            //objectListView1.FinishCellEdit();
-            //objectListView2.FinishCellEdit();
-            //olvStoreItems.FinishCellEdit();
-            //olvSpells.FinishCellEdit();
+
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 X011* (.bin)|X011.bin|Sf3 X021* (.bin)|X021.bin|Sf3 X026* (.bin)|X026.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             savefile.FileName = Path.GetFileName(FileEditor.Filename);
@@ -312,42 +118,6 @@ namespace SF3.IconPointerEditor.Forms
             }
         }
 
-        private void frmIconPointerEditor_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            /*try {
-                byte[] data = olvMonsters.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }*/
-            /*
-            try {
-                byte[] data = olvItems.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/itemstate." +
-                     ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }*/
-            /*try {
-                byte[] data = olvBlacksmith.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/blacksmithstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }
-            try {
-                byte[] data = olvStoreItems.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/storesstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }
-            try {
-                byte[] data = olvSpells.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/spellsstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }*/
-        }
-
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e)
         {
             if (e.Column.AspectToStringFormat == "{0:X}")
@@ -355,11 +125,6 @@ namespace SF3.IconPointerEditor.Forms
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.Hexadecimal = true;
             }
-            /*else if (e.Column.AspectToStringFormat == "{0:1}")
-            {
-                NumericUpDown control = (NumericUpDown)e.Control;
-                control.binary? = true;
-            } */
             else if (e.Value is SpellIcon)
             {
                 ComboBox cb = new ComboBox();
@@ -373,19 +138,6 @@ namespace SF3.IconPointerEditor.Forms
                 cb.SelectedItem = e.Value;
                 e.Control = cb;
             }
-            /*else if (e.Value is Spell)
-            {
-                ComboBox cb = new ComboBox();
-                cb.Bounds = e.CellBounds;
-                cb.DropDownStyle = ComboBoxStyle.DropDownList;
-                cb.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cb.AutoCompleteMode = AutoCompleteMode.Append;
-                cb.ValueMember = "Value";
-                cb.DisplayMember = "SpellName";
-                cb.Items.AddRange(SpellList.getSpellList());
-                cb.SelectedItem = e.Value;
-                e.Control = cb;
-            }*/
             else if (e.Value is ItemIcon)
             {
                 ComboBox cb = new ComboBox();
@@ -400,95 +152,28 @@ namespace SF3.IconPointerEditor.Forms
                 e.Control = cb;
             }
 
-            /*else if (e.Value is StatType) {
-                ComboBox cb = new ComboBox();
-                cb.Bounds = e.CellBounds;
-                cb.DropDownStyle = ComboBoxStyle.DropDownList;
-                cb.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cb.AutoCompleteMode = AutoCompleteMode.Append;
-                cb.ValueMember = "Value";
-                cb.DisplayMember = "Name";
-                cb.Items.AddRange(StatTypeList.getStatTypeList());
-                cb.SelectedItem = e.Value;
-                e.Control = cb;
-            } else if (e.Value is Spell) {
-                ComboBox cb = new ComboBox();
-                cb.Bounds = e.CellBounds;
-                cb.DropDownStyle = ComboBoxStyle.DropDownList;
-                cb.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cb.AutoCompleteMode = AutoCompleteMode.Append;
-                cb.ValueMember = "Value";
-                cb.DisplayMember = "Name";
-                cb.Items.AddRange(SpellList.getSpellList());
-                cb.SelectedItem = e.Value;
-                e.Control = cb;
-            } else if (e.Value is CharacterClass) {
-                ComboBox cb = new ComboBox();
-                cb.Bounds = e.CellBounds;
-                cb.DropDownStyle = ComboBoxStyle.DropDownList;
-                cb.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cb.AutoCompleteMode = AutoCompleteMode.Append;
-                cb.ValueMember = "Value";
-                cb.DisplayMember = "Name";
-                cb.Items.AddRange(CharacterClassList.getCharacterClassList());
-                cb.SelectedItem = e.Value;
-                e.Control = cb;
-            } else if (e.Value is StoreItemType) {
-                ComboBox cb = new ComboBox();
-                cb.Bounds = e.CellBounds;
-                cb.DropDownStyle = ComboBoxStyle.DropDownList;
-                cb.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cb.AutoCompleteMode = AutoCompleteMode.Append;
-                cb.ValueMember = "Value";
-                cb.DisplayMember = "Name";
-                cb.Items.AddRange(StoreItemTypeList.getStoreItemTypeList());
-                cb.SelectedItem = e.Value;
-                e.Control = cb;
-            }*/
-
             Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
         }
 
         private void olvCellEditFinishing(object sender, CellEditEventArgs e)
         {
-            /*if (e.Value is Action) {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                Action value = (Action)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            } else*/
             if (e.Value is SpellIcon)
             {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 SpellIcon value = (SpellIcon)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
-                /*} else if (e.Value is Spell) {
-                    PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                    Spell value = (Spell)((ComboBox)e.Control).SelectedItem;
-                    property.SetValue(e.RowObject, value, null);*/
             }
             else if (e.Value is ItemIcon)
             {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 ItemIcon value = (ItemIcon)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
-            } /*else if (e.Value is CharacterClass) {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                CharacterClass value = (CharacterClass)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            } else if (e.Value is StoreItemType) {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                StoreItemType value = (StoreItemType)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            }*/
+            }
         }
 
         private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
         {
             frmIconPointerEditor_Resize(this, new EventArgs());
-        }
-
-        private void frmIconPointerEditor_Load(object sender, EventArgs e)
-        {
         }
 
         public static class Globals
@@ -517,37 +202,23 @@ namespace SF3.IconPointerEditor.Forms
         {
             _scenario = ScenarioType.PremiumDisk;
         }
+
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Other;
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void toolStripMenuItem5_Click_1(object sender, EventArgs e)
-        {
-        }
-
-        private void toolStripMenuItem6_Click(object sender, EventArgs e)
-        {
-        }
-
         private void toolStripMenuItem6_Click_1(object sender, EventArgs e)
         {
-            //MessageBox.Show("Could not load Resources/itemList.xml.");
             if (Globals.x026 == true)
             {
                 Globals.x026 = false;
-                //this.Text = "Sf3 Icon pointer Editor" + "          " + "X026 mode: Off";
                 Globals.toggle = "Off";
                 updateText();
             }
             else
             {
                 Globals.x026 = true;
-                //this.Text = "Sf3 Icon pointer Editor" + "          " + "X026 mode: On";
                 Globals.toggle = "On";
                 updateText();
             }
