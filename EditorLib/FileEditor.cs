@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Text;
 using System.IO;
+using SF3.Editor.Exceptions;
 
 namespace SF3.Editor
 {
-    public class FileEditorReadException : Exception
-    {
-    }
-
     public static class FileEditor
     {
         private static byte[] data;

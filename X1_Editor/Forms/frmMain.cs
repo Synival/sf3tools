@@ -18,6 +18,7 @@ using SF3.X1_Editor.Models.Arrows;
 using BrightIdeasSoftware;
 using SF3.Editor;
 using SF3.Types;
+using SF3.Editor.Exceptions;
 
 /*
 

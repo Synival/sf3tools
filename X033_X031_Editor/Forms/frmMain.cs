@@ -12,6 +12,7 @@ using SF3.Editor;
 using System.Linq;
 using System.Collections.Generic;
 using SF3.Types;
+using SF3.Editor.Exceptions;
 
 namespace SF3.X033_X031_Editor.Forms
 {

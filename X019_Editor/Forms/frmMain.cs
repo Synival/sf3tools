@@ -10,6 +10,7 @@ using SF3.X019_Editor.Models.Items;
 using BrightIdeasSoftware;
 using SF3.Editor;
 using SF3.Types;
+using SF3.Editor.Exceptions;
 
 /*
 

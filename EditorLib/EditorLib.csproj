@@ -72,6 +72,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\FileEditorReadException.cs" />
     <Compile Include="FileEditor.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
