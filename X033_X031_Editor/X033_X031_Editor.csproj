@@ -92,8 +92,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="favicon.ico" />
-    <Content Include="julian.ico" />
     <Content Include="pen_penguin.ico" />
     <Content Include="Resources\classEquip.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
