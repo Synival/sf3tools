@@ -5,7 +5,7 @@ namespace SF3.X002_Editor.Models.StatBoost
 {
     public class StatBoost
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int stat;
         private int address;
@@ -15,10 +15,9 @@ namespace SF3.X002_Editor.Models.StatBoost
         private string name;
         private int checkVersion2;
 
-        public StatBoost(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public StatBoost(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
@@ -57,7 +56,7 @@ namespace SF3.X002_Editor.Models.StatBoost
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int StatID => index;
         public string StatName => name;
 

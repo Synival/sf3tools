@@ -8,14 +8,13 @@ namespace SF3.X013_Editor.Models.MagicBonus
 {
     public class MagicBonusList : IModelArray<MagicBonus>
     {
-        public MagicBonusList(IFileEditor fileEditor, ScenarioType scenario)
+        public MagicBonusList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
         }
 
-        private IFileEditor _fileEditor;
-        public ScenarioType Scenario { get; }
+        private ISF3FileEditor _fileEditor;
+        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private MagicBonus[] itemssorted;
         private MagicBonus[] items;
@@ -67,7 +66,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new MagicBonus[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new MagicBonus(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new MagicBonus(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].MagicID] = itemssorted[old.Length];
                     }
                 }

@@ -5,7 +5,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
 {
     public class BattlePointers
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int battlePointer;
         //private readonly int battlePointer2;
@@ -31,10 +31,9 @@ namespace SF3.X1_Editor.Models.BattlePointers
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public BattlePointers(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public BattlePointers(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -136,7 +135,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int BattleID => index;
         public string BattleName => name;
 

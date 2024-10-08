@@ -9,17 +9,16 @@ namespace SF3.IconPointerEditor.Models.Items
 {
     public class ItemList : IModelArray<Item>
     {
-        public ItemList(IFileEditor fileEditor, ScenarioType scenario)
+        public ItemList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Item[] itemssorted;
         private Item[] items;
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private string r = "";
 
@@ -68,7 +67,7 @@ namespace SF3.IconPointerEditor.Models.Items
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Item[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Item(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Item(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].ID] = itemssorted[old.Length];
                         //MessageBox.Show("" + _fileEditor.GetDouble(itemssorted[itemssorted.Length - 1].Address));
                     }

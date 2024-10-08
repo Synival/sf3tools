@@ -5,7 +5,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 {
     public class WeaponLevel
     {
-        IFileEditor _fileEditor;
+        ISF3FileEditor _fileEditor;
 
         //starting stat table
         private int level1;
@@ -21,10 +21,9 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         private int index;
         private string name;
 
-        public WeaponLevel(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public WeaponLevel(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             checkType = _fileEditor.GetByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = _fileEditor.GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
@@ -109,7 +108,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int WeaponLevelID => index;
         public string WeaponLevelName => name;
 

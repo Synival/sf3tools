@@ -25,7 +25,7 @@ namespace SF3.X019_Editor.Forms
 
         private ItemList _itemList;
 
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         public frmMain()
         {
@@ -192,7 +192,7 @@ namespace SF3.X019_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            _itemList = new ItemList(_fileEditor, _scenario);
+            _itemList = new ItemList(_fileEditor);
             if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
@@ -250,7 +250,7 @@ namespace SF3.X019_Editor.Forms
             openfile.Filter = "SF3 data (X019.bin)|X019.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new FileEditor();
+                _fileEditor = new SF3FileEditor(_scenario);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try

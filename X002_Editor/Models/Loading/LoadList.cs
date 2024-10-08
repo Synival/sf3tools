@@ -8,15 +8,14 @@ namespace SF3.X002_Editor.Models.Loading
 {
     public class LoadList : IModelArray<Loading>
     {
-        IFileEditor _fileEditor;
+        ISF3FileEditor _fileEditor;
 
-        public LoadList(IFileEditor fileEditor, ScenarioType scenario)
+        public LoadList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Loading[] itemssorted;
         private Loading[] items;
@@ -68,7 +67,7 @@ namespace SF3.X002_Editor.Models.Loading
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Loading[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Loading(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Loading(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].LoadID] = itemssorted[old.Length];
                     }
                 }

@@ -9,7 +9,7 @@ namespace SF3.IconPointerEditor.Models.Items
 {
     public class Item
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         //SPELLS
         private int theSpellIcon;
@@ -35,10 +35,9 @@ namespace SF3.IconPointerEditor.Models.Items
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Item(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public Item(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -161,7 +160,7 @@ namespace SF3.IconPointerEditor.Models.Items
             //MessageBox.Show("" + address);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int ID => index;
         public string Name => name;
 

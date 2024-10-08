@@ -39,7 +39,7 @@ namespace SF3.X002_Editor.Forms
         private WarpList _warpList;
         private MusicOverrideList _musicOverrideList;
 
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         public frmMain()
         {
@@ -229,59 +229,59 @@ namespace SF3.X002_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            _itemList = new ItemList(_fileEditor, _scenario);
+            _itemList = new ItemList(_fileEditor);
             if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
 
-            _spellList = new SpellList(_fileEditor, _scenario);
+            _spellList = new SpellList(_fileEditor);
             if (!_spellList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellList.xml.");
                 return false;
             }
 
-            _presetList = new PresetList(_fileEditor, _scenario);
+            _presetList = new PresetList(_fileEditor);
             if (!_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
                 return false;
             }
 
-            _loadList = new LoadList(_fileEditor, _scenario);
+            _loadList = new LoadList(_fileEditor);
             if (!_loadList.Load())
             {
                 MessageBox.Show("Could not load Resources/loadList.xml.");
                 return false;
             }
 
-            _statList = new StatList(_fileEditor, _scenario);
+            _statList = new StatList(_fileEditor);
             if (!_statList.Load())
             {
                 MessageBox.Show("Could not load Resources/statList.xml.");
                 return false;
             }
-            _weaponRankList = new WeaponRankList(_fileEditor, _scenario);
+            _weaponRankList = new WeaponRankList(_fileEditor);
             if (!_weaponRankList.Load())
             {
                 MessageBox.Show("Could not load Resources/WeaponRankList.xml.");
                 return false;
             }
-            _attackResistList = new AttackResistList(_fileEditor, _scenario);
+            _attackResistList = new AttackResistList(_fileEditor);
             if (!_attackResistList.Load())
             {
                 MessageBox.Show("Could not load Resources/AttackResistList.xml.");
                 return false;
             }
-            _warpList = new WarpList(_fileEditor, _scenario);
+            _warpList = new WarpList(_fileEditor);
             if (_scenario == ScenarioType.Scenario1 && !_warpList.Load())
             {
                 MessageBox.Show("Could not load Resources/WarpList.xml.");
                 return false;
             }
-            _musicOverrideList = new MusicOverrideList(_fileEditor, _scenario);
+            _musicOverrideList = new MusicOverrideList(_fileEditor);
             if (!_musicOverrideList.Load())
             {
                 MessageBox.Show("Could not load Resources/MusicOverrideList.xml.");
@@ -340,7 +340,7 @@ namespace SF3.X002_Editor.Forms
             openfile.Filter = "SF3 scn3 data (X002.bin)|X002.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new FileEditor();
+                _fileEditor = new SF3FileEditor(_scenario);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try

@@ -8,14 +8,13 @@ namespace SF3.X002_Editor.Models.Presets
 {
     public class PresetList : IModelArray<Preset>
     {
-        public PresetList(IFileEditor fileEditor, ScenarioType scenario)
+        public PresetList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
         }
 
-        private IFileEditor _fileEditor;
-        public ScenarioType Scenario { get; }
+        private ISF3FileEditor _fileEditor;
+        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Preset[] presetssorted;
         private Preset[] presets;
@@ -66,7 +65,7 @@ namespace SF3.X002_Editor.Models.Presets
                         presetssorted.CopyTo(old, 0);
                         presetssorted = new Preset[old.Length + 1];
                         old.CopyTo(presetssorted, 0);
-                        presetssorted[old.Length] = new Preset(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        presetssorted[old.Length] = new Preset(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         presets[presetssorted[old.Length].PresetID] = presetssorted[old.Length];
                     }
                 }

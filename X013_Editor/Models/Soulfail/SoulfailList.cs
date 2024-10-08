@@ -8,14 +8,13 @@ namespace SF3.X013_Editor.Models.Soulfail
 {
     public class SoulfailList : IModelArray<Soulfail>
     {
-        public SoulfailList(IFileEditor fileEditor, ScenarioType scenario)
+        public SoulfailList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
         }
 
-        private IFileEditor _fileEditor;
-        public ScenarioType Scenario { get; }
+        private ISF3FileEditor _fileEditor;
+        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Soulfail[] itemssorted;
         private Soulfail[] items;
@@ -52,7 +51,7 @@ namespace SF3.X013_Editor.Models.Soulfail
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Soulfail[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Soulfail(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Soulfail(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].SoulfailID] = itemssorted[old.Length];
                     }
                 }

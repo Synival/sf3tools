@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.Soulfail
 {
     public class Soulfail
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int expLost;
         private int address;
@@ -14,10 +14,9 @@ namespace SF3.X013_Editor.Models.Soulfail
         private int index;
         private string name;
 
-        public Soulfail(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public Soulfail(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -50,7 +49,7 @@ namespace SF3.X013_Editor.Models.Soulfail
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int SoulfailID => index;
         public string SoulfailName => name;
 

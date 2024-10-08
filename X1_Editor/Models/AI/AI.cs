@@ -6,7 +6,7 @@ namespace SF3.X1_Editor.Models.AI
 {
     public class AI
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int targetX;
         private int targetY;
@@ -18,10 +18,9 @@ namespace SF3.X1_Editor.Models.AI
         private int index;
         private string name;
 
-        public AI(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public AI(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -220,7 +219,7 @@ namespace SF3.X1_Editor.Models.AI
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int AIID => index;
         public string AIName => name;
 

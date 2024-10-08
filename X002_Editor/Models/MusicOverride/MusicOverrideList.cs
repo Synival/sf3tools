@@ -8,17 +8,16 @@ namespace SF3.X002_Editor.Models.MusicOverride
 {
     public class MusicOverrideList : IModelArray<MusicOverride>
     {
-        public MusicOverrideList(IFileEditor fileEditor, ScenarioType scenario)
+        public MusicOverrideList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private MusicOverride[] itemssorted;
         private MusicOverride[] items;
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private string r = "";
 
@@ -67,7 +66,7 @@ namespace SF3.X002_Editor.Models.MusicOverride
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new MusicOverride[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new MusicOverride(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new MusicOverride(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].MusicOverrideID] = itemssorted[old.Length];
                     }
                 }

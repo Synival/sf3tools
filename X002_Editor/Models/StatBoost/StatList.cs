@@ -8,14 +8,13 @@ namespace SF3.X002_Editor.Models.StatBoost
 {
     public class StatList : IModelArray<StatBoost>
     {
-        public StatList(IFileEditor fileEditor, ScenarioType scenario)
+        public StatList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
         }
 
-        private IFileEditor _fileEditor;
-        public ScenarioType Scenario { get; }
+        private ISF3FileEditor _fileEditor;
+        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private StatBoost[] itemssorted;
         private StatBoost[] items;
@@ -52,7 +51,7 @@ namespace SF3.X002_Editor.Models.StatBoost
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new StatBoost[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new StatBoost(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new StatBoost(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].StatID] = itemssorted[old.Length];
                     }
                 }

@@ -8,14 +8,13 @@ namespace SF3.X013_Editor.Models.HealExp
 {
     public class HealExpList : IModelArray<HealExp>
     {
-        public HealExpList(IFileEditor fileEditor, ScenarioType scenario)
+        public HealExpList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
         }
 
-        private IFileEditor _fileEditor;
-        public ScenarioType Scenario { get; }
+        private ISF3FileEditor _fileEditor;
+        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private HealExp[] itemssorted;
         private HealExp[] items;
@@ -52,7 +51,7 @@ namespace SF3.X013_Editor.Models.HealExp
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new HealExp[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new HealExp(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new HealExp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].HealExpID] = itemssorted[old.Length];
                     }
                 }

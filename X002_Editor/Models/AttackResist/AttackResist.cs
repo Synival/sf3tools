@@ -5,7 +5,7 @@ namespace SF3.X002_Editor.Models.AttackResist
 {
     public class AttackResist
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int attack;
         private int resist;
@@ -16,10 +16,9 @@ namespace SF3.X002_Editor.Models.AttackResist
         private int index;
         private string name;
 
-        public AttackResist(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public AttackResist(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
@@ -61,7 +60,7 @@ namespace SF3.X002_Editor.Models.AttackResist
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int AttackResistID => index;
         public string AttackResistName => name;
 

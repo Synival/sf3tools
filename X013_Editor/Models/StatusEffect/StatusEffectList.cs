@@ -10,14 +10,13 @@ namespace SF3.X013_Editor.Models.StatusEffects
 {
     public class StatusEffectList : IModelArray<StatusEffect>
     {
-        public StatusEffectList(IFileEditor fileEditor, ScenarioType scenario)
+        public StatusEffectList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
         }
 
-        private IFileEditor _fileEditor;
-        public ScenarioType Scenario { get; }
+        private ISF3FileEditor _fileEditor;
+        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private StatusEffect[] itemssorted;
         private StatusEffect[] items;
@@ -65,7 +64,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
                             itemssorted.CopyTo(old, 0);
                             itemssorted = new StatusEffect[old.Length + 1];
                             old.CopyTo(itemssorted, 0);
-                            itemssorted[old.Length] = new StatusEffect(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                            itemssorted[old.Length] = new StatusEffect(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
 
                             items[itemssorted[old.Length].StatusEffectID] = itemssorted[old.Length];
                         }

@@ -25,7 +25,7 @@ namespace SF3.IconPointerEditor.Forms
         private ItemList _itemList;
         private PresetList _presetList;
 
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         public frmMain()
         {
@@ -192,7 +192,7 @@ namespace SF3.IconPointerEditor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            _itemList = new ItemList(_fileEditor, _scenario);
+            _itemList = new ItemList(_fileEditor);
             if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
@@ -204,7 +204,7 @@ namespace SF3.IconPointerEditor.Forms
                 return false;
             }*/
 
-            _presetList = new PresetList(_fileEditor, _scenario);
+            _presetList = new PresetList(_fileEditor);
             if (!_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
@@ -245,7 +245,7 @@ namespace SF3.IconPointerEditor.Forms
             openfile.Filter = "SF3 data (X011*.bin)|X011*.bin|SF3 data (X021*.bin)|X021*.bin|SF3 data (X026*.bin)|X026*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new FileEditor();
+                _fileEditor = new SF3FileEditor(_scenario);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try

@@ -43,7 +43,7 @@ namespace SF3.X033_X031_Editor.Forms
         private InitialInfoList _initialInfoList;
         private WeaponLevelList _weaponLevelList;
 
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         public class StatDataPoint
         {
@@ -235,7 +235,7 @@ namespace SF3.X033_X031_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            _statsList = new StatsList(_fileEditor, _scenario);
+            _statsList = new StatsList(_fileEditor);
             if (!_statsList.Load())
             {
                 MessageBox.Show("Could not load Resources/classList.xml.");
@@ -248,14 +248,14 @@ namespace SF3.X033_X031_Editor.Forms
                 return false;
             }*/
 
-            _initialInfoList = new InitialInfoList(_fileEditor, _scenario);
+            _initialInfoList = new InitialInfoList(_fileEditor);
             if (!_initialInfoList.Load())
             {
                 MessageBox.Show("Could not load Resources/classEquip.xml.");
                 return false;
             }
 
-            _weaponLevelList = new WeaponLevelList(_fileEditor, _scenario);
+            _weaponLevelList = new WeaponLevelList(_fileEditor);
             if (!_weaponLevelList.Load())
             {
                 MessageBox.Show("Could not load Resources/WeaponLevel.xml.");
@@ -311,7 +311,7 @@ namespace SF3.X033_X031_Editor.Forms
             openfile.Filter = "SF3 data (X033.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new FileEditor();
+                _fileEditor = new SF3FileEditor(_scenario);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try

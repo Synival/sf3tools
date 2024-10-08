@@ -6,7 +6,7 @@ namespace SF3.X1_Editor.Models.CustomMovement
 {
     public class CustomMovement
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int unknown00;
         private int xPos1;
@@ -26,10 +26,9 @@ namespace SF3.X1_Editor.Models.CustomMovement
         private int index;
         private string name;
 
-        public CustomMovement(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public CustomMovement(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -246,7 +245,7 @@ namespace SF3.X1_Editor.Models.CustomMovement
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int CustomMovementID => index;
         public string CustomMovementName => name;
 

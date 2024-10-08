@@ -5,7 +5,7 @@ namespace SF3.X019_Editor.Models.Items
 {
     public class Item
     {
-        IFileEditor _fileEditor;
+        ISF3FileEditor _fileEditor;
 
         private int maxHP;
         private int maxMP;
@@ -82,10 +82,9 @@ namespace SF3.X019_Editor.Models.Items
         private int index;
         private string name;
 
-        public Item(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public Item(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -190,7 +189,7 @@ namespace SF3.X019_Editor.Models.Items
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int ID => index;
         public string Name => name;
 

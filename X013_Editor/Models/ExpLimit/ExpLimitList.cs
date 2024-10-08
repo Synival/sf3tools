@@ -8,14 +8,13 @@ namespace SF3.X013_Editor.Models.ExpLimit
 {
     public class ExpLimitList : IModelArray<ExpLimit>
     {
-        public ExpLimitList(IFileEditor fileEditor, ScenarioType scenario)
+        public ExpLimitList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
         }
 
-        private IFileEditor _fileEditor;
-        public ScenarioType Scenario { get; }
+        private ISF3FileEditor _fileEditor;
+        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private ExpLimit[] itemssorted;
         private ExpLimit[] items;
@@ -52,7 +51,7 @@ namespace SF3.X013_Editor.Models.ExpLimit
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new ExpLimit[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new ExpLimit(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new ExpLimit(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].ExpLimitID] = itemssorted[old.Length];
                     }
                 }

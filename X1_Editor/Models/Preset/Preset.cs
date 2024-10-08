@@ -6,7 +6,7 @@ namespace SF3.X1_Editor.Models.Presets
 {
     public class Preset
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int unknown1;
         private int tableSize;
@@ -27,10 +27,9 @@ namespace SF3.X1_Editor.Models.Presets
         private string name;
         private int sub;
 
-        public Preset(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public Preset(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -200,7 +199,7 @@ namespace SF3.X1_Editor.Models.Presets
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int SizeID => index;
         public string SizeName => name;
 

@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.Stats
 {
     public class Stat
     {
-        IFileEditor _fileEditor;
+        ISF3FileEditor _fileEditor;
 
         private int sLvlStat1;
         private int sLvlStat2;
@@ -17,10 +17,9 @@ namespace SF3.X013_Editor.Models.Stats
         private int index;
         private string name;
 
-        public Stat(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public Stat(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -56,7 +55,7 @@ namespace SF3.X013_Editor.Models.Stats
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int StatID => index;
         public string StatName => name;
 

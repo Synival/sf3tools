@@ -7,7 +7,7 @@ namespace SF3.X1_Editor.Models.Tiles
 {
     public class Tile
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int noEntry;
         private int unknown01;
@@ -35,10 +35,9 @@ namespace SF3.X1_Editor.Models.Tiles
         private string name;
         private int sub;
 
-        public Tile(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public Tile(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario2)
             {
@@ -181,7 +180,7 @@ namespace SF3.X1_Editor.Models.Tiles
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int TileID => index;
         public string TileName => name;
 

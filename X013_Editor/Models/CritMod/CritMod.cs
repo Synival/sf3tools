@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.CritMod
 {
     public class CritMod
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int advantage;
         private int disadvantage;
@@ -15,10 +15,9 @@ namespace SF3.X013_Editor.Models.CritMod
         private int index;
         private string name;
 
-        public CritMod(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public CritMod(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -52,7 +51,7 @@ namespace SF3.X013_Editor.Models.CritMod
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int CritModID => index;
         public string CritModName => name;
 

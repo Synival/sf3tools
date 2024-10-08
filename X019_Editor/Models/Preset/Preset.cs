@@ -5,7 +5,7 @@ namespace SF3.X019_Editor.Models.Presets
 {
     public class Preset
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int spell;
         private int weaponLv0;
@@ -18,10 +18,9 @@ namespace SF3.X019_Editor.Models.Presets
         private int index;
         private string name;
 
-        public Preset(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public Preset(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -58,7 +57,7 @@ namespace SF3.X019_Editor.Models.Presets
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int PresetID => index;
         public string PresetName => name;
 

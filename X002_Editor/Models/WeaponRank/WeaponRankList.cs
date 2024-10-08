@@ -8,14 +8,13 @@ namespace SF3.X002_Editor.Models.WeaponRank
 {
     public class WeaponRankList : IModelArray<WeaponRank>
     {
-        public WeaponRankList(IFileEditor fileEditor, ScenarioType scenario)
+        public WeaponRankList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
         }
 
-        private IFileEditor _fileEditor;
-        public ScenarioType Scenario { get; }
+        private ISF3FileEditor _fileEditor;
+        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private WeaponRank[] itemssorted;
         private WeaponRank[] items;
@@ -52,7 +51,7 @@ namespace SF3.X002_Editor.Models.WeaponRank
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new WeaponRank[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new WeaponRank(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new WeaponRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].WeaponRankID] = itemssorted[old.Length];
                     }
                 }

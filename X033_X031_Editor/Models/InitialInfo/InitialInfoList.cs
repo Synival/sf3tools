@@ -11,15 +11,14 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 {
     public class InitialInfoList : IModelArray<InitialInfo>
     {
-        IFileEditor _fileEditor;
+        ISF3FileEditor _fileEditor;
 
-        public InitialInfoList(IFileEditor fileEditor, ScenarioType scenario)
+        public InitialInfoList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private InitialInfo[] modelsSorted;
         private InitialInfo[] models;
@@ -70,7 +69,7 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
                         modelsSorted.CopyTo(old, 0);
                         modelsSorted = new InitialInfo[old.Length + 1];
                         old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new InitialInfo(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        modelsSorted[old.Length] = new InitialInfo(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         models[modelsSorted[old.Length].PresetID] = modelsSorted[old.Length];
                     }
                 }

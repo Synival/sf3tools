@@ -7,7 +7,7 @@ namespace SF3.X002_Editor.Models.Warps
 {
     public class Warp
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int unknown1;
         private int unknown2;
@@ -34,10 +34,9 @@ namespace SF3.X002_Editor.Models.Warps
 
         public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Warp(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public Warp(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             //no scn1 for this
 
@@ -62,7 +61,7 @@ namespace SF3.X002_Editor.Models.Warps
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int WarpID => index;
         public string WarpName => name;
 

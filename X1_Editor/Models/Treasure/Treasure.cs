@@ -7,7 +7,7 @@ namespace SF3.X1_Editor.Models.Treasures
 {
     public class Treasure
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int searched;
         private int eventNumber;
@@ -36,10 +36,9 @@ namespace SF3.X1_Editor.Models.Treasures
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Treasure(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public Treasure(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -101,7 +100,7 @@ namespace SF3.X1_Editor.Models.Treasures
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int TreasureID => index;
         public string TreasureName => name;
 

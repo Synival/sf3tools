@@ -5,7 +5,7 @@ namespace SF3.X002_Editor.Models.Loading
 {
     public class Loading
     {
-        IFileEditor _fileEditor;
+        ISF3FileEditor _fileEditor;
 
         private int locationID;
         private int x1;
@@ -22,10 +22,9 @@ namespace SF3.X002_Editor.Models.Loading
         private int index;
         private string name;
 
-        public Loading(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public Loading(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
@@ -71,7 +70,7 @@ namespace SF3.X002_Editor.Models.Loading
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int LoadID => index;
         public string LoadName => name;
 

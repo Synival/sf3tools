@@ -5,7 +5,7 @@ namespace SF3.X002_Editor.Models.WeaponRank
 {
     public class WeaponRank
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int skill0;
         private int skill1;
@@ -18,10 +18,9 @@ namespace SF3.X002_Editor.Models.WeaponRank
         private int index;
         private string name;
 
-        public WeaponRank(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public WeaponRank(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
@@ -64,7 +63,7 @@ namespace SF3.X002_Editor.Models.WeaponRank
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int WeaponRankID => index;
         public string WeaponRankName => name;
 

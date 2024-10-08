@@ -7,7 +7,7 @@ namespace SF3.X1_Editor.Models.Npcs
 {
     public class Npc
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int spriteID;
         private int unknown1;
@@ -41,10 +41,9 @@ namespace SF3.X1_Editor.Models.Npcs
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Npc(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public Npc(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -111,7 +110,7 @@ namespace SF3.X1_Editor.Models.Npcs
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int NpcID => index;
         public string NpcName => name;
 

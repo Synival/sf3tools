@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.ExpLimit
 {
     public class ExpLimit
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int expCheck;
         private int expReplacement;
@@ -15,10 +15,9 @@ namespace SF3.X013_Editor.Models.ExpLimit
         private int index;
         private string name;
 
-        public ExpLimit(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public ExpLimit(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -52,7 +51,7 @@ namespace SF3.X013_Editor.Models.ExpLimit
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int ExpLimitID => index;
         public string ExpLimitName => name;
 

@@ -17,7 +17,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
             Promotion2 = 2,
         }
 
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         //starting stat table
         private int character;
@@ -150,10 +150,9 @@ namespace SF3.X033_X031_Editor.Models.Stats
         private int index;
         private string name;
 
-        public Stats(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public Stats(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
             checkType = _fileEditor.GetByte(0x00000009); //if it's 0x07 we're in a x033.bin
             checkVersion2 = _fileEditor.GetByte(0x000000017); //to determine which version of scn2 we are using 
             //X031.BIN is during combat
@@ -354,7 +353,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public bool IsPromoted => _fileEditor.GetByte((int)characterClass) >= 0x20;
 
         public PromotionLevelType PromotionLevel

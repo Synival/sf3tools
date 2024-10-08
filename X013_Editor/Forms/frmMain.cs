@@ -49,7 +49,7 @@ namespace SF3.X013_Editor.Forms
         private WeaponSpellRankList _weaponSpellRankList;
         private StatusEffectList _statusEffectList;
 
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         public frmMain()
         {
@@ -263,94 +263,94 @@ namespace SF3.X013_Editor.Forms
                 return false;
             }*/
 
-            _itemList = new ItemList(_fileEditor, _scenario);
+            _itemList = new ItemList(_fileEditor);
             if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
 
-            _spellList = new SpellList(_fileEditor, _scenario);
+            _spellList = new SpellList(_fileEditor);
             if (!_spellList.Load())
             {
                 MessageBox.Show("Could not load Resources/characters.xml.");
                 return false;
             }
 
-            _presetList = new PresetList(_fileEditor, _scenario);
+            _presetList = new PresetList(_fileEditor);
             if (!_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/ExpList.xml.");
                 return false;
             }
 
-            _statsList = new StatsList(_fileEditor, _scenario);
+            _statsList = new StatsList(_fileEditor);
             if (!_statsList.Load())
             {
                 MessageBox.Show("Could not load Resources/StatList.xml.");
                 return false;
             }
 
-            _soulmateList = new SoulmateList(_fileEditor, _scenario);
+            _soulmateList = new SoulmateList(_fileEditor);
             if (!_soulmateList.Load())
             {
                 MessageBox.Show("Could not load Resources/SoulmateList.xml.");
                 return false;
             }
 
-            _soulfailList = new SoulfailList(_fileEditor, _scenario);
+            _soulfailList = new SoulfailList(_fileEditor);
             if (!_soulfailList.Load())
             {
                 MessageBox.Show("Could not load Resources/Soulfail.xml.");
                 return false;
             }
 
-            _magicBonusList = new MagicBonusList(_fileEditor, _scenario);
+            _magicBonusList = new MagicBonusList(_fileEditor);
             if (!_magicBonusList.Load())
             {
                 MessageBox.Show("Could not load Resources/MagicBonus.xml.");
                 return false;
             }
 
-            _critModList = new CritModList(_fileEditor, _scenario);
+            _critModList = new CritModList(_fileEditor);
             if (!_critModList.Load())
             {
                 MessageBox.Show("Could not load Resources/CritModList.xml.");
                 return false;
             }
 
-            _critrateList = new CritrateList(_fileEditor, _scenario);
+            _critrateList = new CritrateList(_fileEditor);
             if (!_critrateList.Load())
             {
                 MessageBox.Show("Could not load Resources/CritrateList.xml.");
                 return false;
             }
 
-            _specialChanceList = new SpecialChanceList(_fileEditor, _scenario);
+            _specialChanceList = new SpecialChanceList(_fileEditor);
             if (!_specialChanceList.Load())
             {
                 MessageBox.Show("Could not load Resources/SpecialChanceList.xml.");
                 return false;
             }
-            _expLimitList = new ExpLimitList(_fileEditor, _scenario);
+            _expLimitList = new ExpLimitList(_fileEditor);
             if (!_expLimitList.Load())
             {
                 MessageBox.Show("Could not load Resources/ExpLimitList.xml.");
                 return false;
             }
-            _healExpList = new HealExpList(_fileEditor, _scenario);
+            _healExpList = new HealExpList(_fileEditor);
             if (!_healExpList.Load())
             {
                 MessageBox.Show("Could not load Resources/HealExpList.xml.");
                 return false;
             }
-            _weaponSpellRankList = new WeaponSpellRankList(_fileEditor, _scenario);
+            _weaponSpellRankList = new WeaponSpellRankList(_fileEditor);
             if (!_weaponSpellRankList.Load())
             {
                 MessageBox.Show("Could not load Resources/WeaponSpellRankListList.xml.");
                 return false;
             }
-            _statusEffectList = new StatusEffectList(_fileEditor, _scenario);
+            _statusEffectList = new StatusEffectList(_fileEditor);
             if (!_statusEffectList.Load())
             {
                 MessageBox.Show("Could not load Resources/StatusGroupList.xml.");
@@ -414,7 +414,7 @@ namespace SF3.X013_Editor.Forms
             openfile.Filter = "SF3 scn3 data (X013.bin)|X013.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new FileEditor();
+                _fileEditor = new SF3FileEditor(_scenario);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try

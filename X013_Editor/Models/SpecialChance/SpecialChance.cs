@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
 {
     public class SpecialChance
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int twoSpecials2;
         private int threeSpecials3;
@@ -20,10 +20,9 @@ namespace SF3.X013_Editor.Models.SpecialChance
         private int index;
         private string name;
 
-        public SpecialChance(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public SpecialChance(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -102,7 +101,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int SpecialChanceID => index;
         public string SpecialChanceName => name;
 

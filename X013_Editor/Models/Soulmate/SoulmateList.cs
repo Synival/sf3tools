@@ -8,14 +8,13 @@ namespace SF3.X013_Editor.Models.Soulmate
 {
     public class SoulmateList : IModelArray<Soulmate>
     {
-        public SoulmateList(IFileEditor fileEditor, ScenarioType scenario)
+        public SoulmateList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
         }
 
-        private IFileEditor _fileEditor;
-        public ScenarioType Scenario { get; }
+        private ISF3FileEditor _fileEditor;
+        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Soulmate[] itemssorted;
         private Soulmate[] items;
@@ -52,7 +51,7 @@ namespace SF3.X013_Editor.Models.Soulmate
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new Soulmate[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Soulmate(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new Soulmate(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].SoulmateID] = itemssorted[old.Length];
                     }
                 }

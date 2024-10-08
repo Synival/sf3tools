@@ -6,7 +6,7 @@ namespace SF3.IconPointerEditor.Models.Presets
 {
     public class Preset
     {
-        IFileEditor _fileEditor;
+        ISF3FileEditor _fileEditor;
 
         //ITEMS
         private int theItemIcon;
@@ -18,10 +18,9 @@ namespace SF3.IconPointerEditor.Models.Presets
         private string name;
         private int sub;
 
-        public Preset(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public Preset(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -137,7 +136,7 @@ namespace SF3.IconPointerEditor.Models.Presets
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int SizeID => index;
         public string SizeName => name;
 

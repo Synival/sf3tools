@@ -6,7 +6,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
 {
     public class UnknownAI
     {
-        private IFileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int unknown00;
         private int unknown02;
@@ -39,10 +39,9 @@ namespace SF3.X1_Editor.Models.UnknownAI
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public UnknownAI(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
+        public UnknownAI(ISF3FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
-            Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -237,7 +236,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => _fileEditor.Scenario;
         public int UnknownAIID => index;
         public string UnknownAIName => name;
 
