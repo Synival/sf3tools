@@ -24,5 +24,22 @@ namespace SF3
         /// <param name="filename">The file to load.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
         bool SaveFile(string filename);
+
+        /// <summary>
+        /// Returns the value of a single bit of a byte at a location.
+        /// </summary>
+        /// <param name="location">The address of the byte containing the bit.</param>
+        /// <param name="bit">The position of the bit, in range (0, 7).</param>
+        /// <returns>True if the bit is set, false if the bit is unset.</returns>
+        bool GetBit(int location, int bit);
+
+        /// <summary>
+        /// Sets the value of a single bit of a byte at a location.
+        /// </summary>
+        /// <param name="location">The address of the byte containing the bit.</param>
+        /// <param name="bit">The position of the bit, in range (0, 7).</param>
+        /// <param name="value">The new value of the bit.</param>
+        void SetBit(int location, int bit, bool value);
+
     }
 }

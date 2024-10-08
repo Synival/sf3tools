@@ -229,7 +229,7 @@ namespace SF3.X002_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            _itemList = new ItemList(_scenario);
+            _itemList = new ItemList(_fileEditor, _scenario);
             if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");

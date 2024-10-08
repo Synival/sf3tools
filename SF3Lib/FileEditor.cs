@@ -212,7 +212,14 @@ namespace SF3
                 }
             }
         }
-        public static bool GetBit(int location, int bit)
+
+        /// <summary>
+        /// Returns the value of a single bit of a byte at a location.
+        /// </summary>
+        /// <param name="location">The address of the byte containing the bit.</param>
+        /// <param name="bit">The position of the bit, in range (0, 7).</param>
+        /// <returns>True if the bit is set, false if the bit is unset.</returns>
+        public bool GetBit(int location, int bit)
         {
             if (data == null)
             {
@@ -221,7 +228,14 @@ namespace SF3
 
             return ((data[location] >> (bit - 1) & 0x01) == 1) ? true : false;
         }
-        public static void SetBit(int location, int bit, bool value)
+
+        /// <summary>
+        /// Sets the value of a single bit of a byte at a location.
+        /// </summary>
+        /// <param name="location">The address of the byte containing the bit.</param>
+        /// <param name="bit">The position of the bit, in range (0, 7).</param>
+        /// <param name="value">The new value of the bit.</param>
+        public void SetBit(int location, int bit, bool value)
         {
             if (data == null)
             {

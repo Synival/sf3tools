@@ -6,6 +6,8 @@ namespace SF3.X002_Editor.Models.Items
 {
     public class Item
     {
+        private IFileEditor _fileEditor;
+
         private int PriceLocation;
         private int WeaponTypeLocation;
         private int EffectsEquipLocation;
@@ -36,8 +38,9 @@ namespace SF3.X002_Editor.Models.Items
         private int index;
         private string name;
 
-        public Item(ScenarioType scenario, int id, string text)
+        public Item(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             checkVersion2 = FileEditor.GetByte(0x0000000B);
@@ -121,44 +124,44 @@ namespace SF3.X002_Editor.Models.Items
 
         public bool Cursed
         {
-            get => FileEditor.GetBit(EffectsEquipLocation, 1);
-            set => FileEditor.SetBit(EffectsEquipLocation, 1, value);
+            get => _fileEditor.GetBit(EffectsEquipLocation, 1);
+            set => _fileEditor.SetBit(EffectsEquipLocation, 1, value);
         }
 
         public bool CanCrack
         {
-            get => FileEditor.GetBit(EffectsEquipLocation, 2);
-            set => FileEditor.SetBit(EffectsEquipLocation, 2, value);
+            get => _fileEditor.GetBit(EffectsEquipLocation, 2);
+            set => _fileEditor.SetBit(EffectsEquipLocation, 2, value);
         }
 
         public bool HealingItem
         {
-            get => FileEditor.GetBit(EffectsEquipLocation, 3);
-            set => FileEditor.SetBit(EffectsEquipLocation, 3, value);
+            get => _fileEditor.GetBit(EffectsEquipLocation, 3);
+            set => _fileEditor.SetBit(EffectsEquipLocation, 3, value);
         }
 
         public bool CannotUnequip
         {
-            get => FileEditor.GetBit(EffectsEquipLocation, 4);
-            set => FileEditor.SetBit(EffectsEquipLocation, 4, value);
+            get => _fileEditor.GetBit(EffectsEquipLocation, 4);
+            set => _fileEditor.SetBit(EffectsEquipLocation, 4, value);
         }
 
         public bool Rare
         {
-            get => FileEditor.GetBit(EffectsEquipLocation, 5);
-            set => FileEditor.SetBit(EffectsEquipLocation, 5, value);
+            get => _fileEditor.GetBit(EffectsEquipLocation, 5);
+            set => _fileEditor.SetBit(EffectsEquipLocation, 5, value);
         }
 
         public bool FakeRare //shows rare message when selling, but does not add to deals
         {
-            get => FileEditor.GetBit(EffectsEquipLocation, 6);
-            set => FileEditor.SetBit(EffectsEquipLocation, 6, value);
+            get => _fileEditor.GetBit(EffectsEquipLocation, 6);
+            set => _fileEditor.SetBit(EffectsEquipLocation, 6, value);
         }
 
         public bool HealingItem2 //higher tier healing has this
         {
-            get => FileEditor.GetBit(EffectsEquipLocation, 7);
-            set => FileEditor.SetBit(EffectsEquipLocation, 7, value);
+            get => _fileEditor.GetBit(EffectsEquipLocation, 7);
+            set => _fileEditor.SetBit(EffectsEquipLocation, 7, value);
         }
 
         public int Requirements
@@ -169,32 +172,32 @@ namespace SF3.X002_Editor.Models.Items
 
         public bool RequiredPromo
         {
-            get => FileEditor.GetBit(RequirementLocation, 1);
-            set => FileEditor.SetBit(RequirementLocation, 1, value);
+            get => _fileEditor.GetBit(RequirementLocation, 1);
+            set => _fileEditor.SetBit(RequirementLocation, 1, value);
         }
 
         public bool RequiredPromo2 //apostle of light
         {
-            get => FileEditor.GetBit(RequirementLocation, 2);
-            set => FileEditor.SetBit(RequirementLocation, 2, value);
+            get => _fileEditor.GetBit(RequirementLocation, 2);
+            set => _fileEditor.SetBit(RequirementLocation, 2, value);
         }
 
         public bool RequiredHero //Synbios, Medion, Julian, Gracia, Cyclops
         {
-            get => FileEditor.GetBit(RequirementLocation, 3);
-            set => FileEditor.SetBit(RequirementLocation, 3, value);
+            get => _fileEditor.GetBit(RequirementLocation, 3);
+            set => _fileEditor.SetBit(RequirementLocation, 3, value);
         }
 
         public bool RequiredMale
         {
-            get => FileEditor.GetBit(RequirementLocation, 4);
-            set => FileEditor.SetBit(RequirementLocation, 4, value);
+            get => _fileEditor.GetBit(RequirementLocation, 4);
+            set => _fileEditor.SetBit(RequirementLocation, 4, value);
         }
 
         public bool RequiredFemale
         {
-            get => FileEditor.GetBit(RequirementLocation, 5);
-            set => FileEditor.SetBit(RequirementLocation, 5, value);
+            get => _fileEditor.GetBit(RequirementLocation, 5);
+            set => _fileEditor.SetBit(RequirementLocation, 5, value);
         }
 
 
