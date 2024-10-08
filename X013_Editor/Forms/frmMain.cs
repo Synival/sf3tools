@@ -22,6 +22,7 @@ using BrightIdeasSoftware;
 using SF3.Editor;
 using SF3.Types;
 using SF3.Editor.Exceptions;
+using System.Diagnostics;
 
 /*
 
@@ -50,6 +51,8 @@ namespace SF3.X013_Editor.Forms
         private HealExpList _healExpList;
         private WeaponSpellRankList _weaponSpellRankList;
         private StatusEffectList _statusEffectList;
+
+        private FileEditor _fileEditor;
 
         public frmMain()
         {
@@ -414,7 +417,8 @@ namespace SF3.X013_Editor.Forms
             openfile.Filter = "SF3 scn3 data (X013.bin)|X013.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                if (FileEditor.LoadFile(openfile.FileName))
+                _fileEditor = new FileEditor();
+                if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {

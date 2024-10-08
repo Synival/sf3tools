@@ -47,6 +47,8 @@ namespace SF3.X1_Editor.Forms
         private EnterList _enterList;
         private ArrowList _arrowList;
 
+        private FileEditor _fileEditor;
+
         public frmMain()
         {
             InitializeComponent();
@@ -506,7 +508,8 @@ namespace SF3.X1_Editor.Forms
             openfile.Filter = "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                if (FileEditor.LoadFile(openfile.FileName))
+                _fileEditor = new FileEditor();
+                if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {

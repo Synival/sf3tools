@@ -11,7 +11,7 @@ namespace SF3.Editor
         private static byte[] data;
         public static string Filename;
 
-        public static bool LoadFile(string filename)
+        public bool LoadFile(string filename)
         {
             try
             {
