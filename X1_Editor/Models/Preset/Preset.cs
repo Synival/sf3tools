@@ -6,6 +6,8 @@ namespace SF3.X1_Editor.Models.Presets
 {
     public class Preset
     {
+        private IFileEditor _fileEditor;
+
         private int unknown1;
         private int tableSize;
         private int unknown2;
@@ -25,19 +27,20 @@ namespace SF3.X1_Editor.Models.Presets
         private string name;
         private int sub;
 
-        public Preset(ScenarioType scenario, int id, string text)
+        public Preset(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
 
                 if (offset != 0)
                 {
@@ -48,21 +51,21 @@ namespace SF3.X1_Editor.Models.Presets
                     Globals.map = 0;
                     offset = 0x00000018; //scn1 initial pointer
                     sub = 0x0605f000;
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
                 }
 
                 /*
                 offset = 0x00000018; //scn1 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.GetDouble(offset);
+                npcOffset = _fileEditor.GetDouble(offset);
                 sub = 0x0605f000;
                 offset = npcOffset - sub; //second pointer
-                npcOffset = FileEditor.GetDouble(offset);
+                npcOffset = _fileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -71,12 +74,12 @@ namespace SF3.X1_Editor.Models.Presets
             {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -86,20 +89,20 @@ namespace SF3.X1_Editor.Models.Presets
                     Globals.map = 4;
                     offset = 0x00000024; //scn2 initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
                 }
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.GetDouble(offset);
+                npcOffset = _fileEditor.GetDouble(offset);
                 sub = 0x0605e000;
                 offset = npcOffset - sub + 4; //second pointer
-                npcOffset = FileEditor.GetDouble(offset);
+                npcOffset = _fileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -108,12 +111,12 @@ namespace SF3.X1_Editor.Models.Presets
             {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
 
                 if (offset != 0)
                 {
@@ -124,11 +127,11 @@ namespace SF3.X1_Editor.Models.Presets
                     Globals.map = 8;
                     offset = 0x00000024; //scn3 initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
                 }
             }
@@ -136,11 +139,11 @@ namespace SF3.X1_Editor.Models.Presets
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -150,11 +153,11 @@ namespace SF3.X1_Editor.Models.Presets
                     Globals.map = 0;
                     offset = 0x00000024; //pd initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
                 }
             }
@@ -162,11 +165,11 @@ namespace SF3.X1_Editor.Models.Presets
             {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //third pointer
             }
 

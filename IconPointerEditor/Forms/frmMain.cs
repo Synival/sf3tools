@@ -192,7 +192,7 @@ namespace SF3.IconPointerEditor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            _itemList = new ItemList(_scenario);
+            _itemList = new ItemList(_fileEditor, _scenario);
             if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
@@ -204,7 +204,7 @@ namespace SF3.IconPointerEditor.Forms
                 return false;
             }*/
 
-            _presetList = new PresetList(_scenario);
+            _presetList = new PresetList(_fileEditor, _scenario);
             if (!_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");

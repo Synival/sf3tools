@@ -8,8 +8,9 @@ namespace SF3.X1_Editor.Models.UnknownAI
 {
     public class UnknownAIList : IModelArray<UnknownAI>
     {
-        public UnknownAIList(ScenarioType scenario)
+        public UnknownAIList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
@@ -17,6 +18,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
 
         private UnknownAI[] itemssorted;
         private UnknownAI[] items;
+        private IFileEditor _fileEditor;
 
         private string r = "";
 
@@ -50,7 +52,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
                         itemssorted.CopyTo(old, 0);
                         itemssorted = new UnknownAI[old.Length + 1];
                         old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new UnknownAI(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        itemssorted[old.Length] = new UnknownAI(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].UnknownAIID] = itemssorted[old.Length];
                     }
                 }

@@ -8,8 +8,9 @@ namespace SF3.X1_Editor.Models.AI
 {
     public class AIList : IModelArray<AI>
     {
-        public AIList(ScenarioType scenario)
+        public AIList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
@@ -17,6 +18,7 @@ namespace SF3.X1_Editor.Models.AI
 
         private AI[] spellssorted;
         private AI[] spells;
+        private IFileEditor _fileEditor;
 
         private string r = "";
 
@@ -70,7 +72,7 @@ namespace SF3.X1_Editor.Models.AI
                         spellssorted.CopyTo(old, 0);
                         spellssorted = new AI[old.Length + 1];
                         old.CopyTo(spellssorted, 0);
-                        spellssorted[old.Length] = new AI(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        spellssorted[old.Length] = new AI(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         spells[spellssorted[old.Length].AIID] = spellssorted[old.Length];
                     }
                 }

@@ -7,6 +7,8 @@ namespace SF3.X1_Editor.Models.Npcs
 {
     public class Npc
     {
+        private IFileEditor _fileEditor;
+
         private int spriteID;
         private int unknown1;
         private int table;
@@ -31,23 +33,24 @@ namespace SF3.X1_Editor.Models.Npcs
 
         /*public int NPCTableAddress1
         {
-            get => FileEditor.GetDouble(npcOffset);
-            set => FileEditor.SetDouble(npcOffset, value);
+            get => _fileEditor.GetDouble(npcOffset);
+            set => _fileEditor.SetDouble(npcOffset, value);
         }
 
-        public int NPCTableAddress2 => FileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
+        public int NPCTableAddress2 => _fileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
 
-        public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
+        public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Npc(ScenarioType scenario, int id, string text)
+        public Npc(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
 
                 offset = offset - sub;
             }
@@ -55,28 +58,28 @@ namespace SF3.X1_Editor.Models.Npcs
             {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }/*
             else if (Scenario == ScenarioType.BTL99)
             {
                 offset = 0x00000024; //btl99 initial pointer
                 sub = 0x06060000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }*/
 
@@ -146,8 +149,8 @@ namespace SF3.X1_Editor.Models.Npcs
 
         public int NpcTable
         {
-            get => FileEditor.GetDouble(table);
-            set => FileEditor.SetDouble(table, value);
+            get => _fileEditor.GetDouble(table);
+            set => _fileEditor.SetDouble(table, value);
         }
 
         public int NpcXPos

@@ -9,8 +9,9 @@ namespace SF3.X1_Editor.Models.Npcs
 {
     public class NpcList : IModelArray<Npc>
     {
-        public NpcList(ScenarioType scenario)
+        public NpcList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
@@ -18,6 +19,7 @@ namespace SF3.X1_Editor.Models.Npcs
 
         private Npc[] itemssorted;
         private Npc[] items;
+        private IFileEditor _fileEditor;
 
         private string r = "";
 
@@ -87,7 +89,7 @@ namespace SF3.X1_Editor.Models.Npcs
                                 itemssorted.CopyTo(old, 0);
                                 itemssorted = new Npc[old.Length + 1];
                                 old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Npc(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                itemssorted[old.Length] = new Npc(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 items[itemssorted[old.Length].NpcID] = itemssorted[old.Length];
                                 if (itemssorted[itemssorted.Length - 1].SpriteID == 0xffff)
                                 {

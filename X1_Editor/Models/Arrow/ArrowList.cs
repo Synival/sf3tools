@@ -9,8 +9,11 @@ namespace SF3.X1_Editor.Models.Arrows
 {
     public class ArrowList : IModelArray<Arrow>
     {
-        public ArrowList(ScenarioType scenario)
+        private IFileEditor _fileEditor;
+
+        public ArrowList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
@@ -87,7 +90,7 @@ namespace SF3.X1_Editor.Models.Arrows
                                 itemssorted.CopyTo(old, 0);
                                 itemssorted = new Arrow[old.Length + 1];
                                 old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Arrow(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                itemssorted[old.Length] = new Arrow(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 items[itemssorted[old.Length].ArrowID] = itemssorted[old.Length];
                                 if (itemssorted[itemssorted.Length - 1].ArrowUnknown0 == 0xffff)
                                 {

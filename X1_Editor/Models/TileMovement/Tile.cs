@@ -7,6 +7,8 @@ namespace SF3.X1_Editor.Models.Tiles
 {
     public class Tile
     {
+        private IFileEditor _fileEditor;
+
         private int noEntry;
         private int unknown01;
         private int grassland;
@@ -33,34 +35,35 @@ namespace SF3.X1_Editor.Models.Tiles
         private string name;
         private int sub;
 
-        public Tile(ScenarioType scenario, int id, string text)
+        public Tile(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
                 offset = offset + 0xac; //value we want is 0xac bytes later always
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //second pointer
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
 
                 offset = offset - sub + 0x7c; //second pointer*/
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.GetDouble(offset);
+                npcOffset = _fileEditor.GetDouble(offset);
                 sub = 0x0605e000;
                 offset = npcOffset - sub + 4; //second pointer
-                npcOffset = FileEditor.GetDouble(offset);
+                npcOffset = _fileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -69,11 +72,11 @@ namespace SF3.X1_Editor.Models.Tiles
             {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
                 offset = offset + 0xac; //value we want is 0xac bytes later always (except for btl330-339
                                         //Console.WriteLine(offset);
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
 
                 if (offset < 0x06070000 && offset > 0) //a valid pointer in this fille will always be positive up to 0x06070000
                 {
@@ -85,7 +88,7 @@ namespace SF3.X1_Editor.Models.Tiles
                     //Console.WriteLine("initiating 330-339 workaround");
                     offset = 0x00000024;
                     //sub = 0x0605e000;
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
                     offset = offset + 0x14; //value we want is 0xac bytes later always
                 }
@@ -93,11 +96,11 @@ namespace SF3.X1_Editor.Models.Tiles
                 /*
                 offset = 0x000001c4;
                     sub = 0x0605e000;
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
                     offset = offset + 0xac; //value we want is 0xac bytes later always
                                             //Console.WriteLine(offset);
-                    offset = FileEditor.GetDouble(offset);
+                    offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub; //second pointer
                 /*
 
@@ -105,20 +108,20 @@ namespace SF3.X1_Editor.Models.Tiles
                 //work around for x1btl330-339 not being consistant with everything else
                 offset = 0x00000024;
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
                 offset = offset + 0x14; //value we want is 0xac bytes later always
                 //Console.WriteLine(offset);
-                //offset = FileEditor.GetDouble(offset);
+                //offset = _fileEditor.GetDouble(offset);
                 //offset = offset - sub; //second pointer
                 */
 
                 /*
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
 
                 offset = offset - sub + 0x7c; //second pointer*/
             }
@@ -127,18 +130,18 @@ namespace SF3.X1_Editor.Models.Tiles
             {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
                 offset = offset + 0xac; //value we want is 0xac bytes later always
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //second pointer
 
                 /*
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
 
                 offset = offset - sub + 0x7c; //second pointer
                 */

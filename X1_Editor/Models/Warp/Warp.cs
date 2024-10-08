@@ -8,6 +8,8 @@ namespace SF3.X1_Editor.Models.Warps
 {
     public class Warp
     {
+        private IFileEditor _fileEditor;
+
         private int unknown1;
         private int unknown2;
         private int type;
@@ -25,16 +27,17 @@ namespace SF3.X1_Editor.Models.Warps
 
         /*public int NPCTableAddress1
         {
-            get => FileEditor.GetDouble(npcOffset);
-            set => FileEditor.SetDouble(npcOffset, value);
+            get => _fileEditor.GetDouble(npcOffset);
+            set => _fileEditor.SetDouble(npcOffset, value);
         }
 
-        public int NPCTableAddress2 => FileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
+        public int NPCTableAddress2 => _fileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
 
-        public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
+        public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Warp(ScenarioType scenario, int id, string text)
+        public Warp(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             //no scn1 for this
@@ -43,21 +46,21 @@ namespace SF3.X1_Editor.Models.Warps
             {
                 offset = 0x00000018; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000018; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000018; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
 

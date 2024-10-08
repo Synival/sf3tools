@@ -7,6 +7,8 @@ namespace SF3.X1_Editor.Models.Treasures
 {
     public class Treasure
     {
+        private IFileEditor _fileEditor;
+
         private int searched;
         private int eventNumber;
         private int flagUsed;
@@ -26,23 +28,24 @@ namespace SF3.X1_Editor.Models.Treasures
 
         /*public int NPCTableAddress1
         {
-            get => FileEditor.GetDouble(npcOffset);
-            set => FileEditor.SetDouble(npcOffset, value);
+            get => _fileEditor.GetDouble(npcOffset);
+            set => _fileEditor.SetDouble(npcOffset, value);
         }
 
-        public int NPCTableAddress2 => FileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
+        public int NPCTableAddress2 => _fileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
 
-        public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
+        public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Treasure(ScenarioType scenario, int id, string text)
+        public Treasure(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x0000000C; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
 
                 offset = offset - sub;
             }
@@ -50,28 +53,28 @@ namespace SF3.X1_Editor.Models.Treasures
             {
                 offset = 0x0000000C; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x0000000C; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x0000000C; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.Other)
             {
                 offset = 0x0000000C; //btl99 initial pointer
                 sub = 0x06060000;
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
 

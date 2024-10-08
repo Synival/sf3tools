@@ -262,10 +262,10 @@ namespace SF3.X1_Editor.Forms
                 sub = 0x06060000;
             }
 
-            offset = FileEditor.GetDouble(offset);
+            offset = _fileEditor.GetDouble(offset);
 
             offset = offset - sub; //first pointer
-            offset = FileEditor.GetDouble(offset);
+            offset = _fileEditor.GetDouble(offset);
 
             /*A value higher means a pointer is on the offset, meaning we are in a battle. If it is not a 
               pointer we are at our destination so we know a town is loaded.
@@ -339,7 +339,7 @@ namespace SF3.X1_Editor.Forms
                 MessageBox.Show("Could not load Resources/stattypes.xml.");
                 return false;
             }*/
-            _itemList = new ItemList(_scenario);
+            _itemList = new ItemList(_fileEditor, _scenario);
             if (isBattle && !_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
@@ -351,73 +351,73 @@ namespace SF3.X1_Editor.Forms
                 return false;
             }*/
 
-            _presetList = new PresetList(_scenario);
+            _presetList = new PresetList(_fileEditor, _scenario);
             if (isBattle && !_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
                 return false;
             }
 
-            _aiList = new AIList(_scenario);
+            _aiList = new AIList(_fileEditor, _scenario);
             if (isBattle && !_aiList.Load())
             {
                 MessageBox.Show("Could not load Resources/AI.xml.");
                 return false;
             }
 
-            _unknownAIList = new UnknownAIList(_scenario);
+            _unknownAIList = new UnknownAIList(_fileEditor, _scenario);
             if (isBattle && !_unknownAIList.Load())
             {
                 MessageBox.Show("Could not load Resources/UnknownAI.xml.");
                 return false;
             }
 
-            _battlePointersList = new BattlePointersList(_scenario);
+            _battlePointersList = new BattlePointersList(_fileEditor, _scenario);
             if (isBattle && !_battlePointersList.Load())
             {
                 MessageBox.Show("Could not load Resources/BattlePointersList.xml.");
                 return false;
             }
 
-            _treasureList = new TreasureList(_scenario);
+            _treasureList = new TreasureList(_fileEditor, _scenario);
             if (!_treasureList.Load())
             {
                 MessageBox.Show("Could not load Resources/X1Treasure.xml.");
                 return false;
             }
-            _customMovementList = new CustomMovementList(_scenario);
+            _customMovementList = new CustomMovementList(_fileEditor, _scenario);
             if (isBattle && !_customMovementList.Load())
             {
                 MessageBox.Show("Could not load Resources/X1AI.xml.");
                 return false;
             }
-            _warpList = new WarpList(_scenario);
+            _warpList = new WarpList(_fileEditor, _scenario);
             if (_scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other && !_warpList.Load())
             {
                 MessageBox.Show("Could not load Resources/X1Warp.xml.");
                 return false;
             }
-            _tileList = new TileList(_scenario);
+            _tileList = new TileList(_fileEditor, _scenario);
             if (isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other && !_tileList.Load())
             {
                 MessageBox.Show("Could not load Resources/MovementTypes.xml.");
                 return false;
             }
 
-            _npcList = new NpcList(_scenario);
+            _npcList = new NpcList(_fileEditor, _scenario);
             if (!isBattle && !_npcList.Load())
             {
                 MessageBox.Show("Could not load Resources/NpcList.xml.");
                 return false;
             }
 
-            _enterList = new EnterList(_scenario);
+            _enterList = new EnterList(_fileEditor, _scenario);
             if (!isBattle && !_enterList.Load())
             {
                 MessageBox.Show("Could not load Resources/EnterList.xml.");
                 return false;
             }
-            _arrowList = new ArrowList(_scenario);
+            _arrowList = new ArrowList(_fileEditor, _scenario);
             if (!isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other && !_arrowList.Load())
             {
                 MessageBox.Show("Could not load Resources/ArrowList.xml.");

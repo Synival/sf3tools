@@ -281,7 +281,7 @@ namespace SF3.X002_Editor.Forms
                 MessageBox.Show("Could not load Resources/WarpList.xml.");
                 return false;
             }
-            _musicOverrideList = new MusicOverrideList(_scenario);
+            _musicOverrideList = new MusicOverrideList(_fileEditor, _scenario);
             if (!_musicOverrideList.Load())
             {
                 MessageBox.Show("Could not load Resources/MusicOverrideList.xml.");

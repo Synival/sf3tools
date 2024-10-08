@@ -5,6 +5,8 @@ namespace SF3.X002_Editor.Models.MusicOverride
 {
     public class MusicOverride
     {
+        private IFileEditor _fileEditor;
+
         private int mapID;
         private int synMusic;
         private int medMusic;
@@ -26,8 +28,9 @@ namespace SF3.X002_Editor.Models.MusicOverride
         private int index;
         private string name;
 
-        public MusicOverride(ScenarioType scenario, int id, string text)
+        public MusicOverride(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             checkVersion2 = FileEditor.GetByte(0x0000000B);
@@ -115,50 +118,50 @@ namespace SF3.X002_Editor.Models.MusicOverride
 
         public int MOUnknown1
         {
-            get => FileEditor.GetDouble(unknown1);
-            set => FileEditor.SetDouble(unknown1, value);
+            get => _fileEditor.GetDouble(unknown1);
+            set => _fileEditor.SetDouble(unknown1, value);
         }
 
         public int MOUnknown2
         {
-            get => FileEditor.GetDouble(unknown2);
-            set => FileEditor.SetDouble(unknown2, value);
+            get => _fileEditor.GetDouble(unknown2);
+            set => _fileEditor.SetDouble(unknown2, value);
         }
 
         public int MOUnknown3
         {
-            get => FileEditor.GetDouble(unknown3);
-            set => FileEditor.SetDouble(unknown3, value);
+            get => _fileEditor.GetDouble(unknown3);
+            set => _fileEditor.SetDouble(unknown3, value);
         }
 
         public int MOUnknown4
         {
-            get => FileEditor.GetDouble(unknown4);
-            set => FileEditor.SetDouble(unknown4, value);
+            get => _fileEditor.GetDouble(unknown4);
+            set => _fileEditor.SetDouble(unknown4, value);
         }
 
         public int SynChr
         {
-            get => FileEditor.GetDouble(synChr);
-            set => FileEditor.SetDouble(synChr, value);
+            get => _fileEditor.GetDouble(synChr);
+            set => _fileEditor.SetDouble(synChr, value);
         }
 
         public int MedChr
         {
-            get => FileEditor.GetDouble(medChr);
-            set => FileEditor.SetDouble(medChr, value);
+            get => _fileEditor.GetDouble(medChr);
+            set => _fileEditor.SetDouble(medChr, value);
         }
 
         public int JulChr
         {
-            get => FileEditor.GetDouble(julChr);
-            set => FileEditor.SetDouble(julChr, value);
+            get => _fileEditor.GetDouble(julChr);
+            set => _fileEditor.SetDouble(julChr, value);
         }
 
         public int ExtraChr
         {
-            get => FileEditor.GetDouble(extraChr);
-            set => FileEditor.SetDouble(extraChr, value);
+            get => _fileEditor.GetDouble(extraChr);
+            set => _fileEditor.SetDouble(extraChr, value);
         }
 
         public int MusicOverrideAddress => (address);

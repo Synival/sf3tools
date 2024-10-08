@@ -114,7 +114,11 @@ namespace SF3
             }
         }
 
-        public static int GetDouble(int location)
+        /// <summary>
+        /// Gets the value of a 32-bit integer at a location.
+        /// </summary>
+        /// <param name="location">The address of the 32-bit integer.</param>
+        public int GetDouble(int location)
         {
             if (data == null)
             {
@@ -187,7 +191,12 @@ namespace SF3
             data[location + 1] = (byte)(value % 256);
         }
 
-        public static void SetDouble(int location, int value)
+        /// <summary>
+        /// Sets the value of 32-bit integer at a location.
+        /// </summary>
+        /// <param name="location">The address of the 32-bit integer.</param>
+        /// <param name="value">The new value of the 32-bit integer.</param>
+        public void SetDouble(int location, int value)
         {
             byte[] converted = BitConverter.GetBytes(value);
             data[location] = converted[3];

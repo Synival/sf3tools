@@ -8,8 +8,9 @@ namespace SF3.X1_Editor.Models.Tiles
 {
     public class TileList : IModelArray<Tile>
     {
-        public TileList(ScenarioType scenario)
+        public TileList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
@@ -17,6 +18,7 @@ namespace SF3.X1_Editor.Models.Tiles
 
         private Tile[] tilessorted;
         private Tile[] tiles;
+        private IFileEditor _fileEditor;
 
         private string r = "";
 
@@ -50,7 +52,7 @@ namespace SF3.X1_Editor.Models.Tiles
                         tilessorted.CopyTo(old, 0);
                         tilessorted = new Tile[old.Length + 1];
                         old.CopyTo(tilessorted, 0);
-                        tilessorted[old.Length] = new Tile(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        tilessorted[old.Length] = new Tile(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         tiles[tilessorted[old.Length].TileID] = tilessorted[old.Length];
                     }
                 }

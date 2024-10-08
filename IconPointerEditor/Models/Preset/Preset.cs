@@ -6,6 +6,8 @@ namespace SF3.IconPointerEditor.Models.Presets
 {
     public class Preset
     {
+        IFileEditor _fileEditor;
+
         //ITEMS
         private int theItemIcon;
 
@@ -16,8 +18,9 @@ namespace SF3.IconPointerEditor.Models.Presets
         private string name;
         private int sub;
 
-        public Preset(ScenarioType scenario, int id, string text)
+        public Preset(IFileEditor fileEditor, ScenarioType scenario, int id, string text)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
 
             if (Scenario == ScenarioType.Scenario1)
@@ -34,15 +37,15 @@ namespace SF3.IconPointerEditor.Models.Presets
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //pointer
                 /*
                 offset = 0x00000018; //scn1 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.GetDouble(offset);
+                npcOffset = _fileEditor.GetDouble(offset);
                 sub = 0x0605f000;
                 offset = npcOffset - sub; //second pointer
-                npcOffset = FileEditor.GetDouble(offset);
+                npcOffset = _fileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -60,15 +63,15 @@ namespace SF3.IconPointerEditor.Models.Presets
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //pointer
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.GetDouble(offset);
+                npcOffset = _fileEditor.GetDouble(offset);
                 sub = 0x0605e000;
                 offset = npcOffset - sub + 4; //second pointer
-                npcOffset = FileEditor.GetDouble(offset);
+                npcOffset = _fileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -86,7 +89,7 @@ namespace SF3.IconPointerEditor.Models.Presets
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //pointer
             }
             else if (Scenario == ScenarioType.PremiumDisk)
@@ -102,7 +105,7 @@ namespace SF3.IconPointerEditor.Models.Presets
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.GetDouble(offset);
+                offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //pointer
             }
 
@@ -148,7 +151,7 @@ namespace SF3.IconPointerEditor.Models.Presets
                 }
                 else
                 {
-                    return FileEditor.GetDouble(theItemIcon);
+                    return _fileEditor.GetDouble(theItemIcon);
                 }
             }
             set
@@ -159,7 +162,7 @@ namespace SF3.IconPointerEditor.Models.Presets
                 }
                 else
                 {
-                    FileEditor.SetDouble(theItemIcon, value);
+                    _fileEditor.SetDouble(theItemIcon, value);
                 }
             }
         }

@@ -10,8 +10,9 @@ namespace SF3.X1_Editor.Models.Treasures
 {
     public class TreasureList : IModelArray<Treasure>
     {
-        public TreasureList(ScenarioType scenario)
+        public TreasureList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
@@ -19,6 +20,7 @@ namespace SF3.X1_Editor.Models.Treasures
 
         private Treasure[] itemssorted;
         private Treasure[] items;
+        private IFileEditor _fileEditor;
 
         private string r = "";
 
@@ -63,7 +65,7 @@ namespace SF3.X1_Editor.Models.Treasures
                                 itemssorted.CopyTo(old, 0);
                                 itemssorted = new Treasure[old.Length + 1];
                                 old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Treasure(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                itemssorted[old.Length] = new Treasure(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 items[itemssorted[old.Length].TreasureID] = itemssorted[old.Length];
                                 if (itemssorted[itemssorted.Length - 1].Searched == 0xffff)
                                 {
@@ -88,7 +90,7 @@ namespace SF3.X1_Editor.Models.Treasures
                                 itemssorted.CopyTo(old, 0);
                                 itemssorted = new Treasure[old.Length + 1];
                                 old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Treasure(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                itemssorted[old.Length] = new Treasure(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 items[itemssorted[old.Length].TreasureID] = itemssorted[old.Length];
                                 if (itemssorted[itemssorted.Length - 1].Searched == 0xffff)
                                 {

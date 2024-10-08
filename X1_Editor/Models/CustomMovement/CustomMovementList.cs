@@ -8,8 +8,9 @@ namespace SF3.X1_Editor.Models.CustomMovement
 {
     public class CustomMovementList : IModelArray<CustomMovement>
     {
-        public CustomMovementList(ScenarioType scenario)
+        public CustomMovementList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
@@ -17,6 +18,7 @@ namespace SF3.X1_Editor.Models.CustomMovement
 
         private CustomMovement[] spellssorted;
         private CustomMovement[] spells;
+        private IFileEditor _fileEditor;
 
         private string r = "";
 
@@ -71,7 +73,7 @@ namespace SF3.X1_Editor.Models.CustomMovement
                         spellssorted.CopyTo(old, 0);
                         spellssorted = new CustomMovement[old.Length + 1];
                         old.CopyTo(spellssorted, 0);
-                        spellssorted[old.Length] = new CustomMovement(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        spellssorted[old.Length] = new CustomMovement(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         spells[spellssorted[old.Length].CustomMovementID] = spellssorted[old.Length];
                     }
                 }

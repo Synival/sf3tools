@@ -8,8 +8,9 @@ namespace SF3.IconPointerEditor.Models.Presets
 {
     public class PresetList : IModelArray<Preset>
     {
-        public PresetList(ScenarioType scenario)
+        public PresetList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
@@ -17,6 +18,7 @@ namespace SF3.IconPointerEditor.Models.Presets
 
         private Preset[] presetssorted;
         private Preset[] presets;
+        private IFileEditor _fileEditor;
 
         private string r = "";
 
@@ -65,7 +67,7 @@ namespace SF3.IconPointerEditor.Models.Presets
                         presetssorted.CopyTo(old, 0);
                         presetssorted = new Preset[old.Length + 1];
                         old.CopyTo(presetssorted, 0);
-                        presetssorted[old.Length] = new Preset(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        presetssorted[old.Length] = new Preset(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         presets[presetssorted[old.Length].SizeID] = presetssorted[old.Length];
                     }
                 }

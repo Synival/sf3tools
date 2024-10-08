@@ -9,8 +9,9 @@ namespace SF3.X1_Editor.Models.Enters
 {
     public class EnterList : IModelArray<Enter>
     {
-        public EnterList(ScenarioType scenario)
+        public EnterList(IFileEditor fileEditor, ScenarioType scenario)
         {
+            _fileEditor = fileEditor;
             Scenario = scenario;
         }
 
@@ -18,6 +19,7 @@ namespace SF3.X1_Editor.Models.Enters
 
         private Enter[] itemssorted;
         private Enter[] items;
+        private IFileEditor _fileEditor;
 
         private string r = "";
 
@@ -87,7 +89,7 @@ namespace SF3.X1_Editor.Models.Enters
                                 itemssorted.CopyTo(old, 0);
                                 itemssorted = new Enter[old.Length + 1];
                                 old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Enter(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                itemssorted[old.Length] = new Enter(_fileEditor, Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 items[itemssorted[old.Length].EnterID] = itemssorted[old.Length];
                                 if (itemssorted[itemssorted.Length - 1].Entered == 0xffff)
                                 {
