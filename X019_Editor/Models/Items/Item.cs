@@ -5,7 +5,7 @@ namespace SF3.X019_Editor.Models.Items
 {
     public class Item
     {
-        ISF3FileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int maxHP;
         private int maxMP;

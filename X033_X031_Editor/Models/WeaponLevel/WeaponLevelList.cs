@@ -8,13 +8,12 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 {
     public class WeaponLevelList : IModelArray<WeaponLevel>
     {
-        ISF3FileEditor _fileEditor;
-
         public WeaponLevelList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
+        private ISF3FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         private WeaponLevel[] itemssorted;

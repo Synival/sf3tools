@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.Stats
 {
     public class Stat
     {
-        ISF3FileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int sLvlStat1;
         private int sLvlStat2;

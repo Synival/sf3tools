@@ -5,7 +5,7 @@ namespace SF3.X002_Editor.Models.Loading
 {
     public class Loading
     {
-        ISF3FileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int locationID;
         private int x1;

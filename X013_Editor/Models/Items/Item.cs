@@ -6,7 +6,7 @@ namespace SF3.X013_Editor.Models.Items
 {
     public class Item
     {
-        ISF3FileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         private int unknown1;
         private int damageCalculation;

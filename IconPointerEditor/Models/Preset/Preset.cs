@@ -6,7 +6,7 @@ namespace SF3.IconPointerEditor.Models.Presets
 {
     public class Preset
     {
-        ISF3FileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         //ITEMS
         private int theItemIcon;

@@ -8,13 +8,12 @@ namespace SF3.X002_Editor.Models.Loading
 {
     public class LoadList : IModelArray<Loading>
     {
-        ISF3FileEditor _fileEditor;
-
         public LoadList(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
+        private ISF3FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Loading[] itemssorted;

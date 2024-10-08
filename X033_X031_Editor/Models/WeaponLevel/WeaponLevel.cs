@@ -5,7 +5,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 {
     public class WeaponLevel
     {
-        ISF3FileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         //starting stat table
         private int level1;

@@ -7,7 +7,7 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 {
     public class InitialInfo
     {
-        ISF3FileEditor _fileEditor;
+        private ISF3FileEditor _fileEditor;
 
         //starting equipment table
         private int character;
