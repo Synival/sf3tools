@@ -32,7 +32,7 @@ namespace SF3.X033_X031_Editor.Forms
     using StatDict = Dictionary<StatType, double>;
     using ProbableStatsDict = Dictionary<StatType, ProbableStats>;
 
-    public partial class frmMain : Form
+    public partial class frmX033_X031_Editor : Form
     {
         //Used to append to state names to stop program loading states from older versions
         private string Version = "018";
@@ -69,10 +69,10 @@ namespace SF3.X033_X031_Editor.Forms
             public ProbableStatsDict ProbableStats { get; }
         }
 
-        public frmMain()
+        public frmX033_X031_Editor()
         {
             InitializeComponent();
-            frmMain_Resize(this, new EventArgs());
+            frmX033_X031_Editor_Resize(this, new EventArgs());
 
             /*try {
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
@@ -339,7 +339,7 @@ namespace SF3.X033_X031_Editor.Forms
             }
         }
 
-        private void frmMain_Resize(object sender, EventArgs e)
+        private void frmX033_X031_Editor_Resize(object sender, EventArgs e)
         {
             Size newsize = ClientSize;
             newsize.Height -= 24;
@@ -386,7 +386,7 @@ namespace SF3.X033_X031_Editor.Forms
             }
         }
 
-        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmX033_X031_Editor_FormClosing(object sender, FormClosingEventArgs e)
         {
             /*try {
                 byte[] data = olvMonsters.SaveState();
@@ -542,7 +542,7 @@ namespace SF3.X033_X031_Editor.Forms
 
         private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            frmMain_Resize(this, new EventArgs());
+            frmX033_X031_Editor_Resize(this, new EventArgs());
         }
 
         public static class Debugs

@@ -1,6 +1,6 @@
 ﻿namespace SF3.X033_X031_Editor.Forms
 {
-    partial class frmMain
+    partial class frmX033_X031_Editor
     {
         /// <summary>
         /// Required designer variable.
@@ -50,7 +50,7 @@
             System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX033_X031_Editor));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -2481,7 +2481,7 @@
             series10.BorderWidth = 2;
             series10.ChartArea = "ChartArea1";
             series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series10.Color = System.Drawing.Color.FromArgb(128, ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series10.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series10.Legend = "Legend1";
             series10.Name = "Likely Agi";
             series10.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2489,7 +2489,7 @@
             series11.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent60;
             series11.ChartArea = "ChartArea1";
             series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series11.Color = System.Drawing.Color.FromArgb(128, ((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series11.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             series11.Legend = "Legend1";
             series11.Name = "HP Range 1";
             series11.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2498,7 +2498,7 @@
             series12.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent60;
             series12.ChartArea = "ChartArea1";
             series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series12.Color = System.Drawing.Color.FromArgb(128, ((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series12.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series12.Legend = "Legend1";
             series12.Name = "MP Range 1";
             series12.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2507,7 +2507,7 @@
             series13.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent60;
             series13.ChartArea = "ChartArea1";
             series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series13.Color = System.Drawing.Color.FromArgb(128, 255, 0, 0);
+            series13.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             series13.Legend = "Legend1";
             series13.Name = "Atk Range 1";
             series13.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2516,7 +2516,7 @@
             series14.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent60;
             series14.ChartArea = "ChartArea1";
             series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series14.Color = System.Drawing.Color.FromArgb(128, 0, 128, 0);
+            series14.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             series14.Legend = "Legend1";
             series14.Name = "Def Range 1";
             series14.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2525,7 +2525,7 @@
             series15.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent50;
             series15.ChartArea = "ChartArea1";
             series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series15.Color = System.Drawing.Color.FromArgb(128, ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series15.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series15.Legend = "Legend1";
             series15.Name = "Agi Range 1";
             series15.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2534,7 +2534,7 @@
             series16.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent70;
             series16.ChartArea = "ChartArea1";
             series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series16.Color = System.Drawing.Color.FromArgb(128, ((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series16.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             series16.Legend = "Legend1";
             series16.Name = "HP Range 2";
             series16.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2543,7 +2543,7 @@
             series17.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent70;
             series17.ChartArea = "ChartArea1";
             series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series17.Color = System.Drawing.Color.FromArgb(128, ((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series17.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series17.Legend = "Legend1";
             series17.Name = "MP Range 2";
             series17.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2552,7 +2552,7 @@
             series18.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent70;
             series18.ChartArea = "ChartArea1";
             series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series18.Color = System.Drawing.Color.FromArgb(128, 255, 0, 0);
+            series18.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             series18.Legend = "Legend1";
             series18.Name = "Atk Range 2";
             series18.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2561,7 +2561,7 @@
             series19.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent70;
             series19.ChartArea = "ChartArea1";
             series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series19.Color = System.Drawing.Color.FromArgb(128, 0, 128, 0);
+            series19.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             series19.Legend = "Legend1";
             series19.Name = "Def Range 2";
             series19.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2570,7 +2570,7 @@
             series20.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent70;
             series20.ChartArea = "ChartArea1";
             series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series20.Color = System.Drawing.Color.FromArgb(128, ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series20.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series20.Legend = "Legend1";
             series20.Name = "Agi Range 2";
             series20.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2600,7 +2600,7 @@
             this.CurveGraph.TabIndex = 0;
             this.CurveGraph.Text = "chartCurveGraph";
             // 
-            // frmMain
+            // frmX033_X031_Editor
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2609,10 +2609,10 @@
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmMain";
+            this.Name = "frmX033_X031_Editor";
             this.Text = "Sf3 X033/X031 editor";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
-            this.Resize += new System.EventHandler(this.frmMain_Resize);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmX033_X031_Editor_FormClosing);
+            this.Resize += new System.EventHandler(this.frmX033_X031_Editor_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabSpells.ResumeLayout(false);

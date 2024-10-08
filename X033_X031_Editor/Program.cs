@@ -33,7 +33,7 @@ namespace SF3.X033_X031_Editor
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.frmMain());
+            Application.Run(new Forms.frmX033_X031_Editor());
         }
     }
 }
