@@ -219,8 +219,8 @@ namespace SF3.IconPointerEditor.Forms
             //olvCharacters.ClearObjects();
             //olvMonsters.ClearObjects();
 
-            olvItems.ClearObjects();
-            objectListView1.ClearObjects();
+            olvItemIcons.ClearObjects();
+            olvSpellIcons.ClearObjects();
 
             //olvPresets.ClearObjects();
             //olvSpells.ClearObjects();
@@ -229,8 +229,8 @@ namespace SF3.IconPointerEditor.Forms
 
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
-            olvItems.AddObjects(_presetList.Models);
-            objectListView1.AddObjects(_itemList.Models);
+            olvItemIcons.AddObjects(_presetList.Models);
+            olvSpellIcons.AddObjects(_itemList.Models);
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -280,8 +280,8 @@ namespace SF3.IconPointerEditor.Forms
             tabMain.Size = newsize;
             //olvMonsters.Size = tabMonsters.ClientSize;
             //olvCharacters.Size = tabCharacters.ClientSize;
-            olvItems.Size = tabItems.ClientSize;
-            objectListView1.Size = tabPage1.ClientSize;
+            olvItemIcons.Size = tabItemIcons.ClientSize;
+            olvSpellIcons.Size = tabSpellIcons.ClientSize;
             //olvBlacksmith.Size = tabBlacksmith.ClientSize;
             //olvStoreItems.Size = tabShops.ClientSize;
             //olvSpells.Size = tabSpells.ClientSize;
@@ -297,8 +297,8 @@ namespace SF3.IconPointerEditor.Forms
             //olvBlacksmith.FinishCellEdit();
             //olvMonsters.FinishCellEdit();
             //olvCharacters.FinishCellEdit();
-            olvItems.FinishCellEdit();
-            objectListView1.FinishCellEdit();
+            olvItemIcons.FinishCellEdit();
+            olvSpellIcons.FinishCellEdit();
             //objectListView1.FinishCellEdit();
             //objectListView2.FinishCellEdit();
             //olvStoreItems.FinishCellEdit();

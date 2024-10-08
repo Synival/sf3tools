@@ -69,26 +69,26 @@
             this.olvStatUp4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSpellUse = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSpellUseLv = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabItems = new System.Windows.Forms.TabPage();
-            this.olvItems = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tabItemIcons = new System.Windows.Forms.TabPage();
+            this.olvItemIcons = new BrightIdeasSoftware.ObjectListView();
+            this.lvcItemIconName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcItemIconHexID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcItemIconAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcItemIconOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn23 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn24 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn26 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn29 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tabSpellIcons = new System.Windows.Forms.TabPage();
+            this.olvSpellIcons = new BrightIdeasSoftware.ObjectListView();
+            this.lvcSpellIconName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellIconHexID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellIconAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellIconOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellIconViewOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.menuStrip1.SuspendLayout();
-            this.tabItems.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvItems)).BeginInit();
+            this.tabItemIcons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvItemIcons)).BeginInit();
             this.tabMain.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
+            this.tabSpellIcons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvSpellIcons)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -400,77 +400,77 @@
             this.olvSpellUseLv.DisplayIndex = 25;
             this.olvSpellUseLv.Text = "SpellUseLv";
             // 
-            // tabItems
+            // tabItemIcons
             // 
-            this.tabItems.Controls.Add(this.olvItems);
-            this.tabItems.Location = new System.Drawing.Point(4, 22);
-            this.tabItems.Name = "tabItems";
-            this.tabItems.Size = new System.Drawing.Size(756, 480);
-            this.tabItems.TabIndex = 3;
-            this.tabItems.Text = "Item Icons";
-            this.tabItems.UseVisualStyleBackColor = true;
+            this.tabItemIcons.Controls.Add(this.olvItemIcons);
+            this.tabItemIcons.Location = new System.Drawing.Point(4, 22);
+            this.tabItemIcons.Name = "tabItemIcons";
+            this.tabItemIcons.Size = new System.Drawing.Size(756, 480);
+            this.tabItemIcons.TabIndex = 3;
+            this.tabItemIcons.Text = "Item Icons";
+            this.tabItemIcons.UseVisualStyleBackColor = true;
             // 
-            // olvItems
+            // olvItemIcons
             // 
-            this.olvItems.AllColumns.Add(this.olvColumn1);
-            this.olvItems.AllColumns.Add(this.olvColumn4);
-            this.olvItems.AllColumns.Add(this.olvColumn2);
-            this.olvItems.AllColumns.Add(this.olvColumn3);
-            this.olvItems.AllowColumnReorder = true;
-            this.olvItems.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn1,
-            this.olvColumn4,
-            this.olvColumn2,
-            this.olvColumn3});
-            this.olvItems.FullRowSelect = true;
-            this.olvItems.GridLines = true;
-            this.olvItems.HasCollapsibleGroups = false;
-            this.olvItems.HideSelection = false;
-            this.olvItems.Location = new System.Drawing.Point(0, 0);
-            this.olvItems.MenuLabelGroupBy = "";
-            this.olvItems.Name = "olvItems";
-            this.olvItems.ShowGroups = false;
-            this.olvItems.Size = new System.Drawing.Size(750, 474);
-            this.olvItems.TabIndex = 0;
-            this.olvItems.UseAlternatingBackColors = true;
-            this.olvItems.UseCompatibleStateImageBehavior = false;
-            this.olvItems.View = System.Windows.Forms.View.Details;
-            this.olvItems.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
-            this.olvItems.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
+            this.olvItemIcons.AllColumns.Add(this.lvcItemIconName);
+            this.olvItemIcons.AllColumns.Add(this.lvcItemIconHexID);
+            this.olvItemIcons.AllColumns.Add(this.lvcItemIconAddress);
+            this.olvItemIcons.AllColumns.Add(this.lvcItemIconOffset);
+            this.olvItemIcons.AllowColumnReorder = true;
+            this.olvItemIcons.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvItemIcons.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvcItemIconName,
+            this.lvcItemIconHexID,
+            this.lvcItemIconAddress,
+            this.lvcItemIconOffset});
+            this.olvItemIcons.FullRowSelect = true;
+            this.olvItemIcons.GridLines = true;
+            this.olvItemIcons.HasCollapsibleGroups = false;
+            this.olvItemIcons.HideSelection = false;
+            this.olvItemIcons.Location = new System.Drawing.Point(0, 0);
+            this.olvItemIcons.MenuLabelGroupBy = "";
+            this.olvItemIcons.Name = "olvItemIcons";
+            this.olvItemIcons.ShowGroups = false;
+            this.olvItemIcons.Size = new System.Drawing.Size(750, 474);
+            this.olvItemIcons.TabIndex = 0;
+            this.olvItemIcons.UseAlternatingBackColors = true;
+            this.olvItemIcons.UseCompatibleStateImageBehavior = false;
+            this.olvItemIcons.View = System.Windows.Forms.View.Details;
+            this.olvItemIcons.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
+            this.olvItemIcons.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
-            // olvColumn1
+            // lvcItemIconName
             // 
-            this.olvColumn1.AspectName = "SizeName";
-            this.olvColumn1.IsEditable = false;
-            this.olvColumn1.Text = "Name";
-            this.olvColumn1.Width = 80;
+            this.lvcItemIconName.AspectName = "SizeName";
+            this.lvcItemIconName.IsEditable = false;
+            this.lvcItemIconName.Text = "Name";
+            this.lvcItemIconName.Width = 80;
             // 
-            // olvColumn4
+            // lvcItemIconHexID
             // 
-            this.olvColumn4.AspectName = "SizeID";
-            this.olvColumn4.AspectToStringFormat = "{0:X}";
-            this.olvColumn4.IsEditable = false;
-            this.olvColumn4.Text = "Hex ID";
+            this.lvcItemIconHexID.AspectName = "SizeID";
+            this.lvcItemIconHexID.AspectToStringFormat = "{0:X}";
+            this.lvcItemIconHexID.IsEditable = false;
+            this.lvcItemIconHexID.Text = "Hex ID";
             // 
-            // olvColumn2
+            // lvcItemIconAddress
             // 
-            this.olvColumn2.AspectName = "SizeAddress";
-            this.olvColumn2.AspectToStringFormat = "{0:X}";
-            this.olvColumn2.IsEditable = false;
-            this.olvColumn2.Text = "Address";
+            this.lvcItemIconAddress.AspectName = "SizeAddress";
+            this.lvcItemIconAddress.AspectToStringFormat = "{0:X}";
+            this.lvcItemIconAddress.IsEditable = false;
+            this.lvcItemIconAddress.Text = "Address";
             // 
-            // olvColumn3
+            // lvcItemIconOffset
             // 
-            this.olvColumn3.AspectName = "TheItemIcon";
-            this.olvColumn3.AspectToStringFormat = "{0:X}";
-            this.olvColumn3.Text = "ItemIcon offset";
-            this.olvColumn3.Width = 90;
+            this.lvcItemIconOffset.AspectName = "TheItemIcon";
+            this.lvcItemIconOffset.AspectToStringFormat = "{0:X}";
+            this.lvcItemIconOffset.Text = "ItemIcon offset";
+            this.lvcItemIconOffset.Width = 90;
             // 
             // tabMain
             // 
-            this.tabMain.Controls.Add(this.tabItems);
-            this.tabMain.Controls.Add(this.tabPage1);
+            this.tabMain.Controls.Add(this.tabItemIcons);
+            this.tabMain.Controls.Add(this.tabSpellIcons);
             this.tabMain.Location = new System.Drawing.Point(0, 27);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
@@ -478,84 +478,84 @@
             this.tabMain.TabIndex = 0;
             this.tabMain.SelectedIndexChanged += new System.EventHandler(this.tabMain_SelectedIndexChanged);
             // 
-            // tabPage1
+            // tabSpellIcons
             // 
-            this.tabPage1.Controls.Add(this.objectListView1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(756, 480);
-            this.tabPage1.TabIndex = 4;
-            this.tabPage1.Text = "Spell Icons";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabSpellIcons.Controls.Add(this.olvSpellIcons);
+            this.tabSpellIcons.Location = new System.Drawing.Point(4, 22);
+            this.tabSpellIcons.Name = "tabSpellIcons";
+            this.tabSpellIcons.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSpellIcons.Size = new System.Drawing.Size(756, 480);
+            this.tabSpellIcons.TabIndex = 4;
+            this.tabSpellIcons.Text = "Spell Icons";
+            this.tabSpellIcons.UseVisualStyleBackColor = true;
             // 
-            // objectListView1
+            // olvSpellIcons
             // 
-            this.objectListView1.AllColumns.Add(this.olvColumn23);
-            this.objectListView1.AllColumns.Add(this.olvColumn24);
-            this.objectListView1.AllColumns.Add(this.olvColumn26);
-            this.objectListView1.AllColumns.Add(this.olvColumn29);
-            this.objectListView1.AllColumns.Add(this.olvColumn5);
-            this.objectListView1.AllowColumnReorder = true;
-            this.objectListView1.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn23,
-            this.olvColumn24,
-            this.olvColumn26,
-            this.olvColumn29,
-            this.olvColumn5});
-            this.objectListView1.FullRowSelect = true;
-            this.objectListView1.GridLines = true;
-            this.objectListView1.HasCollapsibleGroups = false;
-            this.objectListView1.HideSelection = false;
-            this.objectListView1.Location = new System.Drawing.Point(3, 3);
-            this.objectListView1.MenuLabelGroupBy = "";
-            this.objectListView1.Name = "objectListView1";
-            this.objectListView1.ShowGroups = false;
-            this.objectListView1.Size = new System.Drawing.Size(750, 474);
-            this.objectListView1.TabIndex = 1;
-            this.objectListView1.UseAlternatingBackColors = true;
-            this.objectListView1.UseCompatibleStateImageBehavior = false;
-            this.objectListView1.View = System.Windows.Forms.View.Details;
-            this.objectListView1.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
-            this.objectListView1.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
+            this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconName);
+            this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconHexID);
+            this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconAddress);
+            this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconOffset);
+            this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconViewOffset);
+            this.olvSpellIcons.AllowColumnReorder = true;
+            this.olvSpellIcons.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvSpellIcons.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvcSpellIconName,
+            this.lvcSpellIconHexID,
+            this.lvcSpellIconAddress,
+            this.lvcSpellIconOffset,
+            this.lvcSpellIconViewOffset});
+            this.olvSpellIcons.FullRowSelect = true;
+            this.olvSpellIcons.GridLines = true;
+            this.olvSpellIcons.HasCollapsibleGroups = false;
+            this.olvSpellIcons.HideSelection = false;
+            this.olvSpellIcons.Location = new System.Drawing.Point(3, 3);
+            this.olvSpellIcons.MenuLabelGroupBy = "";
+            this.olvSpellIcons.Name = "olvSpellIcons";
+            this.olvSpellIcons.ShowGroups = false;
+            this.olvSpellIcons.Size = new System.Drawing.Size(750, 474);
+            this.olvSpellIcons.TabIndex = 1;
+            this.olvSpellIcons.UseAlternatingBackColors = true;
+            this.olvSpellIcons.UseCompatibleStateImageBehavior = false;
+            this.olvSpellIcons.View = System.Windows.Forms.View.Details;
+            this.olvSpellIcons.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
+            this.olvSpellIcons.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
-            // olvColumn23
+            // lvcSpellIconName
             // 
-            this.olvColumn23.AspectName = "Name";
-            this.olvColumn23.IsEditable = false;
-            this.olvColumn23.Text = "Name";
-            this.olvColumn23.Width = 90;
+            this.lvcSpellIconName.AspectName = "Name";
+            this.lvcSpellIconName.IsEditable = false;
+            this.lvcSpellIconName.Text = "Name";
+            this.lvcSpellIconName.Width = 90;
             // 
-            // olvColumn24
+            // lvcSpellIconHexID
             // 
-            this.olvColumn24.AspectName = "ID";
-            this.olvColumn24.AspectToStringFormat = "{0:X}";
-            this.olvColumn24.IsEditable = false;
-            this.olvColumn24.Text = "Hex ID";
-            this.olvColumn24.Width = 50;
+            this.lvcSpellIconHexID.AspectName = "ID";
+            this.lvcSpellIconHexID.AspectToStringFormat = "{0:X}";
+            this.lvcSpellIconHexID.IsEditable = false;
+            this.lvcSpellIconHexID.Text = "Hex ID";
+            this.lvcSpellIconHexID.Width = 50;
             // 
-            // olvColumn26
+            // lvcSpellIconAddress
             // 
-            this.olvColumn26.AspectName = "Address";
-            this.olvColumn26.AspectToStringFormat = "{0:X}";
-            this.olvColumn26.IsEditable = false;
-            this.olvColumn26.Text = "Address";
-            this.olvColumn26.Width = 50;
+            this.lvcSpellIconAddress.AspectName = "Address";
+            this.lvcSpellIconAddress.AspectToStringFormat = "{0:X}";
+            this.lvcSpellIconAddress.IsEditable = false;
+            this.lvcSpellIconAddress.Text = "Address";
+            this.lvcSpellIconAddress.Width = 50;
             // 
-            // olvColumn29
+            // lvcSpellIconOffset
             // 
-            this.olvColumn29.AspectName = "TheSpellIcon";
-            this.olvColumn29.AspectToStringFormat = "{0:X}";
-            this.olvColumn29.Text = "Spell Icon offset";
-            this.olvColumn29.Width = 90;
+            this.lvcSpellIconOffset.AspectName = "TheSpellIcon";
+            this.lvcSpellIconOffset.AspectToStringFormat = "{0:X}";
+            this.lvcSpellIconOffset.Text = "Spell Icon offset";
+            this.lvcSpellIconOffset.Width = 90;
             // 
-            // olvColumn5
+            // lvcSpellIconViewOffset
             // 
-            this.olvColumn5.AspectName = "RealOffset";
-            this.olvColumn5.AspectToStringFormat = "{0:X}";
-            this.olvColumn5.Text = "Offset in file for viewing";
-            this.olvColumn5.Width = 130;
+            this.lvcSpellIconViewOffset.AspectName = "RealOffset";
+            this.lvcSpellIconViewOffset.AspectToStringFormat = "{0:X}";
+            this.lvcSpellIconViewOffset.Text = "Offset in file for viewing";
+            this.lvcSpellIconViewOffset.Width = 130;
             // 
             // frmIconPointerEditor
             // 
@@ -573,11 +573,11 @@
             this.Resize += new System.EventHandler(this.frmIconPointerEditor_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tabItems.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvItems)).EndInit();
+            this.tabItemIcons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvItemIcons)).EndInit();
             this.tabMain.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();
+            this.tabSpellIcons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvSpellIcons)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -621,22 +621,22 @@
         private BrightIdeasSoftware.OLVColumn olvStatUp4;
         private BrightIdeasSoftware.OLVColumn olvSpellUse;
         private BrightIdeasSoftware.OLVColumn olvSpellUseLv;
-        private System.Windows.Forms.TabPage tabItems;
-        private BrightIdeasSoftware.ObjectListView olvItems;
-        private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.OLVColumn olvColumn2;
-        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private System.Windows.Forms.TabPage tabItemIcons;
+        private BrightIdeasSoftware.ObjectListView olvItemIcons;
+        private BrightIdeasSoftware.OLVColumn lvcItemIconName;
+        private BrightIdeasSoftware.OLVColumn lvcItemIconAddress;
+        private BrightIdeasSoftware.OLVColumn lvcItemIconOffset;
         private System.Windows.Forms.TabControl tabMain;
-        private System.Windows.Forms.TabPage tabPage1;
-        private BrightIdeasSoftware.ObjectListView objectListView1;
-        private BrightIdeasSoftware.OLVColumn olvColumn23;
-        private BrightIdeasSoftware.OLVColumn olvColumn24;
-        private BrightIdeasSoftware.OLVColumn olvColumn26;
-        private BrightIdeasSoftware.OLVColumn olvColumn29;
+        private System.Windows.Forms.TabPage tabSpellIcons;
+        private BrightIdeasSoftware.ObjectListView olvSpellIcons;
+        private BrightIdeasSoftware.OLVColumn lvcSpellIconName;
+        private BrightIdeasSoftware.OLVColumn lvcSpellIconHexID;
+        private BrightIdeasSoftware.OLVColumn lvcSpellIconAddress;
+        private BrightIdeasSoftware.OLVColumn lvcSpellIconOffset;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private BrightIdeasSoftware.OLVColumn olvColumn4;
+        private BrightIdeasSoftware.OLVColumn lvcItemIconHexID;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
-        private BrightIdeasSoftware.OLVColumn olvColumn5;
+        private BrightIdeasSoftware.OLVColumn lvcSpellIconViewOffset;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
     }
 }
