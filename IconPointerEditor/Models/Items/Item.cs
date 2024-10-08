@@ -3,7 +3,7 @@ using System;
 using System.Windows.Forms;
 using SF3.Editor;
 using SF3.Types;
-using static SF3.IconPointerEditor.Forms.frmMain;
+using static SF3.IconPointerEditor.Forms.frmIconPointerEditor;
 
 namespace SF3.IconPointerEditor.Models.Items
 {

@@ -14,7 +14,7 @@ namespace SF3.IconPointerEditor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.frmMain());
+            Application.Run(new Forms.frmIconPointerEditor());
         }
     }
 }
