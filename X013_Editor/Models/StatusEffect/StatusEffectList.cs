@@ -99,7 +99,7 @@ using System;
 using System.Xml;
 using System.IO;
 using System.Collections.Generic;
-using SF3.X013_Editor.Forms.frmMain;
+using SF3.X013_Editor.Forms.frmX013_Editor;
 
 namespace SF3.X013_Editor.Models.Treasures
 {

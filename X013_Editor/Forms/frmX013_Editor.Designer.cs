@@ -1,6 +1,6 @@
 ﻿namespace SF3.X013_Editor.Forms
 {
-    partial class frmMain
+    partial class frmX013_Editor
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX013_Editor));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -284,7 +284,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.aboutToolStripMenuItem.Text = "Version 0.16";
             // 
             // helpToolStripMenuItem1
@@ -1969,7 +1969,7 @@
             this.olvSpellUseLv.DisplayIndex = 25;
             this.olvSpellUseLv.Text = "SpellUseLv";
             // 
-            // frmMain
+            // frmX013_Editor
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1978,11 +1978,11 @@
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmMain";
+            this.Name = "frmX013_Editor";
             this.Text = "Sf3 X013 editor";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMonsterEditor_FormClosing);
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            this.Resize += new System.EventHandler(this.frmMonsterEditor_Resize);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmX013_Editor_FormClosing);
+            this.Load += new System.EventHandler(this.frmX013_Editor_Load);
+            this.Resize += new System.EventHandler(this.frmX013_Editor_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabMain.ResumeLayout(false);
@@ -2016,6 +2016,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.objectListView13)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
