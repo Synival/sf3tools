@@ -26,12 +26,28 @@ namespace SF3
         bool SaveFile(string filename);
 
         /// <summary>
+        /// Returns the value of string data of a specific size at a location.
+        /// </summary>
+        /// <param name="location">The address of the string.</param>
+        /// <param name="length">The length of the string space.</param>
+        string GetString(int location, int length);
+
+        /// <summary>
         /// Returns the value of a single bit of a byte at a location.
         /// </summary>
         /// <param name="location">The address of the byte containing the bit.</param>
         /// <param name="bit">The position of the bit, in range (0, 7).</param>
         /// <returns>True if the bit is set, false if the bit is unset.</returns>
         bool GetBit(int location, int bit);
+
+        /// <summary>
+        /// Sets the value of string data of a specific size at a location.
+        /// Data set will not exceed the length provided, and remaining bytes are automatically filled with zeros.
+        /// </summary>
+        /// <param name="location">The address of the string.</param>
+        /// <param name="length">The length of the string space.</param>
+        /// <param name="value">The new value of the string.</param>
+        void SetString(int location, int length, string value);
 
         /// <summary>
         /// Sets the value of a single bit of a byte at a location.

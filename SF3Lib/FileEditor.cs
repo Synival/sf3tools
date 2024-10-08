@@ -133,8 +133,12 @@ namespace SF3
             }
         }
 
-        //Returns a string from values of location to location+length bytes
-        public static string GetString(int location, int length)
+        /// <summary>
+        /// Returns the value of string data of a specific size at a location.
+        /// </summary>
+        /// <param name="location">The address of the string.</param>
+        /// <param name="length">The length of the string space.</param>
+        public string GetString(int location, int length)
         {
             if (data == null)
             {
@@ -171,6 +175,7 @@ namespace SF3
 
             data[location] = value;
         }
+
         public static void SetWord(int location, int value)
         {
             if (data == null)
@@ -181,6 +186,7 @@ namespace SF3
             data[location] = (byte)(value >> 8);
             data[location + 1] = (byte)(value % 256);
         }
+
         public static void SetDouble(int location, int value)
         {
             byte[] converted = BitConverter.GetBytes(value);
@@ -190,7 +196,14 @@ namespace SF3
             data[location + 3] = converted[0];
         }
 
-        public static void SetString(int location, int length, string value)
+        /// <summary>
+        /// Sets the value of string data of a specific size at a location.
+        /// Data set will not exceed the length provided, and remaining bytes are automatically filled with zeros.
+        /// </summary>
+        /// <param name="location">The address of the string.</param>
+        /// <param name="length">The length of the string space.</param>
+        /// <param name="value">The new value of the string.</param>
+        public void SetString(int location, int length, string value)
         {
             if (data == null)
             {
