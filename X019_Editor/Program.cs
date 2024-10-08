@@ -14,7 +14,7 @@ namespace SF3.X019_Editor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.frmMain());
+            Application.Run(new Forms.frmX019_Editor());
         }
     }
 }
