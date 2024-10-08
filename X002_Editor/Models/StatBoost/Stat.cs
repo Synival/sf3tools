@@ -17,7 +17,7 @@ namespace SF3.X002_Editor.Models.StatBoost
         {
             Scenario = scenario;
 
-            checkVersion2 = FileEditor.getByte(0x0000000B);
+            checkVersion2 = FileEditor.GetByte(0x0000000B);
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -60,8 +60,8 @@ namespace SF3.X002_Editor.Models.StatBoost
 
         public int Stat
         {
-            get => FileEditor.getByte(stat);
-            set => FileEditor.setByte(stat, (byte)value);
+            get => FileEditor.GetByte(stat);
+            set => FileEditor.SetByte(stat, (byte)value);
         }
 
         public int StatAddress => (address);

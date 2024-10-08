@@ -262,10 +262,10 @@ namespace SF3.X1_Editor.Forms
                 sub = 0x06060000;
             }
 
-            offset = FileEditor.getDouble(offset);
+            offset = FileEditor.GetDouble(offset);
 
             offset = offset - sub; //first pointer
-            offset = FileEditor.getDouble(offset);
+            offset = FileEditor.GetDouble(offset);
 
             /*A value higher means a pointer is on the offset, meaning we are in a battle. If it is not a 
               pointer we are at our destination so we know a town is loaded.
@@ -506,7 +506,7 @@ namespace SF3.X1_Editor.Forms
             openfile.Filter = "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                if (FileEditor.loadFile(openfile.FileName))
+                if (FileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {
@@ -597,7 +597,7 @@ namespace SF3.X1_Editor.Forms
             savefile.FileName = Path.GetFileName(FileEditor.Filename);
             if (savefile.ShowDialog() == DialogResult.OK)
             {
-                FileEditor.saveFile(savefile.FileName);
+                FileEditor.SaveFile(savefile.FileName);
             }
         }
 

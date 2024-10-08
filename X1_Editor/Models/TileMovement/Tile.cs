@@ -41,26 +41,26 @@ namespace SF3.X1_Editor.Models.Tiles
             {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
                 offset = offset + 0xac; //value we want is 0xac bytes later always
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //second pointer
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
 
                 offset = offset - sub + 0x7c; //second pointer*/
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605e000;
                 offset = npcOffset - sub + 4; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -69,11 +69,11 @@ namespace SF3.X1_Editor.Models.Tiles
             {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
                 offset = offset + 0xac; //value we want is 0xac bytes later always (except for btl330-339
                                         //Console.WriteLine(offset);
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
 
                 if (offset < 0x06070000 && offset > 0) //a valid pointer in this fille will always be positive up to 0x06070000
                 {
@@ -85,7 +85,7 @@ namespace SF3.X1_Editor.Models.Tiles
                     //Console.WriteLine("initiating 330-339 workaround");
                     offset = 0x00000024;
                     //sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
                     offset = offset + 0x14; //value we want is 0xac bytes later always
                 }
@@ -93,11 +93,11 @@ namespace SF3.X1_Editor.Models.Tiles
                 /*
                 offset = 0x000001c4;
                     sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
                     offset = offset + 0xac; //value we want is 0xac bytes later always
                                             //Console.WriteLine(offset);
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //second pointer
                 /*
 
@@ -105,20 +105,20 @@ namespace SF3.X1_Editor.Models.Tiles
                 //work around for x1btl330-339 not being consistant with everything else
                 offset = 0x00000024;
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
                 offset = offset + 0x14; //value we want is 0xac bytes later always
                 //Console.WriteLine(offset);
-                //offset = FileEditor.getDouble(offset);
+                //offset = FileEditor.GetDouble(offset);
                 //offset = offset - sub; //second pointer
                 */
 
                 /*
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
 
                 offset = offset - sub + 0x7c; //second pointer*/
             }
@@ -127,18 +127,18 @@ namespace SF3.X1_Editor.Models.Tiles
             {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
                 offset = offset + 0xac; //value we want is 0xac bytes later always
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //second pointer
 
                 /*
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
 
                 offset = offset - sub + 0x7c; //second pointer
                 */
@@ -184,94 +184,94 @@ namespace SF3.X1_Editor.Models.Tiles
 
         public int TileNoEntry
         {
-            get => FileEditor.getByte(noEntry);
-            set => FileEditor.setByte(noEntry, (byte)value);
+            get => FileEditor.GetByte(noEntry);
+            set => FileEditor.SetByte(noEntry, (byte)value);
         }
         public int TileUnknown1
         {
-            get => FileEditor.getByte(unknown01);
-            set => FileEditor.setByte(unknown01, (byte)value);
+            get => FileEditor.GetByte(unknown01);
+            set => FileEditor.SetByte(unknown01, (byte)value);
         }
         public int TileGrassland
         {
-            get => FileEditor.getByte(grassland);
-            set => FileEditor.setByte(grassland, (byte)value);
+            get => FileEditor.GetByte(grassland);
+            set => FileEditor.SetByte(grassland, (byte)value);
         }
         public int TileDirt
         {
-            get => FileEditor.getByte(dirt);
-            set => FileEditor.setByte(dirt, (byte)value);
+            get => FileEditor.GetByte(dirt);
+            set => FileEditor.SetByte(dirt, (byte)value);
         }
         public int TileDarkGrass
         {
-            get => FileEditor.getByte(darkGrass);
-            set => FileEditor.setByte(darkGrass, (byte)value);
+            get => FileEditor.GetByte(darkGrass);
+            set => FileEditor.SetByte(darkGrass, (byte)value);
         }
 
         public int TileForest
         {
-            get => FileEditor.getByte(forest);
-            set => FileEditor.setByte(forest, (byte)value);
+            get => FileEditor.GetByte(forest);
+            set => FileEditor.SetByte(forest, (byte)value);
         }
 
         public int TileBrownMountain
         {
-            get => FileEditor.getByte(brownMountain);
-            set => FileEditor.setByte(brownMountain, (byte)value);
+            get => FileEditor.GetByte(brownMountain);
+            set => FileEditor.SetByte(brownMountain, (byte)value);
         }
 
         public int TileDesert
         {
-            get => FileEditor.getByte(desert);
-            set => FileEditor.setByte(desert, (byte)value);
+            get => FileEditor.GetByte(desert);
+            set => FileEditor.SetByte(desert, (byte)value);
         }
 
         public int TileGreyMountain
         {
-            get => FileEditor.getByte(greyMountain);
-            set => FileEditor.setByte(greyMountain, (byte)value);
+            get => FileEditor.GetByte(greyMountain);
+            set => FileEditor.SetByte(greyMountain, (byte)value);
         }
 
         public int TileUnknown9
         {
-            get => FileEditor.getByte(unknown09);
-            set => FileEditor.setByte(unknown09, (byte)value);
+            get => FileEditor.GetByte(unknown09);
+            set => FileEditor.SetByte(unknown09, (byte)value);
         }
 
         public int TileUnknownA
         {
-            get => FileEditor.getByte(unknown0a);
-            set => FileEditor.setByte(unknown0a, (byte)value);
+            get => FileEditor.GetByte(unknown0a);
+            set => FileEditor.SetByte(unknown0a, (byte)value);
         }
 
         public int TileUnknownB
         {
-            get => FileEditor.getByte(unknown0b);
-            set => FileEditor.setByte(unknown0b, (byte)value);
+            get => FileEditor.GetByte(unknown0b);
+            set => FileEditor.SetByte(unknown0b, (byte)value);
         }
 
         public int TileUnknownC
         {
-            get => FileEditor.getByte(unknown0c);
-            set => FileEditor.setByte(unknown0c, (byte)value);
+            get => FileEditor.GetByte(unknown0c);
+            set => FileEditor.SetByte(unknown0c, (byte)value);
         }
 
         public int TileUnknownD
         {
-            get => FileEditor.getByte(unknown0d);
-            set => FileEditor.setByte(unknown0d, (byte)value);
+            get => FileEditor.GetByte(unknown0d);
+            set => FileEditor.SetByte(unknown0d, (byte)value);
         }
 
         public int TileUnknownE
         {
-            get => FileEditor.getByte(unknown0e);
-            set => FileEditor.setByte(unknown0e, (byte)value);
+            get => FileEditor.GetByte(unknown0e);
+            set => FileEditor.SetByte(unknown0e, (byte)value);
         }
 
         public int TileUnknownF
         {
-            get => FileEditor.getByte(unknown0f);
-            set => FileEditor.setByte(unknown0f, (byte)value);
+            get => FileEditor.GetByte(unknown0f);
+            set => FileEditor.SetByte(unknown0f, (byte)value);
         }
 
         // public int Map => Globals.map;

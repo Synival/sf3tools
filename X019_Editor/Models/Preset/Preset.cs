@@ -61,28 +61,28 @@ namespace SF3.X019_Editor.Models.Presets
 
         public int SpellID2
         {
-            get => FileEditor.getByte(spell);
-            set => FileEditor.setByte(spell, (byte)value);
+            get => FileEditor.GetByte(spell);
+            set => FileEditor.SetByte(spell, (byte)value);
         }
         public int Weapon0
         {
-            get => FileEditor.getByte(weaponLv0);
-            set => FileEditor.setByte(weaponLv0, (byte)value);
+            get => FileEditor.GetByte(weaponLv0);
+            set => FileEditor.SetByte(weaponLv0, (byte)value);
         }
         public int Weapon1
         {
-            get => FileEditor.getByte(weaponLv1);
-            set => FileEditor.setByte(weaponLv1, (byte)value);
+            get => FileEditor.GetByte(weaponLv1);
+            set => FileEditor.SetByte(weaponLv1, (byte)value);
         }
         public int Weapon2
         {
-            get => FileEditor.getByte(weaponLv2);
-            set => FileEditor.setByte(weaponLv2, (byte)value);
+            get => FileEditor.GetByte(weaponLv2);
+            set => FileEditor.SetByte(weaponLv2, (byte)value);
         }
         public int Weapon3
         {
-            get => FileEditor.getByte(weaponLv3);
-            set => FileEditor.setByte(weaponLv3, (byte)value);
+            get => FileEditor.GetByte(weaponLv3);
+            set => FileEditor.SetByte(weaponLv3, (byte)value);
         }
 
         public int PresetAddress => (address);

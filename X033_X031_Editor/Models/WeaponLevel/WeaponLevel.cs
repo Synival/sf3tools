@@ -23,8 +23,8 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         {
             Scenario = scenario;
 
-            checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
-            checkVersion2 = FileEditor.getByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
+            checkType = FileEditor.GetByte(0x00000009); //if it's 0x07 we're in a x033.bin
+            checkVersion2 = FileEditor.GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -112,23 +112,23 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 
         public int WLevel1
         {
-            get => FileEditor.getWord(level1);
-            set => FileEditor.setWord(level1, value);
+            get => FileEditor.GetWord(level1);
+            set => FileEditor.SetWord(level1, value);
         }
         public int WLevel2
         {
-            get => FileEditor.getWord(level2);
-            set => FileEditor.setWord(level2, value);
+            get => FileEditor.GetWord(level2);
+            set => FileEditor.SetWord(level2, value);
         }
         public int WLevel3
         {
-            get => FileEditor.getWord(level3);
-            set => FileEditor.setWord(level3, value);
+            get => FileEditor.GetWord(level3);
+            set => FileEditor.SetWord(level3, value);
         }
         public int WLevel4
         {
-            get => FileEditor.getWord(level4);
-            set => FileEditor.setWord(level4, value);
+            get => FileEditor.GetWord(level4);
+            set => FileEditor.SetWord(level4, value);
         }
 
         public int WeaponLevelAddress => (address);

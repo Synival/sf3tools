@@ -61,28 +61,28 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
 
         public int RankNone
         {
-            get => FileEditor.getByte(rankNone);
-            set => FileEditor.setByte(rankNone, (byte)value);
+            get => FileEditor.GetByte(rankNone);
+            set => FileEditor.SetByte(rankNone, (byte)value);
         }
         public int RankC
         {
-            get => FileEditor.getByte(rankC);
-            set => FileEditor.setByte(rankC, (byte)value);
+            get => FileEditor.GetByte(rankC);
+            set => FileEditor.SetByte(rankC, (byte)value);
         }
         public int RankB
         {
-            get => FileEditor.getByte(rankB);
-            set => FileEditor.setByte(rankB, (byte)value);
+            get => FileEditor.GetByte(rankB);
+            set => FileEditor.SetByte(rankB, (byte)value);
         }
         public int RankA
         {
-            get => FileEditor.getByte(rankA);
-            set => FileEditor.setByte(rankA, (byte)value);
+            get => FileEditor.GetByte(rankA);
+            set => FileEditor.SetByte(rankA, (byte)value);
         }
         public int RankS
         {
-            get => FileEditor.getByte(rankS);
-            set => FileEditor.setByte(rankS, (byte)value);
+            get => FileEditor.GetByte(rankS);
+            set => FileEditor.SetByte(rankS, (byte)value);
         }
 
         public int WeaponSpellRankAddress => (address);

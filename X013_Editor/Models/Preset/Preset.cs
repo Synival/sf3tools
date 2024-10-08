@@ -61,28 +61,28 @@ namespace SF3.X013_Editor.Models.Presets
 
         public int SLvl0
         {
-            get => FileEditor.getByte(sLvl0);
-            set => FileEditor.setByte(sLvl0, (byte)value);
+            get => FileEditor.GetByte(sLvl0);
+            set => FileEditor.SetByte(sLvl0, (byte)value);
         }
         public int SLvl1
         {
-            get => FileEditor.getByte(sLvl1);
-            set => FileEditor.setByte(sLvl1, (byte)value);
+            get => FileEditor.GetByte(sLvl1);
+            set => FileEditor.SetByte(sLvl1, (byte)value);
         }
         public int SLvl2
         {
-            get => FileEditor.getByte(sLvl2);
-            set => FileEditor.setByte(sLvl2, (byte)value);
+            get => FileEditor.GetByte(sLvl2);
+            set => FileEditor.SetByte(sLvl2, (byte)value);
         }
         public int SLvl3
         {
-            get => FileEditor.getByte(sLvl3);
-            set => FileEditor.setByte(sLvl3, (byte)value);
+            get => FileEditor.GetByte(sLvl3);
+            set => FileEditor.SetByte(sLvl3, (byte)value);
         }
         public int SLvl4
         {
-            get => FileEditor.getByte(sLvl4);
-            set => FileEditor.setByte(sLvl4, (byte)value);
+            get => FileEditor.GetByte(sLvl4);
+            set => FileEditor.SetByte(sLvl4, (byte)value);
         }
 
         public int PresetAddress => (address);

@@ -66,13 +66,13 @@ namespace SF3.X1_Editor.Models.Items
 
         /*public int NPCTableAddress1
         {
-            get => FileEditor.getDouble(npcOffset);
-            set => FileEditor.setDouble(npcOffset, value);
+            get => FileEditor.GetDouble(npcOffset);
+            set => FileEditor.SetDouble(npcOffset, value);
         }
 
-        public int NPCTableAddress2 => FileEditor.getDouble(NPCTableAddress1 - 0x0605F000);
+        public int NPCTableAddress2 => FileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
 
-        public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
+        public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
         public Item(ScenarioType scenario, int id, string text)
         {
@@ -82,12 +82,12 @@ namespace SF3.X1_Editor.Models.Items
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
 
                 if (offset != 0)
                 {
@@ -100,11 +100,11 @@ namespace SF3.X1_Editor.Models.Items
                     Globals.map = 0;
                     offset = 0x00000018; //scn1 initial pointer
                     sub = 0x0605f000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -113,10 +113,10 @@ namespace SF3.X1_Editor.Models.Items
                 /*
                 offset = 0x00000018; //scn1 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605f000;
                 offset = npcOffset - sub; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -125,12 +125,12 @@ namespace SF3.X1_Editor.Models.Items
             {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -142,11 +142,11 @@ namespace SF3.X1_Editor.Models.Items
                     Globals.map = 4;
                     offset = 0x00000024; //scn2 initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -154,10 +154,10 @@ namespace SF3.X1_Editor.Models.Items
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605e000;
                 offset = npcOffset - sub + 4; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -166,12 +166,12 @@ namespace SF3.X1_Editor.Models.Items
             {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -183,11 +183,11 @@ namespace SF3.X1_Editor.Models.Items
                     Globals.map = 8;
                     offset = 0x00000024; //scn3 initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -197,11 +197,11 @@ namespace SF3.X1_Editor.Models.Items
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -213,11 +213,11 @@ namespace SF3.X1_Editor.Models.Items
                     Globals.map = 0;
                     offset = 0x00000024; //pd initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -227,11 +227,11 @@ namespace SF3.X1_Editor.Models.Items
             {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //second pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //third pointer
 
                 offset = offset + 10;
@@ -305,275 +305,275 @@ namespace SF3.X1_Editor.Models.Items
 
         public int Unknown1
         {
-            get => FileEditor.getByte(unknown1);
-            set => FileEditor.setByte(unknown1, (byte)value);
+            get => FileEditor.GetByte(unknown1);
+            set => FileEditor.SetByte(unknown1, (byte)value);
         }
 
         public int Unknown2
         {
-            get => FileEditor.getByte(unknown2);
-            set => FileEditor.setByte(unknown2, (byte)value);
+            get => FileEditor.GetByte(unknown2);
+            set => FileEditor.SetByte(unknown2, (byte)value);
         }
 
         public int EnemyID
         {
-            get => FileEditor.getWord(enemyID);
-            set => FileEditor.setWord(enemyID, value);
+            get => FileEditor.GetWord(enemyID);
+            set => FileEditor.SetWord(enemyID, value);
         }
 
         public int EnemyX
         {
-            get => FileEditor.getWord(x);
-            set => FileEditor.setWord(x, value);
+            get => FileEditor.GetWord(x);
+            set => FileEditor.SetWord(x, value);
         }
 
         public int EnemyY
         {
-            get => FileEditor.getWord(y);
-            set => FileEditor.setWord(y, value);
+            get => FileEditor.GetWord(y);
+            set => FileEditor.SetWord(y, value);
         }
 
         public int ItemOverride
         {
-            get => FileEditor.getWord(itemOverride);
-            set => FileEditor.setWord(itemOverride, value);
+            get => FileEditor.GetWord(itemOverride);
+            set => FileEditor.SetWord(itemOverride, value);
         }
 
         public int Unknown3
         {
-            get => FileEditor.getByte(unknown3);
-            set => FileEditor.setByte(unknown3, (byte)value);
+            get => FileEditor.GetByte(unknown3);
+            set => FileEditor.SetByte(unknown3, (byte)value);
         }
         public int Unknown4
         {
-            get => FileEditor.getByte(unknown4);
-            set => FileEditor.setByte(unknown4, (byte)value);
+            get => FileEditor.GetByte(unknown4);
+            set => FileEditor.SetByte(unknown4, (byte)value);
         }
 
         public int Unknown5
         {
-            get => FileEditor.getByte(unknown5);
-            set => FileEditor.setByte(unknown5, (byte)value);
+            get => FileEditor.GetByte(unknown5);
+            set => FileEditor.SetByte(unknown5, (byte)value);
         }
 
         public int JoinID
         {
-            get => FileEditor.getWord(joinID);
-            set => FileEditor.setWord(joinID, value);
+            get => FileEditor.GetWord(joinID);
+            set => FileEditor.SetWord(joinID, value);
         }
 
         public int Unknown6
         {
-            get => FileEditor.getByte(unknown6);
-            set => FileEditor.setByte(unknown6, (byte)value);
+            get => FileEditor.GetByte(unknown6);
+            set => FileEditor.SetByte(unknown6, (byte)value);
         }
 
         public int Unknown7
         {
-            get => FileEditor.getByte(unknown7);
-            set => FileEditor.setByte(unknown7, (byte)value);
+            get => FileEditor.GetByte(unknown7);
+            set => FileEditor.SetByte(unknown7, (byte)value);
         }
         public int Unknown8
         {
-            get => FileEditor.getByte(unknown8);
-            set => FileEditor.setByte(unknown8, (byte)value);
+            get => FileEditor.GetByte(unknown8);
+            set => FileEditor.SetByte(unknown8, (byte)value);
         }
         public int Unknown9
         {
-            get => FileEditor.getByte(unknown9);
-            set => FileEditor.setByte(unknown9, (byte)value);
+            get => FileEditor.GetByte(unknown9);
+            set => FileEditor.SetByte(unknown9, (byte)value);
         }
 
         public int ControlType
         {
-            get => FileEditor.getByte(controlType);
-            set => FileEditor.setByte(controlType, (byte)value);
+            get => FileEditor.GetByte(controlType);
+            set => FileEditor.SetByte(controlType, (byte)value);
         }
 
         public int Unknown10
         {
-            get => FileEditor.getByte(unknown10);
-            set => FileEditor.setByte(unknown10, (byte)value);
+            get => FileEditor.GetByte(unknown10);
+            set => FileEditor.SetByte(unknown10, (byte)value);
         }
 
         public int Unknown11
         {
-            get => FileEditor.getByte(unknown11);
-            set => FileEditor.setByte(unknown11, (byte)value);
+            get => FileEditor.GetByte(unknown11);
+            set => FileEditor.SetByte(unknown11, (byte)value);
         }
 
         public int Unknown12
         {
-            get => FileEditor.getByte(unknown12);
-            set => FileEditor.setByte(unknown12, (byte)value);
+            get => FileEditor.GetByte(unknown12);
+            set => FileEditor.SetByte(unknown12, (byte)value);
         }
 
         public int Unknown13
         {
-            get => FileEditor.getByte(unknown13);
-            set => FileEditor.setByte(unknown13, (byte)value);
+            get => FileEditor.GetByte(unknown13);
+            set => FileEditor.SetByte(unknown13, (byte)value);
         }
 
         public int Unknown14
         {
-            get => FileEditor.getByte(unknown14);
-            set => FileEditor.setByte(unknown14, (byte)value);
+            get => FileEditor.GetByte(unknown14);
+            set => FileEditor.SetByte(unknown14, (byte)value);
         }
 
         public int Unknown15
         {
-            get => FileEditor.getByte(unknown15);
-            set => FileEditor.setByte(unknown15, (byte)value);
+            get => FileEditor.GetByte(unknown15);
+            set => FileEditor.SetByte(unknown15, (byte)value);
         }
 
         public int Unknown16
         {
-            get => FileEditor.getByte(unknown16);
-            set => FileEditor.setByte(unknown16, (byte)value);
+            get => FileEditor.GetByte(unknown16);
+            set => FileEditor.SetByte(unknown16, (byte)value);
         }
 
         public int Unknown17
         {
-            get => FileEditor.getByte(unknown17);
-            set => FileEditor.setByte(unknown17, (byte)value);
+            get => FileEditor.GetByte(unknown17);
+            set => FileEditor.SetByte(unknown17, (byte)value);
         }
 
         public int Unknown18
         {
-            get => FileEditor.getByte(unknown18);
-            set => FileEditor.setByte(unknown18, (byte)value);
+            get => FileEditor.GetByte(unknown18);
+            set => FileEditor.SetByte(unknown18, (byte)value);
         }
 
         public int Unknown19
         {
-            get => FileEditor.getByte(unknown19);
-            set => FileEditor.setByte(unknown19, (byte)value);
+            get => FileEditor.GetByte(unknown19);
+            set => FileEditor.SetByte(unknown19, (byte)value);
         }
 
         public int Unknown20
         {
-            get => FileEditor.getByte(unknown20);
-            set => FileEditor.setByte(unknown20, (byte)value);
+            get => FileEditor.GetByte(unknown20);
+            set => FileEditor.SetByte(unknown20, (byte)value);
         }
 
         public int Unknown21
         {
-            get => FileEditor.getByte(unknown21);
-            set => FileEditor.setByte(unknown21, (byte)value);
+            get => FileEditor.GetByte(unknown21);
+            set => FileEditor.SetByte(unknown21, (byte)value);
         }
 
         public int Unknown22
         {
-            get => FileEditor.getByte(unknown22);
-            set => FileEditor.setByte(unknown22, (byte)value);
+            get => FileEditor.GetByte(unknown22);
+            set => FileEditor.SetByte(unknown22, (byte)value);
         }
 
         public int Unknown23
         {
-            get => FileEditor.getByte(unknown23);
-            set => FileEditor.setByte(unknown23, (byte)value);
+            get => FileEditor.GetByte(unknown23);
+            set => FileEditor.SetByte(unknown23, (byte)value);
         }
 
         public int Unknown24
         {
-            get => FileEditor.getByte(unknown24);
-            set => FileEditor.setByte(unknown24, (byte)value);
+            get => FileEditor.GetByte(unknown24);
+            set => FileEditor.SetByte(unknown24, (byte)value);
         }
 
         public int Unknown25
         {
-            get => FileEditor.getByte(unknown25);
-            set => FileEditor.setByte(unknown25, (byte)value);
+            get => FileEditor.GetByte(unknown25);
+            set => FileEditor.SetByte(unknown25, (byte)value);
         }
 
         public int Unknown26
         {
-            get => FileEditor.getByte(unknown26);
-            set => FileEditor.setByte(unknown26, (byte)value);
+            get => FileEditor.GetByte(unknown26);
+            set => FileEditor.SetByte(unknown26, (byte)value);
         }
 
         public int Unknown27
         {
-            get => FileEditor.getByte(unknown27);
-            set => FileEditor.setByte(unknown27, (byte)value);
+            get => FileEditor.GetByte(unknown27);
+            set => FileEditor.SetByte(unknown27, (byte)value);
         }
 
         public int Unknown28
         {
-            get => FileEditor.getByte(unknown28);
-            set => FileEditor.setByte(unknown28, (byte)value);
+            get => FileEditor.GetByte(unknown28);
+            set => FileEditor.SetByte(unknown28, (byte)value);
         }
 
         public int Unknown29
         {
-            get => FileEditor.getByte(unknown29);
-            set => FileEditor.setByte(unknown29, (byte)value);
+            get => FileEditor.GetByte(unknown29);
+            set => FileEditor.SetByte(unknown29, (byte)value);
         }
 
         public int Unknown30
         {
-            get => FileEditor.getByte(unknown30);
-            set => FileEditor.setByte(unknown30, (byte)value);
+            get => FileEditor.GetByte(unknown30);
+            set => FileEditor.SetByte(unknown30, (byte)value);
         }
 
         public int Unknown31
         {
-            get => FileEditor.getByte(unknown31);
-            set => FileEditor.setByte(unknown31, (byte)value);
+            get => FileEditor.GetByte(unknown31);
+            set => FileEditor.SetByte(unknown31, (byte)value);
         }
 
         public int Unknown32
         {
-            get => FileEditor.getByte(unknown32);
-            set => FileEditor.setByte(unknown32, (byte)value);
+            get => FileEditor.GetByte(unknown32);
+            set => FileEditor.SetByte(unknown32, (byte)value);
         }
 
         public int Unknown33
         {
-            get => FileEditor.getByte(unknown33);
-            set => FileEditor.setByte(unknown33, (byte)value);
+            get => FileEditor.GetByte(unknown33);
+            set => FileEditor.SetByte(unknown33, (byte)value);
         }
 
         public int Unknown34
         {
-            get => FileEditor.getByte(unknown34);
-            set => FileEditor.setByte(unknown34, (byte)value);
+            get => FileEditor.GetByte(unknown34);
+            set => FileEditor.SetByte(unknown34, (byte)value);
         }
 
         public int Unknown35
         {
-            get => FileEditor.getByte(unknown35);
-            set => FileEditor.setByte(unknown35, (byte)value);
+            get => FileEditor.GetByte(unknown35);
+            set => FileEditor.SetByte(unknown35, (byte)value);
         }
 
         public int Unknown36
         {
-            get => FileEditor.getByte(unknown36);
-            set => FileEditor.setByte(unknown36, (byte)value);
+            get => FileEditor.GetByte(unknown36);
+            set => FileEditor.SetByte(unknown36, (byte)value);
         }
 
         public int Unknown37
         {
-            get => FileEditor.getByte(unknown37);
-            set => FileEditor.setByte(unknown37, (byte)value);
+            get => FileEditor.GetByte(unknown37);
+            set => FileEditor.SetByte(unknown37, (byte)value);
         }
 
         public int Unknown38
         {
-            get => FileEditor.getByte(unknown38);
-            set => FileEditor.setByte(unknown38, (byte)value);
+            get => FileEditor.GetByte(unknown38);
+            set => FileEditor.SetByte(unknown38, (byte)value);
         }
 
         public int Unknown39
         {
-            get => FileEditor.getByte(unknown39);
-            set => FileEditor.setByte(unknown39, (byte)value);
+            get => FileEditor.GetByte(unknown39);
+            set => FileEditor.SetByte(unknown39, (byte)value);
         }
 
         public int Unknown40
         {
-            get => FileEditor.getWord(unknown40);
-            set => FileEditor.setWord(unknown40, value);
+            get => FileEditor.GetWord(unknown40);
+            set => FileEditor.SetWord(unknown40, value);
         }
 
         public int Address => (address);

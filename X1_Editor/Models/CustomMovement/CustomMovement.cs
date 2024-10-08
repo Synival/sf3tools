@@ -32,12 +32,12 @@ namespace SF3.X1_Editor.Models.CustomMovement
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
 
                 if (offset != 0)
                 {
@@ -53,11 +53,11 @@ namespace SF3.X1_Editor.Models.CustomMovement
                     Globals.map = 0;
                     offset = 0x00000018; //scn1 initial pointer
                     sub = 0x0605f000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -70,10 +70,10 @@ namespace SF3.X1_Editor.Models.CustomMovement
                 /*
                 offset = 0x00000018; //scn1 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605f000;
                 offset = npcOffset - sub; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -82,12 +82,12 @@ namespace SF3.X1_Editor.Models.CustomMovement
             {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -103,11 +103,11 @@ namespace SF3.X1_Editor.Models.CustomMovement
                     Globals.map = 4;
                     offset = 0x00000024; //scn2 initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -119,10 +119,10 @@ namespace SF3.X1_Editor.Models.CustomMovement
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605e000;
                 offset = npcOffset - sub + 4; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -131,12 +131,12 @@ namespace SF3.X1_Editor.Models.CustomMovement
             {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -151,11 +151,11 @@ namespace SF3.X1_Editor.Models.CustomMovement
                     Globals.map = 8;
                     offset = 0x00000024; //scn3 initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -168,11 +168,11 @@ namespace SF3.X1_Editor.Models.CustomMovement
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -187,11 +187,11 @@ namespace SF3.X1_Editor.Models.CustomMovement
                     Globals.map = 0;
                     offset = 0x00000024; //pd initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -204,11 +204,11 @@ namespace SF3.X1_Editor.Models.CustomMovement
             {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //second pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //third pointer
 
                 offset = offset + 10;
@@ -249,58 +249,58 @@ namespace SF3.X1_Editor.Models.CustomMovement
 
         public int CustomMovementUnknown
         {
-            get => FileEditor.getWord(unknown00);
-            set => FileEditor.setWord(unknown00, value);
+            get => FileEditor.GetWord(unknown00);
+            set => FileEditor.SetWord(unknown00, value);
         }
 
         public int CustomMovementX1
         {
-            get => FileEditor.getWord(xPos1);
-            set => FileEditor.setWord(xPos1, value);
+            get => FileEditor.GetWord(xPos1);
+            set => FileEditor.SetWord(xPos1, value);
         }
         public int CustomMovementZ1
         {
-            get => FileEditor.getWord(zPos1);
-            set => FileEditor.setWord(zPos1, value);
+            get => FileEditor.GetWord(zPos1);
+            set => FileEditor.SetWord(zPos1, value);
         }
 
         public int CustomMovementX2
         {
-            get => FileEditor.getWord(xPos2);
-            set => FileEditor.setWord(xPos2, value);
+            get => FileEditor.GetWord(xPos2);
+            set => FileEditor.SetWord(xPos2, value);
         }
         public int CustomMovementZ2
         {
-            get => FileEditor.getWord(zPos2);
-            set => FileEditor.setWord(zPos2, value);
+            get => FileEditor.GetWord(zPos2);
+            set => FileEditor.SetWord(zPos2, value);
         }
 
         public int CustomMovementX3
         {
-            get => FileEditor.getWord(xPos3);
-            set => FileEditor.setWord(xPos3, value);
+            get => FileEditor.GetWord(xPos3);
+            set => FileEditor.SetWord(xPos3, value);
         }
         public int CustomMovementZ3
         {
-            get => FileEditor.getWord(zPos3);
-            set => FileEditor.setWord(zPos3, value);
+            get => FileEditor.GetWord(zPos3);
+            set => FileEditor.SetWord(zPos3, value);
         }
 
         public int CustomMovementX4
         {
-            get => FileEditor.getWord(xPos4);
-            set => FileEditor.setWord(xPos4, value);
+            get => FileEditor.GetWord(xPos4);
+            set => FileEditor.SetWord(xPos4, value);
         }
         public int CustomMovementZ4
         {
-            get => FileEditor.getWord(zPos4);
-            set => FileEditor.setWord(zPos4, value);
+            get => FileEditor.GetWord(zPos4);
+            set => FileEditor.SetWord(zPos4, value);
         }
 
         public int CustomMovementEnd
         {
-            get => FileEditor.getDouble(ending);
-            set => FileEditor.setDouble(ending, value);
+            get => FileEditor.GetDouble(ending);
+            set => FileEditor.SetDouble(ending, value);
         }
 
         public int CustomMovementAddress => (address);

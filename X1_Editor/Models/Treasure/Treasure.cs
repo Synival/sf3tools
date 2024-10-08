@@ -26,13 +26,13 @@ namespace SF3.X1_Editor.Models.Treasures
 
         /*public int NPCTableAddress1
         {
-            get => FileEditor.getDouble(npcOffset);
-            set => FileEditor.setDouble(npcOffset, value);
+            get => FileEditor.GetDouble(npcOffset);
+            set => FileEditor.SetDouble(npcOffset, value);
         }
 
-        public int NPCTableAddress2 => FileEditor.getDouble(NPCTableAddress1 - 0x0605F000);
+        public int NPCTableAddress2 => FileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
 
-        public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
+        public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
         public Treasure(ScenarioType scenario, int id, string text)
         {
@@ -42,7 +42,7 @@ namespace SF3.X1_Editor.Models.Treasures
             {
                 offset = 0x0000000C; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
 
                 offset = offset - sub;
             }
@@ -50,28 +50,28 @@ namespace SF3.X1_Editor.Models.Treasures
             {
                 offset = 0x0000000C; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x0000000C; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x0000000C; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.Other)
             {
                 offset = 0x0000000C; //btl99 initial pointer
                 sub = 0x06060000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
 
@@ -106,9 +106,9 @@ namespace SF3.X1_Editor.Models.Treasures
         {
             get
             {
-                if (FileEditor.getWord(eventNumber) <= 0x0f)
+                if (FileEditor.GetWord(eventNumber) <= 0x0f)
                 {
-                    return (FileEditor.getWord(eventNumber) + 0x30).ToString("X");
+                    return (FileEditor.GetWord(eventNumber) + 0x30).ToString("X");
                 }
                 else
                 {
@@ -119,38 +119,38 @@ namespace SF3.X1_Editor.Models.Treasures
 
         public int Searched
         {
-            get => FileEditor.getWord(searched);
-            set => FileEditor.setWord(searched, value);
+            get => FileEditor.GetWord(searched);
+            set => FileEditor.SetWord(searched, value);
         }
 
         public int EventNumber
         {
-            get => FileEditor.getWord(eventNumber);
-            set => FileEditor.setWord(eventNumber, value);
+            get => FileEditor.GetWord(eventNumber);
+            set => FileEditor.SetWord(eventNumber, value);
         }
 
         public int FlagUse
         {
-            get => FileEditor.getWord(flagUsed);
-            set => FileEditor.setWord(flagUsed, value);
+            get => FileEditor.GetWord(flagUsed);
+            set => FileEditor.SetWord(flagUsed, value);
         }
 
         public int UnknownTreasure
         {
-            get => FileEditor.getWord(unknown);
-            set => FileEditor.setWord(unknown, value);
+            get => FileEditor.GetWord(unknown);
+            set => FileEditor.SetWord(unknown, value);
         }
 
         public int EventType
         {
-            get => FileEditor.getWord(eventType);
-            set => FileEditor.setWord(eventType, value);
+            get => FileEditor.GetWord(eventType);
+            set => FileEditor.SetWord(eventType, value);
         }
 
         public int TreasureItem
         {
-            get => FileEditor.getWord(itemID);
-            set => FileEditor.setWord(itemID, value);
+            get => FileEditor.GetWord(itemID);
+            set => FileEditor.SetWord(itemID, value);
         }
 
         public int TreasureAddress => (address);

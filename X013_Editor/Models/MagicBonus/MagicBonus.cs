@@ -87,47 +87,47 @@ namespace SF3.X013_Editor.Models.MagicBonus
 
         public int EarthBonus
         {
-            get => FileEditor.getByte(earthBonus);
-            set => FileEditor.setByte(earthBonus, (byte)value);
+            get => FileEditor.GetByte(earthBonus);
+            set => FileEditor.SetByte(earthBonus, (byte)value);
         }
         public int FireBonus
         {
-            get => FileEditor.getByte(fireBonus);
-            set => FileEditor.setByte(fireBonus, (byte)value);
+            get => FileEditor.GetByte(fireBonus);
+            set => FileEditor.SetByte(fireBonus, (byte)value);
         }
         public int IceBonus
         {
-            get => FileEditor.getByte(iceBonus);
-            set => FileEditor.setByte(iceBonus, (byte)value);
+            get => FileEditor.GetByte(iceBonus);
+            set => FileEditor.SetByte(iceBonus, (byte)value);
         }
         public int SparkBonus
         {
-            get => FileEditor.getByte(sparkBonus);
-            set => FileEditor.setByte(sparkBonus, (byte)value);
+            get => FileEditor.GetByte(sparkBonus);
+            set => FileEditor.SetByte(sparkBonus, (byte)value);
         }
 
         public int WindBonus
         {
-            get => FileEditor.getByte(windBonus);
-            set => FileEditor.setByte(windBonus, (byte)value);
+            get => FileEditor.GetByte(windBonus);
+            set => FileEditor.SetByte(windBonus, (byte)value);
         }
 
         public int LightBonus
         {
-            get => FileEditor.getByte(lightBonus);
-            set => FileEditor.setByte(lightBonus, (byte)value);
+            get => FileEditor.GetByte(lightBonus);
+            set => FileEditor.SetByte(lightBonus, (byte)value);
         }
 
         public int DarkBonus
         {
-            get => FileEditor.getByte(darkBonus);
-            set => FileEditor.setByte(darkBonus, (byte)value);
+            get => FileEditor.GetByte(darkBonus);
+            set => FileEditor.SetByte(darkBonus, (byte)value);
         }
 
         public int UnknownBonus
         {
-            get => FileEditor.getByte(unknownBonus);
-            set => FileEditor.setByte(unknownBonus, (byte)value);
+            get => FileEditor.GetByte(unknownBonus);
+            set => FileEditor.SetByte(unknownBonus, (byte)value);
         }
 
         public int MagicAddress => (address);

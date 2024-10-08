@@ -20,7 +20,7 @@ namespace SF3.X002_Editor.Models.WeaponRank
         {
             Scenario = scenario;
 
-            checkVersion2 = FileEditor.getByte(0x0000000B);
+            checkVersion2 = FileEditor.GetByte(0x0000000B);
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -67,23 +67,23 @@ namespace SF3.X002_Editor.Models.WeaponRank
 
         public int Skill0
         {
-            get => FileEditor.getByte(skill0);
-            set => FileEditor.setByte(skill0, (byte)value);
+            get => FileEditor.GetByte(skill0);
+            set => FileEditor.SetByte(skill0, (byte)value);
         }
         public int Skill1
         {
-            get => FileEditor.getByte(skill1);
-            set => FileEditor.setByte(skill1, (byte)value);
+            get => FileEditor.GetByte(skill1);
+            set => FileEditor.SetByte(skill1, (byte)value);
         }
         public int Skill2
         {
-            get => FileEditor.getByte(skill2);
-            set => FileEditor.setByte(skill2, (byte)value);
+            get => FileEditor.GetByte(skill2);
+            set => FileEditor.SetByte(skill2, (byte)value);
         }
         public int Skill3
         {
-            get => FileEditor.getByte(skill3);
-            set => FileEditor.setByte(skill3, (byte)value);
+            get => FileEditor.GetByte(skill3);
+            set => FileEditor.SetByte(skill3, (byte)value);
         }
 
         public int WeaponRankAddress => (address);

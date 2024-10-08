@@ -31,13 +31,13 @@ namespace SF3.X1_Editor.Models.Npcs
 
         /*public int NPCTableAddress1
         {
-            get => FileEditor.getDouble(npcOffset);
-            set => FileEditor.setDouble(npcOffset, value);
+            get => FileEditor.GetDouble(npcOffset);
+            set => FileEditor.SetDouble(npcOffset, value);
         }
 
-        public int NPCTableAddress2 => FileEditor.getDouble(NPCTableAddress1 - 0x0605F000);
+        public int NPCTableAddress2 => FileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
 
-        public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
+        public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
         public Npc(ScenarioType scenario, int id, string text)
         {
@@ -47,7 +47,7 @@ namespace SF3.X1_Editor.Models.Npcs
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
 
                 offset = offset - sub;
             }
@@ -55,28 +55,28 @@ namespace SF3.X1_Editor.Models.Npcs
             {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }/*
             else if (Scenario == ScenarioType.BTL99)
             {
                 offset = 0x00000024; //btl99 initial pointer
                 sub = 0x06060000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }*/
 
@@ -121,7 +121,7 @@ namespace SF3.X1_Editor.Models.Npcs
 
             get
             {
-                if ((FileEditor.getWord(spriteID) > 0x0f) && (FileEditor.getWord(spriteID) != 0xffff))
+                if ((FileEditor.GetWord(spriteID) > 0x0f) && (FileEditor.GetWord(spriteID) != 0xffff))
                 {
                     return (index + 0x3D).ToString("X");
                 }
@@ -134,68 +134,68 @@ namespace SF3.X1_Editor.Models.Npcs
 
         public int SpriteID
         {
-            get => FileEditor.getWord(spriteID);
-            set => FileEditor.setWord(spriteID, value);
+            get => FileEditor.GetWord(spriteID);
+            set => FileEditor.SetWord(spriteID, value);
         }
 
         public int NpcUnknown
         {
-            get => FileEditor.getWord(unknown1);
-            set => FileEditor.setWord(unknown1, value);
+            get => FileEditor.GetWord(unknown1);
+            set => FileEditor.SetWord(unknown1, value);
         }
 
         public int NpcTable
         {
-            get => FileEditor.getDouble(table);
-            set => FileEditor.setDouble(table, value);
+            get => FileEditor.GetDouble(table);
+            set => FileEditor.SetDouble(table, value);
         }
 
         public int NpcXPos
         {
-            get => FileEditor.getWord(xPos);
-            set => FileEditor.setWord(xPos, value);
+            get => FileEditor.GetWord(xPos);
+            set => FileEditor.SetWord(xPos, value);
         }
 
         public int NpcZPos
         {
-            get => FileEditor.getWord(zPos);
-            set => FileEditor.setWord(zPos, value);
+            get => FileEditor.GetWord(zPos);
+            set => FileEditor.SetWord(zPos, value);
         }
 
         public int NpcDirection
         {
-            get => FileEditor.getWord(direction);
-            set => FileEditor.setWord(direction, value);
+            get => FileEditor.GetWord(direction);
+            set => FileEditor.SetWord(direction, value);
         }
 
         public int NpcUnknownA
         {
-            get => FileEditor.getWord(unknownA);
-            set => FileEditor.setWord(unknownA, value);
+            get => FileEditor.GetWord(unknownA);
+            set => FileEditor.SetWord(unknownA, value);
         }
 
         public int NpcUnknownC
         {
-            get => FileEditor.getWord(unknownC);
-            set => FileEditor.setWord(unknownC, value);
+            get => FileEditor.GetWord(unknownC);
+            set => FileEditor.SetWord(unknownC, value);
         }
 
         public int NpcUnknownE
         {
-            get => FileEditor.getWord(unknownE);
-            set => FileEditor.setWord(unknownE, value);
+            get => FileEditor.GetWord(unknownE);
+            set => FileEditor.SetWord(unknownE, value);
         }
 
         public int NpcUnknown12
         {
-            get => FileEditor.getWord(unknown12);
-            set => FileEditor.setWord(unknown12, value);
+            get => FileEditor.GetWord(unknown12);
+            set => FileEditor.SetWord(unknown12, value);
         }
 
         public int NpcUnknown16
         {
-            get => FileEditor.getWord(unknown16);
-            set => FileEditor.setWord(unknown16, value);
+            get => FileEditor.GetWord(unknown16);
+            set => FileEditor.SetWord(unknown16, value);
         }
 
         public int NpcAddress => (address);

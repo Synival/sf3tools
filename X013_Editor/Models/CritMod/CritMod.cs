@@ -55,13 +55,13 @@ namespace SF3.X013_Editor.Models.CritMod
 
         public int Advantage
         {
-            get => FileEditor.getByte(advantage);
-            set => FileEditor.setByte(advantage, (byte)value);
+            get => FileEditor.GetByte(advantage);
+            set => FileEditor.SetByte(advantage, (byte)value);
         }
         public int Disadvantage
         {
-            get => FileEditor.getByte(disadvantage);
-            set => FileEditor.setByte(disadvantage, (byte)value);
+            get => FileEditor.GetByte(disadvantage);
+            set => FileEditor.SetByte(disadvantage, (byte)value);
         }
 
         public int CritModAddress => (address);

@@ -25,13 +25,13 @@ namespace SF3.X1_Editor.Models.Warps
 
         /*public int NPCTableAddress1
         {
-            get => FileEditor.getDouble(npcOffset);
-            set => FileEditor.setDouble(npcOffset, value);
+            get => FileEditor.GetDouble(npcOffset);
+            set => FileEditor.SetDouble(npcOffset, value);
         }
 
-        public int NPCTableAddress2 => FileEditor.getDouble(NPCTableAddress1 - 0x0605F000);
+        public int NPCTableAddress2 => FileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
 
-        public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
+        public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
         public Warp(ScenarioType scenario, int id, string text)
         {
@@ -43,21 +43,21 @@ namespace SF3.X1_Editor.Models.Warps
             {
                 offset = 0x00000018; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000018; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000018; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
 
@@ -88,26 +88,26 @@ namespace SF3.X1_Editor.Models.Warps
 
         public int WarpUnknown1
         {
-            get => FileEditor.getByte(unknown1);
-            set => FileEditor.setByte(unknown1, (byte)value);
+            get => FileEditor.GetByte(unknown1);
+            set => FileEditor.SetByte(unknown1, (byte)value);
         }
 
         public int WarpUnknown2
         {
-            get => FileEditor.getByte(unknown2);
-            set => FileEditor.setByte(unknown2, (byte)value);
+            get => FileEditor.GetByte(unknown2);
+            set => FileEditor.SetByte(unknown2, (byte)value);
         }
 
         public int WarpType
         {
-            get => FileEditor.getByte(type);
-            set => FileEditor.setByte(type, (byte)value);
+            get => FileEditor.GetByte(type);
+            set => FileEditor.SetByte(type, (byte)value);
         }
 
         public int WarpMap
         {
-            get => FileEditor.getByte(map);
-            set => FileEditor.setByte(map, (byte)value);
+            get => FileEditor.GetByte(map);
+            set => FileEditor.SetByte(map, (byte)value);
         }
 
         public int WarpAddress => (address);

@@ -56,13 +56,13 @@ namespace SF3.X013_Editor.Models.Spells
 
         public int SupportA
         {
-            get => FileEditor.getByte(supportA);
-            set => FileEditor.setByte(supportA, (byte)value);
+            get => FileEditor.GetByte(supportA);
+            set => FileEditor.SetByte(supportA, (byte)value);
         }
         public int SupportB
         {
-            get => FileEditor.getByte(supportB);
-            set => FileEditor.setByte(supportB, (byte)value);
+            get => FileEditor.GetByte(supportB);
+            set => FileEditor.SetByte(supportB, (byte)value);
         }
 
         public int SpellAddress => (address);

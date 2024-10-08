@@ -53,8 +53,8 @@ namespace SF3.X013_Editor.Models.Soulmate
 
         public int Chance
         {
-            get => FileEditor.getByte(chance);
-            set => FileEditor.setByte(chance, (byte)value);
+            get => FileEditor.GetByte(chance);
+            set => FileEditor.SetByte(chance, (byte)value);
         }
 
         public int SoulmateAddress => (address);

@@ -55,13 +55,13 @@ namespace SF3.X013_Editor.Models.ExpLimit
 
         public int ExpCheck
         {
-            get => FileEditor.getByte(expCheck);
-            set => FileEditor.setByte(expCheck, (byte)value);
+            get => FileEditor.GetByte(expCheck);
+            set => FileEditor.SetByte(expCheck, (byte)value);
         }
         public int ExpReplacement
         {
-            get => FileEditor.getByte(expReplacement);
-            set => FileEditor.setByte(expReplacement, (byte)value);
+            get => FileEditor.GetByte(expReplacement);
+            set => FileEditor.SetByte(expReplacement, (byte)value);
         }
 
         public int ExpLimitAddress => (address);

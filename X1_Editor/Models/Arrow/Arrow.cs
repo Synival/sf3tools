@@ -26,13 +26,13 @@ namespace SF3.X1_Editor.Models.Arrows
 
         /*public int NPCTableAddress1
         {
-            get => FileEditor.getDouble(npcOffset);
-            set => FileEditor.setDouble(npcOffset, value);
+            get => FileEditor.GetDouble(npcOffset);
+            set => FileEditor.SetDouble(npcOffset, value);
         }
 
-        public int NPCTableAddress2 => FileEditor.getDouble(NPCTableAddress1 - 0x0605F000);
+        public int NPCTableAddress2 => FileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
 
-        public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
+        public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
         public Arrow(ScenarioType scenario, int id, string text)
         {
@@ -42,21 +42,21 @@ namespace SF3.X1_Editor.Models.Arrows
             {
                 offset = 0x00000060; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000060; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000060; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             /*
@@ -64,7 +64,7 @@ namespace SF3.X1_Editor.Models.Arrows
             {
                 offset = 0x00000030; //btl99 initial pointer
                 sub = 0x06060000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }*/
 
@@ -97,38 +97,38 @@ namespace SF3.X1_Editor.Models.Arrows
 
         public int ArrowUnknown0
         {
-            get => FileEditor.getWord(unknown0);
-            set => FileEditor.setWord(unknown0, value);
+            get => FileEditor.GetWord(unknown0);
+            set => FileEditor.SetWord(unknown0, value);
         }
 
         public int ArrowText
         {
-            get => FileEditor.getWord(textID);
-            set => FileEditor.setWord(textID, value);
+            get => FileEditor.GetWord(textID);
+            set => FileEditor.SetWord(textID, value);
         }
 
         public int ArrowUnknown4
         {
-            get => FileEditor.getWord(unknown4);
-            set => FileEditor.setWord(unknown4, value);
+            get => FileEditor.GetWord(unknown4);
+            set => FileEditor.SetWord(unknown4, value);
         }
 
         public int ArrowWarp
         {
-            get => FileEditor.getWord(warpInMPD);
-            set => FileEditor.setWord(warpInMPD, value);
+            get => FileEditor.GetWord(warpInMPD);
+            set => FileEditor.SetWord(warpInMPD, value);
         }
 
         public int ArrowUnknown8
         {
-            get => FileEditor.getWord(unknown8);
-            set => FileEditor.setWord(unknown8, value);
+            get => FileEditor.GetWord(unknown8);
+            set => FileEditor.SetWord(unknown8, value);
         }
 
         public int ArrowUnknownA
         {
-            get => FileEditor.getWord(unknownA);
-            set => FileEditor.setWord(unknownA, value);
+            get => FileEditor.GetWord(unknownA);
+            set => FileEditor.SetWord(unknownA, value);
         }
 
         public int ArrowAddress => (address);

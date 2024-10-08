@@ -53,8 +53,8 @@ namespace SF3.X013_Editor.Models.Soulfail
 
         public int ExpLost
         {
-            get => FileEditor.getByte(expLost);
-            set => FileEditor.setByte(expLost, (byte)value);
+            get => FileEditor.GetByte(expLost);
+            set => FileEditor.SetByte(expLost, (byte)value);
         }
 
         public int SoulfailAddress => (address);

@@ -18,7 +18,7 @@ namespace SF3.X002_Editor.Models.AttackResist
         {
             Scenario = scenario;
 
-            checkVersion2 = FileEditor.getByte(0x0000000B);
+            checkVersion2 = FileEditor.GetByte(0x0000000B);
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -64,13 +64,13 @@ namespace SF3.X002_Editor.Models.AttackResist
 
         public int Attack
         {
-            get => FileEditor.getByte(attack);
-            set => FileEditor.setByte(attack, (byte)value);
+            get => FileEditor.GetByte(attack);
+            set => FileEditor.SetByte(attack, (byte)value);
         }
         public int Resist
         {
-            get => FileEditor.getByte(resist);
-            set => FileEditor.setByte(resist, (byte)value);
+            get => FileEditor.GetByte(resist);
+            set => FileEditor.SetByte(resist, (byte)value);
         }
 
         public int AttackResistAddress => (address);

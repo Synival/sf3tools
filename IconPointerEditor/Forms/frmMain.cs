@@ -245,7 +245,7 @@ namespace SF3.IconPointerEditor.Forms
             openfile.Filter = "SF3 data (X011*.bin)|X011*.bin|SF3 data (X021*.bin)|X021*.bin|SF3 data (X026*.bin)|X026*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                if (FileEditor.loadFile(openfile.FileName))
+                if (FileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {
@@ -302,7 +302,7 @@ namespace SF3.IconPointerEditor.Forms
             savefile.FileName = Path.GetFileName(FileEditor.Filename);
             if (savefile.ShowDialog() == DialogResult.OK)
             {
-                FileEditor.saveFile(savefile.FileName);
+                FileEditor.SaveFile(savefile.FileName);
             }
         }
 

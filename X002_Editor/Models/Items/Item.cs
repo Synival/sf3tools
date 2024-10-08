@@ -40,7 +40,7 @@ namespace SF3.X002_Editor.Models.Items
         {
             Scenario = scenario;
 
-            checkVersion2 = FileEditor.getByte(0x0000000B);
+            checkVersion2 = FileEditor.GetByte(0x0000000B);
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -105,194 +105,194 @@ namespace SF3.X002_Editor.Models.Items
 
         public int Price
         {
-            get => FileEditor.getWord(PriceLocation);
-            set => FileEditor.setWord(PriceLocation, value);
+            get => FileEditor.GetWord(PriceLocation);
+            set => FileEditor.SetWord(PriceLocation, value);
         }
         public WeaponTypeValue WeaponType
         {
-            get => new WeaponTypeValue(FileEditor.getByte(WeaponTypeLocation));
-            set => FileEditor.setByte(WeaponTypeLocation, (byte)value.Value);
+            get => new WeaponTypeValue(FileEditor.GetByte(WeaponTypeLocation));
+            set => FileEditor.SetByte(WeaponTypeLocation, (byte)value.Value);
         }
         public int EffectsEquip
         {
-            get => FileEditor.getByte(EffectsEquipLocation);
-            set => FileEditor.setByte(EffectsEquipLocation, (byte)value);
+            get => FileEditor.GetByte(EffectsEquipLocation);
+            set => FileEditor.SetByte(EffectsEquipLocation, (byte)value);
         }
 
         public bool Cursed
         {
-            get => FileEditor.getBit(EffectsEquipLocation, 1);
-            set => FileEditor.setBit(EffectsEquipLocation, 1, value);
+            get => FileEditor.GetBit(EffectsEquipLocation, 1);
+            set => FileEditor.SetBit(EffectsEquipLocation, 1, value);
         }
 
         public bool CanCrack
         {
-            get => FileEditor.getBit(EffectsEquipLocation, 2);
-            set => FileEditor.setBit(EffectsEquipLocation, 2, value);
+            get => FileEditor.GetBit(EffectsEquipLocation, 2);
+            set => FileEditor.SetBit(EffectsEquipLocation, 2, value);
         }
 
         public bool HealingItem
         {
-            get => FileEditor.getBit(EffectsEquipLocation, 3);
-            set => FileEditor.setBit(EffectsEquipLocation, 3, value);
+            get => FileEditor.GetBit(EffectsEquipLocation, 3);
+            set => FileEditor.SetBit(EffectsEquipLocation, 3, value);
         }
 
         public bool CannotUnequip
         {
-            get => FileEditor.getBit(EffectsEquipLocation, 4);
-            set => FileEditor.setBit(EffectsEquipLocation, 4, value);
+            get => FileEditor.GetBit(EffectsEquipLocation, 4);
+            set => FileEditor.SetBit(EffectsEquipLocation, 4, value);
         }
 
         public bool Rare
         {
-            get => FileEditor.getBit(EffectsEquipLocation, 5);
-            set => FileEditor.setBit(EffectsEquipLocation, 5, value);
+            get => FileEditor.GetBit(EffectsEquipLocation, 5);
+            set => FileEditor.SetBit(EffectsEquipLocation, 5, value);
         }
 
         public bool FakeRare //shows rare message when selling, but does not add to deals
         {
-            get => FileEditor.getBit(EffectsEquipLocation, 6);
-            set => FileEditor.setBit(EffectsEquipLocation, 6, value);
+            get => FileEditor.GetBit(EffectsEquipLocation, 6);
+            set => FileEditor.SetBit(EffectsEquipLocation, 6, value);
         }
 
         public bool HealingItem2 //higher tier healing has this
         {
-            get => FileEditor.getBit(EffectsEquipLocation, 7);
-            set => FileEditor.setBit(EffectsEquipLocation, 7, value);
+            get => FileEditor.GetBit(EffectsEquipLocation, 7);
+            set => FileEditor.SetBit(EffectsEquipLocation, 7, value);
         }
 
         public int Requirements
         {
-            get => FileEditor.getByte(RequirementLocation);
-            set => FileEditor.setByte(RequirementLocation, (byte)value);
+            get => FileEditor.GetByte(RequirementLocation);
+            set => FileEditor.SetByte(RequirementLocation, (byte)value);
         }
 
         public bool RequiredPromo
         {
-            get => FileEditor.getBit(RequirementLocation, 1);
-            set => FileEditor.setBit(RequirementLocation, 1, value);
+            get => FileEditor.GetBit(RequirementLocation, 1);
+            set => FileEditor.SetBit(RequirementLocation, 1, value);
         }
 
         public bool RequiredPromo2 //apostle of light
         {
-            get => FileEditor.getBit(RequirementLocation, 2);
-            set => FileEditor.setBit(RequirementLocation, 2, value);
+            get => FileEditor.GetBit(RequirementLocation, 2);
+            set => FileEditor.SetBit(RequirementLocation, 2, value);
         }
 
         public bool RequiredHero //Synbios, Medion, Julian, Gracia, Cyclops
         {
-            get => FileEditor.getBit(RequirementLocation, 3);
-            set => FileEditor.setBit(RequirementLocation, 3, value);
+            get => FileEditor.GetBit(RequirementLocation, 3);
+            set => FileEditor.SetBit(RequirementLocation, 3, value);
         }
 
         public bool RequiredMale
         {
-            get => FileEditor.getBit(RequirementLocation, 4);
-            set => FileEditor.setBit(RequirementLocation, 4, value);
+            get => FileEditor.GetBit(RequirementLocation, 4);
+            set => FileEditor.SetBit(RequirementLocation, 4, value);
         }
 
         public bool RequiredFemale
         {
-            get => FileEditor.getBit(RequirementLocation, 5);
-            set => FileEditor.setBit(RequirementLocation, 5, value);
+            get => FileEditor.GetBit(RequirementLocation, 5);
+            set => FileEditor.SetBit(RequirementLocation, 5, value);
         }
 
 
         public int Range
         {
-            get => FileEditor.getByte(RangeLocation);
-            set => FileEditor.setByte(RangeLocation, (byte)value);
+            get => FileEditor.GetByte(RangeLocation);
+            set => FileEditor.SetByte(RangeLocation, (byte)value);
         }
         public int Attack
         {
-            get => FileEditor.getByte(AttackLocation);
-            set => FileEditor.setByte(AttackLocation, (byte)value);
+            get => FileEditor.GetByte(AttackLocation);
+            set => FileEditor.SetByte(AttackLocation, (byte)value);
         }
         public int Defense
         {
-            get => FileEditor.getByte(DefenseLocation);
-            set => FileEditor.setByte(DefenseLocation, (byte)value);
+            get => FileEditor.GetByte(DefenseLocation);
+            set => FileEditor.SetByte(DefenseLocation, (byte)value);
         }
         public int AttackRank
         {
-            get => FileEditor.getByte(AttackUpRankLocation);
-            set => FileEditor.setByte(AttackUpRankLocation, (byte)value);
+            get => FileEditor.GetByte(AttackUpRankLocation);
+            set => FileEditor.SetByte(AttackUpRankLocation, (byte)value);
         }
         public int SpellRank
         {
-            get => FileEditor.getByte(SpellUpRankLocation);
-            set => FileEditor.setByte(SpellUpRankLocation, (byte)value);
+            get => FileEditor.GetByte(SpellUpRankLocation);
+            set => FileEditor.SetByte(SpellUpRankLocation, (byte)value);
         }
         public int PhysicalAttribute
         {
-            get => FileEditor.getByte(PhysicalAttributeLocation);
-            set => FileEditor.setByte(PhysicalAttributeLocation, (byte)value);
+            get => FileEditor.GetByte(PhysicalAttributeLocation);
+            set => FileEditor.SetByte(PhysicalAttributeLocation, (byte)value);
         }
 
         public int Unknown1
         {
-            get => FileEditor.getByte(Unknown1Location);
-            set => FileEditor.setByte(Unknown1Location, (byte)value);
+            get => FileEditor.GetByte(Unknown1Location);
+            set => FileEditor.SetByte(Unknown1Location, (byte)value);
         }
         public int MonsterType
         {
-            get => FileEditor.getByte(MonsterTypeAttributeLocation);
-            set => FileEditor.setByte(MonsterTypeAttributeLocation, (byte)value);
+            get => FileEditor.GetByte(MonsterTypeAttributeLocation);
+            set => FileEditor.SetByte(MonsterTypeAttributeLocation, (byte)value);
         }
         public int Unknown2
         {
-            get => FileEditor.getByte(Unknown2Location);
-            set => FileEditor.setByte(Unknown2Location, (byte)value);
+            get => FileEditor.GetByte(Unknown2Location);
+            set => FileEditor.SetByte(Unknown2Location, (byte)value);
         }
         public int StatType1
         {
-            get => FileEditor.getByte(StatType1Location);
-            set => FileEditor.setByte(StatType1Location, (byte)value);
+            get => FileEditor.GetByte(StatType1Location);
+            set => FileEditor.SetByte(StatType1Location, (byte)value);
         }
         public int StatUp1
         {
-            get => FileEditor.getByte(StatUp1Location);
-            set => FileEditor.setByte(StatUp1Location, (byte)value);
+            get => FileEditor.GetByte(StatUp1Location);
+            set => FileEditor.SetByte(StatUp1Location, (byte)value);
         }
         public int StatType2
         {
-            get => FileEditor.getByte(StatType2Location);
-            set => FileEditor.setByte(StatType2Location, (byte)value);
+            get => FileEditor.GetByte(StatType2Location);
+            set => FileEditor.SetByte(StatType2Location, (byte)value);
         }
         public int StatUp2
         {
-            get => FileEditor.getByte(StatUp2Location);
-            set => FileEditor.setByte(StatUp2Location, (byte)value);
+            get => FileEditor.GetByte(StatUp2Location);
+            set => FileEditor.SetByte(StatUp2Location, (byte)value);
         }
         public int StatType3
         {
-            get => FileEditor.getByte(StatType3Location);
-            set => FileEditor.setByte(StatType3Location, (byte)value);
+            get => FileEditor.GetByte(StatType3Location);
+            set => FileEditor.SetByte(StatType3Location, (byte)value);
         }
         public int StatUp3
         {
-            get => FileEditor.getByte(StatUp3Location);
-            set => FileEditor.setByte(StatUp3Location, (byte)value);
+            get => FileEditor.GetByte(StatUp3Location);
+            set => FileEditor.SetByte(StatUp3Location, (byte)value);
         }
         public int StatType4
         {
-            get => FileEditor.getByte(StatType4Location);
-            set => FileEditor.setByte(StatType4Location, (byte)value);
+            get => FileEditor.GetByte(StatType4Location);
+            set => FileEditor.SetByte(StatType4Location, (byte)value);
         }
         public int StatUp4
         {
-            get => FileEditor.getByte(StatUp4Location);
-            set => FileEditor.setByte(StatUp4Location, (byte)value);
+            get => FileEditor.GetByte(StatUp4Location);
+            set => FileEditor.SetByte(StatUp4Location, (byte)value);
         }
         public int SpellUse
         {
-            get => FileEditor.getByte(SpellOnUseLocation);
-            set => FileEditor.setByte(SpellOnUseLocation, (byte)value);
+            get => FileEditor.GetByte(SpellOnUseLocation);
+            set => FileEditor.SetByte(SpellOnUseLocation, (byte)value);
         }
         public int SpellUseLv
         {
-            get => FileEditor.getByte(SpellLvOnUseLocation);
-            set => FileEditor.setByte(SpellLvOnUseLocation, (byte)value);
+            get => FileEditor.GetByte(SpellLvOnUseLocation);
+            set => FileEditor.SetByte(SpellLvOnUseLocation, (byte)value);
         }
 
         public int Address => (address);

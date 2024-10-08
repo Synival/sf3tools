@@ -33,11 +33,11 @@ namespace SF3.X1_Editor.Models.Presets
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
 
                 if (offset != 0)
                 {
@@ -48,21 +48,21 @@ namespace SF3.X1_Editor.Models.Presets
                     Globals.map = 0;
                     offset = 0x00000018; //scn1 initial pointer
                     sub = 0x0605f000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
                 }
 
                 /*
                 offset = 0x00000018; //scn1 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605f000;
                 offset = npcOffset - sub; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -71,12 +71,12 @@ namespace SF3.X1_Editor.Models.Presets
             {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -86,20 +86,20 @@ namespace SF3.X1_Editor.Models.Presets
                     Globals.map = 4;
                     offset = 0x00000024; //scn2 initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
                 }
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605e000;
                 offset = npcOffset - sub + 4; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -108,12 +108,12 @@ namespace SF3.X1_Editor.Models.Presets
             {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
 
                 if (offset != 0)
                 {
@@ -124,11 +124,11 @@ namespace SF3.X1_Editor.Models.Presets
                     Globals.map = 8;
                     offset = 0x00000024; //scn3 initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
                 }
             }
@@ -136,11 +136,11 @@ namespace SF3.X1_Editor.Models.Presets
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -150,11 +150,11 @@ namespace SF3.X1_Editor.Models.Presets
                     Globals.map = 0;
                     offset = 0x00000024; //pd initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
                 }
             }
@@ -162,11 +162,11 @@ namespace SF3.X1_Editor.Models.Presets
             {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //third pointer
             }
 
@@ -203,58 +203,58 @@ namespace SF3.X1_Editor.Models.Presets
 
         public int SizeUnknown1
         {
-            get => FileEditor.getByte(unknown1);
-            set => FileEditor.setByte(unknown1, (byte)value);
+            get => FileEditor.GetByte(unknown1);
+            set => FileEditor.SetByte(unknown1, (byte)value);
         }
         public int TableSize
         {
-            get => FileEditor.getByte(tableSize);
-            set => FileEditor.setByte(tableSize, (byte)value);
+            get => FileEditor.GetByte(tableSize);
+            set => FileEditor.SetByte(tableSize, (byte)value);
         }
         public int SizeUnknown2
         {
-            get => FileEditor.getByte(unknown2);
-            set => FileEditor.setByte(unknown2, (byte)value);
+            get => FileEditor.GetByte(unknown2);
+            set => FileEditor.SetByte(unknown2, (byte)value);
         }
         public int SizeUnknown3
         {
-            get => FileEditor.getByte(unknown3);
-            set => FileEditor.setByte(unknown3, (byte)value);
+            get => FileEditor.GetByte(unknown3);
+            set => FileEditor.SetByte(unknown3, (byte)value);
         }
         public int SizeUnknown4
         {
-            get => FileEditor.getByte(unknown4);
-            set => FileEditor.setByte(unknown4, (byte)value);
+            get => FileEditor.GetByte(unknown4);
+            set => FileEditor.SetByte(unknown4, (byte)value);
         }
 
         public int SizeUnknown5
         {
-            get => FileEditor.getByte(unknown5);
-            set => FileEditor.setByte(unknown5, (byte)value);
+            get => FileEditor.GetByte(unknown5);
+            set => FileEditor.SetByte(unknown5, (byte)value);
         }
 
         public int SizeUnknown6
         {
-            get => FileEditor.getByte(unknown6);
-            set => FileEditor.setByte(unknown6, (byte)value);
+            get => FileEditor.GetByte(unknown6);
+            set => FileEditor.SetByte(unknown6, (byte)value);
         }
 
         public int SizeUnknown7
         {
-            get => FileEditor.getByte(unknown7);
-            set => FileEditor.setByte(unknown7, (byte)value);
+            get => FileEditor.GetByte(unknown7);
+            set => FileEditor.SetByte(unknown7, (byte)value);
         }
 
         public int SizeUnknown8
         {
-            get => FileEditor.getByte(unknown8);
-            set => FileEditor.setByte(unknown8, (byte)value);
+            get => FileEditor.GetByte(unknown8);
+            set => FileEditor.SetByte(unknown8, (byte)value);
         }
 
         public int SizeUnknown9
         {
-            get => FileEditor.getByte(unknown9);
-            set => FileEditor.setByte(unknown9, (byte)value);
+            get => FileEditor.GetByte(unknown9);
+            set => FileEditor.SetByte(unknown9, (byte)value);
         }
 
         public int Map => Globals.map;

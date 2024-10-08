@@ -25,13 +25,13 @@ namespace SF3.IconPointerEditor.Models.Items
 
         /*public int NPCTableAddress1
         {
-            get => FileEditor.getDouble(npcOffset);
-            set => FileEditor.setDouble(npcOffset, value);
+            get => FileEditor.GetDouble(npcOffset);
+            set => FileEditor.SetDouble(npcOffset, value);
         }
 
-        public int NPCTableAddress2 => FileEditor.getDouble(NPCTableAddress1 - 0x0605F000);
+        public int NPCTableAddress2 => FileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
 
-        public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
+        public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
         public Item(ScenarioType scenario, int id, string text)
         {
@@ -51,9 +51,9 @@ namespace SF3.IconPointerEditor.Models.Items
                     sub = 0x06068000;
                 }
 
-                //MessageBox.Show("" + FileEditor.getDouble(offset));
+                //MessageBox.Show("" + FileEditor.GetDouble(offset));
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //pointer
 
                 realOffset = 0xFF8E;
@@ -61,10 +61,10 @@ namespace SF3.IconPointerEditor.Models.Items
                 /*
                 offset = 0x00000018; //scn1 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605f000;
                 offset = npcOffset - sub; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -82,7 +82,7 @@ namespace SF3.IconPointerEditor.Models.Items
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //pointer
 
                 realOffset = 0xFC86;
@@ -100,7 +100,7 @@ namespace SF3.IconPointerEditor.Models.Items
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //pointer
 
                 realOffset = 0x12A48;
@@ -118,7 +118,7 @@ namespace SF3.IconPointerEditor.Models.Items
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //pointer
 
                 realOffset = 0x12A32;
@@ -168,22 +168,22 @@ namespace SF3.IconPointerEditor.Models.Items
             {
                 if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
-                    return FileEditor.getWord(theSpellIcon);
+                    return FileEditor.GetWord(theSpellIcon);
                 }
                 else
                 {
-                    return FileEditor.getDouble(theSpellIcon);
+                    return FileEditor.GetDouble(theSpellIcon);
                 }
             }
             set
             {
                 if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
-                    FileEditor.setWord(theSpellIcon, value);
+                    FileEditor.SetWord(theSpellIcon, value);
                 }
                 else
                 {
-                    FileEditor.setDouble(theSpellIcon, value);
+                    FileEditor.SetDouble(theSpellIcon, value);
                 }
             }
         }
@@ -194,22 +194,22 @@ namespace SF3.IconPointerEditor.Models.Items
             {
                 if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
-                    return FileEditor.getWord(theSpellIcon) + realOffset;
+                    return FileEditor.GetWord(theSpellIcon) + realOffset;
                 }
                 else
                 {
-                    return FileEditor.getDouble(theSpellIcon) + realOffset;
+                    return FileEditor.GetDouble(theSpellIcon) + realOffset;
                 }
             }
             set
             {
                 if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
-                    FileEditor.setWord(theSpellIcon, value - realOffset);
+                    FileEditor.SetWord(theSpellIcon, value - realOffset);
                 }
                 else
                 {
-                    FileEditor.setDouble(theSpellIcon, value - realOffset);
+                    FileEditor.SetDouble(theSpellIcon, value - realOffset);
                 }
             }
         }

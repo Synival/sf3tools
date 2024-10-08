@@ -68,7 +68,7 @@ namespace SF3.IconPointerEditor.Models.Items
                         old.CopyTo(itemssorted, 0);
                         itemssorted[old.Length] = new Item(Scenario, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         items[itemssorted[old.Length].ID] = itemssorted[old.Length];
-                        //MessageBox.Show("" + FileEditor.getDouble(itemssorted[itemssorted.Length - 1].Address));
+                        //MessageBox.Show("" + FileEditor.GetDouble(itemssorted[itemssorted.Length - 1].Address));
                     }
                 }
             }

@@ -2,16 +2,16 @@
 using System.Text;
 using System.IO;
 using SF3.Editor.Exceptions;
+using SF3.Types;
 
 namespace SF3.Editor
 {
-    public static class FileEditor
+    public class FileEditor
     {
         private static byte[] data;
-        public static int scenario = 0;
         public static string Filename;
 
-        public static bool loadFile(string filename)
+        public static bool LoadFile(string filename)
         {
             try
             {
@@ -28,7 +28,7 @@ namespace SF3.Editor
             return true;
         }
 
-        public static bool saveFile(string filename)
+        public static bool SaveFile(string filename)
         {
             FileStream stream = new FileStream(filename, FileMode.Create);
             stream.Write(data, 0, data.Length);
@@ -37,7 +37,7 @@ namespace SF3.Editor
             return true;
         }
 
-        public static int getByte(int location)
+        public static int GetByte(int location)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace SF3.Editor
             }
         }
 
-        public static int getWord(int location)
+        public static int GetWord(int location)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace SF3.Editor
             }
         }
 
-        public static int getDouble(int location)
+        public static int GetDouble(int location)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace SF3.Editor
         }
 
         //Returns a string from values of location to location+length bytes
-        public static string getString(int location, int length)
+        public static string GetString(int location, int length)
         {
             byte[] value = new byte[length];
             for (int i = 0; i < length; i++)
@@ -101,16 +101,16 @@ namespace SF3.Editor
             return InputText.GetString(value);
         }
 
-        public static void setByte(int location, byte value)
+        public static void SetByte(int location, byte value)
         {
             data[location] = value;
         }
-        public static void setWord(int location, int value)
+        public static void SetWord(int location, int value)
         {
             data[location] = (byte)(value >> 8);
             data[location + 1] = (byte)(value % 256);
         }
-        public static void setDouble(int location, int value)
+        public static void SetDouble(int location, int value)
         {
             byte[] converted = BitConverter.GetBytes(value);
             data[location] = converted[3];
@@ -119,7 +119,7 @@ namespace SF3.Editor
             data[location + 3] = converted[0];
         }
 
-        public static void setString(int location, int length, string value)
+        public static void SetString(int location, int length, string value)
         {
             byte[] name = new byte[12];
             Encoding OutputText = Encoding.GetEncoding("shift-jis");
@@ -136,11 +136,11 @@ namespace SF3.Editor
                 }
             }
         }
-        public static bool getBit(int location, int bit)
+        public static bool GetBit(int location, int bit)
         {
             return ((data[location] >> (bit - 1) & 0x01) == 1) ? true : false;
         }
-        public static void setBit(int location, int bit, bool value)
+        public static void SetBit(int location, int bit, bool value)
         {
             if (value)
             {

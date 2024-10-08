@@ -29,13 +29,13 @@ namespace SF3.X1_Editor.Models.UnknownAI
 
         /*public int NPCTableAddress1
         {
-            get => FileEditor.getDouble(npcOffset);
-            set => FileEditor.setDouble(npcOffset, value);
+            get => FileEditor.GetDouble(npcOffset);
+            set => FileEditor.SetDouble(npcOffset, value);
         }
 
-        public int NPCTableAddress2 => FileEditor.getDouble(NPCTableAddress1 - 0x0605F000);
+        public int NPCTableAddress2 => FileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
 
-        public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
+        public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
         public UnknownAI(ScenarioType scenario, int id, string text)
         {
@@ -45,12 +45,12 @@ namespace SF3.X1_Editor.Models.UnknownAI
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
 
                 if (offset != 0)
                 {
@@ -64,11 +64,11 @@ namespace SF3.X1_Editor.Models.UnknownAI
                     Globals.map = 0;
                     offset = 0x00000018; //scn1 initial pointer
                     sub = 0x0605f000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -78,10 +78,10 @@ namespace SF3.X1_Editor.Models.UnknownAI
                 /*
                 offset = 0x00000018; //scn1 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605f000;
                 offset = npcOffset - sub; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -90,12 +90,12 @@ namespace SF3.X1_Editor.Models.UnknownAI
             {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -108,11 +108,11 @@ namespace SF3.X1_Editor.Models.UnknownAI
                     Globals.map = 4;
                     offset = 0x00000024; //scn2 initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -121,10 +121,10 @@ namespace SF3.X1_Editor.Models.UnknownAI
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605e000;
                 offset = npcOffset - sub + 4; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -133,12 +133,12 @@ namespace SF3.X1_Editor.Models.UnknownAI
             {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -151,11 +151,11 @@ namespace SF3.X1_Editor.Models.UnknownAI
                     Globals.map = 8;
                     offset = 0x00000024; //scn3 initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -166,11 +166,11 @@ namespace SF3.X1_Editor.Models.UnknownAI
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub + Globals.map; //second pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 if (offset != 0)
                 {
                     offset = offset - sub; //third pointer
@@ -183,11 +183,11 @@ namespace SF3.X1_Editor.Models.UnknownAI
                     Globals.map = 0;
                     offset = 0x00000024; //pd initial pointer
                     sub = 0x0605e000;
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //first pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub + Globals.map; //second pointer
-                    offset = FileEditor.getDouble(offset);
+                    offset = FileEditor.GetDouble(offset);
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -198,11 +198,11 @@ namespace SF3.X1_Editor.Models.UnknownAI
             {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //second pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //third pointer
 
                 offset = offset + 10;
@@ -240,56 +240,56 @@ namespace SF3.X1_Editor.Models.UnknownAI
 
         public int UnknownAI00
         {
-            get => FileEditor.getWord(unknown00);
-            set => FileEditor.setWord(unknown00, value);
+            get => FileEditor.GetWord(unknown00);
+            set => FileEditor.SetWord(unknown00, value);
         }
 
         public int UnknownAI02
         {
-            get => FileEditor.getWord(unknown02);
-            set => FileEditor.setWord(unknown02, value);
+            get => FileEditor.GetWord(unknown02);
+            set => FileEditor.SetWord(unknown02, value);
         }
 
         public int UnknownAI04
         {
-            get => FileEditor.getWord(unknown04);
-            set => FileEditor.setWord(unknown04, value);
+            get => FileEditor.GetWord(unknown04);
+            set => FileEditor.SetWord(unknown04, value);
         }
 
         public int UnknownAI06
         {
-            get => FileEditor.getWord(unknown06);
-            set => FileEditor.setWord(unknown06, value);
+            get => FileEditor.GetWord(unknown06);
+            set => FileEditor.SetWord(unknown06, value);
         }
 
         public int UnknownAI08
         {
-            get => FileEditor.getWord(unknown08);
-            set => FileEditor.setWord(unknown08, value);
+            get => FileEditor.GetWord(unknown08);
+            set => FileEditor.SetWord(unknown08, value);
         }
 
         public int UnknownAI0A
         {
-            get => FileEditor.getWord(unknown0A);
-            set => FileEditor.setWord(unknown0A, value);
+            get => FileEditor.GetWord(unknown0A);
+            set => FileEditor.SetWord(unknown0A, value);
         }
 
         public int UnknownAI0C
         {
-            get => FileEditor.getWord(unknown0C);
-            set => FileEditor.setWord(unknown0C, value);
+            get => FileEditor.GetWord(unknown0C);
+            set => FileEditor.SetWord(unknown0C, value);
         }
 
         public int UnknownAI0E
         {
-            get => FileEditor.getWord(unknown0E);
-            set => FileEditor.setWord(unknown0E, value);
+            get => FileEditor.GetWord(unknown0E);
+            set => FileEditor.SetWord(unknown0E, value);
         }
 
         public int UnknownAI10
         {
-            get => FileEditor.getWord(unknown10);
-            set => FileEditor.setWord(unknown10, value);
+            get => FileEditor.GetWord(unknown10);
+            set => FileEditor.SetWord(unknown10, value);
         }
 
         public int UnknownAIAddress => (address);

@@ -91,104 +91,104 @@ namespace SF3.IconPointerEditor.Models.Spells
 
         public int SpellTarget
         {
-            get => FileEditor.getByte(targetType);
-            set => FileEditor.setByte(targetType, (byte)value);
+            get => FileEditor.GetByte(targetType);
+            set => FileEditor.SetByte(targetType, (byte)value);
         }
         public int SpellType
         {
-            get => FileEditor.getByte(damageType);
-            set => FileEditor.setByte(damageType, (byte)value);
+            get => FileEditor.GetByte(damageType);
+            set => FileEditor.SetByte(damageType, (byte)value);
         }
         public int SpellUnknown1
         {
-            get => FileEditor.getByte(unknown1);
-            set => FileEditor.setByte(unknown1, (byte)value);
+            get => FileEditor.GetByte(unknown1);
+            set => FileEditor.SetByte(unknown1, (byte)value);
         }
         public int SpellUnknown2
         {
-            get => FileEditor.getByte(unknown2);
-            set => FileEditor.setByte(unknown2, (byte)value);
+            get => FileEditor.GetByte(unknown2);
+            set => FileEditor.SetByte(unknown2, (byte)value);
         }
         public int Lv1Distance
         {
-            get => FileEditor.getByte(lv1Distance);
-            set => FileEditor.setByte(lv1Distance, (byte)value);
+            get => FileEditor.GetByte(lv1Distance);
+            set => FileEditor.SetByte(lv1Distance, (byte)value);
         }
         public int Lv1Targets
         {
-            get => FileEditor.getByte(lv1Targets);
-            set => FileEditor.setByte(lv1Targets, (byte)value);
+            get => FileEditor.GetByte(lv1Targets);
+            set => FileEditor.SetByte(lv1Targets, (byte)value);
         }
         public int Lv1Cost
         {
-            get => FileEditor.getByte(lv1Cost);
-            set => FileEditor.setByte(lv1Cost, (byte)value);
+            get => FileEditor.GetByte(lv1Cost);
+            set => FileEditor.SetByte(lv1Cost, (byte)value);
         }
         public int Lv1Damage
         {
-            get => FileEditor.getByte(lv1Damage);
-            set => FileEditor.setByte(lv1Damage, (byte)value);
+            get => FileEditor.GetByte(lv1Damage);
+            set => FileEditor.SetByte(lv1Damage, (byte)value);
         }
         public int Lv2Distance
         {
-            get => FileEditor.getByte(lv2Distance);
-            set => FileEditor.setByte(lv2Distance, (byte)value);
+            get => FileEditor.GetByte(lv2Distance);
+            set => FileEditor.SetByte(lv2Distance, (byte)value);
         }
         public int Lv2Targets
         {
-            get => FileEditor.getByte(lv2Targets);
-            set => FileEditor.setByte(lv2Targets, (byte)value);
+            get => FileEditor.GetByte(lv2Targets);
+            set => FileEditor.SetByte(lv2Targets, (byte)value);
         }
 
         public int Lv2Cost
         {
-            get => FileEditor.getByte(lv2Cost);
-            set => FileEditor.setByte(lv2Cost, (byte)value);
+            get => FileEditor.GetByte(lv2Cost);
+            set => FileEditor.SetByte(lv2Cost, (byte)value);
         }
         public int Lv2Damage
         {
-            get => FileEditor.getByte(lv2Damage);
-            set => FileEditor.setByte(lv2Damage, (byte)value);
+            get => FileEditor.GetByte(lv2Damage);
+            set => FileEditor.SetByte(lv2Damage, (byte)value);
         }
         public int Lv3Distance
         {
-            get => FileEditor.getByte(lv3Distance);
-            set => FileEditor.setByte(lv3Distance, (byte)value);
+            get => FileEditor.GetByte(lv3Distance);
+            set => FileEditor.SetByte(lv3Distance, (byte)value);
         }
         public int Lv3Targets
         {
-            get => FileEditor.getByte(lv3Targets);
-            set => FileEditor.setByte(lv3Targets, (byte)value);
+            get => FileEditor.GetByte(lv3Targets);
+            set => FileEditor.SetByte(lv3Targets, (byte)value);
         }
         public int Lv3Cost
         {
-            get => FileEditor.getByte(lv3Cost);
-            set => FileEditor.setByte(lv3Cost, (byte)value);
+            get => FileEditor.GetByte(lv3Cost);
+            set => FileEditor.SetByte(lv3Cost, (byte)value);
         }
         public int Lv3Damage
         {
-            get => FileEditor.getByte(lv3Damage);
-            set => FileEditor.setByte(lv3Damage, (byte)value);
+            get => FileEditor.GetByte(lv3Damage);
+            set => FileEditor.SetByte(lv3Damage, (byte)value);
         }
         public int Lv4Distance
         {
-            get => FileEditor.getByte(lv4Distance);
-            set => FileEditor.setByte(lv4Distance, (byte)value);
+            get => FileEditor.GetByte(lv4Distance);
+            set => FileEditor.SetByte(lv4Distance, (byte)value);
         }
         public int Lv4Targets
         {
-            get => FileEditor.getByte(lv4Targets);
-            set => FileEditor.setByte(lv4Targets, (byte)value);
+            get => FileEditor.GetByte(lv4Targets);
+            set => FileEditor.SetByte(lv4Targets, (byte)value);
         }
         public int Lv4Cost
         {
-            get => FileEditor.getByte(lv4Cost);
-            set => FileEditor.setByte(lv4Cost, (byte)value);
+            get => FileEditor.GetByte(lv4Cost);
+            set => FileEditor.SetByte(lv4Cost, (byte)value);
         }
         public int Lv4Damage
         {
-            get => FileEditor.getByte(lv4Damage);
-            set => FileEditor.setByte(lv4Damage, (byte)value);
+            get => FileEditor.GetByte(lv4Damage);
+            set => FileEditor.SetByte(lv4Damage, (byte)value);
         }
         public int SpellAddress => (address);
     }

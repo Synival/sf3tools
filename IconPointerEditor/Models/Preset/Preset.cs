@@ -34,15 +34,15 @@ namespace SF3.IconPointerEditor.Models.Presets
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //pointer
                 /*
                 offset = 0x00000018; //scn1 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605f000;
                 offset = npcOffset - sub; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -60,15 +60,15 @@ namespace SF3.IconPointerEditor.Models.Presets
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //pointer
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605e000;
                 offset = npcOffset - sub + 4; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -86,7 +86,7 @@ namespace SF3.IconPointerEditor.Models.Presets
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //pointer
             }
             else if (Scenario == ScenarioType.PremiumDisk)
@@ -102,7 +102,7 @@ namespace SF3.IconPointerEditor.Models.Presets
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //pointer
             }
 
@@ -144,22 +144,22 @@ namespace SF3.IconPointerEditor.Models.Presets
             {
                 if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
-                    return FileEditor.getWord(theItemIcon);
+                    return FileEditor.GetWord(theItemIcon);
                 }
                 else
                 {
-                    return FileEditor.getDouble(theItemIcon);
+                    return FileEditor.GetDouble(theItemIcon);
                 }
             }
             set
             {
                 if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
                 {
-                    FileEditor.setWord(theItemIcon, value);
+                    FileEditor.SetWord(theItemIcon, value);
                 }
                 else
                 {
-                    FileEditor.setDouble(theItemIcon, value);
+                    FileEditor.SetDouble(theItemIcon, value);
                 }
             }
         }

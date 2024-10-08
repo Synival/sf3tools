@@ -30,7 +30,7 @@ namespace SF3.X002_Editor.Models.MusicOverride
         {
             Scenario = scenario;
 
-            checkVersion2 = FileEditor.getByte(0x0000000B);
+            checkVersion2 = FileEditor.GetByte(0x0000000B);
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -85,80 +85,80 @@ namespace SF3.X002_Editor.Models.MusicOverride
 
         public int MOMapID
         {
-            get => FileEditor.getWord(mapID);
-            set => FileEditor.setWord(mapID, value);
+            get => FileEditor.GetWord(mapID);
+            set => FileEditor.SetWord(mapID, value);
         }
 
         public int SynMusic
         {
-            get => FileEditor.getByte(synMusic);
-            set => FileEditor.setByte(synMusic, (byte)value);
+            get => FileEditor.GetByte(synMusic);
+            set => FileEditor.SetByte(synMusic, (byte)value);
         }
 
         public int MedMusic
         {
-            get => FileEditor.getByte(medMusic);
-            set => FileEditor.setByte(medMusic, (byte)value);
+            get => FileEditor.GetByte(medMusic);
+            set => FileEditor.SetByte(medMusic, (byte)value);
         }
 
         public int JulMusic
         {
-            get => FileEditor.getByte(julMusic);
-            set => FileEditor.setByte(julMusic, (byte)value);
+            get => FileEditor.GetByte(julMusic);
+            set => FileEditor.SetByte(julMusic, (byte)value);
         }
 
         public int ExtraMusic
         {
-            get => FileEditor.getByte(extraMusic);
-            set => FileEditor.setByte(extraMusic, (byte)value);
+            get => FileEditor.GetByte(extraMusic);
+            set => FileEditor.SetByte(extraMusic, (byte)value);
         }
 
         public int MOUnknown1
         {
-            get => FileEditor.getDouble(unknown1);
-            set => FileEditor.setDouble(unknown1, value);
+            get => FileEditor.GetDouble(unknown1);
+            set => FileEditor.SetDouble(unknown1, value);
         }
 
         public int MOUnknown2
         {
-            get => FileEditor.getDouble(unknown2);
-            set => FileEditor.setDouble(unknown2, value);
+            get => FileEditor.GetDouble(unknown2);
+            set => FileEditor.SetDouble(unknown2, value);
         }
 
         public int MOUnknown3
         {
-            get => FileEditor.getDouble(unknown3);
-            set => FileEditor.setDouble(unknown3, value);
+            get => FileEditor.GetDouble(unknown3);
+            set => FileEditor.SetDouble(unknown3, value);
         }
 
         public int MOUnknown4
         {
-            get => FileEditor.getDouble(unknown4);
-            set => FileEditor.setDouble(unknown4, value);
+            get => FileEditor.GetDouble(unknown4);
+            set => FileEditor.SetDouble(unknown4, value);
         }
 
         public int SynChr
         {
-            get => FileEditor.getDouble(synChr);
-            set => FileEditor.setDouble(synChr, value);
+            get => FileEditor.GetDouble(synChr);
+            set => FileEditor.SetDouble(synChr, value);
         }
 
         public int MedChr
         {
-            get => FileEditor.getDouble(medChr);
-            set => FileEditor.setDouble(medChr, value);
+            get => FileEditor.GetDouble(medChr);
+            set => FileEditor.SetDouble(medChr, value);
         }
 
         public int JulChr
         {
-            get => FileEditor.getDouble(julChr);
-            set => FileEditor.setDouble(julChr, value);
+            get => FileEditor.GetDouble(julChr);
+            set => FileEditor.SetDouble(julChr, value);
         }
 
         public int ExtraChr
         {
-            get => FileEditor.getDouble(extraChr);
-            set => FileEditor.setDouble(extraChr, value);
+            get => FileEditor.GetDouble(extraChr);
+            set => FileEditor.SetDouble(extraChr, value);
         }
 
         public int MusicOverrideAddress => (address);

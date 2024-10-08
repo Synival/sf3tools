@@ -21,13 +21,13 @@ namespace SF3.X1_Editor.Models.BattlePointers
 
         /*public int NPCTableAddress1
         {
-            get => FileEditor.getDouble(npcOffset);
-            set => FileEditor.setDouble(npcOffset, value);
+            get => FileEditor.GetDouble(npcOffset);
+            set => FileEditor.SetDouble(npcOffset, value);
         }
 
-        public int NPCTableAddress2 => FileEditor.getDouble(NPCTableAddress1 - 0x0605F000);
+        public int NPCTableAddress2 => FileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
 
-        public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
+        public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
         public BattlePointers(ScenarioType scenario, int id, string text)
         {
@@ -37,21 +37,21 @@ namespace SF3.X1_Editor.Models.BattlePointers
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //second pointer
 
-                //offset = FileEditor.getDouble(offset);
+                //offset = FileEditor.GetDouble(offset);
                 //offset = offset - sub;
 
                 /*
                 offset = 0x00000018; //scn1 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605f000;
                 offset = npcOffset - sub; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -60,19 +60,19 @@ namespace SF3.X1_Editor.Models.BattlePointers
             {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //second pointer
 
-                //offset = FileEditor.getDouble(offset);
+                //offset = FileEditor.GetDouble(offset);
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 sub = 0x0605e000;
                 offset = npcOffset - sub + 4; //second pointer
-                npcOffset = FileEditor.getDouble(offset);
+                npcOffset = FileEditor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
@@ -81,32 +81,32 @@ namespace SF3.X1_Editor.Models.BattlePointers
             {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //second pointer
 
-                //offset = FileEditor.getDouble(offset);
+                //offset = FileEditor.GetDouble(offset);
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //second pointer
-                                       //offset = FileEditor.getDouble(offset);
+                                       //offset = FileEditor.GetDouble(offset);
             }
             else if (Scenario == ScenarioType.Other)
             {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //first pointer
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub; //second pointer
-                //offset = FileEditor.getDouble(offset);
+                //offset = FileEditor.GetDouble(offset);
                 /*
                 offset = offset - sub; //third pointer
 
@@ -139,21 +139,21 @@ namespace SF3.X1_Editor.Models.BattlePointers
 
         /*public int BattlePointer
         {
-            get => FileEditor.getWord(battlePointer);
-            set => FileEditor.setWord(battlePointer, value);
+            get => FileEditor.GetWord(battlePointer);
+            set => FileEditor.SetWord(battlePointer, value);
         }
         */
 
         public int BattlePointer
         {
-            get => FileEditor.getDouble(battlePointer);
-            set => FileEditor.setDouble(battlePointer, value);
+            get => FileEditor.GetDouble(battlePointer);
+            set => FileEditor.SetDouble(battlePointer, value);
         }
 
         /*public int BattlePointer2
         {
-            get => FileEditor.getWord(battlePointer2);
-            set => FileEditor.setWord(battlePointer2, value);
+            get => FileEditor.GetWord(battlePointer2);
+            set => FileEditor.SetWord(battlePointer2, value);
         }
         */
 

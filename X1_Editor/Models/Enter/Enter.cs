@@ -28,13 +28,13 @@ namespace SF3.X1_Editor.Models.Enters
 
         /*public int NPCTableAddress1
         {
-            get => FileEditor.getDouble(npcOffset);
-            set => FileEditor.setDouble(npcOffset, value);
+            get => FileEditor.GetDouble(npcOffset);
+            set => FileEditor.SetDouble(npcOffset, value);
         }
 
-        public int NPCTableAddress2 => FileEditor.getDouble(NPCTableAddress1 - 0x0605F000);
+        public int NPCTableAddress2 => FileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
 
-        public int NPCTableAddress3 => FileEditor.getDouble(NPCTableAddress2 - 0x0605F000);*/
+        public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
         public Enter(ScenarioType scenario, int id, string text)
         {
@@ -44,7 +44,7 @@ namespace SF3.X1_Editor.Models.Enters
             {
                 offset = 0x00000024; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
 
                 offset = offset - sub;
             }
@@ -52,21 +52,21 @@ namespace SF3.X1_Editor.Models.Enters
             {
                 offset = 0x00000030; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000030; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000030; //pd initial pointer
                 sub = 0x0605e000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
             /*
@@ -74,7 +74,7 @@ namespace SF3.X1_Editor.Models.Enters
             {
                 offset = 0x00000030; //btl99 initial pointer
                 sub = 0x06060000;
-                offset = FileEditor.getDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset = offset - sub;
             }*/
 
@@ -109,50 +109,50 @@ namespace SF3.X1_Editor.Models.Enters
 
         public int Entered
         {
-            get => FileEditor.getWord(enterID);
-            set => FileEditor.setWord(enterID, value);
+            get => FileEditor.GetWord(enterID);
+            set => FileEditor.SetWord(enterID, value);
         }
 
         public int EnterUnknown2
         {
-            get => FileEditor.getWord(unknown2);
-            set => FileEditor.setWord(unknown2, value);
+            get => FileEditor.GetWord(unknown2);
+            set => FileEditor.SetWord(unknown2, value);
         }
 
         public int EnterXPos
         {
-            get => FileEditor.getWord(xPos);
-            set => FileEditor.setWord(xPos, value);
+            get => FileEditor.GetWord(xPos);
+            set => FileEditor.SetWord(xPos, value);
         }
 
         public int EnterUnknown6
         {
-            get => FileEditor.getWord(unknown6);
-            set => FileEditor.setWord(unknown6, value);
+            get => FileEditor.GetWord(unknown6);
+            set => FileEditor.SetWord(unknown6, value);
         }
 
         public int EnterZPos
         {
-            get => FileEditor.getWord(zPos);
-            set => FileEditor.setWord(zPos, value);
+            get => FileEditor.GetWord(zPos);
+            set => FileEditor.SetWord(zPos, value);
         }
 
         public int EnterDirection
         {
-            get => FileEditor.getWord(direction);
-            set => FileEditor.setWord(direction, value);
+            get => FileEditor.GetWord(direction);
+            set => FileEditor.SetWord(direction, value);
         }
 
         public int EnterCamera
         {
-            get => FileEditor.getWord(camera);
-            set => FileEditor.setWord(camera, value);
+            get => FileEditor.GetWord(camera);
+            set => FileEditor.SetWord(camera, value);
         }
 
         public int EnterUnknownE
         {
-            get => FileEditor.getWord(unknownE);
-            set => FileEditor.setWord(unknownE, value);
+            get => FileEditor.GetWord(unknownE);
+            set => FileEditor.SetWord(unknownE, value);
         }
 
         public int EnterAddress => (address);

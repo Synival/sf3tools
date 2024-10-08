@@ -250,7 +250,7 @@ namespace SF3.X019_Editor.Forms
             openfile.Filter = "SF3 data (X019.bin)|X019.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                if (FileEditor.loadFile(openfile.FileName))
+                if (FileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {
@@ -309,7 +309,7 @@ namespace SF3.X019_Editor.Forms
             savefile.FileName = Path.GetFileName(FileEditor.Filename);
             if (savefile.ShowDialog() == DialogResult.OK)
             {
-                FileEditor.saveFile(savefile.FileName);
+                FileEditor.SaveFile(savefile.FileName);
             }
         }
 

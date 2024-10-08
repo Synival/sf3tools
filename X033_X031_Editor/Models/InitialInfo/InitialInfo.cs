@@ -39,8 +39,8 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
         public InitialInfo(ScenarioType scenario, int id, string text)
         {
             Scenario = scenario;
-            checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
-            checkVersion2 = FileEditor.getByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
+            checkType = FileEditor.GetByte(0x00000009); //if it's 0x07 we're in a x033.bin
+            checkVersion2 = FileEditor.GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -144,106 +144,106 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 
         public int CharacterE
         {
-            get => FileEditor.getByte(character);
-            set => FileEditor.setByte(character, (byte)value);
+            get => FileEditor.GetByte(character);
+            set => FileEditor.SetByte(character, (byte)value);
         }
 
         public CharacterClassValue CharacterClassE
         {
-            get => new CharacterClassValue(FileEditor.getByte(characterClass));
-            set => FileEditor.setByte(characterClass, (byte)value.Value);
+            get => new CharacterClassValue(FileEditor.GetByte(characterClass));
+            set => FileEditor.SetByte(characterClass, (byte)value.Value);
         }
 
         public int Level
         {
-            get => FileEditor.getByte(level);
-            set => FileEditor.setByte(level, (byte)value);
+            get => FileEditor.GetByte(level);
+            set => FileEditor.SetByte(level, (byte)value);
         }
 
         public SexValue Sex
         {
-            get => new SexValue(FileEditor.getByte(sex));
-            set => FileEditor.setByte(sex, (byte)value.Value);
+            get => new SexValue(FileEditor.GetByte(sex));
+            set => FileEditor.SetByte(sex, (byte)value.Value);
         }
 
         public int Weapon
         {
-            get => FileEditor.getWord(weapon);
-            set => FileEditor.setWord(weapon, value);
+            get => FileEditor.GetWord(weapon);
+            set => FileEditor.SetWord(weapon, value);
         }
 
         public int Accessory
         {
-            get => FileEditor.getWord(accessory);
-            set => FileEditor.setWord(accessory, value);
+            get => FileEditor.GetWord(accessory);
+            set => FileEditor.SetWord(accessory, value);
         }
 
         public int Item1
         {
-            get => FileEditor.getWord(item1);
-            set => FileEditor.setWord(item1, value);
+            get => FileEditor.GetWord(item1);
+            set => FileEditor.SetWord(item1, value);
         }
 
         public int Item2
         {
-            get => FileEditor.getWord(item2);
-            set => FileEditor.setWord(item2, value);
+            get => FileEditor.GetWord(item2);
+            set => FileEditor.SetWord(item2, value);
         }
         public int Item3
         {
-            get => FileEditor.getWord(item3);
-            set => FileEditor.setWord(item3, value);
+            get => FileEditor.GetWord(item3);
+            set => FileEditor.SetWord(item3, value);
         }
         public int Item4
         {
-            get => FileEditor.getWord(item4);
-            set => FileEditor.setWord(item4, value);
+            get => FileEditor.GetWord(item4);
+            set => FileEditor.SetWord(item4, value);
         }
 
         public WeaponTypeValue Weapon1Type
         {
-            get => new WeaponTypeValue(FileEditor.getByte(weapon1Type));
-            set => FileEditor.setByte(weapon1Type, (byte)value.Value);
+            get => new WeaponTypeValue(FileEditor.GetByte(weapon1Type));
+            set => FileEditor.SetByte(weapon1Type, (byte)value.Value);
         }
 
         public int Weapon1Exp
         {
-            get => FileEditor.getWord(weapon1Exp);
-            set => FileEditor.setWord(weapon1Exp, value);
+            get => FileEditor.GetWord(weapon1Exp);
+            set => FileEditor.SetWord(weapon1Exp, value);
         }
 
         public WeaponTypeValue Weapon2Type
         {
-            get => new WeaponTypeValue(FileEditor.getByte(weapon2Type));
-            set => FileEditor.setByte(weapon2Type, (byte)value.Value);
+            get => new WeaponTypeValue(FileEditor.GetByte(weapon2Type));
+            set => FileEditor.SetByte(weapon2Type, (byte)value.Value);
         }
 
         public int Weapon2Exp
         {
-            get => FileEditor.getWord(weapon2Exp);
-            set => FileEditor.setWord(weapon2Exp, value);
+            get => FileEditor.GetWord(weapon2Exp);
+            set => FileEditor.SetWord(weapon2Exp, value);
         }
         public WeaponTypeValue Weapon3Type
         {
-            get => new WeaponTypeValue(FileEditor.getByte(weapon3Type));
-            set => FileEditor.setByte(weapon3Type, (byte)value.Value);
+            get => new WeaponTypeValue(FileEditor.GetByte(weapon3Type));
+            set => FileEditor.SetByte(weapon3Type, (byte)value.Value);
         }
 
         public int Weapon3Exp
         {
-            get => FileEditor.getWord(weapon3Exp);
-            set => FileEditor.setWord(weapon3Exp, value);
+            get => FileEditor.GetWord(weapon3Exp);
+            set => FileEditor.SetWord(weapon3Exp, value);
         }
         public WeaponTypeValue Weapon4Type
         {
-            get => new WeaponTypeValue(FileEditor.getByte(weapon4Type));
-            set => FileEditor.setByte(weapon4Type, (byte)value.Value);
+            get => new WeaponTypeValue(FileEditor.GetByte(weapon4Type));
+            set => FileEditor.SetByte(weapon4Type, (byte)value.Value);
         }
 
         public int Weapon4Exp
         {
-            get => FileEditor.getWord(weapon4Exp);
-            set => FileEditor.setWord(weapon4Exp, value);
+            get => FileEditor.GetWord(weapon4Exp);
+            set => FileEditor.SetWord(weapon4Exp, value);
         }
 
         public int PresetAddress => (address);

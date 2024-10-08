@@ -151,8 +151,8 @@ namespace SF3.X033_X031_Editor.Models.Stats
         public Stats(ScenarioType scenario, int id, string text)
         {
             Scenario = scenario;
-            checkType = FileEditor.getByte(0x00000009); //if it's 0x07 we're in a x033.bin
-            checkVersion2 = FileEditor.getByte(0x000000017); //to determine which version of scn2 we are using 
+            checkType = FileEditor.GetByte(0x00000009); //if it's 0x07 we're in a x033.bin
+            checkVersion2 = FileEditor.GetByte(0x000000017); //to determine which version of scn2 we are using 
             //X031.BIN is during combat
             //X033.BIN is out of combat
 
@@ -352,13 +352,13 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         public ScenarioType Scenario { get; }
-        public bool IsPromoted => FileEditor.getByte((int)characterClass) >= 0x20;
+        public bool IsPromoted => FileEditor.GetByte((int)characterClass) >= 0x20;
 
         public PromotionLevelType PromotionLevel
         {
             get
             {
-                int chClass = FileEditor.getByte((int)characterClass);
+                int chClass = FileEditor.GetByte((int)characterClass);
                 return chClass < 0x20 ? PromotionLevelType.Unpromoted :
                        chClass < 0x48 ? PromotionLevelType.Promotion1 :
                                         PromotionLevelType.Promotion2;
@@ -452,62 +452,62 @@ namespace SF3.X033_X031_Editor.Models.Stats
 
         public int CharacterID
         {
-            get => FileEditor.getByte(character);
-            set => FileEditor.setByte(character, (byte)value);
+            get => FileEditor.GetByte(character);
+            set => FileEditor.SetByte(character, (byte)value);
         }
 
         public CharacterClassValue CharacterClass
         {
-            get => new CharacterClassValue(FileEditor.getByte(characterClass));
-            set => FileEditor.setByte(characterClass, (byte)value.Value);
+            get => new CharacterClassValue(FileEditor.GetByte(characterClass));
+            set => FileEditor.SetByte(characterClass, (byte)value.Value);
         }
 
         public int HPPromote
         {
-            get => FileEditor.getByte(hpPromote);
-            set => FileEditor.setByte(hpPromote, (byte)value);
+            get => FileEditor.GetByte(hpPromote);
+            set => FileEditor.SetByte(hpPromote, (byte)value);
         }
 
         public int HPCurve1
         {
-            get => FileEditor.getByte(hpCurve1);
-            set => FileEditor.setByte(hpCurve1, (byte)value);
+            get => FileEditor.GetByte(hpCurve1);
+            set => FileEditor.SetByte(hpCurve1, (byte)value);
         }
 
         public int HPCurve5
         {
-            get => FileEditor.getByte(hpCurve5);
-            set => FileEditor.setByte(hpCurve5, (byte)value);
+            get => FileEditor.GetByte(hpCurve5);
+            set => FileEditor.SetByte(hpCurve5, (byte)value);
         }
 
         public int HPCurve10
         {
-            get => FileEditor.getByte(hpCurve10);
-            set => FileEditor.setByte(hpCurve10, (byte)value);
+            get => FileEditor.GetByte(hpCurve10);
+            set => FileEditor.SetByte(hpCurve10, (byte)value);
         }
 
         public int HPCurve12_15
         {
-            get => FileEditor.getByte(hpCurve12_15);
-            set => FileEditor.setByte(hpCurve12_15, (byte)value);
+            get => FileEditor.GetByte(hpCurve12_15);
+            set => FileEditor.SetByte(hpCurve12_15, (byte)value);
         }
 
         public int HPCurve14_20
         {
-            get => FileEditor.getByte(hpCurve14_20);
-            set => FileEditor.setByte(hpCurve14_20, (byte)value);
+            get => FileEditor.GetByte(hpCurve14_20);
+            set => FileEditor.SetByte(hpCurve14_20, (byte)value);
         }
 
         public int HPCurve17_30
         {
-            get => FileEditor.getByte(hpCurve17_30);
-            set => FileEditor.setByte(hpCurve17_30, (byte)value);
+            get => FileEditor.GetByte(hpCurve17_30);
+            set => FileEditor.SetByte(hpCurve17_30, (byte)value);
         }
 
         public int HPCurve20_99
         {
-            get => FileEditor.getByte(hpCurve20_99);
-            set => FileEditor.setByte(hpCurve20_99, (byte)value);
+            get => FileEditor.GetByte(hpCurve20_99);
+            set => FileEditor.SetByte(hpCurve20_99, (byte)value);
         }
 
         public string HPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 0);
@@ -519,50 +519,50 @@ namespace SF3.X033_X031_Editor.Models.Stats
 
         public int MPPromote
         {
-            get => FileEditor.getByte(mpPromote);
-            set => FileEditor.setByte(mpPromote, (byte)value);
+            get => FileEditor.GetByte(mpPromote);
+            set => FileEditor.SetByte(mpPromote, (byte)value);
         }
 
         public int MPCurve1
         {
-            get => FileEditor.getByte(mpCurve1);
-            set => FileEditor.setByte(mpCurve1, (byte)value);
+            get => FileEditor.GetByte(mpCurve1);
+            set => FileEditor.SetByte(mpCurve1, (byte)value);
         }
 
         public int MPCurve5
         {
-            get => FileEditor.getByte(mpCurve5);
-            set => FileEditor.setByte(mpCurve5, (byte)value);
+            get => FileEditor.GetByte(mpCurve5);
+            set => FileEditor.SetByte(mpCurve5, (byte)value);
         }
 
         public int MPCurve10
         {
-            get => FileEditor.getByte(mpCurve10);
-            set => FileEditor.setByte(mpCurve10, (byte)value);
+            get => FileEditor.GetByte(mpCurve10);
+            set => FileEditor.SetByte(mpCurve10, (byte)value);
         }
 
         public int MPCurve12_15
         {
-            get => FileEditor.getByte(mpCurve12_15);
-            set => FileEditor.setByte(mpCurve12_15, (byte)value);
+            get => FileEditor.GetByte(mpCurve12_15);
+            set => FileEditor.SetByte(mpCurve12_15, (byte)value);
         }
 
         public int MPCurve14_20
         {
-            get => FileEditor.getByte(mpCurve14_20);
-            set => FileEditor.setByte(mpCurve14_20, (byte)value);
+            get => FileEditor.GetByte(mpCurve14_20);
+            set => FileEditor.SetByte(mpCurve14_20, (byte)value);
         }
 
         public int MPCurve17_30
         {
-            get => FileEditor.getByte(mpCurve17_30);
-            set => FileEditor.setByte(mpCurve17_30, (byte)value);
+            get => FileEditor.GetByte(mpCurve17_30);
+            set => FileEditor.SetByte(mpCurve17_30, (byte)value);
         }
 
         public int MPCurve20_99
         {
-            get => FileEditor.getByte(mpCurve20_99);
-            set => FileEditor.setByte(mpCurve20_99, (byte)value);
+            get => FileEditor.GetByte(mpCurve20_99);
+            set => FileEditor.SetByte(mpCurve20_99, (byte)value);
         }
 
         public string MPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 0);
@@ -574,50 +574,50 @@ namespace SF3.X033_X031_Editor.Models.Stats
 
         public int AtkPromote
         {
-            get => FileEditor.getByte(atkPromote);
-            set => FileEditor.setByte(atkPromote, (byte)value);
+            get => FileEditor.GetByte(atkPromote);
+            set => FileEditor.SetByte(atkPromote, (byte)value);
         }
 
         public int AtkCurve1
         {
-            get => FileEditor.getByte(atkCurve1);
-            set => FileEditor.setByte(atkCurve1, (byte)value);
+            get => FileEditor.GetByte(atkCurve1);
+            set => FileEditor.SetByte(atkCurve1, (byte)value);
         }
 
         public int AtkCurve5
         {
-            get => FileEditor.getByte(atkCurve5);
-            set => FileEditor.setByte(atkCurve5, (byte)value);
+            get => FileEditor.GetByte(atkCurve5);
+            set => FileEditor.SetByte(atkCurve5, (byte)value);
         }
 
         public int AtkCurve10
         {
-            get => FileEditor.getByte(atkCurve10);
-            set => FileEditor.setByte(atkCurve10, (byte)value);
+            get => FileEditor.GetByte(atkCurve10);
+            set => FileEditor.SetByte(atkCurve10, (byte)value);
         }
 
         public int AtkCurve12_15
         {
-            get => FileEditor.getByte(atkCurve12_15);
-            set => FileEditor.setByte(atkCurve12_15, (byte)value);
+            get => FileEditor.GetByte(atkCurve12_15);
+            set => FileEditor.SetByte(atkCurve12_15, (byte)value);
         }
 
         public int AtkCurve14_20
         {
-            get => FileEditor.getByte(atkCurve14_20);
-            set => FileEditor.setByte(atkCurve14_20, (byte)value);
+            get => FileEditor.GetByte(atkCurve14_20);
+            set => FileEditor.SetByte(atkCurve14_20, (byte)value);
         }
 
         public int AtkCurve17_30
         {
-            get => FileEditor.getByte(atkCurve17_30);
-            set => FileEditor.setByte(atkCurve17_30, (byte)value);
+            get => FileEditor.GetByte(atkCurve17_30);
+            set => FileEditor.SetByte(atkCurve17_30, (byte)value);
         }
 
         public int AtkCurve20_99
         {
-            get => FileEditor.getByte(atkCurve20_99);
-            set => FileEditor.setByte(atkCurve20_99, (byte)value);
+            get => FileEditor.GetByte(atkCurve20_99);
+            set => FileEditor.SetByte(atkCurve20_99, (byte)value);
         }
 
         public string Atkgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 0);
@@ -629,50 +629,50 @@ namespace SF3.X033_X031_Editor.Models.Stats
 
         public int DefPromote
         {
-            get => FileEditor.getByte(defPromote);
-            set => FileEditor.setByte(defPromote, (byte)value);
+            get => FileEditor.GetByte(defPromote);
+            set => FileEditor.SetByte(defPromote, (byte)value);
         }
 
         public int DefCurve1
         {
-            get => FileEditor.getByte(defCurve1);
-            set => FileEditor.setByte(defCurve1, (byte)value);
+            get => FileEditor.GetByte(defCurve1);
+            set => FileEditor.SetByte(defCurve1, (byte)value);
         }
 
         public int DefCurve5
         {
-            get => FileEditor.getByte(defCurve5);
-            set => FileEditor.setByte(defCurve5, (byte)value);
+            get => FileEditor.GetByte(defCurve5);
+            set => FileEditor.SetByte(defCurve5, (byte)value);
         }
 
         public int DefCurve10
         {
-            get => FileEditor.getByte(defCurve10);
-            set => FileEditor.setByte(defCurve10, (byte)value);
+            get => FileEditor.GetByte(defCurve10);
+            set => FileEditor.SetByte(defCurve10, (byte)value);
         }
 
         public int DefCurve12_15
         {
-            get => FileEditor.getByte(defCurve12_15);
-            set => FileEditor.setByte(defCurve12_15, (byte)value);
+            get => FileEditor.GetByte(defCurve12_15);
+            set => FileEditor.SetByte(defCurve12_15, (byte)value);
         }
 
         public int DefCurve14_20
         {
-            get => FileEditor.getByte(defCurve14_20);
-            set => FileEditor.setByte(defCurve14_20, (byte)value);
+            get => FileEditor.GetByte(defCurve14_20);
+            set => FileEditor.SetByte(defCurve14_20, (byte)value);
         }
 
         public int DefCurve17_30
         {
-            get => FileEditor.getByte(defCurve17_30);
-            set => FileEditor.setByte(defCurve17_30, (byte)value);
+            get => FileEditor.GetByte(defCurve17_30);
+            set => FileEditor.SetByte(defCurve17_30, (byte)value);
         }
 
         public int DefCurve20_99
         {
-            get => FileEditor.getByte(defCurve20_99);
-            set => FileEditor.setByte(defCurve20_99, (byte)value);
+            get => FileEditor.GetByte(defCurve20_99);
+            set => FileEditor.SetByte(defCurve20_99, (byte)value);
         }
 
         public string Defgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 0);
@@ -684,50 +684,50 @@ namespace SF3.X033_X031_Editor.Models.Stats
 
         public int AgiPromote
         {
-            get => FileEditor.getByte(agiPromote);
-            set => FileEditor.setByte(agiPromote, (byte)value);
+            get => FileEditor.GetByte(agiPromote);
+            set => FileEditor.SetByte(agiPromote, (byte)value);
         }
 
         public int AgiCurve1
         {
-            get => FileEditor.getByte(agiCurve1);
-            set => FileEditor.setByte(agiCurve1, (byte)value);
+            get => FileEditor.GetByte(agiCurve1);
+            set => FileEditor.SetByte(agiCurve1, (byte)value);
         }
 
         public int AgiCurve5
         {
-            get => FileEditor.getByte(agiCurve5);
-            set => FileEditor.setByte(agiCurve5, (byte)value);
+            get => FileEditor.GetByte(agiCurve5);
+            set => FileEditor.SetByte(agiCurve5, (byte)value);
         }
 
         public int AgiCurve10
         {
-            get => FileEditor.getByte(agiCurve10);
-            set => FileEditor.setByte(agiCurve10, (byte)value);
+            get => FileEditor.GetByte(agiCurve10);
+            set => FileEditor.SetByte(agiCurve10, (byte)value);
         }
 
         public int AgiCurve12_15
         {
-            get => FileEditor.getByte(agiCurve12_15);
-            set => FileEditor.setByte(agiCurve12_15, (byte)value);
+            get => FileEditor.GetByte(agiCurve12_15);
+            set => FileEditor.SetByte(agiCurve12_15, (byte)value);
         }
 
         public int AgiCurve14_20
         {
-            get => FileEditor.getByte(agiCurve14_20);
-            set => FileEditor.setByte(agiCurve14_20, (byte)value);
+            get => FileEditor.GetByte(agiCurve14_20);
+            set => FileEditor.SetByte(agiCurve14_20, (byte)value);
         }
 
         public int AgiCurve17_30
         {
-            get => FileEditor.getByte(agiCurve17_30);
-            set => FileEditor.setByte(agiCurve17_30, (byte)value);
+            get => FileEditor.GetByte(agiCurve17_30);
+            set => FileEditor.SetByte(agiCurve17_30, (byte)value);
         }
 
         public int AgiCurve20_99
         {
-            get => FileEditor.getByte(agiCurve20_99);
-            set => FileEditor.setByte(agiCurve20_99, (byte)value);
+            get => FileEditor.GetByte(agiCurve20_99);
+            set => FileEditor.SetByte(agiCurve20_99, (byte)value);
         }
 
         public string Agigroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 0);
@@ -739,440 +739,440 @@ namespace SF3.X033_X031_Editor.Models.Stats
 
         public int S1LearnedAt
         {
-            get => FileEditor.getByte(s1LearnedAt);
-            set => FileEditor.setByte(s1LearnedAt, (byte)value);
+            get => FileEditor.GetByte(s1LearnedAt);
+            set => FileEditor.SetByte(s1LearnedAt, (byte)value);
         }
 
         public int S1LearnedID
         {
-            get => FileEditor.getByte(s1LearnedID);
-            set => FileEditor.setByte(s1LearnedID, (byte)value);
+            get => FileEditor.GetByte(s1LearnedID);
+            set => FileEditor.SetByte(s1LearnedID, (byte)value);
         }
 
         public int S1LearnedLevel
         {
-            get => FileEditor.getByte(s1LearnedLevel);
-            set => FileEditor.setByte(s1LearnedLevel, (byte)value);
+            get => FileEditor.GetByte(s1LearnedLevel);
+            set => FileEditor.SetByte(s1LearnedLevel, (byte)value);
         }
 
         public int S2LearnedAt
         {
-            get => FileEditor.getByte(s2LearnedAt);
-            set => FileEditor.setByte(s2LearnedAt, (byte)value);
+            get => FileEditor.GetByte(s2LearnedAt);
+            set => FileEditor.SetByte(s2LearnedAt, (byte)value);
         }
 
         public int S2LearnedID
         {
-            get => FileEditor.getByte(s2LearnedID);
-            set => FileEditor.setByte(s2LearnedID, (byte)value);
+            get => FileEditor.GetByte(s2LearnedID);
+            set => FileEditor.SetByte(s2LearnedID, (byte)value);
         }
 
         public int S2LearnedLevel
         {
-            get => FileEditor.getByte(s2LearnedLevel);
-            set => FileEditor.setByte(s2LearnedLevel, (byte)value);
+            get => FileEditor.GetByte(s2LearnedLevel);
+            set => FileEditor.SetByte(s2LearnedLevel, (byte)value);
         }
 
         public int S3LearnedAt
         {
-            get => FileEditor.getByte(s3LearnedAt);
-            set => FileEditor.setByte(s3LearnedAt, (byte)value);
+            get => FileEditor.GetByte(s3LearnedAt);
+            set => FileEditor.SetByte(s3LearnedAt, (byte)value);
         }
 
         public int S3LearnedID
         {
-            get => FileEditor.getByte(s3LearnedID);
-            set => FileEditor.setByte(s3LearnedID, (byte)value);
+            get => FileEditor.GetByte(s3LearnedID);
+            set => FileEditor.SetByte(s3LearnedID, (byte)value);
         }
 
         public int S3LearnedLevel
         {
-            get => FileEditor.getByte(s3LearnedLevel);
-            set => FileEditor.setByte(s3LearnedLevel, (byte)value);
+            get => FileEditor.GetByte(s3LearnedLevel);
+            set => FileEditor.SetByte(s3LearnedLevel, (byte)value);
         }
 
         public int S4LearnedAt
         {
-            get => FileEditor.getByte(s4LearnedAt);
-            set => FileEditor.setByte(s4LearnedAt, (byte)value);
+            get => FileEditor.GetByte(s4LearnedAt);
+            set => FileEditor.SetByte(s4LearnedAt, (byte)value);
         }
 
         public int S4LearnedID
         {
-            get => FileEditor.getByte(s4LearnedID);
-            set => FileEditor.setByte(s4LearnedID, (byte)value);
+            get => FileEditor.GetByte(s4LearnedID);
+            set => FileEditor.SetByte(s4LearnedID, (byte)value);
         }
 
         public int S4LearnedLevel
         {
-            get => FileEditor.getByte(s4LearnedLevel);
-            set => FileEditor.setByte(s4LearnedLevel, (byte)value);
+            get => FileEditor.GetByte(s4LearnedLevel);
+            set => FileEditor.SetByte(s4LearnedLevel, (byte)value);
         }
 
         public int S5LearnedAt
         {
-            get => FileEditor.getByte(s5LearnedAt);
-            set => FileEditor.setByte(s5LearnedAt, (byte)value);
+            get => FileEditor.GetByte(s5LearnedAt);
+            set => FileEditor.SetByte(s5LearnedAt, (byte)value);
         }
 
         public int S5LearnedID
         {
-            get => FileEditor.getByte(s5LearnedID);
-            set => FileEditor.setByte(s5LearnedID, (byte)value);
+            get => FileEditor.GetByte(s5LearnedID);
+            set => FileEditor.SetByte(s5LearnedID, (byte)value);
         }
 
         public int S5LearnedLevel
         {
-            get => FileEditor.getByte(s5LearnedLevel);
-            set => FileEditor.setByte(s5LearnedLevel, (byte)value);
+            get => FileEditor.GetByte(s5LearnedLevel);
+            set => FileEditor.SetByte(s5LearnedLevel, (byte)value);
         }
 
         public int S6LearnedAt
         {
-            get => FileEditor.getByte(s6LearnedAt);
-            set => FileEditor.setByte(s6LearnedAt, (byte)value);
+            get => FileEditor.GetByte(s6LearnedAt);
+            set => FileEditor.SetByte(s6LearnedAt, (byte)value);
         }
 
         public int S6LearnedID
         {
-            get => FileEditor.getByte(s6LearnedID);
-            set => FileEditor.setByte(s6LearnedID, (byte)value);
+            get => FileEditor.GetByte(s6LearnedID);
+            set => FileEditor.SetByte(s6LearnedID, (byte)value);
         }
 
         public int S6LearnedLevel
         {
-            get => FileEditor.getByte(s6LearnedLevel);
-            set => FileEditor.setByte(s6LearnedLevel, (byte)value);
+            get => FileEditor.GetByte(s6LearnedLevel);
+            set => FileEditor.SetByte(s6LearnedLevel, (byte)value);
         }
 
         public int S7LearnedAt
         {
-            get => FileEditor.getByte(s7LearnedAt);
-            set => FileEditor.setByte(s7LearnedAt, (byte)value);
+            get => FileEditor.GetByte(s7LearnedAt);
+            set => FileEditor.SetByte(s7LearnedAt, (byte)value);
         }
 
         public int S7LearnedID
         {
-            get => FileEditor.getByte(s7LearnedID);
-            set => FileEditor.setByte(s7LearnedID, (byte)value);
+            get => FileEditor.GetByte(s7LearnedID);
+            set => FileEditor.SetByte(s7LearnedID, (byte)value);
         }
 
         public int S7LearnedLevel
         {
-            get => FileEditor.getByte(s7LearnedLevel);
-            set => FileEditor.setByte(s7LearnedLevel, (byte)value);
+            get => FileEditor.GetByte(s7LearnedLevel);
+            set => FileEditor.SetByte(s7LearnedLevel, (byte)value);
         }
 
         public int S8LearnedAt
         {
-            get => FileEditor.getByte(s8LearnedAt);
-            set => FileEditor.setByte(s8LearnedAt, (byte)value);
+            get => FileEditor.GetByte(s8LearnedAt);
+            set => FileEditor.SetByte(s8LearnedAt, (byte)value);
         }
 
         public int S8LearnedID
         {
-            get => FileEditor.getByte(s8LearnedID);
-            set => FileEditor.setByte(s8LearnedID, (byte)value);
+            get => FileEditor.GetByte(s8LearnedID);
+            set => FileEditor.SetByte(s8LearnedID, (byte)value);
         }
 
         public int S8LearnedLevel
         {
-            get => FileEditor.getByte(s8LearnedLevel);
-            set => FileEditor.setByte(s8LearnedLevel, (byte)value);
+            get => FileEditor.GetByte(s8LearnedLevel);
+            set => FileEditor.SetByte(s8LearnedLevel, (byte)value);
         }
 
         public int S9LearnedAt
         {
-            get => FileEditor.getByte(s9LearnedAt);
-            set => FileEditor.setByte(s9LearnedAt, (byte)value);
+            get => FileEditor.GetByte(s9LearnedAt);
+            set => FileEditor.SetByte(s9LearnedAt, (byte)value);
         }
 
         public int S9LearnedID
         {
-            get => FileEditor.getByte(s9LearnedID);
-            set => FileEditor.setByte(s9LearnedID, (byte)value);
+            get => FileEditor.GetByte(s9LearnedID);
+            set => FileEditor.SetByte(s9LearnedID, (byte)value);
         }
 
         public int S9LearnedLevel
         {
-            get => FileEditor.getByte(s9LearnedLevel);
-            set => FileEditor.setByte(s9LearnedLevel, (byte)value);
+            get => FileEditor.GetByte(s9LearnedLevel);
+            set => FileEditor.SetByte(s9LearnedLevel, (byte)value);
         }
 
         public int S10LearnedAt
         {
-            get => FileEditor.getByte(s10LearnedAt);
-            set => FileEditor.setByte(s10LearnedAt, (byte)value);
+            get => FileEditor.GetByte(s10LearnedAt);
+            set => FileEditor.SetByte(s10LearnedAt, (byte)value);
         }
 
         public int S10LearnedID
         {
-            get => FileEditor.getByte(s10LearnedID);
-            set => FileEditor.setByte(s10LearnedID, (byte)value);
+            get => FileEditor.GetByte(s10LearnedID);
+            set => FileEditor.SetByte(s10LearnedID, (byte)value);
         }
 
         public int S10LearnedLevel
         {
-            get => FileEditor.getByte(s10LearnedLevel);
-            set => FileEditor.setByte(s10LearnedLevel, (byte)value);
+            get => FileEditor.GetByte(s10LearnedLevel);
+            set => FileEditor.SetByte(s10LearnedLevel, (byte)value);
         }
 
         public int S11LearnedAt
         {
-            get => FileEditor.getByte(s11LearnedAt);
-            set => FileEditor.setByte(s11LearnedAt, (byte)value);
+            get => FileEditor.GetByte(s11LearnedAt);
+            set => FileEditor.SetByte(s11LearnedAt, (byte)value);
         }
 
         public int S11LearnedID
         {
-            get => FileEditor.getByte(s11LearnedID);
-            set => FileEditor.setByte(s11LearnedID, (byte)value);
+            get => FileEditor.GetByte(s11LearnedID);
+            set => FileEditor.SetByte(s11LearnedID, (byte)value);
         }
 
         public int S11LearnedLevel
         {
-            get => FileEditor.getByte(s11LearnedLevel);
-            set => FileEditor.setByte(s11LearnedLevel, (byte)value);
+            get => FileEditor.GetByte(s11LearnedLevel);
+            set => FileEditor.SetByte(s11LearnedLevel, (byte)value);
         }
 
         public int S12LearnedAt
         {
-            get => FileEditor.getByte(s12LearnedAt);
-            set => FileEditor.setByte(s12LearnedAt, (byte)value);
+            get => FileEditor.GetByte(s12LearnedAt);
+            set => FileEditor.SetByte(s12LearnedAt, (byte)value);
         }
 
         public int S12LearnedID
         {
-            get => FileEditor.getByte(s12LearnedID);
-            set => FileEditor.setByte(s12LearnedID, (byte)value);
+            get => FileEditor.GetByte(s12LearnedID);
+            set => FileEditor.SetByte(s12LearnedID, (byte)value);
         }
 
         public int S12LearnedLevel
         {
-            get => FileEditor.getByte(s12LearnedLevel);
-            set => FileEditor.setByte(s12LearnedLevel, (byte)value);
+            get => FileEditor.GetByte(s12LearnedLevel);
+            set => FileEditor.SetByte(s12LearnedLevel, (byte)value);
         }
 
         public int Weapon1Special1
         {
-            get => FileEditor.getByte(weapon1Special1);
-            set => FileEditor.setByte(weapon1Special1, (byte)value);
+            get => FileEditor.GetByte(weapon1Special1);
+            set => FileEditor.SetByte(weapon1Special1, (byte)value);
         }
 
         public int Weapon1Special2
         {
-            get => FileEditor.getByte(weapon1Special2);
-            set => FileEditor.setByte(weapon1Special2, (byte)value);
+            get => FileEditor.GetByte(weapon1Special2);
+            set => FileEditor.SetByte(weapon1Special2, (byte)value);
         }
 
         public int Weapon1Special3
         {
-            get => FileEditor.getByte(weapon1Special3);
-            set => FileEditor.setByte(weapon1Special3, (byte)value);
+            get => FileEditor.GetByte(weapon1Special3);
+            set => FileEditor.SetByte(weapon1Special3, (byte)value);
         }
 
         public int Weapon2Special1
         {
-            get => FileEditor.getByte(weapon2Special1);
-            set => FileEditor.setByte(weapon2Special1, (byte)value);
+            get => FileEditor.GetByte(weapon2Special1);
+            set => FileEditor.SetByte(weapon2Special1, (byte)value);
         }
 
         public int Weapon2Special2
         {
-            get => FileEditor.getByte(weapon2Special2);
-            set => FileEditor.setByte(weapon2Special2, (byte)value);
+            get => FileEditor.GetByte(weapon2Special2);
+            set => FileEditor.SetByte(weapon2Special2, (byte)value);
         }
 
         public int Weapon2Special3
         {
-            get => FileEditor.getByte(weapon2Special3);
-            set => FileEditor.setByte(weapon2Special3, (byte)value);
+            get => FileEditor.GetByte(weapon2Special3);
+            set => FileEditor.SetByte(weapon2Special3, (byte)value);
         }
 
         public int Weapon3Special1
         {
-            get => FileEditor.getByte(weapon3Special1);
-            set => FileEditor.setByte(weapon3Special1, (byte)value);
+            get => FileEditor.GetByte(weapon3Special1);
+            set => FileEditor.SetByte(weapon3Special1, (byte)value);
         }
 
         public int Weapon3Special2
         {
-            get => FileEditor.getByte(weapon3Special2);
-            set => FileEditor.setByte(weapon3Special2, (byte)value);
+            get => FileEditor.GetByte(weapon3Special2);
+            set => FileEditor.SetByte(weapon3Special2, (byte)value);
         }
 
         public int Weapon3Special3
         {
-            get => FileEditor.getByte(weapon3Special3);
-            set => FileEditor.setByte(weapon3Special3, (byte)value);
+            get => FileEditor.GetByte(weapon3Special3);
+            set => FileEditor.SetByte(weapon3Special3, (byte)value);
         }
 
         public int Weapon4Special1
         {
-            get => FileEditor.getByte(weapon4Special1);
-            set => FileEditor.setByte(weapon4Special1, (byte)value);
+            get => FileEditor.GetByte(weapon4Special1);
+            set => FileEditor.SetByte(weapon4Special1, (byte)value);
         }
 
         public int Weapon4Special2
         {
-            get => FileEditor.getByte(weapon4Special2);
-            set => FileEditor.setByte(weapon4Special2, (byte)value);
+            get => FileEditor.GetByte(weapon4Special2);
+            set => FileEditor.SetByte(weapon4Special2, (byte)value);
         }
 
         public int Weapon4Special3
         {
-            get => FileEditor.getByte(weapon4Special3);
-            set => FileEditor.setByte(weapon4Special3, (byte)value);
+            get => FileEditor.GetByte(weapon4Special3);
+            set => FileEditor.SetByte(weapon4Special3, (byte)value);
         }
 
         public int BaseLuck
         {
-            get => FileEditor.getByte(baseLuck);
-            set => FileEditor.setByte(baseLuck, (byte)value);
+            get => FileEditor.GetByte(baseLuck);
+            set => FileEditor.SetByte(baseLuck, (byte)value);
         }
 
         public int BaseMov
         {
-            get => FileEditor.getByte(baseMov);
-            set => FileEditor.setByte(baseMov, (byte)value);
+            get => FileEditor.GetByte(baseMov);
+            set => FileEditor.SetByte(baseMov, (byte)value);
         }
 
         public int BaseTurns
         {
-            get => FileEditor.getByte(baseTurns);
-            set => FileEditor.setByte(baseTurns, (byte)value);
+            get => FileEditor.GetByte(baseTurns);
+            set => FileEditor.SetByte(baseTurns, (byte)value);
         }
 
         public int BaseHPRegen
         {
-            get => FileEditor.getByte(baseHPRegen);
-            set => FileEditor.setByte(baseHPRegen, (byte)value);
+            get => FileEditor.GetByte(baseHPRegen);
+            set => FileEditor.SetByte(baseHPRegen, (byte)value);
         }
 
         public int BaseMPRegen
         {
-            get => FileEditor.getByte(baseMPRegen);
-            set => FileEditor.setByte(baseMPRegen, (byte)value);
+            get => FileEditor.GetByte(baseMPRegen);
+            set => FileEditor.SetByte(baseMPRegen, (byte)value);
         }
 
         public int EarthRes
         {
-            get => FileEditor.getByte(earthRes);
-            set => FileEditor.setByte(earthRes, (byte)value);
+            get => FileEditor.GetByte(earthRes);
+            set => FileEditor.SetByte(earthRes, (byte)value);
         }
 
         public int FireRes
         {
-            get => FileEditor.getByte(fireRes);
-            set => FileEditor.setByte(fireRes, (byte)value);
+            get => FileEditor.GetByte(fireRes);
+            set => FileEditor.SetByte(fireRes, (byte)value);
         }
 
         public int IceRes
         {
-            get => FileEditor.getByte(iceRes);
-            set => FileEditor.setByte(iceRes, (byte)value);
+            get => FileEditor.GetByte(iceRes);
+            set => FileEditor.SetByte(iceRes, (byte)value);
         }
 
         public int SparkRes
         {
-            get => FileEditor.getByte(sparkRes);
-            set => FileEditor.setByte(sparkRes, (byte)value);
+            get => FileEditor.GetByte(sparkRes);
+            set => FileEditor.SetByte(sparkRes, (byte)value);
         }
 
         public int WindRes
         {
-            get => FileEditor.getByte(windRes);
-            set => FileEditor.setByte(windRes, (byte)value);
+            get => FileEditor.GetByte(windRes);
+            set => FileEditor.SetByte(windRes, (byte)value);
         }
 
         public int LightRes
         {
-            get => FileEditor.getByte(lightRes);
-            set => FileEditor.setByte(lightRes, (byte)value);
+            get => FileEditor.GetByte(lightRes);
+            set => FileEditor.SetByte(lightRes, (byte)value);
         }
 
         public int DarkRes
         {
-            get => FileEditor.getByte(darkRes);
-            set => FileEditor.setByte(darkRes, (byte)value);
+            get => FileEditor.GetByte(darkRes);
+            set => FileEditor.SetByte(darkRes, (byte)value);
         }
 
         public int UnknownRes
         {
-            get => FileEditor.getByte(unknownRes);
-            set => FileEditor.setByte(unknownRes, (byte)value);
+            get => FileEditor.GetByte(unknownRes);
+            set => FileEditor.SetByte(unknownRes, (byte)value);
         }
 
         public int Slow
         {
-            get => FileEditor.getByte(slow);
-            set => FileEditor.setByte(slow, (byte)value);
+            get => FileEditor.GetByte(slow);
+            set => FileEditor.SetByte(slow, (byte)value);
         }
 
         public int Support
         {
-            get => FileEditor.getByte(support);
-            set => FileEditor.setByte(support, (byte)value);
+            get => FileEditor.GetByte(support);
+            set => FileEditor.SetByte(support, (byte)value);
         }
 
         public int MagicBonus
         {
-            get => FileEditor.getByte(magicBonus);
-            set => FileEditor.setByte(magicBonus, (byte)value);
+            get => FileEditor.GetByte(magicBonus);
+            set => FileEditor.SetByte(magicBonus, (byte)value);
         }
 
         public int MovementType
         {
-            get => FileEditor.getByte(movementType);
-            set => FileEditor.setByte(movementType, (byte)value);
+            get => FileEditor.GetByte(movementType);
+            set => FileEditor.SetByte(movementType, (byte)value);
         }
 
         public int WeaponEquipable1
         {
-            get => FileEditor.getByte(weaponEquipable1);
-            set => FileEditor.setByte(weaponEquipable1, (byte)value);
+            get => FileEditor.GetByte(weaponEquipable1);
+            set => FileEditor.SetByte(weaponEquipable1, (byte)value);
         }
 
         public int WeaponEquipable2
         {
-            get => FileEditor.getByte(weaponEquipable2);
-            set => FileEditor.setByte(weaponEquipable2, (byte)value);
+            get => FileEditor.GetByte(weaponEquipable2);
+            set => FileEditor.SetByte(weaponEquipable2, (byte)value);
         }
 
         public int WeaponEquipable3
         {
-            get => FileEditor.getByte(weaponEquipable3);
-            set => FileEditor.setByte(weaponEquipable3, (byte)value);
+            get => FileEditor.GetByte(weaponEquipable3);
+            set => FileEditor.SetByte(weaponEquipable3, (byte)value);
         }
 
         public int WeaponEquipable4
         {
-            get => FileEditor.getByte(weaponEquipable4);
-            set => FileEditor.setByte(weaponEquipable4, (byte)value);
+            get => FileEditor.GetByte(weaponEquipable4);
+            set => FileEditor.SetByte(weaponEquipable4, (byte)value);
         }
 
         public int AccessoryEquipable1
         {
-            get => FileEditor.getByte(accessoryEquipable1);
-            set => FileEditor.setByte(accessoryEquipable1, (byte)value);
+            get => FileEditor.GetByte(accessoryEquipable1);
+            set => FileEditor.SetByte(accessoryEquipable1, (byte)value);
         }
 
         public int AccessoryEquipable2
         {
-            get => FileEditor.getByte(accessoryEquipable2);
-            set => FileEditor.setByte(accessoryEquipable2, (byte)value);
+            get => FileEditor.GetByte(accessoryEquipable2);
+            set => FileEditor.SetByte(accessoryEquipable2, (byte)value);
         }
 
         public int AccessoryEquipable3
         {
-            get => FileEditor.getByte(accessoryEquipable3);
-            set => FileEditor.setByte(accessoryEquipable3, (byte)value);
+            get => FileEditor.GetByte(accessoryEquipable3);
+            set => FileEditor.SetByte(accessoryEquipable3, (byte)value);
         }
 
         public int AccessoryEquipable4
         {
-            get => FileEditor.getByte(accessoryEquipable4);
-            set => FileEditor.setByte(accessoryEquipable4, (byte)value);
+            get => FileEditor.GetByte(accessoryEquipable4);
+            set => FileEditor.SetByte(accessoryEquipable4, (byte)value);
         }
 
         public int Address => (address);
