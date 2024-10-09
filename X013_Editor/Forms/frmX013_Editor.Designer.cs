@@ -418,7 +418,7 @@
             this.olvItems.GridLines = true;
             this.olvItems.HasCollapsibleGroups = false;
             this.olvItems.HideSelection = false;
-            this.olvItems.Location = new System.Drawing.Point(0, 0);
+            this.olvItems.Location = new System.Drawing.Point(3, 3);
             this.olvItems.MenuLabelGroupBy = "";
             this.olvItems.Name = "olvItems";
             this.olvItems.ShowGroups = false;

@@ -908,7 +908,7 @@
             this.olvStats.GridLines = true;
             this.olvStats.HasCollapsibleGroups = false;
             this.olvStats.HideSelection = false;
-            this.olvStats.Location = new System.Drawing.Point(0, 0);
+            this.olvStats.Location = new System.Drawing.Point(3, 3);
             this.olvStats.MenuLabelGroupBy = "";
             this.olvStats.Name = "olvStats";
             this.olvStats.ShowGroups = false;
@@ -2596,7 +2596,7 @@
             this.CurveGraph.Series.Add(series18);
             this.CurveGraph.Series.Add(series19);
             this.CurveGraph.Series.Add(series20);
-            this.CurveGraph.Size = new System.Drawing.Size(752, 449);
+            this.CurveGraph.Size = new System.Drawing.Size(749, 446);
             this.CurveGraph.TabIndex = 0;
             this.CurveGraph.Text = "chartCurveGraph";
             // 

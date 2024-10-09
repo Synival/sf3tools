@@ -89,7 +89,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -97,7 +97,7 @@
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -202,7 +202,7 @@
             this.olvItemIcons.GridLines = true;
             this.olvItemIcons.HasCollapsibleGroups = false;
             this.olvItemIcons.HideSelection = false;
-            this.olvItemIcons.Location = new System.Drawing.Point(0, 0);
+            this.olvItemIcons.Location = new System.Drawing.Point(3, 3);
             this.olvItemIcons.MenuLabelGroupBy = "";
             this.olvItemIcons.Name = "olvItemIcons";
             this.olvItemIcons.ShowGroups = false;
@@ -283,7 +283,7 @@
             this.olvSpellIcons.GridLines = true;
             this.olvSpellIcons.HasCollapsibleGroups = false;
             this.olvSpellIcons.HideSelection = false;
-            this.olvSpellIcons.Location = new System.Drawing.Point(0, 0);
+            this.olvSpellIcons.Location = new System.Drawing.Point(3, 3);
             this.olvSpellIcons.MenuLabelGroupBy = "";
             this.olvSpellIcons.Name = "olvSpellIcons";
             this.olvSpellIcons.ShowGroups = false;
