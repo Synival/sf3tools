@@ -334,6 +334,9 @@
             // 
             // tabMain
             // 
+            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tabItems);
             this.tabMain.Controls.Add(this.tabPage1);
             this.tabMain.Controls.Add(this.tabPage2);
@@ -353,7 +356,6 @@
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(764, 506);
             this.tabMain.TabIndex = 0;
-            this.tabMain.SelectedIndexChanged += new System.EventHandler(this.tabMain_SelectedIndexChanged);
             // 
             // tabItems
             // 
@@ -390,6 +392,9 @@
             this.olvItems.AllColumns.Add(this.olvColumn108);
             this.olvItems.AllColumns.Add(this.olvColumn109);
             this.olvItems.AllowColumnReorder = true;
+            this.olvItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvItems.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
@@ -605,6 +610,9 @@
             this.objectListView1.AllColumns.Add(this.olvColumn14);
             this.objectListView1.AllColumns.Add(this.olvColumn15);
             this.objectListView1.AllowColumnReorder = true;
+            this.objectListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView1.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn8,
@@ -702,6 +710,9 @@
             this.objectListView2.AllColumns.Add(this.olvColumn19);
             this.objectListView2.AllColumns.Add(this.olvColumn20);
             this.objectListView2.AllowColumnReorder = true;
+            this.objectListView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView2.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn16,
@@ -779,6 +790,9 @@
             this.objectListView3.AllColumns.Add(this.olvColumn26);
             this.objectListView3.AllColumns.Add(this.olvColumn27);
             this.objectListView3.AllowColumnReorder = true;
+            this.objectListView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView3.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn21,
@@ -869,6 +883,9 @@
             this.objectListView4.AllColumns.Add(this.olvColumn30);
             this.objectListView4.AllColumns.Add(this.olvColumn31);
             this.objectListView4.AllowColumnReorder = true;
+            this.objectListView4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView4.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView4.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn28,
@@ -936,6 +953,9 @@
             this.objectListView5.AllColumns.Add(this.olvColumn34);
             this.objectListView5.AllColumns.Add(this.olvColumn35);
             this.objectListView5.AllowColumnReorder = true;
+            this.objectListView5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView5.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView5.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn32,
@@ -1009,6 +1029,9 @@
             this.objectListView6.AllColumns.Add(this.olvColumn45);
             this.objectListView6.AllColumns.Add(this.olvColumn46);
             this.objectListView6.AllowColumnReorder = true;
+            this.objectListView6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView6.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView6.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn36,
@@ -1134,6 +1157,9 @@
             this.objectListView7.AllColumns.Add(this.olvColumn50);
             this.objectListView7.AllColumns.Add(this.olvColumn51);
             this.objectListView7.AllowColumnReorder = true;
+            this.objectListView7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView7.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView7.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn47,
@@ -1206,6 +1232,9 @@
             this.objectListView8.AllColumns.Add(this.olvColumn59);
             this.objectListView8.AllColumns.Add(this.olvColumn68);
             this.objectListView8.AllowColumnReorder = true;
+            this.objectListView8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView8.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView8.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn52,
@@ -1310,6 +1339,9 @@
             this.objectListView9.AllColumns.Add(this.olvColumn67);
             this.objectListView9.AllColumns.Add(this.olvColumn70);
             this.objectListView9.AllowColumnReorder = true;
+            this.objectListView9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView9.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView9.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn60,
@@ -1411,6 +1443,9 @@
             this.objectListView10.AllColumns.Add(this.olvColumn69);
             this.objectListView10.AllColumns.Add(this.olvColumn71);
             this.objectListView10.AllowColumnReorder = true;
+            this.objectListView10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView10.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView10.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn48,
@@ -1477,6 +1512,9 @@
             this.objectListView11.AllColumns.Add(this.olvColumn72);
             this.objectListView11.AllColumns.Add(this.olvColumn73);
             this.objectListView11.AllowColumnReorder = true;
+            this.objectListView11.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView11.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView11.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn53,
@@ -1540,6 +1578,9 @@
             this.objectListView12.AllColumns.Add(this.olvColumn80);
             this.objectListView12.AllColumns.Add(this.olvColumn81);
             this.objectListView12.AllowColumnReorder = true;
+            this.objectListView12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView12.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView12.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn74,
@@ -1650,6 +1691,9 @@
             this.objectListView13.AllColumns.Add(this.olvColumn93);
             this.objectListView13.AllColumns.Add(this.olvColumn94);
             this.objectListView13.AllowColumnReorder = true;
+            this.objectListView13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView13.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView13.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn82,
@@ -1982,7 +2026,6 @@
             this.Text = "Sf3 X013 editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmX013_Editor_FormClosing);
             this.Load += new System.EventHandler(this.frmX013_Editor_Load);
-            this.Resize += new System.EventHandler(this.frmX013_Editor_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabMain.ResumeLayout(false);

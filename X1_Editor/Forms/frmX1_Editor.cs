@@ -50,7 +50,6 @@ namespace SF3.X1_Editor.Forms
         public frmX1_Editor()
         {
             InitializeComponent();
-            frmX1_Editor_Resize(this, new EventArgs());
 
             /*try {
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
@@ -542,33 +541,6 @@ namespace SF3.X1_Editor.Forms
             }
         }
 
-        private void frmX1_Editor_Resize(object sender, EventArgs e)
-        {
-            Size newsize = ClientSize;
-            newsize.Height -= 24;
-            tabMain.Size = newsize;
-            //olvMonsters.Size = tabMonsters.ClientSize;
-            //olvCharacters.Size = tabCharacters.ClientSize;
-            olvItems.Size = tabItems.ClientSize;
-            objectListView1.Size = tabPage1.ClientSize;
-            objectListView2.Size = tabPage2.ClientSize;
-            objectListView3.Size = tabPage3.ClientSize;
-            objectListView4.Size = tabPage4.ClientSize;
-            objectListView5.Size = tabPage5.ClientSize;
-            objectListView6.Size = tabPage6.ClientSize;
-            objectListView7.Size = tabPage7.ClientSize;
-            objectListView8.Size = tabPage8.ClientSize;
-            objectListView9.Size = tabPage9.ClientSize;
-            objectListView10.Size = tabPage10.ClientSize;
-            objectListView11.Size = tabPage11.ClientSize;
-            objectListView12.Size = tabPage12.ClientSize;
-            objectListView13.Size = tabPage13.ClientSize;
-            objectListView14.Size = tabPage14.ClientSize;
-            //olvBlacksmith.Size = tabBlacksmith.ClientSize;
-            //olvStoreItems.Size = tabShops.ClientSize;
-            //olvSpells.Size = tabSpells.ClientSize;
-        }
-
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_fileEditor == null)
@@ -772,11 +744,6 @@ namespace SF3.X1_Editor.Forms
                 StoreItemType value = (StoreItemType)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             }*/
-        }
-
-        private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            frmX1_Editor_Resize(this, new EventArgs());
         }
 
         private void frmX1_Editor_Load(object sender, EventArgs e)

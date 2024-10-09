@@ -507,7 +507,6 @@ namespace SF3.X1_Editor.Forms
             // 
             this.tabItems.Controls.Add(this.olvItems);
             this.tabItems.Location = new System.Drawing.Point(4, 22);
-            this.tabItems.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabItems.Name = "tabItems";
             this.tabItems.Size = new System.Drawing.Size(909, 480);
             this.tabItems.TabIndex = 3;
@@ -530,6 +529,9 @@ namespace SF3.X1_Editor.Forms
             this.olvItems.AllColumns.Add(this.olvColumn21);
             this.olvItems.AllColumns.Add(this.olvColumn22);
             this.olvItems.AllowColumnReorder = true;
+            this.olvItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvItems.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
@@ -550,11 +552,10 @@ namespace SF3.X1_Editor.Forms
             this.olvItems.HasCollapsibleGroups = false;
             this.olvItems.HideSelection = false;
             this.olvItems.Location = new System.Drawing.Point(3, 3);
-            this.olvItems.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.olvItems.MenuLabelGroupBy = "";
             this.olvItems.Name = "olvItems";
             this.olvItems.ShowGroups = false;
-            this.olvItems.Size = new System.Drawing.Size(902, 474);
+            this.olvItems.Size = new System.Drawing.Size(903, 474);
             this.olvItems.TabIndex = 0;
             this.olvItems.UseAlternatingBackColors = true;
             this.olvItems.UseCompatibleStateImageBehavior = false;
@@ -653,6 +654,9 @@ namespace SF3.X1_Editor.Forms
             // 
             // tabMain
             // 
+            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tabItems);
             this.tabMain.Controls.Add(this.tabPage1);
             this.tabMain.Controls.Add(this.tabPage2);
@@ -669,20 +673,17 @@ namespace SF3.X1_Editor.Forms
             this.tabMain.Controls.Add(this.tabPage10);
             this.tabMain.Controls.Add(this.tabPage11);
             this.tabMain.Location = new System.Drawing.Point(0, 27);
-            this.tabMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(917, 506);
             this.tabMain.TabIndex = 0;
-            this.tabMain.SelectedIndexChanged += new System.EventHandler(this.tabMain_SelectedIndexChanged);
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.objectListView1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(909, 480);
             this.tabPage1.TabIndex = 4;
             this.tabPage1.Text = "SlotTab1";
@@ -704,6 +705,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView1.AllColumns.Add(this.olvColumn19);
             this.objectListView1.AllColumns.Add(this.olvColumn20);
             this.objectListView1.AllowColumnReorder = true;
+            this.objectListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView1.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn23,
@@ -724,11 +728,10 @@ namespace SF3.X1_Editor.Forms
             this.objectListView1.HasCollapsibleGroups = false;
             this.objectListView1.HideSelection = false;
             this.objectListView1.Location = new System.Drawing.Point(3, 3);
-            this.objectListView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.objectListView1.MenuLabelGroupBy = "";
             this.objectListView1.Name = "objectListView1";
             this.objectListView1.ShowGroups = false;
-            this.objectListView1.Size = new System.Drawing.Size(902, 474);
+            this.objectListView1.Size = new System.Drawing.Size(903, 474);
             this.objectListView1.TabIndex = 1;
             this.objectListView1.UseAlternatingBackColors = true;
             this.objectListView1.UseCompatibleStateImageBehavior = false;
@@ -832,9 +835,8 @@ namespace SF3.X1_Editor.Forms
             // 
             this.tabPage2.Controls.Add(this.objectListView2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(909, 480);
             this.tabPage2.TabIndex = 5;
             this.tabPage2.Text = "SlotTab2";
@@ -860,6 +862,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView2.AllColumns.Add(this.olvColumn56);
             this.objectListView2.AllColumns.Add(this.olvColumn57);
             this.objectListView2.AllowColumnReorder = true;
+            this.objectListView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView2.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn25,
@@ -884,11 +889,10 @@ namespace SF3.X1_Editor.Forms
             this.objectListView2.HasCollapsibleGroups = false;
             this.objectListView2.HideSelection = false;
             this.objectListView2.Location = new System.Drawing.Point(3, 3);
-            this.objectListView2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.objectListView2.MenuLabelGroupBy = "";
             this.objectListView2.Name = "objectListView2";
             this.objectListView2.ShowGroups = false;
-            this.objectListView2.Size = new System.Drawing.Size(902, 474);
+            this.objectListView2.Size = new System.Drawing.Size(903, 474);
             this.objectListView2.TabIndex = 1;
             this.objectListView2.UseAlternatingBackColors = true;
             this.objectListView2.UseCompatibleStateImageBehavior = false;
@@ -1019,9 +1023,8 @@ namespace SF3.X1_Editor.Forms
             // 
             this.tabPage3.Controls.Add(this.objectListView3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(909, 480);
             this.tabPage3.TabIndex = 6;
             this.tabPage3.Text = "SlotTab3";
@@ -1043,6 +1046,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView3.AllColumns.Add(this.olvColumn13);
             this.objectListView3.AllColumns.Add(this.olvColumn14);
             this.objectListView3.AllowColumnReorder = true;
+            this.objectListView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView3.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn41,
@@ -1063,11 +1069,10 @@ namespace SF3.X1_Editor.Forms
             this.objectListView3.HasCollapsibleGroups = false;
             this.objectListView3.HideSelection = false;
             this.objectListView3.Location = new System.Drawing.Point(3, 3);
-            this.objectListView3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.objectListView3.MenuLabelGroupBy = "";
             this.objectListView3.Name = "objectListView3";
             this.objectListView3.ShowGroups = false;
-            this.objectListView3.Size = new System.Drawing.Size(902, 474);
+            this.objectListView3.Size = new System.Drawing.Size(903, 474);
             this.objectListView3.TabIndex = 1;
             this.objectListView3.UseAlternatingBackColors = true;
             this.objectListView3.UseCompatibleStateImageBehavior = false;
@@ -1169,9 +1174,8 @@ namespace SF3.X1_Editor.Forms
             // 
             this.tabPage4.Controls.Add(this.objectListView4);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(909, 480);
             this.tabPage4.TabIndex = 7;
             this.tabPage4.Text = "SlotTab4";
@@ -1192,6 +1196,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView4.AllColumns.Add(this.olvColumn77);
             this.objectListView4.AllColumns.Add(this.olvColumn78);
             this.objectListView4.AllowColumnReorder = true;
+            this.objectListView4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView4.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView4.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn59,
@@ -1211,11 +1218,10 @@ namespace SF3.X1_Editor.Forms
             this.objectListView4.HasCollapsibleGroups = false;
             this.objectListView4.HideSelection = false;
             this.objectListView4.Location = new System.Drawing.Point(3, 3);
-            this.objectListView4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.objectListView4.MenuLabelGroupBy = "";
             this.objectListView4.Name = "objectListView4";
             this.objectListView4.ShowGroups = false;
-            this.objectListView4.Size = new System.Drawing.Size(902, 474);
+            this.objectListView4.Size = new System.Drawing.Size(903, 474);
             this.objectListView4.TabIndex = 1;
             this.objectListView4.UseAlternatingBackColors = true;
             this.objectListView4.UseCompatibleStateImageBehavior = false;
@@ -1310,9 +1316,8 @@ namespace SF3.X1_Editor.Forms
             // 
             this.tabPage6.Controls.Add(this.objectListView6);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage6.Size = new System.Drawing.Size(909, 480);
             this.tabPage6.TabIndex = 9;
             this.tabPage6.Text = "SpawnZones";
@@ -1333,6 +1338,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView6.AllColumns.Add(this.olvColumn84);
             this.objectListView6.AllColumns.Add(this.olvColumn85);
             this.objectListView6.AllowColumnReorder = true;
+            this.objectListView6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView6.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView6.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn38,
@@ -1352,11 +1360,10 @@ namespace SF3.X1_Editor.Forms
             this.objectListView6.HasCollapsibleGroups = false;
             this.objectListView6.HideSelection = false;
             this.objectListView6.Location = new System.Drawing.Point(3, 3);
-            this.objectListView6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.objectListView6.MenuLabelGroupBy = "";
             this.objectListView6.Name = "objectListView6";
             this.objectListView6.ShowGroups = false;
-            this.objectListView6.Size = new System.Drawing.Size(902, 474);
+            this.objectListView6.Size = new System.Drawing.Size(903, 474);
             this.objectListView6.TabIndex = 2;
             this.objectListView6.UseAlternatingBackColors = true;
             this.objectListView6.UseCompatibleStateImageBehavior = false;
@@ -1454,9 +1461,8 @@ namespace SF3.X1_Editor.Forms
             // 
             this.tabPage5.Controls.Add(this.objectListView5);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(909, 480);
             this.tabPage5.TabIndex = 8;
             this.tabPage5.Text = "AI TargetPosition";
@@ -1470,6 +1476,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView5.AllColumns.Add(this.olvColumn36);
             this.objectListView5.AllColumns.Add(this.olvColumn37);
             this.objectListView5.AllowColumnReorder = true;
+            this.objectListView5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView5.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView5.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn28,
@@ -1482,11 +1491,10 @@ namespace SF3.X1_Editor.Forms
             this.objectListView5.HasCollapsibleGroups = false;
             this.objectListView5.HideSelection = false;
             this.objectListView5.Location = new System.Drawing.Point(3, 3);
-            this.objectListView5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.objectListView5.MenuLabelGroupBy = "";
             this.objectListView5.Name = "objectListView5";
             this.objectListView5.ShowGroups = false;
-            this.objectListView5.Size = new System.Drawing.Size(902, 474);
+            this.objectListView5.Size = new System.Drawing.Size(903, 474);
             this.objectListView5.TabIndex = 2;
             this.objectListView5.UseAlternatingBackColors = true;
             this.objectListView5.UseCompatibleStateImageBehavior = false;
@@ -1558,6 +1566,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView9.AllColumns.Add(this.olvColumn110);
             this.objectListView9.AllColumns.Add(this.olvColumn111);
             this.objectListView9.AllowColumnReorder = true;
+            this.objectListView9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView9.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView9.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn90,
@@ -1577,12 +1588,11 @@ namespace SF3.X1_Editor.Forms
             this.objectListView9.GridLines = true;
             this.objectListView9.HasCollapsibleGroups = false;
             this.objectListView9.HideSelection = false;
-            this.objectListView9.Location = new System.Drawing.Point(5, 3);
-            this.objectListView9.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.objectListView9.Location = new System.Drawing.Point(3, 3);
             this.objectListView9.MenuLabelGroupBy = "";
             this.objectListView9.Name = "objectListView9";
             this.objectListView9.ShowGroups = false;
-            this.objectListView9.Size = new System.Drawing.Size(902, 474);
+            this.objectListView9.Size = new System.Drawing.Size(903, 474);
             this.objectListView9.TabIndex = 3;
             this.objectListView9.UseAlternatingBackColors = true;
             this.objectListView9.UseCompatibleStateImageBehavior = false;
@@ -1684,9 +1694,8 @@ namespace SF3.X1_Editor.Forms
             // 
             this.tabPage8.Controls.Add(this.objectListView8);
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
-            this.tabPage8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage8.Size = new System.Drawing.Size(909, 480);
             this.tabPage8.TabIndex = 11;
             this.tabPage8.Text = "Interactables";
@@ -1705,6 +1714,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView8.AllColumns.Add(this.olvColumn99);
             this.objectListView8.AllColumns.Add(this.olvColumn148);
             this.objectListView8.AllowColumnReorder = true;
+            this.objectListView8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView8.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView8.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn91,
@@ -1722,11 +1734,10 @@ namespace SF3.X1_Editor.Forms
             this.objectListView8.HasCollapsibleGroups = false;
             this.objectListView8.HideSelection = false;
             this.objectListView8.Location = new System.Drawing.Point(3, 3);
-            this.objectListView8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.objectListView8.MenuLabelGroupBy = "";
             this.objectListView8.Name = "objectListView8";
             this.objectListView8.ShowGroups = false;
-            this.objectListView8.Size = new System.Drawing.Size(902, 474);
+            this.objectListView8.Size = new System.Drawing.Size(903, 474);
             this.objectListView8.TabIndex = 4;
             this.objectListView8.UseAlternatingBackColors = true;
             this.objectListView8.UseCompatibleStateImageBehavior = false;
@@ -1835,6 +1846,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView12.AllColumns.Add(this.olvColumn153);
             this.objectListView12.AllColumns.Add(this.olvColumn147);
             this.objectListView12.AllowColumnReorder = true;
+            this.objectListView12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView12.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView12.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn138,
@@ -1856,12 +1870,11 @@ namespace SF3.X1_Editor.Forms
             this.objectListView12.GridLines = true;
             this.objectListView12.HasCollapsibleGroups = false;
             this.objectListView12.HideSelection = false;
-            this.objectListView12.Location = new System.Drawing.Point(5, 3);
-            this.objectListView12.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.objectListView12.Location = new System.Drawing.Point(3, 3);
             this.objectListView12.MenuLabelGroupBy = "";
             this.objectListView12.Name = "objectListView12";
             this.objectListView12.ShowGroups = false;
-            this.objectListView12.Size = new System.Drawing.Size(902, 474);
+            this.objectListView12.Size = new System.Drawing.Size(903, 474);
             this.objectListView12.TabIndex = 5;
             this.objectListView12.UseAlternatingBackColors = true;
             this.objectListView12.UseCompatibleStateImageBehavior = false;
@@ -1998,6 +2011,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView13.AllColumns.Add(this.olvColumn163);
             this.objectListView13.AllColumns.Add(this.olvColumn164);
             this.objectListView13.AllowColumnReorder = true;
+            this.objectListView13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView13.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView13.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn154,
@@ -2015,12 +2031,11 @@ namespace SF3.X1_Editor.Forms
             this.objectListView13.GridLines = true;
             this.objectListView13.HasCollapsibleGroups = false;
             this.objectListView13.HideSelection = false;
-            this.objectListView13.Location = new System.Drawing.Point(5, 3);
-            this.objectListView13.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.objectListView13.Location = new System.Drawing.Point(3, 3);
             this.objectListView13.MenuLabelGroupBy = "";
             this.objectListView13.Name = "objectListView13";
             this.objectListView13.ShowGroups = false;
-            this.objectListView13.Size = new System.Drawing.Size(902, 474);
+            this.objectListView13.Size = new System.Drawing.Size(903, 474);
             this.objectListView13.TabIndex = 6;
             this.objectListView13.UseAlternatingBackColors = true;
             this.objectListView13.UseCompatibleStateImageBehavior = false;
@@ -2128,6 +2143,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView14.AllColumns.Add(this.olvColumn172);
             this.objectListView14.AllColumns.Add(this.olvColumn173);
             this.objectListView14.AllowColumnReorder = true;
+            this.objectListView14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView14.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView14.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn165,
@@ -2143,12 +2161,11 @@ namespace SF3.X1_Editor.Forms
             this.objectListView14.GridLines = true;
             this.objectListView14.HasCollapsibleGroups = false;
             this.objectListView14.HideSelection = false;
-            this.objectListView14.Location = new System.Drawing.Point(5, 3);
-            this.objectListView14.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.objectListView14.Location = new System.Drawing.Point(3, 3);
             this.objectListView14.MenuLabelGroupBy = "";
             this.objectListView14.Name = "objectListView14";
             this.objectListView14.ShowGroups = false;
-            this.objectListView14.Size = new System.Drawing.Size(902, 474);
+            this.objectListView14.Size = new System.Drawing.Size(903, 474);
             this.objectListView14.TabIndex = 7;
             this.objectListView14.UseAlternatingBackColors = true;
             this.objectListView14.UseCompatibleStateImageBehavior = false;
@@ -2223,9 +2240,8 @@ namespace SF3.X1_Editor.Forms
             // 
             this.tabPage7.Controls.Add(this.objectListView7);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage7.Size = new System.Drawing.Size(909, 480);
             this.tabPage7.TabIndex = 10;
             this.tabPage7.Text = "Battle Pointers";
@@ -2238,6 +2254,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView7.AllColumns.Add(this.olvColumn88);
             this.objectListView7.AllColumns.Add(this.olvColumn89);
             this.objectListView7.AllowColumnReorder = true;
+            this.objectListView7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView7.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView7.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn15,
@@ -2249,11 +2268,10 @@ namespace SF3.X1_Editor.Forms
             this.objectListView7.HasCollapsibleGroups = false;
             this.objectListView7.HideSelection = false;
             this.objectListView7.Location = new System.Drawing.Point(3, 3);
-            this.objectListView7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.objectListView7.MenuLabelGroupBy = "";
             this.objectListView7.Name = "objectListView7";
             this.objectListView7.ShowGroups = false;
-            this.objectListView7.Size = new System.Drawing.Size(902, 474);
+            this.objectListView7.Size = new System.Drawing.Size(903, 474);
             this.objectListView7.TabIndex = 3;
             this.objectListView7.UseAlternatingBackColors = true;
             this.objectListView7.UseCompatibleStateImageBehavior = false;
@@ -2312,6 +2330,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView10.AllColumns.Add(this.olvColumn117);
             this.objectListView10.AllColumns.Add(this.olvColumn118);
             this.objectListView10.AllowColumnReorder = true;
+            this.objectListView10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView10.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView10.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn112,
@@ -2325,12 +2346,11 @@ namespace SF3.X1_Editor.Forms
             this.objectListView10.GridLines = true;
             this.objectListView10.HasCollapsibleGroups = false;
             this.objectListView10.HideSelection = false;
-            this.objectListView10.Location = new System.Drawing.Point(5, 3);
-            this.objectListView10.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.objectListView10.Location = new System.Drawing.Point(3, 3);
             this.objectListView10.MenuLabelGroupBy = "";
             this.objectListView10.Name = "objectListView10";
             this.objectListView10.ShowGroups = false;
-            this.objectListView10.Size = new System.Drawing.Size(902, 474);
+            this.objectListView10.Size = new System.Drawing.Size(903, 474);
             this.objectListView10.TabIndex = 5;
             this.objectListView10.UseAlternatingBackColors = true;
             this.objectListView10.UseCompatibleStateImageBehavior = false;
@@ -2421,6 +2441,9 @@ namespace SF3.X1_Editor.Forms
             this.objectListView11.AllColumns.Add(this.olvColumn136);
             this.objectListView11.AllColumns.Add(this.olvColumn137);
             this.objectListView11.AllowColumnReorder = true;
+            this.objectListView11.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView11.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView11.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn119,
@@ -2446,12 +2469,11 @@ namespace SF3.X1_Editor.Forms
             this.objectListView11.GridLines = true;
             this.objectListView11.HasCollapsibleGroups = false;
             this.objectListView11.HideSelection = false;
-            this.objectListView11.Location = new System.Drawing.Point(5, 3);
-            this.objectListView11.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.objectListView11.Location = new System.Drawing.Point(3, 3);
             this.objectListView11.MenuLabelGroupBy = "";
             this.objectListView11.Name = "objectListView11";
             this.objectListView11.ShowGroups = false;
-            this.objectListView11.Size = new System.Drawing.Size(902, 474);
+            this.objectListView11.Size = new System.Drawing.Size(903, 474);
             this.objectListView11.TabIndex = 2;
             this.objectListView11.UseAlternatingBackColors = true;
             this.objectListView11.UseCompatibleStateImageBehavior = false;
@@ -2800,13 +2822,11 @@ namespace SF3.X1_Editor.Forms
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "frmX1_Editor";
             this.Text = "Sf3 X1 editor          |OpenedFile: None|          Current open settings: Scenari" +
     "o: 1 | Map: Synbios | MapType: none | debug: off";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmX1_Editor_FormClosing);
             this.Load += new System.EventHandler(this.frmX1_Editor_Load);
-            this.Resize += new System.EventHandler(this.frmX1_Editor_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabItems.ResumeLayout(false);

@@ -44,7 +44,6 @@ namespace SF3.X002_Editor.Forms
         public frmX002_Editor()
         {
             InitializeComponent();
-            frmX002_Editor_Resize(this, new EventArgs());
 
             /*try {
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
@@ -368,27 +367,6 @@ namespace SF3.X002_Editor.Forms
             }
         }
 
-        private void frmX002_Editor_Resize(object sender, EventArgs e)
-        {
-            Size newsize = ClientSize;
-            newsize.Height -= 24;
-            tabMain.Size = newsize;
-            //olvMonsters.Size = tabMonsters.ClientSize;
-            //olvCharacters.Size = tabCharacters.ClientSize;
-            olvItems.Size = tabItems.ClientSize;
-            olvSpells.Size = tabSpells.ClientSize;
-            olvPreset.Size = tabPreset.ClientSize;
-            olvLoaded.Size = tabLoaded.ClientSize;
-            olvStatBoost.Size = tabStatBoost.ClientSize;
-            olvWeaponRankAttack.Size = tabWeaponRankAttack.ClientSize;
-            olvAttackResist.Size = tabAttackResist.ClientSize;
-            olvWarpTableScn1.Size = tabWarpTableScn1.ClientSize;
-            olvLoadedOverride.Size = tabLoadedOverride.ClientSize;
-            //olvBlacksmith.Size = tabBlacksmith.ClientSize;
-            //olvStoreItems.Size = tabShops.ClientSize;
-            //olvSpells.Size = tabSpells.ClientSize;
-        }
-
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_fileEditor == null)
@@ -671,11 +649,6 @@ namespace SF3.X002_Editor.Forms
                 StoreItemType value = (StoreItemType)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             }*/
-        }
-
-        private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            frmX002_Editor_Resize(this, new EventArgs());
         }
 
         private void tabpage_Click(object sender, EventArgs e)

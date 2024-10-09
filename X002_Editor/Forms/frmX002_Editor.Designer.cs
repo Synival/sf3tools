@@ -334,6 +334,9 @@
             this.olvSpells.AllColumns.Add(this.lvcSpellsLv4Cost);
             this.olvSpells.AllColumns.Add(this.lvcSpellsLvc4Pow);
             this.olvSpells.AllowColumnReorder = true;
+            this.olvSpells.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvSpells.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvSpells.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcSpellsID,
@@ -572,6 +575,9 @@
             this.olvItems.AllColumns.Add(this.lvcItemsMale);
             this.olvItems.AllColumns.Add(this.lvcItemsFemale);
             this.olvItems.AllowColumnReorder = true;
+            this.olvItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvItems.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcItemsID,
@@ -908,6 +914,9 @@
             // 
             // tabMain
             // 
+            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tabItems);
             this.tabMain.Controls.Add(this.tabSpells);
             this.tabMain.Controls.Add(this.tabPreset);
@@ -922,7 +931,6 @@
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(764, 506);
             this.tabMain.TabIndex = 0;
-            this.tabMain.SelectedIndexChanged += new System.EventHandler(this.tabMain_SelectedIndexChanged);
             this.tabMain.Click += new System.EventHandler(this.tabpage_Click);
             // 
             // tabPreset
@@ -947,6 +955,9 @@
             this.olvPreset.AllColumns.Add(this.lvcPresetWeaponLv2);
             this.olvPreset.AllColumns.Add(this.lvcPresetWeaponLv3);
             this.olvPreset.AllowColumnReorder = true;
+            this.olvPreset.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvPreset.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvPreset.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcPresetID,
@@ -1054,6 +1065,9 @@
             this.olvLoaded.AllColumns.Add(this.lvcLoadedNumMaps);
             this.olvLoaded.AllColumns.Add(this.lvcLoadedCHR);
             this.olvLoaded.AllowColumnReorder = true;
+            this.olvLoaded.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvLoaded.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvLoaded.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcLoadedID,
@@ -1192,6 +1206,9 @@
             this.olvLoadedOverride.AllColumns.Add(this.lvcLoadedOverrideJulCHR);
             this.olvLoadedOverride.AllColumns.Add(this.lvcLoadedOverrideExtraCHR);
             this.olvLoadedOverride.AllowColumnReorder = true;
+            this.olvLoadedOverride.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvLoadedOverride.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvLoadedOverride.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcLoadedOverrideID,
@@ -1350,6 +1367,9 @@
             this.olvStatBoost.AllColumns.Add(this.lvcStatBoostItemName);
             this.olvStatBoost.AllColumns.Add(this.lvcStatBoostStatValue);
             this.olvStatBoost.AllowColumnReorder = true;
+            this.olvStatBoost.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvStatBoost.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvStatBoost.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcStatBoostID,
@@ -1423,6 +1443,9 @@
             this.olvWeaponRankAttack.AllColumns.Add(this.lvcWeaponRankAttackSkill2AtkPlus);
             this.olvWeaponRankAttack.AllColumns.Add(this.lvcWeaponRankAttackSkill3AtkPlus);
             this.olvWeaponRankAttack.AllowColumnReorder = true;
+            this.olvWeaponRankAttack.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvWeaponRankAttack.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvWeaponRankAttack.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcWeaponRankAttackID,
@@ -1518,6 +1541,9 @@
             this.olvAttackResist.AllColumns.Add(this.lvcAttackResistAttackSpell);
             this.olvAttackResist.AllColumns.Add(this.lvcAttackResistResistSpell);
             this.olvAttackResist.AllowColumnReorder = true;
+            this.olvAttackResist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvAttackResist.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvAttackResist.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcAttackResistID,
@@ -1599,6 +1625,9 @@
             this.olvWarpTableScn1.AllColumns.Add(this.lvcWarpTableScn1WarpType);
             this.olvWarpTableScn1.AllColumns.Add(this.lvcWarpTableScn1WarpMap);
             this.olvWarpTableScn1.AllowColumnReorder = true;
+            this.olvWarpTableScn1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvWarpTableScn1.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvWarpTableScn1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcWarpTableScn1ID,
@@ -1689,7 +1718,6 @@
             this.Text = "Sf3 X002 editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmX002_Editor_FormClosing);
             this.Load += new System.EventHandler(this.frmX002_Editor_Load);
-            this.Resize += new System.EventHandler(this.frmX002_Editor_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabSpells.ResumeLayout(false);

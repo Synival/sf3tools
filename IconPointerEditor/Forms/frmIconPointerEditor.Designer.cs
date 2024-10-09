@@ -192,6 +192,9 @@
             this.olvItemIcons.AllColumns.Add(this.lvcItemIconAddress);
             this.olvItemIcons.AllColumns.Add(this.lvcItemIconOffset);
             this.olvItemIcons.AllowColumnReorder = true;
+            this.olvItemIcons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvItemIcons.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvItemIcons.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcItemIconName,
@@ -244,6 +247,9 @@
             // 
             // tabMain
             // 
+            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tabItemIcons);
             this.tabMain.Controls.Add(this.tabSpellIcons);
             this.tabMain.Location = new System.Drawing.Point(0, 27);
@@ -251,7 +257,6 @@
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(764, 506);
             this.tabMain.TabIndex = 0;
-            this.tabMain.SelectedIndexChanged += new System.EventHandler(this.tabMain_SelectedIndexChanged);
             // 
             // tabSpellIcons
             // 
@@ -272,6 +277,9 @@
             this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconOffset);
             this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconViewOffset);
             this.olvSpellIcons.AllowColumnReorder = true;
+            this.olvSpellIcons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvSpellIcons.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvSpellIcons.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcSpellIconName,
@@ -343,7 +351,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmIconPointerEditor";
             this.Text = "Sf3 Icon pointer Editor          X026 mode: Off";
-            this.Resize += new System.EventHandler(this.frmIconPointerEditor_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabItemIcons.ResumeLayout(false);

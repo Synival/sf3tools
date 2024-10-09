@@ -30,7 +30,6 @@ namespace SF3.X019_Editor.Forms
         public frmX019_Editor()
         {
             InitializeComponent();
-            frmX019_Editor_Resize(this, new EventArgs());
 
             /*try {
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
@@ -278,23 +277,6 @@ namespace SF3.X019_Editor.Forms
             }
         }
 
-        private void frmX019_Editor_Resize(object sender, EventArgs e)
-        {
-            Size newsize = ClientSize;
-            newsize.Height -= 24;
-            tabMain.Size = newsize;
-            //olvMonsters.Size = tabMonsters.ClientSize;
-            //olvCharacters.Size = tabCharacters.ClientSize;
-            olvItems.Size = tabItems.ClientSize;
-            objectListView1.Size = tabPage1.ClientSize;
-            objectListView2.Size = tabPage2.ClientSize;
-            objectListView3.Size = tabPage3.ClientSize;
-            objectListView4.Size = tabPage4.ClientSize;
-            //olvBlacksmith.Size = tabBlacksmith.ClientSize;
-            //olvStoreItems.Size = tabShops.ClientSize;
-            //olvSpells.Size = tabSpells.ClientSize;
-        }
-
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_fileEditor == null)
@@ -486,11 +468,6 @@ namespace SF3.X019_Editor.Forms
                 StoreItemType value = (StoreItemType)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             }*/
-        }
-
-        private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            frmX019_Editor_Resize(this, new EventArgs());
         }
 
         private void frmX019_Editor_Load(object sender, EventArgs e)

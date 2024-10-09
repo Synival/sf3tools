@@ -26,7 +26,6 @@ namespace SF3.IconPointerEditor.Forms
         public frmIconPointerEditor()
         {
             InitializeComponent();
-            frmIconPointerEditor_Resize(this, new EventArgs());
         }
 
         private bool initialise()
@@ -88,15 +87,6 @@ namespace SF3.IconPointerEditor.Forms
                     MessageBox.Show("Error trying to load file. It is probably in use by another process.");
                 }
             }
-        }
-
-        private void frmIconPointerEditor_Resize(object sender, EventArgs e)
-        {
-            Size newsize = ClientSize;
-            newsize.Height -= 24;
-            tabMain.Size = newsize;
-            olvItemIcons.Size = tabItemIcons.ClientSize;
-            olvSpellIcons.Size = tabSpellIcons.ClientSize;
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -169,11 +159,6 @@ namespace SF3.IconPointerEditor.Forms
                 ItemIcon value = (ItemIcon)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             }
-        }
-
-        private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            frmIconPointerEditor_Resize(this, new EventArgs());
         }
 
         public static class Globals
