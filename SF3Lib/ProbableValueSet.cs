@@ -76,12 +76,13 @@ namespace SF3
         }
 
         /// <summary>
-        /// Calculates the weighted median of the probability set, but at a certain position where the distribution
-        /// isn't 50% but any other percentage.
+        /// Calculates a linearly-interpreted weighted median-like value for probability set at an arbitrary position
+        /// (not fixed at the middle point like the median).
         /// </summary>
-        /// <param name="targetProbability">The target percentage of the distribution area for the value we're looking for.</param>
-        /// <returns>A linearly-interpolated weighted median at a specific target distribution percent.</returns>
-        public double GetWeightedMedianAt(double targetProbability)
+        /// <param name="targetArea">The total area left of the median-like value we're looking for.
+        /// In range (0.00, 1.00).</param>
+        /// <returns>A linearly-interpolated weighted median where the area left of the result is equal to 'targetArea'.</returns>
+        public double GetWeightedMedianAt(double targetArea)
         {
             if (this.Count == 0)
             {
@@ -93,61 +94,60 @@ namespace SF3
             }
 
             var sortedValues = this.OrderBy(x => x.Key).ToArray();
-            if (targetProbability <= 0.00)
+            if (targetArea <= 0.00)
             {
                 return sortedValues[0].Key;
             }
-            if (targetProbability >= 1.00)
+            if (targetArea >= 1.00)
             {
                 return sortedValues[sortedValues.Length - 1].Key;
             }
 
             // Make sure the target reflects a percentage of all total probabilities.
-            double totalProbability = sortedValues.Sum(kv => kv.Value);
-            targetProbability *= totalProbability;
+            double totalArea = sortedValues.Sum(kv => kv.Value);
+            targetArea *= totalArea;
 
-            // For a funky linearly-interpolated median, we'll iterate over the value by (n-1)/n to transform ranges like this:
-            //     [0.00, 1.00, 2.00]
-            // To ranges like this:
-            //     [0.00, 0.66, 1.33, 2.00]
+            // Track the total area we've passed.
+            double currentArea = 0.00;
 
-            double n = 0.0;
-            double nInterval = (double)(sortedValues.Length - 1) / (double)sortedValues.Length;
-
-            // Track the total probability we've passed.
-            double currentProbability = 0.00;
-
-            for (int i = 0; i <= sortedValues.Length; i++, n += nInterval)
+            for (int i = 0; i < sortedValues.Length; i++)
             {
                 // If we haven't reached the target probability yet, keep going.
-                double segmentProbability = sortedValues[i].Value;
-                if (currentProbability + segmentProbability < targetProbability)
+                double probability = sortedValues[i].Value;
+                if (currentArea + probability < targetArea)
                 {
-                    currentProbability += segmentProbability;
+                    currentArea += probability;
                     continue;
                 }
 
-                // Determine the interpolation position of 'targetProbability' between 'currentProbability' and ('currentProbability' + 'segmentProbability').
-                double probabilityInterp = (targetProbability - currentProbability) / segmentProbability;
+                // Determine the interpolation percentage of 'targetArea' between (currentArea, currentArea + probability).
+                double probabilityInterp = (targetArea - currentArea) / probability;
 
-                // Increase the index we're using by an interval proportional to the interpolated position in the probability segment.
-                n += probabilityInterp * nInterval;
+                // Determine an index of the dataset with the fractional portion. This will be used for linear interpolation.
+                double n = (double)i + probabilityInterp;
 
-                // Check for some simple cases.
-                int intN = (int)n;
-                if (intN >= sortedValues.Length)
+                // The domain for linear interpolation is larger than the domain of the input dataset, so need to convert from a domain like this:
+                // (example for 3 data points):
+                //     (0.00, 1.00, 2.00, 3.00)
+                // to: (0.00, 0.66, 1.33, 2.00)
+                n *= (double)(sortedValues.Length - 1) / (double)sortedValues.Length;
+
+                // Check for some simple cases, and cases potentially caused by floating point imprecision.
+                double nFloor = Math.Floor(n);
+                int nInt = (int)nFloor;
+                if (n == nFloor)
                 {
                     return sortedValues[sortedValues.Length - 1].Key;
                 }
-                if (n == (double)intN)
+                else if (nInt >= sortedValues.Length)
                 {
-                    return sortedValues[(int)n].Key;
+                    return sortedValues[(int)nFloor].Key;
                 }
 
                 // Return a value[n], interpolating between 'n' and 'n + 1' for the fractional portion of 'n'
-                double valueInterp = n - (double)intN;
-                double value1 = sortedValues[intN].Key;
-                double value2 = sortedValues[intN + 1].Key;
+                double valueInterp = n - nFloor;
+                double value1 = sortedValues[nInt].Key;
+                double value2 = sortedValues[nInt + 1].Key;
                 double valueRange = value2 - value1;
                 return value1 + valueRange * valueInterp;
             }
