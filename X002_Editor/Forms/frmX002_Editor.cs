@@ -302,7 +302,7 @@ namespace SF3.X002_Editor.Forms
             olvStatBoost.ClearObjects();
             olvWeaponRankAttack.ClearObjects();
             olvAttackResist.ClearObjects();
-            olvWarpTableScn1.ClearObjects();
+            olvWarpTable.ClearObjects();
             olvLoadedOverride.ClearObjects();
 
             //olvPresets.ClearObjects();
@@ -323,7 +323,7 @@ namespace SF3.X002_Editor.Forms
 
             if (_scenario == ScenarioType.Scenario1)
             {
-                olvWarpTableScn1.AddObjects(_warpList.Models);
+                olvWarpTable.AddObjects(_warpList.Models);
             }
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
@@ -384,7 +384,7 @@ namespace SF3.X002_Editor.Forms
             olvStatBoost.FinishCellEdit();
             olvWeaponRankAttack.FinishCellEdit();
             olvAttackResist.FinishCellEdit();
-            olvWarpTableScn1.FinishCellEdit();
+            olvWarpTable.FinishCellEdit();
             olvLoadedOverride.FinishCellEdit();
             //olvStoreItems.FinishCellEdit();
             //olvSpells.FinishCellEdit();

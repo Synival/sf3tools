@@ -217,11 +217,11 @@ namespace SF3.X019_Editor.Forms
             //olvCharacters.ClearObjects();
             //olvMonsters.ClearObjects();
 
-            olvItems.ClearObjects();
-            objectListView1.ClearObjects();
-            objectListView2.ClearObjects();
-            objectListView3.ClearObjects();
-            objectListView4.ClearObjects();
+            olvMonsterTab1.ClearObjects();
+            olvMonsterTab2.ClearObjects();
+            olvMonsterTab3.ClearObjects();
+            olvMonsterTab4.ClearObjects();
+            olvMonsterTab5.ClearObjects();
 
             //olvPresets.ClearObjects();
             //olvSpells.ClearObjects();
@@ -230,11 +230,11 @@ namespace SF3.X019_Editor.Forms
 
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
-            olvItems.AddObjects(_itemList.Models);
-            objectListView1.AddObjects(_itemList.Models);
-            objectListView2.AddObjects(_itemList.Models);
-            objectListView3.AddObjects(_itemList.Models);
-            objectListView4.AddObjects(_itemList.Models);
+            olvMonsterTab1.AddObjects(_itemList.Models);
+            olvMonsterTab2.AddObjects(_itemList.Models);
+            olvMonsterTab3.AddObjects(_itemList.Models);
+            olvMonsterTab4.AddObjects(_itemList.Models);
+            olvMonsterTab5.AddObjects(_itemList.Models);
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
             //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
@@ -287,7 +287,7 @@ namespace SF3.X019_Editor.Forms
             //olvBlacksmith.FinishCellEdit();
             //olvMonsters.FinishCellEdit();
             //olvCharacters.FinishCellEdit();
-            olvItems.FinishCellEdit();
+            olvMonsterTab1.FinishCellEdit();
             //objectListView1.FinishCellEdit();
             //objectListView2.FinishCellEdit();
             //olvStoreItems.FinishCellEdit();
@@ -311,7 +311,7 @@ namespace SF3.X019_Editor.Forms
             } catch (Exception) { }*/
             try
             {
-                byte[] data = olvItems.SaveState();
+                byte[] data = olvMonsterTab1.SaveState();
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/itemstate." +
                      ".bin", FileMode.Create, FileAccess.Write);
                 stream.Write(data, 0, data.Length);

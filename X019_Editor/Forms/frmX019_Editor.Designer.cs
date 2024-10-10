@@ -68,8 +68,8 @@
             this.olvStatUp4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSpellUse = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSpellUseLv = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabItems = new System.Windows.Forms.TabPage();
-            this.olvItems = new BrightIdeasSoftware.ObjectListView();
+            this.tabMonsterTab1 = new System.Windows.Forms.TabPage();
+            this.olvMonsterTab1 = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn69 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -94,8 +94,8 @@
             this.olvColumn21 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn22 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
+            this.tabMonsterTab2 = new System.Windows.Forms.TabPage();
+            this.olvMonsterTab2 = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn23 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn24 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn26 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -112,8 +112,8 @@
             this.olvColumn37 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn38 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn39 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.objectListView2 = new BrightIdeasSoftware.ObjectListView();
+            this.tabMonsterTab3 = new System.Windows.Forms.TabPage();
+            this.olvMonsterTab3 = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn25 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn40 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn42 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -132,8 +132,8 @@
             this.olvColumn55 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn56 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn57 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.objectListView3 = new BrightIdeasSoftware.ObjectListView();
+            this.tabMonsterTab4 = new System.Windows.Forms.TabPage();
+            this.olvMonsterTab4 = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn41 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn58 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn60 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -144,8 +144,8 @@
             this.olvColumn65 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn66 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn67 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.objectListView4 = new BrightIdeasSoftware.ObjectListView();
+            this.tabMonsterTab5 = new System.Windows.Forms.TabPage();
+            this.olvMonsterTab5 = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn59 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn68 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn70 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -159,17 +159,17 @@
             this.olvColumn78 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn79 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.menuStrip1.SuspendLayout();
-            this.tabItems.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvItems)).BeginInit();
+            this.tabMonsterTab1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab1)).BeginInit();
             this.tabMain.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView2)).BeginInit();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView3)).BeginInit();
-            this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView4)).BeginInit();
+            this.tabMonsterTab2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab2)).BeginInit();
+            this.tabMonsterTab3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab3)).BeginInit();
+            this.tabMonsterTab4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab4)).BeginInit();
+            this.tabMonsterTab5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab5)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -472,47 +472,47 @@
             this.olvSpellUseLv.DisplayIndex = 25;
             this.olvSpellUseLv.Text = "SpellUseLv";
             // 
-            // tabItems
+            // tabMonsterTab1
             // 
-            this.tabItems.Controls.Add(this.olvItems);
-            this.tabItems.Location = new System.Drawing.Point(4, 22);
-            this.tabItems.Name = "tabItems";
-            this.tabItems.Size = new System.Drawing.Size(756, 480);
-            this.tabItems.TabIndex = 3;
-            this.tabItems.Text = "MonsterTab1";
-            this.tabItems.UseVisualStyleBackColor = true;
+            this.tabMonsterTab1.Controls.Add(this.olvMonsterTab1);
+            this.tabMonsterTab1.Location = new System.Drawing.Point(4, 22);
+            this.tabMonsterTab1.Name = "tabMonsterTab1";
+            this.tabMonsterTab1.Size = new System.Drawing.Size(756, 480);
+            this.tabMonsterTab1.TabIndex = 3;
+            this.tabMonsterTab1.Text = "MonsterTab1";
+            this.tabMonsterTab1.UseVisualStyleBackColor = true;
             // 
-            // olvItems
+            // olvMonsterTab1
             // 
-            this.olvItems.AllColumns.Add(this.olvColumn1);
-            this.olvItems.AllColumns.Add(this.olvColumn7);
-            this.olvItems.AllColumns.Add(this.olvColumn69);
-            this.olvItems.AllColumns.Add(this.olvColumn2);
-            this.olvItems.AllColumns.Add(this.olvColumn3);
-            this.olvItems.AllColumns.Add(this.olvColumn4);
-            this.olvItems.AllColumns.Add(this.olvColumn5);
-            this.olvItems.AllColumns.Add(this.olvColumn6);
-            this.olvItems.AllColumns.Add(this.olvColumn8);
-            this.olvItems.AllColumns.Add(this.olvColumn9);
-            this.olvItems.AllColumns.Add(this.olvColumn10);
-            this.olvItems.AllColumns.Add(this.olvColumn11);
-            this.olvItems.AllColumns.Add(this.olvColumn12);
-            this.olvItems.AllColumns.Add(this.olvColumn13);
-            this.olvItems.AllColumns.Add(this.olvColumn14);
-            this.olvItems.AllColumns.Add(this.olvColumn15);
-            this.olvItems.AllColumns.Add(this.olvColumn16);
-            this.olvItems.AllColumns.Add(this.olvColumn17);
-            this.olvItems.AllColumns.Add(this.olvColumn18);
-            this.olvItems.AllColumns.Add(this.olvColumn19);
-            this.olvItems.AllColumns.Add(this.olvColumn20);
-            this.olvItems.AllColumns.Add(this.olvColumn21);
-            this.olvItems.AllColumns.Add(this.olvColumn22);
-            this.olvItems.AllowColumnReorder = true;
-            this.olvItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn1);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn7);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn69);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn2);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn3);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn4);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn5);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn6);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn8);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn9);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn10);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn11);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn12);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn13);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn14);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn15);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn16);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn17);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn18);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn19);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn20);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn21);
+            this.olvMonsterTab1.AllColumns.Add(this.olvColumn22);
+            this.olvMonsterTab1.AllowColumnReorder = true;
+            this.olvMonsterTab1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvItems.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvMonsterTab1.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvMonsterTab1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
             this.olvColumn7,
             this.olvColumn69,
@@ -536,21 +536,21 @@
             this.olvColumn20,
             this.olvColumn21,
             this.olvColumn22});
-            this.olvItems.FullRowSelect = true;
-            this.olvItems.GridLines = true;
-            this.olvItems.HasCollapsibleGroups = false;
-            this.olvItems.HideSelection = false;
-            this.olvItems.Location = new System.Drawing.Point(3, 3);
-            this.olvItems.MenuLabelGroupBy = "";
-            this.olvItems.Name = "olvItems";
-            this.olvItems.ShowGroups = false;
-            this.olvItems.Size = new System.Drawing.Size(750, 474);
-            this.olvItems.TabIndex = 0;
-            this.olvItems.UseAlternatingBackColors = true;
-            this.olvItems.UseCompatibleStateImageBehavior = false;
-            this.olvItems.View = System.Windows.Forms.View.Details;
-            this.olvItems.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
-            this.olvItems.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
+            this.olvMonsterTab1.FullRowSelect = true;
+            this.olvMonsterTab1.GridLines = true;
+            this.olvMonsterTab1.HasCollapsibleGroups = false;
+            this.olvMonsterTab1.HideSelection = false;
+            this.olvMonsterTab1.Location = new System.Drawing.Point(3, 3);
+            this.olvMonsterTab1.MenuLabelGroupBy = "";
+            this.olvMonsterTab1.Name = "olvMonsterTab1";
+            this.olvMonsterTab1.ShowGroups = false;
+            this.olvMonsterTab1.Size = new System.Drawing.Size(750, 474);
+            this.olvMonsterTab1.TabIndex = 0;
+            this.olvMonsterTab1.UseAlternatingBackColors = true;
+            this.olvMonsterTab1.UseCompatibleStateImageBehavior = false;
+            this.olvMonsterTab1.View = System.Windows.Forms.View.Details;
+            this.olvMonsterTab1.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
+            this.olvMonsterTab1.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // olvColumn1
             // 
@@ -700,52 +700,52 @@
             this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabMain.Controls.Add(this.tabItems);
-            this.tabMain.Controls.Add(this.tabPage1);
-            this.tabMain.Controls.Add(this.tabPage2);
-            this.tabMain.Controls.Add(this.tabPage3);
-            this.tabMain.Controls.Add(this.tabPage4);
+            this.tabMain.Controls.Add(this.tabMonsterTab1);
+            this.tabMain.Controls.Add(this.tabMonsterTab2);
+            this.tabMain.Controls.Add(this.tabMonsterTab3);
+            this.tabMain.Controls.Add(this.tabMonsterTab4);
+            this.tabMain.Controls.Add(this.tabMonsterTab5);
             this.tabMain.Location = new System.Drawing.Point(0, 27);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(764, 506);
             this.tabMain.TabIndex = 0;
             // 
-            // tabPage1
+            // tabMonsterTab2
             // 
-            this.tabPage1.Controls.Add(this.objectListView1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(756, 480);
-            this.tabPage1.TabIndex = 4;
-            this.tabPage1.Text = "MonsterTab2";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabMonsterTab2.Controls.Add(this.olvMonsterTab2);
+            this.tabMonsterTab2.Location = new System.Drawing.Point(4, 22);
+            this.tabMonsterTab2.Name = "tabMonsterTab2";
+            this.tabMonsterTab2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMonsterTab2.Size = new System.Drawing.Size(756, 480);
+            this.tabMonsterTab2.TabIndex = 4;
+            this.tabMonsterTab2.Text = "MonsterTab2";
+            this.tabMonsterTab2.UseVisualStyleBackColor = true;
             // 
-            // objectListView1
+            // olvMonsterTab2
             // 
-            this.objectListView1.AllColumns.Add(this.olvColumn23);
-            this.objectListView1.AllColumns.Add(this.olvColumn24);
-            this.objectListView1.AllColumns.Add(this.olvColumn26);
-            this.objectListView1.AllColumns.Add(this.olvColumn27);
-            this.objectListView1.AllColumns.Add(this.olvColumn28);
-            this.objectListView1.AllColumns.Add(this.olvColumn29);
-            this.objectListView1.AllColumns.Add(this.olvColumn30);
-            this.objectListView1.AllColumns.Add(this.olvColumn31);
-            this.objectListView1.AllColumns.Add(this.olvColumn32);
-            this.objectListView1.AllColumns.Add(this.olvColumn33);
-            this.objectListView1.AllColumns.Add(this.olvColumn34);
-            this.objectListView1.AllColumns.Add(this.olvColumn35);
-            this.objectListView1.AllColumns.Add(this.olvColumn36);
-            this.objectListView1.AllColumns.Add(this.olvColumn37);
-            this.objectListView1.AllColumns.Add(this.olvColumn38);
-            this.objectListView1.AllColumns.Add(this.olvColumn39);
-            this.objectListView1.AllowColumnReorder = true;
-            this.objectListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn23);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn24);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn26);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn27);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn28);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn29);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn30);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn31);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn32);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn33);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn34);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn35);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn36);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn37);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn38);
+            this.olvMonsterTab2.AllColumns.Add(this.olvColumn39);
+            this.olvMonsterTab2.AllowColumnReorder = true;
+            this.olvMonsterTab2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.objectListView1.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvMonsterTab2.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvMonsterTab2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn23,
             this.olvColumn24,
             this.olvColumn26,
@@ -762,21 +762,21 @@
             this.olvColumn37,
             this.olvColumn38,
             this.olvColumn39});
-            this.objectListView1.FullRowSelect = true;
-            this.objectListView1.GridLines = true;
-            this.objectListView1.HasCollapsibleGroups = false;
-            this.objectListView1.HideSelection = false;
-            this.objectListView1.Location = new System.Drawing.Point(3, 3);
-            this.objectListView1.MenuLabelGroupBy = "";
-            this.objectListView1.Name = "objectListView1";
-            this.objectListView1.ShowGroups = false;
-            this.objectListView1.Size = new System.Drawing.Size(750, 474);
-            this.objectListView1.TabIndex = 1;
-            this.objectListView1.UseAlternatingBackColors = true;
-            this.objectListView1.UseCompatibleStateImageBehavior = false;
-            this.objectListView1.View = System.Windows.Forms.View.Details;
-            this.objectListView1.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
-            this.objectListView1.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
+            this.olvMonsterTab2.FullRowSelect = true;
+            this.olvMonsterTab2.GridLines = true;
+            this.olvMonsterTab2.HasCollapsibleGroups = false;
+            this.olvMonsterTab2.HideSelection = false;
+            this.olvMonsterTab2.Location = new System.Drawing.Point(3, 3);
+            this.olvMonsterTab2.MenuLabelGroupBy = "";
+            this.olvMonsterTab2.Name = "olvMonsterTab2";
+            this.olvMonsterTab2.ShowGroups = false;
+            this.olvMonsterTab2.Size = new System.Drawing.Size(750, 474);
+            this.olvMonsterTab2.TabIndex = 1;
+            this.olvMonsterTab2.UseAlternatingBackColors = true;
+            this.olvMonsterTab2.UseCompatibleStateImageBehavior = false;
+            this.olvMonsterTab2.View = System.Windows.Forms.View.Details;
+            this.olvMonsterTab2.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
+            this.olvMonsterTab2.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // olvColumn23
             // 
@@ -881,43 +881,43 @@
             this.olvColumn39.AspectToStringFormat = "{0:X}";
             this.olvColumn39.Text = "ItemSlot4";
             // 
-            // tabPage2
+            // tabMonsterTab3
             // 
-            this.tabPage2.Controls.Add(this.objectListView2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(756, 480);
-            this.tabPage2.TabIndex = 5;
-            this.tabPage2.Text = "MonsterTab3";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabMonsterTab3.Controls.Add(this.olvMonsterTab3);
+            this.tabMonsterTab3.Location = new System.Drawing.Point(4, 22);
+            this.tabMonsterTab3.Name = "tabMonsterTab3";
+            this.tabMonsterTab3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMonsterTab3.Size = new System.Drawing.Size(756, 480);
+            this.tabMonsterTab3.TabIndex = 5;
+            this.tabMonsterTab3.Text = "MonsterTab3";
+            this.tabMonsterTab3.UseVisualStyleBackColor = true;
             // 
-            // objectListView2
+            // olvMonsterTab3
             // 
-            this.objectListView2.AllColumns.Add(this.olvColumn25);
-            this.objectListView2.AllColumns.Add(this.olvColumn40);
-            this.objectListView2.AllColumns.Add(this.olvColumn42);
-            this.objectListView2.AllColumns.Add(this.olvColumn43);
-            this.objectListView2.AllColumns.Add(this.olvColumn44);
-            this.objectListView2.AllColumns.Add(this.olvColumn45);
-            this.objectListView2.AllColumns.Add(this.olvColumn46);
-            this.objectListView2.AllColumns.Add(this.olvColumn47);
-            this.objectListView2.AllColumns.Add(this.olvColumn48);
-            this.objectListView2.AllColumns.Add(this.olvColumn49);
-            this.objectListView2.AllColumns.Add(this.olvColumn50);
-            this.objectListView2.AllColumns.Add(this.olvColumn51);
-            this.objectListView2.AllColumns.Add(this.olvColumn52);
-            this.objectListView2.AllColumns.Add(this.olvColumn53);
-            this.objectListView2.AllColumns.Add(this.olvColumn54);
-            this.objectListView2.AllColumns.Add(this.olvColumn55);
-            this.objectListView2.AllColumns.Add(this.olvColumn56);
-            this.objectListView2.AllColumns.Add(this.olvColumn57);
-            this.objectListView2.AllowColumnReorder = true;
-            this.objectListView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn25);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn40);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn42);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn43);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn44);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn45);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn46);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn47);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn48);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn49);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn50);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn51);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn52);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn53);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn54);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn55);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn56);
+            this.olvMonsterTab3.AllColumns.Add(this.olvColumn57);
+            this.olvMonsterTab3.AllowColumnReorder = true;
+            this.olvMonsterTab3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.objectListView2.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.objectListView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvMonsterTab3.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvMonsterTab3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn25,
             this.olvColumn40,
             this.olvColumn42,
@@ -936,21 +936,21 @@
             this.olvColumn55,
             this.olvColumn56,
             this.olvColumn57});
-            this.objectListView2.FullRowSelect = true;
-            this.objectListView2.GridLines = true;
-            this.objectListView2.HasCollapsibleGroups = false;
-            this.objectListView2.HideSelection = false;
-            this.objectListView2.Location = new System.Drawing.Point(3, 3);
-            this.objectListView2.MenuLabelGroupBy = "";
-            this.objectListView2.Name = "objectListView2";
-            this.objectListView2.ShowGroups = false;
-            this.objectListView2.Size = new System.Drawing.Size(750, 474);
-            this.objectListView2.TabIndex = 1;
-            this.objectListView2.UseAlternatingBackColors = true;
-            this.objectListView2.UseCompatibleStateImageBehavior = false;
-            this.objectListView2.View = System.Windows.Forms.View.Details;
-            this.objectListView2.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
-            this.objectListView2.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
+            this.olvMonsterTab3.FullRowSelect = true;
+            this.olvMonsterTab3.GridLines = true;
+            this.olvMonsterTab3.HasCollapsibleGroups = false;
+            this.olvMonsterTab3.HideSelection = false;
+            this.olvMonsterTab3.Location = new System.Drawing.Point(3, 3);
+            this.olvMonsterTab3.MenuLabelGroupBy = "";
+            this.olvMonsterTab3.Name = "olvMonsterTab3";
+            this.olvMonsterTab3.ShowGroups = false;
+            this.olvMonsterTab3.Size = new System.Drawing.Size(750, 474);
+            this.olvMonsterTab3.TabIndex = 1;
+            this.olvMonsterTab3.UseAlternatingBackColors = true;
+            this.olvMonsterTab3.UseCompatibleStateImageBehavior = false;
+            this.olvMonsterTab3.View = System.Windows.Forms.View.Details;
+            this.olvMonsterTab3.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
+            this.olvMonsterTab3.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // olvColumn25
             // 
@@ -1067,35 +1067,35 @@
             this.olvColumn57.Text = "Unknown6";
             this.olvColumn57.Width = 70;
             // 
-            // tabPage3
+            // tabMonsterTab4
             // 
-            this.tabPage3.Controls.Add(this.objectListView3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(756, 480);
-            this.tabPage3.TabIndex = 6;
-            this.tabPage3.Text = "MonsterTab4";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabMonsterTab4.Controls.Add(this.olvMonsterTab4);
+            this.tabMonsterTab4.Location = new System.Drawing.Point(4, 22);
+            this.tabMonsterTab4.Name = "tabMonsterTab4";
+            this.tabMonsterTab4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMonsterTab4.Size = new System.Drawing.Size(756, 480);
+            this.tabMonsterTab4.TabIndex = 6;
+            this.tabMonsterTab4.Text = "MonsterTab4";
+            this.tabMonsterTab4.UseVisualStyleBackColor = true;
             // 
-            // objectListView3
+            // olvMonsterTab4
             // 
-            this.objectListView3.AllColumns.Add(this.olvColumn41);
-            this.objectListView3.AllColumns.Add(this.olvColumn58);
-            this.objectListView3.AllColumns.Add(this.olvColumn60);
-            this.objectListView3.AllColumns.Add(this.olvColumn61);
-            this.objectListView3.AllColumns.Add(this.olvColumn62);
-            this.objectListView3.AllColumns.Add(this.olvColumn63);
-            this.objectListView3.AllColumns.Add(this.olvColumn64);
-            this.objectListView3.AllColumns.Add(this.olvColumn65);
-            this.objectListView3.AllColumns.Add(this.olvColumn66);
-            this.objectListView3.AllColumns.Add(this.olvColumn67);
-            this.objectListView3.AllowColumnReorder = true;
-            this.objectListView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.olvMonsterTab4.AllColumns.Add(this.olvColumn41);
+            this.olvMonsterTab4.AllColumns.Add(this.olvColumn58);
+            this.olvMonsterTab4.AllColumns.Add(this.olvColumn60);
+            this.olvMonsterTab4.AllColumns.Add(this.olvColumn61);
+            this.olvMonsterTab4.AllColumns.Add(this.olvColumn62);
+            this.olvMonsterTab4.AllColumns.Add(this.olvColumn63);
+            this.olvMonsterTab4.AllColumns.Add(this.olvColumn64);
+            this.olvMonsterTab4.AllColumns.Add(this.olvColumn65);
+            this.olvMonsterTab4.AllColumns.Add(this.olvColumn66);
+            this.olvMonsterTab4.AllColumns.Add(this.olvColumn67);
+            this.olvMonsterTab4.AllowColumnReorder = true;
+            this.olvMonsterTab4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.objectListView3.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.objectListView3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvMonsterTab4.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvMonsterTab4.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn41,
             this.olvColumn58,
             this.olvColumn60,
@@ -1106,21 +1106,21 @@
             this.olvColumn65,
             this.olvColumn66,
             this.olvColumn67});
-            this.objectListView3.FullRowSelect = true;
-            this.objectListView3.GridLines = true;
-            this.objectListView3.HasCollapsibleGroups = false;
-            this.objectListView3.HideSelection = false;
-            this.objectListView3.Location = new System.Drawing.Point(3, 3);
-            this.objectListView3.MenuLabelGroupBy = "";
-            this.objectListView3.Name = "objectListView3";
-            this.objectListView3.ShowGroups = false;
-            this.objectListView3.Size = new System.Drawing.Size(750, 474);
-            this.objectListView3.TabIndex = 1;
-            this.objectListView3.UseAlternatingBackColors = true;
-            this.objectListView3.UseCompatibleStateImageBehavior = false;
-            this.objectListView3.View = System.Windows.Forms.View.Details;
-            this.objectListView3.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
-            this.objectListView3.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
+            this.olvMonsterTab4.FullRowSelect = true;
+            this.olvMonsterTab4.GridLines = true;
+            this.olvMonsterTab4.HasCollapsibleGroups = false;
+            this.olvMonsterTab4.HideSelection = false;
+            this.olvMonsterTab4.Location = new System.Drawing.Point(3, 3);
+            this.olvMonsterTab4.MenuLabelGroupBy = "";
+            this.olvMonsterTab4.Name = "olvMonsterTab4";
+            this.olvMonsterTab4.ShowGroups = false;
+            this.olvMonsterTab4.Size = new System.Drawing.Size(750, 474);
+            this.olvMonsterTab4.TabIndex = 1;
+            this.olvMonsterTab4.UseAlternatingBackColors = true;
+            this.olvMonsterTab4.UseCompatibleStateImageBehavior = false;
+            this.olvMonsterTab4.View = System.Windows.Forms.View.Details;
+            this.olvMonsterTab4.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
+            this.olvMonsterTab4.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // olvColumn41
             // 
@@ -1189,37 +1189,37 @@
             this.olvColumn67.Text = "MovementType";
             this.olvColumn67.Width = 90;
             // 
-            // tabPage4
+            // tabMonsterTab5
             // 
-            this.tabPage4.Controls.Add(this.objectListView4);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(756, 480);
-            this.tabPage4.TabIndex = 7;
-            this.tabPage4.Text = "MonsterTab5";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabMonsterTab5.Controls.Add(this.olvMonsterTab5);
+            this.tabMonsterTab5.Location = new System.Drawing.Point(4, 22);
+            this.tabMonsterTab5.Name = "tabMonsterTab5";
+            this.tabMonsterTab5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMonsterTab5.Size = new System.Drawing.Size(756, 480);
+            this.tabMonsterTab5.TabIndex = 7;
+            this.tabMonsterTab5.Text = "MonsterTab5";
+            this.tabMonsterTab5.UseVisualStyleBackColor = true;
             // 
-            // objectListView4
+            // olvMonsterTab5
             // 
-            this.objectListView4.AllColumns.Add(this.olvColumn59);
-            this.objectListView4.AllColumns.Add(this.olvColumn68);
-            this.objectListView4.AllColumns.Add(this.olvColumn70);
-            this.objectListView4.AllColumns.Add(this.olvColumn71);
-            this.objectListView4.AllColumns.Add(this.olvColumn72);
-            this.objectListView4.AllColumns.Add(this.olvColumn73);
-            this.objectListView4.AllColumns.Add(this.olvColumn74);
-            this.objectListView4.AllColumns.Add(this.olvColumn75);
-            this.objectListView4.AllColumns.Add(this.olvColumn76);
-            this.objectListView4.AllColumns.Add(this.olvColumn77);
-            this.objectListView4.AllColumns.Add(this.olvColumn78);
-            this.objectListView4.AllColumns.Add(this.olvColumn79);
-            this.objectListView4.AllowColumnReorder = true;
-            this.objectListView4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.olvMonsterTab5.AllColumns.Add(this.olvColumn59);
+            this.olvMonsterTab5.AllColumns.Add(this.olvColumn68);
+            this.olvMonsterTab5.AllColumns.Add(this.olvColumn70);
+            this.olvMonsterTab5.AllColumns.Add(this.olvColumn71);
+            this.olvMonsterTab5.AllColumns.Add(this.olvColumn72);
+            this.olvMonsterTab5.AllColumns.Add(this.olvColumn73);
+            this.olvMonsterTab5.AllColumns.Add(this.olvColumn74);
+            this.olvMonsterTab5.AllColumns.Add(this.olvColumn75);
+            this.olvMonsterTab5.AllColumns.Add(this.olvColumn76);
+            this.olvMonsterTab5.AllColumns.Add(this.olvColumn77);
+            this.olvMonsterTab5.AllColumns.Add(this.olvColumn78);
+            this.olvMonsterTab5.AllColumns.Add(this.olvColumn79);
+            this.olvMonsterTab5.AllowColumnReorder = true;
+            this.olvMonsterTab5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.objectListView4.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.objectListView4.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvMonsterTab5.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvMonsterTab5.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn59,
             this.olvColumn68,
             this.olvColumn70,
@@ -1232,21 +1232,21 @@
             this.olvColumn77,
             this.olvColumn78,
             this.olvColumn79});
-            this.objectListView4.FullRowSelect = true;
-            this.objectListView4.GridLines = true;
-            this.objectListView4.HasCollapsibleGroups = false;
-            this.objectListView4.HideSelection = false;
-            this.objectListView4.Location = new System.Drawing.Point(3, 3);
-            this.objectListView4.MenuLabelGroupBy = "";
-            this.objectListView4.Name = "objectListView4";
-            this.objectListView4.ShowGroups = false;
-            this.objectListView4.Size = new System.Drawing.Size(750, 474);
-            this.objectListView4.TabIndex = 1;
-            this.objectListView4.UseAlternatingBackColors = true;
-            this.objectListView4.UseCompatibleStateImageBehavior = false;
-            this.objectListView4.View = System.Windows.Forms.View.Details;
-            this.objectListView4.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
-            this.objectListView4.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
+            this.olvMonsterTab5.FullRowSelect = true;
+            this.olvMonsterTab5.GridLines = true;
+            this.olvMonsterTab5.HasCollapsibleGroups = false;
+            this.olvMonsterTab5.HideSelection = false;
+            this.olvMonsterTab5.Location = new System.Drawing.Point(3, 3);
+            this.olvMonsterTab5.MenuLabelGroupBy = "";
+            this.olvMonsterTab5.Name = "olvMonsterTab5";
+            this.olvMonsterTab5.ShowGroups = false;
+            this.olvMonsterTab5.Size = new System.Drawing.Size(750, 474);
+            this.olvMonsterTab5.TabIndex = 1;
+            this.olvMonsterTab5.UseAlternatingBackColors = true;
+            this.olvMonsterTab5.UseCompatibleStateImageBehavior = false;
+            this.olvMonsterTab5.View = System.Windows.Forms.View.Details;
+            this.olvMonsterTab5.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
+            this.olvMonsterTab5.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // olvColumn59
             // 
@@ -1346,17 +1346,17 @@
             this.Load += new System.EventHandler(this.frmX019_Editor_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tabItems.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvItems)).EndInit();
+            this.tabMonsterTab1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab1)).EndInit();
             this.tabMain.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView2)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView3)).EndInit();
-            this.tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView4)).EndInit();
+            this.tabMonsterTab2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab2)).EndInit();
+            this.tabMonsterTab3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab3)).EndInit();
+            this.tabMonsterTab4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab4)).EndInit();
+            this.tabMonsterTab5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1402,8 +1402,8 @@
         private BrightIdeasSoftware.OLVColumn olvSpellUse;
         private BrightIdeasSoftware.OLVColumn olvSpellUseLv;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
-        private System.Windows.Forms.TabPage tabItems;
-        private BrightIdeasSoftware.ObjectListView olvItems;
+        private System.Windows.Forms.TabPage tabMonsterTab1;
+        private BrightIdeasSoftware.ObjectListView olvMonsterTab1;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn7;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
@@ -1427,8 +1427,8 @@
         private BrightIdeasSoftware.OLVColumn olvColumn20;
         private BrightIdeasSoftware.OLVColumn olvColumn21;
         private BrightIdeasSoftware.OLVColumn olvColumn22;
-        private System.Windows.Forms.TabPage tabPage1;
-        private BrightIdeasSoftware.ObjectListView objectListView1;
+        private System.Windows.Forms.TabPage tabMonsterTab2;
+        private BrightIdeasSoftware.ObjectListView olvMonsterTab2;
         private BrightIdeasSoftware.OLVColumn olvColumn23;
         private BrightIdeasSoftware.OLVColumn olvColumn24;
         private BrightIdeasSoftware.OLVColumn olvColumn26;
@@ -1445,8 +1445,8 @@
         private BrightIdeasSoftware.OLVColumn olvColumn37;
         private BrightIdeasSoftware.OLVColumn olvColumn38;
         private BrightIdeasSoftware.OLVColumn olvColumn39;
-        private System.Windows.Forms.TabPage tabPage2;
-        private BrightIdeasSoftware.ObjectListView objectListView2;
+        private System.Windows.Forms.TabPage tabMonsterTab3;
+        private BrightIdeasSoftware.ObjectListView olvMonsterTab3;
         private BrightIdeasSoftware.OLVColumn olvColumn25;
         private BrightIdeasSoftware.OLVColumn olvColumn40;
         private BrightIdeasSoftware.OLVColumn olvColumn42;
@@ -1465,8 +1465,8 @@
         private BrightIdeasSoftware.OLVColumn olvColumn55;
         private BrightIdeasSoftware.OLVColumn olvColumn56;
         private BrightIdeasSoftware.OLVColumn olvColumn57;
-        private System.Windows.Forms.TabPage tabPage3;
-        private BrightIdeasSoftware.ObjectListView objectListView3;
+        private System.Windows.Forms.TabPage tabMonsterTab4;
+        private BrightIdeasSoftware.ObjectListView olvMonsterTab4;
         private BrightIdeasSoftware.OLVColumn olvColumn41;
         private BrightIdeasSoftware.OLVColumn olvColumn58;
         private BrightIdeasSoftware.OLVColumn olvColumn60;
@@ -1477,8 +1477,8 @@
         private BrightIdeasSoftware.OLVColumn olvColumn65;
         private BrightIdeasSoftware.OLVColumn olvColumn66;
         private BrightIdeasSoftware.OLVColumn olvColumn67;
-        private System.Windows.Forms.TabPage tabPage4;
-        private BrightIdeasSoftware.ObjectListView objectListView4;
+        private System.Windows.Forms.TabPage tabMonsterTab5;
+        private BrightIdeasSoftware.ObjectListView olvMonsterTab5;
         private BrightIdeasSoftware.OLVColumn olvColumn59;
         private BrightIdeasSoftware.OLVColumn olvColumn68;
         private BrightIdeasSoftware.OLVColumn olvColumn70;

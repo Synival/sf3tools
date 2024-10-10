@@ -431,21 +431,21 @@ namespace SF3.X1_Editor.Forms
             //olvCharacters.ClearObjects();
             //olvMonsters.ClearObjects();
 
-            olvItems.ClearObjects();
-            objectListView1.ClearObjects();
-            objectListView2.ClearObjects();
-            objectListView3.ClearObjects();
-            objectListView4.ClearObjects();
-            objectListView5.ClearObjects();
-            objectListView6.ClearObjects();
-            objectListView7.ClearObjects();
-            objectListView8.ClearObjects();
-            objectListView9.ClearObjects();
-            objectListView10.ClearObjects();
-            objectListView11.ClearObjects();
-            objectListView12.ClearObjects();
-            objectListView13.ClearObjects();
-            objectListView14.ClearObjects();
+            olvHeader.ClearObjects();
+            olvSlotTab1.ClearObjects();
+            olvSlotTab2.ClearObjects();
+            olvSlotTab3.ClearObjects();
+            olvSlotTab4.ClearObjects();
+            olvAITargetPosition.ClearObjects();
+            olvSpawnZones.ClearObjects();
+            olvBattlePointers.ClearObjects();
+            olvInteractables.ClearObjects();
+            olvScriptedMovement.ClearObjects();
+            olvWarpTable.ClearObjects();
+            olvTileData.ClearObjects();
+            olvTownNpcs.ClearObjects();
+            olvNonBattleEnter.ClearObjects();
+            olvArrows.ClearObjects();
 
             //olvPresets.ClearObjects();
             //olvSpells.ClearObjects();
@@ -456,37 +456,37 @@ namespace SF3.X1_Editor.Forms
 
             if (isBattle)
             {
-                olvItems.AddObjects(_presetList.Models);
-                objectListView1.AddObjects(_itemList.Models);
-                objectListView2.AddObjects(_itemList.Models);
-                objectListView3.AddObjects(_itemList.Models);
-                objectListView4.AddObjects(_itemList.Models);
-                objectListView5.AddObjects(_aiList.Models);
-                objectListView6.AddObjects(_unknownAIList.Models);
-                objectListView7.AddObjects(_battlePointersList.Models);
-                objectListView9.AddObjects(_customMovementList.Models);
+                olvHeader.AddObjects(_presetList.Models);
+                olvSlotTab1.AddObjects(_itemList.Models);
+                olvSlotTab2.AddObjects(_itemList.Models);
+                olvSlotTab3.AddObjects(_itemList.Models);
+                olvSlotTab4.AddObjects(_itemList.Models);
+                olvAITargetPosition.AddObjects(_aiList.Models);
+                olvSpawnZones.AddObjects(_unknownAIList.Models);
+                olvBattlePointers.AddObjects(_battlePointersList.Models);
+                olvScriptedMovement.AddObjects(_customMovementList.Models);
             }
 
-            objectListView8.AddObjects(_treasureList.Models);
+            olvInteractables.AddObjects(_treasureList.Models);
 
             if (!isBattle)
             {
-                objectListView12.AddObjects(_npcList.Models);
-                objectListView13.AddObjects(_enterList.Models);
+                olvTownNpcs.AddObjects(_npcList.Models);
+                olvNonBattleEnter.AddObjects(_enterList.Models);
             }
 
             if (!isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other)
             {
-                objectListView14.AddObjects(_arrowList.Models);
+                olvArrows.AddObjects(_arrowList.Models);
             }
 
             if (_scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other)
             {
-                objectListView10.AddObjects(_warpList.Models);
+                olvWarpTable.AddObjects(_warpList.Models);
             }
             if (isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other)
             {
-                objectListView11.AddObjects(_tileList.Models);
+                olvTileData.AddObjects(_tileList.Models);
             }
 
             //olvCharacters.AddObjects(CharacterList.getCharacterList());
@@ -551,21 +551,21 @@ namespace SF3.X1_Editor.Forms
             //olvBlacksmith.FinishCellEdit();
             //olvMonsters.FinishCellEdit();
             //olvCharacters.FinishCellEdit();
-            olvItems.FinishCellEdit();
-            objectListView1.FinishCellEdit();
-            objectListView2.FinishCellEdit();
-            objectListView3.FinishCellEdit();
-            objectListView4.FinishCellEdit();
-            objectListView5.FinishCellEdit();
-            objectListView6.FinishCellEdit();
-            objectListView7.FinishCellEdit();
-            objectListView8.FinishCellEdit();
-            objectListView9.FinishCellEdit();
-            objectListView10.FinishCellEdit();
-            objectListView11.FinishCellEdit();
-            objectListView12.FinishCellEdit();
-            objectListView13.FinishCellEdit();
-            objectListView14.FinishCellEdit();
+            olvHeader.FinishCellEdit();
+            olvSlotTab1.FinishCellEdit();
+            olvSlotTab2.FinishCellEdit();
+            olvSlotTab3.FinishCellEdit();
+            olvSlotTab4.FinishCellEdit();
+            olvAITargetPosition.FinishCellEdit();
+            olvSpawnZones.FinishCellEdit();
+            olvBattlePointers.FinishCellEdit();
+            olvInteractables.FinishCellEdit();
+            olvScriptedMovement.FinishCellEdit();
+            olvWarpTable.FinishCellEdit();
+            olvTileData.FinishCellEdit();
+            olvTownNpcs.FinishCellEdit();
+            olvNonBattleEnter.FinishCellEdit();
+            olvArrows.FinishCellEdit();
             //objectListView1.FinishCellEdit();
             //objectListView2.FinishCellEdit();
             //olvStoreItems.FinishCellEdit();
@@ -589,7 +589,7 @@ namespace SF3.X1_Editor.Forms
             } catch (Exception) { }*/
             try
             {
-                byte[] data = olvItems.SaveState();
+                byte[] data = olvHeader.SaveState();
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/itemstate." +
                      ".bin", FileMode.Create, FileAccess.Write);
                 stream.Write(data, 0, data.Length);

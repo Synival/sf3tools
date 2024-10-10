@@ -170,8 +170,8 @@
             this.lvcAttackResistItemName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcAttackResistAttackSpell = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcAttackResistResistSpell = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabWarpTableScn1 = new System.Windows.Forms.TabPage();
-            this.olvWarpTableScn1 = new BrightIdeasSoftware.ObjectListView();
+            this.tabWarpTable = new System.Windows.Forms.TabPage();
+            this.olvWarpTable = new BrightIdeasSoftware.ObjectListView();
             this.lvcWarpTableScn1ID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcWarpTableScn1Address = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcWarpTableScn1WarpName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -197,8 +197,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.olvWeaponRankAttack)).BeginInit();
             this.tabAttackResist.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvAttackResist)).BeginInit();
-            this.tabWarpTableScn1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvWarpTableScn1)).BeginInit();
+            this.tabWarpTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvWarpTable)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -925,7 +925,7 @@
             this.tabMain.Controls.Add(this.tabStatBoost);
             this.tabMain.Controls.Add(this.tabWeaponRankAttack);
             this.tabMain.Controls.Add(this.tabAttackResist);
-            this.tabMain.Controls.Add(this.tabWarpTableScn1);
+            this.tabMain.Controls.Add(this.tabWarpTable);
             this.tabMain.Location = new System.Drawing.Point(0, 27);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
@@ -1604,32 +1604,32 @@
             this.lvcAttackResistResistSpell.Text = "Resist spell";
             this.lvcAttackResistResistSpell.Width = 80;
             // 
-            // tabWarpTableScn1
+            // tabWarpTable
             // 
-            this.tabWarpTableScn1.Controls.Add(this.olvWarpTableScn1);
-            this.tabWarpTableScn1.Location = new System.Drawing.Point(4, 22);
-            this.tabWarpTableScn1.Name = "tabWarpTableScn1";
-            this.tabWarpTableScn1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWarpTableScn1.Size = new System.Drawing.Size(756, 480);
-            this.tabWarpTableScn1.TabIndex = 10;
-            this.tabWarpTableScn1.Text = "WarpTable scn1";
-            this.tabWarpTableScn1.UseVisualStyleBackColor = true;
+            this.tabWarpTable.Controls.Add(this.olvWarpTable);
+            this.tabWarpTable.Location = new System.Drawing.Point(4, 22);
+            this.tabWarpTable.Name = "tabWarpTable";
+            this.tabWarpTable.Padding = new System.Windows.Forms.Padding(3);
+            this.tabWarpTable.Size = new System.Drawing.Size(756, 480);
+            this.tabWarpTable.TabIndex = 10;
+            this.tabWarpTable.Text = "WarpTable scn1";
+            this.tabWarpTable.UseVisualStyleBackColor = true;
             // 
-            // olvWarpTableScn1
+            // olvWarpTable
             // 
-            this.olvWarpTableScn1.AllColumns.Add(this.lvcWarpTableScn1ID);
-            this.olvWarpTableScn1.AllColumns.Add(this.lvcWarpTableScn1Address);
-            this.olvWarpTableScn1.AllColumns.Add(this.lvcWarpTableScn1WarpName);
-            this.olvWarpTableScn1.AllColumns.Add(this.lvcWarpTableScn1Plus0x00);
-            this.olvWarpTableScn1.AllColumns.Add(this.lvcWarpTableScn1Plus0x01);
-            this.olvWarpTableScn1.AllColumns.Add(this.lvcWarpTableScn1WarpType);
-            this.olvWarpTableScn1.AllColumns.Add(this.lvcWarpTableScn1WarpMap);
-            this.olvWarpTableScn1.AllowColumnReorder = true;
-            this.olvWarpTableScn1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.olvWarpTable.AllColumns.Add(this.lvcWarpTableScn1ID);
+            this.olvWarpTable.AllColumns.Add(this.lvcWarpTableScn1Address);
+            this.olvWarpTable.AllColumns.Add(this.lvcWarpTableScn1WarpName);
+            this.olvWarpTable.AllColumns.Add(this.lvcWarpTableScn1Plus0x00);
+            this.olvWarpTable.AllColumns.Add(this.lvcWarpTableScn1Plus0x01);
+            this.olvWarpTable.AllColumns.Add(this.lvcWarpTableScn1WarpType);
+            this.olvWarpTable.AllColumns.Add(this.lvcWarpTableScn1WarpMap);
+            this.olvWarpTable.AllowColumnReorder = true;
+            this.olvWarpTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvWarpTableScn1.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvWarpTableScn1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvWarpTable.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvWarpTable.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcWarpTableScn1ID,
             this.lvcWarpTableScn1Address,
             this.lvcWarpTableScn1WarpName,
@@ -1637,21 +1637,21 @@
             this.lvcWarpTableScn1Plus0x01,
             this.lvcWarpTableScn1WarpType,
             this.lvcWarpTableScn1WarpMap});
-            this.olvWarpTableScn1.FullRowSelect = true;
-            this.olvWarpTableScn1.GridLines = true;
-            this.olvWarpTableScn1.HasCollapsibleGroups = false;
-            this.olvWarpTableScn1.HideSelection = false;
-            this.olvWarpTableScn1.Location = new System.Drawing.Point(3, 3);
-            this.olvWarpTableScn1.MenuLabelGroupBy = "";
-            this.olvWarpTableScn1.Name = "olvWarpTableScn1";
-            this.olvWarpTableScn1.ShowGroups = false;
-            this.olvWarpTableScn1.Size = new System.Drawing.Size(750, 474);
-            this.olvWarpTableScn1.TabIndex = 3;
-            this.olvWarpTableScn1.UseAlternatingBackColors = true;
-            this.olvWarpTableScn1.UseCompatibleStateImageBehavior = false;
-            this.olvWarpTableScn1.View = System.Windows.Forms.View.Details;
-            this.olvWarpTableScn1.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
-            this.olvWarpTableScn1.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
+            this.olvWarpTable.FullRowSelect = true;
+            this.olvWarpTable.GridLines = true;
+            this.olvWarpTable.HasCollapsibleGroups = false;
+            this.olvWarpTable.HideSelection = false;
+            this.olvWarpTable.Location = new System.Drawing.Point(3, 3);
+            this.olvWarpTable.MenuLabelGroupBy = "";
+            this.olvWarpTable.Name = "olvWarpTable";
+            this.olvWarpTable.ShowGroups = false;
+            this.olvWarpTable.Size = new System.Drawing.Size(750, 474);
+            this.olvWarpTable.TabIndex = 3;
+            this.olvWarpTable.UseAlternatingBackColors = true;
+            this.olvWarpTable.UseCompatibleStateImageBehavior = false;
+            this.olvWarpTable.View = System.Windows.Forms.View.Details;
+            this.olvWarpTable.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
+            this.olvWarpTable.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcWarpTableScn1ID
             // 
@@ -1737,8 +1737,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.olvWeaponRankAttack)).EndInit();
             this.tabAttackResist.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvAttackResist)).EndInit();
-            this.tabWarpTableScn1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvWarpTableScn1)).EndInit();
+            this.tabWarpTable.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvWarpTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1855,8 +1855,8 @@
         private BrightIdeasSoftware.OLVColumn lvcAttackResistItemName;
         private BrightIdeasSoftware.OLVColumn lvcAttackResistAttackSpell;
         private BrightIdeasSoftware.OLVColumn lvcAttackResistResistSpell;
-        private System.Windows.Forms.TabPage tabWarpTableScn1;
-        private BrightIdeasSoftware.ObjectListView olvWarpTableScn1;
+        private System.Windows.Forms.TabPage tabWarpTable;
+        private BrightIdeasSoftware.ObjectListView olvWarpTable;
 
         private BrightIdeasSoftware.OLVColumn lvcWarpTableScn1ID;
         private BrightIdeasSoftware.OLVColumn lvcWarpTableScn1Address;
