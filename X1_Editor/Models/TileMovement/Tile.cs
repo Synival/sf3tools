@@ -124,7 +124,6 @@ namespace SF3.X1_Editor.Models.Tiles
 
                 offset = offset - sub + 0x7c; //second pointer*/
             }
-
             else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x000001c4;
@@ -133,17 +132,21 @@ namespace SF3.X1_Editor.Models.Tiles
                 offset = offset - sub; //first pointer
                 offset = offset + 0xac; //value we want is 0xac bytes later always
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //second pointer
 
-                /*
-                offset = 0x00000024; //scn2 initial pointer
-                sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
-                offset = _fileEditor.GetDouble(offset);
-
-                offset = offset - sub + 0x7c; //second pointer
-                */
+                if (offset < 0x06070000 && offset > 0) //a valid pointer in this fille will always be positive up to 0x06070000
+                {
+                    //Console.WriteLine("finishing normal proceedure");
+                    offset = offset - sub; //second pointer
+                }
+                else //work around for x1btlP05 not being consistant with everything else
+                {
+                    //Console.WriteLine("P05");
+                    offset = 0x00000024;
+                    //sub = 0x0605e000;
+                    offset = _fileEditor.GetDouble(offset);
+                    offset = offset - sub; //first pointer
+                    offset = offset + 0x14;
+                }
             }
 
             //offset = 0x00002b28; scn1

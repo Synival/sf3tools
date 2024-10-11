@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorLib", "EditorLib\Edit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF3Lib", "SF3Lib\SF3Lib.csproj", "{E0FA4C78-8ADF-4B68-A63B-74C76E868940}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF3LibTests", "SF3LibTests\SF3LibTests.csproj", "{4FBA2497-27D0-42EB-9033-1D7BC6CCD727}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SF3LibTests", "SF3LibTests\SF3LibTests.csproj", "{4FBA2497-27D0-42EB-9033-1D7BC6CCD727}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
