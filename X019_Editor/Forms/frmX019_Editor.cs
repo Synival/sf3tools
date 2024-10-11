@@ -170,7 +170,7 @@ namespace SF3.X019_Editor.Forms
 
         private bool initialise()
         {
-            saveAsToolStripMenuItem.Enabled = true;
+            tsmiFile_SaveAs.Enabled = true;
             /*if (!StoreItemTypeList.loadStoreItemTypeList()) {
                 MessageBox.Show("Could not load Resources/storeitemtypes.xml.");
                 return false;

@@ -30,18 +30,18 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX019_Editor));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiScenario_Scenario1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiScenario_Scenario2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiScenario_Scenario3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiScenario_PremiumDisk = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiScenario_PremiumDiskX044 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabMonsterTab1 = new System.Windows.Forms.TabPage();
             this.olvMonsterTab1 = new BrightIdeasSoftware.ObjectListView();
             this.lvcMonsterTab1Name = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -149,105 +149,105 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem,
-            this.helpToolStripMenuItem1});
+            this.tsmiFile,
+            this.tsmiHelp,
+            this.tsmiScenario});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(764, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // fileToolStripMenuItem
+            // tsmiFile
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveAsToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiFile_Open,
+            this.tsmiFile_SaveAs});
+            this.tsmiFile.Name = "tsmiFile";
+            this.tsmiFile.Size = new System.Drawing.Size(37, 20);
+            this.tsmiFile.Text = "File";
             // 
-            // openToolStripMenuItem
+            // tsmiFile_Open
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.openToolStripMenuItem.Text = "Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.tsmiFile_Open.Name = "tsmiFile_Open";
+            this.tsmiFile_Open.Size = new System.Drawing.Size(114, 22);
+            this.tsmiFile_Open.Text = "Open";
+            this.tsmiFile_Open.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
-            // saveAsToolStripMenuItem
+            // tsmiFile_SaveAs
             // 
-            this.saveAsToolStripMenuItem.Enabled = false;
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.saveAsToolStripMenuItem.Text = "Save As";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            this.tsmiFile_SaveAs.Enabled = false;
+            this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
+            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(114, 22);
+            this.tsmiFile_SaveAs.Text = "Save As";
+            this.tsmiFile_SaveAs.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
-            // helpToolStripMenuItem
+            // tsmiHelp
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiHelp_Version});
+            this.tsmiHelp.Name = "tsmiHelp";
+            this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
+            this.tsmiHelp.Text = "Help";
             // 
-            // aboutToolStripMenuItem
+            // tsmiHelp_Version
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.aboutToolStripMenuItem.Text = "Ver 0.11";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.tsmiHelp_Version.Name = "tsmiHelp_Version";
+            this.tsmiHelp_Version.Size = new System.Drawing.Size(180, 22);
+            this.tsmiHelp_Version.Text = "Ver 0.11";
+            this.tsmiHelp_Version.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // helpToolStripMenuItem1
+            // tsmiScenario
             // 
-            this.helpToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem4,
+            this.tsmiScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiScenario_Scenario1,
+            this.tsmiScenario_Scenario2,
+            this.tsmiScenario_Scenario3,
+            this.tsmiScenario_PremiumDisk,
             this.toolStripSeparator5,
-            this.toolStripMenuItem5});
-            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(64, 20);
-            this.helpToolStripMenuItem1.Text = "Scenario";
+            this.tsmiScenario_PremiumDiskX044});
+            this.tsmiScenario.Name = "tsmiScenario";
+            this.tsmiScenario.Size = new System.Drawing.Size(64, 20);
+            this.tsmiScenario.Text = "Scenario";
             // 
-            // toolStripMenuItem1
+            // tsmiScenario_Scenario1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
-            this.toolStripMenuItem1.Text = "Scenario 1";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.tsmiScenario_Scenario1.Name = "tsmiScenario_Scenario1";
+            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_Scenario1.Text = "Scenario 1";
+            this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
-            // toolStripMenuItem2
+            // tsmiScenario_Scenario2
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(175, 22);
-            this.toolStripMenuItem2.Text = "Scenario 2";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            this.tsmiScenario_Scenario2.Name = "tsmiScenario_Scenario2";
+            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_Scenario2.Text = "Scenario 2";
+            this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
-            // toolStripMenuItem3
+            // tsmiScenario_Scenario3
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(175, 22);
-            this.toolStripMenuItem3.Text = "Scenario 3";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            this.tsmiScenario_Scenario3.Name = "tsmiScenario_Scenario3";
+            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_Scenario3.Text = "Scenario 3";
+            this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
-            // toolStripMenuItem4
+            // tsmiScenario_PremiumDisk
             // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(175, 22);
-            this.toolStripMenuItem4.Text = "Premium Disk";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            this.tsmiScenario_PremiumDisk.Name = "tsmiScenario_PremiumDisk";
+            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_PremiumDisk.Text = "Premium Disk";
+            this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(172, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
             // 
-            // toolStripMenuItem5
+            // tsmiScenario_PremiumDiskX044
             // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(175, 22);
-            this.toolStripMenuItem5.Text = "Premium disk X044";
+            this.tsmiScenario_PremiumDiskX044.Name = "tsmiScenario_PremiumDiskX044";
+            this.tsmiScenario_PremiumDiskX044.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_PremiumDiskX044.Text = "Premium disk X044";
             // 
             // tabMonsterTab1
             // 
@@ -1141,18 +1141,18 @@
 
         #endregion
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_Open;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_SaveAs;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_Version;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_Scenario2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_PremiumDisk;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_Scenario3;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_Scenario1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_PremiumDiskX044;
         private System.Windows.Forms.TabPage tabMonsterTab1;
         private BrightIdeasSoftware.ObjectListView olvMonsterTab1;
         private BrightIdeasSoftware.OLVColumn lvcMonsterTab1Name;

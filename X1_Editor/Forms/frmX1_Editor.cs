@@ -235,7 +235,7 @@ namespace SF3.X1_Editor.Forms
 
         private bool initialise()
         {
-            saveAsToolStripMenuItem.Enabled = true;
+            tsmiFile_SaveAs.Enabled = true;
 
             int offset = 0;
             int sub = 0;
@@ -280,7 +280,7 @@ namespace SF3.X1_Editor.Forms
                 isBattle = true;
                 //Console.WriteLine(offset.ToString("X"));
 
-                this.battleToolStripMenuItem.Text = "Battle toggle: on";
+                this.tsmiMapType_BattleToggle.Text = "Battle toggle: on";
                 _battle = "battle";
             }
             else if (offset > 0x0605e000)
@@ -288,14 +288,14 @@ namespace SF3.X1_Editor.Forms
                 isBattle = true;
                 //Console.WriteLine(offset.ToString("X"));
 
-                this.battleToolStripMenuItem.Text = "Battle toggle: on";
+                this.tsmiMapType_BattleToggle.Text = "Battle toggle: on";
                 _battle = "battle";
             }
             else
             {
                 isBattle = false;
                 //Console.WriteLine(offset.ToString("X"));
-                this.battleToolStripMenuItem.Text = "Battle toggle: off";
+                this.tsmiMapType_BattleToggle.Text = "Battle toggle: off";
                 _battle = "town";
             }
 
@@ -848,13 +848,13 @@ namespace SF3.X1_Editor.Forms
             if (isBattle == false)
             {
                 isBattle = true;
-                this.battleToolStripMenuItem.Text = "Battle toggle: on";
+                this.tsmiMapType_BattleToggle.Text = "Battle toggle: on";
                 _battle = "battle";
             }
             else
             {
                 isBattle = false;
-                this.battleToolStripMenuItem.Text = "Battle toggle: off";
+                this.tsmiMapType_BattleToggle.Text = "Battle toggle: off";
                 _battle = "town";
             }
             updateText();
@@ -865,13 +865,13 @@ namespace SF3.X1_Editor.Forms
             if (Globals.treasureDebug == true)
             {
                 Globals.treasureDebug = false;
-                this.treasureDebugToggleOffToolStripMenuItem.Text = "treasureDebug toggle: off";
+                this.tsmiHelp_TreasureDebugToggle.Text = "treasureDebug toggle: off";
                 _debug = "off";
             }
             else
             {
                 Globals.treasureDebug = true;
-                this.treasureDebugToggleOffToolStripMenuItem.Text = "treasureDebug toggle: on";
+                this.tsmiHelp_TreasureDebugToggle.Text = "treasureDebug toggle: on";
                 _debug = "on";
             }
             updateText();

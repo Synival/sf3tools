@@ -32,28 +32,28 @@ namespace SF3.X1_Editor.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX1_Editor));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.secnarioThanMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
-            this.treasureDebugToggleOffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp_SelectScenarioThenMap = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp_IfTheTablesEtc = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp_TreasureDebugToggle = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiScenario_Scenario1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiScenario_Scenario2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiScenario_Scenario3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiScenario_PremiumDisk = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
-            this.battleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiScenario_BTL99 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMap = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMap_MapSynbios = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMap_MapMedion = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMap_MapJulian = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMap_MapExtra = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMapType = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMapType_BattleToggle = new System.Windows.Forms.ToolStripMenuItem();
             this.tabHeader = new System.Windows.Forms.TabPage();
             this.olvHeader = new BrightIdeasSoftware.ObjectListView();
             this.lvcHeaderSizeList = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -295,11 +295,11 @@ namespace SF3.X1_Editor.Forms
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem,
-            this.helpToolStripMenuItem1,
-            this.toolStripMenuItem6,
-            this.toolStripMenuItem11});
+            this.tsmiFile,
+            this.tsmiHelp,
+            this.tsmiScenario,
+            this.tsmiMap,
+            this.tsmiMapType});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -307,175 +307,175 @@ namespace SF3.X1_Editor.Forms
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // fileToolStripMenuItem
+            // tsmiFile
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveAsToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiFile_Open,
+            this.tsmiFile_SaveAs});
+            this.tsmiFile.Name = "tsmiFile";
+            this.tsmiFile.Size = new System.Drawing.Size(37, 20);
+            this.tsmiFile.Text = "File";
             // 
-            // openToolStripMenuItem
+            // tsmiFile_Open
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.openToolStripMenuItem.Text = "Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.tsmiFile_Open.Name = "tsmiFile_Open";
+            this.tsmiFile_Open.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_Open.Text = "Open";
+            this.tsmiFile_Open.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
-            // saveAsToolStripMenuItem
+            // tsmiFile_SaveAs
             // 
-            this.saveAsToolStripMenuItem.Enabled = false;
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.saveAsToolStripMenuItem.Text = "Save As";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            this.tsmiFile_SaveAs.Enabled = false;
+            this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
+            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_SaveAs.Text = "Save As";
+            this.tsmiFile_SaveAs.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
-            // helpToolStripMenuItem
+            // tsmiHelp
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem,
-            this.secnarioThanMapToolStripMenuItem,
-            this.toolStripMenuItem12,
-            this.treasureDebugToggleOffToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiHelp_Version,
+            this.tsmiHelp_SelectScenarioThenMap,
+            this.tsmiHelp_IfTheTablesEtc,
+            this.tsmiHelp_TreasureDebugToggle});
+            this.tsmiHelp.Name = "tsmiHelp";
+            this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
+            this.tsmiHelp.Text = "Help";
             // 
-            // aboutToolStripMenuItem
+            // tsmiHelp_Version
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(368, 22);
-            this.aboutToolStripMenuItem.Text = "Version 0.33";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.tsmiHelp_Version.Name = "tsmiHelp_Version";
+            this.tsmiHelp_Version.Size = new System.Drawing.Size(368, 22);
+            this.tsmiHelp_Version.Text = "Version 0.33";
+            this.tsmiHelp_Version.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // secnarioThanMapToolStripMenuItem
+            // tsmiHelp_SelectScenarioThenMap
             // 
-            this.secnarioThanMapToolStripMenuItem.Name = "secnarioThanMapToolStripMenuItem";
-            this.secnarioThanMapToolStripMenuItem.Size = new System.Drawing.Size(368, 22);
-            this.secnarioThanMapToolStripMenuItem.Text = "Select Scenario then map";
+            this.tsmiHelp_SelectScenarioThenMap.Name = "tsmiHelp_SelectScenarioThenMap";
+            this.tsmiHelp_SelectScenarioThenMap.Size = new System.Drawing.Size(368, 22);
+            this.tsmiHelp_SelectScenarioThenMap.Text = "Select Scenario then map";
             // 
-            // toolStripMenuItem12
+            // tsmiHelp_IfTheTablesEtc
             // 
-            this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new System.Drawing.Size(368, 22);
-            this.toolStripMenuItem12.Text = "If the tables don\'t populate you used the wrong settings";
+            this.tsmiHelp_IfTheTablesEtc.Name = "tsmiHelp_IfTheTablesEtc";
+            this.tsmiHelp_IfTheTablesEtc.Size = new System.Drawing.Size(368, 22);
+            this.tsmiHelp_IfTheTablesEtc.Text = "If the tables don\'t populate you used the wrong settings";
             // 
-            // treasureDebugToggleOffToolStripMenuItem
+            // tsmiHelp_TreasureDebugToggle
             // 
-            this.treasureDebugToggleOffToolStripMenuItem.Name = "treasureDebugToggleOffToolStripMenuItem";
-            this.treasureDebugToggleOffToolStripMenuItem.Size = new System.Drawing.Size(368, 22);
-            this.treasureDebugToggleOffToolStripMenuItem.Text = "treasureDebug toggle: off";
-            this.treasureDebugToggleOffToolStripMenuItem.Click += new System.EventHandler(this.treasureDebugToggleOffToolStripMenuItem_Click);
+            this.tsmiHelp_TreasureDebugToggle.Name = "tsmiHelp_TreasureDebugToggle";
+            this.tsmiHelp_TreasureDebugToggle.Size = new System.Drawing.Size(368, 22);
+            this.tsmiHelp_TreasureDebugToggle.Text = "treasureDebug toggle: off";
+            this.tsmiHelp_TreasureDebugToggle.Click += new System.EventHandler(this.treasureDebugToggleOffToolStripMenuItem_Click);
             // 
-            // helpToolStripMenuItem1
+            // tsmiScenario
             // 
-            this.helpToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem4,
+            this.tsmiScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiScenario_Scenario1,
+            this.tsmiScenario_Scenario2,
+            this.tsmiScenario_Scenario3,
+            this.tsmiScenario_PremiumDisk,
             this.toolStripSeparator1,
-            this.toolStripMenuItem5});
-            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(64, 20);
-            this.helpToolStripMenuItem1.Text = "Scenario";
+            this.tsmiScenario_BTL99});
+            this.tsmiScenario.Name = "tsmiScenario";
+            this.tsmiScenario.Size = new System.Drawing.Size(64, 20);
+            this.tsmiScenario.Text = "Scenario";
             // 
-            // toolStripMenuItem1
+            // tsmiScenario_Scenario1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItem1.Text = "Scenario 1";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.tsmiScenario_Scenario1.Name = "tsmiScenario_Scenario1";
+            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_Scenario1.Text = "Scenario 1";
+            this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
-            // toolStripMenuItem2
+            // tsmiScenario_Scenario2
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItem2.Text = "Scenario 2";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            this.tsmiScenario_Scenario2.Name = "tsmiScenario_Scenario2";
+            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_Scenario2.Text = "Scenario 2";
+            this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
-            // toolStripMenuItem3
+            // tsmiScenario_Scenario3
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItem3.Text = "Scenario 3";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            this.tsmiScenario_Scenario3.Name = "tsmiScenario_Scenario3";
+            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_Scenario3.Text = "Scenario 3";
+            this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
-            // toolStripMenuItem4
+            // tsmiScenario_PremiumDisk
             // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItem4.Text = "Premium Disk";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            this.tsmiScenario_PremiumDisk.Name = "tsmiScenario_PremiumDisk";
+            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_PremiumDisk.Text = "Premium Disk";
+            this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
-            // toolStripMenuItem5
+            // tsmiScenario_BTL99
             // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItem5.Text = "BTL99";
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            this.tsmiScenario_BTL99.Name = "tsmiScenario_BTL99";
+            this.tsmiScenario_BTL99.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_BTL99.Text = "BTL99";
+            this.tsmiScenario_BTL99.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
-            // toolStripMenuItem6
+            // tsmiMap
             // 
-            this.toolStripMenuItem6.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem7,
-            this.toolStripMenuItem8,
-            this.toolStripMenuItem9,
-            this.toolStripMenuItem10});
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(43, 20);
-            this.toolStripMenuItem6.Text = "Map";
+            this.tsmiMap.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiMap_MapSynbios,
+            this.tsmiMap_MapMedion,
+            this.tsmiMap_MapJulian,
+            this.tsmiMap_MapExtra});
+            this.tsmiMap.Name = "tsmiMap";
+            this.tsmiMap.Size = new System.Drawing.Size(43, 20);
+            this.tsmiMap.Text = "Map";
             // 
-            // toolStripMenuItem7
+            // tsmiMap_MapSynbios
             // 
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(139, 22);
-            this.toolStripMenuItem7.Text = "mapSynbios";
-            this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
+            this.tsmiMap_MapSynbios.Name = "tsmiMap_MapSynbios";
+            this.tsmiMap_MapSynbios.Size = new System.Drawing.Size(180, 22);
+            this.tsmiMap_MapSynbios.Text = "mapSynbios";
+            this.tsmiMap_MapSynbios.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
-            // toolStripMenuItem8
+            // tsmiMap_MapMedion
             // 
-            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(139, 22);
-            this.toolStripMenuItem8.Text = "mapMedion";
-            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
+            this.tsmiMap_MapMedion.Name = "tsmiMap_MapMedion";
+            this.tsmiMap_MapMedion.Size = new System.Drawing.Size(180, 22);
+            this.tsmiMap_MapMedion.Text = "mapMedion";
+            this.tsmiMap_MapMedion.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
             // 
-            // toolStripMenuItem9
+            // tsmiMap_MapJulian
             // 
-            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(139, 22);
-            this.toolStripMenuItem9.Text = "mapJulian";
-            this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
+            this.tsmiMap_MapJulian.Name = "tsmiMap_MapJulian";
+            this.tsmiMap_MapJulian.Size = new System.Drawing.Size(180, 22);
+            this.tsmiMap_MapJulian.Text = "mapJulian";
+            this.tsmiMap_MapJulian.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
             // 
-            // toolStripMenuItem10
+            // tsmiMap_MapExtra
             // 
-            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(139, 22);
-            this.toolStripMenuItem10.Text = "mapExtra";
-            this.toolStripMenuItem10.Click += new System.EventHandler(this.toolStripMenuItem10_Click);
+            this.tsmiMap_MapExtra.Name = "tsmiMap_MapExtra";
+            this.tsmiMap_MapExtra.Size = new System.Drawing.Size(180, 22);
+            this.tsmiMap_MapExtra.Text = "mapExtra";
+            this.tsmiMap_MapExtra.Click += new System.EventHandler(this.toolStripMenuItem10_Click);
             // 
-            // toolStripMenuItem11
+            // tsmiMapType
             // 
-            this.toolStripMenuItem11.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.battleToolStripMenuItem});
-            this.toolStripMenuItem11.Enabled = false;
-            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(69, 20);
-            this.toolStripMenuItem11.Text = "Map type";
-            this.toolStripMenuItem11.Visible = false;
+            this.tsmiMapType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiMapType_BattleToggle});
+            this.tsmiMapType.Enabled = false;
+            this.tsmiMapType.Name = "tsmiMapType";
+            this.tsmiMapType.Size = new System.Drawing.Size(69, 20);
+            this.tsmiMapType.Text = "Map type";
+            this.tsmiMapType.Visible = false;
             // 
-            // battleToolStripMenuItem
+            // tsmiMapType_BattleToggle
             // 
-            this.battleToolStripMenuItem.Name = "battleToolStripMenuItem";
-            this.battleToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.battleToolStripMenuItem.Text = "Battle toggle: on";
-            this.battleToolStripMenuItem.Click += new System.EventHandler(this.battleToolStripMenuItem_Click);
+            this.tsmiMapType_BattleToggle.Name = "tsmiMapType_BattleToggle";
+            this.tsmiMapType_BattleToggle.Size = new System.Drawing.Size(180, 22);
+            this.tsmiMapType_BattleToggle.Text = "Battle toggle: on";
+            this.tsmiMapType_BattleToggle.Click += new System.EventHandler(this.battleToolStripMenuItem_Click);
             // 
             // tabHeader
             // 
@@ -2644,16 +2644,16 @@ namespace SF3.X1_Editor.Forms
 
         #endregion
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_Open;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_SaveAs;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_Version;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_Scenario2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_PremiumDisk;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_Scenario3;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_Scenario1;
         private System.Windows.Forms.TabPage tabHeader;
         private BrightIdeasSoftware.ObjectListView olvHeader;
         private BrightIdeasSoftware.OLVColumn lvcHeaderSizeList;
@@ -2730,14 +2730,14 @@ namespace SF3.X1_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcSlotTab1SpawnCondition;
         private BrightIdeasSoftware.OLVColumn lvcSlotTab1Plus0x0E;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_BTL99;
         private BrightIdeasSoftware.OLVColumn lvcHeaderHeaderPlus0x08;
         private BrightIdeasSoftware.OLVColumn lvcHeaderHeaderPlus0x09;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem10;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMap;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMap_MapSynbios;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMap_MapMedion;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMap_MapJulian;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMap_MapExtra;
         private BrightIdeasSoftware.OLVColumn lvcHeaderMap;
         private System.Windows.Forms.TabPage tabAITargetPosition;
         private BrightIdeasSoftware.ObjectListView olvAITargetPosition;
@@ -2767,7 +2767,7 @@ namespace SF3.X1_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcBattlePointersID;
         private BrightIdeasSoftware.OLVColumn lvcBattlePointersAddress;
         private BrightIdeasSoftware.OLVColumn lvcBattlePointersPointer;
-        private System.Windows.Forms.ToolStripMenuItem secnarioThanMapToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_SelectScenarioThenMap;
         private System.Windows.Forms.TabPage tabInteractables;
         private BrightIdeasSoftware.ObjectListView olvInteractables;
         private BrightIdeasSoftware.OLVColumn lvcInteractablesName;
@@ -2779,9 +2779,9 @@ namespace SF3.X1_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcInteractablesUnknown1;
         private BrightIdeasSoftware.OLVColumn lvcInteractablesEventTypeCode;
         private BrightIdeasSoftware.OLVColumn lvcInteractablesItemTextCode;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem11;
-        private System.Windows.Forms.ToolStripMenuItem battleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem treasureDebugToggleOffToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMapType;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMapType_BattleToggle;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_TreasureDebugToggle;
         private System.Windows.Forms.TabPage tabScriptedMovement;
         private BrightIdeasSoftware.ObjectListView olvScriptedMovement;
         private BrightIdeasSoftware.OLVColumn lvcScriptedMovementName;
@@ -2797,7 +2797,7 @@ namespace SF3.X1_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcScriptedMovementCoordX4;
         private BrightIdeasSoftware.OLVColumn lvcScriptedMovementCoordZ4;
         private BrightIdeasSoftware.OLVColumn lvcScriptedMovementEnd;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem12;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_IfTheTablesEtc;
         private System.Windows.Forms.TabPage tabWarpTable;
         private BrightIdeasSoftware.ObjectListView olvWarpTable;
         private BrightIdeasSoftware.OLVColumn lvcWarpTableName;

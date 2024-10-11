@@ -25,11 +25,11 @@ namespace SF3.IconPointerEditor.Forms
             set
             {
                 _scenario = value;
-                toolStripMenuItem1.Checked = (_scenario == ScenarioType.Scenario1);
-                toolStripMenuItem2.Checked = (_scenario == ScenarioType.Scenario2);
-                toolStripMenuItem3.Checked = (_scenario == ScenarioType.Scenario3);
-                toolStripMenuItem4.Checked = (_scenario == ScenarioType.PremiumDisk);
-                toolStripMenuItem5.Checked = (_scenario == ScenarioType.Other);
+                tsmiScenario_Scenario1.Checked = (_scenario == ScenarioType.Scenario1);
+                tsmiScenario_Scenario2.Checked = (_scenario == ScenarioType.Scenario2);
+                tsmiScenario_Scenario3.Checked = (_scenario == ScenarioType.Scenario3);
+                tsmiScenario_PremiumDisk.Checked = (_scenario == ScenarioType.PremiumDisk);
+                tsmiHelp_OpenInfo.Checked = (_scenario == ScenarioType.Other);
             }
         }
 
@@ -46,7 +46,7 @@ namespace SF3.IconPointerEditor.Forms
 
         private bool initialise()
         {
-            saveAsToolStripMenuItem.Enabled = true;
+            tsmiFile_SaveAs.Enabled = true;
 
             _itemList = new SpellIconList(_fileEditor);
             if (!_itemList.Load())
