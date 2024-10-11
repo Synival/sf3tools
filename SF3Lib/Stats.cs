@@ -88,7 +88,7 @@ namespace SF3
                     new StatGrowthGroup(2, false, new ValueRange<int>(10, 12)),
                     new StatGrowthGroup(3, false, new ValueRange<int>(12, 14)),
                     new StatGrowthGroup(4, false, new ValueRange<int>(14, 17)),
-                    new StatGrowthGroup(5, false, new ValueRange<int>(17, 20))
+                    new StatGrowthGroup(5, false, new ValueRange<int>(17, 30))
                 }
             },
             {
