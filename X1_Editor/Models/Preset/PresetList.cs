@@ -8,7 +8,7 @@ namespace SF3.X1_Editor.Models.Presets
 {
     public class PresetList : IModelArray<Preset>
     {
-        public PresetList(ISF3FileEditor fileEditor)
+        public PresetList(IX1FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -17,7 +17,7 @@ namespace SF3.X1_Editor.Models.Presets
 
         private Preset[] presetssorted;
         private Preset[] presets;
-        private ISF3FileEditor _fileEditor;
+        private IX1FileEditor _fileEditor;
 
         private string r = "";
 

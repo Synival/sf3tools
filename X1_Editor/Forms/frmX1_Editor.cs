@@ -31,6 +31,7 @@ namespace SF3.X1_Editor.Forms
         private bool isBattle = true;
 
         private ScenarioType _scenario = ScenarioType.Scenario1;
+        private int _map = 0x00;
 
         private ItemList _itemList;
         private PresetList _presetList;
@@ -45,7 +46,7 @@ namespace SF3.X1_Editor.Forms
         private EnterList _enterList;
         private ArrowList _arrowList;
 
-        private ISF3FileEditor _fileEditor;
+        private IX1FileEditor _fileEditor;
 
         public frmX1_Editor()
         {
@@ -505,7 +506,7 @@ namespace SF3.X1_Editor.Forms
             openfile.Filter = "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new SF3FileEditor(_scenario);
+                _fileEditor = new X1FileEditor(_scenario, _map);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
@@ -752,7 +753,6 @@ namespace SF3.X1_Editor.Forms
 
         public static class Globals
         {
-            public static int map = 0;
             public static bool treasureDebug = false;
             public static string scn = "1";
             public static string maps = "Synbios";
@@ -766,7 +766,7 @@ namespace SF3.X1_Editor.Forms
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario1;
-            Globals.map = 0x00; //synbios lead by default
+            _map = 0x00; //synbios lead by default
             Globals.scn = "1";
             Globals.maps = "Synbios";
             updateText();
@@ -775,7 +775,7 @@ namespace SF3.X1_Editor.Forms
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario2;
-            Globals.map = 0x04; //medion lead by default
+            _map = 0x04; //medion lead by default
             Globals.scn = "2";
             Globals.maps = "Medion";
             updateText();
@@ -784,7 +784,7 @@ namespace SF3.X1_Editor.Forms
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario3;
-            Globals.map = 0x08; //julian lead by default
+            _map = 0x08; //julian lead by default
             Globals.scn = "3";
             Globals.maps = "Julian";
             updateText();
@@ -793,7 +793,7 @@ namespace SF3.X1_Editor.Forms
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.PremiumDisk;
-            Globals.map = 0x00; //synbios lead by default
+            _map = 0x00; //synbios lead by default
             Globals.scn = "PD";
             Globals.maps = "Synbios";
 
@@ -810,28 +810,28 @@ namespace SF3.X1_Editor.Forms
 
         private void toolStripMenuItem7_Click(object sender, EventArgs e)
         {
-            Globals.map = 0x00; //map with synbios as lead
+            _map = 0x00; //map with synbios as lead
             Globals.maps = "Synbios";
             updateText();
         }
 
         private void toolStripMenuItem8_Click(object sender, EventArgs e)
         {
-            Globals.map = 0x04; //map with medion as lead
+            _map = 0x04; //map with medion as lead
             Globals.maps = "Medion";
             updateText();
         }
 
         private void toolStripMenuItem9_Click(object sender, EventArgs e)
         {
-            Globals.map = 0x08; //map with julian as lead
+            _map = 0x08; //map with julian as lead
             Globals.maps = "Julian";
             updateText();
         }
 
         private void toolStripMenuItem10_Click(object sender, EventArgs e)
         {
-            Globals.map = 0x0C; //map with no lead or a extra as lead. also for ruins
+            _map = 0x0C; //map with no lead or a extra as lead. also for ruins
             Globals.maps = "Extra";
             updateText();
         }

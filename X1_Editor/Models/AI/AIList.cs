@@ -8,7 +8,7 @@ namespace SF3.X1_Editor.Models.AI
 {
     public class AIList : IModelArray<AI>
     {
-        public AIList(ISF3FileEditor fileEditor)
+        public AIList(IX1FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -17,7 +17,7 @@ namespace SF3.X1_Editor.Models.AI
 
         private AI[] spellssorted;
         private AI[] spells;
-        private ISF3FileEditor _fileEditor;
+        private IX1FileEditor _fileEditor;
 
         private string r = "";
 

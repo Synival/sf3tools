@@ -8,7 +8,7 @@ namespace SF3.X1_Editor.Models.CustomMovement
 {
     public class CustomMovementList : IModelArray<CustomMovement>
     {
-        public CustomMovementList(ISF3FileEditor fileEditor)
+        public CustomMovementList(IX1FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -17,7 +17,7 @@ namespace SF3.X1_Editor.Models.CustomMovement
 
         private CustomMovement[] spellssorted;
         private CustomMovement[] spells;
-        private ISF3FileEditor _fileEditor;
+        private IX1FileEditor _fileEditor;
 
         private string r = "";
 

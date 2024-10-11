@@ -8,7 +8,7 @@ namespace SF3.X1_Editor.Models.Items
 {
     public class ItemList : IModelArray<Item>
     {
-        public ItemList(ISF3FileEditor fileEditor)
+        public ItemList(IX1FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -17,7 +17,7 @@ namespace SF3.X1_Editor.Models.Items
 
         private Item[] itemssorted;
         private Item[] items;
-        private ISF3FileEditor _fileEditor;
+        private IX1FileEditor _fileEditor;
 
         private string r = "";
 
