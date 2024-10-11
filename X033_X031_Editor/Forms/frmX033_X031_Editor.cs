@@ -523,9 +523,10 @@ namespace SF3.X033_X031_Editor.Forms
             Scenario = ScenarioType.PremiumDisk;
         }
 
-        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        private void tsmiHelp_DebugCurve_Click(object sender, EventArgs e)
         {
             Debugs.debugs = !Debugs.debugs;
+            tsmiHelp_DebugCurve.Checked = Debugs.debugs;
         }
 
         private void tabMain_Click(object sender, EventArgs e)

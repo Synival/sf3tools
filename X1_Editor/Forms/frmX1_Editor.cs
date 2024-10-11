@@ -28,9 +28,8 @@ namespace SF3.X1_Editor.Forms
     {
         //Used to append to state names to stop program loading states from older versions
         private string Version = "033";
-        private bool isBattle = true;
 
-        private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
+        private ScenarioType _scenario = (ScenarioType)(-1); // uninitialized value
 
         private ScenarioType Scenario
         {
@@ -43,13 +42,73 @@ namespace SF3.X1_Editor.Forms
                 tsmiScenario_Scenario3.Checked = (_scenario == ScenarioType.Scenario3);
                 tsmiScenario_PremiumDisk.Checked = (_scenario == ScenarioType.PremiumDisk);
                 tsmiScenario_BTL99.Checked = (_scenario == ScenarioType.Other);
+
+                switch (_scenario)
+                {
+                    case ScenarioType.Scenario1:   _scn = "1";     break;
+                    case ScenarioType.Scenario2:   _scn = "2";     break;
+                    case ScenarioType.Scenario3:   _scn = "3";     break;
+                    case ScenarioType.PremiumDisk: _scn = "PD";    break;
+                    case ScenarioType.Other:       _scn = "BTL99"; break;
+                }
+
+                updateText();
             }
         }
 
         private int _map = 0x00;
+
+        private int Map
+        {
+            get => _map;
+            set
+            {
+                _map = value;
+                tsmiMap_MapSynbios.Checked = (_map == 0x00);
+                tsmiMap_MapMedion.Checked = (_map == 0x04);
+                tsmiMap_MapJulian.Checked = (_map == 0x08);
+                tsmiMap_MapExtra.Checked = (_map == 0x0C);
+
+                switch (_map)
+                {
+                    case 0x00: _maps = "Synbios"; break;
+                    case 0x04: _maps = "Medion";  break;
+                    case 0x08: _maps = "Julian";  break;
+                    case 0x0C: _maps = "Extra";   break;
+                }
+
+                updateText();
+            }
+        }
+
+        private bool _isBattle = true;
+
+        private bool IsBattle
+        {
+            get => _isBattle;
+            set
+            {
+                _isBattle = value;
+                tsmiMapType_BattleToggle.Checked = _isBattle;
+
+                if (_isBattle)
+                {
+                    this.tsmiMapType_BattleToggle.Text = "Battle toggle: on";
+                    _mapType = "battle";
+                }
+                else
+                {
+                    this.tsmiMapType_BattleToggle.Text = "Battle toggle: off";
+                    _mapType = "town";
+                }
+
+                updateText();
+            }
+        }
+
         private string _scn = "1";
         private string _maps = "Synbios";
-        private string _battle = "none";
+        private string _mapType = "none";
         private string _fileName = "None";
         private string _debug = "off";
 
@@ -72,6 +131,7 @@ namespace SF3.X1_Editor.Forms
         {
             InitializeComponent();
             Scenario = ScenarioType.Scenario1;
+            Map = 0x00;
 
             /*try {
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
@@ -293,26 +353,15 @@ namespace SF3.X1_Editor.Forms
             */
             if (Scenario == ScenarioType.Scenario1 && offset > 0x0605F000)
             {
-                isBattle = true;
-                //Console.WriteLine(offset.ToString("X"));
-
-                this.tsmiMapType_BattleToggle.Text = "Battle toggle: on";
-                _battle = "battle";
+                IsBattle = true;
             }
             else if (offset > 0x0605e000)
             {
-                isBattle = true;
-                //Console.WriteLine(offset.ToString("X"));
-
-                this.tsmiMapType_BattleToggle.Text = "Battle toggle: on";
-                _battle = "battle";
+                IsBattle = true;
             }
             else
             {
-                isBattle = false;
-                //Console.WriteLine(offset.ToString("X"));
-                this.tsmiMapType_BattleToggle.Text = "Battle toggle: off";
-                _battle = "town";
+                IsBattle = false;
             }
 
             updateText();
@@ -361,7 +410,7 @@ namespace SF3.X1_Editor.Forms
                 return false;
             }*/
             _itemList = new ItemList(_fileEditor);
-            if (isBattle && !_itemList.Load())
+            if (IsBattle && !_itemList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
@@ -373,28 +422,28 @@ namespace SF3.X1_Editor.Forms
             }*/
 
             _presetList = new PresetList(_fileEditor);
-            if (isBattle && !_presetList.Load())
+            if (IsBattle && !_presetList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
                 return false;
             }
 
             _aiList = new AIList(_fileEditor);
-            if (isBattle && !_aiList.Load())
+            if (IsBattle && !_aiList.Load())
             {
                 MessageBox.Show("Could not load Resources/AI.xml.");
                 return false;
             }
 
             _unknownAIList = new UnknownAIList(_fileEditor);
-            if (isBattle && !_unknownAIList.Load())
+            if (IsBattle && !_unknownAIList.Load())
             {
                 MessageBox.Show("Could not load Resources/UnknownAI.xml.");
                 return false;
             }
 
             _battlePointersList = new BattlePointersList(_fileEditor);
-            if (isBattle && !_battlePointersList.Load())
+            if (IsBattle && !_battlePointersList.Load())
             {
                 MessageBox.Show("Could not load Resources/BattlePointersList.xml.");
                 return false;
@@ -407,7 +456,7 @@ namespace SF3.X1_Editor.Forms
                 return false;
             }
             _customMovementList = new CustomMovementList(_fileEditor);
-            if (isBattle && !_customMovementList.Load())
+            if (IsBattle && !_customMovementList.Load())
             {
                 MessageBox.Show("Could not load Resources/X1AI.xml.");
                 return false;
@@ -419,27 +468,27 @@ namespace SF3.X1_Editor.Forms
                 return false;
             }
             _tileList = new TileList(_fileEditor);
-            if (isBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_tileList.Load())
+            if (IsBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_tileList.Load())
             {
                 MessageBox.Show("Could not load Resources/MovementTypes.xml.");
                 return false;
             }
 
             _npcList = new NpcList(_fileEditor);
-            if (!isBattle && !_npcList.Load())
+            if (!IsBattle && !_npcList.Load())
             {
                 MessageBox.Show("Could not load Resources/NpcList.xml.");
                 return false;
             }
 
             _enterList = new EnterList(_fileEditor);
-            if (!isBattle && !_enterList.Load())
+            if (!IsBattle && !_enterList.Load())
             {
                 MessageBox.Show("Could not load Resources/EnterList.xml.");
                 return false;
             }
             _arrowList = new ArrowList(_fileEditor);
-            if (!isBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_arrowList.Load())
+            if (!IsBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_arrowList.Load())
             {
                 MessageBox.Show("Could not load Resources/ArrowList.xml.");
                 return false;
@@ -476,7 +525,7 @@ namespace SF3.X1_Editor.Forms
 
             //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
-            if (isBattle)
+            if (IsBattle)
             {
                 olvHeader.AddObjects(_presetList.Models);
                 olvSlotTab1.AddObjects(_itemList.Models);
@@ -491,13 +540,13 @@ namespace SF3.X1_Editor.Forms
 
             olvInteractables.AddObjects(_treasureList.Models);
 
-            if (!isBattle)
+            if (!IsBattle)
             {
                 olvTownNpcs.AddObjects(_npcList.Models);
                 olvNonBattleEnter.AddObjects(_enterList.Models);
             }
 
-            if (!isBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
+            if (!IsBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
             {
                 olvArrows.AddObjects(_arrowList.Models);
             }
@@ -506,7 +555,7 @@ namespace SF3.X1_Editor.Forms
             {
                 olvWarpTable.AddObjects(_warpList.Models);
             }
-            if (isBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
+            if (IsBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
             {
                 olvTileData.AddObjects(_tileList.Models);
             }
@@ -527,7 +576,7 @@ namespace SF3.X1_Editor.Forms
             openfile.Filter = "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new X1FileEditor(Scenario, _map);
+                _fileEditor = new X1FileEditor(Scenario, Map);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
@@ -776,116 +825,64 @@ namespace SF3.X1_Editor.Forms
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario1;
-            _map = 0x00; //synbios lead by default
-            _scn = "1";
-            _maps = "Synbios";
-            updateText();
+            Map = 0x00; //synbios lead by default
         }
 
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario2;
-            _map = 0x04; //medion lead by default
-            _scn = "2";
-            _maps = "Medion";
-            updateText();
+            Map = 0x04; //medion lead by default
         }
 
         private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario3;
-            _map = 0x08; //julian lead by default
-            _scn = "3";
-            _maps = "Julian";
-            updateText();
+            Map = 0x08; //julian lead by default
         }
 
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.PremiumDisk;
-            _map = 0x00; //synbios lead by default
-            _scn = "PD";
-            _maps = "Synbios";
-
-            updateText();
+            Map = 0x00; //synbios lead by default
         }
+
         private void tsmiScenario_BTL99_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Other;
-            _scn = "BTL99";
-            _maps = "Synbios";
-
-            updateText();
+            Map = 0x00; //synbios lead by default
         }
 
-        private void tsmiMap_MapSynbios_Click(object sender, EventArgs e)
-        {
-            _map = 0x00; //map with synbios as lead
-            _maps = "Synbios";
-            updateText();
-        }
+        private void tsmiMap_MapSynbios_Click(object sender, EventArgs e) =>  Map = 0x00; //map with synbios as lead
+        private void tsmiMap_MapMedion_Click(object sender, EventArgs e) => Map = 0x04; //map with medion as lead
+        private void tsmiMap_MapJulian_Click(object sender, EventArgs e) => Map = 0x08; //map with julian as lead
+        private void tsmiMap_MapExtra_Click(object sender, EventArgs e) => Map = 0x0C; //map with no lead or a extra as lead. also for ruins
 
-        private void tsmiMap_MapMedion_Click(object sender, EventArgs e)
-        {
-            _map = 0x04; //map with medion as lead
-            _maps = "Medion";
-            updateText();
-        }
-
-        private void tsmiMap_MapJulian_Click(object sender, EventArgs e)
-        {
-            _map = 0x08; //map with julian as lead
-            _maps = "Julian";
-            updateText();
-        }
-
-        private void tsmiMap_MapExtra_Click(object sender, EventArgs e)
-        {
-            _map = 0x0C; //map with no lead or a extra as lead. also for ruins
-            _maps = "Extra";
-            updateText();
-        }
-
-        private void tsmiMapType_BattleToggle_Click(object sender, EventArgs e)
-        {
-            //battle
-            if (isBattle == false)
-            {
-                isBattle = true;
-                this.tsmiMapType_BattleToggle.Text = "Battle toggle: on";
-                _battle = "battle";
-            }
-            else
-            {
-                isBattle = false;
-                this.tsmiMapType_BattleToggle.Text = "Battle toggle: off";
-                _battle = "town";
-            }
-            updateText();
-        }
+        private void tsmiMapType_BattleToggle_Click(object sender, EventArgs e) => IsBattle = !IsBattle;
 
         private void tsmiHelp_TreasureDebugToggle_Click(object sender, EventArgs e)
         {
-            if (Globals.treasureDebug == true)
+            Globals.treasureDebug = !Globals.treasureDebug;
+            tsmiHelp_TreasureDebugToggle.Checked = Globals.treasureDebug;
+
+            if (Globals.treasureDebug)
             {
-                Globals.treasureDebug = false;
-                this.tsmiHelp_TreasureDebugToggle.Text = "treasureDebug toggle: off";
-                _debug = "off";
-            }
-            else
-            {
-                Globals.treasureDebug = true;
                 this.tsmiHelp_TreasureDebugToggle.Text = "treasureDebug toggle: on";
                 _debug = "on";
             }
+            else
+            {
+                this.tsmiHelp_TreasureDebugToggle.Text = "treasureDebug toggle: off";
+                _debug = "off";
+            }
+
             updateText();
         }
 
         private void updateText()
         {
-            //this.toolStripMenuItem12.Text = "Current Loading info. Map: " + _maps + " Scenario " + _scn + " MapType: " + _battle + " debug: " + _debug;
-            //this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + _fileName + "|          Current Loading info: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _battle + " | debug: " + _debug;
-            this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + _fileName + "|          Current open settings: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _battle + " | debug: " + _debug;
+            //this.toolStripMenuItem12.Text = "Current Loading info. Map: " + _maps + " Scenario " + _scn + " MapType: " + _mapType + " debug: " + _debug;
+            //this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + _fileName + "|          Current Loading info: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _mapType + " | debug: " + _debug;
+            this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + _fileName + "|          Current open settings: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _mapType + " | debug: " + _debug;
         }
     }
 }

@@ -17,7 +17,6 @@ namespace SF3.IconPointerEditor.Forms
         private string Version = "007";
 
         private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
-        public bool _x026 = false;
 
         private ScenarioType Scenario
         {
@@ -32,6 +31,19 @@ namespace SF3.IconPointerEditor.Forms
             }
         }
 
+        public bool _x026 = false;
+
+        private bool X026
+        {
+            get => _x026;
+            set
+            {
+                _x026 = value;
+                tsmiHelp_X026Toggle.Checked = _x026;
+                updateText();
+            }
+        }
+
         private SpellIconList _itemList;
         private ItemIconList _presetList;
 
@@ -41,6 +53,7 @@ namespace SF3.IconPointerEditor.Forms
         {
             InitializeComponent();
             Scenario = ScenarioType.Scenario1;
+            X026 = false;
         }
 
         private bool initialise()
@@ -76,7 +89,7 @@ namespace SF3.IconPointerEditor.Forms
             openfile.Filter = "SF3 data (X011*.bin)|X011*.bin|SF3 data (X021*.bin)|X021*.bin|SF3 data (X026*.bin)|X026*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new IconPointerFileEditor(Scenario, _x026);
+                _fileEditor = new IconPointerFileEditor(Scenario, X026);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
@@ -196,25 +209,13 @@ namespace SF3.IconPointerEditor.Forms
             Scenario = ScenarioType.PremiumDisk;
         }
 
-        private void tsmiHelp_X026Toggle_Click(object sender, EventArgs e)
-        {
-            if (_x026 == true)
-            {
-                _x026 = false;
-                updateText();
-            }
-            else
-            {
-                _x026 = true;
-                updateText();
-            }
-        }
+        private void tsmiHelp_X026Toggle_Click(object sender, EventArgs e) => X026 = !X026;
 
         private void updateText()
         {
             //this.toolStripMenuItem12.Text = "Current Loading info. Map: " + Globals.maps + " Scenario " + Globals.scn + " MapType: " + Globals.battle + " debug: " + Globals.debug;
             //this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + Globals.fileName + "|          Current Loading info: Scenario: " + Globals.scn + " | Map: " + Globals.maps + " | MapType: " + Globals.battle + " | debug: " + Globals.debug;
-            this.Text = "Sf3 Icon pointer Editor" + "          " + "X026 mode: " + (_x026 ? "On" : "Off");
+            this.Text = "Sf3 Icon pointer Editor" + "          " + "X026 mode: " + (X026 ? "On" : "Off");
         }
     }
 }

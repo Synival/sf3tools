@@ -352,7 +352,7 @@
             this.tsmiHelp_DebugCurve.Name = "tsmiHelp_DebugCurve";
             this.tsmiHelp_DebugCurve.Size = new System.Drawing.Size(297, 22);
             this.tsmiHelp_DebugCurve.Text = "Debug Curve";
-            this.tsmiHelp_DebugCurve.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            this.tsmiHelp_DebugCurve.Click += new System.EventHandler(this.tsmiHelp_DebugCurve_Click);
             // 
             // tsmiScenario
             // 
