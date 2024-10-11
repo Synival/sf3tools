@@ -32,6 +32,11 @@ namespace SF3.X1_Editor.Forms
 
         private ScenarioType _scenario = ScenarioType.Scenario1;
         private int _map = 0x00;
+        private string _scn = "1";
+        private string _maps = "Synbios";
+        private string _battle = "none";
+        private string _fileName = "None";
+        private string _debug = "off";
 
         private ItemList _itemList;
         private PresetList _presetList;
@@ -276,7 +281,7 @@ namespace SF3.X1_Editor.Forms
                 //Console.WriteLine(offset.ToString("X"));
 
                 this.battleToolStripMenuItem.Text = "Battle toggle: on";
-                Globals.battle = "battle";
+                _battle = "battle";
             }
             else if (offset > 0x0605e000)
             {
@@ -284,14 +289,14 @@ namespace SF3.X1_Editor.Forms
                 //Console.WriteLine(offset.ToString("X"));
 
                 this.battleToolStripMenuItem.Text = "Battle toggle: on";
-                Globals.battle = "battle";
+                _battle = "battle";
             }
             else
             {
                 isBattle = false;
                 //Console.WriteLine(offset.ToString("X"));
                 this.battleToolStripMenuItem.Text = "Battle toggle: off";
-                Globals.battle = "town";
+                _battle = "town";
             }
 
             updateText();
@@ -531,7 +536,7 @@ namespace SF3.X1_Editor.Forms
                     //string lastWord = words[words.Length - 1];
                     words = openfile.FileName.Split('\\');
                     lastWord = words[words.Length - 1];
-                    Globals.fileName = lastWord;
+                    _fileName = lastWord;
                     updateText();
                     //Console.WriteLine(lastWord);
                 }
@@ -754,21 +759,14 @@ namespace SF3.X1_Editor.Forms
         public static class Globals
         {
             public static bool treasureDebug = false;
-            public static string scn = "1";
-            public static string maps = "Synbios";
-            public static string battle = "none";
-            public static string debug = "off";
-            public static string fileName = "None";
-
-            //public static int customOffset = 0x00000000;
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario1;
             _map = 0x00; //synbios lead by default
-            Globals.scn = "1";
-            Globals.maps = "Synbios";
+            _scn = "1";
+            _maps = "Synbios";
             updateText();
         }
 
@@ -776,8 +774,8 @@ namespace SF3.X1_Editor.Forms
         {
             _scenario = ScenarioType.Scenario2;
             _map = 0x04; //medion lead by default
-            Globals.scn = "2";
-            Globals.maps = "Medion";
+            _scn = "2";
+            _maps = "Medion";
             updateText();
         }
 
@@ -785,8 +783,8 @@ namespace SF3.X1_Editor.Forms
         {
             _scenario = ScenarioType.Scenario3;
             _map = 0x08; //julian lead by default
-            Globals.scn = "3";
-            Globals.maps = "Julian";
+            _scn = "3";
+            _maps = "Julian";
             updateText();
         }
 
@@ -794,16 +792,16 @@ namespace SF3.X1_Editor.Forms
         {
             _scenario = ScenarioType.PremiumDisk;
             _map = 0x00; //synbios lead by default
-            Globals.scn = "PD";
-            Globals.maps = "Synbios";
+            _scn = "PD";
+            _maps = "Synbios";
 
             updateText();
         }
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Other;
-            Globals.scn = "BTL99";
-            Globals.maps = "Synbios";
+            _scn = "BTL99";
+            _maps = "Synbios";
 
             updateText();
         }
@@ -811,28 +809,28 @@ namespace SF3.X1_Editor.Forms
         private void toolStripMenuItem7_Click(object sender, EventArgs e)
         {
             _map = 0x00; //map with synbios as lead
-            Globals.maps = "Synbios";
+            _maps = "Synbios";
             updateText();
         }
 
         private void toolStripMenuItem8_Click(object sender, EventArgs e)
         {
             _map = 0x04; //map with medion as lead
-            Globals.maps = "Medion";
+            _maps = "Medion";
             updateText();
         }
 
         private void toolStripMenuItem9_Click(object sender, EventArgs e)
         {
             _map = 0x08; //map with julian as lead
-            Globals.maps = "Julian";
+            _maps = "Julian";
             updateText();
         }
 
         private void toolStripMenuItem10_Click(object sender, EventArgs e)
         {
             _map = 0x0C; //map with no lead or a extra as lead. also for ruins
-            Globals.maps = "Extra";
+            _maps = "Extra";
             updateText();
         }
 
@@ -851,13 +849,13 @@ namespace SF3.X1_Editor.Forms
             {
                 isBattle = true;
                 this.battleToolStripMenuItem.Text = "Battle toggle: on";
-                Globals.battle = "battle";
+                _battle = "battle";
             }
             else
             {
                 isBattle = false;
                 this.battleToolStripMenuItem.Text = "Battle toggle: off";
-                Globals.battle = "town";
+                _battle = "town";
             }
             updateText();
         }
@@ -868,22 +866,22 @@ namespace SF3.X1_Editor.Forms
             {
                 Globals.treasureDebug = false;
                 this.treasureDebugToggleOffToolStripMenuItem.Text = "treasureDebug toggle: off";
-                Globals.debug = "off";
+                _debug = "off";
             }
             else
             {
                 Globals.treasureDebug = true;
                 this.treasureDebugToggleOffToolStripMenuItem.Text = "treasureDebug toggle: on";
-                Globals.debug = "on";
+                _debug = "on";
             }
             updateText();
         }
 
         private void updateText()
         {
-            //this.toolStripMenuItem12.Text = "Current Loading info. Map: " + Globals.maps + " Scenario " + Globals.scn + " MapType: " + Globals.battle + " debug: " + Globals.debug;
-            //this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + Globals.fileName + "|          Current Loading info: Scenario: " + Globals.scn + " | Map: " + Globals.maps + " | MapType: " + Globals.battle + " | debug: " + Globals.debug;
-            this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + Globals.fileName + "|          Current open settings: Scenario: " + Globals.scn + " | Map: " + Globals.maps + " | MapType: " + Globals.battle + " | debug: " + Globals.debug;
+            //this.toolStripMenuItem12.Text = "Current Loading info. Map: " + _maps + " Scenario " + _scn + " MapType: " + _battle + " debug: " + _debug;
+            //this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + _fileName + "|          Current Loading info: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _battle + " | debug: " + _debug;
+            this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + _fileName + "|          Current open settings: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _battle + " | debug: " + _debug;
         }
     }
 }
