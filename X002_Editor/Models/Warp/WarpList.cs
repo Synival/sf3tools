@@ -29,7 +29,7 @@ namespace SF3.X002_Editor.Models.Warps
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public bool Load()
         {
-            r = "Resources/X1Warp.xml";
+            r = "Resources/X002Warp.xml";
 
             itemssorted = new Warp[0];
             items = new Warp[1000]; //max size of itemList

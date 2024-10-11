@@ -292,7 +292,7 @@ namespace SF3.X002_Editor.Forms
             _warpList = new WarpList(_fileEditor);
             if (Scenario == ScenarioType.Scenario1 && !_warpList.Load())
             {
-                MessageBox.Show("Could not load Resources/WarpList.xml.");
+                MessageBox.Show("Could not load Resources/X002Warp.xml.");
                 return false;
             }
             _musicOverrideList = new MusicOverrideList(_fileEditor);

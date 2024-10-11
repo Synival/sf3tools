@@ -144,7 +144,7 @@
     <Content Include="Resources\WeaponRankList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\X1Warp.xml">
+    <Content Include="Resources\X002Warp.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="RPD\itemListPD.xml">
