@@ -70,94 +70,94 @@
             this.olvSpellUseLv = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMonsterTab1 = new System.Windows.Forms.TabPage();
             this.olvMonsterTab1 = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn69 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn11 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn12 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn13 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn14 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn16 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn17 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn18 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn19 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn21 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn22 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1Name = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1ID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1SpriteID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1Address = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1MaxHP = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1MaxMP = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1Level = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1Attack = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1Defense = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1Agility = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1Mov = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1Luck = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1Turns = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1HPRegen = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1MPRegen = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1EarthRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1FireRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1IceRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1SparkRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1WindRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1LightRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1DarkRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab1UnusedRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabMonsterTab2 = new System.Windows.Forms.TabPage();
             this.olvMonsterTab2 = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn23 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn24 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn26 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn27 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn28 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn29 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn31 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn32 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn33 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn34 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn35 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn36 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn37 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn38 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn39 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2Name = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2ID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2Spell1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2Spell1Level = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2Spell2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2Spell2Level = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2Spell3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2Spell3Level = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2Spell4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2Spell4Level = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2Weapon = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2EquippedAccessory = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2ItemSlot1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2ItemSlot2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2ItemSlot3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab2ItemSlot4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMonsterTab3 = new System.Windows.Forms.TabPage();
             this.olvMonsterTab3 = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn25 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn40 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn42 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn43 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn44 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn45 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn46 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn47 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn48 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn49 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn50 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn51 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn52 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn53 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn54 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn55 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn56 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn57 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Name = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3ID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Special1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Special2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Special3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Special4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Special5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Special6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Special7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Special8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Special9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Special10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Unknown1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Unknown2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Unknown3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Unknown4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Unknown5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3Unknown6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMonsterTab4 = new System.Windows.Forms.TabPage();
             this.olvMonsterTab4 = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn41 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn58 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn60 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn61 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn62 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn63 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn64 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn65 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn66 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn67 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab4Name = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab4ID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab4Gold = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab4Drop = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab4Unknown7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab4DroprateType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab4SlowPlus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab4SupportPlus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab4MagicType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab4MovementType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMonsterTab5 = new System.Windows.Forms.TabPage();
             this.olvMonsterTab5 = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn59 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn68 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn70 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn71 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn72 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn73 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn74 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn75 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn76 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn77 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn78 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn79 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab5Name = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab5ID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab5CanHeal = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab5Unknown12 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab5SpellChance1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab5SpellChance2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab5SpellChance3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab5SpellChance4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab5SpellChance5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab5SpellChance6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab5Unknown19 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab5Unknown20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.menuStrip1.SuspendLayout();
             this.tabMonsterTab1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab1)).BeginInit();
@@ -484,58 +484,58 @@
             // 
             // olvMonsterTab1
             // 
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn1);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn7);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn69);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn2);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn3);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn4);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn5);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn6);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn8);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn9);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn10);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn11);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn12);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn13);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn14);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn15);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn16);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn17);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn18);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn19);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn20);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn21);
-            this.olvMonsterTab1.AllColumns.Add(this.olvColumn22);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1Name);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1ID);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1SpriteID);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1Address);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1MaxHP);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1MaxMP);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1Level);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1Attack);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1Defense);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1Agility);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1Mov);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1Luck);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1Turns);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1HPRegen);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1MPRegen);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1EarthRes);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1FireRes);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1IceRes);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1SparkRes);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1WindRes);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1LightRes);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1DarkRes);
+            this.olvMonsterTab1.AllColumns.Add(this.lvcMonsterTab1UnusedRes);
             this.olvMonsterTab1.AllowColumnReorder = true;
             this.olvMonsterTab1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvMonsterTab1.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvMonsterTab1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn1,
-            this.olvColumn7,
-            this.olvColumn69,
-            this.olvColumn2,
-            this.olvColumn3,
-            this.olvColumn4,
-            this.olvColumn5,
-            this.olvColumn6,
-            this.olvColumn8,
-            this.olvColumn9,
-            this.olvColumn10,
-            this.olvColumn11,
-            this.olvColumn12,
-            this.olvColumn13,
-            this.olvColumn14,
-            this.olvColumn15,
-            this.olvColumn16,
-            this.olvColumn17,
-            this.olvColumn18,
-            this.olvColumn19,
-            this.olvColumn20,
-            this.olvColumn21,
-            this.olvColumn22});
+            this.lvcMonsterTab1Name,
+            this.lvcMonsterTab1ID,
+            this.lvcMonsterTab1SpriteID,
+            this.lvcMonsterTab1Address,
+            this.lvcMonsterTab1MaxHP,
+            this.lvcMonsterTab1MaxMP,
+            this.lvcMonsterTab1Level,
+            this.lvcMonsterTab1Attack,
+            this.lvcMonsterTab1Defense,
+            this.lvcMonsterTab1Agility,
+            this.lvcMonsterTab1Mov,
+            this.lvcMonsterTab1Luck,
+            this.lvcMonsterTab1Turns,
+            this.lvcMonsterTab1HPRegen,
+            this.lvcMonsterTab1MPRegen,
+            this.lvcMonsterTab1EarthRes,
+            this.lvcMonsterTab1FireRes,
+            this.lvcMonsterTab1IceRes,
+            this.lvcMonsterTab1SparkRes,
+            this.lvcMonsterTab1WindRes,
+            this.lvcMonsterTab1LightRes,
+            this.lvcMonsterTab1DarkRes,
+            this.lvcMonsterTab1UnusedRes});
             this.olvMonsterTab1.FullRowSelect = true;
             this.olvMonsterTab1.GridLines = true;
             this.olvMonsterTab1.HasCollapsibleGroups = false;
@@ -552,148 +552,148 @@
             this.olvMonsterTab1.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvMonsterTab1.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
-            // olvColumn1
+            // lvcMonsterTab1Name
             // 
-            this.olvColumn1.AspectName = "Name";
-            this.olvColumn1.IsEditable = false;
-            this.olvColumn1.Text = "Name";
-            this.olvColumn1.Width = 90;
+            this.lvcMonsterTab1Name.AspectName = "Name";
+            this.lvcMonsterTab1Name.IsEditable = false;
+            this.lvcMonsterTab1Name.Text = "Name";
+            this.lvcMonsterTab1Name.Width = 90;
             // 
-            // olvColumn7
+            // lvcMonsterTab1ID
             // 
-            this.olvColumn7.AspectName = "ID";
-            this.olvColumn7.AspectToStringFormat = "{0:X}";
-            this.olvColumn7.IsEditable = false;
-            this.olvColumn7.Text = "Hex ID";
+            this.lvcMonsterTab1ID.AspectName = "ID";
+            this.lvcMonsterTab1ID.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1ID.IsEditable = false;
+            this.lvcMonsterTab1ID.Text = "Hex ID";
             // 
-            // olvColumn69
+            // lvcMonsterTab1SpriteID
             // 
-            this.olvColumn69.AspectName = "SpriteID";
-            this.olvColumn69.AspectToStringFormat = "{0:X}";
-            this.olvColumn69.IsEditable = false;
-            this.olvColumn69.Text = "SpriteID";
+            this.lvcMonsterTab1SpriteID.AspectName = "SpriteID";
+            this.lvcMonsterTab1SpriteID.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1SpriteID.IsEditable = false;
+            this.lvcMonsterTab1SpriteID.Text = "SpriteID";
             // 
-            // olvColumn2
+            // lvcMonsterTab1Address
             // 
-            this.olvColumn2.AspectName = "Address";
-            this.olvColumn2.AspectToStringFormat = "{0:X}";
-            this.olvColumn2.IsEditable = false;
-            this.olvColumn2.Text = "Address";
+            this.lvcMonsterTab1Address.AspectName = "Address";
+            this.lvcMonsterTab1Address.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1Address.IsEditable = false;
+            this.lvcMonsterTab1Address.Text = "Address";
             // 
-            // olvColumn3
+            // lvcMonsterTab1MaxHP
             // 
-            this.olvColumn3.AspectName = "MaxHP";
-            this.olvColumn3.AspectToStringFormat = "{0:X}";
-            this.olvColumn3.Text = "MaxHP";
+            this.lvcMonsterTab1MaxHP.AspectName = "MaxHP";
+            this.lvcMonsterTab1MaxHP.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1MaxHP.Text = "MaxHP";
             // 
-            // olvColumn4
+            // lvcMonsterTab1MaxMP
             // 
-            this.olvColumn4.AspectName = "MaxMP";
-            this.olvColumn4.AspectToStringFormat = "{0:X}";
-            this.olvColumn4.Text = "MaxMP";
+            this.lvcMonsterTab1MaxMP.AspectName = "MaxMP";
+            this.lvcMonsterTab1MaxMP.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1MaxMP.Text = "MaxMP";
             // 
-            // olvColumn5
+            // lvcMonsterTab1Level
             // 
-            this.olvColumn5.AspectName = "Level";
-            this.olvColumn5.AspectToStringFormat = "{0:X}";
-            this.olvColumn5.Text = "Level";
+            this.lvcMonsterTab1Level.AspectName = "Level";
+            this.lvcMonsterTab1Level.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1Level.Text = "Level";
             // 
-            // olvColumn6
+            // lvcMonsterTab1Attack
             // 
-            this.olvColumn6.AspectName = "Attack";
-            this.olvColumn6.AspectToStringFormat = "{0:X}";
-            this.olvColumn6.Text = "Attack";
+            this.lvcMonsterTab1Attack.AspectName = "Attack";
+            this.lvcMonsterTab1Attack.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1Attack.Text = "Attack";
             // 
-            // olvColumn8
+            // lvcMonsterTab1Defense
             // 
-            this.olvColumn8.AspectName = "Defense";
-            this.olvColumn8.AspectToStringFormat = "{0:X}";
-            this.olvColumn8.Text = "Defense";
+            this.lvcMonsterTab1Defense.AspectName = "Defense";
+            this.lvcMonsterTab1Defense.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1Defense.Text = "Defense";
             // 
-            // olvColumn9
+            // lvcMonsterTab1Agility
             // 
-            this.olvColumn9.AspectName = "Agility";
-            this.olvColumn9.AspectToStringFormat = "{0:X}";
-            this.olvColumn9.Text = "Agility";
+            this.lvcMonsterTab1Agility.AspectName = "Agility";
+            this.lvcMonsterTab1Agility.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1Agility.Text = "Agility";
             // 
-            // olvColumn10
+            // lvcMonsterTab1Mov
             // 
-            this.olvColumn10.AspectName = "Mov";
-            this.olvColumn10.AspectToStringFormat = "{0:X}";
-            this.olvColumn10.Text = "Mov";
+            this.lvcMonsterTab1Mov.AspectName = "Mov";
+            this.lvcMonsterTab1Mov.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1Mov.Text = "Mov";
             // 
-            // olvColumn11
+            // lvcMonsterTab1Luck
             // 
-            this.olvColumn11.AspectName = "Luck";
-            this.olvColumn11.AspectToStringFormat = "{0:X}";
-            this.olvColumn11.Text = "Luck";
+            this.lvcMonsterTab1Luck.AspectName = "Luck";
+            this.lvcMonsterTab1Luck.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1Luck.Text = "Luck";
             // 
-            // olvColumn12
+            // lvcMonsterTab1Turns
             // 
-            this.olvColumn12.AspectName = "Turns";
-            this.olvColumn12.AspectToStringFormat = "{0:X}";
-            this.olvColumn12.Text = "Turns";
+            this.lvcMonsterTab1Turns.AspectName = "Turns";
+            this.lvcMonsterTab1Turns.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1Turns.Text = "Turns";
             // 
-            // olvColumn13
+            // lvcMonsterTab1HPRegen
             // 
-            this.olvColumn13.AspectName = "HPRegen";
-            this.olvColumn13.AspectToStringFormat = "{0:X}";
-            this.olvColumn13.Text = "HPRegen";
+            this.lvcMonsterTab1HPRegen.AspectName = "HPRegen";
+            this.lvcMonsterTab1HPRegen.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1HPRegen.Text = "HPRegen";
             // 
-            // olvColumn14
+            // lvcMonsterTab1MPRegen
             // 
-            this.olvColumn14.AspectName = "MPRegen";
-            this.olvColumn14.AspectToStringFormat = "{0:X}";
-            this.olvColumn14.Text = "MPRegen";
+            this.lvcMonsterTab1MPRegen.AspectName = "MPRegen";
+            this.lvcMonsterTab1MPRegen.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1MPRegen.Text = "MPRegen";
             // 
-            // olvColumn15
+            // lvcMonsterTab1EarthRes
             // 
-            this.olvColumn15.AspectName = "EarthRes";
-            this.olvColumn15.AspectToStringFormat = "{0:X}";
-            this.olvColumn15.Text = "EarthRes";
+            this.lvcMonsterTab1EarthRes.AspectName = "EarthRes";
+            this.lvcMonsterTab1EarthRes.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1EarthRes.Text = "EarthRes";
             // 
-            // olvColumn16
+            // lvcMonsterTab1FireRes
             // 
-            this.olvColumn16.AspectName = "FireRes";
-            this.olvColumn16.AspectToStringFormat = "{0:X}";
-            this.olvColumn16.Text = "FireRes";
+            this.lvcMonsterTab1FireRes.AspectName = "FireRes";
+            this.lvcMonsterTab1FireRes.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1FireRes.Text = "FireRes";
             // 
-            // olvColumn17
+            // lvcMonsterTab1IceRes
             // 
-            this.olvColumn17.AspectName = "IceRes";
-            this.olvColumn17.AspectToStringFormat = "{0:X}";
-            this.olvColumn17.Text = "IceRes";
+            this.lvcMonsterTab1IceRes.AspectName = "IceRes";
+            this.lvcMonsterTab1IceRes.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1IceRes.Text = "IceRes";
             // 
-            // olvColumn18
+            // lvcMonsterTab1SparkRes
             // 
-            this.olvColumn18.AspectName = "SparkRes";
-            this.olvColumn18.AspectToStringFormat = "{0:X}";
-            this.olvColumn18.Text = "SparkRes";
+            this.lvcMonsterTab1SparkRes.AspectName = "SparkRes";
+            this.lvcMonsterTab1SparkRes.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1SparkRes.Text = "SparkRes";
             // 
-            // olvColumn19
+            // lvcMonsterTab1WindRes
             // 
-            this.olvColumn19.AspectName = "WindRes";
-            this.olvColumn19.AspectToStringFormat = "{0:X}";
-            this.olvColumn19.Text = "WindRes";
+            this.lvcMonsterTab1WindRes.AspectName = "WindRes";
+            this.lvcMonsterTab1WindRes.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1WindRes.Text = "WindRes";
             // 
-            // olvColumn20
+            // lvcMonsterTab1LightRes
             // 
-            this.olvColumn20.AspectName = "LightRes";
-            this.olvColumn20.AspectToStringFormat = "{0:X}";
-            this.olvColumn20.Text = "LightRes";
+            this.lvcMonsterTab1LightRes.AspectName = "LightRes";
+            this.lvcMonsterTab1LightRes.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1LightRes.Text = "LightRes";
             // 
-            // olvColumn21
+            // lvcMonsterTab1DarkRes
             // 
-            this.olvColumn21.AspectName = "DarkRes";
-            this.olvColumn21.AspectToStringFormat = "{0:X}";
-            this.olvColumn21.Text = "DarkRes";
+            this.lvcMonsterTab1DarkRes.AspectName = "DarkRes";
+            this.lvcMonsterTab1DarkRes.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1DarkRes.Text = "DarkRes";
             // 
-            // olvColumn22
+            // lvcMonsterTab1UnusedRes
             // 
-            this.olvColumn22.AspectName = "UnusedRes";
-            this.olvColumn22.AspectToStringFormat = "{0:X}";
-            this.olvColumn22.Text = "UnusedRes";
-            this.olvColumn22.Width = 90;
+            this.lvcMonsterTab1UnusedRes.AspectName = "UnusedRes";
+            this.lvcMonsterTab1UnusedRes.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1UnusedRes.Text = "UnusedRes";
+            this.lvcMonsterTab1UnusedRes.Width = 90;
             // 
             // tabMain
             // 
@@ -724,44 +724,44 @@
             // 
             // olvMonsterTab2
             // 
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn23);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn24);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn26);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn27);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn28);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn29);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn30);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn31);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn32);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn33);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn34);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn35);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn36);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn37);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn38);
-            this.olvMonsterTab2.AllColumns.Add(this.olvColumn39);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2Name);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2ID);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2Spell1);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2Spell1Level);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2Spell2);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2Spell2Level);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2Spell3);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2Spell3Level);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2Spell4);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2Spell4Level);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2Weapon);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2EquippedAccessory);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2ItemSlot1);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2ItemSlot2);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2ItemSlot3);
+            this.olvMonsterTab2.AllColumns.Add(this.lvcMonsterTab2ItemSlot4);
             this.olvMonsterTab2.AllowColumnReorder = true;
             this.olvMonsterTab2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvMonsterTab2.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvMonsterTab2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn23,
-            this.olvColumn24,
-            this.olvColumn26,
-            this.olvColumn27,
-            this.olvColumn28,
-            this.olvColumn29,
-            this.olvColumn30,
-            this.olvColumn31,
-            this.olvColumn32,
-            this.olvColumn33,
-            this.olvColumn34,
-            this.olvColumn35,
-            this.olvColumn36,
-            this.olvColumn37,
-            this.olvColumn38,
-            this.olvColumn39});
+            this.lvcMonsterTab2Name,
+            this.lvcMonsterTab2ID,
+            this.lvcMonsterTab2Spell1,
+            this.lvcMonsterTab2Spell1Level,
+            this.lvcMonsterTab2Spell2,
+            this.lvcMonsterTab2Spell2Level,
+            this.lvcMonsterTab2Spell3,
+            this.lvcMonsterTab2Spell3Level,
+            this.lvcMonsterTab2Spell4,
+            this.lvcMonsterTab2Spell4Level,
+            this.lvcMonsterTab2Weapon,
+            this.lvcMonsterTab2EquippedAccessory,
+            this.lvcMonsterTab2ItemSlot1,
+            this.lvcMonsterTab2ItemSlot2,
+            this.lvcMonsterTab2ItemSlot3,
+            this.lvcMonsterTab2ItemSlot4});
             this.olvMonsterTab2.FullRowSelect = true;
             this.olvMonsterTab2.GridLines = true;
             this.olvMonsterTab2.HasCollapsibleGroups = false;
@@ -778,108 +778,108 @@
             this.olvMonsterTab2.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvMonsterTab2.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
-            // olvColumn23
+            // lvcMonsterTab2Name
             // 
-            this.olvColumn23.AspectName = "Name";
-            this.olvColumn23.IsEditable = false;
-            this.olvColumn23.Text = "Name";
+            this.lvcMonsterTab2Name.AspectName = "Name";
+            this.lvcMonsterTab2Name.IsEditable = false;
+            this.lvcMonsterTab2Name.Text = "Name";
             // 
-            // olvColumn24
+            // lvcMonsterTab2ID
             // 
-            this.olvColumn24.AspectName = "ID";
-            this.olvColumn24.AspectToStringFormat = "{0:X}";
-            this.olvColumn24.IsEditable = false;
-            this.olvColumn24.Text = "Hex ID";
+            this.lvcMonsterTab2ID.AspectName = "ID";
+            this.lvcMonsterTab2ID.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2ID.IsEditable = false;
+            this.lvcMonsterTab2ID.Text = "Hex ID";
             // 
-            // olvColumn26
+            // lvcMonsterTab2Spell1
             // 
-            this.olvColumn26.AspectName = "Spell1";
-            this.olvColumn26.AspectToStringFormat = "{0:X}";
-            this.olvColumn26.Text = "Spell1";
+            this.lvcMonsterTab2Spell1.AspectName = "Spell1";
+            this.lvcMonsterTab2Spell1.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2Spell1.Text = "Spell1";
             // 
-            // olvColumn27
+            // lvcMonsterTab2Spell1Level
             // 
-            this.olvColumn27.AspectName = "Spell1Level";
-            this.olvColumn27.AspectToStringFormat = "{0:X}";
-            this.olvColumn27.Text = "Spell1Level";
-            this.olvColumn27.Width = 70;
+            this.lvcMonsterTab2Spell1Level.AspectName = "Spell1Level";
+            this.lvcMonsterTab2Spell1Level.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2Spell1Level.Text = "Spell1Level";
+            this.lvcMonsterTab2Spell1Level.Width = 70;
             // 
-            // olvColumn28
+            // lvcMonsterTab2Spell2
             // 
-            this.olvColumn28.AspectName = "Spell2";
-            this.olvColumn28.AspectToStringFormat = "{0:X}";
-            this.olvColumn28.Text = "Spell2";
+            this.lvcMonsterTab2Spell2.AspectName = "Spell2";
+            this.lvcMonsterTab2Spell2.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2Spell2.Text = "Spell2";
             // 
-            // olvColumn29
+            // lvcMonsterTab2Spell2Level
             // 
-            this.olvColumn29.AspectName = "Spell2Level";
-            this.olvColumn29.AspectToStringFormat = "{0:X}";
-            this.olvColumn29.Text = "Spell2Level";
-            this.olvColumn29.Width = 70;
+            this.lvcMonsterTab2Spell2Level.AspectName = "Spell2Level";
+            this.lvcMonsterTab2Spell2Level.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2Spell2Level.Text = "Spell2Level";
+            this.lvcMonsterTab2Spell2Level.Width = 70;
             // 
-            // olvColumn30
+            // lvcMonsterTab2Spell3
             // 
-            this.olvColumn30.AspectName = "Spell3";
-            this.olvColumn30.AspectToStringFormat = "{0:X}";
-            this.olvColumn30.Text = "Spell3";
+            this.lvcMonsterTab2Spell3.AspectName = "Spell3";
+            this.lvcMonsterTab2Spell3.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2Spell3.Text = "Spell3";
             // 
-            // olvColumn31
+            // lvcMonsterTab2Spell3Level
             // 
-            this.olvColumn31.AspectName = "Spell3Level";
-            this.olvColumn31.AspectToStringFormat = "{0:X}";
-            this.olvColumn31.Text = "Spell3Level";
-            this.olvColumn31.Width = 70;
+            this.lvcMonsterTab2Spell3Level.AspectName = "Spell3Level";
+            this.lvcMonsterTab2Spell3Level.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2Spell3Level.Text = "Spell3Level";
+            this.lvcMonsterTab2Spell3Level.Width = 70;
             // 
-            // olvColumn32
+            // lvcMonsterTab2Spell4
             // 
-            this.olvColumn32.AspectName = "Spell4";
-            this.olvColumn32.AspectToStringFormat = "{0:X}";
-            this.olvColumn32.Text = "Spell4";
+            this.lvcMonsterTab2Spell4.AspectName = "Spell4";
+            this.lvcMonsterTab2Spell4.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2Spell4.Text = "Spell4";
             // 
-            // olvColumn33
+            // lvcMonsterTab2Spell4Level
             // 
-            this.olvColumn33.AspectName = "Spell4Level";
-            this.olvColumn33.AspectToStringFormat = "{0:X}";
-            this.olvColumn33.Text = "Spell4Level";
-            this.olvColumn33.Width = 70;
+            this.lvcMonsterTab2Spell4Level.AspectName = "Spell4Level";
+            this.lvcMonsterTab2Spell4Level.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2Spell4Level.Text = "Spell4Level";
+            this.lvcMonsterTab2Spell4Level.Width = 70;
             // 
-            // olvColumn34
+            // lvcMonsterTab2Weapon
             // 
-            this.olvColumn34.AspectName = "Weapon";
-            this.olvColumn34.AspectToStringFormat = "{0:X}";
-            this.olvColumn34.Text = "EquippedWeapon";
-            this.olvColumn34.Width = 110;
+            this.lvcMonsterTab2Weapon.AspectName = "Weapon";
+            this.lvcMonsterTab2Weapon.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2Weapon.Text = "EquippedWeapon";
+            this.lvcMonsterTab2Weapon.Width = 110;
             // 
-            // olvColumn35
+            // lvcMonsterTab2EquippedAccessory
             // 
-            this.olvColumn35.AspectName = "Accessory";
-            this.olvColumn35.AspectToStringFormat = "{0:X}";
-            this.olvColumn35.Text = "EquippedAccessory";
-            this.olvColumn35.Width = 100;
+            this.lvcMonsterTab2EquippedAccessory.AspectName = "Accessory";
+            this.lvcMonsterTab2EquippedAccessory.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2EquippedAccessory.Text = "EquippedAccessory";
+            this.lvcMonsterTab2EquippedAccessory.Width = 100;
             // 
-            // olvColumn36
+            // lvcMonsterTab2ItemSlot1
             // 
-            this.olvColumn36.AspectName = "ItemSlot1";
-            this.olvColumn36.AspectToStringFormat = "{0:X}";
-            this.olvColumn36.Text = "ItemSlot1";
+            this.lvcMonsterTab2ItemSlot1.AspectName = "ItemSlot1";
+            this.lvcMonsterTab2ItemSlot1.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2ItemSlot1.Text = "ItemSlot1";
             // 
-            // olvColumn37
+            // lvcMonsterTab2ItemSlot2
             // 
-            this.olvColumn37.AspectName = "ItemSlot2";
-            this.olvColumn37.AspectToStringFormat = "{0:X}";
-            this.olvColumn37.Text = "ItemSlot2";
+            this.lvcMonsterTab2ItemSlot2.AspectName = "ItemSlot2";
+            this.lvcMonsterTab2ItemSlot2.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2ItemSlot2.Text = "ItemSlot2";
             // 
-            // olvColumn38
+            // lvcMonsterTab2ItemSlot3
             // 
-            this.olvColumn38.AspectName = "ItemSlot3";
-            this.olvColumn38.AspectToStringFormat = "{0:X}";
-            this.olvColumn38.Text = "ItemSlot3";
+            this.lvcMonsterTab2ItemSlot3.AspectName = "ItemSlot3";
+            this.lvcMonsterTab2ItemSlot3.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2ItemSlot3.Text = "ItemSlot3";
             // 
-            // olvColumn39
+            // lvcMonsterTab2ItemSlot4
             // 
-            this.olvColumn39.AspectName = "ItemSlot4";
-            this.olvColumn39.AspectToStringFormat = "{0:X}";
-            this.olvColumn39.Text = "ItemSlot4";
+            this.lvcMonsterTab2ItemSlot4.AspectName = "ItemSlot4";
+            this.lvcMonsterTab2ItemSlot4.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab2ItemSlot4.Text = "ItemSlot4";
             // 
             // tabMonsterTab3
             // 
@@ -894,48 +894,48 @@
             // 
             // olvMonsterTab3
             // 
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn25);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn40);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn42);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn43);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn44);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn45);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn46);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn47);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn48);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn49);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn50);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn51);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn52);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn53);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn54);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn55);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn56);
-            this.olvMonsterTab3.AllColumns.Add(this.olvColumn57);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Name);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3ID);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Special1);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Special2);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Special3);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Special4);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Special5);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Special6);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Special7);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Special8);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Special9);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Special10);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Unknown1);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Unknown2);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Unknown3);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Unknown4);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Unknown5);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Unknown6);
             this.olvMonsterTab3.AllowColumnReorder = true;
             this.olvMonsterTab3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvMonsterTab3.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvMonsterTab3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn25,
-            this.olvColumn40,
-            this.olvColumn42,
-            this.olvColumn43,
-            this.olvColumn44,
-            this.olvColumn45,
-            this.olvColumn46,
-            this.olvColumn47,
-            this.olvColumn48,
-            this.olvColumn49,
-            this.olvColumn50,
-            this.olvColumn51,
-            this.olvColumn52,
-            this.olvColumn53,
-            this.olvColumn54,
-            this.olvColumn55,
-            this.olvColumn56,
-            this.olvColumn57});
+            this.lvcMonsterTab3Name,
+            this.lvcMonsterTab3ID,
+            this.lvcMonsterTab3Special1,
+            this.lvcMonsterTab3Special2,
+            this.lvcMonsterTab3Special3,
+            this.lvcMonsterTab3Special4,
+            this.lvcMonsterTab3Special5,
+            this.lvcMonsterTab3Special6,
+            this.lvcMonsterTab3Special7,
+            this.lvcMonsterTab3Special8,
+            this.lvcMonsterTab3Special9,
+            this.lvcMonsterTab3Special10,
+            this.lvcMonsterTab3Unknown1,
+            this.lvcMonsterTab3Unknown2,
+            this.lvcMonsterTab3Unknown3,
+            this.lvcMonsterTab3Unknown4,
+            this.lvcMonsterTab3Unknown5,
+            this.lvcMonsterTab3Unknown6});
             this.olvMonsterTab3.FullRowSelect = true;
             this.olvMonsterTab3.GridLines = true;
             this.olvMonsterTab3.HasCollapsibleGroups = false;
@@ -952,120 +952,120 @@
             this.olvMonsterTab3.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvMonsterTab3.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
-            // olvColumn25
+            // lvcMonsterTab3Name
             // 
-            this.olvColumn25.AspectName = "Name";
-            this.olvColumn25.IsEditable = false;
-            this.olvColumn25.Text = "Name";
+            this.lvcMonsterTab3Name.AspectName = "Name";
+            this.lvcMonsterTab3Name.IsEditable = false;
+            this.lvcMonsterTab3Name.Text = "Name";
             // 
-            // olvColumn40
+            // lvcMonsterTab3ID
             // 
-            this.olvColumn40.AspectName = "ID";
-            this.olvColumn40.AspectToStringFormat = "{0:X}";
-            this.olvColumn40.IsEditable = false;
-            this.olvColumn40.Text = "Hex ID";
+            this.lvcMonsterTab3ID.AspectName = "ID";
+            this.lvcMonsterTab3ID.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3ID.IsEditable = false;
+            this.lvcMonsterTab3ID.Text = "Hex ID";
             // 
-            // olvColumn42
+            // lvcMonsterTab3Special1
             // 
-            this.olvColumn42.AspectName = "Special1";
-            this.olvColumn42.AspectToStringFormat = "{0:X}";
-            this.olvColumn42.Text = "Special1";
+            this.lvcMonsterTab3Special1.AspectName = "Special1";
+            this.lvcMonsterTab3Special1.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Special1.Text = "Special1";
             // 
-            // olvColumn43
+            // lvcMonsterTab3Special2
             // 
-            this.olvColumn43.AspectName = "Special2";
-            this.olvColumn43.AspectToStringFormat = "{0:X}";
-            this.olvColumn43.Text = "Special2";
+            this.lvcMonsterTab3Special2.AspectName = "Special2";
+            this.lvcMonsterTab3Special2.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Special2.Text = "Special2";
             // 
-            // olvColumn44
+            // lvcMonsterTab3Special3
             // 
-            this.olvColumn44.AspectName = "Special3";
-            this.olvColumn44.AspectToStringFormat = "{0:X}";
-            this.olvColumn44.Text = "Special3";
+            this.lvcMonsterTab3Special3.AspectName = "Special3";
+            this.lvcMonsterTab3Special3.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Special3.Text = "Special3";
             // 
-            // olvColumn45
+            // lvcMonsterTab3Special4
             // 
-            this.olvColumn45.AspectName = "Special4";
-            this.olvColumn45.AspectToStringFormat = "{0:X}";
-            this.olvColumn45.Text = "Special4";
+            this.lvcMonsterTab3Special4.AspectName = "Special4";
+            this.lvcMonsterTab3Special4.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Special4.Text = "Special4";
             // 
-            // olvColumn46
+            // lvcMonsterTab3Special5
             // 
-            this.olvColumn46.AspectName = "Special5";
-            this.olvColumn46.AspectToStringFormat = "{0:X}";
-            this.olvColumn46.Text = "Special5";
+            this.lvcMonsterTab3Special5.AspectName = "Special5";
+            this.lvcMonsterTab3Special5.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Special5.Text = "Special5";
             // 
-            // olvColumn47
+            // lvcMonsterTab3Special6
             // 
-            this.olvColumn47.AspectName = "Special6";
-            this.olvColumn47.AspectToStringFormat = "{0:X}";
-            this.olvColumn47.Text = "Special6";
+            this.lvcMonsterTab3Special6.AspectName = "Special6";
+            this.lvcMonsterTab3Special6.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Special6.Text = "Special6";
             // 
-            // olvColumn48
+            // lvcMonsterTab3Special7
             // 
-            this.olvColumn48.AspectName = "Special7";
-            this.olvColumn48.AspectToStringFormat = "{0:X}";
-            this.olvColumn48.Text = "Special7";
+            this.lvcMonsterTab3Special7.AspectName = "Special7";
+            this.lvcMonsterTab3Special7.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Special7.Text = "Special7";
             // 
-            // olvColumn49
+            // lvcMonsterTab3Special8
             // 
-            this.olvColumn49.AspectName = "Special8";
-            this.olvColumn49.AspectToStringFormat = "{0:X}";
-            this.olvColumn49.Text = "Special8";
+            this.lvcMonsterTab3Special8.AspectName = "Special8";
+            this.lvcMonsterTab3Special8.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Special8.Text = "Special8";
             // 
-            // olvColumn50
+            // lvcMonsterTab3Special9
             // 
-            this.olvColumn50.AspectName = "Special9";
-            this.olvColumn50.AspectToStringFormat = "{0:X}";
-            this.olvColumn50.Text = "Special9";
+            this.lvcMonsterTab3Special9.AspectName = "Special9";
+            this.lvcMonsterTab3Special9.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Special9.Text = "Special9";
             // 
-            // olvColumn51
+            // lvcMonsterTab3Special10
             // 
-            this.olvColumn51.AspectName = "Special10";
-            this.olvColumn51.AspectToStringFormat = "{0:X}";
-            this.olvColumn51.Text = "Special10";
+            this.lvcMonsterTab3Special10.AspectName = "Special10";
+            this.lvcMonsterTab3Special10.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Special10.Text = "Special10";
             // 
-            // olvColumn52
+            // lvcMonsterTab3Unknown1
             // 
-            this.olvColumn52.AspectName = "Unknown1";
-            this.olvColumn52.AspectToStringFormat = "{0:X}";
-            this.olvColumn52.Text = "Unknown1";
-            this.olvColumn52.Width = 70;
+            this.lvcMonsterTab3Unknown1.AspectName = "Unknown1";
+            this.lvcMonsterTab3Unknown1.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Unknown1.Text = "Unknown1";
+            this.lvcMonsterTab3Unknown1.Width = 70;
             // 
-            // olvColumn53
+            // lvcMonsterTab3Unknown2
             // 
-            this.olvColumn53.AspectName = "Unknown2";
-            this.olvColumn53.AspectToStringFormat = "{0:X}";
-            this.olvColumn53.Text = "Unknown2";
-            this.olvColumn53.Width = 70;
+            this.lvcMonsterTab3Unknown2.AspectName = "Unknown2";
+            this.lvcMonsterTab3Unknown2.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Unknown2.Text = "Unknown2";
+            this.lvcMonsterTab3Unknown2.Width = 70;
             // 
-            // olvColumn54
+            // lvcMonsterTab3Unknown3
             // 
-            this.olvColumn54.AspectName = "Unknown3";
-            this.olvColumn54.AspectToStringFormat = "{0:X}";
-            this.olvColumn54.Text = "Unknown3";
-            this.olvColumn54.Width = 70;
+            this.lvcMonsterTab3Unknown3.AspectName = "Unknown3";
+            this.lvcMonsterTab3Unknown3.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Unknown3.Text = "Unknown3";
+            this.lvcMonsterTab3Unknown3.Width = 70;
             // 
-            // olvColumn55
+            // lvcMonsterTab3Unknown4
             // 
-            this.olvColumn55.AspectName = "Unknown4";
-            this.olvColumn55.AspectToStringFormat = "{0:X}";
-            this.olvColumn55.Text = "Protections";
-            this.olvColumn55.Width = 70;
+            this.lvcMonsterTab3Unknown4.AspectName = "Unknown4";
+            this.lvcMonsterTab3Unknown4.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Unknown4.Text = "Protections";
+            this.lvcMonsterTab3Unknown4.Width = 70;
             // 
-            // olvColumn56
+            // lvcMonsterTab3Unknown5
             // 
-            this.olvColumn56.AspectName = "Unknown5";
-            this.olvColumn56.AspectToStringFormat = "{0:X}";
-            this.olvColumn56.Text = "exp = 5";
-            this.olvColumn56.Width = 70;
+            this.lvcMonsterTab3Unknown5.AspectName = "Unknown5";
+            this.lvcMonsterTab3Unknown5.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Unknown5.Text = "exp = 5";
+            this.lvcMonsterTab3Unknown5.Width = 70;
             // 
-            // olvColumn57
+            // lvcMonsterTab3Unknown6
             // 
-            this.olvColumn57.AspectName = "Unknown6";
-            this.olvColumn57.AspectToStringFormat = "{0:X}";
-            this.olvColumn57.Text = "Unknown6";
-            this.olvColumn57.Width = 70;
+            this.lvcMonsterTab3Unknown6.AspectName = "Unknown6";
+            this.lvcMonsterTab3Unknown6.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab3Unknown6.Text = "Unknown6";
+            this.lvcMonsterTab3Unknown6.Width = 70;
             // 
             // tabMonsterTab4
             // 
@@ -1080,32 +1080,32 @@
             // 
             // olvMonsterTab4
             // 
-            this.olvMonsterTab4.AllColumns.Add(this.olvColumn41);
-            this.olvMonsterTab4.AllColumns.Add(this.olvColumn58);
-            this.olvMonsterTab4.AllColumns.Add(this.olvColumn60);
-            this.olvMonsterTab4.AllColumns.Add(this.olvColumn61);
-            this.olvMonsterTab4.AllColumns.Add(this.olvColumn62);
-            this.olvMonsterTab4.AllColumns.Add(this.olvColumn63);
-            this.olvMonsterTab4.AllColumns.Add(this.olvColumn64);
-            this.olvMonsterTab4.AllColumns.Add(this.olvColumn65);
-            this.olvMonsterTab4.AllColumns.Add(this.olvColumn66);
-            this.olvMonsterTab4.AllColumns.Add(this.olvColumn67);
+            this.olvMonsterTab4.AllColumns.Add(this.lvcMonsterTab4Name);
+            this.olvMonsterTab4.AllColumns.Add(this.lvcMonsterTab4ID);
+            this.olvMonsterTab4.AllColumns.Add(this.lvcMonsterTab4Gold);
+            this.olvMonsterTab4.AllColumns.Add(this.lvcMonsterTab4Drop);
+            this.olvMonsterTab4.AllColumns.Add(this.lvcMonsterTab4Unknown7);
+            this.olvMonsterTab4.AllColumns.Add(this.lvcMonsterTab4DroprateType);
+            this.olvMonsterTab4.AllColumns.Add(this.lvcMonsterTab4SlowPlus);
+            this.olvMonsterTab4.AllColumns.Add(this.lvcMonsterTab4SupportPlus);
+            this.olvMonsterTab4.AllColumns.Add(this.lvcMonsterTab4MagicType);
+            this.olvMonsterTab4.AllColumns.Add(this.lvcMonsterTab4MovementType);
             this.olvMonsterTab4.AllowColumnReorder = true;
             this.olvMonsterTab4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvMonsterTab4.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvMonsterTab4.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn41,
-            this.olvColumn58,
-            this.olvColumn60,
-            this.olvColumn61,
-            this.olvColumn62,
-            this.olvColumn63,
-            this.olvColumn64,
-            this.olvColumn65,
-            this.olvColumn66,
-            this.olvColumn67});
+            this.lvcMonsterTab4Name,
+            this.lvcMonsterTab4ID,
+            this.lvcMonsterTab4Gold,
+            this.lvcMonsterTab4Drop,
+            this.lvcMonsterTab4Unknown7,
+            this.lvcMonsterTab4DroprateType,
+            this.lvcMonsterTab4SlowPlus,
+            this.lvcMonsterTab4SupportPlus,
+            this.lvcMonsterTab4MagicType,
+            this.lvcMonsterTab4MovementType});
             this.olvMonsterTab4.FullRowSelect = true;
             this.olvMonsterTab4.GridLines = true;
             this.olvMonsterTab4.HasCollapsibleGroups = false;
@@ -1122,72 +1122,72 @@
             this.olvMonsterTab4.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvMonsterTab4.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
-            // olvColumn41
+            // lvcMonsterTab4Name
             // 
-            this.olvColumn41.AspectName = "Name";
-            this.olvColumn41.IsEditable = false;
-            this.olvColumn41.Text = "Name";
+            this.lvcMonsterTab4Name.AspectName = "Name";
+            this.lvcMonsterTab4Name.IsEditable = false;
+            this.lvcMonsterTab4Name.Text = "Name";
             // 
-            // olvColumn58
+            // lvcMonsterTab4ID
             // 
-            this.olvColumn58.AspectName = "ID";
-            this.olvColumn58.AspectToStringFormat = "{0:X}";
-            this.olvColumn58.IsEditable = false;
-            this.olvColumn58.Text = "Hex ID";
+            this.lvcMonsterTab4ID.AspectName = "ID";
+            this.lvcMonsterTab4ID.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab4ID.IsEditable = false;
+            this.lvcMonsterTab4ID.Text = "Hex ID";
             // 
-            // olvColumn60
+            // lvcMonsterTab4Gold
             // 
-            this.olvColumn60.AspectName = "Gold";
-            this.olvColumn60.AspectToStringFormat = "{0:X}";
-            this.olvColumn60.Text = "Gold";
+            this.lvcMonsterTab4Gold.AspectName = "Gold";
+            this.lvcMonsterTab4Gold.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab4Gold.Text = "Gold";
             // 
-            // olvColumn61
+            // lvcMonsterTab4Drop
             // 
-            this.olvColumn61.AspectName = "Drop";
-            this.olvColumn61.AspectToStringFormat = "{0:X}";
-            this.olvColumn61.Text = "Drop";
+            this.lvcMonsterTab4Drop.AspectName = "Drop";
+            this.lvcMonsterTab4Drop.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab4Drop.Text = "Drop";
             // 
-            // olvColumn62
+            // lvcMonsterTab4Unknown7
             // 
-            this.olvColumn62.AspectName = "Unknown7";
-            this.olvColumn62.AspectToStringFormat = "{0:X}";
-            this.olvColumn62.Text = "Unknown7";
-            this.olvColumn62.Width = 70;
+            this.lvcMonsterTab4Unknown7.AspectName = "Unknown7";
+            this.lvcMonsterTab4Unknown7.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab4Unknown7.Text = "Unknown7";
+            this.lvcMonsterTab4Unknown7.Width = 70;
             // 
-            // olvColumn63
+            // lvcMonsterTab4DroprateType
             // 
-            this.olvColumn63.AspectName = "Unknown8";
-            this.olvColumn63.AspectToStringFormat = "{0:X}";
-            this.olvColumn63.Text = "Droprate/type";
-            this.olvColumn63.Width = 80;
+            this.lvcMonsterTab4DroprateType.AspectName = "Unknown8";
+            this.lvcMonsterTab4DroprateType.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab4DroprateType.Text = "Droprate/type";
+            this.lvcMonsterTab4DroprateType.Width = 80;
             // 
-            // olvColumn64
+            // lvcMonsterTab4SlowPlus
             // 
-            this.olvColumn64.AspectName = "Unknown9";
-            this.olvColumn64.AspectToStringFormat = "{0:X}";
-            this.olvColumn64.Text = "Slow+%";
-            this.olvColumn64.Width = 70;
+            this.lvcMonsterTab4SlowPlus.AspectName = "Unknown9";
+            this.lvcMonsterTab4SlowPlus.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab4SlowPlus.Text = "Slow+%";
+            this.lvcMonsterTab4SlowPlus.Width = 70;
             // 
-            // olvColumn65
+            // lvcMonsterTab4SupportPlus
             // 
-            this.olvColumn65.AspectName = "Unknown10";
-            this.olvColumn65.AspectToStringFormat = "{0:X}";
-            this.olvColumn65.Text = "Support+%";
-            this.olvColumn65.Width = 70;
+            this.lvcMonsterTab4SupportPlus.AspectName = "Unknown10";
+            this.lvcMonsterTab4SupportPlus.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab4SupportPlus.Text = "Support+%";
+            this.lvcMonsterTab4SupportPlus.Width = 70;
             // 
-            // olvColumn66
+            // lvcMonsterTab4MagicType
             // 
-            this.olvColumn66.AspectName = "MagicType";
-            this.olvColumn66.AspectToStringFormat = "{0:X}";
-            this.olvColumn66.Text = "MagicType";
-            this.olvColumn66.Width = 70;
+            this.lvcMonsterTab4MagicType.AspectName = "MagicType";
+            this.lvcMonsterTab4MagicType.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab4MagicType.Text = "MagicType";
+            this.lvcMonsterTab4MagicType.Width = 70;
             // 
-            // olvColumn67
+            // lvcMonsterTab4MovementType
             // 
-            this.olvColumn67.AspectName = "MovementType";
-            this.olvColumn67.AspectToStringFormat = "{0:X}";
-            this.olvColumn67.Text = "MovementType";
-            this.olvColumn67.Width = 90;
+            this.lvcMonsterTab4MovementType.AspectName = "MovementType";
+            this.lvcMonsterTab4MovementType.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab4MovementType.Text = "MovementType";
+            this.lvcMonsterTab4MovementType.Width = 90;
             // 
             // tabMonsterTab5
             // 
@@ -1202,36 +1202,36 @@
             // 
             // olvMonsterTab5
             // 
-            this.olvMonsterTab5.AllColumns.Add(this.olvColumn59);
-            this.olvMonsterTab5.AllColumns.Add(this.olvColumn68);
-            this.olvMonsterTab5.AllColumns.Add(this.olvColumn70);
-            this.olvMonsterTab5.AllColumns.Add(this.olvColumn71);
-            this.olvMonsterTab5.AllColumns.Add(this.olvColumn72);
-            this.olvMonsterTab5.AllColumns.Add(this.olvColumn73);
-            this.olvMonsterTab5.AllColumns.Add(this.olvColumn74);
-            this.olvMonsterTab5.AllColumns.Add(this.olvColumn75);
-            this.olvMonsterTab5.AllColumns.Add(this.olvColumn76);
-            this.olvMonsterTab5.AllColumns.Add(this.olvColumn77);
-            this.olvMonsterTab5.AllColumns.Add(this.olvColumn78);
-            this.olvMonsterTab5.AllColumns.Add(this.olvColumn79);
+            this.olvMonsterTab5.AllColumns.Add(this.lvcMonsterTab5Name);
+            this.olvMonsterTab5.AllColumns.Add(this.lvcMonsterTab5ID);
+            this.olvMonsterTab5.AllColumns.Add(this.lvcMonsterTab5CanHeal);
+            this.olvMonsterTab5.AllColumns.Add(this.lvcMonsterTab5Unknown12);
+            this.olvMonsterTab5.AllColumns.Add(this.lvcMonsterTab5SpellChance1);
+            this.olvMonsterTab5.AllColumns.Add(this.lvcMonsterTab5SpellChance2);
+            this.olvMonsterTab5.AllColumns.Add(this.lvcMonsterTab5SpellChance3);
+            this.olvMonsterTab5.AllColumns.Add(this.lvcMonsterTab5SpellChance4);
+            this.olvMonsterTab5.AllColumns.Add(this.lvcMonsterTab5SpellChance5);
+            this.olvMonsterTab5.AllColumns.Add(this.lvcMonsterTab5SpellChance6);
+            this.olvMonsterTab5.AllColumns.Add(this.lvcMonsterTab5Unknown19);
+            this.olvMonsterTab5.AllColumns.Add(this.lvcMonsterTab5Unknown20);
             this.olvMonsterTab5.AllowColumnReorder = true;
             this.olvMonsterTab5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvMonsterTab5.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvMonsterTab5.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn59,
-            this.olvColumn68,
-            this.olvColumn70,
-            this.olvColumn71,
-            this.olvColumn72,
-            this.olvColumn73,
-            this.olvColumn74,
-            this.olvColumn75,
-            this.olvColumn76,
-            this.olvColumn77,
-            this.olvColumn78,
-            this.olvColumn79});
+            this.lvcMonsterTab5Name,
+            this.lvcMonsterTab5ID,
+            this.lvcMonsterTab5CanHeal,
+            this.lvcMonsterTab5Unknown12,
+            this.lvcMonsterTab5SpellChance1,
+            this.lvcMonsterTab5SpellChance2,
+            this.lvcMonsterTab5SpellChance3,
+            this.lvcMonsterTab5SpellChance4,
+            this.lvcMonsterTab5SpellChance5,
+            this.lvcMonsterTab5SpellChance6,
+            this.lvcMonsterTab5Unknown19,
+            this.lvcMonsterTab5Unknown20});
             this.olvMonsterTab5.FullRowSelect = true;
             this.olvMonsterTab5.GridLines = true;
             this.olvMonsterTab5.HasCollapsibleGroups = false;
@@ -1248,88 +1248,88 @@
             this.olvMonsterTab5.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvMonsterTab5.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
-            // olvColumn59
+            // lvcMonsterTab5Name
             // 
-            this.olvColumn59.AspectName = "Name";
-            this.olvColumn59.IsEditable = false;
-            this.olvColumn59.Text = "Name";
+            this.lvcMonsterTab5Name.AspectName = "Name";
+            this.lvcMonsterTab5Name.IsEditable = false;
+            this.lvcMonsterTab5Name.Text = "Name";
             // 
-            // olvColumn68
+            // lvcMonsterTab5ID
             // 
-            this.olvColumn68.AspectName = "ID";
-            this.olvColumn68.AspectToStringFormat = "{0:X}";
-            this.olvColumn68.IsEditable = false;
-            this.olvColumn68.Text = "Hex ID";
+            this.lvcMonsterTab5ID.AspectName = "ID";
+            this.lvcMonsterTab5ID.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab5ID.IsEditable = false;
+            this.lvcMonsterTab5ID.Text = "Hex ID";
             // 
-            // olvColumn70
+            // lvcMonsterTab5CanHeal
             // 
-            this.olvColumn70.AspectName = "Unknown11";
-            this.olvColumn70.AspectToStringFormat = "{0:X}";
-            this.olvColumn70.Text = "CanHeal";
-            this.olvColumn70.Width = 70;
+            this.lvcMonsterTab5CanHeal.AspectName = "Unknown11";
+            this.lvcMonsterTab5CanHeal.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab5CanHeal.Text = "CanHeal";
+            this.lvcMonsterTab5CanHeal.Width = 70;
             // 
-            // olvColumn71
+            // lvcMonsterTab5Unknown12
             // 
-            this.olvColumn71.AspectName = "Unknown12";
-            this.olvColumn71.AspectToStringFormat = "{0:X}";
-            this.olvColumn71.Text = "Unknown12";
-            this.olvColumn71.Width = 70;
+            this.lvcMonsterTab5Unknown12.AspectName = "Unknown12";
+            this.lvcMonsterTab5Unknown12.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab5Unknown12.Text = "Unknown12";
+            this.lvcMonsterTab5Unknown12.Width = 70;
             // 
-            // olvColumn72
+            // lvcMonsterTab5SpellChance1
             // 
-            this.olvColumn72.AspectName = "Unknown13";
-            this.olvColumn72.AspectToStringFormat = "{0:X}";
-            this.olvColumn72.Text = "+spellChance1";
-            this.olvColumn72.Width = 82;
+            this.lvcMonsterTab5SpellChance1.AspectName = "Unknown13";
+            this.lvcMonsterTab5SpellChance1.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab5SpellChance1.Text = "+spellChance1";
+            this.lvcMonsterTab5SpellChance1.Width = 82;
             // 
-            // olvColumn73
+            // lvcMonsterTab5SpellChance2
             // 
-            this.olvColumn73.AspectName = "Unknown14";
-            this.olvColumn73.AspectToStringFormat = "{0:X}";
-            this.olvColumn73.Text = "+spellChance2";
-            this.olvColumn73.Width = 82;
+            this.lvcMonsterTab5SpellChance2.AspectName = "Unknown14";
+            this.lvcMonsterTab5SpellChance2.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab5SpellChance2.Text = "+spellChance2";
+            this.lvcMonsterTab5SpellChance2.Width = 82;
             // 
-            // olvColumn74
+            // lvcMonsterTab5SpellChance3
             // 
-            this.olvColumn74.AspectName = "Unknown15";
-            this.olvColumn74.AspectToStringFormat = "{0:X}";
-            this.olvColumn74.Text = "+spellChance3";
-            this.olvColumn74.Width = 82;
+            this.lvcMonsterTab5SpellChance3.AspectName = "Unknown15";
+            this.lvcMonsterTab5SpellChance3.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab5SpellChance3.Text = "+spellChance3";
+            this.lvcMonsterTab5SpellChance3.Width = 82;
             // 
-            // olvColumn75
+            // lvcMonsterTab5SpellChance4
             // 
-            this.olvColumn75.AspectName = "Unknown16";
-            this.olvColumn75.AspectToStringFormat = "{0:X}";
-            this.olvColumn75.Text = "+spellChance4";
-            this.olvColumn75.Width = 82;
+            this.lvcMonsterTab5SpellChance4.AspectName = "Unknown16";
+            this.lvcMonsterTab5SpellChance4.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab5SpellChance4.Text = "+spellChance4";
+            this.lvcMonsterTab5SpellChance4.Width = 82;
             // 
-            // olvColumn76
+            // lvcMonsterTab5SpellChance5
             // 
-            this.olvColumn76.AspectName = "Unknown17";
-            this.olvColumn76.AspectToStringFormat = "{0:X}";
-            this.olvColumn76.Text = "+spellChance5";
-            this.olvColumn76.Width = 82;
+            this.lvcMonsterTab5SpellChance5.AspectName = "Unknown17";
+            this.lvcMonsterTab5SpellChance5.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab5SpellChance5.Text = "+spellChance5";
+            this.lvcMonsterTab5SpellChance5.Width = 82;
             // 
-            // olvColumn77
+            // lvcMonsterTab5SpellChance6
             // 
-            this.olvColumn77.AspectName = "Unknown18";
-            this.olvColumn77.AspectToStringFormat = "{0:X}";
-            this.olvColumn77.Text = "+spellChance6";
-            this.olvColumn77.Width = 82;
+            this.lvcMonsterTab5SpellChance6.AspectName = "Unknown18";
+            this.lvcMonsterTab5SpellChance6.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab5SpellChance6.Text = "+spellChance6";
+            this.lvcMonsterTab5SpellChance6.Width = 82;
             // 
-            // olvColumn78
+            // lvcMonsterTab5Unknown19
             // 
-            this.olvColumn78.AspectName = "Unknown19";
-            this.olvColumn78.AspectToStringFormat = "{0:X}";
-            this.olvColumn78.Text = "Unknown19";
-            this.olvColumn78.Width = 70;
+            this.lvcMonsterTab5Unknown19.AspectName = "Unknown19";
+            this.lvcMonsterTab5Unknown19.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab5Unknown19.Text = "Unknown19";
+            this.lvcMonsterTab5Unknown19.Width = 70;
             // 
-            // olvColumn79
+            // lvcMonsterTab5Unknown20
             // 
-            this.olvColumn79.AspectName = "Unknown20";
-            this.olvColumn79.AspectToStringFormat = "{0:X}";
-            this.olvColumn79.Text = "Unknown20";
-            this.olvColumn79.Width = 70;
+            this.lvcMonsterTab5Unknown20.AspectName = "Unknown20";
+            this.lvcMonsterTab5Unknown20.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab5Unknown20.Text = "Unknown20";
+            this.lvcMonsterTab5Unknown20.Width = 70;
             // 
             // frmX019_Editor
             // 
@@ -1404,94 +1404,94 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.TabPage tabMonsterTab1;
         private BrightIdeasSoftware.ObjectListView olvMonsterTab1;
-        private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.OLVColumn olvColumn7;
-        private BrightIdeasSoftware.OLVColumn olvColumn2;
-        private BrightIdeasSoftware.OLVColumn olvColumn3;
-        private BrightIdeasSoftware.OLVColumn olvColumn4;
-        private BrightIdeasSoftware.OLVColumn olvColumn5;
-        private BrightIdeasSoftware.OLVColumn olvColumn6;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1Name;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1ID;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1Address;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1MaxHP;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1MaxMP;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1Level;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1Attack;
         private System.Windows.Forms.TabControl tabMain;
-        private BrightIdeasSoftware.OLVColumn olvColumn8;
-        private BrightIdeasSoftware.OLVColumn olvColumn9;
-        private BrightIdeasSoftware.OLVColumn olvColumn10;
-        private BrightIdeasSoftware.OLVColumn olvColumn11;
-        private BrightIdeasSoftware.OLVColumn olvColumn12;
-        private BrightIdeasSoftware.OLVColumn olvColumn13;
-        private BrightIdeasSoftware.OLVColumn olvColumn14;
-        private BrightIdeasSoftware.OLVColumn olvColumn15;
-        private BrightIdeasSoftware.OLVColumn olvColumn16;
-        private BrightIdeasSoftware.OLVColumn olvColumn17;
-        private BrightIdeasSoftware.OLVColumn olvColumn18;
-        private BrightIdeasSoftware.OLVColumn olvColumn19;
-        private BrightIdeasSoftware.OLVColumn olvColumn20;
-        private BrightIdeasSoftware.OLVColumn olvColumn21;
-        private BrightIdeasSoftware.OLVColumn olvColumn22;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1Defense;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1Agility;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1Mov;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1Luck;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1Turns;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1HPRegen;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1MPRegen;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1EarthRes;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1FireRes;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1IceRes;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1SparkRes;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1WindRes;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1LightRes;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1DarkRes;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1UnusedRes;
         private System.Windows.Forms.TabPage tabMonsterTab2;
         private BrightIdeasSoftware.ObjectListView olvMonsterTab2;
-        private BrightIdeasSoftware.OLVColumn olvColumn23;
-        private BrightIdeasSoftware.OLVColumn olvColumn24;
-        private BrightIdeasSoftware.OLVColumn olvColumn26;
-        private BrightIdeasSoftware.OLVColumn olvColumn27;
-        private BrightIdeasSoftware.OLVColumn olvColumn28;
-        private BrightIdeasSoftware.OLVColumn olvColumn29;
-        private BrightIdeasSoftware.OLVColumn olvColumn30;
-        private BrightIdeasSoftware.OLVColumn olvColumn31;
-        private BrightIdeasSoftware.OLVColumn olvColumn32;
-        private BrightIdeasSoftware.OLVColumn olvColumn33;
-        private BrightIdeasSoftware.OLVColumn olvColumn34;
-        private BrightIdeasSoftware.OLVColumn olvColumn35;
-        private BrightIdeasSoftware.OLVColumn olvColumn36;
-        private BrightIdeasSoftware.OLVColumn olvColumn37;
-        private BrightIdeasSoftware.OLVColumn olvColumn38;
-        private BrightIdeasSoftware.OLVColumn olvColumn39;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2Name;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2ID;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2Spell1;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2Spell1Level;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2Spell2;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2Spell2Level;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2Spell3;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2Spell3Level;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2Spell4;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2Spell4Level;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2Weapon;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2EquippedAccessory;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2ItemSlot1;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2ItemSlot2;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2ItemSlot3;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab2ItemSlot4;
         private System.Windows.Forms.TabPage tabMonsterTab3;
         private BrightIdeasSoftware.ObjectListView olvMonsterTab3;
-        private BrightIdeasSoftware.OLVColumn olvColumn25;
-        private BrightIdeasSoftware.OLVColumn olvColumn40;
-        private BrightIdeasSoftware.OLVColumn olvColumn42;
-        private BrightIdeasSoftware.OLVColumn olvColumn43;
-        private BrightIdeasSoftware.OLVColumn olvColumn44;
-        private BrightIdeasSoftware.OLVColumn olvColumn45;
-        private BrightIdeasSoftware.OLVColumn olvColumn46;
-        private BrightIdeasSoftware.OLVColumn olvColumn47;
-        private BrightIdeasSoftware.OLVColumn olvColumn48;
-        private BrightIdeasSoftware.OLVColumn olvColumn49;
-        private BrightIdeasSoftware.OLVColumn olvColumn50;
-        private BrightIdeasSoftware.OLVColumn olvColumn51;
-        private BrightIdeasSoftware.OLVColumn olvColumn52;
-        private BrightIdeasSoftware.OLVColumn olvColumn53;
-        private BrightIdeasSoftware.OLVColumn olvColumn54;
-        private BrightIdeasSoftware.OLVColumn olvColumn55;
-        private BrightIdeasSoftware.OLVColumn olvColumn56;
-        private BrightIdeasSoftware.OLVColumn olvColumn57;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Name;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3ID;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Special1;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Special2;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Special3;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Special4;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Special5;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Special6;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Special7;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Special8;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Special9;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Special10;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Unknown1;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Unknown2;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Unknown3;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Unknown4;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Unknown5;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3Unknown6;
         private System.Windows.Forms.TabPage tabMonsterTab4;
         private BrightIdeasSoftware.ObjectListView olvMonsterTab4;
-        private BrightIdeasSoftware.OLVColumn olvColumn41;
-        private BrightIdeasSoftware.OLVColumn olvColumn58;
-        private BrightIdeasSoftware.OLVColumn olvColumn60;
-        private BrightIdeasSoftware.OLVColumn olvColumn61;
-        private BrightIdeasSoftware.OLVColumn olvColumn62;
-        private BrightIdeasSoftware.OLVColumn olvColumn63;
-        private BrightIdeasSoftware.OLVColumn olvColumn64;
-        private BrightIdeasSoftware.OLVColumn olvColumn65;
-        private BrightIdeasSoftware.OLVColumn olvColumn66;
-        private BrightIdeasSoftware.OLVColumn olvColumn67;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab4Name;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab4ID;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab4Gold;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab4Drop;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab4Unknown7;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab4DroprateType;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab4SlowPlus;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab4SupportPlus;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab4MagicType;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab4MovementType;
         private System.Windows.Forms.TabPage tabMonsterTab5;
         private BrightIdeasSoftware.ObjectListView olvMonsterTab5;
-        private BrightIdeasSoftware.OLVColumn olvColumn59;
-        private BrightIdeasSoftware.OLVColumn olvColumn68;
-        private BrightIdeasSoftware.OLVColumn olvColumn70;
-        private BrightIdeasSoftware.OLVColumn olvColumn71;
-        private BrightIdeasSoftware.OLVColumn olvColumn72;
-        private BrightIdeasSoftware.OLVColumn olvColumn73;
-        private BrightIdeasSoftware.OLVColumn olvColumn74;
-        private BrightIdeasSoftware.OLVColumn olvColumn75;
-        private BrightIdeasSoftware.OLVColumn olvColumn76;
-        private BrightIdeasSoftware.OLVColumn olvColumn77;
-        private BrightIdeasSoftware.OLVColumn olvColumn78;
-        private BrightIdeasSoftware.OLVColumn olvColumn79;
-        private BrightIdeasSoftware.OLVColumn olvColumn69;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab5Name;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab5ID;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab5CanHeal;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab5Unknown12;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab5SpellChance1;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab5SpellChance2;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab5SpellChance3;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab5SpellChance4;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab5SpellChance5;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab5SpellChance6;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab5Unknown19;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab5Unknown20;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab1SpriteID;
     }
 }
 
