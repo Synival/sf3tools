@@ -57,19 +57,13 @@
     <Compile Include="Forms\frmX013_Editor.Designer.cs">
       <DependentUpon>frmX013_Editor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\CritMod\CritModList.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="Models\CritMod\CritModList.cs" />
     <Compile Include="Models\CritMod\CritMod.cs" />
     <Compile Include="Models\StatusEffect\StatusEffect.cs" />
     <Compile Include="Models\StatusEffect\StatusEffectList.cs" />
     <Compile Include="Models\WeaponSpellRank\WeaponSpellRank.cs" />
-    <Compile Include="Models\WeaponSpellRank\WeaponSpellRankList.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Models\Critrate\CritrateList.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="Models\WeaponSpellRank\WeaponSpellRankList.cs" />
+    <Compile Include="Models\Critrate\CritrateList.cs" />
     <Compile Include="Models\Critrate\Critrate.cs" />
     <Compile Include="Models\HealExp\HealExp.cs" />
     <Compile Include="Models\HealExp\HealExpList.cs" />
@@ -86,15 +80,11 @@
     <Compile Include="Models\Soulmate\Soulmate.cs" />
     <Compile Include="Models\Soulmate\SoulmateList.cs" />
     <Compile Include="Models\SpecialChance\SpecialChance.cs" />
-    <Compile Include="Models\SpecialChance\SpecialChanceList.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="Models\SpecialChance\SpecialChanceList.cs" />
     <Compile Include="Models\Spells\SpellList.cs" />
     <Compile Include="Models\Spells\Spells.cs" />
     <Compile Include="Models\Stats\Stats.cs" />
-    <Compile Include="Models\Stats\StatsList.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="Models\Stats\StatsList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmX013_Editor.resx">
