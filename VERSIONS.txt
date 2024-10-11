@@ -1,6 +1,0 @@
-X1 Editor: v033
-X002 Editor: v019
-X013 Editor: v016
-X019 Editor: v011
-X033/X031 Editor: v018
-IconPointerEditor: v008
