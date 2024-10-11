@@ -502,7 +502,7 @@ namespace SF3.X1_Editor.Forms
             return true;
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiFile_Open_Click(object sender, EventArgs e)
         {
             string[] words = new[] { "" };
             string lastWord = "";
@@ -547,7 +547,7 @@ namespace SF3.X1_Editor.Forms
             }
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
         {
             if (_fileEditor == null)
             {
@@ -752,16 +752,12 @@ namespace SF3.X1_Editor.Forms
             }*/
         }
 
-        private void frmX1_Editor_Load(object sender, EventArgs e)
-        {
-        }
-
         public static class Globals
         {
             public static bool treasureDebug = false;
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario1;
             _map = 0x00; //synbios lead by default
@@ -770,7 +766,7 @@ namespace SF3.X1_Editor.Forms
             updateText();
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario2;
             _map = 0x04; //medion lead by default
@@ -779,7 +775,7 @@ namespace SF3.X1_Editor.Forms
             updateText();
         }
 
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario3;
             _map = 0x08; //julian lead by default
@@ -788,7 +784,7 @@ namespace SF3.X1_Editor.Forms
             updateText();
         }
 
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.PremiumDisk;
             _map = 0x00; //synbios lead by default
@@ -797,7 +793,7 @@ namespace SF3.X1_Editor.Forms
 
             updateText();
         }
-        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        private void tsmiScenario_BTL99_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Other;
             _scn = "BTL99";
@@ -806,43 +802,35 @@ namespace SF3.X1_Editor.Forms
             updateText();
         }
 
-        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        private void tsmiMap_MapSynbios_Click(object sender, EventArgs e)
         {
             _map = 0x00; //map with synbios as lead
             _maps = "Synbios";
             updateText();
         }
 
-        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        private void tsmiMap_MapMedion_Click(object sender, EventArgs e)
         {
             _map = 0x04; //map with medion as lead
             _maps = "Medion";
             updateText();
         }
 
-        private void toolStripMenuItem9_Click(object sender, EventArgs e)
+        private void tsmiMap_MapJulian_Click(object sender, EventArgs e)
         {
             _map = 0x08; //map with julian as lead
             _maps = "Julian";
             updateText();
         }
 
-        private void toolStripMenuItem10_Click(object sender, EventArgs e)
+        private void tsmiMap_MapExtra_Click(object sender, EventArgs e)
         {
             _map = 0x0C; //map with no lead or a extra as lead. also for ruins
             _maps = "Extra";
             updateText();
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void toolStripTextBox1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void battleToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiMapType_BattleToggle_Click(object sender, EventArgs e)
         {
             //battle
             if (isBattle == false)
@@ -860,7 +848,7 @@ namespace SF3.X1_Editor.Forms
             updateText();
         }
 
-        private void treasureDebugToggleOffToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiHelp_TreasureDebugToggle_Click(object sender, EventArgs e)
         {
             if (Globals.treasureDebug == true)
             {

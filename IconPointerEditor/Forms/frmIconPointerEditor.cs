@@ -29,7 +29,6 @@ namespace SF3.IconPointerEditor.Forms
                 tsmiScenario_Scenario2.Checked = (_scenario == ScenarioType.Scenario2);
                 tsmiScenario_Scenario3.Checked = (_scenario == ScenarioType.Scenario3);
                 tsmiScenario_PremiumDisk.Checked = (_scenario == ScenarioType.PremiumDisk);
-                tsmiHelp_OpenInfo.Checked = (_scenario == ScenarioType.Other);
             }
         }
 
@@ -71,7 +70,7 @@ namespace SF3.IconPointerEditor.Forms
             return true;
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiFile_Open_Click(object sender, EventArgs e)
         {
             OpenFileDialog openfile = new OpenFileDialog();
             openfile.Filter = "SF3 data (X011*.bin)|X011*.bin|SF3 data (X021*.bin)|X021*.bin|SF3 data (X026*.bin)|X026*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
@@ -105,7 +104,7 @@ namespace SF3.IconPointerEditor.Forms
             }
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
         {
             if (_fileEditor == null)
             {
@@ -177,32 +176,27 @@ namespace SF3.IconPointerEditor.Forms
             }
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario1;
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario2;
         }
 
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario3;
         }
 
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.PremiumDisk;
         }
 
-        private void toolStripMenuItem5_Click(object sender, EventArgs e)
-        {
-            Scenario = ScenarioType.Other;
-        }
-
-        private void toolStripMenuItem6_Click_1(object sender, EventArgs e)
+        private void tsmiHelp_X026Toggle_Click(object sender, EventArgs e)
         {
             if (_x026 == true)
             {

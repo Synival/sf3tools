@@ -304,7 +304,7 @@ namespace SF3.X033_X031_Editor.Forms
             return true;
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiFile_Open_Click(object sender, EventArgs e)
         {
             OpenFileDialog openfile = new OpenFileDialog();
             openfile.Filter = "SF3 data (X033.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
@@ -338,7 +338,7 @@ namespace SF3.X033_X031_Editor.Forms
             }
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
         {
             if (_fileEditor == null)
             {
@@ -364,42 +364,6 @@ namespace SF3.X033_X031_Editor.Forms
             {
                 _fileEditor.SaveFile(savefile.FileName);
             }
-        }
-
-        private void frmX033_X031_Editor_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            /*try {
-                byte[] data = olvMonsters.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }*/
-            /*
-            try {
-                byte[] data = olvItems.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/itemstate." +
-                     ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }*/
-            /*try {
-                byte[] data = olvBlacksmith.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/blacksmithstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }
-            try {
-                byte[] data = olvStoreItems.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/storesstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }
-            try {
-                byte[] data = olvSpells.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/spellsstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }*/
         }
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e)
@@ -525,22 +489,22 @@ namespace SF3.X033_X031_Editor.Forms
             public static bool debugs = false;
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario1;
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario2;
         }
 
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario3;
         }
 
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.PremiumDisk;
         }
@@ -550,7 +514,7 @@ namespace SF3.X033_X031_Editor.Forms
             Debugs.debugs = !Debugs.debugs;
         }
 
-        private void tabpage6_Click(object sender, EventArgs e)
+        private void tabMain_Click(object sender, EventArgs e)
         {
             olvCurveCalc.ClearObjects();
             if (_statsList != null)

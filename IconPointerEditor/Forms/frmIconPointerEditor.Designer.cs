@@ -90,7 +90,7 @@
             this.tsmiFile_Open.Name = "tsmiFile_Open";
             this.tsmiFile_Open.Size = new System.Drawing.Size(180, 22);
             this.tsmiFile_Open.Text = "Open";
-            this.tsmiFile_Open.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.tsmiFile_Open.Click += new System.EventHandler(this.tsmiFile_Open_Click);
             // 
             // tsmiFile_SaveAs
             // 
@@ -98,7 +98,7 @@
             this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
             this.tsmiFile_SaveAs.Size = new System.Drawing.Size(180, 22);
             this.tsmiFile_SaveAs.Text = "Save As";
-            this.tsmiFile_SaveAs.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            this.tsmiFile_SaveAs.Click += new System.EventHandler(this.tsmiFile_SaveAs_Click);
             // 
             // tsmiHelp
             // 
@@ -127,7 +127,7 @@
             this.tsmiHelp_X026Toggle.Name = "tsmiHelp_X026Toggle";
             this.tsmiHelp_X026Toggle.Size = new System.Drawing.Size(219, 22);
             this.tsmiHelp_X026Toggle.Text = " x026 toggle";
-            this.tsmiHelp_X026Toggle.Click += new System.EventHandler(this.toolStripMenuItem6_Click_1);
+            this.tsmiHelp_X026Toggle.Click += new System.EventHandler(this.tsmiHelp_X026Toggle_Click);
             // 
             // tsmiScenario
             // 
@@ -145,28 +145,28 @@
             this.tsmiScenario_Scenario1.Name = "tsmiScenario_Scenario1";
             this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario1.Text = "Scenario 1";
-            this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.tsmiScenario_Scenario1_Click);
             // 
             // tsmiScenario_Scenario2
             // 
             this.tsmiScenario_Scenario2.Name = "tsmiScenario_Scenario2";
             this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario2.Text = "Scenario 2";
-            this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.tsmiScenario_Scenario2_Click);
             // 
             // tsmiScenario_Scenario3
             // 
             this.tsmiScenario_Scenario3.Name = "tsmiScenario_Scenario3";
             this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario3.Text = "Scenario 3";
-            this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.tsmiScenario_Scenario3_Click);
             // 
             // tsmiScenario_PremiumDisk
             // 
             this.tsmiScenario_PremiumDisk.Name = "tsmiScenario_PremiumDisk";
             this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_PremiumDisk.Text = "Premium Disk";
-            this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.tsmiScenario_PremiumDisk_Click);
             // 
             // tabItemIcons
             // 

@@ -243,7 +243,7 @@ namespace SF3.X019_Editor.Forms
             return true;
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiFile_Open_Click(object sender, EventArgs e)
         {
             OpenFileDialog openfile = new OpenFileDialog();
             openfile.Filter = "SF3 data (X019.bin)|X019.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
@@ -277,7 +277,7 @@ namespace SF3.X019_Editor.Forms
             }
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
         {
             if (_fileEditor == null)
             {
@@ -470,36 +470,28 @@ namespace SF3.X019_Editor.Forms
             }*/
         }
 
-        private void frmX019_Editor_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario1;
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario2;
         }
 
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario3;
         }
 
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.PremiumDisk;
         }
-        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        private void tsmiScenario_PremiumDiskX044_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Other;
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
         }
     }
 }

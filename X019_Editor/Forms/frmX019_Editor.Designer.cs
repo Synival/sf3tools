@@ -172,7 +172,7 @@
             this.tsmiFile_Open.Name = "tsmiFile_Open";
             this.tsmiFile_Open.Size = new System.Drawing.Size(114, 22);
             this.tsmiFile_Open.Text = "Open";
-            this.tsmiFile_Open.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.tsmiFile_Open.Click += new System.EventHandler(this.tsmiFile_Open_Click);
             // 
             // tsmiFile_SaveAs
             // 
@@ -180,7 +180,7 @@
             this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
             this.tsmiFile_SaveAs.Size = new System.Drawing.Size(114, 22);
             this.tsmiFile_SaveAs.Text = "Save As";
-            this.tsmiFile_SaveAs.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            this.tsmiFile_SaveAs.Click += new System.EventHandler(this.tsmiFile_SaveAs_Click);
             // 
             // tsmiHelp
             // 
@@ -195,7 +195,6 @@
             this.tsmiHelp_Version.Name = "tsmiHelp_Version";
             this.tsmiHelp_Version.Size = new System.Drawing.Size(180, 22);
             this.tsmiHelp_Version.Text = "Ver 0.11";
-            this.tsmiHelp_Version.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // tsmiScenario
             // 
@@ -215,28 +214,28 @@
             this.tsmiScenario_Scenario1.Name = "tsmiScenario_Scenario1";
             this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario1.Text = "Scenario 1";
-            this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.tsmiScenario_Scenario1_Click);
             // 
             // tsmiScenario_Scenario2
             // 
             this.tsmiScenario_Scenario2.Name = "tsmiScenario_Scenario2";
             this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario2.Text = "Scenario 2";
-            this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.tsmiScenario_Scenario2_Click);
             // 
             // tsmiScenario_Scenario3
             // 
             this.tsmiScenario_Scenario3.Name = "tsmiScenario_Scenario3";
             this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario3.Text = "Scenario 3";
-            this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.tsmiScenario_Scenario3_Click);
             // 
             // tsmiScenario_PremiumDisk
             // 
             this.tsmiScenario_PremiumDisk.Name = "tsmiScenario_PremiumDisk";
             this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_PremiumDisk.Text = "Premium Disk";
-            this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.tsmiScenario_PremiumDisk_Click);
             // 
             // toolStripSeparator5
             // 
@@ -248,6 +247,7 @@
             this.tsmiScenario_PremiumDiskX044.Name = "tsmiScenario_PremiumDiskX044";
             this.tsmiScenario_PremiumDiskX044.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_PremiumDiskX044.Text = "Premium disk X044";
+            this.tsmiScenario_PremiumDiskX044.Click += new System.EventHandler(this.tsmiScenario_PremiumDiskX044_Click);
             // 
             // tabMonsterTab1
             // 
@@ -1120,7 +1120,6 @@
             this.Name = "frmX019_Editor";
             this.Text = "Sf3 X019 editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmX019_Editor_FormClosing);
-            this.Load += new System.EventHandler(this.frmX019_Editor_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabMonsterTab1.ResumeLayout(false);

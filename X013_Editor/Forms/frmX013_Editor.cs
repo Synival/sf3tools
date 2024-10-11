@@ -407,7 +407,7 @@ namespace SF3.X013_Editor.Forms
             return true;
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiFile_Open_Click(object sender, EventArgs e)
         {
             OpenFileDialog openfile = new OpenFileDialog();
             openfile.Filter = "SF3 scn3 data (X013.bin)|X013.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
@@ -441,7 +441,7 @@ namespace SF3.X013_Editor.Forms
             }
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
         {
             if (_fileEditor == null)
             {
@@ -474,42 +474,6 @@ namespace SF3.X013_Editor.Forms
             {
                 _fileEditor.SaveFile(savefile.FileName);
             }
-        }
-
-        private void frmX013_Editor_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            /*try {
-                byte[] data = olvMonsters.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }*/
-            /*
-            try {
-                byte[] data = olvItems.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/itemstate." +
-                     ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }*/
-            /*try {
-                byte[] data = olvBlacksmith.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/blacksmithstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }
-            try {
-                byte[] data = olvStoreItems.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/storesstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }
-            try {
-                byte[] data = olvSpells.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/spellsstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }*/
         }
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e)
@@ -644,26 +608,22 @@ namespace SF3.X013_Editor.Forms
             }*/
         }
 
-        private void frmX013_Editor_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario1;
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario2;
         }
 
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario3;
         }
 
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.PremiumDisk;
         }
