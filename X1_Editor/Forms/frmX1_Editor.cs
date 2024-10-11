@@ -30,7 +30,22 @@ namespace SF3.X1_Editor.Forms
         private string Version = "033";
         private bool isBattle = true;
 
-        private ScenarioType _scenario = ScenarioType.Scenario1;
+        private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
+
+        private ScenarioType Scenario
+        {
+            get => _scenario;
+            set
+            {
+                _scenario = value;
+                tsmiScenario_Scenario1.Checked = (_scenario == ScenarioType.Scenario1);
+                tsmiScenario_Scenario2.Checked = (_scenario == ScenarioType.Scenario2);
+                tsmiScenario_Scenario3.Checked = (_scenario == ScenarioType.Scenario3);
+                tsmiScenario_PremiumDisk.Checked = (_scenario == ScenarioType.PremiumDisk);
+                tsmiScenario_BTL99.Checked = (_scenario == ScenarioType.Other);
+            }
+        }
+
         private int _map = 0x00;
         private string _scn = "1";
         private string _maps = "Synbios";
@@ -56,6 +71,7 @@ namespace SF3.X1_Editor.Forms
         public frmX1_Editor()
         {
             InitializeComponent();
+            Scenario = ScenarioType.Scenario1;
 
             /*try {
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
@@ -240,28 +256,28 @@ namespace SF3.X1_Editor.Forms
             int offset = 0;
             int sub = 0;
 
-            if (_scenario == ScenarioType.Scenario1)
+            if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
             }
-            else if (_scenario == ScenarioType.Scenario2)
+            else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
             }
-            else if (_scenario == ScenarioType.Scenario3)
+            else if (Scenario == ScenarioType.Scenario3)
             {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
             }
-            else if (_scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk)
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
             }
 
-            else if (_scenario == ScenarioType.Other)
+            else if (Scenario == ScenarioType.Other)
             {
                 offset = 0x00000018; //btl99 initial pointer
                 sub = 0x06060000;
@@ -275,7 +291,7 @@ namespace SF3.X1_Editor.Forms
             /*A value higher means a pointer is on the offset, meaning we are in a battle. If it is not a 
               pointer we are at our destination so we know a town is loaded.
             */
-            if (_scenario == ScenarioType.Scenario1 && offset > 0x0605F000)
+            if (Scenario == ScenarioType.Scenario1 && offset > 0x0605F000)
             {
                 isBattle = true;
                 //Console.WriteLine(offset.ToString("X"));
@@ -397,13 +413,13 @@ namespace SF3.X1_Editor.Forms
                 return false;
             }
             _warpList = new WarpList(_fileEditor);
-            if (_scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other && !_warpList.Load())
+            if (Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_warpList.Load())
             {
                 MessageBox.Show("Could not load Resources/X1Warp.xml.");
                 return false;
             }
             _tileList = new TileList(_fileEditor);
-            if (isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other && !_tileList.Load())
+            if (isBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_tileList.Load())
             {
                 MessageBox.Show("Could not load Resources/MovementTypes.xml.");
                 return false;
@@ -423,7 +439,7 @@ namespace SF3.X1_Editor.Forms
                 return false;
             }
             _arrowList = new ArrowList(_fileEditor);
-            if (!isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other && !_arrowList.Load())
+            if (!isBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_arrowList.Load())
             {
                 MessageBox.Show("Could not load Resources/ArrowList.xml.");
                 return false;
@@ -481,16 +497,16 @@ namespace SF3.X1_Editor.Forms
                 olvNonBattleEnter.AddObjects(_enterList.Models);
             }
 
-            if (!isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other)
+            if (!isBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
             {
                 olvArrows.AddObjects(_arrowList.Models);
             }
 
-            if (_scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other)
+            if (Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
             {
                 olvWarpTable.AddObjects(_warpList.Models);
             }
-            if (isBattle && _scenario != ScenarioType.Scenario1 && _scenario != ScenarioType.Other)
+            if (isBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
             {
                 olvTileData.AddObjects(_tileList.Models);
             }
@@ -511,7 +527,7 @@ namespace SF3.X1_Editor.Forms
             openfile.Filter = "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new X1FileEditor(_scenario, _map);
+                _fileEditor = new X1FileEditor(Scenario, _map);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
@@ -759,7 +775,7 @@ namespace SF3.X1_Editor.Forms
 
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.Scenario1;
+            Scenario = ScenarioType.Scenario1;
             _map = 0x00; //synbios lead by default
             _scn = "1";
             _maps = "Synbios";
@@ -768,7 +784,7 @@ namespace SF3.X1_Editor.Forms
 
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.Scenario2;
+            Scenario = ScenarioType.Scenario2;
             _map = 0x04; //medion lead by default
             _scn = "2";
             _maps = "Medion";
@@ -777,7 +793,7 @@ namespace SF3.X1_Editor.Forms
 
         private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.Scenario3;
+            Scenario = ScenarioType.Scenario3;
             _map = 0x08; //julian lead by default
             _scn = "3";
             _maps = "Julian";
@@ -786,7 +802,7 @@ namespace SF3.X1_Editor.Forms
 
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.PremiumDisk;
+            Scenario = ScenarioType.PremiumDisk;
             _map = 0x00; //synbios lead by default
             _scn = "PD";
             _maps = "Synbios";
@@ -795,7 +811,7 @@ namespace SF3.X1_Editor.Forms
         }
         private void tsmiScenario_BTL99_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.Other;
+            Scenario = ScenarioType.Other;
             _scn = "BTL99";
             _maps = "Synbios";
 

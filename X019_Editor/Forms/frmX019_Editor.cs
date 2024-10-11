@@ -21,7 +21,21 @@ namespace SF3.X019_Editor.Forms
         //Used to append to state names to stop program loading states from older versions
         private string Version = "011";
 
-        private ScenarioType _scenario = ScenarioType.Scenario1;
+        private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
+
+        private ScenarioType Scenario
+        {
+            get => _scenario;
+            set
+            {
+                _scenario = value;
+                tsmiScenario_Scenario1.Checked = (_scenario == ScenarioType.Scenario1);
+                tsmiScenario_Scenario2.Checked = (_scenario == ScenarioType.Scenario2);
+                tsmiScenario_Scenario3.Checked = (_scenario == ScenarioType.Scenario3);
+                tsmiScenario_PremiumDisk.Checked = (_scenario == ScenarioType.PremiumDisk);
+                tsmiScenario_PremiumDiskX044.Checked = (_scenario == ScenarioType.Other);
+            }
+        }
 
         private ItemList _itemList;
 
@@ -30,6 +44,7 @@ namespace SF3.X019_Editor.Forms
         public frmX019_Editor()
         {
             InitializeComponent();
+            Scenario = ScenarioType.Scenario1;
 
             /*try {
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
@@ -249,7 +264,7 @@ namespace SF3.X019_Editor.Forms
             openfile.Filter = "SF3 data (X019.bin)|X019.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new SF3FileEditor(_scenario);
+                _fileEditor = new SF3FileEditor(Scenario);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
@@ -472,26 +487,26 @@ namespace SF3.X019_Editor.Forms
 
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.Scenario1;
+            Scenario = ScenarioType.Scenario1;
         }
 
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.Scenario2;
+            Scenario = ScenarioType.Scenario2;
         }
 
         private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.Scenario3;
+            Scenario = ScenarioType.Scenario3;
         }
 
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.PremiumDisk;
+            Scenario = ScenarioType.PremiumDisk;
         }
         private void tsmiScenario_PremiumDiskX044_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.Other;
+            Scenario = ScenarioType.Other;
         }
     }
 }
