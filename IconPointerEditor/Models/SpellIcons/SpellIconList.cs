@@ -9,7 +9,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
 {
     public class SpellIconList : IModelArray<SpellIcon>
     {
-        public SpellIconList(ISF3FileEditor fileEditor)
+        public SpellIconList(IIconPointerFileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -18,7 +18,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
 
         private SpellIcon[] modelsSorted;
         private SpellIcon[] models;
-        private ISF3FileEditor _fileEditor;
+        private IIconPointerFileEditor _fileEditor;
 
         private string r = "";
 

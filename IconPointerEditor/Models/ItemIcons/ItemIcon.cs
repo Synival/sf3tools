@@ -6,7 +6,7 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
 {
     public class ItemIcon
     {
-        private ISF3FileEditor _fileEditor;
+        private IIconPointerFileEditor _fileEditor;
 
         //ITEMS
         private int theItemIcon;
@@ -18,13 +18,13 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
         private string name;
         private int sub;
 
-        public ItemIcon(ISF3FileEditor fileEditor, int id, string text)
+        public ItemIcon(IIconPointerFileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                if (Globals.x026 == true)
+                if (_fileEditor.X026 == true)
                 {
                     offset = 0x08f0; //scn1 initial pointer
                     sub = 0x06078000;
@@ -51,7 +51,7 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                if (Globals.x026 == true)
+                if (_fileEditor.X026 == true)
                 {
                     offset = 0x0a08; //scn2 x026 initial pointer
                     sub = 0x06078000;
@@ -77,7 +77,7 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
             }
             else if (Scenario == ScenarioType.Scenario3)
             {
-                if (Globals.x026 == true)
+                if (_fileEditor.X026 == true)
                 {
                     offset = 0x09b4; //scn3 x026 initial pointer
                     sub = 0x06078000;
@@ -93,7 +93,7 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                if (Globals.x026 == true)
+                if (_fileEditor.X026 == true)
                 {
                     offset = 0x072c; //pd x026 initial pointer
                     sub = 0x06078000;
@@ -118,7 +118,7 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
 
             //int start = 0x354c + (id * 24);
 
-            if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
+            if (_fileEditor.X026 == true && (Scenario == ScenarioType.Scenario1))
             {
                 int start = offset + (id * 0x02);
                 theItemIcon = start; //1 bytes
@@ -144,7 +144,7 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
         {
             get
             {
-                if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
+                if (_fileEditor.X026 == true && (Scenario == ScenarioType.Scenario1))
                 {
                     return _fileEditor.GetWord(theItemIcon);
                 }
@@ -155,7 +155,7 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
             }
             set
             {
-                if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
+                if (_fileEditor.X026 == true && (Scenario == ScenarioType.Scenario1))
                 {
                     _fileEditor.SetWord(theItemIcon, value);
                 }

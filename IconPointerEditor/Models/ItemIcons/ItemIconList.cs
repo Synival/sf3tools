@@ -8,7 +8,7 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
 {
     public class ItemIconList : IModelArray<ItemIcon>
     {
-        public ItemIconList(ISF3FileEditor fileEditor)
+        public ItemIconList(IIconPointerFileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -17,7 +17,7 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
 
         private ItemIcon[] modelsSorted;
         private ItemIcon[] models;
-        private ISF3FileEditor _fileEditor;
+        private IIconPointerFileEditor _fileEditor;
 
         private string r = "";
 

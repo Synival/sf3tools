@@ -9,7 +9,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
 {
     public class SpellIcon
     {
-        private ISF3FileEditor _fileEditor;
+        private IIconPointerFileEditor _fileEditor;
 
         //SPELLS
         private int theSpellIcon;
@@ -35,13 +35,13 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public SpellIcon(ISF3FileEditor fileEditor, int id, string text)
+        public SpellIcon(IIconPointerFileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                if (Globals.x026 == true)
+                if (_fileEditor.X026 == true)
                 {
                     offset = 0x0a30; //scn1 initial pointer
                     sub = 0x06078000;
@@ -73,7 +73,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                if (Globals.x026 == true)
+                if (_fileEditor.X026 == true)
                 {
                     offset = 0x0a1c; //scn2 x026 initial pointer
                     sub = 0x06078000;
@@ -91,7 +91,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
             }
             else if (Scenario == ScenarioType.Scenario3)
             {
-                if (Globals.x026 == true)
+                if (_fileEditor.X026 == true)
                 {
                     offset = 0x09cc; //scn2 x026 initial pointer
                     sub = 0x06078000;
@@ -109,7 +109,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                if (Globals.x026 == true)
+                if (_fileEditor.X026 == true)
                 {
                     offset = 0x07a0; //pd x026 initial pointer
                     sub = 0x06078000;
@@ -136,7 +136,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
 
             //int start = 0x354c + (id * 24);
 
-            if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
+            if (_fileEditor.X026 == true && (Scenario == ScenarioType.Scenario1))
             {
                 int start = offset + (id * 0x02);
                 theSpellIcon = start; //2 bytes  
@@ -168,7 +168,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
         {
             get
             {
-                if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
+                if (_fileEditor.X026 == true && (Scenario == ScenarioType.Scenario1))
                 {
                     return _fileEditor.GetWord(theSpellIcon);
                 }
@@ -179,7 +179,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
             }
             set
             {
-                if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
+                if (_fileEditor.X026 == true && (Scenario == ScenarioType.Scenario1))
                 {
                     _fileEditor.SetWord(theSpellIcon, value);
                 }
@@ -194,7 +194,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
         {
             get
             {
-                if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
+                if (_fileEditor.X026 == true && (Scenario == ScenarioType.Scenario1))
                 {
                     return _fileEditor.GetWord(theSpellIcon) + realOffset;
                 }
@@ -205,7 +205,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
             }
             set
             {
-                if (Globals.x026 == true && (Scenario == ScenarioType.Scenario1))
+                if (_fileEditor.X026 == true && (Scenario == ScenarioType.Scenario1))
                 {
                     _fileEditor.SetWord(theSpellIcon, value - realOffset);
                 }

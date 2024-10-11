@@ -17,11 +17,12 @@ namespace SF3.IconPointerEditor.Forms
         private string Version = "007";
 
         private ScenarioType _scenario = ScenarioType.Scenario1;
+        public bool _x026 = false;
 
         private SpellIconList _itemList;
         private ItemIconList _presetList;
 
-        private ISF3FileEditor _fileEditor;
+        private IIconPointerFileEditor _fileEditor;
 
         public frmIconPointerEditor()
         {
@@ -61,7 +62,7 @@ namespace SF3.IconPointerEditor.Forms
             openfile.Filter = "SF3 data (X011*.bin)|X011*.bin|SF3 data (X021*.bin)|X021*.bin|SF3 data (X026*.bin)|X026*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new SF3FileEditor(_scenario);
+                _fileEditor = new IconPointerFileEditor(_scenario, _x026);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
@@ -161,13 +162,6 @@ namespace SF3.IconPointerEditor.Forms
             }
         }
 
-        public static class Globals
-        {
-            //public static int customOffset = 0x00000000;
-            public static bool x026 = false;
-            public static string toggle = "Off";
-        }
-
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario1;
@@ -195,16 +189,14 @@ namespace SF3.IconPointerEditor.Forms
 
         private void toolStripMenuItem6_Click_1(object sender, EventArgs e)
         {
-            if (Globals.x026 == true)
+            if (_x026 == true)
             {
-                Globals.x026 = false;
-                Globals.toggle = "Off";
+                _x026 = false;
                 updateText();
             }
             else
             {
-                Globals.x026 = true;
-                Globals.toggle = "On";
+                _x026 = true;
                 updateText();
             }
         }
@@ -213,7 +205,7 @@ namespace SF3.IconPointerEditor.Forms
         {
             //this.toolStripMenuItem12.Text = "Current Loading info. Map: " + Globals.maps + " Scenario " + Globals.scn + " MapType: " + Globals.battle + " debug: " + Globals.debug;
             //this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + Globals.fileName + "|          Current Loading info: Scenario: " + Globals.scn + " | Map: " + Globals.maps + " | MapType: " + Globals.battle + " | debug: " + Globals.debug;
-            this.Text = "Sf3 Icon pointer Editor" + "          " + "X026 mode: " + Globals.toggle;
+            this.Text = "Sf3 Icon pointer Editor" + "          " + "X026 mode: " + (_x026 ? "On" : "Off");
         }
     }
 }
