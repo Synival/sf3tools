@@ -648,11 +648,6 @@ namespace SF3.X013_Editor.Forms
         {
         }
 
-        public static class Globals
-        {
-            //public static int customOffset = 0x00000000;
-        }
-
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             _scenario = ScenarioType.Scenario1;
