@@ -34,8 +34,8 @@ namespace SF3.X033_X031_Editor.Forms
 
     public partial class frmX033_X031_Editor : Form
     {
-        //Used to append to state names to stop program loading states from older versions
-        private string Version = "018";
+        // Used to display version in the application
+        private string Version = "0.18";
 
         private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
 
@@ -85,6 +85,7 @@ namespace SF3.X033_X031_Editor.Forms
         public frmX033_X031_Editor()
         {
             InitializeComponent();
+            this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
 
             /*try {

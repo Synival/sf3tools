@@ -13,8 +13,8 @@ namespace SF3.IconPointerEditor.Forms
 {
     public partial class frmIconPointerEditor : Form
     {
-        //Used to append to state names to stop program loading states from older versions
-        private string Version = "007";
+        // Used to display version in the application
+        private string Version = "0.08";
 
         private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
 
@@ -52,6 +52,7 @@ namespace SF3.IconPointerEditor.Forms
         public frmIconPointerEditor()
         {
             InitializeComponent();
+            tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             X026 = false;
         }
