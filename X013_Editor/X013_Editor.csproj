@@ -157,7 +157,7 @@
     <Content Include="Resources\SpecialList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\StatList.xml">
+    <Content Include="Resources\X013StatList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\StatusGroupList.xml">

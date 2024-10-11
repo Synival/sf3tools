@@ -27,7 +27,7 @@ namespace SF3.X002_Editor.Models.StatBoost
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public bool Load()
         {
-            r = "Resources/statList.xml";
+            r = "Resources/X002StatList.xml";
 
             itemssorted = new StatBoost[0];
             items = new StatBoost[300]; //max size of itemList

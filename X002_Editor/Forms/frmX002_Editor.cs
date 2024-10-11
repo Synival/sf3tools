@@ -274,7 +274,7 @@ namespace SF3.X002_Editor.Forms
             _statList = new StatList(_fileEditor);
             if (!_statList.Load())
             {
-                MessageBox.Show("Could not load Resources/statList.xml.");
+                MessageBox.Show("Could not load Resources/X002StatList.xml.");
                 return false;
             }
             _weaponRankList = new WeaponRankList(_fileEditor);

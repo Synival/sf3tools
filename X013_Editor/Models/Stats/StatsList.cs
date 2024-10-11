@@ -27,7 +27,7 @@ namespace SF3.X013_Editor.Models.Stats
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public bool Load()
         {
-            r = "Resources/StatList.xml";
+            r = "Resources/X013StatList.xml";
 
             itemssorted = new Stat[0];
             items = new Stat[256]; //max size of itemList

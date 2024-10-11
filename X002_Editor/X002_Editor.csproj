@@ -138,7 +138,7 @@
     <Content Include="Resources\spellList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\statList.xml">
+    <Content Include="Resources\X002StatList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\WeaponRankList.xml">

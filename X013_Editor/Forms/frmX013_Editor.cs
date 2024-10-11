@@ -301,7 +301,7 @@ namespace SF3.X013_Editor.Forms
             _statsList = new StatsList(_fileEditor);
             if (!_statsList.Load())
             {
-                MessageBox.Show("Could not load Resources/StatList.xml.");
+                MessageBox.Show("Could not load Resources/X013StatList.xml.");
                 return false;
             }
 
