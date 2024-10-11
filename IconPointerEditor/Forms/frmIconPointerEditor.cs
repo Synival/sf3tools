@@ -16,8 +16,22 @@ namespace SF3.IconPointerEditor.Forms
         //Used to append to state names to stop program loading states from older versions
         private string Version = "007";
 
-        private ScenarioType _scenario = ScenarioType.Scenario1;
+        private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
         public bool _x026 = false;
+
+        private ScenarioType Scenario
+        {
+            get => _scenario;
+            set
+            {
+                _scenario = value;
+                toolStripMenuItem1.Checked = (_scenario == ScenarioType.Scenario1);
+                toolStripMenuItem2.Checked = (_scenario == ScenarioType.Scenario2);
+                toolStripMenuItem3.Checked = (_scenario == ScenarioType.Scenario3);
+                toolStripMenuItem4.Checked = (_scenario == ScenarioType.PremiumDisk);
+                toolStripMenuItem5.Checked = (_scenario == ScenarioType.Other);
+            }
+        }
 
         private SpellIconList _itemList;
         private ItemIconList _presetList;
@@ -27,6 +41,7 @@ namespace SF3.IconPointerEditor.Forms
         public frmIconPointerEditor()
         {
             InitializeComponent();
+            Scenario = ScenarioType.Scenario1;
         }
 
         private bool initialise()
@@ -62,7 +77,7 @@ namespace SF3.IconPointerEditor.Forms
             openfile.Filter = "SF3 data (X011*.bin)|X011*.bin|SF3 data (X021*.bin)|X021*.bin|SF3 data (X026*.bin)|X026*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new IconPointerFileEditor(_scenario, _x026);
+                _fileEditor = new IconPointerFileEditor(Scenario, _x026);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
@@ -164,27 +179,27 @@ namespace SF3.IconPointerEditor.Forms
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.Scenario1;
+            Scenario = ScenarioType.Scenario1;
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.Scenario2;
+            Scenario = ScenarioType.Scenario2;
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.Scenario3;
+            Scenario = ScenarioType.Scenario3;
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.PremiumDisk;
+            Scenario = ScenarioType.PremiumDisk;
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            _scenario = ScenarioType.Other;
+            Scenario = ScenarioType.Other;
         }
 
         private void toolStripMenuItem6_Click_1(object sender, EventArgs e)
