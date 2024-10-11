@@ -114,7 +114,7 @@
             // 
             this.tsmiHelp_Version.Name = "tsmiHelp_Version";
             this.tsmiHelp_Version.Size = new System.Drawing.Size(219, 22);
-            this.tsmiHelp_Version.Text = "Version 0.08";
+            this.tsmiHelp_Version.Text = "Version (set internally)";
             // 
             // tsmiHelp_OpenInfo
             // 

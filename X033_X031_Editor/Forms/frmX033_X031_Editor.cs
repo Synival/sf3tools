@@ -35,7 +35,7 @@ namespace SF3.X033_X031_Editor.Forms
     public partial class frmX033_X031_Editor : Form
     {
         // Used to display version in the application
-        private string Version = "0.18";
+        private string Version = "0.19";
 
         private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
 

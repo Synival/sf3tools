@@ -14,7 +14,7 @@ namespace SF3.IconPointerEditor.Forms
     public partial class frmIconPointerEditor : Form
     {
         // Used to display version in the application
-        private string Version = "0.08";
+        private string Version = "0.09";
 
         private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
 

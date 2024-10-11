@@ -258,7 +258,7 @@
             // 
             this.tsmiHelp_Version.Name = "tsmiHelp_Version";
             this.tsmiHelp_Version.Size = new System.Drawing.Size(180, 22);
-            this.tsmiHelp_Version.Text = "Version 0.16";
+            this.tsmiHelp_Version.Text = "Version (set internally)";
             // 
             // tsmiScenario
             // 

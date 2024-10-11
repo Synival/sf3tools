@@ -339,7 +339,7 @@
             // 
             this.tsmiHelp_Version.Name = "tsmiHelp_Version";
             this.tsmiHelp_Version.Size = new System.Drawing.Size(297, 22);
-            this.tsmiHelp_Version.Text = "Version 0.18";
+            this.tsmiHelp_Version.Text = "Version (set internally)";
             // 
             // tsmiHelp_X031forInCombatEtc
             // 
