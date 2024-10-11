@@ -571,10 +571,10 @@ namespace SF3.X033_X031_Editor.Forms
                         probableStats.Add(keyValue.Key, new ProbableStats(
                             keyValue.Value.GetWeightedAverage(),
                             new double[] {
-                                keyValue.Value.GetWeightedMedianAt(0.025),
+                                keyValue.Value.GetWeightedMedianAt(0.005),
                                 keyValue.Value.GetWeightedMedianAt(0.25),
                                 keyValue.Value.GetWeightedMedianAt(0.75),
-                                keyValue.Value.GetWeightedMedianAt(0.975)
+                                keyValue.Value.GetWeightedMedianAt(0.995)
                             }
                         ));
                     }
@@ -658,14 +658,14 @@ namespace SF3.X033_X031_Editor.Forms
                     likelySeries.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].Likely);
                 }
 
-                var range1Series = CurveGraph.Series[statTypeStr + " Range 1"];
+                var range1Series = CurveGraph.Series[statTypeStr + " Range 1 (50% Likely)"];
                 range1Series.Points.Clear();
                 foreach (var dataPoint in probableStatsDataPoints)
                 {
                     range1Series.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].AtPercentages[1], dataPoint.ProbableStats[statType].AtPercentages[2]);
                 }
 
-                var range2Series = CurveGraph.Series[statTypeStr + " Range 2"];
+                var range2Series = CurveGraph.Series[statTypeStr + " Range 2 (49% Likely)"];
                 range2Series.Points.Clear();
                 foreach (var dataPoint in probableStatsDataPoints)
                 {
