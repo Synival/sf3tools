@@ -14,6 +14,7 @@ using SF3.Exceptions;
 
 namespace SF3.X033_X031_Editor.Forms
 {
+    // TODO: place this somewhere else!
     public struct ProbableStats
     {
         public ProbableStats(double likely, double[] atPercentages)
@@ -541,6 +542,7 @@ namespace SF3.X033_X031_Editor.Forms
 
         private void CurveGraphCharacterComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshCurveGraph();
 
+        // TODO: this method does way too much work and shouldn't belong in the form. sort it out!!
         private void RefreshCurveGraph()
         {
             // Data points for the chart.
@@ -556,6 +558,8 @@ namespace SF3.X033_X031_Editor.Forms
             bool isPromoted = promotionLevel >= 1;
 
             // Default axis ranges.
+            // NOTE: The actual stat gain caps at (30, 99, 99).
+            //       This is different from level gains, which are (20, 99, 99).
             int maxLevel = isPromoted ? 40 : 20;
             int maxValue = promotionLevel == 0 ? 50 : promotionLevel == 1 ? 100 : 200;
 
@@ -665,7 +669,7 @@ namespace SF3.X033_X031_Editor.Forms
                     range1Series.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].AtPercentages[1], dataPoint.ProbableStats[statType].AtPercentages[2]);
                 }
 
-                var range2Series = CurveGraph.Series[statTypeStr + " Range 2 (49% Likely)"];
+                var range2Series = CurveGraph.Series[statTypeStr + " Range 2 (99% Likely)"];
                 range2Series.Points.Clear();
                 foreach (var dataPoint in probableStatsDataPoints)
                 {

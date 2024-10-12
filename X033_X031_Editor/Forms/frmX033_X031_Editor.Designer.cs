@@ -119,7 +119,7 @@
             this.lvcHPCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcHPCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcHPCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcHPCurve20_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHPCurve30_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMPPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMPCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMPCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -127,7 +127,7 @@
             this.lvcMPCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMPCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMPCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMPCurve20_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMPCurve30_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcAtkPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcAtkCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcAtkCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -135,7 +135,7 @@
             this.lvcAtkCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcAtkCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcAtkCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcAtkCurve20_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAtkCurve30_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcDefPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcDefCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcDefCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -143,7 +143,7 @@
             this.lvcDefCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcDefCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcDefCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcDefCurve20_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcDefCurve30_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcAgiPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcAgiCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcAgiCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -151,7 +151,7 @@
             this.lvcAgiCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcAgiCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcAgiCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcAgiCurve20_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAgiCurve30_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabEquipStatistics = new System.Windows.Forms.TabPage();
             this.olvEquipStatistics = new BrightIdeasSoftware.ObjectListView();
@@ -819,7 +819,7 @@
             this.olvStats.AllColumns.Add(this.lvcHPCurve12_15);
             this.olvStats.AllColumns.Add(this.lvcHPCurve14_20);
             this.olvStats.AllColumns.Add(this.lvcHPCurve17_30);
-            this.olvStats.AllColumns.Add(this.lvcHPCurve20_99);
+            this.olvStats.AllColumns.Add(this.lvcHPCurve30_99);
             this.olvStats.AllColumns.Add(this.lvcMPPromote);
             this.olvStats.AllColumns.Add(this.lvcMPCurve1);
             this.olvStats.AllColumns.Add(this.lvcMPCurve5);
@@ -827,7 +827,7 @@
             this.olvStats.AllColumns.Add(this.lvcMPCurve12_15);
             this.olvStats.AllColumns.Add(this.lvcMPCurve14_20);
             this.olvStats.AllColumns.Add(this.lvcMPCurve17_30);
-            this.olvStats.AllColumns.Add(this.lvcMPCurve20_99);
+            this.olvStats.AllColumns.Add(this.lvcMPCurve30_99);
             this.olvStats.AllColumns.Add(this.lvcAtkPromote);
             this.olvStats.AllColumns.Add(this.lvcAtkCurve1);
             this.olvStats.AllColumns.Add(this.lvcAtkCurve5);
@@ -835,7 +835,7 @@
             this.olvStats.AllColumns.Add(this.lvcAtkCurve12_15);
             this.olvStats.AllColumns.Add(this.lvcAtkCurve14_20);
             this.olvStats.AllColumns.Add(this.lvcAtkCurve17_30);
-            this.olvStats.AllColumns.Add(this.lvcAtkCurve20_99);
+            this.olvStats.AllColumns.Add(this.lvcAtkCurve30_99);
             this.olvStats.AllColumns.Add(this.lvcDefPromote);
             this.olvStats.AllColumns.Add(this.lvcDefCurve1);
             this.olvStats.AllColumns.Add(this.lvcDefCurve5);
@@ -843,7 +843,7 @@
             this.olvStats.AllColumns.Add(this.lvcDefCurve12_15);
             this.olvStats.AllColumns.Add(this.lvcDefCurve14_20);
             this.olvStats.AllColumns.Add(this.lvcDefCurve17_30);
-            this.olvStats.AllColumns.Add(this.lvcDefCurve20_99);
+            this.olvStats.AllColumns.Add(this.lvcDefCurve30_99);
             this.olvStats.AllColumns.Add(this.lvcAgiPromote);
             this.olvStats.AllColumns.Add(this.lvcAgiCurve1);
             this.olvStats.AllColumns.Add(this.lvcAgiCurve5);
@@ -851,7 +851,7 @@
             this.olvStats.AllColumns.Add(this.lvcAgiCurve12_15);
             this.olvStats.AllColumns.Add(this.lvcAgiCurve14_20);
             this.olvStats.AllColumns.Add(this.lvcAgiCurve17_30);
-            this.olvStats.AllColumns.Add(this.lvcAgiCurve20_99);
+            this.olvStats.AllColumns.Add(this.lvcAgiCurve30_99);
             this.olvStats.AllowColumnReorder = true;
             this.olvStats.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -870,7 +870,7 @@
             this.lvcHPCurve12_15,
             this.lvcHPCurve14_20,
             this.lvcHPCurve17_30,
-            this.lvcHPCurve20_99,
+            this.lvcHPCurve30_99,
             this.lvcMPPromote,
             this.lvcMPCurve1,
             this.lvcMPCurve5,
@@ -878,7 +878,7 @@
             this.lvcMPCurve12_15,
             this.lvcMPCurve14_20,
             this.lvcMPCurve17_30,
-            this.lvcMPCurve20_99,
+            this.lvcMPCurve30_99,
             this.lvcAtkPromote,
             this.lvcAtkCurve1,
             this.lvcAtkCurve5,
@@ -886,7 +886,7 @@
             this.lvcAtkCurve12_15,
             this.lvcAtkCurve14_20,
             this.lvcAtkCurve17_30,
-            this.lvcAtkCurve20_99,
+            this.lvcAtkCurve30_99,
             this.lvcDefPromote,
             this.lvcDefCurve1,
             this.lvcDefCurve5,
@@ -894,7 +894,7 @@
             this.lvcDefCurve12_15,
             this.lvcDefCurve14_20,
             this.lvcDefCurve17_30,
-            this.lvcDefCurve20_99,
+            this.lvcDefCurve30_99,
             this.lvcAgiPromote,
             this.lvcAgiCurve1,
             this.lvcAgiCurve5,
@@ -902,7 +902,7 @@
             this.lvcAgiCurve12_15,
             this.lvcAgiCurve14_20,
             this.lvcAgiCurve17_30,
-            this.lvcAgiCurve20_99});
+            this.lvcAgiCurve30_99});
             this.olvStats.FullRowSelect = true;
             this.olvStats.GridLines = true;
             this.olvStats.HasCollapsibleGroups = false;
@@ -1004,12 +1004,12 @@
             this.lvcHPCurve17_30.Text = "HPLv17/30";
             this.lvcHPCurve17_30.Width = 75;
             // 
-            // lvcHPCurve20_99
+            // lvcHPCurve30_99
             // 
-            this.lvcHPCurve20_99.AspectName = "HPCurve20_99";
-            this.lvcHPCurve20_99.AspectToStringFormat = "{0:X}";
-            this.lvcHPCurve20_99.Text = "HPLv20/99";
-            this.lvcHPCurve20_99.Width = 75;
+            this.lvcHPCurve30_99.AspectName = "HPCurve30_99";
+            this.lvcHPCurve30_99.AspectToStringFormat = "{0:X}";
+            this.lvcHPCurve30_99.Text = "HPLv30/99";
+            this.lvcHPCurve30_99.Width = 75;
             // 
             // lvcMPPromote
             // 
@@ -1060,12 +1060,12 @@
             this.lvcMPCurve17_30.Text = "MPLv17/30";
             this.lvcMPCurve17_30.Width = 75;
             // 
-            // lvcMPCurve20_99
+            // lvcMPCurve30_99
             // 
-            this.lvcMPCurve20_99.AspectName = "MPCurve20_99";
-            this.lvcMPCurve20_99.AspectToStringFormat = "{0:X}";
-            this.lvcMPCurve20_99.Text = "MPLv20/99";
-            this.lvcMPCurve20_99.Width = 75;
+            this.lvcMPCurve30_99.AspectName = "MPCurve30_99";
+            this.lvcMPCurve30_99.AspectToStringFormat = "{0:X}";
+            this.lvcMPCurve30_99.Text = "MPLv30/99";
+            this.lvcMPCurve30_99.Width = 75;
             // 
             // lvcAtkPromote
             // 
@@ -1116,12 +1116,12 @@
             this.lvcAtkCurve17_30.Text = "AtkLv17/30";
             this.lvcAtkCurve17_30.Width = 70;
             // 
-            // lvcAtkCurve20_99
+            // lvcAtkCurve30_99
             // 
-            this.lvcAtkCurve20_99.AspectName = "AtkCurve20_99";
-            this.lvcAtkCurve20_99.AspectToStringFormat = "{0:X}";
-            this.lvcAtkCurve20_99.Text = "AtkLv20/99";
-            this.lvcAtkCurve20_99.Width = 70;
+            this.lvcAtkCurve30_99.AspectName = "AtkCurve30_99";
+            this.lvcAtkCurve30_99.AspectToStringFormat = "{0:X}";
+            this.lvcAtkCurve30_99.Text = "AtkLv30/99";
+            this.lvcAtkCurve30_99.Width = 70;
             // 
             // lvcDefPromote
             // 
@@ -1172,12 +1172,12 @@
             this.lvcDefCurve17_30.Text = "DefLv17/30";
             this.lvcDefCurve17_30.Width = 70;
             // 
-            // lvcDefCurve20_99
+            // lvcDefCurve30_99
             // 
-            this.lvcDefCurve20_99.AspectName = "DefCurve20_99";
-            this.lvcDefCurve20_99.AspectToStringFormat = "{0:X}";
-            this.lvcDefCurve20_99.Text = "DefLv20/99";
-            this.lvcDefCurve20_99.Width = 70;
+            this.lvcDefCurve30_99.AspectName = "DefCurve30_99";
+            this.lvcDefCurve30_99.AspectToStringFormat = "{0:X}";
+            this.lvcDefCurve30_99.Text = "DefLv30/99";
+            this.lvcDefCurve30_99.Width = 70;
             // 
             // lvcAgiPromote
             // 
@@ -1228,12 +1228,12 @@
             this.lvcAgiCurve17_30.Text = "AgiLv17/30";
             this.lvcAgiCurve17_30.Width = 70;
             // 
-            // lvcAgiCurve20_99
+            // lvcAgiCurve30_99
             // 
-            this.lvcAgiCurve20_99.AspectName = "AgiCurve20_99";
-            this.lvcAgiCurve20_99.AspectToStringFormat = "{0:X}";
-            this.lvcAgiCurve20_99.Text = "AgiLv20/99";
-            this.lvcAgiCurve20_99.Width = 70;
+            this.lvcAgiCurve30_99.AspectName = "AgiCurve30_99";
+            this.lvcAgiCurve30_99.AspectToStringFormat = "{0:X}";
+            this.lvcAgiCurve30_99.Text = "AgiLv30/99";
+            this.lvcAgiCurve30_99.Width = 70;
             // 
             // tabMain
             // 
@@ -2552,7 +2552,7 @@
             series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
             series16.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             series16.Legend = "Legend1";
-            series16.Name = "HP Range 2 (49% Likely)";
+            series16.Name = "HP Range 2 (99% Likely)";
             series16.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
             series16.YValuesPerPoint = 2;
             series16.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
@@ -2561,7 +2561,7 @@
             series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
             series17.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series17.Legend = "Legend1";
-            series17.Name = "MP Range 2 (49% Likely)";
+            series17.Name = "MP Range 2 (99% Likely)";
             series17.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
             series17.YValuesPerPoint = 2;
             series17.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
@@ -2570,7 +2570,7 @@
             series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
             series18.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             series18.Legend = "Legend1";
-            series18.Name = "Atk Range 2 (49% Likely)";
+            series18.Name = "Atk Range 2 (99% Likely)";
             series18.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
             series18.YValuesPerPoint = 2;
             series18.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
@@ -2579,7 +2579,7 @@
             series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
             series19.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             series19.Legend = "Legend1";
-            series19.Name = "Def Range 2 (49% Likely)";
+            series19.Name = "Def Range 2 (99% Likely)";
             series19.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
             series19.YValuesPerPoint = 2;
             series19.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
@@ -2588,7 +2588,7 @@
             series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
             series20.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series20.Legend = "Legend1";
-            series20.Name = "Agi Range 2 (49% Likely)";
+            series20.Name = "Agi Range 2 (99% Likely)";
             series20.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
             series20.YValuesPerPoint = 2;
             series20.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
@@ -2699,7 +2699,7 @@
         private BrightIdeasSoftware.OLVColumn lvcHPCurve12_15;
         private BrightIdeasSoftware.OLVColumn lvcHPCurve14_20;
         private BrightIdeasSoftware.OLVColumn lvcHPCurve17_30;
-        private BrightIdeasSoftware.OLVColumn lvcHPCurve20_99;
+        private BrightIdeasSoftware.OLVColumn lvcHPCurve30_99;
         private BrightIdeasSoftware.OLVColumn lvcMPPromote;
         private BrightIdeasSoftware.OLVColumn lvcMPCurve1;
         private BrightIdeasSoftware.OLVColumn lvcMPCurve5;
@@ -2707,7 +2707,7 @@
         private BrightIdeasSoftware.OLVColumn lvcMPCurve12_15;
         private BrightIdeasSoftware.OLVColumn lvcMPCurve14_20;
         private BrightIdeasSoftware.OLVColumn lvcMPCurve17_30;
-        private BrightIdeasSoftware.OLVColumn lvcMPCurve20_99;
+        private BrightIdeasSoftware.OLVColumn lvcMPCurve30_99;
         private BrightIdeasSoftware.OLVColumn lvcAtkPromote;
         private BrightIdeasSoftware.OLVColumn lvcAtkCurve1;
         private BrightIdeasSoftware.OLVColumn lvcAtkCurve5;
@@ -2739,7 +2739,7 @@
         internal System.Windows.Forms.TabControl tabMain;
         private BrightIdeasSoftware.OLVColumn lvcAtkCurve14_20;
         private BrightIdeasSoftware.OLVColumn lvcAtkCurve17_30;
-        private BrightIdeasSoftware.OLVColumn lvcAtkCurve20_99;
+        private BrightIdeasSoftware.OLVColumn lvcAtkCurve30_99;
         private BrightIdeasSoftware.OLVColumn lvcDefPromote;
         private BrightIdeasSoftware.OLVColumn lvcDefCurve1;
         private BrightIdeasSoftware.OLVColumn lvcDefCurve5;
@@ -2747,7 +2747,7 @@
         private BrightIdeasSoftware.OLVColumn lvcDefCurve12_15;
         private BrightIdeasSoftware.OLVColumn lvcDefCurve14_20;
         private BrightIdeasSoftware.OLVColumn lvcDefCurve17_30;
-        private BrightIdeasSoftware.OLVColumn lvcDefCurve20_99;
+        private BrightIdeasSoftware.OLVColumn lvcDefCurve30_99;
         private BrightIdeasSoftware.OLVColumn lvcAgiPromote;
         private BrightIdeasSoftware.OLVColumn lvcAgiCurve1;
         private BrightIdeasSoftware.OLVColumn lvcAgiCurve5;
@@ -2755,7 +2755,7 @@
         private BrightIdeasSoftware.OLVColumn lvcAgiCurve12_15;
         private BrightIdeasSoftware.OLVColumn lvcAgiCurve14_20;
         private BrightIdeasSoftware.OLVColumn lvcAgiCurve17_30;
-        private BrightIdeasSoftware.OLVColumn lvcAgiCurve20_99;
+        private BrightIdeasSoftware.OLVColumn lvcAgiCurve30_99;
         private BrightIdeasSoftware.OLVColumn olvColumn63;
         private BrightIdeasSoftware.OLVColumn olvColumn64;
         private BrightIdeasSoftware.OLVColumn olvColumn65;

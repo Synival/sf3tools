@@ -29,7 +29,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         private int hpCurve12_15;
         private int hpCurve14_20;
         private int hpCurve17_30;
-        private int hpCurve20_99;
+        private int hpCurve30_99;
         private int mpPromote;
         private int mpCurve1;
         private int mpCurve5;
@@ -37,7 +37,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         private int mpCurve12_15;
         private int mpCurve14_20;
         private int mpCurve17_30;
-        private int mpCurve20_99;
+        private int mpCurve30_99;
         private int atkPromote;
         private int atkCurve1;
         private int atkCurve5;
@@ -45,7 +45,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         private int atkCurve12_15;
         private int atkCurve14_20;
         private int atkCurve17_30;
-        private int atkCurve20_99;
+        private int atkCurve30_99;
         private int defPromote;
         private int defCurve1;
         private int defCurve5;
@@ -53,7 +53,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         private int defCurve12_15;
         private int defCurve14_20;
         private int defCurve17_30;
-        private int defCurve20_99;
+        private int defCurve30_99;
         private int agiPromote;
         private int agiCurve1;
         private int agiCurve5;
@@ -61,7 +61,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         private int agiCurve12_15;
         private int agiCurve14_20;
         private int agiCurve17_30;
-        private int agiCurve20_99;
+        private int agiCurve30_99;
 
         private int s1LearnedAt;
         private int s1LearnedLevel;
@@ -238,7 +238,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
             hpCurve12_15 = start + 0x06;
             hpCurve14_20 = start + 0x07;
             hpCurve17_30 = start + 0x08;
-            hpCurve20_99 = start + 0x09;
+            hpCurve30_99 = start + 0x09;
             mpPromote = start + 0x0A;
             mpCurve1 = start + 0x0B;
             mpCurve5 = start + 0x0C;
@@ -246,7 +246,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
             mpCurve12_15 = start + 0x0E;
             mpCurve14_20 = start + 0x0F;
             mpCurve17_30 = start + 0x10;
-            mpCurve20_99 = start + 0x11;
+            mpCurve30_99 = start + 0x11;
             atkPromote = start + 0x12;
             atkCurve1 = start + 0x13;
             atkCurve5 = start + 0x14;
@@ -254,7 +254,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
             atkCurve12_15 = start + 0x16;
             atkCurve14_20 = start + 0x17;
             atkCurve17_30 = start + 0x18;
-            atkCurve20_99 = start + 0x19;
+            atkCurve30_99 = start + 0x19;
             defPromote = start + 0x1a;
             defCurve1 = start + 0x1b;
             defCurve5 = start + 0x1c;
@@ -262,7 +262,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
             defCurve12_15 = start + 0x1e;
             defCurve14_20 = start + 0x1f;
             defCurve17_30 = start + 0x20;
-            defCurve20_99 = start + 0x21;
+            defCurve30_99 = start + 0x21;
             agiPromote = start + 0x22;
             agiCurve1 = start + 0x23;
             agiCurve5 = start + 0x24;
@@ -270,7 +270,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
             agiCurve12_15 = start + 0x26;
             agiCurve14_20 = start + 0x27;
             agiCurve17_30 = start + 0x28;
-            agiCurve20_99 = start + 0x29;
+            agiCurve30_99 = start + 0x29;
 
             s1LearnedAt = start + 0x2a;
             s1LearnedLevel = start + 0x2b; //actually the ID
@@ -379,7 +379,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                         case 2: return new ValueRange<int>(HPCurve10, HPCurve12_15);
                         case 3: return new ValueRange<int>(HPCurve12_15, HPCurve14_20);
                         case 4: return new ValueRange<int>(HPCurve14_20, HPCurve17_30);
-                        case 5: return new ValueRange<int>(HPCurve17_30, HPCurve20_99);
+                        case 5: return new ValueRange<int>(HPCurve17_30, HPCurve30_99);
                         default: throw new ArgumentOutOfRangeException();
                     }
 
@@ -391,7 +391,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                         case 2: return new ValueRange<int>(MPCurve10, MPCurve12_15);
                         case 3: return new ValueRange<int>(MPCurve12_15, MPCurve14_20);
                         case 4: return new ValueRange<int>(MPCurve14_20, MPCurve17_30);
-                        case 5: return new ValueRange<int>(MPCurve17_30, MPCurve20_99);
+                        case 5: return new ValueRange<int>(MPCurve17_30, MPCurve30_99);
                         default: throw new ArgumentOutOfRangeException();
                     }
 
@@ -403,7 +403,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                         case 2: return new ValueRange<int>(AtkCurve10, AtkCurve12_15);
                         case 3: return new ValueRange<int>(AtkCurve12_15, AtkCurve14_20);
                         case 4: return new ValueRange<int>(AtkCurve14_20, AtkCurve17_30);
-                        case 5: return new ValueRange<int>(AtkCurve17_30, AtkCurve20_99);
+                        case 5: return new ValueRange<int>(AtkCurve17_30, AtkCurve30_99);
                         default: throw new ArgumentOutOfRangeException();
                     }
 
@@ -415,7 +415,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                         case 2: return new ValueRange<int>(DefCurve10, DefCurve12_15);
                         case 3: return new ValueRange<int>(DefCurve12_15, DefCurve14_20);
                         case 4: return new ValueRange<int>(DefCurve14_20, DefCurve17_30);
-                        case 5: return new ValueRange<int>(DefCurve17_30, DefCurve20_99);
+                        case 5: return new ValueRange<int>(DefCurve17_30, DefCurve30_99);
                         default: throw new ArgumentOutOfRangeException();
                     }
 
@@ -427,7 +427,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                         case 2: return new ValueRange<int>(AgiCurve10, AgiCurve12_15);
                         case 3: return new ValueRange<int>(AgiCurve12_15, AgiCurve14_20);
                         case 4: return new ValueRange<int>(AgiCurve14_20, AgiCurve17_30);
-                        case 5: return new ValueRange<int>(AgiCurve17_30, AgiCurve20_99);
+                        case 5: return new ValueRange<int>(AgiCurve17_30, AgiCurve30_99);
                         default: throw new ArgumentOutOfRangeException();
                     }
 
@@ -506,10 +506,10 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => _fileEditor.SetByte(hpCurve17_30, (byte)value);
         }
 
-        public int HPCurve20_99
+        public int HPCurve30_99
         {
-            get => _fileEditor.GetByte(hpCurve20_99);
-            set => _fileEditor.SetByte(hpCurve20_99, (byte)value);
+            get => _fileEditor.GetByte(hpCurve30_99);
+            set => _fileEditor.SetByte(hpCurve30_99, (byte)value);
         }
 
         public string HPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 0);
@@ -561,10 +561,10 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => _fileEditor.SetByte(mpCurve17_30, (byte)value);
         }
 
-        public int MPCurve20_99
+        public int MPCurve30_99
         {
-            get => _fileEditor.GetByte(mpCurve20_99);
-            set => _fileEditor.SetByte(mpCurve20_99, (byte)value);
+            get => _fileEditor.GetByte(mpCurve30_99);
+            set => _fileEditor.SetByte(mpCurve30_99, (byte)value);
         }
 
         public string MPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 0);
@@ -616,10 +616,10 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => _fileEditor.SetByte(atkCurve17_30, (byte)value);
         }
 
-        public int AtkCurve20_99
+        public int AtkCurve30_99
         {
-            get => _fileEditor.GetByte(atkCurve20_99);
-            set => _fileEditor.SetByte(atkCurve20_99, (byte)value);
+            get => _fileEditor.GetByte(atkCurve30_99);
+            set => _fileEditor.SetByte(atkCurve30_99, (byte)value);
         }
 
         public string Atkgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 0);
@@ -671,10 +671,10 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => _fileEditor.SetByte(defCurve17_30, (byte)value);
         }
 
-        public int DefCurve20_99
+        public int DefCurve30_99
         {
-            get => _fileEditor.GetByte(defCurve20_99);
-            set => _fileEditor.SetByte(defCurve20_99, (byte)value);
+            get => _fileEditor.GetByte(defCurve30_99);
+            set => _fileEditor.SetByte(defCurve30_99, (byte)value);
         }
 
         public string Defgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 0);
@@ -726,10 +726,10 @@ namespace SF3.X033_X031_Editor.Models.Stats
             set => _fileEditor.SetByte(agiCurve17_30, (byte)value);
         }
 
-        public int AgiCurve20_99
+        public int AgiCurve30_99
         {
-            get => _fileEditor.GetByte(agiCurve20_99);
-            set => _fileEditor.SetByte(agiCurve20_99, (byte)value);
+            get => _fileEditor.GetByte(agiCurve30_99);
+            set => _fileEditor.SetByte(agiCurve30_99, (byte)value);
         }
 
         public string Agigroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 0);
