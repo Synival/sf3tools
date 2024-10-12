@@ -30,6 +30,14 @@ namespace SF3.Editor
         /// <param name="e">CellEditEventArgs reference</param>
         public static void EnhanceOlvCellEditControl(ObjectListView olv, CellEditEventArgs e)
         {
+            // Ensure that strings displayed in hex format are edited in hex format.
+            if (e.Column.AspectToStringFormat == "{0:X}")
+            {
+                NumericUpDown control = (NumericUpDown)e.Control;
+                control.Hexadecimal = true;
+            }
+
+            // Enhance ComboBox's so values are updated any time the dropdown is closed, unless from hitting "escape".
             if (e.Control is ComboBox)
             {
                 ComboBox cb = e.Control as ComboBox;

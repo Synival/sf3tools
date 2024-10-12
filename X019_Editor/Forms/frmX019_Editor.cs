@@ -273,12 +273,6 @@ namespace SF3.X019_Editor.Forms
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e)
         {
-            if (e.Column.AspectToStringFormat == "{0:X}")
-            {
-                NumericUpDown control = (NumericUpDown)e.Control;
-                control.Hexadecimal = true;
-            }
-
             Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
         }
 
