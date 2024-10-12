@@ -5,7 +5,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
 {
     public class BattlePointers
     {
-        private ISF3FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private int battlePointer;
         //private readonly int battlePointer2;
@@ -31,7 +31,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public BattlePointers(ISF3FileEditor fileEditor, int id, string text)
+        public BattlePointers(IX1_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

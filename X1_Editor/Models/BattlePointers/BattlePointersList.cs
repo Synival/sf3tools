@@ -8,7 +8,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
 {
     public class BattlePointersList : IModelArray<BattlePointers>
     {
-        public BattlePointersList(ISF3FileEditor fileEditor)
+        public BattlePointersList(IX1_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -17,7 +17,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
 
         private BattlePointers[] itemssorted;
         private BattlePointers[] items;
-        private ISF3FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private string r = "";
 

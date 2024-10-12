@@ -10,7 +10,7 @@ namespace SF3.X1_Editor.Models.Treasures
 {
     public class TreasureList : IModelArray<Treasure>
     {
-        public TreasureList(ISF3FileEditor fileEditor)
+        public TreasureList(IX1_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -19,7 +19,7 @@ namespace SF3.X1_Editor.Models.Treasures
 
         private Treasure[] itemssorted;
         private Treasure[] items;
-        private ISF3FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private string r = "";
 

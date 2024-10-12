@@ -7,7 +7,7 @@ namespace SF3.X1_Editor.Models.Npcs
 {
     public class Npc
     {
-        private ISF3FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private int spriteID;
         private int unknown1;
@@ -41,7 +41,7 @@ namespace SF3.X1_Editor.Models.Npcs
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Npc(ISF3FileEditor fileEditor, int id, string text)
+        public Npc(IX1_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

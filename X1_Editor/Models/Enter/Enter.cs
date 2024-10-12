@@ -7,7 +7,7 @@ namespace SF3.X1_Editor.Models.Enters
 {
     public class Enter
     {
-        private ISF3FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private int enterID; //2 byte
         private int unknown2; //2 byte
@@ -38,7 +38,7 @@ namespace SF3.X1_Editor.Models.Enters
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Enter(ISF3FileEditor fileEditor, int id, string text)
+        public Enter(IX1_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

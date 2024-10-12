@@ -9,7 +9,7 @@ namespace SF3.X1_Editor.Models.Npcs
 {
     public class NpcList : IModelArray<Npc>
     {
-        public NpcList(ISF3FileEditor fileEditor)
+        public NpcList(IX1_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -18,7 +18,7 @@ namespace SF3.X1_Editor.Models.Npcs
 
         private Npc[] itemssorted;
         private Npc[] items;
-        private ISF3FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private string r = "";
 

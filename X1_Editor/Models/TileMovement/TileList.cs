@@ -8,7 +8,7 @@ namespace SF3.X1_Editor.Models.Tiles
 {
     public class TileList : IModelArray<Tile>
     {
-        public TileList(ISF3FileEditor fileEditor)
+        public TileList(IX1_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -17,7 +17,7 @@ namespace SF3.X1_Editor.Models.Tiles
 
         private Tile[] tilessorted;
         private Tile[] tiles;
-        private ISF3FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private string r = "";
 

@@ -9,7 +9,7 @@ namespace SF3.X1_Editor.Models.Warps
 {
     public class WarpList : IModelArray<Warp>
     {
-        public WarpList(ISF3FileEditor fileEditor)
+        public WarpList(IX1_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -18,7 +18,7 @@ namespace SF3.X1_Editor.Models.Warps
 
         private Warp[] itemssorted;
         private Warp[] items;
-        private ISF3FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private string r = "";
 

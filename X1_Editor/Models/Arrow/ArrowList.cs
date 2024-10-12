@@ -9,9 +9,9 @@ namespace SF3.X1_Editor.Models.Arrows
 {
     public class ArrowList : IModelArray<Arrow>
     {
-        private ISF3FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
-        public ArrowList(ISF3FileEditor fileEditor)
+        public ArrowList(IX1_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }

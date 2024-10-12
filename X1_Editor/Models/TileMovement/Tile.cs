@@ -7,7 +7,7 @@ namespace SF3.X1_Editor.Models.Tiles
 {
     public class Tile
     {
-        private ISF3FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private int noEntry;
         private int unknown01;
@@ -35,7 +35,7 @@ namespace SF3.X1_Editor.Models.Tiles
         private string name;
         private int sub;
 
-        public Tile(ISF3FileEditor fileEditor, int id, string text)
+        public Tile(IX1_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

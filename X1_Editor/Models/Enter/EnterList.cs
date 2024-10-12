@@ -9,7 +9,7 @@ namespace SF3.X1_Editor.Models.Enters
 {
     public class EnterList : IModelArray<Enter>
     {
-        public EnterList(ISF3FileEditor fileEditor)
+        public EnterList(IX1_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -18,7 +18,7 @@ namespace SF3.X1_Editor.Models.Enters
 
         private Enter[] itemssorted;
         private Enter[] items;
-        private ISF3FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private string r = "";
 

@@ -7,7 +7,7 @@ namespace SF3.X1_Editor.Models.Treasures
 {
     public class Treasure
     {
-        private ISF3FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private int searched;
         private int eventNumber;
@@ -36,7 +36,7 @@ namespace SF3.X1_Editor.Models.Treasures
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Treasure(ISF3FileEditor fileEditor, int id, string text)
+        public Treasure(IX1_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 
