@@ -6,7 +6,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
 {
     public class UnknownAI
     {
-        private IX1FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private int unknown00;
         private int unknown02;
@@ -39,7 +39,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public UnknownAI(IX1FileEditor fileEditor, int id, string text)
+        public UnknownAI(IX1_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

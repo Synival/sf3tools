@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SF3.X1_Editor
 {
-    public class X1FileEditor : SF3FileEditor, IX1FileEditor
+    public class X1_FileEditor : SF3FileEditor, IX1_FileEditor
     {
-        public X1FileEditor(ScenarioType scenario, int map) : base(scenario)
+        public X1_FileEditor(ScenarioType scenario, int map) : base(scenario)
         {
             Map = map;
         }

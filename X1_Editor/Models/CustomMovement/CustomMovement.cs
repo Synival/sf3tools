@@ -6,7 +6,7 @@ namespace SF3.X1_Editor.Models.CustomMovement
 {
     public class CustomMovement
     {
-        private IX1FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private int unknown00;
         private int xPos1;
@@ -26,7 +26,7 @@ namespace SF3.X1_Editor.Models.CustomMovement
         private int index;
         private string name;
 
-        public CustomMovement(IX1FileEditor fileEditor, int id, string text)
+        public CustomMovement(IX1_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

@@ -125,7 +125,7 @@ namespace SF3.X1_Editor.Forms
         private EnterList _enterList;
         private ArrowList _arrowList;
 
-        private IX1FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         public frmX1_Editor()
         {
@@ -577,7 +577,7 @@ namespace SF3.X1_Editor.Forms
             openfile.Filter = "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new X1FileEditor(Scenario, Map);
+                _fileEditor = new X1_FileEditor(Scenario, Map);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try

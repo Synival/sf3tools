@@ -6,7 +6,7 @@ namespace SF3.X1_Editor.Models.Presets
 {
     public class Preset
     {
-        private IX1FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private int unknown1;
         private int tableSize;
@@ -27,7 +27,7 @@ namespace SF3.X1_Editor.Models.Presets
         private string name;
         private int sub;
 
-        public Preset(IX1FileEditor fileEditor, int id, string text)
+        public Preset(IX1_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

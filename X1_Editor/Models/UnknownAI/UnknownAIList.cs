@@ -8,7 +8,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
 {
     public class UnknownAIList : IModelArray<UnknownAI>
     {
-        public UnknownAIList(IX1FileEditor fileEditor)
+        public UnknownAIList(IX1_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -17,7 +17,7 @@ namespace SF3.X1_Editor.Models.UnknownAI
 
         private UnknownAI[] itemssorted;
         private UnknownAI[] items;
-        private IX1FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private string r = "";
 

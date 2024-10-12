@@ -6,7 +6,7 @@ namespace SF3.X1_Editor.Models.Items
 {
     public class Item
     {
-        private IX1FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private int unknown1;
         private int unknown2;
@@ -76,7 +76,7 @@ namespace SF3.X1_Editor.Models.Items
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Item(IX1FileEditor fileEditor, int id, string text)
+        public Item(IX1_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

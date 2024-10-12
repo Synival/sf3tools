@@ -6,7 +6,7 @@ namespace SF3.X1_Editor.Models.AI
 {
     public class AI
     {
-        private IX1FileEditor _fileEditor;
+        private IX1_FileEditor _fileEditor;
 
         private int targetX;
         private int targetY;
@@ -18,7 +18,7 @@ namespace SF3.X1_Editor.Models.AI
         private int index;
         private string name;
 
-        public AI(IX1FileEditor fileEditor, int id, string text)
+        public AI(IX1_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

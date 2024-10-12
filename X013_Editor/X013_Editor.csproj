@@ -57,6 +57,7 @@
     <Compile Include="Forms\frmX013_Editor.Designer.cs">
       <DependentUpon>frmX013_Editor.cs</DependentUpon>
     </Compile>
+    <Compile Include="IX013_FileEditor.cs" />
     <Compile Include="Models\CritMod\CritModList.cs" />
     <Compile Include="Models\CritMod\CritMod.cs" />
     <Compile Include="Models\StatusEffect\StatusEffect.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Models\Stats\StatsList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="X013_FileEditor.cs" />
     <EmbeddedResource Include="Forms\frmX013_Editor.resx">
       <DependentUpon>frmX013_Editor.cs</DependentUpon>
       <SubType>Designer</SubType>
