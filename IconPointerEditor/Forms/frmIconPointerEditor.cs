@@ -148,10 +148,6 @@ namespace SF3.IconPointerEditor.Forms
             Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
         }
 
-        private void olvCellEditFinishing(object sender, CellEditEventArgs e)
-        {
-        }
-
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario1;

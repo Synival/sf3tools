@@ -399,7 +399,6 @@
             this.olvSpecials.UseAlternatingBackColors = true;
             this.olvSpecials.UseCompatibleStateImageBehavior = false;
             this.olvSpecials.View = System.Windows.Forms.View.Details;
-            this.olvSpecials.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvSpecials.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSpecialsName
@@ -603,7 +602,6 @@
             this.olvFriendshipExp.UseAlternatingBackColors = true;
             this.olvFriendshipExp.UseCompatibleStateImageBehavior = false;
             this.olvFriendshipExp.View = System.Windows.Forms.View.Details;
-            this.olvFriendshipExp.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvFriendshipExp.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcFriendshipExpName
@@ -700,7 +698,6 @@
             this.olvSupportType.UseAlternatingBackColors = true;
             this.olvSupportType.UseCompatibleStateImageBehavior = false;
             this.olvSupportType.View = System.Windows.Forms.View.Details;
-            this.olvSupportType.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvSupportType.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSupportTypeName
@@ -782,7 +779,6 @@
             this.olvSupportStats.UseAlternatingBackColors = true;
             this.olvSupportStats.UseCompatibleStateImageBehavior = false;
             this.olvSupportStats.View = System.Windows.Forms.View.Details;
-            this.olvSupportStats.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvSupportStats.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSupportStatsName
@@ -872,7 +868,6 @@
             this.olvSoulmate.UseAlternatingBackColors = true;
             this.olvSoulmate.UseCompatibleStateImageBehavior = false;
             this.olvSoulmate.View = System.Windows.Forms.View.Details;
-            this.olvSoulmate.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvSoulmate.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSoulmateName
@@ -942,7 +937,6 @@
             this.olvSoulmateChanceFail.UseAlternatingBackColors = true;
             this.olvSoulmateChanceFail.UseCompatibleStateImageBehavior = false;
             this.olvSoulmateChanceFail.View = System.Windows.Forms.View.Details;
-            this.olvSoulmateChanceFail.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvSoulmateChanceFail.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSoulmateChanceFailName
@@ -1025,7 +1019,6 @@
             this.olvMagicBonus.UseAlternatingBackColors = true;
             this.olvMagicBonus.UseCompatibleStateImageBehavior = false;
             this.olvMagicBonus.View = System.Windows.Forms.View.Details;
-            this.olvMagicBonus.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvMagicBonus.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcMagicBonusDefaultUser
@@ -1146,7 +1139,6 @@
             this.olvCritVantages.UseAlternatingBackColors = true;
             this.olvCritVantages.UseCompatibleStateImageBehavior = false;
             this.olvCritVantages.View = System.Windows.Forms.View.Details;
-            this.olvCritVantages.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvCritVantages.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcCritVantagesName
@@ -1225,7 +1217,6 @@
             this.olvCritCounterRate.UseAlternatingBackColors = true;
             this.olvCritCounterRate.UseCompatibleStateImageBehavior = false;
             this.olvCritCounterRate.View = System.Windows.Forms.View.Details;
-            this.olvCritCounterRate.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvCritCounterRate.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcCritCounterRateName
@@ -1332,7 +1323,6 @@
             this.olvSpecialChance.UseAlternatingBackColors = true;
             this.olvSpecialChance.UseCompatibleStateImageBehavior = false;
             this.olvSpecialChance.View = System.Windows.Forms.View.Details;
-            this.olvSpecialChance.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvSpecialChance.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSpecialChanceSpecialProcRate
@@ -1432,7 +1422,6 @@
             this.olvExpLimit.UseAlternatingBackColors = true;
             this.olvExpLimit.UseCompatibleStateImageBehavior = false;
             this.olvExpLimit.View = System.Windows.Forms.View.Details;
-            this.olvExpLimit.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvExpLimit.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcExpLimitName
@@ -1500,7 +1489,6 @@
             this.olvHealExp.UseAlternatingBackColors = true;
             this.olvHealExp.UseCompatibleStateImageBehavior = false;
             this.olvHealExp.View = System.Windows.Forms.View.Details;
-            this.olvHealExp.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvHealExp.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcHealExpName
@@ -1571,7 +1559,6 @@
             this.olvWeaponSpellRank.UseAlternatingBackColors = true;
             this.olvWeaponSpellRank.UseCompatibleStateImageBehavior = false;
             this.olvWeaponSpellRank.View = System.Windows.Forms.View.Details;
-            this.olvWeaponSpellRank.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvWeaponSpellRank.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcWeaponSpellRankTable
@@ -1689,7 +1676,6 @@
             this.olvStatusGroups.UseAlternatingBackColors = true;
             this.olvStatusGroups.UseCompatibleStateImageBehavior = false;
             this.olvStatusGroups.View = System.Windows.Forms.View.Details;
-            this.olvStatusGroups.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvStatusGroups.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcStatusGroupsName

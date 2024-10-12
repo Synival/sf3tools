@@ -207,7 +207,6 @@
             this.olvItemIcons.UseAlternatingBackColors = true;
             this.olvItemIcons.UseCompatibleStateImageBehavior = false;
             this.olvItemIcons.View = System.Windows.Forms.View.Details;
-            this.olvItemIcons.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvItemIcons.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcItemIconName
@@ -293,7 +292,6 @@
             this.olvSpellIcons.UseAlternatingBackColors = true;
             this.olvSpellIcons.UseCompatibleStateImageBehavior = false;
             this.olvSpellIcons.View = System.Windows.Forms.View.Details;
-            this.olvSpellIcons.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvSpellIcons.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSpellIconName
