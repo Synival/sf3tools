@@ -5,7 +5,7 @@ namespace SF3.X019_Editor.Models.Items
 {
     public class Item
     {
-        private ISF3FileEditor _fileEditor;
+        private IX019_FileEditor _fileEditor;
 
         private int maxHP;
         private int maxMP;
@@ -82,7 +82,7 @@ namespace SF3.X019_Editor.Models.Items
         private int index;
         private string name;
 
-        public Item(ISF3FileEditor fileEditor, int id, string text)
+        public Item(IX019_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

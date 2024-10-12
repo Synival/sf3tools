@@ -5,7 +5,7 @@ namespace SF3.X019_Editor.Models.Presets
 {
     public class Preset
     {
-        private ISF3FileEditor _fileEditor;
+        private IX019_FileEditor _fileEditor;
 
         private int spell;
         private int weaponLv0;
@@ -18,7 +18,7 @@ namespace SF3.X019_Editor.Models.Presets
         private int index;
         private string name;
 
-        public Preset(ISF3FileEditor fileEditor, int id, string text)
+        public Preset(IX019_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

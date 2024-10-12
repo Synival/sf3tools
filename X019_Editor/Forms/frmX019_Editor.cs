@@ -39,7 +39,7 @@ namespace SF3.X019_Editor.Forms
 
         private ItemList _itemList;
 
-        private ISF3FileEditor _fileEditor;
+        private IX019_FileEditor _fileEditor;
 
         public frmX019_Editor()
         {
@@ -265,7 +265,7 @@ namespace SF3.X019_Editor.Forms
             openfile.Filter = "SF3 data (X019.bin)|X019.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new SF3FileEditor(Scenario);
+                _fileEditor = new X019_FileEditor(Scenario);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
