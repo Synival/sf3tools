@@ -16,10 +16,6 @@ using BrightIdeasSoftware;
 using SF3.Types;
 using SF3.Exceptions;
 
-/*
-
-*/
-
 namespace SF3.X002_Editor.Forms
 {
     public partial class frmX002_Editor : Form
@@ -59,144 +55,12 @@ namespace SF3.X002_Editor.Forms
             InitializeComponent();
             tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
-
-            //lvcAction1.AspectToStringConverter = getActionName;
-            //lvcAction2.AspectToStringConverter = getActionName;
-            //lvcAction3.AspectToStringConverter = getActionName;
-            //lvcAction4.AspectToStringConverter = getActionName;
-            //lvcAction5.AspectToStringConverter = getActionName;
-            //lvcAction6.AspectToStringConverter = getActionName;
-            //lvcAction7.AspectToStringConverter = getActionName;
-            //lvcAction8.AspectToStringConverter = getActionName;
-
-            //lvcItemStatType1.AspectToStringConverter += getStatTypeName;
-            //lvcItemStatType2.AspectToStringConverter += getStatTypeName;
-            //lvcItemStatType3.AspectToStringConverter += getStatTypeName;
-
-            //lvcCharacterItem1.AspectToStringConverter += getItemName;
-            //lvcCharacterItem2.AspectToStringConverter += getItemName;
-            //lvcCharacterItem3.AspectToStringConverter += getItemName;
-            //lvcCharacterItem4.AspectToStringConverter += getItemName;
-            //lvcCharacterItem5.AspectToStringConverter += getItemName;
-            //lvcCharacterItem6.AspectToStringConverter += getItemName;
-            //lvcCharacterItem7.AspectToStringConverter += getItemName;
-            //lvcCharacterItem8.AspectToStringConverter += getItemName;
-
-            //lvcItem.AspectToStringConverter += getItemName;
-
-            //lvcBlacksmithItem.AspectToStringConverter += getItemName;
-            //lvcStoreItem.AspectToStringConverter += getItemName;
-
-            //lvcSpellType.AspectToStringConverter += getSpellName;
-            //lvcSpellClass.AspectToStringConverter += getClassName;
-
-            //lvcStoreItemType.AspectToStringConverter += getStoreItemTypeName;
-
-            //Block the putter events for columns that use comboboxes
-            //we handle this in the cell edit finishing event to make things a TON easier
-            /*lvcItemStatType1.AspectPutter += blocker;
-            lvcItemStatType2.AspectPutter += blocker;
-            lvcItemStatType3.AspectPutter += blocker;
-            lvcAction1.AspectPutter += blocker;
-            lvcAction2.AspectPutter += blocker;
-            lvcAction3.AspectPutter += blocker;
-            lvcAction4.AspectPutter += blocker;
-            lvcAction5.AspectPutter += blocker;
-            lvcAction6.AspectPutter += blocker;
-            lvcAction7.AspectPutter += blocker;
-            lvcAction8.AspectPutter += blocker;
-            lvcCharacterItem1.AspectPutter += blocker;
-            lvcCharacterItem2.AspectPutter += blocker;
-            lvcCharacterItem3.AspectPutter += blocker;
-            lvcCharacterItem4.AspectPutter += blocker;
-            lvcCharacterItem5.AspectPutter += blocker;
-            lvcCharacterItem6.AspectPutter += blocker;
-            lvcCharacterItem7.AspectPutter += blocker;
-            lvcCharacterItem8.AspectPutter += blocker;
-
-            lvcItem.AspectPutter += blocker;
-            lvcBlacksmithItem.AspectPutter += blocker;
-            lvcStoreItem.AspectPutter += blocker;
-
-            lvcSpellClass.AspectPutter += blocker;
-            lvcSpellType.AspectPutter += blocker;
-            lvcStoreItemType.AspectPutter += blocker;*/
         }
-
-        private void blocker(object target, object newvalue) { }
-
-        /*private string getActionName(object target)
-        {
-            return ((Action)target).Name;
-        }*/
-        /*private string getStatTypeName(object target)
-        {
-            return ((StatType)target).Name;
-        }*/
-        private string getItemName(object target)
-        {
-            return ((Item)target).Name;
-        }
-        private string getSpellName(object target)
-        {
-            return ((Spell)target).SpellName;
-        }
-        private string getPresetName(object target)
-        {
-            return ((Preset)target).PresetName;
-        }
-        private string getLoadName(object target)
-        {
-            return ((Loading)target).LoadName;
-        }
-        private string getStatName(object target)
-        {
-            return ((StatBoost)target).StatName;
-        }
-        private string getWeaponRankName(object target)
-        {
-            return ((WeaponRank)target).WeaponRankName;
-        }
-
-        private string getAttackResist(object target)
-        {
-            return ((AttackResist)target).AttackResistName;
-        }
-
-        private string getMusicOverride(object target)
-        {
-            return ((MusicOverride)target).MusicOverrideName;
-        }
-
-        /*
-        private string getStoreItemTypeName(object target)
-        {
-            return ((StoreItemType)target).Name;
-        }*/
 
         private bool initialise()
         {
             tsmiFile_SaveAs.Enabled = true;
-            /*if (!StoreItemTypeList.loadStoreItemTypeList()) {
-                MessageBox.Show("Could not load Resources/storeitemtypes.xml.");
-                return false;
-            }
-            if (!SpellList.loadSpellList()) {
-                MessageBox.Show("Could not load Resources/spells.xml.");
-                return false;
-            }
-            if (!CharacterClassList.loadCharacterClassList()) {
-                MessageBox.Show("Could not load Resources/classes.xml.");
-                return false;
-            }*/
-            /*if (!ActionList.loadActionList()) {
-                MessageBox.Show("Could not load Resources/actions.xml.");
-                return false;
-            }*/
-            /*if (!StatTypeList.loadStatTypeList()) {
-                MessageBox.Show("Could not load Resources/stattypes.xml.");
-                return false;
-            }*/
+
             _itemList = new ItemList(_fileEditor);
             if (!_itemList.Load())
             {
@@ -231,38 +95,34 @@ namespace SF3.X002_Editor.Forms
                 MessageBox.Show("Could not load Resources/X002StatList.xml.");
                 return false;
             }
+
             _weaponRankList = new WeaponRankList(_fileEditor);
             if (!_weaponRankList.Load())
             {
                 MessageBox.Show("Could not load Resources/WeaponRankList.xml.");
                 return false;
             }
+
             _attackResistList = new AttackResistList(_fileEditor);
             if (!_attackResistList.Load())
             {
                 MessageBox.Show("Could not load Resources/AttackResistList.xml.");
                 return false;
             }
+
             _warpList = new WarpList(_fileEditor);
             if (Scenario == ScenarioType.Scenario1 && !_warpList.Load())
             {
                 MessageBox.Show("Could not load Resources/X002Warp.xml.");
                 return false;
             }
+
             _musicOverrideList = new MusicOverrideList(_fileEditor);
             if (!_musicOverrideList.Load())
             {
                 MessageBox.Show("Could not load Resources/MusicOverrideList.xml.");
                 return false;
             }
-
-            //BlacksmithList.loadBlacksmithList();
-            //StoreItemList.loadStoreItemList();
-            //SpellEntryList.loadSpellEntryList();
-
-            //olvBlacksmith.ClearObjects();
-            //olvCharacters.ClearObjects();
-            //olvMonsters.ClearObjects();
 
             olvItems.ClearObjects();
             olvSpells.ClearObjects();
@@ -273,13 +133,6 @@ namespace SF3.X002_Editor.Forms
             olvAttackResist.ClearObjects();
             olvWarpTable.ClearObjects();
             olvLoadedOverride.ClearObjects();
-
-            //olvPresets.ClearObjects();
-            //olvSpells.ClearObjects();
-            //olvSpells.ClearObjects();
-            //olvStoreItems.ClearObjects();
-
-            //olvMonsters.AddObjects(MonsterList.getMonsterList());
 
             olvItems.AddObjects(_itemList.Models);
             olvSpells.AddObjects(_spellList.Models);
@@ -295,10 +148,6 @@ namespace SF3.X002_Editor.Forms
                 olvWarpTable.AddObjects(_warpList.Models);
             }
 
-            //olvCharacters.AddObjects(CharacterList.getCharacterList());
-            //olvBlacksmith.AddObjects(BlacksmithList.getBlacksmithList());
-            //olvStoreItems.AddObjects(StoreItemList.getStoreItemList());
-            //olvSpells.AddObjects(SpellEntryList.getSpellEntryList());
             return true;
         }
 
@@ -343,9 +192,6 @@ namespace SF3.X002_Editor.Forms
                 return;
             }
 
-            //olvBlacksmith.FinishCellEdit();
-            //olvMonsters.FinishCellEdit();
-            //olvCharacters.FinishCellEdit();
             olvItems.FinishCellEdit();
             olvSpells.FinishCellEdit();
             olvPreset.FinishCellEdit();
@@ -355,8 +201,7 @@ namespace SF3.X002_Editor.Forms
             olvAttackResist.FinishCellEdit();
             olvWarpTable.FinishCellEdit();
             olvLoadedOverride.FinishCellEdit();
-            //olvStoreItems.FinishCellEdit();
-            //olvSpells.FinishCellEdit();
+
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 x002 (.bin)|X002.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             savefile.FileName = Path.GetFileName(FileEditor.Filename);
@@ -366,10 +211,7 @@ namespace SF3.X002_Editor.Forms
             }
         }
 
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e)
-        {
-            Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
-        }
+        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
 
         private void tabMain_Click(object sender, EventArgs e)
         {
@@ -386,24 +228,9 @@ namespace SF3.X002_Editor.Forms
             }
         }
 
-        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
-        {
-            Scenario = ScenarioType.Scenario1;
-        }
-
-        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
-        {
-            Scenario = ScenarioType.Scenario2;
-        }
-
-        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
-        {
-            Scenario = ScenarioType.Scenario3;
-        }
-
-        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
-        {
-            Scenario = ScenarioType.PremiumDisk;
-        }
+        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario1;
+        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;
+        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
+        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
     }
 }

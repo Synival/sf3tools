@@ -424,10 +424,7 @@ namespace SF3.X1_Editor.Forms
             }
         }
 
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e)
-        {
-            Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
-        }
+        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
 
         public static class Globals
         {
@@ -464,7 +461,7 @@ namespace SF3.X1_Editor.Forms
             Map = 0x00; //synbios lead by default
         }
 
-        private void tsmiMap_MapSynbios_Click(object sender, EventArgs e) =>  Map = 0x00; //map with synbios as lead
+        private void tsmiMap_MapSynbios_Click(object sender, EventArgs e) => Map = 0x00; //map with synbios as lead
         private void tsmiMap_MapMedion_Click(object sender, EventArgs e) => Map = 0x04; //map with medion as lead
         private void tsmiMap_MapJulian_Click(object sender, EventArgs e) => Map = 0x08; //map with julian as lead
         private void tsmiMap_MapExtra_Click(object sender, EventArgs e) => Map = 0x0C; //map with no lead or a extra as lead. also for ruins

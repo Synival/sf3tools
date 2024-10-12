@@ -137,30 +137,12 @@ namespace SF3.IconPointerEditor.Forms
             }
         }
 
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e)
-        {
-            Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
-        }
+        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
 
-        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
-        {
-            Scenario = ScenarioType.Scenario1;
-        }
-
-        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
-        {
-            Scenario = ScenarioType.Scenario2;
-        }
-
-        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
-        {
-            Scenario = ScenarioType.Scenario3;
-        }
-
-        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
-        {
-            Scenario = ScenarioType.PremiumDisk;
-        }
+        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario1;
+        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;
+        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
+        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
 
         private void tsmiHelp_X026Toggle_Click(object sender, EventArgs e) => X026 = !X026;
 
