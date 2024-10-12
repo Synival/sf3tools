@@ -5,7 +5,7 @@ namespace SF3.X002_Editor.Models.MusicOverride
 {
     public class MusicOverride
     {
-        private ISF3FileEditor _fileEditor;
+        private IX002_FileEditor _fileEditor;
 
         private int mapID;
         private int synMusic;
@@ -28,7 +28,7 @@ namespace SF3.X002_Editor.Models.MusicOverride
         private int index;
         private string name;
 
-        public MusicOverride(ISF3FileEditor fileEditor, int id, string text)
+        public MusicOverride(IX002_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

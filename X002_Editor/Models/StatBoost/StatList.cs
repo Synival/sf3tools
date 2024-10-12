@@ -8,12 +8,12 @@ namespace SF3.X002_Editor.Models.StatBoost
 {
     public class StatList : IModelArray<StatBoost>
     {
-        public StatList(ISF3FileEditor fileEditor)
+        public StatList(IX002_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
-        private ISF3FileEditor _fileEditor;
+        private IX002_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         private StatBoost[] itemssorted;

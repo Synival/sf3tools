@@ -5,7 +5,7 @@ namespace SF3.X002_Editor.Models.Loading
 {
     public class Loading
     {
-        private ISF3FileEditor _fileEditor;
+        private IX002_FileEditor _fileEditor;
 
         private int locationID;
         private int x1;
@@ -22,7 +22,7 @@ namespace SF3.X002_Editor.Models.Loading
         private int index;
         private string name;
 
-        public Loading(ISF3FileEditor fileEditor, int id, string text)
+        public Loading(IX002_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

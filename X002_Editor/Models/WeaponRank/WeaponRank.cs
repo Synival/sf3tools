@@ -5,7 +5,7 @@ namespace SF3.X002_Editor.Models.WeaponRank
 {
     public class WeaponRank
     {
-        private ISF3FileEditor _fileEditor;
+        private IX002_FileEditor _fileEditor;
 
         private int skill0;
         private int skill1;
@@ -18,7 +18,7 @@ namespace SF3.X002_Editor.Models.WeaponRank
         private int index;
         private string name;
 
-        public WeaponRank(ISF3FileEditor fileEditor, int id, string text)
+        public WeaponRank(IX002_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

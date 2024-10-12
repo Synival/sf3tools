@@ -5,7 +5,7 @@ namespace SF3.X002_Editor.Models.AttackResist
 {
     public class AttackResist
     {
-        private ISF3FileEditor _fileEditor;
+        private IX002_FileEditor _fileEditor;
 
         private int attack;
         private int resist;
@@ -16,7 +16,7 @@ namespace SF3.X002_Editor.Models.AttackResist
         private int index;
         private string name;
 
-        public AttackResist(ISF3FileEditor fileEditor, int id, string text)
+        public AttackResist(IX002_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

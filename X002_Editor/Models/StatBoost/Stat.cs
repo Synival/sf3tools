@@ -5,7 +5,7 @@ namespace SF3.X002_Editor.Models.StatBoost
 {
     public class StatBoost
     {
-        private ISF3FileEditor _fileEditor;
+        private IX002_FileEditor _fileEditor;
 
         private int stat;
         private int address;
@@ -15,7 +15,7 @@ namespace SF3.X002_Editor.Models.StatBoost
         private string name;
         private int checkVersion2;
 
-        public StatBoost(ISF3FileEditor fileEditor, int id, string text)
+        public StatBoost(IX002_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

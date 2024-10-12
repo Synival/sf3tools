@@ -8,7 +8,7 @@ namespace SF3.X002_Editor.Models.MusicOverride
 {
     public class MusicOverrideList : IModelArray<MusicOverride>
     {
-        public MusicOverrideList(ISF3FileEditor fileEditor)
+        public MusicOverrideList(IX002_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -17,7 +17,7 @@ namespace SF3.X002_Editor.Models.MusicOverride
 
         private MusicOverride[] itemssorted;
         private MusicOverride[] items;
-        private ISF3FileEditor _fileEditor;
+        private IX002_FileEditor _fileEditor;
 
         private string r = "";
 

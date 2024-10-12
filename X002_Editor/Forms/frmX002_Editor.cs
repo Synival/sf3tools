@@ -52,7 +52,7 @@ namespace SF3.X002_Editor.Forms
         private WarpList _warpList;
         private MusicOverrideList _musicOverrideList;
 
-        private ISF3FileEditor _fileEditor;
+        private IX002_FileEditor _fileEditor;
 
         public frmX002_Editor()
         {
@@ -354,7 +354,7 @@ namespace SF3.X002_Editor.Forms
             openfile.Filter = "SF3 scn3 data (X002.bin)|X002.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new SF3FileEditor(Scenario);
+                _fileEditor = new X002_FileEditor(Scenario);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try

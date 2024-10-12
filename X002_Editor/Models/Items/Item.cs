@@ -6,7 +6,7 @@ namespace SF3.X002_Editor.Models.Items
 {
     public class Item
     {
-        private ISF3FileEditor _fileEditor;
+        private IX002_FileEditor _fileEditor;
 
         private int PriceLocation;
         private int WeaponTypeLocation;
@@ -38,7 +38,7 @@ namespace SF3.X002_Editor.Models.Items
         private int index;
         private string name;
 
-        public Item(ISF3FileEditor fileEditor, int id, string text)
+        public Item(IX002_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

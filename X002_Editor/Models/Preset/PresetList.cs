@@ -8,12 +8,12 @@ namespace SF3.X002_Editor.Models.Presets
 {
     public class PresetList : IModelArray<Preset>
     {
-        public PresetList(ISF3FileEditor fileEditor)
+        public PresetList(IX002_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
-        private ISF3FileEditor _fileEditor;
+        private IX002_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Preset[] presetssorted;

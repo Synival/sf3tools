@@ -8,12 +8,12 @@ namespace SF3.X002_Editor.Models.WeaponRank
 {
     public class WeaponRankList : IModelArray<WeaponRank>
     {
-        public WeaponRankList(ISF3FileEditor fileEditor)
+        public WeaponRankList(IX002_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
-        private ISF3FileEditor _fileEditor;
+        private IX002_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         private WeaponRank[] itemssorted;
