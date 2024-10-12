@@ -1,10 +1,8 @@
-﻿using SF3.Editor;
-using SF3.Types;
-using System;
+﻿using SF3.Types;
 
-namespace SF3.X013_Editor.Models.Items
+namespace SF3.X013_Editor.Models.Specials
 {
-    public class Item
+    public class Special
     {
         private IX013_FileEditor _fileEditor;
 
@@ -22,7 +20,7 @@ namespace SF3.X013_Editor.Models.Items
         private int index;
         private string name;
 
-        public Item(IX013_FileEditor fileEditor, int id, string text)
+        public Special(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

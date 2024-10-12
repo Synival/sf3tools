@@ -3,10 +3,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
-using SF3.X013_Editor.Models.Spells;
+using SF3.X013_Editor.Models.SupportTypes;
 using SF3.X013_Editor.Models.Presets;
-using SF3.X013_Editor.Models.Items;
-using SF3.X013_Editor.Models.Stats;
+using SF3.X013_Editor.Models.Specials;
+using SF3.X013_Editor.Models.SupportStats;
 using SF3.X013_Editor.Models.Soulmate;
 using SF3.X013_Editor.Models.Soulfail;
 using SF3.X013_Editor.Models.MagicBonus;
@@ -43,10 +43,10 @@ namespace SF3.X013_Editor.Forms
             }
         }
 
-        private ItemList _itemList;
-        private SpellList _spellList;
-        private PresetList _presetList;
-        private StatsList _statsList;
+        private SpecialList _specialsList;
+        private SupportTypeList _supportTypeList;
+        private FriendshipExpList _friendshipExpList;
+        private SupportStatsList _supportStatsList;
         private SoulmateList _soulmateList;
         private SoulfailList _soulfailList;
         private MagicBonusList _magicBonusList;
@@ -71,29 +71,29 @@ namespace SF3.X013_Editor.Forms
         {
             tsmiFile_SaveAs.Enabled = true;
 
-            _itemList = new ItemList(_fileEditor);
-            if (!_itemList.Load())
+            _specialsList = new SpecialList(_fileEditor);
+            if (!_specialsList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
 
-            _spellList = new SpellList(_fileEditor);
-            if (!_spellList.Load())
+            _supportTypeList = new SupportTypeList(_fileEditor);
+            if (!_supportTypeList.Load())
             {
                 MessageBox.Show("Could not load Resources/characters.xml.");
                 return false;
             }
 
-            _presetList = new PresetList(_fileEditor);
-            if (!_presetList.Load())
+            _friendshipExpList = new FriendshipExpList(_fileEditor);
+            if (!_friendshipExpList.Load())
             {
                 MessageBox.Show("Could not load Resources/ExpList.xml.");
                 return false;
             }
 
-            _statsList = new StatsList(_fileEditor);
-            if (!_statsList.Load())
+            _supportStatsList = new SupportStatsList(_fileEditor);
+            if (!_supportStatsList.Load())
             {
                 MessageBox.Show("Could not load Resources/X013StatList.xml.");
                 return false;
@@ -184,10 +184,10 @@ namespace SF3.X013_Editor.Forms
             olvWeaponSpellRank.ClearObjects();
             olvStatusGroups.ClearObjects();
 
-            olvSpecials.AddObjects(_itemList.Models);
-            olvFriendshipExp.AddObjects(_presetList.Models);
-            olvSupportType.AddObjects(_spellList.Models);
-            olvSupportStats.AddObjects(_statsList.Models);
+            olvSpecials.AddObjects(_specialsList.Models);
+            olvFriendshipExp.AddObjects(_friendshipExpList.Models);
+            olvSupportType.AddObjects(_supportTypeList.Models);
+            olvSupportStats.AddObjects(_supportStatsList.Models);
             olvSoulmate.AddObjects(_soulmateList.Models);
             olvSoulmateChanceFail.AddObjects(_soulfailList.Models);
             olvMagicBonus.AddObjects(_magicBonusList.Models);

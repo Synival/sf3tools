@@ -1,9 +1,6 @@
-﻿
-using SF3.Editor;
-using SF3.Types;
+﻿using SF3.Types;
 using SF3.Values;
 using System;
-using System.Collections.Generic;
 using static SF3.X033_X031_Editor.Forms.frmX033_X031_Editor;
 
 namespace SF3.X033_X031_Editor.Models.Stats

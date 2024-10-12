@@ -3,9 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
-using SF3.X019_Editor.Models.Spells;
-using SF3.X019_Editor.Models.Presets;
-using SF3.X019_Editor.Models.Items;
+using SF3.X019_Editor.Models.Monsters;
 using BrightIdeasSoftware;
 using SF3.Types;
 using SF3.Exceptions;
@@ -33,7 +31,7 @@ namespace SF3.X019_Editor.Forms
             }
         }
 
-        private ItemList _itemList;
+        private MonsterList _monsterList;
 
         private IX019_FileEditor _fileEditor;
 
@@ -48,8 +46,8 @@ namespace SF3.X019_Editor.Forms
         {
             tsmiFile_SaveAs.Enabled = true;
 
-            _itemList = new ItemList(_fileEditor);
-            if (!_itemList.Load())
+            _monsterList = new MonsterList(_fileEditor);
+            if (!_monsterList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
@@ -61,11 +59,11 @@ namespace SF3.X019_Editor.Forms
             olvMonsterTab4.ClearObjects();
             olvMonsterTab5.ClearObjects();
 
-            olvMonsterTab1.AddObjects(_itemList.Models);
-            olvMonsterTab2.AddObjects(_itemList.Models);
-            olvMonsterTab3.AddObjects(_itemList.Models);
-            olvMonsterTab4.AddObjects(_itemList.Models);
-            olvMonsterTab5.AddObjects(_itemList.Models);
+            olvMonsterTab1.AddObjects(_monsterList.Models);
+            olvMonsterTab2.AddObjects(_monsterList.Models);
+            olvMonsterTab3.AddObjects(_monsterList.Models);
+            olvMonsterTab4.AddObjects(_monsterList.Models);
+            olvMonsterTab5.AddObjects(_monsterList.Models);
 
             return true;
         }

@@ -1,5 +1,4 @@
-﻿using SF3.Editor;
-using SF3.Types;
+﻿using SF3.Types;
 using SF3.Values;
 
 namespace SF3.X002_Editor.Models.Items

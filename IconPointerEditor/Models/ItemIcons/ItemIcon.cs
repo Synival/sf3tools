@@ -1,6 +1,4 @@
-﻿using SF3.Editor;
-using SF3.Types;
-using static SF3.IconPointerEditor.Forms.frmIconPointerEditor;
+﻿using SF3.Types;
 
 namespace SF3.IconPointerEditor.Models.ItemIcons
 {

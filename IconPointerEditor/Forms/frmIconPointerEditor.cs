@@ -44,8 +44,8 @@ namespace SF3.IconPointerEditor.Forms
             }
         }
 
-        private SpellIconList _itemList;
-        private ItemIconList _presetList;
+        private SpellIconList _spellIconList;
+        private ItemIconList _itemIconList;
 
         private IIconPointerFileEditor _fileEditor;
 
@@ -61,15 +61,15 @@ namespace SF3.IconPointerEditor.Forms
         {
             tsmiFile_SaveAs.Enabled = true;
 
-            _itemList = new SpellIconList(_fileEditor);
-            if (!_itemList.Load())
+            _spellIconList = new SpellIconList(_fileEditor);
+            if (!_spellIconList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
 
-            _presetList = new ItemIconList(_fileEditor);
-            if (!_presetList.Load())
+            _itemIconList = new ItemIconList(_fileEditor);
+            if (!_itemIconList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
                 return false;
@@ -78,8 +78,8 @@ namespace SF3.IconPointerEditor.Forms
             olvItemIcons.ClearObjects();
             olvSpellIcons.ClearObjects();
 
-            olvItemIcons.AddObjects(_presetList.Models);
-            olvSpellIcons.AddObjects(_itemList.Models);
+            olvItemIcons.AddObjects(_itemIconList.Models);
+            olvSpellIcons.AddObjects(_spellIconList.Models);
 
             return true;
         }

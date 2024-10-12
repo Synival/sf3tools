@@ -1,7 +1,4 @@
-﻿using BrightIdeasSoftware;
-using SF3.Editor;
-using SF3.Types;
-using System;
+﻿using SF3.Types;
 
 namespace SF3.X013_Editor.Models.StatusEffects
 {

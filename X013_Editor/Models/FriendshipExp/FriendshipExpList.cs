@@ -4,20 +4,20 @@ using System.IO;
 using SF3.Models;
 using SF3.Types;
 
-namespace SF3.X019_Editor.Models.Presets
+namespace SF3.X013_Editor.Models.Presets
 {
-    public class PresetList : IModelArray<Preset>
+    public class FriendshipExpList : IModelArray<FriendshipExp>
     {
-        public PresetList(IX019_FileEditor fileEditor)
+        public FriendshipExpList(IX013_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
-        private IX019_FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
-        private Preset[] presetssorted;
-        private Preset[] presets;
+        private FriendshipExp[] modelsSorted;
+        private FriendshipExp[] models;
 
         private string r = "";
 
@@ -27,25 +27,10 @@ namespace SF3.X019_Editor.Models.Presets
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public bool Load()
         {
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                r = "RSc1/spellIndexListS1.xml";
-            }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                r = "RSc2/spellIndexListS2.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                r = "Resources/spellIndexList.xml";
-            }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                r = "RPD/spellListIndexPD.xml";
-            }
+            r = "Resources/ExpList.xml";
 
-            presetssorted = new Preset[0];
-            presets = new Preset[31]; //max size of spellIndexList
+            modelsSorted = new FriendshipExp[0];
+            models = new FriendshipExp[1]; //max size of spellIndexList
             FileStream stream = null;
             try
             {
@@ -55,18 +40,18 @@ namespace SF3.X019_Editor.Models.Presets
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Preset[] old;
+                FriendshipExp[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Preset[presetssorted.Length];
-                        presetssorted.CopyTo(old, 0);
-                        presetssorted = new Preset[old.Length + 1];
-                        old.CopyTo(presetssorted, 0);
-                        presetssorted[old.Length] = new Preset(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        presets[presetssorted[old.Length].PresetID] = presetssorted[old.Length];
+                        old = new FriendshipExp[modelsSorted.Length];
+                        modelsSorted.CopyTo(old, 0);
+                        modelsSorted = new FriendshipExp[old.Length + 1];
+                        old.CopyTo(modelsSorted, 0);
+                        modelsSorted[old.Length] = new FriendshipExp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[modelsSorted[old.Length].PresetID] = modelsSorted[old.Length];
                     }
                 }
             }
@@ -88,6 +73,6 @@ namespace SF3.X019_Editor.Models.Presets
             return true;
         }
 
-        public Preset[] Models => presetssorted;
+        public FriendshipExp[] Models => modelsSorted;
     }
 }

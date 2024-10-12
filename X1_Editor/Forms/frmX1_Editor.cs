@@ -2,10 +2,10 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
-using SF3.X1_Editor.Models.Presets;
-using SF3.X1_Editor.Models.Items;
+using SF3.X1_Editor.Models.Headers;
+using SF3.X1_Editor.Models.Slots;
 using SF3.X1_Editor.Models.AI;
-using SF3.X1_Editor.Models.UnknownAI;
+using SF3.X1_Editor.Models.SpawnZones;
 using SF3.X1_Editor.Models.BattlePointers;
 using SF3.X1_Editor.Models.Treasures;
 using SF3.X1_Editor.Models.CustomMovement;
@@ -108,10 +108,10 @@ namespace SF3.X1_Editor.Forms
         private string _fileName = "None";
         private string _debug = "off";
 
-        private ItemList _itemList;
-        private PresetList _presetList;
+        private SlotList _slotList;
+        private HeaderList _headerList;
         private AIList _aiList;
-        private UnknownAIList _unknownAIList;
+        private SpawnZoneList _spawnZoneList;
         private BattlePointersList _battlePointersList;
         private TreasureList _treasureList;
         private CustomMovementList _customMovementList;
@@ -211,15 +211,15 @@ namespace SF3.X1_Editor.Forms
             }    
             else*/
 
-            _itemList = new ItemList(_fileEditor);
-            if (IsBattle && !_itemList.Load())
+            _slotList = new SlotList(_fileEditor);
+            if (IsBattle && !_slotList.Load())
             {
                 MessageBox.Show("Could not load Resources/itemList.xml.");
                 return false;
             }
 
-            _presetList = new PresetList(_fileEditor);
-            if (IsBattle && !_presetList.Load())
+            _headerList = new HeaderList(_fileEditor);
+            if (IsBattle && !_headerList.Load())
             {
                 MessageBox.Show("Could not load Resources/spellIndexList.xml.");
                 return false;
@@ -232,8 +232,8 @@ namespace SF3.X1_Editor.Forms
                 return false;
             }
 
-            _unknownAIList = new UnknownAIList(_fileEditor);
-            if (IsBattle && !_unknownAIList.Load())
+            _spawnZoneList = new SpawnZoneList(_fileEditor);
+            if (IsBattle && !_spawnZoneList.Load())
             {
                 MessageBox.Show("Could not load Resources/UnknownAI.xml.");
                 return false;
@@ -313,13 +313,13 @@ namespace SF3.X1_Editor.Forms
 
             if (IsBattle)
             {
-                olvHeader.AddObjects(_presetList.Models);
-                olvSlotTab1.AddObjects(_itemList.Models);
-                olvSlotTab2.AddObjects(_itemList.Models);
-                olvSlotTab3.AddObjects(_itemList.Models);
-                olvSlotTab4.AddObjects(_itemList.Models);
+                olvHeader.AddObjects(_headerList.Models);
+                olvSlotTab1.AddObjects(_slotList.Models);
+                olvSlotTab2.AddObjects(_slotList.Models);
+                olvSlotTab3.AddObjects(_slotList.Models);
+                olvSlotTab4.AddObjects(_slotList.Models);
                 olvAITargetPosition.AddObjects(_aiList.Models);
-                olvSpawnZones.AddObjects(_unknownAIList.Models);
+                olvSpawnZones.AddObjects(_spawnZoneList.Models);
                 olvBattlePointers.AddObjects(_battlePointersList.Models);
                 olvScriptedMovement.AddObjects(_customMovementList.Models);
             }

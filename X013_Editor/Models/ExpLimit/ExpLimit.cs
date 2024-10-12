@@ -1,5 +1,4 @@
-﻿using SF3.Editor;
-using SF3.Types;
+﻿using SF3.Types;
 
 namespace SF3.X013_Editor.Models.ExpLimit
 {

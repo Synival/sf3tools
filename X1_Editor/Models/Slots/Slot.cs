@@ -1,10 +1,8 @@
-﻿using SF3.Editor;
-using SF3.Types;
-using static SF3.X1_Editor.Forms.frmX1_Editor;
+﻿using SF3.Types;
 
-namespace SF3.X1_Editor.Models.Items
+namespace SF3.X1_Editor.Models.Slots
 {
-    public class Item
+    public class Slot
     {
         private IX1_FileEditor _fileEditor;
 
@@ -76,7 +74,7 @@ namespace SF3.X1_Editor.Models.Items
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Item(IX1_FileEditor fileEditor, int id, string text)
+        public Slot(IX1_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

@@ -4,19 +4,19 @@ using System.IO;
 using SF3.Models;
 using SF3.Types;
 
-namespace SF3.X1_Editor.Models.UnknownAI
+namespace SF3.X1_Editor.Models.Slots
 {
-    public class UnknownAIList : IModelArray<UnknownAI>
+    public class SlotList : IModelArray<Slot>
     {
-        public UnknownAIList(IX1_FileEditor fileEditor)
+        public SlotList(IX1_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
 
-        private UnknownAI[] itemssorted;
-        private UnknownAI[] items;
+        private Slot[] modelsSorted;
+        private Slot[] models;
         private IX1_FileEditor _fileEditor;
 
         private string r = "";
@@ -27,10 +27,15 @@ namespace SF3.X1_Editor.Models.UnknownAI
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public bool Load()
         {
-            r = "Resources/UnknownAIList.xml";
+            if (Scenario == ScenarioType.Scenario1)
+            {
+                r = "Resources/X1List.xml";
+            }
+            else
+                r = "Resources/X1OtherList.xml";
 
-            itemssorted = new UnknownAI[0];
-            items = new UnknownAI[30]; //max size of itemList
+            modelsSorted = new Slot[0];
+            models = new Slot[256]; //max size of itemList
             FileStream stream = null;
             try
             {
@@ -41,18 +46,25 @@ namespace SF3.X1_Editor.Models.UnknownAI
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                UnknownAI[] old;
+                Slot[] old;
+                //int stop = 0;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new UnknownAI[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new UnknownAI[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new UnknownAI(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].UnknownAIID] = itemssorted[old.Length];
+                        old = new Slot[modelsSorted.Length];
+                        modelsSorted.CopyTo(old, 0);
+                        modelsSorted = new Slot[old.Length + 1];
+                        old.CopyTo(modelsSorted, 0);
+                        modelsSorted[old.Length] = new Slot(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[modelsSorted[old.Length].ID] = modelsSorted[old.Length];
+                        /*Console.WriteLine(items[itemssorted[old.Length].ID].EnemyID);
+                        //numberTest = items[itemssorted[old.Length].ID].EnemyID;
+                        if (items[itemssorted[old.Length].ID].EnemyID == 0xffff)
+                        {
+                            stop = 1;
+                        }*/
                     }
                 }
             }
@@ -74,6 +86,6 @@ namespace SF3.X1_Editor.Models.UnknownAI
             return true;
         }
 
-        public UnknownAI[] Models => itemssorted;
+        public Slot[] Models => modelsSorted;
     }
 }

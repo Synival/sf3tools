@@ -4,11 +4,11 @@ using System.IO;
 using SF3.Models;
 using SF3.Types;
 
-namespace SF3.X013_Editor.Models.Stats
+namespace SF3.X013_Editor.Models.SupportStats
 {
-    public class StatsList : IModelArray<Stat>
+    public class SupportStatsList : IModelArray<SupportStats>
     {
-        public StatsList(IX013_FileEditor fileEditor)
+        public SupportStatsList(IX013_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -16,8 +16,8 @@ namespace SF3.X013_Editor.Models.Stats
         private IX013_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
-        private Stat[] itemssorted;
-        private Stat[] items;
+        private SupportStats[] modelsSorted;
+        private SupportStats[] models;
 
         private string r = "";
 
@@ -29,8 +29,8 @@ namespace SF3.X013_Editor.Models.Stats
         {
             r = "Resources/X013StatList.xml";
 
-            itemssorted = new Stat[0];
-            items = new Stat[256]; //max size of itemList
+            modelsSorted = new SupportStats[0];
+            models = new SupportStats[256]; //max size of itemList
             FileStream stream = null;
             try
             {
@@ -41,18 +41,18 @@ namespace SF3.X013_Editor.Models.Stats
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Stat[] old;
+                SupportStats[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Stat[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new Stat[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Stat(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].StatID] = itemssorted[old.Length];
+                        old = new SupportStats[modelsSorted.Length];
+                        modelsSorted.CopyTo(old, 0);
+                        modelsSorted = new SupportStats[old.Length + 1];
+                        old.CopyTo(modelsSorted, 0);
+                        modelsSorted[old.Length] = new SupportStats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[modelsSorted[old.Length].StatID] = modelsSorted[old.Length];
                     }
                 }
             }
@@ -74,6 +74,6 @@ namespace SF3.X013_Editor.Models.Stats
             return true;
         }
 
-        public Stat[] Models => itemssorted;
+        public SupportStats[] Models => modelsSorted;
     }
 }

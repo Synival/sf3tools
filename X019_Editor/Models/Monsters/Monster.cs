@@ -1,9 +1,8 @@
-﻿using SF3.Editor;
-using SF3.Types;
+﻿using SF3.Types;
 
-namespace SF3.X019_Editor.Models.Items
+namespace SF3.X019_Editor.Models.Monsters
 {
-    public class Item
+    public class Monster
     {
         private IX019_FileEditor _fileEditor;
 
@@ -82,7 +81,7 @@ namespace SF3.X019_Editor.Models.Items
         private int index;
         private string name;
 
-        public Item(IX019_FileEditor fileEditor, int id, string text)
+        public Monster(IX019_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

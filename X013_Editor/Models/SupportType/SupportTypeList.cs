@@ -4,20 +4,20 @@ using System.IO;
 using SF3.Models;
 using SF3.Types;
 
-namespace SF3.X019_Editor.Models.Spells
+namespace SF3.X013_Editor.Models.SupportTypes
 {
-    public class SpellList : IModelArray<Spell>
+    public class SupportTypeList : IModelArray<SupportType>
     {
-        public SpellList(IX019_FileEditor fileEditor)
+        public SupportTypeList(IX013_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
-        private IX019_FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
-        private Spell[] spellssorted;
-        private Spell[] spells;
+        private SupportType[] modelsSorted;
+        private SupportType[] models;
 
         private string r = "";
 
@@ -29,23 +29,23 @@ namespace SF3.X019_Editor.Models.Spells
         {
             if (Scenario == ScenarioType.Scenario1)
             {
-                r = "RSc1/spellListS1.xml";
+                r = "RSc1/charactersS1.xml";
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                r = "RSc2/spellListS2.xml";
+                r = "RSc2/charactersS2.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                r = "Resources/spellList.xml";
+                r = "Resources/characters.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                r = "RPD/spellListPD.xml";
+                r = "RPD/charactersPD.xml";
             }
 
-            spellssorted = new Spell[0];
-            spells = new Spell[75]; //max size of spellList
+            modelsSorted = new SupportType[0];
+            models = new SupportType[120]; //max size of spellList
             FileStream stream = null;
             try
             {
@@ -55,18 +55,18 @@ namespace SF3.X019_Editor.Models.Spells
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Spell[] old;
+                SupportType[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Spell[spellssorted.Length];
-                        spellssorted.CopyTo(old, 0);
-                        spellssorted = new Spell[old.Length + 1];
-                        old.CopyTo(spellssorted, 0);
-                        spellssorted[old.Length] = new Spell(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        spells[spellssorted[old.Length].SpellID] = spellssorted[old.Length];
+                        old = new SupportType[modelsSorted.Length];
+                        modelsSorted.CopyTo(old, 0);
+                        modelsSorted = new SupportType[old.Length + 1];
+                        old.CopyTo(modelsSorted, 0);
+                        modelsSorted[old.Length] = new SupportType(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[modelsSorted[old.Length].SpellID] = modelsSorted[old.Length];
                     }
                 }
             }
@@ -88,6 +88,6 @@ namespace SF3.X019_Editor.Models.Spells
             return true;
         }
 
-        public Spell[] Models => spellssorted;
+        public SupportType[] Models => modelsSorted;
     }
 }

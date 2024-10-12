@@ -2,9 +2,6 @@
 using System.Xml;
 using System.IO;
 using SF3.Models;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections;
 using SF3.Types;
 
 namespace SF3.X033_X031_Editor.Models.InitialInfos

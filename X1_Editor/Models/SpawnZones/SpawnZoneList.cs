@@ -4,20 +4,20 @@ using System.IO;
 using SF3.Models;
 using SF3.Types;
 
-namespace SF3.X013_Editor.Models.Presets
+namespace SF3.X1_Editor.Models.SpawnZones
 {
-    public class PresetList : IModelArray<Preset>
+    public class SpawnZoneList : IModelArray<SpawnZone>
     {
-        public PresetList(IX013_FileEditor fileEditor)
+        public SpawnZoneList(IX1_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
-        private IX013_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
-        private Preset[] presetssorted;
-        private Preset[] presets;
+        private SpawnZone[] modelsSorted;
+        private SpawnZone[] models;
+        private IX1_FileEditor _fileEditor;
 
         private string r = "";
 
@@ -27,31 +27,32 @@ namespace SF3.X013_Editor.Models.Presets
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public bool Load()
         {
-            r = "Resources/ExpList.xml";
+            r = "Resources/UnknownAIList.xml";
 
-            presetssorted = new Preset[0];
-            presets = new Preset[1]; //max size of spellIndexList
+            modelsSorted = new SpawnZone[0];
+            models = new SpawnZone[30]; //max size of itemList
             FileStream stream = null;
             try
             {
                 stream = new FileStream(r, FileMode.Open);
+
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Preset[] old;
+                SpawnZone[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Preset[presetssorted.Length];
-                        presetssorted.CopyTo(old, 0);
-                        presetssorted = new Preset[old.Length + 1];
-                        old.CopyTo(presetssorted, 0);
-                        presetssorted[old.Length] = new Preset(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        presets[presetssorted[old.Length].PresetID] = presetssorted[old.Length];
+                        old = new SpawnZone[modelsSorted.Length];
+                        modelsSorted.CopyTo(old, 0);
+                        modelsSorted = new SpawnZone[old.Length + 1];
+                        old.CopyTo(modelsSorted, 0);
+                        modelsSorted[old.Length] = new SpawnZone(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[modelsSorted[old.Length].UnknownAIID] = modelsSorted[old.Length];
                     }
                 }
             }
@@ -73,6 +74,6 @@ namespace SF3.X013_Editor.Models.Presets
             return true;
         }
 
-        public Preset[] Models => presetssorted;
+        public SpawnZone[] Models => modelsSorted;
     }
 }

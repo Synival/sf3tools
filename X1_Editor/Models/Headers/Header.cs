@@ -1,10 +1,8 @@
-﻿using SF3.Editor;
-using SF3.Types;
-using static SF3.X1_Editor.Forms.frmX1_Editor;
+﻿using SF3.Types;
 
-namespace SF3.X1_Editor.Models.Presets
+namespace SF3.X1_Editor.Models.Headers
 {
-    public class Preset
+    public class Header
     {
         private IX1_FileEditor _fileEditor;
 
@@ -27,7 +25,7 @@ namespace SF3.X1_Editor.Models.Presets
         private string name;
         private int sub;
 
-        public Preset(IX1_FileEditor fileEditor, int id, string text)
+        public Header(IX1_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

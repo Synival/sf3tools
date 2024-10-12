@@ -4,19 +4,19 @@ using System.IO;
 using SF3.Models;
 using SF3.Types;
 
-namespace SF3.X1_Editor.Models.Presets
+namespace SF3.X1_Editor.Models.Headers
 {
-    public class PresetList : IModelArray<Preset>
+    public class HeaderList : IModelArray<Header>
     {
-        public PresetList(IX1_FileEditor fileEditor)
+        public HeaderList(IX1_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
 
-        private Preset[] presetssorted;
-        private Preset[] presets;
+        private Header[] modelsSorted;
+        private Header[] models;
         private IX1_FileEditor _fileEditor;
 
         private string r = "";
@@ -29,8 +29,8 @@ namespace SF3.X1_Editor.Models.Presets
         {
             r = "Resources/X1Top.xml";
 
-            presetssorted = new Preset[0];
-            presets = new Preset[31]; //max size of spellIndexList
+            modelsSorted = new Header[0];
+            models = new Header[31]; //max size of spellIndexList
             FileStream stream = null;
             try
             {
@@ -41,18 +41,18 @@ namespace SF3.X1_Editor.Models.Presets
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Preset[] old;
+                Header[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Preset[presetssorted.Length];
-                        presetssorted.CopyTo(old, 0);
-                        presetssorted = new Preset[old.Length + 1];
-                        old.CopyTo(presetssorted, 0);
-                        presetssorted[old.Length] = new Preset(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        presets[presetssorted[old.Length].SizeID] = presetssorted[old.Length];
+                        old = new Header[modelsSorted.Length];
+                        modelsSorted.CopyTo(old, 0);
+                        modelsSorted = new Header[old.Length + 1];
+                        old.CopyTo(modelsSorted, 0);
+                        modelsSorted[old.Length] = new Header(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[modelsSorted[old.Length].SizeID] = modelsSorted[old.Length];
                     }
                 }
             }
@@ -72,6 +72,6 @@ namespace SF3.X1_Editor.Models.Presets
             return true;
         }
 
-        public Preset[] Models => presetssorted;
+        public Header[] Models => modelsSorted;
     }
 }

@@ -1,9 +1,8 @@
-﻿using SF3.Editor;
-using SF3.Types;
+﻿using SF3.Types;
 
 namespace SF3.X013_Editor.Models.Presets
 {
-    public class Preset
+    public class FriendshipExp
     {
         private IX013_FileEditor _fileEditor;
 
@@ -18,7 +17,7 @@ namespace SF3.X013_Editor.Models.Presets
         private int index;
         private string name;
 
-        public Preset(IX013_FileEditor fileEditor, int id, string text)
+        public FriendshipExp(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

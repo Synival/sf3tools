@@ -4,20 +4,20 @@ using System.IO;
 using SF3.Models;
 using SF3.Types;
 
-namespace SF3.X013_Editor.Models.Items
+namespace SF3.X019_Editor.Models.Monsters
 {
-    public class ItemList : IModelArray<Item>
+    public class MonsterList : IModelArray<Monster>
     {
-        public ItemList(IX013_FileEditor fileEditor)
+        public MonsterList(IX019_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
-        private IX013_FileEditor _fileEditor;
+        private IX019_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
-        private Item[] itemssorted;
-        private Item[] items;
+        private Monster[] modelsSorted;
+        private Monster[] models;
 
         private string r = "";
 
@@ -29,23 +29,27 @@ namespace SF3.X013_Editor.Models.Items
         {
             if (Scenario == ScenarioType.Scenario1)
             {
-                r = "RSc1/SpecialListS1.xml";
+                r = "RSc1/X019List.xml";
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                r = "RSc2/SpecialListS2.xml";
+                r = "RSc2/X019List.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                r = "Resources/SpecialList.xml";
+                r = "Resources/X019List.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                r = "RPD/SpecialListPD.xml";
+                r = "RPD/X019List.xml";
+            }
+            else if (Scenario == ScenarioType.Other)
+            {
+                r = "RPDX44/X044List.xml";
             }
 
-            itemssorted = new Item[0];
-            items = new Item[256]; //max size of itemList
+            modelsSorted = new Monster[0];
+            models = new Monster[256]; //max size of itemList
             FileStream stream = null;
             try
             {
@@ -56,18 +60,18 @@ namespace SF3.X013_Editor.Models.Items
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Item[] old;
+                Monster[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Item[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new Item[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Item(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].ID] = itemssorted[old.Length];
+                        old = new Monster[modelsSorted.Length];
+                        modelsSorted.CopyTo(old, 0);
+                        modelsSorted = new Monster[old.Length + 1];
+                        old.CopyTo(modelsSorted, 0);
+                        modelsSorted[old.Length] = new Monster(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[modelsSorted[old.Length].ID] = modelsSorted[old.Length];
                     }
                 }
             }
@@ -89,6 +93,6 @@ namespace SF3.X013_Editor.Models.Items
             return true;
         }
 
-        public Item[] Models => itemssorted;
+        public Monster[] Models => modelsSorted;
     }
 }

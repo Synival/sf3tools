@@ -4,20 +4,20 @@ using System.IO;
 using SF3.Models;
 using SF3.Types;
 
-namespace SF3.X1_Editor.Models.Items
+namespace SF3.X013_Editor.Models.Specials
 {
-    public class ItemList : IModelArray<Item>
+    public class SpecialList : IModelArray<Special>
     {
-        public ItemList(IX1_FileEditor fileEditor)
+        public SpecialList(IX013_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
+        private IX013_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
-        private Item[] itemssorted;
-        private Item[] items;
-        private IX1_FileEditor _fileEditor;
+        private Special[] modelsSorted;
+        private Special[] models;
 
         private string r = "";
 
@@ -29,13 +29,23 @@ namespace SF3.X1_Editor.Models.Items
         {
             if (Scenario == ScenarioType.Scenario1)
             {
-                r = "Resources/X1List.xml";
+                r = "RSc1/SpecialListS1.xml";
             }
-            else
-                r = "Resources/X1OtherList.xml";
+            else if (Scenario == ScenarioType.Scenario2)
+            {
+                r = "RSc2/SpecialListS2.xml";
+            }
+            if (Scenario == ScenarioType.Scenario3)
+            {
+                r = "Resources/SpecialList.xml";
+            }
+            else if (Scenario == ScenarioType.PremiumDisk)
+            {
+                r = "RPD/SpecialListPD.xml";
+            }
 
-            itemssorted = new Item[0];
-            items = new Item[256]; //max size of itemList
+            modelsSorted = new Special[0];
+            models = new Special[256]; //max size of itemList
             FileStream stream = null;
             try
             {
@@ -46,25 +56,18 @@ namespace SF3.X1_Editor.Models.Items
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Item[] old;
-                //int stop = 0;
+                Special[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Item[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new Item[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Item(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].ID] = itemssorted[old.Length];
-                        /*Console.WriteLine(items[itemssorted[old.Length].ID].EnemyID);
-                        //numberTest = items[itemssorted[old.Length].ID].EnemyID;
-                        if (items[itemssorted[old.Length].ID].EnemyID == 0xffff)
-                        {
-                            stop = 1;
-                        }*/
+                        old = new Special[modelsSorted.Length];
+                        modelsSorted.CopyTo(old, 0);
+                        modelsSorted = new Special[old.Length + 1];
+                        old.CopyTo(modelsSorted, 0);
+                        modelsSorted[old.Length] = new Special(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[modelsSorted[old.Length].ID] = modelsSorted[old.Length];
                     }
                 }
             }
@@ -86,6 +89,6 @@ namespace SF3.X1_Editor.Models.Items
             return true;
         }
 
-        public Item[] Models => itemssorted;
+        public Special[] Models => modelsSorted;
     }
 }

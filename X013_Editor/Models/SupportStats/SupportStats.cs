@@ -1,9 +1,8 @@
-﻿using SF3.Editor;
-using SF3.Types;
+﻿using SF3.Types;
 
-namespace SF3.X013_Editor.Models.Stats
+namespace SF3.X013_Editor.Models.SupportStats
 {
-    public class Stat
+    public class SupportStats
     {
         private IX013_FileEditor _fileEditor;
 
@@ -17,7 +16,7 @@ namespace SF3.X013_Editor.Models.Stats
         private int index;
         private string name;
 
-        public Stat(IX013_FileEditor fileEditor, int id, string text)
+        public SupportStats(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 
