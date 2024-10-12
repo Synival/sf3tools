@@ -325,15 +325,6 @@ namespace SF3.X019_Editor.Forms
                 stream.Write(data, 0, data.Length);
                 stream.Close();
             } catch (Exception) { }*/
-            try
-            {
-                byte[] data = olvMonsterTab1.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/itemstate." +
-                     ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            }
-            catch (Exception) { }
             /*try {
                 byte[] data = olvBlacksmith.SaveState();
                 FileStream stream = new FileStream(Application.StartupPath + "/Resources/blacksmithstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
