@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.HealExp
 {
     public class HealExp
     {
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
 
         private int healExp;
         private int address;
@@ -14,7 +14,7 @@ namespace SF3.X013_Editor.Models.HealExp
         private int index;
         private string name;
 
-        public HealExp(ISF3FileEditor fileEditor, int id, string text)
+        public HealExp(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

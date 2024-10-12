@@ -8,12 +8,12 @@ namespace SF3.X013_Editor.Models.ExpLimit
 {
     public class ExpLimitList : IModelArray<ExpLimit>
     {
-        public ExpLimitList(ISF3FileEditor fileEditor)
+        public ExpLimitList(IX013_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         private ExpLimit[] itemssorted;

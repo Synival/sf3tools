@@ -8,12 +8,12 @@ namespace SF3.X013_Editor.Models.Items
 {
     public class ItemList : IModelArray<Item>
     {
-        public ItemList(ISF3FileEditor fileEditor)
+        public ItemList(IX013_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Item[] itemssorted;

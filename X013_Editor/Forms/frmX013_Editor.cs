@@ -62,7 +62,7 @@ namespace SF3.X013_Editor.Forms
         private WeaponSpellRankList _weaponSpellRankList;
         private StatusEffectList _statusEffectList;
 
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
 
         public frmX013_Editor()
         {
@@ -428,7 +428,7 @@ namespace SF3.X013_Editor.Forms
             openfile.Filter = "SF3 scn3 data (X013.bin)|X013.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new SF3FileEditor(Scenario);
+                _fileEditor = new X013_FileEditor(Scenario);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try

@@ -7,7 +7,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
 {
     public class StatusEffect
     {
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
 
         private int luck0;
         private int luck1;
@@ -40,7 +40,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public StatusEffect(ISF3FileEditor fileEditor, int id, string text)
+        public StatusEffect(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

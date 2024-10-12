@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.Soulmate
 {
     public class Soulmate
     {
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
 
         private int chance;
         private int address;
@@ -14,7 +14,7 @@ namespace SF3.X013_Editor.Models.Soulmate
         private int index;
         private string name;
 
-        public Soulmate(ISF3FileEditor fileEditor, int id, string text)
+        public Soulmate(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

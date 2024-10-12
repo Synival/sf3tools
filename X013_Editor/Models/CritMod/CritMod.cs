@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.CritMod
 {
     public class CritMod
     {
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
 
         private int advantage;
         private int disadvantage;
@@ -15,7 +15,7 @@ namespace SF3.X013_Editor.Models.CritMod
         private int index;
         private string name;
 
-        public CritMod(ISF3FileEditor fileEditor, int id, string text)
+        public CritMod(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

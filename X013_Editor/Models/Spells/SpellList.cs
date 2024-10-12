@@ -8,12 +8,12 @@ namespace SF3.X013_Editor.Models.Spells
 {
     public class SpellList : IModelArray<Spell>
     {
-        public SpellList(ISF3FileEditor fileEditor)
+        public SpellList(IX013_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Spell[] spellssorted;

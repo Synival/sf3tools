@@ -8,12 +8,12 @@ namespace SF3.X013_Editor.Models.SpecialChance
 {
     public class SpecialChanceList : IModelArray<SpecialChance>
     {
-        public SpecialChanceList(ISF3FileEditor fileEditor)
+        public SpecialChanceList(IX013_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         private SpecialChance[] itemssorted;

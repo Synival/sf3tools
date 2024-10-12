@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.Soulfail
 {
     public class Soulfail
     {
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
 
         private int expLost;
         private int address;
@@ -14,7 +14,7 @@ namespace SF3.X013_Editor.Models.Soulfail
         private int index;
         private string name;
 
-        public Soulfail(ISF3FileEditor fileEditor, int id, string text)
+        public Soulfail(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

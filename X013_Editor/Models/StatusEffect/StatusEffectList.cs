@@ -10,12 +10,12 @@ namespace SF3.X013_Editor.Models.StatusEffects
 {
     public class StatusEffectList : IModelArray<StatusEffect>
     {
-        public StatusEffectList(ISF3FileEditor fileEditor)
+        public StatusEffectList(IX013_FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         private StatusEffect[] itemssorted;

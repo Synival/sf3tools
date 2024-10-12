@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
 {
     public class SpecialChance
     {
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
 
         private int twoSpecials2;
         private int threeSpecials3;
@@ -20,7 +20,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
         private int index;
         private string name;
 
-        public SpecialChance(ISF3FileEditor fileEditor, int id, string text)
+        public SpecialChance(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

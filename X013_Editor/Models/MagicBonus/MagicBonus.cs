@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
 {
     public class MagicBonus
     {
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
 
         private int earthBonus;
         private int fireBonus;
@@ -22,7 +22,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
         private int index;
         private string name;
 
-        public MagicBonus(ISF3FileEditor fileEditor, int id, string text)
+        public MagicBonus(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

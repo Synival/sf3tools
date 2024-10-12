@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.Critrate
 {
     public class Critrate
     {
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
 
         private int noSpecial;
         private int oneSpecial;
@@ -19,7 +19,7 @@ namespace SF3.X013_Editor.Models.Critrate
         private int index;
         private string name;
 
-        public Critrate(ISF3FileEditor fileEditor, int id, string text)
+        public Critrate(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 

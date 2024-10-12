@@ -5,7 +5,7 @@ namespace SF3.X013_Editor.Models.Spells
 {
     public class Spell
     {
-        private ISF3FileEditor _fileEditor;
+        private IX013_FileEditor _fileEditor;
 
         private int supportA;
         private int supportB;
@@ -15,7 +15,7 @@ namespace SF3.X013_Editor.Models.Spells
         private int index;
         private string name;
 
-        public Spell(ISF3FileEditor fileEditor, int id, string text)
+        public Spell(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 
