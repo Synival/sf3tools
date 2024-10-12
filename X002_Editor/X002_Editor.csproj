@@ -196,9 +196,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EditorLib\EditorLib.csproj">
+    <ProjectReference Include="..\SF3EditorLib\SF3EditorLib.csproj">
       <Project>{5fe40461-c218-45be-8947-9b4a8d8291fd}</Project>
-      <Name>EditorLib</Name>
+      <Name>SF3EditorLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\ObjectListView\ObjectListView\ObjectListView2008.csproj">
       <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
