@@ -342,40 +342,12 @@ namespace SF3.X033_X031_Editor.Forms
             {
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.Hexadecimal = true;
-                //control.BackColor = Color.Aqua;
             }
             /*else if (e.Column.AspectToStringFormat == "{0:1}")
             {
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.binary? = true;
             } */
-            else if (e.Value is Stats)
-            {
-                ComboBox cb = new ComboBox();
-                cb.Bounds = e.CellBounds;
-                cb.DropDownStyle = ComboBoxStyle.DropDownList;
-                cb.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cb.AutoCompleteMode = AutoCompleteMode.Append;
-                cb.ValueMember = "Value";
-                cb.DisplayMember = "Name";
-                cb.Items.AddRange(_statsList.Models);
-                cb.SelectedItem = e.Value;
-                e.Control = cb;
-            }
-            else if (e.Value is InitialInfo)
-            {
-                ComboBox cb = new ComboBox();
-                cb.Bounds = e.CellBounds;
-                cb.DropDownStyle = ComboBoxStyle.DropDownList;
-                cb.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cb.AutoCompleteMode = AutoCompleteMode.Append;
-                cb.ValueMember = "Value";
-                cb.DisplayMember = "Name";
-                cb.Items.AddRange(_initialInfoList.Models);
-                cb.SelectedItem = e.Value;
-                e.Control = cb;
-            }
-
             /*else if (e.Value is StatType) {
                 ComboBox cb = new ComboBox();
                 cb.Bounds = e.CellBounds;
@@ -431,19 +403,8 @@ namespace SF3.X033_X031_Editor.Forms
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 Action value = (Action)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
-            } else*/
-            if (e.Value is Stats)
-            {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                var value = (Models.Stats.Stats)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            }
-            else if (e.Value is InitialInfo)
-            {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                InitialInfo value = (InitialInfo)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            } /*else if (e.Value is CharacterClass) {
+            } */
+            /*else if (e.Value is CharacterClass) {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 CharacterClass value = (CharacterClass)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);

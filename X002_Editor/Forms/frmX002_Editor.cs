@@ -529,50 +529,6 @@ namespace SF3.X002_Editor.Forms
                 Action value = (Action)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             } else*/
-            if (e.Value is Item)
-            {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                Item value = (Item)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            }
-            else if (e.Value is Spell)
-            {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                Spell value = (Spell)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            }
-            else if (e.Value is Preset)
-            {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                Preset value = (Preset)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            }
-            else if (e.Value is Loading)
-            {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                Loading value = (Loading)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            }
-
-            else if (e.Value is StatBoost)
-            {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                StatBoost value = (StatBoost)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            }
-            else if (e.Value is WeaponRank)
-            {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                WeaponRank value = (WeaponRank)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            }
-            else if (e.Value is AttackResist)
-            {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                AttackResist value = (AttackResist)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            }
-
             /*else if (e.Value is CharacterClass) {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 CharacterClass value = (CharacterClass)((ComboBox)e.Control).SelectedItem;

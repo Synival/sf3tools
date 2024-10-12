@@ -144,50 +144,12 @@ namespace SF3.IconPointerEditor.Forms
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.Hexadecimal = true;
             }
-            else if (e.Value is SpellIcon)
-            {
-                ComboBox cb = new ComboBox();
-                cb.Bounds = e.CellBounds;
-                cb.DropDownStyle = ComboBoxStyle.DropDownList;
-                cb.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cb.AutoCompleteMode = AutoCompleteMode.Append;
-                cb.ValueMember = "Value";
-                cb.DisplayMember = "Name";
-                cb.Items.AddRange(_itemList.Models);
-                cb.SelectedItem = e.Value;
-                e.Control = cb;
-            }
-            else if (e.Value is ItemIcon)
-            {
-                ComboBox cb = new ComboBox();
-                cb.Bounds = e.CellBounds;
-                cb.DropDownStyle = ComboBoxStyle.DropDownList;
-                cb.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cb.AutoCompleteMode = AutoCompleteMode.Append;
-                cb.ValueMember = "Value";
-                cb.DisplayMember = "Name";
-                cb.Items.AddRange(_presetList.Models);
-                cb.SelectedItem = e.Value;
-                e.Control = cb;
-            }
 
             Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
         }
 
         private void olvCellEditFinishing(object sender, CellEditEventArgs e)
         {
-            if (e.Value is SpellIcon)
-            {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                SpellIcon value = (SpellIcon)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            }
-            else if (e.Value is ItemIcon)
-            {
-                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                ItemIcon value = (ItemIcon)((ComboBox)e.Control).SelectedItem;
-                property.SetValue(e.RowObject, value, null);
-            }
         }
 
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)

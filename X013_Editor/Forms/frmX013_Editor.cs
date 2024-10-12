@@ -457,19 +457,6 @@ namespace SF3.X013_Editor.Forms
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.binary? = true;
             } */
-            else if (e.Value is Item)
-            {
-                ComboBox cb = new ComboBox();
-                cb.Bounds = e.CellBounds;
-                cb.DropDownStyle = ComboBoxStyle.DropDownList;
-                cb.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cb.AutoCompleteMode = AutoCompleteMode.Append;
-                cb.ValueMember = "Value";
-                cb.DisplayMember = "Name";
-                cb.Items.AddRange(_itemList.Models);
-                cb.SelectedItem = e.Value;
-                e.Control = cb;
-            }
             /*else if (e.Value is Spell)
             {
                 ComboBox cb = new ComboBox();
@@ -553,20 +540,15 @@ namespace SF3.X013_Editor.Forms
                 Action value = (Action)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
             } else*/
-            if (e.Value is Item)
-            {
+            /*} else if (e.Value is Spell) {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                Item value = (Item)((ComboBox)e.Control).SelectedItem;
+                Spell value = (Spell)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
-                /*} else if (e.Value is Spell) {
-                    PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                    Spell value = (Spell)((ComboBox)e.Control).SelectedItem;
-                    property.SetValue(e.RowObject, value, null);
-                } else if (e.Value is Preset) {
-                    PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
-                    Preset value = (Preset)((ComboBox)e.Control).SelectedItem;
-                    property.SetValue(e.RowObject, value, null);*/
-            } /*else if (e.Value is CharacterClass) {
+            } else if (e.Value is Preset) {
+                PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
+                Preset value = (Preset)((ComboBox)e.Control).SelectedItem;
+                property.SetValue(e.RowObject, value, null);*/
+            /*else if (e.Value is CharacterClass) {
                 PropertyInfo property = e.RowObject.GetType().GetProperty(e.Column.AspectName);
                 CharacterClass value = (CharacterClass)((ComboBox)e.Control).SelectedItem;
                 property.SetValue(e.RowObject, value, null);
