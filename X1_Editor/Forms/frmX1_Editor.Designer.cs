@@ -533,7 +533,6 @@ namespace SF3.X1_Editor.Forms
             this.olvHeader.UseAlternatingBackColors = true;
             this.olvHeader.UseCompatibleStateImageBehavior = false;
             this.olvHeader.View = System.Windows.Forms.View.Details;
-            this.olvHeader.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvHeader.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcHeaderSizeList
@@ -709,7 +708,6 @@ namespace SF3.X1_Editor.Forms
             this.olvSlotTab1.UseAlternatingBackColors = true;
             this.olvSlotTab1.UseCompatibleStateImageBehavior = false;
             this.olvSlotTab1.View = System.Windows.Forms.View.Details;
-            this.olvSlotTab1.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvSlotTab1.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSlotTab1Name
@@ -870,7 +868,6 @@ namespace SF3.X1_Editor.Forms
             this.olvSlotTab2.UseAlternatingBackColors = true;
             this.olvSlotTab2.UseCompatibleStateImageBehavior = false;
             this.olvSlotTab2.View = System.Windows.Forms.View.Details;
-            this.olvSlotTab2.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvSlotTab2.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSlotTab2Name
@@ -1050,7 +1047,6 @@ namespace SF3.X1_Editor.Forms
             this.olvSlotTab3.UseAlternatingBackColors = true;
             this.olvSlotTab3.UseCompatibleStateImageBehavior = false;
             this.olvSlotTab3.View = System.Windows.Forms.View.Details;
-            this.olvSlotTab3.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvSlotTab3.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSlotTab3Name
@@ -1199,7 +1195,6 @@ namespace SF3.X1_Editor.Forms
             this.olvSlotTab4.UseAlternatingBackColors = true;
             this.olvSlotTab4.UseCompatibleStateImageBehavior = false;
             this.olvSlotTab4.View = System.Windows.Forms.View.Details;
-            this.olvSlotTab4.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvSlotTab4.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSlotTab4Name
@@ -1341,7 +1336,6 @@ namespace SF3.X1_Editor.Forms
             this.olvSpawnZones.UseAlternatingBackColors = true;
             this.olvSpawnZones.UseCompatibleStateImageBehavior = false;
             this.olvSpawnZones.View = System.Windows.Forms.View.Details;
-            this.olvSpawnZones.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvSpawnZones.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSpawnZonesName
@@ -1472,7 +1466,6 @@ namespace SF3.X1_Editor.Forms
             this.olvAITargetPosition.UseAlternatingBackColors = true;
             this.olvAITargetPosition.UseCompatibleStateImageBehavior = false;
             this.olvAITargetPosition.View = System.Windows.Forms.View.Details;
-            this.olvAITargetPosition.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvAITargetPosition.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcAITargetPositionName
@@ -1715,7 +1708,6 @@ namespace SF3.X1_Editor.Forms
             this.olvInteractables.UseAlternatingBackColors = true;
             this.olvInteractables.UseCompatibleStateImageBehavior = false;
             this.olvInteractables.View = System.Windows.Forms.View.Details;
-            this.olvInteractables.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvInteractables.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcInteractablesName
@@ -1852,7 +1844,6 @@ namespace SF3.X1_Editor.Forms
             this.olvTownNpcs.UseAlternatingBackColors = true;
             this.olvTownNpcs.UseCompatibleStateImageBehavior = false;
             this.olvTownNpcs.View = System.Windows.Forms.View.Details;
-            this.olvTownNpcs.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvTownNpcs.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcTownNpcsName
@@ -2013,7 +2004,6 @@ namespace SF3.X1_Editor.Forms
             this.olvNonBattleEnter.UseAlternatingBackColors = true;
             this.olvNonBattleEnter.UseCompatibleStateImageBehavior = false;
             this.olvNonBattleEnter.View = System.Windows.Forms.View.Details;
-            this.olvNonBattleEnter.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvNonBattleEnter.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcNonBattleEnterName
@@ -2143,7 +2133,6 @@ namespace SF3.X1_Editor.Forms
             this.olvArrows.UseAlternatingBackColors = true;
             this.olvArrows.UseCompatibleStateImageBehavior = false;
             this.olvArrows.View = System.Windows.Forms.View.Details;
-            this.olvArrows.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvArrows.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcArrowsName
@@ -2249,7 +2238,6 @@ namespace SF3.X1_Editor.Forms
             this.olvBattlePointers.UseAlternatingBackColors = true;
             this.olvBattlePointers.UseCompatibleStateImageBehavior = false;
             this.olvBattlePointers.View = System.Windows.Forms.View.Details;
-            this.olvBattlePointers.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvBattlePointers.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcBattlePointersName
@@ -2328,7 +2316,6 @@ namespace SF3.X1_Editor.Forms
             this.olvWarpTable.UseAlternatingBackColors = true;
             this.olvWarpTable.UseCompatibleStateImageBehavior = false;
             this.olvWarpTable.View = System.Windows.Forms.View.Details;
-            this.olvWarpTable.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvWarpTable.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcWarpTableName
@@ -2451,7 +2438,6 @@ namespace SF3.X1_Editor.Forms
             this.olvTileData.UseAlternatingBackColors = true;
             this.olvTileData.UseCompatibleStateImageBehavior = false;
             this.olvTileData.View = System.Windows.Forms.View.Details;
-            this.olvTileData.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditFinishing);
             this.olvTileData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcTileDataName
