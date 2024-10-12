@@ -60,52 +60,6 @@ namespace SF3.X002_Editor.Forms
             tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
 
-            /*try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvMonsters.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }*/
-            /*try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/itemstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvItems.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }*/
-
-            /*try
-            {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/spellsstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvItems.RestoreState(data);
-                stream.Close();
-            }/*
-            catch (Exception) { }
-            /*try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/blacksmithstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvBlacksmith.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }
-            try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/storesstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvStoreItems.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }
-            /*
-            try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/spellsstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvSpells.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }*/
             //lvcAction1.AspectToStringConverter = getActionName;
             //lvcAction2.AspectToStringConverter = getActionName;
             //lvcAction3.AspectToStringConverter = getActionName;

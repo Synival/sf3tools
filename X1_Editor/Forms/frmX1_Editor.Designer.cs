@@ -2601,7 +2601,6 @@ namespace SF3.X1_Editor.Forms
             this.Name = "frmX1_Editor";
             this.Text = "Sf3 X1 editor          |OpenedFile: None|          Current open settings: Scenari" +
     "o: 1 | Map: Synbios | MapType: none | debug: off";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmX1_Editor_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabHeader.ResumeLayout(false);

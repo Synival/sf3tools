@@ -134,52 +134,6 @@ namespace SF3.X1_Editor.Forms
             Scenario = ScenarioType.Scenario1;
             Map = 0x00;
 
-            /*try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvMonsters.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }*/
-            /*try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/itemstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvItems.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }*/
-
-            /*try
-            {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/spellsstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvItems.RestoreState(data);
-                stream.Close();
-            }/*
-            catch (Exception) { }
-            /*try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/blacksmithstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvBlacksmith.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }
-            try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/storesstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvStoreItems.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }
-            /*
-            try {
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/spellsstate." + Version + ".bin", FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                olvSpells.RestoreState(data);
-                stream.Close();
-            } catch (Exception) { }*/
             //lvcAction1.AspectToStringConverter = getActionName;
             //lvcAction2.AspectToStringConverter = getActionName;
             //lvcAction3.AspectToStringConverter = getActionName;
@@ -649,34 +603,6 @@ namespace SF3.X1_Editor.Forms
             {
                 _fileEditor.SaveFile(savefile.FileName);
             }
-        }
-
-        private void frmX1_Editor_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            /*try {
-                byte[] data = olvMonsters.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/monsterstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }*/
-            /*try {
-                byte[] data = olvBlacksmith.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/blacksmithstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }
-            try {
-                byte[] data = olvStoreItems.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/storesstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }
-            try {
-                byte[] data = olvSpells.SaveState();
-                FileStream stream = new FileStream(Application.StartupPath + "/Resources/spellsstate." + Version + ".bin", FileMode.Create, FileAccess.Write);
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            } catch (Exception) { }*/
         }
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e)
