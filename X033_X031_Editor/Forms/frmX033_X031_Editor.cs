@@ -57,7 +57,7 @@ namespace SF3.X033_X031_Editor.Forms
         private InitialInfoList _initialInfoList;
         private WeaponLevelList _weaponLevelList;
 
-        private ISF3FileEditor _fileEditor;
+        private IX033_X031_FileEditor _fileEditor;
 
         public class StatDataPoint
         {
@@ -326,7 +326,7 @@ namespace SF3.X033_X031_Editor.Forms
             openfile.Filter = "SF3 data (X033.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor = new SF3FileEditor(Scenario);
+                _fileEditor = new X033_X031_FileEditor(Scenario);
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try

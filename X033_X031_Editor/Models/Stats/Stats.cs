@@ -17,7 +17,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
             Promotion2 = 2,
         }
 
-        private ISF3FileEditor _fileEditor;
+        private IX033_X031_FileEditor _fileEditor;
 
         //starting stat table
         private int character;
@@ -150,7 +150,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         private int index;
         private string name;
 
-        public Stats(ISF3FileEditor fileEditor, int id, string text)
+        public Stats(IX033_X031_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
             checkType = _fileEditor.GetByte(0x00000009); //if it's 0x07 we're in a x033.bin
