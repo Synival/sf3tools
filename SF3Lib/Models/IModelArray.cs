@@ -22,7 +22,6 @@ namespace SF3.Models
         /// </summary>
         ScenarioType Scenario { get; }
 
-/*
         /// <summary>
         /// Resets all loaded data.
         /// </summary>
@@ -33,16 +32,15 @@ namespace SF3.Models
         /// Is 'true' when a successful Load() has occurred.
         /// </summary>
         bool IsLoaded { get; }
-*/
-    }
 
-    public interface IModelArray<T> : IModelArray
-    {
         /// <summary>
         /// The XML file to load for this resource.
         /// </summary>
         string ResourceFile { get; }
+    }
 
+    public interface IModelArray<T> : IModelArray
+    {
         /// <summary>
         /// A mutable array of models of type T.
         /// </summary>

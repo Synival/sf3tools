@@ -1,6 +1,7 @@
 ﻿using SF3.Types;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,16 +15,14 @@ namespace SF3.Models
             _fileEditor = fileEditor;
         }
 
-        /// <summary>
-        /// Loads models from its respective XML file(s).
-        /// </summary>
-        /// <returns>Return 'true' on success, or 'false' if the .XML file(s) do not exist or are in use.</returns>
         public abstract bool Load();
+        public abstract bool Reset();
 
-        /// <summary>
-        /// The Scenario the contained models belong to.
-        /// </summary>
         public ScenarioType Scenario => _fileEditor.Scenario;
+
+        public abstract string ResourceFile { get; }
+        public abstract bool IsLoaded { get; }
+
 
         private ISF3FileEditor _fileEditor;
 
@@ -35,15 +34,16 @@ namespace SF3.Models
         {
         }
 
-        /// <summary>
-        /// The XML file to load for this resource.
-        /// </summary>
-        public abstract string ResourceFile { get; }
+        public override bool Reset()
+        {
+            _models = null;
+            return true;
+        }
 
-        /// <summary>
-        /// A mutable array of models of type T.
-        /// </summary>
         public T[] Models => _models;
+
+        public override string ResourceFile { get; }
+        public override bool IsLoaded => _models != null;
 
         protected T[] _models = null;
     }
