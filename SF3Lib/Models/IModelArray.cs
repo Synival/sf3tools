@@ -9,6 +9,9 @@ using System.Xml;
 
 namespace SF3.Models
 {
+    /// <summary>
+    /// Interface for any collection of SF3 models that can be modified.
+    /// </summary>
     public interface IModelArray
     {
         /// <summary>
@@ -39,6 +42,9 @@ namespace SF3.Models
         string ResourceFile { get; }
     }
 
+    /// <summary>
+    /// Interface for a specific collection of SF3 models that can be modified.
+    /// </summary>
     public interface IModelArray<T> : IModelArray
     {
         /// <summary>

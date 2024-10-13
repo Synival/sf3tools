@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace SF3.Models
 {
+    /// <summary>
+    /// Base implementation for any collection of SF3 models that can be modified.
+    /// </summary>
     public abstract class ModelArray : IModelArray
     {
         protected ModelArray(ISF3FileEditor fileEditor)
@@ -28,6 +31,9 @@ namespace SF3.Models
 
     }
 
+    /// <summary>
+    /// Base implementation for a specific collection of SF3 models that can be modified.
+    /// </summary>
     public abstract class ModelArray<T> : ModelArray, IModelArray<T> where T : class
     {
         protected ModelArray(ISF3FileEditor fileEditor) : base(fileEditor)
