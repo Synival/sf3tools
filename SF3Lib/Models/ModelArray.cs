@@ -35,12 +35,10 @@ namespace SF3.Models
         {
         }
 
-/*
         /// <summary>
         /// The XML file to load for this resource.
         /// </summary>
         public abstract string ResourceFile { get; }
-*/
 
         /// <summary>
         /// A mutable array of models of type T.

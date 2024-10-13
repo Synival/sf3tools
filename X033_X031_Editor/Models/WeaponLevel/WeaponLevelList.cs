@@ -16,7 +16,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         private IX033_X031_FileEditor _fileEditor;
         private WeaponLevel[] items;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/WeaponLevel.xml";
 
         /// <summary>
         /// Initialises list
@@ -24,14 +24,12 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
         public override bool Load()
         {
-            r = "Resources/WeaponLevel.xml";
-
             _models = new WeaponLevel[0];
             items = new WeaponLevel[2]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

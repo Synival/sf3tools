@@ -16,7 +16,7 @@ namespace SF3.X1_Editor.Models.Tiles
         private Tile[] tiles;
         private IX1_FileEditor _fileEditor;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/MovementTypes.xml";
 
         /// <summary>
         /// Initialises class
@@ -24,14 +24,12 @@ namespace SF3.X1_Editor.Models.Tiles
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/MovementTypes.xml";
-
             _models = new Tile[0];
             tiles = new Tile[31]; //max size of spellIndexList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

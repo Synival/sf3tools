@@ -16,7 +16,7 @@ namespace SF3.X013_Editor.Models.Soulfail
         private IX013_FileEditor _fileEditor;
         private Soulfail[] items;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/Soulfail.xml";
 
         /// <summary>
         /// Initialises class
@@ -24,14 +24,12 @@ namespace SF3.X013_Editor.Models.Soulfail
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/Soulfail.xml";
-
             _models = new Soulfail[0];
             items = new Soulfail[1]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

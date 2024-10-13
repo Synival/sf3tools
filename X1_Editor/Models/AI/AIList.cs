@@ -11,12 +11,33 @@ namespace SF3.X1_Editor.Models.AI
         public AIList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
+
+            /*if (Globals.scenario == ScenarioType.Scenario1)
+            {
+                _resourceFile = "Resources/X1AIScn1.xml";
+            }
+            else if (Globals.scenario == ScenarioType.Scenario2)
+            {
+                _resourceFile = "Resources/X1AIOther.xml";
+            }
+            else if (Globals.scenario == ScenarioType.Scenario3)
+            {
+                _resourceFile = "Resources/X1AIOther.xml";
+            }
+            else if (Globals.scenario == ScenarioType.PremiumDisk)
+            {
+                _resourceFile = "Resources/X1AIOther.xml";
+            }
+            else
+            {
+                _resourceFile = "Resources/X1AIOther.xml";
+            }*/
         }
 
         private AI[] models;
         private IX1_FileEditor _fileEditor;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/X1AI.xml";
 
         /// <summary>
         /// Initialises class
@@ -24,35 +45,12 @@ namespace SF3.X1_Editor.Models.AI
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/X1AI.xml";
-
-            /*if (Globals.scenario == ScenarioType.Scenario1)
-            {
-                r = "Resources/X1AIScn1.xml";
-            }
-            else if (Globals.scenario == ScenarioType.Scenario2)
-            {
-                r = "Resources/X1AIOther.xml";
-            }
-            else if (Globals.scenario == ScenarioType.Scenario3)
-            {
-                r = "Resources/X1AIOther.xml";
-            }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
-            {
-                r = "Resources/X1AIOther.xml";
-            }
-            else
-            {
-                r = "Resources/X1AIOther.xml";
-            }*/
-
             _models = new AI[0];
             models = new AI[130]; //max size of spellList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;

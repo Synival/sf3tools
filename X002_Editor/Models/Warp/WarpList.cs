@@ -16,7 +16,7 @@ namespace SF3.X002_Editor.Models.Warps
         private IX002_FileEditor _fileEditor;
         private Warp[] items;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/X002Warp.xml";
 
         /// <summary>
         /// Initialises class
@@ -24,14 +24,12 @@ namespace SF3.X002_Editor.Models.Warps
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/X002Warp.xml";
-
             _models = new Warp[0];
             items = new Warp[1000]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

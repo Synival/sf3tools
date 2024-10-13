@@ -16,7 +16,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
         private IX013_FileEditor _fileEditor;
         private SpecialChance[] items;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/SpecialChanceList.xml";
 
         /// <summary>
         /// Initialises class
@@ -24,14 +24,12 @@ namespace SF3.X013_Editor.Models.SpecialChance
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/SpecialChanceList.xml";
-
             _models = new SpecialChance[0];
             items = new SpecialChance[1]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

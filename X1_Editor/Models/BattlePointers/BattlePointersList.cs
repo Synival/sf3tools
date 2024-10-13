@@ -16,7 +16,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
         private BattlePointers[] items;
         private IX1_FileEditor _fileEditor;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/BattlePointersList.xml";
 
         /// <summary>
         /// Initialises class
@@ -24,14 +24,12 @@ namespace SF3.X1_Editor.Models.BattlePointers
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/BattlePointersList.xml";
-
             _models = new BattlePointers[0];
             items = new BattlePointers[5]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

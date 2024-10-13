@@ -11,12 +11,30 @@ namespace SF3.X013_Editor.Models.Specials
         public SpecialList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
+
+            if (Scenario == ScenarioType.Scenario1)
+            {
+                _resourceFile = "RSc1/SpecialListS1.xml";
+            }
+            else if (Scenario == ScenarioType.Scenario2)
+            {
+                _resourceFile = "RSc2/SpecialListS2.xml";
+            }
+            if (Scenario == ScenarioType.Scenario3)
+            {
+                _resourceFile = "Resources/SpecialList.xml";
+            }
+            else if (Scenario == ScenarioType.PremiumDisk)
+            {
+                _resourceFile = "RPD/SpecialListPD.xml";
+            }
         }
 
+        private string _resourceFile;
         private IX013_FileEditor _fileEditor;
         private Special[] models;
 
-        private string r = "";
+        public override string ResourceFile => _resourceFile;
 
         /// <summary>
         /// Initialises class
@@ -24,29 +42,12 @@ namespace SF3.X013_Editor.Models.Specials
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                r = "RSc1/SpecialListS1.xml";
-            }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                r = "RSc2/SpecialListS2.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                r = "Resources/SpecialList.xml";
-            }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                r = "RPD/SpecialListPD.xml";
-            }
-
             _models = new Special[0];
             models = new Special[256]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

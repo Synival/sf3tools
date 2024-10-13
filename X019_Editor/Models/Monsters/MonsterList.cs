@@ -11,12 +11,34 @@ namespace SF3.X019_Editor.Models.Monsters
         public MonsterList(IX019_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
+
+            if (Scenario == ScenarioType.Scenario1)
+            {
+                _resourceFile = "RSc1/X019List.xml";
+            }
+            else if (Scenario == ScenarioType.Scenario2)
+            {
+                _resourceFile = "RSc2/X019List.xml";
+            }
+            if (Scenario == ScenarioType.Scenario3)
+            {
+                _resourceFile = "Resources/X019List.xml";
+            }
+            else if (Scenario == ScenarioType.PremiumDisk)
+            {
+                _resourceFile = "RPD/X019List.xml";
+            }
+            else if (Scenario == ScenarioType.Other)
+            {
+                _resourceFile = "RPDX44/X044List.xml";
+            }
         }
 
+        private string _resourceFile;
         private IX019_FileEditor _fileEditor;
         private Monster[] models;
 
-        private string r = "";
+        public override string ResourceFile => _resourceFile;
 
         /// <summary>
         /// Initialises class
@@ -24,33 +46,12 @@ namespace SF3.X019_Editor.Models.Monsters
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                r = "RSc1/X019List.xml";
-            }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                r = "RSc2/X019List.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                r = "Resources/X019List.xml";
-            }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                r = "RPD/X019List.xml";
-            }
-            else if (Scenario == ScenarioType.Other)
-            {
-                r = "RPDX44/X044List.xml";
-            }
-
             _models = new Monster[0];
             models = new Monster[256]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

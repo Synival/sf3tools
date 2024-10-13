@@ -16,7 +16,7 @@ namespace SF3.X002_Editor.Models.AttackResist
         private IX002_FileEditor _fileEditor;
         private AttackResist[] items;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/AttackResistList.xml";
 
         /// <summary>
         /// Initialises class
@@ -24,14 +24,12 @@ namespace SF3.X002_Editor.Models.AttackResist
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/AttackResistList.xml";
-
             _models = new AttackResist[0];
             items = new AttackResist[2]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

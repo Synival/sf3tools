@@ -11,12 +11,30 @@ namespace SF3.X002_Editor.Models.MusicOverride
         public MusicOverrideList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
+
+            if (Scenario == ScenarioType.Scenario1)
+            {
+                _resourceFile = "RSc1/musicOverrideListS1.xml";
+            }
+            else if (Scenario == ScenarioType.Scenario2)
+            {
+                _resourceFile = "RSc2/musicOverrideListS2.xml";
+            }
+            if (Scenario == ScenarioType.Scenario3)
+            {
+                _resourceFile = "Resources/musicOverrideList.xml";
+            }
+            else if (Scenario == ScenarioType.PremiumDisk)
+            {
+                _resourceFile = "RPD/musicOverrideListPD.xml";
+            }
         }
 
+        private string _resourceFile;
         private MusicOverride[] items;
         private IX002_FileEditor _fileEditor;
 
-        private string r = "";
+        public override string ResourceFile => _resourceFile;
 
         /// <summary>
         /// Initialises class
@@ -24,29 +42,12 @@ namespace SF3.X002_Editor.Models.MusicOverride
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                r = "RSc1/musicOverrideListS1.xml";
-            }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                r = "RSc2/musicOverrideListS2.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                r = "Resources/musicOverrideList.xml";
-            }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                r = "RPD/musicOverrideListPD.xml";
-            }
-
             _models = new MusicOverride[0];
             items = new MusicOverride[300]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

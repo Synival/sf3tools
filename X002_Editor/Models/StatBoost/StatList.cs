@@ -16,7 +16,7 @@ namespace SF3.X002_Editor.Models.StatBoost
         private IX002_FileEditor _fileEditor;
         private StatBoost[] items;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/X002StatList.xml";
 
         /// <summary>
         /// Initialises class
@@ -24,14 +24,12 @@ namespace SF3.X002_Editor.Models.StatBoost
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/X002StatList.xml";
-
             _models = new StatBoost[0];
             items = new StatBoost[300]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

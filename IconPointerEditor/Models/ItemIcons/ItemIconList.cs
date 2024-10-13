@@ -11,12 +11,30 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
         public ItemIconList(IIconPointerFileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
+
+            if (Scenario == ScenarioType.Scenario1)
+            {
+                _resourceFile = "Resources/scenario1Items.xml";
+            }
+            if (Scenario == ScenarioType.Scenario2)
+            {
+                _resourceFile = "Resources/scenario2Items.xml";
+            }
+            if (Scenario == ScenarioType.Scenario3)
+            {
+                _resourceFile = "Resources/scenario3Items.xml";
+            }
+            if (Scenario == ScenarioType.PremiumDisk)
+            {
+                _resourceFile = "Resources/PDItems.xml";
+            }
         }
 
+        private string _resourceFile;
         private ItemIcon[] models;
         private IIconPointerFileEditor _fileEditor;
 
-        private string r = "";
+        public override string ResourceFile => _resourceFile;
 
         /// <summary>
         /// Initialises class
@@ -24,29 +42,12 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                r = "Resources/scenario1Items.xml";
-            }
-            if (Scenario == ScenarioType.Scenario2)
-            {
-                r = "Resources/scenario2Items.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                r = "Resources/scenario3Items.xml";
-            }
-            if (Scenario == ScenarioType.PremiumDisk)
-            {
-                r = "Resources/PDItems.xml";
-            }
-
             _models = new ItemIcon[0];
             models = new ItemIcon[300]; //max size 
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

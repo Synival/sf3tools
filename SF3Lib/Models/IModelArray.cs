@@ -38,12 +38,10 @@ namespace SF3.Models
 
     public interface IModelArray<T> : IModelArray
     {
-/*
         /// <summary>
         /// The XML file to load for this resource.
         /// </summary>
         string ResourceFile { get; }
-*/
 
         /// <summary>
         /// A mutable array of models of type T.

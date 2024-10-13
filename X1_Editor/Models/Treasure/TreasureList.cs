@@ -17,7 +17,7 @@ namespace SF3.X1_Editor.Models.Treasures
         private Treasure[] items;
         private IX1_FileEditor _fileEditor;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/X1Treasure.xml";
 
         /// <summary>
         /// Initialises class
@@ -25,14 +25,12 @@ namespace SF3.X1_Editor.Models.Treasures
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/X1Treasure.xml";
-
             _models = new Treasure[0];
             items = new Treasure[255]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

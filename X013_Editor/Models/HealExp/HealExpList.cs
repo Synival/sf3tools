@@ -16,7 +16,7 @@ namespace SF3.X013_Editor.Models.HealExp
         private IX013_FileEditor _fileEditor;
         private HealExp[] items;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/HealExpList.xml";
 
         /// <summary>
         /// Initialises class
@@ -24,14 +24,12 @@ namespace SF3.X013_Editor.Models.HealExp
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/HealExpList.xml";
-
             _models = new HealExp[0];
             items = new HealExp[2]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

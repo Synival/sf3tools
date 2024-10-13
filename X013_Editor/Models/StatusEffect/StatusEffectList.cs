@@ -16,7 +16,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
         private IX013_FileEditor _fileEditor;
         private StatusEffect[] items;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/StatusGroupList.xml";
 
         /// <summary>
         /// Initialises class
@@ -24,14 +24,12 @@ namespace SF3.X013_Editor.Models.StatusEffects
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/StatusGroupList.xml";
-
             _models = new StatusEffect[0];
             items = new StatusEffect[1000]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

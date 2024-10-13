@@ -16,7 +16,7 @@ namespace SF3.X1_Editor.Models.Headers
         private Header[] models;
         private IX1_FileEditor _fileEditor;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/X1Top.xml";
 
         /// <summary>
         /// Initialises class
@@ -24,14 +24,12 @@ namespace SF3.X1_Editor.Models.Headers
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/X1Top.xml";
-
             _models = new Header[0];
             models = new Header[31]; //max size of spellIndexList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

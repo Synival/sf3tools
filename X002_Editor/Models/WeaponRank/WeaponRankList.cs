@@ -16,7 +16,7 @@ namespace SF3.X002_Editor.Models.WeaponRank
         private IX002_FileEditor _fileEditor;
         private WeaponRank[] items;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/WeaponRankList.xml";
 
         /// <summary>
         /// Initialises class
@@ -24,14 +24,12 @@ namespace SF3.X002_Editor.Models.WeaponRank
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/WeaponRankList.xml";
-
             _models = new WeaponRank[0];
             items = new WeaponRank[5]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

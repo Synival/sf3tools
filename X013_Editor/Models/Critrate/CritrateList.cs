@@ -16,7 +16,7 @@ namespace SF3.X013_Editor.Models.Critrate
         private IX013_FileEditor _fileEditor;
         private Critrate[] items;
 
-        private string r = "";
+        public override string ResourceFile => "Resources/CritrateList.xml";
 
         /// <summary>
         /// Initialises class
@@ -24,14 +24,12 @@ namespace SF3.X013_Editor.Models.Critrate
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            r = "Resources/CritrateList.xml";
-
             _models = new Critrate[0];
             items = new Critrate[3]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

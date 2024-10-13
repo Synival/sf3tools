@@ -11,12 +11,22 @@ namespace SF3.X1_Editor.Models.Slots
         public SlotList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
+
+            if (Scenario == ScenarioType.Scenario1)
+            {
+                _resourceFile = "Resources/X1List.xml";
+            }
+            else
+            {
+                _resourceFile = "Resources/X1OtherList.xml";
+            }
         }
 
+        private string _resourceFile;
         private Slot[] models;
         private IX1_FileEditor _fileEditor;
 
-        private string r = "";
+        public override string ResourceFile => _resourceFile;
 
         /// <summary>
         /// Initialises class
@@ -24,19 +34,12 @@ namespace SF3.X1_Editor.Models.Slots
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                r = "Resources/X1List.xml";
-            }
-            else
-                r = "Resources/X1OtherList.xml";
-
             _models = new Slot[0];
             models = new Slot[256]; //max size of itemList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
 
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;

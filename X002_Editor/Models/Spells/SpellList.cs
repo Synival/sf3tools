@@ -11,12 +11,30 @@ namespace SF3.X002_Editor.Models.Spells
         public SpellList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
+
+            if (Scenario == ScenarioType.Scenario1)
+            {
+                _resourceFile = "RSc1/spellListS1.xml";
+            }
+            else if (Scenario == ScenarioType.Scenario2)
+            {
+                _resourceFile = "RSc2/spellListS2.xml";
+            }
+            if (Scenario == ScenarioType.Scenario3)
+            {
+                _resourceFile = "Resources/spellList.xml";
+            }
+            else if (Scenario == ScenarioType.PremiumDisk)
+            {
+                _resourceFile = "RPD/spellListPD.xml";
+            }
         }
 
+        private string _resourceFile;
         private IX002_FileEditor _fileEditor;
         private Spell[] spells;
 
-        private string r = "";
+        public override string ResourceFile => _resourceFile;
 
         /// <summary>
         /// Initialises class
@@ -24,29 +42,12 @@ namespace SF3.X002_Editor.Models.Spells
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
         public override bool Load()
         {
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                r = "RSc1/spellListS1.xml";
-            }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                r = "RSc2/spellListS2.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                r = "Resources/spellList.xml";
-            }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                r = "RPD/spellListPD.xml";
-            }
-
             _models = new Spell[0];
             spells = new Spell[78]; //max size of spellList. 
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;

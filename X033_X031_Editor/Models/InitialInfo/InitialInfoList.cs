@@ -11,12 +11,30 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
         public InitialInfoList(IX033_X031_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
+
+            if (Scenario == ScenarioType.Scenario1)
+            {
+                _resourceFile = "RSc1/classEquipS1.xml";
+            }
+            else if (Scenario == ScenarioType.Scenario2)
+            {
+                _resourceFile = "RSc2/classEquipS2.xml";
+            }
+            if (Scenario == ScenarioType.Scenario3)
+            {
+                _resourceFile = "Resources/classEquip.xml";
+            }
+            else if (Scenario == ScenarioType.PremiumDisk)
+            {
+                _resourceFile = "RPD/classEquipPD.xml";
+            }
         }
 
+        private string _resourceFile;
         private IX033_X031_FileEditor _fileEditor;
         private InitialInfo[] models;
 
-        private string r = "";
+        public override string ResourceFile => _resourceFile;
 
         /// <summary>
         /// Initialises list
@@ -24,29 +42,12 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
         public override bool Load()
         {
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                r = "RSc1/classEquipS1.xml";
-            }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                r = "RSc2/classEquipS2.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                r = "Resources/classEquip.xml";
-            }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                r = "RPD/classEquipPD.xml";
-            }
-
             _models = new InitialInfo[0];
             models = new InitialInfo[100]; //max size of spellIndexList
             FileStream stream = null;
             try
             {
-                stream = new FileStream(r, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open);
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
