@@ -320,7 +320,7 @@ namespace SF3.X1_Editor.Forms
             // 
             this.tsmiFile_Open.Name = "tsmiFile_Open";
             this.tsmiFile_Open.Size = new System.Drawing.Size(180, 22);
-            this.tsmiFile_Open.Text = "Open";
+            this.tsmiFile_Open.Text = "Open...";
             this.tsmiFile_Open.Click += new System.EventHandler(this.tsmiFile_Open_Click);
             // 
             // tsmiFile_SaveAs
@@ -328,7 +328,7 @@ namespace SF3.X1_Editor.Forms
             this.tsmiFile_SaveAs.Enabled = false;
             this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
             this.tsmiFile_SaveAs.Size = new System.Drawing.Size(180, 22);
-            this.tsmiFile_SaveAs.Text = "Save As";
+            this.tsmiFile_SaveAs.Text = "Save As...";
             this.tsmiFile_SaveAs.Click += new System.EventHandler(this.tsmiFile_SaveAs_Click);
             // 
             // tsmiHelp
