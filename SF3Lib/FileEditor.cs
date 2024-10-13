@@ -10,8 +10,8 @@ namespace SF3
     /// </summary>
     public class FileEditor : IFileEditor
     {
-        private static byte[] data = null;
-        public static string Filename;
+        private byte[] data = null;
+        public string Filename { get; private set; }
 
         /// <summary>
         /// Loads a file's binary data for editing.

@@ -96,5 +96,9 @@ namespace SF3
         /// <param name="value">The new value of the bit.</param>
         void SetBit(int location, int bit, bool value);
 
+        /// <summary>
+        /// Filename of the file loaded.
+        /// </summary>
+        string Filename { get; }
     }
 }

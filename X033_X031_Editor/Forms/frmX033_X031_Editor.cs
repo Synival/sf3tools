@@ -189,7 +189,7 @@ namespace SF3.X033_X031_Editor.Forms
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 x033 (.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            savefile.FileName = Path.GetFileName(FileEditor.Filename);
+            savefile.FileName = Path.GetFileName(_fileEditor.Filename);
             if (savefile.ShowDialog() == DialogResult.OK)
             {
                 _fileEditor.SaveFile(savefile.FileName);
