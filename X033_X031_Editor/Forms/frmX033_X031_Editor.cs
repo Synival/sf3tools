@@ -379,15 +379,17 @@ namespace SF3.X033_X031_Editor.Forms
             olvWeaponLevelReq.FinishCellEdit();
             olvCurveCalc.FinishCellEdit();
 
-            OpenFileDialog openfile = new OpenFileDialog();
-            openfile.Filter = "SF3 data (X033.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            if (openfile.ShowDialog() != DialogResult.OK)
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Copy To";
+            saveFileDialog.Filter = "SF3 data (X033.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
+            var copyToFilename = saveFileDialog.FileName;
 
             var copyFileEditor = new X033_X031_FileEditor(Scenario);
-            if (!copyFileEditor.LoadFile(openfile.FileName))
+            if (!copyFileEditor.LoadFile(copyToFilename))
             {
                 MessageBox.Show("Error trying to load file. It is probably in use by another process.");
                 return;
@@ -451,21 +453,21 @@ namespace SF3.X033_X031_Editor.Forms
             {
                 //wrong file was selected
                 MessageBox.Show("Failed to read file:\n" +
-                                "    " + openfile.FileName);
+                                "    " + copyToFilename);
                 return;
             }
             catch (FileEditorReadException)
             {
                 //wrong file was selected
                 MessageBox.Show("Data appears corrupt or invalid:\n" +
-                                "    " + openfile.FileName + "\n\n" +
+                                "    " + copyToFilename + "\n\n" +
                                 "Is this the correct type of file?");
                 return;
             }
 
-            if (!copyFileEditor.SaveFile(openfile.FileName))
+            if (!copyFileEditor.SaveFile(copyToFilename))
             {
-                MessageBox.Show("Failed to write to " + openfile.FileName);
+                MessageBox.Show("Failed to write to " + copyToFilename);
                 return;
             }
 
