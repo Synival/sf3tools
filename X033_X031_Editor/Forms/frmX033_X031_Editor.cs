@@ -393,6 +393,7 @@ namespace SF3.X033_X031_Editor.Forms
                 return;
             }
 
+            string copyResults = "";
             try
             {
                 // TODO: refactor out!
@@ -417,9 +418,11 @@ namespace SF3.X033_X031_Editor.Forms
                     return;
                 }
 
-                Utils.BulkCopyProperties<Models.Stats.Stats>(_statsList.Models, copyStatsList.Models);
-                Utils.BulkCopyProperties<InitialInfo>(_initialInfoList.Models, copyInitialInfoList.Models);
-                Utils.BulkCopyProperties<WeaponLevel>(_weaponLevelList.Models, copyWeaponLevelList.Models);
+                var report1 = Utils.BulkCopyCollectionProperties(_statsList.Models, copyStatsList.Models);
+                var report2 = Utils.BulkCopyCollectionProperties(_initialInfoList.Models, copyInitialInfoList.Models);
+                var report3 = Utils.BulkCopyCollectionProperties(_weaponLevelList.Models, copyWeaponLevelList.Models);
+
+                copyResults = report1.ToString() + "\n" + report2.ToString() + "\n" + report3.ToString();
             }
             catch (System.Reflection.TargetInvocationException)
             {
@@ -443,7 +446,8 @@ namespace SF3.X033_X031_Editor.Forms
                 return;
             }
 
-            MessageBox.Show("All tables copied successfully.");
+            // Show the user a nice report.
+            MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyResults);
         }
     }
 }
