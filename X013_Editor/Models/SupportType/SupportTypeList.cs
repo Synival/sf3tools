@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.SupportTypes
         }
 
         private IX013_FileEditor _fileEditor;
-        private SupportType[] modelsSorted;
         private SupportType[] models;
 
         private string r = "";
@@ -42,7 +41,7 @@ namespace SF3.X013_Editor.Models.SupportTypes
                 r = "RPD/charactersPD.xml";
             }
 
-            modelsSorted = new SupportType[0];
+            _models = new SupportType[0];
             models = new SupportType[120]; //max size of spellList
             FileStream stream = null;
             try
@@ -59,12 +58,12 @@ namespace SF3.X013_Editor.Models.SupportTypes
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new SupportType[modelsSorted.Length];
-                        modelsSorted.CopyTo(old, 0);
-                        modelsSorted = new SupportType[old.Length + 1];
-                        old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new SupportType(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[modelsSorted[old.Length].SpellID] = modelsSorted[old.Length];
+                        old = new SupportType[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new SupportType[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new SupportType(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[_models[old.Length].SpellID] = _models[old.Length];
                     }
                 }
             }
@@ -85,7 +84,5 @@ namespace SF3.X013_Editor.Models.SupportTypes
             }
             return true;
         }
-
-        public SupportType[] Models => modelsSorted;
     }
 }

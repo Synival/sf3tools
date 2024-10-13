@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.StatusEffects
         }
 
         private IX013_FileEditor _fileEditor;
-        private StatusEffect[] itemssorted;
         private StatusEffect[] items;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
         {
             r = "Resources/StatusGroupList.xml";
 
-            itemssorted = new StatusEffect[0];
+            _models = new StatusEffect[0];
             items = new StatusEffect[1000]; //max size of itemList
             FileStream stream = null;
             try
@@ -46,23 +45,23 @@ namespace SF3.X013_Editor.Models.StatusEffects
                 int myCount = 0;
                 //string myName = "WarpIndex " + myCount;
                 //Globals.treasureDebug = true;
-                //while (!xml.EOF && (itemssorted.Length == 0 || itemssorted[itemssorted.Length - 1].Searched != 0xffff))
+                //while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
 
                 while (!xml.EOF)
-                //while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].Searched != 0xffff || itemssorted[itemssorted.Length - 1].EventNumber != 0xffff)))
-                //while (!xml.EOF && (itemssorted.Length == 0 || myCount <= 2))
+                //while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].Searched != 0xffff || _models[_models.Length - 1].EventNumber != 0xffff)))
+                //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                 {
                     {
                         xml.Read();
                         if (xml.HasAttributes)
                         {
-                            old = new StatusEffect[itemssorted.Length];
-                            itemssorted.CopyTo(old, 0);
-                            itemssorted = new StatusEffect[old.Length + 1];
-                            old.CopyTo(itemssorted, 0);
-                            itemssorted[old.Length] = new StatusEffect(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                            old = new StatusEffect[_models.Length];
+                            _models.CopyTo(old, 0);
+                            _models = new StatusEffect[old.Length + 1];
+                            old.CopyTo(_models, 0);
+                            _models[old.Length] = new StatusEffect(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
 
-                            items[itemssorted[old.Length].StatusEffectID] = itemssorted[old.Length];
+                            items[_models[old.Length].StatusEffectID] = _models[old.Length];
                         }
                     }
                 }
@@ -85,7 +84,5 @@ namespace SF3.X013_Editor.Models.StatusEffects
             }
             return true;
         }
-
-        public StatusEffect[] Models => itemssorted;
     }
 }

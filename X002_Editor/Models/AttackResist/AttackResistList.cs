@@ -14,7 +14,6 @@ namespace SF3.X002_Editor.Models.AttackResist
         }
 
         private IX002_FileEditor _fileEditor;
-        private AttackResist[] itemssorted;
         private AttackResist[] items;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X002_Editor.Models.AttackResist
         {
             r = "Resources/AttackResistList.xml";
 
-            itemssorted = new AttackResist[0];
+            _models = new AttackResist[0];
             items = new AttackResist[2]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X002_Editor.Models.AttackResist
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new AttackResist[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new AttackResist[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new AttackResist(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].AttackResistID] = itemssorted[old.Length];
+                        old = new AttackResist[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new AttackResist[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new AttackResist(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].AttackResistID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X002_Editor.Models.AttackResist
             }
             return true;
         }
-
-        public AttackResist[] Models => itemssorted;
     }
 }

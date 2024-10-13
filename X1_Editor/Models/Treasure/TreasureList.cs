@@ -14,7 +14,6 @@ namespace SF3.X1_Editor.Models.Treasures
             _fileEditor = fileEditor;
         }
 
-        private Treasure[] itemssorted;
         private Treasure[] items;
         private IX1_FileEditor _fileEditor;
 
@@ -28,7 +27,7 @@ namespace SF3.X1_Editor.Models.Treasures
         {
             r = "Resources/X1Treasure.xml";
 
-            itemssorted = new Treasure[0];
+            _models = new Treasure[0];
             items = new Treasure[255]; //max size of itemList
             FileStream stream = null;
             try
@@ -46,24 +45,24 @@ namespace SF3.X1_Editor.Models.Treasures
                 //while (!xml.EOF)
                 int myCount = 0;
                 //Globals.treasureDebug = true;
-                //while (!xml.EOF && (itemssorted.Length == 0 || itemssorted[itemssorted.Length - 1].Searched != 0xffff))
+                //while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
 
                 if (Globals.treasureDebug == true)
                 {
-                    //while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].Searched != 0xffff || itemssorted[itemssorted.Length - 1].EventNumber != 0xffff)))
-                    while (!xml.EOF && (itemssorted.Length == 0 || myCount <= 2))
+                    //while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].Searched != 0xffff || _models[_models.Length - 1].EventNumber != 0xffff)))
+                    while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                     {
                         {
                             xml.Read();
                             if (xml.HasAttributes)
                             {
-                                old = new Treasure[itemssorted.Length];
-                                itemssorted.CopyTo(old, 0);
-                                itemssorted = new Treasure[old.Length + 1];
-                                old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                items[itemssorted[old.Length].TreasureID] = itemssorted[old.Length];
-                                if (itemssorted[itemssorted.Length - 1].Searched == 0xffff)
+                                old = new Treasure[_models.Length];
+                                _models.CopyTo(old, 0);
+                                _models = new Treasure[old.Length + 1];
+                                old.CopyTo(_models, 0);
+                                _models[old.Length] = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                items[_models[old.Length].TreasureID] = _models[old.Length];
+                                if (_models[_models.Length - 1].Searched == 0xffff)
                                 {
                                     myCount = 1 + myCount;
                                 }
@@ -74,21 +73,21 @@ namespace SF3.X1_Editor.Models.Treasures
 
                 else
                 {
-                    while (!xml.EOF && (itemssorted.Length == 0 || itemssorted[itemssorted.Length - 1].Searched != 0xffff))
-                    //while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].Searched != 0xffff || itemssorted[itemssorted.Length - 1].EventNumber != 0xffff)))
-                    //while (!xml.EOF && (itemssorted.Length == 0 || myCount <= 2))
+                    while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
+                    //while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].Searched != 0xffff || _models[_models.Length - 1].EventNumber != 0xffff)))
+                    //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                     {
                         {
                             xml.Read();
                             if (xml.HasAttributes)
                             {
-                                old = new Treasure[itemssorted.Length];
-                                itemssorted.CopyTo(old, 0);
-                                itemssorted = new Treasure[old.Length + 1];
-                                old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                items[itemssorted[old.Length].TreasureID] = itemssorted[old.Length];
-                                if (itemssorted[itemssorted.Length - 1].Searched == 0xffff)
+                                old = new Treasure[_models.Length];
+                                _models.CopyTo(old, 0);
+                                _models = new Treasure[old.Length + 1];
+                                old.CopyTo(_models, 0);
+                                _models[old.Length] = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                items[_models[old.Length].TreasureID] = _models[old.Length];
+                                if (_models[_models.Length - 1].Searched == 0xffff)
                                 {
                                     myCount = 1 + myCount;
                                 }
@@ -115,7 +114,5 @@ namespace SF3.X1_Editor.Models.Treasures
             }
             return true;
         }
-
-        public Treasure[] Models => itemssorted;
     }
 }

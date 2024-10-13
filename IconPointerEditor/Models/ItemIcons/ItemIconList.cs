@@ -13,7 +13,6 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
             _fileEditor = fileEditor;
         }
 
-        private ItemIcon[] modelsSorted;
         private ItemIcon[] models;
         private IIconPointerFileEditor _fileEditor;
 
@@ -42,7 +41,7 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
                 r = "Resources/PDItems.xml";
             }
 
-            modelsSorted = new ItemIcon[0];
+            _models = new ItemIcon[0];
             models = new ItemIcon[300]; //max size 
             FileStream stream = null;
             try
@@ -60,12 +59,12 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new ItemIcon[modelsSorted.Length];
-                        modelsSorted.CopyTo(old, 0);
-                        modelsSorted = new ItemIcon[old.Length + 1];
-                        old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new ItemIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[modelsSorted[old.Length].SizeID] = modelsSorted[old.Length];
+                        old = new ItemIcon[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new ItemIcon[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new ItemIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[_models[old.Length].SizeID] = _models[old.Length];
                     }
                 }
             }
@@ -84,7 +83,5 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
             }
             return true;
         }
-
-        public ItemIcon[] Models => modelsSorted;
     }
 }

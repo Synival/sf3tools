@@ -15,7 +15,6 @@ namespace SF3.X1_Editor.Models.Arrows
             _fileEditor = fileEditor;
         }
 
-        private Arrow[] itemssorted;
         private Arrow[] items;
 
         private string r = "";
@@ -28,7 +27,7 @@ namespace SF3.X1_Editor.Models.Arrows
         {
             r = "Resources/X1Arrow.xml";
 
-            itemssorted = new Arrow[0];
+            _models = new Arrow[0];
             items = new Arrow[100]; //max size of itemList
             FileStream stream = null;
             try
@@ -46,24 +45,24 @@ namespace SF3.X1_Editor.Models.Arrows
                 //while (!xml.EOF)
                 int myCount = 0;
                 //Globals.treasureDebug = true;
-                //while (!xml.EOF && (itemssorted.Length == 0 || itemssorted[itemssorted.Length - 1].Searched != 0xffff))
+                //while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
 
                 /*if(Globals.treasureDebug == true)
                 {
-                    //while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].Searched != 0xffff || itemssorted[itemssorted.Length - 1].EventNumber != 0xffff)))
-                    while (!xml.EOF && (itemssorted.Length == 0 || myCount <= 2))
+                    //while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].Searched != 0xffff || _models[_models.Length - 1].EventNumber != 0xffff)))
+                    while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                     {
                         {
                             xml.Read();
                             if (xml.HasAttributes)
                             {
-                                old = new Npc[itemssorted.Length];
-                                itemssorted.CopyTo(old, 0);
-                                itemssorted = new Npc[old.Length + 1];
-                                old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Npc(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                items[itemssorted[old.Length].NpcID] = itemssorted[old.Length];
-                                if (itemssorted[itemssorted.Length - 1].SpriteID == 0xffff)
+                                old = new Npc[_models.Length];
+                                _models.CopyTo(old, 0);
+                                _models = new Npc[old.Length + 1];
+                                old.CopyTo(_models, 0);
+                                _models[old.Length] = new Npc(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                items[_models[old.Length].NpcID] = _models[old.Length];
+                                if (_models[_models.Length - 1].SpriteID == 0xffff)
                                 {
                                     myCount = 1 + myCount;
                                 }
@@ -74,21 +73,21 @@ namespace SF3.X1_Editor.Models.Arrows
 
                 else*/
                 {
-                    while (!xml.EOF && (itemssorted.Length == 0 || itemssorted[itemssorted.Length - 1].ArrowUnknown0 != 0xffff))
-                    //while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].Searched != 0xffff || itemssorted[itemssorted.Length - 1].EventNumber != 0xffff)))
-                    //while (!xml.EOF && (itemssorted.Length == 0 || myCount <= 2))
+                    while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].ArrowUnknown0 != 0xffff))
+                    //while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].Searched != 0xffff || _models[_models.Length - 1].EventNumber != 0xffff)))
+                    //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                     {
                         {
                             xml.Read();
                             if (xml.HasAttributes)
                             {
-                                old = new Arrow[itemssorted.Length];
-                                itemssorted.CopyTo(old, 0);
-                                itemssorted = new Arrow[old.Length + 1];
-                                old.CopyTo(itemssorted, 0);
-                                itemssorted[old.Length] = new Arrow(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                items[itemssorted[old.Length].ArrowID] = itemssorted[old.Length];
-                                if (itemssorted[itemssorted.Length - 1].ArrowUnknown0 == 0xffff)
+                                old = new Arrow[_models.Length];
+                                _models.CopyTo(old, 0);
+                                _models = new Arrow[old.Length + 1];
+                                old.CopyTo(_models, 0);
+                                _models[old.Length] = new Arrow(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                items[_models[old.Length].ArrowID] = _models[old.Length];
+                                if (_models[_models.Length - 1].ArrowUnknown0 == 0xffff)
                                 {
                                     myCount = 1 + myCount;
                                 }
@@ -115,7 +114,5 @@ namespace SF3.X1_Editor.Models.Arrows
             }
             return true;
         }
-
-        public Arrow[] Models => itemssorted;
     }
 }

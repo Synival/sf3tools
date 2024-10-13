@@ -13,7 +13,6 @@ namespace SF3.X1_Editor.Models.SpawnZones
             _fileEditor = fileEditor;
         }
 
-        private SpawnZone[] modelsSorted;
         private SpawnZone[] models;
         private IX1_FileEditor _fileEditor;
 
@@ -27,7 +26,7 @@ namespace SF3.X1_Editor.Models.SpawnZones
         {
             r = "Resources/UnknownAIList.xml";
 
-            modelsSorted = new SpawnZone[0];
+            _models = new SpawnZone[0];
             models = new SpawnZone[30]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X1_Editor.Models.SpawnZones
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new SpawnZone[modelsSorted.Length];
-                        modelsSorted.CopyTo(old, 0);
-                        modelsSorted = new SpawnZone[old.Length + 1];
-                        old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new SpawnZone(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[modelsSorted[old.Length].UnknownAIID] = modelsSorted[old.Length];
+                        old = new SpawnZone[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new SpawnZone[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new SpawnZone(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[_models[old.Length].UnknownAIID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X1_Editor.Models.SpawnZones
             }
             return true;
         }
-
-        public SpawnZone[] Models => modelsSorted;
     }
 }

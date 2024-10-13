@@ -14,7 +14,6 @@ namespace SF3.X002_Editor.Models.WeaponRank
         }
 
         private IX002_FileEditor _fileEditor;
-        private WeaponRank[] itemssorted;
         private WeaponRank[] items;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X002_Editor.Models.WeaponRank
         {
             r = "Resources/WeaponRankList.xml";
 
-            itemssorted = new WeaponRank[0];
+            _models = new WeaponRank[0];
             items = new WeaponRank[5]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X002_Editor.Models.WeaponRank
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new WeaponRank[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new WeaponRank[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new WeaponRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].WeaponRankID] = itemssorted[old.Length];
+                        old = new WeaponRank[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new WeaponRank[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new WeaponRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].WeaponRankID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X002_Editor.Models.WeaponRank
             }
             return true;
         }
-
-        public WeaponRank[] Models => itemssorted;
     }
 }

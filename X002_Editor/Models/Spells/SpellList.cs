@@ -14,7 +14,6 @@ namespace SF3.X002_Editor.Models.Spells
         }
 
         private IX002_FileEditor _fileEditor;
-        private Spell[] spellssorted;
         private Spell[] spells;
 
         private string r = "";
@@ -42,7 +41,7 @@ namespace SF3.X002_Editor.Models.Spells
                 r = "RPD/spellListPD.xml";
             }
 
-            spellssorted = new Spell[0];
+            _models = new Spell[0];
             spells = new Spell[78]; //max size of spellList. 
             FileStream stream = null;
             try
@@ -59,12 +58,12 @@ namespace SF3.X002_Editor.Models.Spells
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Spell[spellssorted.Length];
-                        spellssorted.CopyTo(old, 0);
-                        spellssorted = new Spell[old.Length + 1];
-                        old.CopyTo(spellssorted, 0);
-                        spellssorted[old.Length] = new Spell(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        spells[spellssorted[old.Length].SpellID] = spellssorted[old.Length];
+                        old = new Spell[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new Spell[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new Spell(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        spells[_models[old.Length].SpellID] = _models[old.Length];
                     }
                 }
             }
@@ -85,7 +84,5 @@ namespace SF3.X002_Editor.Models.Spells
             }
             return true;
         }
-
-        public Spell[] Models => spellssorted;
     }
 }

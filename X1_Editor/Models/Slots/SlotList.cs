@@ -13,7 +13,6 @@ namespace SF3.X1_Editor.Models.Slots
             _fileEditor = fileEditor;
         }
 
-        private Slot[] modelsSorted;
         private Slot[] models;
         private IX1_FileEditor _fileEditor;
 
@@ -32,7 +31,7 @@ namespace SF3.X1_Editor.Models.Slots
             else
                 r = "Resources/X1OtherList.xml";
 
-            modelsSorted = new Slot[0];
+            _models = new Slot[0];
             models = new Slot[256]; //max size of itemList
             FileStream stream = null;
             try
@@ -51,12 +50,12 @@ namespace SF3.X1_Editor.Models.Slots
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Slot[modelsSorted.Length];
-                        modelsSorted.CopyTo(old, 0);
-                        modelsSorted = new Slot[old.Length + 1];
-                        old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new Slot(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[modelsSorted[old.Length].ID] = modelsSorted[old.Length];
+                        old = new Slot[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new Slot[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new Slot(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[_models[old.Length].ID] = _models[old.Length];
                         /*Console.WriteLine(items[itemssorted[old.Length].ID].EnemyID);
                         //numberTest = items[itemssorted[old.Length].ID].EnemyID;
                         if (items[itemssorted[old.Length].ID].EnemyID == 0xffff)
@@ -83,7 +82,5 @@ namespace SF3.X1_Editor.Models.Slots
             }
             return true;
         }
-
-        public Slot[] Models => modelsSorted;
     }
 }

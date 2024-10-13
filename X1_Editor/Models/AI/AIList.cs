@@ -13,7 +13,6 @@ namespace SF3.X1_Editor.Models.AI
             _fileEditor = fileEditor;
         }
 
-        private AI[] modelsSorted;
         private AI[] models;
         private IX1_FileEditor _fileEditor;
 
@@ -48,7 +47,7 @@ namespace SF3.X1_Editor.Models.AI
                 r = "Resources/X1AIOther.xml";
             }*/
 
-            modelsSorted = new AI[0];
+            _models = new AI[0];
             models = new AI[130]; //max size of spellList
             FileStream stream = null;
             try
@@ -65,12 +64,12 @@ namespace SF3.X1_Editor.Models.AI
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new AI[modelsSorted.Length];
-                        modelsSorted.CopyTo(old, 0);
-                        modelsSorted = new AI[old.Length + 1];
-                        old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new AI(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[modelsSorted[old.Length].AIID] = modelsSorted[old.Length];
+                        old = new AI[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new AI[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new AI(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[_models[old.Length].AIID] = _models[old.Length];
                     }
                 }
             }
@@ -91,7 +90,5 @@ namespace SF3.X1_Editor.Models.AI
             }
             return true;
         }
-
-        public AI[] Models => modelsSorted;
     }
 }

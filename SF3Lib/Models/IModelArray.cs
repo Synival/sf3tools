@@ -1,6 +1,7 @@
 ﻿using SF3.Types;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,13 @@ namespace SF3.Models
 
     public interface IModelArray<T> : IModelArray
     {
+/*
+        /// <summary>
+        /// The XML file to load for this resource.
+        /// </summary>
+        string ResourceFile { get; }
+*/
+
         /// <summary>
         /// A mutable array of models of type T.
         /// </summary>

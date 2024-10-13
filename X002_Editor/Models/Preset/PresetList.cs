@@ -14,7 +14,6 @@ namespace SF3.X002_Editor.Models.Presets
         }
 
         private IX002_FileEditor _fileEditor;
-        private Preset[] presetssorted;
         private Preset[] presets;
 
         private string r = "";
@@ -42,7 +41,7 @@ namespace SF3.X002_Editor.Models.Presets
                 r = "RPD/spellIndexListPD.xml";
             }
 
-            presetssorted = new Preset[0];
+            _models = new Preset[0];
             presets = new Preset[31]; //max size of spellIndexList
             FileStream stream = null;
             try
@@ -59,12 +58,12 @@ namespace SF3.X002_Editor.Models.Presets
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Preset[presetssorted.Length];
-                        presetssorted.CopyTo(old, 0);
-                        presetssorted = new Preset[old.Length + 1];
-                        old.CopyTo(presetssorted, 0);
-                        presetssorted[old.Length] = new Preset(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        presets[presetssorted[old.Length].PresetID] = presetssorted[old.Length];
+                        old = new Preset[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new Preset[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new Preset(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        presets[_models[old.Length].PresetID] = _models[old.Length];
                     }
                 }
             }
@@ -85,7 +84,5 @@ namespace SF3.X002_Editor.Models.Presets
             }
             return true;
         }
-
-        public Preset[] Models => presetssorted;
     }
 }

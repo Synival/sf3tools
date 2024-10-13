@@ -14,7 +14,6 @@ namespace SF3.X019_Editor.Models.Monsters
         }
 
         private IX019_FileEditor _fileEditor;
-        private Monster[] modelsSorted;
         private Monster[] models;
 
         private string r = "";
@@ -46,7 +45,7 @@ namespace SF3.X019_Editor.Models.Monsters
                 r = "RPDX44/X044List.xml";
             }
 
-            modelsSorted = new Monster[0];
+            _models = new Monster[0];
             models = new Monster[256]; //max size of itemList
             FileStream stream = null;
             try
@@ -64,12 +63,12 @@ namespace SF3.X019_Editor.Models.Monsters
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Monster[modelsSorted.Length];
-                        modelsSorted.CopyTo(old, 0);
-                        modelsSorted = new Monster[old.Length + 1];
-                        old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new Monster(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[modelsSorted[old.Length].ID] = modelsSorted[old.Length];
+                        old = new Monster[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new Monster[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new Monster(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[_models[old.Length].ID] = _models[old.Length];
                     }
                 }
             }
@@ -90,7 +89,5 @@ namespace SF3.X019_Editor.Models.Monsters
             }
             return true;
         }
-
-        public Monster[] Models => modelsSorted;
     }
 }

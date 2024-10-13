@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.CritMod
         }
 
         private IX013_FileEditor _fileEditor;
-        private CritMod[] itemssorted;
         private CritMod[] items;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X013_Editor.Models.CritMod
         {
             r = "Resources/CritModList.xml";
 
-            itemssorted = new CritMod[0];
+            _models = new CritMod[0];
             items = new CritMod[1]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X013_Editor.Models.CritMod
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new CritMod[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new CritMod[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new CritMod(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].CritModID] = itemssorted[old.Length];
+                        old = new CritMod[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new CritMod[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new CritMod(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].CritModID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X013_Editor.Models.CritMod
             }
             return true;
         }
-
-        public CritMod[] Models => itemssorted;
     }
 }

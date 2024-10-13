@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.MagicBonus
         }
 
         private IX013_FileEditor _fileEditor;
-        private MagicBonus[] itemssorted;
         private MagicBonus[] items;
 
         private string r = "";
@@ -42,7 +41,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
                 r = "RPD/magicBonusPD.xml";
             }
 
-            itemssorted = new MagicBonus[0];
+            _models = new MagicBonus[0];
             items = new MagicBonus[256]; //max size of itemList
             FileStream stream = null;
             try
@@ -60,12 +59,12 @@ namespace SF3.X013_Editor.Models.MagicBonus
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new MagicBonus[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new MagicBonus[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new MagicBonus(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].MagicID] = itemssorted[old.Length];
+                        old = new MagicBonus[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new MagicBonus[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new MagicBonus(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].MagicID] = _models[old.Length];
                     }
                 }
             }
@@ -86,7 +85,5 @@ namespace SF3.X013_Editor.Models.MagicBonus
             }
             return true;
         }
-
-        public MagicBonus[] Models => itemssorted;
     }
 }

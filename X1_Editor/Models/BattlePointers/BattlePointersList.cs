@@ -13,7 +13,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
             _fileEditor = fileEditor;
         }
 
-        private BattlePointers[] itemssorted;
         private BattlePointers[] items;
         private IX1_FileEditor _fileEditor;
 
@@ -27,7 +26,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
         {
             r = "Resources/BattlePointersList.xml";
 
-            itemssorted = new BattlePointers[0];
+            _models = new BattlePointers[0];
             items = new BattlePointers[5]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X1_Editor.Models.BattlePointers
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new BattlePointers[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new BattlePointers[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new BattlePointers(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].BattleID] = itemssorted[old.Length];
+                        old = new BattlePointers[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new BattlePointers[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new BattlePointers(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].BattleID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X1_Editor.Models.BattlePointers
             }
             return true;
         }
-
-        public BattlePointers[] Models => itemssorted;
     }
 }

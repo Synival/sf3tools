@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.HealExp
         }
 
         private IX013_FileEditor _fileEditor;
-        private HealExp[] itemssorted;
         private HealExp[] items;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X013_Editor.Models.HealExp
         {
             r = "Resources/HealExpList.xml";
 
-            itemssorted = new HealExp[0];
+            _models = new HealExp[0];
             items = new HealExp[2]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X013_Editor.Models.HealExp
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new HealExp[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new HealExp[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new HealExp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].HealExpID] = itemssorted[old.Length];
+                        old = new HealExp[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new HealExp[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new HealExp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].HealExpID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X013_Editor.Models.HealExp
             }
             return true;
         }
-
-        public HealExp[] Models => itemssorted;
     }
 }

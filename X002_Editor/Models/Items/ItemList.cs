@@ -14,7 +14,6 @@ namespace SF3.X002_Editor.Models.Items
         }
 
         private IX002_FileEditor _fileEditor;
-        private Item[] itemssorted;
         private Item[] items;
 
         private string r = "";
@@ -42,7 +41,7 @@ namespace SF3.X002_Editor.Models.Items
                 r = "RPD/itemListPD.xml";
             }
 
-            itemssorted = new Item[0];
+            _models = new Item[0];
             items = new Item[300]; //max size of itemList
             FileStream stream = null;
             try
@@ -60,13 +59,13 @@ namespace SF3.X002_Editor.Models.Items
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Item[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new Item[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
+                        old = new Item[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new Item[old.Length + 1];
+                        old.CopyTo(_models, 0);
 
-                        itemssorted[old.Length] = new Item(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].ID] = itemssorted[old.Length];
+                        _models[old.Length] = new Item(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].ID] = _models[old.Length];
                     }
                 }
             }
@@ -87,7 +86,5 @@ namespace SF3.X002_Editor.Models.Items
             }
             return true;
         }
-
-        public Item[] Models => itemssorted;
     }
 }

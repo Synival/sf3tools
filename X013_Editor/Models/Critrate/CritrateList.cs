@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.Critrate
         }
 
         private IX013_FileEditor _fileEditor;
-        private Critrate[] itemssorted;
         private Critrate[] items;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X013_Editor.Models.Critrate
         {
             r = "Resources/CritrateList.xml";
 
-            itemssorted = new Critrate[0];
+            _models = new Critrate[0];
             items = new Critrate[3]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X013_Editor.Models.Critrate
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Critrate[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new Critrate[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Critrate(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].CritrateID] = itemssorted[old.Length];
+                        old = new Critrate[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new Critrate[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new Critrate(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].CritrateID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X013_Editor.Models.Critrate
             }
             return true;
         }
-
-        public Critrate[] Models => itemssorted;
     }
 }

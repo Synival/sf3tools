@@ -13,7 +13,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
             _fileEditor = fileEditor;
         }
 
-        private CustomMovement[] spellssorted;
         private CustomMovement[] spells;
         private IX1_FileEditor _fileEditor;
 
@@ -49,7 +48,7 @@ namespace SF3.X1_Editor.Models.CustomMovement
                 r = "Resources/X1AIOther.xml";
             }*/
 
-            spellssorted = new CustomMovement[0];
+            _models = new CustomMovement[0];
             spells = new CustomMovement[130]; //max size of spellList
             FileStream stream = null;
             try
@@ -66,12 +65,12 @@ namespace SF3.X1_Editor.Models.CustomMovement
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new CustomMovement[spellssorted.Length];
-                        spellssorted.CopyTo(old, 0);
-                        spellssorted = new CustomMovement[old.Length + 1];
-                        old.CopyTo(spellssorted, 0);
-                        spellssorted[old.Length] = new CustomMovement(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        spells[spellssorted[old.Length].CustomMovementID] = spellssorted[old.Length];
+                        old = new CustomMovement[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new CustomMovement[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new CustomMovement(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        spells[_models[old.Length].CustomMovementID] = _models[old.Length];
                     }
                 }
             }
@@ -92,7 +91,5 @@ namespace SF3.X1_Editor.Models.CustomMovement
             }
             return true;
         }
-
-        public CustomMovement[] Models => spellssorted;
     }
 }

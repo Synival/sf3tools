@@ -13,7 +13,6 @@ namespace SF3.X1_Editor.Models.Warps
             _fileEditor = fileEditor;
         }
 
-        private Warp[] itemssorted;
         private Warp[] items;
         private IX1_FileEditor _fileEditor;
 
@@ -27,7 +26,7 @@ namespace SF3.X1_Editor.Models.Warps
         {
             r = "Resources/X1Warp.xml";
 
-            itemssorted = new Warp[0];
+            _models = new Warp[0];
             items = new Warp[255]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,22 +44,22 @@ namespace SF3.X1_Editor.Models.Warps
                 //while (!xml.EOF)
                 int myCount = 0;
                 //Globals.treasureDebug = true;
-                //while (!xml.EOF && (itemssorted.Length == 0 || itemssorted[itemssorted.Length - 1].Searched != 0xffff))
+                //while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
 
-                while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].WarpType != 0x01 && itemssorted[itemssorted.Length - 1].WarpType != 0xff)))
-                //while (!xml.EOF && (itemssorted.Length == 0 || (itemssorted[itemssorted.Length - 1].Searched != 0xffff || itemssorted[itemssorted.Length - 1].EventNumber != 0xffff)))
-                //while (!xml.EOF && (itemssorted.Length == 0 || myCount <= 2))
+                while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].WarpType != 0x01 && _models[_models.Length - 1].WarpType != 0xff)))
+                //while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].Searched != 0xffff || _models[_models.Length - 1].EventNumber != 0xffff)))
+                //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                 {
                     {
                         xml.Read();
                         if (xml.HasAttributes)
                         {
-                            old = new Warp[itemssorted.Length];
-                            itemssorted.CopyTo(old, 0);
-                            itemssorted = new Warp[old.Length + 1];
-                            old.CopyTo(itemssorted, 0);
-                            itemssorted[old.Length] = new Warp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                            items[itemssorted[old.Length].WarpID] = itemssorted[old.Length];
+                            old = new Warp[_models.Length];
+                            _models.CopyTo(old, 0);
+                            _models = new Warp[old.Length + 1];
+                            old.CopyTo(_models, 0);
+                            _models[old.Length] = new Warp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                            items[_models[old.Length].WarpID] = _models[old.Length];
                         }
                     }
                 }
@@ -83,7 +82,5 @@ namespace SF3.X1_Editor.Models.Warps
             }
             return true;
         }
-
-        public Warp[] Models => itemssorted;
     }
 }

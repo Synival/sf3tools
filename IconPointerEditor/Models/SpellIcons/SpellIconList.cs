@@ -14,7 +14,6 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
             _fileEditor = fileEditor;
         }
 
-        private SpellIcon[] modelsSorted;
         private SpellIcon[] models;
         private IIconPointerFileEditor _fileEditor;
 
@@ -43,7 +42,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
                 r = "Resources/PDSpells.xml";
             }
 
-            modelsSorted = new SpellIcon[0];
+            _models = new SpellIcon[0];
             models = new SpellIcon[256]; //max size of itemList
             FileStream stream = null;
             try
@@ -61,13 +60,13 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new SpellIcon[modelsSorted.Length];
-                        modelsSorted.CopyTo(old, 0);
-                        modelsSorted = new SpellIcon[old.Length + 1];
-                        old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new SpellIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[modelsSorted[old.Length].ID] = modelsSorted[old.Length];
-                        //MessageBox.Show("" + _fileEditor.GetDouble(modelsSorted[modelsSorted.Length - 1].Address));
+                        old = new SpellIcon[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new SpellIcon[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new SpellIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[_models[old.Length].ID] = _models[old.Length];
+                        //MessageBox.Show("" + _fileEditor.GetDouble(_models[_models.Length - 1].Address));
                     }
                 }
             }
@@ -88,7 +87,5 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
             }
             return true;
         }
-
-        public SpellIcon[] Models => modelsSorted;
     }
 }

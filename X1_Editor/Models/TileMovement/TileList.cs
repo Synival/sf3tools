@@ -13,7 +13,6 @@ namespace SF3.X1_Editor.Models.Tiles
             _fileEditor = fileEditor;
         }
 
-        private Tile[] tilessorted;
         private Tile[] tiles;
         private IX1_FileEditor _fileEditor;
 
@@ -27,7 +26,7 @@ namespace SF3.X1_Editor.Models.Tiles
         {
             r = "Resources/MovementTypes.xml";
 
-            tilessorted = new Tile[0];
+            _models = new Tile[0];
             tiles = new Tile[31]; //max size of spellIndexList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X1_Editor.Models.Tiles
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Tile[tilessorted.Length];
-                        tilessorted.CopyTo(old, 0);
-                        tilessorted = new Tile[old.Length + 1];
-                        old.CopyTo(tilessorted, 0);
-                        tilessorted[old.Length] = new Tile(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        tiles[tilessorted[old.Length].TileID] = tilessorted[old.Length];
+                        old = new Tile[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new Tile[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new Tile(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        tiles[_models[old.Length].TileID] = _models[old.Length];
                     }
                 }
             }
@@ -69,7 +68,5 @@ namespace SF3.X1_Editor.Models.Tiles
             }
             return true;
         }
-
-        public Tile[] Models => tilessorted;
     }
 }

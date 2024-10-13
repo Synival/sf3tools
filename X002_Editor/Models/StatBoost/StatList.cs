@@ -14,7 +14,6 @@ namespace SF3.X002_Editor.Models.StatBoost
         }
 
         private IX002_FileEditor _fileEditor;
-        private StatBoost[] itemssorted;
         private StatBoost[] items;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X002_Editor.Models.StatBoost
         {
             r = "Resources/X002StatList.xml";
 
-            itemssorted = new StatBoost[0];
+            _models = new StatBoost[0];
             items = new StatBoost[300]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X002_Editor.Models.StatBoost
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new StatBoost[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new StatBoost[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new StatBoost(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].StatID] = itemssorted[old.Length];
+                        old = new StatBoost[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new StatBoost[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new StatBoost(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].StatID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X002_Editor.Models.StatBoost
             }
             return true;
         }
-
-        public StatBoost[] Models => itemssorted;
     }
 }

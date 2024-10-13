@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.Presets
         }
 
         private IX013_FileEditor _fileEditor;
-        private FriendshipExp[] modelsSorted;
         private FriendshipExp[] models;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X013_Editor.Models.Presets
         {
             r = "Resources/ExpList.xml";
 
-            modelsSorted = new FriendshipExp[0];
+            _models = new FriendshipExp[0];
             models = new FriendshipExp[1]; //max size of spellIndexList
             FileStream stream = null;
             try
@@ -44,12 +43,12 @@ namespace SF3.X013_Editor.Models.Presets
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new FriendshipExp[modelsSorted.Length];
-                        modelsSorted.CopyTo(old, 0);
-                        modelsSorted = new FriendshipExp[old.Length + 1];
-                        old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new FriendshipExp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[modelsSorted[old.Length].PresetID] = modelsSorted[old.Length];
+                        old = new FriendshipExp[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new FriendshipExp[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new FriendshipExp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[_models[old.Length].PresetID] = _models[old.Length];
                     }
                 }
             }
@@ -70,7 +69,5 @@ namespace SF3.X013_Editor.Models.Presets
             }
             return true;
         }
-
-        public FriendshipExp[] Models => modelsSorted;
     }
 }

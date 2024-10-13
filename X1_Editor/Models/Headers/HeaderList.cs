@@ -13,7 +13,6 @@ namespace SF3.X1_Editor.Models.Headers
             _fileEditor = fileEditor;
         }
 
-        private Header[] modelsSorted;
         private Header[] models;
         private IX1_FileEditor _fileEditor;
 
@@ -27,7 +26,7 @@ namespace SF3.X1_Editor.Models.Headers
         {
             r = "Resources/X1Top.xml";
 
-            modelsSorted = new Header[0];
+            _models = new Header[0];
             models = new Header[31]; //max size of spellIndexList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X1_Editor.Models.Headers
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Header[modelsSorted.Length];
-                        modelsSorted.CopyTo(old, 0);
-                        modelsSorted = new Header[old.Length + 1];
-                        old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new Header(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[modelsSorted[old.Length].SizeID] = modelsSorted[old.Length];
+                        old = new Header[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new Header[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new Header(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[_models[old.Length].SizeID] = _models[old.Length];
                     }
                 }
             }
@@ -69,7 +68,5 @@ namespace SF3.X1_Editor.Models.Headers
             }
             return true;
         }
-
-        public Header[] Models => modelsSorted;
     }
 }

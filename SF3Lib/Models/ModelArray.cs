@@ -9,7 +9,7 @@ namespace SF3.Models
 {
     public abstract class ModelArray : IModelArray
     {
-        public ModelArray(ISF3FileEditor fileEditor)
+        protected ModelArray(ISF3FileEditor fileEditor)
         {
             _fileEditor = fileEditor;
         }
@@ -29,10 +29,24 @@ namespace SF3.Models
 
     }
 
-    public abstract class ModelArray<T> : ModelArray
+    public abstract class ModelArray<T> : ModelArray, IModelArray<T> where T : class
     {
         protected ModelArray(ISF3FileEditor fileEditor) : base(fileEditor)
         {
         }
+
+/*
+        /// <summary>
+        /// The XML file to load for this resource.
+        /// </summary>
+        public abstract string ResourceFile { get; }
+*/
+
+        /// <summary>
+        /// A mutable array of models of type T.
+        /// </summary>
+        public T[] Models => _models;
+
+        protected T[] _models = null;
     }
 }

@@ -14,7 +14,6 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         }
 
         private IX033_X031_FileEditor _fileEditor;
-        private WeaponLevel[] itemssorted;
         private WeaponLevel[] items;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         {
             r = "Resources/WeaponLevel.xml";
 
-            itemssorted = new WeaponLevel[0];
+            _models = new WeaponLevel[0];
             items = new WeaponLevel[2]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new WeaponLevel[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new WeaponLevel[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new WeaponLevel(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].WeaponLevelID] = itemssorted[old.Length];
+                        old = new WeaponLevel[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new WeaponLevel[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new WeaponLevel(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].WeaponLevelID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
             }
             return true;
         }
-
-        public WeaponLevel[] Models => itemssorted;
     }
 }

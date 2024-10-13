@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.Soulmate
         }
 
         private IX013_FileEditor _fileEditor;
-        private Soulmate[] itemssorted;
         private Soulmate[] items;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X013_Editor.Models.Soulmate
         {
             r = "Resources/SoulmateList.xml";
 
-            itemssorted = new Soulmate[0];
+            _models = new Soulmate[0];
             items = new Soulmate[1771]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X013_Editor.Models.Soulmate
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Soulmate[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new Soulmate[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Soulmate(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].SoulmateID] = itemssorted[old.Length];
+                        old = new Soulmate[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new Soulmate[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new Soulmate(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].SoulmateID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X013_Editor.Models.Soulmate
             }
             return true;
         }
-
-        public Soulmate[] Models => itemssorted;
     }
 }

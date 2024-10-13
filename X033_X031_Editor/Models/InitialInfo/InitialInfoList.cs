@@ -14,7 +14,6 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
         }
 
         private IX033_X031_FileEditor _fileEditor;
-        private InitialInfo[] modelsSorted;
         private InitialInfo[] models;
 
         private string r = "";
@@ -42,7 +41,7 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
                 r = "RPD/classEquipPD.xml";
             }
 
-            modelsSorted = new InitialInfo[0];
+            _models = new InitialInfo[0];
             models = new InitialInfo[100]; //max size of spellIndexList
             FileStream stream = null;
             try
@@ -59,12 +58,12 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new InitialInfo[modelsSorted.Length];
-                        modelsSorted.CopyTo(old, 0);
-                        modelsSorted = new InitialInfo[old.Length + 1];
-                        old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new InitialInfo(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[modelsSorted[old.Length].PresetID] = modelsSorted[old.Length];
+                        old = new InitialInfo[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new InitialInfo[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new InitialInfo(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[_models[old.Length].PresetID] = _models[old.Length];
                     }
                 }
             }
@@ -85,7 +84,5 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
             }
             return true;
         }
-
-        public InitialInfo[] Models => modelsSorted;
     }
 }

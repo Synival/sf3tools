@@ -13,7 +13,6 @@ namespace SF3.X002_Editor.Models.MusicOverride
             _fileEditor = fileEditor;
         }
 
-        private MusicOverride[] itemssorted;
         private MusicOverride[] items;
         private IX002_FileEditor _fileEditor;
 
@@ -42,7 +41,7 @@ namespace SF3.X002_Editor.Models.MusicOverride
                 r = "RPD/musicOverrideListPD.xml";
             }
 
-            itemssorted = new MusicOverride[0];
+            _models = new MusicOverride[0];
             items = new MusicOverride[300]; //max size of itemList
             FileStream stream = null;
             try
@@ -60,12 +59,12 @@ namespace SF3.X002_Editor.Models.MusicOverride
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new MusicOverride[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new MusicOverride[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new MusicOverride(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].MusicOverrideID] = itemssorted[old.Length];
+                        old = new MusicOverride[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new MusicOverride[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new MusicOverride(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].MusicOverrideID] = _models[old.Length];
                     }
                 }
             }
@@ -86,7 +85,5 @@ namespace SF3.X002_Editor.Models.MusicOverride
             }
             return true;
         }
-
-        public MusicOverride[] Models => itemssorted;
     }
 }

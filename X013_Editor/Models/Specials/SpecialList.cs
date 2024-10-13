@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.Specials
         }
 
         private IX013_FileEditor _fileEditor;
-        private Special[] modelsSorted;
         private Special[] models;
 
         private string r = "";
@@ -42,7 +41,7 @@ namespace SF3.X013_Editor.Models.Specials
                 r = "RPD/SpecialListPD.xml";
             }
 
-            modelsSorted = new Special[0];
+            _models = new Special[0];
             models = new Special[256]; //max size of itemList
             FileStream stream = null;
             try
@@ -60,12 +59,12 @@ namespace SF3.X013_Editor.Models.Specials
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Special[modelsSorted.Length];
-                        modelsSorted.CopyTo(old, 0);
-                        modelsSorted = new Special[old.Length + 1];
-                        old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new Special(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[modelsSorted[old.Length].ID] = modelsSorted[old.Length];
+                        old = new Special[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new Special[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new Special(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[_models[old.Length].ID] = _models[old.Length];
                     }
                 }
             }
@@ -86,7 +85,5 @@ namespace SF3.X013_Editor.Models.Specials
             }
             return true;
         }
-
-        public Special[] Models => modelsSorted;
     }
 }

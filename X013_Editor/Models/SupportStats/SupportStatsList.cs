@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.SupportStats
         }
 
         private IX013_FileEditor _fileEditor;
-        private SupportStats[] modelsSorted;
         private SupportStats[] models;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X013_Editor.Models.SupportStats
         {
             r = "Resources/X013StatList.xml";
 
-            modelsSorted = new SupportStats[0];
+            _models = new SupportStats[0];
             models = new SupportStats[256]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X013_Editor.Models.SupportStats
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new SupportStats[modelsSorted.Length];
-                        modelsSorted.CopyTo(old, 0);
-                        modelsSorted = new SupportStats[old.Length + 1];
-                        old.CopyTo(modelsSorted, 0);
-                        modelsSorted[old.Length] = new SupportStats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[modelsSorted[old.Length].StatID] = modelsSorted[old.Length];
+                        old = new SupportStats[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new SupportStats[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new SupportStats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[_models[old.Length].StatID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X013_Editor.Models.SupportStats
             }
             return true;
         }
-
-        public SupportStats[] Models => modelsSorted;
     }
 }

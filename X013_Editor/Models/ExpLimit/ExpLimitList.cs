@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.ExpLimit
         }
 
         private IX013_FileEditor _fileEditor;
-        private ExpLimit[] itemssorted;
         private ExpLimit[] items;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X013_Editor.Models.ExpLimit
         {
             r = "Resources/ExpLimitList.xml";
 
-            itemssorted = new ExpLimit[0];
+            _models = new ExpLimit[0];
             items = new ExpLimit[2]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X013_Editor.Models.ExpLimit
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new ExpLimit[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new ExpLimit[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new ExpLimit(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].ExpLimitID] = itemssorted[old.Length];
+                        old = new ExpLimit[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new ExpLimit[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new ExpLimit(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].ExpLimitID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X013_Editor.Models.ExpLimit
             }
             return true;
         }
-
-        public ExpLimit[] Models => itemssorted;
     }
 }

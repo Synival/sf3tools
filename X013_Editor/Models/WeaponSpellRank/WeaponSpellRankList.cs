@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
         }
 
         private IX013_FileEditor _fileEditor;
-        private WeaponSpellRank[] itemssorted;
         private WeaponSpellRank[] items;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
         {
             r = "Resources/WeaponSpellRankList.xml";
 
-            itemssorted = new WeaponSpellRank[0];
+            _models = new WeaponSpellRank[0];
             items = new WeaponSpellRank[4]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new WeaponSpellRank[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new WeaponSpellRank[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new WeaponSpellRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].WeaponSpellRankID] = itemssorted[old.Length];
+                        old = new WeaponSpellRank[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new WeaponSpellRank[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new WeaponSpellRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].WeaponSpellRankID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
             }
             return true;
         }
-
-        public WeaponSpellRank[] Models => itemssorted;
     }
 }

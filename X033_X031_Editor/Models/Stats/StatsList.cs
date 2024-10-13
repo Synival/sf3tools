@@ -14,7 +14,6 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         private IX033_X031_FileEditor _fileEditor;
-        private Stats[] statsSorted;
         private Stats[] stats;
 
         private string r = "";
@@ -42,7 +41,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
                 r = "RPD/classListPD.xml";
             }
 
-            statsSorted = new Stats[0];
+            _models = new Stats[0];
             stats = new Stats[300]; //max size of itemList
             FileStream stream = null;
             try
@@ -60,12 +59,12 @@ namespace SF3.X033_X031_Editor.Models.Stats
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Stats[statsSorted.Length];
-                        statsSorted.CopyTo(old, 0);
-                        statsSorted = new Stats[old.Length + 1];
-                        old.CopyTo(statsSorted, 0);
-                        statsSorted[old.Length] = new Stats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        stats[statsSorted[old.Length].ID] = statsSorted[old.Length];
+                        old = new Stats[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new Stats[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new Stats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        stats[_models[old.Length].ID] = _models[old.Length];
                     }
                 }
             }
@@ -86,8 +85,6 @@ namespace SF3.X033_X031_Editor.Models.Stats
             }
             return true;
         }
-
-        public Stats[] Models => statsSorted;
 
     }
 }

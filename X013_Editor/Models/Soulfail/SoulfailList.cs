@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.Soulfail
         }
 
         private IX013_FileEditor _fileEditor;
-        private Soulfail[] itemssorted;
         private Soulfail[] items;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X013_Editor.Models.Soulfail
         {
             r = "Resources/Soulfail.xml";
 
-            itemssorted = new Soulfail[0];
+            _models = new Soulfail[0];
             items = new Soulfail[1]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X013_Editor.Models.Soulfail
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Soulfail[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new Soulfail[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new Soulfail(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].SoulfailID] = itemssorted[old.Length];
+                        old = new Soulfail[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new Soulfail[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new Soulfail(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].SoulfailID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X013_Editor.Models.Soulfail
             }
             return true;
         }
-
-        public Soulfail[] Models => itemssorted;
     }
 }

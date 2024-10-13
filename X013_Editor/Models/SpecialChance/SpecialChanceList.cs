@@ -14,7 +14,6 @@ namespace SF3.X013_Editor.Models.SpecialChance
         }
 
         private IX013_FileEditor _fileEditor;
-        private SpecialChance[] itemssorted;
         private SpecialChance[] items;
 
         private string r = "";
@@ -27,7 +26,7 @@ namespace SF3.X013_Editor.Models.SpecialChance
         {
             r = "Resources/SpecialChanceList.xml";
 
-            itemssorted = new SpecialChance[0];
+            _models = new SpecialChance[0];
             items = new SpecialChance[1]; //max size of itemList
             FileStream stream = null;
             try
@@ -45,12 +44,12 @@ namespace SF3.X013_Editor.Models.SpecialChance
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new SpecialChance[itemssorted.Length];
-                        itemssorted.CopyTo(old, 0);
-                        itemssorted = new SpecialChance[old.Length + 1];
-                        old.CopyTo(itemssorted, 0);
-                        itemssorted[old.Length] = new SpecialChance(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[itemssorted[old.Length].SpecialChanceID] = itemssorted[old.Length];
+                        old = new SpecialChance[_models.Length];
+                        _models.CopyTo(old, 0);
+                        _models = new SpecialChance[old.Length + 1];
+                        old.CopyTo(_models, 0);
+                        _models[old.Length] = new SpecialChance(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].SpecialChanceID] = _models[old.Length];
                     }
                 }
             }
@@ -71,7 +70,5 @@ namespace SF3.X013_Editor.Models.SpecialChance
             }
             return true;
         }
-
-        public SpecialChance[] Models => itemssorted;
     }
 }
