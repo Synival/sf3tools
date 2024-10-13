@@ -201,7 +201,11 @@ namespace SF3
         public static BulkCopyPropertiesResult BulkCopyProperties<T>(T objFrom, T objTo, bool inherit = true) where T : class
         {
             // Get all public properties with the [BulkCopy] attribute.
-            var properties = typeof(T).GetProperties(BindingFlags.Public | (inherit ? 0 : BindingFlags.DeclaredOnly))
+            var properties = typeof(T).GetProperties(
+                    BindingFlags.Public |
+                    BindingFlags.Instance |
+                    (inherit ? 0 : BindingFlags.DeclaredOnly)
+                )
                 .Where(x => x.IsDefined(typeof(BulkCopyAttribute)))
                 .ToList();
 
@@ -243,7 +247,7 @@ namespace SF3
             for (int i = 0; i < arrayFrom.Length; i++)
             {
                 inputRowReports.Add(new BulkCopyCollectionRowResult(i,
-                    (i < arrayTo.Length) ? BulkCopyProperties<T>(arrayFrom[i], arrayTo[i], inherit) : null));
+                    (i < arrayTo.Length) ? BulkCopyProperties(arrayFrom[i], arrayTo[i], inherit) : null));
             }
 
             return new BulkCopyCollectionResult(inputRowReports, Math.Max(arrayTo.Length - arrayFrom.Length, 0));
