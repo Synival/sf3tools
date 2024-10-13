@@ -145,7 +145,6 @@ namespace SF3
                 InRowsSkipped = inputRows.Count(x => !x.Copied);
                 OutRowsSkipped = listOutRowsIgnored;
                 RowsCopied = inputRows.Count(x => x.Copied);
-                PrettyReport = MakePrettyReport();
             }
 
             /// <summary>
@@ -169,11 +168,29 @@ namespace SF3
             public int RowsCopied { get; }
 
             /// <summary>
-            /// A human-readable detailed report of all changes
+            /// Produces a large report with overall/summary and individual changes.
             /// </summary>
-            public string PrettyReport { get; }
+            /// <returns>A multiline string with a trailing "\n".</returns>
+            public string MakeFullReport()
+            {
+                string report =
+                    "Overall report:\n" +
+                    "====================================================\n" +
+                    MakeSummaryReport();
 
-            private string MakePrettyReport()
+                report += "\n\n" +
+                    "Individual changes report:\n" +
+                    "====================================================\n" +
+                    MakeIndividualChangesReport();
+
+                return report;
+            }
+
+            /// <summary>
+            /// Produces a summary report for changes made to the list.
+            /// </summary>
+            /// <returns>A multiline string with a trailing "\n".</returns>
+            public string MakeSummaryReport()
             {
                 string report =
                     "Rows copied: " + RowsCopied + "\n" +
@@ -184,7 +201,29 @@ namespace SF3
                 report += "Rows changed: " + rowsWithChanges.Count + "\n";
 
                 var cellsChanged = rowsWithChanges.Sum(x => x.CopyResult.Properties.Count(y => y.Changed));
-                report += "Cells changed: " + cellsChanged;
+                report += "Cells changed: " + cellsChanged + "\n";
+
+                return report;
+            }
+
+            /// <summary>
+            /// Produces a detailed report of all changes in the list.
+            /// </summary>
+            /// <returns>A multiline string with a trailing "\n".</returns>
+            public string MakeIndividualChangesReport()
+            {
+                string report = "";
+                var rowsWithChanges = InputRows.Where(x => x.Copied && x.CopyResult.Properties.Any(y => y.Changed)).ToList();
+
+                foreach (var row in rowsWithChanges)
+                {
+                    report += "Row [" + row.Index + "]:\n";
+                    var changes = row.CopyResult.Properties.Where(x => x.Changed).ToList();
+                    foreach (var change in changes)
+                    {
+                        report += "    " + change.Property.Name + ": " + change.OldValue.ToString() + " => " + change.NewValue.ToString() + "\n";
+                    }
+                }
 
                 return report;
             }

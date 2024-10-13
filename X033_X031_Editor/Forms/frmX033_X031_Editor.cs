@@ -422,10 +422,30 @@ namespace SF3.X033_X031_Editor.Forms
                 var report2 = Utils.BulkCopyCollectionProperties(_initialInfoList.Models, copyInitialInfoList.Models);
                 var report3 = Utils.BulkCopyCollectionProperties(_weaponLevelList.Models, copyWeaponLevelList.Models);
 
+                // Produce a giant report.
                 copyResults =
-                    "Stats:\n======================================\n" + report1.PrettyReport + "\n\n" +
-                    "Initial Info:\n======================================\n" + report2.PrettyReport + "\n\n" +
-                    "Weapon Level List:\n======================================\n" + report3.PrettyReport;
+                    "Stats:\n======================================\n" + report1.MakeSummaryReport() + "\n\n" +
+                    "Initial Info:\n======================================\n" + report2.MakeSummaryReport() + "\n\n" +
+                    "Weapon Level List:\n======================================\n" + report3.MakeSummaryReport();
+
+                // Output summary 
+                try
+                {
+                    File.WriteAllText("Changes_Stats.txt", report1.MakeFullReport());
+                    File.WriteAllText("Changes_InitialInfos.txt", report2.MakeFullReport());
+                    File.WriteAllText("Changes_WeaponLevels.txt", report3.MakeFullReport());
+                    copyResults +=
+                        "\n\n" +
+                        "Detailed reports dumped to:\n" + 
+                        "    Changes_Stats.txt\n" +
+                        "    Changes_InitialInfos.txt\n" +
+                        "    Changes_WeaponLevels.txt";
+
+                }
+                catch
+                {
+                    copyResults += "\n\nCouldn't dump detailed reports.";
+                }
             }
             catch (System.Reflection.TargetInvocationException)
             {
