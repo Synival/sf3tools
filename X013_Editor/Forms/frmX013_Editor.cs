@@ -20,6 +20,8 @@ using SF3.X013_Editor.Models.StatusEffects;
 using BrightIdeasSoftware;
 using SF3.Types;
 using SF3.Exceptions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SF3.X013_Editor.Forms
 {
@@ -58,6 +60,7 @@ namespace SF3.X013_Editor.Forms
         private WeaponSpellRankList _weaponSpellRankList;
         private StatusEffectList _statusEffectList;
 
+        private List<ObjectListView> _objectListViews;
         private IX013_FileEditor _fileEditor;
 
         public frmX013_Editor()
@@ -65,6 +68,7 @@ namespace SF3.X013_Editor.Forms
             InitializeComponent();
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
+            _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
         }
 
         private bool initialise()
@@ -169,20 +173,7 @@ namespace SF3.X013_Editor.Forms
                 return false;
             }
 
-            olvSpecials.ClearObjects();
-            olvFriendshipExp.ClearObjects();
-            olvSupportType.ClearObjects();
-            olvSupportStats.ClearObjects();
-            olvSoulmate.ClearObjects();
-            olvSoulmateChanceFail.ClearObjects();
-            olvMagicBonus.ClearObjects();
-            olvCritVantages.ClearObjects();
-            olvCritCounterRate.ClearObjects();
-            olvSpecialChance.ClearObjects();
-            olvExpLimit.ClearObjects();
-            olvHealExp.ClearObjects();
-            olvWeaponSpellRank.ClearObjects();
-            olvStatusGroups.ClearObjects();
+            _objectListViews.ForEach(x => x.ClearObjects());
 
             olvSpecials.AddObjects(_specialsList.Models);
             olvFriendshipExp.AddObjects(_friendshipExpList.Models);
@@ -243,20 +234,7 @@ namespace SF3.X013_Editor.Forms
                 return;
             }
 
-            olvSpecials.FinishCellEdit();
-            olvFriendshipExp.FinishCellEdit();
-            olvSupportType.FinishCellEdit();
-            olvSupportStats.FinishCellEdit();
-            olvSoulmate.FinishCellEdit();
-            olvSoulmateChanceFail.FinishCellEdit();
-            olvMagicBonus.FinishCellEdit();
-            olvCritVantages.FinishCellEdit();
-            olvCritCounterRate.FinishCellEdit();
-            olvSpecialChance.FinishCellEdit();
-            olvExpLimit.FinishCellEdit();
-            olvHealExp.FinishCellEdit();
-            olvWeaponSpellRank.FinishCellEdit();
-            olvStatusGroups.FinishCellEdit();
+            _objectListViews.ForEach(x => x.FinishCellEdit());
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 x013 (.bin)|X013.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";

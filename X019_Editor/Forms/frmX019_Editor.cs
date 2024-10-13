@@ -7,6 +7,8 @@ using SF3.X019_Editor.Models.Monsters;
 using BrightIdeasSoftware;
 using SF3.Types;
 using SF3.Exceptions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SF3.X019_Editor.Forms
 {
@@ -33,6 +35,7 @@ namespace SF3.X019_Editor.Forms
 
         private MonsterList _monsterList;
 
+        private List<ObjectListView> _objectListViews;
         private IX019_FileEditor _fileEditor;
 
         public frmX019_Editor()
@@ -40,6 +43,7 @@ namespace SF3.X019_Editor.Forms
             InitializeComponent();
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
+            _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
         }
 
         private bool initialise()
@@ -53,11 +57,7 @@ namespace SF3.X019_Editor.Forms
                 return false;
             }
 
-            olvMonsterTab1.ClearObjects();
-            olvMonsterTab2.ClearObjects();
-            olvMonsterTab3.ClearObjects();
-            olvMonsterTab4.ClearObjects();
-            olvMonsterTab5.ClearObjects();
+            _objectListViews.ForEach(x => x.ClearObjects());
 
             olvMonsterTab1.AddObjects(_monsterList.Models);
             olvMonsterTab2.AddObjects(_monsterList.Models);
@@ -109,11 +109,7 @@ namespace SF3.X019_Editor.Forms
                 return;
             }
 
-            olvMonsterTab1.FinishCellEdit();
-            olvMonsterTab2.FinishCellEdit();
-            olvMonsterTab3.FinishCellEdit();
-            olvMonsterTab4.FinishCellEdit();
-            olvMonsterTab5.FinishCellEdit();
+            _objectListViews.ForEach(x => x.FinishCellEdit());
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 X019 (.bin)|X019.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";

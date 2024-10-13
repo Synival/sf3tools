@@ -11,6 +11,7 @@ using System.Linq;
 using System.Collections.Generic;
 using SF3.Types;
 using SF3.Exceptions;
+using System.Runtime.CompilerServices;
 
 namespace SF3.X033_X031_Editor.Forms
 {
@@ -57,6 +58,7 @@ namespace SF3.X033_X031_Editor.Forms
         private InitialInfoList _initialInfoList;
         private WeaponLevelList _weaponLevelList;
 
+        private List<ObjectListView> _objectListViews;
         private IX033_X031_FileEditor _fileEditor;
 
         public class StatDataPoint
@@ -88,6 +90,7 @@ namespace SF3.X033_X031_Editor.Forms
             InitializeComponent();
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
+            _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
         }
 
         private bool initialise()
@@ -116,13 +119,7 @@ namespace SF3.X033_X031_Editor.Forms
                 return false;
             }
 
-            olvStats.ClearObjects();
-            olvSpells.ClearObjects();
-            olvEquipStatistics.ClearObjects();
-            olvMiscellaneous.ClearObjects();
-            olvInitialInfo.ClearObjects();
-            olvWeaponLevelReq.ClearObjects();
-            olvCurveCalc.ClearObjects();
+            _objectListViews.ForEach(x => x.ClearObjects());
 
             olvStats.AddObjects(_statsList.Models);
             olvSpells.AddObjects(_statsList.Models);
@@ -180,14 +177,7 @@ namespace SF3.X033_X031_Editor.Forms
                 return;
             }
 
-            // TODO: refactor out!
-            olvStats.FinishCellEdit();
-            olvSpells.FinishCellEdit();
-            olvEquipStatistics.FinishCellEdit();
-            olvMiscellaneous.FinishCellEdit();
-            olvInitialInfo.FinishCellEdit();
-            olvWeaponLevelReq.FinishCellEdit();
-            olvCurveCalc.FinishCellEdit();
+            _objectListViews.ForEach(x => x.FinishCellEdit());
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 x033 (.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
@@ -370,14 +360,7 @@ namespace SF3.X033_X031_Editor.Forms
                 return;
             }
 
-            // TODO: refactor out!
-            olvStats.FinishCellEdit();
-            olvSpells.FinishCellEdit();
-            olvEquipStatistics.FinishCellEdit();
-            olvMiscellaneous.FinishCellEdit();
-            olvInitialInfo.FinishCellEdit();
-            olvWeaponLevelReq.FinishCellEdit();
-            olvCurveCalc.FinishCellEdit();
+            _objectListViews.ForEach(x => x.FinishCellEdit());
 
             var saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Copy To";

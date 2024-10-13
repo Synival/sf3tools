@@ -15,6 +15,8 @@ using SF3.X002_Editor.Models.MusicOverride;
 using BrightIdeasSoftware;
 using SF3.Types;
 using SF3.Exceptions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SF3.X002_Editor.Forms
 {
@@ -48,6 +50,7 @@ namespace SF3.X002_Editor.Forms
         private WarpList _warpList;
         private MusicOverrideList _musicOverrideList;
 
+        private List<ObjectListView> _objectListViews;
         private IX002_FileEditor _fileEditor;
 
         public frmX002_Editor()
@@ -55,6 +58,7 @@ namespace SF3.X002_Editor.Forms
             InitializeComponent();
             tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
+            _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
         }
 
         private bool initialise()
@@ -124,15 +128,7 @@ namespace SF3.X002_Editor.Forms
                 return false;
             }
 
-            olvItems.ClearObjects();
-            olvSpells.ClearObjects();
-            olvPreset.ClearObjects();
-            olvLoaded.ClearObjects();
-            olvStatBoost.ClearObjects();
-            olvWeaponRankAttack.ClearObjects();
-            olvAttackResist.ClearObjects();
-            olvWarpTable.ClearObjects();
-            olvLoadedOverride.ClearObjects();
+            _objectListViews.ForEach(x => x.ClearObjects());
 
             olvItems.AddObjects(_itemList.Models);
             olvSpells.AddObjects(_spellList.Models);
@@ -192,15 +188,7 @@ namespace SF3.X002_Editor.Forms
                 return;
             }
 
-            olvItems.FinishCellEdit();
-            olvSpells.FinishCellEdit();
-            olvPreset.FinishCellEdit();
-            olvLoaded.FinishCellEdit();
-            olvStatBoost.FinishCellEdit();
-            olvWeaponRankAttack.FinishCellEdit();
-            olvAttackResist.FinishCellEdit();
-            olvWarpTable.FinishCellEdit();
-            olvLoadedOverride.FinishCellEdit();
+            _objectListViews.ForEach(x => x.FinishCellEdit());
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 x002 (.bin)|X002.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";

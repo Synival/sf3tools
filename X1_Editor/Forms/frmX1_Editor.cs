@@ -17,6 +17,9 @@ using SF3.X1_Editor.Models.Arrows;
 using BrightIdeasSoftware;
 using SF3.Types;
 using SF3.Exceptions;
+using System.Reflection;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SF3.X1_Editor.Forms
 {
@@ -121,6 +124,7 @@ namespace SF3.X1_Editor.Forms
         private EnterList _enterList;
         private ArrowList _arrowList;
 
+        private List<ObjectListView> _objectListViews;
         private IX1_FileEditor _fileEditor;
 
         public frmX1_Editor()
@@ -129,6 +133,7 @@ namespace SF3.X1_Editor.Forms
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             Map = 0x00;
+            _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
         }
 
         private bool initialise()
@@ -295,21 +300,7 @@ namespace SF3.X1_Editor.Forms
                 return false;
             }
 
-            olvHeader.ClearObjects();
-            olvSlotTab1.ClearObjects();
-            olvSlotTab2.ClearObjects();
-            olvSlotTab3.ClearObjects();
-            olvSlotTab4.ClearObjects();
-            olvAITargetPosition.ClearObjects();
-            olvSpawnZones.ClearObjects();
-            olvBattlePointers.ClearObjects();
-            olvInteractables.ClearObjects();
-            olvScriptedMovement.ClearObjects();
-            olvWarpTable.ClearObjects();
-            olvTileData.ClearObjects();
-            olvTownNpcs.ClearObjects();
-            olvNonBattleEnter.ClearObjects();
-            olvArrows.ClearObjects();
+            _objectListViews.ForEach(x => x.ClearObjects());
 
             if (IsBattle)
             {
@@ -399,21 +390,7 @@ namespace SF3.X1_Editor.Forms
                 return;
             }
 
-            olvHeader.FinishCellEdit();
-            olvSlotTab1.FinishCellEdit();
-            olvSlotTab2.FinishCellEdit();
-            olvSlotTab3.FinishCellEdit();
-            olvSlotTab4.FinishCellEdit();
-            olvAITargetPosition.FinishCellEdit();
-            olvSpawnZones.FinishCellEdit();
-            olvBattlePointers.FinishCellEdit();
-            olvInteractables.FinishCellEdit();
-            olvScriptedMovement.FinishCellEdit();
-            olvWarpTable.FinishCellEdit();
-            olvTileData.FinishCellEdit();
-            olvTownNpcs.FinishCellEdit();
-            olvNonBattleEnter.FinishCellEdit();
-            olvArrows.FinishCellEdit();
+            _objectListViews.ForEach(x => x.FinishCellEdit());
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 X1* (.bin)|X1.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
