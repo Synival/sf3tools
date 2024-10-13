@@ -49,7 +49,7 @@ namespace SF3.X019_Editor.Forms
             _monsterList = new MonsterList(_fileEditor);
             if (!_monsterList.Load())
             {
-                MessageBox.Show("Could not load Resources/itemList.xml.");
+                MessageBox.Show("Could not load " + _monsterList.ResourceFile);
                 return false;
             }
 

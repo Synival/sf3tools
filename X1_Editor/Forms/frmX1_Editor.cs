@@ -214,84 +214,84 @@ namespace SF3.X1_Editor.Forms
             _slotList = new SlotList(_fileEditor);
             if (IsBattle && !_slotList.Load())
             {
-                MessageBox.Show("Could not load Resources/itemList.xml.");
+                MessageBox.Show("Could not load " + _slotList.ResourceFile);
                 return false;
             }
 
             _headerList = new HeaderList(_fileEditor);
             if (IsBattle && !_headerList.Load())
             {
-                MessageBox.Show("Could not load Resources/spellIndexList.xml.");
+                MessageBox.Show("Could not load " + _headerList.ResourceFile);
                 return false;
             }
 
             _aiList = new AIList(_fileEditor);
             if (IsBattle && !_aiList.Load())
             {
-                MessageBox.Show("Could not load Resources/AI.xml.");
+                MessageBox.Show("Could not load " + _aiList.ResourceFile);
                 return false;
             }
 
             _spawnZoneList = new SpawnZoneList(_fileEditor);
             if (IsBattle && !_spawnZoneList.Load())
             {
-                MessageBox.Show("Could not load Resources/UnknownAI.xml.");
+                MessageBox.Show("Could not load " + _spawnZoneList.ResourceFile);
                 return false;
             }
 
             _battlePointersList = new BattlePointersList(_fileEditor);
             if (IsBattle && !_battlePointersList.Load())
             {
-                MessageBox.Show("Could not load Resources/BattlePointersList.xml.");
+                MessageBox.Show("Could not load " + _battlePointersList.ResourceFile);
                 return false;
             }
 
             _treasureList = new TreasureList(_fileEditor);
             if (!_treasureList.Load())
             {
-                MessageBox.Show("Could not load Resources/X1Treasure.xml.");
+                MessageBox.Show("Could not load " + _treasureList.ResourceFile);
                 return false;
             }
 
             _customMovementList = new CustomMovementList(_fileEditor);
             if (IsBattle && !_customMovementList.Load())
             {
-                MessageBox.Show("Could not load Resources/X1AI.xml.");
+                MessageBox.Show("Could not load " + _customMovementList.ResourceFile);
                 return false;
             }
 
             _warpList = new WarpList(_fileEditor);
             if (Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_warpList.Load())
             {
-                MessageBox.Show("Could not load Resources/X1Warp.xml.");
+                MessageBox.Show("Could not load " + _warpList.ResourceFile);
                 return false;
             }
 
             _tileList = new TileList(_fileEditor);
             if (IsBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_tileList.Load())
             {
-                MessageBox.Show("Could not load Resources/MovementTypes.xml.");
+                MessageBox.Show("Could not load " + _tileList.ResourceFile);
                 return false;
             }
 
             _npcList = new NpcList(_fileEditor);
             if (!IsBattle && !_npcList.Load())
             {
-                MessageBox.Show("Could not load Resources/NpcList.xml.");
+                MessageBox.Show("Could not load " + _npcList.ResourceFile);
                 return false;
             }
 
             _enterList = new EnterList(_fileEditor);
             if (!IsBattle && !_enterList.Load())
             {
-                MessageBox.Show("Could not load Resources/EnterList.xml.");
+                MessageBox.Show("Could not load " + _enterList.ResourceFile);
                 return false;
             }
 
             _arrowList = new ArrowList(_fileEditor);
             if (!IsBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_arrowList.Load())
             {
-                MessageBox.Show("Could not load Resources/ArrowList.xml.");
+                MessageBox.Show("Could not load " + _arrowList.ResourceFile);
                 return false;
             }
 

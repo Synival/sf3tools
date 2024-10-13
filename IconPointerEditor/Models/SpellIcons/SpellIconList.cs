@@ -38,9 +38,9 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
         public override string ResourceFile => _resourceFile;
 
         /// <summary>
-        /// Initialises class
+        /// Loads data from the file editor provided in the constructor.
         /// </summary>
-        /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
+        /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load()
         {
             _models = new SpellIcon[0];

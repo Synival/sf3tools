@@ -74,98 +74,98 @@ namespace SF3.X013_Editor.Forms
             _specialsList = new SpecialList(_fileEditor);
             if (!_specialsList.Load())
             {
-                MessageBox.Show("Could not load Resources/itemList.xml.");
+                MessageBox.Show("Could not load " + _specialsList.ResourceFile);
                 return false;
             }
 
             _supportTypeList = new SupportTypeList(_fileEditor);
             if (!_supportTypeList.Load())
             {
-                MessageBox.Show("Could not load Resources/characters.xml.");
+                MessageBox.Show("Could not load " + _supportTypeList.ResourceFile);
                 return false;
             }
 
             _friendshipExpList = new FriendshipExpList(_fileEditor);
             if (!_friendshipExpList.Load())
             {
-                MessageBox.Show("Could not load Resources/ExpList.xml.");
+                MessageBox.Show("Could not load " + _friendshipExpList.ResourceFile);
                 return false;
             }
 
             _supportStatsList = new SupportStatsList(_fileEditor);
             if (!_supportStatsList.Load())
             {
-                MessageBox.Show("Could not load Resources/X013StatList.xml.");
+                MessageBox.Show("Could not load " + _supportStatsList.ResourceFile);
                 return false;
             }
 
             _soulmateList = new SoulmateList(_fileEditor);
             if (!_soulmateList.Load())
             {
-                MessageBox.Show("Could not load Resources/SoulmateList.xml.");
+                MessageBox.Show("Could not load " + _soulmateList.ResourceFile);
                 return false;
             }
 
             _soulfailList = new SoulfailList(_fileEditor);
             if (!_soulfailList.Load())
             {
-                MessageBox.Show("Could not load Resources/Soulfail.xml.");
+                MessageBox.Show("Could not load " + _soulfailList.ResourceFile);
                 return false;
             }
 
             _magicBonusList = new MagicBonusList(_fileEditor);
             if (!_magicBonusList.Load())
             {
-                MessageBox.Show("Could not load Resources/MagicBonus.xml.");
+                MessageBox.Show("Could not load " + _magicBonusList.ResourceFile);
                 return false;
             }
 
             _critModList = new CritModList(_fileEditor);
             if (!_critModList.Load())
             {
-                MessageBox.Show("Could not load Resources/CritModList.xml.");
+                MessageBox.Show("Could not load " + _critModList.ResourceFile);
                 return false;
             }
 
             _critrateList = new CritrateList(_fileEditor);
             if (!_critrateList.Load())
             {
-                MessageBox.Show("Could not load Resources/CritrateList.xml.");
+                MessageBox.Show("Could not load " + _critrateList.ResourceFile);
                 return false;
             }
 
             _specialChanceList = new SpecialChanceList(_fileEditor);
             if (!_specialChanceList.Load())
             {
-                MessageBox.Show("Could not load Resources/SpecialChanceList.xml.");
+                MessageBox.Show("Could not load " + _specialChanceList.ResourceFile);
                 return false;
             }
 
             _expLimitList = new ExpLimitList(_fileEditor);
             if (!_expLimitList.Load())
             {
-                MessageBox.Show("Could not load Resources/ExpLimitList.xml.");
+                MessageBox.Show("Could not load " + _expLimitList.ResourceFile);
                 return false;
             }
 
             _healExpList = new HealExpList(_fileEditor);
             if (!_healExpList.Load())
             {
-                MessageBox.Show("Could not load Resources/HealExpList.xml.");
+                MessageBox.Show("Could not load " + _healExpList.ResourceFile);
                 return false;
             }
 
             _weaponSpellRankList = new WeaponSpellRankList(_fileEditor);
             if (!_weaponSpellRankList.Load())
             {
-                MessageBox.Show("Could not load Resources/WeaponSpellRankListList.xml.");
+                MessageBox.Show("Could not load " + _weaponSpellRankList.ResourceFile);
                 return false;
             }
 
             _statusEffectList = new StatusEffectList(_fileEditor);
             if (!_statusEffectList.Load())
             {
-                MessageBox.Show("Could not load Resources/StatusGroupList.xml.");
+                MessageBox.Show("Could not load " + _statusEffectList.ResourceFile);
                 return false;
             }
 

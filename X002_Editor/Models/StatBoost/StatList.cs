@@ -19,9 +19,9 @@ namespace SF3.X002_Editor.Models.StatBoost
         public override string ResourceFile => "Resources/X002StatList.xml";
 
         /// <summary>
-        /// Initialises class
+        /// Loads data from the file editor provided in the constructor.
         /// </summary>
-        /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
+        /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load()
         {
             _models = new StatBoost[0];

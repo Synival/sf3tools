@@ -19,9 +19,9 @@ namespace SF3.X013_Editor.Models.SupportStats
         public override string ResourceFile => "Resources/X013StatList.xml";
 
         /// <summary>
-        /// Initialises class
+        /// Loads data from the file editor provided in the constructor.
         /// </summary>
-        /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
+        /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load()
         {
             _models = new SupportStats[0];

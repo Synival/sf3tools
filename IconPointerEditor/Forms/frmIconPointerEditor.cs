@@ -64,14 +64,14 @@ namespace SF3.IconPointerEditor.Forms
             _spellIconList = new SpellIconList(_fileEditor);
             if (!_spellIconList.Load())
             {
-                MessageBox.Show("Could not load Resources/itemList.xml.");
+                MessageBox.Show("Could not load " + _spellIconList.ResourceFile);
                 return false;
             }
 
             _itemIconList = new ItemIconList(_fileEditor);
             if (!_itemIconList.Load())
             {
-                MessageBox.Show("Could not load Resources/spellIndexList.xml.");
+                MessageBox.Show("Could not load " + _itemIconList.ResourceFile);
                 return false;
             }
 

@@ -37,9 +37,9 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
         public override string ResourceFile => _resourceFile;
 
         /// <summary>
-        /// Initialises class
+        /// Loads data from the file editor provided in the constructor.
         /// </summary>
-        /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
+        /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load()
         {
             _models = new ItemIcon[0];

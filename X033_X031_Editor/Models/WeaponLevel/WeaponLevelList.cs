@@ -19,9 +19,9 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         public override string ResourceFile => "Resources/WeaponLevel.xml";
 
         /// <summary>
-        /// Initialises list
+        /// Loads data from the file editor provided in the constructor.
         /// </summary>
-        /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
+        /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load()
         {
             _models = new WeaponLevel[0];

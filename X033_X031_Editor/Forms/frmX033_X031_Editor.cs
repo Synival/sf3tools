@@ -98,21 +98,21 @@ namespace SF3.X033_X031_Editor.Forms
             _statsList = new StatsList(_fileEditor);
             if (!_statsList.Load())
             {
-                MessageBox.Show("Could not load Resources/classList.xml.");
+                MessageBox.Show("Could not load " + _statsList.ResourceFile);
                 return false;
             }
 
             _initialInfoList = new InitialInfoList(_fileEditor);
             if (!_initialInfoList.Load())
             {
-                MessageBox.Show("Could not load Resources/classEquip.xml.");
+                MessageBox.Show("Could not load " + _initialInfoList.ResourceFile);
                 return false;
             }
 
             _weaponLevelList = new WeaponLevelList(_fileEditor);
             if (!_weaponLevelList.Load())
             {
-                MessageBox.Show("Could not load Resources/WeaponLevel.xml.");
+                MessageBox.Show("Could not load " + _weaponLevelList.ResourceFile);
                 return false;
             }
 
@@ -402,21 +402,21 @@ namespace SF3.X033_X031_Editor.Forms
                 var copyStatsList = new StatsList(copyFileEditor);
                 if (!copyStatsList.Load())
                 {
-                    MessageBox.Show("Could not load Resources/classList.xml.");
+                    MessageBox.Show("Could not load " + copyStatsList.ResourceFile);
                     return;
                 }
 
                 var copyInitialInfoList = new InitialInfoList(copyFileEditor);
                 if (!copyInitialInfoList.Load())
                 {
-                    MessageBox.Show("Could not load Resources/classEquip.xml.");
+                    MessageBox.Show("Could not load " + copyInitialInfoList.ResourceFile);
                     return;
                 }
 
                 var copyWeaponLevelList = new WeaponLevelList(copyFileEditor);
                 if (!copyWeaponLevelList.Load())
                 {
-                    MessageBox.Show("Could not load Resources/WeaponLevel.xml.");
+                    MessageBox.Show("Could not load " + copyWeaponLevelList.ResourceFile);
                     return;
                 }
 

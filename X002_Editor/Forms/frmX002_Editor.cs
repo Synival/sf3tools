@@ -64,63 +64,63 @@ namespace SF3.X002_Editor.Forms
             _itemList = new ItemList(_fileEditor);
             if (!_itemList.Load())
             {
-                MessageBox.Show("Could not load Resources/itemList.xml.");
+                MessageBox.Show("Could not load " + _itemList.ResourceFile);
                 return false;
             }
 
             _spellList = new SpellList(_fileEditor);
             if (!_spellList.Load())
             {
-                MessageBox.Show("Could not load Resources/spellList.xml.");
+                MessageBox.Show("Could not load " + _spellList.ResourceFile);
                 return false;
             }
 
             _presetList = new PresetList(_fileEditor);
             if (!_presetList.Load())
             {
-                MessageBox.Show("Could not load Resources/spellIndexList.xml.");
+                MessageBox.Show("Could not load " + _presetList.ResourceFile);
                 return false;
             }
 
             _loadList = new LoadList(_fileEditor);
             if (!_loadList.Load())
             {
-                MessageBox.Show("Could not load Resources/loadList.xml.");
+                MessageBox.Show("Could not load " + _loadList.ResourceFile);
                 return false;
             }
 
             _statList = new StatList(_fileEditor);
             if (!_statList.Load())
             {
-                MessageBox.Show("Could not load Resources/X002StatList.xml.");
+                MessageBox.Show("Could not load " + _statList.ResourceFile);
                 return false;
             }
 
             _weaponRankList = new WeaponRankList(_fileEditor);
             if (!_weaponRankList.Load())
             {
-                MessageBox.Show("Could not load Resources/WeaponRankList.xml.");
+                MessageBox.Show("Could not load " + _weaponRankList.ResourceFile);
                 return false;
             }
 
             _attackResistList = new AttackResistList(_fileEditor);
             if (!_attackResistList.Load())
             {
-                MessageBox.Show("Could not load Resources/AttackResistList.xml.");
+                MessageBox.Show("Could not load " + _attackResistList.ResourceFile);
                 return false;
             }
 
             _warpList = new WarpList(_fileEditor);
             if (Scenario == ScenarioType.Scenario1 && !_warpList.Load())
             {
-                MessageBox.Show("Could not load Resources/X002Warp.xml.");
+                MessageBox.Show("Could not load " + _warpList.ResourceFile);
                 return false;
             }
 
             _musicOverrideList = new MusicOverrideList(_fileEditor);
             if (!_musicOverrideList.Load())
             {
-                MessageBox.Show("Could not load Resources/MusicOverrideList.xml.");
+                MessageBox.Show("Could not load " + _musicOverrideList.ResourceFile);
                 return false;
             }
 
