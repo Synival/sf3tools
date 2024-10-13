@@ -422,7 +422,10 @@ namespace SF3.X033_X031_Editor.Forms
                 var report2 = Utils.BulkCopyCollectionProperties(_initialInfoList.Models, copyInitialInfoList.Models);
                 var report3 = Utils.BulkCopyCollectionProperties(_weaponLevelList.Models, copyWeaponLevelList.Models);
 
-                copyResults = report1.ToString() + "\n" + report2.ToString() + "\n" + report3.ToString();
+                copyResults =
+                    "Stats:\n======================================\n" + report1.PrettyReport + "\n\n" +
+                    "Initial Info:\n======================================\n" + report2.PrettyReport + "\n\n" +
+                    "Weapon Level List:\n======================================\n" + report3.PrettyReport;
             }
             catch (System.Reflection.TargetInvocationException)
             {

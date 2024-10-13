@@ -145,6 +145,7 @@ namespace SF3
                 InRowsSkipped = inputRows.Count(x => !x.Copied);
                 OutRowsSkipped = listOutRowsIgnored;
                 RowsCopied = inputRows.Count(x => x.Copied);
+                PrettyReport = MakePrettyReport();
             }
 
             /// <summary>
@@ -166,6 +167,27 @@ namespace SF3
             /// The number of rows copied from 'objFrom' to 'objTo'.
             /// </summary>
             public int RowsCopied { get; }
+
+            /// <summary>
+            /// A human-readable detailed report of all changes
+            /// </summary>
+            public string PrettyReport { get; }
+
+            private string MakePrettyReport()
+            {
+                string report =
+                    "Rows copied: " + RowsCopied + "\n" +
+                    "Input rows skipped: " + InRowsSkipped + "\n" +
+                    "Target rows unaffected: " + OutRowsSkipped + "\n";
+
+                var rowsWithChanges = InputRows.Where(x => x.Copied && x.CopyResult.Properties.Any(y => y.Changed)).ToList();
+                report += "Rows changed: " + rowsWithChanges.Count + "\n";
+
+                var cellsChanged = rowsWithChanges.Sum(x => x.CopyResult.Properties.Count(y => y.Changed));
+                report += "Cells changed: " + cellsChanged;
+
+                return report;
+            }
         }
 
         /// <summary>
