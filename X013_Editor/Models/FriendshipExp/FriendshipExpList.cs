@@ -8,14 +8,12 @@ namespace SF3.X013_Editor.Models.Presets
 {
     public class FriendshipExpList : ModelArray<FriendshipExp>
     {
-        public FriendshipExpList(IX013_FileEditor fileEditor)
+        public FriendshipExpList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX013_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private FriendshipExp[] modelsSorted;
         private FriendshipExp[] models;
 

@@ -9,12 +9,10 @@ namespace SF3.X1_Editor.Models.Treasures
 {
     public class TreasureList : ModelArray<Treasure>
     {
-        public TreasureList(IX1_FileEditor fileEditor)
+        public TreasureList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Treasure[] itemssorted;
         private Treasure[] items;

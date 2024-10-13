@@ -8,14 +8,12 @@ namespace SF3.X013_Editor.Models.SupportTypes
 {
     public class SupportTypeList : ModelArray<SupportType>
     {
-        public SupportTypeList(IX013_FileEditor fileEditor)
+        public SupportTypeList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX013_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private SupportType[] modelsSorted;
         private SupportType[] models;
 

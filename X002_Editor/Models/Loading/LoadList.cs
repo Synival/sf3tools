@@ -8,14 +8,12 @@ namespace SF3.X002_Editor.Models.Loading
 {
     public class LoadList : ModelArray<Loading>
     {
-        public LoadList(IX002_FileEditor fileEditor)
+        public LoadList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX002_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private Loading[] itemssorted;
         private Loading[] items;
 

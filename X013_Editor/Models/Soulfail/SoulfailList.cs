@@ -8,14 +8,12 @@ namespace SF3.X013_Editor.Models.Soulfail
 {
     public class SoulfailList : ModelArray<Soulfail>
     {
-        public SoulfailList(IX013_FileEditor fileEditor)
+        public SoulfailList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX013_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private Soulfail[] itemssorted;
         private Soulfail[] items;
 

@@ -8,12 +8,10 @@ namespace SF3.X1_Editor.Models.Tiles
 {
     public class TileList : ModelArray<Tile>
     {
-        public TileList(IX1_FileEditor fileEditor)
+        public TileList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Tile[] tilessorted;
         private Tile[] tiles;

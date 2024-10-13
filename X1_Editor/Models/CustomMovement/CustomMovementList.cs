@@ -8,12 +8,10 @@ namespace SF3.X1_Editor.Models.CustomMovement
 {
     public class CustomMovementList : ModelArray<CustomMovement>
     {
-        public CustomMovementList(IX1_FileEditor fileEditor)
+        public CustomMovementList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private CustomMovement[] spellssorted;
         private CustomMovement[] spells;

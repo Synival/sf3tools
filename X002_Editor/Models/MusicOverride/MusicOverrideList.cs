@@ -8,12 +8,10 @@ namespace SF3.X002_Editor.Models.MusicOverride
 {
     public class MusicOverrideList : ModelArray<MusicOverride>
     {
-        public MusicOverrideList(IX002_FileEditor fileEditor)
+        public MusicOverrideList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private MusicOverride[] itemssorted;
         private MusicOverride[] items;

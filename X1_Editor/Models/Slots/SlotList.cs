@@ -8,12 +8,10 @@ namespace SF3.X1_Editor.Models.Slots
 {
     public class SlotList : ModelArray<Slot>
     {
-        public SlotList(IX1_FileEditor fileEditor)
+        public SlotList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Slot[] modelsSorted;
         private Slot[] models;

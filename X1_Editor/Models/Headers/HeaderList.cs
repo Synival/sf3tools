@@ -8,12 +8,10 @@ namespace SF3.X1_Editor.Models.Headers
 {
     public class HeaderList : ModelArray<Header>
     {
-        public HeaderList(IX1_FileEditor fileEditor)
+        public HeaderList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Header[] modelsSorted;
         private Header[] models;

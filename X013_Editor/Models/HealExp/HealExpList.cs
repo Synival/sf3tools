@@ -8,14 +8,12 @@ namespace SF3.X013_Editor.Models.HealExp
 {
     public class HealExpList : ModelArray<HealExp>
     {
-        public HealExpList(IX013_FileEditor fileEditor)
+        public HealExpList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX013_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private HealExp[] itemssorted;
         private HealExp[] items;
 

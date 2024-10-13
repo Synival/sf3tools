@@ -8,14 +8,12 @@ namespace SF3.X013_Editor.Models.Specials
 {
     public class SpecialList : ModelArray<Special>
     {
-        public SpecialList(IX013_FileEditor fileEditor)
+        public SpecialList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX013_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private Special[] modelsSorted;
         private Special[] models;
 

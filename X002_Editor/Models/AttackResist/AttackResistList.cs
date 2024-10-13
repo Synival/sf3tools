@@ -8,14 +8,12 @@ namespace SF3.X002_Editor.Models.AttackResist
 {
     public class AttackResistList : ModelArray<AttackResist>
     {
-        public AttackResistList(IX002_FileEditor fileEditor)
+        public AttackResistList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX002_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private AttackResist[] itemssorted;
         private AttackResist[] items;
 

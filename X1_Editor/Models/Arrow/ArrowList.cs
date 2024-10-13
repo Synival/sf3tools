@@ -10,12 +10,10 @@ namespace SF3.X1_Editor.Models.Arrows
     {
         private IX1_FileEditor _fileEditor;
 
-        public ArrowList(IX1_FileEditor fileEditor)
+        public ArrowList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Arrow[] itemssorted;
         private Arrow[] items;

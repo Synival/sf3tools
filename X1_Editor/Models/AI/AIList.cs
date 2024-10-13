@@ -8,12 +8,10 @@ namespace SF3.X1_Editor.Models.AI
 {
     public class AIList : ModelArray<AI>
     {
-        public AIList(IX1_FileEditor fileEditor)
+        public AIList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private AI[] modelsSorted;
         private AI[] models;

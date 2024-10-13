@@ -8,14 +8,12 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 {
     public class WeaponLevelList : ModelArray<WeaponLevel>
     {
-        public WeaponLevelList(IX033_X031_FileEditor fileEditor)
+        public WeaponLevelList(IX033_X031_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX033_X031_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private WeaponLevel[] itemssorted;
         private WeaponLevel[] items;
 

@@ -8,12 +8,10 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
 {
     public class ItemIconList : ModelArray<ItemIcon>
     {
-        public ItemIconList(IIconPointerFileEditor fileEditor)
+        public ItemIconList(IIconPointerFileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private ItemIcon[] modelsSorted;
         private ItemIcon[] models;

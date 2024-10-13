@@ -8,14 +8,12 @@ namespace SF3.X013_Editor.Models.Critrate
 {
     public class CritrateList : ModelArray<Critrate>
     {
-        public CritrateList(IX013_FileEditor fileEditor)
+        public CritrateList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX013_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private Critrate[] itemssorted;
         private Critrate[] items;
 

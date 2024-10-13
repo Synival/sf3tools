@@ -8,14 +8,12 @@ namespace SF3.X013_Editor.Models.SpecialChance
 {
     public class SpecialChanceList : ModelArray<SpecialChance>
     {
-        public SpecialChanceList(IX013_FileEditor fileEditor)
+        public SpecialChanceList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX013_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private SpecialChance[] itemssorted;
         private SpecialChance[] items;
 

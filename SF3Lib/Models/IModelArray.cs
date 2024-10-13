@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SF3.Types;
+using System;
 using System.Collections;
 using System.IO;
 using System.Linq;
@@ -14,6 +15,11 @@ namespace SF3.Models
         /// </summary>
         /// <returns>Return 'true' on success, or 'false' if the .XML file(s) do not exist or are in use.</returns>
         bool Load();
+
+        /// <summary>
+        /// The Scenario the contained models belong to.
+        /// </summary>
+        ScenarioType Scenario { get; }
 
 /*
         /// <summary>

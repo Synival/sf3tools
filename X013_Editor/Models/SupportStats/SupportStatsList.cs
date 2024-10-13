@@ -8,14 +8,12 @@ namespace SF3.X013_Editor.Models.SupportStats
 {
     public class SupportStatsList : ModelArray<SupportStats>
     {
-        public SupportStatsList(IX013_FileEditor fileEditor)
+        public SupportStatsList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX013_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private SupportStats[] modelsSorted;
         private SupportStats[] models;
 

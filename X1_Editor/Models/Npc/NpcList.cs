@@ -8,12 +8,10 @@ namespace SF3.X1_Editor.Models.Npcs
 {
     public class NpcList : ModelArray<Npc>
     {
-        public NpcList(IX1_FileEditor fileEditor)
+        public NpcList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Npc[] itemssorted;
         private Npc[] items;

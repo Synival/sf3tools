@@ -8,14 +8,12 @@ namespace SF3.X013_Editor.Models.MagicBonus
 {
     public class MagicBonusList : ModelArray<MagicBonus>
     {
-        public MagicBonusList(IX013_FileEditor fileEditor)
+        public MagicBonusList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX013_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private MagicBonus[] itemssorted;
         private MagicBonus[] items;
 

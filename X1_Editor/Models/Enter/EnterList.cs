@@ -8,12 +8,10 @@ namespace SF3.X1_Editor.Models.Enters
 {
     public class EnterList : ModelArray<Enter>
     {
-        public EnterList(IX1_FileEditor fileEditor)
+        public EnterList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Enter[] itemssorted;
         private Enter[] items;

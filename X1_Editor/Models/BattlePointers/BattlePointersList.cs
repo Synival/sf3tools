@@ -8,12 +8,10 @@ namespace SF3.X1_Editor.Models.BattlePointers
 {
     public class BattlePointersList : ModelArray<BattlePointers>
     {
-        public BattlePointersList(IX1_FileEditor fileEditor)
+        public BattlePointersList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private BattlePointers[] itemssorted;
         private BattlePointers[] items;

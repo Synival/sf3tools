@@ -8,14 +8,12 @@ namespace SF3.X013_Editor.Models.CritMod
 {
     public class CritModList : ModelArray<CritMod>
     {
-        public CritModList(IX013_FileEditor fileEditor)
+        public CritModList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX013_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private CritMod[] itemssorted;
         private CritMod[] items;
 

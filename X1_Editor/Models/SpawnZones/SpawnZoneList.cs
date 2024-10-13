@@ -8,12 +8,10 @@ namespace SF3.X1_Editor.Models.SpawnZones
 {
     public class SpawnZoneList : ModelArray<SpawnZone>
     {
-        public SpawnZoneList(IX1_FileEditor fileEditor)
+        public SpawnZoneList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private SpawnZone[] modelsSorted;
         private SpawnZone[] models;

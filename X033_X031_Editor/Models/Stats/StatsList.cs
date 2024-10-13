@@ -8,14 +8,12 @@ namespace SF3.X033_X031_Editor.Models.Stats
 {
     public class StatsList : ModelArray<Stats>
     {
-        public StatsList(IX033_X031_FileEditor fileEditor)
+        public StatsList(IX033_X031_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX033_X031_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private Stats[] statsSorted;
         private Stats[] stats;
 

@@ -9,12 +9,10 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
 {
     public class SpellIconList : ModelArray<SpellIcon>
     {
-        public SpellIconList(IIconPointerFileEditor fileEditor)
+        public SpellIconList(IIconPointerFileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private SpellIcon[] modelsSorted;
         private SpellIcon[] models;

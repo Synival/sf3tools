@@ -8,14 +8,12 @@ namespace SF3.X019_Editor.Models.Monsters
 {
     public class MonsterList : ModelArray<Monster>
     {
-        public MonsterList(IX019_FileEditor fileEditor)
+        public MonsterList(IX019_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX019_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private Monster[] modelsSorted;
         private Monster[] models;
 

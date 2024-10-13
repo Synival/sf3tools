@@ -8,14 +8,12 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 {
     public class InitialInfoList : ModelArray<InitialInfo>
     {
-        public InitialInfoList(IX033_X031_FileEditor fileEditor)
+        public InitialInfoList(IX033_X031_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
 
         private IX033_X031_FileEditor _fileEditor;
-        public ScenarioType Scenario => _fileEditor.Scenario;
-
         private InitialInfo[] modelsSorted;
         private InitialInfo[] models;
 

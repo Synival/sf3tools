@@ -8,12 +8,10 @@ namespace SF3.X1_Editor.Models.Warps
 {
     public class WarpList : ModelArray<Warp>
     {
-        public WarpList(IX1_FileEditor fileEditor)
+        public WarpList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
         }
-
-        public ScenarioType Scenario => _fileEditor.Scenario;
 
         private Warp[] itemssorted;
         private Warp[] items;
