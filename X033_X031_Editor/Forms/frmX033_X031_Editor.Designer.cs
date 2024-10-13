@@ -55,6 +55,7 @@
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_CopyTo = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_X031forInCombatEtc = new System.Windows.Forms.ToolStripMenuItem();
@@ -305,7 +306,8 @@
             // 
             this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile_Open,
-            this.tsmiFile_SaveAs});
+            this.tsmiFile_SaveAs,
+            this.tsmiFile_CopyTo});
             this.tsmiFile.Name = "tsmiFile";
             this.tsmiFile.Size = new System.Drawing.Size(37, 20);
             this.tsmiFile.Text = "File";
@@ -324,6 +326,14 @@
             this.tsmiFile_SaveAs.Size = new System.Drawing.Size(114, 22);
             this.tsmiFile_SaveAs.Text = "Save As...";
             this.tsmiFile_SaveAs.Click += new System.EventHandler(this.tsmiFile_SaveAs_Click);
+            // 
+            // tsmiFile_CopyTo
+            // 
+            this.tsmiFile_CopyTo.Enabled = false;
+            this.tsmiFile_CopyTo.Name = "tsmiFile_CopyTo";
+            this.tsmiFile_CopyTo.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_CopyTo.Text = "Copy To...";
+            this.tsmiFile_CopyTo.Click += new System.EventHandler(this.tsmiFile_CopyTo_Click);
             // 
             // tsmiHelp
             // 
@@ -2863,6 +2873,7 @@
         private System.Windows.Forms.TabPage tabCurveGraph;
         private System.Windows.Forms.ComboBox cbCurveGraphCharacter;
         private System.Windows.Forms.DataVisualization.Charting.Chart CurveGraph;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_CopyTo;
     }
 }
 

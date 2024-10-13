@@ -1,4 +1,5 @@
-﻿using SF3.Types;
+﻿using SF3.Attributes;
+using SF3.Types;
 using SF3.Values;
 using System;
 using static SF3.X033_X031_Editor.Forms.frmX033_X031_Editor;
@@ -449,60 +450,70 @@ namespace SF3.X033_X031_Editor.Models.Stats
         public int ID => index;
         public string Name => name;
 
+        [BulkCopy]
         public int CharacterID
         {
             get => _fileEditor.GetByte(character);
             set => _fileEditor.SetByte(character, (byte)value);
         }
 
+        [BulkCopy]
         public CharacterClassValue CharacterClass
         {
             get => new CharacterClassValue(_fileEditor.GetByte(characterClass));
             set => _fileEditor.SetByte(characterClass, (byte)value.Value);
         }
 
+        [BulkCopy]
         public int HPPromote
         {
             get => _fileEditor.GetByte(hpPromote);
             set => _fileEditor.SetByte(hpPromote, (byte)value);
         }
 
+        [BulkCopy]
         public int HPCurve1
         {
             get => _fileEditor.GetByte(hpCurve1);
             set => _fileEditor.SetByte(hpCurve1, (byte)value);
         }
 
+        [BulkCopy]
         public int HPCurve5
         {
             get => _fileEditor.GetByte(hpCurve5);
             set => _fileEditor.SetByte(hpCurve5, (byte)value);
         }
 
+        [BulkCopy]
         public int HPCurve10
         {
             get => _fileEditor.GetByte(hpCurve10);
             set => _fileEditor.SetByte(hpCurve10, (byte)value);
         }
 
+        [BulkCopy]
         public int HPCurve12_15
         {
             get => _fileEditor.GetByte(hpCurve12_15);
             set => _fileEditor.SetByte(hpCurve12_15, (byte)value);
         }
 
+        [BulkCopy]
         public int HPCurve14_20
         {
             get => _fileEditor.GetByte(hpCurve14_20);
             set => _fileEditor.SetByte(hpCurve14_20, (byte)value);
         }
 
+        [BulkCopy]
         public int HPCurve17_30
         {
             get => _fileEditor.GetByte(hpCurve17_30);
             set => _fileEditor.SetByte(hpCurve17_30, (byte)value);
         }
 
+        [BulkCopy]
         public int HPCurve30_99
         {
             get => _fileEditor.GetByte(hpCurve30_99);
@@ -516,48 +527,56 @@ namespace SF3.X033_X031_Editor.Models.Stats
         public string HPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 4);
         public string HPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 5);
 
+        [BulkCopy]
         public int MPPromote
         {
             get => _fileEditor.GetByte(mpPromote);
             set => _fileEditor.SetByte(mpPromote, (byte)value);
         }
 
+        [BulkCopy]
         public int MPCurve1
         {
             get => _fileEditor.GetByte(mpCurve1);
             set => _fileEditor.SetByte(mpCurve1, (byte)value);
         }
 
+        [BulkCopy]
         public int MPCurve5
         {
             get => _fileEditor.GetByte(mpCurve5);
             set => _fileEditor.SetByte(mpCurve5, (byte)value);
         }
 
+        [BulkCopy]
         public int MPCurve10
         {
             get => _fileEditor.GetByte(mpCurve10);
             set => _fileEditor.SetByte(mpCurve10, (byte)value);
         }
 
+        [BulkCopy]
         public int MPCurve12_15
         {
             get => _fileEditor.GetByte(mpCurve12_15);
             set => _fileEditor.SetByte(mpCurve12_15, (byte)value);
         }
 
+        [BulkCopy]
         public int MPCurve14_20
         {
             get => _fileEditor.GetByte(mpCurve14_20);
             set => _fileEditor.SetByte(mpCurve14_20, (byte)value);
         }
 
+        [BulkCopy]
         public int MPCurve17_30
         {
             get => _fileEditor.GetByte(mpCurve17_30);
             set => _fileEditor.SetByte(mpCurve17_30, (byte)value);
         }
 
+        [BulkCopy]
         public int MPCurve30_99
         {
             get => _fileEditor.GetByte(mpCurve30_99);
@@ -571,48 +590,56 @@ namespace SF3.X033_X031_Editor.Models.Stats
         public string MPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 4);
         public string MPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 5);
 
+        [BulkCopy]
         public int AtkPromote
         {
             get => _fileEditor.GetByte(atkPromote);
             set => _fileEditor.SetByte(atkPromote, (byte)value);
         }
 
+        [BulkCopy]
         public int AtkCurve1
         {
             get => _fileEditor.GetByte(atkCurve1);
             set => _fileEditor.SetByte(atkCurve1, (byte)value);
         }
 
+        [BulkCopy]
         public int AtkCurve5
         {
             get => _fileEditor.GetByte(atkCurve5);
             set => _fileEditor.SetByte(atkCurve5, (byte)value);
         }
 
+        [BulkCopy]
         public int AtkCurve10
         {
             get => _fileEditor.GetByte(atkCurve10);
             set => _fileEditor.SetByte(atkCurve10, (byte)value);
         }
 
+        [BulkCopy]
         public int AtkCurve12_15
         {
             get => _fileEditor.GetByte(atkCurve12_15);
             set => _fileEditor.SetByte(atkCurve12_15, (byte)value);
         }
 
+        [BulkCopy]
         public int AtkCurve14_20
         {
             get => _fileEditor.GetByte(atkCurve14_20);
             set => _fileEditor.SetByte(atkCurve14_20, (byte)value);
         }
 
+        [BulkCopy]
         public int AtkCurve17_30
         {
             get => _fileEditor.GetByte(atkCurve17_30);
             set => _fileEditor.SetByte(atkCurve17_30, (byte)value);
         }
 
+        [BulkCopy]
         public int AtkCurve30_99
         {
             get => _fileEditor.GetByte(atkCurve30_99);
@@ -626,48 +653,56 @@ namespace SF3.X033_X031_Editor.Models.Stats
         public string Atkgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 4);
         public string Atkgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 5);
 
+        [BulkCopy]
         public int DefPromote
         {
             get => _fileEditor.GetByte(defPromote);
             set => _fileEditor.SetByte(defPromote, (byte)value);
         }
 
+        [BulkCopy]
         public int DefCurve1
         {
             get => _fileEditor.GetByte(defCurve1);
             set => _fileEditor.SetByte(defCurve1, (byte)value);
         }
 
+        [BulkCopy]
         public int DefCurve5
         {
             get => _fileEditor.GetByte(defCurve5);
             set => _fileEditor.SetByte(defCurve5, (byte)value);
         }
 
+        [BulkCopy]
         public int DefCurve10
         {
             get => _fileEditor.GetByte(defCurve10);
             set => _fileEditor.SetByte(defCurve10, (byte)value);
         }
 
+        [BulkCopy]
         public int DefCurve12_15
         {
             get => _fileEditor.GetByte(defCurve12_15);
             set => _fileEditor.SetByte(defCurve12_15, (byte)value);
         }
 
+        [BulkCopy]
         public int DefCurve14_20
         {
             get => _fileEditor.GetByte(defCurve14_20);
             set => _fileEditor.SetByte(defCurve14_20, (byte)value);
         }
 
+        [BulkCopy]
         public int DefCurve17_30
         {
             get => _fileEditor.GetByte(defCurve17_30);
             set => _fileEditor.SetByte(defCurve17_30, (byte)value);
         }
 
+        [BulkCopy]
         public int DefCurve30_99
         {
             get => _fileEditor.GetByte(defCurve30_99);
@@ -681,48 +716,56 @@ namespace SF3.X033_X031_Editor.Models.Stats
         public string Defgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 4);
         public string Defgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 5);
 
+        [BulkCopy]
         public int AgiPromote
         {
             get => _fileEditor.GetByte(agiPromote);
             set => _fileEditor.SetByte(agiPromote, (byte)value);
         }
 
+        [BulkCopy]
         public int AgiCurve1
         {
             get => _fileEditor.GetByte(agiCurve1);
             set => _fileEditor.SetByte(agiCurve1, (byte)value);
         }
 
+        [BulkCopy]
         public int AgiCurve5
         {
             get => _fileEditor.GetByte(agiCurve5);
             set => _fileEditor.SetByte(agiCurve5, (byte)value);
         }
 
+        [BulkCopy]
         public int AgiCurve10
         {
             get => _fileEditor.GetByte(agiCurve10);
             set => _fileEditor.SetByte(agiCurve10, (byte)value);
         }
 
+        [BulkCopy]
         public int AgiCurve12_15
         {
             get => _fileEditor.GetByte(agiCurve12_15);
             set => _fileEditor.SetByte(agiCurve12_15, (byte)value);
         }
 
+        [BulkCopy]
         public int AgiCurve14_20
         {
             get => _fileEditor.GetByte(agiCurve14_20);
             set => _fileEditor.SetByte(agiCurve14_20, (byte)value);
         }
 
+        [BulkCopy]
         public int AgiCurve17_30
         {
             get => _fileEditor.GetByte(agiCurve17_30);
             set => _fileEditor.SetByte(agiCurve17_30, (byte)value);
         }
 
+        [BulkCopy]
         public int AgiCurve30_99
         {
             get => _fileEditor.GetByte(agiCurve30_99);
@@ -736,438 +779,511 @@ namespace SF3.X033_X031_Editor.Models.Stats
         public string Agigroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 4);
         public string Agigroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 5);
 
+        [BulkCopy]
         public int S1LearnedAt
         {
             get => _fileEditor.GetByte(s1LearnedAt);
             set => _fileEditor.SetByte(s1LearnedAt, (byte)value);
         }
 
+        [BulkCopy]
         public int S1LearnedID
         {
             get => _fileEditor.GetByte(s1LearnedID);
             set => _fileEditor.SetByte(s1LearnedID, (byte)value);
         }
 
+        [BulkCopy]
         public int S1LearnedLevel
         {
             get => _fileEditor.GetByte(s1LearnedLevel);
             set => _fileEditor.SetByte(s1LearnedLevel, (byte)value);
         }
 
+        [BulkCopy]
         public int S2LearnedAt
         {
             get => _fileEditor.GetByte(s2LearnedAt);
             set => _fileEditor.SetByte(s2LearnedAt, (byte)value);
         }
 
+        [BulkCopy]
         public int S2LearnedID
         {
             get => _fileEditor.GetByte(s2LearnedID);
             set => _fileEditor.SetByte(s2LearnedID, (byte)value);
         }
 
+        [BulkCopy]
         public int S2LearnedLevel
         {
             get => _fileEditor.GetByte(s2LearnedLevel);
             set => _fileEditor.SetByte(s2LearnedLevel, (byte)value);
         }
 
+        [BulkCopy]
         public int S3LearnedAt
         {
             get => _fileEditor.GetByte(s3LearnedAt);
             set => _fileEditor.SetByte(s3LearnedAt, (byte)value);
         }
 
+        [BulkCopy]
         public int S3LearnedID
         {
             get => _fileEditor.GetByte(s3LearnedID);
             set => _fileEditor.SetByte(s3LearnedID, (byte)value);
         }
 
+        [BulkCopy]
         public int S3LearnedLevel
         {
             get => _fileEditor.GetByte(s3LearnedLevel);
             set => _fileEditor.SetByte(s3LearnedLevel, (byte)value);
         }
 
+        [BulkCopy]
         public int S4LearnedAt
         {
             get => _fileEditor.GetByte(s4LearnedAt);
             set => _fileEditor.SetByte(s4LearnedAt, (byte)value);
         }
 
+        [BulkCopy]
         public int S4LearnedID
         {
             get => _fileEditor.GetByte(s4LearnedID);
             set => _fileEditor.SetByte(s4LearnedID, (byte)value);
         }
 
+        [BulkCopy]
         public int S4LearnedLevel
         {
             get => _fileEditor.GetByte(s4LearnedLevel);
             set => _fileEditor.SetByte(s4LearnedLevel, (byte)value);
         }
 
+        [BulkCopy]
         public int S5LearnedAt
         {
             get => _fileEditor.GetByte(s5LearnedAt);
             set => _fileEditor.SetByte(s5LearnedAt, (byte)value);
         }
 
+        [BulkCopy]
         public int S5LearnedID
         {
             get => _fileEditor.GetByte(s5LearnedID);
             set => _fileEditor.SetByte(s5LearnedID, (byte)value);
         }
 
+        [BulkCopy]
         public int S5LearnedLevel
         {
             get => _fileEditor.GetByte(s5LearnedLevel);
             set => _fileEditor.SetByte(s5LearnedLevel, (byte)value);
         }
 
+        [BulkCopy]
         public int S6LearnedAt
         {
             get => _fileEditor.GetByte(s6LearnedAt);
             set => _fileEditor.SetByte(s6LearnedAt, (byte)value);
         }
 
+        [BulkCopy]
         public int S6LearnedID
         {
             get => _fileEditor.GetByte(s6LearnedID);
             set => _fileEditor.SetByte(s6LearnedID, (byte)value);
         }
 
+        [BulkCopy]
         public int S6LearnedLevel
         {
             get => _fileEditor.GetByte(s6LearnedLevel);
             set => _fileEditor.SetByte(s6LearnedLevel, (byte)value);
         }
 
+        [BulkCopy]
         public int S7LearnedAt
         {
             get => _fileEditor.GetByte(s7LearnedAt);
             set => _fileEditor.SetByte(s7LearnedAt, (byte)value);
         }
 
+        [BulkCopy]
         public int S7LearnedID
         {
             get => _fileEditor.GetByte(s7LearnedID);
             set => _fileEditor.SetByte(s7LearnedID, (byte)value);
         }
 
+        [BulkCopy]
         public int S7LearnedLevel
         {
             get => _fileEditor.GetByte(s7LearnedLevel);
             set => _fileEditor.SetByte(s7LearnedLevel, (byte)value);
         }
 
+        [BulkCopy]
         public int S8LearnedAt
         {
             get => _fileEditor.GetByte(s8LearnedAt);
             set => _fileEditor.SetByte(s8LearnedAt, (byte)value);
         }
 
+        [BulkCopy]
         public int S8LearnedID
         {
             get => _fileEditor.GetByte(s8LearnedID);
             set => _fileEditor.SetByte(s8LearnedID, (byte)value);
         }
 
+        [BulkCopy]
         public int S8LearnedLevel
         {
             get => _fileEditor.GetByte(s8LearnedLevel);
             set => _fileEditor.SetByte(s8LearnedLevel, (byte)value);
         }
 
+        [BulkCopy]
         public int S9LearnedAt
         {
             get => _fileEditor.GetByte(s9LearnedAt);
             set => _fileEditor.SetByte(s9LearnedAt, (byte)value);
         }
 
+        [BulkCopy]
         public int S9LearnedID
         {
             get => _fileEditor.GetByte(s9LearnedID);
             set => _fileEditor.SetByte(s9LearnedID, (byte)value);
         }
 
+        [BulkCopy]
         public int S9LearnedLevel
         {
             get => _fileEditor.GetByte(s9LearnedLevel);
             set => _fileEditor.SetByte(s9LearnedLevel, (byte)value);
         }
 
+        [BulkCopy]
         public int S10LearnedAt
         {
             get => _fileEditor.GetByte(s10LearnedAt);
             set => _fileEditor.SetByte(s10LearnedAt, (byte)value);
         }
 
+        [BulkCopy]
         public int S10LearnedID
         {
             get => _fileEditor.GetByte(s10LearnedID);
             set => _fileEditor.SetByte(s10LearnedID, (byte)value);
         }
 
+        [BulkCopy]
         public int S10LearnedLevel
         {
             get => _fileEditor.GetByte(s10LearnedLevel);
             set => _fileEditor.SetByte(s10LearnedLevel, (byte)value);
         }
 
+        [BulkCopy]
         public int S11LearnedAt
         {
             get => _fileEditor.GetByte(s11LearnedAt);
             set => _fileEditor.SetByte(s11LearnedAt, (byte)value);
         }
 
+        [BulkCopy]
         public int S11LearnedID
         {
             get => _fileEditor.GetByte(s11LearnedID);
             set => _fileEditor.SetByte(s11LearnedID, (byte)value);
         }
 
+        [BulkCopy]
         public int S11LearnedLevel
         {
             get => _fileEditor.GetByte(s11LearnedLevel);
             set => _fileEditor.SetByte(s11LearnedLevel, (byte)value);
         }
 
+        [BulkCopy]
         public int S12LearnedAt
         {
             get => _fileEditor.GetByte(s12LearnedAt);
             set => _fileEditor.SetByte(s12LearnedAt, (byte)value);
         }
 
+        [BulkCopy]
         public int S12LearnedID
         {
             get => _fileEditor.GetByte(s12LearnedID);
             set => _fileEditor.SetByte(s12LearnedID, (byte)value);
         }
 
+        [BulkCopy]
         public int S12LearnedLevel
         {
             get => _fileEditor.GetByte(s12LearnedLevel);
             set => _fileEditor.SetByte(s12LearnedLevel, (byte)value);
         }
 
+        [BulkCopy]
         public int Weapon1Special1
         {
             get => _fileEditor.GetByte(weapon1Special1);
             set => _fileEditor.SetByte(weapon1Special1, (byte)value);
         }
 
+        [BulkCopy]
         public int Weapon1Special2
         {
             get => _fileEditor.GetByte(weapon1Special2);
             set => _fileEditor.SetByte(weapon1Special2, (byte)value);
         }
 
+        [BulkCopy]
         public int Weapon1Special3
         {
             get => _fileEditor.GetByte(weapon1Special3);
             set => _fileEditor.SetByte(weapon1Special3, (byte)value);
         }
 
+        [BulkCopy]
         public int Weapon2Special1
         {
             get => _fileEditor.GetByte(weapon2Special1);
             set => _fileEditor.SetByte(weapon2Special1, (byte)value);
         }
 
+        [BulkCopy]
         public int Weapon2Special2
         {
             get => _fileEditor.GetByte(weapon2Special2);
             set => _fileEditor.SetByte(weapon2Special2, (byte)value);
         }
 
+        [BulkCopy]
         public int Weapon2Special3
         {
             get => _fileEditor.GetByte(weapon2Special3);
             set => _fileEditor.SetByte(weapon2Special3, (byte)value);
         }
 
+        [BulkCopy]
         public int Weapon3Special1
         {
             get => _fileEditor.GetByte(weapon3Special1);
             set => _fileEditor.SetByte(weapon3Special1, (byte)value);
         }
 
+        [BulkCopy]
         public int Weapon3Special2
         {
             get => _fileEditor.GetByte(weapon3Special2);
             set => _fileEditor.SetByte(weapon3Special2, (byte)value);
         }
 
+        [BulkCopy]
         public int Weapon3Special3
         {
             get => _fileEditor.GetByte(weapon3Special3);
             set => _fileEditor.SetByte(weapon3Special3, (byte)value);
         }
 
+        [BulkCopy]
         public int Weapon4Special1
         {
             get => _fileEditor.GetByte(weapon4Special1);
             set => _fileEditor.SetByte(weapon4Special1, (byte)value);
         }
 
+        [BulkCopy]
         public int Weapon4Special2
         {
             get => _fileEditor.GetByte(weapon4Special2);
             set => _fileEditor.SetByte(weapon4Special2, (byte)value);
         }
 
+        [BulkCopy]
         public int Weapon4Special3
         {
             get => _fileEditor.GetByte(weapon4Special3);
             set => _fileEditor.SetByte(weapon4Special3, (byte)value);
         }
 
+        [BulkCopy]
         public int BaseLuck
         {
             get => _fileEditor.GetByte(baseLuck);
             set => _fileEditor.SetByte(baseLuck, (byte)value);
         }
 
+        [BulkCopy]
         public int BaseMov
         {
             get => _fileEditor.GetByte(baseMov);
             set => _fileEditor.SetByte(baseMov, (byte)value);
         }
 
+        [BulkCopy]
         public int BaseTurns
         {
             get => _fileEditor.GetByte(baseTurns);
             set => _fileEditor.SetByte(baseTurns, (byte)value);
         }
 
+        [BulkCopy]
         public int BaseHPRegen
         {
             get => _fileEditor.GetByte(baseHPRegen);
             set => _fileEditor.SetByte(baseHPRegen, (byte)value);
         }
 
+        [BulkCopy]
         public int BaseMPRegen
         {
             get => _fileEditor.GetByte(baseMPRegen);
             set => _fileEditor.SetByte(baseMPRegen, (byte)value);
         }
 
+        [BulkCopy]
         public int EarthRes
         {
             get => _fileEditor.GetByte(earthRes);
             set => _fileEditor.SetByte(earthRes, (byte)value);
         }
 
+        [BulkCopy]
         public int FireRes
         {
             get => _fileEditor.GetByte(fireRes);
             set => _fileEditor.SetByte(fireRes, (byte)value);
         }
 
+        [BulkCopy]
         public int IceRes
         {
             get => _fileEditor.GetByte(iceRes);
             set => _fileEditor.SetByte(iceRes, (byte)value);
         }
 
+        [BulkCopy]
         public int SparkRes
         {
             get => _fileEditor.GetByte(sparkRes);
             set => _fileEditor.SetByte(sparkRes, (byte)value);
         }
 
+        [BulkCopy]
         public int WindRes
         {
             get => _fileEditor.GetByte(windRes);
             set => _fileEditor.SetByte(windRes, (byte)value);
         }
 
+        [BulkCopy]
         public int LightRes
         {
             get => _fileEditor.GetByte(lightRes);
             set => _fileEditor.SetByte(lightRes, (byte)value);
         }
 
+        [BulkCopy]
         public int DarkRes
         {
             get => _fileEditor.GetByte(darkRes);
             set => _fileEditor.SetByte(darkRes, (byte)value);
         }
 
+        [BulkCopy]
         public int UnknownRes
         {
             get => _fileEditor.GetByte(unknownRes);
             set => _fileEditor.SetByte(unknownRes, (byte)value);
         }
 
+        [BulkCopy]
         public int Slow
         {
             get => _fileEditor.GetByte(slow);
             set => _fileEditor.SetByte(slow, (byte)value);
         }
 
+        [BulkCopy]
         public int Support
         {
             get => _fileEditor.GetByte(support);
             set => _fileEditor.SetByte(support, (byte)value);
         }
 
+        [BulkCopy]
         public int MagicBonus
         {
             get => _fileEditor.GetByte(magicBonus);
             set => _fileEditor.SetByte(magicBonus, (byte)value);
         }
 
+        [BulkCopy]
         public int MovementType
         {
             get => _fileEditor.GetByte(movementType);
             set => _fileEditor.SetByte(movementType, (byte)value);
         }
 
+        [BulkCopy]
         public int WeaponEquipable1
         {
             get => _fileEditor.GetByte(weaponEquipable1);
             set => _fileEditor.SetByte(weaponEquipable1, (byte)value);
         }
 
+        [BulkCopy]
         public int WeaponEquipable2
         {
             get => _fileEditor.GetByte(weaponEquipable2);
             set => _fileEditor.SetByte(weaponEquipable2, (byte)value);
         }
 
+        [BulkCopy]
         public int WeaponEquipable3
         {
             get => _fileEditor.GetByte(weaponEquipable3);
             set => _fileEditor.SetByte(weaponEquipable3, (byte)value);
         }
 
+        [BulkCopy]
         public int WeaponEquipable4
         {
             get => _fileEditor.GetByte(weaponEquipable4);
             set => _fileEditor.SetByte(weaponEquipable4, (byte)value);
         }
 
+        [BulkCopy]
         public int AccessoryEquipable1
         {
             get => _fileEditor.GetByte(accessoryEquipable1);
             set => _fileEditor.SetByte(accessoryEquipable1, (byte)value);
         }
 
+        [BulkCopy]
         public int AccessoryEquipable2
         {
             get => _fileEditor.GetByte(accessoryEquipable2);
             set => _fileEditor.SetByte(accessoryEquipable2, (byte)value);
         }
 
+        [BulkCopy]
         public int AccessoryEquipable3
         {
             get => _fileEditor.GetByte(accessoryEquipable3);
             set => _fileEditor.SetByte(accessoryEquipable3, (byte)value);
         }
 
+        [BulkCopy]
         public int AccessoryEquipable4
         {
             get => _fileEditor.GetByte(accessoryEquipable4);

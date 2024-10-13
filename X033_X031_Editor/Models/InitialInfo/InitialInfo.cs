@@ -1,4 +1,5 @@
-﻿using SF3.Types;
+﻿using SF3.Attributes;
+using SF3.Types;
 using SF3.Values;
 
 namespace SF3.X033_X031_Editor.Models.InitialInfos
@@ -142,104 +143,126 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
         public int PresetID => index;
         public string PresetName => name;
 
+        [BulkCopy]
         public int CharacterE
         {
             get => _fileEditor.GetByte(character);
             set => _fileEditor.SetByte(character, (byte)value);
         }
 
+        [BulkCopy]
         public CharacterClassValue CharacterClassE
         {
             get => new CharacterClassValue(_fileEditor.GetByte(characterClass));
             set => _fileEditor.SetByte(characterClass, (byte)value.Value);
         }
 
+        [BulkCopy]
         public int Level
         {
             get => _fileEditor.GetByte(level);
             set => _fileEditor.SetByte(level, (byte)value);
         }
 
+        [BulkCopy]
         public SexValue Sex
         {
             get => new SexValue(_fileEditor.GetByte(sex));
             set => _fileEditor.SetByte(sex, (byte)value.Value);
         }
 
+        [BulkCopy]
         public int Weapon
         {
             get => _fileEditor.GetWord(weapon);
             set => _fileEditor.SetWord(weapon, value);
         }
 
+        [BulkCopy]
         public int Accessory
         {
             get => _fileEditor.GetWord(accessory);
             set => _fileEditor.SetWord(accessory, value);
         }
 
+        [BulkCopy]
         public int Item1
         {
             get => _fileEditor.GetWord(item1);
             set => _fileEditor.SetWord(item1, value);
         }
 
+        [BulkCopy]
         public int Item2
         {
             get => _fileEditor.GetWord(item2);
             set => _fileEditor.SetWord(item2, value);
         }
+
+        [BulkCopy]
         public int Item3
         {
             get => _fileEditor.GetWord(item3);
             set => _fileEditor.SetWord(item3, value);
         }
+
+        [BulkCopy]
         public int Item4
         {
             get => _fileEditor.GetWord(item4);
             set => _fileEditor.SetWord(item4, value);
         }
 
+        [BulkCopy]
         public WeaponTypeValue Weapon1Type
         {
             get => new WeaponTypeValue(_fileEditor.GetByte(weapon1Type));
             set => _fileEditor.SetByte(weapon1Type, (byte)value.Value);
         }
 
+        [BulkCopy]
         public int Weapon1Exp
         {
             get => _fileEditor.GetWord(weapon1Exp);
             set => _fileEditor.SetWord(weapon1Exp, value);
         }
 
+        [BulkCopy]
         public WeaponTypeValue Weapon2Type
         {
             get => new WeaponTypeValue(_fileEditor.GetByte(weapon2Type));
             set => _fileEditor.SetByte(weapon2Type, (byte)value.Value);
         }
 
+        [BulkCopy]
         public int Weapon2Exp
         {
             get => _fileEditor.GetWord(weapon2Exp);
             set => _fileEditor.SetWord(weapon2Exp, value);
         }
+
+        [BulkCopy]
         public WeaponTypeValue Weapon3Type
         {
             get => new WeaponTypeValue(_fileEditor.GetByte(weapon3Type));
             set => _fileEditor.SetByte(weapon3Type, (byte)value.Value);
         }
 
+        [BulkCopy]
         public int Weapon3Exp
         {
             get => _fileEditor.GetWord(weapon3Exp);
             set => _fileEditor.SetWord(weapon3Exp, value);
         }
+
+        [BulkCopy]
         public WeaponTypeValue Weapon4Type
         {
             get => new WeaponTypeValue(_fileEditor.GetByte(weapon4Type));
             set => _fileEditor.SetByte(weapon4Type, (byte)value.Value);
         }
 
+        [BulkCopy]
         public int Weapon4Exp
         {
             get => _fileEditor.GetWord(weapon4Exp);

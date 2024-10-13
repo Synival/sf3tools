@@ -1,4 +1,5 @@
-﻿using SF3.Types;
+﻿using SF3.Attributes;
+using SF3.Types;
 
 namespace SF3.X033_X031_Editor.Models.WeaponLevel
 {
@@ -111,21 +112,28 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         public int WeaponLevelID => index;
         public string WeaponLevelName => name;
 
+        [BulkCopy]
         public int WLevel1
         {
             get => _fileEditor.GetWord(level1);
             set => _fileEditor.SetWord(level1, value);
         }
+
+        [BulkCopy]
         public int WLevel2
         {
             get => _fileEditor.GetWord(level2);
             set => _fileEditor.SetWord(level2, value);
         }
+
+        [BulkCopy]
         public int WLevel3
         {
             get => _fileEditor.GetWord(level3);
             set => _fileEditor.SetWord(level3, value);
         }
+
+        [BulkCopy]
         public int WLevel4
         {
             get => _fileEditor.GetWord(level4);

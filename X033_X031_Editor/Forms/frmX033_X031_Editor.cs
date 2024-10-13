@@ -93,6 +93,7 @@ namespace SF3.X033_X031_Editor.Forms
         private bool initialise()
         {
             tsmiFile_SaveAs.Enabled = true;
+            tsmiFile_CopyTo.Enabled = true;
 
             _statsList = new StatsList(_fileEditor);
             if (!_statsList.Load())
@@ -179,6 +180,7 @@ namespace SF3.X033_X031_Editor.Forms
                 return;
             }
 
+            // TODO: refactor out!
             olvStats.FinishCellEdit();
             olvSpells.FinishCellEdit();
             olvEquipStatistics.FinishCellEdit();
@@ -359,6 +361,89 @@ namespace SF3.X033_X031_Editor.Forms
                     range2Series.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].AtPercentages[0], dataPoint.ProbableStats[statType].AtPercentages[3]);
                 }
             }
+        }
+
+        private void tsmiFile_CopyTo_Click(object sender, EventArgs e)
+        {
+            if (_fileEditor == null)
+            {
+                return;
+            }
+
+            // TODO: refactor out!
+            olvStats.FinishCellEdit();
+            olvSpells.FinishCellEdit();
+            olvEquipStatistics.FinishCellEdit();
+            olvMiscellaneous.FinishCellEdit();
+            olvInitialInfo.FinishCellEdit();
+            olvWeaponLevelReq.FinishCellEdit();
+            olvCurveCalc.FinishCellEdit();
+
+            OpenFileDialog openfile = new OpenFileDialog();
+            openfile.Filter = "SF3 data (X033.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+            if (openfile.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            var copyFileEditor = new X033_X031_FileEditor(Scenario);
+            if (!copyFileEditor.LoadFile(openfile.FileName))
+            {
+                MessageBox.Show("Error trying to load file. It is probably in use by another process.");
+                return;
+            }
+
+            try
+            {
+                // TODO: refactor out!
+                var copyStatsList = new StatsList(copyFileEditor);
+                if (!copyStatsList.Load())
+                {
+                    MessageBox.Show("Could not load Resources/classList.xml.");
+                    return;
+                }
+
+                var copyInitialInfoList = new InitialInfoList(copyFileEditor);
+                if (!copyInitialInfoList.Load())
+                {
+                    MessageBox.Show("Could not load Resources/classEquip.xml.");
+                    return;
+                }
+
+                var copyWeaponLevelList = new WeaponLevelList(copyFileEditor);
+                if (!copyWeaponLevelList.Load())
+                {
+                    MessageBox.Show("Could not load Resources/WeaponLevel.xml.");
+                    return;
+                }
+
+                Utils.BulkCopyProperties<Models.Stats.Stats>(_statsList.Models, copyStatsList.Models);
+                Utils.BulkCopyProperties<InitialInfo>(_initialInfoList.Models, copyInitialInfoList.Models);
+                Utils.BulkCopyProperties<WeaponLevel>(_weaponLevelList.Models, copyWeaponLevelList.Models);
+            }
+            catch (System.Reflection.TargetInvocationException)
+            {
+                //wrong file was selected
+                MessageBox.Show("Failed to read file:\n" +
+                                "    " + openfile.FileName);
+                return;
+            }
+            catch (FileEditorReadException)
+            {
+                //wrong file was selected
+                MessageBox.Show("Data appears corrupt or invalid:\n" +
+                                "    " + openfile.FileName + "\n\n" +
+                                "Is this the correct type of file?");
+                return;
+            }
+
+            if (!copyFileEditor.SaveFile(openfile.FileName))
+            {
+                MessageBox.Show("Failed to write to " + openfile.FileName);
+                return;
+            }
+
+            MessageBox.Show("All tables copied successfully.");
         }
     }
 }

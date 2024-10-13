@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SF3.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace SF3
@@ -47,6 +49,66 @@ namespace SF3
                 dict.Add(value, value.Name);
             }
             return dict;
+        }
+
+        /// <summary>
+        /// Copies all properties of type T tagged with [BulkCopy] in 'objFrom' to 'objTo'.
+        /// </summary>
+        /// <typeparam name="T">The type whose properties should be </typeparam>
+        /// <param name="objFrom">The object whose properties should be copied from.</param>
+        /// <param name="objTo">The object whose properties should be copied to.</param>
+        /// <param name="inherit">When true (default), all inherited properties are copied.</param>
+        /// <returns>A list of all properties copied.</returns>
+        public static List<PropertyInfo> BulkCopyProperties<T>(T objFrom, T objTo, bool inherit = true) where T : class
+        {
+            var properties = typeof(T).GetProperties(BindingFlags.Public | (inherit ? 0 : BindingFlags.DeclaredOnly))
+                .Where(x => x.IsDefined(typeof(BulkCopyAttribute)))
+                .ToList();
+
+            foreach (var property in properties)
+            {
+                property.SetValue(objTo, property.GetValue(objFrom));
+            }
+
+            return properties;
+        }
+
+        /// <summary>
+        /// Copies all properties of type T in an IEnumerable<T> tagged with [BulkCopy] in 'objFrom' to 'objTo'.
+        /// </summary>
+        /// <typeparam name="T">The type whose properties should be </typeparam>
+        /// <param name="objFrom">The object whose properties should be copied from.</param>
+        /// <param name="objTo">The object whose properties should be copied to.</param>
+        /// <param name="inherit">When true (default), all inherited properties are copied.</param>
+        /// <returns>A list of all properties copied.</returns>
+        public static List<PropertyInfo> BulkCopyProperties<T>(IEnumerable<T> listFrom, IEnumerable<T> listTo, bool inherit = true) where T : class
+        {
+            var properties = typeof(T).GetProperties(
+                    BindingFlags.Public |
+                    BindingFlags.Instance |
+                    (inherit ? 0 : BindingFlags.DeclaredOnly))
+                .Where(x => x.IsDefined(typeof(BulkCopyAttribute)))
+                .ToList();
+
+            var arrayFrom = listFrom.ToArray();
+            var arrayTo = listTo.ToArray();
+
+            if (arrayFrom.Length != arrayTo.Length)
+            {
+                // TODO: make it better!!
+                throw new ArgumentException("Model lists need to have the same number of elements!");
+            }
+
+            foreach (var property in properties)
+            {
+                for (int i = 0; i < arrayFrom.Length; i++)
+                {
+                    var value = property.GetValue(arrayFrom[i]);
+                    property.SetValue(arrayTo[i], value);
+                }
+            }
+
+            return properties;
         }
     }
 }
