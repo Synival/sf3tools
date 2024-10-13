@@ -74,8 +74,8 @@
             this.lvcSpellsS1LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS1LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS2LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS2LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS2LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellsS2LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS3LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS3LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS3LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -423,8 +423,8 @@
             this.olvSpells.AllColumns.Add(this.lvcSpellsS1LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS1LearnedID);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS2LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS2LearnedID);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS2LearnedLevel);
+            this.olvSpells.AllColumns.Add(this.lvcSpellsS2LearnedID);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS3LearnedAt);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS3LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS3LearnedID);
@@ -468,8 +468,8 @@
             this.lvcSpellsS1LearnedLevel,
             this.lvcSpellsS1LearnedID,
             this.lvcSpellsS2LearnedAt,
-            this.lvcSpellsS2LearnedID,
             this.lvcSpellsS2LearnedLevel,
+            this.lvcSpellsS2LearnedID,
             this.lvcSpellsS3LearnedAt,
             this.lvcSpellsS3LearnedLevel,
             this.lvcSpellsS3LearnedID,
@@ -549,14 +549,14 @@
             // 
             // lvcSpellsS1LearnedLevel
             // 
-            this.lvcSpellsS1LearnedLevel.AspectName = "S1LearnedID";
+            this.lvcSpellsS1LearnedLevel.AspectName = "S1LearnedLevel";
             this.lvcSpellsS1LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS1LearnedLevel.Text = "S1LearnedLevel";
             this.lvcSpellsS1LearnedLevel.Width = 95;
             // 
             // lvcSpellsS1LearnedID
             // 
-            this.lvcSpellsS1LearnedID.AspectName = "S1LearnedLevel";
+            this.lvcSpellsS1LearnedID.AspectName = "S1LearnedID";
             this.lvcSpellsS1LearnedID.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS1LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS1LearnedID.Text = "S1LearnedID";
@@ -569,20 +569,20 @@
             this.lvcSpellsS2LearnedAt.Text = "S2LearnedAt";
             this.lvcSpellsS2LearnedAt.Width = 75;
             // 
-            // lvcSpellsS2LearnedID
-            // 
-            this.lvcSpellsS2LearnedID.AspectName = "S2LearnedID";
-            this.lvcSpellsS2LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS2LearnedID.Text = "S2LearnedID";
-            this.lvcSpellsS2LearnedID.Width = 95;
-            // 
             // lvcSpellsS2LearnedLevel
             // 
             this.lvcSpellsS2LearnedLevel.AspectName = "S2LearnedLevel";
             this.lvcSpellsS2LearnedLevel.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS2LearnedLevel.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS2LearnedLevel.Text = "S2LearnedLevel";
             this.lvcSpellsS2LearnedLevel.Width = 90;
+            // 
+            // lvcSpellsS2LearnedID
+            // 
+            this.lvcSpellsS2LearnedID.AspectName = "S2LearnedID";
+            this.lvcSpellsS2LearnedID.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsS2LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvcSpellsS2LearnedID.Text = "S2LearnedID";
+            this.lvcSpellsS2LearnedID.Width = 95;
             // 
             // lvcSpellsS3LearnedAt
             // 
@@ -593,14 +593,14 @@
             // 
             // lvcSpellsS3LearnedLevel
             // 
-            this.lvcSpellsS3LearnedLevel.AspectName = "S3LearnedID";
+            this.lvcSpellsS3LearnedLevel.AspectName = "S3LearnedLevel";
             this.lvcSpellsS3LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS3LearnedLevel.Text = "S3LearnedLevel";
             this.lvcSpellsS3LearnedLevel.Width = 95;
             // 
             // lvcSpellsS3LearnedID
             // 
-            this.lvcSpellsS3LearnedID.AspectName = "S3LearnedLevel";
+            this.lvcSpellsS3LearnedID.AspectName = "S3LearnedID";
             this.lvcSpellsS3LearnedID.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS3LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS3LearnedID.Text = "S3LearnedID";
@@ -615,14 +615,14 @@
             // 
             // lvcSpellsS4LearnedLevel
             // 
-            this.lvcSpellsS4LearnedLevel.AspectName = "S4LearnedID";
+            this.lvcSpellsS4LearnedLevel.AspectName = "S4LearnedLevel";
             this.lvcSpellsS4LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS4LearnedLevel.Text = "S4LearnedLevel";
             this.lvcSpellsS4LearnedLevel.Width = 95;
             // 
             // lvcSpellsS4LearnedID
             // 
-            this.lvcSpellsS4LearnedID.AspectName = "S4LearnedLevel";
+            this.lvcSpellsS4LearnedID.AspectName = "S4LearnedID";
             this.lvcSpellsS4LearnedID.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS4LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS4LearnedID.Text = "S4LearnedID";
@@ -637,14 +637,14 @@
             // 
             // lvcSpellsS5LearnedLevel
             // 
-            this.lvcSpellsS5LearnedLevel.AspectName = "S5LearnedID";
+            this.lvcSpellsS5LearnedLevel.AspectName = "S5LearnedLevel";
             this.lvcSpellsS5LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS5LearnedLevel.Text = "S5LearnedLevel";
             this.lvcSpellsS5LearnedLevel.Width = 95;
             // 
             // lvcSpellsS5LearnedID
             // 
-            this.lvcSpellsS5LearnedID.AspectName = "S5LearnedLevel";
+            this.lvcSpellsS5LearnedID.AspectName = "S5LearnedID";
             this.lvcSpellsS5LearnedID.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS5LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS5LearnedID.Text = "S5LearnedID";
@@ -659,14 +659,14 @@
             // 
             // lvcSpellsS6LearnedLevel
             // 
-            this.lvcSpellsS6LearnedLevel.AspectName = "S6LearnedID";
+            this.lvcSpellsS6LearnedLevel.AspectName = "S6LearnedLevel";
             this.lvcSpellsS6LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS6LearnedLevel.Text = "S6LearnedLevel";
             this.lvcSpellsS6LearnedLevel.Width = 95;
             // 
             // lvcSpellsS6LearnedID
             // 
-            this.lvcSpellsS6LearnedID.AspectName = "S6LearnedLevel";
+            this.lvcSpellsS6LearnedID.AspectName = "S6LearnedID";
             this.lvcSpellsS6LearnedID.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS6LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS6LearnedID.Text = "S6LearnedID";
@@ -681,14 +681,14 @@
             // 
             // lvcSpellsS7LearnedLevel
             // 
-            this.lvcSpellsS7LearnedLevel.AspectName = "S7LearnedID";
+            this.lvcSpellsS7LearnedLevel.AspectName = "S7LearnedLevel";
             this.lvcSpellsS7LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS7LearnedLevel.Text = "S7LearnedLevel";
             this.lvcSpellsS7LearnedLevel.Width = 95;
             // 
             // lvcSpellsS7LearnedID
             // 
-            this.lvcSpellsS7LearnedID.AspectName = "S7LearnedLevel";
+            this.lvcSpellsS7LearnedID.AspectName = "S7LearnedID";
             this.lvcSpellsS7LearnedID.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS7LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS7LearnedID.Text = "S7LearnedID";
@@ -703,14 +703,14 @@
             // 
             // lvcSpellsS8LearnedLevel
             // 
-            this.lvcSpellsS8LearnedLevel.AspectName = "S8LearnedID";
+            this.lvcSpellsS8LearnedLevel.AspectName = "S8LearnedLevel";
             this.lvcSpellsS8LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS8LearnedLevel.Text = "S8LearnedLevel";
             this.lvcSpellsS8LearnedLevel.Width = 95;
             // 
             // lvcSpellsS8LearnedID
             // 
-            this.lvcSpellsS8LearnedID.AspectName = "S8LearnedLevel";
+            this.lvcSpellsS8LearnedID.AspectName = "S8LearnedID";
             this.lvcSpellsS8LearnedID.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS8LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS8LearnedID.Text = "S8LearnedID";
@@ -725,14 +725,14 @@
             // 
             // lvcSpellsS9LearnedLevel
             // 
-            this.lvcSpellsS9LearnedLevel.AspectName = "S9LearnedID";
+            this.lvcSpellsS9LearnedLevel.AspectName = "S9LearnedLevel";
             this.lvcSpellsS9LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS9LearnedLevel.Text = "S9LearnedLevel";
             this.lvcSpellsS9LearnedLevel.Width = 95;
             // 
             // lvcSpellsS9LearnedID
             // 
-            this.lvcSpellsS9LearnedID.AspectName = "S9LearnedLevel";
+            this.lvcSpellsS9LearnedID.AspectName = "S9LearnedID";
             this.lvcSpellsS9LearnedID.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS9LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS9LearnedID.Text = "S9LearnedID";
@@ -747,14 +747,14 @@
             // 
             // lvcSpellsS10LearnedLevel
             // 
-            this.lvcSpellsS10LearnedLevel.AspectName = "S10LearnedID";
+            this.lvcSpellsS10LearnedLevel.AspectName = "S10LearnedLevel";
             this.lvcSpellsS10LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS10LearnedLevel.Text = "S10LearnedLevel";
             this.lvcSpellsS10LearnedLevel.Width = 95;
             // 
             // lvcSpellsS10LearnedID
             // 
-            this.lvcSpellsS10LearnedID.AspectName = "S10LearnedLevel";
+            this.lvcSpellsS10LearnedID.AspectName = "S10LearnedID";
             this.lvcSpellsS10LearnedID.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS10LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS10LearnedID.Text = "S10LearnedID";
@@ -769,14 +769,14 @@
             // 
             // lvcSpellsS11LearnedLevel
             // 
-            this.lvcSpellsS11LearnedLevel.AspectName = "S11LearnedID";
+            this.lvcSpellsS11LearnedLevel.AspectName = "S11LearnedLevel";
             this.lvcSpellsS11LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS11LearnedLevel.Text = "S11LearnedLevel";
             this.lvcSpellsS11LearnedLevel.Width = 95;
             // 
             // lvcSpellsS11LearnedID
             // 
-            this.lvcSpellsS11LearnedID.AspectName = "S11LearnedLevel";
+            this.lvcSpellsS11LearnedID.AspectName = "S11LearnedID";
             this.lvcSpellsS11LearnedID.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS11LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS11LearnedID.Text = "S11LearnedID";
@@ -791,14 +791,14 @@
             // 
             // lvcSpellsS12LearnedLevel
             // 
-            this.lvcSpellsS12LearnedLevel.AspectName = "S12LearnedID";
+            this.lvcSpellsS12LearnedLevel.AspectName = "S12LearnedLevel";
             this.lvcSpellsS12LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS12LearnedLevel.Text = "S12LearnedLevel";
             this.lvcSpellsS12LearnedLevel.Width = 95;
             // 
             // lvcSpellsS12LearnedID
             // 
-            this.lvcSpellsS12LearnedID.AspectName = "S12LearnedLevel";
+            this.lvcSpellsS12LearnedID.AspectName = "S12LearnedID";
             this.lvcSpellsS12LearnedID.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS12LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS12LearnedID.Text = "S12LearnedID";
@@ -2675,8 +2675,8 @@
         private BrightIdeasSoftware.OLVColumn lvcSpellsS1LearnedLevel;
         private BrightIdeasSoftware.OLVColumn lvcSpellsS1LearnedID;
         private BrightIdeasSoftware.OLVColumn lvcSpellsS2LearnedAt;
-        private BrightIdeasSoftware.OLVColumn lvcSpellsS2LearnedID;
         private BrightIdeasSoftware.OLVColumn lvcSpellsS2LearnedLevel;
+        private BrightIdeasSoftware.OLVColumn lvcSpellsS2LearnedID;
         private BrightIdeasSoftware.OLVColumn lvcSpellsS3LearnedAt;
         private BrightIdeasSoftware.OLVColumn lvcSpellsS3LearnedLevel;
         private BrightIdeasSoftware.OLVColumn lvcSpellsS3LearnedID;
