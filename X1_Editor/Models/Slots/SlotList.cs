@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X1_Editor.Models.Slots
 {
-    public class SlotList : IModelArray<Slot>
+    public class SlotList : ModelArray<Slot>
     {
         public SlotList(IX1_FileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.X1_Editor.Models.Slots
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             if (Scenario == ScenarioType.Scenario1)
             {

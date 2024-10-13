@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X002_Editor.Models.StatBoost
 {
-    public class StatList : IModelArray<StatBoost>
+    public class StatList : ModelArray<StatBoost>
     {
         public StatList(IX002_FileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.X002_Editor.Models.StatBoost
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             r = "Resources/X002StatList.xml";
 

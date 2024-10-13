@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X1_Editor.Models.CustomMovement
 {
-    public class CustomMovementList : IModelArray<CustomMovement>
+    public class CustomMovementList : ModelArray<CustomMovement>
     {
         public CustomMovementList(IX1_FileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.X1_Editor.Models.CustomMovement
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             r = "Resources/X1AI.xml";
 

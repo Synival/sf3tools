@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X1_Editor.Models.AI
 {
-    public class AIList : IModelArray<AI>
+    public class AIList : ModelArray<AI>
     {
         public AIList(IX1_FileEditor fileEditor)
         {
@@ -15,8 +15,8 @@ namespace SF3.X1_Editor.Models.AI
 
         public ScenarioType Scenario => _fileEditor.Scenario;
 
-        private AI[] spellssorted;
-        private AI[] spells;
+        private AI[] modelsSorted;
+        private AI[] models;
         private IX1_FileEditor _fileEditor;
 
         private string r = "";
@@ -25,7 +25,7 @@ namespace SF3.X1_Editor.Models.AI
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             r = "Resources/X1AI.xml";
 
@@ -50,8 +50,8 @@ namespace SF3.X1_Editor.Models.AI
                 r = "Resources/X1AIOther.xml";
             }*/
 
-            spellssorted = new AI[0];
-            spells = new AI[130]; //max size of spellList
+            modelsSorted = new AI[0];
+            models = new AI[130]; //max size of spellList
             FileStream stream = null;
             try
             {
@@ -67,12 +67,12 @@ namespace SF3.X1_Editor.Models.AI
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new AI[spellssorted.Length];
-                        spellssorted.CopyTo(old, 0);
-                        spellssorted = new AI[old.Length + 1];
-                        old.CopyTo(spellssorted, 0);
-                        spellssorted[old.Length] = new AI(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        spells[spellssorted[old.Length].AIID] = spellssorted[old.Length];
+                        old = new AI[modelsSorted.Length];
+                        modelsSorted.CopyTo(old, 0);
+                        modelsSorted = new AI[old.Length + 1];
+                        old.CopyTo(modelsSorted, 0);
+                        modelsSorted[old.Length] = new AI(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        models[modelsSorted[old.Length].AIID] = modelsSorted[old.Length];
                     }
                 }
             }
@@ -94,6 +94,6 @@ namespace SF3.X1_Editor.Models.AI
             return true;
         }
 
-        public AI[] Models => spellssorted;
+        public AI[] Models => modelsSorted;
     }
 }

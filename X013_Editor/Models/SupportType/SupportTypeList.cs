@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X013_Editor.Models.SupportTypes
 {
-    public class SupportTypeList : IModelArray<SupportType>
+    public class SupportTypeList : ModelArray<SupportType>
     {
         public SupportTypeList(IX013_FileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.X013_Editor.Models.SupportTypes
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             if (Scenario == ScenarioType.Scenario1)
             {

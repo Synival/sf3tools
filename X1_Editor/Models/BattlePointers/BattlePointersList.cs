@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X1_Editor.Models.BattlePointers
 {
-    public class BattlePointersList : IModelArray<BattlePointers>
+    public class BattlePointersList : ModelArray<BattlePointers>
     {
         public BattlePointersList(IX1_FileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.X1_Editor.Models.BattlePointers
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             r = "Resources/BattlePointersList.xml";
 

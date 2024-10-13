@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X033_X031_Editor.Models.WeaponLevel
 {
-    public class WeaponLevelList : IModelArray<WeaponLevel>
+    public class WeaponLevelList : ModelArray<WeaponLevel>
     {
         public WeaponLevelList(IX033_X031_FileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
         /// Initialises list
         /// </summary>
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             r = "Resources/WeaponLevel.xml";
 

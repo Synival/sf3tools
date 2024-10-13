@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X013_Editor.Models.WeaponSpellRank
 {
-    public class WeaponSpellRankList : IModelArray<WeaponSpellRank>
+    public class WeaponSpellRankList : ModelArray<WeaponSpellRank>
     {
         public WeaponSpellRankList(IX013_FileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.X013_Editor.Models.WeaponSpellRank
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             r = "Resources/WeaponSpellRankList.xml";
 

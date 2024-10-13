@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X013_Editor.Models.MagicBonus
 {
-    public class MagicBonusList : IModelArray<MagicBonus>
+    public class MagicBonusList : ModelArray<MagicBonus>
     {
         public MagicBonusList(IX013_FileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.X013_Editor.Models.MagicBonus
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             if (Scenario == ScenarioType.Scenario1)
             {

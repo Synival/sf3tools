@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X1_Editor.Models.Arrows
 {
-    public class ArrowList : IModelArray<Arrow>
+    public class ArrowList : ModelArray<Arrow>
     {
         private IX1_FileEditor _fileEditor;
 
@@ -26,7 +26,7 @@ namespace SF3.X1_Editor.Models.Arrows
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             r = "Resources/X1Arrow.xml";
 

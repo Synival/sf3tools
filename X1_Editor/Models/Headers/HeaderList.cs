@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X1_Editor.Models.Headers
 {
-    public class HeaderList : IModelArray<Header>
+    public class HeaderList : ModelArray<Header>
     {
         public HeaderList(IX1_FileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.X1_Editor.Models.Headers
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             r = "Resources/X1Top.xml";
 

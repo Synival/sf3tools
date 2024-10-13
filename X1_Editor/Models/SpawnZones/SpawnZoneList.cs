@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X1_Editor.Models.SpawnZones
 {
-    public class SpawnZoneList : IModelArray<SpawnZone>
+    public class SpawnZoneList : ModelArray<SpawnZone>
     {
         public SpawnZoneList(IX1_FileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.X1_Editor.Models.SpawnZones
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             r = "Resources/UnknownAIList.xml";
 

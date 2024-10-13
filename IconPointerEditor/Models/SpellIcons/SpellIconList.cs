@@ -7,7 +7,7 @@ using SF3.Models;
 
 namespace SF3.IconPointerEditor.Models.SpellIcons
 {
-    public class SpellIconList : IModelArray<SpellIcon>
+    public class SpellIconList : ModelArray<SpellIcon>
     {
         public SpellIconList(IIconPointerFileEditor fileEditor)
         {
@@ -26,7 +26,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
         /// Initialises class
         /// </summary>
         /// <returns>'true' on success, 'false' if .xml files do not exist or are in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             if (Scenario == ScenarioType.Scenario1)
             {

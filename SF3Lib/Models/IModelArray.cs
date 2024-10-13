@@ -14,6 +14,19 @@ namespace SF3.Models
         /// </summary>
         /// <returns>Return 'true' on success, or 'false' if the .XML file(s) do not exist or are in use.</returns>
         bool Load();
+
+/*
+        /// <summary>
+        /// Resets all loaded data.
+        /// </summary>
+        /// <returns>'true' when a reset has occurred or nothing was loaded.</returns>
+        bool Reset();
+
+        /// <summary>
+        /// Is 'true' when a successful Load() has occurred.
+        /// </summary>
+        bool IsLoaded { get; }
+*/
     }
 
     public interface IModelArray<T> : IModelArray

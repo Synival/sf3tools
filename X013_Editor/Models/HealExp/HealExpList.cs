@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X013_Editor.Models.HealExp
 {
-    public class HealExpList : IModelArray<HealExp>
+    public class HealExpList : ModelArray<HealExp>
     {
         public HealExpList(IX013_FileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.X013_Editor.Models.HealExp
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             r = "Resources/HealExpList.xml";
 

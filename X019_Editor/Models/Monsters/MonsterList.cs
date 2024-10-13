@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X019_Editor.Models.Monsters
 {
-    public class MonsterList : IModelArray<Monster>
+    public class MonsterList : ModelArray<Monster>
     {
         public MonsterList(IX019_FileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.X019_Editor.Models.Monsters
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             if (Scenario == ScenarioType.Scenario1)
             {

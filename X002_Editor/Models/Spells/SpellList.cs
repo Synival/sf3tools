@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.X002_Editor.Models.Spells
 {
-    public class SpellList : IModelArray<Spell>
+    public class SpellList : ModelArray<Spell>
     {
         public SpellList(IX002_FileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.X002_Editor.Models.Spells
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             if (Scenario == ScenarioType.Scenario1)
             {

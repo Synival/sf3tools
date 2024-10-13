@@ -6,7 +6,7 @@ using SF3.Models;
 
 namespace SF3.IconPointerEditor.Models.ItemIcons
 {
-    public class ItemIconList : IModelArray<ItemIcon>
+    public class ItemIconList : ModelArray<ItemIcon>
     {
         public ItemIconList(IIconPointerFileEditor fileEditor)
         {
@@ -25,7 +25,7 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             if (Scenario == ScenarioType.Scenario1)
             {

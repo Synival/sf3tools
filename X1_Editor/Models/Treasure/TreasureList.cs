@@ -7,7 +7,7 @@ using static SF3.X1_Editor.Forms.frmX1_Editor;
 
 namespace SF3.X1_Editor.Models.Treasures
 {
-    public class TreasureList : IModelArray<Treasure>
+    public class TreasureList : ModelArray<Treasure>
     {
         public TreasureList(IX1_FileEditor fileEditor)
         {
@@ -26,7 +26,7 @@ namespace SF3.X1_Editor.Models.Treasures
         /// Initialises class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public bool Load()
+        public override bool Load()
         {
             r = "Resources/X1Treasure.xml";
 
