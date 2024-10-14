@@ -15,9 +15,9 @@ namespace SF3
             _title = BaseTitle;
         }
 
-        private byte[] data = null;
+        private byte[] _data = null;
 
-        public bool IsLoaded => data != null;
+        public bool IsLoaded => _data != null;
 
         private bool _isModified = false;
 
@@ -75,7 +75,7 @@ namespace SF3
                 PreLoaded?.Invoke(this, EventArgs.Empty);
 
                 Filename = filename;
-                data = newData;
+                _data = newData;
 
                 UpdateTitle();
                 Loaded?.Invoke(this, EventArgs.Empty);
@@ -102,7 +102,7 @@ namespace SF3
         /// <returns>'true' on success, 'false' on failure.</returns>
         public bool SaveFile(string filename)
         {
-            if (data == null)
+            if (_data == null)
             {
                 throw new FileEditorNotLoadedException();
             }
@@ -113,7 +113,7 @@ namespace SF3
                 PreSaved?.Invoke(this, EventArgs.Empty);
 
                 stream = new FileStream(filename, FileMode.Create);
-                stream.Write(data, 0, data.Length);
+                stream.Write(_data, 0, _data.Length);
                 Filename = filename;
 
                 IsModified = false;
@@ -148,7 +148,7 @@ namespace SF3
 
             PreClosed?.Invoke(this, EventArgs.Empty);
 
-            data = null;
+            _data = null;
             Filename = null;
             IsModified = false;
 
@@ -163,14 +163,14 @@ namespace SF3
         /// <param name="location">The address of the byte.</param>
         public int GetByte(int location)
         {
-            if (data == null)
+            if (_data == null)
             {
                 throw new FileEditorNotLoadedException();
             }
 
             try
             {
-                return data[location];
+                return _data[location];
             }
             catch (IndexOutOfRangeException)
             {
@@ -185,14 +185,14 @@ namespace SF3
         /// <param name="location">The address of the 16-bit integer.</param>
         public int GetWord(int location)
         {
-            if (data == null)
+            if (_data == null)
             {
                 throw new FileEditorNotLoadedException();
             }
 
             try
             {
-                return data[location] * 256 + data[location + 1];
+                return _data[location] * 256 + _data[location + 1];
             }
             catch (IndexOutOfRangeException)
             {
@@ -207,15 +207,15 @@ namespace SF3
         /// <param name="location">The address of the 32-bit integer.</param>
         public int GetDouble(int location)
         {
-            if (data == null)
+            if (_data == null)
             {
                 throw new FileEditorNotLoadedException();
             }
 
             try
             {
-                return (data[location] * 256 * 256 * 256) + (data[location + 1] * 256 * 256)
-                            + (data[location + 2] * 256) + data[location + 3];
+                return (_data[location] * 256 * 256 * 256) + (_data[location + 1] * 256 * 256)
+                            + (_data[location + 2] * 256) + _data[location + 3];
             }
             catch (IndexOutOfRangeException)
             {
@@ -231,7 +231,7 @@ namespace SF3
         /// <param name="length">The length of the string space.</param>
         public string GetString(int location, int length)
         {
-            if (data == null)
+            if (_data == null)
             {
                 throw new FileEditorNotLoadedException();
             }
@@ -241,11 +241,11 @@ namespace SF3
             {
                 try
                 {
-                    if (data[location + i] == 0x0)
+                    if (_data[location + i] == 0x0)
                     {
                         break;
                     }
-                    value[i] = data[location + i];
+                    value[i] = _data[location + i];
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -264,14 +264,14 @@ namespace SF3
         /// <param name="value">The new value of the byte.</param>
         public void SetByte(int location, byte value)
         {
-            if (data == null)
+            if (_data == null)
             {
                 throw new FileEditorNotLoadedException();
             }
 
-            if (data[location] != value)
+            if (_data[location] != value)
             {
-                data[location] = value;
+                _data[location] = value;
                 IsModified = true;
             }
         }
@@ -283,7 +283,7 @@ namespace SF3
         /// <param name="value">The new value of the 16-bit integer.</param>
         public void SetWord(int location, int value)
         {
-            if (data == null)
+            if (_data == null)
             {
                 throw new FileEditorNotLoadedException();
             }
@@ -291,10 +291,10 @@ namespace SF3
             byte highByte = (byte)(value >> 8);
             byte lowByte = (byte)(value % 0x100);
 
-            if (data[location + 0] != highByte || data[location + 1] != lowByte)
+            if (_data[location + 0] != highByte || _data[location + 1] != lowByte)
             {
-                data[location + 0] = highByte;
-                data[location + 1] = lowByte;
+                _data[location + 0] = highByte;
+                _data[location + 1] = lowByte;
                 IsModified = true;
             }
         }
@@ -308,15 +308,15 @@ namespace SF3
         {
             byte[] converted = BitConverter.GetBytes(value);
 
-            if (data[location + 0] != converted[3] ||
-                data[location + 1] != converted[2] ||
-                data[location + 2] != converted[1] ||
-                data[location + 3] != converted[0])
+            if (_data[location + 0] != converted[3] ||
+                _data[location + 1] != converted[2] ||
+                _data[location + 2] != converted[1] ||
+                _data[location + 3] != converted[0])
             {
-                data[location + 0] = converted[3];
-                data[location + 1] = converted[2];
-                data[location + 2] = converted[1];
-                data[location + 3] = converted[0];
+                _data[location + 0] = converted[3];
+                _data[location + 1] = converted[2];
+                _data[location + 2] = converted[1];
+                _data[location + 3] = converted[0];
                 IsModified = true;
             }
         }
@@ -330,7 +330,7 @@ namespace SF3
         /// <param name="value">The new value of the string.</param>
         public void SetString(int location, int length, string value)
         {
-            if (data == null)
+            if (_data == null)
             {
                 throw new FileEditorNotLoadedException();
             }
@@ -340,9 +340,9 @@ namespace SF3
             name = OutputText.GetBytes(value);
             for (int i = 0; i < name.Length; i++)
             {
-                if (data[location + i] != name[i])
+                if (_data[location + i] != name[i])
                 {
-                    data[location + i] = name[i];
+                    _data[location + i] = name[i];
                     IsModified = true;
                 }
             }
@@ -350,9 +350,9 @@ namespace SF3
             {
                 for (int i = name.Length; i < length; i++)
                 {
-                    if (data[location + i] != 0x00)
+                    if (_data[location + i] != 0x00)
                     {
-                        data[location + i] = 0x00;
+                        _data[location + i] = 0x00;
                         IsModified = true;
                     }
                 }
@@ -367,12 +367,12 @@ namespace SF3
         /// <returns>True if the bit is set, false if the bit is unset.</returns>
         public bool GetBit(int location, int bit)
         {
-            if (data == null)
+            if (_data == null)
             {
                 throw new FileEditorNotLoadedException();
             }
 
-            return ((data[location] >> (bit - 1) & 0x01) == 1) ? true : false;
+            return ((_data[location] >> (bit - 1) & 0x01) == 1) ? true : false;
         }
 
         /// <summary>
@@ -383,7 +383,7 @@ namespace SF3
         /// <param name="value">The new value of the bit.</param>
         public void SetBit(int location, int bit, bool value)
         {
-            if (data == null)
+            if (_data == null)
             {
                 throw new FileEditorNotLoadedException();
             }
@@ -392,17 +392,17 @@ namespace SF3
 
             if (value)
             {
-                if ((data[location] & bitmask) == 0x00)
+                if ((_data[location] & bitmask) == 0x00)
                 {
-                    data[location] |= bitmask;
+                    _data[location] |= bitmask;
                     IsModified = true;
                 }
             }
             else
             {
-                if ((data[location] & bitmask) != 0x00)
+                if ((_data[location] & bitmask) != 0x00)
                 {
-                    data[location] &= (byte)~bitmask;
+                    _data[location] &= (byte)~bitmask;
                     IsModified = true;
                 }
             }
