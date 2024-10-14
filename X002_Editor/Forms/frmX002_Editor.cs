@@ -191,17 +191,11 @@ namespace SF3.X002_Editor.Forms
             }
         }
 
-        private void CloseFile()
+        public override void CloseFile()
         {
-            if (FileEditor == null)
-            {
-                return;
-            }
-
-            tsmiFile_SaveAs.Enabled = false;
+            base.CloseFile();
             _objectListViews.ForEach(x => x.ClearObjects());
-            FileEditor.CloseFile();
-            FileEditor = null;
+            tsmiFile_SaveAs.Enabled = false;
         }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e)

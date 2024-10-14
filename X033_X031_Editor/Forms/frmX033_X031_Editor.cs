@@ -177,18 +177,12 @@ namespace SF3.X033_X031_Editor.Forms
             }
         }
 
-        private void CloseFile()
+        public override void CloseFile()
         {
-            if (FileEditor == null)
-            {
-                return;
-            }
-
+            base.CloseFile();
+            _objectListViews.ForEach(x => x.ClearObjects());
             tsmiFile_SaveAs.Enabled = false;
             tsmiFile_CopyTablesFrom.Enabled = false;
-            _objectListViews.ForEach(x => x.ClearObjects());
-            FileEditor.CloseFile();
-            FileEditor = null;
         }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e)

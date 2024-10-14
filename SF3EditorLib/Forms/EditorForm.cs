@@ -48,5 +48,18 @@ namespace SF3.Editor.Forms
         {
             this.Text = MakeTitle();
         }
+
+        /// <summary>
+        /// Closes a file if open.
+        /// </summary>
+        public virtual void CloseFile()
+        {
+            if (FileEditor == null)
+            {
+                return;
+            }
+            FileEditor.CloseFile();
+            FileEditor = null;
+        }
     }
 }
