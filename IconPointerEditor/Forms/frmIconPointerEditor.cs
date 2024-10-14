@@ -99,6 +99,7 @@ namespace SF3.IconPointerEditor.Forms
             openfile.Filter = "SF3 data (X011*.bin)|X011*.bin|SF3 data (X021*.bin)|X021*.bin|SF3 data (X026*.bin)|X026*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
+                CloseFile();
                 _fileEditor = new IconPointerFileEditor(Scenario, X026);
                 _fileEditor.TitleChanged += (obj, args) => updateText();
 
@@ -111,12 +112,14 @@ namespace SF3.IconPointerEditor.Forms
                     catch (System.Reflection.TargetInvocationException)
                     {
                         //wrong file was selected
+                        CloseFile();
                         MessageBox.Show("Failed to read file:\n" +
                                         "    " + openfile.FileName);
                     }
                     catch (FileEditorReadException)
                     {
                         //wrong file was selected
+                        CloseFile();
                         MessageBox.Show("Data appears corrupt or invalid:\n" +
                                         "    " + openfile.FileName + "\n\n" +
                                         "Is this the correct type of file?");
@@ -127,6 +130,19 @@ namespace SF3.IconPointerEditor.Forms
                     MessageBox.Show("Error trying to load file. It is probably in use by another process.");
                 }
             }
+        }
+
+        private void CloseFile()
+        {
+            if (_fileEditor == null)
+            {
+                return;
+            }
+
+            tsmiFile_SaveAs.Enabled = false;
+            _objectListViews.ForEach(x => x.ClearObjects());
+            _fileEditor.CloseFile();
+            _fileEditor = null;
         }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e)

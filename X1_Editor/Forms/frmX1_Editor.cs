@@ -356,6 +356,7 @@ namespace SF3.X1_Editor.Forms
             openfile.Filter = "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
             if (openfile.ShowDialog() == DialogResult.OK)
             {
+                CloseFile();
                 _fileEditor = new X1_FileEditor(Scenario, Map);
                 _fileEditor.TitleChanged += (obj, args) => updateText();
 
@@ -374,6 +375,7 @@ namespace SF3.X1_Editor.Forms
                     catch (FileEditorReadException)
                     {
                         //wrong file was selected
+                        CloseFile();
                         MessageBox.Show("Data appears corrupt or invalid:\n" +
                                         "    " + openfile.FileName + "\n\n" +
                                         "Is this the correct type of file?");
@@ -389,6 +391,19 @@ namespace SF3.X1_Editor.Forms
                     MessageBox.Show("Error trying to load file. It is probably in use by another process.");
                 }
             }
+        }
+
+        private void CloseFile()
+        {
+            if (_fileEditor == null)
+            {
+                return;
+            }
+
+            tsmiFile_SaveAs.Enabled = false;
+            _objectListViews.ForEach(x => x.ClearObjects());
+            _fileEditor.CloseFile();
+            _fileEditor = null;
         }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
