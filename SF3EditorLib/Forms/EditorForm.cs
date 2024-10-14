@@ -19,6 +19,8 @@ namespace SF3.Editor.Forms
     /// </summary>
     public partial class EditorForm : Form
     {
+        private const string SavePromptString = "You have unsaved changes. Would you like to save?";
+
         /// <summary>
         /// FileEditor open for the current file.
         /// </summary>
@@ -125,7 +127,12 @@ namespace SF3.Editor.Forms
                 return false;
             }
 
-            CloseFile();
+            // Close the file first, and don't proceed if the user aborted it.
+            if (!CloseFile())
+            {
+                return false;
+            }
+
             FileEditor = MakeFileEditor();
             FileEditor.TitleChanged += (obj, args) => UpdateTitle();
 
@@ -173,6 +180,7 @@ namespace SF3.Editor.Forms
         /// If a file is open, it does nothing. But, if a file IS open,
         /// it creates an "Save As" dialog and, if a file was chosen, saves open data.
         /// </summary>
+        /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
         public bool SaveFileDialog()
         {
             if (FileEditor == null)
@@ -195,17 +203,38 @@ namespace SF3.Editor.Forms
 
         /// <summary>
         /// Closes a file if open.
+        /// If may prompt the user to save if the file has been modified.
         /// </summary>
-        public void CloseFile()
+        /// <param name="force">When true, a "Save Changes" dialog is never offered.</param>
+        /// <returns>'true' if no file was open or the file was closed. Returns 'false' if the user clicked 'cancel' when
+        /// prompted to save changes.</returns>
+        public bool CloseFile(bool force = false)
         {
             if (FileEditor == null)
             {
-                return;
+                return true;
+            }
+
+            if (!force && FileEditor.IsModified)
+            {
+                var result = MessageBox.Show(SavePromptString, "Save Changes", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Cancel)
+                {
+                    return false;
+                }
+                else if (result == DialogResult.Yes)
+                {
+                    if (!SaveFileDialog())
+                    {
+                        return false;
+                    }
+                }
             }
 
             ObjectListViews.ForEach(x => x.ClearObjects());
             FileEditor.CloseFile();
             FileEditor = null;
+            return true;
         }
 
         /// <summary>
@@ -257,5 +286,16 @@ namespace SF3.Editor.Forms
         /// Triggered after FileEditor's loaded state has been changed.
         /// </summary>
         public event EventHandler FileIsLoadedChanged;
+
+        private void EditorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (FileEditor?.IsModified == true)
+            {
+                if (!CloseFile())
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
     }
 }

@@ -28,7 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // EditorForm
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "EditorForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditorForm_FormClosing);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
