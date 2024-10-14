@@ -208,6 +208,7 @@ namespace SF3.X013_Editor.Forms
                 _fileEditor = new X013_FileEditor(Scenario);
                 _fileEditor.Loaded += (obj, args) => updateText();
                 _fileEditor.Closed += (obj, args) => updateText();
+                _fileEditor.ModifiedChanged += (obj, args) => updateText();
 
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
@@ -264,7 +265,7 @@ namespace SF3.X013_Editor.Forms
         private void updateText()
         {
             this.Text = _originalTitle +
-                ((_fileEditor?.IsLoaded == true) ? " - " + _fileEditor.Title : "");
+                ((_fileEditor?.IsLoaded == true) ? " - " + _fileEditor.Title + (_fileEditor.IsModified ? "*" : "") : "");
         }
     }
 }

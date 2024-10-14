@@ -359,6 +359,7 @@ namespace SF3.X1_Editor.Forms
                 _fileEditor = new X1_FileEditor(Scenario, Map);
                 _fileEditor.Loaded += (obj, args) => updateText();
                 _fileEditor.Closed += (obj, args) => updateText();
+                _fileEditor.ModifiedChanged += (obj, args) => updateText();
 
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
@@ -476,7 +477,7 @@ namespace SF3.X1_Editor.Forms
         private void updateText()
         {
             this.Text = _originalTitle +
-                ((_fileEditor?.IsLoaded == true) ? " - " + _fileEditor.Title : " - (no file open)") +
+                ((_fileEditor?.IsLoaded == true) ? " - " + _fileEditor.Title + (_fileEditor.IsModified ? "*" : "") : " - (no file open)") +
                 " | Current open settings: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _mapType + " | Debug: " + _debug;
         }
     }

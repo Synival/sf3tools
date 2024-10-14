@@ -102,6 +102,7 @@ namespace SF3.IconPointerEditor.Forms
                 _fileEditor = new IconPointerFileEditor(Scenario, X026);
                 _fileEditor.Loaded += (obj, args) => updateText();
                 _fileEditor.Closed += (obj, args) => updateText();
+                _fileEditor.ModifiedChanged += (obj, args) => updateText();
 
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
@@ -160,7 +161,7 @@ namespace SF3.IconPointerEditor.Forms
         private void updateText()
         {
             this.Text = _originalTitle +
-                ((_fileEditor?.IsLoaded == true) ? " - " + _fileEditor.Title : "");
+                ((_fileEditor?.IsLoaded == true) ? " - " + _fileEditor.Title + (_fileEditor.IsModified ? "*" : "") : "");
         }
     }
 }

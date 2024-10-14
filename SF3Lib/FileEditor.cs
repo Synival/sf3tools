@@ -14,6 +14,21 @@ namespace SF3
 
         public bool IsLoaded => data != null;
 
+        private bool _isModified = false;
+
+        public bool IsModified
+        {
+            get => _isModified;
+            private set
+            {
+                if (_isModified != value)
+                {
+                    _isModified = value;
+                    ModifiedChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
         public string Filename { get; private set; }
 
         public virtual string Title => IsLoaded ? Filename : "(no file)";
@@ -28,7 +43,7 @@ namespace SF3
             FileStream stream = null;
             try
             {
-                PreLoaded?.Invoke(this, new EventArgs());
+                PreLoaded?.Invoke(this, EventArgs.Empty);
 
                 stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
                 data = new byte[stream.Length];
@@ -36,7 +51,7 @@ namespace SF3
                 Filename = filename;
                 stream.Close();
 
-                Loaded?.Invoke(this, new EventArgs());
+                Loaded?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception)
             {
@@ -68,13 +83,14 @@ namespace SF3
             FileStream stream = null;
             try
             {
-                PreSaved?.Invoke(this, new EventArgs());
+                PreSaved?.Invoke(this, EventArgs.Empty);
 
                 stream = new FileStream(filename, FileMode.Create);
                 stream.Write(data, 0, data.Length);
                 Filename = filename;
 
-                Saved?.Invoke(this, new EventArgs());
+                IsModified = false;
+                Saved?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception)
             {
@@ -102,12 +118,13 @@ namespace SF3
                 return true;
             }
 
-            PreClosed?.Invoke(this, new EventArgs());
+            PreClosed?.Invoke(this, EventArgs.Empty);
 
             data = null;
             Filename = null;
+            IsModified = false;
 
-            Closed?.Invoke(this, new EventArgs());
+            Closed?.Invoke(this, EventArgs.Empty);
             return true;
         }
 
@@ -223,7 +240,11 @@ namespace SF3
                 throw new FileEditorNotLoadedException();
             }
 
-            data[location] = value;
+            if (data[location] != value)
+            {
+                data[location] = value;
+                IsModified = true;
+            }
         }
 
         /// <summary>
@@ -238,8 +259,15 @@ namespace SF3
                 throw new FileEditorNotLoadedException();
             }
 
-            data[location] = (byte)(value >> 8);
-            data[location + 1] = (byte)(value % 256);
+            byte highByte = (byte)(value >> 8);
+            byte lowByte = (byte)(value % 0x100);
+
+            if (data[location + 0] != highByte || data[location + 1] != lowByte)
+            {
+                data[location + 0] = highByte;
+                data[location + 1] = lowByte;
+                IsModified = true;
+            }
         }
 
         /// <summary>
@@ -250,10 +278,18 @@ namespace SF3
         public void SetDouble(int location, int value)
         {
             byte[] converted = BitConverter.GetBytes(value);
-            data[location] = converted[3];
-            data[location + 1] = converted[2];
-            data[location + 2] = converted[1];
-            data[location + 3] = converted[0];
+
+            if (data[location + 0] != converted[3] ||
+                data[location + 1] != converted[2] ||
+                data[location + 2] != converted[1] ||
+                data[location + 3] != converted[0])
+            {
+                data[location + 0] = converted[3];
+                data[location + 1] = converted[2];
+                data[location + 2] = converted[1];
+                data[location + 3] = converted[0];
+                IsModified = true;
+            }
         }
 
         /// <summary>
@@ -275,13 +311,21 @@ namespace SF3
             name = OutputText.GetBytes(value);
             for (int i = 0; i < name.Length; i++)
             {
-                data[location + i] = name[i];
+                if (data[location + i] != name[i])
+                {
+                    data[location + i] = name[i];
+                    IsModified = true;
+                }
             }
             if (name.Length < length)
             {
                 for (int i = name.Length; i < length; i++)
                 {
-                    data[location + i] = 0x0;
+                    if (data[location + i] != 0x00)
+                    {
+                        data[location + i] = 0x00;
+                        IsModified = true;
+                    }
                 }
             }
         }
@@ -315,13 +359,23 @@ namespace SF3
                 throw new FileEditorNotLoadedException();
             }
 
+            byte bitmask = (byte)(1 << (bit - 1));
+
             if (value)
             {
-                data[location] |= (byte)(1 << (bit - 1));
+                if ((data[location] & bitmask) == 0x00)
+                {
+                    data[location] |= bitmask;
+                    IsModified = true;
+                }
             }
             else
             {
-                data[location] &= (byte)~(1 << (bit - 1));
+                if ((data[location] & bitmask) != 0x00)
+                {
+                    data[location] &= (byte)~bitmask;
+                    IsModified = true;
+                }
             }
         }
 
@@ -331,5 +385,6 @@ namespace SF3
         public event EventHandler Saved;
         public event EventHandler PreClosed;
         public event EventHandler Closed;
+        public event EventHandler ModifiedChanged;
     }
 }

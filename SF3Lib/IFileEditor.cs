@@ -108,6 +108,11 @@ namespace SF3
         bool IsLoaded { get; }
 
         /// <summary>
+        /// 'True' when the file is loaded.
+        /// </summary>
+        bool IsModified { get; }
+
+        /// <summary>
         /// Filename of the file loaded.
         /// </summary>
         string Filename { get; }
@@ -146,5 +151,10 @@ namespace SF3
         /// Event that occurs when a file is closed.
         /// </summary>
         event EventHandler Closed;
+
+        /// <summary>
+        /// Event that occurs when the 'Modified' property is changed.
+        /// </summary>
+        event EventHandler ModifiedChanged;
     }
 }
