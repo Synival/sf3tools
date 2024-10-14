@@ -125,8 +125,6 @@ namespace SF3.X1_Editor.Forms
         private EnterList _enterList;
         private ArrowList _arrowList;
 
-        private List<ObjectListView> _objectListViews;
-
         public frmX1_Editor()
         {
             InitializeComponent();
@@ -135,7 +133,7 @@ namespace SF3.X1_Editor.Forms
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             Map = 0x00;
-            _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
+            ObjectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
 
             UpdateTitle();
         }
@@ -306,7 +304,7 @@ namespace SF3.X1_Editor.Forms
                 return false;
             }
 
-            _objectListViews.ForEach(x => x.ClearObjects());
+            ObjectListViews.ForEach(x => x.ClearObjects());
 
             if (IsBattle)
             {
@@ -396,7 +394,6 @@ namespace SF3.X1_Editor.Forms
         public override void CloseFile()
         {
             base.CloseFile();
-            _objectListViews.ForEach(x => x.ClearObjects());
             tsmiFile_SaveAs.Enabled = false;
         }
 
@@ -407,7 +404,7 @@ namespace SF3.X1_Editor.Forms
                 return;
             }
 
-            _objectListViews.ForEach(x => x.FinishCellEdit());
+            ObjectListViews.ForEach(x => x.FinishCellEdit());
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 X1* (.bin)|X1.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";

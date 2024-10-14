@@ -50,8 +50,6 @@ namespace SF3.IconPointerEditor.Forms
         private SpellIconList _spellIconList;
         private ItemIconList _itemIconList;
 
-        private List<ObjectListView> _objectListViews;
-
         public frmIconPointerEditor()
         {
             InitializeComponent();
@@ -60,7 +58,7 @@ namespace SF3.IconPointerEditor.Forms
             tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             X026 = false;
-            _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
+            ObjectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
 
             UpdateTitle();
         }
@@ -84,7 +82,7 @@ namespace SF3.IconPointerEditor.Forms
                 return false;
             }
 
-            _objectListViews.ForEach(x => x.ClearObjects());
+            ObjectListViews.ForEach(x => x.ClearObjects());
 
             olvItemIcons.AddObjects(_itemIconList.Models);
             olvSpellIcons.AddObjects(_spellIconList.Models);
@@ -134,7 +132,6 @@ namespace SF3.IconPointerEditor.Forms
         public override void CloseFile()
         {
             base.CloseFile();
-            _objectListViews.ForEach(x => x.ClearObjects());
             tsmiFile_SaveAs.Enabled = false;
         }
 
@@ -145,7 +142,7 @@ namespace SF3.IconPointerEditor.Forms
                 return;
             }
 
-            _objectListViews.ForEach(x => x.FinishCellEdit());
+            ObjectListViews.ForEach(x => x.FinishCellEdit());
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 X011* (.bin)|X011.bin|Sf3 X021* (.bin)|X021.bin|Sf3 X026* (.bin)|X026.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";

@@ -51,8 +51,6 @@ namespace SF3.X002_Editor.Forms
         private WarpList _warpList;
         private MusicOverrideList _musicOverrideList;
 
-        private List<ObjectListView> _objectListViews;
-
         public frmX002_Editor()
         {
             InitializeComponent();
@@ -60,7 +58,7 @@ namespace SF3.X002_Editor.Forms
             BaseTitle = this.Text;
             tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
-            _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
+            ObjectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
 
             UpdateTitle();
         }
@@ -133,7 +131,7 @@ namespace SF3.X002_Editor.Forms
                 return false;
             }
 
-            _objectListViews.ForEach(x => x.ClearObjects());
+            ObjectListViews.ForEach(x => x.ClearObjects());
 
             olvItems.AddObjects(_itemList.Models);
             olvSpells.AddObjects(_spellList.Models);
@@ -194,7 +192,6 @@ namespace SF3.X002_Editor.Forms
         public override void CloseFile()
         {
             base.CloseFile();
-            _objectListViews.ForEach(x => x.ClearObjects());
             tsmiFile_SaveAs.Enabled = false;
         }
 
@@ -205,7 +202,7 @@ namespace SF3.X002_Editor.Forms
                 return;
             }
 
-            _objectListViews.ForEach(x => x.FinishCellEdit());
+            ObjectListViews.ForEach(x => x.FinishCellEdit());
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 x002 (.bin)|X002.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";

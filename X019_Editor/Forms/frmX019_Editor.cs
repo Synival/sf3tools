@@ -36,8 +36,6 @@ namespace SF3.X019_Editor.Forms
 
         private MonsterList _monsterList;
 
-        private List<ObjectListView> _objectListViews;
-
         public frmX019_Editor()
         {
             InitializeComponent();
@@ -45,7 +43,7 @@ namespace SF3.X019_Editor.Forms
             BaseTitle = this.Text;
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
-            _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
+            ObjectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
 
             UpdateTitle();
         }
@@ -62,7 +60,7 @@ namespace SF3.X019_Editor.Forms
                 return false;
             }
 
-            _objectListViews.ForEach(x => x.ClearObjects());
+            ObjectListViews.ForEach(x => x.ClearObjects());
 
             olvMonsterTab1.AddObjects(_monsterList.Models);
             olvMonsterTab2.AddObjects(_monsterList.Models);
@@ -115,7 +113,6 @@ namespace SF3.X019_Editor.Forms
         public override void CloseFile()
         {
             base.CloseFile();
-            _objectListViews.ForEach(x => x.ClearObjects());
             tsmiFile_SaveAs.Enabled = false;
         }
 
@@ -126,7 +123,7 @@ namespace SF3.X019_Editor.Forms
                 return;
             }
 
-            _objectListViews.ForEach(x => x.FinishCellEdit());
+            ObjectListViews.ForEach(x => x.FinishCellEdit());
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 X019 (.bin)|X019.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";

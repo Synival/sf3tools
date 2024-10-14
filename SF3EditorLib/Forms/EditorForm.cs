@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrightIdeasSoftware;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -14,15 +15,11 @@ namespace SF3.Editor.Forms
     /// </summary>
     public partial class EditorForm : Form
     {
-        private IFileEditor _fileEditor;
-
-        public IFileEditor FileEditor
-        {
-            get => _fileEditor;
-            set => _fileEditor = value;
-        }
+        protected IFileEditor FileEditor { get; set; }
 
         public string BaseTitle { get; protected set; }
+
+        protected List<ObjectListView> ObjectListViews { get; set; }
 
         public EditorForm()
         {
@@ -39,7 +36,7 @@ namespace SF3.Editor.Forms
         /// The title to set when using UpdateTitle().
         /// </summary>
         /// <returns></returns>
-        protected virtual string MakeTitle() => _fileEditor?.EditorTitle(BaseTitle) ?? BaseTitle;
+        protected virtual string MakeTitle() => FileEditor?.EditorTitle(BaseTitle) ?? BaseTitle;
 
         /// <summary>
         /// Updates the title of the form.
@@ -58,6 +55,8 @@ namespace SF3.Editor.Forms
             {
                 return;
             }
+
+            ObjectListViews.ForEach(x => x.ClearObjects());
             FileEditor.CloseFile();
             FileEditor = null;
         }

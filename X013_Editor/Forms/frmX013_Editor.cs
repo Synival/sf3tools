@@ -61,8 +61,6 @@ namespace SF3.X013_Editor.Forms
         private WeaponSpellRankList _weaponSpellRankList;
         private StatusEffectList _statusEffectList;
 
-        private List<ObjectListView> _objectListViews;
-
         public frmX013_Editor()
         {
             InitializeComponent();
@@ -70,7 +68,7 @@ namespace SF3.X013_Editor.Forms
             BaseTitle = this.Text;
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
-            _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
+            ObjectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
 
             UpdateTitle();
         }
@@ -178,7 +176,7 @@ namespace SF3.X013_Editor.Forms
                 return false;
             }
 
-            _objectListViews.ForEach(x => x.ClearObjects());
+            ObjectListViews.ForEach(x => x.ClearObjects());
 
             olvSpecials.AddObjects(_specialsList.Models);
             olvFriendshipExp.AddObjects(_friendshipExpList.Models);
@@ -240,7 +238,6 @@ namespace SF3.X013_Editor.Forms
         public override void CloseFile()
         {
             base.CloseFile();
-            _objectListViews.ForEach(x => x.ClearObjects());
             tsmiFile_SaveAs.Enabled = false;
         }
 
@@ -251,7 +248,7 @@ namespace SF3.X013_Editor.Forms
                 return;
             }
 
-            _objectListViews.ForEach(x => x.FinishCellEdit());
+            ObjectListViews.ForEach(x => x.FinishCellEdit());
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 x013 (.bin)|X013.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";

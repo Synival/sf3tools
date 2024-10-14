@@ -56,8 +56,6 @@ namespace SF3.X033_X031_Editor.Forms
         private InitialInfoList _initialInfoList;
         private WeaponLevelList _weaponLevelList;
 
-        private List<ObjectListView> _objectListViews;
-
         public class StatDataPoint
         {
             public StatDataPoint(int level, StatDict stats)
@@ -89,7 +87,7 @@ namespace SF3.X033_X031_Editor.Forms
             BaseTitle = this.Text;
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
-            _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
+            ObjectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
 
             UpdateTitle();
         }
@@ -121,7 +119,7 @@ namespace SF3.X033_X031_Editor.Forms
                 return false;
             }
 
-            _objectListViews.ForEach(x => x.ClearObjects());
+            ObjectListViews.ForEach(x => x.ClearObjects());
 
             olvStats.AddObjects(_statsList.Models);
             olvSpells.AddObjects(_statsList.Models);
@@ -180,7 +178,6 @@ namespace SF3.X033_X031_Editor.Forms
         public override void CloseFile()
         {
             base.CloseFile();
-            _objectListViews.ForEach(x => x.ClearObjects());
             tsmiFile_SaveAs.Enabled = false;
             tsmiFile_CopyTablesFrom.Enabled = false;
         }
@@ -192,7 +189,7 @@ namespace SF3.X033_X031_Editor.Forms
                 return;
             }
 
-            _objectListViews.ForEach(x => x.FinishCellEdit());
+            ObjectListViews.ForEach(x => x.FinishCellEdit());
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 x033 (.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
@@ -375,7 +372,7 @@ namespace SF3.X033_X031_Editor.Forms
                 return;
             }
 
-            _objectListViews.ForEach(x => x.FinishCellEdit());
+            ObjectListViews.ForEach(x => x.FinishCellEdit());
 
             var openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Copy Tables From";
@@ -422,7 +419,7 @@ namespace SF3.X033_X031_Editor.Forms
                 var report2 = Utils.BulkCopyCollectionProperties(copyInitialInfoList.Models, _initialInfoList.Models);
                 var report3 = Utils.BulkCopyCollectionProperties(copyWeaponLevelList.Models, _weaponLevelList.Models);
 
-                _objectListViews.ForEach(x => x.RefreshAllItems());
+                ObjectListViews.ForEach(x => x.RefreshAllItems());
 
                 // Produce a giant report.
                 copyResults =
