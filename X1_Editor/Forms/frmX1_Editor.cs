@@ -29,27 +29,18 @@ namespace SF3.X1_Editor.Forms
         // Used to display version in the application
         private string Version = "0.34";
 
-        private int _map = 0x00;
+        private MapType _map = MapType.Synbios;
 
-        private int Map
+        private MapType Map
         {
             get => _map;
             set
             {
                 _map = value;
-                tsmiMap_MapSynbios.Checked = (_map == 0x00);
-                tsmiMap_MapMedion.Checked = (_map == 0x04);
-                tsmiMap_MapJulian.Checked = (_map == 0x08);
-                tsmiMap_MapExtra.Checked = (_map == 0x0C);
-
-                switch (_map)
-                {
-                    case 0x00: _maps = "Synbios"; break;
-                    case 0x04: _maps = "Medion";  break;
-                    case 0x08: _maps = "Julian";  break;
-                    case 0x0C: _maps = "Extra";   break;
-                }
-
+                tsmiMap_MapSynbios.Checked = (_map == MapType.Synbios);
+                tsmiMap_MapMedion.Checked = (_map == MapType.Medion);
+                tsmiMap_MapJulian.Checked = (_map == MapType.Julian);
+                tsmiMap_MapExtra.Checked = (_map == MapType.Extra);
                 UpdateTitle();
             }
         }
@@ -80,7 +71,6 @@ namespace SF3.X1_Editor.Forms
         }
 
         private string _scn = "1";
-        private string _maps = "Synbios";
         private string _mapType = "none";
         private string _debug = "off";
 
@@ -358,37 +348,37 @@ namespace SF3.X1_Editor.Forms
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario1;
-            Map = 0x00; //synbios lead by default
+            Map = MapType.Synbios;
         }
 
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario2;
-            Map = 0x04; //medion lead by default
+            Map = MapType.Medion;
         }
 
         private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario3;
-            Map = 0x08; //julian lead by default
+            Map = MapType.Julian;
         }
 
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.PremiumDisk;
-            Map = 0x00; //synbios lead by default
+            Map = MapType.Synbios;
         }
 
         private void tsmiScenario_BTL99_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Other;
-            Map = 0x00; //synbios lead by default
+            Map = MapType.Synbios;
         }
 
-        private void tsmiMap_MapSynbios_Click(object sender, EventArgs e) => Map = 0x00; //map with synbios as lead
-        private void tsmiMap_MapMedion_Click(object sender, EventArgs e) => Map = 0x04; //map with medion as lead
-        private void tsmiMap_MapJulian_Click(object sender, EventArgs e) => Map = 0x08; //map with julian as lead
-        private void tsmiMap_MapExtra_Click(object sender, EventArgs e) => Map = 0x0C; //map with no lead or a extra as lead. also for ruins
+        private void tsmiMap_MapSynbios_Click(object sender, EventArgs e) => Map = MapType.Synbios; //map with synbios as lead
+        private void tsmiMap_MapMedion_Click(object sender, EventArgs e) => Map = MapType.Medion; //map with medion as lead
+        private void tsmiMap_MapJulian_Click(object sender, EventArgs e) => Map = MapType.Julian; //map with julian as lead
+        private void tsmiMap_MapExtra_Click(object sender, EventArgs e) => Map = MapType.Extra; //map with no lead or a extra as lead. also for ruins
 
         private void tsmiMapType_BattleToggle_Click(object sender, EventArgs e) => IsBattle = !IsBattle;
 
@@ -414,7 +404,7 @@ namespace SF3.X1_Editor.Forms
         protected override string MakeTitle()
         {
             return base.MakeTitle() +
-                "            | Current open settings: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _mapType + " | Debug: " + _debug;
+                "            | Current open settings: Scenario: " + _scn + " | Map: " + _map.ToString() + " | MapType: " + _mapType + " | Debug: " + _debug;
         }
     }
 }

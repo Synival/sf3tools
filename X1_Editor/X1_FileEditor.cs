@@ -9,14 +9,14 @@ namespace SF3.X1_Editor
 {
     public class X1_FileEditor : SF3FileEditor, IX1_FileEditor
     {
-        public X1_FileEditor(ScenarioType scenario, int map) : base(scenario)
+        public X1_FileEditor(ScenarioType scenario, MapType map) : base(scenario)
         {
             Map = map;
         }
 
-        private int _map;
+        private MapType _map;
 
-        public int Map
+        public MapType Map
         {
             get => _map;
             set
@@ -29,24 +29,10 @@ namespace SF3.X1_Editor
             }
         }
 
-        // TODO: just use an enum!
-        public string MapString
-        {
-            get
-            {
-                switch (Map)
-                {
-                    case 0x00: return "Synbios";
-                    case 0x04: return "Medion";
-                    case 0x08: return "Julian";
-                    case 0x0C: return "Extra";
-                    default: return "(invalid value)";
-                }
-            }
-        }
+        public int MapOffset => (int) Map;
 
         protected override string BaseTitle => IsLoaded
-            ? base.BaseTitle + " (Map: " + MapString + ")"
+            ? base.BaseTitle + " (Map: " + Map.ToString() + ")"
             : base.BaseTitle;
     }
 }
