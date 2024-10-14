@@ -113,6 +113,11 @@ namespace SF3
         string Filename { get; }
 
         /// <summary>
+        /// The title of the file being modified for display
+        /// </summary>
+        string Title { get; }
+
+        /// <summary>
         /// Event that occurs before a file is opened.
         /// </summary>
         event EventHandler PreLoaded;

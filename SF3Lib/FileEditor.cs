@@ -16,6 +16,8 @@ namespace SF3
 
         public string Filename { get; private set; }
 
+        public virtual string Title => IsLoaded ? Filename : "(no file)";
+
         /// <summary>
         /// Loads a file's binary data for editing.
         /// </summary>
@@ -26,7 +28,7 @@ namespace SF3
             FileStream stream = null;
             try
             {
-                PreLoaded.Invoke(this, new EventArgs());
+                PreLoaded?.Invoke(this, new EventArgs());
 
                 stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
                 data = new byte[stream.Length];
@@ -34,7 +36,7 @@ namespace SF3
                 Filename = filename;
                 stream.Close();
 
-                Loaded.Invoke(this, new EventArgs());
+                Loaded?.Invoke(this, new EventArgs());
             }
             catch (Exception)
             {
@@ -66,13 +68,13 @@ namespace SF3
             FileStream stream = null;
             try
             {
-                PreSaved.Invoke(this, new EventArgs());
+                PreSaved?.Invoke(this, new EventArgs());
 
                 stream = new FileStream(filename, FileMode.Create);
                 stream.Write(data, 0, data.Length);
                 Filename = filename;
 
-                Saved.Invoke(this, new EventArgs());
+                Saved?.Invoke(this, new EventArgs());
             }
             catch (Exception)
             {
@@ -100,12 +102,12 @@ namespace SF3
                 return true;
             }
 
-            PreClosed.Invoke(this, new EventArgs());
+            PreClosed?.Invoke(this, new EventArgs());
 
             data = null;
             Filename = null;
 
-            Closed.Invoke(this, new EventArgs());
+            Closed?.Invoke(this, new EventArgs());
             return true;
         }
 

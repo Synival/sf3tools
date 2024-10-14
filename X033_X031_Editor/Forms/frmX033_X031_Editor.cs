@@ -36,6 +36,8 @@ namespace SF3.X033_X031_Editor.Forms
         // Used to display version in the application
         private string Version = "0.19";
 
+        private string _originalTitle;
+
         private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
 
         private ScenarioType Scenario
@@ -85,9 +87,13 @@ namespace SF3.X033_X031_Editor.Forms
         public frmX033_X031_Editor()
         {
             InitializeComponent();
+
+            _originalTitle = this.Text;
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
+
+            updateText();
         }
 
         private bool initialise()
@@ -140,6 +146,9 @@ namespace SF3.X033_X031_Editor.Forms
             if (openfile.ShowDialog() == DialogResult.OK)
             {
                 _fileEditor = new X033_X031_FileEditor(Scenario);
+                _fileEditor.Loaded += (obj, args) => updateText();
+                _fileEditor.Closed += (obj, args) => updateText();
+
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
@@ -449,6 +458,12 @@ namespace SF3.X033_X031_Editor.Forms
 
             // Show the user a nice report.
             MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyResults);
+        }
+
+        private void updateText()
+        {
+            this.Text = _originalTitle +
+                ((_fileEditor?.IsLoaded == true) ? " - " + _fileEditor.Title : "");
         }
     }
 }

@@ -17,7 +17,10 @@ namespace SF3
             Scenario = scenario;
         }
 
-        /// The scenario/disc/file to edit.
         public ScenarioType Scenario { get; }
+
+        public override string Title => IsLoaded
+            ? Filename + " (" + Scenario.ToString() + ")"
+            : "(no file)";
     }
 }

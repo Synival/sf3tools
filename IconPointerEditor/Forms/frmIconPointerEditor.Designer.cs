@@ -341,7 +341,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmIconPointerEditor";
-            this.Text = "Sf3 Icon pointer Editor          X026 mode: Off";
+            this.Text = "SF3 Icon Pointer Editor";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabItemIcons.ResumeLayout(false);

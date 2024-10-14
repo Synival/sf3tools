@@ -18,6 +18,8 @@ namespace SF3.IconPointerEditor.Forms
         // Used to display version in the application
         private string Version = "0.09";
 
+        private string _originalTitle;
+
         private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
 
         private ScenarioType Scenario
@@ -55,10 +57,14 @@ namespace SF3.IconPointerEditor.Forms
         public frmIconPointerEditor()
         {
             InitializeComponent();
+
+            _originalTitle = this.Text;
             tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             X026 = false;
             _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
+
+            updateText();
         }
 
         private bool initialise()
@@ -94,6 +100,9 @@ namespace SF3.IconPointerEditor.Forms
             if (openfile.ShowDialog() == DialogResult.OK)
             {
                 _fileEditor = new IconPointerFileEditor(Scenario, X026);
+                _fileEditor.Loaded += (obj, args) => updateText();
+                _fileEditor.Closed += (obj, args) => updateText();
+
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
@@ -150,9 +159,8 @@ namespace SF3.IconPointerEditor.Forms
 
         private void updateText()
         {
-            //this.toolStripMenuItem12.Text = "Current Loading info. Map: " + Globals.maps + " Scenario " + Globals.scn + " MapType: " + Globals.battle + " debug: " + Globals.debug;
-            //this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + Globals.fileName + "|          Current Loading info: Scenario: " + Globals.scn + " | Map: " + Globals.maps + " | MapType: " + Globals.battle + " | debug: " + Globals.debug;
-            this.Text = "Sf3 Icon pointer Editor" + "          " + "X026 mode: " + (X026 ? "On" : "Off");
+            this.Text = _originalTitle +
+                ((_fileEditor?.IsLoaded == true) ? " - " + _fileEditor.Title : "");
         }
     }
 }

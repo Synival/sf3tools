@@ -30,6 +30,8 @@ namespace SF3.X013_Editor.Forms
         // Used to display version in the application
         private string Version = "0.17";
 
+        private string _originalTitle;
+
         private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
 
         private ScenarioType Scenario
@@ -66,9 +68,13 @@ namespace SF3.X013_Editor.Forms
         public frmX013_Editor()
         {
             InitializeComponent();
+
+            _originalTitle = this.Text;
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
+
+            updateText();
         }
 
         private bool initialise()
@@ -200,6 +206,9 @@ namespace SF3.X013_Editor.Forms
             if (openfile.ShowDialog() == DialogResult.OK)
             {
                 _fileEditor = new X013_FileEditor(Scenario);
+                _fileEditor.Loaded += (obj, args) => updateText();
+                _fileEditor.Closed += (obj, args) => updateText();
+
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
@@ -251,5 +260,11 @@ namespace SF3.X013_Editor.Forms
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;
         private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
+
+        private void updateText()
+        {
+            this.Text = _originalTitle +
+                ((_fileEditor?.IsLoaded == true) ? " - " + _fileEditor.Title : "");
+        }
     }
 }

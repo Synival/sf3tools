@@ -1113,7 +1113,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmX019_Editor";
-            this.Text = "Sf3 X019 editor";
+            this.Text = "SF3 X019 Editor";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabMonsterTab1.ResumeLayout(false);

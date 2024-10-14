@@ -2585,8 +2585,8 @@ namespace SF3.X1_Editor.Forms
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmX1_Editor";
-            this.Text = "Sf3 X1 editor          |OpenedFile: None|          Current open settings: Scenari" +
-    "o: 1 | Map: Synbios | MapType: none | debug: off";
+            this.Text = "SF3 X1 Editor";
+
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabHeader.ResumeLayout(false);

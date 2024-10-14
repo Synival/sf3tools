@@ -28,6 +28,8 @@ namespace SF3.X1_Editor.Forms
         // Used to display version in the application
         private string Version = "0.34";
 
+        private string _originalTitle;
+
         private ScenarioType _scenario = (ScenarioType)(-1); // uninitialized value
 
         private ScenarioType Scenario
@@ -130,10 +132,14 @@ namespace SF3.X1_Editor.Forms
         public frmX1_Editor()
         {
             InitializeComponent();
+
+            _originalTitle = this.Text;
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             Map = 0x00;
             _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
+
+            updateText();
         }
 
         private bool initialise()
@@ -351,6 +357,9 @@ namespace SF3.X1_Editor.Forms
             if (openfile.ShowDialog() == DialogResult.OK)
             {
                 _fileEditor = new X1_FileEditor(Scenario, Map);
+                _fileEditor.Loaded += (obj, args) => updateText();
+                _fileEditor.Closed += (obj, args) => updateText();
+
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
@@ -466,9 +475,9 @@ namespace SF3.X1_Editor.Forms
 
         private void updateText()
         {
-            //this.toolStripMenuItem12.Text = "Current Loading info. Map: " + _maps + " Scenario " + _scn + " MapType: " + _mapType + " debug: " + _debug;
-            //this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + _fileName + "|          Current Loading info: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _mapType + " | debug: " + _debug;
-            this.Text = "Sf3 X1 editor" + "          " + "|OpenedFile: " + _fileName + "|          Current open settings: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _mapType + " | debug: " + _debug;
+            this.Text = _originalTitle +
+                ((_fileEditor?.IsLoaded == true) ? " - " + _fileEditor.Title : " - (no file open)") +
+                " | Current open settings: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _mapType + " | Debug: " + _debug;
         }
     }
 }
