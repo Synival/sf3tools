@@ -10,10 +10,11 @@ using SF3.Types;
 using SF3.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
+using SF3.Editor.Forms;
 
 namespace SF3.IconPointerEditor.Forms
 {
-    public partial class frmIconPointerEditor : Form
+    public partial class frmIconPointerEditor : EditorForm
     {
         // Used to display version in the application
         private string Version = "0.09";

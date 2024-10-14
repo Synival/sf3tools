@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using SF3.Types;
 using SF3.Exceptions;
 using SF3.Editor.Extensions;
+using SF3.Editor.Forms;
 
 namespace SF3.X033_X031_Editor.Forms
 {
@@ -31,7 +32,7 @@ namespace SF3.X033_X031_Editor.Forms
     using StatDict = Dictionary<StatType, double>;
     using ProbableStatsDict = Dictionary<StatType, ProbableStats>;
 
-    public partial class frmX033_X031_Editor : Form
+    public partial class frmX033_X031_Editor : EditorForm
     {
         // Used to display version in the application
         private string Version = "0.19";

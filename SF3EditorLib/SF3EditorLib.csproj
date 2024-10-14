@@ -73,9 +73,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ObjectListViewExtensions.cs" />
+    <Compile Include="Forms\EditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditorForm.Designer.cs">
+      <DependentUpon>EditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ObjectListView\ObjectListView\ObjectListView2008.csproj">
       <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>

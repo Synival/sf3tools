@@ -9,10 +9,11 @@ using SF3.Types;
 using SF3.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
+using SF3.Editor.Forms;
 
 namespace SF3.X019_Editor.Forms
 {
-    public partial class frmX019_Editor : Form
+    public partial class frmX019_Editor : EditorForm
     {
         // Used to display version in the application
         private string Version = "0.12";
