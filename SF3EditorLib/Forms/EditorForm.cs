@@ -1,4 +1,5 @@
 ﻿using BrightIdeasSoftware;
+using SF3.Types;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,11 +16,38 @@ namespace SF3.Editor.Forms
     /// </summary>
     public partial class EditorForm : Form
     {
+        /// <summary>
+        /// FileEditor open for the current file.
+        /// </summary>
         protected IFileEditor FileEditor { get; set; }
 
+        /// <summary>
+        /// Title of the form set in the designer. Should be set after derived class' InitializeComponent().
+        /// </summary>
         public string BaseTitle { get; protected set; }
 
-        protected List<ObjectListView> ObjectListViews { get; set; }
+        /// <summary>
+        /// All ObjectListView's present in the form. Populated automatically.
+        /// </summary>
+        protected List<ObjectListView> ObjectListViews { get; private set; }
+
+        private ScenarioType _scenario = ScenarioType.Scenario1;
+
+        /// <summary>
+        /// The Scenario set for editing.
+        /// </summary>
+        public ScenarioType Scenario
+        {
+            get => _scenario;
+            set
+            {
+                if (_scenario != value)
+                {
+                    _scenario = value;
+                    ScenarioChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
         public EditorForm()
         {
@@ -45,7 +73,9 @@ namespace SF3.Editor.Forms
         /// The title to set when using UpdateTitle().
         /// </summary>
         /// <returns></returns>
-        protected virtual string MakeTitle() => FileEditor?.EditorTitle(BaseTitle) ?? BaseTitle;
+        protected virtual string MakeTitle() => (FileEditor?.IsLoaded == true)
+            ? FileEditor.EditorTitle(BaseTitle)
+            : BaseTitle;
 
         /// <summary>
         /// Updates the title of the form.
@@ -69,5 +99,10 @@ namespace SF3.Editor.Forms
             FileEditor.CloseFile();
             FileEditor = null;
         }
+
+        /// <summary>
+        /// Triggered when Scenario has a new value.
+        /// </summary>
+        public event EventHandler ScenarioChanged;
     }
 }

@@ -26,21 +26,6 @@ namespace SF3.X002_Editor.Forms
         // Used to display version in the application
         private string Version = "0.20";
 
-        private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
-
-        private ScenarioType Scenario
-        {
-            get => _scenario;
-            set
-            {
-                _scenario = value;
-                tsmiScenario_Scenario1.Checked = (_scenario == ScenarioType.Scenario1);
-                tsmiScenario_Scenario2.Checked = (_scenario == ScenarioType.Scenario2);
-                tsmiScenario_Scenario3.Checked = (_scenario == ScenarioType.Scenario3);
-                tsmiScenario_PremiumDisk.Checked = (_scenario == ScenarioType.PremiumDisk);
-            }
-        }
-
         private ItemList _itemList;
         private SpellList _spellList;
         private PresetList _presetList;
@@ -57,7 +42,17 @@ namespace SF3.X002_Editor.Forms
             BaseTitle = this.Text;
 
             tsmiHelp_Version.Text = "Version " + Version;
-            Scenario = ScenarioType.Scenario1;
+
+            EventHandler onScenarioChanged = (obj, eargs) =>
+            {
+                tsmiScenario_Scenario1.Checked = (Scenario == ScenarioType.Scenario1);
+                tsmiScenario_Scenario2.Checked = (Scenario == ScenarioType.Scenario2);
+                tsmiScenario_Scenario3.Checked = (Scenario == ScenarioType.Scenario3);
+                tsmiScenario_PremiumDisk.Checked = (Scenario == ScenarioType.PremiumDisk);
+            };
+
+            ScenarioChanged += onScenarioChanged;
+            onScenarioChanged(null, EventArgs.Empty);
 
             FinalizeForm();
         }

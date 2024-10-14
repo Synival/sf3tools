@@ -19,21 +19,6 @@ namespace SF3.IconPointerEditor.Forms
         // Used to display version in the application
         private string Version = "0.09";
 
-        private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
-
-        private ScenarioType Scenario
-        {
-            get => _scenario;
-            set
-            {
-                _scenario = value;
-                tsmiScenario_Scenario1.Checked = (_scenario == ScenarioType.Scenario1);
-                tsmiScenario_Scenario2.Checked = (_scenario == ScenarioType.Scenario2);
-                tsmiScenario_Scenario3.Checked = (_scenario == ScenarioType.Scenario3);
-                tsmiScenario_PremiumDisk.Checked = (_scenario == ScenarioType.PremiumDisk);
-            }
-        }
-
         public bool _x026 = false;
 
         private bool X026
@@ -58,6 +43,17 @@ namespace SF3.IconPointerEditor.Forms
             tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             X026 = false;
+
+            EventHandler onScenarioChanged = (obj, eargs) =>
+            {
+                tsmiScenario_Scenario1.Checked = (Scenario == ScenarioType.Scenario1);
+                tsmiScenario_Scenario2.Checked = (Scenario == ScenarioType.Scenario2);
+                tsmiScenario_Scenario3.Checked = (Scenario == ScenarioType.Scenario3);
+                tsmiScenario_PremiumDisk.Checked = (Scenario == ScenarioType.PremiumDisk);
+            };
+
+            ScenarioChanged += onScenarioChanged;
+            onScenarioChanged(null, EventArgs.Empty);
 
             FinalizeForm();
         }

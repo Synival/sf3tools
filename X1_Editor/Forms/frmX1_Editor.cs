@@ -29,33 +29,6 @@ namespace SF3.X1_Editor.Forms
         // Used to display version in the application
         private string Version = "0.34";
 
-        private ScenarioType _scenario = (ScenarioType)(-1); // uninitialized value
-
-        private ScenarioType Scenario
-        {
-            get => _scenario;
-            set
-            {
-                _scenario = value;
-                tsmiScenario_Scenario1.Checked = (_scenario == ScenarioType.Scenario1);
-                tsmiScenario_Scenario2.Checked = (_scenario == ScenarioType.Scenario2);
-                tsmiScenario_Scenario3.Checked = (_scenario == ScenarioType.Scenario3);
-                tsmiScenario_PremiumDisk.Checked = (_scenario == ScenarioType.PremiumDisk);
-                tsmiScenario_BTL99.Checked = (_scenario == ScenarioType.Other);
-
-                switch (_scenario)
-                {
-                    case ScenarioType.Scenario1:   _scn = "1";     break;
-                    case ScenarioType.Scenario2:   _scn = "2";     break;
-                    case ScenarioType.Scenario3:   _scn = "3";     break;
-                    case ScenarioType.PremiumDisk: _scn = "PD";    break;
-                    case ScenarioType.Other:       _scn = "BTL99"; break;
-                }
-
-                UpdateTitle();
-            }
-        }
-
         private int _map = 0x00;
 
         private int Map
@@ -133,6 +106,29 @@ namespace SF3.X1_Editor.Forms
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             Map = 0x00;
+
+            EventHandler onScenarioChanged = (obj, eargs) =>
+            {
+                tsmiScenario_Scenario1.Checked = (Scenario == ScenarioType.Scenario1);
+                tsmiScenario_Scenario2.Checked = (Scenario == ScenarioType.Scenario2);
+                tsmiScenario_Scenario3.Checked = (Scenario == ScenarioType.Scenario3);
+                tsmiScenario_PremiumDisk.Checked = (Scenario == ScenarioType.PremiumDisk);
+                tsmiScenario_BTL99.Checked = (Scenario == ScenarioType.Other);
+
+                switch (Scenario)
+                {
+                    case ScenarioType.Scenario1:   _scn = "1";     break;
+                    case ScenarioType.Scenario2:   _scn = "2";     break;
+                    case ScenarioType.Scenario3:   _scn = "3";     break;
+                    case ScenarioType.PremiumDisk: _scn = "PD";    break;
+                    case ScenarioType.Other:       _scn = "BTL99"; break;
+                }
+
+                UpdateTitle();
+            };
+
+            ScenarioChanged += onScenarioChanged;
+            onScenarioChanged(null, EventArgs.Empty);
 
             FinalizeForm();
         }
