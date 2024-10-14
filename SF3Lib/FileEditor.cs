@@ -62,13 +62,20 @@ namespace SF3
             FileStream stream = null;
             try
             {
+                stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                var newData = new byte[stream.Length];
+                stream.Read(newData, 0, (int)stream.Length);
+                stream.Close();
+
+                if (IsLoaded)
+                {
+                    CloseFile();
+                }
+
                 PreLoaded?.Invoke(this, EventArgs.Empty);
 
-                stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
                 Filename = filename;
-                stream.Close();
+                data = newData;
 
                 UpdateTitle();
                 Loaded?.Invoke(this, EventArgs.Empty);
