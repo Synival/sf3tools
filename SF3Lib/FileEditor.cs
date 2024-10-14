@@ -379,6 +379,8 @@ namespace SF3
             }
         }
 
+        public string EditorTitle(string formTitle) => formTitle + (IsLoaded ? " - " + Title + (IsModified ? "*" : "") : "");
+
         public event EventHandler PreLoaded;
         public event EventHandler Loaded;
         public event EventHandler PreSaved;

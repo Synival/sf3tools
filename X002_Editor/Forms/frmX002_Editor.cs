@@ -233,8 +233,7 @@ namespace SF3.X002_Editor.Forms
 
         private void updateText()
         {
-            this.Text = _originalTitle +
-                ((_fileEditor?.IsLoaded == true) ? " - " + _fileEditor.Title + (_fileEditor.IsModified ? "*" : "") : "");
+            this.Text = _fileEditor?.EditorTitle(_originalTitle) ?? _originalTitle;
         }
     }
 }

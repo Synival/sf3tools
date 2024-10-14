@@ -476,9 +476,8 @@ namespace SF3.X1_Editor.Forms
 
         private void updateText()
         {
-            this.Text = _originalTitle +
-                ((_fileEditor?.IsLoaded == true) ? " - " + _fileEditor.Title + (_fileEditor.IsModified ? "*" : "") : " - (no file open)") +
-                " | Current open settings: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _mapType + " | Debug: " + _debug;
+            this.Text = (_fileEditor?.EditorTitle(_originalTitle) ?? _originalTitle) +
+                "            | Current open settings: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _mapType + " | Debug: " + _debug;
         }
     }
 }

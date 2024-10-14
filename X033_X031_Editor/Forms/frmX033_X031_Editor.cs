@@ -463,8 +463,7 @@ namespace SF3.X033_X031_Editor.Forms
 
         private void updateText()
         {
-            this.Text = _originalTitle +
-                ((_fileEditor?.IsLoaded == true) ? " - " + _fileEditor.Title + (_fileEditor.IsModified ? "*" : "") : "");
+            this.Text = _fileEditor?.EditorTitle(_originalTitle) ?? _originalTitle;
         }
     }
 }

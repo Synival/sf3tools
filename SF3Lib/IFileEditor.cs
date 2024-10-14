@@ -123,6 +123,11 @@ namespace SF3
         string Title { get; }
 
         /// <summary>
+        /// The title used for the editor, with the current file and '*' indicating modification.
+        /// </summary>
+        string EditorTitle(string formTitle);
+
+        /// <summary>
         /// Event that occurs before a file is opened.
         /// </summary>
         event EventHandler PreLoaded;
