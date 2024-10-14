@@ -60,7 +60,6 @@ namespace SF3.IconPointerEditor.Forms
 
         private bool Initialize()
         {
-            tsmiFile_SaveAs.Enabled = true;
             var fileEditor = FileEditor as IIconPointerFileEditor;
 
             _spellIconList = new SpellIconList(fileEditor);
@@ -82,6 +81,7 @@ namespace SF3.IconPointerEditor.Forms
             olvItemIcons.AddObjects(_itemIconList.Models);
             olvSpellIcons.AddObjects(_spellIconList.Models);
 
+            tsmiFile_SaveAs.Enabled = true;
             return true;
         }
 
@@ -104,14 +104,12 @@ namespace SF3.IconPointerEditor.Forms
                     catch (System.Reflection.TargetInvocationException)
                     {
                         //wrong file was selected
-                        CloseFile();
                         MessageBox.Show("Failed to read file:\n" +
                                         "    " + openfile.FileName);
                     }
                     catch (FileEditorReadException)
                     {
                         //wrong file was selected
-                        CloseFile();
                         MessageBox.Show("Data appears corrupt or invalid:\n" +
                                         "    " + openfile.FileName + "\n\n" +
                                         "Is this the correct type of file?");

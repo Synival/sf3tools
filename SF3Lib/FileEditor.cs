@@ -35,7 +35,27 @@ namespace SF3
             }
         }
 
+        /// <summary>
+        /// File opened, with full path.
+        /// </summary>
         public string Filename { get; private set; }
+
+        /// <summary>
+        /// Filename without the path.
+        /// </summary>
+        public string ShortFilename
+        {
+            get
+            {
+                if (Filename == null)
+                {
+                    return null;
+                }
+
+                var words = Filename.Split('\\');
+                return words[Math.Max(0, words.Length - 1)];
+            }
+        }
 
         private string _title;
 
@@ -424,7 +444,7 @@ namespace SF3
         /// This isn't intended to be used directly, but just overridden.
         /// Call UpdateTitle() whenever it looks like the title should be modified.
         /// </summary>
-        protected virtual string BaseTitle => IsLoaded ? Filename : "(no file)";
+        protected virtual string BaseTitle => IsLoaded ? ShortFilename : "(no file)";
 
         /// <summary>
         /// Updates 'Title' and invokes a 'TitleChanged' event if it changed.

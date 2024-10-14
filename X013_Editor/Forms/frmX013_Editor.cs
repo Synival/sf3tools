@@ -69,7 +69,6 @@ namespace SF3.X013_Editor.Forms
 
         private bool Initialize()
         {
-            tsmiFile_SaveAs.Enabled = true;
             var fileEditor = FileEditor as IX013_FileEditor;
 
             _specialsList = new SpecialList(fileEditor);
@@ -187,6 +186,7 @@ namespace SF3.X013_Editor.Forms
             olvWeaponSpellRank.AddObjects(_weaponSpellRankList.Models);
             olvStatusGroups.AddObjects(_statusEffectList.Models);
 
+            tsmiFile_SaveAs.Enabled = true;
             return true;
         }
 
@@ -209,14 +209,12 @@ namespace SF3.X013_Editor.Forms
                     catch (System.Reflection.TargetInvocationException)
                     {
                         //wrong file was selected
-                        CloseFile();
                         MessageBox.Show("Failed to read file:\n" +
                                         "    " + openfile.FileName);
                     }
                     catch (FileEditorReadException)
                     {
                         //wrong file was selected
-                        CloseFile();
                         MessageBox.Show("Data appears corrupt or invalid:\n" +
                                         "    " + openfile.FileName + "\n\n" +
                                         "Is this the correct type of file?");

@@ -82,7 +82,6 @@ namespace SF3.X1_Editor.Forms
         private string _scn = "1";
         private string _maps = "Synbios";
         private string _mapType = "none";
-        private string _fileName = "None";
         private string _debug = "off";
 
         private SlotList _slotList;
@@ -135,8 +134,6 @@ namespace SF3.X1_Editor.Forms
 
         private bool Initialize()
         {
-            tsmiFile_SaveAs.Enabled = true;
-
             int offset = 0;
             int sub = 0;
 
@@ -337,6 +334,7 @@ namespace SF3.X1_Editor.Forms
                 olvTileData.AddObjects(_tileList.Models);
             }
 
+            tsmiFile_SaveAs.Enabled = true;
             return true;
         }
 
@@ -368,16 +366,10 @@ namespace SF3.X1_Editor.Forms
                     catch (FileEditorReadException)
                     {
                         //wrong file was selected
-                        CloseFile();
                         MessageBox.Show("Data appears corrupt or invalid:\n" +
                                         "    " + openfile.FileName + "\n\n" +
                                         "Is this the correct type of file?");
                     }
-
-                    words = openfile.FileName.Split('\\');
-                    lastWord = words[words.Length - 1];
-                    _fileName = lastWord;
-                    UpdateTitle();
                 }
                 else
                 {

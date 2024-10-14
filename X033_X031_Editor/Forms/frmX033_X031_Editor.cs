@@ -88,8 +88,6 @@ namespace SF3.X033_X031_Editor.Forms
 
         private bool Initialize()
         {
-            tsmiFile_SaveAs.Enabled = true;
-            tsmiFile_CopyTablesFrom.Enabled = true;
             var fileEditor = FileEditor as IX033_X031_FileEditor;
 
             _statsList = new StatsList(fileEditor);
@@ -127,6 +125,8 @@ namespace SF3.X033_X031_Editor.Forms
             cbCurveGraphCharacter.DataSource = _statsList.Models;
             cbCurveGraphCharacter.DisplayMember = "Name";
 
+            tsmiFile_SaveAs.Enabled = true;
+            tsmiFile_CopyTablesFrom.Enabled = true;
             return true;
         }
 
@@ -149,14 +149,12 @@ namespace SF3.X033_X031_Editor.Forms
                     catch (System.Reflection.TargetInvocationException)
                     {
                         //wrong file was selected
-                        CloseFile();
                         MessageBox.Show("Failed to read file:\n" +
                                         "    " + openfile.FileName);
                     }
                     catch (FileEditorReadException)
                     {
                         //wrong file was selected
-                        CloseFile();
                         MessageBox.Show("Data appears corrupt or invalid:\n" +
                                         "    " + openfile.FileName + "\n\n" +
                                         "Is this the correct type of file?");

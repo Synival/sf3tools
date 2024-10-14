@@ -44,7 +44,6 @@ namespace SF3.X019_Editor.Forms
 
         private bool Initialize()
         {
-            tsmiFile_SaveAs.Enabled = true;
             var fileEditor = FileEditor as IX019_FileEditor;
 
             _monsterList = new MonsterList(fileEditor);
@@ -62,6 +61,7 @@ namespace SF3.X019_Editor.Forms
             olvMonsterTab4.AddObjects(_monsterList.Models);
             olvMonsterTab5.AddObjects(_monsterList.Models);
 
+            tsmiFile_SaveAs.Enabled = true;
             return true;
         }
 
@@ -84,14 +84,12 @@ namespace SF3.X019_Editor.Forms
                     catch (System.Reflection.TargetInvocationException)
                     {
                         //wrong file was selected
-                        CloseFile();
                         MessageBox.Show("Failed to read file:\n" +
                                         "    " + openfile.FileName);
                     }
                     catch (FileEditorReadException)
                     {
                         //wrong file was selected
-                        CloseFile();
                         MessageBox.Show("Data appears corrupt or invalid:\n" +
                                         "    " + openfile.FileName + "\n\n" +
                                         "Is this the correct type of file?");
