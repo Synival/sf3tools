@@ -132,6 +132,10 @@
             this.lvcMonsterTab5SpellChance6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMonsterTab5Unknown19 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMonsterTab5Unknown20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tsSeparator_File1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabMonsterTab1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab1)).BeginInit();
@@ -162,7 +166,11 @@
             // 
             this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile_Open,
-            this.tsmiFile_SaveAs});
+            this.tsmiFile_SaveAs,
+            this.tsSeparator_File1,
+            this.tsmiFile_Close,
+            this.tsSeparator_File2,
+            this.tsmiFile_Exit});
             this.tsmiFile.Name = "tsmiFile";
             this.tsmiFile.Size = new System.Drawing.Size(37, 20);
             this.tsmiFile.Text = "File";
@@ -170,7 +178,7 @@
             // tsmiFile_Open
             // 
             this.tsmiFile_Open.Name = "tsmiFile_Open";
-            this.tsmiFile_Open.Size = new System.Drawing.Size(114, 22);
+            this.tsmiFile_Open.Size = new System.Drawing.Size(180, 22);
             this.tsmiFile_Open.Text = "Open...";
             this.tsmiFile_Open.Click += new System.EventHandler(this.tsmiFile_Open_Click);
             // 
@@ -178,7 +186,7 @@
             // 
             this.tsmiFile_SaveAs.Enabled = false;
             this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
-            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(114, 22);
+            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(180, 22);
             this.tsmiFile_SaveAs.Text = "Save As...";
             this.tsmiFile_SaveAs.Click += new System.EventHandler(this.tsmiFile_SaveAs_Click);
             // 
@@ -193,7 +201,7 @@
             // tsmiHelp_Version
             // 
             this.tsmiHelp_Version.Name = "tsmiHelp_Version";
-            this.tsmiHelp_Version.Size = new System.Drawing.Size(180, 22);
+            this.tsmiHelp_Version.Size = new System.Drawing.Size(114, 22);
             this.tsmiHelp_Version.Text = "Ver 0.11";
             // 
             // tsmiScenario
@@ -212,40 +220,40 @@
             // tsmiScenario_Scenario1
             // 
             this.tsmiScenario_Scenario1.Name = "tsmiScenario_Scenario1";
-            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(175, 22);
             this.tsmiScenario_Scenario1.Text = "Scenario 1";
             this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.tsmiScenario_Scenario1_Click);
             // 
             // tsmiScenario_Scenario2
             // 
             this.tsmiScenario_Scenario2.Name = "tsmiScenario_Scenario2";
-            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(175, 22);
             this.tsmiScenario_Scenario2.Text = "Scenario 2";
             this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.tsmiScenario_Scenario2_Click);
             // 
             // tsmiScenario_Scenario3
             // 
             this.tsmiScenario_Scenario3.Name = "tsmiScenario_Scenario3";
-            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(175, 22);
             this.tsmiScenario_Scenario3.Text = "Scenario 3";
             this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.tsmiScenario_Scenario3_Click);
             // 
             // tsmiScenario_PremiumDisk
             // 
             this.tsmiScenario_PremiumDisk.Name = "tsmiScenario_PremiumDisk";
-            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(175, 22);
             this.tsmiScenario_PremiumDisk.Text = "Premium Disk";
             this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.tsmiScenario_PremiumDisk_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(172, 6);
             // 
             // tsmiScenario_PremiumDiskX044
             // 
             this.tsmiScenario_PremiumDiskX044.Name = "tsmiScenario_PremiumDiskX044";
-            this.tsmiScenario_PremiumDiskX044.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_PremiumDiskX044.Size = new System.Drawing.Size(175, 22);
             this.tsmiScenario_PremiumDiskX044.Text = "Premium disk X044";
             this.tsmiScenario_PremiumDiskX044.Click += new System.EventHandler(this.tsmiScenario_PremiumDiskX044_Click);
             // 
@@ -1103,6 +1111,31 @@
             this.lvcMonsterTab5Unknown20.Text = "Unknown20";
             this.lvcMonsterTab5Unknown20.Width = 70;
             // 
+            // tsSeparator_File1
+            // 
+            this.tsSeparator_File1.Name = "tsSeparator_File1";
+            this.tsSeparator_File1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // tsmiFile_Close
+            // 
+            this.tsmiFile_Close.Enabled = false;
+            this.tsmiFile_Close.Name = "tsmiFile_Close";
+            this.tsmiFile_Close.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_Close.Text = "Close";
+            this.tsmiFile_Close.Click += new System.EventHandler(this.tsmiFile_Close_Click);
+            // 
+            // tsSeparator_File2
+            // 
+            this.tsSeparator_File2.Name = "tsSeparator_File2";
+            this.tsSeparator_File2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // tsmiFile_Exit
+            // 
+            this.tsmiFile_Exit.Name = "tsmiFile_Exit";
+            this.tsmiFile_Exit.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_Exit.Text = "Exit";
+            this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
+            // 
             // frmX019_Editor
             // 
             this.AllowDrop = true;
@@ -1236,6 +1269,10 @@
         private BrightIdeasSoftware.OLVColumn lvcMonsterTab5Unknown19;
         private BrightIdeasSoftware.OLVColumn lvcMonsterTab5Unknown20;
         private BrightIdeasSoftware.OLVColumn lvcMonsterTab1SpriteID;
+        private System.Windows.Forms.ToolStripSeparator tsSeparator_File1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_Close;
+        private System.Windows.Forms.ToolStripSeparator tsSeparator_File2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_Exit;
     }
 }
 

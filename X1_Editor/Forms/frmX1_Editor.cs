@@ -122,6 +122,7 @@ namespace SF3.X1_Editor.Forms
             FileIsLoadedChanged += (obj, eargs) =>
             {
                 tsmiFile_SaveAs.Enabled = IsLoaded == true;
+                tsmiFile_Close.Enabled = IsLoaded == true;
             };
 
             FinalizeForm();
@@ -336,9 +337,12 @@ namespace SF3.X1_Editor.Forms
             return true;
         }
 
+        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
+
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
+        private void tsmiFile_Close_Click(object sender, EventArgs e) => CloseFile();
+        private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
 
         public static class Globals
         {
