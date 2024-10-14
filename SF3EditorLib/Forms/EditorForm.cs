@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -83,7 +84,12 @@ namespace SF3.Editor.Forms
         /// </summary>
         protected void UpdateTitle()
         {
-            this.Text = MakeTitle();
+            string newTitle = MakeTitle();
+            if (this.Text != newTitle)
+            {
+                this.Text = newTitle;
+                TitleChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>
@@ -132,6 +138,15 @@ namespace SF3.Editor.Forms
             FileEditor = MakeFileEditor();
             FileEditor.TitleChanged += (obj, args) => UpdateTitle();
 
+            FileEditor.PreLoaded += (obj, eargs) => this.PreFileLoaded?.Invoke(this, eargs);
+            FileEditor.Loaded += (obj, eargs) => this.FileLoaded?.Invoke(this, eargs);
+            FileEditor.PreClosed += (obj, eargs) => this.PreFileClosed?.Invoke(this, eargs);
+            FileEditor.Closed += (obj, eargs) => this.FileClosed?.Invoke(this, eargs);
+            FileEditor.PreSaved += (obj, eargs) => this.PreFileSaved?.Invoke(this, eargs);
+            FileEditor.Saved += (obj, eargs) => this.FileSaved?.Invoke(this, eargs);
+            FileEditor.ModifiedChanged += (obj, eargs) => this.FileModifiedChanged?.Invoke(this, eargs);
+            FileEditor.IsLoadedChanged += (obj, eargs) => this.FileIsLoadedChanged?.Invoke(this, eargs);
+
             if (!FileEditor.LoadFile(openfile.FileName))
             {
                 MessageBox.Show("Error trying to load file. It is probably in use by another process.");
@@ -167,5 +182,50 @@ namespace SF3.Editor.Forms
         /// Triggered when Scenario has a new value.
         /// </summary>
         public event EventHandler ScenarioChanged;
+
+        /// <summary>
+        /// Triggered whenever UpdateTitle() makes a change.
+        /// </summary>
+        public event EventHandler TitleChanged;
+
+        /// <summary>
+        /// Triggered before FileEditor loads a file.
+        /// </summary>
+        public event EventHandler PreFileLoaded;
+
+        /// <summary>
+        /// Triggered after FileEditor loads a file.
+        /// </summary>
+        public event EventHandler FileLoaded;
+
+        /// <summary>
+        /// Triggered before FileEditor saves a file.
+        /// </summary>
+        public event EventHandler PreFileSaved;
+
+        /// <summary>
+        /// Triggered after FileEditor saves a file.
+        /// </summary>
+        public event EventHandler FileSaved;
+
+        /// <summary>
+        /// Triggered before FileEditor closes a file.
+        /// </summary>
+        public event EventHandler PreFileClosed;
+
+        /// <summary>
+        /// Triggered after FileEditor closes a file.
+        /// </summary>
+        public event EventHandler FileClosed;
+
+        /// <summary>
+        /// Triggered after FileEditor's modified state has been changed.
+        /// </summary>
+        public event EventHandler FileModifiedChanged;
+
+        /// <summary>
+        /// Triggered after FileEditor's loaded state has been changed.
+        /// </summary>
+        public event EventHandler FileIsLoadedChanged;
     }
 }

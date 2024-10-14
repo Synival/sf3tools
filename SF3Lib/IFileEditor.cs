@@ -166,5 +166,10 @@ namespace SF3
         /// Event that occurs whenever the 'Title' property is changed.
         /// </summary>
         event EventHandler TitleChanged;
+
+        /// <summary>
+        /// Event that occurs whenever the 'IsLoaded' property is changed.
+        /// </summary>
+        event EventHandler IsLoadedChanged;
     }
 }
