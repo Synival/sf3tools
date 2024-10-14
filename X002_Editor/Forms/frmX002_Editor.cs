@@ -26,8 +26,6 @@ namespace SF3.X002_Editor.Forms
         // Used to display version in the application
         private string Version = "0.20";
 
-        private string _originalTitle;
-
         private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
 
         private ScenarioType Scenario
@@ -54,13 +52,12 @@ namespace SF3.X002_Editor.Forms
         private MusicOverrideList _musicOverrideList;
 
         private List<ObjectListView> _objectListViews;
-        private IX002_FileEditor _fileEditor;
 
         public frmX002_Editor()
         {
             InitializeComponent();
 
-            _originalTitle = this.Text;
+            BaseTitle = this.Text;
             tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
@@ -71,64 +68,65 @@ namespace SF3.X002_Editor.Forms
         private bool Initialize()
         {
             tsmiFile_SaveAs.Enabled = true;
+            var fileEditor = FileEditor as IX002_FileEditor;
 
-            _itemList = new ItemList(_fileEditor);
+            _itemList = new ItemList(fileEditor);
             if (!_itemList.Load())
             {
                 MessageBox.Show("Could not load " + _itemList.ResourceFile);
                 return false;
             }
 
-            _spellList = new SpellList(_fileEditor);
+            _spellList = new SpellList(fileEditor);
             if (!_spellList.Load())
             {
                 MessageBox.Show("Could not load " + _spellList.ResourceFile);
                 return false;
             }
 
-            _presetList = new PresetList(_fileEditor);
+            _presetList = new PresetList(fileEditor);
             if (!_presetList.Load())
             {
                 MessageBox.Show("Could not load " + _presetList.ResourceFile);
                 return false;
             }
 
-            _loadList = new LoadList(_fileEditor);
+            _loadList = new LoadList(fileEditor);
             if (!_loadList.Load())
             {
                 MessageBox.Show("Could not load " + _loadList.ResourceFile);
                 return false;
             }
 
-            _statList = new StatList(_fileEditor);
+            _statList = new StatList(fileEditor);
             if (!_statList.Load())
             {
                 MessageBox.Show("Could not load " + _statList.ResourceFile);
                 return false;
             }
 
-            _weaponRankList = new WeaponRankList(_fileEditor);
+            _weaponRankList = new WeaponRankList(fileEditor);
             if (!_weaponRankList.Load())
             {
                 MessageBox.Show("Could not load " + _weaponRankList.ResourceFile);
                 return false;
             }
 
-            _attackResistList = new AttackResistList(_fileEditor);
+            _attackResistList = new AttackResistList(fileEditor);
             if (!_attackResistList.Load())
             {
                 MessageBox.Show("Could not load " + _attackResistList.ResourceFile);
                 return false;
             }
 
-            _warpList = new WarpList(_fileEditor);
+            _warpList = new WarpList(fileEditor);
             if (Scenario == ScenarioType.Scenario1 && !_warpList.Load())
             {
                 MessageBox.Show("Could not load " + _warpList.ResourceFile);
                 return false;
             }
 
-            _musicOverrideList = new MusicOverrideList(_fileEditor);
+            _musicOverrideList = new MusicOverrideList(fileEditor);
             if (!_musicOverrideList.Load())
             {
                 MessageBox.Show("Could not load " + _musicOverrideList.ResourceFile);
@@ -161,10 +159,10 @@ namespace SF3.X002_Editor.Forms
             if (openfile.ShowDialog() == DialogResult.OK)
             {
                 CloseFile();
-                _fileEditor = new X002_FileEditor(Scenario);
-                _fileEditor.TitleChanged += (obj, args) => UpdateTitle();
+                FileEditor = new X002_FileEditor(Scenario);
+                FileEditor.TitleChanged += (obj, args) => UpdateTitle();
 
-                if (_fileEditor.LoadFile(openfile.FileName))
+                if (FileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {
@@ -195,20 +193,20 @@ namespace SF3.X002_Editor.Forms
 
         private void CloseFile()
         {
-            if (_fileEditor == null)
+            if (FileEditor == null)
             {
                 return;
             }
 
             tsmiFile_SaveAs.Enabled = false;
             _objectListViews.ForEach(x => x.ClearObjects());
-            _fileEditor.CloseFile();
-            _fileEditor = null;
+            FileEditor.CloseFile();
+            FileEditor = null;
         }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
         {
-            if (_fileEditor == null)
+            if (FileEditor == null)
             {
                 return;
             }
@@ -217,10 +215,10 @@ namespace SF3.X002_Editor.Forms
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 x002 (.bin)|X002.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            savefile.FileName = Path.GetFileName(_fileEditor.Filename);
+            savefile.FileName = Path.GetFileName(FileEditor.Filename);
             if (savefile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor.SaveFile(savefile.FileName);
+                FileEditor.SaveFile(savefile.FileName);
             }
         }
 
@@ -245,10 +243,5 @@ namespace SF3.X002_Editor.Forms
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;
         private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
-
-        private void UpdateTitle()
-        {
-            this.Text = _fileEditor?.EditorTitle(_originalTitle) ?? _originalTitle;
-        }
     }
 }

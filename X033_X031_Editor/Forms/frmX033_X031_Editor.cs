@@ -37,8 +37,6 @@ namespace SF3.X033_X031_Editor.Forms
         // Used to display version in the application
         private string Version = "0.19";
 
-        private string _originalTitle;
-
         private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
 
         private ScenarioType Scenario
@@ -59,7 +57,6 @@ namespace SF3.X033_X031_Editor.Forms
         private WeaponLevelList _weaponLevelList;
 
         private List<ObjectListView> _objectListViews;
-        private IX033_X031_FileEditor _fileEditor;
 
         public class StatDataPoint
         {
@@ -89,7 +86,7 @@ namespace SF3.X033_X031_Editor.Forms
         {
             InitializeComponent();
 
-            _originalTitle = this.Text;
+            BaseTitle = this.Text;
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
@@ -101,22 +98,23 @@ namespace SF3.X033_X031_Editor.Forms
         {
             tsmiFile_SaveAs.Enabled = true;
             tsmiFile_CopyTablesFrom.Enabled = true;
+            var fileEditor = FileEditor as IX033_X031_FileEditor;
 
-            _statsList = new StatsList(_fileEditor);
+            _statsList = new StatsList(fileEditor);
             if (!_statsList.Load())
             {
                 MessageBox.Show("Could not load " + _statsList.ResourceFile);
                 return false;
             }
 
-            _initialInfoList = new InitialInfoList(_fileEditor);
+            _initialInfoList = new InitialInfoList(fileEditor);
             if (!_initialInfoList.Load())
             {
                 MessageBox.Show("Could not load " + _initialInfoList.ResourceFile);
                 return false;
             }
 
-            _weaponLevelList = new WeaponLevelList(_fileEditor);
+            _weaponLevelList = new WeaponLevelList(fileEditor);
             if (!_weaponLevelList.Load())
             {
                 MessageBox.Show("Could not load " + _weaponLevelList.ResourceFile);
@@ -147,10 +145,10 @@ namespace SF3.X033_X031_Editor.Forms
             if (openfile.ShowDialog() == DialogResult.OK)
             {
                 CloseFile();
-                _fileEditor = new X033_X031_FileEditor(Scenario);
-                _fileEditor.TitleChanged += (obj, args) => UpdateTitle();
+                FileEditor = new X033_X031_FileEditor(Scenario);
+                FileEditor.TitleChanged += (obj, args) => UpdateTitle();
 
-                if (_fileEditor.LoadFile(openfile.FileName))
+                if (FileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {
@@ -181,7 +179,7 @@ namespace SF3.X033_X031_Editor.Forms
 
         private void CloseFile()
         {
-            if (_fileEditor == null)
+            if (FileEditor == null)
             {
                 return;
             }
@@ -189,13 +187,13 @@ namespace SF3.X033_X031_Editor.Forms
             tsmiFile_SaveAs.Enabled = false;
             tsmiFile_CopyTablesFrom.Enabled = false;
             _objectListViews.ForEach(x => x.ClearObjects());
-            _fileEditor.CloseFile();
-            _fileEditor = null;
+            FileEditor.CloseFile();
+            FileEditor = null;
         }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
         {
-            if (_fileEditor == null)
+            if (FileEditor == null)
             {
                 return;
             }
@@ -204,10 +202,10 @@ namespace SF3.X033_X031_Editor.Forms
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 x033 (.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            savefile.FileName = Path.GetFileName(_fileEditor.Filename);
+            savefile.FileName = Path.GetFileName(FileEditor.Filename);
             if (savefile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor.SaveFile(savefile.FileName);
+                FileEditor.SaveFile(savefile.FileName);
             }
         }
 
@@ -378,7 +376,7 @@ namespace SF3.X033_X031_Editor.Forms
 
         private void tsmiFile_CopyTablesFrom_Click(object sender, EventArgs e)
         {
-            if (_fileEditor == null)
+            if (FileEditor == null)
             {
                 return;
             }
@@ -475,11 +473,6 @@ namespace SF3.X033_X031_Editor.Forms
 
             // Show the user a nice report.
             MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyResults);
-        }
-
-        private void UpdateTitle()
-        {
-            this.Text = _fileEditor?.EditorTitle(_originalTitle) ?? _originalTitle;
         }
     }
 }

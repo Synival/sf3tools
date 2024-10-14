@@ -31,8 +31,6 @@ namespace SF3.X013_Editor.Forms
         // Used to display version in the application
         private string Version = "0.17";
 
-        private string _originalTitle;
-
         private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
 
         private ScenarioType Scenario
@@ -64,13 +62,12 @@ namespace SF3.X013_Editor.Forms
         private StatusEffectList _statusEffectList;
 
         private List<ObjectListView> _objectListViews;
-        private IX013_FileEditor _fileEditor;
 
         public frmX013_Editor()
         {
             InitializeComponent();
 
-            _originalTitle = this.Text;
+            BaseTitle = this.Text;
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
@@ -81,99 +78,100 @@ namespace SF3.X013_Editor.Forms
         private bool Initialize()
         {
             tsmiFile_SaveAs.Enabled = true;
+            var fileEditor = FileEditor as IX013_FileEditor;
 
-            _specialsList = new SpecialList(_fileEditor);
+            _specialsList = new SpecialList(fileEditor);
             if (!_specialsList.Load())
             {
                 MessageBox.Show("Could not load " + _specialsList.ResourceFile);
                 return false;
             }
 
-            _supportTypeList = new SupportTypeList(_fileEditor);
+            _supportTypeList = new SupportTypeList(fileEditor);
             if (!_supportTypeList.Load())
             {
                 MessageBox.Show("Could not load " + _supportTypeList.ResourceFile);
                 return false;
             }
 
-            _friendshipExpList = new FriendshipExpList(_fileEditor);
+            _friendshipExpList = new FriendshipExpList(fileEditor);
             if (!_friendshipExpList.Load())
             {
                 MessageBox.Show("Could not load " + _friendshipExpList.ResourceFile);
                 return false;
             }
 
-            _supportStatsList = new SupportStatsList(_fileEditor);
+            _supportStatsList = new SupportStatsList(fileEditor);
             if (!_supportStatsList.Load())
             {
                 MessageBox.Show("Could not load " + _supportStatsList.ResourceFile);
                 return false;
             }
 
-            _soulmateList = new SoulmateList(_fileEditor);
+            _soulmateList = new SoulmateList(fileEditor);
             if (!_soulmateList.Load())
             {
                 MessageBox.Show("Could not load " + _soulmateList.ResourceFile);
                 return false;
             }
 
-            _soulfailList = new SoulfailList(_fileEditor);
+            _soulfailList = new SoulfailList(fileEditor);
             if (!_soulfailList.Load())
             {
                 MessageBox.Show("Could not load " + _soulfailList.ResourceFile);
                 return false;
             }
 
-            _magicBonusList = new MagicBonusList(_fileEditor);
+            _magicBonusList = new MagicBonusList(fileEditor);
             if (!_magicBonusList.Load())
             {
                 MessageBox.Show("Could not load " + _magicBonusList.ResourceFile);
                 return false;
             }
 
-            _critModList = new CritModList(_fileEditor);
+            _critModList = new CritModList(fileEditor);
             if (!_critModList.Load())
             {
                 MessageBox.Show("Could not load " + _critModList.ResourceFile);
                 return false;
             }
 
-            _critrateList = new CritrateList(_fileEditor);
+            _critrateList = new CritrateList(fileEditor);
             if (!_critrateList.Load())
             {
                 MessageBox.Show("Could not load " + _critrateList.ResourceFile);
                 return false;
             }
 
-            _specialChanceList = new SpecialChanceList(_fileEditor);
+            _specialChanceList = new SpecialChanceList(fileEditor);
             if (!_specialChanceList.Load())
             {
                 MessageBox.Show("Could not load " + _specialChanceList.ResourceFile);
                 return false;
             }
 
-            _expLimitList = new ExpLimitList(_fileEditor);
+            _expLimitList = new ExpLimitList(fileEditor);
             if (!_expLimitList.Load())
             {
                 MessageBox.Show("Could not load " + _expLimitList.ResourceFile);
                 return false;
             }
 
-            _healExpList = new HealExpList(_fileEditor);
+            _healExpList = new HealExpList(fileEditor);
             if (!_healExpList.Load())
             {
                 MessageBox.Show("Could not load " + _healExpList.ResourceFile);
                 return false;
             }
 
-            _weaponSpellRankList = new WeaponSpellRankList(_fileEditor);
+            _weaponSpellRankList = new WeaponSpellRankList(fileEditor);
             if (!_weaponSpellRankList.Load())
             {
                 MessageBox.Show("Could not load " + _weaponSpellRankList.ResourceFile);
                 return false;
             }
 
-            _statusEffectList = new StatusEffectList(_fileEditor);
+            _statusEffectList = new StatusEffectList(fileEditor);
             if (!_statusEffectList.Load())
             {
                 MessageBox.Show("Could not load " + _statusEffectList.ResourceFile);
@@ -207,10 +205,10 @@ namespace SF3.X013_Editor.Forms
             if (openfile.ShowDialog() == DialogResult.OK)
             {
                 CloseFile();
-                _fileEditor = new X013_FileEditor(Scenario);
-                _fileEditor.TitleChanged += (obj, args) => UpdateTitle();
+                FileEditor = new X013_FileEditor(Scenario);
+                FileEditor.TitleChanged += (obj, args) => UpdateTitle();
 
-                if (_fileEditor.LoadFile(openfile.FileName))
+                if (FileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {
@@ -241,20 +239,20 @@ namespace SF3.X013_Editor.Forms
 
         private void CloseFile()
         {
-            if (_fileEditor == null)
+            if (FileEditor == null)
             {
                 return;
             }
 
             tsmiFile_SaveAs.Enabled = false;
             _objectListViews.ForEach(x => x.ClearObjects());
-            _fileEditor.CloseFile();
-            _fileEditor = null;
+            FileEditor.CloseFile();
+            FileEditor = null;
         }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
         {
-            if (_fileEditor == null)
+            if (FileEditor == null)
             {
                 return;
             }
@@ -263,10 +261,10 @@ namespace SF3.X013_Editor.Forms
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 x013 (.bin)|X013.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            savefile.FileName = Path.GetFileName(_fileEditor.Filename);
+            savefile.FileName = Path.GetFileName(FileEditor.Filename);
             if (savefile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor.SaveFile(savefile.FileName);
+                FileEditor.SaveFile(savefile.FileName);
             }
         }
 
@@ -276,10 +274,5 @@ namespace SF3.X013_Editor.Forms
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;
         private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
-
-        private void UpdateTitle()
-        {
-            this.Text = _fileEditor?.EditorTitle(_originalTitle) ?? _originalTitle;
-        }
     }
 }

@@ -19,8 +19,6 @@ namespace SF3.IconPointerEditor.Forms
         // Used to display version in the application
         private string Version = "0.09";
 
-        private string _originalTitle;
-
         private ScenarioType _scenario = (ScenarioType) (-1); // uninitialized value
 
         private ScenarioType Scenario
@@ -53,13 +51,12 @@ namespace SF3.IconPointerEditor.Forms
         private ItemIconList _itemIconList;
 
         private List<ObjectListView> _objectListViews;
-        private IIconPointerFileEditor _fileEditor;
 
         public frmIconPointerEditor()
         {
             InitializeComponent();
 
-            _originalTitle = this.Text;
+            BaseTitle = this.Text;
             tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             X026 = false;
@@ -71,15 +68,16 @@ namespace SF3.IconPointerEditor.Forms
         private bool Initialize()
         {
             tsmiFile_SaveAs.Enabled = true;
+            var fileEditor = FileEditor as IIconPointerFileEditor;
 
-            _spellIconList = new SpellIconList(_fileEditor);
+            _spellIconList = new SpellIconList(fileEditor);
             if (!_spellIconList.Load())
             {
                 MessageBox.Show("Could not load " + _spellIconList.ResourceFile);
                 return false;
             }
 
-            _itemIconList = new ItemIconList(_fileEditor);
+            _itemIconList = new ItemIconList(fileEditor);
             if (!_itemIconList.Load())
             {
                 MessageBox.Show("Could not load " + _itemIconList.ResourceFile);
@@ -101,10 +99,10 @@ namespace SF3.IconPointerEditor.Forms
             if (openfile.ShowDialog() == DialogResult.OK)
             {
                 CloseFile();
-                _fileEditor = new IconPointerFileEditor(Scenario, X026);
-                _fileEditor.TitleChanged += (obj, args) => UpdateTitle();
+                FileEditor = new IconPointerFileEditor(Scenario, X026);
+                FileEditor.TitleChanged += (obj, args) => UpdateTitle();
 
-                if (_fileEditor.LoadFile(openfile.FileName))
+                if (FileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {
@@ -135,20 +133,20 @@ namespace SF3.IconPointerEditor.Forms
 
         private void CloseFile()
         {
-            if (_fileEditor == null)
+            if (FileEditor == null)
             {
                 return;
             }
 
             tsmiFile_SaveAs.Enabled = false;
             _objectListViews.ForEach(x => x.ClearObjects());
-            _fileEditor.CloseFile();
-            _fileEditor = null;
+            FileEditor.CloseFile();
+            FileEditor = null;
         }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
         {
-            if (_fileEditor == null)
+            if (FileEditor == null)
             {
                 return;
             }
@@ -157,10 +155,10 @@ namespace SF3.IconPointerEditor.Forms
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 X011* (.bin)|X011.bin|Sf3 X021* (.bin)|X021.bin|Sf3 X026* (.bin)|X026.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            savefile.FileName = Path.GetFileName(_fileEditor.Filename);
+            savefile.FileName = Path.GetFileName(FileEditor.Filename);
             if (savefile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor.SaveFile(savefile.FileName);
+                FileEditor.SaveFile(savefile.FileName);
             }
         }
 
@@ -172,10 +170,5 @@ namespace SF3.IconPointerEditor.Forms
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
 
         private void tsmiHelp_X026Toggle_Click(object sender, EventArgs e) => X026 = !X026;
-
-        private void UpdateTitle()
-        {
-            this.Text = _fileEditor?.EditorTitle(_originalTitle) ?? _originalTitle;
-        }
     }
 }

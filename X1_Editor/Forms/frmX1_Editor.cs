@@ -29,8 +29,6 @@ namespace SF3.X1_Editor.Forms
         // Used to display version in the application
         private string Version = "0.34";
 
-        private string _originalTitle;
-
         private ScenarioType _scenario = (ScenarioType)(-1); // uninitialized value
 
         private ScenarioType Scenario
@@ -128,13 +126,12 @@ namespace SF3.X1_Editor.Forms
         private ArrowList _arrowList;
 
         private List<ObjectListView> _objectListViews;
-        private IX1_FileEditor _fileEditor;
 
         public frmX1_Editor()
         {
             InitializeComponent();
 
-            _originalTitle = this.Text;
+            BaseTitle = this.Text;
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             Map = 0x00;
@@ -177,10 +174,10 @@ namespace SF3.X1_Editor.Forms
                 sub = 0x06060000;
             }
 
-            offset = _fileEditor.GetDouble(offset);
+            offset = FileEditor.GetDouble(offset);
 
             offset = offset - sub; //first pointer
-            offset = _fileEditor.GetDouble(offset);
+            offset = FileEditor.GetDouble(offset);
 
             /*A value higher means a pointer is on the offset, meaning we are in a battle. If it is not a 
               pointer we are at our destination so we know a town is loaded.
@@ -223,84 +220,86 @@ namespace SF3.X1_Editor.Forms
             }    
             else*/
 
-            _slotList = new SlotList(_fileEditor);
+            var fileEditor = FileEditor as IX1_FileEditor;
+
+            _slotList = new SlotList(fileEditor);
             if (IsBattle && !_slotList.Load())
             {
                 MessageBox.Show("Could not load " + _slotList.ResourceFile);
                 return false;
             }
 
-            _headerList = new HeaderList(_fileEditor);
+            _headerList = new HeaderList(fileEditor);
             if (IsBattle && !_headerList.Load())
             {
                 MessageBox.Show("Could not load " + _headerList.ResourceFile);
                 return false;
             }
 
-            _aiList = new AIList(_fileEditor);
+            _aiList = new AIList(fileEditor);
             if (IsBattle && !_aiList.Load())
             {
                 MessageBox.Show("Could not load " + _aiList.ResourceFile);
                 return false;
             }
 
-            _spawnZoneList = new SpawnZoneList(_fileEditor);
+            _spawnZoneList = new SpawnZoneList(fileEditor);
             if (IsBattle && !_spawnZoneList.Load())
             {
                 MessageBox.Show("Could not load " + _spawnZoneList.ResourceFile);
                 return false;
             }
 
-            _battlePointersList = new BattlePointersList(_fileEditor);
+            _battlePointersList = new BattlePointersList(fileEditor);
             if (IsBattle && !_battlePointersList.Load())
             {
                 MessageBox.Show("Could not load " + _battlePointersList.ResourceFile);
                 return false;
             }
 
-            _treasureList = new TreasureList(_fileEditor);
+            _treasureList = new TreasureList(fileEditor);
             if (!_treasureList.Load())
             {
                 MessageBox.Show("Could not load " + _treasureList.ResourceFile);
                 return false;
             }
 
-            _customMovementList = new CustomMovementList(_fileEditor);
+            _customMovementList = new CustomMovementList(fileEditor);
             if (IsBattle && !_customMovementList.Load())
             {
                 MessageBox.Show("Could not load " + _customMovementList.ResourceFile);
                 return false;
             }
 
-            _warpList = new WarpList(_fileEditor);
+            _warpList = new WarpList(fileEditor);
             if (Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_warpList.Load())
             {
                 MessageBox.Show("Could not load " + _warpList.ResourceFile);
                 return false;
             }
 
-            _tileList = new TileList(_fileEditor);
+            _tileList = new TileList(fileEditor);
             if (IsBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_tileList.Load())
             {
                 MessageBox.Show("Could not load " + _tileList.ResourceFile);
                 return false;
             }
 
-            _npcList = new NpcList(_fileEditor);
+            _npcList = new NpcList(fileEditor);
             if (!IsBattle && !_npcList.Load())
             {
                 MessageBox.Show("Could not load " + _npcList.ResourceFile);
                 return false;
             }
 
-            _enterList = new EnterList(_fileEditor);
+            _enterList = new EnterList(fileEditor);
             if (!IsBattle && !_enterList.Load())
             {
                 MessageBox.Show("Could not load " + _enterList.ResourceFile);
                 return false;
             }
 
-            _arrowList = new ArrowList(_fileEditor);
+            _arrowList = new ArrowList(fileEditor);
             if (!IsBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_arrowList.Load())
             {
                 MessageBox.Show("Could not load " + _arrowList.ResourceFile);
@@ -358,10 +357,10 @@ namespace SF3.X1_Editor.Forms
             if (openfile.ShowDialog() == DialogResult.OK)
             {
                 CloseFile();
-                _fileEditor = new X1_FileEditor(Scenario, Map);
-                _fileEditor.TitleChanged += (obj, args) => UpdateTitle();
+                FileEditor = new X1_FileEditor(Scenario, Map);
+                FileEditor.TitleChanged += (obj, args) => UpdateTitle();
 
-                if (_fileEditor.LoadFile(openfile.FileName))
+                if (FileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {
@@ -396,20 +395,20 @@ namespace SF3.X1_Editor.Forms
 
         private void CloseFile()
         {
-            if (_fileEditor == null)
+            if (FileEditor == null)
             {
                 return;
             }
 
             tsmiFile_SaveAs.Enabled = false;
             _objectListViews.ForEach(x => x.ClearObjects());
-            _fileEditor.CloseFile();
-            _fileEditor = null;
+            FileEditor.CloseFile();
+            FileEditor = null;
         }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
         {
-            if (_fileEditor == null)
+            if (FileEditor == null)
             {
                 return;
             }
@@ -418,10 +417,10 @@ namespace SF3.X1_Editor.Forms
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "Sf3 X1* (.bin)|X1.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            savefile.FileName = Path.GetFileName(_fileEditor.Filename);
+            savefile.FileName = Path.GetFileName(FileEditor.Filename);
             if (savefile.ShowDialog() == DialogResult.OK)
             {
-                _fileEditor.SaveFile(savefile.FileName);
+                FileEditor.SaveFile(savefile.FileName);
             }
         }
 
@@ -488,9 +487,9 @@ namespace SF3.X1_Editor.Forms
             UpdateTitle();
         }
 
-        private void UpdateTitle()
+        protected override string MakeTitle()
         {
-            this.Text = (_fileEditor?.EditorTitle(_originalTitle) ?? _originalTitle) +
+            return base.MakeTitle() +
                 "            | Current open settings: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _mapType + " | Debug: " + _debug;
         }
     }
