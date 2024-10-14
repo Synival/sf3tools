@@ -100,9 +100,7 @@ namespace SF3.IconPointerEditor.Forms
             if (openfile.ShowDialog() == DialogResult.OK)
             {
                 _fileEditor = new IconPointerFileEditor(Scenario, X026);
-                _fileEditor.Loaded += (obj, args) => updateText();
-                _fileEditor.Closed += (obj, args) => updateText();
-                _fileEditor.ModifiedChanged += (obj, args) => updateText();
+                _fileEditor.TitleChanged += (obj, args) => updateText();
 
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {

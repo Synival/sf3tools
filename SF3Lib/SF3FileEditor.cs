@@ -19,8 +19,8 @@ namespace SF3
 
         public ScenarioType Scenario { get; }
 
-        public override string Title => IsLoaded
-            ? Filename + " (" + Scenario.ToString() + ")"
-            : "(no file)";
+        protected override string BaseTitle => IsLoaded
+            ? base.BaseTitle + " (" + Scenario.ToString() + ")"
+            : base.BaseTitle;
     }
 }

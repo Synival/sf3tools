@@ -10,6 +10,11 @@ namespace SF3
     /// </summary>
     public class FileEditor : IFileEditor
     {
+        public FileEditor()
+        {
+            _title = BaseTitle;
+        }
+
         private byte[] data = null;
 
         public bool IsLoaded => data != null;
@@ -25,13 +30,27 @@ namespace SF3
                 {
                     _isModified = value;
                     ModifiedChanged?.Invoke(this, EventArgs.Empty);
+                    UpdateTitle();
                 }
             }
         }
 
         public string Filename { get; private set; }
 
-        public virtual string Title => IsLoaded ? Filename : "(no file)";
+        private string _title;
+
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                if (_title != value)
+                {
+                    _title = value;
+                    TitleChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
         /// <summary>
         /// Loads a file's binary data for editing.
@@ -51,6 +70,7 @@ namespace SF3
                 Filename = filename;
                 stream.Close();
 
+                UpdateTitle();
                 Loaded?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception)
@@ -90,6 +110,7 @@ namespace SF3
                 Filename = filename;
 
                 IsModified = false;
+                UpdateTitle();
                 Saved?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception)
@@ -124,6 +145,7 @@ namespace SF3
             Filename = null;
             IsModified = false;
 
+            UpdateTitle();
             Closed?.Invoke(this, EventArgs.Empty);
             return true;
         }
@@ -379,7 +401,7 @@ namespace SF3
             }
         }
 
-        public string EditorTitle(string formTitle) => formTitle + (IsLoaded ? " - " + Title + (IsModified ? "*" : "") : "");
+        public string EditorTitle(string formTitle) => formTitle + (IsLoaded ? " - " + Title : "");
 
         public event EventHandler PreLoaded;
         public event EventHandler Loaded;
@@ -388,5 +410,19 @@ namespace SF3
         public event EventHandler PreClosed;
         public event EventHandler Closed;
         public event EventHandler ModifiedChanged;
+        public event EventHandler TitleChanged;
+
+        /// <summary>
+        /// Creates a new title to be used with UpdateTitle().
+        /// This isn't intended to be used directly, but just overridden.
+        /// Call UpdateTitle() whenever it looks like the title should be modified.
+        /// </summary>
+        protected virtual string BaseTitle => IsLoaded ? Filename : "(no file)";
+
+        /// <summary>
+        /// Updates 'Title' and invokes a 'TitleChanged' event if it changed.
+        /// Call this whenever it looks like the title should be modified.
+        /// </summary>
+        protected void UpdateTitle() => Title = BaseTitle + (IsModified ? "*" : "");
     }
 }

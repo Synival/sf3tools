@@ -16,8 +16,8 @@ namespace SF3.IconPointerEditor
 
         public bool X026 { get; }
 
-        public override string Title => IsLoaded
-            ? base.Title + (X026 ? " (X026)" : "")
-            : base.Title;
+        protected override string BaseTitle => IsLoaded
+            ? base.BaseTitle + (X026 ? " (X026)" : "")
+            : base.BaseTitle;
     }
 }

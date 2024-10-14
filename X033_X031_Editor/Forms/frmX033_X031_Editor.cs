@@ -146,9 +146,7 @@ namespace SF3.X033_X031_Editor.Forms
             if (openfile.ShowDialog() == DialogResult.OK)
             {
                 _fileEditor = new X033_X031_FileEditor(Scenario);
-                _fileEditor.Loaded += (obj, args) => updateText();
-                _fileEditor.Closed += (obj, args) => updateText();
-                _fileEditor.ModifiedChanged += (obj, args) => updateText();
+                _fileEditor.TitleChanged += (obj, args) => updateText();
 
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {

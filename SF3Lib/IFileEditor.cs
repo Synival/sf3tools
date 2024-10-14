@@ -161,5 +161,10 @@ namespace SF3
         /// Event that occurs when the 'Modified' property is changed.
         /// </summary>
         event EventHandler ModifiedChanged;
+
+        /// <summary>
+        /// Event that occurs whenever the 'Title' property is changed.
+        /// </summary>
+        event EventHandler TitleChanged;
     }
 }

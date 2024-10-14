@@ -14,7 +14,20 @@ namespace SF3.X1_Editor
             Map = map;
         }
 
-        public int Map { get; set; }
+        private int _map;
+
+        public int Map
+        {
+            get => _map;
+            set
+            {
+                if (_map != value)
+                {
+                    _map = value;
+                    UpdateTitle();
+                }
+            }
+        }
 
         // TODO: just use an enum!
         public string MapString
@@ -32,8 +45,8 @@ namespace SF3.X1_Editor
             }
         }
 
-        public override string Title => IsLoaded
-            ? base.Title + " (Map: " + MapString + ")"
-            : base.Title;
+        protected override string BaseTitle => IsLoaded
+            ? base.BaseTitle + " (Map: " + MapString + ")"
+            : base.BaseTitle;
     }
 }
