@@ -275,6 +275,7 @@
             this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparator_File3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.tabSpells.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvSpells)).BeginInit();
@@ -355,6 +356,7 @@
             this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiHelp_Version,
             this.tsmiHelp_X031forInCombatEtc,
+            this.tsSeparator_Help1,
             this.tsmiHelp_DebugCurve});
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
@@ -2659,6 +2661,11 @@
             this.tsmiFile_Exit.Text = "Exit";
             this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
             // 
+            // tsSeparator_Help1
+            // 
+            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
+            this.tsSeparator_Help1.Size = new System.Drawing.Size(294, 6);
+            // 
             // frmX033_X031_Editor
             // 
             this.AllowDrop = true;
@@ -2919,6 +2926,7 @@
         private System.Windows.Forms.ToolStripSeparator tsSeparator_File2;
         private System.Windows.Forms.ToolStripSeparator tsSeparator_File3;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_Exit;
+        private System.Windows.Forms.ToolStripSeparator tsSeparator_Help1;
     }
 }
 

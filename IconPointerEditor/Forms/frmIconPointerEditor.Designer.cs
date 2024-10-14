@@ -60,6 +60,7 @@
             this.lvcSpellIconAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellIconOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellIconViewOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.tabItemIcons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvItemIcons)).BeginInit();
@@ -138,6 +139,7 @@
             this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiHelp_Version,
             this.tsmiHelp_OpenInfo,
+            this.tsSeparator_Help1,
             this.tsmiHelp_X026Toggle});
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
@@ -364,6 +366,11 @@
             this.lvcSpellIconViewOffset.Text = "Offset in file for viewing";
             this.lvcSpellIconViewOffset.Width = 130;
             // 
+            // tsSeparator_Help1
+            // 
+            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
+            this.tsSeparator_Help1.Size = new System.Drawing.Size(216, 6);
+            // 
             // frmIconPointerEditor
             // 
             this.AllowDrop = true;
@@ -419,5 +426,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_Close;
         private System.Windows.Forms.ToolStripSeparator tsSeparator_File2;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_Exit;
+        private System.Windows.Forms.ToolStripSeparator tsSeparator_Help1;
     }
 }

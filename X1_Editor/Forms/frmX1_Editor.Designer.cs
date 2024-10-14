@@ -262,6 +262,7 @@ namespace SF3.X1_Editor.Forms
             this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.tabHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).BeginInit();
@@ -345,6 +346,7 @@ namespace SF3.X1_Editor.Forms
             this.tsmiHelp_Version,
             this.tsmiHelp_SelectScenarioThenMap,
             this.tsmiHelp_IfTheTablesEtc,
+            this.tsSeparator_Help1,
             this.tsmiHelp_TreasureDebugToggle});
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
@@ -391,40 +393,40 @@ namespace SF3.X1_Editor.Forms
             // tsmiScenario_Scenario1
             // 
             this.tsmiScenario_Scenario1.Name = "tsmiScenario_Scenario1";
-            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(148, 22);
+            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario1.Text = "Scenario 1";
             this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.tsmiScenario_Scenario1_Click);
             // 
             // tsmiScenario_Scenario2
             // 
             this.tsmiScenario_Scenario2.Name = "tsmiScenario_Scenario2";
-            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(148, 22);
+            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario2.Text = "Scenario 2";
             this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.tsmiScenario_Scenario2_Click);
             // 
             // tsmiScenario_Scenario3
             // 
             this.tsmiScenario_Scenario3.Name = "tsmiScenario_Scenario3";
-            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(148, 22);
+            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario3.Text = "Scenario 3";
             this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.tsmiScenario_Scenario3_Click);
             // 
             // tsmiScenario_PremiumDisk
             // 
             this.tsmiScenario_PremiumDisk.Name = "tsmiScenario_PremiumDisk";
-            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(148, 22);
+            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_PremiumDisk.Text = "Premium Disk";
             this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.tsmiScenario_PremiumDisk_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // tsmiScenario_BTL99
             // 
             this.tsmiScenario_BTL99.Name = "tsmiScenario_BTL99";
-            this.tsmiScenario_BTL99.Size = new System.Drawing.Size(148, 22);
+            this.tsmiScenario_BTL99.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_BTL99.Text = "BTL99";
             this.tsmiScenario_BTL99.Click += new System.EventHandler(this.tsmiScenario_BTL99_Click);
             // 
@@ -442,28 +444,28 @@ namespace SF3.X1_Editor.Forms
             // tsmiMap_MapSynbios
             // 
             this.tsmiMap_MapSynbios.Name = "tsmiMap_MapSynbios";
-            this.tsmiMap_MapSynbios.Size = new System.Drawing.Size(139, 22);
+            this.tsmiMap_MapSynbios.Size = new System.Drawing.Size(180, 22);
             this.tsmiMap_MapSynbios.Text = "mapSynbios";
             this.tsmiMap_MapSynbios.Click += new System.EventHandler(this.tsmiMap_MapSynbios_Click);
             // 
             // tsmiMap_MapMedion
             // 
             this.tsmiMap_MapMedion.Name = "tsmiMap_MapMedion";
-            this.tsmiMap_MapMedion.Size = new System.Drawing.Size(139, 22);
+            this.tsmiMap_MapMedion.Size = new System.Drawing.Size(180, 22);
             this.tsmiMap_MapMedion.Text = "mapMedion";
             this.tsmiMap_MapMedion.Click += new System.EventHandler(this.tsmiMap_MapMedion_Click);
             // 
             // tsmiMap_MapJulian
             // 
             this.tsmiMap_MapJulian.Name = "tsmiMap_MapJulian";
-            this.tsmiMap_MapJulian.Size = new System.Drawing.Size(139, 22);
+            this.tsmiMap_MapJulian.Size = new System.Drawing.Size(180, 22);
             this.tsmiMap_MapJulian.Text = "mapJulian";
             this.tsmiMap_MapJulian.Click += new System.EventHandler(this.tsmiMap_MapJulian_Click);
             // 
             // tsmiMap_MapExtra
             // 
             this.tsmiMap_MapExtra.Name = "tsmiMap_MapExtra";
-            this.tsmiMap_MapExtra.Size = new System.Drawing.Size(139, 22);
+            this.tsmiMap_MapExtra.Size = new System.Drawing.Size(180, 22);
             this.tsmiMap_MapExtra.Text = "mapExtra";
             this.tsmiMap_MapExtra.Click += new System.EventHandler(this.tsmiMap_MapExtra_Click);
             // 
@@ -480,7 +482,7 @@ namespace SF3.X1_Editor.Forms
             // tsmiMapType_BattleToggle
             // 
             this.tsmiMapType_BattleToggle.Name = "tsmiMapType_BattleToggle";
-            this.tsmiMapType_BattleToggle.Size = new System.Drawing.Size(161, 22);
+            this.tsmiMapType_BattleToggle.Size = new System.Drawing.Size(180, 22);
             this.tsmiMapType_BattleToggle.Text = "Battle toggle: on";
             this.tsmiMapType_BattleToggle.Click += new System.EventHandler(this.tsmiMapType_BattleToggle_Click);
             // 
@@ -2608,6 +2610,11 @@ namespace SF3.X1_Editor.Forms
             this.tsmiFile_Exit.Text = "Exit";
             this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
             // 
+            // tsSeparator_Help1
+            // 
+            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
+            this.tsSeparator_Help1.Size = new System.Drawing.Size(365, 6);
+            // 
             // frmX1_Editor
             // 
             this.AllowDrop = true;
@@ -2889,6 +2896,7 @@ namespace SF3.X1_Editor.Forms
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_Close;
         private System.Windows.Forms.ToolStripSeparator tsSeparator_File2;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_Exit;
+        private System.Windows.Forms.ToolStripSeparator tsSeparator_Help1;
     }
 }
 
