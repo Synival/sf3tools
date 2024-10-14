@@ -12,18 +12,24 @@ namespace SF3
     public interface IFileEditor
     {
         /// <summary>
-        /// Loads a file's binary data for editing.
+        /// Loads a file's binary data for editing. Invokes events 'PreLoaded' and 'Loaded'.
         /// </summary>
         /// <param name="filename">The file to load.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
         bool LoadFile(string filename);
 
         /// <summary>
-        /// Saves a file's binary data for editing.
+        /// Saves a file's binary data for editing. Invokes events 'PreSaved' and 'Saved'.
         /// </summary>
         /// <param name="filename">The file to load.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
         bool SaveFile(string filename);
+
+        /// <summary>
+        /// Closes a file if opened. Invokes events 'PreClosed' and 'Closed' if a file is open.
+        /// </summary>
+        /// <returns>'true' if a file was closed, otherwise 'false'.</returns>
+        bool CloseFile();
 
         /// <summary>
         /// Gets the value of a byte at a location.
@@ -97,8 +103,43 @@ namespace SF3
         void SetBit(int location, int bit, bool value);
 
         /// <summary>
+        /// 'True' when the file is loaded.
+        /// </summary>
+        bool IsLoaded { get; }
+
+        /// <summary>
         /// Filename of the file loaded.
         /// </summary>
         string Filename { get; }
+
+        /// <summary>
+        /// Event that occurs before a file is opened.
+        /// </summary>
+        event EventHandler PreLoaded;
+
+        /// <summary>
+        /// Event that occurs when a file is opened.
+        /// </summary>
+        event EventHandler Loaded;
+
+        /// <summary>
+        /// Event that occurs before a file is saved.
+        /// </summary>
+        event EventHandler PreSaved;
+
+        /// <summary>
+        /// Event that occurs when a file is saved.
+        /// </summary>
+        event EventHandler Saved;
+
+        /// <summary>
+        /// Event that occurs before a file is closed.
+        /// </summary>
+        event EventHandler PreClosed;
+
+        /// <summary>
+        /// Event that occurs when a file is closed.
+        /// </summary>
+        event EventHandler Closed;
     }
 }

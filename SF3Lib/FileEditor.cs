@@ -11,6 +11,9 @@ namespace SF3
     public class FileEditor : IFileEditor
     {
         private byte[] data = null;
+
+        public bool IsLoaded => data != null;
+
         public string Filename { get; private set; }
 
         /// <summary>
@@ -23,11 +26,15 @@ namespace SF3
             FileStream stream = null;
             try
             {
+                PreLoaded.Invoke(this, new EventArgs());
+
                 stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
                 data = new byte[stream.Length];
                 stream.Read(data, 0, (int)stream.Length);
                 Filename = filename;
                 stream.Close();
+
+                Loaded.Invoke(this, new EventArgs());
             }
             catch (Exception)
             {
@@ -59,9 +66,13 @@ namespace SF3
             FileStream stream = null;
             try
             {
+                PreSaved.Invoke(this, new EventArgs());
+
                 stream = new FileStream(filename, FileMode.Create);
                 stream.Write(data, 0, data.Length);
                 Filename = filename;
+
+                Saved.Invoke(this, new EventArgs());
             }
             catch (Exception)
             {
@@ -75,6 +86,26 @@ namespace SF3
                 }
             }
 
+            return true;
+        }
+
+        /// <summary>
+        /// Closes a file if opened. Invokes event 'Closed' if a file was closed.
+        /// </summary>
+        /// <returns>'true' on success, even if no file is open.</returns>
+        public bool CloseFile()
+        {
+            if (!IsLoaded)
+            {
+                return true;
+            }
+
+            PreClosed.Invoke(this, new EventArgs());
+
+            data = null;
+            Filename = null;
+
+            Closed.Invoke(this, new EventArgs());
             return true;
         }
 
@@ -291,5 +322,12 @@ namespace SF3
                 data[location] &= (byte)~(1 << (bit - 1));
             }
         }
+
+        public event EventHandler PreLoaded;
+        public event EventHandler Loaded;
+        public event EventHandler PreSaved;
+        public event EventHandler Saved;
+        public event EventHandler PreClosed;
+        public event EventHandler Closed;
     }
 }
