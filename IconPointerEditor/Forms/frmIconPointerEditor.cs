@@ -53,14 +53,13 @@ namespace SF3.IconPointerEditor.Forms
         public frmIconPointerEditor()
         {
             InitializeComponent();
-
             BaseTitle = this.Text;
+
             tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
             X026 = false;
-            ObjectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
 
-            UpdateTitle();
+            FinalizeForm();
         }
 
         private bool Initialize()

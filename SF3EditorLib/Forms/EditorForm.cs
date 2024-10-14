@@ -33,6 +33,15 @@ namespace SF3.Editor.Forms
         }
 
         /// <summary>
+        /// Function to be called after derived class's InitializeComponent() is called.
+        /// </summary>
+        public void FinalizeForm()
+        {
+            ObjectListViews = SF3.Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
+            UpdateTitle();
+        }
+
+        /// <summary>
         /// The title to set when using UpdateTitle().
         /// </summary>
         /// <returns></returns>

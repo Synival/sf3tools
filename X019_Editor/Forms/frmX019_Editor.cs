@@ -39,13 +39,12 @@ namespace SF3.X019_Editor.Forms
         public frmX019_Editor()
         {
             InitializeComponent();
-
             BaseTitle = this.Text;
+
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
-            ObjectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
 
-            UpdateTitle();
+            FinalizeForm();
         }
 
         private bool Initialize()
