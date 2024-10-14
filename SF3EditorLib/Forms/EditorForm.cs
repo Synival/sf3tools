@@ -21,7 +21,7 @@ namespace SF3.Editor.Forms
         /// <summary>
         /// FileEditor open for the current file.
         /// </summary>
-        protected IFileEditor FileEditor { get; set; }
+        protected IFileEditor FileEditor { get; private set; }
 
         /// <summary>
         /// Title of the form set in the designer. Should be set after derived class' InitializeComponent().
@@ -50,6 +50,11 @@ namespace SF3.Editor.Forms
                 }
             }
         }
+
+        /// <summary>
+        /// Is 'true' when a file has been loaded.
+        /// </summary>
+        public bool IsLoaded => FileEditor?.IsLoaded == true;
 
         public EditorForm()
         {
@@ -95,7 +100,7 @@ namespace SF3.Editor.Forms
         /// <summary>
         /// Closes a file if open.
         /// </summary>
-        public virtual void CloseFile()
+        public void CloseFile()
         {
             if (FileEditor == null)
             {

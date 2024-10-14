@@ -64,6 +64,11 @@ namespace SF3.X013_Editor.Forms
             ScenarioChanged += onScenarioChanged;
             onScenarioChanged(null, EventArgs.Empty);
 
+            FileIsLoadedChanged += (obj, eargs) =>
+            {
+                tsmiFile_SaveAs.Enabled = IsLoaded == true;
+            };
+
             FinalizeForm();
         }
 
@@ -190,17 +195,10 @@ namespace SF3.X013_Editor.Forms
             olvWeaponSpellRank.AddObjects(_weaponSpellRankList.Models);
             olvStatusGroups.AddObjects(_statusEffectList.Models);
 
-            tsmiFile_SaveAs.Enabled = true;
             return true;
         }
 
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
-
-        public override void CloseFile()
-        {
-            base.CloseFile();
-            tsmiFile_SaveAs.Enabled = false;
-        }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
         {
