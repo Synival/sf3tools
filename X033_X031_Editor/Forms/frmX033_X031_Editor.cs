@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
-using System.Reflection;
 using System.IO;
 using SF3.X033_X031_Editor.Models.InitialInfos;
 using SF3.X033_X031_Editor.Models.Stats;
 using SF3.X033_X031_Editor.Models.WeaponLevel;
 using BrightIdeasSoftware;
-using System.Linq;
 using System.Collections.Generic;
 using SF3.Types;
 using SF3.Exceptions;
-using System.Runtime.CompilerServices;
+using SF3.Editor.Extensions;
 
 namespace SF3.X033_X031_Editor.Forms
 {
@@ -96,7 +93,7 @@ namespace SF3.X033_X031_Editor.Forms
         private bool initialise()
         {
             tsmiFile_SaveAs.Enabled = true;
-            tsmiFile_CopyTo.Enabled = true;
+            tsmiFile_CopyTablesFrom.Enabled = true;
 
             _statsList = new StatsList(_fileEditor);
             if (!_statsList.Load())
@@ -353,7 +350,7 @@ namespace SF3.X033_X031_Editor.Forms
             }
         }
 
-        private void tsmiFile_CopyTo_Click(object sender, EventArgs e)
+        private void tsmiFile_CopyTablesFrom_Click(object sender, EventArgs e)
         {
             if (_fileEditor == null)
             {
@@ -362,17 +359,17 @@ namespace SF3.X033_X031_Editor.Forms
 
             _objectListViews.ForEach(x => x.FinishCellEdit());
 
-            var saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Title = "Copy To";
-            saveFileDialog.Filter = "SF3 data (X033.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Copy Tables From";
+            openFileDialog.Filter = "SF3 data (X033.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
-            var copyToFilename = saveFileDialog.FileName;
+            var copyFromFilename = openFileDialog.FileName;
 
             var copyFileEditor = new X033_X031_FileEditor(Scenario);
-            if (!copyFileEditor.LoadFile(copyToFilename))
+            if (!copyFileEditor.LoadFile(copyFromFilename))
             {
                 MessageBox.Show("Error trying to load file. It is probably in use by another process.");
                 return;
@@ -403,9 +400,11 @@ namespace SF3.X033_X031_Editor.Forms
                     return;
                 }
 
-                var report1 = Utils.BulkCopyCollectionProperties(_statsList.Models, copyStatsList.Models);
-                var report2 = Utils.BulkCopyCollectionProperties(_initialInfoList.Models, copyInitialInfoList.Models);
-                var report3 = Utils.BulkCopyCollectionProperties(_weaponLevelList.Models, copyWeaponLevelList.Models);
+                var report1 = Utils.BulkCopyCollectionProperties(copyStatsList.Models, _statsList.Models);
+                var report2 = Utils.BulkCopyCollectionProperties(copyInitialInfoList.Models, _initialInfoList.Models);
+                var report3 = Utils.BulkCopyCollectionProperties(copyWeaponLevelList.Models, _weaponLevelList.Models);
+
+                _objectListViews.ForEach(x => x.RefreshAllItems());
 
                 // Produce a giant report.
                 copyResults =
@@ -436,21 +435,15 @@ namespace SF3.X033_X031_Editor.Forms
             {
                 //wrong file was selected
                 MessageBox.Show("Failed to read file:\n" +
-                                "    " + copyToFilename);
+                                "    " + copyFromFilename);
                 return;
             }
             catch (FileEditorReadException)
             {
                 //wrong file was selected
                 MessageBox.Show("Data appears corrupt or invalid:\n" +
-                                "    " + copyToFilename + "\n\n" +
+                                "    " + copyFromFilename + "\n\n" +
                                 "Is this the correct type of file?");
-                return;
-            }
-
-            if (!copyFileEditor.SaveFile(copyToFilename))
-            {
-                MessageBox.Show("Failed to write to " + copyToFilename);
                 return;
             }
 

@@ -55,7 +55,7 @@
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiFile_CopyTo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_CopyTablesFrom = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_X031forInCombatEtc = new System.Windows.Forms.ToolStripMenuItem();
@@ -270,6 +270,7 @@
             this.tabCurveGraph = new System.Windows.Forms.TabPage();
             this.cbCurveGraphCharacter = new System.Windows.Forms.ComboBox();
             this.CurveGraph = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tsSeperator_File = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.tabSpells.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvSpells)).BeginInit();
@@ -307,7 +308,8 @@
             this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile_Open,
             this.tsmiFile_SaveAs,
-            this.tsmiFile_CopyTo});
+            this.tsSeperator_File,
+            this.tsmiFile_CopyTablesFrom});
             this.tsmiFile.Name = "tsmiFile";
             this.tsmiFile.Size = new System.Drawing.Size(37, 20);
             this.tsmiFile.Text = "File";
@@ -315,7 +317,7 @@
             // tsmiFile_Open
             // 
             this.tsmiFile_Open.Name = "tsmiFile_Open";
-            this.tsmiFile_Open.Size = new System.Drawing.Size(114, 22);
+            this.tsmiFile_Open.Size = new System.Drawing.Size(180, 22);
             this.tsmiFile_Open.Text = "Open...";
             this.tsmiFile_Open.Click += new System.EventHandler(this.tsmiFile_Open_Click);
             // 
@@ -323,17 +325,17 @@
             // 
             this.tsmiFile_SaveAs.Enabled = false;
             this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
-            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(114, 22);
+            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(180, 22);
             this.tsmiFile_SaveAs.Text = "Save As...";
             this.tsmiFile_SaveAs.Click += new System.EventHandler(this.tsmiFile_SaveAs_Click);
             // 
-            // tsmiFile_CopyTo
+            // tsmiFile_CopyTablesFrom
             // 
-            this.tsmiFile_CopyTo.Enabled = false;
-            this.tsmiFile_CopyTo.Name = "tsmiFile_CopyTo";
-            this.tsmiFile_CopyTo.Size = new System.Drawing.Size(180, 22);
-            this.tsmiFile_CopyTo.Text = "Copy To...";
-            this.tsmiFile_CopyTo.Click += new System.EventHandler(this.tsmiFile_CopyTo_Click);
+            this.tsmiFile_CopyTablesFrom.Enabled = false;
+            this.tsmiFile_CopyTablesFrom.Name = "tsmiFile_CopyTablesFrom";
+            this.tsmiFile_CopyTablesFrom.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_CopyTablesFrom.Text = "Copy Tables From...";
+            this.tsmiFile_CopyTablesFrom.Click += new System.EventHandler(this.tsmiFile_CopyTablesFrom_Click);
             // 
             // tsmiHelp
             // 
@@ -927,7 +929,7 @@
             this.olvStats.View = System.Windows.Forms.View.Details;
             this.olvStats.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
-            // lvcID
+            // lvcStatsID
             // 
             this.lvcStatsID.AspectName = "ID";
             this.lvcStatsID.AspectToStringFormat = "{0:X}";
@@ -935,21 +937,21 @@
             this.lvcStatsID.Text = "ID";
             this.lvcStatsID.Width = 30;
             // 
-            // lvcAddress
+            // lvcStatsAddress
             // 
             this.lvcStatsAddress.AspectName = "Address";
             this.lvcStatsAddress.AspectToStringFormat = "{0:X}";
             this.lvcStatsAddress.IsEditable = false;
             this.lvcStatsAddress.Text = "Address";
             // 
-            // lvcName
+            // lvcStatsName
             // 
             this.lvcStatsName.AspectName = "Name";
             this.lvcStatsName.IsEditable = false;
             this.lvcStatsName.Text = "nameStatus";
             this.lvcStatsName.Width = 90;
             // 
-            // lvcCharacterID
+            // lvcStatsCharacterID
             // 
             this.lvcStatsCharacterID.AspectName = "CharacterID";
             this.lvcStatsCharacterID.AspectToStringFormat = "{0:X}";
@@ -957,13 +959,13 @@
             this.lvcStatsCharacterID.Text = "characterID";
             this.lvcStatsCharacterID.Width = 80;
             // 
-            // lvcCharacterClass
+            // lvcStatsCharacterClass
             // 
             this.lvcStatsCharacterClass.AspectName = "CharacterClass";
             this.lvcStatsCharacterClass.Text = "Class";
             this.lvcStatsCharacterClass.Width = 150;
             // 
-            // lvcHPPromote
+            // lvcStatsHPPromote
             // 
             this.lvcStatsHPPromote.AspectName = "HPPromote";
             this.lvcStatsHPPromote.AspectToStringFormat = "{0:X}";
@@ -1019,7 +1021,7 @@
             this.lvcStatsHPCurve30_99.Text = "HPLv30/99";
             this.lvcStatsHPCurve30_99.Width = 75;
             // 
-            // lvcMPPromote
+            // lvcStatsMPPromote
             // 
             this.lvcStatsMPPromote.AspectName = "MPPromote";
             this.lvcStatsMPPromote.AspectToStringFormat = "{0:X}";
@@ -1075,7 +1077,7 @@
             this.lvcStatsMPCurve30_99.Text = "MPLv30/99";
             this.lvcStatsMPCurve30_99.Width = 75;
             // 
-            // lvcAtkPromote
+            // lvcStatsAtkPromote
             // 
             this.lvcStatsAtkPromote.AspectName = "AtkPromote";
             this.lvcStatsAtkPromote.AspectToStringFormat = "{0:X}";
@@ -1131,7 +1133,7 @@
             this.lvcStatsAtkCurve30_99.Text = "AtkLv30/99";
             this.lvcStatsAtkCurve30_99.Width = 70;
             // 
-            // lvcDefPromote
+            // lvcStatsDefPromote
             // 
             this.lvcStatsDefPromote.AspectName = "DefPromote";
             this.lvcStatsDefPromote.AspectToStringFormat = "{0:X}";
@@ -1187,7 +1189,7 @@
             this.lvcStatsDefCurve30_99.Text = "DefLv30/99";
             this.lvcStatsDefCurve30_99.Width = 70;
             // 
-            // lvcAgiPromote
+            // lvcStatsAgiPromote
             // 
             this.lvcStatsAgiPromote.AspectName = "AgiPromote";
             this.lvcStatsAgiPromote.AspectToStringFormat = "{0:X}";
@@ -2619,6 +2621,11 @@
             this.CurveGraph.TabIndex = 0;
             this.CurveGraph.Text = "chartCurveGraph";
             // 
+            // tsSeperator_File
+            // 
+            this.tsSeperator_File.Name = "tsSeperator_File";
+            this.tsSeperator_File.Size = new System.Drawing.Size(177, 6);
+            // 
             // frmX033_X031_Editor
             // 
             this.AllowDrop = true;
@@ -2873,7 +2880,8 @@
         private System.Windows.Forms.TabPage tabCurveGraph;
         private System.Windows.Forms.ComboBox cbCurveGraphCharacter;
         private System.Windows.Forms.DataVisualization.Charting.Chart CurveGraph;
-        private System.Windows.Forms.ToolStripMenuItem tsmiFile_CopyTo;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_CopyTablesFrom;
+        private System.Windows.Forms.ToolStripSeparator tsSeperator_File;
     }
 }
 
