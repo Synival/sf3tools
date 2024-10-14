@@ -1,4 +1,5 @@
 ﻿using BrightIdeasSoftware;
+using SF3.Exceptions;
 using SF3.Types;
 using System;
 using System.Collections.Generic;
@@ -98,6 +99,68 @@ namespace SF3.Editor.Forms
             ObjectListViews.ForEach(x => x.ClearObjects());
             FileEditor.CloseFile();
             FileEditor = null;
+        }
+
+        /// <summary>
+        /// File filter for OpenFileDialog(). Must be overridden.
+        /// </summary>
+        protected virtual string OpenFileDialogFilter => throw new NotImplementedException();
+
+        /// <summary>
+        /// Factory method for creating an IFileEditor in OpenFileDialog(). Must be overridden.
+        /// </summary>
+        protected virtual IFileEditor MakeFileEditor() => throw new NotImplementedException();
+
+        /// <summary>
+        /// Function to load data from a file opened with OpenFileDialog(). Must be overridden.
+        /// </summary>
+        protected virtual bool LoadOpenedFile() => throw new NotImplementedException();
+
+        /// <summary>
+        /// Creates an "Open" dialog and, if a file was chosen, opens it, processes its data, and loads it.
+        /// </summary>
+        public bool OpenFileDialog()
+        {
+            OpenFileDialog openfile = new OpenFileDialog();
+            openfile.Filter = OpenFileDialogFilter;
+            if (openfile.ShowDialog() != DialogResult.OK)
+            {
+                return false;
+            }
+
+            CloseFile();
+            FileEditor = MakeFileEditor();
+            FileEditor.TitleChanged += (obj, args) => UpdateTitle();
+
+            if (!FileEditor.LoadFile(openfile.FileName))
+            {
+                MessageBox.Show("Error trying to load file. It is probably in use by another process.");
+                return false;
+            }
+
+            bool success = false;
+            try
+            {
+                success = LoadOpenedFile();
+            }
+            catch (System.Reflection.TargetInvocationException)
+            {
+                success = false;
+            }
+            catch (FileEditorReadException)
+            {
+                success = false;
+            }
+
+            if (!success)
+            {
+                //wrong file was selected
+                MessageBox.Show("Data appears corrupt or invalid:\n" +
+                                "    " + openfile.FileName + "\n\n" +
+                                "Is this the correct type of file?");
+            }
+
+            return true;
         }
 
         /// <summary>

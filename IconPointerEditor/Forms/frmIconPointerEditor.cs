@@ -58,7 +58,11 @@ namespace SF3.IconPointerEditor.Forms
             FinalizeForm();
         }
 
-        private bool Initialize()
+        protected override string OpenFileDialogFilter => "SF3 data (X011*.bin)|X011*.bin|SF3 data (X021*.bin)|X021*.bin|SF3 data (X026*.bin)|X026*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+
+        protected override IFileEditor MakeFileEditor() => new IconPointerFileEditor(Scenario, X026);
+
+        protected override bool LoadOpenedFile()
         {
             var fileEditor = FileEditor as IIconPointerFileEditor;
 
@@ -85,42 +89,7 @@ namespace SF3.IconPointerEditor.Forms
             return true;
         }
 
-        private void tsmiFile_Open_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openfile = new OpenFileDialog();
-            openfile.Filter = "SF3 data (X011*.bin)|X011*.bin|SF3 data (X021*.bin)|X021*.bin|SF3 data (X026*.bin)|X026*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            if (openfile.ShowDialog() == DialogResult.OK)
-            {
-                CloseFile();
-                FileEditor = new IconPointerFileEditor(Scenario, X026);
-                FileEditor.TitleChanged += (obj, args) => UpdateTitle();
-
-                if (FileEditor.LoadFile(openfile.FileName))
-                {
-                    try
-                    {
-                        Initialize();
-                    }
-                    catch (System.Reflection.TargetInvocationException)
-                    {
-                        //wrong file was selected
-                        MessageBox.Show("Failed to read file:\n" +
-                                        "    " + openfile.FileName);
-                    }
-                    catch (FileEditorReadException)
-                    {
-                        //wrong file was selected
-                        MessageBox.Show("Data appears corrupt or invalid:\n" +
-                                        "    " + openfile.FileName + "\n\n" +
-                                        "Is this the correct type of file?");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Error trying to load file. It is probably in use by another process.");
-                }
-            }
-        }
+        private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
 
         public override void CloseFile()
         {
