@@ -54,7 +54,7 @@ namespace SF3.X1_Editor.Forms
                     case ScenarioType.Other:       _scn = "BTL99"; break;
                 }
 
-                updateText();
+                UpdateTitle();
             }
         }
 
@@ -79,7 +79,7 @@ namespace SF3.X1_Editor.Forms
                     case 0x0C: _maps = "Extra";   break;
                 }
 
-                updateText();
+                UpdateTitle();
             }
         }
 
@@ -104,7 +104,7 @@ namespace SF3.X1_Editor.Forms
                     _mapType = "town";
                 }
 
-                updateText();
+                UpdateTitle();
             }
         }
 
@@ -140,10 +140,10 @@ namespace SF3.X1_Editor.Forms
             Map = 0x00;
             _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
 
-            updateText();
+            UpdateTitle();
         }
 
-        private bool initialise()
+        private bool Initialize()
         {
             tsmiFile_SaveAs.Enabled = true;
 
@@ -198,7 +198,7 @@ namespace SF3.X1_Editor.Forms
                 IsBattle = false;
             }
 
-            updateText();
+            UpdateTitle();
 
             //attempt to detect scenario that failed
             /*if (offset > 0x06067fff || offset < 0x0605e000)
@@ -359,13 +359,13 @@ namespace SF3.X1_Editor.Forms
             {
                 CloseFile();
                 _fileEditor = new X1_FileEditor(Scenario, Map);
-                _fileEditor.TitleChanged += (obj, args) => updateText();
+                _fileEditor.TitleChanged += (obj, args) => UpdateTitle();
 
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {
-                        initialise();
+                        Initialize();
                     }
                     catch (System.Reflection.TargetInvocationException)
                     {
@@ -385,7 +385,7 @@ namespace SF3.X1_Editor.Forms
                     words = openfile.FileName.Split('\\');
                     lastWord = words[words.Length - 1];
                     _fileName = lastWord;
-                    updateText();
+                    UpdateTitle();
                 }
                 else
                 {
@@ -485,10 +485,10 @@ namespace SF3.X1_Editor.Forms
                 _debug = "off";
             }
 
-            updateText();
+            UpdateTitle();
         }
 
-        private void updateText()
+        private void UpdateTitle()
         {
             this.Text = (_fileEditor?.EditorTitle(_originalTitle) ?? _originalTitle) +
                 "            | Current open settings: Scenario: " + _scn + " | Map: " + _maps + " | MapType: " + _mapType + " | Debug: " + _debug;

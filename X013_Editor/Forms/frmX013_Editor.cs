@@ -75,10 +75,10 @@ namespace SF3.X013_Editor.Forms
             Scenario = ScenarioType.Scenario1;
             _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
 
-            updateText();
+            UpdateTitle();
         }
 
-        private bool initialise()
+        private bool Initialize()
         {
             tsmiFile_SaveAs.Enabled = true;
 
@@ -208,13 +208,13 @@ namespace SF3.X013_Editor.Forms
             {
                 CloseFile();
                 _fileEditor = new X013_FileEditor(Scenario);
-                _fileEditor.TitleChanged += (obj, args) => updateText();
+                _fileEditor.TitleChanged += (obj, args) => UpdateTitle();
 
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {
-                        initialise();
+                        Initialize();
                     }
                     catch (System.Reflection.TargetInvocationException)
                     {
@@ -277,7 +277,7 @@ namespace SF3.X013_Editor.Forms
         private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
 
-        private void updateText()
+        private void UpdateTitle()
         {
             this.Text = _fileEditor?.EditorTitle(_originalTitle) ?? _originalTitle;
         }

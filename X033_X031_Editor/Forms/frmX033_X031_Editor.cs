@@ -94,10 +94,10 @@ namespace SF3.X033_X031_Editor.Forms
             Scenario = ScenarioType.Scenario1;
             _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
 
-            updateText();
+            UpdateTitle();
         }
 
-        private bool initialise()
+        private bool Initialize()
         {
             tsmiFile_SaveAs.Enabled = true;
             tsmiFile_CopyTablesFrom.Enabled = true;
@@ -148,13 +148,13 @@ namespace SF3.X033_X031_Editor.Forms
             {
                 CloseFile();
                 _fileEditor = new X033_X031_FileEditor(Scenario);
-                _fileEditor.TitleChanged += (obj, args) => updateText();
+                _fileEditor.TitleChanged += (obj, args) => UpdateTitle();
 
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {
-                        initialise();
+                        Initialize();
                     }
                     catch (System.Reflection.TargetInvocationException)
                     {
@@ -477,7 +477,7 @@ namespace SF3.X033_X031_Editor.Forms
             MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyResults);
         }
 
-        private void updateText()
+        private void UpdateTitle()
         {
             this.Text = _fileEditor?.EditorTitle(_originalTitle) ?? _originalTitle;
         }

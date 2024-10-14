@@ -45,7 +45,7 @@ namespace SF3.IconPointerEditor.Forms
             {
                 _x026 = value;
                 tsmiHelp_X026Toggle.Checked = _x026;
-                updateText();
+                UpdateTitle();
             }
         }
 
@@ -65,10 +65,10 @@ namespace SF3.IconPointerEditor.Forms
             X026 = false;
             _objectListViews = Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
 
-            updateText();
+            UpdateTitle();
         }
 
-        private bool initialise()
+        private bool Initialize()
         {
             tsmiFile_SaveAs.Enabled = true;
 
@@ -102,13 +102,13 @@ namespace SF3.IconPointerEditor.Forms
             {
                 CloseFile();
                 _fileEditor = new IconPointerFileEditor(Scenario, X026);
-                _fileEditor.TitleChanged += (obj, args) => updateText();
+                _fileEditor.TitleChanged += (obj, args) => UpdateTitle();
 
                 if (_fileEditor.LoadFile(openfile.FileName))
                 {
                     try
                     {
-                        initialise();
+                        Initialize();
                     }
                     catch (System.Reflection.TargetInvocationException)
                     {
@@ -173,7 +173,7 @@ namespace SF3.IconPointerEditor.Forms
 
         private void tsmiHelp_X026Toggle_Click(object sender, EventArgs e) => X026 = !X026;
 
-        private void updateText()
+        private void UpdateTitle()
         {
             this.Text = _fileEditor?.EditorTitle(_originalTitle) ?? _originalTitle;
         }
