@@ -62,7 +62,22 @@ namespace SF3.X002_Editor.Forms
             FinalizeForm();
         }
 
-        protected override string OpenFileDialogFilter => "SF3 scn3 data (X002.bin)|X002.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+        private void tabMain_Click(object sender, EventArgs e)
+        {
+            olvSpells.ClearObjects();
+            if (_spellList != null)
+            {
+                olvSpells.AddObjects(_spellList.Models);
+            }
+
+            olvStatBoost.ClearObjects();
+            if (_statList != null)
+            {
+                olvStatBoost.AddObjects(_statList.Models);
+            }
+        }
+
+        protected override string FileDialogFilter => "SF3 scn3 data (X002.bin)|X002.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
 
         protected override IFileEditor MakeFileEditor() => new X002_FileEditor(Scenario);
 
@@ -153,41 +168,8 @@ namespace SF3.X002_Editor.Forms
         }
 
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
-
-        private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
-        {
-            if (FileEditor == null)
-            {
-                return;
-            }
-
-            ObjectListViews.ForEach(x => x.FinishCellEdit());
-
-            SaveFileDialog savefile = new SaveFileDialog();
-            savefile.Filter = "Sf3 x002 (.bin)|X002.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            savefile.FileName = Path.GetFileName(FileEditor.Filename);
-            if (savefile.ShowDialog() == DialogResult.OK)
-            {
-                FileEditor.SaveFile(savefile.FileName);
-            }
-        }
-
+        private void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
-
-        private void tabMain_Click(object sender, EventArgs e)
-        {
-            olvSpells.ClearObjects();
-            if (_spellList != null)
-            {
-                olvSpells.AddObjects(_spellList.Models);
-            }
-
-            olvStatBoost.ClearObjects();
-            if (_statList != null)
-            {
-                olvStatBoost.AddObjects(_statList.Models);
-            }
-        }
 
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario1;
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;

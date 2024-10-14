@@ -137,7 +137,7 @@ namespace SF3.X1_Editor.Forms
             FinalizeForm();
         }
 
-        protected override string OpenFileDialogFilter => "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+        protected override string FileDialogFilter => "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
 
         protected override IFileEditor MakeFileEditor() => new X1_FileEditor(Scenario, Map);
 
@@ -347,25 +347,7 @@ namespace SF3.X1_Editor.Forms
         }
 
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
-
-        private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
-        {
-            if (FileEditor == null)
-            {
-                return;
-            }
-
-            ObjectListViews.ForEach(x => x.FinishCellEdit());
-
-            SaveFileDialog savefile = new SaveFileDialog();
-            savefile.Filter = "Sf3 X1* (.bin)|X1.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            savefile.FileName = Path.GetFileName(FileEditor.Filename);
-            if (savefile.ShowDialog() == DialogResult.OK)
-            {
-                FileEditor.SaveFile(savefile.FileName);
-            }
-        }
-
+        private void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
 
         public static class Globals

@@ -92,7 +92,12 @@ namespace SF3.X033_X031_Editor.Forms
             FinalizeForm();
         }
 
-        protected override string OpenFileDialogFilter => "SF3 data (X033.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+        public static class Debugs
+        {
+            public static bool debugs = false;
+        }
+
+        protected override string FileDialogFilter => "SF3 data (X033.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
 
         protected override IFileEditor MakeFileEditor() => new X033_X031_FileEditor(Scenario);
 
@@ -139,31 +144,8 @@ namespace SF3.X033_X031_Editor.Forms
         }
 
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
-
-        private void tsmiFile_SaveAs_Click(object sender, EventArgs e)
-        {
-            if (FileEditor == null)
-            {
-                return;
-            }
-
-            ObjectListViews.ForEach(x => x.FinishCellEdit());
-
-            SaveFileDialog savefile = new SaveFileDialog();
-            savefile.Filter = "Sf3 x033 (.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Sf3 datafile (*.bin)|*.bin|" + "All Files (*.*)|*.*";
-            savefile.FileName = Path.GetFileName(FileEditor.Filename);
-            if (savefile.ShowDialog() == DialogResult.OK)
-            {
-                FileEditor.SaveFile(savefile.FileName);
-            }
-        }
-
+        private void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
-
-        public static class Debugs
-        {
-            public static bool debugs = false;
-        }
 
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario1;
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -98,24 +99,9 @@ namespace SF3.Editor.Forms
         }
 
         /// <summary>
-        /// Closes a file if open.
+        /// File filter for OpenFileDialog() and SaveFileDialog(). Must be overridden.
         /// </summary>
-        public void CloseFile()
-        {
-            if (FileEditor == null)
-            {
-                return;
-            }
-
-            ObjectListViews.ForEach(x => x.ClearObjects());
-            FileEditor.CloseFile();
-            FileEditor = null;
-        }
-
-        /// <summary>
-        /// File filter for OpenFileDialog(). Must be overridden.
-        /// </summary>
-        protected virtual string OpenFileDialogFilter => throw new NotImplementedException();
+        protected virtual string FileDialogFilter => throw new NotImplementedException();
 
         /// <summary>
         /// Factory method for creating an IFileEditor in OpenFileDialog(). Must be overridden.
@@ -133,7 +119,7 @@ namespace SF3.Editor.Forms
         public bool OpenFileDialog()
         {
             OpenFileDialog openfile = new OpenFileDialog();
-            openfile.Filter = OpenFileDialogFilter;
+            openfile.Filter = FileDialogFilter;
             if (openfile.ShowDialog() != DialogResult.OK)
             {
                 return false;
@@ -181,6 +167,45 @@ namespace SF3.Editor.Forms
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// If a file is open, it does nothing. But, if a file IS open,
+        /// it creates an "Save As" dialog and, if a file was chosen, saves open data.
+        /// </summary>
+        public bool SaveFileDialog()
+        {
+            if (FileEditor == null)
+            {
+                return false;
+            }
+
+            ObjectListViews.ForEach(x => x.FinishCellEdit());
+
+            SaveFileDialog savefile = new SaveFileDialog();
+            savefile.Filter = FileDialogFilter;
+            savefile.FileName = Path.GetFileName(FileEditor.Filename);
+            if (savefile.ShowDialog() != DialogResult.OK)
+            {
+                return false;
+            }
+
+            return FileEditor.SaveFile(savefile.FileName);
+        }
+
+        /// <summary>
+        /// Closes a file if open.
+        /// </summary>
+        public void CloseFile()
+        {
+            if (FileEditor == null)
+            {
+                return;
+            }
+
+            ObjectListViews.ForEach(x => x.ClearObjects());
+            FileEditor.CloseFile();
+            FileEditor = null;
         }
 
         /// <summary>
