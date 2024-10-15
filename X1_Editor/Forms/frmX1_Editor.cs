@@ -21,6 +21,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using SF3.Editor.Forms;
+using SF3.Models;
 
 namespace SF3.X1_Editor.Forms
 {
@@ -158,7 +159,7 @@ namespace SF3.X1_Editor.Forms
                 sub = 0x0605e000;
             }
 
-            else if (Scenario == ScenarioType.Other)
+            else if (Scenario == ScenarioType.Other /* BTL99 */)
             {
                 offset = 0x00000018; //btl99 initial pointer
                 sub = 0x06060000;
@@ -213,87 +214,69 @@ namespace SF3.X1_Editor.Forms
             var fileEditor = FileEditor as IX1_FileEditor;
 
             _slotList = new SlotList(fileEditor);
-            if (IsBattle && !_slotList.Load())
-            {
-                MessageBox.Show("Could not load " + _slotList.ResourceFile);
-                return false;
-            }
-
             _headerList = new HeaderList(fileEditor);
-            if (IsBattle && !_headerList.Load())
-            {
-                MessageBox.Show("Could not load " + _headerList.ResourceFile);
-                return false;
-            }
-
             _aiList = new AIList(fileEditor);
-            if (IsBattle && !_aiList.Load())
-            {
-                MessageBox.Show("Could not load " + _aiList.ResourceFile);
-                return false;
-            }
-
             _spawnZoneList = new SpawnZoneList(fileEditor);
-            if (IsBattle && !_spawnZoneList.Load())
-            {
-                MessageBox.Show("Could not load " + _spawnZoneList.ResourceFile);
-                return false;
-            }
-
             _battlePointersList = new BattlePointersList(fileEditor);
-            if (IsBattle && !_battlePointersList.Load())
-            {
-                MessageBox.Show("Could not load " + _battlePointersList.ResourceFile);
-                return false;
-            }
-
-            _treasureList = new TreasureList(fileEditor);
-            if (!_treasureList.Load())
-            {
-                MessageBox.Show("Could not load " + _treasureList.ResourceFile);
-                return false;
-            }
-
             _customMovementList = new CustomMovementList(fileEditor);
-            if (IsBattle && !_customMovementList.Load())
-            {
-                MessageBox.Show("Could not load " + _customMovementList.ResourceFile);
-                return false;
-            }
-
+            _treasureList = new TreasureList(fileEditor);
             _warpList = new WarpList(fileEditor);
-            if (Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_warpList.Load())
-            {
-                MessageBox.Show("Could not load " + _warpList.ResourceFile);
-                return false;
-            }
-
             _tileList = new TileList(fileEditor);
-            if (IsBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_tileList.Load())
-            {
-                MessageBox.Show("Could not load " + _tileList.ResourceFile);
-                return false;
-            }
-
             _npcList = new NpcList(fileEditor);
-            if (!IsBattle && !_npcList.Load())
-            {
-                MessageBox.Show("Could not load " + _npcList.ResourceFile);
-                return false;
-            }
-
             _enterList = new EnterList(fileEditor);
-            if (!IsBattle && !_enterList.Load())
+            _arrowList = new ArrowList(fileEditor);
+
+            // Models in all X1 files
+            var loadLists = new List<IModelArray>()
             {
-                MessageBox.Show("Could not load " + _enterList.ResourceFile);
-                return false;
+                _treasureList,
+            };
+
+            if (Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
+            {
+                loadLists.Add(_warpList);
             }
 
-            _arrowList = new ArrowList(fileEditor);
-            if (!IsBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other && !_arrowList.Load())
+            // Models in only X1 battle files
+            if (IsBattle)
             {
-                MessageBox.Show("Could not load " + _arrowList.ResourceFile);
-                return false;
+                loadLists.AddRange(new List<IModelArray>()
+                {
+                    _slotList,
+                    _headerList,
+                    _aiList,
+                    _spawnZoneList,
+                    _battlePointersList,
+                    _customMovementList,
+                });
+
+                if (Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
+                {
+                    loadLists.Add(_tileList);
+                }
+            }
+            // Models in only X1 town files
+            else
+            {
+                loadLists.AddRange(new List<IModelArray>()
+                {
+                    _npcList,
+                    _enterList,
+                });
+
+                if (Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
+                {
+                    loadLists.Add(_arrowList);
+                }
+            }
+
+            foreach (var list in loadLists)
+            {
+                if (!list.Load())
+                {
+                    MessageBox.Show("Could not load " + list.ResourceFile);
+                    return false;
+                }
             }
 
             ObjectListViews.ForEach(x => x.ClearObjects());

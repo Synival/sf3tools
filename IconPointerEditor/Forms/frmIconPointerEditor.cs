@@ -11,6 +11,7 @@ using SF3.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 using SF3.Editor.Forms;
+using SF3.Models;
 
 namespace SF3.IconPointerEditor.Forms
 {
@@ -73,17 +74,21 @@ namespace SF3.IconPointerEditor.Forms
             var fileEditor = FileEditor as IIconPointerFileEditor;
 
             _spellIconList = new SpellIconList(fileEditor);
-            if (!_spellIconList.Load())
-            {
-                MessageBox.Show("Could not load " + _spellIconList.ResourceFile);
-                return false;
-            }
-
             _itemIconList = new ItemIconList(fileEditor);
-            if (!_itemIconList.Load())
+
+            var loadLists = new List<IModelArray>
             {
-                MessageBox.Show("Could not load " + _itemIconList.ResourceFile);
-                return false;
+                _spellIconList,
+                _itemIconList,
+            };
+
+            foreach (var list in loadLists)
+            {
+                if (!list.Load())
+                {
+                    MessageBox.Show("Could not load " + list.ResourceFile);
+                    return false;
+                }
             }
 
             ObjectListViews.ForEach(x => x.ClearObjects());

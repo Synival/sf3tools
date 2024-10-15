@@ -18,6 +18,7 @@ using SF3.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 using SF3.Editor.Forms;
+using SF3.Models;
 
 namespace SF3.X002_Editor.Forms
 {
@@ -87,66 +88,39 @@ namespace SF3.X002_Editor.Forms
             var fileEditor = FileEditor as IX002_FileEditor;
 
             _itemList = new ItemList(fileEditor);
-            if (!_itemList.Load())
-            {
-                MessageBox.Show("Could not load " + _itemList.ResourceFile);
-                return false;
-            }
-
             _spellList = new SpellList(fileEditor);
-            if (!_spellList.Load())
-            {
-                MessageBox.Show("Could not load " + _spellList.ResourceFile);
-                return false;
-            }
-
             _presetList = new PresetList(fileEditor);
-            if (!_presetList.Load())
-            {
-                MessageBox.Show("Could not load " + _presetList.ResourceFile);
-                return false;
-            }
-
             _loadList = new LoadList(fileEditor);
-            if (!_loadList.Load())
-            {
-                MessageBox.Show("Could not load " + _loadList.ResourceFile);
-                return false;
-            }
-
             _statList = new StatList(fileEditor);
-            if (!_statList.Load())
-            {
-                MessageBox.Show("Could not load " + _statList.ResourceFile);
-                return false;
-            }
-
             _weaponRankList = new WeaponRankList(fileEditor);
-            if (!_weaponRankList.Load())
-            {
-                MessageBox.Show("Could not load " + _weaponRankList.ResourceFile);
-                return false;
-            }
-
             _attackResistList = new AttackResistList(fileEditor);
-            if (!_attackResistList.Load())
-            {
-                MessageBox.Show("Could not load " + _attackResistList.ResourceFile);
-                return false;
-            }
-
-            _warpList = new WarpList(fileEditor);
-            if (Scenario == ScenarioType.Scenario1 && !_warpList.Load())
-            {
-                MessageBox.Show("Could not load " + _warpList.ResourceFile);
-                return false;
-            }
-
             _musicOverrideList = new MusicOverrideList(fileEditor);
-            if (!_musicOverrideList.Load())
+            _warpList = new WarpList(fileEditor);
+
+            var loadLists = new List<IModelArray>()
             {
-                MessageBox.Show("Could not load " + _musicOverrideList.ResourceFile);
-                return false;
+                _itemList,
+                _spellList,
+                _presetList,
+                _loadList,
+                _statList,
+                _weaponRankList,
+                _attackResistList,
+                _musicOverrideList,
+            };
+
+            if (Scenario == ScenarioType.Scenario1)
+            {
+                loadLists.Add(_warpList);
+            }
+
+            foreach (var list in loadLists)
+            {
+                if (!list.Load())
+                {
+                    MessageBox.Show("Could not load " + list.ResourceFile);
+                    return false;
+                }
             }
 
             ObjectListViews.ForEach(x => x.ClearObjects());

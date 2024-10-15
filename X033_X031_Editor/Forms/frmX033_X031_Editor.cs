@@ -10,6 +10,7 @@ using SF3.Types;
 using SF3.Exceptions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
+using SF3.Models;
 
 namespace SF3.X033_X031_Editor.Forms
 {
@@ -107,24 +108,23 @@ namespace SF3.X033_X031_Editor.Forms
             var fileEditor = FileEditor as IX033_X031_FileEditor;
 
             _statsList = new StatsList(fileEditor);
-            if (!_statsList.Load())
-            {
-                MessageBox.Show("Could not load " + _statsList.ResourceFile);
-                return false;
-            }
-
             _initialInfoList = new InitialInfoList(fileEditor);
-            if (!_initialInfoList.Load())
-            {
-                MessageBox.Show("Could not load " + _initialInfoList.ResourceFile);
-                return false;
-            }
-
             _weaponLevelList = new WeaponLevelList(fileEditor);
-            if (!_weaponLevelList.Load())
+
+            var loadLists = new List<IModelArray>()
             {
-                MessageBox.Show("Could not load " + _weaponLevelList.ResourceFile);
-                return false;
+                _statsList,
+                _initialInfoList,
+                _weaponLevelList,
+            };
+
+            foreach (var list in loadLists)
+            {
+                if (!list.Load())
+                {
+                    MessageBox.Show("Could not load " + list.ResourceFile);
+                    return false;
+                }
             }
 
             ObjectListViews.ForEach(x => x.ClearObjects());

@@ -26,7 +26,6 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
                 {
                     offset = 0x08f0; //scn1 initial pointer
                     sub = 0x06078000;
-                    //MessageBox.Show("Could not load Resources/itemList.xml.");
                 }
                 else
                 {

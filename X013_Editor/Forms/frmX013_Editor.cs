@@ -23,6 +23,7 @@ using SF3.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 using SF3.Editor.Forms;
+using SF3.Models;
 
 namespace SF3.X013_Editor.Forms
 {
@@ -82,101 +83,45 @@ namespace SF3.X013_Editor.Forms
             var fileEditor = FileEditor as IX013_FileEditor;
 
             _specialsList = new SpecialList(fileEditor);
-            if (!_specialsList.Load())
-            {
-                MessageBox.Show("Could not load " + _specialsList.ResourceFile);
-                return false;
-            }
-
             _supportTypeList = new SupportTypeList(fileEditor);
-            if (!_supportTypeList.Load())
-            {
-                MessageBox.Show("Could not load " + _supportTypeList.ResourceFile);
-                return false;
-            }
-
             _friendshipExpList = new FriendshipExpList(fileEditor);
-            if (!_friendshipExpList.Load())
-            {
-                MessageBox.Show("Could not load " + _friendshipExpList.ResourceFile);
-                return false;
-            }
-
             _supportStatsList = new SupportStatsList(fileEditor);
-            if (!_supportStatsList.Load())
-            {
-                MessageBox.Show("Could not load " + _supportStatsList.ResourceFile);
-                return false;
-            }
-
             _soulmateList = new SoulmateList(fileEditor);
-            if (!_soulmateList.Load())
-            {
-                MessageBox.Show("Could not load " + _soulmateList.ResourceFile);
-                return false;
-            }
-
             _soulfailList = new SoulfailList(fileEditor);
-            if (!_soulfailList.Load())
-            {
-                MessageBox.Show("Could not load " + _soulfailList.ResourceFile);
-                return false;
-            }
-
             _magicBonusList = new MagicBonusList(fileEditor);
-            if (!_magicBonusList.Load())
-            {
-                MessageBox.Show("Could not load " + _magicBonusList.ResourceFile);
-                return false;
-            }
-
             _critModList = new CritModList(fileEditor);
-            if (!_critModList.Load())
-            {
-                MessageBox.Show("Could not load " + _critModList.ResourceFile);
-                return false;
-            }
-
             _critrateList = new CritrateList(fileEditor);
-            if (!_critrateList.Load())
-            {
-                MessageBox.Show("Could not load " + _critrateList.ResourceFile);
-                return false;
-            }
-
             _specialChanceList = new SpecialChanceList(fileEditor);
-            if (!_specialChanceList.Load())
-            {
-                MessageBox.Show("Could not load " + _specialChanceList.ResourceFile);
-                return false;
-            }
-
             _expLimitList = new ExpLimitList(fileEditor);
-            if (!_expLimitList.Load())
-            {
-                MessageBox.Show("Could not load " + _expLimitList.ResourceFile);
-                return false;
-            }
-
             _healExpList = new HealExpList(fileEditor);
-            if (!_healExpList.Load())
-            {
-                MessageBox.Show("Could not load " + _healExpList.ResourceFile);
-                return false;
-            }
-
             _weaponSpellRankList = new WeaponSpellRankList(fileEditor);
-            if (!_weaponSpellRankList.Load())
-            {
-                MessageBox.Show("Could not load " + _weaponSpellRankList.ResourceFile);
-                return false;
-            }
-
             _statusEffectList = new StatusEffectList(fileEditor);
-            if (!_statusEffectList.Load())
+
+            var loadLists = new List<IModelArray>()
             {
-                MessageBox.Show("Could not load " + _statusEffectList.ResourceFile);
-                return false;
+                _specialsList,
+                _supportTypeList,
+                _friendshipExpList,
+                _supportStatsList,
+                _soulmateList,
+                _soulfailList,
+                _magicBonusList,
+                _critModList,
+                _critrateList,
+                _specialChanceList,
+                _expLimitList,
+                _healExpList,
+                _weaponSpellRankList,
+                _statusEffectList,
+            };
+
+            foreach (var list in loadLists)
+            {
+                if (!list.Load())
+                {
+                    MessageBox.Show("Could not load " + list.ResourceFile);
+                    return false;
+                }
             }
 
             ObjectListViews.ForEach(x => x.ClearObjects());

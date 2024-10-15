@@ -43,7 +43,6 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
                 {
                     offset = 0x0a30; //scn1 initial pointer
                     sub = 0x06078000;
-                    //MessageBox.Show("Could not load Resources/itemList.xml.");
                 }
                 else
                 {
