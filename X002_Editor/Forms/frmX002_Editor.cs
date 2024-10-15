@@ -1,21 +1,8 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
-using System.Reflection;
-using System.IO;
-using SF3.X002_Editor.Models.Spells;
-using SF3.X002_Editor.Models.Presets;
-using SF3.X002_Editor.Models.Items;
-using SF3.X002_Editor.Models.Loading;
-using SF3.X002_Editor.Models.StatBoost;
-using SF3.X002_Editor.Models.WeaponRank;
-using SF3.X002_Editor.Models.AttackResist;
-using SF3.X002_Editor.Models.Warps;
-using SF3.X002_Editor.Models.MusicOverride;
 using BrightIdeasSoftware;
 using SF3.Types;
 using System.Collections.Generic;
-using System.Linq;
 using SF3.Editor.Forms;
 using SF3.Models;
 using SF3.Editor.Extensions;
@@ -27,6 +14,8 @@ namespace SF3.X002_Editor.Forms
     {
         // Used to display version in the application
         private string Version = "0.20";
+
+        new public IX002_FileEditor FileEditor => base.FileEditor as IX002_FileEditor;
 
         public frmX002_Editor()
         {
@@ -58,16 +47,15 @@ namespace SF3.X002_Editor.Forms
         private void tabMain_Click(object sender, EventArgs e)
         {
             olvSpells.ClearObjects();
-            var fileEditor = FileEditor as IX002_FileEditor;
-            if (fileEditor?.SpellList != null)
+            if (FileEditor?.SpellList != null)
             {
-                olvSpells.AddObjects(fileEditor.SpellList.Models);
+                olvSpells.AddObjects(FileEditor.SpellList.Models);
             }
 
             olvStatBoost.ClearObjects();
-            if (fileEditor?.StatList != null)
+            if (FileEditor?.StatList != null)
             {
-                olvStatBoost.AddObjects(fileEditor.StatList.Models);
+                olvStatBoost.AddObjects(FileEditor.StatList.Models);
             }
         }
 
@@ -77,18 +65,16 @@ namespace SF3.X002_Editor.Forms
 
         protected override bool LoadOpenedFile()
         {
-            var fileEditor = FileEditor as IX002_FileEditor;
-
             var loadLists = new List<IModelArray>()
             {
-                fileEditor.ItemList,
-                fileEditor.SpellList,
-                fileEditor.PresetList,
-                fileEditor.LoadList,
-                fileEditor.StatList,
-                fileEditor.WeaponRankList,
-                fileEditor.AttackResistList,
-                fileEditor.MusicOverrideList,
+                FileEditor.ItemList,
+                FileEditor.SpellList,
+                FileEditor.PresetList,
+                FileEditor.LoadList,
+                FileEditor.StatList,
+                FileEditor.WeaponRankList,
+                FileEditor.AttackResistList,
+                FileEditor.MusicOverrideList,
             };
 
             foreach (var list in loadLists)
@@ -102,17 +88,17 @@ namespace SF3.X002_Editor.Forms
 
             ObjectListViews.ForEach(x => x.ClearObjects());
 
-            olvItems.AddObjects(fileEditor.ItemList.Models);
-            olvSpells.AddObjects(fileEditor.SpellList.Models);
-            olvPreset.AddObjects(fileEditor.PresetList.Models);
-            olvLoaded.AddObjects(fileEditor.LoadList.Models);
-            olvStatBoost.AddObjects(fileEditor.StatList.Models);
-            olvWeaponRankAttack.AddObjects(fileEditor.WeaponRankList.Models);
-            olvAttackResist.AddObjects(fileEditor.AttackResistList.Models);
-            olvLoadedOverride.AddObjects(fileEditor.MusicOverrideList.Models);
+            olvItems.AddObjects(FileEditor.ItemList.Models);
+            olvSpells.AddObjects(FileEditor.SpellList.Models);
+            olvPreset.AddObjects(FileEditor.PresetList.Models);
+            olvLoaded.AddObjects(FileEditor.LoadList.Models);
+            olvStatBoost.AddObjects(FileEditor.StatList.Models);
+            olvWeaponRankAttack.AddObjects(FileEditor.WeaponRankList.Models);
+            olvAttackResist.AddObjects(FileEditor.AttackResistList.Models);
+            olvLoadedOverride.AddObjects(FileEditor.MusicOverrideList.Models);
 
             if (!tabMain.PopulateAndShowTabs(new List<PopulateAndShowTabConfig>() {
-                new PopulateAndShowTabConfig(Scenario == ScenarioType.Scenario1, tabWarpTable, olvWarpTable, fileEditor.WarpList)
+                new PopulateAndShowTabConfig(Scenario == ScenarioType.Scenario1, tabWarpTable, olvWarpTable, FileEditor.WarpList)
             }))
             {
                 return false;
