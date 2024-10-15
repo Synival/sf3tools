@@ -6,10 +6,10 @@ using System.IO;
 using SF3.X019_Editor.Models.Monsters;
 using BrightIdeasSoftware;
 using SF3.Types;
-using SF3.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 using SF3.Editor.Forms;
+using SF3.Editor.Extensions;
 
 namespace SF3.X019_Editor.Forms
 {
@@ -74,7 +74,7 @@ namespace SF3.X019_Editor.Forms
             return true;
         }
 
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
+        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
 
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();

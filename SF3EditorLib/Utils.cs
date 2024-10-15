@@ -1,5 +1,4 @@
-﻿using BrightIdeasSoftware;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
@@ -21,39 +20,6 @@ namespace SF3.Editor
             comboBox.DisplayMember = "Value";
             comboBox.ValueMember = "Key";
             return comboBox;
-        }
-
-        /// <summary>
-        /// Adds some extra functionality to the Control created when editing an ObjectListView cell.
-        /// </summary>
-        /// <param name="olv">ObjectListView reference</param>
-        /// <param name="e">CellEditEventArgs reference</param>
-        public static void EnhanceOlvCellEditControl(ObjectListView olv, CellEditEventArgs e)
-        {
-            // Ensure that strings displayed in hex format are edited in hex format.
-            if (e.Column.AspectToStringFormat == "{0:X}")
-            {
-                NumericUpDown control = (NumericUpDown)e.Control;
-                control.Hexadecimal = true;
-            }
-
-            // Enhance ComboBox's so values are updated any time the dropdown is closed, unless from hitting "escape".
-            if (e.Control is ComboBox)
-            {
-                ComboBox cb = e.Control as ComboBox;
-                cb.KeyDown += (s, e2) =>
-                {
-                    if (e2.KeyCode == Keys.Escape)
-                    {
-                        cb.SelectedValue = e.Column.GetValue(e.RowObject);
-                    }
-                };
-                cb.DropDownClosed += (s, e2) =>
-                {
-                    e.Column.PutValue(e.RowObject, cb.SelectedValue);
-                    olv.RefreshItem(e.ListViewItem);
-                };
-            }
         }
     }
 }

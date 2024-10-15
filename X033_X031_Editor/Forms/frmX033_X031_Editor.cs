@@ -144,7 +144,7 @@ namespace SF3.X033_X031_Editor.Forms
             return true;
         }
 
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => Editor.Utils.EnhanceOlvCellEditControl(sender as ObjectListView, e);
+        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
 
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();
