@@ -107,11 +107,11 @@ namespace SF3.X1_Editor.Forms
 
                 switch (Scenario)
                 {
-                    case ScenarioType.Scenario1:   _scn = "1";     break;
-                    case ScenarioType.Scenario2:   _scn = "2";     break;
-                    case ScenarioType.Scenario3:   _scn = "3";     break;
-                    case ScenarioType.PremiumDisk: _scn = "PD";    break;
-                    case ScenarioType.Other:       _scn = "BTL99"; break;
+                    case ScenarioType.Scenario1: _scn = "1"; break;
+                    case ScenarioType.Scenario2: _scn = "2"; break;
+                    case ScenarioType.Scenario3: _scn = "3"; break;
+                    case ScenarioType.PremiumDisk: _scn = "PD"; break;
+                    case ScenarioType.Other: _scn = "BTL99"; break;
                 }
 
                 UpdateTitle();
@@ -212,6 +212,7 @@ namespace SF3.X1_Editor.Forms
             else*/
 
             var fileEditor = FileEditor as IX1_FileEditor;
+            bool isntScn1 = Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other;
 
             _slotList = new SlotList(fileEditor);
             _headerList = new HeaderList(fileEditor);
@@ -250,7 +251,7 @@ namespace SF3.X1_Editor.Forms
                     _customMovementList,
                 });
 
-                if (Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
+                if (isntScn1)
                 {
                     loadLists.Add(_tileList);
                 }
@@ -264,7 +265,7 @@ namespace SF3.X1_Editor.Forms
                     _enterList,
                 });
 
-                if (Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
+                if (isntScn1)
                 {
                     loadLists.Add(_arrowList);
                 }
@@ -281,41 +282,36 @@ namespace SF3.X1_Editor.Forms
 
             ObjectListViews.ForEach(x => x.ClearObjects());
 
-            if (IsBattle)
+            Action<bool, TabPage, ObjectListView, object[]> conditionallyAddModels = (cond, tab, olv, models) =>
             {
-                olvHeader.AddObjects(_headerList.Models);
-                olvSlotTab1.AddObjects(_slotList.Models);
-                olvSlotTab2.AddObjects(_slotList.Models);
-                olvSlotTab3.AddObjects(_slotList.Models);
-                olvSlotTab4.AddObjects(_slotList.Models);
-                olvAITargetPosition.AddObjects(_aiList.Models);
-                olvSpawnZones.AddObjects(_spawnZoneList.Models);
-                olvBattlePointers.AddObjects(_battlePointersList.Models);
-                olvScriptedMovement.AddObjects(_customMovementList.Models);
-            }
+                if (cond)
+                {
+                    tabMain.TabPages.Add(tab);
+                    olv.AddObjects(models);
+                    tab.Controls.Add(olv);
+                }
+            };
 
-            olvInteractables.AddObjects(_treasureList.Models);
+            tabMain.SuspendLayout();
+            tabMain.TabPages.Clear();
 
-            if (!IsBattle)
-            {
-                olvTownNpcs.AddObjects(_npcList.Models);
-                olvNonBattleEnter.AddObjects(_enterList.Models);
-            }
+            conditionallyAddModels(IsBattle, tabHeader, olvHeader, _headerList.Models);
+            conditionallyAddModels(IsBattle, tabSlotTab1, olvSlotTab1, _slotList.Models);
+            conditionallyAddModels(IsBattle, tabSlotTab2, olvSlotTab2, _slotList.Models);
+            conditionallyAddModels(IsBattle, tabSlotTab3, olvSlotTab3, _slotList.Models);
+            conditionallyAddModels(IsBattle, tabSlotTab4, olvSlotTab4, _slotList.Models);
+            conditionallyAddModels(IsBattle, tabAITargetPosition, olvAITargetPosition, _aiList.Models);
+            conditionallyAddModels(IsBattle, tabSpawnZones, olvSpawnZones, _spawnZoneList.Models);
+            conditionallyAddModels(IsBattle, tabBattlePointers, olvBattlePointers, _battlePointersList.Models);
+            conditionallyAddModels(IsBattle, tabScriptedMovement, olvScriptedMovement, _customMovementList.Models);
+            conditionallyAddModels(true, tabInteractables, olvInteractables, _treasureList.Models);
+            conditionallyAddModels(!IsBattle, tabTownNpcs, olvTownNpcs, _npcList.Models);
+            conditionallyAddModels(!IsBattle, tabNonBattleEnter, olvNonBattleEnter, _enterList.Models);
+            conditionallyAddModels(!IsBattle && isntScn1, tabArrows, olvArrows, _arrowList.Models);
+            conditionallyAddModels(isntScn1, tabWarpTable, olvWarpTable, _warpList.Models);
+            conditionallyAddModels(IsBattle && isntScn1, tabTileData, olvTileData, _tileList.Models);
 
-            if (!IsBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
-            {
-                olvArrows.AddObjects(_arrowList.Models);
-            }
-
-            if (Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
-            {
-                olvWarpTable.AddObjects(_warpList.Models);
-            }
-
-            if (IsBattle && Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
-            {
-                olvTileData.AddObjects(_tileList.Models);
-            }
+            tabMain.ResumeLayout();
 
             return true;
         }
