@@ -45,11 +45,12 @@ namespace SF3.Editor.Extensions
         public static bool PopulateAndShowTabs(this TabControl tabControl, IEnumerable<PopulateAndShowTabConfig> tabConfigs)
         {
             tabControl.SuspendLayout();
+            var lastSelectedTab = tabControl.SelectedTab;
+            tabControl.SelectedTab = null;
 
             // Reset all tabs.
             foreach (var tc in tabConfigs)
             {
-                // TODO: Can we somehow remove the tab *without* losing its controls???
                 tabControl.TabPages.Remove(tc.TabPage);
                 tc.ObjectListView.ClearObjects();
             }
@@ -71,7 +72,11 @@ namespace SF3.Editor.Extensions
 
                 tabControl.TabPages.Add(tc.TabPage);
                 tc.ObjectListView.AddObjects(tc.ModelObjs);
-                tc.TabPage.Controls.Add(tc.ObjectListView);
+            }
+
+            if (lastSelectedTab?.Parent == tabControl)
+            {
+                tabControl.SelectedTab = lastSelectedTab;
             }
 
             tabControl.ResumeLayout();
