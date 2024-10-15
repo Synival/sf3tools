@@ -65,46 +65,18 @@ namespace SF3.X002_Editor.Forms
 
         protected override bool LoadOpenedFile()
         {
-            var loadLists = new List<IModelArray>()
+            return tabMain.PopulateAndShowTabs(new List<PopulateAndShowTabConfig>()
             {
-                FileEditor.ItemList,
-                FileEditor.SpellList,
-                FileEditor.PresetList,
-                FileEditor.LoadList,
-                FileEditor.StatList,
-                FileEditor.WeaponRankList,
-                FileEditor.AttackResistList,
-                FileEditor.MusicOverrideList,
-            };
-
-            foreach (var list in loadLists)
-            {
-                if (!list.Load())
-                {
-                    MessageBox.Show("Could not load " + list.ResourceFile);
-                    return false;
-                }
-            }
-
-            ObjectListViews.ForEach(x => x.ClearObjects());
-
-            olvItems.AddObjects(FileEditor.ItemList.Models);
-            olvSpells.AddObjects(FileEditor.SpellList.Models);
-            olvPreset.AddObjects(FileEditor.PresetList.Models);
-            olvLoaded.AddObjects(FileEditor.LoadList.Models);
-            olvStatBoost.AddObjects(FileEditor.StatList.Models);
-            olvWeaponRankAttack.AddObjects(FileEditor.WeaponRankList.Models);
-            olvAttackResist.AddObjects(FileEditor.AttackResistList.Models);
-            olvLoadedOverride.AddObjects(FileEditor.MusicOverrideList.Models);
-
-            if (!tabMain.PopulateAndShowTabs(new List<PopulateAndShowTabConfig>() {
-                new PopulateAndShowTabConfig(Scenario == ScenarioType.Scenario1, tabWarpTable, olvWarpTable, FileEditor.WarpList)
-            }))
-            {
-                return false;
-            }
-
-            return true;
+                new PopulateAndShowTabConfig(true, tabItems, olvItems, FileEditor.ItemList),
+                new PopulateAndShowTabConfig(true, tabSpells, olvSpells, FileEditor.SpellList),
+                new PopulateAndShowTabConfig(true, tabPreset, olvPreset, FileEditor.PresetList),
+                new PopulateAndShowTabConfig(true, tabLoaded, olvLoaded, FileEditor.LoadList),
+                new PopulateAndShowTabConfig(true, tabLoadedOverride, olvLoadedOverride, FileEditor.MusicOverrideList),
+                new PopulateAndShowTabConfig(true, tabStatBoost, olvStatBoost, FileEditor.StatList),
+                new PopulateAndShowTabConfig(true, tabWeaponRankAttack, olvWeaponRankAttack, FileEditor.WeaponRankList),
+                new PopulateAndShowTabConfig(true, tabAttackResist, olvAttackResist, FileEditor.AttackResistList),
+                new PopulateAndShowTabConfig(Scenario == ScenarioType.Scenario1, tabWarpTable, olvWarpTable, FileEditor.WarpList),
+            });
         }
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
