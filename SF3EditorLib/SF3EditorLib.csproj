@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ObjectListViewExtensions.cs" />
+    <Compile Include="Extensions\TabControlExtensions.cs" />
     <Compile Include="Forms\EditorForm.cs">
       <SubType>Form</SubType>
     </Compile>

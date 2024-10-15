@@ -40,6 +40,11 @@ namespace SF3.Models
         /// The XML file to load for this resource.
         /// </summary>
         string ResourceFile { get; }
+
+        /// <summary>
+        /// An mutable array of models.
+        /// </summary>
+        object[] ModelObjs { get; }
     }
 
     /// <summary>

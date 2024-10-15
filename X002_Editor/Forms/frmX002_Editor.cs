@@ -19,6 +19,7 @@ using System.Linq;
 using SF3.Editor.Forms;
 using SF3.Models;
 using SF3.Editor.Extensions;
+using static SF3.Editor.Extensions.TabControlExtensions;
 
 namespace SF3.X002_Editor.Forms
 {
@@ -134,9 +135,11 @@ namespace SF3.X002_Editor.Forms
             olvAttackResist.AddObjects(_attackResistList.Models);
             olvLoadedOverride.AddObjects(_musicOverrideList.Models);
 
-            if (Scenario == ScenarioType.Scenario1)
+            if (!tabMain.PopulateAndShowTabs(new List<PopulateAndShowTabConfig>() {
+                new PopulateAndShowTabConfig(Scenario == ScenarioType.Scenario1, tabWarpTable, olvWarpTable, _warpList)
+            }))
             {
-                olvWarpTable.AddObjects(_warpList.Models);
+                return false;
             }
 
             return true;

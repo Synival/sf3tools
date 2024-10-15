@@ -25,7 +25,7 @@ namespace SF3.Models
 
         public abstract string ResourceFile { get; }
         public abstract bool IsLoaded { get; }
-
+        public abstract object[] ModelObjs { get; }
 
         private ISF3FileEditor _fileEditor;
 
@@ -46,9 +46,9 @@ namespace SF3.Models
             return true;
         }
 
+        public override object[] ModelObjs => _models;
         public T[] Models => _models;
 
-        public override string ResourceFile { get; }
         public override bool IsLoaded => _models != null;
 
         protected T[] _models = null;

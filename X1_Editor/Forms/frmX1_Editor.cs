@@ -22,6 +22,7 @@ using System.Linq;
 using SF3.Editor.Forms;
 using SF3.Models;
 using SF3.Editor.Extensions;
+using static SF3.Editor.Extensions.TabControlExtensions;
 
 namespace SF3.X1_Editor.Forms
 {
@@ -227,93 +228,24 @@ namespace SF3.X1_Editor.Forms
             _enterList = new EnterList(fileEditor);
             _arrowList = new ArrowList(fileEditor);
 
-            // Models in all X1 files
-            var loadLists = new List<IModelArray>()
+            return tabMain.PopulateAndShowTabs(new List<PopulateAndShowTabConfig>()
             {
-                _treasureList,
-            };
-
-            if (Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other)
-            {
-                loadLists.Add(_warpList);
-            }
-
-            // Models in only X1 battle files
-            if (IsBattle)
-            {
-                loadLists.AddRange(new List<IModelArray>()
-                {
-                    _slotList,
-                    _headerList,
-                    _aiList,
-                    _spawnZoneList,
-                    _battlePointersList,
-                    _customMovementList,
-                });
-
-                if (isntScn1)
-                {
-                    loadLists.Add(_tileList);
-                }
-            }
-            // Models in only X1 town files
-            else
-            {
-                loadLists.AddRange(new List<IModelArray>()
-                {
-                    _npcList,
-                    _enterList,
-                });
-
-                if (isntScn1)
-                {
-                    loadLists.Add(_arrowList);
-                }
-            }
-
-            foreach (var list in loadLists)
-            {
-                if (!list.Load())
-                {
-                    MessageBox.Show("Could not load " + list.ResourceFile);
-                    return false;
-                }
-            }
-
-            ObjectListViews.ForEach(x => x.ClearObjects());
-
-            Action<bool, TabPage, ObjectListView, object[]> conditionallyAddModels = (cond, tab, olv, models) =>
-            {
-                if (cond)
-                {
-                    tabMain.TabPages.Add(tab);
-                    olv.AddObjects(models);
-                    tab.Controls.Add(olv);
-                }
-            };
-
-            tabMain.SuspendLayout();
-            tabMain.TabPages.Clear();
-
-            conditionallyAddModels(IsBattle, tabHeader, olvHeader, _headerList.Models);
-            conditionallyAddModels(IsBattle, tabSlotTab1, olvSlotTab1, _slotList.Models);
-            conditionallyAddModels(IsBattle, tabSlotTab2, olvSlotTab2, _slotList.Models);
-            conditionallyAddModels(IsBattle, tabSlotTab3, olvSlotTab3, _slotList.Models);
-            conditionallyAddModels(IsBattle, tabSlotTab4, olvSlotTab4, _slotList.Models);
-            conditionallyAddModels(IsBattle, tabAITargetPosition, olvAITargetPosition, _aiList.Models);
-            conditionallyAddModels(IsBattle, tabSpawnZones, olvSpawnZones, _spawnZoneList.Models);
-            conditionallyAddModels(IsBattle, tabBattlePointers, olvBattlePointers, _battlePointersList.Models);
-            conditionallyAddModels(IsBattle, tabScriptedMovement, olvScriptedMovement, _customMovementList.Models);
-            conditionallyAddModels(true, tabInteractables, olvInteractables, _treasureList.Models);
-            conditionallyAddModels(!IsBattle, tabTownNpcs, olvTownNpcs, _npcList.Models);
-            conditionallyAddModels(!IsBattle, tabNonBattleEnter, olvNonBattleEnter, _enterList.Models);
-            conditionallyAddModels(!IsBattle && isntScn1, tabArrows, olvArrows, _arrowList.Models);
-            conditionallyAddModels(isntScn1, tabWarpTable, olvWarpTable, _warpList.Models);
-            conditionallyAddModels(IsBattle && isntScn1, tabTileData, olvTileData, _tileList.Models);
-
-            tabMain.ResumeLayout();
-
-            return true;
+                new PopulateAndShowTabConfig(IsBattle, tabHeader, olvHeader, _headerList),
+                new PopulateAndShowTabConfig(IsBattle, tabSlotTab1, olvSlotTab1, _slotList),
+                new PopulateAndShowTabConfig(IsBattle, tabSlotTab2, olvSlotTab2, _slotList),
+                new PopulateAndShowTabConfig(IsBattle, tabSlotTab3, olvSlotTab3, _slotList),
+                new PopulateAndShowTabConfig(IsBattle, tabSlotTab4, olvSlotTab4, _slotList),
+                new PopulateAndShowTabConfig(IsBattle, tabAITargetPosition, olvAITargetPosition, _aiList),
+                new PopulateAndShowTabConfig(IsBattle, tabSpawnZones, olvSpawnZones, _spawnZoneList),
+                new PopulateAndShowTabConfig(IsBattle, tabBattlePointers, olvBattlePointers, _battlePointersList),
+                new PopulateAndShowTabConfig(IsBattle, tabScriptedMovement, olvScriptedMovement, _customMovementList),
+                new PopulateAndShowTabConfig(true, tabInteractables, olvInteractables, _treasureList),
+                new PopulateAndShowTabConfig(!IsBattle, tabTownNpcs, olvTownNpcs, _npcList),
+                new PopulateAndShowTabConfig(!IsBattle, tabNonBattleEnter, olvNonBattleEnter, _enterList),
+                new PopulateAndShowTabConfig(!IsBattle && isntScn1, tabArrows, olvArrows, _arrowList),
+                new PopulateAndShowTabConfig(isntScn1, tabWarpTable, olvWarpTable, _warpList),
+                new PopulateAndShowTabConfig(IsBattle && isntScn1, tabTileData, olvTileData, _tileList),
+            });
         }
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
