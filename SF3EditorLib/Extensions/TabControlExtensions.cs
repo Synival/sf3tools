@@ -24,10 +24,10 @@ namespace SF3.Editor.Extensions
                 ModelArray = modelArray;
             }
 
-            public bool IsVisible { get; private set; }
-            public TabPage TabPage { get; private set; }
-            public ObjectListView ObjectListView { get; private set; }
-            public IModelArray ModelArray { get; private set; }
+            public bool IsVisible { get; }
+            public TabPage TabPage { get; }
+            public ObjectListView ObjectListView { get; }
+            public IModelArray ModelArray { get; }
             public object[] ModelObjs => ModelArray.ModelObjs;
         }
 
