@@ -1,4 +1,5 @@
-﻿using SF3.Types;
+﻿using SF3.Models;
+using SF3.Types;
 using SF3.X002_Editor.Models.AttackResist;
 using SF3.X002_Editor.Models.Items;
 using SF3.X002_Editor.Models.Loading;
@@ -20,15 +21,37 @@ namespace SF3.X002_Editor
     {
         public X002_FileEditor(ScenarioType scenario) : base(scenario)
         {
-            ItemList = new ItemList(this);
-            SpellList = new SpellList(this);
-            PresetList = new PresetList(this);
-            LoadList = new LoadList(this);
-            StatList = new StatList(this);
-            WeaponRankList = new WeaponRankList(this);
-            AttackResistList = new AttackResistList(this);
-            WarpList = new WarpList(this);
-            MusicOverrideList = new MusicOverrideList(this);
+            _modelArrays.Add(ItemList = new ItemList(this));
+            _modelArrays.Add(SpellList = new SpellList(this));
+            _modelArrays.Add(PresetList = new PresetList(this));
+            _modelArrays.Add(LoadList = new LoadList(this));
+            _modelArrays.Add(StatList = new StatList(this));
+            _modelArrays.Add(WeaponRankList = new WeaponRankList(this));
+            _modelArrays.Add(AttackResistList = new AttackResistList(this));
+            _modelArrays.Add(MusicOverrideList = new MusicOverrideList(this));
+
+            if (Scenario == ScenarioType.Scenario1)
+            {
+                _modelArrays.Add(WarpList = new WarpList(this));
+            }
+        }
+
+        public override bool LoadFile(string filename)
+        {
+            if (!base.LoadFile(filename))
+            {
+                return false;
+            }
+
+            foreach (var model in _modelArrays)
+            {
+                if (!model.Load())
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public ItemList ItemList { get; }
@@ -40,5 +63,7 @@ namespace SF3.X002_Editor
         public AttackResistList AttackResistList { get; }
         public WarpList WarpList { get; }
         public MusicOverrideList MusicOverrideList { get; }
+
+        private List<IModelArray> _modelArrays = new List<IModelArray>();
     }
 }

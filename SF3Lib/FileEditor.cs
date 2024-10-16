@@ -103,7 +103,7 @@ namespace SF3
         /// </summary>
         /// <param name="filename">The file to load.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
-        public bool LoadFile(string filename)
+        public virtual bool LoadFile(string filename)
         {
             FileStream stream = null;
             try
