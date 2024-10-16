@@ -51,19 +51,6 @@ namespace SF3.X1_Editor.Forms
 
         private string _debug = "off";
 
-        private SlotList _slotList;
-        private HeaderList _headerList;
-        private AIList _aiList;
-        private SpawnZoneList _spawnZoneList;
-        private BattlePointersList _battlePointersList;
-        private TreasureList _treasureList;
-        private CustomMovementList _customMovementList;
-        private WarpList _warpList;
-        private TileList _tileList;
-        private NpcList _npcList;
-        private EnterList _enterList;
-        private ArrowList _arrowList;
-
         public frmX1_Editor()
         {
             InitializeComponent();
@@ -103,36 +90,23 @@ namespace SF3.X1_Editor.Forms
         {
             bool isntScn1 = Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other;
 
-            _slotList = new SlotList(FileEditor);
-            _headerList = new HeaderList(FileEditor);
-            _aiList = new AIList(FileEditor);
-            _spawnZoneList = new SpawnZoneList(FileEditor);
-            _battlePointersList = new BattlePointersList(FileEditor);
-            _customMovementList = new CustomMovementList(FileEditor);
-            _treasureList = new TreasureList(FileEditor);
-            _warpList = new WarpList(FileEditor);
-            _tileList = new TileList(FileEditor);
-            _npcList = new NpcList(FileEditor);
-            _enterList = new EnterList(FileEditor);
-            _arrowList = new ArrowList(FileEditor);
-
             return tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
             {
-                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabHeader, olvHeader, _headerList),
-                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSlotTab1, olvSlotTab1, _slotList),
-                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSlotTab2, olvSlotTab2, _slotList),
-                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSlotTab3, olvSlotTab3, _slotList),
-                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSlotTab4, olvSlotTab4, _slotList),
-                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabAITargetPosition, olvAITargetPosition, _aiList),
-                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSpawnZones, olvSpawnZones, _spawnZoneList),
-                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabBattlePointers, olvBattlePointers, _battlePointersList),
-                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabScriptedMovement, olvScriptedMovement, _customMovementList),
-                new PopulateAndToggleTabConfig(true, tabInteractables, olvInteractables, _treasureList),
-                new PopulateAndToggleTabConfig(!FileEditor.IsBattle, tabTownNpcs, olvTownNpcs, _npcList),
-                new PopulateAndToggleTabConfig(!FileEditor.IsBattle, tabNonBattleEnter, olvNonBattleEnter, _enterList),
-                new PopulateAndToggleTabConfig(!FileEditor.IsBattle && isntScn1, tabArrows, olvArrows, _arrowList),
-                new PopulateAndToggleTabConfig(isntScn1, tabWarpTable, olvWarpTable, _warpList),
-                new PopulateAndToggleTabConfig(FileEditor.IsBattle && isntScn1, tabTileData, olvTileData, _tileList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabHeader, olvHeader, FileEditor.HeaderList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSlotTab1, olvSlotTab1, FileEditor.SlotList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSlotTab2, olvSlotTab2, FileEditor.SlotList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSlotTab3, olvSlotTab3, FileEditor.SlotList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSlotTab4, olvSlotTab4, FileEditor.SlotList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabAITargetPosition, olvAITargetPosition, FileEditor.AIList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSpawnZones, olvSpawnZones, FileEditor.SpawnZoneList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabBattlePointers, olvBattlePointers, FileEditor.BattlePointersList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabScriptedMovement, olvScriptedMovement, FileEditor.CustomMovementList),
+                new PopulateAndToggleTabConfig(true, tabInteractables, olvInteractables, FileEditor.TreasureList),
+                new PopulateAndToggleTabConfig(!FileEditor.IsBattle, tabTownNpcs, olvTownNpcs, FileEditor.NpcList),
+                new PopulateAndToggleTabConfig(!FileEditor.IsBattle, tabNonBattleEnter, olvNonBattleEnter, FileEditor.EnterList),
+                new PopulateAndToggleTabConfig(!FileEditor.IsBattle && isntScn1, tabArrows, olvArrows, FileEditor.ArrowList),
+                new PopulateAndToggleTabConfig(isntScn1, tabWarpTable, olvWarpTable, FileEditor.WarpList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle && isntScn1, tabTileData, olvTileData, FileEditor.TileList),
             });
         }
 

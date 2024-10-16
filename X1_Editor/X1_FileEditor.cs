@@ -1,5 +1,17 @@
 ﻿using SF3.Models;
 using SF3.Types;
+using SF3.X1_Editor.Models.AI;
+using SF3.X1_Editor.Models.Arrows;
+using SF3.X1_Editor.Models.BattlePointers;
+using SF3.X1_Editor.Models.CustomMovement;
+using SF3.X1_Editor.Models.Enters;
+using SF3.X1_Editor.Models.Headers;
+using SF3.X1_Editor.Models.Npcs;
+using SF3.X1_Editor.Models.Slots;
+using SF3.X1_Editor.Models.SpawnZones;
+using SF3.X1_Editor.Models.Tiles;
+using SF3.X1_Editor.Models.Treasures;
+using SF3.X1_Editor.Models.Warps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +27,8 @@ namespace SF3.X1_Editor
             Map = map;
         }
 
-        public override bool LoadFile(string filename)
+        public override IEnumerable<IModelArray> MakeModelArrays()
         {
-            if (!base.LoadFile(filename))
-            {
-                return false;
-            }
-
             int offset = 0;
             int sub = 0;
 
@@ -73,13 +80,59 @@ namespace SF3.X1_Editor
                 IsBattle = false;
             }
 
-            return true;
+            bool isntScn1 = Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other;
+
+            // Add models present for both towns and battles.
+            var modelArrays = new List<IModelArray>
+            {
+                (TreasureList = new TreasureList(this))
+            };
+
+            if (isntScn1)
+            {
+                modelArrays.Add(WarpList = new WarpList(this));
+            }
+
+            // Add models only present for battles.
+            if (IsBattle)
+            {
+                modelArrays.AddRange(new List<IModelArray>()
+                {
+                    (HeaderList = new HeaderList(this)),
+                    (SlotList = new SlotList(this)),
+                    (AIList = new AIList(this)),
+                    (SpawnZoneList = new SpawnZoneList(this)),
+                    (BattlePointersList = new BattlePointersList(this)),
+                    (CustomMovementList = new CustomMovementList(this)),
+                });
+
+                if (isntScn1)
+                {
+                    modelArrays.Add(TileList = new TileList(this));
+                }
+            }
+
+            // Add models only present for towns.
+            if (!IsBattle)
+            {
+                modelArrays.AddRange(new List<IModelArray>()
+                {
+                    (NpcList = new NpcList(this)),
+                    (EnterList = new EnterList(this))
+                });
+
+                if (isntScn1)
+                {
+                    modelArrays.Add(ArrowList = new ArrowList(this));
+                }
+            }
+
+            return modelArrays;
         }
 
-        public override IEnumerable<IModelArray> MakeModelArrays()
-        {
-            return new List<IModelArray>();
-        }
+        protected override string BaseTitle => IsLoaded
+            ? base.BaseTitle + " (Map: " + Map.ToString() + ") (Type: " + (IsBattle ? "Battle" : "Town") + ")"
+            : base.BaseTitle;
 
         private MapType _map;
 
@@ -113,8 +166,17 @@ namespace SF3.X1_Editor
             }
         }
 
-        protected override string BaseTitle => IsLoaded
-            ? base.BaseTitle + " (Map: " + Map.ToString() + ") (Type: " + (IsBattle ? "Battle" : "Town") + ")"
-            : base.BaseTitle;
+        public SlotList SlotList { get; private set; }
+        public HeaderList HeaderList { get; private set; }
+        public AIList AIList { get; private set; }
+        public SpawnZoneList SpawnZoneList { get; private set; }
+        public BattlePointersList BattlePointersList { get; private set; }
+        public TreasureList TreasureList { get; private set; }
+        public CustomMovementList CustomMovementList { get; private set; }
+        public WarpList WarpList { get; private set; }
+        public TileList TileList { get; private set; }
+        public NpcList NpcList { get; private set; }
+        public EnterList EnterList { get; private set; }
+        public ArrowList ArrowList { get; private set; }
     }
 }
