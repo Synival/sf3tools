@@ -32,6 +32,7 @@ namespace SF3.X033_X031_Editor.Forms
 {
     using StatDict = Dictionary<StatType, double>;
     using ProbableStatsDict = Dictionary<StatType, ProbableStats>;
+    using static SF3.Editor.Extensions.TabControlExtensions;
 
     public partial class frmX033_X031_Editor : EditorForm
     {
@@ -111,31 +112,19 @@ namespace SF3.X033_X031_Editor.Forms
             _initialInfoList = new InitialInfoList(fileEditor);
             _weaponLevelList = new WeaponLevelList(fileEditor);
 
-            var loadLists = new List<IModelArray>()
+            if (!tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
             {
-                _statsList,
-                _initialInfoList,
-                _weaponLevelList,
-            };
-
-            foreach (var list in loadLists)
+                new PopulateAndToggleTabConfig(true, tabStats, olvStats, _statsList),
+                new PopulateAndToggleTabConfig(true, tabSpells, olvSpells, _statsList),
+                new PopulateAndToggleTabConfig(true, tabEquipStatistics, olvEquipStatistics, _statsList),
+                new PopulateAndToggleTabConfig(true, tabMiscellaneous, olvMiscellaneous, _statsList),
+                new PopulateAndToggleTabConfig(true, tabInitialInfo, olvInitialInfo, _initialInfoList),
+                new PopulateAndToggleTabConfig(true, tabWeaponLevelReq, olvWeaponLevelReq, _weaponLevelList),
+                new PopulateAndToggleTabConfig(true, tabCurveCalc, olvCurveCalc, _statsList),
+            }))
             {
-                if (!list.Load())
-                {
-                    MessageBox.Show("Could not load " + list.ResourceFile);
-                    return false;
-                }
+                return false;
             }
-
-            ObjectListViews.ForEach(x => x.ClearObjects());
-
-            olvStats.AddObjects(_statsList.Models);
-            olvSpells.AddObjects(_statsList.Models);
-            olvEquipStatistics.AddObjects(_statsList.Models);
-            olvMiscellaneous.AddObjects(_statsList.Models);
-            olvInitialInfo.AddObjects(_initialInfoList.Models);
-            olvWeaponLevelReq.AddObjects(_weaponLevelList.Models);
-            olvCurveCalc.AddObjects(_statsList.Models);
 
             // Update curve graph controls.
             cbCurveGraphCharacter.DataSource = _statsList.Models;

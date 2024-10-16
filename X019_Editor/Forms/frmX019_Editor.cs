@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SF3.Editor.Forms;
 using SF3.Editor.Extensions;
+using static SF3.Editor.Extensions.TabControlExtensions;
 
 namespace SF3.X019_Editor.Forms
 {
@@ -57,21 +58,15 @@ namespace SF3.X019_Editor.Forms
             var fileEditor = FileEditor as IX019_FileEditor;
 
             _monsterList = new MonsterList(fileEditor);
-            if (!_monsterList.Load())
+
+            return tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
             {
-                MessageBox.Show("Could not load " + _monsterList.ResourceFile);
-                return false;
-            }
-
-            ObjectListViews.ForEach(x => x.ClearObjects());
-
-            olvMonsterTab1.AddObjects(_monsterList.Models);
-            olvMonsterTab2.AddObjects(_monsterList.Models);
-            olvMonsterTab3.AddObjects(_monsterList.Models);
-            olvMonsterTab4.AddObjects(_monsterList.Models);
-            olvMonsterTab5.AddObjects(_monsterList.Models);
-
-            return true;
+                new PopulateAndToggleTabConfig(true, tabMonsterTab1, olvMonsterTab1, _monsterList),
+                new PopulateAndToggleTabConfig(true, tabMonsterTab2, olvMonsterTab2, _monsterList),
+                new PopulateAndToggleTabConfig(true, tabMonsterTab3, olvMonsterTab3, _monsterList),
+                new PopulateAndToggleTabConfig(true, tabMonsterTab4, olvMonsterTab4, _monsterList),
+                new PopulateAndToggleTabConfig(true, tabMonsterTab5, olvMonsterTab5, _monsterList),
+            });
         }
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);

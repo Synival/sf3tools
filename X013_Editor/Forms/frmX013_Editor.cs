@@ -24,6 +24,7 @@ using System.Linq;
 using SF3.Editor.Forms;
 using SF3.Models;
 using SF3.Editor.Extensions;
+using static SF3.Editor.Extensions.TabControlExtensions;
 
 namespace SF3.X013_Editor.Forms
 {
@@ -97,51 +98,23 @@ namespace SF3.X013_Editor.Forms
             _weaponSpellRankList = new WeaponSpellRankList(fileEditor);
             _statusEffectList = new StatusEffectList(fileEditor);
 
-            var loadLists = new List<IModelArray>()
+            return tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
             {
-                _specialsList,
-                _supportTypeList,
-                _friendshipExpList,
-                _supportStatsList,
-                _soulmateList,
-                _soulfailList,
-                _magicBonusList,
-                _critModList,
-                _critrateList,
-                _specialChanceList,
-                _expLimitList,
-                _healExpList,
-                _weaponSpellRankList,
-                _statusEffectList,
-            };
-
-            foreach (var list in loadLists)
-            {
-                if (!list.Load())
-                {
-                    MessageBox.Show("Could not load " + list.ResourceFile);
-                    return false;
-                }
-            }
-
-            ObjectListViews.ForEach(x => x.ClearObjects());
-
-            olvSpecials.AddObjects(_specialsList.Models);
-            olvFriendshipExp.AddObjects(_friendshipExpList.Models);
-            olvSupportType.AddObjects(_supportTypeList.Models);
-            olvSupportStats.AddObjects(_supportStatsList.Models);
-            olvSoulmate.AddObjects(_soulmateList.Models);
-            olvSoulmateChanceFail.AddObjects(_soulfailList.Models);
-            olvMagicBonus.AddObjects(_magicBonusList.Models);
-            olvCritVantages.AddObjects(_critModList.Models);
-            olvCritCounterRate.AddObjects(_critrateList.Models);
-            olvSpecialChance.AddObjects(_specialChanceList.Models);
-            olvExpLimit.AddObjects(_expLimitList.Models);
-            olvHealExp.AddObjects(_healExpList.Models);
-            olvWeaponSpellRank.AddObjects(_weaponSpellRankList.Models);
-            olvStatusGroups.AddObjects(_statusEffectList.Models);
-
-            return true;
+                new PopulateAndToggleTabConfig(true, tabSpecials, olvSpecials, _specialsList),
+                new PopulateAndToggleTabConfig(true, tabFriendshipExp, olvFriendshipExp, _friendshipExpList),
+                new PopulateAndToggleTabConfig(true, tabSupportType, olvSupportType, _supportTypeList),
+                new PopulateAndToggleTabConfig(true, tabSupportStats, olvSupportStats, _supportStatsList),
+                new PopulateAndToggleTabConfig(true, tabSoulmate, olvSoulmate, _soulmateList),
+                new PopulateAndToggleTabConfig(true, tabSoulmateChanceFail, olvSoulmateChanceFail, _soulfailList),
+                new PopulateAndToggleTabConfig(true, tabMagicBonus, olvMagicBonus, _magicBonusList),
+                new PopulateAndToggleTabConfig(true, tabCritVantages, olvCritVantages, _critModList),
+                new PopulateAndToggleTabConfig(true, tabCritCounterRate, olvCritCounterRate, _critrateList),
+                new PopulateAndToggleTabConfig(true, tabSpecialChance, olvSpecialChance, _specialChanceList),
+                new PopulateAndToggleTabConfig(true, tabExpLimit, olvExpLimit, _expLimitList),
+                new PopulateAndToggleTabConfig(true, tabHealExp, olvHealExp, _healExpList),
+                new PopulateAndToggleTabConfig(true, tabWeaponSpellRank, olvWeaponSpellRank, _weaponSpellRankList),
+                new PopulateAndToggleTabConfig(true, tabStatusGroups, olvStatusGroups, _statusEffectList)
+            });
         }
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);

@@ -12,6 +12,7 @@ using System.Linq;
 using SF3.Editor.Forms;
 using SF3.Models;
 using SF3.Editor.Extensions;
+using static SF3.Editor.Extensions.TabControlExtensions;
 
 namespace SF3.IconPointerEditor.Forms
 {
@@ -76,27 +77,11 @@ namespace SF3.IconPointerEditor.Forms
             _spellIconList = new SpellIconList(fileEditor);
             _itemIconList = new ItemIconList(fileEditor);
 
-            var loadLists = new List<IModelArray>
+            return tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
             {
-                _spellIconList,
-                _itemIconList,
-            };
-
-            foreach (var list in loadLists)
-            {
-                if (!list.Load())
-                {
-                    MessageBox.Show("Could not load " + list.ResourceFile);
-                    return false;
-                }
-            }
-
-            ObjectListViews.ForEach(x => x.ClearObjects());
-
-            olvItemIcons.AddObjects(_itemIconList.Models);
-            olvSpellIcons.AddObjects(_spellIconList.Models);
-
-            return true;
+                new PopulateAndToggleTabConfig(true, tabSpellIcons, olvSpellIcons, _spellIconList),
+                new PopulateAndToggleTabConfig(true, tabItemIcons, olvItemIcons, _itemIconList)
+            });
         }
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
