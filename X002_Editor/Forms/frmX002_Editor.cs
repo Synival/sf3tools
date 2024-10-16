@@ -65,16 +65,23 @@ namespace SF3.X002_Editor.Forms
 
         protected override bool LoadOpenedFile()
         {
+            if (!tabMain.PopulateTabs(new List<PopulateTabConfig>()
+            {
+                new PopulateTabConfig(tabItems, olvItems, FileEditor.ItemList),
+                new PopulateTabConfig(tabSpells, olvSpells, FileEditor.SpellList),
+                new PopulateTabConfig(tabPreset, olvPreset, FileEditor.PresetList),
+                new PopulateTabConfig(tabLoaded, olvLoaded, FileEditor.LoadList),
+                new PopulateTabConfig(tabLoadedOverride, olvLoadedOverride, FileEditor.MusicOverrideList),
+                new PopulateTabConfig(tabStatBoost, olvStatBoost, FileEditor.StatList),
+                new PopulateTabConfig(tabWeaponRankAttack, olvWeaponRankAttack, FileEditor.WeaponRankList),
+                new PopulateTabConfig(tabAttackResist, olvAttackResist, FileEditor.AttackResistList)
+            }))
+            {
+                return false;
+            }
+
             return tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
             {
-                new PopulateAndToggleTabConfig(true, tabItems, olvItems, FileEditor.ItemList),
-                new PopulateAndToggleTabConfig(true, tabSpells, olvSpells, FileEditor.SpellList),
-                new PopulateAndToggleTabConfig(true, tabPreset, olvPreset, FileEditor.PresetList),
-                new PopulateAndToggleTabConfig(true, tabLoaded, olvLoaded, FileEditor.LoadList),
-                new PopulateAndToggleTabConfig(true, tabLoadedOverride, olvLoadedOverride, FileEditor.MusicOverrideList),
-                new PopulateAndToggleTabConfig(true, tabStatBoost, olvStatBoost, FileEditor.StatList),
-                new PopulateAndToggleTabConfig(true, tabWeaponRankAttack, olvWeaponRankAttack, FileEditor.WeaponRankList),
-                new PopulateAndToggleTabConfig(true, tabAttackResist, olvAttackResist, FileEditor.AttackResistList),
                 new PopulateAndToggleTabConfig(Scenario == ScenarioType.Scenario1, tabWarpTable, olvWarpTable, FileEditor.WarpList),
             });
         }

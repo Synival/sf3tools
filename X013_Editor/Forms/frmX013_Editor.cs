@@ -98,22 +98,22 @@ namespace SF3.X013_Editor.Forms
             _weaponSpellRankList = new WeaponSpellRankList(fileEditor);
             _statusEffectList = new StatusEffectList(fileEditor);
 
-            return tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
+            return tabMain.PopulateTabs(new List<PopulateTabConfig>()
             {
-                new PopulateAndToggleTabConfig(true, tabSpecials, olvSpecials, _specialsList),
-                new PopulateAndToggleTabConfig(true, tabFriendshipExp, olvFriendshipExp, _friendshipExpList),
-                new PopulateAndToggleTabConfig(true, tabSupportType, olvSupportType, _supportTypeList),
-                new PopulateAndToggleTabConfig(true, tabSupportStats, olvSupportStats, _supportStatsList),
-                new PopulateAndToggleTabConfig(true, tabSoulmate, olvSoulmate, _soulmateList),
-                new PopulateAndToggleTabConfig(true, tabSoulmateChanceFail, olvSoulmateChanceFail, _soulfailList),
-                new PopulateAndToggleTabConfig(true, tabMagicBonus, olvMagicBonus, _magicBonusList),
-                new PopulateAndToggleTabConfig(true, tabCritVantages, olvCritVantages, _critModList),
-                new PopulateAndToggleTabConfig(true, tabCritCounterRate, olvCritCounterRate, _critrateList),
-                new PopulateAndToggleTabConfig(true, tabSpecialChance, olvSpecialChance, _specialChanceList),
-                new PopulateAndToggleTabConfig(true, tabExpLimit, olvExpLimit, _expLimitList),
-                new PopulateAndToggleTabConfig(true, tabHealExp, olvHealExp, _healExpList),
-                new PopulateAndToggleTabConfig(true, tabWeaponSpellRank, olvWeaponSpellRank, _weaponSpellRankList),
-                new PopulateAndToggleTabConfig(true, tabStatusGroups, olvStatusGroups, _statusEffectList)
+                new PopulateTabConfig(tabSpecials, olvSpecials, _specialsList),
+                new PopulateTabConfig(tabFriendshipExp, olvFriendshipExp, _friendshipExpList),
+                new PopulateTabConfig(tabSupportType, olvSupportType, _supportTypeList),
+                new PopulateTabConfig(tabSupportStats, olvSupportStats, _supportStatsList),
+                new PopulateTabConfig(tabSoulmate, olvSoulmate, _soulmateList),
+                new PopulateTabConfig(tabSoulmateChanceFail, olvSoulmateChanceFail, _soulfailList),
+                new PopulateTabConfig(tabMagicBonus, olvMagicBonus, _magicBonusList),
+                new PopulateTabConfig(tabCritVantages, olvCritVantages, _critModList),
+                new PopulateTabConfig(tabCritCounterRate, olvCritCounterRate, _critrateList),
+                new PopulateTabConfig(tabSpecialChance, olvSpecialChance, _specialChanceList),
+                new PopulateTabConfig(tabExpLimit, olvExpLimit, _expLimitList),
+                new PopulateTabConfig(tabHealExp, olvHealExp, _healExpList),
+                new PopulateTabConfig(tabWeaponSpellRank, olvWeaponSpellRank, _weaponSpellRankList),
+                new PopulateTabConfig(tabStatusGroups, olvStatusGroups, _statusEffectList)
             });
         }
 

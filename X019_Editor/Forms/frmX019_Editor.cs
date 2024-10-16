@@ -59,13 +59,13 @@ namespace SF3.X019_Editor.Forms
 
             _monsterList = new MonsterList(fileEditor);
 
-            return tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
+            return tabMain.PopulateTabs(new List<PopulateTabConfig>()
             {
-                new PopulateAndToggleTabConfig(true, tabMonsterTab1, olvMonsterTab1, _monsterList),
-                new PopulateAndToggleTabConfig(true, tabMonsterTab2, olvMonsterTab2, _monsterList),
-                new PopulateAndToggleTabConfig(true, tabMonsterTab3, olvMonsterTab3, _monsterList),
-                new PopulateAndToggleTabConfig(true, tabMonsterTab4, olvMonsterTab4, _monsterList),
-                new PopulateAndToggleTabConfig(true, tabMonsterTab5, olvMonsterTab5, _monsterList),
+                new PopulateTabConfig(tabMonsterTab1, olvMonsterTab1, _monsterList),
+                new PopulateTabConfig(tabMonsterTab2, olvMonsterTab2, _monsterList),
+                new PopulateTabConfig(tabMonsterTab3, olvMonsterTab3, _monsterList),
+                new PopulateTabConfig(tabMonsterTab4, olvMonsterTab4, _monsterList),
+                new PopulateTabConfig(tabMonsterTab5, olvMonsterTab5, _monsterList),
             });
         }
 

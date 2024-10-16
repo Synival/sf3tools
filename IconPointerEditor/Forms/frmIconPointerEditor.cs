@@ -77,10 +77,10 @@ namespace SF3.IconPointerEditor.Forms
             _spellIconList = new SpellIconList(fileEditor);
             _itemIconList = new ItemIconList(fileEditor);
 
-            return tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
+            return tabMain.PopulateTabs(new List<PopulateTabConfig>()
             {
-                new PopulateAndToggleTabConfig(true, tabSpellIcons, olvSpellIcons, _spellIconList),
-                new PopulateAndToggleTabConfig(true, tabItemIcons, olvItemIcons, _itemIconList)
+                new PopulateTabConfig(tabSpellIcons, olvSpellIcons, _spellIconList),
+                new PopulateTabConfig(tabItemIcons, olvItemIcons, _itemIconList)
             });
         }
 

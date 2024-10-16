@@ -70,19 +70,17 @@ namespace SF3.Editor.Extensions
         }
 
         /// <summary>
-        /// Configuration of a single tab in PopulateAndToggleTabs.
+        /// Configuration of a single tab for PopulateTabs().
         /// </summary>
-        public class PopulateAndToggleTabConfig
+        public class PopulateTabConfig
         {
-            public PopulateAndToggleTabConfig(bool isVisible, TabPage tabPage, ObjectListView objectListView, IModelArray modelArray)
+            public PopulateTabConfig(TabPage tabPage, ObjectListView objectListView, IModelArray modelArray)
             {
-                IsVisible = isVisible;
                 TabPage = tabPage;
                 ObjectListView = objectListView;
                 ModelArray = modelArray;
             }
 
-            public bool IsVisible { get; }
             public TabPage TabPage { get; }
             public ObjectListView ObjectListView { get; }
             public IModelArray ModelArray { get; }
@@ -90,7 +88,51 @@ namespace SF3.Editor.Extensions
         }
 
         /// <summary>
+        /// Configuration of a single tab for PopulateAndToggleTabs().
+        /// </summary>
+        public class PopulateAndToggleTabConfig : PopulateTabConfig
+        {
+            public PopulateAndToggleTabConfig(bool isVisible, TabPage tabPage, ObjectListView objectListView, IModelArray modelArray)
+            : base(tabPage, objectListView, modelArray)
+            {
+                IsVisible = isVisible;
+            }
+
+            public bool IsVisible { get; }
+        }
+
+        /// <summary>
+        /// Populates contents of tabs.
+        /// All ObjectListView's provided with the tab configuration will have their objects removed via ClearObjects(),
+        /// regardless of whether or not they are visible.
+        /// Any ModelArray's not loaded will be loaded automatically. If the TabPage is visible, its corresponding
+        /// ObjectListView will be populated with its data.
+        /// If a ModelArray could not be loaded, an error message will be shown and the method will return 'false'.
+        /// </summary>
+        /// <param name="tabControl"></param>
+        /// <param name="tabConfigs"></param>
+        /// <returns>'True' if the operation succeeded, 'false' if a ModelArray could not be loaded.</returns>
+        public static bool PopulateTabs(this TabControl tabControl, IEnumerable<PopulateTabConfig> tabConfigs)
+        {
+            // Show and populate visible tabs.
+            foreach (var tc in tabConfigs)
+            {
+                tc.ObjectListView.ClearObjects();
+                if (!tc.ModelArray.IsLoaded && !tc.ModelArray.Load())
+                {
+                    // TODO: we really should be throwing an exception here instead...
+                    MessageBox.Show("Could not load " + tc.ModelArray.ResourceFile);
+                    return false;
+                }
+                tc.ObjectListView.AddObjects(tc.ModelObjs);
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Shows/hides tabs in a collection based on their 'IsVisible' setting and populates their data.
+        /// Also populates the contents of tabs.
         /// All ObjectListView's provided with the tab configuration will have their objects removed via ClearObjects(),
         /// regardless of whether or not they are visible.
         /// Any ModelArray's not loaded will be loaded automatically. If the TabPage is visible, its corresponding
@@ -103,28 +145,11 @@ namespace SF3.Editor.Extensions
         public static bool PopulateAndToggleTabs(this TabControl tabControl, IEnumerable<PopulateAndToggleTabConfig> tabConfigs)
         {
             tabControl.ToggleTabs(tabConfigs.ToDictionary(x => x.TabPage, x => x.IsVisible));
-
-            // Show and populate visible tabs.
-            foreach (var tc in tabConfigs)
-            {
-                tc.ObjectListView.ClearObjects();
-
-                if (!tc.IsVisible)
-                {
-                    continue;
-                }
-
-                if (!tc.ModelArray.IsLoaded && !tc.ModelArray.Load())
-                {
-                    // TODO: we really should be throwing an exception here instead...
-                    MessageBox.Show("Could not load " + tc.ModelArray.ResourceFile);
-                    return false;
-                }
-
-                tc.ObjectListView.AddObjects(tc.ModelObjs);
-            }
-
-            return true;
+            var populateTabConfigs = tabConfigs
+                .Where(x => x.IsVisible)
+                .Cast<PopulateTabConfig>()
+                .ToList();
+            return tabControl.PopulateTabs(populateTabConfigs);
         }
     }
 }

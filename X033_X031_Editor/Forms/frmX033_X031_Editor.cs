@@ -112,15 +112,15 @@ namespace SF3.X033_X031_Editor.Forms
             _initialInfoList = new InitialInfoList(fileEditor);
             _weaponLevelList = new WeaponLevelList(fileEditor);
 
-            if (!tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
+            if (!tabMain.PopulateTabs(new List<PopulateTabConfig>()
             {
-                new PopulateAndToggleTabConfig(true, tabStats, olvStats, _statsList),
-                new PopulateAndToggleTabConfig(true, tabSpells, olvSpells, _statsList),
-                new PopulateAndToggleTabConfig(true, tabEquipStatistics, olvEquipStatistics, _statsList),
-                new PopulateAndToggleTabConfig(true, tabMiscellaneous, olvMiscellaneous, _statsList),
-                new PopulateAndToggleTabConfig(true, tabInitialInfo, olvInitialInfo, _initialInfoList),
-                new PopulateAndToggleTabConfig(true, tabWeaponLevelReq, olvWeaponLevelReq, _weaponLevelList),
-                new PopulateAndToggleTabConfig(true, tabCurveCalc, olvCurveCalc, _statsList),
+                new PopulateTabConfig(tabStats, olvStats, _statsList),
+                new PopulateTabConfig(tabSpells, olvSpells, _statsList),
+                new PopulateTabConfig(tabEquipStatistics, olvEquipStatistics, _statsList),
+                new PopulateTabConfig(tabMiscellaneous, olvMiscellaneous, _statsList),
+                new PopulateTabConfig(tabInitialInfo, olvInitialInfo, _initialInfoList),
+                new PopulateTabConfig(tabWeaponLevelReq, olvWeaponLevelReq, _weaponLevelList),
+                new PopulateTabConfig(tabCurveCalc, olvCurveCalc, _statsList),
             }))
             {
                 return false;
