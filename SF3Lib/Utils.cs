@@ -149,7 +149,46 @@ namespace SF3
         /// <summary>
         /// Result for BulkCopyProperties() functions.
         /// </summary>
-        public class BulkCopyCollectionResult<T> where T : class
+        public interface IBulkCopyCollectionResult
+        {
+            /// <summary>
+            /// The number of rows in 'objFrom' that were not copied to 'objTo'.
+            /// </summary>
+            int InRowsSkipped { get; }
+
+            /// <summary>
+            /// The number of rows in 'objTo' that were unaffected.
+            /// </summary>
+            int OutRowsSkipped { get; }
+
+            /// <summary>
+            /// The number of rows copied from 'objFrom' to 'objTo'.
+            /// </summary>
+            int RowsCopied { get; }
+
+            /// <summary>
+            /// Produces a large report with overall/summary and individual changes.
+            /// </summary>
+            /// <returns>A multiline string with a trailing "\n".</returns>
+            string MakeFullReport();
+
+            /// <summary>
+            /// Produces a summary report for changes made to the list.
+            /// </summary>
+            /// <returns>A multiline string with a trailing "\n".</returns>
+            string MakeSummaryReport();
+
+            /// <summary>
+            /// Produces a detailed report of all changes in the list.
+            /// </summary>
+            /// <returns>A multiline string with a trailing "\n".</returns>
+            string MakeIndividualChangesReport();
+        }
+
+        /// <summary>
+        /// Result for BulkCopyProperties() functions.
+        /// </summary>
+        public class BulkCopyCollectionResult<T> : IBulkCopyCollectionResult where T : class
         {
             public BulkCopyCollectionResult(IEnumerable<BulkCopyCollectionRowResult<T>> inputRows, int listOutRowsIgnored)
             {
@@ -164,25 +203,10 @@ namespace SF3
             /// </summary>
             public IEnumerable<BulkCopyCollectionRowResult<T>> InputRows { get; }
 
-            /// <summary>
-            /// The number of rows in 'objFrom' that were not copied to 'objTo'.
-            /// </summary>
             public int InRowsSkipped { get; }
-
-            /// <summary>
-            /// The number of rows in 'objTo' that were unaffected.
-            /// </summary>
             public int OutRowsSkipped { get; }
-
-            /// <summary>
-            /// The number of rows copied from 'objFrom' to 'objTo'.
-            /// </summary>
             public int RowsCopied { get; }
 
-            /// <summary>
-            /// Produces a large report with overall/summary and individual changes.
-            /// </summary>
-            /// <returns>A multiline string with a trailing "\n".</returns>
             public string MakeFullReport()
             {
                 string report =
@@ -198,10 +222,6 @@ namespace SF3
                 return report;
             }
 
-            /// <summary>
-            /// Produces a summary report for changes made to the list.
-            /// </summary>
-            /// <returns>A multiline string with a trailing "\n".</returns>
             public string MakeSummaryReport()
             {
                 string report =
@@ -218,10 +238,6 @@ namespace SF3
                 return report;
             }
 
-            /// <summary>
-            /// Produces a detailed report of all changes in the list.
-            /// </summary>
-            /// <returns>A multiline string with a trailing "\n".</returns>
             public string MakeIndividualChangesReport()
             {
                 string report = "";
