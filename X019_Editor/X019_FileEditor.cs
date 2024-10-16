@@ -1,4 +1,5 @@
-﻿using SF3.Types;
+﻿using SF3.Models;
+using SF3.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,11 @@ namespace SF3.X019_Editor
     {
         public X019_FileEditor(ScenarioType scenario) : base(scenario)
         {
+        }
+
+        public override IEnumerable<IModelArray> MakeModelArrays()
+        {
+            return new List<IModelArray>();
         }
     }
 }

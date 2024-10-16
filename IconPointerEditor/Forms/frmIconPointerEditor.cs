@@ -34,9 +34,6 @@ namespace SF3.IconPointerEditor.Forms
             }
         }
 
-        private SpellIconList _spellIconList;
-        private ItemIconList _itemIconList;
-
         public frmIconPointerEditor()
         {
             InitializeComponent();
@@ -74,13 +71,10 @@ namespace SF3.IconPointerEditor.Forms
         {
             var fileEditor = FileEditor as IIconPointerFileEditor;
 
-            _spellIconList = new SpellIconList(fileEditor);
-            _itemIconList = new ItemIconList(fileEditor);
-
             return tabMain.PopulateTabs(new List<PopulateTabConfig>()
             {
-                new PopulateTabConfig(tabSpellIcons, olvSpellIcons, _spellIconList),
-                new PopulateTabConfig(tabItemIcons, olvItemIcons, _itemIconList)
+                new PopulateTabConfig(tabSpellIcons, olvSpellIcons, fileEditor.SpellIconList),
+                new PopulateTabConfig(tabItemIcons, olvItemIcons, fileEditor.ItemIconList)
             });
         }
 

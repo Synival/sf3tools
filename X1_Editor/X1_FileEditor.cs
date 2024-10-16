@@ -1,4 +1,5 @@
-﻿using SF3.Types;
+﻿using SF3.Models;
+using SF3.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace SF3.X1_Editor
         public X1_FileEditor(ScenarioType scenario, MapType map) : base(scenario)
         {
             Map = map;
+        }
+
+        public override IEnumerable<IModelArray> MakeModelArrays()
+        {
+            return new List<IModelArray>();
         }
 
         private MapType _map;

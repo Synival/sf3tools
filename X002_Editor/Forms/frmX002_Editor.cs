@@ -4,7 +4,6 @@ using BrightIdeasSoftware;
 using SF3.Types;
 using System.Collections.Generic;
 using SF3.Editor.Forms;
-using SF3.Models;
 using SF3.Editor.Extensions;
 using static SF3.Editor.Extensions.TabControlExtensions;
 

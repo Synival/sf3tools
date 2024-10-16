@@ -1,4 +1,7 @@
-﻿using SF3.Types;
+﻿using SF3.IconPointerEditor.Models.ItemIcons;
+using SF3.IconPointerEditor.Models.SpellIcons;
+using SF3.Models;
+using SF3.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +17,20 @@ namespace SF3.IconPointerEditor
             X026 = x026;
         }
 
+        public override IEnumerable<IModelArray> MakeModelArrays()
+        {
+            return new List<IModelArray>()
+            {
+                (SpellIconList = new SpellIconList(this)),
+                (ItemIconList = new ItemIconList(this))
+            };
+        }
+
         public bool X026 { get; }
+
+        public SpellIconList SpellIconList { get; private set; }
+
+        public ItemIconList ItemIconList { get; private set; }
 
         protected override string BaseTitle => IsLoaded
             ? base.BaseTitle + (X026 ? " (X026)" : "")
