@@ -101,29 +101,6 @@ namespace SF3.X1_Editor.Forms
 
         protected override bool LoadOpenedFile()
         {
-            //attempt to detect scenario that failed
-            /*if (offset > 0x06067fff || offset < 0x0605e000)
-            {
-                //Console.WriteLine(offset.ToString("X"));
-
-                olvItems.ClearObjects();
-                objectListView1.ClearObjects();
-                objectListView2.ClearObjects();
-                objectListView3.ClearObjects();
-                objectListView4.ClearObjects();
-                objectListView5.ClearObjects();
-                objectListView6.ClearObjects();
-                objectListView7.ClearObjects();
-                objectListView8.ClearObjects();
-                objectListView9.ClearObjects();
-                objectListView10.ClearObjects();
-                objectListView11.ClearObjects();
-                objectListView12.ClearObjects();
-                objectListView13.ClearObjects();
-                return false;
-            }    
-            else*/
-
             bool isntScn1 = Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other;
 
             _slotList = new SlotList(FileEditor);
