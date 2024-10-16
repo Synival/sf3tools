@@ -1,5 +1,6 @@
 ﻿using SF3.Models;
 using SF3.Types;
+using SF3.X019_Editor.Models.Monsters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,12 @@ namespace SF3.X019_Editor
 
         public override IEnumerable<IModelArray> MakeModelArrays()
         {
-            return new List<IModelArray>();
+            return new List<IModelArray>()
+            {
+                (MonsterList = new MonsterList(this))
+            };
         }
+
+        public MonsterList MonsterList { get; private set; }
     }
 }

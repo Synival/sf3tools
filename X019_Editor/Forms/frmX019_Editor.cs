@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Reflection;
-using System.IO;
-using SF3.X019_Editor.Models.Monsters;
 using BrightIdeasSoftware;
 using SF3.Types;
 using System.Collections.Generic;
-using System.Linq;
 using SF3.Editor.Forms;
 using SF3.Editor.Extensions;
 using static SF3.Editor.Extensions.TabControlExtensions;
@@ -19,7 +13,7 @@ namespace SF3.X019_Editor.Forms
         // Used to display version in the application
         private string Version = "0.12";
 
-        private MonsterList _monsterList;
+        new public IX019_FileEditor FileEditor => base.FileEditor as IX019_FileEditor;
 
         public frmX019_Editor()
         {
@@ -55,17 +49,13 @@ namespace SF3.X019_Editor.Forms
 
         protected override bool LoadOpenedFile()
         {
-            var fileEditor = FileEditor as IX019_FileEditor;
-
-            _monsterList = new MonsterList(fileEditor);
-
             return tabMain.PopulateTabs(new List<PopulateTabConfig>()
             {
-                new PopulateTabConfig(tabMonsterTab1, olvMonsterTab1, _monsterList),
-                new PopulateTabConfig(tabMonsterTab2, olvMonsterTab2, _monsterList),
-                new PopulateTabConfig(tabMonsterTab3, olvMonsterTab3, _monsterList),
-                new PopulateTabConfig(tabMonsterTab4, olvMonsterTab4, _monsterList),
-                new PopulateTabConfig(tabMonsterTab5, olvMonsterTab5, _monsterList),
+                new PopulateTabConfig(tabMonsterTab1, olvMonsterTab1, FileEditor.MonsterList),
+                new PopulateTabConfig(tabMonsterTab2, olvMonsterTab2, FileEditor.MonsterList),
+                new PopulateTabConfig(tabMonsterTab3, olvMonsterTab3, FileEditor.MonsterList),
+                new PopulateTabConfig(tabMonsterTab4, olvMonsterTab4, FileEditor.MonsterList),
+                new PopulateTabConfig(tabMonsterTab5, olvMonsterTab5, FileEditor.MonsterList),
             });
         }
 
