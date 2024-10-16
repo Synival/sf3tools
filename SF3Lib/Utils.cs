@@ -211,12 +211,12 @@ namespace SF3
             {
                 string report =
                     "Overall report:\n" +
-                    "====================================================\n" +
+                    "----------------------------------------------------\n" +
                     MakeSummaryReport();
 
                 report += "\n\n" +
                     "Individual changes report:\n" +
-                    "====================================================\n" +
+                    "----------------------------------------------------\n" +
                     MakeIndividualChangesReport();
 
                 return report;
@@ -265,10 +265,10 @@ namespace SF3
         /// <param name="objTo">The object whose properties should be copied to.</param>
         /// <param name="inherit">When true (default), all inherited properties are copied.</param>
         /// <returns>A list of all properties considered and the result.</returns>
-        public static BulkCopyPropertiesResult BulkCopyProperties<T>(T objFrom, T objTo, bool inherit = true) where T : class
+        public static BulkCopyPropertiesResult BulkCopyProperties<T>(T objFrom, T objTo, bool inherit = true)
         {
             // Get all public properties with the [BulkCopy] attribute.
-            var properties = typeof(T).GetProperties(
+            var properties = objFrom.GetType().GetProperties(
                     BindingFlags.Public |
                     BindingFlags.Instance |
                     (inherit ? 0 : BindingFlags.DeclaredOnly)
@@ -292,21 +292,13 @@ namespace SF3
         /// <summary>
         /// Copies all properties of type T in an IEnumerable<T> tagged with [BulkCopy] in 'objFrom' to 'objTo'.
         /// </summary>
-        /// <typeparam name="T">The type whose properties should be </typeparam>
+        /// <typeparam name="T">The type whose properties should be copied.</typeparam>
         /// <param name="listFrom">The object whose properties should be copied from.</param>
         /// <param name="listTo">The object whose properties should be copied to.</param>
         /// <param name="inherit">When true (default), all inherited properties are copied.</param>
         /// <returns>A report with the number of rows affected, unaffected, and each row's individual properties changed.</returns>
         public static BulkCopyCollectionResult<T> BulkCopyCollectionProperties<T>(IEnumerable<T> listFrom, IEnumerable<T> listTo, bool inherit = true) where T : class
         {
-            // Get all public properties with the [BulkCopy] attribute.
-            var properties = typeof(T).GetProperties(
-                    BindingFlags.Public |
-                    BindingFlags.Instance |
-                    (inherit ? 0 : BindingFlags.DeclaredOnly))
-                .Where(x => x.IsDefined(typeof(BulkCopyAttribute)))
-                .ToList();
-
             var arrayFrom = listFrom.ToArray();
             var arrayTo = listTo.ToArray();
 

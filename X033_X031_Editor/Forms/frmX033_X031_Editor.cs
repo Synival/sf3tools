@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.IO;
-using SF3.X033_X031_Editor.Models.InitialInfos;
-using SF3.X033_X031_Editor.Models.Stats;
-using SF3.X033_X031_Editor.Models.WeaponLevel;
 using BrightIdeasSoftware;
 using System.Collections.Generic;
 using SF3.Types;
@@ -11,6 +7,8 @@ using SF3.Exceptions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.Models;
+using System.Linq;
+using System.IO;
 
 namespace SF3.X033_X031_Editor.Forms
 {
@@ -306,7 +304,7 @@ namespace SF3.X033_X031_Editor.Forms
 
             var openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Copy Tables From";
-            openFileDialog.Filter = "SF3 data (X033.bin)|X033.bin|SF3 data (X031.bin)|X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+            openFileDialog.Filter = FileDialogFilter;
             if (openFileDialog.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -320,60 +318,53 @@ namespace SF3.X033_X031_Editor.Forms
                 return;
             }
 
-            string copyResults = "";
+            string copyReports = "";
             try
             {
-                // TODO: refactor out!
-                var copyStatsList = new StatsList(copyFileEditor);
-                if (!copyStatsList.Load())
-                {
-                    MessageBox.Show("Could not load " + copyStatsList.ResourceFile);
-                    return;
-                }
+                // Gather all the IModelArray properties to copy.
+                // TODO: Maybe another attribute??
+                var modelsFrom = copyFileEditor.GetType().GetProperties()
+                    .Where(x => typeof(IModelArray).IsAssignableFrom(x.PropertyType))
+                    .ToDictionary(x => x, x => x.GetValue(copyFileEditor) as IModelArray);
 
-                var copyInitialInfoList = new InitialInfoList(copyFileEditor);
-                if (!copyInitialInfoList.Load())
-                {
-                    MessageBox.Show("Could not load " + copyInitialInfoList.ResourceFile);
-                    return;
-                }
+                var modelsTo = FileEditor.GetType().GetProperties()
+                    .Where(x => typeof(IModelArray).IsAssignableFrom(x.PropertyType))
+                    .ToDictionary(x => x, x => x.GetValue(FileEditor) as IModelArray);
 
-                var copyWeaponLevelList = new WeaponLevelList(copyFileEditor);
-                if (!copyWeaponLevelList.Load())
-                {
-                    MessageBox.Show("Could not load " + copyWeaponLevelList.ResourceFile);
-                    return;
-                }
-
-                var report1 = Utils.BulkCopyCollectionProperties(copyStatsList.Models, FileEditor.StatsList.Models);
-                var report2 = Utils.BulkCopyCollectionProperties(copyInitialInfoList.Models, FileEditor.InitialInfoList.Models);
-                var report3 = Utils.BulkCopyCollectionProperties(copyWeaponLevelList.Models, FileEditor.WeaponLevelList.Models);
+                // Perform the bulk copy for each IModelArray store the results.
+                var bulkCopyResults = modelsFrom
+                    .Join(modelsTo, l => l.Key, r => r.Key, (l, r) => (l.Key, l.Value, r.Value))
+                    .ToDictionary(x => x.Key, x => Utils.BulkCopyCollectionProperties(x.Item2.ModelObjs, x.Item3.ModelObjs, true));
 
                 ObjectListViews.ForEach(x => x.RefreshAllItems());
 
                 // Produce a giant report.
-                copyResults =
-                    "Stats:\n======================================\n" + report1.MakeSummaryReport() + "\n\n" +
-                    "Initial Info:\n======================================\n" + report2.MakeSummaryReport() + "\n\n" +
-                    "Weapon Level List:\n======================================\n" + report3.MakeSummaryReport();
-
-                // Output summary 
-                try
+                var fullReports = "";
+                foreach (var report in bulkCopyResults)
                 {
-                    File.WriteAllText("Changes_Stats.txt", report1.MakeFullReport());
-                    File.WriteAllText("Changes_InitialInfos.txt", report2.MakeFullReport());
-                    File.WriteAllText("Changes_WeaponLevels.txt", report3.MakeFullReport());
-                    copyResults +=
-                        "\n\n" +
-                        "Detailed reports dumped to:\n" + 
-                        "    Changes_Stats.txt\n" +
-                        "    Changes_InitialInfos.txt\n" +
-                        "    Changes_WeaponLevels.txt";
+                    copyReports += (copyReports == "" ? "" : "\n\n") +
+                        report.Key.Name + "\n" +
+                        "====================================================\n" +
+                        report.Value.MakeSummaryReport();
 
+                    fullReports += (fullReports == "" ? "" : "\n\n") +
+                        report.Key.Name + "\n" +
+                        "====================================================\n" +
+                        report.Value.MakeFullReport();
                 }
-                catch
+
+                // Output summary files.
+                if (fullReports != "")
                 {
-                    copyResults += "\n\nCouldn't dump detailed reports.";
+                    try
+                    {
+                        File.WriteAllText("BulkCopyReport.txt", fullReports);
+                        copyReports += "\n\nDetailed reports dumped to 'BulkCopyReport.txt'.";
+                    }
+                    catch
+                    {
+                        copyReports += "\n\nError: Couldn't dump detailed report to 'BulkCopyReport.txt'.";
+                    }
                 }
             }
             catch (System.Reflection.TargetInvocationException)
@@ -393,7 +384,7 @@ namespace SF3.X033_X031_Editor.Forms
             }
 
             // Show the user a nice report.
-            MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyResults);
+            MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyReports);
         }
     }
 }
