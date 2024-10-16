@@ -48,7 +48,7 @@ namespace SF3.X013_Editor.Forms
 
         protected override bool LoadOpenedFile()
         {
-            return tabMain.PopulateTabs(new List<PopulateTabConfig>()
+            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()
             {
                 new PopulateTabConfig(tabSpecials, olvSpecials, FileEditor.SpecialsList),
                 new PopulateTabConfig(tabFriendshipExp, olvFriendshipExp, FileEditor.FriendshipExpList),

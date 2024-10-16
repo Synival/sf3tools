@@ -104,7 +104,7 @@ namespace SF3.X033_X031_Editor.Forms
 
         protected override bool LoadOpenedFile()
         {
-            if (!tabMain.PopulateTabs(new List<PopulateTabConfig>()
+            if (!tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()
             {
                 new PopulateTabConfig(tabStats, olvStats, FileEditor.StatsList),
                 new PopulateTabConfig(tabSpells, olvSpells, FileEditor.StatsList),

@@ -49,7 +49,7 @@ namespace SF3.X019_Editor.Forms
 
         protected override bool LoadOpenedFile()
         {
-            return tabMain.PopulateTabs(new List<PopulateTabConfig>()
+            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()
             {
                 new PopulateTabConfig(tabMonsterTab1, olvMonsterTab1, FileEditor.MonsterList),
                 new PopulateTabConfig(tabMonsterTab2, olvMonsterTab2, FileEditor.MonsterList),

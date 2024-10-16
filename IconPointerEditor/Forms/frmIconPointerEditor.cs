@@ -63,7 +63,7 @@ namespace SF3.IconPointerEditor.Forms
 
         protected override bool LoadOpenedFile()
         {
-            return tabMain.PopulateTabs(new List<PopulateTabConfig>()
+            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()
             {
                 new PopulateTabConfig(tabSpellIcons, olvSpellIcons, FileEditor.SpellIconList),
                 new PopulateTabConfig(tabItemIcons, olvItemIcons, FileEditor.ItemIconList)

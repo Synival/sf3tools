@@ -63,7 +63,7 @@ namespace SF3.X002_Editor.Forms
 
         protected override bool LoadOpenedFile()
         {
-            if (!tabMain.PopulateTabs(new List<PopulateTabConfig>()
+            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()
             {
                 new PopulateTabConfig(tabItems, olvItems, FileEditor.ItemList),
                 new PopulateTabConfig(tabSpells, olvSpells, FileEditor.SpellList),
@@ -72,15 +72,8 @@ namespace SF3.X002_Editor.Forms
                 new PopulateTabConfig(tabLoadedOverride, olvLoadedOverride, FileEditor.MusicOverrideList),
                 new PopulateTabConfig(tabStatBoost, olvStatBoost, FileEditor.StatList),
                 new PopulateTabConfig(tabWeaponRankAttack, olvWeaponRankAttack, FileEditor.WeaponRankList),
-                new PopulateTabConfig(tabAttackResist, olvAttackResist, FileEditor.AttackResistList)
-            }))
-            {
-                return false;
-            }
-
-            return tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
-            {
-                new PopulateAndToggleTabConfig(Scenario == ScenarioType.Scenario1, tabWarpTable, olvWarpTable, FileEditor.WarpList),
+                new PopulateTabConfig(tabAttackResist, olvAttackResist, FileEditor.AttackResistList),
+                new PopulateTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpList),
             });
         }
 

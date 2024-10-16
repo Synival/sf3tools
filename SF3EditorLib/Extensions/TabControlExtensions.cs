@@ -88,20 +88,6 @@ namespace SF3.Editor.Extensions
         }
 
         /// <summary>
-        /// Configuration of a single tab for PopulateAndToggleTabs().
-        /// </summary>
-        public class PopulateAndToggleTabConfig : PopulateTabConfig
-        {
-            public PopulateAndToggleTabConfig(bool isVisible, TabPage tabPage, ObjectListView objectListView, IModelArray modelArray)
-            : base(tabPage, objectListView, modelArray)
-            {
-                IsVisible = isVisible;
-            }
-
-            public bool IsVisible { get; }
-        }
-
-        /// <summary>
         /// Populates contents of tabs.
         /// All ObjectListView's provided with the tab configuration will have their objects removed via ClearObjects(),
         /// regardless of whether or not they are visible.
@@ -142,11 +128,11 @@ namespace SF3.Editor.Extensions
         /// <param name="tabControl"></param>
         /// <param name="tabConfigs"></param>
         /// <returns>'True' if the operation succeeded, 'false' if a ModelArray could not be loaded.</returns>
-        public static bool PopulateAndToggleTabs(this TabControl tabControl, IEnumerable<PopulateAndToggleTabConfig> tabConfigs)
+        public static bool PopulateAndToggleTabs(this TabControl tabControl, IEnumerable<PopulateTabConfig> tabConfigs)
         {
-            tabControl.ToggleTabs(tabConfigs.ToDictionary(x => x.TabPage, x => x.IsVisible));
+            tabControl.ToggleTabs(tabConfigs.ToDictionary(x => x.TabPage, x => x.ModelArray != null));
             var populateTabConfigs = tabConfigs
-                .Where(x => x.IsVisible)
+                .Where(x => x.ModelArray != null)
                 .Cast<PopulateTabConfig>()
                 .ToList();
             return tabControl.PopulateTabs(populateTabConfigs);
