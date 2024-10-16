@@ -4,12 +4,7 @@ using SF3.Types;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SF3.Editor.Forms
@@ -20,44 +15,6 @@ namespace SF3.Editor.Forms
     public partial class EditorForm : Form
     {
         private const string SavePromptString = "You have unsaved changes. Would you like to save?";
-
-        /// <summary>
-        /// FileEditor open for the current file.
-        /// </summary>
-        protected IFileEditor FileEditor { get; private set; }
-
-        /// <summary>
-        /// Title of the form set in the designer. Should be set after derived class' InitializeComponent().
-        /// </summary>
-        public string BaseTitle { get; protected set; }
-
-        /// <summary>
-        /// All ObjectListView's present in the form. Populated automatically.
-        /// </summary>
-        protected List<ObjectListView> ObjectListViews { get; private set; }
-
-        private ScenarioType _scenario = ScenarioType.Scenario1;
-
-        /// <summary>
-        /// The Scenario set for editing.
-        /// </summary>
-        public ScenarioType Scenario
-        {
-            get => _scenario;
-            set
-            {
-                if (_scenario != value)
-                {
-                    _scenario = value;
-                    ScenarioChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Is 'true' when a file has been loaded.
-        /// </summary>
-        public bool IsLoaded => FileEditor?.IsLoaded == true;
 
         public EditorForm()
         {
@@ -78,42 +35,6 @@ namespace SF3.Editor.Forms
             ObjectListViews = SF3.Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
             UpdateTitle();
         }
-
-        /// <summary>
-        /// The title to set when using UpdateTitle().
-        /// </summary>
-        /// <returns></returns>
-        protected virtual string MakeTitle() => (FileEditor?.IsLoaded == true)
-            ? FileEditor.EditorTitle(BaseTitle)
-            : BaseTitle;
-
-        /// <summary>
-        /// Updates the title of the form.
-        /// </summary>
-        protected void UpdateTitle()
-        {
-            string newTitle = MakeTitle();
-            if (this.Text != newTitle)
-            {
-                this.Text = newTitle;
-                TitleChanged?.Invoke(this, EventArgs.Empty);
-            }
-        }
-
-        /// <summary>
-        /// File filter for OpenFileDialog() and SaveFileDialog(). Must be overridden.
-        /// </summary>
-        protected virtual string FileDialogFilter => throw new NotImplementedException();
-
-        /// <summary>
-        /// Factory method for creating an IFileEditor in OpenFileDialog(). Must be overridden.
-        /// </summary>
-        protected virtual IFileEditor MakeFileEditor() => throw new NotImplementedException();
-
-        /// <summary>
-        /// Function to load data from a file opened with OpenFileDialog(). Must be overridden.
-        /// </summary>
-        protected virtual bool LoadOpenedFile() => throw new NotImplementedException();
 
         /// <summary>
         /// Creates an "Open" dialog and, if a file was chosen, opens it, processes its data, and loads it.
@@ -154,7 +75,7 @@ namespace SF3.Editor.Forms
             bool success = false;
             try
             {
-                success = LoadOpenedFile();
+                success = OnLoad();
             }
             catch (System.Reflection.TargetInvocationException)
             {
@@ -238,6 +159,94 @@ namespace SF3.Editor.Forms
         }
 
         /// <summary>
+        /// Updates the title of the form.
+        /// </summary>
+        protected void UpdateTitle()
+        {
+            string newTitle = MakeTitle();
+            if (this.Text != newTitle)
+            {
+                this.Text = newTitle;
+                TitleChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// Function to load data from a file opened with OpenFileDialog(). Must be overridden.
+        /// </summary>
+        protected virtual bool OnLoad()
+        {
+            return true;
+        }
+
+        private void EditorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (FileEditor?.IsModified == true)
+            {
+                if (!CloseFile())
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Title of the form set in the designer. Should be set after derived class' InitializeComponent().
+        /// </summary>
+        public string BaseTitle { get; protected set; }
+
+        private ScenarioType _scenario = ScenarioType.Scenario1;
+
+        /// <summary>
+        /// The Scenario set for editing.
+        /// </summary>
+        public ScenarioType Scenario
+        {
+            get => _scenario;
+            set
+            {
+                if (_scenario != value)
+                {
+                    _scenario = value;
+                    ScenarioChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Is 'true' when a file has been loaded.
+        /// </summary>
+        public bool IsLoaded => FileEditor?.IsLoaded == true;
+
+        /// <summary>
+        /// FileEditor open for the current file.
+        /// </summary>
+        protected IFileEditor FileEditor { get; private set; }
+
+        /// <summary>
+        /// All ObjectListView's present in the form. Populated automatically.
+        /// </summary>
+        protected List<ObjectListView> ObjectListViews { get; private set; }
+
+        /// <summary>
+        /// The title to set when using UpdateTitle().
+        /// </summary>
+        /// <returns></returns>
+        protected virtual string MakeTitle() => (FileEditor?.IsLoaded == true)
+            ? FileEditor.EditorTitle(BaseTitle)
+            : BaseTitle;
+
+        /// <summary>
+        /// File filter for OpenFileDialog() and SaveFileDialog(). Must be overridden.
+        /// </summary>
+        protected virtual string FileDialogFilter => throw new NotImplementedException();
+
+        /// <summary>
+        /// Factory method for creating an IFileEditor in OpenFileDialog(). Must be overridden.
+        /// </summary>
+        protected virtual IFileEditor MakeFileEditor() => throw new NotImplementedException();
+
+        /// <summary>
         /// Triggered when Scenario has a new value.
         /// </summary>
         public event EventHandler ScenarioChanged;
@@ -286,16 +295,5 @@ namespace SF3.Editor.Forms
         /// Triggered after FileEditor's loaded state has been changed.
         /// </summary>
         public event EventHandler FileIsLoadedChanged;
-
-        private void EditorForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (FileEditor?.IsModified == true)
-            {
-                if (!CloseFile())
-                {
-                    e.Cancel = true;
-                }
-            }
-        }
     }
 }

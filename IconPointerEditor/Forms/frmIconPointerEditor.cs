@@ -61,8 +61,13 @@ namespace SF3.IconPointerEditor.Forms
 
         protected override IFileEditor MakeFileEditor() => new IconPointerFileEditor(Scenario, X026);
 
-        protected override bool LoadOpenedFile()
+        protected override bool OnLoad()
         {
+            if (!base.OnLoad())
+            {
+                return false;
+            }
+
             return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()
             {
                 new PopulateTabConfig(tabSpellIcons, olvSpellIcons, FileEditor.SpellIconList),

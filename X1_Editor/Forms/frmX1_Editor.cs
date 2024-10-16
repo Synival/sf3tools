@@ -86,9 +86,12 @@ namespace SF3.X1_Editor.Forms
 
         protected override IFileEditor MakeFileEditor() => new X1_FileEditor(Scenario, Map);
 
-        protected override bool LoadOpenedFile()
+        protected override bool OnLoad()
         {
-            bool isntScn1 = Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other;
+            if (!base.OnLoad())
+            {
+                return false;
+            }
 
             return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()
             {

@@ -102,8 +102,13 @@ namespace SF3.X033_X031_Editor.Forms
 
         protected override IFileEditor MakeFileEditor() => new X033_X031_FileEditor(Scenario);
 
-        protected override bool LoadOpenedFile()
+        protected override bool OnLoad()
         {
+            if (!base.OnLoad())
+            {
+                return false;
+            }
+
             if (!tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()
             {
                 new PopulateTabConfig(tabStats, olvStats, FileEditor.StatsList),
