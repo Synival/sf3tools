@@ -185,7 +185,7 @@ namespace SF3
         /// Closes a file if opened. Invokes event 'Closed' if a file was closed.
         /// </summary>
         /// <returns>'true' on success, even if no file is open.</returns>
-        public bool CloseFile()
+        public virtual bool CloseFile()
         {
             if (!IsLoaded)
             {

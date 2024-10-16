@@ -16,7 +16,6 @@ namespace SF3
         public SF3FileEditor(ScenarioType scenario)
         {
             Scenario = scenario;
-            ModelArrays = MakeModelArrays();
         }
 
         /// <summary>
@@ -32,6 +31,8 @@ namespace SF3
                 return false;
             }
 
+            ModelArrays = MakeModelArrays();
+
             foreach (var ma in ModelArrays)
             {
                 if (!ma.Load())
@@ -43,9 +44,20 @@ namespace SF3
             return true;
         }
 
+        public override bool CloseFile()
+        {
+            if (!base.CloseFile())
+            {
+                return false;
+            }
+
+            ModelArrays = null;
+            return true;
+        }
+
         public ScenarioType Scenario { get; }
 
-        public IEnumerable<IModelArray> ModelArrays { get; }
+        public IEnumerable<IModelArray> ModelArrays { get; private set; }
 
         protected override string BaseTitle => IsLoaded
             ? base.BaseTitle + " (" + Scenario.ToString() + ")"
