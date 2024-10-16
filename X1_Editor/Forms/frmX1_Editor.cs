@@ -228,23 +228,23 @@ namespace SF3.X1_Editor.Forms
             _enterList = new EnterList(fileEditor);
             _arrowList = new ArrowList(fileEditor);
 
-            return tabMain.PopulateAndShowTabs(new List<PopulateAndShowTabConfig>()
+            return tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
             {
-                new PopulateAndShowTabConfig(IsBattle, tabHeader, olvHeader, _headerList),
-                new PopulateAndShowTabConfig(IsBattle, tabSlotTab1, olvSlotTab1, _slotList),
-                new PopulateAndShowTabConfig(IsBattle, tabSlotTab2, olvSlotTab2, _slotList),
-                new PopulateAndShowTabConfig(IsBattle, tabSlotTab3, olvSlotTab3, _slotList),
-                new PopulateAndShowTabConfig(IsBattle, tabSlotTab4, olvSlotTab4, _slotList),
-                new PopulateAndShowTabConfig(IsBattle, tabAITargetPosition, olvAITargetPosition, _aiList),
-                new PopulateAndShowTabConfig(IsBattle, tabSpawnZones, olvSpawnZones, _spawnZoneList),
-                new PopulateAndShowTabConfig(IsBattle, tabBattlePointers, olvBattlePointers, _battlePointersList),
-                new PopulateAndShowTabConfig(IsBattle, tabScriptedMovement, olvScriptedMovement, _customMovementList),
-                new PopulateAndShowTabConfig(true, tabInteractables, olvInteractables, _treasureList),
-                new PopulateAndShowTabConfig(!IsBattle, tabTownNpcs, olvTownNpcs, _npcList),
-                new PopulateAndShowTabConfig(!IsBattle, tabNonBattleEnter, olvNonBattleEnter, _enterList),
-                new PopulateAndShowTabConfig(!IsBattle && isntScn1, tabArrows, olvArrows, _arrowList),
-                new PopulateAndShowTabConfig(isntScn1, tabWarpTable, olvWarpTable, _warpList),
-                new PopulateAndShowTabConfig(IsBattle && isntScn1, tabTileData, olvTileData, _tileList),
+                new PopulateAndToggleTabConfig(IsBattle, tabHeader, olvHeader, _headerList),
+                new PopulateAndToggleTabConfig(IsBattle, tabSlotTab1, olvSlotTab1, _slotList),
+                new PopulateAndToggleTabConfig(IsBattle, tabSlotTab2, olvSlotTab2, _slotList),
+                new PopulateAndToggleTabConfig(IsBattle, tabSlotTab3, olvSlotTab3, _slotList),
+                new PopulateAndToggleTabConfig(IsBattle, tabSlotTab4, olvSlotTab4, _slotList),
+                new PopulateAndToggleTabConfig(IsBattle, tabAITargetPosition, olvAITargetPosition, _aiList),
+                new PopulateAndToggleTabConfig(IsBattle, tabSpawnZones, olvSpawnZones, _spawnZoneList),
+                new PopulateAndToggleTabConfig(IsBattle, tabBattlePointers, olvBattlePointers, _battlePointersList),
+                new PopulateAndToggleTabConfig(IsBattle, tabScriptedMovement, olvScriptedMovement, _customMovementList),
+                new PopulateAndToggleTabConfig(true, tabInteractables, olvInteractables, _treasureList),
+                new PopulateAndToggleTabConfig(!IsBattle, tabTownNpcs, olvTownNpcs, _npcList),
+                new PopulateAndToggleTabConfig(!IsBattle, tabNonBattleEnter, olvNonBattleEnter, _enterList),
+                new PopulateAndToggleTabConfig(!IsBattle && isntScn1, tabArrows, olvArrows, _arrowList),
+                new PopulateAndToggleTabConfig(isntScn1, tabWarpTable, olvWarpTable, _warpList),
+                new PopulateAndToggleTabConfig(IsBattle && isntScn1, tabTileData, olvTileData, _tileList),
             });
         }
 

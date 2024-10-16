@@ -3,6 +3,7 @@ using SF3.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,11 +13,68 @@ namespace SF3.Editor.Extensions
     public static class TabControlExtensions
     {
         /// <summary>
-        /// Configuration of a single tab in PopulateAndShowTabs.
+        /// Adds or removes tabs based on their 'value' in a key-value Dictionary.
         /// </summary>
-        public class PopulateAndShowTabConfig
+        /// <param name="tabControl">The control whose tabs should be toggled.</param>
+        /// <param name="tabPages">A key-value dictionary of tabs and whether or not they should be visible.</param>
+        public static void ToggleTabs(this TabControl tabControl, Dictionary<TabPage, bool> tabPages)
         {
-            public PopulateAndShowTabConfig(bool isVisible, TabPage tabPage, ObjectListView objectListView, IModelArray modelArray)
+            var tabsToRemove = tabControl.TabPages
+                .Cast<TabPage>()
+                .Intersect(tabPages.Where(x => !x.Value).Select(x => x.Key))
+                .ToArray();
+
+            var tabsToAdd = tabPages
+                .Where(x => x.Value)
+                .Select(x => x.Key)
+                .Except(tabControl.TabPages.Cast<TabPage>())
+                .ToArray();
+
+            // If there aren't any changes to be maid, abort early.
+            if (tabsToRemove.Length == 0 && tabsToAdd.Length == 0)
+            {
+                return;
+            }
+
+            // Deselect the selected tab (it screws up rendering).
+            var lastSelectedTab = tabControl.SelectedTab;
+            tabControl.SelectedTab = null;
+
+            // Prevent redraw/layout updates while modifying tabs.
+            tabControl.SuspendLayout();
+
+            // Remove all tabs, so we don't have to worry about adding them back in-order.
+            tabsToRemove = tabControl.TabPages
+                .Cast<TabPage>()
+                .Intersect(tabPages.Select(x => x.Key))
+                .ToArray();
+            foreach (var tab in tabsToRemove)
+            {
+                tabControl.TabPages.Remove(tab);
+            }
+
+            // Add enabled tabs.
+            tabsToAdd = tabPages
+                .Where(x => x.Value)
+                .Select(x => x.Key)
+                .Except(tabControl.TabPages.Cast<TabPage>())
+                .ToArray();
+            tabControl.TabPages.AddRange(tabsToAdd);
+
+            // Done - resume redrawing and re-select the tab, if possible.
+            tabControl.ResumeLayout();
+            if (lastSelectedTab?.Parent == tabControl)
+            {
+                tabControl.SelectedTab = lastSelectedTab;
+            }
+        }
+
+        /// <summary>
+        /// Configuration of a single tab in PopulateAndToggleTabs.
+        /// </summary>
+        public class PopulateAndToggleTabConfig
+        {
+            public PopulateAndToggleTabConfig(bool isVisible, TabPage tabPage, ObjectListView objectListView, IModelArray modelArray)
             {
                 IsVisible = isVisible;
                 TabPage = tabPage;
@@ -42,22 +100,15 @@ namespace SF3.Editor.Extensions
         /// <param name="tabControl"></param>
         /// <param name="tabConfigs"></param>
         /// <returns>'True' if the operation succeeded, 'false' if a ModelArray could not be loaded.</returns>
-        public static bool PopulateAndShowTabs(this TabControl tabControl, IEnumerable<PopulateAndShowTabConfig> tabConfigs)
+        public static bool PopulateAndToggleTabs(this TabControl tabControl, IEnumerable<PopulateAndToggleTabConfig> tabConfigs)
         {
-            tabControl.SuspendLayout();
-            var lastSelectedTab = tabControl.SelectedTab;
-            tabControl.SelectedTab = null;
-
-            // Reset all tabs.
-            foreach (var tc in tabConfigs)
-            {
-                tabControl.TabPages.Remove(tc.TabPage);
-                tc.ObjectListView.ClearObjects();
-            }
+            tabControl.ToggleTabs(tabConfigs.ToDictionary(x => x.TabPage, x => x.IsVisible));
 
             // Show and populate visible tabs.
             foreach (var tc in tabConfigs)
             {
+                tc.ObjectListView.ClearObjects();
+
                 if (!tc.IsVisible)
                 {
                     continue;
@@ -70,16 +121,9 @@ namespace SF3.Editor.Extensions
                     return false;
                 }
 
-                tabControl.TabPages.Add(tc.TabPage);
                 tc.ObjectListView.AddObjects(tc.ModelObjs);
             }
 
-            if (lastSelectedTab?.Parent == tabControl)
-            {
-                tabControl.SelectedTab = lastSelectedTab;
-            }
-
-            tabControl.ResumeLayout();
             return true;
         }
     }

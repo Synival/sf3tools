@@ -65,17 +65,17 @@ namespace SF3.X002_Editor.Forms
 
         protected override bool LoadOpenedFile()
         {
-            return tabMain.PopulateAndShowTabs(new List<PopulateAndShowTabConfig>()
+            return tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
             {
-                new PopulateAndShowTabConfig(true, tabItems, olvItems, FileEditor.ItemList),
-                new PopulateAndShowTabConfig(true, tabSpells, olvSpells, FileEditor.SpellList),
-                new PopulateAndShowTabConfig(true, tabPreset, olvPreset, FileEditor.PresetList),
-                new PopulateAndShowTabConfig(true, tabLoaded, olvLoaded, FileEditor.LoadList),
-                new PopulateAndShowTabConfig(true, tabLoadedOverride, olvLoadedOverride, FileEditor.MusicOverrideList),
-                new PopulateAndShowTabConfig(true, tabStatBoost, olvStatBoost, FileEditor.StatList),
-                new PopulateAndShowTabConfig(true, tabWeaponRankAttack, olvWeaponRankAttack, FileEditor.WeaponRankList),
-                new PopulateAndShowTabConfig(true, tabAttackResist, olvAttackResist, FileEditor.AttackResistList),
-                new PopulateAndShowTabConfig(Scenario == ScenarioType.Scenario1, tabWarpTable, olvWarpTable, FileEditor.WarpList),
+                new PopulateAndToggleTabConfig(true, tabItems, olvItems, FileEditor.ItemList),
+                new PopulateAndToggleTabConfig(true, tabSpells, olvSpells, FileEditor.SpellList),
+                new PopulateAndToggleTabConfig(true, tabPreset, olvPreset, FileEditor.PresetList),
+                new PopulateAndToggleTabConfig(true, tabLoaded, olvLoaded, FileEditor.LoadList),
+                new PopulateAndToggleTabConfig(true, tabLoadedOverride, olvLoadedOverride, FileEditor.MusicOverrideList),
+                new PopulateAndToggleTabConfig(true, tabStatBoost, olvStatBoost, FileEditor.StatList),
+                new PopulateAndToggleTabConfig(true, tabWeaponRankAttack, olvWeaponRankAttack, FileEditor.WeaponRankList),
+                new PopulateAndToggleTabConfig(true, tabAttackResist, olvAttackResist, FileEditor.AttackResistList),
+                new PopulateAndToggleTabConfig(Scenario == ScenarioType.Scenario1, tabWarpTable, olvWarpTable, FileEditor.WarpList),
             });
         }
 
