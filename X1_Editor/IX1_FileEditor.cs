@@ -13,5 +13,7 @@ namespace SF3.X1_Editor
         MapType Map { get; set; }
 
         int MapOffset { get; }
+
+        bool IsBattle { get; }
     }
 }

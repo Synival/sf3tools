@@ -35,10 +35,15 @@ namespace SF3.X1_Editor.Forms
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_File1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_SelectScenarioThenMap = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_IfTheTablesEtc = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiHelp_TreasureDebugToggle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,8 +57,6 @@ namespace SF3.X1_Editor.Forms
             this.tsmiMap_MapMedion = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMap_MapJulian = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMap_MapExtra = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiMapType = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiMapType_BattleToggle = new System.Windows.Forms.ToolStripMenuItem();
             this.tabHeader = new System.Windows.Forms.TabPage();
             this.olvHeader = new BrightIdeasSoftware.ObjectListView();
             this.lvcHeaderSizeList = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -258,11 +261,6 @@ namespace SF3.X1_Editor.Forms
             this.lvcTileDataUnknownD = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileDataUnknownE = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileDataUnknownF = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tsSeparator_File1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.tabHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).BeginInit();
@@ -303,8 +301,7 @@ namespace SF3.X1_Editor.Forms
             this.tsmiFile,
             this.tsmiHelp,
             this.tsmiScenario,
-            this.tsmiMap,
-            this.tsmiMapType});
+            this.tsmiMap});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -340,6 +337,31 @@ namespace SF3.X1_Editor.Forms
             this.tsmiFile_SaveAs.Text = "Save As...";
             this.tsmiFile_SaveAs.Click += new System.EventHandler(this.tsmiFile_SaveAs_Click);
             // 
+            // tsSeparator_File1
+            // 
+            this.tsSeparator_File1.Name = "tsSeparator_File1";
+            this.tsSeparator_File1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // tsmiFile_Close
+            // 
+            this.tsmiFile_Close.Enabled = false;
+            this.tsmiFile_Close.Name = "tsmiFile_Close";
+            this.tsmiFile_Close.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_Close.Text = "Close";
+            this.tsmiFile_Close.Click += new System.EventHandler(this.tsmiFile_Close_Click);
+            // 
+            // tsSeparator_File2
+            // 
+            this.tsSeparator_File2.Name = "tsSeparator_File2";
+            this.tsSeparator_File2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // tsmiFile_Exit
+            // 
+            this.tsmiFile_Exit.Name = "tsmiFile_Exit";
+            this.tsmiFile_Exit.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_Exit.Text = "Exit";
+            this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
+            // 
             // tsmiHelp
             // 
             this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -369,6 +391,11 @@ namespace SF3.X1_Editor.Forms
             this.tsmiHelp_IfTheTablesEtc.Name = "tsmiHelp_IfTheTablesEtc";
             this.tsmiHelp_IfTheTablesEtc.Size = new System.Drawing.Size(368, 22);
             this.tsmiHelp_IfTheTablesEtc.Text = "If the tables don\'t populate you used the wrong settings";
+            // 
+            // tsSeparator_Help1
+            // 
+            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
+            this.tsSeparator_Help1.Size = new System.Drawing.Size(365, 6);
             // 
             // tsmiHelp_TreasureDebugToggle
             // 
@@ -468,23 +495,6 @@ namespace SF3.X1_Editor.Forms
             this.tsmiMap_MapExtra.Size = new System.Drawing.Size(180, 22);
             this.tsmiMap_MapExtra.Text = "mapExtra";
             this.tsmiMap_MapExtra.Click += new System.EventHandler(this.tsmiMap_MapExtra_Click);
-            // 
-            // tsmiMapType
-            // 
-            this.tsmiMapType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiMapType_BattleToggle});
-            this.tsmiMapType.Enabled = false;
-            this.tsmiMapType.Name = "tsmiMapType";
-            this.tsmiMapType.Size = new System.Drawing.Size(69, 20);
-            this.tsmiMapType.Text = "Map type";
-            this.tsmiMapType.Visible = false;
-            // 
-            // tsmiMapType_BattleToggle
-            // 
-            this.tsmiMapType_BattleToggle.Name = "tsmiMapType_BattleToggle";
-            this.tsmiMapType_BattleToggle.Size = new System.Drawing.Size(180, 22);
-            this.tsmiMapType_BattleToggle.Text = "Battle toggle: on";
-            this.tsmiMapType_BattleToggle.Click += new System.EventHandler(this.tsmiMapType_BattleToggle_Click);
             // 
             // tabHeader
             // 
@@ -2585,36 +2595,6 @@ namespace SF3.X1_Editor.Forms
             this.lvcTileDataUnknownF.Text = "UnknownF";
             this.lvcTileDataUnknownF.Width = 65;
             // 
-            // tsSeparator_File1
-            // 
-            this.tsSeparator_File1.Name = "tsSeparator_File1";
-            this.tsSeparator_File1.Size = new System.Drawing.Size(177, 6);
-            // 
-            // tsmiFile_Close
-            // 
-            this.tsmiFile_Close.Enabled = false;
-            this.tsmiFile_Close.Name = "tsmiFile_Close";
-            this.tsmiFile_Close.Size = new System.Drawing.Size(180, 22);
-            this.tsmiFile_Close.Text = "Close";
-            this.tsmiFile_Close.Click += new System.EventHandler(this.tsmiFile_Close_Click);
-            // 
-            // tsSeparator_File2
-            // 
-            this.tsSeparator_File2.Name = "tsSeparator_File2";
-            this.tsSeparator_File2.Size = new System.Drawing.Size(177, 6);
-            // 
-            // tsmiFile_Exit
-            // 
-            this.tsmiFile_Exit.Name = "tsmiFile_Exit";
-            this.tsmiFile_Exit.Size = new System.Drawing.Size(180, 22);
-            this.tsmiFile_Exit.Text = "Exit";
-            this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
-            // 
-            // tsSeparator_Help1
-            // 
-            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
-            this.tsSeparator_Help1.Size = new System.Drawing.Size(365, 6);
-            // 
             // frmX1_Editor
             // 
             this.AllowDrop = true;
@@ -2801,8 +2781,6 @@ namespace SF3.X1_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcInteractablesUnknown1;
         private BrightIdeasSoftware.OLVColumn lvcInteractablesEventTypeCode;
         private BrightIdeasSoftware.OLVColumn lvcInteractablesItemTextCode;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMapType;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMapType_BattleToggle;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp_TreasureDebugToggle;
         private System.Windows.Forms.TabPage tabScriptedMovement;
         private BrightIdeasSoftware.ObjectListView olvScriptedMovement;

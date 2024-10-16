@@ -31,6 +31,8 @@ namespace SF3.X1_Editor.Forms
         // Used to display version in the application
         private string Version = "0.34";
 
+        new public IX1_FileEditor FileEditor => base.FileEditor as IX1_FileEditor;
+
         private MapType _map = MapType.Synbios;
 
         private MapType Map
@@ -47,33 +49,6 @@ namespace SF3.X1_Editor.Forms
             }
         }
 
-        private bool _isBattle = true;
-
-        private bool IsBattle
-        {
-            get => _isBattle;
-            set
-            {
-                _isBattle = value;
-                tsmiMapType_BattleToggle.Checked = _isBattle;
-
-                if (_isBattle)
-                {
-                    this.tsmiMapType_BattleToggle.Text = "Battle toggle: on";
-                    _mapType = "battle";
-                }
-                else
-                {
-                    this.tsmiMapType_BattleToggle.Text = "Battle toggle: off";
-                    _mapType = "town";
-                }
-
-                UpdateTitle();
-            }
-        }
-
-        private string _scn = "1";
-        private string _mapType = "none";
         private string _debug = "off";
 
         private SlotList _slotList;
@@ -105,16 +80,6 @@ namespace SF3.X1_Editor.Forms
                 tsmiScenario_Scenario3.Checked = (Scenario == ScenarioType.Scenario3);
                 tsmiScenario_PremiumDisk.Checked = (Scenario == ScenarioType.PremiumDisk);
                 tsmiScenario_BTL99.Checked = (Scenario == ScenarioType.Other);
-
-                switch (Scenario)
-                {
-                    case ScenarioType.Scenario1: _scn = "1"; break;
-                    case ScenarioType.Scenario2: _scn = "2"; break;
-                    case ScenarioType.Scenario3: _scn = "3"; break;
-                    case ScenarioType.PremiumDisk: _scn = "PD"; break;
-                    case ScenarioType.Other: _scn = "BTL99"; break;
-                }
-
                 UpdateTitle();
             };
 
@@ -136,59 +101,6 @@ namespace SF3.X1_Editor.Forms
 
         protected override bool LoadOpenedFile()
         {
-            int offset = 0;
-            int sub = 0;
-
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                offset = 0x00000018; //scn1 initial pointer
-                sub = 0x0605f000;
-            }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                offset = 0x00000024; //scn2 initial pointer
-                sub = 0x0605e000;
-            }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
-                offset = 0x00000024; //scn3 initial pointer
-                sub = 0x0605e000;
-            }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                offset = 0x00000024; //pd initial pointer
-                sub = 0x0605e000;
-            }
-
-            else if (Scenario == ScenarioType.Other /* BTL99 */)
-            {
-                offset = 0x00000018; //btl99 initial pointer
-                sub = 0x06060000;
-            }
-
-            offset = FileEditor.GetDouble(offset);
-
-            offset = offset - sub; //first pointer
-            offset = FileEditor.GetDouble(offset);
-
-            /*A value higher means a pointer is on the offset, meaning we are in a battle. If it is not a 
-              pointer we are at our destination so we know a town is loaded.
-            */
-            if (Scenario == ScenarioType.Scenario1 && offset > 0x0605F000)
-            {
-                IsBattle = true;
-            }
-            else if (offset > 0x0605e000)
-            {
-                IsBattle = true;
-            }
-            else
-            {
-                IsBattle = false;
-            }
-
-            UpdateTitle();
-
             //attempt to detect scenario that failed
             /*if (offset > 0x06067fff || offset < 0x0605e000)
             {
@@ -212,39 +124,38 @@ namespace SF3.X1_Editor.Forms
             }    
             else*/
 
-            var fileEditor = FileEditor as IX1_FileEditor;
             bool isntScn1 = Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other;
 
-            _slotList = new SlotList(fileEditor);
-            _headerList = new HeaderList(fileEditor);
-            _aiList = new AIList(fileEditor);
-            _spawnZoneList = new SpawnZoneList(fileEditor);
-            _battlePointersList = new BattlePointersList(fileEditor);
-            _customMovementList = new CustomMovementList(fileEditor);
-            _treasureList = new TreasureList(fileEditor);
-            _warpList = new WarpList(fileEditor);
-            _tileList = new TileList(fileEditor);
-            _npcList = new NpcList(fileEditor);
-            _enterList = new EnterList(fileEditor);
-            _arrowList = new ArrowList(fileEditor);
+            _slotList = new SlotList(FileEditor);
+            _headerList = new HeaderList(FileEditor);
+            _aiList = new AIList(FileEditor);
+            _spawnZoneList = new SpawnZoneList(FileEditor);
+            _battlePointersList = new BattlePointersList(FileEditor);
+            _customMovementList = new CustomMovementList(FileEditor);
+            _treasureList = new TreasureList(FileEditor);
+            _warpList = new WarpList(FileEditor);
+            _tileList = new TileList(FileEditor);
+            _npcList = new NpcList(FileEditor);
+            _enterList = new EnterList(FileEditor);
+            _arrowList = new ArrowList(FileEditor);
 
             return tabMain.PopulateAndToggleTabs(new List<PopulateAndToggleTabConfig>()
             {
-                new PopulateAndToggleTabConfig(IsBattle, tabHeader, olvHeader, _headerList),
-                new PopulateAndToggleTabConfig(IsBattle, tabSlotTab1, olvSlotTab1, _slotList),
-                new PopulateAndToggleTabConfig(IsBattle, tabSlotTab2, olvSlotTab2, _slotList),
-                new PopulateAndToggleTabConfig(IsBattle, tabSlotTab3, olvSlotTab3, _slotList),
-                new PopulateAndToggleTabConfig(IsBattle, tabSlotTab4, olvSlotTab4, _slotList),
-                new PopulateAndToggleTabConfig(IsBattle, tabAITargetPosition, olvAITargetPosition, _aiList),
-                new PopulateAndToggleTabConfig(IsBattle, tabSpawnZones, olvSpawnZones, _spawnZoneList),
-                new PopulateAndToggleTabConfig(IsBattle, tabBattlePointers, olvBattlePointers, _battlePointersList),
-                new PopulateAndToggleTabConfig(IsBattle, tabScriptedMovement, olvScriptedMovement, _customMovementList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabHeader, olvHeader, _headerList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSlotTab1, olvSlotTab1, _slotList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSlotTab2, olvSlotTab2, _slotList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSlotTab3, olvSlotTab3, _slotList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSlotTab4, olvSlotTab4, _slotList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabAITargetPosition, olvAITargetPosition, _aiList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabSpawnZones, olvSpawnZones, _spawnZoneList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabBattlePointers, olvBattlePointers, _battlePointersList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle, tabScriptedMovement, olvScriptedMovement, _customMovementList),
                 new PopulateAndToggleTabConfig(true, tabInteractables, olvInteractables, _treasureList),
-                new PopulateAndToggleTabConfig(!IsBattle, tabTownNpcs, olvTownNpcs, _npcList),
-                new PopulateAndToggleTabConfig(!IsBattle, tabNonBattleEnter, olvNonBattleEnter, _enterList),
-                new PopulateAndToggleTabConfig(!IsBattle && isntScn1, tabArrows, olvArrows, _arrowList),
+                new PopulateAndToggleTabConfig(!FileEditor.IsBattle, tabTownNpcs, olvTownNpcs, _npcList),
+                new PopulateAndToggleTabConfig(!FileEditor.IsBattle, tabNonBattleEnter, olvNonBattleEnter, _enterList),
+                new PopulateAndToggleTabConfig(!FileEditor.IsBattle && isntScn1, tabArrows, olvArrows, _arrowList),
                 new PopulateAndToggleTabConfig(isntScn1, tabWarpTable, olvWarpTable, _warpList),
-                new PopulateAndToggleTabConfig(IsBattle && isntScn1, tabTileData, olvTileData, _tileList),
+                new PopulateAndToggleTabConfig(FileEditor.IsBattle && isntScn1, tabTileData, olvTileData, _tileList),
             });
         }
 
@@ -295,8 +206,6 @@ namespace SF3.X1_Editor.Forms
         private void tsmiMap_MapJulian_Click(object sender, EventArgs e) => Map = MapType.Julian; //map with julian as lead
         private void tsmiMap_MapExtra_Click(object sender, EventArgs e) => Map = MapType.Extra; //map with no lead or a extra as lead. also for ruins
 
-        private void tsmiMapType_BattleToggle_Click(object sender, EventArgs e) => IsBattle = !IsBattle;
-
         private void tsmiHelp_TreasureDebugToggle_Click(object sender, EventArgs e)
         {
             Globals.treasureDebug = !Globals.treasureDebug;
@@ -314,12 +223,6 @@ namespace SF3.X1_Editor.Forms
             }
 
             UpdateTitle();
-        }
-
-        protected override string MakeTitle()
-        {
-            return base.MakeTitle() +
-                "            | Current open settings: Scenario: " + _scn + " | Map: " + _map.ToString() + " | MapType: " + _mapType + " | Debug: " + _debug;
         }
     }
 }
