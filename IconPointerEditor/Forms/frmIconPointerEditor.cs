@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Reflection;
-using System.IO;
-using SF3.IconPointerEditor.Models.ItemIcons;
-using SF3.IconPointerEditor.Models.SpellIcons;
 using BrightIdeasSoftware;
 using SF3.Types;
 using System.Collections.Generic;
-using System.Linq;
 using SF3.Editor.Forms;
-using SF3.Models;
 using SF3.Editor.Extensions;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
@@ -20,6 +12,8 @@ namespace SF3.IconPointerEditor.Forms
     {
         // Used to display version in the application
         private string Version = "0.09";
+
+        new public IIconPointerFileEditor FileEditor => base.FileEditor as IIconPointerFileEditor;
 
         public bool _x026 = false;
 
@@ -69,12 +63,10 @@ namespace SF3.IconPointerEditor.Forms
 
         protected override bool LoadOpenedFile()
         {
-            var fileEditor = FileEditor as IIconPointerFileEditor;
-
             return tabMain.PopulateTabs(new List<PopulateTabConfig>()
             {
-                new PopulateTabConfig(tabSpellIcons, olvSpellIcons, fileEditor.SpellIconList),
-                new PopulateTabConfig(tabItemIcons, olvItemIcons, fileEditor.ItemIconList)
+                new PopulateTabConfig(tabSpellIcons, olvSpellIcons, FileEditor.SpellIconList),
+                new PopulateTabConfig(tabItemIcons, olvItemIcons, FileEditor.ItemIconList)
             });
         }
 
