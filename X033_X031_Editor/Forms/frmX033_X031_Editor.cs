@@ -39,9 +39,7 @@ namespace SF3.X033_X031_Editor.Forms
         // Used to display version in the application
         private string Version = "0.19";
 
-        private StatsList _statsList;
-        private InitialInfoList _initialInfoList;
-        private WeaponLevelList _weaponLevelList;
+        new public IX033_X031_FileEditor FileEditor => base.FileEditor as IX033_X031_FileEditor;
 
         public class StatDataPoint
         {
@@ -106,34 +104,28 @@ namespace SF3.X033_X031_Editor.Forms
 
         protected override bool LoadOpenedFile()
         {
-            var fileEditor = FileEditor as IX033_X031_FileEditor;
-
-            _statsList = new StatsList(fileEditor);
-            _initialInfoList = new InitialInfoList(fileEditor);
-            _weaponLevelList = new WeaponLevelList(fileEditor);
-
             if (!tabMain.PopulateTabs(new List<PopulateTabConfig>()
             {
-                new PopulateTabConfig(tabStats, olvStats, _statsList),
-                new PopulateTabConfig(tabSpells, olvSpells, _statsList),
-                new PopulateTabConfig(tabEquipStatistics, olvEquipStatistics, _statsList),
-                new PopulateTabConfig(tabMiscellaneous, olvMiscellaneous, _statsList),
-                new PopulateTabConfig(tabInitialInfo, olvInitialInfo, _initialInfoList),
-                new PopulateTabConfig(tabWeaponLevelReq, olvWeaponLevelReq, _weaponLevelList),
-                new PopulateTabConfig(tabCurveCalc, olvCurveCalc, _statsList),
+                new PopulateTabConfig(tabStats, olvStats, FileEditor.StatsList),
+                new PopulateTabConfig(tabSpells, olvSpells, FileEditor.StatsList),
+                new PopulateTabConfig(tabEquipStatistics, olvEquipStatistics, FileEditor.StatsList),
+                new PopulateTabConfig(tabMiscellaneous, olvMiscellaneous, FileEditor.StatsList),
+                new PopulateTabConfig(tabInitialInfo, olvInitialInfo, FileEditor.InitialInfoList),
+                new PopulateTabConfig(tabWeaponLevelReq, olvWeaponLevelReq, FileEditor.WeaponLevelList),
+                new PopulateTabConfig(tabCurveCalc, olvCurveCalc, FileEditor.StatsList)
             }))
             {
                 return false;
             }
 
             // Update curve graph controls.
-            cbCurveGraphCharacter.DataSource = _statsList.Models;
+            cbCurveGraphCharacter.DataSource = FileEditor.StatsList.Models;
             cbCurveGraphCharacter.DisplayMember = "Name";
 
             return true;
         }
 
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
+        private void olvCellEditStarting(object sender, CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
 
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();
@@ -154,9 +146,9 @@ namespace SF3.X033_X031_Editor.Forms
         private void tabMain_Click(object sender, EventArgs e)
         {
             olvCurveCalc.ClearObjects();
-            if (_statsList != null)
+            if (FileEditor?.StatsList != null)
             {
-                olvCurveCalc.AddObjects(_statsList.Models);
+                olvCurveCalc.AddObjects(FileEditor?.StatsList.Models);
             }
         }
 
@@ -171,7 +163,7 @@ namespace SF3.X033_X031_Editor.Forms
 
             // Get the stats model for the selected character.
             int index = cbCurveGraphCharacter.SelectedIndex;
-            Models.Stats.Stats stats = (index >= 0 && index < _statsList.Models.Length) ? _statsList.Models[index] : null;
+            Models.Stats.Stats stats = (index >= 0 && index < FileEditor.StatsList.Models.Length) ? FileEditor.StatsList.Models[index] : null;
 
             // We'll need to use some different values depending on the promotion level.
             int promotionLevel = (int?)stats?.PromotionLevel ?? 0;
@@ -348,9 +340,9 @@ namespace SF3.X033_X031_Editor.Forms
                     return;
                 }
 
-                var report1 = Utils.BulkCopyCollectionProperties(copyStatsList.Models, _statsList.Models);
-                var report2 = Utils.BulkCopyCollectionProperties(copyInitialInfoList.Models, _initialInfoList.Models);
-                var report3 = Utils.BulkCopyCollectionProperties(copyWeaponLevelList.Models, _weaponLevelList.Models);
+                var report1 = Utils.BulkCopyCollectionProperties(copyStatsList.Models, FileEditor.StatsList.Models);
+                var report2 = Utils.BulkCopyCollectionProperties(copyInitialInfoList.Models, FileEditor.InitialInfoList.Models);
+                var report3 = Utils.BulkCopyCollectionProperties(copyWeaponLevelList.Models, FileEditor.WeaponLevelList.Models);
 
                 ObjectListViews.ForEach(x => x.RefreshAllItems());
 

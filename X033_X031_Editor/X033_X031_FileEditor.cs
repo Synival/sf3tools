@@ -1,5 +1,8 @@
 ﻿using SF3.Models;
 using SF3.Types;
+using SF3.X033_X031_Editor.Models.InitialInfos;
+using SF3.X033_X031_Editor.Models.Stats;
+using SF3.X033_X031_Editor.Models.WeaponLevel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +19,18 @@ namespace SF3.X033_X031_Editor
 
         public override IEnumerable<IModelArray> MakeModelArrays()
         {
-            return new List<IModelArray>();
+            return new List<IModelArray>()
+            {
+                (StatsList = new StatsList(this)),
+                (InitialInfoList = new InitialInfoList(this)),
+                (WeaponLevelList = new WeaponLevelList(this)),
+            };
         }
+
+        public StatsList StatsList { get; private set; }
+
+        public InitialInfoList InitialInfoList { get; private set; }
+
+        public WeaponLevelList WeaponLevelList { get; private set; }
     }
 }
