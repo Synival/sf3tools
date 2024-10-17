@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+	<item value="0x00" name="Blank" />
+	<item value="0x01" name="Blaze" />
+	<item value="0x02" name="Freeze" />
+	<item value="0x03" name="Spark" />
+	<item value="0x04" name="Tornado" />
+	<item value="0x05" name="Soul Steal" />
+	<item value="0x06" name="Inferno stha" />
+	<item value="0x07" name="Support" />
+	<item value="0x08" name="Slow" />
+	<item value="0x09" name="Shield stha" />
+	<item value="0x0A" name="Resist" />
+	<item value="0x0B" name="Attack" />
+	<item value="0x0C" name="Dispell" />
+	<item value="0x0D" name="Confuse" />
+	<item value="0x0E" name="Sleep" />
+	<item value="0x0F" name="Elemental stha" />
+	<item value="0x10" name="Negate stha" />
+	<item value="0x11" name="Heal" />
+	<item value="0x12" name="Aura" />
+	<item value="0x13" name="Restore stha" />
+	<item value="0x14" name="Antidote" />
+	<item value="0x15" name="Return" />
+	<item value="0x16" name="Spider web stha" />
+	<item value="0x17" name="Anger stha" />
+	<item value="0x18" name="Akashi stha" />
+	<item value="0x19" name="Madness stha" />
+	<item value="0x1A" name="Sleep stha ninja" />
+	<item value="0x1B" name="Spiritual stha" />
+	<item value="0x1C" name="Talisman stha" />
+	<item value="0x1D" name="Gods wind stha" />
+	<item value="0x1E" name="Heal stha" />
+	<item value="0x1F" name="Aura stha" />
+	<item value="0x20" name="Restore stha" />
+	<item value="0x21" name="Raise stha" />
+	<item value="0x22" name="Antidote stha" />
+	<item value="0x23" name="Healing stha" />
+	<item value="0x24" name="Praying stha" />
+	<item value="0x25" name="Revival stha" />
+	<item value="0x26" name="Phoenix" />
+	<item value="0x27" name="Wendigo" />
+	<item value="0x28" name="Tiamat" />
+	<item value="0x29" name="Tanatos" />
+	<item value="0x2A" name="41" />
+	<item value="0x2B" name="42" />
+	<item value="0x2C" name="43" />
+	<item value="0x2D" name="44" />
+	<item value="0x2E" name="45" />
+	<item value="0x2F" name="46" />
+	<item value="0x30" name="47" />
+	<item value="0x31" name="48" />
+	<item value="0x32" name="49" />
+</items>

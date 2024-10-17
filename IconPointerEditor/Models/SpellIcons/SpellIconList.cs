@@ -15,19 +15,19 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "Resources/scenario1Spells.xml";
+                _resourceFile = "Resources/S1/SpellIcons.xml";
             }
             if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "Resources/scenario2Spells.xml";
+                _resourceFile = "Resources/S2/SpellIcons.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/scenario3Spells.xml";
+                _resourceFile = "Resources/S3/SpellIcons.xml";
             }
             if (Scenario == ScenarioType.PremiumDisk)
             {
-                _resourceFile = "Resources/PDSpells.xml";
+                _resourceFile = "Resources/PD/SpellIcons.xml";
             }
         }
 

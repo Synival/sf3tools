@@ -14,19 +14,19 @@ namespace SF3.X002_Editor.Models.Spells
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "RSc1/spellListS1.xml";
+                _resourceFile = "Resources/S1/Spells.xml";
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "RSc2/spellListS2.xml";
+                _resourceFile = "Resources/S2/Spells.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/spellList.xml";
+                _resourceFile = "Resources/S3/Spells.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                _resourceFile = "RPD/spellListPD.xml";
+                _resourceFile = "Resources/PD/Spells.xml";
             }
         }
 

@@ -14,19 +14,19 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "Resources/scenario1Items.xml";
+                _resourceFile = "Resources/S1/Items.xml";
             }
             if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "Resources/scenario2Items.xml";
+                _resourceFile = "Resources/S2/Items.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/scenario3Items.xml";
+                _resourceFile = "Resources/S3/Items.xml";
             }
             if (Scenario == ScenarioType.PremiumDisk)
             {
-                _resourceFile = "Resources/PDItems.xml";
+                _resourceFile = "Resources/PD/Items.xml";
             }
         }
 

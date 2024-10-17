@@ -14,19 +14,19 @@ namespace SF3.X002_Editor.Models.Items
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "RSc1/itemListS1.xml";
+                _resourceFile = "Resources/S1/Items.xml";
             }
-            else if (Scenario == ScenarioType.Scenario2)
+            if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "RSc2/itemListS2.xml";
+                _resourceFile = "Resources/S2/Items.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/itemList.xml";
+                _resourceFile = "Resources/S3/Items.xml";
             }
-            else if (Scenario == ScenarioType.PremiumDisk)
+            if (Scenario == ScenarioType.PremiumDisk)
             {
-                _resourceFile = "RPD/itemListPD.xml";
+                _resourceFile = "Resources/PD/Items.xml";
             }
         }
 
