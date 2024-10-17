@@ -30,18 +30,18 @@ namespace SF3.X1_Editor.Forms
 
         new public IX1_FileEditor FileEditor => base.FileEditor as IX1_FileEditor;
 
-        private MapType _map = MapType.Synbios;
+        private MapLeaderType _mapLeader = MapLeaderType.Synbios;
 
-        private MapType Map
+        private MapLeaderType MapLeader
         {
-            get => _map;
+            get => _mapLeader;
             set
             {
-                _map = value;
-                tsmiMap_MapSynbios.Checked = (_map == MapType.Synbios);
-                tsmiMap_MapMedion.Checked = (_map == MapType.Medion);
-                tsmiMap_MapJulian.Checked = (_map == MapType.Julian);
-                tsmiMap_MapExtra.Checked = (_map == MapType.Extra);
+                _mapLeader = value;
+                tsmiMap_MapSynbios.Checked = (_mapLeader == MapLeaderType.Synbios);
+                tsmiMap_MapMedion.Checked = (_mapLeader == MapLeaderType.Medion);
+                tsmiMap_MapJulian.Checked = (_mapLeader == MapLeaderType.Julian);
+                tsmiMap_MapExtra.Checked = (_mapLeader == MapLeaderType.Extra);
             }
         }
 
@@ -52,7 +52,7 @@ namespace SF3.X1_Editor.Forms
 
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
-            Map = 0x00;
+            MapLeader = 0x00;
 
             EventHandler onScenarioChanged = (obj, eargs) =>
             {
@@ -76,7 +76,7 @@ namespace SF3.X1_Editor.Forms
 
         protected override string FileDialogFilter => "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
 
-        protected override IFileEditor MakeFileEditor() => new X1_FileEditor(Scenario, Map, IsBTL99);
+        protected override IFileEditor MakeFileEditor() => new X1_FileEditor(Scenario, MapLeader, IsBTL99);
 
         protected override bool OnLoad()
         {
@@ -120,25 +120,25 @@ namespace SF3.X1_Editor.Forms
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario1;
-            Map = MapType.Synbios;
+            MapLeader = MapLeaderType.Synbios;
         }
 
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario2;
-            Map = MapType.Medion;
+            MapLeader = MapLeaderType.Medion;
         }
 
         private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario3;
-            Map = MapType.Julian;
+            MapLeader = MapLeaderType.Julian;
         }
 
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.PremiumDisk;
-            Map = MapType.Synbios;
+            MapLeader = MapLeaderType.Synbios;
         }
 
         private void tsmiScenario_BTL99_Click(object sender, EventArgs e)
@@ -146,14 +146,14 @@ namespace SF3.X1_Editor.Forms
             IsBTL99 = !IsBTL99;
             if (IsBTL99)
             {
-                Map = MapType.Synbios;
+                MapLeader = MapLeaderType.Synbios;
             }
         }
 
-        private void tsmiMap_MapSynbios_Click(object sender, EventArgs e) => Map = MapType.Synbios; //map with synbios as lead
-        private void tsmiMap_MapMedion_Click(object sender, EventArgs e) => Map = MapType.Medion; //map with medion as lead
-        private void tsmiMap_MapJulian_Click(object sender, EventArgs e) => Map = MapType.Julian; //map with julian as lead
-        private void tsmiMap_MapExtra_Click(object sender, EventArgs e) => Map = MapType.Extra; //map with no lead or a extra as lead. also for ruins
+        private void tsmiMap_MapSynbios_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Synbios; //map with synbios as lead
+        private void tsmiMap_MapMedion_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Medion; //map with medion as lead
+        private void tsmiMap_MapJulian_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Julian; //map with julian as lead
+        private void tsmiMap_MapExtra_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Extra; //map with no lead or a extra as lead. also for ruins
 
         private void tsmiHelp_TreasureDebugToggle_Click(object sender, EventArgs e)
         {

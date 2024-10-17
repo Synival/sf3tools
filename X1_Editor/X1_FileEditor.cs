@@ -22,9 +22,9 @@ namespace SF3.X1_Editor
 {
     public class X1_FileEditor : SF3FileEditor, IX1_FileEditor
     {
-        public X1_FileEditor(ScenarioType scenario, MapType map, bool isBTL99) : base(scenario)
+        public X1_FileEditor(ScenarioType scenario, MapLeaderType mapLeader, bool isBTL99) : base(scenario)
         {
-            Map = map;
+            MapLeader = mapLeader;
             IsBTL99 = isBTL99;
         }
 
@@ -131,25 +131,25 @@ namespace SF3.X1_Editor
         }
 
         protected override string BaseTitle => IsLoaded
-            ? base.BaseTitle + " (Map: " + Map.ToString() + ") (Type: " + (IsBattle ? "Battle" : "Town") + ")"
+            ? base.BaseTitle + " (Map: " + MapLeader.ToString() + ") (Type: " + (IsBattle ? "Battle" : "Town") + ")"
             : base.BaseTitle;
 
-        private MapType _map;
+        private MapLeaderType _mapLeader;
 
-        public MapType Map
+        public MapLeaderType MapLeader
         {
-            get => _map;
+            get => _mapLeader;
             set
             {
-                if (_map != value)
+                if (_mapLeader != value)
                 {
-                    _map = value;
+                    _mapLeader = value;
                     UpdateTitle();
                 }
             }
         }
 
-        public int MapOffset => (int) Map;
+        public int MapOffset => (int) MapLeader;
 
         private bool _isBattle;
 

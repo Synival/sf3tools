@@ -89,7 +89,7 @@
     <Compile Include="ScenarioFileType.cs" />
     <Compile Include="SF3FileEditor.cs" />
     <Compile Include="Types\FileType.cs" />
-    <Compile Include="Types\MapType.cs" />
+    <Compile Include="Types\MapLeaderType.cs" />
     <Compile Include="ValueRange.cs" />
     <Compile Include="Stats.cs" />
     <Compile Include="Types\ScenarioType.cs" />

@@ -75,7 +75,7 @@ namespace SF3.X1_Editor.Models.SpawnZones
                 }
                 else
                 {
-                    _fileEditor.Map = MapType.Synbios;
+                    _fileEditor.MapLeader = MapLeaderType.Synbios;
                     offset = 0x00000018; //scn1 initial pointer
                     sub = 0x0605f000;
                     offset = _fileEditor.GetDouble(offset);
@@ -119,7 +119,7 @@ namespace SF3.X1_Editor.Models.SpawnZones
                 }
                 else
                 {
-                    _fileEditor.Map = MapType.Medion;
+                    _fileEditor.MapLeader = MapLeaderType.Medion;
                     offset = 0x00000024; //scn2 initial pointer
                     sub = 0x0605e000;
                     offset = _fileEditor.GetDouble(offset);
@@ -162,7 +162,7 @@ namespace SF3.X1_Editor.Models.SpawnZones
                 }
                 else
                 {
-                    _fileEditor.Map = MapType.Julian;
+                    _fileEditor.MapLeader = MapLeaderType.Julian;
                     offset = 0x00000024; //scn3 initial pointer
                     sub = 0x0605e000;
                     offset = _fileEditor.GetDouble(offset);
@@ -194,7 +194,7 @@ namespace SF3.X1_Editor.Models.SpawnZones
                 }
                 else
                 {
-                    _fileEditor.Map = MapType.Synbios;
+                    _fileEditor.MapLeader = MapLeaderType.Synbios;
                     offset = 0x00000024; //pd initial pointer
                     sub = 0x0605e000;
                     offset = _fileEditor.GetDouble(offset);
