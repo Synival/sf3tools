@@ -33,6 +33,10 @@
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_File1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
@@ -178,10 +182,6 @@
             this.lvcWarpTableScn1Plus0x01 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcWarpTableScn1WarpType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcWarpTableScn1WarpMap = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tsSeparator_File1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabSpells.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvSpells)).BeginInit();
@@ -232,7 +232,7 @@
             // tsmiFile_Open
             // 
             this.tsmiFile_Open.Name = "tsmiFile_Open";
-            this.tsmiFile_Open.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_Open.Size = new System.Drawing.Size(123, 22);
             this.tsmiFile_Open.Text = "Open...";
             this.tsmiFile_Open.Click += new System.EventHandler(this.tsmiFile_Open_Click);
             // 
@@ -240,9 +240,34 @@
             // 
             this.tsmiFile_SaveAs.Enabled = false;
             this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
-            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(123, 22);
             this.tsmiFile_SaveAs.Text = "Save As...";
             this.tsmiFile_SaveAs.Click += new System.EventHandler(this.tsmiFile_SaveAs_Click);
+            // 
+            // tsSeparator_File1
+            // 
+            this.tsSeparator_File1.Name = "tsSeparator_File1";
+            this.tsSeparator_File1.Size = new System.Drawing.Size(120, 6);
+            // 
+            // tsmiFile_Close
+            // 
+            this.tsmiFile_Close.Enabled = false;
+            this.tsmiFile_Close.Name = "tsmiFile_Close";
+            this.tsmiFile_Close.Size = new System.Drawing.Size(123, 22);
+            this.tsmiFile_Close.Text = "Close";
+            this.tsmiFile_Close.Click += new System.EventHandler(this.tsmiFile_Close_Click);
+            // 
+            // tsSeparator_File2
+            // 
+            this.tsSeparator_File2.Name = "tsSeparator_File2";
+            this.tsSeparator_File2.Size = new System.Drawing.Size(120, 6);
+            // 
+            // tsmiFile_Exit
+            // 
+            this.tsmiFile_Exit.Name = "tsmiFile_Exit";
+            this.tsmiFile_Exit.Size = new System.Drawing.Size(123, 22);
+            this.tsmiFile_Exit.Text = "Exit";
+            this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
             // 
             // tsmiHelp
             // 
@@ -653,7 +678,7 @@
             this.lvcItemsName.AspectName = "Name";
             this.lvcItemsName.IsEditable = false;
             this.lvcItemsName.Text = "Item Name";
-            this.lvcItemsName.Width = 65;
+            this.lvcItemsName.Width = 100;
             // 
             // lvcItemsPrice
             // 
@@ -824,6 +849,7 @@
             this.lvcItemsSpellUse.AspectToStringFormat = "{0:X}";
             this.lvcItemsSpellUse.DisplayIndex = 22;
             this.lvcItemsSpellUse.Text = "SpellUse";
+            this.lvcItemsSpellUse.Width = 120;
             // 
             // lvcItemsSpellUseLv
             // 
@@ -1008,6 +1034,7 @@
             this.lvcPresetSpellID.AspectName = "SpellID2";
             this.lvcPresetSpellID.AspectToStringFormat = "{0:X}";
             this.lvcPresetSpellID.Text = "SpellID";
+            this.lvcPresetSpellID.Width = 98;
             // 
             // lvcPresetWeaponLv0
             // 
@@ -1695,31 +1722,6 @@
             this.lvcWarpTableScn1WarpMap.AspectName = "WarpMap";
             this.lvcWarpTableScn1WarpMap.AspectToStringFormat = "{0:X}";
             this.lvcWarpTableScn1WarpMap.Text = "Map";
-            // 
-            // tsSeparator_File1
-            // 
-            this.tsSeparator_File1.Name = "tsSeparator_File1";
-            this.tsSeparator_File1.Size = new System.Drawing.Size(177, 6);
-            // 
-            // tsmiFile_Close
-            // 
-            this.tsmiFile_Close.Enabled = false;
-            this.tsmiFile_Close.Name = "tsmiFile_Close";
-            this.tsmiFile_Close.Size = new System.Drawing.Size(180, 22);
-            this.tsmiFile_Close.Text = "Close";
-            this.tsmiFile_Close.Click += new System.EventHandler(this.tsmiFile_Close_Click);
-            // 
-            // tsSeparator_File2
-            // 
-            this.tsSeparator_File2.Name = "tsSeparator_File2";
-            this.tsSeparator_File2.Size = new System.Drawing.Size(177, 6);
-            // 
-            // tsmiFile_Exit
-            // 
-            this.tsmiFile_Exit.Name = "tsmiFile_Exit";
-            this.tsmiFile_Exit.Size = new System.Drawing.Size(180, 22);
-            this.tsmiFile_Exit.Text = "Exit";
-            this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
             // 
             // frmX002_Editor
             // 

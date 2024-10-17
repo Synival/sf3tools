@@ -33,6 +33,10 @@
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_File1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,10 +136,6 @@
             this.lvcMonsterTab5SpellChance6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMonsterTab5Unknown19 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMonsterTab5Unknown20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tsSeparator_File1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabMonsterTab1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab1)).BeginInit();
@@ -178,7 +178,7 @@
             // tsmiFile_Open
             // 
             this.tsmiFile_Open.Name = "tsmiFile_Open";
-            this.tsmiFile_Open.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_Open.Size = new System.Drawing.Size(123, 22);
             this.tsmiFile_Open.Text = "Open...";
             this.tsmiFile_Open.Click += new System.EventHandler(this.tsmiFile_Open_Click);
             // 
@@ -186,9 +186,34 @@
             // 
             this.tsmiFile_SaveAs.Enabled = false;
             this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
-            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(123, 22);
             this.tsmiFile_SaveAs.Text = "Save As...";
             this.tsmiFile_SaveAs.Click += new System.EventHandler(this.tsmiFile_SaveAs_Click);
+            // 
+            // tsSeparator_File1
+            // 
+            this.tsSeparator_File1.Name = "tsSeparator_File1";
+            this.tsSeparator_File1.Size = new System.Drawing.Size(120, 6);
+            // 
+            // tsmiFile_Close
+            // 
+            this.tsmiFile_Close.Enabled = false;
+            this.tsmiFile_Close.Name = "tsmiFile_Close";
+            this.tsmiFile_Close.Size = new System.Drawing.Size(123, 22);
+            this.tsmiFile_Close.Text = "Close";
+            this.tsmiFile_Close.Click += new System.EventHandler(this.tsmiFile_Close_Click);
+            // 
+            // tsSeparator_File2
+            // 
+            this.tsSeparator_File2.Name = "tsSeparator_File2";
+            this.tsSeparator_File2.Size = new System.Drawing.Size(120, 6);
+            // 
+            // tsmiFile_Exit
+            // 
+            this.tsmiFile_Exit.Name = "tsmiFile_Exit";
+            this.tsmiFile_Exit.Size = new System.Drawing.Size(123, 22);
+            this.tsmiFile_Exit.Text = "Exit";
+            this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
             // 
             // tsmiHelp
             // 
@@ -341,7 +366,7 @@
             this.lvcMonsterTab1Name.AspectName = "Name";
             this.lvcMonsterTab1Name.IsEditable = false;
             this.lvcMonsterTab1Name.Text = "Name";
-            this.lvcMonsterTab1Name.Width = 90;
+            this.lvcMonsterTab1Name.Width = 100;
             // 
             // lvcMonsterTab1ID
             // 
@@ -566,6 +591,7 @@
             this.lvcMonsterTab2Name.AspectName = "Name";
             this.lvcMonsterTab2Name.IsEditable = false;
             this.lvcMonsterTab2Name.Text = "Name";
+            this.lvcMonsterTab2Name.Width = 100;
             // 
             // lvcMonsterTab2ID
             // 
@@ -579,6 +605,7 @@
             this.lvcMonsterTab2Spell1.AspectName = "Spell1";
             this.lvcMonsterTab2Spell1.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2Spell1.Text = "Spell1";
+            this.lvcMonsterTab2Spell1.Width = 120;
             // 
             // lvcMonsterTab2Spell1Level
             // 
@@ -592,6 +619,7 @@
             this.lvcMonsterTab2Spell2.AspectName = "Spell2";
             this.lvcMonsterTab2Spell2.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2Spell2.Text = "Spell2";
+            this.lvcMonsterTab2Spell2.Width = 120;
             // 
             // lvcMonsterTab2Spell2Level
             // 
@@ -605,6 +633,7 @@
             this.lvcMonsterTab2Spell3.AspectName = "Spell3";
             this.lvcMonsterTab2Spell3.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2Spell3.Text = "Spell3";
+            this.lvcMonsterTab2Spell3.Width = 120;
             // 
             // lvcMonsterTab2Spell3Level
             // 
@@ -618,6 +647,7 @@
             this.lvcMonsterTab2Spell4.AspectName = "Spell4";
             this.lvcMonsterTab2Spell4.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2Spell4.Text = "Spell4";
+            this.lvcMonsterTab2Spell4.Width = 120;
             // 
             // lvcMonsterTab2Spell4Level
             // 
@@ -739,6 +769,7 @@
             this.lvcMonsterTab3Name.AspectName = "Name";
             this.lvcMonsterTab3Name.IsEditable = false;
             this.lvcMonsterTab3Name.Text = "Name";
+            this.lvcMonsterTab3Name.Width = 100;
             // 
             // lvcMonsterTab3ID
             // 
@@ -908,6 +939,7 @@
             this.lvcMonsterTab4Name.AspectName = "Name";
             this.lvcMonsterTab4Name.IsEditable = false;
             this.lvcMonsterTab4Name.Text = "Name";
+            this.lvcMonsterTab4Name.Width = 100;
             // 
             // lvcMonsterTab4ID
             // 
@@ -1033,6 +1065,7 @@
             this.lvcMonsterTab5Name.AspectName = "Name";
             this.lvcMonsterTab5Name.IsEditable = false;
             this.lvcMonsterTab5Name.Text = "Name";
+            this.lvcMonsterTab5Name.Width = 100;
             // 
             // lvcMonsterTab5ID
             // 
@@ -1110,31 +1143,6 @@
             this.lvcMonsterTab5Unknown20.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab5Unknown20.Text = "Unknown20";
             this.lvcMonsterTab5Unknown20.Width = 70;
-            // 
-            // tsSeparator_File1
-            // 
-            this.tsSeparator_File1.Name = "tsSeparator_File1";
-            this.tsSeparator_File1.Size = new System.Drawing.Size(177, 6);
-            // 
-            // tsmiFile_Close
-            // 
-            this.tsmiFile_Close.Enabled = false;
-            this.tsmiFile_Close.Name = "tsmiFile_Close";
-            this.tsmiFile_Close.Size = new System.Drawing.Size(180, 22);
-            this.tsmiFile_Close.Text = "Close";
-            this.tsmiFile_Close.Click += new System.EventHandler(this.tsmiFile_Close_Click);
-            // 
-            // tsSeparator_File2
-            // 
-            this.tsSeparator_File2.Name = "tsSeparator_File2";
-            this.tsSeparator_File2.Size = new System.Drawing.Size(177, 6);
-            // 
-            // tsmiFile_Exit
-            // 
-            this.tsmiFile_Exit.Name = "tsmiFile_Exit";
-            this.tsmiFile_Exit.Size = new System.Drawing.Size(180, 22);
-            this.tsmiFile_Exit.Text = "Exit";
-            this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
             // 
             // frmX019_Editor
             // 

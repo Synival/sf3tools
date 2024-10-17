@@ -16,7 +16,7 @@ namespace SF3.Values
 
         // TODO: Use resources file?
         public static readonly Dictionary<int, string> ValueNames = new Dictionary<int, string> {
-            {0x00, "None"},
+            {0x00, "-"},
             {0x01, "Item"},
             {0x0A, "Dagger"},
             {0x0B, "Sword"},

@@ -285,10 +285,10 @@ namespace SF3.X002_Editor.Models.Items
             get => _fileEditor.GetByte(StatUp4Location);
             set => _fileEditor.SetByte(StatUp4Location, (byte)value);
         }
-        public int SpellUse
+        public SpellValue SpellUse
         {
-            get => _fileEditor.GetByte(SpellOnUseLocation);
-            set => _fileEditor.SetByte(SpellOnUseLocation, (byte)value);
+            get => new SpellValue(_fileEditor.GetByte(SpellOnUseLocation));
+            set => _fileEditor.SetByte(SpellOnUseLocation, (byte)value.Value);
         }
         public int SpellUseLv
         {

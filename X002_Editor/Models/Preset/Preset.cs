@@ -1,4 +1,5 @@
 ﻿using SF3.Types;
+using SF3.Values;
 
 namespace SF3.X002_Editor.Models.Presets
 {
@@ -67,10 +68,10 @@ namespace SF3.X002_Editor.Models.Presets
         public int PresetID => index;
         public string PresetName => name;
 
-        public int SpellID2
+        public SpellValue SpellID2
         {
-            get => _fileEditor.GetByte(spell);
-            set => _fileEditor.SetByte(spell, (byte)value);
+            get => new SpellValue(_fileEditor.GetByte(spell));
+            set => _fileEditor.SetByte(spell, (byte)value.Value);
         }
         public int Weapon0
         {

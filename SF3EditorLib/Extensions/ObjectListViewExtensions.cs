@@ -30,13 +30,6 @@ namespace SF3.Editor.Extensions
         /// <param name="e">Arguments from the OlvCellEditControl event.</param>
         public static void EnhanceOlvCellEditControl(this ObjectListView olv, CellEditEventArgs e)
         {
-            // Ensure that strings displayed in hex format are edited in hex format.
-            if (e.Column.AspectToStringFormat == "{0:X}")
-            {
-                NumericUpDown control = (NumericUpDown)e.Control;
-                control.Hexadecimal = true;
-            }
-
             // Enhance ComboBox's so values are updated any time the dropdown is closed, unless from hitting "escape".
             if (e.Control is ComboBox)
             {
@@ -53,6 +46,12 @@ namespace SF3.Editor.Extensions
                     e.Column.PutValue(e.RowObject, cb.SelectedValue);
                     olv.RefreshItem(e.ListViewItem);
                 };
+            }
+            // Ensure that strings displayed in hex format are edited in hex format.
+            else if (e.Column.AspectToStringFormat == "{0:X}")
+            {
+                NumericUpDown control = (NumericUpDown)e.Control;
+                control.Hexadecimal = true;
             }
         }
     }

@@ -94,6 +94,7 @@
     <Compile Include="Types\StatType.cs" />
     <Compile Include="Utils\Utils.cs" />
     <Compile Include="Values\CharacterClassValue.cs" />
+    <Compile Include="Values\SpellValue.cs" />
     <Compile Include="Values\SexValue.cs" />
     <Compile Include="Values\WeaponTypeValue.cs" />
   </ItemGroup>

@@ -19,6 +19,12 @@ namespace SF3.X002_Editor
                 (Object model, OLVColumn column, Object value) => Editor.Utils.MakeNamedValueComboBox(WeaponTypeValue.ComboBoxValues)
             );
 
+            // TODO: generic method to prevent copy + paste
+            ObjectListView.EditorRegistry.Register(
+                typeof(SpellValue),
+                (Object model, OLVColumn column, Object value) => Editor.Utils.MakeNamedValueComboBox(SpellValue.ComboBoxValues)
+            );
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Forms.frmX002_Editor());

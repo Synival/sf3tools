@@ -1,4 +1,5 @@
 ﻿using SF3.Types;
+using SF3.Values;
 
 namespace SF3.X019_Editor.Models.Monsters
 {
@@ -304,10 +305,10 @@ namespace SF3.X019_Editor.Models.Monsters
             set => _fileEditor.SetByte(unusedRes, (byte)value);
         }
 
-        public int Spell1
+        public SpellValue Spell1
         {
-            get => _fileEditor.GetByte(spell1);
-            set => _fileEditor.SetByte(spell1, (byte)value);
+            get => new SpellValue(_fileEditor.GetByte(spell1));
+            set => _fileEditor.SetByte(spell1, (byte)value.Value);
         }
 
         public int Spell1Level
@@ -316,10 +317,10 @@ namespace SF3.X019_Editor.Models.Monsters
             set => _fileEditor.SetByte(spell1Level, (byte)value);
         }
 
-        public int Spell2
+        public SpellValue Spell2
         {
-            get => _fileEditor.GetByte(spell2);
-            set => _fileEditor.SetByte(spell2, (byte)value);
+            get => new SpellValue(_fileEditor.GetByte(spell2));
+            set => _fileEditor.SetByte(spell2, (byte)value.Value);
         }
 
         public int Spell2Level
@@ -328,10 +329,10 @@ namespace SF3.X019_Editor.Models.Monsters
             set => _fileEditor.SetByte(spell2Level, (byte)value);
         }
 
-        public int Spell3
+        public SpellValue Spell3
         {
-            get => _fileEditor.GetByte(spell3);
-            set => _fileEditor.SetByte(spell3, (byte)value);
+            get => new SpellValue(_fileEditor.GetByte(spell3));
+            set => _fileEditor.SetByte(spell3, (byte)value.Value);
         }
 
         public int Spell3Level
@@ -340,10 +341,10 @@ namespace SF3.X019_Editor.Models.Monsters
             set => _fileEditor.SetByte(spell3Level, (byte)value);
         }
 
-        public int Spell4
+        public SpellValue Spell4
         {
-            get => _fileEditor.GetByte(spell4);
-            set => _fileEditor.SetByte(spell4, (byte)value);
+            get => new SpellValue(_fileEditor.GetByte(spell4));
+            set => _fileEditor.SetByte(spell4, (byte)value.Value);
         }
 
         public int Spell4Level
