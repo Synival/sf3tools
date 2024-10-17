@@ -351,40 +351,40 @@ namespace SF3.X019_Editor.Models.Monsters
             set => _fileEditor.SetByte(spell4Level, (byte)value);
         }
 
-        public int Weapon
+        public ItemValue Weapon
         {
-            get => _fileEditor.GetWord(equippedWeapon);
-            set => _fileEditor.SetWord(equippedWeapon, value);
+            get => new ItemValue(Scenario, _fileEditor.GetWord(equippedWeapon));
+            set => _fileEditor.SetWord(equippedWeapon, value.Value);
         }
 
-        public int Accessory
+        public ItemValue Accessory
         {
-            get => _fileEditor.GetWord(equippedAccessory);
-            set => _fileEditor.SetWord(equippedAccessory, value);
+            get => new ItemValue(Scenario, _fileEditor.GetWord(equippedAccessory));
+            set => _fileEditor.SetWord(equippedAccessory, value.Value);
         }
 
-        public int ItemSlot1
+        public ItemValue ItemSlot1
         {
-            get => _fileEditor.GetWord(itemSlot1);
-            set => _fileEditor.SetWord(itemSlot1, value);
+            get => new ItemValue(Scenario, _fileEditor.GetWord(itemSlot1));
+            set => _fileEditor.SetWord(itemSlot1, value.Value);
         }
 
-        public int ItemSlot2
+        public ItemValue ItemSlot2
         {
-            get => _fileEditor.GetWord(itemSlot2);
-            set => _fileEditor.SetWord(itemSlot2, value);
+            get => new ItemValue(Scenario, _fileEditor.GetWord(itemSlot2));
+            set => _fileEditor.SetWord(itemSlot2, value.Value);
         }
 
-        public int ItemSlot3
+        public ItemValue ItemSlot3
         {
-            get => _fileEditor.GetWord(itemSlot3);
-            set => _fileEditor.SetWord(itemSlot3, value);
+            get => new ItemValue(Scenario, _fileEditor.GetWord(itemSlot3));
+            set => _fileEditor.SetWord(itemSlot3, value.Value);
         }
 
-        public int ItemSlot4
+        public ItemValue ItemSlot4
         {
-            get => _fileEditor.GetWord(itemSlot4);
-            set => _fileEditor.SetWord(itemSlot4, value);
+            get => new ItemValue(Scenario, _fileEditor.GetWord(itemSlot4));
+            set => _fileEditor.SetWord(itemSlot4, value.Value);
         }
 
         public int Special1

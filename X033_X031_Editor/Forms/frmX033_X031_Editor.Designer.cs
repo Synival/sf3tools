@@ -1898,42 +1898,42 @@
             this.lvcInitialInfoWeapon.AspectName = "Weapon";
             this.lvcInitialInfoWeapon.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoWeapon.Text = "WeaponEq";
-            this.lvcInitialInfoWeapon.Width = 70;
+            this.lvcInitialInfoWeapon.Width = 120;
             // 
             // lvcInitialInfoAccessoryEq
             // 
             this.lvcInitialInfoAccessoryEq.AspectName = "Accessory";
             this.lvcInitialInfoAccessoryEq.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoAccessoryEq.Text = "AccessorryEq";
-            this.lvcInitialInfoAccessoryEq.Width = 77;
+            this.lvcInitialInfoAccessoryEq.Width = 120;
             // 
             // lvcInitialInfoItem1
             // 
             this.lvcInitialInfoItem1.AspectName = "Item1";
             this.lvcInitialInfoItem1.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoItem1.Text = "Item1";
-            this.lvcInitialInfoItem1.Width = 40;
+            this.lvcInitialInfoItem1.Width = 120;
             // 
             // lvcInitialInfoItem2
             // 
             this.lvcInitialInfoItem2.AspectName = "Item2";
             this.lvcInitialInfoItem2.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoItem2.Text = "Item2";
-            this.lvcInitialInfoItem2.Width = 40;
+            this.lvcInitialInfoItem2.Width = 120;
             // 
             // lvcInitialInfoItem3
             // 
             this.lvcInitialInfoItem3.AspectName = "Item3";
             this.lvcInitialInfoItem3.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoItem3.Text = "Item3";
-            this.lvcInitialInfoItem3.Width = 40;
+            this.lvcInitialInfoItem3.Width = 120;
             // 
             // lvcInitialInfoItem4
             // 
             this.lvcInitialInfoItem4.AspectName = "Item4";
             this.lvcInitialInfoItem4.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoItem4.Text = "Item4";
-            this.lvcInitialInfoItem4.Width = 40;
+            this.lvcInitialInfoItem4.Width = 120;
             // 
             // lvcInitialInfoWeapon1Type
             // 

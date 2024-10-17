@@ -661,38 +661,42 @@
             this.lvcMonsterTab2Weapon.AspectName = "Weapon";
             this.lvcMonsterTab2Weapon.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2Weapon.Text = "EquippedWeapon";
-            this.lvcMonsterTab2Weapon.Width = 110;
+            this.lvcMonsterTab2Weapon.Width = 120;
             // 
             // lvcMonsterTab2EquippedAccessory
             // 
             this.lvcMonsterTab2EquippedAccessory.AspectName = "Accessory";
             this.lvcMonsterTab2EquippedAccessory.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2EquippedAccessory.Text = "EquippedAccessory";
-            this.lvcMonsterTab2EquippedAccessory.Width = 100;
+            this.lvcMonsterTab2EquippedAccessory.Width = 120;
             // 
             // lvcMonsterTab2ItemSlot1
             // 
             this.lvcMonsterTab2ItemSlot1.AspectName = "ItemSlot1";
             this.lvcMonsterTab2ItemSlot1.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2ItemSlot1.Text = "ItemSlot1";
+            this.lvcMonsterTab2ItemSlot1.Width = 120;
             // 
             // lvcMonsterTab2ItemSlot2
             // 
             this.lvcMonsterTab2ItemSlot2.AspectName = "ItemSlot2";
             this.lvcMonsterTab2ItemSlot2.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2ItemSlot2.Text = "ItemSlot2";
+            this.lvcMonsterTab2ItemSlot2.Width = 120;
             // 
             // lvcMonsterTab2ItemSlot3
             // 
             this.lvcMonsterTab2ItemSlot3.AspectName = "ItemSlot3";
             this.lvcMonsterTab2ItemSlot3.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2ItemSlot3.Text = "ItemSlot3";
+            this.lvcMonsterTab2ItemSlot3.Width = 120;
             // 
             // lvcMonsterTab2ItemSlot4
             // 
             this.lvcMonsterTab2ItemSlot4.AspectName = "ItemSlot4";
             this.lvcMonsterTab2ItemSlot4.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2ItemSlot4.Text = "ItemSlot4";
+            this.lvcMonsterTab2ItemSlot4.Width = 120;
             // 
             // tabMonsterTab3
             // 

@@ -174,45 +174,45 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
         }
 
         [BulkCopy]
-        public int Weapon
+        public ItemValue Weapon
         {
-            get => _fileEditor.GetWord(weapon);
-            set => _fileEditor.SetWord(weapon, value);
+            get => new ItemValue(Scenario, _fileEditor.GetWord(weapon));
+            set => _fileEditor.SetWord(weapon, value.Value);
         }
 
         [BulkCopy]
-        public int Accessory
+        public ItemValue Accessory
         {
-            get => _fileEditor.GetWord(accessory);
-            set => _fileEditor.SetWord(accessory, value);
+            get => new ItemValue(Scenario, _fileEditor.GetWord(accessory));
+            set => _fileEditor.SetWord(accessory, value.Value);
         }
 
         [BulkCopy]
-        public int Item1
+        public ItemValue Item1
         {
-            get => _fileEditor.GetWord(item1);
-            set => _fileEditor.SetWord(item1, value);
+            get => new ItemValue(Scenario, _fileEditor.GetWord(item1));
+            set => _fileEditor.SetWord(item1, value.Value);
         }
 
         [BulkCopy]
-        public int Item2
+        public ItemValue Item2
         {
-            get => _fileEditor.GetWord(item2);
-            set => _fileEditor.SetWord(item2, value);
+            get => new ItemValue(Scenario, _fileEditor.GetWord(item2));
+            set => _fileEditor.SetWord(item2, value.Value);
         }
 
         [BulkCopy]
-        public int Item3
+        public ItemValue Item3
         {
-            get => _fileEditor.GetWord(item3);
-            set => _fileEditor.SetWord(item3, value);
+            get => new ItemValue(Scenario, _fileEditor.GetWord(item3));
+            set => _fileEditor.SetWord(item3, value.Value);
         }
 
         [BulkCopy]
-        public int Item4
+        public ItemValue Item4
         {
-            get => _fileEditor.GetWord(item4);
-            set => _fileEditor.SetWord(item4, value);
+            get => new ItemValue(Scenario, _fileEditor.GetWord(item4));
+            set => _fileEditor.SetWord(item4, value.Value);
         }
 
         [BulkCopy]

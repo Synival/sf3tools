@@ -423,7 +423,7 @@
             this.lvcSpellsName.AspectName = "SpellName";
             this.lvcSpellsName.IsEditable = false;
             this.lvcSpellsName.Text = "SpellName";
-            this.lvcSpellsName.Width = 70;
+            this.lvcSpellsName.Width = 120;
             // 
             // lvcSpellsTarget
             // 
@@ -678,7 +678,7 @@
             this.lvcItemsName.AspectName = "Name";
             this.lvcItemsName.IsEditable = false;
             this.lvcItemsName.Text = "Item Name";
-            this.lvcItemsName.Width = 100;
+            this.lvcItemsName.Width = 120;
             // 
             // lvcItemsPrice
             // 

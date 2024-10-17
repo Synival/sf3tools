@@ -40,6 +40,7 @@
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_OpenInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiHelp_X026Toggle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,7 +61,6 @@
             this.lvcSpellIconAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellIconOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellIconViewOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.tabItemIcons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvItemIcons)).BeginInit();
@@ -97,7 +97,7 @@
             // tsmiFile_Open
             // 
             this.tsmiFile_Open.Name = "tsmiFile_Open";
-            this.tsmiFile_Open.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_Open.Size = new System.Drawing.Size(123, 22);
             this.tsmiFile_Open.Text = "Open...";
             this.tsmiFile_Open.Click += new System.EventHandler(this.tsmiFile_Open_Click);
             // 
@@ -105,32 +105,32 @@
             // 
             this.tsmiFile_SaveAs.Enabled = false;
             this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
-            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(123, 22);
             this.tsmiFile_SaveAs.Text = "Save As...";
             this.tsmiFile_SaveAs.Click += new System.EventHandler(this.tsmiFile_SaveAs_Click);
             // 
             // tsSeparator_File1
             // 
             this.tsSeparator_File1.Name = "tsSeparator_File1";
-            this.tsSeparator_File1.Size = new System.Drawing.Size(177, 6);
+            this.tsSeparator_File1.Size = new System.Drawing.Size(120, 6);
             // 
             // tsmiFile_Close
             // 
             this.tsmiFile_Close.Enabled = false;
             this.tsmiFile_Close.Name = "tsmiFile_Close";
-            this.tsmiFile_Close.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_Close.Size = new System.Drawing.Size(123, 22);
             this.tsmiFile_Close.Text = "Close";
             this.tsmiFile_Close.Click += new System.EventHandler(this.tsmiFile_Close_Click);
             // 
             // tsSeparator_File2
             // 
             this.tsSeparator_File2.Name = "tsSeparator_File2";
-            this.tsSeparator_File2.Size = new System.Drawing.Size(177, 6);
+            this.tsSeparator_File2.Size = new System.Drawing.Size(120, 6);
             // 
             // tsmiFile_Exit
             // 
             this.tsmiFile_Exit.Name = "tsmiFile_Exit";
-            this.tsmiFile_Exit.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_Exit.Size = new System.Drawing.Size(123, 22);
             this.tsmiFile_Exit.Text = "Exit";
             this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
             // 
@@ -156,6 +156,11 @@
             this.tsmiHelp_OpenInfo.Name = "tsmiHelp_OpenInfo";
             this.tsmiHelp_OpenInfo.Size = new System.Drawing.Size(219, 22);
             this.tsmiHelp_OpenInfo.Text = "Opens X011,X021, X026 files";
+            // 
+            // tsSeparator_Help1
+            // 
+            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
+            this.tsSeparator_Help1.Size = new System.Drawing.Size(216, 6);
             // 
             // tsmiHelp_X026Toggle
             // 
@@ -249,7 +254,7 @@
             this.lvcItemIconName.AspectName = "SizeName";
             this.lvcItemIconName.IsEditable = false;
             this.lvcItemIconName.Text = "Name";
-            this.lvcItemIconName.Width = 80;
+            this.lvcItemIconName.Width = 120;
             // 
             // lvcItemIconHexID
             // 
@@ -334,7 +339,7 @@
             this.lvcSpellIconName.AspectName = "Name";
             this.lvcSpellIconName.IsEditable = false;
             this.lvcSpellIconName.Text = "Name";
-            this.lvcSpellIconName.Width = 90;
+            this.lvcSpellIconName.Width = 120;
             // 
             // lvcSpellIconHexID
             // 
@@ -365,11 +370,6 @@
             this.lvcSpellIconViewOffset.AspectToStringFormat = "{0:X}";
             this.lvcSpellIconViewOffset.Text = "Offset in file for viewing";
             this.lvcSpellIconViewOffset.Width = 130;
-            // 
-            // tsSeparator_Help1
-            // 
-            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
-            this.tsSeparator_Help1.Size = new System.Drawing.Size(216, 6);
             // 
             // frmIconPointerEditor
             // 
