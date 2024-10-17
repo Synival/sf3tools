@@ -131,7 +131,9 @@ namespace SF3.Values
             {0x6A, "Hermit (P2)"},
         };
 
-        public static readonly Dictionary<NamedValue, string> ComboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new CharacterClassValue(value));
+        private static readonly Dictionary<NamedValue, string> _ComboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new CharacterClassValue(value));
+
+        public override Dictionary<NamedValue, string> ComboBoxValues => _ComboBoxValues;
 
         public CharacterClassValue(int value) : base(HexValueWithName(value, ValueNames), value)
         {

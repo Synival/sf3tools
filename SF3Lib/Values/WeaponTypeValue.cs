@@ -52,7 +52,9 @@ namespace SF3.Values
             {0x81, "Ring/Accessory"},
         };
 
-        public static readonly Dictionary<NamedValue, string> ComboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new WeaponTypeValue(value));
+        private static readonly Dictionary<NamedValue, string> _ComboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new WeaponTypeValue(value));
+
+        public override Dictionary<NamedValue, string> ComboBoxValues => _ComboBoxValues;
 
         public WeaponTypeValue(int value) : base(HexValueWithName(value, ValueNames), value)
         {

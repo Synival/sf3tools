@@ -60,25 +60,25 @@ namespace SF3.Editor.Extensions
             // TODO: generic method to prevent copy + paste
             ObjectListView.EditorRegistry.Register(
                 typeof(CharacterClassValue),
-                (Object model, OLVColumn column, Object value) => Utils.MakeNamedValueComboBox(CharacterClassValue.ComboBoxValues)
+                (object model, OLVColumn column, object value) => Utils.MakeNamedValueComboBox((value as CharacterClassValue).ComboBoxValues)
             );
 
             // TODO: generic method to prevent copy + paste
             ObjectListView.EditorRegistry.Register(
                 typeof(SexValue),
-                (Object model, OLVColumn column, Object value) => Utils.MakeNamedValueComboBox(SexValue.ComboBoxValues)
+                (object model, OLVColumn column, object value) => Utils.MakeNamedValueComboBox((value as SexValue).ComboBoxValues)
             );
 
             // TODO: generic method to prevent copy + paste
             ObjectListView.EditorRegistry.Register(
                 typeof(SpellValue),
-                (Object model, OLVColumn column, Object value) => Utils.MakeNamedValueComboBox(SpellValue.ComboBoxValues)
+                (object model, OLVColumn column, object value) => Utils.MakeNamedValueComboBox((value as SpellValue).ComboBoxValues)
             );
 
             // TODO: generic method to prevent copy + paste
             ObjectListView.EditorRegistry.Register(
                 typeof(WeaponTypeValue),
-                (Object model, OLVColumn column, Object value) => Utils.MakeNamedValueComboBox(WeaponTypeValue.ComboBoxValues)
+                (object model, OLVColumn column, object value) => Utils.MakeNamedValueComboBox((value as WeaponTypeValue).ComboBoxValues)
             );
         }
     }

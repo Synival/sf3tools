@@ -20,7 +20,9 @@ namespace SF3.Values
             {0x02, "Female"},
         };
 
-        public static readonly Dictionary<NamedValue, string> ComboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SexValue(value));
+        private static readonly Dictionary<NamedValue, string> _ComboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SexValue(value));
+
+        public override Dictionary<NamedValue, string> ComboBoxValues => _ComboBoxValues;
 
         public SexValue(int value) : base(HexValueWithName(value, ValueNames), value)
         {

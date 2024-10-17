@@ -8,13 +8,15 @@ namespace SF3
     /// Concrete type with both a Name (string) and a Value (int).
     /// Used when values need both names to look up and must be identifiable as a specific type.
     /// </summary>
-    public class NamedValue : IComparable, IComparable<NamedValue>
+    public abstract class NamedValue : IComparable, IComparable<NamedValue>
     {
         public NamedValue(string name, int value)
         {
             _name = name;
             _value = value;
         }
+
+        public abstract Dictionary<NamedValue, string> ComboBoxValues { get; }
 
         public override string ToString() => Name;
 

@@ -15,11 +15,17 @@ namespace SF3.Values
         public const int MaxValue = 0xFF;
 
         // TODO: These definitely change between scenarios, so somehow it will need to be scenario-specific, likely tied to the SF3FileEditor.
-        public static readonly Dictionary<int, string> ValueNames = GetValueNameDictionaryFromXML("Resources/S3/Spells.xml");
+        public static readonly Dictionary<int, string> ValueNamesS1 = GetValueNameDictionaryFromXML("Resources/S1/Spells.xml");
+        public static readonly Dictionary<int, string> ValueNamesS2 = GetValueNameDictionaryFromXML("Resources/S2/Spells.xml");
+        public static readonly Dictionary<int, string> ValueNamesS3 = GetValueNameDictionaryFromXML("Resources/S3/Spells.xml");
+        public static readonly Dictionary<int, string> ValueNamesPD = GetValueNameDictionaryFromXML("Resources/PD/Spells.xml");
 
-        public static readonly Dictionary<NamedValue, string> ComboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SpellValue(value));
+        private static readonly Dictionary<NamedValue, string> _ComboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SpellValue(value));
 
-        public SpellValue(int value) : base(HexValueWithName(value, ValueNames), value)
+        public override Dictionary<NamedValue, string> ComboBoxValues => _ComboBoxValues;
+
+        // TODO: determine which scenario to use!
+        public SpellValue(int value) : base(HexValueWithName(value, ValueNamesS3), value)
         {
         }
     }
