@@ -62,41 +62,41 @@ namespace SF3.X033_X031_Editor.Models.Stats
         private int agiCurve30_99;
 
         private int s1LearnedAt;
-        private int s1LearnedLevel;
         private int s1LearnedID;
+        private int s1LearnedLevel;
         private int s2LearnedAt;
-        private int s2LearnedLevel;
         private int s2LearnedID;
+        private int s2LearnedLevel;
         private int s3LearnedAt;
-        private int s3LearnedLevel;
         private int s3LearnedID;
+        private int s3LearnedLevel;
         private int s4LearnedAt;
-        private int s4LearnedLevel;
         private int s4LearnedID;
+        private int s4LearnedLevel;
         private int s5LearnedAt;
-        private int s5LearnedLevel;
         private int s5LearnedID;
+        private int s5LearnedLevel;
         private int s6LearnedAt;
-        private int s6LearnedLevel;
         private int s6LearnedID;
+        private int s6LearnedLevel;
         private int s7LearnedAt;
-        private int s7LearnedLevel;
         private int s7LearnedID;
+        private int s7LearnedLevel;
         private int s8LearnedAt;
-        private int s8LearnedLevel;
         private int s8LearnedID;
+        private int s8LearnedLevel;
         private int s9LearnedAt;
-        private int s9LearnedLevel;
         private int s9LearnedID;
+        private int s9LearnedLevel;
         private int s10LearnedAt;
-        private int s10LearnedLevel;
         private int s10LearnedID;
+        private int s10LearnedLevel;
         private int s11LearnedAt;
-        private int s11LearnedLevel;
         private int s11LearnedID;
+        private int s11LearnedLevel;
         private int s12LearnedAt;
-        private int s12LearnedLevel;
         private int s12LearnedID;
+        private int s12LearnedLevel;
 
         private int weapon1Special1;
         private int weapon1Special2;
@@ -271,41 +271,41 @@ namespace SF3.X033_X031_Editor.Models.Stats
             agiCurve30_99 = start + 0x29;
 
             s1LearnedAt = start + 0x2a;
-            s1LearnedLevel = start + 0x2b; //actually the ID
-            s1LearnedID = start + 0x2c; //actaully the level. true for all the spells. i messed up
+            s1LearnedID = start + 0x2b;
+            s1LearnedLevel = start + 0x2c;
             s2LearnedAt = start + 0x2d;
-            s2LearnedLevel = start + 0x2e;
-            s2LearnedID = start + 0x2f;
+            s2LearnedID = start + 0x2e;
+            s2LearnedLevel = start + 0x2f;
             s3LearnedAt = start + 0x30;
-            s3LearnedLevel = start + 0x31;
-            s3LearnedID = start + 0x32;
+            s3LearnedID = start + 0x31;
+            s3LearnedLevel = start + 0x32;
             s4LearnedAt = start + 0x33;
-            s4LearnedLevel = start + 0x34;
-            s4LearnedID = start + 0x35;
+            s4LearnedID = start + 0x34;
+            s4LearnedLevel = start + 0x35;
             s5LearnedAt = start + 0x36;
-            s5LearnedLevel = start + 0x37;
-            s5LearnedID = start + 0x38;
+            s5LearnedID = start + 0x37;
+            s5LearnedLevel = start + 0x38;
             s6LearnedAt = start + 0x39;
-            s6LearnedLevel = start + 0x3a;
-            s6LearnedID = start + 0x3b;
+            s6LearnedID = start + 0x3a;
+            s6LearnedLevel = start + 0x3b;
             s7LearnedAt = start + 0x3c;
-            s7LearnedLevel = start + 0x3d;
-            s7LearnedID = start + 0x3e;
+            s7LearnedID = start + 0x3d;
+            s7LearnedLevel = start + 0x3e;
             s8LearnedAt = start + 0x3f;
-            s8LearnedLevel = start + 0x40;
-            s8LearnedID = start + 0x41;
+            s8LearnedID = start + 0x40;
+            s8LearnedLevel = start + 0x41;
             s9LearnedAt = start + 0x42;
-            s9LearnedLevel = start + 0x43;
-            s9LearnedID = start + 0x44;
+            s9LearnedID = start + 0x43;
+            s9LearnedLevel = start + 0x44;
             s10LearnedAt = start + 0x45;
-            s10LearnedLevel = start + 0x46;
-            s10LearnedID = start + 0x47;
+            s10LearnedID = start + 0x46;
+            s10LearnedLevel = start + 0x47;
             s11LearnedAt = start + 0x48;
-            s11LearnedLevel = start + 0x49;
-            s11LearnedID = start + 0x4a;
+            s11LearnedID = start + 0x49;
+            s11LearnedLevel = start + 0x4a;
             s12LearnedAt = start + 0x4b;
-            s12LearnedLevel = start + 0x4c;
-            s12LearnedID = start + 0x4d;
+            s12LearnedID = start + 0x4c;
+            s12LearnedLevel = start + 0x4d;
 
             weapon1Special1 = start + 0x4e;
             weapon1Special2 = start + 0x4f;
@@ -789,17 +789,17 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         [BulkCopy]
-        public int S1LearnedID
-        {
-            get => _fileEditor.GetByte(s1LearnedID);
-            set => _fileEditor.SetByte(s1LearnedID, (byte)value);
-        }
-
-        [BulkCopy]
         public int S1LearnedLevel
         {
             get => _fileEditor.GetByte(s1LearnedLevel);
             set => _fileEditor.SetByte(s1LearnedLevel, (byte)value);
+        }
+
+        [BulkCopy]
+        public int S1LearnedID
+        {
+            get => _fileEditor.GetByte(s1LearnedID);
+            set => _fileEditor.SetByte(s1LearnedID, (byte)value);
         }
 
         [BulkCopy]
@@ -810,17 +810,17 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         [BulkCopy]
-        public int S2LearnedID
-        {
-            get => _fileEditor.GetByte(s2LearnedID);
-            set => _fileEditor.SetByte(s2LearnedID, (byte)value);
-        }
-
-        [BulkCopy]
         public int S2LearnedLevel
         {
             get => _fileEditor.GetByte(s2LearnedLevel);
             set => _fileEditor.SetByte(s2LearnedLevel, (byte)value);
+        }
+
+        [BulkCopy]
+        public int S2LearnedID
+        {
+            get => _fileEditor.GetByte(s2LearnedID);
+            set => _fileEditor.SetByte(s2LearnedID, (byte)value);
         }
 
         [BulkCopy]
@@ -831,17 +831,17 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         [BulkCopy]
-        public int S3LearnedID
-        {
-            get => _fileEditor.GetByte(s3LearnedID);
-            set => _fileEditor.SetByte(s3LearnedID, (byte)value);
-        }
-
-        [BulkCopy]
         public int S3LearnedLevel
         {
             get => _fileEditor.GetByte(s3LearnedLevel);
             set => _fileEditor.SetByte(s3LearnedLevel, (byte)value);
+        }
+
+        [BulkCopy]
+        public int S3LearnedID
+        {
+            get => _fileEditor.GetByte(s3LearnedID);
+            set => _fileEditor.SetByte(s3LearnedID, (byte)value);
         }
 
         [BulkCopy]
@@ -852,17 +852,17 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         [BulkCopy]
-        public int S4LearnedID
-        {
-            get => _fileEditor.GetByte(s4LearnedID);
-            set => _fileEditor.SetByte(s4LearnedID, (byte)value);
-        }
-
-        [BulkCopy]
         public int S4LearnedLevel
         {
             get => _fileEditor.GetByte(s4LearnedLevel);
             set => _fileEditor.SetByte(s4LearnedLevel, (byte)value);
+        }
+
+        [BulkCopy]
+        public int S4LearnedID
+        {
+            get => _fileEditor.GetByte(s4LearnedID);
+            set => _fileEditor.SetByte(s4LearnedID, (byte)value);
         }
 
         [BulkCopy]
@@ -873,17 +873,17 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         [BulkCopy]
-        public int S5LearnedID
-        {
-            get => _fileEditor.GetByte(s5LearnedID);
-            set => _fileEditor.SetByte(s5LearnedID, (byte)value);
-        }
-
-        [BulkCopy]
         public int S5LearnedLevel
         {
             get => _fileEditor.GetByte(s5LearnedLevel);
             set => _fileEditor.SetByte(s5LearnedLevel, (byte)value);
+        }
+
+        [BulkCopy]
+        public int S5LearnedID
+        {
+            get => _fileEditor.GetByte(s5LearnedID);
+            set => _fileEditor.SetByte(s5LearnedID, (byte)value);
         }
 
         [BulkCopy]
@@ -894,17 +894,17 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         [BulkCopy]
-        public int S6LearnedID
-        {
-            get => _fileEditor.GetByte(s6LearnedID);
-            set => _fileEditor.SetByte(s6LearnedID, (byte)value);
-        }
-
-        [BulkCopy]
         public int S6LearnedLevel
         {
             get => _fileEditor.GetByte(s6LearnedLevel);
             set => _fileEditor.SetByte(s6LearnedLevel, (byte)value);
+        }
+
+        [BulkCopy]
+        public int S6LearnedID
+        {
+            get => _fileEditor.GetByte(s6LearnedID);
+            set => _fileEditor.SetByte(s6LearnedID, (byte)value);
         }
 
         [BulkCopy]
@@ -915,17 +915,17 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         [BulkCopy]
-        public int S7LearnedID
-        {
-            get => _fileEditor.GetByte(s7LearnedID);
-            set => _fileEditor.SetByte(s7LearnedID, (byte)value);
-        }
-
-        [BulkCopy]
         public int S7LearnedLevel
         {
             get => _fileEditor.GetByte(s7LearnedLevel);
             set => _fileEditor.SetByte(s7LearnedLevel, (byte)value);
+        }
+
+        [BulkCopy]
+        public int S7LearnedID
+        {
+            get => _fileEditor.GetByte(s7LearnedID);
+            set => _fileEditor.SetByte(s7LearnedID, (byte)value);
         }
 
         [BulkCopy]
@@ -936,17 +936,17 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         [BulkCopy]
-        public int S8LearnedID
-        {
-            get => _fileEditor.GetByte(s8LearnedID);
-            set => _fileEditor.SetByte(s8LearnedID, (byte)value);
-        }
-
-        [BulkCopy]
         public int S8LearnedLevel
         {
             get => _fileEditor.GetByte(s8LearnedLevel);
             set => _fileEditor.SetByte(s8LearnedLevel, (byte)value);
+        }
+
+        [BulkCopy]
+        public int S8LearnedID
+        {
+            get => _fileEditor.GetByte(s8LearnedID);
+            set => _fileEditor.SetByte(s8LearnedID, (byte)value);
         }
 
         [BulkCopy]
@@ -957,17 +957,17 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         [BulkCopy]
-        public int S9LearnedID
-        {
-            get => _fileEditor.GetByte(s9LearnedID);
-            set => _fileEditor.SetByte(s9LearnedID, (byte)value);
-        }
-
-        [BulkCopy]
         public int S9LearnedLevel
         {
             get => _fileEditor.GetByte(s9LearnedLevel);
             set => _fileEditor.SetByte(s9LearnedLevel, (byte)value);
+        }
+
+        [BulkCopy]
+        public int S9LearnedID
+        {
+            get => _fileEditor.GetByte(s9LearnedID);
+            set => _fileEditor.SetByte(s9LearnedID, (byte)value);
         }
 
         [BulkCopy]
@@ -978,17 +978,17 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         [BulkCopy]
-        public int S10LearnedID
-        {
-            get => _fileEditor.GetByte(s10LearnedID);
-            set => _fileEditor.SetByte(s10LearnedID, (byte)value);
-        }
-
-        [BulkCopy]
         public int S10LearnedLevel
         {
             get => _fileEditor.GetByte(s10LearnedLevel);
             set => _fileEditor.SetByte(s10LearnedLevel, (byte)value);
+        }
+
+        [BulkCopy]
+        public int S10LearnedID
+        {
+            get => _fileEditor.GetByte(s10LearnedID);
+            set => _fileEditor.SetByte(s10LearnedID, (byte)value);
         }
 
         [BulkCopy]
@@ -999,17 +999,17 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         [BulkCopy]
-        public int S11LearnedID
-        {
-            get => _fileEditor.GetByte(s11LearnedID);
-            set => _fileEditor.SetByte(s11LearnedID, (byte)value);
-        }
-
-        [BulkCopy]
         public int S11LearnedLevel
         {
             get => _fileEditor.GetByte(s11LearnedLevel);
             set => _fileEditor.SetByte(s11LearnedLevel, (byte)value);
+        }
+
+        [BulkCopy]
+        public int S11LearnedID
+        {
+            get => _fileEditor.GetByte(s11LearnedID);
+            set => _fileEditor.SetByte(s11LearnedID, (byte)value);
         }
 
         [BulkCopy]
@@ -1020,17 +1020,17 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         [BulkCopy]
-        public int S12LearnedID
-        {
-            get => _fileEditor.GetByte(s12LearnedID);
-            set => _fileEditor.SetByte(s12LearnedID, (byte)value);
-        }
-
-        [BulkCopy]
         public int S12LearnedLevel
         {
             get => _fileEditor.GetByte(s12LearnedLevel);
             set => _fileEditor.SetByte(s12LearnedLevel, (byte)value);
+        }
+
+        [BulkCopy]
+        public int S12LearnedID
+        {
+            get => _fileEditor.GetByte(s12LearnedID);
+            set => _fileEditor.SetByte(s12LearnedID, (byte)value);
         }
 
         [BulkCopy]
