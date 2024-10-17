@@ -1,5 +1,6 @@
 ﻿using SF3.Attributes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -63,14 +64,14 @@ namespace SF3.Utils
         /// <summary>
         /// Result for an individual row in BulkCopyCollectionResult.
         /// </summary>
-        public class BulkCopyCollectionRowResult<T> where T : class
+        public class BulkCopyCollectionRowResult
         {
             /// <summary>
             /// Bulk copy result for a row that was or was not copied, depending on whether 'copyResult' is 'null'.
             /// </summary>
             /// <param name="index">Index of the row in 'listFrom'.</param>
             /// <param name="copyResult">Result of the row copied. Can be 'null' to indicate the row wasn't copied.</param>
-            public BulkCopyCollectionRowResult(int index, T rowFrom, T rowTo, BulkCopyPropertiesResult copyResult)
+            public BulkCopyCollectionRowResult(int index, object rowFrom, object rowTo, BulkCopyPropertiesResult copyResult)
             {
                 Index = index;
                 RowFrom = rowFrom;
@@ -87,12 +88,12 @@ namespace SF3.Utils
             /// <summary>
             /// The input row.
             /// </summary>
-            public T RowFrom { get; }
+            public object RowFrom { get; }
 
             /// <summary>
             /// The output row.
             /// </summary>
-            public T RowTo { get; }
+            public object RowTo { get; }
 
             /// <summary>
             /// 'True' if this row was copied.
@@ -108,48 +109,9 @@ namespace SF3.Utils
         /// <summary>
         /// Result for BulkCopyProperties() functions.
         /// </summary>
-        public interface IBulkCopyCollectionResult
+        public class BulkCopyCollectionResult
         {
-            /// <summary>
-            /// The number of rows in 'objFrom' that were not copied to 'objTo'.
-            /// </summary>
-            int InRowsSkipped { get; }
-
-            /// <summary>
-            /// The number of rows in 'objTo' that were unaffected.
-            /// </summary>
-            int OutRowsSkipped { get; }
-
-            /// <summary>
-            /// The number of rows copied from 'objFrom' to 'objTo'.
-            /// </summary>
-            int RowsCopied { get; }
-
-            /// <summary>
-            /// Produces a large report with overall/summary and individual changes.
-            /// </summary>
-            /// <returns>A multiline string with a trailing "\n".</returns>
-            string MakeFullReport();
-
-            /// <summary>
-            /// Produces a summary report for changes made to the list.
-            /// </summary>
-            /// <returns>A multiline string with a trailing "\n".</returns>
-            string MakeSummaryReport();
-
-            /// <summary>
-            /// Produces a detailed report of all changes in the list.
-            /// </summary>
-            /// <returns>A multiline string with a trailing "\n".</returns>
-            string MakeIndividualChangesReport();
-        }
-
-        /// <summary>
-        /// Result for BulkCopyProperties() functions.
-        /// </summary>
-        public class BulkCopyCollectionResult<T> : IBulkCopyCollectionResult where T : class
-        {
-            public BulkCopyCollectionResult(IEnumerable<BulkCopyCollectionRowResult<T>> inputRows, int listOutRowsIgnored)
+            public BulkCopyCollectionResult(IEnumerable<BulkCopyCollectionRowResult> inputRows, int listOutRowsIgnored)
             {
                 InputRows = inputRows;
                 InRowsSkipped = inputRows.Count(x => !x.Copied);
@@ -160,12 +122,27 @@ namespace SF3.Utils
             /// <summary>
             /// Individual reports for each row in 'listForm'.
             /// </summary>
-            public IEnumerable<BulkCopyCollectionRowResult<T>> InputRows { get; }
+            public IEnumerable<BulkCopyCollectionRowResult> InputRows { get; }
 
+            /// <summary>
+            /// The number of rows in 'objFrom' that were not copied to 'objTo'.
+            /// </summary>
             public int InRowsSkipped { get; }
+
+            /// <summary>
+            /// The number of rows in 'objTo' that were unaffected.
+            /// </summary>
             public int OutRowsSkipped { get; }
+
+            /// <summary>
+            /// The number of rows copied from 'objFrom' to 'objTo'.
+            /// </summary>
             public int RowsCopied { get; }
 
+            /// <summary>
+            /// Produces a large report with overall/summary and individual changes.
+            /// </summary>
+            /// <returns>A multiline string with a trailing "\n".</returns>
             public string MakeFullReport()
             {
                 string report =
@@ -181,6 +158,10 @@ namespace SF3.Utils
                 return report;
             }
 
+            /// <summary>
+            /// Produces a summary report for changes made to the list.
+            /// </summary>
+            /// <returns>A multiline string with a trailing "\n".</returns>
             public string MakeSummaryReport()
             {
                 string report =
@@ -197,6 +178,10 @@ namespace SF3.Utils
                 return report;
             }
 
+            /// <summary>
+            /// Produces a detailed report of all changes in the list.
+            /// </summary>
+            /// <returns>A multiline string with a trailing "\n".</returns>
             public string MakeIndividualChangesReport()
             {
                 string report = "";
@@ -217,14 +202,13 @@ namespace SF3.Utils
         }
 
         /// <summary>
-        /// Copies all properties of type T tagged with [BulkCopy] in 'objFrom' to 'objTo'.
+        /// Copies all properties tagged with [BulkCopy] in 'objFrom' to 'objTo'.
         /// </summary>
-        /// <typeparam name="T">The type whose properties should be </typeparam>
         /// <param name="objFrom">The object whose properties should be copied from.</param>
         /// <param name="objTo">The object whose properties should be copied to.</param>
         /// <param name="inherit">When true (default), all inherited properties are copied.</param>
         /// <returns>A list of all properties considered and the result.</returns>
-        public static BulkCopyPropertiesResult BulkCopyProperties<T>(this T objFrom, T objTo, bool inherit = true)
+        public static BulkCopyPropertiesResult BulkCopyProperties(this object objFrom, object objTo, bool inherit = true)
         {
             // Get all public properties we're considering to check.
             var allProperties = objFrom.GetType().GetProperties(
@@ -269,27 +253,26 @@ namespace SF3.Utils
         }
 
         /// <summary>
-        /// Copies all properties of type T in an IEnumerable<T> tagged with [BulkCopy] in 'objFrom' to 'objTo'.
+        /// Copies all properties in an IEnumerable tagged with [BulkCopy] in 'objFrom' to 'objTo'.
         /// </summary>
-        /// <typeparam name="T">The type whose properties should be copied.</typeparam>
         /// <param name="listFrom">The object whose properties should be copied from.</param>
         /// <param name="listTo">The object whose properties should be copied to.</param>
         /// <param name="inherit">When true (default), all inherited properties are copied.</param>
         /// <returns>A report with the number of rows affected, unaffected, and each row's individual properties changed.</returns>
-        public static BulkCopyCollectionResult<T> BulkCopyCollectionProperties<T>(this IEnumerable<T> listFrom, IEnumerable<T> listTo, bool inherit = true) where T : class
+        public static BulkCopyCollectionResult BulkCopyCollectionProperties(this IEnumerable<object> listFrom, IEnumerable<object> listTo, bool inherit = true)
         {
             var arrayFrom = listFrom.ToArray();
             var arrayTo = listTo.ToArray();
 
-            var inputRowReports = new List<BulkCopyCollectionRowResult<T>>();
+            var inputRowReports = new List<BulkCopyCollectionRowResult>();
             for (int i = 0; i < arrayFrom.Length; i++)
             {
                 var rowTo = (i < arrayTo.Length) ? arrayTo[i] : null;
-                inputRowReports.Add(new BulkCopyCollectionRowResult<T>(i, arrayFrom[i], rowTo,
+                inputRowReports.Add(new BulkCopyCollectionRowResult(i, arrayFrom[i], rowTo,
                     (rowTo != null) ? BulkCopyProperties(arrayFrom[i], rowTo, inherit) : null));
             }
 
-            return new BulkCopyCollectionResult<T>(inputRowReports, Math.Max(arrayTo.Length - arrayFrom.Length, 0));
+            return new BulkCopyCollectionResult(inputRowReports, Math.Max(arrayTo.Length - arrayFrom.Length, 0));
         }
     }
 }
