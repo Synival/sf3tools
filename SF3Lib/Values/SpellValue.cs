@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SF3.Types;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
@@ -15,18 +16,29 @@ namespace SF3.Values
         public const int MaxValue = 0xFF;
 
         // TODO: These definitely change between scenarios, so somehow it will need to be scenario-specific, likely tied to the SF3FileEditor.
-        public static readonly Dictionary<int, string> ValueNamesS1 = GetValueNameDictionaryFromXML("Resources/S1/Spells.xml");
-        public static readonly Dictionary<int, string> ValueNamesS2 = GetValueNameDictionaryFromXML("Resources/S2/Spells.xml");
-        public static readonly Dictionary<int, string> ValueNamesS3 = GetValueNameDictionaryFromXML("Resources/S3/Spells.xml");
-        public static readonly Dictionary<int, string> ValueNamesPD = GetValueNameDictionaryFromXML("Resources/PD/Spells.xml");
-
-        private static readonly Dictionary<NamedValue, string> _ComboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SpellValue(value));
-
-        public override Dictionary<NamedValue, string> ComboBoxValues => _ComboBoxValues;
-
-        // TODO: determine which scenario to use!
-        public SpellValue(int value) : base(HexValueWithName(value, ValueNamesS3), value)
+        public static readonly Dictionary<ScenarioType, Dictionary<int, string>> ValueNames = new Dictionary<ScenarioType, Dictionary<int, string>>()
         {
+            { ScenarioType.Scenario1,   GetValueNameDictionaryFromXML("Resources/S1/Spells.xml") },
+            { ScenarioType.Scenario2,   GetValueNameDictionaryFromXML("Resources/S2/Spells.xml") },
+            { ScenarioType.Scenario3,   GetValueNameDictionaryFromXML("Resources/S3/Spells.xml") },
+            { ScenarioType.PremiumDisk, GetValueNameDictionaryFromXML("Resources/PD/Spells.xml") },
+        };
+
+        public static readonly Dictionary<ScenarioType, Dictionary<NamedValue, string>> _comboBoxValues = new Dictionary<ScenarioType, Dictionary<NamedValue, string>>()
+        {
+            { ScenarioType.Scenario1, MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SpellValue(ScenarioType.Scenario1, value)) },
+            { ScenarioType.Scenario2, MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SpellValue(ScenarioType.Scenario2, value)) },
+            { ScenarioType.Scenario3, MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SpellValue(ScenarioType.Scenario3, value)) },
+            { ScenarioType.PremiumDisk, MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SpellValue(ScenarioType.PremiumDisk, value)) },
+        };
+
+        public SpellValue(ScenarioType scenario, int value) : base(HexValueWithName(value, ValueNames[scenario]), value)
+        {
+            Scenario = scenario;
         }
+
+        public override Dictionary<NamedValue, string> ComboBoxValues => _comboBoxValues[Scenario];
+
+        private ScenarioType Scenario { get; }
     }
 }

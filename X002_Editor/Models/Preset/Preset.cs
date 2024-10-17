@@ -70,7 +70,7 @@ namespace SF3.X002_Editor.Models.Presets
 
         public SpellValue SpellID2
         {
-            get => new SpellValue(_fileEditor.GetByte(spell));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(spell));
             set => _fileEditor.SetByte(spell, (byte)value.Value);
         }
         public int Weapon0

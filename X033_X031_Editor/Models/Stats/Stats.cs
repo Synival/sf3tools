@@ -798,7 +798,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         [BulkCopy]
         public SpellValue S1LearnedID
         {
-            get => new SpellValue(_fileEditor.GetByte(s1LearnedID));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(s1LearnedID));
             set => _fileEditor.SetByte(s1LearnedID, (byte)value.Value);
         }
 
@@ -819,7 +819,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         [BulkCopy]
         public SpellValue S2LearnedID
         {
-            get => new SpellValue(_fileEditor.GetByte(s2LearnedID));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(s2LearnedID));
             set => _fileEditor.SetByte(s2LearnedID, (byte)value.Value);
         }
 
@@ -840,7 +840,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         [BulkCopy]
         public SpellValue S3LearnedID
         {
-            get => new SpellValue(_fileEditor.GetByte(s3LearnedID));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(s3LearnedID));
             set => _fileEditor.SetByte(s3LearnedID, (byte)value.Value);
         }
 
@@ -861,7 +861,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         [BulkCopy]
         public SpellValue S4LearnedID
         {
-            get => new SpellValue(_fileEditor.GetByte(s4LearnedID));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(s4LearnedID));
             set => _fileEditor.SetByte(s4LearnedID, (byte)value.Value);
         }
 
@@ -882,7 +882,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         [BulkCopy]
         public SpellValue S5LearnedID
         {
-            get => new SpellValue(_fileEditor.GetByte(s5LearnedID));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(s5LearnedID));
             set => _fileEditor.SetByte(s5LearnedID, (byte)value.Value);
         }
 
@@ -903,7 +903,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         [BulkCopy]
         public SpellValue S6LearnedID
         {
-            get => new SpellValue(_fileEditor.GetByte(s6LearnedID));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(s6LearnedID));
             set => _fileEditor.SetByte(s6LearnedID, (byte)value.Value);
         }
 
@@ -924,7 +924,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         [BulkCopy]
         public SpellValue S7LearnedID
         {
-            get => new SpellValue(_fileEditor.GetByte(s7LearnedID));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(s7LearnedID));
             set => _fileEditor.SetByte(s7LearnedID, (byte)value.Value);
         }
 
@@ -945,7 +945,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         [BulkCopy]
         public SpellValue S8LearnedID
         {
-            get => new SpellValue(_fileEditor.GetByte(s8LearnedID));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(s8LearnedID));
             set => _fileEditor.SetByte(s8LearnedID, (byte)value.Value);
         }
 
@@ -966,7 +966,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         [BulkCopy]
         public SpellValue S9LearnedID
         {
-            get => new SpellValue(_fileEditor.GetByte(s9LearnedID));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(s9LearnedID));
             set => _fileEditor.SetByte(s9LearnedID, (byte)value.Value);
         }
 
@@ -987,7 +987,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         [BulkCopy]
         public SpellValue S10LearnedID
         {
-            get => new SpellValue(_fileEditor.GetByte(s10LearnedID));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(s10LearnedID));
             set => _fileEditor.SetByte(s10LearnedID, (byte)value.Value);
         }
 
@@ -1008,7 +1008,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         [BulkCopy]
         public SpellValue S11LearnedID
         {
-            get => new SpellValue(_fileEditor.GetByte(s11LearnedID));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(s11LearnedID));
             set => _fileEditor.SetByte(s11LearnedID, (byte)value.Value);
         }
 
@@ -1029,7 +1029,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         [BulkCopy]
         public SpellValue S12LearnedID
         {
-            get => new SpellValue(_fileEditor.GetByte(s12LearnedID));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(s12LearnedID));
             set => _fileEditor.SetByte(s12LearnedID, (byte)value.Value);
         }
 

@@ -305,7 +305,7 @@ namespace SF3.X019_Editor.Models.Monsters
 
         public SpellValue Spell1
         {
-            get => new SpellValue(_fileEditor.GetByte(spell1));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(spell1));
             set => _fileEditor.SetByte(spell1, (byte)value.Value);
         }
 
@@ -317,7 +317,7 @@ namespace SF3.X019_Editor.Models.Monsters
 
         public SpellValue Spell2
         {
-            get => new SpellValue(_fileEditor.GetByte(spell2));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(spell2));
             set => _fileEditor.SetByte(spell2, (byte)value.Value);
         }
 
@@ -329,7 +329,7 @@ namespace SF3.X019_Editor.Models.Monsters
 
         public SpellValue Spell3
         {
-            get => new SpellValue(_fileEditor.GetByte(spell3));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(spell3));
             set => _fileEditor.SetByte(spell3, (byte)value.Value);
         }
 
@@ -341,7 +341,7 @@ namespace SF3.X019_Editor.Models.Monsters
 
         public SpellValue Spell4
         {
-            get => new SpellValue(_fileEditor.GetByte(spell4));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(spell4));
             set => _fileEditor.SetByte(spell4, (byte)value.Value);
         }
 

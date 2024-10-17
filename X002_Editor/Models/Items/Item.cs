@@ -287,7 +287,7 @@ namespace SF3.X002_Editor.Models.Items
         }
         public SpellValue SpellUse
         {
-            get => new SpellValue(_fileEditor.GetByte(SpellOnUseLocation));
+            get => new SpellValue(Scenario, _fileEditor.GetByte(SpellOnUseLocation));
             set => _fileEditor.SetByte(SpellOnUseLocation, (byte)value.Value);
         }
         public int SpellUseLv
