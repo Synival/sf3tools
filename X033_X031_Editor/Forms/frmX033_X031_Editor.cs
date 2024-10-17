@@ -321,6 +321,10 @@ namespace SF3.X033_X031_Editor.Forms
             string copyReports = "";
             try
             {
+                Utils.BulkCopyProperties(copyFileEditor, FileEditor);
+
+                // TODO: how in the world do we get the full report?
+/*
                 // Gather all the IModelArray properties to copy.
                 // TODO: Maybe another attribute??
                 var modelsFrom = copyFileEditor.GetType().GetProperties()
@@ -335,9 +339,11 @@ namespace SF3.X033_X031_Editor.Forms
                 var bulkCopyResults = modelsFrom
                     .Join(modelsTo, l => l.Key, r => r.Key, (l, r) => (l.Key, l.Value, r.Value))
                     .ToDictionary(x => x.Key, x => Utils.BulkCopyCollectionProperties(x.Item2.ModelObjs, x.Item3.ModelObjs, true));
-
+*/
                 ObjectListViews.ForEach(x => x.RefreshAllItems());
 
+                // TODO: re-enable nice report
+/*
                 // Produce a giant report.
                 var fullReports = "";
                 foreach (var report in bulkCopyResults)
@@ -366,6 +372,7 @@ namespace SF3.X033_X031_Editor.Forms
                         copyReports += "\n\nError: Couldn't dump detailed report to 'BulkCopyReport.txt'.";
                     }
                 }
+*/
             }
             catch (System.Reflection.TargetInvocationException)
             {

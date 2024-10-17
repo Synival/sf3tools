@@ -70,6 +70,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\BulkCopyRecurseAttribute.cs" />
     <Compile Include="Attributes\BulkCopyAttribute.cs" />
     <Compile Include="Exceptions\FileEditorException.cs" />
     <Compile Include="Exceptions\FileEditorNotLoadedException.cs" />

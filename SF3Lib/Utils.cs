@@ -267,26 +267,46 @@ namespace SF3
         /// <returns>A list of all properties considered and the result.</returns>
         public static BulkCopyPropertiesResult BulkCopyProperties<T>(T objFrom, T objTo, bool inherit = true)
         {
-            // Get all public properties with the [BulkCopy] attribute.
-            var properties = objFrom.GetType().GetProperties(
+            // Get all public properties we're considering to check.
+            var allProperties = objFrom.GetType().GetProperties(
                     BindingFlags.Public |
                     BindingFlags.Instance |
                     (inherit ? 0 : BindingFlags.DeclaredOnly)
-                )
-                .Where(x => x.IsDefined(typeof(BulkCopyAttribute)))
-                .ToList();
+                ).ToList();
 
-            var propertyList = new List<BulkCopyPropertyResult>();
-            foreach (var property in properties)
+            // Get all public properties with the [BulkCopy] attribute.
+            var copyList = allProperties.Where(x => x.IsDefined(typeof(BulkCopyAttribute))).ToList();
+            var resultList = new List<BulkCopyPropertyResult>();
+            foreach (var property in copyList)
             {
                 var oldValue = property.GetValue(objTo);
                 property.SetValue(objTo, property.GetValue(objFrom));
                 var newValue = property.GetValue(objTo);
 
-                propertyList.Add(new BulkCopyPropertyResult(property, oldValue, newValue));
+                resultList.Add(new BulkCopyPropertyResult(property, oldValue, newValue));
             }
 
-            return new BulkCopyPropertiesResult(propertyList);
+            // Get all public properties with the [BulkCopy] attribute.
+            var copyContentsList = allProperties.Where(x => x.IsDefined(typeof(BulkCopyRecurseAttribute))).ToList();
+            var subResultList = new List<BulkCopyPropertyResult>();
+            foreach (var property in copyContentsList)
+            {
+                var valueFrom = property.GetValue(objFrom);
+                var valueTo = property.GetValue(objTo);
+
+                // TODO: how to bundle this into the result??
+                // TODO: This should be handled automatically and the results should go to the same collection
+                if (typeof(IEnumerable<object>).IsAssignableFrom(valueFrom.GetType()))
+                {
+                    BulkCopyCollectionProperties(valueFrom as IEnumerable<object>, valueTo as IEnumerable<object>, inherit);
+                }
+                else
+                {
+                    BulkCopyProperties(valueFrom, valueTo, inherit);
+                }
+            }
+
+            return new BulkCopyPropertiesResult(resultList);
         }
 
         /// <summary>

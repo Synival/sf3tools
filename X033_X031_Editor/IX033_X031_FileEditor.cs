@@ -1,4 +1,5 @@
-﻿using SF3.X033_X031_Editor.Models.InitialInfos;
+﻿using SF3.Attributes;
+using SF3.X033_X031_Editor.Models.InitialInfos;
 using SF3.X033_X031_Editor.Models.Stats;
 using SF3.X033_X031_Editor.Models.WeaponLevel;
 using System;

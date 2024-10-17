@@ -1,4 +1,5 @@
-﻿using SF3.Models;
+﻿using SF3.Attributes;
+using SF3.Models;
 using SF3.Types;
 using SF3.X033_X031_Editor.Models.InitialInfos;
 using SF3.X033_X031_Editor.Models.Stats;
@@ -27,10 +28,13 @@ namespace SF3.X033_X031_Editor
             };
         }
 
+        [BulkCopyRecurse]
         public StatsList StatsList { get; private set; }
 
+        [BulkCopyRecurse]
         public InitialInfoList InitialInfoList { get; private set; }
 
+        [BulkCopyRecurse]
         public WeaponLevelList WeaponLevelList { get; private set; }
     }
 }

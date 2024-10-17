@@ -1,4 +1,5 @@
-﻿using SF3.Types;
+﻿using SF3.Attributes;
+using SF3.Types;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -47,6 +48,8 @@ namespace SF3.Models
         }
 
         public override object[] ModelObjs => _models;
+
+        [BulkCopyRecurse]
         public T[] Models => _models;
 
         public override bool IsLoaded => _models != null;
