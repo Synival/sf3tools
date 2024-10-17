@@ -1,5 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using SF3.Exceptions;
+using SF3.Extensions;
 using SF3.Types;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace SF3.Editor.Forms
         /// </summary>
         public void FinalizeForm()
         {
-            ObjectListViews = SF3.Utils.GetAllObjectsOfTypeInFields<ObjectListView>(this, false);
+            ObjectListViews = this.GetAllObjectsOfTypeInFields<ObjectListView>(false);
             UpdateTitle();
         }
 

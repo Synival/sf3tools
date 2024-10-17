@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using static SF3.Utils.Utils;
 
 namespace SF3.Values
 {
@@ -19,9 +20,9 @@ namespace SF3.Values
             {0x02, "Female"},
         };
 
-        public static readonly Dictionary<NamedValue, string> ComboBoxValues = Utils.MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SexValue(value));
+        public static readonly Dictionary<NamedValue, string> ComboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SexValue(value));
 
-        public SexValue(int value) : base(Utils.HexValueWithName(value, ValueNames), value)
+        public SexValue(int value) : base(HexValueWithName(value, ValueNames), value)
         {
         }
     }

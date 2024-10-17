@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using static SF3.Utils.Utils;
 
 namespace SF3.Values
 {
@@ -130,9 +131,9 @@ namespace SF3.Values
             {0x6A, "Hermit (P2)"},
         };
 
-        public static readonly Dictionary<NamedValue, string> ComboBoxValues = Utils.MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new CharacterClassValue(value));
+        public static readonly Dictionary<NamedValue, string> ComboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new CharacterClassValue(value));
 
-        public CharacterClassValue(int value) : base(Utils.HexValueWithName(value, ValueNames), value)
+        public CharacterClassValue(int value) : base(HexValueWithName(value, ValueNames), value)
         {
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using static SF3.Utils.Utils;
 
 namespace SF3.Values
 {
@@ -51,9 +52,9 @@ namespace SF3.Values
             {0x81, "Ring/Accessory"},
         };
 
-        public static readonly Dictionary<NamedValue, string> ComboBoxValues = Utils.MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new WeaponTypeValue(value));
+        public static readonly Dictionary<NamedValue, string> ComboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new WeaponTypeValue(value));
 
-        public WeaponTypeValue(int value) : base(Utils.HexValueWithName(value, ValueNames), value)
+        public WeaponTypeValue(int value) : base(HexValueWithName(value, ValueNames), value)
         {
         }
     }

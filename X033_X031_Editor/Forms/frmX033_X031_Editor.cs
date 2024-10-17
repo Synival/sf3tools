@@ -6,9 +6,7 @@ using SF3.Types;
 using SF3.Exceptions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
-using SF3.Models;
-using System.Linq;
-using System.IO;
+using SF3.Utils;
 
 namespace SF3.X033_X031_Editor.Forms
 {
@@ -321,7 +319,7 @@ namespace SF3.X033_X031_Editor.Forms
             string copyReports = "";
             try
             {
-                Utils.BulkCopyProperties(copyFileEditor, FileEditor);
+                copyFileEditor.BulkCopyProperties(FileEditor);
 
                 // TODO: how in the world do we get the full report?
 /*

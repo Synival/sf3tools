@@ -4,53 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace SF3
+namespace SF3.Utils
 {
-    /// <summary>
-    /// Miscellaneous utility functions.
-    /// </summary>
-    public static class Utils
+    public static partial class ObjectExtensions
     {
-        /// <summary>
-        /// Returns a string with a stringified hex value followed by a value name if available in a dictionary.
-        /// </summary>
-        /// <param name="value">Value for which a string should be generated</param>
-        /// <param name="nameDict">Dictionary with possible names for 'value'</param>
-        /// <param name="hexDigits">Number of digits for the hexideimcal portion of the return string</param>
-        /// <returns>
-        /// If no name available:
-        ///     {0:X[hexDigits]}
-        /// If value name available:
-        ///     {0:X[hexDigits]: [name]
-        /// </returns>
-        public static string HexValueWithName(int value, Dictionary<int, string> nameDict, int hexDigits = 2)
-        {
-            var valueStr = value.ToString("X" + hexDigits.ToString());
-            string className;
-            return nameDict.TryGetValue(value, out className)
-                ? valueStr + ": " + className
-                : valueStr;
-        }
-
-        /// <summary>
-        /// Creates a dictionary of all possible values to supply to MakeNamedValueComboBox().
-        /// </summary>
-        /// <param name="minValue">Minimum value</param>
-        /// <param name="maxValue">Maximum value</param>
-        /// <param name="factoryFunc">Factory function to create a NamedValue. Used for looking up 'NamedValue.Name' for all possible values.</param>
-        /// <returns>A key-value dictionary of all possible values (key) and their names (value).</returns>
-        public static Dictionary<NamedValue, string> MakeNamedValueComboBoxValues(int minValue, int maxValue, Func<int, NamedValue> factoryFunc)
-        {
-            var dict = new Dictionary<NamedValue, string>();
-            for (int i = minValue; i < maxValue; i++)
-            {
-                var value = factoryFunc(i);
-                dict.Add(value, value.Name);
-            }
-            return dict;
-        }
-
         /// <summary>
         /// Result for individual properties affected by BulkCopyProperties() functions.
         /// </summary>
@@ -265,7 +224,7 @@ namespace SF3
         /// <param name="objTo">The object whose properties should be copied to.</param>
         /// <param name="inherit">When true (default), all inherited properties are copied.</param>
         /// <returns>A list of all properties considered and the result.</returns>
-        public static BulkCopyPropertiesResult BulkCopyProperties<T>(T objFrom, T objTo, bool inherit = true)
+        public static BulkCopyPropertiesResult BulkCopyProperties<T>(this T objFrom, T objTo, bool inherit = true)
         {
             // Get all public properties we're considering to check.
             var allProperties = objFrom.GetType().GetProperties(
@@ -317,7 +276,7 @@ namespace SF3
         /// <param name="listTo">The object whose properties should be copied to.</param>
         /// <param name="inherit">When true (default), all inherited properties are copied.</param>
         /// <returns>A report with the number of rows affected, unaffected, and each row's individual properties changed.</returns>
-        public static BulkCopyCollectionResult<T> BulkCopyCollectionProperties<T>(IEnumerable<T> listFrom, IEnumerable<T> listTo, bool inherit = true) where T : class
+        public static BulkCopyCollectionResult<T> BulkCopyCollectionProperties<T>(this IEnumerable<T> listFrom, IEnumerable<T> listTo, bool inherit = true) where T : class
         {
             var arrayFrom = listFrom.ToArray();
             var arrayTo = listTo.ToArray();
@@ -331,28 +290,6 @@ namespace SF3
             }
 
             return new BulkCopyCollectionResult<T>(inputRowReports, Math.Max(arrayTo.Length - arrayFrom.Length, 0));
-        }
-
-        /// <summary>
-        /// Gets all values of all fields with type T.
-        /// </summary>
-        /// <typeparam name="T">The type to look for.</typeparam>
-        /// <param name="obj">The object whose fields should be searched.</param>
-        /// <param name="inherit">If 'true', values for fields with base classes will be returned.</param>
-        /// <returns></returns>
-        public static List<T> GetAllObjectsOfTypeInFields<T>(object obj, bool inherit = true) where T : class
-        {
-            var fields = obj.GetType().GetFields(
-                BindingFlags.Public |
-                BindingFlags.NonPublic |
-                BindingFlags.Instance |
-                (inherit ? 0 : BindingFlags.DeclaredOnly)
-            );
-
-            return fields
-                .Where(x => x.FieldType == typeof(T))
-                .Select(x => x.GetValue(obj) as T)
-                .ToList();
         }
     }
 }
