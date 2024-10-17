@@ -86,6 +86,7 @@
     <Compile Include="ProbableValueSet.cs" />
     <Compile Include="Models\IModelArray.cs" />
     <Compile Include="NamedValue.cs" />
+    <Compile Include="ScenarioFileType.cs" />
     <Compile Include="SF3FileEditor.cs" />
     <Compile Include="Types\FileType.cs" />
     <Compile Include="Types\MapType.cs" />

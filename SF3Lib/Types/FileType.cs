@@ -12,6 +12,8 @@ namespace SF3.Types
     /// </summary>
     public enum FileType
     {
+        Unspecified = 0,
+
         // IconPointerEditor files
         X011_X021,
         X026,
