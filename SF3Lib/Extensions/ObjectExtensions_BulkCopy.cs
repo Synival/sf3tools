@@ -1,9 +1,11 @@
 ﻿using SF3.Attributes;
+using SF3.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,19 +22,45 @@ namespace SF3.Utils
             /// Nested results from any objects in a collection copied or objects copied recursively.
             /// </summary>
             IEnumerable<IBulkCopyResult> ChildResults { get; }
+
+            /// <summary>
+            /// Produces a report for itself as well as all children.
+            /// </summary>
+            /// <returns>A string separated by newlines without a trailing newline.</returns>
+            string MakeFullReport();
+
+            /// <summary>
+            /// Produces a report for itself.
+            /// </summary>
+            /// <returns></returns>
+            string MakeSummaryReport();
+
+            /// <summary>
+            /// 'True' if any changes were made.
+            /// </summary>
+            bool Changed { get; }
+
+            /// <summary>
+            /// Returns the total number of changes.
+            /// </summary>
+            int ChangeCount { get; }
         }
 
         /// <summary>
         /// Any kind of result from any kind of BulkCopy() operation.
         /// </summary>
-        public class BulkCopyResult : IBulkCopyResult
+        public abstract class BulkCopyResult : IBulkCopyResult
         {
             public BulkCopyResult(IEnumerable<IBulkCopyResult> childResults)
             {
                 ChildResults = childResults;
             }
 
-            public IEnumerable<IBulkCopyResult> ChildResults { get; } = new List<BulkCopyResult>();
+            public abstract string MakeFullReport();
+            public abstract string MakeSummaryReport();
+            public IEnumerable<IBulkCopyResult> ChildResults { get; }
+            public abstract bool Changed { get; }
+            public abstract int ChangeCount { get; }
         }
 
         /// <summary>
@@ -47,7 +75,12 @@ namespace SF3.Utils
                 OldValue = oldValue;
                 NewValue = newValue;
                 Changed = !NewValue.Equals(OldValue);
+                ChangeCount = Changed ? 1 : 0;
             }
+
+            public override string MakeFullReport() => MakeSummaryReport();
+
+            public override string MakeSummaryReport() => !Changed ? "" : Property.Name + ": " + OldValue.ToString() + " => " + NewValue.ToString() + "\n";
 
             /// <summary>
             /// The property affected.
@@ -64,10 +97,8 @@ namespace SF3.Utils
             /// </summary>
             public object NewValue { get; }
 
-            /// <summary>
-            /// True if the property was modified.
-            /// </summary>
-            public bool Changed { get; }
+            public override bool Changed { get; }
+            public override int ChangeCount { get; }
         }
 
         /// <summary>
@@ -75,10 +106,33 @@ namespace SF3.Utils
         /// </summary>
         public class BulkCopyPropertiesResult : BulkCopyResult
         {
-            public BulkCopyPropertiesResult(IEnumerable<IBulkCopyResult> childResults)
+            public BulkCopyPropertiesResult(object obj, IEnumerable<IBulkCopyResult> childResults)
             : base(childResults)
             {
+                Object = obj;
+                ChangeCount = childResults?.Count(x => x.Changed) ?? 0;
+                Changed = ChangeCount > 0;
             }
+
+            public override string MakeFullReport()
+            {
+                var report = string.Join("", ChildResults.Select(x => x.MakeFullReport()));
+                return (report == "") ? "" : Object.GetType().Name + "\n" + report.Indent("  ");
+            }
+
+            public override string MakeSummaryReport()
+            {
+                var report = string.Join("", ChildResults.Select(x => x.MakeSummaryReport()));
+                return (report == "") ? "" : Object.GetType().Name + "\n" + report.Indent("  ");
+            }
+
+            /// <summary>
+            /// The object whose properties were bulk-copied.
+            /// </summary>
+            public object Object { get; }
+
+            public override bool Changed { get; }
+            public override int ChangeCount { get; }
         }
 
         /// <summary>
@@ -98,7 +152,13 @@ namespace SF3.Utils
                 RowTo = rowTo;
                 Copied = (rowTo != null && copyResult != null);
                 CopyResult = copyResult;
+                Changed = Copied && (copyResult?.Changed ?? false);
+                ChangeCount = Changed ? copyResult.ChangeCount : 0;
             }
+
+            public string MakeFullReport() => CopyResult?.MakeFullReport();
+
+            public string MakeSummaryReport() => CopyResult?.MakeSummaryReport();
 
             /// <summary>
             /// The index of the row in the 'listFrom' collection.
@@ -125,7 +185,11 @@ namespace SF3.Utils
             /// </summary>
             public BulkCopyPropertiesResult CopyResult { get; }
 
-            public IEnumerable<IBulkCopyResult> ChildResults => (CopyResult != null) ? CopyResult.ChildResults : null;
+            public IEnumerable<IBulkCopyResult> ChildResults => CopyResult?.ChildResults;
+
+            public bool Changed { get; }
+
+            public int ChangeCount { get; }
         }
 
         /// <summary>
@@ -133,9 +197,10 @@ namespace SF3.Utils
         /// </summary>
         public class BulkCopyCollectionResult : BulkCopyResult
         {
-            public BulkCopyCollectionResult(IEnumerable<IBulkCopyResult> inputResults, int listOutRowsIgnored)
+            public BulkCopyCollectionResult(IEnumerable<object> collection, IEnumerable<IBulkCopyResult> inputResults, int listOutRowsIgnored)
             : base(inputResults)
             {
+                Collection = collection;
                 InputRows = inputResults
                     .Where(x => typeof(BulkCopyCollectionRowResult).IsAssignableFrom(x.GetType()))
                     .Cast<BulkCopyCollectionRowResult>()
@@ -143,7 +208,72 @@ namespace SF3.Utils
                 InRowsSkipped = InputRows.Count(x => !x.Copied);
                 OutRowsSkipped = listOutRowsIgnored;
                 RowsCopied = InputRows.Count(x => x.Copied);
+                ChangeCount = inputResults?.Count(x => x.Changed) ?? 0;
+                Changed = ChangeCount > 0;
             }
+
+            public override string MakeFullReport()
+            {
+                string report =
+                    "Overall report:\n" +
+                    MakeSummaryReport().Indent("  ");
+
+                var individualChangesReport = MakeIndividualChangesReport(true);
+                report +=
+                    "Individual changes report:\n" +
+                    ((individualChangesReport == "") ? "  (no changes)\n" : individualChangesReport.Indent("  "));
+
+                return report;
+            }
+
+            public override string MakeSummaryReport()
+            {
+                string report =
+                    "Rows copied: " + RowsCopied + "\n" +
+                    "Input rows skipped: " + InRowsSkipped + "\n" +
+                    "Target rows unaffected: " + OutRowsSkipped + "\n";
+
+                var rowsWithChanges = InputRows.Where(x => x.Copied && x.CopyResult.Changed).ToList();
+                report += "Rows changed: " + rowsWithChanges.Count + "\n";
+
+                var cellsChanged = rowsWithChanges.Sum(x => x.CopyResult.ChangeCount);
+                report += "Cells changed: " + cellsChanged + "\n";
+
+                // We probably will never have this, but just in case...
+                var otherRows = ChildResults.Except(InputRows).ToList();
+                if (otherRows.Any())
+                {
+                    report += string.Join("", otherRows.Select(x => MakeSummaryReport().Indent("  ")).ToList());
+                }
+
+                return report;
+            }
+
+            /// <summary>
+            /// Produces a detailed report of all changes in the list.
+            /// </summary>
+            /// <returns>A multiline string with a trailing "\n".</returns>
+            public string MakeIndividualChangesReport(bool fullReport = false)
+            {
+                string report = "";
+
+                foreach (var row in InputRows)
+                {
+                    var rowReport = fullReport ? row.MakeFullReport() : row.MakeSummaryReport();
+                    if (rowReport == "")
+                    {
+                        continue;
+                    }
+                    report += "Row [" + row.Index + "]:\n" + rowReport.Indent("  ");
+                }
+
+                return report;
+            }
+
+            /// <summary>
+            /// The collection iterated over.
+            /// </summary>
+            public IEnumerable<object> Collection { get; }
 
             /// <summary>
             /// All rows attempted to be copied.
@@ -165,71 +295,8 @@ namespace SF3.Utils
             /// </summary>
             public int RowsCopied { get; }
 
-            /// <summary>
-            /// Produces a large report with overall/summary and individual changes.
-            /// </summary>
-            /// <returns>A multiline string with a trailing "\n".</returns>
-            public string MakeFullReport()
-            {
-                string report =
-                    "Overall report:\n" +
-                    "----------------------------------------------------\n" +
-                    MakeSummaryReport();
-
-                report += "\n\n" +
-                    "Individual changes report:\n" +
-                    "----------------------------------------------------\n" +
-                    MakeIndividualChangesReport();
-
-                return report;
-            }
-
-            /// <summary>
-            /// Produces a summary report for changes made to the list.
-            /// </summary>
-            /// <returns>A multiline string with a trailing "\n".</returns>
-            public string MakeSummaryReport()
-            {
-                string report =
-                    "Rows copied: " + RowsCopied + "\n" +
-                    "Input rows skipped: " + InRowsSkipped + "\n" +
-                    "Target rows unaffected: " + OutRowsSkipped + "\n";
-
-                // TODO: get this working!
-/*
-                var rowsWithChanges = InputRows.Where(x => x.Copied && x.CopyResult.Properties.Any(y => y.Changed)).ToList();
-                report += "Rows changed: " + rowsWithChanges.Count + "\n";
-
-                var cellsChanged = rowsWithChanges.Sum(x => x.CopyResult.Properties.Count(y => y.Changed));
-                report += "Cells changed: " + cellsChanged + "\n";
-*/
-
-                return report;
-            }
-
-            /// <summary>
-            /// Produces a detailed report of all changes in the list.
-            /// </summary>
-            /// <returns>A multiline string with a trailing "\n".</returns>
-            public string MakeIndividualChangesReport()
-            {
-                string report = "";
-                // TODO: get this working again!!
-/*
-                var rowsWithChanges = InputRows.Where(x => x.Copied && x.CopyResult.Properties.Any(y => y.Changed)).ToList();
-
-                foreach (var row in rowsWithChanges)
-                {
-                    report += "Row [" + row.Index + "]:\n";
-                    var changes = row.CopyResult.Properties.Where(x => x.Changed).ToList();
-                    foreach (var change in changes)
-                    {
-                        report += "    " + change.Property.Name + ": " + change.OldValue.ToString() + " => " + change.NewValue.ToString() + "\n";
-                    }
-                }
-*/
-                return report;
-            }
+            public override bool Changed { get; }
+            public override int ChangeCount { get; }
         }
 
         /// <summary>
@@ -278,7 +345,7 @@ namespace SF3.Utils
                 }
             }
 
-            return new BulkCopyPropertiesResult(resultList);
+            return new BulkCopyPropertiesResult(objFrom, resultList);
         }
 
         /// <summary>
@@ -301,7 +368,7 @@ namespace SF3.Utils
                     (rowTo != null) ? BulkCopyProperties(arrayFrom[i], rowTo, inherit) : null));
             }
 
-            return new BulkCopyCollectionResult(inputRowReports, Math.Max(arrayTo.Length - arrayFrom.Length, 0));
+            return new BulkCopyCollectionResult(listFrom, inputRowReports, Math.Max(arrayTo.Length - arrayFrom.Length, 0));
         }
     }
 }

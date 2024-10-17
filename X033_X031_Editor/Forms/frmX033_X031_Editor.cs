@@ -7,6 +7,7 @@ using SF3.Exceptions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.Utils;
+using System.IO;
 
 namespace SF3.X033_X031_Editor.Forms
 {
@@ -316,61 +317,28 @@ namespace SF3.X033_X031_Editor.Forms
                 return;
             }
 
-            string copyReports = "";
+            string copyReport = "";
             try
             {
-                copyFileEditor.BulkCopyProperties(FileEditor);
-
-                // TODO: how in the world do we get the full report?
-/*
-                // Gather all the IModelArray properties to copy.
-                // TODO: Maybe another attribute??
-                var modelsFrom = copyFileEditor.GetType().GetProperties()
-                    .Where(x => typeof(IModelArray).IsAssignableFrom(x.PropertyType))
-                    .ToDictionary(x => x, x => x.GetValue(copyFileEditor) as IModelArray);
-
-                var modelsTo = FileEditor.GetType().GetProperties()
-                    .Where(x => typeof(IModelArray).IsAssignableFrom(x.PropertyType))
-                    .ToDictionary(x => x, x => x.GetValue(FileEditor) as IModelArray);
-
-                // Perform the bulk copy for each IModelArray store the results.
-                var bulkCopyResults = modelsFrom
-                    .Join(modelsTo, l => l.Key, r => r.Key, (l, r) => (l.Key, l.Value, r.Value))
-                    .ToDictionary(x => x.Key, x => Utils.BulkCopyCollectionProperties(x.Item2.ModelObjs, x.Item3.ModelObjs, true));
-*/
+                var result = copyFileEditor.BulkCopyProperties(FileEditor);
                 ObjectListViews.ForEach(x => x.RefreshAllItems());
 
-                // TODO: re-enable nice report
-/*
-                // Produce a giant report.
-                var fullReports = "";
-                foreach (var report in bulkCopyResults)
-                {
-                    copyReports += (copyReports == "" ? "" : "\n\n") +
-                        report.Key.Name + "\n" +
-                        "====================================================\n" +
-                        report.Value.MakeSummaryReport();
-
-                    fullReports += (fullReports == "" ? "" : "\n\n") +
-                        report.Key.Name + "\n" +
-                        "====================================================\n" +
-                        report.Value.MakeFullReport();
-                }
+                copyReport += result.MakeSummaryReport();
 
                 // Output summary files.
-                if (fullReports != "")
+                var fullReport = result.MakeFullReport();
+                if (fullReport != "")
                 {
                     try
                     {
-                        File.WriteAllText("BulkCopyReport.txt", fullReports);
-                        copyReports += "\n\nDetailed reports dumped to 'BulkCopyReport.txt'.";
+                        File.WriteAllText("BulkCopyReport.txt", fullReport);
+                        copyReport += "\n\nDetailed reports dumped to 'BulkCopyReport.txt'.";
                     }
                     catch
                     {
-                        copyReports += "\n\nError: Couldn't dump detailed report to 'BulkCopyReport.txt'.";
+                        copyReport += "\n\nError: Couldn't dump detailed report to 'BulkCopyReport.txt'.";
                     }
                 }
-*/
             }
             catch (System.Reflection.TargetInvocationException)
             {
@@ -389,7 +357,7 @@ namespace SF3.X033_X031_Editor.Forms
             }
 
             // Show the user a nice report.
-            MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyReports);
+            MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyReport);
         }
     }
 }
