@@ -12,11 +12,36 @@ namespace SF3.Utils
     public static partial class ObjectExtensions
     {
         /// <summary>
+        /// Any kind of result from any kind of BulkCopy() operation.
+        /// </summary>
+        public interface IBulkCopyResult
+        {
+            /// <summary>
+            /// Nested results from any objects in a collection copied or objects copied recursively.
+            /// </summary>
+            IEnumerable<IBulkCopyResult> ChildResults { get; }
+        }
+
+        /// <summary>
+        /// Any kind of result from any kind of BulkCopy() operation.
+        /// </summary>
+        public class BulkCopyResult : IBulkCopyResult
+        {
+            public BulkCopyResult(IEnumerable<IBulkCopyResult> childResults)
+            {
+                ChildResults = childResults;
+            }
+
+            public IEnumerable<IBulkCopyResult> ChildResults { get; } = new List<BulkCopyResult>();
+        }
+
+        /// <summary>
         /// Result for individual properties affected by BulkCopyProperties() functions.
         /// </summary>
-        public class BulkCopyPropertyResult
+        public class BulkCopyPropertyResult : BulkCopyResult
         {
             public BulkCopyPropertyResult(PropertyInfo property, object oldValue, object newValue)
+            : base(null)
             {
                 Property = property;
                 OldValue = oldValue;
@@ -48,23 +73,18 @@ namespace SF3.Utils
         /// <summary>
         /// Collection of BulkCopyPropertyResult's reported by BulkCopyProperties() functions.
         /// </summary>
-        public class BulkCopyPropertiesResult
+        public class BulkCopyPropertiesResult : BulkCopyResult
         {
-            public BulkCopyPropertiesResult(IEnumerable<BulkCopyPropertyResult> properties)
+            public BulkCopyPropertiesResult(IEnumerable<IBulkCopyResult> childResults)
+            : base(childResults)
             {
-                Properties = properties;
             }
-
-            /// <summary>
-            /// Collection of properties affected.
-            /// </summary>
-            public IEnumerable<BulkCopyPropertyResult> Properties { get; }
         }
 
         /// <summary>
         /// Result for an individual row in BulkCopyCollectionResult.
         /// </summary>
-        public class BulkCopyCollectionRowResult
+        public class BulkCopyCollectionRowResult : IBulkCopyResult
         {
             /// <summary>
             /// Bulk copy result for a row that was or was not copied, depending on whether 'copyResult' is 'null'.
@@ -104,23 +124,29 @@ namespace SF3.Utils
             /// Report for all properties copied. Can be 'null' if this row was not copied (i.e, 'Copied' is 'false').
             /// </summary>
             public BulkCopyPropertiesResult CopyResult { get; }
+
+            public IEnumerable<IBulkCopyResult> ChildResults => (CopyResult != null) ? CopyResult.ChildResults : null;
         }
 
         /// <summary>
         /// Result for BulkCopyProperties() functions.
         /// </summary>
-        public class BulkCopyCollectionResult
+        public class BulkCopyCollectionResult : BulkCopyResult
         {
-            public BulkCopyCollectionResult(IEnumerable<BulkCopyCollectionRowResult> inputRows, int listOutRowsIgnored)
+            public BulkCopyCollectionResult(IEnumerable<IBulkCopyResult> inputResults, int listOutRowsIgnored)
+            : base(inputResults)
             {
-                InputRows = inputRows;
-                InRowsSkipped = inputRows.Count(x => !x.Copied);
+                InputRows = inputResults
+                    .Where(x => typeof(BulkCopyCollectionRowResult).IsAssignableFrom(x.GetType()))
+                    .Cast<BulkCopyCollectionRowResult>()
+                    .ToList();
+                InRowsSkipped = InputRows.Count(x => !x.Copied);
                 OutRowsSkipped = listOutRowsIgnored;
-                RowsCopied = inputRows.Count(x => x.Copied);
+                RowsCopied = InputRows.Count(x => x.Copied);
             }
 
             /// <summary>
-            /// Individual reports for each row in 'listForm'.
+            /// All rows attempted to be copied.
             /// </summary>
             public IEnumerable<BulkCopyCollectionRowResult> InputRows { get; }
 
@@ -169,11 +195,14 @@ namespace SF3.Utils
                     "Input rows skipped: " + InRowsSkipped + "\n" +
                     "Target rows unaffected: " + OutRowsSkipped + "\n";
 
+                // TODO: get this working!
+/*
                 var rowsWithChanges = InputRows.Where(x => x.Copied && x.CopyResult.Properties.Any(y => y.Changed)).ToList();
                 report += "Rows changed: " + rowsWithChanges.Count + "\n";
 
                 var cellsChanged = rowsWithChanges.Sum(x => x.CopyResult.Properties.Count(y => y.Changed));
                 report += "Cells changed: " + cellsChanged + "\n";
+*/
 
                 return report;
             }
@@ -185,6 +214,8 @@ namespace SF3.Utils
             public string MakeIndividualChangesReport()
             {
                 string report = "";
+                // TODO: get this working again!!
+/*
                 var rowsWithChanges = InputRows.Where(x => x.Copied && x.CopyResult.Properties.Any(y => y.Changed)).ToList();
 
                 foreach (var row in rowsWithChanges)
@@ -196,7 +227,7 @@ namespace SF3.Utils
                         report += "    " + change.Property.Name + ": " + change.OldValue.ToString() + " => " + change.NewValue.ToString() + "\n";
                     }
                 }
-
+*/
                 return report;
             }
         }
@@ -219,7 +250,7 @@ namespace SF3.Utils
 
             // Get all public properties with the [BulkCopy] attribute.
             var copyList = allProperties.Where(x => x.IsDefined(typeof(BulkCopyAttribute))).ToList();
-            var resultList = new List<BulkCopyPropertyResult>();
+            var resultList = new List<IBulkCopyResult>();
             foreach (var property in copyList)
             {
                 var oldValue = property.GetValue(objTo);
@@ -237,15 +268,13 @@ namespace SF3.Utils
                 var valueFrom = property.GetValue(objFrom);
                 var valueTo = property.GetValue(objTo);
 
-                // TODO: how to bundle this into the result??
-                // TODO: This should be handled automatically and the results should go to the same collection
                 if (typeof(IEnumerable<object>).IsAssignableFrom(valueFrom.GetType()))
                 {
-                    BulkCopyCollectionProperties(valueFrom as IEnumerable<object>, valueTo as IEnumerable<object>, inherit);
+                    resultList.Add(BulkCopyCollectionProperties(valueFrom as IEnumerable<object>, valueTo as IEnumerable<object>, inherit));
                 }
                 else
                 {
-                    BulkCopyProperties(valueFrom, valueTo, inherit);
+                    resultList.Add(BulkCopyProperties(valueFrom, valueTo, inherit));
                 }
             }
 
