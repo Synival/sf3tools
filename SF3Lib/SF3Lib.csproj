@@ -87,6 +87,7 @@
     <Compile Include="Models\IModelArray.cs" />
     <Compile Include="NamedValue.cs" />
     <Compile Include="SF3FileEditor.cs" />
+    <Compile Include="Types\FileType.cs" />
     <Compile Include="Types\MapType.cs" />
     <Compile Include="ValueRange.cs" />
     <Compile Include="Stats.cs" />
