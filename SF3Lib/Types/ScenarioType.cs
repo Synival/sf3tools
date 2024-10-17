@@ -12,7 +12,6 @@ namespace SF3.Types
         Scenario1 = 1,
         Scenario2 = 2,
         Scenario3 = 3,
-        PremiumDisk = 4,
-        Other = 5 // TODO: Not really a scenario, but used for a file with a specific layout. Maybe there's a different way to do this?
+        PremiumDisk = 4
     }
 }

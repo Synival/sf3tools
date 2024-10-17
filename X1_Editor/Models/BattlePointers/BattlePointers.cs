@@ -34,7 +34,23 @@ namespace SF3.X1_Editor.Models.BattlePointers
         {
             _fileEditor = fileEditor;
 
-            if (Scenario == ScenarioType.Scenario1)
+            if (_fileEditor.IsBTL99)
+            {
+                offset = 0x00000018; //BTL99 initial pointer
+                sub = 0x06060000;
+                offset = _fileEditor.GetDouble(offset);
+                offset = offset - sub; //first pointer
+                offset = _fileEditor.GetDouble(offset);
+                offset = offset - sub; //second pointer
+                //offset = _fileEditor.GetDouble(offset);
+                /*
+                offset = offset - sub; //third pointer
+
+                offset = offset + 10;
+                offset = offset + 0xa90;
+                */
+            }
+            else if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
@@ -98,22 +114,6 @@ namespace SF3.X1_Editor.Models.BattlePointers
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //second pointer
                                        //offset = _fileEditor.GetDouble(offset);
-            }
-            else if (Scenario == ScenarioType.Other)
-            {
-                offset = 0x00000018; //BTL99 initial pointer
-                sub = 0x06060000;
-                offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
-                offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //second pointer
-                //offset = _fileEditor.GetDouble(offset);
-                /*
-                offset = offset - sub; //third pointer
-
-                offset = offset + 10;
-                offset = offset + 0xa90;
-                */
             }
 
             //offset = 0x00002b28; scn1

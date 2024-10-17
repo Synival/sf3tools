@@ -100,10 +100,8 @@ namespace SF3.X019_Editor.Models.Monsters
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                offset = 0x00000eb0; //pd
+                offset = _fileEditor.IsPDX044 ? 0x00007e40 : 0x00000eb0; //pd
             }
-            else
-                offset = 0x00000eb0; //X044 pd
 
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2

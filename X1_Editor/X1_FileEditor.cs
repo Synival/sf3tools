@@ -22,9 +22,10 @@ namespace SF3.X1_Editor
 {
     public class X1_FileEditor : SF3FileEditor, IX1_FileEditor
     {
-        public X1_FileEditor(ScenarioType scenario, MapType map) : base(scenario)
+        public X1_FileEditor(ScenarioType scenario, MapType map, bool isBTL99) : base(scenario)
         {
             Map = map;
+            IsBTL99 = isBTL99;
         }
 
         public override IEnumerable<IModelArray> MakeModelArrays()
@@ -32,7 +33,12 @@ namespace SF3.X1_Editor
             int offset = 0;
             int sub = 0;
 
-            if (Scenario == ScenarioType.Scenario1)
+            if (IsBTL99)
+            {
+                offset = 0x00000018; //btl99 initial pointer
+                sub = 0x06060000;
+            }
+            else if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
@@ -51,12 +57,6 @@ namespace SF3.X1_Editor
             {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
-            }
-
-            else if (Scenario == ScenarioType.Other /* BTL99 */)
-            {
-                offset = 0x00000018; //btl99 initial pointer
-                sub = 0x06060000;
             }
 
             offset = GetDouble(offset);
@@ -80,7 +80,7 @@ namespace SF3.X1_Editor
                 IsBattle = false;
             }
 
-            bool isntScn1 = Scenario != ScenarioType.Scenario1 && Scenario != ScenarioType.Other;
+            bool isntScn1OrBTL99 = Scenario != ScenarioType.Scenario1 && !IsBTL99;
 
             // Add models present for both towns and battles.
             var modelArrays = new List<IModelArray>
@@ -88,7 +88,7 @@ namespace SF3.X1_Editor
                 (TreasureList = new TreasureList(this))
             };
 
-            if (isntScn1)
+            if (isntScn1OrBTL99)
             {
                 modelArrays.Add(WarpList = new WarpList(this));
             }
@@ -106,7 +106,7 @@ namespace SF3.X1_Editor
                     (CustomMovementList = new CustomMovementList(this)),
                 });
 
-                if (isntScn1)
+                if (isntScn1OrBTL99)
                 {
                     modelArrays.Add(TileList = new TileList(this));
                 }
@@ -121,7 +121,7 @@ namespace SF3.X1_Editor
                     (EnterList = new EnterList(this))
                 });
 
-                if (isntScn1)
+                if (isntScn1OrBTL99)
                 {
                     modelArrays.Add(ArrowList = new ArrowList(this));
                 }
@@ -165,6 +165,8 @@ namespace SF3.X1_Editor
                 }
             }
         }
+
+        public bool IsBTL99 { get; }
 
         public SlotList SlotList { get; private set; }
         public HeaderList HeaderList { get; private set; }

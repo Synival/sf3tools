@@ -15,9 +15,9 @@ namespace SF3.IconPointerEditor.Forms
 
         new public IIconPointerFileEditor FileEditor => base.FileEditor as IIconPointerFileEditor;
 
-        public bool _x026 = false;
+        private bool _x026 = false;
 
-        private bool X026
+        public bool X026
         {
             get => _x026;
             set

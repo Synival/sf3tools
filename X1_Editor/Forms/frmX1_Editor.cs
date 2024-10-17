@@ -1,26 +1,8 @@
 ﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.IO;
-using SF3.X1_Editor.Models.Headers;
-using SF3.X1_Editor.Models.Slots;
-using SF3.X1_Editor.Models.AI;
-using SF3.X1_Editor.Models.SpawnZones;
-using SF3.X1_Editor.Models.BattlePointers;
-using SF3.X1_Editor.Models.Treasures;
-using SF3.X1_Editor.Models.CustomMovement;
-using SF3.X1_Editor.Models.Warps;
-using SF3.X1_Editor.Models.Tiles;
-using SF3.X1_Editor.Models.Npcs;
-using SF3.X1_Editor.Models.Enters;
-using SF3.X1_Editor.Models.Arrows;
 using BrightIdeasSoftware;
 using SF3.Types;
-using System.Reflection;
 using System.Collections.Generic;
-using System.Linq;
 using SF3.Editor.Forms;
-using SF3.Models;
 using SF3.Editor.Extensions;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
@@ -30,6 +12,21 @@ namespace SF3.X1_Editor.Forms
     {
         // Used to display version in the application
         private string Version = "0.34";
+
+        private bool _isBTL99 = false;
+
+        public bool IsBTL99
+        {
+            get => _isBTL99;
+            set
+            {
+                if (_isBTL99 != value)
+                {
+                    _isBTL99 = value;
+                    tsmiScenario_BTL99.Checked = _isBTL99;
+                }
+            }
+        }
 
         new public IX1_FileEditor FileEditor => base.FileEditor as IX1_FileEditor;
 
@@ -45,11 +42,8 @@ namespace SF3.X1_Editor.Forms
                 tsmiMap_MapMedion.Checked = (_map == MapType.Medion);
                 tsmiMap_MapJulian.Checked = (_map == MapType.Julian);
                 tsmiMap_MapExtra.Checked = (_map == MapType.Extra);
-                UpdateTitle();
             }
         }
-
-        private string _debug = "off";
 
         public frmX1_Editor()
         {
@@ -66,12 +60,10 @@ namespace SF3.X1_Editor.Forms
                 tsmiScenario_Scenario2.Checked = (Scenario == ScenarioType.Scenario2);
                 tsmiScenario_Scenario3.Checked = (Scenario == ScenarioType.Scenario3);
                 tsmiScenario_PremiumDisk.Checked = (Scenario == ScenarioType.PremiumDisk);
-                tsmiScenario_BTL99.Checked = (Scenario == ScenarioType.Other);
-                UpdateTitle();
             };
 
             ScenarioChanged += onScenarioChanged;
-            onScenarioChanged(null, EventArgs.Empty);
+            onScenarioChanged(this, EventArgs.Empty);
 
             FileIsLoadedChanged += (obj, eargs) =>
             {
@@ -84,7 +76,7 @@ namespace SF3.X1_Editor.Forms
 
         protected override string FileDialogFilter => "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
 
-        protected override IFileEditor MakeFileEditor() => new X1_FileEditor(Scenario, Map);
+        protected override IFileEditor MakeFileEditor() => new X1_FileEditor(Scenario, Map, IsBTL99);
 
         protected override bool OnLoad()
         {
@@ -151,8 +143,11 @@ namespace SF3.X1_Editor.Forms
 
         private void tsmiScenario_BTL99_Click(object sender, EventArgs e)
         {
-            Scenario = ScenarioType.Other;
-            Map = MapType.Synbios;
+            IsBTL99 = !IsBTL99;
+            if (IsBTL99)
+            {
+                Map = MapType.Synbios;
+            }
         }
 
         private void tsmiMap_MapSynbios_Click(object sender, EventArgs e) => Map = MapType.Synbios; //map with synbios as lead
@@ -164,19 +159,7 @@ namespace SF3.X1_Editor.Forms
         {
             Globals.treasureDebug = !Globals.treasureDebug;
             tsmiHelp_TreasureDebugToggle.Checked = Globals.treasureDebug;
-
-            if (Globals.treasureDebug)
-            {
-                this.tsmiHelp_TreasureDebugToggle.Text = "treasureDebug toggle: on";
-                _debug = "on";
-            }
-            else
-            {
-                this.tsmiHelp_TreasureDebugToggle.Text = "treasureDebug toggle: off";
-                _debug = "off";
-            }
-
-            UpdateTitle();
+            tsmiHelp_TreasureDebugToggle.Text = "treasureDebug toggle: " + (Globals.treasureDebug ? "on" : "off");
         }
     }
 }

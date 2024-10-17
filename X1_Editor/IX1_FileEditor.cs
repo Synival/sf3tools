@@ -28,6 +28,8 @@ namespace SF3.X1_Editor
 
         bool IsBattle { get; }
 
+        bool IsBTL99 { get; }
+
         SlotList SlotList { get; }
         HeaderList HeaderList { get; }
         AIList AIList { get; }

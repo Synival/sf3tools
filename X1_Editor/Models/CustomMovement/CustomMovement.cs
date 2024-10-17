@@ -28,7 +28,23 @@ namespace SF3.X1_Editor.Models.CustomMovement
         {
             _fileEditor = fileEditor;
 
-            if (Scenario == ScenarioType.Scenario1)
+            if (_fileEditor.IsBTL99)
+            {
+                offset = 0x00000018; //BTL99 initial pointer
+                sub = 0x06060000;
+                offset = _fileEditor.GetDouble(offset);
+                offset = offset - sub; //first pointer
+                offset = _fileEditor.GetDouble(offset);
+                offset = offset - sub; //second pointer
+                offset = _fileEditor.GetDouble(offset);
+                offset = offset - sub; //third pointer
+
+                offset = offset + 10;
+                offset = offset + 0xe9a;
+                offset = offset + 0x126;
+                offset = offset + 0x84; //size of AITargetPosition
+            }
+            else if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
@@ -199,22 +215,6 @@ namespace SF3.X1_Editor.Models.CustomMovement
                     offset = offset + 0x126;
                     offset = offset + 0x84; //size of AITargetPosition
                 }
-            }
-            else if (Scenario == ScenarioType.Other)
-            {
-                offset = 0x00000018; //BTL99 initial pointer
-                sub = 0x06060000;
-                offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
-                offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //second pointer
-                offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //third pointer
-
-                offset = offset + 10;
-                offset = offset + 0xe9a;
-                offset = offset + 0x126;
-                offset = offset + 0x84; //size of AITargetPosition
             }
 
             //offset = 0x00002b28; scn1

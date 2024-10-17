@@ -37,7 +37,14 @@ namespace SF3.X1_Editor.Models.Treasures
         {
             _fileEditor = fileEditor;
 
-            if (Scenario == ScenarioType.Scenario1)
+            if (_fileEditor.IsBTL99)
+            {
+                offset = 0x0000000C; //btl99 initial pointer
+                sub = 0x06060000;
+                offset = _fileEditor.GetDouble(offset);
+                offset = offset - sub;
+            }
+            else if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x0000000C; //scn1 initial pointer
                 sub = 0x0605f000;
@@ -63,13 +70,6 @@ namespace SF3.X1_Editor.Models.Treasures
             {
                 offset = 0x0000000C; //pd initial pointer
                 sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
-            }
-            else if (Scenario == ScenarioType.Other)
-            {
-                offset = 0x0000000C; //btl99 initial pointer
-                sub = 0x06060000;
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }

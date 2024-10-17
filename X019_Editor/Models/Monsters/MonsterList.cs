@@ -8,9 +8,10 @@ namespace SF3.X019_Editor.Models.Monsters
 {
     public class MonsterList : ModelArray<Monster>
     {
-        public MonsterList(IX019_FileEditor fileEditor) : base(fileEditor)
+        public MonsterList(IX019_FileEditor fileEditor, bool isPDX044) : base(fileEditor)
         {
             _fileEditor = fileEditor;
+            _isPDX044 = isPDX044;
 
             if (Scenario == ScenarioType.Scenario1)
             {
@@ -24,11 +25,11 @@ namespace SF3.X019_Editor.Models.Monsters
             {
                 _resourceFile = "Resources/X019List.xml";
             }
-            else if (Scenario == ScenarioType.PremiumDisk)
+            else if (Scenario == ScenarioType.PremiumDisk && !_isPDX044)
             {
                 _resourceFile = "RPD/X019List.xml";
             }
-            else if (Scenario == ScenarioType.Other)
+            else if (Scenario == ScenarioType.PremiumDisk && _isPDX044)
             {
                 _resourceFile = "RPDX44/X044List.xml";
             }
@@ -36,6 +37,7 @@ namespace SF3.X019_Editor.Models.Monsters
 
         private string _resourceFile;
         private IX019_FileEditor _fileEditor;
+        private bool _isPDX044;
         private Monster[] models;
 
         public override string ResourceFile => _resourceFile;
