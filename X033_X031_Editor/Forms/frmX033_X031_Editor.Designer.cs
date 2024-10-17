@@ -56,10 +56,15 @@
             this.tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparator_File1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiFile_CopyTablesFrom = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_File3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_X031forInCombatEtc = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiHelp_DebugCurve = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,41 +77,41 @@
             this.lvcSpellsAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsNameStatus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS1LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS1LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS1LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellsS1LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS2LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS2LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS2LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellsS2LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS3LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS3LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS3LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellsS3LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS4LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS4LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS4LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellsS4LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS5LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS5LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS5LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellsS5LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS6LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS6LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS6LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellsS6LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS7LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS7LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS7LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellsS7LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS8LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS8LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS8LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellsS8LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS9LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS9LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS9LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellsS9LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS10LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS10LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS10LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellsS10LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS11LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS11LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS11LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellsS11LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS12LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS12LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellsS12LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellsS12LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabStats = new System.Windows.Forms.TabPage();
             this.olvStats = new BrightIdeasSoftware.ObjectListView();
             this.lvcStatsID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -271,11 +276,6 @@
             this.tabCurveGraph = new System.Windows.Forms.TabPage();
             this.cbCurveGraphCharacter = new System.Windows.Forms.ComboBox();
             this.CurveGraph = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.tsSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsSeparator_File3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.tabSpells.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvSpells)).BeginInit();
@@ -326,7 +326,7 @@
             // tsmiFile_Open
             // 
             this.tsmiFile_Open.Name = "tsmiFile_Open";
-            this.tsmiFile_Open.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_Open.Size = new System.Drawing.Size(177, 22);
             this.tsmiFile_Open.Text = "Open...";
             this.tsmiFile_Open.Click += new System.EventHandler(this.tsmiFile_Open_Click);
             // 
@@ -334,22 +334,47 @@
             // 
             this.tsmiFile_SaveAs.Enabled = false;
             this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
-            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(177, 22);
             this.tsmiFile_SaveAs.Text = "Save As...";
             this.tsmiFile_SaveAs.Click += new System.EventHandler(this.tsmiFile_SaveAs_Click);
             // 
             // tsSeparator_File1
             // 
             this.tsSeparator_File1.Name = "tsSeparator_File1";
-            this.tsSeparator_File1.Size = new System.Drawing.Size(177, 6);
+            this.tsSeparator_File1.Size = new System.Drawing.Size(174, 6);
+            // 
+            // tsmiFile_Close
+            // 
+            this.tsmiFile_Close.Enabled = false;
+            this.tsmiFile_Close.Name = "tsmiFile_Close";
+            this.tsmiFile_Close.Size = new System.Drawing.Size(177, 22);
+            this.tsmiFile_Close.Text = "Close";
+            this.tsmiFile_Close.Click += new System.EventHandler(this.tsmiFile_Close_Click);
+            // 
+            // tsSeparator_File2
+            // 
+            this.tsSeparator_File2.Name = "tsSeparator_File2";
+            this.tsSeparator_File2.Size = new System.Drawing.Size(174, 6);
             // 
             // tsmiFile_CopyTablesFrom
             // 
             this.tsmiFile_CopyTablesFrom.Enabled = false;
             this.tsmiFile_CopyTablesFrom.Name = "tsmiFile_CopyTablesFrom";
-            this.tsmiFile_CopyTablesFrom.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFile_CopyTablesFrom.Size = new System.Drawing.Size(177, 22);
             this.tsmiFile_CopyTablesFrom.Text = "Copy Tables From...";
             this.tsmiFile_CopyTablesFrom.Click += new System.EventHandler(this.tsmiFile_CopyTablesFrom_Click);
+            // 
+            // tsSeparator_File3
+            // 
+            this.tsSeparator_File3.Name = "tsSeparator_File3";
+            this.tsSeparator_File3.Size = new System.Drawing.Size(174, 6);
+            // 
+            // tsmiFile_Exit
+            // 
+            this.tsmiFile_Exit.Name = "tsmiFile_Exit";
+            this.tsmiFile_Exit.Size = new System.Drawing.Size(177, 22);
+            this.tsmiFile_Exit.Text = "Exit";
+            this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
             // 
             // tsmiHelp
             // 
@@ -373,6 +398,11 @@
             this.tsmiHelp_X031forInCombatEtc.Name = "tsmiHelp_X031forInCombatEtc";
             this.tsmiHelp_X031forInCombatEtc.Size = new System.Drawing.Size(297, 22);
             this.tsmiHelp_X031forInCombatEtc.Text = "x031 for incombat, x033 for out of combat";
+            // 
+            // tsSeparator_Help1
+            // 
+            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
+            this.tsSeparator_Help1.Size = new System.Drawing.Size(294, 6);
             // 
             // tsmiHelp_DebugCurve
             // 
@@ -437,41 +467,41 @@
             this.olvSpells.AllColumns.Add(this.lvcSpellsAddress);
             this.olvSpells.AllColumns.Add(this.lvcSpellsNameStatus);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS1LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS1LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS1LearnedID);
+            this.olvSpells.AllColumns.Add(this.lvcSpellsS1LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS2LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS2LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS2LearnedID);
+            this.olvSpells.AllColumns.Add(this.lvcSpellsS2LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS3LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS3LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS3LearnedID);
+            this.olvSpells.AllColumns.Add(this.lvcSpellsS3LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS4LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS4LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS4LearnedID);
+            this.olvSpells.AllColumns.Add(this.lvcSpellsS4LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS5LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS5LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS5LearnedID);
+            this.olvSpells.AllColumns.Add(this.lvcSpellsS5LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS6LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS6LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS6LearnedID);
+            this.olvSpells.AllColumns.Add(this.lvcSpellsS6LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS7LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS7LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS7LearnedID);
+            this.olvSpells.AllColumns.Add(this.lvcSpellsS7LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS8LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS8LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS8LearnedID);
+            this.olvSpells.AllColumns.Add(this.lvcSpellsS8LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS9LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS9LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS9LearnedID);
+            this.olvSpells.AllColumns.Add(this.lvcSpellsS9LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS10LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS10LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS10LearnedID);
+            this.olvSpells.AllColumns.Add(this.lvcSpellsS10LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS11LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS11LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS11LearnedID);
+            this.olvSpells.AllColumns.Add(this.lvcSpellsS11LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS12LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS12LearnedLevel);
             this.olvSpells.AllColumns.Add(this.lvcSpellsS12LearnedID);
+            this.olvSpells.AllColumns.Add(this.lvcSpellsS12LearnedLevel);
             this.olvSpells.AllowColumnReorder = true;
             this.olvSpells.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -482,41 +512,41 @@
             this.lvcSpellsAddress,
             this.lvcSpellsNameStatus,
             this.lvcSpellsS1LearnedAt,
-            this.lvcSpellsS1LearnedLevel,
             this.lvcSpellsS1LearnedID,
+            this.lvcSpellsS1LearnedLevel,
             this.lvcSpellsS2LearnedAt,
-            this.lvcSpellsS2LearnedLevel,
             this.lvcSpellsS2LearnedID,
+            this.lvcSpellsS2LearnedLevel,
             this.lvcSpellsS3LearnedAt,
-            this.lvcSpellsS3LearnedLevel,
             this.lvcSpellsS3LearnedID,
+            this.lvcSpellsS3LearnedLevel,
             this.lvcSpellsS4LearnedAt,
-            this.lvcSpellsS4LearnedLevel,
             this.lvcSpellsS4LearnedID,
+            this.lvcSpellsS4LearnedLevel,
             this.lvcSpellsS5LearnedAt,
-            this.lvcSpellsS5LearnedLevel,
             this.lvcSpellsS5LearnedID,
+            this.lvcSpellsS5LearnedLevel,
             this.lvcSpellsS6LearnedAt,
-            this.lvcSpellsS6LearnedLevel,
             this.lvcSpellsS6LearnedID,
+            this.lvcSpellsS6LearnedLevel,
             this.lvcSpellsS7LearnedAt,
-            this.lvcSpellsS7LearnedLevel,
             this.lvcSpellsS7LearnedID,
+            this.lvcSpellsS7LearnedLevel,
             this.lvcSpellsS8LearnedAt,
-            this.lvcSpellsS8LearnedLevel,
             this.lvcSpellsS8LearnedID,
+            this.lvcSpellsS8LearnedLevel,
             this.lvcSpellsS9LearnedAt,
-            this.lvcSpellsS9LearnedLevel,
             this.lvcSpellsS9LearnedID,
+            this.lvcSpellsS9LearnedLevel,
             this.lvcSpellsS10LearnedAt,
-            this.lvcSpellsS10LearnedLevel,
             this.lvcSpellsS10LearnedID,
+            this.lvcSpellsS10LearnedLevel,
             this.lvcSpellsS11LearnedAt,
-            this.lvcSpellsS11LearnedLevel,
             this.lvcSpellsS11LearnedID,
+            this.lvcSpellsS11LearnedLevel,
             this.lvcSpellsS12LearnedAt,
-            this.lvcSpellsS12LearnedLevel,
-            this.lvcSpellsS12LearnedID});
+            this.lvcSpellsS12LearnedID,
+            this.lvcSpellsS12LearnedLevel});
             this.olvSpells.FullRowSelect = true;
             this.olvSpells.GridLines = true;
             this.olvSpells.HasCollapsibleGroups = false;
@@ -564,13 +594,6 @@
             this.lvcSpellsS1LearnedAt.Text = "S1LearnedAt";
             this.lvcSpellsS1LearnedAt.Width = 75;
             // 
-            // lvcSpellsS1LearnedLevel
-            // 
-            this.lvcSpellsS1LearnedLevel.AspectName = "S1LearnedLevel";
-            this.lvcSpellsS1LearnedLevel.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS1LearnedLevel.Text = "S1LearnedLevel";
-            this.lvcSpellsS1LearnedLevel.Width = 95;
-            // 
             // lvcSpellsS1LearnedID
             // 
             this.lvcSpellsS1LearnedID.AspectName = "S1LearnedID";
@@ -579,19 +602,19 @@
             this.lvcSpellsS1LearnedID.Text = "S1LearnedID";
             this.lvcSpellsS1LearnedID.Width = 90;
             // 
+            // lvcSpellsS1LearnedLevel
+            // 
+            this.lvcSpellsS1LearnedLevel.AspectName = "S1LearnedLevel";
+            this.lvcSpellsS1LearnedLevel.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsS1LearnedLevel.Text = "S1LearnedLevel";
+            this.lvcSpellsS1LearnedLevel.Width = 95;
+            // 
             // lvcSpellsS2LearnedAt
             // 
             this.lvcSpellsS2LearnedAt.AspectName = "S2LearnedAt";
             this.lvcSpellsS2LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS2LearnedAt.Text = "S2LearnedAt";
             this.lvcSpellsS2LearnedAt.Width = 75;
-            // 
-            // lvcSpellsS2LearnedLevel
-            // 
-            this.lvcSpellsS2LearnedLevel.AspectName = "S2LearnedLevel";
-            this.lvcSpellsS2LearnedLevel.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS2LearnedLevel.Text = "S2LearnedLevel";
-            this.lvcSpellsS2LearnedLevel.Width = 90;
             // 
             // lvcSpellsS2LearnedID
             // 
@@ -601,19 +624,19 @@
             this.lvcSpellsS2LearnedID.Text = "S2LearnedID";
             this.lvcSpellsS2LearnedID.Width = 95;
             // 
+            // lvcSpellsS2LearnedLevel
+            // 
+            this.lvcSpellsS2LearnedLevel.AspectName = "S2LearnedLevel";
+            this.lvcSpellsS2LearnedLevel.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsS2LearnedLevel.Text = "S2LearnedLevel";
+            this.lvcSpellsS2LearnedLevel.Width = 90;
+            // 
             // lvcSpellsS3LearnedAt
             // 
             this.lvcSpellsS3LearnedAt.AspectName = "S3LearnedAt";
             this.lvcSpellsS3LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS3LearnedAt.Text = "S3LearnedAt";
             this.lvcSpellsS3LearnedAt.Width = 75;
-            // 
-            // lvcSpellsS3LearnedLevel
-            // 
-            this.lvcSpellsS3LearnedLevel.AspectName = "S3LearnedLevel";
-            this.lvcSpellsS3LearnedLevel.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS3LearnedLevel.Text = "S3LearnedLevel";
-            this.lvcSpellsS3LearnedLevel.Width = 95;
             // 
             // lvcSpellsS3LearnedID
             // 
@@ -623,19 +646,19 @@
             this.lvcSpellsS3LearnedID.Text = "S3LearnedID";
             this.lvcSpellsS3LearnedID.Width = 90;
             // 
+            // lvcSpellsS3LearnedLevel
+            // 
+            this.lvcSpellsS3LearnedLevel.AspectName = "S3LearnedLevel";
+            this.lvcSpellsS3LearnedLevel.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsS3LearnedLevel.Text = "S3LearnedLevel";
+            this.lvcSpellsS3LearnedLevel.Width = 95;
+            // 
             // lvcSpellsS4LearnedAt
             // 
             this.lvcSpellsS4LearnedAt.AspectName = "S4LearnedAt";
             this.lvcSpellsS4LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS4LearnedAt.Text = "S4LearnedAt";
             this.lvcSpellsS4LearnedAt.Width = 75;
-            // 
-            // lvcSpellsS4LearnedLevel
-            // 
-            this.lvcSpellsS4LearnedLevel.AspectName = "S4LearnedLevel";
-            this.lvcSpellsS4LearnedLevel.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS4LearnedLevel.Text = "S4LearnedLevel";
-            this.lvcSpellsS4LearnedLevel.Width = 95;
             // 
             // lvcSpellsS4LearnedID
             // 
@@ -645,19 +668,19 @@
             this.lvcSpellsS4LearnedID.Text = "S4LearnedID";
             this.lvcSpellsS4LearnedID.Width = 90;
             // 
+            // lvcSpellsS4LearnedLevel
+            // 
+            this.lvcSpellsS4LearnedLevel.AspectName = "S4LearnedLevel";
+            this.lvcSpellsS4LearnedLevel.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsS4LearnedLevel.Text = "S4LearnedLevel";
+            this.lvcSpellsS4LearnedLevel.Width = 95;
+            // 
             // lvcSpellsS5LearnedAt
             // 
             this.lvcSpellsS5LearnedAt.AspectName = "S5LearnedAt";
             this.lvcSpellsS5LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS5LearnedAt.Text = "S5LearnedAt";
             this.lvcSpellsS5LearnedAt.Width = 75;
-            // 
-            // lvcSpellsS5LearnedLevel
-            // 
-            this.lvcSpellsS5LearnedLevel.AspectName = "S5LearnedLevel";
-            this.lvcSpellsS5LearnedLevel.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS5LearnedLevel.Text = "S5LearnedLevel";
-            this.lvcSpellsS5LearnedLevel.Width = 95;
             // 
             // lvcSpellsS5LearnedID
             // 
@@ -667,19 +690,19 @@
             this.lvcSpellsS5LearnedID.Text = "S5LearnedID";
             this.lvcSpellsS5LearnedID.Width = 90;
             // 
+            // lvcSpellsS5LearnedLevel
+            // 
+            this.lvcSpellsS5LearnedLevel.AspectName = "S5LearnedLevel";
+            this.lvcSpellsS5LearnedLevel.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsS5LearnedLevel.Text = "S5LearnedLevel";
+            this.lvcSpellsS5LearnedLevel.Width = 95;
+            // 
             // lvcSpellsS6LearnedAt
             // 
             this.lvcSpellsS6LearnedAt.AspectName = "S6LearnedAt";
             this.lvcSpellsS6LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS6LearnedAt.Text = "S6LearnedAt";
             this.lvcSpellsS6LearnedAt.Width = 75;
-            // 
-            // lvcSpellsS6LearnedLevel
-            // 
-            this.lvcSpellsS6LearnedLevel.AspectName = "S6LearnedLevel";
-            this.lvcSpellsS6LearnedLevel.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS6LearnedLevel.Text = "S6LearnedLevel";
-            this.lvcSpellsS6LearnedLevel.Width = 95;
             // 
             // lvcSpellsS6LearnedID
             // 
@@ -689,19 +712,19 @@
             this.lvcSpellsS6LearnedID.Text = "S6LearnedID";
             this.lvcSpellsS6LearnedID.Width = 90;
             // 
+            // lvcSpellsS6LearnedLevel
+            // 
+            this.lvcSpellsS6LearnedLevel.AspectName = "S6LearnedLevel";
+            this.lvcSpellsS6LearnedLevel.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsS6LearnedLevel.Text = "S6LearnedLevel";
+            this.lvcSpellsS6LearnedLevel.Width = 95;
+            // 
             // lvcSpellsS7LearnedAt
             // 
             this.lvcSpellsS7LearnedAt.AspectName = "S7LearnedAt";
             this.lvcSpellsS7LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS7LearnedAt.Text = "S7LearnedAt";
             this.lvcSpellsS7LearnedAt.Width = 75;
-            // 
-            // lvcSpellsS7LearnedLevel
-            // 
-            this.lvcSpellsS7LearnedLevel.AspectName = "S7LearnedLevel";
-            this.lvcSpellsS7LearnedLevel.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS7LearnedLevel.Text = "S7LearnedLevel";
-            this.lvcSpellsS7LearnedLevel.Width = 95;
             // 
             // lvcSpellsS7LearnedID
             // 
@@ -711,19 +734,19 @@
             this.lvcSpellsS7LearnedID.Text = "S7LearnedID";
             this.lvcSpellsS7LearnedID.Width = 90;
             // 
+            // lvcSpellsS7LearnedLevel
+            // 
+            this.lvcSpellsS7LearnedLevel.AspectName = "S7LearnedLevel";
+            this.lvcSpellsS7LearnedLevel.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsS7LearnedLevel.Text = "S7LearnedLevel";
+            this.lvcSpellsS7LearnedLevel.Width = 95;
+            // 
             // lvcSpellsS8LearnedAt
             // 
             this.lvcSpellsS8LearnedAt.AspectName = "S8LearnedAt";
             this.lvcSpellsS8LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS8LearnedAt.Text = "S8LearnedAt";
             this.lvcSpellsS8LearnedAt.Width = 75;
-            // 
-            // lvcSpellsS8LearnedLevel
-            // 
-            this.lvcSpellsS8LearnedLevel.AspectName = "S8LearnedLevel";
-            this.lvcSpellsS8LearnedLevel.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS8LearnedLevel.Text = "S8LearnedLevel";
-            this.lvcSpellsS8LearnedLevel.Width = 95;
             // 
             // lvcSpellsS8LearnedID
             // 
@@ -733,19 +756,19 @@
             this.lvcSpellsS8LearnedID.Text = "S8LearnedID";
             this.lvcSpellsS8LearnedID.Width = 90;
             // 
+            // lvcSpellsS8LearnedLevel
+            // 
+            this.lvcSpellsS8LearnedLevel.AspectName = "S8LearnedLevel";
+            this.lvcSpellsS8LearnedLevel.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsS8LearnedLevel.Text = "S8LearnedLevel";
+            this.lvcSpellsS8LearnedLevel.Width = 95;
+            // 
             // lvcSpellsS9LearnedAt
             // 
             this.lvcSpellsS9LearnedAt.AspectName = "S9LearnedAt";
             this.lvcSpellsS9LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS9LearnedAt.Text = "S9LearnedAt";
             this.lvcSpellsS9LearnedAt.Width = 75;
-            // 
-            // lvcSpellsS9LearnedLevel
-            // 
-            this.lvcSpellsS9LearnedLevel.AspectName = "S9LearnedLevel";
-            this.lvcSpellsS9LearnedLevel.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS9LearnedLevel.Text = "S9LearnedLevel";
-            this.lvcSpellsS9LearnedLevel.Width = 95;
             // 
             // lvcSpellsS9LearnedID
             // 
@@ -755,19 +778,19 @@
             this.lvcSpellsS9LearnedID.Text = "S9LearnedID";
             this.lvcSpellsS9LearnedID.Width = 90;
             // 
+            // lvcSpellsS9LearnedLevel
+            // 
+            this.lvcSpellsS9LearnedLevel.AspectName = "S9LearnedLevel";
+            this.lvcSpellsS9LearnedLevel.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsS9LearnedLevel.Text = "S9LearnedLevel";
+            this.lvcSpellsS9LearnedLevel.Width = 95;
+            // 
             // lvcSpellsS10LearnedAt
             // 
             this.lvcSpellsS10LearnedAt.AspectName = "S10LearnedAt";
             this.lvcSpellsS10LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS10LearnedAt.Text = "S10LearnedAt";
             this.lvcSpellsS10LearnedAt.Width = 75;
-            // 
-            // lvcSpellsS10LearnedLevel
-            // 
-            this.lvcSpellsS10LearnedLevel.AspectName = "S10LearnedLevel";
-            this.lvcSpellsS10LearnedLevel.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS10LearnedLevel.Text = "S10LearnedLevel";
-            this.lvcSpellsS10LearnedLevel.Width = 95;
             // 
             // lvcSpellsS10LearnedID
             // 
@@ -777,19 +800,19 @@
             this.lvcSpellsS10LearnedID.Text = "S10LearnedID";
             this.lvcSpellsS10LearnedID.Width = 90;
             // 
+            // lvcSpellsS10LearnedLevel
+            // 
+            this.lvcSpellsS10LearnedLevel.AspectName = "S10LearnedLevel";
+            this.lvcSpellsS10LearnedLevel.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsS10LearnedLevel.Text = "S10LearnedLevel";
+            this.lvcSpellsS10LearnedLevel.Width = 95;
+            // 
             // lvcSpellsS11LearnedAt
             // 
             this.lvcSpellsS11LearnedAt.AspectName = "S11LearnedAt";
             this.lvcSpellsS11LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS11LearnedAt.Text = "S11LearnedAt";
             this.lvcSpellsS11LearnedAt.Width = 75;
-            // 
-            // lvcSpellsS11LearnedLevel
-            // 
-            this.lvcSpellsS11LearnedLevel.AspectName = "S11LearnedLevel";
-            this.lvcSpellsS11LearnedLevel.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS11LearnedLevel.Text = "S11LearnedLevel";
-            this.lvcSpellsS11LearnedLevel.Width = 95;
             // 
             // lvcSpellsS11LearnedID
             // 
@@ -799,19 +822,19 @@
             this.lvcSpellsS11LearnedID.Text = "S11LearnedID";
             this.lvcSpellsS11LearnedID.Width = 90;
             // 
+            // lvcSpellsS11LearnedLevel
+            // 
+            this.lvcSpellsS11LearnedLevel.AspectName = "S11LearnedLevel";
+            this.lvcSpellsS11LearnedLevel.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsS11LearnedLevel.Text = "S11LearnedLevel";
+            this.lvcSpellsS11LearnedLevel.Width = 95;
+            // 
             // lvcSpellsS12LearnedAt
             // 
             this.lvcSpellsS12LearnedAt.AspectName = "S12LearnedAt";
             this.lvcSpellsS12LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS12LearnedAt.Text = "S12LearnedAt";
             this.lvcSpellsS12LearnedAt.Width = 75;
-            // 
-            // lvcSpellsS12LearnedLevel
-            // 
-            this.lvcSpellsS12LearnedLevel.AspectName = "S12LearnedLevel";
-            this.lvcSpellsS12LearnedLevel.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS12LearnedLevel.Text = "S12LearnedLevel";
-            this.lvcSpellsS12LearnedLevel.Width = 95;
             // 
             // lvcSpellsS12LearnedID
             // 
@@ -820,6 +843,13 @@
             this.lvcSpellsS12LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS12LearnedID.Text = "S12LearnedID";
             this.lvcSpellsS12LearnedID.Width = 90;
+            // 
+            // lvcSpellsS12LearnedLevel
+            // 
+            this.lvcSpellsS12LearnedLevel.AspectName = "S12LearnedLevel";
+            this.lvcSpellsS12LearnedLevel.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsS12LearnedLevel.Text = "S12LearnedLevel";
+            this.lvcSpellsS12LearnedLevel.Width = 95;
             // 
             // tabStats
             // 
@@ -2635,36 +2665,6 @@
             this.CurveGraph.Size = new System.Drawing.Size(749, 446);
             this.CurveGraph.TabIndex = 0;
             this.CurveGraph.Text = "chartCurveGraph";
-            // 
-            // tsSeparator_File2
-            // 
-            this.tsSeparator_File2.Name = "tsSeparator_File2";
-            this.tsSeparator_File2.Size = new System.Drawing.Size(177, 6);
-            // 
-            // tsmiFile_Close
-            // 
-            this.tsmiFile_Close.Enabled = false;
-            this.tsmiFile_Close.Name = "tsmiFile_Close";
-            this.tsmiFile_Close.Size = new System.Drawing.Size(180, 22);
-            this.tsmiFile_Close.Text = "Close";
-            this.tsmiFile_Close.Click += new System.EventHandler(this.tsmiFile_Close_Click);
-            // 
-            // tsSeparator_File3
-            // 
-            this.tsSeparator_File3.Name = "tsSeparator_File3";
-            this.tsSeparator_File3.Size = new System.Drawing.Size(177, 6);
-            // 
-            // tsmiFile_Exit
-            // 
-            this.tsmiFile_Exit.Name = "tsmiFile_Exit";
-            this.tsmiFile_Exit.Size = new System.Drawing.Size(180, 22);
-            this.tsmiFile_Exit.Text = "Exit";
-            this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
-            // 
-            // tsSeparator_Help1
-            // 
-            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
-            this.tsSeparator_Help1.Size = new System.Drawing.Size(294, 6);
             // 
             // frmX033_X031_Editor
             // 
