@@ -70,6 +70,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\BulkCopyRowNameAttribute.cs" />
     <Compile Include="Attributes\BulkCopyRecurseAttribute.cs" />
     <Compile Include="Attributes\BulkCopyAttribute.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />

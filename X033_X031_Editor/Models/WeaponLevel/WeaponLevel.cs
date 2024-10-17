@@ -110,6 +110,8 @@ namespace SF3.X033_X031_Editor.Models.WeaponLevel
 
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int WeaponLevelID => index;
+
+        [BulkCopyRowName]
         public string WeaponLevelName => name;
 
         [BulkCopy]

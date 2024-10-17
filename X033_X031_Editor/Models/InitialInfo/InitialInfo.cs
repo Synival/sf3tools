@@ -141,6 +141,8 @@ namespace SF3.X033_X031_Editor.Models.InitialInfos
 
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int PresetID => index;
+
+        [BulkCopyRowName]
         public string PresetName => name;
 
         [BulkCopy]

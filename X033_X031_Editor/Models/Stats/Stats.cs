@@ -448,6 +448,8 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         public int ID => index;
+
+        [BulkCopyRowName]
         public string Name => name;
 
         [BulkCopy]
