@@ -33,7 +33,7 @@
   <item value="0x1E" name="BreathOfFire" />
   <item value="0x1F" name="BreathOfIce" />
   <item value="0x20" name="BreathOfThunder" />
-  <item value="0x21" name="MultipleTargetLaser" />
+  <item value="0x21" name="BreathOfWind" />
   <item value="0x22" name="BreathOfDemon" />
   <item value="0x23" name="BreatheOfWater" />
   <item value="0x24" name="BreathOfAcid" />
