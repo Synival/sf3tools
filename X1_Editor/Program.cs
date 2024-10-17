@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SF3.Editor.Extensions;
+using System;
 using System.Windows.Forms;
 
 namespace SF3.X1_Editor
@@ -12,6 +12,7 @@ namespace SF3.X1_Editor
         [STAThread]
         static void Main()
         {
+            ObjectListViewExtensions.RegisterSF3Values();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Forms.frmX1_Editor());

@@ -1,7 +1,5 @@
-﻿using BrightIdeasSoftware;
-using SF3.Values;
+﻿using SF3.Editor.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SF3.X019_Editor
@@ -14,12 +12,7 @@ namespace SF3.X019_Editor
         [STAThread]
         static void Main()
         {
-            // TODO: generic method to prevent copy + paste
-            ObjectListView.EditorRegistry.Register(
-                typeof(SpellValue),
-                (Object model, OLVColumn column, Object value) => Editor.Utils.MakeNamedValueComboBox(SpellValue.ComboBoxValues)
-            );
-
+            ObjectListViewExtensions.RegisterSF3Values();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Forms.frmX019_Editor());

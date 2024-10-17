@@ -1,9 +1,6 @@
 ﻿using BrightIdeasSoftware;
+using SF3.Values;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SF3.Editor.Extensions
@@ -53,6 +50,36 @@ namespace SF3.Editor.Extensions
                 NumericUpDown control = (NumericUpDown)e.Control;
                 control.Hexadecimal = true;
             }
+        }
+
+        /// <summary>
+        /// Performs ObjectListView.EditorRegistry.Register() for all SF3 NamedValues.
+        /// </summary>
+        public static void RegisterSF3Values()
+        {
+            // TODO: generic method to prevent copy + paste
+            ObjectListView.EditorRegistry.Register(
+                typeof(CharacterClassValue),
+                (Object model, OLVColumn column, Object value) => Utils.MakeNamedValueComboBox(CharacterClassValue.ComboBoxValues)
+            );
+
+            // TODO: generic method to prevent copy + paste
+            ObjectListView.EditorRegistry.Register(
+                typeof(SexValue),
+                (Object model, OLVColumn column, Object value) => Utils.MakeNamedValueComboBox(SexValue.ComboBoxValues)
+            );
+
+            // TODO: generic method to prevent copy + paste
+            ObjectListView.EditorRegistry.Register(
+                typeof(SpellValue),
+                (Object model, OLVColumn column, Object value) => Utils.MakeNamedValueComboBox(SpellValue.ComboBoxValues)
+            );
+
+            // TODO: generic method to prevent copy + paste
+            ObjectListView.EditorRegistry.Register(
+                typeof(WeaponTypeValue),
+                (Object model, OLVColumn column, Object value) => Utils.MakeNamedValueComboBox(WeaponTypeValue.ComboBoxValues)
+            );
         }
     }
 }
