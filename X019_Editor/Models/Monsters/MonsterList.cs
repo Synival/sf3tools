@@ -15,23 +15,23 @@ namespace SF3.X019_Editor.Models.Monsters
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "RSc1/X019List.xml";
+                _resourceFile = "Resources/S1/Monsters.xml";
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "RSc2/X019List.xml";
+                _resourceFile = "Resources/S2/Monsters.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/X019List.xml";
+                _resourceFile = "Resources/S3/Monsters.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk && !_isPDX044)
             {
-                _resourceFile = "RPD/X019List.xml";
+                _resourceFile = "Resources/PD/Monsters.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk && _isPDX044)
             {
-                _resourceFile = "RPDX44/X044List.xml";
+                _resourceFile = "Resources/PD/Monsters_X044.xml";
             }
         }
 

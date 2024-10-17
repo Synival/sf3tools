@@ -1,4 +1,5 @@
 ﻿using SF3.Types;
+using SF3.Values;
 
 namespace SF3.X1_Editor.Models.Slots
 {
@@ -315,10 +316,10 @@ namespace SF3.X1_Editor.Models.Slots
             set => _fileEditor.SetByte(unknown2, (byte)value);
         }
 
-        public int EnemyID
+        public MonsterValue EnemyID
         {
-            get => _fileEditor.GetWord(enemyID);
-            set => _fileEditor.SetWord(enemyID, value);
+            get => new MonsterValue(Scenario, false, _fileEditor.GetWord(enemyID), true);
+            set => _fileEditor.SetWord(enemyID, value.Value);
         }
 
         public int EnemyX

@@ -15,7 +15,6 @@ namespace SF3.Values
         public const int MinValue = 0;
         public const int MaxValue = 0xFF;
 
-        // TODO: These definitely change between scenarios, so somehow it will need to be scenario-specific, likely tied to the SF3FileEditor.
         public static readonly Dictionary<ScenarioType, Dictionary<int, string>> ValueNames = new Dictionary<ScenarioType, Dictionary<int, string>>()
         {
             { ScenarioType.Scenario1,   GetValueNameDictionaryFromXML("Resources/S1/Items.xml") },

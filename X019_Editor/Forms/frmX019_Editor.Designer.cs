@@ -366,7 +366,7 @@
             this.lvcMonsterTab1Name.AspectName = "Name";
             this.lvcMonsterTab1Name.IsEditable = false;
             this.lvcMonsterTab1Name.Text = "Name";
-            this.lvcMonsterTab1Name.Width = 100;
+            this.lvcMonsterTab1Name.Width = 150;
             // 
             // lvcMonsterTab1ID
             // 
@@ -591,7 +591,7 @@
             this.lvcMonsterTab2Name.AspectName = "Name";
             this.lvcMonsterTab2Name.IsEditable = false;
             this.lvcMonsterTab2Name.Text = "Name";
-            this.lvcMonsterTab2Name.Width = 100;
+            this.lvcMonsterTab2Name.Width = 150;
             // 
             // lvcMonsterTab2ID
             // 
@@ -773,7 +773,7 @@
             this.lvcMonsterTab3Name.AspectName = "Name";
             this.lvcMonsterTab3Name.IsEditable = false;
             this.lvcMonsterTab3Name.Text = "Name";
-            this.lvcMonsterTab3Name.Width = 100;
+            this.lvcMonsterTab3Name.Width = 150;
             // 
             // lvcMonsterTab3ID
             // 
@@ -943,7 +943,7 @@
             this.lvcMonsterTab4Name.AspectName = "Name";
             this.lvcMonsterTab4Name.IsEditable = false;
             this.lvcMonsterTab4Name.Text = "Name";
-            this.lvcMonsterTab4Name.Width = 100;
+            this.lvcMonsterTab4Name.Width = 150;
             // 
             // lvcMonsterTab4ID
             // 
@@ -1069,7 +1069,7 @@
             this.lvcMonsterTab5Name.AspectName = "Name";
             this.lvcMonsterTab5Name.IsEditable = false;
             this.lvcMonsterTab5Name.Text = "Name";
-            this.lvcMonsterTab5Name.Width = 100;
+            this.lvcMonsterTab5Name.Width = 150;
             // 
             // lvcMonsterTab5ID
             // 

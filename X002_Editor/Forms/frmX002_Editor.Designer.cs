@@ -1607,7 +1607,7 @@
             this.lvcAttackResistItemName.AspectName = "AttackResistName";
             this.lvcAttackResistItemName.IsEditable = false;
             this.lvcAttackResistItemName.Text = "Item Name";
-            this.lvcAttackResistItemName.Width = 65;
+            this.lvcAttackResistItemName.Width = 120;
             // 
             // lvcAttackResistAttackSpell
             // 

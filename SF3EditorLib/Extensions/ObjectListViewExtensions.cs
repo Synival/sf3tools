@@ -67,6 +67,7 @@ namespace SF3.Editor.Extensions
             // TODO: a super-cool reflection version would be amazing.
             RegisterNamedValue<CharacterClassValue>();
             RegisterNamedValue<ItemValue>();
+            RegisterNamedValue<MonsterValue>();
             RegisterNamedValue<SexValue>();
             RegisterNamedValue<SpellValue>();
             RegisterNamedValue<WeaponTypeValue>();
