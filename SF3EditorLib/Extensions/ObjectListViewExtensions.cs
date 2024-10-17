@@ -57,29 +57,19 @@ namespace SF3.Editor.Extensions
         /// </summary>
         public static void RegisterSF3Values()
         {
-            // TODO: generic method to prevent copy + paste
-            ObjectListView.EditorRegistry.Register(
-                typeof(CharacterClassValue),
-                (object model, OLVColumn column, object value) => Utils.MakeNamedValueComboBox((value as CharacterClassValue).ComboBoxValues)
-            );
+            void RegisterNamedValue<T>() =>
+                ObjectListView.EditorRegistry.Register(
+                    typeof(T),
+                    (object model, OLVColumn column, object value) => Utils.MakeNamedValueComboBox((value as NamedValue).ComboBoxValues)
+                );
 
-            // TODO: generic method to prevent copy + paste
-            ObjectListView.EditorRegistry.Register(
-                typeof(SexValue),
-                (object model, OLVColumn column, object value) => Utils.MakeNamedValueComboBox((value as SexValue).ComboBoxValues)
-            );
-
-            // TODO: generic method to prevent copy + paste
-            ObjectListView.EditorRegistry.Register(
-                typeof(SpellValue),
-                (object model, OLVColumn column, object value) => Utils.MakeNamedValueComboBox((value as SpellValue).ComboBoxValues)
-            );
-
-            // TODO: generic method to prevent copy + paste
-            ObjectListView.EditorRegistry.Register(
-                typeof(WeaponTypeValue),
-                (object model, OLVColumn column, object value) => Utils.MakeNamedValueComboBox((value as WeaponTypeValue).ComboBoxValues)
-            );
+            // ObjectListView needs exact types, so register each value manually.
+            // TODO: a super-cool reflection version would be amazing.
+            RegisterNamedValue<CharacterClassValue>();
+            RegisterNamedValue<ItemValue>();
+            RegisterNamedValue<SexValue>();
+            RegisterNamedValue<SpellValue>();
+            RegisterNamedValue<WeaponTypeValue>();
         }
     }
 }
