@@ -2,10 +2,9 @@
 using System.Xml;
 using System.IO;
 using SF3.Types;
-using SF3.Models;
-using SF3.IconPointerEditor.FileEditors;
+using SF3.FileEditors;
 
-namespace SF3.IconPointerEditor.Models.ItemIcons
+namespace SF3.Models.IconPointerEditor.ItemIcons
 {
     public class ItemIconList : ModelArray<ItemIcon>
     {

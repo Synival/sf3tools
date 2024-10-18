@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
-using System.Windows.Forms;
 using SF3.Types;
-using SF3.Models;
-using SF3.IconPointerEditor.FileEditors;
+using SF3.FileEditors;
 
-namespace SF3.IconPointerEditor.Models.SpellIcons
+namespace SF3.Models.IconPointerEditor.SpellIcons
 {
     public class SpellIconList : ModelArray<SpellIcon>
     {
