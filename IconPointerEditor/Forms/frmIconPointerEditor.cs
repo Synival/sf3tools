@@ -51,6 +51,7 @@ namespace SF3.IconPointerEditor.Forms
             FileIsLoadedChanged += (obj, eargs) =>
             {
                 tsmiFile_SaveAs.Enabled = IsLoaded == true;
+                tsmiFile_CopyTablesFrom.Enabled = IsLoaded == true;
                 tsmiFile_Close.Enabled = IsLoaded == true;
             };
 
@@ -80,6 +81,7 @@ namespace SF3.IconPointerEditor.Forms
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();
         private void tsmiFile_Close_Click(object sender, EventArgs e) => CloseFile();
+        private void tsmiFile_CopyTablesFrom_Click(object sender, EventArgs e) => CopyTablesFrom();
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
 
         private void tsmiHelp_X026Toggle_Click(object sender, EventArgs e) => X026 = !X026;

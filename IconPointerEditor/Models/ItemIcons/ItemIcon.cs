@@ -1,4 +1,5 @@
-﻿using SF3.Types;
+﻿using SF3.Attributes;
+using SF3.Types;
 
 namespace SF3.IconPointerEditor.Models.ItemIcons
 {
@@ -135,8 +136,11 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
 
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int SizeID => index;
+
+        [BulkCopyRowName]
         public string SizeName => name;
 
+        [BulkCopy]
         public int TheItemIcon
         {
             get

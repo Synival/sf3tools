@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Forms;
 using SF3.Types;
+using SF3.Attributes;
 
 namespace SF3.IconPointerEditor.Models.SpellIcons
 {
@@ -159,8 +160,11 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
 
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int ID => index;
+
+        [BulkCopyRowName]
         public string Name => name;
 
+        [BulkCopy]
         public int TheSpellIcon
         {
             get
@@ -187,6 +191,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
             }
         }
 
+        [BulkCopy]
         public int RealOffset
         {
             get

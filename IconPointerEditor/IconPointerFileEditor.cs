@@ -1,4 +1,5 @@
-﻿using SF3.IconPointerEditor.Models.ItemIcons;
+﻿using SF3.Attributes;
+using SF3.IconPointerEditor.Models.ItemIcons;
 using SF3.IconPointerEditor.Models.SpellIcons;
 using SF3.Models;
 using SF3.Types;
@@ -28,8 +29,10 @@ namespace SF3.IconPointerEditor
 
         public bool X026 { get; }
 
+        [BulkCopyRecurse]
         public SpellIconList SpellIconList { get; private set; }
 
+        [BulkCopyRecurse]
         public ItemIconList ItemIconList { get; private set; }
 
         protected override string BaseTitle => IsLoaded
