@@ -1,4 +1,5 @@
 ﻿using SF3.Attributes;
+using SF3.FileEditors;
 using SF3.Models;
 using SF3.Types;
 using SF3.X033_X031_Editor.Models.InitialInfos;
@@ -10,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF3.X033_X031_Editor
+namespace SF3.X033_X031_Editor.FileEditors
 {
     public class X033_X031_FileEditor : SF3FileEditor, IX033_X031_FileEditor
     {

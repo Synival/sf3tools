@@ -1,4 +1,5 @@
-﻿using SF3.Models;
+﻿using SF3.FileEditors;
+using SF3.Models;
 using SF3.Types;
 using SF3.X013_Editor.Models.CritMod;
 using SF3.X013_Editor.Models.Critrate;
@@ -20,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF3.X013_Editor
+namespace SF3.X013_Editor.FileEditors
 {
     public class X013_FileEditor : SF3FileEditor, IX013_FileEditor
     {

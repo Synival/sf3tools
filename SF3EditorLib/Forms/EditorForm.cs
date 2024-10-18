@@ -2,6 +2,7 @@
 using SF3.Editor.Extensions;
 using SF3.Exceptions;
 using SF3.Extensions;
+using SF3.FileEditors;
 using SF3.Types;
 using SF3.Utils;
 using System;

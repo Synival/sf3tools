@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using SF3.Types;
 using SF3.Attributes;
 using SF3.Values;
+using SF3.IconPointerEditor.FileEditors;
 
 namespace SF3.IconPointerEditor.Models.SpellIcons
 {

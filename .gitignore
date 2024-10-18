@@ -7,3 +7,4 @@ obj/
 *.csproj.user
 /dist_src
 /dist
+/SF3LibTests/TestData

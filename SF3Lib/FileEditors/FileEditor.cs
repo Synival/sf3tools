@@ -3,7 +3,7 @@ using System.Text;
 using System.IO;
 using SF3.Exceptions;
 
-namespace SF3
+namespace SF3.FileEditors
 {
     /// <summary>
     /// Used for loading, saving, reading, and modifying .BIN files.

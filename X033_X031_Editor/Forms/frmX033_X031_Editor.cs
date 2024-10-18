@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using SF3.Types;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
+using SF3.X033_X031_Editor.FileEditors;
+using SF3.FileEditors;
 
 namespace SF3.X033_X031_Editor.Forms
 {

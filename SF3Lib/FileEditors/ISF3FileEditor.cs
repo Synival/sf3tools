@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF3
+namespace SF3.FileEditors
 {
     /// <summary>
     /// IFileEditor specifically for files in Shining Force 3

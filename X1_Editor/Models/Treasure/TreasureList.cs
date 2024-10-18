@@ -4,6 +4,7 @@ using System.IO;
 using SF3.Models;
 using SF3.Types;
 using static SF3.X1_Editor.Forms.frmX1_Editor;
+using SF3.X1_Editor.FileEditors;
 
 namespace SF3.X1_Editor.Models.Treasures
 {

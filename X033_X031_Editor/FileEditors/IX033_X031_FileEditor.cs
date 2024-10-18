@@ -1,4 +1,5 @@
 ﻿using SF3.Attributes;
+using SF3.FileEditors;
 using SF3.X033_X031_Editor.Models.InitialInfos;
 using SF3.X033_X031_Editor.Models.Stats;
 using SF3.X033_X031_Editor.Models.WeaponLevel;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF3.X033_X031_Editor
+namespace SF3.X033_X031_Editor.FileEditors
 {
     public interface IX033_X031_FileEditor : ISF3FileEditor
     {

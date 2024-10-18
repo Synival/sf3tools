@@ -1,4 +1,5 @@
-﻿using SF3.Models;
+﻿using SF3.FileEditors;
+using SF3.Models;
 using SF3.Types;
 using SF3.X019_Editor.Models.Monsters;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF3.X019_Editor
+namespace SF3.X019_Editor.FileEditors
 {
     public class X019_FileEditor : SF3FileEditor, IX019_FileEditor
     {

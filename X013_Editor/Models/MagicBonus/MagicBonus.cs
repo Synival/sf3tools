@@ -1,4 +1,5 @@
 ﻿using SF3.Types;
+using SF3.X013_Editor.FileEditors;
 
 namespace SF3.X013_Editor.Models.MagicBonus
 {

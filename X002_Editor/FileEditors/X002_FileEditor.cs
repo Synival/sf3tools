@@ -1,4 +1,5 @@
-﻿using SF3.Models;
+﻿using SF3.FileEditors;
+using SF3.Models;
 using SF3.Types;
 using SF3.X002_Editor.Models.AttackResist;
 using SF3.X002_Editor.Models.Items;
@@ -15,7 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF3.X002_Editor
+namespace SF3.X002_Editor.FileEditors
 {
     public class X002_FileEditor : SF3FileEditor, IX002_FileEditor
     {

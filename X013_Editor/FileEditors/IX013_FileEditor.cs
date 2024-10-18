@@ -1,4 +1,5 @@
-﻿using SF3.X013_Editor.Models.CritMod;
+﻿using SF3.FileEditors;
+using SF3.X013_Editor.Models.CritMod;
 using SF3.X013_Editor.Models.Critrate;
 using SF3.X013_Editor.Models.ExpLimit;
 using SF3.X013_Editor.Models.HealExp;
@@ -18,7 +19,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF3.X013_Editor
+namespace SF3.X013_Editor.FileEditors
 {
     public interface IX013_FileEditor : ISF3FileEditor
     {

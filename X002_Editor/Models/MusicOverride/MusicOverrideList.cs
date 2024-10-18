@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using SF3.Models;
 using SF3.Types;
+using SF3.X002_Editor.FileEditors;
 
 namespace SF3.X002_Editor.Models.MusicOverride
 {

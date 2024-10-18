@@ -24,4 +24,12 @@
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TestData\PD\" />
+    <Folder Include="TestData\S1JP\" />
+    <Folder Include="TestData\S3\" />
+    <Folder Include="TestData\S2\" />
+    <Folder Include="TestData\S1US\" />
+  </ItemGroup>
+
 </Project>

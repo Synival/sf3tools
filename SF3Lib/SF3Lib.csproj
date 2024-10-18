@@ -79,14 +79,14 @@
     <Compile Include="Exceptions\FileEditorNotLoadedException.cs" />
     <Compile Include="Exceptions\FileEditorReadException.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="FileEditor.cs" />
-    <Compile Include="IFileEditor.cs" />
-    <Compile Include="ISF3FileEditor.cs" />
+    <Compile Include="FileEditors\FileEditor.cs" />
+    <Compile Include="FileEditors\IFileEditor.cs" />
+    <Compile Include="FileEditors\ISF3FileEditor.cs" />
     <Compile Include="Models\ModelArray.cs" />
     <Compile Include="ProbableValueSet.cs" />
     <Compile Include="Models\IModelArray.cs" />
     <Compile Include="NamedValue.cs" />
-    <Compile Include="SF3FileEditor.cs" />
+    <Compile Include="FileEditors\SF3FileEditor.cs" />
     <Compile Include="Types\MapLeaderType.cs" />
     <Compile Include="ValueRange.cs" />
     <Compile Include="Stats.cs" />
@@ -183,7 +183,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\IconPointerEditor\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

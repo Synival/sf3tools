@@ -1,5 +1,6 @@
 ﻿using SF3.Types;
 using SF3.Values;
+using SF3.X1_Editor.FileEditors;
 
 namespace SF3.X1_Editor.Models.Slots
 {

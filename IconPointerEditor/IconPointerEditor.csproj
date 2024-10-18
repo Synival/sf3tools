@@ -58,8 +58,8 @@
     <Compile Include="Forms\frmIconPointerEditor.Designer.cs">
       <DependentUpon>frmIconPointerEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="IconPointerFileEditor.cs" />
-    <Compile Include="IIconPointerFileEditor.cs" />
+    <Compile Include="FileEditors\IconPointerFileEditor.cs" />
+    <Compile Include="FileEditors\IIconPointerFileEditor.cs" />
     <Compile Include="Models\SpellIcons\SpellIcon.cs" />
     <Compile Include="Models\SpellIcons\SpellIconList.cs" />
     <Compile Include="Models\ItemIcons\ItemIcon.cs" />

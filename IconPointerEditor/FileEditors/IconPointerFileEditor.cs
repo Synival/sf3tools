@@ -1,4 +1,5 @@
 ﻿using SF3.Attributes;
+using SF3.FileEditors;
 using SF3.IconPointerEditor.Models.ItemIcons;
 using SF3.IconPointerEditor.Models.SpellIcons;
 using SF3.Models;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF3.IconPointerEditor
+namespace SF3.IconPointerEditor.FileEditors
 {
     public class IconPointerFileEditor : SF3FileEditor, IIconPointerFileEditor
     {

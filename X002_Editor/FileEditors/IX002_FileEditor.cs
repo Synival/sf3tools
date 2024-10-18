@@ -1,4 +1,5 @@
-﻿using SF3.X002_Editor.Models.AttackResist;
+﻿using SF3.FileEditors;
+using SF3.X002_Editor.Models.AttackResist;
 using SF3.X002_Editor.Models.Items;
 using SF3.X002_Editor.Models.Loading;
 using SF3.X002_Editor.Models.MusicOverride;
@@ -13,7 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF3.X002_Editor
+namespace SF3.X002_Editor.FileEditors
 {
     public interface IX002_FileEditor : ISF3FileEditor
     {

@@ -72,7 +72,7 @@
     <Compile Include="Forms\frmX002_Editor.Designer.cs">
       <DependentUpon>frmX002_Editor.cs</DependentUpon>
     </Compile>
-    <Compile Include="IX002_FileEditor.cs" />
+    <Compile Include="FileEditors\IX002_FileEditor.cs" />
     <Compile Include="Models\AttackResist\AttackResist.cs" />
     <Compile Include="Models\AttackResist\AttackResistList.cs" />
     <Compile Include="Models\musicOverride\MusicOverride.cs" />
@@ -93,7 +93,7 @@
     <Compile Include="Models\StatBoost\StatList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="X002_FileEditor.cs" />
+    <Compile Include="FileEditors\X002_FileEditor.cs" />
     <EmbeddedResource Include="Forms\frmX002_Editor.resx">
       <DependentUpon>frmX002_Editor.cs</DependentUpon>
       <SubType>Designer</SubType>

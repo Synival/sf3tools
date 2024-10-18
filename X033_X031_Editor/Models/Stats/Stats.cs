@@ -1,6 +1,7 @@
 ﻿using SF3.Attributes;
 using SF3.Types;
 using SF3.Values;
+using SF3.X033_X031_Editor.FileEditors;
 using System;
 using static SF3.X033_X031_Editor.Forms.frmX033_X031_Editor;
 

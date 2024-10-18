@@ -1,4 +1,5 @@
 ﻿using SF3.Attributes;
+using SF3.IconPointerEditor.FileEditors;
 using SF3.Types;
 
 namespace SF3.IconPointerEditor.Models.ItemIcons

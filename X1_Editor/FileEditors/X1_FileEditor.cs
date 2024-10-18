@@ -1,4 +1,5 @@
-﻿using SF3.Models;
+﻿using SF3.FileEditors;
+using SF3.Models;
 using SF3.Types;
 using SF3.X1_Editor.Models.AI;
 using SF3.X1_Editor.Models.Arrows;
@@ -18,7 +19,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF3.X1_Editor
+namespace SF3.X1_Editor.FileEditors
 {
     public class X1_FileEditor : SF3FileEditor, IX1_FileEditor
     {
