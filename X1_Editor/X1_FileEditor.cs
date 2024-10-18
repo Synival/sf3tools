@@ -28,7 +28,7 @@ namespace SF3.X1_Editor
             IsBTL99 = isBTL99;
         }
 
-        public override IEnumerable<IModelArray> MakeModelArrays()
+        public override bool OnLoadBeforeMakeModelArrays()
         {
             int offset = 0;
             int sub = 0;
@@ -80,6 +80,11 @@ namespace SF3.X1_Editor
                 IsBattle = false;
             }
 
+            return true;
+        }
+
+        public override IEnumerable<IModelArray> MakeModelArrays()
+        {
             bool isntScn1OrBTL99 = Scenario != ScenarioType.Scenario1 && !IsBTL99;
 
             // Add models present for both towns and battles.

@@ -24,9 +24,25 @@ namespace SF3
         /// <returns>A collection of unloaded IModelArray's.</returns>
         public abstract IEnumerable<IModelArray> MakeModelArrays();
 
+        /// <summary>
+        /// Occurs when data is loaded but before the ModelArray's are created.
+        /// This is a good place to check file data to determine how to create the models.
+        /// If 'false' is returned, loading is aborted.
+        /// </summary>
+        /// <returns>'true' on success, otherwise 'false'.</returns>
+        public virtual bool OnLoadBeforeMakeModelArrays()
+        {
+            return true;
+        }
+
         public override bool LoadFile(string filename)
         {
             if (!base.LoadFile(filename))
+            {
+                return false;
+            }
+
+            if (!OnLoadBeforeMakeModelArrays())
             {
                 return false;
             }
