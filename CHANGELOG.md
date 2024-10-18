@@ -18,7 +18,6 @@
 - Adjusted some columns to fit some text better
 
 ### IconPointerEditor
-- Fixes for X026 compatability with Scenario 1 original JP version
 - Added 'File -> Copy Tables From...' to copy table between X011, X021, and X026 files
 - Updated 'File -> Open...' and 'File -> Save As...' dialogs to show all files editable without changing the dropdown
 - Added a column for "Spell Name" to differentiate between the spell represented by the icon (which has a lot of STHA holdovers) and the actual spell referenced.

@@ -29,10 +29,6 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
                 if (_fileEditor.IsX026 == true)
                 {
                     offset = 0x08f0; //scn1 initial pointer
-                    if (checkVersion2 == 0x98) //original jp
-                    {
-                        offset = 0x0a30;
-                    }
                     sub = 0x06078000;
                 }
                 else
