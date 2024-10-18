@@ -12,14 +12,21 @@ namespace SF3.X013_Editor.Models.Soulmate
 
         private int index;
         private string name;
+        private int checkVersion2;
 
         public Soulmate(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 
+            checkVersion2 = _fileEditor.GetByte(0x0000000A);
+
             if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00007530; //scn1
+                if (checkVersion2 == 0x0A) //original jp
+                {
+                    offset -= 0x0C;
+                }
             }
             else if (Scenario == ScenarioType.Scenario2)
             {

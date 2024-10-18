@@ -12,14 +12,21 @@ namespace SF3.X013_Editor.Models.HealExp
 
         private int index;
         private string name;
+        private int checkVersion2;
 
         public HealExp(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 
+            checkVersion2 = _fileEditor.GetByte(0x0000000A);
+
             if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00004c8b; //scn1
+                if (checkVersion2 == 0x0A) //original jp
+                {
+                    offset -= 0x64;
+                }
             }
             else if (Scenario == ScenarioType.Scenario2)
             {

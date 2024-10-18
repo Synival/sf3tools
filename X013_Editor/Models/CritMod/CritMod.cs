@@ -13,14 +13,21 @@ namespace SF3.X013_Editor.Models.CritMod
 
         private int index;
         private string name;
+        private int checkVersion2;
 
         public CritMod(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 
+            checkVersion2 = _fileEditor.GetByte(0x0000000A);
+
             if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00002e74; //scn1
+                if (checkVersion2 == 0x0A) //original jp
+                {
+                    offset -= 0x70;
+                }
             }
             else if (Scenario == ScenarioType.Scenario2)
             {

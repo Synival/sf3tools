@@ -15,14 +15,21 @@ namespace SF3.X013_Editor.Models.SupportStats
 
         private int index;
         private string name;
+        private int checkVersion2;
 
         public SupportStats(IX013_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 
+            checkVersion2 = _fileEditor.GetByte(0x0000000A);
+
             if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x000074b5; //scn1
+                if (checkVersion2 == 0x0A) //original jp
+                {
+                    offset -= 0x0C;
+                }
             }
             else if (Scenario == ScenarioType.Scenario2)
             {

@@ -26,6 +26,7 @@ namespace SF3.X013_Editor.Models.StatusEffects
 
         private int index;
         private string name;
+        private int checkVersion2;
 
         /*public int NPCTableAddress1
         {
@@ -41,9 +42,15 @@ namespace SF3.X013_Editor.Models.StatusEffects
         {
             _fileEditor = fileEditor;
 
+            checkVersion2 = _fileEditor.GetByte(0x0000000A);
+
             if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00007408; //scn1
+                if (checkVersion2 == 0x0A) //original jp
+                {
+                    offset -= 0x0C;
+                }
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
