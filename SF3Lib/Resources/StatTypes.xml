@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+	<item value="0x00" name="--" />
+	<item value="0x01" name="Atk" />
+	<item value="0x02" name="Def" />
+	<item value="0x03" name="Agi" />
+	<item value="0x04" name="Mov" />
+	<item value="0x05" name="Luck" />
+	<item value="0x06" name="Turns" />
+	<item value="0x07" name="HPRegen" />
+	<item value="0x08" name="MPRegen" />
+	<item value="0x09" name="EarthRes?" />
+	<item value="0x0A" name="FireRes" />
+	<item value="0x0B" name="IceRes" />
+	<item value="0x0C" name="SparkRes" />
+	<item value="0x0D" name="WindRes" />
+	<item value="0x0E" name="LightRes" />
+	<item value="0x0F" name="DarkRes" />
+	<item value="0x10" name="UnknownRes" />
+	<item value="0x11" name="Spell" />
+	<item value="0x12" name="Special" />
+	<item value="0x13" name="Crit" />
+	<item value="0x14" name="Count" />
+	<item value="0x15" name="CurseRes" />
+</items>

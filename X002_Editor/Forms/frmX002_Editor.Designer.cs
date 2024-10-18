@@ -789,7 +789,7 @@
             this.lvcItemsStatType1.AspectToStringFormat = "{0:X}";
             this.lvcItemsStatType1.DisplayIndex = 14;
             this.lvcItemsStatType1.Text = "StatType1";
-            this.lvcItemsStatType1.Width = 70;
+            this.lvcItemsStatType1.Width = 90;
             // 
             // lvcItemsStatUp1
             // 
@@ -804,7 +804,7 @@
             this.lvcItemsStatType2.AspectToStringFormat = "{0:X}";
             this.lvcItemsStatType2.DisplayIndex = 16;
             this.lvcItemsStatType2.Text = "StatType2";
-            this.lvcItemsStatType2.Width = 70;
+            this.lvcItemsStatType2.Width = 90;
             // 
             // lvcItemsStatUp2
             // 
@@ -819,7 +819,7 @@
             this.lvcItemsStatType3.AspectToStringFormat = "{0:X}";
             this.lvcItemsStatType3.DisplayIndex = 18;
             this.lvcItemsStatType3.Text = "StatType3";
-            this.lvcItemsStatType3.Width = 70;
+            this.lvcItemsStatType3.Width = 90;
             // 
             // lvcItemsStatUp3
             // 
@@ -834,7 +834,7 @@
             this.lvcItemsStatType4.AspectToStringFormat = "{0:X}";
             this.lvcItemsStatType4.DisplayIndex = 20;
             this.lvcItemsStatType4.Text = "StatType4";
-            this.lvcItemsStatType4.Width = 70;
+            this.lvcItemsStatType4.Width = 90;
             // 
             // lvcItemsStatUp4
             // 
