@@ -70,6 +70,7 @@ namespace SF3.Editor.Extensions
             RegisterNamedValue<ItemValue>();
             RegisterNamedValue<MonsterValue>();
             RegisterNamedValue<SexValue>();
+            RegisterNamedValue<SpecialValue>();
             RegisterNamedValue<SpellValue>();
             RegisterNamedValue<WeaponTypeValue>();
         }

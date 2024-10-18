@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+	<item value="0x00" name="Nothing?" />
+	<item value="0x01" name="Critical Hit" />
+	<item value="0x02" name="Counter" />
+	<item value="0x03" name="Slow" />
+	<item value="0x04" name="Sleep" />
+	<item value="0x05" name="Confuse" />
+	<item value="0x06" name="Illusion" />
+	<item value="0x07" name="Dispel" />
+	<item value="0x08" name="Paralyze" />
+	<item value="0x09" name="Poison" />
+	<item value="0x0A" name="Poison" />
+	<item value="0x0B" name="Charm" />
+	<item value="0x0C" name="Cold" />
+	<item value="0x0D" name="Critical hit?" />
+	<item value="0x0E" name="Penatrate armor" />
+	<item value="0x0F" name="Berserk" />
+	<item value="0x10" name="Blood sucker" />
+	<item value="0x11" name="Regret hit" />
+	<item value="0x12" name="Critical hit//NOT SET" />
+	<item value="0x13" name="Critical hit//NOT SET" />
+	<item value="0x14" name="Shadow Edge" />
+	<item value="0x15" name="Twin slash" />
+	<item value="0x16" name="Laser Edge" />
+	<item value="0x17" name="Rainbow Edge" />
+	<item value="0x18" name="Silent Kill" />
+	<item value="0x19" name="Sonic wave" />
+	<item value="0x1A" name="Twin wave" />
+	<item value="0x1B" name="Mirage dance" />
+	<item value="0x1C" name="Thundershock" />
+	<item value="0x1D" name="Heatwave" />
+	<item value="0x1E" name="Soul eater" />
+	<item value="0x1F" name="Dazzle edge" />
+	<item value="0x20" name="Triangle" />
+	<item value="0x21" name="Pentagram" />
+	<item value="0x22" name="Centurion" />
+	<item value="0x23" name="Mist Feint" />
+	<item value="0x24" name="Rune Magic" />
+	<item value="0x25" name="Alchemy" />
+	<item value="0x26" name="Das Ende" />
+	<item value="0x27" name="After Burner" />
+	<item value="0x28" name="Ice Breaker" />
+	<item value="0x29" name="Dimension" />
+	<item value="0x2A" name="Melt Armor" />
+	<item value="0x2B" name="Light Cross" />
+	<item value="0x2C" name="Light Sphere" />
+	<item value="0x2D" name="Poison blade" />
+	<item value="0x2E" name="Force edge" />
+	<item value="0x2F" name="Lance change" />
+	<item value="0x30" name="Super charge" />
+	<item value="0x31" name="Mega charge" />
+	<item value="0x32" name="dragon breath" />
+	<item value="0x33" name="Death charge" />
+	<item value="0x34" name="Side Winder" />
+	<item value="0x35" name="Energy fall" />
+	<item value="0x36" name="Thunder fall" />
+	<item value="0x37" name="Flash Gazer" />
+	<item value="0x38" name="Meteor" />
+	<item value="0x39" name="Tornado" />
+	<item value="0x3A" name="Cross break" />
+	<item value="0x3B" name="Air dance" />
+	<item value="0x3C" name="Lord rush" />
+	<item value="0x3D" name="lightning" />
+	<item value="0x3E" name="Death gate" />
+	<item value="0x3F" name="Full swing" />
+	<item value="0x40" name="Power wheel" />
+	<item value="0x41" name="Mega wheel" />
+	<item value="0x42" name="Ragnarok" />
+	<item value="0x43" name="Giga Wheel" />
+	<item value="0x44" name="Death wheel" />
+	<item value="0x45" name="Power throw" />
+	<item value="0x46" name="Boomerang" />
+	<item value="0x47" name="Vortex" />
+	<item value="0x48" name="Fatal strike" />
+	<item value="0x49" name="Mist storm" />
+	<item value="0x4A" name="Power crash" />
+	<item value="0x4B" name="Stun bomb" />
+	<item value="0x4C" name="EarthQuake" />
+	<item value="0x4D" name="Thunderstorm" />
+	<item value="0x4E" name="Pressure bomb" />
+	<item value="0x4F" name="dragon claw" />
+	<item value="0x50" name="sky claw" />
+	<item value="0x51" name="heaven claw" />
+	<item value="0x52" name="storm fang" />
+	<item value="0x53" name="venom fang" />
+	<item value="0x54" name="brutal shock" />
+	<item value="0x55" name="bullet heel" />
+	<item value="0x56" name="vortex kick" />
+	<item value="0x57" name="phoenix sky dance" />
+	<item value="0x58" name="heavenly fire" />
+	<item value="0x59" name="jewel palm" />
+	<item value="0x5A" name="fist O Fury" />
+	<item value="0x5B" name="Thunder drop" />
+	<item value="0x5C" name="Conquer King" />
+	<item value="0x5D" name="Mirage palm" />
+	<item value="0x5E" name="Backstep fist" />
+	<item value="0x5F" name="Double palm" />
+	<item value="0x60" name="Stun palm" />
+	<item value="0x61" name="Panic palm" />
+	<item value="0x62" name="Nine Gate" />
+	<item value="0x63" name="Meta dream" />
+	<item value="0x64" name="Change gold" />
+	<item value="0x65" name="Demon breath" />
+	<item value="0x66" name="Soul shot" />
+	<item value="0x67" name="Fairy soul" />
+	<item value="0x68" name="Soul blast" />
+	<item value="0x69" name="Fata Morgana" />
+	<item value="0x6A" name="Fairy Lover" />
+	<item value="0x6B" name="Stone Circle" />
+	<item value="0x6C" name="Seal of Sin" />
+	<item value="0x6D" name="Judgement" />
+	<item value="0x6E" name="Apocalypse" />
+	<item value="0x6F" name="Fool prayer" />
+	<item value="0x70" name="Holy silence" />
+	<item value="0x71" name="Apostle Descent" />
+	<item value="0x72" name="Ice arrow" />
+	<item value="0x73" name="Mesmerize Arrow" />
+	<item value="0x74" name="Drain Arrow" />
+	<item value="0x75" name="Lunatic" />
+	<item value="0x76" name="Dragon Snipe" />
+	<item value="0x77" name="Spell Virus" />
+	<item value="0x78" name="Poison Arrow" />
+	<item value="0x79" name="Goddess charm" />
+	<item value="0x7A" name="Double Bolt" />
+	<item value="0x7B" name="Sniper Bolt" />
+	<item value="0x7C" name="Vulcan Bolt" />
+	<item value="0x7D" name="Saint Flame" />
+	<item value="0x7E" name="Hell Wind" />
+	<item value="0x7F" name="Stun Needle" />
+	<item value="0x80" name="Dazzle shot" />
+	<item value="0x81" name="Armor Shot" />
+	<item value="0x82" name="Explode" />
+	<item value="0x83" name="Desert Storm" />
+	<item value="0x84" name="Planet Dance" />
+	<item value="0x85" name="Schwarchshilt" />
+	<item value="0x86" name="Butterfly dance" />
+	<item value="0x87" name="Izuna drop" />
+	<item value="0x88" name="Fine mist" />
+	<item value="0x89" name="Kamaitachi" />
+	<item value="0x8A" name="Oni Hyakusoku" />
+	<item value="0x8B" name="Umi Zato" />
+	<item value="0x8C" name="Destruction" />
+	<item value="0x8D" name="Hades Road" />
+	<item value="0x8E" name="Shadow Loom" />
+	<item value="0x8F" name="Dark Raven" />
+	<item value="0x90" name="Demon Circle" />
+	<item value="0x91" name="Thunder Array" />
+	<item value="0x92" name="Chaos Call" />
+	<item value="0x93" name="Evil Wind" />
+	<item value="0x94" name="Twister" />
+	<item value="0x95" name="Cross Slash" />
+	<item value="0x96" name="Bloody Spin" />
+	<item value="0x97" name="Hyper Boom" />
+	<item value="0x98" name="Hell Dive" />
+	<item value="0x99" name="Zero Count" />
+	<item value="0x9A" name="Rocket Punch" />
+	<item value="0x9B" name="Burst punch" />
+	<item value="0x9C" name="Nova shot" />
+	<item value="0x9D" name="drill smash" />
+	<item value="0x9E" name="hammer throw" />
+	<item value="0x9F" name="gestalt" />
+	<item value="0xA0" name="penguin kick" />
+	<item value="0xA1" name="penguin spit" />
+	<item value="0xA2" name="penn dynamo" />
+	<item value="0xA3" name="power slash" />
+	<item value="0xA4" name="sky high" />
+	<item value="0xA5" name="eagle dive" />
+	<item value="0xA6" name="power feint" />
+	<item value="0xA7" name="double feint" />
+	<item value="0xA8" name="danse macabre" />
+	<item value="0xA9" name="wolf fang" />
+	<item value="0xAA" name="wolf rush" />
+	<item value="0xAB" name="cork screw" />
+	<item value="0xAC" name="wild blow" />
+	<item value="0xAD" name="soul spark" />
+	<item value="0xAE" name="death dive" />
+	<item value="0xAF" name="Light sphere" />
+	<item value="0xB0" name="Star bomb" />
+	<item value="0xB1" name="Road rush" />
+	<item value="0xB2" name="Flame tail" />
+	<item value="0xB3" name="Melt armor" />
+	<item value="0xB4" name="dominion ray" />
+	<item value="0xB5" name="thunder blow" />
+	<item value="0xB6" name="Photon Rage" />
+	<item value="0xB7" name="Dragon breath" />
+	<item value="0xB8" name="Air fang" />
+	<item value="0xB9" name="Wild rush" />
+	<item value="0xBA" name="Soul smash" />
+	<item value="0xBB" name="Soul gun" />
+	<item value="0xBC" name="Maniac beat" />
+	<item value="0xBD" name="Mad spin" />
+	<item value="0xBE" name="Merry-go-round" />
+	<item value="0xBF" name="Slave dance" />
+	<item value="0xC0" name="Balloon bomb" />
+	<item value="0xC1" name="Penguin flash" />
+	<item value="0xC2" name="Penko carnival" />
+	<item value="0xC3" name="Plasma shell" />
+	<item value="0xC4" name="Flame Prism" />
+	<item value="0xC5" name="Frost Blade" />
+	<item value="0xC6" name="Fire breath" />
+	<item value="0xC7" name="Acid breath" />
+	<item value="0xC8" name="Panic" />
+	<item value="0xC9" name="Bee strike" />
+	<item value="0xCA" name="Queen Bee" />
+	<item value="0xCB" name="Tail bomb" />
+	<item value="0xCC" name="breath geyser" />
+	<item value="0xCD" name="Gigaton Press" />
+	<item value="0xCE" name="unicorn buck" />
+	<item value="0xCF" name="unicorn ray" />
+	<item value="0xD0" name="stampede" />
+	<item value="0xD1" name="Crescent Moon" />
+	<item value="0xD2" name="full moon blade" />
+	<item value="0xD3" name="Instant kill" />
+	<item value="0xD4" name="Leprecannon" />
+	<item value="0xD5" name="Dragon Fang" />
+	<item value="0xD6" name="Dragon Rush" />
+	<item value="0xD7" name="Change dragon" />
+	<item value="0xD8" name="Vacuum wave" />
+	<item value="0xD9" name="Pendolf vacuum" />
+	<item value="0xDA" name="Rocket Anchor" />
+	<item value="0xDB" name="Burst anchor" />
+	<item value="0xDC" name="Godly Claw" />
+	<item value="0xDD" name="Claw wave" />
+	<item value="0xDE" name="Heavenly light" />
+	<item value="0xDF" name="Thunder Breath" />
+	<item value="0xE0" name="change virgo" />
+	<item value="0xE1" name="blood sucker" />
+	<item value="0xE2" name="gold rush" />
+	<item value="0xE3" name="hectical spin" />
+	<item value="0xE4" name="elemental flare" />
+	<item value="0xE5" name="frost blade (katana)" />
+	<item value="0xE6" name="metal jacket" />
+	<item value="0xE7" name="mega reaper" />
+	<item value="0xE8" name="salamander" />
+	<item value="0xE9" name="gorgon buster" />
+	<item value="0xEA" name="corona wheel" />
+	<item value="0xEB" name="heat cyclone" />
+	<item value="0xEC" name="geo spark" />
+	<item value="0xED" name="soul grapple" />
+	<item value="0xEE" name="reincarnation" />
+	<item value="0xEF" name="phase inversion" />
+	<item value="0xF0" name="dragon wave" />
+	<item value="0xF1" name="ruled heaven" />
+	<item value="0xF2" name="tachyon shot" />
+	<item value="0xF3" name="thorn crown" />
+	<item value="0xF4" name="Star dust" />
+	<item value="0xF5" name="Prism Ray" />
+	<item value="0xF6" name="Muzzle blast" />
+	<item value="0xF7" name="Dark Demon" />
+	<item value="0xF8" name="Expander" />
+	<item value="0xF9" name="Beast Bash" />
+	<item value="0xFA" name="Mirage Round" />
+	<item value="0xFB" name="Absoluate Zero" />
+	<item value="0xFC" name="Blizzard Breath" />
+	<item value="0xFD" name="Hell Napalm" />
+	<item value="0xFE" name="Critical Hit//?" />
+	<item value="0xFF" name="Critical Hit//?" />
+</items>

@@ -14,19 +14,19 @@ namespace SF3.X013_Editor.Models.Specials
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "RSc1/SpecialListS1.xml";
+                _resourceFile = "Resources/S1/Specials.xml";
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "RSc2/SpecialListS2.xml";
+                _resourceFile = "Resources/S2/Specials.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/SpecialList.xml";
+                _resourceFile = "Resources/S3/Specials.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                _resourceFile = "RPD/SpecialListPD.xml";
+                _resourceFile = "Resources/PD/Specials.xml";
             }
         }
 
