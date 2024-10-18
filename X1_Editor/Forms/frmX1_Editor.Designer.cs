@@ -420,41 +420,41 @@ namespace SF3.X1_Editor.Forms
             // tsmiScenario_Scenario1
             // 
             this.tsmiScenario_Scenario1.Name = "tsmiScenario_Scenario1";
-            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(148, 22);
+            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario1.Text = "Scenario 1";
             this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.tsmiScenario_Scenario1_Click);
             // 
             // tsmiScenario_Scenario2
             // 
             this.tsmiScenario_Scenario2.Name = "tsmiScenario_Scenario2";
-            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(148, 22);
+            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario2.Text = "Scenario 2";
             this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.tsmiScenario_Scenario2_Click);
             // 
             // tsmiScenario_Scenario3
             // 
             this.tsmiScenario_Scenario3.Name = "tsmiScenario_Scenario3";
-            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(148, 22);
+            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario3.Text = "Scenario 3";
             this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.tsmiScenario_Scenario3_Click);
             // 
             // tsmiScenario_PremiumDisk
             // 
             this.tsmiScenario_PremiumDisk.Name = "tsmiScenario_PremiumDisk";
-            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(148, 22);
+            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_PremiumDisk.Text = "Premium Disk";
             this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.tsmiScenario_PremiumDisk_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // tsmiScenario_BTL99
             // 
             this.tsmiScenario_BTL99.Name = "tsmiScenario_BTL99";
-            this.tsmiScenario_BTL99.Size = new System.Drawing.Size(148, 22);
-            this.tsmiScenario_BTL99.Text = "BTL99";
+            this.tsmiScenario_BTL99.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_BTL99.Text = "BTL99 Toggle";
             this.tsmiScenario_BTL99.Click += new System.EventHandler(this.tsmiScenario_BTL99_Click);
             // 
             // tsmiMap

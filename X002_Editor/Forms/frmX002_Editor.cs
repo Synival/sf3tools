@@ -18,7 +18,7 @@ namespace SF3.X002_Editor.Forms
         public frmX002_Editor()
         {
             InitializeComponent();
-            BaseTitle = this.Text;
+            BaseTitle = this.Text + " " + Version;
 
             tsmiHelp_Version.Text = "Version " + Version;
 

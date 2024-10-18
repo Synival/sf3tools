@@ -13,16 +13,16 @@ namespace SF3.X019_Editor.Forms
         // Used to display version in the application
         private string Version = "0.13";
 
-        private bool _isPDX044 = false;
+        private bool _isX044 = false;
 
-        public bool IsPDX044
+        public bool IsX044
         {
-            get => _isPDX044;
+            get => _isX044;
             set
             {
-                if (_isPDX044 != value)
+                if (_isX044 != value)
                 {
-                    _isPDX044 = value;
+                    _isX044 = value;
                     UpdateCheckboxes();
                 }
             }
@@ -33,7 +33,7 @@ namespace SF3.X019_Editor.Forms
         public frmX019_Editor()
         {
             InitializeComponent();
-            BaseTitle = this.Text;
+            BaseTitle = this.Text + " " + Version;
 
             this.tsmiHelp_Version.Text = "Version " + Version;
 
@@ -50,9 +50,11 @@ namespace SF3.X019_Editor.Forms
         }
 
 
-        protected override string FileDialogFilter => "SF3 data (X019.bin)|X019.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+        protected override string FileDialogFilter => IsX044
+            ? "SF3 data (X044.bin)|X044.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*"
+            : "SF3 data (X019.bin)|X019.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
 
-        protected override IFileEditor MakeFileEditor() => new X019_FileEditor(Scenario, IsPDX044);
+        protected override IFileEditor MakeFileEditor() => new X019_FileEditor(Scenario, IsX044);
 
         protected override bool OnLoad()
         {
@@ -81,31 +83,31 @@ namespace SF3.X019_Editor.Forms
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario1;
-            IsPDX044 = false;
+            IsX044 = false;
         }
 
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario2;
-            IsPDX044 = false;
+            IsX044 = false;
         }
 
         private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario3;
-            IsPDX044 = false;
+            IsX044 = false;
         }
 
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.PremiumDisk;
-            IsPDX044 = false;
+            IsX044 = false;
         }
 
         private void tsmiScenario_PremiumDiskX044_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.PremiumDisk;
-            IsPDX044 = true;
+            IsX044 = true;
         }
 
         private void UpdateCheckboxes()
@@ -113,8 +115,8 @@ namespace SF3.X019_Editor.Forms
             tsmiScenario_Scenario1.Checked = (Scenario == ScenarioType.Scenario1);
             tsmiScenario_Scenario2.Checked = (Scenario == ScenarioType.Scenario2);
             tsmiScenario_Scenario3.Checked = (Scenario == ScenarioType.Scenario3);
-            tsmiScenario_PremiumDisk.Checked = (Scenario == ScenarioType.PremiumDisk && !IsPDX044);
-            tsmiScenario_PremiumDiskX044.Checked = (Scenario == ScenarioType.PremiumDisk && IsPDX044);
+            tsmiScenario_PremiumDisk.Checked = (Scenario == ScenarioType.PremiumDisk && !IsX044);
+            tsmiScenario_PremiumDiskX044.Checked = (Scenario == ScenarioType.PremiumDisk && IsX044);
         }
     }
 }

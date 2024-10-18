@@ -40,7 +40,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                if (_fileEditor.X026 == true)
+                if (_fileEditor.IsX026 == true)
                 {
                     offset = 0x0a30; //scn1 initial pointer
                     sub = 0x06078000;
@@ -71,7 +71,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                if (_fileEditor.X026 == true)
+                if (_fileEditor.IsX026 == true)
                 {
                     offset = 0x0a1c; //scn2 x026 initial pointer
                     sub = 0x06078000;
@@ -89,7 +89,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
             }
             else if (Scenario == ScenarioType.Scenario3)
             {
-                if (_fileEditor.X026 == true)
+                if (_fileEditor.IsX026 == true)
                 {
                     offset = 0x09cc; //scn2 x026 initial pointer
                     sub = 0x06078000;
@@ -107,7 +107,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                if (_fileEditor.X026 == true)
+                if (_fileEditor.IsX026 == true)
                 {
                     offset = 0x07a0; //pd x026 initial pointer
                     sub = 0x06078000;
@@ -134,7 +134,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
 
             //int start = 0x354c + (id * 24);
 
-            if (_fileEditor.X026 == true && (Scenario == ScenarioType.Scenario1))
+            if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1))
             {
                 int start = offset + (id * 0x02);
                 theSpellIcon = start; //2 bytes  
@@ -169,7 +169,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
         {
             get
             {
-                if (_fileEditor.X026 == true && (Scenario == ScenarioType.Scenario1))
+                if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1))
                 {
                     return _fileEditor.GetWord(theSpellIcon);
                 }
@@ -180,7 +180,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
             }
             set
             {
-                if (_fileEditor.X026 == true && (Scenario == ScenarioType.Scenario1))
+                if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1))
                 {
                     _fileEditor.SetWord(theSpellIcon, value);
                 }
@@ -196,7 +196,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
         {
             get
             {
-                if (_fileEditor.X026 == true && (Scenario == ScenarioType.Scenario1))
+                if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1))
                 {
                     return _fileEditor.GetWord(theSpellIcon) + realOffset;
                 }
@@ -207,7 +207,7 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
             }
             set
             {
-                if (_fileEditor.X026 == true && (Scenario == ScenarioType.Scenario1))
+                if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1))
                 {
                     _fileEditor.SetWord(theSpellIcon, value - realOffset);
                 }

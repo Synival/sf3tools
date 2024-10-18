@@ -11,21 +11,25 @@ namespace SF3.X019_Editor
 {
     public class X019_FileEditor : SF3FileEditor, IX019_FileEditor
     {
-        public X019_FileEditor(ScenarioType scenario, bool isPDX044) : base(scenario)
+        public X019_FileEditor(ScenarioType scenario, bool isX044) : base(scenario)
         {
-            IsPDX044 = isPDX044;
+            IsX044 = isX044;
         }
 
         public override IEnumerable<IModelArray> MakeModelArrays()
         {
             return new List<IModelArray>()
             {
-                (MonsterList = new MonsterList(this, IsPDX044))
+                (MonsterList = new MonsterList(this, IsX044))
             };
         }
 
         public MonsterList MonsterList { get; private set; }
 
-        public bool IsPDX044 { get; }
+        public bool IsX044 { get; }
+
+        protected override string BaseTitle => IsLoaded
+            ? base.BaseTitle + ((Scenario == ScenarioType.PremiumDisk && IsX044) ? " (PD X044)" : "")
+            : base.BaseTitle;
     }
 }

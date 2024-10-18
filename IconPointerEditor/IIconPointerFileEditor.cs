@@ -10,7 +10,7 @@ namespace SF3.IconPointerEditor
 {
     public interface IIconPointerFileEditor : ISF3FileEditor
     {
-        bool X026 { get; }
+        bool IsX026 { get; }
 
         SpellIconList SpellIconList { get; }
         ItemIconList ItemIconList { get; }

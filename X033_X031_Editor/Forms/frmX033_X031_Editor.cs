@@ -61,7 +61,7 @@ namespace SF3.X033_X031_Editor.Forms
         public frmX033_X031_Editor()
         {
             InitializeComponent();
-            BaseTitle = this.Text;
+            BaseTitle = this.Text + " " + Version;
 
             this.tsmiHelp_Version.Text = "Version " + Version;
 

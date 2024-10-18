@@ -26,6 +26,7 @@
 
 ### X019 Editor
 - Premium Disk X044.BIN should now load properly again
+- Updated 'File -> Open...' and 'File -> Save As...' dialogs to show all files editable without changing the dropdown
 
 ### X033/X031 Editor
 - Added 'File -> Copy Tables From...' to copy table between X033 and X031 files

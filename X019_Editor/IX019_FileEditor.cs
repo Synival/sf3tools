@@ -10,6 +10,6 @@ namespace SF3.X019_Editor
     public interface IX019_FileEditor : ISF3FileEditor
     {
         MonsterList MonsterList { get; }
-        bool IsPDX044 { get; }
+        bool IsX044 { get; }
     }
 }

@@ -131,7 +131,7 @@ namespace SF3.X1_Editor
         }
 
         protected override string BaseTitle => IsLoaded
-            ? base.BaseTitle + " (Map: " + MapLeader.ToString() + ") (Type: " + (IsBattle ? "Battle" : "Town") + ")"
+            ? base.BaseTitle + " (Map: " + MapLeader.ToString() + ") (Type: " + (IsBTL99 ? "BTL99" : IsBattle ? "Battle" : "Town") + ")"
             : base.BaseTitle;
 
         private MapLeaderType _mapLeader;

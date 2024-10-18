@@ -245,41 +245,41 @@
             // tsmiScenario_Scenario1
             // 
             this.tsmiScenario_Scenario1.Name = "tsmiScenario_Scenario1";
-            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(175, 22);
+            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario1.Text = "Scenario 1";
             this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.tsmiScenario_Scenario1_Click);
             // 
             // tsmiScenario_Scenario2
             // 
             this.tsmiScenario_Scenario2.Name = "tsmiScenario_Scenario2";
-            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(175, 22);
+            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario2.Text = "Scenario 2";
             this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.tsmiScenario_Scenario2_Click);
             // 
             // tsmiScenario_Scenario3
             // 
             this.tsmiScenario_Scenario3.Name = "tsmiScenario_Scenario3";
-            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(175, 22);
+            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_Scenario3.Text = "Scenario 3";
             this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.tsmiScenario_Scenario3_Click);
             // 
             // tsmiScenario_PremiumDisk
             // 
             this.tsmiScenario_PremiumDisk.Name = "tsmiScenario_PremiumDisk";
-            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(175, 22);
+            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(180, 22);
             this.tsmiScenario_PremiumDisk.Text = "Premium Disk";
             this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.tsmiScenario_PremiumDisk_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(172, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
             // 
             // tsmiScenario_PremiumDiskX044
             // 
             this.tsmiScenario_PremiumDiskX044.Name = "tsmiScenario_PremiumDiskX044";
-            this.tsmiScenario_PremiumDiskX044.Size = new System.Drawing.Size(175, 22);
-            this.tsmiScenario_PremiumDiskX044.Text = "Premium disk X044";
+            this.tsmiScenario_PremiumDiskX044.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_PremiumDiskX044.Text = "Premium Disk X044";
             this.tsmiScenario_PremiumDiskX044.Click += new System.EventHandler(this.tsmiScenario_PremiumDiskX044_Click);
             // 
             // tabMonsterTab1

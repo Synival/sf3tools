@@ -13,9 +13,9 @@ namespace SF3.IconPointerEditor
 {
     public class IconPointerFileEditor : SF3FileEditor, IIconPointerFileEditor
     {
-        public IconPointerFileEditor(ScenarioType scenario, bool x026) : base(scenario)
+        public IconPointerFileEditor(ScenarioType scenario, bool isX026) : base(scenario)
         {
-            X026 = x026;
+            IsX026 = isX026;
         }
 
         public override IEnumerable<IModelArray> MakeModelArrays()
@@ -27,7 +27,7 @@ namespace SF3.IconPointerEditor
             };
         }
 
-        public bool X026 { get; }
+        public bool IsX026 { get; }
 
         [BulkCopyRecurse]
         public SpellIconList SpellIconList { get; private set; }
@@ -36,7 +36,7 @@ namespace SF3.IconPointerEditor
         public ItemIconList ItemIconList { get; private set; }
 
         protected override string BaseTitle => IsLoaded
-            ? base.BaseTitle + (X026 ? " (X026)" : "")
+            ? base.BaseTitle + (IsX026 ? " (X026)" : "")
             : base.BaseTitle;
     }
 }

@@ -15,15 +15,15 @@ namespace SF3.IconPointerEditor.Forms
 
         new public IIconPointerFileEditor FileEditor => base.FileEditor as IIconPointerFileEditor;
 
-        private bool _x026 = false;
+        private bool _isX026 = false;
 
-        public bool X026
+        public bool IsX026
         {
-            get => _x026;
+            get => _isX026;
             set
             {
-                _x026 = value;
-                tsmiHelp_X026Toggle.Checked = _x026;
+                _isX026 = value;
+                tsmiHelp_X026Toggle.Checked = _isX026;
                 UpdateTitle();
             }
         }
@@ -31,11 +31,11 @@ namespace SF3.IconPointerEditor.Forms
         public frmIconPointerEditor()
         {
             InitializeComponent();
-            BaseTitle = this.Text;
+            BaseTitle = this.Text + " " + Version;
 
             tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
-            X026 = false;
+            IsX026 = false;
 
             EventHandler onScenarioChanged = (obj, eargs) =>
             {
@@ -58,9 +58,11 @@ namespace SF3.IconPointerEditor.Forms
             FinalizeForm();
         }
 
-        protected override string FileDialogFilter => "SF3 data (X011.bin;X021.bin;X026.bin)|X011.bin;X021.bin;X026.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+        protected override string FileDialogFilter => IsX026
+            ? "SF3 data (X026.bin)|X026.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*"
+            : "SF3 data (X011.bin;X021.bin)|X011.bin;X021.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
 
-        protected override IFileEditor MakeFileEditor() => new IconPointerFileEditor(Scenario, X026);
+        protected override IFileEditor MakeFileEditor() => new IconPointerFileEditor(Scenario, IsX026);
 
         protected override bool OnLoad()
         {
@@ -84,7 +86,7 @@ namespace SF3.IconPointerEditor.Forms
         private void tsmiFile_CopyTablesFrom_Click(object sender, EventArgs e) => CopyTablesFrom();
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
 
-        private void tsmiHelp_X026Toggle_Click(object sender, EventArgs e) => X026 = !X026;
+        private void tsmiHelp_X026Toggle_Click(object sender, EventArgs e) => IsX026 = !IsX026;
 
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario1;
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;

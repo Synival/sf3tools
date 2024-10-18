@@ -48,7 +48,7 @@ namespace SF3.X1_Editor.Forms
         public frmX1_Editor()
         {
             InitializeComponent();
-            BaseTitle = this.Text;
+            BaseTitle = this.Text + " " + Version;
 
             this.tsmiHelp_Version.Text = "Version " + Version;
             Scenario = ScenarioType.Scenario1;
@@ -74,7 +74,9 @@ namespace SF3.X1_Editor.Forms
             FinalizeForm();
         }
 
-        protected override string FileDialogFilter => "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+        protected override string FileDialogFilter => IsBTL99
+            ? "SF3 data (X1BTL99.bin)|X1BTL99.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*"
+            : "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
 
         protected override IFileEditor MakeFileEditor() => new X1_FileEditor(Scenario, MapLeader, IsBTL99);
 
@@ -120,25 +122,37 @@ namespace SF3.X1_Editor.Forms
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario1;
-            MapLeader = MapLeaderType.Synbios;
+            if (!IsBTL99)
+            {
+                MapLeader = MapLeaderType.Synbios;
+            }
         }
 
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario2;
-            MapLeader = MapLeaderType.Medion;
+            if (!IsBTL99)
+            {
+                MapLeader = MapLeaderType.Medion;
+            }
         }
 
         private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario3;
-            MapLeader = MapLeaderType.Julian;
+            if (!IsBTL99)
+            {
+                MapLeader = MapLeaderType.Julian;
+            }
         }
 
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.PremiumDisk;
-            MapLeader = MapLeaderType.Synbios;
+            if (!IsBTL99)
+            {
+                MapLeader = MapLeaderType.Synbios;
+            }
         }
 
         private void tsmiScenario_BTL99_Click(object sender, EventArgs e)
