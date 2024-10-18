@@ -22,7 +22,7 @@ namespace SF3.Values
 
         private static readonly Dictionary<NamedValue, string> _comboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SexValue(value));
 
-        public SexValue(int value) : base(HexValueWithName(value, ValueNames), value)
+        public SexValue(int value) : base(NameOrHexValue(value, ValueNames), HexValueWithName(value, ValueNames), value)
         {
         }
 

@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using SF3.Types;
 using SF3.Attributes;
+using SF3.Values;
 
 namespace SF3.IconPointerEditor.Models.SpellIcons
 {
@@ -162,7 +163,9 @@ namespace SF3.IconPointerEditor.Models.SpellIcons
         public int ID => index;
 
         [BulkCopyRowName]
-        public string Name => name;
+        public string IconName => name;
+
+        public string SpellName => new SpellValue(Scenario, ID).Name;
 
         [BulkCopy]
         public int TheSpellIcon

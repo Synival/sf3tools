@@ -54,7 +54,7 @@ namespace SF3.Values
 
         private static readonly Dictionary<NamedValue, string> _comboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new WeaponTypeValue(value));
 
-        public WeaponTypeValue(int value) : base(HexValueWithName(value, ValueNames), value)
+        public WeaponTypeValue(int value) : base(NameOrHexValue(value, ValueNames), HexValueWithName(value, ValueNames), value)
         {
         }
 

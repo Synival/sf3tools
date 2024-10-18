@@ -63,6 +63,7 @@
             this.lvcSpellIconAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellIconOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellIconViewOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellIconSpellName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.menuStrip1.SuspendLayout();
             this.tabItemIcons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvItemIcons)).BeginInit();
@@ -200,28 +201,28 @@
             // tsmiScenario_Scenario1
             // 
             this.tsmiScenario_Scenario1.Name = "tsmiScenario_Scenario1";
-            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(148, 22);
             this.tsmiScenario_Scenario1.Text = "Scenario 1";
             this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.tsmiScenario_Scenario1_Click);
             // 
             // tsmiScenario_Scenario2
             // 
             this.tsmiScenario_Scenario2.Name = "tsmiScenario_Scenario2";
-            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(148, 22);
             this.tsmiScenario_Scenario2.Text = "Scenario 2";
             this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.tsmiScenario_Scenario2_Click);
             // 
             // tsmiScenario_Scenario3
             // 
             this.tsmiScenario_Scenario3.Name = "tsmiScenario_Scenario3";
-            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(148, 22);
             this.tsmiScenario_Scenario3.Text = "Scenario 3";
             this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.tsmiScenario_Scenario3_Click);
             // 
             // tsmiScenario_PremiumDisk
             // 
             this.tsmiScenario_PremiumDisk.Name = "tsmiScenario_PremiumDisk";
-            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(180, 22);
+            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(148, 22);
             this.tsmiScenario_PremiumDisk.Text = "Premium Disk";
             this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.tsmiScenario_PremiumDisk_Click);
             // 
@@ -321,6 +322,7 @@
             // olvSpellIcons
             // 
             this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconName);
+            this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconSpellName);
             this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconHexID);
             this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconAddress);
             this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconOffset);
@@ -332,6 +334,7 @@
             this.olvSpellIcons.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvSpellIcons.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcSpellIconName,
+            this.lvcSpellIconSpellName,
             this.lvcSpellIconHexID,
             this.lvcSpellIconAddress,
             this.lvcSpellIconOffset,
@@ -353,9 +356,9 @@
             // 
             // lvcSpellIconName
             // 
-            this.lvcSpellIconName.AspectName = "Name";
+            this.lvcSpellIconName.AspectName = "IconName";
             this.lvcSpellIconName.IsEditable = false;
-            this.lvcSpellIconName.Text = "Name";
+            this.lvcSpellIconName.Text = "Icon Name";
             this.lvcSpellIconName.Width = 120;
             // 
             // lvcSpellIconHexID
@@ -387,6 +390,13 @@
             this.lvcSpellIconViewOffset.AspectToStringFormat = "{0:X}";
             this.lvcSpellIconViewOffset.Text = "Offset in file for viewing";
             this.lvcSpellIconViewOffset.Width = 130;
+            // 
+            // lvcSpellIconSpellName
+            // 
+            this.lvcSpellIconSpellName.AspectName = "SpellName";
+            this.lvcSpellIconSpellName.IsEditable = false;
+            this.lvcSpellIconSpellName.Text = "Spell Name";
+            this.lvcSpellIconSpellName.Width = 120;
             // 
             // frmIconPointerEditor
             // 
@@ -446,5 +456,6 @@
         private System.Windows.Forms.ToolStripSeparator tsSeparator_Help1;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_CopyTablesFrom;
         private System.Windows.Forms.ToolStripSeparator tsSeparator_File3;
+        private BrightIdeasSoftware.OLVColumn lvcSpellIconSpellName;
     }
 }

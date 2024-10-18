@@ -11,6 +11,26 @@ namespace SF3.Utils
     public static class Utils
     {
         /// <summary>
+        /// Returns a string with the name in a name dictionary or, if it's not available, the value in hex format.
+        /// </summary>
+        /// <param name="value">Value for which a string should be generated</param>
+        /// <param name="nameDict">Dictionary with possible names for 'value'</param>
+        /// <param name="hexDigits">Number of digits for the hexideimcal portion of the return string</param>
+        /// <returns>
+        /// If no name available:
+        ///     {0:X[hexDigits]}
+        /// If value name available:
+        ///     {name}
+        /// </returns>
+        public static string NameOrHexValue(int value, Dictionary<int, string> nameDict, int hexDigits = 2)
+        {
+            string name;
+            return nameDict.TryGetValue(value, out name)
+                ? name
+                : value.ToString("X" + hexDigits.ToString());
+        }
+
+        /// <summary>
         /// Returns a string with a stringified hex value followed by a value name if available in a dictionary.
         /// </summary>
         /// <param name="value">Value for which a string should be generated</param>
@@ -20,14 +40,14 @@ namespace SF3.Utils
         /// If no name available:
         ///     {0:X[hexDigits]}
         /// If value name available:
-        ///     {0:X[hexDigits]: [name]
+        ///     {0:X[hexDigits]}: {name}
         /// </returns>
         public static string HexValueWithName(int value, Dictionary<int, string> nameDict, int hexDigits = 2)
         {
             var valueStr = value.ToString("X" + hexDigits.ToString());
-            string className;
-            return nameDict.TryGetValue(value, out className)
-                ? valueStr + ": " + className
+            string name;
+            return nameDict.TryGetValue(value, out name)
+                ? valueStr + ": " + name
                 : valueStr;
         }
 
@@ -44,7 +64,7 @@ namespace SF3.Utils
             for (int i = minValue; i < maxValue; i++)
             {
                 var value = factoryFunc(i);
-                dict.Add(value, value.Name);
+                dict.Add(value, value.ValueName);
             }
             return dict;
         }

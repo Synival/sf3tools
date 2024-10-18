@@ -54,12 +54,12 @@ namespace SF3.Values
             return new Dictionary<NamedValue, string>(
                 dict.Select(x => {
                     var mv = x.Key as MonsterValue;
-                    return new KeyValuePair<NamedValue, string>(new MonsterValue(mv.Scenario, mv.IsX044, mv.Value, true), mv.Name);
+                    return new KeyValuePair<NamedValue, string>(new MonsterValue(mv.Scenario, mv.IsX044, mv.Value, true), mv.ValueName);
                 })
                 .ToDictionary(x => x.Key, x => x.Value)
             )
             {
-                { newValue, newValue.Name }
+                { newValue, newValue.ValueName }
             };
         }
 
@@ -86,11 +86,14 @@ namespace SF3.Values
         // --------------------------------------------------------------------------------
 
         public MonsterValue(ScenarioType scenario, bool isX044, int value, bool withFFFF)
-        : base(HexValueWithName(
-            value,
-            withFFFF
+        : base(
+            NameOrHexValue(value, withFFFF
                 ? (scenario == ScenarioType.PremiumDisk && isX044) ? ValueNamesPDX044_WithFFFF : ValueNames_WithFFFF[scenario]
-                : (scenario == ScenarioType.PremiumDisk && isX044) ? ValueNamesPDX044 : ValueNames[scenario]), value)
+                : (scenario == ScenarioType.PremiumDisk && isX044) ? ValueNamesPDX044 : ValueNames[scenario]),
+            HexValueWithName(value, withFFFF
+                ? (scenario == ScenarioType.PremiumDisk && isX044) ? ValueNamesPDX044_WithFFFF : ValueNames_WithFFFF[scenario]
+                : (scenario == ScenarioType.PremiumDisk && isX044) ? ValueNamesPDX044 : ValueNames[scenario]),
+            value)
         {
             Scenario = scenario;
             IsX044 = isX044;

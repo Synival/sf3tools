@@ -31,7 +31,7 @@ namespace SF3.Values
             { ScenarioType.PremiumDisk, MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SpellValue(ScenarioType.PremiumDisk, value)) },
         };
 
-        public SpellValue(ScenarioType scenario, int value) : base(HexValueWithName(value, ValueNames[scenario]), value)
+        public SpellValue(ScenarioType scenario, int value) : base(NameOrHexValue(value, ValueNames[scenario]), HexValueWithName(value, ValueNames[scenario]), value)
         {
             Scenario = scenario;
         }

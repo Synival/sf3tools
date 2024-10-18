@@ -10,21 +10,38 @@ namespace SF3
     /// </summary>
     public abstract class NamedValue : IComparable, IComparable<NamedValue>
     {
-        public NamedValue(string name, int value)
+        public NamedValue(string name, string valueName, int value)
         {
             _name = name;
+            _valueName = valueName;
             _value = value;
         }
 
+        /// <summary>
+        /// Returns a dictionary with possible values and names for display and modifying the value in a ComboBox.
+        /// </summary>
         public abstract Dictionary<NamedValue, string> ComboBoxValues { get; }
 
-        public override string ToString() => Name;
-
-        public string Name => _name;
-        public int Value => _value;
+        public override string ToString() => ValueName;
 
         private readonly string _name;
+        private readonly string _valueName;
         private readonly int _value;
+
+        /// <summary>
+        /// The name of the value.
+        /// </summary>
+        public string Name => _name;
+
+        /// <summary>
+        /// Combination of value + name.
+        /// </summary>
+        public string ValueName => _valueName;
+
+        /// <summary>
+        /// Value represented.
+        /// </summary>
+        public int Value => _value;
 
         static public bool operator <(NamedValue lhs, NamedValue rhs) => lhs.Value < rhs.Value;
         static public bool operator >(NamedValue lhs, NamedValue rhs) => lhs.Value > rhs.Value;

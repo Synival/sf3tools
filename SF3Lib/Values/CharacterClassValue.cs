@@ -133,7 +133,7 @@ namespace SF3.Values
 
         private static readonly Dictionary<NamedValue, string> _comboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new CharacterClassValue(value));
 
-        public CharacterClassValue(int value) : base(HexValueWithName(value, ValueNames), value)
+        public CharacterClassValue(int value) : base(NameOrHexValue(value, ValueNames), HexValueWithName(value, ValueNames), value)
         {
         }
 
