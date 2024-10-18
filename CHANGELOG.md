@@ -10,6 +10,8 @@
     - Spells
     - Items
     - Monsters
+    - Specials
+    - Item Stat Types
 - Fixes to some incorrect spell and items names:
     - Scn1+2 MultipleTargetLaser -> BreathOfWind
     - Misty Rapier and Magic Rapier were sometimes swapped
