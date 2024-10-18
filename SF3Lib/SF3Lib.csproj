@@ -94,6 +94,7 @@
     <Compile Include="Types\StatType.cs" />
     <Compile Include="Utils\Utils.cs" />
     <Compile Include="Values\CharacterClassValue.cs" />
+    <Compile Include="Values\CharacterValue.cs" />
     <Compile Include="Values\ItemValue.cs" />
     <Compile Include="Values\MonsterValue.cs" />
     <Compile Include="Values\SpellValue.cs" />
@@ -101,16 +102,28 @@
     <Compile Include="Values\WeaponTypeValue.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\PD\Characters.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\PD\Monsters.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PD\Monsters_X044.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\S1\Characters.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\S1\Monsters.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\S2\Characters.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\S2\Monsters.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S3\Characters.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S3\Items.xml">

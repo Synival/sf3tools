@@ -14,19 +14,19 @@ namespace SF3.X013_Editor.Models.SupportTypes
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "RSc1/charactersS1.xml";
+                _resourceFile = "Resources/S1/Characters.xml";
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "RSc2/charactersS2.xml";
+                _resourceFile = "Resources/S2/Characters.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/characters.xml";
+                _resourceFile = "Resources/S3/Characters.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                _resourceFile = "RPD/charactersPD.xml";
+                _resourceFile = "Resources/PD/Characters.xml";
             }
         }
 

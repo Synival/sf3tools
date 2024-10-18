@@ -66,6 +66,7 @@ namespace SF3.Editor.Extensions
             // ObjectListView needs exact types, so register each value manually.
             // TODO: a super-cool reflection version would be amazing.
             RegisterNamedValue<CharacterClassValue>();
+            RegisterNamedValue<CharacterValue>();
             RegisterNamedValue<ItemValue>();
             RegisterNamedValue<MonsterValue>();
             RegisterNamedValue<SexValue>();
