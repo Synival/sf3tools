@@ -34,7 +34,7 @@ namespace SF3.X033_X031_Editor.Forms
     public partial class frmX033_X031_Editor : EditorForm
     {
         // Used to display version in the application
-        private string Version = "0.19";
+        private string Version = "0.20";
 
         new public IX033_X031_FileEditor FileEditor => base.FileEditor as IX033_X031_FileEditor;
 

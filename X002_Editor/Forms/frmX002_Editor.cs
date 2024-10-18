@@ -11,7 +11,7 @@ namespace SF3.X002_Editor.Forms
     public partial class frmX002_Editor : EditorForm
     {
         // Used to display version in the application
-        private string Version = "0.20";
+        private string Version = "0.21";
 
         new public IX002_FileEditor FileEditor => base.FileEditor as IX002_FileEditor;
 

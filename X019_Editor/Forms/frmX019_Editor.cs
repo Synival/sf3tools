@@ -11,7 +11,7 @@ namespace SF3.X019_Editor.Forms
     public partial class frmX019_Editor : EditorForm
     {
         // Used to display version in the application
-        private string Version = "0.12";
+        private string Version = "0.13";
 
         private bool _isPDX044 = false;
 
