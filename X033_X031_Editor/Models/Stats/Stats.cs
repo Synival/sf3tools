@@ -1034,87 +1034,87 @@ namespace SF3.X033_X031_Editor.Models.Stats
         }
 
         [BulkCopy]
-        public int Weapon1Special1
+        public SpecialValue Weapon1Special1
         {
-            get => _fileEditor.GetByte(weapon1Special1);
-            set => _fileEditor.SetByte(weapon1Special1, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon1Special1));
+            set => _fileEditor.SetByte(weapon1Special1, (byte)value.Value);
         }
 
         [BulkCopy]
-        public int Weapon1Special2
+        public SpecialValue Weapon1Special2
         {
-            get => _fileEditor.GetByte(weapon1Special2);
-            set => _fileEditor.SetByte(weapon1Special2, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon1Special2));
+            set => _fileEditor.SetByte(weapon1Special2, (byte)value.Value);
         }
 
         [BulkCopy]
-        public int Weapon1Special3
+        public SpecialValue Weapon1Special3
         {
-            get => _fileEditor.GetByte(weapon1Special3);
-            set => _fileEditor.SetByte(weapon1Special3, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon1Special3));
+            set => _fileEditor.SetByte(weapon1Special3, (byte)value.Value);
         }
 
         [BulkCopy]
-        public int Weapon2Special1
+        public SpecialValue Weapon2Special1
         {
-            get => _fileEditor.GetByte(weapon2Special1);
-            set => _fileEditor.SetByte(weapon2Special1, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon2Special1));
+            set => _fileEditor.SetByte(weapon2Special1, (byte)value.Value);
         }
 
         [BulkCopy]
-        public int Weapon2Special2
+        public SpecialValue Weapon2Special2
         {
-            get => _fileEditor.GetByte(weapon2Special2);
-            set => _fileEditor.SetByte(weapon2Special2, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon2Special2));
+            set => _fileEditor.SetByte(weapon2Special2, (byte)value.Value);
         }
 
         [BulkCopy]
-        public int Weapon2Special3
+        public SpecialValue Weapon2Special3
         {
-            get => _fileEditor.GetByte(weapon2Special3);
-            set => _fileEditor.SetByte(weapon2Special3, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon2Special3));
+            set => _fileEditor.SetByte(weapon2Special3, (byte)value.Value);
         }
 
         [BulkCopy]
-        public int Weapon3Special1
+        public SpecialValue Weapon3Special1
         {
-            get => _fileEditor.GetByte(weapon3Special1);
-            set => _fileEditor.SetByte(weapon3Special1, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon3Special1));
+            set => _fileEditor.SetByte(weapon3Special1, (byte)value.Value);
         }
 
         [BulkCopy]
-        public int Weapon3Special2
+        public SpecialValue Weapon3Special2
         {
-            get => _fileEditor.GetByte(weapon3Special2);
-            set => _fileEditor.SetByte(weapon3Special2, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon3Special2));
+            set => _fileEditor.SetByte(weapon3Special2, (byte)value.Value);
         }
 
         [BulkCopy]
-        public int Weapon3Special3
+        public SpecialValue Weapon3Special3
         {
-            get => _fileEditor.GetByte(weapon3Special3);
-            set => _fileEditor.SetByte(weapon3Special3, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon3Special3));
+            set => _fileEditor.SetByte(weapon3Special3, (byte)value.Value);
         }
 
         [BulkCopy]
-        public int Weapon4Special1
+        public SpecialValue Weapon4Special1
         {
-            get => _fileEditor.GetByte(weapon4Special1);
-            set => _fileEditor.SetByte(weapon4Special1, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon4Special1));
+            set => _fileEditor.SetByte(weapon4Special1, (byte)value.Value);
         }
 
         [BulkCopy]
-        public int Weapon4Special2
+        public SpecialValue Weapon4Special2
         {
-            get => _fileEditor.GetByte(weapon4Special2);
-            set => _fileEditor.SetByte(weapon4Special2, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon4Special2));
+            set => _fileEditor.SetByte(weapon4Special2, (byte)value.Value);
         }
 
         [BulkCopy]
-        public int Weapon4Special3
+        public SpecialValue Weapon4Special3
         {
-            get => _fileEditor.GetByte(weapon4Special3);
-            set => _fileEditor.SetByte(weapon4Special3, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon4Special3));
+            set => _fileEditor.SetByte(weapon4Special3, (byte)value.Value);
         }
 
         [BulkCopy]

@@ -387,56 +387,64 @@ namespace SF3.X019_Editor.Models.Monsters
             set => _fileEditor.SetWord(itemSlot4, value.Value);
         }
 
-        public int Special1
+        public SpecialValue Special1
         {
-            get => _fileEditor.GetByte(enemySpecial1);
-            set => _fileEditor.SetByte(enemySpecial1, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(enemySpecial1));
+            set => _fileEditor.SetByte(enemySpecial1, (byte)value.Value);
         }
 
-        public int Special2
+        public SpecialValue Special2
         {
-            get => _fileEditor.GetByte(enemySpecial2);
-            set => _fileEditor.SetByte(enemySpecial2, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(enemySpecial2));
+            set => _fileEditor.SetByte(enemySpecial2, (byte)value.Value);
         }
-        public int Special3
+
+        public SpecialValue Special3
         {
-            get => _fileEditor.GetByte(enemySpecial3);
-            set => _fileEditor.SetByte(enemySpecial3, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(enemySpecial3));
+            set => _fileEditor.SetByte(enemySpecial3, (byte)value.Value);
         }
-        public int Special4
+
+        public SpecialValue Special4
         {
-            get => _fileEditor.GetByte(enemySpecial4);
-            set => _fileEditor.SetByte(enemySpecial4, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(enemySpecial4));
+            set => _fileEditor.SetByte(enemySpecial4, (byte)value.Value);
         }
-        public int Special5
+
+        public SpecialValue Special5
         {
-            get => _fileEditor.GetByte(enemySpecial5);
-            set => _fileEditor.SetByte(enemySpecial5, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(enemySpecial5));
+            set => _fileEditor.SetByte(enemySpecial5, (byte)value.Value);
         }
-        public int Special6
+
+        public SpecialValue Special6
         {
-            get => _fileEditor.GetByte(enemySpecial6);
-            set => _fileEditor.SetByte(enemySpecial6, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(enemySpecial6));
+            set => _fileEditor.SetByte(enemySpecial6, (byte)value.Value);
         }
-        public int Special7
+
+        public SpecialValue Special7
         {
-            get => _fileEditor.GetByte(enemySpecial7);
-            set => _fileEditor.SetByte(enemySpecial7, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(enemySpecial7));
+            set => _fileEditor.SetByte(enemySpecial7, (byte)value.Value);
         }
-        public int Special8
+
+        public SpecialValue Special8
         {
-            get => _fileEditor.GetByte(enemySpecial8);
-            set => _fileEditor.SetByte(enemySpecial8, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(enemySpecial8));
+            set => _fileEditor.SetByte(enemySpecial8, (byte)value.Value);
         }
-        public int Special9
+
+        public SpecialValue Special9
         {
-            get => _fileEditor.GetByte(enemySpecial9);
-            set => _fileEditor.SetByte(enemySpecial9, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(enemySpecial9));
+            set => _fileEditor.SetByte(enemySpecial9, (byte)value.Value);
         }
-        public int Special10
+
+        public SpecialValue Special10
         {
-            get => _fileEditor.GetByte(enemySpecial10);
-            set => _fileEditor.SetByte(enemySpecial10, (byte)value);
+            get => new SpecialValue(Scenario, _fileEditor.GetByte(enemySpecial10));
+            set => _fileEditor.SetByte(enemySpecial10, (byte)value.Value);
         }
 
         public int Unknown1
