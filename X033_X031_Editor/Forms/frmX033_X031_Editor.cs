@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Windows.Forms;
 using BrightIdeasSoftware;
 using System.Collections.Generic;
 using SF3.Types;
-using SF3.Exceptions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
-using SF3.Utils;
-using System.IO;
 
 namespace SF3.X033_X031_Editor.Forms
 {
@@ -132,6 +128,7 @@ namespace SF3.X033_X031_Editor.Forms
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();
         private void tsmiFile_Close_Click(object sender, EventArgs e) => CloseFile();
+        private void tsmiFile_CopyTablesFrom_Click(object sender, EventArgs e) => CopyTablesFrom();
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
 
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario1;
@@ -290,74 +287,6 @@ namespace SF3.X033_X031_Editor.Forms
                     range2Series.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].AtPercentages[0], dataPoint.ProbableStats[statType].AtPercentages[3]);
                 }
             }
-        }
-
-        private void tsmiFile_CopyTablesFrom_Click(object sender, EventArgs e)
-        {
-            if (FileEditor == null)
-            {
-                return;
-            }
-
-            ObjectListViews.ForEach(x => x.FinishCellEdit());
-
-            var openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Copy Tables From";
-            openFileDialog.Filter = FileDialogFilter;
-            if (openFileDialog.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
-            var copyFromFilename = openFileDialog.FileName;
-
-            var copyFileEditor = new X033_X031_FileEditor(Scenario);
-            if (!copyFileEditor.LoadFile(copyFromFilename))
-            {
-                MessageBox.Show("Error trying to load file. It is probably in use by another process.");
-                return;
-            }
-
-            string copyReport = "";
-            try
-            {
-                var result = copyFileEditor.BulkCopyProperties(FileEditor);
-                ObjectListViews.ForEach(x => x.RefreshAllItems());
-
-                copyReport += result.MakeSummaryReport();
-
-                // Output summary files.
-                var fullReport = result.MakeFullReport();
-                if (fullReport != "")
-                {
-                    try
-                    {
-                        File.WriteAllText("BulkCopyReport.txt", fullReport);
-                        copyReport += "\n\nDetailed reports dumped to 'BulkCopyReport.txt'.";
-                    }
-                    catch
-                    {
-                        copyReport += "\n\nError: Couldn't dump detailed report to 'BulkCopyReport.txt'.";
-                    }
-                }
-            }
-            catch (System.Reflection.TargetInvocationException)
-            {
-                //wrong file was selected
-                MessageBox.Show("Failed to read file:\n" +
-                                "    " + copyFromFilename);
-                return;
-            }
-            catch (FileEditorReadException)
-            {
-                //wrong file was selected
-                MessageBox.Show("Data appears corrupt or invalid:\n" +
-                                "    " + copyFromFilename + "\n\n" +
-                                "Is this the correct type of file?");
-                return;
-            }
-
-            // Show the user a nice report.
-            MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyReport);
         }
     }
 }

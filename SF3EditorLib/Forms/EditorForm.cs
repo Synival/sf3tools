@@ -1,7 +1,9 @@
 ﻿using BrightIdeasSoftware;
+using SF3.Editor.Extensions;
 using SF3.Exceptions;
 using SF3.Extensions;
 using SF3.Types;
+using SF3.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -157,6 +159,77 @@ namespace SF3.Editor.Forms
             FileEditor.CloseFile();
             FileEditor = null;
             return true;
+        }
+
+        /// <summary>
+        /// Opens a dialog to perform a bulk copy of tables from another .BIN file.
+        /// </summary>
+        public void CopyTablesFrom()
+        {
+            if (FileEditor == null)
+            {
+                return;
+            }
+
+            ObjectListViews.ForEach(x => x.FinishCellEdit());
+
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Copy Tables From";
+            openFileDialog.Filter = FileDialogFilter;
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            var copyFromFilename = openFileDialog.FileName;
+
+            var copyFileEditor = MakeFileEditor();
+            if (!copyFileEditor.LoadFile(copyFromFilename))
+            {
+                MessageBox.Show("Error trying to load file. It is probably in use by another process.");
+                return;
+            }
+
+            string copyReport = "";
+            try
+            {
+                var result = copyFileEditor.BulkCopyProperties(FileEditor);
+                ObjectListViews.ForEach(x => x.RefreshAllItems());
+
+                copyReport += result.MakeSummaryReport();
+
+                // Output summary files.
+                var fullReport = result.MakeFullReport();
+                if (fullReport != "")
+                {
+                    try
+                    {
+                        File.WriteAllText("BulkCopyReport.txt", fullReport);
+                        copyReport += "\n\nDetailed reports dumped to 'BulkCopyReport.txt'.";
+                    }
+                    catch
+                    {
+                        copyReport += "\n\nError: Couldn't dump detailed report to 'BulkCopyReport.txt'.";
+                    }
+                }
+            }
+            catch (System.Reflection.TargetInvocationException)
+            {
+                //wrong file was selected
+                MessageBox.Show("Failed to read file:\n" +
+                                "    " + copyFromFilename);
+                return;
+            }
+            catch (FileEditorReadException)
+            {
+                //wrong file was selected
+                MessageBox.Show("Data appears corrupt or invalid:\n" +
+                                "    " + copyFromFilename + "\n\n" +
+                                "Is this the correct type of file?");
+                return;
+            }
+
+            // Show the user a nice report.
+            MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyReport);
         }
 
         /// <summary>
