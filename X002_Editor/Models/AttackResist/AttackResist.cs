@@ -28,7 +28,6 @@ namespace SF3.X002_Editor.Models.AttackResist
             else if (Scenario == ScenarioType.Scenario2)
             {
                 offset = 0x00000d15; //scn2
-
                 if (checkVersion2 == 0x2C)
                 {
                     offset = offset - 0x40;

@@ -36,6 +36,10 @@ namespace SF3.X002_Editor.Models.MusicOverride
             if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x0000527a; //scn1
+                if (checkVersion2 == 0x10) //original jp
+                {
+                    offset -= 0x0C;
+                }
             }
             else if (Scenario == ScenarioType.Scenario2)
             {

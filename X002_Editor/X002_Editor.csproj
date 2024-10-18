@@ -88,7 +88,7 @@
     <Compile Include="Models\Preset\Preset.cs" />
     <Compile Include="Models\Preset\PresetList.cs" />
     <Compile Include="Models\Spells\SpellList.cs" />
-    <Compile Include="Models\Spells\Spells.cs" />
+    <Compile Include="Models\Spells\Spell.cs" />
     <Compile Include="Models\StatBoost\Stat.cs" />
     <Compile Include="Models\StatBoost\StatList.cs" />
     <Compile Include="Program.cs" />

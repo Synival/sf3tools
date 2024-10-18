@@ -17,6 +17,7 @@ namespace SF3.X002_Editor.Models.Warps
         private int address;
         //private int npcOffset;
         private int offset;
+        private int checkVersion2;
         private int sub;
 
         private int index;
@@ -36,11 +37,16 @@ namespace SF3.X002_Editor.Models.Warps
         {
             _fileEditor = fileEditor;
 
-            //no scn1 for this
+            checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
+            //only scn1 for this
             if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x000053cc; //scn1
+                if (checkVersion2 == 0x10) //original jp
+                {
+                    offset -= 0x0C;
+                }
             }
 
             index = id;

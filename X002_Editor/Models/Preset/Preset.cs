@@ -28,6 +28,10 @@ namespace SF3.X002_Editor.Models.Presets
             if (Scenario == ScenarioType.Scenario1)
             {
                 offset = 0x00004738; //scn1
+                if (checkVersion2 == 0x10) //original jp
+                {
+                    offset -= 0x0C;
+                }
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
