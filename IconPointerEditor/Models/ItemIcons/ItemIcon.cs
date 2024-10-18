@@ -11,6 +11,7 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
         private int theItemIcon;
 
         private int offset;
+        private int checkVersion2;
         private int address;
 
         private int index;
@@ -21,11 +22,17 @@ namespace SF3.IconPointerEditor.Models.ItemIcons
         {
             _fileEditor = fileEditor;
 
+            checkVersion2 = _fileEditor.GetByte(0x0000000B);
+
             if (Scenario == ScenarioType.Scenario1)
             {
                 if (_fileEditor.IsX026 == true)
                 {
                     offset = 0x08f0; //scn1 initial pointer
+                    if (checkVersion2 == 0x98) //original jp
+                    {
+                        offset = 0x0a30;
+                    }
                     sub = 0x06078000;
                 }
                 else
