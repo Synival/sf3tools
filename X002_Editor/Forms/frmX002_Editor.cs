@@ -57,7 +57,7 @@ namespace SF3.X002_Editor.Forms
             }
         }
 
-        protected override string FileDialogFilter => "SF3 scn3 data (X002.bin)|X002.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+        protected override string FileDialogFilter => "SF3 data (X002.bin)|X002.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
 
         protected override IFileEditor MakeFileEditor() => new X002_FileEditor(Scenario);
 

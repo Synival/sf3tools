@@ -390,24 +390,24 @@
             // tsmiHelp_Version
             // 
             this.tsmiHelp_Version.Name = "tsmiHelp_Version";
-            this.tsmiHelp_Version.Size = new System.Drawing.Size(297, 22);
+            this.tsmiHelp_Version.Size = new System.Drawing.Size(299, 22);
             this.tsmiHelp_Version.Text = "Version (set internally)";
             // 
             // tsmiHelp_X031forInCombatEtc
             // 
             this.tsmiHelp_X031forInCombatEtc.Name = "tsmiHelp_X031forInCombatEtc";
-            this.tsmiHelp_X031forInCombatEtc.Size = new System.Drawing.Size(297, 22);
-            this.tsmiHelp_X031forInCombatEtc.Text = "x031 for incombat, x033 for out of combat";
+            this.tsmiHelp_X031forInCombatEtc.Size = new System.Drawing.Size(299, 22);
+            this.tsmiHelp_X031forInCombatEtc.Text = "X031 for incombat, X033 for out of combat";
             // 
             // tsSeparator_Help1
             // 
             this.tsSeparator_Help1.Name = "tsSeparator_Help1";
-            this.tsSeparator_Help1.Size = new System.Drawing.Size(294, 6);
+            this.tsSeparator_Help1.Size = new System.Drawing.Size(296, 6);
             // 
             // tsmiHelp_DebugCurve
             // 
             this.tsmiHelp_DebugCurve.Name = "tsmiHelp_DebugCurve";
-            this.tsmiHelp_DebugCurve.Size = new System.Drawing.Size(297, 22);
+            this.tsmiHelp_DebugCurve.Size = new System.Drawing.Size(299, 22);
             this.tsmiHelp_DebugCurve.Text = "Debug Curve";
             this.tsmiHelp_DebugCurve.Click += new System.EventHandler(this.tsmiHelp_DebugCurve_Click);
             // 
