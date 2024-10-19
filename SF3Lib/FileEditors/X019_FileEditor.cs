@@ -1,14 +1,9 @@
-﻿using SF3.FileEditors;
-using SF3.Models;
+﻿using SF3.Models;
 using SF3.Types;
-using SF3.X019_Editor.Models.Monsters;
-using System;
+using SF3.Models.X019.Monsters;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SF3.X019_Editor.FileEditors
+namespace SF3.FileEditors
 {
     public class X019_FileEditor : SF3FileEditor, IX019_FileEditor
     {

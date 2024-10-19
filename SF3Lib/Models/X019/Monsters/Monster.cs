@@ -1,8 +1,8 @@
 ﻿using SF3.Types;
 using SF3.Values;
-using SF3.X019_Editor.FileEditors;
+using SF3.FileEditors;
 
-namespace SF3.X019_Editor.Models.Monsters
+namespace SF3.Models.X019.Monsters
 {
     public class Monster
     {

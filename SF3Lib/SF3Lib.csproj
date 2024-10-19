@@ -84,13 +84,17 @@
     <Compile Include="FileEditors\IFileEditor.cs" />
     <Compile Include="FileEditors\IIconPointerFileEditor.cs" />
     <Compile Include="FileEditors\ISF3FileEditor.cs" />
+    <Compile Include="FileEditors\IX019_FileEditor.cs" />
     <Compile Include="FileEditors\IX033_X031_FileEditor.cs" />
+    <Compile Include="FileEditors\X019_FileEditor.cs" />
     <Compile Include="FileEditors\X033_X031_FileEditor.cs" />
     <Compile Include="Models\IconPointerEditor\ItemIcons\ItemIcon.cs" />
     <Compile Include="Models\IconPointerEditor\ItemIcons\ItemIconList.cs" />
     <Compile Include="Models\IconPointerEditor\SpellIcons\SpellIcon.cs" />
     <Compile Include="Models\IconPointerEditor\SpellIcons\SpellIconList.cs" />
     <Compile Include="Models\ModelArray.cs" />
+    <Compile Include="Models\X019\Monsters\Monster.cs" />
+    <Compile Include="Models\X019\Monsters\MonsterList.cs" />
     <Compile Include="Models\X033_X031\InitialInfo\InitialInfo.cs" />
     <Compile Include="Models\X033_X031\InitialInfo\InitialInfoList.cs" />
     <Compile Include="Models\X033_X031\Stats\Stats.cs" />
