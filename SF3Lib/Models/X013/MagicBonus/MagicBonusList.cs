@@ -14,19 +14,19 @@ namespace SF3.Models.X013.MagicBonus
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "RSc1/magicBonusS1.xml";
+                _resourceFile = "Resources/S1/MagicBonus.xml";
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "RSc2/magicBonusS2.xml";
+                _resourceFile = "Resources/S2/MagicBonus.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/magicBonus.xml";
+                _resourceFile = "Resources/S3/MagicBonus.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                _resourceFile = "RPD/magicBonusPD.xml";
+                _resourceFile = "Resources/PD/MagicBonus.xml";
             }
         }
 
