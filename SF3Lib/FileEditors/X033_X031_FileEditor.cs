@@ -1,17 +1,12 @@
 ﻿using SF3.Attributes;
-using SF3.FileEditors;
 using SF3.Models;
 using SF3.Types;
-using SF3.X033_X031_Editor.Models.InitialInfos;
-using SF3.X033_X031_Editor.Models.Stats;
-using SF3.X033_X031_Editor.Models.WeaponLevel;
-using System;
+using SF3.Models.X033_X031.InitialInfos;
+using SF3.Models.X033_X031.Stats;
+using SF3.Models.X033_X031.WeaponLevel;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SF3.X033_X031_Editor.FileEditors
+namespace SF3.FileEditors
 {
     public class X033_X031_FileEditor : SF3FileEditor, IX033_X031_FileEditor
     {

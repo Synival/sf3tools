@@ -1,14 +1,18 @@
 ﻿using SF3.Attributes;
 using SF3.Types;
 using SF3.Values;
-using SF3.X033_X031_Editor.FileEditors;
+using SF3.FileEditors;
 using System;
-using static SF3.X033_X031_Editor.Forms.frmX033_X031_Editor;
 
-namespace SF3.X033_X031_Editor.Models.Stats
+namespace SF3.Models.X033_X031.Stats
 {
     public class Stats
     {
+        /// <summary>
+        /// When enabled, GetAverageStatGrowthPerLevelAsPercent() will show the "growthValue" in its output
+        /// </summary>
+        public static bool DebugGrowthValues { get; set; } = false;
+
         public enum PromotionLevelType
         {
             Unpromoted = 0,
@@ -444,7 +448,7 @@ namespace SF3.X033_X031_Editor.Models.Stats
         public string GetAverageStatGrowthPerLevelAsPercent(StatType stat, int groupIndex)
         {
             var growthValue = SF3.Stats.GetStatGrowthValuePerLevel(GetStatGrowthRange(stat, groupIndex).Range, SF3.Stats.StatGrowthGroups[IsPromoted][groupIndex].Range.Range);
-            return (Debugs.debugs ? string.Format("{0:x}", growthValue) + " || " : "") +
+            return (DebugGrowthValues ? string.Format("{0:x}", growthValue) + " || " : "") +
                     SF3.Stats.GetAverageStatGrowthPerLevelAsPercent(growthValue);
         }
 

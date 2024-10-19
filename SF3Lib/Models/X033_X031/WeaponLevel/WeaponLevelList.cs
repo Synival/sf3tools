@@ -3,39 +3,21 @@ using System.Xml;
 using System.IO;
 using SF3.Models;
 using SF3.Types;
-using SF3.X033_X031_Editor.FileEditors;
+using SF3.FileEditors;
 
-namespace SF3.X033_X031_Editor.Models.Stats
+namespace SF3.Models.X033_X031.WeaponLevel
 {
-    public class StatsList : ModelArray<Stats>
+    public class WeaponLevelList : ModelArray<WeaponLevel>
     {
-        public StatsList(IX033_X031_FileEditor fileEditor) : base(fileEditor)
+        public WeaponLevelList(IX033_X031_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
-
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                _resourceFile = "RSc1/classListS1.xml";
-            }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                _resourceFile = "RSc2/classListS2.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                _resourceFile = "Resources/classList.xml";
-            }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                _resourceFile = "RPD/classListPD.xml";
-            }
         }
 
-        private string _resourceFile;
         private IX033_X031_FileEditor _fileEditor;
-        private Stats[] stats;
+        private WeaponLevel[] items;
 
-        public override string ResourceFile => _resourceFile;
+        public override string ResourceFile => "Resources/WeaponLevel.xml";
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
@@ -43,8 +25,8 @@ namespace SF3.X033_X031_Editor.Models.Stats
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load()
         {
-            _models = new Stats[0];
-            stats = new Stats[300]; //max size of itemList
+            _models = new WeaponLevel[0];
+            items = new WeaponLevel[2]; //max size of itemList
             FileStream stream = null;
             try
             {
@@ -55,18 +37,18 @@ namespace SF3.X033_X031_Editor.Models.Stats
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Stats[] old;
+                WeaponLevel[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Stats[_models.Length];
+                        old = new WeaponLevel[_models.Length];
                         _models.CopyTo(old, 0);
-                        _models = new Stats[old.Length + 1];
+                        _models = new WeaponLevel[old.Length + 1];
                         old.CopyTo(_models, 0);
-                        _models[old.Length] = new Stats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        stats[_models[old.Length].ID] = _models[old.Length];
+                        _models[old.Length] = new WeaponLevel(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].WeaponLevelID] = _models[old.Length];
                     }
                 }
             }
@@ -87,6 +69,5 @@ namespace SF3.X033_X031_Editor.Models.Stats
             }
             return true;
         }
-
     }
 }

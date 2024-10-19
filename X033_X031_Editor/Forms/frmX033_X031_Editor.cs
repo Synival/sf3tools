@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using SF3.Types;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
-using SF3.X033_X031_Editor.FileEditors;
 using SF3.FileEditors;
 
 namespace SF3.X033_X031_Editor.Forms
@@ -88,11 +87,6 @@ namespace SF3.X033_X031_Editor.Forms
             FinalizeForm();
         }
 
-        public static class Debugs
-        {
-            public static bool debugs = false;
-        }
-
         protected override string FileDialogFilter => "SF3 data (X033.bin;X031.bin)|X033.bin;X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
 
         protected override IFileEditor MakeFileEditor() => new X033_X031_FileEditor(Scenario);
@@ -140,8 +134,8 @@ namespace SF3.X033_X031_Editor.Forms
 
         private void tsmiHelp_DebugCurve_Click(object sender, EventArgs e)
         {
-            Debugs.debugs = !Debugs.debugs;
-            tsmiHelp_DebugCurve.Checked = Debugs.debugs;
+            Models.X033_X031.Stats.Stats.DebugGrowthValues = !Models.X033_X031.Stats.Stats.DebugGrowthValues;
+            tsmiHelp_DebugCurve.Checked = Models.X033_X031.Stats.Stats.DebugGrowthValues;
         }
 
         private void tabMain_Click(object sender, EventArgs e)
@@ -164,7 +158,7 @@ namespace SF3.X033_X031_Editor.Forms
 
             // Get the stats model for the selected character.
             int index = cbCurveGraphCharacter.SelectedIndex;
-            Models.Stats.Stats stats = (index >= 0 && index < FileEditor.StatsList.Models.Length) ? FileEditor.StatsList.Models[index] : null;
+            Models.X033_X031.Stats.Stats stats = (index >= 0 && index < FileEditor.StatsList.Models.Length) ? FileEditor.StatsList.Models[index] : null;
 
             // We'll need to use some different values depending on the promotion level.
             int promotionLevel = (int?)stats?.PromotionLevel ?? 0;

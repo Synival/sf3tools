@@ -1,8 +1,8 @@
 ﻿using SF3.Attributes;
 using SF3.Types;
-using SF3.X033_X031_Editor.FileEditors;
+using SF3.FileEditors;
 
-namespace SF3.X033_X031_Editor.Models.WeaponLevel
+namespace SF3.Models.X033_X031.WeaponLevel
 {
     public class WeaponLevel
     {
