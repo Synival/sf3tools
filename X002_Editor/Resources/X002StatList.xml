@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
-  <item value="0x00" name="Power Wine" />
-  <item value="0x04" name="Protect Milk" />
-  <item value="0x08" name="Quick Chiken" />
-  <item value="0x14" name="Nimble Onion" />
-  <item value="0x18" name="Lucky Cookie" />
-  <item value="0x28" name="Health Bread" />
-  <item value="0x2c" name="Brain Food" />
- 
+	<item value="0x00" name="Power Wine" />
+	<item value="0x04" name="Protect Milk" />
+	<item value="0x08" name="Quick Chiken" />
+	<item value="0x14" name="Nimble Onion" />
+	<item value="0x18" name="Lucky Cookie" />
+	<item value="0x28" name="Health Bread" />
+	<item value="0x2c" name="Brain Food" />
 </items>

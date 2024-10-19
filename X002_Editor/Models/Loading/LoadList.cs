@@ -15,19 +15,19 @@ namespace SF3.X002_Editor.Models.Loading
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "RSc1/loadListS1.xml";
+                _resourceFile = "RSc1/LoadList.xml";
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "RSc2/loadListS2.xml";
+                _resourceFile = "RSc2/LoadList.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/loadList.xml";
+                _resourceFile = "Resources/LoadList.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                _resourceFile = "RPD/loadListPD.xml";
+                _resourceFile = "RPD/LoadList.xml";
             }
         }
 

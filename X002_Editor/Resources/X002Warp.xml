@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
-
 	<item value="0x00" name="WarpIndex0" />
 	<item value="0x01" name="WarpIndex1" />
 	<item value="0x02" name="WarpIndex2" />
@@ -11,71 +10,71 @@
 	<item value="0x07" name="WarpIndex7" />
 	<item value="0x08" name="WarpIndex8" />
 	<item value="0x09" name="WarpIndex9" />
-  <item value="0x0A" name="WarpIndex10" />
-  <item value="0x0B" name="WarpIndex11" />
-  <item value="0x0C" name="WarpIndex12" />
-  <item value="0x0D" name="WarpIndex13" />
-  <item value="0x0E" name="WarpIndex14" />
-  <item value="0x0F" name="WarpIndex15" />
-  <item value="0x10" name="WarpIndex16" />
-  <item value="0x11" name="WarpIndex17" />
-  <item value="0x12" name="WarpIndex18" />
-  <item value="0x13" name="WarpIndex19" />
-  <item value="0x14" name="WarpIndex20" />
-  <item value="0x15" name="WarpIndex21" />
-  <item value="0x16" name="WarpIndex22" />
-  <item value="0x17" name="WarpIndex23" />
-  <item value="0x18" name="WarpIndex24" />
-  <item value="0x19" name="WarpIndex25" />
-  <item value="0x1A" name="WarpIndex26" />
-  <item value="0x1B" name="WarpIndex27" />
-  <item value="0x1C" name="WarpIndex28" />
-  <item value="0x1D" name="WarpIndex29" />
-  <item value="0x1E" name="WarpIndex30" />
-  <item value="0x1F" name="WarpIndex31" />
-  <item value="0x20" name="WarpIndex32" />
-  <item value="0x21" name="WarpIndex33" />
-  <item value="0x22" name="WarpIndex34" />
-  <item value="0x23" name="WarpIndex35" />
-  <item value="0x24" name="WarpIndex36" />
-  <item value="0x25" name="WarpIndex37" />
-  <item value="0x26" name="WarpIndex38" />
-  <item value="0x27" name="WarpIndex39" />
-  <item value="0x28" name="WarpIndex40" />
-  <item value="0x29" name="WarpIndex41" />
-  <item value="0x2A" name="WarpIndex42" />
-  <item value="0x2B" name="WarpIndex43" />
-  <item value="0x2C" name="WarpIndex44" />
-  <item value="0x2D" name="WarpIndex45" />
-  <item value="0x2E" name="WarpIndex46" />
-  <item value="0x2F" name="WarpIndex47" />
-  <item value="0x30" name="WarpIndex48" />
-  <item value="0x31" name="WarpIndex49" />
-  <item value="0x32" name="WarpIndex50" />
-  <item value="0x33" name="WarpIndex51" />
-  <item value="0x34" name="WarpIndex52" />
-  <item value="0x35" name="WarpIndex53" />
-  <item value="0x36" name="WarpIndex54" />
-  <item value="0x37" name="WarpIndex55" />
-  <item value="0x38" name="WarpIndex56" />
-  <item value="0x39" name="WarpIndex57" />
-  <item value="0x3A" name="WarpIndex58" />
-  <item value="0x3B" name="WarpIndex59" />
-  <item value="0x3C" name="WarpIndex60" />
-  <item value="0x3D" name="WarpIndex61" />
-  <item value="0x3E" name="WarpIndex62" />
-  <item value="0x3F" name="WarpIndex63" />
-  <item value="0x40" name="WarpIndex64" />
-  <item value="0x41" name="WarpIndex65" />
-  <item value="0x42" name="WarpIndex66" />
-  <item value="0x43" name="WarpIndex67" />
-  <item value="0x44" name="WarpIndex68" />
-  <item value="0x45" name="WarpIndex69" />
-  <item value="0x46" name="WarpIndex70" />
-  <item value="0x47" name="WarpIndex71" />
-  <item value="0x48" name="WarpIndex72" />
-  <item value="0x49" name="WarpIndex73" />
-  <item value="0x4a" name="WarpIndex74" />
+	<item value="0x0A" name="WarpIndex10" />
+	<item value="0x0B" name="WarpIndex11" />
+	<item value="0x0C" name="WarpIndex12" />
+	<item value="0x0D" name="WarpIndex13" />
+	<item value="0x0E" name="WarpIndex14" />
+	<item value="0x0F" name="WarpIndex15" />
+	<item value="0x10" name="WarpIndex16" />
+	<item value="0x11" name="WarpIndex17" />
+	<item value="0x12" name="WarpIndex18" />
+	<item value="0x13" name="WarpIndex19" />
+	<item value="0x14" name="WarpIndex20" />
+	<item value="0x15" name="WarpIndex21" />
+	<item value="0x16" name="WarpIndex22" />
+	<item value="0x17" name="WarpIndex23" />
+	<item value="0x18" name="WarpIndex24" />
+	<item value="0x19" name="WarpIndex25" />
+	<item value="0x1A" name="WarpIndex26" />
+	<item value="0x1B" name="WarpIndex27" />
+	<item value="0x1C" name="WarpIndex28" />
+	<item value="0x1D" name="WarpIndex29" />
+	<item value="0x1E" name="WarpIndex30" />
+	<item value="0x1F" name="WarpIndex31" />
+	<item value="0x20" name="WarpIndex32" />
+	<item value="0x21" name="WarpIndex33" />
+	<item value="0x22" name="WarpIndex34" />
+	<item value="0x23" name="WarpIndex35" />
+	<item value="0x24" name="WarpIndex36" />
+	<item value="0x25" name="WarpIndex37" />
+	<item value="0x26" name="WarpIndex38" />
+	<item value="0x27" name="WarpIndex39" />
+	<item value="0x28" name="WarpIndex40" />
+	<item value="0x29" name="WarpIndex41" />
+	<item value="0x2A" name="WarpIndex42" />
+	<item value="0x2B" name="WarpIndex43" />
+	<item value="0x2C" name="WarpIndex44" />
+	<item value="0x2D" name="WarpIndex45" />
+	<item value="0x2E" name="WarpIndex46" />
+	<item value="0x2F" name="WarpIndex47" />
+	<item value="0x30" name="WarpIndex48" />
+	<item value="0x31" name="WarpIndex49" />
+	<item value="0x32" name="WarpIndex50" />
+	<item value="0x33" name="WarpIndex51" />
+	<item value="0x34" name="WarpIndex52" />
+	<item value="0x35" name="WarpIndex53" />
+	<item value="0x36" name="WarpIndex54" />
+	<item value="0x37" name="WarpIndex55" />
+	<item value="0x38" name="WarpIndex56" />
+	<item value="0x39" name="WarpIndex57" />
+	<item value="0x3A" name="WarpIndex58" />
+	<item value="0x3B" name="WarpIndex59" />
+	<item value="0x3C" name="WarpIndex60" />
+	<item value="0x3D" name="WarpIndex61" />
+	<item value="0x3E" name="WarpIndex62" />
+	<item value="0x3F" name="WarpIndex63" />
+	<item value="0x40" name="WarpIndex64" />
+	<item value="0x41" name="WarpIndex65" />
+	<item value="0x42" name="WarpIndex66" />
+	<item value="0x43" name="WarpIndex67" />
+	<item value="0x44" name="WarpIndex68" />
+	<item value="0x45" name="WarpIndex69" />
+	<item value="0x46" name="WarpIndex70" />
+	<item value="0x47" name="WarpIndex71" />
+	<item value="0x48" name="WarpIndex72" />
+	<item value="0x49" name="WarpIndex73" />
+	<item value="0x4a" name="WarpIndex74" />
 	<item value="0x4b" name="WarpIndex75" />
 	<item value="0x4c" name="WarpIndex76" />
 	<item value="0x4d" name="WarpIndex77" />

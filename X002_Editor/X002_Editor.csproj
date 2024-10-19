@@ -125,13 +125,13 @@
     <Content Include="Resources\AttackResistList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\loadList.xml">
+    <Content Include="Resources\LoadList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\musicOverrideList.xml">
+    <Content Include="Resources\MusicOverrideList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\spellIndexList.xml">
+    <Content Include="Resources\SpellIndexList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\X002StatList.xml">
@@ -143,31 +143,31 @@
     <Content Include="Resources\X002Warp.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="RPD\loadListPD.xml">
+    <Content Include="RPD\LoadList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="RPD\musicOverrideListPD.xml">
+    <Content Include="RPD\MusicOverrideList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="RPD\spellIndexListPD.xml">
+    <Content Include="RPD\SpellIndexList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="RSc1\loadListS1.xml">
+    <Content Include="RSc1\LoadList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="RSc1\musicOverrideListS1.xml">
+    <Content Include="RSc1\MusicOverrideList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="RSc1\spellIndexListS1.xml">
+    <Content Include="RSc1\SpellIndexList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="RSc2\loadListS2.xml">
+    <Content Include="RSc2\LoadList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="RSc2\musicOverrideListS2.xml">
+    <Content Include="RSc2\MusicOverrideList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="RSc2\spellIndexListS2.xml">
+    <Content Include="RSc2\SpellIndexList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
