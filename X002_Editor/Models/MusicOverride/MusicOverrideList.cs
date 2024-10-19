@@ -15,19 +15,19 @@ namespace SF3.X002_Editor.Models.MusicOverride
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "RSc1/MusicOverrideList.xml";
+                _resourceFile = "Resources/S1/MusicOverrideList.xml";
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "RSc2/MusicOverrideList.xml";
+                _resourceFile = "Resources/S2/MusicOverrideList.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/MusicOverrideList.xml";
+                _resourceFile = "Resources/S3/MusicOverrideList.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                _resourceFile = "RPD/MusicOverrideList.xml";
+                _resourceFile = "Resources/PD/MusicOverrideList.xml";
             }
         }
 

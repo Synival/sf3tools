@@ -15,19 +15,19 @@ namespace SF3.X002_Editor.Models.Presets
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "RSc1/SpellIndexList.xml";
+                _resourceFile = "Resources/S1/SpellIndexList.xml";
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "RSc2/SpellIndexList.xml";
+                _resourceFile = "Resources/S2/SpellIndexList.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/SpellIndexList.xml";
+                _resourceFile = "Resources/S3/SpellIndexList.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                _resourceFile = "RPD/SpellIndexList.xml";
+                _resourceFile = "Resources/PD/SpellIndexList.xml";
             }
         }
 
