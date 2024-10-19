@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="0x00" name="-" />
+    <item value="0x01" name="Item" />
+    <item value="0x0A" name="Dagger" />
+    <item value="0x0B" name="Sword" />
+    <item value="0x0C" name="Rapier" />
+    <item value="0x0D" name="Blade" />
+    <item value="0x0E" name="Katana" />
+    <item value="0x0F" name="Wing" />
+    <item value="0x14" name="Lance" />
+    <item value="0x15" name="Spear" />
+    <item value="0x16" name="Halberd" />
+    <item value="0x1E" name="Axe" />
+    <item value="0x1F" name="Tomahawk" />
+    <item value="0x20" name="Mace" />
+    <item value="0x21" name="Anchor" />
+    <item value="0x32" name="Claw" />
+    <item value="0x33" name="Glove" />
+    <item value="0x34" name="Knuckle" />
+    <item value="0x3C" name="Rod" />
+    <item value="0x3D" name="Wand" />
+    <item value="0x3E" name="Ankh" />
+    <item value="0x3F" name="Elbesem Staff" />
+    <item value="0x46" name="Bow" />
+    <item value="0x47" name="Crossbow" />
+    <item value="0x48" name="Shell" />
+    <item value="0x4A" name="Shuriken" />
+    <item value="0x50" name="Beak" />
+    <item value="0x51" name="Horn" />
+    <item value="0x52" name="Talon" />
+    <item value="0x5A" name="Whip" />
+    <item value="0x7A" name="Bracer" />
+    <item value="0x7B" name="Circlet/Tiara" />
+    <item value="0x7C" name="Ninja Bowl" />
+    <item value="0x81" name="Ring/Accessory" />
+</items>

@@ -204,6 +204,9 @@
     <Content Include="Resources\BattlePointersList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\WeaponTypes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Sexes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
