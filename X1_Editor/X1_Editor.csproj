@@ -58,34 +58,8 @@
     <Compile Include="Forms\frmX1_Editor.Designer.cs">
       <DependentUpon>frmX1_Editor.cs</DependentUpon>
     </Compile>
-    <Compile Include="FileEditors\IX1_FileEditor.cs" />
-    <Compile Include="Models\Arrow\Arrow.cs" />
-    <Compile Include="Models\Arrow\ArrowList.cs" />
-    <Compile Include="Models\BattlePointers\BattlePointers.cs" />
-    <Compile Include="Models\BattlePointers\BattlePointersList.cs" />
-    <Compile Include="Models\CustomMovement\CustomMovement.cs" />
-    <Compile Include="Models\CustomMovement\CustomMovementList.cs" />
-    <Compile Include="Models\Enter\Enter.cs" />
-    <Compile Include="Models\Enter\EnterList.cs" />
-    <Compile Include="Models\Npc\Npc.cs" />
-    <Compile Include="Models\Npc\NpcList.cs" />
-    <Compile Include="Models\TileMovement\Tile.cs" />
-    <Compile Include="Models\TileMovement\TileList.cs" />
-    <Compile Include="Models\Treasure\Treasure.cs" />
-    <Compile Include="Models\Treasure\TreasureList.cs" />
-    <Compile Include="Models\SpawnZones\SpawnZone.cs" />
-    <Compile Include="Models\SpawnZones\SpawnZoneList.cs" />
-    <Compile Include="Models\Slots\Slot.cs" />
-    <Compile Include="Models\Slots\SlotList.cs" />
-    <Compile Include="Models\Headers\Header.cs" />
-    <Compile Include="Models\Headers\HeaderList.cs" />
-    <Compile Include="Models\AI\AIList.cs" />
-    <Compile Include="Models\AI\AI.cs" />
-    <Compile Include="Models\Warp\Warp.cs" />
-    <Compile Include="Models\Warp\WarpList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FileEditors\X1_FileEditor.cs" />
     <EmbeddedResource Include="Forms\frmX1_Editor.resx">
       <DependentUpon>frmX1_Editor.cs</DependentUpon>
       <SubType>Designer</SubType>

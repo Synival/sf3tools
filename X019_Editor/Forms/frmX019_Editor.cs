@@ -6,7 +6,6 @@ using SF3.Editor.Forms;
 using SF3.Editor.Extensions;
 using static SF3.Editor.Extensions.TabControlExtensions;
 using SF3.FileEditors;
-using SF3.FileEditors;
 
 namespace SF3.X019_Editor.Forms
 {

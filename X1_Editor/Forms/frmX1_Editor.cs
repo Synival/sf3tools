@@ -6,7 +6,6 @@ using SF3.Editor.Forms;
 using SF3.Editor.Extensions;
 using static SF3.Editor.Extensions.TabControlExtensions;
 using SF3.FileEditors;
-using SF3.X1_Editor.FileEditors;
 
 namespace SF3.X1_Editor.Forms
 {
@@ -116,11 +115,6 @@ namespace SF3.X1_Editor.Forms
         private void tsmiFile_Close_Click(object sender, EventArgs e) => CloseFile();
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
 
-        public static class Globals
-        {
-            public static bool treasureDebug = false;
-        }
-
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
         {
             Scenario = ScenarioType.Scenario1;
@@ -173,9 +167,9 @@ namespace SF3.X1_Editor.Forms
 
         private void tsmiHelp_TreasureDebugToggle_Click(object sender, EventArgs e)
         {
-            Globals.treasureDebug = !Globals.treasureDebug;
-            tsmiHelp_TreasureDebugToggle.Checked = Globals.treasureDebug;
-            tsmiHelp_TreasureDebugToggle.Text = "treasureDebug toggle: " + (Globals.treasureDebug ? "on" : "off");
+            Models.X1.Treasures.TreasureList.Debug = !Models.X1.Treasures.TreasureList.Debug;
+            tsmiHelp_TreasureDebugToggle.Checked = Models.X1.Treasures.TreasureList.Debug;
+            tsmiHelp_TreasureDebugToggle.Text = "treasureDebug toggle: " + (Models.X1.Treasures.TreasureList.Debug ? "on" : "off");
         }
     }
 }
