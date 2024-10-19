@@ -54,11 +54,13 @@ namespace SF3.Editor.Extensions
             }
         }
 
-        private static void RegisterNamedValue<T>() =>
+        private static void RegisterNamedValue<T>()
+        {
             ObjectListView.EditorRegistry.Register(
                 typeof(T),
                 (object model, OLVColumn column, object value) => Utils.MakeNamedValueComboBox((value as NamedValue).ComboBoxValues)
             );
+        }
 
         /// <summary>
         /// Performs ObjectListView.EditorRegistry.Register() for all SF3 NamedValues.
@@ -76,7 +78,7 @@ namespace SF3.Editor.Extensions
             var methodBase = typeof(ObjectListViewExtensions).GetMethod(nameof(RegisterNamedValue), BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
             foreach (var nvt in namedValueTypes)
             {
-                var method = methodBase.MakeGenericMethod(typeof(CharacterClassValue));
+                var method = methodBase.MakeGenericMethod(nvt);
                 method.Invoke(null, null);
             }
         }
