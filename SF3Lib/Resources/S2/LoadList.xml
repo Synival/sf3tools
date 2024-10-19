@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
-	
+    
   <item value="0x00" name="Measurement Test" />
-  <item value="0x01" name="ShopTest" />	
+  <item value="0x01" name="ShopTest" />    
   <item value="0x02" name="OPMOVIE" />
   <item value="0x03" name="LOGO" />
   <item value="0x04" name="DREAM" />

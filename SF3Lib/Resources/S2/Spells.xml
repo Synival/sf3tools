@@ -1,64 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
-	<item value="0x00" name="--" />
-	<item value="0x01" name="Blaze" />
-	<item value="0x02" name="Freeze" />
-	<item value="0x03" name="Spark" />
-	<item value="0x04" name="Tornado" />
-	<item value="0x05" name="Soul Steal" />
-	<item value="0x06" name="Inferno" />
-	<item value="0x07" name="Support" />
-	<item value="0x08" name="Slow" />
-	<item value="0x09" name="Shining" />
-	<item value="0x0A" name="Resist" />
-	<item value="0x0B" name="Attack" />
-	<item value="0x0C" name="Dispel" />
-	<item value="0x0D" name="Confuse" />
-	<item value="0x0E" name="Sleep" />
-	<item value="0x0F" name="Charm" />
-	<item value="0x10" name="Drain" />
-	<item value="0x11" name="Heal" />
-	<item value="0x12" name="Aura" />
-	<item value="0x13" name="Chant" />
-	<item value="0x14" name="Antidote" />
-	<item value="0x15" name="Return" />
-	<item value="0x16" name="Heal item" />
-	<item value="0x17" name="MP heal item?" />
-	<item value="0x18" name="StatusHeal item?" />
-	<item value="0x19" name="AngelWing?" />
-	<item value="0x1A" name="Raise1" />
-	<item value="0x1B" name="Raise2" />
-	<item value="0x1C" name="Raise3" />
-	<item value="0x1D" name="LevelUp" />
-	<item value="0x1E" name="BreathOfFire" />
-	<item value="0x1F" name="BreathOfIce" />
-	<item value="0x20" name="BreathOfThunder" />
-	<item value="0x21" name="BreathOfWind" />
-	<item value="0x22" name="BreathOfDemon" />
-	<item value="0x23" name="BreatheOfWater" />
-	<item value="0x24" name="BreathOfAcid" />
-	<item value="0x25" name="CounjureChaos" />
-	<item value="0x26" name="Phoenix" />
-	<item value="0x27" name="Wendigo" />
-	<item value="0x28" name="Tiamat" />
-	<item value="0x29" name="Thantanos" />
-	<item value="0x2A" name="RageIncreaseAttack" />
-	<item value="0x2B" name="Meat" />
-	<item value="0x2C" name="Elbesem Orb" />
-	<item value="0x2D" name="Titan Laser" />
-	<item value="0x2E" name="Titan Punch" />
-	<item value="0x2F" name="Titan Attack" />
-	<item value="0x30" name="Panic and confusion" />
-	<item value="0x31" name="Violently Shakes ground" />
-	<item value="0x32" name="Boulder" />
-	<item value="0x33" name="DivineCaneUse" />
-	<item value="0x34" name="Thor" />
-	<item value="0x35" name="Zephyrus" />
-	<item value="0x36" name="Golem" />
-	<item value="0x37" name="Hell Dragon" />
-	<item value="0x38" name="BreathWithBubbles" />
-	<item value="0x39" name="Ink" />
-	<item value="0x3A" name="Tamed" />
-	<item value="0x3B" name="Fakecharm?" />
-	<item value="0x3C" name="CoreMagic?" />
+    <item value="0x00" name="--" />
+    <item value="0x01" name="Blaze" />
+    <item value="0x02" name="Freeze" />
+    <item value="0x03" name="Spark" />
+    <item value="0x04" name="Tornado" />
+    <item value="0x05" name="Soul Steal" />
+    <item value="0x06" name="Inferno" />
+    <item value="0x07" name="Support" />
+    <item value="0x08" name="Slow" />
+    <item value="0x09" name="Shining" />
+    <item value="0x0A" name="Resist" />
+    <item value="0x0B" name="Attack" />
+    <item value="0x0C" name="Dispel" />
+    <item value="0x0D" name="Confuse" />
+    <item value="0x0E" name="Sleep" />
+    <item value="0x0F" name="Charm" />
+    <item value="0x10" name="Drain" />
+    <item value="0x11" name="Heal" />
+    <item value="0x12" name="Aura" />
+    <item value="0x13" name="Chant" />
+    <item value="0x14" name="Antidote" />
+    <item value="0x15" name="Return" />
+    <item value="0x16" name="Heal item" />
+    <item value="0x17" name="MP heal item?" />
+    <item value="0x18" name="StatusHeal item?" />
+    <item value="0x19" name="AngelWing?" />
+    <item value="0x1A" name="Raise1" />
+    <item value="0x1B" name="Raise2" />
+    <item value="0x1C" name="Raise3" />
+    <item value="0x1D" name="LevelUp" />
+    <item value="0x1E" name="BreathOfFire" />
+    <item value="0x1F" name="BreathOfIce" />
+    <item value="0x20" name="BreathOfThunder" />
+    <item value="0x21" name="BreathOfWind" />
+    <item value="0x22" name="BreathOfDemon" />
+    <item value="0x23" name="BreatheOfWater" />
+    <item value="0x24" name="BreathOfAcid" />
+    <item value="0x25" name="CounjureChaos" />
+    <item value="0x26" name="Phoenix" />
+    <item value="0x27" name="Wendigo" />
+    <item value="0x28" name="Tiamat" />
+    <item value="0x29" name="Thantanos" />
+    <item value="0x2A" name="RageIncreaseAttack" />
+    <item value="0x2B" name="Meat" />
+    <item value="0x2C" name="Elbesem Orb" />
+    <item value="0x2D" name="Titan Laser" />
+    <item value="0x2E" name="Titan Punch" />
+    <item value="0x2F" name="Titan Attack" />
+    <item value="0x30" name="Panic and confusion" />
+    <item value="0x31" name="Violently Shakes ground" />
+    <item value="0x32" name="Boulder" />
+    <item value="0x33" name="DivineCaneUse" />
+    <item value="0x34" name="Thor" />
+    <item value="0x35" name="Zephyrus" />
+    <item value="0x36" name="Golem" />
+    <item value="0x37" name="Hell Dragon" />
+    <item value="0x38" name="BreathWithBubbles" />
+    <item value="0x39" name="Ink" />
+    <item value="0x3A" name="Tamed" />
+    <item value="0x3B" name="Fakecharm?" />
+    <item value="0x3C" name="CoreMagic?" />
 </items>

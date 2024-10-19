@@ -8,7 +8,7 @@
   <item value="0x05" name="Elbesem Temple Inside Battle" />
   <item value="0x06" name="Garvin's Mansion Battle" />
   <item value="0x07" name="Swampland Cave Battle" />
-	<item value="0x08" name="Aspinia Volcano South Battle" />
-	<item value="0x09" name="Storich Underground Battle" />
-	<item value="0x0a" name="Aspia Castle Tank Battle" />
+    <item value="0x08" name="Aspinia Volcano South Battle" />
+    <item value="0x09" name="Storich Underground Battle" />
+    <item value="0x0a" name="Aspia Castle Tank Battle" />
 </items>

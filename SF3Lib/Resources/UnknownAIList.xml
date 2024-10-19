@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
-	<item value="0x00" name="Entry0" />
-	<item value="0x01" name="Entry1" />
-	<item value="0x02" name="Entry2" />
-	<item value="0x03" name="Entry3" />
-	<item value="0x04" name="Entry4" />
-	<item value="0x05" name="Entry5" />
-	<item value="0x06" name="Entry6" />
-	<item value="0x07" name="Entry7" />
-	<item value="0x08" name="Entry8" />
-	<item value="0x09" name="Entry9" />
-	<item value="0x0A" name="Entry10" />
-	<item value="0x0B" name="Entry11" />
-	<item value="0x0C" name="Entry12" />
-	<item value="0x0D" name="Entry13" />
-	<item value="0x0E" name="Entry14" />
-	<item value="0x0F" name="Entry15" />
+    <item value="0x00" name="Entry0" />
+    <item value="0x01" name="Entry1" />
+    <item value="0x02" name="Entry2" />
+    <item value="0x03" name="Entry3" />
+    <item value="0x04" name="Entry4" />
+    <item value="0x05" name="Entry5" />
+    <item value="0x06" name="Entry6" />
+    <item value="0x07" name="Entry7" />
+    <item value="0x08" name="Entry8" />
+    <item value="0x09" name="Entry9" />
+    <item value="0x0A" name="Entry10" />
+    <item value="0x0B" name="Entry11" />
+    <item value="0x0C" name="Entry12" />
+    <item value="0x0D" name="Entry13" />
+    <item value="0x0E" name="Entry14" />
+    <item value="0x0F" name="Entry15" />
 </items>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
-	<item value="0x01" name="Male" />
-	<item value="0x02" name="Female" />
+    <item value="0x01" name="Male" />
+    <item value="0x02" name="Female" />
 </items>
