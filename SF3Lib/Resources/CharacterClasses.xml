@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="0x00" name="Swordsman (U)" />
+    <item value="0x01" name="Knight (U)" />
+    <item value="0x02" name="Warrior (U)" />
+    <item value="0x03" name="Priest (U)" />
+    <item value="0x04" name="Magician (U)" />
+    <item value="0x05" name="Archer (U)" />
+    <item value="0x06" name="Monk (U)" />
+    <item value="0x07" name="Birdsoldier (U)" />
+    <item value="0x08" name="Ranger (U)" />
+    <item value="0x09" name="Penguin (M) (U)" />
+    <item value="0x0A" name="Steam Soldier (U)" />
+    <item value="0x0B" name="Werewolf (U)" />
+    <item value="0x0C" name="Ninja Tyro (U)" />
+    <item value="0x0D" name="Kunoichi (U)" />
+    <item value="0x0E" name="Elven Ranger (U)" />
+    <item value="0x0F" name="Shaman (U)" />
+    <item value="0x10" name="Mecha Bot (U)" />
+    <item value="0x11" name="Metal Driver (U)" />
+    <item value="0x12" name="Penguin (F) (U)" />
+    <item value="0x13" name="Trainer (U)" />
+    <item value="0x14" name="Child (U)" />
+    <item value="0x15" name="Officer (U)" />
+    <item value="0x16" name="Royal Youth (U)" />
+    <item value="0x17" name="Dragon Child (U)" />
+    <item value="0x18" name="Unicorn Filly (U)" />
+    <item value="0x19" name="Dragon (U)" />
+    <item value="0x1A" name="Lion Soldier (U)" />
+    <item value="0x1B" name="Pegasus (U)" />
+    <item value="0x1C" name="Penguin (S) (U)" />
+    <item value="0x1D" name="Samurai Tyro (U)" />
+    <item value="0x1E" name="Sprite (U)" />
+    <item value="0x1F" name="Harridan (U)" />
+    <item value="0x20" name="Hero (P1)" />
+    <item value="0x21" name="Cavalier (P1)" />
+    <item value="0x22" name="Gladiator (P1)" />
+    <item value="0x23" name="Cleric (P1)" />
+    <item value="0x24" name="Wizard (P1)" />
+    <item value="0x25" name="Sniper (P1)" />
+    <item value="0x26" name="Master Monk (P1)" />
+    <item value="0x27" name="Birdknight (P1)" />
+    <item value="0x28" name="Bow Knight (P1)" />
+    <item value="0x29" name="Dynamo (P1)" />
+    <item value="0x2A" name="Steam Knight (P1)" />
+    <item value="0x2B" name="Wolf Baron (P1)" />
+    <item value="0x2C" name="Ninja (P1)" />
+    <item value="0x2D" name="Ninja (F) (P1)" />
+    <item value="0x2E" name="Striker (P1)" />
+    <item value="0x2F" name="Summoner (P1)" />
+    <item value="0x30" name="Mecha Soldier (P1)" />
+    <item value="0x31" name="Gunner (P1)" />
+    <item value="0x32" name="Diva (P1)" />
+    <item value="0x33" name="Beast Tamer (P1)" />
+    <item value="0x34" name="Godchild (P1)" />
+    <item value="0x35" name="Commander (P1)" />
+    <item value="0x36" name="Princess (P1)" />
+    <item value="0x37" name="Dragonman (P1)" />
+    <item value="0x38" name="Unicorn (P1)" />
+    <item value="0x39" name="White Dragon (P1)" />
+    <item value="0x3A" name="Lion Warrior (P1)" />
+    <item value="0x3B" name="Pegasus Knight (P1)" />
+    <item value="0x3C" name="Scholar (P1)" />
+    <item value="0x3D" name="Samurai (P1)" />
+    <item value="0x3E" name="Fairy (P1)" />
+    <item value="0x3F" name="Witch (P1)" />
+    <item value="0x40" name="Ogre Rider (P1)" />
+    <item value="0x41" name="Master (P1)" />
+    <item value="0x42" name="Rider (P1)" />
+    <item value="0x43" name="Monk (?) (P1)" />
+    <item value="0x44" name="1-228 (P1)" />
+    <item value="0x45" name="1-229 (P1)" />
+    <item value="0x46" name="1-230 (P1)" />
+    <item value="0x47" name="1-231 (P1)" />
+    <item value="0x48" name="Champion (P2)" />
+    <item value="0x49" name="Paladin (P2)" />
+    <item value="0x4A" name="High Wizard (P2)" />
+    <item value="0x4B" name="Bishop (P2)" />
+    <item value="0x4C" name="Bow Master (P2)" />
+    <item value="0x4D" name="Baron (P2)" />
+    <item value="0x4E" name="Fist Master (P2)" />
+    <item value="0x4F" name="Wing Lord (P2)" />
+    <item value="0x50" name="Saint (P2)" />
+    <item value="0x51" name="Buster Knight (P2)" />
+    <item value="0x52" name="Emperor (P2)" />
+    <item value="0x53" name="Steam Baron (P2)" />
+    <item value="0x54" name="Berserker (P2)" />
+    <item value="0x55" name="Master Ninja (P2)" />
+    <item value="0x56" name="Commando (P2)" />
+    <item value="0x57" name="Sorceress (P2)" />
+    <item value="0x58" name="Innovator (P2)" />
+    <item value="0x59" name="Mecha God (P2)" />
+    <item value="0x5A" name="Magic Knight (P2)" />
+    <item value="0x5B" name="Buster (P2)" />
+    <item value="0x5C" name="Queen (P2)" />
+    <item value="0x5D" name="Beast Master (P2)" />
+    <item value="0x5E" name="General (P2)" />
+    <item value="0x5F" name="Light Princess (P2)" />
+    <item value="0x60" name="Dragon Master (P2)" />
+    <item value="0x61" name="Unicorn Queen (P2)" />
+    <item value="0x62" name="Sacred Dragon (P2)" />
+    <item value="0x63" name="Lion King (P2)" />
+    <item value="0x64" name="Pegasus Lord (P2)" />
+    <item value="0x65" name="Professor (P2)" />
+    <item value="0x66" name="Taisho (P2)" />
+    <item value="0x67" name="Light Fairy (P2)" />
+    <item value="0x68" name="Enchantress (P2)" />
+    <item value="0x69" name="Mad Rider (P2)" />
+    <item value="0x6A" name="Hermit (P2)" />
+</items>
+
