@@ -1,6 +1,8 @@
 ﻿using BrightIdeasSoftware;
 using SF3.Values;
 using System;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace SF3.Editor.Extensions
@@ -52,28 +54,31 @@ namespace SF3.Editor.Extensions
             }
         }
 
+        private static void RegisterNamedValue<T>() =>
+            ObjectListView.EditorRegistry.Register(
+                typeof(T),
+                (object model, OLVColumn column, object value) => Utils.MakeNamedValueComboBox((value as NamedValue).ComboBoxValues)
+            );
+
         /// <summary>
         /// Performs ObjectListView.EditorRegistry.Register() for all SF3 NamedValues.
         /// </summary>
         public static void RegisterSF3Values()
         {
-            void RegisterNamedValue<T>() =>
-                ObjectListView.EditorRegistry.Register(
-                    typeof(T),
-                    (object model, OLVColumn column, object value) => Utils.MakeNamedValueComboBox((value as NamedValue).ComboBoxValues)
-                );
+            // Get all classes derived from 'NamedValue'
+            var namedValueTypes = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(domainAssembly => domainAssembly.GetTypes())
+                .Where(type => type != typeof(NamedValue) && typeof(NamedValue).IsAssignableFrom(type))
+                .OrderBy(x => x.Name)
+                .ToList();
 
-            // ObjectListView needs exact types, so register each value manually.
-            // TODO: a super-cool reflection version would be amazing.
-            RegisterNamedValue<CharacterClassValue>();
-            RegisterNamedValue<CharacterValue>();
-            RegisterNamedValue<ItemValue>();
-            RegisterNamedValue<MonsterValue>();
-            RegisterNamedValue<SexValue>();
-            RegisterNamedValue<SpecialValue>();
-            RegisterNamedValue<SpellValue>();
-            RegisterNamedValue<StatTypeValue>();
-            RegisterNamedValue<WeaponTypeValue>();
+            // Invoke RegisterNamedValue<T> for all types
+            var methodBase = typeof(ObjectListViewExtensions).GetMethod(nameof(RegisterNamedValue), BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            foreach (var nvt in namedValueTypes)
+            {
+                var method = methodBase.MakeGenericMethod(typeof(CharacterClassValue));
+                method.Invoke(null, null);
+            }
         }
     }
 }
