@@ -1,8 +1,7 @@
 ﻿using SF3.Types;
-using SF3.X002_Editor.FileEditors;
-using System;
+using SF3.FileEditors;
 
-namespace SF3.X002_Editor.Models.Warps
+namespace SF3.Models.X002.Warps
 {
     public class Warp
     {

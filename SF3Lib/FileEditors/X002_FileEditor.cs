@@ -1,22 +1,17 @@
-﻿using SF3.FileEditors;
-using SF3.Models;
+﻿using SF3.Models;
 using SF3.Types;
-using SF3.X002_Editor.Models.AttackResist;
-using SF3.X002_Editor.Models.Items;
-using SF3.X002_Editor.Models.Loading;
-using SF3.X002_Editor.Models.MusicOverride;
-using SF3.X002_Editor.Models.Presets;
-using SF3.X002_Editor.Models.Spells;
-using SF3.X002_Editor.Models.StatBoost;
-using SF3.X002_Editor.Models.Warps;
-using SF3.X002_Editor.Models.WeaponRank;
-using System;
+using SF3.Models.X002.AttackResist;
+using SF3.Models.X002.Items;
+using SF3.Models.X002.Loading;
+using SF3.Models.X002.MusicOverride;
+using SF3.Models.X002.Presets;
+using SF3.Models.X002.Spells;
+using SF3.Models.X002.StatBoost;
+using SF3.Models.X002.Warps;
+using SF3.Models.X002.WeaponRank;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SF3.X002_Editor.FileEditors
+namespace SF3.FileEditors
 {
     public class X002_FileEditor : SF3FileEditor, IX002_FileEditor
     {

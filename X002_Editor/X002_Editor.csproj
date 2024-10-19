@@ -72,28 +72,8 @@
     <Compile Include="Forms\frmX002_Editor.Designer.cs">
       <DependentUpon>frmX002_Editor.cs</DependentUpon>
     </Compile>
-    <Compile Include="FileEditors\IX002_FileEditor.cs" />
-    <Compile Include="Models\AttackResist\AttackResist.cs" />
-    <Compile Include="Models\AttackResist\AttackResistList.cs" />
-    <Compile Include="Models\musicOverride\MusicOverride.cs" />
-    <Compile Include="Models\musicOverride\MusicOverrideList.cs" />
-    <Compile Include="Models\Warp\Warp.cs" />
-    <Compile Include="Models\Warp\WarpList.cs" />
-    <Compile Include="Models\WeaponRank\WeaponRank.cs" />
-    <Compile Include="Models\WeaponRank\WeaponRankList.cs" />
-    <Compile Include="Models\Items\Item.cs" />
-    <Compile Include="Models\Items\ItemList.cs" />
-    <Compile Include="Models\Loading\Load.cs" />
-    <Compile Include="Models\Loading\LoadList.cs" />
-    <Compile Include="Models\Preset\Preset.cs" />
-    <Compile Include="Models\Preset\PresetList.cs" />
-    <Compile Include="Models\Spells\SpellList.cs" />
-    <Compile Include="Models\Spells\Spell.cs" />
-    <Compile Include="Models\StatBoost\Stat.cs" />
-    <Compile Include="Models\StatBoost\StatList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FileEditors\X002_FileEditor.cs" />
     <EmbeddedResource Include="Forms\frmX002_Editor.resx">
       <DependentUpon>frmX002_Editor.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -144,6 +124,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

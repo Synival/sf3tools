@@ -1,7 +1,7 @@
 ﻿using SF3.Types;
-using SF3.X002_Editor.FileEditors;
+using SF3.FileEditors;
 
-namespace SF3.X002_Editor.Models.Spells
+namespace SF3.Models.X002.Spells
 {
     public class Spell
     {

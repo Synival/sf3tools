@@ -1,41 +1,21 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
-using SF3.Models;
-using SF3.Types;
-using SF3.X002_Editor.FileEditors;
+using SF3.FileEditors;
 
-namespace SF3.X002_Editor.Models.Items
+namespace SF3.Models.X002.AttackResist
 {
-    public class ItemList : ModelArray<Item>
+    public class AttackResistList : ModelArray<AttackResist>
     {
-        public ItemList(IX002_FileEditor fileEditor) : base(fileEditor)
+        public AttackResistList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
-
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                _resourceFile = "Resources/S1/Items.xml";
-            }
-            if (Scenario == ScenarioType.Scenario2)
-            {
-                _resourceFile = "Resources/S2/Items.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                _resourceFile = "Resources/S3/Items.xml";
-            }
-            if (Scenario == ScenarioType.PremiumDisk)
-            {
-                _resourceFile = "Resources/PD/Items.xml";
-            }
         }
 
-        private string _resourceFile;
         private IX002_FileEditor _fileEditor;
-        private Item[] items;
+        private AttackResist[] items;
 
-        public override string ResourceFile => _resourceFile;
+        public override string ResourceFile => "Resources/AttackResistList.xml";
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
@@ -43,8 +23,8 @@ namespace SF3.X002_Editor.Models.Items
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load()
         {
-            _models = new Item[0];
-            items = new Item[300]; //max size of itemList
+            _models = new AttackResist[0];
+            items = new AttackResist[2]; //max size of itemList
             FileStream stream = null;
             try
             {
@@ -55,19 +35,18 @@ namespace SF3.X002_Editor.Models.Items
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Item[] old;
+                AttackResist[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Item[_models.Length];
+                        old = new AttackResist[_models.Length];
                         _models.CopyTo(old, 0);
-                        _models = new Item[old.Length + 1];
+                        _models = new AttackResist[old.Length + 1];
                         old.CopyTo(_models, 0);
-
-                        _models[old.Length] = new Item(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[old.Length].ID] = _models[old.Length];
+                        _models[old.Length] = new AttackResist(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        items[_models[old.Length].AttackResistID] = _models[old.Length];
                     }
                 }
             }

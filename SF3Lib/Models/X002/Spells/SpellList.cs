@@ -1,39 +1,38 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
-using SF3.Models;
 using SF3.Types;
-using SF3.X002_Editor.FileEditors;
+using SF3.FileEditors;
 
-namespace SF3.X002_Editor.Models.Presets
+namespace SF3.Models.X002.Spells
 {
-    public class PresetList : ModelArray<Preset>
+    public class SpellList : ModelArray<Spell>
     {
-        public PresetList(IX002_FileEditor fileEditor) : base(fileEditor)
+        public SpellList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "Resources/S1/SpellIndexList.xml";
+                _resourceFile = "Resources/S1/Spells.xml";
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "Resources/S2/SpellIndexList.xml";
+                _resourceFile = "Resources/S2/Spells.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/S3/SpellIndexList.xml";
+                _resourceFile = "Resources/S3/Spells.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                _resourceFile = "Resources/PD/SpellIndexList.xml";
+                _resourceFile = "Resources/PD/Spells.xml";
             }
         }
 
         private string _resourceFile;
         private IX002_FileEditor _fileEditor;
-        private Preset[] presets;
+        private Spell[] spells;
 
         public override string ResourceFile => _resourceFile;
 
@@ -43,8 +42,8 @@ namespace SF3.X002_Editor.Models.Presets
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load()
         {
-            _models = new Preset[0];
-            presets = new Preset[31]; //max size of spellIndexList
+            _models = new Spell[0];
+            spells = new Spell[78]; //max size of spellList. 
             FileStream stream = null;
             try
             {
@@ -54,18 +53,18 @@ namespace SF3.X002_Editor.Models.Presets
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Preset[] old;
+                Spell[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Preset[_models.Length];
+                        old = new Spell[_models.Length];
                         _models.CopyTo(old, 0);
-                        _models = new Preset[old.Length + 1];
+                        _models = new Spell[old.Length + 1];
                         old.CopyTo(_models, 0);
-                        _models[old.Length] = new Preset(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        presets[_models[old.Length].PresetID] = _models[old.Length];
+                        _models[old.Length] = new Spell(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        spells[_models[old.Length].SpellID] = _models[old.Length];
                     }
                 }
             }

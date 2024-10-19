@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using SF3.Editor.Forms;
 using SF3.Editor.Extensions;
 using static SF3.Editor.Extensions.TabControlExtensions;
-using SF3.X002_Editor.FileEditors;
 using SF3.FileEditors;
 
 namespace SF3.X002_Editor.Forms
