@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+	<item value="0x00" name="Synbios" />
+	<item value="0x01" name="Dantares" />
+	<item value="0x02" name="Masqurin" />
+	<item value="0x03" name="Grace" />
+	<item value="0x04" name="Hayward" />
+	<item value="0x05" name="Obright" />
+	<item value="0x06" name="Irene" />
+	<item value="0x07" name="Julian" />
+	<item value="0x08" name="Cybel" />
+	<item value="0x09" name="Eldar" />
+	<item value="0x0A" name="Kahn" />
+	<item value="0x0B" name="Noon" />
+	<item value="0x0C" name="Justin" />
+	<item value="0x0D" name="Horst" />
+	<item value="0x0E" name="Penn" />
+	<item value="0x0F" name="Rachet" />
+	<item value="0x10" name="Frank" />
+	<item value="0x11" name="Hagane" />
+	<item value="0x12" name="Murasame" />
+	<item value="0x13" name="Fynnding" />
+	<item value="0x14" name="Medion" />
+	<item value="0x15" name="Unused" />
+</items>

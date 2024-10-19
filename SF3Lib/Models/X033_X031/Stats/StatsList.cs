@@ -15,19 +15,19 @@ namespace SF3.Models.X033_X031.Stats
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "RSc1/classListS1.xml";
+                _resourceFile = "Resources/S1/ClassList.xml";
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "RSc2/classListS2.xml";
+                _resourceFile = "Resources/S2/ClassList.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/classList.xml";
+                _resourceFile = "Resources/S3/ClassList.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                _resourceFile = "RPD/classListPD.xml";
+                _resourceFile = "Resources/PD/ClassList.xml";
             }
         }
 

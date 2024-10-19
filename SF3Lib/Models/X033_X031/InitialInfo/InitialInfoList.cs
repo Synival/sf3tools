@@ -14,19 +14,19 @@ namespace SF3.Models.X033_X031.InitialInfos
 
             if (Scenario == ScenarioType.Scenario1)
             {
-                _resourceFile = "RSc1/classEquipS1.xml";
+                _resourceFile = "Resources/S1/ClassEquip.xml";
             }
             else if (Scenario == ScenarioType.Scenario2)
             {
-                _resourceFile = "RSc2/classEquipS2.xml";
+                _resourceFile = "Resources/S2/ClassEquip.xml";
             }
             if (Scenario == ScenarioType.Scenario3)
             {
-                _resourceFile = "Resources/classEquip.xml";
+                _resourceFile = "Resources/S3/ClassEquip.xml";
             }
             else if (Scenario == ScenarioType.PremiumDisk)
             {
-                _resourceFile = "RPD/classEquipPD.xml";
+                _resourceFile = "Resources/PD/ClassEquip.xml";
             }
         }
 
