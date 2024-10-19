@@ -32,6 +32,13 @@ namespace SF3.FileEditors
         bool CloseFile();
 
         /// <summary>
+        /// Gets the value of 1, 2, 3 or 4 contiguous bytes at an address.
+        /// </summary>
+        /// <param name="location">The address of the data.</param>
+        /// <returns>Sum of all bytes (earlier byte = higher byte).</returns>
+        uint GetData(int location, int bytes);
+
+        /// <summary>
         /// Gets the value of a byte at a location.
         /// </summary>
         /// <param name="location">The address of the byte.</param>
@@ -63,6 +70,14 @@ namespace SF3.FileEditors
         /// <param name="bit">The position of the bit, in range (0, 7).</param>
         /// <returns>True if the bit is set, false if the bit is unset.</returns>
         bool GetBit(int location, int bit);
+
+        /// <summary>
+        /// Sets the value of data with 1, 2, 3, or 4 bytes at an address.
+        /// </summary>
+        /// <param name="location">The address of the data.</param>
+        /// <param name="value">The new value of the data (sized for the maximum number of bytes).</param>
+        /// <param name="bytes">The number of bytes to store.</param>
+        void SetData(int location, uint value, int bytes);
 
         /// <summary>
         /// Sets the value of a byte at a location.

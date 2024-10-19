@@ -204,71 +204,54 @@ namespace SF3.FileEditors
         }
 
         /// <summary>
-        /// Gets the value of a byte at a location.
+        /// Gets the value of 1, 2, 3 or 4 contiguous bytes at an address.
         /// </summary>
-        /// <param name="location">The address of the byte.</param>
-        public int GetByte(int location)
+        /// <param name="location">The address of the data.</param>
+        /// <returns>Sum of all bytes (earlier byte = higher byte).</returns>
+        public uint GetData(int location, int bytes)
         {
+            if (location < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(location));
+            }
+            if (bytes < 1 || bytes > 4)
+            {
+                throw new ArgumentOutOfRangeException(nameof(bytes));
+            }
             if (Data == null)
             {
                 throw new FileEditorNotLoadedException();
             }
-
-            try
+            if (location + bytes > Data.Length)
             {
-                return Data[location];
-            }
-            catch (IndexOutOfRangeException)
-            {
-                //wrong kind of file was selected to load
                 throw new FileEditorReadException();
             }
+
+            uint value = 0;
+            for (int i = 0; i < bytes; i++)
+            {
+                value += ((uint) Data[location + i]) << ((bytes - i - 1) * 8);
+            }
+            return value;
         }
+
+        /// <summary>
+        /// Gets the value of a byte at a location.
+        /// </summary>
+        /// <param name="location">The address of the byte.</param>
+        public int GetByte(int location) => (int) GetData(location, 1);
 
         /// <summary>
         /// Gets the value of a 16-bit integer at a location.
         /// </summary>
         /// <param name="location">The address of the 16-bit integer.</param>
-        public int GetWord(int location)
-        {
-            if (Data == null)
-            {
-                throw new FileEditorNotLoadedException();
-            }
-
-            try
-            {
-                return Data[location] * 256 + Data[location + 1];
-            }
-            catch (IndexOutOfRangeException)
-            {
-                //wrong kind of file was selected to load
-                throw new FileEditorReadException();
-            }
-        }
+        public int GetWord(int location) => (int) GetData(location, 2);
 
         /// <summary>
         /// Gets the value of a 32-bit integer at a location.
         /// </summary>
         /// <param name="location">The address of the 32-bit integer.</param>
-        public int GetDouble(int location)
-        {
-            if (Data == null)
-            {
-                throw new FileEditorNotLoadedException();
-            }
-
-            try
-            {
-                return (Data[location] * 256 * 256 * 256) + (Data[location + 1] * 256 * 256)
-                            + (Data[location + 2] * 256) + Data[location + 3];
-            }
-            catch (IndexOutOfRangeException)
-            {
-                //wrong kind of file was selected to load
-                throw new FileEditorReadException();
-            }
-        }
+        public int GetDouble(int location) => (int) GetData(location, 4);
 
         /// <summary>
         /// Returns the value of string data of a specific size at a location.
@@ -304,68 +287,63 @@ namespace SF3.FileEditors
         }
 
         /// <summary>
-        /// Sets the value of a byte at a location.
+        /// Sets the value of data with 1, 2, 3, or 4 bytes at an address.
         /// </summary>
-        /// <param name="location">The address of the byte.</param>
-        /// <param name="value">The new value of the byte.</param>
-        public void SetByte(int location, byte value)
+        /// <param name="location">The address of the data.</param>
+        /// <param name="value">The new value of the data (sized for the maximum number of bytes).</param>
+        /// <param name="bytes">The number of bytes to store.</param>
+        public void SetData(int location, uint value, int bytes)
         {
+            if (location < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(location));
+            }
+            if (bytes < 1 || bytes > 4)
+            {
+                throw new ArgumentOutOfRangeException(nameof(bytes));
+            }
             if (Data == null)
             {
                 throw new FileEditorNotLoadedException();
             }
-
-            if (Data[location] != value)
+            if (location + bytes > Data.Length)
             {
-                Data[location] = value;
-                IsModified = true;
+                throw new FileEditorReadException();
+            }
+
+            byte[] converted = BitConverter.GetBytes(value);
+
+            for (int i = 0; i < bytes; i++)
+            {
+                byte b = converted[bytes - i - 1];
+                if (Data[location + i] != b)
+                {
+                    Data[location + i] = b;
+                    IsModified = true;
+                }
             }
         }
+
+        /// <summary>
+        /// Sets the value of a byte at a location.
+        /// </summary>
+        /// <param name="location">The address of the byte.</param>
+        /// <param name="value">The new value of the byte.</param>
+        public void SetByte(int location, byte value) => SetData(location, value, 1);
 
         /// <summary>
         /// Sets the value of a 16-bit integer at a location.
         /// </summary>
         /// <param name="location">The address of the 16-bit integer.</param>
         /// <param name="value">The new value of the 16-bit integer.</param>
-        public void SetWord(int location, int value)
-        {
-            if (Data == null)
-            {
-                throw new FileEditorNotLoadedException();
-            }
-
-            byte highByte = (byte)(value >> 8);
-            byte lowByte = (byte)(value % 0x100);
-
-            if (Data[location + 0] != highByte || Data[location + 1] != lowByte)
-            {
-                Data[location + 0] = highByte;
-                Data[location + 1] = lowByte;
-                IsModified = true;
-            }
-        }
+        public void SetWord(int location, int value) => SetData(location, (uint) value, 2);
 
         /// <summary>
         /// Sets the value of a 32-bit integer at a location.
         /// </summary>
         /// <param name="location">The address of the 32-bit integer.</param>
         /// <param name="value">The new value of the 32-bit integer.</param>
-        public void SetDouble(int location, int value)
-        {
-            byte[] converted = BitConverter.GetBytes(value);
-
-            if (Data[location + 0] != converted[3] ||
-                Data[location + 1] != converted[2] ||
-                Data[location + 2] != converted[1] ||
-                Data[location + 3] != converted[0])
-            {
-                Data[location + 0] = converted[3];
-                Data[location + 1] = converted[2];
-                Data[location + 2] = converted[1];
-                Data[location + 3] = converted[0];
-                IsModified = true;
-            }
-        }
+        public void SetDouble(int location, int value) => SetData(location, (uint) value, 4);
 
         /// <summary>
         /// Sets the value of string data of a specific size at a location.
@@ -409,13 +387,25 @@ namespace SF3.FileEditors
         /// Returns the value of a single bit of a byte at a location.
         /// </summary>
         /// <param name="location">The address of the byte containing the bit.</param>
-        /// <param name="bit">The position of the bit, in range (0, 7).</param>
+        /// <param name="bit">The position of the bit, in range (1, 8).</param>
         /// <returns>True if the bit is set, false if the bit is unset.</returns>
         public bool GetBit(int location, int bit)
         {
+            if (location < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(location));
+            }
+            if (bit < 1 || bit > 8)
+            {
+                throw new ArgumentOutOfRangeException(nameof(bit));
+            }
             if (Data == null)
             {
                 throw new FileEditorNotLoadedException();
+            }
+            if (location >= Data.Length)
+            {
+                throw new FileEditorReadException();
             }
 
             return ((Data[location] >> (bit - 1) & 0x01) == 1) ? true : false;
@@ -425,13 +415,25 @@ namespace SF3.FileEditors
         /// Sets the value of a single bit of a byte at a location.
         /// </summary>
         /// <param name="location">The address of the byte containing the bit.</param>
-        /// <param name="bit">The position of the bit, in range (0, 7).</param>
+        /// <param name="bit">The position of the bit, in range (1, 8).</param>
         /// <param name="value">The new value of the bit.</param>
         public void SetBit(int location, int bit, bool value)
         {
+            if (location < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(location));
+            }
+            if (bit < 1 || bit > 8)
+            {
+                throw new ArgumentOutOfRangeException(nameof(bit));
+            }
             if (Data == null)
             {
                 throw new FileEditorNotLoadedException();
+            }
+            if (location >= Data.Length)
+            {
+                throw new FileEditorReadException();
             }
 
             byte bitmask = (byte)(1 << (bit - 1));
