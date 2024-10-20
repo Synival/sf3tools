@@ -15,13 +15,8 @@ namespace SF3.Values
 
         public static readonly Dictionary<ScenarioType, Dictionary<int, string>> ValueNames = GetValueNameDictionaryForAllScenariosFromXML("Spells.xml");
 
-        public static readonly Dictionary<ScenarioType, Dictionary<NamedValue, string>> _comboBoxValues = new Dictionary<ScenarioType, Dictionary<NamedValue, string>>()
-        {
-            { ScenarioType.Scenario1, MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SpellValue(ScenarioType.Scenario1, value)) },
-            { ScenarioType.Scenario2, MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SpellValue(ScenarioType.Scenario2, value)) },
-            { ScenarioType.Scenario3, MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SpellValue(ScenarioType.Scenario3, value)) },
-            { ScenarioType.PremiumDisk, MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new SpellValue(ScenarioType.PremiumDisk, value)) },
-        };
+        public static readonly Dictionary<ScenarioType, Dictionary<NamedValue, string>> _comboBoxValues =
+            MakeNamedValueComboBoxValuesForAllScenarios(MinValue, MaxValue, (s, v) => new SpellValue(s, v));
 
         public SpellValue(ScenarioType scenario, int value) : base(NameOrHexValue(value, ValueNames[scenario]), HexValueWithName(value, ValueNames[scenario]), value)
         {

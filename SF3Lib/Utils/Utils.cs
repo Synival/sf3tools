@@ -54,6 +54,24 @@ namespace SF3.Utils
         }
 
         /// <summary>
+        /// Creates a dictionary of the results of MakeNamedValueComboBoxValues() for all scenarios.
+        /// </summary>
+        /// <param name="minValue">Minimum value</param>
+        /// <param name="maxValue">Maximum value</param>
+        /// <param name="factoryFunc">Factory function to create a NamedValue. Used for looking up 'NamedValue.Name' for all possible values.</param>
+        /// <returns>A dictionary of the results of MakeNamedValueComboBoxValues() for all scenarios.</returns>
+        public static Dictionary<ScenarioType, Dictionary<NamedValue, string>> MakeNamedValueComboBoxValuesForAllScenarios(int minValue, int maxValue, Func<ScenarioType, int, NamedValue> factoryFunc)
+        {
+            return new Dictionary<ScenarioType, Dictionary<NamedValue, string>>()
+            {
+                { ScenarioType.Scenario1, MakeNamedValueComboBoxValues(minValue, maxValue, v => factoryFunc(ScenarioType.Scenario1, v)) },
+                { ScenarioType.Scenario2, MakeNamedValueComboBoxValues(minValue, maxValue, v => factoryFunc(ScenarioType.Scenario2, v)) },
+                { ScenarioType.Scenario3, MakeNamedValueComboBoxValues(minValue, maxValue, v => factoryFunc(ScenarioType.Scenario3, v)) },
+                { ScenarioType.PremiumDisk, MakeNamedValueComboBoxValues(minValue, maxValue, v => factoryFunc(ScenarioType.PremiumDisk, v)) },
+            };
+        }
+
+        /// <summary>
         /// Creates a dictionary of all possible values to supply to MakeNamedValueComboBox().
         /// </summary>
         /// <param name="minValue">Minimum value</param>

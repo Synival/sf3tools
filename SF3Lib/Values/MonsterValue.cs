@@ -19,13 +19,8 @@ namespace SF3.Values
 
         public static readonly Dictionary<int, string> ValueNamesPDX044 = GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.PremiumDisk, "Monsters_X044.xml"));
 
-        public static readonly Dictionary<ScenarioType, Dictionary<NamedValue, string>> _comboBoxValues = new Dictionary<ScenarioType, Dictionary<NamedValue, string>>()
-        {
-            { ScenarioType.Scenario1, MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new MonsterValue(ScenarioType.Scenario1, false, value, false)) },
-            { ScenarioType.Scenario2, MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new MonsterValue(ScenarioType.Scenario2, false, value, false)) },
-            { ScenarioType.Scenario3, MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new MonsterValue(ScenarioType.Scenario3, false, value, false)) },
-            { ScenarioType.PremiumDisk, MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new MonsterValue(ScenarioType.PremiumDisk, false, value, false)) },
-        };
+        public static readonly Dictionary<ScenarioType, Dictionary<NamedValue, string>> _comboBoxValues =
+            MakeNamedValueComboBoxValuesForAllScenarios(MinValue, MaxValue, (s, v) => new MonsterValue(s, false, v, false));
 
         public static readonly Dictionary<NamedValue, string> _comboBoxValuesPDX044 = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new MonsterValue(ScenarioType.PremiumDisk, true, value, false));
 
