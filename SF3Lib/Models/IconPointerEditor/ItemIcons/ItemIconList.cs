@@ -8,6 +8,8 @@ namespace SF3.Models.IconPointerEditor.ItemIcons
 {
     public class ItemIconList : ModelArray<ItemIcon>
     {
+        public int MaxSize { get; } = 300;
+
         public ItemIconList(IIconPointerFileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -43,7 +45,7 @@ namespace SF3.Models.IconPointerEditor.ItemIcons
         public override bool Load()
         {
             _models = new ItemIcon[0];
-            models = new ItemIcon[300]; //max size 
+            models = new ItemIcon[MaxSize];
             FileStream stream = null;
             try
             {

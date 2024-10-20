@@ -8,6 +8,8 @@ namespace SF3.Models.X013.SupportTypes
 {
     public class SupportTypeList : ModelArray<SupportType>
     {
+        public int MaxSize { get; } = 120;
+
         public SupportTypeList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -43,7 +45,7 @@ namespace SF3.Models.X013.SupportTypes
         public override bool Load()
         {
             _models = new SupportType[0];
-            models = new SupportType[120]; //max size of spellList
+            models = new SupportType[MaxSize];
             FileStream stream = null;
             try
             {

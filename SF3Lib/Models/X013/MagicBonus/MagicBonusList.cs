@@ -8,6 +8,8 @@ namespace SF3.Models.X013.MagicBonus
 {
     public class MagicBonusList : ModelArray<MagicBonus>
     {
+        public int MaxSize { get; } = 256;
+
         public MagicBonusList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -43,7 +45,7 @@ namespace SF3.Models.X013.MagicBonus
         public override bool Load()
         {
             _models = new MagicBonus[0];
-            items = new MagicBonus[256]; //max size of itemList
+            items = new MagicBonus[MaxSize];
             FileStream stream = null;
             try
             {

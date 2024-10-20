@@ -7,6 +7,8 @@ namespace SF3.Models.X1.BattlePointers
 {
     public class BattlePointersList : ModelArray<BattlePointers>
     {
+        public int MaxSize { get; } = 5;
+
         public BattlePointersList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X1.BattlePointers
         public override bool Load()
         {
             _models = new BattlePointers[0];
-            items = new BattlePointers[5]; //max size of itemList
+            items = new BattlePointers[MaxSize];
             FileStream stream = null;
             try
             {

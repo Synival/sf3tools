@@ -7,6 +7,8 @@ namespace SF3.Models.X013.WeaponSpellRank
 {
     public class WeaponSpellRankList : ModelArray<WeaponSpellRank>
     {
+        public int MaxSize { get; } = 4;
+
         public WeaponSpellRankList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X013.WeaponSpellRank
         public override bool Load()
         {
             _models = new WeaponSpellRank[0];
-            items = new WeaponSpellRank[4]; //max size of itemList
+            items = new WeaponSpellRank[MaxSize];
             FileStream stream = null;
             try
             {

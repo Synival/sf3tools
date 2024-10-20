@@ -7,6 +7,8 @@ namespace SF3.Models.X002.StatBoost
 {
     public class StatList : ModelArray<StatBoost>
     {
+        public int MaxSize { get; } = 300;
+
         public StatList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X002.StatBoost
         public override bool Load()
         {
             _models = new StatBoost[0];
-            items = new StatBoost[300]; //max size of itemList
+            items = new StatBoost[MaxSize];
             FileStream stream = null;
             try
             {

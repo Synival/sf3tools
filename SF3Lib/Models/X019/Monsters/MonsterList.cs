@@ -8,6 +8,8 @@ namespace SF3.Models.X019.Monsters
 {
     public class MonsterList : ModelArray<Monster>
     {
+        public int MaxSize { get; } = 256;
+
         public MonsterList(IX019_FileEditor fileEditor, bool isX044) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -47,7 +49,7 @@ namespace SF3.Models.X019.Monsters
         public override bool Load()
         {
             _models = new Monster[0];
-            models = new Monster[256]; //max size of itemList
+            models = new Monster[MaxSize];
             FileStream stream = null;
             try
             {

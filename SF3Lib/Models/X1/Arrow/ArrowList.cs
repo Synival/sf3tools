@@ -7,6 +7,8 @@ namespace SF3.Models.X1.Arrows
 {
     public class ArrowList : ModelArray<Arrow>
     {
+        public int MaxSize { get; } = 100;
+
         public ArrowList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X1.Arrows
         public override bool Load()
         {
             _models = new Arrow[0];
-            items = new Arrow[100]; //max size of itemList
+            items = new Arrow[MaxSize];
             FileStream stream = null;
             try
             {

@@ -8,6 +8,8 @@ namespace SF3.Models.X1.Slots
 {
     public class SlotList : ModelArray<Slot>
     {
+        public int MaxSize { get; } = 256;
+
         public SlotList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -35,7 +37,7 @@ namespace SF3.Models.X1.Slots
         public override bool Load()
         {
             _models = new Slot[0];
-            models = new Slot[256]; //max size of itemList
+            models = new Slot[MaxSize];
             FileStream stream = null;
             try
             {

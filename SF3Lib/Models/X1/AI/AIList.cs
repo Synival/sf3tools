@@ -7,6 +7,8 @@ namespace SF3.Models.X1.AI
 {
     public class AIList : ModelArray<AI>
     {
+        public int MaxSize { get; } = 130;
+
         public AIList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -45,7 +47,7 @@ namespace SF3.Models.X1.AI
         public override bool Load()
         {
             _models = new AI[0];
-            models = new AI[130]; //max size of spellList
+            models = new AI[MaxSize];
             FileStream stream = null;
             try
             {

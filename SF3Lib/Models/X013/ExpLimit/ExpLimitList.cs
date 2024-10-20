@@ -7,6 +7,8 @@ namespace SF3.Models.X013.ExpLimit
 {
     public class ExpLimitList : ModelArray<ExpLimit>
     {
+        public int MaxSize { get; } = 2;
+
         public ExpLimitList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X013.ExpLimit
         public override bool Load()
         {
             _models = new ExpLimit[0];
-            items = new ExpLimit[2]; //max size of itemList
+            items = new ExpLimit[MaxSize];
             FileStream stream = null;
             try
             {

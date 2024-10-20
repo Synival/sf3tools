@@ -8,6 +8,8 @@ namespace SF3.Models.X033_X031.InitialInfos
 {
     public class InitialInfoList : ModelArray<InitialInfo>
     {
+        public int MaxSize { get; } = 100;
+
         public InitialInfoList(IX033_X031_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -43,7 +45,7 @@ namespace SF3.Models.X033_X031.InitialInfos
         public override bool Load()
         {
             _models = new InitialInfo[0];
-            models = new InitialInfo[100]; //max size of spellIndexList
+            models = new InitialInfo[MaxSize];
             FileStream stream = null;
             try
             {

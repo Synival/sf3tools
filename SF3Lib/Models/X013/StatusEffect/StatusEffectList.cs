@@ -7,6 +7,8 @@ namespace SF3.Models.X013.StatusEffects
 {
     public class StatusEffectList : ModelArray<StatusEffect>
     {
+        public int MaxSize { get; } = 1000;
+
         public StatusEffectList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X013.StatusEffects
         public override bool Load()
         {
             _models = new StatusEffect[0];
-            items = new StatusEffect[1000]; //max size of itemList
+            items = new StatusEffect[MaxSize];
             FileStream stream = null;
             try
             {

@@ -8,6 +8,8 @@ namespace SF3.Models.X002.Loading
 {
     public class LoadList : ModelArray<Loading>
     {
+        public int MaxSize { get; } = 300;
+
         public LoadList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -43,7 +45,7 @@ namespace SF3.Models.X002.Loading
         public override bool Load()
         {
             _models = new Loading[0];
-            items = new Loading[300]; //max size of itemList
+            items = new Loading[MaxSize];
             FileStream stream = null;
             try
             {

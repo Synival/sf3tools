@@ -6,6 +6,8 @@ namespace SF3.Models.X002.Warps
 {
     public class WarpList : ModelArray<Warp>
     {
+        public int MaxSize { get; } = 1000;
+
         public WarpList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -23,7 +25,7 @@ namespace SF3.Models.X002.Warps
         public override bool Load()
         {
             _models = new Warp[0];
-            items = new Warp[1000]; //max size of itemList
+            items = new Warp[MaxSize];
             FileStream stream = null;
             try
             {

@@ -7,6 +7,8 @@ namespace SF3.Models.X013.Soulfail
 {
     public class SoulfailList : ModelArray<Soulfail>
     {
+        public int MaxSize { get; } = 1;
+
         public SoulfailList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X013.Soulfail
         public override bool Load()
         {
             _models = new Soulfail[0];
-            items = new Soulfail[1]; //max size of itemList
+            items = new Soulfail[MaxSize];
             FileStream stream = null;
             try
             {

@@ -7,6 +7,8 @@ namespace SF3.Models.X013.CritMod
 {
     public class CritModList : ModelArray<CritMod>
     {
+        public int MaxSize { get; } = 1;
+
         public CritModList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X013.CritMod
         public override bool Load()
         {
             _models = new CritMod[0];
-            items = new CritMod[1]; //max size of itemList
+            items = new CritMod[MaxSize];
             FileStream stream = null;
             try
             {

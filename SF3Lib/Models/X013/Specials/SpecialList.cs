@@ -8,6 +8,8 @@ namespace SF3.Models.X013.Specials
 {
     public class SpecialList : ModelArray<Special>
     {
+        public int MaxSize { get; } = 256;
+
         public SpecialList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -43,7 +45,7 @@ namespace SF3.Models.X013.Specials
         public override bool Load()
         {
             _models = new Special[0];
-            models = new Special[256]; //max size of itemList
+            models = new Special[MaxSize];
             FileStream stream = null;
             try
             {

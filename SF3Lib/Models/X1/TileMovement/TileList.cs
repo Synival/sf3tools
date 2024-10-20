@@ -7,6 +7,8 @@ namespace SF3.Models.X1.Tiles
 {
     public class TileList : ModelArray<Tile>
     {
+        public int MaxSize { get; } = 31;
+
         public TileList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X1.Tiles
         public override bool Load()
         {
             _models = new Tile[0];
-            tiles = new Tile[31]; //max size of spellIndexList
+            tiles = new Tile[MaxSize];
             FileStream stream = null;
             try
             {

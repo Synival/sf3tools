@@ -7,6 +7,8 @@ namespace SF3.Models.X1.Enters
 {
     public class EnterList : ModelArray<Enter>
     {
+        public int MaxSize { get; } = 100;
+
         public EnterList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X1.Enters
         public override bool Load()
         {
             _models = new Enter[0];
-            items = new Enter[100]; //max size of itemList
+            items = new Enter[MaxSize];
             FileStream stream = null;
             try
             {

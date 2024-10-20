@@ -7,6 +7,8 @@ namespace SF3.Models.X1.SpawnZones
 {
     public class SpawnZoneList : ModelArray<SpawnZone>
     {
+        public int MaxSize { get; } = 30;
+
         public SpawnZoneList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X1.SpawnZones
         public override bool Load()
         {
             _models = new SpawnZone[0];
-            models = new SpawnZone[30]; //max size of itemList
+            models = new SpawnZone[MaxSize];
             FileStream stream = null;
             try
             {

@@ -7,6 +7,8 @@ namespace SF3.Models.X013.HealExp
 {
     public class HealExpList : ModelArray<HealExp>
     {
+        public int MaxSize { get; } = 2;
+
         public HealExpList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X013.HealExp
         public override bool Load()
         {
             _models = new HealExp[0];
-            items = new HealExp[2]; //max size of itemList
+            items = new HealExp[MaxSize];
             FileStream stream = null;
             try
             {

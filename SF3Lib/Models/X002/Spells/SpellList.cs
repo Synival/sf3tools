@@ -8,6 +8,8 @@ namespace SF3.Models.X002.Spells
 {
     public class SpellList : ModelArray<Spell>
     {
+        public int MaxSize { get; } = 78;
+
         public SpellList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -43,7 +45,7 @@ namespace SF3.Models.X002.Spells
         public override bool Load()
         {
             _models = new Spell[0];
-            spells = new Spell[78]; //max size of spellList. 
+            spells = new Spell[MaxSize];
             FileStream stream = null;
             try
             {

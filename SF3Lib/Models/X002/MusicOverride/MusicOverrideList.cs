@@ -8,6 +8,8 @@ namespace SF3.Models.X002.MusicOverride
 {
     public class MusicOverrideList : ModelArray<MusicOverride>
     {
+        public int MaxSize { get; } = 300;
+
         public MusicOverrideList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -43,7 +45,7 @@ namespace SF3.Models.X002.MusicOverride
         public override bool Load()
         {
             _models = new MusicOverride[0];
-            items = new MusicOverride[300]; //max size of itemList
+            items = new MusicOverride[MaxSize];
             FileStream stream = null;
             try
             {

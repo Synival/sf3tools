@@ -7,6 +7,8 @@ namespace SF3.Models.X013.Soulmate
 {
     public class SoulmateList : ModelArray<Soulmate>
     {
+        public int MaxSize { get; } = 1771;
+
         public SoulmateList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X013.Soulmate
         public override bool Load()
         {
             _models = new Soulmate[0];
-            items = new Soulmate[1771]; //max size of itemList
+            items = new Soulmate[MaxSize];
             FileStream stream = null;
             try
             {

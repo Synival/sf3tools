@@ -7,6 +7,8 @@ namespace SF3.Models.X013.SupportStats
 {
     public class SupportStatsList : ModelArray<SupportStats>
     {
+        public int MaxSize { get; } = 256;
+
         public SupportStatsList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X013.SupportStats
         public override bool Load()
         {
             _models = new SupportStats[0];
-            models = new SupportStats[256]; //max size of itemList
+            models = new SupportStats[MaxSize];
             FileStream stream = null;
             try
             {

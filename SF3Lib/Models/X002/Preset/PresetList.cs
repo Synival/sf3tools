@@ -8,6 +8,8 @@ namespace SF3.Models.X002.Presets
 {
     public class PresetList : ModelArray<Preset>
     {
+        public int MaxSize { get; } = 31;
+
         public PresetList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -43,7 +45,7 @@ namespace SF3.Models.X002.Presets
         public override bool Load()
         {
             _models = new Preset[0];
-            presets = new Preset[31]; //max size of spellIndexList
+            presets = new Preset[MaxSize];
             FileStream stream = null;
             try
             {

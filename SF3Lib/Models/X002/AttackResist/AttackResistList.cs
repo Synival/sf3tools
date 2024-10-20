@@ -7,6 +7,8 @@ namespace SF3.Models.X002.AttackResist
 {
     public class AttackResistList : ModelArray<AttackResist>
     {
+        public int MaxSize { get; } = 2;
+
         public AttackResistList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X002.AttackResist
         public override bool Load()
         {
             _models = new AttackResist[0];
-            items = new AttackResist[2]; //max size of itemList
+            items = new AttackResist[MaxSize];
             FileStream stream = null;
             try
             {

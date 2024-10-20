@@ -7,6 +7,8 @@ namespace SF3.Models.X1.Treasures
 {
     public class TreasureList : ModelArray<Treasure>
     {
+        public int MaxSize { get; } = 255;
+
         /// <summary>
         /// TODO: what does this do when set?
         /// </summary>
@@ -29,7 +31,7 @@ namespace SF3.Models.X1.Treasures
         public override bool Load()
         {
             _models = new Treasure[0];
-            items = new Treasure[255]; //max size of itemList
+            items = new Treasure[MaxSize];
             FileStream stream = null;
             try
             {

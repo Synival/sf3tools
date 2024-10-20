@@ -7,6 +7,8 @@ namespace SF3.Models.X013.SpecialChance
 {
     public class SpecialChanceList : ModelArray<SpecialChance>
     {
+        public int MaxSize { get; } = 1;
+
         public SpecialChanceList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X013.SpecialChance
         public override bool Load()
         {
             _models = new SpecialChance[0];
-            items = new SpecialChance[1]; //max size of itemList
+            items = new SpecialChance[MaxSize];
             FileStream stream = null;
             try
             {

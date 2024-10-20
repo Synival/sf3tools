@@ -7,6 +7,8 @@ namespace SF3.Models.X013.Presets
 {
     public class FriendshipExpList : ModelArray<FriendshipExp>
     {
+        public int MaxSize { get; } = 1;
+
         public FriendshipExpList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X013.Presets
         public override bool Load()
         {
             _models = new FriendshipExp[0];
-            models = new FriendshipExp[1]; //max size of spellIndexList
+            models = new FriendshipExp[MaxSize];
             FileStream stream = null;
             try
             {

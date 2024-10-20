@@ -9,6 +9,8 @@ namespace SF3.Models.X033_X031.WeaponLevel
 {
     public class WeaponLevelList : ModelArray<WeaponLevel>
     {
+        public int MaxSize { get; } = 2;
+
         public WeaponLevelList(IX033_X031_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -26,7 +28,7 @@ namespace SF3.Models.X033_X031.WeaponLevel
         public override bool Load()
         {
             _models = new WeaponLevel[0];
-            items = new WeaponLevel[2]; //max size of itemList
+            items = new WeaponLevel[MaxSize];
             FileStream stream = null;
             try
             {

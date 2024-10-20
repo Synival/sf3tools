@@ -8,6 +8,8 @@ namespace SF3.Models.IconPointerEditor.SpellIcons
 {
     public class SpellIconList : ModelArray<SpellIcon>
     {
+        public int MaxSize { get; } = 256;
+
         public SpellIconList(IIconPointerFileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -43,7 +45,7 @@ namespace SF3.Models.IconPointerEditor.SpellIcons
         public override bool Load()
         {
             _models = new SpellIcon[0];
-            models = new SpellIcon[256]; //max size of itemList
+            models = new SpellIcon[MaxSize];
             FileStream stream = null;
             try
             {

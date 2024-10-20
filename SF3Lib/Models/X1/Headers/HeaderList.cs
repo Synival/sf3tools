@@ -7,6 +7,8 @@ namespace SF3.Models.X1.Headers
 {
     public class HeaderList : ModelArray<Header>
     {
+        public int MaxSize { get; } = 31;
+
         public HeaderList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -24,7 +26,7 @@ namespace SF3.Models.X1.Headers
         public override bool Load()
         {
             _models = new Header[0];
-            models = new Header[31]; //max size of spellIndexList
+            models = new Header[MaxSize];
             FileStream stream = null;
             try
             {

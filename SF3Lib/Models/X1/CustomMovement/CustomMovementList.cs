@@ -7,6 +7,8 @@ namespace SF3.Models.X1.CustomMovement
 {
     public class CustomMovementList : ModelArray<CustomMovement>
     {
+        public int MaxSize { get; } = 130;
+
         public CustomMovementList(IX1_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
@@ -46,7 +48,7 @@ namespace SF3.Models.X1.CustomMovement
         public override bool Load()
         {
             _models = new CustomMovement[0];
-            spells = new CustomMovement[130]; //max size of spellList
+            spells = new CustomMovement[MaxSize];
             FileStream stream = null;
             try
             {
