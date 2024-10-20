@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
-using SF3.Types;
 using SF3.FileEditors;
+using static SF3.Utils.Utils;
 
 namespace SF3.Models.X013.Specials
 {
@@ -13,23 +13,7 @@ namespace SF3.Models.X013.Specials
         public SpecialList(IX013_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
-
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                _resourceFile = "Resources/S1/Specials.xml";
-            }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                _resourceFile = "Resources/S2/Specials.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                _resourceFile = "Resources/S3/Specials.xml";
-            }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                _resourceFile = "Resources/PD/Specials.xml";
-            }
+            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "Specials.xml");
         }
 
         private string _resourceFile;

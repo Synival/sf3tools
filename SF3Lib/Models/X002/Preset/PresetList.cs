@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
-using SF3.Types;
 using SF3.FileEditors;
+using static SF3.Utils.Utils;
 
 namespace SF3.Models.X002.Presets
 {
@@ -13,23 +13,7 @@ namespace SF3.Models.X002.Presets
         public PresetList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
-
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                _resourceFile = "Resources/S1/SpellIndexList.xml";
-            }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                _resourceFile = "Resources/S2/SpellIndexList.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                _resourceFile = "Resources/S3/SpellIndexList.xml";
-            }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                _resourceFile = "Resources/PD/SpellIndexList.xml";
-            }
+            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "SpellIndexList.xml");
         }
 
         private string _resourceFile;

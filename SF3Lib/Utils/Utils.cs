@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SF3.Types;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Xml;
 
 namespace SF3.Utils
@@ -102,6 +104,30 @@ namespace SF3.Utils
             }
 
             return nameDict;
+        }
+
+        /// <summary>
+        /// Returns the relative path of a resource file that is different depending on the scenario.
+        /// </summary>
+        /// <param name="scenario">The scenario for the resource.</param>
+        /// <param name="resourceName">The name of the resource file without its path.</param>
+        /// <returns>A string with a relative path with file for the resource.</returns>
+        /// <exception cref="ArgumentException">Thrown if the scenario is invalid.</exception>
+        public static string ResourceFileForScenario(ScenarioType scenario, string resourceName)
+        {
+            switch (scenario)
+            {
+                case ScenarioType.Scenario1:
+                    return "Resources/S1/" + resourceName;
+                case ScenarioType.Scenario2:
+                    return "Resources/S2/" + resourceName;
+                case ScenarioType.Scenario3:
+                    return "Resources/S3/" + resourceName;
+                case ScenarioType.PremiumDisk:
+                    return "Resources/PD/" + resourceName;
+                default:
+                    throw new ArgumentException(MethodBase.GetCurrentMethod().Name + ": Handled scenario for " + nameof(scenario));
+            }
         }
     }
 }

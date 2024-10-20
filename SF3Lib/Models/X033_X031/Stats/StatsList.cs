@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
-using SF3.Models;
-using SF3.Types;
 using SF3.FileEditors;
+using static SF3.Utils.Utils;
 
 namespace SF3.Models.X033_X031.Stats
 {
@@ -14,23 +13,7 @@ namespace SF3.Models.X033_X031.Stats
         public StatsList(IX033_X031_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
-
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                _resourceFile = "Resources/S1/ClassList.xml";
-            }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                _resourceFile = "Resources/S2/ClassList.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                _resourceFile = "Resources/S3/ClassList.xml";
-            }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                _resourceFile = "Resources/PD/ClassList.xml";
-            }
+            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "ClassList.xml");
         }
 
         private string _resourceFile;

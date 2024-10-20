@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
-using SF3.Types;
 using SF3.FileEditors;
+using static SF3.Utils.Utils;
 
 namespace SF3.Models.X002.Items
 {
@@ -13,23 +13,7 @@ namespace SF3.Models.X002.Items
         public ItemList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
-
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                _resourceFile = "Resources/S1/Items.xml";
-            }
-            if (Scenario == ScenarioType.Scenario2)
-            {
-                _resourceFile = "Resources/S2/Items.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                _resourceFile = "Resources/S3/Items.xml";
-            }
-            if (Scenario == ScenarioType.PremiumDisk)
-            {
-                _resourceFile = "Resources/PD/Items.xml";
-            }
+            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "Items.xml");
         }
 
         private string _resourceFile;

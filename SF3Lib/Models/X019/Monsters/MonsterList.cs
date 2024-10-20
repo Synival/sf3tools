@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using SF3.Types;
 using SF3.FileEditors;
+using static SF3.Utils.Utils;
 
 namespace SF3.Models.X019.Monsters
 {
@@ -14,25 +15,9 @@ namespace SF3.Models.X019.Monsters
         {
             _fileEditor = fileEditor;
             _isX044 = isX044;
-
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                _resourceFile = "Resources/S1/Monsters.xml";
-            }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                _resourceFile = "Resources/S2/Monsters.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                _resourceFile = "Resources/S3/Monsters.xml";
-            }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                _resourceFile = isX044
-                    ? "Resources/PD/Monsters_X044.xml"
-                    : "Resources/PD/Monsters.xml";
-            }
+            _resourceFile = (Scenario == ScenarioType.PremiumDisk && isX044)
+                ? "Resources/PD/Monsters_X044.xml"
+                : ResourceFileForScenario(_fileEditor.Scenario, "Monsters.xml");
         }
 
         private string _resourceFile;

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
-using SF3.Types;
 using SF3.FileEditors;
+using static SF3.Utils.Utils;
 
 namespace SF3.Models.X002.MusicOverride
 {
@@ -13,23 +13,7 @@ namespace SF3.Models.X002.MusicOverride
         public MusicOverrideList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
-
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                _resourceFile = "Resources/S1/MusicOverrideList.xml";
-            }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                _resourceFile = "Resources/S2/MusicOverrideList.xml";
-            }
-            if (Scenario == ScenarioType.Scenario3)
-            {
-                _resourceFile = "Resources/S3/MusicOverrideList.xml";
-            }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                _resourceFile = "Resources/PD/MusicOverrideList.xml";
-            }
+            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "MusicOverrideList.xml");
         }
 
         private string _resourceFile;
