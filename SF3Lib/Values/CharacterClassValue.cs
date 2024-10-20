@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using static SF3.Utils.Resources;
 using static SF3.Utils.Utils;
 
 namespace SF3.Values

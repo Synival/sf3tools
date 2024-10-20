@@ -182,6 +182,7 @@
     <Compile Include="NamedValue.cs" />
     <Compile Include="FileEditors\SF3FileEditor.cs" />
     <Compile Include="Types\MapLeaderType.cs" />
+    <Compile Include="Utils\Resources.cs" />
     <Compile Include="ValueRange.cs" />
     <Compile Include="Stats.cs" />
     <Compile Include="Types\ScenarioType.cs" />

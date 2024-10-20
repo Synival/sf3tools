@@ -1,8 +1,6 @@
 ﻿using SF3.Types;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+using static SF3.Utils.Resources;
 using static SF3.Utils.Utils;
 
 namespace SF3.Values

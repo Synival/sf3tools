@@ -2,7 +2,7 @@
 using System.Xml;
 using System.IO;
 using SF3.FileEditors;
-using static SF3.Utils.Utils;
+using static SF3.Utils.Resources;
 
 namespace SF3.Models.X033_X031.Stats
 {
