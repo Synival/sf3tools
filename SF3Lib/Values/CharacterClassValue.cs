@@ -4,22 +4,20 @@ using static SF3.Utils.Utils;
 
 namespace SF3.Values
 {
+    public class CharacterClassValueResourceInfo : INamedValueFromResourceInfo
+    {
+        public string ResourceName => "CharacterClasses.xml";
+        public int MinValue => 0;
+        public int MaxValue => 0xFF;
+    }
+
     /// <summary>
     /// Named value for CharacterClass that can be bound to an ObjectListView.
     /// </summary>
-    public class CharacterClassValue : NamedValue
+    public class CharacterClassValue : NamedValueFromResource<CharacterClassValue, CharacterClassValueResourceInfo>
     {
-        public const int MinValue = 0;
-        public const int MaxValue = 0xFF;
-
-        public static readonly Dictionary<int, string> ValueNames = GetValueNameDictionaryFromXML("Resources/CharacterClasses.xml");
-
-        private static readonly Dictionary<NamedValue, string> _comboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => new CharacterClassValue(value));
-
-        public CharacterClassValue(int value) : base(NameOrHexValue(value, ValueNames), HexValueWithName(value, ValueNames), value)
+        public CharacterClassValue(int value) : base(value)
         {
         }
-
-        public override Dictionary<NamedValue, string> ComboBoxValues => _comboBoxValues;
     }
 }

@@ -70,7 +70,7 @@ namespace SF3.Editor.Extensions
             // Get all classes derived from 'NamedValue'
             var namedValueTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(domainAssembly => domainAssembly.GetTypes())
-                .Where(type => type != typeof(NamedValue) && typeof(NamedValue).IsAssignableFrom(type))
+                .Where(type => type != typeof(NamedValue) && !type.ContainsGenericParameters && typeof(NamedValue).IsAssignableFrom(type))
                 .OrderBy(x => x.Name)
                 .ToList();
 
