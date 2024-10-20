@@ -13,13 +13,7 @@ namespace SF3.Values
         public const int MinValue = 0;
         public const int MaxValue = 0xFF;
 
-        public static readonly Dictionary<ScenarioType, Dictionary<int, string>> ValueNames = new Dictionary<ScenarioType, Dictionary<int, string>>()
-        {
-            { ScenarioType.Scenario1,   GetValueNameDictionaryFromXML("Resources/S1/Specials.xml") },
-            { ScenarioType.Scenario2,   GetValueNameDictionaryFromXML("Resources/S2/Specials.xml") },
-            { ScenarioType.Scenario3,   GetValueNameDictionaryFromXML("Resources/S3/Specials.xml") },
-            { ScenarioType.PremiumDisk, GetValueNameDictionaryFromXML("Resources/PD/Specials.xml") },
-        };
+        public static readonly Dictionary<ScenarioType, Dictionary<int, string>> ValueNames = GetValueNameDictionaryForAllScenariosFromXML("Specials.xml");
 
         public static readonly Dictionary<ScenarioType, Dictionary<NamedValue, string>> _comboBoxValues = new Dictionary<ScenarioType, Dictionary<NamedValue, string>>()
         {

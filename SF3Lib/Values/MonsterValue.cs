@@ -15,15 +15,9 @@ namespace SF3.Values
         public const int MaxValue = 0xFF;
 
         // Values without FFFF
-        public static readonly Dictionary<ScenarioType, Dictionary<int, string>> ValueNames = new Dictionary<ScenarioType, Dictionary<int, string>>()
-        {
-            { ScenarioType.Scenario1,   GetValueNameDictionaryFromXML("Resources/S1/Monsters.xml") },
-            { ScenarioType.Scenario2,   GetValueNameDictionaryFromXML("Resources/S2/Monsters.xml") },
-            { ScenarioType.Scenario3,   GetValueNameDictionaryFromXML("Resources/S3/Monsters.xml") },
-            { ScenarioType.PremiumDisk, GetValueNameDictionaryFromXML("Resources/PD/Monsters.xml") },
-        };
+        public static readonly Dictionary<ScenarioType, Dictionary<int, string>> ValueNames = GetValueNameDictionaryForAllScenariosFromXML("Monsters.xml");
 
-        public static readonly Dictionary<int, string> ValueNamesPDX044 = GetValueNameDictionaryFromXML("Resources/PD/Monsters_X044.xml");
+        public static readonly Dictionary<int, string> ValueNamesPDX044 = GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.PremiumDisk, "Monsters_X044.xml"));
 
         public static readonly Dictionary<ScenarioType, Dictionary<NamedValue, string>> _comboBoxValues = new Dictionary<ScenarioType, Dictionary<NamedValue, string>>()
         {

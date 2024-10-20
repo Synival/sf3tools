@@ -14,6 +14,23 @@ namespace SF3.Utils
     public static class Resources
     {
         /// <summary>
+        /// Returns a dictionary of all ScenarioType values with a corresponding Dictionary of resource values
+        /// </summary>
+        /// <param name="resourceName"></param>
+        /// <returns></returns>
+        public static Dictionary<ScenarioType, Dictionary<int, string>> GetValueNameDictionaryForAllScenariosFromXML(string resourceName)
+        {
+            // TODO: maybe use reflection over ScenarioType?
+            return new Dictionary<ScenarioType, Dictionary<int, string>>()
+            {
+                { ScenarioType.Scenario1, GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.Scenario1, resourceName)) },
+                { ScenarioType.Scenario2, GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.Scenario2, resourceName)) },
+                { ScenarioType.Scenario3, GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.Scenario3, resourceName)) },
+                { ScenarioType.PremiumDisk, GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.PremiumDisk, resourceName)) }
+            };
+        }
+
+        /// <summary>
         /// Parses an XML file and returns a Dictionary of values (attribute "value") with their names (attribute "name").
         /// </summary>
         /// <param name="filename">XML file to parse.</param>
