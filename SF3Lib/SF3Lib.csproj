@@ -73,6 +73,7 @@
     <Compile Include="Attributes\BulkCopyRowNameAttribute.cs" />
     <Compile Include="Attributes\BulkCopyRecurseAttribute.cs" />
     <Compile Include="Attributes\BulkCopyAttribute.cs" />
+    <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions_BulkCopy.cs" />
     <Compile Include="Exceptions\FileEditorException.cs" />
