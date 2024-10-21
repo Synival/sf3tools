@@ -18,6 +18,28 @@ namespace SF3
         }
 
         /// <summary>
+        /// Factory function for making another value using the same settings as the current value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public abstract NamedValue MakeRelatedValue(int value);
+
+        /// <summary>
+        /// The minimum value that related values can be.
+        /// </summary>
+        public abstract int MinValue { get; }
+
+        /// <summary>
+        /// The maximum value that related values can be.
+        /// </summary>
+        public abstract int MaxValue { get; }
+
+        /// <summary>
+        /// Returns a dictionary with possible values and names for possible related values.
+        /// </summary>
+        public abstract Dictionary<int, string> PossibleValues { get; }
+
+        /// <summary>
         /// Returns a dictionary with possible values and names for display and modifying the value in a ComboBox.
         /// </summary>
         public abstract Dictionary<NamedValue, string> ComboBoxValues { get; }

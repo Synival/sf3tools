@@ -11,7 +11,8 @@ namespace SF3.Values
         string ResourceName { get; }
         int MinValue { get; }
         int MaxValue { get; }
-        Dictionary<ScenarioType, Dictionary<int, string>> ValueNames { get; }
+        Dictionary<ScenarioType, Dictionary<int, string>> PossibleValues { get; }
+        Dictionary<ScenarioType, Dictionary<NamedValue, string>> ComboBoxValues { get; }
     };
 
     public class NamedValueFromResourceForScenariosInfo : INamedValueFromResourceForScenariosInfo
@@ -19,26 +20,26 @@ namespace SF3.Values
         public NamedValueFromResourceForScenariosInfo(string resourceName)
         {
             ResourceName = resourceName;
-            ValueNames = GetValueNameDictionaryForAllScenariosFromXML(ResourceName);
+            PossibleValues = GetValueNameDictionaryForAllScenariosFromXML(ResourceName);
         }
 
         public string ResourceName { get; }
         public virtual int MinValue => 0x00;
         public virtual int MaxValue => 0xFF;
-        public Dictionary<ScenarioType, Dictionary<int, string>> ValueNames { get; }
+        public Dictionary<ScenarioType, Dictionary<int, string>> PossibleValues { get; }
+        public Dictionary<ScenarioType, Dictionary<NamedValue, string>> ComboBoxValues { get; } = new Dictionary<ScenarioType, Dictionary<NamedValue, string>>();
     };
 
     /// <summary>
     /// Named value with values from a resource file that can be bound to an ObjectListView.
     /// </summary>
-    public class NamedValueFromResourceForScenarios<TSelf, TResourceInfo> : NamedValue
-        where TSelf : NamedValue
+    public abstract class NamedValueFromResourceForScenarios<TResourceInfo> : NamedValue
         where TResourceInfo : INamedValueFromResourceForScenariosInfo, new()
     {
         public NamedValueFromResourceForScenarios(ScenarioType scenario, int value)
         : base(
-            NameOrHexValue(value, ValueNames[scenario]),
-            HexValueWithName(value, ValueNames[scenario]),
+            NameOrHexValue(value, ResourceInfo.PossibleValues[scenario]),
+            HexValueWithName(value, ResourceInfo.PossibleValues[scenario]),
             value
         )
         {
@@ -52,14 +53,23 @@ namespace SF3.Values
         }
 
         public static readonly TResourceInfo ResourceInfo = new TResourceInfo();
-        public static readonly int MinValue = ResourceInfo.MinValue;
-        public static readonly int MaxValue = ResourceInfo.MaxValue;
-        public static readonly Dictionary<ScenarioType, Dictionary<int, string>> ValueNames = ResourceInfo.ValueNames;
 
-        private static readonly Dictionary<ScenarioType, Dictionary<NamedValue, string>> _comboBoxValues =
-            MakeNamedValueComboBoxValuesForAllScenarios(MinValue, MaxValue, (s, v) => (TSelf)Activator.CreateInstance(typeof(TSelf), s, v));
+        public override int MinValue => ResourceInfo.MinValue;
+        public override int MaxValue => ResourceInfo.MaxValue;
 
-        public override Dictionary<NamedValue, string> ComboBoxValues => _comboBoxValues[Scenario];
+        public override Dictionary<int, string> PossibleValues => ResourceInfo.PossibleValues[Scenario];
+
+        public override Dictionary<NamedValue, string> ComboBoxValues
+        {
+            get
+            {
+                if (!ResourceInfo.ComboBoxValues.ContainsKey(Scenario))
+                {
+                    ResourceInfo.ComboBoxValues.Add(Scenario, MakeNamedValueComboBoxValues(this));
+                }
+                return ResourceInfo.ComboBoxValues[Scenario];
+            }
+        }
 
         public ScenarioType Scenario { get; }
     }

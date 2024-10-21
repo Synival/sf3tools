@@ -10,7 +10,8 @@ namespace SF3.Values
         string ResourceName { get; }
         int MinValue { get; }
         int MaxValue { get; }
-        Dictionary<int, string> ValueNames { get; }
+        Dictionary<int, string> PossibleValues { get; }
+        Dictionary<NamedValue, string> ComboBoxValues { get; set; }
     };
 
     public class NamedValueFromResourceInfo : INamedValueFromResourceInfo
@@ -18,33 +19,48 @@ namespace SF3.Values
         public NamedValueFromResourceInfo(string resourceName)
         {
             ResourceName = resourceName;
-            ValueNames = GetValueNameDictionaryFromXML("Resources/" + ResourceName);
+            PossibleValues = GetValueNameDictionaryFromXML("Resources/" + ResourceName);
         }
 
         public string ResourceName { get; }
         public virtual int MinValue => 0x00;
         public virtual int MaxValue => 0xFF;
-        public Dictionary<int, string> ValueNames { get; }
+        public Dictionary<int, string> PossibleValues { get; }
+        public Dictionary<NamedValue, string> ComboBoxValues { get; set; } = null;
     };
 
     /// <summary>
     /// Named value with values from a resource file that can be bound to an ObjectListView.
     /// </summary>
-    public class NamedValueFromResource<TSelf, TResourceInfo> : NamedValue
-        where TSelf : NamedValue
+    public abstract class NamedValueFromResource<TResourceInfo> : NamedValue
         where TResourceInfo : INamedValueFromResourceInfo, new()
     {
-        public NamedValueFromResource(int value) : base(NameOrHexValue(value, ValueNames), HexValueWithName(value, ValueNames), value)
+        public NamedValueFromResource(int value)
+        : base(
+            NameOrHexValue(value, ResourceInfo.PossibleValues),
+            HexValueWithName(value, ResourceInfo.PossibleValues),
+            value
+        )
         {
         }
 
         public static readonly TResourceInfo ResourceInfo = new TResourceInfo();
-        public static readonly int MinValue = ResourceInfo.MinValue;
-        public static readonly int MaxValue = ResourceInfo.MaxValue;
-        public static Dictionary<int, string> ValueNames => ResourceInfo.ValueNames;
 
-        private static readonly Dictionary<NamedValue, string> _comboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => (TSelf)Activator.CreateInstance(typeof(TSelf), value));
+        public override int MinValue => ResourceInfo.MinValue;
+        public override int MaxValue => ResourceInfo.MaxValue;
 
-        public override Dictionary<NamedValue, string> ComboBoxValues => _comboBoxValues;
+        public override Dictionary<int, string> PossibleValues => ResourceInfo.PossibleValues;
+
+        public override Dictionary<NamedValue, string> ComboBoxValues
+        {
+            get
+            {
+                if (ResourceInfo.ComboBoxValues == null)
+                {
+                    ResourceInfo.ComboBoxValues = MakeNamedValueComboBoxValues(this);
+                }
+                return ResourceInfo.ComboBoxValues;
+            }
+        }
     }
 }

@@ -10,10 +10,12 @@
     /// <summary>
     /// Named value for Sex that can be bound to an ObjectListView.
     /// </summary>
-    public class SexValue : NamedValueFromResource<SexValue, SexValueResourceInfo>
+    public class SexValue : NamedValueFromResource<SexValueResourceInfo>
     {
         public SexValue(int value) : base(value)
         {
         }
+
+        public override NamedValue MakeRelatedValue(int value) => new SexValue(value);
     }
 }

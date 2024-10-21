@@ -319,7 +319,7 @@ namespace SF3.Models.X1.Slots
 
         public MonsterValue EnemyID
         {
-            get => new MonsterValue(Scenario, false, _fileEditor.GetWord(enemyID), true);
+            get => new MonsterValue(Scenario, false, true, _fileEditor.GetWord(enemyID));
             set => _fileEditor.SetWord(enemyID, value.Value);
         }
 
