@@ -486,10 +486,10 @@ namespace SF3.Models.X019.Monsters
             set => _fileEditor.SetWord(gold, value);
         }
 
-        public int Drop
+        public ItemValue Drop
         {
-            get => _fileEditor.GetWord(drop);
-            set => _fileEditor.SetWord(drop, value);
+            get => new ItemValue(Scenario, _fileEditor.GetWord(drop));
+            set => _fileEditor.SetWord(drop, value.Value);
         }
 
         public int Unknown7

@@ -10,7 +10,7 @@
     /// <summary>
     /// Named value for WeaponType that can be bound to an ObjectListView.
     /// </summary>
-    public class WeaponTypeValue : NamedValueFromResource<WeaponTypeValue, StatTypeValueResourceInfo>
+    public class WeaponTypeValue : NamedValueFromResource<WeaponTypeValue, WeaponTypeValueResourceInfo>
     {
         public WeaponTypeValue(int value) : base(value)
         {
