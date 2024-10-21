@@ -40,7 +40,6 @@ namespace SF3.Models.X033_X031.InitialInfos
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                InitialInfo[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

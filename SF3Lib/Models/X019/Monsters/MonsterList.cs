@@ -46,7 +46,6 @@ namespace SF3.Models.X019.Monsters
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Monster[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

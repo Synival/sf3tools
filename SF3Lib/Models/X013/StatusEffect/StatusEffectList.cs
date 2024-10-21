@@ -38,7 +38,6 @@ namespace SF3.Models.X013.StatusEffects
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                StatusEffect[] old;
                 //int stop = 0;
                 //int numberTest = 0;
                 //while (!xml.EOF)

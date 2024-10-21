@@ -40,7 +40,6 @@ namespace SF3.Models.X002.Spells
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Spell[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

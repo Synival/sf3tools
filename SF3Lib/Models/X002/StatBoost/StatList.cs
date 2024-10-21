@@ -38,7 +38,6 @@ namespace SF3.Models.X002.StatBoost
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                StatBoost[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

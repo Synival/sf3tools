@@ -38,7 +38,6 @@ namespace SF3.Models.X1.Headers
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Header[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

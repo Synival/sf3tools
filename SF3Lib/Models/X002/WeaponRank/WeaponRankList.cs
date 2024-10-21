@@ -38,7 +38,6 @@ namespace SF3.Models.X002.WeaponRank
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                WeaponRank[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

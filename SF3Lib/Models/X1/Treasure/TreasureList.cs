@@ -43,7 +43,6 @@ namespace SF3.Models.X1.Treasures
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Treasure[] old;
                 //int stop = 0;
                 //int numberTest = 0;
                 //while (!xml.EOF)

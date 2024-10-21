@@ -58,7 +58,6 @@ namespace SF3.Models.X1.AI
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                AI[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

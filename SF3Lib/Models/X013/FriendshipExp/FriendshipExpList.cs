@@ -37,7 +37,6 @@ namespace SF3.Models.X013.Presets
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                FriendshipExp[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

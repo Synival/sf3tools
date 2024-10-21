@@ -38,7 +38,6 @@ namespace SF3.Models.X013.HealExp
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                HealExp[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

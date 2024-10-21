@@ -59,7 +59,6 @@ namespace SF3.Models.X1.CustomMovement
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                CustomMovement[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

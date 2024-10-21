@@ -41,7 +41,6 @@ namespace SF3.Models.X013.Specials
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Special[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

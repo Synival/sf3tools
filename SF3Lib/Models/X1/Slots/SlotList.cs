@@ -49,7 +49,6 @@ namespace SF3.Models.X1.Slots
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Slot[] old;
                 //int stop = 0;
                 while (!xml.EOF)
                 {

@@ -41,7 +41,6 @@ namespace SF3.Models.X013.MagicBonus
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                MagicBonus[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

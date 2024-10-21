@@ -38,7 +38,6 @@ namespace SF3.Models.X013.Soulfail
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Soulfail[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

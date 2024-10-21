@@ -40,7 +40,6 @@ namespace SF3.Models.X013.SupportTypes
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                SupportType[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

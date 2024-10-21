@@ -38,7 +38,6 @@ namespace SF3.Models.X1.Arrows
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Arrow[] old;
                 //int stop = 0;
                 //int numberTest = 0;
                 //while (!xml.EOF)

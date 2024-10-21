@@ -41,7 +41,6 @@ namespace SF3.Models.X033_X031.Stats
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                Stats[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

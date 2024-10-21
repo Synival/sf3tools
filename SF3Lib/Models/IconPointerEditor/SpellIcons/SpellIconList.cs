@@ -41,7 +41,6 @@ namespace SF3.Models.IconPointerEditor.SpellIcons
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                SpellIcon[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();

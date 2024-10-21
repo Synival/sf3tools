@@ -38,7 +38,6 @@ namespace SF3.Models.X013.CritMod
                 settings.IgnoreWhitespace = true;
                 XmlReader xml = XmlTextReader.Create(stream, settings);
                 xml.Read();
-                CritMod[] old;
                 while (!xml.EOF)
                 {
                     xml.Read();
