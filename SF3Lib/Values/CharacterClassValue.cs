@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using static SF3.Utils.Resources;
-using static SF3.Utils.Utils;
-
-namespace SF3.Values
+﻿namespace SF3.Values
 {
     public class CharacterClassValueResourceInfo : INamedValueFromResourceInfo
     {
