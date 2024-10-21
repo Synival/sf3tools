@@ -48,7 +48,7 @@ namespace SF3.Models.X002.WeaponRank
                         _models = new WeaponRank[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new WeaponRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[old.Length].WeaponRankID] = _models[old.Length];
+                        items[_models[_models.Length - 1].WeaponRankID] = _models[_models.Length - 1];
                     }
                 }
             }

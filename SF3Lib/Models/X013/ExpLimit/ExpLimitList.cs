@@ -48,7 +48,7 @@ namespace SF3.Models.X013.ExpLimit
                         _models = new ExpLimit[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new ExpLimit(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[old.Length].ExpLimitID] = _models[old.Length];
+                        items[_models[_models.Length - 1].ExpLimitID] = _models[_models.Length - 1];
                     }
                 }
             }

@@ -56,7 +56,7 @@ namespace SF3.Models.X019.Monsters
                         _models = new Monster[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Monster(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[_models[old.Length].ID] = _models[old.Length];
+                        models[_models[_models.Length - 1].ID] = _models[_models.Length - 1];
                     }
                 }
             }

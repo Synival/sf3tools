@@ -48,7 +48,7 @@ namespace SF3.Models.X013.Soulmate
                         _models = new Soulmate[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Soulmate(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[old.Length].SoulmateID] = _models[old.Length];
+                        items[_models[_models.Length - 1].SoulmateID] = _models[_models.Length - 1];
                     }
                 }
             }

@@ -51,7 +51,7 @@ namespace SF3.Models.IconPointerEditor.SpellIcons
                         _models = new SpellIcon[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new SpellIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[_models[old.Length].ID] = _models[old.Length];
+                        models[_models[_models.Length - 1].ID] = _models[_models.Length - 1];
                         //MessageBox.Show("" + _fileEditor.GetDouble(_models[_models.Length - 1].Address));
                     }
                 }

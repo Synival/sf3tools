@@ -48,7 +48,7 @@ namespace SF3.Models.X013.Soulfail
                         _models = new Soulfail[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Soulfail(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[old.Length].SoulfailID] = _models[old.Length];
+                        items[_models[_models.Length - 1].SoulfailID] = _models[_models.Length - 1];
                     }
                 }
             }

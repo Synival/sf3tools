@@ -48,7 +48,7 @@ namespace SF3.Models.X1.Tiles
                         _models = new Tile[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Tile(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        tiles[_models[old.Length].TileID] = _models[old.Length];
+                        tiles[_models[_models.Length - 1].TileID] = _models[_models.Length - 1];
                     }
                 }
             }

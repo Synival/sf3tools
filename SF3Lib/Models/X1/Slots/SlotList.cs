@@ -60,7 +60,7 @@ namespace SF3.Models.X1.Slots
                         _models = new Slot[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Slot(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[_models[old.Length].ID] = _models[old.Length];
+                        models[_models[_models.Length - 1].ID] = _models[_models.Length - 1];
                         /*Console.WriteLine(items[itemssorted[old.Length].ID].EnemyID);
                         //numberTest = items[itemssorted[old.Length].ID].EnemyID;
                         if (items[itemssorted[old.Length].ID].EnemyID == 0xffff)

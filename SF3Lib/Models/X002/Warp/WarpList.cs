@@ -65,7 +65,7 @@ namespace SF3.Models.X002.Warps
                             myName = "WarpIndex ";
                             myName = myName + myCount;
 
-                            items[_models[old.Length].WarpID] = _models[old.Length];
+                            items[_models[_models.Length - 1].WarpID] = _models[_models.Length - 1];
                         }
                     }
                 }

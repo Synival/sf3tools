@@ -50,7 +50,7 @@ namespace SF3.Models.X002.Presets
                         _models = new Preset[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Preset(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        presets[_models[old.Length].PresetID] = _models[old.Length];
+                        presets[_models[_models.Length - 1].PresetID] = _models[_models.Length - 1];
                     }
                 }
             }

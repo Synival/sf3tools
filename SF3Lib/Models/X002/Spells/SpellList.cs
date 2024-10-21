@@ -50,7 +50,7 @@ namespace SF3.Models.X002.Spells
                         _models = new Spell[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Spell(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        spells[_models[old.Length].SpellID] = _models[old.Length];
+                        spells[_models[_models.Length - 1].SpellID] = _models[_models.Length - 1];
                     }
                 }
             }

@@ -48,7 +48,7 @@ namespace SF3.Models.X013.HealExp
                         _models = new HealExp[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new HealExp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[old.Length].HealExpID] = _models[old.Length];
+                        items[_models[_models.Length - 1].HealExpID] = _models[_models.Length - 1];
                     }
                 }
             }

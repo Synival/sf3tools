@@ -69,7 +69,7 @@ namespace SF3.Models.X1.CustomMovement
                         _models = new CustomMovement[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new CustomMovement(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        spells[_models[old.Length].CustomMovementID] = _models[old.Length];
+                        spells[_models[_models.Length - 1].CustomMovementID] = _models[_models.Length - 1];
                     }
                 }
             }

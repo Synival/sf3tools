@@ -51,7 +51,7 @@ namespace SF3.Models.X033_X031.Stats
                         _models = new Stats[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Stats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        stats[_models[old.Length].ID] = _models[old.Length];
+                        stats[_models[_models.Length - 1].ID] = _models[_models.Length - 1];
                     }
                 }
             }

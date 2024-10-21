@@ -50,7 +50,7 @@ namespace SF3.Models.X033_X031.InitialInfos
                         _models = new InitialInfo[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new InitialInfo(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[_models[old.Length].PresetID] = _models[old.Length];
+                        models[_models[_models.Length - 1].PresetID] = _models[_models.Length - 1];
                     }
                 }
             }

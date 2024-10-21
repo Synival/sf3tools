@@ -51,7 +51,7 @@ namespace SF3.Models.X002.Loading
                         _models = new Loading[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Loading(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[old.Length].LoadID] = _models[old.Length];
+                        items[_models[_models.Length - 1].LoadID] = _models[_models.Length - 1];
                     }
                 }
             }

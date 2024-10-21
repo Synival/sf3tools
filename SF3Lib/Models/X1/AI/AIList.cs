@@ -68,7 +68,7 @@ namespace SF3.Models.X1.AI
                         _models = new AI[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new AI(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[_models[old.Length].AIID] = _models[old.Length];
+                        models[_models[_models.Length - 1].AIID] = _models[_models.Length - 1];
                     }
                 }
             }

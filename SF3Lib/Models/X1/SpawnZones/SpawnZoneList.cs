@@ -48,7 +48,7 @@ namespace SF3.Models.X1.SpawnZones
                         _models = new SpawnZone[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new SpawnZone(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[_models[old.Length].UnknownAIID] = _models[old.Length];
+                        models[_models[_models.Length - 1].UnknownAIID] = _models[_models.Length - 1];
                     }
                 }
             }

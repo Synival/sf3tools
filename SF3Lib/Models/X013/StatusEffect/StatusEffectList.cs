@@ -60,7 +60,7 @@ namespace SF3.Models.X013.StatusEffects
                             old.CopyTo(_models, 0);
                             _models[old.Length] = new StatusEffect(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
 
-                            items[_models[old.Length].StatusEffectID] = _models[old.Length];
+                            items[_models[_models.Length - 1].StatusEffectID] = _models[_models.Length - 1];
                         }
                     }
                 }

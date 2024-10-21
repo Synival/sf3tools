@@ -48,7 +48,7 @@ namespace SF3.Models.X013.SupportStats
                         _models = new SupportStats[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new SupportStats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        models[_models[old.Length].StatID] = _models[old.Length];
+                        models[_models[_models.Length - 1].StatID] = _models[_models.Length - 1];
                     }
                 }
             }

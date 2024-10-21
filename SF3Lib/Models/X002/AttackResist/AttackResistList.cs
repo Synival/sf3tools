@@ -48,7 +48,7 @@ namespace SF3.Models.X002.AttackResist
                         _models = new AttackResist[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new AttackResist(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[old.Length].AttackResistID] = _models[old.Length];
+                        items[_models[_models.Length - 1].AttackResistID] = _models[_models.Length - 1];
                     }
                 }
             }

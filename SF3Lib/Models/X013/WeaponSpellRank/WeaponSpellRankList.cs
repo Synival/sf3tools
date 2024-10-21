@@ -48,7 +48,7 @@ namespace SF3.Models.X013.WeaponSpellRank
                         _models = new WeaponSpellRank[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new WeaponSpellRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[old.Length].WeaponSpellRankID] = _models[old.Length];
+                        items[_models[_models.Length - 1].WeaponSpellRankID] = _models[_models.Length - 1];
                     }
                 }
             }

@@ -48,7 +48,7 @@ namespace SF3.Models.X013.Critrate
                         _models = new Critrate[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Critrate(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[old.Length].CritrateID] = _models[old.Length];
+                        items[_models[_models.Length - 1].CritrateID] = _models[_models.Length - 1];
                     }
                 }
             }
