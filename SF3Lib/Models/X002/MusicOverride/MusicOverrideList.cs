@@ -17,7 +17,7 @@ namespace SF3.Models.X002.MusicOverride
         }
 
         private string _resourceFile;
-        private MusicOverride[] items;
+        private MusicOverride[] models;
         private IX002_FileEditor _fileEditor;
 
         public override string ResourceFile => _resourceFile;
@@ -29,7 +29,7 @@ namespace SF3.Models.X002.MusicOverride
         public override bool Load()
         {
             _models = new MusicOverride[0];
-            items = new MusicOverride[MaxSize];
+            models = new MusicOverride[MaxSize];
             FileStream stream = null;
             try
             {
@@ -51,7 +51,7 @@ namespace SF3.Models.X002.MusicOverride
                         _models = new MusicOverride[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new MusicOverride(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[_models.Length - 1].MusicOverrideID] = _models[_models.Length - 1];
+                        models[_models[_models.Length - 1].MusicOverrideID] = _models[_models.Length - 1];
                     }
                 }
             }

@@ -15,7 +15,7 @@ namespace SF3.Models.X013.StatusEffects
         }
 
         private IX013_FileEditor _fileEditor;
-        private StatusEffect[] items;
+        private StatusEffect[] models;
 
         public override string ResourceFile => "Resources/StatusGroupList.xml";
 
@@ -26,7 +26,7 @@ namespace SF3.Models.X013.StatusEffects
         public override bool Load()
         {
             _models = new StatusEffect[0];
-            items = new StatusEffect[MaxSize];
+            models = new StatusEffect[MaxSize];
             FileStream stream = null;
             try
             {
@@ -60,7 +60,7 @@ namespace SF3.Models.X013.StatusEffects
                             old.CopyTo(_models, 0);
                             _models[old.Length] = new StatusEffect(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
 
-                            items[_models[_models.Length - 1].StatusEffectID] = _models[_models.Length - 1];
+                            models[_models[_models.Length - 1].StatusEffectID] = _models[_models.Length - 1];
                         }
                     }
                 }

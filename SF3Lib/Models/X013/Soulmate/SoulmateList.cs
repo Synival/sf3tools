@@ -15,7 +15,7 @@ namespace SF3.Models.X013.Soulmate
         }
 
         private IX013_FileEditor _fileEditor;
-        private Soulmate[] items;
+        private Soulmate[] models;
 
         public override string ResourceFile => "Resources/SoulmateList.xml";
 
@@ -26,7 +26,7 @@ namespace SF3.Models.X013.Soulmate
         public override bool Load()
         {
             _models = new Soulmate[0];
-            items = new Soulmate[MaxSize];
+            models = new Soulmate[MaxSize];
             FileStream stream = null;
             try
             {
@@ -48,7 +48,7 @@ namespace SF3.Models.X013.Soulmate
                         _models = new Soulmate[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Soulmate(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[_models.Length - 1].SoulmateID] = _models[_models.Length - 1];
+                        models[_models[_models.Length - 1].SoulmateID] = _models[_models.Length - 1];
                     }
                 }
             }

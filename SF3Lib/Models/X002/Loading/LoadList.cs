@@ -18,7 +18,7 @@ namespace SF3.Models.X002.Loading
 
         private string _resourceFile;
         private IX002_FileEditor _fileEditor;
-        private Loading[] items;
+        private Loading[] models;
 
         public override string ResourceFile => _resourceFile;
 
@@ -29,7 +29,7 @@ namespace SF3.Models.X002.Loading
         public override bool Load()
         {
             _models = new Loading[0];
-            items = new Loading[MaxSize];
+            models = new Loading[MaxSize];
             FileStream stream = null;
             try
             {
@@ -51,7 +51,7 @@ namespace SF3.Models.X002.Loading
                         _models = new Loading[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Loading(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[_models.Length - 1].LoadID] = _models[_models.Length - 1];
+                        models[_models[_models.Length - 1].LoadID] = _models[_models.Length - 1];
                     }
                 }
             }

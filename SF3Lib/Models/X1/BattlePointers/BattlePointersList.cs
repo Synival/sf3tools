@@ -14,7 +14,7 @@ namespace SF3.Models.X1.BattlePointers
             _fileEditor = fileEditor;
         }
 
-        private BattlePointers[] items;
+        private BattlePointers[] models;
         private IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/BattlePointersList.xml";
@@ -26,7 +26,7 @@ namespace SF3.Models.X1.BattlePointers
         public override bool Load()
         {
             _models = new BattlePointers[0];
-            items = new BattlePointers[MaxSize];
+            models = new BattlePointers[MaxSize];
             FileStream stream = null;
             try
             {
@@ -48,7 +48,7 @@ namespace SF3.Models.X1.BattlePointers
                         _models = new BattlePointers[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new BattlePointers(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[_models.Length - 1].BattleID] = _models[_models.Length - 1];
+                        models[_models[_models.Length - 1].BattleID] = _models[_models.Length - 1];
                     }
                 }
             }

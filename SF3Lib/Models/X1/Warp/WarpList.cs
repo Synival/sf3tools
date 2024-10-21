@@ -14,7 +14,7 @@ namespace SF3.Models.X1.Warps
             _fileEditor = fileEditor;
         }
 
-        private Warp[] items;
+        private Warp[] models;
         private IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/X1Warp.xml";
@@ -26,7 +26,7 @@ namespace SF3.Models.X1.Warps
         public override bool Load()
         {
             _models = new Warp[0];
-            items = new Warp[MaxSize];
+            models = new Warp[MaxSize];
             FileStream stream = null;
             try
             {
@@ -58,7 +58,7 @@ namespace SF3.Models.X1.Warps
                             _models = new Warp[old.Length + 1];
                             old.CopyTo(_models, 0);
                             _models[old.Length] = new Warp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                            items[_models[_models.Length - 1].WarpID] = _models[_models.Length - 1];
+                            models[_models[_models.Length - 1].WarpID] = _models[_models.Length - 1];
                         }
                     }
                 }

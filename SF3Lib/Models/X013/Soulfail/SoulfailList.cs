@@ -15,7 +15,7 @@ namespace SF3.Models.X013.Soulfail
         }
 
         private IX013_FileEditor _fileEditor;
-        private Soulfail[] items;
+        private Soulfail[] models;
 
         public override string ResourceFile => "Resources/Soulfail.xml";
 
@@ -26,7 +26,7 @@ namespace SF3.Models.X013.Soulfail
         public override bool Load()
         {
             _models = new Soulfail[0];
-            items = new Soulfail[MaxSize];
+            models = new Soulfail[MaxSize];
             FileStream stream = null;
             try
             {
@@ -48,7 +48,7 @@ namespace SF3.Models.X013.Soulfail
                         _models = new Soulfail[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Soulfail(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[_models.Length - 1].SoulfailID] = _models[_models.Length - 1];
+                        models[_models[_models.Length - 1].SoulfailID] = _models[_models.Length - 1];
                     }
                 }
             }

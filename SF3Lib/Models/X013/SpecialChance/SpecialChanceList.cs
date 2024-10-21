@@ -15,7 +15,7 @@ namespace SF3.Models.X013.SpecialChance
         }
 
         private IX013_FileEditor _fileEditor;
-        private SpecialChance[] items;
+        private SpecialChance[] models;
 
         public override string ResourceFile => "Resources/SpecialChanceList.xml";
 
@@ -26,7 +26,7 @@ namespace SF3.Models.X013.SpecialChance
         public override bool Load()
         {
             _models = new SpecialChance[0];
-            items = new SpecialChance[MaxSize];
+            models = new SpecialChance[MaxSize];
             FileStream stream = null;
             try
             {
@@ -48,7 +48,7 @@ namespace SF3.Models.X013.SpecialChance
                         _models = new SpecialChance[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new SpecialChance(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[_models.Length - 1].SpecialChanceID] = _models[_models.Length - 1];
+                        models[_models[_models.Length - 1].SpecialChanceID] = _models[_models.Length - 1];
                     }
                 }
             }

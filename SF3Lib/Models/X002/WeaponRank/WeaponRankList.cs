@@ -15,7 +15,7 @@ namespace SF3.Models.X002.WeaponRank
         }
 
         private IX002_FileEditor _fileEditor;
-        private WeaponRank[] items;
+        private WeaponRank[] models;
 
         public override string ResourceFile => "Resources/WeaponRankList.xml";
 
@@ -26,7 +26,7 @@ namespace SF3.Models.X002.WeaponRank
         public override bool Load()
         {
             _models = new WeaponRank[0];
-            items = new WeaponRank[MaxSize];
+            models = new WeaponRank[MaxSize];
             FileStream stream = null;
             try
             {
@@ -48,7 +48,7 @@ namespace SF3.Models.X002.WeaponRank
                         _models = new WeaponRank[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new WeaponRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[_models.Length - 1].WeaponRankID] = _models[_models.Length - 1];
+                        models[_models[_models.Length - 1].WeaponRankID] = _models[_models.Length - 1];
                     }
                 }
             }

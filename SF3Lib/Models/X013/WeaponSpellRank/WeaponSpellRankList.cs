@@ -15,7 +15,7 @@ namespace SF3.Models.X013.WeaponSpellRank
         }
 
         private IX013_FileEditor _fileEditor;
-        private WeaponSpellRank[] items;
+        private WeaponSpellRank[] models;
 
         public override string ResourceFile => "Resources/WeaponSpellRankList.xml";
 
@@ -26,7 +26,7 @@ namespace SF3.Models.X013.WeaponSpellRank
         public override bool Load()
         {
             _models = new WeaponSpellRank[0];
-            items = new WeaponSpellRank[MaxSize];
+            models = new WeaponSpellRank[MaxSize];
             FileStream stream = null;
             try
             {
@@ -48,7 +48,7 @@ namespace SF3.Models.X013.WeaponSpellRank
                         _models = new WeaponSpellRank[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new WeaponSpellRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[_models.Length - 1].WeaponSpellRankID] = _models[_models.Length - 1];
+                        models[_models[_models.Length - 1].WeaponSpellRankID] = _models[_models.Length - 1];
                     }
                 }
             }

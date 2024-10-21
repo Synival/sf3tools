@@ -14,7 +14,7 @@ namespace SF3.Models.X002.Warps
         }
 
         private IX002_FileEditor _fileEditor;
-        private Warp[] items;
+        private Warp[] models;
 
         public override string ResourceFile => "Resources/X002Warp.xml";
 
@@ -25,7 +25,7 @@ namespace SF3.Models.X002.Warps
         public override bool Load()
         {
             _models = new Warp[0];
-            items = new Warp[MaxSize];
+            models = new Warp[MaxSize];
             FileStream stream = null;
             try
             {
@@ -65,7 +65,7 @@ namespace SF3.Models.X002.Warps
                             myName = "WarpIndex ";
                             myName = myName + myCount;
 
-                            items[_models[_models.Length - 1].WarpID] = _models[_models.Length - 1];
+                            models[_models[_models.Length - 1].WarpID] = _models[_models.Length - 1];
                         }
                     }
                 }

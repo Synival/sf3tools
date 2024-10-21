@@ -18,7 +18,7 @@ namespace SF3.Models.X033_X031.Stats
 
         private string _resourceFile;
         private IX033_X031_FileEditor _fileEditor;
-        private Stats[] stats;
+        private Stats[] models;
 
         public override string ResourceFile => _resourceFile;
 
@@ -29,7 +29,7 @@ namespace SF3.Models.X033_X031.Stats
         public override bool Load()
         {
             _models = new Stats[0];
-            stats = new Stats[MaxSize];
+            models = new Stats[MaxSize];
             FileStream stream = null;
             try
             {
@@ -51,7 +51,7 @@ namespace SF3.Models.X033_X031.Stats
                         _models = new Stats[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Stats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        stats[_models[_models.Length - 1].ID] = _models[_models.Length - 1];
+                        models[_models[_models.Length - 1].ID] = _models[_models.Length - 1];
                     }
                 }
             }

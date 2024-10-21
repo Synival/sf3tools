@@ -14,7 +14,7 @@ namespace SF3.Models.X1.Tiles
             _fileEditor = fileEditor;
         }
 
-        private Tile[] tiles;
+        private Tile[] models;
         private IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/MovementTypes.xml";
@@ -26,7 +26,7 @@ namespace SF3.Models.X1.Tiles
         public override bool Load()
         {
             _models = new Tile[0];
-            tiles = new Tile[MaxSize];
+            models = new Tile[MaxSize];
             FileStream stream = null;
             try
             {
@@ -48,7 +48,7 @@ namespace SF3.Models.X1.Tiles
                         _models = new Tile[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Tile(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        tiles[_models[_models.Length - 1].TileID] = _models[_models.Length - 1];
+                        models[_models[_models.Length - 1].TileID] = _models[_models.Length - 1];
                     }
                 }
             }

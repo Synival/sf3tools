@@ -18,7 +18,7 @@ namespace SF3.Models.X002.Spells
 
         private string _resourceFile;
         private IX002_FileEditor _fileEditor;
-        private Spell[] spells;
+        private Spell[] models;
 
         public override string ResourceFile => _resourceFile;
 
@@ -29,7 +29,7 @@ namespace SF3.Models.X002.Spells
         public override bool Load()
         {
             _models = new Spell[0];
-            spells = new Spell[MaxSize];
+            models = new Spell[MaxSize];
             FileStream stream = null;
             try
             {
@@ -50,7 +50,7 @@ namespace SF3.Models.X002.Spells
                         _models = new Spell[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new Spell(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        spells[_models[_models.Length - 1].SpellID] = _models[_models.Length - 1];
+                        models[_models[_models.Length - 1].SpellID] = _models[_models.Length - 1];
                     }
                 }
             }

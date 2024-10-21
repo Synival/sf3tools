@@ -18,7 +18,7 @@ namespace SF3.Models.X013.MagicBonus
 
         private string _resourceFile;
         private IX013_FileEditor _fileEditor;
-        private MagicBonus[] items;
+        private MagicBonus[] models;
 
         public override string ResourceFile => _resourceFile;
 
@@ -29,7 +29,7 @@ namespace SF3.Models.X013.MagicBonus
         public override bool Load()
         {
             _models = new MagicBonus[0];
-            items = new MagicBonus[MaxSize];
+            models = new MagicBonus[MaxSize];
             FileStream stream = null;
             try
             {
@@ -51,7 +51,7 @@ namespace SF3.Models.X013.MagicBonus
                         _models = new MagicBonus[old.Length + 1];
                         old.CopyTo(_models, 0);
                         _models[old.Length] = new MagicBonus(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        items[_models[_models.Length - 1].MagicID] = _models[_models.Length - 1];
+                        models[_models[_models.Length - 1].MagicID] = _models[_models.Length - 1];
                     }
                 }
             }

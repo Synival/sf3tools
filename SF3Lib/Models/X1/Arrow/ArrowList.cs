@@ -14,7 +14,7 @@ namespace SF3.Models.X1.Arrows
             _fileEditor = fileEditor;
         }
 
-        private Arrow[] items;
+        private Arrow[] models;
         private IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/X1Arrow.xml";
@@ -26,7 +26,7 @@ namespace SF3.Models.X1.Arrows
         public override bool Load()
         {
             _models = new Arrow[0];
-            items = new Arrow[MaxSize];
+            models = new Arrow[MaxSize];
             FileStream stream = null;
             try
             {
@@ -59,7 +59,7 @@ namespace SF3.Models.X1.Arrows
                                 _models = new Npc[old.Length + 1];
                                 old.CopyTo(_models, 0);
                                 _models[old.Length] = new Npc(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                items[_models[_models.Length - 1].NpcID] = _models[_models.Length - 1];
+                                models[_models[_models.Length - 1].NpcID] = _models[_models.Length - 1];
                                 if (_models[_models.Length - 1].SpriteID == 0xffff)
                                 {
                                     myCount = 1 + myCount;
@@ -84,7 +84,7 @@ namespace SF3.Models.X1.Arrows
                                 _models = new Arrow[old.Length + 1];
                                 old.CopyTo(_models, 0);
                                 _models[old.Length] = new Arrow(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                items[_models[_models.Length - 1].ArrowID] = _models[_models.Length - 1];
+                                models[_models[_models.Length - 1].ArrowID] = _models[_models.Length - 1];
                                 if (_models[_models.Length - 1].ArrowUnknown0 == 0xffff)
                                 {
                                     myCount = 1 + myCount;

@@ -14,7 +14,7 @@ namespace SF3.Models.X1.Npcs
             _fileEditor = fileEditor;
         }
 
-        private Npc[] items;
+        private Npc[] models;
         private IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/X1Npc.xml";
@@ -26,7 +26,7 @@ namespace SF3.Models.X1.Npcs
         public override bool Load()
         {
             _models = new Npc[0];
-            items = new Npc[MaxSize];
+            models = new Npc[MaxSize];
             FileStream stream = null;
             try
             {
@@ -59,7 +59,7 @@ namespace SF3.Models.X1.Npcs
                                 _models = new Npc[old.Length + 1];
                                 old.CopyTo(_models, 0);
                                 _models[old.Length] = new Npc(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                items[_models[_models.Length - 1].NpcID] = _models[_models.Length - 1];
+                                models[_models[_models.Length - 1].NpcID] = _models[_models.Length - 1];
                                 if (_models[_models.Length - 1].SpriteID == 0xffff)
                                 {
                                     myCount = 1 + myCount;
@@ -84,7 +84,7 @@ namespace SF3.Models.X1.Npcs
                                 _models = new Npc[old.Length + 1];
                                 old.CopyTo(_models, 0);
                                 _models[old.Length] = new Npc(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                items[_models[_models.Length - 1].NpcID] = _models[_models.Length - 1];
+                                models[_models[_models.Length - 1].NpcID] = _models[_models.Length - 1];
                                 if (_models[_models.Length - 1].SpriteID == 0xffff)
                                 {
                                     myCount = 1 + myCount;

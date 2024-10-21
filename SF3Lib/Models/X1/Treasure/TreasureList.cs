@@ -19,7 +19,7 @@ namespace SF3.Models.X1.Treasures
             _fileEditor = fileEditor;
         }
 
-        private Treasure[] items;
+        private Treasure[] models;
         private IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/X1Treasure.xml";
@@ -31,7 +31,7 @@ namespace SF3.Models.X1.Treasures
         public override bool Load()
         {
             _models = new Treasure[0];
-            items = new Treasure[MaxSize];
+            models = new Treasure[MaxSize];
             FileStream stream = null;
             try
             {
@@ -64,7 +64,7 @@ namespace SF3.Models.X1.Treasures
                                 _models = new Treasure[old.Length + 1];
                                 old.CopyTo(_models, 0);
                                 _models[old.Length] = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                items[_models[_models.Length - 1].TreasureID] = _models[_models.Length - 1];
+                                models[_models[_models.Length - 1].TreasureID] = _models[_models.Length - 1];
                                 if (_models[_models.Length - 1].Searched == 0xffff)
                                 {
                                     myCount = 1 + myCount;
@@ -89,7 +89,7 @@ namespace SF3.Models.X1.Treasures
                                 _models = new Treasure[old.Length + 1];
                                 old.CopyTo(_models, 0);
                                 _models[old.Length] = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                items[_models[_models.Length - 1].TreasureID] = _models[_models.Length - 1];
+                                models[_models[_models.Length - 1].TreasureID] = _models[_models.Length - 1];
                                 if (_models[_models.Length - 1].Searched == 0xffff)
                                 {
                                     myCount = 1 + myCount;

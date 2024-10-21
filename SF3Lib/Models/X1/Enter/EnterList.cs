@@ -14,7 +14,7 @@ namespace SF3.Models.X1.Enters
             _fileEditor = fileEditor;
         }
 
-        private Enter[] items;
+        private Enter[] models;
         private IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/X1Enter.xml";
@@ -26,7 +26,7 @@ namespace SF3.Models.X1.Enters
         public override bool Load()
         {
             _models = new Enter[0];
-            items = new Enter[MaxSize];
+            models = new Enter[MaxSize];
             FileStream stream = null;
             try
             {
@@ -59,7 +59,7 @@ namespace SF3.Models.X1.Enters
                                 _models = new Npc[old.Length + 1];
                                 old.CopyTo(_models, 0);
                                 _models[old.Length] = new Npc(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                items[_models[_models.Length - 1].NpcID] = _models[_models.Length - 1];
+                                models[_models[_models.Length - 1].NpcID] = _models[_models.Length - 1];
                                 if (_models[_models.Length - 1].SpriteID == 0xffff)
                                 {
                                     myCount = 1 + myCount;
@@ -84,7 +84,7 @@ namespace SF3.Models.X1.Enters
                                 _models = new Enter[old.Length + 1];
                                 old.CopyTo(_models, 0);
                                 _models[old.Length] = new Enter(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                items[_models[_models.Length - 1].EnterID] = _models[_models.Length - 1];
+                                models[_models[_models.Length - 1].EnterID] = _models[_models.Length - 1];
                                 if (_models[_models.Length - 1].Entered == 0xffff)
                                 {
                                     myCount = 1 + myCount;
