@@ -35,10 +35,7 @@ namespace SF3.Models.X033_X031.InitialInfos
             try
             {
                 stream = new FileStream(ResourceFile, FileMode.Open);
-                XmlReaderSettings settings = new XmlReaderSettings();
-                settings.IgnoreComments = true;
-                settings.IgnoreWhitespace = true;
-                XmlReader xml = XmlTextReader.Create(stream, settings);
+                var xml = MakeXmlReader(stream);
                 xml.Read();
                 while (!xml.EOF)
                 {

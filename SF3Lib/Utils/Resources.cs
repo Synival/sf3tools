@@ -88,5 +88,18 @@ namespace SF3.Utils
                     throw new ArgumentException(MethodBase.GetCurrentMethod().Name + ": Handled scenario for " + nameof(scenario));
             }
         }
+
+        /// <summary>
+        /// Creates a standard XML reader for resource streams.
+        /// </summary>
+        /// <param name="stream">Stream from which to read the XML resource</param>
+        /// <returns>A new XmlReader.</returns>
+        public static XmlReader MakeXmlReader(Stream stream)
+        {
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.IgnoreComments = true;
+            settings.IgnoreWhitespace = true;
+            return XmlReader.Create(stream, settings);
+        }
     }
 }

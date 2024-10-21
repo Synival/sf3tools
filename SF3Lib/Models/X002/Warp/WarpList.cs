@@ -2,6 +2,7 @@
 using System.IO;
 using SF3.FileEditors;
 using SF3.Extensions;
+using static SF3.Utils.Resources;
 
 namespace SF3.Models.X002.Warps
 {
@@ -32,10 +33,7 @@ namespace SF3.Models.X002.Warps
             {
                 stream = new FileStream(ResourceFile, FileMode.Open);
 
-                XmlReaderSettings settings = new XmlReaderSettings();
-                settings.IgnoreComments = true;
-                settings.IgnoreWhitespace = true;
-                XmlReader xml = XmlTextReader.Create(stream, settings);
+                var xml = MakeXmlReader(stream);
                 xml.Read();
                 //int stop = 0;
                 //int numberTest = 0;

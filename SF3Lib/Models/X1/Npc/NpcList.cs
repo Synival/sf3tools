@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using SF3.FileEditors;
 using SF3.Extensions;
+using static SF3.Utils.Resources;
 
 namespace SF3.Models.X1.Npcs
 {
@@ -33,10 +34,7 @@ namespace SF3.Models.X1.Npcs
             {
                 stream = new FileStream(ResourceFile, FileMode.Open);
 
-                XmlReaderSettings settings = new XmlReaderSettings();
-                settings.IgnoreComments = true;
-                settings.IgnoreWhitespace = true;
-                XmlReader xml = XmlTextReader.Create(stream, settings);
+                var xml = MakeXmlReader(stream);
                 xml.Read();
                 //int stop = 0;
                 //int numberTest = 0;
