@@ -26,8 +26,15 @@ namespace SF3.Values
         public NamedValueFromResourceForScenarios(ScenarioType scenario, int value)
         : base(
             NameOrHexValue(value, ValueNames[scenario]),
-            HexValueWithName(value, ValueNames[scenario]), value
+            HexValueWithName(value, ValueNames[scenario]),
+            value
         )
+        {
+            Scenario = scenario;
+        }
+
+        public NamedValueFromResourceForScenarios(ScenarioType scenario, string name, string valueName, int value)
+        : base(name, valueName, value)
         {
             Scenario = scenario;
         }
