@@ -10,6 +10,21 @@ namespace SF3.Values
         string ResourceName { get; }
         int MinValue { get; }
         int MaxValue { get; }
+        Dictionary<int, string> ValueNames { get; }
+    };
+
+    public class NamedValueFromResourceInfo : INamedValueFromResourceInfo
+    {
+        public NamedValueFromResourceInfo(string resourceName)
+        {
+            ResourceName = resourceName;
+            ValueNames = GetValueNameDictionaryFromXML("Resources/" + ResourceName);
+        }
+
+        public string ResourceName { get; }
+        public virtual int MinValue => 0x00;
+        public virtual int MaxValue => 0xFF;
+        public Dictionary<int, string> ValueNames { get; }
     };
 
     /// <summary>
@@ -19,18 +34,16 @@ namespace SF3.Values
         where TSelf : NamedValue
         where TResourceInfo : INamedValueFromResourceInfo, new()
     {
-        private static readonly TResourceInfo ResourceInfo = new TResourceInfo();
-
-        public static readonly int MinValue = ResourceInfo.MinValue;
-        public static readonly int MaxValue = ResourceInfo.MaxValue;
-
-        public static readonly Dictionary<int, string> ValueNames = GetValueNameDictionaryFromXML("Resources/" + ResourceInfo.ResourceName);
-
-        private static readonly Dictionary<NamedValue, string> _comboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => (TSelf)Activator.CreateInstance(typeof(TSelf), value));
-
         public NamedValueFromResource(int value) : base(NameOrHexValue(value, ValueNames), HexValueWithName(value, ValueNames), value)
         {
         }
+
+        public static readonly TResourceInfo ResourceInfo = new TResourceInfo();
+        public static readonly int MinValue = ResourceInfo.MinValue;
+        public static readonly int MaxValue = ResourceInfo.MaxValue;
+        public static Dictionary<int, string> ValueNames => ResourceInfo.ValueNames;
+
+        private static readonly Dictionary<NamedValue, string> _comboBoxValues = MakeNamedValueComboBoxValues(MinValue, MaxValue, (int value) => (TSelf)Activator.CreateInstance(typeof(TSelf), value));
 
         public override Dictionary<NamedValue, string> ComboBoxValues => _comboBoxValues;
     }

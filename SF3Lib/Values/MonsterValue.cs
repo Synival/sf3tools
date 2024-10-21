@@ -6,11 +6,11 @@ using static SF3.Utils.Utils;
 
 namespace SF3.Values
 {
-    public class MonsterValueResourceInfo : INamedValueFromResourceInfo
+    public class MonsterValueResourceInfo : NamedValueFromResourceForScenariosInfo
     {
-        public string ResourceName => "Monsters.xml";
-        public int MinValue => 0;
-        public int MaxValue => 0xFF;
+        public MonsterValueResourceInfo() : base("Monsters.xml")
+        {
+        }
     }
 
     /// <summary>

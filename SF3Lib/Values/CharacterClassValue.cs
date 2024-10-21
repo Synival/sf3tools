@@ -1,10 +1,10 @@
 ﻿namespace SF3.Values
 {
-    public class CharacterClassValueResourceInfo : INamedValueFromResourceInfo
+    public class CharacterClassValueResourceInfo : NamedValueFromResourceInfo
     {
-        public string ResourceName => "CharacterClasses.xml";
-        public int MinValue => 0;
-        public int MaxValue => 0xFF;
+        public CharacterClassValueResourceInfo() : base("CharacterClasses.xml")
+        {
+        }
     }
 
     /// <summary>

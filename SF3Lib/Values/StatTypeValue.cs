@@ -1,10 +1,10 @@
 ﻿namespace SF3.Values
 {
-    public class StatTypeValueResourceInfo : INamedValueFromResourceInfo
+    public class StatTypeValueResourceInfo : NamedValueFromResourceInfo
     {
-        public string ResourceName => "StatTypes.xml";
-        public int MinValue => 0;
-        public int MaxValue => 0xFF;
+        public StatTypeValueResourceInfo() : base("StatTypes.xml")
+        {
+        }
     }
 
     /// <summary>

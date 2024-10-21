@@ -2,11 +2,11 @@
 
 namespace SF3.Values
 {
-    public class SpellValueResourceInfo : INamedValueFromResourceInfo
+    public class SpellValueResourceInfo : NamedValueFromResourceForScenariosInfo
     {
-        public string ResourceName => "Spells.xml";
-        public int MinValue => 0;
-        public int MaxValue => 0xFF;
+        public SpellValueResourceInfo() : base("Spells.xml")
+        {
+        }
     }
 
     /// <summary>

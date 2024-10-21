@@ -1,10 +1,10 @@
 ﻿namespace SF3.Values
 {
-    public class SexValueResourceInfo : INamedValueFromResourceInfo
+    public class SexValueResourceInfo : NamedValueFromResourceInfo
     {
-        public string ResourceName => "Sexes.xml";
-        public int MinValue => 0;
-        public int MaxValue => 0xFF;
+        public SexValueResourceInfo() : base("Sexes.xml")
+        {
+        }
     }
 
     /// <summary>

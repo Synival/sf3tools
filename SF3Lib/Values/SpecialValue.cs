@@ -2,11 +2,11 @@
 
 namespace SF3.Values
 {
-    public class SpecialValueResourceInfo : INamedValueFromResourceInfo
+    public class SpecialValueResourceInfo : NamedValueFromResourceForScenariosInfo
     {
-        public string ResourceName => "Specials.xml";
-        public int MinValue => 0;
-        public int MaxValue => 0xFF;
+        public SpecialValueResourceInfo() : base("Specials.xml")
+        {
+        }
     }
 
     /// <summary>

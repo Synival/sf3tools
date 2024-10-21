@@ -1,10 +1,10 @@
 ﻿namespace SF3.Values
 {
-    public class WeaponTypeValueResourceInfo : INamedValueFromResourceInfo
+    public class WeaponTypeValueResourceInfo : NamedValueFromResourceInfo
     {
-        public string ResourceName => "WeaponTypes.xml";
-        public int MinValue => 0;
-        public int MaxValue => 0xFF;
+        public WeaponTypeValueResourceInfo() : base("WeaponTypes.xml")
+        {
+        }
     }
 
     /// <summary>
