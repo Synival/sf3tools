@@ -17,7 +17,6 @@ namespace SF3.Models.X002.StatBoost
         }
 
         private IX002_FileEditor _fileEditor;
-        private StatBoost[] models;
 
         public override string ResourceFile => "Resources/X002StatList.xml";
 
@@ -28,7 +27,6 @@ namespace SF3.Models.X002.StatBoost
         public override bool Load()
         {
             _models = new StatBoost[0];
-            models = new StatBoost[MaxSize];
             FileStream stream = null;
             try
             {
@@ -41,8 +39,12 @@ namespace SF3.Models.X002.StatBoost
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new StatBoost(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].StatID] = _models[_models.Length - 1];
+                        var newModel = new StatBoost(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.StatID < 0 || newModel.StatID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

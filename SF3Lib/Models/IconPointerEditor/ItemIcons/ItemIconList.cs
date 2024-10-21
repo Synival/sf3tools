@@ -18,7 +18,6 @@ namespace SF3.Models.IconPointerEditor.ItemIcons
         }
 
         private string _resourceFile;
-        private ItemIcon[] models;
         private IIconPointerFileEditor _fileEditor;
 
         public override string ResourceFile => _resourceFile;
@@ -30,7 +29,6 @@ namespace SF3.Models.IconPointerEditor.ItemIcons
         public override bool Load()
         {
             _models = new ItemIcon[0];
-            models = new ItemIcon[MaxSize];
             FileStream stream = null;
             try
             {
@@ -43,8 +41,12 @@ namespace SF3.Models.IconPointerEditor.ItemIcons
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new ItemIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].SizeID] = _models[_models.Length - 1];
+                        var newModel = new ItemIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.SizeID < 0 || newModel.SizeID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

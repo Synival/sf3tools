@@ -19,7 +19,6 @@ namespace SF3.Models.X033_X031.InitialInfos
 
         private string _resourceFile;
         private IX033_X031_FileEditor _fileEditor;
-        private InitialInfo[] models;
 
         public override string ResourceFile => _resourceFile;
 
@@ -30,7 +29,6 @@ namespace SF3.Models.X033_X031.InitialInfos
         public override bool Load()
         {
             _models = new InitialInfo[0];
-            models = new InitialInfo[MaxSize];
             FileStream stream = null;
             try
             {
@@ -42,8 +40,12 @@ namespace SF3.Models.X033_X031.InitialInfos
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new InitialInfo(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].PresetID] = _models[_models.Length - 1];
+                        var newModel = new InitialInfo(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.PresetID < 0 || newModel.PresetID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

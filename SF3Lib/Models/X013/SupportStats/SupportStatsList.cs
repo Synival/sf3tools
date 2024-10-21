@@ -17,7 +17,6 @@ namespace SF3.Models.X013.SupportStats
         }
 
         private IX013_FileEditor _fileEditor;
-        private SupportStats[] models;
 
         public override string ResourceFile => "Resources/X013StatList.xml";
 
@@ -28,7 +27,6 @@ namespace SF3.Models.X013.SupportStats
         public override bool Load()
         {
             _models = new SupportStats[0];
-            models = new SupportStats[MaxSize];
             FileStream stream = null;
             try
             {
@@ -41,8 +39,12 @@ namespace SF3.Models.X013.SupportStats
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new SupportStats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].StatID] = _models[_models.Length - 1];
+                        var newModel = new SupportStats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.StatID < 0 || newModel.StatID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

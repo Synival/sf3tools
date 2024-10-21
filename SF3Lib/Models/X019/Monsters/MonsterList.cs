@@ -24,7 +24,6 @@ namespace SF3.Models.X019.Monsters
         private string _resourceFile;
         private IX019_FileEditor _fileEditor;
         private bool _isX044;
-        private Monster[] models;
 
         public override string ResourceFile => _resourceFile;
 
@@ -35,7 +34,6 @@ namespace SF3.Models.X019.Monsters
         public override bool Load()
         {
             _models = new Monster[0];
-            models = new Monster[MaxSize];
             FileStream stream = null;
             try
             {
@@ -48,8 +46,12 @@ namespace SF3.Models.X019.Monsters
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new Monster(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].ID] = _models[_models.Length - 1];
+                        var newModel = new Monster(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.ID < 0 || newModel.ID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

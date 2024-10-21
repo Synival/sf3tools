@@ -16,7 +16,6 @@ namespace SF3.Models.X1.Headers
             _fileEditor = fileEditor;
         }
 
-        private Header[] models;
         private IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/X1Top.xml";
@@ -28,7 +27,6 @@ namespace SF3.Models.X1.Headers
         public override bool Load()
         {
             _models = new Header[0];
-            models = new Header[MaxSize];
             FileStream stream = null;
             try
             {
@@ -41,8 +39,12 @@ namespace SF3.Models.X1.Headers
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new Header(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].SizeID] = _models[_models.Length - 1];
+                        var newModel = new Header(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.SizeID < 0 || newModel.SizeID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

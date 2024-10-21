@@ -17,7 +17,6 @@ namespace SF3.Models.X013.ExpLimit
         }
 
         private IX013_FileEditor _fileEditor;
-        private ExpLimit[] models;
 
         public override string ResourceFile => "Resources/ExpLimitList.xml";
 
@@ -28,7 +27,6 @@ namespace SF3.Models.X013.ExpLimit
         public override bool Load()
         {
             _models = new ExpLimit[0];
-            models = new ExpLimit[MaxSize];
             FileStream stream = null;
             try
             {
@@ -41,8 +39,12 @@ namespace SF3.Models.X013.ExpLimit
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new ExpLimit(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].ExpLimitID] = _models[_models.Length - 1];
+                        var newModel = new ExpLimit(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.ExpLimitID < 0 || newModel.ExpLimitID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

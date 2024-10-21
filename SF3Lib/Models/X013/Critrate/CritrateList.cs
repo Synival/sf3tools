@@ -17,7 +17,6 @@ namespace SF3.Models.X013.Critrate
         }
 
         private IX013_FileEditor _fileEditor;
-        private Critrate[] models;
 
         public override string ResourceFile => "Resources/CritrateList.xml";
 
@@ -28,7 +27,6 @@ namespace SF3.Models.X013.Critrate
         public override bool Load()
         {
             _models = new Critrate[0];
-            models = new Critrate[MaxSize];
             FileStream stream = null;
             try
             {
@@ -41,8 +39,12 @@ namespace SF3.Models.X013.Critrate
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new Critrate(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].CritrateID] = _models[_models.Length - 1];
+                        var newModel = new Critrate(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.CritrateID < 0 || newModel.CritrateID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

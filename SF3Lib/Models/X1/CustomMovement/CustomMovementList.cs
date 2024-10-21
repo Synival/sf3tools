@@ -38,7 +38,6 @@ namespace SF3.Models.X1.CustomMovement
             }*/
         }
 
-        private CustomMovement[] models;
         private IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/X1AI.xml";
@@ -50,7 +49,6 @@ namespace SF3.Models.X1.CustomMovement
         public override bool Load()
         {
             _models = new CustomMovement[0];
-            models = new CustomMovement[MaxSize];
             FileStream stream = null;
             try
             {
@@ -62,8 +60,12 @@ namespace SF3.Models.X1.CustomMovement
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new CustomMovement(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].CustomMovementID] = _models[_models.Length - 1];
+                        var newModel = new CustomMovement(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.CustomMovementID < 0 || newModel.CustomMovementID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

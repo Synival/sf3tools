@@ -3,6 +3,7 @@ using System.IO;
 using SF3.FileEditors;
 using SF3.Extensions;
 using static SF3.Utils.Resources;
+using System;
 
 namespace SF3.Models.X002.Warps
 {
@@ -16,7 +17,6 @@ namespace SF3.Models.X002.Warps
         }
 
         private IX002_FileEditor _fileEditor;
-        private Warp[] models;
 
         public override string ResourceFile => "Resources/X002Warp.xml";
 
@@ -27,7 +27,6 @@ namespace SF3.Models.X002.Warps
         public override bool Load()
         {
             _models = new Warp[0];
-            models = new Warp[MaxSize];
             FileStream stream = null;
             try
             {
@@ -41,27 +40,30 @@ namespace SF3.Models.X002.Warps
                 int myCount = 0;
                 string myName = "WarpIndex " + myCount;
                 //Globals.treasureDebug = true;
-                //while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
+                //while (!xml.EOF && (_models.Length == 0 || newModel.Searched != 0xffff))
 
                 while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].WarpType != 0x01 && _models[_models.Length - 1].WarpType != 0xff)))
-                //while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].Searched != 0xffff || _models[_models.Length - 1].EventNumber != 0xffff)))
+                //while (!xml.EOF && (_models.Length == 0 || (newModel.Searched != 0xffff || newModel.EventNumber != 0xffff)))
                 //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                 {
                     {
                         xml.Read();
                         if (xml.HasAttributes)
                         {
-                            _models = _models.ExpandedWith(new Warp(_fileEditor, myCount, myName));
+                            var newModel = new Warp(_fileEditor, myCount, myName);
+                            _models = _models.ExpandedWith(newModel);
 
                             myCount++;
                             myName = "WarpIndex ";
                             myName = myName + myCount;
 
-                            models[_models[_models.Length - 1].WarpID] = _models[_models.Length - 1];
+                            if (newModel.WarpID < 0 || newModel.WarpID >= MaxSize)
+                            {
+                                throw new IndexOutOfRangeException();
+                            }
                         }
                     }
                 }
-
             }
             catch (FileLoadException)
             {

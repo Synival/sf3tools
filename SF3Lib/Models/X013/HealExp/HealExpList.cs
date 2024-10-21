@@ -17,7 +17,6 @@ namespace SF3.Models.X013.HealExp
         }
 
         private IX013_FileEditor _fileEditor;
-        private HealExp[] models;
 
         public override string ResourceFile => "Resources/HealExpList.xml";
 
@@ -28,7 +27,6 @@ namespace SF3.Models.X013.HealExp
         public override bool Load()
         {
             _models = new HealExp[0];
-            models = new HealExp[MaxSize];
             FileStream stream = null;
             try
             {
@@ -41,8 +39,12 @@ namespace SF3.Models.X013.HealExp
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new HealExp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].HealExpID] = _models[_models.Length - 1];
+                        var newModel = new HealExp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.HealExpID < 0 || newModel.HealExpID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

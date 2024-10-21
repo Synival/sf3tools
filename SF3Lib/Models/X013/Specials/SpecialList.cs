@@ -19,7 +19,6 @@ namespace SF3.Models.X013.Specials
 
         private string _resourceFile;
         private IX013_FileEditor _fileEditor;
-        private Special[] models;
 
         public override string ResourceFile => _resourceFile;
 
@@ -30,7 +29,6 @@ namespace SF3.Models.X013.Specials
         public override bool Load()
         {
             _models = new Special[0];
-            models = new Special[MaxSize];
             FileStream stream = null;
             try
             {
@@ -43,8 +41,12 @@ namespace SF3.Models.X013.Specials
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new Special(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].ID] = _models[_models.Length - 1];
+                        var newModel = new Special(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.ID < 0 || newModel.ID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

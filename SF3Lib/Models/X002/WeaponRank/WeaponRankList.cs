@@ -17,7 +17,6 @@ namespace SF3.Models.X002.WeaponRank
         }
 
         private IX002_FileEditor _fileEditor;
-        private WeaponRank[] models;
 
         public override string ResourceFile => "Resources/WeaponRankList.xml";
 
@@ -28,7 +27,6 @@ namespace SF3.Models.X002.WeaponRank
         public override bool Load()
         {
             _models = new WeaponRank[0];
-            models = new WeaponRank[MaxSize];
             FileStream stream = null;
             try
             {
@@ -41,8 +39,12 @@ namespace SF3.Models.X002.WeaponRank
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new WeaponRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].WeaponRankID] = _models[_models.Length - 1];
+                        var newModel = new WeaponRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.WeaponRankID < 0 || newModel.WeaponRankID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

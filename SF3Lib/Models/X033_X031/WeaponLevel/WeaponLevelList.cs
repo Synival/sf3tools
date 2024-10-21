@@ -19,7 +19,6 @@ namespace SF3.Models.X033_X031.WeaponLevel
         }
 
         private IX033_X031_FileEditor _fileEditor;
-        private WeaponLevel[] models;
 
         public override string ResourceFile => "Resources/WeaponLevel.xml";
 
@@ -30,7 +29,6 @@ namespace SF3.Models.X033_X031.WeaponLevel
         public override bool Load()
         {
             _models = new WeaponLevel[0];
-            models = new WeaponLevel[MaxSize];
             FileStream stream = null;
             try
             {
@@ -43,8 +41,12 @@ namespace SF3.Models.X033_X031.WeaponLevel
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new WeaponLevel(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].WeaponLevelID] = _models[_models.Length - 1];
+                        var newModel = new WeaponLevel(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.WeaponLevelID < 0 || newModel.WeaponLevelID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

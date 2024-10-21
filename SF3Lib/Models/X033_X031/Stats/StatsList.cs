@@ -19,7 +19,6 @@ namespace SF3.Models.X033_X031.Stats
 
         private string _resourceFile;
         private IX033_X031_FileEditor _fileEditor;
-        private Stats[] models;
 
         public override string ResourceFile => _resourceFile;
 
@@ -30,7 +29,6 @@ namespace SF3.Models.X033_X031.Stats
         public override bool Load()
         {
             _models = new Stats[0];
-            models = new Stats[MaxSize];
             FileStream stream = null;
             try
             {
@@ -43,8 +41,12 @@ namespace SF3.Models.X033_X031.Stats
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new Stats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].ID] = _models[_models.Length - 1];
+                        var newModel = new Stats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.ID < 0 || newModel.ID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }
@@ -65,6 +67,5 @@ namespace SF3.Models.X033_X031.Stats
             }
             return true;
         }
-
     }
 }

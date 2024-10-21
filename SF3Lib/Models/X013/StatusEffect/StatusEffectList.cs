@@ -17,7 +17,6 @@ namespace SF3.Models.X013.StatusEffects
         }
 
         private IX013_FileEditor _fileEditor;
-        private StatusEffect[] models;
 
         public override string ResourceFile => "Resources/StatusGroupList.xml";
 
@@ -28,7 +27,6 @@ namespace SF3.Models.X013.StatusEffects
         public override bool Load()
         {
             _models = new StatusEffect[0];
-            models = new StatusEffect[MaxSize];
             FileStream stream = null;
             try
             {
@@ -42,23 +40,26 @@ namespace SF3.Models.X013.StatusEffects
                 int myCount = 0;
                 //string myName = "WarpIndex " + myCount;
                 //Globals.treasureDebug = true;
-                //while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
+                //while (!xml.EOF && (_models.Length == 0 || newModel.Searched != 0xffff))
 
                 while (!xml.EOF)
-                //while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].Searched != 0xffff || _models[_models.Length - 1].EventNumber != 0xffff)))
+                //while (!xml.EOF && (_models.Length == 0 || (newModel.Searched != 0xffff || newModel.EventNumber != 0xffff)))
                 //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                 {
                     {
                         xml.Read();
                         if (xml.HasAttributes)
                         {
-                            _models = _models.ExpandedWith(new StatusEffect(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
+                            var newModel = new StatusEffect(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                            _models = _models.ExpandedWith(newModel);
 
-                            models[_models[_models.Length - 1].StatusEffectID] = _models[_models.Length - 1];
+                            if (newModel.StatusEffectID < 0 || newModel.StatusEffectID >= MaxSize)
+                            {
+                                throw new IndexOutOfRangeException();
+                            }
                         }
                     }
                 }
-
             }
             catch (FileLoadException)
             {

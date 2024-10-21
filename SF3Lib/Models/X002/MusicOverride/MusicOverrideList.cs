@@ -18,7 +18,6 @@ namespace SF3.Models.X002.MusicOverride
         }
 
         private string _resourceFile;
-        private MusicOverride[] models;
         private IX002_FileEditor _fileEditor;
 
         public override string ResourceFile => _resourceFile;
@@ -30,7 +29,6 @@ namespace SF3.Models.X002.MusicOverride
         public override bool Load()
         {
             _models = new MusicOverride[0];
-            models = new MusicOverride[MaxSize];
             FileStream stream = null;
             try
             {
@@ -43,8 +41,12 @@ namespace SF3.Models.X002.MusicOverride
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new MusicOverride(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].MusicOverrideID] = _models[_models.Length - 1];
+                        var newModel = new MusicOverride(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.MusicOverrideID < 0 || newModel.MusicOverrideID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

@@ -21,7 +21,6 @@ namespace SF3.Models.X1.Treasures
             _fileEditor = fileEditor;
         }
 
-        private Treasure[] models;
         private IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/X1Treasure.xml";
@@ -33,7 +32,6 @@ namespace SF3.Models.X1.Treasures
         public override bool Load()
         {
             _models = new Treasure[0];
-            models = new Treasure[MaxSize];
             FileStream stream = null;
             try
             {
@@ -46,20 +44,24 @@ namespace SF3.Models.X1.Treasures
                 //while (!xml.EOF)
                 int myCount = 0;
                 //Debug = true;
-                //while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
+                //while (!xml.EOF && (_models.Length == 0 || newModel.Searched != 0xffff))
 
                 if (Debug == true)
                 {
-                    //while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].Searched != 0xffff || _models[_models.Length - 1].EventNumber != 0xffff)))
+                    //while (!xml.EOF && (_models.Length == 0 || (newModel.Searched != 0xffff || newModel.EventNumber != 0xffff)))
                     while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                     {
                         {
                             xml.Read();
                             if (xml.HasAttributes)
                             {
-                                _models = _models.ExpandedWith(new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                                models[_models[_models.Length - 1].TreasureID] = _models[_models.Length - 1];
-                                if (_models[_models.Length - 1].Searched == 0xffff)
+                                var newModel = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                _models = _models.ExpandedWith(newModel);
+                                if (newModel.TreasureID < 0 || newModel.TreasureID >= MaxSize)
+                                {
+                                    throw new IndexOutOfRangeException();
+                                }
+                                if (newModel.Searched == 0xffff)
                                 {
                                     myCount = 1 + myCount;
                                 }
@@ -78,9 +80,13 @@ namespace SF3.Models.X1.Treasures
                             xml.Read();
                             if (xml.HasAttributes)
                             {
-                                _models = _models.ExpandedWith(new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                                models[_models[_models.Length - 1].TreasureID] = _models[_models.Length - 1];
-                                if (_models[_models.Length - 1].Searched == 0xffff)
+                                var newModel = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                _models = _models.ExpandedWith(newModel);
+                                if (newModel.TreasureID < 0 || newModel.TreasureID >= MaxSize)
+                                {
+                                    throw new IndexOutOfRangeException();
+                                }
+                                if (newModel.Searched == 0xffff)
                                 {
                                     myCount = 1 + myCount;
                                 }
@@ -88,7 +94,6 @@ namespace SF3.Models.X1.Treasures
                         }
                     }
                 }
-
             }
             catch (FileLoadException)
             {

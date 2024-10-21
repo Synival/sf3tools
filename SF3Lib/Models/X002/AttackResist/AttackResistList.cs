@@ -17,7 +17,6 @@ namespace SF3.Models.X002.AttackResist
         }
 
         private IX002_FileEditor _fileEditor;
-        private AttackResist[] models;
 
         public override string ResourceFile => "Resources/AttackResistList.xml";
 
@@ -28,7 +27,6 @@ namespace SF3.Models.X002.AttackResist
         public override bool Load()
         {
             _models = new AttackResist[0];
-            models = new AttackResist[MaxSize];
             FileStream stream = null;
             try
             {
@@ -41,8 +39,12 @@ namespace SF3.Models.X002.AttackResist
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new AttackResist(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].AttackResistID] = _models[_models.Length - 1];
+                        var newModel = new AttackResist(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.AttackResistID < 0 || newModel.AttackResistID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

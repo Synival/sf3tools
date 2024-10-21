@@ -19,7 +19,6 @@ namespace SF3.Models.X002.Spells
 
         private string _resourceFile;
         private IX002_FileEditor _fileEditor;
-        private Spell[] models;
 
         public override string ResourceFile => _resourceFile;
 
@@ -30,7 +29,6 @@ namespace SF3.Models.X002.Spells
         public override bool Load()
         {
             _models = new Spell[0];
-            models = new Spell[MaxSize];
             FileStream stream = null;
             try
             {
@@ -42,8 +40,12 @@ namespace SF3.Models.X002.Spells
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new Spell(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].SpellID] = _models[_models.Length - 1];
+                        var newModel = new Spell(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.SpellID < 0 || newModel.SpellID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

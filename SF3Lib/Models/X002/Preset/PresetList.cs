@@ -19,7 +19,6 @@ namespace SF3.Models.X002.Presets
 
         private string _resourceFile;
         private IX002_FileEditor _fileEditor;
-        private Preset[] models;
 
         public override string ResourceFile => _resourceFile;
 
@@ -30,7 +29,6 @@ namespace SF3.Models.X002.Presets
         public override bool Load()
         {
             _models = new Preset[0];
-            models = new Preset[MaxSize];
             FileStream stream = null;
             try
             {
@@ -42,8 +40,12 @@ namespace SF3.Models.X002.Presets
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new Preset(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].PresetID] = _models[_models.Length - 1];
+                        var newModel = new Preset(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.PresetID < 0 || newModel.PresetID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

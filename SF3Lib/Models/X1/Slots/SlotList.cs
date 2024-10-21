@@ -27,7 +27,6 @@ namespace SF3.Models.X1.Slots
         }
 
         private string _resourceFile;
-        private Slot[] models;
         private IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => _resourceFile;
@@ -39,7 +38,6 @@ namespace SF3.Models.X1.Slots
         public override bool Load()
         {
             _models = new Slot[0];
-            models = new Slot[MaxSize];
             FileStream stream = null;
             try
             {
@@ -53,8 +51,12 @@ namespace SF3.Models.X1.Slots
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        _models = _models.ExpandedWith(new Slot(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
-                        models[_models[_models.Length - 1].ID] = _models[_models.Length - 1];
+                        var newModel = new Slot(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(newModel);
+                        if (newModel.ID < 0 || newModel.ID >= MaxSize)
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
                         /*Console.WriteLine(items[itemssorted[old.Length].ID].EnemyID);
                         //numberTest = items[itemssorted[old.Length].ID].EnemyID;
                         if (items[itemssorted[old.Length].ID].EnemyID == 0xffff)
