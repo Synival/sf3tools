@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
+using SF3.Extensions;
 
 namespace SF3.Models.X002.MusicOverride
 {
@@ -46,11 +47,7 @@ namespace SF3.Models.X002.MusicOverride
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new MusicOverride[_models.Length];
-                        _models.CopyTo(old, 0);
-                        _models = new MusicOverride[old.Length + 1];
-                        old.CopyTo(_models, 0);
-                        _models[old.Length] = new MusicOverride(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(new MusicOverride(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
                         models[_models[_models.Length - 1].MusicOverrideID] = _models[_models.Length - 1];
                     }
                 }

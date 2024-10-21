@@ -2,6 +2,7 @@
 using System.Xml;
 using System.IO;
 using SF3.FileEditors;
+using SF3.Extensions;
 
 namespace SF3.Models.X1.Arrows
 {
@@ -54,11 +55,7 @@ namespace SF3.Models.X1.Arrows
                             xml.Read();
                             if (xml.HasAttributes)
                             {
-                                old = new Npc[_models.Length];
-                                _models.CopyTo(old, 0);
-                                _models = new Npc[old.Length + 1];
-                                old.CopyTo(_models, 0);
-                                _models[old.Length] = new Npc(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                _models = _models.ExpandedWith(new Npc(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
                                 models[_models[_models.Length - 1].NpcID] = _models[_models.Length - 1];
                                 if (_models[_models.Length - 1].SpriteID == 0xffff)
                                 {
@@ -79,11 +76,7 @@ namespace SF3.Models.X1.Arrows
                             xml.Read();
                             if (xml.HasAttributes)
                             {
-                                old = new Arrow[_models.Length];
-                                _models.CopyTo(old, 0);
-                                _models = new Arrow[old.Length + 1];
-                                old.CopyTo(_models, 0);
-                                _models[old.Length] = new Arrow(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                _models = _models.ExpandedWith(new Arrow(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
                                 models[_models[_models.Length - 1].ArrowID] = _models[_models.Length - 1];
                                 if (_models[_models.Length - 1].ArrowUnknown0 == 0xffff)
                                 {

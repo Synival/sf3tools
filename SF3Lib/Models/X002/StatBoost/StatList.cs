@@ -2,6 +2,7 @@
 using System.Xml;
 using System.IO;
 using SF3.FileEditors;
+using SF3.Extensions;
 
 namespace SF3.Models.X002.StatBoost
 {
@@ -43,11 +44,7 @@ namespace SF3.Models.X002.StatBoost
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new StatBoost[_models.Length];
-                        _models.CopyTo(old, 0);
-                        _models = new StatBoost[old.Length + 1];
-                        old.CopyTo(_models, 0);
-                        _models[old.Length] = new StatBoost(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(new StatBoost(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
                         models[_models[_models.Length - 1].StatID] = _models[_models.Length - 1];
                     }
                 }

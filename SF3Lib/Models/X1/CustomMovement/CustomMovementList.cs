@@ -2,6 +2,7 @@
 using System.Xml;
 using System.IO;
 using SF3.FileEditors;
+using SF3.Extensions;
 
 namespace SF3.Models.X1.CustomMovement
 {
@@ -64,11 +65,7 @@ namespace SF3.Models.X1.CustomMovement
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new CustomMovement[_models.Length];
-                        _models.CopyTo(old, 0);
-                        _models = new CustomMovement[old.Length + 1];
-                        old.CopyTo(_models, 0);
-                        _models[old.Length] = new CustomMovement(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(new CustomMovement(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
                         models[_models[_models.Length - 1].CustomMovementID] = _models[_models.Length - 1];
                     }
                 }

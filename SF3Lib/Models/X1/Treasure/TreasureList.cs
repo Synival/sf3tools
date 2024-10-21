@@ -2,6 +2,7 @@
 using System.Xml;
 using System.IO;
 using SF3.FileEditors;
+using SF3.Extensions;
 
 namespace SF3.Models.X1.Treasures
 {
@@ -59,11 +60,7 @@ namespace SF3.Models.X1.Treasures
                             xml.Read();
                             if (xml.HasAttributes)
                             {
-                                old = new Treasure[_models.Length];
-                                _models.CopyTo(old, 0);
-                                _models = new Treasure[old.Length + 1];
-                                old.CopyTo(_models, 0);
-                                _models[old.Length] = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                _models = _models.ExpandedWith(new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
                                 models[_models[_models.Length - 1].TreasureID] = _models[_models.Length - 1];
                                 if (_models[_models.Length - 1].Searched == 0xffff)
                                 {
@@ -84,11 +81,7 @@ namespace SF3.Models.X1.Treasures
                             xml.Read();
                             if (xml.HasAttributes)
                             {
-                                old = new Treasure[_models.Length];
-                                _models.CopyTo(old, 0);
-                                _models = new Treasure[old.Length + 1];
-                                old.CopyTo(_models, 0);
-                                _models[old.Length] = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                _models = _models.ExpandedWith(new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
                                 models[_models[_models.Length - 1].TreasureID] = _models[_models.Length - 1];
                                 if (_models[_models.Length - 1].Searched == 0xffff)
                                 {

@@ -3,6 +3,7 @@ using System.Xml;
 using System.IO;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
+using SF3.Extensions;
 
 namespace SF3.Models.X013.Specials
 {
@@ -46,11 +47,7 @@ namespace SF3.Models.X013.Specials
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Special[_models.Length];
-                        _models.CopyTo(old, 0);
-                        _models = new Special[old.Length + 1];
-                        old.CopyTo(_models, 0);
-                        _models[old.Length] = new Special(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(new Special(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
                         models[_models[_models.Length - 1].ID] = _models[_models.Length - 1];
                     }
                 }

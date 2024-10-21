@@ -2,6 +2,7 @@
 using System.Xml;
 using System.IO;
 using SF3.FileEditors;
+using SF3.Extensions;
 
 namespace SF3.Models.X1.Headers
 {
@@ -43,11 +44,7 @@ namespace SF3.Models.X1.Headers
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        old = new Header[_models.Length];
-                        _models.CopyTo(old, 0);
-                        _models = new Header[old.Length + 1];
-                        old.CopyTo(_models, 0);
-                        _models[old.Length] = new Header(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _models = _models.ExpandedWith(new Header(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1)));
                         models[_models[_models.Length - 1].SizeID] = _models[_models.Length - 1];
                     }
                 }
