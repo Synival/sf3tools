@@ -1,5 +1,5 @@
 ﻿using DFRLib.Exceptions;
-using SF3.Extensions;
+using DFRLib.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -70,34 +70,12 @@ namespace DFRLib
         /// <returns>A list containing all differences between the two files.</returns>
         static public List<ByteDiffChunk> MakeByteDiffChunks(Stream streamFrom, Stream streamTo)
         {
-            var chunks = new List<ByteDiffChunk>();
-
-            // Data for the current chunk being read.
-            ulong diffAddress = 0;
-            int size = 0;
-            var bytesFrom = new byte[16];
-            var bytesTo = new byte[16];
-
-            // Nice little lambda to finish the chunk that was read.
-            Action finalizeByteDiffChunk = () =>
-            {
-                if (size == 0)
-                    return;
-
-                chunks.Add(new ByteDiffChunk(diffAddress, bytesFrom, bytesTo, size));
-
-                size = 0;
-                diffAddress = 0;
-                bytesFrom = new byte[16];
-                bytesTo = new byte[16];
-            };
-
-            // Data for reading from the input streams.
-            ulong readAddress = 0;
-            int streamFromRead = 0;
-            int streamToRead = 0;
+            int streamFromRead;
+            int streamToRead;
             byte[] streamFromBuf = new byte[1024];
             byte[] streamToBuf = new byte[1024];
+
+            var chunkBuilder = new ByteDiffChunkBuilder();
 
             // Read from streams until no more data is available.
             while (true)
@@ -118,36 +96,10 @@ namespace DFRLib
 
                 // Process bytes read.
                 for (int i = 0; i < streamFromRead; i++)
-                {
-                    // Ignore unchanged bytes, but if we were in the middle of a DiffChunk, finalize it.
-                    if (streamFromBuf[i] == streamToBuf[i])
-                    {
-                        finalizeByteDiffChunk();
-                        readAddress++;
-                        continue;
-                    }
-
-                    // Found a difference -- do we need to start a new chunk?
-                    if (size == 0)
-                        diffAddress = readAddress;
-
-                    // If the chunk arrays are too small, double their size.
-                    if (bytesFrom.Length <= size)
-                        bytesFrom = bytesFrom.Expanded(bytesFrom.Length);
-                    if (bytesTo.Length <= size)
-                        bytesTo = bytesTo.Expanded(bytesTo.Length);
-
-                    // Save data for the chunk.
-                    bytesFrom[size] = streamFromBuf[i];
-                    bytesTo[size] = streamToBuf[i];
-                    size++;
-
-                    readAddress++;
-                }
+                    chunkBuilder.Feed(streamFromBuf[i], streamToBuf[i]);
             }
-            finalizeByteDiffChunk();
 
-            return chunks;
+            return chunkBuilder.FetchChunks();
         }
 
         /// <summary>
