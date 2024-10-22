@@ -14,6 +14,38 @@ namespace DFRLib
     public class ByteDiffChunkBuilder
     {
         /// <summary>
+        /// A work-in-progress chunk.
+        /// </summary>
+        private class CurrentChunk
+        {
+            public CurrentChunk(ulong address)
+            {
+                _address = address;
+            }
+
+            public void Feed(byte byteFrom, byte byteTo)
+            {
+                // If the chunk arrays are too small, double their size.
+                if (_fromBuffer.Length <= _size)
+                    _fromBuffer = _fromBuffer.Expanded(_fromBuffer.Length);
+                if (_toBuffer.Length <= _size)
+                    _toBuffer = _toBuffer.Expanded(_toBuffer.Length);
+
+                // Save data for the chunk.
+                _fromBuffer[_size] = byteFrom;
+                _toBuffer[_size] = byteTo;
+                _size++;
+            }
+
+            public ByteDiffChunk MakeChunk() => new ByteDiffChunk(_address, _fromBuffer, _toBuffer, _size);
+
+            private ulong _address;
+            private int _size = 0;
+            private byte[] _fromBuffer = new byte[16];
+            private byte[] _toBuffer = new byte[16];
+        }
+
+        /// <summary>
         /// Takes in bytes from the 'from' and 'to' data sources and appends chunks to property 'Chunks'
         /// when found.
         /// </summary>
@@ -30,19 +62,9 @@ namespace DFRLib
             }
 
             // Found a difference -- do we need to start a new chunk?
-            if (_currentChunkSize == 0)
-                _currentChunkAddress = _inputAddress;
-
-            // If the chunk arrays are too small, double their size.
-            if (_currentChunkFromBuffer.Length <= _currentChunkSize)
-                _currentChunkFromBuffer = _currentChunkFromBuffer.Expanded(_currentChunkFromBuffer.Length);
-            if (_currentChunkToBuffer.Length <= _currentChunkSize)
-                _currentChunkToBuffer = _currentChunkToBuffer.Expanded(_currentChunkToBuffer.Length);
-
-            // Save data for the chunk.
-            _currentChunkFromBuffer[_currentChunkSize] = byteFrom;
-            _currentChunkToBuffer[_currentChunkSize] = byteTo;
-            _currentChunkSize++;
+            if (_currentChunk == null)
+                _currentChunk = new CurrentChunk(_inputAddress);
+            _currentChunk.Feed(byteFrom, byteTo);
 
             _inputAddress++;
         }
@@ -52,16 +74,11 @@ namespace DFRLib
         /// </summary>
         public void CommitCurrentChunks()
         {
-            if (_currentChunkSize == 0)
+            if (_currentChunk == null)
                 return;
 
-            _chunks.Add(new ByteDiffChunk(_currentChunkAddress, _currentChunkFromBuffer, _currentChunkToBuffer, _currentChunkSize));
-
-            // Reset current chunk state.
-            _currentChunkSize = 0;
-            _currentChunkAddress = 0;
-            _currentChunkFromBuffer = new byte[16];
-            _currentChunkToBuffer = new byte[16];
+            _chunks.Add(_currentChunk.MakeChunk());
+            _currentChunk = null;
         }
 
         /// <summary>
@@ -80,10 +97,7 @@ namespace DFRLib
         }
 
         private ulong _inputAddress = 0;
-        private ulong _currentChunkAddress = 0;
-        private int _currentChunkSize = 0;
-        private byte[] _currentChunkFromBuffer = new byte[16];
-        private byte[] _currentChunkToBuffer = new byte[16];
         private List<ByteDiffChunk> _chunks = new List<ByteDiffChunk>();
+        private CurrentChunk? _currentChunk = null;
     }
 }
