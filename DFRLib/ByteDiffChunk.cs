@@ -47,25 +47,28 @@ namespace DFRLib
         /// <param name="address">Where the bytes where changed.</param>
         /// <param name="bytesFrom">What was originally present. Only 'size' number of bytes will be used.</param>
         /// <param name="bytesTo">What the bytes have been changed to. Only 'size' number of bytes will be used.</param>
-        /// <param name="size">The size of the chunk.</param>
+        /// <param name="fromSize">The size of the 'from' chunk.</param>
+        /// <param name="toSize">The size of the 'to' chunk.</param>
         /// <exception cref="ArgumentException">Thrown if 'bytesFrom' or 'bytesTo' have fewer bytes than 'size'.</exception>
-        public ByteDiffChunk(ulong address, byte[] bytesFrom, byte[] bytesTo, int size)
+        public ByteDiffChunk(ulong address, byte[] bytesFrom, byte[] bytesTo, int fromSize, int toSize)
         {
             Address = address;
-            if (bytesFrom.Length < size || bytesTo.Length < size)
-                throw new ArgumentException(nameof(bytesFrom) + " or " + nameof(bytesTo) + " is smaller than the requested size");
+            if (bytesFrom.Length < fromSize)
+                throw new ArgumentException(nameof(bytesFrom) + " is smaller than its requested size");
+            if (bytesTo.Length < toSize)
+                throw new ArgumentException(nameof(bytesTo) + " is smaller than its requested size");
 
-            if (bytesFrom.Length != size)
+            if (bytesFrom.Length != fromSize)
             {
-                var newBytes = new byte[size];
-                Array.Copy(bytesFrom, newBytes, size);
+                var newBytes = new byte[fromSize];
+                Array.Copy(bytesFrom, newBytes, fromSize);
                 bytesFrom = newBytes;
             }
 
-            if (bytesTo.Length != size)
+            if (bytesTo.Length != toSize)
             {
-                var newBytes = new byte[size];
-                Array.Copy(bytesTo, newBytes, size);
+                var newBytes = new byte[toSize];
+                Array.Copy(bytesTo, newBytes, toSize);
                 bytesTo = newBytes;
             }
 

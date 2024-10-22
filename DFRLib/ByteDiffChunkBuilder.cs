@@ -1,4 +1,5 @@
-﻿using DFRLib.Extensions;
+﻿using DFRLib.Exceptions;
+using DFRLib.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,35 +24,63 @@ namespace DFRLib
                 _address = address;
             }
 
-            public void Feed(byte byteFrom, byte byteTo)
+            public void FeedDiff(byte byteFrom, byte byteTo)
             {
+                if (!IsEmptyChunk && !IsDiffChunk)
+                    throw new ByteDiffException("Tried to feed 'diff' data into the wrong kind of chunk");
+
                 // If the chunk arrays are too small, double their size.
-                if (_fromBuffer.Length <= _size)
+                if (_fromBuffer.Length <= _fromSize)
                     _fromBuffer = _fromBuffer.Expanded(_fromBuffer.Length);
-                if (_toBuffer.Length <= _size)
+                if (_toBuffer.Length <= _toSize)
                     _toBuffer = _toBuffer.Expanded(_toBuffer.Length);
 
                 // Save data for the chunk.
-                _fromBuffer[_size] = byteFrom;
-                _toBuffer[_size] = byteTo;
-                _size++;
+                _fromBuffer[_fromSize++] = byteFrom;
+                _toBuffer[_toSize++] = byteTo;
             }
 
-            public ByteDiffChunk MakeChunk() => new ByteDiffChunk(_address, _fromBuffer, _toBuffer, _size);
+            public void FeedAppend(byte byteTo)
+            {
+                if (!IsEmptyChunk && !IsAppendChunk)
+                    throw new ByteDiffException("Tried to feed 'append' data into the wrong kind of chunk");
+
+                // If the chunk arrays are too small, double their size.
+                if (_toBuffer.Length <= _toSize)
+                    _toBuffer = _toBuffer.Expanded(_toBuffer.Length);
+
+                // Save data for the chunk.
+                _toBuffer[_toSize++] = byteTo;
+            }
+
+            public void TrimToTrailingZeroes()
+            {
+                _toSize = 0;
+                while (_toBuffer[_toSize] != 0x00)
+                    _toSize++;
+            }
+
+            public ByteDiffChunk MakeChunk() => new ByteDiffChunk(_address, _fromBuffer, _toBuffer, _fromSize, _toSize);
+
+            public bool IsEmptyChunk => _fromSize == 0 && _toSize == 0;
+            public bool IsDiffChunk => _fromSize > 0 && _toSize > 0 && _fromSize == _toSize;
+            public bool IsAppendChunk => _fromSize == 0 && _toSize > 0;
+            public byte LastByteTo => _toBuffer[_toSize - 1];
 
             private ulong _address;
-            private int _size = 0;
+            private int _fromSize = 0;
+            private int _toSize = 0;
             private byte[] _fromBuffer = new byte[16];
             private byte[] _toBuffer = new byte[16];
         }
 
         /// <summary>
-        /// Takes in bytes from the 'from' and 'to' data sources and appends chunks to property 'Chunks'
-        /// when found.
+        /// Takes in bytes from the 'from' and 'to' data sources and builds a new "diff" chunk,
+        /// committing completed chunks along the way.
         /// </summary>
         /// <param name="byteFrom">Byte in the 'from' data.</param>
         /// <param name="byteTo">Byte in the 'to' data.</param>
-        public void Feed(byte byteFrom, byte byteTo)
+        public void FeedDiff(byte byteFrom, byte byteTo)
         {
             // Ignore unchanged bytes, but if we were in the middle of a DiffChunk, finalize it.
             if (byteFrom == byteTo)
@@ -61,10 +90,48 @@ namespace DFRLib
                 return;
             }
 
+            // We can't mix chunk types - force commit of the earlier chunk if it's incompatable.
+            if (_currentChunk != null && !_currentChunk.IsDiffChunk)
+                CommitCurrentChunks();
+
             // Found a difference -- do we need to start a new chunk?
             if (_currentChunk == null)
                 _currentChunk = new CurrentChunk(_inputAddress);
-            _currentChunk.Feed(byteFrom, byteTo);
+            _currentChunk.FeedDiff(byteFrom, byteTo);
+
+            _inputAddress++;
+        }
+
+        /// <summary>
+        /// Takes in bytes from the 'to' data sources and builds a new "append" chunk,
+        /// committing completed chunks along the way.
+        /// </summary>
+        /// <param name="byteTo">Byte in the 'to' data.</param>
+        public void FeedAppend(byte byteTo)
+        {
+            // Zeroes can be ignored if we're not actually working on a chunk.
+            if (_currentChunk == null && byteTo == 0x00)
+            {
+                _inputAddress++;
+                return;
+            }
+
+            // We can't mix chunk types - force commit of the earlier chunk if it's incompatable.
+            if (_currentChunk != null && !_currentChunk.IsAppendChunk)
+                CommitCurrentChunks();
+
+            // If the last chunk was writing zeroes, and we started a new chunk, the trailing zeroes from the previous
+            // chunk can be trimmed.
+            if (_currentChunk != null && _currentChunk.LastByteTo == 0x00 && byteTo != 0x00)
+            {
+                _currentChunk.TrimToTrailingZeroes();
+                CommitCurrentChunks();
+            }
+
+            // Found a difference -- do we need to start a new chunk?
+            if (_currentChunk == null)
+                _currentChunk = new CurrentChunk(_inputAddress);
+            _currentChunk.FeedAppend(byteTo);
 
             _inputAddress++;
         }
