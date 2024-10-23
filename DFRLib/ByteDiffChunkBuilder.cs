@@ -6,6 +6,11 @@ using System.Text;
 
 namespace DFRLib
 {
+    public struct ByteDiffChunkBuilderOptions
+    {
+        public bool CombineAppendedChunks;
+    }
+
     /// <summary>
     /// Helper class that takes in data and spits our ByteDiffChunk's as they appear.
     /// To use:
@@ -74,6 +79,11 @@ namespace DFRLib
             private byte[] _toBuffer = new byte[16];
         }
 
+        public ByteDiffChunkBuilder(ByteDiffChunkBuilderOptions? options = null)
+        {
+            Options = options ?? new ByteDiffChunkBuilderOptions();
+        }
+
         /// <summary>
         /// Takes in bytes from the 'from' and 'to' data sources and builds a new "diff" chunk,
         /// committing completed chunks along the way.
@@ -122,10 +132,13 @@ namespace DFRLib
 
             // If the last chunk was writing zeroes, and we started a new chunk, the trailing zeroes from the previous
             // chunk can be trimmed.
-            if (_currentChunk != null && _currentChunk.LastByteTo == 0x00 && byteTo != 0x00)
+            if (!Options.CombineAppendedChunks)
             {
-                _currentChunk.TrimToTrailingZeroes();
-                CommitCurrentChunks();
+                if (_currentChunk != null && _currentChunk.LastByteTo == 0x00 && byteTo != 0x00)
+                {
+                    _currentChunk.TrimToTrailingZeroes();
+                    CommitCurrentChunks();
+                }
             }
 
             // Found a difference -- do we need to start a new chunk?
@@ -162,6 +175,8 @@ namespace DFRLib
             _chunks = new List<ByteDiffChunk>();
             return chunks;
         }
+
+        public ByteDiffChunkBuilderOptions Options { get; }
 
         private ulong _inputAddress = 0;
         private List<ByteDiffChunk> _chunks = new List<ByteDiffChunk>();

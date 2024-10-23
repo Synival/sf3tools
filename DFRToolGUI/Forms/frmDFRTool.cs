@@ -79,7 +79,10 @@ namespace DFRToolGUI.Forms
 
             try
             {
-                var diffChunk = new ByteDiff(tbOriginalFile.Text, tbAlteredFile.Text);
+                var diffChunk = new ByteDiff(tbOriginalFile.Text, tbAlteredFile.Text, new ByteDiffChunkBuilderOptions
+                {
+                    CombineAppendedChunks = cbCombineAllAppendedData.Checked
+                });
                 var dfrText = diffChunk.ToDFR();
                 File.WriteAllText(tbOutputFile.Text, dfrText);
             }

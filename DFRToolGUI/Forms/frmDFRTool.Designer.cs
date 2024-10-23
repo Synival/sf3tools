@@ -41,6 +41,7 @@
             tbOutputFile = new TextBox();
             labelSeparator2 = new Label();
             cbOpenWhenGenerated = new CheckBox();
+            cbCombineAllAppendedData = new CheckBox();
             SuspendLayout();
             // 
             // btnOutputFile
@@ -152,6 +153,8 @@
             // 
             cbOpenWhenGenerated.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             cbOpenWhenGenerated.AutoSize = true;
+            cbOpenWhenGenerated.Checked = true;
+            cbOpenWhenGenerated.CheckState = CheckState.Checked;
             cbOpenWhenGenerated.Location = new Point(204, 161);
             cbOpenWhenGenerated.Name = "cbOpenWhenGenerated";
             cbOpenWhenGenerated.Size = new Size(255, 34);
@@ -159,11 +162,25 @@
             cbOpenWhenGenerated.Text = "Open automatically when generated\r\n(.DFR files can be opened in any text editor)";
             cbOpenWhenGenerated.UseVisualStyleBackColor = true;
             // 
+            // cbCombineAllAppendedData
+            // 
+            cbCombineAllAppendedData.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            cbCombineAllAppendedData.AutoSize = true;
+            cbCombineAllAppendedData.Checked = true;
+            cbCombineAllAppendedData.CheckState = CheckState.Checked;
+            cbCombineAllAppendedData.Location = new Point(12, 169);
+            cbCombineAllAppendedData.Name = "cbCombineAllAppendedData";
+            cbCombineAllAppendedData.Size = new Size(172, 19);
+            cbCombineAllAppendedData.TabIndex = 12;
+            cbCombineAllAppendedData.Text = "Combine all appended data";
+            cbCombineAllAppendedData.UseVisualStyleBackColor = true;
+            // 
             // frmDFRTool
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(579, 207);
+            Controls.Add(cbCombineAllAppendedData);
             Controls.Add(cbOpenWhenGenerated);
             Controls.Add(labelSeparator2);
             Controls.Add(tbOutputFile);
@@ -178,9 +195,9 @@
             Controls.Add(btnOriginalFile);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximumSize = new Size(1280, 246);
-            MinimumSize = new Size(405, 246);
+            MinimumSize = new Size(595, 246);
             Name = "frmDFRTool";
-            Text = "DFRTool";
+            Text = "DFRTool v0.1 (Compatible with 25.1 patcher)";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -198,5 +215,6 @@
         private TextBox tbOutputFile;
         private Label labelSeparator2;
         private CheckBox cbOpenWhenGenerated;
+        private CheckBox cbCombineAllAppendedData;
     }
 }

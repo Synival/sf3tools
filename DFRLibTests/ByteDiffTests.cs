@@ -134,5 +134,19 @@ namespace DFRLibTests
                 "8,,70800000\n";
             Assert.AreEqual(expectedDfr, dfr);
         }
+
+        [TestMethod]
+        public void Constructor_WithMultipleAppendChunksWithZeroes_AndCombineOption_ProducesExpectedDFR()
+        {
+            var bytesFrom = new byte[] { 0x10, 0x20, 0x30, 0x40 };
+            var bytesTo   = new byte[] { 0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x00, 0x00, 0x70, 0x80, 0x00, 0x00 };
+
+            var diff = new ByteDiff(bytesFrom, bytesTo, new ByteDiffChunkBuilderOptions { CombineAppendedChunks = true });
+            var dfr = diff.ToDFR();
+
+             const string expectedDfr =
+                "4,,5060000070800000\n";
+            Assert.AreEqual(expectedDfr, dfr);
+        }
     }
 }
