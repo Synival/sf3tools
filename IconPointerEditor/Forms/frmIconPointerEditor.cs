@@ -1,16 +1,14 @@
 ﻿using System;
-using BrightIdeasSoftware;
-using SF3.Types;
 using System.Collections.Generic;
-using SF3.Editor.Forms;
+using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
-using static SF3.Editor.Extensions.TabControlExtensions;
+using SF3.Editor.Forms;
 using SF3.FileEditors;
+using SF3.Types;
+using static SF3.Editor.Extensions.TabControlExtensions;
 
-namespace SF3.IconPointerEditor.Forms
-{
-    public partial class frmIconPointerEditor : EditorForm
-    {
+namespace SF3.IconPointerEditor.Forms {
+    public partial class frmIconPointerEditor : EditorForm {
         // Used to display version in the application
         private string Version = "0.10";
 
@@ -18,19 +16,16 @@ namespace SF3.IconPointerEditor.Forms
 
         private bool _isX026 = false;
 
-        public bool IsX026
-        {
+        public bool IsX026 {
             get => _isX026;
-            set
-            {
+            set {
                 _isX026 = value;
                 tsmiHelp_X026Toggle.Checked = _isX026;
                 UpdateTitle();
             }
         }
 
-        public frmIconPointerEditor()
-        {
+        public frmIconPointerEditor() {
             InitializeComponent();
             BaseTitle = this.Text + " " + Version;
 
@@ -49,8 +44,7 @@ namespace SF3.IconPointerEditor.Forms
             ScenarioChanged += onScenarioChanged;
             onScenarioChanged(null, EventArgs.Empty);
 
-            FileIsLoadedChanged += (obj, eargs) =>
-            {
+            FileIsLoadedChanged += (obj, eargs) => {
                 tsmiFile_SaveAs.Enabled = IsLoaded == true;
                 tsmiFile_CopyTablesFrom.Enabled = IsLoaded == true;
                 tsmiFile_Close.Enabled = IsLoaded == true;
@@ -65,15 +59,11 @@ namespace SF3.IconPointerEditor.Forms
 
         protected override IFileEditor MakeFileEditor() => new IconPointerFileEditor(Scenario, IsX026);
 
-        protected override bool OnLoad()
-        {
+        protected override bool OnLoad() {
             if (!base.OnLoad())
-            {
                 return false;
-            }
 
-            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()
-            {
+            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>() {
                 new PopulateTabConfig(tabSpellIcons, olvSpellIcons, FileEditor.SpellIconList),
                 new PopulateTabConfig(tabItemIcons, olvItemIcons, FileEditor.ItemIconList)
             });
