@@ -1,17 +1,14 @@
-﻿using SF3.Editor.Extensions;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using SF3.Editor.Extensions;
 
-namespace SF3.X002_Editor
-{
-    static class Program
-    {
+namespace SF3.X002_Editor {
+    static class Program {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
-        {
+        static void Main() {
             ObjectListViewExtensions.RegisterSF3Values();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
