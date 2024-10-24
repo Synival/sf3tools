@@ -9,3 +9,5 @@ obj/
 /dist
 /SF3LibTests/TestData
 /DFRLibTests/TestData
+*.pubxml.user
+*.swp

@@ -15,8 +15,8 @@ namespace DFRLib {
         /// <param name="fileToPath">The altered file to compare to.</param>
         /// <returns>A list containing all differences between the two files.</returns>
         static public List<ByteDiffChunk> MakeByteDiffChunks(string fileFromPath, string fileToPath, ByteDiffChunkBuilderOptions? options = null) {
-            FileStream? fileStreamFrom = null;
-            FileStream? fileStreamTo = null;
+            FileStream fileStreamFrom = null;
+            FileStream fileStreamTo = null;
 
             try {
                 fileStreamFrom = new FileStream(fileFromPath, FileMode.Open);

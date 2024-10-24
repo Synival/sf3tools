@@ -160,6 +160,6 @@ namespace DFRLib {
 
         private ulong _inputAddress = 0;
         private List<ByteDiffChunk> _chunks = new List<ByteDiffChunk>();
-        private CurrentChunk? _currentChunk = null;
+        private CurrentChunk _currentChunk = null;
     }
 }
