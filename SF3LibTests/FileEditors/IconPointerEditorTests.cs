@@ -1,21 +1,12 @@
 ﻿using SF3.FileEditors;
 using SF3.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static SF3LibTests.Utils;
 
-namespace SF3LibTests.FileEditors
-{
+namespace SF3LibTests.FileEditors {
     [TestClass]
-    public class IconPointerEditorTests
-    {
-        class TestCase
-        {
-            public TestCase(string filename, ScenarioType scenario, bool isX066)
-            {
+    public class IconPointerEditorTests {
+        class TestCase {
+            public TestCase(string filename, ScenarioType scenario, bool isX066) {
                 Filename = "../../../" + filename;
                 Scenario = scenario;
                 IsX066 = isX066;
@@ -27,8 +18,7 @@ namespace SF3LibTests.FileEditors
         }
 
         [TestMethod]
-        public void ItemIcons_X11_X21_HaveExpectedFirstFewRows()
-        {
+        public void ItemIcons_X11_X21_HaveExpectedFirstFewRows() {
             var testCases = new List<TestCase>()
             {
                 new TestCase("TestData/S1US/X011.BIN", ScenarioType.Scenario1, false),
@@ -41,8 +31,7 @@ namespace SF3LibTests.FileEditors
                 new TestCase("TestData/PD/X021.BIN", ScenarioType.PremiumDisk, false),
             };
 
-            RunTestCases(testCases, testCase =>
-            {
+            RunTestCases(testCases, testCase => {
                 var editor = new IconPointerFileEditor(testCase.Scenario, testCase.IsX066);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 Assert.AreEqual(0x26, editor.ItemIconList.Models[1].TheItemIcon);
@@ -51,8 +40,7 @@ namespace SF3LibTests.FileEditors
         }
 
         [TestMethod]
-        public void ItemIcons_X26_HasExpectedFirstFewRows()
-        {
+        public void ItemIcons_X26_HasExpectedFirstFewRows() {
             var testCases = new List<TestCase>()
             {
                 new TestCase("TestData/S1US/X026.BIN", ScenarioType.Scenario1, true),
@@ -62,8 +50,7 @@ namespace SF3LibTests.FileEditors
                 new TestCase("TestData/PD/X026.BIN", ScenarioType.PremiumDisk, true),
             };
 
-            RunTestCases(testCases, testCase =>
-            {
+            RunTestCases(testCases, testCase => {
                 var editor = new IconPointerFileEditor(testCase.Scenario, testCase.IsX066);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 Assert.AreEqual(0x26, editor.ItemIconList.Models[1].TheItemIcon);

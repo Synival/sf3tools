@@ -1,13 +1,10 @@
 using SF3;
 
-namespace SF3LibTests
-{
+namespace SF3LibTests {
     [TestClass]
-    public class ProbablyValueSetTests
-    {
+    public class ProbablyValueSetTests {
         [TestMethod]
-        public void RollNext_WithCoinFlip_ReturnsExpectedSet()
-        {
+        public void RollNext_WithCoinFlip_ReturnsExpectedSet() {
             // Arrange
             var inputSet = new ProbableValueSet()
             {
@@ -33,8 +30,7 @@ namespace SF3LibTests
         }
 
         [TestMethod]
-        public void RollNext_WithWeightedCoinFlip_ReturnsExpectedSet()
-        {
+        public void RollNext_WithWeightedCoinFlip_ReturnsExpectedSet() {
             // Arrange
             var inputSet = new ProbableValueSet()
             {
@@ -60,8 +56,7 @@ namespace SF3LibTests
         }
 
         [TestMethod]
-        public void GetWeightedAverage_WithWeightedAverage_ReturnsExpectedValue()
-        {
+        public void GetWeightedAverage_WithWeightedAverage_ReturnsExpectedValue() {
             // Arrange
             var inputSet = new ProbableValueSet()
             {
@@ -75,8 +70,7 @@ namespace SF3LibTests
         }
 
         [TestMethod]
-        public void GetWeightedMedian_WithCoinFlip_ReturnsBetween()
-        {
+        public void GetWeightedMedian_WithCoinFlip_ReturnsBetween() {
             // Arrange
             var inputSet = new ProbableValueSet()
             {
@@ -89,8 +83,7 @@ namespace SF3LibTests
         }
 
         [TestMethod]
-        public void GetWeightedMedianAt_WithCoinFlipAndZeroPercent_ReturnsTails()
-        {
+        public void GetWeightedMedianAt_WithCoinFlipAndZeroPercent_ReturnsTails() {
             // Arrange
             var inputSet = new ProbableValueSet()
             {
@@ -103,8 +96,7 @@ namespace SF3LibTests
         }
 
         [TestMethod]
-        public void GetWeightedMedianAt_WithCoinFlipAndFiftyPercent_ReturnsBetweens()
-        {
+        public void GetWeightedMedianAt_WithCoinFlipAndFiftyPercent_ReturnsBetweens() {
             // Arrange
             var inputSet = new ProbableValueSet()
             {
@@ -117,8 +109,7 @@ namespace SF3LibTests
         }
 
         [TestMethod]
-        public void GetWeightedMedianAt_WithCoinFlipAndHundredPercent_ReturnsHeads()
-        {
+        public void GetWeightedMedianAt_WithCoinFlipAndHundredPercent_ReturnsHeads() {
             // Arrange
             var inputSet = new ProbableValueSet()
             {
@@ -132,8 +123,7 @@ namespace SF3LibTests
 
 
         [TestMethod]
-        public void GetWeightedMedianAt_WithThreeSidesFiftyPercent_ReturnsMiddle()
-        {
+        public void GetWeightedMedianAt_WithThreeSidesFiftyPercent_ReturnsMiddle() {
             // Arrange
             var inputSet = new ProbableValueSet()
             {
@@ -148,8 +138,7 @@ namespace SF3LibTests
 
 
         [TestMethod]
-        public void GetWeightedMedianAt_WithOneOneTwoFiftyPercent_ReturnsBetweenSecondAndThird()
-        {
+        public void GetWeightedMedianAt_WithOneOneTwoFiftyPercent_ReturnsBetweenSecondAndThird() {
             // Arrange
             var inputSet = new ProbableValueSet()
             {
