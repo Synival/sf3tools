@@ -1,28 +1,23 @@
 ﻿using System;
-using BrightIdeasSoftware;
-using SF3.Types;
 using System.Collections.Generic;
-using SF3.Editor.Forms;
+using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
-using static SF3.Editor.Extensions.TabControlExtensions;
+using SF3.Editor.Forms;
 using SF3.FileEditors;
+using SF3.Types;
+using static SF3.Editor.Extensions.TabControlExtensions;
 
-namespace SF3.X1_Editor.Forms
-{
-    public partial class frmX1_Editor : EditorForm
-    {
+namespace SF3.X1_Editor.Forms {
+    public partial class frmX1_Editor : EditorForm {
         // Used to display version in the application
         private string Version = "0.35";
 
         private bool _isBTL99 = false;
 
-        public bool IsBTL99
-        {
+        public bool IsBTL99 {
             get => _isBTL99;
-            set
-            {
-                if (_isBTL99 != value)
-                {
+            set {
+                if (_isBTL99 != value) {
                     _isBTL99 = value;
                     tsmiScenario_BTL99.Checked = _isBTL99;
                 }
@@ -33,11 +28,9 @@ namespace SF3.X1_Editor.Forms
 
         private MapLeaderType _mapLeader = MapLeaderType.Synbios;
 
-        private MapLeaderType MapLeader
-        {
+        private MapLeaderType MapLeader {
             get => _mapLeader;
-            set
-            {
+            set {
                 _mapLeader = value;
                 tsmiMap_MapSynbios.Checked = (_mapLeader == MapLeaderType.Synbios);
                 tsmiMap_MapMedion.Checked = (_mapLeader == MapLeaderType.Medion);
@@ -46,8 +39,7 @@ namespace SF3.X1_Editor.Forms
             }
         }
 
-        public frmX1_Editor()
-        {
+        public frmX1_Editor() {
             InitializeComponent();
             BaseTitle = this.Text + " " + Version;
 
@@ -66,8 +58,7 @@ namespace SF3.X1_Editor.Forms
             ScenarioChanged += onScenarioChanged;
             onScenarioChanged(this, EventArgs.Empty);
 
-            FileIsLoadedChanged += (obj, eargs) =>
-            {
+            FileIsLoadedChanged += (obj, eargs) => {
                 tsmiFile_SaveAs.Enabled = IsLoaded == true;
                 tsmiFile_Close.Enabled = IsLoaded == true;
             };
@@ -81,15 +72,11 @@ namespace SF3.X1_Editor.Forms
 
         protected override IFileEditor MakeFileEditor() => new X1_FileEditor(Scenario, MapLeader, IsBTL99);
 
-        protected override bool OnLoad()
-        {
+        protected override bool OnLoad() {
             if (!base.OnLoad())
-            {
                 return false;
-            }
 
-            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()
-            {
+            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>() {
                 new PopulateTabConfig(tabHeader, olvHeader, FileEditor.HeaderList),
                 new PopulateTabConfig(tabSlotTab1, olvSlotTab1, FileEditor.SlotList),
                 new PopulateTabConfig(tabSlotTab2, olvSlotTab2, FileEditor.SlotList),
@@ -115,49 +102,34 @@ namespace SF3.X1_Editor.Forms
         private void tsmiFile_Close_Click(object sender, EventArgs e) => CloseFile();
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
 
-        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
-        {
+        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) {
             Scenario = ScenarioType.Scenario1;
             if (!IsBTL99)
-            {
                 MapLeader = MapLeaderType.Synbios;
-            }
         }
 
-        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
-        {
+        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) {
             Scenario = ScenarioType.Scenario2;
             if (!IsBTL99)
-            {
                 MapLeader = MapLeaderType.Medion;
-            }
         }
 
-        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
-        {
+        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) {
             Scenario = ScenarioType.Scenario3;
             if (!IsBTL99)
-            {
                 MapLeader = MapLeaderType.Julian;
-            }
         }
 
-        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
-        {
+        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) {
             Scenario = ScenarioType.PremiumDisk;
             if (!IsBTL99)
-            {
                 MapLeader = MapLeaderType.Synbios;
-            }
         }
 
-        private void tsmiScenario_BTL99_Click(object sender, EventArgs e)
-        {
+        private void tsmiScenario_BTL99_Click(object sender, EventArgs e) {
             IsBTL99 = !IsBTL99;
             if (IsBTL99)
-            {
                 MapLeader = MapLeaderType.Synbios;
-            }
         }
 
         private void tsmiMap_MapSynbios_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Synbios; //map with synbios as lead
@@ -165,8 +137,7 @@ namespace SF3.X1_Editor.Forms
         private void tsmiMap_MapJulian_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Julian; //map with julian as lead
         private void tsmiMap_MapExtra_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Extra; //map with no lead or a extra as lead. also for ruins
 
-        private void tsmiHelp_TreasureDebugToggle_Click(object sender, EventArgs e)
-        {
+        private void tsmiHelp_TreasureDebugToggle_Click(object sender, EventArgs e) {
             Models.X1.Treasures.TreasureList.Debug = !Models.X1.Treasures.TreasureList.Debug;
             tsmiHelp_TreasureDebugToggle.Checked = Models.X1.Treasures.TreasureList.Debug;
             tsmiHelp_TreasureDebugToggle.Text = "treasureDebug toggle: " + (Models.X1.Treasures.TreasureList.Debug ? "on" : "off");
