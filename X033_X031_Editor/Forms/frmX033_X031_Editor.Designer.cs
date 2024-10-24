@@ -1766,7 +1766,7 @@
             this.lvcMiscellaneousMovementType.AspectName = "MovementType";
             this.lvcMiscellaneousMovementType.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousMovementType.Text = "MovementType";
-            this.lvcMiscellaneousMovementType.Width = 115;
+            this.lvcMiscellaneousMovementType.Width = 120;
             // 
             // tabInitialInfo
             // 

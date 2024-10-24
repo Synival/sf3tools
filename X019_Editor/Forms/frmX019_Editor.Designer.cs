@@ -967,6 +967,7 @@
             this.lvcMonsterTab4Drop.AspectName = "Drop";
             this.lvcMonsterTab4Drop.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab4Drop.Text = "Drop";
+            this.lvcMonsterTab4Drop.Width = 120;
             // 
             // lvcMonsterTab4Unknown7
             // 
@@ -1008,7 +1009,7 @@
             this.lvcMonsterTab4MovementType.AspectName = "MovementType";
             this.lvcMonsterTab4MovementType.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab4MovementType.Text = "MovementType";
-            this.lvcMonsterTab4MovementType.Width = 90;
+            this.lvcMonsterTab4MovementType.Width = 120;
             // 
             // tabMonsterTab5
             // 

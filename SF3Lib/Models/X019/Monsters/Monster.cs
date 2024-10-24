@@ -519,10 +519,10 @@ namespace SF3.Models.X019.Monsters
             set => _fileEditor.SetByte(magicType, (byte)value);
         }
 
-        public int MovementType
+        public MovementTypeValue MovementType
         {
-            get => _fileEditor.GetByte(movementType);
-            set => _fileEditor.SetByte(movementType, (byte)value);
+            get => new MovementTypeValue(_fileEditor.GetByte(movementType));
+            set => _fileEditor.SetByte(movementType, (byte)value.Value);
         }
 
         public int Unknown11

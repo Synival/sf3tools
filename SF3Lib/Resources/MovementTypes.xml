@@ -7,7 +7,7 @@
     <type value="0x04" name="Tank" />
     <type value="0x05" name="Flying" />
     <type value="0x06" name="Floating" />
-    <type value="0x07" name="Aquadic" />
+    <type value="0x07" name="Aquatic" />
     <type value="0x08" name="Archer" />
     <type value="0x09" name="Bowknight" />
     <type value="0x0A" name="Elf" />

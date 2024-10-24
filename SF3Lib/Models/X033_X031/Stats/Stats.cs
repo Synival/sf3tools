@@ -1235,10 +1235,10 @@ namespace SF3.Models.X033_X031.Stats
         }
 
         [BulkCopy]
-        public int MovementType
+        public MovementTypeValue MovementType
         {
-            get => _fileEditor.GetByte(movementType);
-            set => _fileEditor.SetByte(movementType, (byte)value);
+            get => new MovementTypeValue(_fileEditor.GetByte(movementType));
+            set => _fileEditor.SetByte(movementType, (byte)value.Value);
         }
 
         [BulkCopy]
