@@ -1,18 +1,15 @@
 ﻿using System;
-using BrightIdeasSoftware;
 using System.Collections.Generic;
-using SF3.Types;
+using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.X033_X031_Editor.Forms
-{
+namespace SF3.X033_X031_Editor.Forms {
     // TODO: place this somewhere else!
-    public struct ProbableStats
-    {
-        public ProbableStats(double likely, double[] atPercentages)
-        {
+    public struct ProbableStats {
+        public ProbableStats(double likely, double[] atPercentages) {
             Likely = likely;
             AtPercentages = atPercentages;
         }
@@ -22,23 +19,19 @@ namespace SF3.X033_X031_Editor.Forms
     }
 }
 
-namespace SF3.X033_X031_Editor.Forms
-{
-    using StatDict = Dictionary<StatType, double>;
-    using ProbableStatsDict = Dictionary<StatType, ProbableStats>;
+namespace SF3.X033_X031_Editor.Forms {
     using static SF3.Editor.Extensions.TabControlExtensions;
+    using ProbableStatsDict = Dictionary<StatType, ProbableStats>;
+    using StatDict = Dictionary<StatType, double>;
 
-    public partial class frmX033_X031_Editor : EditorForm
-    {
+    public partial class frmX033_X031_Editor : EditorForm {
         // Used to display version in the application
         private string Version = "0.20";
 
         new public IX033_X031_FileEditor FileEditor => base.FileEditor as IX033_X031_FileEditor;
 
-        public class StatDataPoint
-        {
-            public StatDataPoint(int level, StatDict stats)
-            {
+        public class StatDataPoint {
+            public StatDataPoint(int level, StatDict stats) {
                 Level = level;
                 Stats = stats;
             }
@@ -47,10 +40,8 @@ namespace SF3.X033_X031_Editor.Forms
             public StatDict Stats { get; }
         }
 
-        public class ProbableStatsDataPoint
-        {
-            public ProbableStatsDataPoint(int level, ProbableStatsDict probableStats)
-            {
+        public class ProbableStatsDataPoint {
+            public ProbableStatsDataPoint(int level, ProbableStatsDict probableStats) {
                 Level = level;
                 ProbableStats = probableStats;
             }
@@ -59,8 +50,7 @@ namespace SF3.X033_X031_Editor.Forms
             public ProbableStatsDict ProbableStats { get; }
         }
 
-        public frmX033_X031_Editor()
-        {
+        public frmX033_X031_Editor() {
             InitializeComponent();
             BaseTitle = this.Text + " " + Version;
 
@@ -77,8 +67,7 @@ namespace SF3.X033_X031_Editor.Forms
             ScenarioChanged += onScenarioChanged;
             onScenarioChanged(null, EventArgs.Empty);
 
-            FileIsLoadedChanged += (obj, eargs) =>
-            {
+            FileIsLoadedChanged += (obj, eargs) => {
                 tsmiFile_SaveAs.Enabled = IsLoaded == true;
                 tsmiFile_CopyTablesFrom.Enabled = IsLoaded == true;
                 tsmiFile_Close.Enabled = IsLoaded == true;
@@ -91,15 +80,11 @@ namespace SF3.X033_X031_Editor.Forms
 
         protected override IFileEditor MakeFileEditor() => new X033_X031_FileEditor(Scenario);
 
-        protected override bool OnLoad()
-        {
+        protected override bool OnLoad() {
             if (!base.OnLoad())
-            {
                 return false;
-            }
 
-            if (!tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()
-            {
+            if (!tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>() {
                 new PopulateTabConfig(tabStats, olvStats, FileEditor.StatsList),
                 new PopulateTabConfig(tabSpells, olvSpells, FileEditor.StatsList),
                 new PopulateTabConfig(tabEquipStatistics, olvEquipStatistics, FileEditor.StatsList),
@@ -107,8 +92,7 @@ namespace SF3.X033_X031_Editor.Forms
                 new PopulateTabConfig(tabInitialInfo, olvInitialInfo, FileEditor.InitialInfoList),
                 new PopulateTabConfig(tabWeaponLevelReq, olvWeaponLevelReq, FileEditor.WeaponLevelList),
                 new PopulateTabConfig(tabCurveCalc, olvCurveCalc, FileEditor.StatsList)
-            }))
-            {
+            })) {
                 return false;
             }
 
@@ -132,26 +116,21 @@ namespace SF3.X033_X031_Editor.Forms
         private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
 
-        private void tsmiHelp_DebugCurve_Click(object sender, EventArgs e)
-        {
+        private void tsmiHelp_DebugCurve_Click(object sender, EventArgs e) {
             Models.X033_X031.Stats.Stats.DebugGrowthValues = !Models.X033_X031.Stats.Stats.DebugGrowthValues;
             tsmiHelp_DebugCurve.Checked = Models.X033_X031.Stats.Stats.DebugGrowthValues;
         }
 
-        private void tabMain_Click(object sender, EventArgs e)
-        {
+        private void tabMain_Click(object sender, EventArgs e) {
             olvCurveCalc.ClearObjects();
             if (FileEditor?.StatsList != null)
-            {
                 olvCurveCalc.AddObjects(FileEditor?.StatsList.Models);
-            }
         }
 
         private void CurveGraphCharacterComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshCurveGraph();
 
         // TODO: this method does way too much work and shouldn't belong in the form. sort it out!!
-        private void RefreshCurveGraph()
-        {
+        private void RefreshCurveGraph() {
             // Data points for the chart.
             var targetStatDataPoints = new List<StatDataPoint>();
             var probableStatsDataPoints = new List<ProbableStatsDataPoint>();
@@ -171,8 +150,7 @@ namespace SF3.X033_X031_Editor.Forms
             int maxValue = promotionLevel == 0 ? 50 : promotionLevel == 1 ? 100 : 200;
 
             // Did we find stats? If so, populate our data sets.
-            if (stats != null)
-            {
+            if (stats != null) {
                 // Function to convert a ProbableValueSet to a ProbableStatsDict.
                 Func<Dictionary<StatType, ProbableValueSet>, ProbableStatsDict> GetProbableStats = (pvs) =>
                 {
@@ -194,8 +172,7 @@ namespace SF3.X033_X031_Editor.Forms
 
                 // Add initial stats for level 1.
                 var startStatValues = new StatDict();
-                foreach (var statType in (StatType[])Enum.GetValues(typeof(StatType)))
-                {
+                foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
                     var targetStat = stats.GetStatGrowthRange(statType, 0).Begin;
                     startStatValues.Add(statType, targetStat);
                     maxValue = Math.Max(maxValue, targetStat);
@@ -204,22 +181,18 @@ namespace SF3.X033_X031_Editor.Forms
 
                 // Get initial probable stats for level 1 (which are the same as startStatValues).
                 var currentProbableStatValues = new Dictionary<StatType, ProbableValueSet>();
-                foreach (var statType in (StatType[])Enum.GetValues(typeof(StatType)))
-                {
-                    currentProbableStatValues[statType] = new ProbableValueSet()
-                    {
+                foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType)))
+                    currentProbableStatValues[statType] = new ProbableValueSet() {
                         { (int) startStatValues[statType], 1.00 }
                     };
-                }
+
                 probableStatsDataPoints.Add(new ProbableStatsDataPoint(1, GetProbableStats(currentProbableStatValues)));
 
                 // Populate data points for all stat growth groups, until the max level.
-                foreach (var statGrowthGroup in Stats.StatGrowthGroups[isPromoted])
-                {
+                foreach (var statGrowthGroup in Stats.StatGrowthGroups[isPromoted]) {
                     // Add the next target stats.
                     var statValues = new StatDict();
-                    foreach (var statType in (StatType[])Enum.GetValues(typeof(StatType)))
-                    {
+                    foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
                         var targetStat = stats.GetStatGrowthRange(statType, statGrowthGroup.GroupIndex).End;
                         statValues.Add(statType, targetStat);
                         maxValue = Math.Max(maxValue, targetStat);
@@ -227,10 +200,8 @@ namespace SF3.X033_X031_Editor.Forms
                     targetStatDataPoints.Add(new StatDataPoint(statGrowthGroup.Range.End, statValues));
 
                     // Add probable stat values for every level in this stat growth group.
-                    for (int lv = statGrowthGroup.Range.Begin + 1; lv <= statGrowthGroup.Range.End; lv++)
-                    {
-                        foreach (var statType in (StatType[])Enum.GetValues(typeof(StatType)))
-                        {
+                    for (int lv = statGrowthGroup.Range.Begin + 1; lv <= statGrowthGroup.Range.End; lv++) {
+                        foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
                             var growthValue = stats.GetAverageStatGrowthPerLevel(statType, statGrowthGroup.GroupIndex);
                             var guaranteedGrowth = (int)growthValue;
                             var plusOneProbability = growthValue - (double)guaranteedGrowth;
@@ -251,37 +222,28 @@ namespace SF3.X033_X031_Editor.Forms
             CurveGraph.ChartAreas[0].AxisY.Maximum = maxValue;
             CurveGraph.ChartAreas[0].AxisY.Interval = promotionLevel == 0 ? 5 : promotionLevel == 1 ? 10 : 20;
 
-            foreach (var statType in (StatType[])Enum.GetValues(typeof(StatType)))
-            {
+            foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
                 var statTypeStr = statType.ToString();
 
                 var targetSeries = CurveGraph.Series[statTypeStr];
                 targetSeries.Points.Clear();
                 foreach (var dataPoint in targetStatDataPoints)
-                {
                     targetSeries.Points.AddXY(dataPoint.Level, dataPoint.Stats[statType]);
-                }
 
                 var likelySeries = CurveGraph.Series["Likely " + statTypeStr];
                 likelySeries.Points.Clear();
                 foreach (var dataPoint in probableStatsDataPoints)
-                {
                     likelySeries.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].Likely);
-                }
 
                 var range1Series = CurveGraph.Series[statTypeStr + " Range 1 (50% Likely)"];
                 range1Series.Points.Clear();
                 foreach (var dataPoint in probableStatsDataPoints)
-                {
                     range1Series.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].AtPercentages[1], dataPoint.ProbableStats[statType].AtPercentages[2]);
-                }
 
                 var range2Series = CurveGraph.Series[statTypeStr + " Range 2 (99% Likely)"];
                 range2Series.Points.Clear();
                 foreach (var dataPoint in probableStatsDataPoints)
-                {
                     range2Series.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].AtPercentages[0], dataPoint.ProbableStats[statType].AtPercentages[3]);
-                }
             }
         }
     }
