@@ -1,13 +1,10 @@
-﻿using SF3.Types;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using SF3.Types;
 using static SF3.Utils.Resources;
 using static SF3.Utils.Utils;
 
-namespace SF3.Values
-{
-    public interface INamedValueFromResourceForScenariosInfo
-    {
+namespace SF3.Values {
+    public interface INamedValueFromResourceForScenariosInfo {
         string ResourceName { get; }
         int MinValue { get; }
         int MaxValue { get; }
@@ -15,10 +12,8 @@ namespace SF3.Values
         Dictionary<ScenarioType, Dictionary<NamedValue, string>> ComboBoxValues { get; }
     };
 
-    public class NamedValueFromResourceForScenariosInfo : INamedValueFromResourceForScenariosInfo
-    {
-        public NamedValueFromResourceForScenariosInfo(string resourceName)
-        {
+    public class NamedValueFromResourceForScenariosInfo : INamedValueFromResourceForScenariosInfo {
+        public NamedValueFromResourceForScenariosInfo(string resourceName) {
             ResourceName = resourceName;
             PossibleValues = GetValueNameDictionaryForAllScenariosFromXML(ResourceName);
         }
@@ -34,21 +29,18 @@ namespace SF3.Values
     /// Named value with values from a resource file that can be bound to an ObjectListView.
     /// </summary>
     public abstract class NamedValueFromResourceForScenarios<TResourceInfo> : NamedValue
-        where TResourceInfo : INamedValueFromResourceForScenariosInfo, new()
-    {
+        where TResourceInfo : INamedValueFromResourceForScenariosInfo, new() {
         public NamedValueFromResourceForScenarios(ScenarioType scenario, int value)
         : base(
             NameOrHexValue(value, ResourceInfo.PossibleValues[scenario]),
             HexValueWithName(value, ResourceInfo.PossibleValues[scenario]),
             value
-        )
-        {
+        ) {
             Scenario = scenario;
         }
 
         public NamedValueFromResourceForScenarios(ScenarioType scenario, string name, string valueName, int value)
-        : base(name, valueName, value)
-        {
+        : base(name, valueName, value) {
             Scenario = scenario;
         }
 
@@ -59,14 +51,10 @@ namespace SF3.Values
 
         public override Dictionary<int, string> PossibleValues => ResourceInfo.PossibleValues[Scenario];
 
-        public override Dictionary<NamedValue, string> ComboBoxValues
-        {
-            get
-            {
+        public override Dictionary<NamedValue, string> ComboBoxValues {
+            get {
                 if (!ResourceInfo.ComboBoxValues.ContainsKey(Scenario))
-                {
                     ResourceInfo.ComboBoxValues.Add(Scenario, MakeNamedValueComboBoxValues(this));
-                }
                 return ResourceInfo.ComboBoxValues[Scenario];
             }
         }

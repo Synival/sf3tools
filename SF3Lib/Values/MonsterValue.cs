@@ -1,16 +1,12 @@
-﻿using SF3.Types;
-using SF3.Utils;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using SF3.Types;
 using static SF3.Utils.Resources;
 using static SF3.Utils.Utils;
 
-namespace SF3.Values
-{
-    public class MonsterValueResourceInfo : NamedValueFromResourceForScenariosInfo
-    {
-        public MonsterValueResourceInfo() : base("Monsters.xml")
-        {
+namespace SF3.Values {
+    public class MonsterValueResourceInfo : NamedValueFromResourceForScenariosInfo {
+        public MonsterValueResourceInfo() : base("Monsters.xml") {
             PossibleValuesPDX044 = GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.PremiumDisk, "Monsters_X044.xml"));
 
             PossibleValues_WithFFFF = PossibleValues.ToDictionary(x => x.Key, x => DictionaryWithFFFF(x.Value));
@@ -49,10 +45,8 @@ namespace SF3.Values
     /// <summary>
     /// Named value for Monster ID's that can be bound to an ObjectListView.
     /// </summary>
-    public class MonsterValue : NamedValueFromResourceForScenarios<MonsterValueResourceInfo>
-    {
-        public MonsterValue(ScenarioType scenario, int value) : base(scenario, value)
-        {
+    public class MonsterValue : NamedValueFromResourceForScenarios<MonsterValueResourceInfo> {
+        public MonsterValue(ScenarioType scenario, int value) : base(scenario, value) {
         }
 
         public MonsterValue(ScenarioType scenario, bool isX044, bool withFFFF, int value)
@@ -60,8 +54,8 @@ namespace SF3.Values
             scenario,
             NameOrHexValue(value, GetPossibleValues(scenario, isX044, withFFFF)),
             HexValueWithName(value, GetPossibleValues(scenario, isX044, withFFFF)),
-            value)
-        {
+            value
+        ) {
             IsX044 = isX044;
             WithFFFF = withFFFF;
         }
@@ -74,14 +68,10 @@ namespace SF3.Values
 
         public override Dictionary<int, string> PossibleValues => GetPossibleValues(Scenario, IsPDX044, WithFFFF);
 
-        public override Dictionary<NamedValue, string> ComboBoxValues
-        {
-            get
-            {
+        public override Dictionary<NamedValue, string> ComboBoxValues {
+            get {
                 if (!ResourceInfo.ExpandedComboBoxValues[IsPDX044][WithFFFF].ContainsKey(Scenario))
-                {
                     ResourceInfo.ExpandedComboBoxValues[IsPDX044][WithFFFF].Add(Scenario, MakeNamedValueComboBoxValues(this));
-                }
                 return ResourceInfo.ExpandedComboBoxValues[IsPDX044][WithFFFF][Scenario];
             }
         }

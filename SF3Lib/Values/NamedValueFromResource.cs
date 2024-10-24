@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using static SF3.Utils.Resources;
 using static SF3.Utils.Utils;
 
-namespace SF3.Values
-{
-    public interface INamedValueFromResourceInfo
-    {
+namespace SF3.Values {
+    public interface INamedValueFromResourceInfo {
         string ResourceName { get; }
         int MinValue { get; }
         int MaxValue { get; }
@@ -14,10 +11,8 @@ namespace SF3.Values
         Dictionary<NamedValue, string> ComboBoxValues { get; set; }
     };
 
-    public class NamedValueFromResourceInfo : INamedValueFromResourceInfo
-    {
-        public NamedValueFromResourceInfo(string resourceName)
-        {
+    public class NamedValueFromResourceInfo : INamedValueFromResourceInfo {
+        public NamedValueFromResourceInfo(string resourceName) {
             ResourceName = resourceName;
             PossibleValues = GetValueNameDictionaryFromXML("Resources/" + ResourceName);
         }
@@ -33,15 +28,13 @@ namespace SF3.Values
     /// Named value with values from a resource file that can be bound to an ObjectListView.
     /// </summary>
     public abstract class NamedValueFromResource<TResourceInfo> : NamedValue
-        where TResourceInfo : INamedValueFromResourceInfo, new()
-    {
+        where TResourceInfo : INamedValueFromResourceInfo, new() {
         public NamedValueFromResource(int value)
         : base(
             NameOrHexValue(value, ResourceInfo.PossibleValues),
             HexValueWithName(value, ResourceInfo.PossibleValues),
             value
-        )
-        {
+        ) {
         }
 
         public static readonly TResourceInfo ResourceInfo = new TResourceInfo();
@@ -51,14 +44,10 @@ namespace SF3.Values
 
         public override Dictionary<int, string> PossibleValues => ResourceInfo.PossibleValues;
 
-        public override Dictionary<NamedValue, string> ComboBoxValues
-        {
-            get
-            {
+        public override Dictionary<NamedValue, string> ComboBoxValues {
+            get {
                 if (ResourceInfo.ComboBoxValues == null)
-                {
                     ResourceInfo.ComboBoxValues = MakeNamedValueComboBoxValues(this);
-                }
                 return ResourceInfo.ComboBoxValues;
             }
         }
