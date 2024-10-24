@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace SF3
-{
+namespace SF3 {
     /// <summary>
     /// Concrete type with both a Name (string) and a Value (int).
     /// Used when values need both names to look up and must be identifiable as a specific type.
     /// </summary>
-    public abstract class NamedValue : IComparable, IComparable<NamedValue>
-    {
-        public NamedValue(string name, string valueName, int value)
-        {
+    public abstract class NamedValue : IComparable, IComparable<NamedValue> {
+        public NamedValue(string name, string valueName, int value) {
             _name = name;
             _valueName = valueName;
             _value = value;

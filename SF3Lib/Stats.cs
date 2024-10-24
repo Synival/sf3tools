@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SF3
-{
+namespace SF3 {
     /// <summary>
     /// Utility functions for stats.
     /// </summary>
-    static public class Stats
-    {
+    static public class Stats {
         /// <summary>
         /// An array for all possible outcomes of the RNG for adding an additional point when gaining stats.
         /// Index: The number below 0x100 used when determining a stat 'growthValue'.
@@ -60,10 +55,8 @@ namespace SF3
         /// <summary>
         /// The level range for a stat gains in a particular group (e.g, HPCurve1 to HPCurve2).
         /// </summary>
-        public class StatGrowthGroup
-        {
-            public StatGrowthGroup(int groupIndex, bool isPromoted, ValueRange<int> range)
-            {
+        public class StatGrowthGroup {
+            public StatGrowthGroup(int groupIndex, bool isPromoted, ValueRange<int> range) {
                 GroupIndex = groupIndex;
                 IsPromoted = isPromoted;
                 Range = range;
@@ -81,8 +74,7 @@ namespace SF3
         {
             {
                 false,
-                new StatGrowthGroup[]
-                {
+                new StatGrowthGroup[] {
                     new StatGrowthGroup(0, false, new ValueRange<int>(1, 5)),
                     new StatGrowthGroup(1, false, new ValueRange<int>(5, 10)),
                     new StatGrowthGroup(2, false, new ValueRange<int>(10, 12)),
@@ -93,8 +85,7 @@ namespace SF3
             },
             {
                 true,
-                new StatGrowthGroup[]
-                {
+                new StatGrowthGroup[] {
                     new StatGrowthGroup(0, true, new ValueRange<int>(1, 5)),
                     new StatGrowthGroup(1, true, new ValueRange<int>(5, 10)),
                     new StatGrowthGroup(2, true, new ValueRange<int>(10, 15)),
@@ -112,8 +103,7 @@ namespace SF3
         /// <param name="growthValue">Internal value used for stat growth provided by GetStatGrowthValue*()
         /// functions.</param>
         /// <returns>The average number of stat gains per level.</returns>
-        static public double GetAverageStatGrowthPerLevel(int growthValue)
-        {
+        static public double GetAverageStatGrowthPerLevel(int growthValue) {
             int guaranteedStatBonus = (growthValue & 0xf00) % 15;
 
             // The portion of growthValue % 0x100 is the starting point for the formula to determine whether
@@ -135,9 +125,7 @@ namespace SF3
         /// functions.</param>
         /// <returns>The average number of stat gains per level as a percentage string.</returns>
         static public string GetAverageStatGrowthPerLevelAsPercent(int growthValue)
-        {
-            return string.Format("{0:0.##}", GetAverageStatGrowthPerLevel(growthValue) * 100) + "%";
-        }
+            => string.Format("{0:0.##}", GetAverageStatGrowthPerLevel(growthValue) * 100) + "%";
 
         /// <summary>
         /// Returns an internally-used growth value based on a range of stat to increase by over the course of a range
@@ -146,11 +134,9 @@ namespace SF3
         /// <param name="statRange">The total range of stats to increase by over the course of 'levelRange'.</param>
         /// <param name="levelRange">The number of levels over which the stat range is reached.</param>
         /// <returns>An internal value used for calculating stat gains.</returns>
-        static public int GetStatGrowthValuePerLevel(int statRange, int levelRange)
-        {
+        static public int GetStatGrowthValuePerLevel(int statRange, int levelRange) {
             var statRangeTimes0x100 = statRange << 8;
-            switch (levelRange)
-            {
+            switch (levelRange) {
                 case 2:
                     return statRangeTimes0x100 >> 1;
                 case 3:
