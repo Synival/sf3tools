@@ -2,10 +2,8 @@
 using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.IconPointerEditor.ItemIcons
-{
-    public class ItemIcon
-    {
+namespace SF3.Models.IconPointerEditor.ItemIcons {
+    public class ItemIcon {
         private IIconPointerFileEditor _fileEditor;
 
         //ITEMS
@@ -19,21 +17,17 @@ namespace SF3.Models.IconPointerEditor.ItemIcons
         private string name;
         private int sub;
 
-        public ItemIcon(IIconPointerFileEditor fileEditor, int id, string text)
-        {
+        public ItemIcon(IIconPointerFileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
-                if (_fileEditor.IsX026 == true)
-                {
+            if (Scenario == ScenarioType.Scenario1) {
+                if (_fileEditor.IsX026 == true) {
                     offset = 0x08f0; //scn1 initial pointer
                     sub = 0x06078000;
                 }
-                else
-                {
+                else {
                     offset = 0x0000003C; //scn1 initial pointer
                     sub = 0x06068000;
                 }
@@ -51,15 +45,12 @@ namespace SF3.Models.IconPointerEditor.ItemIcons
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
-                if (_fileEditor.IsX026 == true)
-                {
+            else if (Scenario == ScenarioType.Scenario2) {
+                if (_fileEditor.IsX026 == true) {
                     offset = 0x0a08; //scn2 x026 initial pointer
                     sub = 0x06078000;
                 }
-                else
-                {
+                else {
                     offset = 0x0000003C; //scn2 initial pointer
                     sub = 0x06068000;
                 }
@@ -77,15 +68,12 @@ namespace SF3.Models.IconPointerEditor.ItemIcons
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
-                if (_fileEditor.IsX026 == true)
-                {
+            else if (Scenario == ScenarioType.Scenario3) {
+                if (_fileEditor.IsX026 == true) {
                     offset = 0x09b4; //scn3 x026 initial pointer
                     sub = 0x06078000;
                 }
-                else
-                {
+                else {
                     offset = 0x0000003C; //scn3 initial pointer
                     sub = 0x06068000;
                 }
@@ -93,15 +81,12 @@ namespace SF3.Models.IconPointerEditor.ItemIcons
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //pointer
             }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
-                if (_fileEditor.IsX026 == true)
-                {
+            else if (Scenario == ScenarioType.PremiumDisk) {
+                if (_fileEditor.IsX026 == true) {
                     offset = 0x072c; //pd x026 initial pointer
                     sub = 0x06078000;
                 }
-                else
-                {
+                else {
                     offset = 0x0000003C; //pd initial pointer
                     sub = 0x06068000;
                 }
@@ -120,15 +105,13 @@ namespace SF3.Models.IconPointerEditor.ItemIcons
 
             //int start = 0x354c + (id * 24);
 
-            if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1))
-            {
+            if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)) {
                 int start = offset + (id * 0x02);
                 theItemIcon = start; //1 bytes
 
                 address = offset + (id * 0x02);
             }
-            else
-            {
+            else {
                 int start = offset + (id * 0x04);
                 theItemIcon = start; //1 bytes
 
@@ -145,27 +128,20 @@ namespace SF3.Models.IconPointerEditor.ItemIcons
         public string SizeName => name;
 
         [BulkCopy]
-        public int TheItemIcon
-        {
-            get
-            {
-                if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1))
-                {
+        public int TheItemIcon {
+            get {
+                if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)) {
                     return _fileEditor.GetWord(theItemIcon);
                 }
-                else
-                {
+                else {
                     return _fileEditor.GetDouble(theItemIcon);
                 }
             }
-            set
-            {
-                if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1))
-                {
+            set {
+                if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)) {
                     _fileEditor.SetWord(theItemIcon, value);
                 }
-                else
-                {
+                else {
                     _fileEditor.SetDouble(theItemIcon, value);
                 }
             }

@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X002.AttackResist
-{
-    public class AttackResist
-    {
+namespace SF3.Models.X002.AttackResist {
+    public class AttackResist {
         private IX002_FileEditor _fileEditor;
 
         private int attack;
@@ -16,26 +14,21 @@ namespace SF3.Models.X002.AttackResist
         private int index;
         private string name;
 
-        public AttackResist(IX002_FileEditor fileEditor, int id, string text)
-        {
+        public AttackResist(IX002_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00000cb5; //scn1
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000d15; //scn2
-                if (checkVersion2 == 0x2C)
-                {
+                if (checkVersion2 == 0x2C) {
                     offset = offset - 0x40;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000dcd; //scn3
             }
             else
@@ -63,15 +56,13 @@ namespace SF3.Models.X002.AttackResist
         public int AttackResistID => index;
         public string AttackResistName => name;
 
-        public int Attack
-        {
+        public int Attack {
             get => _fileEditor.GetByte(attack);
-            set => _fileEditor.SetByte(attack, (byte)value);
+            set => _fileEditor.SetByte(attack, (byte) value);
         }
-        public int Resist
-        {
+        public int Resist {
             get => _fileEditor.GetByte(resist);
-            set => _fileEditor.SetByte(resist, (byte)value);
+            set => _fileEditor.SetByte(resist, (byte) value);
         }
 
         public int AttackResistAddress => (address);

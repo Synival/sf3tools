@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X1.BattlePointers
-{
-    public class BattlePointers
-    {
+namespace SF3.Models.X1.BattlePointers {
+    public class BattlePointers {
         private IX1_FileEditor _fileEditor;
 
         private int battlePointer;
@@ -31,12 +29,10 @@ namespace SF3.Models.X1.BattlePointers
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public BattlePointers(IX1_FileEditor fileEditor, int id, string text)
-        {
+        public BattlePointers(IX1_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
-            if (_fileEditor.IsBTL99)
-            {
+            if (_fileEditor.IsBTL99) {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
                 offset = _fileEditor.GetDouble(offset);
@@ -51,8 +47,7 @@ namespace SF3.Models.X1.BattlePointers
                 offset = offset + 0xa90;
                 */
             }
-            else if (Scenario == ScenarioType.Scenario1)
-            {
+            else if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
                 offset = _fileEditor.GetDouble(offset);
@@ -74,8 +69,7 @@ namespace SF3.Models.X1.BattlePointers
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -95,8 +89,7 @@ namespace SF3.Models.X1.BattlePointers
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -106,8 +99,7 @@ namespace SF3.Models.X1.BattlePointers
 
                 //offset = _fileEditor.GetDouble(offset);
             }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
+            else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -146,8 +138,7 @@ namespace SF3.Models.X1.BattlePointers
         }
         */
 
-        public int BattlePointer
-        {
+        public int BattlePointer {
             get => _fileEditor.GetDouble(battlePointer);
             set => _fileEditor.SetDouble(battlePointer, value);
         }

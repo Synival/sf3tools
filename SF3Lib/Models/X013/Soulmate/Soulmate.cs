@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X013.Soulmate
-{
-    public class Soulmate
-    {
+namespace SF3.Models.X013.Soulmate {
+    public class Soulmate {
         private IX013_FileEditor _fileEditor;
 
         private int chance;
@@ -15,26 +13,22 @@ namespace SF3.Models.X013.Soulmate
         private string name;
         private int checkVersion2;
 
-        public Soulmate(IX013_FileEditor fileEditor, int id, string text)
-        {
+        public Soulmate(IX013_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000A);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00007530; //scn1
                 if (checkVersion2 == 0x0A) //original jp
                 {
                     offset -= 0x0C;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00007484; //scn2
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x0000736c; //scn3
             }
             else
@@ -60,10 +54,9 @@ namespace SF3.Models.X013.Soulmate
         public int SoulmateID => index;
         public string SoulmateName => name;
 
-        public int Chance
-        {
+        public int Chance {
             get => _fileEditor.GetByte(chance);
-            set => _fileEditor.SetByte(chance, (byte)value);
+            set => _fileEditor.SetByte(chance, (byte) value);
         }
 
         public int SoulmateAddress => (address);

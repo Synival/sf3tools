@@ -1,11 +1,9 @@
-﻿using SF3.Types;
+﻿using SF3.FileEditors;
+using SF3.Types;
 using SF3.Values;
-using SF3.FileEditors;
 
-namespace SF3.Models.X002.Items
-{
-    public class Item
-    {
+namespace SF3.Models.X002.Items {
+    public class Item {
         private IX002_FileEditor _fileEditor;
 
         private int PriceLocation;
@@ -38,30 +36,25 @@ namespace SF3.Models.X002.Items
         private int index;
         private string name;
 
-        public Item(IX002_FileEditor fileEditor, int id, string text)
-        {
+        public Item(IX002_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00002b28; //scn1
                 if (checkVersion2 == 0x10) //original jp
                 {
                     offset -= 0x0C;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00002e9c; //scn2
-                if (checkVersion2 == 0x2C)
-                {
+                if (checkVersion2 == 0x2C) {
                     offset = offset - 0x44;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x0000354c; //scn3
             }
             else
@@ -109,48 +102,40 @@ namespace SF3.Models.X002.Items
         public int ID => index;
         public string Name => name;
 
-        public int Price
-        {
+        public int Price {
             get => _fileEditor.GetWord(PriceLocation);
             set => _fileEditor.SetWord(PriceLocation, value);
         }
-        public WeaponTypeValue WeaponType
-        {
+        public WeaponTypeValue WeaponType {
             get => new WeaponTypeValue(_fileEditor.GetByte(WeaponTypeLocation));
-            set => _fileEditor.SetByte(WeaponTypeLocation, (byte)value.Value);
+            set => _fileEditor.SetByte(WeaponTypeLocation, (byte) value.Value);
         }
-        public int EffectsEquip
-        {
+        public int EffectsEquip {
             get => _fileEditor.GetByte(EffectsEquipLocation);
-            set => _fileEditor.SetByte(EffectsEquipLocation, (byte)value);
+            set => _fileEditor.SetByte(EffectsEquipLocation, (byte) value);
         }
 
-        public bool Cursed
-        {
+        public bool Cursed {
             get => _fileEditor.GetBit(EffectsEquipLocation, 1);
             set => _fileEditor.SetBit(EffectsEquipLocation, 1, value);
         }
 
-        public bool CanCrack
-        {
+        public bool CanCrack {
             get => _fileEditor.GetBit(EffectsEquipLocation, 2);
             set => _fileEditor.SetBit(EffectsEquipLocation, 2, value);
         }
 
-        public bool HealingItem
-        {
+        public bool HealingItem {
             get => _fileEditor.GetBit(EffectsEquipLocation, 3);
             set => _fileEditor.SetBit(EffectsEquipLocation, 3, value);
         }
 
-        public bool CannotUnequip
-        {
+        public bool CannotUnequip {
             get => _fileEditor.GetBit(EffectsEquipLocation, 4);
             set => _fileEditor.SetBit(EffectsEquipLocation, 4, value);
         }
 
-        public bool Rare
-        {
+        public bool Rare {
             get => _fileEditor.GetBit(EffectsEquipLocation, 5);
             set => _fileEditor.SetBit(EffectsEquipLocation, 5, value);
         }
@@ -167,14 +152,12 @@ namespace SF3.Models.X002.Items
             set => _fileEditor.SetBit(EffectsEquipLocation, 7, value);
         }
 
-        public int Requirements
-        {
+        public int Requirements {
             get => _fileEditor.GetByte(RequirementLocation);
-            set => _fileEditor.SetByte(RequirementLocation, (byte)value);
+            set => _fileEditor.SetByte(RequirementLocation, (byte) value);
         }
 
-        public bool RequiredPromo
-        {
+        public bool RequiredPromo {
             get => _fileEditor.GetBit(RequirementLocation, 1);
             set => _fileEditor.SetBit(RequirementLocation, 1, value);
         }
@@ -191,128 +174,107 @@ namespace SF3.Models.X002.Items
             set => _fileEditor.SetBit(RequirementLocation, 3, value);
         }
 
-        public bool RequiredMale
-        {
+        public bool RequiredMale {
             get => _fileEditor.GetBit(RequirementLocation, 4);
             set => _fileEditor.SetBit(RequirementLocation, 4, value);
         }
 
-        public bool RequiredFemale
-        {
+        public bool RequiredFemale {
             get => _fileEditor.GetBit(RequirementLocation, 5);
             set => _fileEditor.SetBit(RequirementLocation, 5, value);
         }
 
-        public int Range
-        {
+        public int Range {
             get => _fileEditor.GetByte(RangeLocation);
-            set => _fileEditor.SetByte(RangeLocation, (byte)value);
+            set => _fileEditor.SetByte(RangeLocation, (byte) value);
         }
 
-        public int Attack
-        {
+        public int Attack {
             get => _fileEditor.GetByte(AttackLocation);
-            set => _fileEditor.SetByte(AttackLocation, (byte)value);
+            set => _fileEditor.SetByte(AttackLocation, (byte) value);
         }
 
-        public int Defense
-        {
+        public int Defense {
             get => _fileEditor.GetByte(DefenseLocation);
-            set => _fileEditor.SetByte(DefenseLocation, (byte)value);
+            set => _fileEditor.SetByte(DefenseLocation, (byte) value);
         }
 
-        public int AttackRank
-        {
+        public int AttackRank {
             get => _fileEditor.GetByte(AttackUpRankLocation);
-            set => _fileEditor.SetByte(AttackUpRankLocation, (byte)value);
+            set => _fileEditor.SetByte(AttackUpRankLocation, (byte) value);
         }
-        public int SpellRank
-        {
+        public int SpellRank {
             get => _fileEditor.GetByte(SpellUpRankLocation);
-            set => _fileEditor.SetByte(SpellUpRankLocation, (byte)value);
+            set => _fileEditor.SetByte(SpellUpRankLocation, (byte) value);
         }
-        public int PhysicalAttribute
-        {
+        public int PhysicalAttribute {
             get => _fileEditor.GetByte(PhysicalAttributeLocation);
-            set => _fileEditor.SetByte(PhysicalAttributeLocation, (byte)value);
+            set => _fileEditor.SetByte(PhysicalAttributeLocation, (byte) value);
         }
 
-        public int Unknown1
-        {
+        public int Unknown1 {
             get => _fileEditor.GetByte(Unknown1Location);
-            set => _fileEditor.SetByte(Unknown1Location, (byte)value);
+            set => _fileEditor.SetByte(Unknown1Location, (byte) value);
         }
 
-        public int MonsterType
-        {
+        public int MonsterType {
             get => _fileEditor.GetByte(MonsterTypeAttributeLocation);
-            set => _fileEditor.SetByte(MonsterTypeAttributeLocation, (byte)value);
+            set => _fileEditor.SetByte(MonsterTypeAttributeLocation, (byte) value);
         }
 
-        public int Unknown2
-        {
+        public int Unknown2 {
             get => _fileEditor.GetByte(Unknown2Location);
-            set => _fileEditor.SetByte(Unknown2Location, (byte)value);
+            set => _fileEditor.SetByte(Unknown2Location, (byte) value);
         }
 
-        public StatTypeValue StatType1
-        {
+        public StatTypeValue StatType1 {
             get => new StatTypeValue(_fileEditor.GetByte(StatType1Location));
-            set => _fileEditor.SetByte(StatType1Location, (byte)value.Value);
+            set => _fileEditor.SetByte(StatType1Location, (byte) value.Value);
         }
 
-        public int StatUp1
-        {
+        public int StatUp1 {
             get => _fileEditor.GetByte(StatUp1Location);
-            set => _fileEditor.SetByte(StatUp1Location, (byte)value);
+            set => _fileEditor.SetByte(StatUp1Location, (byte) value);
         }
 
-        public StatTypeValue StatType2
-        {
+        public StatTypeValue StatType2 {
             get => new StatTypeValue(_fileEditor.GetByte(StatType2Location));
-            set => _fileEditor.SetByte(StatType2Location, (byte)value.Value);
+            set => _fileEditor.SetByte(StatType2Location, (byte) value.Value);
         }
 
-        public int StatUp2
-        {
+        public int StatUp2 {
             get => _fileEditor.GetByte(StatUp2Location);
-            set => _fileEditor.SetByte(StatUp2Location, (byte)value);
+            set => _fileEditor.SetByte(StatUp2Location, (byte) value);
         }
 
-        public StatTypeValue StatType3
-        {
+        public StatTypeValue StatType3 {
             get => new StatTypeValue(_fileEditor.GetByte(StatType3Location));
-            set => _fileEditor.SetByte(StatType3Location, (byte)value.Value);
+            set => _fileEditor.SetByte(StatType3Location, (byte) value.Value);
         }
 
-        public int StatUp3
-        {
+        public int StatUp3 {
             get => _fileEditor.GetByte(StatUp3Location);
-            set => _fileEditor.SetByte(StatUp3Location, (byte)value);
+            set => _fileEditor.SetByte(StatUp3Location, (byte) value);
         }
 
-        public StatTypeValue StatType4
-        {
+        public StatTypeValue StatType4 {
             get => new StatTypeValue(_fileEditor.GetByte(StatType4Location));
-            set => _fileEditor.SetByte(StatType4Location, (byte)value.Value);
+            set => _fileEditor.SetByte(StatType4Location, (byte) value.Value);
         }
 
-        public int StatUp4
-        {
+        public int StatUp4 {
             get => _fileEditor.GetByte(StatUp4Location);
-            set => _fileEditor.SetByte(StatUp4Location, (byte)value);
+            set => _fileEditor.SetByte(StatUp4Location, (byte) value);
         }
 
-        public SpellValue SpellUse
-        {
+        public SpellValue SpellUse {
             get => new SpellValue(Scenario, _fileEditor.GetByte(SpellOnUseLocation));
-            set => _fileEditor.SetByte(SpellOnUseLocation, (byte)value.Value);
+            set => _fileEditor.SetByte(SpellOnUseLocation, (byte) value.Value);
         }
 
-        public int SpellUseLv
-        {
+        public int SpellUseLv {
             get => _fileEditor.GetByte(SpellLvOnUseLocation);
-            set => _fileEditor.SetByte(SpellLvOnUseLocation, (byte)value);
+            set => _fileEditor.SetByte(SpellLvOnUseLocation, (byte) value);
         }
 
         public int Address => (address);

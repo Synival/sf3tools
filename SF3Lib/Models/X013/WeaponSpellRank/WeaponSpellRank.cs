@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X013.WeaponSpellRank
-{
-    public class WeaponSpellRank
-    {
+namespace SF3.Models.X013.WeaponSpellRank {
+    public class WeaponSpellRank {
         private IX013_FileEditor _fileEditor;
 
         private int rankNone;
@@ -19,26 +17,22 @@ namespace SF3.Models.X013.WeaponSpellRank
         private string name;
         private int checkVersion2;
 
-        public WeaponSpellRank(IX013_FileEditor fileEditor, int id, string text)
-        {
+        public WeaponSpellRank(IX013_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000A);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x000070F0; //scn1
                 if (checkVersion2 == 0x0A) //original jp
                 {
                     offset -= 0x0C;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00006FC8; //scn2
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00006D04; //scn3
             }
             else
@@ -68,30 +62,25 @@ namespace SF3.Models.X013.WeaponSpellRank
         public int WeaponSpellRankID => index;
         public string WeaponSpellRankName => name;
 
-        public int RankNone
-        {
+        public int RankNone {
             get => _fileEditor.GetByte(rankNone);
-            set => _fileEditor.SetByte(rankNone, (byte)value);
+            set => _fileEditor.SetByte(rankNone, (byte) value);
         }
-        public int RankC
-        {
+        public int RankC {
             get => _fileEditor.GetByte(rankC);
-            set => _fileEditor.SetByte(rankC, (byte)value);
+            set => _fileEditor.SetByte(rankC, (byte) value);
         }
-        public int RankB
-        {
+        public int RankB {
             get => _fileEditor.GetByte(rankB);
-            set => _fileEditor.SetByte(rankB, (byte)value);
+            set => _fileEditor.SetByte(rankB, (byte) value);
         }
-        public int RankA
-        {
+        public int RankA {
             get => _fileEditor.GetByte(rankA);
-            set => _fileEditor.SetByte(rankA, (byte)value);
+            set => _fileEditor.SetByte(rankA, (byte) value);
         }
-        public int RankS
-        {
+        public int RankS {
             get => _fileEditor.GetByte(rankS);
-            set => _fileEditor.SetByte(rankS, (byte)value);
+            set => _fileEditor.SetByte(rankS, (byte) value);
         }
 
         public int WeaponSpellRankAddress => (address);

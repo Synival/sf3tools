@@ -1,11 +1,9 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 using SF3.Values;
 
-namespace SF3.Models.X002.LoadedOverride
-{
-    public class LoadedOverride
-    {
+namespace SF3.Models.X002.LoadedOverride {
+    public class LoadedOverride {
         private IX002_FileEditor _fileEditor;
 
         private int mapID;
@@ -29,30 +27,25 @@ namespace SF3.Models.X002.LoadedOverride
         private int index;
         private string name;
 
-        public LoadedOverride(IX002_FileEditor fileEditor, int id, string text)
-        {
+        public LoadedOverride(IX002_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x0000527a; //scn1
                 if (checkVersion2 == 0x10) //original jp
                 {
                     offset -= 0x0C;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x000058be; //scn2
-                if (checkVersion2 == 0x2C)
-                {
+                if (checkVersion2 == 0x2C) {
                     offset = offset - 0x44;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00006266; //scn3
             }
             else
@@ -90,80 +83,67 @@ namespace SF3.Models.X002.LoadedOverride
         public int LoadedOverrideID => index;
         public string LoadedOverrideName => name;
 
-        public int MOMapID
-        {
+        public int MOMapID {
             get => _fileEditor.GetWord(mapID);
             set => _fileEditor.SetWord(mapID, value);
         }
 
-        public int SynMusic
-        {
+        public int SynMusic {
             get => _fileEditor.GetByte(synMusic);
-            set => _fileEditor.SetByte(synMusic, (byte)value);
+            set => _fileEditor.SetByte(synMusic, (byte) value);
         }
 
-        public int MedMusic
-        {
+        public int MedMusic {
             get => _fileEditor.GetByte(medMusic);
-            set => _fileEditor.SetByte(medMusic, (byte)value);
+            set => _fileEditor.SetByte(medMusic, (byte) value);
         }
 
-        public int JulMusic
-        {
+        public int JulMusic {
             get => _fileEditor.GetByte(julMusic);
-            set => _fileEditor.SetByte(julMusic, (byte)value);
+            set => _fileEditor.SetByte(julMusic, (byte) value);
         }
 
-        public int ExtraMusic
-        {
+        public int ExtraMusic {
             get => _fileEditor.GetByte(extraMusic);
-            set => _fileEditor.SetByte(extraMusic, (byte)value);
+            set => _fileEditor.SetByte(extraMusic, (byte) value);
         }
 
-        public FileIndexValue SynMpd
-        {
+        public FileIndexValue SynMpd {
             get => new FileIndexValue(Scenario, _fileEditor.GetDouble(synMpd));
             set => _fileEditor.SetDouble(synMpd, value.Value);
         }
 
-        public FileIndexValue MedMpd
-        {
+        public FileIndexValue MedMpd {
             get => new FileIndexValue(Scenario, _fileEditor.GetDouble(medMpd));
             set => _fileEditor.SetDouble(medMpd, value.Value);
         }
 
-        public FileIndexValue JulMpd
-        {
+        public FileIndexValue JulMpd {
             get => new FileIndexValue(Scenario, _fileEditor.GetDouble(julMpd));
             set => _fileEditor.SetDouble(julMpd, value.Value);
         }
 
-        public FileIndexValue ExtraMpd
-        {
+        public FileIndexValue ExtraMpd {
             get => new FileIndexValue(Scenario, _fileEditor.GetDouble(extraMpd));
             set => _fileEditor.SetDouble(extraMpd, value.Value);
         }
 
-        public FileIndexValue SynChr
-        {
+        public FileIndexValue SynChr {
             get => new FileIndexValue(Scenario, _fileEditor.GetDouble(synChr));
             set => _fileEditor.SetDouble(synChr, value.Value);
         }
 
-        public FileIndexValue MedChr
-        {
+        public FileIndexValue MedChr {
             get => new FileIndexValue(Scenario, _fileEditor.GetDouble(medChr));
             set => _fileEditor.SetDouble(medChr, value.Value);
         }
 
-        public FileIndexValue JulChr
-        {
+        public FileIndexValue JulChr {
             get => new FileIndexValue(Scenario, _fileEditor.GetDouble(julChr));
             set => _fileEditor.SetDouble(julChr, value.Value);
         }
 
-        public FileIndexValue ExtraChr
-        {
+        public FileIndexValue ExtraChr {
             get => new FileIndexValue(Scenario, _fileEditor.GetDouble(extraChr));
             set => _fileEditor.SetDouble(extraChr, value.Value);
         }

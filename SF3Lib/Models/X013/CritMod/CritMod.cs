@@ -1,10 +1,8 @@
 ﻿using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.X013.CritMod
-{
-    public class CritMod
-    {
+namespace SF3.Models.X013.CritMod {
+    public class CritMod {
         private IX013_FileEditor _fileEditor;
 
         private int advantage;
@@ -16,26 +14,22 @@ namespace SF3.Models.X013.CritMod
         private string name;
         private int checkVersion2;
 
-        public CritMod(IX013_FileEditor fileEditor, int id, string text)
-        {
+        public CritMod(IX013_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000A);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00002e74; //scn1
                 if (checkVersion2 == 0x0A) //original jp
                 {
                     offset -= 0x70;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00003050; //scn2
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00002d58; //scn3
             }
             else
@@ -62,15 +56,13 @@ namespace SF3.Models.X013.CritMod
         public int CritModID => index;
         public string CritModName => name;
 
-        public int Advantage
-        {
+        public int Advantage {
             get => _fileEditor.GetByte(advantage);
-            set => _fileEditor.SetByte(advantage, (byte)value);
+            set => _fileEditor.SetByte(advantage, (byte) value);
         }
-        public int Disadvantage
-        {
+        public int Disadvantage {
             get => _fileEditor.GetByte(disadvantage);
-            set => _fileEditor.SetByte(disadvantage, (byte)value);
+            set => _fileEditor.SetByte(disadvantage, (byte) value);
         }
 
         public int CritModAddress => (address);

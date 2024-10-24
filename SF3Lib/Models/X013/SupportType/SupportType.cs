@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X013.SupportTypes
-{
-    public class SupportType
-    {
+namespace SF3.Models.X013.SupportTypes {
+    public class SupportType {
         private IX013_FileEditor _fileEditor;
 
         private int supportA;
@@ -16,26 +14,22 @@ namespace SF3.Models.X013.SupportTypes
         private string name;
         private int checkVersion2;
 
-        public SupportType(IX013_FileEditor fileEditor, int id, string text)
-        {
+        public SupportType(IX013_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000A);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00007484; //scn1
                 if (checkVersion2 == 0x0A) //original jp
                 {
                     offset -= 0x0C;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00007390; //scn2
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00007278; //scn3
             }
             else
@@ -63,15 +57,13 @@ namespace SF3.Models.X013.SupportTypes
         public int SpellID => index;
         public string SpellName => name;
 
-        public int SupportA
-        {
+        public int SupportA {
             get => _fileEditor.GetByte(supportA);
-            set => _fileEditor.SetByte(supportA, (byte)value);
+            set => _fileEditor.SetByte(supportA, (byte) value);
         }
-        public int SupportB
-        {
+        public int SupportB {
             get => _fileEditor.GetByte(supportB);
-            set => _fileEditor.SetByte(supportB, (byte)value);
+            set => _fileEditor.SetByte(supportB, (byte) value);
         }
 
         public int SpellAddress => (address);

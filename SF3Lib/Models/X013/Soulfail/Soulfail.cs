@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X013.Soulfail
-{
-    public class Soulfail
-    {
+namespace SF3.Models.X013.Soulfail {
+    public class Soulfail {
         private IX013_FileEditor _fileEditor;
 
         private int expLost;
@@ -15,26 +13,22 @@ namespace SF3.Models.X013.Soulfail
         private string name;
         private int checkVersion2;
 
-        public Soulfail(IX013_FileEditor fileEditor, int id, string text)
-        {
+        public Soulfail(IX013_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000A);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00005e5f; //scn1
                 if (checkVersion2 == 0x0A) //original jp
                 {
                     offset -= 0x36;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x0000650f; //scn2
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00006077; //scn3
             }
             else
@@ -60,10 +54,9 @@ namespace SF3.Models.X013.Soulfail
         public int SoulfailID => index;
         public string SoulfailName => name;
 
-        public int ExpLost
-        {
+        public int ExpLost {
             get => _fileEditor.GetByte(expLost);
-            set => _fileEditor.SetByte(expLost, (byte)value);
+            set => _fileEditor.SetByte(expLost, (byte) value);
         }
 
         public int SoulfailAddress => (address);

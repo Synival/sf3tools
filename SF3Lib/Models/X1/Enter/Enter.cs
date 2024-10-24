@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X1.Enters
-{
-    public class Enter
-    {
+namespace SF3.Models.X1.Enters {
+    public class Enter {
         private IX1_FileEditor _fileEditor;
 
         private int enterID; //2 byte
@@ -36,34 +34,29 @@ namespace SF3.Models.X1.Enters
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Enter(IX1_FileEditor fileEditor, int id, string text)
-        {
+        public Enter(IX1_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00000024; //scn1 initial pointer
                 sub = 0x0605f000;
                 offset = _fileEditor.GetDouble(offset);
 
                 offset = offset - sub;
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000030; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000030; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
+            else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000030; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -107,50 +100,42 @@ namespace SF3.Models.X1.Enters
         public int EnterID => index;
         public string EnterName => name;
 
-        public int Entered
-        {
+        public int Entered {
             get => _fileEditor.GetWord(enterID);
             set => _fileEditor.SetWord(enterID, value);
         }
 
-        public int EnterUnknown2
-        {
+        public int EnterUnknown2 {
             get => _fileEditor.GetWord(unknown2);
             set => _fileEditor.SetWord(unknown2, value);
         }
 
-        public int EnterXPos
-        {
+        public int EnterXPos {
             get => _fileEditor.GetWord(xPos);
             set => _fileEditor.SetWord(xPos, value);
         }
 
-        public int EnterUnknown6
-        {
+        public int EnterUnknown6 {
             get => _fileEditor.GetWord(unknown6);
             set => _fileEditor.SetWord(unknown6, value);
         }
 
-        public int EnterZPos
-        {
+        public int EnterZPos {
             get => _fileEditor.GetWord(zPos);
             set => _fileEditor.SetWord(zPos, value);
         }
 
-        public int EnterDirection
-        {
+        public int EnterDirection {
             get => _fileEditor.GetWord(direction);
             set => _fileEditor.SetWord(direction, value);
         }
 
-        public int EnterCamera
-        {
+        public int EnterCamera {
             get => _fileEditor.GetWord(camera);
             set => _fileEditor.SetWord(camera, value);
         }
 
-        public int EnterUnknownE
-        {
+        public int EnterUnknownE {
             get => _fileEditor.GetWord(unknownE);
             set => _fileEditor.SetWord(unknownE, value);
         }

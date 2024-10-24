@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X1.Arrows
-{
-    public class Arrow
-    {
+namespace SF3.Models.X1.Arrows {
+    public class Arrow {
         private IX1_FileEditor _fileEditor;
 
         private int unknown0; //2 byte
@@ -34,26 +32,22 @@ namespace SF3.Models.X1.Arrows
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Arrow(IX1_FileEditor fileEditor, int id, string text)
-        {
+        public Arrow(IX1_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
-            if (Scenario == ScenarioType.Scenario2)
-            {
+            if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000060; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000060; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
+            else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000060; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -95,38 +89,32 @@ namespace SF3.Models.X1.Arrows
         public int ArrowID => index;
         public string ArrowName => name;
 
-        public int ArrowUnknown0
-        {
+        public int ArrowUnknown0 {
             get => _fileEditor.GetWord(unknown0);
             set => _fileEditor.SetWord(unknown0, value);
         }
 
-        public int ArrowText
-        {
+        public int ArrowText {
             get => _fileEditor.GetWord(textID);
             set => _fileEditor.SetWord(textID, value);
         }
 
-        public int ArrowUnknown4
-        {
+        public int ArrowUnknown4 {
             get => _fileEditor.GetWord(unknown4);
             set => _fileEditor.SetWord(unknown4, value);
         }
 
-        public int ArrowWarp
-        {
+        public int ArrowWarp {
             get => _fileEditor.GetWord(warpInMPD);
             set => _fileEditor.SetWord(warpInMPD, value);
         }
 
-        public int ArrowUnknown8
-        {
+        public int ArrowUnknown8 {
             get => _fileEditor.GetWord(unknown8);
             set => _fileEditor.SetWord(unknown8, value);
         }
 
-        public int ArrowUnknownA
-        {
+        public int ArrowUnknownA {
             get => _fileEditor.GetWord(unknownA);
             set => _fileEditor.SetWord(unknownA, value);
         }

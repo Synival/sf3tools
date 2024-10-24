@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X1.CustomMovement
-{
-    public class CustomMovement
-    {
+namespace SF3.Models.X1.CustomMovement {
+    public class CustomMovement {
         private IX1_FileEditor _fileEditor;
 
         private int unknown00;
@@ -25,12 +23,10 @@ namespace SF3.Models.X1.CustomMovement
         private int index;
         private string name;
 
-        public CustomMovement(IX1_FileEditor fileEditor, int id, string text)
-        {
+        public CustomMovement(IX1_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
-            if (_fileEditor.IsBTL99)
-            {
+            if (_fileEditor.IsBTL99) {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
                 offset = _fileEditor.GetDouble(offset);
@@ -45,8 +41,7 @@ namespace SF3.Models.X1.CustomMovement
                 offset = offset + 0x126;
                 offset = offset + 0x84; //size of AITargetPosition
             }
-            else if (Scenario == ScenarioType.Scenario1)
-            {
+            else if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
                 offset = _fileEditor.GetDouble(offset);
@@ -56,8 +51,7 @@ namespace SF3.Models.X1.CustomMovement
 
                 offset = _fileEditor.GetDouble(offset);
 
-                if (offset != 0)
-                {
+                if (offset != 0) {
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -65,8 +59,7 @@ namespace SF3.Models.X1.CustomMovement
                     offset = offset + 0x126;
                     offset = offset + 0x84; //size of AITargetPosition
                 }
-                else
-                {
+                else {
                     _fileEditor.MapLeader = MapLeaderType.Synbios;
                     offset = 0x00000018; //scn1 initial pointer
                     sub = 0x0605f000;
@@ -95,8 +88,7 @@ namespace SF3.Models.X1.CustomMovement
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -105,8 +97,7 @@ namespace SF3.Models.X1.CustomMovement
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
 
                 offset = _fileEditor.GetDouble(offset);
-                if (offset != 0)
-                {
+                if (offset != 0) {
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -115,8 +106,7 @@ namespace SF3.Models.X1.CustomMovement
                     offset = offset + 0x126;
                     offset = offset + 0x84; //size of AITargetPosition
                 }
-                else
-                {
+                else {
                     _fileEditor.MapLeader = MapLeaderType.Medion;
                     offset = 0x00000024; //scn2 initial pointer
                     sub = 0x0605e000;
@@ -144,8 +134,7 @@ namespace SF3.Models.X1.CustomMovement
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -154,8 +143,7 @@ namespace SF3.Models.X1.CustomMovement
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
 
                 offset = _fileEditor.GetDouble(offset);
-                if (offset != 0)
-                {
+                if (offset != 0) {
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -163,8 +151,7 @@ namespace SF3.Models.X1.CustomMovement
                     offset = offset + 0x126;
                     offset = offset + 0x84; //size of AITargetPosition
                 }
-                else
-                {
+                else {
                     _fileEditor.MapLeader = MapLeaderType.Julian;
                     offset = 0x00000024; //scn3 initial pointer
                     sub = 0x0605e000;
@@ -181,8 +168,7 @@ namespace SF3.Models.X1.CustomMovement
                     offset = offset + 0x84; //size of AITargetPosition
                 }
             }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
+            else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -190,8 +176,7 @@ namespace SF3.Models.X1.CustomMovement
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
                 offset = _fileEditor.GetDouble(offset);
-                if (offset != 0)
-                {
+                if (offset != 0) {
                     offset = offset - sub; //third pointer
 
                     offset = offset + 10;
@@ -199,8 +184,7 @@ namespace SF3.Models.X1.CustomMovement
                     offset = offset + 0x126;
                     offset = offset + 0x84; //size of AITargetPosition
                 }
-                else
-                {
+                else {
                     _fileEditor.MapLeader = MapLeaderType.Synbios;
                     offset = 0x00000024; //pd initial pointer
                     sub = 0x0605e000;
@@ -248,58 +232,48 @@ namespace SF3.Models.X1.CustomMovement
         public int CustomMovementID => index;
         public string CustomMovementName => name;
 
-        public int CustomMovementUnknown
-        {
+        public int CustomMovementUnknown {
             get => _fileEditor.GetWord(unknown00);
             set => _fileEditor.SetWord(unknown00, value);
         }
 
-        public int CustomMovementX1
-        {
+        public int CustomMovementX1 {
             get => _fileEditor.GetWord(xPos1);
             set => _fileEditor.SetWord(xPos1, value);
         }
-        public int CustomMovementZ1
-        {
+        public int CustomMovementZ1 {
             get => _fileEditor.GetWord(zPos1);
             set => _fileEditor.SetWord(zPos1, value);
         }
 
-        public int CustomMovementX2
-        {
+        public int CustomMovementX2 {
             get => _fileEditor.GetWord(xPos2);
             set => _fileEditor.SetWord(xPos2, value);
         }
-        public int CustomMovementZ2
-        {
+        public int CustomMovementZ2 {
             get => _fileEditor.GetWord(zPos2);
             set => _fileEditor.SetWord(zPos2, value);
         }
 
-        public int CustomMovementX3
-        {
+        public int CustomMovementX3 {
             get => _fileEditor.GetWord(xPos3);
             set => _fileEditor.SetWord(xPos3, value);
         }
-        public int CustomMovementZ3
-        {
+        public int CustomMovementZ3 {
             get => _fileEditor.GetWord(zPos3);
             set => _fileEditor.SetWord(zPos3, value);
         }
 
-        public int CustomMovementX4
-        {
+        public int CustomMovementX4 {
             get => _fileEditor.GetWord(xPos4);
             set => _fileEditor.SetWord(xPos4, value);
         }
-        public int CustomMovementZ4
-        {
+        public int CustomMovementZ4 {
             get => _fileEditor.GetWord(zPos4);
             set => _fileEditor.SetWord(zPos4, value);
         }
 
-        public int CustomMovementEnd
-        {
+        public int CustomMovementEnd {
             get => _fileEditor.GetDouble(ending);
             set => _fileEditor.SetDouble(ending, value);
         }

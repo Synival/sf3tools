@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Xml;
 using System.IO;
-using SF3.FileEditors;
 using SF3.Extensions;
+using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X1.Npcs
-{
-    public class NpcList : ModelArray<Npc>
-    {
+namespace SF3.Models.X1.Npcs {
+    public class NpcList : ModelArray<Npc> {
         public int MaxSize { get; } = 100;
 
-        public NpcList(IX1_FileEditor fileEditor) : base(fileEditor)
-        {
+        public NpcList(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 
@@ -24,12 +20,10 @@ namespace SF3.Models.X1.Npcs
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
-        public override bool Load()
-        {
+        public override bool Load() {
             _models = new Npc[0];
             FileStream stream = null;
-            try
-            {
+            try {
                 stream = new FileStream(ResourceFile, FileMode.Open);
 
                 var xml = MakeXmlReader(stream);
@@ -72,16 +66,13 @@ throw new IndexOutOfRangeException();
                     {
                         {
                             xml.Read();
-                            if (xml.HasAttributes)
-                            {
+                            if (xml.HasAttributes) {
                                 var newModel = new Npc(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 _models = _models.ExpandedWith(newModel);
-                                if (newModel.NpcID < 0 || newModel.NpcID >= MaxSize)
-                                {
+                                if (newModel.NpcID < 0 || newModel.NpcID >= MaxSize) {
                                     throw new IndexOutOfRangeException();
                                 }
-                                if (newModel.SpriteID == 0xffff)
-                                {
+                                if (newModel.SpriteID == 0xffff) {
                                     myCount = 1 + myCount;
                                 }
                             }
@@ -89,18 +80,14 @@ throw new IndexOutOfRangeException();
                     }
                 }
             }
-            catch (FileLoadException)
-            {
+            catch (FileLoadException) {
                 return false;
             }
-            catch (FileNotFoundException)
-            {
+            catch (FileNotFoundException) {
                 return false;
             }
-            finally
-            {
-                if (stream != null)
-                {
+            finally {
+                if (stream != null) {
                     stream.Close();
                 }
             }

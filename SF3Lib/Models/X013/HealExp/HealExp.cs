@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X013.HealExp
-{
-    public class HealExp
-    {
+namespace SF3.Models.X013.HealExp {
+    public class HealExp {
         private IX013_FileEditor _fileEditor;
 
         private int healExp;
@@ -15,26 +13,22 @@ namespace SF3.Models.X013.HealExp
         private string name;
         private int checkVersion2;
 
-        public HealExp(IX013_FileEditor fileEditor, int id, string text)
-        {
+        public HealExp(IX013_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000A);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00004c8b; //scn1
                 if (checkVersion2 == 0x0A) //original jp
                 {
                     offset -= 0x64;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00004ebf; //scn2
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00004aed; //scn3
             }
             else
@@ -60,10 +54,9 @@ namespace SF3.Models.X013.HealExp
         public int HealExpID => index;
         public string HealExpName => name;
 
-        public int HealBonus
-        {
+        public int HealBonus {
             get => _fileEditor.GetByte(healExp);
-            set => _fileEditor.SetByte(healExp, (byte)value);
+            set => _fileEditor.SetByte(healExp, (byte) value);
         }
 
         public int HealExpAddress => (address);

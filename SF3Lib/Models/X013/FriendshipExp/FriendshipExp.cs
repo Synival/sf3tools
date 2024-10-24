@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X013.Presets
-{
-    public class FriendshipExp
-    {
+namespace SF3.Models.X013.Presets {
+    public class FriendshipExp {
         private IX013_FileEditor _fileEditor;
 
         private int sLvl0;
@@ -19,26 +17,22 @@ namespace SF3.Models.X013.Presets
         private string name;
         private int checkVersion2;
 
-        public FriendshipExp(IX013_FileEditor fileEditor, int id, string text)
-        {
+        public FriendshipExp(IX013_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000A);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x0000747c; //scn1
                 if (checkVersion2 == 0x0A) //original jp
                 {
                     offset -= 0x0C;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00007388; //scn2
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00007270; //scn3
             }
             else
@@ -68,30 +62,25 @@ namespace SF3.Models.X013.Presets
         public int PresetID => index;
         public string PresetName => name;
 
-        public int SLvl0
-        {
+        public int SLvl0 {
             get => _fileEditor.GetByte(sLvl0);
-            set => _fileEditor.SetByte(sLvl0, (byte)value);
+            set => _fileEditor.SetByte(sLvl0, (byte) value);
         }
-        public int SLvl1
-        {
+        public int SLvl1 {
             get => _fileEditor.GetByte(sLvl1);
-            set => _fileEditor.SetByte(sLvl1, (byte)value);
+            set => _fileEditor.SetByte(sLvl1, (byte) value);
         }
-        public int SLvl2
-        {
+        public int SLvl2 {
             get => _fileEditor.GetByte(sLvl2);
-            set => _fileEditor.SetByte(sLvl2, (byte)value);
+            set => _fileEditor.SetByte(sLvl2, (byte) value);
         }
-        public int SLvl3
-        {
+        public int SLvl3 {
             get => _fileEditor.GetByte(sLvl3);
-            set => _fileEditor.SetByte(sLvl3, (byte)value);
+            set => _fileEditor.SetByte(sLvl3, (byte) value);
         }
-        public int SLvl4
-        {
+        public int SLvl4 {
             get => _fileEditor.GetByte(sLvl4);
-            set => _fileEditor.SetByte(sLvl4, (byte)value);
+            set => _fileEditor.SetByte(sLvl4, (byte) value);
         }
 
         public int PresetAddress => (address);

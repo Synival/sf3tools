@@ -1,11 +1,9 @@
-﻿using SF3.Types;
+﻿using SF3.FileEditors;
+using SF3.Types;
 using SF3.Values;
-using SF3.FileEditors;
 
-namespace SF3.Models.X002.Presets
-{
-    public class Preset
-    {
+namespace SF3.Models.X002.Presets {
+    public class Preset {
         private IX002_FileEditor _fileEditor;
 
         private int spell;
@@ -20,30 +18,25 @@ namespace SF3.Models.X002.Presets
         private int index;
         private string name;
 
-        public Preset(IX002_FileEditor fileEditor, int id, string text)
-        {
+        public Preset(IX002_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00004738; //scn1
                 if (checkVersion2 == 0x10) //original jp
                 {
                     offset -= 0x0C;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00004b60; //scn2
-                if (checkVersion2 == 0x2C)
-                {
+                if (checkVersion2 == 0x2C) {
                     offset = offset - 0x44;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00005734; //scn3
             }
             else
@@ -73,30 +66,25 @@ namespace SF3.Models.X002.Presets
         public int PresetID => index;
         public string PresetName => name;
 
-        public SpellValue SpellID2
-        {
+        public SpellValue SpellID2 {
             get => new SpellValue(Scenario, _fileEditor.GetByte(spell));
-            set => _fileEditor.SetByte(spell, (byte)value.Value);
+            set => _fileEditor.SetByte(spell, (byte) value.Value);
         }
-        public int Weapon0
-        {
+        public int Weapon0 {
             get => _fileEditor.GetByte(weaponLv0);
-            set => _fileEditor.SetByte(weaponLv0, (byte)value);
+            set => _fileEditor.SetByte(weaponLv0, (byte) value);
         }
-        public int Weapon1
-        {
+        public int Weapon1 {
             get => _fileEditor.GetByte(weaponLv1);
-            set => _fileEditor.SetByte(weaponLv1, (byte)value);
+            set => _fileEditor.SetByte(weaponLv1, (byte) value);
         }
-        public int Weapon2
-        {
+        public int Weapon2 {
             get => _fileEditor.GetByte(weaponLv2);
-            set => _fileEditor.SetByte(weaponLv2, (byte)value);
+            set => _fileEditor.SetByte(weaponLv2, (byte) value);
         }
-        public int Weapon3
-        {
+        public int Weapon3 {
             get => _fileEditor.GetByte(weaponLv3);
-            set => _fileEditor.SetByte(weaponLv3, (byte)value);
+            set => _fileEditor.SetByte(weaponLv3, (byte) value);
         }
 
         public int PresetAddress => (address);

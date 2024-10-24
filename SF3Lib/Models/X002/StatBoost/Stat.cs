@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X002.StatBoost
-{
-    public class StatBoost
-    {
+namespace SF3.Models.X002.StatBoost {
+    public class StatBoost {
         private IX002_FileEditor _fileEditor;
 
         private int stat;
@@ -15,30 +13,25 @@ namespace SF3.Models.X002.StatBoost
         private string name;
         private int checkVersion2;
 
-        public StatBoost(IX002_FileEditor fileEditor, int id, string text)
-        {
+        public StatBoost(IX002_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000B);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00004537; //scn1
                 if (checkVersion2 == 0x10) //original jp
                 {
                     offset -= 0x0C;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x000048ab; //scn2
-                if (checkVersion2 == 0x2C)
-                {
+                if (checkVersion2 == 0x2C) {
                     offset = offset - 0x44;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x0000537b; //scn3
             }
             else
@@ -64,10 +57,9 @@ namespace SF3.Models.X002.StatBoost
         public int StatID => index;
         public string StatName => name;
 
-        public int Stat
-        {
+        public int Stat {
             get => _fileEditor.GetByte(stat);
-            set => _fileEditor.SetByte(stat, (byte)value);
+            set => _fileEditor.SetByte(stat, (byte) value);
         }
 
         public int StatAddress => (address);

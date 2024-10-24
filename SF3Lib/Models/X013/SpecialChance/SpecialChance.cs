@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X013.SpecialChance
-{
-    public class SpecialChance
-    {
+namespace SF3.Models.X013.SpecialChance {
+    public class SpecialChance {
         private IX013_FileEditor _fileEditor;
 
         private int twoSpecials2;
@@ -21,26 +19,22 @@ namespace SF3.Models.X013.SpecialChance
         private string name;
         private int checkVersion2;
 
-        public SpecialChance(IX013_FileEditor fileEditor, int id, string text)
-        {
+        public SpecialChance(IX013_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             checkVersion2 = _fileEditor.GetByte(0x0000000A);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x000027ae; //scn1
                 if (checkVersion2 == 0x0A) //original jp
                 {
                     offset -= 0x70;
                 }
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x000029c6; //scn2
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x000027a2; //scn3
             }
             else
@@ -56,8 +50,7 @@ namespace SF3.Models.X013.SpecialChance
 
             //int start = 0x354c + (id * 24);
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 int start = offset + (id * 0x4a);
                 twoSpecials2 = start + 0x01; //1 bytes
                 threeSpecials3 = start + 0x15; //1 byte
@@ -68,8 +61,7 @@ namespace SF3.Models.X013.SpecialChance
 
                 address = offset + (id * 0x4a);
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 int start = offset + (id * 0x4a);
                 twoSpecials2 = start + 0x01; //1 bytes
                 threeSpecials3 = start + 0x15; //1 byte
@@ -80,8 +72,7 @@ namespace SF3.Models.X013.SpecialChance
 
                 address = offset + (id * 0x4a);
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 int start = offset + (id * 0x3a);
                 twoSpecials2 = start + 0x01; //1 bytes
                 threeSpecials3 = start + 0x0f; //1 byte
@@ -92,8 +83,7 @@ namespace SF3.Models.X013.SpecialChance
 
                 address = offset + (id * 0x3a);
             }
-            else
-            {
+            else {
                 int start = offset + (id * 0x3a);
                 twoSpecials2 = start + 0x01; //1 bytes
                 threeSpecials3 = start + 0x0f; //1 byte
@@ -112,37 +102,31 @@ namespace SF3.Models.X013.SpecialChance
         public int SpecialChanceID => index;
         public string SpecialChanceName => name;
 
-        public int TwoSpecials2
-        {
+        public int TwoSpecials2 {
             get => _fileEditor.GetByte(twoSpecials2);
-            set => _fileEditor.SetByte(twoSpecials2, (byte)value);
+            set => _fileEditor.SetByte(twoSpecials2, (byte) value);
         }
-        public int ThreeSpecials3
-        {
+        public int ThreeSpecials3 {
             get => _fileEditor.GetByte(threeSpecials3);
-            set => _fileEditor.SetByte(threeSpecials3, (byte)value);
+            set => _fileEditor.SetByte(threeSpecials3, (byte) value);
         }
-        public int ThreeSpecials2
-        {
+        public int ThreeSpecials2 {
             get => _fileEditor.GetByte(threeSpecials2);
-            set => _fileEditor.SetByte(threeSpecials2, (byte)value);
+            set => _fileEditor.SetByte(threeSpecials2, (byte) value);
         }
-        public int FourSpecials4
-        {
+        public int FourSpecials4 {
             get => _fileEditor.GetByte(fourSpecials4);
-            set => _fileEditor.SetByte(fourSpecials4, (byte)value);
+            set => _fileEditor.SetByte(fourSpecials4, (byte) value);
         }
 
-        public int FourSpecials3
-        {
+        public int FourSpecials3 {
             get => _fileEditor.GetByte(fourSpecials3);
-            set => _fileEditor.SetByte(fourSpecials3, (byte)value);
+            set => _fileEditor.SetByte(fourSpecials3, (byte) value);
         }
 
-        public int FourSpecials2
-        {
+        public int FourSpecials2 {
             get => _fileEditor.GetByte(fourSpecials2);
-            set => _fileEditor.SetByte(fourSpecials2, (byte)value);
+            set => _fileEditor.SetByte(fourSpecials2, (byte) value);
         }
 
         public int SpecialChanceAddress => (address);

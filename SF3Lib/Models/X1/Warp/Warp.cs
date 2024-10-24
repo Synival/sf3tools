@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X1.Warps
-{
-    public class Warp
-    {
+namespace SF3.Models.X1.Warps {
+    public class Warp {
         private IX1_FileEditor _fileEditor;
 
         private int unknown1;
@@ -32,28 +30,24 @@ namespace SF3.Models.X1.Warps
 
         public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Warp(IX1_FileEditor fileEditor, int id, string text)
-        {
+        public Warp(IX1_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             //no scn1 for this
 
-            if (Scenario == ScenarioType.Scenario2)
-            {
+            if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000018; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000018; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub;
             }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
+            else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000018; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -85,28 +79,24 @@ namespace SF3.Models.X1.Warps
         public int WarpID => index;
         public string WarpName => name;
 
-        public int WarpUnknown1
-        {
+        public int WarpUnknown1 {
             get => _fileEditor.GetByte(unknown1);
-            set => _fileEditor.SetByte(unknown1, (byte)value);
+            set => _fileEditor.SetByte(unknown1, (byte) value);
         }
 
-        public int WarpUnknown2
-        {
+        public int WarpUnknown2 {
             get => _fileEditor.GetByte(unknown2);
-            set => _fileEditor.SetByte(unknown2, (byte)value);
+            set => _fileEditor.SetByte(unknown2, (byte) value);
         }
 
-        public int WarpType
-        {
+        public int WarpType {
             get => _fileEditor.GetByte(type);
-            set => _fileEditor.SetByte(type, (byte)value);
+            set => _fileEditor.SetByte(type, (byte) value);
         }
 
-        public int WarpMap
-        {
+        public int WarpMap {
             get => _fileEditor.GetByte(map);
-            set => _fileEditor.SetByte(map, (byte)value);
+            set => _fileEditor.SetByte(map, (byte) value);
         }
 
         public int WarpAddress => (address);

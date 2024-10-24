@@ -1,27 +1,21 @@
 ﻿using System;
-using System.Xml;
 using System.IO;
-using SF3.Types;
-using SF3.FileEditors;
 using SF3.Extensions;
+using SF3.FileEditors;
+using SF3.Types;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X1.Slots
-{
-    public class SlotList : ModelArray<Slot>
-    {
+namespace SF3.Models.X1.Slots {
+    public class SlotList : ModelArray<Slot> {
         public int MaxSize { get; } = 256;
 
-        public SlotList(IX1_FileEditor fileEditor) : base(fileEditor)
-        {
+        public SlotList(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
 
-            if (Scenario == ScenarioType.Scenario1)
-            {
+            if (Scenario == ScenarioType.Scenario1) {
                 _resourceFile = "Resources/X1List.xml";
             }
-            else
-            {
+            else {
                 _resourceFile = "Resources/X1OtherList.xml";
             }
         }
@@ -35,26 +29,21 @@ namespace SF3.Models.X1.Slots
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
-        public override bool Load()
-        {
+        public override bool Load() {
             _models = new Slot[0];
             FileStream stream = null;
-            try
-            {
+            try {
                 stream = new FileStream(ResourceFile, FileMode.Open);
 
                 var xml = MakeXmlReader(stream);
                 xml.Read();
                 //int stop = 0;
-                while (!xml.EOF)
-                {
+                while (!xml.EOF) {
                     xml.Read();
-                    if (xml.HasAttributes)
-                    {
+                    if (xml.HasAttributes) {
                         var newModel = new Slot(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.ID < 0 || newModel.ID >= MaxSize)
-                        {
+                        if (newModel.ID < 0 || newModel.ID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                         /*Console.WriteLine(items[itemssorted[old.Length].ID].EnemyID);
@@ -66,18 +55,14 @@ namespace SF3.Models.X1.Slots
                     }
                 }
             }
-            catch (FileLoadException)
-            {
+            catch (FileLoadException) {
                 return false;
             }
-            catch (FileNotFoundException)
-            {
+            catch (FileNotFoundException) {
                 return false;
             }
-            finally
-            {
-                if (stream != null)
-                {
+            finally {
+                if (stream != null) {
                     stream.Close();
                 }
             }

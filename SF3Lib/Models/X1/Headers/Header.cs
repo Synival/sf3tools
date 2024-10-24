@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X1.Headers
-{
-    public class Header
-    {
+namespace SF3.Models.X1.Headers {
+    public class Header {
         private IX1_FileEditor _fileEditor;
 
         private int unknown1;
@@ -26,12 +24,10 @@ namespace SF3.Models.X1.Headers
         private string name;
         private int sub;
 
-        public Header(IX1_FileEditor fileEditor, int id, string text)
-        {
+        public Header(IX1_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
-            if (_fileEditor.IsBTL99)
-            {
+            if (_fileEditor.IsBTL99) {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
                 offset = _fileEditor.GetDouble(offset);
@@ -41,8 +37,7 @@ namespace SF3.Models.X1.Headers
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub; //third pointer
             }
-            else if (Scenario == ScenarioType.Scenario1)
-            {
+            else if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
                 offset = _fileEditor.GetDouble(offset);
@@ -51,12 +46,10 @@ namespace SF3.Models.X1.Headers
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
                 offset = _fileEditor.GetDouble(offset);
 
-                if (offset != 0)
-                {
+                if (offset != 0) {
                     offset = offset - sub; //third pointer
                 }
-                else
-                {
+                else {
                     _fileEditor.MapLeader = MapLeaderType.Synbios;
                     offset = 0x00000018; //scn1 initial pointer
                     sub = 0x0605f000;
@@ -79,8 +72,7 @@ namespace SF3.Models.X1.Headers
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -89,12 +81,10 @@ namespace SF3.Models.X1.Headers
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
 
                 offset = _fileEditor.GetDouble(offset);
-                if (offset != 0)
-                {
+                if (offset != 0) {
                     offset = offset - sub; //third pointer
                 }
-                else
-                {
+                else {
                     _fileEditor.MapLeader = MapLeaderType.Medion;
                     offset = 0x00000024; //scn2 initial pointer
                     sub = 0x0605e000;
@@ -116,8 +106,7 @@ namespace SF3.Models.X1.Headers
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -127,12 +116,10 @@ namespace SF3.Models.X1.Headers
 
                 offset = _fileEditor.GetDouble(offset);
 
-                if (offset != 0)
-                {
+                if (offset != 0) {
                     offset = offset - sub; //third pointer
                 }
-                else
-                {
+                else {
                     _fileEditor.MapLeader = MapLeaderType.Julian;
                     offset = 0x00000024; //scn3 initial pointer
                     sub = 0x0605e000;
@@ -144,8 +131,7 @@ namespace SF3.Models.X1.Headers
                     offset = offset - sub; //third pointer
                 }
             }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
+            else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -153,12 +139,10 @@ namespace SF3.Models.X1.Headers
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
                 offset = _fileEditor.GetDouble(offset);
-                if (offset != 0)
-                {
+                if (offset != 0) {
                     offset = offset - sub; //third pointer
                 }
-                else
-                {
+                else {
                     _fileEditor.MapLeader = MapLeaderType.Synbios;
                     offset = 0x00000024; //pd initial pointer
                     sub = 0x0605e000;
@@ -202,60 +186,50 @@ namespace SF3.Models.X1.Headers
         public int SizeID => index;
         public string SizeName => name;
 
-        public int SizeUnknown1
-        {
+        public int SizeUnknown1 {
             get => _fileEditor.GetByte(unknown1);
-            set => _fileEditor.SetByte(unknown1, (byte)value);
+            set => _fileEditor.SetByte(unknown1, (byte) value);
         }
-        public int TableSize
-        {
+        public int TableSize {
             get => _fileEditor.GetByte(tableSize);
-            set => _fileEditor.SetByte(tableSize, (byte)value);
+            set => _fileEditor.SetByte(tableSize, (byte) value);
         }
-        public int SizeUnknown2
-        {
+        public int SizeUnknown2 {
             get => _fileEditor.GetByte(unknown2);
-            set => _fileEditor.SetByte(unknown2, (byte)value);
+            set => _fileEditor.SetByte(unknown2, (byte) value);
         }
-        public int SizeUnknown3
-        {
+        public int SizeUnknown3 {
             get => _fileEditor.GetByte(unknown3);
-            set => _fileEditor.SetByte(unknown3, (byte)value);
+            set => _fileEditor.SetByte(unknown3, (byte) value);
         }
-        public int SizeUnknown4
-        {
+        public int SizeUnknown4 {
             get => _fileEditor.GetByte(unknown4);
-            set => _fileEditor.SetByte(unknown4, (byte)value);
+            set => _fileEditor.SetByte(unknown4, (byte) value);
         }
 
-        public int SizeUnknown5
-        {
+        public int SizeUnknown5 {
             get => _fileEditor.GetByte(unknown5);
-            set => _fileEditor.SetByte(unknown5, (byte)value);
+            set => _fileEditor.SetByte(unknown5, (byte) value);
         }
 
-        public int SizeUnknown6
-        {
+        public int SizeUnknown6 {
             get => _fileEditor.GetByte(unknown6);
-            set => _fileEditor.SetByte(unknown6, (byte)value);
+            set => _fileEditor.SetByte(unknown6, (byte) value);
         }
 
-        public int SizeUnknown7
-        {
+        public int SizeUnknown7 {
             get => _fileEditor.GetByte(unknown7);
-            set => _fileEditor.SetByte(unknown7, (byte)value);
+            set => _fileEditor.SetByte(unknown7, (byte) value);
         }
 
-        public int SizeUnknown8
-        {
+        public int SizeUnknown8 {
             get => _fileEditor.GetByte(unknown8);
-            set => _fileEditor.SetByte(unknown8, (byte)value);
+            set => _fileEditor.SetByte(unknown8, (byte) value);
         }
 
-        public int SizeUnknown9
-        {
+        public int SizeUnknown9 {
             get => _fileEditor.GetByte(unknown9);
-            set => _fileEditor.SetByte(unknown9, (byte)value);
+            set => _fileEditor.SetByte(unknown9, (byte) value);
         }
 
         public int Map => _fileEditor.MapOffset;

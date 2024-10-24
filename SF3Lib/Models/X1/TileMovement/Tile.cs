@@ -1,10 +1,8 @@
-﻿using SF3.Types;
-using SF3.FileEditors;
+﻿using SF3.FileEditors;
+using SF3.Types;
 
-namespace SF3.Models.X1.Tiles
-{
-    public class Tile
-    {
+namespace SF3.Models.X1.Tiles {
+    public class Tile {
         private IX1_FileEditor _fileEditor;
 
         private int noEntry;
@@ -33,12 +31,10 @@ namespace SF3.Models.X1.Tiles
         private string name;
         private int sub;
 
-        public Tile(IX1_FileEditor fileEditor, int id, string text)
-        {
+        public Tile(IX1_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
-            if (Scenario == ScenarioType.Scenario2)
-            {
+            if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -65,8 +61,7 @@ namespace SF3.Models.X1.Tiles
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -122,8 +117,7 @@ namespace SF3.Models.X1.Tiles
 
                 offset = offset - sub + 0x7c; //second pointer*/
             }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
+            else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
@@ -185,96 +179,80 @@ namespace SF3.Models.X1.Tiles
         public int TileID => index;
         public string TileName => name;
 
-        public int TileNoEntry
-        {
+        public int TileNoEntry {
             get => _fileEditor.GetByte(noEntry);
-            set => _fileEditor.SetByte(noEntry, (byte)value);
+            set => _fileEditor.SetByte(noEntry, (byte) value);
         }
-        public int TileUnknown1
-        {
+        public int TileUnknown1 {
             get => _fileEditor.GetByte(unknown01);
-            set => _fileEditor.SetByte(unknown01, (byte)value);
+            set => _fileEditor.SetByte(unknown01, (byte) value);
         }
-        public int TileGrassland
-        {
+        public int TileGrassland {
             get => _fileEditor.GetByte(grassland);
-            set => _fileEditor.SetByte(grassland, (byte)value);
+            set => _fileEditor.SetByte(grassland, (byte) value);
         }
-        public int TileDirt
-        {
+        public int TileDirt {
             get => _fileEditor.GetByte(dirt);
-            set => _fileEditor.SetByte(dirt, (byte)value);
+            set => _fileEditor.SetByte(dirt, (byte) value);
         }
-        public int TileDarkGrass
-        {
+        public int TileDarkGrass {
             get => _fileEditor.GetByte(darkGrass);
-            set => _fileEditor.SetByte(darkGrass, (byte)value);
+            set => _fileEditor.SetByte(darkGrass, (byte) value);
         }
 
-        public int TileForest
-        {
+        public int TileForest {
             get => _fileEditor.GetByte(forest);
-            set => _fileEditor.SetByte(forest, (byte)value);
+            set => _fileEditor.SetByte(forest, (byte) value);
         }
 
-        public int TileBrownMountain
-        {
+        public int TileBrownMountain {
             get => _fileEditor.GetByte(brownMountain);
-            set => _fileEditor.SetByte(brownMountain, (byte)value);
+            set => _fileEditor.SetByte(brownMountain, (byte) value);
         }
 
-        public int TileDesert
-        {
+        public int TileDesert {
             get => _fileEditor.GetByte(desert);
-            set => _fileEditor.SetByte(desert, (byte)value);
+            set => _fileEditor.SetByte(desert, (byte) value);
         }
 
-        public int TileGreyMountain
-        {
+        public int TileGreyMountain {
             get => _fileEditor.GetByte(greyMountain);
-            set => _fileEditor.SetByte(greyMountain, (byte)value);
+            set => _fileEditor.SetByte(greyMountain, (byte) value);
         }
 
-        public int TileUnknown9
-        {
+        public int TileUnknown9 {
             get => _fileEditor.GetByte(unknown09);
-            set => _fileEditor.SetByte(unknown09, (byte)value);
+            set => _fileEditor.SetByte(unknown09, (byte) value);
         }
 
-        public int TileUnknownA
-        {
+        public int TileUnknownA {
             get => _fileEditor.GetByte(unknown0a);
-            set => _fileEditor.SetByte(unknown0a, (byte)value);
+            set => _fileEditor.SetByte(unknown0a, (byte) value);
         }
 
-        public int TileUnknownB
-        {
+        public int TileUnknownB {
             get => _fileEditor.GetByte(unknown0b);
-            set => _fileEditor.SetByte(unknown0b, (byte)value);
+            set => _fileEditor.SetByte(unknown0b, (byte) value);
         }
 
-        public int TileUnknownC
-        {
+        public int TileUnknownC {
             get => _fileEditor.GetByte(unknown0c);
-            set => _fileEditor.SetByte(unknown0c, (byte)value);
+            set => _fileEditor.SetByte(unknown0c, (byte) value);
         }
 
-        public int TileUnknownD
-        {
+        public int TileUnknownD {
             get => _fileEditor.GetByte(unknown0d);
-            set => _fileEditor.SetByte(unknown0d, (byte)value);
+            set => _fileEditor.SetByte(unknown0d, (byte) value);
         }
 
-        public int TileUnknownE
-        {
+        public int TileUnknownE {
             get => _fileEditor.GetByte(unknown0e);
-            set => _fileEditor.SetByte(unknown0e, (byte)value);
+            set => _fileEditor.SetByte(unknown0e, (byte) value);
         }
 
-        public int TileUnknownF
-        {
+        public int TileUnknownF {
             get => _fileEditor.GetByte(unknown0f);
-            set => _fileEditor.SetByte(unknown0f, (byte)value);
+            set => _fileEditor.SetByte(unknown0f, (byte) value);
         }
 
         // public int Map => Globals.map;

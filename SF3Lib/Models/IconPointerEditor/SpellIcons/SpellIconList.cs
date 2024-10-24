@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Xml;
 using System.IO;
+using SF3.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
-using SF3.Extensions;
 
-namespace SF3.Models.IconPointerEditor.SpellIcons
-{
-    public class SpellIconList : ModelArray<SpellIcon>
-    {
+namespace SF3.Models.IconPointerEditor.SpellIcons {
+    public class SpellIconList : ModelArray<SpellIcon> {
         public int MaxSize { get; } = 256;
 
-        public SpellIconList(IIconPointerFileEditor fileEditor) : base(fileEditor)
-        {
+        public SpellIconList(IIconPointerFileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
             _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "SpellIcons.xml");
         }
@@ -26,42 +22,34 @@ namespace SF3.Models.IconPointerEditor.SpellIcons
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
-        public override bool Load()
-        {
+        public override bool Load() {
             _models = new SpellIcon[0];
             FileStream stream = null;
-            try
-            {
+            try {
                 stream = new FileStream(ResourceFile, FileMode.Open);
 
                 var xml = MakeXmlReader(stream);
                 xml.Read();
-                while (!xml.EOF)
-                {
+                while (!xml.EOF) {
                     xml.Read();
-                    if (xml.HasAttributes)
-                    {
+                    if (xml.HasAttributes) {
                         var newModel = new SpellIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
                         if (newModel.ID < 0 || newModel.ID >= MaxSize) {
-throw new IndexOutOfRangeException();
-}
+                            throw new IndexOutOfRangeException();
+                        }
                         //MessageBox.Show("" + _fileEditor.GetDouble(newModel.Address));
                     }
                 }
             }
-            catch (FileLoadException)
-            {
+            catch (FileLoadException) {
                 return false;
             }
-            catch (FileNotFoundException)
-            {
+            catch (FileNotFoundException) {
                 return false;
             }
-            finally
-            {
-                if (stream != null)
-                {
+            finally {
+                if (stream != null) {
                     stream.Close();
                 }
             }

@@ -1,18 +1,14 @@
-﻿using System.Xml;
+﻿using System;
 using System.IO;
-using SF3.FileEditors;
 using SF3.Extensions;
+using SF3.FileEditors;
 using static SF3.Utils.Resources;
-using System;
 
-namespace SF3.Models.X002.Warps
-{
-    public class WarpList : ModelArray<Warp>
-    {
+namespace SF3.Models.X002.Warps {
+    public class WarpList : ModelArray<Warp> {
         public int MaxSize { get; } = 1000;
 
-        public WarpList(IX002_FileEditor fileEditor) : base(fileEditor)
-        {
+        public WarpList(IX002_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 
@@ -24,12 +20,10 @@ namespace SF3.Models.X002.Warps
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
-        public override bool Load()
-        {
+        public override bool Load() {
             _models = new Warp[0];
             FileStream stream = null;
-            try
-            {
+            try {
                 stream = new FileStream(ResourceFile, FileMode.Open);
 
                 var xml = MakeXmlReader(stream);
@@ -48,8 +42,7 @@ namespace SF3.Models.X002.Warps
                 {
                     {
                         xml.Read();
-                        if (xml.HasAttributes)
-                        {
+                        if (xml.HasAttributes) {
                             var newModel = new Warp(_fileEditor, myCount, myName);
                             _models = _models.ExpandedWith(newModel);
 
@@ -57,26 +50,21 @@ namespace SF3.Models.X002.Warps
                             myName = "WarpIndex ";
                             myName = myName + myCount;
 
-                            if (newModel.WarpID < 0 || newModel.WarpID >= MaxSize)
-                            {
+                            if (newModel.WarpID < 0 || newModel.WarpID >= MaxSize) {
                                 throw new IndexOutOfRangeException();
                             }
                         }
                     }
                 }
             }
-            catch (FileLoadException)
-            {
+            catch (FileLoadException) {
                 return false;
             }
-            catch (FileNotFoundException)
-            {
+            catch (FileNotFoundException) {
                 return false;
             }
-            finally
-            {
-                if (stream != null)
-                {
+            finally {
+                if (stream != null) {
                     stream.Close();
                 }
             }

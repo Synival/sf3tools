@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Xml;
 using System.IO;
-using SF3.FileEditors;
 using SF3.Extensions;
+using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X1.Warps
-{
-    public class WarpList : ModelArray<Warp>
-    {
+namespace SF3.Models.X1.Warps {
+    public class WarpList : ModelArray<Warp> {
         public int MaxSize { get; } = 255;
 
-        public WarpList(IX1_FileEditor fileEditor) : base(fileEditor)
-        {
+        public WarpList(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 
@@ -24,12 +20,10 @@ namespace SF3.Models.X1.Warps
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
-        public override bool Load()
-        {
+        public override bool Load() {
             _models = new Warp[0];
             FileStream stream = null;
-            try
-            {
+            try {
                 stream = new FileStream(ResourceFile, FileMode.Open);
 
                 var xml = MakeXmlReader(stream);
@@ -47,30 +41,24 @@ namespace SF3.Models.X1.Warps
                 {
                     {
                         xml.Read();
-                        if (xml.HasAttributes)
-                        {
+                        if (xml.HasAttributes) {
                             var newModel = new Warp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                             _models = _models.ExpandedWith(newModel);
-                            if (newModel.WarpID < 0 || newModel.WarpID >= MaxSize)
-                            {
+                            if (newModel.WarpID < 0 || newModel.WarpID >= MaxSize) {
                                 throw new IndexOutOfRangeException();
                             }
                         }
                     }
                 }
             }
-            catch (FileLoadException)
-            {
+            catch (FileLoadException) {
                 return false;
             }
-            catch (FileNotFoundException)
-            {
+            catch (FileNotFoundException) {
                 return false;
             }
-            finally
-            {
-                if (stream != null)
-                {
+            finally {
+                if (stream != null) {
                     stream.Close();
                 }
             }
