@@ -42,13 +42,13 @@
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_OpenInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiHelp_X026Toggle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario3 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_PremiumDisk = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_Scenario1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiScenario_X026Toggle = new System.Windows.Forms.ToolStripMenuItem();
             this.tabItemIcons = new System.Windows.Forms.TabPage();
             this.olvItemIcons = new BrightIdeasSoftware.ObjectListView();
             this.lvcItemIconName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -59,11 +59,11 @@
             this.tabSpellIcons = new System.Windows.Forms.TabPage();
             this.olvSpellIcons = new BrightIdeasSoftware.ObjectListView();
             this.lvcSpellIconName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpellIconSpellName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellIconHexID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellIconAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellIconOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpellIconViewOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellIconSpellName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.menuStrip1.SuspendLayout();
             this.tabItemIcons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvItemIcons)).BeginInit();
@@ -76,8 +76,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile,
-            this.tsmiHelp,
-            this.tsmiScenario});
+            this.tsmiScenario,
+            this.tsmiHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(764, 24);
@@ -97,71 +97,74 @@
             this.tsmiFile_Exit});
             this.tsmiFile.Name = "tsmiFile";
             this.tsmiFile.Size = new System.Drawing.Size(37, 20);
-            this.tsmiFile.Text = "File";
+            this.tsmiFile.Text = "&File";
             // 
             // tsmiFile_Open
             // 
             this.tsmiFile_Open.Name = "tsmiFile_Open";
-            this.tsmiFile_Open.Size = new System.Drawing.Size(177, 22);
-            this.tsmiFile_Open.Text = "Open...";
+            this.tsmiFile_Open.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.tsmiFile_Open.Size = new System.Drawing.Size(188, 22);
+            this.tsmiFile_Open.Text = "&Open...";
             this.tsmiFile_Open.Click += new System.EventHandler(this.tsmiFile_Open_Click);
             // 
             // tsmiFile_SaveAs
             // 
             this.tsmiFile_SaveAs.Enabled = false;
             this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
-            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(177, 22);
-            this.tsmiFile_SaveAs.Text = "Save As...";
+            this.tsmiFile_SaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.A)));
+            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(188, 22);
+            this.tsmiFile_SaveAs.Text = "Save &As...";
             this.tsmiFile_SaveAs.Click += new System.EventHandler(this.tsmiFile_SaveAs_Click);
             // 
             // tsSeparator_File1
             // 
             this.tsSeparator_File1.Name = "tsSeparator_File1";
-            this.tsSeparator_File1.Size = new System.Drawing.Size(174, 6);
+            this.tsSeparator_File1.Size = new System.Drawing.Size(185, 6);
             // 
             // tsmiFile_CopyTablesFrom
             // 
             this.tsmiFile_CopyTablesFrom.Enabled = false;
             this.tsmiFile_CopyTablesFrom.Name = "tsmiFile_CopyTablesFrom";
-            this.tsmiFile_CopyTablesFrom.Size = new System.Drawing.Size(177, 22);
+            this.tsmiFile_CopyTablesFrom.Size = new System.Drawing.Size(188, 22);
             this.tsmiFile_CopyTablesFrom.Text = "Copy Tables From...";
             this.tsmiFile_CopyTablesFrom.Click += new System.EventHandler(this.tsmiFile_CopyTablesFrom_Click);
             // 
             // tsSeparator_File2
             // 
             this.tsSeparator_File2.Name = "tsSeparator_File2";
-            this.tsSeparator_File2.Size = new System.Drawing.Size(174, 6);
+            this.tsSeparator_File2.Size = new System.Drawing.Size(185, 6);
             // 
             // tsmiFile_Close
             // 
             this.tsmiFile_Close.Enabled = false;
             this.tsmiFile_Close.Name = "tsmiFile_Close";
-            this.tsmiFile_Close.Size = new System.Drawing.Size(177, 22);
-            this.tsmiFile_Close.Text = "Close";
+            this.tsmiFile_Close.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.tsmiFile_Close.Size = new System.Drawing.Size(188, 22);
+            this.tsmiFile_Close.Text = "&Close";
             this.tsmiFile_Close.Click += new System.EventHandler(this.tsmiFile_Close_Click);
             // 
             // tsSeparator_File3
             // 
             this.tsSeparator_File3.Name = "tsSeparator_File3";
-            this.tsSeparator_File3.Size = new System.Drawing.Size(174, 6);
+            this.tsSeparator_File3.Size = new System.Drawing.Size(185, 6);
             // 
             // tsmiFile_Exit
             // 
             this.tsmiFile_Exit.Name = "tsmiFile_Exit";
-            this.tsmiFile_Exit.Size = new System.Drawing.Size(177, 22);
-            this.tsmiFile_Exit.Text = "Exit";
+            this.tsmiFile_Exit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.tsmiFile_Exit.Size = new System.Drawing.Size(188, 22);
+            this.tsmiFile_Exit.Text = "E&xit";
             this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
             // 
             // tsmiHelp
             // 
             this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiHelp_Version,
-            this.tsmiHelp_OpenInfo,
-            this.tsSeparator_Help1,
-            this.tsmiHelp_X026Toggle});
+            this.tsmiHelp_OpenInfo});
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
-            this.tsmiHelp.Text = "Help";
+            this.tsmiHelp.Text = "&Help";
             // 
             // tsmiHelp_Version
             // 
@@ -175,56 +178,63 @@
             this.tsmiHelp_OpenInfo.Size = new System.Drawing.Size(224, 22);
             this.tsmiHelp_OpenInfo.Text = "Opens X011, X021, X026 Files";
             // 
-            // tsSeparator_Help1
-            // 
-            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
-            this.tsSeparator_Help1.Size = new System.Drawing.Size(221, 6);
-            // 
-            // tsmiHelp_X026Toggle
-            // 
-            this.tsmiHelp_X026Toggle.Name = "tsmiHelp_X026Toggle";
-            this.tsmiHelp_X026Toggle.Size = new System.Drawing.Size(224, 22);
-            this.tsmiHelp_X026Toggle.Text = "X026 Toggle";
-            this.tsmiHelp_X026Toggle.Click += new System.EventHandler(this.tsmiHelp_X026Toggle_Click);
-            // 
             // tsmiScenario
             // 
             this.tsmiScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiScenario_Scenario1,
             this.tsmiScenario_Scenario2,
             this.tsmiScenario_Scenario3,
-            this.tsmiScenario_PremiumDisk});
+            this.tsmiScenario_PremiumDisk,
+            this.tsSeparator_Scenario1,
+            this.tsmiScenario_X026Toggle});
             this.tsmiScenario.Name = "tsmiScenario";
             this.tsmiScenario.Size = new System.Drawing.Size(64, 20);
-            this.tsmiScenario.Text = "Scenario";
+            this.tsmiScenario.Text = "&Scenario";
             // 
             // tsmiScenario_Scenario1
             // 
             this.tsmiScenario_Scenario1.Name = "tsmiScenario_Scenario1";
-            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(148, 22);
-            this.tsmiScenario_Scenario1.Text = "Scenario 1";
+            this.tsmiScenario_Scenario1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
+            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(189, 22);
+            this.tsmiScenario_Scenario1.Text = "Scenario &1";
             this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.tsmiScenario_Scenario1_Click);
             // 
             // tsmiScenario_Scenario2
             // 
             this.tsmiScenario_Scenario2.Name = "tsmiScenario_Scenario2";
-            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(148, 22);
-            this.tsmiScenario_Scenario2.Text = "Scenario 2";
+            this.tsmiScenario_Scenario2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
+            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(189, 22);
+            this.tsmiScenario_Scenario2.Text = "Scenario &2";
             this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.tsmiScenario_Scenario2_Click);
             // 
             // tsmiScenario_Scenario3
             // 
             this.tsmiScenario_Scenario3.Name = "tsmiScenario_Scenario3";
-            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(148, 22);
-            this.tsmiScenario_Scenario3.Text = "Scenario 3";
+            this.tsmiScenario_Scenario3.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
+            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(189, 22);
+            this.tsmiScenario_Scenario3.Text = "Scenario &3";
             this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.tsmiScenario_Scenario3_Click);
             // 
             // tsmiScenario_PremiumDisk
             // 
             this.tsmiScenario_PremiumDisk.Name = "tsmiScenario_PremiumDisk";
-            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(148, 22);
-            this.tsmiScenario_PremiumDisk.Text = "Premium Disk";
+            this.tsmiScenario_PremiumDisk.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(189, 22);
+            this.tsmiScenario_PremiumDisk.Text = "&Premium Disk";
             this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.tsmiScenario_PremiumDisk_Click);
+            // 
+            // tsSeparator_Scenario1
+            // 
+            this.tsSeparator_Scenario1.Name = "tsSeparator_Scenario1";
+            this.tsSeparator_Scenario1.Size = new System.Drawing.Size(186, 6);
+            // 
+            // tsmiScenario_X026Toggle
+            // 
+            this.tsmiScenario_X026Toggle.Name = "tsmiScenario_X026Toggle";
+            this.tsmiScenario_X026Toggle.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.tsmiScenario_X026Toggle.Size = new System.Drawing.Size(189, 22);
+            this.tsmiScenario_X026Toggle.Text = "&X026 Toggle";
+            this.tsmiScenario_X026Toggle.Click += new System.EventHandler(this.tsmiScenario_X026Toggle_Click);
             // 
             // tabItemIcons
             // 
@@ -361,6 +371,13 @@
             this.lvcSpellIconName.Text = "Icon Name";
             this.lvcSpellIconName.Width = 120;
             // 
+            // lvcSpellIconSpellName
+            // 
+            this.lvcSpellIconSpellName.AspectName = "SpellName";
+            this.lvcSpellIconSpellName.IsEditable = false;
+            this.lvcSpellIconSpellName.Text = "Spell Name";
+            this.lvcSpellIconSpellName.Width = 120;
+            // 
             // lvcSpellIconHexID
             // 
             this.lvcSpellIconHexID.AspectName = "ID";
@@ -390,13 +407,6 @@
             this.lvcSpellIconViewOffset.AspectToStringFormat = "{0:X}";
             this.lvcSpellIconViewOffset.Text = "Offset in file for viewing";
             this.lvcSpellIconViewOffset.Width = 130;
-            // 
-            // lvcSpellIconSpellName
-            // 
-            this.lvcSpellIconSpellName.AspectName = "SpellName";
-            this.lvcSpellIconSpellName.IsEditable = false;
-            this.lvcSpellIconSpellName.Text = "Spell Name";
-            this.lvcSpellIconSpellName.Width = 120;
             // 
             // frmIconPointerEditor
             // 
@@ -448,14 +458,14 @@
         private BrightIdeasSoftware.OLVColumn lvcItemIconHexID;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp_OpenInfo;
         private BrightIdeasSoftware.OLVColumn lvcSpellIconViewOffset;
-        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_X026Toggle;
         private System.Windows.Forms.ToolStripSeparator tsSeparator_File1;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_Close;
         private System.Windows.Forms.ToolStripSeparator tsSeparator_File2;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_Exit;
-        private System.Windows.Forms.ToolStripSeparator tsSeparator_Help1;
+        private System.Windows.Forms.ToolStripSeparator tsSeparator_Scenario1;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_CopyTablesFrom;
         private System.Windows.Forms.ToolStripSeparator tsSeparator_File3;
         private BrightIdeasSoftware.OLVColumn lvcSpellIconSpellName;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_X026Toggle;
     }
 }

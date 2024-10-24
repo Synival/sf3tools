@@ -20,7 +20,7 @@ namespace SF3.IconPointerEditor.Forms {
             get => _isX026;
             set {
                 _isX026 = value;
-                tsmiHelp_X026Toggle.Checked = _isX026;
+                tsmiScenario_X026Toggle.Checked = _isX026;
                 UpdateTitle();
             }
         }
@@ -77,11 +77,10 @@ namespace SF3.IconPointerEditor.Forms {
         private void tsmiFile_CopyTablesFrom_Click(object sender, EventArgs e) => CopyTablesFrom();
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
 
-        private void tsmiHelp_X026Toggle_Click(object sender, EventArgs e) => IsX026 = !IsX026;
-
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario1;
         private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;
         private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
+        private void tsmiScenario_X026Toggle_Click(object sender, EventArgs e) => IsX026 = !IsX026;
     }
 }

@@ -140,7 +140,6 @@ namespace SF3.X1_Editor.Forms {
         private void tsmiHelp_TreasureDebugToggle_Click(object sender, EventArgs e) {
             Models.X1.Treasures.TreasureList.Debug = !Models.X1.Treasures.TreasureList.Debug;
             tsmiHelp_TreasureDebugToggle.Checked = Models.X1.Treasures.TreasureList.Debug;
-            tsmiHelp_TreasureDebugToggle.Text = "treasureDebug toggle: " + (Models.X1.Treasures.TreasureList.Debug ? "on" : "off");
         }
     }
 }
