@@ -1,32 +1,28 @@
-﻿using BrightIdeasSoftware;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Windows.Forms;
+using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
 using SF3.Exceptions;
 using SF3.Extensions;
 using SF3.FileEditors;
 using SF3.Types;
 using SF3.Utils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Windows.Forms;
 
-namespace SF3.Editor.Forms
-{
+namespace SF3.Editor.Forms {
     /// <summary>
     /// Base editor form from which all other editors are derived.
     /// </summary>
-    public partial class EditorForm : Form
-    {
+    public partial class EditorForm : Form {
         private const string SavePromptString = "You have unsaved changes. Would you like to save?";
 
-        public EditorForm()
-        {
+        public EditorForm() {
             InitializeComponent();
         }
 
-        public EditorForm(IContainer container)
-        {
+        public EditorForm(IContainer container) {
             container.Add(this);
             InitializeComponent();
         }
@@ -34,8 +30,7 @@ namespace SF3.Editor.Forms
         /// <summary>
         /// Function to be called after derived class's InitializeComponent() is called.
         /// </summary>
-        public void FinalizeForm()
-        {
+        public void FinalizeForm() {
             ObjectListViews = this.GetAllObjectsOfTypeInFields<ObjectListView>(false);
             UpdateTitle();
         }
@@ -43,20 +38,15 @@ namespace SF3.Editor.Forms
         /// <summary>
         /// Creates an "Open" dialog and, if a file was chosen, opens it, processes its data, and loads it.
         /// </summary>
-        public bool OpenFileDialog()
-        {
+        public bool OpenFileDialog() {
             OpenFileDialog openfile = new OpenFileDialog();
             openfile.Filter = FileDialogFilter;
             if (openfile.ShowDialog() != DialogResult.OK)
-            {
                 return false;
-            }
 
             // Close the file first, and don't proceed if the user aborted it.
             if (!CloseFile())
-            {
                 return false;
-            }
 
             FileEditor = MakeFileEditor();
             FileEditor.TitleChanged += (obj, args) => UpdateTitle();
@@ -70,32 +60,28 @@ namespace SF3.Editor.Forms
             FileEditor.ModifiedChanged += (obj, eargs) => this.FileModifiedChanged?.Invoke(this, eargs);
             FileEditor.IsLoadedChanged += (obj, eargs) => this.FileIsLoadedChanged?.Invoke(this, eargs);
 
-            if (!FileEditor.LoadFile(openfile.FileName))
-            {
+            if (!FileEditor.LoadFile(openfile.FileName)) {
                 MessageBox.Show("Error trying to load file. It is probably in use by another process.");
                 return false;
             }
 
             bool success = false;
-            try
-            {
+            try {
                 success = OnLoad();
             }
-            catch (System.Reflection.TargetInvocationException)
-            {
+            catch (System.Reflection.TargetInvocationException) {
                 success = false;
             }
-            catch (FileEditorReadException)
-            {
+            catch (FileEditorReadException) {
                 success = false;
             }
 
-            if (!success)
-            {
+            if (!success) {
                 //wrong file was selected
                 MessageBox.Show("Data appears corrupt or invalid:\n" +
                                 "    " + openfile.FileName + "\n\n" +
                                 "Is this the correct type of file?");
+                return false;
             }
 
             return true;
@@ -106,12 +92,9 @@ namespace SF3.Editor.Forms
         /// it creates an "Save As" dialog and, if a file was chosen, saves open data.
         /// </summary>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
-        public bool SaveFileDialog()
-        {
+        public bool SaveFileDialog() {
             if (FileEditor == null)
-            {
                 return false;
-            }
 
             ObjectListViews.ForEach(x => x.FinishCellEdit());
 
@@ -119,9 +102,7 @@ namespace SF3.Editor.Forms
             savefile.Filter = FileDialogFilter;
             savefile.FileName = Path.GetFileName(FileEditor.Filename);
             if (savefile.ShowDialog() != DialogResult.OK)
-            {
                 return false;
-            }
 
             return FileEditor.SaveFile(savefile.FileName);
         }
@@ -133,26 +114,17 @@ namespace SF3.Editor.Forms
         /// <param name="force">When true, a "Save Changes" dialog is never offered.</param>
         /// <returns>'true' if no file was open or the file was closed. Returns 'false' if the user clicked 'cancel' when
         /// prompted to save changes.</returns>
-        public bool CloseFile(bool force = false)
-        {
+        public bool CloseFile(bool force = false) {
             if (FileEditor == null)
-            {
                 return true;
-            }
 
-            if (!force && FileEditor.IsModified)
-            {
+            if (!force && FileEditor.IsModified) {
                 var result = MessageBox.Show(SavePromptString, "Save Changes", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Cancel)
-                {
                     return false;
-                }
-                else if (result == DialogResult.Yes)
-                {
+                else if (result == DialogResult.Yes) {
                     if (!SaveFileDialog())
-                    {
                         return false;
-                    }
                 }
             }
 
@@ -165,12 +137,9 @@ namespace SF3.Editor.Forms
         /// <summary>
         /// Opens a dialog to perform a bulk copy of tables from another .BIN file.
         /// </summary>
-        public void CopyTablesFrom()
-        {
+        public void CopyTablesFrom() {
             if (FileEditor == null)
-            {
                 return;
-            }
 
             ObjectListViews.ForEach(x => x.FinishCellEdit());
 
@@ -178,21 +147,17 @@ namespace SF3.Editor.Forms
             openFileDialog.Title = "Copy Tables From";
             openFileDialog.Filter = FileDialogFilter;
             if (openFileDialog.ShowDialog() != DialogResult.OK)
-            {
                 return;
-            }
             var copyFromFilename = openFileDialog.FileName;
 
             var copyFileEditor = MakeFileEditor();
-            if (!copyFileEditor.LoadFile(copyFromFilename))
-            {
+            if (!copyFileEditor.LoadFile(copyFromFilename)) {
                 MessageBox.Show("Error trying to load file. It is probably in use by another process.");
                 return;
             }
 
             string copyReport = "";
-            try
-            {
+            try {
                 var result = copyFileEditor.BulkCopyProperties(FileEditor);
                 ObjectListViews.ForEach(x => x.RefreshAllItems());
 
@@ -200,28 +165,23 @@ namespace SF3.Editor.Forms
 
                 // Output summary files.
                 var fullReport = result.MakeFullReport();
-                if (fullReport != "")
-                {
-                    try
-                    {
+                if (fullReport != "") {
+                    try {
                         File.WriteAllText("BulkCopyReport.txt", fullReport);
                         copyReport += "\n\nDetailed reports dumped to 'BulkCopyReport.txt'.";
                     }
-                    catch
-                    {
+                    catch {
                         copyReport += "\n\nError: Couldn't dump detailed report to 'BulkCopyReport.txt'.";
                     }
                 }
             }
-            catch (System.Reflection.TargetInvocationException)
-            {
+            catch (System.Reflection.TargetInvocationException) {
                 //wrong file was selected
                 MessageBox.Show("Failed to read file:\n" +
                                 "    " + copyFromFilename);
                 return;
             }
-            catch (FileEditorReadException)
-            {
+            catch (FileEditorReadException) {
                 //wrong file was selected
                 MessageBox.Show("Data appears corrupt or invalid:\n" +
                                 "    " + copyFromFilename + "\n\n" +
@@ -236,11 +196,9 @@ namespace SF3.Editor.Forms
         /// <summary>
         /// Updates the title of the form.
         /// </summary>
-        protected void UpdateTitle()
-        {
+        protected void UpdateTitle() {
             string newTitle = MakeTitle();
-            if (this.Text != newTitle)
-            {
+            if (this.Text != newTitle) {
                 this.Text = newTitle;
                 TitleChanged?.Invoke(this, EventArgs.Empty);
             }
@@ -249,20 +207,12 @@ namespace SF3.Editor.Forms
         /// <summary>
         /// Function to load data from a file opened with OpenFileDialog(). Must be overridden.
         /// </summary>
-        protected virtual bool OnLoad()
-        {
-            return true;
-        }
+        protected virtual bool OnLoad() => true;
 
-        private void EditorForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        private void EditorForm_FormClosing(object sender, FormClosingEventArgs e) {
             if (FileEditor?.IsModified == true)
-            {
                 if (!CloseFile())
-                {
                     e.Cancel = true;
-                }
-            }
         }
 
         /// <summary>
@@ -275,13 +225,10 @@ namespace SF3.Editor.Forms
         /// <summary>
         /// The Scenario set for editing.
         /// </summary>
-        public ScenarioType Scenario
-        {
+        public ScenarioType Scenario {
             get => _scenario;
-            set
-            {
-                if (_scenario != value)
-                {
+            set {
+                if (_scenario != value) {
                     _scenario = value;
                     ScenarioChanged?.Invoke(this, EventArgs.Empty);
                 }

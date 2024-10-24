@@ -1,24 +1,17 @@
-﻿using BrightIdeasSoftware;
-using SF3.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using BrightIdeasSoftware;
+using SF3.Models;
 
-namespace SF3.Editor.Extensions
-{
-    public static class TabControlExtensions
-    {
+namespace SF3.Editor.Extensions {
+    public static class TabControlExtensions {
         /// <summary>
         /// Adds or removes tabs based on their 'value' in a key-value Dictionary.
         /// </summary>
         /// <param name="tabControl">The control whose tabs should be toggled.</param>
         /// <param name="tabPages">A key-value dictionary of tabs and whether or not they should be visible.</param>
-        public static void ToggleTabs(this TabControl tabControl, Dictionary<TabPage, bool> tabPages)
-        {
+        public static void ToggleTabs(this TabControl tabControl, Dictionary<TabPage, bool> tabPages) {
             var tabsToRemove = tabControl.TabPages
                 .Cast<TabPage>()
                 .Intersect(tabPages.Where(x => !x.Value).Select(x => x.Key))
@@ -32,9 +25,7 @@ namespace SF3.Editor.Extensions
 
             // If there aren't any changes to be maid, abort early.
             if (tabsToRemove.Length == 0 && tabsToAdd.Length == 0)
-            {
                 return;
-            }
 
             // Deselect the selected tab (it screws up rendering).
             var lastSelectedTab = tabControl.SelectedTab;
@@ -49,9 +40,7 @@ namespace SF3.Editor.Extensions
                 .Intersect(tabPages.Select(x => x.Key))
                 .ToArray();
             foreach (var tab in tabsToRemove)
-            {
                 tabControl.TabPages.Remove(tab);
-            }
 
             // Add enabled tabs.
             tabsToAdd = tabPages
@@ -64,18 +53,14 @@ namespace SF3.Editor.Extensions
             // Done - resume redrawing and re-select the tab, if possible.
             tabControl.ResumeLayout();
             if (lastSelectedTab?.Parent == tabControl)
-            {
                 tabControl.SelectedTab = lastSelectedTab;
-            }
         }
 
         /// <summary>
         /// Configuration of a single tab for PopulateTabs().
         /// </summary>
-        public class PopulateTabConfig
-        {
-            public PopulateTabConfig(TabPage tabPage, ObjectListView objectListView, IModelArray modelArray)
-            {
+        public class PopulateTabConfig {
+            public PopulateTabConfig(TabPage tabPage, ObjectListView objectListView, IModelArray modelArray) {
                 TabPage = tabPage;
                 ObjectListView = objectListView;
                 ModelArray = modelArray;
@@ -98,14 +83,11 @@ namespace SF3.Editor.Extensions
         /// <param name="tabControl"></param>
         /// <param name="tabConfigs"></param>
         /// <returns>'True' if the operation succeeded, 'false' if a ModelArray could not be loaded.</returns>
-        public static bool PopulateTabs(this TabControl tabControl, IEnumerable<PopulateTabConfig> tabConfigs)
-        {
+        public static bool PopulateTabs(this TabControl tabControl, IEnumerable<PopulateTabConfig> tabConfigs) {
             // Show and populate visible tabs.
-            foreach (var tc in tabConfigs)
-            {
+            foreach (var tc in tabConfigs) {
                 tc.ObjectListView.ClearObjects();
-                if (!tc.ModelArray.IsLoaded && !tc.ModelArray.Load())
-                {
+                if (!tc.ModelArray.IsLoaded && !tc.ModelArray.Load()) {
                     // TODO: we really should be throwing an exception here instead...
                     MessageBox.Show("Could not load " + tc.ModelArray.ResourceFile);
                     return false;
@@ -128,8 +110,7 @@ namespace SF3.Editor.Extensions
         /// <param name="tabControl"></param>
         /// <param name="tabConfigs"></param>
         /// <returns>'True' if the operation succeeded, 'false' if a ModelArray could not be loaded.</returns>
-        public static bool PopulateAndToggleTabs(this TabControl tabControl, IEnumerable<PopulateTabConfig> tabConfigs)
-        {
+        public static bool PopulateAndToggleTabs(this TabControl tabControl, IEnumerable<PopulateTabConfig> tabConfigs) {
             tabControl.ToggleTabs(tabConfigs.ToDictionary(x => x.TabPage, x => x.ModelArray != null));
             var populateTabConfigs = tabConfigs
                 .Where(x => x.ModelArray != null)
