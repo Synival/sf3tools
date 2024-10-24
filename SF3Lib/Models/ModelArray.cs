@@ -1,22 +1,13 @@
 ﻿using SF3.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SF3.Models
-{
+namespace SF3.Models {
     /// <summary>
     /// Base implementation for any collection of SF3 models that can be modified.
     /// </summary>
-    public abstract class ModelArray : IModelArray
-    {
-        protected ModelArray(ISF3FileEditor fileEditor)
-        {
+    public abstract class ModelArray : IModelArray {
+        protected ModelArray(ISF3FileEditor fileEditor) {
             _fileEditor = fileEditor;
         }
 
@@ -36,14 +27,11 @@ namespace SF3.Models
     /// <summary>
     /// Base implementation for a specific collection of SF3 models that can be modified.
     /// </summary>
-    public abstract class ModelArray<T> : ModelArray, IModelArray<T> where T : class
-    {
-        protected ModelArray(ISF3FileEditor fileEditor) : base(fileEditor)
-        {
+    public abstract class ModelArray<T> : ModelArray, IModelArray<T> where T : class {
+        protected ModelArray(ISF3FileEditor fileEditor) : base(fileEditor) {
         }
 
-        public override bool Reset()
-        {
+        public override bool Reset() {
             _models = null;
             return true;
         }

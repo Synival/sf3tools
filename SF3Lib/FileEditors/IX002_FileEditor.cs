@@ -8,10 +8,8 @@ using SF3.Models.X002.StatBoost;
 using SF3.Models.X002.Warps;
 using SF3.Models.X002.WeaponRank;
 
-namespace SF3.FileEditors
-{
-    public interface IX002_FileEditor : ISF3FileEditor
-    {
+namespace SF3.FileEditors {
+    public interface IX002_FileEditor : ISF3FileEditor {
         ItemList ItemList { get; }
         SpellList SpellList { get; }
         PresetList PresetList { get; }

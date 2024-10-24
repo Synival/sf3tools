@@ -1,5 +1,5 @@
-﻿using SF3.Models;
-using SF3.Types;
+﻿using System.Collections.Generic;
+using SF3.Models;
 using SF3.Models.X002.AttackResist;
 using SF3.Models.X002.Items;
 using SF3.Models.X002.Loading;
@@ -9,20 +9,15 @@ using SF3.Models.X002.Spells;
 using SF3.Models.X002.StatBoost;
 using SF3.Models.X002.Warps;
 using SF3.Models.X002.WeaponRank;
-using System.Collections.Generic;
+using SF3.Types;
 
-namespace SF3.FileEditors
-{
-    public class X002_FileEditor : SF3FileEditor, IX002_FileEditor
-    {
-        public X002_FileEditor(ScenarioType scenario) : base(scenario)
-        {
+namespace SF3.FileEditors {
+    public class X002_FileEditor : SF3FileEditor, IX002_FileEditor {
+        public X002_FileEditor(ScenarioType scenario) : base(scenario) {
         }
 
-        public override IEnumerable<IModelArray> MakeModelArrays()
-        {
-            var modelArrays = new List<IModelArray>()
-            {
+        public override IEnumerable<IModelArray> MakeModelArrays() {
+            var modelArrays = new List<IModelArray>() {
                 (ItemList = new ItemList(this)),
                 (SpellList = new SpellList(this)),
                 (PresetList = new PresetList(this)),
@@ -34,9 +29,7 @@ namespace SF3.FileEditors
             };
 
             if (Scenario == ScenarioType.Scenario1)
-            {
                 modelArrays.Add(WarpList = new WarpList(this));
-            }
 
             return modelArrays;
         }

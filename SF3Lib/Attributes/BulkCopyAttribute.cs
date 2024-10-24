@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SF3.Attributes
-{
+namespace SF3.Attributes {
     /// <summary>
     /// Used to indicate that BulkCopyProperties() should copy this property.
     /// </summary>
-    public class BulkCopyAttribute : Attribute
-    {
+    public class BulkCopyAttribute : Attribute {
     }
 }

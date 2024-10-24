@@ -1,29 +1,23 @@
 ﻿using System;
-using System.Text;
 using System.IO;
+using System.Text;
 using SF3.Exceptions;
 
-namespace SF3.FileEditors
-{
+namespace SF3.FileEditors {
     /// <summary>
     /// Used for loading, saving, reading, and modifying .BIN files.
     /// </summary>
-    public class FileEditor : IFileEditor
-    {
-        public FileEditor()
-        {
+    public class FileEditor : IFileEditor {
+        public FileEditor() {
             _title = BaseTitle;
         }
 
         private byte[] _data = null;
 
-        private byte[] Data
-        {
+        private byte[] Data {
             get => _data;
-            set
-            {
-                if (_data != value)
-                {
+            set {
+                if (_data != value) {
                     _data = value;
                     IsLoaded = (_data != null);
                 }
@@ -32,13 +26,10 @@ namespace SF3.FileEditors
 
         private bool _isLoaded = false;
 
-        public bool IsLoaded
-        {
+        public bool IsLoaded {
             get => _isLoaded;
-            set
-            {
-                if (_isLoaded != value)
-                {
+            set {
+                if (_isLoaded != value) {
                     _isLoaded = value;
                     IsLoadedChanged?.Invoke(this, EventArgs.Empty);
                 }
@@ -47,13 +38,10 @@ namespace SF3.FileEditors
 
         private bool _isModified = false;
 
-        public bool IsModified
-        {
+        public bool IsModified {
             get => _isModified;
-            private set
-            {
-                if (_isModified != value)
-                {
+            private set {
+                if (_isModified != value) {
                     _isModified = value;
                     ModifiedChanged?.Invoke(this, EventArgs.Empty);
                     UpdateTitle();
@@ -69,14 +57,10 @@ namespace SF3.FileEditors
         /// <summary>
         /// Filename without the path.
         /// </summary>
-        public string ShortFilename
-        {
-            get
-            {
+        public string ShortFilename {
+            get {
                 if (Filename == null)
-                {
                     return null;
-                }
 
                 var words = Filename.Split('\\');
                 return words[Math.Max(0, words.Length - 1)];
@@ -85,13 +69,10 @@ namespace SF3.FileEditors
 
         private string _title;
 
-        public string Title
-        {
+        public string Title {
             get => _title;
-            set
-            {
-                if (_title != value)
-                {
+            set {
+                if (_title != value) {
                     _title = value;
                     TitleChanged?.Invoke(this, EventArgs.Empty);
                 }
@@ -103,20 +84,16 @@ namespace SF3.FileEditors
         /// </summary>
         /// <param name="filename">The file to load.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
-        public virtual bool LoadFile(string filename)
-        {
+        public virtual bool LoadFile(string filename) {
             FileStream stream = null;
-            try
-            {
+            try {
                 stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
                 var newData = new byte[stream.Length];
-                stream.Read(newData, 0, (int)stream.Length);
+                stream.Read(newData, 0, (int) stream.Length);
                 stream.Close();
 
                 if (IsLoaded)
-                {
                     CloseFile();
-                }
 
                 PreLoaded?.Invoke(this, EventArgs.Empty);
 
@@ -126,16 +103,12 @@ namespace SF3.FileEditors
                 UpdateTitle();
                 Loaded?.Invoke(this, EventArgs.Empty);
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 return false;
             }
-            finally
-            {
+            finally {
                 if (stream != null)
-                {
                     stream.Close();
-                }
             }
 
             return true;
@@ -146,16 +119,12 @@ namespace SF3.FileEditors
         /// </summary>
         /// <param name="filename">The file to load.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
-        public bool SaveFile(string filename)
-        {
+        public bool SaveFile(string filename) {
             if (Data == null)
-            {
                 throw new FileEditorNotLoadedException();
-            }
 
             FileStream stream = null;
-            try
-            {
+            try {
                 PreSaved?.Invoke(this, EventArgs.Empty);
 
                 stream = new FileStream(filename, FileMode.Create);
@@ -166,16 +135,12 @@ namespace SF3.FileEditors
                 UpdateTitle();
                 Saved?.Invoke(this, EventArgs.Empty);
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 return false;
             }
-            finally
-            {
+            finally {
                 if (stream != null)
-                {
                     stream.Close();
-                }
             }
 
             return true;
@@ -185,12 +150,9 @@ namespace SF3.FileEditors
         /// Closes a file if opened. Invokes event 'Closed' if a file was closed.
         /// </summary>
         /// <returns>'true' on success, even if no file is open.</returns>
-        public virtual bool CloseFile()
-        {
+        public virtual bool CloseFile() {
             if (!IsLoaded)
-            {
                 return true;
-            }
 
             PreClosed?.Invoke(this, EventArgs.Empty);
 
@@ -208,30 +170,19 @@ namespace SF3.FileEditors
         /// </summary>
         /// <param name="location">The address of the data.</param>
         /// <returns>Sum of all bytes (earlier byte = higher byte).</returns>
-        public uint GetData(int location, int bytes)
-        {
+        public uint GetData(int location, int bytes) {
             if (location < 0)
-            {
                 throw new ArgumentOutOfRangeException(nameof(location));
-            }
             if (bytes < 1 || bytes > 4)
-            {
                 throw new ArgumentOutOfRangeException(nameof(bytes));
-            }
             if (Data == null)
-            {
                 throw new FileEditorNotLoadedException();
-            }
             if (location + bytes > Data.Length)
-            {
                 throw new FileEditorReadException();
-            }
 
             uint value = 0;
             for (int i = 0; i < bytes; i++)
-            {
                 value += ((uint) Data[location + i]) << ((bytes - i - 1) * 8);
-            }
             return value;
         }
 
@@ -258,26 +209,18 @@ namespace SF3.FileEditors
         /// </summary>
         /// <param name="location">The address of the string.</param>
         /// <param name="length">The length of the string space.</param>
-        public string GetString(int location, int length)
-        {
+        public string GetString(int location, int length) {
             if (Data == null)
-            {
                 throw new FileEditorNotLoadedException();
-            }
 
             byte[] value = new byte[length];
-            for (int i = 0; i < length; i++)
-            {
-                try
-                {
+            for (int i = 0; i < length; i++) {
+                try {
                     if (Data[location + i] == 0x0)
-                    {
                         break;
-                    }
                     value[i] = Data[location + i];
                 }
-                catch (IndexOutOfRangeException)
-                {
+                catch (IndexOutOfRangeException) {
                     //wrong kind of file was selected to load
                     throw new FileEditorReadException();
                 }
@@ -292,32 +235,21 @@ namespace SF3.FileEditors
         /// <param name="location">The address of the data.</param>
         /// <param name="value">The new value of the data (sized for the maximum number of bytes).</param>
         /// <param name="bytes">The number of bytes to store.</param>
-        public void SetData(int location, uint value, int bytes)
-        {
+        public void SetData(int location, uint value, int bytes) {
             if (location < 0)
-            {
                 throw new ArgumentOutOfRangeException(nameof(location));
-            }
             if (bytes < 1 || bytes > 4)
-            {
                 throw new ArgumentOutOfRangeException(nameof(bytes));
-            }
             if (Data == null)
-            {
                 throw new FileEditorNotLoadedException();
-            }
             if (location + bytes > Data.Length)
-            {
                 throw new FileEditorReadException();
-            }
 
             byte[] converted = BitConverter.GetBytes(value);
 
-            for (int i = 0; i < bytes; i++)
-            {
+            for (int i = 0; i < bytes; i++) {
                 byte b = converted[bytes - i - 1];
-                if (Data[location + i] != b)
-                {
+                if (Data[location + i] != b) {
                     Data[location + i] = b;
                     IsModified = true;
                 }
@@ -352,30 +284,22 @@ namespace SF3.FileEditors
         /// <param name="location">The address of the string.</param>
         /// <param name="length">The length of the string space.</param>
         /// <param name="value">The new value of the string.</param>
-        public void SetString(int location, int length, string value)
-        {
+        public void SetString(int location, int length, string value) {
             if (Data == null)
-            {
                 throw new FileEditorNotLoadedException();
-            }
 
             byte[] name = new byte[12];
             Encoding OutputText = Encoding.GetEncoding("shift-jis");
             name = OutputText.GetBytes(value);
-            for (int i = 0; i < name.Length; i++)
-            {
-                if (Data[location + i] != name[i])
-                {
+            for (int i = 0; i < name.Length; i++) {
+                if (Data[location + i] != name[i]) {
                     Data[location + i] = name[i];
                     IsModified = true;
                 }
             }
-            if (name.Length < length)
-            {
-                for (int i = name.Length; i < length; i++)
-                {
-                    if (Data[location + i] != 0x00)
-                    {
+            if (name.Length < length) {
+                for (int i = name.Length; i < length; i++) {
+                    if (Data[location + i] != 0x00) {
                         Data[location + i] = 0x00;
                         IsModified = true;
                     }
@@ -389,24 +313,15 @@ namespace SF3.FileEditors
         /// <param name="location">The address of the byte containing the bit.</param>
         /// <param name="bit">The position of the bit, in range (1, 8).</param>
         /// <returns>True if the bit is set, false if the bit is unset.</returns>
-        public bool GetBit(int location, int bit)
-        {
+        public bool GetBit(int location, int bit) {
             if (location < 0)
-            {
                 throw new ArgumentOutOfRangeException(nameof(location));
-            }
             if (bit < 1 || bit > 8)
-            {
                 throw new ArgumentOutOfRangeException(nameof(bit));
-            }
             if (Data == null)
-            {
                 throw new FileEditorNotLoadedException();
-            }
             if (location >= Data.Length)
-            {
                 throw new FileEditorReadException();
-            }
 
             return ((Data[location] >> (bit - 1) & 0x01) == 1) ? true : false;
         }
@@ -417,40 +332,27 @@ namespace SF3.FileEditors
         /// <param name="location">The address of the byte containing the bit.</param>
         /// <param name="bit">The position of the bit, in range (1, 8).</param>
         /// <param name="value">The new value of the bit.</param>
-        public void SetBit(int location, int bit, bool value)
-        {
+        public void SetBit(int location, int bit, bool value) {
             if (location < 0)
-            {
                 throw new ArgumentOutOfRangeException(nameof(location));
-            }
             if (bit < 1 || bit > 8)
-            {
                 throw new ArgumentOutOfRangeException(nameof(bit));
-            }
             if (Data == null)
-            {
                 throw new FileEditorNotLoadedException();
-            }
             if (location >= Data.Length)
-            {
                 throw new FileEditorReadException();
-            }
 
             byte bitmask = (byte)(1 << (bit - 1));
 
-            if (value)
-            {
-                if ((Data[location] & bitmask) == 0x00)
-                {
+            if (value) {
+                if ((Data[location] & bitmask) == 0x00) {
                     Data[location] |= bitmask;
                     IsModified = true;
                 }
             }
-            else
-            {
-                if ((Data[location] & bitmask) != 0x00)
-                {
-                    Data[location] &= (byte)~bitmask;
+            else {
+                if ((Data[location] & bitmask) != 0x00) {
+                    Data[location] &= (byte) ~bitmask;
                     IsModified = true;
                 }
             }

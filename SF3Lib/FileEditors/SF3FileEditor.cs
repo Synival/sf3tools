@@ -1,20 +1,13 @@
-﻿using SF3.Models;
+﻿using System.Collections.Generic;
+using SF3.Models;
 using SF3.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SF3.FileEditors
-{
+namespace SF3.FileEditors {
     /// <summary>
     /// IFileEditor specifically for files in Shining Force 3
     /// </summary>
-    public abstract class SF3FileEditor : FileEditor, ISF3FileEditor
-    {
-        public SF3FileEditor(ScenarioType scenario)
-        {
+    public abstract class SF3FileEditor : FileEditor, ISF3FileEditor {
+        public SF3FileEditor(ScenarioType scenario) {
             Scenario = scenario;
         }
 
@@ -31,41 +24,25 @@ namespace SF3.FileEditors
         /// </summary>
         /// <returns>'true' on success, otherwise 'false'.</returns>
         public virtual bool OnLoadBeforeMakeModelArrays()
-        {
-            return true;
-        }
+            => true;
 
-        public override bool LoadFile(string filename)
-        {
+        public override bool LoadFile(string filename) {
             if (!base.LoadFile(filename))
-            {
                 return false;
-            }
-
             if (!OnLoadBeforeMakeModelArrays())
-            {
                 return false;
-            }
 
             ModelArrays = MakeModelArrays();
-
             foreach (var ma in ModelArrays)
-            {
                 if (!ma.Load())
-                {
                     return false;
-                }
-            }
 
             return true;
         }
 
-        public override bool CloseFile()
-        {
+        public override bool CloseFile() {
             if (!base.CloseFile())
-            {
                 return false;
-            }
 
             ModelArrays = null;
             return true;

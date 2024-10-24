@@ -1,5 +1,5 @@
-﻿using SF3.Models;
-using SF3.Types;
+﻿using System.Collections.Generic;
+using SF3.Models;
 using SF3.Models.X013.CritMod;
 using SF3.Models.X013.Critrate;
 using SF3.Models.X013.ExpLimit;
@@ -14,20 +14,15 @@ using SF3.Models.X013.StatusEffects;
 using SF3.Models.X013.SupportStats;
 using SF3.Models.X013.SupportTypes;
 using SF3.Models.X013.WeaponSpellRank;
-using System.Collections.Generic;
+using SF3.Types;
 
-namespace SF3.FileEditors
-{
-    public class X013_FileEditor : SF3FileEditor, IX013_FileEditor
-    {
-        public X013_FileEditor(ScenarioType scenario) : base(scenario)
-        {
+namespace SF3.FileEditors {
+    public class X013_FileEditor : SF3FileEditor, IX013_FileEditor {
+        public X013_FileEditor(ScenarioType scenario) : base(scenario) {
         }
 
-        public override IEnumerable<IModelArray> MakeModelArrays()
-        {
-            return new List<IModelArray>()
-            {
+        public override IEnumerable<IModelArray> MakeModelArrays() {
+            return new List<IModelArray>() {
                 (SpecialsList = new SpecialList(this)),
                 (SupportTypeList = new SupportTypeList(this)),
                 (FriendshipExpList = new FriendshipExpList(this)),

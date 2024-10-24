@@ -1,5 +1,5 @@
-﻿using SF3.Models;
-using SF3.Types;
+﻿using System.Collections.Generic;
+using SF3.Models;
 using SF3.Models.X1.AI;
 using SF3.Models.X1.Arrows;
 using SF3.Models.X1.BattlePointers;
@@ -12,45 +12,36 @@ using SF3.Models.X1.SpawnZones;
 using SF3.Models.X1.Tiles;
 using SF3.Models.X1.Treasures;
 using SF3.Models.X1.Warps;
-using System.Collections.Generic;
+using SF3.Types;
 
-namespace SF3.FileEditors
-{
-    public class X1_FileEditor : SF3FileEditor, IX1_FileEditor
-    {
-        public X1_FileEditor(ScenarioType scenario, MapLeaderType mapLeader, bool isBTL99) : base(scenario)
-        {
+namespace SF3.FileEditors {
+    public class X1_FileEditor : SF3FileEditor, IX1_FileEditor {
+        public X1_FileEditor(ScenarioType scenario, MapLeaderType mapLeader, bool isBTL99) : base(scenario) {
             MapLeader = mapLeader;
             IsBTL99 = isBTL99;
         }
 
-        public override bool OnLoadBeforeMakeModelArrays()
-        {
+        public override bool OnLoadBeforeMakeModelArrays() {
             int offset = 0;
             int sub = 0;
 
-            if (IsBTL99)
-            {
+            if (IsBTL99) {
                 offset = 0x00000018; //btl99 initial pointer
                 sub = 0x06060000;
             }
-            else if (Scenario == ScenarioType.Scenario1)
-            {
+            else if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
             }
-            else if (Scenario == ScenarioType.Scenario2)
-            {
+            else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
             }
-            else if (Scenario == ScenarioType.Scenario3)
-            {
+            else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
             }
-            else if (Scenario == ScenarioType.PremiumDisk)
-            {
+            else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
             }
@@ -61,44 +52,31 @@ namespace SF3.FileEditors
             offset = GetDouble(offset);
 
             /*A value higher means a pointer is on the offset, meaning we are in a battle. If it is not a 
-              pointer we are at our destination so we know a town is loaded.
-            */
+              pointer we are at our destination so we know a town is loaded. */
             if (Scenario == ScenarioType.Scenario1 && offset > 0x0605F000)
-            {
                 IsBattle = true;
-            }
             else if (offset > 0x0605e000)
-            {
                 IsBattle = true;
-            }
             else
-            {
                 IsBattle = false;
-            }
 
             return true;
         }
 
-        public override IEnumerable<IModelArray> MakeModelArrays()
-        {
+        public override IEnumerable<IModelArray> MakeModelArrays() {
             bool isntScn1OrBTL99 = Scenario != ScenarioType.Scenario1 && !IsBTL99;
 
             // Add models present for both towns and battles.
-            var modelArrays = new List<IModelArray>
-            {
+            var modelArrays = new List<IModelArray> {
                 (TreasureList = new TreasureList(this))
             };
 
             if (isntScn1OrBTL99)
-            {
                 modelArrays.Add(WarpList = new WarpList(this));
-            }
 
             // Add models only present for battles.
-            if (IsBattle)
-            {
-                modelArrays.AddRange(new List<IModelArray>()
-                {
+            if (IsBattle) {
+                modelArrays.AddRange(new List<IModelArray>() {
                     (HeaderList = new HeaderList(this)),
                     (SlotList = new SlotList(this)),
                     (AIList = new AIList(this)),
@@ -108,24 +86,18 @@ namespace SF3.FileEditors
                 });
 
                 if (isntScn1OrBTL99)
-                {
                     modelArrays.Add(TileList = new TileList(this));
-                }
             }
 
             // Add models only present for towns.
-            if (!IsBattle)
-            {
-                modelArrays.AddRange(new List<IModelArray>()
-                {
+            if (!IsBattle) {
+                modelArrays.AddRange(new List<IModelArray>() {
                     (NpcList = new NpcList(this)),
                     (EnterList = new EnterList(this))
                 });
 
                 if (isntScn1OrBTL99)
-                {
                     modelArrays.Add(ArrowList = new ArrowList(this));
-                }
             }
 
             return modelArrays;
@@ -137,13 +109,10 @@ namespace SF3.FileEditors
 
         private MapLeaderType _mapLeader;
 
-        public MapLeaderType MapLeader
-        {
+        public MapLeaderType MapLeader {
             get => _mapLeader;
-            set
-            {
-                if (_mapLeader != value)
-                {
+            set {
+                if (_mapLeader != value) {
                     _mapLeader = value;
                     UpdateTitle();
                 }
@@ -154,13 +123,10 @@ namespace SF3.FileEditors
 
         private bool _isBattle;
 
-        public bool IsBattle
-        {
+        public bool IsBattle {
             get => _isBattle;
-            set
-            {
-                if (_isBattle != value)
-                {
+            set {
+                if (_isBattle != value) {
                     _isBattle = value;
                     UpdateTitle();
                 }

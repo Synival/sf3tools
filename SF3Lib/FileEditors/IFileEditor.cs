@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SF3.FileEditors
-{
+namespace SF3.FileEditors {
     /// <summary>
     /// Used for loading, saving, reading, and modifying .BIN files.
     /// </summary>
-    public interface IFileEditor
-    {
+    public interface IFileEditor {
         /// <summary>
         /// Loads a file's binary data for editing. Invokes events 'PreLoaded' and 'Loaded'.
         /// </summary>

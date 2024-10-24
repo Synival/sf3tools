@@ -1,19 +1,10 @@
 ﻿using SF3.Types;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml;
 
-namespace SF3.Models
-{
+namespace SF3.Models {
     /// <summary>
     /// Interface for any collection of SF3 models that can be modified.
     /// </summary>
-    public interface IModelArray
-    {
+    public interface IModelArray {
         /// <summary>
         /// Loads models from its respective XML file(s).
         /// </summary>
@@ -50,8 +41,7 @@ namespace SF3.Models
     /// <summary>
     /// Interface for a specific collection of SF3 models that can be modified.
     /// </summary>
-    public interface IModelArray<T> : IModelArray
-    {
+    public interface IModelArray<T> : IModelArray {
         /// <summary>
         /// A mutable array of models of type T.
         /// </summary>

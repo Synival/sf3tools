@@ -13,10 +13,8 @@ using SF3.Models.X013.SupportStats;
 using SF3.Models.X013.SupportTypes;
 using SF3.Models.X013.WeaponSpellRank;
 
-namespace SF3.FileEditors
-{
-    public interface IX013_FileEditor : ISF3FileEditor
-    {
+namespace SF3.FileEditors {
+    public interface IX013_FileEditor : ISF3FileEditor {
         SpecialList SpecialsList { get; }
         SupportTypeList SupportTypeList { get; }
         FriendshipExpList FriendshipExpList { get; }
