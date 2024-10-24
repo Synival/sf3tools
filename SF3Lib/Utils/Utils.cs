@@ -19,10 +19,10 @@ namespace SF3.Utils {
         /// If value name available:
         ///     {name}
         /// </returns>
-        public static string NameOrHexValue(int value, Dictionary<int, string> nameDict, int hexDigits = 2) {
+        public static string NameOrHexValue(int value, Dictionary<int, string> nameDict, string formatString = null) {
             return nameDict.TryGetValue(value, out string name)
                 ? name
-                : value.ToString("X" + hexDigits.ToString());
+                : value.ToString(formatString ?? "X2");
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace SF3.Utils {
         /// If value name available:
         ///     {0:X[hexDigits]}: {name}
         /// </returns>
-        public static string HexValueWithName(int value, Dictionary<int, string> nameDict, int hexDigits = 2) {
-            var valueStr = value.ToString("X" + hexDigits.ToString());
+        public static string HexValueWithName(int value, Dictionary<int, string> nameDict, string formatString = null) {
+            var valueStr = value.ToString(formatString ?? "X2");
             return nameDict.TryGetValue(value, out string name)
                 ? valueStr + ": " + name
                 : valueStr;

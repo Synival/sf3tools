@@ -52,8 +52,8 @@ namespace SF3.Values {
         public MonsterValue(ScenarioType scenario, bool isX044, bool withFFFF, int value)
         : base(
             scenario,
-            NameOrHexValue(value, GetPossibleValues(scenario, isX044, withFFFF)),
-            HexValueWithName(value, GetPossibleValues(scenario, isX044, withFFFF)),
+            NameOrHexValue(value, GetPossibleValues(scenario, isX044, withFFFF), ResourceInfo.FormatString),
+            HexValueWithName(value, GetPossibleValues(scenario, isX044, withFFFF), ResourceInfo.FormatString),
             value
         ) {
             IsX044 = isX044;

@@ -1,9 +1,10 @@
 ﻿using SF3.Types;
 using SF3.FileEditors;
+using SF3.Values;
 
-namespace SF3.Models.X002.MusicOverride
+namespace SF3.Models.X002.LoadedOverride
 {
-    public class MusicOverride
+    public class LoadedOverride
     {
         private IX002_FileEditor _fileEditor;
 
@@ -12,10 +13,10 @@ namespace SF3.Models.X002.MusicOverride
         private int medMusic;
         private int julMusic;
         private int extraMusic;
-        private int unknown1;
-        private int unknown2;
-        private int unknown3;
-        private int unknown4;
+        private int synMpd;
+        private int medMpd;
+        private int julMpd;
+        private int extraMpd;
         private int synChr;
         private int medChr;
         private int julChr;
@@ -28,7 +29,7 @@ namespace SF3.Models.X002.MusicOverride
         private int index;
         private string name;
 
-        public MusicOverride(IX002_FileEditor fileEditor, int id, string text)
+        public LoadedOverride(IX002_FileEditor fileEditor, int id, string text)
         {
             _fileEditor = fileEditor;
 
@@ -73,10 +74,10 @@ namespace SF3.Models.X002.MusicOverride
             medMusic = start + 0x03; //1 byte
             julMusic = start + 0x04; //1 byte
             extraMusic = start + 0x05; //1 byte
-            unknown1 = start + 0x06; //4 bytes mpd synbios?
-            unknown2 = start + 0x0a; //4 bytes mpd medion
-            unknown3 = start + 0x0e; //4 bytes mpd julian?
-            unknown4 = start + 0x12; //4 bytes mpd extra?
+            synMpd = start + 0x06; //4 bytes mpd synbios?
+            medMpd = start + 0x0a; //4 bytes mpd medion
+            julMpd = start + 0x0e; //4 bytes mpd julian?
+            extraMpd = start + 0x12; //4 bytes mpd extra?
             synChr = start + 0x16; //4 bytes chr synbios?
             medChr = start + 0x1a; //4 bytes chr medion
             julChr = start + 0x1e; //4 bytes chr julian?
@@ -86,8 +87,8 @@ namespace SF3.Models.X002.MusicOverride
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int MusicOverrideID => index;
-        public string MusicOverrideName => name;
+        public int LoadedOverrideID => index;
+        public string LoadedOverrideName => name;
 
         public int MOMapID
         {
@@ -119,54 +120,54 @@ namespace SF3.Models.X002.MusicOverride
             set => _fileEditor.SetByte(extraMusic, (byte)value);
         }
 
-        public int MOUnknown1
+        public FileIndexValue SynMpd
         {
-            get => _fileEditor.GetDouble(unknown1);
-            set => _fileEditor.SetDouble(unknown1, value);
+            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(synMpd));
+            set => _fileEditor.SetDouble(synMpd, value.Value);
         }
 
-        public int MOUnknown2
+        public FileIndexValue MedMpd
         {
-            get => _fileEditor.GetDouble(unknown2);
-            set => _fileEditor.SetDouble(unknown2, value);
+            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(medMpd));
+            set => _fileEditor.SetDouble(medMpd, value.Value);
         }
 
-        public int MOUnknown3
+        public FileIndexValue JulMpd
         {
-            get => _fileEditor.GetDouble(unknown3);
-            set => _fileEditor.SetDouble(unknown3, value);
+            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(julMpd));
+            set => _fileEditor.SetDouble(julMpd, value.Value);
         }
 
-        public int MOUnknown4
+        public FileIndexValue ExtraMpd
         {
-            get => _fileEditor.GetDouble(unknown4);
-            set => _fileEditor.SetDouble(unknown4, value);
+            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(extraMpd));
+            set => _fileEditor.SetDouble(extraMpd, value.Value);
         }
 
-        public int SynChr
+        public FileIndexValue SynChr
         {
-            get => _fileEditor.GetDouble(synChr);
-            set => _fileEditor.SetDouble(synChr, value);
+            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(synChr));
+            set => _fileEditor.SetDouble(synChr, value.Value);
         }
 
-        public int MedChr
+        public FileIndexValue MedChr
         {
-            get => _fileEditor.GetDouble(medChr);
-            set => _fileEditor.SetDouble(medChr, value);
+            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(medChr));
+            set => _fileEditor.SetDouble(medChr, value.Value);
         }
 
-        public int JulChr
+        public FileIndexValue JulChr
         {
-            get => _fileEditor.GetDouble(julChr);
-            set => _fileEditor.SetDouble(julChr, value);
+            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(julChr));
+            set => _fileEditor.SetDouble(julChr, value.Value);
         }
 
-        public int ExtraChr
+        public FileIndexValue ExtraChr
         {
-            get => _fileEditor.GetDouble(extraChr);
-            set => _fileEditor.SetDouble(extraChr, value);
+            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(extraChr));
+            set => _fileEditor.SetDouble(extraChr, value.Value);
         }
 
-        public int MusicOverrideAddress => (address);
+        public int LoadedOverrideAddress => (address);
     }
 }

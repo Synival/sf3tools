@@ -5,7 +5,7 @@
     }
 
     /// <summary>
-    /// Named value for Sex that can be bound to an ObjectListView.
+    /// Named value for movement type that can be bound to an ObjectListView.
     /// </summary>
     public class MovementTypeValue : NamedValueFromResource<MovementTypeValueResourceInfo> {
         public MovementTypeValue(int value) : base(value) {

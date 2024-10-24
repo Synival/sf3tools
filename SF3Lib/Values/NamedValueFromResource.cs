@@ -7,6 +7,7 @@ namespace SF3.Values {
         string ResourceName { get; }
         int MinValue { get; }
         int MaxValue { get; }
+        string FormatString { get; }
         Dictionary<int, string> PossibleValues { get; }
         Dictionary<NamedValue, string> ComboBoxValues { get; set; }
     };
@@ -20,6 +21,7 @@ namespace SF3.Values {
         public string ResourceName { get; }
         public virtual int MinValue => 0x00;
         public virtual int MaxValue => 0xFF;
+        public virtual string FormatString => "X2";
         public Dictionary<int, string> PossibleValues { get; }
         public Dictionary<NamedValue, string> ComboBoxValues { get; set; } = null;
     };
@@ -31,8 +33,8 @@ namespace SF3.Values {
         where TResourceInfo : INamedValueFromResourceInfo, new() {
         public NamedValueFromResource(int value)
         : base(
-            NameOrHexValue(value, ResourceInfo.PossibleValues),
-            HexValueWithName(value, ResourceInfo.PossibleValues),
+            NameOrHexValue(value, ResourceInfo.PossibleValues, ResourceInfo.FormatString),
+            HexValueWithName(value, ResourceInfo.PossibleValues, ResourceInfo.FormatString),
             value
         ) {
         }

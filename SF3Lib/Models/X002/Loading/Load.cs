@@ -1,5 +1,6 @@
 ﻿using SF3.Types;
 using SF3.FileEditors;
+using SF3.Values;
 
 namespace SF3.Models.X002.Loading
 {
@@ -84,10 +85,10 @@ namespace SF3.Models.X002.Loading
             set => _fileEditor.SetWord(locationID, value);
         }
 
-        public int X1
+        public FileIndexValue X1
         {
-            get => _fileEditor.GetWord(x1);
-            set => _fileEditor.SetWord(x1, value);
+            get => new FileIndexValue(Scenario, _fileEditor.GetWord(x1));
+            set => _fileEditor.SetWord(x1, value.Value);
         }
 
         public int CHP
@@ -96,10 +97,10 @@ namespace SF3.Models.X002.Loading
             set => _fileEditor.SetWord(chp, value);
         }
 
-        public int X5
+        public FileIndexValue X5
         {
-            get => _fileEditor.GetWord(x5);
-            set => _fileEditor.SetWord(x5, value);
+            get => new FileIndexValue(Scenario, _fileEditor.GetWord(x5));
+            set => _fileEditor.SetWord(x5, value.Value);
         }
 
         public int Music
@@ -108,10 +109,10 @@ namespace SF3.Models.X002.Loading
             set => _fileEditor.SetWord(music, value);
         }
 
-        public int MPD
+        public FileIndexValue MPD
         {
-            get => _fileEditor.GetWord(mpd);
-            set => _fileEditor.SetWord(mpd, value);
+            get => new FileIndexValue(Scenario, _fileEditor.GetWord(mpd));
+            set => _fileEditor.SetWord(mpd, value.Value);
         }
 
         public int LoadUnknown
@@ -120,10 +121,10 @@ namespace SF3.Models.X002.Loading
             set => _fileEditor.SetWord(unknown, value);
         }
 
-        public int CHR
+        public FileIndexValue CHR
         {
-            get => _fileEditor.GetWord(chr);
-            set => _fileEditor.SetWord(chr, value);
+            get => new FileIndexValue(Scenario, _fileEditor.GetWord(chr));
+            set => _fileEditor.SetWord(chr, value.Value);
         }
 
         public int LoadAddress => (address);

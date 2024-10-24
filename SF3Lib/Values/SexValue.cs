@@ -5,7 +5,7 @@
     }
 
     /// <summary>
-    /// Named value for Sex that can be bound to an ObjectListView.
+    /// Named value for sex that can be bound to an ObjectListView.
     /// </summary>
     public class SexValue : NamedValueFromResource<SexValueResourceInfo> {
         public SexValue(int value) : base(value) {

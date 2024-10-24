@@ -8,6 +8,7 @@ namespace SF3.Values {
         string ResourceName { get; }
         int MinValue { get; }
         int MaxValue { get; }
+        string FormatString { get; }
         Dictionary<ScenarioType, Dictionary<int, string>> PossibleValues { get; }
         Dictionary<ScenarioType, Dictionary<NamedValue, string>> ComboBoxValues { get; }
     };
@@ -21,6 +22,7 @@ namespace SF3.Values {
         public string ResourceName { get; }
         public virtual int MinValue => 0x00;
         public virtual int MaxValue => 0xFF;
+        public virtual string FormatString => "X2";
         public Dictionary<ScenarioType, Dictionary<int, string>> PossibleValues { get; }
         public Dictionary<ScenarioType, Dictionary<NamedValue, string>> ComboBoxValues { get; } = new Dictionary<ScenarioType, Dictionary<NamedValue, string>>();
     };
@@ -32,8 +34,8 @@ namespace SF3.Values {
         where TResourceInfo : INamedValueFromResourceForScenariosInfo, new() {
         public NamedValueFromResourceForScenarios(ScenarioType scenario, int value)
         : base(
-            NameOrHexValue(value, ResourceInfo.PossibleValues[scenario]),
-            HexValueWithName(value, ResourceInfo.PossibleValues[scenario]),
+            NameOrHexValue(value, ResourceInfo.PossibleValues[scenario], ResourceInfo.FormatString),
+            HexValueWithName(value, ResourceInfo.PossibleValues[scenario], ResourceInfo.FormatString),
             value
         ) {
             Scenario = scenario;

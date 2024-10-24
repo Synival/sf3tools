@@ -62,7 +62,7 @@ namespace SF3.X002_Editor.Forms {
                 new PopulateTabConfig(tabSpells, olvSpells, FileEditor.SpellList),
                 new PopulateTabConfig(tabPreset, olvPreset, FileEditor.PresetList),
                 new PopulateTabConfig(tabLoaded, olvLoaded, FileEditor.LoadList),
-                new PopulateTabConfig(tabLoadedOverride, olvLoadedOverride, FileEditor.MusicOverrideList),
+                new PopulateTabConfig(tabLoadedOverride, olvLoadedOverride, FileEditor.LoadedOverrideList),
                 new PopulateTabConfig(tabStatBoost, olvStatBoost, FileEditor.StatList),
                 new PopulateTabConfig(tabWeaponRankAttack, olvWeaponRankAttack, FileEditor.WeaponRankList),
                 new PopulateTabConfig(tabAttackResist, olvAttackResist, FileEditor.AttackResistList),

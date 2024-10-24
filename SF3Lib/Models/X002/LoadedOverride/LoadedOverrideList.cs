@@ -5,16 +5,16 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 using SF3.Extensions;
 
-namespace SF3.Models.X002.MusicOverride
+namespace SF3.Models.X002.LoadedOverride
 {
-    public class MusicOverrideList : ModelArray<MusicOverride>
+    public class LoadedOverrideList : ModelArray<LoadedOverride>
     {
         public int MaxSize { get; } = 300;
 
-        public MusicOverrideList(IX002_FileEditor fileEditor) : base(fileEditor)
+        public LoadedOverrideList(IX002_FileEditor fileEditor) : base(fileEditor)
         {
             _fileEditor = fileEditor;
-            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "MusicOverrideList.xml");
+            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "LoadedOverrideList.xml");
         }
 
         private string _resourceFile;
@@ -28,7 +28,7 @@ namespace SF3.Models.X002.MusicOverride
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load()
         {
-            _models = new MusicOverride[0];
+            _models = new LoadedOverride[0];
             FileStream stream = null;
             try
             {
@@ -41,9 +41,9 @@ namespace SF3.Models.X002.MusicOverride
                     xml.Read();
                     if (xml.HasAttributes)
                     {
-                        var newModel = new MusicOverride(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new LoadedOverride(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.MusicOverrideID < 0 || newModel.MusicOverrideID >= MaxSize)
+                        if (newModel.LoadedOverrideID < 0 || newModel.LoadedOverrideID >= MaxSize)
                         {
                             throw new IndexOutOfRangeException();
                         }

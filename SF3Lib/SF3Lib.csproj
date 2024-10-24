@@ -76,7 +76,7 @@
     <Content Include="Resources\PD\MagicBonus.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PD\MusicOverrideList.xml">
+    <Content Include="Resources\PD\LoadedOverrideList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PD\SpellIndexList.xml">
@@ -94,7 +94,7 @@
     <Content Include="Resources\S1\MagicBonus.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\S1\MusicOverrideList.xml">
+    <Content Include="Resources\S1\LoadedOverrideList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S1\SpellIndexList.xml">
@@ -112,7 +112,7 @@
     <Content Include="Resources\S2\MagicBonus.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\S2\MusicOverrideList.xml">
+    <Content Include="Resources\S2\LoadedOverrideList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S2\SpellIndexList.xml">
@@ -184,7 +184,7 @@
     <Content Include="Resources\S3\MagicBonus.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\S3\MusicOverrideList.xml">
+    <Content Include="Resources\S3\LoadedOverrideList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S3\Specials.xml">
@@ -274,5 +274,19 @@
     <Content Include="Resources\X1Warp.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Resources\PD\FileIndexes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\S1\FileIndexes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\S2\FileIndexes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\S3\FileIndexes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

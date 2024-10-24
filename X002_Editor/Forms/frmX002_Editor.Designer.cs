@@ -1155,7 +1155,7 @@
             this.lvcLoadedX1.AspectName = "X1";
             this.lvcLoadedX1.AspectToStringFormat = "{0:X}";
             this.lvcLoadedX1.Text = "X1";
-            this.lvcLoadedX1.Width = 50;
+            this.lvcLoadedX1.Width = 120;
             // 
             // lvcLoadedCHP
             // 
@@ -1169,7 +1169,7 @@
             this.lvcLoadedX5.AspectName = "X5";
             this.lvcLoadedX5.AspectToStringFormat = "{0:X}";
             this.lvcLoadedX5.Text = "X5";
-            this.lvcLoadedX5.Width = 50;
+            this.lvcLoadedX5.Width = 120;
             // 
             // lvcLoadedMusic
             // 
@@ -1183,7 +1183,7 @@
             this.lvcLoadedMPD.AspectName = "MPD";
             this.lvcLoadedMPD.AspectToStringFormat = "{0:X}";
             this.lvcLoadedMPD.Text = "MPD";
-            this.lvcLoadedMPD.Width = 50;
+            this.lvcLoadedMPD.Width = 120;
             // 
             // lvcLoadedNumMaps
             // 
@@ -1197,7 +1197,7 @@
             this.lvcLoadedCHR.AspectName = "CHR";
             this.lvcLoadedCHR.AspectToStringFormat = "{0:X}";
             this.lvcLoadedCHR.Text = "CHR";
-            this.lvcLoadedCHR.Width = 50;
+            this.lvcLoadedCHR.Width = 120;
             // 
             // tabLoadedOverride
             // 
@@ -1267,7 +1267,7 @@
             // 
             // lvcLoadedOverrideID
             // 
-            this.lvcLoadedOverrideID.AspectName = "MusicOverrideID";
+            this.lvcLoadedOverrideID.AspectName = "LoadedOverrideID";
             this.lvcLoadedOverrideID.AspectToStringFormat = "{0:X}";
             this.lvcLoadedOverrideID.IsEditable = false;
             this.lvcLoadedOverrideID.Text = "ID";
@@ -1275,7 +1275,7 @@
             // 
             // lvcLoadedOverrideAddress
             // 
-            this.lvcLoadedOverrideAddress.AspectName = "MusicOverrideAddress";
+            this.lvcLoadedOverrideAddress.AspectName = "LoadedOverrideAddress";
             this.lvcLoadedOverrideAddress.AspectToStringFormat = "{0:X}";
             this.lvcLoadedOverrideAddress.IsEditable = false;
             this.lvcLoadedOverrideAddress.Text = "Address";
@@ -1283,7 +1283,7 @@
             // 
             // lvcLoadedOverrideAreaName
             // 
-            this.lvcLoadedOverrideAreaName.AspectName = "MusicOverrideName";
+            this.lvcLoadedOverrideAreaName.AspectName = "LoadedOverrideName";
             this.lvcLoadedOverrideAreaName.IsEditable = false;
             this.lvcLoadedOverrideAreaName.Text = "Area Name";
             this.lvcLoadedOverrideAreaName.Width = 155;
@@ -1323,53 +1323,59 @@
             // 
             // lvcLoadedOverrideSynMPD
             // 
-            this.lvcLoadedOverrideSynMPD.AspectName = "MOUnknown1";
+            this.lvcLoadedOverrideSynMPD.AspectName = "SynMpd";
             this.lvcLoadedOverrideSynMPD.AspectToStringFormat = "{0:X}";
             this.lvcLoadedOverrideSynMPD.Text = "synMPD";
+            this.lvcLoadedOverrideSynMPD.Width = 120;
             // 
             // lvcLoadedOverrideMedMPD
             // 
-            this.lvcLoadedOverrideMedMPD.AspectName = "MOUnknown2";
+            this.lvcLoadedOverrideMedMPD.AspectName = "MedMpd";
             this.lvcLoadedOverrideMedMPD.AspectToStringFormat = "{0:X}";
             this.lvcLoadedOverrideMedMPD.Text = "medMPD";
+            this.lvcLoadedOverrideMedMPD.Width = 120;
             // 
             // lvcLoadedOverrideJulMPD
             // 
-            this.lvcLoadedOverrideJulMPD.AspectName = "MOUnknown3";
+            this.lvcLoadedOverrideJulMPD.AspectName = "JulMpd";
             this.lvcLoadedOverrideJulMPD.AspectToStringFormat = "{0:X}";
             this.lvcLoadedOverrideJulMPD.Text = "julMPD";
+            this.lvcLoadedOverrideJulMPD.Width = 120;
             // 
             // lvcLoadedOverrideExtraMPD
             // 
-            this.lvcLoadedOverrideExtraMPD.AspectName = "MOUnknown4";
+            this.lvcLoadedOverrideExtraMPD.AspectName = "ExtraMpd";
             this.lvcLoadedOverrideExtraMPD.AspectToStringFormat = "{0:X}";
             this.lvcLoadedOverrideExtraMPD.Text = "extraMPD";
-            this.lvcLoadedOverrideExtraMPD.Width = 70;
+            this.lvcLoadedOverrideExtraMPD.Width = 120;
             // 
             // lvcLoadedOverrideSynCHR
             // 
             this.lvcLoadedOverrideSynCHR.AspectName = "SynChr";
             this.lvcLoadedOverrideSynCHR.AspectToStringFormat = "{0:X}";
             this.lvcLoadedOverrideSynCHR.Text = "synCHR";
+            this.lvcLoadedOverrideSynCHR.Width = 120;
             // 
             // lvcLoadedOverrideMedCHR
             // 
             this.lvcLoadedOverrideMedCHR.AspectName = "MedChr";
             this.lvcLoadedOverrideMedCHR.AspectToStringFormat = "{0:X}";
             this.lvcLoadedOverrideMedCHR.Text = "medCHR";
+            this.lvcLoadedOverrideMedCHR.Width = 120;
             // 
             // lvcLoadedOverrideJulCHR
             // 
             this.lvcLoadedOverrideJulCHR.AspectName = "JulChr";
             this.lvcLoadedOverrideJulCHR.AspectToStringFormat = "{0:X}";
             this.lvcLoadedOverrideJulCHR.Text = "julCHR";
+            this.lvcLoadedOverrideJulCHR.Width = 120;
             // 
             // lvcLoadedOverrideExtraCHR
             // 
             this.lvcLoadedOverrideExtraCHR.AspectName = "ExtraChr";
             this.lvcLoadedOverrideExtraCHR.AspectToStringFormat = "{0:X}";
             this.lvcLoadedOverrideExtraCHR.Text = "extraCHR";
-            this.lvcLoadedOverrideExtraCHR.Width = 70;
+            this.lvcLoadedOverrideExtraCHR.Width = 120;
             // 
             // tabStatBoost
             // 

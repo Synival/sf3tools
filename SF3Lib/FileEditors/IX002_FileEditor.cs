@@ -1,7 +1,7 @@
 ﻿using SF3.Models.X002.AttackResist;
 using SF3.Models.X002.Items;
+using SF3.Models.X002.LoadedOverride;
 using SF3.Models.X002.Loading;
-using SF3.Models.X002.MusicOverride;
 using SF3.Models.X002.Presets;
 using SF3.Models.X002.Spells;
 using SF3.Models.X002.StatBoost;
@@ -18,6 +18,6 @@ namespace SF3.FileEditors {
         WeaponRankList WeaponRankList { get; }
         AttackResistList AttackResistList { get; }
         WarpList WarpList { get; }
-        MusicOverrideList MusicOverrideList { get; }
+        LoadedOverrideList LoadedOverrideList { get; }
     }
 }

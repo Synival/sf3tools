@@ -2,8 +2,8 @@
 using SF3.Models;
 using SF3.Models.X002.AttackResist;
 using SF3.Models.X002.Items;
+using SF3.Models.X002.LoadedOverride;
 using SF3.Models.X002.Loading;
-using SF3.Models.X002.MusicOverride;
 using SF3.Models.X002.Presets;
 using SF3.Models.X002.Spells;
 using SF3.Models.X002.StatBoost;
@@ -25,7 +25,7 @@ namespace SF3.FileEditors {
                 (StatList = new StatList(this)),
                 (WeaponRankList = new WeaponRankList(this)),
                 (AttackResistList = new AttackResistList(this)),
-                (MusicOverrideList = new MusicOverrideList(this))
+                (LoadedOverrideList = new LoadedOverrideList(this))
             };
 
             if (Scenario == ScenarioType.Scenario1)
@@ -42,6 +42,6 @@ namespace SF3.FileEditors {
         public WeaponRankList WeaponRankList { get; private set; }
         public AttackResistList AttackResistList { get; private set; }
         public WarpList WarpList { get; private set; }
-        public MusicOverrideList MusicOverrideList { get; private set; }
+        public LoadedOverrideList LoadedOverrideList { get; private set; }
     }
 }
