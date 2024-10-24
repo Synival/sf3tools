@@ -1,18 +1,12 @@
-﻿using SF3.Types;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Xml;
+using SF3.Types;
 
-namespace SF3.Utils
-{
+namespace SF3.Utils {
     /// <summary>
     /// Miscellaneous utility functions.
     /// </summary>
-    public static class Utils
-    {
+    public static class Utils {
         /// <summary>
         /// Returns a string with the name in a name dictionary or, if it's not available, the value in hex format.
         /// </summary>
@@ -25,10 +19,8 @@ namespace SF3.Utils
         /// If value name available:
         ///     {name}
         /// </returns>
-        public static string NameOrHexValue(int value, Dictionary<int, string> nameDict, int hexDigits = 2)
-        {
-            string name;
-            return nameDict.TryGetValue(value, out name)
+        public static string NameOrHexValue(int value, Dictionary<int, string> nameDict, int hexDigits = 2) {
+            return nameDict.TryGetValue(value, out string name)
                 ? name
                 : value.ToString("X" + hexDigits.ToString());
         }
@@ -45,11 +37,9 @@ namespace SF3.Utils
         /// If value name available:
         ///     {0:X[hexDigits]}: {name}
         /// </returns>
-        public static string HexValueWithName(int value, Dictionary<int, string> nameDict, int hexDigits = 2)
-        {
+        public static string HexValueWithName(int value, Dictionary<int, string> nameDict, int hexDigits = 2) {
             var valueStr = value.ToString("X" + hexDigits.ToString());
-            string name;
-            return nameDict.TryGetValue(value, out name)
+            return nameDict.TryGetValue(value, out string name)
                 ? valueStr + ": " + name
                 : valueStr;
         }
@@ -62,9 +52,7 @@ namespace SF3.Utils
         /// <param name="factoryFunc">Factory function to create a NamedValue. Used for looking up 'NamedValue.Name' for all possible values.</param>
         /// <returns>A dictionary of the results of MakeNamedValueComboBoxValues() for all scenarios.</returns>
         public static Dictionary<ScenarioType, Dictionary<NamedValue, string>> MakeNamedValueComboBoxValuesForAllScenarios(Dictionary<ScenarioType, NamedValue> baseValues)
-        {
-            return baseValues.ToDictionary(x => x.Key, x => MakeNamedValueComboBoxValues(x.Value));
-        }
+            => baseValues.ToDictionary(x => x.Key, x => MakeNamedValueComboBoxValues(x.Value));
 
         /// <summary>
         /// Creates a dictionary of all possible values to supply to MakeNamedValueComboBox().
@@ -73,27 +61,23 @@ namespace SF3.Utils
         /// <param name="maxValue">Maximum value</param>
         /// <param name="factoryFunc">Factory function to create a NamedValue. Used for looking up 'NamedValue.Name' for all possible values.</param>
         /// <returns>A key-value dictionary of all possible values (key) and their names (value).</returns>
-        public static Dictionary<NamedValue, string> MakeNamedValueComboBoxValues(NamedValue baseValue)
-        {
+        public static Dictionary<NamedValue, string> MakeNamedValueComboBoxValues(NamedValue baseValue) {
             var dict = new Dictionary<NamedValue, string>();
 
             // Add values below MinValue...
-            foreach (var kv in baseValue.PossibleValues.Where(x => x.Key < baseValue.MinValue).OrderBy(x => x.Key))
-            {
+            foreach (var kv in baseValue.PossibleValues.Where(x => x.Key < baseValue.MinValue).OrderBy(x => x.Key)) {
                 var value = baseValue.MakeRelatedValue(kv.Key);
                 dict.Add(value, value.ValueName);
             }
 
             // ...add values in range (MinValue, MaxValue)....
-            for (int i = baseValue.MinValue; i <= baseValue.MaxValue; i++)
-            {
+            for (int i = baseValue.MinValue; i <= baseValue.MaxValue; i++) {
                 var value = baseValue.MakeRelatedValue(i);
                 dict.Add(value, value.ValueName);
             }
 
             // ...and finally add values above MaxValue.
-            foreach (var kv in baseValue.PossibleValues.Where(x => x.Key > baseValue.MaxValue).OrderBy(x => x.Key))
-            {
+            foreach (var kv in baseValue.PossibleValues.Where(x => x.Key > baseValue.MaxValue).OrderBy(x => x.Key)) {
                 var value = baseValue.MakeRelatedValue(kv.Key);
                 dict.Add(value, value.ValueName);
             }

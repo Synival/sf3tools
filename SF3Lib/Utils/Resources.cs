@@ -1,28 +1,24 @@
-﻿using SF3.Types;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Xml;
+using SF3.Types;
 
-namespace SF3.Utils
-{
+namespace SF3.Utils {
     /// <summary>
     /// Utility functions for managing resources
     /// TODO: This should eventually be a "ResourceManager" singleton
     /// </summary>
-    public static class Resources
-    {
+    public static class Resources {
         /// <summary>
         /// Returns a dictionary of all ScenarioType values with a corresponding Dictionary of resource values
         /// </summary>
         /// <param name="resourceName"></param>
         /// <returns></returns>
-        public static Dictionary<ScenarioType, Dictionary<int, string>> GetValueNameDictionaryForAllScenariosFromXML(string resourceName)
-        {
+        public static Dictionary<ScenarioType, Dictionary<int, string>> GetValueNameDictionaryForAllScenariosFromXML(string resourceName) {
             // TODO: maybe use reflection over ScenarioType?
-            return new Dictionary<ScenarioType, Dictionary<int, string>>()
-            {
+            return new Dictionary<ScenarioType, Dictionary<int, string>>() {
                 { ScenarioType.Scenario1, GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.Scenario1, resourceName)) },
                 { ScenarioType.Scenario2, GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.Scenario2, resourceName)) },
                 { ScenarioType.Scenario3, GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.Scenario3, resourceName)) },
@@ -35,8 +31,7 @@ namespace SF3.Utils
         /// </summary>
         /// <param name="filename">XML file to parse.</param>
         /// <returns>a Dictionary of values (attribute "value") with their names (attribute "name").</returns>
-        public static Dictionary<int, string> GetValueNameDictionaryFromXML(string filename)
-        {
+        public static Dictionary<int, string> GetValueNameDictionaryFromXML(string filename) {
             var stream = new FileStream(filename, FileMode.Open);
 
             var settings = new XmlReaderSettings();
@@ -47,18 +42,14 @@ namespace SF3.Utils
             xml.Read();
 
             var nameDict = new Dictionary<int, string>();
-            while (!xml.EOF)
-            {
+            while (!xml.EOF) {
                 xml.Read();
-                if (xml.HasAttributes)
-                {
+                if (xml.HasAttributes) {
                     string valueStr = xml.GetAttribute("value");
                     string name = xml.GetAttribute("name");
 
                     if (valueStr != null && name != null)
-                    {
                         nameDict.Add(Convert.ToInt32(valueStr, 16), name);
-                    }
                 }
             }
 
@@ -72,10 +63,8 @@ namespace SF3.Utils
         /// <param name="resourceName">The name of the resource file without its path.</param>
         /// <returns>A string with a relative path with file for the resource.</returns>
         /// <exception cref="ArgumentException">Thrown if the scenario is invalid.</exception>
-        public static string ResourceFileForScenario(ScenarioType scenario, string resourceName)
-        {
-            switch (scenario)
-            {
+        public static string ResourceFileForScenario(ScenarioType scenario, string resourceName) {
+            switch (scenario) {
                 case ScenarioType.Scenario1:
                     return "Resources/S1/" + resourceName;
                 case ScenarioType.Scenario2:
@@ -94,8 +83,7 @@ namespace SF3.Utils
         /// </summary>
         /// <param name="stream">Stream from which to read the XML resource</param>
         /// <returns>A new XmlReader.</returns>
-        public static XmlReader MakeXmlReader(Stream stream)
-        {
+        public static XmlReader MakeXmlReader(Stream stream) {
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.IgnoreComments = true;
             settings.IgnoreWhitespace = true;
