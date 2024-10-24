@@ -60,13 +60,12 @@ namespace SF3.Editor.Forms {
             FileEditor.ModifiedChanged += (obj, eargs) => this.FileModifiedChanged?.Invoke(this, eargs);
             FileEditor.IsLoadedChanged += (obj, eargs) => this.FileIsLoadedChanged?.Invoke(this, eargs);
 
-            if (!FileEditor.LoadFile(openfile.FileName)) {
-                MessageBox.Show("Error trying to load file. It is probably in use by another process.");
-                return false;
-            }
-
             bool success = false;
             try {
+                if (!FileEditor.LoadFile(openfile.FileName)) {
+                    MessageBox.Show("Error trying to load file. It is probably in use by another process.");
+                    return false;
+                }
                 success = OnLoad();
             }
             catch (System.Reflection.TargetInvocationException) {

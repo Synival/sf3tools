@@ -40,6 +40,23 @@ namespace SF3.FileEditors {
             };
         }
 
+        public override void DestroyModelArrays() {
+            SpecialsList = null;
+            SupportTypeList = null;
+            FriendshipExpList = null;
+            SupportStatsList = null;
+            SoulmateList = null;
+            SoulfailList = null;
+            MagicBonusList = null;
+            CritModList = null;
+            CritrateList = null;
+            SpecialChanceList = null;
+            ExpLimitList = null;
+            HealExpList = null;
+            WeaponSpellRankList = null;
+            StatusEffectList = null;
+        }
+
         public SpecialList SpecialsList { get; private set; }
         public SupportTypeList SupportTypeList { get; private set; }
         public FriendshipExpList FriendshipExpList { get; private set; }

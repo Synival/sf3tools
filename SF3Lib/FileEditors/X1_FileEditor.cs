@@ -103,6 +103,21 @@ namespace SF3.FileEditors {
             return modelArrays;
         }
 
+        public override void DestroyModelArrays() {
+            SlotList = null;
+            HeaderList = null;
+            AIList = null;
+            SpawnZoneList = null;
+            BattlePointersList = null;
+            TreasureList = null;
+            CustomMovementList = null;
+            WarpList = null;
+            TileList = null;
+            NpcList = null;
+            EnterList = null;
+            ArrowList = null;
+        }
+
         protected override string BaseTitle => IsLoaded
             ? base.BaseTitle + " (Map: " + MapLeader.ToString() + ") (Type: " + (IsBTL99 ? "BTL99" : IsBattle ? "Battle" : "Town") + ")"
             : base.BaseTitle;

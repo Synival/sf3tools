@@ -34,6 +34,17 @@ namespace SF3.FileEditors {
             return modelArrays;
         }
 
+        public override void DestroyModelArrays() {
+            ItemList = null;
+            SpellList = null;
+            PresetList = null;
+            LoadList = null;
+            StatList = null;
+            WeaponRankList = null;
+            AttackResistList = null;
+            LoadedOverrideList = null;
+        }
+
         public ItemList ItemList { get; private set; }
         public SpellList SpellList { get; private set; }
         public PresetList PresetList { get; private set; }

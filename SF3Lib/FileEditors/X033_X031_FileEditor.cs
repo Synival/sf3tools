@@ -19,6 +19,12 @@ namespace SF3.FileEditors {
             };
         }
 
+        public override void DestroyModelArrays() {
+            StatsList = null;
+            InitialInfoList = null;
+            WeaponLevelList = null;
+        }
+
         [BulkCopyRecurse]
         public StatsList StatsList { get; private set; }
 

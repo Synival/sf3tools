@@ -15,6 +15,10 @@ namespace SF3.FileEditors {
             };
         }
 
+        public override void DestroyModelArrays() {
+            MonsterList = null;
+        }
+
         public MonsterList MonsterList { get; private set; }
 
         public bool IsX044 { get; }

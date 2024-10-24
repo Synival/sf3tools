@@ -18,6 +18,11 @@ namespace SF3.FileEditors {
             };
         }
 
+        public override void DestroyModelArrays() {
+            SpellIconList = null;
+            ItemIconList = null;
+        }
+
         public bool IsX026 { get; }
 
         [BulkCopyRecurse]

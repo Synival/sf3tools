@@ -18,6 +18,11 @@ namespace SF3.FileEditors {
         public abstract IEnumerable<IModelArray> MakeModelArrays();
 
         /// <summary>
+        /// Unsets or deinitialize any model IModelArray's populated in MakeModelArrays().
+        /// </summary>
+        public abstract void DestroyModelArrays();
+
+        /// <summary>
         /// Occurs when data is loaded but before the ModelArray's are created.
         /// This is a good place to check file data to determine how to create the models.
         /// If 'false' is returned, loading is aborted.
@@ -41,9 +46,12 @@ namespace SF3.FileEditors {
         }
 
         public override bool CloseFile() {
+            if (!IsLoaded)
+                return true;
             if (!base.CloseFile())
                 return false;
 
+            DestroyModelArrays();
             ModelArrays = null;
             return true;
         }
