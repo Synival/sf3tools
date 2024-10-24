@@ -566,7 +566,6 @@
             // 
             this.lvcSpellsID.AspectName = "ID";
             this.lvcSpellsID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsID.IsEditable = false;
             this.lvcSpellsID.Text = "ID";
             this.lvcSpellsID.Width = 30;
@@ -575,7 +574,6 @@
             // 
             this.lvcSpellsAddress.AspectName = "Address";
             this.lvcSpellsAddress.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsAddress.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsAddress.IsEditable = false;
             this.lvcSpellsAddress.Text = "Address";
             this.lvcSpellsAddress.Width = 62;
@@ -598,7 +596,6 @@
             // 
             this.lvcSpellsS1LearnedID.AspectName = "S1LearnedID";
             this.lvcSpellsS1LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS1LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS1LearnedID.Text = "S1LearnedID";
             this.lvcSpellsS1LearnedID.Width = 90;
             // 
@@ -620,7 +617,6 @@
             // 
             this.lvcSpellsS2LearnedID.AspectName = "S2LearnedID";
             this.lvcSpellsS2LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS2LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS2LearnedID.Text = "S2LearnedID";
             this.lvcSpellsS2LearnedID.Width = 95;
             // 
@@ -642,7 +638,6 @@
             // 
             this.lvcSpellsS3LearnedID.AspectName = "S3LearnedID";
             this.lvcSpellsS3LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS3LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS3LearnedID.Text = "S3LearnedID";
             this.lvcSpellsS3LearnedID.Width = 90;
             // 
@@ -664,7 +659,6 @@
             // 
             this.lvcSpellsS4LearnedID.AspectName = "S4LearnedID";
             this.lvcSpellsS4LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS4LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS4LearnedID.Text = "S4LearnedID";
             this.lvcSpellsS4LearnedID.Width = 90;
             // 
@@ -686,7 +680,6 @@
             // 
             this.lvcSpellsS5LearnedID.AspectName = "S5LearnedID";
             this.lvcSpellsS5LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS5LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS5LearnedID.Text = "S5LearnedID";
             this.lvcSpellsS5LearnedID.Width = 90;
             // 
@@ -708,7 +701,6 @@
             // 
             this.lvcSpellsS6LearnedID.AspectName = "S6LearnedID";
             this.lvcSpellsS6LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS6LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS6LearnedID.Text = "S6LearnedID";
             this.lvcSpellsS6LearnedID.Width = 90;
             // 
@@ -730,7 +722,6 @@
             // 
             this.lvcSpellsS7LearnedID.AspectName = "S7LearnedID";
             this.lvcSpellsS7LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS7LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS7LearnedID.Text = "S7LearnedID";
             this.lvcSpellsS7LearnedID.Width = 90;
             // 
@@ -752,7 +743,6 @@
             // 
             this.lvcSpellsS8LearnedID.AspectName = "S8LearnedID";
             this.lvcSpellsS8LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS8LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS8LearnedID.Text = "S8LearnedID";
             this.lvcSpellsS8LearnedID.Width = 90;
             // 
@@ -774,7 +764,6 @@
             // 
             this.lvcSpellsS9LearnedID.AspectName = "S9LearnedID";
             this.lvcSpellsS9LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS9LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS9LearnedID.Text = "S9LearnedID";
             this.lvcSpellsS9LearnedID.Width = 90;
             // 
@@ -796,7 +785,6 @@
             // 
             this.lvcSpellsS10LearnedID.AspectName = "S10LearnedID";
             this.lvcSpellsS10LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS10LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS10LearnedID.Text = "S10LearnedID";
             this.lvcSpellsS10LearnedID.Width = 90;
             // 
@@ -818,7 +806,6 @@
             // 
             this.lvcSpellsS11LearnedID.AspectName = "S11LearnedID";
             this.lvcSpellsS11LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS11LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS11LearnedID.Text = "S11LearnedID";
             this.lvcSpellsS11LearnedID.Width = 90;
             // 
@@ -840,7 +827,6 @@
             // 
             this.lvcSpellsS12LearnedID.AspectName = "S12LearnedID";
             this.lvcSpellsS12LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS12LearnedID.HeaderFont = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvcSpellsS12LearnedID.Text = "S12LearnedID";
             this.lvcSpellsS12LearnedID.Width = 90;
             // 
