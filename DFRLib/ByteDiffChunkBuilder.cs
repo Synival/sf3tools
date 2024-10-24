@@ -1,13 +1,9 @@
-﻿using DFRLib.Exceptions;
+﻿using System.Collections.Generic;
+using DFRLib.Exceptions;
 using DFRLib.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace DFRLib
-{
-    public struct ByteDiffChunkBuilderOptions
-    {
+namespace DFRLib {
+    public struct ByteDiffChunkBuilderOptions {
         public bool CombineAppendedChunks;
     }
 
@@ -17,20 +13,16 @@ namespace DFRLib
     ///     1. Feed it data using Feed()
     ///     2. Get all chunks using FetchChunks()
     /// </summary>
-    public class ByteDiffChunkBuilder
-    {
+    public class ByteDiffChunkBuilder {
         /// <summary>
         /// A work-in-progress chunk.
         /// </summary>
-        private class CurrentChunk
-        {
-            public CurrentChunk(ulong address)
-            {
+        private class CurrentChunk {
+            public CurrentChunk(ulong address) {
                 _address = address;
             }
 
-            public void FeedDiff(byte byteFrom, byte byteTo)
-            {
+            public void FeedDiff(byte byteFrom, byte byteTo) {
                 if (!IsEmptyChunk && !IsDiffChunk)
                     throw new ByteDiffException("Tried to feed 'diff' data into the wrong kind of chunk");
 
@@ -45,8 +37,7 @@ namespace DFRLib
                 _toBuffer[_toSize++] = byteTo;
             }
 
-            public void FeedAppend(byte byteTo)
-            {
+            public void FeedAppend(byte byteTo) {
                 if (!IsEmptyChunk && !IsAppendChunk)
                     throw new ByteDiffException("Tried to feed 'append' data into the wrong kind of chunk");
 
@@ -58,8 +49,7 @@ namespace DFRLib
                 _toBuffer[_toSize++] = byteTo;
             }
 
-            public void TrimToTrailingZeroes()
-            {
+            public void TrimToTrailingZeroes() {
                 _toSize = 0;
                 while (_toBuffer[_toSize] != 0x00)
                     _toSize++;
@@ -80,9 +70,7 @@ namespace DFRLib
         }
 
         public ByteDiffChunkBuilder(ByteDiffChunkBuilderOptions? options = null)
-        {
-            Options = options ?? new ByteDiffChunkBuilderOptions();
-        }
+            => Options = options ?? new ByteDiffChunkBuilderOptions();
 
         /// <summary>
         /// Takes in bytes from the 'from' and 'to' data sources and builds a new "diff" chunk,
@@ -90,11 +78,9 @@ namespace DFRLib
         /// </summary>
         /// <param name="byteFrom">Byte in the 'from' data.</param>
         /// <param name="byteTo">Byte in the 'to' data.</param>
-        public void FeedDiff(byte byteFrom, byte byteTo)
-        {
+        public void FeedDiff(byte byteFrom, byte byteTo) {
             // Ignore unchanged bytes, but if we were in the middle of a DiffChunk, finalize it.
-            if (byteFrom == byteTo)
-            {
+            if (byteFrom == byteTo) {
                 CommitCurrentChunks();
                 _inputAddress++;
                 return;
@@ -117,11 +103,9 @@ namespace DFRLib
         /// committing completed chunks along the way.
         /// </summary>
         /// <param name="byteTo">Byte in the 'to' data.</param>
-        public void FeedAppend(byte byteTo)
-        {
+        public void FeedAppend(byte byteTo) {
             // Zeroes can be ignored if we're not actually working on a chunk.
-            if (_currentChunk == null && byteTo == 0x00)
-            {
+            if (_currentChunk == null && byteTo == 0x00) {
                 _inputAddress++;
                 return;
             }
@@ -132,10 +116,8 @@ namespace DFRLib
 
             // If the last chunk was writing zeroes, and we started a new chunk, the trailing zeroes from the previous
             // chunk can be trimmed.
-            if (!Options.CombineAppendedChunks)
-            {
-                if (_currentChunk != null && _currentChunk.LastByteTo == 0x00 && byteTo != 0x00)
-                {
+            if (!Options.CombineAppendedChunks) {
+                if (_currentChunk != null && _currentChunk.LastByteTo == 0x00 && byteTo != 0x00) {
                     _currentChunk.TrimToTrailingZeroes();
                     CommitCurrentChunks();
                 }
@@ -152,8 +134,7 @@ namespace DFRLib
         /// <summary>
         /// Commits any chunk in progress. This should be called after reading all data from the data sources.
         /// </summary>
-        public void CommitCurrentChunks()
-        {
+        public void CommitCurrentChunks() {
             if (_currentChunk == null)
                 return;
 
@@ -166,8 +147,7 @@ namespace DFRLib
         /// By default, any chunks in progress will be committed first.
         /// </summary>
         /// <returns>The current list of ByteDiffChunk's.</returns>
-        public List<ByteDiffChunk> FetchChunks(bool commitChunksInProgress = true)
-        {
+        public List<ByteDiffChunk> FetchChunks(bool commitChunksInProgress = true) {
             if (commitChunksInProgress)
                 CommitCurrentChunks();
 

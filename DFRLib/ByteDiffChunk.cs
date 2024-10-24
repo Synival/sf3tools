@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DFRLib
-{
+namespace DFRLib {
     /// <summary>
     /// A sequence of contiguous bytes changed at an address.
     /// </summary>
-    public class ByteDiffChunk
-    {
+    public class ByteDiffChunk {
         /// <summary>
         /// Converts a sequence of bytes to a long string of hex values.
         /// </summary>
         /// <param name="bytes">A sequence of bytes.</param>
         /// <returns>A string.</returns>
-        public static string MakeByteHexStr(IEnumerable<byte> bytes)
-        {
+        public static string MakeByteHexStr(IEnumerable<byte> bytes) {
             var sb = new StringBuilder();
             foreach (var b in bytes)
                 sb.Append(b.ToString("x2"));
@@ -30,8 +26,7 @@ namespace DFRLib
         /// <param name="bytesFrom">What was originally present. Must be the same size as 'bytesTo'.</param>
         /// <param name="bytesTo">What the bytes have been changed to. Must be the same size as 'bytesFrom'.</param>
         /// <exception cref="ArgumentException">Thrown if 'bytesFrom' and 'bytesTo' have differing size.</exception>
-        public ByteDiffChunk(ulong address, byte[] bytesFrom, byte[] bytesTo)
-        {
+        public ByteDiffChunk(ulong address, byte[] bytesFrom, byte[] bytesTo) {
             Address = address;
             if (bytesFrom.Length != bytesTo.Length)
                 throw new ArgumentException(nameof(bytesFrom) + " and " + nameof(bytesTo) + " must be the same size");
@@ -50,23 +45,20 @@ namespace DFRLib
         /// <param name="fromSize">The size of the 'from' chunk.</param>
         /// <param name="toSize">The size of the 'to' chunk.</param>
         /// <exception cref="ArgumentException">Thrown if 'bytesFrom' or 'bytesTo' have fewer bytes than 'size'.</exception>
-        public ByteDiffChunk(ulong address, byte[] bytesFrom, byte[] bytesTo, int fromSize, int toSize)
-        {
+        public ByteDiffChunk(ulong address, byte[] bytesFrom, byte[] bytesTo, int fromSize, int toSize) {
             Address = address;
             if (bytesFrom.Length < fromSize)
                 throw new ArgumentException(nameof(bytesFrom) + " is smaller than its requested size");
             if (bytesTo.Length < toSize)
                 throw new ArgumentException(nameof(bytesTo) + " is smaller than its requested size");
 
-            if (bytesFrom.Length != fromSize)
-            {
+            if (bytesFrom.Length != fromSize) {
                 var newBytes = new byte[fromSize];
                 Array.Copy(bytesFrom, newBytes, fromSize);
                 bytesFrom = newBytes;
             }
 
-            if (bytesTo.Length != toSize)
-            {
+            if (bytesTo.Length != toSize) {
                 var newBytes = new byte[toSize];
                 Array.Copy(bytesTo, newBytes, toSize);
                 bytesTo = newBytes;
