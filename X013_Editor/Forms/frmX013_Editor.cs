@@ -1,23 +1,20 @@
 ﻿using System;
-using BrightIdeasSoftware;
-using SF3.Types;
 using System.Collections.Generic;
-using SF3.Editor.Forms;
+using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
-using static SF3.Editor.Extensions.TabControlExtensions;
+using SF3.Editor.Forms;
 using SF3.FileEditors;
+using SF3.Types;
+using static SF3.Editor.Extensions.TabControlExtensions;
 
-namespace SF3.X013_Editor.Forms
-{
-    public partial class frmX013_Editor : EditorForm
-    {
+namespace SF3.X013_Editor.Forms {
+    public partial class frmX013_Editor : EditorForm {
         // Used to display version in the application
         private string Version = "0.18";
 
         new public IX013_FileEditor FileEditor => base.FileEditor as IX013_FileEditor;
 
-        public frmX013_Editor()
-        {
+        public frmX013_Editor() {
             InitializeComponent();
             BaseTitle = this.Text + " " + Version;
 
@@ -34,8 +31,7 @@ namespace SF3.X013_Editor.Forms
             ScenarioChanged += onScenarioChanged;
             onScenarioChanged(null, EventArgs.Empty);
 
-            FileIsLoadedChanged += (obj, eargs) =>
-            {
+            FileIsLoadedChanged += (obj, eargs) => {
                 tsmiFile_SaveAs.Enabled = IsLoaded == true;
                 tsmiFile_Close.Enabled = IsLoaded == true;
             };
@@ -47,15 +43,11 @@ namespace SF3.X013_Editor.Forms
 
         protected override IFileEditor MakeFileEditor() => new X013_FileEditor(Scenario);
 
-        protected override bool OnLoad()
-        {
+        protected override bool OnLoad() {
             if (!base.OnLoad())
-            {
                 return false;
-            }
 
-            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()
-            {
+            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>() {
                 new PopulateTabConfig(tabSpecials, olvSpecials, FileEditor.SpecialsList),
                 new PopulateTabConfig(tabFriendshipExp, olvFriendshipExp, FileEditor.FriendshipExpList),
                 new PopulateTabConfig(tabSupportType, olvSupportType, FileEditor.SupportTypeList),
