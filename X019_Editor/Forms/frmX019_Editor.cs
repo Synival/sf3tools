@@ -1,28 +1,23 @@
 ﻿using System;
-using BrightIdeasSoftware;
-using SF3.Types;
 using System.Collections.Generic;
-using SF3.Editor.Forms;
+using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
-using static SF3.Editor.Extensions.TabControlExtensions;
+using SF3.Editor.Forms;
 using SF3.FileEditors;
+using SF3.Types;
+using static SF3.Editor.Extensions.TabControlExtensions;
 
-namespace SF3.X019_Editor.Forms
-{
-    public partial class frmX019_Editor : EditorForm
-    {
+namespace SF3.X019_Editor.Forms {
+    public partial class frmX019_Editor : EditorForm {
         // Used to display version in the application
         private string Version = "0.13";
 
         private bool _isX044 = false;
 
-        public bool IsX044
-        {
+        public bool IsX044 {
             get => _isX044;
-            set
-            {
-                if (_isX044 != value)
-                {
+            set {
+                if (_isX044 != value) {
                     _isX044 = value;
                     UpdateCheckboxes();
                 }
@@ -31,8 +26,7 @@ namespace SF3.X019_Editor.Forms
 
         new public IX019_FileEditor FileEditor => base.FileEditor as IX019_FileEditor;
 
-        public frmX019_Editor()
-        {
+        public frmX019_Editor() {
             InitializeComponent();
             BaseTitle = this.Text + " " + Version;
 
@@ -41,8 +35,7 @@ namespace SF3.X019_Editor.Forms
             ScenarioChanged += (obj, eargs) => UpdateCheckboxes();
             UpdateCheckboxes();
 
-            FileIsLoadedChanged += (obj, eargs) =>
-            {
+            FileIsLoadedChanged += (obj, eargs) => {
                 tsmiFile_SaveAs.Enabled = IsLoaded == true;
                 tsmiFile_Close.Enabled = IsLoaded == true;
             };
@@ -57,15 +50,11 @@ namespace SF3.X019_Editor.Forms
 
         protected override IFileEditor MakeFileEditor() => new X019_FileEditor(Scenario, IsX044);
 
-        protected override bool OnLoad()
-        {
+        protected override bool OnLoad() {
             if (!base.OnLoad())
-            {
                 return false;
-            }
 
-            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()
-            {
+            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>() {
                 new PopulateTabConfig(tabMonsterTab1, olvMonsterTab1, FileEditor.MonsterList),
                 new PopulateTabConfig(tabMonsterTab2, olvMonsterTab2, FileEditor.MonsterList),
                 new PopulateTabConfig(tabMonsterTab3, olvMonsterTab3, FileEditor.MonsterList),
@@ -81,38 +70,32 @@ namespace SF3.X019_Editor.Forms
         private void tsmiFile_Close_Click(object sender, EventArgs e) => CloseFile();
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
 
-        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e)
-        {
+        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) {
             Scenario = ScenarioType.Scenario1;
             IsX044 = false;
         }
 
-        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e)
-        {
+        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) {
             Scenario = ScenarioType.Scenario2;
             IsX044 = false;
         }
 
-        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e)
-        {
+        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) {
             Scenario = ScenarioType.Scenario3;
             IsX044 = false;
         }
 
-        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e)
-        {
+        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) {
             Scenario = ScenarioType.PremiumDisk;
             IsX044 = false;
         }
 
-        private void tsmiScenario_PremiumDiskX044_Click(object sender, EventArgs e)
-        {
+        private void tsmiScenario_PremiumDiskX044_Click(object sender, EventArgs e) {
             Scenario = ScenarioType.PremiumDisk;
             IsX044 = true;
         }
 
-        private void UpdateCheckboxes()
-        {
+        private void UpdateCheckboxes() {
             tsmiScenario_Scenario1.Checked = (Scenario == ScenarioType.Scenario1);
             tsmiScenario_Scenario2.Checked = (Scenario == ScenarioType.Scenario2);
             tsmiScenario_Scenario3.Checked = (Scenario == ScenarioType.Scenario3);
