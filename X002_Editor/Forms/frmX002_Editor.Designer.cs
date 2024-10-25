@@ -37,13 +37,13 @@ namespace SF3.X002_Editor.Forms
             this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario3 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_PremiumDisk = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
             this.tabSpells = new System.Windows.Forms.TabPage();
             this.olvSpells = new BrightIdeasSoftware.ObjectListView();
             this.lvcSpellsID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -274,20 +274,6 @@ namespace SF3.X002_Editor.Forms
             this.tsmiFile_Exit.Text = "E&xit";
             this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
             // 
-            // tsmiHelp
-            // 
-            this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiHelp_Version});
-            this.tsmiHelp.Name = "tsmiHelp";
-            this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
-            this.tsmiHelp.Text = "&Help";
-            // 
-            // tsmiHelp_Version
-            // 
-            this.tsmiHelp_Version.Name = "tsmiHelp_Version";
-            this.tsmiHelp_Version.Size = new System.Drawing.Size(190, 22);
-            this.tsmiHelp_Version.Text = "Version (set internally)";
-            // 
             // tsmiScenario
             // 
             this.tsmiScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -330,6 +316,20 @@ namespace SF3.X002_Editor.Forms
             this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(189, 22);
             this.tsmiScenario_PremiumDisk.Text = "&Premium Disk";
             this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.tsmiScenario_PremiumDisk_Click);
+            // 
+            // tsmiHelp
+            // 
+            this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiHelp_Version});
+            this.tsmiHelp.Name = "tsmiHelp";
+            this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
+            this.tsmiHelp.Text = "&Help";
+            // 
+            // tsmiHelp_Version
+            // 
+            this.tsmiHelp_Version.Name = "tsmiHelp_Version";
+            this.tsmiHelp_Version.Size = new System.Drawing.Size(190, 22);
+            this.tsmiHelp_Version.Text = "Version (set internally)";
             // 
             // tabSpells
             // 
@@ -767,7 +767,7 @@ namespace SF3.X002_Editor.Forms
             this.lvcItemsEffectiveType1.AspectToStringFormat = "{0:X}";
             this.lvcItemsEffectiveType1.DisplayIndex = 10;
             this.lvcItemsEffectiveType1.Text = "Effective type 1";
-            this.lvcItemsEffectiveType1.Width = 90;
+            this.lvcItemsEffectiveType1.Width = 120;
             // 
             // lvcItemsUnknown1
             // 
@@ -783,7 +783,7 @@ namespace SF3.X002_Editor.Forms
             this.lvcItemsEffectiveType2.AspectToStringFormat = "{0:X}";
             this.lvcItemsEffectiveType2.DisplayIndex = 12;
             this.lvcItemsEffectiveType2.Text = "Effective type 2";
-            this.lvcItemsEffectiveType2.Width = 90;
+            this.lvcItemsEffectiveType2.Width = 120;
             // 
             // lvcItemsEffective2Pow
             // 

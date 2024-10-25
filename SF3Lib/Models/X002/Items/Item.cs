@@ -203,13 +203,15 @@ namespace SF3.Models.X002.Items {
             get => _fileEditor.GetByte(AttackUpRankLocation);
             set => _fileEditor.SetByte(AttackUpRankLocation, (byte) value);
         }
+
         public int SpellRank {
             get => _fileEditor.GetByte(SpellUpRankLocation);
             set => _fileEditor.SetByte(SpellUpRankLocation, (byte) value);
         }
-        public int PhysicalAttribute {
-            get => _fileEditor.GetByte(PhysicalAttributeLocation);
-            set => _fileEditor.SetByte(PhysicalAttributeLocation, (byte) value);
+
+        public EffectiveTypeValue PhysicalAttribute {
+            get => new EffectiveTypeValue(_fileEditor.GetByte(PhysicalAttributeLocation));
+            set => _fileEditor.SetByte(PhysicalAttributeLocation, (byte) value.Value);
         }
 
         public int Unknown1 {
@@ -217,9 +219,9 @@ namespace SF3.Models.X002.Items {
             set => _fileEditor.SetByte(Unknown1Location, (byte) value);
         }
 
-        public int MonsterType {
-            get => _fileEditor.GetByte(MonsterTypeAttributeLocation);
-            set => _fileEditor.SetByte(MonsterTypeAttributeLocation, (byte) value);
+        public EffectiveTypeValue MonsterType {
+            get => new EffectiveTypeValue(_fileEditor.GetByte(MonsterTypeAttributeLocation));
+            set => _fileEditor.SetByte(MonsterTypeAttributeLocation, (byte) value.Value);
         }
 
         public int Unknown2 {
