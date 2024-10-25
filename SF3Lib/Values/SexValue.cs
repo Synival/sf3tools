@@ -1,4 +1,4 @@
-﻿namespace SF3.Values {
+namespace SF3.Values {
     public class SexValueResourceInfo : NamedValueFromResourceInfo {
         public SexValueResourceInfo() : base("Sexes.xml") {
         }

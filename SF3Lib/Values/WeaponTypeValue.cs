@@ -1,4 +1,4 @@
-﻿namespace SF3.Values {
+namespace SF3.Values {
     public class WeaponTypeValueResourceInfo : NamedValueFromResourceInfo {
         public WeaponTypeValueResourceInfo() : base("WeaponTypes.xml") {
         }

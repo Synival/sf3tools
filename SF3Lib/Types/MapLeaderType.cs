@@ -1,4 +1,4 @@
-﻿namespace SF3.Types {
+namespace SF3.Types {
     /// <summary>
     /// The leader of a map in X1*.BIN files.
     /// </summary>

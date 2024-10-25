@@ -1,4 +1,4 @@
-﻿using SF3.FileEditors;
+using SF3.FileEditors;
 using SF3.Types;
 using static SF3LibTests.Utils;
 

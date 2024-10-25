@@ -1,4 +1,4 @@
-﻿using DFRLib;
+using DFRLib;
 using NDesk.Options;
 
 namespace DFRTool {

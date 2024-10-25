@@ -1,4 +1,4 @@
-﻿namespace SF3.IconPointerEditor.Forms
+namespace SF3.IconPointerEditor.Forms
 {
     partial class frmIconPointerEditor
     {

@@ -1,4 +1,4 @@
-﻿using SF3.Models.X002.AttackResist;
+using SF3.Models.X002.AttackResist;
 using SF3.Models.X002.Items;
 using SF3.Models.X002.LoadedOverride;
 using SF3.Models.X002.Loading;

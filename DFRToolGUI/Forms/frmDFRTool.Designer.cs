@@ -1,4 +1,4 @@
-﻿namespace DFRToolGUI.Forms
+namespace DFRToolGUI.Forms
 {
     partial class frmDFRTool
     {
