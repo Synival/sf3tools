@@ -407,18 +407,22 @@ namespace SF3.Models.X019.Monsters {
             get => _fileEditor.GetByte(unknown2);
             set => _fileEditor.SetByte(unknown2, (byte) value);
         }
+
         public int Unknown3 {
             get => _fileEditor.GetByte(unknown3);
             set => _fileEditor.SetByte(unknown3, (byte) value);
         }
+
         public int Unknown4 {
             get => _fileEditor.GetByte(unknown4);
             set => _fileEditor.SetByte(unknown4, (byte) value);
         }
+
         public int Unknown5 {
             get => _fileEditor.GetByte(unknown5);
             set => _fileEditor.SetByte(unknown5, (byte) value);
         }
+
         public int Unknown6 {
             get => _fileEditor.GetByte(unknown6);
             set => _fileEditor.SetByte(unknown6, (byte) value);
@@ -438,14 +442,17 @@ namespace SF3.Models.X019.Monsters {
             get => _fileEditor.GetByte(unknown7);
             set => _fileEditor.SetByte(unknown7, (byte) value);
         }
+
         public int Unknown8 {
             get => _fileEditor.GetByte(unknown8);
             set => _fileEditor.SetByte(unknown8, (byte) value);
         }
+
         public int Unknown9 {
             get => _fileEditor.GetByte(unknown9);
             set => _fileEditor.SetByte(unknown9, (byte) value);
         }
+
         public int Unknown10 {
             get => _fileEditor.GetByte(unknown10);
             set => _fileEditor.SetByte(unknown10, (byte) value);

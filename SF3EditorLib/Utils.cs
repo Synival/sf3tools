@@ -8,7 +8,13 @@ namespace SF3.Editor {
         /// </summary>
         /// <param name="allPossibleValues">All values possible for the ComboBox (not just the valid named ones).</param>
         /// <returns>A new pre-configured ComboBox.</returns>
-        public static ComboBox MakeNamedValueComboBox(Dictionary<NamedValue, string> allPossibleValues) {
+        public static ComboBox MakeNamedValueComboBox(Dictionary<NamedValue, string> allPossibleValues, NamedValue extraValue) {
+            if (!allPossibleValues.ContainsKey(extraValue)) {
+                allPossibleValues = new Dictionary<NamedValue, string>(allPossibleValues) {
+                    { extraValue, extraValue.ValueName }
+                };
+            }
+
             var comboBox = new ComboBox();
             comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox.DataSource = new BindingSource(allPossibleValues, null);
