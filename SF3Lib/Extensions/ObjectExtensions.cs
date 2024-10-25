@@ -30,29 +30,31 @@ namespace SF3.Extensions {
         /// Returns a hex value for the string if possible. Otherwise returns ToString().
         /// </summary>
         /// <param name="obj">Object to ToString() or return a hex value for.</param>
-        /// <returns></returns>
+        /// <returns>The value of 'obj' formatted, if possible, with 'formatString' or "X2".
+        /// Otherwise returns obj.ToString().</returns>
         public static string ToStringHex(this object obj, string formatString = null) {
-            // TODO: is there something fancy we can do here?
-            if (obj == null)
-                throw new ArgumentNullException(nameof(obj));
-            else if (obj is byte)
-                return "0x" + ((byte) obj).ToString(formatString ?? "X2");
-            else if (obj is sbyte)
-                return "0x" + ((sbyte) obj).ToString(formatString ?? "X2");
-            else if (obj is ushort)
-                return "0x" + ((ushort) obj).ToString(formatString ?? "X2");
-            else if (obj is short)
-                return "0x" + ((short) obj).ToString(formatString ?? "X2");
-            else if (obj is uint)
-                return "0x" + ((uint) obj).ToString(formatString ?? "X2");
-            else if (obj is int)
-                return "0x" + ((int) obj).ToString(formatString ?? "X2");
-            else if (obj is ulong)
-                return "0x" + ((ulong) obj).ToString(formatString ?? "X2");
-            else if (obj is long)
-                return "0x" + ((long) obj).ToString(formatString ?? "X2");
-            else
-                return obj.ToString();
+            switch (obj) {
+                case null:
+                    throw new ArgumentNullException(nameof(obj));
+                case byte v:
+                    return "0x" + v.ToString(formatString ?? "X2");
+                case sbyte v:
+                    return "0x" + v.ToString(formatString ?? "X2");
+                case ushort v:
+                    return "0x" + v.ToString(formatString ?? "X2");
+                case short v:
+                    return "0x" + v.ToString(formatString ?? "X2");
+                case uint v:
+                    return "0x" + v.ToString(formatString ?? "X2");
+                case int v:
+                    return "0x" + v.ToString(formatString ?? "X2");
+                case ulong v:
+                    return "0x" + v.ToString(formatString ?? "X2");
+                case long v:
+                    return "0x" + v.ToString(formatString ?? "X2");
+                default:
+                    return obj.ToString();
+            }
         }
     }
 }
