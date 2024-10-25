@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
@@ -30,7 +31,63 @@ namespace SF3.Editor.Forms {
         /// <summary>
         /// Function to be called after derived class's InitializeComponent() is called.
         /// </summary>
-        public void FinalizeForm() {
+        public void InitializeEditor(ToolStrip toolStrip) {
+            if (toolStrip != null) {
+                var menuItems = new Dictionary<string, ToolStripMenuItem>();
+                foreach (var ti in this.menuStrip1.Items) {
+                    if (ti is ToolStripMenuItem tsmi)
+                        menuItems.Add(tsmi.Text, tsmi);
+                }
+
+                // It's dangerous to modify the list as we iterate over it, so store the actions for later.
+                var actions = new List<Action>();
+
+                foreach (var ti in toolStrip.Items) {
+                    if (ti is ToolStripMenuItem tsmi) {
+                        var tsmiCopy = tsmi;
+                        if (menuItems.ContainsKey(tsmi.Text)) {
+                            actions.Add(() => {
+                                while (tsmiCopy.DropDownItems.Count > 0)
+                                    menuItems[tsmiCopy.Text].DropDownItems.Add(tsmiCopy.DropDownItems[0]);
+                                tsmiCopy.DropDownItems.Clear();
+                            });
+                        }
+                        else
+                            actions.Add(() => menuStrip1.Items.Insert(menuStrip1.Items.IndexOf(tsmiHelp), tsmi));
+                    }
+                    else {
+                        var tsi = ti as ToolStripItem;
+                        actions.Add(() => menuStrip1.Items.Add(tsi));
+                    }
+                }
+
+                foreach (var action in actions)
+                    action();
+
+                toolStrip.Items.Clear();
+                this.Controls.Remove(toolStrip);
+            }
+
+            _baseTitle = this.Text + " v" + Version;
+            this.tsmiHelp_Version.Text = "Version " + Version;
+            this.Scenario = ScenarioType.Scenario1;
+
+            EventHandler onScenarioChanged = (obj, eargs) => {
+                tsmiScenario_Scenario1.Checked = (Scenario == ScenarioType.Scenario1);
+                tsmiScenario_Scenario2.Checked = (Scenario == ScenarioType.Scenario2);
+                tsmiScenario_Scenario3.Checked = (Scenario == ScenarioType.Scenario3);
+                tsmiScenario_PremiumDisk.Checked = (Scenario == ScenarioType.PremiumDisk);
+            };
+
+            ScenarioChanged += onScenarioChanged;
+            onScenarioChanged(null, EventArgs.Empty);
+
+            FileIsLoadedChanged += (obj, eargs) => {
+                tsmiFile_SaveAs.Enabled = IsLoaded == true;
+                tsmiFile_CopyTablesFrom.Enabled = IsLoaded == true;
+                tsmiFile_Close.Enabled = IsLoaded == true;
+            };
+
             ObjectListViews = this.GetAllObjectsOfTypeInFields<ObjectListView>(false);
             UpdateTitle();
         }
@@ -214,12 +271,11 @@ namespace SF3.Editor.Forms {
                     e.Cancel = true;
         }
 
-        /// <summary>
-        /// Title of the form set in the designer. Should be set after derived class' InitializeComponent().
-        /// </summary>
-        public string BaseTitle { get; protected set; }
+        private string _baseTitle;
 
-        private ScenarioType _scenario = ScenarioType.Scenario1;
+        protected virtual string Version => "(unset)";
+
+        private ScenarioType _scenario = (ScenarioType) (-1); // Uninitialized value
 
         /// <summary>
         /// The Scenario set for editing.
@@ -254,8 +310,8 @@ namespace SF3.Editor.Forms {
         /// </summary>
         /// <returns></returns>
         protected virtual string MakeTitle() => (FileEditor?.IsLoaded == true)
-            ? FileEditor.EditorTitle(BaseTitle)
-            : BaseTitle;
+            ? FileEditor.EditorTitle(_baseTitle)
+            : _baseTitle;
 
         /// <summary>
         /// File filter for OpenFileDialog() and SaveFileDialog(). Must be overridden.
@@ -316,5 +372,16 @@ namespace SF3.Editor.Forms {
         /// Triggered after FileEditor's loaded state has been changed.
         /// </summary>
         public event EventHandler FileIsLoadedChanged;
+
+        protected virtual void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
+        protected virtual void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();
+        protected virtual void tsmiFile_Close_Click(object sender, EventArgs e) => CloseFile();
+        protected virtual void tsmiFile_CopyTablesFrom_Click(object sender, EventArgs e) => CopyTablesFrom();
+        protected virtual void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
+
+        protected virtual void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario1;
+        protected virtual void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;
+        protected virtual void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
+        protected virtual void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
     }
 }

@@ -10,7 +10,7 @@ using static SF3.Editor.Extensions.TabControlExtensions;
 namespace SF3.X1_Editor.Forms {
     public partial class frmX1_Editor : EditorForm {
         // Used to display version in the application
-        private string Version = "0.36";
+        protected override string Version => "0.36";
 
         private bool _isBTL99 = false;
 
@@ -26,44 +26,25 @@ namespace SF3.X1_Editor.Forms {
 
         new public IX1_FileEditor FileEditor => base.FileEditor as IX1_FileEditor;
 
-        private MapLeaderType _mapLeader = MapLeaderType.Synbios;
+        private MapLeaderType _mapLeader = (MapLeaderType) (-1); // uninitialized value
 
         private MapLeaderType MapLeader {
             get => _mapLeader;
             set {
-                _mapLeader = value;
-                tsmiMap_MapSynbios.Checked = (_mapLeader == MapLeaderType.Synbios);
-                tsmiMap_MapMedion.Checked = (_mapLeader == MapLeaderType.Medion);
-                tsmiMap_MapJulian.Checked = (_mapLeader == MapLeaderType.Julian);
-                tsmiMap_MapExtra.Checked = (_mapLeader == MapLeaderType.Extra);
+                if (_mapLeader != value) {
+                    _mapLeader = value;
+                    tsmiMap_MapSynbios.Checked = (_mapLeader == MapLeaderType.Synbios);
+                    tsmiMap_MapMedion.Checked = (_mapLeader == MapLeaderType.Medion);
+                    tsmiMap_MapJulian.Checked = (_mapLeader == MapLeaderType.Julian);
+                    tsmiMap_MapExtra.Checked = (_mapLeader == MapLeaderType.Extra);
+                }
             }
         }
 
         public frmX1_Editor() {
             InitializeComponent();
-            BaseTitle = this.Text + " " + Version;
-
-            this.tsmiHelp_Version.Text = "Version " + Version;
-            Scenario = ScenarioType.Scenario1;
-            MapLeader = 0x00;
-
-            EventHandler onScenarioChanged = (obj, eargs) =>
-            {
-                tsmiScenario_Scenario1.Checked = (Scenario == ScenarioType.Scenario1);
-                tsmiScenario_Scenario2.Checked = (Scenario == ScenarioType.Scenario2);
-                tsmiScenario_Scenario3.Checked = (Scenario == ScenarioType.Scenario3);
-                tsmiScenario_PremiumDisk.Checked = (Scenario == ScenarioType.PremiumDisk);
-            };
-
-            ScenarioChanged += onScenarioChanged;
-            onScenarioChanged(this, EventArgs.Empty);
-
-            FileIsLoadedChanged += (obj, eargs) => {
-                tsmiFile_SaveAs.Enabled = IsLoaded == true;
-                tsmiFile_Close.Enabled = IsLoaded == true;
-            };
-
-            FinalizeForm();
+            InitializeEditor(menuStrip1);
+            MapLeader = MapLeaderType.Synbios;
         }
 
         protected override string FileDialogFilter => IsBTL99
@@ -97,31 +78,26 @@ namespace SF3.X1_Editor.Forms {
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
 
-        private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
-        private void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();
-        private void tsmiFile_Close_Click(object sender, EventArgs e) => CloseFile();
-        private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
-
-        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) {
-            Scenario = ScenarioType.Scenario1;
+        protected override void tsmiScenario_Scenario1_Click(object sender, EventArgs e) {
+            base.tsmiScenario_Scenario1_Click(sender, e);
             if (!IsBTL99)
                 MapLeader = MapLeaderType.Synbios;
         }
 
-        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) {
-            Scenario = ScenarioType.Scenario2;
+        protected override void tsmiScenario_Scenario2_Click(object sender, EventArgs e) {
+            base.tsmiScenario_Scenario2_Click(sender, e);
             if (!IsBTL99)
                 MapLeader = MapLeaderType.Medion;
         }
 
-        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) {
-            Scenario = ScenarioType.Scenario3;
+        protected override void tsmiScenario_Scenario3_Click(object sender, EventArgs e) {
+            base.tsmiScenario_Scenario3_Click(sender, e);
             if (!IsBTL99)
                 MapLeader = MapLeaderType.Julian;
         }
 
-        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) {
-            Scenario = ScenarioType.PremiumDisk;
+        protected override void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) {
+            base.tsmiScenario_PremiumDisk_Click(sender, e);
             if (!IsBTL99)
                 MapLeader = MapLeaderType.Synbios;
         }

@@ -26,7 +26,7 @@ namespace SF3.X033_X031_Editor.Forms {
 
     public partial class frmX033_X031_Editor : EditorForm {
         // Used to display version in the application
-        private string Version = "0.21";
+        protected override string Version => "0.21";
 
         new public IX033_X031_FileEditor FileEditor => base.FileEditor as IX033_X031_FileEditor;
 
@@ -52,28 +52,7 @@ namespace SF3.X033_X031_Editor.Forms {
 
         public frmX033_X031_Editor() {
             InitializeComponent();
-            BaseTitle = this.Text + " " + Version;
-
-            this.tsmiHelp_Version.Text = "Version " + Version;
-
-            EventHandler onScenarioChanged = (obj, eargs) =>
-            {
-                tsmiScenario_Scenario1.Checked = (Scenario == ScenarioType.Scenario1);
-                tsmiScenario_Scenario2.Checked = (Scenario == ScenarioType.Scenario2);
-                tsmiScenario_Scenario3.Checked = (Scenario == ScenarioType.Scenario3);
-                tsmiScenario_PremiumDisk.Checked = (Scenario == ScenarioType.PremiumDisk);
-            };
-
-            ScenarioChanged += onScenarioChanged;
-            onScenarioChanged(null, EventArgs.Empty);
-
-            FileIsLoadedChanged += (obj, eargs) => {
-                tsmiFile_SaveAs.Enabled = IsLoaded == true;
-                tsmiFile_CopyTablesFrom.Enabled = IsLoaded == true;
-                tsmiFile_Close.Enabled = IsLoaded == true;
-            };
-
-            FinalizeForm();
+            InitializeEditor(menuStrip1);
         }
 
         protected override string FileDialogFilter => "SF3 data (X033.bin;X031.bin)|X033.bin;X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
@@ -104,17 +83,6 @@ namespace SF3.X033_X031_Editor.Forms {
         }
 
         private void olvCellEditStarting(object sender, CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
-
-        private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
-        private void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();
-        private void tsmiFile_Close_Click(object sender, EventArgs e) => CloseFile();
-        private void tsmiFile_CopyTablesFrom_Click(object sender, EventArgs e) => CopyTablesFrom();
-        private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
-
-        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario1;
-        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;
-        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
-        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
 
         private void tsmiHelp_DebugCurve_Click(object sender, EventArgs e) {
             Models.X033_X031.Stats.Stats.DebugGrowthValues = !Models.X033_X031.Stats.Stats.DebugGrowthValues;
