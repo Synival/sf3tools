@@ -30,9 +30,15 @@ They require the .NET 8.0 runtime to use.
 
 ### X002 Editor
 - Added more dropdowns with value names for columns:
-    - Element
-    - Spell Target
-    - Effective Type 1, Effective Type 2
+    - Items:
+        - Effective Type 1, Effective Type 2
+    - Spells:
+        - Element
+        - Spell Target
+    - Loaded:
+        - Added dropdowns for file indexes (X1, X5, MPD, CHR)
+    - LoadOverride:
+        - Added dropdowns for file indexes (synMPD, medMPD, julMPD, extraMPD, synCHR, medCHR, julCHR, extraCHR)
 
 ### X019 Editor
 - Added more dropdowns with value names for columns:
