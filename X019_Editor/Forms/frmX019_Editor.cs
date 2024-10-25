@@ -10,7 +10,7 @@ using static SF3.Editor.Extensions.TabControlExtensions;
 namespace SF3.X019_Editor.Forms {
     public partial class frmX019_Editor : EditorForm {
         // Used to display version in the application
-        private string Version = "0.13";
+        private string Version = "0.14";
 
         private bool _isX044 = false;
 

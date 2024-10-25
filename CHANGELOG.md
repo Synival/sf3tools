@@ -34,8 +34,6 @@ They require the .NET 8.0 runtime to use.
     - Spell Target
     - Effective Type 1, Effective Type 2
 
-### X013 Editor
-
 ### X019 Editor
 - Added more dropdowns with value names for columns:
     - Item dropped
