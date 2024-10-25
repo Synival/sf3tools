@@ -39,12 +39,6 @@ namespace SF3.X1_Editor.Forms
             this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiHelp_SelectScenarioThenMap = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiHelp_IfTheTablesEtc = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiHelp_TreasureDebugToggle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,6 +51,12 @@ namespace SF3.X1_Editor.Forms
             this.tsmiMap_MapMedion = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMap_MapJulian = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMap_MapExtra = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp_SelectScenarioThenMap = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp_IfTheTablesEtc = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiHelp_TreasureDebugToggle = new System.Windows.Forms.ToolStripMenuItem();
             this.tabHeader = new System.Windows.Forms.TabPage();
             this.olvHeader = new BrightIdeasSoftware.ObjectListView();
             this.lvcHeaderSizeList = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -93,7 +93,7 @@ namespace SF3.X1_Editor.Forms
             this.lvcSlotTab2Name = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSlotTab2ID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSlotTab2Plus0x0F = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSlotTab2FacingIsFace = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSlotTab2FacingIsBoss = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSlotTab2ControlType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSlotTab2Plus0x12 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSlotTab2Respawn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -261,6 +261,7 @@ namespace SF3.X1_Editor.Forms
             this.lvcTileDataUnknownD = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileDataUnknownE = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileDataUnknownF = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSlotTab2IsBoss = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.menuStrip1.SuspendLayout();
             this.tabHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).BeginInit();
@@ -367,48 +368,6 @@ namespace SF3.X1_Editor.Forms
             this.tsmiFile_Exit.Text = "E&xit";
             this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
             // 
-            // tsmiHelp
-            // 
-            this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiHelp_Version,
-            this.tsmiHelp_SelectScenarioThenMap,
-            this.tsmiHelp_IfTheTablesEtc,
-            this.tsSeparator_Help1,
-            this.tsmiHelp_TreasureDebugToggle});
-            this.tsmiHelp.Name = "tsmiHelp";
-            this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
-            this.tsmiHelp.Text = "&Help";
-            // 
-            // tsmiHelp_Version
-            // 
-            this.tsmiHelp_Version.Name = "tsmiHelp_Version";
-            this.tsmiHelp_Version.Size = new System.Drawing.Size(368, 22);
-            this.tsmiHelp_Version.Text = "Version (set internally)";
-            // 
-            // tsmiHelp_SelectScenarioThenMap
-            // 
-            this.tsmiHelp_SelectScenarioThenMap.Name = "tsmiHelp_SelectScenarioThenMap";
-            this.tsmiHelp_SelectScenarioThenMap.Size = new System.Drawing.Size(368, 22);
-            this.tsmiHelp_SelectScenarioThenMap.Text = "Select Scenario then map";
-            // 
-            // tsmiHelp_IfTheTablesEtc
-            // 
-            this.tsmiHelp_IfTheTablesEtc.Name = "tsmiHelp_IfTheTablesEtc";
-            this.tsmiHelp_IfTheTablesEtc.Size = new System.Drawing.Size(368, 22);
-            this.tsmiHelp_IfTheTablesEtc.Text = "If the tables don\'t populate you used the wrong settings";
-            // 
-            // tsSeparator_Help1
-            // 
-            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
-            this.tsSeparator_Help1.Size = new System.Drawing.Size(365, 6);
-            // 
-            // tsmiHelp_TreasureDebugToggle
-            // 
-            this.tsmiHelp_TreasureDebugToggle.Name = "tsmiHelp_TreasureDebugToggle";
-            this.tsmiHelp_TreasureDebugToggle.Size = new System.Drawing.Size(368, 22);
-            this.tsmiHelp_TreasureDebugToggle.Text = "&treasureDebug Toggle";
-            this.tsmiHelp_TreasureDebugToggle.Click += new System.EventHandler(this.tsmiHelp_TreasureDebugToggle_Click);
-            // 
             // tsmiScenario
             // 
             this.tsmiScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -481,30 +440,72 @@ namespace SF3.X1_Editor.Forms
             // tsmiMap_MapSynbios
             // 
             this.tsmiMap_MapSynbios.Name = "tsmiMap_MapSynbios";
-            this.tsmiMap_MapSynbios.Size = new System.Drawing.Size(180, 22);
+            this.tsmiMap_MapSynbios.Size = new System.Drawing.Size(139, 22);
             this.tsmiMap_MapSynbios.Text = "map&Synbios";
             this.tsmiMap_MapSynbios.Click += new System.EventHandler(this.tsmiMap_MapSynbios_Click);
             // 
             // tsmiMap_MapMedion
             // 
             this.tsmiMap_MapMedion.Name = "tsmiMap_MapMedion";
-            this.tsmiMap_MapMedion.Size = new System.Drawing.Size(180, 22);
+            this.tsmiMap_MapMedion.Size = new System.Drawing.Size(139, 22);
             this.tsmiMap_MapMedion.Text = "map&Medion";
             this.tsmiMap_MapMedion.Click += new System.EventHandler(this.tsmiMap_MapMedion_Click);
             // 
             // tsmiMap_MapJulian
             // 
             this.tsmiMap_MapJulian.Name = "tsmiMap_MapJulian";
-            this.tsmiMap_MapJulian.Size = new System.Drawing.Size(180, 22);
+            this.tsmiMap_MapJulian.Size = new System.Drawing.Size(139, 22);
             this.tsmiMap_MapJulian.Text = "map&Julian";
             this.tsmiMap_MapJulian.Click += new System.EventHandler(this.tsmiMap_MapJulian_Click);
             // 
             // tsmiMap_MapExtra
             // 
             this.tsmiMap_MapExtra.Name = "tsmiMap_MapExtra";
-            this.tsmiMap_MapExtra.Size = new System.Drawing.Size(180, 22);
+            this.tsmiMap_MapExtra.Size = new System.Drawing.Size(139, 22);
             this.tsmiMap_MapExtra.Text = "map&Extra";
             this.tsmiMap_MapExtra.Click += new System.EventHandler(this.tsmiMap_MapExtra_Click);
+            // 
+            // tsmiHelp
+            // 
+            this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiHelp_Version,
+            this.tsmiHelp_SelectScenarioThenMap,
+            this.tsmiHelp_IfTheTablesEtc,
+            this.tsSeparator_Help1,
+            this.tsmiHelp_TreasureDebugToggle});
+            this.tsmiHelp.Name = "tsmiHelp";
+            this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
+            this.tsmiHelp.Text = "&Help";
+            // 
+            // tsmiHelp_Version
+            // 
+            this.tsmiHelp_Version.Name = "tsmiHelp_Version";
+            this.tsmiHelp_Version.Size = new System.Drawing.Size(368, 22);
+            this.tsmiHelp_Version.Text = "Version (set internally)";
+            // 
+            // tsmiHelp_SelectScenarioThenMap
+            // 
+            this.tsmiHelp_SelectScenarioThenMap.Name = "tsmiHelp_SelectScenarioThenMap";
+            this.tsmiHelp_SelectScenarioThenMap.Size = new System.Drawing.Size(368, 22);
+            this.tsmiHelp_SelectScenarioThenMap.Text = "Select Scenario then map";
+            // 
+            // tsmiHelp_IfTheTablesEtc
+            // 
+            this.tsmiHelp_IfTheTablesEtc.Name = "tsmiHelp_IfTheTablesEtc";
+            this.tsmiHelp_IfTheTablesEtc.Size = new System.Drawing.Size(368, 22);
+            this.tsmiHelp_IfTheTablesEtc.Text = "If the tables don\'t populate you used the wrong settings";
+            // 
+            // tsSeparator_Help1
+            // 
+            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
+            this.tsSeparator_Help1.Size = new System.Drawing.Size(365, 6);
+            // 
+            // tsmiHelp_TreasureDebugToggle
+            // 
+            this.tsmiHelp_TreasureDebugToggle.Name = "tsmiHelp_TreasureDebugToggle";
+            this.tsmiHelp_TreasureDebugToggle.Size = new System.Drawing.Size(368, 22);
+            this.tsmiHelp_TreasureDebugToggle.Text = "&treasureDebug Toggle";
+            this.tsmiHelp_TreasureDebugToggle.Click += new System.EventHandler(this.tsmiHelp_TreasureDebugToggle_Click);
             // 
             // tabHeader
             // 
@@ -848,7 +849,8 @@ namespace SF3.X1_Editor.Forms
             this.olvSlotTab2.AllColumns.Add(this.lvcSlotTab2Name);
             this.olvSlotTab2.AllColumns.Add(this.lvcSlotTab2ID);
             this.olvSlotTab2.AllColumns.Add(this.lvcSlotTab2Plus0x0F);
-            this.olvSlotTab2.AllColumns.Add(this.lvcSlotTab2FacingIsFace);
+            this.olvSlotTab2.AllColumns.Add(this.lvcSlotTab2IsBoss);
+            this.olvSlotTab2.AllColumns.Add(this.lvcSlotTab2FacingIsBoss);
             this.olvSlotTab2.AllColumns.Add(this.lvcSlotTab2ControlType);
             this.olvSlotTab2.AllColumns.Add(this.lvcSlotTab2Plus0x12);
             this.olvSlotTab2.AllColumns.Add(this.lvcSlotTab2Respawn1);
@@ -871,7 +873,8 @@ namespace SF3.X1_Editor.Forms
             this.lvcSlotTab2Name,
             this.lvcSlotTab2ID,
             this.lvcSlotTab2Plus0x0F,
-            this.lvcSlotTab2FacingIsFace,
+            this.lvcSlotTab2IsBoss,
+            this.lvcSlotTab2FacingIsBoss,
             this.lvcSlotTab2ControlType,
             this.lvcSlotTab2Plus0x12,
             this.lvcSlotTab2Respawn1,
@@ -921,12 +924,12 @@ namespace SF3.X1_Editor.Forms
             this.lvcSlotTab2Plus0x0F.Text = "+0x0F";
             this.lvcSlotTab2Plus0x0F.Width = 50;
             // 
-            // lvcSlotTab2FacingIsFace
+            // lvcSlotTab2FacingIsBoss
             // 
-            this.lvcSlotTab2FacingIsFace.AspectName = "Unknown7";
-            this.lvcSlotTab2FacingIsFace.AspectToStringFormat = "{0:X}";
-            this.lvcSlotTab2FacingIsFace.Text = "Facing/isBoss";
-            this.lvcSlotTab2FacingIsFace.Width = 80;
+            this.lvcSlotTab2FacingIsBoss.AspectName = "FacingIsBoss";
+            this.lvcSlotTab2FacingIsBoss.AspectToStringFormat = "{0:X}";
+            this.lvcSlotTab2FacingIsBoss.Text = "Facing/isBoss";
+            this.lvcSlotTab2FacingIsBoss.Width = 80;
             // 
             // lvcSlotTab2ControlType
             // 
@@ -2605,6 +2608,11 @@ namespace SF3.X1_Editor.Forms
             this.lvcTileDataUnknownF.Text = "UnknownF";
             this.lvcTileDataUnknownF.Width = 65;
             // 
+            // lvcSlotTab2IsBoss
+            // 
+            this.lvcSlotTab2IsBoss.AspectName = "IsBoss";
+            this.lvcSlotTab2IsBoss.Text = "IsBoss";
+            // 
             // frmX1_Editor
             // 
             this.AllowDrop = true;
@@ -2694,7 +2702,7 @@ namespace SF3.X1_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcSlotTab2Name;
         private BrightIdeasSoftware.OLVColumn lvcSlotTab2ID;
         private BrightIdeasSoftware.OLVColumn lvcSlotTab2Plus0x0F;
-        private BrightIdeasSoftware.OLVColumn lvcSlotTab2FacingIsFace;
+        private BrightIdeasSoftware.OLVColumn lvcSlotTab2FacingIsBoss;
         private BrightIdeasSoftware.OLVColumn lvcSlotTab2ControlType;
         private BrightIdeasSoftware.OLVColumn lvcSlotTab2Plus0x12;
         private BrightIdeasSoftware.OLVColumn lvcSlotTab2Respawn1;
@@ -2885,6 +2893,7 @@ namespace SF3.X1_Editor.Forms
         private System.Windows.Forms.ToolStripSeparator tsSeparator_File2;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_Exit;
         private System.Windows.Forms.ToolStripSeparator tsSeparator_Help1;
+        private BrightIdeasSoftware.OLVColumn lvcSlotTab2IsBoss;
     }
 }
 

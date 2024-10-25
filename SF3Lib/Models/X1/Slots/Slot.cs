@@ -17,7 +17,7 @@ namespace SF3.Models.X1.Slots {
         private int joinID;
         private int unknown5;
         private int unknown6;
-        private int unknown7;
+        private int facingIsBoss;
         private int unknown8;
         private int controlType;
         private int unknown9;
@@ -245,7 +245,7 @@ namespace SF3.Models.X1.Slots {
             unknown4 = start + 13;
             unknown5 = start + 14;
             unknown6 = start + 15;
-            unknown7 = start + 16;
+            facingIsBoss = start + 16;
             controlType = start + 17;
             unknown8 = start + 18;
             unknown9 = start + 19;
@@ -343,9 +343,14 @@ namespace SF3.Models.X1.Slots {
             set => _fileEditor.SetByte(unknown6, (byte) value);
         }
 
-        public int Unknown7 {
-            get => _fileEditor.GetByte(unknown7);
-            set => _fileEditor.SetByte(unknown7, (byte) value);
+        public bool IsBoss {
+            get => _fileEditor.GetBit(facingIsBoss, 5);
+            set => _fileEditor.SetBit(facingIsBoss, 5, value);
+        }
+
+        public int FacingIsBoss {
+            get => _fileEditor.GetByte(facingIsBoss);
+            set => _fileEditor.SetByte(facingIsBoss, (byte) value);
         }
         public int Unknown8 {
             get => _fileEditor.GetByte(unknown8);
