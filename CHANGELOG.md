@@ -1,3 +1,62 @@
+## 2024-10-26
+
+This is the first version of the DFRTool command-line tool and GUI tool (DFRToolGUI)!
+These can be used to generate .DFR files using an original file and an altered file.
+They require the .NET 8.0 runtime to use.
+
+### DFRTool
+- Run `dfrtool [-c] original-file altered-file > output.DFR` to get your DFR file.
+- (use `dfrtool --help` for more info)
+
+### DFRToolGUI
+- Can do everything the DFRTool can do, but with a GUI frontend.
+
+### All Editors
+- Added keyboard shortcuts to menus and did some re-organizing to follow common practices:
+    - "Help" menu moved to the right side
+    - Open/Save/Close are Ctrl+O, Ctrl+Alt+S, Ctrl+W
+    - Scenarios can be quickly selected with Ctrl+1, Ctrl+2, Ctrl+3, Ctrl+P
+- All .XML resource files have been migrated into one place so they can be shared between editors, with the following file structure:
+    - Resources/ (contains .XML files that aren't scenario-specific)
+    - Resources/S1 (Scenario 1-specific .XML files)
+    - Resources/S2 (Scenario 2-specific .XML files)
+    - Resources/S3 (Scenario 3-specific .XML files)
+    - Resources/PD (Premium Disk-specific .XML files)
+- Editing dropdowns with unhandled values (like 0xFFFD for 'EnemyID' in Sc3 X1BTL328.BIN, Julian Map) no longer crashes
+- Fixed a bug where closing an edited file wouldn't clean up its data completely, which could cause strange behavior in the next file edited
+
+### IconPointerEditor
+- Added "Spell Name" column with text to reflect the actual spell referenced in addition to the icon name
+
+### X002 Editor
+- Added more dropdowns with value names for columns:
+    - Element
+    - Spell Target
+    - Effective Type 1, Effective Type 2
+
+### X013 Editor
+
+### X019 Editor
+- Added more dropdowns with value names for columns:
+    - Item dropped
+    - Movement type
+
+### X033/X031 Editor
+- Added more dropdowns with value names for columns:
+    - Movement type
+
+### X1 Editor
+- Fix to crash when loading bad X1 files.
+- Added dropdown 'IsBoss' before to 'FacingIsBoss' to convenient view/modify its boss bit
+
+### Code clean-ups
+- Moved all code not related to the editor frontends into SF3Lib project. Now, everything can be shared amonst all tools.
+- Mass-applied code formatting script with .editorconfig for terse-style code
+- Began refactoring all the 'ModelLists' to use simplified, shared code
+- Added automated testing for IconPointerEditor to ensure it works across all scenarios and X026.BIN files
+- Made it easy to manage the "NamedValues" for new resources
+- More refactoring (it's almost done!)
+
 ## 2024-10-19
 
 ### All Editors
