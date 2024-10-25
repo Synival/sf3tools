@@ -1,4 +1,4 @@
-﻿namespace SF3.Exceptions {
+namespace SF3.Exceptions {
     public class FileEditorNotLoadedException : FileEditorException {
     }
 }

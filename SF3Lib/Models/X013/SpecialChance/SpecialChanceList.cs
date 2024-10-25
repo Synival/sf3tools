@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using SF3.Extensions;
 using SF3.FileEditors;

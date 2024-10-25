@@ -1,4 +1,4 @@
-﻿namespace SF3.Values {
+namespace SF3.Values {
     public class StatTypeValueResourceInfo : NamedValueFromResourceInfo {
         public StatTypeValueResourceInfo() : base("StatTypes.xml") {
         }

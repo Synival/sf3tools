@@ -1,4 +1,4 @@
-﻿namespace DFRLib.Extensions {
+namespace DFRLib.Extensions {
     public static class ArrayExtensions {
         /// <summary>
         /// Returns a copy of an array with additional uninitialized elements at the end.

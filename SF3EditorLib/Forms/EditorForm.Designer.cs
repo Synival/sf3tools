@@ -1,4 +1,4 @@
-﻿namespace SF3.Editor.Forms
+namespace SF3.Editor.Forms
 {
     partial class EditorForm
     {

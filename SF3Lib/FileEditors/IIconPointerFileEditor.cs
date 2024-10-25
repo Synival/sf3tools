@@ -1,4 +1,4 @@
-﻿using SF3.Models.IconPointerEditor.ItemIcons;
+using SF3.Models.IconPointerEditor.ItemIcons;
 using SF3.Models.IconPointerEditor.SpellIcons;
 
 namespace SF3.FileEditors {

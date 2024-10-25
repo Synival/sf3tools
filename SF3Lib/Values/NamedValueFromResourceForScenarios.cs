@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using SF3.Types;
 using static SF3.Utils.Resources;
 using static SF3.Utils.Utils;

@@ -1,4 +1,4 @@
-﻿using SF3.Models.X1.AI;
+using SF3.Models.X1.AI;
 using SF3.Models.X1.Arrows;
 using SF3.Models.X1.BattlePointers;
 using SF3.Models.X1.CustomMovement;

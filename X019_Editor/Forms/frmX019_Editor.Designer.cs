@@ -1,4 +1,4 @@
-﻿namespace SF3.X019_Editor.Forms
+namespace SF3.X019_Editor.Forms
 {
     partial class frmX019_Editor
     {

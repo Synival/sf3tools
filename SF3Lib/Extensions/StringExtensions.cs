@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 
 namespace SF3.Extensions {
     public static class StringExtensions {

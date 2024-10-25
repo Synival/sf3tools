@@ -1,4 +1,4 @@
-﻿using SF3.Models.X013.CritMod;
+using SF3.Models.X013.CritMod;
 using SF3.Models.X013.Critrate;
 using SF3.Models.X013.ExpLimit;
 using SF3.Models.X013.HealExp;

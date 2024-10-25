@@ -1,4 +1,4 @@
-﻿using SF3.Models.X033_X031.InitialInfos;
+using SF3.Models.X033_X031.InitialInfos;
 using SF3.Models.X033_X031.Stats;
 using SF3.Models.X033_X031.WeaponLevel;
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using SF3.Attributes;
 using SF3.FileEditors;
 using SF3.Types;

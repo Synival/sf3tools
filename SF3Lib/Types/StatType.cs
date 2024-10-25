@@ -1,4 +1,4 @@
-﻿namespace SF3.Types {
+namespace SF3.Types {
     /// <summary>
     /// Stats for characters and monsters.
     /// </summary>

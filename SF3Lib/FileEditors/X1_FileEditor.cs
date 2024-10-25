@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using SF3.Models;
 using SF3.Models.X1.AI;
 using SF3.Models.X1.Arrows;

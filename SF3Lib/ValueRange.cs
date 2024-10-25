@@ -1,4 +1,4 @@
-﻿namespace SF3 {
+namespace SF3 {
     /// <summary>
     /// Two values - a beginning and an end - with an auto-calculated range.
     /// </summary>
