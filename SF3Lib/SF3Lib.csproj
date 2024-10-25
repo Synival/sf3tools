@@ -6,6 +6,16 @@
     <PublishUrl>publish\</PublishUrl>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\Elements.xml" />
+    <None Remove="Resources\SpellTargets.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Elements.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\SpellTargets.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\AttackResistList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

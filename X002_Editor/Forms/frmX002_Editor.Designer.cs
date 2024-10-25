@@ -449,9 +449,10 @@
             // 
             // lvcSpellsElement
             // 
-            this.lvcSpellsElement.AspectName = "SpellUnknown1";
+            this.lvcSpellsElement.AspectName = "Element";
             this.lvcSpellsElement.AspectToStringFormat = "{0:X}";
             this.lvcSpellsElement.Text = "Element";
+            this.lvcSpellsElement.Width = 90;
             // 
             // lvcSpellsHidden
             // 

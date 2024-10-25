@@ -1,5 +1,6 @@
 ﻿using SF3.FileEditors;
 using SF3.Types;
+using SF3.Values;
 
 namespace SF3.Models.X002.Spells {
     public class Spell {
@@ -7,7 +8,7 @@ namespace SF3.Models.X002.Spells {
 
         private int targetType;
         private int damageType;
-        private int unknown1; //actually element
+        private int element;
         private int unknown2; //actually, iconHidden
         private int lv1Distance;
         private int lv1Targets;
@@ -69,7 +70,7 @@ namespace SF3.Models.X002.Spells {
             int start = offset + (id * 20);
             targetType = start; //2 bytes
             damageType = start + 1;
-            unknown1 = start + 2; //1 byte
+            element = start + 2; //1 byte
             unknown2 = start + 3; //1 byte
             lv1Distance = start + 4; //1 byte
             lv1Targets = start + 5; //1 byte
@@ -95,17 +96,17 @@ namespace SF3.Models.X002.Spells {
         public int SpellID => index;
         public string SpellName => name;
 
-        public int SpellTarget {
-            get => _fileEditor.GetByte(targetType);
-            set => _fileEditor.SetByte(targetType, (byte) value);
+        public SpellTargetValue SpellTarget {
+            get => new SpellTargetValue(_fileEditor.GetByte(targetType));
+            set => _fileEditor.SetByte(targetType, (byte) value.Value);
         }
         public int SpellType {
             get => _fileEditor.GetByte(damageType);
             set => _fileEditor.SetByte(damageType, (byte) value);
         }
-        public int SpellUnknown1 {
-            get => _fileEditor.GetByte(unknown1);
-            set => _fileEditor.SetByte(unknown1, (byte) value);
+        public ElementValue Element {
+            get => new ElementValue(_fileEditor.GetByte(element));
+            set => _fileEditor.SetByte(element, (byte) value.Value);
         }
         public int SpellUnknown2 {
             get => _fileEditor.GetByte(unknown2);

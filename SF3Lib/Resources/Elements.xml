@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="0x00" name="Earth/None" />
+    <item value="0x01" name="Fire" />
+    <item value="0x02" name="Ice" />
+    <item value="0x03" name="Spark" />
+    <item value="0x04" name="Wind" />
+    <item value="0x05" name="Light" />
+    <item value="0x06" name="Dark" />
+</items>
