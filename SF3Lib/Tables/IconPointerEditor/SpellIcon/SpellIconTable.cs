@@ -5,10 +5,10 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Tables.IconPointerEditor.SpellIcon {
-    public class SpellIconList : Table<SpellIcon> {
+    public class SpellIconTable : Table<SpellIcon> {
         public int MaxSize { get; } = 256;
 
-        public SpellIconList(IIconPointerFileEditor fileEditor) : base(fileEditor) {
+        public SpellIconTable(IIconPointerFileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
             _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "SpellIcons.xml");
         }

@@ -13,8 +13,8 @@ namespace SF3.FileEditors {
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (SpellIconList = new SpellIconList(this)),
-                (ItemIconList = new ItemIconList(this))
+                (SpellIconList = new SpellIconTable(this)),
+                (ItemIconList = new ItemIconTable(this))
             };
         }
 
@@ -26,10 +26,10 @@ namespace SF3.FileEditors {
         public bool IsX026 { get; }
 
         [BulkCopyRecurse]
-        public SpellIconList SpellIconList { get; private set; }
+        public SpellIconTable SpellIconList { get; private set; }
 
         [BulkCopyRecurse]
-        public ItemIconList ItemIconList { get; private set; }
+        public ItemIconTable ItemIconList { get; private set; }
 
         protected override string BaseTitle => IsLoaded
             ? base.BaseTitle + (IsX026 ? " (X026)" : "")

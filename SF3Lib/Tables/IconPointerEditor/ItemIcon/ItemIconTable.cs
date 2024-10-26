@@ -5,10 +5,10 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Tables.IconPointerEditor.ItemIcon {
-    public class ItemIconList : Table<ItemIcon> {
+    public class ItemIconTable : Table<ItemIcon> {
         public int MaxSize { get; } = 300;
 
-        public ItemIconList(IIconPointerFileEditor fileEditor) : base(fileEditor) {
+        public ItemIconTable(IIconPointerFileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
             _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "Items.xml");
         }
