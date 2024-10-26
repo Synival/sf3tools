@@ -106,16 +106,7 @@ namespace SF3.Editor.Forms {
                 return false;
 
             FileEditor = MakeFileEditor();
-            FileEditor.TitleChanged += (obj, args) => UpdateTitle();
-
-            FileEditor.PreLoaded += (obj, eargs) => this.PreFileLoaded?.Invoke(this, eargs);
-            FileEditor.Loaded += (obj, eargs) => this.FileLoaded?.Invoke(this, eargs);
-            FileEditor.PreClosed += (obj, eargs) => this.PreFileClosed?.Invoke(this, eargs);
-            FileEditor.Closed += (obj, eargs) => this.FileClosed?.Invoke(this, eargs);
-            FileEditor.PreSaved += (obj, eargs) => this.PreFileSaved?.Invoke(this, eargs);
-            FileEditor.Saved += (obj, eargs) => this.FileSaved?.Invoke(this, eargs);
-            FileEditor.ModifiedChanged += (obj, eargs) => this.FileModifiedChanged?.Invoke(this, eargs);
-            FileEditor.IsLoadedChanged += (obj, eargs) => this.FileIsLoadedChanged?.Invoke(this, eargs);
+            AttachFileEditor(FileEditor);
 
             bool success = false;
             try {
@@ -141,6 +132,18 @@ namespace SF3.Editor.Forms {
             }
 
             return true;
+        }
+
+        private void AttachFileEditor(IFileEditor fileEditor) {
+            fileEditor.TitleChanged += (obj, args) => UpdateTitle();
+            fileEditor.PreLoaded += (obj, eargs) => this.PreFileLoaded?.Invoke(this, eargs);
+            fileEditor.Loaded += (obj, eargs) => this.FileLoaded?.Invoke(this, eargs);
+            fileEditor.PreClosed += (obj, eargs) => this.PreFileClosed?.Invoke(this, eargs);
+            fileEditor.Closed += (obj, eargs) => this.FileClosed?.Invoke(this, eargs);
+            fileEditor.PreSaved += (obj, eargs) => this.PreFileSaved?.Invoke(this, eargs);
+            fileEditor.Saved += (obj, eargs) => this.FileSaved?.Invoke(this, eargs);
+            fileEditor.ModifiedChanged += (obj, eargs) => this.FileModifiedChanged?.Invoke(this, eargs);
+            fileEditor.IsLoadedChanged += (obj, eargs) => this.FileIsLoadedChanged?.Invoke(this, eargs);
         }
 
         /// <summary>
