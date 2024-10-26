@@ -1,6 +1,6 @@
 using CommonLib.Statistics;
 
-namespace CommonLib.Tests {
+namespace CommonLib.Tests.Statistics {
     [TestClass]
     public class ProbablyValueSetTests {
         [TestMethod]
@@ -13,7 +13,7 @@ namespace CommonLib.Tests {
             };
 
             // Act
-            var outputSet = inputSet.RollNext((int value) =>
+            var outputSet = inputSet.RollNext((value) =>
             {
                 return new ProbableValueSet()
                 {
@@ -39,7 +39,7 @@ namespace CommonLib.Tests {
             };
 
             // Act
-            var outputSet = inputSet.RollNext((int value) =>
+            var outputSet = inputSet.RollNext((value) =>
             {
                 return new ProbableValueSet()
                 {
@@ -121,7 +121,6 @@ namespace CommonLib.Tests {
             Assert.AreEqual(20.0, inputSet.GetWeightedMedianAt(1.00), 0.001);
         }
 
-
         [TestMethod]
         public void GetWeightedMedianAt_WithThreeSidesFiftyPercent_ReturnsMiddle() {
             // Arrange
@@ -135,7 +134,6 @@ namespace CommonLib.Tests {
             // Act + Assert
             Assert.AreEqual(20.0, inputSet.GetWeightedMedianAt(0.50), 0.001);
         }
-
 
         [TestMethod]
         public void GetWeightedMedianAt_WithOneOneTwoFiftyPercent_ReturnsBetweenSecondAndThird() {
