@@ -20,7 +20,7 @@ namespace SF3.Models {
         public abstract bool IsLoaded { get; }
         public abstract object[] ModelObjs { get; }
 
-        private ISF3FileEditor _fileEditor;
+        private readonly ISF3FileEditor _fileEditor;
 
     }
 
