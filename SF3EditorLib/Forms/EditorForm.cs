@@ -156,60 +156,6 @@ namespace SF3.Editor.Forms {
             return true;
         }
 
-        /// <summary>
-        /// Creates an "Open" dialog and, if a DFR file was chosen, does the following:
-        /// 1. Create a ByteDiff() from the DFR file
-        /// 2. Close the current document
-        /// 3. Reload the current document, but with the new data instead of its own
-        /// </summary>
-        public bool ApplyDFRDialog() {
-            if (!IsLoaded)
-                return false;
-
-            OpenFileDialog openfile = new OpenFileDialog();
-            openfile.Filter = "DFR Files (*.DFR)|*.DFR|All Files (*.*)|*.*";
-            if (openfile.ShowDialog() != DialogResult.OK)
-                return false;
-
-            FileStream file = null;
-            try {
-                file = File.Open(openfile.FileName, FileMode.Open, FileAccess.Read);
-                var diff = new ByteDiff(file);
-                var oldBytes = FileEditor.GetAllData();
-                var newBytes = diff.ApplyTo(oldBytes);
-
-                var filename = FileEditor.Filename;
-                if (!CloseFile())
-                    return false;
-                if (!LoadFile(filename, new MemoryStream(newBytes))) {
-                    if (FileEditor != null)
-                        FileEditor.IsModified = true;
-                    return false;
-                }
-
-                FileEditor.IsModified = true;
-                MessageBox.Show("DFR file successfully applied.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception e) {
-                MessageBox.Show("Error loading DFR file:\n\n" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            finally {
-                file.Close();
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Opens the DFRToolGUI as a modal dialog with the current editor data as its "Altered File".
-        /// </summary>
-        public bool GenerateDFRFile() {
-            var form = new frmDFRTool(FileEditor.GetAllData());
-            form.ShowDialog();
-            return true;
-        }
-
         private void AttachFileEditor(IFileEditor fileEditor) {
             fileEditor.TitleChanged += (obj, args) => UpdateTitle();
             fileEditor.PreLoaded += (obj, eargs) => this.PreFileLoaded?.Invoke(this, eargs);
@@ -266,6 +212,60 @@ namespace SF3.Editor.Forms {
             ObjectListViews.ForEach(x => x.ClearObjects());
             FileEditor.CloseFile();
             FileEditor = null;
+            return true;
+        }
+
+        /// <summary>
+        /// Creates an "Open" dialog and, if a DFR file was chosen, does the following:
+        /// 1. Create a ByteDiff() from the DFR file
+        /// 2. Close the current document
+        /// 3. Reload the current document, but with the new data instead of its own
+        /// </summary>
+        public bool ApplyDFRDialog() {
+            if (!IsLoaded)
+                return false;
+
+            OpenFileDialog openfile = new OpenFileDialog();
+            openfile.Filter = "DFR Files (*.DFR)|*.DFR|All Files (*.*)|*.*";
+            if (openfile.ShowDialog() != DialogResult.OK)
+                return false;
+
+            FileStream file = null;
+            try {
+                file = File.Open(openfile.FileName, FileMode.Open, FileAccess.Read);
+                var diff = new ByteDiff(file);
+                var oldBytes = FileEditor.GetAllData();
+                var newBytes = diff.ApplyTo(oldBytes);
+
+                var filename = FileEditor.Filename;
+                if (!CloseFile())
+                    return false;
+                if (!LoadFile(filename, new MemoryStream(newBytes))) {
+                    if (FileEditor != null)
+                        FileEditor.IsModified = true;
+                    return false;
+                }
+
+                FileEditor.IsModified = true;
+                MessageBox.Show("DFR file successfully applied.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception e) {
+                MessageBox.Show("Error loading DFR file:\n\n" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            finally {
+                file.Close();
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Opens the DFRToolGUI as a modal dialog with the current editor data as its "Altered File".
+        /// </summary>
+        public bool GenerateDFRFile() {
+            var form = new frmDFRTool(FileEditor.GetAllData());
+            form.ShowDialog();
             return true;
         }
 
