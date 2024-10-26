@@ -3,7 +3,7 @@ namespace CommonLib.Statistics {
     /// Two values - a beginning and an end - with an auto-calculated range.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public struct ValueRange<T> where T : struct {
+    public readonly struct ValueRange<T> where T : struct {
         public ValueRange(int begin, int end) {
             Begin = begin;
             End = end;

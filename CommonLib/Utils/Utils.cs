@@ -15,7 +15,7 @@ namespace CommonLib.Utils {
         ///     {name}
         /// </returns>
         public static string NameOrHexValue(int value, Dictionary<int, string> nameDict, string formatString = null) {
-            return nameDict.TryGetValue(value, out string name)
+            return nameDict.TryGetValue(value, out var name)
                 ? name
                 : value.ToString(formatString ?? "X2");
         }
@@ -34,7 +34,7 @@ namespace CommonLib.Utils {
         /// </returns>
         public static string HexValueWithName(int value, Dictionary<int, string> nameDict, string formatString = null) {
             var valueStr = value.ToString(formatString ?? "X2");
-            return nameDict.TryGetValue(value, out string name)
+            return nameDict.TryGetValue(value, out var name)
                 ? valueStr + ": " + name
                 : valueStr;
         }

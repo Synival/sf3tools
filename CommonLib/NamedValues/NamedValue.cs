@@ -8,9 +8,9 @@ namespace CommonLib.NamedValues {
     /// </summary>
     public abstract class NamedValue : IComparable, IComparable<NamedValue> {
         public NamedValue(string name, string valueName, int value) {
-            _name = name;
-            _valueName = valueName;
-            _value = value;
+            Name = name;
+            ValueName = valueName;
+            Value = value;
         }
 
         /// <summary>
@@ -42,29 +42,25 @@ namespace CommonLib.NamedValues {
 
         public override string ToString() => ValueName;
 
-        private readonly string _name;
-        private readonly string _valueName;
-        private readonly int _value;
-
         /// <summary>
         /// The name of the value.
         /// </summary>
-        public string Name => _name;
+        public string Name { get; }
 
         /// <summary>
         /// Combination of value + name.
         /// </summary>
-        public string ValueName => _valueName;
+        public string ValueName { get; }
 
         /// <summary>
         /// Value represented.
         /// </summary>
-        public int Value => _value;
+        public int Value { get; }
 
-        static public bool operator <(NamedValue lhs, NamedValue rhs) => lhs.Value < rhs.Value;
-        static public bool operator >(NamedValue lhs, NamedValue rhs) => lhs.Value > rhs.Value;
-        static public bool operator ==(NamedValue lhs, NamedValue rhs) => lhs.Value == rhs.Value;
-        static public bool operator !=(NamedValue lhs, NamedValue rhs) => lhs.Value != rhs.Value;
+        public static bool operator <(NamedValue lhs, NamedValue rhs) => lhs.Value < rhs.Value;
+        public static bool operator >(NamedValue lhs, NamedValue rhs) => lhs.Value > rhs.Value;
+        public static bool operator ==(NamedValue lhs, NamedValue rhs) => lhs.Value == rhs.Value;
+        public static bool operator !=(NamedValue lhs, NamedValue rhs) => lhs.Value != rhs.Value;
         public override bool Equals(object rhs) => rhs is NamedValue ? Value == (rhs as NamedValue).Value : base.Equals(rhs);
         public override int GetHashCode() => Value;
 

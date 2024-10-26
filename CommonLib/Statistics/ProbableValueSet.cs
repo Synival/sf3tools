@@ -46,14 +46,8 @@ namespace CommonLib.Statistics {
         /// Calculates the weighted average of the probability set.
         /// </summary>
         /// <returns>The weighted average of all values in the probability set.</returns>
-        public double GetWeightedAverage() {
-            if (Count == 0)
-                throw new IndexOutOfRangeException();
-            if (Count == 1)
-                return this.ToArray()[0].Key;
-
-            return this.Sum(kv => kv.Key * kv.Value);
-        }
+        public double GetWeightedAverage()
+            => Count == 0 ? throw new IndexOutOfRangeException() : Count == 1 ? this.ToArray()[0].Key : this.Sum(kv => kv.Key * kv.Value);
 
         /// <summary>
         /// Calculates a linearly-interpreted weighted median-like value for probability set at an arbitrary position
@@ -114,7 +108,7 @@ namespace CommonLib.Statistics {
                 double value1 = sortedValues[nInt].Key;
                 double value2 = sortedValues[nInt + 1].Key;
                 var valueRange = value2 - value1;
-                return value1 + valueRange * valueInterp;
+                return value1 + (valueRange * valueInterp);
             }
 
             // Looks like we exceed the set - use the last value.

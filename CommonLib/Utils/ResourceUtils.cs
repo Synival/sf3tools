@@ -14,19 +14,20 @@ namespace CommonLib.Utils {
         public static Dictionary<int, string> GetValueNameDictionaryFromXML(string filename) {
             var stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
 
-            var settings = new XmlReaderSettings();
-            settings.IgnoreComments = true;
-            settings.IgnoreWhitespace = true;
+            var settings = new XmlReaderSettings {
+                IgnoreComments = true,
+                IgnoreWhitespace = true
+            };
 
             var xml = XmlReader.Create(stream, settings);
-            xml.Read();
+            _ = xml.Read();
 
             var nameDict = new Dictionary<int, string>();
             while (!xml.EOF) {
-                xml.Read();
+                _ = xml.Read();
                 if (xml.HasAttributes) {
-                    string valueStr = xml.GetAttribute("value");
-                    string name = xml.GetAttribute("name");
+                    var valueStr = xml.GetAttribute("value");
+                    var name = xml.GetAttribute("name");
 
                     if (valueStr != null && name != null)
                         nameDict.Add(Convert.ToInt32(valueStr, 16), name);

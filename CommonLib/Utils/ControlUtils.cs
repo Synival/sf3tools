@@ -22,7 +22,7 @@ namespace CommonLib.Utils {
             }
 
             // ...add values in range (MinValue, MaxValue)....
-            for (int i = baseValue.MinValue; i <= baseValue.MaxValue; i++) {
+            for (var i = baseValue.MinValue; i <= baseValue.MaxValue; i++) {
                 var value = baseValue.MakeRelatedValue(i);
                 dict.Add(value, value.ValueName);
             }

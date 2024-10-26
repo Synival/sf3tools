@@ -134,7 +134,7 @@ namespace CommonLib.Extensions {
                 Index = index;
                 RowFrom = rowFrom;
                 RowTo = rowTo;
-                Copied = (rowTo != null && copyResult != null);
+                Copied = rowTo != null && copyResult != null;
                 CopyResult = copyResult;
                 Changed = Copied && (copyResult?.Changed ?? false);
                 ChangeCount = Changed ? copyResult.ChangeCount : 0;
@@ -210,7 +210,7 @@ namespace CommonLib.Extensions {
             }
 
             public override string MakeFullReport() {
-                string report =
+                var report =
                     "Summary:\n" +
                     MakeSummaryReport(true).Indent("  ");
 
@@ -225,7 +225,7 @@ namespace CommonLib.Extensions {
             public override string MakeSummaryReport() => MakeSummaryReport(false);
 
             public string MakeSummaryReport(bool inFullReport) {
-                string report =
+                var report =
                     (inFullReport ? ("Rows copied: " + RowsCopied + "\n") : "") +
                     ((inFullReport || InRowsSkipped != 0) ? ("Input rows skipped: " + InRowsSkipped + "\n") : "") +
                     ((inFullReport || OutRowsSkipped != 0) ? ("Target rows unaffected: " + OutRowsSkipped + "\n") : "");
@@ -249,7 +249,7 @@ namespace CommonLib.Extensions {
             /// </summary>
             /// <returns>A multiline string with a trailing "\n".</returns>
             public string MakeIndividualChangesReport(bool fullReport = false) {
-                string report = "";
+                var report = "";
 
                 foreach (var row in InputRows) {
                     var rowReport = fullReport ? row.MakeFullReport() : row.MakeSummaryReport();
@@ -344,7 +344,7 @@ namespace CommonLib.Extensions {
             var arrayTo = listTo.ToArray();
 
             var inputRowReports = new List<BulkCopyCollectionRowResult>();
-            for (int i = 0; i < arrayFrom.Length; i++) {
+            for (var i = 0; i < arrayFrom.Length; i++) {
                 var rowTo = (i < arrayTo.Length) ? arrayTo[i] : null;
                 inputRowReports.Add(new BulkCopyCollectionRowResult(i, arrayFrom[i], rowTo,
                     (rowTo != null) ? BulkCopyProperties(arrayFrom[i], rowTo, inherit) : null));
