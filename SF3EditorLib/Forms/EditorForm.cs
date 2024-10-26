@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
@@ -285,7 +286,7 @@ namespace SF3.Editor.Forms {
                 return;
             var copyToFilename = saveFileDialog.FileName;
 
-            string copyReport = "";
+            SF3.Utils.ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyFileEditor = MakeFileEditor();
                 if (!copyFileEditor.LoadFile(copyToFilename)) {
@@ -293,24 +294,10 @@ namespace SF3.Editor.Forms {
                     return;
                 }
 
-                var result = FileEditor.BulkCopyProperties(copyFileEditor);
+                result = FileEditor.BulkCopyProperties(copyFileEditor);
                 if (!copyFileEditor.SaveFile(copyToFilename)) {
                     MessageBox.Show("Error trying to update file.");
                     return;
-                }
-
-                copyReport += result.MakeSummaryReport();
-
-                // Output summary files.
-                var fullReport = result.MakeFullReport();
-                if (fullReport != "") {
-                    try {
-                        File.WriteAllText("BulkCopyReport.txt", fullReport);
-                        copyReport += "\n\nDetailed reports dumped to 'BulkCopyReport.txt'.";
-                    }
-                    catch {
-                        copyReport += "\n\nError: Couldn't dump detailed report to 'BulkCopyReport.txt'.";
-                    }
                 }
             }
             catch (Exception e) {
@@ -321,8 +308,7 @@ namespace SF3.Editor.Forms {
                 return;
             }
 
-            // Show the user a nice report.
-            MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyReport);
+            ProduceAndPresentBulkCopyReport(result);
         }
 
         /// <summary>
@@ -341,30 +327,14 @@ namespace SF3.Editor.Forms {
                 return;
             var copyFromFilename = openFileDialog.FileName;
 
-            string copyReport = "";
+            SF3.Utils.ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyFileEditor = MakeFileEditor();
                 if (!copyFileEditor.LoadFile(copyFromFilename)) {
                     MessageBox.Show("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
-
-                var result = copyFileEditor.BulkCopyProperties(FileEditor);
-                ObjectListViews.ForEach(x => x.RefreshAllItems());
-
-                copyReport += result.MakeSummaryReport();
-
-                // Output summary files.
-                var fullReport = result.MakeFullReport();
-                if (fullReport != "") {
-                    try {
-                        File.WriteAllText("BulkCopyReport.txt", fullReport);
-                        copyReport += "\n\nDetailed reports dumped to 'BulkCopyReport.txt'.";
-                    }
-                    catch {
-                        copyReport += "\n\nError: Couldn't dump detailed report to 'BulkCopyReport.txt'.";
-                    }
-                }
+                result = copyFileEditor.BulkCopyProperties(FileEditor);
             }
             catch (Exception e) {
                 //wrong file was selected
@@ -374,8 +344,36 @@ namespace SF3.Editor.Forms {
                 return;
             }
 
+            ObjectListViews.ForEach(x => x.RefreshAllItems());
+            ProduceAndPresentBulkCopyReport(result);
+        }
+
+        private void ProduceAndPresentBulkCopyReport(SF3.Utils.ObjectExtensions.BulkCopyPropertiesResult result) {
+            string copyReport = result.MakeSummaryReport();
+
+            // Output summary files.
+            var fullReport = result.MakeFullReport();
+            bool wroteBulkCopyReport = false;
+            if (fullReport != "") {
+                try {
+                    File.WriteAllText("BulkCopyReport.txt", fullReport);
+                    wroteBulkCopyReport = true;
+                    copyReport += "\n\nDetailed reports dumped to 'BulkCopyReport.txt'.";
+                }
+                catch {
+                    copyReport += "\n\nError: Couldn't dump detailed report to 'BulkCopyReport.txt'.";
+                }
+            }
+
             // Show the user a nice report.
             MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyReport);
+            if (wroteBulkCopyReport) {
+                new Process {
+                    StartInfo = new ProcessStartInfo("BulkCopyReport.txt") {
+                        UseShellExecute = true
+                    }
+                }.Start();
+            }
         }
 
         /// <summary>

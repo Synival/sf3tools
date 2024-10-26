@@ -21,7 +21,7 @@ namespace DFRToolGUI.Forms {
             InitializeComponent();
             this.btnAlteredFile.Enabled = false;
             this.tbAlteredFile.Enabled = false;
-            this.tbAlteredFile.Text = "(reading from editor)";
+            this.tbAlteredFile.Text = "(Data Read from Editor)";
 
             Data = data;
         }
