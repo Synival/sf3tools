@@ -26,20 +26,19 @@ namespace DFRLib.Tests {
 
         [TestMethod]
         public void Constructor_WithMalformedDFRRow_ThrowsException() {
-            Assert.ThrowsException<ArgumentException>(() => new ByteDiffChunk("12aF,abcd,dbca,"));
-            Assert.ThrowsException<ArgumentException>(() => new ByteDiffChunk("12aF,abcd"));
+            _ = Assert.ThrowsException<ArgumentException>(() => new ByteDiffChunk("12aF,abcd,dbca,"));
+            _ = Assert.ThrowsException<ArgumentException>(() => new ByteDiffChunk("12aF,abcd"));
         }
 
         [TestMethod]
-        public void Constructor_DFRRowWithoutRightType_ThrowsException() {
-            Assert.ThrowsException<ArgumentException>(() => new ByteDiffChunk("12aF,cd,dbca"));
-        }
+        public void Constructor_DFRRowWithoutRightType_ThrowsException()
+            => Assert.ThrowsException<ArgumentException>(() => new ByteDiffChunk("12aF,cd,dbca"));
 
         [TestMethod]
         public void Constructor_WithNonHexDFRRow_ThrowsException() {
-            Assert.ThrowsException<ArgumentException>(() => new ByteDiffChunk("j2aF,abcd,dbca"));
-            Assert.ThrowsException<ArgumentException>(() => new ByteDiffChunk("12aF,jbcd,dbca"));
-            Assert.ThrowsException<ArgumentException>(() => new ByteDiffChunk("12aF,abcd,jbca"));
+            _ = Assert.ThrowsException<ArgumentException>(() => new ByteDiffChunk("j2aF,abcd,dbca"));
+            _ = Assert.ThrowsException<ArgumentException>(() => new ByteDiffChunk("12aF,jbcd,dbca"));
+            _ = Assert.ThrowsException<ArgumentException>(() => new ByteDiffChunk("12aF,abcd,jbca"));
         }
     }
 }
