@@ -5,10 +5,10 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X1.Enter {
-    public class EnterList : Table<Enter> {
+    public class EnterTable : Table<Enter> {
         public int MaxSize { get; } = 100;
 
-        public EnterList(IX1_FileEditor fileEditor) : base(fileEditor) {
+        public EnterTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 

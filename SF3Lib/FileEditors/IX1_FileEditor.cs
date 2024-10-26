@@ -23,17 +23,17 @@ namespace SF3.FileEditors {
 
         bool IsBTL99 { get; }
 
-        SlotList SlotList { get; }
-        HeaderList HeaderList { get; }
-        AIList AIList { get; }
-        SpawnZoneList SpawnZoneList { get; }
-        BattlePointersList BattlePointersList { get; }
-        TreasureList TreasureList { get; }
-        CustomMovementList CustomMovementList { get; }
-        WarpList WarpList { get; }
-        TileMovementList TileList { get; }
-        NpcList NpcList { get; }
-        EnterList EnterList { get; }
-        ArrowList ArrowList { get; }
+        SlotTable SlotList { get; }
+        HeaderTable HeaderList { get; }
+        AITable AIList { get; }
+        SpawnZoneTable SpawnZoneList { get; }
+        BattlePointersTable BattlePointersList { get; }
+        TreasureTable TreasureList { get; }
+        CustomMovementTable CustomMovementList { get; }
+        WarpTable WarpList { get; }
+        TileMovementTable TileList { get; }
+        NpcTable NpcList { get; }
+        EnterTable EnterList { get; }
+        ArrowTable ArrowList { get; }
     }
 }

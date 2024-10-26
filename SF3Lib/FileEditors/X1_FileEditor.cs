@@ -63,36 +63,36 @@ namespace SF3.FileEditors {
 
             // Add models present for both towns and battles.
             var modelArrays = new List<ITable> {
-                (TreasureList = new TreasureList(this))
+                (TreasureList = new TreasureTable(this))
             };
 
             if (isntScn1OrBTL99)
-                modelArrays.Add(WarpList = new WarpList(this));
+                modelArrays.Add(WarpList = new WarpTable(this));
 
             // Add models only present for battles.
             if (IsBattle) {
                 modelArrays.AddRange(new List<ITable>() {
-                    (HeaderList = new HeaderList(this)),
-                    (SlotList = new SlotList(this)),
-                    (AIList = new AIList(this)),
-                    (SpawnZoneList = new SpawnZoneList(this)),
-                    (BattlePointersList = new BattlePointersList(this)),
-                    (CustomMovementList = new CustomMovementList(this)),
+                    (HeaderList = new HeaderTable(this)),
+                    (SlotList = new SlotTable(this)),
+                    (AIList = new AITable(this)),
+                    (SpawnZoneList = new SpawnZoneTable(this)),
+                    (BattlePointersList = new BattlePointersTable(this)),
+                    (CustomMovementList = new CustomMovementTable(this)),
                 });
 
                 if (isntScn1OrBTL99)
-                    modelArrays.Add(TileList = new TileMovementList(this));
+                    modelArrays.Add(TileList = new TileMovementTable(this));
             }
 
             // Add models only present for towns.
             if (!IsBattle) {
                 modelArrays.AddRange(new List<ITable>() {
-                    (NpcList = new NpcList(this)),
-                    (EnterList = new EnterList(this))
+                    (NpcList = new NpcTable(this)),
+                    (EnterList = new EnterTable(this))
                 });
 
                 if (isntScn1OrBTL99)
-                    modelArrays.Add(ArrowList = new ArrowList(this));
+                    modelArrays.Add(ArrowList = new ArrowTable(this));
             }
 
             return modelArrays;
@@ -145,17 +145,17 @@ namespace SF3.FileEditors {
 
         public bool IsBTL99 { get; }
 
-        public SlotList SlotList { get; private set; }
-        public HeaderList HeaderList { get; private set; }
-        public AIList AIList { get; private set; }
-        public SpawnZoneList SpawnZoneList { get; private set; }
-        public BattlePointersList BattlePointersList { get; private set; }
-        public TreasureList TreasureList { get; private set; }
-        public CustomMovementList CustomMovementList { get; private set; }
-        public WarpList WarpList { get; private set; }
-        public TileMovementList TileList { get; private set; }
-        public NpcList NpcList { get; private set; }
-        public EnterList EnterList { get; private set; }
-        public ArrowList ArrowList { get; private set; }
+        public SlotTable SlotList { get; private set; }
+        public HeaderTable HeaderList { get; private set; }
+        public AITable AIList { get; private set; }
+        public SpawnZoneTable SpawnZoneList { get; private set; }
+        public BattlePointersTable BattlePointersList { get; private set; }
+        public TreasureTable TreasureList { get; private set; }
+        public CustomMovementTable CustomMovementList { get; private set; }
+        public WarpTable WarpList { get; private set; }
+        public TileMovementTable TileList { get; private set; }
+        public NpcTable NpcList { get; private set; }
+        public EnterTable EnterList { get; private set; }
+        public ArrowTable ArrowList { get; private set; }
     }
 }

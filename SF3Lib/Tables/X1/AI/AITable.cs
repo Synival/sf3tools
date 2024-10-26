@@ -4,15 +4,14 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X1.CustomMovement {
-    public class CustomMovementList : Table<CustomMovement> {
+namespace SF3.Tables.X1.AI {
+    public class AITable : Table<AI> {
         public int MaxSize { get; } = 130;
 
-        public CustomMovementList(IX1_FileEditor fileEditor) : base(fileEditor) {
+        public AITable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
 
-            /*
-            if (Globals.scenario == ScenarioType.Scenario1)
+            /*if (Globals.scenario == ScenarioType.Scenario1)
             {
                 _resourceFile = "Resources/X1AIScn1.xml";
             }
@@ -43,7 +42,7 @@ namespace SF3.Tables.X1.CustomMovement {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new CustomMovement[0];
+            _models = new AI[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -52,9 +51,9 @@ namespace SF3.Tables.X1.CustomMovement {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new CustomMovement(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new AI(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.CustomMovementID < 0 || newModel.CustomMovementID >= MaxSize) {
+                        if (newModel.AIID < 0 || newModel.AIID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

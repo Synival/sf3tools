@@ -113,8 +113,8 @@ namespace SF3.X1_Editor.Forms {
         private void tsmiMap_MapExtra_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Extra; //map with no lead or a extra as lead. also for ruins
 
         private void tsmiHelp_TreasureDebugToggle_Click(object sender, EventArgs e) {
-            Tables.X1.Treasure.TreasureList.Debug = !Tables.X1.Treasure.TreasureList.Debug;
-            tsmiHelp_TreasureDebugToggle.Checked = Tables.X1.Treasure.TreasureList.Debug;
+            Tables.X1.Treasure.TreasureTable.Debug = !Tables.X1.Treasure.TreasureTable.Debug;
+            tsmiHelp_TreasureDebugToggle.Checked = Tables.X1.Treasure.TreasureTable.Debug;
         }
     }
 }

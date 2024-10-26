@@ -4,24 +4,24 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X1.Header {
-    public class HeaderList : Table<Header> {
+namespace SF3.Tables.X1.TileMovement {
+    public class TileMovementTable : Table<TileMovement> {
         public int MaxSize { get; } = 31;
 
-        public HeaderList(IX1_FileEditor fileEditor) : base(fileEditor) {
+        public TileMovementTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 
         private readonly IX1_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/X1Top.xml";
+        public override string ResourceFile => "Resources/MovementTypes.xml";
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new Header[0];
+            _models = new TileMovement[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -31,11 +31,10 @@ namespace SF3.Tables.X1.Header {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new Header(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new TileMovement(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.SizeID < 0 || newModel.SizeID >= MaxSize) {
+                        if (newModel.TileID < 0 || newModel.TileID >= MaxSize)
                             throw new IndexOutOfRangeException();
-                        }
                     }
                 }
             }

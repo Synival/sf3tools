@@ -4,24 +4,29 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X1.Arrow {
-    public class ArrowList : Table<Arrow> {
-        public int MaxSize { get; } = 100;
+namespace SF3.Tables.X1.Treasure {
+    public class TreasureTable : Table<Treasure> {
+        public int MaxSize { get; } = 255;
 
-        public ArrowList(IX1_FileEditor fileEditor) : base(fileEditor) {
+        /// <summary>
+        /// TODO: what does this do when set?
+        /// </summary>
+        public static bool Debug { get; set; } = false;
+
+        public TreasureTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 
         private readonly IX1_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/X1Arrow.xml";
+        public override string ResourceFile => "Resources/X1Treasure.xml";
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new Arrow[0];
+            _models = new Treasure[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -32,46 +37,38 @@ namespace SF3.Tables.X1.Arrow {
                 //int numberTest = 0;
                 //while (!xml.EOF)
                 var myCount = 0;
-                //Globals.treasureDebug = true;
-                //while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
+                //Debug = true;
+                //while (!xml.EOF && (_models.Length == 0 || newModel.Searched != 0xffff))
 
-                /*if(Globals.treasureDebug == true)
-                {
-                    //while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].Searched != 0xffff || _models[_models.Length - 1].EventNumber != 0xffff)))
-                    while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
-                    {
+                if (Debug == true) {
+                    //while (!xml.EOF && (_models.Length == 0 || (newModel.Searched != 0xffff || newModel.EventNumber != 0xffff)))
+                    while (!xml.EOF && (_models.Length == 0 || myCount <= 2)) {
                         {
-                            xml.Read();
-                            if (xml.HasAttributes)
-                            {
-                                var newModel = new Npc(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        _models = _models.ExpandedWith(newModel);
-                                if (newModel.NpcID < 0 || newModel.NpcID >= MaxSize) {
-throw new IndexOutOfRangeException();
-}
-                                if (newModel.SpriteID == 0xffff)
-                                {
+                            _ = xml.Read();
+                            if (xml.HasAttributes) {
+                                var newModel = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                _models = _models.ExpandedWith(newModel);
+                                if (newModel.TreasureID < 0 || newModel.TreasureID >= MaxSize)
+                                    throw new IndexOutOfRangeException();
+                                if (newModel.Searched == 0xffff)
                                     myCount = 1 + myCount;
-                                }
                             }
                         }
                     }
                 }
-
-                else*/
-                {
-                    while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].ArrowUnknown0 != 0xffff))
+                else {
+                    while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
                     //while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].Searched != 0xffff || _models[_models.Length - 1].EventNumber != 0xffff)))
                     //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                     {
                         {
                             _ = xml.Read();
                             if (xml.HasAttributes) {
-                                var newModel = new Arrow(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                var newModel = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 _models = _models.ExpandedWith(newModel);
-                                if (newModel.ArrowID < 0 || newModel.ArrowID >= MaxSize)
+                                if (newModel.TreasureID < 0 || newModel.TreasureID >= MaxSize)
                                     throw new IndexOutOfRangeException();
-                                if (newModel.ArrowUnknown0 == 0xffff)
+                                if (newModel.Searched == 0xffff)
                                     myCount = 1 + myCount;
                             }
                         }
