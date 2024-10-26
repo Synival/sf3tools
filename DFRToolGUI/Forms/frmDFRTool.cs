@@ -20,24 +20,26 @@ namespace DFRTool.GUI.Forms {
         /// <param name="data"></param>
         public frmDFRTool(byte[] data) {
             InitializeComponent();
-            this.btnAlteredFile.Enabled = false;
-            this.tbAlteredFile.Enabled = false;
-            this.tbAlteredFile.Text = "(Data Read from Editor)";
+            btnAlteredFile.Enabled = false;
+            tbAlteredFile.Enabled = false;
+            tbAlteredFile.Text = "(Data Read from Editor)";
 
             Data = data;
         }
 
         private void btnOriginalFile_Click(object sender, EventArgs e) {
-            var dialog = new OpenFileDialog();
-            dialog.Filter = "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*";
+            var dialog = new OpenFileDialog {
+                Filter = "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*"
+            };
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
             tbOriginalFile.Text = dialog.FileName;
         }
 
         private void btnAlteredFile_Click(object sender, EventArgs e) {
-            var dialog = new OpenFileDialog();
-            dialog.Filter = "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*";
+            var dialog = new OpenFileDialog {
+                Filter = "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*"
+            };
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
             tbAlteredFile.Text = dialog.FileName;
@@ -95,10 +97,8 @@ namespace DFRTool.GUI.Forms {
                     throw;
                 }
                 finally {
-                    if (origStream != null)
-                        origStream.Close();
-                    if (alteredStream != null)
-                        alteredStream.Close();
+                    origStream?.Close();
+                    alteredStream?.Close();
                 }
 
                 File.WriteAllText(tbOutputFile.Text, dfrText);
@@ -111,7 +111,7 @@ namespace DFRTool.GUI.Forms {
             InfoMessage("DFR file generated successfully.");
 
             if (cbOpenWhenGenerated.Checked) {
-                new Process {
+                _ = new Process {
                     StartInfo = new ProcessStartInfo(tbOutputFile.Text) {
                         UseShellExecute = true
                     }
