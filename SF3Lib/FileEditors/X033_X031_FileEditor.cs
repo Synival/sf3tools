@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using SF3.Models;
-using SF3.Models.X033_X031.InitialInfos;
+using SF3.Models.X033_X031.InitialInfo;
 using SF3.Models.X033_X031.Stats;
 using SF3.Models.X033_X031.WeaponLevel;
 using SF3.Types;

@@ -55,9 +55,10 @@ namespace SF3.Utils {
         /// <param name="stream">Stream from which to read the XML resource</param>
         /// <returns>A new XmlReader.</returns>
         public static XmlReader MakeXmlReader(Stream stream) {
-            XmlReaderSettings settings = new XmlReaderSettings();
-            settings.IgnoreComments = true;
-            settings.IgnoreWhitespace = true;
+            var settings = new XmlReaderSettings {
+                IgnoreComments = true,
+                IgnoreWhitespace = true
+            };
             return XmlReader.Create(stream, settings);
         }
     }

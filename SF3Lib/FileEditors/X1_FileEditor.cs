@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 using SF3.Models;
 using SF3.Models.X1.AI;
-using SF3.Models.X1.Arrows;
+using SF3.Models.X1.Arrow;
 using SF3.Models.X1.BattlePointers;
 using SF3.Models.X1.CustomMovement;
-using SF3.Models.X1.Enters;
+using SF3.Models.X1.Enter;
 using SF3.Models.X1.Headers;
-using SF3.Models.X1.Npcs;
+using SF3.Models.X1.Npc;
 using SF3.Models.X1.Slots;
 using SF3.Models.X1.SpawnZones;
-using SF3.Models.X1.Tiles;
-using SF3.Models.X1.Treasures;
-using SF3.Models.X1.Warps;
+using SF3.Models.X1.TileMovement;
+using SF3.Models.X1.Treasure;
+using SF3.Models.X1.Warp;
 using SF3.Types;
 
 namespace SF3.FileEditors {
@@ -22,8 +22,8 @@ namespace SF3.FileEditors {
         }
 
         public override bool OnLoadBeforeMakeModelArrays() {
-            int offset = 0;
-            int sub = 0;
+            var offset = 0;
+            var sub = 0;
 
             if (IsBTL99) {
                 offset = 0x00000018; //btl99 initial pointer
@@ -48,23 +48,18 @@ namespace SF3.FileEditors {
 
             offset = GetDouble(offset);
 
-            offset = offset - sub; //first pointer
+            offset -= sub; //first pointer
             offset = GetDouble(offset);
 
             /*A value higher means a pointer is on the offset, meaning we are in a battle. If it is not a 
               pointer we are at our destination so we know a town is loaded. */
-            if (Scenario == ScenarioType.Scenario1 && offset > 0x0605F000)
-                IsBattle = true;
-            else if (offset > 0x0605e000)
-                IsBattle = true;
-            else
-                IsBattle = false;
+            IsBattle = (Scenario == ScenarioType.Scenario1 && offset > 0x0605F000) || offset > 0x0605e000;
 
             return true;
         }
 
         public override IEnumerable<IModelArray> MakeModelArrays() {
-            bool isntScn1OrBTL99 = Scenario != ScenarioType.Scenario1 && !IsBTL99;
+            var isntScn1OrBTL99 = Scenario != ScenarioType.Scenario1 && !IsBTL99;
 
             // Add models present for both towns and battles.
             var modelArrays = new List<IModelArray> {

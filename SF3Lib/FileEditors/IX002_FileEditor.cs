@@ -2,10 +2,10 @@ using SF3.Models.X002.AttackResist;
 using SF3.Models.X002.Items;
 using SF3.Models.X002.LoadedOverride;
 using SF3.Models.X002.Loading;
-using SF3.Models.X002.Presets;
+using SF3.Models.X002.Preset;
 using SF3.Models.X002.Spells;
 using SF3.Models.X002.StatBoost;
-using SF3.Models.X002.Warps;
+using SF3.Models.X002.Warp;
 using SF3.Models.X002.WeaponRank;
 
 namespace SF3.FileEditors {

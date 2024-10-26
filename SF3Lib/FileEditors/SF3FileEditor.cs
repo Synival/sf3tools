@@ -39,9 +39,10 @@ namespace SF3.FileEditors {
                 return false;
 
             ModelArrays = MakeModelArrays();
-            foreach (var ma in ModelArrays)
+            foreach (var ma in ModelArrays) {
                 if (!ma.Load())
                     return false;
+            }
 
             return true;
         }

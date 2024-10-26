@@ -19,7 +19,7 @@ namespace SF3.FileEditors {
             set {
                 if (_data != value) {
                     _data = value;
-                    IsLoaded = (_data != null);
+                    IsLoaded = _data != null;
                 }
             }
         }
@@ -94,15 +94,14 @@ namespace SF3.FileEditors {
                 return false;
             }
             finally {
-                if (stream != null)
-                    stream.Close();
+                stream?.Close();
             }
         }
 
         public virtual bool LoadFile(string filename, Stream stream) {
             try {
                 if (IsLoaded)
-                    CloseFile();
+                    _ = CloseFile();
 
                 var memoryStream = new MemoryStream();
                 stream.CopyTo(memoryStream);
@@ -148,8 +147,7 @@ namespace SF3.FileEditors {
                 return false;
             }
             finally {
-                if (stream != null)
-                    stream.Close();
+                stream?.Close();
             }
 
             return true;
@@ -196,7 +194,7 @@ namespace SF3.FileEditors {
                 throw new FileEditorReadException();
 
             uint value = 0;
-            for (int i = 0; i < bytes; i++)
+            for (var i = 0; i < bytes; i++)
                 value += ((uint) Data[location + i]) << ((bytes - i - 1) * 8);
             return value;
         }
@@ -228,8 +226,8 @@ namespace SF3.FileEditors {
             if (Data == null)
                 throw new FileEditorNotLoadedException();
 
-            byte[] value = new byte[length];
-            for (int i = 0; i < length; i++) {
+            var value = new byte[length];
+            for (var i = 0; i < length; i++) {
                 try {
                     if (Data[location + i] == 0x0)
                         break;
@@ -240,7 +238,7 @@ namespace SF3.FileEditors {
                     throw new FileEditorReadException();
                 }
             }
-            Encoding InputText = Encoding.GetEncoding("shift-jis");
+            var InputText = Encoding.GetEncoding("shift-jis");
             return InputText.GetString(value);
         }
 
@@ -260,10 +258,10 @@ namespace SF3.FileEditors {
             if (location + bytes > Data.Length)
                 throw new FileEditorReadException();
 
-            byte[] converted = BitConverter.GetBytes(value);
+            var converted = BitConverter.GetBytes(value);
 
-            for (int i = 0; i < bytes; i++) {
-                byte b = converted[bytes - i - 1];
+            for (var i = 0; i < bytes; i++) {
+                var b = converted[bytes - i - 1];
                 if (Data[location + i] != b) {
                     Data[location + i] = b;
                     IsModified = true;
@@ -302,18 +300,16 @@ namespace SF3.FileEditors {
         public void SetString(int location, int length, string value) {
             if (Data == null)
                 throw new FileEditorNotLoadedException();
-
-            byte[] name = new byte[12];
-            Encoding OutputText = Encoding.GetEncoding("shift-jis");
-            name = OutputText.GetBytes(value);
-            for (int i = 0; i < name.Length; i++) {
+            var OutputText = Encoding.GetEncoding("shift-jis");
+            var name = OutputText.GetBytes(value);
+            for (var i = 0; i < name.Length; i++) {
                 if (Data[location + i] != name[i]) {
                     Data[location + i] = name[i];
                     IsModified = true;
                 }
             }
             if (name.Length < length) {
-                for (int i = name.Length; i < length; i++) {
+                for (var i = name.Length; i < length; i++) {
                     if (Data[location + i] != 0x00) {
                         Data[location + i] = 0x00;
                         IsModified = true;
@@ -357,7 +353,7 @@ namespace SF3.FileEditors {
             if (location >= Data.Length)
                 throw new FileEditorReadException();
 
-            byte bitmask = (byte)(1 << (bit - 1));
+            var bitmask = (byte)(1 << (bit - 1));
 
             if (value) {
                 if ((Data[location] & bitmask) == 0x00) {

@@ -6,14 +6,14 @@ namespace SF3.Statistics {
     /// <summary>
     /// Utility functions for stats.
     /// </summary>
-    static public class GrowthStats {
+    public static class GrowthStats {
         /// <summary>
         /// An array for all possible outcomes of the RNG for adding an additional point when gaining stats.
         /// Index: The number below 0x100 used when determining a stat 'growthValue'.
         /// Value: The number of possibilities of the calculation Random(0, 0x7F) + Random(0, 0x7F) out of
         ///        'TotalRngOutcomes' that result in +1 stat.
         /// </summary>
-        static public double[] NumRngOutcomesToReachPlusOne = {
+        public static double[] NumRngOutcomesToReachPlusOne = {
                 0,     0,     1,     3,     6,    10,    15,    21, // 0x00 - 0x07
                28,    36,    45,    55,    66,    78,    91,   105, // 0x08 - 0x0F
               120,   136,   153,   171,   190,   210,   231,   253, // 0x10 - 0x17
@@ -71,7 +71,7 @@ namespace SF3.Statistics {
         /// <summary>
         /// Hard-coded list of stat curve groups, indexed by [IsPromoted][GrowthGroup].
         /// </summary>
-        static public readonly Dictionary<bool, StatGrowthGroup[]> StatGrowthGroups = new Dictionary<bool, StatGrowthGroup[]>()
+        public static readonly Dictionary<bool, StatGrowthGroup[]> StatGrowthGroups = new Dictionary<bool, StatGrowthGroup[]>()
         {
             {
                 false,
@@ -104,7 +104,7 @@ namespace SF3.Statistics {
         /// <param name="growthValue">Internal value used for stat growth provided by GetStatGrowthValue*()
         /// functions.</param>
         /// <returns>The average number of stat gains per level.</returns>
-        static public double GetAverageStatGrowthPerLevel(int growthValue) {
+        public static double GetAverageStatGrowthPerLevel(int growthValue) {
             var guaranteedStatBonus = (growthValue & 0xf00) % 15;
 
             // The portion of growthValue % 0x100 is the starting point for the formula to determine whether
@@ -125,7 +125,7 @@ namespace SF3.Statistics {
         /// <param name="growthValue">Internal value used for stat growth provided by GetStatGrowthValue*()
         /// functions.</param>
         /// <returns>The average number of stat gains per level as a percentage string.</returns>
-        static public string GetAverageStatGrowthPerLevelAsPercent(int growthValue)
+        public static string GetAverageStatGrowthPerLevelAsPercent(int growthValue)
             => string.Format("{0:0.##}", GetAverageStatGrowthPerLevel(growthValue) * 100) + "%";
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace SF3.Statistics {
         /// <param name="statRange">The total range of stats to increase by over the course of 'levelRange'.</param>
         /// <param name="levelRange">The number of levels over which the stat range is reached.</param>
         /// <returns>An internal value used for calculating stat gains.</returns>
-        static public int GetStatGrowthValuePerLevel(int statRange, int levelRange) {
+        public static int GetStatGrowthValuePerLevel(int statRange, int levelRange) {
             var statRangeTimes0x100 = statRange << 8;
             switch (levelRange) {
                 case 2:
@@ -145,13 +145,13 @@ namespace SF3.Statistics {
                 case 4:
                     return statRangeTimes0x100 >> 2;
                 case 5:
-                    return statRangeTimes0x100 * 0x100 / 0x280 >> 1;
+                    return (statRangeTimes0x100 * 0x100 / 0x280) >> 1;
                 case 10:
-                    return statRangeTimes0x100 * 0x100 / 0x280 >> 2;
+                    return (statRangeTimes0x100 * 0x100 / 0x280) >> 2;
                 case 13:
-                    return statRangeTimes0x100 * 0x100 / 0x340 >> 2;
+                    return (statRangeTimes0x100 * 0x100 / 0x340) >> 2;
                 case 69:
-                    return statRangeTimes0x100 * 0x100 / 0x228 >> 5;
+                    return (statRangeTimes0x100 * 0x100 / 0x228) >> 5;
                 default:
                     return statRangeTimes0x100 / levelRange;
             }

@@ -1,15 +1,15 @@
 using SF3.Models.X1.AI;
-using SF3.Models.X1.Arrows;
+using SF3.Models.X1.Arrow;
 using SF3.Models.X1.BattlePointers;
 using SF3.Models.X1.CustomMovement;
-using SF3.Models.X1.Enters;
+using SF3.Models.X1.Enter;
 using SF3.Models.X1.Headers;
-using SF3.Models.X1.Npcs;
+using SF3.Models.X1.Npc;
 using SF3.Models.X1.Slots;
 using SF3.Models.X1.SpawnZones;
-using SF3.Models.X1.Tiles;
-using SF3.Models.X1.Treasures;
-using SF3.Models.X1.Warps;
+using SF3.Models.X1.TileMovement;
+using SF3.Models.X1.Treasure;
+using SF3.Models.X1.Warp;
 using SF3.Types;
 
 namespace SF3.FileEditors {
