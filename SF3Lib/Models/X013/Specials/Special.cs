@@ -3,22 +3,18 @@ using SF3.Types;
 
 namespace SF3.Models.X013.Specials {
     public class Special {
-        private IX013_FileEditor _fileEditor;
+        private readonly IX013_FileEditor _fileEditor;
 
-        private int unknown1;
-        private int damageCalculation;
-        private int extraPow;
-        private int pow;
-        private int address;
-        private int offset;
+        private readonly int unknown1;
+        private readonly int damageCalculation;
+        private readonly int extraPow;
+        private readonly int pow;
+        private readonly int offset;
         private int r1;
         private int r2;
         private int r3;
         private int machh;
-
-        private int index;
-        private string name;
-        private int checkVersion2;
+        private readonly int checkVersion2;
 
         public Special(IX013_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
@@ -38,44 +34,48 @@ namespace SF3.Models.X013.Specials {
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00006d18; //scn3
             }
-            else
+            else {
                 offset = 0x00006bf4; //pd
+            }
 
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            ID = id;
+            Name = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 4);
+            var start = offset + (id * 4);
             unknown1 = start; //2 bytes
             damageCalculation = start + 1; //1 byte
             extraPow = start + 2; //1 byte
             pow = start + 3; //1 byte
-            address = offset + (id * 0x4);
+            Address = offset + (id * 0x4);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int ID => index;
-        public string Name => name;
+        public int ID { get; }
+        public string Name { get; }
 
         public int Unknown1 {
             get => _fileEditor.GetByte(unknown1);
             set => _fileEditor.SetByte(unknown1, (byte) value);
         }
+
         public int DamageCalc {
             get => _fileEditor.GetByte(damageCalculation);
             set => _fileEditor.SetByte(damageCalculation, (byte) value);
         }
+
         public int ExtraPow {
             get => _fileEditor.GetByte(extraPow);
             set => _fileEditor.SetByte(extraPow, (byte) value);
         }
+
         public int Pow {
             get => _fileEditor.GetByte(pow);
             set => _fileEditor.SetByte(pow, (byte) value);
@@ -102,7 +102,7 @@ namespace SF3.Models.X013.Specials {
                 if (_fileEditor.GetByte(damageCalculation) != 0x64) {
                     r1 = _fileEditor.GetByte(extraPow);
                     ;
-                    r1 = r1 - _fileEditor.GetByte(damageCalculation);
+                    r1 -= _fileEditor.GetByte(damageCalculation);
                     ;
                     r3 = 0; //random number
 
@@ -125,10 +125,10 @@ namespace SF3.Models.X013.Specials {
                     //r1 = r1 >> 1;
                     //r1 = r1 >> 1;
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
-                    r1 = r1 + _fileEditor.GetByte(damageCalculation);
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
+                    r1 += _fileEditor.GetByte(damageCalculation);
 
                     return r1;
                 }
@@ -143,7 +143,7 @@ namespace SF3.Models.X013.Specials {
                 if (_fileEditor.GetByte(damageCalculation) != 0x64) {
                     r1 = _fileEditor.GetByte(extraPow);
                     ;
-                    r1 = r1 - _fileEditor.GetByte(damageCalculation);
+                    r1 -= _fileEditor.GetByte(damageCalculation);
                     ;
                     r3 = 1; //random number
 
@@ -152,10 +152,10 @@ namespace SF3.Models.X013.Specials {
                     r2 = machh;
                     r1 = r2 / 7;
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
-                    r1 = r1 + _fileEditor.GetByte(damageCalculation);
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
+                    r1 += _fileEditor.GetByte(damageCalculation);
 
                     return r1;
                 }
@@ -170,7 +170,7 @@ namespace SF3.Models.X013.Specials {
                 if (_fileEditor.GetByte(damageCalculation) != 0x64) {
                     r1 = _fileEditor.GetByte(extraPow);
                     ;
-                    r1 = r1 - _fileEditor.GetByte(damageCalculation);
+                    r1 -= _fileEditor.GetByte(damageCalculation);
                     ;
                     r3 = 2; //random number
 
@@ -179,10 +179,10 @@ namespace SF3.Models.X013.Specials {
                     r2 = machh;
                     r1 = r2 / 7;
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
-                    r1 = r1 + _fileEditor.GetByte(damageCalculation);
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
+                    r1 += _fileEditor.GetByte(damageCalculation);
 
                     return r1;
                 }
@@ -197,7 +197,7 @@ namespace SF3.Models.X013.Specials {
                 if (_fileEditor.GetByte(damageCalculation) != 0x64) {
                     r1 = _fileEditor.GetByte(extraPow);
                     ;
-                    r1 = r1 - _fileEditor.GetByte(damageCalculation);
+                    r1 -= _fileEditor.GetByte(damageCalculation);
                     ;
                     r3 = 3; //random number
 
@@ -206,10 +206,10 @@ namespace SF3.Models.X013.Specials {
                     r2 = machh;
                     r1 = r2 / 7;
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
-                    r1 = r1 + _fileEditor.GetByte(damageCalculation);
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
+                    r1 += _fileEditor.GetByte(damageCalculation);
 
                     return r1;
                 }
@@ -224,7 +224,7 @@ namespace SF3.Models.X013.Specials {
                 if (_fileEditor.GetByte(damageCalculation) != 0x64) {
                     r1 = _fileEditor.GetByte(extraPow);
                     ;
-                    r1 = r1 - _fileEditor.GetByte(damageCalculation);
+                    r1 -= _fileEditor.GetByte(damageCalculation);
                     ;
                     r3 = 4; //random number
 
@@ -233,10 +233,10 @@ namespace SF3.Models.X013.Specials {
                     r2 = machh;
                     r1 = r2 / 7;
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
-                    r1 = r1 + _fileEditor.GetByte(damageCalculation);
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
+                    r1 += _fileEditor.GetByte(damageCalculation);
 
                     return r1;
                 }
@@ -251,7 +251,7 @@ namespace SF3.Models.X013.Specials {
                 if (_fileEditor.GetByte(damageCalculation) != 0x64) {
                     r1 = _fileEditor.GetByte(extraPow);
                     ;
-                    r1 = r1 - _fileEditor.GetByte(damageCalculation);
+                    r1 -= _fileEditor.GetByte(damageCalculation);
                     ;
                     r3 = 5; //random number
 
@@ -260,10 +260,10 @@ namespace SF3.Models.X013.Specials {
                     r2 = machh;
                     r1 = r2 / 7;
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
-                    r1 = r1 + _fileEditor.GetByte(damageCalculation);
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
+                    r1 += _fileEditor.GetByte(damageCalculation);
 
                     return r1;
                 }
@@ -278,7 +278,7 @@ namespace SF3.Models.X013.Specials {
                 if (_fileEditor.GetByte(damageCalculation) != 0x64) {
                     r1 = _fileEditor.GetByte(extraPow);
                     ;
-                    r1 = r1 - _fileEditor.GetByte(damageCalculation);
+                    r1 -= _fileEditor.GetByte(damageCalculation);
                     ;
                     r3 = 6; //random number
 
@@ -287,10 +287,10 @@ namespace SF3.Models.X013.Specials {
                     r2 = machh;
                     r1 = r2 / 7;
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
-                    r1 = r1 + _fileEditor.GetByte(damageCalculation);
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
+                    r1 += _fileEditor.GetByte(damageCalculation);
 
                     return r1;
                 }
@@ -305,7 +305,7 @@ namespace SF3.Models.X013.Specials {
                 if (_fileEditor.GetByte(damageCalculation) != 0x64) {
                     r1 = _fileEditor.GetByte(extraPow);
                     ;
-                    r1 = r1 - _fileEditor.GetByte(damageCalculation);
+                    r1 -= _fileEditor.GetByte(damageCalculation);
                     ;
                     r3 = 7; //random number
 
@@ -314,10 +314,10 @@ namespace SF3.Models.X013.Specials {
                     r2 = machh;
                     r1 = r2 / 7;
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
-                    r1 = r1 + _fileEditor.GetByte(damageCalculation);
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
+                    r1 += _fileEditor.GetByte(damageCalculation);
 
                     return r1;
                 }
@@ -338,7 +338,7 @@ namespace SF3.Models.X013.Specials {
                     r2 = _fileEditor.GetByte(extraPow) - r2;
                     r3 = 8; //random number
                     r1 = r3;
-                    r1 = r1 - 7;
+                    r1 -= 7;
 
                     machh = r1 * r2;
 
@@ -350,9 +350,9 @@ namespace SF3.Models.X013.Specials {
                     //Console.WriteLine("r1 = " + r1);
                     r1 = -(r2 / 7);
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
                     r1 = _fileEditor.GetByte(extraPow) + r1;
 
                     return r1;
@@ -371,7 +371,7 @@ namespace SF3.Models.X013.Specials {
                     r2 = _fileEditor.GetByte(extraPow) - r2;
                     r3 = 9; //random number
                     r1 = r3;
-                    r1 = r1 - 7;
+                    r1 -= 7;
 
                     machh = r1 * r2;
 
@@ -379,9 +379,9 @@ namespace SF3.Models.X013.Specials {
 
                     r1 = -(r2 / 7);
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
                     r1 = _fileEditor.GetByte(extraPow) + r1;
 
                     return r1;
@@ -400,7 +400,7 @@ namespace SF3.Models.X013.Specials {
                     r2 = _fileEditor.GetByte(extraPow) - r2;
                     r3 = 10; //random number
                     r1 = r3;
-                    r1 = r1 - 7;
+                    r1 -= 7;
 
                     machh = r1 * r2;
 
@@ -408,9 +408,9 @@ namespace SF3.Models.X013.Specials {
 
                     r1 = -(r2 / 7);
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
                     r1 = _fileEditor.GetByte(extraPow) + r1;
 
                     return r1;
@@ -429,7 +429,7 @@ namespace SF3.Models.X013.Specials {
                     r2 = _fileEditor.GetByte(extraPow) - r2;
                     r3 = 11; //random number
                     r1 = r3;
-                    r1 = r1 - 7;
+                    r1 -= 7;
 
                     machh = r1 * r2;
 
@@ -437,9 +437,9 @@ namespace SF3.Models.X013.Specials {
 
                     r1 = -(r2 / 7);
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
                     r1 = _fileEditor.GetByte(extraPow) + r1;
 
                     return r1;
@@ -458,7 +458,7 @@ namespace SF3.Models.X013.Specials {
                     r2 = _fileEditor.GetByte(extraPow) - r2;
                     r3 = 12; //random number
                     r1 = r3;
-                    r1 = r1 - 7;
+                    r1 -= 7;
 
                     machh = r1 * r2;
 
@@ -466,9 +466,9 @@ namespace SF3.Models.X013.Specials {
 
                     r1 = -(r2 / 7);
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
                     r1 = _fileEditor.GetByte(extraPow) + r1;
 
                     return r1;
@@ -487,7 +487,7 @@ namespace SF3.Models.X013.Specials {
                     r2 = _fileEditor.GetByte(extraPow) - r2;
                     r3 = 13; //random number
                     r1 = r3;
-                    r1 = r1 - 7;
+                    r1 -= 7;
 
                     machh = r1 * r2;
 
@@ -495,9 +495,9 @@ namespace SF3.Models.X013.Specials {
 
                     r1 = -(r2 / 7);
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
                     r1 = _fileEditor.GetByte(extraPow) + r1;
 
                     return r1;
@@ -516,7 +516,7 @@ namespace SF3.Models.X013.Specials {
                     r2 = _fileEditor.GetByte(extraPow) - r2;
                     r3 = 14; //random number
                     r1 = r3;
-                    r1 = r1 - 7;
+                    r1 -= 7;
 
                     machh = r1 * r2;
 
@@ -524,9 +524,9 @@ namespace SF3.Models.X013.Specials {
 
                     r1 = -(r2 / 7);
 
-                    r2 = r2 << 2;
-                    r2 = r2 - r2;
-                    r1 = r1 - r2;
+                    r2 <<= 2;
+                    r2 -= r2;
+                    r1 -= r2;
                     r1 = _fileEditor.GetByte(extraPow) + r1;
 
                     return r1;
@@ -537,6 +537,6 @@ namespace SF3.Models.X013.Specials {
             }
         }
 
-        public int Address => (address);
+        public int Address { get; }
     }
 }

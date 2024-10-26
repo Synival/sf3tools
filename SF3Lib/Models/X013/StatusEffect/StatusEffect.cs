@@ -1,31 +1,25 @@
 using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.X013.StatusEffects {
+namespace SF3.Models.X013.StatusEffect {
     public class StatusEffect {
-        private IX013_FileEditor _fileEditor;
+        private readonly IX013_FileEditor _fileEditor;
 
-        private int luck0;
-        private int luck1;
-        private int luck2;
-        private int luck3;
-        private int luck4;
-        private int luck5;
-        private int luck6;
-        private int luck7;
-        private int luck8;
-        private int luck9;
+        private readonly int luck0;
+        private readonly int luck1;
+        private readonly int luck2;
+        private readonly int luck3;
+        private readonly int luck4;
+        private readonly int luck5;
+        private readonly int luck6;
+        private readonly int luck7;
+        private readonly int luck8;
+        private readonly int luck9;
 
-        //int pointerValue;
-
-        private int address;
         //private int npcOffset;
-        private int offset;
-        private int sub;
-
-        private int index;
-        private string name;
-        private int checkVersion2;
+        private readonly int offset;
+        private readonly int sub;
+        private readonly int checkVersion2;
 
         /*public int NPCTableAddress1
         {
@@ -45,9 +39,7 @@ namespace SF3.Models.X013.StatusEffects {
             if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00007408; //scn1
                 if (checkVersion2 == 0x0A) //original jp
-                {
                     offset -= 0x0C;
-                }
             }
             else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00007314; //scn2
@@ -55,15 +47,16 @@ namespace SF3.Models.X013.StatusEffects {
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x000071fc; //scn3
             }
-            else
+            else {
                 offset = 0x000070d8; //pd
+            }
 
-            index = id;
-            name = text;
+            StatusEffectID = id;
+            StatusEffectName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x18);
+            var start = offset + (id * 0x18);
 
             luck0 = start;
             luck1 = start + 2;
@@ -77,13 +70,13 @@ namespace SF3.Models.X013.StatusEffects {
             luck9 = start + 18;
 
             //unknown42 = start + 52;
-            address = offset + (id * 0x18);
+            StatusEffectAddress = offset + (id * 0x18);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int StatusEffectID => index;
-        public string StatusEffectName => name;
+        public int StatusEffectID { get; }
+        public string StatusEffectName { get; }
 
         public int StatusLuck0 {
             get => _fileEditor.GetByte(luck0);
@@ -135,6 +128,6 @@ namespace SF3.Models.X013.StatusEffects {
             set => _fileEditor.SetByte(luck9, (byte) value);
         }
 
-        public int StatusEffectAddress => (address);
+        public int StatusEffectAddress { get; }
     }
 }

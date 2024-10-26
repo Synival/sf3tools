@@ -3,20 +3,16 @@ using SF3.Types;
 
 namespace SF3.Models.X013.Critrate {
     public class Critrate {
-        private IX013_FileEditor _fileEditor;
+        private readonly IX013_FileEditor _fileEditor;
 
-        private int noSpecial;
-        private int oneSpecial;
-        private int twoSpecial;
-        private int threeSpecial;
-        private int fourSpecial;
-        private int fiveSpecial;
-        private int address;
-        private int offset;
-
-        private int index;
-        private string name;
-        private int checkVersion2;
+        private readonly int noSpecial;
+        private readonly int oneSpecial;
+        private readonly int twoSpecial;
+        private readonly int threeSpecial;
+        private readonly int fourSpecial;
+        private readonly int fiveSpecial;
+        private readonly int offset;
+        private readonly int checkVersion2;
 
         public Critrate(IX013_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
@@ -36,50 +32,55 @@ namespace SF3.Models.X013.Critrate {
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x000071dc; //scn3
             }
-            else
+            else {
                 offset = 0x000070b8; //pd
+            }
 
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            CritrateID = id;
+            CritrateName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 8);
+            var start = offset + (id * 8);
             noSpecial = start; //1 bytes
             oneSpecial = start + 1; //1 byte
             twoSpecial = start + 2; //1 byte
             threeSpecial = start + 3; //1 byte
             fourSpecial = start + 4;
             fiveSpecial = start + 5;
-            address = offset + (id * 0x8);
+            CritrateAddress = offset + (id * 0x8);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int CritrateID => index;
-        public string CritrateName => name;
+        public int CritrateID { get; }
+        public string CritrateName { get; }
 
         public int NoSpecial {
             get => _fileEditor.GetByte(noSpecial);
             set => _fileEditor.SetByte(noSpecial, (byte) value);
         }
+
         public int OneSpecial {
             get => _fileEditor.GetByte(oneSpecial);
             set => _fileEditor.SetByte(oneSpecial, (byte) value);
         }
+
         public int TwoSpecial {
             get => _fileEditor.GetByte(twoSpecial);
             set => _fileEditor.SetByte(twoSpecial, (byte) value);
         }
+
         public int ThreeSpecial {
             get => _fileEditor.GetByte(threeSpecial);
             set => _fileEditor.SetByte(threeSpecial, (byte) value);
         }
+
         public int FourSpecial {
             get => _fileEditor.GetByte(fourSpecial);
             set => _fileEditor.SetByte(fourSpecial, (byte) value);
@@ -90,6 +91,6 @@ namespace SF3.Models.X013.Critrate {
             set => _fileEditor.SetByte(fiveSpecial, (byte) value);
         }
 
-        public int CritrateAddress => (address);
+        public int CritrateAddress { get; }
     }
 }

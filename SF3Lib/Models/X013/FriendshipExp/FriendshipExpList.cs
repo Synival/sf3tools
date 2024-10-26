@@ -4,7 +4,7 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X013.Presets {
+namespace SF3.Models.X013.FriendshipExp {
     public class FriendshipExpList : ModelArray<FriendshipExp> {
         public int MaxSize { get; } = 1;
 
@@ -12,7 +12,7 @@ namespace SF3.Models.X013.Presets {
             _fileEditor = fileEditor;
         }
 
-        private IX013_FileEditor _fileEditor;
+        private readonly IX013_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/ExpList.xml";
 
@@ -26,15 +26,14 @@ namespace SF3.Models.X013.Presets {
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
                 var xml = MakeXmlReader(stream);
-                xml.Read();
+                _ = xml.Read();
                 while (!xml.EOF) {
-                    xml.Read();
+                    _ = xml.Read();
                     if (xml.HasAttributes) {
                         var newModel = new FriendshipExp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.PresetID < 0 || newModel.PresetID >= MaxSize) {
+                        if (newModel.PresetID < 0 || newModel.PresetID >= MaxSize)
                             throw new IndexOutOfRangeException();
-                        }
                     }
                 }
             }
@@ -45,9 +44,7 @@ namespace SF3.Models.X013.Presets {
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }

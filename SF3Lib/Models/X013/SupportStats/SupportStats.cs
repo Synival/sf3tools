@@ -3,18 +3,14 @@ using SF3.Types;
 
 namespace SF3.Models.X013.SupportStats {
     public class SupportStats {
-        private IX013_FileEditor _fileEditor;
+        private readonly IX013_FileEditor _fileEditor;
 
-        private int sLvlStat1;
-        private int sLvlStat2;
-        private int sLvlStat3;
-        private int sLvlStat4;
-        private int address;
-        private int offset;
-
-        private int index;
-        private string name;
-        private int checkVersion2;
+        private readonly int sLvlStat1;
+        private readonly int sLvlStat2;
+        private readonly int sLvlStat3;
+        private readonly int sLvlStat4;
+        private readonly int offset;
+        private readonly int checkVersion2;
 
         public SupportStats(IX013_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
@@ -34,31 +30,32 @@ namespace SF3.Models.X013.SupportStats {
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x000072f1; //scn3
             }
-            else
+            else {
                 offset = 0x000071cd; //pd
+            }
 
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            StatID = id;
+            StatName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 4);
+            var start = offset + (id * 4);
             sLvlStat1 = start; //1 bytes
             sLvlStat2 = start + 1; //1 byte
             sLvlStat3 = start + 2; //1 byte
             sLvlStat4 = start + 3; //1 byte
-            address = offset + (id * 0x4);
+            StatAddress = offset + (id * 0x4);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int StatID => index;
-        public string StatName => name;
+        public int StatID { get; }
+        public string StatName { get; }
 
         public int SLvlStat1 {
             get => _fileEditor.GetByte(sLvlStat1);
@@ -77,6 +74,6 @@ namespace SF3.Models.X013.SupportStats {
             set => _fileEditor.SetByte(sLvlStat4, (byte) value);
         }
 
-        public int StatAddress => (address);
+        public int StatAddress { get; }
     }
 }

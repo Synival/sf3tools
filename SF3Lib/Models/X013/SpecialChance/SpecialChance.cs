@@ -3,21 +3,16 @@ using SF3.Types;
 
 namespace SF3.Models.X013.SpecialChance {
     public class SpecialChance {
-        private IX013_FileEditor _fileEditor;
+        private readonly IX013_FileEditor _fileEditor;
 
-        private int twoSpecials2;
-        private int threeSpecials3;
-        private int threeSpecials2;
-        private int fourSpecials4;
-        private int fourSpecials3;
-        private int fourSpecials2;
-
-        private int address;
-        private int offset;
-
-        private int index;
-        private string name;
-        private int checkVersion2;
+        private readonly int twoSpecials2;
+        private readonly int threeSpecials3;
+        private readonly int threeSpecials2;
+        private readonly int fourSpecials4;
+        private readonly int fourSpecials3;
+        private readonly int fourSpecials2;
+        private readonly int offset;
+        private readonly int checkVersion2;
 
         public SpecialChance(IX013_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
@@ -37,21 +32,22 @@ namespace SF3.Models.X013.SpecialChance {
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x000027a2; //scn3
             }
-            else
+            else {
                 offset = 0x000027c2; //pd
+            }
 
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            SpecialChanceID = id;
+            SpecialChanceName = text;
 
             //int start = 0x354c + (id * 24);
 
             if (Scenario == ScenarioType.Scenario1) {
-                int start = offset + (id * 0x4a);
+                var start = offset + (id * 0x4a);
                 twoSpecials2 = start + 0x01; //1 bytes
                 threeSpecials3 = start + 0x15; //1 byte
                 threeSpecials2 = start + 0x1d; //1 byte
@@ -59,10 +55,10 @@ namespace SF3.Models.X013.SpecialChance {
                 fourSpecials3 = start + 0x3d; //1 byte
                 fourSpecials2 = start + 0x49; //1 byte
 
-                address = offset + (id * 0x4a);
+                SpecialChanceAddress = offset + (id * 0x4a);
             }
             else if (Scenario == ScenarioType.Scenario2) {
-                int start = offset + (id * 0x4a);
+                var start = offset + (id * 0x4a);
                 twoSpecials2 = start + 0x01; //1 bytes
                 threeSpecials3 = start + 0x15; //1 byte
                 threeSpecials2 = start + 0x1d; //1 byte
@@ -70,10 +66,10 @@ namespace SF3.Models.X013.SpecialChance {
                 fourSpecials3 = start + 0x3d; //1 byte
                 fourSpecials2 = start + 0x49; //1 byte
 
-                address = offset + (id * 0x4a);
+                SpecialChanceAddress = offset + (id * 0x4a);
             }
             else if (Scenario == ScenarioType.Scenario3) {
-                int start = offset + (id * 0x3a);
+                var start = offset + (id * 0x3a);
                 twoSpecials2 = start + 0x01; //1 bytes
                 threeSpecials3 = start + 0x0f; //1 byte
                 threeSpecials2 = start + 0x19; //1 byte
@@ -81,10 +77,10 @@ namespace SF3.Models.X013.SpecialChance {
                 fourSpecials3 = start + 0x2d; //1 byte
                 fourSpecials2 = start + 0x39; //1 byte
 
-                address = offset + (id * 0x3a);
+                SpecialChanceAddress = offset + (id * 0x3a);
             }
             else {
-                int start = offset + (id * 0x3a);
+                var start = offset + (id * 0x3a);
                 twoSpecials2 = start + 0x01; //1 bytes
                 threeSpecials3 = start + 0x0f; //1 byte
                 threeSpecials2 = start + 0x19; //1 byte
@@ -92,28 +88,31 @@ namespace SF3.Models.X013.SpecialChance {
                 fourSpecials3 = start + 0x2d; //1 byte
                 fourSpecials2 = start + 0x39; //1 byte
 
-                address = offset + (id * 0x3a);
+                SpecialChanceAddress = offset + (id * 0x3a);
             }
 
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int SpecialChanceID => index;
-        public string SpecialChanceName => name;
+        public int SpecialChanceID { get; }
+        public string SpecialChanceName { get; }
 
         public int TwoSpecials2 {
             get => _fileEditor.GetByte(twoSpecials2);
             set => _fileEditor.SetByte(twoSpecials2, (byte) value);
         }
+
         public int ThreeSpecials3 {
             get => _fileEditor.GetByte(threeSpecials3);
             set => _fileEditor.SetByte(threeSpecials3, (byte) value);
         }
+
         public int ThreeSpecials2 {
             get => _fileEditor.GetByte(threeSpecials2);
             set => _fileEditor.SetByte(threeSpecials2, (byte) value);
         }
+
         public int FourSpecials4 {
             get => _fileEditor.GetByte(fourSpecials4);
             set => _fileEditor.SetByte(fourSpecials4, (byte) value);
@@ -129,6 +128,6 @@ namespace SF3.Models.X013.SpecialChance {
             set => _fileEditor.SetByte(fourSpecials2, (byte) value);
         }
 
-        public int SpecialChanceAddress => (address);
+        public int SpecialChanceAddress { get; }
     }
 }

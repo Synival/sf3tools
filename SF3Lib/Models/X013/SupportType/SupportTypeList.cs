@@ -4,7 +4,7 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X013.SupportTypes {
+namespace SF3.Models.X013.SupportType {
     public class SupportTypeList : ModelArray<SupportType> {
         public int MaxSize { get; } = 120;
 
@@ -13,8 +13,8 @@ namespace SF3.Models.X013.SupportTypes {
             _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "Characters.xml");
         }
 
-        private string _resourceFile;
-        private IX013_FileEditor _fileEditor;
+        private readonly string _resourceFile;
+        private readonly IX013_FileEditor _fileEditor;
 
         public override string ResourceFile => _resourceFile;
 
@@ -28,15 +28,14 @@ namespace SF3.Models.X013.SupportTypes {
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
                 var xml = MakeXmlReader(stream);
-                xml.Read();
+                _ = xml.Read();
                 while (!xml.EOF) {
-                    xml.Read();
+                    _ = xml.Read();
                     if (xml.HasAttributes) {
                         var newModel = new SupportType(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.SpellID < 0 || newModel.SpellID >= MaxSize) {
+                        if (newModel.SpellID < 0 || newModel.SpellID >= MaxSize)
                             throw new IndexOutOfRangeException();
-                        }
                     }
                 }
             }
@@ -47,9 +46,7 @@ namespace SF3.Models.X013.SupportTypes {
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }

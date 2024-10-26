@@ -4,7 +4,7 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X013.StatusEffects {
+namespace SF3.Models.X013.StatusEffect {
     public class StatusEffectList : ModelArray<StatusEffect> {
         public int MaxSize { get; } = 1000;
 
@@ -12,7 +12,7 @@ namespace SF3.Models.X013.StatusEffects {
             _fileEditor = fileEditor;
         }
 
-        private IX013_FileEditor _fileEditor;
+        private readonly IX013_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/StatusGroupList.xml";
 
@@ -27,11 +27,7 @@ namespace SF3.Models.X013.StatusEffects {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
-                xml.Read();
-                //int stop = 0;
-                //int numberTest = 0;
-                //while (!xml.EOF)
-                int myCount = 0;
+                _ = xml.Read();
                 //string myName = "WarpIndex " + myCount;
                 //Globals.treasureDebug = true;
                 //while (!xml.EOF && (_models.Length == 0 || newModel.Searched != 0xffff))
@@ -41,14 +37,13 @@ namespace SF3.Models.X013.StatusEffects {
                 //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                 {
                     {
-                        xml.Read();
+                        _ = xml.Read();
                         if (xml.HasAttributes) {
                             var newModel = new StatusEffect(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                             _models = _models.ExpandedWith(newModel);
 
-                            if (newModel.StatusEffectID < 0 || newModel.StatusEffectID >= MaxSize) {
+                            if (newModel.StatusEffectID < 0 || newModel.StatusEffectID >= MaxSize)
                                 throw new IndexOutOfRangeException();
-                            }
                         }
                     }
                 }
@@ -60,9 +55,7 @@ namespace SF3.Models.X013.StatusEffects {
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }

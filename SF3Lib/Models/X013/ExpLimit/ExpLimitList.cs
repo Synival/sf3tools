@@ -12,7 +12,7 @@ namespace SF3.Models.X013.ExpLimit {
             _fileEditor = fileEditor;
         }
 
-        private IX013_FileEditor _fileEditor;
+        private readonly IX013_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/ExpLimitList.xml";
 
@@ -27,9 +27,9 @@ namespace SF3.Models.X013.ExpLimit {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
-                xml.Read();
+                _ = xml.Read();
                 while (!xml.EOF) {
-                    xml.Read();
+                    _ = xml.Read();
                     if (xml.HasAttributes) {
                         var newModel = new ExpLimit(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
@@ -46,9 +46,7 @@ namespace SF3.Models.X013.ExpLimit {
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }
