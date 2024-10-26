@@ -13,8 +13,8 @@ namespace SF3.Models.X002.Spells {
             _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "Spells.xml");
         }
 
-        private string _resourceFile;
-        private IX002_FileEditor _fileEditor;
+        private readonly string _resourceFile;
+        private readonly IX002_FileEditor _fileEditor;
 
         public override string ResourceFile => _resourceFile;
 
@@ -28,9 +28,9 @@ namespace SF3.Models.X002.Spells {
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
                 var xml = MakeXmlReader(stream);
-                xml.Read();
+                _ = xml.Read();
                 while (!xml.EOF) {
-                    xml.Read();
+                    _ = xml.Read();
                     if (xml.HasAttributes) {
                         var newModel = new Spell(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
@@ -47,9 +47,7 @@ namespace SF3.Models.X002.Spells {
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }

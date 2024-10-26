@@ -4,22 +4,18 @@ using SF3.Values;
 
 namespace SF3.Models.X002.Loading {
     public class Loading {
-        private IX002_FileEditor _fileEditor;
+        private readonly IX002_FileEditor _fileEditor;
 
-        private int locationID;
-        private int x1;
-        private int chp;
-        private int x5;
-        private int music;
-        private int mpd;
-        private int unknown;
-        private int chr;
-        private int address;
-        private int offset;
-        private int checkVersion2;
-
-        private int index;
-        private string name;
+        private readonly int locationID;
+        private readonly int x1;
+        private readonly int chp;
+        private readonly int x5;
+        private readonly int music;
+        private readonly int mpd;
+        private readonly int unknown;
+        private readonly int chr;
+        private readonly int offset;
+        private readonly int checkVersion2;
 
         public Loading(IX002_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
@@ -36,26 +32,27 @@ namespace SF3.Models.X002.Loading {
             else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00004bd8; //scn2
                 if (checkVersion2 == 0x2C) {
-                    offset = offset - 0x44;
+                    offset -= 0x44;
                 }
             }
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x000057d0; //scn3
             }
-            else
+            else {
                 offset = 0x000058bc; //pd
+            }
 
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            LoadID = id;
+            LoadName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x10);
+            var start = offset + (id * 0x10);
             locationID = start; //2 bytes
             x1 = start + 0x02; //2 byte
             chp = start + 0x04; //2 byte
@@ -64,13 +61,13 @@ namespace SF3.Models.X002.Loading {
             mpd = start + 0x0a; //2 bytes
             unknown = start + 0x0c; //2 bytes
             chr = start + 0x0e; //2 bytes
-            address = offset + (id * 0x10);
+            LoadAddress = offset + (id * 0x10);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int LoadID => index;
-        public string LoadName => name;
+        public int LoadID { get; }
+        public string LoadName { get; }
 
         public int LocationID {
             get => _fileEditor.GetWord(locationID);
@@ -112,6 +109,6 @@ namespace SF3.Models.X002.Loading {
             set => _fileEditor.SetWord(chr, value.Value);
         }
 
-        public int LoadAddress => (address);
+        public int LoadAddress { get; }
     }
 }

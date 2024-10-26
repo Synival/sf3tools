@@ -4,37 +4,33 @@ using SF3.Values;
 
 namespace SF3.Models.X002.Items {
     public class Item {
-        private IX002_FileEditor _fileEditor;
+        private readonly IX002_FileEditor _fileEditor;
 
-        private int PriceLocation;
-        private int WeaponTypeLocation;
-        private int EffectsEquipLocation;
-        private int RequirementLocation;
-        private int RangeLocation;
-        private int AttackLocation;
-        private int DefenseLocation;
-        private int AttackUpRankLocation;
-        private int SpellUpRankLocation;
-        private int PhysicalAttributeLocation;
-        private int Unknown1Location;
-        private int MonsterTypeAttributeLocation;
-        private int Unknown2Location;
-        private int StatType1Location;
-        private int StatUp1Location;
-        private int StatType2Location;
-        private int StatUp2Location;
-        private int StatType3Location;
-        private int StatUp3Location;
-        private int StatType4Location;
-        private int StatUp4Location;
-        private int SpellOnUseLocation;
-        private int SpellLvOnUseLocation;
-        private int address;
-        private int offset;
-        private int checkVersion2;
-
-        private int index;
-        private string name;
+        private readonly int PriceLocation;
+        private readonly int WeaponTypeLocation;
+        private readonly int EffectsEquipLocation;
+        private readonly int RequirementLocation;
+        private readonly int RangeLocation;
+        private readonly int AttackLocation;
+        private readonly int DefenseLocation;
+        private readonly int AttackUpRankLocation;
+        private readonly int SpellUpRankLocation;
+        private readonly int PhysicalAttributeLocation;
+        private readonly int Unknown1Location;
+        private readonly int MonsterTypeAttributeLocation;
+        private readonly int Unknown2Location;
+        private readonly int StatType1Location;
+        private readonly int StatUp1Location;
+        private readonly int StatType2Location;
+        private readonly int StatUp2Location;
+        private readonly int StatType3Location;
+        private readonly int StatUp3Location;
+        private readonly int StatType4Location;
+        private readonly int StatUp4Location;
+        private readonly int SpellOnUseLocation;
+        private readonly int SpellLvOnUseLocation;
+        private readonly int offset;
+        private readonly int checkVersion2;
 
         public Item(IX002_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
@@ -51,26 +47,27 @@ namespace SF3.Models.X002.Items {
             else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00002e9c; //scn2
                 if (checkVersion2 == 0x2C) {
-                    offset = offset - 0x44;
+                    offset -= 0x44;
                 }
             }
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x0000354c; //scn3
             }
-            else
+            else {
                 offset = 0x000035fc; //pd
+            }
 
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            ID = id;
+            Name = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 24);
+            var start = offset + (id * 24);
             PriceLocation = start; //2 bytes. only thing that is 2 bytes
             WeaponTypeLocation = start + 2; //1 byte
             EffectsEquipLocation = start + 3; //1 byte
@@ -94,13 +91,13 @@ namespace SF3.Models.X002.Items {
             StatUp4Location = start + 21;
             SpellOnUseLocation = start + 22;
             SpellLvOnUseLocation = start + 23;
-            address = offset + (id * 0x18);
+            Address = offset + (id * 0x18);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int ID => index;
-        public string Name => name;
+        public int ID { get; }
+        public string Name { get; }
 
         public int Price {
             get => _fileEditor.GetWord(PriceLocation);
@@ -279,6 +276,6 @@ namespace SF3.Models.X002.Items {
             set => _fileEditor.SetByte(SpellLvOnUseLocation, (byte) value);
         }
 
-        public int Address => (address);
+        public int Address { get; }
     }
 }

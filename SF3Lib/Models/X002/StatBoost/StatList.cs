@@ -12,7 +12,7 @@ namespace SF3.Models.X002.StatBoost {
             _fileEditor = fileEditor;
         }
 
-        private IX002_FileEditor _fileEditor;
+        private readonly IX002_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/X002StatList.xml";
 
@@ -27,9 +27,9 @@ namespace SF3.Models.X002.StatBoost {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
-                xml.Read();
+                _ = xml.Read();
                 while (!xml.EOF) {
-                    xml.Read();
+                    _ = xml.Read();
                     if (xml.HasAttributes) {
                         var newModel = new StatBoost(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
@@ -46,9 +46,7 @@ namespace SF3.Models.X002.StatBoost {
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }

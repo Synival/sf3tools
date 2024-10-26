@@ -4,28 +4,23 @@ using SF3.Values;
 
 namespace SF3.Models.X002.LoadedOverride {
     public class LoadedOverride {
-        private IX002_FileEditor _fileEditor;
+        private readonly IX002_FileEditor _fileEditor;
 
-        private int mapID;
-        private int synMusic;
-        private int medMusic;
-        private int julMusic;
-        private int extraMusic;
-        private int synMpd;
-        private int medMpd;
-        private int julMpd;
-        private int extraMpd;
-        private int synChr;
-        private int medChr;
-        private int julChr;
-        private int extraChr;
-
-        private int address;
-        private int offset;
-        private int checkVersion2;
-
-        private int index;
-        private string name;
+        private readonly int mapID;
+        private readonly int synMusic;
+        private readonly int medMusic;
+        private readonly int julMusic;
+        private readonly int extraMusic;
+        private readonly int synMpd;
+        private readonly int medMpd;
+        private readonly int julMpd;
+        private readonly int extraMpd;
+        private readonly int synChr;
+        private readonly int medChr;
+        private readonly int julChr;
+        private readonly int extraChr;
+        private readonly int offset;
+        private readonly int checkVersion2;
 
         public LoadedOverride(IX002_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
@@ -42,26 +37,27 @@ namespace SF3.Models.X002.LoadedOverride {
             else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x000058be; //scn2
                 if (checkVersion2 == 0x2C) {
-                    offset = offset - 0x44;
+                    offset -= 0x44;
                 }
             }
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00006266; //scn3
             }
-            else
+            else {
                 offset = 0x00005aa2; //pd. assumed location if it were to exist
+            }
 
             //offset = 0x00002b28; scn1
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            LoadedOverrideID = id;
+            LoadedOverrideName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x28);
+            var start = offset + (id * 0x28);
             mapID = start; //2 bytes
             synMusic = start + 0x02; //1 byte
             medMusic = start + 0x03; //1 byte
@@ -75,13 +71,13 @@ namespace SF3.Models.X002.LoadedOverride {
             medChr = start + 0x1a; //4 bytes chr medion
             julChr = start + 0x1e; //4 bytes chr julian?
             extraChr = start + 0x22; //4 bytes chr extra?
-            address = offset + (id * 0x28);
+            LoadedOverrideAddress = offset + (id * 0x28);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int LoadedOverrideID => index;
-        public string LoadedOverrideName => name;
+        public int LoadedOverrideID { get; }
+        public string LoadedOverrideName { get; }
 
         public int MOMapID {
             get => _fileEditor.GetWord(mapID);
@@ -148,6 +144,6 @@ namespace SF3.Models.X002.LoadedOverride {
             set => _fileEditor.SetDouble(extraChr, value.Value);
         }
 
-        public int LoadedOverrideAddress => (address);
+        public int LoadedOverrideAddress { get; }
     }
 }

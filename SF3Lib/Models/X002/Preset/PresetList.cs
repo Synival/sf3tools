@@ -4,7 +4,7 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X002.Presets {
+namespace SF3.Models.X002.Preset {
     public class PresetList : ModelArray<Preset> {
         public int MaxSize { get; } = 31;
 
@@ -13,8 +13,8 @@ namespace SF3.Models.X002.Presets {
             _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "SpellIndexList.xml");
         }
 
-        private string _resourceFile;
-        private IX002_FileEditor _fileEditor;
+        private readonly string _resourceFile;
+        private readonly IX002_FileEditor _fileEditor;
 
         public override string ResourceFile => _resourceFile;
 
@@ -28,15 +28,14 @@ namespace SF3.Models.X002.Presets {
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
                 var xml = MakeXmlReader(stream);
-                xml.Read();
+                _ = xml.Read();
                 while (!xml.EOF) {
-                    xml.Read();
+                    _ = xml.Read();
                     if (xml.HasAttributes) {
                         var newModel = new Preset(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.PresetID < 0 || newModel.PresetID >= MaxSize) {
+                        if (newModel.PresetID < 0 || newModel.PresetID >= MaxSize)
                             throw new IndexOutOfRangeException();
-                        }
                     }
                 }
             }
@@ -47,9 +46,7 @@ namespace SF3.Models.X002.Presets {
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }
