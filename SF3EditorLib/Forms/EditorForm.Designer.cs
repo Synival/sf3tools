@@ -35,8 +35,12 @@ namespace SF3.Editor.Forms
             this.tsSeparator_File1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiFile_CopyTablesFrom = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_ApplyDFRFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_GenerateDFRFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparator_File3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFile_CopyTablesTo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_CopyTablesFrom = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator_File4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +49,6 @@ namespace SF3.Editor.Forms
             this.tsmiScenario_PremiumDisk = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiFile_ApplyDFRFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,8 +73,11 @@ namespace SF3.Editor.Forms
             this.tsmiFile_Close,
             this.tsSeparator_File2,
             this.tsmiFile_ApplyDFRFile,
-            this.tsmiFile_CopyTablesFrom,
+            this.tsmiFile_GenerateDFRFile,
             this.tsSeparator_File3,
+            this.tsmiFile_CopyTablesTo,
+            this.tsmiFile_CopyTablesFrom,
+            this.tsSeparator_File4,
             this.tsmiFile_Exit});
             this.tsmiFile.Name = "tsmiFile";
             this.tsmiFile.Size = new System.Drawing.Size(37, 20);
@@ -81,7 +87,7 @@ namespace SF3.Editor.Forms
             // 
             this.tsmiFile_Open.Name = "tsmiFile_Open";
             this.tsmiFile_Open.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.tsmiFile_Open.Size = new System.Drawing.Size(186, 22);
+            this.tsmiFile_Open.Size = new System.Drawing.Size(240, 22);
             this.tsmiFile_Open.Text = "&Open...";
             this.tsmiFile_Open.Click += new System.EventHandler(this.tsmiFile_Open_Click);
             // 
@@ -91,47 +97,78 @@ namespace SF3.Editor.Forms
             this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
             this.tsmiFile_SaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.S)));
-            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(186, 22);
+            this.tsmiFile_SaveAs.Size = new System.Drawing.Size(240, 22);
             this.tsmiFile_SaveAs.Text = "Save &As...";
             this.tsmiFile_SaveAs.Click += new System.EventHandler(this.tsmiFile_SaveAs_Click);
             // 
             // tsSeparator_File1
             // 
             this.tsSeparator_File1.Name = "tsSeparator_File1";
-            this.tsSeparator_File1.Size = new System.Drawing.Size(183, 6);
+            this.tsSeparator_File1.Size = new System.Drawing.Size(237, 6);
             // 
             // tsmiFile_Close
             // 
             this.tsmiFile_Close.Enabled = false;
             this.tsmiFile_Close.Name = "tsmiFile_Close";
             this.tsmiFile_Close.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
-            this.tsmiFile_Close.Size = new System.Drawing.Size(186, 22);
+            this.tsmiFile_Close.Size = new System.Drawing.Size(240, 22);
             this.tsmiFile_Close.Text = "&Close";
             this.tsmiFile_Close.Click += new System.EventHandler(this.tsmiFile_Close_Click);
             // 
             // tsSeparator_File2
             // 
             this.tsSeparator_File2.Name = "tsSeparator_File2";
-            this.tsSeparator_File2.Size = new System.Drawing.Size(183, 6);
+            this.tsSeparator_File2.Size = new System.Drawing.Size(237, 6);
+            // 
+            // tsmiFile_ApplyDFRFile
+            // 
+            this.tsmiFile_ApplyDFRFile.Enabled = false;
+            this.tsmiFile_ApplyDFRFile.Name = "tsmiFile_ApplyDFRFile";
+            this.tsmiFile_ApplyDFRFile.Size = new System.Drawing.Size(240, 22);
+            this.tsmiFile_ApplyDFRFile.Text = "Apply DFR File...";
+            this.tsmiFile_ApplyDFRFile.Click += new System.EventHandler(this.tsmiFile_applyDFRFile_Click);
+            // 
+            // tsmiFile_GenerateDFRFile
+            // 
+            this.tsmiFile_GenerateDFRFile.Enabled = false;
+            this.tsmiFile_GenerateDFRFile.Name = "tsmiFile_GenerateDFRFile";
+            this.tsmiFile_GenerateDFRFile.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.D)));
+            this.tsmiFile_GenerateDFRFile.Size = new System.Drawing.Size(240, 22);
+            this.tsmiFile_GenerateDFRFile.Text = "Generate DFR File...";
+            this.tsmiFile_GenerateDFRFile.Click += new System.EventHandler(this.tsmiFile_generateDFRFile_Click);
+            // 
+            // tsSeparator_File3
+            // 
+            this.tsSeparator_File3.Name = "tsSeparator_File3";
+            this.tsSeparator_File3.Size = new System.Drawing.Size(237, 6);
+            // 
+            // tsmiFile_CopyTablesTo
+            // 
+            this.tsmiFile_CopyTablesTo.Enabled = false;
+            this.tsmiFile_CopyTablesTo.Name = "tsmiFile_CopyTablesTo";
+            this.tsmiFile_CopyTablesTo.Size = new System.Drawing.Size(240, 22);
+            this.tsmiFile_CopyTablesTo.Text = "Copy Tables To...";
+            this.tsmiFile_CopyTablesTo.Click += new System.EventHandler(this.tsmiFile_CopyTablesTo_Click);
             // 
             // tsmiFile_CopyTablesFrom
             // 
             this.tsmiFile_CopyTablesFrom.Enabled = false;
             this.tsmiFile_CopyTablesFrom.Name = "tsmiFile_CopyTablesFrom";
-            this.tsmiFile_CopyTablesFrom.Size = new System.Drawing.Size(186, 22);
+            this.tsmiFile_CopyTablesFrom.Size = new System.Drawing.Size(240, 22);
             this.tsmiFile_CopyTablesFrom.Text = "Copy Tables From...";
             this.tsmiFile_CopyTablesFrom.Click += new System.EventHandler(this.tsmiFile_CopyTablesFrom_Click);
             // 
-            // tsSeparator_File3
+            // tsSeparator_File4
             // 
-            this.tsSeparator_File3.Name = "tsSeparator_File3";
-            this.tsSeparator_File3.Size = new System.Drawing.Size(183, 6);
+            this.tsSeparator_File4.Name = "tsSeparator_File4";
+            this.tsSeparator_File4.Size = new System.Drawing.Size(237, 6);
             // 
             // tsmiFile_Exit
             // 
             this.tsmiFile_Exit.Name = "tsmiFile_Exit";
             this.tsmiFile_Exit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.tsmiFile_Exit.Size = new System.Drawing.Size(186, 22);
+            this.tsmiFile_Exit.Size = new System.Drawing.Size(240, 22);
             this.tsmiFile_Exit.Text = "E&xit";
             this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
             // 
@@ -192,14 +229,6 @@ namespace SF3.Editor.Forms
             this.tsmiHelp_Version.Size = new System.Drawing.Size(190, 22);
             this.tsmiHelp_Version.Text = "Version (set internally)";
             // 
-            // tsmiFile_ApplyDFRFile
-            // 
-            this.tsmiFile_ApplyDFRFile.Enabled = false;
-            this.tsmiFile_ApplyDFRFile.Name = "tsmiFile_ApplyDFRFile";
-            this.tsmiFile_ApplyDFRFile.Size = new System.Drawing.Size(186, 22);
-            this.tsmiFile_ApplyDFRFile.Text = "Apply DFR File...";
-            this.tsmiFile_ApplyDFRFile.Click += new System.EventHandler(this.applyDFRToolStripMenuItem_Click);
-            // 
             // EditorForm
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
@@ -233,5 +262,8 @@ namespace SF3.Editor.Forms
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp_Version;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_ApplyDFRFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_GenerateDFRFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_CopyTablesTo;
+        private System.Windows.Forms.ToolStripSeparator tsSeparator_File4;
     }
 }

@@ -5,8 +5,8 @@ using System.IO;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using DFRLib;
+using DFRToolGUI.Forms;
 using SF3.Editor.Extensions;
-using SF3.Exceptions;
 using SF3.Extensions;
 using SF3.FileEditors;
 using SF3.Types;
@@ -83,10 +83,12 @@ namespace SF3.Editor.Forms {
             onScenarioChanged(null, EventArgs.Empty);
 
             FileIsLoadedChanged += (obj, eargs) => {
-                tsmiFile_SaveAs.Enabled = IsLoaded == true;
-                tsmiFile_ApplyDFRFile.Enabled = IsLoaded == true;
-                tsmiFile_CopyTablesFrom.Enabled = IsLoaded == true;
-                tsmiFile_Close.Enabled = IsLoaded == true;
+                tsmiFile_SaveAs.Enabled          = IsLoaded;
+                tsmiFile_ApplyDFRFile.Enabled    = IsLoaded;
+                tsmiFile_GenerateDFRFile.Enabled = IsLoaded;
+                tsmiFile_CopyTablesTo.Enabled    = IsLoaded;
+                tsmiFile_CopyTablesFrom.Enabled  = IsLoaded;
+                tsmiFile_Close.Enabled           = IsLoaded;
             };
 
             ObjectListViews = this.GetAllObjectsOfTypeInFields<ObjectListView>(false);
@@ -146,8 +148,7 @@ namespace SF3.Editor.Forms {
 
             if (!success) {
                 //wrong file was selected
-                MessageBox.Show("Data appears corrupt or invalid:\n" +
-                                "    " + filename + "\n\n" +
+                MessageBox.Show("Data in '" + filename + "' appears corrupt or invalid.\n" +
                                 "Is this the correct type of file?");
                 return false;
             }
@@ -197,6 +198,15 @@ namespace SF3.Editor.Forms {
                 file.Close();
             }
 
+            return true;
+        }
+
+        /// <summary>
+        /// Opens the DFRToolGUI as a modal dialog with the current editor data as its "Altered File".
+        /// </summary>
+        public bool GenerateDFRFile() {
+            var form = new frmDFRTool(FileEditor.GetAllData());
+            form.ShowDialog();
             return true;
         }
 
@@ -260,6 +270,62 @@ namespace SF3.Editor.Forms {
         }
 
         /// <summary>
+        /// Opens a dialog to perform a bulk copy of tables to another .BIN file.
+        /// </summary>
+        public void CopyTablesTo() {
+            if (FileEditor == null)
+                return;
+
+            ObjectListViews.ForEach(x => x.FinishCellEdit());
+
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Copy Tables To";
+            saveFileDialog.Filter = FileDialogFilter;
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+            var copyToFilename = saveFileDialog.FileName;
+
+            string copyReport = "";
+            try {
+                var copyFileEditor = MakeFileEditor();
+                if (!copyFileEditor.LoadFile(copyToFilename)) {
+                    MessageBox.Show("Error trying to load file. It is probably in use by another process.");
+                    return;
+                }
+
+                var result = FileEditor.BulkCopyProperties(copyFileEditor);
+                if (!copyFileEditor.SaveFile(copyToFilename)) {
+                    MessageBox.Show("Error trying to update file.");
+                    return;
+                }
+
+                copyReport += result.MakeSummaryReport();
+
+                // Output summary files.
+                var fullReport = result.MakeFullReport();
+                if (fullReport != "") {
+                    try {
+                        File.WriteAllText("BulkCopyReport.txt", fullReport);
+                        copyReport += "\n\nDetailed reports dumped to 'BulkCopyReport.txt'.";
+                    }
+                    catch {
+                        copyReport += "\n\nError: Couldn't dump detailed report to 'BulkCopyReport.txt'.";
+                    }
+                }
+            }
+            catch (Exception e) {
+                //wrong file was selected
+                MessageBox.Show("Data in '" + copyToFilename + "' appears corrupt or invalid:\n\n" +
+                                e.Message + "\n\n" +
+                                "Is this the correct type of file?");
+                return;
+            }
+
+            // Show the user a nice report.
+            MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyReport);
+        }
+
+        /// <summary>
         /// Opens a dialog to perform a bulk copy of tables from another .BIN file.
         /// </summary>
         public void CopyTablesFrom() {
@@ -275,14 +341,14 @@ namespace SF3.Editor.Forms {
                 return;
             var copyFromFilename = openFileDialog.FileName;
 
-            var copyFileEditor = MakeFileEditor();
-            if (!copyFileEditor.LoadFile(copyFromFilename)) {
-                MessageBox.Show("Error trying to load file. It is probably in use by another process.");
-                return;
-            }
-
             string copyReport = "";
             try {
+                var copyFileEditor = MakeFileEditor();
+                if (!copyFileEditor.LoadFile(copyFromFilename)) {
+                    MessageBox.Show("Error trying to load file. It is probably in use by another process.");
+                    return;
+                }
+
                 var result = copyFileEditor.BulkCopyProperties(FileEditor);
                 ObjectListViews.ForEach(x => x.RefreshAllItems());
 
@@ -300,16 +366,10 @@ namespace SF3.Editor.Forms {
                     }
                 }
             }
-            catch (System.Reflection.TargetInvocationException) {
+            catch (Exception e) {
                 //wrong file was selected
-                MessageBox.Show("Failed to read file:\n" +
-                                "    " + copyFromFilename);
-                return;
-            }
-            catch (FileEditorReadException) {
-                //wrong file was selected
-                MessageBox.Show("Data appears corrupt or invalid:\n" +
-                                "    " + copyFromFilename + "\n\n" +
+                MessageBox.Show("Data in '" + copyFromFilename + "' appears corrupt or invalid:\n\n" +
+                                e.Message + "\n\n" +
                                 "Is this the correct type of file?");
                 return;
             }
@@ -445,14 +505,17 @@ namespace SF3.Editor.Forms {
         protected virtual void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
         protected virtual void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();
         protected virtual void tsmiFile_Close_Click(object sender, EventArgs e) => CloseFile();
-        protected virtual void tsmiFile_CopyTablesFrom_Click(object sender, EventArgs e) => CopyTablesFrom();
         protected virtual void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
+
+        protected virtual void tsmiFile_applyDFRFile_Click(object sender, EventArgs e) => ApplyDFRDialog();
+        protected virtual void tsmiFile_generateDFRFile_Click(object sender, EventArgs e) => GenerateDFRFile();
 
         protected virtual void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario1;
         protected virtual void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;
         protected virtual void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
         protected virtual void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
 
-        protected virtual void applyDFRToolStripMenuItem_Click(object sender, EventArgs e) => ApplyDFRDialog();
+        protected virtual void tsmiFile_CopyTablesTo_Click(object sender, EventArgs e) => CopyTablesTo();
+        protected virtual void tsmiFile_CopyTablesFrom_Click(object sender, EventArgs e) => CopyTablesFrom();
     }
 }

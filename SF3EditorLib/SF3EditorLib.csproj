@@ -87,6 +87,10 @@
       <Project>{374A86FE-863F-4509-922D-CAE6E0FEA139}</Project>
       <Name>DFRLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DFRToolGUI\DFRToolGUI.csproj">
+      <Project>{1D20A93D-B1F0-4DAF-9B7B-072EF671C02D}</Project>
+      <Name>DFRToolGUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ObjectListView\ObjectListView\ObjectListView2008.csproj">
       <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
       <Name>ObjectListView2008</Name>
