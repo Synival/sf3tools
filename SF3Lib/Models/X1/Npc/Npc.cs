@@ -1,31 +1,25 @@
 using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.X1.Npcs {
+namespace SF3.Models.X1.Npc {
     public class Npc {
-        private IX1_FileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
-        private int spriteID;
-        private int unknown1;
-        private int table;
-        private int xPos;
-        private int zPos;
-        private int direction;
-        private int unknownA;
-        private int unknownC;
-        private int unknownE;
-        private int unknown12;
-        private int unknown16;
+        private readonly int spriteID;
+        private readonly int unknown1;
+        private readonly int table;
+        private readonly int xPos;
+        private readonly int zPos;
+        private readonly int direction;
+        private readonly int unknownA;
+        private readonly int unknownC;
+        private readonly int unknownE;
+        private readonly int unknown12;
+        private readonly int unknown16;
 
-        //int pointerValue;
-
-        private int address;
         //private int npcOffset;
-        private int offset;
-        private int sub;
-
-        private int index;
-        private string name;
+        private readonly int offset;
+        private readonly int sub;
 
         /*public int NPCTableAddress1
         {
@@ -45,25 +39,25 @@ namespace SF3.Models.X1.Npcs {
                 sub = 0x0605f000;
                 offset = _fileEditor.GetDouble(offset);
 
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }/*
             else if (Scenario == ScenarioType.BTL99)
             {
@@ -78,12 +72,12 @@ namespace SF3.Models.X1.Npcs {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            NpcID = id;
+            NpcName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x18);
+            var start = offset + (id * 0x18);
             spriteID = start; //2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
             unknown1 = start + 0x02; //unknown+0x02
             table = start + 0x04;
@@ -97,29 +91,20 @@ namespace SF3.Models.X1.Npcs {
             unknown16 = start + 0x16;
 
             //unknown42 = start + 52;
-            address = offset + (id * 0x18);
+            NpcAddress = offset + (id * 0x18);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int NpcID => index;
-        public string NpcName => name;
+        public int NpcID { get; }
+        public string NpcName { get; }
 
-        public string NpcTieIn {
-            /*get
+        public string NpcTieIn             /*get
             {
                 return index + 0x3D;
             }*/
 
-            get {
-                if ((_fileEditor.GetWord(spriteID) > 0x0f) && (_fileEditor.GetWord(spriteID) != 0xffff)) {
-                    return (index + 0x3D).ToString("X");
-                }
-                else {
-                    return "";
-                }
-            }
-        }
+            => _fileEditor.GetWord(spriteID) > 0x0f && _fileEditor.GetWord(spriteID) != 0xffff ? (NpcID + 0x3D).ToString("X") : "";
 
         public int SpriteID {
             get => _fileEditor.GetWord(spriteID);
@@ -176,6 +161,6 @@ namespace SF3.Models.X1.Npcs {
             set => _fileEditor.SetWord(unknown16, value);
         }
 
-        public int NpcAddress => (address);
+        public int NpcAddress { get; }
     }
 }

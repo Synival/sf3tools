@@ -12,16 +12,11 @@ namespace SF3.Models.X1.Slots {
         public SlotList(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
 
-            if (Scenario == ScenarioType.Scenario1) {
-                _resourceFile = "Resources/X1List.xml";
-            }
-            else {
-                _resourceFile = "Resources/X1OtherList.xml";
-            }
+            _resourceFile =Scenario == ScenarioType.Scenario1 ? "Resources/X1List.xml" : "Resources/X1OtherList.xml";
         }
 
-        private string _resourceFile;
-        private IX1_FileEditor _fileEditor;
+        private readonly string _resourceFile;
+        private readonly IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => _resourceFile;
 
@@ -36,10 +31,10 @@ namespace SF3.Models.X1.Slots {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
-                xml.Read();
+                _ = xml.Read();
                 //int stop = 0;
                 while (!xml.EOF) {
-                    xml.Read();
+                    _ = xml.Read();
                     if (xml.HasAttributes) {
                         var newModel = new Slot(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
@@ -62,9 +57,7 @@ namespace SF3.Models.X1.Slots {
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }

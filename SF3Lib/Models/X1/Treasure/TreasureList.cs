@@ -4,7 +4,7 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X1.Treasures {
+namespace SF3.Models.X1.Treasure {
     public class TreasureList : ModelArray<Treasure> {
         public int MaxSize { get; } = 255;
 
@@ -17,7 +17,7 @@ namespace SF3.Models.X1.Treasures {
             _fileEditor = fileEditor;
         }
 
-        private IX1_FileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/X1Treasure.xml";
 
@@ -32,11 +32,11 @@ namespace SF3.Models.X1.Treasures {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
-                xml.Read();
+                _ = xml.Read();
                 //int stop = 0;
                 //int numberTest = 0;
                 //while (!xml.EOF)
-                int myCount = 0;
+                var myCount = 0;
                 //Debug = true;
                 //while (!xml.EOF && (_models.Length == 0 || newModel.Searched != 0xffff))
 
@@ -44,37 +44,32 @@ namespace SF3.Models.X1.Treasures {
                     //while (!xml.EOF && (_models.Length == 0 || (newModel.Searched != 0xffff || newModel.EventNumber != 0xffff)))
                     while (!xml.EOF && (_models.Length == 0 || myCount <= 2)) {
                         {
-                            xml.Read();
+                            _ = xml.Read();
                             if (xml.HasAttributes) {
                                 var newModel = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 _models = _models.ExpandedWith(newModel);
-                                if (newModel.TreasureID < 0 || newModel.TreasureID >= MaxSize) {
+                                if (newModel.TreasureID < 0 || newModel.TreasureID >= MaxSize)
                                     throw new IndexOutOfRangeException();
-                                }
-                                if (newModel.Searched == 0xffff) {
+                                if (newModel.Searched == 0xffff)
                                     myCount = 1 + myCount;
-                                }
                             }
                         }
                     }
                 }
-
                 else {
                     while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
                     //while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].Searched != 0xffff || _models[_models.Length - 1].EventNumber != 0xffff)))
                     //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                     {
                         {
-                            xml.Read();
+                            _ = xml.Read();
                             if (xml.HasAttributes) {
                                 var newModel = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 _models = _models.ExpandedWith(newModel);
-                                if (newModel.TreasureID < 0 || newModel.TreasureID >= MaxSize) {
+                                if (newModel.TreasureID < 0 || newModel.TreasureID >= MaxSize)
                                     throw new IndexOutOfRangeException();
-                                }
-                                if (newModel.Searched == 0xffff) {
+                                if (newModel.Searched == 0xffff)
                                     myCount = 1 + myCount;
-                                }
                             }
                         }
                     }
@@ -87,9 +82,7 @@ namespace SF3.Models.X1.Treasures {
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }

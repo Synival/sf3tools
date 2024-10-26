@@ -3,21 +3,13 @@ using SF3.Types;
 
 namespace SF3.Models.X1.BattlePointers {
     public class BattlePointers {
-        private IX1_FileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
-        private int battlePointer;
-        //private readonly int battlePointer2;
-        //private int unknown42;
+        private readonly int battlePointer;
 
-        //int pointerValue;
-
-        private readonly int address;
         //private int npcOffset;
-        private int offset;
-        private int sub;
-
-        private int index;
-        private string name;
+        private readonly int offset;
+        private readonly int sub;
 
         /*public int NPCTableAddress1
         {
@@ -36,9 +28,9 @@ namespace SF3.Models.X1.BattlePointers {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //second pointer
+                offset -= sub; //second pointer
                 //offset = _fileEditor.GetDouble(offset);
                 /*
                 offset = offset - sub; //third pointer
@@ -51,9 +43,9 @@ namespace SF3.Models.X1.BattlePointers {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //second pointer
+                offset -= sub; //second pointer
 
                 //offset = _fileEditor.GetDouble(offset);
                 //offset = offset - sub;
@@ -73,9 +65,9 @@ namespace SF3.Models.X1.BattlePointers {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //second pointer
+                offset -= sub; //second pointer
 
                 //offset = _fileEditor.GetDouble(offset);
 
@@ -93,9 +85,9 @@ namespace SF3.Models.X1.BattlePointers {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //second pointer
+                offset -= sub; //second pointer
 
                 //offset = _fileEditor.GetDouble(offset);
             }
@@ -103,10 +95,10 @@ namespace SF3.Models.X1.BattlePointers {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //second pointer
-                                       //offset = _fileEditor.GetDouble(offset);
+                offset -= sub; //second pointer
+                //offset = _fileEditor.GetDouble(offset);
             }
 
             //offset = 0x00002b28; scn1
@@ -114,22 +106,22 @@ namespace SF3.Models.X1.BattlePointers {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            BattleID = id;
+            BattleName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x4);
+            var start = offset + (id * 0x4);
             battlePointer = start; //2 bytes 
             //battlePointer2 = start +2; //2 bytes
             //unknown42 = start + 52;
-            address = offset + (id * 0x4);
+            BattleAddress = offset + (id * 0x4);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int BattleID => index;
-        public string BattleName => name;
+        public int BattleID { get; }
+        public string BattleName { get; }
 
         /*public int BattlePointer
         {
@@ -150,6 +142,6 @@ namespace SF3.Models.X1.BattlePointers {
         }
         */
 
-        public int BattleAddress => (address);
+        public int BattleAddress { get; }
     }
 }

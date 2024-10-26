@@ -1,35 +1,31 @@
 using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.X1.Tiles {
+namespace SF3.Models.X1.TileMovement {
     public class Tile {
-        private IX1_FileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
-        private int noEntry;
-        private int unknown01;
-        private int grassland;
-        private int dirt;
-        private int darkGrass;
-        private int forest;
-        private int brownMountain;
-        private int desert;
-        private int greyMountain;
+        private readonly int noEntry;
+        private readonly int unknown01;
+        private readonly int grassland;
+        private readonly int dirt;
+        private readonly int darkGrass;
+        private readonly int forest;
+        private readonly int brownMountain;
+        private readonly int desert;
+        private readonly int greyMountain;
 
-        private int unknown08;
-        private int unknown09;
-        private int unknown0a;
-        private int unknown0b;
-        private int unknown0c;
-        private int unknown0d;
-        private int unknown0e;
-        private int unknown0f;
+        private readonly int unknown08;
+        private readonly int unknown09;
+        private readonly int unknown0a;
+        private readonly int unknown0b;
+        private readonly int unknown0c;
+        private readonly int unknown0d;
+        private readonly int unknown0e;
+        private readonly int unknown0f;
 
-        private int offset;
-        private int address;
-
-        private int index;
-        private string name;
-        private int sub;
+        private readonly int offset;
+        private readonly int sub;
 
         public Tile(IX1_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
@@ -38,10 +34,10 @@ namespace SF3.Models.X1.Tiles {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
-                offset = offset + 0xac; //value we want is 0xac bytes later always
+                offset -= sub; //first pointer
+                offset += 0xac; //value we want is 0xac bytes later always
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //second pointer
+                offset -= sub; //second pointer
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
@@ -65,15 +61,14 @@ namespace SF3.Models.X1.Tiles {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
-                offset = offset + 0xac; //value we want is 0xac bytes later always (except for btl330-339
-                                        //Console.WriteLine(offset);
+                offset -= sub; //first pointer
+                offset += 0xac; //value we want is 0xac bytes later always (except for btl330-339
+                //Console.WriteLine(offset);
                 offset = _fileEditor.GetDouble(offset);
 
-                if (offset < 0x06070000 && offset > 0) //a valid pointer in this fille will always be positive up to 0x06070000
-                {
+                if (offset < 0x06070000 && offset > 0) { //a valid pointer in this fille will always be positive up to 0x06070000
                     //Console.WriteLine("finishing normal proceedure");
-                    offset = offset - sub; //second pointer
+                    offset -= sub; //second pointer
                 }
                 else //work around for x1btl330-339 not being consistant with everything else
                 {
@@ -81,8 +76,8 @@ namespace SF3.Models.X1.Tiles {
                     offset = 0x00000024;
                     //sub = 0x0605e000;
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //first pointer
-                    offset = offset + 0x14; //value we want is 0xac bytes later always
+                    offset -= sub; //first pointer
+                    offset += 0x14; //value we want is 0xac bytes later always
                 }
 
                 /*
@@ -121,14 +116,14 @@ namespace SF3.Models.X1.Tiles {
                 offset = 0x000001c4;
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
-                offset = offset + 0xac; //value we want is 0xac bytes later always
+                offset -= sub; //first pointer
+                offset += 0xac; //value we want is 0xac bytes later always
                 offset = _fileEditor.GetDouble(offset);
 
                 if (offset < 0x06070000 && offset > 0) //a valid pointer in this fille will always be positive up to 0x06070000
-                {
+{
                     //Console.WriteLine("finishing normal proceedure");
-                    offset = offset - sub; //second pointer
+                    offset -= sub; //second pointer
                 }
                 else //work around for x1btlP05 not being consistant with everything else
                 {
@@ -136,8 +131,8 @@ namespace SF3.Models.X1.Tiles {
                     offset = 0x00000024;
                     //sub = 0x0605e000;
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //first pointer
-                    offset = offset + 0x14;
+                    offset -= sub; //first pointer
+                    offset += 0x14;
                 }
             }
 
@@ -146,12 +141,12 @@ namespace SF3.Models.X1.Tiles {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            TileID = id;
+            TileName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x10);
+            var start = offset + (id * 0x10);
 
             noEntry = start;
             unknown01 = start + 1;
@@ -171,30 +166,34 @@ namespace SF3.Models.X1.Tiles {
             unknown0e = start + 0xe;
             unknown0f = start + 0xf;
 
-            address = offset + (id * 0x10);
+            TileAddress = offset + (id * 0x10);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int TileID => index;
-        public string TileName => name;
+        public int TileID { get; }
+        public string TileName { get; }
 
         public int TileNoEntry {
             get => _fileEditor.GetByte(noEntry);
             set => _fileEditor.SetByte(noEntry, (byte) value);
         }
+
         public int TileUnknown1 {
             get => _fileEditor.GetByte(unknown01);
             set => _fileEditor.SetByte(unknown01, (byte) value);
         }
+
         public int TileGrassland {
             get => _fileEditor.GetByte(grassland);
             set => _fileEditor.SetByte(grassland, (byte) value);
         }
+
         public int TileDirt {
             get => _fileEditor.GetByte(dirt);
             set => _fileEditor.SetByte(dirt, (byte) value);
         }
+
         public int TileDarkGrass {
             get => _fileEditor.GetByte(darkGrass);
             set => _fileEditor.SetByte(darkGrass, (byte) value);
@@ -257,6 +256,6 @@ namespace SF3.Models.X1.Tiles {
 
         // public int Map => Globals.map;
 
-        public int TileAddress => (address);
+        public int TileAddress { get; }
     }
 }

@@ -1,26 +1,20 @@
 using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.X1.Arrows {
+namespace SF3.Models.X1.Arrow {
     public class Arrow {
-        private IX1_FileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
-        private int unknown0; //2 byte
-        private int textID; //2 byte
-        private int unknown4; //2 byte
-        private int warpInMPD; //2 byte
-        private int unknown8; //2 byte
-        private int unknownA; //2 byte
+        private readonly int unknown0; //2 byte
+        private readonly int textID; //2 byte
+        private readonly int unknown4; //2 byte
+        private readonly int warpInMPD; //2 byte
+        private readonly int unknown8; //2 byte
+        private readonly int unknownA; //2 byte
+                                       //private int npcOffset;
 
-        //int pointerValue;
-
-        private int address;
-        //private int npcOffset;
-        private int offset;
-        private int sub;
-
-        private int index;
-        private string name;
+        private readonly int offset;
+        private readonly int sub;
 
         /*public int NPCTableAddress1
         {
@@ -39,19 +33,19 @@ namespace SF3.Models.X1.Arrows {
                 offset = 0x00000060; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000060; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000060; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
             /*
             else if (Scenario == ScenarioType.BTL99)
@@ -67,12 +61,12 @@ namespace SF3.Models.X1.Arrows {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            ArrowID = id;
+            ArrowName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x0c);
+            var start = offset + (id * 0x0c);
             unknown0 = start; //2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
             textID = start + 0x02;
             unknown4 = start + 0x04;
@@ -81,13 +75,13 @@ namespace SF3.Models.X1.Arrows {
             unknownA = start + 0x0a;
 
             //unknown42 = start + 52;
-            address = offset + (id * 0x0c);
+            ArrowAddress = offset + (id * 0x0c);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int ArrowID => index;
-        public string ArrowName => name;
+        public int ArrowID { get; }
+        public string ArrowName { get; }
 
         public int ArrowUnknown0 {
             get => _fileEditor.GetWord(unknown0);
@@ -119,6 +113,6 @@ namespace SF3.Models.X1.Arrows {
             set => _fileEditor.SetWord(unknownA, value);
         }
 
-        public int ArrowAddress => (address);
+        public int ArrowAddress { get; }
     }
 }

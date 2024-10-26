@@ -4,7 +4,7 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X1.Npcs {
+namespace SF3.Models.X1.Npc {
     public class NpcList : ModelArray<Npc> {
         public int MaxSize { get; } = 100;
 
@@ -12,7 +12,7 @@ namespace SF3.Models.X1.Npcs {
             _fileEditor = fileEditor;
         }
 
-        private IX1_FileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/X1Npc.xml";
 
@@ -27,11 +27,11 @@ namespace SF3.Models.X1.Npcs {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
-                xml.Read();
+                _ = xml.Read();
                 //int stop = 0;
                 //int numberTest = 0;
                 //while (!xml.EOF)
-                int myCount = 0;
+                var myCount = 0;
                 //Globals.treasureDebug = true;
                 //while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
 
@@ -65,16 +65,14 @@ throw new IndexOutOfRangeException();
                     //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                     {
                         {
-                            xml.Read();
+                            _ = xml.Read();
                             if (xml.HasAttributes) {
                                 var newModel = new Npc(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 _models = _models.ExpandedWith(newModel);
-                                if (newModel.NpcID < 0 || newModel.NpcID >= MaxSize) {
+                                if (newModel.NpcID < 0 || newModel.NpcID >= MaxSize)
                                     throw new IndexOutOfRangeException();
-                                }
-                                if (newModel.SpriteID == 0xffff) {
+                                if (newModel.SpriteID == 0xffff)
                                     myCount = 1 + myCount;
-                                }
                             }
                         }
                     }
@@ -87,9 +85,7 @@ throw new IndexOutOfRangeException();
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }

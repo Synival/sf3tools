@@ -4,7 +4,7 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X1.Tiles {
+namespace SF3.Models.X1.TileMovement {
     public class TileList : ModelArray<Tile> {
         public int MaxSize { get; } = 31;
 
@@ -12,7 +12,7 @@ namespace SF3.Models.X1.Tiles {
             _fileEditor = fileEditor;
         }
 
-        private IX1_FileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/MovementTypes.xml";
 
@@ -27,15 +27,14 @@ namespace SF3.Models.X1.Tiles {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
-                xml.Read();
+                _ = xml.Read();
                 while (!xml.EOF) {
-                    xml.Read();
+                    _ = xml.Read();
                     if (xml.HasAttributes) {
                         var newModel = new Tile(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.TileID < 0 || newModel.TileID >= MaxSize) {
+                        if (newModel.TileID < 0 || newModel.TileID >= MaxSize)
                             throw new IndexOutOfRangeException();
-                        }
                     }
                 }
             }
@@ -45,9 +44,7 @@ namespace SF3.Models.X1.Tiles {
                 //  return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }

@@ -4,65 +4,58 @@ using SF3.Values;
 
 namespace SF3.Models.X1.Slots {
     public class Slot {
-        private IX1_FileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
-        private int unknown1;
-        private int unknown2;
-        private int enemyID;
-        private int x;
-        private int y;
-        private int itemOverride;
-        private int unknown3;
-        private int unknown4;
-        private int joinID;
-        private int unknown5;
-        private int unknown6;
-        private int facingIsBoss;
-        private int unknown8;
-        private int controlType;
-        private int unknown9;
-        private int unknown10;
-        private int unknown11;
-        private int unknown12;
-        private int unknown13;
-        private int unknown14;
-        private int unknown15;
-        private int unknown16;
-        private int unknown17;
-        private int unknown18;
-        private int unknown19;
-        private int unknown20;
-        private int unknown21;
-        private int unknown22;
-        private int unknown23;
-        private int unknown24;
-        private int unknown25;
-        private int unknown26;
-        private int unknown27;
-        private int unknown28;
-        private int unknown29;
-        private int unknown30;
-        private int unknown31;
-        private int unknown32;
-        private int unknown33;
-        private int unknown34;
-        private int unknown35;
-        private int unknown36;
-        private int unknown37;
-        private int unknown38;
-        private int unknown39;
-        private int unknown40;
-        //private int unknown42;
+        private readonly int unknown1;
+        private readonly int unknown2;
+        private readonly int enemyID;
+        private readonly int x;
+        private readonly int y;
+        private readonly int itemOverride;
+        private readonly int unknown3;
+        private readonly int unknown4;
+        private readonly int joinID;
+        private readonly int unknown5;
+        private readonly int unknown6;
+        private readonly int facingIsBoss;
+        private readonly int unknown8;
+        private readonly int controlType;
+        private readonly int unknown9;
+        private readonly int unknown10;
+        private readonly int unknown11;
+        private readonly int unknown12;
+        private readonly int unknown13;
+        private readonly int unknown14;
+        private readonly int unknown15;
+        private readonly int unknown16;
+        private readonly int unknown17;
+        private readonly int unknown18;
+        private readonly int unknown19;
+        private readonly int unknown20;
+        private readonly int unknown21;
+        private readonly int unknown22;
+        private readonly int unknown23;
+        private readonly int unknown24;
+        private readonly int unknown25;
+        private readonly int unknown26;
+        private readonly int unknown27;
+        private readonly int unknown28;
+        private readonly int unknown29;
+        private readonly int unknown30;
+        private readonly int unknown31;
+        private readonly int unknown32;
+        private readonly int unknown33;
+        private readonly int unknown34;
+        private readonly int unknown35;
+        private readonly int unknown36;
+        private readonly int unknown37;
+        private readonly int unknown38;
+        private readonly int unknown39;
+        private readonly int unknown40;
 
-        //int pointerValue;
-
-        private int address;
         //private int npcOffset;
-        private int offset;
-        private int sub;
-
-        private int index;
-        private string name;
+        private readonly int offset;
+        private readonly int sub;
 
         /*public int NPCTableAddress1
         {
@@ -81,41 +74,41 @@ namespace SF3.Models.X1.Slots {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //second pointer
+                offset -= sub; //second pointer
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //third pointer
+                offset -= sub; //third pointer
 
-                offset = offset + 10;
+                offset += 10;
             }
             else if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
 
                 offset = _fileEditor.GetDouble(offset);
 
                 if (offset != 0) {
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
+                    offset += 10;
                 }
                 else {
                     _fileEditor.MapLeader = MapLeaderType.Synbios;
                     offset = 0x00000018; //scn1 initial pointer
                     sub = 0x0605f000;
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //first pointer
+                    offset -= sub; //first pointer
                     offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub + _fileEditor.MapOffset; //second pointer
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
+                    offset += 10;
                 }
 
                 /*
@@ -133,28 +126,28 @@ namespace SF3.Models.X1.Slots {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
 
                 offset = _fileEditor.GetDouble(offset);
                 if (offset != 0) {
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
+                    offset += 10;
                 }
                 else {
                     _fileEditor.MapLeader = MapLeaderType.Medion;
                     offset = 0x00000024; //scn2 initial pointer
                     sub = 0x0605e000;
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //first pointer
+                    offset -= sub; //first pointer
                     offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub + _fileEditor.MapOffset; //second pointer
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
+                    offset += 10;
                 }
 
                 /*offset = 0x00000024; //scn2 initial pointer
@@ -171,55 +164,55 @@ namespace SF3.Models.X1.Slots {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
 
                 offset = _fileEditor.GetDouble(offset);
                 if (offset != 0) {
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
+                    offset += 10;
                 }
                 else {
                     _fileEditor.MapLeader = MapLeaderType.Julian;
                     offset = 0x00000024; //scn3 initial pointer
                     sub = 0x0605e000;
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //first pointer
+                    offset -= sub; //first pointer
                     offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub + _fileEditor.MapOffset; //second pointer
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
+                    offset += 10;
                 }
             }
             else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
                 offset = _fileEditor.GetDouble(offset);
                 if (offset != 0) {
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
+                    offset += 10;
                 }
                 else {
                     _fileEditor.MapLeader = MapLeaderType.Synbios;
                     offset = 0x00000024; //pd initial pointer
                     sub = 0x0605e000;
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //first pointer
+                    offset -= sub; //first pointer
                     offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub + _fileEditor.MapOffset; //second pointer
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
+                    offset += 10;
                 }
             }
 
@@ -228,12 +221,12 @@ namespace SF3.Models.X1.Slots {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            ID = id;
+            Name = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x34);
+            var start = offset + (id * 0x34);
             enemyID = start; //2 bytes  
             x = start + 2; //2 byte
             y = start + 4; //2 byte
@@ -281,13 +274,13 @@ namespace SF3.Models.X1.Slots {
             unknown39 = start + 49;
             unknown40 = start + 50; //2 bytes
             //unknown42 = start + 52;
-            address = offset + (id * 0x34);
+            Address = offset + (id * 0x34);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int ID => index;
-        public string Name => name;
+        public int ID { get; }
+        public string Name { get; }
 
         public int Unknown1 {
             get => _fileEditor.GetByte(unknown1);
@@ -323,6 +316,7 @@ namespace SF3.Models.X1.Slots {
             get => _fileEditor.GetByte(unknown3);
             set => _fileEditor.SetByte(unknown3, (byte) value);
         }
+
         public int Unknown4 {
             get => _fileEditor.GetByte(unknown4);
             set => _fileEditor.SetByte(unknown4, (byte) value);
@@ -352,10 +346,12 @@ namespace SF3.Models.X1.Slots {
             get => _fileEditor.GetByte(facingIsBoss);
             set => _fileEditor.SetByte(facingIsBoss, (byte) value);
         }
+
         public int Unknown8 {
             get => _fileEditor.GetByte(unknown8);
             set => _fileEditor.SetByte(unknown8, (byte) value);
         }
+
         public int Unknown9 {
             get => _fileEditor.GetByte(unknown9);
             set => _fileEditor.SetByte(unknown9, (byte) value);
@@ -521,6 +517,6 @@ namespace SF3.Models.X1.Slots {
             set => _fileEditor.SetWord(unknown40, value);
         }
 
-        public int Address => (address);
+        public int Address { get; }
     }
 }

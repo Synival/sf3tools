@@ -4,7 +4,7 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X1.Warps {
+namespace SF3.Models.X1.Warp {
     public class WarpList : ModelArray<Warp> {
         public int MaxSize { get; } = 255;
 
@@ -12,7 +12,7 @@ namespace SF3.Models.X1.Warps {
             _fileEditor = fileEditor;
         }
 
-        private IX1_FileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/X1Warp.xml";
 
@@ -27,11 +27,7 @@ namespace SF3.Models.X1.Warps {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
-                xml.Read();
-                //int stop = 0;
-                //int numberTest = 0;
-                //while (!xml.EOF)
-                int myCount = 0;
+                _ = xml.Read();
                 //Globals.treasureDebug = true;
                 //while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
 
@@ -40,13 +36,12 @@ namespace SF3.Models.X1.Warps {
                 //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
                 {
                     {
-                        xml.Read();
+                        _ = xml.Read();
                         if (xml.HasAttributes) {
                             var newModel = new Warp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                             _models = _models.ExpandedWith(newModel);
-                            if (newModel.WarpID < 0 || newModel.WarpID >= MaxSize) {
+                            if (newModel.WarpID < 0 || newModel.WarpID >= MaxSize)
                                 throw new IndexOutOfRangeException();
-                            }
                         }
                     }
                 }
@@ -58,9 +53,7 @@ namespace SF3.Models.X1.Warps {
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }

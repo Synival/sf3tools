@@ -1,26 +1,20 @@
 using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.X1.Treasures {
+namespace SF3.Models.X1.Treasure {
     public class Treasure {
-        private IX1_FileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
-        private int searched;
-        private int eventNumber;
-        private int flagUsed;
-        private int unknown;
-        private int eventType;
-        private int itemID;
+        private readonly int searched;
+        private readonly int eventNumber;
+        private readonly int flagUsed;
+        private readonly int unknown;
+        private readonly int eventType;
+        private readonly int itemID;
 
-        //int pointerValue;
-
-        private int address;
         //private int npcOffset;
-        private int offset;
-        private int sub;
-
-        private int index;
-        private string name;
+        private readonly int offset;
+        private readonly int sub;
 
         /*public int NPCTableAddress1
         {
@@ -39,32 +33,32 @@ namespace SF3.Models.X1.Treasures {
                 offset = 0x0000000C; //btl99 initial pointer
                 sub = 0x06060000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x0000000C; //scn1 initial pointer
                 sub = 0x0605f000;
                 offset = _fileEditor.GetDouble(offset);
 
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x0000000C; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x0000000C; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x0000000C; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
 
             //offset = 0x00002b28; scn1
@@ -72,12 +66,12 @@ namespace SF3.Models.X1.Treasures {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            TreasureID = id;
+            TreasureName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x0c);
+            var start = offset + (id * 0x0c);
             searched = start; //2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
             eventNumber = start + 2;
             flagUsed = start + 4;
@@ -86,24 +80,18 @@ namespace SF3.Models.X1.Treasures {
             itemID = start + 10;
 
             //unknown42 = start + 52;
-            address = offset + (id * 0x0c);
+            TreasureAddress = offset + (id * 0x0c);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int TreasureID => index;
-        public string TreasureName => name;
+        public int TreasureID { get; }
+        public string TreasureName { get; }
 
-        public string MPDTieIn {
-            get {
-                if (_fileEditor.GetWord(eventNumber) <= 0x0f) {
-                    return (_fileEditor.GetWord(eventNumber) + 0x30).ToString("X");
-                }
-                else {
-                    return "";
-                }
-            }
-        }
+        public string MPDTieIn
+            => _fileEditor.GetWord(eventNumber) <= 0x0f
+                ? (_fileEditor.GetWord(eventNumber) + 0x30).ToString("X")
+                : "";
 
         public int Searched {
             get => _fileEditor.GetWord(searched);
@@ -135,6 +123,6 @@ namespace SF3.Models.X1.Treasures {
             set => _fileEditor.SetWord(itemID, value);
         }
 
-        public int TreasureAddress => (address);
+        public int TreasureAddress { get; }
     }
 }

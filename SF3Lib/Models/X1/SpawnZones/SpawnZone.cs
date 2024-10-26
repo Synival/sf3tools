@@ -3,28 +3,21 @@ using SF3.Types;
 
 namespace SF3.Models.X1.SpawnZones {
     public class SpawnZone {
-        private IX1_FileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
-        private int unknown00;
-        private int unknown02;
-        private int unknown04;
-        private int unknown06;
-        private int unknown08;
-        private int unknown0A;
-        private int unknown0C;
-        private int unknown0E;
-        private int unknown10;
-        //private int unknown42;
+        private readonly int unknown00;
+        private readonly int unknown02;
+        private readonly int unknown04;
+        private readonly int unknown06;
+        private readonly int unknown08;
+        private readonly int unknown0A;
+        private readonly int unknown0C;
+        private readonly int unknown0E;
+        private readonly int unknown10;
 
-        //int pointerValue;
-
-        private int address;
         //private int npcOffset;
-        private int offset;
-        private int sub;
-
-        private int index;
-        private string name;
+        private readonly int offset;
+        private readonly int sub;
 
         /*public int NPCTableAddress1
         {
@@ -43,44 +36,44 @@ namespace SF3.Models.X1.SpawnZones {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //second pointer
+                offset -= sub; //second pointer
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //third pointer
+                offset -= sub; //third pointer
 
-                offset = offset + 10;
-                offset = offset + 0xea0;
+                offset += 10;
+                offset += 0xea0;
             }
             else if (Scenario == ScenarioType.Scenario1) {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
 
                 offset = _fileEditor.GetDouble(offset);
 
                 if (offset != 0) {
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
-                    offset = offset + 0xEa0;
+                    offset += 10;
+                    offset += 0xEa0;
                 }
                 else {
                     _fileEditor.MapLeader = MapLeaderType.Synbios;
                     offset = 0x00000018; //scn1 initial pointer
                     sub = 0x0605f000;
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //first pointer
+                    offset -= sub; //first pointer
                     offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub + _fileEditor.MapOffset; //second pointer
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
-                    offset = offset + 0xEa0;
+                    offset += 10;
+                    offset += 0xEa0;
                 }
 
                 /*
@@ -98,30 +91,30 @@ namespace SF3.Models.X1.SpawnZones {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
 
                 offset = _fileEditor.GetDouble(offset);
                 if (offset != 0) {
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
-                    offset = offset + 0xa90;
+                    offset += 10;
+                    offset += 0xa90;
                 }
                 else {
                     _fileEditor.MapLeader = MapLeaderType.Medion;
                     offset = 0x00000024; //scn2 initial pointer
                     sub = 0x0605e000;
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //first pointer
+                    offset -= sub; //first pointer
                     offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub + _fileEditor.MapOffset; //second pointer
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
-                    offset = offset + 0xa90;
+                    offset += 10;
+                    offset += 0xa90;
                 }
 
                 /*offset = 0x00000024; //scn2 initial pointer
@@ -138,59 +131,59 @@ namespace SF3.Models.X1.SpawnZones {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
 
                 offset = _fileEditor.GetDouble(offset);
                 if (offset != 0) {
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
-                    offset = offset + 0xa90;
+                    offset += 10;
+                    offset += 0xa90;
                 }
                 else {
                     _fileEditor.MapLeader = MapLeaderType.Julian;
                     offset = 0x00000024; //scn3 initial pointer
                     sub = 0x0605e000;
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //first pointer
+                    offset -= sub; //first pointer
                     offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub + _fileEditor.MapOffset; //second pointer
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
-                    offset = offset + 0xa90;
+                    offset += 10;
+                    offset += 0xa90;
                 }
             }
             else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //first pointer
+                offset -= sub; //first pointer
                 offset = _fileEditor.GetDouble(offset);
                 offset = offset - sub + _fileEditor.MapOffset; //second pointer
                 offset = _fileEditor.GetDouble(offset);
                 if (offset != 0) {
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
-                    offset = offset + 0xa90;
+                    offset += 10;
+                    offset += 0xa90;
                 }
                 else {
                     _fileEditor.MapLeader = MapLeaderType.Synbios;
                     offset = 0x00000024; //pd initial pointer
                     sub = 0x0605e000;
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //first pointer
+                    offset -= sub; //first pointer
                     offset = _fileEditor.GetDouble(offset);
                     offset = offset - sub + _fileEditor.MapOffset; //second pointer
                     offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub; //third pointer
+                    offset -= sub; //third pointer
 
-                    offset = offset + 10;
-                    offset = offset + 0xa90;
+                    offset += 10;
+                    offset += 0xa90;
                 }
             }
 
@@ -199,12 +192,12 @@ namespace SF3.Models.X1.SpawnZones {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            UnknownAIID = id;
+            UnknownAIName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x12);
+            var start = offset + (id * 0x12);
             unknown00 = start; //2 bytes  
             unknown02 = start + 2; //2 byte
             unknown04 = start + 4; //2 byte
@@ -215,13 +208,13 @@ namespace SF3.Models.X1.SpawnZones {
             unknown0E = start + 0x0e;
             unknown10 = start + 0x10;
             //unknown42 = start + 52;
-            address = offset + (id * 0x12);
+            UnknownAIAddress = offset + (id * 0x12);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int UnknownAIID => index;
-        public string UnknownAIName => name;
+        public int UnknownAIID { get; }
+        public string UnknownAIName { get; }
 
         public int UnknownAI00 {
             get => _fileEditor.GetWord(unknown00);
@@ -268,6 +261,6 @@ namespace SF3.Models.X1.SpawnZones {
             set => _fileEditor.SetWord(unknown10, value);
         }
 
-        public int UnknownAIAddress => (address);
+        public int UnknownAIAddress { get; }
     }
 }

@@ -1,28 +1,22 @@
 using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.X1.Enters {
+namespace SF3.Models.X1.Enter {
     public class Enter {
-        private IX1_FileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
-        private int enterID; //2 byte
-        private int unknown2; //2 byte
-        private int xPos; //2 byte
-        private int unknown6; //2 byte
-        private int zPos; //2 byte
-        private int direction; //2 byte
-        private int camera; //2 byte
-        private int unknownE; //2 byte
+        private readonly int enterID; //2 byte
+        private readonly int unknown2; //2 byte
+        private readonly int xPos; //2 byte
+        private readonly int unknown6; //2 byte
+        private readonly int zPos; //2 byte
+        private readonly int direction; //2 byte
+        private readonly int camera; //2 byte
+        private readonly int unknownE; //2 byte
+                                       //private int npcOffset;
 
-        //int pointerValue;
-
-        private int address;
-        //private int npcOffset;
-        private int offset;
-        private int sub;
-
-        private int index;
-        private string name;
+        private readonly int offset;
+        private readonly int sub;
 
         /*public int NPCTableAddress1
         {
@@ -42,25 +36,25 @@ namespace SF3.Models.X1.Enters {
                 sub = 0x0605f000;
                 offset = _fileEditor.GetDouble(offset);
 
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000030; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000030; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000030; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
             /*
             else if (Scenario == ScenarioType.BTL99)
@@ -76,12 +70,12 @@ namespace SF3.Models.X1.Enters {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            EnterID = id;
+            EnterName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x10);
+            var start = offset + (id * 0x10);
             enterID = start; //2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
             unknown2 = start + 0x02; //unknown+0x02
             xPos = start + 0x04;
@@ -92,13 +86,13 @@ namespace SF3.Models.X1.Enters {
             unknownE = start + 0x0e;
 
             //unknown42 = start + 52;
-            address = offset + (id * 0x10);
+            EnterAddress = offset + (id * 0x10);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int EnterID => index;
-        public string EnterName => name;
+        public int EnterID { get; }
+        public string EnterName { get; }
 
         public int Entered {
             get => _fileEditor.GetWord(enterID);
@@ -140,6 +134,6 @@ namespace SF3.Models.X1.Enters {
             set => _fileEditor.SetWord(unknownE, value);
         }
 
-        public int EnterAddress => (address);
+        public int EnterAddress { get; }
     }
 }

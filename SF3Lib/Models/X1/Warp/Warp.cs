@@ -1,24 +1,18 @@
 using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.X1.Warps {
+namespace SF3.Models.X1.Warp {
     public class Warp {
-        private IX1_FileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
-        private int unknown1;
-        private int unknown2;
-        private int type;
-        private int map;
+        private readonly int unknown1;
+        private readonly int unknown2;
+        private readonly int type;
+        private readonly int map;
 
-        //int pointerValue;
-
-        private int address;
         //private int npcOffset;
-        private int offset;
-        private int sub;
-
-        private int index;
-        private string name;
+        private readonly int offset;
+        private readonly int sub;
 
         /*public int NPCTableAddress1
         {
@@ -39,19 +33,19 @@ namespace SF3.Models.X1.Warps {
                 offset = 0x00000018; //scn2 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000018; //scn3 initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
             else if (Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000018; //pd initial pointer
                 sub = 0x0605e000;
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub;
+                offset -= sub;
             }
 
             //offset = 0x00002b28; scn1
@@ -59,25 +53,25 @@ namespace SF3.Models.X1.Warps {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            WarpID = id;
+            WarpName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x04);
+            var start = offset + (id * 0x04);
             unknown1 = start;
             unknown2 = start + 1;
             type = start + 2;
             map = start + 3;
 
             //unknown42 = start + 52;
-            address = offset + (id * 0x04);
+            WarpAddress = offset + (id * 0x04);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int WarpID => index;
-        public string WarpName => name;
+        public int WarpID { get; }
+        public string WarpName { get; }
 
         public int WarpUnknown1 {
             get => _fileEditor.GetByte(unknown1);
@@ -99,6 +93,6 @@ namespace SF3.Models.X1.Warps {
             set => _fileEditor.SetByte(map, (byte) value);
         }
 
-        public int WarpAddress => (address);
+        public int WarpAddress { get; }
     }
 }
