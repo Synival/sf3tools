@@ -1,17 +1,17 @@
 using System.Collections.Generic;
-using SF3.Models;
-using SF3.Models.X1.AI;
-using SF3.Models.X1.Arrow;
-using SF3.Models.X1.BattlePointer;
-using SF3.Models.X1.CustomMovement;
-using SF3.Models.X1.Enter;
-using SF3.Models.X1.Header;
-using SF3.Models.X1.Npc;
-using SF3.Models.X1.Slot;
-using SF3.Models.X1.SpawnZone;
-using SF3.Models.X1.TileMovement;
-using SF3.Models.X1.Treasure;
-using SF3.Models.X1.Warp;
+using SF3.Tables;
+using SF3.Tables.X1.AI;
+using SF3.Tables.X1.Arrow;
+using SF3.Tables.X1.BattlePointer;
+using SF3.Tables.X1.CustomMovement;
+using SF3.Tables.X1.Enter;
+using SF3.Tables.X1.Header;
+using SF3.Tables.X1.Npc;
+using SF3.Tables.X1.Slot;
+using SF3.Tables.X1.SpawnZone;
+using SF3.Tables.X1.TileMovement;
+using SF3.Tables.X1.Treasure;
+using SF3.Tables.X1.Warp;
 using SF3.Types;
 
 namespace SF3.FileEditors {

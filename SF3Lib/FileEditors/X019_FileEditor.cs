@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using SF3.Models;
-using SF3.Models.X019.Monster;
+using SF3.Tables;
+using SF3.Tables.X019.Monster;
 using SF3.Types;
 
 namespace SF3.FileEditors {

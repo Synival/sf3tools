@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
-using SF3.Models;
+using SF3.Tables;
 using SF3.Types;
 
 namespace SF3.FileEditors {

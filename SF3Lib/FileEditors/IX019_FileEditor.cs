@@ -1,4 +1,4 @@
-using SF3.Models.X019.Monster;
+using SF3.Tables.X019.Monster;
 
 namespace SF3.FileEditors {
     public interface IX019_FileEditor : ISF3FileEditor {

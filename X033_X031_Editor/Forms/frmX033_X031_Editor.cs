@@ -6,6 +6,7 @@ using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.FileEditors;
 using SF3.Statistics;
+using SF3.Tables.X033_X031.Stats;
 using SF3.Types;
 using static SF3.Editor.Extensions.TabControlExtensions;
 using ProbableStatsDict = System.Collections.Generic.Dictionary<SF3.Types.StatType, SF3.X033_X031_Editor.Forms.ProbableStats>;
@@ -84,8 +85,8 @@ namespace SF3.X033_X031_Editor.Forms {
         private void olvCellEditStarting(object sender, CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
 
         private void tsmiHelp_DebugCurve_Click(object sender, EventArgs e) {
-            Models.X033_X031.Stats.Stats.DebugGrowthValues = !Models.X033_X031.Stats.Stats.DebugGrowthValues;
-            tsmiHelp_DebugCurve.Checked = Models.X033_X031.Stats.Stats.DebugGrowthValues;
+            Stats.DebugGrowthValues = !Stats.DebugGrowthValues;
+            tsmiHelp_DebugCurve.Checked = Stats.DebugGrowthValues;
         }
 
         private void tabMain_Click(object sender, EventArgs e) {
