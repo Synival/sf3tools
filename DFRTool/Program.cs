@@ -3,14 +3,12 @@ using NDesk.Options;
 
 namespace DFRTool {
     internal class Program {
-        const string c_ShortUsageString =
+        private const string c_ShortUsageString =
             "Usage: dfrtool [OPTION]... original_file altered_file\n";
-
-        const string c_ErrorUsageString =
+        private const string c_ErrorUsageString =
             c_ShortUsageString +
             "Try 'dfrtool --help' for more information.\n";
-
-        const string c_FullUsageString =
+        private const string c_FullUsageString =
             c_ShortUsageString +
             "Outputs text in DFR format based on a comparison between two files.\n" +
             "\n" +
@@ -18,9 +16,9 @@ namespace DFRTool {
             "  -h, --help                print this help message\n" +
             "  -c, --combined-appends    merges all appended changes into one row\n";
 
-        static int Main(string[] args) {
-            bool combineAppends = false;
-            bool outputHelp = false;
+        private static int Main(string[] args) {
+            var combineAppends = false;
+            var outputHelp = false;
 
             var options = new OptionSet() {
                { "c|combine-appends", v => combineAppends = true },
