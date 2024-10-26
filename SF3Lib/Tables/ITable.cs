@@ -2,17 +2,17 @@ using SF3.Types;
 
 namespace SF3.Tables {
     /// <summary>
-    /// Interface for any collection of SF3 models that can be modified.
+    /// Interface for any table of SF3 data that can be modified.
     /// </summary>
     public interface ITable {
         /// <summary>
-        /// Loads models from its respective XML file(s).
+        /// Loads rows from its respective XML file(s).
         /// </summary>
         /// <returns>Return 'true' on success, or 'false' if the .XML file(s) do not exist or are in use.</returns>
         bool Load();
 
         /// <summary>
-        /// The Scenario the contained models belong to.
+        /// The Scenario the contained rows belong to.
         /// </summary>
         ScenarioType Scenario { get; }
 
@@ -33,18 +33,18 @@ namespace SF3.Tables {
         string ResourceFile { get; }
 
         /// <summary>
-        /// An mutable array of models.
+        /// An mutable array of rows.
         /// </summary>
-        object[] ModelObjs { get; }
+        object[] RowObjs { get; }
     }
 
     /// <summary>
-    /// Interface for a specific collection of SF3 models that can be modified.
+    /// Interface for a specific table of SF3 data that can be modified.
     /// </summary>
     public interface ITable<T> : ITable {
         /// <summary>
-        /// A mutable array of models of type T.
+        /// A mutable array of rows of type T.
         /// </summary>
-        T[] Models { get; }
+        T[] Rows { get; }
     }
 }

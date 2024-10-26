@@ -23,7 +23,7 @@ namespace SF3.Tables.X013.MagicBonus {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new MagicBonus[0];
+            _rows = new MagicBonus[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -33,9 +33,9 @@ namespace SF3.Tables.X013.MagicBonus {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new MagicBonus(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        _models = _models.ExpandedWith(newModel);
-                        if (newModel.MagicID < 0 || newModel.MagicID >= MaxSize) {
+                        var newRow = new MagicBonus(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _rows = _rows.ExpandedWith(newRow);
+                        if (newRow.MagicID < 0 || newRow.MagicID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

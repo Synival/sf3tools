@@ -21,7 +21,7 @@ namespace SF3.Tables.X013.WeaponSpellRank {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new WeaponSpellRank[0];
+            _rows = new WeaponSpellRank[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -31,9 +31,9 @@ namespace SF3.Tables.X013.WeaponSpellRank {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new WeaponSpellRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        _models = _models.ExpandedWith(newModel);
-                        if (newModel.WeaponSpellRankID < 0 || newModel.WeaponSpellRankID >= MaxSize) {
+                        var newRow = new WeaponSpellRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _rows = _rows.ExpandedWith(newRow);
+                        if (newRow.WeaponSpellRankID < 0 || newRow.WeaponSpellRankID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

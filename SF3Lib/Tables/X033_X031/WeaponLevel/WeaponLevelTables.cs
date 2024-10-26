@@ -21,7 +21,7 @@ namespace SF3.Tables.X033_X031.WeaponLevel {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new WeaponLevel[0];
+            _rows = new WeaponLevel[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -31,9 +31,9 @@ namespace SF3.Tables.X033_X031.WeaponLevel {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new WeaponLevel(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        _models = _models.ExpandedWith(newModel);
-                        if (newModel.WeaponLevelID < 0 || newModel.WeaponLevelID >= MaxSize) {
+                        var newRow = new WeaponLevel(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _rows = _rows.ExpandedWith(newRow);
+                        if (newRow.WeaponLevelID < 0 || newRow.WeaponLevelID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

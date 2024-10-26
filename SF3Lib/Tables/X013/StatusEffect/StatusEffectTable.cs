@@ -21,7 +21,7 @@ namespace SF3.Tables.X013.StatusEffect {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new StatusEffect[0];
+            _rows = new StatusEffect[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -30,19 +30,19 @@ namespace SF3.Tables.X013.StatusEffect {
                 _ = xml.Read();
                 //string myName = "WarpIndex " + myCount;
                 //Globals.treasureDebug = true;
-                //while (!xml.EOF && (_models.Length == 0 || newModel.Searched != 0xffff))
+                //while (!xml.EOF && (_rows.Length == 0 || newRow.Searched != 0xffff))
 
                 while (!xml.EOF)
-                //while (!xml.EOF && (_models.Length == 0 || (newModel.Searched != 0xffff || newModel.EventNumber != 0xffff)))
-                //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
+                //while (!xml.EOF && (_rows.Length == 0 || (newRow.Searched != 0xffff || newRow.EventNumber != 0xffff)))
+                //while (!xml.EOF && (_rows.Length == 0 || myCount <= 2))
                 {
                     {
                         _ = xml.Read();
                         if (xml.HasAttributes) {
-                            var newModel = new StatusEffect(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                            _models = _models.ExpandedWith(newModel);
+                            var newRow = new StatusEffect(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                            _rows = _rows.ExpandedWith(newRow);
 
-                            if (newModel.StatusEffectID < 0 || newModel.StatusEffectID >= MaxSize)
+                            if (newRow.StatusEffectID < 0 || newRow.StatusEffectID >= MaxSize)
                                 throw new IndexOutOfRangeException();
                         }
                     }

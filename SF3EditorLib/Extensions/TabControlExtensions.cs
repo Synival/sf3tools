@@ -61,16 +61,16 @@ namespace SF3.Editor.Extensions {
         /// Configuration of a single tab for PopulateTabs().
         /// </summary>
         public class PopulateTabConfig {
-            public PopulateTabConfig(TabPage tabPage, ObjectListView objectListView, ITable modelArray) {
+            public PopulateTabConfig(TabPage tabPage, ObjectListView objectListView, ITable table) {
                 TabPage = tabPage;
                 ObjectListView = objectListView;
-                Table = modelArray;
+                Table = table;
             }
 
             public TabPage TabPage { get; }
             public ObjectListView ObjectListView { get; }
             public ITable Table { get; }
-            public object[] ModelObjs => Table.ModelObjs;
+            public object[] RowObjs => Table.RowObjs;
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace SF3.Editor.Extensions {
                     ErrorMessage("Could not load " + tc.Table.ResourceFile);
                     return false;
                 }
-                tc.ObjectListView.AddObjects(tc.ModelObjs);
+                tc.ObjectListView.AddObjects(tc.RowObjs);
             }
 
             return true;

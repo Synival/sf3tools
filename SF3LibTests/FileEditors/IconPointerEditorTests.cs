@@ -34,8 +34,8 @@ namespace SF3Lib.Tests.FileEditors {
             RunTestCases(testCases, testCase => {
                 var editor = new IconPointerFileEditor(testCase.Scenario, testCase.IsX066);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
-                Assert.AreEqual(0x26, editor.ItemIconList.Models[1].TheItemIcon);
-                Assert.AreEqual(0x18, editor.SpellIconList.Models[1].TheSpellIcon);
+                Assert.AreEqual(0x26, editor.ItemIconList.Rows[1].TheItemIcon);
+                Assert.AreEqual(0x18, editor.SpellIconList.Rows[1].TheSpellIcon);
             });
         }
 
@@ -53,8 +53,8 @@ namespace SF3Lib.Tests.FileEditors {
             RunTestCases(testCases, testCase => {
                 var editor = new IconPointerFileEditor(testCase.Scenario, testCase.IsX066);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
-                Assert.AreEqual(0x26, editor.ItemIconList.Models[1].TheItemIcon);
-                Assert.AreEqual(0x18, editor.SpellIconList.Models[1].TheSpellIcon);
+                Assert.AreEqual(0x26, editor.ItemIconList.Rows[1].TheItemIcon);
+                Assert.AreEqual(0x18, editor.SpellIconList.Rows[1].TheSpellIcon);
             });
         }
     }

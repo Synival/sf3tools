@@ -21,7 +21,7 @@ namespace SF3.Tables.X1.BattlePointer {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new BattlePointers[0];
+            _rows = new BattlePointers[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -31,9 +31,9 @@ namespace SF3.Tables.X1.BattlePointer {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new BattlePointers(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        _models = _models.ExpandedWith(newModel);
-                        if (newModel.BattleID < 0 || newModel.BattleID >= MaxSize) {
+                        var newRow = new BattlePointers(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _rows = _rows.ExpandedWith(newRow);
+                        if (newRow.BattleID < 0 || newRow.BattleID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

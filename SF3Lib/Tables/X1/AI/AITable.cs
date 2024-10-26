@@ -42,7 +42,7 @@ namespace SF3.Tables.X1.AI {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new AI[0];
+            _rows = new AI[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -51,9 +51,9 @@ namespace SF3.Tables.X1.AI {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new AI(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        _models = _models.ExpandedWith(newModel);
-                        if (newModel.AIID < 0 || newModel.AIID >= MaxSize) {
+                        var newRow = new AI(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _rows = _rows.ExpandedWith(newRow);
+                        if (newRow.AIID < 0 || newRow.AIID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

@@ -26,7 +26,7 @@ namespace SF3.Tables.X1.Treasure {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new Treasure[0];
+            _rows = new Treasure[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -38,37 +38,37 @@ namespace SF3.Tables.X1.Treasure {
                 //while (!xml.EOF)
                 var myCount = 0;
                 //Debug = true;
-                //while (!xml.EOF && (_models.Length == 0 || newModel.Searched != 0xffff))
+                //while (!xml.EOF && (_rows.Length == 0 || newRow.Searched != 0xffff))
 
                 if (Debug == true) {
-                    //while (!xml.EOF && (_models.Length == 0 || (newModel.Searched != 0xffff || newModel.EventNumber != 0xffff)))
-                    while (!xml.EOF && (_models.Length == 0 || myCount <= 2)) {
+                    //while (!xml.EOF && (_rows.Length == 0 || (newRow.Searched != 0xffff || newRow.EventNumber != 0xffff)))
+                    while (!xml.EOF && (_rows.Length == 0 || myCount <= 2)) {
                         {
                             _ = xml.Read();
                             if (xml.HasAttributes) {
-                                var newModel = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                _models = _models.ExpandedWith(newModel);
-                                if (newModel.TreasureID < 0 || newModel.TreasureID >= MaxSize)
+                                var newRow = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                _rows = _rows.ExpandedWith(newRow);
+                                if (newRow.TreasureID < 0 || newRow.TreasureID >= MaxSize)
                                     throw new IndexOutOfRangeException();
-                                if (newModel.Searched == 0xffff)
+                                if (newRow.Searched == 0xffff)
                                     myCount = 1 + myCount;
                             }
                         }
                     }
                 }
                 else {
-                    while (!xml.EOF && (_models.Length == 0 || _models[_models.Length - 1].Searched != 0xffff))
-                    //while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].Searched != 0xffff || _models[_models.Length - 1].EventNumber != 0xffff)))
-                    //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
+                    while (!xml.EOF && (_rows.Length == 0 || _rows[_rows.Length - 1].Searched != 0xffff))
+                    //while (!xml.EOF && (_rows.Length == 0 || (_rows[_rows.Length - 1].Searched != 0xffff || _rows[_rows.Length - 1].EventNumber != 0xffff)))
+                    //while (!xml.EOF && (_rows.Length == 0 || myCount <= 2))
                     {
                         {
                             _ = xml.Read();
                             if (xml.HasAttributes) {
-                                var newModel = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                                _models = _models.ExpandedWith(newModel);
-                                if (newModel.TreasureID < 0 || newModel.TreasureID >= MaxSize)
+                                var newRow = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                                _rows = _rows.ExpandedWith(newRow);
+                                if (newRow.TreasureID < 0 || newRow.TreasureID >= MaxSize)
                                     throw new IndexOutOfRangeException();
-                                if (newModel.Searched == 0xffff)
+                                if (newRow.Searched == 0xffff)
                                     myCount = 1 + myCount;
                             }
                         }

@@ -21,11 +21,11 @@ namespace SF3.X002_Editor.Forms {
         private void tabMain_Click(object sender, EventArgs e) {
             olvSpells.ClearObjects();
             if (FileEditor?.SpellList != null)
-                olvSpells.AddObjects(FileEditor.SpellList.Models);
+                olvSpells.AddObjects(FileEditor.SpellList.Rows);
 
             olvStatBoost.ClearObjects();
             if (FileEditor?.StatList != null)
-                olvStatBoost.AddObjects(FileEditor.StatList.Models);
+                olvStatBoost.AddObjects(FileEditor.StatList.Rows);
         }
 
         protected override string FileDialogFilter => "SF3 Data (X002.BIN)|X002.BIN|" + base.FileDialogFilter;

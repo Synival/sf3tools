@@ -23,7 +23,7 @@ namespace SF3.Tables.X033_X031.Stats {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new Stats[0];
+            _rows = new Stats[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -33,9 +33,9 @@ namespace SF3.Tables.X033_X031.Stats {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new Stats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        _models = _models.ExpandedWith(newModel);
-                        if (newModel.ID < 0 || newModel.ID >= MaxSize) {
+                        var newRow = new Stats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _rows = _rows.ExpandedWith(newRow);
+                        if (newRow.ID < 0 || newRow.ID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

@@ -23,7 +23,7 @@ namespace SF3.Tables.IconPointerEditor.ItemIcon {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new ItemIcon[0];
+            _rows = new ItemIcon[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -33,9 +33,9 @@ namespace SF3.Tables.IconPointerEditor.ItemIcon {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new ItemIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        _models = _models.ExpandedWith(newModel);
-                        if (newModel.SizeID < 0 || newModel.SizeID >= MaxSize) {
+                        var newRow = new ItemIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _rows = _rows.ExpandedWith(newRow);
+                        if (newRow.SizeID < 0 || newRow.SizeID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

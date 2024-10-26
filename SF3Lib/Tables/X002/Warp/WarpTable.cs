@@ -21,7 +21,7 @@ namespace SF3.Tables.X002.Warp {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new Warp[0];
+            _rows = new Warp[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -34,23 +34,23 @@ namespace SF3.Tables.X002.Warp {
                 var myCount = 0;
                 var myName = "WarpIndex " + myCount;
                 //Globals.treasureDebug = true;
-                //while (!xml.EOF && (_models.Length == 0 || newModel.Searched != 0xffff))
+                //while (!xml.EOF && (_rows.Length == 0 || newRow.Searched != 0xffff))
 
-                while (!xml.EOF && (_models.Length == 0 || (_models[_models.Length - 1].WarpType != 0x01 && _models[_models.Length - 1].WarpType != 0xff)))
-                //while (!xml.EOF && (_models.Length == 0 || (newModel.Searched != 0xffff || newModel.EventNumber != 0xffff)))
-                //while (!xml.EOF && (_models.Length == 0 || myCount <= 2))
+                while (!xml.EOF && (_rows.Length == 0 || (_rows[_rows.Length - 1].WarpType != 0x01 && _rows[_rows.Length - 1].WarpType != 0xff)))
+                //while (!xml.EOF && (_rows.Length == 0 || (newRow.Searched != 0xffff || newRow.EventNumber != 0xffff)))
+                //while (!xml.EOF && (_rows.Length == 0 || myCount <= 2))
                 {
                     {
                         _ = xml.Read();
                         if (xml.HasAttributes) {
-                            var newModel = new Warp(_fileEditor, myCount, myName);
-                            _models = _models.ExpandedWith(newModel);
+                            var newRow = new Warp(_fileEditor, myCount, myName);
+                            _rows = _rows.ExpandedWith(newRow);
 
                             myCount++;
                             myName = "WarpIndex ";
                             myName += myCount;
 
-                            if (newModel.WarpID < 0 || newModel.WarpID >= MaxSize)
+                            if (newRow.WarpID < 0 || newRow.WarpID >= MaxSize)
                                 throw new IndexOutOfRangeException();
                         }
                     }

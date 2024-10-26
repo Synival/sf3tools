@@ -21,7 +21,7 @@ namespace SF3.Tables.X002.AttackResist {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new AttackResist[0];
+            _rows = new AttackResist[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -31,9 +31,9 @@ namespace SF3.Tables.X002.AttackResist {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new AttackResist(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        _models = _models.ExpandedWith(newModel);
-                        if (newModel.AttackResistID < 0 || newModel.AttackResistID >= MaxSize) {
+                        var newRow = new AttackResist(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        _rows = _rows.ExpandedWith(newRow);
+                        if (newRow.AttackResistID < 0 || newRow.AttackResistID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

@@ -76,7 +76,7 @@ namespace SF3.X033_X031_Editor.Forms {
             }
 
             // Update curve graph controls.
-            cbCurveGraphCharacter.DataSource = FileEditor.StatsList.Models;
+            cbCurveGraphCharacter.DataSource = FileEditor.StatsList.Rows;
             cbCurveGraphCharacter.DisplayMember = "Name";
 
             return true;
@@ -92,7 +92,7 @@ namespace SF3.X033_X031_Editor.Forms {
         private void tabMain_Click(object sender, EventArgs e) {
             olvCurveCalc.ClearObjects();
             if (FileEditor?.StatsList != null)
-                olvCurveCalc.AddObjects(FileEditor?.StatsList.Models);
+                olvCurveCalc.AddObjects(FileEditor?.StatsList.Rows);
         }
 
         private void CurveGraphCharacterComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshCurveGraph();
@@ -105,7 +105,7 @@ namespace SF3.X033_X031_Editor.Forms {
 
             // Get the stats model for the selected character.
             var index = cbCurveGraphCharacter.SelectedIndex;
-            var stats = (index >= 0 && index < FileEditor.StatsList.Models.Length) ? FileEditor.StatsList.Models[index] : null;
+            var stats = (index >= 0 && index < FileEditor.StatsList.Rows.Length) ? FileEditor.StatsList.Rows[index] : null;
 
             // We'll need to use some different values depending on the promotion level.
             var promotionLevel = (int?)stats?.PromotionLevel ?? 0;

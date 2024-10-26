@@ -47,7 +47,7 @@ namespace SF3.Editor.Extensions {
         private static void RegisterNamedValue<T>() {
             ObjectListView.EditorRegistry.Register(
                 typeof(T),
-                (object model, OLVColumn column, object value) => ControlUtils.MakeNamedValueComboBox((value as NamedValue).ComboBoxValues, value as NamedValue)
+                (object data, OLVColumn column, object value) => ControlUtils.MakeNamedValueComboBox((value as NamedValue).ComboBoxValues, value as NamedValue)
             );
         }
 
