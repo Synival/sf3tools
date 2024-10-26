@@ -15,19 +15,19 @@ using SF3.Tables.X013.WeaponSpellRank;
 
 namespace SF3.FileEditors {
     public interface IX013_FileEditor : ISF3FileEditor {
-        SpecialList SpecialsList { get; }
-        SupportTypeList SupportTypeList { get; }
-        FriendshipExpList FriendshipExpList { get; }
-        SupportStatsList SupportStatsList { get; }
-        SoulmateList SoulmateList { get; }
-        SoulfailList SoulfailList { get; }
-        MagicBonusList MagicBonusList { get; }
-        CritModList CritModList { get; }
-        CritrateList CritrateList { get; }
-        SpecialChanceList SpecialChanceList { get; }
-        ExpLimitList ExpLimitList { get; }
-        HealExpList HealExpList { get; }
-        WeaponSpellRankList WeaponSpellRankList { get; }
-        StatusEffectList StatusEffectList { get; }
+        SpecialTable SpecialsList { get; }
+        SupportTypeTable SupportTypeList { get; }
+        FriendshipExpTable FriendshipExpList { get; }
+        SupportStatsTable SupportStatsList { get; }
+        SoulmateTable SoulmateList { get; }
+        SoulfailTable SoulfailList { get; }
+        MagicBonusTable MagicBonusList { get; }
+        CritModTable CritModList { get; }
+        CritrateTable CritrateList { get; }
+        SpecialChanceTable SpecialChanceList { get; }
+        ExpLimitTable ExpLimitList { get; }
+        HealExpTable HealExpList { get; }
+        WeaponSpellRankTable WeaponSpellRankList { get; }
+        StatusEffectTable StatusEffectList { get; }
     }
 }

@@ -4,36 +4,38 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X013.FriendshipExp {
-    public class FriendshipExpList : Table<FriendshipExp> {
-        public int MaxSize { get; } = 1;
+namespace SF3.Tables.X013.ExpLimit {
+    public class ExpLimitTable : Table<ExpLimit> {
+        public int MaxSize { get; } = 2;
 
-        public FriendshipExpList(IX013_FileEditor fileEditor) : base(fileEditor) {
+        public ExpLimitTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 
         private readonly IX013_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/ExpList.xml";
+        public override string ResourceFile => "Resources/ExpLimitList.xml";
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new FriendshipExp[0];
+            _models = new ExpLimit[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
+
                 var xml = MakeXmlReader(stream);
                 _ = xml.Read();
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new FriendshipExp(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new ExpLimit(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.PresetID < 0 || newModel.PresetID >= MaxSize)
+                        if (newModel.ExpLimitID < 0 || newModel.ExpLimitID >= MaxSize) {
                             throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

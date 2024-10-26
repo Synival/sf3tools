@@ -4,24 +4,24 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X013.SpecialChance {
-    public class SpecialChanceList : Table<SpecialChance> {
+namespace SF3.Tables.X013.Soulfail {
+    public class SoulfailTable : Table<Soulfail> {
         public int MaxSize { get; } = 1;
 
-        public SpecialChanceList(IX013_FileEditor fileEditor) : base(fileEditor) {
+        public SoulfailTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 
         private readonly IX013_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/SpecialChanceList.xml";
+        public override string ResourceFile => "Resources/Soulfail.xml";
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new SpecialChance[0];
+            _models = new Soulfail[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -31,9 +31,9 @@ namespace SF3.Tables.X013.SpecialChance {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new SpecialChance(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new Soulfail(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.SpecialChanceID < 0 || newModel.SpecialChanceID >= MaxSize) {
+                        if (newModel.SoulfailID < 0 || newModel.SoulfailID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

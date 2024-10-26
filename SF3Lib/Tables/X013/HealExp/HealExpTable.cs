@@ -5,10 +5,10 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X013.HealExp {
-    public class HealExpList : Table<HealExp> {
+    public class HealExpTable : Table<HealExp> {
         public int MaxSize { get; } = 2;
 
-        public HealExpList(IX013_FileEditor fileEditor) : base(fileEditor) {
+        public HealExpTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 

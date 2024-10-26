@@ -5,10 +5,10 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X013.StatusEffect {
-    public class StatusEffectList : Table<StatusEffect> {
+    public class StatusEffectTable : Table<StatusEffect> {
         public int MaxSize { get; } = 1000;
 
-        public StatusEffectList(IX013_FileEditor fileEditor) : base(fileEditor) {
+        public StatusEffectTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 

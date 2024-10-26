@@ -23,20 +23,20 @@ namespace SF3.FileEditors {
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (SpecialsList = new SpecialList(this)),
-                (SupportTypeList = new SupportTypeList(this)),
-                (FriendshipExpList = new FriendshipExpList(this)),
-                (SupportStatsList = new SupportStatsList(this)),
-                (SoulmateList = new SoulmateList(this)),
-                (SoulfailList = new SoulfailList(this)),
-                (MagicBonusList = new MagicBonusList(this)),
-                (CritModList = new CritModList(this)),
-                (CritrateList = new CritrateList(this)),
-                (SpecialChanceList = new SpecialChanceList(this)),
-                (ExpLimitList = new ExpLimitList(this)),
-                (HealExpList = new HealExpList(this)),
-                (WeaponSpellRankList = new WeaponSpellRankList(this)),
-                (StatusEffectList = new StatusEffectList(this)),
+                (SpecialsList = new SpecialTable(this)),
+                (SupportTypeList = new SupportTypeTable(this)),
+                (FriendshipExpList = new FriendshipExpTable(this)),
+                (SupportStatsList = new SupportStatsTable(this)),
+                (SoulmateList = new SoulmateTable(this)),
+                (SoulfailList = new SoulfailTable(this)),
+                (MagicBonusList = new MagicBonusTable(this)),
+                (CritModList = new CritModTable(this)),
+                (CritrateList = new CritrateTable(this)),
+                (SpecialChanceList = new SpecialChanceTable(this)),
+                (ExpLimitList = new ExpLimitTable(this)),
+                (HealExpList = new HealExpTable(this)),
+                (WeaponSpellRankList = new WeaponSpellRankTable(this)),
+                (StatusEffectList = new StatusEffectTable(this)),
             };
         }
 
@@ -57,19 +57,19 @@ namespace SF3.FileEditors {
             StatusEffectList = null;
         }
 
-        public SpecialList SpecialsList { get; private set; }
-        public SupportTypeList SupportTypeList { get; private set; }
-        public FriendshipExpList FriendshipExpList { get; private set; }
-        public SupportStatsList SupportStatsList { get; private set; }
-        public SoulmateList SoulmateList { get; private set; }
-        public SoulfailList SoulfailList { get; private set; }
-        public MagicBonusList MagicBonusList { get; private set; }
-        public CritModList CritModList { get; private set; }
-        public CritrateList CritrateList { get; private set; }
-        public SpecialChanceList SpecialChanceList { get; private set; }
-        public ExpLimitList ExpLimitList { get; private set; }
-        public HealExpList HealExpList { get; private set; }
-        public WeaponSpellRankList WeaponSpellRankList { get; private set; }
-        public StatusEffectList StatusEffectList { get; private set; }
+        public SpecialTable SpecialsList { get; private set; }
+        public SupportTypeTable SupportTypeList { get; private set; }
+        public FriendshipExpTable FriendshipExpList { get; private set; }
+        public SupportStatsTable SupportStatsList { get; private set; }
+        public SoulmateTable SoulmateList { get; private set; }
+        public SoulfailTable SoulfailList { get; private set; }
+        public MagicBonusTable MagicBonusList { get; private set; }
+        public CritModTable CritModList { get; private set; }
+        public CritrateTable CritrateList { get; private set; }
+        public SpecialChanceTable SpecialChanceList { get; private set; }
+        public ExpLimitTable ExpLimitList { get; private set; }
+        public HealExpTable HealExpList { get; private set; }
+        public WeaponSpellRankTable WeaponSpellRankList { get; private set; }
+        public StatusEffectTable StatusEffectList { get; private set; }
     }
 }

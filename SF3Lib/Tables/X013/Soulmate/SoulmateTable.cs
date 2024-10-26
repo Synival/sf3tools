@@ -4,38 +4,38 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X013.SupportType {
-    public class SupportTypeList : Table<SupportType> {
-        public int MaxSize { get; } = 120;
+namespace SF3.Tables.X013.Soulmate {
+    public class SoulmateTable : Table<Soulmate> {
+        public int MaxSize { get; } = 1771;
 
-        public SupportTypeList(IX013_FileEditor fileEditor) : base(fileEditor) {
+        public SoulmateTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
-            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "Characters.xml");
         }
 
-        private readonly string _resourceFile;
         private readonly IX013_FileEditor _fileEditor;
 
-        public override string ResourceFile => _resourceFile;
+        public override string ResourceFile => "Resources/SoulmateList.xml";
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new SupportType[0];
+            _models = new Soulmate[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
+
                 var xml = MakeXmlReader(stream);
                 _ = xml.Read();
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new SupportType(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new Soulmate(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.SpellID < 0 || newModel.SpellID >= MaxSize)
+                        if (newModel.SoulmateID < 0 || newModel.SoulmateID >= MaxSize) {
                             throw new IndexOutOfRangeException();
+                        }
                     }
                 }
             }

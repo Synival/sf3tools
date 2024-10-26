@@ -4,24 +4,26 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X013.CritMod {
-    public class CritModList : Table<CritMod> {
-        public int MaxSize { get; } = 1;
+namespace SF3.Tables.X013.Specials {
+    public class SpecialTable : Table<Special> {
+        public int MaxSize { get; } = 256;
 
-        public CritModList(IX013_FileEditor fileEditor) : base(fileEditor) {
+        public SpecialTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
+            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "Specials.xml");
         }
 
+        private readonly string _resourceFile;
         private readonly IX013_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/CritModList.xml";
+        public override string ResourceFile => _resourceFile;
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new CritMod[0];
+            _models = new Special[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -31,9 +33,9 @@ namespace SF3.Tables.X013.CritMod {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new CritMod(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new Special(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.CritModID < 0 || newModel.CritModID >= MaxSize) {
+                        if (newModel.ID < 0 || newModel.ID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

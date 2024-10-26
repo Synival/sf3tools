@@ -4,24 +4,24 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X013.SupportStats {
-    public class SupportStatsList : Table<SupportStats> {
-        public int MaxSize { get; } = 256;
+namespace SF3.Tables.X013.CritMod {
+    public class CritModTable : Table<CritMod> {
+        public int MaxSize { get; } = 1;
 
-        public SupportStatsList(IX013_FileEditor fileEditor) : base(fileEditor) {
+        public CritModTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 
         private readonly IX013_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/X013StatList.xml";
+        public override string ResourceFile => "Resources/CritModList.xml";
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new SupportStats[0];
+            _models = new CritMod[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -31,9 +31,9 @@ namespace SF3.Tables.X013.SupportStats {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new SupportStats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new CritMod(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.StatID < 0 || newModel.StatID >= MaxSize) {
+                        if (newModel.CritModID < 0 || newModel.CritModID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

@@ -4,26 +4,24 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X013.Specials {
-    public class SpecialList : Table<Special> {
+namespace SF3.Tables.X013.SupportStats {
+    public class SupportStatsTable : Table<SupportStats> {
         public int MaxSize { get; } = 256;
 
-        public SpecialList(IX013_FileEditor fileEditor) : base(fileEditor) {
+        public SupportStatsTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
-            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "Specials.xml");
         }
 
-        private readonly string _resourceFile;
         private readonly IX013_FileEditor _fileEditor;
 
-        public override string ResourceFile => _resourceFile;
+        public override string ResourceFile => "Resources/X013StatList.xml";
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new Special[0];
+            _models = new SupportStats[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -33,9 +31,9 @@ namespace SF3.Tables.X013.Specials {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new Special(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new SupportStats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.ID < 0 || newModel.ID >= MaxSize) {
+                        if (newModel.StatID < 0 || newModel.StatID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }
