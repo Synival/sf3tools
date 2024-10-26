@@ -62,15 +62,16 @@ namespace DFRLib {
             public bool IsAppendChunk => _fromSize == 0 && _toSize > 0;
             public byte LastByteTo => _toBuffer[_toSize - 1];
 
-            private ulong _address;
+            private readonly ulong _address;
             private int _fromSize = 0;
             private int _toSize = 0;
             private byte[] _fromBuffer = new byte[16];
             private byte[] _toBuffer = new byte[16];
         }
 
-        public ByteDiffChunkBuilder(ByteDiffChunkBuilderOptions? options = null)
-            => Options = options ?? new ByteDiffChunkBuilderOptions();
+        public ByteDiffChunkBuilder(ByteDiffChunkBuilderOptions? options = null) {
+            Options = options ?? new ByteDiffChunkBuilderOptions();
+        }
 
         /// <summary>
         /// Takes in bytes from the 'from' and 'to' data sources and builds a new "diff" chunk,

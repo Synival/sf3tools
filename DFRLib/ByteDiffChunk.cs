@@ -17,7 +17,7 @@ namespace DFRLib {
         public static string MakeByteHexStr(IEnumerable<byte> bytes) {
             var sb = new StringBuilder();
             foreach (var b in bytes)
-                sb.Append(b.ToString("x2"));
+                _ = sb.Append(b.ToString("x2"));
             return sb.ToString();
         }
 
@@ -82,7 +82,7 @@ namespace DFRLib {
                 throw new ArgumentNullException(nameof(dfrRow));
 
             // Ignore comments.
-            int index = dfrRow.IndexOf(';');
+            var index = dfrRow.IndexOf(';');
             if (index >= 0)
                 dfrRow = dfrRow.Substring(0, index).Trim();
 
@@ -95,28 +95,24 @@ namespace DFRLib {
                 throw new ArgumentException("Expected 3 sections, got " + sections.Length + ": " + dfrRow);
 
             // Get the address.
-            if (ulong.TryParse(sections[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out ulong addr))
-                Address = addr;
-            else
-                throw new ArgumentException("Invalid address: " + sections[0]);
+            Address = ulong.TryParse(sections[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var addr)
+                ? addr
+                : throw new ArgumentException("Invalid address: " + sections[0]);
 
             byte[] GetByteList(string argName, string argValue) {
                 byte chToHexDigit(char ch) {
-                    if (ch >= '0' && ch <= '9')
-                        return (byte) (ch - '0');
-                    else if (ch >= 'a' && ch <= 'f')
-                        return (byte) (ch - 'a' + 0x0a);
-                    else if (ch >= 'A' && ch <= 'F')
-                        return (byte) (ch - 'A' + 0x0a);
-                    else
-                        throw new ArgumentException("Not a hex char: " + ch);
+                    return ch >= '0' && ch <= '9'
+                        ? (byte) (ch - '0')
+                        : ch >= 'a' && ch <= 'f'
+                        ? (byte) (ch - 'a' + 0x0a)
+                        : ch >= 'A' && ch <= 'F' ? (byte) (ch - 'A' + 0x0a) : throw new ArgumentException("Not a hex char: " + ch);
                 }
 
                 if (argValue.Length % 2 != 0)
                     throw new ArgumentException(argName + " has wrong length: " + argValue);
                 var bytes = new byte[argValue.Length / 2];
-                int b = 0;
-                for (int i = 0; i < argValue.Length; i += 2) {
+                var b = 0;
+                for (var i = 0; i < argValue.Length; i += 2) {
                     var b1 = chToHexDigit(argValue[i + 0]);
                     var b2 = chToHexDigit(argValue[i + 1]);
                     bytes[b++] = (byte) ((b1 << 4) + b2);
@@ -154,7 +150,7 @@ namespace DFRLib {
                     "but is only " + data.Length + " bytes.");
             }
 
-            for (int i = 0; i < BytesFrom.Length; i++) {
+            for (var i = 0; i < BytesFrom.Length; i++) {
                 if (data[i + (int) Address] != BytesFrom[i]) {
                     throw new ArgumentException(
                         "Expected " + BytesFrom[i].ToString("X2") + " at address " + Address.ToString("X") +
