@@ -26,6 +26,12 @@ namespace SF3.FileEditors {
         bool CloseFile();
 
         /// <summary>
+        /// Returns a copy of all data loaded into the editor.
+        /// </summary>
+        /// <returns>A copy of the editor's data.</returns>
+        byte[] GetAllData();
+
+        /// <summary>
         /// Gets the value of 1, 2, 3 or 4 contiguous bytes at an address.
         /// </summary>
         /// <param name="location">The address of the data.</param>
@@ -117,9 +123,9 @@ namespace SF3.FileEditors {
         bool IsLoaded { get; }
 
         /// <summary>
-        /// 'True' when the file is loaded.
+        /// 'True' when the file is modified.
         /// </summary>
-        bool IsModified { get; }
+        bool IsModified { get; set; }
 
         /// <summary>
         /// Filename of the file loaded.

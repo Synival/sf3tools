@@ -40,7 +40,7 @@ namespace SF3.FileEditors {
 
         public bool IsModified {
             get => _isModified;
-            private set {
+            set {
                 if (_isModified != value) {
                     _isModified = value;
                     ModifiedChanged?.Invoke(this, EventArgs.Empty);
@@ -163,6 +163,12 @@ namespace SF3.FileEditors {
             UpdateTitle();
             Closed?.Invoke(this, EventArgs.Empty);
             return true;
+        }
+
+        public byte[] GetAllData() {
+            var newData = new byte[Data.Length];
+            Data.CopyTo(newData, 0);
+            return Data;
         }
 
         /// <summary>
