@@ -11,7 +11,7 @@ namespace SF3.IconPointerEditor.Forms {
         // Used to display version in the application
         protected override string Version => "0.11";
 
-        new public IIconPointerFileEditor FileEditor => base.FileEditor as IIconPointerFileEditor;
+        public new IIconPointerFileEditor FileEditor => base.FileEditor as IIconPointerFileEditor;
 
         private bool _isX026 = false;
 
