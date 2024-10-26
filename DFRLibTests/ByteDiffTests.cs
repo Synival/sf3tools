@@ -1,3 +1,4 @@
+using System.Text;
 using DFRLib;
 
 namespace DFRLibTests {
@@ -135,6 +136,59 @@ namespace DFRLibTests {
             const string expectedDfr =
                 "4,,5060000070800000\n";
             Assert.AreEqual(expectedDfr, dfr);
+        }
+
+        [TestMethod]
+        public void Constructor_FromByteStream_ProducesExpectedDFR() {
+            var data =
+                "; do something\n" +
+                "12FF,0081,0182\n" +
+                "\r\n" +
+                "4321,,DEADBEEF\r\n" + 
+                "    " +
+                "5000,,01";
+
+            var diff = new ByteDiff(new MemoryStream(Encoding.UTF8.GetBytes(data)));
+            var dfr = diff.ToDFR();
+
+            const string expectedDfr =
+                "12ff,0081,0182\n" +
+                "4321,,deadbeef\n" +
+                "5000,,01\n";
+            Assert.AreEqual(expectedDfr, dfr);
+        }
+
+        [TestMethod]
+        public void ApplyTo_WithChunksFromDFR_SetsExpectedBytes() {
+            var bytes = new byte[] {
+                0x00, 0x00, 0x01, 0x81,
+                0xFF, 0xFF, 0xFF, 0xFF,
+                0xFF, 0xFF, 0xFF, 0xFF
+            };
+            var expectedBytes = new byte[] {
+                0x00, 0x00, 0x02, 0x82,
+                0xFF, 0xFF, 0xFF, 0xFF,
+                0xFF, 0xFF, 0xFF, 0xFF,
+                0x00, 0x00, 0x00, 0x00,
+                0xDE, 0xAD, 0xBE, 0xEF
+            };
+
+            var dfrData =
+                "02,0181,0282\n" +
+                "10,,DEADBEEF";
+            var diff = new ByteDiff(new MemoryStream(Encoding.UTF8.GetBytes(dfrData)));
+
+            var resultBytes = diff.ApplyTo(bytes);
+            Assert.IsTrue(Enumerable.SequenceEqual(expectedBytes, resultBytes));
+        }
+
+        [TestMethod]
+        public void ApplyTo_WithUnexpectedData_Throws() {
+            var bytes = new byte[] { 0x00, 0x01, 0x02, 0x03 };
+            var dfrData = "02,0205,0203";
+            var diff = new ByteDiff(new MemoryStream(Encoding.UTF8.GetBytes(dfrData)));
+
+            Assert.ThrowsException<InvalidDataException>(() => diff.ApplyTo(bytes));
         }
     }
 }

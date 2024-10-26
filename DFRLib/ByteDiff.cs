@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace DFRLib {
@@ -108,6 +110,29 @@ namespace DFRLib {
             => Chunks = MakeByteDiffChunks(bytesFrom, bytesTo, options);
 
         /// <summary>
+        /// Creates a diff based on a stream of text in DFR format.
+        /// </summary>
+        /// <param name="stream">Stream containing DFR text.</param>
+        public ByteDiff(Stream stream) {
+            try {
+                var reader = new StreamReader(stream);
+                var chunkList = new List<ByteDiffChunk>();
+                string line;
+                while ((line = reader.ReadLine()?.Trim()) != null) {
+                    int index;
+                    if ((index = line.IndexOf(';')) >= 0)
+                        line = line.Substring(0, index).Trim();
+                    if (line.Length > 0)
+                        chunkList.Add(new ByteDiffChunk(line));
+                }
+                Chunks = chunkList;
+            }
+            finally {
+                stream.Close();
+            }
+        }
+
+        /// <summary>
         /// Converts all changes into a DFR file.
         /// </summary>
         /// <returns>A single newline-separated string with a trailing newline.</returns>
@@ -116,6 +141,34 @@ namespace DFRLib {
             foreach (var chunk in Chunks)
                 sb.Append(chunk.ToDFR() + "\n");
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Applies this set of ByteChunk's to a copy of an input buffer and returns that copy.
+        /// </summary>
+        /// <param name="bytes">Input data.</param>
+        /// <returns>A copy of 'bytes', sizes to fit the data requested</returns>
+        /// <exception cref="InvalidDataException">Thrown if a chunk's value of 'bytesFrom' doesn't match data in 'bytes'.</exception>
+        public byte[] ApplyTo(byte[] bytes) {
+            // TODO: this doesn't handle a lot of cases with overlap or things like that!!
+            int length = Math.Max(bytes.Length, Chunks.Max(x => (int) x.Address + x.BytesTo.Length));
+            var newBytes = new byte[length];
+            bytes.CopyTo(newBytes, 0);
+
+            foreach (var chunk in Chunks) {
+                // Ensure that the expected data is correct.
+                for (int i = 0; i < chunk.BytesFrom.Length; i++)
+                    if (newBytes[i + (int) chunk.Address] != chunk.BytesFrom[i])
+                        throw new InvalidDataException(
+                            "Expected " + chunk.BytesFrom[i].ToString("X2") + " at address " + chunk.Address.ToString("X") +
+                            ", instead got " + newBytes[i + (int) chunk.Address]);
+
+                // Set data.
+                for (int i = 0; i < chunk.BytesTo.Length; i++)
+                    newBytes[i + (int) chunk.Address] = chunk.BytesTo[i];
+            }
+
+            return newBytes;
         }
 
         /// <summary>

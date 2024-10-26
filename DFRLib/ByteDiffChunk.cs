@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace DFRLib {
@@ -69,7 +71,72 @@ namespace DFRLib {
         }
 
         /// <summary>
-        /// 
+        /// Creates a byte chunk based on a row in a DFR File.
+        /// Comments are pre-processed out. The row must have valid data in the proper format, or it will throw.
+        /// </summary>
+        /// <param name="dfrRow">A string representation of the DFR row.</param>
+        /// <exception cref="ArgumentNullException">Thrown if 'dfrRow' is null.</exception>
+        /// <exception cref="ArgumentException">Thrown if 'dfrRow' has no data or data with an invalid format.</exception>
+        public ByteDiffChunk(string dfrRow) {
+            if (dfrRow == null)
+                throw new ArgumentNullException(nameof(dfrRow));
+
+            // Ignore comments.
+            int index = dfrRow.IndexOf(';');
+            if (index >= 0)
+                dfrRow = dfrRow.Substring(0, index).Trim();
+
+            // Get sections:
+            //     <address>,<in-data>,<out-data>
+            var sections = dfrRow.Split(',').Select(x => x.Trim()).ToArray();
+            if (sections.Length == 0 || sections[0] == "")
+                throw new ArgumentException("No data");
+            if (sections.Length != 3)
+                throw new ArgumentException("Expected 3 sections, got " + sections.Length + ": " + dfrRow);
+
+            // Get the address.
+            if (ulong.TryParse(sections[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out ulong addr))
+                Address = addr;
+            else
+                throw new ArgumentException("Invalid address: " + sections[0]);
+
+            byte[] GetByteList(string argName, string argValue) {
+                byte chToHexDigit(char ch) {
+                    if (ch >= '0' && ch <= '9')
+                        return (byte) (ch - '0');
+                    else if (ch >= 'a' && ch <= 'f')
+                        return (byte) (ch - 'a' + 0x0a);
+                    else if (ch >= 'A' && ch <= 'F')
+                        return (byte) (ch - 'A' + 0x0a);
+                    else
+                        throw new ArgumentException("Not a hex char: " + ch);
+                }
+
+                if (argValue.Length % 2 != 0)
+                    throw new ArgumentException(argName + " has wrong length: " + argValue);
+                var bytes = new byte[argValue.Length / 2];
+                int b = 0;
+                for (int i = 0; i < argValue.Length; i += 2) {
+                    var b1 = chToHexDigit(argValue[i + 0]);
+                    var b2 = chToHexDigit(argValue[i + 1]);
+                    bytes[b++] = (byte) ((b1 << 4) + b2);
+                }
+
+                return bytes;
+            }
+
+            // Get bytes from and to.
+            var bytesFrom = GetByteList(nameof(sections) + "[1]", sections[1]);
+            var bytesTo = GetByteList(nameof(sections) + "[2]", sections[2]);
+            if (bytesFrom.Length != 0 && bytesFrom.Length != bytesTo.Length)
+                throw new ArgumentException("Doesn't match format of alter or append chunk: " + dfrRow);
+
+            BytesFrom = bytesFrom;
+            BytesTo = bytesTo;
+        }
+
+        /// <summary>
+        /// Converts the byte chunk into a row for a DFR file.
         /// </summary>
         /// <returns>A string.</returns>
         public string ToDFR() => Address.ToString("x") + "," + MakeByteHexStr(BytesFrom) + "," + MakeByteHexStr(BytesTo);
@@ -78,11 +145,6 @@ namespace DFRLib {
         /// Where the diff chunk begins.
         /// </summary>
         public ulong Address { get; }
-
-        /// <summary>
-        /// The number of bytes affected.
-        /// </summary>
-        public int Size => BytesFrom.Length;
 
         /// <summary>
         /// The original bytes.
