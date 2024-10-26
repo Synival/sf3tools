@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using static CommonLib.Utils.ControlUtils;
 using static CommonLib.Utils.ResourceUtils;
 using static CommonLib.Utils.Utils;
-using static CommonLib.Utils.ControlUtils;
 
 namespace CommonLib.NamedValues {
     public interface INamedValueFromResourceInfo {

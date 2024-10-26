@@ -143,7 +143,7 @@ namespace DFRLib.Tests {
                 "; do something\n" +
                 "12FF,0081,0182\n" +
                 "\r\n" +
-                "4321,,DEADBEEF\r\n" + 
+                "4321,,DEADBEEF\r\n" +
                 "    " +
                 "5000,,01";
 

@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.NamedValues;
 using SF3.Types;
-using static SF3.Utils.Resources;
-using static CommonLib.Utils.Utils;
-using static CommonLib.Utils.ResourceUtils;
 using static CommonLib.Utils.ControlUtils;
+using static CommonLib.Utils.ResourceUtils;
+using static CommonLib.Utils.Utils;
+using static SF3.Utils.Resources;
 
 namespace SF3.Values {
     public class MonsterValueResourceInfo : NamedValueFromResourceForScenariosInfo {

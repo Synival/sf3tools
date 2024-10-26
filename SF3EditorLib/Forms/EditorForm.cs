@@ -11,7 +11,6 @@ using DFRTool.GUI.Forms;
 using SF3.Editor.Extensions;
 using SF3.FileEditors;
 using SF3.Types;
-using SF3.Utils;
 using static CommonLib.Win.Utils.MessageUtils;
 
 namespace SF3.Editor.Forms {
