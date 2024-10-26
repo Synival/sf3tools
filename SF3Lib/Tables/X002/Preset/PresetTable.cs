@@ -4,13 +4,13 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X002.Items {
-    public class ItemList : Table<Item> {
-        public int MaxSize { get; } = 300;
+namespace SF3.Tables.X002.Preset {
+    public class PresetTable : Table<Preset> {
+        public int MaxSize { get; } = 31;
 
-        public ItemList(IX002_FileEditor fileEditor) : base(fileEditor) {
+        public PresetTable(IX002_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
-            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "Items.xml");
+            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "SpellIndexList.xml");
         }
 
         private readonly string _resourceFile;
@@ -23,21 +23,19 @@ namespace SF3.Tables.X002.Items {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new Item[0];
+            _models = new Preset[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
-
                 var xml = MakeXmlReader(stream);
                 _ = xml.Read();
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new Item(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new Preset(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.ID < 0 || newModel.ID >= MaxSize) {
+                        if (newModel.PresetID < 0 || newModel.PresetID >= MaxSize)
                             throw new IndexOutOfRangeException();
-                        }
                     }
                 }
             }

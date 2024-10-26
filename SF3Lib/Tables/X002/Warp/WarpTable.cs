@@ -5,10 +5,10 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X002.Warp {
-    public class WarpList : Table<Warp> {
+    public class WarpTable : Table<Warp> {
         public int MaxSize { get; } = 1000;
 
-        public WarpList(IX002_FileEditor fileEditor) : base(fileEditor) {
+        public WarpTable(IX002_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 

@@ -4,36 +4,37 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X002.WeaponRank {
-    public class WeaponRankList : Table<WeaponRank> {
-        public int MaxSize { get; } = 5;
+namespace SF3.Tables.X002.Spells {
+    public class SpellTable : Table<Spell> {
+        public int MaxSize { get; } = 78;
 
-        public WeaponRankList(IX002_FileEditor fileEditor) : base(fileEditor) {
+        public SpellTable(IX002_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
+            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "Spells.xml");
         }
 
+        private readonly string _resourceFile;
         private readonly IX002_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/WeaponRankList.xml";
+        public override string ResourceFile => _resourceFile;
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new WeaponRank[0];
+            _models = new Spell[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
-
                 var xml = MakeXmlReader(stream);
                 _ = xml.Read();
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new WeaponRank(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new Spell(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.WeaponRankID < 0 || newModel.WeaponRankID >= MaxSize) {
+                        if (newModel.SpellID < 0 || newModel.SpellID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

@@ -4,26 +4,24 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X002.LoadedOverride {
-    public class LoadedOverrideList : Table<LoadedOverride> {
+namespace SF3.Tables.X002.StatBoost {
+    public class StatTable : Table<StatBoost> {
         public int MaxSize { get; } = 300;
 
-        public LoadedOverrideList(IX002_FileEditor fileEditor) : base(fileEditor) {
+        public StatTable(IX002_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
-            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "LoadedOverrideList.xml");
         }
 
-        private readonly string _resourceFile;
         private readonly IX002_FileEditor _fileEditor;
 
-        public override string ResourceFile => _resourceFile;
+        public override string ResourceFile => "Resources/X002StatList.xml";
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new LoadedOverride[0];
+            _models = new StatBoost[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -33,9 +31,9 @@ namespace SF3.Tables.X002.LoadedOverride {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new LoadedOverride(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new StatBoost(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.LoadedOverrideID < 0 || newModel.LoadedOverrideID >= MaxSize) {
+                        if (newModel.StatID < 0 || newModel.StatID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

@@ -10,14 +10,14 @@ using SF3.Tables.X002.WeaponRank;
 
 namespace SF3.FileEditors {
     public interface IX002_FileEditor : ISF3FileEditor {
-        ItemList ItemList { get; }
-        SpellList SpellList { get; }
-        PresetList PresetList { get; }
-        LoadList LoadList { get; }
-        StatList StatList { get; }
-        WeaponRankList WeaponRankList { get; }
-        AttackResistList AttackResistList { get; }
-        WarpList WarpList { get; }
-        LoadedOverrideList LoadedOverrideList { get; }
+        ItemTable ItemList { get; }
+        SpellTable SpellList { get; }
+        PresetTable PresetList { get; }
+        LoadTable LoadList { get; }
+        StatTable StatList { get; }
+        WeaponRankTable WeaponRankList { get; }
+        AttackResistTable AttackResistList { get; }
+        WarpTable WarpList { get; }
+        LoadedOverrideTable LoadedOverrideList { get; }
     }
 }

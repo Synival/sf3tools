@@ -4,24 +4,26 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X002.AttackResist {
-    public class AttackResistList : Table<AttackResist> {
-        public int MaxSize { get; } = 2;
+namespace SF3.Tables.X002.Loading {
+    public class LoadTable : Table<Loading> {
+        public int MaxSize { get; } = 300;
 
-        public AttackResistList(IX002_FileEditor fileEditor) : base(fileEditor) {
+        public LoadTable(IX002_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
+            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "LoadList.xml");
         }
 
+        private readonly string _resourceFile;
         private readonly IX002_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/AttackResistList.xml";
+        public override string ResourceFile => _resourceFile;
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new AttackResist[0];
+            _models = new Loading[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -31,9 +33,9 @@ namespace SF3.Tables.X002.AttackResist {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new AttackResist(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new Loading(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.AttackResistID < 0 || newModel.AttackResistID >= MaxSize) {
+                        if (newModel.LoadID < 0 || newModel.LoadID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }
