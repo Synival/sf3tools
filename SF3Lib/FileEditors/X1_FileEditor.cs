@@ -61,17 +61,17 @@ namespace SF3.FileEditors {
         public override IEnumerable<ITable> MakeTables() {
             var isntScn1OrBTL99 = Scenario != ScenarioType.Scenario1 && !IsBTL99;
 
-            // Add models present for both towns and battles.
-            var modelArrays = new List<ITable> {
+            // Add tables present for both towns and battles.
+            var tables = new List<ITable> {
                 (TreasureList = new TreasureTable(this))
             };
 
             if (isntScn1OrBTL99)
-                modelArrays.Add(WarpList = new WarpTable(this));
+                tables.Add(WarpList = new WarpTable(this));
 
-            // Add models only present for battles.
+            // Add tables only present for battles.
             if (IsBattle) {
-                modelArrays.AddRange(new List<ITable>() {
+                tables.AddRange(new List<ITable>() {
                     (HeaderList = new HeaderTable(this)),
                     (SlotList = new SlotTable(this)),
                     (AIList = new AITable(this)),
@@ -81,21 +81,21 @@ namespace SF3.FileEditors {
                 });
 
                 if (isntScn1OrBTL99)
-                    modelArrays.Add(TileList = new TileMovementTable(this));
+                    tables.Add(TileList = new TileMovementTable(this));
             }
 
-            // Add models only present for towns.
+            // Add tables only present for towns.
             if (!IsBattle) {
-                modelArrays.AddRange(new List<ITable>() {
+                tables.AddRange(new List<ITable>() {
                     (NpcList = new NpcTable(this)),
                     (EnterList = new EnterTable(this))
                 });
 
                 if (isntScn1OrBTL99)
-                    modelArrays.Add(ArrowList = new ArrowTable(this));
+                    tables.Add(ArrowList = new ArrowTable(this));
             }
 
-            return modelArrays;
+            return tables;
         }
 
         public override void DestroyTables() {

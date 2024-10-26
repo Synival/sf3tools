@@ -19,13 +19,13 @@ namespace SF3.FileEditors {
         public abstract IEnumerable<ITable> MakeTables();
 
         /// <summary>
-        /// Unsets or deinitialize any model ITable's populated in MakeTables().
+        /// Unsets or deinitialize any ITable's populated in MakeTables().
         /// </summary>
         public abstract void DestroyTables();
 
         /// <summary>
         /// Occurs when data is loaded but before the Table's are created.
-        /// This is a good place to check file data to determine how to create the models.
+        /// This is a good place to check file data to determine how to create the tables.
         /// If 'false' is returned, loading is aborted.
         /// </summary>
         /// <returns>'true' on success, otherwise 'false'.</returns>

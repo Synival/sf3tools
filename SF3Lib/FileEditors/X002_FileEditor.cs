@@ -17,7 +17,7 @@ namespace SF3.FileEditors {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            var modelArrays = new List<ITable>() {
+            var tables = new List<ITable>() {
                 (ItemList = new ItemTable(this)),
                 (SpellList = new SpellTable(this)),
                 (PresetList = new PresetTable(this)),
@@ -29,9 +29,9 @@ namespace SF3.FileEditors {
             };
 
             if (Scenario == ScenarioType.Scenario1)
-                modelArrays.Add(WarpList = new WarpTable(this));
+                tables.Add(WarpList = new WarpTable(this));
 
-            return modelArrays;
+            return tables;
         }
 
         public override void DestroyTables() {
