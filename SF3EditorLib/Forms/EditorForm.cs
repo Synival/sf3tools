@@ -101,6 +101,28 @@ namespace SF3.Editor.Forms {
             if (openfile.ShowDialog() != DialogResult.OK)
                 return false;
 
+            return LoadFile(openfile.FileName);
+        }
+
+        private bool LoadFile(string filename) {
+            FileStream stream = null;
+            try {
+                try {
+                    stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                }
+                catch {
+                    MessageBox.Show("Error trying to load file. It is probably in use by another process.");
+                    throw;
+                }
+                return LoadFile(filename, stream);
+            }
+            finally {
+                if (stream != null)
+                    stream.Close();
+            }
+        }
+
+        private bool LoadFile(string filename, Stream stream) {
             // Close the file first, and don't proceed if the user aborted it.
             if (!CloseFile())
                 return false;
@@ -108,25 +130,23 @@ namespace SF3.Editor.Forms {
             FileEditor = MakeFileEditor();
             AttachFileEditor(FileEditor);
 
-            bool success = false;
-            try {
-                if (!FileEditor.LoadFile(openfile.FileName)) {
-                    MessageBox.Show("Error trying to load file. It is probably in use by another process.");
+            bool success = new Func<bool>(() => {
+                try {
+                    if (!FileEditor.LoadFile(filename, stream))
+                        return false;
+                    if (!OnLoad())
+                        return false;
+                    return true;
+                }
+                catch {
                     return false;
                 }
-                success = OnLoad();
-            }
-            catch (System.Reflection.TargetInvocationException) {
-                success = false;
-            }
-            catch (FileEditorReadException) {
-                success = false;
-            }
+            })();
 
             if (!success) {
                 //wrong file was selected
                 MessageBox.Show("Data appears corrupt or invalid:\n" +
-                                "    " + openfile.FileName + "\n\n" +
+                                "    " + filename + "\n\n" +
                                 "Is this the correct type of file?");
                 return false;
             }
