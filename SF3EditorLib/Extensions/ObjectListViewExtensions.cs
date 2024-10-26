@@ -27,7 +27,7 @@ namespace SF3.Editor.Extensions {
         public static void EnhanceOlvCellEditControl(this ObjectListView olv, CellEditEventArgs e) {
             // Enhance ComboBox's so values are updated any time the dropdown is closed, unless from hitting "escape".
             if (e.Control is ComboBox) {
-                ComboBox cb = e.Control as ComboBox;
+                var cb = e.Control as ComboBox;
                 cb.KeyDown += (s, e2) => {
                     if (e2.KeyCode == Keys.Escape)
                         cb.SelectedValue = e.Column.GetValue(e.RowObject);
@@ -39,7 +39,7 @@ namespace SF3.Editor.Extensions {
             }
             // Ensure that strings displayed in hex format are edited in hex format.
             else if (e.Column.AspectToStringFormat == "{0:X}") {
-                NumericUpDown control = (NumericUpDown)e.Control;
+                var control = (NumericUpDown)e.Control;
                 control.Hexadecimal = true;
             }
         }
@@ -66,7 +66,7 @@ namespace SF3.Editor.Extensions {
             var methodBase = typeof(ObjectListViewExtensions).GetMethod(nameof(RegisterNamedValue), BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
             foreach (var nvt in namedValueTypes) {
                 var method = methodBase.MakeGenericMethod(nvt);
-                method.Invoke(null, null);
+                _ = method.Invoke(null, null);
             }
         }
     }

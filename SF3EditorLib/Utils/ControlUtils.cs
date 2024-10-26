@@ -16,11 +16,12 @@ namespace SF3.Editor.Utils {
                 };
             }
 
-            var comboBox = new ComboBox();
-            comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox.DataSource = new BindingSource(allPossibleValues, null);
-            comboBox.DisplayMember = "Value";
-            comboBox.ValueMember = "Key";
+            var comboBox = new ComboBox {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                DataSource = new BindingSource(allPossibleValues, null),
+                DisplayMember = "Value",
+                ValueMember = "Key"
+            };
             return comboBox;
         }
     }

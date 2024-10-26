@@ -35,7 +35,7 @@ namespace SF3.Editor.Forms {
         public void InitializeEditor(ToolStrip toolStrip) {
             if (toolStrip != null) {
                 var menuItems = new Dictionary<string, ToolStripMenuItem>();
-                foreach (var ti in this.menuStrip1.Items) {
+                foreach (var ti in menuStrip1.Items) {
                     if (ti is ToolStripMenuItem tsmi)
                         menuItems.Add(tsmi.Text, tsmi);
                 }
@@ -49,12 +49,13 @@ namespace SF3.Editor.Forms {
                         if (menuItems.ContainsKey(tsmi.Text)) {
                             actions.Add(() => {
                                 while (tsmiCopy.DropDownItems.Count > 0)
-                                    menuItems[tsmiCopy.Text].DropDownItems.Add(tsmiCopy.DropDownItems[0]);
+                                    _=menuItems[tsmiCopy.Text].DropDownItems.Add(tsmiCopy.DropDownItems[0]);
                                 tsmiCopy.DropDownItems.Clear();
                             });
                         }
-                        else
+                        else {
                             actions.Add(() => menuStrip1.Items.Insert(menuStrip1.Items.IndexOf(tsmiHelp), tsmi));
+                        }
                     }
                     else {
                         var tsi = ti as ToolStripItem;
@@ -66,19 +67,19 @@ namespace SF3.Editor.Forms {
                     action();
 
                 toolStrip.Items.Clear();
-                this.Controls.Remove(toolStrip);
+                Controls.Remove(toolStrip);
             }
 
-            _baseTitle = this.Text + " v" + Version;
-            this.tsmiHelp_Version.Text = "Version " + Version;
-            this.Scenario = ScenarioType.Scenario1;
+            _baseTitle = Text + " v" + Version;
+            tsmiHelp_Version.Text = "Version " + Version;
+            Scenario = ScenarioType.Scenario1;
 
-            EventHandler onScenarioChanged = (obj, eargs) => {
-                tsmiScenario_Scenario1.Checked = (Scenario == ScenarioType.Scenario1);
-                tsmiScenario_Scenario2.Checked = (Scenario == ScenarioType.Scenario2);
-                tsmiScenario_Scenario3.Checked = (Scenario == ScenarioType.Scenario3);
-                tsmiScenario_PremiumDisk.Checked = (Scenario == ScenarioType.PremiumDisk);
-            };
+            void onScenarioChanged(object obj, EventArgs eargs) {
+                tsmiScenario_Scenario1.Checked = Scenario == ScenarioType.Scenario1;
+                tsmiScenario_Scenario2.Checked = Scenario == ScenarioType.Scenario2;
+                tsmiScenario_Scenario3.Checked = Scenario == ScenarioType.Scenario3;
+                tsmiScenario_PremiumDisk.Checked = Scenario == ScenarioType.PremiumDisk;
+            }
 
             ScenarioChanged += onScenarioChanged;
             onScenarioChanged(null, EventArgs.Empty);
@@ -93,9 +94,7 @@ namespace SF3.Editor.Forms {
                 tsmiFile_Close.Enabled           = IsLoaded;
             };
 
-            FileModifiedChanged += (obj, eargs) => {
-                tsmiFile_Save.Enabled = IsLoaded && FileEditor.IsModified;
-            };
+            FileModifiedChanged += (obj, eargs) => tsmiFile_Save.Enabled = IsLoaded && FileEditor.IsModified;
 
             ObjectListViews = this.GetAllObjectsOfTypeInFields<ObjectListView>(false);
             UpdateTitle();
@@ -105,8 +104,9 @@ namespace SF3.Editor.Forms {
         /// Creates an "Open" dialog and, if a file was chosen, opens it, processes its data, and loads it.
         /// </summary>
         public bool OpenFileDialog() {
-            OpenFileDialog openfile = new OpenFileDialog();
-            openfile.Filter = FileDialogFilter;
+            var openfile = new OpenFileDialog {
+                Filter = FileDialogFilter
+            };
             if (openfile.ShowDialog() != DialogResult.OK)
                 return false;
 
@@ -126,8 +126,7 @@ namespace SF3.Editor.Forms {
                 return LoadFile(filename, stream);
             }
             finally {
-                if (stream != null)
-                    stream.Close();
+                stream?.Close();
             }
         }
 
@@ -139,13 +138,9 @@ namespace SF3.Editor.Forms {
             FileEditor = MakeFileEditor();
             AttachFileEditor(FileEditor);
 
-            bool success = new Func<bool>(() => {
+            var success = new Func<bool>(() => {
                 try {
-                    if (!FileEditor.LoadFile(filename, stream))
-                        return false;
-                    if (!OnLoad())
-                        return false;
-                    return true;
+                    return FileEditor.LoadFile(filename, stream) && OnLoad();
                 }
                 catch {
                     return false;
@@ -163,15 +158,15 @@ namespace SF3.Editor.Forms {
         }
 
         private void AttachFileEditor(IFileEditor fileEditor) {
-            fileEditor.TitleChanged += (obj, args) => UpdateTitle();
-            fileEditor.PreLoaded += (obj, eargs) => this.PreFileLoaded?.Invoke(this, eargs);
-            fileEditor.Loaded += (obj, eargs) => this.FileLoaded?.Invoke(this, eargs);
-            fileEditor.PreClosed += (obj, eargs) => this.PreFileClosed?.Invoke(this, eargs);
-            fileEditor.Closed += (obj, eargs) => this.FileClosed?.Invoke(this, eargs);
-            fileEditor.PreSaved += (obj, eargs) => this.PreFileSaved?.Invoke(this, eargs);
-            fileEditor.Saved += (obj, eargs) => this.FileSaved?.Invoke(this, eargs);
-            fileEditor.ModifiedChanged += (obj, eargs) => this.FileModifiedChanged?.Invoke(this, eargs);
-            fileEditor.IsLoadedChanged += (obj, eargs) => this.FileIsLoadedChanged?.Invoke(this, eargs);
+            fileEditor.TitleChanged    += (obj, args) => UpdateTitle();
+            fileEditor.PreLoaded       += (obj, eargs) => PreFileLoaded?.Invoke(this, eargs);
+            fileEditor.Loaded          += (obj, eargs) => FileLoaded?.Invoke(this, eargs);
+            fileEditor.PreClosed       += (obj, eargs) => PreFileClosed?.Invoke(this, eargs);
+            fileEditor.Closed          += (obj, eargs) => FileClosed?.Invoke(this, eargs);
+            fileEditor.PreSaved        += (obj, eargs) => PreFileSaved?.Invoke(this, eargs);
+            fileEditor.Saved           += (obj, eargs) => FileSaved?.Invoke(this, eargs);
+            fileEditor.ModifiedChanged += (obj, eargs) => FileModifiedChanged?.Invoke(this, eargs);
+            fileEditor.IsLoadedChanged += (obj, eargs) => FileIsLoadedChanged?.Invoke(this, eargs);
         }
 
         /// <summary>
@@ -186,9 +181,10 @@ namespace SF3.Editor.Forms {
 
             ObjectListViews.ForEach(x => x.FinishCellEdit());
 
-            SaveFileDialog savefile = new SaveFileDialog();
-            savefile.Filter = FileDialogFilter;
-            savefile.FileName = Path.GetFileName(FileEditor.Filename);
+            var savefile = new SaveFileDialog {
+                Filter = FileDialogFilter,
+                FileName = Path.GetFileName(FileEditor.Filename)
+            };
             if (savefile.ShowDialog() != DialogResult.OK)
                 return false;
 
@@ -207,16 +203,18 @@ namespace SF3.Editor.Forms {
         }
 
         private bool SaveFile(string filename) {
+            bool success = true;
             try {
-                if (!FileEditor.SaveFile(filename)) {
-                    ErrorMessage("Error trying to save file. It is probably in use by another process.");
-                    return false;
-                }
+                if (!FileEditor.SaveFile(filename))
+                    success = false;
             }
-            catch (Exception e) {
-                return false;
+            catch {
+                success = false;
             }
-            return true;
+            if (!success)
+                ErrorMessage("Error trying to save file. It is probably in use by another process.");
+
+            return success;
         }
 
         /// <summary>
@@ -241,7 +239,7 @@ namespace SF3.Editor.Forms {
             }
 
             ObjectListViews.ForEach(x => x.ClearObjects());
-            FileEditor.CloseFile();
+            _ = FileEditor.CloseFile();
             FileEditor = null;
             return true;
         }
@@ -256,8 +254,9 @@ namespace SF3.Editor.Forms {
             if (!IsLoaded)
                 return false;
 
-            OpenFileDialog openfile = new OpenFileDialog();
-            openfile.Filter = "DFR Files (*.DFR)|*.DFR|All Files (*.*)|*.*";
+            var openfile = new OpenFileDialog {
+                Filter = "DFR Files (*.DFR)|*.DFR|All Files (*.*)|*.*"
+            };
             if (openfile.ShowDialog() != DialogResult.OK)
                 return false;
 
@@ -296,7 +295,7 @@ namespace SF3.Editor.Forms {
         /// </summary>
         public bool GenerateDFRFile() {
             var form = new frmDFRTool(FileEditor.GetAllData());
-            form.ShowDialog();
+            _ = form.ShowDialog();
             return true;
         }
 
@@ -309,9 +308,10 @@ namespace SF3.Editor.Forms {
 
             ObjectListViews.ForEach(x => x.FinishCellEdit());
 
-            var saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Title = "Copy Tables To";
-            saveFileDialog.Filter = FileDialogFilter;
+            var saveFileDialog = new SaveFileDialog {
+                Title = "Copy Tables To",
+                Filter = FileDialogFilter
+            };
             if (saveFileDialog.ShowDialog() != DialogResult.OK)
                 return;
             var copyToFilename = saveFileDialog.FileName;
@@ -350,9 +350,10 @@ namespace SF3.Editor.Forms {
 
             ObjectListViews.ForEach(x => x.FinishCellEdit());
 
-            var openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Copy Tables From";
-            openFileDialog.Filter = FileDialogFilter;
+            var openFileDialog = new OpenFileDialog {
+                Title = "Copy Tables From",
+                Filter = FileDialogFilter
+            };
             if (openFileDialog.ShowDialog() != DialogResult.OK)
                 return;
             var copyFromFilename = openFileDialog.FileName;
@@ -379,11 +380,11 @@ namespace SF3.Editor.Forms {
         }
 
         private void ProduceAndPresentBulkCopyReport(ObjectExtensions.BulkCopyPropertiesResult result) {
-            string copyReport = result.MakeSummaryReport();
+            var copyReport = result.MakeSummaryReport();
 
             // Output summary files.
             var fullReport = result.MakeFullReport();
-            bool wroteBulkCopyReport = false;
+            var wroteBulkCopyReport = false;
             if (fullReport != "") {
                 try {
                     File.WriteAllText("BulkCopyReport.txt", fullReport);
@@ -398,7 +399,7 @@ namespace SF3.Editor.Forms {
             // Show the user a nice report.
             InfoMessage("Copy successful.\n\nResults:\n\n" + copyReport);
             if (wroteBulkCopyReport) {
-                new Process {
+                _=new Process {
                     StartInfo = new ProcessStartInfo("BulkCopyReport.txt") {
                         UseShellExecute = true
                     }
@@ -410,14 +411,12 @@ namespace SF3.Editor.Forms {
         /// Updates the title of the form.
         /// </summary>
         protected void UpdateTitle() {
-            string newTitle = MakeTitle();
-            if (this.Text != newTitle) {
-                this.Text = newTitle;
+            var newTitle = MakeTitle();
+            if (Text != newTitle) {
+                Text = newTitle;
                 TitleChanged?.Invoke(this, EventArgs.Empty);
             }
         }
-
-        static private string _errorMessageTitle = null;
 
         /// <summary>
         /// Function to load data from a file opened with OpenFileDialog(). Must be overridden.
@@ -527,9 +526,10 @@ namespace SF3.Editor.Forms {
         public event EventHandler FileIsLoadedChanged;
 
         protected virtual void EditorForm_FormClosing(object sender, FormClosingEventArgs e) {
-            if (FileEditor?.IsModified == true)
+            if (FileEditor?.IsModified == true) {
                 if (!CloseFile())
                     e.Cancel = true;
+            }
         }
 
         protected virtual void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
