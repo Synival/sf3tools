@@ -19,17 +19,17 @@ namespace SF3.X019_Editor.Forms {
             set {
                 if (_isX044 != value) {
                     _isX044 = value;
-                    tsmiScenario_PremiumDiskX044.Checked = (Scenario == ScenarioType.PremiumDisk && IsX044);
+                    tsmiScenario_PremiumDiskX044.Checked = Scenario == ScenarioType.PremiumDisk && IsX044;
                 }
             }
         }
 
-        new public IX019_FileEditor FileEditor => base.FileEditor as IX019_FileEditor;
+        public new IX019_FileEditor FileEditor => base.FileEditor as IX019_FileEditor;
 
         public frmX019_Editor() {
             InitializeComponent();
             InitializeEditor(menuStrip1);
-            this.ScenarioChanged += (obj, e) => tsmiScenario_PremiumDiskX044.Checked = (Scenario == ScenarioType.PremiumDisk && IsX044);
+            ScenarioChanged += (obj, e) => tsmiScenario_PremiumDiskX044.Checked = Scenario == ScenarioType.PremiumDisk && IsX044;
         }
 
         protected override string FileDialogFilter

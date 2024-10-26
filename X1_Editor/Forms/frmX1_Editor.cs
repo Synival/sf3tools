@@ -24,7 +24,7 @@ namespace SF3.X1_Editor.Forms {
             }
         }
 
-        new public IX1_FileEditor FileEditor => base.FileEditor as IX1_FileEditor;
+        public new IX1_FileEditor FileEditor => base.FileEditor as IX1_FileEditor;
 
         private MapLeaderType _mapLeader = (MapLeaderType) (-1); // uninitialized value
 
@@ -33,10 +33,10 @@ namespace SF3.X1_Editor.Forms {
             set {
                 if (_mapLeader != value) {
                     _mapLeader = value;
-                    tsmiMap_MapSynbios.Checked = (_mapLeader == MapLeaderType.Synbios);
-                    tsmiMap_MapMedion.Checked = (_mapLeader == MapLeaderType.Medion);
-                    tsmiMap_MapJulian.Checked = (_mapLeader == MapLeaderType.Julian);
-                    tsmiMap_MapExtra.Checked = (_mapLeader == MapLeaderType.Extra);
+                    tsmiMap_MapSynbios.Checked = _mapLeader == MapLeaderType.Synbios;
+                    tsmiMap_MapMedion.Checked  = _mapLeader == MapLeaderType.Medion;
+                    tsmiMap_MapJulian.Checked  = _mapLeader == MapLeaderType.Julian;
+                    tsmiMap_MapExtra.Checked   = _mapLeader == MapLeaderType.Extra;
                 }
             }
         }
@@ -113,8 +113,8 @@ namespace SF3.X1_Editor.Forms {
         private void tsmiMap_MapExtra_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Extra; //map with no lead or a extra as lead. also for ruins
 
         private void tsmiHelp_TreasureDebugToggle_Click(object sender, EventArgs e) {
-            Models.X1.Treasures.TreasureList.Debug = !Models.X1.Treasures.TreasureList.Debug;
-            tsmiHelp_TreasureDebugToggle.Checked = Models.X1.Treasures.TreasureList.Debug;
+            Models.X1.Treasure.TreasureList.Debug = !Models.X1.Treasure.TreasureList.Debug;
+            tsmiHelp_TreasureDebugToggle.Checked = Models.X1.Treasure.TreasureList.Debug;
         }
     }
 }
