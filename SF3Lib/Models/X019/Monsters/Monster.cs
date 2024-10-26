@@ -4,82 +4,76 @@ using SF3.Values;
 
 namespace SF3.Models.X019.Monsters {
     public class Monster {
-        private IX019_FileEditor _fileEditor;
+        private readonly IX019_FileEditor _fileEditor;
 
-        private int maxHP;
-        private int maxMP;
-        private int level;
-        private int attack;
-        private int defense;
-        private int agility;
-        private int mov;
-        private int luck;
-        private int turns;
-        private int hpRegen;
-        private int mpRegen;
-        private int earthRes;
-        private int fireRes;
-        private int iceRes;
-        private int sparkRes;
-        private int windRes;
-        private int lightRes;
-        private int darkRes;
-        private int unusedRes;
-        private int spell1;
-        private int spell1Level;
-        private int spell2;
-        private int spell2Level;
-        private int spell3;
-        private int spell3Level;
-        private int spell4;
-        private int spell4Level;
-        private int equippedWeapon;
-        private int equippedAccessory;
-        private int itemSlot1;
-        private int itemSlot2;
-        private int itemSlot3;
-        private int itemSlot4;
-        private int enemySpecial1;
-        private int enemySpecial2;
-        private int enemySpecial3;
-        private int enemySpecial4; //?
-        private int enemySpecial5; //?
-        private int enemySpecial6; //?
-        private int enemySpecial7; //?
-        private int enemySpecial8; //?
-        private int enemySpecial9; //?
-        private int enemySpecial10; //?
-        private int unknown1;
-        private int unknown2;
-        private int unknown3;
-        private int unknown4;
-        private int unknown5;
-        private int unknown6;
-        private int gold;
-        private int drop;
-        private int unknown7;
-        private int unknown8;
-        private int unknown9;
-        private int unknown10;
-        private int magicType;
-        private int movementType;
-        private int unknown11;
-        private int unknown12;
-        private int unknown13;
-        private int unknown14;
-        private int unknown15;
-        private int unknown16;
-        private int unknown17;
-        private int unknown18;
-        private int unknown19;
-        private int unknown20;
-        private int spriteID;
-
-        private int address;
-        private int offset;
-
-        private int index;
-        private string name;
+        private readonly int maxHP;
+        private readonly int maxMP;
+        private readonly int level;
+        private readonly int attack;
+        private readonly int defense;
+        private readonly int agility;
+        private readonly int mov;
+        private readonly int luck;
+        private readonly int turns;
+        private readonly int hpRegen;
+        private readonly int mpRegen;
+        private readonly int earthRes;
+        private readonly int fireRes;
+        private readonly int iceRes;
+        private readonly int sparkRes;
+        private readonly int windRes;
+        private readonly int lightRes;
+        private readonly int darkRes;
+        private readonly int unusedRes;
+        private readonly int spell1;
+        private readonly int spell1Level;
+        private readonly int spell2;
+        private readonly int spell2Level;
+        private readonly int spell3;
+        private readonly int spell3Level;
+        private readonly int spell4;
+        private readonly int spell4Level;
+        private readonly int equippedWeapon;
+        private readonly int equippedAccessory;
+        private readonly int itemSlot1;
+        private readonly int itemSlot2;
+        private readonly int itemSlot3;
+        private readonly int itemSlot4;
+        private readonly int enemySpecial1;
+        private readonly int enemySpecial2;
+        private readonly int enemySpecial3;
+        private readonly int enemySpecial4; //?
+        private readonly int enemySpecial5; //?
+        private readonly int enemySpecial6; //?
+        private readonly int enemySpecial7; //?
+        private readonly int enemySpecial8; //?
+        private readonly int enemySpecial9; //?
+        private readonly int enemySpecial10; //?
+        private readonly int unknown1;
+        private readonly int unknown2;
+        private readonly int unknown3;
+        private readonly int unknown4;
+        private readonly int unknown5;
+        private readonly int unknown6;
+        private readonly int gold;
+        private readonly int drop;
+        private readonly int unknown7;
+        private readonly int unknown8;
+        private readonly int unknown9;
+        private readonly int unknown10;
+        private readonly int magicType;
+        private readonly int movementType;
+        private readonly int unknown11;
+        private readonly int unknown12;
+        private readonly int unknown13;
+        private readonly int unknown14;
+        private readonly int unknown15;
+        private readonly int unknown16;
+        private readonly int unknown17;
+        private readonly int unknown18;
+        private readonly int unknown19;
+        private readonly int unknown20;
+        private readonly int offset;
 
         public Monster(IX019_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
@@ -102,12 +96,12 @@ namespace SF3.Models.X019.Monsters {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            ID = id;
+            Name = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 76);
+            var start = offset + (id * 76);
             maxHP = start; //2 bytes
             maxMP = start + 2; //1 byte
             level = start + 3; //1 byte
@@ -175,17 +169,17 @@ namespace SF3.Models.X019.Monsters {
             unknown18 = start + 73; //what to do on turn6?
             unknown19 = start + 74;
             unknown20 = start + 75;
-            spriteID = id + 200;
+            SpriteID = id + 200;
 
-            address = offset + (id * 0x4C);
+            Address = offset + (id * 0x4C);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int ID => index;
-        public string Name => name;
+        public int ID { get; }
+        public string Name { get; }
 
-        public int SpriteID => spriteID;
+        public int SpriteID { get; }
 
         public int MaxHP {
             get => _fileEditor.GetWord(maxHP);
@@ -518,6 +512,6 @@ namespace SF3.Models.X019.Monsters {
             set => _fileEditor.SetByte(unknown20, (byte) value);
         }
 
-        public int Address => (address);
+        public int Address { get; }
     }
 }
