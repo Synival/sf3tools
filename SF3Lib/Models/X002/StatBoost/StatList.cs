@@ -24,7 +24,7 @@ namespace SF3.Models.X002.StatBoost {
             _models = new StatBoost[0];
             FileStream stream = null;
             try {
-                stream = new FileStream(ResourceFile, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
                 xml.Read();

@@ -31,7 +31,7 @@ namespace SF3.Models.X019.Monsters {
             _models = new Monster[0];
             FileStream stream = null;
             try {
-                stream = new FileStream(ResourceFile, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
                 xml.Read();

@@ -127,7 +127,7 @@ namespace SF3.FileEditors {
             try {
                 PreSaved?.Invoke(this, EventArgs.Empty);
 
-                stream = new FileStream(filename, FileMode.Create);
+                stream = new FileStream(filename, FileMode.Create, FileAccess.Write);
                 stream.Write(Data, 0, Data.Length);
                 Filename = filename;
 

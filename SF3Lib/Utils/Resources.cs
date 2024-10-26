@@ -32,7 +32,7 @@ namespace SF3.Utils {
         /// <param name="filename">XML file to parse.</param>
         /// <returns>a Dictionary of values (attribute "value") with their names (attribute "name").</returns>
         public static Dictionary<int, string> GetValueNameDictionaryFromXML(string filename) {
-            var stream = new FileStream(filename, FileMode.Open);
+            var stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
 
             var settings = new XmlReaderSettings();
             settings.IgnoreComments = true;

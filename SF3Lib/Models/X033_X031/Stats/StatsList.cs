@@ -26,7 +26,7 @@ namespace SF3.Models.X033_X031.Stats {
             _models = new Stats[0];
             FileStream stream = null;
             try {
-                stream = new FileStream(ResourceFile, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
                 xml.Read();

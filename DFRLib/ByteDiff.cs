@@ -19,8 +19,8 @@ namespace DFRLib {
             FileStream fileStreamTo = null;
 
             try {
-                fileStreamFrom = new FileStream(fileFromPath, FileMode.Open);
-                fileStreamTo = new FileStream(fileToPath, FileMode.Open);
+                fileStreamFrom = new FileStream(fileFromPath, FileMode.Open, FileAccess.Read);
+                fileStreamTo = new FileStream(fileToPath, FileMode.Open, FileAccess.Read);
 
                 var fileStreamFromLen = fileStreamFrom.Length;
                 var fileStreamToLen = fileStreamTo.Length;

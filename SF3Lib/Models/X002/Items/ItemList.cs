@@ -26,7 +26,7 @@ namespace SF3.Models.X002.Items {
             _models = new Item[0];
             FileStream stream = null;
             try {
-                stream = new FileStream(ResourceFile, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
                 xml.Read();

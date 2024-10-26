@@ -24,7 +24,7 @@ namespace SF3.Models.X1.Headers {
             _models = new Header[0];
             FileStream stream = null;
             try {
-                stream = new FileStream(ResourceFile, FileMode.Open);
+                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
                 xml.Read();
