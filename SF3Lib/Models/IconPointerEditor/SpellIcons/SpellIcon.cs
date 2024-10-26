@@ -5,21 +5,15 @@ using SF3.Values;
 
 namespace SF3.Models.IconPointerEditor.SpellIcons {
     public class SpellIcon {
-        private IIconPointerFileEditor _fileEditor;
+        private readonly IIconPointerFileEditor _fileEditor;
 
         //SPELLS
-        private int theSpellIcon;
-        private int realOffset;
+        private readonly int theSpellIcon;
+        private readonly int realOffset;
 
-        //int pointerValue;
-
-        private int address;
         //private int npcOffset;
-        private int offset;
-        private int sub;
-
-        private int index;
-        private string name;
+        private readonly int offset;
+        private readonly int sub;
 
         /*public int NPCTableAddress1
         {
@@ -47,7 +41,7 @@ namespace SF3.Models.IconPointerEditor.SpellIcons {
                 //MessageBox.Show("" + _fileEditor.GetDouble(offset));
 
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //pointer
+                offset -= sub; //pointer
 
                 realOffset = 0xFF8E;
 
@@ -73,7 +67,7 @@ namespace SF3.Models.IconPointerEditor.SpellIcons {
                 }
 
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //pointer
+                offset -= sub; //pointer
 
                 realOffset = 0xFC86;
             }
@@ -88,7 +82,7 @@ namespace SF3.Models.IconPointerEditor.SpellIcons {
                 }
 
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //pointer
+                offset -= sub; //pointer
 
                 realOffset = 0x12A48;
             }
@@ -103,7 +97,7 @@ namespace SF3.Models.IconPointerEditor.SpellIcons {
                 }
 
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //pointer
+                offset -= sub; //pointer
 
                 realOffset = 0x12A32;
             }
@@ -113,22 +107,22 @@ namespace SF3.Models.IconPointerEditor.SpellIcons {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            ID = id;
+            IconName = text;
 
             //int start = 0x354c + (id * 24);
 
             if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)) {
-                int start = offset + (id * 0x02);
+                var start = offset + (id * 0x02);
                 theSpellIcon = start; //2 bytes  
                                       //unknown42 = start + 52;
-                address = offset + (id * 0x02);
+                Address = offset + (id * 0x02);
             }
             else {
-                int start = offset + (id * 0x04);
+                var start = offset + (id * 0x04);
                 theSpellIcon = start; //2 bytes  
                                       //unknown42 = start + 52;
-                address = offset + (id * 0x04);
+                Address = offset + (id * 0x04);
             }
 
             /*int start = offset + (id * 0x04);
@@ -141,22 +135,19 @@ namespace SF3.Models.IconPointerEditor.SpellIcons {
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int ID => index;
+        public int ID { get; }
 
         [BulkCopyRowName]
-        public string IconName => name;
+        public string IconName { get; }
 
         public string SpellName => new SpellValue(Scenario, ID).Name;
 
         [BulkCopy]
         public int TheSpellIcon {
             get {
-                if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)) {
-                    return _fileEditor.GetWord(theSpellIcon);
-                }
-                else {
-                    return _fileEditor.GetDouble(theSpellIcon);
-                }
+                return _fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)
+                    ? _fileEditor.GetWord(theSpellIcon)
+                    : _fileEditor.GetDouble(theSpellIcon);
             }
             set {
                 if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)) {
@@ -171,12 +162,9 @@ namespace SF3.Models.IconPointerEditor.SpellIcons {
         [BulkCopy]
         public int RealOffset {
             get {
-                if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)) {
-                    return _fileEditor.GetWord(theSpellIcon) + realOffset;
-                }
-                else {
-                    return _fileEditor.GetDouble(theSpellIcon) + realOffset;
-                }
+                return _fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)
+                    ? _fileEditor.GetWord(theSpellIcon) + realOffset
+                    : _fileEditor.GetDouble(theSpellIcon) + realOffset;
             }
             set {
                 if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)) {
@@ -188,6 +176,6 @@ namespace SF3.Models.IconPointerEditor.SpellIcons {
             }
         }
 
-        public int Address => (address);
+        public int Address { get; }
     }
 }

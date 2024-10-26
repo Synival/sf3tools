@@ -4,18 +4,14 @@ using SF3.Types;
 
 namespace SF3.Models.IconPointerEditor.ItemIcons {
     public class ItemIcon {
-        private IIconPointerFileEditor _fileEditor;
+        private readonly IIconPointerFileEditor _fileEditor;
 
         //ITEMS
-        private int theItemIcon;
+        private readonly int theItemIcon;
 
-        private int offset;
-        private int checkVersion2;
-        private int address;
-
-        private int index;
-        private string name;
-        private int sub;
+        private readonly int offset;
+        private readonly int checkVersion2;
+        private readonly int sub;
 
         public ItemIcon(IIconPointerFileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
@@ -33,7 +29,7 @@ namespace SF3.Models.IconPointerEditor.ItemIcons {
                 }
 
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //pointer
+                offset -= sub; //pointer
                 /*
                 offset = 0x00000018; //scn1 initial pointer
                 npcOffset = offset;
@@ -56,7 +52,7 @@ namespace SF3.Models.IconPointerEditor.ItemIcons {
                 }
 
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //pointer
+                offset -= sub; //pointer
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
@@ -79,7 +75,7 @@ namespace SF3.Models.IconPointerEditor.ItemIcons {
                 }
 
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //pointer
+                offset -= sub; //pointer
             }
             else if (Scenario == ScenarioType.PremiumDisk) {
                 if (_fileEditor.IsX026 == true) {
@@ -92,7 +88,7 @@ namespace SF3.Models.IconPointerEditor.ItemIcons {
                 }
 
                 offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub; //pointer
+                offset -= sub; //pointer
             }
 
             //offset = 0x00002b28; scn1
@@ -100,42 +96,39 @@ namespace SF3.Models.IconPointerEditor.ItemIcons {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            SizeID = id;
+            SizeName = text;
 
             //int start = 0x354c + (id * 24);
 
             if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)) {
-                int start = offset + (id * 0x02);
+                var start = offset + (id * 0x02);
                 theItemIcon = start; //1 bytes
 
-                address = offset + (id * 0x02);
+                SizeAddress = offset + (id * 0x02);
             }
             else {
-                int start = offset + (id * 0x04);
+                var start = offset + (id * 0x04);
                 theItemIcon = start; //1 bytes
 
-                address = offset + (id * 0x04);
+                SizeAddress = offset + (id * 0x04);
             }
 
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int SizeID => index;
+        public int SizeID { get; }
 
         [BulkCopyRowName]
-        public string SizeName => name;
+        public string SizeName { get; }
 
         [BulkCopy]
         public int TheItemIcon {
             get {
-                if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)) {
-                    return _fileEditor.GetWord(theItemIcon);
-                }
-                else {
-                    return _fileEditor.GetDouble(theItemIcon);
-                }
+                return _fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)
+                    ? _fileEditor.GetWord(theItemIcon)
+                    : _fileEditor.GetDouble(theItemIcon);
             }
             set {
                 if (_fileEditor.IsX026 == true && (Scenario == ScenarioType.Scenario1)) {
@@ -147,6 +140,6 @@ namespace SF3.Models.IconPointerEditor.ItemIcons {
             }
         }
 
-        public int SizeAddress => (address);
+        public int SizeAddress { get; }
     }
 }
