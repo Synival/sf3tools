@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -140,6 +141,31 @@ namespace DFRLib {
         /// </summary>
         /// <returns>A string.</returns>
         public string ToDFR() => Address.ToString("x") + "," + MakeByteHexStr(BytesFrom) + "," + MakeByteHexStr(BytesTo);
+
+        /// <summary>
+        /// Applies the changes in this chunk to data. The data must be large enough to apply the change,
+        /// and must have the expected data if 'BytesFrom' is set.
+        /// </summary>
+        /// <param name="data">Data to modify.</param>
+        /// <exception cref="ArgumentException">Thrown if the data is too small to apply the change or the expected data is incorrect.</exception>
+        public void ApplyTo(byte[] data) {
+            // Ensure that the expected data is correct.
+            if (data.Length < (int) Address + BytesTo.Length) {
+                throw new ArgumentException("Data is too short; must be at least " + ((int) Address + BytesTo.Length) + " bytes, " +
+                    "but is only " + data.Length + " bytes.");
+            }
+
+            for (int i = 0; i < BytesFrom.Length; i++) {
+                if (data[i + (int) Address] != BytesFrom[i]) {
+                    throw new ArgumentException(
+                        "Expected " + BytesFrom[i].ToString("X2") + " at address " + Address.ToString("X") +
+                        ", instead got " + data[i + (int) Address]);
+                }
+            }
+
+            // Set data.
+            BytesTo.CopyTo(data, (int) Address);
+        }
 
         /// <summary>
         /// Where the diff chunk begins.

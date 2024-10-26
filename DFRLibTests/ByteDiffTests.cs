@@ -188,7 +188,7 @@ namespace DFRLibTests {
             var dfrData = "02,0205,0203";
             var diff = new ByteDiff(new MemoryStream(Encoding.UTF8.GetBytes(dfrData)));
 
-            Assert.ThrowsException<InvalidDataException>(() => diff.ApplyTo(bytes));
+            Assert.ThrowsException<ArgumentException>(() => diff.ApplyTo(bytes));
         }
     }
 }

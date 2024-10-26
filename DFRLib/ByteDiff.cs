@@ -148,25 +148,14 @@ namespace DFRLib {
         /// </summary>
         /// <param name="bytes">Input data.</param>
         /// <returns>A copy of 'bytes', sizes to fit the data requested</returns>
-        /// <exception cref="InvalidDataException">Thrown if a chunk's value of 'bytesFrom' doesn't match data in 'bytes'.</exception>
         public byte[] ApplyTo(byte[] bytes) {
             // TODO: this doesn't handle a lot of cases with overlap or things like that!!
             int length = Math.Max(bytes.Length, Chunks.Max(x => (int) x.Address + x.BytesTo.Length));
             var newBytes = new byte[length];
             bytes.CopyTo(newBytes, 0);
 
-            foreach (var chunk in Chunks) {
-                // Ensure that the expected data is correct.
-                for (int i = 0; i < chunk.BytesFrom.Length; i++)
-                    if (newBytes[i + (int) chunk.Address] != chunk.BytesFrom[i])
-                        throw new InvalidDataException(
-                            "Expected " + chunk.BytesFrom[i].ToString("X2") + " at address " + chunk.Address.ToString("X") +
-                            ", instead got " + newBytes[i + (int) chunk.Address]);
-
-                // Set data.
-                for (int i = 0; i < chunk.BytesTo.Length; i++)
-                    newBytes[i + (int) chunk.Address] = chunk.BytesTo[i];
-            }
+            foreach (var chunk in Chunks)
+                chunk.ApplyTo(newBytes);
 
             return newBytes;
         }
