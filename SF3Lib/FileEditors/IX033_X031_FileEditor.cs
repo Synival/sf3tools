@@ -4,8 +4,8 @@ using SF3.Tables.X033_X031.WeaponLevel;
 
 namespace SF3.FileEditors {
     public interface IX033_X031_FileEditor : ISF3FileEditor {
-        StatsList StatsList { get; }
-        InitialInfoList InitialInfoList { get; }
-        WeaponLevelList WeaponLevelList { get; }
+        StatsTables StatsList { get; }
+        InitialInfoTables InitialInfoList { get; }
+        WeaponLevelTables WeaponLevelList { get; }
     }
 }

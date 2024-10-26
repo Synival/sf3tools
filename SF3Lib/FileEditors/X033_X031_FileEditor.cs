@@ -13,9 +13,9 @@ namespace SF3.FileEditors {
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (StatsList = new StatsList(this)),
-                (InitialInfoList = new InitialInfoList(this)),
-                (WeaponLevelList = new WeaponLevelList(this)),
+                (StatsList = new StatsTables(this)),
+                (InitialInfoList = new InitialInfoTables(this)),
+                (WeaponLevelList = new WeaponLevelTables(this)),
             };
         }
 
@@ -26,12 +26,12 @@ namespace SF3.FileEditors {
         }
 
         [BulkCopyRecurse]
-        public StatsList StatsList { get; private set; }
+        public StatsTables StatsList { get; private set; }
 
         [BulkCopyRecurse]
-        public InitialInfoList InitialInfoList { get; private set; }
+        public InitialInfoTables InitialInfoList { get; private set; }
 
         [BulkCopyRecurse]
-        public WeaponLevelList WeaponLevelList { get; private set; }
+        public WeaponLevelTables WeaponLevelList { get; private set; }
     }
 }

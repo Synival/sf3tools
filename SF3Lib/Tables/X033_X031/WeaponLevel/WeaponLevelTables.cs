@@ -5,10 +5,10 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X033_X031.WeaponLevel {
-    public class WeaponLevelList : Table<WeaponLevel> {
+    public class WeaponLevelTables : Table<WeaponLevel> {
         public int MaxSize { get; } = 2;
 
-        public WeaponLevelList(IX033_X031_FileEditor fileEditor) : base(fileEditor) {
+        public WeaponLevelTables(IX033_X031_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 
