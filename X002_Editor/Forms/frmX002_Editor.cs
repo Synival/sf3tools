@@ -29,7 +29,7 @@ namespace SF3.X002_Editor.Forms {
                 olvStatBoost.AddObjects(FileEditor.StatList.Models);
         }
 
-        protected override string FileDialogFilter => "SF3 data (X002.bin)|X002.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+        protected override string FileDialogFilter => "SF3 Data (X002.BIN)|X002.BIN|" + base.FileDialogFilter;
 
         protected override IFileEditor MakeFileEditor() => new X002_FileEditor(Scenario);
 

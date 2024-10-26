@@ -9,7 +9,7 @@ namespace DFRToolGUI.Forms {
 
         private void btnOriginalFile_Click(object sender, EventArgs e) {
             var dialog = new OpenFileDialog();
-            dialog.Filter = ".BIN files (*.BIN)|*.BIN|All files (*.*)|*.*";
+            dialog.Filter = "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*";
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
             tbOriginalFile.Text = dialog.FileName;
@@ -17,7 +17,7 @@ namespace DFRToolGUI.Forms {
 
         private void btnAlteredFile_Click(object sender, EventArgs e) {
             var dialog = new OpenFileDialog();
-            dialog.Filter = ".BIN files (*.BIN)|*.BIN|All files (*.*)|*.*";
+            dialog.Filter = "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*";
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
             tbAlteredFile.Text = dialog.FileName;
@@ -31,7 +31,7 @@ namespace DFRToolGUI.Forms {
                 ? originalFileSplit[originalFileSplit.Length - 1] + ".DFR"
                 : "Patch.BIN.DFR";
 
-            dialog.Filter = ".DFR files (*.DFR)|*.DFR|All files (*.*)|*.*";
+            dialog.Filter = "DFR Files (*.DFR)|*.DFR|All Files (*.*)|*.*";
             dialog.FileName = suggestedName;
 
             if (dialog.ShowDialog() != DialogResult.OK)

@@ -385,7 +385,7 @@ namespace SF3.Editor.Forms {
         /// <summary>
         /// File filter for OpenFileDialog() and SaveFileDialog(). Must be overridden.
         /// </summary>
-        protected virtual string FileDialogFilter => throw new NotImplementedException();
+        protected virtual string FileDialogFilter => "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*";
 
         /// <summary>
         /// Factory method for creating an IFileEditor in OpenFileDialog(). Must be overridden.

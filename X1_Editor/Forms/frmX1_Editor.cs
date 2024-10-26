@@ -47,9 +47,8 @@ namespace SF3.X1_Editor.Forms {
             MapLeader = MapLeaderType.Synbios;
         }
 
-        protected override string FileDialogFilter => IsBTL99
-            ? "SF3 data (X1BTL99.bin)|X1BTL99.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*"
-            : "SF3 data (X1*.bin)|X1*.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+        protected override string FileDialogFilter
+            => (IsBTL99 ? "SF3 Data (X1BTL99.BIN)|X1BTL99.BIN|" : "SF3 Data (X1*.BIN)|X1*.BIN|") + base.FileDialogFilter;
 
         protected override IFileEditor MakeFileEditor() => new X1_FileEditor(Scenario, MapLeader, IsBTL99);
 

@@ -31,9 +31,8 @@ namespace SF3.IconPointerEditor.Forms {
             IsX026 = false;
         }
 
-        protected override string FileDialogFilter => IsX026
-            ? "SF3 data (X026.bin)|X026.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*"
-            : "SF3 data (X011.bin;X021.bin)|X011.bin;X021.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+        protected override string FileDialogFilter
+            => (IsX026 ? "SF3 Data (X026.BIN)|X026.BIN|" : "SF3 Data (X011.BIN;X021.BIN)|X011.BIN;X021.BIN|") + base.FileDialogFilter;
 
         protected override IFileEditor MakeFileEditor() => new IconPointerFileEditor(Scenario, IsX026);
 

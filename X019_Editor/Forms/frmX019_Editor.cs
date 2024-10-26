@@ -32,9 +32,8 @@ namespace SF3.X019_Editor.Forms {
             this.ScenarioChanged += (obj, e) => tsmiScenario_PremiumDiskX044.Checked = (Scenario == ScenarioType.PremiumDisk && IsX044);
         }
 
-        protected override string FileDialogFilter => IsX044
-            ? "SF3 data (X044.bin)|X044.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*"
-            : "SF3 data (X019.bin)|X019.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+        protected override string FileDialogFilter
+            => (IsX044 ? "SF3 Data (X044.BIN)|X044.BIN|" : "SF3 Data (X019.BIN)|X019.BIN|") + base.FileDialogFilter;
 
         protected override IFileEditor MakeFileEditor() => new X019_FileEditor(Scenario, IsX044);
 

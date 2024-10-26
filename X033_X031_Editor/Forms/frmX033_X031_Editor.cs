@@ -55,7 +55,7 @@ namespace SF3.X033_X031_Editor.Forms {
             InitializeEditor(menuStrip1);
         }
 
-        protected override string FileDialogFilter => "SF3 data (X033.bin;X031.bin)|X033.bin;X031.bin|Binary File (*.bin)|*.bin|" + "All Files (*.*)|*.*";
+        protected override string FileDialogFilter => "SF3 Data (X033.BIN;X031.BIN)|X033.BIN;X031.BIN|" + base.FileDialogFilter;
 
         protected override IFileEditor MakeFileEditor() => new X033_X031_FileEditor(Scenario);
 
