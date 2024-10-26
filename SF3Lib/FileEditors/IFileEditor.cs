@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 namespace SF3.FileEditors {
     /// <summary>
@@ -11,6 +12,14 @@ namespace SF3.FileEditors {
         /// <param name="filename">The file to load.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
         bool LoadFile(string filename);
+
+        /// <summary>
+        /// Loads a stream of binary data for editing. Invokes events 'PreLoaded' and 'Loaded'.
+        /// </summary>
+        /// <param name="filename">The filename of 'stream' to be stored.</param>
+        /// <param name="stream">The data stream to load.</param>
+        /// <returns>'true' on success, 'false' on failure.</returns>
+        bool LoadFile(string filename, Stream stream);
 
         /// <summary>
         /// Saves a file's binary data for editing. Invokes events 'PreSaved' and 'Saved'.

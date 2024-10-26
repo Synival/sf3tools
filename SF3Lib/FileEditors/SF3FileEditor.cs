@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using SF3.Models;
 using SF3.Types;
 
@@ -31,8 +32,8 @@ namespace SF3.FileEditors {
         public virtual bool OnLoadBeforeMakeModelArrays()
             => true;
 
-        public override bool LoadFile(string filename) {
-            if (!base.LoadFile(filename))
+        public override bool LoadFile(string filename, Stream stream) {
+            if (!base.LoadFile(filename, stream))
                 return false;
             if (!OnLoadBeforeMakeModelArrays())
                 return false;

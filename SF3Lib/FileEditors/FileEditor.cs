@@ -88,12 +88,25 @@ namespace SF3.FileEditors {
             FileStream stream = null;
             try {
                 stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                var newData = new byte[stream.Length];
-                stream.Read(newData, 0, (int) stream.Length);
-                stream.Close();
+                return LoadFile(filename, stream);
+            }
+            catch (Exception) {
+                return false;
+            }
+            finally {
+                if (stream != null)
+                    stream.Close();
+            }
+        }
 
+        public virtual bool LoadFile(string filename, Stream stream) {
+            try {
                 if (IsLoaded)
                     CloseFile();
+
+                var memoryStream = new MemoryStream();
+                stream.CopyTo(memoryStream);
+                var newData = memoryStream.ToArray();
 
                 PreLoaded?.Invoke(this, EventArgs.Empty);
 
@@ -105,10 +118,6 @@ namespace SF3.FileEditors {
             }
             catch (Exception) {
                 return false;
-            }
-            finally {
-                if (stream != null)
-                    stream.Close();
             }
 
             return true;
