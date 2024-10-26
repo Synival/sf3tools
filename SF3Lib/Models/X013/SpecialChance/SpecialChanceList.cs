@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X013.SpecialChance {
-    public class SpecialChanceList : ModelArray<SpecialChance> {
+    public class SpecialChanceList : Table<SpecialChance> {
         public int MaxSize { get; } = 1;
 
         public SpecialChanceList(IX013_FileEditor fileEditor) : base(fileEditor) {

@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X013.SupportType {
-    public class SupportTypeList : ModelArray<SupportType> {
+    public class SupportTypeList : Table<SupportType> {
         public int MaxSize { get; } = 120;
 
         public SupportTypeList(IX013_FileEditor fileEditor) : base(fileEditor) {

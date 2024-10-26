@@ -11,14 +11,14 @@ namespace SF3.FileEditors {
             IsX026 = isX026;
         }
 
-        public override IEnumerable<IModelArray> MakeModelArrays() {
-            return new List<IModelArray>() {
+        public override IEnumerable<ITable> MakeTables() {
+            return new List<ITable>() {
                 (SpellIconList = new SpellIconList(this)),
                 (ItemIconList = new ItemIconList(this))
             };
         }
 
-        public override void DestroyModelArrays() {
+        public override void DestroyTables() {
             SpellIconList = null;
             ItemIconList = null;
         }

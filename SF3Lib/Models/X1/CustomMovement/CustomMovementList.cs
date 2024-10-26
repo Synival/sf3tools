@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X1.CustomMovement {
-    public class CustomMovementList : ModelArray<CustomMovement> {
+    public class CustomMovementList : Table<CustomMovement> {
         public int MaxSize { get; } = 130;
 
         public CustomMovementList(IX1_FileEditor fileEditor) : base(fileEditor) {

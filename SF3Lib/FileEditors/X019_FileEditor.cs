@@ -9,13 +9,13 @@ namespace SF3.FileEditors {
             IsX044 = isX044;
         }
 
-        public override IEnumerable<IModelArray> MakeModelArrays() {
-            return new List<IModelArray>() {
+        public override IEnumerable<ITable> MakeTables() {
+            return new List<ITable>() {
                 (MonsterList = new MonsterList(this, IsX044))
             };
         }
 
-        public override void DestroyModelArrays() {
+        public override void DestroyTables() {
             MonsterList = null;
         }
 

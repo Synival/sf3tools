@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X002.LoadedOverride {
-    public class LoadedOverrideList : ModelArray<LoadedOverride> {
+    public class LoadedOverrideList : Table<LoadedOverride> {
         public int MaxSize { get; } = 300;
 
         public LoadedOverrideList(IX002_FileEditor fileEditor) : base(fileEditor) {

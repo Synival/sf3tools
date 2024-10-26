@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X013.StatusEffect {
-    public class StatusEffectList : ModelArray<StatusEffect> {
+    public class StatusEffectList : Table<StatusEffect> {
         public int MaxSize { get; } = 1000;
 
         public StatusEffectList(IX013_FileEditor fileEditor) : base(fileEditor) {

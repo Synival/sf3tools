@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X1.AI {
-    public class AIList : ModelArray<AI> {
+    public class AIList : Table<AI> {
         public int MaxSize { get; } = 130;
 
         public AIList(IX1_FileEditor fileEditor) : base(fileEditor) {

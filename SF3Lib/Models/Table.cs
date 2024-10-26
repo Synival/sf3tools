@@ -6,8 +6,8 @@ namespace SF3.Models {
     /// <summary>
     /// Base implementation for any collection of SF3 models that can be modified.
     /// </summary>
-    public abstract class ModelArray : IModelArray {
-        protected ModelArray(ISF3FileEditor fileEditor) {
+    public abstract class Table : ITable {
+        protected Table(ISF3FileEditor fileEditor) {
             _fileEditor = fileEditor;
         }
 
@@ -27,8 +27,8 @@ namespace SF3.Models {
     /// <summary>
     /// Base implementation for a specific collection of SF3 models that can be modified.
     /// </summary>
-    public abstract class ModelArray<T> : ModelArray, IModelArray<T> where T : class {
-        protected ModelArray(ISF3FileEditor fileEditor) : base(fileEditor) {
+    public abstract class Table<T> : Table, ITable<T> where T : class {
+        protected Table(ISF3FileEditor fileEditor) : base(fileEditor) {
         }
 
         public override bool Reset() {

@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X1.Arrow {
-    public class ArrowList : ModelArray<Arrow> {
+    public class ArrowList : Table<Arrow> {
         public int MaxSize { get; } = 100;
 
         public ArrowList(IX1_FileEditor fileEditor) : base(fileEditor) {

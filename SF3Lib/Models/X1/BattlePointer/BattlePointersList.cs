@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X1.BattlePointer {
-    public class BattlePointersList : ModelArray<BattlePointers> {
+    public class BattlePointersList : Table<BattlePointers> {
         public int MaxSize { get; } = 5;
 
         public BattlePointersList(IX1_FileEditor fileEditor) : base(fileEditor) {

@@ -11,15 +11,15 @@ namespace SF3.FileEditors {
         public X033_X031_FileEditor(ScenarioType scenario) : base(scenario) {
         }
 
-        public override IEnumerable<IModelArray> MakeModelArrays() {
-            return new List<IModelArray>() {
+        public override IEnumerable<ITable> MakeTables() {
+            return new List<ITable>() {
                 (StatsList = new StatsList(this)),
                 (InitialInfoList = new InitialInfoList(this)),
                 (WeaponLevelList = new WeaponLevelList(this)),
             };
         }
 
-        public override void DestroyModelArrays() {
+        public override void DestroyTables() {
             StatsList = null;
             InitialInfoList = null;
             WeaponLevelList = null;

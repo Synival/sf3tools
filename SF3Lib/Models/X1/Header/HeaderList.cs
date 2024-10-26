@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X1.Header {
-    public class HeaderList : ModelArray<Header> {
+    public class HeaderList : Table<Header> {
         public int MaxSize { get; } = 31;
 
         public HeaderList(IX1_FileEditor fileEditor) : base(fileEditor) {

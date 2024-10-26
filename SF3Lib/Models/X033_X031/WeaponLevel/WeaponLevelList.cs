@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X033_X031.WeaponLevel {
-    public class WeaponLevelList : ModelArray<WeaponLevel> {
+    public class WeaponLevelList : Table<WeaponLevel> {
         public int MaxSize { get; } = 2;
 
         public WeaponLevelList(IX033_X031_FileEditor fileEditor) : base(fileEditor) {

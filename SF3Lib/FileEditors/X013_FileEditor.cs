@@ -21,8 +21,8 @@ namespace SF3.FileEditors {
         public X013_FileEditor(ScenarioType scenario) : base(scenario) {
         }
 
-        public override IEnumerable<IModelArray> MakeModelArrays() {
-            return new List<IModelArray>() {
+        public override IEnumerable<ITable> MakeTables() {
+            return new List<ITable>() {
                 (SpecialsList = new SpecialList(this)),
                 (SupportTypeList = new SupportTypeList(this)),
                 (FriendshipExpList = new FriendshipExpList(this)),
@@ -40,7 +40,7 @@ namespace SF3.FileEditors {
             };
         }
 
-        public override void DestroyModelArrays() {
+        public override void DestroyTables() {
             SpecialsList = null;
             SupportTypeList = null;
             FriendshipExpList = null;

@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X1.Treasure {
-    public class TreasureList : ModelArray<Treasure> {
+    public class TreasureList : Table<Treasure> {
         public int MaxSize { get; } = 255;
 
         /// <summary>

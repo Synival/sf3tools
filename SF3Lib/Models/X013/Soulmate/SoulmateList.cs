@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X013.Soulmate {
-    public class SoulmateList : ModelArray<Soulmate> {
+    public class SoulmateList : Table<Soulmate> {
         public int MaxSize { get; } = 1771;
 
         public SoulmateList(IX013_FileEditor fileEditor) : base(fileEditor) {

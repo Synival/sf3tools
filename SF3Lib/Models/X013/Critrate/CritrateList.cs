@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X013.Critrate {
-    public class CritrateList : ModelArray<Critrate> {
+    public class CritrateList : Table<Critrate> {
         public int MaxSize { get; } = 3;
 
         public CritrateList(IX013_FileEditor fileEditor) : base(fileEditor) {

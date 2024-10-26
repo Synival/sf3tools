@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X002.Loading {
-    public class LoadList : ModelArray<Loading> {
+    public class LoadList : Table<Loading> {
         public int MaxSize { get; } = 300;
 
         public LoadList(IX002_FileEditor fileEditor) : base(fileEditor) {

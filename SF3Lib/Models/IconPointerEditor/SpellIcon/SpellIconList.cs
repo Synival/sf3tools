@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.IconPointerEditor.SpellIcon {
-    public class SpellIconList : ModelArray<SpellIcon> {
+    public class SpellIconList : Table<SpellIcon> {
         public int MaxSize { get; } = 256;
 
         public SpellIconList(IIconPointerFileEditor fileEditor) : base(fileEditor) {

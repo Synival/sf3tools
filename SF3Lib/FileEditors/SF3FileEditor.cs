@@ -13,33 +13,33 @@ namespace SF3.FileEditors {
         }
 
         /// <summary>
-        /// Creates a collection of empty IModelArray's to be populated on LoadFile().
+        /// Creates a collection of empty ITable's to be populated on LoadFile().
         /// </summary>
-        /// <returns>A collection of unloaded IModelArray's.</returns>
-        public abstract IEnumerable<IModelArray> MakeModelArrays();
+        /// <returns>A collection of unloaded ITable's.</returns>
+        public abstract IEnumerable<ITable> MakeTables();
 
         /// <summary>
-        /// Unsets or deinitialize any model IModelArray's populated in MakeModelArrays().
+        /// Unsets or deinitialize any model ITable's populated in MakeTables().
         /// </summary>
-        public abstract void DestroyModelArrays();
+        public abstract void DestroyTables();
 
         /// <summary>
-        /// Occurs when data is loaded but before the ModelArray's are created.
+        /// Occurs when data is loaded but before the Table's are created.
         /// This is a good place to check file data to determine how to create the models.
         /// If 'false' is returned, loading is aborted.
         /// </summary>
         /// <returns>'true' on success, otherwise 'false'.</returns>
-        public virtual bool OnLoadBeforeMakeModelArrays()
+        public virtual bool OnLoadBeforeMakeTables()
             => true;
 
         public override bool LoadFile(string filename, Stream stream) {
             if (!base.LoadFile(filename, stream))
                 return false;
-            if (!OnLoadBeforeMakeModelArrays())
+            if (!OnLoadBeforeMakeTables())
                 return false;
 
-            ModelArrays = MakeModelArrays();
-            foreach (var ma in ModelArrays) {
+            Tables = MakeTables();
+            foreach (var ma in Tables) {
                 if (!ma.Load())
                     return false;
             }
@@ -53,14 +53,14 @@ namespace SF3.FileEditors {
             if (!base.CloseFile())
                 return false;
 
-            DestroyModelArrays();
-            ModelArrays = null;
+            DestroyTables();
+            Tables = null;
             return true;
         }
 
         public ScenarioType Scenario { get; }
 
-        public IEnumerable<IModelArray> ModelArrays { get; private set; }
+        public IEnumerable<ITable> Tables { get; private set; }
 
         protected override string BaseTitle => IsLoaded
             ? base.BaseTitle + " (" + Scenario.ToString() + ")"

@@ -6,7 +6,7 @@ using SF3.Types;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X1.Slot {
-    public class SlotList : ModelArray<Slot> {
+    public class SlotList : Table<Slot> {
         public int MaxSize { get; } = 256;
 
         public SlotList(IX1_FileEditor fileEditor) : base(fileEditor) {

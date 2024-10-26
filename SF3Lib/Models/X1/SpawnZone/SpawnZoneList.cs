@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X1.SpawnZone {
-    public class SpawnZoneList : ModelArray<SpawnZone> {
+    public class SpawnZoneList : Table<SpawnZone> {
         public int MaxSize { get; } = 30;
 
         public SpawnZoneList(IX1_FileEditor fileEditor) : base(fileEditor) {

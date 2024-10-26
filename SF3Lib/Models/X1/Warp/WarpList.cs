@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X1.Warp {
-    public class WarpList : ModelArray<Warp> {
+    public class WarpList : Table<Warp> {
         public int MaxSize { get; } = 255;
 
         public WarpList(IX1_FileEditor fileEditor) : base(fileEditor) {

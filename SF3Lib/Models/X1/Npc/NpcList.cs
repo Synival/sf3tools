@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X1.Npc {
-    public class NpcList : ModelArray<Npc> {
+    public class NpcList : Table<Npc> {
         public int MaxSize { get; } = 100;
 
         public NpcList(IX1_FileEditor fileEditor) : base(fileEditor) {

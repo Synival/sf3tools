@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X002.AttackResist {
-    public class AttackResistList : ModelArray<AttackResist> {
+    public class AttackResistList : Table<AttackResist> {
         public int MaxSize { get; } = 2;
 
         public AttackResistList(IX002_FileEditor fileEditor) : base(fileEditor) {

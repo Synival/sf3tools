@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X1.TileMovement {
-    public class TileMovementList : ModelArray<TileMovement> {
+    public class TileMovementList : Table<TileMovement> {
         public int MaxSize { get; } = 31;
 
         public TileMovementList(IX1_FileEditor fileEditor) : base(fileEditor) {

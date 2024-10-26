@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X013.CritMod {
-    public class CritModList : ModelArray<CritMod> {
+    public class CritModList : Table<CritMod> {
         public int MaxSize { get; } = 1;
 
         public CritModList(IX013_FileEditor fileEditor) : base(fileEditor) {

@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X013.MagicBonus {
-    public class MagicBonusList : ModelArray<MagicBonus> {
+    public class MagicBonusList : Table<MagicBonus> {
         public int MaxSize { get; } = 256;
 
         public MagicBonusList(IX013_FileEditor fileEditor) : base(fileEditor) {

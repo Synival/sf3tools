@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.IconPointerEditor.ItemIcon {
-    public class ItemIconList : ModelArray<ItemIcon> {
+    public class ItemIconList : Table<ItemIcon> {
         public int MaxSize { get; } = 300;
 
         public ItemIconList(IIconPointerFileEditor fileEditor) : base(fileEditor) {

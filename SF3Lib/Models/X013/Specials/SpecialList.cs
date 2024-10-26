@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X013.Specials {
-    public class SpecialList : ModelArray<Special> {
+    public class SpecialList : Table<Special> {
         public int MaxSize { get; } = 256;
 
         public SpecialList(IX013_FileEditor fileEditor) : base(fileEditor) {

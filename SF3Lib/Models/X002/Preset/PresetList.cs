@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X002.Preset {
-    public class PresetList : ModelArray<Preset> {
+    public class PresetList : Table<Preset> {
         public int MaxSize { get; } = 31;
 
         public PresetList(IX002_FileEditor fileEditor) : base(fileEditor) {

@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X033_X031.InitialInfo {
-    public class InitialInfoList : ModelArray<InitialInfo> {
+    public class InitialInfoList : Table<InitialInfo> {
         public int MaxSize { get; } = 100;
 
         public InitialInfoList(IX033_X031_FileEditor fileEditor) : base(fileEditor) {

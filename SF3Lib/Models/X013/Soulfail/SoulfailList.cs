@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X013.Soulfail {
-    public class SoulfailList : ModelArray<Soulfail> {
+    public class SoulfailList : Table<Soulfail> {
         public int MaxSize { get; } = 1;
 
         public SoulfailList(IX013_FileEditor fileEditor) : base(fileEditor) {

@@ -13,8 +13,8 @@ namespace SF3.FileEditors {
         ScenarioType Scenario { get; }
 
         /// <summary>
-        /// Collection of ModelArrays initialized upon loading.
+        /// Collection of Tables initialized upon loading.
         /// </summary>
-        IEnumerable<IModelArray> ModelArrays { get; }
+        IEnumerable<ITable> Tables { get; }
     }
 }

@@ -21,7 +21,7 @@ namespace SF3.FileEditors {
             IsBTL99 = isBTL99;
         }
 
-        public override bool OnLoadBeforeMakeModelArrays() {
+        public override bool OnLoadBeforeMakeTables() {
             var offset = 0;
             var sub = 0;
 
@@ -58,11 +58,11 @@ namespace SF3.FileEditors {
             return true;
         }
 
-        public override IEnumerable<IModelArray> MakeModelArrays() {
+        public override IEnumerable<ITable> MakeTables() {
             var isntScn1OrBTL99 = Scenario != ScenarioType.Scenario1 && !IsBTL99;
 
             // Add models present for both towns and battles.
-            var modelArrays = new List<IModelArray> {
+            var modelArrays = new List<ITable> {
                 (TreasureList = new TreasureList(this))
             };
 
@@ -71,7 +71,7 @@ namespace SF3.FileEditors {
 
             // Add models only present for battles.
             if (IsBattle) {
-                modelArrays.AddRange(new List<IModelArray>() {
+                modelArrays.AddRange(new List<ITable>() {
                     (HeaderList = new HeaderList(this)),
                     (SlotList = new SlotList(this)),
                     (AIList = new AIList(this)),
@@ -86,7 +86,7 @@ namespace SF3.FileEditors {
 
             // Add models only present for towns.
             if (!IsBattle) {
-                modelArrays.AddRange(new List<IModelArray>() {
+                modelArrays.AddRange(new List<ITable>() {
                     (NpcList = new NpcList(this)),
                     (EnterList = new EnterList(this))
                 });
@@ -98,7 +98,7 @@ namespace SF3.FileEditors {
             return modelArrays;
         }
 
-        public override void DestroyModelArrays() {
+        public override void DestroyTables() {
             SlotList = null;
             HeaderList = null;
             AIList = null;

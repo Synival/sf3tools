@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X013.HealExp {
-    public class HealExpList : ModelArray<HealExp> {
+    public class HealExpList : Table<HealExp> {
         public int MaxSize { get; } = 2;
 
         public HealExpList(IX013_FileEditor fileEditor) : base(fileEditor) {

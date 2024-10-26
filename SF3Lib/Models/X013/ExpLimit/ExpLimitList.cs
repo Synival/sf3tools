@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X013.ExpLimit {
-    public class ExpLimitList : ModelArray<ExpLimit> {
+    public class ExpLimitList : Table<ExpLimit> {
         public int MaxSize { get; } = 2;
 
         public ExpLimitList(IX013_FileEditor fileEditor) : base(fileEditor) {

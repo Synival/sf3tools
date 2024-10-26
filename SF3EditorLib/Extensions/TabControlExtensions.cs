@@ -61,36 +61,36 @@ namespace SF3.Editor.Extensions {
         /// Configuration of a single tab for PopulateTabs().
         /// </summary>
         public class PopulateTabConfig {
-            public PopulateTabConfig(TabPage tabPage, ObjectListView objectListView, IModelArray modelArray) {
+            public PopulateTabConfig(TabPage tabPage, ObjectListView objectListView, ITable modelArray) {
                 TabPage = tabPage;
                 ObjectListView = objectListView;
-                ModelArray = modelArray;
+                Table = modelArray;
             }
 
             public TabPage TabPage { get; }
             public ObjectListView ObjectListView { get; }
-            public IModelArray ModelArray { get; }
-            public object[] ModelObjs => ModelArray.ModelObjs;
+            public ITable Table { get; }
+            public object[] ModelObjs => Table.ModelObjs;
         }
 
         /// <summary>
         /// Populates contents of tabs.
         /// All ObjectListView's provided with the tab configuration will have their objects removed via ClearObjects(),
         /// regardless of whether or not they are visible.
-        /// Any ModelArray's not loaded will be loaded automatically. If the TabPage is visible, its corresponding
+        /// Any Table's not loaded will be loaded automatically. If the TabPage is visible, its corresponding
         /// ObjectListView will be populated with its data.
-        /// If a ModelArray could not be loaded, an error message will be shown and the method will return 'false'.
+        /// If a Table could not be loaded, an error message will be shown and the method will return 'false'.
         /// </summary>
         /// <param name="tabControl"></param>
         /// <param name="tabConfigs"></param>
-        /// <returns>'True' if the operation succeeded, 'false' if a ModelArray could not be loaded.</returns>
+        /// <returns>'True' if the operation succeeded, 'false' if a Table could not be loaded.</returns>
         public static bool PopulateTabs(this TabControl tabControl, IEnumerable<PopulateTabConfig> tabConfigs) {
             // Show and populate visible tabs.
             foreach (var tc in tabConfigs) {
                 tc.ObjectListView.ClearObjects();
-                if (!tc.ModelArray.IsLoaded && !tc.ModelArray.Load()) {
+                if (!tc.Table.IsLoaded && !tc.Table.Load()) {
                     // TODO: we really should be throwing an exception here instead...
-                    ErrorMessage("Could not load " + tc.ModelArray.ResourceFile);
+                    ErrorMessage("Could not load " + tc.Table.ResourceFile);
                     return false;
                 }
                 tc.ObjectListView.AddObjects(tc.ModelObjs);
@@ -104,17 +104,17 @@ namespace SF3.Editor.Extensions {
         /// Also populates the contents of tabs.
         /// All ObjectListView's provided with the tab configuration will have their objects removed via ClearObjects(),
         /// regardless of whether or not they are visible.
-        /// Any ModelArray's not loaded will be loaded automatically. If the TabPage is visible, its corresponding
+        /// Any Table's not loaded will be loaded automatically. If the TabPage is visible, its corresponding
         /// ObjectListView will be populated with its data.
-        /// If a ModelArray could not be loaded, an error message will be shown and the method will return 'false'.
+        /// If a Table could not be loaded, an error message will be shown and the method will return 'false'.
         /// </summary>
         /// <param name="tabControl"></param>
         /// <param name="tabConfigs"></param>
-        /// <returns>'True' if the operation succeeded, 'false' if a ModelArray could not be loaded.</returns>
+        /// <returns>'True' if the operation succeeded, 'false' if a Table could not be loaded.</returns>
         public static bool PopulateAndToggleTabs(this TabControl tabControl, IEnumerable<PopulateTabConfig> tabConfigs) {
-            tabControl.ToggleTabs(tabConfigs.ToDictionary(x => x.TabPage, x => x.ModelArray != null));
+            tabControl.ToggleTabs(tabConfigs.ToDictionary(x => x.TabPage, x => x.Table != null));
             var populateTabConfigs = tabConfigs
-                .Where(x => x.ModelArray != null)
+                .Where(x => x.Table != null)
                 .Cast<PopulateTabConfig>()
                 .ToList();
             return tabControl.PopulateTabs(populateTabConfigs);

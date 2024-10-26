@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X013.FriendshipExp {
-    public class FriendshipExpList : ModelArray<FriendshipExp> {
+    public class FriendshipExpList : Table<FriendshipExp> {
         public int MaxSize { get; } = 1;
 
         public FriendshipExpList(IX013_FileEditor fileEditor) : base(fileEditor) {

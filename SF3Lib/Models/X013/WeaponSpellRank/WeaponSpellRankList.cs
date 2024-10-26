@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X013.WeaponSpellRank {
-    public class WeaponSpellRankList : ModelArray<WeaponSpellRank> {
+    public class WeaponSpellRankList : Table<WeaponSpellRank> {
         public int MaxSize { get; } = 4;
 
         public WeaponSpellRankList(IX013_FileEditor fileEditor) : base(fileEditor) {

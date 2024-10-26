@@ -5,7 +5,7 @@ using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
 namespace SF3.Models.X002.WeaponRank {
-    public class WeaponRankList : ModelArray<WeaponRank> {
+    public class WeaponRankList : Table<WeaponRank> {
         public int MaxSize { get; } = 5;
 
         public WeaponRankList(IX002_FileEditor fileEditor) : base(fileEditor) {
