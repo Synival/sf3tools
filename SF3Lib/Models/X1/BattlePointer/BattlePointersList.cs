@@ -4,24 +4,24 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X1.SpawnZones {
-    public class SpawnZoneList : ModelArray<SpawnZone> {
-        public int MaxSize { get; } = 30;
+namespace SF3.Models.X1.BattlePointer {
+    public class BattlePointersList : ModelArray<BattlePointers> {
+        public int MaxSize { get; } = 5;
 
-        public SpawnZoneList(IX1_FileEditor fileEditor) : base(fileEditor) {
+        public BattlePointersList(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 
         private readonly IX1_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/UnknownAIList.xml";
+        public override string ResourceFile => "Resources/BattlePointersList.xml";
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new SpawnZone[0];
+            _models = new BattlePointers[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -31,9 +31,9 @@ namespace SF3.Models.X1.SpawnZones {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new SpawnZone(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new BattlePointers(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.UnknownAIID < 0 || newModel.UnknownAIID >= MaxSize) {
+                        if (newModel.BattleID < 0 || newModel.BattleID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }

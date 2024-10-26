@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using SF3.Models;
 using SF3.Models.X1.AI;
 using SF3.Models.X1.Arrow;
-using SF3.Models.X1.BattlePointers;
+using SF3.Models.X1.BattlePointer;
 using SF3.Models.X1.CustomMovement;
 using SF3.Models.X1.Enter;
-using SF3.Models.X1.Headers;
+using SF3.Models.X1.Header;
 using SF3.Models.X1.Npc;
-using SF3.Models.X1.Slots;
-using SF3.Models.X1.SpawnZones;
+using SF3.Models.X1.Slot;
+using SF3.Models.X1.SpawnZone;
 using SF3.Models.X1.TileMovement;
 using SF3.Models.X1.Treasure;
 using SF3.Models.X1.Warp;
@@ -81,7 +81,7 @@ namespace SF3.FileEditors {
                 });
 
                 if (isntScn1OrBTL99)
-                    modelArrays.Add(TileList = new TileList(this));
+                    modelArrays.Add(TileList = new TileMovementList(this));
             }
 
             // Add models only present for towns.
@@ -153,7 +153,7 @@ namespace SF3.FileEditors {
         public TreasureList TreasureList { get; private set; }
         public CustomMovementList CustomMovementList { get; private set; }
         public WarpList WarpList { get; private set; }
-        public TileList TileList { get; private set; }
+        public TileMovementList TileList { get; private set; }
         public NpcList NpcList { get; private set; }
         public EnterList EnterList { get; private set; }
         public ArrowList ArrowList { get; private set; }

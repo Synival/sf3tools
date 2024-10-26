@@ -2,7 +2,7 @@ using SF3.FileEditors;
 using SF3.Types;
 using SF3.Values;
 
-namespace SF3.Models.X1.Slots {
+namespace SF3.Models.X1.Slot {
     public class Slot {
         private readonly IX1_FileEditor _fileEditor;
 

@@ -1,12 +1,12 @@
 using SF3.Models.X1.AI;
 using SF3.Models.X1.Arrow;
-using SF3.Models.X1.BattlePointers;
+using SF3.Models.X1.BattlePointer;
 using SF3.Models.X1.CustomMovement;
 using SF3.Models.X1.Enter;
-using SF3.Models.X1.Headers;
+using SF3.Models.X1.Header;
 using SF3.Models.X1.Npc;
-using SF3.Models.X1.Slots;
-using SF3.Models.X1.SpawnZones;
+using SF3.Models.X1.Slot;
+using SF3.Models.X1.SpawnZone;
 using SF3.Models.X1.TileMovement;
 using SF3.Models.X1.Treasure;
 using SF3.Models.X1.Warp;
@@ -31,7 +31,7 @@ namespace SF3.FileEditors {
         TreasureList TreasureList { get; }
         CustomMovementList CustomMovementList { get; }
         WarpList WarpList { get; }
-        TileList TileList { get; }
+        TileMovementList TileList { get; }
         NpcList NpcList { get; }
         EnterList EnterList { get; }
         ArrowList ArrowList { get; }

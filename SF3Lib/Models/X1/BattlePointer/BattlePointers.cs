@@ -1,7 +1,7 @@
 using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.X1.BattlePointers {
+namespace SF3.Models.X1.BattlePointer {
     public class BattlePointers {
         private readonly IX1_FileEditor _fileEditor;
 

@@ -4,24 +4,24 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X1.BattlePointers {
-    public class BattlePointersList : ModelArray<BattlePointers> {
-        public int MaxSize { get; } = 5;
+namespace SF3.Models.X1.Header {
+    public class HeaderList : ModelArray<Header> {
+        public int MaxSize { get; } = 31;
 
-        public BattlePointersList(IX1_FileEditor fileEditor) : base(fileEditor) {
+        public HeaderList(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
         }
 
         private readonly IX1_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/BattlePointersList.xml";
+        public override string ResourceFile => "Resources/X1Top.xml";
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new BattlePointers[0];
+            _models = new Header[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -31,9 +31,9 @@ namespace SF3.Models.X1.BattlePointers {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new BattlePointers(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new Header(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.BattleID < 0 || newModel.BattleID >= MaxSize) {
+                        if (newModel.SizeID < 0 || newModel.SizeID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }
@@ -41,9 +41,8 @@ namespace SF3.Models.X1.BattlePointers {
             }
             catch (FileLoadException) {
                 return false;
-            }
-            catch (FileNotFoundException) {
-                return false;
+                //} catch (FileNotFoundException) {
+                //  return false;
             }
             finally {
                 stream?.Close();

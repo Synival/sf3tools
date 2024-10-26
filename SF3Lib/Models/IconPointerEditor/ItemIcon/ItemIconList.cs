@@ -2,21 +2,19 @@ using System;
 using System.IO;
 using CommonLib.Extensions;
 using SF3.FileEditors;
-using SF3.Types;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X1.Slots {
-    public class SlotList : ModelArray<Slot> {
-        public int MaxSize { get; } = 256;
+namespace SF3.Models.IconPointerEditor.ItemIcon {
+    public class ItemIconList : ModelArray<ItemIcon> {
+        public int MaxSize { get; } = 300;
 
-        public SlotList(IX1_FileEditor fileEditor) : base(fileEditor) {
+        public ItemIconList(IIconPointerFileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
-
-            _resourceFile =Scenario == ScenarioType.Scenario1 ? "Resources/X1List.xml" : "Resources/X1OtherList.xml";
+            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "Items.xml");
         }
 
         private readonly string _resourceFile;
-        private readonly IX1_FileEditor _fileEditor;
+        private readonly IIconPointerFileEditor _fileEditor;
 
         public override string ResourceFile => _resourceFile;
 
@@ -25,36 +23,28 @@ namespace SF3.Models.X1.Slots {
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new Slot[0];
+            _models = new ItemIcon[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
                 _ = xml.Read();
-                //int stop = 0;
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new Slot(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new ItemIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.ID < 0 || newModel.ID >= MaxSize) {
+                        if (newModel.SizeID < 0 || newModel.SizeID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
-                        /*Console.WriteLine(items[itemssorted[old.Length].ID].EnemyID);
-                        //numberTest = items[itemssorted[old.Length].ID].EnemyID;
-                        if (items[itemssorted[old.Length].ID].EnemyID == 0xffff)
-                        {
-                            stop = 1;
-                        }*/
                     }
                 }
             }
             catch (FileLoadException) {
                 return false;
-            }
-            catch (FileNotFoundException) {
-                return false;
+                //} catch (FileNotFoundException) {
+                //  return false;
             }
             finally {
                 stream?.Close();

@@ -4,26 +4,24 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.IconPointerEditor.ItemIcons {
-    public class ItemIconList : ModelArray<ItemIcon> {
-        public int MaxSize { get; } = 300;
+namespace SF3.Models.X1.SpawnZone {
+    public class SpawnZoneList : ModelArray<SpawnZone> {
+        public int MaxSize { get; } = 30;
 
-        public ItemIconList(IIconPointerFileEditor fileEditor) : base(fileEditor) {
+        public SpawnZoneList(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
-            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "Items.xml");
         }
 
-        private readonly string _resourceFile;
-        private readonly IIconPointerFileEditor _fileEditor;
+        private readonly IX1_FileEditor _fileEditor;
 
-        public override string ResourceFile => _resourceFile;
+        public override string ResourceFile => "Resources/UnknownAIList.xml";
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _models = new ItemIcon[0];
+            _models = new SpawnZone[0];
             FileStream stream = null;
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -33,9 +31,9 @@ namespace SF3.Models.IconPointerEditor.ItemIcons {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newModel = new ItemIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                        var newModel = new SpawnZone(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.SizeID < 0 || newModel.SizeID >= MaxSize) {
+                        if (newModel.UnknownAIID < 0 || newModel.UnknownAIID >= MaxSize) {
                             throw new IndexOutOfRangeException();
                         }
                     }
@@ -43,8 +41,9 @@ namespace SF3.Models.IconPointerEditor.ItemIcons {
             }
             catch (FileLoadException) {
                 return false;
-                //} catch (FileNotFoundException) {
-                //  return false;
+            }
+            catch (FileNotFoundException) {
+                return false;
             }
             finally {
                 stream?.Close();

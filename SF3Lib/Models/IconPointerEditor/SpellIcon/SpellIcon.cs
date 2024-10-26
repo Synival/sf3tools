@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 using SF3.Values;
 
-namespace SF3.Models.IconPointerEditor.SpellIcons {
+namespace SF3.Models.IconPointerEditor.SpellIcon {
     public class SpellIcon {
         private readonly IIconPointerFileEditor _fileEditor;
 

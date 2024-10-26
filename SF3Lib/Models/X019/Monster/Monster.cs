@@ -2,7 +2,7 @@ using SF3.FileEditors;
 using SF3.Types;
 using SF3.Values;
 
-namespace SF3.Models.X019.Monsters {
+namespace SF3.Models.X019.Monster {
     public class Monster {
         private readonly IX019_FileEditor _fileEditor;
 

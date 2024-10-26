@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using SF3.Models;
-using SF3.Models.IconPointerEditor.ItemIcons;
-using SF3.Models.IconPointerEditor.SpellIcons;
+using SF3.Models.IconPointerEditor.ItemIcon;
+using SF3.Models.IconPointerEditor.SpellIcon;
 using SF3.Types;
 
 namespace SF3.FileEditors {

@@ -2,7 +2,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X1.TileMovement {
-    public class Tile {
+    public class TileMovement {
         private readonly IX1_FileEditor _fileEditor;
 
         private readonly int noEntry;
@@ -27,7 +27,7 @@ namespace SF3.Models.X1.TileMovement {
         private readonly int offset;
         private readonly int sub;
 
-        public Tile(IX1_FileEditor fileEditor, int id, string text) {
+        public TileMovement(IX1_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
 
             if (Scenario == ScenarioType.Scenario2) {

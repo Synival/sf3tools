@@ -2,7 +2,7 @@ using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.IconPointerEditor.ItemIcons {
+namespace SF3.Models.IconPointerEditor.ItemIcon {
     public class ItemIcon {
         private readonly IIconPointerFileEditor _fileEditor;
 
