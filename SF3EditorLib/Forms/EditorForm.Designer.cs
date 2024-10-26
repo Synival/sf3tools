@@ -49,6 +49,7 @@ namespace SF3.Editor.Forms
             this.tsmiScenario_PremiumDisk = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_Save = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,6 +69,7 @@ namespace SF3.Editor.Forms
             // 
             this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile_Open,
+            this.tsmiFile_Save,
             this.tsmiFile_SaveAs,
             this.tsSeparator_File1,
             this.tsmiFile_Close,
@@ -229,6 +231,15 @@ namespace SF3.Editor.Forms
             this.tsmiHelp_Version.Size = new System.Drawing.Size(190, 22);
             this.tsmiHelp_Version.Text = "Version (set internally)";
             // 
+            // tsmiFile_Save
+            // 
+            this.tsmiFile_Save.Enabled = false;
+            this.tsmiFile_Save.Name = "tsmiFile_Save";
+            this.tsmiFile_Save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.tsmiFile_Save.Size = new System.Drawing.Size(240, 22);
+            this.tsmiFile_Save.Text = "&Save";
+            this.tsmiFile_Save.Click += new System.EventHandler(this.tsmiFile_Save_Click);
+            // 
             // EditorForm
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
@@ -265,5 +276,6 @@ namespace SF3.Editor.Forms
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_GenerateDFRFile;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_CopyTablesTo;
         private System.Windows.Forms.ToolStripSeparator tsSeparator_File4;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_Save;
     }
 }

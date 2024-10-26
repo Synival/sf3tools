@@ -84,12 +84,17 @@ namespace SF3.Editor.Forms {
             onScenarioChanged(null, EventArgs.Empty);
 
             FileIsLoadedChanged += (obj, eargs) => {
+                tsmiFile_Save.Enabled            = IsLoaded && FileEditor.IsModified;
                 tsmiFile_SaveAs.Enabled          = IsLoaded;
                 tsmiFile_ApplyDFRFile.Enabled    = IsLoaded;
                 tsmiFile_GenerateDFRFile.Enabled = IsLoaded;
                 tsmiFile_CopyTablesTo.Enabled    = IsLoaded;
                 tsmiFile_CopyTablesFrom.Enabled  = IsLoaded;
                 tsmiFile_Close.Enabled           = IsLoaded;
+            };
+
+            FileModifiedChanged += (obj, eargs) => {
+                tsmiFile_Save.Enabled = IsLoaded && FileEditor.IsModified;
             };
 
             ObjectListViews = this.GetAllObjectsOfTypeInFields<ObjectListView>(false);
@@ -114,9 +119,9 @@ namespace SF3.Editor.Forms {
                 try {
                     stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
                 }
-                catch {
-                    MessageBox.Show("Error trying to load file. It is probably in use by another process.");
-                    throw;
+                catch (Exception e) {
+                    MessageBox.Show("Error trying to load file:\n\n" + e.Message + "\n\nIt is probably in use by another process.");
+                    return false;
                 }
                 return LoadFile(filename, stream);
             }
@@ -170,8 +175,9 @@ namespace SF3.Editor.Forms {
         }
 
         /// <summary>
-        /// If a file is open, it does nothing. But, if a file IS open,
-        /// it creates an "Save As" dialog and, if a file was chosen, saves open data.
+        /// If a file isn't open, it does nothing and returns 'false'.
+        /// But, if a file IS open, it shows a "Save As" dialog and, if a file was chosen, saves open data
+        /// and reports an error if unsuccessful.
         /// </summary>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
         public bool SaveFileDialog() {
@@ -186,7 +192,31 @@ namespace SF3.Editor.Forms {
             if (savefile.ShowDialog() != DialogResult.OK)
                 return false;
 
-            return FileEditor.SaveFile(savefile.FileName);
+            return SaveFile(savefile.FileName);
+        }
+
+        /// <summary>
+        /// If a file isn't open and modified, it does nothing and returns 'false'.
+        /// But if a file IS open and modified, it saves the current file and reports an error if unsuccessful.
+        /// </summary>
+        /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
+        public bool Save() {
+            if (FileEditor == null || !FileEditor.IsModified)
+                return false;
+            return SaveFile(FileEditor.Filename);
+        }
+
+        private bool SaveFile(string filename) {
+            try {
+                if (!FileEditor.SaveFile(filename)) {
+                    MessageBox.Show("Error trying to save file. It is probably in use by another process.");
+                    return false;
+                }
+            }
+            catch (Exception e) {
+                return false;
+            }
+            return true;
         }
 
         /// <summary>
@@ -392,12 +422,6 @@ namespace SF3.Editor.Forms {
         /// </summary>
         protected virtual bool OnLoad() => true;
 
-        private void EditorForm_FormClosing(object sender, FormClosingEventArgs e) {
-            if (FileEditor?.IsModified == true)
-                if (!CloseFile())
-                    e.Cancel = true;
-        }
-
         private string _baseTitle;
 
         protected virtual string Version => "(unset)";
@@ -500,7 +524,14 @@ namespace SF3.Editor.Forms {
         /// </summary>
         public event EventHandler FileIsLoadedChanged;
 
+        protected virtual void EditorForm_FormClosing(object sender, FormClosingEventArgs e) {
+            if (FileEditor?.IsModified == true)
+                if (!CloseFile())
+                    e.Cancel = true;
+        }
+
         protected virtual void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
+        protected virtual void tsmiFile_Save_Click(object sender, EventArgs e) => Save();
         protected virtual void tsmiFile_SaveAs_Click(object sender, EventArgs e) => SaveFileDialog();
         protected virtual void tsmiFile_Close_Click(object sender, EventArgs e) => CloseFile();
         protected virtual void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
@@ -508,12 +539,12 @@ namespace SF3.Editor.Forms {
         protected virtual void tsmiFile_applyDFRFile_Click(object sender, EventArgs e) => ApplyDFRDialog();
         protected virtual void tsmiFile_generateDFRFile_Click(object sender, EventArgs e) => GenerateDFRFile();
 
+        protected virtual void tsmiFile_CopyTablesTo_Click(object sender, EventArgs e) => CopyTablesTo();
+        protected virtual void tsmiFile_CopyTablesFrom_Click(object sender, EventArgs e) => CopyTablesFrom();
+
         protected virtual void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario1;
         protected virtual void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;
         protected virtual void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
         protected virtual void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
-
-        protected virtual void tsmiFile_CopyTablesTo_Click(object sender, EventArgs e) => CopyTablesTo();
-        protected virtual void tsmiFile_CopyTablesFrom_Click(object sender, EventArgs e) => CopyTablesFrom();
     }
 }
