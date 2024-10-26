@@ -6,10 +6,10 @@ using SF3.Types;
 using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X019.Monster {
-    public class MonsterList : Table<Monster> {
+    public class MonsterTable : Table<Monster> {
         public int MaxSize { get; } = 256;
 
-        public MonsterList(IX019_FileEditor fileEditor, bool isX044) : base(fileEditor) {
+        public MonsterTable(IX019_FileEditor fileEditor, bool isX044) : base(fileEditor) {
             _fileEditor = fileEditor;
             _isX044 = isX044;
             _resourceFile = (Scenario == ScenarioType.PremiumDisk && isX044)
