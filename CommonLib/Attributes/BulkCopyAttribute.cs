@@ -1,6 +1,6 @@
 using System;
 
-namespace SF3.Attributes {
+namespace CommonLib.Attributes {
     /// <summary>
     /// Used to indicate that BulkCopyProperties() should copy this property.
     /// </summary>

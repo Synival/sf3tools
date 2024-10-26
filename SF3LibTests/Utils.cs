@@ -1,4 +1,4 @@
-namespace SF3LibTests {
+namespace SF3Lib.Tests {
     public static class Utils {
         public static void RunTestCases<T>(IEnumerable<T> testCases, Action<T> test) {
             var exceptions = new List<Exception>();

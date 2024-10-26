@@ -3,8 +3,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using DFRLib;
+using static CommonLib.Win.Utils.MessageUtils;
 
-namespace DFRToolGUI.Forms {
+namespace DFRTool.GUI.Forms {
     public partial class frmDFRTool : Form {
         /// <summary>
         /// Initializes the DFRToolGUI as a standalone application.
@@ -59,20 +60,18 @@ namespace DFRToolGUI.Forms {
         }
 
         private void btnGenerateDFR_Click(object sender, EventArgs e) {
-            const string messageBoxTitle = "DFRTool";
-
             if (tbOriginalFile.Text.Length == 0) {
-                MessageBox.Show("Please select an original file.", messageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                InfoMessage("Please select an original file.");
                 return;
             }
 
             if (Data == null && tbAlteredFile.Text.Length == 0) {
-                MessageBox.Show("Please select an altered file.", messageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                InfoMessage("Please select an altered file.");
                 return;
             }
 
             if (tbOutputFile.Text.Length == 0) {
-                MessageBox.Show("Please select a destination for the DFR file.", messageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                InfoMessage("Please select a destination for the DFR file.");
                 return;
             }
 
@@ -105,11 +104,11 @@ namespace DFRToolGUI.Forms {
                 File.WriteAllText(tbOutputFile.Text, dfrText);
             }
             catch (Exception ex) {
-                MessageBox.Show("DFR generation failed:\n\n" + ex.Message, messageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                ErrorMessage("DFR generation failed:\n\n" + ex.Message);
                 return;
             }
 
-            MessageBox.Show("DFR file generated successfully.", messageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            InfoMessage("DFR file generated successfully.");
 
             if (cbOpenWhenGenerated.Checked) {
                 new Process {

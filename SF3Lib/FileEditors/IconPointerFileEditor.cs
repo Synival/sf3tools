@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using SF3.Attributes;
+using CommonLib.Attributes;
 using SF3.Models;
 using SF3.Models.IconPointerEditor.ItemIcons;
 using SF3.Models.IconPointerEditor.SpellIcons;

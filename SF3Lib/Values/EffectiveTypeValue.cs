@@ -1,3 +1,5 @@
+using CommonLib.NamedValues;
+
 namespace SF3.Values {
     public class EffectiveTypeValueResourceInfo : NamedValueFromResourceInfo {
         public EffectiveTypeValueResourceInfo() : base("EffectiveTypes.xml") {

@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using static SF3.Utils.Resources;
-using static SF3.Utils.Utils;
+using static CommonLib.Utils.ResourceUtils;
+using static CommonLib.Utils.Utils;
+using static CommonLib.Utils.ControlUtils;
 
-namespace SF3.Values {
+namespace CommonLib.NamedValues {
     public interface INamedValueFromResourceInfo {
         string ResourceName { get; }
         int MinValue { get; }

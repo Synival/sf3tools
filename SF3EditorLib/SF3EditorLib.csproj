@@ -80,9 +80,17 @@
     <Compile Include="Forms\EditorForm.Designer.cs">
       <DependentUpon>EditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils.cs" />
+    <Compile Include="Utils\ControlUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonLibWin\CommonLibWin.csproj">
+      <Project>{5fe12345-c218-45be-8947-b90000000000}</Project>
+      <Name>CommonLibWin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonLib\CommonLib.csproj">
+      <Project>{dbd21823-582a-4a42-92ab-3294e013a4a4}</Project>
+      <Name>CommonLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DFRLib\DFRLib.csproj">
       <Project>{374A86FE-863F-4509-922D-CAE6E0FEA139}</Project>
       <Name>DFRLib</Name>

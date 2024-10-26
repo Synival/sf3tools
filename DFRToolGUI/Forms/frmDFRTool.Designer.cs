@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DFRToolGUI.Forms
+namespace DFRTool.GUI.Forms
 {
     partial class frmDFRTool
     {

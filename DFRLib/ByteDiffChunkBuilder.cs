@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using CommonLib.Extensions;
 using DFRLib.Exceptions;
-using DFRLib.Extensions;
 
 namespace DFRLib {
     public struct ByteDiffChunkBuilderOptions {

@@ -1,6 +1,4 @@
-using DFRLib;
-
-namespace DFRLibTests {
+namespace DFRLib.Tests {
     [TestClass]
     public class ByteDiffChunkTests {
         [TestMethod]

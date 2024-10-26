@@ -89,6 +89,10 @@
     <Content Include="pen_penguin.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonLib\CommonLib.csproj">
+      <Project>{dbd21823-582a-4a42-92ab-3294e013a4a4}</Project>
+      <Name>CommonLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SF3EditorLib\SF3EditorLib.csproj">
       <Project>{5fe40461-c218-45be-8947-9b4a8d8291fd}</Project>
       <Name>SF3EditorLib</Name>

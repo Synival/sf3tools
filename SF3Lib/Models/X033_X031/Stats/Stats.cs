@@ -1,6 +1,8 @@
 using System;
-using SF3.Attributes;
+using CommonLib.Attributes;
+using CommonLib.Statistics;
 using SF3.FileEditors;
+using SF3.Statistics;
 using SF3.Types;
 using SF3.Values;
 
@@ -448,14 +450,14 @@ namespace SF3.Models.X033_X031.Stats {
         }
 
         public double GetAverageStatGrowthPerLevel(StatType stat, int groupIndex) {
-            var growthValue = SF3.Stats.GetStatGrowthValuePerLevel(GetStatGrowthRange(stat, groupIndex).Range, SF3.Stats.StatGrowthGroups[IsPromoted][groupIndex].Range.Range);
-            return SF3.Stats.GetAverageStatGrowthPerLevel(growthValue);
+            var growthValue = GrowthStats.GetStatGrowthValuePerLevel(GetStatGrowthRange(stat, groupIndex).Range, GrowthStats.StatGrowthGroups[IsPromoted][groupIndex].Range.Range);
+            return GrowthStats.GetAverageStatGrowthPerLevel(growthValue);
         }
 
         public string GetAverageStatGrowthPerLevelAsPercent(StatType stat, int groupIndex) {
-            var growthValue = SF3.Stats.GetStatGrowthValuePerLevel(GetStatGrowthRange(stat, groupIndex).Range, SF3.Stats.StatGrowthGroups[IsPromoted][groupIndex].Range.Range);
+            var growthValue = GrowthStats.GetStatGrowthValuePerLevel(GetStatGrowthRange(stat, groupIndex).Range, GrowthStats.StatGrowthGroups[IsPromoted][groupIndex].Range.Range);
             return (DebugGrowthValues ? string.Format("{0:x}", growthValue) + " || " : "") +
-                    SF3.Stats.GetAverageStatGrowthPerLevelAsPercent(growthValue);
+                    GrowthStats.GetAverageStatGrowthPerLevelAsPercent(growthValue);
         }
 
         public int ID => index;

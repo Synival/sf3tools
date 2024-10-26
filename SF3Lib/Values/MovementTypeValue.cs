@@ -1,3 +1,4 @@
+using CommonLib.NamedValues;
 namespace SF3.Values {
     public class MovementTypeValueResourceInfo : NamedValueFromResourceInfo {
         public MovementTypeValueResourceInfo() : base("MovementTypes.xml") {

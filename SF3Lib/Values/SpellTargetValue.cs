@@ -1,3 +1,4 @@
+using CommonLib.NamedValues;
 namespace SF3.Values {
     public class SpellTargetValueResourceInfo : NamedValueFromResourceInfo {
         public SpellTargetValueResourceInfo() : base("SpellTargets.xml") {

@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using CommonLib.Statistics;
 
-namespace SF3 {
+namespace SF3.Statistics {
     /// <summary>
     /// Utility functions for stats.
     /// </summary>
-    static public class Stats {
+    static public class GrowthStats {
         /// <summary>
         /// An array for all possible outcomes of the RNG for adding an additional point when gaining stats.
         /// Index: The number below 0x100 used when determining a stat 'growthValue'.
@@ -104,15 +105,15 @@ namespace SF3 {
         /// functions.</param>
         /// <returns>The average number of stat gains per level.</returns>
         static public double GetAverageStatGrowthPerLevel(int growthValue) {
-            int guaranteedStatBonus = (growthValue & 0xf00) % 15;
+            var guaranteedStatBonus = (growthValue & 0xf00) % 15;
 
             // The portion of growthValue % 0x100 is the starting point for the formula to determine whether
             // we should add an additional stat point.
-            int growthValuePlusOneCalcStart = Math.Max(growthValue % 0x100, 0);
+            var growthValuePlusOneCalcStart = Math.Max(growthValue % 0x100, 0);
 
             // Determine the odds that adding to random numbers range (0x00, 0x7F) will yield a result >= 100,
             // which provides a bonus +1 stat boost.
-            double percentToReachPlusOne = NumRngOutcomesToReachPlusOne[growthValuePlusOneCalcStart] / TotalRngOutcomes;
+            var percentToReachPlusOne = NumRngOutcomesToReachPlusOne[growthValuePlusOneCalcStart] / TotalRngOutcomes;
 
             return percentToReachPlusOne + guaranteedStatBonus;
         }

@@ -1,4 +1,4 @@
-namespace SF3.Extensions {
+namespace CommonLib.Extensions {
     public static class ArrayExtensions {
         /// <summary>
         /// Returns a copy of an array with an additional element 'newValue' tacked on the end.

@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
+using CommonLib.NamedValues;
 
-namespace SF3.Editor {
-    public static class Utils {
+namespace SF3.Editor.Utils {
+    public static class ControlUtils {
         /// <summary>
         /// Creates a combo box that can be bound to a NamedValue.
         /// </summary>

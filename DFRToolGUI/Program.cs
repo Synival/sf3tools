@@ -1,8 +1,8 @@
 using System;
 using System.Windows.Forms;
-using DFRToolGUI.Forms;
+using DFRTool.GUI.Forms;
 
-namespace DFRToolGUI {
+namespace DFRTool.GUI {
     internal static class Program {
         /// <summary>
         ///  The main entry point for the application.

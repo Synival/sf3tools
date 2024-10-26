@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SF3 {
+namespace CommonLib.Statistics {
     /// <summary>
     /// A set of values paired with a probability in the form of a key-value dictionary.
     /// Key: the value
@@ -21,14 +21,14 @@ namespace SF3 {
 
             foreach (var keyValueIn in this) {
                 var valueIn = keyValueIn.Key;
-                double probabilityIn = keyValueIn.Value;
+                var probabilityIn = keyValueIn.Value;
                 if (probabilityIn == 0.00)
                     continue;
 
                 var transformedSet = transformFunc(valueIn);
                 foreach (var keyValueOut in transformedSet) {
                     var valueOut = keyValueOut.Key;
-                    double probabilityOut = keyValueOut.Value;
+                    var probabilityOut = keyValueOut.Value;
                     if (probabilityOut == 0.00)
                         continue;
 
@@ -47,9 +47,9 @@ namespace SF3 {
         /// </summary>
         /// <returns>The weighted average of all values in the probability set.</returns>
         public double GetWeightedAverage() {
-            if (this.Count == 0)
+            if (Count == 0)
                 throw new IndexOutOfRangeException();
-            if (this.Count == 1)
+            if (Count == 1)
                 return this.ToArray()[0].Key;
 
             return this.Sum(kv => kv.Key * kv.Value);
@@ -63,9 +63,9 @@ namespace SF3 {
         /// In range (0.00, 1.00).</param>
         /// <returns>A linearly-interpolated weighted median where the area left of the result is equal to 'targetArea'.</returns>
         public double GetWeightedMedianAt(double targetArea) {
-            if (this.Count == 0)
+            if (Count == 0)
                 throw new IndexOutOfRangeException();
-            if (this.Count == 1)
+            if (Count == 1)
                 return this.ToArray()[0].Key;
 
             var sortedValues = this.OrderBy(x => x.Key).ToArray();
@@ -75,45 +75,45 @@ namespace SF3 {
                 return sortedValues[sortedValues.Length - 1].Key;
 
             // Make sure the target reflects a percentage of all total probabilities.
-            double totalArea = sortedValues.Sum(kv => kv.Value);
+            var totalArea = sortedValues.Sum(kv => kv.Value);
             targetArea *= totalArea;
 
             // Track the total area we've passed.
-            double currentArea = 0.00;
+            var currentArea = 0.00;
 
-            for (int i = 0; i < sortedValues.Length; i++) {
+            for (var i = 0; i < sortedValues.Length; i++) {
                 // If we haven't reached the target probability yet, keep going.
-                double probability = sortedValues[i].Value;
+                var probability = sortedValues[i].Value;
                 if (currentArea + probability < targetArea) {
                     currentArea += probability;
                     continue;
                 }
 
                 // Determine the interpolation percentage of 'targetArea' between (currentArea, currentArea + probability).
-                double probabilityInterp = (targetArea - currentArea) / probability;
+                var probabilityInterp = (targetArea - currentArea) / probability;
 
                 // Determine an index of the dataset with the fractional portion. This will be used for linear interpolation.
-                double n = (double)i + probabilityInterp;
+                var n = i + probabilityInterp;
 
                 // The domain for linear interpolation is larger than the domain of the input dataset, so need to convert from a domain like this:
                 // (example for 3 data points):
                 //     (0.00, 1.00, 2.00, 3.00)
                 // to: (0.00, 0.66, 1.33, 2.00)
-                n *= (double) (sortedValues.Length - 1) / (double) sortedValues.Length;
+                n *=  (sortedValues.Length - 1) / (double) sortedValues.Length;
 
                 // Check for some simple cases, and cases potentially caused by floating point imprecision.
-                double nFloor = Math.Floor(n);
-                int nInt = (int)nFloor;
+                var nFloor = Math.Floor(n);
+                var nInt = (int)nFloor;
                 if (n == nFloor)
                     return sortedValues[sortedValues.Length - 1].Key;
                 else if (nInt >= sortedValues.Length)
                     return sortedValues[(int) nFloor].Key;
 
                 // Return a value[n], interpolating between 'n' and 'n + 1' for the fractional portion of 'n'
-                double valueInterp = n - nFloor;
+                var valueInterp = n - nFloor;
                 double value1 = sortedValues[nInt].Key;
                 double value2 = sortedValues[nInt + 1].Key;
-                double valueRange = value2 - value1;
+                var valueRange = value2 - value1;
                 return value1 + valueRange * valueInterp;
             }
 

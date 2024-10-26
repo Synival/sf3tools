@@ -3,6 +3,8 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using CommonLib.NamedValues;
+using SF3.Editor.Utils;
 
 namespace SF3.Editor.Extensions {
     public static class ObjectListViewExtensions {
@@ -45,7 +47,7 @@ namespace SF3.Editor.Extensions {
         private static void RegisterNamedValue<T>() {
             ObjectListView.EditorRegistry.Register(
                 typeof(T),
-                (object model, OLVColumn column, object value) => Utils.MakeNamedValueComboBox((value as NamedValue).ComboBoxValues, value as NamedValue)
+                (object model, OLVColumn column, object value) => ControlUtils.MakeNamedValueComboBox((value as NamedValue).ComboBoxValues, value as NamedValue)
             );
         }
 

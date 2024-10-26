@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using SF3.Extensions;
+using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 

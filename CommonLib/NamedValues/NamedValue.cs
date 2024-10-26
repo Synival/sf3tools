@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SF3 {
+namespace CommonLib.NamedValues {
     /// <summary>
     /// Concrete type with both a Name (string) and a Value (int).
     /// Used when values need both names to look up and must be identifiable as a specific type.
@@ -65,10 +65,10 @@ namespace SF3 {
         static public bool operator >(NamedValue lhs, NamedValue rhs) => lhs.Value > rhs.Value;
         static public bool operator ==(NamedValue lhs, NamedValue rhs) => lhs.Value == rhs.Value;
         static public bool operator !=(NamedValue lhs, NamedValue rhs) => lhs.Value != rhs.Value;
-        public override bool Equals(object rhs) => (rhs is NamedValue) ? this.Value == (rhs as NamedValue).Value : base.Equals(rhs);
-        public override int GetHashCode() => this.Value;
+        public override bool Equals(object rhs) => rhs is NamedValue ? Value == (rhs as NamedValue).Value : base.Equals(rhs);
+        public override int GetHashCode() => Value;
 
-        public int CompareTo(object rhs) => (rhs is NamedValue) ? CompareTo(rhs as NamedValue) : throw new NotImplementedException();
-        public int CompareTo(NamedValue rhs) => (this.Value < rhs.Value) ? -1 : (this.Value == rhs.Value) ? 0 : 1;
+        public int CompareTo(object rhs) => rhs is NamedValue ? CompareTo(rhs as NamedValue) : throw new NotImplementedException();
+        public int CompareTo(NamedValue rhs) => Value < rhs.Value ? -1 : Value == rhs.Value ? 0 : 1;
     }
 }

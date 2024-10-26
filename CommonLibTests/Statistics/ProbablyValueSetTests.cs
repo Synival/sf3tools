@@ -1,6 +1,6 @@
-using SF3;
+using CommonLib.Statistics;
 
-namespace SF3LibTests {
+namespace CommonLib.Tests {
     [TestClass]
     public class ProbablyValueSetTests {
         [TestMethod]

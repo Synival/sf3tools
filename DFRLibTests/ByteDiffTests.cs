@@ -1,7 +1,6 @@
 using System.Text;
-using DFRLib;
 
-namespace DFRLibTests {
+namespace DFRLib.Tests {
     [TestClass]
     public class ByteDiffTests {
         [TestMethod]

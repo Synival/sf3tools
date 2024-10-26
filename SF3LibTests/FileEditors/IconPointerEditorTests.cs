@@ -1,6 +1,6 @@
 using SF3.FileEditors;
 using SF3.Types;
-using static SF3LibTests.Utils;
+using static SF3Lib.Tests.Utils;
 
 namespace SF3LibTests.FileEditors {
     [TestClass]

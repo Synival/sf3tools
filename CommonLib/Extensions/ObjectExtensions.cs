@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace SF3.Extensions {
+namespace CommonLib.Extensions {
     public static partial class ObjectExtensions {
         /// <summary>
         /// Gets all values of all fields with type T.

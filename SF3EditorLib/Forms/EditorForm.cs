@@ -5,13 +5,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using CommonLib.Extensions;
 using DFRLib;
-using DFRToolGUI.Forms;
+using DFRTool.GUI.Forms;
 using SF3.Editor.Extensions;
-using SF3.Extensions;
 using SF3.FileEditors;
 using SF3.Types;
 using SF3.Utils;
+using static CommonLib.Win.Utils.MessageUtils;
 
 namespace SF3.Editor.Forms {
     /// <summary>
@@ -120,7 +121,7 @@ namespace SF3.Editor.Forms {
                     stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
                 }
                 catch (Exception e) {
-                    MessageBox.Show("Error trying to load file:\n\n" + e.Message + "\n\nIt is probably in use by another process.");
+                    ErrorMessage("Error trying to load file:\n\n" + e.Message + "\n\nIt is probably in use by another process.");
                     return false;
                 }
                 return LoadFile(filename, stream);
@@ -154,8 +155,8 @@ namespace SF3.Editor.Forms {
 
             if (!success) {
                 //wrong file was selected
-                MessageBox.Show("Data in '" + filename + "' appears corrupt or invalid.\n" +
-                                "Is this the correct type of file?");
+                ErrorMessage("Data in '" + filename + "' appears corrupt or invalid.\n" +
+                             "Is this the correct type of file?");
                 return false;
             }
 
@@ -209,7 +210,7 @@ namespace SF3.Editor.Forms {
         private bool SaveFile(string filename) {
             try {
                 if (!FileEditor.SaveFile(filename)) {
-                    MessageBox.Show("Error trying to save file. It is probably in use by another process.");
+                    ErrorMessage("Error trying to save file. It is probably in use by another process.");
                     return false;
                 }
             }
@@ -231,7 +232,7 @@ namespace SF3.Editor.Forms {
                 return true;
 
             if (!force && FileEditor.IsModified) {
-                var result = MessageBox.Show(SavePromptString, "Save Changes", MessageBoxButtons.YesNoCancel);
+                var result = MessageBox.Show(SavePromptString, "Save Changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.Cancel)
                     return false;
                 else if (result == DialogResult.Yes) {
@@ -278,10 +279,10 @@ namespace SF3.Editor.Forms {
                 }
 
                 FileEditor.IsModified = true;
-                MessageBox.Show("DFR file successfully applied.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                InfoMessage("DFR file successfully applied.");
             }
             catch (Exception e) {
-                MessageBox.Show("Error loading DFR file:\n\n" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorMessage("Error loading DFR file:\n\n" + e.Message);
                 return false;
             }
             finally {
@@ -316,25 +317,25 @@ namespace SF3.Editor.Forms {
                 return;
             var copyToFilename = saveFileDialog.FileName;
 
-            SF3.Utils.ObjectExtensions.BulkCopyPropertiesResult result = null;
+            ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyFileEditor = MakeFileEditor();
                 if (!copyFileEditor.LoadFile(copyToFilename)) {
-                    MessageBox.Show("Error trying to load file. It is probably in use by another process.");
+                    ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
 
                 result = FileEditor.BulkCopyProperties(copyFileEditor);
                 if (!copyFileEditor.SaveFile(copyToFilename)) {
-                    MessageBox.Show("Error trying to update file.");
+                    ErrorMessage("Error trying to update file.");
                     return;
                 }
             }
             catch (Exception e) {
                 //wrong file was selected
-                MessageBox.Show("Data in '" + copyToFilename + "' appears corrupt or invalid:\n\n" +
-                                e.Message + "\n\n" +
-                                "Is this the correct type of file?");
+                ErrorMessage("Data in '" + copyToFilename + "' appears corrupt or invalid:\n\n" +
+                             e.Message + "\n\n" +
+                             "Is this the correct type of file?");
                 return;
             }
 
@@ -357,20 +358,20 @@ namespace SF3.Editor.Forms {
                 return;
             var copyFromFilename = openFileDialog.FileName;
 
-            SF3.Utils.ObjectExtensions.BulkCopyPropertiesResult result = null;
+            ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyFileEditor = MakeFileEditor();
                 if (!copyFileEditor.LoadFile(copyFromFilename)) {
-                    MessageBox.Show("Error trying to load file. It is probably in use by another process.");
+                    ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
                 result = copyFileEditor.BulkCopyProperties(FileEditor);
             }
             catch (Exception e) {
                 //wrong file was selected
-                MessageBox.Show("Data in '" + copyFromFilename + "' appears corrupt or invalid:\n\n" +
-                                e.Message + "\n\n" +
-                                "Is this the correct type of file?");
+                ErrorMessage("Data in '" + copyFromFilename + "' appears corrupt or invalid:\n\n" +
+                             e.Message + "\n\n" +
+                             "Is this the correct type of file?");
                 return;
             }
 
@@ -378,7 +379,7 @@ namespace SF3.Editor.Forms {
             ProduceAndPresentBulkCopyReport(result);
         }
 
-        private void ProduceAndPresentBulkCopyReport(SF3.Utils.ObjectExtensions.BulkCopyPropertiesResult result) {
+        private void ProduceAndPresentBulkCopyReport(ObjectExtensions.BulkCopyPropertiesResult result) {
             string copyReport = result.MakeSummaryReport();
 
             // Output summary files.
@@ -396,7 +397,7 @@ namespace SF3.Editor.Forms {
             }
 
             // Show the user a nice report.
-            MessageBox.Show("Copy successful.\n\nResults:\n\n" + copyReport);
+            InfoMessage("Copy successful.\n\nResults:\n\n" + copyReport);
             if (wroteBulkCopyReport) {
                 new Process {
                     StartInfo = new ProcessStartInfo("BulkCopyReport.txt") {
@@ -416,6 +417,8 @@ namespace SF3.Editor.Forms {
                 TitleChanged?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        static private string _errorMessageTitle = null;
 
         /// <summary>
         /// Function to load data from a file opened with OpenFileDialog(). Must be overridden.

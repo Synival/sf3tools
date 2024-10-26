@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using SF3.Models;
+using static CommonLib.Win.Utils.MessageUtils;
 
 namespace SF3.Editor.Extensions {
     public static class TabControlExtensions {
@@ -89,7 +90,7 @@ namespace SF3.Editor.Extensions {
                 tc.ObjectListView.ClearObjects();
                 if (!tc.ModelArray.IsLoaded && !tc.ModelArray.Load()) {
                     // TODO: we really should be throwing an exception here instead...
-                    MessageBox.Show("Could not load " + tc.ModelArray.ResourceFile);
+                    ErrorMessage("Could not load " + tc.ModelArray.ResourceFile);
                     return false;
                 }
                 tc.ObjectListView.AddObjects(tc.ModelObjs);

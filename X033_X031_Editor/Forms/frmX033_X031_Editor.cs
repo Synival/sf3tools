@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using BrightIdeasSoftware;
+using CommonLib.Statistics;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.FileEditors;
+using SF3.Statistics;
 using SF3.Types;
 
 namespace SF3.X033_X031_Editor.Forms {
@@ -157,7 +159,7 @@ namespace SF3.X033_X031_Editor.Forms {
                 probableStatsDataPoints.Add(new ProbableStatsDataPoint(1, GetProbableStats(currentProbableStatValues)));
 
                 // Populate data points for all stat growth groups, until the max level.
-                foreach (var statGrowthGroup in Stats.StatGrowthGroups[isPromoted]) {
+                foreach (var statGrowthGroup in GrowthStats.StatGrowthGroups[isPromoted]) {
                     // Add the next target stats.
                     var statValues = new StatDict();
                     foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {

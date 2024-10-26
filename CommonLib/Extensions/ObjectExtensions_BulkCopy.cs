@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using SF3.Attributes;
-using SF3.Extensions;
+using CommonLib.Attributes;
 
-namespace SF3.Utils {
+namespace CommonLib.Extensions {
     public static partial class ObjectExtensions {
         /// <summary>
         /// Any kind of result from any kind of BulkCopy() operation.

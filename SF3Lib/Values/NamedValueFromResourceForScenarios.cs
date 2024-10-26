@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using CommonLib.NamedValues;
 using SF3.Types;
 using static SF3.Utils.Resources;
-using static SF3.Utils.Utils;
+using static CommonLib.Utils.Utils;
+using static CommonLib.Utils.ControlUtils;
 
 namespace SF3.Values {
     public interface INamedValueFromResourceForScenariosInfo {
