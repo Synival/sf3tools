@@ -6,8 +6,24 @@ using DFRLib;
 
 namespace DFRToolGUI.Forms {
     public partial class frmDFRTool : Form {
+        /// <summary>
+        /// Initializes the DFRToolGUI as a standalone application.
+        /// </summary>
         public frmDFRTool() {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Initializes the DFRToolGUI for use inside an editor, with specific data for the "altered" file.
+        /// </summary>
+        /// <param name="data"></param>
+        public frmDFRTool(byte[] data) {
+            InitializeComponent();
+            this.btnAlteredFile.Enabled = false;
+            this.tbAlteredFile.Enabled = false;
+            this.tbAlteredFile.Text = "(reading from editor)";
+
+            Data = data;
         }
 
         private void btnOriginalFile_Click(object sender, EventArgs e) {
@@ -50,7 +66,7 @@ namespace DFRToolGUI.Forms {
                 return;
             }
 
-            if (tbAlteredFile.Text.Length == 0) {
+            if (Data == null && tbAlteredFile.Text.Length == 0) {
                 MessageBox.Show("Please select an altered file.", messageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
@@ -61,11 +77,31 @@ namespace DFRToolGUI.Forms {
             }
 
             try {
-                var diffChunk = new ByteDiff(tbOriginalFile.Text, tbAlteredFile.Text, new ByteDiffChunkBuilderOptions
-                {
-                    CombineAppendedChunks = cbCombineAllAppendedData.Checked
-                });
-                var dfrText = diffChunk.ToDFR();
+                FileStream origStream = null;
+                Stream alteredStream = null;
+                string dfrText = null;
+
+                try {
+                    origStream = new FileStream(tbOriginalFile.Text, FileMode.Open, FileAccess.Read);
+                    alteredStream = (Data != null)
+                        ? (Stream) new MemoryStream(Data)
+                        : new FileStream(tbAlteredFile.Text, FileMode.Open, FileAccess.Read);
+
+                    var diffChunk = new ByteDiff(origStream, alteredStream, new ByteDiffChunkBuilderOptions {
+                        CombineAppendedChunks = cbCombineAllAppendedData.Checked
+                    });
+                    dfrText = diffChunk.ToDFR();
+                }
+                catch {
+                    throw;
+                }
+                finally {
+                    if (origStream != null)
+                        origStream.Close();
+                    if (alteredStream != null)
+                        alteredStream.Close();
+                }
+
                 File.WriteAllText(tbOutputFile.Text, dfrText);
             }
             catch (Exception ex) {
@@ -83,5 +119,7 @@ namespace DFRToolGUI.Forms {
                 }.Start();
             }
         }
+
+        private byte[] Data { get; } = null;
     }
 }
