@@ -45,6 +45,7 @@ namespace SF3.Editor.Forms
             this.tsmiScenario_PremiumDisk = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_ApplyDFRFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,6 +69,7 @@ namespace SF3.Editor.Forms
             this.tsSeparator_File1,
             this.tsmiFile_Close,
             this.tsSeparator_File2,
+            this.tsmiFile_ApplyDFRFile,
             this.tsmiFile_CopyTablesFrom,
             this.tsSeparator_File3,
             this.tsmiFile_Exit});
@@ -187,8 +189,16 @@ namespace SF3.Editor.Forms
             // tsmiHelp_Version
             // 
             this.tsmiHelp_Version.Name = "tsmiHelp_Version";
-            this.tsmiHelp_Version.Size = new System.Drawing.Size(299, 22);
+            this.tsmiHelp_Version.Size = new System.Drawing.Size(190, 22);
             this.tsmiHelp_Version.Text = "Version (set internally)";
+            // 
+            // tsmiFile_ApplyDFRFile
+            // 
+            this.tsmiFile_ApplyDFRFile.Enabled = false;
+            this.tsmiFile_ApplyDFRFile.Name = "tsmiFile_ApplyDFRFile";
+            this.tsmiFile_ApplyDFRFile.Size = new System.Drawing.Size(186, 22);
+            this.tsmiFile_ApplyDFRFile.Text = "Apply DFR File...";
+            this.tsmiFile_ApplyDFRFile.Click += new System.EventHandler(this.applyDFRToolStripMenuItem_Click);
             // 
             // EditorForm
             // 
@@ -222,5 +232,6 @@ namespace SF3.Editor.Forms
         private System.Windows.Forms.ToolStripMenuItem tsmiScenario_PremiumDisk;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp_Version;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_ApplyDFRFile;
     }
 }

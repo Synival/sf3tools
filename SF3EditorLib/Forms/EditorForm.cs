@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using DFRLib;
 using SF3.Editor.Extensions;
 using SF3.Exceptions;
 using SF3.Extensions;
@@ -84,6 +84,7 @@ namespace SF3.Editor.Forms {
 
             FileIsLoadedChanged += (obj, eargs) => {
                 tsmiFile_SaveAs.Enabled = IsLoaded == true;
+                tsmiFile_ApplyDFRFile.Enabled = IsLoaded == true;
                 tsmiFile_CopyTablesFrom.Enabled = IsLoaded == true;
                 tsmiFile_Close.Enabled = IsLoaded == true;
             };
@@ -149,6 +150,51 @@ namespace SF3.Editor.Forms {
                                 "    " + filename + "\n\n" +
                                 "Is this the correct type of file?");
                 return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Creates an "Open" dialog and, if a DFR file was chosen, does the following:
+        /// 1. Create a ByteDiff() from the DFR file
+        /// 2. Close the current document
+        /// 3. Reload the current document, but with the new data instead of its own
+        /// </summary>
+        public bool ApplyDFRDialog() {
+            if (!IsLoaded)
+                return false;
+
+            OpenFileDialog openfile = new OpenFileDialog();
+            openfile.Filter = "DFR Files (*.DFR)|*.DFR|All Files (*.*)|*.*";
+            if (openfile.ShowDialog() != DialogResult.OK)
+                return false;
+
+            FileStream file = null;
+            try {
+                file = File.Open(openfile.FileName, FileMode.Open, FileAccess.Read);
+                var diff = new ByteDiff(file);
+                var oldBytes = FileEditor.GetAllData();
+                var newBytes = diff.ApplyTo(oldBytes);
+
+                var filename = FileEditor.Filename;
+                if (!CloseFile())
+                    return false;
+                if (!LoadFile(filename, new MemoryStream(newBytes))) {
+                    if (FileEditor != null)
+                        FileEditor.IsModified = true;
+                    return false;
+                }
+
+                FileEditor.IsModified = true;
+                MessageBox.Show("DFR file successfully applied.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception e) {
+                MessageBox.Show("Error loading DFR file:\n\n" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            finally {
+                file.Close();
             }
 
             return true;
@@ -406,5 +452,7 @@ namespace SF3.Editor.Forms {
         protected virtual void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;
         protected virtual void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
         protected virtual void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
+
+        protected virtual void applyDFRToolStripMenuItem_Click(object sender, EventArgs e) => ApplyDFRDialog();
     }
 }
