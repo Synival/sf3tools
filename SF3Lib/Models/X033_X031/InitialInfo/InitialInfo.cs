@@ -3,38 +3,33 @@ using SF3.FileEditors;
 using SF3.Types;
 using SF3.Values;
 
-namespace SF3.Models.X033_X031.InitialInfos {
+namespace SF3.Models.X033_X031.InitialInfo {
     public class InitialInfo {
-        private IX033_X031_FileEditor _fileEditor;
+        private readonly IX033_X031_FileEditor _fileEditor;
 
         //starting equipment table
-        private int character;
-        private int characterClass;
-        private int level;
-        private int sex;
-        private int weapon; //2 bytes
-        private int accessory; //2 bytes
-        private int item1; //2 bytes
-        private int item2; //2 bytes
-        private int item3; //2 bytes
-        private int item4; //2 bytes
-        private int weapon1Type; //for exp
-        private int weapon1Exp; //2 bytes
-        private int weapon2Type; //for exp
-        private int weapon2Exp; //2 bytes
-        private int weapon3Type; //for exp
-        private int weapon3Exp; //2 bytes
-        private int weapon4Type; // for exp
-        private int weapon4Exp; //2 bytes
+        private readonly int character;
+        private readonly int characterClass;
+        private readonly int level;
+        private readonly int sex;
+        private readonly int weapon; //2 bytes
+        private readonly int accessory; //2 bytes
+        private readonly int item1; //2 bytes
+        private readonly int item2; //2 bytes
+        private readonly int item3; //2 bytes
+        private readonly int item4; //2 bytes
+        private readonly int weapon1Type; //for exp
+        private readonly int weapon1Exp; //2 bytes
+        private readonly int weapon2Type; //for exp
+        private readonly int weapon2Exp; //2 bytes
+        private readonly int weapon3Type; //for exp
+        private readonly int weapon3Exp; //2 bytes
+        private readonly int weapon4Type; // for exp
+        private readonly int weapon4Exp; //2 bytes
 
-        private int checkType;
-        private int checkVersion2;
-
-        private int address;
-        private int offset;
-
-        private int index;
-        private string name;
+        private readonly int checkType;
+        private readonly int checkVersion2;
+        private readonly int offset;
 
         public InitialInfo(IX033_X031_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
@@ -71,7 +66,7 @@ namespace SF3.Models.X033_X031.InitialInfos {
             }
             else if (Scenario == ScenarioType.Scenario3) {
                 if (checkType == 0x07) //x033
-                {
+{
                     offset = 0x000054e6; //scn3
                 }
                 else {
@@ -81,7 +76,7 @@ namespace SF3.Models.X033_X031.InitialInfos {
             else if (Scenario == ScenarioType.PremiumDisk) {
                 //Console.WriteLine(checkType);
                 if (checkType == 0x07) //x033
-                {
+{
                     offset = 0x00005734; //pd
                 }
                 else {
@@ -95,12 +90,12 @@ namespace SF3.Models.X033_X031.InitialInfos {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            PresetID = id;
+            PresetName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x20);
+            var start = offset + (id * 0x20);
 
             character = start + 0x00;
             characterClass = start + 0x01;
@@ -121,15 +116,15 @@ namespace SF3.Models.X033_X031.InitialInfos {
             weapon4Type = start + 0x1c; // for exp
             weapon4Exp = start + 0x1e; //2 bytes
 
-            address = offset + (id * 0x20);
+            PresetAddress = offset + (id * 0x20);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int PresetID => index;
+        public int PresetID { get; }
 
         [BulkCopyRowName]
-        public string PresetName => name;
+        public string PresetName { get; }
 
         [BulkCopy]
         public int CharacterE {
@@ -239,6 +234,6 @@ namespace SF3.Models.X033_X031.InitialInfos {
             set => _fileEditor.SetWord(weapon4Exp, value);
         }
 
-        public int PresetAddress => (address);
+        public int PresetAddress { get; }
     }
 }

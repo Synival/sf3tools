@@ -19,138 +19,133 @@ namespace SF3.Models.X033_X031.Stats {
             Promotion2 = 2,
         }
 
-        private IX033_X031_FileEditor _fileEditor;
+        private readonly IX033_X031_FileEditor _fileEditor;
 
         //starting stat table
-        private int character;
-        private int characterClass;
-        private int hpPromote;
-        private int hpCurve1;
-        private int hpCurve5;
-        private int hpCurve10;
-        private int hpCurve12_15;
-        private int hpCurve14_20;
-        private int hpCurve17_30;
-        private int hpCurve30_99;
-        private int mpPromote;
-        private int mpCurve1;
-        private int mpCurve5;
-        private int mpCurve10;
-        private int mpCurve12_15;
-        private int mpCurve14_20;
-        private int mpCurve17_30;
-        private int mpCurve30_99;
-        private int atkPromote;
-        private int atkCurve1;
-        private int atkCurve5;
-        private int atkCurve10;
-        private int atkCurve12_15;
-        private int atkCurve14_20;
-        private int atkCurve17_30;
-        private int atkCurve30_99;
-        private int defPromote;
-        private int defCurve1;
-        private int defCurve5;
-        private int defCurve10;
-        private int defCurve12_15;
-        private int defCurve14_20;
-        private int defCurve17_30;
-        private int defCurve30_99;
-        private int agiPromote;
-        private int agiCurve1;
-        private int agiCurve5;
-        private int agiCurve10;
-        private int agiCurve12_15;
-        private int agiCurve14_20;
-        private int agiCurve17_30;
-        private int agiCurve30_99;
+        private readonly int character;
+        private readonly int characterClass;
+        private readonly int hpPromote;
+        private readonly int hpCurve1;
+        private readonly int hpCurve5;
+        private readonly int hpCurve10;
+        private readonly int hpCurve12_15;
+        private readonly int hpCurve14_20;
+        private readonly int hpCurve17_30;
+        private readonly int hpCurve30_99;
+        private readonly int mpPromote;
+        private readonly int mpCurve1;
+        private readonly int mpCurve5;
+        private readonly int mpCurve10;
+        private readonly int mpCurve12_15;
+        private readonly int mpCurve14_20;
+        private readonly int mpCurve17_30;
+        private readonly int mpCurve30_99;
+        private readonly int atkPromote;
+        private readonly int atkCurve1;
+        private readonly int atkCurve5;
+        private readonly int atkCurve10;
+        private readonly int atkCurve12_15;
+        private readonly int atkCurve14_20;
+        private readonly int atkCurve17_30;
+        private readonly int atkCurve30_99;
+        private readonly int defPromote;
+        private readonly int defCurve1;
+        private readonly int defCurve5;
+        private readonly int defCurve10;
+        private readonly int defCurve12_15;
+        private readonly int defCurve14_20;
+        private readonly int defCurve17_30;
+        private readonly int defCurve30_99;
+        private readonly int agiPromote;
+        private readonly int agiCurve1;
+        private readonly int agiCurve5;
+        private readonly int agiCurve10;
+        private readonly int agiCurve12_15;
+        private readonly int agiCurve14_20;
+        private readonly int agiCurve17_30;
+        private readonly int agiCurve30_99;
 
-        private int s1LearnedAt;
-        private int s1LearnedID;
-        private int s1LearnedLevel;
-        private int s2LearnedAt;
-        private int s2LearnedID;
-        private int s2LearnedLevel;
-        private int s3LearnedAt;
-        private int s3LearnedID;
-        private int s3LearnedLevel;
-        private int s4LearnedAt;
-        private int s4LearnedID;
-        private int s4LearnedLevel;
-        private int s5LearnedAt;
-        private int s5LearnedID;
-        private int s5LearnedLevel;
-        private int s6LearnedAt;
-        private int s6LearnedID;
-        private int s6LearnedLevel;
-        private int s7LearnedAt;
-        private int s7LearnedID;
-        private int s7LearnedLevel;
-        private int s8LearnedAt;
-        private int s8LearnedID;
-        private int s8LearnedLevel;
-        private int s9LearnedAt;
-        private int s9LearnedID;
-        private int s9LearnedLevel;
-        private int s10LearnedAt;
-        private int s10LearnedID;
-        private int s10LearnedLevel;
-        private int s11LearnedAt;
-        private int s11LearnedID;
-        private int s11LearnedLevel;
-        private int s12LearnedAt;
-        private int s12LearnedID;
-        private int s12LearnedLevel;
+        private readonly int s1LearnedAt;
+        private readonly int s1LearnedID;
+        private readonly int s1LearnedLevel;
+        private readonly int s2LearnedAt;
+        private readonly int s2LearnedID;
+        private readonly int s2LearnedLevel;
+        private readonly int s3LearnedAt;
+        private readonly int s3LearnedID;
+        private readonly int s3LearnedLevel;
+        private readonly int s4LearnedAt;
+        private readonly int s4LearnedID;
+        private readonly int s4LearnedLevel;
+        private readonly int s5LearnedAt;
+        private readonly int s5LearnedID;
+        private readonly int s5LearnedLevel;
+        private readonly int s6LearnedAt;
+        private readonly int s6LearnedID;
+        private readonly int s6LearnedLevel;
+        private readonly int s7LearnedAt;
+        private readonly int s7LearnedID;
+        private readonly int s7LearnedLevel;
+        private readonly int s8LearnedAt;
+        private readonly int s8LearnedID;
+        private readonly int s8LearnedLevel;
+        private readonly int s9LearnedAt;
+        private readonly int s9LearnedID;
+        private readonly int s9LearnedLevel;
+        private readonly int s10LearnedAt;
+        private readonly int s10LearnedID;
+        private readonly int s10LearnedLevel;
+        private readonly int s11LearnedAt;
+        private readonly int s11LearnedID;
+        private readonly int s11LearnedLevel;
+        private readonly int s12LearnedAt;
+        private readonly int s12LearnedID;
+        private readonly int s12LearnedLevel;
 
-        private int weapon1Special1;
-        private int weapon1Special2;
-        private int weapon1Special3;
-        private int weapon2Special1;
-        private int weapon2Special2;
-        private int weapon2Special3;
-        private int weapon3Special1;
-        private int weapon3Special2;
-        private int weapon3Special3;
-        private int weapon4Special1;
-        private int weapon4Special2;
-        private int weapon4Special3;
-        private int baseLuck;
-        private int baseMov;
+        private readonly int weapon1Special1;
+        private readonly int weapon1Special2;
+        private readonly int weapon1Special3;
+        private readonly int weapon2Special1;
+        private readonly int weapon2Special2;
+        private readonly int weapon2Special3;
+        private readonly int weapon3Special1;
+        private readonly int weapon3Special2;
+        private readonly int weapon3Special3;
+        private readonly int weapon4Special1;
+        private readonly int weapon4Special2;
+        private readonly int weapon4Special3;
+        private readonly int baseLuck;
+        private readonly int baseMov;
 
-        private int baseTurns;
-        private int baseHPRegen;
-        private int baseMPRegen;
+        private readonly int baseTurns;
+        private readonly int baseHPRegen;
+        private readonly int baseMPRegen;
 
-        private int earthRes;
-        private int fireRes;
-        private int iceRes;
-        private int sparkRes;
-        private int windRes;
-        private int lightRes;
-        private int darkRes;
-        private int unknownRes;
-        private int slow;
-        private int support;
+        private readonly int earthRes;
+        private readonly int fireRes;
+        private readonly int iceRes;
+        private readonly int sparkRes;
+        private readonly int windRes;
+        private readonly int lightRes;
+        private readonly int darkRes;
+        private readonly int unknownRes;
+        private readonly int slow;
+        private readonly int support;
 
-        private int magicBonus;
-        private int movementType;
+        private readonly int magicBonus;
+        private readonly int movementType;
 
-        private int weaponEquipable1;
-        private int weaponEquipable2;
-        private int weaponEquipable3;
-        private int weaponEquipable4;
-        private int accessoryEquipable1;
-        private int accessoryEquipable2;
-        private int accessoryEquipable3;
-        private int accessoryEquipable4;
-
-        private int address;
-        private int offset;
-        private int checkType;
-        private int checkVersion2;
-
-        private int index;
-        private string name;
+        private readonly int weaponEquipable1;
+        private readonly int weaponEquipable2;
+        private readonly int weaponEquipable3;
+        private readonly int weaponEquipable4;
+        private readonly int accessoryEquipable1;
+        private readonly int accessoryEquipable2;
+        private readonly int accessoryEquipable3;
+        private readonly int accessoryEquipable4;
+        private readonly int offset;
+        private readonly int checkType;
+        private readonly int checkVersion2;
 
         public Stats(IX033_X031_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
@@ -209,12 +204,12 @@ namespace SF3.Models.X033_X031.Stats {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            ID = id;
+            Name = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x7B);
+            var start = offset + (id * 0x7B);
 
             character = start + 0x00;
             characterClass = start + 0x01;
@@ -336,16 +331,16 @@ namespace SF3.Models.X033_X031.Stats {
             accessoryEquipable3 = start + 0x79;
             accessoryEquipable4 = start + 0x7a;
 
-            address = offset + (id * 0x7B);
+            Address = offset + (id * 0x7B);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public bool IsPromoted => _fileEditor.GetByte((int) characterClass) >= 0x20;
+        public bool IsPromoted => _fileEditor.GetByte(characterClass) >= 0x20;
 
         public PromotionLevelType PromotionLevel {
             get {
-                int chClass = _fileEditor.GetByte((int)characterClass);
+                var chClass = _fileEditor.GetByte(characterClass);
                 return chClass < 0x20 ? PromotionLevelType.Unpromoted :
                        chClass < 0x48 ? PromotionLevelType.Promotion1 :
                                         PromotionLevelType.Promotion2;
@@ -460,10 +455,10 @@ namespace SF3.Models.X033_X031.Stats {
                     GrowthStats.GetAverageStatGrowthPerLevelAsPercent(growthValue);
         }
 
-        public int ID => index;
+        public int ID { get; }
 
         [BulkCopyRowName]
-        public string Name => name;
+        public string Name { get; }
 
         [BulkCopy]
         public int CharacterID {
@@ -1190,6 +1185,6 @@ namespace SF3.Models.X033_X031.Stats {
             set => _fileEditor.SetByte(accessoryEquipable4, (byte) value);
         }
 
-        public int Address => (address);
+        public int Address { get; }
     }
 }

@@ -4,7 +4,7 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using static SF3.Utils.Resources;
 
-namespace SF3.Models.X033_X031.InitialInfos {
+namespace SF3.Models.X033_X031.InitialInfo {
     public class InitialInfoList : ModelArray<InitialInfo> {
         public int MaxSize { get; } = 100;
 
@@ -13,8 +13,8 @@ namespace SF3.Models.X033_X031.InitialInfos {
             _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "ClassEquip.xml");
         }
 
-        private string _resourceFile;
-        private IX033_X031_FileEditor _fileEditor;
+        private readonly string _resourceFile;
+        private readonly IX033_X031_FileEditor _fileEditor;
 
         public override string ResourceFile => _resourceFile;
 
@@ -28,15 +28,14 @@ namespace SF3.Models.X033_X031.InitialInfos {
             try {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
                 var xml = MakeXmlReader(stream);
-                xml.Read();
+                _ = xml.Read();
                 while (!xml.EOF) {
-                    xml.Read();
+                    _ = xml.Read();
                     if (xml.HasAttributes) {
                         var newModel = new InitialInfo(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
-                        if (newModel.PresetID < 0 || newModel.PresetID >= MaxSize) {
+                        if (newModel.PresetID < 0 || newModel.PresetID >= MaxSize)
                             throw new IndexOutOfRangeException();
-                        }
                     }
                 }
             }
@@ -47,9 +46,7 @@ namespace SF3.Models.X033_X031.InitialInfos {
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }

@@ -12,7 +12,7 @@ namespace SF3.Models.X033_X031.WeaponLevel {
             _fileEditor = fileEditor;
         }
 
-        private IX033_X031_FileEditor _fileEditor;
+        private readonly IX033_X031_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/WeaponLevel.xml";
 
@@ -27,9 +27,9 @@ namespace SF3.Models.X033_X031.WeaponLevel {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
-                xml.Read();
+                _ = xml.Read();
                 while (!xml.EOF) {
-                    xml.Read();
+                    _ = xml.Read();
                     if (xml.HasAttributes) {
                         var newModel = new WeaponLevel(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
@@ -46,9 +46,7 @@ namespace SF3.Models.X033_X031.WeaponLevel {
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }

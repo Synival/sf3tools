@@ -13,8 +13,8 @@ namespace SF3.Models.X033_X031.Stats {
             _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "ClassList.xml");
         }
 
-        private string _resourceFile;
-        private IX033_X031_FileEditor _fileEditor;
+        private readonly string _resourceFile;
+        private readonly IX033_X031_FileEditor _fileEditor;
 
         public override string ResourceFile => _resourceFile;
 
@@ -29,9 +29,9 @@ namespace SF3.Models.X033_X031.Stats {
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
 
                 var xml = MakeXmlReader(stream);
-                xml.Read();
+                _ = xml.Read();
                 while (!xml.EOF) {
-                    xml.Read();
+                    _ = xml.Read();
                     if (xml.HasAttributes) {
                         var newModel = new Stats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _models = _models.ExpandedWith(newModel);
@@ -48,9 +48,7 @@ namespace SF3.Models.X033_X031.Stats {
                 return false;
             }
             finally {
-                if (stream != null) {
-                    stream.Close();
-                }
+                stream?.Close();
             }
             return true;
         }

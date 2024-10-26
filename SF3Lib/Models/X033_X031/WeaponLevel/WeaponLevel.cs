@@ -4,21 +4,16 @@ using SF3.Types;
 
 namespace SF3.Models.X033_X031.WeaponLevel {
     public class WeaponLevel {
-        private IX033_X031_FileEditor _fileEditor;
+        private readonly IX033_X031_FileEditor _fileEditor;
 
         //starting stat table
-        private int level1;
-        private int level2;
-        private int level3;
-        private int level4;
-
-        private int address;
-        private int offset;
-        private int checkType;
-        private int checkVersion2;
-
-        private int index;
-        private string name;
+        private readonly int level1;
+        private readonly int level2;
+        private readonly int level3;
+        private readonly int level4;
+        private readonly int offset;
+        private readonly int checkType;
+        private readonly int checkVersion2;
 
         public WeaponLevel(IX033_X031_FileEditor fileEditor, int id, string text) {
             _fileEditor = fileEditor;
@@ -74,27 +69,27 @@ namespace SF3.Models.X033_X031.WeaponLevel {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            index = id;
-            name = text;
+            WeaponLevelID = id;
+            WeaponLevelName = text;
 
             //int start = 0x354c + (id * 24);
 
-            int start = offset + (id * 0x11);
+            var start = offset + (id * 0x11);
 
             level1 = start + 0x02;
             level2 = start + 0x06;
             level3 = start + 0x0a;
             level4 = start + 0x0e;
 
-            address = offset + (id * 0x11);
+            WeaponLevelAddress = offset + (id * 0x11);
             //address = 0x0354c + (id * 0x18);
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int WeaponLevelID => index;
+        public int WeaponLevelID { get; }
 
         [BulkCopyRowName]
-        public string WeaponLevelName => name;
+        public string WeaponLevelName { get; }
 
         [BulkCopy]
         public int WLevel1 {
@@ -120,6 +115,6 @@ namespace SF3.Models.X033_X031.WeaponLevel {
             set => _fileEditor.SetWord(level4, value);
         }
 
-        public int WeaponLevelAddress => (address);
+        public int WeaponLevelAddress { get; }
     }
 }
