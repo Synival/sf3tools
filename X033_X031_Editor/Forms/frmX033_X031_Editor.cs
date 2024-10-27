@@ -64,19 +64,19 @@ namespace SF3.X033_X031_Editor.Forms {
                 return false;
 
             if (!tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>() {
-                new PopulateTabConfig(tabStats, olvStats, FileEditor.StatsList),
-                new PopulateTabConfig(tabSpells, olvSpells, FileEditor.StatsList),
-                new PopulateTabConfig(tabEquipStatistics, olvEquipStatistics, FileEditor.StatsList),
-                new PopulateTabConfig(tabMiscellaneous, olvMiscellaneous, FileEditor.StatsList),
-                new PopulateTabConfig(tabInitialInfo, olvInitialInfo, FileEditor.InitialInfoList),
-                new PopulateTabConfig(tabWeaponLevelReq, olvWeaponLevelReq, FileEditor.WeaponLevelList),
-                new PopulateTabConfig(tabCurveCalc, olvCurveCalc, FileEditor.StatsList)
+                new PopulateTabConfig(tabStats, olvStats, FileEditor.StatsTable),
+                new PopulateTabConfig(tabSpells, olvSpells, FileEditor.StatsTable),
+                new PopulateTabConfig(tabEquipStatistics, olvEquipStatistics, FileEditor.StatsTable),
+                new PopulateTabConfig(tabMiscellaneous, olvMiscellaneous, FileEditor.StatsTable),
+                new PopulateTabConfig(tabInitialInfo, olvInitialInfo, FileEditor.InitialInfoTable),
+                new PopulateTabConfig(tabWeaponLevelReq, olvWeaponLevelReq, FileEditor.WeaponLevelTable),
+                new PopulateTabConfig(tabCurveCalc, olvCurveCalc, FileEditor.StatsTable)
             })) {
                 return false;
             }
 
             // Update curve graph controls.
-            cbCurveGraphCharacter.DataSource = FileEditor.StatsList.Rows;
+            cbCurveGraphCharacter.DataSource = FileEditor.StatsTable.Rows;
             cbCurveGraphCharacter.DisplayMember = "Name";
 
             return true;
@@ -91,8 +91,8 @@ namespace SF3.X033_X031_Editor.Forms {
 
         private void tabMain_Click(object sender, EventArgs e) {
             olvCurveCalc.ClearObjects();
-            if (FileEditor?.StatsList != null)
-                olvCurveCalc.AddObjects(FileEditor?.StatsList.Rows);
+            if (FileEditor?.StatsTable != null)
+                olvCurveCalc.AddObjects(FileEditor?.StatsTable.Rows);
         }
 
         private void CurveGraphCharacterComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshCurveGraph();
@@ -105,7 +105,7 @@ namespace SF3.X033_X031_Editor.Forms {
 
             // Get the stats model for the selected character.
             var index = cbCurveGraphCharacter.SelectedIndex;
-            var stats = (index >= 0 && index < FileEditor.StatsList.Rows.Length) ? FileEditor.StatsList.Rows[index] : null;
+            var stats = (index >= 0 && index < FileEditor.StatsTable.Rows.Length) ? FileEditor.StatsTable.Rows[index] : null;
 
             // We'll need to use some different values depending on the promotion level.
             var promotionLevel = (int?)stats?.PromotionLevel ?? 0;

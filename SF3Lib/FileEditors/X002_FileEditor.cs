@@ -10,41 +10,41 @@ namespace SF3.FileEditors {
 
         public override IEnumerable<ITable> MakeTables() {
             var tables = new List<ITable>() {
-                (ItemList = new ItemTable(this)),
-                (SpellList = new SpellTable(this)),
-                (PresetList = new PresetTable(this)),
-                (LoadList = new LoadTable(this)),
-                (StatList = new StatTable(this)),
-                (WeaponRankList = new WeaponRankTable(this)),
-                (AttackResistList = new AttackResistTable(this)),
-                (LoadedOverrideList = new LoadedOverrideTable(this))
+                (ItemTable = new ItemTable(this)),
+                (SpellTable = new SpellTable(this)),
+                (PresetTable = new PresetTable(this)),
+                (LoadTable = new LoadTable(this)),
+                (StatTable = new StatTable(this)),
+                (WeaponRankTable = new WeaponRankTable(this)),
+                (AttackResistTable = new AttackResistTable(this)),
+                (LoadedOverrideTable = new LoadedOverrideTable(this))
             };
 
             if (Scenario == ScenarioType.Scenario1)
-                tables.Add(WarpList = new WarpTable(this));
+                tables.Add(WarpTable = new WarpTable(this));
 
             return tables;
         }
 
         public override void DestroyTables() {
-            ItemList = null;
-            SpellList = null;
-            PresetList = null;
-            LoadList = null;
-            StatList = null;
-            WeaponRankList = null;
-            AttackResistList = null;
-            LoadedOverrideList = null;
+            ItemTable = null;
+            SpellTable = null;
+            PresetTable = null;
+            LoadTable = null;
+            StatTable = null;
+            WeaponRankTable = null;
+            AttackResistTable = null;
+            LoadedOverrideTable = null;
         }
 
-        public ItemTable ItemList { get; private set; }
-        public SpellTable SpellList { get; private set; }
-        public PresetTable PresetList { get; private set; }
-        public LoadTable LoadList { get; private set; }
-        public StatTable StatList { get; private set; }
-        public WeaponRankTable WeaponRankList { get; private set; }
-        public AttackResistTable AttackResistList { get; private set; }
-        public WarpTable WarpList { get; private set; }
-        public LoadedOverrideTable LoadedOverrideList { get; private set; }
+        public ItemTable ItemTable { get; private set; }
+        public SpellTable SpellTable { get; private set; }
+        public PresetTable PresetTable { get; private set; }
+        public LoadTable LoadTable { get; private set; }
+        public StatTable StatTable { get; private set; }
+        public WeaponRankTable WeaponRankTable { get; private set; }
+        public AttackResistTable AttackResistTable { get; private set; }
+        public WarpTable WarpTable { get; private set; }
+        public LoadedOverrideTable LoadedOverrideTable { get; private set; }
     }
 }

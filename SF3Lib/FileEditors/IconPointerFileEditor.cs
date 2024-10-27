@@ -12,23 +12,23 @@ namespace SF3.FileEditors {
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (SpellIconList = new SpellIconTable(this)),
-                (ItemIconList = new ItemIconTable(this))
+                (SpellIconTable = new SpellIconTable(this)),
+                (ItemIconTable = new ItemIconTable(this))
             };
         }
 
         public override void DestroyTables() {
-            SpellIconList = null;
-            ItemIconList = null;
+            SpellIconTable = null;
+            ItemIconTable = null;
         }
 
         public bool IsX026 { get; }
 
         [BulkCopyRecurse]
-        public SpellIconTable SpellIconList { get; private set; }
+        public SpellIconTable SpellIconTable { get; private set; }
 
         [BulkCopyRecurse]
-        public ItemIconTable ItemIconList { get; private set; }
+        public ItemIconTable ItemIconTable { get; private set; }
 
         protected override string BaseTitle => IsLoaded
             ? base.BaseTitle + (IsX026 ? " (X026)" : "")

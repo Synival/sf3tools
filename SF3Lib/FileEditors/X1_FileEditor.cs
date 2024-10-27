@@ -52,54 +52,54 @@ namespace SF3.FileEditors {
 
             // Add tables present for both towns and battles.
             var tables = new List<ITable> {
-                (TreasureList = new TreasureTable(this))
+                (TreasureTable = new TreasureTable(this))
             };
 
             if (isntScn1OrBTL99)
-                tables.Add(WarpList = new WarpTable(this));
+                tables.Add(WarpTable = new WarpTable(this));
 
             // Add tables only present for battles.
             if (IsBattle) {
                 tables.AddRange(new List<ITable>() {
-                    (HeaderList = new HeaderTable(this)),
-                    (SlotList = new SlotTable(this)),
-                    (AIList = new AITable(this)),
-                    (SpawnZoneList = new SpawnZoneTable(this)),
-                    (BattlePointersList = new BattlePointersTable(this)),
-                    (CustomMovementList = new CustomMovementTable(this)),
+                    (HeaderTable = new HeaderTable(this)),
+                    (SlotTable = new SlotTable(this)),
+                    (AITable = new AITable(this)),
+                    (SpawnZoneTable = new SpawnZoneTable(this)),
+                    (BattlePointersTable = new BattlePointersTable(this)),
+                    (CustomMovementTable = new CustomMovementTable(this)),
                 });
 
                 if (isntScn1OrBTL99)
-                    tables.Add(TileList = new TileMovementTable(this));
+                    tables.Add(TileMovementTable = new TileMovementTable(this));
             }
 
             // Add tables only present for towns.
             if (!IsBattle) {
                 tables.AddRange(new List<ITable>() {
-                    (NpcList = new NpcTable(this)),
-                    (EnterList = new EnterTable(this))
+                    (NpcTable = new NpcTable(this)),
+                    (EnterTable = new EnterTable(this))
                 });
 
                 if (isntScn1OrBTL99)
-                    tables.Add(ArrowList = new ArrowTable(this));
+                    tables.Add(ArrowTable = new ArrowTable(this));
             }
 
             return tables;
         }
 
         public override void DestroyTables() {
-            SlotList = null;
-            HeaderList = null;
-            AIList = null;
-            SpawnZoneList = null;
-            BattlePointersList = null;
-            TreasureList = null;
-            CustomMovementList = null;
-            WarpList = null;
-            TileList = null;
-            NpcList = null;
-            EnterList = null;
-            ArrowList = null;
+            SlotTable = null;
+            HeaderTable = null;
+            AITable = null;
+            SpawnZoneTable = null;
+            BattlePointersTable = null;
+            TreasureTable = null;
+            CustomMovementTable = null;
+            WarpTable = null;
+            TileMovementTable = null;
+            NpcTable = null;
+            EnterTable = null;
+            ArrowTable = null;
         }
 
         protected override string BaseTitle => IsLoaded
@@ -134,17 +134,17 @@ namespace SF3.FileEditors {
 
         public bool IsBTL99 { get; }
 
-        public SlotTable SlotList { get; private set; }
-        public HeaderTable HeaderList { get; private set; }
-        public AITable AIList { get; private set; }
-        public SpawnZoneTable SpawnZoneList { get; private set; }
-        public BattlePointersTable BattlePointersList { get; private set; }
-        public TreasureTable TreasureList { get; private set; }
-        public CustomMovementTable CustomMovementList { get; private set; }
-        public WarpTable WarpList { get; private set; }
-        public TileMovementTable TileList { get; private set; }
-        public NpcTable NpcList { get; private set; }
-        public EnterTable EnterList { get; private set; }
-        public ArrowTable ArrowList { get; private set; }
+        public SlotTable SlotTable { get; private set; }
+        public HeaderTable HeaderTable { get; private set; }
+        public AITable AITable { get; private set; }
+        public SpawnZoneTable SpawnZoneTable { get; private set; }
+        public BattlePointersTable BattlePointersTable { get; private set; }
+        public TreasureTable TreasureTable { get; private set; }
+        public CustomMovementTable CustomMovementTable { get; private set; }
+        public WarpTable WarpTable { get; private set; }
+        public TileMovementTable TileMovementTable { get; private set; }
+        public NpcTable NpcTable { get; private set; }
+        public EnterTable EnterTable { get; private set; }
+        public ArrowTable ArrowTable { get; private set; }
     }
 }

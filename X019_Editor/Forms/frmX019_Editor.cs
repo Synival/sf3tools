@@ -42,11 +42,11 @@ namespace SF3.X019_Editor.Forms {
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>() {
-                new PopulateTabConfig(tabMonsterTab1, olvMonsterTab1, FileEditor.MonsterList),
-                new PopulateTabConfig(tabMonsterTab2, olvMonsterTab2, FileEditor.MonsterList),
-                new PopulateTabConfig(tabMonsterTab3, olvMonsterTab3, FileEditor.MonsterList),
-                new PopulateTabConfig(tabMonsterTab4, olvMonsterTab4, FileEditor.MonsterList),
-                new PopulateTabConfig(tabMonsterTab5, olvMonsterTab5, FileEditor.MonsterList),
+                new PopulateTabConfig(tabMonsterTab1, olvMonsterTab1, FileEditor.MonsterTable),
+                new PopulateTabConfig(tabMonsterTab2, olvMonsterTab2, FileEditor.MonsterTable),
+                new PopulateTabConfig(tabMonsterTab3, olvMonsterTab3, FileEditor.MonsterTable),
+                new PopulateTabConfig(tabMonsterTab4, olvMonsterTab4, FileEditor.MonsterTable),
+                new PopulateTabConfig(tabMonsterTab5, olvMonsterTab5, FileEditor.MonsterTable),
             });
         }
 

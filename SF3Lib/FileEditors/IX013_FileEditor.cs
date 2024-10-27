@@ -2,19 +2,19 @@ using SF3.Tables.X013;
 
 namespace SF3.FileEditors {
     public interface IX013_FileEditor : ISF3FileEditor {
-        SpecialTable SpecialsList { get; }
-        SupportTypeTable SupportTypeList { get; }
-        FriendshipExpTable FriendshipExpList { get; }
-        SupportStatsTable SupportStatsList { get; }
-        SoulmateTable SoulmateList { get; }
-        SoulfailTable SoulfailList { get; }
-        MagicBonusTable MagicBonusList { get; }
-        CritModTable CritModList { get; }
-        CritrateTable CritrateList { get; }
-        SpecialChanceTable SpecialChanceList { get; }
-        ExpLimitTable ExpLimitList { get; }
-        HealExpTable HealExpList { get; }
-        WeaponSpellRankTable WeaponSpellRankList { get; }
-        StatusEffectTable StatusEffectList { get; }
+        SpecialTable SpecialsTable { get; }
+        SupportTypeTable SupportTypeTable { get; }
+        FriendshipExpTable FriendshipExpTable { get; }
+        SupportStatsTable SupportStatsTable { get; }
+        SoulmateTable SoulmateTable { get; }
+        SoulfailTable SoulfailTable { get; }
+        MagicBonusTable MagicBonusTable { get; }
+        CritModTable CritModTable { get; }
+        CritrateTable CritrateTable { get; }
+        SpecialChanceTable SpecialChanceTable { get; }
+        ExpLimitTable ExpLimitTable { get; }
+        HealExpTable HealExpTable { get; }
+        WeaponSpellRankTable WeaponSpellRankTable { get; }
+        StatusEffectTable StatusEffectTable { get; }
     }
 }

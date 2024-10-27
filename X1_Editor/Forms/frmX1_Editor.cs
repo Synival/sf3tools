@@ -58,21 +58,21 @@ namespace SF3.X1_Editor.Forms {
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>() {
-                new PopulateTabConfig(tabHeader, olvHeader, FileEditor.HeaderList),
-                new PopulateTabConfig(tabSlotTab1, olvSlotTab1, FileEditor.SlotList),
-                new PopulateTabConfig(tabSlotTab2, olvSlotTab2, FileEditor.SlotList),
-                new PopulateTabConfig(tabSlotTab3, olvSlotTab3, FileEditor.SlotList),
-                new PopulateTabConfig(tabSlotTab4, olvSlotTab4, FileEditor.SlotList),
-                new PopulateTabConfig(tabAITargetPosition, olvAITargetPosition, FileEditor.AIList),
-                new PopulateTabConfig(tabSpawnZones, olvSpawnZones, FileEditor.SpawnZoneList),
-                new PopulateTabConfig(tabBattlePointers, olvBattlePointers, FileEditor.BattlePointersList),
-                new PopulateTabConfig(tabScriptedMovement, olvScriptedMovement, FileEditor.CustomMovementList),
-                new PopulateTabConfig(tabInteractables, olvInteractables, FileEditor.TreasureList),
-                new PopulateTabConfig(tabTownNpcs, olvTownNpcs, FileEditor.NpcList),
-                new PopulateTabConfig(tabNonBattleEnter, olvNonBattleEnter, FileEditor.EnterList),
-                new PopulateTabConfig(tabArrows, olvArrows, FileEditor.ArrowList),
-                new PopulateTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpList),
-                new PopulateTabConfig(tabTileData, olvTileData, FileEditor.TileList),
+                new PopulateTabConfig(tabHeader, olvHeader, FileEditor.HeaderTable),
+                new PopulateTabConfig(tabSlotTab1, olvSlotTab1, FileEditor.SlotTable),
+                new PopulateTabConfig(tabSlotTab2, olvSlotTab2, FileEditor.SlotTable),
+                new PopulateTabConfig(tabSlotTab3, olvSlotTab3, FileEditor.SlotTable),
+                new PopulateTabConfig(tabSlotTab4, olvSlotTab4, FileEditor.SlotTable),
+                new PopulateTabConfig(tabAITargetPosition, olvAITargetPosition, FileEditor.AITable),
+                new PopulateTabConfig(tabSpawnZones, olvSpawnZones, FileEditor.SpawnZoneTable),
+                new PopulateTabConfig(tabBattlePointers, olvBattlePointers, FileEditor.BattlePointersTable),
+                new PopulateTabConfig(tabScriptedMovement, olvScriptedMovement, FileEditor.CustomMovementTable),
+                new PopulateTabConfig(tabInteractables, olvInteractables, FileEditor.TreasureTable),
+                new PopulateTabConfig(tabTownNpcs, olvTownNpcs, FileEditor.NpcTable),
+                new PopulateTabConfig(tabNonBattleEnter, olvNonBattleEnter, FileEditor.EnterTable),
+                new PopulateTabConfig(tabArrows, olvArrows, FileEditor.ArrowTable),
+                new PopulateTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpTable),
+                new PopulateTabConfig(tabTileData, olvTileData, FileEditor.TileMovementTable),
             });
         }
 

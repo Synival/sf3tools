@@ -20,12 +20,12 @@ namespace SF3.X002_Editor.Forms {
 
         private void tabMain_Click(object sender, EventArgs e) {
             olvSpells.ClearObjects();
-            if (FileEditor?.SpellList != null)
-                olvSpells.AddObjects(FileEditor.SpellList.Rows);
+            if (FileEditor?.SpellTable != null)
+                olvSpells.AddObjects(FileEditor.SpellTable.Rows);
 
             olvStatBoost.ClearObjects();
-            if (FileEditor?.StatList != null)
-                olvStatBoost.AddObjects(FileEditor.StatList.Rows);
+            if (FileEditor?.StatTable != null)
+                olvStatBoost.AddObjects(FileEditor.StatTable.Rows);
         }
 
         protected override string FileDialogFilter => "SF3 Data (X002.BIN)|X002.BIN|" + base.FileDialogFilter;
@@ -37,15 +37,15 @@ namespace SF3.X002_Editor.Forms {
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()             {
-                new PopulateTabConfig(tabItems, olvItems, FileEditor.ItemList),
-                new PopulateTabConfig(tabSpells, olvSpells, FileEditor.SpellList),
-                new PopulateTabConfig(tabPreset, olvPreset, FileEditor.PresetList),
-                new PopulateTabConfig(tabLoaded, olvLoaded, FileEditor.LoadList),
-                new PopulateTabConfig(tabLoadedOverride, olvLoadedOverride, FileEditor.LoadedOverrideList),
-                new PopulateTabConfig(tabStatBoost, olvStatBoost, FileEditor.StatList),
-                new PopulateTabConfig(tabWeaponRankAttack, olvWeaponRankAttack, FileEditor.WeaponRankList),
-                new PopulateTabConfig(tabAttackResist, olvAttackResist, FileEditor.AttackResistList),
-                new PopulateTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpList),
+                new PopulateTabConfig(tabItems, olvItems, FileEditor.ItemTable),
+                new PopulateTabConfig(tabSpells, olvSpells, FileEditor.SpellTable),
+                new PopulateTabConfig(tabPreset, olvPreset, FileEditor.PresetTable),
+                new PopulateTabConfig(tabLoaded, olvLoaded, FileEditor.LoadTable),
+                new PopulateTabConfig(tabLoadedOverride, olvLoadedOverride, FileEditor.LoadedOverrideTable),
+                new PopulateTabConfig(tabStatBoost, olvStatBoost, FileEditor.StatTable),
+                new PopulateTabConfig(tabWeaponRankAttack, olvWeaponRankAttack, FileEditor.WeaponRankTable),
+                new PopulateTabConfig(tabAttackResist, olvAttackResist, FileEditor.AttackResistTable),
+                new PopulateTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpTable),
             });
         }
 

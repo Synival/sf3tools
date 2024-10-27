@@ -40,8 +40,8 @@ namespace SF3.IconPointerEditor.Forms {
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>() {
-                new PopulateTabConfig(tabSpellIcons, olvSpellIcons, FileEditor.SpellIconList),
-                new PopulateTabConfig(tabItemIcons, olvItemIcons, FileEditor.ItemIconList)
+                new PopulateTabConfig(tabSpellIcons, olvSpellIcons, FileEditor.SpellIconTable),
+                new PopulateTabConfig(tabItemIcons, olvItemIcons, FileEditor.ItemIconTable)
             });
         }
 

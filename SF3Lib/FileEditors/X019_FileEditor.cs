@@ -11,15 +11,15 @@ namespace SF3.FileEditors {
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (MonsterList = new MonsterTable(this, IsX044))
+                (MonsterTable = new MonsterTable(this, IsX044))
             };
         }
 
         public override void DestroyTables() {
-            MonsterList = null;
+            MonsterTable = null;
         }
 
-        public MonsterTable MonsterList { get; private set; }
+        public MonsterTable MonsterTable { get; private set; }
 
         public bool IsX044 { get; }
 
