@@ -264,6 +264,9 @@
     <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="Resources\DroprateList.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\PD\FileIndexes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

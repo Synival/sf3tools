@@ -56,7 +56,7 @@ namespace SF3.Models {
         private readonly int gold;
         private readonly int drop;
         private readonly int unknown7;
-        private readonly int unknown8;
+        private readonly int droprate;
         private readonly int unknown9;
         private readonly int unknown10;
         private readonly int magicType;
@@ -133,7 +133,7 @@ namespace SF3.Models {
             gold = Address + 56; //2 byte
             drop = Address + 58; //2 byte
             unknown7 = Address + 60;
-            unknown8 = Address + 61; //droprate/drops items when attacked. Set E for thief rules
+            droprate = Address + 61; //droprate/drops items when attacked. Set E for thief rules
             unknown9 = Address + 62; //slow bonus?
             unknown10 = Address + 63; //support bonus?
             magicType = Address + 64;
@@ -419,9 +419,9 @@ namespace SF3.Models {
             set => Editor.SetByte(unknown7, (byte) value);
         }
 
-        public int Unknown8 {
-            get => Editor.GetByte(unknown8);
-            set => Editor.SetByte(unknown8, (byte) value);
+        public DroprateValue Droprate {
+            get => new DroprateValue(Editor.GetByte(droprate));
+            set => Editor.SetByte(droprate, (byte) value.Value);
         }
 
         public int Unknown9 {

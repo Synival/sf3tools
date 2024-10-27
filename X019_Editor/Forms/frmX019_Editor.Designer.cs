@@ -865,10 +865,10 @@ namespace SF3.X019_Editor.Forms
             // 
             // lvcMonsterTab4DroprateType
             // 
-            this.lvcMonsterTab4DroprateType.AspectName = "Unknown8";
+            this.lvcMonsterTab4DroprateType.AspectName = "Droprate";
             this.lvcMonsterTab4DroprateType.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab4DroprateType.Text = "Droprate/type";
-            this.lvcMonsterTab4DroprateType.Width = 80;
+            this.lvcMonsterTab4DroprateType.Width = 100;
             // 
             // lvcMonsterTab4SlowPlus
             // 
