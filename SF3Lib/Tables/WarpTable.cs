@@ -15,6 +15,7 @@ namespace SF3.Tables {
         }
 
         private readonly ISF3FileEditor _fileEditor;
+        public override int Address => throw new NotImplementedException();
 
         public override string ResourceFile => _fileEditor.Scenario == ScenarioType.Scenario1 ? "Resources/S1/Warps.xml" : null;
 

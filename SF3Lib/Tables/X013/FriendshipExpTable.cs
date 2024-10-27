@@ -16,6 +16,7 @@ namespace SF3.Tables.X013 {
         private readonly IX013_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/ExpList.xml";
+        public override int Address => throw new NotImplementedException();
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.

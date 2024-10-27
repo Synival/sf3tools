@@ -1,3 +1,4 @@
+using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Tables {
@@ -12,15 +13,26 @@ namespace SF3.Tables {
         bool Load();
 
         /// <summary>
+        /// Resets all loaded data.
+        /// </summary>
+        /// <returns>'true' when a reset has occurred or nothing was loaded.</returns>
+        bool Reset();
+
+        /// <summary>
+        /// The editor used for this table.
+        /// TODO: make this just an IByteEditor!
+        /// </summary>
+        ISF3FileEditor FileEditor { get; }
+
+        /// <summary>
         /// The Scenario the contained rows belong to.
         /// </summary>
         ScenarioType Scenario { get; }
 
         /// <summary>
-        /// Resets all loaded data.
+        /// The address of the first row of the table.
         /// </summary>
-        /// <returns>'true' when a reset has occurred or nothing was loaded.</returns>
-        bool Reset();
+        int Address { get; }
 
         /// <summary>
         /// Is 'true' when a successful Load() has occurred.

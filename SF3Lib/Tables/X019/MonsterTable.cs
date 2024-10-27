@@ -23,6 +23,7 @@ namespace SF3.Tables.X019 {
         private readonly bool _isX044;
 
         public override string ResourceFile => _resourceFile;
+        public override int Address => throw new NotImplementedException();
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.

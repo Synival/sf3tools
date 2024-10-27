@@ -12,8 +12,8 @@ namespace SF3.FileEditors {
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (SpellIconTable = new SpellIconTable(this)),
-                (ItemIconTable = new ItemIconTable(this))
+                (SpellIconTable = new SpellIconTable(this, IsX026)),
+                (ItemIconTable = new ItemIconTable(this, IsX026))
             };
         }
 

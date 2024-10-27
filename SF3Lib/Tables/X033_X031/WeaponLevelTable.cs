@@ -16,6 +16,7 @@ namespace SF3.Tables.X033_X031 {
         private readonly IX033_X031_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/WeaponLevel.xml";
+        public override int Address => throw new NotImplementedException();
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.

@@ -18,6 +18,7 @@ namespace SF3.Tables.X002 {
         private readonly IX002_FileEditor _fileEditor;
 
         public override string ResourceFile => _resourceFile;
+        public override int Address => throw new NotImplementedException();
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.

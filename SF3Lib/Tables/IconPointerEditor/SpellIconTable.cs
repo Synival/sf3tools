@@ -3,23 +3,83 @@ using System.IO;
 using CommonLib.Extensions;
 using SF3.FileEditors;
 using SF3.Models.IconPointerEditor;
+using SF3.Types;
 using static SF3.Utils.Resources;
 
 namespace SF3.Tables.IconPointerEditor {
     public class SpellIconTable : Table<SpellIcon> {
-        public override int? MaxSize => 256;
+        public SpellIconTable(IIconPointerFileEditor fileEditor, bool isX026) : base(fileEditor) {
+            ResourceFile = ResourceFileForScenario(FileEditor.Scenario, "SpellIcons.xml");
+            IsX026 = isX026;
 
-        public SpellIconTable(IIconPointerFileEditor fileEditor) : base(fileEditor) {
-            _fileEditor = fileEditor;
-            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "SpellIcons.xml");
+            if (Scenario == ScenarioType.Scenario1) {
+                int offset, sub;
+                if (IsX026) {
+                    offset = 0x0a30; //scn1 initial pointer
+                    sub = 0x06078000;
+                }
+                else {
+                    offset = 0x00000030; //scn1 initial pointer
+                    sub = 0x06068000;
+                }
+
+                Address = FileEditor.GetDouble(offset) - sub;
+                RealOffsetStart = 0xFF8E;
+            }
+            else if (Scenario == ScenarioType.Scenario2) {
+                int offset, sub;
+                if (IsX026) {
+                    offset = 0x0a1c; //scn2 x026 initial pointer
+                    sub = 0x06078000;
+                }
+                else {
+                    offset = 0x00000030; //scn2 initial pointer
+                    sub = 0x06068000;
+                }
+
+                Address = FileEditor.GetDouble(offset) - sub;
+                RealOffsetStart = 0xFC86;
+            }
+            else if (Scenario == ScenarioType.Scenario3) {
+                int offset, sub;
+                if (IsX026) {
+                    offset = 0x09cc; //scn2 x026 initial pointer
+                    sub = 0x06078000;
+                }
+                else {
+                    offset = 0x00000030; //scn3 initial pointer
+                    sub = 0x06068000;
+                }
+
+                Address = FileEditor.GetDouble(offset) - sub;
+                RealOffsetStart = 0x12A48;
+            }
+            else if (Scenario == ScenarioType.PremiumDisk) {
+                int offset, sub;
+                if (IsX026) {
+                    offset = 0x07a0; //pd x026 initial pointer
+                    sub = 0x06078000;
+                }
+                else {
+                    offset = 0x00000030; //pd initial pointer
+                    sub = 0x06068000;
+                }
+
+                Address = FileEditor.GetDouble(offset) - sub; //pointer
+                RealOffsetStart = 0x12A32;
+            }
+            else
+                throw new ArgumentException(nameof(fileEditor) + ".Scenario");
         }
 
-        private readonly string _resourceFile;
-        private readonly IIconPointerFileEditor _fileEditor;
-
-        public override string ResourceFile => _resourceFile;
-
         public override bool Load()
-            => LoadFromResourceFile((id, name) => new SpellIcon(_fileEditor, id, name));
+            => LoadFromResourceFile((id, name, address) => new SpellIcon(FileEditor, id, name, address, Scenario, IsX026, RealOffsetStart));
+
+        public override string ResourceFile { get; }
+        public override int Address { get; }
+        public override int? MaxSize => 256;
+
+        public bool IsX026 { get; }
+        public int RealOffsetStart { get; }
     }
 }

@@ -38,6 +38,7 @@ namespace SF3.Tables.X1 {
         private readonly IX1_FileEditor _fileEditor;
 
         public override string ResourceFile => "Resources/X1AI.xml";
+        public override int Address => throw new NotImplementedException();
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.

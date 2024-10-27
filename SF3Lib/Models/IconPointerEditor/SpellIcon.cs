@@ -8,90 +8,24 @@ namespace SF3.Models.IconPointerEditor {
     public class SpellIcon : IModel {
         //SPELLS
         private readonly int theSpellIcon;
-        private readonly int realOffset;
 
-        public SpellIcon(IIconPointerFileEditor fileEditor, int id, string name) {
-            Editor = fileEditor;
-            Scenario = fileEditor.Scenario;
-            IsX026 = fileEditor.IsX026;
-            ID = id;
-            Name = name;
+        public SpellIcon(IByteEditor fileEditor, int id, string name, int address, ScenarioType scenario, bool isX026, int realOffsetStart) {
+            Editor          = fileEditor;
+            ID              = id;
+            Name            = name;
+            Address         = address;
 
-            int offset;
-            int sub;
-
-            if (Scenario == ScenarioType.Scenario1) {
-                if (IsX026) {
-                    offset = 0x0a30; //scn1 initial pointer
-                    sub = 0x06078000;
-                }
-                else {
-                    offset = 0x00000030; //scn1 initial pointer
-                    sub = 0x06068000;
-                }
-
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //pointer
-
-                realOffset = 0xFF8E;
-            }
-            else if (Scenario == ScenarioType.Scenario2) {
-                if (IsX026) {
-                    offset = 0x0a1c; //scn2 x026 initial pointer
-                    sub = 0x06078000;
-                }
-                else {
-                    offset = 0x00000030; //scn2 initial pointer
-                    sub = 0x06068000;
-                }
-
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //pointer
-
-                realOffset = 0xFC86;
-            }
-            else if (Scenario == ScenarioType.Scenario3) {
-                if (IsX026) {
-                    offset = 0x09cc; //scn2 x026 initial pointer
-                    sub = 0x06078000;
-                }
-                else {
-                    offset = 0x00000030; //scn3 initial pointer
-                    sub = 0x06068000;
-                }
-
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //pointer
-
-                realOffset = 0x12A48;
-            }
-            else if (Scenario == ScenarioType.PremiumDisk) {
-                if (IsX026) {
-                    offset = 0x07a0; //pd x026 initial pointer
-                    sub = 0x06078000;
-                }
-                else {
-                    offset = 0x00000030; //pd initial pointer
-                    sub = 0x06068000;
-                }
-
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //pointer
-
-                realOffset = 0x12A32;
-            }
-            else
-                throw new ArgumentException(nameof(fileEditor) + ".Scenario");
+            IsSc1X026       = scenario == ScenarioType.Scenario1 && isX026;
+            RealOffsetStart = realOffsetStart;
+            SpellName       = new SpellValue(scenario, ID).Name;
 
             if (IsSc1X026) {
                 Size = 2;
-                Address = offset + (id * Size);
-                theSpellIcon = Address; //1 byte
+                theSpellIcon = Address; // 1 byte
             }
             else {
                 Size = 4;
-                Address = offset + (id * Size);
-                theSpellIcon = Address; //2 bytes  
+                theSpellIcon = Address; // 2 bytes  
             }
         }
 
@@ -103,11 +37,9 @@ namespace SF3.Models.IconPointerEditor {
         public int Address { get; }
         public int Size { get; }
 
-        public string SpellName => new SpellValue(Scenario, ID).Name;
-
-        public ScenarioType Scenario { get; }
-        public bool IsX026 { get; }
-        public bool IsSc1X026 => IsX026 && Scenario == ScenarioType.Scenario1;
+        public bool IsSc1X026 { get; }
+        public string SpellName { get; }
+        public int RealOffsetStart { get; }
 
         [BulkCopy]
         public int TheSpellIcon {
@@ -126,8 +58,8 @@ namespace SF3.Models.IconPointerEditor {
 
         [BulkCopy]
         public int RealOffset {
-            get => TheSpellIcon + realOffset;
-            set => TheSpellIcon = value - realOffset;
+            get => TheSpellIcon + RealOffsetStart;
+            set => TheSpellIcon = value - RealOffsetStart;
         }
     }
 }

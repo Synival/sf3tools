@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using CommonLib.Attributes;
-using CommonLib.Extensions;
 using SF3.FileEditors;
+using SF3.Models;
 using SF3.Types;
 using static SF3.Utils.Resources;
 
@@ -15,7 +14,7 @@ namespace SF3.Tables {
     /// </summary>
     public abstract class Table : ITable {
         protected Table(ISF3FileEditor fileEditor) {
-            _fileEditor = fileEditor;
+            FileEditor = fileEditor;
         }
 
         /// <summary>
@@ -30,15 +29,14 @@ namespace SF3.Tables {
         /// <returns>'true' if successful (or no data is loaded), 'false' on failure.</returns>
         public abstract bool Reset();
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
+        public ISF3FileEditor FileEditor { get; }
+        public ScenarioType Scenario => FileEditor.Scenario;
+        public abstract int Address { get; }
 
         public abstract string ResourceFile { get; }
         public abstract bool IsLoaded { get; }
         public abstract object[] RowObjs { get; }
         public virtual int? MaxSize => null;
-
-        private readonly ISF3FileEditor _fileEditor;
-
     }
 
     /// <summary>
@@ -55,8 +53,9 @@ namespace SF3.Tables {
 
         /// <summary>
         /// Loads all rows from the resource file, sorted by value.
+        /// TODO: make 'T' always an IModel!
         /// </summary>
-        public bool LoadFromResourceFile(Func<int, string, T> makeTFunc) {
+        public bool LoadFromResourceFile(Func<int, string, int, T> makeTFunc) {
             var rows = new Dictionary<int, T>();
             FileStream stream = null;
             try {
@@ -64,12 +63,16 @@ namespace SF3.Tables {
 
                 var xml = MakeXmlReader(stream);
                 _ = xml.Read();
+                int address = Address;
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
                         int id = Convert.ToInt32(xml.GetAttribute(0), 16);
                         string name = xml.GetAttribute(1);
-                        rows.Add(id, makeTFunc(id, name));
+                        var newModel = makeTFunc(id, name, address);
+                        rows.Add(id, newModel);
+                        address += ((IModel) newModel).Size;
+                        
                         if (id < 0 || (MaxSize != null && id >= MaxSize))
                             throw new IndexOutOfRangeException();
                     }
