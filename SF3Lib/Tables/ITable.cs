@@ -36,6 +36,11 @@ namespace SF3.Tables {
         /// An mutable array of rows.
         /// </summary>
         object[] RowObjs { get; }
+
+        /// <summary>
+        /// The maximum allowed size the table can be. Optional.
+        /// </summary>
+        int? MaxSize { get; }
     }
 
     /// <summary>
