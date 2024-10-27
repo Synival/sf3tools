@@ -26,7 +26,7 @@ namespace SF3.Tests {
 
             if (exceptions.Any()) {
                 throw new AggregateException(
-                    "\n" + string.Join('\n', exceptions.Select(x => x.Item1.Name + ": " + x.Item2.Message)),
+                    "\n" + string.Join('\n', exceptions.Select(x => x.Item1.Name + ": " + x.Item2.Message)) + "\n",
                     exceptions.Select(x => x.Item2).ToArray());
             }
         }

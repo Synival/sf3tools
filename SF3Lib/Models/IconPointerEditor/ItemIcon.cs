@@ -8,12 +8,12 @@ namespace SF3.Models.IconPointerEditor {
         //ITEMS
         private readonly int theItemIcon;
 
-        public ItemIcon(IIconPointerFileEditor fileEditor, int id, string text) {
+        public ItemIcon(IIconPointerFileEditor fileEditor, int id, string name) {
             FileEditor = fileEditor;
             Scenario = fileEditor.Scenario;
             IsX026 = fileEditor.IsX026;
             ID = id;
-            Name = text;
+            Name = name;
 
             int offset, sub;
 

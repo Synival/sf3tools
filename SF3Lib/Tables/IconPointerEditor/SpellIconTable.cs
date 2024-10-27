@@ -19,39 +19,7 @@ namespace SF3.Tables.IconPointerEditor {
 
         public override string ResourceFile => _resourceFile;
 
-        /// <summary>
-        /// Loads data from the file editor provided in the constructor.
-        /// </summary>
-        /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
-        public override bool Load() {
-            _rows = new SpellIcon[0];
-            FileStream stream = null;
-            try {
-                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
-
-                var xml = MakeXmlReader(stream);
-                _ = xml.Read();
-                while (!xml.EOF) {
-                    _ = xml.Read();
-                    if (xml.HasAttributes) {
-                        var newRow = new SpellIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        _rows = _rows.ExpandedWith(newRow);
-                        if (newRow.ID < 0 || newRow.ID >= MaxSize)
-                            throw new IndexOutOfRangeException();
-                        //MessageBox.Show("" + _fileEditor.GetDouble(newRow.Address));
-                    }
-                }
-            }
-            catch (FileLoadException) {
-                return false;
-            }
-            catch (FileNotFoundException) {
-                return false;
-            }
-            finally {
-                stream?.Close();
-            }
-            return true;
-        }
+        public override bool Load()
+            => LoadFromResourceFile((id, name) => new SpellIcon(_fileEditor, id, name));
     }
 }

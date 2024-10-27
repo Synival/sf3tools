@@ -10,12 +10,12 @@ namespace SF3.Models.IconPointerEditor {
         private readonly int theSpellIcon;
         private readonly int realOffset;
 
-        public SpellIcon(IIconPointerFileEditor fileEditor, int id, string text) {
+        public SpellIcon(IIconPointerFileEditor fileEditor, int id, string name) {
             FileEditor = fileEditor;
             Scenario = fileEditor.Scenario;
             IsX026 = fileEditor.IsX026;
             ID = id;
-            Name = text;
+            Name = name;
 
             int offset;
             int sub;

@@ -17,6 +17,6 @@ namespace SF3.Tables.IconPointerEditor {
         public override string ResourceFile => _resourceFile;
 
         public override bool Load()
-            => LoadFromResourceFile((value, name) => new ItemIcon(_fileEditor, value, name));
+            => LoadFromResourceFile((id, name) => new ItemIcon(_fileEditor, id, name));
     }
 }
