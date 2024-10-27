@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -7,7 +7,7 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <RootNamespace>SF3Lib.Tests</RootNamespace>
+    <RootNamespace>SF3.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,11 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TestData\PD\" />
-    <Folder Include="TestData\S1JP\" />
-    <Folder Include="TestData\S3\" />
-    <Folder Include="TestData\S2\" />
-    <Folder Include="TestData\S1US\" />
+    <Folder Include="TestData\" />
   </ItemGroup>
 
 </Project>

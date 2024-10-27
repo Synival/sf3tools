@@ -1,60 +1,63 @@
 using SF3.FileEditors;
 using SF3.Types;
-using static SF3Lib.Tests.Utils;
 
-namespace SF3Lib.Tests.FileEditors {
+namespace SF3.Tests.FileEditors {
     [TestClass]
     public class IconPointerEditorTests {
-        private class TestCase {
-            public TestCase(string filename, ScenarioType scenario, bool isX066) {
-                Filename = "../../../" + filename;
-                Scenario = scenario;
-                IsX066 = isX066;
+        private class IPETestCase : TestCase {
+            public IPETestCase(ScenarioType scenario, string filename, bool isX026, int itemIconRows, int spellIconRows)
+            : base(scenario, filename) {
+                IsX026 = isX026;
+                ExpectedItemIconRows = itemIconRows;
+                ExpectedSpellIconRows = spellIconRows;
             }
 
-            public readonly string Filename;
-            public readonly ScenarioType Scenario;
-            public readonly bool IsX066;
+            public override string Name => base.Name + (IsX026 ? " (X026)" : "");
+            public bool IsX026 { get; }
+            public int ExpectedItemIconRows { get; }
+            public int ExpectedSpellIconRows { get; }
         }
 
-        [TestMethod]
-        public void ItemIcons_X11_X21_HaveExpectedFirstFewRows() {
-            var testCases = new List<TestCase>()
-            {
-                new("TestData/S1US/X011.BIN", ScenarioType.Scenario1, false),
-                new("TestData/S1US/X021.BIN", ScenarioType.Scenario1, false),
-                new("TestData/S2/X011.BIN", ScenarioType.Scenario2, false),
-                new("TestData/S2/X021.BIN", ScenarioType.Scenario2, false),
-                new("TestData/S3/X011.BIN", ScenarioType.Scenario3, false),
-                new("TestData/S3/X021.BIN", ScenarioType.Scenario3, false),
-                new("TestData/PD/X011.BIN", ScenarioType.PremiumDisk, false),
-                new("TestData/PD/X021.BIN", ScenarioType.PremiumDisk, false),
-            };
+        private readonly static List<IPETestCase> TestCases = new()
+        {
+            new(ScenarioType.Scenario1, "X011.BIN", false, 256, 51),
+            new(ScenarioType.Scenario1, "X021.BIN", false, 256, 51),
+            new(ScenarioType.Scenario1, "X026.BIN", true, 256, 51),
 
-            RunTestCases(testCases, testCase => {
-                var editor = new IconPointerFileEditor(testCase.Scenario, testCase.IsX066);
+            new(ScenarioType.Scenario2, "X011.BIN", false, 256, 61),
+            new(ScenarioType.Scenario2, "X021.BIN", false, 256, 61),
+            new(ScenarioType.Scenario2, "X026.BIN", true, 256, 61),
+
+            new(ScenarioType.Scenario3, "X011.BIN", false, 300, 91),
+            new(ScenarioType.Scenario3, "X021.BIN", false, 300, 91),
+            new(ScenarioType.Scenario3, "X026.BIN", true, 300, 91),
+
+            new(ScenarioType.PremiumDisk, "X011.BIN", false, 300, 93),
+            new(ScenarioType.PremiumDisk, "X021.BIN", false, 300, 93),
+            new(ScenarioType.PremiumDisk, "X026.BIN", true, 300, 93)
+        };
+
+        [TestMethod]
+        public void ItemIconTable_X11_X21_X26_HasExpectedData() {
+            TestCase.Run(TestCases, testCase => {
+                var editor = new IconPointerFileEditor(testCase.Scenario, testCase.IsX026);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
+
+                Assert.AreEqual(0x00, editor.ItemIconList.Rows[0].TheItemIcon);
                 Assert.AreEqual(0x26, editor.ItemIconList.Rows[1].TheItemIcon);
-                Assert.AreEqual(0x18, editor.SpellIconList.Rows[1].TheSpellIcon);
+                Assert.AreEqual(testCase.ExpectedItemIconRows, editor.ItemIconList.Rows.Length);
             });
         }
 
         [TestMethod]
-        public void ItemIcons_X26_HasExpectedFirstFewRows() {
-            var testCases = new List<TestCase>()
-            {
-                new("TestData/S1US/X026.BIN", ScenarioType.Scenario1, true),
-                new("TestData/S1JP/X026.BIN", ScenarioType.Scenario1, true),
-                new("TestData/S2/X026.BIN", ScenarioType.Scenario2, true),
-                new("TestData/S3/X026.BIN", ScenarioType.Scenario3, true),
-                new("TestData/PD/X026.BIN", ScenarioType.PremiumDisk, true),
-            };
-
-            RunTestCases(testCases, testCase => {
-                var editor = new IconPointerFileEditor(testCase.Scenario, testCase.IsX066);
+        public void SpellIconTable_X11_X21_X26_HasExpectedData() {
+            TestCase.Run(TestCases, testCase => {
+                var editor = new IconPointerFileEditor(testCase.Scenario, testCase.IsX026);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
-                Assert.AreEqual(0x26, editor.ItemIconList.Rows[1].TheItemIcon);
+
+                Assert.AreEqual(0x00, editor.SpellIconList.Rows[0].TheSpellIcon);
                 Assert.AreEqual(0x18, editor.SpellIconList.Rows[1].TheSpellIcon);
+                Assert.AreEqual(testCase.ExpectedSpellIconRows, editor.SpellIconList.Rows.Length);
             });
         }
     }
