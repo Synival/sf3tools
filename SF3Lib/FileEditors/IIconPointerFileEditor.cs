@@ -1,5 +1,4 @@
-using SF3.Tables.IconPointerEditor.ItemIcon;
-using SF3.Tables.IconPointerEditor.SpellIcon;
+using SF3.Tables.IconPointerEditor;
 
 namespace SF3.FileEditors {
     public interface IIconPointerFileEditor : ISF3FileEditor {

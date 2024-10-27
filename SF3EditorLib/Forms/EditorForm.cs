@@ -203,7 +203,7 @@ namespace SF3.Editor.Forms {
         }
 
         private bool SaveFile(string filename) {
-            bool success = true;
+            var success = true;
             try {
                 if (!FileEditor.SaveFile(filename))
                     success = false;
@@ -230,8 +230,9 @@ namespace SF3.Editor.Forms {
 
             if (!force && FileEditor.IsModified) {
                 var result = MessageBox.Show(SavePromptString, "Save Changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (result == DialogResult.Cancel)
+                if (result == DialogResult.Cancel) {
                     return false;
+                }
                 else if (result == DialogResult.Yes) {
                     if (!SaveFileDialog())
                         return false;

@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using SF3.Tables;
-using SF3.Tables.X033_X031.InitialInfo;
-using SF3.Tables.X033_X031.Stats;
-using SF3.Tables.X033_X031.WeaponLevel;
+using SF3.Tables.X033_X031;
 using SF3.Types;
 
 namespace SF3.FileEditors {
@@ -13,9 +11,9 @@ namespace SF3.FileEditors {
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (StatsList = new StatsTables(this)),
-                (InitialInfoList = new InitialInfoTables(this)),
-                (WeaponLevelList = new WeaponLevelTables(this)),
+                (StatsList = new StatsTable(this)),
+                (InitialInfoList = new InitialInfoTable(this)),
+                (WeaponLevelList = new WeaponLevelTable(this)),
             };
         }
 
@@ -26,12 +24,12 @@ namespace SF3.FileEditors {
         }
 
         [BulkCopyRecurse]
-        public StatsTables StatsList { get; private set; }
+        public StatsTable StatsList { get; private set; }
 
         [BulkCopyRecurse]
-        public InitialInfoTables InitialInfoList { get; private set; }
+        public InitialInfoTable InitialInfoList { get; private set; }
 
         [BulkCopyRecurse]
-        public WeaponLevelTables WeaponLevelList { get; private set; }
+        public WeaponLevelTable WeaponLevelList { get; private set; }
     }
 }

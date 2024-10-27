@@ -1,19 +1,6 @@
 using System.Collections.Generic;
 using SF3.Tables;
-using SF3.Tables.X013.CritMod;
-using SF3.Tables.X013.Critrate;
-using SF3.Tables.X013.ExpLimit;
-using SF3.Tables.X013.FriendshipExp;
-using SF3.Tables.X013.HealExp;
-using SF3.Tables.X013.MagicBonus;
-using SF3.Tables.X013.Soulfail;
-using SF3.Tables.X013.Soulmate;
-using SF3.Tables.X013.SpecialChance;
-using SF3.Tables.X013.Specials;
-using SF3.Tables.X013.StatusEffect;
-using SF3.Tables.X013.SupportStats;
-using SF3.Tables.X013.SupportType;
-using SF3.Tables.X013.WeaponSpellRank;
+using SF3.Tables.X013;
 using SF3.Types;
 
 namespace SF3.FileEditors {
