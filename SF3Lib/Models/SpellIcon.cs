@@ -4,7 +4,7 @@ using SF3.FileEditors;
 using SF3.Types;
 using SF3.Values;
 
-namespace SF3.Models.IconPointerEditor {
+namespace SF3.Models {
     public class SpellIcon : IModel {
         //SPELLS
         private readonly int theSpellIcon;

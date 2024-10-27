@@ -1,13 +1,13 @@
 using System;
 using SF3.FileEditors;
-using SF3.Models.IconPointerEditor;
+using SF3.Models;
 using SF3.Types;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.IconPointerEditor {
+namespace SF3.Tables {
     public class ItemIconTable : Table<ItemIcon> {
         public ItemIconTable(ISF3FileEditor fileEditor, bool isX026) : base(fileEditor) {
-            ResourceFile = ResourceFileForScenario(this.FileEditor.Scenario, "Items.xml");
+            ResourceFile = ResourceFileForScenario(FileEditor.Scenario, "Items.xml");
             IsX026 = isX026;
 
             if (Scenario == ScenarioType.Scenario1) {

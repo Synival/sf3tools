@@ -3,7 +3,7 @@ using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.IconPointerEditor {
+namespace SF3.Models {
     public class ItemIcon : IModel {
         //ITEMS
         private readonly int theItemIcon;

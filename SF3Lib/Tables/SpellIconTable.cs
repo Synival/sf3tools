@@ -2,11 +2,11 @@ using System;
 using System.IO;
 using CommonLib.Extensions;
 using SF3.FileEditors;
-using SF3.Models.IconPointerEditor;
+using SF3.Models;
 using SF3.Types;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.IconPointerEditor {
+namespace SF3.Tables {
     public class SpellIconTable : Table<SpellIcon> {
         public SpellIconTable(IIconPointerFileEditor fileEditor, bool isX026) : base(fileEditor) {
             ResourceFile = ResourceFileForScenario(FileEditor.Scenario, "SpellIcons.xml");
