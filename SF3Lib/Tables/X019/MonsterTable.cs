@@ -23,40 +23,13 @@ namespace SF3.Tables.X019 {
         private readonly bool _isX044;
 
         public override string ResourceFile => _resourceFile;
-        public override int Address => throw new NotImplementedException();
+        public override int Address { get; }
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
         /// </summary>
         /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
-        public override bool Load() {
-            _rows = new Monster[0];
-            FileStream stream = null;
-            try {
-                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
-
-                var xml = MakeXmlReader(stream);
-                _ = xml.Read();
-                while (!xml.EOF) {
-                    _ = xml.Read();
-                    if (xml.HasAttributes) {
-                        var newRow = new Monster(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        _rows = _rows.ExpandedWith(newRow);
-                        if (newRow.ID < 0 || newRow.ID >= MaxSize)
-                            throw new IndexOutOfRangeException();
-                    }
-                }
-            }
-            catch (FileLoadException) {
-                return false;
-            }
-            catch (FileNotFoundException) {
-                return false;
-            }
-            finally {
-                stream?.Close();
-            }
-            return true;
-        }
+        public override bool Load()
+            => LoadFromResourceFile((id, name, address) => new Monster(_fileEditor, id, name));
     }
 }

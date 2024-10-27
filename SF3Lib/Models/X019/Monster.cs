@@ -3,7 +3,7 @@ using SF3.Types;
 using SF3.Values;
 
 namespace SF3.Models.X019 {
-    public class Monster {
+    public class Monster : IModel {
         private readonly IX019_FileEditor _fileEditor;
 
         private readonly int maxHP;
@@ -172,12 +172,14 @@ namespace SF3.Models.X019 {
             SpriteID = id + 200;
 
             Address = offset + (id * 0x4C);
-            //address = 0x0354c + (id * 0x18);
+            Size = 0x4C;
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int ID { get; }
         public string Name { get; }
+        public int Address { get; }
+        public int Size { get; }
 
         public int SpriteID { get; }
 
@@ -512,6 +514,6 @@ namespace SF3.Models.X019 {
             set => _fileEditor.SetByte(unknown20, (byte) value);
         }
 
-        public int Address { get; }
+        public IByteEditor Editor => throw new System.NotImplementedException();
     }
 }
