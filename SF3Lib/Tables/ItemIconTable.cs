@@ -8,58 +8,68 @@ namespace SF3.Tables {
     public class ItemIconTable : Table<ItemIcon> {
         public ItemIconTable(ISF3FileEditor fileEditor, bool isX026) : base(fileEditor) {
             ResourceFile = ResourceFileForScenario(Scenario, "Items.xml");
-            IsX026 = isX026;
+            IsX026       = isX026;
 
-            if (Scenario == ScenarioType.Scenario1) {
-                int offset, sub;
-                if (IsX026 == true) {
-                    offset = 0x08f0; //scn1 initial pointer
-                    sub = 0x06078000;
+            switch (Scenario) {
+                case ScenarioType.Scenario1: {
+                    int offset, sub;
+                    if (IsX026) {
+                        offset = 0x08f0; //scn1 initial pointer
+                        sub = 0x06078000;
+                    }
+                    else {
+                        offset = 0x0000003C; //scn1 initial pointer
+                        sub = 0x06068000;
+                    }
+                    Address = FileEditor.GetDouble(offset) - sub;
+                    break;
                 }
-                else {
-                    offset = 0x0000003C; //scn1 initial pointer
-                    sub = 0x06068000;
+
+                case ScenarioType.Scenario2: {
+                    int offset, sub;
+                    if (IsX026) {
+                        offset = 0x0a08; //scn2 x026 initial pointer
+                        sub = 0x06078000;
+                    }
+                    else {
+                        offset = 0x0000003C; //scn2 initial pointer
+                        sub = 0x06068000;
+                    }
+                    Address = FileEditor.GetDouble(offset) - sub;
+                    break;
                 }
-                Address = FileEditor.GetDouble(offset) - sub;
+
+                case ScenarioType.Scenario3: {
+                    int offset, sub;
+                    if (IsX026) {
+                        offset = 0x09b4; //scn3 x026 initial pointer
+                        sub = 0x06078000;
+                    }
+                    else {
+                        offset = 0x0000003C; //scn3 initial pointer
+                        sub = 0x06068000;
+                    }
+                    Address = FileEditor.GetDouble(offset) - sub;
+                    break;
+                }
+
+                case ScenarioType.PremiumDisk: {
+                    int offset, sub;
+                    if (IsX026) {
+                        offset = 0x072c; //pd x026 initial pointer
+                        sub = 0x06078000;
+                    }
+                    else {
+                        offset = 0x0000003C; //pd initial pointer
+                        sub = 0x06068000;
+                    }
+                    Address = FileEditor.GetDouble(offset) - sub;
+                    break;
+                }
+
+                default:
+                    throw new ArgumentException(nameof(Scenario));
             }
-            else if (Scenario == ScenarioType.Scenario2) {
-                int offset, sub;
-                if (IsX026 == true) {
-                    offset = 0x0a08; //scn2 x026 initial pointer
-                    sub = 0x06078000;
-                }
-                else {
-                    offset = 0x0000003C; //scn2 initial pointer
-                    sub = 0x06068000;
-                }
-                Address = FileEditor.GetDouble(offset) - sub;
-            }
-            else if (Scenario == ScenarioType.Scenario3) {
-                int offset, sub;
-                if (IsX026 == true) {
-                    offset = 0x09b4; //scn3 x026 initial pointer
-                    sub = 0x06078000;
-                }
-                else {
-                    offset = 0x0000003C; //scn3 initial pointer
-                    sub = 0x06068000;
-                }
-                Address = FileEditor.GetDouble(offset) - sub;
-            }
-            else if (Scenario == ScenarioType.PremiumDisk) {
-                int offset, sub;
-                if (IsX026 == true) {
-                    offset = 0x072c; //pd x026 initial pointer
-                    sub = 0x06078000;
-                }
-                else {
-                    offset = 0x0000003C; //pd initial pointer
-                    sub = 0x06068000;
-                }
-                Address = FileEditor.GetDouble(offset) - sub;
-            }
-            else
-                throw new ArgumentException(nameof(Scenario));
         }
 
         public override bool Load()

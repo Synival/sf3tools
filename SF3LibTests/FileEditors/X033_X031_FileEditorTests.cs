@@ -58,7 +58,7 @@ namespace SF3.Tests.FileEditors {
         }
 
         [TestMethod]
-        public void InitialTable_HasExpectedData() {
+        public void InitialInfoTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var editor = new X033_X031_FileEditor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));

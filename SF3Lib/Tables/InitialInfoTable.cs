@@ -1,3 +1,4 @@
+using System;
 using SF3.FileEditors;
 using SF3.Models;
 using SF3.Types;
@@ -34,9 +35,13 @@ namespace SF3.Tables {
                 case ScenarioType.Scenario3:
                     Address = isX033 ? 0x000054e6 : 0x000054aa;
                     break;
+
                 case ScenarioType.PremiumDisk:
                     Address = isX033 ? 0x00005734 : 0x000056ec;
                     break;
+
+                default:
+                    throw new ArgumentException(nameof(Scenario));
             }
         }
 
