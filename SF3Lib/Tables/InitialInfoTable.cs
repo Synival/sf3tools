@@ -1,18 +1,17 @@
-using System;
 using SF3.FileEditors;
-using SF3.Models.X033_X031;
+using SF3.Models;
 using SF3.Types;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X033_X031 {
+namespace SF3.Tables {
     public class InitialInfoTable : Table<InitialInfo> {
         public InitialInfoTable(IX033_X031_FileEditor fileEditor) : base(fileEditor) {
             ResourceFile = ResourceFileForScenario(Scenario, "ClassEquip.xml");
 
-            int checkType     = FileEditor.GetByte(0x00000009);     //if it's 0x07 we're in a x033.bin
-            int checkVersion2 = FileEditor.GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
+            var checkType     = FileEditor.GetByte(0x00000009);     //if it's 0x07 we're in a x033.bin
+            var checkVersion2 = FileEditor.GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
 
-            bool isX033 = checkType == 0x07;
+            var isX033 = checkType == 0x07;
 
             switch (Scenario) {
                 case ScenarioType.Scenario1:

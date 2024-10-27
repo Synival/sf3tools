@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 using SF3.Values;
 
-namespace SF3.Models.X033_X031 {
+namespace SF3.Models {
     public class InitialInfo : IModel {
         //starting equipment table
         private readonly int character;

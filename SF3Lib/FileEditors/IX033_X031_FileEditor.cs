@@ -1,3 +1,4 @@
+using SF3.Tables;
 using SF3.Tables.X033_X031;
 
 namespace SF3.FileEditors {
