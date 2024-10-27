@@ -94,6 +94,7 @@ namespace SF3.X019_Editor.Forms
             this.lvcMonsterTab3Unknown1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMonsterTab3Unknown2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMonsterTab3Unknown3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMonsterTab3CantSeeStatus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMonsterTab3Unknown4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMonsterTab3Unknown5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMonsterTab3Unknown6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -141,7 +142,7 @@ namespace SF3.X019_Editor.Forms
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiScenario});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Location = new System.Drawing.Point(0, 24);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(764, 24);
             this.menuStrip1.TabIndex = 1;
@@ -613,6 +614,7 @@ namespace SF3.X019_Editor.Forms
             this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Unknown1);
             this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Unknown2);
             this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Unknown3);
+            this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3CantSeeStatus);
             this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Unknown4);
             this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Unknown5);
             this.olvMonsterTab3.AllColumns.Add(this.lvcMonsterTab3Unknown6);
@@ -637,6 +639,7 @@ namespace SF3.X019_Editor.Forms
             this.lvcMonsterTab3Unknown1,
             this.lvcMonsterTab3Unknown2,
             this.lvcMonsterTab3Unknown3,
+            this.lvcMonsterTab3CantSeeStatus,
             this.lvcMonsterTab3Unknown4,
             this.lvcMonsterTab3Unknown5,
             this.lvcMonsterTab3Unknown6});
@@ -754,16 +757,22 @@ namespace SF3.X019_Editor.Forms
             this.lvcMonsterTab3Unknown3.Text = "Unknown3";
             this.lvcMonsterTab3Unknown3.Width = 70;
             // 
+            // lvcMonsterTab3CantSeeStatus
+            // 
+            this.lvcMonsterTab3CantSeeStatus.AspectName = "CantSeeStatus";
+            this.lvcMonsterTab3CantSeeStatus.Text = "Status Hidden";
+            this.lvcMonsterTab3CantSeeStatus.Width = 80;
+            // 
             // lvcMonsterTab3Unknown4
             // 
-            this.lvcMonsterTab3Unknown4.AspectName = "Unknown4";
+            this.lvcMonsterTab3Unknown4.AspectName = "Protections";
             this.lvcMonsterTab3Unknown4.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab3Unknown4.Text = "Protections";
             this.lvcMonsterTab3Unknown4.Width = 70;
             // 
             // lvcMonsterTab3Unknown5
             // 
-            this.lvcMonsterTab3Unknown5.AspectName = "Unknown5";
+            this.lvcMonsterTab3Unknown5.AspectName = "ExpIs5";
             this.lvcMonsterTab3Unknown5.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab3Unknown5.Text = "exp = 5";
             this.lvcMonsterTab3Unknown5.Width = 70;
@@ -872,14 +881,14 @@ namespace SF3.X019_Editor.Forms
             // 
             // lvcMonsterTab4SlowPlus
             // 
-            this.lvcMonsterTab4SlowPlus.AspectName = "Unknown9";
+            this.lvcMonsterTab4SlowPlus.AspectName = "SlowPlus";
             this.lvcMonsterTab4SlowPlus.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab4SlowPlus.Text = "Slow+%";
             this.lvcMonsterTab4SlowPlus.Width = 70;
             // 
             // lvcMonsterTab4SupportPlus
             // 
-            this.lvcMonsterTab4SupportPlus.AspectName = "Unknown10";
+            this.lvcMonsterTab4SupportPlus.AspectName = "SupportPlus";
             this.lvcMonsterTab4SupportPlus.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab4SupportPlus.Text = "Support+%";
             this.lvcMonsterTab4SupportPlus.Width = 70;
@@ -1051,6 +1060,7 @@ namespace SF3.X019_Editor.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmX019_Editor";
             this.Text = "SF3 X019 Editor";
+            this.Controls.SetChildIndex(this.menuStrip1, 0);
             this.Controls.SetChildIndex(this.tabMain, 0);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -1165,6 +1175,7 @@ namespace SF3.X019_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcMonsterTab5Unknown19;
         private BrightIdeasSoftware.OLVColumn lvcMonsterTab5Unknown20;
         private BrightIdeasSoftware.OLVColumn lvcMonsterTab1SpriteID;
+        private BrightIdeasSoftware.OLVColumn lvcMonsterTab3CantSeeStatus;
     }
 }
 

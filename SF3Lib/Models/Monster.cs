@@ -50,15 +50,15 @@ namespace SF3.Models {
         private readonly int unknown1;
         private readonly int unknown2;
         private readonly int unknown3;
-        private readonly int unknown4;
-        private readonly int unknown5;
+        private readonly int protections;
+        private readonly int expIs5;
         private readonly int unknown6;
         private readonly int gold;
         private readonly int drop;
         private readonly int unknown7;
         private readonly int droprate;
-        private readonly int unknown9;
-        private readonly int unknown10;
+        private readonly int slowPlus;
+        private readonly int supportPlus;
         private readonly int magicType;
         private readonly int movementType;
         private readonly int unknown11;
@@ -127,15 +127,15 @@ namespace SF3.Models {
             unknown1 = Address + 50;
             unknown2 = Address + 51;
             unknown3 = Address + 52;
-            unknown4 = Address + 53; //protections? 8 = no crit? 0a = damage immunity?
-            unknown5 = Address + 54; //exp = 5
+            protections = Address + 53; //protections? 8 = no crit? 0a = damage immunity?
+            expIs5 = Address + 54; //exp = 5
             unknown6 = Address + 55;
             gold = Address + 56; //2 byte
             drop = Address + 58; //2 byte
             unknown7 = Address + 60;
             droprate = Address + 61; //droprate/drops items when attacked. Set E for thief rules
-            unknown9 = Address + 62; //slow bonus?
-            unknown10 = Address + 63; //support bonus?
+            slowPlus = Address + 62; //slow bonus?
+            supportPlus = Address + 63; //support bonus?
             magicType = Address + 64;
             movementType = Address + 65;
             unknown11 = Address + 66; //heal when damaged when set?
@@ -389,14 +389,19 @@ namespace SF3.Models {
             set => Editor.SetByte(unknown3, (byte) value);
         }
 
-        public int Unknown4 {
-            get => Editor.GetByte(unknown4);
-            set => Editor.SetByte(unknown4, (byte) value);
+        public bool CantSeeStatus {
+            get => Editor.GetBit(protections, 4);
+            set => Editor.SetBit(protections, 4, value);
         }
 
-        public int Unknown5 {
-            get => Editor.GetByte(unknown5);
-            set => Editor.SetByte(unknown5, (byte) value);
+        public int Protections {
+            get => Editor.GetByte(protections);
+            set => Editor.SetByte(protections, (byte) value);
+        }
+
+        public int ExpIs5 {
+            get => Editor.GetByte(expIs5);
+            set => Editor.SetByte(expIs5, (byte) value);
         }
 
         public int Unknown6 {
@@ -424,14 +429,14 @@ namespace SF3.Models {
             set => Editor.SetByte(droprate, (byte) value.Value);
         }
 
-        public int Unknown9 {
-            get => Editor.GetByte(unknown9);
-            set => Editor.SetByte(unknown9, (byte) value);
+        public int SlowPlus {
+            get => Editor.GetByte(slowPlus);
+            set => Editor.SetByte(slowPlus, (byte) value);
         }
 
-        public int Unknown10 {
-            get => Editor.GetByte(unknown10);
-            set => Editor.SetByte(unknown10, (byte) value);
+        public int SupportPlus {
+            get => Editor.GetByte(supportPlus);
+            set => Editor.SetByte(supportPlus, (byte) value);
         }
 
         public int MagicType {
