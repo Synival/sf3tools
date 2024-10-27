@@ -2,7 +2,7 @@ using SF3.FileEditors;
 using SF3.Types;
 using SF3.Values;
 
-namespace SF3.Models.X019 {
+namespace SF3.Models {
     public class Monster : IModel {
         private readonly int maxHP;
         private readonly int maxMP;

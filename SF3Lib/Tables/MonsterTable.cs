@@ -1,12 +1,9 @@
-using System;
-using System.IO;
-using CommonLib.Extensions;
 using SF3.FileEditors;
-using SF3.Models.X019;
+using SF3.Models;
 using SF3.Types;
 using static SF3.Utils.Resources;
 
-namespace SF3.Tables.X019 {
+namespace SF3.Tables {
     public class MonsterTable : Table<Monster> {
         public MonsterTable(ISF3FileEditor fileEditor, bool isX044) : base(fileEditor) {
             IsX044 = isX044;
