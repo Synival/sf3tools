@@ -8,28 +8,35 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X019 {
     public class MonsterTable : Table<Monster> {
-        public override int? MaxSize => 256;
-
-        public MonsterTable(IX019_FileEditor fileEditor, bool isX044) : base(fileEditor) {
-            _fileEditor = fileEditor;
-            _isX044 = isX044;
-            _resourceFile = Scenario == ScenarioType.PremiumDisk && isX044
+        public MonsterTable(ISF3FileEditor fileEditor, bool isX044) : base(fileEditor) {
+            IsX044 = isX044;
+            ResourceFile = Scenario == ScenarioType.PremiumDisk && isX044
                 ? "Resources/PD/Monsters_X044.xml"
-                : ResourceFileForScenario(_fileEditor.Scenario, "Monsters.xml");
+                : ResourceFileForScenario(Scenario, "Monsters.xml");
+
+            switch (Scenario) {
+                case ScenarioType.Scenario1:
+                    Address = 0x0000000C;
+                    break;
+                case ScenarioType.Scenario2:
+                    Address = 0x0000000C;
+                    break;
+                case ScenarioType.Scenario3:
+                    Address = 0x00000eb0;
+                    break;
+                case ScenarioType.PremiumDisk:
+                    Address = isX044 ? 0x00007e40 : 0x00000eb0;
+                    break;
+            }
         }
 
-        private readonly string _resourceFile;
-        private readonly IX019_FileEditor _fileEditor;
-        private readonly bool _isX044;
-
-        public override string ResourceFile => _resourceFile;
-        public override int Address { get; }
-
-        /// <summary>
-        /// Loads data from the file editor provided in the constructor.
-        /// </summary>
-        /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new Monster(_fileEditor, id, name));
+            => LoadFromResourceFile((id, name, address) => new Monster(FileEditor, id, name, address, Scenario, IsX044));
+
+        public override string ResourceFile { get; }
+        public override int Address { get; }
+        public override int? MaxSize => 256;
+
+        public bool IsX044 { get; }
     }
 }
