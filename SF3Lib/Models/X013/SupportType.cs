@@ -1,5 +1,6 @@
 using SF3.FileEditors;
 using SF3.Types;
+using SF3.Values;
 
 namespace SF3.Models.X013 {
     public class SupportType {
@@ -52,13 +53,14 @@ namespace SF3.Models.X013 {
         public int SpellID { get; }
         public string SpellName { get; }
 
-        public int SupportA {
-            get => _fileEditor.GetByte(supportA);
-            set => _fileEditor.SetByte(supportA, (byte) value);
+        public FriendshipBonusTypeValue SupportA {
+            get => new FriendshipBonusTypeValue(_fileEditor.GetByte(supportA));
+            set => _fileEditor.SetByte(supportA, (byte) value.Value);
         }
-        public int SupportB {
-            get => _fileEditor.GetByte(supportB);
-            set => _fileEditor.SetByte(supportB, (byte) value);
+
+        public FriendshipBonusTypeValue SupportB {
+            get => new FriendshipBonusTypeValue(_fileEditor.GetByte(supportB));
+            set => _fileEditor.SetByte(supportB, (byte) value.Value);
         }
 
         public int SpellAddress { get; }

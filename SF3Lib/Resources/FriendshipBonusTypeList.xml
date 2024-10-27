@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="00" name="--" />
+    <item value="01" name="+Atk" />
+    <item value="02" name="+Crit%" />
+    <item value="03" name="+MagicPow" />
+    <item value="04" name="+ExpOnKill" />
+    <item value="05" name="+GoldOnKill" />
+    <item value="06" name="+ItemDrop%" />
+    <item value="07" name="+Def" />
+    <item value="08" name="-EnemyCrit%" />
+    <item value="09" name="+Dodge%" />
+    <item value="0a" name="+Counter%" />
+    <item value="0b" name="+MagicRes" />
+    <item value="0c" name="-Debuff%, +Luck" />
+    <item value="0d" name="+DivertEnemyAttack% (broken/unused)" />
+    <item value="0e" name="+MagicRes, +Luck" />
+    <item value="0f" name="+Counter%, +MagicRes" />
+    <item value="10" name="+Dodge%, +Luck" />
+    <item value="11" name="+Crit%, +Counter%" />
+</items>

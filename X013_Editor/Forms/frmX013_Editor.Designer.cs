@@ -624,13 +624,14 @@ namespace SF3.X013_Editor.Forms
             this.lvcSupportTypeSupportA.AspectName = "SupportA";
             this.lvcSupportTypeSupportA.AspectToStringFormat = "{0:X}";
             this.lvcSupportTypeSupportA.Text = "SupportA";
+            this.lvcSupportTypeSupportA.Width = 120;
             // 
             // lvcSupportTypeSupportB
             // 
             this.lvcSupportTypeSupportB.AspectName = "SupportB";
             this.lvcSupportTypeSupportB.AspectToStringFormat = "{0:X}";
             this.lvcSupportTypeSupportB.Text = "SupportB";
-            this.lvcSupportTypeSupportB.Width = 115;
+            this.lvcSupportTypeSupportB.Width = 120;
             // 
             // tabSupportStats
             // 
