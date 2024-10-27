@@ -1,9 +1,9 @@
 using System;
 using SF3.FileEditors;
-using SF3.Models.X033_X031;
+using SF3.Models;
 using SF3.Types;
 
-namespace SF3.Tables.X033_X031 {
+namespace SF3.Tables {
     public class WeaponLevelTable : Table<WeaponLevel> {
 
         public WeaponLevelTable(IX033_X031_FileEditor fileEditor) : base(fileEditor) {

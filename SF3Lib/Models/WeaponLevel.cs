@@ -2,7 +2,7 @@ using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.X033_X031 {
+namespace SF3.Models {
     public class WeaponLevel : IModel {
         private readonly int level1;
         private readonly int level2;
