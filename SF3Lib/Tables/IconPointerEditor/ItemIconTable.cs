@@ -36,15 +36,13 @@ namespace SF3.Tables.IconPointerEditor {
                     if (xml.HasAttributes) {
                         var newRow = new ItemIcon(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _rows = _rows.ExpandedWith(newRow);
-                        if (newRow.SizeID < 0 || newRow.SizeID >= MaxSize)
+                        if (newRow.ID < 0 || newRow.ID >= MaxSize)
                             throw new IndexOutOfRangeException();
                     }
                 }
             }
             catch (FileLoadException) {
                 return false;
-                //} catch (FileNotFoundException) {
-                //  return false;
             }
             finally {
                 stream?.Close();

@@ -1,25 +1,24 @@
+using System;
 using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.IconPointerEditor {
-    public class ItemIcon {
-        private readonly IIconPointerFileEditor _fileEditor;
-
+    public class ItemIcon : IModel {
         //ITEMS
         private readonly int theItemIcon;
 
-        private readonly int offset;
-        private readonly int checkVersion2;
-        private readonly int sub;
-
         public ItemIcon(IIconPointerFileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
+            FileEditor = fileEditor;
+            Scenario = fileEditor.Scenario;
+            IsX026 = fileEditor.IsX026;
+            ID = id;
+            Name = text;
 
-            checkVersion2 = _fileEditor.GetByte(0x0000000B);
+            int offset, sub;
 
             if (Scenario == ScenarioType.Scenario1) {
-                if (_fileEditor.IsX026 == true) {
+                if (IsX026 == true) {
                     offset = 0x08f0; //scn1 initial pointer
                     sub = 0x06078000;
                 }
@@ -28,21 +27,11 @@ namespace SF3.Models.IconPointerEditor {
                     sub = 0x06068000;
                 }
 
-                offset = _fileEditor.GetDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset -= sub; //pointer
-                /*
-                offset = 0x00000018; //scn1 initial pointer
-                npcOffset = offset;
-                npcOffset = _fileEditor.GetDouble(offset);
-                sub = 0x0605f000;
-                offset = npcOffset - sub; //second pointer
-                npcOffset = _fileEditor.GetDouble(offset);
-                offset = npcOffset - sub; //third pointer
-                //offset value should now point to where npc placements are
-                */
             }
             else if (Scenario == ScenarioType.Scenario2) {
-                if (_fileEditor.IsX026 == true) {
+                if (IsX026 == true) {
                     offset = 0x0a08; //scn2 x026 initial pointer
                     sub = 0x06078000;
                 }
@@ -51,21 +40,11 @@ namespace SF3.Models.IconPointerEditor {
                     sub = 0x06068000;
                 }
 
-                offset = _fileEditor.GetDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset -= sub; //pointer
-
-                /*offset = 0x00000024; //scn2 initial pointer
-                npcOffset = offset;
-                npcOffset = _fileEditor.GetDouble(offset);
-                sub = 0x0605e000;
-                offset = npcOffset - sub + 4; //second pointer
-                npcOffset = _fileEditor.GetDouble(offset);
-                offset = npcOffset - sub; //third pointer
-                //offset value should now point to where npc placements are
-                */
             }
             else if (Scenario == ScenarioType.Scenario3) {
-                if (_fileEditor.IsX026 == true) {
+                if (IsX026 == true) {
                     offset = 0x09b4; //scn3 x026 initial pointer
                     sub = 0x06078000;
                 }
@@ -74,11 +53,11 @@ namespace SF3.Models.IconPointerEditor {
                     sub = 0x06068000;
                 }
 
-                offset = _fileEditor.GetDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset -= sub; //pointer
             }
             else if (Scenario == ScenarioType.PremiumDisk) {
-                if (_fileEditor.IsX026 == true) {
+                if (IsX026 == true) {
                     offset = 0x072c; //pd x026 initial pointer
                     sub = 0x06078000;
                 }
@@ -87,59 +66,46 @@ namespace SF3.Models.IconPointerEditor {
                     sub = 0x06068000;
                 }
 
-                offset = _fileEditor.GetDouble(offset);
+                offset = FileEditor.GetDouble(offset);
                 offset -= sub; //pointer
             }
+            else
+                throw new ArgumentException(nameof(fileEditor) + ".Scenario");
 
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
+            if (IsSc1X026) {
+                Address = offset + (id * 0x02);
+                theItemIcon = Address; //1 byte
 
-            SizeID = id;
-            SizeName = text;
-
-            //int start = 0x354c + (id * 24);
-
-            if (_fileEditor.IsX026 == true && Scenario == ScenarioType.Scenario1) {
-                var start = offset + (id * 0x02);
-                theItemIcon = start; //1 bytes
-
-                SizeAddress = offset + (id * 0x02);
             }
             else {
-                var start = offset + (id * 0x04);
-                theItemIcon = start; //1 bytes
-
-                SizeAddress = offset + (id * 0x04);
+                Address = offset + (id * 0x04);
+                theItemIcon = Address; //2 bytes
             }
-
-            //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
-        public int SizeID { get; }
-
+        public IFileEditor FileEditor { get; }
         [BulkCopyRowName]
-        public string SizeName { get; }
+        public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+
+        public ScenarioType Scenario { get; }
+        public bool IsX026 { get; }
+        public bool IsSc1X026 => IsX026 && Scenario == ScenarioType.Scenario1;
 
         [BulkCopy]
         public int TheItemIcon {
             get {
-                return _fileEditor.IsX026 == true && Scenario == ScenarioType.Scenario1
-                    ? _fileEditor.GetWord(theItemIcon)
-                    : _fileEditor.GetDouble(theItemIcon);
+                return IsSc1X026
+                    ? FileEditor.GetWord(theItemIcon)
+                    : FileEditor.GetDouble(theItemIcon);
             }
             set {
-                if (_fileEditor.IsX026 == true && Scenario == ScenarioType.Scenario1) {
-                    _fileEditor.SetWord(theItemIcon, value);
-                }
-                else {
-                    _fileEditor.SetDouble(theItemIcon, value);
-                }
+                if (IsSc1X026)
+                    FileEditor.SetWord(theItemIcon, value);
+                else
+                    FileEditor.SetDouble(theItemIcon, value);
             }
         }
-
-        public int SizeAddress { get; }
     }
 }

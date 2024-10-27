@@ -148,21 +148,21 @@ namespace SF3.IconPointerEditor.Forms
             // 
             // lvcItemIconName
             // 
-            this.lvcItemIconName.AspectName = "SizeName";
+            this.lvcItemIconName.AspectName = "Name";
             this.lvcItemIconName.IsEditable = false;
             this.lvcItemIconName.Text = "Name";
             this.lvcItemIconName.Width = 120;
             // 
             // lvcItemIconHexID
             // 
-            this.lvcItemIconHexID.AspectName = "SizeID";
+            this.lvcItemIconHexID.AspectName = "ID";
             this.lvcItemIconHexID.AspectToStringFormat = "{0:X}";
             this.lvcItemIconHexID.IsEditable = false;
             this.lvcItemIconHexID.Text = "Hex ID";
             // 
             // lvcItemIconAddress
             // 
-            this.lvcItemIconAddress.AspectName = "SizeAddress";
+            this.lvcItemIconAddress.AspectName = "Address";
             this.lvcItemIconAddress.AspectToStringFormat = "{0:X}";
             this.lvcItemIconAddress.IsEditable = false;
             this.lvcItemIconAddress.Text = "Address";
@@ -235,7 +235,7 @@ namespace SF3.IconPointerEditor.Forms
             // 
             // lvcSpellIconName
             // 
-            this.lvcSpellIconName.AspectName = "IconName";
+            this.lvcSpellIconName.AspectName = "Name";
             this.lvcSpellIconName.IsEditable = false;
             this.lvcSpellIconName.Text = "Icon Name";
             this.lvcSpellIconName.Width = 120;
