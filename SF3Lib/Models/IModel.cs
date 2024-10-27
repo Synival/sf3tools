@@ -5,7 +5,7 @@ namespace SF3.Models {
     /// Abstraction of any model stored in SF3 data tables.
     /// </summary>
     public interface IModel {
-        IFileEditor FileEditor { get; }
+        IByteEditor Editor { get; }
         string Name { get; }
         int ID { get; }
         int Address { get; }

@@ -9,7 +9,7 @@ namespace SF3.Models.IconPointerEditor {
         private readonly int theItemIcon;
 
         public ItemIcon(IIconPointerFileEditor fileEditor, int id, string name) {
-            FileEditor = fileEditor;
+            Editor = fileEditor;
             Scenario = fileEditor.Scenario;
             IsX026 = fileEditor.IsX026;
             ID = id;
@@ -27,7 +27,7 @@ namespace SF3.Models.IconPointerEditor {
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //pointer
             }
             else if (Scenario == ScenarioType.Scenario2) {
@@ -40,7 +40,7 @@ namespace SF3.Models.IconPointerEditor {
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //pointer
             }
             else if (Scenario == ScenarioType.Scenario3) {
@@ -53,7 +53,7 @@ namespace SF3.Models.IconPointerEditor {
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //pointer
             }
             else if (Scenario == ScenarioType.PremiumDisk) {
@@ -66,7 +66,7 @@ namespace SF3.Models.IconPointerEditor {
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //pointer
             }
             else
@@ -84,7 +84,7 @@ namespace SF3.Models.IconPointerEditor {
             }
         }
 
-        public IFileEditor FileEditor { get; }
+        public IByteEditor Editor { get; }
         [BulkCopyRowName]
         public string Name { get; }
         public int ID { get; }
@@ -99,14 +99,14 @@ namespace SF3.Models.IconPointerEditor {
         public int TheItemIcon {
             get {
                 return IsSc1X026
-                    ? FileEditor.GetWord(theItemIcon)
-                    : FileEditor.GetDouble(theItemIcon);
+                    ? Editor.GetWord(theItemIcon)
+                    : Editor.GetDouble(theItemIcon);
             }
             set {
                 if (IsSc1X026)
-                    FileEditor.SetWord(theItemIcon, value);
+                    Editor.SetWord(theItemIcon, value);
                 else
-                    FileEditor.SetDouble(theItemIcon, value);
+                    Editor.SetDouble(theItemIcon, value);
             }
         }
     }

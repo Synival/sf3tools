@@ -11,7 +11,7 @@ namespace SF3.Models.IconPointerEditor {
         private readonly int realOffset;
 
         public SpellIcon(IIconPointerFileEditor fileEditor, int id, string name) {
-            FileEditor = fileEditor;
+            Editor = fileEditor;
             Scenario = fileEditor.Scenario;
             IsX026 = fileEditor.IsX026;
             ID = id;
@@ -30,7 +30,7 @@ namespace SF3.Models.IconPointerEditor {
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //pointer
 
                 realOffset = 0xFF8E;
@@ -45,7 +45,7 @@ namespace SF3.Models.IconPointerEditor {
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //pointer
 
                 realOffset = 0xFC86;
@@ -60,7 +60,7 @@ namespace SF3.Models.IconPointerEditor {
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //pointer
 
                 realOffset = 0x12A48;
@@ -75,7 +75,7 @@ namespace SF3.Models.IconPointerEditor {
                     sub = 0x06068000;
                 }
 
-                offset = FileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //pointer
 
                 realOffset = 0x12A32;
@@ -95,7 +95,7 @@ namespace SF3.Models.IconPointerEditor {
             }
         }
 
-        public IFileEditor FileEditor { get; }
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
         public string Name { get; }
@@ -113,14 +113,14 @@ namespace SF3.Models.IconPointerEditor {
         public int TheSpellIcon {
             get {
                 return IsSc1X026
-                    ? FileEditor.GetWord(theSpellIcon)
-                    : FileEditor.GetDouble(theSpellIcon);
+                    ? Editor.GetWord(theSpellIcon)
+                    : Editor.GetDouble(theSpellIcon);
             }
             set {
                 if (IsSc1X026)
-                    FileEditor.SetWord(theSpellIcon, value);
+                    Editor.SetWord(theSpellIcon, value);
                 else
-                    FileEditor.SetDouble(theSpellIcon, value);
+                    Editor.SetDouble(theSpellIcon, value);
             }
         }
 
