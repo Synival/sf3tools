@@ -469,7 +469,7 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public CharacterClassValue CharacterClass {
             get => new CharacterClassValue(_fileEditor.GetByte(characterClass));
-            set => _fileEditor.SetByte(characterClass, (byte) value.Value);
+            set => _fileEditor.SetByte(characterClass, (byte) value);
         }
 
         [BulkCopy]
@@ -762,7 +762,7 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public SpellValue S1LearnedID {
             get => new SpellValue(Scenario, _fileEditor.GetByte(s1LearnedID));
-            set => _fileEditor.SetByte(s1LearnedID, (byte) value.Value);
+            set => _fileEditor.SetByte(s1LearnedID, (byte) value);
         }
 
         [BulkCopy]
@@ -780,7 +780,7 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public SpellValue S2LearnedID {
             get => new SpellValue(Scenario, _fileEditor.GetByte(s2LearnedID));
-            set => _fileEditor.SetByte(s2LearnedID, (byte) value.Value);
+            set => _fileEditor.SetByte(s2LearnedID, (byte) value);
         }
 
         [BulkCopy]
@@ -798,7 +798,7 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public SpellValue S3LearnedID {
             get => new SpellValue(Scenario, _fileEditor.GetByte(s3LearnedID));
-            set => _fileEditor.SetByte(s3LearnedID, (byte) value.Value);
+            set => _fileEditor.SetByte(s3LearnedID, (byte) value);
         }
 
         [BulkCopy]
@@ -816,7 +816,7 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public SpellValue S4LearnedID {
             get => new SpellValue(Scenario, _fileEditor.GetByte(s4LearnedID));
-            set => _fileEditor.SetByte(s4LearnedID, (byte) value.Value);
+            set => _fileEditor.SetByte(s4LearnedID, (byte) value);
         }
 
         [BulkCopy]
@@ -834,7 +834,7 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public SpellValue S5LearnedID {
             get => new SpellValue(Scenario, _fileEditor.GetByte(s5LearnedID));
-            set => _fileEditor.SetByte(s5LearnedID, (byte) value.Value);
+            set => _fileEditor.SetByte(s5LearnedID, (byte) value);
         }
 
         [BulkCopy]
@@ -852,7 +852,7 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public SpellValue S6LearnedID {
             get => new SpellValue(Scenario, _fileEditor.GetByte(s6LearnedID));
-            set => _fileEditor.SetByte(s6LearnedID, (byte) value.Value);
+            set => _fileEditor.SetByte(s6LearnedID, (byte) value);
         }
 
         [BulkCopy]
@@ -870,7 +870,7 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public SpellValue S7LearnedID {
             get => new SpellValue(Scenario, _fileEditor.GetByte(s7LearnedID));
-            set => _fileEditor.SetByte(s7LearnedID, (byte) value.Value);
+            set => _fileEditor.SetByte(s7LearnedID, (byte) value);
         }
 
         [BulkCopy]
@@ -888,7 +888,7 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public SpellValue S8LearnedID {
             get => new SpellValue(Scenario, _fileEditor.GetByte(s8LearnedID));
-            set => _fileEditor.SetByte(s8LearnedID, (byte) value.Value);
+            set => _fileEditor.SetByte(s8LearnedID, (byte) value);
         }
 
         [BulkCopy]
@@ -906,7 +906,7 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public SpellValue S9LearnedID {
             get => new SpellValue(Scenario, _fileEditor.GetByte(s9LearnedID));
-            set => _fileEditor.SetByte(s9LearnedID, (byte) value.Value);
+            set => _fileEditor.SetByte(s9LearnedID, (byte) value);
         }
 
         [BulkCopy]
@@ -924,7 +924,7 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public SpellValue S10LearnedID {
             get => new SpellValue(Scenario, _fileEditor.GetByte(s10LearnedID));
-            set => _fileEditor.SetByte(s10LearnedID, (byte) value.Value);
+            set => _fileEditor.SetByte(s10LearnedID, (byte) value);
         }
 
         [BulkCopy]
@@ -942,7 +942,7 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public SpellValue S11LearnedID {
             get => new SpellValue(Scenario, _fileEditor.GetByte(s11LearnedID));
-            set => _fileEditor.SetByte(s11LearnedID, (byte) value.Value);
+            set => _fileEditor.SetByte(s11LearnedID, (byte) value);
         }
 
         [BulkCopy]
@@ -960,79 +960,79 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public SpellValue S12LearnedID {
             get => new SpellValue(Scenario, _fileEditor.GetByte(s12LearnedID));
-            set => _fileEditor.SetByte(s12LearnedID, (byte) value.Value);
+            set => _fileEditor.SetByte(s12LearnedID, (byte) value);
         }
 
         [BulkCopy]
         public SpecialValue Weapon1Special1 {
             get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon1Special1));
-            set => _fileEditor.SetByte(weapon1Special1, (byte) value.Value);
+            set => _fileEditor.SetByte(weapon1Special1, (byte) value);
         }
 
         [BulkCopy]
         public SpecialValue Weapon1Special2 {
             get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon1Special2));
-            set => _fileEditor.SetByte(weapon1Special2, (byte) value.Value);
+            set => _fileEditor.SetByte(weapon1Special2, (byte) value);
         }
 
         [BulkCopy]
         public SpecialValue Weapon1Special3 {
             get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon1Special3));
-            set => _fileEditor.SetByte(weapon1Special3, (byte) value.Value);
+            set => _fileEditor.SetByte(weapon1Special3, (byte) value);
         }
 
         [BulkCopy]
         public SpecialValue Weapon2Special1 {
             get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon2Special1));
-            set => _fileEditor.SetByte(weapon2Special1, (byte) value.Value);
+            set => _fileEditor.SetByte(weapon2Special1, (byte) value);
         }
 
         [BulkCopy]
         public SpecialValue Weapon2Special2 {
             get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon2Special2));
-            set => _fileEditor.SetByte(weapon2Special2, (byte) value.Value);
+            set => _fileEditor.SetByte(weapon2Special2, (byte) value);
         }
 
         [BulkCopy]
         public SpecialValue Weapon2Special3 {
             get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon2Special3));
-            set => _fileEditor.SetByte(weapon2Special3, (byte) value.Value);
+            set => _fileEditor.SetByte(weapon2Special3, (byte) value);
         }
 
         [BulkCopy]
         public SpecialValue Weapon3Special1 {
             get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon3Special1));
-            set => _fileEditor.SetByte(weapon3Special1, (byte) value.Value);
+            set => _fileEditor.SetByte(weapon3Special1, (byte) value);
         }
 
         [BulkCopy]
         public SpecialValue Weapon3Special2 {
             get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon3Special2));
-            set => _fileEditor.SetByte(weapon3Special2, (byte) value.Value);
+            set => _fileEditor.SetByte(weapon3Special2, (byte) value);
         }
 
         [BulkCopy]
         public SpecialValue Weapon3Special3 {
             get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon3Special3));
-            set => _fileEditor.SetByte(weapon3Special3, (byte) value.Value);
+            set => _fileEditor.SetByte(weapon3Special3, (byte) value);
         }
 
         [BulkCopy]
         public SpecialValue Weapon4Special1 {
             get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon4Special1));
-            set => _fileEditor.SetByte(weapon4Special1, (byte) value.Value);
+            set => _fileEditor.SetByte(weapon4Special1, (byte) value);
         }
 
         [BulkCopy]
         public SpecialValue Weapon4Special2 {
             get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon4Special2));
-            set => _fileEditor.SetByte(weapon4Special2, (byte) value.Value);
+            set => _fileEditor.SetByte(weapon4Special2, (byte) value);
         }
 
         [BulkCopy]
         public SpecialValue Weapon4Special3 {
             get => new SpecialValue(Scenario, _fileEditor.GetByte(weapon4Special3));
-            set => _fileEditor.SetByte(weapon4Special3, (byte) value.Value);
+            set => _fileEditor.SetByte(weapon4Special3, (byte) value);
         }
 
         [BulkCopy]
@@ -1134,55 +1134,55 @@ namespace SF3.Models.X033_X031 {
         [BulkCopy]
         public MovementTypeValue MovementType {
             get => new MovementTypeValue(_fileEditor.GetByte(movementType));
-            set => _fileEditor.SetByte(movementType, (byte) value.Value);
+            set => _fileEditor.SetByte(movementType, (byte) value);
         }
 
         [BulkCopy]
         public WeaponTypeValue WeaponEquipable1 {
             get => new WeaponTypeValue(_fileEditor.GetByte(weaponEquipable1));
-            set => _fileEditor.SetByte(weaponEquipable1, (byte) value.Value);
+            set => _fileEditor.SetByte(weaponEquipable1, (byte) value);
         }
 
         [BulkCopy]
         public WeaponTypeValue WeaponEquipable2 {
             get => new WeaponTypeValue(_fileEditor.GetByte(weaponEquipable2));
-            set => _fileEditor.SetByte(weaponEquipable2, (byte) value.Value);
+            set => _fileEditor.SetByte(weaponEquipable2, (byte) value);
         }
 
         [BulkCopy]
         public WeaponTypeValue WeaponEquipable3 {
             get => new WeaponTypeValue(_fileEditor.GetByte(weaponEquipable3));
-            set => _fileEditor.SetByte(weaponEquipable3, (byte) value.Value);
+            set => _fileEditor.SetByte(weaponEquipable3, (byte) value);
         }
 
         [BulkCopy]
         public WeaponTypeValue WeaponEquipable4 {
             get => new WeaponTypeValue(_fileEditor.GetByte(weaponEquipable4));
-            set => _fileEditor.SetByte(weaponEquipable4, (byte) value.Value);
+            set => _fileEditor.SetByte(weaponEquipable4, (byte) value);
         }
 
         [BulkCopy]
         public WeaponTypeValue AccessoryEquipable1 {
             get => new WeaponTypeValue(_fileEditor.GetByte(accessoryEquipable1));
-            set => _fileEditor.SetByte(accessoryEquipable1, (byte) value.Value);
+            set => _fileEditor.SetByte(accessoryEquipable1, (byte) value);
         }
 
         [BulkCopy]
         public WeaponTypeValue AccessoryEquipable2 {
             get => new WeaponTypeValue(_fileEditor.GetByte(accessoryEquipable2));
-            set => _fileEditor.SetByte(accessoryEquipable2, (byte) value.Value);
+            set => _fileEditor.SetByte(accessoryEquipable2, (byte) value);
         }
 
         [BulkCopy]
         public WeaponTypeValue AccessoryEquipable3 {
             get => new WeaponTypeValue(_fileEditor.GetByte(accessoryEquipable3));
-            set => _fileEditor.SetByte(accessoryEquipable3, (byte) value.Value);
+            set => _fileEditor.SetByte(accessoryEquipable3, (byte) value);
         }
 
         [BulkCopy]
         public WeaponTypeValue AccessoryEquipable4 {
             get => new WeaponTypeValue(_fileEditor.GetByte(accessoryEquipable4));
-            set => _fileEditor.SetByte(accessoryEquipable4, (byte) value.Value);
+            set => _fileEditor.SetByte(accessoryEquipable4, (byte) value);
         }
 
         public int Address { get; }

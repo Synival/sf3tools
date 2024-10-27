@@ -102,7 +102,7 @@ namespace SF3.Models.X002 {
         }
         public WeaponTypeValue WeaponType {
             get => new WeaponTypeValue(_fileEditor.GetByte(WeaponTypeLocation));
-            set => _fileEditor.SetByte(WeaponTypeLocation, (byte) value.Value);
+            set => _fileEditor.SetByte(WeaponTypeLocation, (byte) value);
         }
         public int EffectsEquip {
             get => _fileEditor.GetByte(EffectsEquipLocation);
@@ -205,7 +205,7 @@ namespace SF3.Models.X002 {
 
         public EffectiveTypeValue PhysicalAttribute {
             get => new EffectiveTypeValue(_fileEditor.GetByte(PhysicalAttributeLocation));
-            set => _fileEditor.SetByte(PhysicalAttributeLocation, (byte) value.Value);
+            set => _fileEditor.SetByte(PhysicalAttributeLocation, (byte) value);
         }
 
         public int Unknown1 {
@@ -215,7 +215,7 @@ namespace SF3.Models.X002 {
 
         public EffectiveTypeValue MonsterType {
             get => new EffectiveTypeValue(_fileEditor.GetByte(MonsterTypeAttributeLocation));
-            set => _fileEditor.SetByte(MonsterTypeAttributeLocation, (byte) value.Value);
+            set => _fileEditor.SetByte(MonsterTypeAttributeLocation, (byte) value);
         }
 
         public int Unknown2 {
@@ -225,7 +225,7 @@ namespace SF3.Models.X002 {
 
         public StatTypeValue StatType1 {
             get => new StatTypeValue(_fileEditor.GetByte(StatType1Location));
-            set => _fileEditor.SetByte(StatType1Location, (byte) value.Value);
+            set => _fileEditor.SetByte(StatType1Location, (byte) value);
         }
 
         public int StatUp1 {
@@ -235,7 +235,7 @@ namespace SF3.Models.X002 {
 
         public StatTypeValue StatType2 {
             get => new StatTypeValue(_fileEditor.GetByte(StatType2Location));
-            set => _fileEditor.SetByte(StatType2Location, (byte) value.Value);
+            set => _fileEditor.SetByte(StatType2Location, (byte) value);
         }
 
         public int StatUp2 {
@@ -245,7 +245,7 @@ namespace SF3.Models.X002 {
 
         public StatTypeValue StatType3 {
             get => new StatTypeValue(_fileEditor.GetByte(StatType3Location));
-            set => _fileEditor.SetByte(StatType3Location, (byte) value.Value);
+            set => _fileEditor.SetByte(StatType3Location, (byte) value);
         }
 
         public int StatUp3 {
@@ -255,7 +255,7 @@ namespace SF3.Models.X002 {
 
         public StatTypeValue StatType4 {
             get => new StatTypeValue(_fileEditor.GetByte(StatType4Location));
-            set => _fileEditor.SetByte(StatType4Location, (byte) value.Value);
+            set => _fileEditor.SetByte(StatType4Location, (byte) value);
         }
 
         public int StatUp4 {
@@ -265,7 +265,7 @@ namespace SF3.Models.X002 {
 
         public SpellValue SpellUse {
             get => new SpellValue(Scenario, _fileEditor.GetByte(SpellOnUseLocation));
-            set => _fileEditor.SetByte(SpellOnUseLocation, (byte) value.Value);
+            set => _fileEditor.SetByte(SpellOnUseLocation, (byte) value);
         }
 
         public int SpellUseLv {

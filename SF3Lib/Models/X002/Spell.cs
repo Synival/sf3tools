@@ -92,7 +92,7 @@ namespace SF3.Models.X002 {
 
         public SpellTargetValue SpellTarget {
             get => new SpellTargetValue(_fileEditor.GetByte(targetType));
-            set => _fileEditor.SetByte(targetType, (byte) value.Value);
+            set => _fileEditor.SetByte(targetType, (byte) value);
         }
 
         public int SpellType {
@@ -102,7 +102,7 @@ namespace SF3.Models.X002 {
 
         public ElementValue Element {
             get => new ElementValue(_fileEditor.GetByte(element));
-            set => _fileEditor.SetByte(element, (byte) value.Value);
+            set => _fileEditor.SetByte(element, (byte) value);
         }
 
         public int SpellUnknown2 {

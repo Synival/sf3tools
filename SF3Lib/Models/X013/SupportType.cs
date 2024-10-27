@@ -55,12 +55,12 @@ namespace SF3.Models.X013 {
 
         public FriendshipBonusTypeValue SupportA {
             get => new FriendshipBonusTypeValue(_fileEditor.GetByte(supportA));
-            set => _fileEditor.SetByte(supportA, (byte) value.Value);
+            set => _fileEditor.SetByte(supportA, (byte) value);
         }
 
         public FriendshipBonusTypeValue SupportB {
             get => new FriendshipBonusTypeValue(_fileEditor.GetByte(supportB));
-            set => _fileEditor.SetByte(supportB, (byte) value.Value);
+            set => _fileEditor.SetByte(supportB, (byte) value);
         }
 
         public int SpellAddress { get; }

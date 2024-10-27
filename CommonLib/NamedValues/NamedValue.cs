@@ -61,10 +61,32 @@ namespace CommonLib.NamedValues {
         public static bool operator >(NamedValue lhs, NamedValue rhs) => lhs.Value > rhs.Value;
         public static bool operator ==(NamedValue lhs, NamedValue rhs) => lhs.Value == rhs.Value;
         public static bool operator !=(NamedValue lhs, NamedValue rhs) => lhs.Value != rhs.Value;
-        public override bool Equals(object rhs) => rhs is NamedValue ? Value == (rhs as NamedValue).Value : base.Equals(rhs);
+
+        public static bool operator <(NamedValue lhs, int rhs) => lhs.Value < rhs;
+        public static bool operator >(NamedValue lhs, int rhs) => lhs.Value > rhs;
+        public static bool operator ==(NamedValue lhs, int rhs) => lhs.Value == rhs;
+        public static bool operator !=(NamedValue lhs, int rhs) => lhs.Value != rhs;
+
+        public static bool operator <(int lhs, NamedValue rhs) => lhs < rhs.Value;
+        public static bool operator >(int lhs, NamedValue rhs) => lhs > rhs.Value;
+        public static bool operator ==(int lhs, NamedValue rhs) => lhs == rhs.Value;
+        public static bool operator !=(int lhs, NamedValue rhs) => lhs != rhs.Value;
+
+        public override bool Equals(object rhs) =>
+            rhs is NamedValue rhsNV ? Value == rhsNV.Value :
+            rhs is int rhsInt ? Value == rhsInt :
+            base.Equals(rhs);
+
         public override int GetHashCode() => Value;
 
-        public int CompareTo(object rhs) => rhs is NamedValue ? CompareTo(rhs as NamedValue) : throw new NotImplementedException();
+        public int CompareTo(object rhs) =>
+            rhs is NamedValue rhsNV ? CompareTo(rhsNV) :
+            rhs is int rhsInt ? CompareTo(rhsInt) :
+            throw new NotImplementedException();
+
         public int CompareTo(NamedValue rhs) => Value < rhs.Value ? -1 : Value == rhs.Value ? 0 : 1;
+        public int CompareTo(int rhs) => Value < rhs ? -1 : Value == rhs ? 0 : 1;
+
+        public static implicit operator int(NamedValue nv) => nv.Value;
     }
 }

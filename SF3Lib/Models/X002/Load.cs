@@ -73,7 +73,7 @@ namespace SF3.Models.X002 {
 
         public FileIndexValue X1 {
             get => new FileIndexValue(Scenario, _fileEditor.GetWord(x1));
-            set => _fileEditor.SetWord(x1, value.Value);
+            set => _fileEditor.SetWord(x1, value);
         }
 
         public int CHP {
@@ -83,7 +83,7 @@ namespace SF3.Models.X002 {
 
         public FileIndexValue X5 {
             get => new FileIndexValue(Scenario, _fileEditor.GetWord(x5));
-            set => _fileEditor.SetWord(x5, value.Value);
+            set => _fileEditor.SetWord(x5, value);
         }
 
         public int Music {
@@ -93,7 +93,7 @@ namespace SF3.Models.X002 {
 
         public FileIndexValue MPD {
             get => new FileIndexValue(Scenario, _fileEditor.GetWord(mpd));
-            set => _fileEditor.SetWord(mpd, value.Value);
+            set => _fileEditor.SetWord(mpd, value);
         }
 
         public int LoadUnknown {
@@ -103,7 +103,7 @@ namespace SF3.Models.X002 {
 
         public FileIndexValue CHR {
             get => new FileIndexValue(Scenario, _fileEditor.GetWord(chr));
-            set => _fileEditor.SetWord(chr, value.Value);
+            set => _fileEditor.SetWord(chr, value);
         }
 
         public int LoadAddress { get; }

@@ -294,7 +294,7 @@ namespace SF3.Models.X1 {
 
         public MonsterValue EnemyID {
             get => new MonsterValue(Scenario, false, true, _fileEditor.GetWord(enemyID));
-            set => _fileEditor.SetWord(enemyID, value.Value);
+            set => _fileEditor.SetWord(enemyID, value);
         }
 
         public int EnemyX {

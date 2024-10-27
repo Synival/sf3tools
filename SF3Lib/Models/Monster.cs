@@ -256,7 +256,7 @@ namespace SF3.Models {
 
         public SpellValue Spell1 {
             get => new SpellValue(Scenario, Editor.GetByte(spell1));
-            set => Editor.SetByte(spell1, (byte) value.Value);
+            set => Editor.SetByte(spell1, (byte) value);
         }
 
         public int Spell1Level {
@@ -266,7 +266,7 @@ namespace SF3.Models {
 
         public SpellValue Spell2 {
             get => new SpellValue(Scenario, Editor.GetByte(spell2));
-            set => Editor.SetByte(spell2, (byte) value.Value);
+            set => Editor.SetByte(spell2, (byte) value);
         }
 
         public int Spell2Level {
@@ -276,7 +276,7 @@ namespace SF3.Models {
 
         public SpellValue Spell3 {
             get => new SpellValue(Scenario, Editor.GetByte(spell3));
-            set => Editor.SetByte(spell3, (byte) value.Value);
+            set => Editor.SetByte(spell3, (byte) value);
         }
 
         public int Spell3Level {
@@ -286,7 +286,7 @@ namespace SF3.Models {
 
         public SpellValue Spell4 {
             get => new SpellValue(Scenario, Editor.GetByte(spell4));
-            set => Editor.SetByte(spell4, (byte) value.Value);
+            set => Editor.SetByte(spell4, (byte) value);
         }
 
         public int Spell4Level {
@@ -296,82 +296,82 @@ namespace SF3.Models {
 
         public ItemValue Weapon {
             get => new ItemValue(Scenario, Editor.GetWord(equippedWeapon));
-            set => Editor.SetWord(equippedWeapon, value.Value);
+            set => Editor.SetWord(equippedWeapon, value);
         }
 
         public ItemValue Accessory {
             get => new ItemValue(Scenario, Editor.GetWord(equippedAccessory));
-            set => Editor.SetWord(equippedAccessory, value.Value);
+            set => Editor.SetWord(equippedAccessory, value);
         }
 
         public ItemValue ItemSlot1 {
             get => new ItemValue(Scenario, Editor.GetWord(itemSlot1));
-            set => Editor.SetWord(itemSlot1, value.Value);
+            set => Editor.SetWord(itemSlot1, value);
         }
 
         public ItemValue ItemSlot2 {
             get => new ItemValue(Scenario, Editor.GetWord(itemSlot2));
-            set => Editor.SetWord(itemSlot2, value.Value);
+            set => Editor.SetWord(itemSlot2, value);
         }
 
         public ItemValue ItemSlot3 {
             get => new ItemValue(Scenario, Editor.GetWord(itemSlot3));
-            set => Editor.SetWord(itemSlot3, value.Value);
+            set => Editor.SetWord(itemSlot3, value);
         }
 
         public ItemValue ItemSlot4 {
             get => new ItemValue(Scenario, Editor.GetWord(itemSlot4));
-            set => Editor.SetWord(itemSlot4, value.Value);
+            set => Editor.SetWord(itemSlot4, value);
         }
 
         public SpecialValue Special1 {
             get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial1));
-            set => Editor.SetByte(enemySpecial1, (byte) value.Value);
+            set => Editor.SetByte(enemySpecial1, (byte) value);
         }
 
         public SpecialValue Special2 {
             get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial2));
-            set => Editor.SetByte(enemySpecial2, (byte) value.Value);
+            set => Editor.SetByte(enemySpecial2, (byte) value);
         }
 
         public SpecialValue Special3 {
             get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial3));
-            set => Editor.SetByte(enemySpecial3, (byte) value.Value);
+            set => Editor.SetByte(enemySpecial3, (byte) value);
         }
 
         public SpecialValue Special4 {
             get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial4));
-            set => Editor.SetByte(enemySpecial4, (byte) value.Value);
+            set => Editor.SetByte(enemySpecial4, (byte) value);
         }
 
         public SpecialValue Special5 {
             get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial5));
-            set => Editor.SetByte(enemySpecial5, (byte) value.Value);
+            set => Editor.SetByte(enemySpecial5, (byte) value);
         }
 
         public SpecialValue Special6 {
             get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial6));
-            set => Editor.SetByte(enemySpecial6, (byte) value.Value);
+            set => Editor.SetByte(enemySpecial6, (byte) value);
         }
 
         public SpecialValue Special7 {
             get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial7));
-            set => Editor.SetByte(enemySpecial7, (byte) value.Value);
+            set => Editor.SetByte(enemySpecial7, (byte) value);
         }
 
         public SpecialValue Special8 {
             get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial8));
-            set => Editor.SetByte(enemySpecial8, (byte) value.Value);
+            set => Editor.SetByte(enemySpecial8, (byte) value);
         }
 
         public SpecialValue Special9 {
             get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial9));
-            set => Editor.SetByte(enemySpecial9, (byte) value.Value);
+            set => Editor.SetByte(enemySpecial9, (byte) value);
         }
 
         public SpecialValue Special10 {
             get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial10));
-            set => Editor.SetByte(enemySpecial10, (byte) value.Value);
+            set => Editor.SetByte(enemySpecial10, (byte) value);
         }
 
         public int Unknown1 {
@@ -416,7 +416,7 @@ namespace SF3.Models {
 
         public ItemValue Drop {
             get => new ItemValue(Scenario, Editor.GetWord(drop));
-            set => Editor.SetWord(drop, value.Value);
+            set => Editor.SetWord(drop, value);
         }
 
         public int Unknown7 {
@@ -426,7 +426,7 @@ namespace SF3.Models {
 
         public DroprateValue Droprate {
             get => new DroprateValue(Editor.GetByte(droprate));
-            set => Editor.SetByte(droprate, (byte) value.Value);
+            set => Editor.SetByte(droprate, (byte) value);
         }
 
         public int SlowPlus {
@@ -446,7 +446,7 @@ namespace SF3.Models {
 
         public MovementTypeValue MovementType {
             get => new MovementTypeValue(Editor.GetByte(movementType));
-            set => Editor.SetByte(movementType, (byte) value.Value);
+            set => Editor.SetByte(movementType, (byte) value);
         }
 
         public int Unknown11 {

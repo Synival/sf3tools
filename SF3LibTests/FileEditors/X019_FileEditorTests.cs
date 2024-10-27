@@ -4,8 +4,8 @@ using SF3.Types;
 namespace SF3.Tests.FileEditors {
     [TestClass]
     public class X019_FileEditorTests {
-        private class IPETestCase : TestCase {
-            public IPETestCase(ScenarioType scenario, string filename, bool isX044, int expectedRows)
+        private class X019_TestCase : TestCase {
+            public X019_TestCase(ScenarioType scenario, string filename, bool isX044, int expectedRows)
             : base(scenario, filename) {
                 IsX044 = isX044;
                 ExpectedRows = expectedRows;
@@ -16,7 +16,7 @@ namespace SF3.Tests.FileEditors {
             public int ExpectedRows { get; }
         }
 
-        private readonly static List<IPETestCase> TestCases = new()
+        private readonly static List<X019_TestCase> TestCases = new()
         {
             new(ScenarioType.Scenario1, "X019.BIN", false, 142),
             new(ScenarioType.Scenario2, "X019.BIN", false, 191),
