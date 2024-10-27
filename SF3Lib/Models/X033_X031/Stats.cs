@@ -1138,51 +1138,51 @@ namespace SF3.Models.X033_X031 {
         }
 
         [BulkCopy]
-        public int WeaponEquipable1 {
-            get => _fileEditor.GetByte(weaponEquipable1);
-            set => _fileEditor.SetByte(weaponEquipable1, (byte) value);
+        public WeaponTypeValue WeaponEquipable1 {
+            get => new WeaponTypeValue(_fileEditor.GetByte(weaponEquipable1));
+            set => _fileEditor.SetByte(weaponEquipable1, (byte) value.Value);
         }
 
         [BulkCopy]
-        public int WeaponEquipable2 {
-            get => _fileEditor.GetByte(weaponEquipable2);
-            set => _fileEditor.SetByte(weaponEquipable2, (byte) value);
+        public WeaponTypeValue WeaponEquipable2 {
+            get => new WeaponTypeValue(_fileEditor.GetByte(weaponEquipable2));
+            set => _fileEditor.SetByte(weaponEquipable2, (byte) value.Value);
         }
 
         [BulkCopy]
-        public int WeaponEquipable3 {
-            get => _fileEditor.GetByte(weaponEquipable3);
-            set => _fileEditor.SetByte(weaponEquipable3, (byte) value);
+        public WeaponTypeValue WeaponEquipable3 {
+            get => new WeaponTypeValue(_fileEditor.GetByte(weaponEquipable3));
+            set => _fileEditor.SetByte(weaponEquipable3, (byte) value.Value);
         }
 
         [BulkCopy]
-        public int WeaponEquipable4 {
-            get => _fileEditor.GetByte(weaponEquipable4);
-            set => _fileEditor.SetByte(weaponEquipable4, (byte) value);
+        public WeaponTypeValue WeaponEquipable4 {
+            get => new WeaponTypeValue(_fileEditor.GetByte(weaponEquipable4));
+            set => _fileEditor.SetByte(weaponEquipable4, (byte) value.Value);
         }
 
         [BulkCopy]
-        public int AccessoryEquipable1 {
-            get => _fileEditor.GetByte(accessoryEquipable1);
-            set => _fileEditor.SetByte(accessoryEquipable1, (byte) value);
+        public WeaponTypeValue AccessoryEquipable1 {
+            get => new WeaponTypeValue(_fileEditor.GetByte(accessoryEquipable1));
+            set => _fileEditor.SetByte(accessoryEquipable1, (byte) value.Value);
         }
 
         [BulkCopy]
-        public int AccessoryEquipable2 {
-            get => _fileEditor.GetByte(accessoryEquipable2);
-            set => _fileEditor.SetByte(accessoryEquipable2, (byte) value);
+        public WeaponTypeValue AccessoryEquipable2 {
+            get => new WeaponTypeValue(_fileEditor.GetByte(accessoryEquipable2));
+            set => _fileEditor.SetByte(accessoryEquipable2, (byte) value.Value);
         }
 
         [BulkCopy]
-        public int AccessoryEquipable3 {
-            get => _fileEditor.GetByte(accessoryEquipable3);
-            set => _fileEditor.SetByte(accessoryEquipable3, (byte) value);
+        public WeaponTypeValue AccessoryEquipable3 {
+            get => new WeaponTypeValue(_fileEditor.GetByte(accessoryEquipable3));
+            set => _fileEditor.SetByte(accessoryEquipable3, (byte) value.Value);
         }
 
         [BulkCopy]
-        public int AccessoryEquipable4 {
-            get => _fileEditor.GetByte(accessoryEquipable4);
-            set => _fileEditor.SetByte(accessoryEquipable4, (byte) value);
+        public WeaponTypeValue AccessoryEquipable4 {
+            get => new WeaponTypeValue(_fileEditor.GetByte(accessoryEquipable4));
+            set => _fileEditor.SetByte(accessoryEquipable4, (byte) value.Value);
         }
 
         public int Address { get; }
