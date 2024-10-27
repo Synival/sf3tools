@@ -1,4 +1,4 @@
-using SF3.Tables.Shared;
+using SF3.Tables;
 using SF3.Tables.X1;
 using SF3.Types;
 

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using SF3.Tables;
-using SF3.Tables.Shared;
 using SF3.Tables.X002;
 using SF3.Types;
 

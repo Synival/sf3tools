@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using CommonLib.Extensions;
 using CommonLib.Utils;
 using SF3.FileEditors;
-using SF3.Models.Shared;
+using SF3.Models;
 using SF3.Types;
 
-namespace SF3.Tables.Shared {
+namespace SF3.Tables {
     public class WarpTable : Table<Warp> {
         public int MaxSize { get; } = 1000;
 
