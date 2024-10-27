@@ -22,9 +22,10 @@ namespace SF3.FileEditors {
         public MonsterTable MonsterTable { get; private set; }
 
         public bool IsX044 { get; }
+        public bool IsPDX044 => Scenario == ScenarioType.PremiumDisk && IsX044;
 
         protected override string BaseTitle => IsLoaded
-            ? base.BaseTitle + ((Scenario == ScenarioType.PremiumDisk && IsX044) ? " (PD X044)" : "")
+            ? base.BaseTitle + (IsPDX044 ? " (PD X044)" : "")
             : base.BaseTitle;
     }
 }

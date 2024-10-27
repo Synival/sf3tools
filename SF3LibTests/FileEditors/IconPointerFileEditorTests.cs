@@ -3,7 +3,7 @@ using SF3.Types;
 
 namespace SF3.Tests.FileEditors {
     [TestClass]
-    public class IconPointerEditorTests {
+    public class IconPointerFileEditorTests {
         private class IPETestCase : TestCase {
             public IPETestCase(ScenarioType scenario, string filename, bool isX026, int itemIconRows, int spellIconRows, int spellRealOffsetStart)
             : base(scenario, filename) {
@@ -40,7 +40,7 @@ namespace SF3.Tests.FileEditors {
         };
 
         [TestMethod]
-        public void ItemIconTable_X11_X21_X26_HasExpectedData() {
+        public void ItemIconTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var editor = new IconPointerFileEditor(testCase.Scenario, testCase.IsX026);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
@@ -52,7 +52,7 @@ namespace SF3.Tests.FileEditors {
         }
 
         [TestMethod]
-        public void SpellIconTable_X11_X21_X26_HasExpectedData() {
+        public void SpellIconTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var editor = new IconPointerFileEditor(testCase.Scenario, testCase.IsX026);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
