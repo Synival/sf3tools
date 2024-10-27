@@ -9,7 +9,7 @@ using static SF3.Utils.Resources;
 namespace SF3.Tables {
     public class SpellIconTable : Table<SpellIcon> {
         public SpellIconTable(IIconPointerFileEditor fileEditor, bool isX026) : base(fileEditor) {
-            ResourceFile = ResourceFileForScenario(FileEditor.Scenario, "SpellIcons.xml");
+            ResourceFile = ResourceFileForScenario(Scenario, "SpellIcons.xml");
             IsX026 = isX026;
 
             if (Scenario == ScenarioType.Scenario1) {
@@ -69,7 +69,7 @@ namespace SF3.Tables {
                 RealOffsetStart = 0x12A32;
             }
             else
-                throw new ArgumentException(nameof(fileEditor) + ".Scenario");
+                throw new ArgumentException(nameof(Scenario));
         }
 
         public override bool Load()

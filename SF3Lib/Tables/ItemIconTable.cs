@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 namespace SF3.Tables {
     public class ItemIconTable : Table<ItemIcon> {
         public ItemIconTable(ISF3FileEditor fileEditor, bool isX026) : base(fileEditor) {
-            ResourceFile = ResourceFileForScenario(FileEditor.Scenario, "Items.xml");
+            ResourceFile = ResourceFileForScenario(Scenario, "Items.xml");
             IsX026 = isX026;
 
             if (Scenario == ScenarioType.Scenario1) {
@@ -70,6 +70,6 @@ namespace SF3.Tables {
         public override int? MaxSize => 300;
 
         public bool IsX026 { get; }
-        public bool IsSc1X026 => FileEditor.Scenario == ScenarioType.Scenario1 && IsX026;
+        public bool IsSc1X026 => Scenario == ScenarioType.Scenario1 && IsX026;
     }
 }
