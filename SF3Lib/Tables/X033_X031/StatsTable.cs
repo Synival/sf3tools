@@ -1,57 +1,54 @@
 using System;
-using System.IO;
-using CommonLib.Extensions;
 using SF3.FileEditors;
 using SF3.Models.X033_X031;
+using SF3.Types;
 using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X033_X031 {
     public class StatsTable : Table<Stats> {
-        public override int? MaxSize => 300;
+        public StatsTable(ISF3FileEditor fileEditor) : base(fileEditor) {
+            ResourceFile = ResourceFileForScenario(Scenario, "ClassList.xml");
 
-        public StatsTable(IX033_X031_FileEditor fileEditor) : base(fileEditor) {
-            _fileEditor = fileEditor;
-            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "ClassList.xml");
-        }
+            var checkType     = FileEditor.GetByte(0x00000009);  // if it's 0x07 we're in a x033.bin
+            var checkVersion2 = FileEditor.GetByte(0x000000017); // to determine which version of scn2 we are using 
+            bool isX033       = checkType == 0x07;
 
-        private readonly string _resourceFile;
-        private readonly IX033_X031_FileEditor _fileEditor;
+            switch (Scenario) {
+                case ScenarioType.Scenario1:
+                    Address = isX033 ? 0x00000da4 : 0x00000d74;
+                    break;
 
-        public override string ResourceFile => _resourceFile;
-        public override int Address => throw new NotImplementedException();
-
-        /// <summary>
-        /// Loads data from the file editor provided in the constructor.
-        /// </summary>
-        /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
-        public override bool Load() {
-            _rows = new Stats[0];
-            FileStream stream = null;
-            try {
-                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
-
-                var xml = MakeXmlReader(stream);
-                _ = xml.Read();
-                while (!xml.EOF) {
-                    _ = xml.Read();
-                    if (xml.HasAttributes) {
-                        var newRow = new Stats(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        _rows = _rows.ExpandedWith(newRow);
-                        if (newRow.ID < 0 || newRow.ID >= MaxSize)
-                            throw new IndexOutOfRangeException();
+                case ScenarioType.Scenario2: {
+                    if (isX033) {
+                        var isScn2Ver1003 = checkVersion2 == 0x8c;
+                        Address = isScn2Ver1003 ? 0x00000ee0 : 0x00000f08;
                     }
+                    else {
+                        var isScn2Ver1003 = checkVersion2 == 0x4c;
+                        Address = isScn2Ver1003 ? 0x00000ea4 : 0x00000eb4;
+                    }
+
+                    break;
                 }
+
+                case ScenarioType.Scenario3:
+                    Address = isX033 ? 0x00001030 : 0x00000ff4;
+                    break;
+
+                case ScenarioType.PremiumDisk:
+                    Address = isX033 ? 0x00001204 : 0x000011bc;
+                    break;
+
+                default:
+                    throw new ArgumentException(nameof(Scenario));
             }
-            catch (FileLoadException) {
-                return false;
-            }
-            catch (FileNotFoundException) {
-                return false;
-            }
-            finally {
-                stream?.Close();
-            }
-            return true;
         }
+
+        public override bool Load()
+            => LoadFromResourceFile((id, name, address) => new Stats(FileEditor, id, name, address, Scenario));
+
+        public override string ResourceFile { get; }
+        public override int Address { get; }
+        public override int? MaxSize => 300;
     }
 }
