@@ -9,5 +9,6 @@ namespace SF3.Models {
         string Name { get; }
         int ID { get; }
         int Address { get; }
+        int Size { get; }
     }
 }

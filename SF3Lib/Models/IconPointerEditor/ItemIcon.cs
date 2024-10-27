@@ -73,12 +73,13 @@ namespace SF3.Models.IconPointerEditor {
                 throw new ArgumentException(nameof(fileEditor) + ".Scenario");
 
             if (IsSc1X026) {
-                Address = offset + (id * 0x02);
+                Size = 2;
+                Address = offset + (id * Size);
                 theItemIcon = Address; //1 byte
-
             }
             else {
-                Address = offset + (id * 0x04);
+                Size = 4;
+                Address = offset + (id * Size);
                 theItemIcon = Address; //2 bytes
             }
         }
@@ -88,6 +89,7 @@ namespace SF3.Models.IconPointerEditor {
         public string Name { get; }
         public int ID { get; }
         public int Address { get; }
+        public int Size { get; }
 
         public ScenarioType Scenario { get; }
         public bool IsX026 { get; }
