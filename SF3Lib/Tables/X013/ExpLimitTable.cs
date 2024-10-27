@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X013 {
     public class ExpLimitTable : Table<ExpLimit> {
-        public int MaxSize { get; } = 2;
+        public override int? MaxSize => 2;
 
         public ExpLimitTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

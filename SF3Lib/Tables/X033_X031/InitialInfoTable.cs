@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X033_X031 {
     public class InitialInfoTable : Table<InitialInfo> {
-        public int MaxSize { get; } = 100;
+        public override int? MaxSize => 100;
 
         public InitialInfoTable(IX033_X031_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

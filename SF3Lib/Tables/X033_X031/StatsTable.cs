@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X033_X031 {
     public class StatsTable : Table<Stats> {
-        public int MaxSize { get; } = 300;
+        public override int? MaxSize => 300;
 
         public StatsTable(IX033_X031_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

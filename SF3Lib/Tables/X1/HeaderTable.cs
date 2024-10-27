@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X1 {
     public class HeaderTable : Table<Header> {
-        public int MaxSize { get; } = 31;
+        public override int? MaxSize => 31;
 
         public HeaderTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

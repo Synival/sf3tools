@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X1 {
     public class EnterTable : Table<Enter> {
-        public int MaxSize { get; } = 100;
+        public override int? MaxSize => 100;
 
         public EnterTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

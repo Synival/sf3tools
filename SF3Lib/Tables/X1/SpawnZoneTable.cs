@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X1 {
     public class SpawnZoneTable : Table<SpawnZone> {
-        public int MaxSize { get; } = 30;
+        public override int? MaxSize => 30;
 
         public SpawnZoneTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

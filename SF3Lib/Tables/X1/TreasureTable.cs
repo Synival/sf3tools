@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X1 {
     public class TreasureTable : Table<Treasure> {
-        public int MaxSize { get; } = 255;
+        public override int? MaxSize => 255;
 
         /// <summary>
         /// TODO: what does this do when set?

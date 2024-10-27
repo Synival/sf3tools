@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X1 {
     public class NpcTable : Table<Npc> {
-        public int MaxSize { get; } = 100;
+        public override int? MaxSize => 100;
 
         public NpcTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

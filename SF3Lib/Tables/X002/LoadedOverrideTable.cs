@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X002 {
     public class LoadedOverrideTable : Table<LoadedOverride> {
-        public int MaxSize { get; } = 300;
+        public override int? MaxSize => 300;
 
         public LoadedOverrideTable(IX002_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X013 {
     public class StatusEffectTable : Table<StatusEffect> {
-        public int MaxSize { get; } = 1000;
+        public override int? MaxSize => 1000;
 
         public StatusEffectTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

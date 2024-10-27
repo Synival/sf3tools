@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X002 {
     public class PresetTable : Table<Preset> {
-        public int MaxSize { get; } = 31;
+        public override int? MaxSize => 31;
 
         public PresetTable(IX002_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

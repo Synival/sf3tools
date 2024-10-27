@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X1 {
     public class CustomMovementTable : Table<CustomMovement> {
-        public int MaxSize { get; } = 130;
+        public override int? MaxSize => 130;
 
         public CustomMovementTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

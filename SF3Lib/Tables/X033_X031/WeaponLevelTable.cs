@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X033_X031 {
     public class WeaponLevelTable : Table<WeaponLevel> {
-        public int MaxSize { get; } = 2;
+        public override int? MaxSize => 2;
 
         public WeaponLevelTable(IX033_X031_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

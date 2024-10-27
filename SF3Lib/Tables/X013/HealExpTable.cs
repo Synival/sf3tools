@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X013 {
     public class HealExpTable : Table<HealExp> {
-        public int MaxSize { get; } = 2;
+        public override int? MaxSize => 2;
 
         public HealExpTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

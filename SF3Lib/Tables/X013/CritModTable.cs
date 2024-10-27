@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X013 {
     public class CritModTable : Table<CritMod> {
-        public int MaxSize { get; } = 1;
+        public override int? MaxSize => 1;
 
         public CritModTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

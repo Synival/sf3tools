@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.IconPointerEditor {
     public class SpellIconTable : Table<SpellIcon> {
-        public int MaxSize { get; } = 256;
+        public override int? MaxSize => 256;
 
         public SpellIconTable(IIconPointerFileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

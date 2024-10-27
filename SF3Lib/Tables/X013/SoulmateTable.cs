@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X013 {
     public class SoulmateTable : Table<Soulmate> {
-        public int MaxSize { get; } = 1771;
+        public override int? MaxSize => 1771;
 
         public SoulmateTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

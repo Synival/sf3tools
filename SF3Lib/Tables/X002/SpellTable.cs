@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X002 {
     public class SpellTable : Table<Spell> {
-        public int MaxSize { get; } = 78;
+        public override int? MaxSize => 78;
 
         public SpellTable(IX002_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

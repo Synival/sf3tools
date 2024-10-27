@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X1 {
     public class TileMovementTable : Table<TileMovement> {
-        public int MaxSize { get; } = 31;
+        public override int? MaxSize => 31;
 
         public TileMovementTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

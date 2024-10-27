@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X1 {
     public class ArrowTable : Table<Arrow> {
-        public int MaxSize { get; } = 100;
+        public override int? MaxSize => 100;
 
         public ArrowTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

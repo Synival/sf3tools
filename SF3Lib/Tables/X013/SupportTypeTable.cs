@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X013 {
     public class SupportTypeTable : Table<SupportType> {
-        public int MaxSize { get; } = 120;
+        public override int? MaxSize => 120;
 
         public SupportTypeTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

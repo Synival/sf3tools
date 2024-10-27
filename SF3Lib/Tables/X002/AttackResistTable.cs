@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X002 {
     public class AttackResistTable : Table<AttackResist> {
-        public int MaxSize { get; } = 2;
+        public override int? MaxSize => 2;
 
         public AttackResistTable(IX002_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

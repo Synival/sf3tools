@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X002 {
     public class WeaponRankTable : Table<WeaponRank> {
-        public int MaxSize { get; } = 5;
+        public override int? MaxSize => 5;
 
         public WeaponRankTable(IX002_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

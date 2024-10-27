@@ -8,7 +8,7 @@ using SF3.Types;
 
 namespace SF3.Tables {
     public class WarpTable : Table<Warp> {
-        public int MaxSize { get; } = 1000;
+        public override int? MaxSize => 1000;
 
         public WarpTable(ISF3FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

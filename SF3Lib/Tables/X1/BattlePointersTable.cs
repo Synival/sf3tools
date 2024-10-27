@@ -7,7 +7,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X1 {
     public class BattlePointersTable : Table<BattlePointers> {
-        public int MaxSize { get; } = 5;
+        public override int? MaxSize => 5;
 
         public BattlePointersTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;

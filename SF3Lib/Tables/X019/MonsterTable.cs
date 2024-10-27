@@ -8,7 +8,7 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables.X019 {
     public class MonsterTable : Table<Monster> {
-        public int MaxSize { get; } = 256;
+        public override int? MaxSize => 256;
 
         public MonsterTable(IX019_FileEditor fileEditor, bool isX044) : base(fileEditor) {
             _fileEditor = fileEditor;
