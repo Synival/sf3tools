@@ -1892,7 +1892,7 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             // lvcWeaponLevelReqID
             // 
-            this.lvcWeaponLevelReqID.AspectName = "WeaponLevelID";
+            this.lvcWeaponLevelReqID.AspectName = "ID";
             this.lvcWeaponLevelReqID.AspectToStringFormat = "{0:X}";
             this.lvcWeaponLevelReqID.IsEditable = false;
             this.lvcWeaponLevelReqID.Text = "ID";
@@ -1900,14 +1900,14 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             // lvcWeaponLevelReqAddress
             // 
-            this.lvcWeaponLevelReqAddress.AspectName = "WeaponLevelAddress";
+            this.lvcWeaponLevelReqAddress.AspectName = "Address";
             this.lvcWeaponLevelReqAddress.AspectToStringFormat = "{0:X}";
             this.lvcWeaponLevelReqAddress.IsEditable = false;
             this.lvcWeaponLevelReqAddress.Text = "Address";
             // 
             // lvcWeaponLevelReqTable
             // 
-            this.lvcWeaponLevelReqTable.AspectName = "WeaponLevelName";
+            this.lvcWeaponLevelReqTable.AspectName = "Name";
             this.lvcWeaponLevelReqTable.AspectToStringFormat = "{0:X}";
             this.lvcWeaponLevelReqTable.IsEditable = false;
             this.lvcWeaponLevelReqTable.Text = "Table";

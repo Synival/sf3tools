@@ -28,7 +28,6 @@ namespace SF3.Tables {
                         var isScn2Ver1003 = checkVersion2 == 0x4c;
                         Address = isScn2Ver1003 ? 0x00002e5a : 0x00002e6a;
                     }
-
                     break;
                 }
 
