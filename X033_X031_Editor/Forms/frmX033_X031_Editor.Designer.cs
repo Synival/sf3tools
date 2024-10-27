@@ -1701,7 +1701,7 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             // lvcInitialInfoID
             // 
-            this.lvcInitialInfoID.AspectName = "PresetID";
+            this.lvcInitialInfoID.AspectName = "ID";
             this.lvcInitialInfoID.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoID.IsEditable = false;
             this.lvcInitialInfoID.Text = "ID";
@@ -1709,14 +1709,14 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             // lvcInitialInfoAddress
             // 
-            this.lvcInitialInfoAddress.AspectName = "PresetAddress";
+            this.lvcInitialInfoAddress.AspectName = "Address";
             this.lvcInitialInfoAddress.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoAddress.IsEditable = false;
             this.lvcInitialInfoAddress.Text = "Address";
             // 
             // lvcInitialInfoDefaultName
             // 
-            this.lvcInitialInfoDefaultName.AspectName = "PresetName";
+            this.lvcInitialInfoDefaultName.AspectName = "Name";
             this.lvcInitialInfoDefaultName.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoDefaultName.IsEditable = false;
             this.lvcInitialInfoDefaultName.Text = "DefaultName";
