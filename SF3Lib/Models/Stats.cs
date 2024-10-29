@@ -274,6 +274,9 @@ namespace SF3.Models {
             accessoryEquipable4 = Address + 0x7a;
         }
 
+        private string GetCharacterClassName(int value) => ValueNames.GetCharacterClassName(value);
+        private string GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
+
         public ScenarioType Scenario { get; }
         public bool IsPromoted => Editor.GetByte(characterClass) >= 0x20;
 
@@ -409,8 +412,9 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        public CharacterClassValue CharacterClass {
-            get => new CharacterClassValue(Editor.GetByte(characterClass));
+        [NameGetter(nameof(GetCharacterClassName))]
+        public int CharacterClass {
+            get => Editor.GetByte(characterClass);
             set => Editor.SetByte(characterClass, (byte) value);
         }
 
@@ -1080,50 +1084,58 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        public WeaponTypeValue WeaponEquipable1 {
-            get => new WeaponTypeValue(Editor.GetByte(weaponEquipable1));
+        [NameGetter(nameof(GetWeaponTypeName))]
+        public int WeaponEquipable1 {
+            get => Editor.GetByte(weaponEquipable1);
             set => Editor.SetByte(weaponEquipable1, (byte) value);
         }
 
         [BulkCopy]
-        public WeaponTypeValue WeaponEquipable2 {
-            get => new WeaponTypeValue(Editor.GetByte(weaponEquipable2));
+        [NameGetter(nameof(GetWeaponTypeName))]
+        public int WeaponEquipable2 {
+            get => Editor.GetByte(weaponEquipable2);
             set => Editor.SetByte(weaponEquipable2, (byte) value);
         }
 
         [BulkCopy]
-        public WeaponTypeValue WeaponEquipable3 {
-            get => new WeaponTypeValue(Editor.GetByte(weaponEquipable3));
+        [NameGetter(nameof(GetWeaponTypeName))]
+        public int WeaponEquipable3 {
+            get => Editor.GetByte(weaponEquipable3);
             set => Editor.SetByte(weaponEquipable3, (byte) value);
         }
 
         [BulkCopy]
-        public WeaponTypeValue WeaponEquipable4 {
-            get => new WeaponTypeValue(Editor.GetByte(weaponEquipable4));
+        [NameGetter(nameof(GetWeaponTypeName))]
+        public int WeaponEquipable4 {
+            get => Editor.GetByte(weaponEquipable4);
             set => Editor.SetByte(weaponEquipable4, (byte) value);
         }
 
         [BulkCopy]
-        public WeaponTypeValue AccessoryEquipable1 {
-            get => new WeaponTypeValue(Editor.GetByte(accessoryEquipable1));
+        [NameGetter(nameof(GetWeaponTypeName))]
+        public int AccessoryEquipable1 {
+            get => Editor.GetByte(accessoryEquipable1);
             set => Editor.SetByte(accessoryEquipable1, (byte) value);
         }
 
         [BulkCopy]
-        public WeaponTypeValue AccessoryEquipable2 {
-            get => new WeaponTypeValue(Editor.GetByte(accessoryEquipable2));
+        [NameGetter(nameof(GetWeaponTypeName))]
+        public int AccessoryEquipable2 {
+            get => Editor.GetByte(accessoryEquipable2);
             set => Editor.SetByte(accessoryEquipable2, (byte) value);
         }
 
         [BulkCopy]
-        public WeaponTypeValue AccessoryEquipable3 {
-            get => new WeaponTypeValue(Editor.GetByte(accessoryEquipable3));
+        [NameGetter(nameof(GetWeaponTypeName))]
+        public int AccessoryEquipable3 {
+            get => Editor.GetByte(accessoryEquipable3);
             set => Editor.SetByte(accessoryEquipable3, (byte) value);
         }
 
         [BulkCopy]
-        public WeaponTypeValue AccessoryEquipable4 {
-            get => new WeaponTypeValue(Editor.GetByte(accessoryEquipable4));
+        [NameGetter(nameof(GetWeaponTypeName))]
+        public int AccessoryEquipable4 {
+            get => Editor.GetByte(accessoryEquipable4);
             set => Editor.SetByte(accessoryEquipable4, (byte) value);
         }
     }

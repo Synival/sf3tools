@@ -1,3 +1,4 @@
+using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 using SF3.Values;
@@ -92,6 +93,8 @@ namespace SF3.Models.X002 {
             //address = 0x0354c + (id * 0x18);
         }
 
+        private string GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
+
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int ID { get; }
         public string Name { get; }
@@ -100,10 +103,13 @@ namespace SF3.Models.X002 {
             get => _fileEditor.GetWord(PriceLocation);
             set => _fileEditor.SetWord(PriceLocation, value);
         }
-        public WeaponTypeValue WeaponType {
-            get => new WeaponTypeValue(_fileEditor.GetByte(WeaponTypeLocation));
+
+        [NameGetter(nameof(GetWeaponTypeName))]
+        public int WeaponType {
+            get => _fileEditor.GetByte(WeaponTypeLocation);
             set => _fileEditor.SetByte(WeaponTypeLocation, (byte) value);
         }
+
         public int EffectsEquip {
             get => _fileEditor.GetByte(EffectsEquipLocation);
             set => _fileEditor.SetByte(EffectsEquipLocation, (byte) value);

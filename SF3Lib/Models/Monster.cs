@@ -1,3 +1,4 @@
+using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 using SF3.Values;
@@ -151,6 +152,8 @@ namespace SF3.Models {
             SpriteID          = id + 200;
         }
 
+        private string GetItemName(int value) => ValueNames.GetItemName(Scenario, value);
+
         public IByteEditor Editor { get; }
         public ScenarioType Scenario { get; }
         public int ID { get; }
@@ -294,33 +297,39 @@ namespace SF3.Models {
             set => Editor.SetByte(spell4Level, (byte) value);
         }
 
-        public ItemValue Weapon {
-            get => new ItemValue(Scenario, Editor.GetWord(equippedWeapon));
+        [NameGetter(nameof(GetItemName))]
+        public int Weapon {
+            get => Editor.GetWord(equippedWeapon);
             set => Editor.SetWord(equippedWeapon, value);
         }
 
-        public ItemValue Accessory {
-            get => new ItemValue(Scenario, Editor.GetWord(equippedAccessory));
+        [NameGetter(nameof(GetItemName))]
+        public int Accessory {
+            get => Editor.GetWord(equippedAccessory);
             set => Editor.SetWord(equippedAccessory, value);
         }
 
-        public ItemValue ItemSlot1 {
-            get => new ItemValue(Scenario, Editor.GetWord(itemSlot1));
+        [NameGetter(nameof(GetItemName))]
+        public int ItemSlot1 {
+            get => Editor.GetWord(itemSlot1);
             set => Editor.SetWord(itemSlot1, value);
         }
 
-        public ItemValue ItemSlot2 {
-            get => new ItemValue(Scenario, Editor.GetWord(itemSlot2));
+        [NameGetter(nameof(GetItemName))]
+        public int ItemSlot2 {
+            get => Editor.GetWord(itemSlot2);
             set => Editor.SetWord(itemSlot2, value);
         }
 
-        public ItemValue ItemSlot3 {
-            get => new ItemValue(Scenario, Editor.GetWord(itemSlot3));
+        [NameGetter(nameof(GetItemName))]
+        public int ItemSlot3 {
+            get => Editor.GetWord(itemSlot3);
             set => Editor.SetWord(itemSlot3, value);
         }
 
-        public ItemValue ItemSlot4 {
-            get => new ItemValue(Scenario, Editor.GetWord(itemSlot4));
+        [NameGetter(nameof(GetItemName))]
+        public int ItemSlot4 {
+            get => Editor.GetWord(itemSlot4);
             set => Editor.SetWord(itemSlot4, value);
         }
 
@@ -414,8 +423,9 @@ namespace SF3.Models {
             set => Editor.SetWord(gold, value);
         }
 
-        public ItemValue Drop {
-            get => new ItemValue(Scenario, Editor.GetWord(drop));
+        [NameGetter(nameof(GetItemName))]
+        public int Drop {
+            get => Editor.GetWord(drop);
             set => Editor.SetWord(drop, value);
         }
 
