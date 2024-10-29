@@ -62,10 +62,10 @@ namespace SF3.Models {
         public int Address { get; }
         public int Size { get; }
 
-        private string GetCharacterClassName(int value) => new CharacterClassValue(value).Name;
-        private string GetSexName(int value) => new SexValue(value).Name;
-        private string GetItemName(int value) => new ItemValue(Scenario, value).Name;
-        private string GetWeaponTypeName(int value) => new WeaponTypeValue(value).Name;
+        private string GetCharacterClassName(int value) => ValueNames.GetCharacterClassName(value);
+        private string GetSexName(int value) => ValueNames.GetSexName(value);
+        private string GetItemName(int value) => ValueNames.GetItemName(Scenario, value);
+        private string GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
 
         [BulkCopy]
         public int CharacterE {
