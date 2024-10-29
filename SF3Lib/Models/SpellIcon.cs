@@ -17,7 +17,7 @@ namespace SF3.Models {
 
             IsSc1X026       = scenario == ScenarioType.Scenario1 && isX026;
             RealOffsetStart = realOffsetStart;
-            SpellName       = new SpellValue(scenario, ID).Name;
+            SpellName       = new SpellValue(scenario, ID).NameOrValueStr;
 
             if (IsSc1X026) {
                 Size = 2;

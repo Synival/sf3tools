@@ -12,7 +12,7 @@ namespace SF3.Editor.Utils {
         public static ComboBox MakeNamedValueComboBox(Dictionary<NamedValue, string> allPossibleValues, NamedValue extraValue) {
             if (!allPossibleValues.ContainsKey(extraValue)) {
                 allPossibleValues = new Dictionary<NamedValue, string>(allPossibleValues) {
-                    { extraValue, extraValue.ValueName }
+                    { extraValue, extraValue.FullName }
                 };
             }
 

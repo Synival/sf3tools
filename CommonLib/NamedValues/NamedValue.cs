@@ -7,9 +7,11 @@ namespace CommonLib.NamedValues {
     /// Used when values need both names to look up and must be identifiable as a specific type.
     /// </summary>
     public abstract class NamedValue : IComparable, IComparable<NamedValue> {
-        public NamedValue(string name, string valueName, int value) {
+        public NamedValue(string name, string valueStr, int value) {
             Name = name;
-            ValueName = valueName;
+            ValueStr = valueStr;
+            NameOrValueStr = name ?? valueStr;
+            FullName = valueStr + ((name != null) ? (": " + name) : "");
             Value = value;
         }
 
@@ -40,17 +42,27 @@ namespace CommonLib.NamedValues {
         /// </summary>
         public abstract Dictionary<NamedValue, string> ComboBoxValues { get; }
 
-        public override string ToString() => ValueName;
+        public override string ToString() => FullName;
 
         /// <summary>
-        /// The name of the value.
+        /// Name of the value, or 'null' if it doesn't have one.
         /// </summary>
         public string Name { get; }
 
         /// <summary>
         /// Combination of value + name.
         /// </summary>
-        public string ValueName { get; }
+        public string ValueStr { get; }
+
+        /// <summary>
+        /// The name of the value or, if there is no name, the value as a string.
+        /// </summary>
+        public string NameOrValueStr { get; }
+
+        /// <summary>
+        /// Full combination of value + name.
+        /// </summary>
+        public string FullName { get; }
 
         /// <summary>
         /// Value represented.

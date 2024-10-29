@@ -58,8 +58,10 @@ namespace CommonLib.Extensions {
         /// Result for individual properties affected by BulkCopyProperties() functions.
         /// </summary>
         public class BulkCopyPropertyResult : BulkCopyResult {
-            public BulkCopyPropertyResult(PropertyInfo property, object oldValue, object newValue)
+            public BulkCopyPropertyResult(object objFrom, object objTo, PropertyInfo property, object oldValue, object newValue)
             : base(null) {
+                ObjFrom = objFrom;
+                ObjTo = objTo;
                 Property = property;
                 OldValue = oldValue;
                 NewValue = newValue;
@@ -69,13 +71,26 @@ namespace CommonLib.Extensions {
 
             public override string MakeFullReport() => MakeSummaryReport();
 
-            public override string MakeSummaryReport()
-                => !Changed ? "" : Property.Name + ": " + OldValue.ToStringHex() + " => " + NewValue.ToStringHex() + "\n";
+            public override string MakeSummaryReport() {
+                return !Changed ? "" : Property.Name + ": " +
+                    (OldValue.ToNamedValue(ObjTo, Property) ?? OldValue.ToStringHex()) + " => " +
+                    (NewValue.ToNamedValue(ObjTo, Property) ?? NewValue.ToStringHex()) + "\n";
+            }
 
             /// <summary>
             /// The property affected.
             /// </summary>
             public PropertyInfo Property { get; }
+
+            /// <summary>
+            /// The object from which the value was copied.
+            /// </summary>
+            public object ObjFrom { get; }
+
+            /// <summary>
+            /// The object to which the value was copied.
+            /// </summary>
+            public object ObjTo { get; }
 
             /// <summary>
             /// The old value of the property before the copy.
@@ -313,7 +328,7 @@ namespace CommonLib.Extensions {
                 property.SetValue(objTo, property.GetValue(objFrom));
                 var newValue = property.GetValue(objTo);
 
-                resultList.Add(new BulkCopyPropertyResult(property, oldValue, newValue));
+                resultList.Add(new BulkCopyPropertyResult(objFrom, objTo, property, oldValue, newValue));
             }
 
             // Get all public properties with the [BulkCopy] attribute.

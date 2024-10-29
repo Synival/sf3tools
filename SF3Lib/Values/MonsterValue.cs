@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using SF3.Types;
 using static CommonLib.Utils.ControlUtils;
@@ -55,8 +56,8 @@ namespace SF3.Values {
         public MonsterValue(ScenarioType scenario, bool isX044, bool withFFFF, int value)
         : base(
             scenario,
-            NameOrHexValue(value, GetPossibleValues(scenario, isX044, withFFFF), ResourceInfo.FormatString),
-            HexValueWithName(value, GetPossibleValues(scenario, isX044, withFFFF), ResourceInfo.FormatString),
+            NameOrNull(value, GetPossibleValues(scenario, isX044, withFFFF)),
+            value.ToStringHex(ResourceInfo.FormatString, ""),
             value
         ) {
             IsX044 = isX044;

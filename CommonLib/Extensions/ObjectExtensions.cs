@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using CommonLib.Attributes;
 
 namespace CommonLib.Extensions {
     public static partial class ObjectExtensions {
@@ -32,29 +33,57 @@ namespace CommonLib.Extensions {
         /// <param name="obj">Object to ToString() or return a hex value for.</param>
         /// <returns>The value of 'obj' formatted, if possible, with 'formatString' or "X2".
         /// Otherwise returns obj.ToString().</returns>
-        public static string ToStringHex(this object obj, string formatString = null) {
+        public static string ToStringHex(this object obj, string formatString = null, string prefix = "0x") {
             switch (obj) {
                 case null:
                     throw new ArgumentNullException(nameof(obj));
                 case byte v:
-                    return "0x" + v.ToString(formatString ?? "X2");
+                    return prefix + v.ToString(formatString ?? "X2");
                 case sbyte v:
-                    return "0x" + v.ToString(formatString ?? "X2");
+                    return prefix + v.ToString(formatString ?? "X2");
                 case ushort v:
-                    return "0x" + v.ToString(formatString ?? "X2");
+                    return prefix + v.ToString(formatString ?? "X2");
                 case short v:
-                    return "0x" + v.ToString(formatString ?? "X2");
+                    return prefix + v.ToString(formatString ?? "X2");
                 case uint v:
-                    return "0x" + v.ToString(formatString ?? "X2");
+                    return prefix + v.ToString(formatString ?? "X2");
                 case int v:
-                    return "0x" + v.ToString(formatString ?? "X2");
+                    return prefix + v.ToString(formatString ?? "X2");
                 case ulong v:
-                    return "0x" + v.ToString(formatString ?? "X2");
+                    return prefix + v.ToString(formatString ?? "X2");
                 case long v:
-                    return "0x" + v.ToString(formatString ?? "X2");
+                    return prefix + v.ToString(formatString ?? "X2");
                 default:
                     return obj.ToString();
             }
+        }
+
+        /// <summary>
+        /// Returns a nicely formatted named value for an object if a NamedValueAttribute is present.
+        /// Otherwise returns null.
+        /// </summary>
+        /// <param name="value">The value to convert to a name.</param>
+        /// <param name="containerObj">The object which contains the property.</param>
+        /// <param name="property">The property that has the NamedValueAttribute.</param>
+        /// <returns>A nicely formatted value + name or 'null' if no NamedValueAttribute was found.</returns>
+        public static string ToNamedValue(this object value, object containerObj, PropertyInfo property)
+            => ToNamedValue(value, containerObj, property.GetCustomAttribute<NameGetterAttribute>());
+
+        /// <summary>
+        /// Returns a nicely formatted named value for an object if a NamedValueAttribute is supplied.
+        /// Otherwise returns null.
+        /// </summary>
+        /// <param name="value">The value to convert to a name.</param>
+        /// <param name="containerObj">The object which contains the property.</param>
+        /// <param name="attr">The NameValueAttribute associated with the value.</param>
+        /// <returns>A nicely formatted value + name or 'null' if no NamedValueAttribute was supplied.</returns>
+        public static string ToNamedValue(this object value, object containerObj, NameGetterAttribute attr) {
+            if (attr == null)
+                return null;
+            var hexValue = value.ToStringHex(null, "");
+            var intValue = Convert.ToInt16(hexValue, 16);
+            var name = attr.GetName(containerObj, intValue);
+            return hexValue + ((name != null) ? ": " + name : "");
         }
     }
 }

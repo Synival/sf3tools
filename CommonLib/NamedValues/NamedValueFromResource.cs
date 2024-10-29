@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CommonLib.Extensions;
 using static CommonLib.Utils.ControlUtils;
 using static CommonLib.Utils.ResourceUtils;
 using static CommonLib.Utils.Utils;
@@ -34,8 +35,8 @@ namespace CommonLib.NamedValues {
         where TResourceInfo : INamedValueFromResourceInfo, new() {
         public NamedValueFromResource(int value)
         : base(
-            NameOrHexValue(value, ResourceInfo.PossibleValues, ResourceInfo.FormatString),
-            HexValueWithName(value, ResourceInfo.PossibleValues, ResourceInfo.FormatString),
+            NameOrNull(value, ResourceInfo.PossibleValues),
+            value.ToStringHex(ResourceInfo.FormatString, ""),
             value
         ) {
         }

@@ -62,6 +62,11 @@ namespace SF3.Models {
         public int Address { get; }
         public int Size { get; }
 
+        private string GetCharacterClassName(int value) => new CharacterClassValue(value).Name;
+        private string GetSexName(int value) => new SexValue(value).Name;
+        private string GetItemName(int value) => new ItemValue(Scenario, value).Name;
+        private string GetWeaponTypeName(int value) => new WeaponTypeValue(value).Name;
+
         [BulkCopy]
         public int CharacterE {
             get => Editor.GetByte(character);
@@ -69,8 +74,9 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        public CharacterClassValue CharacterClassE {
-            get => new CharacterClassValue(Editor.GetByte(characterClass));
+        [NameGetter(nameof(GetCharacterClassName))]
+        public int CharacterClassE {
+            get => Editor.GetByte(characterClass);
             set => Editor.SetByte(characterClass, (byte) value);
         }
 
@@ -81,50 +87,58 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        public SexValue Sex {
-            get => new SexValue(Editor.GetByte(sex));
+        [NameGetter(nameof(GetSexName))]
+        public int Sex {
+            get => Editor.GetByte(sex);
             set => Editor.SetByte(sex, (byte) value);
         }
 
         [BulkCopy]
-        public ItemValue Weapon {
-            get => new ItemValue(Scenario, Editor.GetWord(weapon));
+        [NameGetter(nameof(GetItemName))]
+        public int Weapon {
+            get => Editor.GetWord(weapon);
             set => Editor.SetWord(weapon, value);
         }
 
         [BulkCopy]
-        public ItemValue Accessory {
-            get => new ItemValue(Scenario, Editor.GetWord(accessory));
+        [NameGetter(nameof(GetItemName))]
+        public int Accessory {
+            get => Editor.GetWord(accessory);
             set => Editor.SetWord(accessory, value);
         }
 
         [BulkCopy]
-        public ItemValue Item1 {
-            get => new ItemValue(Scenario, Editor.GetWord(item1));
+        [NameGetter(nameof(GetItemName))]
+        public int Item1 {
+            get => Editor.GetWord(item1);
             set => Editor.SetWord(item1, value);
         }
 
         [BulkCopy]
-        public ItemValue Item2 {
-            get => new ItemValue(Scenario, Editor.GetWord(item2));
+        [NameGetter(nameof(GetItemName))]
+        public int Item2 {
+            get => Editor.GetWord(item2);
             set => Editor.SetWord(item2, value);
         }
 
         [BulkCopy]
-        public ItemValue Item3 {
-            get => new ItemValue(Scenario, Editor.GetWord(item3));
+        [NameGetter(nameof(GetItemName))]
+        public int Item3 {
+            get => Editor.GetWord(item3);
             set => Editor.SetWord(item3, value);
         }
 
         [BulkCopy]
-        public ItemValue Item4 {
-            get => new ItemValue(Scenario, Editor.GetWord(item4));
+        [NameGetter(nameof(GetItemName))]
+        public int Item4 {
+            get => Editor.GetWord(item4);
             set => Editor.SetWord(item4, value);
         }
 
         [BulkCopy]
-        public WeaponTypeValue Weapon1Type {
-            get => new WeaponTypeValue(Editor.GetByte(weapon1Type));
+        [NameGetter(nameof(GetWeaponTypeName))]
+        public int Weapon1Type {
+            get => Editor.GetByte(weapon1Type);
             set => Editor.SetByte(weapon1Type, (byte) value);
         }
 
@@ -135,8 +149,9 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        public WeaponTypeValue Weapon2Type {
-            get => new WeaponTypeValue(Editor.GetByte(weapon2Type));
+        [NameGetter(nameof(GetWeaponTypeName))]
+        public int Weapon2Type {
+            get => Editor.GetByte(weapon2Type);
             set => Editor.SetByte(weapon2Type, (byte) value);
         }
 
@@ -147,8 +162,9 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        public WeaponTypeValue Weapon3Type {
-            get => new WeaponTypeValue(Editor.GetByte(weapon3Type));
+        [NameGetter(nameof(GetWeaponTypeName))]
+        public int Weapon3Type {
+            get => Editor.GetByte(weapon3Type);
             set => Editor.SetByte(weapon3Type, (byte) value);
         }
 
@@ -159,8 +175,9 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        public WeaponTypeValue Weapon4Type {
-            get => new WeaponTypeValue(Editor.GetByte(weapon4Type));
+        [NameGetter(nameof(GetWeaponTypeName))]
+        public int Weapon4Type {
+            get => Editor.GetByte(weapon4Type);
             set => Editor.SetByte(weapon4Type, (byte) value);
         }
 

@@ -18,19 +18,19 @@ namespace CommonLib.Utils {
             // Add values below MinValue...
             foreach (var kv in baseValue.PossibleValues.Where(x => x.Key < baseValue.MinValue).OrderBy(x => x.Key)) {
                 var value = baseValue.MakeRelatedValue(kv.Key);
-                dict.Add(value, value.ValueName);
+                dict.Add(value, value.FullName);
             }
 
             // ...add values in range (MinValue, MaxValue)....
             for (var i = baseValue.MinValue; i <= baseValue.MaxValue; i++) {
                 var value = baseValue.MakeRelatedValue(i);
-                dict.Add(value, value.ValueName);
+                dict.Add(value, value.FullName);
             }
 
             // ...and finally add values above MaxValue.
             foreach (var kv in baseValue.PossibleValues.Where(x => x.Key > baseValue.MaxValue).OrderBy(x => x.Key)) {
                 var value = baseValue.MakeRelatedValue(kv.Key);
-                dict.Add(value, value.ValueName);
+                dict.Add(value, value.FullName);
             }
 
             return dict;

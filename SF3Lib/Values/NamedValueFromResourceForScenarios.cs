@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using SF3.Types;
 using static CommonLib.Utils.ControlUtils;
@@ -36,8 +37,8 @@ namespace SF3.Values {
         where TResourceInfo : INamedValueFromResourceForScenariosInfo, new() {
         public NamedValueFromResourceForScenarios(ScenarioType scenario, int value)
         : base(
-            NameOrHexValue(value, ResourceInfo.PossibleValues[scenario], ResourceInfo.FormatString),
-            HexValueWithName(value, ResourceInfo.PossibleValues[scenario], ResourceInfo.FormatString),
+            NameOrNull(value, ResourceInfo.PossibleValues[scenario]),
+            value.ToStringHex(ResourceInfo.FormatString, ""),
             value
         ) {
             Scenario = scenario;
