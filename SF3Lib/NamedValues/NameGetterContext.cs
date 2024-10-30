@@ -32,6 +32,7 @@ namespace SF3.NamedValues {
             };
         }
 
+        public string GetName(int value, object parameter) => _nameGetters[(NamedValueType) parameter](value).Name;
         public NameAndInfo GetNameAndInfo(int value, object parameter) => _nameGetters[(NamedValueType) parameter](value);
         public bool CanGetNameAndInfo(int value, object parameter) => _nameGetters.ContainsKey((NamedValueType) parameter);
 

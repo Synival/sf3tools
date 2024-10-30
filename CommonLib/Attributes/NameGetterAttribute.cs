@@ -12,7 +12,7 @@ namespace CommonLib.Attributes {
         /// when fetching names and info.
         /// </summary>
         /// <param name="parameter">Optional parameter used when fetching names and info.</param>
-        public NameGetterAttribute(object parameter) {
+        public NameGetterAttribute(object parameter = null) {
             Parameter = parameter;
         }
 

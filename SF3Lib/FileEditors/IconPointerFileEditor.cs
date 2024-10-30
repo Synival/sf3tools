@@ -73,7 +73,7 @@ namespace SF3.FileEditors {
             var has16BitIconAddr = Scenario == ScenarioType.Scenario1 && isX026;
 
             return new List<ITable>() {
-                (SpellIconTable = new SpellIconTable(this, spellIconAddress, has16BitIconAddr, spellIconRealOffsetStart)),
+                (SpellIconTable = new SpellIconTable(this, spellIconAddress, NameContext, has16BitIconAddr, spellIconRealOffsetStart)),
                 (ItemIconTable  = new ItemIconTable(this, itemIconAddress, has16BitIconAddr))
             };
         }

@@ -11,6 +11,14 @@ namespace CommonLib.NamedValues
     public interface INameGetterContext
     {
         /// <summary>
+        /// Fetches the name of a value.
+        /// </summary>
+        /// <param name="value">The value whose name we want to fetch.</param>
+        /// <param name="parameter">Optional parameter assigned to the NameGetterAttribute.</param>
+        /// <returns>The name of the value (if one exists).</returns>
+        string GetName(int value, object parameter);
+
+        /// <summary>
         /// Fetches the name of a value and information about it.
         /// </summary>
         /// <param name="value">The value whose name we want to fetch.</param>
