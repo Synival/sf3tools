@@ -275,12 +275,6 @@ namespace SF3.Models {
             accessoryEquipable4 = Address + 0x7a;
         }
 
-        private NameAndInfo GetCharacterClassName(int value) => ValueNames.GetCharacterClassName(value);
-        private NameAndInfo GetMovementTypeName(int value) => ValueNames.GetMovementTypeName(value);
-        private NameAndInfo GetSpecialName(int value) => ValueNames.GetSpecialName(Scenario, value);
-        private NameAndInfo GetSpellName(int value) => ValueNames.GetSpellName(Scenario, value);
-        private NameAndInfo GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
-
         public ScenarioType Scenario { get; }
         public bool IsPromoted => Editor.GetByte(characterClass) >= 0x20;
 
@@ -416,7 +410,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetCharacterClassName))]
+        [NameGetter(NamedValueType.CharacterClass)]
         public int CharacterClass {
             get => Editor.GetByte(characterClass);
             set => Editor.SetByte(characterClass, (byte) value);
@@ -710,7 +704,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int S1LearnedID {
             get => Editor.GetByte(s1LearnedID);
             set => Editor.SetByte(s1LearnedID, (byte) value);
@@ -729,7 +723,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int S2LearnedID {
             get => Editor.GetByte(s2LearnedID);
             set => Editor.SetByte(s2LearnedID, (byte) value);
@@ -748,7 +742,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int S3LearnedID {
             get => Editor.GetByte(s3LearnedID);
             set => Editor.SetByte(s3LearnedID, (byte) value);
@@ -767,7 +761,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int S4LearnedID {
             get => Editor.GetByte(s4LearnedID);
             set => Editor.SetByte(s4LearnedID, (byte) value);
@@ -786,7 +780,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int S5LearnedID {
             get => Editor.GetByte(s5LearnedID);
             set => Editor.SetByte(s5LearnedID, (byte) value);
@@ -805,7 +799,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int S6LearnedID {
             get => Editor.GetByte(s6LearnedID);
             set => Editor.SetByte(s6LearnedID, (byte) value);
@@ -824,7 +818,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int S7LearnedID {
             get => Editor.GetByte(s7LearnedID);
             set => Editor.SetByte(s7LearnedID, (byte) value);
@@ -843,7 +837,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int S8LearnedID {
             get => Editor.GetByte(s8LearnedID);
             set => Editor.SetByte(s8LearnedID, (byte) value);
@@ -862,7 +856,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int S9LearnedID {
             get => Editor.GetByte(s9LearnedID);
             set => Editor.SetByte(s9LearnedID, (byte) value);
@@ -881,7 +875,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int S10LearnedID {
             get => Editor.GetByte(s10LearnedID);
             set => Editor.SetByte(s10LearnedID, (byte) value);
@@ -900,7 +894,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int S11LearnedID {
             get => Editor.GetByte(s11LearnedID);
             set => Editor.SetByte(s11LearnedID, (byte) value);
@@ -919,91 +913,91 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int S12LearnedID {
             get => Editor.GetByte(s12LearnedID);
             set => Editor.SetByte(s12LearnedID, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Weapon1Special1 {
             get => Editor.GetByte(weapon1Special1);
             set => Editor.SetByte(weapon1Special1, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Weapon1Special2 {
             get => Editor.GetByte(weapon1Special2);
             set => Editor.SetByte(weapon1Special2, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Weapon1Special3 {
             get => Editor.GetByte(weapon1Special3);
             set => Editor.SetByte(weapon1Special3, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Weapon2Special1 {
             get => Editor.GetByte(weapon2Special1);
             set => Editor.SetByte(weapon2Special1, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Weapon2Special2 {
             get => Editor.GetByte(weapon2Special2);
             set => Editor.SetByte(weapon2Special2, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Weapon2Special3 {
             get => Editor.GetByte(weapon2Special3);
             set => Editor.SetByte(weapon2Special3, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Weapon3Special1 {
             get => Editor.GetByte(weapon3Special1);
             set => Editor.SetByte(weapon3Special1, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Weapon3Special2 {
             get => Editor.GetByte(weapon3Special2);
             set => Editor.SetByte(weapon3Special2, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Weapon3Special3 {
             get => Editor.GetByte(weapon3Special3);
             set => Editor.SetByte(weapon3Special3, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Weapon4Special1 {
             get => Editor.GetByte(weapon4Special1);
             set => Editor.SetByte(weapon4Special1, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Weapon4Special2 {
             get => Editor.GetByte(weapon4Special2);
             set => Editor.SetByte(weapon4Special2, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Weapon4Special3 {
             get => Editor.GetByte(weapon4Special3);
             set => Editor.SetByte(weapon4Special3, (byte) value);
@@ -1106,63 +1100,63 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetMovementTypeName))]
+        [NameGetter(NamedValueType.MovementType)]
         public int MovementType {
             get => Editor.GetByte(movementType);
             set => Editor.SetByte(movementType, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetWeaponTypeName))]
+        [NameGetter(NamedValueType.WeaponType)]
         public int WeaponEquipable1 {
             get => Editor.GetByte(weaponEquipable1);
             set => Editor.SetByte(weaponEquipable1, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetWeaponTypeName))]
+        [NameGetter(NamedValueType.WeaponType)]
         public int WeaponEquipable2 {
             get => Editor.GetByte(weaponEquipable2);
             set => Editor.SetByte(weaponEquipable2, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetWeaponTypeName))]
+        [NameGetter(NamedValueType.WeaponType)]
         public int WeaponEquipable3 {
             get => Editor.GetByte(weaponEquipable3);
             set => Editor.SetByte(weaponEquipable3, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetWeaponTypeName))]
+        [NameGetter(NamedValueType.WeaponType)]
         public int WeaponEquipable4 {
             get => Editor.GetByte(weaponEquipable4);
             set => Editor.SetByte(weaponEquipable4, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetWeaponTypeName))]
+        [NameGetter(NamedValueType.WeaponType)]
         public int AccessoryEquipable1 {
             get => Editor.GetByte(accessoryEquipable1);
             set => Editor.SetByte(accessoryEquipable1, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetWeaponTypeName))]
+        [NameGetter(NamedValueType.WeaponType)]
         public int AccessoryEquipable2 {
             get => Editor.GetByte(accessoryEquipable2);
             set => Editor.SetByte(accessoryEquipable2, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetWeaponTypeName))]
+        [NameGetter(NamedValueType.WeaponType)]
         public int AccessoryEquipable3 {
             get => Editor.GetByte(accessoryEquipable3);
             set => Editor.SetByte(accessoryEquipable3, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetWeaponTypeName))]
+        [NameGetter(NamedValueType.WeaponType)]
         public int AccessoryEquipable4 {
             get => Editor.GetByte(accessoryEquipable4);
             set => Editor.SetByte(accessoryEquipable4, (byte) value);

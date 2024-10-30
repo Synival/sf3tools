@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Extensions;
+using CommonLib.NamedValues;
 using DFRLib;
 using DFRTool.GUI.Forms;
 using SF3.Editor.Extensions;
@@ -101,7 +102,7 @@ namespace SF3.Editor.Forms {
 
             ObjectListViews = this.GetAllObjectsOfTypeInFields<ObjectListView>(false);
             foreach (var olv in ObjectListViews)
-                olv.Enhance();
+                olv.Enhance(null /* TODO: actual context!! */);
 
             UpdateTitle();
         }
@@ -345,7 +346,7 @@ namespace SF3.Editor.Forms {
                 return;
             }
 
-            ProduceAndPresentBulkCopyReport(result);
+            ProduceAndPresentBulkCopyReport(result, null /* TODO: actual context!! */);
         }
 
         /// <summary>
@@ -383,14 +384,14 @@ namespace SF3.Editor.Forms {
             }
 
             ObjectListViews.ForEach(x => x.RefreshAllItems());
-            ProduceAndPresentBulkCopyReport(result);
+            ProduceAndPresentBulkCopyReport(result, null /* TODO: actual context!! */);
         }
 
-        private void ProduceAndPresentBulkCopyReport(ObjectExtensions.BulkCopyPropertiesResult result) {
-            var copyReport = result.MakeSummaryReport();
+        private void ProduceAndPresentBulkCopyReport(ObjectExtensions.BulkCopyPropertiesResult result, INameGetterContext nameContext) {
+            var copyReport = result.MakeSummaryReport(nameContext);
 
             // Output summary files.
-            var fullReport = result.MakeFullReport();
+            var fullReport = result.MakeFullReport(nameContext);
             var wroteBulkCopyReport = false;
             if (fullReport != "") {
                 try {

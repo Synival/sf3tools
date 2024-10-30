@@ -64,8 +64,6 @@ namespace SF3.Models.X002 {
             //address = 0x0354c + (id * 0x18);
         }
 
-        private NameAndInfo GetFileIndexName(int value) => ValueNames.GetFileIndexName(Scenario, value);
-
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         [BulkCopyRowName]
@@ -80,7 +78,7 @@ namespace SF3.Models.X002 {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetFileIndexName))]
+        [NameGetter(NamedValueType.FileIndex)]
         public int X1 {
             get => _fileEditor.GetWord(x1);
             set => _fileEditor.SetWord(x1, value);
@@ -93,7 +91,7 @@ namespace SF3.Models.X002 {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetFileIndexName))]
+        [NameGetter(NamedValueType.FileIndex)]
         public int X5 {
             get => _fileEditor.GetWord(x5);
             set => _fileEditor.SetWord(x5, value);
@@ -106,7 +104,7 @@ namespace SF3.Models.X002 {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetFileIndexName))]
+        [NameGetter(NamedValueType.FileIndex)]
         public int MPD {
             get => _fileEditor.GetWord(mpd);
             set => _fileEditor.SetWord(mpd, value);
@@ -119,7 +117,7 @@ namespace SF3.Models.X002 {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetFileIndexName))]
+        [NameGetter(NamedValueType.FileIndex)]
         public int CHR {
             get => _fileEditor.GetWord(chr);
             set => _fileEditor.SetWord(chr, value);

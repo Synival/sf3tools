@@ -51,19 +51,17 @@ namespace SF3.Models.X013 {
             //address = 0x0354c + (id * 0x18);
         }
 
-        private NameAndInfo GetFriendshipBonusTypeName(int value) => ValueNames.GetEffectiveTypeName(value);
-
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int SpellID { get; }
         public string SpellName { get; }
 
-        [NameGetter(nameof(GetFriendshipBonusTypeName))]
+        [NameGetter(NamedValueType.FriendshipBonusType)]
         public int SupportA {
             get => _fileEditor.GetByte(supportA);
             set => _fileEditor.SetByte(supportA, (byte) value);
         }
 
-        [NameGetter(nameof(GetFriendshipBonusTypeName))]
+        [NameGetter(NamedValueType.FriendshipBonusType)]
         public int SupportB {
             get => _fileEditor.GetByte(supportB);
             set => _fileEditor.SetByte(supportB, (byte) value);

@@ -94,11 +94,6 @@ namespace SF3.Models.X002 {
             //address = 0x0354c + (id * 0x18);
         }
 
-        private NameAndInfo GetEffectiveTypeName(int value) => ValueNames.GetEffectiveTypeName(value);
-        private NameAndInfo GetSpellName(int value) => ValueNames.GetSpellName(Scenario, value);
-        private NameAndInfo GetStatTypeName(int value) => ValueNames.GetStatTypeName(value);
-        private NameAndInfo GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
-
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         [BulkCopyRowName]
@@ -113,7 +108,7 @@ namespace SF3.Models.X002 {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetWeaponTypeName))]
+        [NameGetter(NamedValueType.WeaponType)]
         public int WeaponType {
             get => _fileEditor.GetByte(WeaponTypeLocation);
             set => _fileEditor.SetByte(WeaponTypeLocation, (byte) value);
@@ -226,7 +221,7 @@ namespace SF3.Models.X002 {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetEffectiveTypeName))]
+        [NameGetter(NamedValueType.EffectiveType)]
         public int PhysicalAttribute {
             get => _fileEditor.GetByte(PhysicalAttributeLocation);
             set => _fileEditor.SetByte(PhysicalAttributeLocation, (byte) value);
@@ -239,7 +234,7 @@ namespace SF3.Models.X002 {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetEffectiveTypeName))]
+        [NameGetter(NamedValueType.EffectiveType)]
         public int MonsterType {
             get => _fileEditor.GetByte(MonsterTypeAttributeLocation);
             set => _fileEditor.SetByte(MonsterTypeAttributeLocation, (byte) value);
@@ -252,7 +247,7 @@ namespace SF3.Models.X002 {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetStatTypeName))]
+        [NameGetter(NamedValueType.StatType)]
         public int StatType1 {
             get => _fileEditor.GetByte(StatType1Location);
             set => _fileEditor.SetByte(StatType1Location, (byte) value);
@@ -265,7 +260,7 @@ namespace SF3.Models.X002 {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetStatTypeName))]
+        [NameGetter(NamedValueType.StatType)]
         public int StatType2 {
             get => _fileEditor.GetByte(StatType2Location);
             set => _fileEditor.SetByte(StatType2Location, (byte) value);
@@ -278,7 +273,7 @@ namespace SF3.Models.X002 {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetStatTypeName))]
+        [NameGetter(NamedValueType.StatType)]
         public int StatType3 {
             get => _fileEditor.GetByte(StatType3Location);
             set => _fileEditor.SetByte(StatType3Location, (byte) value);
@@ -291,7 +286,7 @@ namespace SF3.Models.X002 {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetStatTypeName))]
+        [NameGetter(NamedValueType.StatType)]
         public int StatType4 {
             get => _fileEditor.GetByte(StatType4Location);
             set => _fileEditor.SetByte(StatType4Location, (byte) value);
@@ -304,7 +299,7 @@ namespace SF3.Models.X002 {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int SpellUse {
             get => _fileEditor.GetByte(SpellOnUseLocation);
             set => _fileEditor.SetByte(SpellOnUseLocation, (byte) value);

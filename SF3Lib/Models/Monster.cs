@@ -153,12 +153,6 @@ namespace SF3.Models {
             SpriteID          = id + 200;
         }
 
-        private NameAndInfo GetDroprateName(int value) => ValueNames.GetDroprateName(value);
-        private NameAndInfo GetItemName(int value) => ValueNames.GetItemName(Scenario, value);
-        private NameAndInfo GetMovementTypeName(int value) => ValueNames.GetMovementTypeName(value);
-        private NameAndInfo GetSpecialName(int value) => ValueNames.GetSpecialName(Scenario, value);
-        private NameAndInfo GetSpellName(int value) => ValueNames.GetSpellName(Scenario, value);
-
         public IByteEditor Editor { get; }
         public ScenarioType Scenario { get; }
 
@@ -285,7 +279,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int Spell1 {
             get => Editor.GetByte(spell1);
             set => Editor.SetByte(spell1, (byte) value);
@@ -298,7 +292,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int Spell2 {
             get => Editor.GetByte(spell2);
             set => Editor.SetByte(spell2, (byte) value);
@@ -311,7 +305,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int Spell3 {
             get => Editor.GetByte(spell3);
             set => Editor.SetByte(spell3, (byte) value);
@@ -324,7 +318,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int Spell4 {
             get => Editor.GetByte(spell4);
             set => Editor.SetByte(spell4, (byte) value);
@@ -337,112 +331,112 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetItemName))]
+        [NameGetter(NamedValueType.Item)]
         public int Weapon {
             get => Editor.GetWord(equippedWeapon);
             set => Editor.SetWord(equippedWeapon, value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetItemName))]
+        [NameGetter(NamedValueType.Item)]
         public int Accessory {
             get => Editor.GetWord(equippedAccessory);
             set => Editor.SetWord(equippedAccessory, value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetItemName))]
+        [NameGetter(NamedValueType.Item)]
         public int ItemSlot1 {
             get => Editor.GetWord(itemSlot1);
             set => Editor.SetWord(itemSlot1, value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetItemName))]
+        [NameGetter(NamedValueType.Item)]
         public int ItemSlot2 {
             get => Editor.GetWord(itemSlot2);
             set => Editor.SetWord(itemSlot2, value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetItemName))]
+        [NameGetter(NamedValueType.Item)]
         public int ItemSlot3 {
             get => Editor.GetWord(itemSlot3);
             set => Editor.SetWord(itemSlot3, value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetItemName))]
+        [NameGetter(NamedValueType.Item)]
         public int ItemSlot4 {
             get => Editor.GetWord(itemSlot4);
             set => Editor.SetWord(itemSlot4, value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Special1 {
             get => Editor.GetByte(enemySpecial1);
             set => Editor.SetByte(enemySpecial1, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Special2 {
             get => Editor.GetByte(enemySpecial2);
             set => Editor.SetByte(enemySpecial2, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Special3 {
             get => Editor.GetByte(enemySpecial3);
             set => Editor.SetByte(enemySpecial3, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Special4 {
             get => Editor.GetByte(enemySpecial4);
             set => Editor.SetByte(enemySpecial4, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Special5 {
             get => Editor.GetByte(enemySpecial5);
             set => Editor.SetByte(enemySpecial5, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Special6 {
             get => Editor.GetByte(enemySpecial6);
             set => Editor.SetByte(enemySpecial6, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Special7 {
             get => Editor.GetByte(enemySpecial7);
             set => Editor.SetByte(enemySpecial7, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Special8 {
             get => Editor.GetByte(enemySpecial8);
             set => Editor.SetByte(enemySpecial8, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Special9 {
             get => Editor.GetByte(enemySpecial9);
             set => Editor.SetByte(enemySpecial9, (byte) value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpecialName))]
+        [NameGetter(NamedValueType.Special)]
         public int Special10 {
             get => Editor.GetByte(enemySpecial10);
             set => Editor.SetByte(enemySpecial10, (byte) value);
@@ -496,7 +490,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetItemName))]
+        [NameGetter(NamedValueType.Item)]
         public int Drop {
             get => Editor.GetWord(drop);
             set => Editor.SetWord(drop, value);
@@ -509,7 +503,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetDroprateName))]
+        [NameGetter(NamedValueType.Droprate)]
         public int Droprate {
             get => Editor.GetByte(droprate);
             set => Editor.SetByte(droprate, (byte) value);
@@ -534,7 +528,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetMovementTypeName))]
+        [NameGetter(NamedValueType.MovementType)]
         public int MovementType {
             get => Editor.GetByte(movementType);
             set => Editor.SetByte(movementType, (byte) value);

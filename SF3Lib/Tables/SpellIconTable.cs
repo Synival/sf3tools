@@ -1,5 +1,6 @@
 using SF3.FileEditors;
 using SF3.Models;
+using SF3.NamedValues;
 using static SF3.Utils.Resources;
 
 namespace SF3.Tables {
@@ -12,7 +13,9 @@ namespace SF3.Tables {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new SpellIcon(FileEditor, id, name, address, Scenario, Has16BitIconAddr, RealOffsetStart));
+            => LoadFromResourceFile((id, name, address) => new SpellIcon(
+                FileEditor, id, name, address, ValueNames.SpellInfo.Info[Scenario].Values[id], Scenario, Has16BitIconAddr, RealOffsetStart
+            ));
 
         public override string ResourceFile { get; }
         public override int Address { get; }

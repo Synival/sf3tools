@@ -74,8 +74,6 @@ namespace SF3.Models.X002 {
             //address = 0x0354c + (id * 0x18);
         }
 
-        private NameAndInfo GetFileIndexName(int value) => ValueNames.GetFileIndexName(Scenario, value);
-
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         [BulkCopyRowName]
@@ -114,56 +112,56 @@ namespace SF3.Models.X002 {
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetFileIndexName))]
+        [NameGetter(NamedValueType.FileIndex)]
         public int SynMpd {
             get => _fileEditor.GetDouble(synMpd);
             set => _fileEditor.SetDouble(synMpd, value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetFileIndexName))]
+        [NameGetter(NamedValueType.FileIndex)]
         public int MedMpd {
             get => _fileEditor.GetDouble(medMpd);
             set => _fileEditor.SetDouble(medMpd, value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetFileIndexName))]
+        [NameGetter(NamedValueType.FileIndex)]
         public int JulMpd {
             get => _fileEditor.GetDouble(julMpd);
             set => _fileEditor.SetDouble(julMpd, value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetFileIndexName))]
+        [NameGetter(NamedValueType.FileIndex)]
         public int ExtraMpd {
             get => _fileEditor.GetDouble(extraMpd);
             set => _fileEditor.SetDouble(extraMpd, value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetFileIndexName))]
+        [NameGetter(NamedValueType.FileIndex)]
         public int SynChr {
             get => _fileEditor.GetDouble(synChr);
             set => _fileEditor.SetDouble(synChr, value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetFileIndexName))]
+        [NameGetter(NamedValueType.FileIndex)]
         public int MedChr {
             get => _fileEditor.GetDouble(medChr);
             set => _fileEditor.SetDouble(medChr, value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetFileIndexName))]
+        [NameGetter(NamedValueType.FileIndex)]
         public int JulChr {
             get => _fileEditor.GetDouble(julChr);
             set => _fileEditor.SetDouble(julChr, value);
         }
 
         [BulkCopy]
-        [NameGetter(nameof(GetFileIndexName))]
+        [NameGetter(NamedValueType.FileIndex)]
         public int ExtraChr {
             get => _fileEditor.GetDouble(extraChr);
             set => _fileEditor.SetDouble(extraChr, value);

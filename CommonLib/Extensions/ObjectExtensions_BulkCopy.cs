@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using CommonLib.Attributes;
+using CommonLib.NamedValues;
 
 namespace CommonLib.Extensions {
     public static partial class ObjectExtensions {
@@ -19,13 +20,13 @@ namespace CommonLib.Extensions {
             /// Produces a report for itself as well as all children.
             /// </summary>
             /// <returns>A string separated by newlines without a trailing newline.</returns>
-            string MakeFullReport();
+            string MakeFullReport(INameGetterContext nameContext);
 
             /// <summary>
             /// Produces a report for itself.
             /// </summary>
             /// <returns></returns>
-            string MakeSummaryReport();
+            string MakeSummaryReport(INameGetterContext nameContext);
 
             /// <summary>
             /// 'True' if any changes were made.
@@ -46,8 +47,8 @@ namespace CommonLib.Extensions {
                 ChildResults = childResults;
             }
 
-            public abstract string MakeFullReport();
-            public abstract string MakeSummaryReport();
+            public abstract string MakeFullReport(INameGetterContext nameContext);
+            public abstract string MakeSummaryReport(INameGetterContext nameContext);
 
             public IEnumerable<IBulkCopyResult> ChildResults { get; }
             public abstract bool Changed { get; }
@@ -69,12 +70,12 @@ namespace CommonLib.Extensions {
                 ChangeCount = Changed ? 1 : 0;
             }
 
-            public override string MakeFullReport() => MakeSummaryReport();
+            public override string MakeFullReport(INameGetterContext nameContext) => MakeSummaryReport(nameContext);
 
-            public override string MakeSummaryReport() {
+            public override string MakeSummaryReport(INameGetterContext nameContext) {
                 return !Changed ? "" : Property.Name + ": " +
-                    (OldValue.ToNamedValue(ObjTo, Property) ?? OldValue.ToStringHex()) + " => " +
-                    (NewValue.ToNamedValue(ObjTo, Property) ?? NewValue.ToStringHex()) + "\n";
+                    (OldValue.ToNamedValue(nameContext, Property) ?? OldValue.ToStringHex()) + " => " +
+                    (NewValue.ToNamedValue(nameContext, Property) ?? NewValue.ToStringHex()) + "\n";
             }
 
             /// <summary>
@@ -117,13 +118,13 @@ namespace CommonLib.Extensions {
                 Changed = ChangeCount > 0;
             }
 
-            public override string MakeFullReport() {
-                var report = string.Join("", ChildResults.Select(x => x.MakeFullReport()));
+            public override string MakeFullReport(INameGetterContext nameContext) {
+                var report = string.Join("", ChildResults.Select(x => x.MakeFullReport(nameContext)));
                 return (report == "") ? "" : Object.GetType().Name + "\n" + report.Indent("  ");
             }
 
-            public override string MakeSummaryReport() {
-                var report = string.Join("", ChildResults.Select(x => x.MakeSummaryReport()));
+            public override string MakeSummaryReport(INameGetterContext nameContext) {
+                var report = string.Join("", ChildResults.Select(x => x.MakeSummaryReport(nameContext)));
                 return (report == "") ? "" : Object.GetType().Name + "\n" + report.Indent("  ");
             }
 
@@ -155,19 +156,19 @@ namespace CommonLib.Extensions {
                 ChangeCount = Changed ? copyResult.ChangeCount : 0;
 
                 // Determine row name.
-                var rowNameProperties = rowFrom
+                var rowNameProperties = rowTo
                     .GetType()
                     .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                     .Where(x => x.IsDefined(typeof(BulkCopyRowNameAttribute)))
-                    .Select(x => x.GetValue(rowFrom).ToString())
+                    .Select(x => x.GetValue(rowTo).ToString())
                     .ToList();
 
                 Name = rowNameProperties.Any() ? string.Join(" / ", rowNameProperties) : "Row " + index;
             }
 
-            public string MakeFullReport() => CopyResult?.MakeFullReport() ?? "";
+            public string MakeFullReport(INameGetterContext nameContext) => CopyResult?.MakeFullReport(nameContext) ?? "";
 
-            public string MakeSummaryReport() => CopyResult?.MakeSummaryReport() ?? "";
+            public string MakeSummaryReport(INameGetterContext nameContext) => CopyResult?.MakeSummaryReport(nameContext) ?? "";
 
             /// <summary>
             /// The index of the row in the 'listFrom' collection.
@@ -224,12 +225,12 @@ namespace CommonLib.Extensions {
                 Changed = ChangeCount > 0;
             }
 
-            public override string MakeFullReport() {
+            public override string MakeFullReport(INameGetterContext nameContext) {
                 var report =
                     "Summary:\n" +
-                    MakeSummaryReport(true).Indent("  ");
+                    MakeSummaryReport(nameContext, true).Indent("  ");
 
-                var individualChangesReport = MakeIndividualChangesReport(true);
+                var individualChangesReport = MakeIndividualChangesReport(nameContext, true);
                 report +=
                     "Changes:\n" +
                     ((individualChangesReport == "") ? "  (none)\n" : individualChangesReport.Indent("  "));
@@ -237,9 +238,9 @@ namespace CommonLib.Extensions {
                 return report;
             }
 
-            public override string MakeSummaryReport() => MakeSummaryReport(false);
+            public override string MakeSummaryReport(INameGetterContext nameContext) => MakeSummaryReport(nameContext, false);
 
-            public string MakeSummaryReport(bool inFullReport) {
+            public string MakeSummaryReport(INameGetterContext nameContext, bool inFullReport) {
                 var report =
                     (inFullReport ? ("Rows copied: " + RowsCopied + "\n") : "") +
                     ((inFullReport || InRowsSkipped != 0) ? ("Input rows skipped: " + InRowsSkipped + "\n") : "") +
@@ -254,7 +255,7 @@ namespace CommonLib.Extensions {
                 // We probably will never have this, but just in case...
                 var otherRows = ChildResults.Except(InputRows).ToList();
                 if (otherRows.Any())
-                    report += string.Join("", otherRows.Select(x => MakeSummaryReport().Indent("  ")).ToList());
+                    report += string.Join("", otherRows.Select(x => MakeSummaryReport(nameContext).Indent("  ")).ToList());
 
                 return report;
             }
@@ -263,11 +264,11 @@ namespace CommonLib.Extensions {
             /// Produces a detailed report of all changes in the list.
             /// </summary>
             /// <returns>A multiline string with a trailing "\n".</returns>
-            public string MakeIndividualChangesReport(bool fullReport = false) {
+            public string MakeIndividualChangesReport(INameGetterContext nameContext, bool fullReport = false) {
                 var report = "";
 
                 foreach (var row in InputRows) {
-                    var rowReport = fullReport ? row.MakeFullReport() : row.MakeSummaryReport();
+                    var rowReport = fullReport ? row.MakeFullReport(nameContext) : row.MakeSummaryReport(nameContext);
                     if (rowReport == "")
                         continue;
                     report += row.Name + "\n" + rowReport.Indent("  ");
@@ -337,6 +338,12 @@ namespace CommonLib.Extensions {
             foreach (var property in copyContentsList) {
                 var valueFrom = property.GetValue(objFrom);
                 var valueTo = property.GetValue(objTo);
+
+                // Don't recurse through objects that are unassigned, on either end.
+                // We have no idea how to instantiate them anyway.
+                // TODO: at least log this!
+                if (valueFrom == null || valueTo == null)
+                    continue;
 
                 if (typeof(IEnumerable<object>).IsAssignableFrom(valueFrom.GetType()))
                     resultList.Add(BulkCopyCollectionProperties(valueFrom as IEnumerable<object>, valueTo as IEnumerable<object>, inherit));

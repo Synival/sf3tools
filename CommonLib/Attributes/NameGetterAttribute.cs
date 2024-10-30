@@ -7,35 +7,36 @@ namespace CommonLib.Attributes {
     /// An attribute with the name of a "getter" method that fetches the name of the associated property's value.
     /// </summary>
     public class NameGetterAttribute : Attribute {
-        public NameGetterAttribute(string methodName) {
-            MethodName = methodName;
+        /// <summary>
+        /// Creates a NameGetterAttribute with an optional parameter that is passed to the INameGetterContext
+        /// when fetching names and info.
+        /// </summary>
+        /// <param name="parameter">Optional parameter used when fetching names and info.</param>
+        public NameGetterAttribute(object parameter) {
+            Parameter = parameter;
         }
 
         /// <summary>
         /// Fetches the property's value's name and all information about it.
         /// </summary>
-        /// <param name="containerObj">The object which contains this property.</param>
-        /// <param name="value">The current value of the property.</param>
+        /// <param name="context">The object that will provide the name for this value.</param>
+        /// <param name="value">The value for whose name we're trying to fetch.</param>
         /// <returns>The return value of: containerObj.<MethodName>(value)</returns>
-        public NameAndInfo GetNameAndInfo(object containerObj, int value = 0) {
-            var method = containerObj.GetType().GetMethod(
-                MethodName,
-                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            return (NameAndInfo) method.Invoke(containerObj, new object[] { value });
-        }
+        public NameAndInfo GetNameAndInfo(INameGetterContext context, int value, bool foo)
+            => context.GetNameAndInfo(value, Parameter);
 
         /// <summary>
         /// Fetches the property's value's name using the fetcher method.
         /// </summary>
-        /// <param name="containerObj">The object which contains this property.</param>
-        /// <param name="value">The current value of the property.</param>
+        /// <param name="context">The object that will provide the name for this value.</param>
+        /// <param name="value">The value for whose name we're trying to fetch.</param>
         /// <returns>The return value of: containerObj.<MethodName>(value).Name</returns>
-        public string GetName(object containerObj, int value)
-            => GetNameAndInfo(containerObj, value).Name;
+        public string GetName(INameGetterContext context, int value, bool foo)
+            => GetNameAndInfo(context, value, false).Name;
 
         /// <summary>
-        /// The name of the method that fetches a NameAndInfo instance.
+        /// The parameter used when fetching names and info.
         /// </summary>
-        public string MethodName { get; }
+        public object Parameter { get; }
     }
 }

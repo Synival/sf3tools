@@ -58,8 +58,6 @@ namespace SF3.Models.X002 {
             //address = 0x0354c + (id * 0x18);
         }
 
-        private NameAndInfo GetSpellName(int value) => ValueNames.GetSpellName(Scenario, value);
-
         public ScenarioType Scenario => _fileEditor.Scenario;
 
         [BulkCopyRowName]
@@ -68,7 +66,7 @@ namespace SF3.Models.X002 {
         public int PresetAddress { get; }
 
         [BulkCopy]
-        [NameGetter(nameof(GetSpellName))]
+        [NameGetter(NamedValueType.Spell)]
         public int SpellID2 {
             get => _fileEditor.GetByte(spell);
             set => _fileEditor.SetByte(spell, (byte) value);

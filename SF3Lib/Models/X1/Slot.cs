@@ -282,32 +282,6 @@ namespace SF3.Models.X1 {
             //address = 0x0354c + (id * 0x18);
         }
 
-        private class MonsterSlotInfo : INamedValueFromResourceForScenariosInfo {
-            public MonsterSlotInfo() {
-                Dictionary<int, string> dictionaryWithSpecialSlots(Dictionary<int, string> values)
-                    => new Dictionary<int, string>(values) {
-                        { 0xFFFD, "Unkown BTL328 Slot" },
-                        { 0xFFFF, "Character Slot" }
-                    };
-
-                Info = ValueNames.MonsterInfo.Info
-                    .ToDictionary(
-                        x => x.Key,
-                        x => (INamedValueInfo) new NamedValueInfo(x.Value.MinValue, x.Value.MaxValue, x.Value.FormatString, dictionaryWithSpecialSlots(x.Value.Values))
-                    );
-            }
-
-            public string ResourceName => ValueNames.MonsterInfo.ResourceName;
-            public int MinValue => ValueNames.MonsterInfo.MinValue;
-            public int MaxValue => ValueNames.MonsterInfo.MaxValue;
-            public string FormatString => ValueNames.MonsterInfo.FormatString;
-            public Dictionary<ScenarioType, INamedValueInfo> Info { get; }
-        }
-
-        private static readonly MonsterSlotInfo MonsterSlotInfoInst = new MonsterSlotInfo();
-
-        public NameAndInfo GetMonsterName(int value) => new NameAndInfo(value, MonsterSlotInfoInst.Info[Scenario]);
-
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int ID { get; }
         public string Name { get; }
@@ -322,7 +296,7 @@ namespace SF3.Models.X1 {
             set => _fileEditor.SetByte(unknown2, (byte) value);
         }
 
-        [NameGetter(nameof(GetMonsterName))]
+        [NameGetter(NamedValueType.MonsterForSlot)]
         public int EnemyID {
             get => _fileEditor.GetWord(enemyID);
             set => _fileEditor.SetWord(enemyID, value);

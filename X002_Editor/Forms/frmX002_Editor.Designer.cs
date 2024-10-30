@@ -559,6 +559,7 @@ namespace SF3.X002_Editor.Forms
             // lvcItemsWeaponType
             // 
             this.lvcItemsWeaponType.AspectName = "WeaponType";
+            this.lvcItemsWeaponType.AspectToStringFormat = "{0:X}";
             this.lvcItemsWeaponType.Text = "WeaponType";
             this.lvcItemsWeaponType.Width = 150;
             // 
