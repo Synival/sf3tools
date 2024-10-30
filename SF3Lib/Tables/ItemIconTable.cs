@@ -12,13 +12,12 @@ namespace SF3.Tables {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new ItemIcon(FileEditor, id, name, address, IsSc1X026));
+            => LoadFromResourceFile((id, name, address) => new ItemIcon(FileEditor, id, name, address, Has16BitIconAddr));
 
         public override string ResourceFile { get; }
         public override int Address { get; }
         public override int? MaxSize => 300;
 
         public bool Has16BitIconAddr { get; }
-        public bool IsSc1X026 => Scenario == ScenarioType.Scenario1 && Has16BitIconAddr;
     }
 }
