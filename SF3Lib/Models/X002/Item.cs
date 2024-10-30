@@ -94,6 +94,7 @@ namespace SF3.Models.X002 {
             //address = 0x0354c + (id * 0x18);
         }
 
+        private NameAndInfo GetEffectiveTypeName(int value) => ValueNames.GetEffectiveTypeName(value);
         private NameAndInfo GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
 
         public ScenarioType Scenario => _fileEditor.Scenario;
@@ -210,8 +211,9 @@ namespace SF3.Models.X002 {
             set => _fileEditor.SetByte(SpellUpRankLocation, (byte) value);
         }
 
-        public EffectiveTypeValue PhysicalAttribute {
-            get => new EffectiveTypeValue(_fileEditor.GetByte(PhysicalAttributeLocation));
+        [NameGetter(nameof(GetEffectiveTypeName))]
+        public int PhysicalAttribute {
+            get => _fileEditor.GetByte(PhysicalAttributeLocation);
             set => _fileEditor.SetByte(PhysicalAttributeLocation, (byte) value);
         }
 
@@ -220,8 +222,9 @@ namespace SF3.Models.X002 {
             set => _fileEditor.SetByte(Unknown1Location, (byte) value);
         }
 
-        public EffectiveTypeValue MonsterType {
-            get => new EffectiveTypeValue(_fileEditor.GetByte(MonsterTypeAttributeLocation));
+        [NameGetter(nameof(GetEffectiveTypeName))]
+        public int MonsterType {
+            get => _fileEditor.GetByte(MonsterTypeAttributeLocation);
             set => _fileEditor.SetByte(MonsterTypeAttributeLocation, (byte) value);
         }
 

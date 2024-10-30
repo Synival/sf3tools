@@ -153,6 +153,7 @@ namespace SF3.Models {
             SpriteID          = id + 200;
         }
 
+        private NameAndInfo GetDroprateName(int value) => ValueNames.GetDroprateName(value);
         private NameAndInfo GetItemName(int value) => ValueNames.GetItemName(Scenario, value);
 
         public IByteEditor Editor { get; }
@@ -435,8 +436,9 @@ namespace SF3.Models {
             set => Editor.SetByte(unknown7, (byte) value);
         }
 
-        public DroprateValue Droprate {
-            get => new DroprateValue(Editor.GetByte(droprate));
+        [NameGetter(nameof(GetDroprateName))]
+        public int Droprate {
+            get => Editor.GetByte(droprate);
             set => Editor.SetByte(droprate, (byte) value);
         }
 
