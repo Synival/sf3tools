@@ -21,6 +21,7 @@ namespace SF3.NamedValues {
                 { NamedValueType.FriendshipBonusType, v => new NameAndInfo(v, ValueNames.FriendshipBonusTypeInfo) },
                 { NamedValueType.Item,                v => new NameAndInfo(v, ValueNames.ItemInfo.Info[Scenario]) },
                 { NamedValueType.Monster,             v => new NameAndInfo(v, ValueNames.MonsterInfo.Info[Scenario]) },
+                { NamedValueType.MonsterForSlot,      v => new NameAndInfo(v, ValueNames.MonsterForSlotInfo.Info[Scenario]) },
                 { NamedValueType.MovementType,        v => new NameAndInfo(v, ValueNames.MovementTypeInfo) },
                 { NamedValueType.Sex,                 v => new NameAndInfo(v, ValueNames.SexInfo) },
                 { NamedValueType.Special,             v => new NameAndInfo(v, ValueNames.SpecialInfo.Info[Scenario]) },
