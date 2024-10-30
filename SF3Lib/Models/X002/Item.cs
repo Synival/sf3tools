@@ -95,6 +95,7 @@ namespace SF3.Models.X002 {
         }
 
         private NameAndInfo GetEffectiveTypeName(int value) => ValueNames.GetEffectiveTypeName(value);
+        private NameAndInfo GetStatTypeName(int value) => ValueNames.GetStatTypeName(value);
         private NameAndInfo GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
 
         public ScenarioType Scenario => _fileEditor.Scenario;
@@ -233,8 +234,9 @@ namespace SF3.Models.X002 {
             set => _fileEditor.SetByte(Unknown2Location, (byte) value);
         }
 
-        public StatTypeValue StatType1 {
-            get => new StatTypeValue(_fileEditor.GetByte(StatType1Location));
+        [NameGetter(nameof(GetStatTypeName))]
+        public int StatType1 {
+            get => _fileEditor.GetByte(StatType1Location);
             set => _fileEditor.SetByte(StatType1Location, (byte) value);
         }
 
@@ -243,8 +245,9 @@ namespace SF3.Models.X002 {
             set => _fileEditor.SetByte(StatUp1Location, (byte) value);
         }
 
-        public StatTypeValue StatType2 {
-            get => new StatTypeValue(_fileEditor.GetByte(StatType2Location));
+        [NameGetter(nameof(GetStatTypeName))]
+        public int StatType2 {
+            get => _fileEditor.GetByte(StatType2Location);
             set => _fileEditor.SetByte(StatType2Location, (byte) value);
         }
 
@@ -253,8 +256,9 @@ namespace SF3.Models.X002 {
             set => _fileEditor.SetByte(StatUp2Location, (byte) value);
         }
 
-        public StatTypeValue StatType3 {
-            get => new StatTypeValue(_fileEditor.GetByte(StatType3Location));
+        [NameGetter(nameof(GetStatTypeName))]
+        public int StatType3 {
+            get => _fileEditor.GetByte(StatType3Location);
             set => _fileEditor.SetByte(StatType3Location, (byte) value);
         }
 
@@ -263,8 +267,9 @@ namespace SF3.Models.X002 {
             set => _fileEditor.SetByte(StatUp3Location, (byte) value);
         }
 
-        public StatTypeValue StatType4 {
-            get => new StatTypeValue(_fileEditor.GetByte(StatType4Location));
+        [NameGetter(nameof(GetStatTypeName))]
+        public int StatType4 {
+            get => _fileEditor.GetByte(StatType4Location);
             set => _fileEditor.SetByte(StatType4Location, (byte) value);
         }
 

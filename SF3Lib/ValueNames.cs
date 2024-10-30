@@ -19,8 +19,14 @@ namespace SF3 {
             = new NamedValueFromResourceInfo("FriendshipBonusTypeList.xml");
         private static readonly NamedValueFromResourceForScenariosInfo ItemInfo
             = new NamedValueFromResourceForScenariosInfo("Items.xml");
+        private static readonly NamedValueFromResourceInfo MovementTypeInfo
+            = new NamedValueFromResourceInfo("MovementTypes.xml");
         private static readonly NamedValueFromResourceInfo SexInfo
             = new NamedValueFromResourceInfo("Sexes.xml");
+        private static readonly NamedValueFromResourceInfo SpellTargetInfo
+            = new NamedValueFromResourceInfo("SpellTargets.xml");
+        private static readonly NamedValueFromResourceInfo StatTypeInfo
+            = new NamedValueFromResourceInfo("StatTypes.xml");
         private static readonly NamedValueFromResourceInfo WeaponTypeInfo
             = new NamedValueFromResourceInfo("WeaponTypes.xml");
 
@@ -38,8 +44,14 @@ namespace SF3 {
             => new NameAndInfo(value, FriendshipBonusTypeInfo);
         public static NameAndInfo GetItemName(ScenarioType scenario, int value)
             => new NameAndInfo(value, ItemInfo.Info[scenario]);
+        public static NameAndInfo GetMovementTypeName(int value)
+            => new NameAndInfo(value, MovementTypeInfo);
         public static NameAndInfo GetSexName(int value)
             => new NameAndInfo(value, SexInfo);
+        public static NameAndInfo GetSpellTargetName(int value)
+            => new NameAndInfo(value, StatTypeInfo);
+        public static NameAndInfo GetStatTypeName(int value)
+            => new NameAndInfo(value, StatTypeInfo);
         public static NameAndInfo GetWeaponTypeName(int value)
             => new NameAndInfo(value, WeaponTypeInfo);
     }

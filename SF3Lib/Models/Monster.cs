@@ -155,6 +155,7 @@ namespace SF3.Models {
 
         private NameAndInfo GetDroprateName(int value) => ValueNames.GetDroprateName(value);
         private NameAndInfo GetItemName(int value) => ValueNames.GetItemName(Scenario, value);
+        private NameAndInfo GetMovementTypeName(int value) => ValueNames.GetMovementTypeName(value);
 
         public IByteEditor Editor { get; }
         public ScenarioType Scenario { get; }
@@ -457,8 +458,9 @@ namespace SF3.Models {
             set => Editor.SetByte(magicType, (byte) value);
         }
 
-        public MovementTypeValue MovementType {
-            get => new MovementTypeValue(Editor.GetByte(movementType));
+        [NameGetter(nameof(GetMovementTypeName))]
+        public int MovementType {
+            get => Editor.GetByte(movementType);
             set => Editor.SetByte(movementType, (byte) value);
         }
 

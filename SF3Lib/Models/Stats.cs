@@ -276,6 +276,7 @@ namespace SF3.Models {
         }
 
         private NameAndInfo GetCharacterClassName(int value) => ValueNames.GetCharacterClassName(value);
+        private NameAndInfo GetMovementTypeName(int value) => ValueNames.GetMovementTypeName(value);
         private NameAndInfo GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
 
         public ScenarioType Scenario { get; }
@@ -1079,8 +1080,9 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        public MovementTypeValue MovementType {
-            get => new MovementTypeValue(Editor.GetByte(movementType));
+        [NameGetter(nameof(GetMovementTypeName))]
+        public int MovementType {
+            get => Editor.GetByte(movementType);
             set => Editor.SetByte(movementType, (byte) value);
         }
 

@@ -89,13 +89,15 @@ namespace SF3.Models.X002 {
         }
 
         private NameAndInfo GetElementName(int value) => ValueNames.GetElementName(value);
+        private NameAndInfo GetSpellTargetName(int value) => ValueNames.GetSpellTargetName(value);
 
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int SpellID { get; }
         public string SpellName { get; }
 
-        public SpellTargetValue SpellTarget {
-            get => new SpellTargetValue(_fileEditor.GetByte(targetType));
+        [NameGetter(nameof(GetSpellTargetName))]
+        public int SpellTarget {
+            get => _fileEditor.GetByte(targetType);
             set => _fileEditor.SetByte(targetType, (byte) value);
         }
 
