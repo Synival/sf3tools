@@ -20,7 +20,7 @@ namespace SF3.Tests.FileEditors {
             public int ExpectedSpellRealOffsetStart { get; }
         }
 
-        private readonly static List<IPETestCase> TestCases = [
+        private static readonly List<IPETestCase> TestCases = [
             new(ScenarioType.Scenario1, "X011.BIN", false, 256, 51, 65422),
             new(ScenarioType.Scenario1, "X021.BIN", false, 256, 51, 65422),
             new(ScenarioType.Scenario1, "X026.BIN", true, 256, 51, 65422),

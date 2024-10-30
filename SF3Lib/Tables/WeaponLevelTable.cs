@@ -1,7 +1,5 @@
-using System;
 using SF3.FileEditors;
 using SF3.Models;
-using SF3.Types;
 
 namespace SF3.Tables {
     public class WeaponLevelTable : Table<WeaponLevel> {

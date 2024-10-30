@@ -20,7 +20,7 @@ namespace SF3.Tests.FileEditors {
             public int ExpectedInitialInfoRows { get; }
         }
 
-        private readonly static List<X033_X031_TestCase> TestCases = [
+        private static readonly List<X033_X031_TestCase> TestCases = [
             new(ScenarioType.Scenario1, "X033.BIN", 33, 22),
             new(ScenarioType.Scenario1, "X031.BIN", 33, 22),
             new(ScenarioType.Scenario2, "X033.BIN", 66, 41),

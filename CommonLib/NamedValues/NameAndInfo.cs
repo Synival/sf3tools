@@ -8,7 +8,7 @@ namespace CommonLib.NamedValues {
         public NameAndInfo(int value, INamedValueInfo info) {
             Value = value;
             Name = NameOrNull(value, info.Values);
-            NameOrValueStr = Name != null ? Name : value.ToString(info.FormatString);
+            NameOrValueStr = Name ?? value.ToString(info.FormatString);
             Info = info;
         }
 

@@ -29,7 +29,7 @@ namespace SF3.Tables {
                 : new Dictionary<int, string>();
 
             _rows = new Warp[0];
-            for (var i = 0; _rows.Length == 0 || _rows[_rows.Length - 1].WarpType != 0x01 && _rows[_rows.Length - 1].WarpType != 0xff; i++) {
+            for (var i = 0; _rows.Length == 0 || (_rows[_rows.Length - 1].WarpType != 0x01 && _rows[_rows.Length - 1].WarpType != 0xff); i++) {
                 if (i == MaxSize)
                     throw new IndexOutOfRangeException();
                 var newRow = new Warp(_fileEditor, i, values.ContainsKey(i) ? values[i] : "WarpIndex" + i);

@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
-using CommonLib.NamedValues;
-using SF3.Editor.Utils;
 using static SF3.Editor.Utils.ControlUtils;
 
 namespace SF3.Editor.Extensions {
@@ -44,14 +41,12 @@ namespace SF3.Editor.Extensions {
             // but alas, it only takes one paramter (value) and that's not enough to check for a name.)
             lvc.AspectGetter = obj => {
                 var property = obj.GetType().GetProperty(lvc.AspectName);
-                if (property.GetCustomAttribute<NameGetterAttribute>() is var attr && attr != null) {
-                    lvc.AspectToStringConverter = v => {
+                lvc.AspectToStringConverter =property.GetCustomAttribute<NameGetterAttribute>() is var attr && attr != null
+                    ? (v => {
                         var val = ((int) lvc.GetAspectByName(obj)).ToNamedValue(obj, attr);
                         return val;
-                    };
-                }
-                else
-                    lvc.AspectToStringConverter = null;
+                    })
+                    : (AspectToStringConverterDelegate) null;
 
                 return lvc.GetAspectByName(obj);
             };
@@ -114,12 +109,12 @@ namespace SF3.Editor.Extensions {
             var creatorMap = (Dictionary<Type, EditorCreatorDelegate>) creatorMapField.GetValue(ObjectListView.EditorRegistry);
 
             var typesToHijack = new Type[] {
-                typeof(Int16),
-                typeof(Int32),
-                typeof(Int64),
-                typeof(UInt16),
-                typeof(UInt32),
-                typeof(UInt64)
+                typeof(short),
+                typeof(int),
+                typeof(long),
+                typeof(ushort),
+                typeof(uint),
+                typeof(ulong)
             };
 
             foreach (var type in typesToHijack) {

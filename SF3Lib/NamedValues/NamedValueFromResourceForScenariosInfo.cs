@@ -9,8 +9,7 @@ namespace SF3.NamedValues {
     /// Named value info from a resource that is specific to each scenario.
     /// </summary>
     public class NamedValueFromResourceForScenariosInfo : INamedValueFromResourceForScenariosInfo {
-        public NamedValueFromResourceForScenariosInfo(string resourceName, int minValue = 0x00, int maxValue = 0xFF, string formatString = "X2")
-        {
+        public NamedValueFromResourceForScenariosInfo(string resourceName, int minValue = 0x00, int maxValue = 0xFF, string formatString = "X2") {
             ResourceName = resourceName;
             MinValue = minValue;
             MaxValue = maxValue;

@@ -63,16 +63,16 @@ namespace SF3.Tables {
 
                 var xml = MakeXmlReader(stream);
                 _ = xml.Read();
-                int address = Address;
+                var address = Address;
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        int id = Convert.ToInt32(xml.GetAttribute(0), 16);
-                        string name = xml.GetAttribute(1);
+                        var id = Convert.ToInt32(xml.GetAttribute(0), 16);
+                        var name = xml.GetAttribute(1);
                         var newModel = makeTFunc(id, name, address);
                         rows.Add(id, newModel);
                         address += ((IModel) newModel).Size;
-                        
+
                         if (id < 0 || (MaxSize != null && id >= MaxSize))
                             throw new IndexOutOfRangeException();
                     }

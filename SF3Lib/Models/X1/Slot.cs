@@ -304,7 +304,7 @@ namespace SF3.Models.X1 {
             public Dictionary<ScenarioType, INamedValueInfo> Info { get; }
         }
 
-        private static MonsterSlotInfo MonsterSlotInfoInst = new MonsterSlotInfo();
+        private static readonly MonsterSlotInfo MonsterSlotInfoInst = new MonsterSlotInfo();
 
         public NameAndInfo GetMonsterName(int value) => new NameAndInfo(value, MonsterSlotInfoInst.Info[Scenario]);
 

@@ -16,7 +16,7 @@ namespace SF3.Tests.FileEditors {
             public int ExpectedRows { get; }
         }
 
-        private readonly static List<X019_TestCase> TestCases = [
+        private static readonly List<X019_TestCase> TestCases = [
             new(ScenarioType.Scenario1, "X019.BIN", false, 142),
             new(ScenarioType.Scenario2, "X019.BIN", false, 191),
             new(ScenarioType.Scenario3, "X019.BIN", false, 212),

@@ -48,14 +48,14 @@ namespace SF3.Models {
 
             //int start = 0x354c + (id * 24);
 
-            var start = offset + id * 0x04;
+            var start = offset + (id * 0x04);
             unknown1 = start;
             unknown2 = start + 1;
             type = start + 2;
             map = start + 3;
 
             //unknown42 = start + 52;
-            WarpAddress = offset + id * 0x04;
+            WarpAddress = offset + (id * 0x04);
             //address = 0x0354c + (id * 0x18);
         }
 

@@ -58,7 +58,7 @@ namespace SF3.Models.X002 {
             //address = 0x0354c + (id * 0x18);
         }
 
-        NameAndInfo GetSpellName(int value) => ValueNames.GetSpellName(Scenario, value);
+        private NameAndInfo GetSpellName(int value) => ValueNames.GetSpellName(Scenario, value);
 
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int PresetID { get; }
