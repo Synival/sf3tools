@@ -13,6 +13,10 @@ namespace SF3 {
             = new NamedValueFromResourceInfo("DroprateList.xml");
         private static readonly NamedValueFromResourceInfo EffectiveTypeInfo
             = new NamedValueFromResourceInfo("EffectiveTypes.xml");
+        private static readonly NamedValueFromResourceInfo ElementInfo
+            = new NamedValueFromResourceInfo("Elements.xml");
+        private static readonly NamedValueFromResourceInfo FriendshipBonusTypeInfo
+            = new NamedValueFromResourceInfo("FriendshipBonusTypeList.xml");
         private static readonly NamedValueFromResourceForScenariosInfo ItemInfo
             = new NamedValueFromResourceForScenariosInfo("Items.xml");
         private static readonly NamedValueFromResourceInfo SexInfo
@@ -28,6 +32,10 @@ namespace SF3 {
             => new NameAndInfo(value, DroprateInfo);
         public static NameAndInfo GetEffectiveTypeName(int value)
             => new NameAndInfo(value, EffectiveTypeInfo);
+        public static NameAndInfo GetElementName(int value)
+            => new NameAndInfo(value, ElementInfo);
+        public static NameAndInfo GetFriendshipBonusTypeName(int value)
+            => new NameAndInfo(value, FriendshipBonusTypeInfo);
         public static NameAndInfo GetItemName(ScenarioType scenario, int value)
             => new NameAndInfo(value, ItemInfo.Info[scenario]);
         public static NameAndInfo GetSexName(int value)

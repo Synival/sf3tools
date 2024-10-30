@@ -1,3 +1,5 @@
+using CommonLib;
+using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 using SF3.Values;
@@ -86,6 +88,8 @@ namespace SF3.Models.X002 {
             //address = 0x0354c + (id * 0x18);
         }
 
+        private NameAndInfo GetElementName(int value) => ValueNames.GetElementName(value);
+
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int SpellID { get; }
         public string SpellName { get; }
@@ -100,8 +104,9 @@ namespace SF3.Models.X002 {
             set => _fileEditor.SetByte(damageType, (byte) value);
         }
 
-        public ElementValue Element {
-            get => new ElementValue(_fileEditor.GetByte(element));
+        [NameGetter(nameof(GetElementName))]
+        public int Element {
+            get => _fileEditor.GetByte(element);
             set => _fileEditor.SetByte(element, (byte) value);
         }
 
