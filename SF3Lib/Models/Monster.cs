@@ -74,7 +74,7 @@ namespace SF3.Models {
         private readonly int unknown19;
         private readonly int unknown20;
 
-        public Monster(IByteEditor editor, int id, string name, int address, ScenarioType scenario, bool isX044) {
+        public Monster(IByteEditor editor, int id, string name, int address, ScenarioType scenario) {
             Editor   = editor;
             ID       = id;
             Name     = name;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using SF3.Tables;
 using SF3.Types;
@@ -9,8 +10,27 @@ namespace SF3.FileEditors {
         }
 
         public override IEnumerable<ITable> MakeTables() {
+            int monsterTableAddress;
+
+            switch (Scenario) {
+                case ScenarioType.Scenario1:
+                    monsterTableAddress = 0x0000000C;
+                    break;
+                case ScenarioType.Scenario2:
+                    monsterTableAddress = 0x0000000C;
+                    break;
+                case ScenarioType.Scenario3:
+                    monsterTableAddress = 0x00000eb0;
+                    break;
+                case ScenarioType.PremiumDisk:
+                    monsterTableAddress = IsX044 ? 0x00007e40 : 0x00000eb0;
+                    break;
+                default:
+                    throw new ArgumentException(nameof(Scenario));
+            }
+
             return new List<ITable>() {
-                (MonsterTable = new MonsterTable(this, IsX044))
+                (MonsterTable = new MonsterTable(this, monsterTableAddress))
             };
         }
 

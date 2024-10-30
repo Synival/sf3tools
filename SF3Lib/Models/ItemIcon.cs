@@ -8,21 +8,21 @@ namespace SF3.Models {
         //ITEMS
         private readonly int theItemIcon;
 
-        public ItemIcon(IByteEditor editor, int id, string name, int address, bool isSc1X026) {
+        public ItemIcon(IByteEditor editor, int id, string name, int address, bool has16BitIconAddr) {
             Editor    = editor;
             ID        = id;
             Name      = name;
             Address   = address;
 
-            IsSc1X026 = isSc1X026;
+            Has16BitIconAddr = has16BitIconAddr;
 
-            if (IsSc1X026) {
+            if (Has16BitIconAddr) {
                 Size = 2;
-                theItemIcon = Address; // 1 byte
+                theItemIcon = Address; // 2 bytes
             }
             else {
                 Size = 4;
-                theItemIcon = Address; // 2 bytes
+                theItemIcon = Address; // 4 bytes
             }
         }
 
@@ -34,17 +34,17 @@ namespace SF3.Models {
         public int Size { get; }
 
         public bool IsX026 { get; }
-        public bool IsSc1X026 { get; }
+        public bool Has16BitIconAddr { get; }
 
         [BulkCopy]
         public int TheItemIcon {
             get {
-                return IsSc1X026
+                return Has16BitIconAddr
                     ? Editor.GetWord(theItemIcon)
                     : Editor.GetDouble(theItemIcon);
             }
             set {
-                if (IsSc1X026)
+                if (Has16BitIconAddr)
                     Editor.SetWord(theItemIcon, value);
                 else
                     Editor.SetDouble(theItemIcon, value);

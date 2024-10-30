@@ -9,23 +9,23 @@ namespace SF3.Models {
         //SPELLS
         private readonly int theSpellIcon;
 
-        public SpellIcon(IByteEditor fileEditor, int id, string name, int address, ScenarioType scenario, bool isX026, int realOffsetStart) {
+        public SpellIcon(IByteEditor fileEditor, int id, string name, int address, ScenarioType scenario, bool has16BitIconAddr, int realOffsetStart) {
             Editor          = fileEditor;
             ID              = id;
             Name            = name;
             Address         = address;
 
-            IsSc1X026       = scenario == ScenarioType.Scenario1 && isX026;
+            Has16BitIconAddr = has16BitIconAddr;
             RealOffsetStart = realOffsetStart;
             SpellName       = ValueNames.GetSpellName(scenario, id).Name;
 
-            if (IsSc1X026) {
+            if (Has16BitIconAddr) {
                 Size = 2;
-                theSpellIcon = Address; // 1 byte
+                theSpellIcon = Address; // 2 bytes
             }
             else {
                 Size = 4;
-                theSpellIcon = Address; // 2 bytes  
+                theSpellIcon = Address; // 4 bytes  
             }
         }
 
@@ -37,19 +37,19 @@ namespace SF3.Models {
         public int Address { get; }
         public int Size { get; }
 
-        public bool IsSc1X026 { get; }
+        public bool Has16BitIconAddr { get; }
         public string SpellName { get; }
         public int RealOffsetStart { get; }
 
         [BulkCopy]
         public int TheSpellIcon {
             get {
-                return IsSc1X026
+                return Has16BitIconAddr
                     ? Editor.GetWord(theSpellIcon)
                     : Editor.GetDouble(theSpellIcon);
             }
             set {
-                if (IsSc1X026)
+                if (Has16BitIconAddr)
                     Editor.SetWord(theSpellIcon, value);
                 else
                     Editor.SetDouble(theSpellIcon, value);

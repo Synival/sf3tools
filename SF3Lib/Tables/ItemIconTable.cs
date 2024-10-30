@@ -6,70 +6,10 @@ using static SF3.Utils.Resources;
 
 namespace SF3.Tables {
     public class ItemIconTable : Table<ItemIcon> {
-        public ItemIconTable(ISF3FileEditor fileEditor, bool isX026) : base(fileEditor) {
-            ResourceFile = ResourceFileForScenario(Scenario, "Items.xml");
-            IsX026       = isX026;
-
-            switch (Scenario) {
-                case ScenarioType.Scenario1: {
-                    int offset, sub;
-                    if (IsX026) {
-                        offset = 0x08f0; //scn1 initial pointer
-                        sub = 0x06078000;
-                    }
-                    else {
-                        offset = 0x0000003C; //scn1 initial pointer
-                        sub = 0x06068000;
-                    }
-                    Address = FileEditor.GetDouble(offset) - sub;
-                    break;
-                }
-
-                case ScenarioType.Scenario2: {
-                    int offset, sub;
-                    if (IsX026) {
-                        offset = 0x0a08; //scn2 x026 initial pointer
-                        sub = 0x06078000;
-                    }
-                    else {
-                        offset = 0x0000003C; //scn2 initial pointer
-                        sub = 0x06068000;
-                    }
-                    Address = FileEditor.GetDouble(offset) - sub;
-                    break;
-                }
-
-                case ScenarioType.Scenario3: {
-                    int offset, sub;
-                    if (IsX026) {
-                        offset = 0x09b4; //scn3 x026 initial pointer
-                        sub = 0x06078000;
-                    }
-                    else {
-                        offset = 0x0000003C; //scn3 initial pointer
-                        sub = 0x06068000;
-                    }
-                    Address = FileEditor.GetDouble(offset) - sub;
-                    break;
-                }
-
-                case ScenarioType.PremiumDisk: {
-                    int offset, sub;
-                    if (IsX026) {
-                        offset = 0x072c; //pd x026 initial pointer
-                        sub = 0x06078000;
-                    }
-                    else {
-                        offset = 0x0000003C; //pd initial pointer
-                        sub = 0x06068000;
-                    }
-                    Address = FileEditor.GetDouble(offset) - sub;
-                    break;
-                }
-
-                default:
-                    throw new ArgumentException(nameof(Scenario));
-            }
+        public ItemIconTable(ISF3FileEditor fileEditor, int address, bool has16BitIconAddr) : base(fileEditor) {
+            ResourceFile     = ResourceFileForScenario(Scenario, "Items.xml");
+            Address          = address;
+            Has16BitIconAddr = has16BitIconAddr;
         }
 
         public override bool Load()
@@ -79,7 +19,7 @@ namespace SF3.Tables {
         public override int Address { get; }
         public override int? MaxSize => 300;
 
-        public bool IsX026 { get; }
-        public bool IsSc1X026 => Scenario == ScenarioType.Scenario1 && IsX026;
+        public bool Has16BitIconAddr { get; }
+        public bool IsSc1X026 => Scenario == ScenarioType.Scenario1 && Has16BitIconAddr;
     }
 }
