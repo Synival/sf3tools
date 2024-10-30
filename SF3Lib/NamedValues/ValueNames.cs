@@ -1,9 +1,7 @@
-﻿using CommonLib;
-using CommonLib.NamedValues;
+﻿using CommonLib.NamedValues;
 using SF3.Types;
-using SF3.Values;
 
-namespace SF3 {
+namespace SF3.NamedValues {
     public static class ValueNames {
         public static readonly NamedValueFromResourceForScenariosInfo CharacterInfo
             = new NamedValueFromResourceForScenariosInfo("Characters.xml");

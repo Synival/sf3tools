@@ -1,11 +1,11 @@
 using System;
-using CommonLib;
 using CommonLib.Attributes;
+using CommonLib.NamedValues;
 using CommonLib.Statistics;
 using SF3.FileEditors;
+using SF3.NamedValues;
 using SF3.Statistics;
 using SF3.Types;
-using SF3.Values;
 
 namespace SF3.Models {
     public class Stats : IModel {

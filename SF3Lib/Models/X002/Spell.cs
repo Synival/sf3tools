@@ -1,8 +1,8 @@
-using CommonLib;
 using CommonLib.Attributes;
+using CommonLib.NamedValues;
 using SF3.FileEditors;
+using SF3.NamedValues;
 using SF3.Types;
-using SF3.Values;
 
 namespace SF3.Models.X002 {
     public class Spell {

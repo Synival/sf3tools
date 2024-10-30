@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using CommonLib;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.FileEditors;
+using SF3.NamedValues;
 using SF3.Types;
-using SF3.Values;
 
 namespace SF3.Models.X1 {
     public class Slot {
@@ -303,7 +302,6 @@ namespace SF3.Models.X1 {
             public int MaxValue => ValueNames.MonsterInfo.MaxValue;
             public string FormatString => ValueNames.MonsterInfo.FormatString;
             public Dictionary<ScenarioType, INamedValueInfo> Info { get; }
-            public Dictionary<ScenarioType, Dictionary<NamedValue, string>> ComboBoxValues => throw new System.NotImplementedException();
         }
 
         private static MonsterSlotInfo MonsterSlotInfoInst = new MonsterSlotInfo();

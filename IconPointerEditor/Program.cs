@@ -9,7 +9,7 @@ namespace SF3.IconPointerEditor {
         /// </summary>
         [STAThread]
         private static void Main() {
-            ObjectListViewExtensions.RegisterSF3Values();
+            ObjectListViewExtensions.RegisterNamedValues();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Forms.frmIconPointerEditor());

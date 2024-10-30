@@ -1,6 +1,6 @@
 ﻿using static CommonLib.Utils.Utils;
 
-namespace CommonLib {
+namespace CommonLib.NamedValues {
     /// <summary>
     /// Contained for a value, its name, and all information about the value.
     /// </summary>
@@ -8,7 +8,7 @@ namespace CommonLib {
         public NameAndInfo(int value, INamedValueInfo info) {
             Value = value;
             Name = NameOrNull(value, info.Values);
-            NameOrValueStr = (Name != null) ? Name : value.ToString(info.FormatString);
+            NameOrValueStr = Name != null ? Name : value.ToString(info.FormatString);
             Info = info;
         }
 

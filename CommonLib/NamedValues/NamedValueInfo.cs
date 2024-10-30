@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using static CommonLib.Utils.Utils;
 
-namespace CommonLib {
+namespace CommonLib.NamedValues {
     /// <summary>
     /// Information about a named value type.
     /// </summary>
@@ -12,7 +12,7 @@ namespace CommonLib {
             MaxValue = maxValue;
             FormatString = formatString;
             Values = possibleValues;
-            NewComboBoxValues = MakeNamedValueComboBoxValues();
+            ComboBoxValues = MakeNamedValueComboBoxValues();
         }
 
         /// <summary>
@@ -41,6 +41,6 @@ namespace CommonLib {
         public int MaxValue { get; }
         public string FormatString { get; }
         public Dictionary<int, string> Values { get; }
-        public Dictionary<int, string> NewComboBoxValues { get; }
+        public Dictionary<int, string> ComboBoxValues { get; }
     }
 }

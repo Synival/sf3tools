@@ -82,13 +82,15 @@ namespace SF3.Editor.Extensions {
             }
         }
 
-        private static void RegisterNamedValue<T>() {
-            ObjectListView.EditorRegistry.Register(
-                typeof(T),
-                (object data, OLVColumn column, object value) => ControlUtils.MakeNamedValueComboBox((value as NamedValue).ComboBoxValues, value as NamedValue)
-            );
-        }
-
+        /// <summary>
+        /// Function to use for each EditorCreatorDelegate we're hijacking.
+        /// Creates a combo box instead of the standard control if a named value is present.
+        /// </summary>
+        /// <param name="obj">The object bound to the ObjectListView row.</param>
+        /// <param name="model">The column of the OLV.</param>
+        /// <param name="value">The value fetched from the column.</param>
+        /// <param name="oldDelegate">The EditorCreatorDelegate we're replacing to use as a fallback.</param>
+        /// <returns>The control to use when editing - a ComboBox for named values, otherwise the return value of 'oldDelegate'.</returns>
         private static Control NamedValueEditorCreator(object obj, OLVColumn model, object value, EditorCreatorDelegate oldDelegate) {
             var property = obj.GetType().GetProperty(model.AspectName);
             if (property.GetCustomAttribute<NameGetterAttribute>() is var attr && attr != null) {
@@ -106,22 +108,7 @@ namespace SF3.Editor.Extensions {
         /// <summary>
         /// Performs ObjectListView.EditorRegistry.Register() for all SF3 NamedValues.
         /// </summary>
-        public static void RegisterSF3Values() {
-            // Get all classes derived from 'NamedValue'
-            var namedValueTypes = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(domainAssembly => domainAssembly.GetTypes())
-                .Where(type => type != typeof(NamedValue) && !type.ContainsGenericParameters && typeof(NamedValue).IsAssignableFrom(type))
-                .OrderBy(x => x.Name)
-                .ToList();
-
-            // Invoke RegisterNamedValue<T> for all types
-            // TODO: old method!! use the cooler one below!!
-            var methodBase = typeof(ObjectListViewExtensions).GetMethod(nameof(RegisterNamedValue), BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
-            foreach (var nvt in namedValueTypes) {
-                var method = methodBase.MakeGenericMethod(nvt);
-                _ = method.Invoke(null, null);
-            }
-
+        public static void RegisterNamedValues() {
             /// BIG HACK to get existing editor delegates.
             var creatorMapField = ObjectListView.EditorRegistry.GetType().GetField(
                 "creatorMap", BindingFlags.NonPublic | BindingFlags.Instance);

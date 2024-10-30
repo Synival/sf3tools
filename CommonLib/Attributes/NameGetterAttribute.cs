@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using CommonLib.NamedValues;
 
 namespace CommonLib.Attributes {
     /// <summary>
