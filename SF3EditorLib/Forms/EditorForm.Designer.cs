@@ -31,6 +31,7 @@ namespace SF3.Editor.Forms
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_Save = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparator_File1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +43,8 @@ namespace SF3.Editor.Forms
             this.tsmiFile_CopyTablesFrom = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparator_File4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEdit_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScenario_Scenario2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +52,6 @@ namespace SF3.Editor.Forms
             this.tsmiScenario_PremiumDisk = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiFile_Save = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +59,7 @@ namespace SF3.Editor.Forms
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile,
+            this.tsmiEdit,
             this.tsmiScenario,
             this.tsmiHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -92,6 +95,15 @@ namespace SF3.Editor.Forms
             this.tsmiFile_Open.Size = new System.Drawing.Size(240, 22);
             this.tsmiFile_Open.Text = "&Open...";
             this.tsmiFile_Open.Click += new System.EventHandler(this.tsmiFile_Open_Click);
+            // 
+            // tsmiFile_Save
+            // 
+            this.tsmiFile_Save.Enabled = false;
+            this.tsmiFile_Save.Name = "tsmiFile_Save";
+            this.tsmiFile_Save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.tsmiFile_Save.Size = new System.Drawing.Size(240, 22);
+            this.tsmiFile_Save.Text = "&Save";
+            this.tsmiFile_Save.Click += new System.EventHandler(this.tsmiFile_Save_Click);
             // 
             // tsmiFile_SaveAs
             // 
@@ -174,6 +186,21 @@ namespace SF3.Editor.Forms
             this.tsmiFile_Exit.Text = "E&xit";
             this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
             // 
+            // tsmiEdit
+            // 
+            this.tsmiEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEdit_UseDropdowns});
+            this.tsmiEdit.Name = "tsmiEdit";
+            this.tsmiEdit.Size = new System.Drawing.Size(39, 20);
+            this.tsmiEdit.Text = "&Edit";
+            // 
+            // tsmiEdit_UseDropdowns
+            // 
+            this.tsmiEdit_UseDropdowns.Name = "tsmiEdit_UseDropdowns";
+            this.tsmiEdit_UseDropdowns.Size = new System.Drawing.Size(253, 22);
+            this.tsmiEdit_UseDropdowns.Text = "Use &Dropdowns for Named Values";
+            this.tsmiEdit_UseDropdowns.Click += new System.EventHandler(this.tsmiEdit_UseDropdowns_Click);
+            // 
             // tsmiScenario
             // 
             this.tsmiScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -231,15 +258,6 @@ namespace SF3.Editor.Forms
             this.tsmiHelp_Version.Size = new System.Drawing.Size(190, 22);
             this.tsmiHelp_Version.Text = "Version (set internally)";
             // 
-            // tsmiFile_Save
-            // 
-            this.tsmiFile_Save.Enabled = false;
-            this.tsmiFile_Save.Name = "tsmiFile_Save";
-            this.tsmiFile_Save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.tsmiFile_Save.Size = new System.Drawing.Size(240, 22);
-            this.tsmiFile_Save.Text = "&Save";
-            this.tsmiFile_Save.Click += new System.EventHandler(this.tsmiFile_Save_Click);
-            // 
             // EditorForm
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
@@ -277,5 +295,7 @@ namespace SF3.Editor.Forms
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_CopyTablesTo;
         private System.Windows.Forms.ToolStripSeparator tsSeparator_File4;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_Save;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEdit;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEdit_UseDropdowns;
     }
 }

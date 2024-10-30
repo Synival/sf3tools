@@ -22,6 +22,9 @@ namespace SF3.Editor.Forms {
 
         public EditorForm() {
             InitializeComponent();
+
+            tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
+            Globals.UseDropdownsChanged += (s, e) => tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
         }
 
         public EditorForm(IContainer container) {
@@ -552,5 +555,7 @@ namespace SF3.Editor.Forms {
         protected virtual void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario2;
         protected virtual void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
         protected virtual void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
+
+        private void tsmiEdit_UseDropdowns_Click(object sender, EventArgs e) => Globals.UseDropdowns = !Globals.UseDropdowns;
     }
 }

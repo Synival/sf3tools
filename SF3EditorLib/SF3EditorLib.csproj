@@ -80,6 +80,7 @@
     <Compile Include="Forms\EditorForm.Designer.cs">
       <DependentUpon>EditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Globals.cs" />
     <Compile Include="Utils\ControlUtils.cs" />
   </ItemGroup>
   <ItemGroup>
