@@ -1,8 +1,7 @@
-﻿using System;
+﻿using CommonLib;
 using CommonLib.NamedValues;
 using SF3.Types;
 using SF3.Values;
-using static CommonLib.Utils.Utils;
 
 namespace SF3 {
     public static class ValueNames {
@@ -15,13 +14,13 @@ namespace SF3 {
         private static readonly NamedValueFromResourceInfo WeaponTypeInfo
             = new NamedValueFromResourceInfo("WeaponTypes.xml");
 
-        public static string GetCharacterClassName(int value)
-            => NameOrNull(value, CharacterClassInfo.PossibleValues);
-        public static string GetItemName(ScenarioType scenario, int value)
-            => NameOrNull(value, ItemInfo.PossibleValues[scenario]);
-        public static string GetSexName(int value)
-            => NameOrNull(value, SexInfo.PossibleValues);
-        public static string GetWeaponTypeName(int value)
-            => NameOrNull(value, WeaponTypeInfo.PossibleValues);
+        public static NameAndInfo GetCharacterClassName(int value)
+            => new NameAndInfo(value, CharacterClassInfo);
+        public static NameAndInfo GetItemName(ScenarioType scenario, int value)
+            => new NameAndInfo(value, ItemInfo.Info[scenario]);
+        public static NameAndInfo GetSexName(int value)
+            => new NameAndInfo(value, SexInfo);
+        public static NameAndInfo GetWeaponTypeName(int value)
+            => new NameAndInfo(value, WeaponTypeInfo);
     }
 }

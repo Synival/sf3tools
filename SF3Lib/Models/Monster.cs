@@ -1,3 +1,4 @@
+using CommonLib;
 using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
@@ -152,7 +153,7 @@ namespace SF3.Models {
             SpriteID          = id + 200;
         }
 
-        private string GetItemName(int value) => ValueNames.GetItemName(Scenario, value);
+        private NameAndInfo GetItemName(int value) => ValueNames.GetItemName(Scenario, value);
 
         public IByteEditor Editor { get; }
         public ScenarioType Scenario { get; }

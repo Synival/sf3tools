@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -7,6 +8,7 @@ using CommonLib.Attributes;
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using SF3.Editor.Utils;
+using static SF3.Editor.Utils.ControlUtils;
 
 namespace SF3.Editor.Extensions {
     public static class ObjectListViewExtensions {
@@ -22,22 +24,37 @@ namespace SF3.Editor.Extensions {
         }
 
         /// <summary>
-        /// Adds some extra functionality to all columns of an ObjectListView.
+        /// Applies some neat extensions to the ObjectListView.
+        /// </summary>
+        /// <param name=""></param>
+        public static void Enhance(this ObjectListView olv) {
+            foreach (var lvc in olv.AllColumns)
+                lvc.Enhance();
+        }
+
+        /// <summary>
+        /// Adds some extra functionality to a column of an ObjectListView.
         /// </summary>
         /// <param name="olv"></param>
-        public static void EnhanceColumns(this ObjectListView olv) {
-            foreach (var lvc in olv.AllColumns) {
-                lvc.AspectGetter = obj => {
-                    var property = obj.GetType().GetProperty(lvc.AspectName);
-                    if (property.GetCustomAttribute<NameGetterAttribute>() is var attr && attr != null) {
-                        // TODO: do something with this valuable info!!
-                        return ((int) lvc.GetAspectByName(obj)).ToNamedValue(obj, attr);
-                    }
-                    else
-                        return lvc.GetAspectByName(obj);
-                };
-            }
+        public static void Enhance(this OLVColumn lvc) {
+            // Add a hook to each AspectGetter that will check for a named value.
+            // If a name exists, hijack the AspectToStringConverter to use the name instead.
+            // If no name exists, use the standard AspectToStringConverter.
+            // (It would be nice if we could set one single AspectToStringConverter to check for this,
+            // but alas, it only takes one paramter (value) and that's not enough to check for a name.)
+            lvc.AspectGetter = obj => {
+                var property = obj.GetType().GetProperty(lvc.AspectName);
+                if (property.GetCustomAttribute<NameGetterAttribute>() is var attr && attr != null) {
+                    lvc.AspectToStringConverter = v => {
+                        var val = ((int) lvc.GetAspectByName(obj)).ToNamedValue(obj, attr);
+                        return val;
+                    };
+                }
+                else
+                    lvc.AspectToStringConverter = null;
 
+                return lvc.GetAspectByName(obj);
+            };
         }
 
         /// <summary>
@@ -72,61 +89,18 @@ namespace SF3.Editor.Extensions {
             );
         }
 
-        /// <summary>
-        /// A NumericUpDown designed to use with integer values that are displayed by the ObjectListView
-        /// as a string.
-        /// Its 'Value' takes (almost) any input and always outputs a T.
-        /// This is to deal with ObjectListView using Value get/set via reflection.
-        /// </summary>
-        private class NumericUpDownFromAny : NumericUpDown
-        {
-            public NumericUpDownFromAny(Type getterType, int min = int.MinValue, int max = int.MaxValue) {
-                Minimum = min;
-                Maximum = max;
-                DecimalPlaces = 0;
-                Hexadecimal = true;
-                GetterType = getterType;
+        private static Control NamedValueEditorCreator(object obj, OLVColumn model, object value, EditorCreatorDelegate oldDelegate) {
+            var property = obj.GetType().GetProperty(model.AspectName);
+            if (property.GetCustomAttribute<NameGetterAttribute>() is var attr && attr != null) {
+                var intValue = (int) property.GetValue(obj);
+                var nameAndValues = attr.GetNameAndInfo(obj, intValue);
+                return MakeNamedValueComboBox(nameAndValues.Info, intValue);
+
+                //TODO: use this for wacky new feature!
+                //return new NumericUpDownFromAny(property.PropertyType);
             }
 
-            private Type GetterType { get; }
-
-            private static bool FromStringPred(char ch) => ch != ':' && ch != ' ';
-
-            private int FromString(string value) {
-                value = new string(value.TakeWhile(FromStringPred).ToArray());
-                return Convert.ToInt32(value, 16);
-            }
-
-            public new object Value {
-                get {
-                    if (GetterType == typeof(byte))
-                        return (byte) base.Value;
-                    else if (GetterType == typeof(int))
-                        return (int) base.Value;
-                    else if (GetterType == typeof(decimal))
-                        return base.Value;
-                    else
-                        throw new ArgumentException("Type 'T' is not a handled value getter type");
-                }
-                set {
-                    switch (value) {
-                        case string s:
-                            base.Value = new decimal(FromString(s));
-                            break;
-                        case byte b:
-                            base.Value = new decimal(b);
-                            break;
-                        case int i:
-                            base.Value = new decimal(i);
-                            break;
-                        case decimal d:
-                            base.Value = d;
-                            break;
-                        default:
-                            throw new ArgumentException("'value' is not a handled value settertype");
-                    }
-                }
-            }
+            return oldDelegate(obj, model, value);
         }
 
         /// <summary>
@@ -148,14 +122,25 @@ namespace SF3.Editor.Extensions {
                 _ = method.Invoke(null, null);
             }
 
-            ObjectListView.EditorRegistry.RegisterDefault((obj, model, value) => {
-                var property = obj.GetType().GetProperty(model.AspectName);
-                if (property.GetCustomAttribute<NameGetterAttribute>() is var attr && attr != null) {
-                    // TODO: combo box!
-                    return new NumericUpDownFromAny(property.PropertyType);
-                }
-                return null;
-            });
+            /// BIG HACK to get existing editor delegates.
+            var creatorMapField = ObjectListView.EditorRegistry.GetType().GetField(
+                "creatorMap", BindingFlags.NonPublic | BindingFlags.Instance);
+            var creatorMap = (Dictionary<Type, EditorCreatorDelegate>) creatorMapField.GetValue(ObjectListView.EditorRegistry);
+
+            var typesToHijack = new Type[] {
+                typeof(Int16),
+                typeof(Int32),
+                typeof(Int64),
+                typeof(UInt16),
+                typeof(UInt32),
+                typeof(UInt64)
+            };
+
+            foreach (var type in typesToHijack) {
+                var creator = creatorMap[type];
+                ObjectListView.EditorRegistry.Register(type, (obj, model, value)
+                    => NamedValueEditorCreator(obj, model, value, creator));
+            }
         }
     }
 }

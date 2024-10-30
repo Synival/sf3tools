@@ -4,7 +4,6 @@ using CommonLib.NamedValues;
 
 namespace CommonLib.Utils {
     public static class ControlUtils {
-
         /// <summary>
         /// Creates a dictionary of all possible values to supply to MakeNamedValueComboBox().
         /// </summary>

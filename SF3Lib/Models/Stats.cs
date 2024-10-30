@@ -1,4 +1,5 @@
 using System;
+using CommonLib;
 using CommonLib.Attributes;
 using CommonLib.Statistics;
 using SF3.FileEditors;
@@ -274,8 +275,8 @@ namespace SF3.Models {
             accessoryEquipable4 = Address + 0x7a;
         }
 
-        private string GetCharacterClassName(int value) => ValueNames.GetCharacterClassName(value);
-        private string GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
+        private NameAndInfo GetCharacterClassName(int value) => ValueNames.GetCharacterClassName(value);
+        private NameAndInfo GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
 
         public ScenarioType Scenario { get; }
         public bool IsPromoted => Editor.GetByte(characterClass) >= 0x20;

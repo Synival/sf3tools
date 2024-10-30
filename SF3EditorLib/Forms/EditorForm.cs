@@ -98,7 +98,7 @@ namespace SF3.Editor.Forms {
 
             ObjectListViews = this.GetAllObjectsOfTypeInFields<ObjectListView>(false);
             foreach (var olv in ObjectListViews)
-                olv.EnhanceColumns();
+                olv.Enhance();
 
             UpdateTitle();
         }

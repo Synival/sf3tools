@@ -1,7 +1,7 @@
+using CommonLib;
 using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
-using SF3.Values;
 
 namespace SF3.Models {
     public class InitialInfo : IModel {
@@ -62,10 +62,10 @@ namespace SF3.Models {
         public int Address { get; }
         public int Size { get; }
 
-        private string GetCharacterClassName(int value) => ValueNames.GetCharacterClassName(value);
-        private string GetSexName(int value) => ValueNames.GetSexName(value);
-        private string GetItemName(int value) => ValueNames.GetItemName(Scenario, value);
-        private string GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
+        private NameAndInfo GetCharacterClassName(int value) => ValueNames.GetCharacterClassName(value);
+        private NameAndInfo GetSexName(int value) => ValueNames.GetSexName(value);
+        private NameAndInfo GetItemName(int value) => ValueNames.GetItemName(Scenario, value);
+        private NameAndInfo GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
 
         [BulkCopy]
         public int CharacterE {

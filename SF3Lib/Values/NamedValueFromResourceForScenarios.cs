@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using CommonLib;
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using SF3.Types;
@@ -12,22 +14,30 @@ namespace SF3.Values {
         int MinValue { get; }
         int MaxValue { get; }
         string FormatString { get; }
-        Dictionary<ScenarioType, Dictionary<int, string>> PossibleValues { get; }
+        Dictionary<ScenarioType, INamedValueInfo> Info { get; }
         Dictionary<ScenarioType, Dictionary<NamedValue, string>> ComboBoxValues { get; }
     };
 
     public class NamedValueFromResourceForScenariosInfo : INamedValueFromResourceForScenariosInfo {
-        public NamedValueFromResourceForScenariosInfo(string resourceName) {
+        public NamedValueFromResourceForScenariosInfo(string resourceName)
+        {
             ResourceName = resourceName;
-            PossibleValues = GetValueNameDictionaryForAllScenariosFromXML(ResourceName);
+            var possibleValues = GetValueNameDictionaryForAllScenariosFromXML(ResourceName);
+
+            Info = possibleValues
+                .ToDictionary(
+                    x => x.Key,
+                    x => (INamedValueInfo) new NamedValueInfo(MinValue, MaxValue, FormatString, x.Value)
+                );
         }
 
         public string ResourceName { get; }
         public virtual int MinValue => 0x00;
         public virtual int MaxValue => 0xFF;
         public virtual string FormatString => "X2";
-        public Dictionary<ScenarioType, Dictionary<int, string>> PossibleValues { get; }
         public Dictionary<ScenarioType, Dictionary<NamedValue, string>> ComboBoxValues { get; } = new Dictionary<ScenarioType, Dictionary<NamedValue, string>>();
+
+        public Dictionary<ScenarioType, INamedValueInfo> Info { get; }
     };
 
     /// <summary>
@@ -37,7 +47,7 @@ namespace SF3.Values {
         where TResourceInfo : INamedValueFromResourceForScenariosInfo, new() {
         public NamedValueFromResourceForScenarios(ScenarioType scenario, int value)
         : base(
-            NameOrNull(value, ResourceInfo.PossibleValues[scenario]),
+            NameOrNull(value, ResourceInfo.Info[scenario].Values),
             value.ToStringHex(ResourceInfo.FormatString, ""),
             value
         ) {
@@ -54,7 +64,7 @@ namespace SF3.Values {
         public override int MinValue => ResourceInfo.MinValue;
         public override int MaxValue => ResourceInfo.MaxValue;
 
-        public override Dictionary<int, string> PossibleValues => ResourceInfo.PossibleValues[Scenario];
+        public override Dictionary<int, string> PossibleValues => ResourceInfo.Info[Scenario].Values;
 
         public override Dictionary<NamedValue, string> ComboBoxValues {
             get {

@@ -1,3 +1,4 @@
+using CommonLib;
 using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
@@ -93,7 +94,7 @@ namespace SF3.Models.X002 {
             //address = 0x0354c + (id * 0x18);
         }
 
-        private string GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
+        private NameAndInfo GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
 
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int ID { get; }

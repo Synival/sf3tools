@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using CommonLib.Attributes;
+using static CommonLib.Utils.Utils;
 
 namespace CommonLib.Extensions {
     public static partial class ObjectExtensions {
@@ -82,8 +83,8 @@ namespace CommonLib.Extensions {
                 return null;
             var hexValue = value.ToStringHex(null, "");
             var intValue = Convert.ToInt16(hexValue, 16);
-            var name = attr.GetName(containerObj, intValue);
-            return hexValue + ((name != null) ? ": " + name : "");
+            var nameAndInfo = attr.GetNameAndInfo(containerObj, intValue);
+            return GetFullName(intValue, nameAndInfo.Name, nameAndInfo.Info.FormatString);
         }
     }
 }

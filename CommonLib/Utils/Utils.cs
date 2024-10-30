@@ -10,5 +10,20 @@ namespace CommonLib.Utils {
         /// <returns> The corresponding name in the dictionary or 'null'.</returns>
         public static string NameOrNull(int value, Dictionary<int, string> nameDict)
             => nameDict.TryGetValue(value, out var name) ? name : null;
+
+        /// <summary>
+        /// Returns a combination of a value (formatted) and a name, if one exists.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="name">Name of the value. Can be 'null'.</param>
+        /// <param name="formatString"></param>
+        /// <returns>A string in the format of either:
+        ///     {formatted-value}
+        ///     {formatted-vaule}: name
+        /// </returns>
+        public static string GetFullName(int value, string name, string formatString = "X2") {
+            var hexName = value.ToString(formatString);
+            return hexName + ((name != null) ? ": " + name : "");
+        }
     }
 }

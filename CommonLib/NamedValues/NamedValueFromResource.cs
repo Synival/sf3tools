@@ -5,26 +5,19 @@ using static CommonLib.Utils.ResourceUtils;
 using static CommonLib.Utils.Utils;
 
 namespace CommonLib.NamedValues {
-    public interface INamedValueFromResourceInfo {
+    public interface INamedValueFromResourceInfo : INamedValueInfo {
         string ResourceName { get; }
-        int MinValue { get; }
-        int MaxValue { get; }
-        string FormatString { get; }
-        Dictionary<int, string> PossibleValues { get; }
         Dictionary<NamedValue, string> ComboBoxValues { get; set; }
     };
 
-    public class NamedValueFromResourceInfo : INamedValueFromResourceInfo {
-        public NamedValueFromResourceInfo(string resourceName) {
+    public class NamedValueFromResourceInfo : NamedValueInfo, INamedValueFromResourceInfo {
+        public NamedValueFromResourceInfo(string resourceName, int minValue = 0x00, int maxValue = 0xFF, string formatString = "X2")
+        : base(minValue, maxValue, formatString, GetValueNameDictionaryFromXML("Resources/" + resourceName))
+        {
             ResourceName = resourceName;
-            PossibleValues = GetValueNameDictionaryFromXML("Resources/" + ResourceName);
         }
 
         public string ResourceName { get; }
-        public virtual int MinValue => 0x00;
-        public virtual int MaxValue => 0xFF;
-        public virtual string FormatString => "X2";
-        public Dictionary<int, string> PossibleValues { get; }
         public Dictionary<NamedValue, string> ComboBoxValues { get; set; } = null;
     };
 
@@ -35,7 +28,7 @@ namespace CommonLib.NamedValues {
         where TResourceInfo : INamedValueFromResourceInfo, new() {
         public NamedValueFromResource(int value)
         : base(
-            NameOrNull(value, ResourceInfo.PossibleValues),
+            NameOrNull(value, ResourceInfo.Values),
             value.ToStringHex(ResourceInfo.FormatString, ""),
             value
         ) {
@@ -46,7 +39,7 @@ namespace CommonLib.NamedValues {
         public override int MinValue => ResourceInfo.MinValue;
         public override int MaxValue => ResourceInfo.MaxValue;
 
-        public override Dictionary<int, string> PossibleValues => ResourceInfo.PossibleValues;
+        public override Dictionary<int, string> PossibleValues => ResourceInfo.Values;
 
         public override Dictionary<NamedValue, string> ComboBoxValues {
             get {

@@ -13,7 +13,7 @@ namespace SF3.Values {
         public MonsterValueResourceInfo() : base("Monsters.xml") {
             PossibleValuesPDX044 = GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.PremiumDisk, "Monsters_X044.xml"));
 
-            PossibleValues_WithFFFF = PossibleValues.ToDictionary(x => x.Key, x => DictionaryWithFFFF(x.Value));
+            PossibleValues_WithFFFF = Info.ToDictionary(x => x.Key, x => DictionaryWithFFFF(x.Value.Values));
             PossibleValuesPDX044_WithFFFF = DictionaryWithFFFF(PossibleValuesPDX044);
 
             // Scary (and stupid) matrix will all possible ComboBoxValues.
@@ -66,7 +66,7 @@ namespace SF3.Values {
 
         private static Dictionary<int, string> GetPossibleValues(ScenarioType scenario, bool isX044, bool withFFFF) => withFFFF
             ? ((scenario == ScenarioType.PremiumDisk && isX044) ? ResourceInfo.PossibleValuesPDX044_WithFFFF : ResourceInfo.PossibleValues_WithFFFF[scenario])
-            : ((scenario == ScenarioType.PremiumDisk && isX044) ? ResourceInfo.PossibleValuesPDX044 : ResourceInfo.PossibleValues[scenario]);
+            : ((scenario == ScenarioType.PremiumDisk && isX044) ? ResourceInfo.PossibleValuesPDX044 : ResourceInfo.Info[scenario].Values);
 
         public override NamedValue MakeRelatedValue(int value) => new MonsterValue(Scenario, IsX044, WithFFFF, value);
 
