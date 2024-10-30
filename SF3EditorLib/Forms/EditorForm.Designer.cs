@@ -197,7 +197,8 @@ namespace SF3.Editor.Forms
             // tsmiEdit_UseDropdowns
             // 
             this.tsmiEdit_UseDropdowns.Name = "tsmiEdit_UseDropdowns";
-            this.tsmiEdit_UseDropdowns.Size = new System.Drawing.Size(253, 22);
+            this.tsmiEdit_UseDropdowns.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.tsmiEdit_UseDropdowns.Size = new System.Drawing.Size(295, 22);
             this.tsmiEdit_UseDropdowns.Text = "Use &Dropdowns for Named Values";
             this.tsmiEdit_UseDropdowns.Click += new System.EventHandler(this.tsmiEdit_UseDropdowns_Click);
             // 
@@ -216,7 +217,7 @@ namespace SF3.Editor.Forms
             // 
             this.tsmiScenario_Scenario1.Name = "tsmiScenario_Scenario1";
             this.tsmiScenario_Scenario1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
-            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(189, 22);
+            this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(188, 22);
             this.tsmiScenario_Scenario1.Text = "Scenario &1";
             this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.tsmiScenario_Scenario1_Click);
             // 
@@ -224,7 +225,7 @@ namespace SF3.Editor.Forms
             // 
             this.tsmiScenario_Scenario2.Name = "tsmiScenario_Scenario2";
             this.tsmiScenario_Scenario2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
-            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(189, 22);
+            this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(188, 22);
             this.tsmiScenario_Scenario2.Text = "Scenario &2";
             this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.tsmiScenario_Scenario2_Click);
             // 
@@ -232,15 +233,15 @@ namespace SF3.Editor.Forms
             // 
             this.tsmiScenario_Scenario3.Name = "tsmiScenario_Scenario3";
             this.tsmiScenario_Scenario3.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
-            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(189, 22);
+            this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(188, 22);
             this.tsmiScenario_Scenario3.Text = "Scenario &3";
             this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.tsmiScenario_Scenario3_Click);
             // 
             // tsmiScenario_PremiumDisk
             // 
             this.tsmiScenario_PremiumDisk.Name = "tsmiScenario_PremiumDisk";
-            this.tsmiScenario_PremiumDisk.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(189, 22);
+            this.tsmiScenario_PremiumDisk.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D4)));
+            this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(188, 22);
             this.tsmiScenario_PremiumDisk.Text = "&Premium Disk";
             this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.tsmiScenario_PremiumDisk_Click);
             // 

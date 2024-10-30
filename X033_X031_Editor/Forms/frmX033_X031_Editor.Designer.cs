@@ -862,6 +862,7 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcStatsCharacterClass
             // 
             this.lvcStatsCharacterClass.AspectName = "CharacterClass";
+            this.lvcStatsCharacterClass.AspectToStringFormat = "{0:X}";
             this.lvcStatsCharacterClass.Text = "Class";
             this.lvcStatsCharacterClass.Width = 150;
             // 
