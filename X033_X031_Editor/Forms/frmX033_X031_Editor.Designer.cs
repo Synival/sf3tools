@@ -51,11 +51,11 @@ namespace SF3.X033_X031_Editor.Forms
             System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX033_X031_Editor));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_X031forInCombatEtc = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiHelp_DebugCurve = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDebug = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDebug_DebugCurve = new System.Windows.Forms.ToolStripMenuItem();
             this.tabSpells = new System.Windows.Forms.TabPage();
             this.olvSpells = new BrightIdeasSoftware.ObjectListView();
             this.lvcSpellsID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -261,7 +261,7 @@ namespace SF3.X033_X031_Editor.Forms
             this.tabCurveGraph = new System.Windows.Forms.TabPage();
             this.cbCurveGraphCharacter = new System.Windows.Forms.ComboBox();
             this.CurveGraph = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.menuStrip1.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             this.tabSpells.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvSpells)).BeginInit();
             this.tabStats.SuspendLayout();
@@ -281,22 +281,21 @@ namespace SF3.X033_X031_Editor.Forms
             ((System.ComponentModel.ISupportInitialize)(this.CurveGraph)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuStrip2
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDebug,
             this.tsmiHelp});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(764, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip2.Location = new System.Drawing.Point(0, 24);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(764, 24);
+            this.menuStrip2.TabIndex = 1;
+            this.menuStrip2.Text = "menuStrip2";
             // 
             // tsmiHelp
             // 
             this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiHelp_X031forInCombatEtc,
-            this.tsSeparator_Help1,
-            this.tsmiHelp_DebugCurve});
+            this.tsmiHelp_X031forInCombatEtc});
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
             this.tsmiHelp.Text = "&Help";
@@ -307,17 +306,20 @@ namespace SF3.X033_X031_Editor.Forms
             this.tsmiHelp_X031forInCombatEtc.Size = new System.Drawing.Size(299, 22);
             this.tsmiHelp_X031forInCombatEtc.Text = "X031 for incombat, X033 for out of combat";
             // 
-            // tsSeparator_Help1
+            // tsmiDebug
             // 
-            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
-            this.tsSeparator_Help1.Size = new System.Drawing.Size(296, 6);
+            this.tsmiDebug.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDebug_DebugCurve});
+            this.tsmiDebug.Name = "tsmiDebug";
+            this.tsmiDebug.Size = new System.Drawing.Size(54, 20);
+            this.tsmiDebug.Text = "&Debug";
             // 
-            // tsmiHelp_DebugCurve
+            // tsmiDebug_DebugCurve
             // 
-            this.tsmiHelp_DebugCurve.Name = "tsmiHelp_DebugCurve";
-            this.tsmiHelp_DebugCurve.Size = new System.Drawing.Size(299, 22);
-            this.tsmiHelp_DebugCurve.Text = "&Debug Curve";
-            this.tsmiHelp_DebugCurve.Click += new System.EventHandler(this.tsmiHelp_DebugCurve_Click);
+            this.tsmiDebug_DebugCurve.Name = "tsmiDebug_DebugCurve";
+            this.tsmiDebug_DebugCurve.Size = new System.Drawing.Size(180, 22);
+            this.tsmiDebug_DebugCurve.Text = "&Debug Curve";
+            this.tsmiDebug_DebugCurve.Click += new System.EventHandler(this.tsmiDebug_DebugCurve_Click);
             // 
             // tabSpells
             // 
@@ -2528,14 +2530,15 @@ namespace SF3.X033_X031_Editor.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 534);
+            this.Controls.Add(this.menuStrip2);
             this.Controls.Add(this.tabMain);
-            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmX033_X031_Editor";
             this.Text = "SF3 X033/X031 Editor";
             this.Controls.SetChildIndex(this.tabMain, 0);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.Controls.SetChildIndex(this.menuStrip2, 0);
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.tabSpells.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvSpells)).EndInit();
             this.tabStats.ResumeLayout(false);
@@ -2559,7 +2562,7 @@ namespace SF3.X033_X031_Editor.Forms
         }
 
         #endregion
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
         private System.Windows.Forms.TabPage tabSpells;
         private BrightIdeasSoftware.ObjectListView olvSpells;
@@ -2764,11 +2767,11 @@ namespace SF3.X033_X031_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcCurveCalcAgiGroup4;
         private BrightIdeasSoftware.OLVColumn lvcCurveCalcAgiGroup5;
         private BrightIdeasSoftware.OLVColumn lvcCurveCalcAgiGroup6;
-        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_DebugCurve;
         private System.Windows.Forms.TabPage tabCurveGraph;
         private System.Windows.Forms.ComboBox cbCurveGraphCharacter;
         private System.Windows.Forms.DataVisualization.Charting.Chart CurveGraph;
-        private System.Windows.Forms.ToolStripSeparator tsSeparator_Help1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDebug;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDebug_DebugCurve;
     }
 }
 

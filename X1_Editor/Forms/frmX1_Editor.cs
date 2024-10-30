@@ -44,7 +44,7 @@ namespace SF3.X1_Editor.Forms {
 
         public frmX1_Editor() {
             InitializeComponent();
-            InitializeEditor(menuStrip1);
+            InitializeEditor(menuStrip2);
             MapLeader = MapLeaderType.Synbios;
         }
 
@@ -113,9 +113,9 @@ namespace SF3.X1_Editor.Forms {
         private void tsmiMap_MapJulian_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Julian; //map with julian as lead
         private void tsmiMap_MapExtra_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Extra; //map with no lead or a extra as lead. also for ruins
 
-        private void tsmiHelp_TreasureDebugToggle_Click(object sender, EventArgs e) {
+        private void tsmiDebug_TreasureDebugToggle_Click(object sender, EventArgs e) {
             TreasureTable.Debug = !TreasureTable.Debug;
-            tsmiHelp_TreasureDebugToggle.Checked = TreasureTable.Debug;
+            tsmiDebug_TreasureDebugToggle.Checked = TreasureTable.Debug;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace SF3.X1_Editor.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX1_Editor));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiScenario_BTL99 = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,8 +43,6 @@ namespace SF3.X1_Editor.Forms
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_SelectScenarioThenMap = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_IfTheTablesEtc = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsSeparator_Help1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiHelp_TreasureDebugToggle = new System.Windows.Forms.ToolStripMenuItem();
             this.tabHeader = new System.Windows.Forms.TabPage();
             this.olvHeader = new BrightIdeasSoftware.ObjectListView();
             this.lvcHeaderSizeList = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -250,7 +248,9 @@ namespace SF3.X1_Editor.Forms
             this.lvcTileDataUnknownD = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileDataUnknownE = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileDataUnknownF = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.menuStrip1.SuspendLayout();
+            this.tsmiDebug = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDebug_TreasureDebugToggle = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip2.SuspendLayout();
             this.tabHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -284,18 +284,19 @@ namespace SF3.X1_Editor.Forms
             ((System.ComponentModel.ISupportInitialize)(this.olvTileData)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuStrip2
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiScenario,
             this.tsmiMap,
+            this.tsmiDebug,
             this.tsmiHelp});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(917, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.menuStrip2.Size = new System.Drawing.Size(917, 24);
+            this.menuStrip2.TabIndex = 1;
+            this.menuStrip2.Text = "menuStrip2";
             // 
             // tsmiScenario
             // 
@@ -362,9 +363,7 @@ namespace SF3.X1_Editor.Forms
             // 
             this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiHelp_SelectScenarioThenMap,
-            this.tsmiHelp_IfTheTablesEtc,
-            this.tsSeparator_Help1,
-            this.tsmiHelp_TreasureDebugToggle});
+            this.tsmiHelp_IfTheTablesEtc});
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
             this.tsmiHelp.Text = "&Help";
@@ -380,18 +379,6 @@ namespace SF3.X1_Editor.Forms
             this.tsmiHelp_IfTheTablesEtc.Name = "tsmiHelp_IfTheTablesEtc";
             this.tsmiHelp_IfTheTablesEtc.Size = new System.Drawing.Size(368, 22);
             this.tsmiHelp_IfTheTablesEtc.Text = "If the tables don\'t populate you used the wrong settings";
-            // 
-            // tsSeparator_Help1
-            // 
-            this.tsSeparator_Help1.Name = "tsSeparator_Help1";
-            this.tsSeparator_Help1.Size = new System.Drawing.Size(365, 6);
-            // 
-            // tsmiHelp_TreasureDebugToggle
-            // 
-            this.tsmiHelp_TreasureDebugToggle.Name = "tsmiHelp_TreasureDebugToggle";
-            this.tsmiHelp_TreasureDebugToggle.Size = new System.Drawing.Size(368, 22);
-            this.tsmiHelp_TreasureDebugToggle.Text = "&treasureDebug Toggle";
-            this.tsmiHelp_TreasureDebugToggle.Click += new System.EventHandler(this.tsmiHelp_TreasureDebugToggle_Click);
             // 
             // tabHeader
             // 
@@ -2499,6 +2486,21 @@ namespace SF3.X1_Editor.Forms
             this.lvcTileDataUnknownF.Text = "UnknownF";
             this.lvcTileDataUnknownF.Width = 65;
             // 
+            // tsmiDebug
+            // 
+            this.tsmiDebug.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDebug_TreasureDebugToggle});
+            this.tsmiDebug.Name = "tsmiDebug";
+            this.tsmiDebug.Size = new System.Drawing.Size(54, 20);
+            this.tsmiDebug.Text = "&Debug";
+            // 
+            // tsmiDebug_TreasureDebugToggle
+            // 
+            this.tsmiDebug_TreasureDebugToggle.Name = "tsmiDebug_TreasureDebugToggle";
+            this.tsmiDebug_TreasureDebugToggle.Size = new System.Drawing.Size(189, 22);
+            this.tsmiDebug_TreasureDebugToggle.Text = "&treasureDebug Toggle";
+            this.tsmiDebug_TreasureDebugToggle.Click += new System.EventHandler(this.tsmiDebug_TreasureDebugToggle_Click);
+            // 
             // frmX1_Editor
             // 
             this.AllowDrop = true;
@@ -2506,13 +2508,14 @@ namespace SF3.X1_Editor.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(917, 534);
             this.Controls.Add(this.tabMain);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuStrip2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmX1_Editor";
             this.Text = "SF3 X1 Editor";
             this.Controls.SetChildIndex(this.tabMain, 0);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.Controls.SetChildIndex(this.menuStrip2, 0);
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.tabHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).EndInit();
             this.tabMain.ResumeLayout(false);
@@ -2550,7 +2553,7 @@ namespace SF3.X1_Editor.Forms
         }
 
         #endregion
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
         private System.Windows.Forms.ToolStripMenuItem tsmiScenario;
         private System.Windows.Forms.TabPage tabHeader;
@@ -2678,7 +2681,6 @@ namespace SF3.X1_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcInteractablesUnknown1;
         private BrightIdeasSoftware.OLVColumn lvcInteractablesEventTypeCode;
         private BrightIdeasSoftware.OLVColumn lvcInteractablesItemTextCode;
-        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_TreasureDebugToggle;
         private System.Windows.Forms.TabPage tabScriptedMovement;
         private BrightIdeasSoftware.ObjectListView olvScriptedMovement;
         private BrightIdeasSoftware.OLVColumn lvcScriptedMovementName;
@@ -2767,8 +2769,9 @@ namespace SF3.X1_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcArrowsPointToWarpMPD;
         private BrightIdeasSoftware.OLVColumn lvcArrowsPlus0x08;
         private BrightIdeasSoftware.OLVColumn lvcArrowsPlus0x0A;
-        private System.Windows.Forms.ToolStripSeparator tsSeparator_Help1;
         private BrightIdeasSoftware.OLVColumn lvcSlotTab2IsBoss;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDebug;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDebug_TreasureDebugToggle;
     }
 }
 

@@ -29,7 +29,7 @@ namespace SF3.X019_Editor.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX019_Editor));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiScenario_PremiumDiskX044 = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,7 +124,7 @@ namespace SF3.X019_Editor.Forms
             this.lvcMonsterTab5SpellChance6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMonsterTab5Unknown19 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMonsterTab5Unknown20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.menuStrip1.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             this.tabMonsterTab1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab1)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -138,15 +138,15 @@ namespace SF3.X019_Editor.Forms
             ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab5)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuStrip2
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiScenario});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 24);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(764, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip2.Location = new System.Drawing.Point(0, 24);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(764, 24);
+            this.menuStrip2.TabIndex = 1;
+            this.menuStrip2.Text = "menuStrip2";
             // 
             // tsmiScenario
             // 
@@ -1056,14 +1056,14 @@ namespace SF3.X019_Editor.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 534);
             this.Controls.Add(this.tabMain);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuStrip2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmX019_Editor";
             this.Text = "SF3 X019 Editor";
-            this.Controls.SetChildIndex(this.menuStrip1, 0);
             this.Controls.SetChildIndex(this.tabMain, 0);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.Controls.SetChildIndex(this.menuStrip2, 0);
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.tabMonsterTab1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab1)).EndInit();
             this.tabMain.ResumeLayout(false);
@@ -1081,7 +1081,7 @@ namespace SF3.X019_Editor.Forms
         }
 
         #endregion
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem tsmiScenario;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem tsmiScenario_PremiumDiskX044;

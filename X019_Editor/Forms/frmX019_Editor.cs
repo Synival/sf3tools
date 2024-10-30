@@ -28,7 +28,7 @@ namespace SF3.X019_Editor.Forms {
 
         public frmX019_Editor() {
             InitializeComponent();
-            InitializeEditor(menuStrip1);
+            InitializeEditor(menuStrip2);
             ScenarioChanged += (obj, e) => tsmiScenario_PremiumDiskX044.Checked = Scenario == ScenarioType.PremiumDisk && IsX044;
         }
 

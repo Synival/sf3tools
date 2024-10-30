@@ -26,7 +26,7 @@ namespace SF3.IconPointerEditor.Forms {
 
         public frmIconPointerEditor() {
             InitializeComponent();
-            InitializeEditor(menuStrip1);
+            InitializeEditor(menuStrip2);
             IsX026 = false;
         }
 

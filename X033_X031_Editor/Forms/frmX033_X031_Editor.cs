@@ -52,7 +52,7 @@ namespace SF3.X033_X031_Editor.Forms {
 
         public frmX033_X031_Editor() {
             InitializeComponent();
-            InitializeEditor(menuStrip1);
+            InitializeEditor(menuStrip2);
         }
 
         protected override string FileDialogFilter => "SF3 Data (X033.BIN;X031.BIN)|X033.BIN;X031.BIN|" + base.FileDialogFilter;
@@ -84,9 +84,9 @@ namespace SF3.X033_X031_Editor.Forms {
 
         private void olvCellEditStarting(object sender, CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
 
-        private void tsmiHelp_DebugCurve_Click(object sender, EventArgs e) {
+        private void tsmiDebug_DebugCurve_Click(object sender, EventArgs e) {
             Stats.DebugGrowthValues = !Stats.DebugGrowthValues;
-            tsmiHelp_DebugCurve.Checked = Stats.DebugGrowthValues;
+            tsmiDebug_DebugCurve.Checked = Stats.DebugGrowthValues;
         }
 
         private void tabMain_Click(object sender, EventArgs e) {
