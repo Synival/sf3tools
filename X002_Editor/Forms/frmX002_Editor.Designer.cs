@@ -61,8 +61,6 @@ namespace SF3.X002_Editor.Forms
             this.lvcItemsName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcItemsPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcItemsWeaponType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcItemsEffectsEquip = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcItemsRequirements = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcItemsRange = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcItemsAttack = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcItemsDefense = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -94,6 +92,8 @@ namespace SF3.X002_Editor.Forms
             this.lvcItemsHeroOnly = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcItemsMale = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcItemsFemale = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcItemsEffectsEquip = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcItemsRequirements = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabPreset = new System.Windows.Forms.TabPage();
             this.olvPreset = new BrightIdeasSoftware.ObjectListView();
@@ -167,6 +167,9 @@ namespace SF3.X002_Editor.Forms
             this.lvcWarpTableScn1Plus0x01 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcWarpTableScn1WarpType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcWarpTableScn1WarpMap = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.tsmiDebug = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDebug_ShowDebugColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.tabSpells.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvSpells)).BeginInit();
             this.tabItems.SuspendLayout();
@@ -186,6 +189,7 @@ namespace SF3.X002_Editor.Forms
             ((System.ComponentModel.ISupportInitialize)(this.olvAttackResist)).BeginInit();
             this.tabWarpTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvWarpTable)).BeginInit();
+            this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabSpells
@@ -432,8 +436,6 @@ namespace SF3.X002_Editor.Forms
             this.olvItems.AllColumns.Add(this.lvcItemsName);
             this.olvItems.AllColumns.Add(this.lvcItemsPrice);
             this.olvItems.AllColumns.Add(this.lvcItemsWeaponType);
-            this.olvItems.AllColumns.Add(this.lvcItemsEffectsEquip);
-            this.olvItems.AllColumns.Add(this.lvcItemsRequirements);
             this.olvItems.AllColumns.Add(this.lvcItemsRange);
             this.olvItems.AllColumns.Add(this.lvcItemsAttack);
             this.olvItems.AllColumns.Add(this.lvcItemsDefense);
@@ -465,6 +467,8 @@ namespace SF3.X002_Editor.Forms
             this.olvItems.AllColumns.Add(this.lvcItemsHeroOnly);
             this.olvItems.AllColumns.Add(this.lvcItemsMale);
             this.olvItems.AllColumns.Add(this.lvcItemsFemale);
+            this.olvItems.AllColumns.Add(this.lvcItemsEffectsEquip);
+            this.olvItems.AllColumns.Add(this.lvcItemsRequirements);
             this.olvItems.AllowColumnReorder = true;
             this.olvItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -476,8 +480,6 @@ namespace SF3.X002_Editor.Forms
             this.lvcItemsName,
             this.lvcItemsPrice,
             this.lvcItemsWeaponType,
-            this.lvcItemsEffectsEquip,
-            this.lvcItemsRequirements,
             this.lvcItemsRange,
             this.lvcItemsAttack,
             this.lvcItemsDefense,
@@ -560,12 +562,207 @@ namespace SF3.X002_Editor.Forms
             this.lvcItemsWeaponType.Text = "WeaponType";
             this.lvcItemsWeaponType.Width = 150;
             // 
+            // lvcItemsRange
+            // 
+            this.lvcItemsRange.AspectName = "Range";
+            this.lvcItemsRange.AspectToStringFormat = "{0:X}";
+            this.lvcItemsRange.Text = "Range";
+            this.lvcItemsRange.Width = 50;
+            // 
+            // lvcItemsAttack
+            // 
+            this.lvcItemsAttack.AspectName = "Attack";
+            this.lvcItemsAttack.AspectToStringFormat = "{0:X}";
+            this.lvcItemsAttack.Text = "Attack";
+            this.lvcItemsAttack.Width = 50;
+            // 
+            // lvcItemsDefense
+            // 
+            this.lvcItemsDefense.AspectName = "Defense";
+            this.lvcItemsDefense.AspectToStringFormat = "{0:X}";
+            this.lvcItemsDefense.Text = "Defense";
+            this.lvcItemsDefense.Width = 54;
+            // 
+            // lvcItemsAttackRank
+            // 
+            this.lvcItemsAttackRank.AspectName = "AttackRank";
+            this.lvcItemsAttackRank.AspectToStringFormat = "{0:X}";
+            this.lvcItemsAttackRank.Text = "AttackRank";
+            this.lvcItemsAttackRank.Width = 75;
+            // 
+            // lvcItemsSpellRank
+            // 
+            this.lvcItemsSpellRank.AspectName = "SpellRank";
+            this.lvcItemsSpellRank.AspectToStringFormat = "{0:X}";
+            this.lvcItemsSpellRank.Text = "SpellRank";
+            this.lvcItemsSpellRank.Width = 70;
+            // 
+            // lvcItemsEffectiveType1
+            // 
+            this.lvcItemsEffectiveType1.AspectName = "PhysicalAttribute";
+            this.lvcItemsEffectiveType1.AspectToStringFormat = "{0:X}";
+            this.lvcItemsEffectiveType1.Text = "Effective type 1";
+            this.lvcItemsEffectiveType1.Width = 120;
+            // 
+            // lvcItemsUnknown1
+            // 
+            this.lvcItemsUnknown1.AspectName = "Unknown1";
+            this.lvcItemsUnknown1.AspectToStringFormat = "{0:X}";
+            this.lvcItemsUnknown1.Text = "Effective 1 pow";
+            this.lvcItemsUnknown1.Width = 90;
+            // 
+            // lvcItemsEffectiveType2
+            // 
+            this.lvcItemsEffectiveType2.AspectName = "MonsterType";
+            this.lvcItemsEffectiveType2.AspectToStringFormat = "{0:X}";
+            this.lvcItemsEffectiveType2.Text = "Effective type 2";
+            this.lvcItemsEffectiveType2.Width = 120;
+            // 
+            // lvcItemsEffective2Pow
+            // 
+            this.lvcItemsEffective2Pow.AspectName = "Unknown2";
+            this.lvcItemsEffective2Pow.AspectToStringFormat = "{0:X}";
+            this.lvcItemsEffective2Pow.Text = "Effective 2 pow";
+            this.lvcItemsEffective2Pow.Width = 90;
+            // 
+            // lvcItemsStatType1
+            // 
+            this.lvcItemsStatType1.AspectName = "StatType1";
+            this.lvcItemsStatType1.AspectToStringFormat = "{0:X}";
+            this.lvcItemsStatType1.Text = "StatType1";
+            this.lvcItemsStatType1.Width = 90;
+            // 
+            // lvcItemsStatUp1
+            // 
+            this.lvcItemsStatUp1.AspectName = "StatUp1";
+            this.lvcItemsStatUp1.AspectToStringFormat = "{0:X}";
+            this.lvcItemsStatUp1.Text = "StatUp1";
+            // 
+            // lvcItemsStatType2
+            // 
+            this.lvcItemsStatType2.AspectName = "StatType2";
+            this.lvcItemsStatType2.AspectToStringFormat = "{0:X}";
+            this.lvcItemsStatType2.Text = "StatType2";
+            this.lvcItemsStatType2.Width = 90;
+            // 
+            // lvcItemsStatUp2
+            // 
+            this.lvcItemsStatUp2.AspectName = "StatUp2";
+            this.lvcItemsStatUp2.AspectToStringFormat = "{0:X}";
+            this.lvcItemsStatUp2.Text = "StatUp2";
+            // 
+            // lvcItemsStatType3
+            // 
+            this.lvcItemsStatType3.AspectName = "StatType3";
+            this.lvcItemsStatType3.AspectToStringFormat = "{0:X}";
+            this.lvcItemsStatType3.Text = "StatType3";
+            this.lvcItemsStatType3.Width = 90;
+            // 
+            // lvcItemsStatUp3
+            // 
+            this.lvcItemsStatUp3.AspectName = "StatUp3";
+            this.lvcItemsStatUp3.AspectToStringFormat = "{0:X}";
+            this.lvcItemsStatUp3.Text = "StatUp3";
+            // 
+            // lvcItemsStatType4
+            // 
+            this.lvcItemsStatType4.AspectName = "StatType4";
+            this.lvcItemsStatType4.AspectToStringFormat = "{0:X}";
+            this.lvcItemsStatType4.Text = "StatType4";
+            this.lvcItemsStatType4.Width = 90;
+            // 
+            // lvcItemsStatUp4
+            // 
+            this.lvcItemsStatUp4.AspectName = "StatUp4";
+            this.lvcItemsStatUp4.AspectToStringFormat = "{0:X}";
+            this.lvcItemsStatUp4.Text = "StatUp4";
+            // 
+            // lvcItemsSpellUse
+            // 
+            this.lvcItemsSpellUse.AspectName = "SpellUse";
+            this.lvcItemsSpellUse.AspectToStringFormat = "{0:X}";
+            this.lvcItemsSpellUse.Text = "SpellUse";
+            this.lvcItemsSpellUse.Width = 120;
+            // 
+            // lvcItemsSpellUseLv
+            // 
+            this.lvcItemsSpellUseLv.AspectName = "SpellUseLv";
+            this.lvcItemsSpellUseLv.AspectToStringFormat = "{0:X}";
+            this.lvcItemsSpellUseLv.Text = "SpellUseLv";
+            this.lvcItemsSpellUseLv.Width = 70;
+            // 
+            // lvcItemsIsCursed
+            // 
+            this.lvcItemsIsCursed.AspectName = "Cursed";
+            this.lvcItemsIsCursed.Text = "isCursed";
+            // 
+            // lvcItemsCanCrack
+            // 
+            this.lvcItemsCanCrack.AspectName = "CanCrack";
+            this.lvcItemsCanCrack.Text = "canCrack";
+            // 
+            // lvcItemsHealingItem
+            // 
+            this.lvcItemsHealingItem.AspectName = "HealingItem";
+            this.lvcItemsHealingItem.Text = "healingItem";
+            this.lvcItemsHealingItem.Width = 80;
+            // 
+            // lvcItemsCannotUnequip
+            // 
+            this.lvcItemsCannotUnequip.AspectName = "CannotUnequip";
+            this.lvcItemsCannotUnequip.Text = "Can\'tUnequip";
+            this.lvcItemsCannotUnequip.Width = 90;
+            // 
+            // lvcItemsRare
+            // 
+            this.lvcItemsRare.AspectName = "Rare";
+            this.lvcItemsRare.Text = "Rare";
+            // 
+            // lvcItemsFakeRare
+            // 
+            this.lvcItemsFakeRare.AspectName = "FakeRare";
+            this.lvcItemsFakeRare.Text = "FakeRare";
+            // 
+            // lvcItemsHealingItem2
+            // 
+            this.lvcItemsHealingItem2.AspectName = "HealingItem2";
+            this.lvcItemsHealingItem2.Text = "healingItem2";
+            this.lvcItemsHealingItem2.Width = 80;
+            // 
+            // lvcItemsRequiresPromo
+            // 
+            this.lvcItemsRequiresPromo.AspectName = "RequiredPromo";
+            this.lvcItemsRequiresPromo.Text = "requiresPromo";
+            this.lvcItemsRequiresPromo.Width = 90;
+            // 
+            // lvcItemsRequiredPromo2
+            // 
+            this.lvcItemsRequiredPromo2.AspectName = "RequiredPromo2";
+            this.lvcItemsRequiredPromo2.Text = "requiredPromo2";
+            this.lvcItemsRequiredPromo2.Width = 90;
+            // 
+            // lvcItemsHeroOnly
+            // 
+            this.lvcItemsHeroOnly.AspectName = "RequiredHero";
+            this.lvcItemsHeroOnly.Text = "hero only";
+            // 
+            // lvcItemsMale
+            // 
+            this.lvcItemsMale.AspectName = "RequiredMale";
+            this.lvcItemsMale.Text = "male";
+            // 
+            // lvcItemsFemale
+            // 
+            this.lvcItemsFemale.AspectName = "RequiredFemale";
+            this.lvcItemsFemale.Text = "female";
+            // 
             // lvcItemsEffectsEquip
             // 
             this.lvcItemsEffectsEquip.AspectName = "EffectsEquip";
             this.lvcItemsEffectsEquip.AspectToStringFormat = "{0:X}";
             this.lvcItemsEffectsEquip.DisplayIndex = 36;
             this.lvcItemsEffectsEquip.IsEditable = false;
+            this.lvcItemsEffectsEquip.IsVisible = false;
             this.lvcItemsEffectsEquip.Text = "DebugEffectsEquip";
             this.lvcItemsEffectsEquip.Width = 77;
             // 
@@ -575,233 +772,9 @@ namespace SF3.X002_Editor.Forms
             this.lvcItemsRequirements.AspectToStringFormat = "{0:X}";
             this.lvcItemsRequirements.DisplayIndex = 37;
             this.lvcItemsRequirements.IsEditable = false;
+            this.lvcItemsRequirements.IsVisible = false;
             this.lvcItemsRequirements.Text = "DebugRequirements";
             this.lvcItemsRequirements.Width = 77;
-            // 
-            // lvcItemsRange
-            // 
-            this.lvcItemsRange.AspectName = "Range";
-            this.lvcItemsRange.AspectToStringFormat = "{0:X}";
-            this.lvcItemsRange.DisplayIndex = 5;
-            this.lvcItemsRange.Text = "Range";
-            this.lvcItemsRange.Width = 50;
-            // 
-            // lvcItemsAttack
-            // 
-            this.lvcItemsAttack.AspectName = "Attack";
-            this.lvcItemsAttack.AspectToStringFormat = "{0:X}";
-            this.lvcItemsAttack.DisplayIndex = 6;
-            this.lvcItemsAttack.Text = "Attack";
-            this.lvcItemsAttack.Width = 50;
-            // 
-            // lvcItemsDefense
-            // 
-            this.lvcItemsDefense.AspectName = "Defense";
-            this.lvcItemsDefense.AspectToStringFormat = "{0:X}";
-            this.lvcItemsDefense.DisplayIndex = 7;
-            this.lvcItemsDefense.Text = "Defense";
-            this.lvcItemsDefense.Width = 54;
-            // 
-            // lvcItemsAttackRank
-            // 
-            this.lvcItemsAttackRank.AspectName = "AttackRank";
-            this.lvcItemsAttackRank.AspectToStringFormat = "{0:X}";
-            this.lvcItemsAttackRank.DisplayIndex = 8;
-            this.lvcItemsAttackRank.Text = "AttackRank";
-            this.lvcItemsAttackRank.Width = 75;
-            // 
-            // lvcItemsSpellRank
-            // 
-            this.lvcItemsSpellRank.AspectName = "SpellRank";
-            this.lvcItemsSpellRank.AspectToStringFormat = "{0:X}";
-            this.lvcItemsSpellRank.DisplayIndex = 9;
-            this.lvcItemsSpellRank.Text = "SpellRank";
-            this.lvcItemsSpellRank.Width = 70;
-            // 
-            // lvcItemsEffectiveType1
-            // 
-            this.lvcItemsEffectiveType1.AspectName = "PhysicalAttribute";
-            this.lvcItemsEffectiveType1.AspectToStringFormat = "{0:X}";
-            this.lvcItemsEffectiveType1.DisplayIndex = 10;
-            this.lvcItemsEffectiveType1.Text = "Effective type 1";
-            this.lvcItemsEffectiveType1.Width = 120;
-            // 
-            // lvcItemsUnknown1
-            // 
-            this.lvcItemsUnknown1.AspectName = "Unknown1";
-            this.lvcItemsUnknown1.AspectToStringFormat = "{0:X}";
-            this.lvcItemsUnknown1.DisplayIndex = 11;
-            this.lvcItemsUnknown1.Text = "Effective 1 pow";
-            this.lvcItemsUnknown1.Width = 90;
-            // 
-            // lvcItemsEffectiveType2
-            // 
-            this.lvcItemsEffectiveType2.AspectName = "MonsterType";
-            this.lvcItemsEffectiveType2.AspectToStringFormat = "{0:X}";
-            this.lvcItemsEffectiveType2.DisplayIndex = 12;
-            this.lvcItemsEffectiveType2.Text = "Effective type 2";
-            this.lvcItemsEffectiveType2.Width = 120;
-            // 
-            // lvcItemsEffective2Pow
-            // 
-            this.lvcItemsEffective2Pow.AspectName = "Unknown2";
-            this.lvcItemsEffective2Pow.AspectToStringFormat = "{0:X}";
-            this.lvcItemsEffective2Pow.DisplayIndex = 13;
-            this.lvcItemsEffective2Pow.Text = "Effective 2 pow";
-            this.lvcItemsEffective2Pow.Width = 90;
-            // 
-            // lvcItemsStatType1
-            // 
-            this.lvcItemsStatType1.AspectName = "StatType1";
-            this.lvcItemsStatType1.AspectToStringFormat = "{0:X}";
-            this.lvcItemsStatType1.DisplayIndex = 14;
-            this.lvcItemsStatType1.Text = "StatType1";
-            this.lvcItemsStatType1.Width = 90;
-            // 
-            // lvcItemsStatUp1
-            // 
-            this.lvcItemsStatUp1.AspectName = "StatUp1";
-            this.lvcItemsStatUp1.AspectToStringFormat = "{0:X}";
-            this.lvcItemsStatUp1.DisplayIndex = 15;
-            this.lvcItemsStatUp1.Text = "StatUp1";
-            // 
-            // lvcItemsStatType2
-            // 
-            this.lvcItemsStatType2.AspectName = "StatType2";
-            this.lvcItemsStatType2.AspectToStringFormat = "{0:X}";
-            this.lvcItemsStatType2.DisplayIndex = 16;
-            this.lvcItemsStatType2.Text = "StatType2";
-            this.lvcItemsStatType2.Width = 90;
-            // 
-            // lvcItemsStatUp2
-            // 
-            this.lvcItemsStatUp2.AspectName = "StatUp2";
-            this.lvcItemsStatUp2.AspectToStringFormat = "{0:X}";
-            this.lvcItemsStatUp2.DisplayIndex = 17;
-            this.lvcItemsStatUp2.Text = "StatUp2";
-            // 
-            // lvcItemsStatType3
-            // 
-            this.lvcItemsStatType3.AspectName = "StatType3";
-            this.lvcItemsStatType3.AspectToStringFormat = "{0:X}";
-            this.lvcItemsStatType3.DisplayIndex = 18;
-            this.lvcItemsStatType3.Text = "StatType3";
-            this.lvcItemsStatType3.Width = 90;
-            // 
-            // lvcItemsStatUp3
-            // 
-            this.lvcItemsStatUp3.AspectName = "StatUp3";
-            this.lvcItemsStatUp3.AspectToStringFormat = "{0:X}";
-            this.lvcItemsStatUp3.DisplayIndex = 19;
-            this.lvcItemsStatUp3.Text = "StatUp3";
-            // 
-            // lvcItemsStatType4
-            // 
-            this.lvcItemsStatType4.AspectName = "StatType4";
-            this.lvcItemsStatType4.AspectToStringFormat = "{0:X}";
-            this.lvcItemsStatType4.DisplayIndex = 20;
-            this.lvcItemsStatType4.Text = "StatType4";
-            this.lvcItemsStatType4.Width = 90;
-            // 
-            // lvcItemsStatUp4
-            // 
-            this.lvcItemsStatUp4.AspectName = "StatUp4";
-            this.lvcItemsStatUp4.AspectToStringFormat = "{0:X}";
-            this.lvcItemsStatUp4.DisplayIndex = 21;
-            this.lvcItemsStatUp4.Text = "StatUp4";
-            // 
-            // lvcItemsSpellUse
-            // 
-            this.lvcItemsSpellUse.AspectName = "SpellUse";
-            this.lvcItemsSpellUse.AspectToStringFormat = "{0:X}";
-            this.lvcItemsSpellUse.DisplayIndex = 22;
-            this.lvcItemsSpellUse.Text = "SpellUse";
-            this.lvcItemsSpellUse.Width = 120;
-            // 
-            // lvcItemsSpellUseLv
-            // 
-            this.lvcItemsSpellUseLv.AspectName = "SpellUseLv";
-            this.lvcItemsSpellUseLv.AspectToStringFormat = "{0:X}";
-            this.lvcItemsSpellUseLv.DisplayIndex = 23;
-            this.lvcItemsSpellUseLv.Text = "SpellUseLv";
-            this.lvcItemsSpellUseLv.Width = 70;
-            // 
-            // lvcItemsIsCursed
-            // 
-            this.lvcItemsIsCursed.AspectName = "Cursed";
-            this.lvcItemsIsCursed.DisplayIndex = 24;
-            this.lvcItemsIsCursed.Text = "isCursed";
-            // 
-            // lvcItemsCanCrack
-            // 
-            this.lvcItemsCanCrack.AspectName = "CanCrack";
-            this.lvcItemsCanCrack.DisplayIndex = 25;
-            this.lvcItemsCanCrack.Text = "canCrack";
-            // 
-            // lvcItemsHealingItem
-            // 
-            this.lvcItemsHealingItem.AspectName = "HealingItem";
-            this.lvcItemsHealingItem.DisplayIndex = 26;
-            this.lvcItemsHealingItem.Text = "healingItem";
-            this.lvcItemsHealingItem.Width = 80;
-            // 
-            // lvcItemsCannotUnequip
-            // 
-            this.lvcItemsCannotUnequip.AspectName = "CannotUnequip";
-            this.lvcItemsCannotUnequip.DisplayIndex = 27;
-            this.lvcItemsCannotUnequip.Text = "Can\'tUnequip";
-            this.lvcItemsCannotUnequip.Width = 90;
-            // 
-            // lvcItemsRare
-            // 
-            this.lvcItemsRare.AspectName = "Rare";
-            this.lvcItemsRare.DisplayIndex = 28;
-            this.lvcItemsRare.Text = "Rare";
-            // 
-            // lvcItemsFakeRare
-            // 
-            this.lvcItemsFakeRare.AspectName = "FakeRare";
-            this.lvcItemsFakeRare.DisplayIndex = 29;
-            this.lvcItemsFakeRare.Text = "FakeRare";
-            // 
-            // lvcItemsHealingItem2
-            // 
-            this.lvcItemsHealingItem2.AspectName = "HealingItem2";
-            this.lvcItemsHealingItem2.DisplayIndex = 30;
-            this.lvcItemsHealingItem2.Text = "healingItem2";
-            this.lvcItemsHealingItem2.Width = 80;
-            // 
-            // lvcItemsRequiresPromo
-            // 
-            this.lvcItemsRequiresPromo.AspectName = "RequiredPromo";
-            this.lvcItemsRequiresPromo.DisplayIndex = 31;
-            this.lvcItemsRequiresPromo.Text = "requiresPromo";
-            this.lvcItemsRequiresPromo.Width = 90;
-            // 
-            // lvcItemsRequiredPromo2
-            // 
-            this.lvcItemsRequiredPromo2.AspectName = "RequiredPromo2";
-            this.lvcItemsRequiredPromo2.DisplayIndex = 32;
-            this.lvcItemsRequiredPromo2.Text = "requiredPromo2";
-            this.lvcItemsRequiredPromo2.Width = 90;
-            // 
-            // lvcItemsHeroOnly
-            // 
-            this.lvcItemsHeroOnly.AspectName = "RequiredHero";
-            this.lvcItemsHeroOnly.DisplayIndex = 33;
-            this.lvcItemsHeroOnly.Text = "hero only";
-            // 
-            // lvcItemsMale
-            // 
-            this.lvcItemsMale.AspectName = "RequiredMale";
-            this.lvcItemsMale.DisplayIndex = 34;
-            this.lvcItemsMale.Text = "male";
-            // 
-            // lvcItemsFemale
-            // 
-            this.lvcItemsFemale.AspectName = "RequiredFemale";
-            this.lvcItemsFemale.DisplayIndex = 35;
-            this.lvcItemsFemale.Text = "female";
             // 
             // tabMain
             // 
@@ -1596,17 +1569,45 @@ namespace SF3.X002_Editor.Forms
             this.lvcWarpTableScn1WarpMap.AspectToStringFormat = "{0:X}";
             this.lvcWarpTableScn1WarpMap.Text = "Map";
             // 
+            // menuStrip2
+            // 
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDebug});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 24);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(764, 24);
+            this.menuStrip2.TabIndex = 3;
+            this.menuStrip2.Text = "menuStrip2";
+            // 
+            // tsmiDebug
+            // 
+            this.tsmiDebug.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDebug_ShowDebugColumns});
+            this.tsmiDebug.Name = "tsmiDebug";
+            this.tsmiDebug.Size = new System.Drawing.Size(54, 20);
+            this.tsmiDebug.Text = "&Debug";
+            // 
+            // tsmiDebug_ShowDebugColumns
+            // 
+            this.tsmiDebug_ShowDebugColumns.Name = "tsmiDebug_ShowDebugColumns";
+            this.tsmiDebug_ShowDebugColumns.Size = new System.Drawing.Size(192, 22);
+            this.tsmiDebug_ShowDebugColumns.Text = "Show Debug &Columns";
+            this.tsmiDebug_ShowDebugColumns.Click += new System.EventHandler(this.tsmiDebug_ShowDebugColumns_Click);
+            // 
             // frmX002_Editor
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 534);
+            this.Controls.Add(this.menuStrip2);
             this.Controls.Add(this.tabMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip2;
             this.Name = "frmX002_Editor";
             this.Text = "SF3 X002 Editor";
             this.Controls.SetChildIndex(this.tabMain, 0);
+            this.Controls.SetChildIndex(this.menuStrip2, 0);
             this.tabSpells.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvSpells)).EndInit();
             this.tabItems.ResumeLayout(false);
@@ -1626,6 +1627,8 @@ namespace SF3.X002_Editor.Forms
             ((System.ComponentModel.ISupportInitialize)(this.olvAttackResist)).EndInit();
             this.tabWarpTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvWarpTable)).EndInit();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1771,6 +1774,9 @@ namespace SF3.X002_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcItemsMale;
         private BrightIdeasSoftware.OLVColumn lvcItemsFemale;
         private BrightIdeasSoftware.OLVColumn lvcSpellsLv4Cost;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDebug;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDebug_ShowDebugColumns;
     }
 }
 
