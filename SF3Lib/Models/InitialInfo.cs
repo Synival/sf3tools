@@ -26,14 +26,12 @@ namespace SF3.Models {
         private readonly int weapon4Type; // for exp
         private readonly int weapon4Exp; //2 bytes
 
-        public InitialInfo(IByteEditor fileEditor, int id, string name, int address, ScenarioType scenario) {
+        public InitialInfo(IByteEditor fileEditor, int id, string name, int address) {
             Editor   = fileEditor;
             ID       = id;
             Name     = name;
             Address  = address;
             Size     = 0x20;
-
-            Scenario = scenario;
 
             character      = Address + 0x00;
             characterClass = Address + 0x01;
@@ -56,7 +54,6 @@ namespace SF3.Models {
         }
 
         public IByteEditor Editor { get; }
-        public ScenarioType Scenario { get; }
 
         [BulkCopyRowName]
         public string Name { get; }

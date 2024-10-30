@@ -10,7 +10,7 @@ namespace SF3.Tables {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new Monster(FileEditor, id, name, address, Scenario));
+            => LoadFromResourceFile((id, name, address) => new Monster(FileEditor, id, name, address));
 
         public override string ResourceFile { get; }
         public override int Address { get; }

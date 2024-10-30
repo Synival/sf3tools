@@ -14,7 +14,7 @@ namespace SF3.Tables {
 
         public override bool Load()
             => LoadFromResourceFile((id, name, address) => new SpellIcon(
-                FileEditor, id, name, address, ValueNames.SpellInfo.Info[Scenario].Values[id], Scenario, Has16BitIconAddr, RealOffsetStart
+                FileEditor, id, name, address, ValueNames.SpellInfo.Info[Scenario].Values[id], Has16BitIconAddr, RealOffsetStart
             ));
 
         public override string ResourceFile { get; }

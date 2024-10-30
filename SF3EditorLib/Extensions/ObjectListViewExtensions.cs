@@ -54,7 +54,7 @@ namespace SF3.Editor.Extensions {
                         if (attr != null) {
                             converter = v => {
                                 var value = lvc.GetAspectByName(obj);
-                                return value.ToNamedValue(nameContext, attr) ?? value.ToString();
+                                return value.ToNamedValue(nameContext, attr) ?? string.Format(lvc.AspectToStringFormat, value);
                             };
                         }
                     }

@@ -8,7 +8,7 @@ namespace SF3.Models {
         //SPELLS
         private readonly int theSpellIcon;
 
-        public SpellIcon(IByteEditor fileEditor, int id, string name, int address, string spellName, ScenarioType scenario, bool has16BitIconAddr, int realOffsetStart) {
+        public SpellIcon(IByteEditor fileEditor, int id, string name, int address, string spellName, bool has16BitIconAddr, int realOffsetStart) {
             Editor          = fileEditor;
             ID              = id;
             Name            = name;

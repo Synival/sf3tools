@@ -74,14 +74,12 @@ namespace SF3.Models {
         private readonly int unknown19;
         private readonly int unknown20;
 
-        public Monster(IByteEditor editor, int id, string name, int address, ScenarioType scenario) {
+        public Monster(IByteEditor editor, int id, string name, int address) {
             Editor   = editor;
             ID       = id;
             Name     = name;
             Address  = address;
             Size     = 0x4C;
-
-            Scenario = scenario;
 
             maxHP             = Address; // 2 bytes
             maxMP             = Address + 2;
@@ -154,7 +152,6 @@ namespace SF3.Models {
         }
 
         public IByteEditor Editor { get; }
-        public ScenarioType Scenario { get; }
 
         [BulkCopyRowName]
         public string Name { get; }

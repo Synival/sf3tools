@@ -143,14 +143,12 @@ namespace SF3.Models {
         private readonly int accessoryEquipable3;
         private readonly int accessoryEquipable4;
 
-        public Stats(IByteEditor editor, int id, string name, int address, ScenarioType scenario) {
+        public Stats(IByteEditor editor, int id, string name, int address) {
             Editor   = editor;
             ID       = id;
             Address  = address;
             Name     = name;
             Size     = 0x7B;
-
-            Scenario = scenario;
 
             character           = Address + 0x00;
             characterClass      = Address + 0x01;
@@ -275,7 +273,6 @@ namespace SF3.Models {
             accessoryEquipable4 = Address + 0x7a;
         }
 
-        public ScenarioType Scenario { get; }
         public bool IsPromoted => Editor.GetByte(characterClass) >= 0x20;
 
         public PromotionLevelType PromotionLevel {
