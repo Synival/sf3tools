@@ -1,12 +1,14 @@
-﻿namespace CommonLib {
+﻿using static CommonLib.Utils.Utils;
+
+namespace CommonLib {
     /// <summary>
     /// Contained for a value, its name, and all information about the value.
     /// </summary>
     public class NameAndInfo {
         public NameAndInfo(int value, INamedValueInfo info) {
             Value = value;
-            Name = info.Values.TryGetValue(value, out string name) ? name : null;
-            NameOrValueStr = (Name != null) ? Name : Value.ToString(Info.FormatString);
+            Name = NameOrNull(value, info.Values);
+            NameOrValueStr = (Name != null) ? Name : value.ToString(info.FormatString);
             Info = info;
         }
 

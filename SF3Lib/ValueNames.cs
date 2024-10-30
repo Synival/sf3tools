@@ -5,35 +5,37 @@ using SF3.Values;
 
 namespace SF3 {
     public static class ValueNames {
-        private static readonly NamedValueFromResourceForScenariosInfo CharacterInfo
+        public static readonly NamedValueFromResourceForScenariosInfo CharacterInfo
             = new NamedValueFromResourceForScenariosInfo("Characters.xml");
-        private static readonly NamedValueFromResourceInfo CharacterClassInfo
+        public static readonly NamedValueFromResourceInfo CharacterClassInfo
             = new NamedValueFromResourceInfo("CharacterClasses.xml");
-        private static readonly NamedValueFromResourceInfo DroprateInfo
+        public static readonly NamedValueFromResourceInfo DroprateInfo
             = new NamedValueFromResourceInfo("DroprateList.xml");
-        private static readonly NamedValueFromResourceInfo EffectiveTypeInfo
+        public static readonly NamedValueFromResourceInfo EffectiveTypeInfo
             = new NamedValueFromResourceInfo("EffectiveTypes.xml");
-        private static readonly NamedValueFromResourceInfo ElementInfo
+        public static readonly NamedValueFromResourceInfo ElementInfo
             = new NamedValueFromResourceInfo("Elements.xml");
-        private static readonly NamedValueFromResourceForScenariosInfo FileIndexInfo
+        public static readonly NamedValueFromResourceForScenariosInfo FileIndexInfo
             = new NamedValueFromResourceForScenariosInfo("FileIndexes.xml", formatString: "X4");
-        private static readonly NamedValueFromResourceInfo FriendshipBonusTypeInfo
+        public static readonly NamedValueFromResourceInfo FriendshipBonusTypeInfo
             = new NamedValueFromResourceInfo("FriendshipBonusTypeList.xml");
-        private static readonly NamedValueFromResourceForScenariosInfo ItemInfo
+        public static readonly NamedValueFromResourceForScenariosInfo ItemInfo
             = new NamedValueFromResourceForScenariosInfo("Items.xml");
-        private static readonly NamedValueFromResourceInfo MovementTypeInfo
+        public static readonly NamedValueFromResourceForScenariosInfo MonsterInfo
+            = new NamedValueFromResourceForScenariosInfo("Monsters.xml");
+        public static readonly NamedValueFromResourceInfo MovementTypeInfo
             = new NamedValueFromResourceInfo("MovementTypes.xml");
-        private static readonly NamedValueFromResourceInfo SexInfo
+        public static readonly NamedValueFromResourceInfo SexInfo
             = new NamedValueFromResourceInfo("Sexes.xml");
-        private static readonly NamedValueFromResourceForScenariosInfo SpecialInfo
+        public static readonly NamedValueFromResourceForScenariosInfo SpecialInfo
             = new NamedValueFromResourceForScenariosInfo("Specials.xml");
-        private static readonly NamedValueFromResourceForScenariosInfo SpellInfo
+        public static readonly NamedValueFromResourceForScenariosInfo SpellInfo
             = new NamedValueFromResourceForScenariosInfo("Spells.xml");
-        private static readonly NamedValueFromResourceInfo SpellTargetInfo
+        public static readonly NamedValueFromResourceInfo SpellTargetInfo
             = new NamedValueFromResourceInfo("SpellTargets.xml");
-        private static readonly NamedValueFromResourceInfo StatTypeInfo
+        public static readonly NamedValueFromResourceInfo StatTypeInfo
             = new NamedValueFromResourceInfo("StatTypes.xml");
-        private static readonly NamedValueFromResourceInfo WeaponTypeInfo
+        public static readonly NamedValueFromResourceInfo WeaponTypeInfo
             = new NamedValueFromResourceInfo("WeaponTypes.xml");
 
         public static NameAndInfo GetCharacterName(ScenarioType scenario, int value)
@@ -52,6 +54,8 @@ namespace SF3 {
             => new NameAndInfo(value, FriendshipBonusTypeInfo);
         public static NameAndInfo GetItemName(ScenarioType scenario, int value)
             => new NameAndInfo(value, ItemInfo.Info[scenario]);
+        public static NameAndInfo GetMonsterName(ScenarioType scenario, int value)
+            => new NameAndInfo(value, MonsterInfo.Info[scenario]);
         public static NameAndInfo GetMovementTypeName(int value)
             => new NameAndInfo(value, MovementTypeInfo);
         public static NameAndInfo GetSexName(int value)

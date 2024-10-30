@@ -122,9 +122,6 @@
     <Content Include="Resources\PD\Monsters.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PD\Monsters_X044.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\PD\Specials.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
