@@ -156,6 +156,8 @@ namespace SF3.Models {
         private NameAndInfo GetDroprateName(int value) => ValueNames.GetDroprateName(value);
         private NameAndInfo GetItemName(int value) => ValueNames.GetItemName(Scenario, value);
         private NameAndInfo GetMovementTypeName(int value) => ValueNames.GetMovementTypeName(value);
+        private NameAndInfo GetSpecialName(int value) => ValueNames.GetSpecialName(Scenario, value);
+        private NameAndInfo GetSpellName(int value) => ValueNames.GetSpellName(Scenario, value);
 
         public IByteEditor Editor { get; }
         public ScenarioType Scenario { get; }
@@ -260,8 +262,9 @@ namespace SF3.Models {
             set => Editor.SetByte(unusedRes, (byte) value);
         }
 
-        public SpellValue Spell1 {
-            get => new SpellValue(Scenario, Editor.GetByte(spell1));
+        [NameGetter(nameof(GetSpellName))]
+        public int Spell1 {
+            get => Editor.GetByte(spell1);
             set => Editor.SetByte(spell1, (byte) value);
         }
 
@@ -270,8 +273,9 @@ namespace SF3.Models {
             set => Editor.SetByte(spell1Level, (byte) value);
         }
 
-        public SpellValue Spell2 {
-            get => new SpellValue(Scenario, Editor.GetByte(spell2));
+        [NameGetter(nameof(GetSpellName))]
+        public int Spell2 {
+            get => Editor.GetByte(spell2);
             set => Editor.SetByte(spell2, (byte) value);
         }
 
@@ -280,8 +284,9 @@ namespace SF3.Models {
             set => Editor.SetByte(spell2Level, (byte) value);
         }
 
-        public SpellValue Spell3 {
-            get => new SpellValue(Scenario, Editor.GetByte(spell3));
+        [NameGetter(nameof(GetSpellName))]
+        public int Spell3 {
+            get => Editor.GetByte(spell3);
             set => Editor.SetByte(spell3, (byte) value);
         }
 
@@ -290,8 +295,9 @@ namespace SF3.Models {
             set => Editor.SetByte(spell3Level, (byte) value);
         }
 
-        public SpellValue Spell4 {
-            get => new SpellValue(Scenario, Editor.GetByte(spell4));
+        [NameGetter(nameof(GetSpellName))]
+        public int Spell4 {
+            get => Editor.GetByte(spell4);
             set => Editor.SetByte(spell4, (byte) value);
         }
 
@@ -336,53 +342,63 @@ namespace SF3.Models {
             set => Editor.SetWord(itemSlot4, value);
         }
 
-        public SpecialValue Special1 {
-            get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial1));
+        [NameGetter(nameof(GetSpecialName))]
+        public int Special1 {
+            get => Editor.GetByte(enemySpecial1);
             set => Editor.SetByte(enemySpecial1, (byte) value);
         }
 
-        public SpecialValue Special2 {
-            get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial2));
+        [NameGetter(nameof(GetSpecialName))]
+        public int Special2 {
+            get => Editor.GetByte(enemySpecial2);
             set => Editor.SetByte(enemySpecial2, (byte) value);
         }
 
-        public SpecialValue Special3 {
-            get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial3));
+        [NameGetter(nameof(GetSpecialName))]
+        public int Special3 {
+            get => Editor.GetByte(enemySpecial3);
             set => Editor.SetByte(enemySpecial3, (byte) value);
         }
 
-        public SpecialValue Special4 {
-            get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial4));
+        [NameGetter(nameof(GetSpecialName))]
+        public int Special4 {
+            get => Editor.GetByte(enemySpecial4);
             set => Editor.SetByte(enemySpecial4, (byte) value);
         }
 
-        public SpecialValue Special5 {
-            get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial5));
+        [NameGetter(nameof(GetSpecialName))]
+        public int Special5 {
+            get => Editor.GetByte(enemySpecial5);
             set => Editor.SetByte(enemySpecial5, (byte) value);
         }
 
-        public SpecialValue Special6 {
-            get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial6));
+        [NameGetter(nameof(GetSpecialName))]
+        public int Special6 {
+            get => Editor.GetByte(enemySpecial6);
             set => Editor.SetByte(enemySpecial6, (byte) value);
         }
 
-        public SpecialValue Special7 {
-            get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial7));
+        [NameGetter(nameof(GetSpecialName))]
+        public int Special7 {
+            get => Editor.GetByte(enemySpecial7);
             set => Editor.SetByte(enemySpecial7, (byte) value);
         }
 
-        public SpecialValue Special8 {
-            get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial8));
+        [NameGetter(nameof(GetSpecialName))]
+        public int Special8 {
+            get => Editor.GetByte(enemySpecial8);
             set => Editor.SetByte(enemySpecial8, (byte) value);
         }
 
-        public SpecialValue Special9 {
-            get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial9));
+        [NameGetter(nameof(GetSpecialName))]
+        public int Special9 {
+            get => Editor.GetByte(enemySpecial9);
             set => Editor.SetByte(enemySpecial9, (byte) value);
         }
 
-        public SpecialValue Special10 {
-            get => new SpecialValue(Scenario, Editor.GetByte(enemySpecial10));
+        [NameGetter(nameof(GetSpecialName))]
+        public int Special10 {
+            get => Editor.GetByte(enemySpecial10);
             set => Editor.SetByte(enemySpecial10, (byte) value);
         }
 

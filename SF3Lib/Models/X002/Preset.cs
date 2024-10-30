@@ -1,3 +1,5 @@
+using CommonLib;
+using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 using SF3.Values;
@@ -56,26 +58,33 @@ namespace SF3.Models.X002 {
             //address = 0x0354c + (id * 0x18);
         }
 
+        NameAndInfo GetSpellName(int value) => ValueNames.GetSpellName(Scenario, value);
+
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int PresetID { get; }
         public string PresetName { get; }
 
-        public SpellValue SpellID2 {
-            get => new SpellValue(Scenario, _fileEditor.GetByte(spell));
+        [NameGetter(nameof(GetSpellName))]
+        public int SpellID2 {
+            get => _fileEditor.GetByte(spell);
             set => _fileEditor.SetByte(spell, (byte) value);
         }
+
         public int Weapon0 {
             get => _fileEditor.GetByte(weaponLv0);
             set => _fileEditor.SetByte(weaponLv0, (byte) value);
         }
+
         public int Weapon1 {
             get => _fileEditor.GetByte(weaponLv1);
             set => _fileEditor.SetByte(weaponLv1, (byte) value);
         }
+
         public int Weapon2 {
             get => _fileEditor.GetByte(weaponLv2);
             set => _fileEditor.SetByte(weaponLv2, (byte) value);
         }
+
         public int Weapon3 {
             get => _fileEditor.GetByte(weaponLv3);
             set => _fileEditor.SetByte(weaponLv3, (byte) value);

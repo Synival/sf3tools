@@ -95,6 +95,7 @@ namespace SF3.Models.X002 {
         }
 
         private NameAndInfo GetEffectiveTypeName(int value) => ValueNames.GetEffectiveTypeName(value);
+        private NameAndInfo GetSpellName(int value) => ValueNames.GetSpellName(Scenario, value);
         private NameAndInfo GetStatTypeName(int value) => ValueNames.GetStatTypeName(value);
         private NameAndInfo GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
 
@@ -278,8 +279,9 @@ namespace SF3.Models.X002 {
             set => _fileEditor.SetByte(StatUp4Location, (byte) value);
         }
 
-        public SpellValue SpellUse {
-            get => new SpellValue(Scenario, _fileEditor.GetByte(SpellOnUseLocation));
+        [NameGetter(nameof(GetSpellName))]
+        public int SpellUse {
+            get => _fileEditor.GetByte(SpellOnUseLocation);
             set => _fileEditor.SetByte(SpellOnUseLocation, (byte) value);
         }
 

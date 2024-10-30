@@ -1,3 +1,5 @@
+using CommonLib;
+using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 using SF3.Values;
@@ -72,6 +74,8 @@ namespace SF3.Models.X002 {
             //address = 0x0354c + (id * 0x18);
         }
 
+        private NameAndInfo GetFileIndexName(int value) => ValueNames.GetFileIndexName(Scenario, value);
+
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int LoadedOverrideID { get; }
         public string LoadedOverrideName { get; }
@@ -101,43 +105,51 @@ namespace SF3.Models.X002 {
             set => _fileEditor.SetByte(extraMusic, (byte) value);
         }
 
-        public FileIndexValue SynMpd {
-            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(synMpd));
+        [NameGetter(nameof(GetFileIndexName))]
+        public int SynMpd {
+            get => _fileEditor.GetDouble(synMpd);
             set => _fileEditor.SetDouble(synMpd, value);
         }
 
-        public FileIndexValue MedMpd {
-            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(medMpd));
+        [NameGetter(nameof(GetFileIndexName))]
+        public int MedMpd {
+            get => _fileEditor.GetDouble(medMpd);
             set => _fileEditor.SetDouble(medMpd, value);
         }
 
-        public FileIndexValue JulMpd {
-            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(julMpd));
+        [NameGetter(nameof(GetFileIndexName))]
+        public int JulMpd {
+            get => _fileEditor.GetDouble(julMpd);
             set => _fileEditor.SetDouble(julMpd, value);
         }
 
-        public FileIndexValue ExtraMpd {
-            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(extraMpd));
+        [NameGetter(nameof(GetFileIndexName))]
+        public int ExtraMpd {
+            get => _fileEditor.GetDouble(extraMpd);
             set => _fileEditor.SetDouble(extraMpd, value);
         }
 
-        public FileIndexValue SynChr {
-            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(synChr));
+        [NameGetter(nameof(GetFileIndexName))]
+        public int SynChr {
+            get => _fileEditor.GetDouble(synChr);
             set => _fileEditor.SetDouble(synChr, value);
         }
 
-        public FileIndexValue MedChr {
-            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(medChr));
+        [NameGetter(nameof(GetFileIndexName))]
+        public int MedChr {
+            get => _fileEditor.GetDouble(medChr);
             set => _fileEditor.SetDouble(medChr, value);
         }
 
-        public FileIndexValue JulChr {
-            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(julChr));
+        [NameGetter(nameof(GetFileIndexName))]
+        public int JulChr {
+            get => _fileEditor.GetDouble(julChr);
             set => _fileEditor.SetDouble(julChr, value);
         }
 
-        public FileIndexValue ExtraChr {
-            get => new FileIndexValue(Scenario, _fileEditor.GetDouble(extraChr));
+        [NameGetter(nameof(GetFileIndexName))]
+        public int ExtraChr {
+            get => _fileEditor.GetDouble(extraChr);
             set => _fileEditor.SetDouble(extraChr, value);
         }
 

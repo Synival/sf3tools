@@ -19,9 +19,12 @@ namespace SF3.Values {
     };
 
     public class NamedValueFromResourceForScenariosInfo : INamedValueFromResourceForScenariosInfo {
-        public NamedValueFromResourceForScenariosInfo(string resourceName)
+        public NamedValueFromResourceForScenariosInfo(string resourceName, int minValue = 0x00, int maxValue = 0xFF, string formatString = "X2")
         {
             ResourceName = resourceName;
+            MinValue = minValue;
+            MaxValue = maxValue;
+            FormatString = formatString;
             var possibleValues = GetValueNameDictionaryForAllScenariosFromXML(ResourceName);
 
             Info = possibleValues
@@ -32,9 +35,9 @@ namespace SF3.Values {
         }
 
         public string ResourceName { get; }
-        public virtual int MinValue => 0x00;
-        public virtual int MaxValue => 0xFF;
-        public virtual string FormatString => "X2";
+        public virtual int MinValue { get; }
+        public virtual int MaxValue { get; }
+        public virtual string FormatString { get; }
         public Dictionary<ScenarioType, Dictionary<NamedValue, string>> ComboBoxValues { get; } = new Dictionary<ScenarioType, Dictionary<NamedValue, string>>();
 
         public Dictionary<ScenarioType, INamedValueInfo> Info { get; }
