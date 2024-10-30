@@ -20,8 +20,7 @@ namespace SF3.Tests.FileEditors {
             public int ExpectedInitialInfoRows { get; }
         }
 
-        private readonly static List<X033_X031_TestCase> TestCases = new()
-        {
+        private readonly static List<X033_X031_TestCase> TestCases = [
             new(ScenarioType.Scenario1, "X033.BIN", 33, 22),
             new(ScenarioType.Scenario1, "X031.BIN", 33, 22),
             new(ScenarioType.Scenario2, "X033.BIN", 66, 41),
@@ -30,7 +29,7 @@ namespace SF3.Tests.FileEditors {
             new(ScenarioType.Scenario3, "X031.BIN", 143, 60),
             new(ScenarioType.PremiumDisk, "X033.BIN", 144, 61),
             new(ScenarioType.PremiumDisk, "X031.BIN", 144, 61),
-        };
+        ];
 
         [TestMethod]
         public void StatsTable_HasExpectedData() {

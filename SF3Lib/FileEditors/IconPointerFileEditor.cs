@@ -19,17 +19,9 @@ namespace SF3.FileEditors {
 
             switch (Scenario) {
                 case ScenarioType.Scenario1: {
-                    int spellIconOffset, itemIconOffset, sub;
-                    if (IsX026) {
-                        spellIconOffset = 0x0a30;
-                        itemIconOffset  = 0x08f0;
-                        sub = 0x06078000;
-                    }
-                    else {
-                        spellIconOffset = 0x0030;
-                        itemIconOffset  = 0x003C;
-                        sub = 0x06068000;
-                    }
+                    int spellIconOffset = IsX026 ? 0x0a30 : 0x0030;
+                    int sub = IsX026 ? 0x06078000 : 0x06068000;
+                    int itemIconOffset = IsX026 ? 0x08f0 : 0x003C;
 
                     spellIconAddress = GetDouble(spellIconOffset) - sub;
                     spellIconRealOffsetStart = 0xFF8E;
@@ -38,17 +30,9 @@ namespace SF3.FileEditors {
                 }
 
                 case ScenarioType.Scenario2: {
-                    int spellIconOffset, itemIconOffset, sub;
-                    if (IsX026) {
-                        spellIconOffset = 0x0a1c;
-                        itemIconOffset  = 0x0a08;
-                        sub = 0x06078000;
-                    }
-                    else {
-                        spellIconOffset = 0x00000030;
-                        itemIconOffset  = 0x0000003C;
-                        sub = 0x06068000;
-                    }
+                    int spellIconOffset = IsX026 ? 0x0a1c : 0x0030;
+                    int itemIconOffset  = IsX026 ? 0x0a08 : 0x003C;
+                    int sub = IsX026 ? 0x06078000 : 0x06068000;
 
                     spellIconAddress = GetDouble(spellIconOffset) - sub;
                     spellIconRealOffsetStart = 0xFC86;
@@ -57,17 +41,9 @@ namespace SF3.FileEditors {
                 }
 
                 case ScenarioType.Scenario3: {
-                    int spellIconOffset, itemIconOffset, sub;
-                    if (IsX026) {
-                        spellIconOffset = 0x09cc;
-                        itemIconOffset  = 0x09b4;
-                        sub = 0x06078000;
-                    }
-                    else {
-                        spellIconOffset = 0x0030;
-                        itemIconOffset  = 0x003C;
-                        sub = 0x06068000;
-                    }
+                    int spellIconOffset = IsX026 ? 0x09cc : 0x0030;
+                    int itemIconOffset  = IsX026 ? 0x09b4 : 0x003C;
+                    int sub             = IsX026 ? 0x06078000 : 0x06068000;
 
                     spellIconAddress = GetDouble(spellIconOffset) - sub;
                     spellIconRealOffsetStart = 0x12A48;
@@ -76,17 +52,9 @@ namespace SF3.FileEditors {
                 }
 
                 case ScenarioType.PremiumDisk: {
-                    int spellIconOffset, itemIconOffset, sub;
-                    if (IsX026) {
-                        spellIconOffset = 0x07a0;
-                        itemIconOffset  = 0x072c;
-                        sub = 0x06078000;
-                    }
-                    else {
-                        spellIconOffset = 0x0030;
-                        itemIconOffset  = 0x003C;
-                        sub = 0x06068000;
-                    }
+                    int spellIconOffset = IsX026 ? 0x07a0 : 0x0030;
+                    int itemIconOffset  = IsX026 ? 0x072c : 0x003C;
+                    int sub             = IsX026 ? 0x06078000 : 0x06068000;
 
                     spellIconAddress = GetDouble(spellIconOffset) - sub;
                     spellIconRealOffsetStart = 0x12A32;

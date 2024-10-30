@@ -16,14 +16,13 @@ namespace SF3.Tests.FileEditors {
             public int ExpectedRows { get; }
         }
 
-        private readonly static List<X019_TestCase> TestCases = new()
-        {
+        private readonly static List<X019_TestCase> TestCases = [
             new(ScenarioType.Scenario1, "X019.BIN", false, 142),
             new(ScenarioType.Scenario2, "X019.BIN", false, 191),
             new(ScenarioType.Scenario3, "X019.BIN", false, 212),
             new(ScenarioType.PremiumDisk, "X019.BIN", false, 212),
             new(ScenarioType.PremiumDisk, "X044.BIN", true, 212),
-        };
+        ];
 
         [TestMethod]
         public void MonsterTable_HasExpectedData() {

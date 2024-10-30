@@ -20,8 +20,7 @@ namespace SF3.Tests.FileEditors {
             public int ExpectedSpellRealOffsetStart { get; }
         }
 
-        private readonly static List<IPETestCase> TestCases = new()
-        {
+        private readonly static List<IPETestCase> TestCases = [
             new(ScenarioType.Scenario1, "X011.BIN", false, 256, 51, 65422),
             new(ScenarioType.Scenario1, "X021.BIN", false, 256, 51, 65422),
             new(ScenarioType.Scenario1, "X026.BIN", true, 256, 51, 65422),
@@ -37,7 +36,7 @@ namespace SF3.Tests.FileEditors {
             new(ScenarioType.PremiumDisk, "X011.BIN", false, 300, 93, 76338),
             new(ScenarioType.PremiumDisk, "X021.BIN", false, 300, 93, 76338),
             new(ScenarioType.PremiumDisk, "X026.BIN", true, 300, 93, 76338)
-        };
+        ];
 
         [TestMethod]
         public void ItemIconTable_HasExpectedData() {
