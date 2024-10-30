@@ -8,9 +8,7 @@ namespace SF3.Tables {
     public class MonsterTable : Table<Monster> {
         public MonsterTable(ISF3FileEditor fileEditor, bool isX044) : base(fileEditor) {
             IsX044       = isX044;
-            ResourceFile = (Scenario == ScenarioType.PremiumDisk && isX044)
-                ? "Resources/PD/Monsters_X044.xml"
-                : ResourceFileForScenario(Scenario, "Monsters.xml");
+            ResourceFile = ResourceFileForScenario(Scenario, "Monsters.xml");
 
             switch (Scenario) {
                 case ScenarioType.Scenario1:
