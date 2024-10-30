@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Tables.X013;
 using SF3.Types;
 
 namespace SF3.FileEditors {
     public class X013_FileEditor : SF3FileEditor, IX013_FileEditor {
-        public X013_FileEditor(ScenarioType scenario) : base(scenario) {
+        public X013_FileEditor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
         }
 
         public override IEnumerable<ITable> MakeTables() {

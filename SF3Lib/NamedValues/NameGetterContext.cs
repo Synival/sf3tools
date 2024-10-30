@@ -32,6 +32,7 @@ namespace SF3.NamedValues {
         }
 
         public NameAndInfo GetNameAndInfo(int value, object parameter) => _nameGetters[(NamedValueType) parameter](value);
+        public bool CanGetNameAndInfo(int value, object parameter) => _nameGetters.ContainsKey((NamedValueType) parameter);
 
         public ScenarioType Scenario { get; }
 

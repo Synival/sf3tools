@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using CommonLib.NamedValues;
 using SF3.Tables;
 using SF3.Types;
 
@@ -8,7 +9,7 @@ namespace SF3.FileEditors {
     /// IFileEditor specifically for files in Shining Force 3
     /// </summary>
     public abstract class SF3FileEditor : FileEditor, ISF3FileEditor {
-        public SF3FileEditor(ScenarioType scenario) {
+        public SF3FileEditor(ScenarioType scenario, INameGetterContext nameContext) : base(nameContext) {
             Scenario = scenario;
         }
 

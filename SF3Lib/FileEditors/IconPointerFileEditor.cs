@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
+using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Types;
 
 namespace SF3.FileEditors {
     public class IconPointerFileEditor : SF3FileEditor, IIconPointerFileEditor {
-        public IconPointerFileEditor(ScenarioType scenario, bool isX026) : base(scenario) {
+        public IconPointerFileEditor(ScenarioType scenario, bool isX026) : base(scenario, new NameGetterContext(scenario)) {
             IsX026 = isX026;
         }
 

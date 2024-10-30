@@ -17,5 +17,13 @@ namespace CommonLib.NamedValues
         /// <param name="parameter">Optional parameter assigned to the NameGetterAttribute.</param>
         /// <returns>Both the name of the value (if one exists) and information about the named value.</returns>
         NameAndInfo GetNameAndInfo(int value, object parameter);
+
+        /// <summary>
+        /// Returns 'true' if GetNameAndInfo() is safe to use with this value and parameter.
+        /// The conditions on whether or not this is safe depends on the implementation.
+        /// </summary>
+        /// <param name="parameter">Optional parameter assigned to the NameGetterAttribute.</param>
+        /// <returns>'true' if GetNameAndInfo() can be used.</returns>
+        bool CanGetNameAndInfo(int value, object parameter);
     }
 }

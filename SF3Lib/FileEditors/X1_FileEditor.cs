@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Tables.X1;
 using SF3.Types;
 
 namespace SF3.FileEditors {
     public class X1_FileEditor : SF3FileEditor, IX1_FileEditor {
-        public X1_FileEditor(ScenarioType scenario, MapLeaderType mapLeader, bool isBTL99) : base(scenario) {
+        public X1_FileEditor(ScenarioType scenario, MapLeaderType mapLeader, bool isBTL99) : base(scenario, new NameGetterContext(scenario)) {
             MapLeader = mapLeader;
             IsBTL99 = isBTL99;
         }

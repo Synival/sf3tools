@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using CommonLib.NamedValues;
 
 namespace SF3.FileEditors {
     /// <summary>
@@ -48,6 +49,11 @@ namespace SF3.FileEditors {
         /// The title of the file being modified for display
         /// </summary>
         string Title { get; }
+
+        /// <summary>
+        /// The context for fetching named values.
+        /// </summary>
+        INameGetterContext NameContext { get; }
 
         /// <summary>
         /// The title used for the editor, with the current file and '*' indicating modification.

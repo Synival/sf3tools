@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using CommonLib.NamedValues;
 using SF3.Exceptions;
 
 namespace SF3.FileEditors {
@@ -8,8 +9,9 @@ namespace SF3.FileEditors {
     /// Used for loading, saving, reading, and modifying .BIN files.
     /// </summary>
     public class FileEditor : IFileEditor {
-        public FileEditor() {
+        public FileEditor(INameGetterContext nameContext) {
             _title = BaseTitle;
+            NameContext = nameContext;
         }
 
         private byte[] _data = null;
@@ -78,6 +80,8 @@ namespace SF3.FileEditors {
                 }
             }
         }
+
+        public INameGetterContext NameContext { get; }
 
         /// <summary>
         /// Loads a file's binary data for editing.

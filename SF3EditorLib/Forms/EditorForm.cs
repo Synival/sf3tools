@@ -102,7 +102,7 @@ namespace SF3.Editor.Forms {
 
             ObjectListViews = this.GetAllObjectsOfTypeInFields<ObjectListView>(false);
             foreach (var olv in ObjectListViews)
-                olv.Enhance(null /* TODO: actual context!! */);
+                olv.Enhance(() => FileEditor);
 
             UpdateTitle();
         }
@@ -346,7 +346,7 @@ namespace SF3.Editor.Forms {
                 return;
             }
 
-            ProduceAndPresentBulkCopyReport(result, null /* TODO: actual context!! */);
+            ProduceAndPresentBulkCopyReport(result, FileEditor.NameContext);
         }
 
         /// <summary>
@@ -384,7 +384,7 @@ namespace SF3.Editor.Forms {
             }
 
             ObjectListViews.ForEach(x => x.RefreshAllItems());
-            ProduceAndPresentBulkCopyReport(result, null /* TODO: actual context!! */);
+            ProduceAndPresentBulkCopyReport(result, FileEditor.NameContext);
         }
 
         private void ProduceAndPresentBulkCopyReport(ObjectExtensions.BulkCopyPropertiesResult result, INameGetterContext nameContext) {

@@ -6,6 +6,7 @@ using BrightIdeasSoftware;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
+using SF3.FileEditors;
 using static SF3.Editor.Utils.ControlUtils;
 
 namespace SF3.Editor.Extensions {
@@ -25,35 +26,41 @@ namespace SF3.Editor.Extensions {
         /// Applies some neat extensions to the ObjectListView.
         /// </summary>
         /// <param name="olv">The ObjectListView to enhance.</param>
-        /// <param name="nameContext">The context for NameGetterAttribute when fetching names.</param>
-        public static void Enhance(this ObjectListView olv, INameGetterContext nameContext) {
+        /// <param name="fileEditorFetcher">The function that fetchers the current FileEditor associated for this ObjectListView.</param>
+        public static void Enhance(this ObjectListView olv, FileEditorFetcher fileEditorFetcher) {
+            olv.SetFileEditorFetcher(fileEditorFetcher);
             foreach (var lvc in olv.AllColumns)
-                lvc.Enhance(nameContext);
+                lvc.Enhance();
         }
 
         /// <summary>
         /// Adds some extra functionality to a column of an ObjectListView.
         /// </summary>
         /// <param name="lvc">The ObjectListView column to enhance.</param>
-        /// <param name="nameContext">The context for NameGetterAttribute when fetching names.</param>
-        public static void Enhance(this OLVColumn lvc, INameGetterContext nameContext) {
-            if (nameContext == null)
-                return;
-
+        public static void Enhance(this OLVColumn lvc) {
             // Add a hook to each AspectGetter that will check for a named value.
             // If a name exists, hijack the AspectToStringConverter to use the name instead.
             // If no name exists, use the standard AspectToStringConverter.
             // (It would be nice if we could set one single AspectToStringConverter to check for this,
             // but alas, it only takes one paramter (value) and that's not enough to check for a name.)
             lvc.AspectGetter = obj => {
-                var property = obj.GetType().GetProperty(lvc.AspectName);
-                lvc.AspectToStringConverter = property.GetCustomAttribute<NameGetterAttribute>() is var attr && attr != null
-                    ? (v => {
-                        var val = ((int) lvc.GetAspectByName(obj)).ToNamedValue(nameContext, attr);
-                        return val;
-                    })
-                    : (AspectToStringConverterDelegate) null;
+                AspectToStringConverterDelegate converter = null;
 
+                var nameContext = ((ObjectListView) lvc.ListView).GetFileEditor()?.NameContext;
+                if (nameContext != null) {
+                    var property = obj.GetType().GetProperty(lvc.AspectName);
+                    if (property != null) {
+                        var attr = property.GetCustomAttribute<NameGetterAttribute>();
+                        if (attr != null) {
+                            converter = v => {
+                                var value = lvc.GetAspectByName(obj);
+                                return value.ToNamedValue(nameContext, attr) ?? value.ToString();
+                            };
+                        }
+                    }
+                }
+
+                lvc.AspectToStringConverter = converter;
                 return lvc.GetAspectByName(obj);
             };
         }
@@ -90,16 +97,19 @@ namespace SF3.Editor.Extensions {
         /// <param name="obj">The object bound to the ObjectListView row.</param>
         /// <param name="model">The column of the OLV.</param>
         /// <param name="value">The value fetched from the column.</param>
-        /// <param name="nameContext">The context for NameGetterAttribute when fetching names.</param>
         /// <param name="oldDelegate">The EditorCreatorDelegate we're replacing to use as a fallback.</param>
         /// <returns>The control to use when editing - a ComboBox for named values, otherwise the return value of 'oldDelegate'.</returns>
-        private static Control NamedValueEditorCreator(object obj, OLVColumn model, object value, INameGetterContext nameContext, EditorCreatorDelegate oldDelegate) {
-            if (nameContext != null && Globals.UseDropdowns) {
-                var property = obj.GetType().GetProperty(model.AspectName);
-                if (property.GetCustomAttribute<NameGetterAttribute>() is var attr && attr != null) {
-                    var intValue = (int) property.GetValue(obj);
-                    var nameAndValues = attr.GetNameAndInfo(nameContext, intValue, false);
-                    return MakeNamedValueComboBox(nameAndValues.Info, intValue);
+        private static Control NamedValueEditorCreator(object obj, OLVColumn model, object value, EditorCreatorDelegate oldDelegate) {
+            if (Globals.UseDropdowns) {
+                var nameContext = ((ObjectListView) model.ListView).GetFileEditor()?.NameContext;
+                if (nameContext != null) {
+                    var property = obj.GetType().GetProperty(model.AspectName);
+                    var attr = property.GetCustomAttribute<NameGetterAttribute>();
+                    if (attr != null) {
+                        var intValue = (int) property.GetValue(obj);
+                        if (nameContext.CanGetNameAndInfo(intValue, attr.Parameter))
+                            return MakeNamedValueComboBox(attr.GetInfo(nameContext, intValue), intValue);
+                    }
                 }
             }
 
@@ -127,8 +137,20 @@ namespace SF3.Editor.Extensions {
             foreach (var type in typesToHijack) {
                 var creator = creatorMap[type];
                 ObjectListView.EditorRegistry.Register(type, (obj, model, value)
-                    => NamedValueEditorCreator(obj, model, value, null /* TODO: actual context!! */, creator));
+                    => NamedValueEditorCreator(obj, model, value, creator));
             }
         }
+
+        private static Dictionary<ObjectListView, FileEditorFetcher> _olvFileEditorFetchers = new Dictionary<ObjectListView, FileEditorFetcher>();
+        public delegate IFileEditor FileEditorFetcher();
+
+        public static void SetFileEditorFetcher(this ObjectListView olv, FileEditorFetcher fetcher)
+            => _olvFileEditorFetchers[olv] = fetcher;
+
+        public static FileEditorFetcher GetFileEditorFetcher(this ObjectListView olv)
+            => _olvFileEditorFetchers.TryGetValue(olv, out FileEditorFetcher fetcher) ? fetcher : null;
+
+        public static IFileEditor GetFileEditor(this ObjectListView olv)
+            => (olv.GetFileEditorFetcher() is var fetcher) ? fetcher() : null;
     }
 }
