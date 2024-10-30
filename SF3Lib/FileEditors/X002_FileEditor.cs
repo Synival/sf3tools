@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CommonLib.Attributes;
 using SF3.Tables;
 using SF3.Tables.X002;
 using SF3.Types;
@@ -37,14 +38,23 @@ namespace SF3.FileEditors {
             LoadedOverrideTable = null;
         }
 
+        [BulkCopyRecurse]
         public ItemTable ItemTable { get; private set; }
+        [BulkCopyRecurse]
         public SpellTable SpellTable { get; private set; }
+        [BulkCopyRecurse]
         public PresetTable PresetTable { get; private set; }
+        [BulkCopyRecurse]
         public LoadTable LoadTable { get; private set; }
+        [BulkCopyRecurse]
         public StatTable StatTable { get; private set; }
+        [BulkCopyRecurse]
         public WeaponRankTable WeaponRankTable { get; private set; }
+        [BulkCopyRecurse]
         public AttackResistTable AttackResistTable { get; private set; }
+        [BulkCopyRecurse]
         public WarpTable WarpTable { get; private set; }
+        [BulkCopyRecurse]
         public LoadedOverrideTable LoadedOverrideTable { get; private set; }
     }
 }

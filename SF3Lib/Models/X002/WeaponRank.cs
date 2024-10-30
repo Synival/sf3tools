@@ -1,3 +1,4 @@
+using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 
@@ -55,29 +56,34 @@ namespace SF3.Models.X002 {
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int WeaponRankID { get; }
-        public string WeaponRankName { get; }
 
+        [BulkCopyRowName]
+        public string WeaponRankName { get; }
+        public int WeaponRankID { get; }
+        public int WeaponRankAddress { get; }
+
+        [BulkCopy]
         public int Skill0 {
             get => _fileEditor.GetByte(skill0);
             set => _fileEditor.SetByte(skill0, (byte) value);
         }
 
+        [BulkCopy]
         public int Skill1 {
             get => _fileEditor.GetByte(skill1);
             set => _fileEditor.SetByte(skill1, (byte) value);
         }
 
+        [BulkCopy]
         public int Skill2 {
             get => _fileEditor.GetByte(skill2);
             set => _fileEditor.SetByte(skill2, (byte) value);
         }
 
+        [BulkCopy]
         public int Skill3 {
             get => _fileEditor.GetByte(skill3);
             set => _fileEditor.SetByte(skill3, (byte) value);
         }
-
-        public int WeaponRankAddress { get; }
     }
 }

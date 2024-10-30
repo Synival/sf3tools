@@ -1,3 +1,4 @@
+using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 
@@ -60,29 +61,34 @@ namespace SF3.Models {
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int WarpID { get; }
-        public string WarpName { get; }
 
+        [BulkCopyRowName]
+        public string WarpName { get; }
+        public int WarpID { get; }
+        public int WarpAddress { get; }
+
+        [BulkCopy]
         public int WarpUnknown1 {
             get => _fileEditor.GetByte(unknown1);
             set => _fileEditor.SetByte(unknown1, (byte) value);
         }
 
+        [BulkCopy]
         public int WarpUnknown2 {
             get => _fileEditor.GetByte(unknown2);
             set => _fileEditor.SetByte(unknown2, (byte) value);
         }
 
+        [BulkCopy]
         public int WarpType {
             get => _fileEditor.GetByte(type);
             set => _fileEditor.SetByte(type, (byte) value);
         }
 
+        [BulkCopy]
         public int WarpMap {
             get => _fileEditor.GetByte(map);
             set => _fileEditor.SetByte(map, (byte) value);
         }
-
-        public int WarpAddress { get; }
     }
 }

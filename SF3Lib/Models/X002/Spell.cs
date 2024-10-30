@@ -92,111 +92,132 @@ namespace SF3.Models.X002 {
         private NameAndInfo GetSpellTargetName(int value) => ValueNames.GetSpellTargetName(value);
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int SpellID { get; }
-        public string SpellName { get; }
 
+        [BulkCopyRowName]
+        public string SpellName { get; }
+        public int SpellID { get; }
+        public int SpellAddress { get; }
+
+        [BulkCopy]
         [NameGetter(nameof(GetSpellTargetName))]
         public int SpellTarget {
             get => _fileEditor.GetByte(targetType);
             set => _fileEditor.SetByte(targetType, (byte) value);
         }
 
+        [BulkCopy]
         public int SpellType {
             get => _fileEditor.GetByte(damageType);
             set => _fileEditor.SetByte(damageType, (byte) value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetElementName))]
         public int Element {
             get => _fileEditor.GetByte(element);
             set => _fileEditor.SetByte(element, (byte) value);
         }
 
+        [BulkCopy]
         public int SpellUnknown2 {
             get => _fileEditor.GetByte(unknown2);
             set => _fileEditor.SetByte(unknown2, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv1Distance {
             get => _fileEditor.GetByte(lv1Distance);
             set => _fileEditor.SetByte(lv1Distance, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv1Targets {
             get => _fileEditor.GetByte(lv1Targets);
             set => _fileEditor.SetByte(lv1Targets, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv1Cost {
             get => _fileEditor.GetByte(lv1Cost);
             set => _fileEditor.SetByte(lv1Cost, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv1Damage {
             get => _fileEditor.GetByte(lv1Damage);
             set => _fileEditor.SetByte(lv1Damage, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv2Distance {
             get => _fileEditor.GetByte(lv2Distance);
             set => _fileEditor.SetByte(lv2Distance, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv2Targets {
             get => _fileEditor.GetByte(lv2Targets);
             set => _fileEditor.SetByte(lv2Targets, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv2Cost {
             get => _fileEditor.GetByte(lv2Cost);
             set => _fileEditor.SetByte(lv2Cost, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv2Damage {
             get => _fileEditor.GetByte(lv2Damage);
             set => _fileEditor.SetByte(lv2Damage, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv3Distance {
             get => _fileEditor.GetByte(lv3Distance);
             set => _fileEditor.SetByte(lv3Distance, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv3Targets {
             get => _fileEditor.GetByte(lv3Targets);
             set => _fileEditor.SetByte(lv3Targets, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv3Cost {
             get => _fileEditor.GetByte(lv3Cost);
             set => _fileEditor.SetByte(lv3Cost, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv3Damage {
             get => _fileEditor.GetByte(lv3Damage);
             set => _fileEditor.SetByte(lv3Damage, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv4Distance {
             get => _fileEditor.GetByte(lv4Distance);
             set => _fileEditor.SetByte(lv4Distance, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv4Targets {
             get => _fileEditor.GetByte(lv4Targets);
             set => _fileEditor.SetByte(lv4Targets, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv4Cost {
             get => _fileEditor.GetByte(lv4Cost);
             set => _fileEditor.SetByte(lv4Cost, (byte) value);
         }
 
+        [BulkCopy]
         public int Lv4Damage {
             get => _fileEditor.GetByte(lv4Damage);
             set => _fileEditor.SetByte(lv4Damage, (byte) value);
         }
-
-        public int SpellAddress { get; }
     }
 }

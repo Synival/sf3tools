@@ -1,3 +1,4 @@
+using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 
@@ -49,18 +50,22 @@ namespace SF3.Models.X002 {
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int AttackResistID { get; }
-        public string AttackResistName { get; }
 
+        [BulkCopyRowName]
+        public string AttackResistName { get; }
+        public int AttackResistID { get; }
+        public int AttackResistAddress { get; }
+
+        [BulkCopy]
         public int Attack {
             get => _fileEditor.GetByte(attack);
             set => _fileEditor.SetByte(attack, (byte) value);
         }
+
+        [BulkCopy]
         public int Resist {
             get => _fileEditor.GetByte(resist);
             set => _fileEditor.SetByte(resist, (byte) value);
         }
-
-        public int AttackResistAddress { get; }
     }
 }

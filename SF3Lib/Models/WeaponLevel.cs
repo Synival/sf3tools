@@ -22,6 +22,7 @@ namespace SF3.Models {
         }
 
         public IByteEditor Editor { get; }
+
         [BulkCopyRowName]
         public string Name { get; }
         public int ID { get; }

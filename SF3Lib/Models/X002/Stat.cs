@@ -1,3 +1,4 @@
+using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 
@@ -48,14 +49,16 @@ namespace SF3.Models.X002 {
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int StatID { get; }
-        public string StatName { get; }
 
+        [BulkCopyRowName]
+        public string StatName { get; }
+        public int StatID { get; }
+        public int StatAddress { get; }
+
+        [BulkCopy]
         public int Stat {
             get => _fileEditor.GetByte(stat);
             set => _fileEditor.SetByte(stat, (byte) value);
         }
-
-        public int StatAddress { get; }
     }
 }

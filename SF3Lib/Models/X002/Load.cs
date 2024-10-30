@@ -67,53 +67,62 @@ namespace SF3.Models.X002 {
         private NameAndInfo GetFileIndexName(int value) => ValueNames.GetFileIndexName(Scenario, value);
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int LoadID { get; }
-        public string LoadName { get; }
 
+        [BulkCopyRowName]
+        public string LoadName { get; }
+        public int LoadID { get; }
+        public int LoadAddress { get; }
+
+        [BulkCopy]
         public int LocationID {
             get => _fileEditor.GetWord(locationID);
             set => _fileEditor.SetWord(locationID, value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetFileIndexName))]
         public int X1 {
             get => _fileEditor.GetWord(x1);
             set => _fileEditor.SetWord(x1, value);
         }
 
+        [BulkCopy]
         public int CHP {
             get => _fileEditor.GetWord(chp);
             set => _fileEditor.SetWord(chp, value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetFileIndexName))]
         public int X5 {
             get => _fileEditor.GetWord(x5);
             set => _fileEditor.SetWord(x5, value);
         }
 
+        [BulkCopy]
         public int Music {
             get => _fileEditor.GetWord(music);
             set => _fileEditor.SetWord(music, value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetFileIndexName))]
         public int MPD {
             get => _fileEditor.GetWord(mpd);
             set => _fileEditor.SetWord(mpd, value);
         }
 
+        [BulkCopy]
         public int LoadUnknown {
             get => _fileEditor.GetWord(unknown);
             set => _fileEditor.SetWord(unknown, value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetFileIndexName))]
         public int CHR {
             get => _fileEditor.GetWord(chr);
             set => _fileEditor.SetWord(chr, value);
         }
-
-        public int LoadAddress { get; }
     }
 }

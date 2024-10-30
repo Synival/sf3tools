@@ -100,20 +100,26 @@ namespace SF3.Models.X002 {
         private NameAndInfo GetWeaponTypeName(int value) => ValueNames.GetWeaponTypeName(value);
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int ID { get; }
-        public string Name { get; }
 
+        [BulkCopyRowName]
+        public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+
+        [BulkCopy]
         public int Price {
             get => _fileEditor.GetWord(PriceLocation);
             set => _fileEditor.SetWord(PriceLocation, value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetWeaponTypeName))]
         public int WeaponType {
             get => _fileEditor.GetByte(WeaponTypeLocation);
             set => _fileEditor.SetByte(WeaponTypeLocation, (byte) value);
         }
 
+        [BulkCopy]
         public int EffectsEquip {
             get => _fileEditor.GetByte(EffectsEquipLocation);
             set => _fileEditor.SetByte(EffectsEquipLocation, (byte) value);
@@ -156,6 +162,7 @@ namespace SF3.Models.X002 {
             set => _fileEditor.SetBit(EffectsEquipLocation, 7, value);
         }
 
+        [BulkCopy]
         public int Requirements {
             get => _fileEditor.GetByte(RequirementLocation);
             set => _fileEditor.SetByte(RequirementLocation, (byte) value);
@@ -188,108 +195,125 @@ namespace SF3.Models.X002 {
             set => _fileEditor.SetBit(RequirementLocation, 5, value);
         }
 
+        [BulkCopy]
         public int Range {
             get => _fileEditor.GetByte(RangeLocation);
             set => _fileEditor.SetByte(RangeLocation, (byte) value);
         }
 
+        [BulkCopy]
         public int Attack {
             get => _fileEditor.GetByte(AttackLocation);
             set => _fileEditor.SetByte(AttackLocation, (byte) value);
         }
 
+        [BulkCopy]
         public int Defense {
             get => _fileEditor.GetByte(DefenseLocation);
             set => _fileEditor.SetByte(DefenseLocation, (byte) value);
         }
 
+        [BulkCopy]
         public int AttackRank {
             get => _fileEditor.GetByte(AttackUpRankLocation);
             set => _fileEditor.SetByte(AttackUpRankLocation, (byte) value);
         }
 
+        [BulkCopy]
         public int SpellRank {
             get => _fileEditor.GetByte(SpellUpRankLocation);
             set => _fileEditor.SetByte(SpellUpRankLocation, (byte) value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetEffectiveTypeName))]
         public int PhysicalAttribute {
             get => _fileEditor.GetByte(PhysicalAttributeLocation);
             set => _fileEditor.SetByte(PhysicalAttributeLocation, (byte) value);
         }
 
+        [BulkCopy]
         public int Unknown1 {
             get => _fileEditor.GetByte(Unknown1Location);
             set => _fileEditor.SetByte(Unknown1Location, (byte) value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetEffectiveTypeName))]
         public int MonsterType {
             get => _fileEditor.GetByte(MonsterTypeAttributeLocation);
             set => _fileEditor.SetByte(MonsterTypeAttributeLocation, (byte) value);
         }
 
+        [BulkCopy]
         public int Unknown2 {
             get => _fileEditor.GetByte(Unknown2Location);
             set => _fileEditor.SetByte(Unknown2Location, (byte) value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetStatTypeName))]
         public int StatType1 {
             get => _fileEditor.GetByte(StatType1Location);
             set => _fileEditor.SetByte(StatType1Location, (byte) value);
         }
 
+        [BulkCopy]
         public int StatUp1 {
             get => _fileEditor.GetByte(StatUp1Location);
             set => _fileEditor.SetByte(StatUp1Location, (byte) value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetStatTypeName))]
         public int StatType2 {
             get => _fileEditor.GetByte(StatType2Location);
             set => _fileEditor.SetByte(StatType2Location, (byte) value);
         }
 
+        [BulkCopy]
         public int StatUp2 {
             get => _fileEditor.GetByte(StatUp2Location);
             set => _fileEditor.SetByte(StatUp2Location, (byte) value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetStatTypeName))]
         public int StatType3 {
             get => _fileEditor.GetByte(StatType3Location);
             set => _fileEditor.SetByte(StatType3Location, (byte) value);
         }
 
+        [BulkCopy]
         public int StatUp3 {
             get => _fileEditor.GetByte(StatUp3Location);
             set => _fileEditor.SetByte(StatUp3Location, (byte) value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetStatTypeName))]
         public int StatType4 {
             get => _fileEditor.GetByte(StatType4Location);
             set => _fileEditor.SetByte(StatType4Location, (byte) value);
         }
 
+        [BulkCopy]
         public int StatUp4 {
             get => _fileEditor.GetByte(StatUp4Location);
             set => _fileEditor.SetByte(StatUp4Location, (byte) value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetSpellName))]
         public int SpellUse {
             get => _fileEditor.GetByte(SpellOnUseLocation);
             set => _fileEditor.SetByte(SpellOnUseLocation, (byte) value);
         }
 
+        [BulkCopy]
         public int SpellUseLv {
             get => _fileEditor.GetByte(SpellLvOnUseLocation);
             set => _fileEditor.SetByte(SpellLvOnUseLocation, (byte) value);
         }
-
-        public int Address { get; }
     }
 }

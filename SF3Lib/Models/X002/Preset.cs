@@ -61,35 +61,41 @@ namespace SF3.Models.X002 {
         private NameAndInfo GetSpellName(int value) => ValueNames.GetSpellName(Scenario, value);
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int PresetID { get; }
-        public string PresetName { get; }
 
+        [BulkCopyRowName]
+        public string PresetName { get; }
+        public int PresetID { get; }
+        public int PresetAddress { get; }
+
+        [BulkCopy]
         [NameGetter(nameof(GetSpellName))]
         public int SpellID2 {
             get => _fileEditor.GetByte(spell);
             set => _fileEditor.SetByte(spell, (byte) value);
         }
 
+        [BulkCopy]
         public int Weapon0 {
             get => _fileEditor.GetByte(weaponLv0);
             set => _fileEditor.SetByte(weaponLv0, (byte) value);
         }
 
+        [BulkCopy]
         public int Weapon1 {
             get => _fileEditor.GetByte(weaponLv1);
             set => _fileEditor.SetByte(weaponLv1, (byte) value);
         }
 
+        [BulkCopy]
         public int Weapon2 {
             get => _fileEditor.GetByte(weaponLv2);
             set => _fileEditor.SetByte(weaponLv2, (byte) value);
         }
 
+        [BulkCopy]
         public int Weapon3 {
             get => _fileEditor.GetByte(weaponLv3);
             set => _fileEditor.SetByte(weaponLv3, (byte) value);
         }
-
-        public int PresetAddress { get; }
     }
 }

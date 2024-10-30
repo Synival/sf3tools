@@ -77,82 +77,96 @@ namespace SF3.Models.X002 {
         private NameAndInfo GetFileIndexName(int value) => ValueNames.GetFileIndexName(Scenario, value);
 
         public ScenarioType Scenario => _fileEditor.Scenario;
-        public int LoadedOverrideID { get; }
-        public string LoadedOverrideName { get; }
 
+        [BulkCopyRowName]
+        public string LoadedOverrideName { get; }
+        public int LoadedOverrideID { get; }
+        public int LoadedOverrideAddress { get; }
+
+        [BulkCopy]
         public int MOMapID {
             get => _fileEditor.GetWord(mapID);
             set => _fileEditor.SetWord(mapID, value);
         }
 
+        [BulkCopy]
         public int SynMusic {
             get => _fileEditor.GetByte(synMusic);
             set => _fileEditor.SetByte(synMusic, (byte) value);
         }
 
+        [BulkCopy]
         public int MedMusic {
             get => _fileEditor.GetByte(medMusic);
             set => _fileEditor.SetByte(medMusic, (byte) value);
         }
 
+        [BulkCopy]
         public int JulMusic {
             get => _fileEditor.GetByte(julMusic);
             set => _fileEditor.SetByte(julMusic, (byte) value);
         }
 
+        [BulkCopy]
         public int ExtraMusic {
             get => _fileEditor.GetByte(extraMusic);
             set => _fileEditor.SetByte(extraMusic, (byte) value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetFileIndexName))]
         public int SynMpd {
             get => _fileEditor.GetDouble(synMpd);
             set => _fileEditor.SetDouble(synMpd, value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetFileIndexName))]
         public int MedMpd {
             get => _fileEditor.GetDouble(medMpd);
             set => _fileEditor.SetDouble(medMpd, value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetFileIndexName))]
         public int JulMpd {
             get => _fileEditor.GetDouble(julMpd);
             set => _fileEditor.SetDouble(julMpd, value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetFileIndexName))]
         public int ExtraMpd {
             get => _fileEditor.GetDouble(extraMpd);
             set => _fileEditor.SetDouble(extraMpd, value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetFileIndexName))]
         public int SynChr {
             get => _fileEditor.GetDouble(synChr);
             set => _fileEditor.SetDouble(synChr, value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetFileIndexName))]
         public int MedChr {
             get => _fileEditor.GetDouble(medChr);
             set => _fileEditor.SetDouble(medChr, value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetFileIndexName))]
         public int JulChr {
             get => _fileEditor.GetDouble(julChr);
             set => _fileEditor.SetDouble(julChr, value);
         }
 
+        [BulkCopy]
         [NameGetter(nameof(GetFileIndexName))]
         public int ExtraChr {
             get => _fileEditor.GetDouble(extraChr);
             set => _fileEditor.SetDouble(extraChr, value);
         }
-
-        public int LoadedOverrideAddress { get; }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CommonLib.Attributes;
 using SF3.Tables;
 using SF3.Types;
 
@@ -38,13 +39,14 @@ namespace SF3.FileEditors {
             MonsterTable = null;
         }
 
-        public MonsterTable MonsterTable { get; private set; }
+        protected override string BaseTitle => IsLoaded
+            ? base.BaseTitle + (IsPDX044 ? " (PD X044)" : "")
+            : base.BaseTitle;
 
         public bool IsX044 { get; }
         public bool IsPDX044 => Scenario == ScenarioType.PremiumDisk && IsX044;
 
-        protected override string BaseTitle => IsLoaded
-            ? base.BaseTitle + (IsPDX044 ? " (PD X044)" : "")
-            : base.BaseTitle;
+        [BulkCopyRecurse]
+        public MonsterTable MonsterTable { get; private set; }
     }
 }

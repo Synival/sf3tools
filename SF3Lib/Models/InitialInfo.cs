@@ -57,6 +57,7 @@ namespace SF3.Models {
 
         public IByteEditor Editor { get; }
         public ScenarioType Scenario { get; }
+
         [BulkCopyRowName]
         public string Name { get; }
         public int ID { get; }
