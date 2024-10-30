@@ -32,7 +32,6 @@ namespace SF3.Models {
         public int Address { get; }
         public int Size { get; }
 
-        public bool IsX026 { get; }
         public bool Has16BitIconAddr { get; }
 
         [BulkCopy]

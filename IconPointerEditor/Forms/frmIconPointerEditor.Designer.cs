@@ -30,9 +30,6 @@ namespace SF3.IconPointerEditor.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmIconPointerEditor));
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsSeparator_Scenario1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiScenario_X026Toggle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_OpenInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.tabItemIcons = new System.Windows.Forms.TabPage();
@@ -61,35 +58,12 @@ namespace SF3.IconPointerEditor.Forms
             // menuStrip2
             // 
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiScenario,
             this.tsmiHelp});
-            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Location = new System.Drawing.Point(0, 24);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(764, 24);
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
-            // 
-            // tsmiScenario
-            // 
-            this.tsmiScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsSeparator_Scenario1,
-            this.tsmiScenario_X026Toggle});
-            this.tsmiScenario.Name = "tsmiScenario";
-            this.tsmiScenario.Size = new System.Drawing.Size(64, 20);
-            this.tsmiScenario.Text = "&Scenario";
-            // 
-            // tsSeparator_Scenario1
-            // 
-            this.tsSeparator_Scenario1.Name = "tsSeparator_Scenario1";
-            this.tsSeparator_Scenario1.Size = new System.Drawing.Size(177, 6);
-            // 
-            // tsmiScenario_X026Toggle
-            // 
-            this.tsmiScenario_X026Toggle.Name = "tsmiScenario_X026Toggle";
-            this.tsmiScenario_X026Toggle.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.tsmiScenario_X026Toggle.Size = new System.Drawing.Size(180, 22);
-            this.tsmiScenario_X026Toggle.Text = "&X026 Toggle";
-            this.tsmiScenario_X026Toggle.Click += new System.EventHandler(this.tsmiScenario_X026Toggle_Click);
             // 
             // tsmiHelp
             // 
@@ -283,8 +257,8 @@ namespace SF3.IconPointerEditor.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 534);
-            this.Controls.Add(this.tabMain);
             this.Controls.Add(this.menuStrip2);
+            this.Controls.Add(this.tabMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmIconPointerEditor";
             this.Text = "SF3 Icon Pointer Editor";
@@ -305,7 +279,6 @@ namespace SF3.IconPointerEditor.Forms
         #endregion
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
-        private System.Windows.Forms.ToolStripMenuItem tsmiScenario;
         private System.Windows.Forms.TabPage tabItemIcons;
         private BrightIdeasSoftware.ObjectListView olvItemIcons;
         private BrightIdeasSoftware.OLVColumn lvcItemIconName;
@@ -321,8 +294,6 @@ namespace SF3.IconPointerEditor.Forms
         private BrightIdeasSoftware.OLVColumn lvcItemIconHexID;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp_OpenInfo;
         private BrightIdeasSoftware.OLVColumn lvcSpellIconViewOffset;
-        private System.Windows.Forms.ToolStripSeparator tsSeparator_Scenario1;
         private BrightIdeasSoftware.OLVColumn lvcSpellIconSpellName;
-        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_X026Toggle;
     }
 }

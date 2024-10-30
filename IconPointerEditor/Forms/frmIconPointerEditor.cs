@@ -13,27 +13,15 @@ namespace SF3.IconPointerEditor.Forms {
 
         public new IIconPointerFileEditor FileEditor => base.FileEditor as IIconPointerFileEditor;
 
-        private bool _isX026 = false;
-
-        public bool IsX026 {
-            get => _isX026;
-            set {
-                _isX026 = value;
-                tsmiScenario_X026Toggle.Checked = _isX026;
-                UpdateTitle();
-            }
-        }
-
         public frmIconPointerEditor() {
             InitializeComponent();
             InitializeEditor(menuStrip2);
-            IsX026 = false;
         }
 
         protected override string FileDialogFilter
-            => (IsX026 ? "SF3 Data (X026.BIN)|X026.BIN|" : "SF3 Data (X011.BIN;X021.BIN)|X011.BIN;X021.BIN|") + base.FileDialogFilter;
+            => "SF3 Data (X011.BIN;X021.BIN;X026.BIN)|X011.BIN;X021.BIN;X026.BIN|" + base.FileDialogFilter;
 
-        protected override IFileEditor MakeFileEditor() => new IconPointerFileEditor(Scenario, IsX026);
+        protected override IFileEditor MakeFileEditor() => new IconPointerFileEditor(Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())
@@ -46,7 +34,5 @@ namespace SF3.IconPointerEditor.Forms {
         }
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
-
-        private void tsmiScenario_X026Toggle_Click(object sender, EventArgs e) => IsX026 = !IsX026;
     }
 }

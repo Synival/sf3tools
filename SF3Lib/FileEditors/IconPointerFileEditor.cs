@@ -1,71 +1,76 @@
 using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
+using SF3.Exceptions;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Types;
 
 namespace SF3.FileEditors {
     public class IconPointerFileEditor : SF3FileEditor, IIconPointerFileEditor {
-        public IconPointerFileEditor(ScenarioType scenario, bool isX026) : base(scenario, new NameGetterContext(scenario)) {
-            IsX026 = isX026;
+        public IconPointerFileEditor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            var has16BitIconAddr = Scenario == ScenarioType.Scenario1 && IsX026;
+            const int sub_X021 = 0x06068000;
+            const int sub_X026 = 0x06078000;
 
-            int spellIconAddress;
+            int spellIconAddress_X021;
+            int spellIconAddress_X026;
+            int itemIconAddress_X021;
+            int itemIconAddress_X026;
             int spellIconRealOffsetStart;
-            int itemIconAddress;
 
             switch (Scenario) {
-                case ScenarioType.Scenario1: {
-                    var spellIconOffset = IsX026 ? 0x0a30 : 0x0030;
-                    var sub = IsX026 ? 0x06078000 : 0x06068000;
-                    var itemIconOffset = IsX026 ? 0x08f0 : 0x003C;
-
-                    spellIconAddress = GetDouble(spellIconOffset) - sub;
+                case ScenarioType.Scenario1:
+                    spellIconAddress_X021 = GetDouble(0x0030) - sub_X021;
+                    spellIconAddress_X026 = GetDouble(0x0a30) - sub_X026;
+                    itemIconAddress_X021  = GetDouble(0x003C) - sub_X021;
+                    itemIconAddress_X026  = GetDouble(0x08f0) - sub_X026;
                     spellIconRealOffsetStart = 0xFF8E;
-                    itemIconAddress = GetDouble(itemIconOffset) - sub;
                     break;
-                }
 
-                case ScenarioType.Scenario2: {
-                    var spellIconOffset = IsX026 ? 0x0a1c : 0x0030;
-                    var itemIconOffset  = IsX026 ? 0x0a08 : 0x003C;
-                    var sub = IsX026 ? 0x06078000 : 0x06068000;
-
-                    spellIconAddress = GetDouble(spellIconOffset) - sub;
+                case ScenarioType.Scenario2:
+                    spellIconAddress_X021 = GetDouble(0x0030) - sub_X021;
+                    spellIconAddress_X026 = GetDouble(0x0a1c) - sub_X026;
+                    itemIconAddress_X021  = GetDouble(0x003C) - sub_X021;
+                    itemIconAddress_X026  = GetDouble(0x0a08) - sub_X026;
                     spellIconRealOffsetStart = 0xFC86;
-                    itemIconAddress = GetDouble(itemIconOffset) - sub;
                     break;
-                }
 
-                case ScenarioType.Scenario3: {
-                    var spellIconOffset = IsX026 ? 0x09cc : 0x0030;
-                    var itemIconOffset  = IsX026 ? 0x09b4 : 0x003C;
-                    var sub             = IsX026 ? 0x06078000 : 0x06068000;
-
-                    spellIconAddress = GetDouble(spellIconOffset) - sub;
+                case ScenarioType.Scenario3:
+                    spellIconAddress_X021 = GetDouble(0x0030) - sub_X021;
+                    spellIconAddress_X026 = GetDouble(0x09cc) - sub_X026;
+                    itemIconAddress_X021  = GetDouble(0x003C) - sub_X021;
+                    itemIconAddress_X026  = GetDouble(0x09b4) - sub_X026;
                     spellIconRealOffsetStart = 0x12A48;
-                    itemIconAddress = GetDouble(itemIconOffset) - sub;
                     break;
-                }
 
-                case ScenarioType.PremiumDisk: {
-                    var spellIconOffset = IsX026 ? 0x07a0 : 0x0030;
-                    var itemIconOffset  = IsX026 ? 0x072c : 0x003C;
-                    var sub             = IsX026 ? 0x06078000 : 0x06068000;
-
-                    spellIconAddress = GetDouble(spellIconOffset) - sub;
+                case ScenarioType.PremiumDisk:
+                    spellIconAddress_X021 = GetDouble(0x0030) - sub_X021;
+                    spellIconAddress_X026 = GetDouble(0x07a0) - sub_X026;
+                    itemIconAddress_X021  = GetDouble(0x003C) - sub_X021;
+                    itemIconAddress_X026  = GetDouble(0x072c) - sub_X026;
                     spellIconRealOffsetStart = 0x12A32;
-                    itemIconAddress = GetDouble(itemIconOffset) - sub;
                     break;
-                }
 
                 default:
                     throw new ArgumentException(nameof(Scenario));
             }
+
+            bool isX021 = (spellIconAddress_X021 >= 0 && spellIconAddress_X021 < Data.Length &&
+                           itemIconAddress_X021  >= 0 && itemIconAddress_X021  < Data.Length);
+            bool isX026 = (spellIconAddress_X026 >= 0 && spellIconAddress_X026 < Data.Length &&
+                           itemIconAddress_X026  >= 0 && itemIconAddress_X026  < Data.Length);
+
+            if (!(isX021 || isX026))
+                throw new FileEditorException("This doesn't look like an X021 or X026 file");
+            else if (isX021 && isX026)
+                throw new FileEditorException("This looks like both an X021 and X026 file");
+
+            int spellIconAddress = isX026 ? spellIconAddress_X026 : spellIconAddress_X021;
+            int itemIconAddress  = isX026 ? itemIconAddress_X026  : itemIconAddress_X021;
+            var has16BitIconAddr = Scenario == ScenarioType.Scenario1 && isX026;
 
             return new List<ITable>() {
                 (SpellIconTable = new SpellIconTable(this, spellIconAddress, has16BitIconAddr, spellIconRealOffsetStart)),
@@ -78,16 +83,10 @@ namespace SF3.FileEditors {
             ItemIconTable = null;
         }
 
-        public bool IsX026 { get; }
-
         [BulkCopyRecurse]
         public SpellIconTable SpellIconTable { get; private set; }
 
         [BulkCopyRecurse]
         public ItemIconTable ItemIconTable { get; private set; }
-
-        protected override string BaseTitle => IsLoaded
-            ? base.BaseTitle + (IsX026 ? " (X026)" : "")
-            : base.BaseTitle;
     }
 }
