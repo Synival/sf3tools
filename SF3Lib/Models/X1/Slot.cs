@@ -284,6 +284,8 @@ namespace SF3.Models.X1 {
 
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int ID { get; }
+
+        [BulkCopyRowName]
         public string Name { get; }
 
         public int Unknown1 {

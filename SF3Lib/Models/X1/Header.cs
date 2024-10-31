@@ -1,3 +1,4 @@
+using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 
@@ -180,6 +181,8 @@ namespace SF3.Models.X1 {
 
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int SizeID { get; }
+
+        [BulkCopyRowName]
         public string SizeName { get; }
 
         public int SizeUnknown1 {

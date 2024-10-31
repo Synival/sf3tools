@@ -1,3 +1,4 @@
+using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 
@@ -57,6 +58,8 @@ namespace SF3.Models.X013 {
 
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int CritrateID { get; }
+
+        [BulkCopyRowName]
         public string CritrateName { get; }
 
         public int NoSpecial {

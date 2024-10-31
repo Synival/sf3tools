@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CommonLib.Attributes;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Tables.X1;
@@ -135,17 +136,29 @@ namespace SF3.FileEditors {
 
         public bool IsBTL99 { get; }
 
+        [BulkCopyRecurse]
         public SlotTable SlotTable { get; private set; }
+        [BulkCopyRecurse]
         public HeaderTable HeaderTable { get; private set; }
+        [BulkCopyRecurse]
         public AITable AITable { get; private set; }
+        [BulkCopyRecurse]
         public SpawnZoneTable SpawnZoneTable { get; private set; }
+        [BulkCopyRecurse]
         public BattlePointersTable BattlePointersTable { get; private set; }
+        [BulkCopyRecurse]
         public TreasureTable TreasureTable { get; private set; }
+        [BulkCopyRecurse]
         public CustomMovementTable CustomMovementTable { get; private set; }
+        [BulkCopyRecurse]
         public WarpTable WarpTable { get; private set; }
+        [BulkCopyRecurse]
         public TileMovementTable TileMovementTable { get; private set; }
+        [BulkCopyRecurse]
         public NpcTable NpcTable { get; private set; }
+        [BulkCopyRecurse]
         public EnterTable EnterTable { get; private set; }
+        [BulkCopyRecurse]
         public ArrowTable ArrowTable { get; private set; }
     }
 }

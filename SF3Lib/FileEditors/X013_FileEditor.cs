@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CommonLib.Attributes;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Tables.X013;
@@ -45,19 +46,33 @@ namespace SF3.FileEditors {
             StatusEffectTable = null;
         }
 
+        [BulkCopyRecurse]
         public SpecialTable SpecialsTable { get; private set; }
+        [BulkCopyRecurse]
         public SupportTypeTable SupportTypeTable { get; private set; }
+        [BulkCopyRecurse]
         public FriendshipExpTable FriendshipExpTable { get; private set; }
+        [BulkCopyRecurse]
         public SupportStatsTable SupportStatsTable { get; private set; }
+        [BulkCopyRecurse]
         public SoulmateTable SoulmateTable { get; private set; }
+        [BulkCopyRecurse]
         public SoulfailTable SoulfailTable { get; private set; }
+        [BulkCopyRecurse]
         public MagicBonusTable MagicBonusTable { get; private set; }
+        [BulkCopyRecurse]
         public CritModTable CritModTable { get; private set; }
+        [BulkCopyRecurse]
         public CritrateTable CritrateTable { get; private set; }
+        [BulkCopyRecurse]
         public SpecialChanceTable SpecialChanceTable { get; private set; }
+        [BulkCopyRecurse]
         public ExpLimitTable ExpLimitTable { get; private set; }
+        [BulkCopyRecurse]
         public HealExpTable HealExpTable { get; private set; }
+        [BulkCopyRecurse]
         public WeaponSpellRankTable WeaponSpellRankTable { get; private set; }
+        [BulkCopyRecurse]
         public StatusEffectTable StatusEffectTable { get; private set; }
     }
 }

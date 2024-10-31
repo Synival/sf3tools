@@ -1,3 +1,4 @@
+using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 
@@ -55,6 +56,8 @@ namespace SF3.Models.X013 {
 
         public ScenarioType Scenario => _fileEditor.Scenario;
         public int WeaponSpellRankID { get; }
+
+        [BulkCopyRowName]
         public string WeaponSpellRankName { get; }
 
         public int RankNone {
