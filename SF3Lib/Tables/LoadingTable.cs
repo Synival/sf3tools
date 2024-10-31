@@ -1,9 +1,9 @@
 using System;
 using SF3.FileEditors;
-using SF3.Models.X002;
+using SF3.Models;
 using static SF3.Utils.ResourceUtils;
 
-namespace SF3.Tables.X002 {
+namespace SF3.Tables {
     public class LoadingTable : Table<Loading> {
         public override int? MaxSize => 300;
 
