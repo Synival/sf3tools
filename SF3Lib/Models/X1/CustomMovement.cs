@@ -230,51 +230,61 @@ namespace SF3.Models.X1 {
         [BulkCopyRowName]
         public string CustomMovementName { get; }
 
+        [BulkCopy]
         public int CustomMovementUnknown {
             get => _fileEditor.GetWord(unknown00);
             set => _fileEditor.SetWord(unknown00, value);
         }
 
+        [BulkCopy]
         public int CustomMovementX1 {
             get => _fileEditor.GetWord(xPos1);
             set => _fileEditor.SetWord(xPos1, value);
         }
 
+        [BulkCopy]
         public int CustomMovementZ1 {
             get => _fileEditor.GetWord(zPos1);
             set => _fileEditor.SetWord(zPos1, value);
         }
 
+        [BulkCopy]
         public int CustomMovementX2 {
             get => _fileEditor.GetWord(xPos2);
             set => _fileEditor.SetWord(xPos2, value);
         }
 
+        [BulkCopy]
         public int CustomMovementZ2 {
             get => _fileEditor.GetWord(zPos2);
             set => _fileEditor.SetWord(zPos2, value);
         }
 
+        [BulkCopy]
         public int CustomMovementX3 {
             get => _fileEditor.GetWord(xPos3);
             set => _fileEditor.SetWord(xPos3, value);
         }
 
+        [BulkCopy]
         public int CustomMovementZ3 {
             get => _fileEditor.GetWord(zPos3);
             set => _fileEditor.SetWord(zPos3, value);
         }
 
+        [BulkCopy]
         public int CustomMovementX4 {
             get => _fileEditor.GetWord(xPos4);
             set => _fileEditor.SetWord(xPos4, value);
         }
 
+        [BulkCopy]
         public int CustomMovementZ4 {
             get => _fileEditor.GetWord(zPos4);
             set => _fileEditor.SetWord(zPos4, value);
         }
 
+        [BulkCopy]
         public int CustomMovementEnd {
             get => _fileEditor.GetDouble(ending);
             set => _fileEditor.SetDouble(ending, value);

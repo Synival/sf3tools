@@ -97,41 +97,49 @@ namespace SF3.Models.X1 {
         [BulkCopyRowName]
         public string EnterName { get; }
 
+        [BulkCopy]
         public int Entered {
             get => _fileEditor.GetWord(enterID);
             set => _fileEditor.SetWord(enterID, value);
         }
 
+        [BulkCopy]
         public int EnterUnknown2 {
             get => _fileEditor.GetWord(unknown2);
             set => _fileEditor.SetWord(unknown2, value);
         }
 
+        [BulkCopy]
         public int EnterXPos {
             get => _fileEditor.GetWord(xPos);
             set => _fileEditor.SetWord(xPos, value);
         }
 
+        [BulkCopy]
         public int EnterUnknown6 {
             get => _fileEditor.GetWord(unknown6);
             set => _fileEditor.SetWord(unknown6, value);
         }
 
+        [BulkCopy]
         public int EnterZPos {
             get => _fileEditor.GetWord(zPos);
             set => _fileEditor.SetWord(zPos, value);
         }
 
+        [BulkCopy]
         public int EnterDirection {
             get => _fileEditor.GetWord(direction);
             set => _fileEditor.SetWord(direction, value);
         }
 
+        [BulkCopy]
         public int EnterCamera {
             get => _fileEditor.GetWord(camera);
             set => _fileEditor.SetWord(camera, value);
         }
 
+        [BulkCopy]
         public int EnterUnknownE {
             get => _fileEditor.GetWord(unknownE);
             set => _fileEditor.SetWord(unknownE, value);

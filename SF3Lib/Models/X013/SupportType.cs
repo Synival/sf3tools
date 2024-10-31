@@ -55,12 +55,14 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string SpellName { get; }
 
+        [BulkCopy]
         [NameGetter(NamedValueType.FriendshipBonusType)]
         public int SupportA {
             get => _fileEditor.GetByte(supportA);
             set => _fileEditor.SetByte(supportA, (byte) value);
         }
 
+        [BulkCopy]
         [NameGetter(NamedValueType.FriendshipBonusType)]
         public int SupportB {
             get => _fileEditor.GetByte(supportB);

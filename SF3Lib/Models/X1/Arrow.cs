@@ -86,31 +86,37 @@ namespace SF3.Models.X1 {
         [BulkCopyRowName]
         public string ArrowName { get; }
 
+        [BulkCopy]
         public int ArrowUnknown0 {
             get => _fileEditor.GetWord(unknown0);
             set => _fileEditor.SetWord(unknown0, value);
         }
 
+        [BulkCopy]
         public int ArrowText {
             get => _fileEditor.GetWord(textID);
             set => _fileEditor.SetWord(textID, value);
         }
 
+        [BulkCopy]
         public int ArrowUnknown4 {
             get => _fileEditor.GetWord(unknown4);
             set => _fileEditor.SetWord(unknown4, value);
         }
 
+        [BulkCopy]
         public int ArrowWarp {
             get => _fileEditor.GetWord(warpInMPD);
             set => _fileEditor.SetWord(warpInMPD, value);
         }
 
+        [BulkCopy]
         public int ArrowUnknown8 {
             get => _fileEditor.GetWord(unknown8);
             set => _fileEditor.SetWord(unknown8, value);
         }
 
+        [BulkCopy]
         public int ArrowUnknownA {
             get => _fileEditor.GetWord(unknownA);
             set => _fileEditor.SetWord(unknownA, value);

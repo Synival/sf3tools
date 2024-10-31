@@ -52,6 +52,7 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string SoulfailName { get; }
 
+        [BulkCopy]
         public int ExpLost {
             get => _fileEditor.GetByte(expLost);
             set => _fileEditor.SetByte(expLost, (byte) value);

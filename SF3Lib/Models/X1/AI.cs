@@ -204,15 +204,18 @@ namespace SF3.Models.X1 {
         [BulkCopyRowName]
         public string AIName { get; }
 
+        [BulkCopy]
         public int TargetX {
             get => _fileEditor.GetWord(targetX);
             set => _fileEditor.SetWord(targetX, value);
         }
 
+        [BulkCopy]
         public int TargetY {
             get => _fileEditor.GetWord(targetY);
             set => _fileEditor.SetWord(targetY, value);
         }
+
         public int AIAddress { get; }
     }
 }

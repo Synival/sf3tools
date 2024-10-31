@@ -60,26 +60,31 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string PresetName { get; }
 
+        [BulkCopy]
         public int SLvl0 {
             get => _fileEditor.GetByte(sLvl0);
             set => _fileEditor.SetByte(sLvl0, (byte) value);
         }
 
+        [BulkCopy]
         public int SLvl1 {
             get => _fileEditor.GetByte(sLvl1);
             set => _fileEditor.SetByte(sLvl1, (byte) value);
         }
 
+        [BulkCopy]
         public int SLvl2 {
             get => _fileEditor.GetByte(sLvl2);
             set => _fileEditor.SetByte(sLvl2, (byte) value);
         }
 
+        [BulkCopy]
         public int SLvl3 {
             get => _fileEditor.GetByte(sLvl3);
             set => _fileEditor.SetByte(sLvl3, (byte) value);
         }
 
+        [BulkCopy]
         public int SLvl4 {
             get => _fileEditor.GetByte(sLvl4);
             set => _fileEditor.SetByte(sLvl4, (byte) value);

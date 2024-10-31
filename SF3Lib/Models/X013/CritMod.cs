@@ -54,11 +54,13 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string CritModName { get; }
 
+        [BulkCopy]
         public int Advantage {
             get => _fileEditor.GetByte(advantage);
             set => _fileEditor.SetByte(advantage, (byte) value);
         }
 
+        [BulkCopy]
         public int Disadvantage {
             get => _fileEditor.GetByte(disadvantage);
             set => _fileEditor.SetByte(disadvantage, (byte) value);

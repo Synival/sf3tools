@@ -176,81 +176,97 @@ namespace SF3.Models.X1 {
         [BulkCopyRowName]
         public string TileName { get; }
 
+        [BulkCopy]
         public int TileNoEntry {
             get => _fileEditor.GetByte(noEntry);
             set => _fileEditor.SetByte(noEntry, (byte) value);
         }
 
+        [BulkCopy]
         public int TileUnknown1 {
             get => _fileEditor.GetByte(unknown01);
             set => _fileEditor.SetByte(unknown01, (byte) value);
         }
 
+        [BulkCopy]
         public int TileGrassland {
             get => _fileEditor.GetByte(grassland);
             set => _fileEditor.SetByte(grassland, (byte) value);
         }
 
+        [BulkCopy]
         public int TileDirt {
             get => _fileEditor.GetByte(dirt);
             set => _fileEditor.SetByte(dirt, (byte) value);
         }
 
+        [BulkCopy]
         public int TileDarkGrass {
             get => _fileEditor.GetByte(darkGrass);
             set => _fileEditor.SetByte(darkGrass, (byte) value);
         }
 
+        [BulkCopy]
         public int TileForest {
             get => _fileEditor.GetByte(forest);
             set => _fileEditor.SetByte(forest, (byte) value);
         }
 
+        [BulkCopy]
         public int TileBrownMountain {
             get => _fileEditor.GetByte(brownMountain);
             set => _fileEditor.SetByte(brownMountain, (byte) value);
         }
 
+        [BulkCopy]
         public int TileDesert {
             get => _fileEditor.GetByte(desert);
             set => _fileEditor.SetByte(desert, (byte) value);
         }
 
+        [BulkCopy]
         public int TileGreyMountain {
             get => _fileEditor.GetByte(greyMountain);
             set => _fileEditor.SetByte(greyMountain, (byte) value);
         }
 
+        [BulkCopy]
         public int TileUnknown9 {
             get => _fileEditor.GetByte(unknown09);
             set => _fileEditor.SetByte(unknown09, (byte) value);
         }
 
+        [BulkCopy]
         public int TileUnknownA {
             get => _fileEditor.GetByte(unknown0a);
             set => _fileEditor.SetByte(unknown0a, (byte) value);
         }
 
+        [BulkCopy]
         public int TileUnknownB {
             get => _fileEditor.GetByte(unknown0b);
             set => _fileEditor.SetByte(unknown0b, (byte) value);
         }
 
+        [BulkCopy]
         public int TileUnknownC {
             get => _fileEditor.GetByte(unknown0c);
             set => _fileEditor.SetByte(unknown0c, (byte) value);
         }
 
+        [BulkCopy]
         public int TileUnknownD {
             get => _fileEditor.GetByte(unknown0d);
             set => _fileEditor.SetByte(unknown0d, (byte) value);
         }
 
+        [BulkCopy]
         public int TileUnknownE {
             get => _fileEditor.GetByte(unknown0e);
             set => _fileEditor.SetByte(unknown0e, (byte) value);
         }
 
+        [BulkCopy]
         public int TileUnknownF {
             get => _fileEditor.GetByte(unknown0f);
             set => _fileEditor.SetByte(unknown0f, (byte) value);

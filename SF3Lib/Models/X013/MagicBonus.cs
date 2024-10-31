@@ -83,41 +83,49 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string MagicName { get; }
 
+        [BulkCopy]
         public int EarthBonus {
             get => _fileEditor.GetByte(earthBonus);
             set => _fileEditor.SetByte(earthBonus, (byte) value);
         }
 
+        [BulkCopy]
         public int FireBonus {
             get => _fileEditor.GetByte(fireBonus);
             set => _fileEditor.SetByte(fireBonus, (byte) value);
         }
 
+        [BulkCopy]
         public int IceBonus {
             get => _fileEditor.GetByte(iceBonus);
             set => _fileEditor.SetByte(iceBonus, (byte) value);
         }
 
+        [BulkCopy]
         public int SparkBonus {
             get => _fileEditor.GetByte(sparkBonus);
             set => _fileEditor.SetByte(sparkBonus, (byte) value);
         }
 
+        [BulkCopy]
         public int WindBonus {
             get => _fileEditor.GetByte(windBonus);
             set => _fileEditor.SetByte(windBonus, (byte) value);
         }
 
+        [BulkCopy]
         public int LightBonus {
             get => _fileEditor.GetByte(lightBonus);
             set => _fileEditor.SetByte(lightBonus, (byte) value);
         }
 
+        [BulkCopy]
         public int DarkBonus {
             get => _fileEditor.GetByte(darkBonus);
             set => _fileEditor.SetByte(darkBonus, (byte) value);
         }
 
+        [BulkCopy]
         public int UnknownBonus {
             get => _fileEditor.GetByte(unknownBonus);
             set => _fileEditor.SetByte(unknownBonus, (byte) value);

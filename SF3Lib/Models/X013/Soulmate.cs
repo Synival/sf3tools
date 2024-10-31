@@ -52,6 +52,7 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string SoulmateName { get; }
 
+        [BulkCopy]
         public int Chance {
             get => _fileEditor.GetByte(chance);
             set => _fileEditor.SetByte(chance, (byte) value);

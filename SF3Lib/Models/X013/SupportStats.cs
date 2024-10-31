@@ -58,18 +58,25 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string StatName { get; }
 
+        [BulkCopy]
         public int SLvlStat1 {
             get => _fileEditor.GetByte(sLvlStat1);
             set => _fileEditor.SetByte(sLvlStat1, (byte) value);
         }
+
+        [BulkCopy]
         public int SLvlStat2 {
             get => _fileEditor.GetByte(sLvlStat2);
             set => _fileEditor.SetByte(sLvlStat2, (byte) value);
         }
+
+        [BulkCopy]
         public int SLvlStat3 {
             get => _fileEditor.GetByte(sLvlStat3);
             set => _fileEditor.SetByte(sLvlStat3, (byte) value);
         }
+
+        [BulkCopy]
         public int SLvlStat4 {
             get => _fileEditor.GetByte(sLvlStat4);
             set => _fileEditor.SetByte(sLvlStat4, (byte) value);

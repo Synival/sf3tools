@@ -109,56 +109,67 @@ namespace SF3.Models.X1 {
 
             => _fileEditor.GetWord(spriteID) > 0x0f && _fileEditor.GetWord(spriteID) != 0xffff ? (NpcID + 0x3D).ToString("X") : "";
 
+        [BulkCopy]
         public int SpriteID {
             get => _fileEditor.GetWord(spriteID);
             set => _fileEditor.SetWord(spriteID, value);
         }
 
+        [BulkCopy]
         public int NpcUnknown {
             get => _fileEditor.GetWord(unknown1);
             set => _fileEditor.SetWord(unknown1, value);
         }
 
+        [BulkCopy]
         public int NpcTable {
             get => _fileEditor.GetDouble(table);
             set => _fileEditor.SetDouble(table, value);
         }
 
+        [BulkCopy]
         public int NpcXPos {
             get => _fileEditor.GetWord(xPos);
             set => _fileEditor.SetWord(xPos, value);
         }
 
+        [BulkCopy]
         public int NpcZPos {
             get => _fileEditor.GetWord(zPos);
             set => _fileEditor.SetWord(zPos, value);
         }
 
+        [BulkCopy]
         public int NpcDirection {
             get => _fileEditor.GetWord(direction);
             set => _fileEditor.SetWord(direction, value);
         }
 
+        [BulkCopy]
         public int NpcUnknownA {
             get => _fileEditor.GetWord(unknownA);
             set => _fileEditor.SetWord(unknownA, value);
         }
 
+        [BulkCopy]
         public int NpcUnknownC {
             get => _fileEditor.GetWord(unknownC);
             set => _fileEditor.SetWord(unknownC, value);
         }
 
+        [BulkCopy]
         public int NpcUnknownE {
             get => _fileEditor.GetWord(unknownE);
             set => _fileEditor.SetWord(unknownE, value);
         }
 
+        [BulkCopy]
         public int NpcUnknown12 {
             get => _fileEditor.GetWord(unknown12);
             set => _fileEditor.SetWord(unknown12, value);
         }
 
+        [BulkCopy]
         public int NpcUnknown16 {
             get => _fileEditor.GetWord(unknown16);
             set => _fileEditor.SetWord(unknown16, value);

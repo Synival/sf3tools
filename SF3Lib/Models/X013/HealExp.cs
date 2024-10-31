@@ -52,6 +52,7 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string HealExpName { get; }
 
+        [BulkCopy]
         public int HealBonus {
             get => _fileEditor.GetByte(healExp);
             set => _fileEditor.SetByte(healExp, (byte) value);

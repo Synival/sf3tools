@@ -99,31 +99,37 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string SpecialChanceName { get; }
 
+        [BulkCopy]
         public int TwoSpecials2 {
             get => _fileEditor.GetByte(twoSpecials2);
             set => _fileEditor.SetByte(twoSpecials2, (byte) value);
         }
 
+        [BulkCopy]
         public int ThreeSpecials3 {
             get => _fileEditor.GetByte(threeSpecials3);
             set => _fileEditor.SetByte(threeSpecials3, (byte) value);
         }
 
+        [BulkCopy]
         public int ThreeSpecials2 {
             get => _fileEditor.GetByte(threeSpecials2);
             set => _fileEditor.SetByte(threeSpecials2, (byte) value);
         }
 
+        [BulkCopy]
         public int FourSpecials4 {
             get => _fileEditor.GetByte(fourSpecials4);
             set => _fileEditor.SetByte(fourSpecials4, (byte) value);
         }
 
+        [BulkCopy]
         public int FourSpecials3 {
             get => _fileEditor.GetByte(fourSpecials3);
             set => _fileEditor.SetByte(fourSpecials3, (byte) value);
         }
 
+        [BulkCopy]
         public int FourSpecials2 {
             get => _fileEditor.GetByte(fourSpecials2);
             set => _fileEditor.SetByte(fourSpecials2, (byte) value);

@@ -62,21 +62,25 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string Name { get; }
 
+        [BulkCopy]
         public int Unknown1 {
             get => _fileEditor.GetByte(unknown1);
             set => _fileEditor.SetByte(unknown1, (byte) value);
         }
 
+        [BulkCopy]
         public int DamageCalc {
             get => _fileEditor.GetByte(damageCalculation);
             set => _fileEditor.SetByte(damageCalculation, (byte) value);
         }
 
+        [BulkCopy]
         public int ExtraPow {
             get => _fileEditor.GetByte(extraPow);
             set => _fileEditor.SetByte(extraPow, (byte) value);
         }
 
+        [BulkCopy]
         public int Pow {
             get => _fileEditor.GetByte(pow);
             set => _fileEditor.SetByte(pow, (byte) value);

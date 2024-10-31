@@ -62,31 +62,37 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string CritrateName { get; }
 
+        [BulkCopy]
         public int NoSpecial {
             get => _fileEditor.GetByte(noSpecial);
             set => _fileEditor.SetByte(noSpecial, (byte) value);
         }
 
+        [BulkCopy]
         public int OneSpecial {
             get => _fileEditor.GetByte(oneSpecial);
             set => _fileEditor.SetByte(oneSpecial, (byte) value);
         }
 
+        [BulkCopy]
         public int TwoSpecial {
             get => _fileEditor.GetByte(twoSpecial);
             set => _fileEditor.SetByte(twoSpecial, (byte) value);
         }
 
+        [BulkCopy]
         public int ThreeSpecial {
             get => _fileEditor.GetByte(threeSpecial);
             set => _fileEditor.SetByte(threeSpecial, (byte) value);
         }
 
+        [BulkCopy]
         public int FourSpecial {
             get => _fileEditor.GetByte(fourSpecial);
             set => _fileEditor.SetByte(fourSpecial, (byte) value);
         }
 
+        [BulkCopy]
         public int FiveSpecial {
             get => _fileEditor.GetByte(fiveSpecial);
             set => _fileEditor.SetByte(fiveSpecial, (byte) value);

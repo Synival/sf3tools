@@ -219,46 +219,55 @@ namespace SF3.Models.X1 {
         [BulkCopyRowName]
         public string UnknownAIName { get; }
 
+        [BulkCopy]
         public int UnknownAI00 {
             get => _fileEditor.GetWord(unknown00);
             set => _fileEditor.SetWord(unknown00, value);
         }
 
+        [BulkCopy]
         public int UnknownAI02 {
             get => _fileEditor.GetWord(unknown02);
             set => _fileEditor.SetWord(unknown02, value);
         }
 
+        [BulkCopy]
         public int UnknownAI04 {
             get => _fileEditor.GetWord(unknown04);
             set => _fileEditor.SetWord(unknown04, value);
         }
 
+        [BulkCopy]
         public int UnknownAI06 {
             get => _fileEditor.GetWord(unknown06);
             set => _fileEditor.SetWord(unknown06, value);
         }
 
+        [BulkCopy]
         public int UnknownAI08 {
             get => _fileEditor.GetWord(unknown08);
             set => _fileEditor.SetWord(unknown08, value);
         }
 
+        [BulkCopy]
         public int UnknownAI0A {
             get => _fileEditor.GetWord(unknown0A);
             set => _fileEditor.SetWord(unknown0A, value);
         }
 
+        [BulkCopy]
         public int UnknownAI0C {
             get => _fileEditor.GetWord(unknown0C);
             set => _fileEditor.SetWord(unknown0C, value);
         }
 
+        [BulkCopy]
         public int UnknownAI0E {
             get => _fileEditor.GetWord(unknown0E);
             set => _fileEditor.SetWord(unknown0E, value);
         }
 
+        [BulkCopy]
         public int UnknownAI10 {
             get => _fileEditor.GetWord(unknown10);
             set => _fileEditor.SetWord(unknown10, value);

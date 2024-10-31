@@ -60,26 +60,31 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string WeaponSpellRankName { get; }
 
+        [BulkCopy]
         public int RankNone {
             get => _fileEditor.GetByte(rankNone);
             set => _fileEditor.SetByte(rankNone, (byte) value);
         }
 
+        [BulkCopy]
         public int RankC {
             get => _fileEditor.GetByte(rankC);
             set => _fileEditor.SetByte(rankC, (byte) value);
         }
 
+        [BulkCopy]
         public int RankB {
             get => _fileEditor.GetByte(rankB);
             set => _fileEditor.SetByte(rankB, (byte) value);
         }
 
+        [BulkCopy]
         public int RankA {
             get => _fileEditor.GetByte(rankA);
             set => _fileEditor.SetByte(rankA, (byte) value);
         }
 
+        [BulkCopy]
         public int RankS {
             get => _fileEditor.GetByte(rankS);
             set => _fileEditor.SetByte(rankS, (byte) value);

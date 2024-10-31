@@ -126,24 +126,11 @@ namespace SF3.Models.X1 {
         [BulkCopyRowName]
         public string BattleName { get; }
 
-        /*public int BattlePointer
-        {
-            get => _fileEditor.GetWord(battlePointer);
-            set => _fileEditor.SetWord(battlePointer, value);
-        }
-        */
-
+        [BulkCopy]
         public int BattlePointer {
             get => _fileEditor.GetDouble(battlePointer);
             set => _fileEditor.SetDouble(battlePointer, value);
         }
-
-        /*public int BattlePointer2
-        {
-            get => _fileEditor.GetWord(battlePointer2);
-            set => _fileEditor.SetWord(battlePointer2, value);
-        }
-        */
 
         public int BattleAddress { get; }
     }

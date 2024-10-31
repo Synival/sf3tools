@@ -185,51 +185,61 @@ namespace SF3.Models.X1 {
         [BulkCopyRowName]
         public string SizeName { get; }
 
+        [BulkCopy]
         public int SizeUnknown1 {
             get => _fileEditor.GetByte(unknown1);
             set => _fileEditor.SetByte(unknown1, (byte) value);
         }
 
+        [BulkCopy]
         public int TableSize {
             get => _fileEditor.GetByte(tableSize);
             set => _fileEditor.SetByte(tableSize, (byte) value);
         }
 
+        [BulkCopy]
         public int SizeUnknown2 {
             get => _fileEditor.GetByte(unknown2);
             set => _fileEditor.SetByte(unknown2, (byte) value);
         }
 
+        [BulkCopy]
         public int SizeUnknown3 {
             get => _fileEditor.GetByte(unknown3);
             set => _fileEditor.SetByte(unknown3, (byte) value);
         }
 
+        [BulkCopy]
         public int SizeUnknown4 {
             get => _fileEditor.GetByte(unknown4);
             set => _fileEditor.SetByte(unknown4, (byte) value);
         }
 
+        [BulkCopy]
         public int SizeUnknown5 {
             get => _fileEditor.GetByte(unknown5);
             set => _fileEditor.SetByte(unknown5, (byte) value);
         }
 
+        [BulkCopy]
         public int SizeUnknown6 {
             get => _fileEditor.GetByte(unknown6);
             set => _fileEditor.SetByte(unknown6, (byte) value);
         }
 
+        [BulkCopy]
         public int SizeUnknown7 {
             get => _fileEditor.GetByte(unknown7);
             set => _fileEditor.SetByte(unknown7, (byte) value);
         }
 
+        [BulkCopy]
         public int SizeUnknown8 {
             get => _fileEditor.GetByte(unknown8);
             set => _fileEditor.SetByte(unknown8, (byte) value);
         }
 
+        [BulkCopy]
         public int SizeUnknown9 {
             get => _fileEditor.GetByte(unknown9);
             set => _fileEditor.SetByte(unknown9, (byte) value);

@@ -54,11 +54,13 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string ExpLimitName { get; }
 
+        [BulkCopy]
         public int ExpCheck {
             get => _fileEditor.GetByte(expCheck);
             set => _fileEditor.SetByte(expCheck, (byte) value);
         }
 
+        [BulkCopy]
         public int ExpReplacement {
             get => _fileEditor.GetByte(expReplacement);
             set => _fileEditor.SetByte(expReplacement, (byte) value);

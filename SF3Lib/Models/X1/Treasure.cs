@@ -96,31 +96,37 @@ namespace SF3.Models.X1 {
                 ? (_fileEditor.GetWord(eventNumber) + 0x30).ToString("X")
                 : "";
 
+        [BulkCopy]
         public int Searched {
             get => _fileEditor.GetWord(searched);
             set => _fileEditor.SetWord(searched, value);
         }
 
+        [BulkCopy]
         public int EventNumber {
             get => _fileEditor.GetWord(eventNumber);
             set => _fileEditor.SetWord(eventNumber, value);
         }
 
+        [BulkCopy]
         public int FlagUse {
             get => _fileEditor.GetWord(flagUsed);
             set => _fileEditor.SetWord(flagUsed, value);
         }
 
+        [BulkCopy]
         public int UnknownTreasure {
             get => _fileEditor.GetWord(unknown);
             set => _fileEditor.SetWord(unknown, value);
         }
 
+        [BulkCopy]
         public int EventType {
             get => _fileEditor.GetWord(eventType);
             set => _fileEditor.SetWord(eventType, value);
         }
 
+        [BulkCopy]
         public int TreasureItem {
             get => _fileEditor.GetWord(itemID);
             set => _fileEditor.SetWord(itemID, value);

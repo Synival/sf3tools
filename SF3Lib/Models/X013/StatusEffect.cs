@@ -80,51 +80,61 @@ namespace SF3.Models.X013 {
         [BulkCopyRowName]
         public string StatusEffectName { get; }
 
+        [BulkCopy]
         public int StatusLuck0 {
             get => _fileEditor.GetByte(luck0);
             set => _fileEditor.SetByte(luck0, (byte) value);
         }
 
+        [BulkCopy]
         public int StatusLuck1 {
             get => _fileEditor.GetByte(luck1);
             set => _fileEditor.SetByte(luck1, (byte) value);
         }
 
+        [BulkCopy]
         public int StatusLuck2 {
             get => _fileEditor.GetByte(luck2);
             set => _fileEditor.SetByte(luck2, (byte) value);
         }
 
+        [BulkCopy]
         public int StatusLuck3 {
             get => _fileEditor.GetByte(luck3);
             set => _fileEditor.SetByte(luck3, (byte) value);
         }
 
+        [BulkCopy]
         public int StatusLuck4 {
             get => _fileEditor.GetByte(luck4);
             set => _fileEditor.SetByte(luck4, (byte) value);
         }
 
+        [BulkCopy]
         public int StatusLuck5 {
             get => _fileEditor.GetByte(luck5);
             set => _fileEditor.SetByte(luck5, (byte) value);
         }
 
+        [BulkCopy]
         public int StatusLuck6 {
             get => _fileEditor.GetByte(luck6);
             set => _fileEditor.SetByte(luck6, (byte) value);
         }
 
+        [BulkCopy]
         public int StatusLuck7 {
             get => _fileEditor.GetByte(luck7);
             set => _fileEditor.SetByte(luck7, (byte) value);
         }
 
+        [BulkCopy]
         public int StatusLuck8 {
             get => _fileEditor.GetByte(luck8);
             set => _fileEditor.SetByte(luck8, (byte) value);
         }
 
+        [BulkCopy]
         public int StatusLuck9 {
             get => _fileEditor.GetByte(luck9);
             set => _fileEditor.SetByte(luck9, (byte) value);
