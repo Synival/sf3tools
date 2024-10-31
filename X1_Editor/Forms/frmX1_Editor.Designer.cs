@@ -2231,14 +2231,14 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcWarpTableName
             // 
-            this.lvcWarpTableName.AspectName = "WarpName";
+            this.lvcWarpTableName.AspectName = "Name";
             this.lvcWarpTableName.IsEditable = false;
             this.lvcWarpTableName.Text = "WarpName";
             this.lvcWarpTableName.Width = 90;
             // 
             // lvcWarpTableID
             // 
-            this.lvcWarpTableID.AspectName = "WarpID";
+            this.lvcWarpTableID.AspectName = "ID";
             this.lvcWarpTableID.AspectToStringFormat = "{0:X}";
             this.lvcWarpTableID.IsEditable = false;
             this.lvcWarpTableID.Text = "Warp ID";
@@ -2246,7 +2246,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcWarpTableAddress
             // 
-            this.lvcWarpTableAddress.AspectName = "WarpAddress";
+            this.lvcWarpTableAddress.AspectName = "Address";
             this.lvcWarpTableAddress.AspectToStringFormat = "{0:X}";
             this.lvcWarpTableAddress.IsEditable = false;
             this.lvcWarpTableAddress.Text = "Address";

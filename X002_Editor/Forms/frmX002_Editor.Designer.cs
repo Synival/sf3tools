@@ -1520,7 +1520,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcWarpTableScn1ID
             // 
-            this.lvcWarpTableScn1ID.AspectName = "WarpID";
+            this.lvcWarpTableScn1ID.AspectName = "ID";
             this.lvcWarpTableScn1ID.AspectToStringFormat = "{0:X}";
             this.lvcWarpTableScn1ID.DisplayIndex = 1;
             this.lvcWarpTableScn1ID.IsEditable = false;
@@ -1529,7 +1529,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcWarpTableScn1Address
             // 
-            this.lvcWarpTableScn1Address.AspectName = "WarpAddress";
+            this.lvcWarpTableScn1Address.AspectName = "Address";
             this.lvcWarpTableScn1Address.AspectToStringFormat = "{0:X}";
             this.lvcWarpTableScn1Address.DisplayIndex = 2;
             this.lvcWarpTableScn1Address.IsEditable = false;
@@ -1538,7 +1538,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcWarpTableScn1WarpName
             // 
-            this.lvcWarpTableScn1WarpName.AspectName = "WarpName";
+            this.lvcWarpTableScn1WarpName.AspectName = "Name";
             this.lvcWarpTableScn1WarpName.DisplayIndex = 0;
             this.lvcWarpTableScn1WarpName.IsEditable = false;
             this.lvcWarpTableScn1WarpName.Text = "WarpName";
