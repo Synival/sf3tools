@@ -12,9 +12,9 @@ namespace SF3.Models.X002 {
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public Preset(ISF3FileEditor editor, int id, string text) {
+        public Preset(ISF3FileEditor editor, int id, string name) {
             Editor = editor;
-            Name   = text;
+            Name   = name;
             ID     = id;
             Size   = 0x05;
 
@@ -43,7 +43,7 @@ namespace SF3.Models.X002 {
             //offset = 0x000035fc; pd
 
             ID = id;
-            Name = text;
+            Name = name;
 
             //int start = 0x354c + (id * 24);
 

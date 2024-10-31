@@ -30,9 +30,9 @@ namespace SF3.Models.X002 {
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public Item(ISF3FileEditor editor, int id, string text) {
+        public Item(ISF3FileEditor editor, int id, string name) {
             Editor = editor;
-            Name   = text;
+            Name   = name;
             ID     = id;
             Size   = 0x18;
 

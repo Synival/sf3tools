@@ -13,9 +13,9 @@ namespace SF3.Models {
         private readonly int checkVersion2;
         private readonly int sub;
 
-        public Warp(ISF3FileEditor editor, int id, string text) {
+        public Warp(ISF3FileEditor editor, int id, string name) {
             Editor = editor;
-            Name   = text;
+            Name   = name;
             ID     = id;
             Size   = 0x04;
 
