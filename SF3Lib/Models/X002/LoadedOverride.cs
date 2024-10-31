@@ -1,13 +1,9 @@
 using CommonLib.Attributes;
-using CommonLib.NamedValues;
 using SF3.FileEditors;
-using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Models.X002 {
-    public class LoadedOverride {
-        private readonly IX002_FileEditor _fileEditor;
-
+    public class LoadedOverride : IModel {
         private readonly int mapID;
         private readonly int synMusic;
         private readonly int medMusic;
@@ -24,22 +20,25 @@ namespace SF3.Models.X002 {
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public LoadedOverride(IX002_FileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
+        public LoadedOverride(ISF3FileEditor editor, int id, string text) {
+            Editor = editor;
+            Name   = text;
+            ID     = id;
+            Size   = 0x28;
 
-            checkVersion2 = _fileEditor.GetByte(0x0000000B);
+            checkVersion2 = editor.GetByte(0x0000000B);
 
-            if (Scenario == ScenarioType.Scenario1) {
+            if (editor.Scenario == ScenarioType.Scenario1) {
                 offset = 0x0000527a; //scn1
                 if (checkVersion2 == 0x10) //original jp
                     offset -= 0x0C;
             }
-            else if (Scenario == ScenarioType.Scenario2) {
+            else if (editor.Scenario == ScenarioType.Scenario2) {
                 offset = 0x000058be; //scn2
                 if (checkVersion2 == 0x2C)
                     offset -= 0x44;
             }
-            else if (Scenario == ScenarioType.Scenario3) {
+            else if (editor.Scenario == ScenarioType.Scenario3) {
                 offset = 0x00006266; //scn3
             }
             else {
@@ -51,8 +50,8 @@ namespace SF3.Models.X002 {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            LoadedOverrideID = id;
-            LoadedOverrideName = text;
+            ID = id;
+            Name = text;
 
             //int start = 0x354c + (id * 24);
 
@@ -70,101 +69,102 @@ namespace SF3.Models.X002 {
             medChr = start + 0x1a; //4 bytes chr medion
             julChr = start + 0x1e; //4 bytes chr julian?
             extraChr = start + 0x22; //4 bytes chr extra?
-            LoadedOverrideAddress = offset + (id * 0x28);
+            Address = offset + (id * 0x28);
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
-        public string LoadedOverrideName { get; }
-        public int LoadedOverrideID { get; }
-        public int LoadedOverrideAddress { get; }
+        public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+        public int Size { get; }
 
         [BulkCopy]
         public int MOMapID {
-            get => _fileEditor.GetWord(mapID);
-            set => _fileEditor.SetWord(mapID, value);
+            get => Editor.GetWord(mapID);
+            set => Editor.SetWord(mapID, value);
         }
 
         [BulkCopy]
         public int SynMusic {
-            get => _fileEditor.GetByte(synMusic);
-            set => _fileEditor.SetByte(synMusic, (byte) value);
+            get => Editor.GetByte(synMusic);
+            set => Editor.SetByte(synMusic, (byte) value);
         }
 
         [BulkCopy]
         public int MedMusic {
-            get => _fileEditor.GetByte(medMusic);
-            set => _fileEditor.SetByte(medMusic, (byte) value);
+            get => Editor.GetByte(medMusic);
+            set => Editor.SetByte(medMusic, (byte) value);
         }
 
         [BulkCopy]
         public int JulMusic {
-            get => _fileEditor.GetByte(julMusic);
-            set => _fileEditor.SetByte(julMusic, (byte) value);
+            get => Editor.GetByte(julMusic);
+            set => Editor.SetByte(julMusic, (byte) value);
         }
 
         [BulkCopy]
         public int ExtraMusic {
-            get => _fileEditor.GetByte(extraMusic);
-            set => _fileEditor.SetByte(extraMusic, (byte) value);
+            get => Editor.GetByte(extraMusic);
+            set => Editor.SetByte(extraMusic, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int SynMpd {
-            get => _fileEditor.GetDouble(synMpd);
-            set => _fileEditor.SetDouble(synMpd, value);
+            get => Editor.GetDouble(synMpd);
+            set => Editor.SetDouble(synMpd, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int MedMpd {
-            get => _fileEditor.GetDouble(medMpd);
-            set => _fileEditor.SetDouble(medMpd, value);
+            get => Editor.GetDouble(medMpd);
+            set => Editor.SetDouble(medMpd, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int JulMpd {
-            get => _fileEditor.GetDouble(julMpd);
-            set => _fileEditor.SetDouble(julMpd, value);
+            get => Editor.GetDouble(julMpd);
+            set => Editor.SetDouble(julMpd, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int ExtraMpd {
-            get => _fileEditor.GetDouble(extraMpd);
-            set => _fileEditor.SetDouble(extraMpd, value);
+            get => Editor.GetDouble(extraMpd);
+            set => Editor.SetDouble(extraMpd, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int SynChr {
-            get => _fileEditor.GetDouble(synChr);
-            set => _fileEditor.SetDouble(synChr, value);
+            get => Editor.GetDouble(synChr);
+            set => Editor.SetDouble(synChr, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int MedChr {
-            get => _fileEditor.GetDouble(medChr);
-            set => _fileEditor.SetDouble(medChr, value);
+            get => Editor.GetDouble(medChr);
+            set => Editor.SetDouble(medChr, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int JulChr {
-            get => _fileEditor.GetDouble(julChr);
-            set => _fileEditor.SetDouble(julChr, value);
+            get => Editor.GetDouble(julChr);
+            set => Editor.SetDouble(julChr, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int ExtraChr {
-            get => _fileEditor.GetDouble(extraChr);
-            set => _fileEditor.SetDouble(extraChr, value);
+            get => Editor.GetDouble(extraChr);
+            set => Editor.SetDouble(extraChr, value);
         }
     }
 }

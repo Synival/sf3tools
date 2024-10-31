@@ -36,7 +36,7 @@ namespace SF3.Tables.X002 {
                     if (xml.HasAttributes) {
                         var newRow = new LoadedOverride(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _rows = _rows.ExpandedWith(newRow);
-                        if (newRow.LoadedOverrideID < 0 || newRow.LoadedOverrideID >= MaxSize)
+                        if (newRow.ID < 0 || newRow.ID >= MaxSize)
                             throw new IndexOutOfRangeException();
                     }
                 }

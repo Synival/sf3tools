@@ -3,9 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X002 {
-    public class WeaponRank {
-        private readonly IX002_FileEditor _fileEditor;
-
+    public class WeaponRank : IModel {
         private readonly int skill0;
         private readonly int skill1;
         private readonly int skill2;
@@ -13,22 +11,25 @@ namespace SF3.Models.X002 {
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public WeaponRank(IX002_FileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
+        public WeaponRank(ISF3FileEditor editor, int id, string text) {
+            Editor = editor;
+            Name   = text;
+            ID     = id;
+            Size   = 0x04;
 
-            checkVersion2 = _fileEditor.GetByte(0x0000000B);
+            checkVersion2 = editor.GetByte(0x0000000B);
 
-            if (Scenario == ScenarioType.Scenario1) {
+            if (editor.Scenario == ScenarioType.Scenario1) {
                 offset = 0x000029f8; //scn1
                 if (checkVersion2 == 0x10) //original jp
                     offset -= 0x0C;
             }
-            else if (Scenario == ScenarioType.Scenario2) {
+            else if (editor.Scenario == ScenarioType.Scenario2) {
                 offset = 0x00002d00; //scn2
                 if (checkVersion2 == 0x2C)
                     offset -= 0x44;
             }
-            else if (Scenario == ScenarioType.Scenario3) {
+            else if (editor.Scenario == ScenarioType.Scenario3) {
                 offset = 0x0000339c; //scn3
             }
             else {
@@ -40,8 +41,8 @@ namespace SF3.Models.X002 {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            WeaponRankID = id;
-            WeaponRankName = text;
+            ID = id;
+            Name = text;
 
             //int start = 0x354c + (id * 24);
 
@@ -51,39 +52,40 @@ namespace SF3.Models.X002 {
             skill2 = start + 2; //1 byte
             skill3 = start + 3; //1 byte
 
-            WeaponRankAddress = offset + (id * 0x04);
+            Address = offset + (id * 0x04);
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
-        public string WeaponRankName { get; }
-        public int WeaponRankID { get; }
-        public int WeaponRankAddress { get; }
+        public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+        public int Size { get; }
 
         [BulkCopy]
         public int Skill0 {
-            get => _fileEditor.GetByte(skill0);
-            set => _fileEditor.SetByte(skill0, (byte) value);
+            get => Editor.GetByte(skill0);
+            set => Editor.SetByte(skill0, (byte) value);
         }
 
         [BulkCopy]
         public int Skill1 {
-            get => _fileEditor.GetByte(skill1);
-            set => _fileEditor.SetByte(skill1, (byte) value);
+            get => Editor.GetByte(skill1);
+            set => Editor.SetByte(skill1, (byte) value);
         }
 
         [BulkCopy]
         public int Skill2 {
-            get => _fileEditor.GetByte(skill2);
-            set => _fileEditor.SetByte(skill2, (byte) value);
+            get => Editor.GetByte(skill2);
+            set => Editor.SetByte(skill2, (byte) value);
         }
 
         [BulkCopy]
         public int Skill3 {
-            get => _fileEditor.GetByte(skill3);
-            set => _fileEditor.SetByte(skill3, (byte) value);
+            get => Editor.GetByte(skill3);
+            set => Editor.SetByte(skill3, (byte) value);
         }
     }
 }

@@ -274,7 +274,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcSpellsID
             // 
-            this.lvcSpellsID.AspectName = "SpellID";
+            this.lvcSpellsID.AspectName = "ID";
             this.lvcSpellsID.AspectToStringFormat = "{0:X}";
             this.lvcSpellsID.IsEditable = false;
             this.lvcSpellsID.Text = "SpellID";
@@ -282,7 +282,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcSpellsAddress
             // 
-            this.lvcSpellsAddress.AspectName = "SpellAddress";
+            this.lvcSpellsAddress.AspectName = "Address";
             this.lvcSpellsAddress.AspectToStringFormat = "{0:X}";
             this.lvcSpellsAddress.IsEditable = false;
             this.lvcSpellsAddress.Text = "Address";
@@ -290,7 +290,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcSpellsName
             // 
-            this.lvcSpellsName.AspectName = "SpellName";
+            this.lvcSpellsName.AspectName = "Name";
             this.lvcSpellsName.IsEditable = false;
             this.lvcSpellsName.Text = "SpellName";
             this.lvcSpellsName.Width = 120;
@@ -850,21 +850,21 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcPresetID
             // 
-            this.lvcPresetID.AspectName = "PresetID";
+            this.lvcPresetID.AspectName = "ID";
             this.lvcPresetID.AspectToStringFormat = "{0:X}";
             this.lvcPresetID.IsEditable = false;
-            this.lvcPresetID.Text = "PresetID";
+            this.lvcPresetID.Text = "ID";
             // 
             // lvcPresetAddress
             // 
-            this.lvcPresetAddress.AspectName = "PresetAddress";
+            this.lvcPresetAddress.AspectName = "Address";
             this.lvcPresetAddress.AspectToStringFormat = "{0:X}";
             this.lvcPresetAddress.IsEditable = false;
             this.lvcPresetAddress.Text = "Address";
             // 
             // lvcPresetName
             // 
-            this.lvcPresetName.AspectName = "PresetName";
+            this.lvcPresetName.AspectName = "Name";
             this.lvcPresetName.AspectToStringFormat = "{0:X}";
             this.lvcPresetName.IsEditable = false;
             this.lvcPresetName.Text = "DefaultName";
@@ -963,7 +963,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcLoadedID
             // 
-            this.lvcLoadedID.AspectName = "LoadID";
+            this.lvcLoadedID.AspectName = "ID";
             this.lvcLoadedID.AspectToStringFormat = "{0:X}";
             this.lvcLoadedID.IsEditable = false;
             this.lvcLoadedID.Text = "ID";
@@ -971,7 +971,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcLoadedAddress
             // 
-            this.lvcLoadedAddress.AspectName = "LoadAddress";
+            this.lvcLoadedAddress.AspectName = "Address";
             this.lvcLoadedAddress.AspectToStringFormat = "{0:X}";
             this.lvcLoadedAddress.IsEditable = false;
             this.lvcLoadedAddress.Text = "Address";
@@ -979,7 +979,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcLoadedAreaName
             // 
-            this.lvcLoadedAreaName.AspectName = "LoadName";
+            this.lvcLoadedAreaName.AspectName = "Name";
             this.lvcLoadedAreaName.IsEditable = false;
             this.lvcLoadedAreaName.Text = "Area Name";
             this.lvcLoadedAreaName.Width = 90;
@@ -1108,7 +1108,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcLoadedOverrideID
             // 
-            this.lvcLoadedOverrideID.AspectName = "LoadedOverrideID";
+            this.lvcLoadedOverrideID.AspectName = "ID";
             this.lvcLoadedOverrideID.AspectToStringFormat = "{0:X}";
             this.lvcLoadedOverrideID.IsEditable = false;
             this.lvcLoadedOverrideID.Text = "ID";
@@ -1116,7 +1116,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcLoadedOverrideAddress
             // 
-            this.lvcLoadedOverrideAddress.AspectName = "LoadedOverrideAddress";
+            this.lvcLoadedOverrideAddress.AspectName = "Address";
             this.lvcLoadedOverrideAddress.AspectToStringFormat = "{0:X}";
             this.lvcLoadedOverrideAddress.IsEditable = false;
             this.lvcLoadedOverrideAddress.Text = "Address";
@@ -1124,7 +1124,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcLoadedOverrideAreaName
             // 
-            this.lvcLoadedOverrideAreaName.AspectName = "LoadedOverrideName";
+            this.lvcLoadedOverrideAreaName.AspectName = "Name";
             this.lvcLoadedOverrideAreaName.IsEditable = false;
             this.lvcLoadedOverrideAreaName.Text = "Area Name";
             this.lvcLoadedOverrideAreaName.Width = 155;
@@ -1262,7 +1262,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcStatBoostID
             // 
-            this.lvcStatBoostID.AspectName = "StatID";
+            this.lvcStatBoostID.AspectName = "ID";
             this.lvcStatBoostID.AspectToStringFormat = "{0:X}";
             this.lvcStatBoostID.IsEditable = false;
             this.lvcStatBoostID.Text = "ID";
@@ -1270,7 +1270,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcStatBoostAddress
             // 
-            this.lvcStatBoostAddress.AspectName = "StatAddress";
+            this.lvcStatBoostAddress.AspectName = "Address";
             this.lvcStatBoostAddress.AspectToStringFormat = "{0:X}";
             this.lvcStatBoostAddress.IsEditable = false;
             this.lvcStatBoostAddress.Text = "Address";
@@ -1278,7 +1278,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcStatBoostItemName
             // 
-            this.lvcStatBoostItemName.AspectName = "StatName";
+            this.lvcStatBoostItemName.AspectName = "Name";
             this.lvcStatBoostItemName.IsEditable = false;
             this.lvcStatBoostItemName.Text = "ItemName";
             this.lvcStatBoostItemName.Width = 90;
@@ -1340,7 +1340,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcWeaponRankAttackID
             // 
-            this.lvcWeaponRankAttackID.AspectName = "WeaponRankID";
+            this.lvcWeaponRankAttackID.AspectName = "ID";
             this.lvcWeaponRankAttackID.AspectToStringFormat = "{0:X}";
             this.lvcWeaponRankAttackID.IsEditable = false;
             this.lvcWeaponRankAttackID.Text = "ID";
@@ -1348,7 +1348,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcWeaponRankAttackAddress
             // 
-            this.lvcWeaponRankAttackAddress.AspectName = "WeaponRankAddress";
+            this.lvcWeaponRankAttackAddress.AspectName = "Address";
             this.lvcWeaponRankAttackAddress.AspectToStringFormat = "{0:X}";
             this.lvcWeaponRankAttackAddress.IsEditable = false;
             this.lvcWeaponRankAttackAddress.Text = "Address";
@@ -1356,7 +1356,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcWeaponRankAttackRank
             // 
-            this.lvcWeaponRankAttackRank.AspectName = "WeaponRankName";
+            this.lvcWeaponRankAttackRank.AspectName = "Name";
             this.lvcWeaponRankAttackRank.IsEditable = false;
             this.lvcWeaponRankAttackRank.Text = "Rank";
             this.lvcWeaponRankAttackRank.Width = 65;
@@ -1435,7 +1435,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcAttackResistID
             // 
-            this.lvcAttackResistID.AspectName = "AttackResistID";
+            this.lvcAttackResistID.AspectName = "ID";
             this.lvcAttackResistID.AspectToStringFormat = "{0:X}";
             this.lvcAttackResistID.IsEditable = false;
             this.lvcAttackResistID.Text = "ID";
@@ -1443,7 +1443,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcAttackResistAddress
             // 
-            this.lvcAttackResistAddress.AspectName = "AttackResistAddress";
+            this.lvcAttackResistAddress.AspectName = "Address";
             this.lvcAttackResistAddress.AspectToStringFormat = "{0:X}";
             this.lvcAttackResistAddress.IsEditable = false;
             this.lvcAttackResistAddress.Text = "Address";
@@ -1451,7 +1451,7 @@ namespace SF3.X002_Editor.Forms
             // 
             // lvcAttackResistItemName
             // 
-            this.lvcAttackResistItemName.AspectName = "AttackResistName";
+            this.lvcAttackResistItemName.AspectName = "Name";
             this.lvcAttackResistItemName.IsEditable = false;
             this.lvcAttackResistItemName.Text = "Item Name";
             this.lvcAttackResistItemName.Width = 120;

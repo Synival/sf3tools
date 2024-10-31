@@ -3,28 +3,29 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X002 {
-    public class AttackResist {
-        private readonly IX002_FileEditor _fileEditor;
-
+    public class AttackResist : IModel {
         private readonly int attack;
         private readonly int resist;
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public AttackResist(IX002_FileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
+        public AttackResist(ISF3FileEditor editor, int id, string text) {
+            Editor = editor;
+            Name   = text;
+            ID     = id;
+            Size   = 0xD3;
 
-            checkVersion2 = _fileEditor.GetByte(0x0000000B);
+            checkVersion2 = Editor.GetByte(0x0000000B);
 
-            if (Scenario == ScenarioType.Scenario1) {
+            if (editor.Scenario == ScenarioType.Scenario1) {
                 offset = 0x00000cb5; //scn1
             }
-            else if (Scenario == ScenarioType.Scenario2) {
+            else if (editor.Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000d15; //scn2
                 if (checkVersion2 == 0x2C)
                     offset -= 0x40;
             }
-            else if (Scenario == ScenarioType.Scenario3) {
+            else if (editor.Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000dcd; //scn3
             }
             else {
@@ -36,36 +37,34 @@ namespace SF3.Models.X002 {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            AttackResistID = id;
-            AttackResistName = text;
-
             //int start = 0x354c + (id * 24);
 
             var start = offset + (id * 0xd3);
             attack = start; //1 byte
             resist = start + 0xd2; //1 byte
 
-            AttackResistAddress = offset + (id * 0xd3);
+            Address = offset + (id * 0xd3);
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
-        public string AttackResistName { get; }
-        public int AttackResistID { get; }
-        public int AttackResistAddress { get; }
+        public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+        public int Size { get; }
 
         [BulkCopy]
         public int Attack {
-            get => _fileEditor.GetByte(attack);
-            set => _fileEditor.SetByte(attack, (byte) value);
+            get => Editor.GetByte(attack);
+            set => Editor.SetByte(attack, (byte) value);
         }
 
         [BulkCopy]
         public int Resist {
-            get => _fileEditor.GetByte(resist);
-            set => _fileEditor.SetByte(resist, (byte) value);
+            get => Editor.GetByte(resist);
+            set => Editor.SetByte(resist, (byte) value);
         }
     }
 }

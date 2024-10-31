@@ -1,13 +1,9 @@
 using CommonLib.Attributes;
-using CommonLib.NamedValues;
 using SF3.FileEditors;
-using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Models.X002 {
-    public class Preset {
-        private readonly IX002_FileEditor _fileEditor;
-
+    public class Preset : IModel {
         private readonly int spell;
         private readonly int weaponLv0;
         private readonly int weaponLv1;
@@ -16,22 +12,25 @@ namespace SF3.Models.X002 {
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public Preset(IX002_FileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
+        public Preset(ISF3FileEditor editor, int id, string text) {
+            Editor = editor;
+            Name   = text;
+            ID     = id;
+            Size   = 0x05;
 
-            checkVersion2 = _fileEditor.GetByte(0x0000000B);
+            checkVersion2 = editor.GetByte(0x0000000B);
 
-            if (Scenario == ScenarioType.Scenario1) {
+            if (editor.Scenario == ScenarioType.Scenario1) {
                 offset = 0x00004738; //scn1
                 if (checkVersion2 == 0x10) //original jp
                     offset -= 0x0C;
             }
-            else if (Scenario == ScenarioType.Scenario2) {
+            else if (editor.Scenario == ScenarioType.Scenario2) {
                 offset = 0x00004b60; //scn2
                 if (checkVersion2 == 0x2C)
                     offset -= 0x44;
             }
-            else if (Scenario == ScenarioType.Scenario3) {
+            else if (editor.Scenario == ScenarioType.Scenario3) {
                 offset = 0x00005734; //scn3
             }
             else {
@@ -43,8 +42,8 @@ namespace SF3.Models.X002 {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            PresetID = id;
-            PresetName = text;
+            ID = id;
+            Name = text;
 
             //int start = 0x354c + (id * 24);
 
@@ -54,46 +53,47 @@ namespace SF3.Models.X002 {
             weaponLv1 = start + 2; //1 byte
             weaponLv2 = start + 3; //1 byte
             weaponLv3 = start + 4; //1 byte
-            PresetAddress = offset + (id * 0x05);
+            Address = offset + (id * 0x05);
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
-        public string PresetName { get; }
-        public int PresetID { get; }
-        public int PresetAddress { get; }
+        public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+        public int Size { get; }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int SpellID2 {
-            get => _fileEditor.GetByte(spell);
-            set => _fileEditor.SetByte(spell, (byte) value);
+            get => Editor.GetByte(spell);
+            set => Editor.SetByte(spell, (byte) value);
         }
 
         [BulkCopy]
         public int Weapon0 {
-            get => _fileEditor.GetByte(weaponLv0);
-            set => _fileEditor.SetByte(weaponLv0, (byte) value);
+            get => Editor.GetByte(weaponLv0);
+            set => Editor.SetByte(weaponLv0, (byte) value);
         }
 
         [BulkCopy]
         public int Weapon1 {
-            get => _fileEditor.GetByte(weaponLv1);
-            set => _fileEditor.SetByte(weaponLv1, (byte) value);
+            get => Editor.GetByte(weaponLv1);
+            set => Editor.SetByte(weaponLv1, (byte) value);
         }
 
         [BulkCopy]
         public int Weapon2 {
-            get => _fileEditor.GetByte(weaponLv2);
-            set => _fileEditor.SetByte(weaponLv2, (byte) value);
+            get => Editor.GetByte(weaponLv2);
+            set => Editor.SetByte(weaponLv2, (byte) value);
         }
 
         [BulkCopy]
         public int Weapon3 {
-            get => _fileEditor.GetByte(weaponLv3);
-            set => _fileEditor.SetByte(weaponLv3, (byte) value);
+            get => Editor.GetByte(weaponLv3);
+            set => Editor.SetByte(weaponLv3, (byte) value);
         }
     }
 }

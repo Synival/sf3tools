@@ -1,13 +1,9 @@
 using CommonLib.Attributes;
-using CommonLib.NamedValues;
 using SF3.FileEditors;
-using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Models.X002 {
-    public class Item {
-        private readonly IX002_FileEditor _fileEditor;
-
+    public class Item : IModel {
         private readonly int PriceLocation;
         private readonly int WeaponTypeLocation;
         private readonly int EffectsEquipLocation;
@@ -34,22 +30,25 @@ namespace SF3.Models.X002 {
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public Item(IX002_FileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
+        public Item(ISF3FileEditor editor, int id, string text) {
+            Editor = editor;
+            Name   = text;
+            ID     = id;
+            Size   = 0x18;
 
-            checkVersion2 = _fileEditor.GetByte(0x0000000B);
+            checkVersion2 = Editor.GetByte(0x0000000B);
 
-            if (Scenario == ScenarioType.Scenario1) {
+            if (editor.Scenario == ScenarioType.Scenario1) {
                 offset = 0x00002b28; //scn1
                 if (checkVersion2 == 0x10) //original jp
                     offset -= 0x0C;
             }
-            else if (Scenario == ScenarioType.Scenario2) {
+            else if (editor.Scenario == ScenarioType.Scenario2) {
                 offset = 0x00002e9c; //scn2
                 if (checkVersion2 == 0x2C)
                     offset -= 0x44;
             }
-            else if (Scenario == ScenarioType.Scenario3) {
+            else if (editor.Scenario == ScenarioType.Scenario3) {
                 offset = 0x0000354c; //scn3
             }
             else {
@@ -60,9 +59,6 @@ namespace SF3.Models.X002 {
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
-
-            ID = id;
-            Name = text;
 
             //int start = 0x354c + (id * 24);
 
@@ -94,221 +90,222 @@ namespace SF3.Models.X002 {
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
         public string Name { get; }
         public int ID { get; }
         public int Address { get; }
+        public int Size { get; }
 
         [BulkCopy]
         public int Price {
-            get => _fileEditor.GetWord(PriceLocation);
-            set => _fileEditor.SetWord(PriceLocation, value);
+            get => Editor.GetWord(PriceLocation);
+            set => Editor.SetWord(PriceLocation, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int WeaponType {
-            get => _fileEditor.GetByte(WeaponTypeLocation);
-            set => _fileEditor.SetByte(WeaponTypeLocation, (byte) value);
+            get => Editor.GetByte(WeaponTypeLocation);
+            set => Editor.SetByte(WeaponTypeLocation, (byte) value);
         }
 
         [BulkCopy]
         public int EffectsEquip {
-            get => _fileEditor.GetByte(EffectsEquipLocation);
-            set => _fileEditor.SetByte(EffectsEquipLocation, (byte) value);
+            get => Editor.GetByte(EffectsEquipLocation);
+            set => Editor.SetByte(EffectsEquipLocation, (byte) value);
         }
 
         public bool Cursed {
-            get => _fileEditor.GetBit(EffectsEquipLocation, 1);
-            set => _fileEditor.SetBit(EffectsEquipLocation, 1, value);
+            get => Editor.GetBit(EffectsEquipLocation, 1);
+            set => Editor.SetBit(EffectsEquipLocation, 1, value);
         }
 
         public bool CanCrack {
-            get => _fileEditor.GetBit(EffectsEquipLocation, 2);
-            set => _fileEditor.SetBit(EffectsEquipLocation, 2, value);
+            get => Editor.GetBit(EffectsEquipLocation, 2);
+            set => Editor.SetBit(EffectsEquipLocation, 2, value);
         }
 
         public bool HealingItem {
-            get => _fileEditor.GetBit(EffectsEquipLocation, 3);
-            set => _fileEditor.SetBit(EffectsEquipLocation, 3, value);
+            get => Editor.GetBit(EffectsEquipLocation, 3);
+            set => Editor.SetBit(EffectsEquipLocation, 3, value);
         }
 
         public bool CannotUnequip {
-            get => _fileEditor.GetBit(EffectsEquipLocation, 4);
-            set => _fileEditor.SetBit(EffectsEquipLocation, 4, value);
+            get => Editor.GetBit(EffectsEquipLocation, 4);
+            set => Editor.SetBit(EffectsEquipLocation, 4, value);
         }
 
         public bool Rare {
-            get => _fileEditor.GetBit(EffectsEquipLocation, 5);
-            set => _fileEditor.SetBit(EffectsEquipLocation, 5, value);
+            get => Editor.GetBit(EffectsEquipLocation, 5);
+            set => Editor.SetBit(EffectsEquipLocation, 5, value);
         }
 
         public bool FakeRare //shows rare message when selling, but does not add to deals
         {
-            get => _fileEditor.GetBit(EffectsEquipLocation, 6);
-            set => _fileEditor.SetBit(EffectsEquipLocation, 6, value);
+            get => Editor.GetBit(EffectsEquipLocation, 6);
+            set => Editor.SetBit(EffectsEquipLocation, 6, value);
         }
 
         public bool HealingItem2 //higher tier healing has this
         {
-            get => _fileEditor.GetBit(EffectsEquipLocation, 7);
-            set => _fileEditor.SetBit(EffectsEquipLocation, 7, value);
+            get => Editor.GetBit(EffectsEquipLocation, 7);
+            set => Editor.SetBit(EffectsEquipLocation, 7, value);
         }
 
         [BulkCopy]
         public int Requirements {
-            get => _fileEditor.GetByte(RequirementLocation);
-            set => _fileEditor.SetByte(RequirementLocation, (byte) value);
+            get => Editor.GetByte(RequirementLocation);
+            set => Editor.SetByte(RequirementLocation, (byte) value);
         }
 
         public bool RequiredPromo {
-            get => _fileEditor.GetBit(RequirementLocation, 1);
-            set => _fileEditor.SetBit(RequirementLocation, 1, value);
+            get => Editor.GetBit(RequirementLocation, 1);
+            set => Editor.SetBit(RequirementLocation, 1, value);
         }
 
         public bool RequiredPromo2 //apostle of light
         {
-            get => _fileEditor.GetBit(RequirementLocation, 2);
-            set => _fileEditor.SetBit(RequirementLocation, 2, value);
+            get => Editor.GetBit(RequirementLocation, 2);
+            set => Editor.SetBit(RequirementLocation, 2, value);
         }
 
         public bool RequiredHero //Synbios, Medion, Julian, Gracia, Cyclops
         {
-            get => _fileEditor.GetBit(RequirementLocation, 3);
-            set => _fileEditor.SetBit(RequirementLocation, 3, value);
+            get => Editor.GetBit(RequirementLocation, 3);
+            set => Editor.SetBit(RequirementLocation, 3, value);
         }
 
         public bool RequiredMale {
-            get => _fileEditor.GetBit(RequirementLocation, 4);
-            set => _fileEditor.SetBit(RequirementLocation, 4, value);
+            get => Editor.GetBit(RequirementLocation, 4);
+            set => Editor.SetBit(RequirementLocation, 4, value);
         }
 
         public bool RequiredFemale {
-            get => _fileEditor.GetBit(RequirementLocation, 5);
-            set => _fileEditor.SetBit(RequirementLocation, 5, value);
+            get => Editor.GetBit(RequirementLocation, 5);
+            set => Editor.SetBit(RequirementLocation, 5, value);
         }
 
         [BulkCopy]
         public int Range {
-            get => _fileEditor.GetByte(RangeLocation);
-            set => _fileEditor.SetByte(RangeLocation, (byte) value);
+            get => Editor.GetByte(RangeLocation);
+            set => Editor.SetByte(RangeLocation, (byte) value);
         }
 
         [BulkCopy]
         public int Attack {
-            get => _fileEditor.GetByte(AttackLocation);
-            set => _fileEditor.SetByte(AttackLocation, (byte) value);
+            get => Editor.GetByte(AttackLocation);
+            set => Editor.SetByte(AttackLocation, (byte) value);
         }
 
         [BulkCopy]
         public int Defense {
-            get => _fileEditor.GetByte(DefenseLocation);
-            set => _fileEditor.SetByte(DefenseLocation, (byte) value);
+            get => Editor.GetByte(DefenseLocation);
+            set => Editor.SetByte(DefenseLocation, (byte) value);
         }
 
         [BulkCopy]
         public int AttackRank {
-            get => _fileEditor.GetByte(AttackUpRankLocation);
-            set => _fileEditor.SetByte(AttackUpRankLocation, (byte) value);
+            get => Editor.GetByte(AttackUpRankLocation);
+            set => Editor.SetByte(AttackUpRankLocation, (byte) value);
         }
 
         [BulkCopy]
         public int SpellRank {
-            get => _fileEditor.GetByte(SpellUpRankLocation);
-            set => _fileEditor.SetByte(SpellUpRankLocation, (byte) value);
+            get => Editor.GetByte(SpellUpRankLocation);
+            set => Editor.SetByte(SpellUpRankLocation, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.EffectiveType)]
         public int PhysicalAttribute {
-            get => _fileEditor.GetByte(PhysicalAttributeLocation);
-            set => _fileEditor.SetByte(PhysicalAttributeLocation, (byte) value);
+            get => Editor.GetByte(PhysicalAttributeLocation);
+            set => Editor.SetByte(PhysicalAttributeLocation, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown1 {
-            get => _fileEditor.GetByte(Unknown1Location);
-            set => _fileEditor.SetByte(Unknown1Location, (byte) value);
+            get => Editor.GetByte(Unknown1Location);
+            set => Editor.SetByte(Unknown1Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.EffectiveType)]
         public int MonsterType {
-            get => _fileEditor.GetByte(MonsterTypeAttributeLocation);
-            set => _fileEditor.SetByte(MonsterTypeAttributeLocation, (byte) value);
+            get => Editor.GetByte(MonsterTypeAttributeLocation);
+            set => Editor.SetByte(MonsterTypeAttributeLocation, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown2 {
-            get => _fileEditor.GetByte(Unknown2Location);
-            set => _fileEditor.SetByte(Unknown2Location, (byte) value);
+            get => Editor.GetByte(Unknown2Location);
+            set => Editor.SetByte(Unknown2Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
         public int StatType1 {
-            get => _fileEditor.GetByte(StatType1Location);
-            set => _fileEditor.SetByte(StatType1Location, (byte) value);
+            get => Editor.GetByte(StatType1Location);
+            set => Editor.SetByte(StatType1Location, (byte) value);
         }
 
         [BulkCopy]
         public int StatUp1 {
-            get => _fileEditor.GetByte(StatUp1Location);
-            set => _fileEditor.SetByte(StatUp1Location, (byte) value);
+            get => Editor.GetByte(StatUp1Location);
+            set => Editor.SetByte(StatUp1Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
         public int StatType2 {
-            get => _fileEditor.GetByte(StatType2Location);
-            set => _fileEditor.SetByte(StatType2Location, (byte) value);
+            get => Editor.GetByte(StatType2Location);
+            set => Editor.SetByte(StatType2Location, (byte) value);
         }
 
         [BulkCopy]
         public int StatUp2 {
-            get => _fileEditor.GetByte(StatUp2Location);
-            set => _fileEditor.SetByte(StatUp2Location, (byte) value);
+            get => Editor.GetByte(StatUp2Location);
+            set => Editor.SetByte(StatUp2Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
         public int StatType3 {
-            get => _fileEditor.GetByte(StatType3Location);
-            set => _fileEditor.SetByte(StatType3Location, (byte) value);
+            get => Editor.GetByte(StatType3Location);
+            set => Editor.SetByte(StatType3Location, (byte) value);
         }
 
         [BulkCopy]
         public int StatUp3 {
-            get => _fileEditor.GetByte(StatUp3Location);
-            set => _fileEditor.SetByte(StatUp3Location, (byte) value);
+            get => Editor.GetByte(StatUp3Location);
+            set => Editor.SetByte(StatUp3Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
         public int StatType4 {
-            get => _fileEditor.GetByte(StatType4Location);
-            set => _fileEditor.SetByte(StatType4Location, (byte) value);
+            get => Editor.GetByte(StatType4Location);
+            set => Editor.SetByte(StatType4Location, (byte) value);
         }
 
         [BulkCopy]
         public int StatUp4 {
-            get => _fileEditor.GetByte(StatUp4Location);
-            set => _fileEditor.SetByte(StatUp4Location, (byte) value);
+            get => Editor.GetByte(StatUp4Location);
+            set => Editor.SetByte(StatUp4Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int SpellUse {
-            get => _fileEditor.GetByte(SpellOnUseLocation);
-            set => _fileEditor.SetByte(SpellOnUseLocation, (byte) value);
+            get => Editor.GetByte(SpellOnUseLocation);
+            set => Editor.SetByte(SpellOnUseLocation, (byte) value);
         }
 
         [BulkCopy]
         public int SpellUseLv {
-            get => _fileEditor.GetByte(SpellLvOnUseLocation);
-            set => _fileEditor.SetByte(SpellLvOnUseLocation, (byte) value);
+            get => Editor.GetByte(SpellLvOnUseLocation);
+            set => Editor.SetByte(SpellLvOnUseLocation, (byte) value);
         }
     }
 }

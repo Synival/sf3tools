@@ -1,13 +1,9 @@
 using CommonLib.Attributes;
-using CommonLib.NamedValues;
 using SF3.FileEditors;
-using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Models.X002 {
-    public class Loading {
-        private readonly IX002_FileEditor _fileEditor;
-
+    public class Loading : IModel {
         private readonly int locationID;
         private readonly int x1;
         private readonly int chp;
@@ -19,22 +15,25 @@ namespace SF3.Models.X002 {
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public Loading(IX002_FileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
+        public Loading(ISF3FileEditor editor, int id, string text) {
+            Editor = editor;
+            Name   = text;
+            ID     = id;
+            Size   = 0x10;
 
-            checkVersion2 = _fileEditor.GetByte(0x0000000B);
+            checkVersion2 = editor.GetByte(0x0000000B);
 
-            if (Scenario == ScenarioType.Scenario1) {
+            if (editor.Scenario == ScenarioType.Scenario1) {
                 offset = 0x000047A4; //scn1
                 if (checkVersion2 == 0x10) //original jp
                     offset -= 0x0C;
             }
-            else if (Scenario == ScenarioType.Scenario2) {
+            else if (editor.Scenario == ScenarioType.Scenario2) {
                 offset = 0x00004bd8; //scn2
                 if (checkVersion2 == 0x2C)
                     offset -= 0x44;
             }
-            else if (Scenario == ScenarioType.Scenario3) {
+            else if (editor.Scenario == ScenarioType.Scenario3) {
                 offset = 0x000057d0; //scn3
             }
             else {
@@ -45,9 +44,6 @@ namespace SF3.Models.X002 {
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
-
-            LoadID = id;
-            LoadName = text;
 
             //int start = 0x354c + (id * 24);
 
@@ -60,67 +56,68 @@ namespace SF3.Models.X002 {
             mpd = start + 0x0a; //2 bytes
             unknown = start + 0x0c; //2 bytes
             chr = start + 0x0e; //2 bytes
-            LoadAddress = offset + (id * 0x10);
+            Address = offset + (id * 0x10);
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
-        public string LoadName { get; }
-        public int LoadID { get; }
-        public int LoadAddress { get; }
+        public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+        public int Size { get; }
 
         [BulkCopy]
         public int LocationID {
-            get => _fileEditor.GetWord(locationID);
-            set => _fileEditor.SetWord(locationID, value);
+            get => Editor.GetWord(locationID);
+            set => Editor.SetWord(locationID, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int X1 {
-            get => _fileEditor.GetWord(x1);
-            set => _fileEditor.SetWord(x1, value);
+            get => Editor.GetWord(x1);
+            set => Editor.SetWord(x1, value);
         }
 
         [BulkCopy]
         public int CHP {
-            get => _fileEditor.GetWord(chp);
-            set => _fileEditor.SetWord(chp, value);
+            get => Editor.GetWord(chp);
+            set => Editor.SetWord(chp, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int X5 {
-            get => _fileEditor.GetWord(x5);
-            set => _fileEditor.SetWord(x5, value);
+            get => Editor.GetWord(x5);
+            set => Editor.SetWord(x5, value);
         }
 
         [BulkCopy]
         public int Music {
-            get => _fileEditor.GetWord(music);
-            set => _fileEditor.SetWord(music, value);
+            get => Editor.GetWord(music);
+            set => Editor.SetWord(music, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int MPD {
-            get => _fileEditor.GetWord(mpd);
-            set => _fileEditor.SetWord(mpd, value);
+            get => Editor.GetWord(mpd);
+            set => Editor.SetWord(mpd, value);
         }
 
         [BulkCopy]
         public int LoadUnknown {
-            get => _fileEditor.GetWord(unknown);
-            set => _fileEditor.SetWord(unknown, value);
+            get => Editor.GetWord(unknown);
+            set => Editor.SetWord(unknown, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int CHR {
-            get => _fileEditor.GetWord(chr);
-            set => _fileEditor.SetWord(chr, value);
+            get => Editor.GetWord(chr);
+            set => Editor.SetWord(chr, value);
         }
     }
 }
