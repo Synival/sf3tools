@@ -368,8 +368,10 @@ namespace CommonLib.Extensions {
             var inputRowReports = new List<BulkCopyCollectionRowResult>();
             for (var i = 0; i < arrayFrom.Length; i++) {
                 var rowTo = (i < arrayTo.Length) ? arrayTo[i] : null;
-                inputRowReports.Add(new BulkCopyCollectionRowResult(i, arrayFrom[i], rowTo,
-                    (rowTo != null) ? BulkCopyProperties(arrayFrom[i], rowTo, inherit) : null));
+                if (rowTo != null) {
+                    inputRowReports.Add(new BulkCopyCollectionRowResult(i, arrayFrom[i], rowTo,
+                        (rowTo != null) ? BulkCopyProperties(arrayFrom[i], rowTo, inherit) : null));
+                }
             }
 
             return new BulkCopyCollectionResult(listFrom, inputRowReports, Math.Max(arrayTo.Length - arrayFrom.Length, 0));
