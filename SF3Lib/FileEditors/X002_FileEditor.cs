@@ -12,14 +12,14 @@ namespace SF3.FileEditors {
 
         public override IEnumerable<ITable> MakeTables() {
             var tables = new List<ITable>() {
-                (ItemTable = new ItemTable(this)),
-                (SpellTable = new SpellTable(this)),
-                (PresetTable = new PresetTable(this)),
-                (LoadTable = new LoadTable(this)),
-                (StatTable = new StatTable(this)),
-                (WeaponRankTable = new WeaponRankTable(this)),
-                (AttackResistTable = new AttackResistTable(this)),
-                (LoadedOverrideTable = new LoadedOverrideTable(this))
+                (ItemTable = new ItemTable(this, 0)),
+                (SpellTable = new SpellTable(this, 0)),
+                (PresetTable = new PresetTable(this, 0)),
+                (LoadingTable = new LoadingTable(this, 0)),
+                (StatBoostTable = new StatBoostTable(this, 0)),
+                (WeaponRankTable = new WeaponRankTable(this, 0)),
+                (AttackResistTable = new AttackResistTable(this, 0)),
+                (LoadedOverrideTable = new LoadedOverrideTable(this, 0))
             };
 
             if (Scenario == ScenarioType.Scenario1)
@@ -32,8 +32,8 @@ namespace SF3.FileEditors {
             ItemTable = null;
             SpellTable = null;
             PresetTable = null;
-            LoadTable = null;
-            StatTable = null;
+            LoadingTable = null;
+            StatBoostTable = null;
             WeaponRankTable = null;
             AttackResistTable = null;
             LoadedOverrideTable = null;
@@ -46,9 +46,9 @@ namespace SF3.FileEditors {
         [BulkCopyRecurse]
         public PresetTable PresetTable { get; private set; }
         [BulkCopyRecurse]
-        public LoadTable LoadTable { get; private set; }
+        public LoadingTable LoadingTable { get; private set; }
         [BulkCopyRecurse]
-        public StatTable StatTable { get; private set; }
+        public StatBoostTable StatBoostTable { get; private set; }
         [BulkCopyRecurse]
         public WeaponRankTable WeaponRankTable { get; private set; }
         [BulkCopyRecurse]

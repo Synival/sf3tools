@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-using CommonLib.Extensions;
 using SF3.FileEditors;
 using SF3.Models.X002;
 using static SF3.Utils.ResourceUtils;
@@ -9,47 +6,15 @@ namespace SF3.Tables.X002 {
     public class SpellTable : Table<Spell> {
         public override int? MaxSize => 78;
 
-        public SpellTable(IX002_FileEditor fileEditor) : base(fileEditor) {
-            _fileEditor = fileEditor;
-            ResourceFile = ResourceFileForScenario(_fileEditor.Scenario, "Spells.xml");
+        public SpellTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
+            ResourceFile = ResourceFileForScenario(FileEditor.Scenario, "Spells.xml");
+            Address = address;
         }
-
-        private readonly IX002_FileEditor _fileEditor;
 
         public override string ResourceFile { get; }
-        public override int Address => throw new NotImplementedException();
+        public override int Address { get; }
 
-        /// <summary>
-        /// Loads data from the file editor provided in the constructor.
-        /// </summary>
-        /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
-        public override bool Load() {
-            _rows = new Spell[0];
-            FileStream stream = null;
-            try {
-                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
-                var xml = MakeXmlReader(stream);
-                _ = xml.Read();
-                while (!xml.EOF) {
-                    _ = xml.Read();
-                    if (xml.HasAttributes) {
-                        var newRow = new Spell(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
-                        _rows = _rows.ExpandedWith(newRow);
-                        if (newRow.ID < 0 || newRow.ID >= MaxSize)
-                            throw new IndexOutOfRangeException();
-                    }
-                }
-            }
-            catch (FileLoadException) {
-                return false;
-            }
-            catch (FileNotFoundException) {
-                return false;
-            }
-            finally {
-                stream?.Close();
-            }
-            return true;
-        }
+        public override bool Load()
+            => LoadFromResourceFile((id, name, address) => new Spell(FileEditor, id, name));
     }
 }

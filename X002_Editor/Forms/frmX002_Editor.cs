@@ -18,14 +18,15 @@ namespace SF3.X002_Editor.Forms {
             InitializeEditor(menuStrip2);
         }
 
+        // TODO: is this even relevant anymore?
         private void tabMain_Click(object sender, EventArgs e) {
             olvSpells.ClearObjects();
             if (FileEditor?.SpellTable != null)
                 olvSpells.AddObjects(FileEditor.SpellTable.Rows);
 
             olvStatBoost.ClearObjects();
-            if (FileEditor?.StatTable != null)
-                olvStatBoost.AddObjects(FileEditor.StatTable.Rows);
+            if (FileEditor?.StatBoostTable != null)
+                olvStatBoost.AddObjects(FileEditor.StatBoostTable.Rows);
         }
 
         protected override string FileDialogFilter => "SF3 Data (X002.BIN)|X002.BIN|" + base.FileDialogFilter;
@@ -40,9 +41,9 @@ namespace SF3.X002_Editor.Forms {
                 new PopulateTabConfig(tabItems, olvItems, FileEditor.ItemTable),
                 new PopulateTabConfig(tabSpells, olvSpells, FileEditor.SpellTable),
                 new PopulateTabConfig(tabPreset, olvPreset, FileEditor.PresetTable),
-                new PopulateTabConfig(tabLoaded, olvLoaded, FileEditor.LoadTable),
+                new PopulateTabConfig(tabLoaded, olvLoaded, FileEditor.LoadingTable),
                 new PopulateTabConfig(tabLoadedOverride, olvLoadedOverride, FileEditor.LoadedOverrideTable),
-                new PopulateTabConfig(tabStatBoost, olvStatBoost, FileEditor.StatTable),
+                new PopulateTabConfig(tabStatBoost, olvStatBoost, FileEditor.StatBoostTable),
                 new PopulateTabConfig(tabWeaponRankAttack, olvWeaponRankAttack, FileEditor.WeaponRankTable),
                 new PopulateTabConfig(tabAttackResist, olvAttackResist, FileEditor.AttackResistTable),
                 new PopulateTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpTable),

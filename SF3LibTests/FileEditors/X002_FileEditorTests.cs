@@ -126,11 +126,11 @@ namespace SF3.Tests.FileEditors {
         }
 
         [TestMethod]
-        public void LoadTable_HasExpectedData() {
+        public void LoadingTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var editor = new X002_FileEditor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
-                var table = editor.LoadTable;
+                var table = editor.LoadingTable;
 
                 Assert.AreEqual(1, table.Rows[0].LocationID);
                 Assert.AreEqual(testCase.Scenario <= ScenarioType.Scenario2 ? 27 :  0, table.Rows[0].Music);
@@ -146,11 +146,11 @@ namespace SF3.Tests.FileEditors {
         }
 
         [TestMethod]
-        public void StatTable_HasExpectedData() {
+        public void StatBoostTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var editor = new X002_FileEditor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
-                var table = editor.StatTable;
+                var table = editor.StatBoostTable;
 
                 Assert.AreEqual(3, table.Rows[0].Stat);
                 Assert.AreEqual(3, table.Rows[1].Stat);

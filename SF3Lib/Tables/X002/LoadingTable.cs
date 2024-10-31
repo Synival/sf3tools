@@ -1,13 +1,14 @@
+using System;
 using SF3.FileEditors;
 using SF3.Models.X002;
 using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables.X002 {
-    public class ItemTable : Table<Item> {
+    public class LoadingTable : Table<Loading> {
         public override int? MaxSize => 300;
 
-        public ItemTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
-            ResourceFile = ResourceFileForScenario(FileEditor.Scenario, "Items.xml");
+        public LoadingTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
+            ResourceFile = ResourceFileForScenario(FileEditor.Scenario, "LoadList.xml");
             Address = address;
         }
 
@@ -15,6 +16,6 @@ namespace SF3.Tables.X002 {
         public override int Address { get; }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new Item(FileEditor, id, name));
+            => LoadFromResourceFile((id, name, address) => new Loading(FileEditor, id, name));
     }
 }

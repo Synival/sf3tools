@@ -6,8 +6,8 @@ namespace SF3.FileEditors {
         ItemTable ItemTable { get; }
         SpellTable SpellTable { get; }
         PresetTable PresetTable { get; }
-        LoadTable LoadTable { get; }
-        StatTable StatTable { get; }
+        LoadingTable LoadingTable { get; }
+        StatBoostTable StatBoostTable { get; }
         WeaponRankTable WeaponRankTable { get; }
         AttackResistTable AttackResistTable { get; }
         WarpTable WarpTable { get; }
