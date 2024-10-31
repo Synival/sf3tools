@@ -3,7 +3,8 @@ using System.IO;
 using CommonLib.Extensions;
 using SF3.FileEditors;
 using SF3.Models.X1;
-using static SF3.Utils.Resources;
+using static CommonLib.Utils.ResourceUtils;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables.X1 {
     public class AITable : Table<AI> {
@@ -11,32 +12,12 @@ namespace SF3.Tables.X1 {
 
         public AITable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
-
-            /*if (Globals.scenario == ScenarioType.Scenario1)
-            {
-                _resourceFile = "Resources/X1AIScn1.xml";
-            }
-            else if (Globals.scenario == ScenarioType.Scenario2)
-            {
-                _resourceFile = "Resources/X1AIOther.xml";
-            }
-            else if (Globals.scenario == ScenarioType.Scenario3)
-            {
-                _resourceFile = "Resources/X1AIOther.xml";
-            }
-            else if (Globals.scenario == ScenarioType.PremiumDisk)
-            {
-                _resourceFile = "Resources/X1AIOther.xml";
-            }
-            else
-            {
-                _resourceFile = "Resources/X1AIOther.xml";
-            }*/
+            ResourceFile = ResourceFile("X1AI.xml");
         }
 
         private readonly IX1_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/X1AI.xml";
+        public override string ResourceFile { get; }
         public override int Address => throw new NotImplementedException();
 
         /// <summary>

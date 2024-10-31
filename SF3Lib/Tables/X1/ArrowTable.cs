@@ -3,7 +3,8 @@ using System.IO;
 using CommonLib.Extensions;
 using SF3.FileEditors;
 using SF3.Models.X1;
-using static SF3.Utils.Resources;
+using static CommonLib.Utils.ResourceUtils;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables.X1 {
     public class ArrowTable : Table<Arrow> {
@@ -11,11 +12,12 @@ namespace SF3.Tables.X1 {
 
         public ArrowTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
+            ResourceFile = ResourceFile("X1Arrow.xml");
         }
 
         private readonly IX1_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/X1Arrow.xml";
+        public override string ResourceFile { get; }
         public override int Address => throw new NotImplementedException();
 
         /// <summary>

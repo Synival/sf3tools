@@ -6,7 +6,7 @@ namespace CommonLib.NamedValues {
     /// </summary>
     public class NamedValueFromResourceInfo : NamedValueInfo, INamedValueFromResourceInfo {
         public NamedValueFromResourceInfo(string resourceName, int minValue = 0x00, int maxValue = 0xFF, string formatString = "X2")
-        : base(minValue, maxValue, formatString, GetValueNameDictionaryFromXML("Resources/" + resourceName)) {
+        : base(minValue, maxValue, formatString, GetValueNameDictionaryFromXML(ResourceFile(resourceName))) {
             ResourceName = resourceName;
         }
 

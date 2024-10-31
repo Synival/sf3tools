@@ -3,7 +3,8 @@ using System.IO;
 using CommonLib.Extensions;
 using SF3.FileEditors;
 using SF3.Models.X1;
-using static SF3.Utils.Resources;
+using static CommonLib.Utils.ResourceUtils;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables.X1 {
     public class HeaderTable : Table<Header> {
@@ -11,11 +12,12 @@ namespace SF3.Tables.X1 {
 
         public HeaderTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
+            ResourceFile = ResourceFile("X1Top.xml");
         }
 
         private readonly IX1_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/X1Top.xml";
+        public override string ResourceFile { get; }
         public override int Address => throw new NotImplementedException();
 
         /// <summary>

@@ -4,7 +4,8 @@ using CommonLib.Extensions;
 using SF3.FileEditors;
 using SF3.Models.X1;
 using SF3.Types;
-using static SF3.Utils.Resources;
+using static CommonLib.Utils.ResourceUtils;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables.X1 {
     public class SlotTable : Table<Slot> {
@@ -12,14 +13,12 @@ namespace SF3.Tables.X1 {
 
         public SlotTable(IX1_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
-
-            _resourceFile =Scenario == ScenarioType.Scenario1 ? "Resources/X1List.xml" : "Resources/X1OtherList.xml";
+            ResourceFile = ResourceFile(Scenario == ScenarioType.Scenario1 ? "X1List.xml" : "X1OtherList.xml");
         }
 
-        private readonly string _resourceFile;
         private readonly IX1_FileEditor _fileEditor;
 
-        public override string ResourceFile => _resourceFile;
+        public override string ResourceFile { get; }
         public override int Address => throw new NotImplementedException();
 
         /// <summary>

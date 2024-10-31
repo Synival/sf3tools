@@ -3,7 +3,8 @@ using System.IO;
 using CommonLib.Extensions;
 using SF3.FileEditors;
 using SF3.Models.X002;
-using static SF3.Utils.Resources;
+using static CommonLib.Utils.ResourceUtils;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables.X002 {
     public class StatTable : Table<StatBoost> {
@@ -11,11 +12,12 @@ namespace SF3.Tables.X002 {
 
         public StatTable(IX002_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
+            ResourceFile = ResourceFile("X002StatList.xml");
         }
 
         private readonly IX002_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/X002StatList.xml";
+        public override string ResourceFile { get; }
         public override int Address => throw new NotImplementedException();
 
         /// <summary>

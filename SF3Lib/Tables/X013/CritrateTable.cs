@@ -3,7 +3,8 @@ using System.IO;
 using CommonLib.Extensions;
 using SF3.FileEditors;
 using SF3.Models.X013;
-using static SF3.Utils.Resources;
+using static CommonLib.Utils.ResourceUtils;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables.X013 {
     public class CritrateTable : Table<Critrate> {
@@ -11,11 +12,12 @@ namespace SF3.Tables.X013 {
 
         public CritrateTable(IX013_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
+            ResourceFile = ResourceFile("CritrateList.xml");
         }
 
         private readonly IX013_FileEditor _fileEditor;
 
-        public override string ResourceFile => "Resources/CritrateList.xml";
+        public override string ResourceFile { get; }
         public override int Address => throw new NotImplementedException();
 
         /// <summary>

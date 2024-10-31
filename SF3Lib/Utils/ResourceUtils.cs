@@ -11,7 +11,7 @@ namespace SF3.Utils {
     /// Utility functions for managing resources
     /// TODO: This should eventually be a "ResourceManager" singleton
     /// </summary>
-    public static class Resources {
+    public static class ResourceUtils {
         /// <summary>
         /// Returns a dictionary of all ScenarioType values with a corresponding Dictionary of resource values
         /// </summary>
@@ -37,13 +37,13 @@ namespace SF3.Utils {
         public static string ResourceFileForScenario(ScenarioType scenario, string resourceName) {
             switch (scenario) {
                 case ScenarioType.Scenario1:
-                    return "Resources/S1/" + resourceName;
+                    return ResourceFile("S1/" + resourceName);
                 case ScenarioType.Scenario2:
-                    return "Resources/S2/" + resourceName;
+                    return ResourceFile("S2/" + resourceName);
                 case ScenarioType.Scenario3:
-                    return "Resources/S3/" + resourceName;
+                    return ResourceFile("S3/" + resourceName);
                 case ScenarioType.PremiumDisk:
-                    return "Resources/PD/" + resourceName;
+                    return ResourceFile("PD/" + resourceName);
                 default:
                     throw new ArgumentException(MethodBase.GetCurrentMethod().Name + ": Handled scenario for " + nameof(scenario));
             }

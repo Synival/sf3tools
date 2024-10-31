@@ -5,6 +5,13 @@ using System.Xml;
 
 namespace CommonLib.Utils {
     public static class ResourceUtils {
+        /// <summary>
+        /// Returns the relative path of a resource file.
+        /// </summary>
+        /// <param name="resourceName">The name of the resource file without its path.</param>
+        /// <returns>A string with a relative path with file for the resource.</returns>
+        public static string ResourceFile(string resourceName)
+            => "Resources/" + resourceName;
 
         /// <summary>
         /// Parses an XML file and returns a Dictionary of values (attribute "value") with their names (attribute "name").

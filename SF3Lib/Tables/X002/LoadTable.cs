@@ -3,7 +3,7 @@ using System.IO;
 using CommonLib.Extensions;
 using SF3.FileEditors;
 using SF3.Models.X002;
-using static SF3.Utils.Resources;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables.X002 {
     public class LoadTable : Table<Loading> {
@@ -11,13 +11,12 @@ namespace SF3.Tables.X002 {
 
         public LoadTable(IX002_FileEditor fileEditor) : base(fileEditor) {
             _fileEditor = fileEditor;
-            _resourceFile = ResourceFileForScenario(_fileEditor.Scenario, "LoadList.xml");
+            ResourceFile = ResourceFileForScenario(_fileEditor.Scenario, "LoadList.xml");
         }
 
-        private readonly string _resourceFile;
         private readonly IX002_FileEditor _fileEditor;
 
-        public override string ResourceFile => _resourceFile;
+        public override string ResourceFile { get; }
         public override int Address => throw new NotImplementedException();
 
         /// <summary>

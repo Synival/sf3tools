@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.NamedValues;
 using SF3.Types;
-using static SF3.Utils.Resources;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.NamedValues {
     /// <summary>
