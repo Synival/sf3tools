@@ -229,5 +229,30 @@ namespace SF3.Tests.FileEditors {
                 Assert.AreEqual(testCase.ExpectedLoadedOverrides, table.Rows.Length);
             });
         }
+
+        [TestMethod]
+        public void WarpTable_HasExpectedData() {
+            TestCase.Run(TestCases, testCase => {
+                var editor = new X002_FileEditor(testCase.Scenario);
+                Assert.IsTrue(editor.LoadFile(testCase.Filename));
+                var table = editor.WarpTable;
+
+                // Only Scenario1 has a warp table in X002.BIN
+                if (testCase.Scenario != ScenarioType.Scenario1) {
+                    Assert.IsNull(table);
+                    return;
+                }
+
+                Assert.AreEqual(0, table.Rows[0].WarpType);
+                Assert.AreEqual(0, table.Rows[0].WarpUnknown1);
+                Assert.AreEqual(0, table.Rows[0].WarpUnknown2);
+
+                Assert.AreEqual(130, table.Rows[1].WarpType);
+                Assert.AreEqual(15, table.Rows[1].WarpUnknown1);
+                Assert.AreEqual(255, table.Rows[1].WarpUnknown2);
+
+                Assert.AreEqual(780, table.Rows.Length);
+            });
+        }
     }
 }
