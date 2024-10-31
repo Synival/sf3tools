@@ -21,7 +21,7 @@ namespace SF3.Models.X013 {
                     offset -= 0x36;
             }
             else if (Scenario == ScenarioType.Scenario2) {
-                offset = 0x0000650f; //scn2
+                offset = 0x0000650b; //scn2
             }
             else if (Scenario == ScenarioType.Scenario3) {
                 offset = 0x00006077; //scn3
