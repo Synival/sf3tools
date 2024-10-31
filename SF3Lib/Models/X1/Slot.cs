@@ -16,7 +16,7 @@ namespace SF3.Models.X1 {
         private readonly int x;
         private readonly int y;
         private readonly int itemOverride;
-        private readonly int unknown3;
+        private readonly int characterPlus0x0B;
         private readonly int unknown4;
         private readonly int joinID;
         private readonly int unknown5;
@@ -238,7 +238,7 @@ namespace SF3.Models.X1 {
             unknown1 = start + 8; //drop disabled
             unknown2 = start + 9; //probably droprate override
             joinID = start + 10; //2 byte
-            unknown3 = start + 12; //character that shows up when enemy id is 5b
+            characterPlus0x0B = start + 12; //character that shows up when enemy id is 5b
             unknown4 = start + 13;
             unknown5 = start + 14;
             unknown6 = start + 15;
@@ -317,9 +317,10 @@ namespace SF3.Models.X1 {
             set => _fileEditor.SetWord(itemOverride, value);
         }
 
-        public int Unknown3 {
-            get => _fileEditor.GetByte(unknown3);
-            set => _fileEditor.SetByte(unknown3, (byte) value);
+        [NameGetter(NamedValueType.Character)]
+        public int CharacterPlus0x0B {
+            get => _fileEditor.GetByte(characterPlus0x0B);
+            set => _fileEditor.SetByte(characterPlus0x0B, (byte) value);
         }
 
         public int Unknown4 {

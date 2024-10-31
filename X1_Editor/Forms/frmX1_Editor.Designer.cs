@@ -687,9 +687,9 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcSlotTab1Plus0x0B
             // 
-            this.lvcSlotTab1Plus0x0B.AspectName = "Unknown3";
+            this.lvcSlotTab1Plus0x0B.AspectName = "CharacterPlus0x0B";
             this.lvcSlotTab1Plus0x0B.AspectToStringFormat = "{0:X}";
-            this.lvcSlotTab1Plus0x0B.Text = "(character)+0x0B";
+            this.lvcSlotTab1Plus0x0B.Text = "Character (+0x0B)";
             this.lvcSlotTab1Plus0x0B.Width = 93;
             // 
             // lvcSlotTab1SpawnCondition
