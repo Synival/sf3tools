@@ -1,3 +1,4 @@
+using System;
 using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
@@ -9,53 +10,47 @@ namespace SF3.Models {
         private readonly int type;
         private readonly int map;
 
-        private readonly int offset;
-        private readonly int checkVersion2;
-        private readonly int sub;
+        public Warp(ISF3FileEditor editor, int id, string name, int address) {
+            Editor  = editor;
+            Name    = name;
+            ID      = id;
+            Address = address;
+            Size    = 0x04;
 
-        public Warp(ISF3FileEditor editor, int id, string name) {
-            Editor = editor;
-            Name   = name;
-            ID     = id;
-            Size   = 0x04;
+            // X002 editor has Scenario1 WarpTable, and provides the address itself.
+            // TODO: the X1 editor can do this soon too!!
+            if (editor.Scenario != ScenarioType.Scenario1) {
+                int offset;
+                int sub;
 
-            checkVersion2 = Editor.GetByte(0x0000000B);
+                if (editor.Scenario == ScenarioType.Scenario2) {
+                    offset = 0x00000018; //scn2 initial pointer
+                    sub = 0x0605e000;
+                    offset = Editor.GetDouble(offset);
+                    offset -= sub;
+                }
+                else if (editor.Scenario == ScenarioType.Scenario3) {
+                    offset = 0x00000018; //scn3 initial pointer
+                    sub = 0x0605e000;
+                    offset = Editor.GetDouble(offset);
+                    offset -= sub;
+                }
+                else if (editor.Scenario == ScenarioType.PremiumDisk) {
+                    offset = 0x00000018; //pd initial pointer
+                    sub = 0x0605e000;
+                    offset = Editor.GetDouble(offset);
+                    offset -= sub;
+                }
+                else
+                    throw new ArgumentException(nameof(editor) + "." + nameof(editor.Scenario));
 
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x000053cc; //scn1
-                if (checkVersion2 == 0x10) //original jp
-                    offset -= 0x0C;
+                Address = offset + (id * 0x04);
             }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x00000018; //scn2 initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x00000018; //scn3 initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub;
-            }
-            else if (editor.Scenario == ScenarioType.PremiumDisk) {
-                offset = 0x00000018; //pd initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub;
-            }
 
-            //int start = 0x354c + (id * 24);
-
-            var start = offset + (id * 0x04);
-            unknown1 = start;
-            unknown2 = start + 1;
-            type = start + 2;
-            map = start + 3;
-
-            //unknown42 = start + 52;
-            Address = offset + (id * 0x04);
-            //address = 0x0354c + (id * 0x18);
+            unknown1 = Address;
+            unknown2 = Address + 1;
+            type     = Address + 2;
+            map      = Address + 3;
         }
 
         public IByteEditor Editor { get; }

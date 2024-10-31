@@ -12,52 +12,22 @@ namespace SF3.Models.X002 {
         private readonly int mpd;
         private readonly int unknown;
         private readonly int chr;
-        private readonly int offset;
-        private readonly int checkVersion2;
 
-        public Loading(ISF3FileEditor editor, int id, string name) {
-            Editor = editor;
-            Name   = name;
-            ID     = id;
-            Size   = 0x10;
+        public Loading(ISF3FileEditor editor, int id, string name, int address) {
+            Editor  = editor;
+            Name    = name;
+            ID      = id;
+            Address = address;
+            Size    = 0x10;
 
-            checkVersion2 = editor.GetByte(0x0000000B);
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x000047A4; //scn1
-                if (checkVersion2 == 0x10) //original jp
-                    offset -= 0x0C;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x00004bd8; //scn2
-                if (checkVersion2 == 0x2C)
-                    offset -= 0x44;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x000057d0; //scn3
-            }
-            else {
-                offset = 0x000058bc; //pd
-            }
-
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
-
-            //int start = 0x354c + (id * 24);
-
-            var start = offset + (id * 0x10);
-            locationID = start; //2 bytes
-            x1 = start + 0x02; //2 byte
-            chp = start + 0x04; //2 byte
-            x5 = start + 0x06; //2 byte
-            music = start + 0x08; //2 byte
-            mpd = start + 0x0a; //2 bytes
-            unknown = start + 0x0c; //2 bytes
-            chr = start + 0x0e; //2 bytes
-            Address = offset + (id * 0x10);
-            //address = 0x0354c + (id * 0x18);
+            locationID = Address;        // 2 bytes
+            x1         = Address + 0x02; // 2 bytes
+            chp        = Address + 0x04; // 2 bytes
+            x5         = Address + 0x06; // 2 bytes
+            music      = Address + 0x08; // 2 bytes
+            mpd        = Address + 0x0a; // 2 bytes
+            unknown    = Address + 0x0c; // 2 bytes
+            chr        = Address + 0x0e; // 2 bytes
         }
 
         public IByteEditor Editor { get; }

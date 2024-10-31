@@ -312,6 +312,7 @@ namespace SF3.Models.X1 {
             set => _fileEditor.SetWord(y, value);
         }
 
+        [NameGetter(NamedValueType.Item)]
         public int ItemOverride {
             get => _fileEditor.GetWord(itemOverride);
             set => _fileEditor.SetWord(itemOverride, value);

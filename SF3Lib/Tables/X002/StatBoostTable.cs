@@ -15,6 +15,6 @@ namespace SF3.Tables.X002 {
         public override int Address { get; }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new StatBoost(FileEditor, id, name));
+            => LoadFromResourceFile((id, name, address) => new StatBoost(FileEditor, id, name, address));
     }
 }

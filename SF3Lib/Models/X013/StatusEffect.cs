@@ -18,7 +18,6 @@ namespace SF3.Models.X013 {
 
         //private int npcOffset;
         private readonly int offset;
-        private readonly int sub;
         private readonly int checkVersion2;
 
         /*public int NPCTableAddress1

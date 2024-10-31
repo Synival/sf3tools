@@ -17,60 +17,27 @@ namespace SF3.Models.X002 {
         private readonly int medChr;
         private readonly int julChr;
         private readonly int extraChr;
-        private readonly int offset;
-        private readonly int checkVersion2;
 
-        public LoadedOverride(ISF3FileEditor editor, int id, string name) {
-            Editor = editor;
-            Name   = name;
-            ID     = id;
-            Size   = 0x28;
+        public LoadedOverride(ISF3FileEditor editor, int id, string name, int address) {
+            Editor  = editor;
+            Name    = name;
+            ID      = id;
+            Address = address;
+            Size    = 0x28;
 
-            checkVersion2 = editor.GetByte(0x0000000B);
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x0000527a; //scn1
-                if (checkVersion2 == 0x10) //original jp
-                    offset -= 0x0C;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x000058be; //scn2
-                if (checkVersion2 == 0x2C)
-                    offset -= 0x44;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x00006266; //scn3
-            }
-            else {
-                offset = 0x00005aa2; //pd. assumed location if it were to exist
-            }
-
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
-
-            ID = id;
-            Name = name;
-
-            //int start = 0x354c + (id * 24);
-
-            var start = offset + (id * 0x28);
-            mapID = start; //2 bytes
-            synMusic = start + 0x02; //1 byte
-            medMusic = start + 0x03; //1 byte
-            julMusic = start + 0x04; //1 byte
-            extraMusic = start + 0x05; //1 byte
-            synMpd = start + 0x06; //4 bytes mpd synbios?
-            medMpd = start + 0x0a; //4 bytes mpd medion
-            julMpd = start + 0x0e; //4 bytes mpd julian?
-            extraMpd = start + 0x12; //4 bytes mpd extra?
-            synChr = start + 0x16; //4 bytes chr synbios?
-            medChr = start + 0x1a; //4 bytes chr medion
-            julChr = start + 0x1e; //4 bytes chr julian?
-            extraChr = start + 0x22; //4 bytes chr extra?
-            Address = offset + (id * 0x28);
-            //address = 0x0354c + (id * 0x18);
+            mapID      = Address;        // 2 bytes
+            synMusic   = Address + 0x02; // 1 byte
+            medMusic   = Address + 0x03; // 1 byte
+            julMusic   = Address + 0x04; // 1 byte
+            extraMusic = Address + 0x05; // 1 byte
+            synMpd     = Address + 0x06; // 4 bytes mpd synbios?
+            medMpd     = Address + 0x0a; // 4 bytes mpd medion
+            julMpd     = Address + 0x0e; // 4 bytes mpd julian?
+            extraMpd   = Address + 0x12; // 4 bytes mpd extra?
+            synChr     = Address + 0x16; // 4 bytes chr synbios?
+            medChr     = Address + 0x1a; // 4 bytes chr medion
+            julChr     = Address + 0x1e; // 4 bytes chr julian?
+            extraChr   = Address + 0x22; // 4 bytes chr extra?
         }
 
         public IByteEditor Editor { get; }

@@ -11,13 +11,14 @@ namespace SF3.Tables {
     public class WarpTable : Table<Warp> {
         public override int? MaxSize => 1000;
 
-        public WarpTable(ISF3FileEditor fileEditor) : base(fileEditor) {
+        public WarpTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
             ResourceFile = fileEditor.Scenario == ScenarioType.Scenario1
                 ? ResourceFileForScenario(ScenarioType.Scenario1, "Warps.xml")
                 : null;
+            Address = address;
         }
 
-        public override int Address => throw new NotImplementedException();
+        public override int Address { get; }
 
         public override string ResourceFile { get; }
 
@@ -31,11 +32,13 @@ namespace SF3.Tables {
                 : new Dictionary<int, string>();
 
             _rows = new Warp[0];
+            int address = Address;
             for (var i = 0; _rows.Length == 0 || (_rows[_rows.Length - 1].WarpType != 0x01 && _rows[_rows.Length - 1].WarpType != 0xff); i++) {
                 if (i == MaxSize)
                     throw new IndexOutOfRangeException();
-                var newRow = new Warp(FileEditor, i, values.ContainsKey(i) ? values[i] : "WarpIndex" + i);
+                var newRow = new Warp(FileEditor, i, values.ContainsKey(i) ? values[i] : "WarpIndex" + i, address);
                 _rows = _rows.ExpandedWith(newRow);
+                address += newRow.Size;
             }
             return true;
         }

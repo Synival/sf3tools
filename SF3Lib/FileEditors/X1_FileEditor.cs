@@ -57,7 +57,7 @@ namespace SF3.FileEditors {
             };
 
             if (isntScn1OrBTL99)
-                tables.Add(WarpTable = new WarpTable(this));
+                tables.Add(WarpTable = new WarpTable(this, 0 /* TODO: real address! */));
 
             // Add tables only present for battles.
             if (IsBattle) {

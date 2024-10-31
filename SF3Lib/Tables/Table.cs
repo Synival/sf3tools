@@ -59,19 +59,21 @@ namespace SF3.Tables {
             var rows = new Dictionary<int, T>();
             FileStream stream = null;
             try {
-                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
+                // Get the size of our rows so we can determine the offset of elements.
+                var size = ((IModel) makeTFunc(0, "", Address)).Size;
 
+                // Read all elements.
+                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
                 var xml = MakeXmlReader(stream);
                 _ = xml.Read();
-                var address = Address;
+
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
                         var id = Convert.ToInt32(xml.GetAttribute(0), 16);
                         var name = xml.GetAttribute(1);
-                        var newModel = makeTFunc(id, name, address);
+                        var newModel = makeTFunc(id, name, Address + id * size);
                         rows.Add(id, newModel);
-                        address += ((IModel) newModel).Size;
 
                         if (id < 0 || (MaxSize != null && id >= MaxSize))
                             throw new IndexOutOfRangeException();

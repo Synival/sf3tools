@@ -24,67 +24,34 @@ namespace SF3.Models.X002 {
         private readonly int lv4Targets;
         private readonly int lv4Cost;
         private readonly int lv4Damage;
-        private readonly int offset;
-        private readonly int checkVersion2;
 
-        public Spell(ISF3FileEditor editor, int id, string name) {
-            Editor = editor;
-            Name   = name;
-            ID     = id;
-            Size   = 0x14;
+        public Spell(ISF3FileEditor editor, int id, string name, int address) {
+            Editor  = editor;
+            Name    = name;
+            ID      = id;
+            Address = address;
+            Size    = 0x14;
 
-            checkVersion2 = editor.GetByte(0x0000000B);
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x00004328; //scn1
-                if (checkVersion2 == 0x10) //original jp
-                    offset -= 0x0C;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x0000469c; //scn2
-                if (checkVersion2 == 0x2C)
-                    offset -= 0x44;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x0000516c; //scn3
-            }
-            else {
-                offset = 0x0000521c; //pd
-            }
-
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
-
-            ID = id;
-            Name = name;
-
-            //int start = 0x354c + (id * 24);
-
-            var start = offset + (id * 20);
-            targetType = start; //2 bytes
-            damageType = start + 1;
-            element = start + 2; //1 byte
-            unknown2 = start + 3; //1 byte
-            lv1Distance = start + 4; //1 byte
-            lv1Targets = start + 5; //1 byte
-            lv1Cost = start + 6;
-            lv1Damage = start + 7;
-            lv2Distance = start + 8;
-            lv2Targets = start + 9;
-            lv2Cost = start + 10;
-            lv2Damage = start + 11;
-            lv3Distance = start + 12;
-            lv3Targets = start + 13;
-            lv3Cost = start + 14;
-            lv3Damage = start + 15;
-            lv4Distance = start + 16;
-            lv4Targets = start + 17;
-            lv4Cost = start + 18;
-            lv4Damage = start + 19;
-            Address = offset + (id * 0x14);
-            //address = 0x0354c + (id * 0x18);
+            targetType  = Address;
+            damageType  = Address + 1;
+            element     = Address + 2;
+            unknown2    = Address + 3;
+            lv1Distance = Address + 4;
+            lv1Targets  = Address + 5;
+            lv1Cost     = Address + 6;
+            lv1Damage   = Address + 7;
+            lv2Distance = Address + 8;
+            lv2Targets  = Address + 9;
+            lv2Cost     = Address + 10;
+            lv2Damage   = Address + 11;
+            lv3Distance = Address + 12;
+            lv3Targets  = Address + 13;
+            lv3Cost     = Address + 14;
+            lv3Damage   = Address + 15;
+            lv4Distance = Address + 16;
+            lv4Targets  = Address + 17;
+            lv4Cost     = Address + 18;
+            lv4Damage   = Address + 19;
         }
 
         public IByteEditor Editor { get; }

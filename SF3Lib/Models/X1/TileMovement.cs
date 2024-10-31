@@ -15,7 +15,6 @@ namespace SF3.Models.X1 {
         private readonly int desert;
         private readonly int greyMountain;
 
-        private readonly int unknown08;
         private readonly int unknown09;
         private readonly int unknown0a;
         private readonly int unknown0b;

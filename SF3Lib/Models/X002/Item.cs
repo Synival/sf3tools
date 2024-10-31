@@ -27,67 +27,37 @@ namespace SF3.Models.X002 {
         private readonly int StatUp4Location;
         private readonly int SpellOnUseLocation;
         private readonly int SpellLvOnUseLocation;
-        private readonly int offset;
-        private readonly int checkVersion2;
 
-        public Item(ISF3FileEditor editor, int id, string name) {
-            Editor = editor;
-            Name   = name;
-            ID     = id;
-            Size   = 0x18;
+        public Item(ISF3FileEditor editor, int id, string name, int address) {
+            Editor  = editor;
+            Name    = name;
+            ID      = id;
+            Address = address;
+            Size    = 0x18;
 
-            checkVersion2 = Editor.GetByte(0x0000000B);
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x00002b28; //scn1
-                if (checkVersion2 == 0x10) //original jp
-                    offset -= 0x0C;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x00002e9c; //scn2
-                if (checkVersion2 == 0x2C)
-                    offset -= 0x44;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x0000354c; //scn3
-            }
-            else {
-                offset = 0x000035fc; //pd
-            }
-
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
-
-            //int start = 0x354c + (id * 24);
-
-            var start = offset + (id * 24);
-            PriceLocation = start; //2 bytes. only thing that is 2 bytes
-            WeaponTypeLocation = start + 2; //1 byte
-            EffectsEquipLocation = start + 3; //1 byte
-            RequirementLocation = start + 4; //1 byte
-            RangeLocation = start + 5; //1 byte
-            AttackLocation = start + 6;
-            DefenseLocation = start + 7;
-            AttackUpRankLocation = start + 8;
-            SpellUpRankLocation = start + 9;
-            PhysicalAttributeLocation = start + 10; //actually effective type 1
-            Unknown1Location = start + 11; //effective type 1 power
-            MonsterTypeAttributeLocation = start + 12; //effective type 2 actually
-            Unknown2Location = start + 13; //effective type 2 power
-            StatType1Location = start + 14;
-            StatUp1Location = start + 15;
-            StatType2Location = start + 16;
-            StatUp2Location = start + 17;
-            StatType3Location = start + 18;
-            StatUp3Location = start + 19;
-            StatType4Location = start + 20;
-            StatUp4Location = start + 21;
-            SpellOnUseLocation = start + 22;
-            SpellLvOnUseLocation = start + 23;
-            Address = offset + (id * 0x18);
-            //address = 0x0354c + (id * 0x18);
+            PriceLocation                = Address;     // 2 bytes. only thing that is 2 bytes
+            WeaponTypeLocation           = Address + 2; // 1 byte
+            EffectsEquipLocation         = Address + 3; // 1 byte
+            RequirementLocation          = Address + 4; // 1 byte
+            RangeLocation                = Address + 5; // 1 byte
+            AttackLocation               = Address + 6;
+            DefenseLocation              = Address + 7;
+            AttackUpRankLocation         = Address + 8;
+            SpellUpRankLocation          = Address + 9;
+            PhysicalAttributeLocation    = Address + 10; // actually effective type 1
+            Unknown1Location             = Address + 11; // effective type 1 power
+            MonsterTypeAttributeLocation = Address + 12; // effective type 2 actually
+            Unknown2Location             = Address + 13; // effective type 2 power
+            StatType1Location            = Address + 14;
+            StatUp1Location              = Address + 15;
+            StatType2Location            = Address + 16;
+            StatUp2Location              = Address + 17;
+            StatType3Location            = Address + 18;
+            StatUp3Location              = Address + 19;
+            StatType4Location            = Address + 20;
+            StatUp4Location              = Address + 21;
+            SpellOnUseLocation           = Address + 22;
+            SpellLvOnUseLocation         = Address + 23;
         }
 
         public IByteEditor Editor { get; }
