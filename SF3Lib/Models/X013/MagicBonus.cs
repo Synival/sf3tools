@@ -49,14 +49,14 @@ namespace SF3.Models.X013 {
 
             if (Scenario == ScenarioType.Scenario1) {
                 var start = offset + (id * 0x20);
-                earthBonus = start + 0x03; //1 bytes
-                fireBonus = start + 0x07; //1 byte
-                iceBonus = start + 0x0B; //1 byte
-                sparkBonus = start + 0x0F; //1 byte
-                windBonus = start + 0x13; //1 byte
-                lightBonus = start + 0x17; //1 byte
-                darkBonus = start + 0x1B; //1 byte
-                unknownBonus = start + 0x1F; //1 byte
+                earthBonus = start + 0x00; //4 bytes
+                fireBonus = start + 0x04; //4 bytes
+                iceBonus = start + 0x08; //4 bytes
+                sparkBonus = start + 0x0C; //4 bytes
+                windBonus = start + 0x10; //4 bytes
+                lightBonus = start + 0x14; //4 bytes
+                darkBonus = start + 0x18; //4 bytes
+                unknownBonus = start + 0x1C; //4 byte
 
                 MagicAddress = offset + (id * 0x20);
             }
@@ -78,6 +78,7 @@ namespace SF3.Models.X013 {
         }
 
         public ScenarioType Scenario => _fileEditor.Scenario;
+        public bool Has32BitValues => _fileEditor.Scenario == ScenarioType.Scenario1;
         public int MagicID { get; }
 
         [BulkCopyRowName]
@@ -85,50 +86,90 @@ namespace SF3.Models.X013 {
 
         [BulkCopy]
         public int EarthBonus {
-            get => _fileEditor.GetByte(earthBonus);
-            set => _fileEditor.SetByte(earthBonus, (byte) value);
+            get => Has32BitValues ? _fileEditor.GetDouble(earthBonus) : _fileEditor.GetByte(earthBonus);
+            set {
+                if (Has32BitValues)
+                    _fileEditor.SetDouble(earthBonus, value);
+                else
+                    _fileEditor.SetByte(earthBonus, (byte) value);
+            }
         }
 
         [BulkCopy]
         public int FireBonus {
-            get => _fileEditor.GetByte(fireBonus);
-            set => _fileEditor.SetByte(fireBonus, (byte) value);
+            get => Has32BitValues ? _fileEditor.GetDouble(fireBonus) : _fileEditor.GetByte(fireBonus);
+            set {
+                if (Has32BitValues)
+                    _fileEditor.SetDouble(fireBonus, value);
+                else
+                    _fileEditor.SetByte(fireBonus, (byte) value);
+            }
         }
 
         [BulkCopy]
         public int IceBonus {
-            get => _fileEditor.GetByte(iceBonus);
-            set => _fileEditor.SetByte(iceBonus, (byte) value);
+            get => Has32BitValues ? _fileEditor.GetDouble(iceBonus) : _fileEditor.GetByte(iceBonus);
+            set {
+                if (Has32BitValues)
+                    _fileEditor.SetDouble(iceBonus, value);
+                else
+                    _fileEditor.SetByte(iceBonus, (byte) value);
+            }
         }
 
         [BulkCopy]
         public int SparkBonus {
-            get => _fileEditor.GetByte(sparkBonus);
-            set => _fileEditor.SetByte(sparkBonus, (byte) value);
+            get => Has32BitValues ? _fileEditor.GetDouble(sparkBonus) : _fileEditor.GetByte(sparkBonus);
+            set {
+                if (Has32BitValues)
+                    _fileEditor.SetDouble(sparkBonus, value);
+                else
+                    _fileEditor.SetByte(sparkBonus, (byte) value);
+            }
         }
 
         [BulkCopy]
         public int WindBonus {
-            get => _fileEditor.GetByte(windBonus);
-            set => _fileEditor.SetByte(windBonus, (byte) value);
+            get => Has32BitValues ? _fileEditor.GetDouble(windBonus) : _fileEditor.GetByte(windBonus);
+            set {
+                if (Has32BitValues)
+                    _fileEditor.SetDouble(windBonus, value);
+                else
+                    _fileEditor.SetByte(windBonus, (byte) value);
+            }
         }
 
         [BulkCopy]
         public int LightBonus {
-            get => _fileEditor.GetByte(lightBonus);
-            set => _fileEditor.SetByte(lightBonus, (byte) value);
+            get => Has32BitValues ? _fileEditor.GetDouble(lightBonus) : _fileEditor.GetByte(lightBonus);
+            set {
+                if (Has32BitValues)
+                    _fileEditor.SetDouble(lightBonus, value);
+                else
+                    _fileEditor.SetByte(lightBonus, (byte) value);
+            }
         }
 
         [BulkCopy]
         public int DarkBonus {
-            get => _fileEditor.GetByte(darkBonus);
-            set => _fileEditor.SetByte(darkBonus, (byte) value);
+            get => Has32BitValues ? _fileEditor.GetDouble(darkBonus) : _fileEditor.GetByte(darkBonus);
+            set {
+                if (Has32BitValues)
+                    _fileEditor.SetDouble(darkBonus, value);
+                else
+                    _fileEditor.SetByte(darkBonus, (byte) value);
+            }
         }
 
         [BulkCopy]
         public int UnknownBonus {
-            get => _fileEditor.GetByte(unknownBonus);
-            set => _fileEditor.SetByte(unknownBonus, (byte) value);
+            get => Has32BitValues ? _fileEditor.GetDouble(unknownBonus) : _fileEditor.GetByte(unknownBonus);
+            set {
+                if (Has32BitValues)
+                    _fileEditor.SetDouble(unknownBonus, value);
+                else
+                    _fileEditor.SetByte(unknownBonus, (byte) value);
+            }
         }
 
         public int MagicAddress { get; }

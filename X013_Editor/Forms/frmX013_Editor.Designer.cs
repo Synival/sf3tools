@@ -947,55 +947,47 @@ namespace SF3.X013_Editor.Forms
             // lvcMagicBonusEarthBonus
             // 
             this.lvcMagicBonusEarthBonus.AspectName = "EarthBonus";
-            this.lvcMagicBonusEarthBonus.AspectToStringFormat = "{0:X}";
             this.lvcMagicBonusEarthBonus.Text = "EarthBonus";
             this.lvcMagicBonusEarthBonus.Width = 70;
             // 
             // lvcMagicBonusFireBonus
             // 
             this.lvcMagicBonusFireBonus.AspectName = "FireBonus";
-            this.lvcMagicBonusFireBonus.AspectToStringFormat = "{0:X}";
             this.lvcMagicBonusFireBonus.Text = "FireBonus";
             this.lvcMagicBonusFireBonus.Width = 65;
             // 
             // lvcMagicBonusIceBonus
             // 
             this.lvcMagicBonusIceBonus.AspectName = "IceBonus";
-            this.lvcMagicBonusIceBonus.AspectToStringFormat = "{0:X}";
             this.lvcMagicBonusIceBonus.Text = "IceBonus";
             // 
             // lvcMagicBonusSparkBonus
             // 
             this.lvcMagicBonusSparkBonus.AspectName = "SparkBonus";
-            this.lvcMagicBonusSparkBonus.AspectToStringFormat = "{0:X}";
             this.lvcMagicBonusSparkBonus.Text = "SparkBonus";
             this.lvcMagicBonusSparkBonus.Width = 80;
             // 
             // lvcMagicBonusWindBonus
             // 
             this.lvcMagicBonusWindBonus.AspectName = "WindBonus";
-            this.lvcMagicBonusWindBonus.AspectToStringFormat = "{0:X}";
             this.lvcMagicBonusWindBonus.Text = "WindBonus";
             this.lvcMagicBonusWindBonus.Width = 70;
             // 
             // lvcMagicBonusLightBonus
             // 
             this.lvcMagicBonusLightBonus.AspectName = "LightBonus";
-            this.lvcMagicBonusLightBonus.AspectToStringFormat = "{0:X}";
             this.lvcMagicBonusLightBonus.Text = "LightBonus";
             this.lvcMagicBonusLightBonus.Width = 70;
             // 
             // lvcMagicBonusDarkBonus
             // 
             this.lvcMagicBonusDarkBonus.AspectName = "DarkBonus";
-            this.lvcMagicBonusDarkBonus.AspectToStringFormat = "{0:X}";
             this.lvcMagicBonusDarkBonus.Text = "DarkBonus";
             this.lvcMagicBonusDarkBonus.Width = 65;
             // 
             // lvcMagicBonusUnknownBonus
             // 
             this.lvcMagicBonusUnknownBonus.AspectName = "UnknownBonus";
-            this.lvcMagicBonusUnknownBonus.AspectToStringFormat = "{0:X}";
             this.lvcMagicBonusUnknownBonus.Text = "UnknownBonus";
             this.lvcMagicBonusUnknownBonus.Width = 90;
             // 
