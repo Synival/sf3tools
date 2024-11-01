@@ -86,7 +86,7 @@ namespace SF3.Models.X013 {
 
         [BulkCopy]
         public int EarthBonus {
-            get => Has32BitValues ? _fileEditor.GetDouble(earthBonus) : _fileEditor.GetByte(earthBonus);
+            get => Has32BitValues ? _fileEditor.GetDouble(earthBonus) : (sbyte) _fileEditor.GetByte(earthBonus);
             set {
                 if (Has32BitValues)
                     _fileEditor.SetDouble(earthBonus, value);
@@ -97,7 +97,7 @@ namespace SF3.Models.X013 {
 
         [BulkCopy]
         public int FireBonus {
-            get => Has32BitValues ? _fileEditor.GetDouble(fireBonus) : _fileEditor.GetByte(fireBonus);
+            get => Has32BitValues ? _fileEditor.GetDouble(fireBonus) : (sbyte) _fileEditor.GetByte(fireBonus);
             set {
                 if (Has32BitValues)
                     _fileEditor.SetDouble(fireBonus, value);
@@ -108,7 +108,7 @@ namespace SF3.Models.X013 {
 
         [BulkCopy]
         public int IceBonus {
-            get => Has32BitValues ? _fileEditor.GetDouble(iceBonus) : _fileEditor.GetByte(iceBonus);
+            get => Has32BitValues ? _fileEditor.GetDouble(iceBonus) : (sbyte) _fileEditor.GetByte(iceBonus);
             set {
                 if (Has32BitValues)
                     _fileEditor.SetDouble(iceBonus, value);
@@ -119,7 +119,7 @@ namespace SF3.Models.X013 {
 
         [BulkCopy]
         public int SparkBonus {
-            get => Has32BitValues ? _fileEditor.GetDouble(sparkBonus) : _fileEditor.GetByte(sparkBonus);
+            get => Has32BitValues ? _fileEditor.GetDouble(sparkBonus) : (sbyte) _fileEditor.GetByte(sparkBonus);
             set {
                 if (Has32BitValues)
                     _fileEditor.SetDouble(sparkBonus, value);
@@ -130,7 +130,7 @@ namespace SF3.Models.X013 {
 
         [BulkCopy]
         public int WindBonus {
-            get => Has32BitValues ? _fileEditor.GetDouble(windBonus) : _fileEditor.GetByte(windBonus);
+            get => Has32BitValues ? _fileEditor.GetDouble(windBonus) : (sbyte) _fileEditor.GetByte(windBonus);
             set {
                 if (Has32BitValues)
                     _fileEditor.SetDouble(windBonus, value);
@@ -141,7 +141,7 @@ namespace SF3.Models.X013 {
 
         [BulkCopy]
         public int LightBonus {
-            get => Has32BitValues ? _fileEditor.GetDouble(lightBonus) : _fileEditor.GetByte(lightBonus);
+            get => Has32BitValues ? _fileEditor.GetDouble(lightBonus) : (sbyte) _fileEditor.GetByte(lightBonus);
             set {
                 if (Has32BitValues)
                     _fileEditor.SetDouble(lightBonus, value);
@@ -152,7 +152,7 @@ namespace SF3.Models.X013 {
 
         [BulkCopy]
         public int DarkBonus {
-            get => Has32BitValues ? _fileEditor.GetDouble(darkBonus) : _fileEditor.GetByte(darkBonus);
+            get => Has32BitValues ? _fileEditor.GetDouble(darkBonus) : (sbyte) _fileEditor.GetByte(darkBonus);
             set {
                 if (Has32BitValues)
                     _fileEditor.SetDouble(darkBonus, value);
@@ -163,7 +163,7 @@ namespace SF3.Models.X013 {
 
         [BulkCopy]
         public int UnknownBonus {
-            get => Has32BitValues ? _fileEditor.GetDouble(unknownBonus) : _fileEditor.GetByte(unknownBonus);
+            get => Has32BitValues ? _fileEditor.GetDouble(unknownBonus) : (sbyte) _fileEditor.GetByte(unknownBonus);
             set {
                 if (Has32BitValues)
                     _fileEditor.SetDouble(unknownBonus, value);
