@@ -127,6 +127,7 @@ namespace SF3.Models.X1 {
         }
 
         [BulkCopy]
+        [NameGetter(NamedValueType.Item)]
         public int TreasureItem {
             get => _fileEditor.GetWord(itemID);
             set => _fileEditor.SetWord(itemID, value);
