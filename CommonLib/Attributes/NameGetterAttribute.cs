@@ -8,12 +8,12 @@ namespace CommonLib.Attributes {
     /// </summary>
     public class NameGetterAttribute : Attribute {
         /// <summary>
-        /// Creates a NameGetterAttribute with an optional parameter that is passed to the INameGetterContext
+        /// Creates a NameGetterAttribute with optional parameters that is passed to the INameGetterContext
         /// when fetching names and info.
         /// </summary>
-        /// <param name="parameter">Optional parameter used when fetching names and info.</param>
-        public NameGetterAttribute(object parameter = null) {
-            Parameter = parameter;
+        /// <param name="parameters">Optional parameters used when fetching names and info.</param>
+        public NameGetterAttribute(params object[] parameters) {
+            Parameters = parameters;
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace CommonLib.Attributes {
         /// <param name="value">The value for whose name we're trying to fetch.</param>
         /// <returns>The return value of: containerObj.<MethodName>(value)</returns>
         public NameAndInfo GetNameAndInfo(INameGetterContext context, int value)
-            => context.GetNameAndInfo(value, Parameter);
+            => context.GetNameAndInfo(value, Parameters);
 
         /// <summary>
         /// Fetches the property's value's name using the fetcher method.
@@ -46,6 +46,6 @@ namespace CommonLib.Attributes {
         /// <summary>
         /// The parameter used when fetching names and info.
         /// </summary>
-        public object Parameter { get; }
+        public object[] Parameters { get; }
     }
 }

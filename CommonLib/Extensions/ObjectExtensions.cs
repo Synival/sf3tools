@@ -84,7 +84,7 @@ namespace CommonLib.Extensions {
                 return null;
             var hexValue = value.ToStringHex(null, "");
             var intValue = Convert.ToInt32(hexValue, 16);
-            if (!context.CanGetNameAndInfo(intValue, attr.Parameter))
+            if (!context.CanGetNameAndInfo(intValue, attr.Parameters))
                 return null;
 
             var nameAndInfo = attr.GetNameAndInfo(context, intValue);

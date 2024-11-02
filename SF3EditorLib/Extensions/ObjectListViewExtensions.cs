@@ -107,7 +107,7 @@ namespace SF3.Editor.Extensions {
                     var attr = property.GetCustomAttribute<NameGetterAttribute>();
                     if (attr != null) {
                         var intValue = (int) property.GetValue(obj);
-                        if (nameContext.CanGetNameAndInfo(intValue, attr.Parameter))
+                        if (nameContext.CanGetNameAndInfo(intValue, attr.Parameters))
                             return MakeNamedValueComboBox(attr.GetInfo(nameContext, intValue), intValue);
                     }
                 }
