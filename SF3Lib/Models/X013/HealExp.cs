@@ -3,27 +3,29 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X013 {
-    public class HealExp {
-        private readonly IX013_FileEditor _fileEditor;
-
+    public class HealExp : IModel {
         private readonly int healExp;
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public HealExp(IX013_FileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
+        public HealExp(IX013_FileEditor editor, int id, string name, int address) {
+            Editor  = editor;
+            Name    = name;
+            ID      = id;
+            Address = address;
+            Size    = 0x01;
 
-            checkVersion2 = _fileEditor.GetByte(0x0000000A);
+            checkVersion2 = Editor.GetByte(0x0000000A);
 
-            if (Scenario == ScenarioType.Scenario1) {
+            if (editor.Scenario == ScenarioType.Scenario1) {
                 offset = 0x00004c8b; //scn1
                 if (checkVersion2 == 0x0A) //original jp
                     offset -= 0x64;
             }
-            else if (Scenario == ScenarioType.Scenario2) {
+            else if (editor.Scenario == ScenarioType.Scenario2) {
                 offset = 0x00004ebf; //scn2
             }
-            else if (Scenario == ScenarioType.Scenario3) {
+            else if (editor.Scenario == ScenarioType.Scenario3) {
                 offset = 0x00004aed; //scn3
             }
             else {
@@ -35,29 +37,26 @@ namespace SF3.Models.X013 {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            HealExpID = id;
-            HealExpName = text;
-
             //int start = 0x354c + (id * 24);
 
             var start = offset + (id * 1);
             healExp = start; //1 byte
-            HealExpAddress = offset + (id * 0x1);
+            Address = offset + (id * 0x1);
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
-        public int HealExpID { get; }
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
-        public string HealExpName { get; }
+        public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+        public int Size { get; }
 
         [BulkCopy]
         public int HealBonus {
-            get => _fileEditor.GetByte(healExp);
-            set => _fileEditor.SetByte(healExp, (byte) value);
+            get => Editor.GetByte(healExp);
+            set => Editor.SetByte(healExp, (byte) value);
         }
-
-        public int HealExpAddress { get; }
     }
 }

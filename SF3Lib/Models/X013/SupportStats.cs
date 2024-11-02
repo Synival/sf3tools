@@ -3,9 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X013 {
-    public class SupportStats {
-        private readonly IX013_FileEditor _fileEditor;
-
+    public class SupportStats : IModel {
         private readonly int sLvlStat1;
         private readonly int sLvlStat2;
         private readonly int sLvlStat3;
@@ -13,20 +11,24 @@ namespace SF3.Models.X013 {
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public SupportStats(IX013_FileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
+        public SupportStats(IX013_FileEditor editor, int id, string name, int address) {
+            Editor  = editor;
+            Name    = name;
+            ID      = id;
+            Address = address;
+            Size    = 0x04;
 
-            checkVersion2 = _fileEditor.GetByte(0x0000000A);
+            checkVersion2 = Editor.GetByte(0x0000000A);
 
-            if (Scenario == ScenarioType.Scenario1) {
+            if (editor.Scenario == ScenarioType.Scenario1) {
                 offset = 0x000074b5; //scn1
                 if (checkVersion2 == 0x0A) //original jp
                     offset -= 0x0C;
             }
-            else if (Scenario == ScenarioType.Scenario2) {
+            else if (editor.Scenario == ScenarioType.Scenario2) {
                 offset = 0x00007409; //scn2
             }
-            else if (Scenario == ScenarioType.Scenario3) {
+            else if (editor.Scenario == ScenarioType.Scenario3) {
                 offset = 0x000072f1; //scn3
             }
             else {
@@ -38,9 +40,6 @@ namespace SF3.Models.X013 {
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
 
-            StatID = id;
-            StatName = text;
-
             //int start = 0x354c + (id * 24);
 
             var start = offset + (id * 4);
@@ -48,40 +47,40 @@ namespace SF3.Models.X013 {
             sLvlStat2 = start + 1; //1 byte
             sLvlStat3 = start + 2; //1 byte
             sLvlStat4 = start + 3; //1 byte
-            StatAddress = offset + (id * 0x4);
+            Address = offset + (id * 0x4);
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
-        public int StatID { get; }
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
-        public string StatName { get; }
+        public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+        public int Size { get; }
 
         [BulkCopy]
         public int SLvlStat1 {
-            get => _fileEditor.GetByte(sLvlStat1);
-            set => _fileEditor.SetByte(sLvlStat1, (byte) value);
+            get => Editor.GetByte(sLvlStat1);
+            set => Editor.SetByte(sLvlStat1, (byte) value);
         }
 
         [BulkCopy]
         public int SLvlStat2 {
-            get => _fileEditor.GetByte(sLvlStat2);
-            set => _fileEditor.SetByte(sLvlStat2, (byte) value);
+            get => Editor.GetByte(sLvlStat2);
+            set => Editor.SetByte(sLvlStat2, (byte) value);
         }
 
         [BulkCopy]
         public int SLvlStat3 {
-            get => _fileEditor.GetByte(sLvlStat3);
-            set => _fileEditor.SetByte(sLvlStat3, (byte) value);
+            get => Editor.GetByte(sLvlStat3);
+            set => Editor.SetByte(sLvlStat3, (byte) value);
         }
 
         [BulkCopy]
         public int SLvlStat4 {
-            get => _fileEditor.GetByte(sLvlStat4);
-            set => _fileEditor.SetByte(sLvlStat4, (byte) value);
+            get => Editor.GetByte(sLvlStat4);
+            set => Editor.SetByte(sLvlStat4, (byte) value);
         }
-
-        public int StatAddress { get; }
     }
 }

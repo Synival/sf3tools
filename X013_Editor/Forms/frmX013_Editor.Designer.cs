@@ -505,20 +505,20 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcFriendshipExpName
             // 
-            this.lvcFriendshipExpName.AspectName = "PresetName";
+            this.lvcFriendshipExpName.AspectName = "Name";
             this.lvcFriendshipExpName.IsEditable = false;
             this.lvcFriendshipExpName.Text = "Name";
             // 
             // lvcFriendshipExpID
             // 
-            this.lvcFriendshipExpID.AspectName = "PresetID";
+            this.lvcFriendshipExpID.AspectName = "ID";
             this.lvcFriendshipExpID.AspectToStringFormat = "{0:X}";
             this.lvcFriendshipExpID.IsEditable = false;
             this.lvcFriendshipExpID.Text = "Hex ID";
             // 
             // lvcFriendshipExpAddress
             // 
-            this.lvcFriendshipExpAddress.AspectName = "PresetAddress";
+            this.lvcFriendshipExpAddress.AspectName = "Address";
             this.lvcFriendshipExpAddress.AspectToStringFormat = "{0:X}";
             this.lvcFriendshipExpAddress.IsEditable = false;
             this.lvcFriendshipExpAddress.Text = "Address";
@@ -601,20 +601,20 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcSupportTypeName
             // 
-            this.lvcSupportTypeName.AspectName = "SpellName";
+            this.lvcSupportTypeName.AspectName = "Name";
             this.lvcSupportTypeName.IsEditable = false;
             this.lvcSupportTypeName.Text = "Name";
             // 
             // lvcSupportTypeID
             // 
-            this.lvcSupportTypeID.AspectName = "SpellID";
+            this.lvcSupportTypeID.AspectName = "ID";
             this.lvcSupportTypeID.AspectToStringFormat = "{0:X}";
             this.lvcSupportTypeID.IsEditable = false;
             this.lvcSupportTypeID.Text = "Hex ID";
             // 
             // lvcSupportTypeAddress
             // 
-            this.lvcSupportTypeAddress.AspectName = "SpellAddress";
+            this.lvcSupportTypeAddress.AspectName = "Address";
             this.lvcSupportTypeAddress.AspectToStringFormat = "{0:X}";
             this.lvcSupportTypeAddress.IsEditable = false;
             this.lvcSupportTypeAddress.Text = "Address";
@@ -683,21 +683,21 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcSupportStatsName
             // 
-            this.lvcSupportStatsName.AspectName = "StatName";
+            this.lvcSupportStatsName.AspectName = "Name";
             this.lvcSupportStatsName.IsEditable = false;
             this.lvcSupportStatsName.Text = "Name";
             this.lvcSupportStatsName.Width = 160;
             // 
             // lvcSupportStatsID
             // 
-            this.lvcSupportStatsID.AspectName = "StatID";
+            this.lvcSupportStatsID.AspectName = "ID";
             this.lvcSupportStatsID.AspectToStringFormat = "{0:X}";
             this.lvcSupportStatsID.IsEditable = false;
             this.lvcSupportStatsID.Text = "Hex ID";
             // 
             // lvcSupportStatsAddress
             // 
-            this.lvcSupportStatsAddress.AspectName = "StatAddress";
+            this.lvcSupportStatsAddress.AspectName = "Address";
             this.lvcSupportStatsAddress.AspectToStringFormat = "{0:X}";
             this.lvcSupportStatsAddress.IsEditable = false;
             this.lvcSupportStatsAddress.Text = "Address";
@@ -772,21 +772,21 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcSoulmateName
             // 
-            this.lvcSoulmateName.AspectName = "SoulmateName";
+            this.lvcSoulmateName.AspectName = "Name";
             this.lvcSoulmateName.IsEditable = false;
             this.lvcSoulmateName.Text = "Name";
             this.lvcSoulmateName.Width = 150;
             // 
             // lvcSoulmateID
             // 
-            this.lvcSoulmateID.AspectName = "SoulmateID";
+            this.lvcSoulmateID.AspectName = "ID";
             this.lvcSoulmateID.AspectToStringFormat = "{0:X}";
             this.lvcSoulmateID.IsEditable = false;
             this.lvcSoulmateID.Text = "Hex ID";
             // 
             // lvcSoulmateAddress
             // 
-            this.lvcSoulmateAddress.AspectName = "SoulmateAddress";
+            this.lvcSoulmateAddress.AspectName = "Address";
             this.lvcSoulmateAddress.AspectToStringFormat = "{0:X}";
             this.lvcSoulmateAddress.IsEditable = false;
             this.lvcSoulmateAddress.Text = "Address";
@@ -841,20 +841,20 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcSoulmateChanceFailName
             // 
-            this.lvcSoulmateChanceFailName.AspectName = "SoulfailName";
+            this.lvcSoulmateChanceFailName.AspectName = "Name";
             this.lvcSoulmateChanceFailName.IsEditable = false;
             this.lvcSoulmateChanceFailName.Text = "Name";
             // 
             // lvcSoulmateChanceFailID
             // 
-            this.lvcSoulmateChanceFailID.AspectName = "SoulfailID";
+            this.lvcSoulmateChanceFailID.AspectName = "ID";
             this.lvcSoulmateChanceFailID.AspectToStringFormat = "{0:X}";
             this.lvcSoulmateChanceFailID.IsEditable = false;
             this.lvcSoulmateChanceFailID.Text = "Hex ID";
             // 
             // lvcSoulmateChanceFailAddress
             // 
-            this.lvcSoulmateChanceFailAddress.AspectName = "SoulfailAddress";
+            this.lvcSoulmateChanceFailAddress.AspectName = "Address";
             this.lvcSoulmateChanceFailAddress.AspectToStringFormat = "{0:X}";
             this.lvcSoulmateChanceFailAddress.IsEditable = false;
             this.lvcSoulmateChanceFailAddress.Text = "Address";
@@ -923,14 +923,14 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcMagicBonusDefaultUser
             // 
-            this.lvcMagicBonusDefaultUser.AspectName = "MagicName";
+            this.lvcMagicBonusDefaultUser.AspectName = "Name";
             this.lvcMagicBonusDefaultUser.IsEditable = false;
             this.lvcMagicBonusDefaultUser.Text = "DefaultUser";
             this.lvcMagicBonusDefaultUser.Width = 70;
             // 
             // lvcMagicBonusID
             // 
-            this.lvcMagicBonusID.AspectName = "MagicID";
+            this.lvcMagicBonusID.AspectName = "ID";
             this.lvcMagicBonusID.AspectToStringFormat = "{0:X}";
             this.lvcMagicBonusID.IsEditable = false;
             this.lvcMagicBonusID.Text = "Hex ID";
@@ -938,7 +938,7 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcMagicBonusAddress
             // 
-            this.lvcMagicBonusAddress.AspectName = "MagicAddress";
+            this.lvcMagicBonusAddress.AspectName = "Address";
             this.lvcMagicBonusAddress.AspectToStringFormat = "{0:X}";
             this.lvcMagicBonusAddress.IsEditable = false;
             this.lvcMagicBonusAddress.Text = "Address";
@@ -1035,14 +1035,14 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcCritVantagesName
             // 
-            this.lvcCritVantagesName.AspectName = "CritModName";
+            this.lvcCritVantagesName.AspectName = "Name";
             this.lvcCritVantagesName.IsEditable = false;
             this.lvcCritVantagesName.Text = "Name";
             this.lvcCritVantagesName.Width = 80;
             // 
             // lvcCritVantagesAddress
             // 
-            this.lvcCritVantagesAddress.AspectName = "CritModAddress";
+            this.lvcCritVantagesAddress.AspectName = "Address";
             this.lvcCritVantagesAddress.AspectToStringFormat = "{0:X}";
             this.lvcCritVantagesAddress.IsEditable = false;
             this.lvcCritVantagesAddress.Text = "Address";
@@ -1113,14 +1113,14 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcCritCounterRateName
             // 
-            this.lvcCritCounterRateName.AspectName = "CritrateName";
+            this.lvcCritCounterRateName.AspectName = "Name";
             this.lvcCritCounterRateName.IsEditable = false;
             this.lvcCritCounterRateName.Text = "Name";
             this.lvcCritCounterRateName.Width = 120;
             // 
             // lvcCritCounterRateAddress
             // 
-            this.lvcCritCounterRateAddress.AspectName = "CritrateAddress";
+            this.lvcCritCounterRateAddress.AspectName = "Address";
             this.lvcCritCounterRateAddress.AspectToStringFormat = "{0:X}";
             this.lvcCritCounterRateAddress.IsEditable = false;
             this.lvcCritCounterRateAddress.Text = "Address";
@@ -1219,14 +1219,14 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcSpecialChanceSpecialProcRate
             // 
-            this.lvcSpecialChanceSpecialProcRate.AspectName = "SpecialChanceName";
+            this.lvcSpecialChanceSpecialProcRate.AspectName = "Name";
             this.lvcSpecialChanceSpecialProcRate.IsEditable = false;
             this.lvcSpecialChanceSpecialProcRate.Text = "Special Proc rate";
             this.lvcSpecialChanceSpecialProcRate.Width = 95;
             // 
             // lvcSpecialChanceAddress
             // 
-            this.lvcSpecialChanceAddress.AspectName = "SpecialChanceAddress";
+            this.lvcSpecialChanceAddress.AspectName = "Address";
             this.lvcSpecialChanceAddress.AspectToStringFormat = "{0:X}";
             this.lvcSpecialChanceAddress.IsEditable = false;
             this.lvcSpecialChanceAddress.Text = "Address";
@@ -1318,13 +1318,13 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcExpLimitName
             // 
-            this.lvcExpLimitName.AspectName = "ExpLimitName";
+            this.lvcExpLimitName.AspectName = "Name";
             this.lvcExpLimitName.IsEditable = false;
             this.lvcExpLimitName.Text = "Name";
             // 
             // lvcExpLimitAddress
             // 
-            this.lvcExpLimitAddress.AspectName = "ExpLimitAddress";
+            this.lvcExpLimitAddress.AspectName = "Address";
             this.lvcExpLimitAddress.AspectToStringFormat = "{0:X}";
             this.lvcExpLimitAddress.IsEditable = false;
             this.lvcExpLimitAddress.Text = "Address";
@@ -1385,13 +1385,13 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcHealExpName
             // 
-            this.lvcHealExpName.AspectName = "HealExpName";
+            this.lvcHealExpName.AspectName = "Name";
             this.lvcHealExpName.IsEditable = false;
             this.lvcHealExpName.Text = "Name";
             // 
             // lvcHealExpAddress
             // 
-            this.lvcHealExpAddress.AspectName = "HealExpAddress";
+            this.lvcHealExpAddress.AspectName = "Address";
             this.lvcHealExpAddress.AspectToStringFormat = "{0:X}";
             this.lvcHealExpAddress.IsEditable = false;
             this.lvcHealExpAddress.Text = "Address";
@@ -1455,14 +1455,14 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcWeaponSpellRankTable
             // 
-            this.lvcWeaponSpellRankTable.AspectName = "WeaponSpellRankName";
+            this.lvcWeaponSpellRankTable.AspectName = "Name";
             this.lvcWeaponSpellRankTable.IsEditable = false;
             this.lvcWeaponSpellRankTable.Text = "Table";
             this.lvcWeaponSpellRankTable.Width = 70;
             // 
             // lvcWeaponSpellRankID
             // 
-            this.lvcWeaponSpellRankID.AspectName = "WeaponSpellRankID";
+            this.lvcWeaponSpellRankID.AspectName = "ID";
             this.lvcWeaponSpellRankID.AspectToStringFormat = "{0:X}";
             this.lvcWeaponSpellRankID.IsEditable = false;
             this.lvcWeaponSpellRankID.Text = "Hex ID";
@@ -1470,7 +1470,7 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcWeaponSpellRankAddress
             // 
-            this.lvcWeaponSpellRankAddress.AspectName = "WeaponSpellRankAddress";
+            this.lvcWeaponSpellRankAddress.AspectName = "Address";
             this.lvcWeaponSpellRankAddress.AspectToStringFormat = "{0:X}";
             this.lvcWeaponSpellRankAddress.IsEditable = false;
             this.lvcWeaponSpellRankAddress.Text = "Address";
@@ -1572,14 +1572,14 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcStatusGroupsName
             // 
-            this.lvcStatusGroupsName.AspectName = "StatusEffectName";
+            this.lvcStatusGroupsName.AspectName = "Name";
             this.lvcStatusGroupsName.IsEditable = false;
             this.lvcStatusGroupsName.Text = "Status Group";
             this.lvcStatusGroupsName.Width = 140;
             // 
             // lvcStatusGroupsID
             // 
-            this.lvcStatusGroupsID.AspectName = "StatusEffectID";
+            this.lvcStatusGroupsID.AspectName = "ID";
             this.lvcStatusGroupsID.AspectToStringFormat = "{0:X}";
             this.lvcStatusGroupsID.IsEditable = false;
             this.lvcStatusGroupsID.Text = "StatusGroup ID";
@@ -1587,7 +1587,7 @@ namespace SF3.X013_Editor.Forms
             // 
             // lvcStatusGroupsAddress
             // 
-            this.lvcStatusGroupsAddress.AspectName = "StatusEffectAddress";
+            this.lvcStatusGroupsAddress.AspectName = "Address";
             this.lvcStatusGroupsAddress.AspectToStringFormat = "{0:X}";
             this.lvcStatusGroupsAddress.IsEditable = false;
             this.lvcStatusGroupsAddress.Text = "Address";

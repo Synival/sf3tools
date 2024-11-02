@@ -43,10 +43,10 @@ namespace SF3.Tables.X013 {
                     {
                         _ = xml.Read();
                         if (xml.HasAttributes) {
-                            var newRow = new StatusEffect(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                            var newRow = new StatusEffect(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1), 0);
                             _rows = _rows.ExpandedWith(newRow);
 
-                            if (newRow.StatusEffectID < 0 || newRow.StatusEffectID >= MaxSize)
+                            if (newRow.ID < 0 || newRow.ID >= MaxSize)
                                 throw new IndexOutOfRangeException();
                         }
                     }

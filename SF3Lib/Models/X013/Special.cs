@@ -3,9 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X013 {
-    public class Special {
-        private readonly IX013_FileEditor _fileEditor;
-
+    public class Special : IModel {
         private readonly int unknown1;
         private readonly int damageCalculation;
         private readonly int extraPow;
@@ -17,20 +15,24 @@ namespace SF3.Models.X013 {
         private int machh;
         private readonly int checkVersion2;
 
-        public Special(IX013_FileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
+        public Special(IX013_FileEditor editor, int id, string name, int address) {
+            Editor  = editor;
+            Name    = name;
+            ID      = id;
+            Address = address;
+            Size    = 0x04;
 
-            checkVersion2 = _fileEditor.GetByte(0x0000000A);
+            checkVersion2 = Editor.GetByte(0x0000000A);
 
-            if (Scenario == ScenarioType.Scenario1) {
+            if (editor.Scenario == ScenarioType.Scenario1) {
                 offset = 0x00007104; //scn1
                 if (checkVersion2 == 0x0A) //original jp
                     offset -= 0x0C;
             }
-            else if (Scenario == ScenarioType.Scenario2) {
+            else if (editor.Scenario == ScenarioType.Scenario2) {
                 offset = 0x00006fdc; //scn2
             }
-            else if (Scenario == ScenarioType.Scenario3) {
+            else if (editor.Scenario == ScenarioType.Scenario3) {
                 offset = 0x00006d18; //scn3
             }
             else {
@@ -41,10 +43,6 @@ namespace SF3.Models.X013 {
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
-
-            ID = id;
-            Name = text;
-
             //int start = 0x354c + (id * 24);
 
             var start = offset + (id * 4);
@@ -56,45 +54,47 @@ namespace SF3.Models.X013 {
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
-        public int ID { get; }
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
         public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+        public int Size { get; }
 
         [BulkCopy]
         public int Unknown1 {
-            get => _fileEditor.GetByte(unknown1);
-            set => _fileEditor.SetByte(unknown1, (byte) value);
+            get => Editor.GetByte(unknown1);
+            set => Editor.SetByte(unknown1, (byte) value);
         }
 
         [BulkCopy]
         public int DamageCalc {
-            get => _fileEditor.GetByte(damageCalculation);
-            set => _fileEditor.SetByte(damageCalculation, (byte) value);
+            get => Editor.GetByte(damageCalculation);
+            set => Editor.SetByte(damageCalculation, (byte) value);
         }
 
         [BulkCopy]
         public int ExtraPow {
-            get => _fileEditor.GetByte(extraPow);
-            set => _fileEditor.SetByte(extraPow, (byte) value);
+            get => Editor.GetByte(extraPow);
+            set => Editor.SetByte(extraPow, (byte) value);
         }
 
         [BulkCopy]
         public int Pow {
-            get => _fileEditor.GetByte(pow);
-            set => _fileEditor.SetByte(pow, (byte) value);
+            get => Editor.GetByte(pow);
+            set => Editor.SetByte(pow, (byte) value);
         }
 
         /*public int ranResult0
         {
             get
             {
-                return _fileEditor.GetByte(damageCalculation);
+                return Editor.GetByte(damageCalculation);
             }
             //set
             //{
-            //    _fileEditor.SetByte(pow, (byte)value);
+            //    Editor.SetByte(pow, (byte)value);
             //}
         }*/
 
@@ -104,10 +104,10 @@ namespace SF3.Models.X013 {
                 //y = damageCalculation;
                 //ran is 1
 
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
                     ;
-                    r1 -= _fileEditor.GetByte(damageCalculation);
+                    r1 -= Editor.GetByte(damageCalculation);
                     ;
                     r3 = 0; //random number
 
@@ -133,22 +133,22 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 += _fileEditor.GetByte(damageCalculation);
+                    r1 += Editor.GetByte(damageCalculation);
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
 
         public int ranResult1 {
             get {
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
                     ;
-                    r1 -= _fileEditor.GetByte(damageCalculation);
+                    r1 -= Editor.GetByte(damageCalculation);
                     ;
                     r3 = 1; //random number
 
@@ -160,22 +160,22 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 += _fileEditor.GetByte(damageCalculation);
+                    r1 += Editor.GetByte(damageCalculation);
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
 
         public int ranResult2 {
             get {
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
                     ;
-                    r1 -= _fileEditor.GetByte(damageCalculation);
+                    r1 -= Editor.GetByte(damageCalculation);
                     ;
                     r3 = 2; //random number
 
@@ -187,22 +187,22 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 += _fileEditor.GetByte(damageCalculation);
+                    r1 += Editor.GetByte(damageCalculation);
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
 
         public int ranResult3 {
             get {
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
                     ;
-                    r1 -= _fileEditor.GetByte(damageCalculation);
+                    r1 -= Editor.GetByte(damageCalculation);
                     ;
                     r3 = 3; //random number
 
@@ -214,22 +214,22 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 += _fileEditor.GetByte(damageCalculation);
+                    r1 += Editor.GetByte(damageCalculation);
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
 
         public int ranResult4 {
             get {
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
                     ;
-                    r1 -= _fileEditor.GetByte(damageCalculation);
+                    r1 -= Editor.GetByte(damageCalculation);
                     ;
                     r3 = 4; //random number
 
@@ -241,22 +241,22 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 += _fileEditor.GetByte(damageCalculation);
+                    r1 += Editor.GetByte(damageCalculation);
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
 
         public int ranResult5 {
             get {
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
                     ;
-                    r1 -= _fileEditor.GetByte(damageCalculation);
+                    r1 -= Editor.GetByte(damageCalculation);
                     ;
                     r3 = 5; //random number
 
@@ -268,22 +268,22 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 += _fileEditor.GetByte(damageCalculation);
+                    r1 += Editor.GetByte(damageCalculation);
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
 
         public int ranResult6 {
             get {
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
                     ;
-                    r1 -= _fileEditor.GetByte(damageCalculation);
+                    r1 -= Editor.GetByte(damageCalculation);
                     ;
                     r3 = 6; //random number
 
@@ -295,22 +295,22 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 += _fileEditor.GetByte(damageCalculation);
+                    r1 += Editor.GetByte(damageCalculation);
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
 
         public int ranResult7 {
             get {
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
                     ;
-                    r1 -= _fileEditor.GetByte(damageCalculation);
+                    r1 -= Editor.GetByte(damageCalculation);
                     ;
                     r3 = 7; //random number
 
@@ -322,12 +322,12 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 += _fileEditor.GetByte(damageCalculation);
+                    r1 += Editor.GetByte(damageCalculation);
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
@@ -337,10 +337,10 @@ namespace SF3.Models.X013 {
                 //x = extraPow;
                 //y = damageCalculation;
                 //ran is 1
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
-                    r2 = _fileEditor.GetByte(pow);
-                    r2 = _fileEditor.GetByte(extraPow) - r2;
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
+                    r2 = Editor.GetByte(pow);
+                    r2 = Editor.GetByte(extraPow) - r2;
                     r3 = 8; //random number
                     r1 = r3;
                     r1 -= 7;
@@ -358,22 +358,22 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 = _fileEditor.GetByte(extraPow) + r1;
+                    r1 = Editor.GetByte(extraPow) + r1;
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
 
         public int ranResult9 {
             get {
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
-                    r2 = _fileEditor.GetByte(pow);
-                    r2 = _fileEditor.GetByte(extraPow) - r2;
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
+                    r2 = Editor.GetByte(pow);
+                    r2 = Editor.GetByte(extraPow) - r2;
                     r3 = 9; //random number
                     r1 = r3;
                     r1 -= 7;
@@ -387,22 +387,22 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 = _fileEditor.GetByte(extraPow) + r1;
+                    r1 = Editor.GetByte(extraPow) + r1;
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
 
         public int ranResult10 {
             get {
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
-                    r2 = _fileEditor.GetByte(pow);
-                    r2 = _fileEditor.GetByte(extraPow) - r2;
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
+                    r2 = Editor.GetByte(pow);
+                    r2 = Editor.GetByte(extraPow) - r2;
                     r3 = 10; //random number
                     r1 = r3;
                     r1 -= 7;
@@ -416,22 +416,22 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 = _fileEditor.GetByte(extraPow) + r1;
+                    r1 = Editor.GetByte(extraPow) + r1;
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
 
         public int ranResult11 {
             get {
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
-                    r2 = _fileEditor.GetByte(pow);
-                    r2 = _fileEditor.GetByte(extraPow) - r2;
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
+                    r2 = Editor.GetByte(pow);
+                    r2 = Editor.GetByte(extraPow) - r2;
                     r3 = 11; //random number
                     r1 = r3;
                     r1 -= 7;
@@ -445,22 +445,22 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 = _fileEditor.GetByte(extraPow) + r1;
+                    r1 = Editor.GetByte(extraPow) + r1;
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
 
         public int ranResult12 {
             get {
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
-                    r2 = _fileEditor.GetByte(pow);
-                    r2 = _fileEditor.GetByte(extraPow) - r2;
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
+                    r2 = Editor.GetByte(pow);
+                    r2 = Editor.GetByte(extraPow) - r2;
                     r3 = 12; //random number
                     r1 = r3;
                     r1 -= 7;
@@ -474,22 +474,22 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 = _fileEditor.GetByte(extraPow) + r1;
+                    r1 = Editor.GetByte(extraPow) + r1;
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
 
         public int ranResult13 {
             get {
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
-                    r2 = _fileEditor.GetByte(pow);
-                    r2 = _fileEditor.GetByte(extraPow) - r2;
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
+                    r2 = Editor.GetByte(pow);
+                    r2 = Editor.GetByte(extraPow) - r2;
                     r3 = 13; //random number
                     r1 = r3;
                     r1 -= 7;
@@ -503,22 +503,22 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 = _fileEditor.GetByte(extraPow) + r1;
+                    r1 = Editor.GetByte(extraPow) + r1;
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
 
         public int ranResult14 {
             get {
-                if (_fileEditor.GetByte(damageCalculation) != 0x64) {
-                    r1 = _fileEditor.GetByte(extraPow);
-                    r2 = _fileEditor.GetByte(pow);
-                    r2 = _fileEditor.GetByte(extraPow) - r2;
+                if (Editor.GetByte(damageCalculation) != 0x64) {
+                    r1 = Editor.GetByte(extraPow);
+                    r2 = Editor.GetByte(pow);
+                    r2 = Editor.GetByte(extraPow) - r2;
                     r3 = 14; //random number
                     r1 = r3;
                     r1 -= 7;
@@ -532,16 +532,14 @@ namespace SF3.Models.X013 {
                     r2 <<= 2;
                     r2 -= r2;
                     r1 -= r2;
-                    r1 = _fileEditor.GetByte(extraPow) + r1;
+                    r1 = Editor.GetByte(extraPow) + r1;
 
                     return r1;
                 }
                 else {
-                    return _fileEditor.GetByte(pow);
+                    return Editor.GetByte(pow);
                 }
             }
         }
-
-        public int Address { get; }
     }
 }
