@@ -9,18 +9,12 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables {
     public class WarpTable : Table<Warp> {
-        public override int? MaxSize => 1000;
-
         public WarpTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
             ResourceFile = fileEditor.Scenario == ScenarioType.Scenario1
                 ? ResourceFileForScenario(ScenarioType.Scenario1, "Warps.xml")
                 : null;
             Address = address;
         }
-
-        public override int Address { get; }
-
-        public override string ResourceFile { get; }
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
@@ -42,5 +36,9 @@ namespace SF3.Tables {
             }
             return true;
         }
+
+        public override string ResourceFile { get; }
+        public override int Address { get; }
+        public override int? MaxSize => 1000;
     }
 }
