@@ -41,7 +41,7 @@
     <item value="0x26" name="Phoenix" />
     <item value="0x27" name="Wendigo" />
     <item value="0x28" name="Tiamat" />
-    <item value="0x29" name="Thantanos" />
+    <item value="0x29" name="Thanatos" />
     <item value="0x2A" name="RageIncreaseAttack" />
     <item value="0x2B" name="Meat" />
     <item value="0x2C" name="Elbesem Orb" />
@@ -62,8 +62,8 @@
     <item value="0x3B" name="Fakecharm?" />
     <item value="0x3C" name="CoreMagic?" />
     <item value="0x3D" name="WalcurayAttack" />
-    <item value="0x3E" name="Proserpine" />
-    <item value="0x3F" name="DemonKing" />
+    <item value="0x3E" name="Proserpina" />
+    <item value="0x3F" name="Demon King" />
     <item value="0x40" name="Summon Penko" />
     <item value="0x41" name="Summon Penn" />
     <item value="0x42" name="Cannon" />
@@ -71,7 +71,7 @@
     <item value="0x44" name="Blizzard" />
     <item value="0x45" name="DeadlyIcestorm" />
     <item value="0x46" name="Blessing" />
-    <item value="0x47" name="ChaosGate" />
+    <item value="0x47" name="Chaos Gate" />
     <item value="0x48" name="WalcyrayLaser" />
     <item value="0x49" name="HealhpORDamageEnemy" />
     <item value="0x4A" name="???" />

@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
     <item value="0x00" name="Nothing" />
-    <item value="0x01" name="Wendego" />
+    <item value="0x01" name="Wendigo" />
     <item value="0x02" name="Aura" />
-    <item value="0x03" name="Thantanos" />
+    <item value="0x03" name="Thanatos" />
     <item value="0x04" name="Dispel1" />
     <item value="0x05" name="Freeze3" />
     <item value="0x06" name="Confuse2" />
@@ -19,7 +19,7 @@
     <item value="0x10" name="Resist2" />
     <item value="0x11" name="Tornado4" />
     <item value="0x12" name="Zephyrus2" />
-    <item value="0x13" name="Pheonix2" />
+    <item value="0x13" name="Phoenix2" />
     <item value="0x14" name="Tiamat2" />
     <item value="0x15" name="Thor2" />
     <item value="0x16" name="Golem2" />
