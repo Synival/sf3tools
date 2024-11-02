@@ -51,8 +51,11 @@ namespace SF3.Editor.Extensions {
                     var property = obj.GetType().GetProperty(lvc.AspectName);
                     if (property != null) {
                         var attr = property.GetCustomAttribute<NameGetterAttribute>();
-                        if (attr != null)
-                            converter = v => obj.GetPropertyValueName(property, nameContext) ?? string.Format(lvc.AspectToStringFormat, lvc.GetAspectByName(obj));
+                        if (attr != null) {
+                            var value = property.GetValue(obj);
+                            if (nameContext.CanGetName(obj, property, value, attr.Parameters))
+                                converter = v => obj.GetPropertyValueName(property, nameContext, value) ?? string.Format(lvc.AspectToStringFormat, lvc.GetAspectByName(obj));
+                        }
                     }
                 }
 

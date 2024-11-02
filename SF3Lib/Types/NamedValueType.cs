@@ -17,8 +17,10 @@
         Sex,
         Special,
         Spell,
+        SpellIndex,
         SpellTarget,
         StatType,
+        StatUpValueType,
         WeaponType,
     };
 }
