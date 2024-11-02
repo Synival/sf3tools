@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X1 {
-    public class CustomMovement : IModel {
+    public class CustomMovement : Model {
         private readonly int unknown00;
         private readonly int xPos1;
         private readonly int zPos1;
@@ -15,12 +15,8 @@ namespace SF3.Models.X1 {
         private readonly int zPos4;
         private readonly int ending;
 
-        public CustomMovement(IX1_FileEditor editor, int id, string name) {
-            Editor = editor;
-            Name   = name;
-            ID     = id;
-            Size   = 0x16;
-
+        public CustomMovement(IX1_FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x16) {
             int offset = 0;
             int sub;
 
@@ -222,14 +218,6 @@ namespace SF3.Models.X1 {
             Address = offset + (id * 0x16);
             //address = 0x0354c + (id * 0x18);
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int CustomMovementUnknown {

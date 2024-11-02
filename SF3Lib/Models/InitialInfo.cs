@@ -5,7 +5,7 @@ using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Models {
-    public class InitialInfo : IModel {
+    public class InitialInfo : Model {
         //starting equipment table
         private readonly int character;
         private readonly int characterClass;
@@ -26,13 +26,8 @@ namespace SF3.Models {
         private readonly int weapon4Type; // for exp
         private readonly int weapon4Exp; //2 bytes
 
-        public InitialInfo(IByteEditor fileEditor, int id, string name, int address) {
-            Editor   = fileEditor;
-            ID       = id;
-            Name     = name;
-            Address  = address;
-            Size     = 0x20;
-
+        public InitialInfo(IByteEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x20) {
             character      = Address + 0x00;
             characterClass = Address + 0x01;
             level          = Address + 0x02;
@@ -52,14 +47,6 @@ namespace SF3.Models {
             weapon4Type    = Address + 0x1c; // 2 bytes
             weapon4Exp     = Address + 0x1e; // 2 bytes
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int CharacterE {

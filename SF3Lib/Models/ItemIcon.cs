@@ -2,35 +2,14 @@ using CommonLib.Attributes;
 using SF3.FileEditors;
 
 namespace SF3.Models {
-    public class ItemIcon : IModel {
-        //ITEMS
+    public class ItemIcon : Model {
         private readonly int theItemIcon;
 
-        public ItemIcon(IByteEditor editor, int id, string name, int address, bool has16BitIconAddr) {
-            Editor    = editor;
-            ID        = id;
-            Name      = name;
-            Address   = address;
-
+        public ItemIcon(IByteEditor editor, int id, string name, int address, bool has16BitIconAddr)
+        : base(editor, id, name, address, has16BitIconAddr ? 0x02 : 0x04) {
             Has16BitIconAddr = has16BitIconAddr;
-
-            if (Has16BitIconAddr) {
-                Size = 2;
-                theItemIcon = Address; // 2 bytes
-            }
-            else {
-                Size = 4;
-                theItemIcon = Address; // 4 bytes
-            }
+            theItemIcon = Address; // 2 or 4 bytes
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         public bool Has16BitIconAddr { get; }
 

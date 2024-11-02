@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X1 {
-    public class TileMovement : IModel {
+    public class TileMovement : Model {
         private readonly int noEntry;
         private readonly int unknown01;
         private readonly int grassland;
@@ -22,12 +22,8 @@ namespace SF3.Models.X1 {
         private readonly int unknown0e;
         private readonly int unknown0f;
 
-        public TileMovement(IX1_FileEditor editor, int id, string name) {
-            Editor = editor;
-            Name   = name;
-            ID     = id;
-            Size   = 0x10;
-
+        public TileMovement(IX1_FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x10) {
             int offset = 0;
             int sub;
 
@@ -167,14 +163,6 @@ namespace SF3.Models.X1 {
             Address = offset + (id * 0x10);
             //address = 0x0354c + (id * 0x18);
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int TileNoEntry {

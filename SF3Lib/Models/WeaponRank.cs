@@ -3,32 +3,19 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models {
-    public class WeaponRank : IModel {
+    public class WeaponRank : Model {
         private readonly int skill0;
         private readonly int skill1;
         private readonly int skill2;
         private readonly int skill3;
 
-        public WeaponRank(ISF3FileEditor editor, int id, string name, int address) {
-            Editor  = editor;
-            Name    = name;
-            ID      = id;
-            Address = address;
-            Size    = 0x04;
-
+        public WeaponRank(ISF3FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x04) {
             skill0 = Address;     // 1 byte
             skill1 = Address + 1; // 1 byte
             skill2 = Address + 2; // 1 byte
             skill3 = Address + 3; // 1 byte
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int Skill0 {

@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X1 {
-    public class SpawnZone : IModel {
+    public class SpawnZone : Model {
         private readonly int unknown00;
         private readonly int unknown02;
         private readonly int unknown04;
@@ -14,12 +14,8 @@ namespace SF3.Models.X1 {
         private readonly int unknown0E;
         private readonly int unknown10;
 
-        public SpawnZone(IX1_FileEditor editor, int id, string name) {
-            Editor = editor;
-            Name   = name;
-            ID     = id;
-            Size   = 0x12;
-
+        public SpawnZone(IX1_FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x12) {
             int offset = 0;
             int sub;
 
@@ -198,14 +194,6 @@ namespace SF3.Models.X1 {
             Address = offset + (id * 0x12);
             //address = 0x0354c + (id * 0x18);
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int UnknownAI00 {

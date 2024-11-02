@@ -3,6 +3,7 @@ using System.IO;
 using CommonLib.Extensions;
 using SF3.FileEditors;
 using SF3.Models.X013;
+using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables.X013 {
@@ -34,7 +35,7 @@ namespace SF3.Tables.X013 {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newRow = new MagicBonus(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1), 0);
+                        var newRow = new MagicBonus(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1), 0, Scenario == ScenarioType.Scenario1);
                         _rows = _rows.ExpandedWith(newRow);
                         if (newRow.ID < 0 || newRow.ID >= MaxSize)
                             throw new IndexOutOfRangeException();

@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X013 {
-    public class SupportStats : IModel {
+    public class SupportStats : Model {
         private readonly int sLvlStat1;
         private readonly int sLvlStat2;
         private readonly int sLvlStat3;
@@ -11,13 +11,8 @@ namespace SF3.Models.X013 {
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public SupportStats(IX013_FileEditor editor, int id, string name, int address) {
-            Editor  = editor;
-            Name    = name;
-            ID      = id;
-            Address = address;
-            Size    = 0x04;
-
+        public SupportStats(IX013_FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x04) {
             checkVersion2 = Editor.GetByte(0x0000000A);
 
             if (editor.Scenario == ScenarioType.Scenario1) {
@@ -50,14 +45,6 @@ namespace SF3.Models.X013 {
             Address = offset + (id * 0x4);
             //address = 0x0354c + (id * 0x18);
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int SLvlStat1 {

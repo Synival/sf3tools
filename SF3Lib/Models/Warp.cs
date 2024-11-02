@@ -4,32 +4,19 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models {
-    public class Warp : IModel {
+    public class Warp : Model {
         private readonly int unknown1;
         private readonly int unknown2;
         private readonly int type;
         private readonly int map;
 
-        public Warp(ISF3FileEditor editor, int id, string name, int address) {
-            Editor  = editor;
-            Name    = name;
-            ID      = id;
-            Address = address;
-            Size    = 0x04;
-
+        public Warp(ISF3FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x04) {
             unknown1 = Address;
             unknown2 = Address + 1;
             type     = Address + 2;
             map      = Address + 3;
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int WarpUnknown1 {

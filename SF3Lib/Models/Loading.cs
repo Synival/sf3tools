@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models {
-    public class Loading : IModel {
+    public class Loading : Model {
         private readonly int locationID;
         private readonly int x1;
         private readonly int chp;
@@ -13,13 +13,8 @@ namespace SF3.Models {
         private readonly int unknown;
         private readonly int chr;
 
-        public Loading(ISF3FileEditor editor, int id, string name, int address) {
-            Editor  = editor;
-            Name    = name;
-            ID      = id;
-            Address = address;
-            Size    = 0x10;
-
+        public Loading(ISF3FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x10) {
             locationID = Address;        // 2 bytes
             x1         = Address + 0x02; // 2 bytes
             chp        = Address + 0x04; // 2 bytes
@@ -29,14 +24,6 @@ namespace SF3.Models {
             unknown    = Address + 0x0c; // 2 bytes
             chr        = Address + 0x0e; // 2 bytes
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int LocationID {

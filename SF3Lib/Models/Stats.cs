@@ -8,7 +8,7 @@ using SF3.Statistics;
 using SF3.Types;
 
 namespace SF3.Models {
-    public class Stats : IModel {
+    public class Stats : Model {
         /// <summary>
         /// When enabled, GetAverageStatGrowthPerLevelAsPercent() will show the "growthValue" in its output
         /// </summary>
@@ -143,13 +143,8 @@ namespace SF3.Models {
         private readonly int accessoryEquipable3;
         private readonly int accessoryEquipable4;
 
-        public Stats(IByteEditor editor, int id, string name, int address) {
-            Editor   = editor;
-            ID       = id;
-            Address  = address;
-            Name     = name;
-            Size     = 0x7B;
-
+        public Stats(IByteEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x7B) {
             character           = Address + 0x00;
             characterClass      = Address + 0x01;
             hpPromote           = Address + 0x02;
@@ -391,14 +386,6 @@ namespace SF3.Models {
             return (DebugGrowthValues ? string.Format("{0:x}", growthValue) + " || " : "") +
                     GrowthStats.GetAverageStatGrowthPerLevelAsPercent(growthValue);
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int CharacterID {

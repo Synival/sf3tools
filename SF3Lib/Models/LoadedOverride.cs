@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models {
-    public class LoadedOverride : IModel {
+    public class LoadedOverride : Model {
         private readonly int mapID;
         private readonly int synMusic;
         private readonly int medMusic;
@@ -18,13 +18,8 @@ namespace SF3.Models {
         private readonly int julChr;
         private readonly int extraChr;
 
-        public LoadedOverride(ISF3FileEditor editor, int id, string name, int address) {
-            Editor  = editor;
-            Name    = name;
-            ID      = id;
-            Address = address;
-            Size    = 0x28;
-
+        public LoadedOverride(ISF3FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x28) {
             mapID      = Address;        // 2 bytes
             synMusic   = Address + 0x02; // 1 byte
             medMusic   = Address + 0x03; // 1 byte
@@ -39,14 +34,6 @@ namespace SF3.Models {
             julChr     = Address + 0x1e; // 4 bytes chr julian?
             extraChr   = Address + 0x22; // 4 bytes chr extra?
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int MOMapID {

@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models {
-    public class Spell : IModel {
+    public class Spell : Model {
         private readonly int targetType;
         private readonly int damageType;
         private readonly int element;
@@ -25,13 +25,8 @@ namespace SF3.Models {
         private readonly int lv4Cost;
         private readonly int lv4Damage;
 
-        public Spell(ISF3FileEditor editor, int id, string name, int address) {
-            Editor  = editor;
-            Name    = name;
-            ID      = id;
-            Address = address;
-            Size    = 0x14;
-
+        public Spell(ISF3FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x14) {
             targetType  = Address;
             damageType  = Address + 1;
             element     = Address + 2;
@@ -53,14 +48,6 @@ namespace SF3.Models {
             lv4Cost     = Address + 18;
             lv4Damage   = Address + 19;
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         [NameGetter(NamedValueType.SpellTarget)]

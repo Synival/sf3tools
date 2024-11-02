@@ -3,34 +3,21 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models {
-    public class Preset : IModel {
+    public class Preset : Model {
         private readonly int spell;
         private readonly int weaponLv0;
         private readonly int weaponLv1;
         private readonly int weaponLv2;
         private readonly int weaponLv3;
 
-        public Preset(ISF3FileEditor editor, int id, string name, int address) {
-            Editor  = editor;
-            Name    = name;
-            ID      = id;
-            Address = address;
-            Size    = 0x05;
-
+        public Preset(ISF3FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x05) {
             spell     = Address;     // 2 bytes
             weaponLv0 = Address + 1; // 1 byte
             weaponLv1 = Address + 2; // 1 byte
             weaponLv2 = Address + 3; // 1 byte
             weaponLv3 = Address + 4; // 1 byte
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]

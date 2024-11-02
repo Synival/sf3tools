@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X1 {
-    public class Treasure : IModel {
+    public class Treasure : Model {
         private readonly int searched;
         private readonly int eventNumber;
         private readonly int flagUsed;
@@ -11,12 +11,8 @@ namespace SF3.Models.X1 {
         private readonly int eventType;
         private readonly int itemID;
 
-        public Treasure(IX1_FileEditor editor, int id, string name) {
-            Editor = editor;
-            Name   = name;
-            ID     = id;
-            Size   = 0x0c;
-
+        public Treasure(IX1_FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x0C) {
             int offset = 0;
             int sub;
 
@@ -71,14 +67,6 @@ namespace SF3.Models.X1 {
             TreasureAddress = offset + (id * 0x0c);
             //address = 0x0354c + (id * 0x18);
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         public string MPDTieIn
             => Editor.GetWord(eventNumber) <= 0x0f

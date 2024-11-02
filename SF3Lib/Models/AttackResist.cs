@@ -3,28 +3,15 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models {
-    public class AttackResist : IModel {
+    public class AttackResist : Model {
         private readonly int attack;
         private readonly int resist;
 
-        public AttackResist(ISF3FileEditor editor, int id, string name, int address) {
-            Editor  = editor;
-            Name    = name;
-            ID      = id;
-            Address = address;
-            Size    = 0xD3;
-
+        public AttackResist(ISF3FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0xD3) {
             attack = Address;        // 1 byte
             resist = Address + 0xd2; // 1 byte
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int Attack {

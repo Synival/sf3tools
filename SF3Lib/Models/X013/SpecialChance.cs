@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X013 {
-    public class SpecialChance : IModel {
+    public class SpecialChance : Model {
         private readonly int twoSpecials2;
         private readonly int threeSpecials3;
         private readonly int threeSpecials2;
@@ -13,12 +13,8 @@ namespace SF3.Models.X013 {
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public SpecialChance(IX013_FileEditor editor, int id, string name, int address) {
-            Editor  = editor;
-            Name    = name;
-            ID      = id;
-            Address = address;
-
+        public SpecialChance(IX013_FileEditor editor, int id, string name, int address, bool hasLargeTable)
+        : base(editor, id, name, address, hasLargeTable ? 0x4a : 0x3a) {
             checkVersion2 = Editor.GetByte(0x0000000A);
 
             if (editor.Scenario == ScenarioType.Scenario1) {
@@ -52,7 +48,6 @@ namespace SF3.Models.X013 {
                 fourSpecials2 = start + 0x49; //1 byte
 
                 Address = offset + (id * 0x4a);
-                Size = 0x4a;
             }
             else if (editor.Scenario == ScenarioType.Scenario2) {
                 var start = offset + (id * 0x4a);
@@ -64,7 +59,6 @@ namespace SF3.Models.X013 {
                 fourSpecials2 = start + 0x49; //1 byte
 
                 Address = offset + (id * 0x4a);
-                Size = 0x4a;
             }
             else if (editor.Scenario == ScenarioType.Scenario3) {
                 var start = offset + (id * 0x3a);
@@ -76,7 +70,6 @@ namespace SF3.Models.X013 {
                 fourSpecials2 = start + 0x39; //1 byte
 
                 Address = offset + (id * 0x3a);
-                Size = 0x3a;
             }
             else {
                 var start = offset + (id * 0x3a);
@@ -88,19 +81,10 @@ namespace SF3.Models.X013 {
                 fourSpecials2 = start + 0x39; //1 byte
 
                 Address = offset + (id * 0x3a);
-                Size = 0x3a;
             }
 
             //address = 0x0354c + (id * 0x18);
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int TwoSpecials2 {

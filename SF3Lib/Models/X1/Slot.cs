@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X1 {
-    public class Slot : IModel {
+    public class Slot : Model {
         private readonly int unknown1;
         private readonly int unknown2;
         private readonly int enemyID;
@@ -51,12 +51,8 @@ namespace SF3.Models.X1 {
         private readonly int unknown39;
         private readonly int unknown40;
 
-        public Slot(IX1_FileEditor editor, int id, string name) {
-            Editor = editor;
-            Name   = name;
-            ID     = id;
-            Size   = 0x34;
-
+        public Slot(IX1_FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x34) {
             int offset = 0;
             int sub;
 
@@ -264,14 +260,6 @@ namespace SF3.Models.X1 {
             Address = offset + (id * 0x34);
             //address = 0x0354c + (id * 0x18);
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int Unknown1 {

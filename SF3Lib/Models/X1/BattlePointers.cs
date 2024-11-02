@@ -3,15 +3,11 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X1 {
-    public class BattlePointers : IModel {
+    public class BattlePointers : Model {
         private readonly int battlePointer;
 
-        public BattlePointers(IX1_FileEditor editor, int id, string name) {
-            Editor = editor;
-            Name   = name;
-            ID     = id;
-            Size   = 0x04;
-
+        public BattlePointers(IX1_FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x04) {
             int offset = 0;
             int sub;
 
@@ -106,14 +102,6 @@ namespace SF3.Models.X1 {
             Address = offset + (id * 0x4);
             //address = 0x0354c + (id * 0x18);
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int BattlePointer {

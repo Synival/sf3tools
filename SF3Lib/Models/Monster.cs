@@ -5,7 +5,7 @@ using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Models {
-    public class Monster : IModel {
+    public class Monster : Model {
         private readonly int maxHP;
         private readonly int maxMP;
         private readonly int level;
@@ -74,13 +74,8 @@ namespace SF3.Models {
         private readonly int unknown19;
         private readonly int unknown20;
 
-        public Monster(IByteEditor editor, int id, string name, int address) {
-            Editor   = editor;
-            ID       = id;
-            Name     = name;
-            Address  = address;
-            Size     = 0x4C;
-
+        public Monster(IByteEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x4C) {
             maxHP             = Address; // 2 bytes
             maxMP             = Address + 2;
             level             = Address + 3;
@@ -150,14 +145,6 @@ namespace SF3.Models {
             unknown20         = Address + 75;
             SpriteID          = id + 200;
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         public int SpriteID { get; }
 

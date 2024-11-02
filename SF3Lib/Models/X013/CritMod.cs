@@ -3,13 +3,14 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X013 {
-    public class CritMod : IModel {
+    public class CritMod : Model {
         private readonly int advantage;
         private readonly int disadvantage;
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public CritMod(IX013_FileEditor editor, int id, string name, int address) {
+        public CritMod(IX013_FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x12) {
             Editor  = editor;
             Name    = name;
             ID      = id;
@@ -46,14 +47,6 @@ namespace SF3.Models.X013 {
             CritModAddress = offset + (id * 0x12);
             //address = 0x0354c + (id * 0x18);
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int Advantage {

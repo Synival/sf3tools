@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X1 {
-    public class Enter : IModel {
+    public class Enter : Model {
         private readonly int enterID; //2 byte
         private readonly int unknown2; //2 byte
         private readonly int xPos; //2 byte
@@ -14,12 +14,8 @@ namespace SF3.Models.X1 {
         private readonly int unknownE; //2 byte
                                        //private int npcOffset;
 
-        public Enter(IX1_FileEditor editor, int id, string name) {
-            Editor = editor;
-            Name   = name;
-            ID     = id;
-            Size   = 0x10;
-
+        public Enter(IX1_FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x10) {
             int offset = 0;
             int sub;
 
@@ -78,14 +74,6 @@ namespace SF3.Models.X1 {
             Address = offset + (id * 0x10);
             //address = 0x0354c + (id * 0x18);
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int Entered {

@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models {
-    public class Item : IModel {
+    public class Item : Model {
         private readonly int PriceLocation;
         private readonly int WeaponTypeLocation;
         private readonly int EffectsEquipLocation;
@@ -28,13 +28,8 @@ namespace SF3.Models {
         private readonly int SpellOnUseLocation;
         private readonly int SpellLvOnUseLocation;
 
-        public Item(ISF3FileEditor editor, int id, string name, int address) {
-            Editor  = editor;
-            Name    = name;
-            ID      = id;
-            Address = address;
-            Size    = 0x18;
-
+        public Item(ISF3FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x18) {
             PriceLocation                = Address;     // 2 bytes. only thing that is 2 bytes
             WeaponTypeLocation           = Address + 2; // 1 byte
             EffectsEquipLocation         = Address + 3; // 1 byte
@@ -59,14 +54,6 @@ namespace SF3.Models {
             SpellOnUseLocation           = Address + 22;
             SpellLvOnUseLocation         = Address + 23;
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int Price {

@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X013 {
-    public class MagicBonus : IModel {
+    public class MagicBonus : Model {
         private readonly int earthBonus;
         private readonly int fireBonus;
         private readonly int iceBonus;
@@ -15,13 +15,9 @@ namespace SF3.Models.X013 {
         private readonly int offset;
         private readonly int checkVersion2;
 
-        public MagicBonus(IX013_FileEditor editor, int id, string name, int address) {
-            Editor  = editor;
-            Name    = name;
-            ID      = id;
-            Address = address;
-
-            Has32BitValues = editor.Scenario == ScenarioType.Scenario1;
+        public MagicBonus(IX013_FileEditor editor, int id, string name, int address, bool has32BitValues)
+        : base(editor, id, name, address, has32BitValues ? 0x20 : 0x08) {
+            Has32BitValues = has32BitValues;
 
             checkVersion2 = Editor.GetByte(0x0000000A);
 
@@ -59,7 +55,6 @@ namespace SF3.Models.X013 {
                 unknownBonus = start + 0x1C; //4 byte
 
                 Address = offset + (id * 0x20);
-                Size    = 0x20;
             }
             else {
                 var start = offset + (id * 8);
@@ -73,19 +68,10 @@ namespace SF3.Models.X013 {
                 unknownBonus = start + 7; //1 byte
 
                 Address = offset + (id * 0x8);
-                Size    = 0x08;
             }
 
             //address = 0x0354c + (id * 0x18);
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         public bool Has32BitValues { get; }
 

@@ -3,7 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X013 {
-    public class StatusEffect : IModel {
+    public class StatusEffect : Model {
         private readonly int luck0;
         private readonly int luck1;
         private readonly int luck2;
@@ -29,13 +29,8 @@ namespace SF3.Models.X013 {
 
         public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public StatusEffect(IX013_FileEditor editor, int id, string name, int address) {
-            Editor  = editor;
-            Name    = name;
-            ID      = id;
-            Address = address;
-            Size    = 0x18;
-
+        public StatusEffect(IX013_FileEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 0x18) {
             checkVersion2 = Editor.GetByte(0x0000000A);
 
             if (editor.Scenario == ScenarioType.Scenario1) {
@@ -72,14 +67,6 @@ namespace SF3.Models.X013 {
             Address = offset + (id * 0x18);
             //address = 0x0354c + (id * 0x18);
         }
-
-        public IByteEditor Editor { get; }
-
-        [BulkCopyRowName]
-        public string Name { get; }
-        public int ID { get; }
-        public int Address { get; }
-        public int Size { get; }
 
         [BulkCopy]
         public int StatusLuck0 {
