@@ -35,14 +35,14 @@ namespace SF3.Tables {
 
         public abstract string ResourceFile { get; }
         public abstract bool IsLoaded { get; }
-        public abstract object[] RowObjs { get; }
+        public abstract IModel[] RowObjs { get; }
         public virtual int? MaxSize => null;
     }
 
     /// <summary>
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
-    public abstract class Table<T> : Table, ITable<T> where T : class {
+    public abstract class Table<T> : Table, ITable<T> where T : class, IModel {
         protected Table(ISF3FileEditor fileEditor) : base(fileEditor) {
         }
 
@@ -60,7 +60,7 @@ namespace SF3.Tables {
             FileStream stream = null;
             try {
                 // Get the size of our rows so we can determine the offset of elements.
-                var size = ((IModel) makeTFunc(0, "", Address)).Size;
+                var size = makeTFunc(0, "", Address).Size;
 
                 // Read all elements.
                 stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
@@ -90,7 +90,7 @@ namespace SF3.Tables {
             return true;
         }
 
-        public override object[] RowObjs => _rows;
+        public override IModel[] RowObjs => _rows;
 
         [BulkCopyRecurse]
         public T[] Rows => _rows;

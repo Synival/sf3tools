@@ -1,4 +1,5 @@
 using SF3.FileEditors;
+using SF3.Models;
 using SF3.Types;
 
 namespace SF3.Tables {
@@ -47,7 +48,7 @@ namespace SF3.Tables {
         /// <summary>
         /// An mutable array of rows.
         /// </summary>
-        object[] RowObjs { get; }
+        IModel[] RowObjs { get; }
 
         /// <summary>
         /// The maximum allowed size the table can be. Optional.
@@ -58,7 +59,7 @@ namespace SF3.Tables {
     /// <summary>
     /// Interface for a specific table of SF3 data that can be modified.
     /// </summary>
-    public interface ITable<T> : ITable {
+    public interface ITable<T> : ITable where T : class, IModel {
         /// <summary>
         /// A mutable array of rows of type T.
         /// </summary>
