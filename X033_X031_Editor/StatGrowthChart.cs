@@ -160,6 +160,7 @@ namespace SF3.X033_X031_Editor {
             var dataPoint =
                 dataPointsUnderMouse.FirstOrDefault(x => x.Series.Name.Contains("99%") && getStatForSeriesName(x.Series.Name) == stat) ??
                 dataPointsUnderMouse.FirstOrDefault(x => x.Series.Name.Contains("50%") && getStatForSeriesName(x.Series.Name) == stat) ??
+                dataPointsUnderMouse.FirstOrDefault(x => x.Series.Name.Contains("Likely") && getStatForSeriesName(x.Series.Name) == stat) ??
                 dataPointUnderMouse;
 
             if (stat == null || dataPoint == null) {
