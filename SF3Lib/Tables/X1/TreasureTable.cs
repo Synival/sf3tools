@@ -52,7 +52,7 @@ namespace SF3.Tables.X1 {
                             if (xml.HasAttributes) {
                                 var newRow = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 _rows = _rows.ExpandedWith(newRow);
-                                if (newRow.TreasureID < 0 || newRow.TreasureID >= MaxSize)
+                                if (newRow.ID < 0 || newRow.ID >= MaxSize)
                                     throw new IndexOutOfRangeException();
                                 if (newRow.Searched == 0xffff)
                                     myCount = 1 + myCount;
@@ -70,7 +70,7 @@ namespace SF3.Tables.X1 {
                             if (xml.HasAttributes) {
                                 var newRow = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 _rows = _rows.ExpandedWith(newRow);
-                                if (newRow.TreasureID < 0 || newRow.TreasureID >= MaxSize)
+                                if (newRow.ID < 0 || newRow.ID >= MaxSize)
                                     throw new IndexOutOfRangeException();
                                 if (newRow.Searched == 0xffff)
                                     myCount = 1 + myCount;

@@ -3,9 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X1 {
-    public class Enter {
-        private readonly IX1_FileEditor _fileEditor;
-
+    public class Enter : IModel {
         private readonly int enterID; //2 byte
         private readonly int unknown2; //2 byte
         private readonly int xPos; //2 byte
@@ -21,40 +19,46 @@ namespace SF3.Models.X1 {
 
         /*public int NPCTableAddress1
         {
-            get => _fileEditor.GetDouble(npcOffset);
-            set => _fileEditor.SetDouble(npcOffset, value);
+            get => Editor.GetDouble(npcOffset);
+            set => Editor.SetDouble(npcOffset, value);
         }
 
-        public int NPCTableAddress2 => _fileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
+        public int NPCTableAddress2 => Editor.GetDouble(NPCTableAddress1 - 0x0605F000);
 
-        public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
+        public int NPCTableAddress3 => Editor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
-        public Enter(IX1_FileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
+        public Enter(IX1_FileEditor editor, int id, string name) {
+            Editor = editor;
+            Name   = name;
+            ID     = id;
+            Size   = 0x10;
 
-            if (Scenario == ScenarioType.Scenario1) {
+            int offset = 0;
+            int sub;
+
+            if (editor.Scenario == ScenarioType.Scenario1) {
                 offset = 0x00000024; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
 
                 offset -= sub;
             }
-            else if (Scenario == ScenarioType.Scenario2) {
+            else if (editor.Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000030; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub;
             }
-            else if (Scenario == ScenarioType.Scenario3) {
+            else if (editor.Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000030; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub;
             }
-            else if (Scenario == ScenarioType.PremiumDisk) {
+            else if (editor.Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000030; //pd initial pointer
                 sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub;
             }
             /*
@@ -62,7 +66,7 @@ namespace SF3.Models.X1 {
             {
                 offset = 0x00000030; //btl99 initial pointer
                 sub = 0x06060000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset = offset - sub;
             }*/
 
@@ -70,9 +74,6 @@ namespace SF3.Models.X1 {
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
-
-            EnterID = id;
-            EnterName = text;
 
             //int start = 0x354c + (id * 24);
 
@@ -87,64 +88,64 @@ namespace SF3.Models.X1 {
             unknownE = start + 0x0e;
 
             //unknown42 = start + 52;
-            EnterAddress = offset + (id * 0x10);
+            Address = offset + (id * 0x10);
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
-        public int EnterID { get; }
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
-        public string EnterName { get; }
+        public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+        public int Size { get; }
 
         [BulkCopy]
         public int Entered {
-            get => _fileEditor.GetWord(enterID);
-            set => _fileEditor.SetWord(enterID, value);
+            get => Editor.GetWord(enterID);
+            set => Editor.SetWord(enterID, value);
         }
 
         [BulkCopy]
         public int EnterUnknown2 {
-            get => _fileEditor.GetWord(unknown2);
-            set => _fileEditor.SetWord(unknown2, value);
+            get => Editor.GetWord(unknown2);
+            set => Editor.SetWord(unknown2, value);
         }
 
         [BulkCopy]
         public int EnterXPos {
-            get => _fileEditor.GetWord(xPos);
-            set => _fileEditor.SetWord(xPos, value);
+            get => Editor.GetWord(xPos);
+            set => Editor.SetWord(xPos, value);
         }
 
         [BulkCopy]
         public int EnterUnknown6 {
-            get => _fileEditor.GetWord(unknown6);
-            set => _fileEditor.SetWord(unknown6, value);
+            get => Editor.GetWord(unknown6);
+            set => Editor.SetWord(unknown6, value);
         }
 
         [BulkCopy]
         public int EnterZPos {
-            get => _fileEditor.GetWord(zPos);
-            set => _fileEditor.SetWord(zPos, value);
+            get => Editor.GetWord(zPos);
+            set => Editor.SetWord(zPos, value);
         }
 
         [BulkCopy]
         public int EnterDirection {
-            get => _fileEditor.GetWord(direction);
-            set => _fileEditor.SetWord(direction, value);
+            get => Editor.GetWord(direction);
+            set => Editor.SetWord(direction, value);
         }
 
         [BulkCopy]
         public int EnterCamera {
-            get => _fileEditor.GetWord(camera);
-            set => _fileEditor.SetWord(camera, value);
+            get => Editor.GetWord(camera);
+            set => Editor.SetWord(camera, value);
         }
 
         [BulkCopy]
         public int EnterUnknownE {
-            get => _fileEditor.GetWord(unknownE);
-            set => _fileEditor.SetWord(unknownE, value);
+            get => Editor.GetWord(unknownE);
+            set => Editor.SetWord(unknownE, value);
         }
-
-        public int EnterAddress { get; }
     }
 }

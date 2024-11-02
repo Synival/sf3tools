@@ -73,7 +73,7 @@ throw new IndexOutOfRangeException();
                             if (xml.HasAttributes) {
                                 var newRow = new Enter(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                                 _rows = _rows.ExpandedWith(newRow);
-                                if (newRow.EnterID < 0 || newRow.EnterID >= MaxSize)
+                                if (newRow.ID < 0 || newRow.ID >= MaxSize)
                                     throw new IndexOutOfRangeException();
                                 if (newRow.Entered == 0xffff)
                                     myCount = 1 + myCount;

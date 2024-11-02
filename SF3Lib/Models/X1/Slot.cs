@@ -1,15 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
 using CommonLib.Attributes;
-using CommonLib.NamedValues;
 using SF3.FileEditors;
-using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Models.X1 {
-    public class Slot {
-        private readonly IX1_FileEditor _fileEditor;
-
+    public class Slot : IModel {
         private readonly int unknown1;
         private readonly int unknown2;
         private readonly int enemyID;
@@ -57,44 +51,36 @@ namespace SF3.Models.X1 {
         private readonly int unknown39;
         private readonly int unknown40;
 
-        //private int npcOffset;
-        private readonly int offset;
-        private readonly int sub;
+        public Slot(IX1_FileEditor editor, int id, string name) {
+            Editor = editor;
+            Name   = name;
+            ID     = id;
+            Size   = 0x34;
 
-        /*public int NPCTableAddress1
-        {
-            get => _fileEditor.GetDouble(npcOffset);
-            set => _fileEditor.SetDouble(npcOffset, value);
-        }
+            int offset = 0;
+            int sub;
 
-        public int NPCTableAddress2 => _fileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
-
-        public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
-
-        public Slot(IX1_FileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
-
-            if (_fileEditor.IsBTL99) {
+            if (editor.IsBTL99) {
                 offset = 0x00000018; //BTL99 initial pointer
                 sub = 0x06060000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //first pointer
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //second pointer
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //third pointer
 
                 offset += 10;
             }
-            else if (Scenario == ScenarioType.Scenario1) {
+            else if (editor.Scenario == ScenarioType.Scenario1) {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //first pointer
-                offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub + _fileEditor.MapOffset; //second pointer
+                offset = Editor.GetDouble(offset);
+                offset = offset - sub + editor.MapOffset; //second pointer
 
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
 
                 if (offset != 0) {
                     offset -= sub; //third pointer
@@ -102,14 +88,14 @@ namespace SF3.Models.X1 {
                     offset += 10;
                 }
                 else {
-                    _fileEditor.MapLeader = MapLeaderType.Synbios;
+                    editor.MapLeader = MapLeaderType.Synbios;
                     offset = 0x00000018; //scn1 initial pointer
                     sub = 0x0605f000;
-                    offset = _fileEditor.GetDouble(offset);
+                    offset = Editor.GetDouble(offset);
                     offset -= sub; //first pointer
-                    offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub + _fileEditor.MapOffset; //second pointer
-                    offset = _fileEditor.GetDouble(offset);
+                    offset = Editor.GetDouble(offset);
+                    offset = offset - sub + editor.MapOffset; //second pointer
+                    offset = Editor.GetDouble(offset);
                     offset -= sub; //third pointer
 
                     offset += 10;
@@ -118,37 +104,37 @@ namespace SF3.Models.X1 {
                 /*
                 offset = 0x00000018; //scn1 initial pointer
                 npcOffset = offset;
-                npcOffset = _fileEditor.GetDouble(offset);
+                npcOffset = Editor.GetDouble(offset);
                 sub = 0x0605f000;
                 offset = npcOffset - sub; //second pointer
-                npcOffset = _fileEditor.GetDouble(offset);
+                npcOffset = Editor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Scenario == ScenarioType.Scenario2) {
+            else if (editor.Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //first pointer
-                offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub + _fileEditor.MapOffset; //second pointer
+                offset = Editor.GetDouble(offset);
+                offset = offset - sub + editor.MapOffset; //second pointer
 
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 if (offset != 0) {
                     offset -= sub; //third pointer
 
                     offset += 10;
                 }
                 else {
-                    _fileEditor.MapLeader = MapLeaderType.Medion;
+                    editor.MapLeader = MapLeaderType.Medion;
                     offset = 0x00000024; //scn2 initial pointer
                     sub = 0x0605e000;
-                    offset = _fileEditor.GetDouble(offset);
+                    offset = Editor.GetDouble(offset);
                     offset -= sub; //first pointer
-                    offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub + _fileEditor.MapOffset; //second pointer
-                    offset = _fileEditor.GetDouble(offset);
+                    offset = Editor.GetDouble(offset);
+                    offset = offset - sub + editor.MapOffset; //second pointer
+                    offset = Editor.GetDouble(offset);
                     offset -= sub; //third pointer
 
                     offset += 10;
@@ -156,64 +142,64 @@ namespace SF3.Models.X1 {
 
                 /*offset = 0x00000024; //scn2 initial pointer
                 npcOffset = offset;
-                npcOffset = _fileEditor.GetDouble(offset);
+                npcOffset = Editor.GetDouble(offset);
                 sub = 0x0605e000;
                 offset = npcOffset - sub + 4; //second pointer
-                npcOffset = _fileEditor.GetDouble(offset);
+                npcOffset = Editor.GetDouble(offset);
                 offset = npcOffset - sub; //third pointer
                 //offset value should now point to where npc placements are
                 */
             }
-            else if (Scenario == ScenarioType.Scenario3) {
+            else if (editor.Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //first pointer
-                offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub + _fileEditor.MapOffset; //second pointer
+                offset = Editor.GetDouble(offset);
+                offset = offset - sub + editor.MapOffset; //second pointer
 
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 if (offset != 0) {
                     offset -= sub; //third pointer
 
                     offset += 10;
                 }
                 else {
-                    _fileEditor.MapLeader = MapLeaderType.Julian;
+                    editor.MapLeader = MapLeaderType.Julian;
                     offset = 0x00000024; //scn3 initial pointer
                     sub = 0x0605e000;
-                    offset = _fileEditor.GetDouble(offset);
+                    offset = Editor.GetDouble(offset);
                     offset -= sub; //first pointer
-                    offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub + _fileEditor.MapOffset; //second pointer
-                    offset = _fileEditor.GetDouble(offset);
+                    offset = Editor.GetDouble(offset);
+                    offset = offset - sub + editor.MapOffset; //second pointer
+                    offset = Editor.GetDouble(offset);
                     offset -= sub; //third pointer
 
                     offset += 10;
                 }
             }
-            else if (Scenario == ScenarioType.PremiumDisk) {
+            else if (editor.Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub; //first pointer
-                offset = _fileEditor.GetDouble(offset);
-                offset = offset - sub + _fileEditor.MapOffset; //second pointer
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
+                offset = offset - sub + editor.MapOffset; //second pointer
+                offset = Editor.GetDouble(offset);
                 if (offset != 0) {
                     offset -= sub; //third pointer
 
                     offset += 10;
                 }
                 else {
-                    _fileEditor.MapLeader = MapLeaderType.Synbios;
+                    editor.MapLeader = MapLeaderType.Synbios;
                     offset = 0x00000024; //pd initial pointer
                     sub = 0x0605e000;
-                    offset = _fileEditor.GetDouble(offset);
+                    offset = Editor.GetDouble(offset);
                     offset -= sub; //first pointer
-                    offset = _fileEditor.GetDouble(offset);
-                    offset = offset - sub + _fileEditor.MapOffset; //second pointer
-                    offset = _fileEditor.GetDouble(offset);
+                    offset = Editor.GetDouble(offset);
+                    offset = offset - sub + editor.MapOffset; //second pointer
+                    offset = Editor.GetDouble(offset);
                     offset -= sub; //third pointer
 
                     offset += 10;
@@ -224,9 +210,6 @@ namespace SF3.Models.X1 {
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
-
-            ID = id;
-            Name = text;
 
             //int start = 0x354c + (id * 24);
 
@@ -282,296 +265,296 @@ namespace SF3.Models.X1 {
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
-        public int ID { get; }
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
         public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+        public int Size { get; }
 
         [BulkCopy]
         public int Unknown1 {
-            get => _fileEditor.GetByte(unknown1);
-            set => _fileEditor.SetByte(unknown1, (byte) value);
+            get => Editor.GetByte(unknown1);
+            set => Editor.SetByte(unknown1, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown2 {
-            get => _fileEditor.GetByte(unknown2);
-            set => _fileEditor.SetByte(unknown2, (byte) value);
+            get => Editor.GetByte(unknown2);
+            set => Editor.SetByte(unknown2, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.MonsterForSlot)]
         public int EnemyID {
-            get => _fileEditor.GetWord(enemyID);
-            set => _fileEditor.SetWord(enemyID, value);
+            get => Editor.GetWord(enemyID);
+            set => Editor.SetWord(enemyID, value);
         }
 
         [BulkCopy]
         public int EnemyX {
-            get => _fileEditor.GetWord(x);
-            set => _fileEditor.SetWord(x, value);
+            get => Editor.GetWord(x);
+            set => Editor.SetWord(x, value);
         }
 
         [BulkCopy]
         public int EnemyY {
-            get => _fileEditor.GetWord(y);
-            set => _fileEditor.SetWord(y, value);
+            get => Editor.GetWord(y);
+            set => Editor.SetWord(y, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int ItemOverride {
-            get => _fileEditor.GetWord(itemOverride);
-            set => _fileEditor.SetWord(itemOverride, value);
+            get => Editor.GetWord(itemOverride);
+            set => Editor.SetWord(itemOverride, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Character)]
         public int CharacterPlus0x0B {
-            get => _fileEditor.GetByte(characterPlus0x0B);
-            set => _fileEditor.SetByte(characterPlus0x0B, (byte) value);
+            get => Editor.GetByte(characterPlus0x0B);
+            set => Editor.SetByte(characterPlus0x0B, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown4 {
-            get => _fileEditor.GetByte(unknown4);
-            set => _fileEditor.SetByte(unknown4, (byte) value);
+            get => Editor.GetByte(unknown4);
+            set => Editor.SetByte(unknown4, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown5 {
-            get => _fileEditor.GetByte(unknown5);
-            set => _fileEditor.SetByte(unknown5, (byte) value);
+            get => Editor.GetByte(unknown5);
+            set => Editor.SetByte(unknown5, (byte) value);
         }
 
         [BulkCopy]
         public int JoinID {
-            get => _fileEditor.GetWord(joinID);
-            set => _fileEditor.SetWord(joinID, value);
+            get => Editor.GetWord(joinID);
+            set => Editor.SetWord(joinID, value);
         }
 
         [BulkCopy]
         public int Unknown6 {
-            get => _fileEditor.GetByte(unknown6);
-            set => _fileEditor.SetByte(unknown6, (byte) value);
+            get => Editor.GetByte(unknown6);
+            set => Editor.SetByte(unknown6, (byte) value);
         }
 
         public bool IsBoss {
-            get => _fileEditor.GetBit(facingIsBoss, 5);
-            set => _fileEditor.SetBit(facingIsBoss, 5, value);
+            get => Editor.GetBit(facingIsBoss, 5);
+            set => Editor.SetBit(facingIsBoss, 5, value);
         }
 
         [BulkCopy]
         public int FacingIsBoss {
-            get => _fileEditor.GetByte(facingIsBoss);
-            set => _fileEditor.SetByte(facingIsBoss, (byte) value);
+            get => Editor.GetByte(facingIsBoss);
+            set => Editor.SetByte(facingIsBoss, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown8 {
-            get => _fileEditor.GetByte(unknown8);
-            set => _fileEditor.SetByte(unknown8, (byte) value);
+            get => Editor.GetByte(unknown8);
+            set => Editor.SetByte(unknown8, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown9 {
-            get => _fileEditor.GetByte(unknown9);
-            set => _fileEditor.SetByte(unknown9, (byte) value);
+            get => Editor.GetByte(unknown9);
+            set => Editor.SetByte(unknown9, (byte) value);
         }
 
         [BulkCopy]
         public int ControlType {
-            get => _fileEditor.GetByte(controlType);
-            set => _fileEditor.SetByte(controlType, (byte) value);
+            get => Editor.GetByte(controlType);
+            set => Editor.SetByte(controlType, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown10 {
-            get => _fileEditor.GetByte(unknown10);
-            set => _fileEditor.SetByte(unknown10, (byte) value);
+            get => Editor.GetByte(unknown10);
+            set => Editor.SetByte(unknown10, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown11 {
-            get => _fileEditor.GetByte(unknown11);
-            set => _fileEditor.SetByte(unknown11, (byte) value);
+            get => Editor.GetByte(unknown11);
+            set => Editor.SetByte(unknown11, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown12 {
-            get => _fileEditor.GetByte(unknown12);
-            set => _fileEditor.SetByte(unknown12, (byte) value);
+            get => Editor.GetByte(unknown12);
+            set => Editor.SetByte(unknown12, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown13 {
-            get => _fileEditor.GetByte(unknown13);
-            set => _fileEditor.SetByte(unknown13, (byte) value);
+            get => Editor.GetByte(unknown13);
+            set => Editor.SetByte(unknown13, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown14 {
-            get => _fileEditor.GetByte(unknown14);
-            set => _fileEditor.SetByte(unknown14, (byte) value);
+            get => Editor.GetByte(unknown14);
+            set => Editor.SetByte(unknown14, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown15 {
-            get => _fileEditor.GetByte(unknown15);
-            set => _fileEditor.SetByte(unknown15, (byte) value);
+            get => Editor.GetByte(unknown15);
+            set => Editor.SetByte(unknown15, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown16 {
-            get => _fileEditor.GetByte(unknown16);
-            set => _fileEditor.SetByte(unknown16, (byte) value);
+            get => Editor.GetByte(unknown16);
+            set => Editor.SetByte(unknown16, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown17 {
-            get => _fileEditor.GetByte(unknown17);
-            set => _fileEditor.SetByte(unknown17, (byte) value);
+            get => Editor.GetByte(unknown17);
+            set => Editor.SetByte(unknown17, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown18 {
-            get => _fileEditor.GetByte(unknown18);
-            set => _fileEditor.SetByte(unknown18, (byte) value);
+            get => Editor.GetByte(unknown18);
+            set => Editor.SetByte(unknown18, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown19 {
-            get => _fileEditor.GetByte(unknown19);
-            set => _fileEditor.SetByte(unknown19, (byte) value);
+            get => Editor.GetByte(unknown19);
+            set => Editor.SetByte(unknown19, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown20 {
-            get => _fileEditor.GetByte(unknown20);
-            set => _fileEditor.SetByte(unknown20, (byte) value);
+            get => Editor.GetByte(unknown20);
+            set => Editor.SetByte(unknown20, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown21 {
-            get => _fileEditor.GetByte(unknown21);
-            set => _fileEditor.SetByte(unknown21, (byte) value);
+            get => Editor.GetByte(unknown21);
+            set => Editor.SetByte(unknown21, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown22 {
-            get => _fileEditor.GetByte(unknown22);
-            set => _fileEditor.SetByte(unknown22, (byte) value);
+            get => Editor.GetByte(unknown22);
+            set => Editor.SetByte(unknown22, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown23 {
-            get => _fileEditor.GetByte(unknown23);
-            set => _fileEditor.SetByte(unknown23, (byte) value);
+            get => Editor.GetByte(unknown23);
+            set => Editor.SetByte(unknown23, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown24 {
-            get => _fileEditor.GetByte(unknown24);
-            set => _fileEditor.SetByte(unknown24, (byte) value);
+            get => Editor.GetByte(unknown24);
+            set => Editor.SetByte(unknown24, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown25 {
-            get => _fileEditor.GetByte(unknown25);
-            set => _fileEditor.SetByte(unknown25, (byte) value);
+            get => Editor.GetByte(unknown25);
+            set => Editor.SetByte(unknown25, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown26 {
-            get => _fileEditor.GetByte(unknown26);
-            set => _fileEditor.SetByte(unknown26, (byte) value);
+            get => Editor.GetByte(unknown26);
+            set => Editor.SetByte(unknown26, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown27 {
-            get => _fileEditor.GetByte(unknown27);
-            set => _fileEditor.SetByte(unknown27, (byte) value);
+            get => Editor.GetByte(unknown27);
+            set => Editor.SetByte(unknown27, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown28 {
-            get => _fileEditor.GetByte(unknown28);
-            set => _fileEditor.SetByte(unknown28, (byte) value);
+            get => Editor.GetByte(unknown28);
+            set => Editor.SetByte(unknown28, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown29 {
-            get => _fileEditor.GetByte(unknown29);
-            set => _fileEditor.SetByte(unknown29, (byte) value);
+            get => Editor.GetByte(unknown29);
+            set => Editor.SetByte(unknown29, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown30 {
-            get => _fileEditor.GetByte(unknown30);
-            set => _fileEditor.SetByte(unknown30, (byte) value);
+            get => Editor.GetByte(unknown30);
+            set => Editor.SetByte(unknown30, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown31 {
-            get => _fileEditor.GetByte(unknown31);
-            set => _fileEditor.SetByte(unknown31, (byte) value);
+            get => Editor.GetByte(unknown31);
+            set => Editor.SetByte(unknown31, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown32 {
-            get => _fileEditor.GetByte(unknown32);
-            set => _fileEditor.SetByte(unknown32, (byte) value);
+            get => Editor.GetByte(unknown32);
+            set => Editor.SetByte(unknown32, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown33 {
-            get => _fileEditor.GetByte(unknown33);
-            set => _fileEditor.SetByte(unknown33, (byte) value);
+            get => Editor.GetByte(unknown33);
+            set => Editor.SetByte(unknown33, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown34 {
-            get => _fileEditor.GetByte(unknown34);
-            set => _fileEditor.SetByte(unknown34, (byte) value);
+            get => Editor.GetByte(unknown34);
+            set => Editor.SetByte(unknown34, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown35 {
-            get => _fileEditor.GetByte(unknown35);
-            set => _fileEditor.SetByte(unknown35, (byte) value);
+            get => Editor.GetByte(unknown35);
+            set => Editor.SetByte(unknown35, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown36 {
-            get => _fileEditor.GetByte(unknown36);
-            set => _fileEditor.SetByte(unknown36, (byte) value);
+            get => Editor.GetByte(unknown36);
+            set => Editor.SetByte(unknown36, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown37 {
-            get => _fileEditor.GetByte(unknown37);
-            set => _fileEditor.SetByte(unknown37, (byte) value);
+            get => Editor.GetByte(unknown37);
+            set => Editor.SetByte(unknown37, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown38 {
-            get => _fileEditor.GetByte(unknown38);
-            set => _fileEditor.SetByte(unknown38, (byte) value);
+            get => Editor.GetByte(unknown38);
+            set => Editor.SetByte(unknown38, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown39 {
-            get => _fileEditor.GetByte(unknown39);
-            set => _fileEditor.SetByte(unknown39, (byte) value);
+            get => Editor.GetByte(unknown39);
+            set => Editor.SetByte(unknown39, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown40 {
-            get => _fileEditor.GetWord(unknown40);
-            set => _fileEditor.SetWord(unknown40, value);
+            get => Editor.GetWord(unknown40);
+            set => Editor.SetWord(unknown40, value);
         }
-
-        public int Address { get; }
     }
 }

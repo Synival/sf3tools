@@ -3,9 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X1 {
-    public class Npc {
-        private readonly IX1_FileEditor _fileEditor;
-
+    public class Npc : IModel {
         private readonly int spriteID;
         private readonly int unknown1;
         private readonly int table;
@@ -18,53 +16,45 @@ namespace SF3.Models.X1 {
         private readonly int unknown12;
         private readonly int unknown16;
 
-        //private int npcOffset;
-        private readonly int offset;
-        private readonly int sub;
+        public Npc(IX1_FileEditor editor, int id, string name) {
+            Editor = editor;
+            Name   = name;
+            ID     = id;
+            Size   = 0x18;
 
-        /*public int NPCTableAddress1
-        {
-            get => _fileEditor.GetDouble(npcOffset);
-            set => _fileEditor.SetDouble(npcOffset, value);
-        }
+            int offset = 0;
+            int sub;
 
-        public int NPCTableAddress2 => _fileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
-
-        public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
-
-        public Npc(IX1_FileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
-
-            if (Scenario == ScenarioType.Scenario1) {
+            if (editor.Scenario == ScenarioType.Scenario1) {
                 offset = 0x00000018; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
 
                 offset -= sub;
             }
-            else if (Scenario == ScenarioType.Scenario2) {
+            else if (editor.Scenario == ScenarioType.Scenario2) {
                 offset = 0x00000024; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub;
             }
-            else if (Scenario == ScenarioType.Scenario3) {
+            else if (editor.Scenario == ScenarioType.Scenario3) {
                 offset = 0x00000024; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub;
             }
-            else if (Scenario == ScenarioType.PremiumDisk) {
+            else if (editor.Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x00000024; //pd initial pointer
                 sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub;
             }/*
-            else if (Scenario == ScenarioType.BTL99)
+            else if (editor.Scenario == ScenarioType.BTL99)
             {
                 offset = 0x00000024; //btl99 initial pointer
                 sub = 0x06060000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset = offset - sub;
             }*/
 
@@ -72,9 +62,6 @@ namespace SF3.Models.X1 {
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
-
-            NpcID = id;
-            NpcName = text;
 
             //int start = 0x354c + (id * 24);
 
@@ -92,89 +79,89 @@ namespace SF3.Models.X1 {
             unknown16 = start + 0x16;
 
             //unknown42 = start + 52;
-            NpcAddress = offset + (id * 0x18);
+            Address = offset + (id * 0x18);
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
-        public int NpcID { get; }
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
-        public string NpcName { get; }
+        public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+        public int Size { get; }
 
         public string NpcTieIn             /*get
             {
                 return index + 0x3D;
             }*/
 
-            => _fileEditor.GetWord(spriteID) > 0x0f && _fileEditor.GetWord(spriteID) != 0xffff ? (NpcID + 0x3D).ToString("X") : "";
+            => Editor.GetWord(spriteID) > 0x0f && Editor.GetWord(spriteID) != 0xffff ? (ID + 0x3D).ToString("X") : "";
 
         [BulkCopy]
         public int SpriteID {
-            get => _fileEditor.GetWord(spriteID);
-            set => _fileEditor.SetWord(spriteID, value);
+            get => Editor.GetWord(spriteID);
+            set => Editor.SetWord(spriteID, value);
         }
 
         [BulkCopy]
         public int NpcUnknown {
-            get => _fileEditor.GetWord(unknown1);
-            set => _fileEditor.SetWord(unknown1, value);
+            get => Editor.GetWord(unknown1);
+            set => Editor.SetWord(unknown1, value);
         }
 
         [BulkCopy]
         public int NpcTable {
-            get => _fileEditor.GetDouble(table);
-            set => _fileEditor.SetDouble(table, value);
+            get => Editor.GetDouble(table);
+            set => Editor.SetDouble(table, value);
         }
 
         [BulkCopy]
         public int NpcXPos {
-            get => _fileEditor.GetWord(xPos);
-            set => _fileEditor.SetWord(xPos, value);
+            get => Editor.GetWord(xPos);
+            set => Editor.SetWord(xPos, value);
         }
 
         [BulkCopy]
         public int NpcZPos {
-            get => _fileEditor.GetWord(zPos);
-            set => _fileEditor.SetWord(zPos, value);
+            get => Editor.GetWord(zPos);
+            set => Editor.SetWord(zPos, value);
         }
 
         [BulkCopy]
         public int NpcDirection {
-            get => _fileEditor.GetWord(direction);
-            set => _fileEditor.SetWord(direction, value);
+            get => Editor.GetWord(direction);
+            set => Editor.SetWord(direction, value);
         }
 
         [BulkCopy]
         public int NpcUnknownA {
-            get => _fileEditor.GetWord(unknownA);
-            set => _fileEditor.SetWord(unknownA, value);
+            get => Editor.GetWord(unknownA);
+            set => Editor.SetWord(unknownA, value);
         }
 
         [BulkCopy]
         public int NpcUnknownC {
-            get => _fileEditor.GetWord(unknownC);
-            set => _fileEditor.SetWord(unknownC, value);
+            get => Editor.GetWord(unknownC);
+            set => Editor.SetWord(unknownC, value);
         }
 
         [BulkCopy]
         public int NpcUnknownE {
-            get => _fileEditor.GetWord(unknownE);
-            set => _fileEditor.SetWord(unknownE, value);
+            get => Editor.GetWord(unknownE);
+            set => Editor.SetWord(unknownE, value);
         }
 
         [BulkCopy]
         public int NpcUnknown12 {
-            get => _fileEditor.GetWord(unknown12);
-            set => _fileEditor.SetWord(unknown12, value);
+            get => Editor.GetWord(unknown12);
+            set => Editor.SetWord(unknown12, value);
         }
 
         [BulkCopy]
         public int NpcUnknown16 {
-            get => _fileEditor.GetWord(unknown16);
-            set => _fileEditor.SetWord(unknown16, value);
+            get => Editor.GetWord(unknown16);
+            set => Editor.SetWord(unknown16, value);
         }
-
-        public int NpcAddress { get; }
     }
 }

@@ -3,9 +3,7 @@ using SF3.FileEditors;
 using SF3.Types;
 
 namespace SF3.Models.X1 {
-    public class Treasure {
-        private readonly IX1_FileEditor _fileEditor;
-
+    public class Treasure : IModel {
         private readonly int searched;
         private readonly int eventNumber;
         private readonly int flagUsed;
@@ -13,52 +11,44 @@ namespace SF3.Models.X1 {
         private readonly int eventType;
         private readonly int itemID;
 
-        //private int npcOffset;
-        private readonly int offset;
-        private readonly int sub;
+        public Treasure(IX1_FileEditor editor, int id, string name) {
+            Editor = editor;
+            Name   = name;
+            ID     = id;
+            Size   = 0x0c;
 
-        /*public int NPCTableAddress1
-        {
-            get => _fileEditor.GetDouble(npcOffset);
-            set => _fileEditor.SetDouble(npcOffset, value);
-        }
+            int offset = 0;
+            int sub;
 
-        public int NPCTableAddress2 => _fileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
-
-        public int NPCTableAddress3 => _fileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
-
-        public Treasure(IX1_FileEditor fileEditor, int id, string text) {
-            _fileEditor = fileEditor;
-
-            if (_fileEditor.IsBTL99) {
+            if (editor.IsBTL99) {
                 offset = 0x0000000C; //btl99 initial pointer
                 sub = 0x06060000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub;
             }
-            else if (Scenario == ScenarioType.Scenario1) {
+            else if (editor.Scenario == ScenarioType.Scenario1) {
                 offset = 0x0000000C; //scn1 initial pointer
                 sub = 0x0605f000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
 
                 offset -= sub;
             }
-            else if (Scenario == ScenarioType.Scenario2) {
+            else if (editor.Scenario == ScenarioType.Scenario2) {
                 offset = 0x0000000C; //scn2 initial pointer
                 sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub;
             }
-            else if (Scenario == ScenarioType.Scenario3) {
+            else if (editor.Scenario == ScenarioType.Scenario3) {
                 offset = 0x0000000C; //scn3 initial pointer
                 sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub;
             }
-            else if (Scenario == ScenarioType.PremiumDisk) {
+            else if (editor.Scenario == ScenarioType.PremiumDisk) {
                 offset = 0x0000000C; //pd initial pointer
                 sub = 0x0605e000;
-                offset = _fileEditor.GetDouble(offset);
+                offset = Editor.GetDouble(offset);
                 offset -= sub;
             }
 
@@ -66,9 +56,6 @@ namespace SF3.Models.X1 {
             //offset = 0x00002e9c; scn2
             //offset = 0x0000354c; scn3
             //offset = 0x000035fc; pd
-
-            TreasureID = id;
-            TreasureName = text;
 
             //int start = 0x354c + (id * 24);
 
@@ -85,52 +72,54 @@ namespace SF3.Models.X1 {
             //address = 0x0354c + (id * 0x18);
         }
 
-        public ScenarioType Scenario => _fileEditor.Scenario;
-        public int TreasureID { get; }
+        public IByteEditor Editor { get; }
 
         [BulkCopyRowName]
-        public string TreasureName { get; }
+        public string Name { get; }
+        public int ID { get; }
+        public int Address { get; }
+        public int Size { get; }
 
         public string MPDTieIn
-            => _fileEditor.GetWord(eventNumber) <= 0x0f
-                ? (_fileEditor.GetWord(eventNumber) + 0x30).ToString("X")
+            => Editor.GetWord(eventNumber) <= 0x0f
+                ? (Editor.GetWord(eventNumber) + 0x30).ToString("X")
                 : "";
 
         [BulkCopy]
         public int Searched {
-            get => _fileEditor.GetWord(searched);
-            set => _fileEditor.SetWord(searched, value);
+            get => Editor.GetWord(searched);
+            set => Editor.SetWord(searched, value);
         }
 
         [BulkCopy]
         public int EventNumber {
-            get => _fileEditor.GetWord(eventNumber);
-            set => _fileEditor.SetWord(eventNumber, value);
+            get => Editor.GetWord(eventNumber);
+            set => Editor.SetWord(eventNumber, value);
         }
 
         [BulkCopy]
         public int FlagUse {
-            get => _fileEditor.GetWord(flagUsed);
-            set => _fileEditor.SetWord(flagUsed, value);
+            get => Editor.GetWord(flagUsed);
+            set => Editor.SetWord(flagUsed, value);
         }
 
         [BulkCopy]
         public int UnknownTreasure {
-            get => _fileEditor.GetWord(unknown);
-            set => _fileEditor.SetWord(unknown, value);
+            get => Editor.GetWord(unknown);
+            set => Editor.SetWord(unknown, value);
         }
 
         [BulkCopy]
         public int EventType {
-            get => _fileEditor.GetWord(eventType);
-            set => _fileEditor.SetWord(eventType, value);
+            get => Editor.GetWord(eventType);
+            set => Editor.SetWord(eventType, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int TreasureItem {
-            get => _fileEditor.GetWord(itemID);
-            set => _fileEditor.SetWord(itemID, value);
+            get => Editor.GetWord(itemID);
+            set => Editor.SetWord(itemID, value);
         }
 
         public int TreasureAddress { get; }

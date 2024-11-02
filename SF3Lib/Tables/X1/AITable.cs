@@ -36,7 +36,7 @@ namespace SF3.Tables.X1 {
                     if (xml.HasAttributes) {
                         var newRow = new AI(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
                         _rows = _rows.ExpandedWith(newRow);
-                        if (newRow.AIID < 0 || newRow.AIID >= MaxSize)
+                        if (newRow.ID < 0 || newRow.ID >= MaxSize)
                             throw new IndexOutOfRangeException();
                     }
                 }

@@ -456,13 +456,13 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcHeaderSizeList
             // 
-            this.lvcHeaderSizeList.AspectName = "SizeName";
+            this.lvcHeaderSizeList.AspectName = "Name";
             this.lvcHeaderSizeList.IsEditable = false;
             this.lvcHeaderSizeList.Text = "SizeList";
             // 
             // lvcHeaderAddress
             // 
-            this.lvcHeaderAddress.AspectName = "SizeAddress";
+            this.lvcHeaderAddress.AspectName = "Address";
             this.lvcHeaderAddress.AspectToStringFormat = "{0:X}";
             this.lvcHeaderAddress.IsEditable = false;
             this.lvcHeaderAddress.Text = "Address";
@@ -1266,14 +1266,14 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcSpawnZonesName
             // 
-            this.lvcSpawnZonesName.AspectName = "UnknownAIName";
+            this.lvcSpawnZonesName.AspectName = "Name";
             this.lvcSpawnZonesName.IsEditable = false;
             this.lvcSpawnZonesName.Text = "Name";
             this.lvcSpawnZonesName.Width = 90;
             // 
             // lvcSpawnZonesID
             // 
-            this.lvcSpawnZonesID.AspectName = "UnknownAIID";
+            this.lvcSpawnZonesID.AspectName = "ID";
             this.lvcSpawnZonesID.AspectToStringFormat = "{0:X}";
             this.lvcSpawnZonesID.IsEditable = false;
             this.lvcSpawnZonesID.Text = "Hex ID";
@@ -1281,7 +1281,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcSpawnZonesAddress
             // 
-            this.lvcSpawnZonesAddress.AspectName = "UnknownAIAddress";
+            this.lvcSpawnZonesAddress.AspectName = "Address";
             this.lvcSpawnZonesAddress.AspectToStringFormat = "{0:X}";
             this.lvcSpawnZonesAddress.IsEditable = false;
             this.lvcSpawnZonesAddress.Text = "Address";
@@ -1396,14 +1396,14 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcAITargetPositionName
             // 
-            this.lvcAITargetPositionName.AspectName = "AIName";
+            this.lvcAITargetPositionName.AspectName = "Name";
             this.lvcAITargetPositionName.IsEditable = false;
             this.lvcAITargetPositionName.Text = "Name";
             this.lvcAITargetPositionName.Width = 90;
             // 
             // lvcAITargetPositionID
             // 
-            this.lvcAITargetPositionID.AspectName = "AIID";
+            this.lvcAITargetPositionID.AspectName = "ID";
             this.lvcAITargetPositionID.AspectToStringFormat = "{0:X}";
             this.lvcAITargetPositionID.IsEditable = false;
             this.lvcAITargetPositionID.Text = "Hex ID";
@@ -1411,7 +1411,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcAITargetPositionAddress
             // 
-            this.lvcAITargetPositionAddress.AspectName = "AIAddress";
+            this.lvcAITargetPositionAddress.AspectName = "Address";
             this.lvcAITargetPositionAddress.AspectToStringFormat = "{0:X}";
             this.lvcAITargetPositionAddress.IsEditable = false;
             this.lvcAITargetPositionAddress.Text = "Address";
@@ -1492,14 +1492,14 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcScriptedMovementName
             // 
-            this.lvcScriptedMovementName.AspectName = "CustomMovementName";
+            this.lvcScriptedMovementName.AspectName = "Name";
             this.lvcScriptedMovementName.IsEditable = false;
             this.lvcScriptedMovementName.Text = "Name";
             this.lvcScriptedMovementName.Width = 90;
             // 
             // lvcScriptedMovementID
             // 
-            this.lvcScriptedMovementID.AspectName = "CustomMovementID";
+            this.lvcScriptedMovementID.AspectName = "ID";
             this.lvcScriptedMovementID.AspectToStringFormat = "{0:X}";
             this.lvcScriptedMovementID.IsEditable = false;
             this.lvcScriptedMovementID.Text = "Hex ID";
@@ -1507,7 +1507,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcScriptedMovementAddress
             // 
-            this.lvcScriptedMovementAddress.AspectName = "CustomMovementAddress";
+            this.lvcScriptedMovementAddress.AspectName = "Address";
             this.lvcScriptedMovementAddress.AspectToStringFormat = "{0:X}";
             this.lvcScriptedMovementAddress.IsEditable = false;
             this.lvcScriptedMovementAddress.Text = "Address";
@@ -1638,14 +1638,14 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcInteractablesName
             // 
-            this.lvcInteractablesName.AspectName = "TreasureName";
+            this.lvcInteractablesName.AspectName = "Name";
             this.lvcInteractablesName.IsEditable = false;
             this.lvcInteractablesName.Text = "InteractableName";
             this.lvcInteractablesName.Width = 100;
             // 
             // lvcInteractablesID
             // 
-            this.lvcInteractablesID.AspectName = "TreasureID";
+            this.lvcInteractablesID.AspectName = "ID";
             this.lvcInteractablesID.AspectToStringFormat = "{0:X}";
             this.lvcInteractablesID.IsEditable = false;
             this.lvcInteractablesID.Text = "Hex ID";
@@ -1653,7 +1653,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcInteractablesAddress
             // 
-            this.lvcInteractablesAddress.AspectName = "TreasureAddress";
+            this.lvcInteractablesAddress.AspectName = "Address";
             this.lvcInteractablesAddress.AspectToStringFormat = "{0:X}";
             this.lvcInteractablesAddress.IsEditable = false;
             this.lvcInteractablesAddress.Text = "Address";
@@ -1774,22 +1774,22 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcTownNpcsName
             // 
-            this.lvcTownNpcsName.AspectName = "NpcName";
+            this.lvcTownNpcsName.AspectName = "Name";
             this.lvcTownNpcsName.IsEditable = false;
             this.lvcTownNpcsName.Text = "NpcName";
             this.lvcTownNpcsName.Width = 70;
             // 
             // lvcTownNpcsID
             // 
-            this.lvcTownNpcsID.AspectName = "NpcID";
+            this.lvcTownNpcsID.AspectName = "ID";
             this.lvcTownNpcsID.AspectToStringFormat = "{0:X}";
             this.lvcTownNpcsID.IsEditable = false;
-            this.lvcTownNpcsID.Text = "NpcID";
+            this.lvcTownNpcsID.Text = "ID";
             this.lvcTownNpcsID.Width = 50;
             // 
             // lvcTownNpcsAddress
             // 
-            this.lvcTownNpcsAddress.AspectName = "NpcAddress";
+            this.lvcTownNpcsAddress.AspectName = "Address";
             this.lvcTownNpcsAddress.AspectToStringFormat = "{0:X}";
             this.lvcTownNpcsAddress.IsEditable = false;
             this.lvcTownNpcsAddress.Text = "Address";
@@ -1934,14 +1934,14 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcNonBattleEnterName
             // 
-            this.lvcNonBattleEnterName.AspectName = "EnterName";
+            this.lvcNonBattleEnterName.AspectName = "Name";
             this.lvcNonBattleEnterName.IsEditable = false;
             this.lvcNonBattleEnterName.Text = "EnterName";
             this.lvcNonBattleEnterName.Width = 70;
             // 
             // lvcNonBattleEnterID
             // 
-            this.lvcNonBattleEnterID.AspectName = "EnterID";
+            this.lvcNonBattleEnterID.AspectName = "ID";
             this.lvcNonBattleEnterID.AspectToStringFormat = "{0:X}";
             this.lvcNonBattleEnterID.IsEditable = false;
             this.lvcNonBattleEnterID.Text = "EnterId";
@@ -1949,7 +1949,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcNonBattleEnterAddress
             // 
-            this.lvcNonBattleEnterAddress.AspectName = "EnterAddress";
+            this.lvcNonBattleEnterAddress.AspectName = "Address";
             this.lvcNonBattleEnterAddress.AspectToStringFormat = "{0:X}";
             this.lvcNonBattleEnterAddress.IsEditable = false;
             this.lvcNonBattleEnterAddress.Text = "Address";
@@ -2063,14 +2063,14 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcArrowsName
             // 
-            this.lvcArrowsName.AspectName = "ArrowName";
+            this.lvcArrowsName.AspectName = "Name";
             this.lvcArrowsName.IsEditable = false;
             this.lvcArrowsName.Text = "ArrowName";
             this.lvcArrowsName.Width = 70;
             // 
             // lvcArrowsID
             // 
-            this.lvcArrowsID.AspectName = "ArrowID";
+            this.lvcArrowsID.AspectName = "ID";
             this.lvcArrowsID.AspectToStringFormat = "{0:X}";
             this.lvcArrowsID.IsEditable = false;
             this.lvcArrowsID.Text = "ArrowId";
@@ -2078,7 +2078,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcArrowsAddress
             // 
-            this.lvcArrowsAddress.AspectName = "ArrowAddress";
+            this.lvcArrowsAddress.AspectName = "Address";
             this.lvcArrowsAddress.AspectToStringFormat = "{0:X}";
             this.lvcArrowsAddress.IsEditable = false;
             this.lvcArrowsAddress.Text = "Address";
@@ -2168,14 +2168,14 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcBattlePointersName
             // 
-            this.lvcBattlePointersName.AspectName = "BattleName";
+            this.lvcBattlePointersName.AspectName = "Name";
             this.lvcBattlePointersName.IsEditable = false;
             this.lvcBattlePointersName.Text = "Name";
             this.lvcBattlePointersName.Width = 90;
             // 
             // lvcBattlePointersID
             // 
-            this.lvcBattlePointersID.AspectName = "BattleID";
+            this.lvcBattlePointersID.AspectName = "ID";
             this.lvcBattlePointersID.AspectToStringFormat = "{0:X}";
             this.lvcBattlePointersID.IsEditable = false;
             this.lvcBattlePointersID.Text = "Hex ID";
@@ -2183,7 +2183,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcBattlePointersAddress
             // 
-            this.lvcBattlePointersAddress.AspectName = "BattleAddress";
+            this.lvcBattlePointersAddress.AspectName = "Address";
             this.lvcBattlePointersAddress.AspectToStringFormat = "{0:X}";
             this.lvcBattlePointersAddress.IsEditable = false;
             this.lvcBattlePointersAddress.Text = "Address";
@@ -2368,14 +2368,14 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcTileDataName
             // 
-            this.lvcTileDataName.AspectName = "TileName";
+            this.lvcTileDataName.AspectName = "Name";
             this.lvcTileDataName.IsEditable = false;
             this.lvcTileDataName.Text = "Name";
             this.lvcTileDataName.Width = 90;
             // 
             // lvcTileDataID
             // 
-            this.lvcTileDataID.AspectName = "TileID";
+            this.lvcTileDataID.AspectName = "ID";
             this.lvcTileDataID.AspectToStringFormat = "{0:X}";
             this.lvcTileDataID.IsEditable = false;
             this.lvcTileDataID.Text = "Hex ID";
@@ -2383,7 +2383,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcTileDataAddress
             // 
-            this.lvcTileDataAddress.AspectName = "TileAddress";
+            this.lvcTileDataAddress.AspectName = "Address";
             this.lvcTileDataAddress.AspectToStringFormat = "{0:X}";
             this.lvcTileDataAddress.IsEditable = false;
             this.lvcTileDataAddress.Text = "Address";

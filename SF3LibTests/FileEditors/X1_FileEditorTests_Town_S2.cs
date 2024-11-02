@@ -24,15 +24,12 @@ namespace SF3.Tests.FileEditors {
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.EnterTable;
 
-            Assert.AreEqual(0, table.Rows[0].EnterID);
             Assert.AreEqual(400, table.Rows[0].EnterXPos);
             Assert.AreEqual(400, table.Rows[0].EnterZPos);
 
-            Assert.AreEqual(1, table.Rows[1].EnterID);
             Assert.AreEqual(688, table.Rows[1].EnterXPos);
             Assert.AreEqual(144, table.Rows[1].EnterZPos);
 
-            Assert.AreEqual(2, table.Rows[2].EnterID);
             Assert.AreEqual(496, table.Rows[2].EnterXPos);
             Assert.AreEqual(208, table.Rows[2].EnterZPos);
 
