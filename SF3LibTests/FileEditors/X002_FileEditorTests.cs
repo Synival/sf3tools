@@ -10,20 +10,20 @@ namespace SF3.Tests.FileEditors {
                 string filename,
                 int expectedItems,
                 int expectedSpells,
-                int expectedPresets,
+                int expectedWeaponSpells,
                 int expectedLoads,
                 int expectedLoadedOverrides)
             : base(scenario, filename) {
                 ExpectedItems   = expectedItems;
                 ExpectedSpells  = expectedSpells;
-                ExpectedPresets = expectedPresets;
+                ExpectedWeaponSpells = expectedWeaponSpells;
                 ExpectedLoads   = expectedLoads;
                 ExpectedLoadedOverrides = expectedLoadedOverrides;
             }
 
             public int ExpectedItems { get; }
             public int ExpectedSpells { get; }
-            public int ExpectedPresets { get; }
+            public int ExpectedWeaponSpells { get; }
             public int ExpectedLoads { get; }
             public int ExpectedLoadedOverrides { get; }
         }
@@ -97,11 +97,11 @@ namespace SF3.Tests.FileEditors {
         }
 
         [TestMethod]
-        public void PresetTable_HasExpectedData() {
+        public void WeaponSpellTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var editor = new X002_FileEditor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
-                var table = editor.PresetTable;
+                var table = editor.WeaponSpellTable;
 
                 Assert.AreEqual(   0, table.Rows[0].SpellID2);
                 Assert.AreEqual(   0, table.Rows[0].Weapon0);
@@ -121,7 +121,7 @@ namespace SF3.Tests.FileEditors {
                 Assert.AreEqual(   2, table.Rows[2].Weapon2);
                 Assert.AreEqual(   2, table.Rows[2].Weapon3);
 
-                Assert.AreEqual(testCase.ExpectedPresets, table.Rows.Length);
+                Assert.AreEqual(testCase.ExpectedWeaponSpells, table.Rows.Length);
             });
         }
 

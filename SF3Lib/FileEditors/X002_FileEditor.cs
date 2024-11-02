@@ -83,7 +83,7 @@ namespace SF3.FileEditors {
                 (ItemTable = new ItemTable(this, itemAddress)),
                 (LoadedOverrideTable = new LoadedOverrideTable(this, loadedOverrideAddress)),
                 (LoadingTable = new LoadingTable(this, loadingAddress)),
-                (PresetTable = new PresetTable(this, presetAddress)),
+                (WeaponSpellTable = new WeaponSpellTable(this, presetAddress)),
                 (SpellTable = new SpellTable(this, spellAddress)),
                 (StatBoostTable = new StatBoostTable(this, statBoostAddress)),
                 (WeaponRankTable = new WeaponRankTable(this, weaponRankAddress)),
@@ -100,7 +100,7 @@ namespace SF3.FileEditors {
             ItemTable = null;
             LoadedOverrideTable = null;
             LoadingTable = null;
-            PresetTable = null;
+            WeaponSpellTable = null;
             SpellTable = null;
             StatBoostTable = null;
             WarpTable = null;
@@ -116,7 +116,7 @@ namespace SF3.FileEditors {
         [BulkCopyRecurse]
         public LoadingTable LoadingTable { get; private set; }
         [BulkCopyRecurse]
-        public PresetTable PresetTable { get; private set; }
+        public WeaponSpellTable WeaponSpellTable { get; private set; }
         [BulkCopyRecurse]
         public SpellTable SpellTable { get; private set; }
         [BulkCopyRecurse]

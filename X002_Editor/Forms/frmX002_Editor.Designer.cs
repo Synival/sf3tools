@@ -95,16 +95,16 @@ namespace SF3.X002_Editor.Forms
             this.lvcItemsEffectsEquip = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcItemsRequirements = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
-            this.tabPreset = new System.Windows.Forms.TabPage();
-            this.olvPreset = new BrightIdeasSoftware.ObjectListView();
-            this.lvcPresetID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcPresetAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcPresetName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcPresetSpellID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcPresetWeaponLv0 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcPresetWeaponLv1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcPresetWeaponLv2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcPresetWeaponLv3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tabWeaponSpells = new System.Windows.Forms.TabPage();
+            this.olvWeaponSpells = new BrightIdeasSoftware.ObjectListView();
+            this.lvcWeaponSpellsID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellsAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellsName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellsSpellID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellsWeaponLv0 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellsWeaponLv1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellsWeaponLv2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellsWeaponLv3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabLoaded = new System.Windows.Forms.TabPage();
             this.olvLoaded = new BrightIdeasSoftware.ObjectListView();
             this.lvcLoadedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -175,8 +175,8 @@ namespace SF3.X002_Editor.Forms
             this.tabItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvItems)).BeginInit();
             this.tabMain.SuspendLayout();
-            this.tabPreset.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvPreset)).BeginInit();
+            this.tabWeaponSpells.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvWeaponSpells)).BeginInit();
             this.tabLoaded.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvLoaded)).BeginInit();
             this.tabLoadedOverride.SuspendLayout();
@@ -784,7 +784,7 @@ namespace SF3.X002_Editor.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tabItems);
             this.tabMain.Controls.Add(this.tabSpells);
-            this.tabMain.Controls.Add(this.tabPreset);
+            this.tabMain.Controls.Add(this.tabWeaponSpells);
             this.tabMain.Controls.Add(this.tabLoaded);
             this.tabMain.Controls.Add(this.tabLoadedOverride);
             this.tabMain.Controls.Add(this.tabStatBoost);
@@ -798,112 +798,112 @@ namespace SF3.X002_Editor.Forms
             this.tabMain.TabIndex = 0;
             this.tabMain.Click += new System.EventHandler(this.tabMain_Click);
             // 
-            // tabPreset
+            // tabWeaponSpells
             // 
-            this.tabPreset.Controls.Add(this.olvPreset);
-            this.tabPreset.Location = new System.Drawing.Point(4, 22);
-            this.tabPreset.Name = "tabPreset";
-            this.tabPreset.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPreset.Size = new System.Drawing.Size(756, 480);
-            this.tabPreset.TabIndex = 5;
-            this.tabPreset.Text = "Preset";
-            this.tabPreset.UseVisualStyleBackColor = true;
+            this.tabWeaponSpells.Controls.Add(this.olvWeaponSpells);
+            this.tabWeaponSpells.Location = new System.Drawing.Point(4, 22);
+            this.tabWeaponSpells.Name = "tabWeaponSpells";
+            this.tabWeaponSpells.Padding = new System.Windows.Forms.Padding(3);
+            this.tabWeaponSpells.Size = new System.Drawing.Size(756, 480);
+            this.tabWeaponSpells.TabIndex = 5;
+            this.tabWeaponSpells.Text = "WeaponSpells";
+            this.tabWeaponSpells.UseVisualStyleBackColor = true;
             // 
-            // olvPreset
+            // olvWeaponSpells
             // 
-            this.olvPreset.AllColumns.Add(this.lvcPresetID);
-            this.olvPreset.AllColumns.Add(this.lvcPresetAddress);
-            this.olvPreset.AllColumns.Add(this.lvcPresetName);
-            this.olvPreset.AllColumns.Add(this.lvcPresetSpellID);
-            this.olvPreset.AllColumns.Add(this.lvcPresetWeaponLv0);
-            this.olvPreset.AllColumns.Add(this.lvcPresetWeaponLv1);
-            this.olvPreset.AllColumns.Add(this.lvcPresetWeaponLv2);
-            this.olvPreset.AllColumns.Add(this.lvcPresetWeaponLv3);
-            this.olvPreset.AllowColumnReorder = true;
-            this.olvPreset.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.olvWeaponSpells.AllColumns.Add(this.lvcWeaponSpellsID);
+            this.olvWeaponSpells.AllColumns.Add(this.lvcWeaponSpellsAddress);
+            this.olvWeaponSpells.AllColumns.Add(this.lvcWeaponSpellsName);
+            this.olvWeaponSpells.AllColumns.Add(this.lvcWeaponSpellsSpellID);
+            this.olvWeaponSpells.AllColumns.Add(this.lvcWeaponSpellsWeaponLv0);
+            this.olvWeaponSpells.AllColumns.Add(this.lvcWeaponSpellsWeaponLv1);
+            this.olvWeaponSpells.AllColumns.Add(this.lvcWeaponSpellsWeaponLv2);
+            this.olvWeaponSpells.AllColumns.Add(this.lvcWeaponSpellsWeaponLv3);
+            this.olvWeaponSpells.AllowColumnReorder = true;
+            this.olvWeaponSpells.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvPreset.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvPreset.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcPresetID,
-            this.lvcPresetAddress,
-            this.lvcPresetName,
-            this.lvcPresetSpellID,
-            this.lvcPresetWeaponLv0,
-            this.lvcPresetWeaponLv1,
-            this.lvcPresetWeaponLv2,
-            this.lvcPresetWeaponLv3});
-            this.olvPreset.FullRowSelect = true;
-            this.olvPreset.GridLines = true;
-            this.olvPreset.HasCollapsibleGroups = false;
-            this.olvPreset.HideSelection = false;
-            this.olvPreset.Location = new System.Drawing.Point(3, 3);
-            this.olvPreset.MenuLabelGroupBy = "";
-            this.olvPreset.Name = "olvPreset";
-            this.olvPreset.ShowGroups = false;
-            this.olvPreset.Size = new System.Drawing.Size(750, 474);
-            this.olvPreset.TabIndex = 1;
-            this.olvPreset.UseAlternatingBackColors = true;
-            this.olvPreset.UseCompatibleStateImageBehavior = false;
-            this.olvPreset.View = System.Windows.Forms.View.Details;
-            this.olvPreset.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
+            this.olvWeaponSpells.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvWeaponSpells.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvcWeaponSpellsID,
+            this.lvcWeaponSpellsAddress,
+            this.lvcWeaponSpellsName,
+            this.lvcWeaponSpellsSpellID,
+            this.lvcWeaponSpellsWeaponLv0,
+            this.lvcWeaponSpellsWeaponLv1,
+            this.lvcWeaponSpellsWeaponLv2,
+            this.lvcWeaponSpellsWeaponLv3});
+            this.olvWeaponSpells.FullRowSelect = true;
+            this.olvWeaponSpells.GridLines = true;
+            this.olvWeaponSpells.HasCollapsibleGroups = false;
+            this.olvWeaponSpells.HideSelection = false;
+            this.olvWeaponSpells.Location = new System.Drawing.Point(3, 3);
+            this.olvWeaponSpells.MenuLabelGroupBy = "";
+            this.olvWeaponSpells.Name = "olvWeaponSpells";
+            this.olvWeaponSpells.ShowGroups = false;
+            this.olvWeaponSpells.Size = new System.Drawing.Size(750, 474);
+            this.olvWeaponSpells.TabIndex = 1;
+            this.olvWeaponSpells.UseAlternatingBackColors = true;
+            this.olvWeaponSpells.UseCompatibleStateImageBehavior = false;
+            this.olvWeaponSpells.View = System.Windows.Forms.View.Details;
+            this.olvWeaponSpells.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
-            // lvcPresetID
+            // lvcWeaponSpellsID
             // 
-            this.lvcPresetID.AspectName = "ID";
-            this.lvcPresetID.AspectToStringFormat = "{0:X}";
-            this.lvcPresetID.IsEditable = false;
-            this.lvcPresetID.Text = "ID";
+            this.lvcWeaponSpellsID.AspectName = "ID";
+            this.lvcWeaponSpellsID.AspectToStringFormat = "{0:X}";
+            this.lvcWeaponSpellsID.IsEditable = false;
+            this.lvcWeaponSpellsID.Text = "ID";
             // 
-            // lvcPresetAddress
+            // lvcWeaponSpellsAddress
             // 
-            this.lvcPresetAddress.AspectName = "Address";
-            this.lvcPresetAddress.AspectToStringFormat = "{0:X}";
-            this.lvcPresetAddress.IsEditable = false;
-            this.lvcPresetAddress.Text = "Address";
+            this.lvcWeaponSpellsAddress.AspectName = "Address";
+            this.lvcWeaponSpellsAddress.AspectToStringFormat = "{0:X}";
+            this.lvcWeaponSpellsAddress.IsEditable = false;
+            this.lvcWeaponSpellsAddress.Text = "Address";
             // 
-            // lvcPresetName
+            // lvcWeaponSpellsName
             // 
-            this.lvcPresetName.AspectName = "Name";
-            this.lvcPresetName.AspectToStringFormat = "{0:X}";
-            this.lvcPresetName.IsEditable = false;
-            this.lvcPresetName.Text = "DefaultName";
-            this.lvcPresetName.Width = 120;
+            this.lvcWeaponSpellsName.AspectName = "Name";
+            this.lvcWeaponSpellsName.AspectToStringFormat = "{0:X}";
+            this.lvcWeaponSpellsName.IsEditable = false;
+            this.lvcWeaponSpellsName.Text = "DefaultName";
+            this.lvcWeaponSpellsName.Width = 120;
             // 
-            // lvcPresetSpellID
+            // lvcWeaponSpellsSpellID
             // 
-            this.lvcPresetSpellID.AspectName = "SpellID2";
-            this.lvcPresetSpellID.AspectToStringFormat = "{0:X}";
-            this.lvcPresetSpellID.Text = "SpellID";
-            this.lvcPresetSpellID.Width = 98;
+            this.lvcWeaponSpellsSpellID.AspectName = "SpellID2";
+            this.lvcWeaponSpellsSpellID.AspectToStringFormat = "{0:X}";
+            this.lvcWeaponSpellsSpellID.Text = "SpellID";
+            this.lvcWeaponSpellsSpellID.Width = 98;
             // 
-            // lvcPresetWeaponLv0
+            // lvcWeaponSpellsWeaponLv0
             // 
-            this.lvcPresetWeaponLv0.AspectName = "Weapon0";
-            this.lvcPresetWeaponLv0.AspectToStringFormat = "{0:X}";
-            this.lvcPresetWeaponLv0.Text = "WeaponLv0";
-            this.lvcPresetWeaponLv0.Width = 78;
+            this.lvcWeaponSpellsWeaponLv0.AspectName = "Weapon0";
+            this.lvcWeaponSpellsWeaponLv0.AspectToStringFormat = "{0:X}";
+            this.lvcWeaponSpellsWeaponLv0.Text = "WeaponLv0";
+            this.lvcWeaponSpellsWeaponLv0.Width = 78;
             // 
-            // lvcPresetWeaponLv1
+            // lvcWeaponSpellsWeaponLv1
             // 
-            this.lvcPresetWeaponLv1.AspectName = "Weapon1";
-            this.lvcPresetWeaponLv1.AspectToStringFormat = "{0:X}";
-            this.lvcPresetWeaponLv1.Text = "WeaponLv1";
-            this.lvcPresetWeaponLv1.Width = 81;
+            this.lvcWeaponSpellsWeaponLv1.AspectName = "Weapon1";
+            this.lvcWeaponSpellsWeaponLv1.AspectToStringFormat = "{0:X}";
+            this.lvcWeaponSpellsWeaponLv1.Text = "WeaponLv1";
+            this.lvcWeaponSpellsWeaponLv1.Width = 81;
             // 
-            // lvcPresetWeaponLv2
+            // lvcWeaponSpellsWeaponLv2
             // 
-            this.lvcPresetWeaponLv2.AspectName = "Weapon2";
-            this.lvcPresetWeaponLv2.AspectToStringFormat = "{0:X}";
-            this.lvcPresetWeaponLv2.Text = "WeaponLv2";
-            this.lvcPresetWeaponLv2.Width = 76;
+            this.lvcWeaponSpellsWeaponLv2.AspectName = "Weapon2";
+            this.lvcWeaponSpellsWeaponLv2.AspectToStringFormat = "{0:X}";
+            this.lvcWeaponSpellsWeaponLv2.Text = "WeaponLv2";
+            this.lvcWeaponSpellsWeaponLv2.Width = 76;
             // 
-            // lvcPresetWeaponLv3
+            // lvcWeaponSpellsWeaponLv3
             // 
-            this.lvcPresetWeaponLv3.AspectName = "Weapon3";
-            this.lvcPresetWeaponLv3.AspectToStringFormat = "{0:X}";
-            this.lvcPresetWeaponLv3.Text = "WeaponLv3";
-            this.lvcPresetWeaponLv3.Width = 81;
+            this.lvcWeaponSpellsWeaponLv3.AspectName = "Weapon3";
+            this.lvcWeaponSpellsWeaponLv3.AspectToStringFormat = "{0:X}";
+            this.lvcWeaponSpellsWeaponLv3.Text = "WeaponLv3";
+            this.lvcWeaponSpellsWeaponLv3.Width = 81;
             // 
             // tabLoaded
             // 
@@ -1614,8 +1614,8 @@ namespace SF3.X002_Editor.Forms
             this.tabItems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvItems)).EndInit();
             this.tabMain.ResumeLayout(false);
-            this.tabPreset.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvPreset)).EndInit();
+            this.tabWeaponSpells.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvWeaponSpells)).EndInit();
             this.tabLoaded.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvLoaded)).EndInit();
             this.tabLoadedOverride.ResumeLayout(false);
@@ -1687,16 +1687,16 @@ namespace SF3.X002_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcItemsSpellUse;
         private BrightIdeasSoftware.OLVColumn lvcItemsSpellUseLv;
         private System.Windows.Forms.TabControl tabMain;
-        private System.Windows.Forms.TabPage tabPreset;
-        private BrightIdeasSoftware.ObjectListView olvPreset;
-        private BrightIdeasSoftware.OLVColumn lvcPresetID;
-        private BrightIdeasSoftware.OLVColumn lvcPresetAddress;
-        private BrightIdeasSoftware.OLVColumn lvcPresetName;
-        private BrightIdeasSoftware.OLVColumn lvcPresetSpellID;
-        private BrightIdeasSoftware.OLVColumn lvcPresetWeaponLv0;
-        private BrightIdeasSoftware.OLVColumn lvcPresetWeaponLv1;
-        private BrightIdeasSoftware.OLVColumn lvcPresetWeaponLv2;
-        private BrightIdeasSoftware.OLVColumn lvcPresetWeaponLv3;
+        private System.Windows.Forms.TabPage tabWeaponSpells;
+        private BrightIdeasSoftware.ObjectListView olvWeaponSpells;
+        private BrightIdeasSoftware.OLVColumn lvcWeaponSpellsID;
+        private BrightIdeasSoftware.OLVColumn lvcWeaponSpellsAddress;
+        private BrightIdeasSoftware.OLVColumn lvcWeaponSpellsName;
+        private BrightIdeasSoftware.OLVColumn lvcWeaponSpellsSpellID;
+        private BrightIdeasSoftware.OLVColumn lvcWeaponSpellsWeaponLv0;
+        private BrightIdeasSoftware.OLVColumn lvcWeaponSpellsWeaponLv1;
+        private BrightIdeasSoftware.OLVColumn lvcWeaponSpellsWeaponLv2;
+        private BrightIdeasSoftware.OLVColumn lvcWeaponSpellsWeaponLv3;
         private BrightIdeasSoftware.OLVColumn lvcSpellsLv4Targets;
         private BrightIdeasSoftware.OLVColumn lvcSpellsLvc4Pow;
         private System.Windows.Forms.TabPage tabLoaded;

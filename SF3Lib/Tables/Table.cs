@@ -53,7 +53,6 @@ namespace SF3.Tables {
 
         /// <summary>
         /// Loads all rows from the resource file, sorted by value.
-        /// TODO: make 'T' always an IModel!
         /// </summary>
         public bool LoadFromResourceFile(Func<int, string, int, T> makeTFunc) {
             var rows = new Dictionary<int, T>();

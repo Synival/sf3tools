@@ -47,7 +47,6 @@ namespace SF3.NamedValues {
                 { NamedValueType.Sex,                 new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SexInfo)) },
                 { NamedValueType.Special,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialInfo.Info[Scenario])) },
                 { NamedValueType.Spell,               new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellInfo.Info[Scenario])) },
-                { NamedValueType.SpellIndex,          new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellIndexInfo.Info[Scenario])) },
                 { NamedValueType.SpellTarget,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellTargetInfo)) },
                 { NamedValueType.StatType,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.StatTypeInfo)) },
                 { NamedValueType.StatUpValueType,
@@ -56,6 +55,7 @@ namespace SF3.NamedValues {
                         (o, p, v, a) => CanGetStatUpValue(o, p, v, a),
                         (o, p, a)    => CanGetStatUpValue(o, p, 0, a)
                     ) },
+                { NamedValueType.WeaponSpell,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.WeaponSpellInfo.Info[Scenario])) },
                 { NamedValueType.WeaponType,          new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.WeaponTypeInfo)) },
             };
         }
@@ -90,7 +90,7 @@ namespace SF3.NamedValues {
                 case StatUpType.Special:
                     return _nameGetters[NamedValueType.Special].GetNameAndInfo(obj, property, value, parameters);
                 case StatUpType.Spell:
-                    return _nameGetters[NamedValueType.SpellIndex].GetNameAndInfo(obj, property, value, parameters);
+                    return _nameGetters[NamedValueType.WeaponSpell].GetNameAndInfo(obj, property, value, parameters);
                 default:
                     return null;
             }

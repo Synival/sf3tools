@@ -4,7 +4,7 @@ namespace SF3.FileEditors {
     public interface IX002_FileEditor : ISF3FileEditor {
         ItemTable ItemTable { get; }
         SpellTable SpellTable { get; }
-        PresetTable PresetTable { get; }
+        WeaponSpellTable WeaponSpellTable { get; }
         LoadingTable LoadingTable { get; }
         StatBoostTable StatBoostTable { get; }
         WeaponRankTable WeaponRankTable { get; }

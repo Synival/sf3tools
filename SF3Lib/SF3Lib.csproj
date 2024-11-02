@@ -71,7 +71,7 @@
     <Content Include="Resources\PD\LoadedOverrideList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PD\SpellIndexList.xml">
+    <Content Include="Resources\PD\WeaponSpells.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S1\ClassEquip.xml">
@@ -89,7 +89,7 @@
     <Content Include="Resources\S1\LoadedOverrideList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\S1\SpellIndexList.xml">
+    <Content Include="Resources\S1\WeaponSpells.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S2\ClassEquip.xml">
@@ -107,7 +107,7 @@
     <Content Include="Resources\S2\LoadedOverrideList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\S2\SpellIndexList.xml">
+    <Content Include="Resources\S2\WeaponSpells.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S3\ClassEquip.xml">
@@ -188,7 +188,7 @@
     <Content Include="Resources\S2\Spells.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\S3\SpellIndexList.xml">
+    <Content Include="Resources\S3\WeaponSpells.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S3\Spells.xml">

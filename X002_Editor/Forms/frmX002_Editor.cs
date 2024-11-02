@@ -40,7 +40,7 @@ namespace SF3.X002_Editor.Forms {
             return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()             {
                 new PopulateTabConfig(tabItems, olvItems, FileEditor.ItemTable),
                 new PopulateTabConfig(tabSpells, olvSpells, FileEditor.SpellTable),
-                new PopulateTabConfig(tabPreset, olvPreset, FileEditor.PresetTable),
+                new PopulateTabConfig(tabWeaponSpells, olvWeaponSpells, FileEditor.WeaponSpellTable),
                 new PopulateTabConfig(tabLoaded, olvLoaded, FileEditor.LoadingTable),
                 new PopulateTabConfig(tabLoadedOverride, olvLoadedOverride, FileEditor.LoadedOverrideTable),
                 new PopulateTabConfig(tabStatBoost, olvStatBoost, FileEditor.StatBoostTable),

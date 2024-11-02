@@ -31,12 +31,12 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceForScenariosInfo("Specials.xml");
         public static readonly NamedValueFromResourceForScenariosInfo SpellInfo
             = new NamedValueFromResourceForScenariosInfo("Spells.xml");
-        public static readonly NamedValueFromResourceForScenariosInfo SpellIndexInfo
-            = new NamedValueFromResourceForScenariosInfo("SpellIndexList.xml");
         public static readonly NamedValueFromResourceInfo SpellTargetInfo
             = new NamedValueFromResourceInfo("SpellTargets.xml");
         public static readonly NamedValueFromResourceInfo StatTypeInfo
             = new NamedValueFromResourceInfo("StatTypes.xml");
+        public static readonly NamedValueFromResourceForScenariosInfo WeaponSpellInfo
+            = new NamedValueFromResourceForScenariosInfo("WeaponSpells.xml");
         public static readonly NamedValueFromResourceInfo WeaponTypeInfo
             = new NamedValueFromResourceInfo("WeaponTypes.xml");
     }
