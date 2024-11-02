@@ -105,10 +105,10 @@ namespace SF3.Editor.Extensions {
                 if (nameContext != null) {
                     var property = obj.GetType().GetProperty(model.AspectName);
                     var attr = property.GetCustomAttribute<NameGetterAttribute>();
-                    if (attr != null) {
+                    if (attr != null && nameContext.CanGetInfo(attr.Parameters)) {
                         var intValue = (int) property.GetValue(obj);
-                        if (nameContext.CanGetNameAndInfo(intValue, attr.Parameters))
-                            return MakeNamedValueComboBox(attr.GetInfo(nameContext, intValue), intValue);
+                        if (nameContext.CanGetName(intValue, attr.Parameters))
+                            return MakeNamedValueComboBox(nameContext.GetInfo(attr.Parameters), intValue);
                     }
                 }
             }

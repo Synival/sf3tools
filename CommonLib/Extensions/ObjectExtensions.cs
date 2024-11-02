@@ -84,11 +84,10 @@ namespace CommonLib.Extensions {
                 return null;
             var hexValue = value.ToStringHex(null, "");
             var intValue = Convert.ToInt32(hexValue, 16);
-            if (!context.CanGetNameAndInfo(intValue, attr.Parameters))
+            if (!context.CanGetInfo(attr.Parameters) || !context.CanGetName(intValue, attr.Parameters))
                 return null;
 
-            var nameAndInfo = attr.GetNameAndInfo(context, intValue);
-            return GetFullName(intValue, nameAndInfo.Name, nameAndInfo.Info.FormatString);
+            return GetFullName(intValue, context.GetName(intValue, attr.Parameters), context.GetInfo(attr.Parameters).FormatString);
         }
     }
 }

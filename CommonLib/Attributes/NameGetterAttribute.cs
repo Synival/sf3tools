@@ -17,33 +17,6 @@ namespace CommonLib.Attributes {
         }
 
         /// <summary>
-        /// Fetches the property's value's name and all information about it.
-        /// </summary>
-        /// <param name="context">The object that will provide the name for this value.</param>
-        /// <param name="value">The value for whose name we're trying to fetch.</param>
-        /// <returns>The return value of: containerObj.<MethodName>(value)</returns>
-        public NameAndInfo GetNameAndInfo(INameGetterContext context, int value)
-            => context.GetNameAndInfo(value, Parameters);
-
-        /// <summary>
-        /// Fetches the property's value's name using the fetcher method.
-        /// </summary>
-        /// <param name="context">The object that will provide the name for this value.</param>
-        /// <param name="value">The value for whose name we're trying to fetch.</param>
-        /// <returns>The return value of: containerObj.<MethodName>(value).Name</returns>
-        public string GetName(INameGetterContext context, int value)
-            => GetNameAndInfo(context, value).Name;
-
-        /// <summary>
-        /// Fetches the property's value's info using the fetcher method.
-        /// </summary>
-        /// <param name="context">The object that will provide the info for this value.</param>
-        /// <param name="value">The value for whose name we're trying to fetch.</param>
-        /// <returns>The return value of: containerObj.<MethodName>(value).Info</returns>
-        public INamedValueInfo GetInfo(INameGetterContext context, int value)
-            => GetNameAndInfo(context, value).Info;
-
-        /// <summary>
         /// The parameter used when fetching names and info.
         /// </summary>
         public object[] Parameters { get; }

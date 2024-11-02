@@ -19,19 +19,26 @@ namespace CommonLib.NamedValues
         string GetName(int value, params object[] parameters);
 
         /// <summary>
-        /// Fetches the name of a value and information about it.
+        /// Fetches the info for a named value.
         /// </summary>
-        /// <param name="value">The value whose name we want to fetch.</param>
         /// <param name="parameters">Optional parameters assigned to the NameGetterAttribute.</param>
-        /// <returns>Both the name of the value (if one exists) and information about the named value.</returns>
-        NameAndInfo GetNameAndInfo(int value, params object[] parameters);
+        /// <returns>The information associated with the named value.</returns>
+        INamedValueInfo GetInfo(params object[] parameters);
 
         /// <summary>
-        /// Returns 'true' if GetNameAndInfo() is safe to use with this value and parameter.
+        /// Returns 'true' if GetName() is safe to use with this value and these parameters.
         /// The conditions on whether or not this is safe depends on the implementation.
         /// </summary>
         /// <param name="parameters">Optional parameters assigned to the NameGetterAttribute.</param>
-        /// <returns>'true' if GetNameAndInfo() can be used.</returns>
-        bool CanGetNameAndInfo(int value, params object[] parameters);
+        /// <returns>'true' if GetName() can be used.</returns>
+        bool CanGetName(int value, params object[] parameters);
+
+        /// <summary>
+        /// Returns 'true' if GetInfo() is safe to use with these parameters.
+        /// The conditions on whether or not this is safe depends on the implementation.
+        /// </summary>
+        /// <param name="parameters">Optional parameters assigned to the NameGetterAttribute.</param>
+        /// <returns>'true' if GetInfo() can be used.</returns>
+        bool CanGetInfo(params object[] parameters);
     }
 }
