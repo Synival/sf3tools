@@ -17,36 +17,6 @@ namespace SF3.Models {
             Address = address;
             Size    = 0x04;
 
-            // X002 editor has Scenario1 WarpTable, and provides the address itself.
-            // TODO: the X1 editor can do this soon too!!
-            if (editor.Scenario != ScenarioType.Scenario1) {
-                int offset;
-                int sub;
-
-                if (editor.Scenario == ScenarioType.Scenario2) {
-                    offset = 0x00000018; //scn2 initial pointer
-                    sub = 0x0605e000;
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub;
-                }
-                else if (editor.Scenario == ScenarioType.Scenario3) {
-                    offset = 0x00000018; //scn3 initial pointer
-                    sub = 0x0605e000;
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub;
-                }
-                else if (editor.Scenario == ScenarioType.PremiumDisk) {
-                    offset = 0x00000018; //pd initial pointer
-                    sub = 0x0605e000;
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub;
-                }
-                else
-                    throw new ArgumentException(nameof(editor) + "." + nameof(editor.Scenario));
-
-                Address = offset + (id * 0x04);
-            }
-
             unknown1 = Address;
             unknown2 = Address + 1;
             type     = Address + 2;

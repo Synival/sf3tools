@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using SF3.NamedValues;
@@ -52,13 +53,42 @@ namespace SF3.FileEditors {
         public override IEnumerable<ITable> MakeTables() {
             var isntScn1OrBTL99 = Scenario != ScenarioType.Scenario1 && !IsBTL99;
 
+            int offset;
+            int sub;
+
+            int warpAddress;
+
+            switch (Scenario) {
+                case ScenarioType.Scenario1:
+                    warpAddress = 0; // X002 editor has Scenario1 WarpTable, and provides the address itself.
+                    break;
+
+                case ScenarioType.Scenario2:
+                    offset = 0x00000018;
+                    sub = 0x0605e000;
+                    warpAddress = GetDouble(offset) - sub;
+                    break;
+
+                case ScenarioType.Scenario3:
+                    offset = 0x00000018;
+                    sub = 0x0605e000;
+                    warpAddress = GetDouble(offset) - sub;
+                    break;
+
+                case ScenarioType.PremiumDisk:
+                    offset = 0x00000018;
+                    sub = 0x0605e000;
+                    warpAddress = GetDouble(offset) - sub;
+                    break;
+
+                default:
+                    throw new ArgumentException(nameof(Scenario));
+            }
+
             // Add tables present for both towns and battles.
             var tables = new List<ITable> {
                 (TreasureTable = new TreasureTable(this))
             };
-
-            if (isntScn1OrBTL99)
-                tables.Add(WarpTable = new WarpTable(this, 0 /* TODO: real address! */));
 
             // Add tables only present for battles.
             if (IsBattle) {
@@ -85,6 +115,9 @@ namespace SF3.FileEditors {
                 if (isntScn1OrBTL99)
                     tables.Add(ArrowTable = new ArrowTable(this));
             }
+
+            if (isntScn1OrBTL99)
+                tables.Add(WarpTable = new WarpTable(this, warpAddress));
 
             return tables;
         }
