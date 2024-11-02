@@ -14,19 +14,6 @@ namespace SF3.Models.X1 {
         private readonly int unknownE; //2 byte
                                        //private int npcOffset;
 
-        private readonly int offset;
-        private readonly int sub;
-
-        /*public int NPCTableAddress1
-        {
-            get => Editor.GetDouble(npcOffset);
-            set => Editor.SetDouble(npcOffset, value);
-        }
-
-        public int NPCTableAddress2 => Editor.GetDouble(NPCTableAddress1 - 0x0605F000);
-
-        public int NPCTableAddress3 => Editor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
-
         public Enter(IX1_FileEditor editor, int id, string name) {
             Editor = editor;
             Name   = name;

@@ -14,8 +14,6 @@ namespace SF3.Models.X1 {
         private readonly int xPos4;
         private readonly int zPos4;
         private readonly int ending;
-        private readonly int offset;
-        private readonly int sub;
 
         public CustomMovement(IX1_FileEditor editor, int id, string name) {
             Editor = editor;
