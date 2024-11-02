@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using CommonLib.NamedValues;
 using SF3.Types;
 
@@ -32,11 +32,11 @@ namespace SF3.NamedValues {
             };
         }
 
-        public string GetName(int value, params object[] parameters) => _nameGetters[(NamedValueType) parameters[0]](value).Name;
-        public INamedValueInfo GetInfo(params object[] parameters) => _nameGetters[(NamedValueType) parameters[0]](0).Info;
+        public string GetName(object obj, PropertyInfo property, int value, params object[] parameters) => _nameGetters[(NamedValueType) parameters[0]](value).Name;
+        public INamedValueInfo GetInfo(object obj, PropertyInfo property, params object[] parameters) => _nameGetters[(NamedValueType) parameters[0]](0).Info;
 
-        public bool CanGetName(int value, params object[] parameters) => _nameGetters.ContainsKey((NamedValueType) parameters[0]);
-        public bool CanGetInfo(params object[] parameters) => _nameGetters.ContainsKey((NamedValueType) parameters[0]);
+        public bool CanGetName(object obj, PropertyInfo property, int value, params object[] parameters) => _nameGetters.ContainsKey((NamedValueType) parameters[0]);
+        public bool CanGetInfo(object obj, PropertyInfo property, params object[] parameters) => _nameGetters.ContainsKey((NamedValueType) parameters[0]);
 
         public ScenarioType Scenario { get; }
 

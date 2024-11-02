@@ -1,7 +1,6 @@
 using CommonLib.NamedValues;
 using SF3.FileEditors;
 using SF3.Models;
-using SF3.NamedValues;
 using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 
@@ -17,7 +16,7 @@ namespace SF3.Tables {
 
         public override bool Load()
             => LoadFromResourceFile((id, name, address) => new SpellIcon(
-                FileEditor, id, name, address, NameContext.GetName(id, NamedValueType.Spell), Has16BitIconAddr, RealOffsetStart
+                FileEditor, id, name, address, NameContext.GetName(null, null, id, NamedValueType.Spell), Has16BitIconAddr, RealOffsetStart
             ));
 
         public override string ResourceFile { get; }

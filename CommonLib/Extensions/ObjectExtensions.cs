@@ -61,33 +61,63 @@ namespace CommonLib.Extensions {
         }
 
         /// <summary>
-        /// Returns a nicely formatted named value for an object if a NamedValueAttribute is present.
+        /// Returns a nicely formatted named value for an object's property if a NamedValueAttribute is present.
         /// Otherwise returns null.
         /// </summary>
-        /// <param name="value">The value to convert to a name.</param>
+        /// <param name="obj">The object that contains the proeprty with the named value.</param>
+        /// <param name="property">The property that has the named value.</param>
         /// <param name="context">The context which knows how to fetch names and does the work for it.</param>
-        /// <param name="property">The property that has the NamedValueAttribute.</param>
-        /// <returns>A nicely formatted value + name or 'null' if no NamedValueAttribute was found.</returns>
-        public static string ToNamedValue(this object value, INameGetterContext context, PropertyInfo property)
-            => ToNamedValue(value, context, property.GetCustomAttribute<NameGetterAttribute>());
-
-        /// <summary>
-        /// Returns a nicely formatted named value for an object if a NamedValueAttribute is supplied.
-        /// Otherwise returns null.
-        /// </summary>
-        /// <param name="value">The value to convert to a name.</param>
-        /// <param name="context">The context which knows how to fetch names and does the work for it.</param>
-        /// <param name="attr">The NameValueAttribute associated with the value.</param>
         /// <returns>A nicely formatted value + name or 'null' if no NamedValueAttribute was supplied.</returns>
-        public static string ToNamedValue(this object value, INameGetterContext context, NameGetterAttribute attr) {
-            if (context == null || attr == null)
+        public static string GetPropertyValueName(this object obj, PropertyInfo property, INameGetterContext context) {
+            if (obj == null || property == null || context == null)
                 return null;
+
+            var attr = property.GetCustomAttribute<NameGetterAttribute>();
+            if (attr == null)
+                return null;
+
+            object value = property.GetValue(obj);
             var hexValue = value.ToStringHex(null, "");
             var intValue = Convert.ToInt32(hexValue, 16);
-            if (!context.CanGetInfo(attr.Parameters) || !context.CanGetName(intValue, attr.Parameters))
+
+            if (!context.CanGetInfo(obj, property, attr.Parameters) || !context.CanGetName(obj, property, intValue, attr.Parameters))
                 return null;
 
-            return GetFullName(intValue, context.GetName(intValue, attr.Parameters), context.GetInfo(attr.Parameters).FormatString);
+            return GetFullName(
+                intValue,
+                context.GetName(obj, property, intValue, attr.Parameters),
+                context.GetInfo(obj, property, attr.Parameters).FormatString
+            );
+        }
+
+        /// <summary>
+        /// Returns a nicely formatted named value for an object's property if a NamedValueAttribute is present.
+        /// Otherwise returns null.
+        /// </summary>
+        /// <param name="obj">The object that contains the proeprty with the named value.</param>
+        /// <param name="property">The property that has the named value.</param>
+        /// <param name="context">The context which knows how to fetch names and does the work for it.</param>
+        /// <param name="value">A specific value to get a name for.</param>
+        /// <returns>A nicely formatted value + name or 'null' if no NamedValueAttribute was supplied.</returns>
+        public static string GetPropertyValueName(this object obj, PropertyInfo property, INameGetterContext context, object value) {
+            if (obj == null || property == null || context == null)
+                return null;
+
+            var attr = property.GetCustomAttribute<NameGetterAttribute>();
+            if (attr == null)
+                return null;
+
+            var hexValue = value.ToStringHex(null, "");
+            var intValue = Convert.ToInt32(hexValue, 16);
+
+            if (!context.CanGetInfo(obj, property, attr.Parameters) || !context.CanGetName(obj, property, intValue, attr.Parameters))
+                return null;
+
+            return GetFullName(
+                intValue,
+                context.GetName(obj, property, intValue, attr.Parameters),
+                context.GetInfo(obj, property, attr.Parameters).FormatString
+            );
         }
     }
 }

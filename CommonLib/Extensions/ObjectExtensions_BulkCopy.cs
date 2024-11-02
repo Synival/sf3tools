@@ -74,8 +74,8 @@ namespace CommonLib.Extensions {
 
             public override string MakeSummaryReport(INameGetterContext nameContext) {
                 return !Changed ? "" : Property.Name + ": " +
-                    (OldValue.ToNamedValue(nameContext, Property) ?? OldValue.ToStringHex()) + " => " +
-                    (NewValue.ToNamedValue(nameContext, Property) ?? NewValue.ToStringHex()) + "\n";
+                    (ObjTo.GetPropertyValueName(Property, nameContext, OldValue) ?? OldValue.ToStringHex()) + " => " +
+                    (ObjTo.GetPropertyValueName(Property, nameContext, NewValue) ?? NewValue.ToStringHex()) + "\n";
             }
 
             /// <summary>

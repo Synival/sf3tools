@@ -51,12 +51,8 @@ namespace SF3.Editor.Extensions {
                     var property = obj.GetType().GetProperty(lvc.AspectName);
                     if (property != null) {
                         var attr = property.GetCustomAttribute<NameGetterAttribute>();
-                        if (attr != null) {
-                            converter = v => {
-                                var value = lvc.GetAspectByName(obj);
-                                return value.ToNamedValue(nameContext, attr) ?? string.Format(lvc.AspectToStringFormat, value);
-                            };
-                        }
+                        if (attr != null)
+                            converter = v => obj.GetPropertyValueName(property, nameContext) ?? string.Format(lvc.AspectToStringFormat, lvc.GetAspectByName(obj));
                     }
                 }
 
@@ -105,10 +101,10 @@ namespace SF3.Editor.Extensions {
                 if (nameContext != null) {
                     var property = obj.GetType().GetProperty(model.AspectName);
                     var attr = property.GetCustomAttribute<NameGetterAttribute>();
-                    if (attr != null && nameContext.CanGetInfo(attr.Parameters)) {
+                    if (attr != null && nameContext.CanGetInfo(obj, property, attr.Parameters)) {
                         var intValue = (int) property.GetValue(obj);
-                        if (nameContext.CanGetName(intValue, attr.Parameters))
-                            return MakeNamedValueComboBox(nameContext.GetInfo(attr.Parameters), intValue);
+                        if (nameContext.CanGetName(obj, property, intValue, attr.Parameters))
+                            return MakeNamedValueComboBox(nameContext.GetInfo(obj, property, attr.Parameters), intValue);
                     }
                 }
             }
