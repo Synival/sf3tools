@@ -6,13 +6,7 @@ namespace SF3.FileEditors {
         // TODO: make this read-only once all of X1 is migrated. I suppose LoadTables() can set it privately
         MapLeaderType MapLeader { get; set; }
 
-        // TODO: remove me once we have a table of tables for battles!!
-        int MapIndex { get; }
-
-        // TODO: remove me once all of X1 is migrated!!
-        int MapOffset { get; }
-
-        bool IsBattle { get; }
+        bool? IsBattle { get; }
 
         bool IsBTL99 { get; }
 

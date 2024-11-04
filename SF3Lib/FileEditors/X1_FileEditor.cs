@@ -13,19 +13,6 @@ namespace SF3.FileEditors {
             IsBTL99 = isBTL99;
         }
 
-        public override bool OnLoadBeforeMakeTables() {
-            var battlePointersPointerPointerAddress = (IsBTL99 || Scenario == ScenarioType.Scenario1) ? 0x0018 : 0x0024;
-            var sub = IsBTL99 ? 0x06060000 : (Scenario == ScenarioType.Scenario1) ? 0x0605f000 : 0x0605e000;
-
-            var battlePointersPointerAddress = GetDouble(battlePointersPointerPointerAddress) - sub;
-            var battlePointersAddress = GetDouble(battlePointersPointerAddress);
-
-            // A value higher means a pointer is on the expLimitAddress, meaning we are in a battle. If it is not a
-            // pointer we are at our destination so we know a town is loaded.
-            IsBattle = (Scenario == ScenarioType.Scenario1 && battlePointersAddress > 0x0605F000) || battlePointersAddress > 0x0605e000;
-            return true;
-        }
-
         public override IEnumerable<ITable> MakeTables() {
             var isScn1OrBTL99 = Scenario == ScenarioType.Scenario1 || IsBTL99;
 
@@ -50,24 +37,38 @@ namespace SF3.FileEditors {
 
             int tileMovementAddress;
 
+            var battlePointersPointerPointerAddress = isScn1OrBTL99 ? 0x0018 : 0x0024;
+            sub = IsBTL99 ? 0x06060000 : (Scenario == ScenarioType.Scenario1) ? 0x0605f000 : 0x0605e000;
+
+            battlePointersPointerAddress = GetDouble(battlePointersPointerPointerAddress) - sub;
+            battlePointersAddress = GetDouble(battlePointersPointerAddress);
+
+            // A value higher means a pointer is on the expLimitAddress, meaning we are in a battle. If it is not a
+            // pointer we are at our destination so we know a town is loaded.
+            if ((Scenario == ScenarioType.Scenario1 && battlePointersAddress > 0x0605F000) || battlePointersAddress > 0x0605e000) {
+                battlePointersAddress -= sub;
+                IsBattle = true;
+            }
+            else {
+                battlePointersAddress = -1;
+                IsBattle = false;
+            }
+
             if (isScn1OrBTL99) {
-                sub = IsBTL99 ? 0x06060000 : 0x0605f000;
                 enemySpawnTableSize  = 0xe9a;
+
                 treasureAddress      = GetDouble(0x000c) - sub;
                 warpAddress          = -1; // X002 editor has Scenario1 WarpTable, and provides the address itself.
-                battlePointersPointerAddress = GetDouble(0x0018) - sub;
-                npcAddress           = battlePointersPointerAddress; // same address
+                npcAddress           = (IsBattle == true) ? -1 : battlePointersPointerAddress; // same address
                 enterAddress         = GetDouble(0x0024) - sub;
                 arrowAddress         = -1; // Not present in Scenario1
             }
             else {
-                sub = 0x0605e000;
                 enemySpawnTableSize = 0xa8a;
 
                 treasureAddress      = GetDouble(0x000c) - sub;
                 warpAddress          = GetDouble(0x0018) - sub;
-                battlePointersPointerAddress = GetDouble(0x0024) - sub;
-                npcAddress           = battlePointersPointerAddress; // same address
+                npcAddress           = (IsBattle == true) ? -1 : battlePointersPointerAddress; // same address
                 enterAddress         = GetDouble(0x0030) - sub;
                 arrowAddress         = GetDouble(0x0060) - sub;
             }
@@ -75,15 +76,14 @@ namespace SF3.FileEditors {
             // If this is a battle, we need to get the addresses for a lot of battle-specific stuff.
             // TODO: we should have a table of tables here!!
             int mapIndex;
-            if (IsBattle) {
+            if (IsBattle == true) {
                 // Load the BattlePointersTable early so we can use it to determine the addresses of other tables.
-                battlePointersAddress = GetDouble(battlePointersPointerAddress) - sub;
                 BattlePointersTable = new BattlePointersTable(this, ResourceFile("BattlePointersList.xml"), battlePointersAddress);
                 BattlePointersTable.Load();
 
                 // Get the address of the selected battle, or, if it's not available, the first available in the BattlePointersTable.
-                mapIndex = (BattlePointersTable.Rows[MapIndex].BattlePointer != 0)
-                    ? MapIndex
+                mapIndex = (BattlePointersTable.Rows[(int) MapLeader].BattlePointer != 0)
+                    ? (int) MapLeader
                     : BattlePointersTable.Rows.Select((v, i) => new { v, i }).First(x => x.v.BattlePointer != 0).i;
 
                 battleAddress = BattlePointersTable.Rows[mapIndex].BattlePointer - sub;
@@ -136,59 +136,61 @@ namespace SF3.FileEditors {
                 tileMovementAddress = -1;
             }
 
-            // Add tables present for both towns and battles.
-            var tables = new List<ITable> {
-                (TreasureTable = new TreasureTable(this, ResourceFile("X1Treasure.xml"), treasureAddress))
-            };
-
-            // Add tables only present for battles.
-            if (IsBattle) {
-                tables.AddRange(new List<ITable>() {
-                    (HeaderTable         = new HeaderTable(this, ResourceFile("X1Top.xml"), headerAddress)),
-                    (SlotTable           = new SlotTable(this, ResourceFile(Scenario == ScenarioType.Scenario1 ? "X1List.xml" : "X1OtherList.xml"), slotAddress)),
-                    (AITable             = new AITable(this, ResourceFile("X1AI.xml"), aiAddress)),
-                    (SpawnZoneTable      = new SpawnZoneTable(this, ResourceFile("UnknownAIList.xml"), spawnZoneAddress)),
-                    BattlePointersTable,
-                    (CustomMovementTable = new CustomMovementTable(this, ResourceFile("X1AI.xml"), customMovementAddress)),
-                });
-
-                if (!isScn1OrBTL99)
-                    tables.Add(TileMovementTable = new TileMovementTable(this, ResourceFile("MovementTypes.xml"), tileMovementAddress));
-            }
-            // Add tables only present outside of battle.
-            else {
-                tables.AddRange(new List<ITable>() {
-                    (NpcTable = new NpcTable(this, ResourceFile("X1Npc.xml"), npcAddress)),
-                    (EnterTable = new EnterTable(this, ResourceFile("X1Enter.xml"), enterAddress))
-                });
-
-                if (!isScn1OrBTL99)
-                    tables.Add(ArrowTable = new ArrowTable(this, ResourceFile("X1Arrow.xml"), arrowAddress));
-            }
-
-            if (!isScn1OrBTL99)
+            // Add tables present outside of the battle tables.
+            var tables = new List<ITable>();
+            if (treasureAddress >= 0)
+                tables.Add(TreasureTable = new TreasureTable(this, ResourceFile("X1Treasure.xml"), treasureAddress));
+            if (warpAddress >= 0)
                 tables.Add(WarpTable = new WarpTable(this, null, warpAddress));
+            if (battlePointersAddress >= 0)
+                tables.Add(BattlePointersTable);
+            if (npcAddress >= 0)
+                tables.Add(NpcTable = new NpcTable(this, ResourceFile("X1Npc.xml"), npcAddress));
+            if (enterAddress >= 0)
+                tables.Add(EnterTable = new EnterTable(this, ResourceFile("X1Enter.xml"), enterAddress));
+            if (arrowAddress >= 0)
+                tables.Add(ArrowTable = new ArrowTable(this, ResourceFile("X1Arrow.xml"), arrowAddress));
+
+            // Add tables for battle tables.
+            // TODO: make this a table of tables!
+            if (headerAddress >= 0)
+                tables.Add(HeaderTable = new HeaderTable(this, ResourceFile("X1Top.xml"), headerAddress));
+            if (slotAddress >= 0)
+                tables.Add(SlotTable = new SlotTable(this, ResourceFile(Scenario == ScenarioType.Scenario1 ? "X1List.xml" : "X1OtherList.xml"), slotAddress));
+            if (spawnZoneAddress >= 0)
+                tables.Add(SpawnZoneTable = new SpawnZoneTable(this, ResourceFile("UnknownAIList.xml"), spawnZoneAddress));
+            if (aiAddress >= 0)
+                tables.Add(AITable = new AITable(this, ResourceFile("X1AI.xml"), aiAddress));
+            if (customMovementAddress >= 0)
+                tables.Add(CustomMovementTable = new CustomMovementTable(this, ResourceFile("X1AI.xml"), customMovementAddress));
+
+            if (tileMovementAddress >= 0)
+                tables.Add(TileMovementTable = new TileMovementTable(this, ResourceFile("MovementTypes.xml"), tileMovementAddress));
 
             return tables;
         }
 
         public override void DestroyTables() {
-            SlotTable           = null;
-            HeaderTable         = null;
-            AITable             = null;
-            SpawnZoneTable      = null;
-            BattlePointersTable = null;
+            IsBattle            = null;
+
             TreasureTable       = null;
-            CustomMovementTable = null;
             WarpTable           = null;
-            TileMovementTable   = null;
+            BattlePointersTable = null;
             NpcTable            = null;
             EnterTable          = null;
             ArrowTable          = null;
+
+            HeaderTable         = null;
+            SlotTable           = null;
+            SpawnZoneTable      = null;
+            AITable             = null;
+            CustomMovementTable = null;
+
+            TileMovementTable   = null;
         }
 
         protected override string BaseTitle => IsLoaded
-            ? base.BaseTitle + " (Map: " + MapLeader.ToString() + ") (Type: " + (IsBTL99 ? "BTL99" : IsBattle ? "Battle" : "Town") + ")"
+            ? base.BaseTitle + " (Map: " + MapLeader.ToString() + ") (Type: " + (IsBTL99 ? "BTL99" : (IsBattle == true) ? "Battle" : "Town") + ")"
             : base.BaseTitle;
 
         private MapLeaderType _mapLeader;
@@ -203,12 +205,11 @@ namespace SF3.FileEditors {
             }
         }
 
-        public int MapIndex => (int) MapLeader;
-        public int MapOffset => MapIndex * 4;
+        public bool IsBTL99 { get; }
 
-        private bool _isBattle;
+        private bool? _isBattle;
 
-        public bool IsBattle {
+        public bool? IsBattle {
             get => _isBattle;
             set {
                 if (_isBattle != value) {
@@ -218,31 +219,31 @@ namespace SF3.FileEditors {
             }
         }
 
-        public bool IsBTL99 { get; }
-
-        [BulkCopyRecurse]
-        public SlotTable SlotTable { get; private set; }
-        [BulkCopyRecurse]
-        public HeaderTable HeaderTable { get; private set; }
-        [BulkCopyRecurse]
-        public AITable AITable { get; private set; }
-        [BulkCopyRecurse]
-        public SpawnZoneTable SpawnZoneTable { get; private set; }
-        [BulkCopyRecurse]
-        public BattlePointersTable BattlePointersTable { get; private set; }
         [BulkCopyRecurse]
         public TreasureTable TreasureTable { get; private set; }
         [BulkCopyRecurse]
-        public CustomMovementTable CustomMovementTable { get; private set; }
-        [BulkCopyRecurse]
         public WarpTable WarpTable { get; private set; }
         [BulkCopyRecurse]
-        public TileMovementTable TileMovementTable { get; private set; }
+        public BattlePointersTable BattlePointersTable { get; private set; }
         [BulkCopyRecurse]
         public NpcTable NpcTable { get; private set; }
         [BulkCopyRecurse]
         public EnterTable EnterTable { get; private set; }
         [BulkCopyRecurse]
         public ArrowTable ArrowTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public HeaderTable HeaderTable { get; private set; }
+        [BulkCopyRecurse]
+        public SlotTable SlotTable { get; private set; }
+        [BulkCopyRecurse]
+        public SpawnZoneTable SpawnZoneTable { get; private set; }
+        [BulkCopyRecurse]
+        public AITable AITable { get; private set; }
+        [BulkCopyRecurse]
+        public CustomMovementTable CustomMovementTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public TileMovementTable TileMovementTable { get; private set; }
     }
 }
