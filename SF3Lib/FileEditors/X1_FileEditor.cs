@@ -59,10 +59,14 @@ namespace SF3.FileEditors {
 
             int treasureAddress;
             int warpAddress;
-            int battlePointerAddress;
+            int battlePointersPointerAddress; // the address to the pointer to the table of battle pointers
             int npcAddress;
             int enterAddress;
             int arrowAddress;
+
+            int battlePointersAddress;
+            int battleAddress;
+            int aiAddress;
 
             if (isScn1OrBTL99) {
                 sub = IsBTL99 ? 0x06060000 : 0x0605f000;
@@ -70,8 +74,8 @@ namespace SF3.FileEditors {
 
                 treasureAddress      = GetDouble(0x000c) - sub;
                 warpAddress          = -1; // X002 editor has Scenario1 WarpTable, and provides the address itself.
-                battlePointerAddress = GetDouble(0x0018) - sub;
-                npcAddress           = GetDouble(0x0018) - sub;
+                battlePointersPointerAddress = GetDouble(0x0018) - sub;
+                npcAddress           = battlePointersPointerAddress; // same address
                 enterAddress         = GetDouble(0x0024) - sub;
                 arrowAddress         = -1; // Not present in Scenario1
             }
@@ -81,34 +85,33 @@ namespace SF3.FileEditors {
 
                 treasureAddress      = GetDouble(0x000c) - sub;
                 warpAddress          = GetDouble(0x0018) - sub;
-                battlePointerAddress = GetDouble(0x0024) - sub;
-                npcAddress           = GetDouble(0x0024) - sub;
+                battlePointersPointerAddress = GetDouble(0x0024) - sub;
+                npcAddress           = battlePointersPointerAddress; // same address
                 enterAddress         = GetDouble(0x0030) - sub;
                 arrowAddress         = GetDouble(0x0060) - sub;
             }
 
             // Get the pointer to the battle.
-            int battleAddress = -1;
             if (IsBattle) {
-                int getBattlePointer() {
-                    int battlePointerForMapLeaderAddress = GetDouble(battlePointerAddress) - sub + MapOffset;
-                    return GetDouble(battlePointerForMapLeaderAddress);
-                }
+                battlePointersAddress = GetDouble(battlePointersPointerAddress) - sub;
 
-                battleAddress = getBattlePointer();
+                battleAddress = GetDouble(battlePointersAddress + MapOffset) - sub;
                 if (battleAddress == 0) {
                     MapLeader =
                         (Scenario == ScenarioType.Scenario1) ? MapLeaderType.Synbios :
                         (Scenario == ScenarioType.Scenario2) ? MapLeaderType.Medion :
                         (Scenario == ScenarioType.Scenario3) ? MapLeaderType.Julian :
                         (Scenario == ScenarioType.PremiumDisk) ? MapLeaderType.Synbios : throw new ArgumentException();
-                    battleAddress = getBattlePointer();
+                    battleAddress = GetDouble(battlePointersAddress + MapOffset) - sub;
                 }
 
-                battleAddress -= sub;
+                aiAddress = battleAddress + 10 + enemySpawnTableSize + somethingElseSize;
             }
-
-            var aiAddress = battleAddress + 10 + enemySpawnTableSize + somethingElseSize;
+            else {
+                battlePointersAddress = -1;
+                battleAddress         = -1;
+                aiAddress             = -1;
+            }
 
             // Add tables present for both towns and battles.
             var tables = new List<ITable> {
@@ -122,7 +125,7 @@ namespace SF3.FileEditors {
                     (SlotTable = new SlotTable(this)),
                     (AITable = new AITable(this, aiAddress)),
                     (SpawnZoneTable = new SpawnZoneTable(this)),
-                    (BattlePointersTable = new BattlePointersTable(this)),
+                    (BattlePointersTable = new BattlePointersTable(this, battlePointersAddress)),
                     (CustomMovementTable = new CustomMovementTable(this)),
                 });
 
