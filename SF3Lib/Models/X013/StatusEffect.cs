@@ -15,42 +15,18 @@ namespace SF3.Models.X013 {
         private readonly int luck8;
         private readonly int luck9;
 
-        private readonly int offset;
-        private readonly int checkVersion2;
-
-        public StatusEffect(IX013_FileEditor editor, int id, string name, int address)
+        public StatusEffect(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x18) {
-            checkVersion2 = Editor.GetByte(0x0000000A);
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x00007408; //scn1
-                if (checkVersion2 == 0x0A) //original jp
-                    offset -= 0x0C;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x00007314; //scn2
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x000071fc; //scn3
-            }
-            else {
-                offset = 0x000070d8; //pd
-            }
-
-            var start = offset + (id * 0x18);
-
-            luck0 = start;
-            luck1 = start + 0x02;
-            luck2 = start + 0x04;
-            luck3 = start + 0x06;
-            luck4 = start + 0x08;
-            luck5 = start + 0x0A;
-            luck6 = start + 0x0C;
-            luck7 = start + 0x0E;
-            luck8 = start + 0x10;
-            luck9 = start + 0x12;
-
-            Address = offset + (id * 0x18);
+            luck0 = Address;
+            luck1 = Address + 0x02;
+            luck2 = Address + 0x04;
+            luck3 = Address + 0x06;
+            luck4 = Address + 0x08;
+            luck5 = Address + 0x0A;
+            luck6 = Address + 0x0C;
+            luck7 = Address + 0x0E;
+            luck8 = Address + 0x10;
+            luck9 = Address + 0x12;
         }
 
         [BulkCopy]

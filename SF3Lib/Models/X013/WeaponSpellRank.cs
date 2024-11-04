@@ -9,35 +9,14 @@ namespace SF3.Models.X013 {
         private readonly int rankB;
         private readonly int rankA;
         private readonly int rankS;
-        private readonly int offset;
-        private readonly int checkVersion2;
 
-        public WeaponSpellRank(IX013_FileEditor editor, int id, string name, int address)
+        public WeaponSpellRank(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x05) {
-            checkVersion2 = Editor.GetByte(0x0000000A);
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x000070F0; //scn1
-                if (checkVersion2 == 0x0A) //original jp
-                    offset -= 0x0C;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x00006FC8; //scn2
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x00006D04; //scn3
-            }
-            else {
-                offset = 0x00006BE0; //pd
-            }
-
-            var start = offset + (id * 5);
-            rankNone = start; //1 bytes
-            rankC = start + 1; //1 byte
-            rankB = start + 2; //1 byte
-            rankA = start + 3; //1 byte
-            rankS = start + 4;
-            Address = offset + (id * 0x5);
+            rankNone = Address;     // 1 byte
+            rankC    = Address + 1; // 1 byte
+            rankB    = Address + 2; // 1 byte
+            rankA    = Address + 3; // 1 byte
+            rankS    = Address + 4; // 1 byte
         }
 
         [BulkCopy]

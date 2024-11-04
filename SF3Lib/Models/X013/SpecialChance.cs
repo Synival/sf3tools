@@ -10,30 +10,10 @@ namespace SF3.Models.X013 {
         private readonly int fourSpecials4;
         private readonly int fourSpecials3;
         private readonly int fourSpecials2;
-        private readonly int offset;
-        private readonly int checkVersion2;
 
-        public SpecialChance(IX013_FileEditor editor, int id, string name, int address, bool hasLargeTable)
+        public SpecialChance(IByteEditor editor, int id, string name, int address, bool hasLargeTable)
         : base(editor, id, name, address, hasLargeTable ? 0x4a : 0x3a) {
-            checkVersion2 = Editor.GetByte(0x0000000A);
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x000027ae; //scn1
-                if (checkVersion2 == 0x0A) //original jp
-                    offset -= 0x70;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x000029c6; //scn2
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x000027a2; //scn3
-            }
-            else {
-                offset = 0x000027c2; //pd
-            }
-
             if (hasLargeTable) {
-                Address = offset + (id * 0x4a);
                 twoSpecials2   = Address + 0x01; // 1 byte
                 threeSpecials3 = Address + 0x15; // 1 byte
                 threeSpecials2 = Address + 0x1d; // 1 byte
@@ -42,7 +22,6 @@ namespace SF3.Models.X013 {
                 fourSpecials2  = Address + 0x49; // 1 byte
             }
             else {
-                Address = offset + (id * 0x3a);
                 twoSpecials2   = Address + 0x01; // 1 byte
                 threeSpecials3 = Address + 0x0f; // 1 byte
                 threeSpecials2 = Address + 0x19; // 1 byte

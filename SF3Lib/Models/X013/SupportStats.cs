@@ -8,34 +8,13 @@ namespace SF3.Models.X013 {
         private readonly int sLvlStat2;
         private readonly int sLvlStat3;
         private readonly int sLvlStat4;
-        private readonly int offset;
-        private readonly int checkVersion2;
 
-        public SupportStats(IX013_FileEditor editor, int id, string name, int address)
+        public SupportStats(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x04) {
-            checkVersion2 = Editor.GetByte(0x0000000A);
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x000074b5; //scn1
-                if (checkVersion2 == 0x0A) //original jp
-                    offset -= 0x0C;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x00007409; //scn2
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x000072f1; //scn3
-            }
-            else {
-                offset = 0x000071cd; //pd
-            }
-
-            var start = offset + (id * 4);
-            sLvlStat1 = start; //1 bytes
-            sLvlStat2 = start + 1; //1 byte
-            sLvlStat3 = start + 2; //1 byte
-            sLvlStat4 = start + 3; //1 byte
-            Address = offset + (id * 0x4);
+            sLvlStat1 = Address;     // 1 byte
+            sLvlStat2 = Address + 1; // 1 byte
+            sLvlStat3 = Address + 2; // 1 byte
+            sLvlStat4 = Address + 3; // 1 byte
         }
 
         [BulkCopy]

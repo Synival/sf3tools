@@ -6,33 +6,11 @@ namespace SF3.Models.X013 {
     public class SupportType : Model {
         private readonly int supportA;
         private readonly int supportB;
-        private readonly int offset;
-        private readonly int checkVersion2;
 
-        public SupportType(IX013_FileEditor editor, int id, string name, int address)
+        public SupportType(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x02) {
-            checkVersion2 = Editor.GetByte(0x0000000A);
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x00007484; //scn1
-                if (checkVersion2 == 0x0A) //original jp
-                    offset -= 0x0C;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x00007390; //scn2
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x00007278; //scn3
-            }
-            else {
-                offset = 0x00007154; //pd
-            }
-
-            var start = offset + (id * 0x02);
-            supportA = start; //1 byte
-            supportB = start + 1;
-
-            Address = offset + (id * 0x02);
+            supportA = Address;     // 1 byte
+            supportB = Address + 1; // 1 byte
         }
 
         [BulkCopy]

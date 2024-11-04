@@ -9,35 +9,16 @@ namespace SF3.Models.X013 {
         private readonly int sLvl2;
         private readonly int sLvl3;
         private readonly int sLvl4;
-        private readonly int offset;
+        private readonly int friendshipExpAddress;
         private readonly int checkVersion2;
 
-        public FriendshipExp(IX013_FileEditor editor, int id, string name, int address)
+        public FriendshipExp(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x04) {
-            checkVersion2 = Editor.GetByte(0x0000000A);
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x0000747c; //scn1
-                if (checkVersion2 == 0x0A) //original jp
-                    offset -= 0x0C;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x00007388; //scn2
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x00007270; //scn3
-            }
-            else {
-                offset = 0x0000714c; //pd
-            }
-
-            var start = offset + (id * 4);
-            sLvl0 = start; //1 byte
-            sLvl1 = start + 1; //1 byte
-            sLvl2 = start + 2; //1 byte
-            sLvl3 = start + 3; //1 byte
-            sLvl4 = start + 4; //1 byte
-            Address = offset + (id * 0x04);
+            sLvl0 = Address;     // 1 byte
+            sLvl1 = Address + 1; // 1 byte
+            sLvl2 = Address + 2; // 1 byte
+            sLvl3 = Address + 3; // 1 byte
+            sLvl4 = Address + 4; // 1 byte
         }
 
         [BulkCopy]

@@ -10,36 +10,15 @@ namespace SF3.Models.X013 {
         private readonly int threeSpecial;
         private readonly int fourSpecial;
         private readonly int fiveSpecial;
-        private readonly int offset;
-        private readonly int checkVersion2;
 
-        public Critrate(IX013_FileEditor editor, int id, string name, int address)
+        public Critrate(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x08) {
-            checkVersion2 = Editor.GetByte(0x0000000A);
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x000073f8; //scn1
-                if (checkVersion2 == 0x0A) //original jp
-                    offset -= 0x0C;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x00007304; //scn2
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x000071dc; //scn3
-            }
-            else {
-                offset = 0x000070b8; //pd
-            }
-
-            var start = offset + (id * 8);
-            noSpecial = start; //1 bytes
-            oneSpecial = start + 1; //1 byte
-            twoSpecial = start + 2; //1 byte
-            threeSpecial = start + 3; //1 byte
-            fourSpecial = start + 4;
-            fiveSpecial = start + 5;
-            Address = offset + (id * 0x8);
+            noSpecial    = Address;     // 1 byte
+            oneSpecial   = Address + 1; // 1 byte
+            twoSpecial   = Address + 2; // 1 byte
+            threeSpecial = Address + 3; // 1 byte
+            fourSpecial  = Address + 4;
+            fiveSpecial  = Address + 5;
         }
 
         [BulkCopy]

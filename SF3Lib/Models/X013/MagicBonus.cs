@@ -12,55 +12,30 @@ namespace SF3.Models.X013 {
         private readonly int lightBonus;
         private readonly int darkBonus;
         private readonly int unknownBonus;
-        private readonly int offset;
-        private readonly int checkVersion2;
 
-        public MagicBonus(IX013_FileEditor editor, int id, string name, int address, bool has32BitValues)
+        public MagicBonus(IByteEditor editor, int id, string name, int address, bool has32BitValues)
         : base(editor, id, name, address, has32BitValues ? 0x20 : 0x08) {
             Has32BitValues = has32BitValues;
 
-            checkVersion2 = Editor.GetByte(0x0000000A);
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x00006e70; //scn1
-                if (checkVersion2 == 0x0A) //original jp
-                    offset -= 0x0C;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x00006ec8; //scn2
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x00006a40; //scn3
+            if (has32BitValues) {
+                earthBonus   = Address + 0x00; // 4 bytes
+                fireBonus    = Address + 0x04; // 4 bytes
+                iceBonus     = Address + 0x08; // 4 bytes
+                sparkBonus   = Address + 0x0C; // 4 bytes
+                windBonus    = Address + 0x10; // 4 bytes
+                lightBonus   = Address + 0x14; // 4 bytes
+                darkBonus    = Address + 0x18; // 4 bytes
+                unknownBonus = Address + 0x1C; // 4 bytes
             }
             else {
-                offset = 0x00006914; //pd
-            }
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                var start = offset + (id * 0x20);
-                earthBonus = start + 0x00; //4 bytes
-                fireBonus = start + 0x04; //4 bytes
-                iceBonus = start + 0x08; //4 bytes
-                sparkBonus = start + 0x0C; //4 bytes
-                windBonus = start + 0x10; //4 bytes
-                lightBonus = start + 0x14; //4 bytes
-                darkBonus = start + 0x18; //4 bytes
-                unknownBonus = start + 0x1C; //4 byte
-
-                Address = offset + (id * 0x20);
-            }
-            else {
-                var start = offset + (id * 8);
-                earthBonus = start; //1 bytes
-                fireBonus = start + 1; //1 byte
-                iceBonus = start + 2; //1 byte
-                sparkBonus = start + 3; //1 byte
-                windBonus = start + 4; //1 byte
-                lightBonus = start + 5; //1 byte
-                darkBonus = start + 6; //1 byte
-                unknownBonus = start + 7; //1 byte
-
-                Address = offset + (id * 0x8);
+                earthBonus   = Address;     // 1 byte
+                fireBonus    = Address + 1; // 1 byte
+                iceBonus     = Address + 2; // 1 byte
+                sparkBonus   = Address + 3; // 1 byte
+                windBonus    = Address + 4; // 1 byte
+                lightBonus   = Address + 5; // 1 byte
+                darkBonus    = Address + 6; // 1 byte
+                unknownBonus = Address + 7; // 1 byte
             }
         }
 

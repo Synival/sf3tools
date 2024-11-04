@@ -79,7 +79,7 @@ namespace SF3.Tables {
             var rows = new Dictionary<int, T>();
             FileStream stream = null;
             try {
-                // Get the size of our rows so we can determine the offset of elements.
+                // Get the size of our rows so we can determine the expLimitAddress of elements.
                 var size = makeTFunc(0, "", Address).Size;
 
                 // Read all elements.

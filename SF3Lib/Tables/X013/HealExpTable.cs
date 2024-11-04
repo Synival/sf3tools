@@ -4,16 +4,13 @@ using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Tables.X013 {
     public class HealExpTable : Table<HealExp> {
-        public HealExpTable(IX013_FileEditor fileEditor, int address) : base(fileEditor) {
-            _fileEditor = fileEditor;
+        public HealExpTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
             ResourceFile = ResourceFile("HealExpList.xml");
             Address = address;
         }
 
-        private readonly IX013_FileEditor _fileEditor;
-
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new HealExp(_fileEditor, id, name, address));
+            => LoadFromResourceFile((id, name, address) => new HealExp(FileEditor, id, name, address));
 
         public override string ResourceFile { get; }
         public override int Address { get; }

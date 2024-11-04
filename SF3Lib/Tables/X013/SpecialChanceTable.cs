@@ -5,16 +5,13 @@ using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Tables.X013 {
     public class SpecialChanceTable : Table<SpecialChance> {
-        public SpecialChanceTable(IX013_FileEditor fileEditor, int address) : base(fileEditor) {
-            _fileEditor = fileEditor;
+        public SpecialChanceTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
             ResourceFile = ResourceFile("SpecialChanceList.xml");
             Address = address;
         }
 
-        private readonly IX013_FileEditor _fileEditor;
-
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new SpecialChance(_fileEditor, id, name, address, Scenario < ScenarioType.Scenario3));
+            => LoadFromResourceFile((id, name, address) => new SpecialChance(FileEditor, id, name, address, Scenario < ScenarioType.Scenario3));
 
         public override string ResourceFile { get; }
         public override int Address { get; }

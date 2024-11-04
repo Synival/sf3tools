@@ -4,16 +4,13 @@ using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Tables.X013 {
     public class ExpLimitTable : Table<ExpLimit> {
-        public ExpLimitTable(IX013_FileEditor fileEditor, int address) : base(fileEditor) {
-            _fileEditor = fileEditor;
+        public ExpLimitTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
             ResourceFile = ResourceFile("ExpLimitList.xml");
             Address = address;
         }
 
-        private readonly IX013_FileEditor _fileEditor;
-
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new ExpLimit(_fileEditor, id, name, address));
+            => LoadFromResourceFile((id, name, address) => new ExpLimit(FileEditor, id, name, address));
 
         public override string ResourceFile { get; }
         public override int Address { get; }
