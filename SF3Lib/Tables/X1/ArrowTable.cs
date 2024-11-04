@@ -8,17 +8,10 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables.X1 {
     public class ArrowTable : Table<Arrow> {
-        public override int? MaxSize => 100;
-
-        public ArrowTable(IX1_FileEditor fileEditor) : base(fileEditor) {
-            _fileEditor = fileEditor;
+        public ArrowTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
             ResourceFile = ResourceFile("X1Arrow.xml");
+            Address = address;
         }
-
-        private readonly IX1_FileEditor _fileEditor;
-
-        public override string ResourceFile { get; }
-        public override int Address => throw new NotImplementedException();
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
@@ -32,53 +25,19 @@ namespace SF3.Tables.X1 {
 
                 var xml = MakeXmlReader(stream);
                 _ = xml.Read();
-                //int stop = 0;
-                //int numberTest = 0;
-                //while (!xml.EOF)
                 var myCount = 0;
-                //Globals.treasureDebug = true;
-                //while (!xml.EOF && (_rows.Length == 0 || _rows[_rows.Length - 1].Searched != 0xffff))
 
-                /*if(Globals.treasureDebug == true)
-                {
-                    //while (!xml.EOF && (_rows.Length == 0 || (_rows[_rows.Length - 1].Searched != 0xffff || _rows[_rows.Length - 1].EventNumber != 0xffff)))
-                    while (!xml.EOF && (_rows.Length == 0 || myCount <= 2))
-                    {
-                        {
-                            xml.Read();
-                            if (xml.HasAttributes)
-                            {
-                                var newRow = new Npc(Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1));
+                int address = Address;
+                while (!xml.EOF && (_rows.Length == 0 || _rows[_rows.Length - 1].ArrowUnknown0 != 0xffff)) {
+                    _ = xml.Read();
+                    if (xml.HasAttributes) {
+                        var newRow = new Arrow(FileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1), address);
+                        address += newRow.Size;
                         _rows = _rows.ExpandedWith(newRow);
-                                if (newRow.NpcID < 0 || newRow.NpcID >= MaxSize) {
-throw new IndexOutOfRangeException();
-}
-                                if (newRow.SpriteID == 0xffff)
-                                {
-                                    myCount = 1 + myCount;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                else*/
-                {
-                    while (!xml.EOF && (_rows.Length == 0 || _rows[_rows.Length - 1].ArrowUnknown0 != 0xffff))
-                    //while (!xml.EOF && (_rows.Length == 0 || (_rows[_rows.Length - 1].Searched != 0xffff || _rows[_rows.Length - 1].EventNumber != 0xffff)))
-                    //while (!xml.EOF && (_rows.Length == 0 || myCount <= 2))
-                    {
-                        {
-                            _ = xml.Read();
-                            if (xml.HasAttributes) {
-                                var newRow = new Arrow(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1), 0);
-                                _rows = _rows.ExpandedWith(newRow);
-                                if (newRow.ID < 0 || newRow.ID >= MaxSize)
-                                    throw new IndexOutOfRangeException();
-                                if (newRow.ArrowUnknown0 == 0xffff)
-                                    myCount = 1 + myCount;
-                            }
-                        }
+                        if (newRow.ID < 0 || newRow.ID >= MaxSize)
+                            throw new IndexOutOfRangeException();
+                        if (newRow.ArrowUnknown0 == 0xffff)
+                            myCount = 1 + myCount;
                     }
                 }
             }
@@ -93,5 +52,9 @@ throw new IndexOutOfRangeException();
             }
             return true;
         }
+
+        public override string ResourceFile { get; }
+        public override int Address { get; }
+        public override int? MaxSize => 100;
     }
 }

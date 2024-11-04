@@ -8,22 +8,15 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables.X1 {
     public class TreasureTable : Table<Treasure> {
-        public override int? MaxSize => 255;
-
         /// <summary>
         /// TODO: what does this do when set?
         /// </summary>
         public static bool Debug { get; set; } = false;
 
-        public TreasureTable(IX1_FileEditor fileEditor) : base(fileEditor) {
-            _fileEditor = fileEditor;
+        public TreasureTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
             ResourceFile = ResourceFile("X1Treasure.xml");
+            Address = address;
         }
-
-        private readonly IX1_FileEditor _fileEditor;
-
-        public override string ResourceFile { get; }
-        public override int Address => throw new NotImplementedException();
 
         /// <summary>
         /// Loads data from the file editor provided in the constructor.
@@ -37,45 +30,23 @@ namespace SF3.Tables.X1 {
 
                 var xml = MakeXmlReader(stream);
                 _ = xml.Read();
-                //int stop = 0;
-                //int numberTest = 0;
-                //while (!xml.EOF)
                 var myCount = 0;
-                //Debug = true;
-                //while (!xml.EOF && (_rows.Length == 0 || newRow.Searched != 0xffff))
 
-                if (Debug == true) {
-                    //while (!xml.EOF && (_rows.Length == 0 || (newRow.Searched != 0xffff || newRow.EventNumber != 0xffff)))
-                    while (!xml.EOF && (_rows.Length == 0 || myCount <= 2)) {
-                        {
-                            _ = xml.Read();
-                            if (xml.HasAttributes) {
-                                var newRow = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1), 0);
-                                _rows = _rows.ExpandedWith(newRow);
-                                if (newRow.ID < 0 || newRow.ID >= MaxSize)
-                                    throw new IndexOutOfRangeException();
-                                if (newRow.Searched == 0xffff)
-                                    myCount = 1 + myCount;
-                            }
-                        }
-                    }
-                }
-                else {
-                    while (!xml.EOF && (_rows.Length == 0 || _rows[_rows.Length - 1].Searched != 0xffff))
-                    //while (!xml.EOF && (_rows.Length == 0 || (_rows[_rows.Length - 1].Searched != 0xffff || _rows[_rows.Length - 1].EventNumber != 0xffff)))
-                    //while (!xml.EOF && (_rows.Length == 0 || myCount <= 2))
-                    {
-                        {
-                            _ = xml.Read();
-                            if (xml.HasAttributes) {
-                                var newRow = new Treasure(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1), 0);
-                                _rows = _rows.ExpandedWith(newRow);
-                                if (newRow.ID < 0 || newRow.ID >= MaxSize)
-                                    throw new IndexOutOfRangeException();
-                                if (newRow.Searched == 0xffff)
-                                    myCount = 1 + myCount;
-                            }
-                        }
+                var whilePred = Debug
+                    ? new Func<bool>(() => !xml.EOF && (_rows.Length == 0 || myCount <= 2))
+                    : new Func<bool>(() => !xml.EOF && (_rows.Length == 0 || _rows[_rows.Length - 1].Searched != 0xffff));
+
+                int address = Address;
+                while (whilePred()) {
+                    _ = xml.Read();
+                    if (xml.HasAttributes) {
+                        var newRow = new Treasure(FileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1), address);
+                        address += newRow.Size;
+                        _rows = _rows.ExpandedWith(newRow);
+                        if (newRow.ID < 0 || newRow.ID >= MaxSize)
+                            throw new IndexOutOfRangeException();
+                        if (newRow.Searched == 0xffff)
+                            myCount = 1 + myCount;
                     }
                 }
             }
@@ -90,5 +61,9 @@ namespace SF3.Tables.X1 {
             }
             return true;
         }
+
+        public override string ResourceFile { get; }
+        public override int Address { get; }
+        public override int? MaxSize => 255;
     }
 }

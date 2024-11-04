@@ -11,61 +11,14 @@ namespace SF3.Models.X1 {
         private readonly int eventType;
         private readonly int itemID;
 
-        public Treasure(IX1_FileEditor editor, int id, string name, int address)
+        public Treasure(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x0C) {
-            int offset = 0;
-            int sub;
-
-            if (editor.IsBTL99) {
-                offset = 0x0000000C; //btl99 initial pointer
-                sub = 0x06060000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x0000000C; //scn1 initial pointer
-                sub = 0x0605f000;
-                offset = Editor.GetDouble(offset);
-
-                offset -= sub;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x0000000C; //scn2 initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x0000000C; //scn3 initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub;
-            }
-            else if (editor.Scenario == ScenarioType.PremiumDisk) {
-                offset = 0x0000000C; //pd initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub;
-            }
-
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
-
-            //int start = 0x354c + (id * 24);
-
-            var start = offset + (id * 0x0c);
-            searched = start; //2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
-            eventNumber = start + 2;
-            flagUsed = start + 4;
-            unknown = start + 6;
-            eventType = start + 8;
-            itemID = start + 10;
-
-            //unknown42 = start + 52;
-            TreasureAddress = offset + (id * 0x0c);
-            //address = 0x0354c + (id * 0x18);
+            searched    = Address; //2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
+            eventNumber = Address + 0x02;
+            flagUsed    = Address + 0x04;
+            unknown     = Address + 0x06;
+            eventType   = Address + 0x08;
+            itemID      = Address + 0x0a;
         }
 
         public string MPDTieIn
@@ -109,7 +62,5 @@ namespace SF3.Models.X1 {
             get => Editor.GetWord(itemID);
             set => Editor.SetWord(itemID, value);
         }
-
-        public int TreasureAddress { get; }
     }
 }

@@ -53,41 +53,52 @@ namespace SF3.FileEditors {
         public override IEnumerable<ITable> MakeTables() {
             var isntScn1OrBTL99 = Scenario != ScenarioType.Scenario1 && !IsBTL99;
 
-            int offset;
             int sub;
 
+            int arrowAddress;
+            int treasureAddress;
             int warpAddress;
 
-            switch (Scenario) {
-                case ScenarioType.Scenario1:
-                    warpAddress = 0; // X002 editor has Scenario1 WarpTable, and provides the address itself.
-                    break;
+            // X1BTL99.BIN is a special case. It has the same layout for each scenario.
+            if (IsBTL99) {
+                arrowAddress    = 0; // Not present
+                treasureAddress = GetDouble(0x000c) - 0x06060000;
+                warpAddress     = 0; // Not present
+            }
+            else {
+                switch (Scenario) {
+                    case ScenarioType.Scenario1:
+                        arrowAddress    = 0; // Not present in Scenario1
+                        warpAddress     = 0; // X002 editor has Scenario1 WarpTable, and provides the address itself.
+                        treasureAddress = GetDouble(0x000c) - 0x0605f000;
+                        break;
 
-                case ScenarioType.Scenario2:
-                    offset = 0x00000018;
-                    sub = 0x0605e000;
-                    warpAddress = GetDouble(offset) - sub;
-                    break;
+                    case ScenarioType.Scenario2:
+                        arrowAddress    = GetDouble(0x0060) - 0x0605e000;
+                        warpAddress     = GetDouble(0x0018) - 0x0605e000;
+                        treasureAddress = GetDouble(0x000c) - 0x0605e000;
+                        break;
 
-                case ScenarioType.Scenario3:
-                    offset = 0x00000018;
-                    sub = 0x0605e000;
-                    warpAddress = GetDouble(offset) - sub;
-                    break;
+                    case ScenarioType.Scenario3:
+                        arrowAddress    = GetDouble(0x0060) - 0x0605e000;
+                        warpAddress     = GetDouble(0x0018) - 0x0605e000;
+                        treasureAddress = GetDouble(0x000c) - 0x0605e000;
+                        break;
 
-                case ScenarioType.PremiumDisk:
-                    offset = 0x00000018;
-                    sub = 0x0605e000;
-                    warpAddress = GetDouble(offset) - sub;
-                    break;
+                    case ScenarioType.PremiumDisk:
+                        arrowAddress    = GetDouble(0x0060) - 0x0605e000;
+                        warpAddress     = GetDouble(0x0018) - 0x0605e000;
+                        treasureAddress = GetDouble(0x000c) - 0x0605e000;
+                        break;
 
-                default:
-                    throw new ArgumentException(nameof(Scenario));
+                    default:
+                        throw new ArgumentException(nameof(Scenario));
+                }
             }
 
             // Add tables present for both towns and battles.
             var tables = new List<ITable> {
-                (TreasureTable = new TreasureTable(this))
+                (TreasureTable = new TreasureTable(this, treasureAddress))
             };
 
             // Add tables only present for battles.
@@ -113,7 +124,7 @@ namespace SF3.FileEditors {
                 });
 
                 if (isntScn1OrBTL99)
-                    tables.Add(ArrowTable = new ArrowTable(this));
+                    tables.Add(ArrowTable = new ArrowTable(this, arrowAddress));
             }
 
             if (isntScn1OrBTL99)
