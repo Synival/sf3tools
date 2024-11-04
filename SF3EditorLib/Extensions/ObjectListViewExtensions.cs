@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
-using CommonLib.NamedValues;
 using SF3.FileEditors;
 using static SF3.Editor.Utils.ControlUtils;
 

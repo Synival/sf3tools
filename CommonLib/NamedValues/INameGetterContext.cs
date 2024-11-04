@@ -1,13 +1,11 @@
 ﻿using System.Reflection;
 
-namespace CommonLib.NamedValues
-{
+namespace CommonLib.NamedValues {
     /// <summary>
     /// Interface for the context passed to functions like NameGetterAttribute.GetName(value, context).
     /// The actual work of retrieving the named value is done here.
     /// </summary>
-    public interface INameGetterContext
-    {
+    public interface INameGetterContext {
         /// <summary>
         /// Fetches the name of a value.
         /// </summary>

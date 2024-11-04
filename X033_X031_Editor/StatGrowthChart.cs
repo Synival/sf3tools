@@ -256,7 +256,7 @@ namespace SF3.X033_X031_Editor {
                             var rangePercent = (double) (lv - lowPoint.Level) / (double) levelRange;
                             targetStats = lowPoint.Stats.Keys
                                 .ToDictionary(x => x, x => lowPoint.Stats[x] + (highPoint.Stats[x] - lowPoint.Stats[x]) * rangePercent);
-                       }
+                        }
 
                         foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
                             var growthValue = stats.GetAverageStatGrowthPerLevel(statType, statGrowthGroup.GroupIndex);

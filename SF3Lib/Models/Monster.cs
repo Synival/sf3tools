@@ -1,7 +1,5 @@
 using CommonLib.Attributes;
-using CommonLib.NamedValues;
 using SF3.FileEditors;
-using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Models {

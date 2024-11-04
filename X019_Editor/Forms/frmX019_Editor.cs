@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using BrightIdeasSoftware;
 using SF3.Editor.Extensions;

@@ -1,9 +1,7 @@
 using System;
 using CommonLib.Attributes;
-using CommonLib.NamedValues;
 using CommonLib.Statistics;
 using SF3.FileEditors;
-using SF3.NamedValues;
 using SF3.Statistics;
 using SF3.Types;
 
