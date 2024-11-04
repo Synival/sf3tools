@@ -55,6 +55,7 @@ namespace DFRTool.GUI.Forms
             this.btnOutputFile.TabIndex = 2;
             this.btnOutputFile.Text = "Output File...";
             this.btnOutputFile.UseVisualStyleBackColor = true;
+            this.btnOutputFile.Click += new System.EventHandler(this.btnOutputFile_Click);
             // 
             // btnAlteredFile
             // 
@@ -64,6 +65,7 @@ namespace DFRTool.GUI.Forms
             this.btnAlteredFile.TabIndex = 1;
             this.btnAlteredFile.Text = "Altered File...";
             this.btnAlteredFile.UseVisualStyleBackColor = true;
+            this.btnAlteredFile.Click += new System.EventHandler(this.btnAlteredFile_Click);
             // 
             // btnOriginalFile
             // 
@@ -73,6 +75,7 @@ namespace DFRTool.GUI.Forms
             this.btnOriginalFile.TabIndex = 0;
             this.btnOriginalFile.Text = "Original File...";
             this.btnOriginalFile.UseVisualStyleBackColor = true;
+            this.btnOriginalFile.Click += new System.EventHandler(this.btnOriginalFile_Click);
             // 
             // labelSeparator1
             // 
@@ -111,6 +114,7 @@ namespace DFRTool.GUI.Forms
             this.btnGenerateDFR.TabIndex = 6;
             this.btnGenerateDFR.Text = "Generate DFR";
             this.btnGenerateDFR.UseVisualStyleBackColor = true;
+            this.btnGenerateDFR.Click += new System.EventHandler(this.btnGenerateDFR_Click);
             // 
             // tbOriginalFile
             // 
