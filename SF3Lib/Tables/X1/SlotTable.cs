@@ -1,65 +1,21 @@
-using System;
-using System.IO;
-using CommonLib.Extensions;
 using SF3.FileEditors;
 using SF3.Models.X1;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
-using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables.X1 {
     public class SlotTable : Table<Slot> {
-        public override int? MaxSize => 256;
-
-        public SlotTable(IX1_FileEditor fileEditor) : base(fileEditor) {
-            _fileEditor = fileEditor;
+        public SlotTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
             ResourceFile = ResourceFile(Scenario == ScenarioType.Scenario1 ? "X1List.xml" : "X1OtherList.xml");
+            Address = address;
         }
 
-        private readonly IX1_FileEditor _fileEditor;
+        public override bool Load()
+            => LoadFromResourceFile((id, name, address) => new Slot(FileEditor, id, name, address));
 
         public override string ResourceFile { get; }
-        public override int Address => throw new NotImplementedException();
+        public override int Address { get; }
+        public override int? MaxSize => 256;
 
-        /// <summary>
-        /// Loads data from the file editor provided in the constructor.
-        /// </summary>
-        /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
-        public override bool Load() {
-            _rows = new Slot[0];
-            FileStream stream = null;
-            try {
-                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
-
-                var xml = MakeXmlReader(stream);
-                _ = xml.Read();
-                //int stop = 0;
-                while (!xml.EOF) {
-                    _ = xml.Read();
-                    if (xml.HasAttributes) {
-                        var newRow = new Slot(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1), 0);
-                        _rows = _rows.ExpandedWith(newRow);
-                        if (newRow.ID < 0 || newRow.ID >= MaxSize)
-                            throw new IndexOutOfRangeException();
-                        /*Console.WriteLine(items[itemssorted[old.Length].ID].EnemyID);
-                        //numberTest = items[itemssorted[old.Length].ID].EnemyID;
-                        if (items[itemssorted[old.Length].ID].EnemyID == 0xffff)
-                        {
-                            stop = 1;
-                        }*/
-                    }
-                }
-            }
-            catch (FileLoadException) {
-                return false;
-            }
-            catch (FileNotFoundException) {
-                return false;
-            }
-            finally {
-                stream?.Close();
-            }
-            return true;
-        }
     }
 }

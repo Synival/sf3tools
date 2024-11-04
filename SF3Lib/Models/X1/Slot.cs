@@ -51,214 +51,54 @@ namespace SF3.Models.X1 {
         private readonly int unknown39;
         private readonly int unknown40;
 
-        public Slot(IX1_FileEditor editor, int id, string name, int address)
+        public Slot(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x34) {
-            int offset = 0;
-            int sub;
-
-            if (editor.IsBTL99) {
-                offset = 0x00000018; //BTL99 initial pointer
-                sub = 0x06060000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //first pointer
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //second pointer
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //third pointer
-
-                offset += 10;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x00000018; //scn1 initial pointer
-                sub = 0x0605f000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //first pointer
-                offset = Editor.GetDouble(offset);
-                offset = offset - sub + editor.MapOffset; //second pointer
-
-                offset = Editor.GetDouble(offset);
-
-                if (offset != 0) {
-                    offset -= sub; //third pointer
-
-                    offset += 10;
-                }
-                else {
-                    editor.MapLeader = MapLeaderType.Synbios;
-                    offset = 0x00000018; //scn1 initial pointer
-                    sub = 0x0605f000;
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //first pointer
-                    offset = Editor.GetDouble(offset);
-                    offset = offset - sub + editor.MapOffset; //second pointer
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //third pointer
-
-                    offset += 10;
-                }
-
-                /*
-                offset = 0x00000018; //scn1 initial pointer
-                npcOffset = offset;
-                npcOffset = Editor.GetDouble(offset);
-                sub = 0x0605f000;
-                offset = npcOffset - sub; //second pointer
-                npcOffset = Editor.GetDouble(offset);
-                offset = npcOffset - sub; //third pointer
-                //offset value should now point to where npc placements are
-                */
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x00000024; //scn2 initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //first pointer
-                offset = Editor.GetDouble(offset);
-                offset = offset - sub + editor.MapOffset; //second pointer
-
-                offset = Editor.GetDouble(offset);
-                if (offset != 0) {
-                    offset -= sub; //third pointer
-
-                    offset += 10;
-                }
-                else {
-                    editor.MapLeader = MapLeaderType.Medion;
-                    offset = 0x00000024; //scn2 initial pointer
-                    sub = 0x0605e000;
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //first pointer
-                    offset = Editor.GetDouble(offset);
-                    offset = offset - sub + editor.MapOffset; //second pointer
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //third pointer
-
-                    offset += 10;
-                }
-
-                /*offset = 0x00000024; //scn2 initial pointer
-                npcOffset = offset;
-                npcOffset = Editor.GetDouble(offset);
-                sub = 0x0605e000;
-                offset = npcOffset - sub + 4; //second pointer
-                npcOffset = Editor.GetDouble(offset);
-                offset = npcOffset - sub; //third pointer
-                //offset value should now point to where npc placements are
-                */
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x00000024; //scn3 initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //first pointer
-                offset = Editor.GetDouble(offset);
-                offset = offset - sub + editor.MapOffset; //second pointer
-
-                offset = Editor.GetDouble(offset);
-                if (offset != 0) {
-                    offset -= sub; //third pointer
-
-                    offset += 10;
-                }
-                else {
-                    editor.MapLeader = MapLeaderType.Julian;
-                    offset = 0x00000024; //scn3 initial pointer
-                    sub = 0x0605e000;
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //first pointer
-                    offset = Editor.GetDouble(offset);
-                    offset = offset - sub + editor.MapOffset; //second pointer
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //third pointer
-
-                    offset += 10;
-                }
-            }
-            else if (editor.Scenario == ScenarioType.PremiumDisk) {
-                offset = 0x00000024; //pd initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //first pointer
-                offset = Editor.GetDouble(offset);
-                offset = offset - sub + editor.MapOffset; //second pointer
-                offset = Editor.GetDouble(offset);
-                if (offset != 0) {
-                    offset -= sub; //third pointer
-
-                    offset += 10;
-                }
-                else {
-                    editor.MapLeader = MapLeaderType.Synbios;
-                    offset = 0x00000024; //pd initial pointer
-                    sub = 0x0605e000;
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //first pointer
-                    offset = Editor.GetDouble(offset);
-                    offset = offset - sub + editor.MapOffset; //second pointer
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //third pointer
-
-                    offset += 10;
-                }
-            }
-
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
-
-            //int start = 0x354c + (id * 24);
-
-            var start = offset + (id * 0x34);
-            enemyID = start; //2 bytes  
-            x = start + 2; //2 byte
-            y = start + 4; //2 byte
-            itemOverride = start + 6; //2 byte
-            unknown1 = start + 8; //drop disabled
-            unknown2 = start + 9; //probably droprate override
-            joinID = start + 10; //2 byte
-            characterPlus0x0B = start + 12; //character that shows up when enemy id is 5b
-            unknown4 = start + 13;
-            unknown5 = start + 14;
-            unknown6 = start + 15;
-            facingIsBoss = start + 16;
-            controlType = start + 17;
-            unknown8 = start + 18;
-            unknown9 = start + 19;
-            unknown10 = start + 20;
-            unknown11 = start + 21;
-            unknown12 = start + 22;
-            unknown13 = start + 23;
-            unknown14 = start + 24;
-            unknown15 = start + 25;
-            unknown16 = start + 26;
-            unknown17 = start + 27;
-            unknown18 = start + 28;
-            unknown19 = start + 29;
-            unknown20 = start + 30;
-            unknown21 = start + 31; //turn not skipped?
-            unknown22 = start + 32;
-            unknown23 = start + 33;
-            unknown24 = start + 34;
-            unknown25 = start + 35;//aitag1?
-            unknown26 = start + 36; //aitype1?
-            unknown27 = start + 37;//aiaggression 1?
-            unknown28 = start + 38;//aitag2?
-            unknown29 = start + 39;//aitype4?
-            unknown30 = start + 40;//aiaggression 2?
-            unknown31 = start + 41; //aitag3?
-            unknown32 = start + 42;//aitype4?
-            unknown33 = start + 43;//aiaggression 3?
-            unknown34 = start + 44; //aitag4?
-            unknown35 = start + 45; //aitype4?
-            unknown36 = start + 46; //aiaggression 4?
-            unknown37 = start + 47;
-            unknown38 = start + 48;
-            unknown39 = start + 49;
-            unknown40 = start + 50; //2 bytes
-            //unknown42 = start + 52;
-            Address = offset + (id * 0x34);
-            //address = 0x0354c + (id * 0x18);
+            enemyID      = Address;      // 2 bytes  
+            x            = Address +  2; // 2 bytes
+            y            = Address +  4; // 2 bytes
+            itemOverride = Address +  6; // 2 bytes
+            unknown1     = Address +  8; // drop disabled
+            unknown2     = Address +  9; // probably droprate override
+            joinID       = Address + 10; // 2 bytes
+            characterPlus0x0B = Address + 12; // character that shows up when enemy id is 5b
+            unknown4     = Address + 13;
+            unknown5     = Address + 14;
+            unknown6     = Address + 15;
+            facingIsBoss = Address + 16;
+            controlType  = Address + 17;
+            unknown8     = Address + 18;
+            unknown9     = Address + 19;
+            unknown10    = Address + 20;
+            unknown11    = Address + 21;
+            unknown12    = Address + 22;
+            unknown13    = Address + 23;
+            unknown14    = Address + 24;
+            unknown15    = Address + 25;
+            unknown16    = Address + 26;
+            unknown17    = Address + 27;
+            unknown18    = Address + 28;
+            unknown19    = Address + 29;
+            unknown20    = Address + 30;
+            unknown21    = Address + 31; // turn not skipped?
+            unknown22    = Address + 32;
+            unknown23    = Address + 33;
+            unknown24    = Address + 34;
+            unknown25    = Address + 35; // aitag1?
+            unknown26    = Address + 36; // aitype1?
+            unknown27    = Address + 37; // aiaggression 1?
+            unknown28    = Address + 38; // aitag2?
+            unknown29    = Address + 39; // aitype4?
+            unknown30    = Address + 40; // aiaggression 2?
+            unknown31    = Address + 41; // aitag3?
+            unknown32    = Address + 42; // aitype4?
+            unknown33    = Address + 43; // aiaggression 3?
+            unknown34    = Address + 44; // aitag4?
+            unknown35    = Address + 45; // aitype4?
+            unknown36    = Address + 46; // aiaggression 4?
+            unknown37    = Address + 47;
+            unknown38    = Address + 48;
+            unknown39    = Address + 49;
+            unknown40    = Address + 50; // 2 bytes
         }
 
         [BulkCopy]

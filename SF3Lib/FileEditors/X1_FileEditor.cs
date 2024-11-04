@@ -14,39 +14,15 @@ namespace SF3.FileEditors {
         }
 
         public override bool OnLoadBeforeMakeTables() {
-            var offset = 0;
-            var sub = 0;
+            var battlePointersPointerPointerAddress = (IsBTL99 || Scenario == ScenarioType.Scenario1) ? 0x0018 : 0x0024;
+            var sub = IsBTL99 ? 0x06060000 : (Scenario == ScenarioType.Scenario1) ? 0x0605f000 : 0x0605e000;
 
-            if (IsBTL99) {
-                offset = 0x00000018; //btl99 initial pointer
-                sub = 0x06060000;
-            }
-            else if (Scenario == ScenarioType.Scenario1) {
-                offset = 0x00000018; //scn1 initial pointer
-                sub = 0x0605f000;
-            }
-            else if (Scenario == ScenarioType.Scenario2) {
-                offset = 0x00000024; //scn2 initial pointer
-                sub = 0x0605e000;
-            }
-            else if (Scenario == ScenarioType.Scenario3) {
-                offset = 0x00000024; //scn3 initial pointer
-                sub = 0x0605e000;
-            }
-            else if (Scenario == ScenarioType.PremiumDisk) {
-                offset = 0x00000024; //pd initial pointer
-                sub = 0x0605e000;
-            }
+            var battlePointersPointerAddress = GetDouble(battlePointersPointerPointerAddress) - sub;
+            var battlePointersAddress = GetDouble(battlePointersPointerAddress);
 
-            offset = GetDouble(offset);
-
-            offset -= sub; //first pointer
-            offset = GetDouble(offset);
-
-            /*A value higher means a pointer is on the offset, meaning we are in a battle. If it is not a 
-              pointer we are at our destination so we know a town is loaded. */
-            IsBattle = (Scenario == ScenarioType.Scenario1 && offset > 0x0605F000) || offset > 0x0605e000;
-
+            // A value higher means a pointer is on the offset, meaning we are in a battle. If it is not a
+            // pointer we are at our destination so we know a town is loaded.
+            IsBattle = (Scenario == ScenarioType.Scenario1 && battlePointersAddress > 0x0605F000) || battlePointersAddress > 0x0605e000;
             return true;
         }
 
@@ -55,7 +31,6 @@ namespace SF3.FileEditors {
 
             int sub;
             int enemySpawnTableSize;
-            const int somethingElseSize = 0x126; // size of something else
 
             int treasureAddress;
             int warpAddress;
@@ -66,13 +41,18 @@ namespace SF3.FileEditors {
 
             int battlePointersAddress;
             int battleAddress;
+
             int headerAddress;
+            int slotAddress;
+            int spawnZoneAddress;
             int aiAddress;
+            int customMovementAddress;
+
+            int tileMovementAddress;
 
             if (isScn1OrBTL99) {
                 sub = IsBTL99 ? 0x06060000 : 0x0605f000;
                 enemySpawnTableSize  = 0xe9a;
-
                 treasureAddress      = GetDouble(0x000c) - sub;
                 warpAddress          = -1; // X002 editor has Scenario1 WarpTable, and provides the address itself.
                 battlePointersPointerAddress = GetDouble(0x0018) - sub;
@@ -104,21 +84,56 @@ namespace SF3.FileEditors {
                 // Get the address of the selected battle, or, if it's not available, the first available in the BattlePointersTable.
                 mapIndex = (BattlePointersTable.Rows[MapIndex].BattlePointer != 0)
                     ? MapIndex
-                    : BattlePointersTable.Rows.Select((v, i) => new {v, i}).First(x => x.v.BattlePointer != 0).i;
+                    : BattlePointersTable.Rows.Select((v, i) => new { v, i }).First(x => x.v.BattlePointer != 0).i;
 
                 battleAddress = BattlePointersTable.Rows[mapIndex].BattlePointer - sub;
 
                 // Determine addresses of other tables.
-                headerAddress = battleAddress;
-                aiAddress     = battleAddress + 0x0a + enemySpawnTableSize + somethingElseSize;
+                headerAddress         = battleAddress;
+                slotAddress           = headerAddress + 0x0a;
+                spawnZoneAddress      = slotAddress + enemySpawnTableSize + 0x06;
+                aiAddress             = spawnZoneAddress + 0x120;
+                customMovementAddress = aiAddress + 0x84;
+
+                // Determine the location of the TileMovementTable, which isn't so straight-forward.
+                // This table is not present in Scenario 1.
+                if (Scenario != ScenarioType.Scenario1) {
+                    // First, look inside a function for its address.
+                    // The value we want is 0xac bytes later always (except for X1BTL330-339 and X1BTLP05)
+                    int tileMovementAddressPointer = GetDouble(0x000001c4) - sub + 0x00ac;
+
+                    // No problems with this method in Scenario 2.
+                    if (Scenario == ScenarioType.Scenario2)
+                        tileMovementAddress = GetDouble(tileMovementAddressPointer) - sub;
+                    else {
+                        tileMovementAddress = GetDouble(tileMovementAddressPointer);
+
+                        // Is this a valid pointer to memory?
+                        if (tileMovementAddress < 0x06070000 && tileMovementAddress > 0)
+                            tileMovementAddress -= sub;
+                        // If not, emply the workaround for X1BTL330-339 and X1BTLP05 not being consistant with everything else
+                        // and locate the table directly.
+                        // TODO: does this pointer exist in other X1BTL* files?
+                        else
+                            tileMovementAddress = GetDouble(0x0024) - sub + 0x14;
+                    }
+                }
+                else
+                    tileMovementAddress = -1;
             }
             else {
                 // No battle, so none of these tables exist.
                 battlePointersAddress = -1;
                 mapIndex              = -1;
                 battleAddress         = -1;
+
                 headerAddress         = -1;
+                slotAddress           = -1;
+                spawnZoneAddress      = -1;
                 aiAddress             = -1;
+                customMovementAddress = -1;
+
+                tileMovementAddress = -1;
             }
 
             // Add tables present for both towns and battles.
@@ -130,15 +145,15 @@ namespace SF3.FileEditors {
             if (IsBattle) {
                 tables.AddRange(new List<ITable>() {
                     (HeaderTable = new HeaderTable(this, headerAddress, mapIndex * 0x04)),
-                    (SlotTable = new SlotTable(this)),
+                    (SlotTable = new SlotTable(this, slotAddress)),
                     (AITable = new AITable(this, aiAddress)),
-                    (SpawnZoneTable = new SpawnZoneTable(this)),
+                    (SpawnZoneTable = new SpawnZoneTable(this, spawnZoneAddress)),
                     BattlePointersTable,
-                    (CustomMovementTable = new CustomMovementTable(this)),
+                    (CustomMovementTable = new CustomMovementTable(this, customMovementAddress)),
                 });
 
                 if (!isScn1OrBTL99)
-                    tables.Add(TileMovementTable = new TileMovementTable(this));
+                    tables.Add(TileMovementTable = new TileMovementTable(this, tileMovementAddress));
             }
             // Add tables only present outside of battle.
             else {

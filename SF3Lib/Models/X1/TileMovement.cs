@@ -1,6 +1,5 @@
 using CommonLib.Attributes;
 using SF3.FileEditors;
-using SF3.Types;
 
 namespace SF3.Models.X1 {
     public class TileMovement : Model {
@@ -22,146 +21,25 @@ namespace SF3.Models.X1 {
         private readonly int unknown0e;
         private readonly int unknown0f;
 
-        public TileMovement(IX1_FileEditor editor, int id, string name, int address)
+        public TileMovement(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x10) {
-            int offset = 0;
-            int sub;
+            noEntry       = Address;
+            unknown01     = Address + 0x01;
+            grassland     = Address + 0x02;
+            dirt          = Address + 0x03;
+            darkGrass     = Address + 0x04;
+            forest        = Address + 0x05;
+            brownMountain = Address + 0x06;
+            desert        = Address + 0x07;
+            greyMountain  = Address + 0x08;
 
-            if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x000001c4;
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //first pointer
-                offset += 0xac; //value we want is 0xac bytes later always
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //second pointer
-
-                /*offset = 0x00000024; //scn2 initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset = offset - sub; //first pointer
-                offset = Editor.GetDouble(offset);
-
-                offset = offset - sub + 0x7c; //second pointer*/
-
-                /*offset = 0x00000024; //scn2 initial pointer
-                npcOffset = offset;
-                npcOffset = Editor.GetDouble(offset);
-                sub = 0x0605e000;
-                offset = npcOffset - sub + 4; //second pointer
-                npcOffset = Editor.GetDouble(offset);
-                offset = npcOffset - sub; //third pointer
-                //offset value should now point to where npc placements are
-                */
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x000001c4;
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //first pointer
-                offset += 0xac; //value we want is 0xac bytes later always (except for btl330-339
-                //Console.WriteLine(offset);
-                offset = Editor.GetDouble(offset);
-
-                if (offset < 0x06070000 && offset > 0)                     //Console.WriteLine("finishing normal proceedure");
-{
-                    offset -= sub; //second pointer
-                }
-                else //work around for x1btl330-339 not being consistant with everything else
-                {
-                    //Console.WriteLine("initiating 330-339 workaround");
-                    offset = 0x00000024;
-                    //sub = 0x0605e000;
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //first pointer
-                    offset += 0x14; //value we want is 0xac bytes later always
-                }
-
-                /*
-                offset = 0x000001c4;
-                    sub = 0x0605e000;
-                    offset = Editor.GetDouble(offset);
-                    offset = offset - sub; //first pointer
-                    offset = offset + 0xac; //value we want is 0xac bytes later always
-                                            //Console.WriteLine(offset);
-                    offset = Editor.GetDouble(offset);
-                    offset = offset - sub; //second pointer
-                /*
-
-                /*
-                //work around for x1btl330-339 not being consistant with everything else
-                offset = 0x00000024;
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset = offset - sub; //first pointer
-                offset = offset + 0x14; //value we want is 0xac bytes later always
-                //Console.WriteLine(offset);
-                //offset = Editor.GetDouble(offset);
-                //offset = offset - sub; //second pointer
-                */
-
-                /*
-                offset = 0x00000024; //scn2 initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset = offset - sub; //first pointer
-                offset = Editor.GetDouble(offset);
-
-                offset = offset - sub + 0x7c; //second pointer*/
-            }
-            else if (editor.Scenario == ScenarioType.PremiumDisk) {
-                offset = 0x000001c4;
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //first pointer
-                offset += 0xac; //value we want is 0xac bytes later always
-                offset = Editor.GetDouble(offset);
-
-                if (offset < 0x06070000 && offset > 0) //a valid pointer in this fille will always be positive up to 0x06070000
-{
-                    //Console.WriteLine("finishing normal proceedure");
-                    offset -= sub; //second pointer
-                }
-                else //work around for x1btlP05 not being consistant with everything else
-                {
-                    //Console.WriteLine("P05");
-                    offset = 0x00000024;
-                    //sub = 0x0605e000;
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //first pointer
-                    offset += 0x14;
-                }
-            }
-
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
-
-            //int start = 0x354c + (id * 24);
-
-            var start = offset + (id * 0x10);
-
-            noEntry = start;
-            unknown01 = start + 1;
-            grassland = start + 2;
-            dirt = start + 3;
-            darkGrass = start + 4;
-            forest = start + 5;
-            brownMountain = start + 6;
-            desert = start + 7;
-            greyMountain = start + 8;
-
-            unknown09 = start + 9;
-            unknown0a = start + 0xa;
-            unknown0b = start + 0xb;
-            unknown0c = start + 0xc;
-            unknown0d = start + 0xd;
-            unknown0e = start + 0xe;
-            unknown0f = start + 0xf;
-
-            Address = offset + (id * 0x10);
-            //address = 0x0354c + (id * 0x18);
+            unknown09     = Address + 0x09;
+            unknown0a     = Address + 0x0a;
+            unknown0b     = Address + 0x0b;
+            unknown0c     = Address + 0x0c;
+            unknown0d     = Address + 0x0d;
+            unknown0e     = Address + 0x0e;
+            unknown0f     = Address + 0x0f;
         }
 
         [BulkCopy]
