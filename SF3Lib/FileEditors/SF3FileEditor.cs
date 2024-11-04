@@ -41,8 +41,9 @@ namespace SF3.FileEditors {
 
             Tables = MakeTables();
             foreach (var ma in Tables) {
-                if (!ma.Load())
-                    return false;
+                if (!ma.IsLoaded)
+                    if (!ma.Load())
+                        return false;
             }
 
             return true;
