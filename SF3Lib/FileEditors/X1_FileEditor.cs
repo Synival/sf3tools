@@ -4,6 +4,7 @@ using CommonLib.Attributes;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Types;
+using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.FileEditors {
     public class X1_FileEditor : SF3FileEditor, IX1_FileEditor {
@@ -77,7 +78,7 @@ namespace SF3.FileEditors {
             if (IsBattle) {
                 // Load the BattlePointersTable early so we can use it to determine the addresses of other tables.
                 battlePointersAddress = GetDouble(battlePointersPointerAddress) - sub;
-                BattlePointersTable = new BattlePointersTable(this, battlePointersAddress);
+                BattlePointersTable = new BattlePointersTable(this, ResourceFile("BattlePointersList.xml"), battlePointersAddress);
                 BattlePointersTable.Load();
 
                 // Get the address of the selected battle, or, if it's not available, the first available in the BattlePointersTable.
@@ -137,53 +138,53 @@ namespace SF3.FileEditors {
 
             // Add tables present for both towns and battles.
             var tables = new List<ITable> {
-                (TreasureTable = new TreasureTable(this, treasureAddress))
+                (TreasureTable = new TreasureTable(this, ResourceFile("X1Treasure.xml"), treasureAddress))
             };
 
             // Add tables only present for battles.
             if (IsBattle) {
                 tables.AddRange(new List<ITable>() {
-                    (HeaderTable = new HeaderTable(this, headerAddress, mapIndex * 0x04)),
-                    (SlotTable = new SlotTable(this, slotAddress)),
-                    (AITable = new AITable(this, aiAddress)),
-                    (SpawnZoneTable = new SpawnZoneTable(this, spawnZoneAddress)),
+                    (HeaderTable         = new HeaderTable(this, ResourceFile("X1Top.xml"), headerAddress, mapIndex * 0x04)),
+                    (SlotTable           = new SlotTable(this, ResourceFile(Scenario == ScenarioType.Scenario1 ? "X1List.xml" : "X1OtherList.xml"), slotAddress)),
+                    (AITable             = new AITable(this, ResourceFile("X1AI.xml"), aiAddress)),
+                    (SpawnZoneTable      = new SpawnZoneTable(this, ResourceFile("UnknownAIList.xml"), spawnZoneAddress)),
                     BattlePointersTable,
-                    (CustomMovementTable = new CustomMovementTable(this, customMovementAddress)),
+                    (CustomMovementTable = new CustomMovementTable(this, ResourceFile("X1AI.xml"), customMovementAddress)),
                 });
 
                 if (!isScn1OrBTL99)
-                    tables.Add(TileMovementTable = new TileMovementTable(this, tileMovementAddress));
+                    tables.Add(TileMovementTable = new TileMovementTable(this, ResourceFile("MovementTypes.xml"), tileMovementAddress));
             }
             // Add tables only present outside of battle.
             else {
                 tables.AddRange(new List<ITable>() {
-                    (NpcTable = new NpcTable(this, npcAddress)),
-                    (EnterTable = new EnterTable(this, enterAddress))
+                    (NpcTable = new NpcTable(this, ResourceFile("X1Npc.xml"), npcAddress)),
+                    (EnterTable = new EnterTable(this, ResourceFile("X1Enter.xml"), enterAddress))
                 });
 
                 if (!isScn1OrBTL99)
-                    tables.Add(ArrowTable = new ArrowTable(this, arrowAddress));
+                    tables.Add(ArrowTable = new ArrowTable(this, ResourceFile("X1Arrow.xml"), arrowAddress));
             }
 
             if (!isScn1OrBTL99)
-                tables.Add(WarpTable = new WarpTable(this, warpAddress));
+                tables.Add(WarpTable = new WarpTable(this, null, warpAddress));
 
             return tables;
         }
 
         public override void DestroyTables() {
-            SlotTable = null;
-            HeaderTable = null;
-            AITable = null;
-            SpawnZoneTable = null;
+            SlotTable           = null;
+            HeaderTable         = null;
+            AITable             = null;
+            SpawnZoneTable      = null;
             BattlePointersTable = null;
-            TreasureTable = null;
+            TreasureTable       = null;
             CustomMovementTable = null;
-            WarpTable = null;
-            TileMovementTable = null;
-            NpcTable = null;
-            EnterTable = null;
-            ArrowTable = null;
+            WarpTable           = null;
+            TileMovementTable   = null;
+            NpcTable            = null;
+            EnterTable          = null;
+            ArrowTable          = null;
         }
 
         protected override string BaseTitle => IsLoaded

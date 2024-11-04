@@ -5,16 +5,15 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables {
     public class MagicBonusTable : Table<MagicBonus> {
-        public MagicBonusTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
-            ResourceFile = ResourceFileForScenario(fileEditor.Scenario, "MagicBonus.xml");
-            Address = address;
+        public MagicBonusTable(IByteEditor fileEditor, string resourceFile, int address, bool has32BitValues) : base(fileEditor, resourceFile, address) {
+            Has32BitValues = has32BitValues;
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new MagicBonus(FileEditor, id, name, address, Scenario == ScenarioType.Scenario1));
+            => LoadFromResourceFile((id, name, address) => new MagicBonus(FileEditor, id, name, address, Has32BitValues));
 
-        public override string ResourceFile { get; }
-        public override int Address { get; }
         public override int? MaxSize => 256;
+
+        public bool Has32BitValues { get; }
     }
 }

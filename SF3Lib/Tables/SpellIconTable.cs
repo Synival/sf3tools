@@ -6,9 +6,10 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables {
     public class SpellIconTable : Table<SpellIcon> {
-        public SpellIconTable(ISF3FileEditor fileEditor, int address, INameGetterContext nameContext, bool has16BitIconAddr, int realOffsetStart) : base(fileEditor) {
-            ResourceFile     = ResourceFileForScenario(Scenario, "SpellIcons.xml");
-            Address          = address;
+        public SpellIconTable(
+            IByteEditor fileEditor, string resourceFile, int address,
+            INameGetterContext nameContext, bool has16BitIconAddr, int realOffsetStart)
+        : base(fileEditor, resourceFile, address) {
             NameContext      = nameContext;
             Has16BitIconAddr = has16BitIconAddr;
             RealOffsetStart  = realOffsetStart;
@@ -19,8 +20,6 @@ namespace SF3.Tables {
                 FileEditor, id, name, address, NameContext.GetName(null, null, id, NamedValueType.Spell), Has16BitIconAddr, RealOffsetStart
             ));
 
-        public override string ResourceFile { get; }
-        public override int Address { get; }
         public override int? MaxSize => 256;
 
         public INameGetterContext NameContext { get; }

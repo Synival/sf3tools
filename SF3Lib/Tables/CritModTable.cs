@@ -4,16 +4,12 @@ using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Tables {
     public class CritModTable : Table<CritMod> {
-        public CritModTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
-            ResourceFile = ResourceFile("CritModList.xml");
-            Address = address;
+        public CritModTable(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }
 
         public override bool Load()
             => LoadFromResourceFile((id, name, address) => new CritMod(FileEditor, id, name, address));
 
-        public override string ResourceFile { get; }
-        public override int Address { get; }
         public override int? MaxSize => 1;
     }
 }

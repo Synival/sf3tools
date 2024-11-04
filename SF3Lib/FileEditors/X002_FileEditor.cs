@@ -4,6 +4,8 @@ using CommonLib.Attributes;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Types;
+using static CommonLib.Utils.ResourceUtils;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.FileEditors {
     public class X002_FileEditor : SF3FileEditor, IX002_FileEditor {
@@ -79,32 +81,32 @@ namespace SF3.FileEditors {
             }
 
             var tables = new List<ITable>() {
-                (AttackResistTable = new AttackResistTable(this, attackResistAddress)),
-                (ItemTable = new ItemTable(this, itemAddress)),
-                (LoadedOverrideTable = new LoadedOverrideTable(this, loadedOverrideAddress)),
-                (LoadingTable = new LoadingTable(this, loadingAddress)),
-                (WeaponSpellTable = new WeaponSpellTable(this, presetAddress)),
-                (SpellTable = new SpellTable(this, spellAddress)),
-                (StatBoostTable = new StatBoostTable(this, statBoostAddress)),
-                (WeaponRankTable = new WeaponRankTable(this, weaponRankAddress)),
+                (AttackResistTable   = new AttackResistTable(this, ResourceFile("AttackResistList.xml"), attackResistAddress)),
+                (ItemTable           = new ItemTable(this, ResourceFileForScenario(Scenario, "Items.xml"), itemAddress)),
+                (LoadedOverrideTable = new LoadedOverrideTable(this, ResourceFileForScenario(Scenario, "LoadedOverrideList.xml"), loadedOverrideAddress)),
+                (LoadingTable        = new LoadingTable(this, ResourceFileForScenario(Scenario, "LoadList.xml"), loadingAddress)),
+                (WeaponSpellTable    = new WeaponSpellTable(this, ResourceFileForScenario(Scenario, "WeaponSpells.xml"), presetAddress)),
+                (SpellTable          = new SpellTable(this, ResourceFileForScenario(Scenario, "Spells.xml"), spellAddress)),
+                (StatBoostTable      = new StatBoostTable(this, ResourceFile("X002StatList.xml"), statBoostAddress)),
+                (WeaponRankTable     = new WeaponRankTable(this, ResourceFile("WeaponRankList.xml"), weaponRankAddress)),
             };
 
             if (Scenario == ScenarioType.Scenario1)
-                tables.Add(WarpTable = new WarpTable(this, warpAddress));
+                tables.Add(WarpTable = new WarpTable(this, ResourceFileForScenario(ScenarioType.Scenario1, "Warps.xml"), warpAddress));
 
             return tables;
         }
 
         public override void DestroyTables() {
-            AttackResistTable = null;
-            ItemTable = null;
+            AttackResistTable   = null;
+            ItemTable           = null;
             LoadedOverrideTable = null;
-            LoadingTable = null;
-            WeaponSpellTable = null;
-            SpellTable = null;
-            StatBoostTable = null;
-            WarpTable = null;
-            WeaponRankTable = null;
+            LoadingTable        = null;
+            WeaponSpellTable    = null;
+            SpellTable          = null;
+            StatBoostTable      = null;
+            WarpTable           = null;
+            WeaponRankTable     = null;
         }
 
         [BulkCopyRecurse]

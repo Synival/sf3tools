@@ -4,6 +4,8 @@ using CommonLib.Attributes;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Types;
+using static CommonLib.Utils.ResourceUtils;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.FileEditors {
     public class X033_X031_FileEditor : SF3FileEditor, IX033_X031_FileEditor {
@@ -59,9 +61,9 @@ namespace SF3.FileEditors {
             }
 
             return new List<ITable>() {
-                (WeaponLevelTable = new WeaponLevelTable(this, weaponLevelAddress)),
-                (StatsTable       = new StatsTable(this, statsAddress)),
-                (InitialInfoTable = new InitialInfoTable(this, initialInfoAddress)),
+                (WeaponLevelTable = new WeaponLevelTable(this, ResourceFile("WeaponLevel.xml"), weaponLevelAddress)),
+                (StatsTable       = new StatsTable(this, ResourceFileForScenario(Scenario, "ClassList.xml"), statsAddress)),
+                (InitialInfoTable = new InitialInfoTable(this, ResourceFileForScenario(Scenario, "ClassEquip.xml"), initialInfoAddress)),
             };
         }
 

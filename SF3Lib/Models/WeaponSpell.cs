@@ -10,7 +10,7 @@ namespace SF3.Models {
         private readonly int weaponLv2;
         private readonly int weaponLv3;
 
-        public WeaponSpell(ISF3FileEditor editor, int id, string name, int address)
+        public WeaponSpell(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x05) {
             spell     = Address;     // 2 bytes
             weaponLv0 = Address + 1; // 1 byte

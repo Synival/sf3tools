@@ -4,7 +4,6 @@ using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.FileEditors;
-using SF3.Tables;
 using SF3.Types;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
@@ -112,10 +111,5 @@ namespace SF3.X1_Editor.Forms {
         private void tsmiMap_MapMedion_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Medion; //map with medion as lead
         private void tsmiMap_MapJulian_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Julian; //map with julian as lead
         private void tsmiMap_MapExtra_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Extra; //map with no lead or a extra as lead. also for ruins
-
-        private void tsmiDebug_TreasureDebugToggle_Click(object sender, EventArgs e) {
-            TreasureTable.Debug = !TreasureTable.Debug;
-            tsmiDebug_TreasureDebugToggle.Checked = TreasureTable.Debug;
-        }
     }
 }

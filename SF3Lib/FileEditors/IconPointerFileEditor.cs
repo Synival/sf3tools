@@ -5,6 +5,7 @@ using SF3.Exceptions;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Types;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.FileEditors {
     public class IconPointerFileEditor : SF3FileEditor, IIconPointerFileEditor {
@@ -73,14 +74,14 @@ namespace SF3.FileEditors {
             var has16BitIconAddr = Scenario == ScenarioType.Scenario1 && isX026;
 
             return new List<ITable>() {
-                (SpellIconTable = new SpellIconTable(this, spellIconAddress, NameContext, has16BitIconAddr, spellIconRealOffsetStart)),
-                (ItemIconTable  = new ItemIconTable(this, itemIconAddress, has16BitIconAddr))
+                (SpellIconTable = new SpellIconTable(this, ResourceFileForScenario(Scenario, "SpellIcons.xml"), spellIconAddress, NameContext, has16BitIconAddr, spellIconRealOffsetStart)),
+                (ItemIconTable  = new ItemIconTable(this, ResourceFileForScenario(Scenario, "Items.xml"), itemIconAddress, has16BitIconAddr))
             };
         }
 
         public override void DestroyTables() {
             SpellIconTable = null;
-            ItemIconTable = null;
+            ItemIconTable  = null;
         }
 
         [BulkCopyRecurse]

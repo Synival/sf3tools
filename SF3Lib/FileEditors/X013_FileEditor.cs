@@ -4,6 +4,8 @@ using CommonLib.Attributes;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Types;
+using static CommonLib.Utils.ResourceUtils;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.FileEditors {
     public class X013_FileEditor : SF3FileEditor, IX013_FileEditor {
@@ -118,20 +120,20 @@ namespace SF3.FileEditors {
             }
 
             return new List<ITable>() {
-                (SpecialsTable        = new SpecialTable(this, specialAddress)),
-                (SupportTypeTable     = new SupportTypeTable(this, supportTypeAddress)),
-                (FriendshipExpTable   = new FriendshipExpTable(this, friendshipExpAddress)),
-                (SupportStatsTable    = new SupportStatsTable(this, supportStatsAddress)),
-                (SoulmateTable        = new SoulmateTable(this, soulmateAddress)),
-                (SoulfailTable        = new SoulfailTable(this, soulFailAddress)),
-                (MagicBonusTable      = new MagicBonusTable(this, magicBonusAddress)),
-                (CritModTable         = new CritModTable(this, critModAddress)),
-                (CritrateTable        = new CritrateTable(this, critrateAddress)),
-                (SpecialChanceTable   = new SpecialChanceTable(this, specialChanceAddress)),
-                (ExpLimitTable        = new ExpLimitTable(this, expLimitAddress)),
-                (HealExpTable         = new HealExpTable(this, healExpAddress)),
-                (WeaponSpellRankTable = new WeaponSpellRankTable(this, weaponSpellRankAddress)),
-                (StatusEffectTable    = new StatusEffectTable(this, statusEffectAddress)),
+                (SpecialsTable        = new SpecialTable(this, ResourceFileForScenario(Scenario, "Specials.xml"), specialAddress)),
+                (SupportTypeTable     = new SupportTypeTable(this, ResourceFileForScenario(Scenario, "Characters.xml"), supportTypeAddress)),
+                (FriendshipExpTable   = new FriendshipExpTable(this, ResourceFile("ExpList.xml"), friendshipExpAddress)),
+                (SupportStatsTable    = new SupportStatsTable(this, ResourceFile("X013StatList.xml"), supportStatsAddress)),
+                (SoulmateTable        = new SoulmateTable(this, ResourceFile("SoulmateList.xml"), soulmateAddress)),
+                (SoulfailTable        = new SoulfailTable(this, ResourceFile("Soulfail.xml"), soulFailAddress)),
+                (MagicBonusTable      = new MagicBonusTable(this, ResourceFileForScenario(Scenario, "MagicBonus.xml"), magicBonusAddress, Scenario == ScenarioType.Scenario1)),
+                (CritModTable         = new CritModTable(this, ResourceFile("CritModList.xml"), critModAddress)),
+                (CritrateTable        = new CritrateTable(this, ResourceFile("CritrateList.xml"), critrateAddress)),
+                (SpecialChanceTable   = new SpecialChanceTable(this, ResourceFile("SpecialChanceList.xml"), specialChanceAddress, Scenario <= ScenarioType.Scenario2)),
+                (ExpLimitTable        = new ExpLimitTable(this, ResourceFile("ExpLimitList.xml"), expLimitAddress)),
+                (HealExpTable         = new HealExpTable(this, ResourceFile("HealExpList.xml"), healExpAddress)),
+                (WeaponSpellRankTable = new WeaponSpellRankTable(this, ResourceFile("WeaponSpellRankList.xml"), weaponSpellRankAddress)),
+                (StatusEffectTable    = new StatusEffectTable(this, ResourceFile("StatusGroupList.xml"), statusEffectAddress)),
             };
         }
 

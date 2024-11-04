@@ -28,7 +28,7 @@ namespace SF3.Models {
         private readonly int SpellOnUseLocation;
         private readonly int SpellLvOnUseLocation;
 
-        public Item(ISF3FileEditor editor, int id, string name, int address)
+        public Item(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x18) {
             PriceLocation                = Address;     // 2 bytes. only thing that is 2 bytes
             WeaponTypeLocation           = Address + 2; // 1 byte

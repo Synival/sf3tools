@@ -21,14 +21,8 @@ namespace SF3.Tables {
 
         /// <summary>
         /// The editor used for this table.
-        /// TODO: make this just an IByteEditor!
         /// </summary>
-        ISF3FileEditor FileEditor { get; }
-
-        /// <summary>
-        /// The Scenario the contained rows belong to.
-        /// </summary>
-        ScenarioType Scenario { get; }
+        IByteEditor FileEditor { get; }
 
         /// <summary>
         /// The address of the first row of the table.

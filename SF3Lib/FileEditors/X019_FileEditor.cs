@@ -4,6 +4,7 @@ using CommonLib.Attributes;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Types;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.FileEditors {
     public class X019_FileEditor : SF3FileEditor, IX019_FileEditor {
@@ -32,7 +33,7 @@ namespace SF3.FileEditors {
             }
 
             return new List<ITable>() {
-                (MonsterTable = new MonsterTable(this, monsterTableAddress))
+                (MonsterTable = new MonsterTable(this, ResourceFileForScenario(Scenario, "Monsters.xml"), monsterTableAddress))
             };
         }
 

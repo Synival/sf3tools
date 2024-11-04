@@ -13,8 +13,10 @@ namespace SF3.Tables {
     /// Base implementation for any table of SF3 data that can be modified.
     /// </summary>
     public abstract class Table : ITable {
-        protected Table(ISF3FileEditor fileEditor) {
+        protected Table(IByteEditor fileEditor, string resourceFile, int address) {
             FileEditor = fileEditor;
+            ResourceFile = resourceFile;
+            Address = address;
         }
 
         /// <summary>
@@ -29,11 +31,10 @@ namespace SF3.Tables {
         /// <returns>'true' if successful (or no data is loaded), 'false' on failure.</returns>
         public abstract bool Reset();
 
-        public ISF3FileEditor FileEditor { get; }
-        public ScenarioType Scenario => FileEditor.Scenario;
-        public abstract int Address { get; }
+        public IByteEditor FileEditor { get; }
+        public string ResourceFile { get; }
+        public int Address { get; }
 
-        public abstract string ResourceFile { get; }
         public abstract bool IsLoaded { get; }
         public abstract IModel[] RowObjs { get; }
         public virtual int? MaxSize => null;
@@ -43,7 +44,7 @@ namespace SF3.Tables {
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
     public abstract class Table<T> : Table, ITable<T> where T : class, IModel {
-        protected Table(ISF3FileEditor fileEditor) : base(fileEditor) {
+        protected Table(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }
 
         public override bool Reset() {

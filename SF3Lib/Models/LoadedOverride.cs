@@ -18,7 +18,7 @@ namespace SF3.Models {
         private readonly int julChr;
         private readonly int extraChr;
 
-        public LoadedOverride(ISF3FileEditor editor, int id, string name, int address)
+        public LoadedOverride(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x28) {
             mapID      = Address;        // 2 bytes
             synMusic   = Address + 0x02; // 1 byte

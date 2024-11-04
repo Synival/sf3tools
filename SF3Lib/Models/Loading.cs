@@ -13,7 +13,7 @@ namespace SF3.Models {
         private readonly int unknown;
         private readonly int chr;
 
-        public Loading(ISF3FileEditor editor, int id, string name, int address)
+        public Loading(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x10) {
             locationID = Address;        // 2 bytes
             x1         = Address + 0x02; // 2 bytes

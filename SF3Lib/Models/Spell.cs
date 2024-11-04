@@ -25,7 +25,7 @@ namespace SF3.Models {
         private readonly int lv4Cost;
         private readonly int lv4Damage;
 
-        public Spell(ISF3FileEditor editor, int id, string name, int address)
+        public Spell(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x14) {
             targetType  = Address;
             damageType  = Address + 1;

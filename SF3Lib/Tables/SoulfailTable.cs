@@ -4,16 +4,12 @@ using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Tables {
     public class SoulfailTable : Table<Soulfail> {
-        public SoulfailTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
-            ResourceFile = ResourceFile("Soulfail.xml");
-            Address = address;
+        public SoulfailTable(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }
 
         public override bool Load()
             => LoadFromResourceFile((id, name, address) => new Soulfail(FileEditor, id, name, address));
 
-        public override string ResourceFile { get; }
-        public override int Address { get; }
         public override int? MaxSize => 1;
     }
 }

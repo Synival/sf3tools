@@ -4,16 +4,12 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables {
     public class WeaponSpellTable : Table<WeaponSpell> {
-        public WeaponSpellTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
-            ResourceFile = ResourceFileForScenario(FileEditor.Scenario, "WeaponSpells.xml");
-            Address = address;
+        public WeaponSpellTable(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }
 
         public override bool Load()
             => LoadFromResourceFile((id, name, address) => new WeaponSpell(FileEditor, id, name, address));
 
-        public override string ResourceFile { get; }
-        public override int Address { get; }
         public override int? MaxSize => 31;
     }
 }

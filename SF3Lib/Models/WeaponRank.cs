@@ -9,7 +9,7 @@ namespace SF3.Models {
         private readonly int skill2;
         private readonly int skill3;
 
-        public WeaponRank(ISF3FileEditor editor, int id, string name, int address)
+        public WeaponRank(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x04) {
             skill0 = Address;     // 1 byte
             skill1 = Address + 1; // 1 byte

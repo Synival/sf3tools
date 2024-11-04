@@ -40,8 +40,6 @@ namespace SF3.X1_Editor.Forms
             this.tsmiMap_MapMedion = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMap_MapJulian = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMap_MapExtra = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDebug = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDebug_TreasureDebugToggle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_SelectScenarioThenMap = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_IfTheTablesEtc = new System.Windows.Forms.ToolStripMenuItem();
@@ -289,7 +287,6 @@ namespace SF3.X1_Editor.Forms
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiScenario,
             this.tsmiMap,
-            this.tsmiDebug,
             this.tsmiHelp});
             this.menuStrip2.Location = new System.Drawing.Point(0, 24);
             this.menuStrip2.Name = "menuStrip2";
@@ -334,45 +331,30 @@ namespace SF3.X1_Editor.Forms
             // tsmiMap_MapSynbios
             // 
             this.tsmiMap_MapSynbios.Name = "tsmiMap_MapSynbios";
-            this.tsmiMap_MapSynbios.Size = new System.Drawing.Size(139, 22);
+            this.tsmiMap_MapSynbios.Size = new System.Drawing.Size(180, 22);
             this.tsmiMap_MapSynbios.Text = "map&Synbios";
             this.tsmiMap_MapSynbios.Click += new System.EventHandler(this.tsmiMap_MapSynbios_Click);
             // 
             // tsmiMap_MapMedion
             // 
             this.tsmiMap_MapMedion.Name = "tsmiMap_MapMedion";
-            this.tsmiMap_MapMedion.Size = new System.Drawing.Size(139, 22);
+            this.tsmiMap_MapMedion.Size = new System.Drawing.Size(180, 22);
             this.tsmiMap_MapMedion.Text = "map&Medion";
             this.tsmiMap_MapMedion.Click += new System.EventHandler(this.tsmiMap_MapMedion_Click);
             // 
             // tsmiMap_MapJulian
             // 
             this.tsmiMap_MapJulian.Name = "tsmiMap_MapJulian";
-            this.tsmiMap_MapJulian.Size = new System.Drawing.Size(139, 22);
+            this.tsmiMap_MapJulian.Size = new System.Drawing.Size(180, 22);
             this.tsmiMap_MapJulian.Text = "map&Julian";
             this.tsmiMap_MapJulian.Click += new System.EventHandler(this.tsmiMap_MapJulian_Click);
             // 
             // tsmiMap_MapExtra
             // 
             this.tsmiMap_MapExtra.Name = "tsmiMap_MapExtra";
-            this.tsmiMap_MapExtra.Size = new System.Drawing.Size(139, 22);
+            this.tsmiMap_MapExtra.Size = new System.Drawing.Size(180, 22);
             this.tsmiMap_MapExtra.Text = "map&Extra";
             this.tsmiMap_MapExtra.Click += new System.EventHandler(this.tsmiMap_MapExtra_Click);
-            // 
-            // tsmiDebug
-            // 
-            this.tsmiDebug.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiDebug_TreasureDebugToggle});
-            this.tsmiDebug.Name = "tsmiDebug";
-            this.tsmiDebug.Size = new System.Drawing.Size(54, 20);
-            this.tsmiDebug.Text = "&Debug";
-            // 
-            // tsmiDebug_TreasureDebugToggle
-            // 
-            this.tsmiDebug_TreasureDebugToggle.Name = "tsmiDebug_TreasureDebugToggle";
-            this.tsmiDebug_TreasureDebugToggle.Size = new System.Drawing.Size(189, 22);
-            this.tsmiDebug_TreasureDebugToggle.Text = "&treasureDebug Toggle";
-            this.tsmiDebug_TreasureDebugToggle.Click += new System.EventHandler(this.tsmiDebug_TreasureDebugToggle_Click);
             // 
             // tsmiHelp
             // 
@@ -2770,8 +2752,6 @@ namespace SF3.X1_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcArrowsPlus0x08;
         private BrightIdeasSoftware.OLVColumn lvcArrowsPlus0x0A;
         private BrightIdeasSoftware.OLVColumn lvcSlotTab2IsBoss;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDebug;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDebug_TreasureDebugToggle;
     }
 }
 

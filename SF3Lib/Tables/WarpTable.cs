@@ -4,16 +4,10 @@ using CommonLib.Extensions;
 using CommonLib.Utils;
 using SF3.FileEditors;
 using SF3.Models;
-using SF3.Types;
-using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Tables {
     public class WarpTable : Table<Warp> {
-        public WarpTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
-            ResourceFile = fileEditor.Scenario == ScenarioType.Scenario1
-                ? ResourceFileForScenario(ScenarioType.Scenario1, "Warps.xml")
-                : null;
-            Address = address;
+        public WarpTable(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }
 
         public override bool Load() {
@@ -35,8 +29,6 @@ namespace SF3.Tables {
             return true;
         }
 
-        public override string ResourceFile { get; }
-        public override int Address { get; }
         public override int? MaxSize => 1000;
     }
 }

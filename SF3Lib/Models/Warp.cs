@@ -10,7 +10,7 @@ namespace SF3.Models {
         private readonly int type;
         private readonly int map;
 
-        public Warp(ISF3FileEditor editor, int id, string name, int address)
+        public Warp(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x04) {
             unknown1 = Address;
             unknown2 = Address + 1;
