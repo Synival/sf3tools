@@ -7,20 +7,16 @@ namespace SF3.Tests.FileEditors {
         private class X1_TestCase : TestCase {
             public X1_TestCase(
                 ScenarioType scenario,
-                string filename,
-                MapLeaderType mapLeader)
+                string filename)
             : base(scenario, filename) {
-                MapLeader = mapLeader;
             }
-
-            public MapLeaderType MapLeader { get; }
         }
 
-        private static readonly X1_TestCase TestCase = new X1_TestCase(ScenarioType.Scenario2, "X1DUSTY.BIN", MapLeaderType.Medion);
+        private static readonly X1_TestCase TestCase = new X1_TestCase(ScenarioType.Scenario2, "X1DUSTY.BIN");
 
         [TestMethod]
         public void EnterTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.EnterTable;
 
@@ -38,7 +34,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void NpcTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.NpcTable;
 
@@ -55,7 +51,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void TreasureTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.TreasureTable;
 
@@ -74,7 +70,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void ArrowTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.ArrowTable;
 
@@ -89,7 +85,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void WarpTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.WarpTable;
 

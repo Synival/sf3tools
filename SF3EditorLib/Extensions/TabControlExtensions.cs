@@ -60,8 +60,18 @@ namespace SF3.Editor.Extensions {
         /// <summary>
         /// Configuration of a single tab for PopulateTabs().
         /// </summary>
-        public class PopulateTabConfig {
-            public PopulateTabConfig(TabPage tabPage, ObjectListView objectListView, ITable table) {
+        public interface IPopulateTabConfig {
+            TabPage TabPage { get; }
+            bool CanPopulate { get; }
+            bool Populate();
+        }
+
+        /// <summary>
+        /// Tab populator that is tied directly to a table that should be loaded into an ObjectListView.
+        /// If the table doesn't exist, the tab is hidden.
+        /// </summary>
+        public class PopulateOLVTabConfig : IPopulateTabConfig {
+            public PopulateOLVTabConfig(TabPage tabPage, ObjectListView objectListView, ITable table) {
                 TabPage = tabPage;
                 ObjectListView = objectListView;
                 Table = table;
@@ -71,6 +81,19 @@ namespace SF3.Editor.Extensions {
             public ObjectListView ObjectListView { get; }
             public ITable Table { get; }
             public object[] RowObjs => Table.RowObjs;
+
+            public bool CanPopulate => Table != null;
+
+            public bool Populate() {
+                ObjectListView.ClearObjects();
+                if (!Table.IsLoaded && !Table.Load()) {
+                    // TODO: we really should be throwing an exception here instead...
+                    ErrorMessage("Could not load " + Table.ResourceFile);
+                    return false;
+                }
+                ObjectListView.AddObjects(RowObjs);
+                return true;
+            }
         }
 
         /// <summary>
@@ -84,18 +107,11 @@ namespace SF3.Editor.Extensions {
         /// <param name="tabControl"></param>
         /// <param name="tabConfigs"></param>
         /// <returns>'True' if the operation succeeded, 'false' if a Table could not be loaded.</returns>
-        public static bool PopulateTabs(this TabControl tabControl, IEnumerable<PopulateTabConfig> tabConfigs) {
+        public static bool PopulateTabs(this TabControl tabControl, IEnumerable<IPopulateTabConfig> tabConfigs) {
             // Show and populate visible tabs.
-            foreach (var tc in tabConfigs) {
-                tc.ObjectListView.ClearObjects();
-                if (!tc.Table.IsLoaded && !tc.Table.Load()) {
-                    // TODO: we really should be throwing an exception here instead...
-                    ErrorMessage("Could not load " + tc.Table.ResourceFile);
+            foreach (var tc in tabConfigs)
+                if (!tc.Populate())
                     return false;
-                }
-                tc.ObjectListView.AddObjects(tc.RowObjs);
-            }
-
             return true;
         }
 
@@ -111,11 +127,11 @@ namespace SF3.Editor.Extensions {
         /// <param name="tabControl"></param>
         /// <param name="tabConfigs"></param>
         /// <returns>'True' if the operation succeeded, 'false' if a Table could not be loaded.</returns>
-        public static bool PopulateAndToggleTabs(this TabControl tabControl, IEnumerable<PopulateTabConfig> tabConfigs) {
-            tabControl.ToggleTabs(tabConfigs.ToDictionary(x => x.TabPage, x => x.Table != null));
+        public static bool PopulateAndToggleTabs(this TabControl tabControl, IEnumerable<IPopulateTabConfig> tabConfigs) {
+            tabControl.ToggleTabs(tabConfigs.ToDictionary(x => x.TabPage, x => x.CanPopulate));
             var populateTabConfigs = tabConfigs
-                .Where(x => x.Table != null)
-                .Cast<PopulateTabConfig>()
+                .Where(x => x.CanPopulate)
+                .Cast<IPopulateTabConfig>()
                 .ToList();
             return tabControl.PopulateTabs(populateTabConfigs);
         }

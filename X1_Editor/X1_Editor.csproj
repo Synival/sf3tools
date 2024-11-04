@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\BattleEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BattleEditorControl.Designer.cs">
+      <DependentUpon>BattleEditorControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmX1_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\BattleEditorControl.resx">
+      <DependentUpon>BattleEditorControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmX1_Editor.resx">
       <DependentUpon>frmX1_Editor.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -89,6 +98,10 @@
     <Content Include="Benetram_Shining_Force_III.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonLib\CommonLib.csproj">
+      <Project>{DBD21823-582A-4A42-92AB-3294E013A4A4}</Project>
+      <Name>CommonLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SF3EditorLib\SF3EditorLib.csproj">
       <Project>{5fe40461-c218-45be-8947-9b4a8d8291fd}</Project>
       <Name>SF3EditorLib</Name>

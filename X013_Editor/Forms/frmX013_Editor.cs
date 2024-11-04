@@ -25,21 +25,21 @@ namespace SF3.X013_Editor.Forms {
             if (!base.OnLoad())
                 return false;
 
-            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>() {
-                new PopulateTabConfig(tabSpecials, olvSpecials, FileEditor.SpecialsTable),
-                new PopulateTabConfig(tabFriendshipExp, olvFriendshipExp, FileEditor.FriendshipExpTable),
-                new PopulateTabConfig(tabSupportType, olvSupportType, FileEditor.SupportTypeTable),
-                new PopulateTabConfig(tabSupportStats, olvSupportStats, FileEditor.SupportStatsTable),
-                new PopulateTabConfig(tabSoulmate, olvSoulmate, FileEditor.SoulmateTable),
-                new PopulateTabConfig(tabSoulmateChanceFail, olvSoulmateChanceFail, FileEditor.SoulfailTable),
-                new PopulateTabConfig(tabMagicBonus, olvMagicBonus, FileEditor.MagicBonusTable),
-                new PopulateTabConfig(tabCritVantages, olvCritVantages, FileEditor.CritModTable),
-                new PopulateTabConfig(tabCritCounterRate, olvCritCounterRate, FileEditor.CritrateTable),
-                new PopulateTabConfig(tabSpecialChance, olvSpecialChance, FileEditor.SpecialChanceTable),
-                new PopulateTabConfig(tabExpLimit, olvExpLimit, FileEditor.ExpLimitTable),
-                new PopulateTabConfig(tabHealExp, olvHealExp, FileEditor.HealExpTable),
-                new PopulateTabConfig(tabWeaponSpellRank, olvWeaponSpellRank, FileEditor.WeaponSpellRankTable),
-                new PopulateTabConfig(tabStatusGroups, olvStatusGroups, FileEditor.StatusEffectTable)
+            return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
+                new PopulateOLVTabConfig(tabSpecials, olvSpecials, FileEditor.SpecialsTable),
+                new PopulateOLVTabConfig(tabFriendshipExp, olvFriendshipExp, FileEditor.FriendshipExpTable),
+                new PopulateOLVTabConfig(tabSupportType, olvSupportType, FileEditor.SupportTypeTable),
+                new PopulateOLVTabConfig(tabSupportStats, olvSupportStats, FileEditor.SupportStatsTable),
+                new PopulateOLVTabConfig(tabSoulmate, olvSoulmate, FileEditor.SoulmateTable),
+                new PopulateOLVTabConfig(tabSoulmateChanceFail, olvSoulmateChanceFail, FileEditor.SoulfailTable),
+                new PopulateOLVTabConfig(tabMagicBonus, olvMagicBonus, FileEditor.MagicBonusTable),
+                new PopulateOLVTabConfig(tabCritVantages, olvCritVantages, FileEditor.CritModTable),
+                new PopulateOLVTabConfig(tabCritCounterRate, olvCritCounterRate, FileEditor.CritrateTable),
+                new PopulateOLVTabConfig(tabSpecialChance, olvSpecialChance, FileEditor.SpecialChanceTable),
+                new PopulateOLVTabConfig(tabExpLimit, olvExpLimit, FileEditor.ExpLimitTable),
+                new PopulateOLVTabConfig(tabHealExp, olvHealExp, FileEditor.HealExpTable),
+                new PopulateOLVTabConfig(tabWeaponSpellRank, olvWeaponSpellRank, FileEditor.WeaponSpellRankTable),
+                new PopulateOLVTabConfig(tabStatusGroups, olvStatusGroups, FileEditor.StatusEffectTable)
             });
         }
 

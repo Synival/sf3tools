@@ -26,9 +26,9 @@ namespace SF3.IconPointerEditor.Forms {
             if (!base.OnLoad())
                 return false;
 
-            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>() {
-                new PopulateTabConfig(tabSpellIcons, olvSpellIcons, FileEditor.SpellIconTable),
-                new PopulateTabConfig(tabItemIcons, olvItemIcons, FileEditor.ItemIconTable)
+            return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
+                new PopulateOLVTabConfig(tabSpellIcons, olvSpellIcons, FileEditor.SpellIconTable),
+                new PopulateOLVTabConfig(tabItemIcons, olvItemIcons, FileEditor.ItemIconTable)
             });
         }
 

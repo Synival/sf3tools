@@ -1,26 +1,30 @@
+using System.Collections.Generic;
 using SF3.Tables;
 using SF3.Types;
 
 namespace SF3.FileEditors {
     public interface IX1_FileEditor : ISF3FileEditor {
-        // TODO: make this read-only once all of X1 is migrated. I suppose LoadTables() can set it privately
-        MapLeaderType MapLeader { get; set; }
+        bool IsBTL99 { get; }
 
         bool? IsBattle { get; }
 
-        bool IsBTL99 { get; }
-
-        SlotTable SlotTable { get; }
-        HeaderTable HeaderTable { get; }
-        AITable AITable { get; }
-        SpawnZoneTable SpawnZoneTable { get; }
-        BattlePointersTable BattlePointersTable { get; }
         TreasureTable TreasureTable { get; }
-        CustomMovementTable CustomMovementTable { get; }
         WarpTable WarpTable { get; }
-        TileMovementTable TileMovementTable { get; }
+        BattlePointersTable BattlePointersTable { get; }
         NpcTable NpcTable { get; }
         EnterTable EnterTable { get; }
         ArrowTable ArrowTable { get; }
+
+        // TODO: temporary until ^^^!
+        HeaderTable HeaderTable { get; }
+        SlotTable SlotTable { get; }
+        SpawnZoneTable SpawnZoneTable { get; }
+        AITable AITable { get; }
+        CustomMovementTable CustomMovementTable { get; }
+        // ^^^^
+
+        List<BattleTable> BattleTables { get; }
+
+        TileMovementTable TileMovementTable { get; }
     }
 }

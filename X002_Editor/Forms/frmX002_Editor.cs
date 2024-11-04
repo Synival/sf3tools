@@ -37,16 +37,16 @@ namespace SF3.X002_Editor.Forms {
             if (!base.OnLoad())
                 return false;
 
-            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>()             {
-                new PopulateTabConfig(tabItems, olvItems, FileEditor.ItemTable),
-                new PopulateTabConfig(tabSpells, olvSpells, FileEditor.SpellTable),
-                new PopulateTabConfig(tabWeaponSpells, olvWeaponSpells, FileEditor.WeaponSpellTable),
-                new PopulateTabConfig(tabLoaded, olvLoaded, FileEditor.LoadingTable),
-                new PopulateTabConfig(tabLoadedOverride, olvLoadedOverride, FileEditor.LoadedOverrideTable),
-                new PopulateTabConfig(tabStatBoost, olvStatBoost, FileEditor.StatBoostTable),
-                new PopulateTabConfig(tabWeaponRankAttack, olvWeaponRankAttack, FileEditor.WeaponRankTable),
-                new PopulateTabConfig(tabAttackResist, olvAttackResist, FileEditor.AttackResistTable),
-                new PopulateTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpTable),
+            return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>()             {
+                new PopulateOLVTabConfig(tabItems, olvItems, FileEditor.ItemTable),
+                new PopulateOLVTabConfig(tabSpells, olvSpells, FileEditor.SpellTable),
+                new PopulateOLVTabConfig(tabWeaponSpells, olvWeaponSpells, FileEditor.WeaponSpellTable),
+                new PopulateOLVTabConfig(tabLoaded, olvLoaded, FileEditor.LoadingTable),
+                new PopulateOLVTabConfig(tabLoadedOverride, olvLoadedOverride, FileEditor.LoadedOverrideTable),
+                new PopulateOLVTabConfig(tabStatBoost, olvStatBoost, FileEditor.StatBoostTable),
+                new PopulateOLVTabConfig(tabWeaponRankAttack, olvWeaponRankAttack, FileEditor.WeaponRankTable),
+                new PopulateOLVTabConfig(tabAttackResist, olvAttackResist, FileEditor.AttackResistTable),
+                new PopulateOLVTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpTable),
             });
         }
 

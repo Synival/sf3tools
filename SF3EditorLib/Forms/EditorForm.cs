@@ -36,7 +36,7 @@ namespace SF3.Editor.Forms {
         /// <summary>
         /// Function to be called after derived class's InitializeComponent() is called.
         /// </summary>
-        public void InitializeEditor(ToolStrip toolStrip = null) {
+        public void InitializeEditor(ToolStrip toolStrip = null, IEnumerable<ObjectListView> extraOLVs = null) {
             if (toolStrip != null) {
                 var menuItems = new Dictionary<string, ToolStripMenuItem>();
                 foreach (var ti in menuStrip1.Items) {
@@ -101,6 +101,9 @@ namespace SF3.Editor.Forms {
             FileModifiedChanged += (obj, eargs) => tsmiFile_Save.Enabled = IsLoaded && FileEditor.IsModified;
 
             ObjectListViews = this.GetAllObjectsOfTypeInFields<ObjectListView>(false);
+            if (extraOLVs != null)
+                ObjectListViews.AddRange(extraOLVs);
+
             foreach (var olv in ObjectListViews)
                 olv.Enhance(() => FileEditor);
 

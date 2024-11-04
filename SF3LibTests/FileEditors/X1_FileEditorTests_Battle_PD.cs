@@ -7,20 +7,16 @@ namespace SF3.Tests.FileEditors {
         private class X1_TestCase : TestCase {
             public X1_TestCase(
                 ScenarioType scenario,
-                string filename,
-                MapLeaderType mapLeader)
+                string filename)
             : base(scenario, filename) {
-                MapLeader = mapLeader;
             }
-
-            public MapLeaderType MapLeader { get; }
         }
 
-        private static readonly X1_TestCase TestCase = new X1_TestCase(ScenarioType.PremiumDisk, "X1BTLP04.BIN", MapLeaderType.Synbios);
+        private static readonly X1_TestCase TestCase = new X1_TestCase(ScenarioType.PremiumDisk, "X1BTLP04.BIN");
 
         [TestMethod]
         public void AITable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.AITable;
 
@@ -35,7 +31,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void BattlePointersTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.BattlePointersTable;
 
@@ -49,7 +45,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void CustomMovementTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.CustomMovementTable;
 
@@ -64,7 +60,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void HeaderTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.HeaderTable;
 
@@ -76,7 +72,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void SlotTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.SlotTable;
 
@@ -93,7 +89,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void SpawnZoneTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.SpawnZoneTable;
 
@@ -116,7 +112,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void TreasureTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.TreasureTable;
 
@@ -131,7 +127,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void TileMovementTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.TileMovementTable;
 
@@ -155,7 +151,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void WarpTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, TestCase.MapLeader, false);
+            var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
             var table = editor.WarpTable;
 

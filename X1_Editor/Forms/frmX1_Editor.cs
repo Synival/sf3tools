@@ -1,10 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 using BrightIdeasSoftware;
+using CommonLib.Extensions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.FileEditors;
+using SF3.Tables;
 using SF3.Types;
+using SF3.X1_Editor.Controls;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
 namespace SF3.X1_Editor.Forms {
@@ -26,90 +31,76 @@ namespace SF3.X1_Editor.Forms {
 
         public new IX1_FileEditor FileEditor => base.FileEditor as IX1_FileEditor;
 
-        private MapLeaderType _mapLeader = (MapLeaderType) (-1); // uninitialized value
-
-        private MapLeaderType MapLeader {
-            get => _mapLeader;
-            set {
-                if (_mapLeader != value) {
-                    _mapLeader = value;
-                    tsmiMap_MapSynbios.Checked = _mapLeader == MapLeaderType.Synbios;
-                    tsmiMap_MapMedion.Checked  = _mapLeader == MapLeaderType.Medion;
-                    tsmiMap_MapJulian.Checked  = _mapLeader == MapLeaderType.Julian;
-                    tsmiMap_MapExtra.Checked   = _mapLeader == MapLeaderType.Extra;
-                }
-            }
-        }
-
         public frmX1_Editor() {
             InitializeComponent();
-            InitializeEditor(menuStrip2);
-            MapLeader = MapLeaderType.Synbios;
+
+            var battleEditors = new List<BattleEditorControl>() {
+                becBattle_Synbios,
+                becBattle_Medion,
+                becBattle_Julian,
+                becBattle_Extra
+            };
+            var battleEditorOLVs = battleEditors.SelectMany(x => x.GetAllObjectsOfTypeInFields<ObjectListView>(false)).ToList();
+
+            InitializeEditor(menuStrip2, battleEditorOLVs);
         }
 
         protected override string FileDialogFilter
             => (IsBTL99 ? "SF3 Data (X1BTL99.BIN)|X1BTL99.BIN|" : "SF3 Data (X1*.BIN)|X1*.BIN|") + base.FileDialogFilter;
 
-        protected override IFileEditor MakeFileEditor() => new X1_FileEditor(Scenario, MapLeader, IsBTL99);
+        protected override IFileEditor MakeFileEditor() => new X1_FileEditor(Scenario, IsBTL99);
+
+        private class PopulateBattleTabConfig : IPopulateTabConfig {
+            public PopulateBattleTabConfig(TabPage tabPage, Dictionary<MapLeaderType, BattleTable> battleTable, MapLeaderType mapLeader) {
+                TabPage = tabPage;
+                BattleTable = battleTable.ContainsKey(mapLeader) ? battleTable[mapLeader] : null;
+            }
+
+            public TabPage TabPage { get; }
+            public BattleTable BattleTable { get; }
+
+            public bool CanPopulate => BattleTable != null;
+
+            public bool Populate() {
+                var bec = TabPage.Controls[0] as BattleEditorControl;
+                return bec.Tabs.PopulateTabs(new List<IPopulateTabConfig>() {
+                    new PopulateOLVTabConfig(bec.TabHeader,           bec.OLVHeader,           BattleTable.HeaderTable),
+                    new PopulateOLVTabConfig(bec.TabSlotTab1,         bec.OLVSlotTab1,         BattleTable.SlotTable),
+                    new PopulateOLVTabConfig(bec.TabSlotTab2,         bec.OLVSlotTab2,         BattleTable.SlotTable),
+                    new PopulateOLVTabConfig(bec.TabSlotTab3,         bec.OLVSlotTab3,         BattleTable.SlotTable),
+                    new PopulateOLVTabConfig(bec.TabSlotTab4,         bec.OLVSlotTab4,         BattleTable.SlotTable),
+                    new PopulateOLVTabConfig(bec.TabSpawnZones,       bec.OLVSpawnZones,       BattleTable.SpawnZoneTable),
+                    new PopulateOLVTabConfig(bec.TabAITargetPosition, bec.OLVAITargetPosition, BattleTable.AITable),
+                    new PopulateOLVTabConfig(bec.TabScriptedMovement, bec.OLVScriptedMovement, BattleTable.CustomMovementTable)
+                });
+            }
+        }
 
         protected override bool OnLoad() {
             if (!base.OnLoad())
                 return false;
 
-            return tabMain.PopulateAndToggleTabs(new List<PopulateTabConfig>() {
-                new PopulateTabConfig(tabHeader, olvHeader, FileEditor.HeaderTable),
-                new PopulateTabConfig(tabSlotTab1, olvSlotTab1, FileEditor.SlotTable),
-                new PopulateTabConfig(tabSlotTab2, olvSlotTab2, FileEditor.SlotTable),
-                new PopulateTabConfig(tabSlotTab3, olvSlotTab3, FileEditor.SlotTable),
-                new PopulateTabConfig(tabSlotTab4, olvSlotTab4, FileEditor.SlotTable),
-                new PopulateTabConfig(tabAITargetPosition, olvAITargetPosition, FileEditor.AITable),
-                new PopulateTabConfig(tabSpawnZones, olvSpawnZones, FileEditor.SpawnZoneTable),
-                new PopulateTabConfig(tabBattlePointers, olvBattlePointers, FileEditor.BattlePointersTable),
-                new PopulateTabConfig(tabScriptedMovement, olvScriptedMovement, FileEditor.CustomMovementTable),
-                new PopulateTabConfig(tabInteractables, olvInteractables, FileEditor.TreasureTable),
-                new PopulateTabConfig(tabTownNpcs, olvTownNpcs, FileEditor.NpcTable),
-                new PopulateTabConfig(tabNonBattleEnter, olvNonBattleEnter, FileEditor.EnterTable),
-                new PopulateTabConfig(tabArrows, olvArrows, FileEditor.ArrowTable),
-                new PopulateTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpTable),
-                new PopulateTabConfig(tabTileData, olvTileData, FileEditor.TileMovementTable),
+            var battleTables = (FileEditor.BattleTables != null)
+                ? FileEditor.BattleTables.ToDictionary(x => x.MapLeader, x => x)
+                : new Dictionary<MapLeaderType, BattleTable>();
+
+            return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
+                new PopulateOLVTabConfig(tabInteractables, olvInteractables, FileEditor.TreasureTable),
+                new PopulateOLVTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpTable),
+                new PopulateOLVTabConfig(tabBattlePointers, olvBattlePointers, FileEditor.BattlePointersTable),
+                new PopulateOLVTabConfig(tabTownNpcs, olvTownNpcs, FileEditor.NpcTable),
+                new PopulateOLVTabConfig(tabNonBattleEnter, olvNonBattleEnter, FileEditor.EnterTable),
+                new PopulateOLVTabConfig(tabArrows, olvArrows, FileEditor.ArrowTable),
+                new PopulateBattleTabConfig(tabBattle_Synbios, battleTables, MapLeaderType.Synbios),
+                new PopulateBattleTabConfig(tabBattle_Medion , battleTables, MapLeaderType.Medion),
+                new PopulateBattleTabConfig(tabBattle_Julian , battleTables, MapLeaderType.Julian),
+                new PopulateBattleTabConfig(tabBattle_Extra,   battleTables, MapLeaderType.Extra),
+                new PopulateOLVTabConfig(tabTileData, olvTileData, FileEditor.TileMovementTable),
             });
         }
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
 
-        protected override void tsmiScenario_Scenario1_Click(object sender, EventArgs e) {
-            base.tsmiScenario_Scenario1_Click(sender, e);
-            if (!IsBTL99)
-                MapLeader = MapLeaderType.Synbios;
-        }
-
-        protected override void tsmiScenario_Scenario2_Click(object sender, EventArgs e) {
-            base.tsmiScenario_Scenario2_Click(sender, e);
-            if (!IsBTL99)
-                MapLeader = MapLeaderType.Medion;
-        }
-
-        protected override void tsmiScenario_Scenario3_Click(object sender, EventArgs e) {
-            base.tsmiScenario_Scenario3_Click(sender, e);
-            if (!IsBTL99)
-                MapLeader = MapLeaderType.Julian;
-        }
-
-        protected override void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) {
-            base.tsmiScenario_PremiumDisk_Click(sender, e);
-            if (!IsBTL99)
-                MapLeader = MapLeaderType.Synbios;
-        }
-
-        private void tsmiScenario_BTL99_Click(object sender, EventArgs e) {
-            IsBTL99 = !IsBTL99;
-            if (IsBTL99)
-                MapLeader = MapLeaderType.Synbios;
-        }
-
-        private void tsmiMap_MapSynbios_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Synbios; //map with synbios as lead
-        private void tsmiMap_MapMedion_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Medion; //map with medion as lead
-        private void tsmiMap_MapJulian_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Julian; //map with julian as lead
-        private void tsmiMap_MapExtra_Click(object sender, EventArgs e) => MapLeader = MapLeaderType.Extra; //map with no lead or a extra as lead. also for ruins
+        private void tsmiScenario_BTL99_Click(object sender, EventArgs e) => IsBTL99 = !IsBTL99;
     }
 }
