@@ -52,9 +52,30 @@ namespace SF3.Tables {
         }
 
         /// <summary>
+        /// Function to determine whether or not reading from a table should continue.
+        /// If 'false' is returned, the 'currentModel' will not be committed.
+        /// </summary>
+        /// <param name="currentRows">The dictionary of rows by ID read thus far.</param>
+        /// <param name="prevModel">The last model read and committed to the table.</param>
+        /// <param name="currentModel">The model just read that is about to be committed to the table unless 'false' is returned.</param>
+        /// <returns>'true' if reading should continue, 'false' if reading should not continue.</returns>
+        public delegate bool ContinueReadingPredicate(Dictionary<int, T> currentRows, T prevModel, T currentModel);
+
+        /// <summary>
         /// Loads all rows from the resource file, sorted by value.
         /// </summary>
-        public bool LoadFromResourceFile(Func<int, string, int, T> makeTFunc) {
+        /// <param name="makeTFunc">Factory function to make the model.</param>
+        /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
+        public bool LoadFromResourceFile(Func<int, string, int, T> makeTFunc)
+            => LoadFromResourceFile(makeTFunc, null);
+
+        /// <summary>
+        /// Loads all rows from the resource file, sorted by value.
+        /// </summary>
+        /// <param name="makeTFunc">Factory function to make the model.</param>
+        /// <param name="pred">Optional predicate function to check whether or not the reader should continue.</param>
+        /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
+        public bool LoadFromResourceFile(Func<int, string, int, T> makeTFunc, ContinueReadingPredicate pred) {
             var rows = new Dictionary<int, T>();
             FileStream stream = null;
             try {
@@ -66,16 +87,21 @@ namespace SF3.Tables {
                 var xml = MakeXmlReader(stream);
                 _ = xml.Read();
 
+                T prevModel = null;
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
                         var id = Convert.ToInt32(xml.GetAttribute(0), 16);
                         var name = xml.GetAttribute(1);
                         var newModel = makeTFunc(id, name, Address + id * size);
+                        if (pred != null && !pred(rows, prevModel, newModel))
+                            break;
+
                         rows.Add(id, newModel);
 
                         if (id < 0 || (MaxSize != null && id >= MaxSize))
                             throw new IndexOutOfRangeException();
+                        prevModel = newModel;
                     }
                 }
             }

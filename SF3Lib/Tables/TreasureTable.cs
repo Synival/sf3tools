@@ -18,48 +18,11 @@ namespace SF3.Tables {
             Address = address;
         }
 
-        /// <summary>
-        /// Loads data from the file editor provided in the constructor.
-        /// </summary>
-        /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
-            _rows = new Treasure[0];
-            FileStream stream = null;
-            try {
-                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
-
-                var xml = MakeXmlReader(stream);
-                _ = xml.Read();
-                var myCount = 0;
-
-                var whilePred = Debug
-                    ? new Func<bool>(() => !xml.EOF && (_rows.Length == 0 || myCount <= 2))
-                    : new Func<bool>(() => !xml.EOF && (_rows.Length == 0 || _rows[_rows.Length - 1].Searched != 0xffff));
-
-                var address = Address;
-                while (whilePred()) {
-                    _ = xml.Read();
-                    if (xml.HasAttributes) {
-                        var newRow = new Treasure(FileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1), address);
-                        address += newRow.Size;
-                        _rows = _rows.ExpandedWith(newRow);
-                        if (newRow.ID < 0 || newRow.ID >= MaxSize)
-                            throw new IndexOutOfRangeException();
-                        if (newRow.Searched == 0xffff)
-                            myCount = 1 + myCount;
-                    }
-                }
-            }
-            catch (FileLoadException) {
-                return false;
-            }
-            catch (FileNotFoundException) {
-                return false;
-            }
-            finally {
-                stream?.Close();
-            }
-            return true;
+            return LoadFromResourceFile(
+                (id, name, address) => new Treasure(FileEditor, id, name, address),
+                Debug ? new ContinueReadingPredicate((rows, prev, cur) => rows.Count <= 2)
+                      : new ContinueReadingPredicate((rows, prev, cur) => prev == null || prev.Searched != 0xffff));
         }
 
         public override string ResourceFile { get; }

@@ -16,10 +16,6 @@ namespace SF3.Tables {
             Address = address;
         }
 
-        /// <summary>
-        /// Loads data from the file editor provided in the constructor.
-        /// </summary>
-        /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
         public override bool Load() {
             var values = ResourceFile != null
                 ? ResourceUtils.GetValueNameDictionaryFromXML(ResourceFile)
@@ -27,12 +23,14 @@ namespace SF3.Tables {
 
             _rows = new Warp[0];
             int address = Address;
-            for (var i = 0; _rows.Length == 0 || (_rows[_rows.Length - 1].WarpType != 0x01 && _rows[_rows.Length - 1].WarpType != 0xff); i++) {
+            Warp prevModel = null;
+            for (var i = 0; prevModel == null || (prevModel.WarpType != 0x01 && prevModel.WarpType != 0xff); i++) {
                 if (i == MaxSize)
                     throw new IndexOutOfRangeException();
                 var newRow = new Warp(FileEditor, i, values.ContainsKey(i) ? values[i] : "WarpIndex" + i, address);
-                _rows = _rows.ExpandedWith(newRow);
                 address += newRow.Size;
+                _rows = _rows.ExpandedWith(newRow);
+                prevModel = newRow;
             }
             return true;
         }
