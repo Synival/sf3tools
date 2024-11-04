@@ -31,6 +31,9 @@ namespace SF3.Tables {
             };
         }
 
+        [BulkCopyRowName]
+        public string Name => MapLeader.ToString() + " Battle";
+
         public IByteEditor Editor { get; }
         public MapLeaderType MapLeader { get; }
         public int Address { get; }
