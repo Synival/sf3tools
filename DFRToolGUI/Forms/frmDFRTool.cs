@@ -7,6 +7,8 @@ using static CommonLib.Win.Utils.MessageUtils;
 
 namespace DFRTool.GUI.Forms {
     public partial class frmDFRTool : Form {
+        bool _isDialogMode = true;
+
         /// <summary>
         /// Initializes the DFRToolGUI as a standalone application.
         /// </summary>
@@ -19,12 +21,25 @@ namespace DFRTool.GUI.Forms {
         /// </summary>
         /// <param name="data"></param>
         public frmDFRTool(byte[] data) {
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.MinimizeBox = false;
             InitializeComponent();
+
             btnAlteredFile.Enabled = false;
             tbAlteredFile.Enabled = false;
             tbAlteredFile.Text = "(Data Read from Editor)";
-
             Data = data;
+            _isDialogMode = true;
+        }
+
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            if (_isDialogMode && ModifierKeys == Keys.None && keyData == Keys.Escape)
+            {
+                Close();
+                return true;
+            }
+            return base.ProcessDialogKey(keyData);
         }
 
         private void btnOriginalFile_Click(object sender, EventArgs e) {
