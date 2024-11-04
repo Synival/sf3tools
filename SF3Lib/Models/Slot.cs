@@ -140,7 +140,7 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(NamedValueType.Character)]
+        [NameGetter(NamedValueType.CharacterPlus, nameof(EnemyID))]
         public int CharacterPlus0x0B {
             get => Editor.GetByte(characterPlus0x0B);
             set => Editor.SetByte(characterPlus0x0B, (byte) value);

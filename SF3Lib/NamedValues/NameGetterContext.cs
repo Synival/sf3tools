@@ -34,6 +34,14 @@ namespace SF3.NamedValues {
 
             _nameGetters = new Dictionary<NamedValueType, SubMethods>() {
                 { NamedValueType.Character,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterInfo.Info[Scenario])) },
+
+                { NamedValueType.CharacterPlus,
+                    new SubMethods(
+                        (o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterInfo.Info[Scenario]),
+                        (o, p, v, a) => CanGetCharacterPlusValue(o, p, v, a),
+                        (o, p, a)    => CanGetCharacterPlusValue(o, p, 0, a)
+                    ) },
+
                 { NamedValueType.CharacterClass,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterClassInfo)) },
                 { NamedValueType.Droprate,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.DroprateInfo)) },
                 { NamedValueType.EffectiveType,       new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EffectiveTypeInfo)) },
@@ -49,12 +57,14 @@ namespace SF3.NamedValues {
                 { NamedValueType.Spell,               new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellInfo.Info[Scenario])) },
                 { NamedValueType.SpellTarget,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellTargetInfo)) },
                 { NamedValueType.StatType,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.StatTypeInfo)) },
+
                 { NamedValueType.StatUpValueType,
                     new SubMethods(
                         (o, p, v, a) => GetStatUpValue(o, p, v, a),
                         (o, p, v, a) => CanGetStatUpValue(o, p, v, a),
                         (o, p, a)    => CanGetStatUpValue(o, p, 0, a)
                     ) },
+
                 { NamedValueType.WeaponSpell,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.WeaponSpellInfo.Info[Scenario])) },
                 { NamedValueType.WeaponType,          new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.WeaponTypeInfo)) },
             };
@@ -108,6 +118,13 @@ namespace SF3.NamedValues {
                 default:
                     return false;
             }
+        }
+
+        private bool CanGetCharacterPlusValue(object obj, PropertyInfo property, int value, object[] parameters) {
+            var typePropertyName = (string) parameters[1];
+            var typeProperty = obj.GetType().GetProperty(typePropertyName);
+            var typePropertyValue = (int) typeProperty.GetValue(obj);
+            return typePropertyValue == 0x5B; // magic number indicated "Character Placeholder"
         }
     }
 }

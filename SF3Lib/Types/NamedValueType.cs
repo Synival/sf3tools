@@ -4,6 +4,7 @@
     /// </summary>
     public enum NamedValueType {
         Character,
+        CharacterPlus,
         CharacterClass,
         Droprate,
         EffectiveType,
