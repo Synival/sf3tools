@@ -469,7 +469,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcHeaderMap
             // 
-            this.lvcHeaderMap.AspectName = "Map";
+            this.lvcHeaderMap.AspectName = "BattlePointersTableOffset";
             this.lvcHeaderMap.AspectToStringFormat = "{0:X}";
             this.lvcHeaderMap.IsEditable = false;
             this.lvcHeaderMap.Text = "Map";

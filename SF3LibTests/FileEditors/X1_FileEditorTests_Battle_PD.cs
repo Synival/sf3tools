@@ -69,7 +69,7 @@ namespace SF3.Tests.FileEditors {
             var table = editor.HeaderTable;
 
             Assert.AreEqual(   0, table.Rows[0].SizeUnknown1);
-            Assert.AreEqual(0x00, table.Rows[0].Map);
+            Assert.AreEqual(0x00, table.Rows[0].BattlePointersTableOffset);
             Assert.AreEqual(  16, table.Rows[0].TableSize);
 
             Assert.AreEqual(1, table.Rows.Length);

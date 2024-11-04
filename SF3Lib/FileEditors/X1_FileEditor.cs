@@ -66,6 +66,7 @@ namespace SF3.FileEditors {
 
             int battlePointersAddress;
             int battleAddress;
+            int headerAddress;
             int aiAddress;
 
             if (isScn1OrBTL99) {
@@ -93,6 +94,7 @@ namespace SF3.FileEditors {
 
             // If this is a battle, we need to get the addresses for a lot of battle-specific stuff.
             // TODO: we should have a table of tables here!!
+            int mapIndex;
             if (IsBattle) {
                 // Load the BattlePointersTable early so we can use it to determine the addresses of other tables.
                 battlePointersAddress = GetDouble(battlePointersPointerAddress) - sub;
@@ -100,17 +102,22 @@ namespace SF3.FileEditors {
                 BattlePointersTable.Load();
 
                 // Get the address of the selected battle, or, if it's not available, the first available in the BattlePointersTable.
-                battleAddress = BattlePointersTable.Rows[MapIndex].BattlePointer - sub;
-                if (battleAddress == 0)
-                    battleAddress = BattlePointersTable.Rows.First(x => x.BattlePointer != 0).BattlePointer - sub;
+                mapIndex = (BattlePointersTable.Rows[MapIndex].BattlePointer != 0)
+                    ? MapIndex
+                    : BattlePointersTable.Rows.Select((v, i) => new {v, i}).First(x => x.v.BattlePointer != 0).i;
+
+                battleAddress = BattlePointersTable.Rows[mapIndex].BattlePointer - sub;
 
                 // Determine addresses of other tables.
-                aiAddress = battleAddress + 0x0a + enemySpawnTableSize + somethingElseSize;
+                headerAddress = battleAddress;
+                aiAddress     = battleAddress + 0x0a + enemySpawnTableSize + somethingElseSize;
             }
             else {
                 // No battle, so none of these tables exist.
                 battlePointersAddress = -1;
+                mapIndex              = -1;
                 battleAddress         = -1;
+                headerAddress         = -1;
                 aiAddress             = -1;
             }
 
@@ -122,7 +129,7 @@ namespace SF3.FileEditors {
             // Add tables only present for battles.
             if (IsBattle) {
                 tables.AddRange(new List<ITable>() {
-                    (HeaderTable = new HeaderTable(this)),
+                    (HeaderTable = new HeaderTable(this, headerAddress, mapIndex * 0x04)),
                     (SlotTable = new SlotTable(this)),
                     (AITable = new AITable(this, aiAddress)),
                     (SpawnZoneTable = new SpawnZoneTable(this)),

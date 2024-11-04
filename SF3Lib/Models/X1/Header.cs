@@ -12,168 +12,26 @@ namespace SF3.Models.X1 {
         private readonly int unknown5;
         private readonly int unknown6;
         private readonly int unknown7;
-
         private readonly int unknown8;
         private readonly int unknown9;
 
-        public Header(IX1_FileEditor editor, int id, string name, int address)
+        public Header(IByteEditor editor, int id, string name, int address, int battlePointersTableOffset)
         : base(editor, id, name, address, 0x0A) {
-            Map = editor.MapOffset;
+            BattlePointersTableOffset = battlePointersTableOffset;
 
-            int offset = 0;
-            int sub;
-
-            if (editor.IsBTL99) {
-                offset = 0x00000018; //BTL99 initial pointer
-                sub = 0x06060000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //first pointer
-                offset = Editor.GetDouble(offset);
-                offset = offset - sub + editor.MapOffset; //second pointer
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //third pointer
-            }
-            else if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x00000018; //scn1 initial pointer
-                sub = 0x0605f000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //first pointer
-                offset = Editor.GetDouble(offset);
-                offset = offset - sub + editor.MapOffset; //second pointer
-                offset = Editor.GetDouble(offset);
-
-                if (offset != 0) {
-                    offset -= sub; //third pointer
-                }
-                else {
-                    editor.MapLeader = MapLeaderType.Synbios;
-                    offset = 0x00000018; //scn1 initial pointer
-                    sub = 0x0605f000;
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //first pointer
-                    offset = Editor.GetDouble(offset);
-                    offset = offset - sub + editor.MapOffset; //second pointer
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //third pointer
-                }
-
-                /*
-                offset = 0x00000018; //scn1 initial pointer
-                npcOffset = offset;
-                npcOffset = Editor.GetDouble(offset);
-                sub = 0x0605f000;
-                offset = npcOffset - sub; //second pointer
-                npcOffset = Editor.GetDouble(offset);
-                offset = npcOffset - sub; //third pointer
-                //offset value should now point to where npc placements are
-                */
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x00000024; //scn2 initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //first pointer
-                offset = Editor.GetDouble(offset);
-                offset = offset - sub + editor.MapOffset; //second pointer
-
-                offset = Editor.GetDouble(offset);
-                if (offset != 0) {
-                    offset -= sub; //third pointer
-                }
-                else {
-                    editor.MapLeader = MapLeaderType.Medion;
-                    offset = 0x00000024; //scn2 initial pointer
-                    sub = 0x0605e000;
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //first pointer
-                    offset = Editor.GetDouble(offset);
-                    offset = offset - sub + editor.MapOffset; //second pointer
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //third pointer
-                }
-
-                /*offset = 0x00000024; //scn2 initial pointer
-                npcOffset = offset;
-                npcOffset = Editor.GetDouble(offset);
-                sub = 0x0605e000;
-                offset = npcOffset - sub + 4; //second pointer
-                npcOffset = Editor.GetDouble(offset);
-                offset = npcOffset - sub; //third pointer
-                //offset value should now point to where npc placements are
-                */
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x00000024; //scn3 initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //first pointer
-                offset = Editor.GetDouble(offset);
-                offset = offset - sub + editor.MapOffset; //second pointer
-
-                offset = Editor.GetDouble(offset);
-
-                if (offset != 0) {
-                    offset -= sub; //third pointer
-                }
-                else {
-                    editor.MapLeader = MapLeaderType.Julian;
-                    offset = 0x00000024; //scn3 initial pointer
-                    sub = 0x0605e000;
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //first pointer
-                    offset = Editor.GetDouble(offset);
-                    offset = offset - sub + editor.MapOffset; //second pointer
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //third pointer
-                }
-            }
-            else if (editor.Scenario == ScenarioType.PremiumDisk) {
-                offset = 0x00000024; //pd initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub; //first pointer
-                offset = Editor.GetDouble(offset);
-                offset = offset - sub + editor.MapOffset; //second pointer
-                offset = Editor.GetDouble(offset);
-                if (offset != 0) {
-                    offset -= sub; //third pointer
-                }
-                else {
-                    editor.MapLeader = MapLeaderType.Synbios;
-                    offset = 0x00000024; //pd initial pointer
-                    sub = 0x0605e000;
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //first pointer
-                    offset = Editor.GetDouble(offset);
-                    offset = offset - sub + editor.MapOffset; //second pointer
-                    offset = Editor.GetDouble(offset);
-                    offset -= sub; //third pointer
-                }
-            }
-
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
-
-            //int start = 0x354c + (id * 24);
-
-            var start = offset + (id * 0x0A);
-            unknown1 = start; //1 bytes
-            tableSize = start + 1; //1 byte
-            unknown2 = start + 2; //1 byte
-            unknown3 = start + 3; //1 byte
-            unknown4 = start + 4; //1 byte
-            unknown5 = start + 5;
-            unknown6 = start + 6;
-            unknown7 = start + 7;
-
-            unknown8 = start + 8;
-            unknown9 = start + 9;
-
-            SizeAddress = offset + (id * 0x0A);
-            //address = 0x0354c + (id * 0x18);
+            unknown1  = Address;     // 1 byte
+            tableSize = Address + 1; // 1 byte
+            unknown2  = Address + 2; // 1 byte
+            unknown3  = Address + 3; // 1 byte
+            unknown4  = Address + 4; // 1 byte
+            unknown5  = Address + 5;
+            unknown6  = Address + 6;
+            unknown7  = Address + 7;
+            unknown8  = Address + 8;
+            unknown9  = Address + 9;
         }
+
+        public int BattlePointersTableOffset { get; }
 
         [BulkCopy]
         public int SizeUnknown1 {
@@ -234,9 +92,5 @@ namespace SF3.Models.X1 {
             get => Editor.GetByte(unknown9);
             set => Editor.SetByte(unknown9, (byte) value);
         }
-
-        public int Map { get; }
-
-        public int SizeAddress { get; }
     }
 }
