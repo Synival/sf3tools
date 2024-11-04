@@ -1,9 +1,9 @@
 using System;
 using SF3.FileEditors;
-using SF3.Models.X013;
+using SF3.Models;
 using static CommonLib.Utils.ResourceUtils;
 
-namespace SF3.Tables.X013 {
+namespace SF3.Tables {
     public class StatusEffectTable : Table<StatusEffect> {
         public StatusEffectTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
             ResourceFile = ResourceFile("StatusGroupList.xml");

@@ -1,8 +1,7 @@
 using CommonLib.Attributes;
 using SF3.FileEditors;
-using SF3.Types;
 
-namespace SF3.Models.X013 {
+namespace SF3.Models {
     public class SpecialChance : Model {
         private readonly int twoSpecials2;
         private readonly int threeSpecials3;

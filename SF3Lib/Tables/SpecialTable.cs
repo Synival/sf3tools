@@ -1,8 +1,8 @@
 using SF3.FileEditors;
-using SF3.Models.X013;
+using SF3.Models;
 using static SF3.Utils.ResourceUtils;
 
-namespace SF3.Tables.X013 {
+namespace SF3.Tables {
     public class SpecialTable : Table<Special> {
         public SpecialTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
             ResourceFile = ResourceFileForScenario(FileEditor.Scenario, "Specials.xml");

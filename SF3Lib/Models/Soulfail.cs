@@ -1,7 +1,7 @@
 using CommonLib.Attributes;
 using SF3.FileEditors;
 
-namespace SF3.Models.X013 {
+namespace SF3.Models {
     public class Soulfail : Model {
         private readonly int expLost;
 

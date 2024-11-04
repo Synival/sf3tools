@@ -1,8 +1,7 @@
 using CommonLib.Attributes;
 using SF3.FileEditors;
-using SF3.Types;
 
-namespace SF3.Models.X013 {
+namespace SF3.Models {
     public class WeaponSpellRank : Model {
         private readonly int rankNone;
         private readonly int rankC;
