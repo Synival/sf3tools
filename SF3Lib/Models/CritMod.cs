@@ -5,8 +5,6 @@ namespace SF3.Models {
     public class CritMod : Model {
         private readonly int advantage;
         private readonly int disadvantage;
-        private readonly int offset;
-        private readonly int checkVersion2;
 
         public CritMod(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x12) {

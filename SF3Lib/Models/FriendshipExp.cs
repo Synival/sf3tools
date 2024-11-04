@@ -8,8 +8,6 @@ namespace SF3.Models {
         private readonly int sLvl2;
         private readonly int sLvl3;
         private readonly int sLvl4;
-        private readonly int friendshipExpAddress;
-        private readonly int checkVersion2;
 
         public FriendshipExp(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x04) {

@@ -216,7 +216,7 @@ namespace SF3.IconPointerEditor.Forms
             // 
             // lvcSpellIconSpellName
             // 
-            this.lvcSpellIconSpellName.AspectName = "SpellName";
+            this.lvcSpellIconSpellName.AspectName = "SpellID";
             this.lvcSpellIconSpellName.IsEditable = false;
             this.lvcSpellIconSpellName.Text = "Spell Name";
             this.lvcSpellIconSpellName.Width = 120;
