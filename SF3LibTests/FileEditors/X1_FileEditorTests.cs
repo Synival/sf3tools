@@ -7,23 +7,30 @@ namespace SF3.Tests.FileEditors {
         private class X1_TestCase : TestCase {
             public X1_TestCase(
                 ScenarioType scenario,
-                string filename)
+                string filename,
+                MapLeaderType? mapLeader,
+                int? expectedBattleCount)
             : base(scenario, filename) {
+                MapLeader = mapLeader;
+                ExpectedBattleCount = expectedBattleCount;
             }
+
+            public MapLeaderType? MapLeader { get; }
+            public int? ExpectedBattleCount { get; }
         }
 
         private static readonly List<X1_TestCase> BattleTestCases = [
-            new(ScenarioType.Scenario1,   "X1BTL104.BIN"),
-            new(ScenarioType.Scenario2,   "X1BTL201.BIN"),
-            new(ScenarioType.Scenario3,   "X1BTL301.BIN"),
-            new(ScenarioType.PremiumDisk, "X1BTLP01.BIN"),
+            new(ScenarioType.Scenario1,   "X1BTL104.BIN", MapLeaderType.Synbios, 1),
+            new(ScenarioType.Scenario2,   "X1BTL201.BIN", MapLeaderType.Medion,  1),
+            new(ScenarioType.Scenario3,   "X1BTL301.BIN", MapLeaderType.Julian,  1),
+            new(ScenarioType.PremiumDisk, "X1BTLP01.BIN", MapLeaderType.Synbios, 1),
         ];
 
         private static readonly List<X1_TestCase> TownTestCases = [
-            new(ScenarioType.Scenario1,   "X1BAL_3.BIN"),
-            new(ScenarioType.Scenario2,   "X1DUSTY.BIN"),
-            new(ScenarioType.Scenario3,   "X1BEER.BIN"),
-            new(ScenarioType.PremiumDisk, "X1DREAM.BIN"),
+            new(ScenarioType.Scenario1,   "X1BAL_3.BIN", null, null),
+            new(ScenarioType.Scenario2,   "X1DUSTY.BIN", null, null),
+            new(ScenarioType.Scenario3,   "X1BEER.BIN",  null, null),
+            new(ScenarioType.PremiumDisk, "X1DREAM.BIN", null, null),
         ];
 
         [TestMethod]
@@ -38,11 +45,19 @@ namespace SF3.Tests.FileEditors {
                 Assert.IsNull(editor.EnterTable);
                 Assert.IsNull(editor.ArrowTable);
 
-                Assert.IsNotNull(editor.HeaderTable);
-                Assert.IsNotNull(editor.SlotTable);
-                Assert.IsNotNull(editor.SpawnZoneTable);
-                Assert.IsNotNull(editor.AITable);
-                Assert.IsNotNull(editor.CustomMovementTable);
+                Assert.AreEqual(testCase.ExpectedBattleCount, editor.BattleTables?.Count);
+
+                if (testCase.MapLeader != null) {
+                    Assert.IsNotNull(editor.BattleTables);
+                    Assert.IsTrue(editor.BattleTables.ContainsKey((MapLeaderType) testCase.MapLeader));
+                    var battle = editor.BattleTables[(MapLeaderType) testCase.MapLeader];
+
+                    Assert.IsNotNull(battle.HeaderTable);
+                    Assert.IsNotNull(battle.SlotTable);
+                    Assert.IsNotNull(battle.SpawnZoneTable);
+                    Assert.IsNotNull(battle.AITable);
+                    Assert.IsNotNull(battle.CustomMovementTable);
+                }
 
                 if (testCase.Scenario == ScenarioType.Scenario1) {
                     Assert.IsNull(editor.WarpTable);
@@ -66,11 +81,7 @@ namespace SF3.Tests.FileEditors {
                 Assert.IsNotNull(editor.NpcTable);
                 Assert.IsNotNull(editor.EnterTable);
 
-                Assert.IsNull(editor.HeaderTable);
-                Assert.IsNull(editor.SlotTable);
-                Assert.IsNull(editor.SpawnZoneTable);
-                Assert.IsNull(editor.AITable);
-                Assert.IsNull(editor.CustomMovementTable);
+                Assert.IsNull(editor.BattleTables);
 
                 Assert.IsNull(editor.TileMovementTable);
 

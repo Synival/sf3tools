@@ -18,7 +18,8 @@ namespace SF3.Tests.FileEditors {
         public void AITable_HasExpectedData() {
             var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
-            var table = editor.AITable;
+            var battle = editor.BattleTables[MapLeaderType.Synbios];
+            var table = battle.AITable;
 
             Assert.AreEqual(29, table.Rows[0].TargetX);
             Assert.AreEqual(43, table.Rows[0].TargetY);
@@ -47,7 +48,8 @@ namespace SF3.Tests.FileEditors {
         public void CustomMovementTable_HasExpectedData() {
             var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
-            var table = editor.CustomMovementTable;
+            var battle = editor.BattleTables[MapLeaderType.Synbios];
+            var table = battle.CustomMovementTable;
 
             Assert.AreEqual(27, table.Rows[0].CustomMovementX1);
             Assert.AreEqual(41, table.Rows[0].CustomMovementZ1);
@@ -62,7 +64,8 @@ namespace SF3.Tests.FileEditors {
         public void HeaderTable_HasExpectedData() {
             var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
-            var table = editor.HeaderTable;
+            var battle = editor.BattleTables[MapLeaderType.Synbios];
+            var table = battle.HeaderTable;
 
             Assert.AreEqual( 0, table.Rows[0].SizeUnknown1);
             Assert.AreEqual(26, table.Rows[0].TableSize);
@@ -74,7 +77,8 @@ namespace SF3.Tests.FileEditors {
         public void SlotTable_HasExpectedData() {
             var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
-            var table = editor.SlotTable;
+            var battle = editor.BattleTables[MapLeaderType.Synbios];
+            var table = battle.SlotTable;
 
             Assert.AreEqual(0xFFFF, table.Rows[0].EnemyID);
             Assert.AreEqual(33, table.Rows[0].EnemyX);
@@ -91,7 +95,8 @@ namespace SF3.Tests.FileEditors {
         public void SpawnZoneTable_HasExpectedData() {
             var editor = new X1_FileEditor(TestCase.Scenario, false);
             Assert.IsTrue(editor.LoadFile(TestCase.Filename));
-            var table = editor.SpawnZoneTable;
+            var battle = editor.BattleTables[MapLeaderType.Synbios];
+            var table = battle.SpawnZoneTable;
 
             Assert.AreEqual(0x400, table.Rows[0].UnknownAI00);
             Assert.AreEqual(0x1C, table.Rows[0].UnknownAI02);

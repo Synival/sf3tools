@@ -130,20 +130,8 @@ namespace SF3.FileEditors {
                 tables.Add(ArrowTable = new ArrowTable(this, ResourceFile("X1Arrow.xml"), arrowAddress));
 
             // Add tables for battle tables.
-            if (BattleTables != null) {
-                foreach (var bt in BattleTables)
-                    tables.AddRange(bt.Value.Tables);
-
-                // TODO: only temporary until the editor can actually use all editors
-                if (BattleTables.Any()) {
-                    var bt = BattleTables.First();
-                    HeaderTable         = bt.Value.HeaderTable;
-                    SlotTable           = bt.Value.SlotTable;
-                    SpawnZoneTable      = bt.Value.SpawnZoneTable;
-                    AITable             = bt.Value.AITable;
-                    CustomMovementTable = bt.Value.CustomMovementTable;
-                }
-            }
+            if (BattleTables != null)
+                tables.AddRange(BattleTables.SelectMany(x => x.Value.Tables));
 
             if (tileMovementAddress >= 0)
                 tables.Add(TileMovementTable = new TileMovementTable(this, ResourceFile("MovementTypes.xml"), tileMovementAddress));
@@ -165,13 +153,6 @@ namespace SF3.FileEditors {
                 BattleTables.Clear();
                 BattleTables = null;
             }
-
-            // TODO: temporary!
-            HeaderTable         = null;
-            SlotTable           = null;
-            SpawnZoneTable      = null;
-            AITable             = null;
-            CustomMovementTable = null;
 
             TileMovementTable   = null;
         }
@@ -206,14 +187,6 @@ namespace SF3.FileEditors {
         public EnterTable EnterTable { get; private set; }
         [BulkCopyRecurse]
         public ArrowTable ArrowTable { get; private set; }
-
-        // TODO: remove this until ^^^ !
-        public HeaderTable HeaderTable { get; private set; }
-        public SlotTable SlotTable { get; private set; }
-        public SpawnZoneTable SpawnZoneTable { get; private set; }
-        public AITable AITable { get; private set; }
-        public CustomMovementTable CustomMovementTable { get; private set; }
-        /// ^^^
 
         [BulkCopyRecurse]
         public Dictionary<MapLeaderType, BattleTable> BattleTables { get; private set; }

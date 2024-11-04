@@ -15,14 +15,6 @@ namespace SF3.FileEditors {
         EnterTable EnterTable { get; }
         ArrowTable ArrowTable { get; }
 
-        // TODO: temporary until ^^^!
-        HeaderTable HeaderTable { get; }
-        SlotTable SlotTable { get; }
-        SpawnZoneTable SpawnZoneTable { get; }
-        AITable AITable { get; }
-        CustomMovementTable CustomMovementTable { get; }
-        // ^^^^
-
         Dictionary<MapLeaderType, BattleTable> BattleTables { get; }
 
         TileMovementTable TileMovementTable { get; }
