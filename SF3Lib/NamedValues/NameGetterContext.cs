@@ -142,6 +142,7 @@ namespace SF3.NamedValues {
 
             switch (typePropertyValue) {
                 case 0x100:
+                case 0x101:
                     return _nameGetters[NamedValueType.Item].GetNameAndInfo(obj, property, value, parameters);
                 default:
                     return null;
@@ -155,6 +156,7 @@ namespace SF3.NamedValues {
 
             switch (typePropertyValue) {
                 case 0x100:
+                case 0x101:
                     return true;
                 default:
                     return false;
