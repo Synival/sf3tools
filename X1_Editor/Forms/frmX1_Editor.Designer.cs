@@ -1061,7 +1061,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcInteractablesItemTextCode
             // 
-            this.lvcInteractablesItemTextCode.AspectName = "TreasureItem";
+            this.lvcInteractablesItemTextCode.AspectName = "EventParameter";
             this.lvcInteractablesItemTextCode.AspectToStringFormat = "{0:X}";
             this.lvcInteractablesItemTextCode.Text = "Item/Text/Code";
             this.lvcInteractablesItemTextCode.Width = 120;

@@ -9,6 +9,7 @@
         Droprate,
         EffectiveType,
         Element,
+        EventParameter,
         FileIndex,
         FriendshipBonusType,
         Item,

@@ -124,7 +124,7 @@ namespace SF3.Tests.FileEditors {
 
             // No treasure to be found in PD, as far as I know.
             Assert.AreEqual(0xFFFF, table.Rows[0].Searched);
-            Assert.AreEqual(0, table.Rows[0].TreasureItem);
+            Assert.AreEqual(0, table.Rows[0].EventParameter);
             Assert.AreEqual(0, table.Rows[0].FlagUse);
             Assert.AreEqual(0, table.Rows[0].EventNumber);
 

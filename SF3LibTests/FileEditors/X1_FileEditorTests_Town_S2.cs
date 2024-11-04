@@ -56,12 +56,12 @@ namespace SF3.Tests.FileEditors {
             var table = editor.TreasureTable;
 
             Assert.AreEqual(0x00, table.Rows[0].Searched);
-            Assert.AreEqual(0x909, table.Rows[0].TreasureItem);
+            Assert.AreEqual(0x909, table.Rows[0].EventParameter);
             Assert.AreEqual(0x01, table.Rows[0].FlagUse);
             Assert.AreEqual(61, table.Rows[0].EventNumber);
 
             Assert.AreEqual(0x0, table.Rows[1].Searched);
-            Assert.AreEqual(0x90A, table.Rows[1].TreasureItem);
+            Assert.AreEqual(0x90A, table.Rows[1].EventParameter);
             Assert.AreEqual(1, table.Rows[1].FlagUse);
             Assert.AreEqual(62, table.Rows[1].EventNumber);
 

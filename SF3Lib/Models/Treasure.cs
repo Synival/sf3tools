@@ -57,8 +57,8 @@ namespace SF3.Models {
         }
 
         [BulkCopy]
-        [NameGetter(NamedValueType.Item)]
-        public int TreasureItem {
+        [NameGetter(NamedValueType.EventParameter, nameof(EventType))]
+        public int EventParameter {
             get => Editor.GetWord(itemID);
             set => Editor.SetWord(itemID, value);
         }

@@ -46,6 +46,14 @@ namespace SF3.NamedValues {
                 { NamedValueType.Droprate,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.DroprateInfo)) },
                 { NamedValueType.EffectiveType,       new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EffectiveTypeInfo)) },
                 { NamedValueType.Element,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.ElementInfo)) },
+
+                { NamedValueType.EventParameter,
+                    new SubMethods(
+                        (o, p, v, a) => GetEventParameterValue(o, p, v, a),
+                        (o, p, v, a) => CanGetEventParameterValue(o, p, v, a),
+                        (o, p, a)    => CanGetEventParameterValue(o, p, 0, a)
+                    ) },
+
                 { NamedValueType.FileIndex,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.FileIndexInfo.Info[Scenario])) },
                 { NamedValueType.FriendshipBonusType, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.FriendshipBonusTypeInfo)) },
                 { NamedValueType.Item,                new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.ItemInfo.Info[Scenario])) },
@@ -125,6 +133,32 @@ namespace SF3.NamedValues {
             var typeProperty = obj.GetType().GetProperty(typePropertyName);
             var typePropertyValue = (int) typeProperty.GetValue(obj);
             return typePropertyValue == 0x5B; // magic number indicated "Character Placeholder"
+        }
+
+        private NameAndInfo GetEventParameterValue(object obj, PropertyInfo property, int value, object[] parameters) {
+            var typePropertyName = (string) parameters[1];
+            var typeProperty = obj.GetType().GetProperty(typePropertyName);
+            var typePropertyValue = (int) typeProperty.GetValue(obj);
+
+            switch (typePropertyValue) {
+                case 0x100:
+                    return _nameGetters[NamedValueType.Item].GetNameAndInfo(obj, property, value, parameters);
+                default:
+                    return null;
+            }
+        }
+
+        private bool CanGetEventParameterValue(object obj, PropertyInfo property, int value, object[] parameters) {
+            var typePropertyName = (string) parameters[1];
+            var typeProperty = obj.GetType().GetProperty(typePropertyName);
+            var typePropertyValue = (int) typeProperty.GetValue(obj);
+
+            switch (typePropertyValue) {
+                case 0x100:
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }
