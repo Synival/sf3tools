@@ -94,17 +94,21 @@ namespace SF3.FileEditors {
             // If this is a battle, we need to get the addresses for a lot of battle-specific stuff.
             // TODO: we should have a table of tables here!!
             if (IsBattle) {
+                // Load the BattlePointersTable early so we can use it to determine the addresses of other tables.
                 battlePointersAddress = GetDouble(battlePointersPointerAddress) - sub;
                 BattlePointersTable = new BattlePointersTable(this, battlePointersAddress);
                 BattlePointersTable.Load();
 
+                // Get the address of the selected battle, or, if it's not available, the first available in the BattlePointersTable.
                 battleAddress = BattlePointersTable.Rows[MapIndex].BattlePointer - sub;
                 if (battleAddress == 0)
                     battleAddress = BattlePointersTable.Rows.First(x => x.BattlePointer != 0).BattlePointer - sub;
 
-                aiAddress = battleAddress + 10 + enemySpawnTableSize + somethingElseSize;
+                // Determine addresses of other tables.
+                aiAddress = battleAddress + 0x0a + enemySpawnTableSize + somethingElseSize;
             }
             else {
+                // No battle, so none of these tables exist.
                 battlePointersAddress = -1;
                 battleAddress         = -1;
                 aiAddress             = -1;
