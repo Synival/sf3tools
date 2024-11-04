@@ -53,27 +53,62 @@ namespace SF3.FileEditors {
         public override IEnumerable<ITable> MakeTables() {
             var isScn1OrBTL99 = Scenario == ScenarioType.Scenario1 || IsBTL99;
 
-            int arrowAddress;
-            int enterAddress;
-            int npcAddress;
+            int sub;
+            int enemySpawnTableSize;
+            const int somethingElseSize = 0x126; // size of something else
+
             int treasureAddress;
             int warpAddress;
+            int battlePointerAddress;
+            int npcAddress;
+            int enterAddress;
+            int arrowAddress;
 
             if (isScn1OrBTL99) {
-                int sub = IsBTL99 ? 0x06060000 : 0x0605f000;
-                arrowAddress    = -1; // Not present in Scenario1
-                warpAddress     = -1; // X002 editor has Scenario1 WarpTable, and provides the address itself.
-                treasureAddress = GetDouble(0x000c) - sub;
-                npcAddress      = GetDouble(0x0018) - sub;
-                enterAddress    = GetDouble(0x0024) - sub;
+                sub = IsBTL99 ? 0x06060000 : 0x0605f000;
+                enemySpawnTableSize  = 0xe9a;
+
+                treasureAddress      = GetDouble(0x000c) - sub;
+                warpAddress          = -1; // X002 editor has Scenario1 WarpTable, and provides the address itself.
+                battlePointerAddress = GetDouble(0x0018) - sub;
+                npcAddress           = GetDouble(0x0018) - sub;
+                enterAddress         = GetDouble(0x0024) - sub;
+                arrowAddress         = -1; // Not present in Scenario1
             }
             else {
-                treasureAddress = GetDouble(0x000c) - 0x0605e000;
-                warpAddress     = GetDouble(0x0018) - 0x0605e000;
-                npcAddress      = GetDouble(0x0024) - 0x0605e000;
-                enterAddress    = GetDouble(0x0030) - 0x0605e000;
-                arrowAddress    = GetDouble(0x0060) - 0x0605e000;
+                sub = 0x0605e000;
+                enemySpawnTableSize = 0xa8a;
+
+                treasureAddress      = GetDouble(0x000c) - sub;
+                warpAddress          = GetDouble(0x0018) - sub;
+                battlePointerAddress = GetDouble(0x0024) - sub;
+                npcAddress           = GetDouble(0x0024) - sub;
+                enterAddress         = GetDouble(0x0030) - sub;
+                arrowAddress         = GetDouble(0x0060) - sub;
             }
+
+            // Get the pointer to the battle.
+            int battleAddress = -1;
+            if (IsBattle) {
+                int getBattlePointer() {
+                    int battlePointerForMapLeaderAddress = GetDouble(battlePointerAddress) - sub + MapOffset;
+                    return GetDouble(battlePointerForMapLeaderAddress);
+                }
+
+                battleAddress = getBattlePointer();
+                if (battleAddress == 0) {
+                    MapLeader =
+                        (Scenario == ScenarioType.Scenario1) ? MapLeaderType.Synbios :
+                        (Scenario == ScenarioType.Scenario2) ? MapLeaderType.Medion :
+                        (Scenario == ScenarioType.Scenario3) ? MapLeaderType.Julian :
+                        (Scenario == ScenarioType.PremiumDisk) ? MapLeaderType.Synbios : throw new ArgumentException();
+                    battleAddress = getBattlePointer();
+                }
+
+                battleAddress -= sub;
+            }
+
+            var aiAddress = battleAddress + 10 + enemySpawnTableSize + somethingElseSize;
 
             // Add tables present for both towns and battles.
             var tables = new List<ITable> {
@@ -85,7 +120,7 @@ namespace SF3.FileEditors {
                 tables.AddRange(new List<ITable>() {
                     (HeaderTable = new HeaderTable(this)),
                     (SlotTable = new SlotTable(this)),
-                    (AITable = new AITable(this)),
+                    (AITable = new AITable(this, aiAddress)),
                     (SpawnZoneTable = new SpawnZoneTable(this)),
                     (BattlePointersTable = new BattlePointersTable(this)),
                     (CustomMovementTable = new CustomMovementTable(this)),
