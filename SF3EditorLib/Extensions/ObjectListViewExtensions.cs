@@ -81,10 +81,10 @@ namespace SF3.Editor.Extensions {
                     olv.RefreshItem(e.ListViewItem);
                 };
             }
-            // Ensure that strings displayed in hex format are edited in hex format.
-            else if (e.Column.AspectToStringFormat == "{0:X}") {
-                var control = (NumericUpDown)e.Control;
-                control.Hexadecimal = true;
+            else if (e.Control is NumericUpDown control) {
+                // Ensure that strings displayed in hex format are edited in hex format.
+                if (e.Column.AspectToStringFormat == "{0:X}")
+                    control.Hexadecimal = true;
             }
         }
 

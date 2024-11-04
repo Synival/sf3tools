@@ -161,8 +161,10 @@ namespace SF3.FileEditors {
             EnterTable          = null;
             ArrowTable          = null;
 
-            BattleTables.Clear();
-            BattleTables        = null;
+            if (BattleTables != null) {
+                BattleTables.Clear();
+                BattleTables = null;
+            }
 
             // TODO: temporary!
             HeaderTable         = null;
