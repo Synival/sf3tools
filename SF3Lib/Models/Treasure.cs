@@ -2,7 +2,7 @@ using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;
 
-namespace SF3.Models.X1 {
+namespace SF3.Models {
     public class Treasure : Model {
         private readonly int searched;
         private readonly int eventNumber;
