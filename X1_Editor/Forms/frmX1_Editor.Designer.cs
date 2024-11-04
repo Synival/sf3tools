@@ -1080,16 +1080,16 @@ namespace SF3.X1_Editor.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tabInteractables);
-            this.tabMain.Controls.Add(this.tabWarpTable);
             this.tabMain.Controls.Add(this.tabBattlePointers);
             this.tabMain.Controls.Add(this.tabTownNpcs);
             this.tabMain.Controls.Add(this.tabNonBattleEnter);
+            this.tabMain.Controls.Add(this.tabWarpTable);
             this.tabMain.Controls.Add(this.tabArrows);
+            this.tabMain.Controls.Add(this.tabTileData);
             this.tabMain.Controls.Add(this.tabBattle_Synbios);
             this.tabMain.Controls.Add(this.tabBattle_Medion);
             this.tabMain.Controls.Add(this.tabBattle_Julian);
             this.tabMain.Controls.Add(this.tabBattle_Extra);
-            this.tabMain.Controls.Add(this.tabTileData);
             this.tabMain.Location = new System.Drawing.Point(0, 24);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;

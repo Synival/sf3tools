@@ -34,6 +34,8 @@ namespace SF3.X1_Editor.Forms {
         public frmX1_Editor() {
             InitializeComponent();
 
+            // Gather all tables in our battleEditors.
+            // TODO: InitializeEditor() should do just do this recursively
             var battleEditors = new List<BattleEditorControl>() {
                 becBattle_Synbios,
                 becBattle_Medion,
@@ -41,6 +43,14 @@ namespace SF3.X1_Editor.Forms {
                 becBattle_Extra
             };
             var battleEditorOLVs = battleEditors.SelectMany(x => x.GetAllObjectsOfTypeInFields<ObjectListView>(false)).ToList();
+
+            // Synchronize the tabs in the battle editors
+            void tabSyncFunc(object sender, TabControlEventArgs e) {
+                foreach (var bec in battleEditors)
+                    bec.Tabs.SelectedIndex = e.TabPageIndex;
+            };
+            foreach (var bec in battleEditors)
+                bec.Tabs.Selected += tabSyncFunc;
 
             InitializeEditor(menuStrip2, battleEditorOLVs);
         }
@@ -82,16 +92,16 @@ namespace SF3.X1_Editor.Forms {
 
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
                 new PopulateOLVTabConfig(tabInteractables, olvInteractables, FileEditor.TreasureTable),
-                new PopulateOLVTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpTable),
                 new PopulateOLVTabConfig(tabBattlePointers, olvBattlePointers, FileEditor.BattlePointersTable),
                 new PopulateOLVTabConfig(tabTownNpcs, olvTownNpcs, FileEditor.NpcTable),
                 new PopulateOLVTabConfig(tabNonBattleEnter, olvNonBattleEnter, FileEditor.EnterTable),
+                new PopulateOLVTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpTable),
                 new PopulateOLVTabConfig(tabArrows, olvArrows, FileEditor.ArrowTable),
+                new PopulateOLVTabConfig(tabTileData, olvTileData, FileEditor.TileMovementTable),
                 new PopulateBattleTabConfig(tabBattle_Synbios, FileEditor.BattleTables, MapLeaderType.Synbios),
                 new PopulateBattleTabConfig(tabBattle_Medion , FileEditor.BattleTables, MapLeaderType.Medion),
                 new PopulateBattleTabConfig(tabBattle_Julian , FileEditor.BattleTables, MapLeaderType.Julian),
                 new PopulateBattleTabConfig(tabBattle_Extra,   FileEditor.BattleTables, MapLeaderType.Extra),
-                new PopulateOLVTabConfig(tabTileData, olvTileData, FileEditor.TileMovementTable),
             });
         }
 
