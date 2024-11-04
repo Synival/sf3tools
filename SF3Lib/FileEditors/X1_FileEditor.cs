@@ -51,55 +51,28 @@ namespace SF3.FileEditors {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            var isntScn1OrBTL99 = Scenario != ScenarioType.Scenario1 && !IsBTL99;
-
-            int sub;
+            var isScn1OrBTL99 = Scenario == ScenarioType.Scenario1 || IsBTL99;
 
             int arrowAddress;
+            int enterAddress;
             int npcAddress;
             int treasureAddress;
             int warpAddress;
 
-            // X1BTL99.BIN is a special case. It has the same layout for each scenario.
-            if (IsBTL99) {
-                arrowAddress    = -1; // Not present
-                treasureAddress = GetDouble(0x000c) - 0x06060000;
-                npcAddress      = -1; // Not present
-                warpAddress     = -1; // Not present
+            if (isScn1OrBTL99) {
+                int sub = IsBTL99 ? 0x06060000 : 0x0605f000;
+                arrowAddress    = -1; // Not present in Scenario1
+                warpAddress     = -1; // X002 editor has Scenario1 WarpTable, and provides the address itself.
+                treasureAddress = GetDouble(0x000c) - sub;
+                npcAddress      = GetDouble(0x0018) - sub;
+                enterAddress    = GetDouble(0x0024) - sub;
             }
             else {
-                switch (Scenario) {
-                    case ScenarioType.Scenario1:
-                        arrowAddress    = -1; // Not present in Scenario1
-                        warpAddress     = -1; // X002 editor has Scenario1 WarpTable, and provides the address itself.
-                        treasureAddress = GetDouble(0x000c) - 0x0605f000;
-                        npcAddress      = GetDouble(0x0018) - 0x0605f000;
-                        break;
-
-                    case ScenarioType.Scenario2:
-                        treasureAddress = GetDouble(0x000c) - 0x0605e000;
-                        warpAddress     = GetDouble(0x0018) - 0x0605e000;
-                        npcAddress      = GetDouble(0x0024) - 0x0605e000;
-                        arrowAddress    = GetDouble(0x0060) - 0x0605e000;
-                        break;
-
-                    case ScenarioType.Scenario3:
-                        treasureAddress = GetDouble(0x000c) - 0x0605e000;
-                        warpAddress     = GetDouble(0x0018) - 0x0605e000;
-                        npcAddress      = GetDouble(0x0024) - 0x0605e000;
-                        arrowAddress    = GetDouble(0x0060) - 0x0605e000;
-                        break;
-
-                    case ScenarioType.PremiumDisk:
-                        treasureAddress = GetDouble(0x000c) - 0x0605e000;
-                        warpAddress     = GetDouble(0x0018) - 0x0605e000;
-                        npcAddress      = GetDouble(0x0024) - 0x0605e000;
-                        arrowAddress    = GetDouble(0x0060) - 0x0605e000;
-                        break;
-
-                    default:
-                        throw new ArgumentException(nameof(Scenario));
-                }
+                treasureAddress = GetDouble(0x000c) - 0x0605e000;
+                warpAddress     = GetDouble(0x0018) - 0x0605e000;
+                npcAddress      = GetDouble(0x0024) - 0x0605e000;
+                enterAddress    = GetDouble(0x0030) - 0x0605e000;
+                arrowAddress    = GetDouble(0x0060) - 0x0605e000;
             }
 
             // Add tables present for both towns and battles.
@@ -118,22 +91,21 @@ namespace SF3.FileEditors {
                     (CustomMovementTable = new CustomMovementTable(this)),
                 });
 
-                if (isntScn1OrBTL99)
+                if (!isScn1OrBTL99)
                     tables.Add(TileMovementTable = new TileMovementTable(this));
             }
-
-            // Add tables only present for towns.
-            if (!IsBattle) {
+            // Add tables only present outside of battle.
+            else {
                 tables.AddRange(new List<ITable>() {
                     (NpcTable = new NpcTable(this, npcAddress)),
-                    (EnterTable = new EnterTable(this))
+                    (EnterTable = new EnterTable(this, enterAddress))
                 });
 
-                if (isntScn1OrBTL99)
+                if (!isScn1OrBTL99)
                     tables.Add(ArrowTable = new ArrowTable(this, arrowAddress));
             }
 
-            if (isntScn1OrBTL99)
+            if (!isScn1OrBTL99)
                 tables.Add(WarpTable = new WarpTable(this, warpAddress));
 
             return tables;
