@@ -16,74 +16,22 @@ namespace SF3.Models.X1 {
         private readonly int unknown12;
         private readonly int unknown16;
 
-        public Npc(IX1_FileEditor editor, int id, string name, int address)
+        public Npc(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x18) {
-            int offset = 0;
-            int sub;
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                offset = 0x00000018; //scn1 initial pointer
-                sub = 0x0605f000;
-                offset = Editor.GetDouble(offset);
-
-                offset -= sub;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                offset = 0x00000024; //scn2 initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub;
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                offset = 0x00000024; //scn3 initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub;
-            }
-            else if (editor.Scenario == ScenarioType.PremiumDisk) {
-                offset = 0x00000024; //pd initial pointer
-                sub = 0x0605e000;
-                offset = Editor.GetDouble(offset);
-                offset -= sub;
-            }/*
-            else if (editor.Scenario == ScenarioType.BTL99)
-            {
-                offset = 0x00000024; //btl99 initial pointer
-                sub = 0x06060000;
-                offset = Editor.GetDouble(offset);
-                offset = offset - sub;
-            }*/
-
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
-
-            //int start = 0x354c + (id * 24);
-
-            var start = offset + (id * 0x18);
-            spriteID = start; //2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
-            unknown1 = start + 0x02; //unknown+0x02
-            table = start + 0x04;
-            xPos = start + 0x08;
-            unknownA = start + 0x0a;
-            unknownC = start + 0x0c;
-            unknownE = start + 0x0e;
-            zPos = start + 0x10;
-            unknown12 = start + 0x12;
-            direction = start + 0x14;
-            unknown16 = start + 0x16;
-
-            //unknown42 = start + 52;
-            Address = offset + (id * 0x18);
-            //address = 0x0354c + (id * 0x18);
+            spriteID  = Address;        // 2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
+            unknown1  = Address + 0x02; // unknown + 0x02
+            table     = Address + 0x04;
+            xPos      = Address + 0x08;
+            unknownA  = Address + 0x0a;
+            unknownC  = Address + 0x0c;
+            unknownE  = Address + 0x0e;
+            zPos      = Address + 0x10;
+            unknown12 = Address + 0x12;
+            direction = Address + 0x14;
+            unknown16 = Address + 0x16;
         }
 
-        public string NpcTieIn             /*get
-            {
-                return index + 0x3D;
-            }*/
-
+        public string NpcTieIn
             => Editor.GetWord(spriteID) > 0x0f && Editor.GetWord(spriteID) != 0xffff ? (ID + 0x3D).ToString("X") : "";
 
         [BulkCopy]

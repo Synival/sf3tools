@@ -56,39 +56,45 @@ namespace SF3.FileEditors {
             int sub;
 
             int arrowAddress;
+            int npcAddress;
             int treasureAddress;
             int warpAddress;
 
             // X1BTL99.BIN is a special case. It has the same layout for each scenario.
             if (IsBTL99) {
-                arrowAddress    = 0; // Not present
+                arrowAddress    = -1; // Not present
                 treasureAddress = GetDouble(0x000c) - 0x06060000;
-                warpAddress     = 0; // Not present
+                npcAddress      = -1; // Not present
+                warpAddress     = -1; // Not present
             }
             else {
                 switch (Scenario) {
                     case ScenarioType.Scenario1:
-                        arrowAddress    = 0; // Not present in Scenario1
-                        warpAddress     = 0; // X002 editor has Scenario1 WarpTable, and provides the address itself.
+                        arrowAddress    = -1; // Not present in Scenario1
+                        warpAddress     = -1; // X002 editor has Scenario1 WarpTable, and provides the address itself.
                         treasureAddress = GetDouble(0x000c) - 0x0605f000;
+                        npcAddress      = GetDouble(0x0018) - 0x0605f000;
                         break;
 
                     case ScenarioType.Scenario2:
-                        arrowAddress    = GetDouble(0x0060) - 0x0605e000;
-                        warpAddress     = GetDouble(0x0018) - 0x0605e000;
                         treasureAddress = GetDouble(0x000c) - 0x0605e000;
+                        warpAddress     = GetDouble(0x0018) - 0x0605e000;
+                        npcAddress      = GetDouble(0x0024) - 0x0605e000;
+                        arrowAddress    = GetDouble(0x0060) - 0x0605e000;
                         break;
 
                     case ScenarioType.Scenario3:
-                        arrowAddress    = GetDouble(0x0060) - 0x0605e000;
-                        warpAddress     = GetDouble(0x0018) - 0x0605e000;
                         treasureAddress = GetDouble(0x000c) - 0x0605e000;
+                        warpAddress     = GetDouble(0x0018) - 0x0605e000;
+                        npcAddress      = GetDouble(0x0024) - 0x0605e000;
+                        arrowAddress    = GetDouble(0x0060) - 0x0605e000;
                         break;
 
                     case ScenarioType.PremiumDisk:
-                        arrowAddress    = GetDouble(0x0060) - 0x0605e000;
-                        warpAddress     = GetDouble(0x0018) - 0x0605e000;
                         treasureAddress = GetDouble(0x000c) - 0x0605e000;
+                        warpAddress     = GetDouble(0x0018) - 0x0605e000;
+                        npcAddress      = GetDouble(0x0024) - 0x0605e000;
+                        arrowAddress    = GetDouble(0x0060) - 0x0605e000;
                         break;
 
                     default:
@@ -119,7 +125,7 @@ namespace SF3.FileEditors {
             // Add tables only present for towns.
             if (!IsBattle) {
                 tables.AddRange(new List<ITable>() {
-                    (NpcTable = new NpcTable(this)),
+                    (NpcTable = new NpcTable(this, npcAddress)),
                     (EnterTable = new EnterTable(this))
                 });
 
