@@ -11,12 +11,6 @@ namespace SF3.Models.X013 {
 
         public CritMod(IX013_FileEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x12) {
-            Editor  = editor;
-            Name    = name;
-            ID      = id;
-            Address = address;
-            Size    = 0x12;
-
             checkVersion2 = Editor.GetByte(0x0000000A);
 
             if (editor.Scenario == ScenarioType.Scenario1) {
@@ -34,18 +28,10 @@ namespace SF3.Models.X013 {
                 offset = 0x00002d78; //pd
             }
 
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
-
-            //int start = 0x354c + (id * 24);
-
             var start = offset + (id * 0x0b);
             advantage = start + 0x01; //1 bytes
             disadvantage = start + 0x11; //1 byte
             CritModAddress = offset + (id * 0x12);
-            //address = 0x0354c + (id * 0x18);
         }
 
         [BulkCopy]

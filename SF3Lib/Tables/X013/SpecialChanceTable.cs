@@ -36,7 +36,7 @@ namespace SF3.Tables.X013 {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var newRow = new SpecialChance(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1), 0, Scenario >= ScenarioType.Scenario3);
+                        var newRow = new SpecialChance(_fileEditor, Convert.ToInt32(xml.GetAttribute(0), 16), xml.GetAttribute(1), 0, Scenario < ScenarioType.Scenario3);
                         _rows = _rows.ExpandedWith(newRow);
                         if (newRow.ID < 0 || newRow.ID >= MaxSize)
                             throw new IndexOutOfRangeException();

@@ -15,19 +15,8 @@ namespace SF3.Models.X013 {
         private readonly int luck8;
         private readonly int luck9;
 
-        //private int npcOffset;
         private readonly int offset;
         private readonly int checkVersion2;
-
-        /*public int NPCTableAddress1
-        {
-            get => FileEditor.GetDouble(npcOffset);
-            set => FileEditor.SetDouble(npcOffset, value);
-        }
-
-        public int NPCTableAddress2 => FileEditor.GetDouble(NPCTableAddress1 - 0x0605F000);
-
-        public int NPCTableAddress3 => FileEditor.GetDouble(NPCTableAddress2 - 0x0605F000);*/
 
         public StatusEffect(IX013_FileEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x18) {
@@ -48,8 +37,6 @@ namespace SF3.Models.X013 {
                 offset = 0x000070d8; //pd
             }
 
-            //int start = 0x354c + (id * 24);
-
             var start = offset + (id * 0x18);
 
             luck0 = start;
@@ -63,9 +50,7 @@ namespace SF3.Models.X013 {
             luck8 = start + 0x10;
             luck9 = start + 0x12;
 
-            //unknown42 = start + 52;
             Address = offset + (id * 0x18);
-            //address = 0x0354c + (id * 0x18);
         }
 
         [BulkCopy]

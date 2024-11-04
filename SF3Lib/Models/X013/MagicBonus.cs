@@ -36,13 +36,6 @@ namespace SF3.Models.X013 {
                 offset = 0x00006914; //pd
             }
 
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
-
-            //int start = 0x354c + (id * 24);
-
             if (editor.Scenario == ScenarioType.Scenario1) {
                 var start = offset + (id * 0x20);
                 earthBonus = start + 0x00; //4 bytes
@@ -69,8 +62,6 @@ namespace SF3.Models.X013 {
 
                 Address = offset + (id * 0x8);
             }
-
-            //address = 0x0354c + (id * 0x18);
         }
 
         public bool Has32BitValues { get; }

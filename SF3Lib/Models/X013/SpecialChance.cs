@@ -32,58 +32,24 @@ namespace SF3.Models.X013 {
                 offset = 0x000027c2; //pd
             }
 
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
-            //int start = 0x354c + (id * 24);
-
-            if (editor.Scenario == ScenarioType.Scenario1) {
-                var start = offset + (id * 0x4a);
-                twoSpecials2 = start + 0x01; //1 bytes
-                threeSpecials3 = start + 0x15; //1 byte
-                threeSpecials2 = start + 0x1d; //1 byte
-                fourSpecials4 = start + 0x31; //1 byte
-                fourSpecials3 = start + 0x3d; //1 byte
-                fourSpecials2 = start + 0x49; //1 byte
-
+            if (hasLargeTable) {
                 Address = offset + (id * 0x4a);
-            }
-            else if (editor.Scenario == ScenarioType.Scenario2) {
-                var start = offset + (id * 0x4a);
-                twoSpecials2 = start + 0x01; //1 bytes
-                threeSpecials3 = start + 0x15; //1 byte
-                threeSpecials2 = start + 0x1d; //1 byte
-                fourSpecials4 = start + 0x31; //1 byte
-                fourSpecials3 = start + 0x3d; //1 byte
-                fourSpecials2 = start + 0x49; //1 byte
-
-                Address = offset + (id * 0x4a);
-            }
-            else if (editor.Scenario == ScenarioType.Scenario3) {
-                var start = offset + (id * 0x3a);
-                twoSpecials2 = start + 0x01; //1 bytes
-                threeSpecials3 = start + 0x0f; //1 byte
-                threeSpecials2 = start + 0x19; //1 byte
-                fourSpecials4 = start + 0x21; //1 byte
-                fourSpecials3 = start + 0x2d; //1 byte
-                fourSpecials2 = start + 0x39; //1 byte
-
-                Address = offset + (id * 0x3a);
+                twoSpecials2   = Address + 0x01; // 1 byte
+                threeSpecials3 = Address + 0x15; // 1 byte
+                threeSpecials2 = Address + 0x1d; // 1 byte
+                fourSpecials4  = Address + 0x31; // 1 byte
+                fourSpecials3  = Address + 0x3d; // 1 byte
+                fourSpecials2  = Address + 0x49; // 1 byte
             }
             else {
-                var start = offset + (id * 0x3a);
-                twoSpecials2 = start + 0x01; //1 bytes
-                threeSpecials3 = start + 0x0f; //1 byte
-                threeSpecials2 = start + 0x19; //1 byte
-                fourSpecials4 = start + 0x21; //1 byte
-                fourSpecials3 = start + 0x2d; //1 byte
-                fourSpecials2 = start + 0x39; //1 byte
-
                 Address = offset + (id * 0x3a);
+                twoSpecials2   = Address + 0x01; // 1 byte
+                threeSpecials3 = Address + 0x0f; // 1 byte
+                threeSpecials2 = Address + 0x19; // 1 byte
+                fourSpecials4  = Address + 0x21; // 1 byte
+                fourSpecials3  = Address + 0x2d; // 1 byte
+                fourSpecials2  = Address + 0x39; // 1 byte
             }
-
-            //address = 0x0354c + (id * 0x18);
         }
 
         [BulkCopy]

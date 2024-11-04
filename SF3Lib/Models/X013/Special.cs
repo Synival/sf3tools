@@ -34,19 +34,12 @@ namespace SF3.Models.X013 {
                 offset = 0x00006bf4; //pd
             }
 
-            //offset = 0x00002b28; scn1
-            //offset = 0x00002e9c; scn2
-            //offset = 0x0000354c; scn3
-            //offset = 0x000035fc; pd
-            //int start = 0x354c + (id * 24);
-
             var start = offset + (id * 4);
             unknown1 = start; //2 bytes
             damageCalculation = start + 1; //1 byte
             extraPow = start + 2; //1 byte
             pow = start + 3; //1 byte
             Address = offset + (id * 0x4);
-            //address = 0x0354c + (id * 0x18);
         }
 
         [BulkCopy]
