@@ -18,17 +18,6 @@ namespace SF3.X002_Editor.Forms {
             InitializeEditor(menuStrip2);
         }
 
-        // TODO: is this even relevant anymore?
-        private void tabMain_Click(object sender, EventArgs e) {
-            olvSpells.ClearObjects();
-            if (FileEditor?.SpellTable != null)
-                olvSpells.AddObjects(FileEditor.SpellTable.Rows);
-
-            olvStatBoost.ClearObjects();
-            if (FileEditor?.StatBoostTable != null)
-                olvStatBoost.AddObjects(FileEditor.StatBoostTable.Rows);
-        }
-
         protected override string FileDialogFilter => "SF3 Data (X002.BIN)|X002.BIN|" + base.FileDialogFilter;
 
         protected override IFileEditor MakeFileEditor() => new X002_FileEditor(Scenario);

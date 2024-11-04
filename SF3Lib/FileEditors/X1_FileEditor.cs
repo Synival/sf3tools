@@ -14,6 +14,7 @@ namespace SF3.FileEditors {
         }
 
         public override IEnumerable<ITable> MakeTables() {
+            // TODO: this does soooo much work! Let's try to break it up into subroutines.
             var isScn1OrBTL99 = Scenario == ScenarioType.Scenario1 || IsBTL99;
 
             int sub;
@@ -66,7 +67,6 @@ namespace SF3.FileEditors {
             }
 
             // If this is a battle, we need to get the addresses for a lot of battle-specific stuff.
-            // TODO: we should have a table of tables here!!
             if (IsBattle == true) {
                 // Load the BattlePointersTable early so we can use it to determine the addresses of other tables.
                 BattlePointersTable = new BattlePointersTable(this, ResourceFile("BattlePointersList.xml"), battlePointersAddress);

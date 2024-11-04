@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Xml;
 using SF3.Types;
@@ -17,15 +18,9 @@ namespace SF3.Utils {
         /// </summary>
         /// <param name="resourceName"></param>
         /// <returns></returns>
-        public static Dictionary<ScenarioType, Dictionary<int, string>> GetValueNameDictionaryForAllScenariosFromXML(string resourceName) {
-            // TODO: maybe use reflection over ScenarioType?
-            return new Dictionary<ScenarioType, Dictionary<int, string>>() {
-                { ScenarioType.Scenario1, GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.Scenario1, resourceName)) },
-                { ScenarioType.Scenario2, GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.Scenario2, resourceName)) },
-                { ScenarioType.Scenario3, GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.Scenario3, resourceName)) },
-                { ScenarioType.PremiumDisk, GetValueNameDictionaryFromXML(ResourceFileForScenario(ScenarioType.PremiumDisk, resourceName)) }
-            };
-        }
+        public static Dictionary<ScenarioType, Dictionary<int, string>> GetValueNameDictionaryForAllScenariosFromXML(string resourceName)
+            => ((ScenarioType[]) Enum.GetValues(typeof(ScenarioType)))
+                .ToDictionary(x => x, x => GetValueNameDictionaryFromXML(ResourceFileForScenario(x, resourceName)));
 
         /// <summary>
         /// Returns the relative path of a resource file that is different depending on the scenario.

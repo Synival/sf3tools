@@ -796,7 +796,6 @@ namespace SF3.X002_Editor.Forms
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(764, 506);
             this.tabMain.TabIndex = 0;
-            this.tabMain.Click += new System.EventHandler(this.tabMain_Click);
             // 
             // tabWeaponSpells
             // 
