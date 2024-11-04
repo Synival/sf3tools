@@ -14,10 +14,8 @@ namespace SF3.Models {
         private readonly int unknown8;
         private readonly int unknown9;
 
-        public Header(IByteEditor editor, int id, string name, int address, int battlePointersTableOffset)
+        public Header(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x0A) {
-            BattlePointersTableOffset = battlePointersTableOffset;
-
             unknown1  = Address;     // 1 byte
             tableSize = Address + 1; // 1 byte
             unknown2  = Address + 2; // 1 byte
@@ -29,8 +27,6 @@ namespace SF3.Models {
             unknown8  = Address + 8;
             unknown9  = Address + 9;
         }
-
-        public int BattlePointersTableOffset { get; }
 
         [BulkCopy]
         public int SizeUnknown1 {

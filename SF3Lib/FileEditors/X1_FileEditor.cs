@@ -144,7 +144,7 @@ namespace SF3.FileEditors {
             // Add tables only present for battles.
             if (IsBattle) {
                 tables.AddRange(new List<ITable>() {
-                    (HeaderTable         = new HeaderTable(this, ResourceFile("X1Top.xml"), headerAddress, mapIndex * 0x04)),
+                    (HeaderTable         = new HeaderTable(this, ResourceFile("X1Top.xml"), headerAddress)),
                     (SlotTable           = new SlotTable(this, ResourceFile(Scenario == ScenarioType.Scenario1 ? "X1List.xml" : "X1OtherList.xml"), slotAddress)),
                     (AITable             = new AITable(this, ResourceFile("X1AI.xml"), aiAddress)),
                     (SpawnZoneTable      = new SpawnZoneTable(this, ResourceFile("UnknownAIList.xml"), spawnZoneAddress)),

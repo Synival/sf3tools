@@ -47,7 +47,6 @@ namespace SF3.X1_Editor.Forms
             this.olvHeader = new BrightIdeasSoftware.ObjectListView();
             this.lvcHeaderSizeList = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcHeaderAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcHeaderMap = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcHeaderHeaderPlus0x00 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcHeaderSizeLimit = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcHeaderHeaderPlus0x02 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -391,7 +390,6 @@ namespace SF3.X1_Editor.Forms
             // 
             this.olvHeader.AllColumns.Add(this.lvcHeaderSizeList);
             this.olvHeader.AllColumns.Add(this.lvcHeaderAddress);
-            this.olvHeader.AllColumns.Add(this.lvcHeaderMap);
             this.olvHeader.AllColumns.Add(this.lvcHeaderHeaderPlus0x00);
             this.olvHeader.AllColumns.Add(this.lvcHeaderSizeLimit);
             this.olvHeader.AllColumns.Add(this.lvcHeaderHeaderPlus0x02);
@@ -410,7 +408,6 @@ namespace SF3.X1_Editor.Forms
             this.olvHeader.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvcHeaderSizeList,
             this.lvcHeaderAddress,
-            this.lvcHeaderMap,
             this.lvcHeaderHeaderPlus0x00,
             this.lvcHeaderSizeLimit,
             this.lvcHeaderHeaderPlus0x02,
@@ -448,13 +445,6 @@ namespace SF3.X1_Editor.Forms
             this.lvcHeaderAddress.AspectToStringFormat = "{0:X}";
             this.lvcHeaderAddress.IsEditable = false;
             this.lvcHeaderAddress.Text = "Address";
-            // 
-            // lvcHeaderMap
-            // 
-            this.lvcHeaderMap.AspectName = "BattlePointersTableOffset";
-            this.lvcHeaderMap.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderMap.IsEditable = false;
-            this.lvcHeaderMap.Text = "Map";
             // 
             // lvcHeaderHeaderPlus0x00
             // 
@@ -2622,7 +2612,6 @@ namespace SF3.X1_Editor.Forms
         private System.Windows.Forms.ToolStripMenuItem tsmiMap_MapMedion;
         private System.Windows.Forms.ToolStripMenuItem tsmiMap_MapJulian;
         private System.Windows.Forms.ToolStripMenuItem tsmiMap_MapExtra;
-        private BrightIdeasSoftware.OLVColumn lvcHeaderMap;
         private System.Windows.Forms.TabPage tabAITargetPosition;
         private BrightIdeasSoftware.ObjectListView olvAITargetPosition;
         private BrightIdeasSoftware.OLVColumn lvcAITargetPositionName;
