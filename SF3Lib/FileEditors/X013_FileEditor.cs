@@ -34,20 +34,20 @@ namespace SF3.FileEditors {
                 throw new ArgumentException(nameof(Scenario));
 
             return new List<ITable>() {
-                (SpecialsTable = new SpecialTable(this)),
-                (SupportTypeTable = new SupportTypeTable(this)),
-                (FriendshipExpTable = new FriendshipExpTable(this)),
-                (SupportStatsTable = new SupportStatsTable(this)),
-                (SoulmateTable = new SoulmateTable(this)),
-                (SoulfailTable = new SoulfailTable(this)),
-                (MagicBonusTable = new MagicBonusTable(this)),
+                (SpecialsTable = new SpecialTable(this, 0)),
+                (SupportTypeTable = new SupportTypeTable(this, 0)),
+                (FriendshipExpTable = new FriendshipExpTable(this, 0)),
+                (SupportStatsTable = new SupportStatsTable(this, 0)),
+                (SoulmateTable = new SoulmateTable(this, 0)),
+                (SoulfailTable = new SoulfailTable(this, 0)),
+                (MagicBonusTable = new MagicBonusTable(this, 0)),
                 (CritModTable = new CritModTable(this, critModAddress)),
-                (CritrateTable = new CritrateTable(this)),
-                (SpecialChanceTable = new SpecialChanceTable(this)),
-                (ExpLimitTable = new ExpLimitTable(this)),
-                (HealExpTable = new HealExpTable(this)),
-                (WeaponSpellRankTable = new WeaponSpellRankTable(this)),
-                (StatusEffectTable = new StatusEffectTable(this)),
+                (CritrateTable = new CritrateTable(this, 0)),
+                (SpecialChanceTable = new SpecialChanceTable(this, 0)),
+                (ExpLimitTable = new ExpLimitTable(this, 0)),
+                (HealExpTable = new HealExpTable(this, 0)),
+                (WeaponSpellRankTable = new WeaponSpellRankTable(this, 0)),
+                (StatusEffectTable = new StatusEffectTable(this, 0)),
             };
         }
 
