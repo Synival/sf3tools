@@ -1,7 +1,7 @@
 using CommonLib.Attributes;
 using SF3.FileEditors;
 
-namespace SF3.Models.X1 {
+namespace SF3.Models {
     public class AI : Model {
         private readonly int targetX;
         private readonly int targetY;
