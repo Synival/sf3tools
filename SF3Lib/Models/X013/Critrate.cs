@@ -39,7 +39,7 @@ namespace SF3.Models.X013 {
             threeSpecial = start + 3; //1 byte
             fourSpecial = start + 4;
             fiveSpecial = start + 5;
-            CritrateAddress = offset + (id * 0x8);
+            Address = offset + (id * 0x8);
         }
 
         [BulkCopy]
@@ -77,7 +77,5 @@ namespace SF3.Models.X013 {
             get => Editor.GetByte(fiveSpecial);
             set => Editor.SetByte(fiveSpecial, (byte) value);
         }
-
-        public int CritrateAddress { get; }
     }
 }

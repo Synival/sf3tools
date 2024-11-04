@@ -31,7 +31,7 @@ namespace SF3.Models.X013 {
             var start = offset + (id * 7);
             expCheck = start; //1 byte
             expReplacement = start + 6; //1 byte
-            ExpLimitAddress = offset + (id * 0x7);
+            Address = offset + (id * 0x7);
         }
 
         [BulkCopy]
@@ -45,7 +45,5 @@ namespace SF3.Models.X013 {
             get => Editor.GetByte(expReplacement);
             set => Editor.SetByte(expReplacement, (byte) value);
         }
-
-        public int ExpLimitAddress { get; }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using SF3.NamedValues;
@@ -11,6 +12,27 @@ namespace SF3.FileEditors {
         }
 
         public override IEnumerable<ITable> MakeTables() {
+            int checkVersion2 = GetByte(0x0000000A);
+
+            int critModAddress;
+
+            if (Scenario == ScenarioType.Scenario1) {
+                critModAddress = 0x00002e74; //scn1
+                if (checkVersion2 == 0x0A) //original jp
+                    critModAddress -= 0x70;
+            }
+            else if (Scenario == ScenarioType.Scenario2) {
+                critModAddress = 0x00003050; //scn2
+            }
+            else if (Scenario == ScenarioType.Scenario3) {
+                critModAddress = 0x00002d58; //scn3
+            }
+            else if (Scenario == ScenarioType.PremiumDisk) {
+                critModAddress = 0x00002d78; //pd
+            }
+            else
+                throw new ArgumentException(nameof(Scenario));
+
             return new List<ITable>() {
                 (SpecialsTable = new SpecialTable(this)),
                 (SupportTypeTable = new SupportTypeTable(this)),
@@ -19,7 +41,7 @@ namespace SF3.FileEditors {
                 (SoulmateTable = new SoulmateTable(this)),
                 (SoulfailTable = new SoulfailTable(this)),
                 (MagicBonusTable = new MagicBonusTable(this)),
-                (CritModTable = new CritModTable(this)),
+                (CritModTable = new CritModTable(this, critModAddress)),
                 (CritrateTable = new CritrateTable(this)),
                 (SpecialChanceTable = new SpecialChanceTable(this)),
                 (ExpLimitTable = new ExpLimitTable(this)),
