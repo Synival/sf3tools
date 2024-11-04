@@ -23,7 +23,7 @@ namespace SF3.FileEditors {
         CustomMovementTable CustomMovementTable { get; }
         // ^^^^
 
-        List<BattleTable> BattleTables { get; }
+        Dictionary<MapLeaderType, BattleTable> BattleTables { get; }
 
         TileMovementTable TileMovementTable { get; }
     }

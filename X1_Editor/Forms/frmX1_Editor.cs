@@ -53,7 +53,7 @@ namespace SF3.X1_Editor.Forms {
         private class PopulateBattleTabConfig : IPopulateTabConfig {
             public PopulateBattleTabConfig(TabPage tabPage, Dictionary<MapLeaderType, BattleTable> battleTable, MapLeaderType mapLeader) {
                 TabPage = tabPage;
-                BattleTable = battleTable.ContainsKey(mapLeader) ? battleTable[mapLeader] : null;
+                BattleTable = battleTable != null && battleTable.ContainsKey(mapLeader) ? battleTable[mapLeader] : null;
             }
 
             public TabPage TabPage { get; }
@@ -80,10 +80,6 @@ namespace SF3.X1_Editor.Forms {
             if (!base.OnLoad())
                 return false;
 
-            var battleTables = (FileEditor.BattleTables != null)
-                ? FileEditor.BattleTables.ToDictionary(x => x.MapLeader, x => x)
-                : new Dictionary<MapLeaderType, BattleTable>();
-
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
                 new PopulateOLVTabConfig(tabInteractables, olvInteractables, FileEditor.TreasureTable),
                 new PopulateOLVTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpTable),
@@ -91,10 +87,10 @@ namespace SF3.X1_Editor.Forms {
                 new PopulateOLVTabConfig(tabTownNpcs, olvTownNpcs, FileEditor.NpcTable),
                 new PopulateOLVTabConfig(tabNonBattleEnter, olvNonBattleEnter, FileEditor.EnterTable),
                 new PopulateOLVTabConfig(tabArrows, olvArrows, FileEditor.ArrowTable),
-                new PopulateBattleTabConfig(tabBattle_Synbios, battleTables, MapLeaderType.Synbios),
-                new PopulateBattleTabConfig(tabBattle_Medion , battleTables, MapLeaderType.Medion),
-                new PopulateBattleTabConfig(tabBattle_Julian , battleTables, MapLeaderType.Julian),
-                new PopulateBattleTabConfig(tabBattle_Extra,   battleTables, MapLeaderType.Extra),
+                new PopulateBattleTabConfig(tabBattle_Synbios, FileEditor.BattleTables, MapLeaderType.Synbios),
+                new PopulateBattleTabConfig(tabBattle_Medion , FileEditor.BattleTables, MapLeaderType.Medion),
+                new PopulateBattleTabConfig(tabBattle_Julian , FileEditor.BattleTables, MapLeaderType.Julian),
+                new PopulateBattleTabConfig(tabBattle_Extra,   FileEditor.BattleTables, MapLeaderType.Extra),
                 new PopulateOLVTabConfig(tabTileData, olvTileData, FileEditor.TileMovementTable),
             });
         }

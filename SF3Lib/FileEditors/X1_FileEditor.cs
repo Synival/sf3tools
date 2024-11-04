@@ -73,12 +73,12 @@ namespace SF3.FileEditors {
                 BattlePointersTable.Load();
 
                 // Get the address of the selected battle, or, if it's not available, the first available in the BattlePointersTable.
-                this.BattleTables = new List<BattleTable>();
+                this.BattleTables = new Dictionary<MapLeaderType, BattleTable>();
                 foreach (var mapLeader in (MapLeaderType[]) Enum.GetValues(typeof(MapLeaderType))) {
                     int mapIndex = (int) mapLeader;
                     var battleTableAddress = BattlePointersTable.Rows[mapIndex].BattlePointer;
                     if (battleTableAddress != 0)
-                        BattleTables.Add(new BattleTable(this, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
+                        BattleTables.Add(mapLeader, new BattleTable(this, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
                 }
 
                 // Determine the location of the TileMovementTable, which isn't so straight-forward.
@@ -132,16 +132,16 @@ namespace SF3.FileEditors {
             // Add tables for battle tables.
             if (BattleTables != null) {
                 foreach (var bt in BattleTables)
-                    tables.AddRange(bt.Tables);
+                    tables.AddRange(bt.Value.Tables);
 
                 // TODO: only temporary until the editor can actually use all editors
                 if (BattleTables.Any()) {
                     var bt = BattleTables.First();
-                    HeaderTable         = bt.HeaderTable;
-                    SlotTable           = bt.SlotTable;
-                    SpawnZoneTable      = bt.SpawnZoneTable;
-                    AITable             = bt.AITable;
-                    CustomMovementTable = bt.CustomMovementTable;
+                    HeaderTable         = bt.Value.HeaderTable;
+                    SlotTable           = bt.Value.SlotTable;
+                    SpawnZoneTable      = bt.Value.SpawnZoneTable;
+                    AITable             = bt.Value.AITable;
+                    CustomMovementTable = bt.Value.CustomMovementTable;
                 }
             }
 
@@ -216,7 +216,7 @@ namespace SF3.FileEditors {
         /// ^^^
 
         [BulkCopyRecurse]
-        public List<BattleTable> BattleTables { get; private set; }
+        public Dictionary<MapLeaderType, BattleTable> BattleTables { get; private set; }
 
         [BulkCopyRecurse]
         public TileMovementTable TileMovementTable { get; private set; }
