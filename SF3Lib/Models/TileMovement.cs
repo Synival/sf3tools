@@ -1,7 +1,7 @@
 using CommonLib.Attributes;
 using SF3.FileEditors;
 
-namespace SF3.Models.X1 {
+namespace SF3.Models {
     public class TileMovement : Model {
         private readonly int noEntry;
         private readonly int unknown01;

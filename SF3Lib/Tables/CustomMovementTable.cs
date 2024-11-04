@@ -1,8 +1,8 @@
 using SF3.FileEditors;
-using SF3.Models.X1;
+using SF3.Models;
 using static CommonLib.Utils.ResourceUtils;
 
-namespace SF3.Tables.X1 {
+namespace SF3.Tables {
     public class CustomMovementTable : Table<CustomMovement> {
         public CustomMovementTable(ISF3FileEditor fileEditor, int address) : base(fileEditor) {
             ResourceFile = ResourceFile("X1AI.xml");

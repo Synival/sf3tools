@@ -1,5 +1,4 @@
 using SF3.Tables;
-using SF3.Tables.X1;
 using SF3.Types;
 
 namespace SF3.FileEditors {
