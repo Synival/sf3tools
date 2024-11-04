@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -7,6 +8,36 @@ using CommonLib.NamedValues;
 
 namespace CommonLib.Extensions {
     public static partial class ObjectExtensions {
+        private static string BulkReportPropertyTypeString(PropertyInfo property)
+            => BulkReportTypeString(property.PropertyType);
+
+        private static string BulkReportTypeString(Type type)
+        // This is useful for debugging, but a bit overwhelming for most folk!
+        #if true
+            => "";
+        #else
+            => " (" + type.Name + ")";
+        #endif
+
+        private static string GetBulkCopyRowName(this object obj, PropertyInfo property) {
+            var rowNameProperties = obj
+                .GetType()
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(x => x.IsDefined(typeof(BulkCopyRowNameAttribute)))
+                .Select(x => x.GetValue(obj).ToString())
+                .ToList();
+            var bulkCopyRowName = rowNameProperties.Any() ? string.Join(" / ", rowNameProperties) : null;
+
+            if (property == null && bulkCopyRowName == null)
+                return obj.GetType().Name;
+            else if (property != null && bulkCopyRowName != null)
+                return property.Name + " / " + bulkCopyRowName + " " + BulkReportPropertyTypeString(property);
+            else if (property != null)
+                return property.Name + BulkReportPropertyTypeString(property);
+            else
+                return bulkCopyRowName + BulkReportTypeString(obj.GetType());
+        }
+
         /// <summary>
         /// Any kind of result from any kind of BulkCopy() operation.
         /// </summary>
@@ -68,12 +99,13 @@ namespace CommonLib.Extensions {
                 NewValue = newValue;
                 Changed = !NewValue.Equals(OldValue);
                 ChangeCount = Changed ? 1 : 0;
+                Name = NewValue.GetBulkCopyRowName(Property);
             }
 
             public override string MakeFullReport(INameGetterContext nameContext) => MakeSummaryReport(nameContext);
 
             public override string MakeSummaryReport(INameGetterContext nameContext) {
-                return !Changed ? "" : Property.Name + ": " +
+                return !Changed ? "" : Name + ": " +
                     (ObjTo.GetPropertyValueName(Property, nameContext, OldValue) ?? OldValue.ToStringHex()) + " => " +
                     (ObjTo.GetPropertyValueName(Property, nameContext, NewValue) ?? NewValue.ToStringHex()) + "\n";
             }
@@ -103,6 +135,11 @@ namespace CommonLib.Extensions {
             /// </summary>
             public object NewValue { get; }
 
+            /// <summary>
+            /// Name of the value changed.
+            /// </summary>
+            public string Name { get; }
+
             public override bool Changed { get; }
             public override int ChangeCount { get; }
         }
@@ -111,27 +148,33 @@ namespace CommonLib.Extensions {
         /// Collection of BulkCopyPropertyResult's reported by BulkCopyProperties() functions.
         /// </summary>
         public class BulkCopyPropertiesResult : BulkCopyResult {
-            public BulkCopyPropertiesResult(object obj, IEnumerable<IBulkCopyResult> childResults)
+            public BulkCopyPropertiesResult(object obj, IEnumerable<IBulkCopyResult> childResults, PropertyInfo property = null)
             : base(childResults) {
                 Object = obj;
                 ChangeCount = childResults?.Count(x => x.Changed) ?? 0;
                 Changed = ChangeCount > 0;
+                Name = obj.GetBulkCopyRowName(property);
             }
 
             public override string MakeFullReport(INameGetterContext nameContext) {
                 var report = string.Join("", ChildResults.Select(x => x.MakeFullReport(nameContext)));
-                return (report == "") ? "" : Object.GetType().Name + "\n" + report.Indent("  ");
+                return (report == "") ? "" : Name + ":\n" + report.Indent("  ");
             }
 
             public override string MakeSummaryReport(INameGetterContext nameContext) {
                 var report = string.Join("", ChildResults.Select(x => x.MakeSummaryReport(nameContext)));
-                return (report == "") ? "" : Object.GetType().Name + "\n" + report.Indent("  ");
+                return (report == "") ? "" : Name + ":\n" + report.Indent("  ");
             }
 
             /// <summary>
             /// The object whose properties were bulk-copied.
             /// </summary>
             public object Object { get; }
+
+            /// <summary>
+            /// The name of the object bulk-copied.
+            /// </summary>
+            public string Name { get; }
 
             public override bool Changed { get; }
             public override int ChangeCount { get; }
@@ -146,34 +189,26 @@ namespace CommonLib.Extensions {
             /// </summary>
             /// <param name="index">Index of the row in 'listFrom'.</param>
             /// <param name="copyResult">Result of the row copied. Can be 'null' to indicate the row wasn't copied.</param>
-            public BulkCopyCollectionRowResult(int index, object rowFrom, object rowTo, BulkCopyPropertiesResult copyResult) {
-                Index = index;
+            public BulkCopyCollectionRowResult(string key, object rowFrom, object rowTo, BulkCopyPropertiesResult copyResult) {
+                Key = key;
                 RowFrom = rowFrom;
                 RowTo = rowTo;
                 Copied = rowTo != null && copyResult != null;
                 CopyResult = copyResult;
                 Changed = Copied && (copyResult?.Changed ?? false);
                 ChangeCount = Changed ? copyResult.ChangeCount : 0;
-
-                // Determine row name.
-                var rowNameProperties = rowTo
-                    .GetType()
-                    .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                    .Where(x => x.IsDefined(typeof(BulkCopyRowNameAttribute)))
-                    .Select(x => x.GetValue(rowTo).ToString())
-                    .ToList();
-
-                Name = rowNameProperties.Any() ? string.Join(" / ", rowNameProperties) : "Row " + index;
             }
 
-            public string MakeFullReport(INameGetterContext nameContext) => CopyResult?.MakeFullReport(nameContext) ?? "";
+            public string MakeFullReport(INameGetterContext nameContext)
+                => CopyResult?.MakeFullReport(nameContext) ?? "";
 
-            public string MakeSummaryReport(INameGetterContext nameContext) => CopyResult?.MakeSummaryReport(nameContext) ?? "";
+            public string MakeSummaryReport(INameGetterContext nameContext)
+                => CopyResult?.MakeSummaryReport(nameContext) ?? "";
 
             /// <summary>
-            /// The index of the row in the 'listFrom' collection.
+            /// The key/index of the row in the 'listFrom' collection.
             /// </summary>
-            public int Index { get; }
+            public string Key { get; }
 
             /// <summary>
             /// The input row.
@@ -195,11 +230,6 @@ namespace CommonLib.Extensions {
             /// </summary>
             public BulkCopyPropertiesResult CopyResult { get; }
 
-            /// <summary>
-            /// Name of the row when using reports.
-            /// </summary>
-            public string Name { get; }
-
             public IEnumerable<IBulkCopyResult> ChildResults => CopyResult?.ChildResults;
 
             public bool Changed { get; }
@@ -211,7 +241,7 @@ namespace CommonLib.Extensions {
         /// Result for BulkCopyProperties() functions.
         /// </summary>
         public class BulkCopyCollectionResult : BulkCopyResult {
-            public BulkCopyCollectionResult(IEnumerable<object> collection, IEnumerable<IBulkCopyResult> inputResults, int listOutRowsIgnored)
+            public BulkCopyCollectionResult(IEnumerable collection, IEnumerable<IBulkCopyResult> inputResults, int listOutRowsIgnored, PropertyInfo property = null)
             : base(inputResults) {
                 Collection = collection;
                 InputRows = inputResults
@@ -223,6 +253,7 @@ namespace CommonLib.Extensions {
                 RowsCopied = InputRows.Count(x => x.Copied);
                 ChangeCount = inputResults?.Count(x => x.Changed) ?? 0;
                 Changed = ChangeCount > 0;
+                Name = collection.GetBulkCopyRowName(property);
             }
 
             public override string MakeFullReport(INameGetterContext nameContext) {
@@ -235,10 +266,13 @@ namespace CommonLib.Extensions {
                     "Changes:\n" +
                     ((individualChangesReport == "") ? "  (none)\n" : individualChangesReport.Indent("  "));
 
-                return report;
+                return report == "" ? "" : Name + ":\n" + report.Indent("   ");
             }
 
-            public override string MakeSummaryReport(INameGetterContext nameContext) => MakeSummaryReport(nameContext, false);
+            public override string MakeSummaryReport(INameGetterContext nameContext) {
+                var report = MakeSummaryReport(nameContext, false);
+                return report == "" ? "" : Name + ":\n" + report.Indent("   ");
+            }
 
             public string MakeSummaryReport(INameGetterContext nameContext, bool inFullReport) {
                 var report =
@@ -271,7 +305,13 @@ namespace CommonLib.Extensions {
                     var rowReport = fullReport ? row.MakeFullReport(nameContext) : row.MakeSummaryReport(nameContext);
                     if (rowReport == "")
                         continue;
-                    report += row.Name + "\n" + rowReport.Indent("  ");
+
+                // Other the other code to show array/dictionary keys.
+                #if true
+                    report += rowReport.Indent("  ").TrimStart();
+                #else
+                    report += "[" + row.Key + "]" + rowReport.Indent("  ").TrimStart();
+                #endif
                 }
 
                 return report;
@@ -280,7 +320,7 @@ namespace CommonLib.Extensions {
             /// <summary>
             /// The collection iterated over.
             /// </summary>
-            public IEnumerable<object> Collection { get; }
+            public IEnumerable Collection { get; }
 
             /// <summary>
             /// All rows attempted to be copied.
@@ -302,6 +342,11 @@ namespace CommonLib.Extensions {
             /// </summary>
             public int RowsCopied { get; }
 
+            /// <summary>
+            /// The name of the collection copied.
+            /// </summary>
+            public string Name { get; }
+
             public override bool Changed { get; }
             public override int ChangeCount { get; }
         }
@@ -313,7 +358,7 @@ namespace CommonLib.Extensions {
         /// <param name="objTo">The object whose properties should be copied to.</param>
         /// <param name="inherit">When true (default), all inherited properties are copied.</param>
         /// <returns>A list of all properties considered and the result.</returns>
-        public static BulkCopyPropertiesResult BulkCopyProperties(this object objFrom, object objTo, bool inherit = true) {
+        public static BulkCopyPropertiesResult BulkCopyProperties(this object objFrom, object objTo, bool inherit = true, PropertyInfo property = null) {
             // Get all public properties we're considering to check.
             var allProperties = objFrom.GetType().GetProperties(
                     BindingFlags.Public |
@@ -324,20 +369,20 @@ namespace CommonLib.Extensions {
             // Get all public properties with the [BulkCopy] attribute.
             var copyList = allProperties.Where(x => x.IsDefined(typeof(BulkCopyAttribute))).ToList();
             var resultList = new List<IBulkCopyResult>();
-            foreach (var property in copyList) {
-                var oldValue = property.GetValue(objTo);
-                property.SetValue(objTo, property.GetValue(objFrom));
-                var newValue = property.GetValue(objTo);
+            foreach (var copyProperty in copyList) {
+                var oldValue = copyProperty.GetValue(objTo);
+                copyProperty.SetValue(objTo, copyProperty.GetValue(objFrom));
+                var newValue = copyProperty.GetValue(objTo);
 
-                resultList.Add(new BulkCopyPropertyResult(objFrom, objTo, property, oldValue, newValue));
+                resultList.Add(new BulkCopyPropertyResult(objFrom, objTo, copyProperty, oldValue, newValue));
             }
 
             // Get all public properties with the [BulkCopy] attribute.
             var copyContentsList = allProperties.Where(x => x.IsDefined(typeof(BulkCopyRecurseAttribute))).ToList();
             var subResultList = new List<BulkCopyPropertyResult>();
-            foreach (var property in copyContentsList) {
-                var valueFrom = property.GetValue(objFrom);
-                var valueTo = property.GetValue(objTo);
+            foreach (var copyProperty in copyContentsList) {
+                var valueFrom = copyProperty.GetValue(objFrom);
+                var valueTo = copyProperty.GetValue(objTo);
 
                 // Don't recurse through objects that are unassigned, on either end.
                 // We have no idea how to instantiate them anyway.
@@ -345,13 +390,16 @@ namespace CommonLib.Extensions {
                 if (valueFrom == null || valueTo == null)
                     continue;
 
-                if (typeof(IEnumerable<object>).IsAssignableFrom(valueFrom.GetType()))
-                    resultList.Add(BulkCopyCollectionProperties(valueFrom as IEnumerable<object>, valueTo as IEnumerable<object>, inherit));
+                var type = valueFrom.GetType();
+                if (typeof(IDictionary).IsAssignableFrom(type))
+                    resultList.Add(BulkCopyCollectionProperties(valueFrom as IDictionary, valueTo as IDictionary, inherit, copyProperty));
+                if (typeof(IEnumerable<object>).IsAssignableFrom(type))
+                    resultList.Add(BulkCopyCollectionProperties(valueFrom as IEnumerable<object>, valueTo as IEnumerable<object>, inherit, copyProperty));
                 else
-                    resultList.Add(BulkCopyProperties(valueFrom, valueTo, inherit));
+                    resultList.Add(BulkCopyProperties(valueFrom, valueTo, inherit, copyProperty));
             }
 
-            return new BulkCopyPropertiesResult(objFrom, resultList);
+            return new BulkCopyPropertiesResult(objFrom, resultList, property);
         }
 
         /// <summary>
@@ -361,20 +409,38 @@ namespace CommonLib.Extensions {
         /// <param name="listTo">The object whose properties should be copied to.</param>
         /// <param name="inherit">When true (default), all inherited properties are copied.</param>
         /// <returns>A report with the number of rows affected, unaffected, and each row's individual properties changed.</returns>
-        public static BulkCopyCollectionResult BulkCopyCollectionProperties(this IEnumerable<object> listFrom, IEnumerable<object> listTo, bool inherit = true) {
+        public static BulkCopyCollectionResult BulkCopyCollectionProperties(this IEnumerable<object> listFrom, IEnumerable<object> listTo, bool inherit = true, PropertyInfo property = null) {
             var arrayFrom = listFrom.ToArray();
             var arrayTo = listTo.ToArray();
 
             var inputRowReports = new List<BulkCopyCollectionRowResult>();
             for (var i = 0; i < arrayFrom.Length; i++) {
+                var rowFrom = arrayFrom[i];
                 var rowTo = (i < arrayTo.Length) ? arrayTo[i] : null;
-                if (rowTo != null) {
-                    inputRowReports.Add(new BulkCopyCollectionRowResult(i, arrayFrom[i], rowTo,
-                        (rowTo != null) ? BulkCopyProperties(arrayFrom[i], rowTo, inherit) : null));
-                }
+                if (rowTo != null)
+                    inputRowReports.Add(new BulkCopyCollectionRowResult(i.ToString(), rowFrom, rowTo, BulkCopyProperties(rowFrom, rowTo, inherit)));
             }
 
-            return new BulkCopyCollectionResult(listFrom, inputRowReports, Math.Max(arrayTo.Length - arrayFrom.Length, 0));
+            return new BulkCopyCollectionResult(listFrom, inputRowReports, Math.Max(arrayTo.Length - arrayFrom.Length, 0), property);
+        }
+
+        /// <summary>
+        /// Copies all properties in an IDictionary tagged with [BulkCopy] in 'objFrom' to 'objTo'.
+        /// </summary>
+        /// <param name="dictFrom">The object whose properties should be copied from.</param>
+        /// <param name="dictTo">The object whose properties should be copied to.</param>
+        /// <param name="inherit">When true (default), all inherited properties are copied.</param>
+        /// <returns>A report with the number of rows affected, unaffected, and each row's individual properties changed.</returns>
+        public static BulkCopyCollectionResult BulkCopyCollectionProperties(this IDictionary dictFrom, IDictionary dictTo, bool inherit = true, PropertyInfo property = null) {
+            var inputRowReports = new List<BulkCopyCollectionRowResult>();
+            foreach (var kvObj in dictFrom) {
+                var kv = (DictionaryEntry) kvObj;
+                var dictValueFrom = kv.Value;
+                var dictValueTo = dictTo.Contains(kv.Key) ? dictTo[kv.Key] : null;
+                if (dictValueTo != null)
+                    inputRowReports.Add(new BulkCopyCollectionRowResult(kv.Key.ToString(), dictValueFrom, dictValueFrom, BulkCopyProperties(dictValueFrom, dictValueTo, inherit)));
+            }
+            return new BulkCopyCollectionResult(dictFrom, inputRowReports, Math.Max(dictTo.Count - dictFrom.Count, 0), property);
         }
     }
 }
