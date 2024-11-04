@@ -114,6 +114,20 @@ namespace SF3.Editor.Extensions {
             return oldDelegate(obj, model, value);
         }
 
+        private class Int32UpDown : NumericUpDown
+        {
+            public Int32UpDown() {
+                this.DecimalPlaces = 0;
+                this.Minimum = int.MinValue;
+                this.Maximum = int.MaxValue;
+            }
+
+            new public int Value {
+                get { return decimal.ToInt32(base.Value); }
+                set { base.Value = new decimal(value); }
+            }
+        }
+
         /// <summary>
         /// Performs ObjectListView.EditorRegistry.Register() for all SF3 NamedValues.
         /// </summary>
@@ -122,6 +136,8 @@ namespace SF3.Editor.Extensions {
             var creatorMapField = ObjectListView.EditorRegistry.GetType().GetField(
                 "creatorMap", BindingFlags.NonPublic | BindingFlags.Instance);
             var creatorMap = (Dictionary<Type, EditorCreatorDelegate>) creatorMapField.GetValue(ObjectListView.EditorRegistry);
+
+            ObjectListView.EditorRegistry.Register(typeof(int), typeof(Int32UpDown));
 
             var typesToHijack = new Type[] {
                 typeof(short),

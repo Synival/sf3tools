@@ -274,15 +274,8 @@ namespace BrightIdeasSoftware
     {
         public IntUpDown() {
             this.DecimalPlaces = 0;
-
-            // SF3 TODO: reverert back to this code after a proper fix is found!!
-#if false
             this.Minimum = -9999999;
             this.Maximum = 9999999;
-#else
-            this.Minimum = Int32.MinValue;
-            this.Maximum = Int32.MaxValue;
-#endif
         }
 
         new public int Value {
