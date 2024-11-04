@@ -14,7 +14,7 @@ namespace SF3.X013_Editor.Forms {
 
         public frmX013_Editor() {
             InitializeComponent();
-            InitializeEditor(null);
+            InitializeEditor();
         }
 
         protected override string FileDialogFilter => "SF3 Data (X013.BIN)|X013.BIN|" + base.FileDialogFilter;

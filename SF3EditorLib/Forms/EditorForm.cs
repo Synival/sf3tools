@@ -36,7 +36,7 @@ namespace SF3.Editor.Forms {
         /// <summary>
         /// Function to be called after derived class's InitializeComponent() is called.
         /// </summary>
-        public void InitializeEditor(ToolStrip toolStrip) {
+        public void InitializeEditor(ToolStrip toolStrip = null) {
             if (toolStrip != null) {
                 var menuItems = new Dictionary<string, ToolStripMenuItem>();
                 foreach (var ti in menuStrip1.Items) {
