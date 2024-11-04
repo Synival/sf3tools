@@ -8,7 +8,7 @@ using static SF3.Editor.Extensions.TabControlExtensions;
 namespace SF3.X013_Editor.Forms {
     public partial class frmX013_Editor : EditorForm {
         // Used to display version in the application
-        protected override string Version => "0.19";
+        protected override string Version => "0.20";
 
         public new IX013_FileEditor FileEditor => base.FileEditor as IX013_FileEditor;
 

@@ -1,3 +1,95 @@
+## 2024-11-08
+
+This version marks a major milestone in development. All the table code has been
+rewritten so it's much more flexible and easier to work with. This opens the door
+to a lot of really cool stuff, like auto-detection of files, a much improved
+X1 editor, and some other really big things down the road. Stay tuned!! :)
+
+Each editor now shares the same underlying menu and core functions, like the "Copy
+Tables" commands. There's also support for creating DFR patches and applying them
+to the current open file. And TONS of quality of life stuff.
+
+Enjoy!
+
+### DFRToolGUI
+
+- Intentionally downgraded from .NET 8.0 to the much older .NET Framework 4.8 so it's compatible with the other editors
+
+### All Editors
+
+- Added "File -> Apply DFR File..." to all editors
+- Added "File -> Generate DFR File..." to all editors
+- Added "File -> Copy Tables To..." to all editors
+- For all editors that didn't have it, added "File -> Copy Tables From..."
+- Added basic "File -> Save" command to save the current open file
+- Improved some error handling
+- Tweaked some hotkeys: editing premium disk is now "Ctrl-4" instead of "Ctrl-P"
+- Fixed the value range for int editors: it didn't work with pointers, like in the BattlePointerTable
+
+### IconPointerEditor
+
+- X044 files are now auto-detected; the flag for selecting them explicitly has been removed
+
+### X002 Editor
+
+- StatUp values for items now have the appropriate dropdowns if their type is special or spell
+- Renamed "Preset" table to "WeaponSpell"
+
+### X013 Editor
+
+- Added dropdowns for SupportA and SupportB values in "SupportType" table
+- Corrected incorrect address of Scn2 SoulFailTable (it was pointing to code, whoops!)
+- Scenario 1 magic bonus table now uses 32-bit ints instead of 8-bit ints
+- Magic bonus table now shows values properly as signed (can be negative) integers
+
+### X019 Editor
+
+- Added dropdown for item drop rate values
+- Added true/false dropdown for "Can't See Status" flag
+
+### X033/X031 Editor
+
+- Added named values with dropdowns for:
+    - Characters' Weapons equippable
+    - Characters' Accessories equippable
+- Hovering the mouse over lines in the "Stat Growth Chart" now shows the probabilities of each stat value for each level
+
+### X1 Editor
+
+- The X1 editor now opens all maps at once instead of only the selected map:
+    - The "Map" dropdown has now been removed. All maps are now loaded
+    - Tables for each battle have been migrated to sub-tabs under these tabs:
+        - Battle (Synbios)
+        - Battle (Medion)
+        - Battle (Julian)
+        - Battle (Extra)
+    - Battle tabs for battles that don't exist (i.e, their pointers in the BattlePointersTable are zero) are automatically hidden
+    - The auto-generated "Map" column in the "Header" table is now gone (it's no longer relevant)
+- Events in the "Interactables" table now have a dropdown for items when the EventType is 0x100 or 0x101
+
+### Code clean-ups
+
+- Each editor now has a core menu that's shared between them
+- Created CommonLib and CommonLibWin projects for shared code that isn't domain-specific (e.g. SF3, DFR)
+- Massive auto-linting / refactoring from VS analysis tools
+- Renamed "ModelArray" and "\*List" classes to "Table" classes
+- Reorganized Models/Tables into individual "Models" and "Tables" folders, rather than sharing a namespace for each model
+- Added unit tests to ensure that all files for all supported discs are working as expected
+- Merged S1 and S2+3+PD WarpTables into a single model/table
+- Rewrote all table loading code to about 5% their original size
+- HUGE architecture changes for Models, Tables, and FileEditors:
+    - All code to determine table/model address have been migrated out from their Models and merged into the MakeTables() routines of their corresponding editors.
+    - It's now the responsibility of the FileEditor to determine table address,
+    - and the responsibility of the table to determine model addresses.
+- Extracted smaller interface IByteEditor from IFileEditor to allow working with in-memory data
+- Completely rewrote how "NamedValues" work. Instead of being their own object, they're now property tabs that get their name from a shared INameGetterContext.
+- Upgrades to "Copy Tables" bulk copy features:
+    - Now supports copying dictionaries
+    - Logging is improved:
+        - Property names are now shown when available
+        - Fixed some bugs regarding really badly-formatted logs for collections
+        - (debug only) Collection keys and underlying types are now shown
+
 ## 2024-10-26
 
 This is the first version of the DFRTool command-line tool and GUI tool (DFRToolGUI)!

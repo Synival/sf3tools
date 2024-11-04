@@ -15,7 +15,7 @@ using static SF3.Editor.Extensions.TabControlExtensions;
 namespace SF3.X1_Editor.Forms {
     public partial class frmX1_Editor : EditorForm {
         // Used to display version in the application
-        protected override string Version => "0.36";
+        protected override string Version => "0.37";
 
         private bool _isBTL99 = false;
 

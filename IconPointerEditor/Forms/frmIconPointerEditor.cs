@@ -8,7 +8,7 @@ using static SF3.Editor.Extensions.TabControlExtensions;
 namespace SF3.IconPointerEditor.Forms {
     public partial class frmIconPointerEditor : EditorForm {
         // Used to display version in the application
-        protected override string Version => "0.11";
+        protected override string Version => "0.12";
 
         public new IIconPointerFileEditor FileEditor => base.FileEditor as IIconPointerFileEditor;
 
