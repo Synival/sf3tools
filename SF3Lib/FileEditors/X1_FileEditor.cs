@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Attributes;
 using SF3.NamedValues;
 using SF3.Tables;
@@ -91,19 +91,16 @@ namespace SF3.FileEditors {
                 arrowAddress         = GetDouble(0x0060) - sub;
             }
 
-            // Get the pointer to the battle.
+            // If this is a battle, we need to get the addresses for a lot of battle-specific stuff.
+            // TODO: we should have a table of tables here!!
             if (IsBattle) {
                 battlePointersAddress = GetDouble(battlePointersPointerAddress) - sub;
+                BattlePointersTable = new BattlePointersTable(this, battlePointersAddress);
+                BattlePointersTable.Load();
 
-                battleAddress = GetDouble(battlePointersAddress + MapOffset) - sub;
-                if (battleAddress == 0) {
-                    MapLeader =
-                        (Scenario == ScenarioType.Scenario1) ? MapLeaderType.Synbios :
-                        (Scenario == ScenarioType.Scenario2) ? MapLeaderType.Medion :
-                        (Scenario == ScenarioType.Scenario3) ? MapLeaderType.Julian :
-                        (Scenario == ScenarioType.PremiumDisk) ? MapLeaderType.Synbios : throw new ArgumentException();
-                    battleAddress = GetDouble(battlePointersAddress + MapOffset) - sub;
-                }
+                battleAddress = BattlePointersTable.Rows[MapIndex].BattlePointer - sub;
+                if (battleAddress == 0)
+                    battleAddress = BattlePointersTable.Rows.First(x => x.BattlePointer != 0).BattlePointer - sub;
 
                 aiAddress = battleAddress + 10 + enemySpawnTableSize + somethingElseSize;
             }
@@ -125,7 +122,7 @@ namespace SF3.FileEditors {
                     (SlotTable = new SlotTable(this)),
                     (AITable = new AITable(this, aiAddress)),
                     (SpawnZoneTable = new SpawnZoneTable(this)),
-                    (BattlePointersTable = new BattlePointersTable(this, battlePointersAddress)),
+                    BattlePointersTable,
                     (CustomMovementTable = new CustomMovementTable(this)),
                 });
 
@@ -180,7 +177,8 @@ namespace SF3.FileEditors {
             }
         }
 
-        public int MapOffset => (int) MapLeader;
+        public int MapIndex => (int) MapLeader;
+        public int MapOffset => MapIndex * 4;
 
         private bool _isBattle;
 

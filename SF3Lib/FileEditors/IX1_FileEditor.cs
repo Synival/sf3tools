@@ -4,9 +4,13 @@ using SF3.Types;
 
 namespace SF3.FileEditors {
     public interface IX1_FileEditor : ISF3FileEditor {
-        // TODO: This really should be read-only, but some of the models set this. How to fix?
+        // TODO: make this read-only once all of X1 is migrated. I suppose LoadTables() can set it privately
         MapLeaderType MapLeader { get; set; }
 
+        // TODO: remove me once we have a table of tables for battles!!
+        int MapIndex { get; }
+
+        // TODO: remove me once all of X1 is migrated!!
         int MapOffset { get; }
 
         bool IsBattle { get; }
