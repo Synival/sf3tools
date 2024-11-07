@@ -11,6 +11,12 @@ to the current open file. And TONS of quality of life stuff.
 
 Enjoy!
 
+### DFRTool
+
+- Added 'apply' command to apply DFR patch to an existing .BIN file. Run 'dfrtool --help' to see usage
+- Existing behavior is now 'create' command . Run 'dfrtool --help' to see usage
+- Added '--version' option
+
 ### DFRToolGUI
 
 - Intentionally downgraded from .NET 8.0 to the much older .NET Framework 4.8 so it's compatible with the other editors
