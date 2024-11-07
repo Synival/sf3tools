@@ -117,9 +117,7 @@ namespace DFRTool {
 
             switch (command) {
                 case Command.Apply:
-                    // TODO: actual command, lawl
-                    Console.WriteLine("Sorry, bud - not implemented yet lol");
-                    return 0;
+                    return Apply(remainingArgs);
 
                 case Command.Create:
                     return Create(remainingArgs);
@@ -128,6 +126,62 @@ namespace DFRTool {
                     Console.Error.WriteLine("Fatal error: unimplemented command '" + command.ToString() + "'");
                     return 1;
             }
+        }
+
+        private static int Apply(string[] args) {
+            var options = new OptionSet() {
+                // more options coming sometime!
+            };
+
+            string[] extra;
+            try {
+                extra = options.Parse(args).ToArray();
+            }
+            catch (Exception e) {
+                Console.WriteLine("Exception caught: " + e.Message);
+                Console.Error.Write(c_ErrorUsageString);
+                return 1;
+            }
+
+            // Require two arguments.
+            if (extra.Length != 2) {
+                Console.Error.WriteLine("Incorrect number of 'apply' arguments.");
+                Console.Error.Write(c_ErrorUsageString);
+                return 1;
+            }
+
+            var fileToPatchName = extra[0];
+            var dfrFilename = extra[1];
+
+            try {
+                FileStream? dfrFile = null;
+                try {
+                    dfrFile = new FileStream(dfrFilename, FileMode.Open, FileAccess.Read);
+                    var diff = new ByteDiff(dfrFile);
+
+                    var oldBytes = File.ReadAllBytes(fileToPatchName);
+                    var newBytes = diff.ApplyTo(oldBytes);
+                    dfrFile.Close();
+
+                    File.WriteAllBytes(fileToPatchName, newBytes);
+                }
+                catch (Exception ex) {
+                    Console.Error.WriteLine(ex.Message);
+                    return 1;
+                }
+                finally {
+                    if (dfrFile != null)
+                        dfrFile.Close();
+                }
+            }
+            catch (Exception ex) {
+                Console.Error.WriteLine(ex.Message);
+                return 1;
+            }
+
+            // We did it! Write the DFR file.
+            Console.WriteLine(fileToPatchName + " patched successfully.");
+            return 0;
         }
 
         private static int Create(string[] args) {
@@ -149,6 +203,7 @@ namespace DFRTool {
 
             // Require two arguments.
             if (extra.Length != 2) {
+                Console.Error.WriteLine("Incorrect number of 'create' arguments.");
                 Console.Error.Write(c_ErrorUsageString);
                 return 1;
             }
