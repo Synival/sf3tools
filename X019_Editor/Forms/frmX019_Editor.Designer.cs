@@ -1018,6 +1018,7 @@ namespace SF3.X019_Editor.Forms
             // 
             // menuStrip2
             // 
+            this.menuStrip2.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiHelp});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
@@ -1052,6 +1053,7 @@ namespace SF3.X019_Editor.Forms
             this.MainMenuStrip = this.menuStrip2;
             this.Name = "frmX019_Editor";
             this.Text = "SF3 X019 Editor";
+            this.Controls.SetChildIndex(this.menuStrip2, 0);
             this.Controls.SetChildIndex(this.tabMain, 0);
             this.tabMonsterTab1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab1)).EndInit();

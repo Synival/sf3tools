@@ -57,9 +57,10 @@ namespace SF3.IconPointerEditor.Forms
             // 
             // menuStrip2
             // 
+            this.menuStrip2.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiHelp});
-            this.menuStrip2.Location = new System.Drawing.Point(0, 24);
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(764, 24);
             this.menuStrip2.TabIndex = 1;
