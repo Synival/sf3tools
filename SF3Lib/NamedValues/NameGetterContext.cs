@@ -62,6 +62,14 @@ namespace SF3.NamedValues {
                 { NamedValueType.MovementType,        new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MovementTypeInfo)) },
                 { NamedValueType.Sex,                 new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SexInfo)) },
                 { NamedValueType.Special,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialInfo.Info[Scenario])) },
+
+                { NamedValueType.SpecialElement,
+                    new SubMethods(
+                        (o, p, v, a) => GetSpecialElementValue(o, p, v, a),
+                        (o, p, v, a) => CanGetSpecialElementValue(o, p, v, a),
+                        (o, p, a)    => CanGetSpecialElementValue(o, p, 0, a)
+                    ) },
+
                 { NamedValueType.Spell,               new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellInfo.Info[Scenario])) },
                 { NamedValueType.SpellTarget,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellTargetInfo)) },
                 { NamedValueType.StatType,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.StatTypeInfo)) },
@@ -157,6 +165,32 @@ namespace SF3.NamedValues {
             switch (typePropertyValue) {
                 case 0x100:
                 case 0x101:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        private NameAndInfo GetSpecialElementValue(object obj, PropertyInfo property, int value, object[] parameters) {
+            var typePropertyName = (string) parameters[1];
+            var typeProperty = obj.GetType().GetProperty(typePropertyName);
+            var typePropertyValue = (int) typeProperty.GetValue(obj);
+
+            switch (typePropertyValue) {
+                case 100:
+                    return _nameGetters[NamedValueType.Element].GetNameAndInfo(obj, property, value, parameters);
+                default:
+                    return null;
+            }
+        }
+
+        private bool CanGetSpecialElementValue(object obj, PropertyInfo property, int value, object[] parameters) {
+            var typePropertyName = (string) parameters[1];
+            var typeProperty = obj.GetType().GetProperty(typePropertyName);
+            var typePropertyValue = (int) typeProperty.GetValue(obj);
+
+            switch (typePropertyValue) {
+                case 100:
                     return true;
                 default:
                     return false;

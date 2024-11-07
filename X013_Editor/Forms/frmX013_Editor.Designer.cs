@@ -330,21 +330,18 @@ namespace SF3.X013_Editor.Forms
             // lvcSpecialsMinPowH
             // 
             this.lvcSpecialsMinPowH.AspectName = "DamageCalc";
-            this.lvcSpecialsMinPowH.AspectToStringFormat = "{0:X}";
             this.lvcSpecialsMinPowH.Text = "damageCalc/minPow H";
             this.lvcSpecialsMinPowH.Width = 125;
             // 
             // lvcSpecialsElementMidPowH
             // 
             this.lvcSpecialsElementMidPowH.AspectName = "ExtraPow";
-            this.lvcSpecialsElementMidPowH.AspectToStringFormat = "{0:X}";
             this.lvcSpecialsElementMidPowH.Text = "Element/midPow H";
             this.lvcSpecialsElementMidPowH.Width = 108;
             // 
             // lvcSpecialsPowerMaxPowH
             // 
             this.lvcSpecialsPowerMaxPowH.AspectName = "Pow";
-            this.lvcSpecialsPowerMaxPowH.AspectToStringFormat = "{0:X}";
             this.lvcSpecialsPowerMaxPowH.Text = "Power/maxPow H";
             this.lvcSpecialsPowerMaxPowH.Width = 99;
             // 
