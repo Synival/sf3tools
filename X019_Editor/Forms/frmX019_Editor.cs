@@ -15,7 +15,7 @@ namespace SF3.X019_Editor.Forms {
 
         public frmX019_Editor() {
             InitializeComponent();
-            InitializeEditor();
+            InitializeEditor(menuStrip2);
         }
 
         protected override string FileDialogFilter

@@ -120,6 +120,9 @@ namespace SF3.X019_Editor.Forms
             this.lvcMonsterTab5SpellChance6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMonsterTab5Unknown19 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcMonsterTab5Unknown20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp_CanAlsoOpenPDX044 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabMonsterTab1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab1)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -131,6 +134,7 @@ namespace SF3.X019_Editor.Forms
             ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab4)).BeginInit();
             this.tabMonsterTab5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab5)).BeginInit();
+            this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabMonsterTab1
@@ -1012,6 +1016,30 @@ namespace SF3.X019_Editor.Forms
             this.lvcMonsterTab5Unknown20.Text = "Unknown20";
             this.lvcMonsterTab5Unknown20.Width = 70;
             // 
+            // menuStrip2
+            // 
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiHelp});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(764, 24);
+            this.menuStrip2.TabIndex = 3;
+            this.menuStrip2.Text = "menuStrip2";
+            // 
+            // tsmiHelp
+            // 
+            this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiHelp_CanAlsoOpenPDX044});
+            this.tsmiHelp.Name = "tsmiHelp";
+            this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
+            this.tsmiHelp.Text = "&Help";
+            // 
+            // tsmiHelp_CanAlsoOpenPDX044
+            // 
+            this.tsmiHelp_CanAlsoOpenPDX044.Name = "tsmiHelp_CanAlsoOpenPDX044";
+            this.tsmiHelp_CanAlsoOpenPDX044.Size = new System.Drawing.Size(276, 22);
+            this.tsmiHelp_CanAlsoOpenPDX044.Text = "Can also open Premium Disk X044.BIN";
+            // 
             // frmX019_Editor
             // 
             this.AllowDrop = true;
@@ -1019,7 +1047,9 @@ namespace SF3.X019_Editor.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 534);
             this.Controls.Add(this.tabMain);
+            this.Controls.Add(this.menuStrip2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip2;
             this.Name = "frmX019_Editor";
             this.Text = "SF3 X019 Editor";
             this.Controls.SetChildIndex(this.tabMain, 0);
@@ -1034,6 +1064,8 @@ namespace SF3.X019_Editor.Forms
             ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab4)).EndInit();
             this.tabMonsterTab5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvMonsterTab5)).EndInit();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1131,6 +1163,9 @@ namespace SF3.X019_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcMonsterTab5Unknown20;
         private BrightIdeasSoftware.OLVColumn lvcMonsterTab1SpriteID;
         private BrightIdeasSoftware.OLVColumn lvcMonsterTab3CantSeeStatus;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_CanAlsoOpenPDX044;
     }
 }
 
