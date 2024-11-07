@@ -21,6 +21,8 @@ Enjoy!
 - Added "File -> Generate DFR File..." to all editors
 - Added "File -> Copy Tables To..." to all editors
 - For all editors that didn't have it, added "File -> Copy Tables From..."
+- Added option "Edit -> Use Dropdowns for Named Values" (on by default)
+    - Disabling this will allow you to edit values directly for fields that normally have dropdowns
 - Added basic "File -> Save" command to save the current open file
 - Improved some error handling
 - Tweaked some hotkeys: editing premium disk is now "Ctrl-4" instead of "Ctrl-P"
