@@ -247,115 +247,96 @@ namespace SF3.X019_Editor.Forms
             // lvcMonsterTab1MaxHP
             // 
             this.lvcMonsterTab1MaxHP.AspectName = "MaxHP";
-            this.lvcMonsterTab1MaxHP.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1MaxHP.Text = "MaxHP";
             // 
             // lvcMonsterTab1MaxMP
             // 
             this.lvcMonsterTab1MaxMP.AspectName = "MaxMP";
-            this.lvcMonsterTab1MaxMP.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1MaxMP.Text = "MaxMP";
             // 
             // lvcMonsterTab1Level
             // 
             this.lvcMonsterTab1Level.AspectName = "Level";
-            this.lvcMonsterTab1Level.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1Level.Text = "Level";
             // 
             // lvcMonsterTab1Attack
             // 
             this.lvcMonsterTab1Attack.AspectName = "Attack";
-            this.lvcMonsterTab1Attack.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1Attack.Text = "Attack";
             // 
             // lvcMonsterTab1Defense
             // 
             this.lvcMonsterTab1Defense.AspectName = "Defense";
-            this.lvcMonsterTab1Defense.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1Defense.Text = "Defense";
             // 
             // lvcMonsterTab1Agility
             // 
             this.lvcMonsterTab1Agility.AspectName = "Agility";
-            this.lvcMonsterTab1Agility.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1Agility.Text = "Agility";
             // 
             // lvcMonsterTab1Mov
             // 
             this.lvcMonsterTab1Mov.AspectName = "Mov";
-            this.lvcMonsterTab1Mov.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1Mov.Text = "Mov";
             // 
             // lvcMonsterTab1Luck
             // 
             this.lvcMonsterTab1Luck.AspectName = "Luck";
-            this.lvcMonsterTab1Luck.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1Luck.Text = "Luck";
             // 
             // lvcMonsterTab1Turns
             // 
             this.lvcMonsterTab1Turns.AspectName = "Turns";
-            this.lvcMonsterTab1Turns.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1Turns.Text = "Turns";
             // 
             // lvcMonsterTab1HPRegen
             // 
             this.lvcMonsterTab1HPRegen.AspectName = "HPRegen";
-            this.lvcMonsterTab1HPRegen.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1HPRegen.Text = "HPRegen";
             // 
             // lvcMonsterTab1MPRegen
             // 
             this.lvcMonsterTab1MPRegen.AspectName = "MPRegen";
-            this.lvcMonsterTab1MPRegen.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1MPRegen.Text = "MPRegen";
             // 
             // lvcMonsterTab1EarthRes
             // 
             this.lvcMonsterTab1EarthRes.AspectName = "EarthRes";
-            this.lvcMonsterTab1EarthRes.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1EarthRes.Text = "EarthRes";
             // 
             // lvcMonsterTab1FireRes
             // 
             this.lvcMonsterTab1FireRes.AspectName = "FireRes";
-            this.lvcMonsterTab1FireRes.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1FireRes.Text = "FireRes";
             // 
             // lvcMonsterTab1IceRes
             // 
             this.lvcMonsterTab1IceRes.AspectName = "IceRes";
-            this.lvcMonsterTab1IceRes.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1IceRes.Text = "IceRes";
             // 
             // lvcMonsterTab1SparkRes
             // 
             this.lvcMonsterTab1SparkRes.AspectName = "SparkRes";
-            this.lvcMonsterTab1SparkRes.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1SparkRes.Text = "SparkRes";
             // 
             // lvcMonsterTab1WindRes
             // 
             this.lvcMonsterTab1WindRes.AspectName = "WindRes";
-            this.lvcMonsterTab1WindRes.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1WindRes.Text = "WindRes";
             // 
             // lvcMonsterTab1LightRes
             // 
             this.lvcMonsterTab1LightRes.AspectName = "LightRes";
-            this.lvcMonsterTab1LightRes.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1LightRes.Text = "LightRes";
             // 
             // lvcMonsterTab1DarkRes
             // 
             this.lvcMonsterTab1DarkRes.AspectName = "DarkRes";
-            this.lvcMonsterTab1DarkRes.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1DarkRes.Text = "DarkRes";
             // 
             // lvcMonsterTab1UnusedRes
             // 
             this.lvcMonsterTab1UnusedRes.AspectName = "UnusedRes";
-            this.lvcMonsterTab1UnusedRes.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab1UnusedRes.Text = "UnusedRes";
             this.lvcMonsterTab1UnusedRes.Width = 90;
             // 
