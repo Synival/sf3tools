@@ -3,6 +3,11 @@ using NDesk.Options;
 
 namespace DFRTool {
     internal class Program {
+        private const string c_Version = "1.1";
+
+        private const string c_VersionString =
+            "DFRTool v" + c_Version + "\n";
+
         private const string c_ShortUsageString =
             "Usage:\n" +
             "  dfrtool [GENERAL_OPTIONS] apply [APPLY_OPTIONS]... bin_file dfr_file\n" +
@@ -17,6 +22,7 @@ namespace DFRTool {
             "\n" +
             "General Options:\n" +
             "  -h, --help                print this help message\n" +
+            "  --version                 print DFRTool version\n" +
             "\n" +
             "Apply Options:\n" +
             "  (none)\n" +
@@ -59,8 +65,11 @@ namespace DFRTool {
 
             // Gather general options.
             var outputHelp = false;
+            var outputVersion = false;
+
             var anywhereOptions = new OptionSet() {
-               { "h|help", v => outputHelp = true },
+               { "h|help",  v => outputHelp = true },
+               { "version", v => outputVersion = true },
             };
             var generalOptions = new OptionSet() {
                 // more options coming sometime!
@@ -79,7 +88,15 @@ namespace DFRTool {
 
             // Never show errors if -h was specified anywhere.
             if (outputHelp) {
+                if (outputVersion)
+                    Console.Write(c_VersionString);
                 Console.Write(c_FullUsageString);
+                return 0;
+            }
+
+            // Always just show version string if requested (unless help is requested).
+            if (outputVersion) {
+                Console.Write(c_VersionString);
                 return 0;
             }
 
