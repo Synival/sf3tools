@@ -22,9 +22,9 @@
     <item value="0x13" name="Chant" />
     <item value="0x14" name="Antidote" />
     <item value="0x15" name="Return" />
-    <item value="0x16" name="Heal item" />
-    <item value="0x17" name="MP heal item?" />
-    <item value="0x18" name="StatusHeal item?" />
+    <item value="0x16" name="Heal Item" />
+    <item value="0x17" name="MP Heal Item?" />
+    <item value="0x18" name="StatusHeal Item?" />
     <item value="0x19" name="AngelWing?" />
     <item value="0x1A" name="Raise1" />
     <item value="0x1B" name="Raise2" />
@@ -48,8 +48,8 @@
     <item value="0x2D" name="Titan Laser" />
     <item value="0x2E" name="Titan Punch" />
     <item value="0x2F" name="Titan Attack" />
-    <item value="0x30" name="Panic and confusion" />
-    <item value="0x31" name="Violently Shakes ground" />
+    <item value="0x30" name="Panic and Confusion" />
+    <item value="0x31" name="Violently Shakes Ground" />
     <item value="0x32" name="Boulder" />
     <item value="0x33" name="DivineCaneUse" />
     <item value="0x34" name="Thor" />
@@ -73,6 +73,6 @@
     <item value="0x46" name="Blessing" />
     <item value="0x47" name="Chaos Gate" />
     <item value="0x48" name="WalcyrayLaser" />
-    <item value="0x49" name="HealhpORDamageEnemy" />
+    <item value="0x49" name="HealHpOrDamageEnemy" />
     <item value="0x4A" name="???" />
 </items>
