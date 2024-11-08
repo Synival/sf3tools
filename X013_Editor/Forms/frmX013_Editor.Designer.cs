@@ -1,7 +1,5 @@
-namespace SF3.X013_Editor.Forms
-{
-    partial class frmX013_Editor
-    {
+namespace SF3.X013_Editor.Forms {
+    partial class frmX013_Editor {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@ namespace SF3.X013_Editor.Forms
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,190 +22,199 @@ namespace SF3.X013_Editor.Forms
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX013_Editor));
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabSpecials = new System.Windows.Forms.TabPage();
             this.olvSpecials = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSpecialsName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsIsSetH = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsMinPowH = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsElementMidPowH = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsPowerMaxPowH = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng0d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng1d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng2d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng3d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng4d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng5d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng6d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng7d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng8d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng9d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng10d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng11d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng12d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng13d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng14d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsIsSetH = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsMinPowH = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsElementMidPowH = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsPowerMaxPowH = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng0d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng1d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng2d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng3d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng4d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng5d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng6d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng7d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng8d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng9d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng10d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng11d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng12d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng13d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialsRng14d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabSpecialEffects = new System.Windows.Forms.TabPage();
             this.olvSpecialEffects = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSpecialEffectsName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialEffectsID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialEffectsAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialEffectsSpecial = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialEffectsName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialEffectsID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialEffectsAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialEffectsSpecial = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabFriendshipExp = new System.Windows.Forms.TabPage();
             this.olvFriendshipExp = new BrightIdeasSoftware.ObjectListView();
-            this.lvcFriendshipExpName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpAlly = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpPartner = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpFriend = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpTrusted = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpSoulmate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcFriendshipExpName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcFriendshipExpID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcFriendshipExpAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcFriendshipExpAlly = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcFriendshipExpPartner = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcFriendshipExpFriend = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcFriendshipExpTrusted = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcFriendshipExpSoulmate = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabSupportType = new System.Windows.Forms.TabPage();
             this.olvSupportType = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSupportTypeName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportTypeID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportTypeAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportTypeSupportA = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportTypeSupportB = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSupportTypeName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSupportTypeID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSupportTypeAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSupportTypeSupportA = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSupportTypeSupportB = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabSupportStats = new System.Windows.Forms.TabPage();
             this.olvSupportStats = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSupportStatsName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportStatsID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportStatsAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportStatsSLvlStat1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportStatsSLvlStat2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportStatsSLvlStat3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportStatsSLvlStat4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSupportStatsName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSupportStatsID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSupportStatsAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSupportStatsSLvlStat1 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSupportStatsSLvlStat2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSupportStatsSLvlStat3 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSupportStatsSLvlStat4 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabSoulmate = new System.Windows.Forms.TabPage();
             this.olvSoulmate = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSoulmateName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSoulmateID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSoulmateAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSoulmateChance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSoulmateName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSoulmateID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSoulmateAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSoulmateChance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabSoulmateChanceFail = new System.Windows.Forms.TabPage();
             this.olvSoulmateChanceFail = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSoulmateChanceFailName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSoulmateChanceFailID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSoulmateChanceFailAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSoulmateChanceFailExpLost = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSoulmateChanceFailName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSoulmateChanceFailID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSoulmateChanceFailAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSoulmateChanceFailExpLost = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabMagicBonus = new System.Windows.Forms.TabPage();
             this.olvMagicBonus = new BrightIdeasSoftware.ObjectListView();
-            this.lvcMagicBonusDefaultUser = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusEarthBonus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusFireBonus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusIceBonus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusSparkBonus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusWindBonus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusLightBonus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusDarkBonus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusUnknownBonus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMagicBonusDefaultUser = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMagicBonusID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMagicBonusAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMagicBonusEarthBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMagicBonusFireBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMagicBonusIceBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMagicBonusSparkBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMagicBonusWindBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMagicBonusLightBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMagicBonusDarkBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcMagicBonusUnknownBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabCritVantages = new System.Windows.Forms.TabPage();
             this.olvCritVantages = new BrightIdeasSoftware.ObjectListView();
-            this.lvcCritVantagesName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritVantagesAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritVantagesAdvantageModifier = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritVantagesDisadvantageModifier = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCritVantagesName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCritVantagesAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCritVantagesAdvantageModifier = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCritVantagesDisadvantageModifier = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabCritCounterRate = new System.Windows.Forms.TabPage();
             this.olvCritCounterRate = new BrightIdeasSoftware.ObjectListView();
-            this.lvcCritCounterRateName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateHave0Specials = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateHave1Specials = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateHave2Specials = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateHave3Specials = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateHave4Specials = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateHave5Specials = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCritCounterRateName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCritCounterRateAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCritCounterRateHave0Specials = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCritCounterRateHave1Specials = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCritCounterRateHave2Specials = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCritCounterRateHave3Specials = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCritCounterRateHave4Specials = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcCritCounterRateHave5Specials = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabSpecialChance = new System.Windows.Forms.TabPage();
             this.olvSpecialChance = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSpecialChanceSpecialProcRate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceTwoSpecials2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceThreeSpecials3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceThreeSpecials2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceFourSpecials4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceFourSpecials3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceFourSpecials2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialChanceSpecialProcRate = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialChanceAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialChanceTwoSpecials2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialChanceThreeSpecials3 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialChanceThreeSpecials2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialChanceFourSpecials4 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialChanceFourSpecials3 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialChanceFourSpecials2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabExpLimit = new System.Windows.Forms.TabPage();
             this.olvExpLimit = new BrightIdeasSoftware.ObjectListView();
-            this.lvcExpLimitName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcExpLimitAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcExpLimitCheckedValue = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcExpLimitReplacedValue = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcExpLimitName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcExpLimitAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcExpLimitCheckedValue = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcExpLimitReplacedValue = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabHealExp = new System.Windows.Forms.TabPage();
             this.olvHealExp = new BrightIdeasSoftware.ObjectListView();
-            this.lvcHealExpName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcHealExpAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcHealExpBonus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHealExpName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHealExpAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHealExpBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabWeaponSpellRank = new System.Windows.Forms.TabPage();
             this.olvWeaponSpellRank = new BrightIdeasSoftware.ObjectListView();
-            this.lvcWeaponSpellRankTable = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankRankNone = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankRankC = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankRankB = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankRankA = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankRankS = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellRankTable = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellRankID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellRankAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellRankRankNone = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellRankRankC = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellRankRankB = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellRankRankA = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponSpellRankRankS = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabStatusGroups = new System.Windows.Forms.TabPage();
             this.olvStatusGroups = new BrightIdeasSoftware.ObjectListView();
-            this.lvcStatusGroupsName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck0Chance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck1Chance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck2Chance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck3Chance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck4Chance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck5Chance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck6Chance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck7Chance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck8Chance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck9Chance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsLuck0Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsLuck1Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsLuck2Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsLuck3Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsLuck4Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsLuck5Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsLuck6Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsLuck7Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsLuck8Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsLuck9Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsUnknown0 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsUnknown1 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsUnknown2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsUnknown3 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsUnknown4 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsUnknown5 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsUnknown6 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsUnknown7 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsUnknown8 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcStatusGroupsUnknown9 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabMain.SuspendLayout();
             this.tabSpecials.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvSpecials)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSpecials)).BeginInit();
             this.tabSpecialEffects.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvSpecialEffects)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSpecialEffects)).BeginInit();
             this.tabFriendshipExp.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvFriendshipExp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvFriendshipExp)).BeginInit();
             this.tabSupportType.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvSupportType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSupportType)).BeginInit();
             this.tabSupportStats.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvSupportStats)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSupportStats)).BeginInit();
             this.tabSoulmate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvSoulmate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSoulmate)).BeginInit();
             this.tabSoulmateChanceFail.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvSoulmateChanceFail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSoulmateChanceFail)).BeginInit();
             this.tabMagicBonus.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvMagicBonus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvMagicBonus)).BeginInit();
             this.tabCritVantages.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvCritVantages)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvCritVantages)).BeginInit();
             this.tabCritCounterRate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvCritCounterRate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvCritCounterRate)).BeginInit();
             this.tabSpecialChance.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvSpecialChance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSpecialChance)).BeginInit();
             this.tabExpLimit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvExpLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvExpLimit)).BeginInit();
             this.tabHealExp.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvHealExp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvHealExp)).BeginInit();
             this.tabWeaponSpellRank.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvWeaponSpellRank)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvWeaponSpellRank)).BeginInit();
             this.tabStatusGroups.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvStatusGroups)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvStatusGroups)).BeginInit();
             this.SuspendLayout();
             // 
             // tabMain
             // 
-            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tabSpecials);
             this.tabMain.Controls.Add(this.tabSpecialEffects);
@@ -267,8 +272,8 @@ namespace SF3.X013_Editor.Forms
             this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng13d);
             this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng14d);
             this.olvSpecials.AllowColumnReorder = true;
-            this.olvSpecials.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvSpecials.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvSpecials.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvSpecials.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -476,8 +481,8 @@ namespace SF3.X013_Editor.Forms
             this.olvSpecialEffects.AllColumns.Add(this.lvcSpecialEffectsAddress);
             this.olvSpecialEffects.AllColumns.Add(this.lvcSpecialEffectsSpecial);
             this.olvSpecialEffects.AllowColumnReorder = true;
-            this.olvSpecialEffects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvSpecialEffects.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvSpecialEffects.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvSpecialEffects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -548,8 +553,8 @@ namespace SF3.X013_Editor.Forms
             this.olvFriendshipExp.AllColumns.Add(this.lvcFriendshipExpTrusted);
             this.olvFriendshipExp.AllColumns.Add(this.lvcFriendshipExpSoulmate);
             this.olvFriendshipExp.AllowColumnReorder = true;
-            this.olvFriendshipExp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvFriendshipExp.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvFriendshipExp.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvFriendshipExp.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -642,8 +647,8 @@ namespace SF3.X013_Editor.Forms
             this.olvSupportType.AllColumns.Add(this.lvcSupportTypeSupportA);
             this.olvSupportType.AllColumns.Add(this.lvcSupportTypeSupportB);
             this.olvSupportType.AllowColumnReorder = true;
-            this.olvSupportType.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvSupportType.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvSupportType.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvSupportType.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -722,8 +727,8 @@ namespace SF3.X013_Editor.Forms
             this.olvSupportStats.AllColumns.Add(this.lvcSupportStatsSLvlStat3);
             this.olvSupportStats.AllColumns.Add(this.lvcSupportStatsSLvlStat4);
             this.olvSupportStats.AllowColumnReorder = true;
-            this.olvSupportStats.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvSupportStats.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvSupportStats.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvSupportStats.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -808,8 +813,8 @@ namespace SF3.X013_Editor.Forms
             this.olvSoulmate.AllColumns.Add(this.lvcSoulmateAddress);
             this.olvSoulmate.AllColumns.Add(this.lvcSoulmateChance);
             this.olvSoulmate.AllowColumnReorder = true;
-            this.olvSoulmate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvSoulmate.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvSoulmate.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvSoulmate.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -876,8 +881,8 @@ namespace SF3.X013_Editor.Forms
             this.olvSoulmateChanceFail.AllColumns.Add(this.lvcSoulmateChanceFailAddress);
             this.olvSoulmateChanceFail.AllColumns.Add(this.lvcSoulmateChanceFailExpLost);
             this.olvSoulmateChanceFail.AllowColumnReorder = true;
-            this.olvSoulmateChanceFail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvSoulmateChanceFail.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvSoulmateChanceFail.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvSoulmateChanceFail.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -950,8 +955,8 @@ namespace SF3.X013_Editor.Forms
             this.olvMagicBonus.AllColumns.Add(this.lvcMagicBonusDarkBonus);
             this.olvMagicBonus.AllColumns.Add(this.lvcMagicBonusUnknownBonus);
             this.olvMagicBonus.AllowColumnReorder = true;
-            this.olvMagicBonus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvMagicBonus.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvMagicBonus.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvMagicBonus.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -1069,8 +1074,8 @@ namespace SF3.X013_Editor.Forms
             this.olvCritVantages.AllColumns.Add(this.lvcCritVantagesAdvantageModifier);
             this.olvCritVantages.AllColumns.Add(this.lvcCritVantagesDisadvantageModifier);
             this.olvCritVantages.AllowColumnReorder = true;
-            this.olvCritVantages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvCritVantages.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvCritVantages.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvCritVantages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -1141,8 +1146,8 @@ namespace SF3.X013_Editor.Forms
             this.olvCritCounterRate.AllColumns.Add(this.lvcCritCounterRateHave4Specials);
             this.olvCritCounterRate.AllColumns.Add(this.lvcCritCounterRateHave5Specials);
             this.olvCritCounterRate.AllowColumnReorder = true;
-            this.olvCritCounterRate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvCritCounterRate.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvCritCounterRate.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvCritCounterRate.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -1241,8 +1246,8 @@ namespace SF3.X013_Editor.Forms
             this.olvSpecialChance.AllColumns.Add(this.lvcSpecialChanceFourSpecials3);
             this.olvSpecialChance.AllColumns.Add(this.lvcSpecialChanceFourSpecials2);
             this.olvSpecialChance.AllowColumnReorder = true;
-            this.olvSpecialChance.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvSpecialChance.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvSpecialChance.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvSpecialChance.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -1338,8 +1343,8 @@ namespace SF3.X013_Editor.Forms
             this.olvExpLimit.AllColumns.Add(this.lvcExpLimitCheckedValue);
             this.olvExpLimit.AllColumns.Add(this.lvcExpLimitReplacedValue);
             this.olvExpLimit.AllowColumnReorder = true;
-            this.olvExpLimit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvExpLimit.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvExpLimit.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvExpLimit.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -1404,8 +1409,8 @@ namespace SF3.X013_Editor.Forms
             this.olvHealExp.AllColumns.Add(this.lvcHealExpAddress);
             this.olvHealExp.AllColumns.Add(this.lvcHealExpBonus);
             this.olvHealExp.AllowColumnReorder = true;
-            this.olvHealExp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvHealExp.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvHealExp.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvHealExp.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -1468,8 +1473,8 @@ namespace SF3.X013_Editor.Forms
             this.olvWeaponSpellRank.AllColumns.Add(this.lvcWeaponSpellRankRankA);
             this.olvWeaponSpellRank.AllColumns.Add(this.lvcWeaponSpellRankRankS);
             this.olvWeaponSpellRank.AllowColumnReorder = true;
-            this.olvWeaponSpellRank.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvWeaponSpellRank.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvWeaponSpellRank.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvWeaponSpellRank.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -1565,18 +1570,28 @@ namespace SF3.X013_Editor.Forms
             this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsID);
             this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsAddress);
             this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck0Chance);
+            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown0);
             this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck1Chance);
+            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown1);
             this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck2Chance);
+            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown2);
             this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck3Chance);
+            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown3);
             this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck4Chance);
+            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown4);
             this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck5Chance);
+            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown5);
             this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck6Chance);
+            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown6);
             this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck7Chance);
+            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown7);
             this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck8Chance);
+            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown8);
             this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck9Chance);
+            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown9);
             this.olvStatusGroups.AllowColumnReorder = true;
-            this.olvStatusGroups.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvStatusGroups.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvStatusGroups.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvStatusGroups.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -1584,15 +1599,25 @@ namespace SF3.X013_Editor.Forms
             this.lvcStatusGroupsID,
             this.lvcStatusGroupsAddress,
             this.lvcStatusGroupsLuck0Chance,
+            this.lvcStatusGroupsUnknown0,
             this.lvcStatusGroupsLuck1Chance,
+            this.lvcStatusGroupsUnknown1,
             this.lvcStatusGroupsLuck2Chance,
+            this.lvcStatusGroupsUnknown2,
             this.lvcStatusGroupsLuck3Chance,
+            this.lvcStatusGroupsUnknown3,
             this.lvcStatusGroupsLuck4Chance,
+            this.lvcStatusGroupsUnknown4,
             this.lvcStatusGroupsLuck5Chance,
+            this.lvcStatusGroupsUnknown5,
             this.lvcStatusGroupsLuck6Chance,
+            this.lvcStatusGroupsUnknown6,
             this.lvcStatusGroupsLuck7Chance,
+            this.lvcStatusGroupsUnknown7,
             this.lvcStatusGroupsLuck8Chance,
-            this.lvcStatusGroupsLuck9Chance});
+            this.lvcStatusGroupsUnknown8,
+            this.lvcStatusGroupsLuck9Chance,
+            this.lvcStatusGroupsUnknown9});
             this.olvStatusGroups.FullRowSelect = true;
             this.olvStatusGroups.GridLines = true;
             this.olvStatusGroups.HasCollapsibleGroups = false;
@@ -1699,6 +1724,66 @@ namespace SF3.X013_Editor.Forms
             this.lvcStatusGroupsLuck9Chance.Text = "Luck9Chance%";
             this.lvcStatusGroupsLuck9Chance.Width = 90;
             // 
+            // lvcStatusGroupsUnknown0
+            // 
+            this.lvcStatusGroupsUnknown0.AspectName = "StatusUnknown0";
+            this.lvcStatusGroupsUnknown0.Text = "Unknown0";
+            this.lvcStatusGroupsUnknown0.Width = 75;
+            // 
+            // lvcStatusGroupsUnknown1
+            // 
+            this.lvcStatusGroupsUnknown1.AspectName = "StatusUnknown1";
+            this.lvcStatusGroupsUnknown1.Text = "Unknown1";
+            this.lvcStatusGroupsUnknown1.Width = 75;
+            // 
+            // lvcStatusGroupsUnknown2
+            // 
+            this.lvcStatusGroupsUnknown2.AspectName = "StatusUnknown2";
+            this.lvcStatusGroupsUnknown2.Text = "Unknown2";
+            this.lvcStatusGroupsUnknown2.Width = 75;
+            // 
+            // lvcStatusGroupsUnknown3
+            // 
+            this.lvcStatusGroupsUnknown3.AspectName = "StatusUnknown3";
+            this.lvcStatusGroupsUnknown3.Text = "Unknown3";
+            this.lvcStatusGroupsUnknown3.Width = 75;
+            // 
+            // lvcStatusGroupsUnknown4
+            // 
+            this.lvcStatusGroupsUnknown4.AspectName = "StatusUnknown4";
+            this.lvcStatusGroupsUnknown4.Text = "Unknown4";
+            this.lvcStatusGroupsUnknown4.Width = 75;
+            // 
+            // lvcStatusGroupsUnknown5
+            // 
+            this.lvcStatusGroupsUnknown5.AspectName = "StatusUnknown5";
+            this.lvcStatusGroupsUnknown5.Text = "Unknown5";
+            this.lvcStatusGroupsUnknown5.Width = 75;
+            // 
+            // lvcStatusGroupsUnknown6
+            // 
+            this.lvcStatusGroupsUnknown6.AspectName = "StatusUnknown6";
+            this.lvcStatusGroupsUnknown6.Text = "Unknown6";
+            this.lvcStatusGroupsUnknown6.Width = 75;
+            // 
+            // lvcStatusGroupsUnknown7
+            // 
+            this.lvcStatusGroupsUnknown7.AspectName = "StatusUnknown7";
+            this.lvcStatusGroupsUnknown7.Text = "Unknown7";
+            this.lvcStatusGroupsUnknown7.Width = 75;
+            // 
+            // lvcStatusGroupsUnknown8
+            // 
+            this.lvcStatusGroupsUnknown8.AspectName = "StatusUnknown8";
+            this.lvcStatusGroupsUnknown8.Text = "Unknown8";
+            this.lvcStatusGroupsUnknown8.Width = 75;
+            // 
+            // lvcStatusGroupsUnknown9
+            // 
+            this.lvcStatusGroupsUnknown9.AspectName = "StatusUnknown9";
+            this.lvcStatusGroupsUnknown9.Text = "Unknown9";
+            this.lvcStatusGroupsUnknown9.Width = 75;
+            // 
             // frmX013_Editor
             // 
             this.AllowDrop = true;
@@ -1706,41 +1791,41 @@ namespace SF3.X013_Editor.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 534);
             this.Controls.Add(this.tabMain);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.Name = "frmX013_Editor";
             this.Text = "SF3 X013 Editor";
             this.Controls.SetChildIndex(this.tabMain, 0);
             this.tabMain.ResumeLayout(false);
             this.tabSpecials.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvSpecials)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSpecials)).EndInit();
             this.tabSpecialEffects.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvSpecialEffects)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSpecialEffects)).EndInit();
             this.tabFriendshipExp.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvFriendshipExp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvFriendshipExp)).EndInit();
             this.tabSupportType.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvSupportType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSupportType)).EndInit();
             this.tabSupportStats.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvSupportStats)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSupportStats)).EndInit();
             this.tabSoulmate.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvSoulmate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSoulmate)).EndInit();
             this.tabSoulmateChanceFail.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvSoulmateChanceFail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSoulmateChanceFail)).EndInit();
             this.tabMagicBonus.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvMagicBonus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvMagicBonus)).EndInit();
             this.tabCritVantages.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvCritVantages)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvCritVantages)).EndInit();
             this.tabCritCounterRate.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvCritCounterRate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvCritCounterRate)).EndInit();
             this.tabSpecialChance.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvSpecialChance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvSpecialChance)).EndInit();
             this.tabExpLimit.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvExpLimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvExpLimit)).EndInit();
             this.tabHealExp.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvHealExp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvHealExp)).EndInit();
             this.tabWeaponSpellRank.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvWeaponSpellRank)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvWeaponSpellRank)).EndInit();
             this.tabStatusGroups.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvStatusGroups)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvStatusGroups)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1870,6 +1955,16 @@ namespace SF3.X013_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcStatusGroupsLuck7Chance;
         private BrightIdeasSoftware.OLVColumn lvcStatusGroupsLuck8Chance;
         private BrightIdeasSoftware.OLVColumn lvcStatusGroupsLuck9Chance;
+        private BrightIdeasSoftware.OLVColumn lvcStatusGroupsUnknown0;
+        private BrightIdeasSoftware.OLVColumn lvcStatusGroupsUnknown1;
+        private BrightIdeasSoftware.OLVColumn lvcStatusGroupsUnknown2;
+        private BrightIdeasSoftware.OLVColumn lvcStatusGroupsUnknown3;
+        private BrightIdeasSoftware.OLVColumn lvcStatusGroupsUnknown4;
+        private BrightIdeasSoftware.OLVColumn lvcStatusGroupsUnknown5;
+        private BrightIdeasSoftware.OLVColumn lvcStatusGroupsUnknown6;
+        private BrightIdeasSoftware.OLVColumn lvcStatusGroupsUnknown7;
+        private BrightIdeasSoftware.OLVColumn lvcStatusGroupsUnknown8;
+        private BrightIdeasSoftware.OLVColumn lvcStatusGroupsUnknown9;
         private BrightIdeasSoftware.OLVColumn lvcSpecialsRng0d;
         private BrightIdeasSoftware.OLVColumn lvcSpecialsRng1d;
         private BrightIdeasSoftware.OLVColumn lvcSpecialsRng2d;
