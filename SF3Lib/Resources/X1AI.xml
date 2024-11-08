@@ -32,5 +32,5 @@
     <item value="0x1D" name="EnemySlot29" />
     <item value="0x1E" name="EnemySlot30" />
     <item value="0x1F" name="EnemySlot31" />
-    <item value="0x20" name="Null" />
+    <item value="0x20" name="(end)" />
 </items>

@@ -38,31 +38,31 @@
     <item value="0x23" name="Uryudo U" />
     <item value="0x24" name="Waltz U" />
     <item value="0x25" name="Rock U" />
-    <item value="0x26" name="Barnard U" />
+    <item value="0x26" name="Bernard U" />
     <item value="0x27" name="Zero U" />
     <item value="0x28" name="Hazuki U" />
     <item value="0x29" name="David U" />
-    <item value="0x2A" name="Hedoba U" />
+    <item value="0x2A" name="Hedva U" />
     <item value="0x2B" name="Gracia P1" />
     <item value="0x2C" name="Donhort P1" />
     <item value="0x2D" name="Hera P1" />
-    <item value="0x2E" name="Robbie P1" />
+    <item value="0x2E" name="Robby P1" />
     <item value="0x2F" name="Arthur P1" />
     <item value="0x30" name="Garosh P1" />
     <item value="0x31" name="Jade P1" />
     <item value="0x32" name="Penko U" />
-    <item value="0x33" name="Papesh P1" />
+    <item value="0x33" name="Pappets P1" />
     <item value="0x34" name="Medion P1" />
     <item value="0x35" name="Campbell P1" />
     <item value="0x36" name="Snytesis P1" />
     <item value="0x37" name="Uryudo P1" />
     <item value="0x38" name="Waltz P1" />
     <item value="0x39" name="Rock P1" />
-    <item value="0x3A" name="Barnard P1" />
+    <item value="0x3A" name="Bernard P1" />
     <item value="0x3B" name="Zero P1" />
     <item value="0x3C" name="Hazuki P1" />
     <item value="0x3D" name="David P1" />
-    <item value="0x3E" name="Hedoba P1" />
+    <item value="0x3E" name="Hedva P1" />
     <item value="0x3F" name="Penko P1" />
     <item value="0x40" name="Kate P1" />
     <item value="0x41" name="Rogan P1" />
@@ -109,11 +109,11 @@
     <item value="0x6A" name="Uryudo P2" />
     <item value="0x6B" name="Waltz P2" />
     <item value="0x6C" name="Rock P2" />
-    <item value="0x6D" name="Barnard P2" />
+    <item value="0x6D" name="Bernard P2" />
     <item value="0x6E" name="Zero P2" />
     <item value="0x6F" name="Hazuki P2" />
     <item value="0x70" name="David P2" />
-    <item value="0x71" name="Hedoba P2" />
+    <item value="0x71" name="Hedva P2" />
     <item value="0x72" name="Gracia P2" />
     <item value="0x73" name="Donhort P2" />
     <item value="0x74" name="Hera P2" />
@@ -122,7 +122,7 @@
     <item value="0x77" name="Garosh P2" />
     <item value="0x78" name="Jade P2" />
     <item value="0x79" name="Penko P2" />
-    <item value="0x7A" name="Papesh P2" />
+    <item value="0x7A" name="Pappets P2" />
     <item value="0x7B" name="Kate P2" />
     <item value="0x7C" name="Rogan P2" />
     <item value="0x7D" name="Edmund P2" />

@@ -1,35 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
-    <item value="0x00" name="(none)" />
-    <item value="0x01" name="Synbios (Unpromoted)" />
-    <item value="0x02" name="Synbios (Promoted)" />
-    <item value="0x03" name="Masqurin (Unpromoted)" />
-    <item value="0x04" name="Masqurin (Promoted)" />
-    <item value="0x05" name="Grace (Unpromoted)" />
-    <item value="0x06" name="Grace (Promoted)" />
-    <item value="0x07" name="Irene (Unpromoted)" />
-    <item value="0x08" name="Irene (Promoted)" />
-    <item value="0x09" name="Julian (Unpromoted)" />
-    <item value="0x0A" name="Julian (Promoted)" />
-    <item value="0x0B" name="Kahn (Unpromoted)" />
-    <item value="0x0C" name="Kahn (Promoted)" />
+    <item value="0x00" name="--" />
+    <item value="0x01" name="Synbios U" />
+    <item value="0x02" name="Synbios P" />
+    <item value="0x03" name="Masqurin U" />
+    <item value="0x04" name="Masqurin P" />
+    <item value="0x05" name="Grace U" />
+    <item value="0x06" name="Grace P" />
+    <item value="0x07" name="Irene U" />
+    <item value="0x08" name="Irene P" />
+    <item value="0x09" name="Julian U" />
+    <item value="0x0A" name="Julian P" />
+    <item value="0x0B" name="Kahn U" />
+    <item value="0x0C" name="Kahn P" />
     <item value="0x0D" name="Noon" />
     <item value="0x0E" name="Hagane" />
     <item value="0x0F" name="Murasame" />
     <item value="0x10" name="Twiggy" />
     <item value="0x11" name="Piper" />
-    <item value="0x12" name="Medion (Unpromoted)" />
-    <item value="0x13" name="Medion (Promoted)" />
-    <item value="0x14" name="Syntesis (Unpromoted" />
-    <item value="0x15" name="Syntesis (Promoted)" />
-    <item value="0x16" name="Uryudo (Unpromoted)" />
-    <item value="0x17" name="Uryudo (Promoted)" />
-    <item value="0x18" name="Hazuki (Unpromoted)" />
-    <item value="0x19" name="Hazuki (Promoted)" />
-    <item value="0x1a" name="Hedoba (Unpromoted)" />
-    <item value="0x1b" name="Hedoba (Promoted)" />
+    <item value="0x12" name="Medion U" />
+    <item value="0x13" name="Medion P" />
+    <item value="0x14" name="Syntesis U" />
+    <item value="0x15" name="Syntesis P" />
+    <item value="0x16" name="Uryudo U" />
+    <item value="0x17" name="Uryudo P" />
+    <item value="0x18" name="Hazuki U" />
+    <item value="0x19" name="Hazuki P" />
+    <item value="0x1a" name="Hedva U" />
+    <item value="0x1b" name="Hedva P" />
     <item value="0x1c" name="Hera" />
-    <item value="0x1d" name="unknown" />
-    <item value="0x1e" name="unknown" />
+    <item value="0x1d" name="Unknown" />
+    <item value="0x1e" name="Unknown" />
     <item value="0x1f" name="Arthur" />
 </items>

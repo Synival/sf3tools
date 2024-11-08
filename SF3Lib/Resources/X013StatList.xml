@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
-    <item value="0x00" name="atk/def" />
-    <item value="0x02" name="crit/succumb/magicres" />
-    <item value="0x04" name="magic" />
-    <item value="0x06" name="exp/gold?" />
-    <item value="0x08" name="unknown" />
-    <item value="0x0a" name="unknown2" />
-    <item value="0x0c" name="luck" />
-    <item value="0x0e" name="damage reduction. unknown source" />
+    <item value="0x00" name="Atk/Def" />
+    <item value="0x02" name="Crit/Succumb/MagicRes" />
+    <item value="0x04" name="Magic" />
+    <item value="0x06" name="Exp/Gold?" />
+    <item value="0x08" name="Unknown" />
+    <item value="0x0a" name="Unknown2" />
+    <item value="0x0c" name="Luck" />
+    <item value="0x0e" name="Damage reduction. Unknown source" />
 </items>

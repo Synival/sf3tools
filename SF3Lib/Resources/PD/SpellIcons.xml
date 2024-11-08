@@ -22,22 +22,22 @@
     <item value="0x13" name="Chant" />
     <item value="0x14" name="Antidote" />
     <item value="0x15" name="Return" />
-    <item value="0x16" name="Spider web stha" />
-    <item value="0x17" name="Anger stha" />
-    <item value="0x18" name="Akashi stha" />
-    <item value="0x19" name="Madness stha" />
-    <item value="0x1A" name="Sleep stha ninja" />
-    <item value="0x1B" name="Spiritual stha" />
-    <item value="0x1C" name="Talisman stha" />
-    <item value="0x1D" name="Gods wind stha" />
-    <item value="0x1E" name="Heal stha" />
-    <item value="0x1F" name="Aura stha" />
-    <item value="0x20" name="Restore stha" />
-    <item value="0x21" name="Raise stha" />
-    <item value="0x22" name="Antidote stha" />
-    <item value="0x23" name="Healing stha" />
-    <item value="0x24" name="Praying stha" />
-    <item value="0x25" name="Revival stha" />
+    <item value="0x16" name="Spider Web STHA" />
+    <item value="0x17" name="Anger STHA" />
+    <item value="0x18" name="Akashi STHA" />
+    <item value="0x19" name="Madness STHA" />
+    <item value="0x1A" name="Sleep STHA Ninja" />
+    <item value="0x1B" name="Spiritual STHA" />
+    <item value="0x1C" name="Talisman STHA" />
+    <item value="0x1D" name="Gods Wind STHA" />
+    <item value="0x1E" name="Heal STHA" />
+    <item value="0x1F" name="Aura STHA" />
+    <item value="0x20" name="Restore STHA" />
+    <item value="0x21" name="Raise STHA" />
+    <item value="0x22" name="Antidote STHA" />
+    <item value="0x23" name="Healing STHA" />
+    <item value="0x24" name="Praying STHA" />
+    <item value="0x25" name="Revival STHA" />
     <item value="0x26" name="Phoenix" />
     <item value="0x27" name="Wendigo" />
     <item value="0x28" name="Tiamat" />

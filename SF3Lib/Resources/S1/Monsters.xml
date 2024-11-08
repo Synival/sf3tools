@@ -8,15 +8,15 @@
     <item value="0x05" name="Silver Knight" />
     <item value="0x06" name="Pegasus Knight" />
     <item value="0x07" name="Bow Knight" />
-    <item value="0x08" name="Horseman (Unused)" />
+    <item value="0x08" name="Horseman (unused)" />
     <item value="0x09" name="Kaiser Guard" />
     <item value="0x0A" name="Dark Knight" />
     <item value="0x0B" name="White Knight" />
     <item value="0x0C" name="Saint" />
     <item value="0x0D" name="Commander" />
-    <item value="0x0E" name="Giant Knight (Unused)" />
+    <item value="0x0E" name="Giant Knight (unused)" />
     <item value="0x0F" name="Lizard Man" />
-    <item value="0x10" name="Dragon Newt (Unused)" />
+    <item value="0x10" name="Dragon Newt (unused)" />
     <item value="0x11" name="Hellhound" />
     <item value="0x12" name="Cerberus" />
     <item value="0x13" name="Scaven" />
@@ -24,7 +24,7 @@
     <item value="0x15" name="Goblin" />
     <item value="0x16" name="Skeleton" />
     <item value="0x17" name="Zombie" />
-    <item value="0x18" name="Wolf Baron (Unused)" />
+    <item value="0x18" name="Wolf Baron (unused)" />
     <item value="0x19" name="Clay Golem" />
     <item value="0x1A" name="Worm" />
     <item value="0x1B" name="Durahan" />
@@ -34,11 +34,11 @@
     <item value="0x1F" name="Golem" />
     <item value="0x20" name="Nothing (Mad Muscle)" />
     <item value="0x21" name="Giga Breaker" />
-    <item value="0x22" name="Talos (Unused)" />
+    <item value="0x22" name="Talos (unused)" />
     <item value="0x23" name="Nothing (Brover)" />
     <item value="0x24" name="Nothing (Colossus)" />
     <item value="0x25" name="Bat" />
-    <item value="0x26" name="Slash Bat (Unused)" />
+    <item value="0x26" name="Slash Bat (unused)" />
     <item value="0x27" name="Birdman" />
     <item value="0x28" name="Nothing (Wing Knight)" />
     <item value="0x29" name="Dragon (Green)" />
@@ -58,7 +58,7 @@
     <item value="0x37" name="Imperial Mage" />
     <item value="0x38" name="Master Mage" />
     <item value="0x39" name="Skull Mage" />
-    <item value="0x3A" name="Death Mage (Unused)" />
+    <item value="0x3A" name="Death Mage (unused)" />
     <item value="0x3B" name="Nothing (Demon Mage)" />
     <item value="0x3C" name="Sorcerer" />
     <item value="0x3D" name="Priest" />

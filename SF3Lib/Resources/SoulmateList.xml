@@ -435,36 +435,36 @@
     <item value="0x1b0" name="David - Bernard" />
     <item value="0x1b1" name="David - Zero" />
     <item value="0x1b2" name="David - Hazuki" />
-    <item value="0x1b3" name="Hedoba - Synbios" />
-    <item value="0x1b4" name="Hedoba - Dantares" />
-    <item value="0x1b5" name="Hedoba - Masqurin" />
-    <item value="0x1b6" name="Hedoba - Grace" />
-    <item value="0x1b7" name="Hedoba - Hayward" />
-    <item value="0x1b8" name="Hedoba - Obright" />
-    <item value="0x1b9" name="Hedoba - Irene" />
-    <item value="0x1ba" name="Hedoba - Julian (Scenario 1)" />
-    <item value="0x1bb" name="Hedoba - Cybel" />
-    <item value="0x1bc" name="Hedoba - Eldar" />
-    <item value="0x1bd" name="Hedoba - Kahn" />
-    <item value="0x1be" name="Hedoba - Noon" />
-    <item value="0x1bf" name="Hedoba - Justin" />
-    <item value="0x1c0" name="Hedoba - Horst" />
-    <item value="0x1c1" name="Hedoba - Penn" />
-    <item value="0x1c2" name="Hedoba - Rattchet" />
-    <item value="0x1c3" name="Hedoba - Frank" />
-    <item value="0x1c4" name="Hedoba - Hagane" />
-    <item value="0x1c5" name="Hedoba - Murasame" />
-    <item value="0x1c6" name="Hedoba - Fynnding" />
-    <item value="0x1c7" name="Hedoba - Medion" />
-    <item value="0x1c8" name="Hedoba - Cambell" />
-    <item value="0x1c9" name="Hedoba - Syntesis" />
-    <item value="0x1ca" name="Hedoba - Uryudo" />
-    <item value="0x1cb" name="Hedoba - Waltz" />
-    <item value="0x1cc" name="Hedoba - Rock" />
-    <item value="0x1cd" name="Hedoba - Bernard" />
-    <item value="0x1ce" name="Hedoba - Zero" />
-    <item value="0x1cf" name="Hedoba - Hazuki" />
-    <item value="0x1d0" name="Hedoba - David" />
+    <item value="0x1b3" name="Hedva - Synbios" />
+    <item value="0x1b4" name="Hedva - Dantares" />
+    <item value="0x1b5" name="Hedva - Masqurin" />
+    <item value="0x1b6" name="Hedva - Grace" />
+    <item value="0x1b7" name="Hedva - Hayward" />
+    <item value="0x1b8" name="Hedva - Obright" />
+    <item value="0x1b9" name="Hedva - Irene" />
+    <item value="0x1ba" name="Hedva - Julian (Scenario 1)" />
+    <item value="0x1bb" name="Hedva - Cybel" />
+    <item value="0x1bc" name="Hedva - Eldar" />
+    <item value="0x1bd" name="Hedva - Kahn" />
+    <item value="0x1be" name="Hedva - Noon" />
+    <item value="0x1bf" name="Hedva - Justin" />
+    <item value="0x1c0" name="Hedva - Horst" />
+    <item value="0x1c1" name="Hedva - Penn" />
+    <item value="0x1c2" name="Hedva - Rattchet" />
+    <item value="0x1c3" name="Hedva - Frank" />
+    <item value="0x1c4" name="Hedva - Hagane" />
+    <item value="0x1c5" name="Hedva - Murasame" />
+    <item value="0x1c6" name="Hedva - Fynnding" />
+    <item value="0x1c7" name="Hedva - Medion" />
+    <item value="0x1c8" name="Hedva - Cambell" />
+    <item value="0x1c9" name="Hedva - Syntesis" />
+    <item value="0x1ca" name="Hedva - Uryudo" />
+    <item value="0x1cb" name="Hedva - Waltz" />
+    <item value="0x1cc" name="Hedva - Rock" />
+    <item value="0x1cd" name="Hedva - Bernard" />
+    <item value="0x1ce" name="Hedva - Zero" />
+    <item value="0x1cf" name="Hedva - Hazuki" />
+    <item value="0x1d0" name="Hedva - David" />
     <item value="0x1d1" name="Julian (Scenario 2) - Synbios" />
     <item value="0x1d2" name="Julian (Scenario 2) - Dantares" />
     <item value="0x1d3" name="Julian (Scenario 2) - Masqurin" />
@@ -495,7 +495,7 @@
     <item value="0x1ec" name="Julian (Scenario 2) - Zero" />
     <item value="0x1ed" name="Julian (Scenario 2) - Hazuki" />
     <item value="0x1ee" name="Julian (Scenario 2) - David" />
-    <item value="0x1ef" name="Julian (Scenario 2) - Hedoba" />
+    <item value="0x1ef" name="Julian (Scenario 2) - Hedva" />
     <item value="0x1f0" name="Donhort - Synbios" />
     <item value="0x1f1" name="Donhort - Dantares" />
     <item value="0x1f2" name="Donhort - Masqurin" />
@@ -526,7 +526,7 @@
     <item value="0x20b" name="Donhort - Zero" />
     <item value="0x20c" name="Donhort - Hazuki" />
     <item value="0x20d" name="Donhort - David" />
-    <item value="0x20e" name="Donhort - Hedoba" />
+    <item value="0x20e" name="Donhort - Hedva" />
     <item value="0x20f" name="Donhort - Julian (Scenario 2)" />
     <item value="0x210" name="Hera - Synbios" />
     <item value="0x211" name="Hera - Dantares" />
@@ -558,7 +558,7 @@
     <item value="0x22b" name="Hera - Zero" />
     <item value="0x22c" name="Hera - Hazuki" />
     <item value="0x22d" name="Hera - David" />
-    <item value="0x22e" name="Hera - Hedoba" />
+    <item value="0x22e" name="Hera - Hedva" />
     <item value="0x22f" name="Hera - Julian (Scenario 2)" />
     <item value="0x230" name="Hera - Donhort" />
     <item value="0x231" name="Robby - Synbios" />
@@ -591,7 +591,7 @@
     <item value="0x24c" name="Robby - Zero" />
     <item value="0x24d" name="Robby - Hazuki" />
     <item value="0x24e" name="Robby - David" />
-    <item value="0x24f" name="Robby - Hedoba" />
+    <item value="0x24f" name="Robby - Hedva" />
     <item value="0x250" name="Robby - Julian (Scenario 2)" />
     <item value="0x251" name="Robby - Donhort" />
     <item value="0x252" name="Robby - Hera" />
@@ -625,7 +625,7 @@
     <item value="0x26e" name="Arthur - Zero" />
     <item value="0x26f" name="Arthur - Hazuki" />
     <item value="0x270" name="Arthur - David" />
-    <item value="0x271" name="Arthur - Hedoba" />
+    <item value="0x271" name="Arthur - Hedva" />
     <item value="0x272" name="Arthur - Julian (Scenario 2)" />
     <item value="0x273" name="Arthur - Donhort" />
     <item value="0x274" name="Arthur - Hera" />
@@ -660,7 +660,7 @@
     <item value="0x291" name="Garosh - Zero" />
     <item value="0x292" name="Garosh - Hazuki" />
     <item value="0x293" name="Garosh - David" />
-    <item value="0x294" name="Garosh - Hedoba" />
+    <item value="0x294" name="Garosh - Hedva" />
     <item value="0x295" name="Garosh - Julian (Scenario 2)" />
     <item value="0x296" name="Garosh - Donhort" />
     <item value="0x297" name="Garosh - Hera" />
@@ -696,7 +696,7 @@
     <item value="0x2b5" name="Jade - Zero" />
     <item value="0x2b6" name="Jade - Hazuki" />
     <item value="0x2b7" name="Jade - David" />
-    <item value="0x2b8" name="Jade - Hedoba" />
+    <item value="0x2b8" name="Jade - Hedva" />
     <item value="0x2b9" name="Jade - Julian (Scenario 2)" />
     <item value="0x2ba" name="Jade - Donhort" />
     <item value="0x2bb" name="Jade - Hera" />
@@ -733,7 +733,7 @@
     <item value="0x2da" name="Penko - Zero" />
     <item value="0x2db" name="Penko - Hazuki" />
     <item value="0x2dc" name="Penko - David" />
-    <item value="0x2dd" name="Penko - Hedoba" />
+    <item value="0x2dd" name="Penko - Hedva" />
     <item value="0x2de" name="Penko - Julian (Scenario 2)" />
     <item value="0x2df" name="Penko - Donhort" />
     <item value="0x2e0" name="Penko - Hera" />
@@ -771,7 +771,7 @@
     <item value="0x300" name="Papetts - Zero" />
     <item value="0x301" name="Papetts - Hazuki" />
     <item value="0x302" name="Papetts - David" />
-    <item value="0x303" name="Papetts - Hedoba" />
+    <item value="0x303" name="Papetts - Hedva" />
     <item value="0x304" name="Papetts - Julian (Scenario 2)" />
     <item value="0x305" name="Papetts - Donhort" />
     <item value="0x306" name="Papetts - Hera" />
@@ -810,7 +810,7 @@
     <item value="0x327" name="Kate - Zero" />
     <item value="0x328" name="Kate - Hazuki" />
     <item value="0x329" name="Kate - David" />
-    <item value="0x32a" name="Kate - Hedoba" />
+    <item value="0x32a" name="Kate - Hedva" />
     <item value="0x32b" name="Kate - Gracia" />
     <item value="0x32c" name="Kate - Donhort" />
     <item value="0x32d" name="Kate - Hera" />
@@ -850,7 +850,7 @@
     <item value="0x34f" name="Rogan - Zero" />
     <item value="0x350" name="Rogan - Hazuki" />
     <item value="0x351" name="Rogan - David" />
-    <item value="0x352" name="Rogan - Hedoba" />
+    <item value="0x352" name="Rogan - Hedva" />
     <item value="0x353" name="Rogan - Gracia" />
     <item value="0x354" name="Rogan - Donhort" />
     <item value="0x355" name="Rogan - Hera" />
@@ -891,7 +891,7 @@
     <item value="0x378" name="Edmund - Zero" />
     <item value="0x379" name="Edmund - Hazuki" />
     <item value="0x37a" name="Edmund - David" />
-    <item value="0x37b" name="Edmund - Hedoba" />
+    <item value="0x37b" name="Edmund - Hedva" />
     <item value="0x37c" name="Edmund - Gracia" />
     <item value="0x37d" name="Edmund - Donhort" />
     <item value="0x37e" name="Edmund - Hera" />
@@ -933,7 +933,7 @@
     <item value="0x3a2" name="Isabella - Zero" />
     <item value="0x3a3" name="Isabella - Hazuki" />
     <item value="0x3a4" name="Isabella - David" />
-    <item value="0x3a5" name="Isabella - Hedoba" />
+    <item value="0x3a5" name="Isabella - Hedva" />
     <item value="0x3a6" name="Isabella - Gracia" />
     <item value="0x3a7" name="Isabella - Donhort" />
     <item value="0x3a8" name="Isabella - Hera" />
@@ -976,7 +976,7 @@
     <item value="0x3cd" name="Brigit - Zero" />
     <item value="0x3ce" name="Brigit - Hazuki" />
     <item value="0x3cf" name="Brigit - David" />
-    <item value="0x3d0" name="Brigit - Hedoba" />
+    <item value="0x3d0" name="Brigit - Hedva" />
     <item value="0x3d1" name="Brigit - Gracia" />
     <item value="0x3d2" name="Brigit - Donhort" />
     <item value="0x3d3" name="Brigit - Hera" />
@@ -1020,7 +1020,7 @@
     <item value="0x3f9" name="Cyclops - Zero" />
     <item value="0x3fa" name="Cyclops - Hazuki" />
     <item value="0x3fb" name="Cyclops - David" />
-    <item value="0x3fc" name="Cyclops - Hedoba" />
+    <item value="0x3fc" name="Cyclops - Hedva" />
     <item value="0x3fd" name="Cyclops - Gracia" />
     <item value="0x3fe" name="Cyclops - Donhort" />
     <item value="0x3ff" name="Cyclops - Hera" />
@@ -1065,7 +1065,7 @@
     <item value="0x426" name="Rollie - Zero" />
     <item value="0x427" name="Rollie - Hazuki" />
     <item value="0x428" name="Rollie - David" />
-    <item value="0x429" name="Rollie - Hedoba" />
+    <item value="0x429" name="Rollie - Hedva" />
     <item value="0x42a" name="Rollie - Gracia" />
     <item value="0x42b" name="Rollie - Donhort" />
     <item value="0x42c" name="Rollie - Hera" />
@@ -1111,7 +1111,7 @@
     <item value="0x454" name="Thousand - Zero" />
     <item value="0x455" name="Thousand - Hazuki" />
     <item value="0x456" name="Thousand - David" />
-    <item value="0x457" name="Thousand - Hedoba" />
+    <item value="0x457" name="Thousand - Hedva" />
     <item value="0x458" name="Thousand - Gracia" />
     <item value="0x459" name="Thousand - Donhort" />
     <item value="0x45a" name="Thousand - Hera" />
@@ -1158,7 +1158,7 @@
     <item value="0x483" name="Leon - Zero" />
     <item value="0x484" name="Leon - Hazuki" />
     <item value="0x485" name="Leon - David" />
-    <item value="0x486" name="Leon - Hedoba" />
+    <item value="0x486" name="Leon - Hedva" />
     <item value="0x487" name="Leon - Gracia" />
     <item value="0x488" name="Leon - Donhort" />
     <item value="0x489" name="Leon - Hera" />
@@ -1206,7 +1206,7 @@
     <item value="0x4b3" name="Honesty - Zero" />
     <item value="0x4b4" name="Honesty - Hazuki" />
     <item value="0x4b5" name="Honesty - David" />
-    <item value="0x4b6" name="Honesty - Hedoba" />
+    <item value="0x4b6" name="Honesty - Hedva" />
     <item value="0x4b7" name="Honesty - Gracia" />
     <item value="0x4b8" name="Honesty - Donhort" />
     <item value="0x4b9" name="Honesty - Hera" />
@@ -1255,7 +1255,7 @@
     <item value="0x4e4" name="Produn - Zero" />
     <item value="0x4e5" name="Produn - Hazuki" />
     <item value="0x4e6" name="Produn - David" />
-    <item value="0x4e7" name="Produn - Hedoba" />
+    <item value="0x4e7" name="Produn - Hedva" />
     <item value="0x4e8" name="Produn - Gracia" />
     <item value="0x4e9" name="Produn - Donhort" />
     <item value="0x4ea" name="Produn - Hera" />
@@ -1305,7 +1305,7 @@
     <item value="0x516" name="Harold - Zero" />
     <item value="0x517" name="Harold - Hazuki" />
     <item value="0x518" name="Harold - David" />
-    <item value="0x519" name="Harold - Hedoba" />
+    <item value="0x519" name="Harold - Hedva" />
     <item value="0x51a" name="Harold - Gracia" />
     <item value="0x51b" name="Harold - Donhort" />
     <item value="0x51c" name="Harold - Hera" />
@@ -1356,7 +1356,7 @@
     <item value="0x549" name="Pendolf - Zero" />
     <item value="0x54a" name="Pendolf - Hazuki" />
     <item value="0x54b" name="Pendolf - David" />
-    <item value="0x54c" name="Pendolf - Hedoba" />
+    <item value="0x54c" name="Pendolf - Hedva" />
     <item value="0x54d" name="Pendolf - Gracia" />
     <item value="0x54e" name="Pendolf - Donhort" />
     <item value="0x54f" name="Pendolf - Hera" />
@@ -1408,7 +1408,7 @@
     <item value="0x57d" name="Spiriel - Zero" />
     <item value="0x57e" name="Spiriel - Hazuki" />
     <item value="0x57f" name="Spiriel - David" />
-    <item value="0x580" name="Spiriel - Hedoba" />
+    <item value="0x580" name="Spiriel - Hedva" />
     <item value="0x581" name="Spiriel - Gracia" />
     <item value="0x582" name="Spiriel - Donhort" />
     <item value="0x583" name="Spiriel - Hera" />
@@ -1461,7 +1461,7 @@
     <item value="0x5b2" name="Jubei - Zero" />
     <item value="0x5b3" name="Jubei - Hazuki" />
     <item value="0x5b4" name="Jubei - David" />
-    <item value="0x5b5" name="Jubei - Hedoba" />
+    <item value="0x5b5" name="Jubei - Hedva" />
     <item value="0x5b6" name="Jubei - Gracia" />
     <item value="0x5b7" name="Jubei - Donhort" />
     <item value="0x5b8" name="Jubei - Hera" />
@@ -1515,7 +1515,7 @@
     <item value="0x5e8" name="Primula - Zero" />
     <item value="0x5e9" name="Primula - Hazuki" />
     <item value="0x5ea" name="Primula - David" />
-    <item value="0x5eb" name="Primula - Hedoba" />
+    <item value="0x5eb" name="Primula - Hedva" />
     <item value="0x5ec" name="Primula - Gracia" />
     <item value="0x5ed" name="Primula - Donhort" />
     <item value="0x5ee" name="Primula - Hera" />
@@ -1570,7 +1570,7 @@
     <item value="0x61f" name="Marky - Zero" />
     <item value="0x620" name="Marky - Hazuki" />
     <item value="0x621" name="Marky - David" />
-    <item value="0x622" name="Marky - Hedoba" />
+    <item value="0x622" name="Marky - Hedva" />
     <item value="0x623" name="Marky - Gracia" />
     <item value="0x624" name="Marky - Donhort" />
     <item value="0x625" name="Marky - Hera" />
@@ -1626,7 +1626,7 @@
     <item value="0x657" name="Turk - Zero" />
     <item value="0x658" name="Turk - Hazuki" />
     <item value="0x659" name="Turk - David" />
-    <item value="0x65a" name="Turk - Hedoba" />
+    <item value="0x65a" name="Turk - Hedva" />
     <item value="0x65b" name="Turk - Gracia" />
     <item value="0x65c" name="Turk - Donhort" />
     <item value="0x65d" name="Turk - Hera" />
@@ -1683,7 +1683,7 @@
     <item value="0x690" name="Unoma - Zero" />
     <item value="0x691" name="Unoma - Hazuki" />
     <item value="0x692" name="Unoma - David" />
-    <item value="0x693" name="Unoma - Hedoba" />
+    <item value="0x693" name="Unoma - Hedva" />
     <item value="0x694" name="Unoma - Gracia" />
     <item value="0x695" name="Unoma - Donhort" />
     <item value="0x696" name="Unoma - Hera" />
@@ -1741,7 +1741,7 @@
     <item value="0x6ca" name="Jane - Zero" />
     <item value="0x6cb" name="Jane - Hazuki" />
     <item value="0x6cc" name="Jane - David" />
-    <item value="0x6cd" name="Jane - Hedoba" />
+    <item value="0x6cd" name="Jane - Hedva" />
     <item value="0x6ce" name="Jane - Gracia" />
     <item value="0x6cf" name="Jane - Donhort" />
     <item value="0x6d0" name="Jane - Hera" />

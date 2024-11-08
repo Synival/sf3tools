@@ -1,37 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
-    <item value="0x00" name="(none)" />
-    <item value="0x01" name="Synbios (Unpromoted)" />
-    <item value="0x02" name="Synbios (Promoted)" />
-    <item value="0x03" name="Masqurin (Unpromoted)" />
-    <item value="0x04" name="Masqurin (Promoted)" />
-    <item value="0x05" name="Grace (Unpromoted)" />
-    <item value="0x06" name="Grace (Promoted)" />
-    <item value="0x07" name="Irene (Unpromoted)" />
-    <item value="0x08" name="Irene (Promoted)" />
-    <item value="0x09" name="Julian (Unpromoted)" />
-    <item value="0x0A" name="Julian (Promoted)" />
-    <item value="0x0B" name="Kahn (Unpromoted)" />
-    <item value="0x0C" name="Kahn (Promoted)" />
+    <item value="0x00" name="--" />
+    <item value="0x01" name="Synbios U" />
+    <item value="0x02" name="Synbios P" />
+    <item value="0x03" name="Masqurin U" />
+    <item value="0x04" name="Masqurin P" />
+    <item value="0x05" name="Grace U" />
+    <item value="0x06" name="Grace P" />
+    <item value="0x07" name="Irene U" />
+    <item value="0x08" name="Irene P" />
+    <item value="0x09" name="Julian U" />
+    <item value="0x0A" name="Julian P" />
+    <item value="0x0B" name="Kahn U" />
+    <item value="0x0C" name="Kahn P" />
     <item value="0x0D" name="Noon" />
     <item value="0x0E" name="Hagane" />
     <item value="0x0F" name="Murasame" />
     <item value="0x10" name="Twiggy" />
     <item value="0x11" name="Piper" />
-    <item value="0x12" name="Medion (Unpromoted)" />
-    <item value="0x13" name="Medion (Promoted)" />
-    <item value="0x14" name="Syntesis (Unpromoted" />
-    <item value="0x15" name="Syntesis (Promoted)" />
-    <item value="0x16" name="Uryudo (Unpromoted)" />
-    <item value="0x17" name="Uryudo (Promoted)" />
-    <item value="0x18" name="Hazuki (Unpromoted)" />
-    <item value="0x19" name="Hazuki (Promoted)" />
-    <item value="0x1a" name="Hedoba (Unpromoted)" />
-    <item value="0x1b" name="Hedoba (Promoted)" />
+    <item value="0x12" name="Medion U" />
+    <item value="0x13" name="Medion P" />
+    <item value="0x14" name="Syntesis U" />
+    <item value="0x15" name="Syntesis P" />
+    <item value="0x16" name="Uryudo U" />
+    <item value="0x17" name="Uryudo P" />
+    <item value="0x18" name="Hazuki U" />
+    <item value="0x19" name="Hazuki P" />
+    <item value="0x1a" name="Hedva U" />
+    <item value="0x1b" name="Hedva P" />
     <item value="0x1c" name="Hera" />
-    <item value="0x1d" name="Masked monk" />
+    <item value="0x1d" name="Masked Monk" />
     <item value="0x1e" name="Imperial Mage" />
-    <item value="0x1f" name="Arthur" /> //
+    <item value="0x1f" name="Arthur" />
     <item value="0x20" name="Gracia" />
     <item value="0x21" name="Edmund" />
     <item value="0x22" name="Isabella" />
@@ -42,37 +42,37 @@
     <item value="0x27" name="Jubei" />
     <item value="0x28" name="Primula" />
     <item value="0x29" name="Marky" />
-    <item value="0x2A" name="Synbios (Innovator)" />
-    <item value="0x2B" name="Masqurin (Innovator)" />
-    <item value="0x2C" name="Grace (Innovator)" />
-    <item value="0x2D" name="Irene (Innovator)" />
-    <item value="0x2E" name="Julian (Innovator)" />
-    <item value="0x2F" name="Kahn (Innovator)" />
-    <item value="0x30" name="Noon (Innovator)" />
-    <item value="0x31" name="Hagane (Innovator)" />
-    <item value="0x32" name="Murasame (Innovator)" />
-    <item value="0x33" name="Medion (Promoted)" />
-    <item value="0x34" name="Syntesis (Unpromoted" />
-    <item value="0x35" name="Uryudo (Innovator)" />
-    <item value="0x36" name="Hazuki (Innovator)" />
-    <item value="0x37" name="Hedoba (Innovator)" />
-    <item value="0x38" name="Gracia (Innovator)" />
-    <item value="0x39" name="Hera (Innovator)" />
-    <item value="0x3a" name="Arthur (Innovator)" />
-    <item value="0x3b" name="Edmund (Innovator)" />
-    <item value="0x3c" name="Isabella (Innovator)" />
-    <item value="0x3d" name="Brigit (Innovator)" />
-    <item value="0x3e" name="Rollie (Innovator)" />
-    <item value="0x3f" name="Produn (Innovator)" />
-    <item value="0x40" name="Pendolf (Innovator)" />
-    <item value="0x41" name="Jubei (Innovator)" />
-    <item value="0x42" name="Primula (Innovator)" />
-    <item value="0x43" name="Marky (Innovator)" /> //
-    <item value="0x44" name="Galm/Hell succubus" />
-    <item value="0x45" name="High ninja" />
+    <item value="0x2A" name="Synbios P2" />
+    <item value="0x2B" name="Masqurin P2" />
+    <item value="0x2C" name="Grace P2" />
+    <item value="0x2D" name="Irene P2" />
+    <item value="0x2E" name="Julian P2" />
+    <item value="0x2F" name="Kahn P2" />
+    <item value="0x30" name="Noon P2" />
+    <item value="0x31" name="Hagane P2" />
+    <item value="0x32" name="Murasame P2" />
+    <item value="0x33" name="Medion P" />
+    <item value="0x34" name="Syntesis U" />
+    <item value="0x35" name="Uryudo P2" />
+    <item value="0x36" name="Hazuki P2" />
+    <item value="0x37" name="Hedva P2" />
+    <item value="0x38" name="Gracia P2" />
+    <item value="0x39" name="Hera P2" />
+    <item value="0x3a" name="Arthur P2" />
+    <item value="0x3b" name="Edmund P2" />
+    <item value="0x3c" name="Isabella P2" />
+    <item value="0x3d" name="Brigit P2" />
+    <item value="0x3e" name="Rollie P2" />
+    <item value="0x3f" name="Produn P2" />
+    <item value="0x40" name="Pendolf P2" />
+    <item value="0x41" name="Jubei P2" />
+    <item value="0x42" name="Primula P2" />
+    <item value="0x43" name="Marky P2" />
+    <item value="0x44" name="Galm/Hell Succubus" />
+    <item value="0x45" name="High Ninja" />
     <item value="0x46" name="Blue/Yasha" />
     <item value="0x47" name="Talos/Basanda" />
-    <item value="0x48" name="unknown" />
+    <item value="0x48" name="Unknown" />
     <item value="0x49" name="Braff" />
-    <item value="0x4A" name="Rainblood queen" />
+    <item value="0x4A" name="Rainblood Queen" />
 </items>
