@@ -200,6 +200,9 @@ namespace SF3.Models {
             set => Editor.SetByte(Unknown2Location, (byte) value);
         }
 
+        int conditionallySignedStatUp(int type, int value)
+            => (type == (int) StatUpType.Special || type == (int) StatUpType.Spell) ? value : (sbyte) value;
+
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
         public int StatType1 {
@@ -210,7 +213,7 @@ namespace SF3.Models {
         [BulkCopy]
         [NameGetter(NamedValueType.StatUpValueType, nameof(StatType1))]
         public int StatUp1 {
-            get => Editor.GetByte(StatUp1Location);
+            get => conditionallySignedStatUp(StatType1, Editor.GetByte(StatUp1Location));
             set => Editor.SetByte(StatUp1Location, (byte) value);
         }
 
@@ -224,7 +227,7 @@ namespace SF3.Models {
         [BulkCopy]
         [NameGetter(NamedValueType.StatUpValueType, nameof(StatType2))]
         public int StatUp2 {
-            get => Editor.GetByte(StatUp2Location);
+            get => conditionallySignedStatUp(StatType2, Editor.GetByte(StatUp2Location));
             set => Editor.SetByte(StatUp2Location, (byte) value);
         }
 
@@ -238,7 +241,7 @@ namespace SF3.Models {
         [BulkCopy]
         [NameGetter(NamedValueType.StatUpValueType, nameof(StatType3))]
         public int StatUp3 {
-            get => Editor.GetByte(StatUp3Location);
+            get => conditionallySignedStatUp(StatType3, Editor.GetByte(StatUp3Location));
             set => Editor.SetByte(StatUp3Location, (byte) value);
         }
 
@@ -252,7 +255,7 @@ namespace SF3.Models {
         [BulkCopy]
         [NameGetter(NamedValueType.StatUpValueType, nameof(StatType4))]
         public int StatUp4 {
-            get => Editor.GetByte(StatUp4Location);
+            get => conditionallySignedStatUp(StatType4, Editor.GetByte(StatUp4Location));
             set => Editor.SetByte(StatUp4Location, (byte) value);
         }
 
