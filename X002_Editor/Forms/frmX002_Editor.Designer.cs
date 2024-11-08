@@ -338,13 +338,11 @@ namespace SF3.X002_Editor.Forms
             // lvcSpellsLv1Cost
             // 
             this.lvcSpellsLv1Cost.AspectName = "Lv1Cost";
-            this.lvcSpellsLv1Cost.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv1Cost.Text = "Lv1Cost";
             // 
             // lvcSpellsLv1Pow
             // 
             this.lvcSpellsLv1Pow.AspectName = "Lv1Damage";
-            this.lvcSpellsLv1Pow.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv1Pow.Text = "Lv1Pow";
             // 
             // lvcSpellsLv2Distance
@@ -362,13 +360,11 @@ namespace SF3.X002_Editor.Forms
             // lvcSpellsLv2Cost
             // 
             this.lvcSpellsLv2Cost.AspectName = "Lv2Cost";
-            this.lvcSpellsLv2Cost.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv2Cost.Text = "Lv2Cost";
             // 
             // lvcSpellsLv2Pow
             // 
             this.lvcSpellsLv2Pow.AspectName = "Lv2Damage";
-            this.lvcSpellsLv2Pow.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv2Pow.Text = "Lv2Pow";
             // 
             // lvcSpellsLv3Distance
@@ -386,13 +382,11 @@ namespace SF3.X002_Editor.Forms
             // lvcSpellsLv3Cost
             // 
             this.lvcSpellsLv3Cost.AspectName = "Lv3Cost";
-            this.lvcSpellsLv3Cost.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv3Cost.Text = "Lv3Cost";
             // 
             // lvcSpellsLv3Pow
             // 
             this.lvcSpellsLv3Pow.AspectName = "Lv3Damage";
-            this.lvcSpellsLv3Pow.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv3Pow.Text = "Lv3Pow";
             // 
             // lvcSpellsLv4Distance
@@ -410,13 +404,11 @@ namespace SF3.X002_Editor.Forms
             // lvcSpellsLv4Cost
             // 
             this.lvcSpellsLv4Cost.AspectName = "Lv4Cost";
-            this.lvcSpellsLv4Cost.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv4Cost.Text = "Lv4Cost";
             // 
             // lvcSpellsLvc4Pow
             // 
             this.lvcSpellsLvc4Pow.AspectName = "Lv4Damage";
-            this.lvcSpellsLvc4Pow.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLvc4Pow.Text = "Lv4Pow";
             // 
             // tabItems
@@ -573,14 +565,12 @@ namespace SF3.X002_Editor.Forms
             // lvcItemsAttack
             // 
             this.lvcItemsAttack.AspectName = "Attack";
-            this.lvcItemsAttack.AspectToStringFormat = "{0:X}";
             this.lvcItemsAttack.Text = "Attack";
             this.lvcItemsAttack.Width = 50;
             // 
             // lvcItemsDefense
             // 
             this.lvcItemsDefense.AspectName = "Defense";
-            this.lvcItemsDefense.AspectToStringFormat = "{0:X}";
             this.lvcItemsDefense.Text = "Defense";
             this.lvcItemsDefense.Width = 54;
             // 
@@ -608,7 +598,6 @@ namespace SF3.X002_Editor.Forms
             // lvcItemsUnknown1
             // 
             this.lvcItemsUnknown1.AspectName = "Unknown1";
-            this.lvcItemsUnknown1.AspectToStringFormat = "{0:X}";
             this.lvcItemsUnknown1.Text = "Effective 1 pow";
             this.lvcItemsUnknown1.Width = 90;
             // 
@@ -622,7 +611,6 @@ namespace SF3.X002_Editor.Forms
             // lvcItemsEffective2Pow
             // 
             this.lvcItemsEffective2Pow.AspectName = "Unknown2";
-            this.lvcItemsEffective2Pow.AspectToStringFormat = "{0:X}";
             this.lvcItemsEffective2Pow.Text = "Effective 2 pow";
             this.lvcItemsEffective2Pow.Width = 90;
             // 

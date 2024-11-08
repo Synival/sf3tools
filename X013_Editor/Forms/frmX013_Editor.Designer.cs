@@ -1329,14 +1329,12 @@ namespace SF3.X013_Editor.Forms
             // lvcExpLimitCheckedValue
             // 
             this.lvcExpLimitCheckedValue.AspectName = "ExpCheck";
-            this.lvcExpLimitCheckedValue.AspectToStringFormat = "{0:X}";
             this.lvcExpLimitCheckedValue.Text = "Checked Value";
             this.lvcExpLimitCheckedValue.Width = 100;
             // 
             // lvcExpLimitReplacedValue
             // 
             this.lvcExpLimitReplacedValue.AspectName = "ExpReplacement";
-            this.lvcExpLimitReplacedValue.AspectToStringFormat = "{0:X}";
             this.lvcExpLimitReplacedValue.Text = "Replaced Value";
             this.lvcExpLimitReplacedValue.Width = 115;
             // 
