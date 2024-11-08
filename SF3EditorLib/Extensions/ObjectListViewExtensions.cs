@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
@@ -22,12 +23,43 @@ namespace SF3.Editor.Extensions {
         }
 
         /// <summary>
+        /// Renderer that will display hex values will a special font.
+        /// </summary>
+        private class HexRenderer : BaseRenderer {
+            public static Font HexFont { get; private set; }
+            private static bool _useHexFont = false;
+
+            public HexRenderer() {
+            }
+
+            public override bool RenderSubItem(DrawListViewSubItemEventArgs e, Graphics g, Rectangle cellBounds, object rowObject) {
+                var lvc = ((ObjectListView) e.Item.ListView).GetColumn(e.ColumnIndex);
+                _ = lvc.AspectGetter(rowObject);
+                _useHexFont = lvc.AspectToStringConverter == null && (lvc.AspectToStringFormat?.StartsWith("{0:X") == true);
+                return base.RenderSubItem(e, g, cellBounds, rowObject);
+            }
+
+            public override void Render(Graphics g, Rectangle r) {
+                if (_useHexFont) {
+                    if (HexFont == null)
+                        HexFont = new Font("Lucida Sans Typewriter", Font.Size);
+                    this.Font = HexFont;
+                }
+                base.Render(g, r);
+            }
+        }
+
+        private static HexRenderer GlobalHexRenderer = new HexRenderer();
+
+        /// <summary>
         /// Applies some neat extensions to the ObjectListView.
         /// </summary>
         /// <param name="olv">The ObjectListView to enhance.</param>
         /// <param name="fileEditorFetcher">The function that fetchers the current FileEditor associated for this ObjectListView.</param>
         public static void Enhance(this ObjectListView olv, FileEditorFetcher fileEditorFetcher) {
             olv.SetFileEditorFetcher(fileEditorFetcher);
+            olv.OwnerDraw = true;
+            olv.DefaultRenderer = GlobalHexRenderer;
             foreach (var lvc in olv.AllColumns)
                 lvc.Enhance();
         }
@@ -37,6 +69,10 @@ namespace SF3.Editor.Extensions {
         /// </summary>
         /// <param name="lvc">The ObjectListView column to enhance.</param>
         public static void Enhance(this OLVColumn lvc) {
+            // TODO: maybe put this in the columns? this is a bit extreme!!!
+            if (lvc.AspectToStringFormat == "{0:X}")
+                lvc.AspectToStringFormat = "{0:X2}";
+
             // Add a hook to each AspectGetter that will check for a named value.
             // If a name exists, hijack the AspectToStringConverter to use the name instead.
             // If no name exists, use the standard AspectToStringConverter.
@@ -83,8 +119,10 @@ namespace SF3.Editor.Extensions {
             }
             else if (e.Control is NumericUpDown control) {
                 // Ensure that strings displayed in hex format are edited in hex format.
-                if (e.Column.AspectToStringFormat == "{0:X}")
+                if (e.Column.AspectToStringFormat?.StartsWith("{0:X") == true) {
+                    control.Font = HexRenderer.HexFont;
                     control.Hexadecimal = true;
+                }
             }
         }
 
