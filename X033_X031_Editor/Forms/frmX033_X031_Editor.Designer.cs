@@ -872,280 +872,240 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcStatsHPPromote
             // 
             this.lvcStatsHPPromote.AspectName = "HPPromote";
-            this.lvcStatsHPPromote.AspectToStringFormat = "{0:X}";
             this.lvcStatsHPPromote.Text = "HPPromote";
             this.lvcStatsHPPromote.Width = 70;
             // 
             // lvcStatsHPCurve1
             // 
             this.lvcStatsHPCurve1.AspectName = "HPCurve1";
-            this.lvcStatsHPCurve1.AspectToStringFormat = "{0:X}";
             this.lvcStatsHPCurve1.Text = "HPLv1";
             this.lvcStatsHPCurve1.Width = 50;
             // 
             // lvcStatsHPCurve5
             // 
             this.lvcStatsHPCurve5.AspectName = "HPCurve5";
-            this.lvcStatsHPCurve5.AspectToStringFormat = "{0:X}";
             this.lvcStatsHPCurve5.Text = "HPLv5";
             this.lvcStatsHPCurve5.Width = 50;
             // 
             // lvcStatsHPCurve10
             // 
             this.lvcStatsHPCurve10.AspectName = "HPCurve10";
-            this.lvcStatsHPCurve10.AspectToStringFormat = "{0:X}";
             this.lvcStatsHPCurve10.Text = "HPLv10";
             this.lvcStatsHPCurve10.Width = 65;
             // 
             // lvcStatsHPCurve12_15
             // 
             this.lvcStatsHPCurve12_15.AspectName = "HPCurve12_15";
-            this.lvcStatsHPCurve12_15.AspectToStringFormat = "{0:X}";
             this.lvcStatsHPCurve12_15.Text = "HPLv12/15";
             this.lvcStatsHPCurve12_15.Width = 75;
             // 
             // lvcStatsHPCurve14_20
             // 
             this.lvcStatsHPCurve14_20.AspectName = "HPCurve14_20";
-            this.lvcStatsHPCurve14_20.AspectToStringFormat = "{0:X}";
             this.lvcStatsHPCurve14_20.Text = "HPLv14/20";
             this.lvcStatsHPCurve14_20.Width = 75;
             // 
             // lvcStatsHPCurve17_30
             // 
             this.lvcStatsHPCurve17_30.AspectName = "HPCurve17_30";
-            this.lvcStatsHPCurve17_30.AspectToStringFormat = "{0:X}";
             this.lvcStatsHPCurve17_30.Text = "HPLv17/30";
             this.lvcStatsHPCurve17_30.Width = 75;
             // 
             // lvcStatsHPCurve30_99
             // 
             this.lvcStatsHPCurve30_99.AspectName = "HPCurve30_99";
-            this.lvcStatsHPCurve30_99.AspectToStringFormat = "{0:X}";
             this.lvcStatsHPCurve30_99.Text = "HPLv30/99";
             this.lvcStatsHPCurve30_99.Width = 75;
             // 
             // lvcStatsMPPromote
             // 
             this.lvcStatsMPPromote.AspectName = "MPPromote";
-            this.lvcStatsMPPromote.AspectToStringFormat = "{0:X}";
             this.lvcStatsMPPromote.Text = "MPPromote";
             this.lvcStatsMPPromote.Width = 70;
             // 
             // lvcStatsMPCurve1
             // 
             this.lvcStatsMPCurve1.AspectName = "MPCurve1";
-            this.lvcStatsMPCurve1.AspectToStringFormat = "{0:X}";
             this.lvcStatsMPCurve1.Text = "MPLv1";
             this.lvcStatsMPCurve1.Width = 50;
             // 
             // lvcStatsMPCurve5
             // 
             this.lvcStatsMPCurve5.AspectName = "MPCurve5";
-            this.lvcStatsMPCurve5.AspectToStringFormat = "{0:X}";
             this.lvcStatsMPCurve5.Text = "MPLv5";
             this.lvcStatsMPCurve5.Width = 50;
             // 
             // lvcStatsMPCurve10
             // 
             this.lvcStatsMPCurve10.AspectName = "MPCurve10";
-            this.lvcStatsMPCurve10.AspectToStringFormat = "{0:X}";
             this.lvcStatsMPCurve10.Text = "MPLv10";
             this.lvcStatsMPCurve10.Width = 62;
             // 
             // lvcStatsMPCurve12_15
             // 
             this.lvcStatsMPCurve12_15.AspectName = "MPCurve12_15";
-            this.lvcStatsMPCurve12_15.AspectToStringFormat = "{0:X}";
             this.lvcStatsMPCurve12_15.Text = "MPLv12/15";
             this.lvcStatsMPCurve12_15.Width = 75;
             // 
             // lvcStatsMPCurve14_20
             // 
             this.lvcStatsMPCurve14_20.AspectName = "MPCurve14_20";
-            this.lvcStatsMPCurve14_20.AspectToStringFormat = "{0:X}";
             this.lvcStatsMPCurve14_20.Text = "MPLv14/20";
             this.lvcStatsMPCurve14_20.Width = 75;
             // 
             // lvcStatsMPCurve17_30
             // 
             this.lvcStatsMPCurve17_30.AspectName = "MPCurve17_30";
-            this.lvcStatsMPCurve17_30.AspectToStringFormat = "{0:X}";
             this.lvcStatsMPCurve17_30.Text = "MPLv17/30";
             this.lvcStatsMPCurve17_30.Width = 75;
             // 
             // lvcStatsMPCurve30_99
             // 
             this.lvcStatsMPCurve30_99.AspectName = "MPCurve30_99";
-            this.lvcStatsMPCurve30_99.AspectToStringFormat = "{0:X}";
             this.lvcStatsMPCurve30_99.Text = "MPLv30/99";
             this.lvcStatsMPCurve30_99.Width = 75;
             // 
             // lvcStatsAtkPromote
             // 
             this.lvcStatsAtkPromote.AspectName = "AtkPromote";
-            this.lvcStatsAtkPromote.AspectToStringFormat = "{0:X}";
             this.lvcStatsAtkPromote.Text = "AtkPromote";
             this.lvcStatsAtkPromote.Width = 73;
             // 
             // lvcStatsAtkCurve1
             // 
             this.lvcStatsAtkCurve1.AspectName = "AtkCurve1";
-            this.lvcStatsAtkCurve1.AspectToStringFormat = "{0:X}";
             this.lvcStatsAtkCurve1.Text = "AtkLv1";
             this.lvcStatsAtkCurve1.Width = 53;
             // 
             // lvcStatsAtkCurve5
             // 
             this.lvcStatsAtkCurve5.AspectName = "AtkCurve5";
-            this.lvcStatsAtkCurve5.AspectToStringFormat = "{0:X}";
             this.lvcStatsAtkCurve5.Text = "AtkLv5";
             this.lvcStatsAtkCurve5.Width = 67;
             // 
             // lvcStatsAtkCurve10
             // 
             this.lvcStatsAtkCurve10.AspectName = "AtkCurve10";
-            this.lvcStatsAtkCurve10.AspectToStringFormat = "{0:X}";
             this.lvcStatsAtkCurve10.Text = "AtkLv10";
             this.lvcStatsAtkCurve10.Width = 70;
             // 
             // lvcStatsAtkCurve12_15
             // 
             this.lvcStatsAtkCurve12_15.AspectName = "AtkCurve12_15";
-            this.lvcStatsAtkCurve12_15.AspectToStringFormat = "{0:X}";
             this.lvcStatsAtkCurve12_15.Text = "AtkLv12/15";
             this.lvcStatsAtkCurve12_15.Width = 70;
             // 
             // lvcStatsAtkCurve14_20
             // 
             this.lvcStatsAtkCurve14_20.AspectName = "AtkCurve14_20";
-            this.lvcStatsAtkCurve14_20.AspectToStringFormat = "{0:X}";
             this.lvcStatsAtkCurve14_20.Text = "AtkLv14/20";
             this.lvcStatsAtkCurve14_20.Width = 70;
             // 
             // lvcStatsAtkCurve17_30
             // 
             this.lvcStatsAtkCurve17_30.AspectName = "AtkCurve17_30";
-            this.lvcStatsAtkCurve17_30.AspectToStringFormat = "{0:X}";
             this.lvcStatsAtkCurve17_30.Text = "AtkLv17/30";
             this.lvcStatsAtkCurve17_30.Width = 70;
             // 
             // lvcStatsAtkCurve30_99
             // 
             this.lvcStatsAtkCurve30_99.AspectName = "AtkCurve30_99";
-            this.lvcStatsAtkCurve30_99.AspectToStringFormat = "{0:X}";
             this.lvcStatsAtkCurve30_99.Text = "AtkLv30/99";
             this.lvcStatsAtkCurve30_99.Width = 70;
             // 
             // lvcStatsDefPromote
             // 
             this.lvcStatsDefPromote.AspectName = "DefPromote";
-            this.lvcStatsDefPromote.AspectToStringFormat = "{0:X}";
             this.lvcStatsDefPromote.Text = "DefPromote";
             this.lvcStatsDefPromote.Width = 73;
             // 
             // lvcStatsDefCurve1
             // 
             this.lvcStatsDefCurve1.AspectName = "DefCurve1";
-            this.lvcStatsDefCurve1.AspectToStringFormat = "{0:X}";
             this.lvcStatsDefCurve1.Text = "DefLv1";
             this.lvcStatsDefCurve1.Width = 53;
             // 
             // lvcStatsDefCurve5
             // 
             this.lvcStatsDefCurve5.AspectName = "DefCurve5";
-            this.lvcStatsDefCurve5.AspectToStringFormat = "{0:X}";
             this.lvcStatsDefCurve5.Text = "DefLv5";
             this.lvcStatsDefCurve5.Width = 67;
             // 
             // lvcStatsDefCurve10
             // 
             this.lvcStatsDefCurve10.AspectName = "DefCurve10";
-            this.lvcStatsDefCurve10.AspectToStringFormat = "{0:X}";
             this.lvcStatsDefCurve10.Text = "DefLv2";
             this.lvcStatsDefCurve10.Width = 70;
             // 
             // lvcStatsDefCurve12_15
             // 
             this.lvcStatsDefCurve12_15.AspectName = "DefCurve12_15";
-            this.lvcStatsDefCurve12_15.AspectToStringFormat = "{0:X}";
             this.lvcStatsDefCurve12_15.Text = "DefLv12/15";
             this.lvcStatsDefCurve12_15.Width = 70;
             // 
             // lvcStatsDefCurve14_20
             // 
             this.lvcStatsDefCurve14_20.AspectName = "DefCurve14_20";
-            this.lvcStatsDefCurve14_20.AspectToStringFormat = "{0:X}";
             this.lvcStatsDefCurve14_20.Text = "DefLv14/20";
             this.lvcStatsDefCurve14_20.Width = 70;
             // 
             // lvcStatsDefCurve17_30
             // 
             this.lvcStatsDefCurve17_30.AspectName = "DefCurve17_30";
-            this.lvcStatsDefCurve17_30.AspectToStringFormat = "{0:X}";
             this.lvcStatsDefCurve17_30.Text = "DefLv17/30";
             this.lvcStatsDefCurve17_30.Width = 70;
             // 
             // lvcStatsDefCurve30_99
             // 
             this.lvcStatsDefCurve30_99.AspectName = "DefCurve30_99";
-            this.lvcStatsDefCurve30_99.AspectToStringFormat = "{0:X}";
             this.lvcStatsDefCurve30_99.Text = "DefLv30/99";
             this.lvcStatsDefCurve30_99.Width = 70;
             // 
             // lvcStatsAgiPromote
             // 
             this.lvcStatsAgiPromote.AspectName = "AgiPromote";
-            this.lvcStatsAgiPromote.AspectToStringFormat = "{0:X}";
             this.lvcStatsAgiPromote.Text = "AgiPromote";
             this.lvcStatsAgiPromote.Width = 73;
             // 
             // lvcStatsAgiCurve1
             // 
             this.lvcStatsAgiCurve1.AspectName = "AgiCurve1";
-            this.lvcStatsAgiCurve1.AspectToStringFormat = "{0:X}";
             this.lvcStatsAgiCurve1.Text = "AgiLv1";
             this.lvcStatsAgiCurve1.Width = 53;
             // 
             // lvcStatsAgiCurve5
             // 
             this.lvcStatsAgiCurve5.AspectName = "AgiCurve5";
-            this.lvcStatsAgiCurve5.AspectToStringFormat = "{0:X}";
             this.lvcStatsAgiCurve5.Text = "AgiLv5";
             this.lvcStatsAgiCurve5.Width = 67;
             // 
             // lvcStatsAgiCurve10
             // 
             this.lvcStatsAgiCurve10.AspectName = "AgiCurve10";
-            this.lvcStatsAgiCurve10.AspectToStringFormat = "{0:X}";
             this.lvcStatsAgiCurve10.Text = "AgiLv10";
             this.lvcStatsAgiCurve10.Width = 70;
             // 
             // lvcStatsAgiCurve12_15
             // 
             this.lvcStatsAgiCurve12_15.AspectName = "AgiCurve12_15";
-            this.lvcStatsAgiCurve12_15.AspectToStringFormat = "{0:X}";
             this.lvcStatsAgiCurve12_15.Text = "AgiLv12/15";
             this.lvcStatsAgiCurve12_15.Width = 70;
             // 
             // lvcStatsAgiCurve14_20
             // 
             this.lvcStatsAgiCurve14_20.AspectName = "AgiCurve14_20";
-            this.lvcStatsAgiCurve14_20.AspectToStringFormat = "{0:X}";
             this.lvcStatsAgiCurve14_20.Text = "AgiLv14/20";
             this.lvcStatsAgiCurve14_20.Width = 70;
             // 
             // lvcStatsAgiCurve17_30
             // 
             this.lvcStatsAgiCurve17_30.AspectName = "AgiCurve17_30";
-            this.lvcStatsAgiCurve17_30.AspectToStringFormat = "{0:X}";
             this.lvcStatsAgiCurve17_30.Text = "AgiLv17/30";
             this.lvcStatsAgiCurve17_30.Width = 70;
             // 
             // lvcStatsAgiCurve30_99
             // 
             this.lvcStatsAgiCurve30_99.AspectName = "AgiCurve30_99";
-            this.lvcStatsAgiCurve30_99.AspectToStringFormat = "{0:X}";
             this.lvcStatsAgiCurve30_99.Text = "AgiLv30/99";
             this.lvcStatsAgiCurve30_99.Width = 70;
             // 
@@ -1503,21 +1463,18 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcMiscellaneousTurns
             // 
             this.lvcMiscellaneousTurns.AspectName = "BaseTurns";
-            this.lvcMiscellaneousTurns.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousTurns.DisplayIndex = 5;
             this.lvcMiscellaneousTurns.Text = "Turns";
             // 
             // lvcMiscellaneousHPRegen
             // 
             this.lvcMiscellaneousHPRegen.AspectName = "BaseHPRegen";
-            this.lvcMiscellaneousHPRegen.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousHPRegen.DisplayIndex = 6;
             this.lvcMiscellaneousHPRegen.Text = "HPRegen";
             // 
             // lvcMiscellaneousMPRegen
             // 
             this.lvcMiscellaneousMPRegen.AspectName = "BaseMPRegen";
-            this.lvcMiscellaneousMPRegen.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousMPRegen.DisplayIndex = 7;
             this.lvcMiscellaneousMPRegen.Text = "MPRegen";
             // 
@@ -1532,7 +1489,6 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcMiscellaneousLuck
             // 
             this.lvcMiscellaneousLuck.AspectName = "BaseLuck";
-            this.lvcMiscellaneousLuck.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousLuck.AutoCompleteEditor = false;
             this.lvcMiscellaneousLuck.DisplayIndex = 3;
             this.lvcMiscellaneousLuck.Text = "Luck";
@@ -1541,7 +1497,6 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcMiscellaneousMov
             // 
             this.lvcMiscellaneousMov.AspectName = "BaseMov";
-            this.lvcMiscellaneousMov.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousMov.DisplayIndex = 4;
             this.lvcMiscellaneousMov.Text = "Mov";
             this.lvcMiscellaneousMov.Width = 34;
@@ -1549,67 +1504,57 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcMiscellaneousEarthRes
             // 
             this.lvcMiscellaneousEarthRes.AspectName = "EarthRes";
-            this.lvcMiscellaneousEarthRes.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousEarthRes.Text = "EarthRes";
             this.lvcMiscellaneousEarthRes.Width = 58;
             // 
             // lvcMiscellaneousFireRes
             // 
             this.lvcMiscellaneousFireRes.AspectName = "FireRes";
-            this.lvcMiscellaneousFireRes.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousFireRes.Text = "FireRes";
             this.lvcMiscellaneousFireRes.Width = 55;
             // 
             // lvcMiscellaneousIceRes
             // 
             this.lvcMiscellaneousIceRes.AspectName = "IceRes";
-            this.lvcMiscellaneousIceRes.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousIceRes.Text = "IceRes";
             this.lvcMiscellaneousIceRes.Width = 55;
             // 
             // lvcMiscellaneousSparkRes
             // 
             this.lvcMiscellaneousSparkRes.AspectName = "SparkRes";
-            this.lvcMiscellaneousSparkRes.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousSparkRes.Text = "SparkRes";
             // 
             // lvcMiscellaneousWindRes
             // 
             this.lvcMiscellaneousWindRes.AspectName = "WindRes";
-            this.lvcMiscellaneousWindRes.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousWindRes.Text = "WindRes";
             this.lvcMiscellaneousWindRes.Width = 58;
             // 
             // lvcMiscellaneousLightRes
             // 
             this.lvcMiscellaneousLightRes.AspectName = "LightRes";
-            this.lvcMiscellaneousLightRes.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousLightRes.Text = "LightRes";
             // 
             // lvcMiscellaneousDarkRes
             // 
             this.lvcMiscellaneousDarkRes.AspectName = "DarkRes";
-            this.lvcMiscellaneousDarkRes.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousDarkRes.Text = "DarkRes";
             // 
             // lvcMiscellaneousUnknownRes
             // 
             this.lvcMiscellaneousUnknownRes.AspectName = "UnknownRes";
-            this.lvcMiscellaneousUnknownRes.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousUnknownRes.Text = "UnknownRes";
             this.lvcMiscellaneousUnknownRes.Width = 83;
             // 
             // lvcMiscellaneousSlowPercent
             // 
             this.lvcMiscellaneousSlowPercent.AspectName = "Slow";
-            this.lvcMiscellaneousSlowPercent.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousSlowPercent.Text = "Slow%";
             this.lvcMiscellaneousSlowPercent.Width = 40;
             // 
             // lvcMiscellaneousSupportPercent
             // 
             this.lvcMiscellaneousSupportPercent.AspectName = "Support";
-            this.lvcMiscellaneousSupportPercent.AspectToStringFormat = "{0:X}";
             this.lvcMiscellaneousSupportPercent.Text = "Support%";
             this.lvcMiscellaneousSupportPercent.Width = 65;
             // 
@@ -1742,7 +1687,6 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcInitialInfoLevel
             // 
             this.lvcInitialInfoLevel.AspectName = "Level";
-            this.lvcInitialInfoLevel.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoLevel.Text = "Level";
             this.lvcInitialInfoLevel.Width = 50;
             // 

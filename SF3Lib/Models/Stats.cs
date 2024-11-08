@@ -1017,49 +1017,49 @@ namespace SF3.Models {
 
         [BulkCopy]
         public int EarthRes {
-            get => Editor.GetByte(earthRes);
+            get => (sbyte) Editor.GetByte(earthRes);
             set => Editor.SetByte(earthRes, (byte) value);
         }
 
         [BulkCopy]
         public int FireRes {
-            get => Editor.GetByte(fireRes);
+            get => (sbyte) Editor.GetByte(fireRes);
             set => Editor.SetByte(fireRes, (byte) value);
         }
 
         [BulkCopy]
         public int IceRes {
-            get => Editor.GetByte(iceRes);
+            get => (sbyte) Editor.GetByte(iceRes);
             set => Editor.SetByte(iceRes, (byte) value);
         }
 
         [BulkCopy]
         public int SparkRes {
-            get => Editor.GetByte(sparkRes);
+            get => (sbyte) Editor.GetByte(sparkRes);
             set => Editor.SetByte(sparkRes, (byte) value);
         }
 
         [BulkCopy]
         public int WindRes {
-            get => Editor.GetByte(windRes);
+            get => (sbyte) Editor.GetByte(windRes);
             set => Editor.SetByte(windRes, (byte) value);
         }
 
         [BulkCopy]
         public int LightRes {
-            get => Editor.GetByte(lightRes);
+            get => (sbyte) Editor.GetByte(lightRes);
             set => Editor.SetByte(lightRes, (byte) value);
         }
 
         [BulkCopy]
         public int DarkRes {
-            get => Editor.GetByte(darkRes);
+            get => (sbyte) Editor.GetByte(darkRes);
             set => Editor.SetByte(darkRes, (byte) value);
         }
 
         [BulkCopy]
         public int UnknownRes {
-            get => Editor.GetByte(unknownRes);
+            get => (sbyte) Editor.GetByte(unknownRes);
             set => Editor.SetByte(unknownRes, (byte) value);
         }
 
