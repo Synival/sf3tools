@@ -3,6 +3,7 @@ using SF3.Tables;
 namespace SF3.FileEditors {
     public interface IX013_FileEditor : ISF3FileEditor {
         SpecialTable SpecialsTable { get; }
+        SpecialEffectTable SpecialEffectTable { get; }
         SupportTypeTable SupportTypeTable { get; }
         FriendshipExpTable FriendshipExpTable { get; }
         SupportStatsTable SupportStatsTable { get; }

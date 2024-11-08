@@ -23,6 +23,7 @@ namespace SF3.FileEditors {
             int soulmateAddress;
             int specialChanceAddress;
             int specialAddress;
+            int specialEffectAddress;
             int statusEffectAddress;
             int supportStatsAddress;
             int supportTypeAddress;
@@ -42,6 +43,7 @@ namespace SF3.FileEditors {
                     soulmateAddress        = 0x7530;
                     specialAddress         = 0x7104;
                     specialChanceAddress   = 0x27ae;
+                    specialEffectAddress   = -1; // not present in scn1
                     statusEffectAddress    = 0x7408;
                     supportStatsAddress    = 0x74b5;
                     supportTypeAddress     = 0x7484;
@@ -76,6 +78,7 @@ namespace SF3.FileEditors {
                     soulmateAddress        = 0x7484;
                     specialAddress         = 0x6fdc;
                     specialChanceAddress   = 0x29c6;
+                    specialEffectAddress   = -1; // not present in scn2
                     statusEffectAddress    = 0x7314;
                     supportStatsAddress    = 0x7409;
                     supportTypeAddress     = 0x7390;
@@ -93,6 +96,7 @@ namespace SF3.FileEditors {
                     soulmateAddress        = 0x736c;
                     specialAddress         = 0x6d18;
                     specialChanceAddress   = 0x27a2;
+                    specialEffectAddress   = 0x711c;
                     statusEffectAddress    = 0x71fc;
                     supportStatsAddress    = 0x72f1;
                     supportTypeAddress     = 0x7278;
@@ -109,6 +113,7 @@ namespace SF3.FileEditors {
                     soulmateAddress        = 0x7248;
                     specialAddress         = 0x6bf4;
                     specialChanceAddress   = 0x27c2;
+                    specialEffectAddress   = 0x6ff8;
                     statusEffectAddress    = 0x70d8;
                     supportStatsAddress    = 0x71cd;
                     supportTypeAddress     = 0x7154;
@@ -119,7 +124,7 @@ namespace SF3.FileEditors {
                     throw new ArgumentException(nameof(Scenario));
             }
 
-            return new List<ITable>() {
+            var tables = new List<ITable>() {
                 (SpecialsTable        = new SpecialTable(this, ResourceFileForScenario(Scenario, "Specials.xml"), specialAddress)),
                 (SupportTypeTable     = new SupportTypeTable(this, ResourceFileForScenario(Scenario, "Characters.xml"), supportTypeAddress)),
                 (FriendshipExpTable   = new FriendshipExpTable(this, ResourceFile("ExpList.xml"), friendshipExpAddress)),
@@ -135,10 +140,16 @@ namespace SF3.FileEditors {
                 (WeaponSpellRankTable = new WeaponSpellRankTable(this, ResourceFile("WeaponSpellRankList.xml"), weaponSpellRankAddress)),
                 (StatusEffectTable    = new StatusEffectTable(this, ResourceFile("StatusGroupList.xml"), statusEffectAddress)),
             };
+
+            if (specialEffectAddress >= 0)
+                tables.Add(SpecialEffectTable = new SpecialEffectTable(this, ResourceFile("SpecialEffects.xml"), specialEffectAddress));
+
+            return tables;
         }
 
         public override void DestroyTables() {
             SpecialsTable        = null;
+            SpecialEffectTable   = null;
             SupportTypeTable     = null;
             FriendshipExpTable   = null;
             SupportStatsTable    = null;
@@ -156,6 +167,8 @@ namespace SF3.FileEditors {
 
         [BulkCopyRecurse]
         public SpecialTable SpecialsTable { get; private set; }
+        [BulkCopyRecurse]
+        public SpecialEffectTable SpecialEffectTable { get; private set; }
         [BulkCopyRecurse]
         public SupportTypeTable SupportTypeTable { get; private set; }
         [BulkCopyRecurse]

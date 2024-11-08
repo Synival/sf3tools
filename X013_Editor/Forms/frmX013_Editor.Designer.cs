@@ -54,6 +54,12 @@ namespace SF3.X013_Editor.Forms
             this.lvcSpecialsRng12d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpecialsRng13d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcSpecialsRng14d = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tabSpecialEffects = new System.Windows.Forms.TabPage();
+            this.olvSpecialEffects = new BrightIdeasSoftware.ObjectListView();
+            this.lvcSpecialEffectsName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialEffectsID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialEffectsAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcSpecialEffectsSpecial = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabFriendshipExp = new System.Windows.Forms.TabPage();
             this.olvFriendshipExp = new BrightIdeasSoftware.ObjectListView();
             this.lvcFriendshipExpName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -170,6 +176,8 @@ namespace SF3.X013_Editor.Forms
             this.tabMain.SuspendLayout();
             this.tabSpecials.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvSpecials)).BeginInit();
+            this.tabSpecialEffects.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvSpecialEffects)).BeginInit();
             this.tabFriendshipExp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvFriendshipExp)).BeginInit();
             this.tabSupportType.SuspendLayout();
@@ -204,6 +212,7 @@ namespace SF3.X013_Editor.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tabSpecials);
+            this.tabMain.Controls.Add(this.tabSpecialEffects);
             this.tabMain.Controls.Add(this.tabFriendshipExp);
             this.tabMain.Controls.Add(this.tabSupportType);
             this.tabMain.Controls.Add(this.tabSupportStats);
@@ -449,6 +458,73 @@ namespace SF3.X013_Editor.Forms
             this.lvcSpecialsRng14d.IsEditable = false;
             this.lvcSpecialsRng14d.Text = "rng14d";
             this.lvcSpecialsRng14d.Width = 46;
+            // 
+            // tabSpecialEffects
+            // 
+            this.tabSpecialEffects.Controls.Add(this.olvSpecialEffects);
+            this.tabSpecialEffects.Location = new System.Drawing.Point(4, 22);
+            this.tabSpecialEffects.Name = "tabSpecialEffects";
+            this.tabSpecialEffects.Size = new System.Drawing.Size(756, 480);
+            this.tabSpecialEffects.TabIndex = 17;
+            this.tabSpecialEffects.Text = "SpecialEffects scn3,pd";
+            this.tabSpecialEffects.UseVisualStyleBackColor = true;
+            // 
+            // olvSpecialEffects
+            // 
+            this.olvSpecialEffects.AllColumns.Add(this.lvcSpecialEffectsName);
+            this.olvSpecialEffects.AllColumns.Add(this.lvcSpecialEffectsID);
+            this.olvSpecialEffects.AllColumns.Add(this.lvcSpecialEffectsAddress);
+            this.olvSpecialEffects.AllColumns.Add(this.lvcSpecialEffectsSpecial);
+            this.olvSpecialEffects.AllowColumnReorder = true;
+            this.olvSpecialEffects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.olvSpecialEffects.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvSpecialEffects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvcSpecialEffectsName,
+            this.lvcSpecialEffectsID,
+            this.lvcSpecialEffectsAddress,
+            this.lvcSpecialEffectsSpecial});
+            this.olvSpecialEffects.FullRowSelect = true;
+            this.olvSpecialEffects.GridLines = true;
+            this.olvSpecialEffects.HasCollapsibleGroups = false;
+            this.olvSpecialEffects.HideSelection = false;
+            this.olvSpecialEffects.Location = new System.Drawing.Point(3, 3);
+            this.olvSpecialEffects.MenuLabelGroupBy = "";
+            this.olvSpecialEffects.Name = "olvSpecialEffects";
+            this.olvSpecialEffects.ShowGroups = false;
+            this.olvSpecialEffects.Size = new System.Drawing.Size(750, 474);
+            this.olvSpecialEffects.TabIndex = 3;
+            this.olvSpecialEffects.UseAlternatingBackColors = true;
+            this.olvSpecialEffects.UseCompatibleStateImageBehavior = false;
+            this.olvSpecialEffects.View = System.Windows.Forms.View.Details;
+            // 
+            // lvcSpecialEffectsName
+            // 
+            this.lvcSpecialEffectsName.AspectName = "Name";
+            this.lvcSpecialEffectsName.IsEditable = false;
+            this.lvcSpecialEffectsName.Text = "Name";
+            this.lvcSpecialEffectsName.Width = 100;
+            // 
+            // lvcSpecialEffectsID
+            // 
+            this.lvcSpecialEffectsID.AspectName = "ID";
+            this.lvcSpecialEffectsID.AspectToStringFormat = "{0:X}";
+            this.lvcSpecialEffectsID.IsEditable = false;
+            this.lvcSpecialEffectsID.Text = "Hex ID";
+            // 
+            // lvcSpecialEffectsAddress
+            // 
+            this.lvcSpecialEffectsAddress.AspectName = "Address";
+            this.lvcSpecialEffectsAddress.AspectToStringFormat = "{0:X4}";
+            this.lvcSpecialEffectsAddress.IsEditable = false;
+            this.lvcSpecialEffectsAddress.Text = "Address";
+            // 
+            // lvcSpecialEffectsSpecial
+            // 
+            this.lvcSpecialEffectsSpecial.AspectName = "Special";
+            this.lvcSpecialEffectsSpecial.Text = "Special";
+            this.lvcSpecialEffectsSpecial.Width = 120;
             // 
             // tabFriendshipExp
             // 
@@ -1637,6 +1713,8 @@ namespace SF3.X013_Editor.Forms
             this.tabMain.ResumeLayout(false);
             this.tabSpecials.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvSpecials)).EndInit();
+            this.tabSpecialEffects.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvSpecialEffects)).EndInit();
             this.tabFriendshipExp.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvFriendshipExp)).EndInit();
             this.tabSupportType.ResumeLayout(false);
@@ -1807,6 +1885,12 @@ namespace SF3.X013_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcSpecialsRng12d;
         private BrightIdeasSoftware.OLVColumn lvcSpecialsRng13d;
         private BrightIdeasSoftware.OLVColumn lvcSpecialsRng14d;
+        private System.Windows.Forms.TabPage tabSpecialEffects;
+        private BrightIdeasSoftware.ObjectListView olvSpecialEffects;
+        private BrightIdeasSoftware.OLVColumn lvcSpecialEffectsName;
+        private BrightIdeasSoftware.OLVColumn lvcSpecialEffectsID;
+        private BrightIdeasSoftware.OLVColumn lvcSpecialEffectsAddress;
+        private BrightIdeasSoftware.OLVColumn lvcSpecialEffectsSpecial;
     }
 }
 

@@ -26,6 +26,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceInfo("MovementTypes.xml");
         public static readonly NamedValueFromResourceInfo SexInfo
             = new NamedValueFromResourceInfo("Sexes.xml");
+        public static readonly NamedValueFromResourceInfo SpecialEffectInfo
+            = new NamedValueFromResourceInfo("SpecialEffects.xml");
         public static readonly NamedValueFromResourceForScenariosInfo SpecialInfo
             = new NamedValueFromResourceForScenariosInfo("Specials.xml");
         public static readonly NamedValueFromResourceForScenariosInfo SpellInfo

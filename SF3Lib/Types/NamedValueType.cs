@@ -18,6 +18,7 @@
         MovementType,
         Sex,
         Special,
+        SpecialEffect,
         SpecialElement,
         Spell,
         SpellTarget,

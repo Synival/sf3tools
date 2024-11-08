@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="0x00" name="Drain 1" />
+    <item value="0x01" name="Drain 2" />
+    <item value="0x02" name="Drain 3" />
+    <item value="0x03" name="Drain 4" />
+    <item value="0x04" name="Drain 5" />
+    <item value="0x05" name="Drain 6" />
+    <item value="0x06" name="Drain 7" />
+    <item value="0x07" name="Drain 8" />
+    <item value="0x08" name="Drain 9" />
+    <item value="0x09" name="Drain 10" />
+    <item value="0x0A" name="Drain 11" />
+    <item value="0x0B" name="(end)" />
+    <item value="0x0C" name="Death 1" />
+    <item value="0x0D" name="Death 2" />
+    <item value="0x0E" name="Death 3" />
+    <item value="0x0F" name="Death 4" />
+    <item value="0x10" name="Death 5" />
+    <item value="0x11" name="Death 6" />
+    <item value="0x12" name="Death 7" />
+    <item value="0x13" name="Death 8" />
+    <item value="0x14" name="Death 9" />
+    <item value="0x15" name="Death 10" />
+    <item value="0x16" name="Death 11" />
+    <item value="0x17" name="Death 12" />
+    <item value="0x18" name="Death 13" />
+    <item value="0x19" name="Death 14" />
+    <item value="0x1A" name="Death 15" />
+    <item value="0x1B" name="Death 16" />
+    <item value="0x1C" name="Death 17" />
+    <item value="0x1D" name="Death 18" />
+    <item value="0x1E" name="Death 19" />
+    <item value="0x1F" name="Death 20" />
+    <item value="0x20" name="Death 21" />
+    <item value="0x21" name="Death 22" />
+    <item value="0x22" name="Death 23" />
+    <item value="0x23" name="(end)" />
+    <item value="0x24" name="Death2 1" />
+    <item value="0x25" name="Death2 2" />
+    <item value="0x26" name="Death2 3" />
+    <item value="0x27" name="Death2 4" />
+    <item value="0x28" name="Death2 5" />
+    <item value="0x29" name="Death2 6" />
+    <item value="0x2A" name="Death2 7" />
+    <item value="0x2B" name="(end)" />
+    <item value="0x2C" name="Drain2 1" />
+    <item value="0x2D" name="Drain2 2" />
+    <item value="0x2E" name="Drain2 3" />
+    <item value="0x2F" name="Drain2 4" />
+    <item value="0x30" name="Drain2 5" />
+    <item value="0x31" name="Drain2 6" />
+    <item value="0x32" name="Drain2 7" />
+    <item value="0x33" name="(end)" />
+    <item value="0x34" name="Freeze 1" />
+    <item value="0x35" name="Freeze 2" />
+    <item value="0x36" name="Freeze 3" />
+    <item value="0x37" name="Freeze 4" />
+    <item value="0x38" name="Freeze 5" />
+    <item value="0x39" name="Freeze 6" />
+    <item value="0x3A" name="Freeze 7" />
+    <item value="0x3B" name="(end)" />
+    <item value="0x3C" name="Sleep 1" />
+    <item value="0x3D" name="Sleep 2" />
+    <item value="0x3E" name="Sleep 3" />
+    <item value="0x3F" name="Sleep 4" />
+    <item value="0x40" name="Sleep 5" />
+    <item value="0x41" name="Sleep 6" />
+    <item value="0x42" name="Sleep 7" />
+    <item value="0x43" name="(end)" />
+    <item value="0x44" name="Slow 1" />
+    <item value="0x45" name="Slow 2" />
+    <item value="0x46" name="Slow 3" />
+    <item value="0x47" name="Slow 4" />
+    <item value="0x48" name="Slow 5" />
+    <item value="0x49" name="Slow 6" />
+    <item value="0x4A" name="Slow 7" />
+    <item value="0x4B" name="Slow 8" />
+    <item value="0x4C" name="Slow 9" />
+    <item value="0x4D" name="Slow 10" />
+    <item value="0x4E" name="Slow 12" />
+    <item value="0x4F" name="(end)" />
+    <item value="0x50" name="Paralyze 1" />
+    <item value="0x51" name="Paralyze 2" />
+    <item value="0x52" name="Paralyze 3" />
+    <item value="0x53" name="Paralyze 4" />
+    <item value="0x54" name="Paralyze 5" />
+    <item value="0x55" name="Paralyze 6" />
+    <item value="0x56" name="Paralyze 7" />
+    <item value="0x57" name="Paralyze 8" />
+    <item value="0x58" name="Paralyze 9" />
+    <item value="0x59" name="Paralyze 10" />
+    <item value="0x5A" name="Paralyze 11" />
+    <item value="0x5B" name="Paralyze 12" />
+    <item value="0x5C" name="Paralyze 13" />
+    <item value="0x5D" name="Paralyze 14" />
+    <item value="0x5E" name="Paralyze 15" />
+    <item value="0x5F" name="Paralyze 16" />
+    <item value="0x60" name="Paralyze 17" />
+    <item value="0x61" name="Paralyze 18" />
+    <item value="0x62" name="Paralyze 19" />
+    <item value="0x63" name="(end)" />
+    <item value="0x64" name="Charm 1" />
+    <item value="0x65" name="Charm 2" />
+    <item value="0x66" name="Charm 3" />
+    <item value="0x67" name="Charm 4" />
+    <item value="0x68" name="Charm 5" />
+    <item value="0x69" name="Charm 6" />
+    <item value="0x6A" name="Charm 7" />
+    <item value="0x6B" name="(end)" />
+    <item value="0x6C" name="Confuse 1" />
+    <item value="0x6D" name="Confuse 2" />
+    <item value="0x6E" name="Confuse 3" />
+    <item value="0x6F" name="Confuse 4" />
+    <item value="0x70" name="Confuse 5" />
+    <item value="0x71" name="Confuse 6" />
+    <item value="0x72" name="Confuse 7" />
+    <item value="0x73" name="Confuse 8" />
+    <item value="0x74" name="Confuse 9" />
+    <item value="0x75" name="Confuse 10" />
+    <item value="0x76" name="Confuse 11" />
+    <item value="0x77" name="Confuse 12" />
+    <item value="0x78" name="Confuse 13" />
+    <item value="0x79" name="Confuse 14" />
+    <item value="0x7A" name="Confuse 15" />
+    <item value="0x7B" name="Confuse 16" />
+    <item value="0x7C" name="Confuse 17" />
+    <item value="0x7D" name="Confuse 18" />
+    <item value="0x7E" name="Confuse 19" />
+    <item value="0x7F" name="(end)" />
+    <item value="0x80" name="Illusion 1" />
+    <item value="0x81" name="Illusion 2" />
+    <item value="0x82" name="Illusion 3" />
+    <item value="0x83" name="Illusion 4" />
+    <item value="0x84" name="Illusion 5" />
+    <item value="0x85" name="Illusion 6" />
+    <item value="0x86" name="Illusion 7" />
+    <item value="0x87" name="Illusion 8" />
+    <item value="0x88" name="Illusion 9" />
+    <item value="0x89" name="Illusion 10" />
+    <item value="0x8A" name="Illusion 11" />
+    <item value="0x8B" name="Illusion 12" />
+    <item value="0x8C" name="Illusion 13" />
+    <item value="0x8D" name="Illusion 14" />
+    <item value="0x8E" name="Illusion 15" />
+    <item value="0x8F" name="(end)" />
+    <item value="0x90" name="Dispel 1" />
+    <item value="0x91" name="Dispel 2" />
+    <item value="0x92" name="Dispel 3" />
+    <item value="0x93" name="Dispel 4" />
+    <item value="0x94" name="Dispel 5" />
+    <item value="0x95" name="Dispel 6" />
+    <item value="0x96" name="Dispel 7" />
+    <item value="0x97" name="(end)" />
+    <item value="0x98" name="Poison 1" />
+    <item value="0x99" name="Poison 2" />
+    <item value="0x9A" name="Poison 3" />
+    <item value="0x9B" name="Poison 4" />
+    <item value="0x9C" name="Poison 5" />
+    <item value="0x9D" name="Poison 6" />
+    <item value="0x9E" name="Poison 7" />
+    <item value="0x9F" name="(end)" />
+    <item value="0xA0" name="Unknown1 1" />
+    <item value="0xA1" name="Unknown1 2" />
+    <item value="0xA2" name="Unknown1 3" />
+    <item value="0xA3" name="(end)" />
+    <item value="0xA4" name="PenetrateArmor 1" />
+    <item value="0xA5" name="PenetrateArmor 2" />
+    <item value="0xA6" name="PenetrateArmor 3" />
+    <item value="0xA7" name="PenetrateArmor 4" />
+    <item value="0xA8" name="PenetrateArmor 5" />
+    <item value="0xA9" name="PenetrateArmor 6" />
+    <item value="0xAA" name="PenetrateArmor 7" />
+    <item value="0xAB" name="(end)" />
+    <item value="0xAC" name="Unknown2 1" />
+    <item value="0xAD" name="Unknown2 2" />
+    <item value="0xAE" name="Unknown2 3" />
+    <item value="0xAF" name="Unknown2 4" />
+    <item value="0xB0" name="Unknown2 5" />
+    <item value="0xB1" name="Unknown2 6" />
+    <item value="0xB2" name="Unknown2 7" />
+    <item value="0xB3" name="Unknown2 8" />
+    <item value="0xB4" name="Unknown2 9" />
+    <item value="0xB5" name="Unknown2 10" />
+    <item value="0xB6" name="Unknown2 11" />
+    <item value="0xB7" name="Unknown2 12" />
+    <item value="0xB8" name="Unknown2 13" />
+    <item value="0xB9" name="Unknown2 14" />
+    <item value="0xBA" name="Unknown2 15" />
+    <item value="0xBB" name="Unknown2 16" />
+    <item value="0xBC" name="Unknown2 17" />
+    <item value="0xBD" name="Unknown2 18" />
+    <item value="0xBE" name="Unknown2 19" />
+    <item value="0xBF" name="(end)" />
+    <item value="0xC0" name="Unknown3 1" />
+    <item value="0xC1" name="Unknown3 2" />
+    <item value="0xC2" name="Unknown3 3" />
+    <item value="0xC3" name="Unknown3 4" />
+    <item value="0xC4" name="Unknown3 5" />
+    <item value="0xC5" name="Unknown3 6" />
+    <item value="0xC6" name="Unknown3 7" />
+    <item value="0xC7" name="(end)" />
+    <item value="0xC8" name="Unknown4 1" />
+    <item value="0xC9" name="Unknown4 2" />
+    <item value="0xCA" name="Unknown4 3" />
+    <item value="0xCB" name="Unknown4 4" />
+    <item value="0xCC" name="Unknown4 5" />
+    <item value="0xCD" name="Unknown4 6" />
+    <item value="0xCE" name="Unknown4 7" />
+    <item value="0xCF" name="(end)" />
+    <item value="0xD0" name="Unknown5 1" />
+    <item value="0xD1" name="Unknown5 2" />
+    <item value="0xD2" name="Unknown5 3" />
+    <item value="0xD3" name="Unknown5 4" />
+    <item value="0xD4" name="Unknown5 5" />
+    <item value="0xD5" name="Unknown5 6" />
+    <item value="0xD6" name="Unknown5 7" />
+    <item value="0xD7" name="Unknown5 8" />
+    <item value="0xD8" name="Unknown5 9" />
+    <item value="0xD9" name="Unknown5 10" />
+    <item value="0xDA" name="Unknown5 11" />
+    <item value="0xDB" name="Unknown5 12" />
+    <item value="0xDC" name="Unknown5 13" />
+    <item value="0xDD" name="Unknown5 14" />
+    <item value="0xDE" name="Unknown5 15" />
+    <item value="0xDF" name="(end)" />
+</items>
