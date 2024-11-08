@@ -492,7 +492,6 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS2LearnedLevel
             // 
             this.lvcSpellsS2LearnedLevel.AspectName = "S2LearnedLevel";
-            this.lvcSpellsS2LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS2LearnedLevel.Text = "S2LearnedLevel";
             this.lvcSpellsS2LearnedLevel.Width = 90;
             // 
