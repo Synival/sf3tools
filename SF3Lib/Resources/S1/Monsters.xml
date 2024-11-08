@@ -14,9 +14,9 @@
     <item value="0x0B" name="White Knight" />
     <item value="0x0C" name="Saint" />
     <item value="0x0D" name="Commander" />
-    <item value="0x0E" name="Giant Knight (unused)" />
+    <item value="0x0E" name="Giant Knight (Unused)" />
     <item value="0x0F" name="Lizard Man" />
-    <item value="0x10" name="Dragon Newt (unused)" />
+    <item value="0x10" name="Dragon Newt (Unused)" />
     <item value="0x11" name="Hellhound" />
     <item value="0x12" name="Cerberus" />
     <item value="0x13" name="Scaven" />
@@ -41,7 +41,7 @@
     <item value="0x26" name="Slash Bat (Unused)" />
     <item value="0x27" name="Birdman" />
     <item value="0x28" name="Nothing (Wing Knight)" />
-    <item value="0x29" name="Dragon (green)" />
+    <item value="0x29" name="Dragon (Green)" />
     <item value="0x2A" name="Nothing (Wyrm)" />
     <item value="0x2B" name="Nothing (Dragon Knight)" />
     <item value="0x2C" name="Wyvern" />
@@ -58,14 +58,14 @@
     <item value="0x37" name="Imperial Mage" />
     <item value="0x38" name="Master Mage" />
     <item value="0x39" name="Skull Mage" />
-    <item value="0x3A" name="Death Mage (unused)" />
-    <item value="0x3B" name="Nothing (Demon mage)" />
+    <item value="0x3A" name="Death Mage (Unused)" />
+    <item value="0x3B" name="Nothing (Demon Mage)" />
     <item value="0x3C" name="Sorcerer" />
     <item value="0x3D" name="Priest" />
     <item value="0x3E" name="High Priest" />
     <item value="0x3F" name="Monk" />
     <item value="0x40" name="Lich" />
-    <item value="0x41" name="Blue mage?" />
+    <item value="0x41" name="Blue Mage?" />
     <item value="0x42" name="Destonian Soldier" />
     <item value="0x43" name="Aspinia Soldier" />
     <item value="0x44" name="Saraband Knight" />
@@ -92,18 +92,18 @@
     <item value="0x59" name="Domaric" />
     <item value="0x5A" name="Garrosh" />
     <item value="0x5B" name="(Character Placeholder)" />
-    <item value="0x5C" name="Mask monk (carrying domaric)" />
+    <item value="0x5C" name="Mask Monk (Carrying Domaric)" />
     <item value="0x5D" name="Def Commander" />
     <item value="0x5E" name="Thief Commander" />
     <item value="0x5F" name="Barrel" />
     <item value="0x60" name="Battalion Leader" />
-    <item value="0x61" name="MP commander" />
+    <item value="0x61" name="MP Commander" />
     <item value="0x62" name="Dark Mage" />
     <item value="0x63" name="Shiraf" />
     <item value="0x64" name="Franz" />
     <item value="0x65" name="Garzel" />
     <item value="0x66" name="Edmund" />
-    <item value="0x67" name="Sting worm" />
+    <item value="0x67" name="Sting Worm" />
     <item value="0x68" name="Queen Worm" />
     <item value="0x69" name="White Lord" />
     <item value="0x6A" name="Colossus" />
@@ -131,7 +131,7 @@
     <item value="0x80" name="Spiriel2" />
     <item value="0x81" name="Giant Armor" />
     <item value="0x82" name="Basanda1" />
-    <item value="0x83" name="Force commander" />
+    <item value="0x83" name="Force Commander" />
     <item value="0x84" name="High Wizard" />
     <item value="0x85" name="Palsis" />
     <item value="0x86" name="Karna" />
@@ -139,7 +139,7 @@
     <item value="0x88" name="Piper" />
     <item value="0x89" name="Dongo" />
     <item value="0x8A" name="Conrad" />
-    <item value="0x8B" name="Silver knight 33" />
+    <item value="0x8B" name="Silver Knight 33" />
     <item value="0x8C" name="Bow Knight 33" />
     <item value="0x8D" name="Unknown" />
 </items>

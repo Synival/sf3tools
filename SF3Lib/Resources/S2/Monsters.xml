@@ -86,7 +86,7 @@
     <item value="0x53" name="Masked Monk (Red/Ankh)" />
     <item value="0x54" name="Spiriel" />
     <item value="0x55" name="Abdark" />
-    <item value="0x56" name="Elbesem Temple core" />
+    <item value="0x56" name="Elbesem Temple Core" />
     <item value="0x57" name="Walcuray" />
     <item value="0x58" name="Ghoul" />
     <item value="0x59" name="Domaric" />
@@ -103,7 +103,7 @@
     <item value="0x64" name="Franz" />
     <item value="0x65" name="Garzel" />
     <item value="0x66" name="Dark Gunner" />
-    <item value="0x67" name="Sting worm" />
+    <item value="0x67" name="Sting Worm" />
     <item value="0x68" name="Queen Worm" />
     <item value="0x69" name="White Lord" />
     <item value="0x6A" name="Colossus" />
@@ -148,7 +148,7 @@
     <item value="0x91" name="Bulzome" />
     <item value="0x92" name="Goriate" />
     <item value="0x93" name="Baersol Soldier" />
-    <item value="0x94" name="Crewart soldier (Axe)" />
+    <item value="0x94" name="Crewart Soldier (Axe)" />
     <item value="0x95" name="Aspinian Knight (Axe)" />
     <item value="0x96" name="Gargoyle" />
     <item value="0x97" name="Scissor Crab" />
@@ -163,7 +163,7 @@
     <item value="0xA0" name="Edmund Solider (Halbard)" />
     <item value="0xA1" name="Edmund Solider (Small Axe)" />
     <item value="0xA2" name="Edmund Commander" />
-    <item value="0xA3" name="Hedva(enemy)" />
+    <item value="0xA3" name="Hedva (Enemy)" />
     <item value="0xA4" name="Kraken Head" />
     <item value="0xA5" name="Kraken Arm" />
     <item value="0xA6" name="Kraken Leg" />
