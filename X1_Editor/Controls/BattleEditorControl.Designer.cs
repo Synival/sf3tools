@@ -162,7 +162,7 @@
             this.tabHeader.Controls.Add(this.olvHeader);
             this.tabHeader.Location = new System.Drawing.Point(4, 22);
             this.tabHeader.Name = "tabHeader";
-            this.tabHeader.Size = new System.Drawing.Size(909, 504);
+            this.tabHeader.Size = new System.Drawing.Size(909, 508);
             this.tabHeader.TabIndex = 3;
             this.tabHeader.Text = "Header";
             this.tabHeader.UseVisualStyleBackColor = true;
@@ -207,7 +207,7 @@
             this.olvHeader.MenuLabelGroupBy = "";
             this.olvHeader.Name = "olvHeader";
             this.olvHeader.ShowGroups = false;
-            this.olvHeader.Size = new System.Drawing.Size(903, 498);
+            this.olvHeader.Size = new System.Drawing.Size(903, 502);
             this.olvHeader.TabIndex = 0;
             this.olvHeader.UseAlternatingBackColors = true;
             this.olvHeader.UseCompatibleStateImageBehavior = false;
@@ -322,7 +322,7 @@
             this.tabSlotTab1.Location = new System.Drawing.Point(4, 22);
             this.tabSlotTab1.Name = "tabSlotTab1";
             this.tabSlotTab1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSlotTab1.Size = new System.Drawing.Size(909, 480);
+            this.tabSlotTab1.Size = new System.Drawing.Size(909, 508);
             this.tabSlotTab1.TabIndex = 4;
             this.tabSlotTab1.Text = "SlotTab1";
             this.tabSlotTab1.UseVisualStyleBackColor = true;
@@ -369,7 +369,7 @@
             this.olvSlotTab1.MenuLabelGroupBy = "";
             this.olvSlotTab1.Name = "olvSlotTab1";
             this.olvSlotTab1.ShowGroups = false;
-            this.olvSlotTab1.Size = new System.Drawing.Size(903, 474);
+            this.olvSlotTab1.Size = new System.Drawing.Size(903, 502);
             this.olvSlotTab1.TabIndex = 1;
             this.olvSlotTab1.UseAlternatingBackColors = true;
             this.olvSlotTab1.UseCompatibleStateImageBehavior = false;
@@ -410,14 +410,14 @@
             // 
             this.lvcSlotTab1EnemyX.AspectName = "EnemyX";
             this.lvcSlotTab1EnemyX.AspectToStringFormat = "";
-            this.lvcSlotTab1EnemyX.Text = "EnemyX (dec)";
+            this.lvcSlotTab1EnemyX.Text = "EnemyX";
             this.lvcSlotTab1EnemyX.Width = 80;
             // 
             // lvcSlotTab1EnemyZ
             // 
             this.lvcSlotTab1EnemyZ.AspectName = "EnemyY";
             this.lvcSlotTab1EnemyZ.AspectToStringFormat = "";
-            this.lvcSlotTab1EnemyZ.Text = "EnemyZ (dec)";
+            this.lvcSlotTab1EnemyZ.Text = "EnemyZ";
             this.lvcSlotTab1EnemyZ.Width = 80;
             // 
             // lvcSlotTab1ItemOverride
@@ -452,14 +452,14 @@
             this.lvcSlotTab1Plus0x0B.AspectName = "CharacterPlus0x0B";
             this.lvcSlotTab1Plus0x0B.AspectToStringFormat = "{0:X}";
             this.lvcSlotTab1Plus0x0B.Text = "Character (+0x0B)";
-            this.lvcSlotTab1Plus0x0B.Width = 93;
+            this.lvcSlotTab1Plus0x0B.Width = 0;
             // 
             // lvcSlotTab1SpawnCondition
             // 
             this.lvcSlotTab1SpawnCondition.AspectName = "Unknown4";
             this.lvcSlotTab1SpawnCondition.AspectToStringFormat = "{0:X}";
-            this.lvcSlotTab1SpawnCondition.Text = "SpawnConditinon?";
-            this.lvcSlotTab1SpawnCondition.Width = 94;
+            this.lvcSlotTab1SpawnCondition.Text = "SpawnCondition?";
+            this.lvcSlotTab1SpawnCondition.Width = 100;
             // 
             // lvcSlotTab1Plus0x0E
             // 
@@ -474,7 +474,7 @@
             this.tabSlotTab2.Location = new System.Drawing.Point(4, 22);
             this.tabSlotTab2.Name = "tabSlotTab2";
             this.tabSlotTab2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSlotTab2.Size = new System.Drawing.Size(909, 480);
+            this.tabSlotTab2.Size = new System.Drawing.Size(909, 508);
             this.tabSlotTab2.TabIndex = 5;
             this.tabSlotTab2.Text = "SlotTab2";
             this.tabSlotTab2.UseVisualStyleBackColor = true;
@@ -531,7 +531,7 @@
             this.olvSlotTab2.MenuLabelGroupBy = "";
             this.olvSlotTab2.Name = "olvSlotTab2";
             this.olvSlotTab2.ShowGroups = false;
-            this.olvSlotTab2.Size = new System.Drawing.Size(903, 474);
+            this.olvSlotTab2.Size = new System.Drawing.Size(903, 502);
             this.olvSlotTab2.TabIndex = 1;
             this.olvSlotTab2.UseAlternatingBackColors = true;
             this.olvSlotTab2.UseCompatibleStateImageBehavior = false;
@@ -668,7 +668,7 @@
             this.tabSlotTab3.Location = new System.Drawing.Point(4, 22);
             this.tabSlotTab3.Name = "tabSlotTab3";
             this.tabSlotTab3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSlotTab3.Size = new System.Drawing.Size(909, 480);
+            this.tabSlotTab3.Size = new System.Drawing.Size(909, 508);
             this.tabSlotTab3.TabIndex = 6;
             this.tabSlotTab3.Text = "SlotTab3";
             this.tabSlotTab3.UseVisualStyleBackColor = true;
@@ -715,7 +715,7 @@
             this.olvSlotTab3.MenuLabelGroupBy = "";
             this.olvSlotTab3.Name = "olvSlotTab3";
             this.olvSlotTab3.ShowGroups = false;
-            this.olvSlotTab3.Size = new System.Drawing.Size(903, 474);
+            this.olvSlotTab3.Size = new System.Drawing.Size(903, 502);
             this.olvSlotTab3.TabIndex = 1;
             this.olvSlotTab3.UseAlternatingBackColors = true;
             this.olvSlotTab3.UseCompatibleStateImageBehavior = false;
@@ -818,7 +818,7 @@
             this.tabSlotTab4.Location = new System.Drawing.Point(4, 22);
             this.tabSlotTab4.Name = "tabSlotTab4";
             this.tabSlotTab4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSlotTab4.Size = new System.Drawing.Size(909, 480);
+            this.tabSlotTab4.Size = new System.Drawing.Size(909, 508);
             this.tabSlotTab4.TabIndex = 7;
             this.tabSlotTab4.Text = "SlotTab4";
             this.tabSlotTab4.UseVisualStyleBackColor = true;
@@ -863,7 +863,7 @@
             this.olvSlotTab4.MenuLabelGroupBy = "";
             this.olvSlotTab4.Name = "olvSlotTab4";
             this.olvSlotTab4.ShowGroups = false;
-            this.olvSlotTab4.Size = new System.Drawing.Size(903, 474);
+            this.olvSlotTab4.Size = new System.Drawing.Size(903, 502);
             this.olvSlotTab4.TabIndex = 1;
             this.olvSlotTab4.UseAlternatingBackColors = true;
             this.olvSlotTab4.UseCompatibleStateImageBehavior = false;
@@ -959,7 +959,7 @@
             this.tabSpawnZones.Location = new System.Drawing.Point(4, 22);
             this.tabSpawnZones.Name = "tabSpawnZones";
             this.tabSpawnZones.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSpawnZones.Size = new System.Drawing.Size(909, 480);
+            this.tabSpawnZones.Size = new System.Drawing.Size(909, 508);
             this.tabSpawnZones.TabIndex = 9;
             this.tabSpawnZones.Text = "SpawnZones";
             this.tabSpawnZones.UseVisualStyleBackColor = true;
@@ -1004,7 +1004,7 @@
             this.olvSpawnZones.MenuLabelGroupBy = "";
             this.olvSpawnZones.Name = "olvSpawnZones";
             this.olvSpawnZones.ShowGroups = false;
-            this.olvSpawnZones.Size = new System.Drawing.Size(903, 474);
+            this.olvSpawnZones.Size = new System.Drawing.Size(903, 502);
             this.olvSpawnZones.TabIndex = 2;
             this.olvSpawnZones.UseAlternatingBackColors = true;
             this.olvSpawnZones.UseCompatibleStateImageBehavior = false;
@@ -1045,57 +1045,53 @@
             // 
             this.lvcSpawnZonesBottomLeftX.AspectName = "UnknownAI02";
             this.lvcSpawnZonesBottomLeftX.AspectToStringFormat = "";
-            this.lvcSpawnZonesBottomLeftX.Text = "bottomLeftx(dec)";
-            this.lvcSpawnZonesBottomLeftX.Width = 94;
+            this.lvcSpawnZonesBottomLeftX.Text = "bottomLeftX";
+            this.lvcSpawnZonesBottomLeftX.Width = 74;
             // 
             // lvcSpawnZonesBottomLeftZ
             // 
             this.lvcSpawnZonesBottomLeftZ.AspectName = "UnknownAI04";
             this.lvcSpawnZonesBottomLeftZ.AspectToStringFormat = "";
-            this.lvcSpawnZonesBottomLeftZ.Text = "bottomLeftZ(dec)";
-            this.lvcSpawnZonesBottomLeftZ.Width = 99;
+            this.lvcSpawnZonesBottomLeftZ.Text = "bottomLeftZ";
+            this.lvcSpawnZonesBottomLeftZ.Width = 79;
             // 
             // lvcSpawnZonesTopLeftX
             // 
             this.lvcSpawnZonesTopLeftX.AspectName = "UnknownAI06";
             this.lvcSpawnZonesTopLeftX.AspectToStringFormat = "";
-            this.lvcSpawnZonesTopLeftX.Text = "topLeftx(dec)";
-            this.lvcSpawnZonesTopLeftX.Width = 77;
+            this.lvcSpawnZonesTopLeftX.Text = "topLeftX";
             // 
             // lvcSpawnZonesTopLeftZ
             // 
             this.lvcSpawnZonesTopLeftZ.AspectName = "UnknownAI08";
             this.lvcSpawnZonesTopLeftZ.AspectToStringFormat = "";
-            this.lvcSpawnZonesTopLeftZ.Text = "topLeftZ(dec)";
-            this.lvcSpawnZonesTopLeftZ.Width = 79;
+            this.lvcSpawnZonesTopLeftZ.Text = "topLeftZ";
             // 
             // lvcSpawnZonesTopRightX
             // 
             this.lvcSpawnZonesTopRightX.AspectName = "UnknownAI0A";
             this.lvcSpawnZonesTopRightX.AspectToStringFormat = "";
-            this.lvcSpawnZonesTopRightX.Text = "topRightx(dec)";
-            this.lvcSpawnZonesTopRightX.Width = 82;
+            this.lvcSpawnZonesTopRightX.Text = "topRightX";
             // 
             // lvcSpawnZonesTopRightZ
             // 
             this.lvcSpawnZonesTopRightZ.AspectName = "UnknownAI0C";
             this.lvcSpawnZonesTopRightZ.AspectToStringFormat = "";
-            this.lvcSpawnZonesTopRightZ.Text = "topRightZ(dec)";
-            this.lvcSpawnZonesTopRightZ.Width = 84;
+            this.lvcSpawnZonesTopRightZ.Text = "topRightZ";
             // 
             // lvcSpawnZonesBottomRightX
             // 
             this.lvcSpawnZonesBottomRightX.AspectName = "UnknownAI0E";
             this.lvcSpawnZonesBottomRightX.AspectToStringFormat = "";
-            this.lvcSpawnZonesBottomRightX.Text = "bottomRightx(dec)";
-            this.lvcSpawnZonesBottomRightX.Width = 100;
+            this.lvcSpawnZonesBottomRightX.Text = "bottomRightX";
+            this.lvcSpawnZonesBottomRightX.Width = 81;
             // 
             // lvcSpawnZonesBottomRightZ
             // 
             this.lvcSpawnZonesBottomRightZ.AspectName = "UnknownAI10";
             this.lvcSpawnZonesBottomRightZ.AspectToStringFormat = "";
-            this.lvcSpawnZonesBottomRightZ.Text = "bottomRightZ(dec)";
-            this.lvcSpawnZonesBottomRightZ.Width = 100;
+            this.lvcSpawnZonesBottomRightZ.Text = "bottomRightZ";
+            this.lvcSpawnZonesBottomRightZ.Width = 80;
             // 
             // tabAITargetPosition
             // 
@@ -1103,7 +1099,7 @@
             this.tabAITargetPosition.Location = new System.Drawing.Point(4, 22);
             this.tabAITargetPosition.Name = "tabAITargetPosition";
             this.tabAITargetPosition.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAITargetPosition.Size = new System.Drawing.Size(909, 480);
+            this.tabAITargetPosition.Size = new System.Drawing.Size(909, 508);
             this.tabAITargetPosition.TabIndex = 8;
             this.tabAITargetPosition.Text = "AI TargetPosition";
             this.tabAITargetPosition.UseVisualStyleBackColor = true;
@@ -1134,7 +1130,7 @@
             this.olvAITargetPosition.MenuLabelGroupBy = "";
             this.olvAITargetPosition.Name = "olvAITargetPosition";
             this.olvAITargetPosition.ShowGroups = false;
-            this.olvAITargetPosition.Size = new System.Drawing.Size(903, 474);
+            this.olvAITargetPosition.Size = new System.Drawing.Size(903, 502);
             this.olvAITargetPosition.TabIndex = 2;
             this.olvAITargetPosition.UseAlternatingBackColors = true;
             this.olvAITargetPosition.UseCompatibleStateImageBehavior = false;
@@ -1168,14 +1164,14 @@
             // 
             this.lvcAITargetPositionTargetX.AspectName = "TargetX";
             this.lvcAITargetPositionTargetX.AspectToStringFormat = "";
-            this.lvcAITargetPositionTargetX.Text = "TargetX (dec)";
+            this.lvcAITargetPositionTargetX.Text = "TargetX";
             this.lvcAITargetPositionTargetX.Width = 80;
             // 
             // lvcAITargetPositionTargetZ
             // 
             this.lvcAITargetPositionTargetZ.AspectName = "TargetY";
             this.lvcAITargetPositionTargetZ.AspectToStringFormat = "";
-            this.lvcAITargetPositionTargetZ.Text = "TargetZ (dec)";
+            this.lvcAITargetPositionTargetZ.Text = "TargetZ";
             this.lvcAITargetPositionTargetZ.Width = 80;
             // 
             // tabScriptedMovement
@@ -1271,57 +1267,49 @@
             // 
             this.lvcScriptedMovementCoordX1.AspectName = "CustomMovementX1";
             this.lvcScriptedMovementCoordX1.AspectToStringFormat = "";
-            this.lvcScriptedMovementCoordX1.Text = "CoordX1(dec)";
-            this.lvcScriptedMovementCoordX1.Width = 81;
+            this.lvcScriptedMovementCoordX1.Text = "CoordX1";
             // 
             // lvcScriptedMovementCoordZ1
             // 
             this.lvcScriptedMovementCoordZ1.AspectName = "CustomMovementZ1";
             this.lvcScriptedMovementCoordZ1.AspectToStringFormat = "";
-            this.lvcScriptedMovementCoordZ1.Text = "CoordZ1(dec)";
-            this.lvcScriptedMovementCoordZ1.Width = 80;
+            this.lvcScriptedMovementCoordZ1.Text = "CoordZ1";
             // 
             // lvcScriptedMovementCoordX2
             // 
             this.lvcScriptedMovementCoordX2.AspectName = "CustomMovementX2";
             this.lvcScriptedMovementCoordX2.AspectToStringFormat = "";
-            this.lvcScriptedMovementCoordX2.Text = "CoordX2(dec)";
-            this.lvcScriptedMovementCoordX2.Width = 79;
+            this.lvcScriptedMovementCoordX2.Text = "CoordX2";
             // 
             // lvcScriptedMovementCoordZ2
             // 
             this.lvcScriptedMovementCoordZ2.AspectName = "CustomMovementZ2";
             this.lvcScriptedMovementCoordZ2.AspectToStringFormat = "";
-            this.lvcScriptedMovementCoordZ2.Text = "CoordZ2(dec)";
-            this.lvcScriptedMovementCoordZ2.Width = 79;
+            this.lvcScriptedMovementCoordZ2.Text = "CoordZ2";
             // 
             // lvcScriptedMovementCoordX3
             // 
             this.lvcScriptedMovementCoordX3.AspectName = "CustomMovementX3";
             this.lvcScriptedMovementCoordX3.AspectToStringFormat = "";
-            this.lvcScriptedMovementCoordX3.Text = "CoordX3(dec)";
-            this.lvcScriptedMovementCoordX3.Width = 78;
+            this.lvcScriptedMovementCoordX3.Text = "CoordX3";
             // 
             // lvcScriptedMovementCoordZ3
             // 
             this.lvcScriptedMovementCoordZ3.AspectName = "CustomMovementZ3";
             this.lvcScriptedMovementCoordZ3.AspectToStringFormat = "";
-            this.lvcScriptedMovementCoordZ3.Text = "CoordZ3(dec)";
-            this.lvcScriptedMovementCoordZ3.Width = 79;
+            this.lvcScriptedMovementCoordZ3.Text = "CoordZ3";
             // 
             // lvcScriptedMovementCoordX4
             // 
             this.lvcScriptedMovementCoordX4.AspectName = "CustomMovementX4";
             this.lvcScriptedMovementCoordX4.AspectToStringFormat = "";
-            this.lvcScriptedMovementCoordX4.Text = "CoordX4(dec)";
-            this.lvcScriptedMovementCoordX4.Width = 79;
+            this.lvcScriptedMovementCoordX4.Text = "CoordX4";
             // 
             // lvcScriptedMovementCoordZ4
             // 
             this.lvcScriptedMovementCoordZ4.AspectName = "CustomMovementZ4";
             this.lvcScriptedMovementCoordZ4.AspectToStringFormat = "";
-            this.lvcScriptedMovementCoordZ4.Text = "CoordZ4(dec)";
-            this.lvcScriptedMovementCoordZ4.Width = 82;
+            this.lvcScriptedMovementCoordZ4.Text = "CoordZ4";
             // 
             // lvcScriptedMovementEnd
             // 

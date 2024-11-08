@@ -461,7 +461,7 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             this.lvcSpellsS1LearnedAt.AspectName = "S1LearnedAt";
             this.lvcSpellsS1LearnedAt.Text = "S1LearnedAt";
-            this.lvcSpellsS1LearnedAt.Width = 75;
+            this.lvcSpellsS1LearnedAt.Width = 80;
             // 
             // lvcSpellsS1LearnedID
             // 
@@ -474,32 +474,32 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             this.lvcSpellsS1LearnedLevel.AspectName = "S1LearnedLevel";
             this.lvcSpellsS1LearnedLevel.Text = "S1LearnedLevel";
-            this.lvcSpellsS1LearnedLevel.Width = 95;
+            this.lvcSpellsS1LearnedLevel.Width = 100;
             // 
             // lvcSpellsS2LearnedAt
             // 
             this.lvcSpellsS2LearnedAt.AspectName = "S2LearnedAt";
             this.lvcSpellsS2LearnedAt.Text = "S2LearnedAt";
-            this.lvcSpellsS2LearnedAt.Width = 75;
+            this.lvcSpellsS2LearnedAt.Width = 80;
             // 
             // lvcSpellsS2LearnedID
             // 
             this.lvcSpellsS2LearnedID.AspectName = "S2LearnedID";
             this.lvcSpellsS2LearnedID.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS2LearnedID.Text = "S2LearnedID";
-            this.lvcSpellsS2LearnedID.Width = 95;
+            this.lvcSpellsS2LearnedID.Width = 90;
             // 
             // lvcSpellsS2LearnedLevel
             // 
             this.lvcSpellsS2LearnedLevel.AspectName = "S2LearnedLevel";
             this.lvcSpellsS2LearnedLevel.Text = "S2LearnedLevel";
-            this.lvcSpellsS2LearnedLevel.Width = 90;
+            this.lvcSpellsS2LearnedLevel.Width = 100;
             // 
             // lvcSpellsS3LearnedAt
             // 
             this.lvcSpellsS3LearnedAt.AspectName = "S3LearnedAt";
             this.lvcSpellsS3LearnedAt.Text = "S3LearnedAt";
-            this.lvcSpellsS3LearnedAt.Width = 75;
+            this.lvcSpellsS3LearnedAt.Width = 80;
             // 
             // lvcSpellsS3LearnedID
             // 
@@ -512,13 +512,13 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             this.lvcSpellsS3LearnedLevel.AspectName = "S3LearnedLevel";
             this.lvcSpellsS3LearnedLevel.Text = "S3LearnedLevel";
-            this.lvcSpellsS3LearnedLevel.Width = 95;
+            this.lvcSpellsS3LearnedLevel.Width = 100;
             // 
             // lvcSpellsS4LearnedAt
             // 
             this.lvcSpellsS4LearnedAt.AspectName = "S4LearnedAt";
             this.lvcSpellsS4LearnedAt.Text = "S4LearnedAt";
-            this.lvcSpellsS4LearnedAt.Width = 75;
+            this.lvcSpellsS4LearnedAt.Width = 80;
             // 
             // lvcSpellsS4LearnedID
             // 
@@ -531,13 +531,13 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             this.lvcSpellsS4LearnedLevel.AspectName = "S4LearnedLevel";
             this.lvcSpellsS4LearnedLevel.Text = "S4LearnedLevel";
-            this.lvcSpellsS4LearnedLevel.Width = 95;
+            this.lvcSpellsS4LearnedLevel.Width = 100;
             // 
             // lvcSpellsS5LearnedAt
             // 
             this.lvcSpellsS5LearnedAt.AspectName = "S5LearnedAt";
             this.lvcSpellsS5LearnedAt.Text = "S5LearnedAt";
-            this.lvcSpellsS5LearnedAt.Width = 75;
+            this.lvcSpellsS5LearnedAt.Width = 80;
             // 
             // lvcSpellsS5LearnedID
             // 
@@ -550,13 +550,13 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             this.lvcSpellsS5LearnedLevel.AspectName = "S5LearnedLevel";
             this.lvcSpellsS5LearnedLevel.Text = "S5LearnedLevel";
-            this.lvcSpellsS5LearnedLevel.Width = 95;
+            this.lvcSpellsS5LearnedLevel.Width = 100;
             // 
             // lvcSpellsS6LearnedAt
             // 
             this.lvcSpellsS6LearnedAt.AspectName = "S6LearnedAt";
             this.lvcSpellsS6LearnedAt.Text = "S6LearnedAt";
-            this.lvcSpellsS6LearnedAt.Width = 75;
+            this.lvcSpellsS6LearnedAt.Width = 80;
             // 
             // lvcSpellsS6LearnedID
             // 
@@ -569,13 +569,13 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             this.lvcSpellsS6LearnedLevel.AspectName = "S6LearnedLevel";
             this.lvcSpellsS6LearnedLevel.Text = "S6LearnedLevel";
-            this.lvcSpellsS6LearnedLevel.Width = 95;
+            this.lvcSpellsS6LearnedLevel.Width = 100;
             // 
             // lvcSpellsS7LearnedAt
             // 
             this.lvcSpellsS7LearnedAt.AspectName = "S7LearnedAt";
             this.lvcSpellsS7LearnedAt.Text = "S7LearnedAt";
-            this.lvcSpellsS7LearnedAt.Width = 75;
+            this.lvcSpellsS7LearnedAt.Width = 80;
             // 
             // lvcSpellsS7LearnedID
             // 
@@ -588,13 +588,13 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             this.lvcSpellsS7LearnedLevel.AspectName = "S7LearnedLevel";
             this.lvcSpellsS7LearnedLevel.Text = "S7LearnedLevel";
-            this.lvcSpellsS7LearnedLevel.Width = 95;
+            this.lvcSpellsS7LearnedLevel.Width = 100;
             // 
             // lvcSpellsS8LearnedAt
             // 
             this.lvcSpellsS8LearnedAt.AspectName = "S8LearnedAt";
             this.lvcSpellsS8LearnedAt.Text = "S8LearnedAt";
-            this.lvcSpellsS8LearnedAt.Width = 75;
+            this.lvcSpellsS8LearnedAt.Width = 80;
             // 
             // lvcSpellsS8LearnedID
             // 
@@ -607,13 +607,13 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             this.lvcSpellsS8LearnedLevel.AspectName = "S8LearnedLevel";
             this.lvcSpellsS8LearnedLevel.Text = "S8LearnedLevel";
-            this.lvcSpellsS8LearnedLevel.Width = 95;
+            this.lvcSpellsS8LearnedLevel.Width = 100;
             // 
             // lvcSpellsS9LearnedAt
             // 
             this.lvcSpellsS9LearnedAt.AspectName = "S9LearnedAt";
             this.lvcSpellsS9LearnedAt.Text = "S9LearnedAt";
-            this.lvcSpellsS9LearnedAt.Width = 75;
+            this.lvcSpellsS9LearnedAt.Width = 80;
             // 
             // lvcSpellsS9LearnedID
             // 
@@ -626,13 +626,13 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             this.lvcSpellsS9LearnedLevel.AspectName = "S9LearnedLevel";
             this.lvcSpellsS9LearnedLevel.Text = "S9LearnedLevel";
-            this.lvcSpellsS9LearnedLevel.Width = 95;
+            this.lvcSpellsS9LearnedLevel.Width = 100;
             // 
             // lvcSpellsS10LearnedAt
             // 
             this.lvcSpellsS10LearnedAt.AspectName = "S10LearnedAt";
             this.lvcSpellsS10LearnedAt.Text = "S10LearnedAt";
-            this.lvcSpellsS10LearnedAt.Width = 75;
+            this.lvcSpellsS10LearnedAt.Width = 80;
             // 
             // lvcSpellsS10LearnedID
             // 
@@ -645,13 +645,13 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             this.lvcSpellsS10LearnedLevel.AspectName = "S10LearnedLevel";
             this.lvcSpellsS10LearnedLevel.Text = "S10LearnedLevel";
-            this.lvcSpellsS10LearnedLevel.Width = 95;
+            this.lvcSpellsS10LearnedLevel.Width = 100;
             // 
             // lvcSpellsS11LearnedAt
             // 
             this.lvcSpellsS11LearnedAt.AspectName = "S11LearnedAt";
             this.lvcSpellsS11LearnedAt.Text = "S11LearnedAt";
-            this.lvcSpellsS11LearnedAt.Width = 75;
+            this.lvcSpellsS11LearnedAt.Width = 80;
             // 
             // lvcSpellsS11LearnedID
             // 
@@ -664,13 +664,13 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             this.lvcSpellsS11LearnedLevel.AspectName = "S11LearnedLevel";
             this.lvcSpellsS11LearnedLevel.Text = "S11LearnedLevel";
-            this.lvcSpellsS11LearnedLevel.Width = 95;
+            this.lvcSpellsS11LearnedLevel.Width = 100;
             // 
             // lvcSpellsS12LearnedAt
             // 
             this.lvcSpellsS12LearnedAt.AspectName = "S12LearnedAt";
             this.lvcSpellsS12LearnedAt.Text = "S12LearnedAt";
-            this.lvcSpellsS12LearnedAt.Width = 75;
+            this.lvcSpellsS12LearnedAt.Width = 80;
             // 
             // lvcSpellsS12LearnedID
             // 
@@ -683,7 +683,7 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             this.lvcSpellsS12LearnedLevel.AspectName = "S12LearnedLevel";
             this.lvcSpellsS12LearnedLevel.Text = "S12LearnedLevel";
-            this.lvcSpellsS12LearnedLevel.Width = 95;
+            this.lvcSpellsS12LearnedLevel.Width = 100;
             // 
             // tabStats
             // 
@@ -1526,7 +1526,7 @@ namespace SF3.X033_X031_Editor.Forms
             // 
             this.lvcMiscellaneousSlowPercent.AspectName = "Slow";
             this.lvcMiscellaneousSlowPercent.Text = "Slow%";
-            this.lvcMiscellaneousSlowPercent.Width = 40;
+            this.lvcMiscellaneousSlowPercent.Width = 55;
             // 
             // lvcMiscellaneousSupportPercent
             // 

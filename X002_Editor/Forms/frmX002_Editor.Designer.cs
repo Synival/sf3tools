@@ -327,13 +327,14 @@ namespace SF3.X002_Editor.Forms
             this.lvcSpellsLv1Distance.AspectName = "Lv1Distance";
             this.lvcSpellsLv1Distance.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv1Distance.Text = "Lv1Distance";
-            this.lvcSpellsLv1Distance.Width = 120;
+            this.lvcSpellsLv1Distance.Width = 85;
             // 
             // lvcSpellsLv1Targets
             // 
             this.lvcSpellsLv1Targets.AspectName = "Lv1Targets";
             this.lvcSpellsLv1Targets.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv1Targets.Text = "Lv1Targets";
+            this.lvcSpellsLv1Targets.Width = 75;
             // 
             // lvcSpellsLv1Cost
             // 
@@ -350,12 +351,14 @@ namespace SF3.X002_Editor.Forms
             this.lvcSpellsLv2Distance.AspectName = "Lv2Distance";
             this.lvcSpellsLv2Distance.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv2Distance.Text = "Lv2Distance";
+            this.lvcSpellsLv2Distance.Width = 85;
             // 
             // lvcSpellsLv2Targets
             // 
             this.lvcSpellsLv2Targets.AspectName = "Lv2Targets";
             this.lvcSpellsLv2Targets.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv2Targets.Text = "Lv2Targets";
+            this.lvcSpellsLv2Targets.Width = 75;
             // 
             // lvcSpellsLv2Cost
             // 
@@ -372,12 +375,14 @@ namespace SF3.X002_Editor.Forms
             this.lvcSpellsLv3Distance.AspectName = "Lv3Distance";
             this.lvcSpellsLv3Distance.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv3Distance.Text = "Lv3Distance";
+            this.lvcSpellsLv3Distance.Width = 85;
             // 
             // lvcSpellsLv3Targets
             // 
             this.lvcSpellsLv3Targets.AspectName = "Lv3Targets";
             this.lvcSpellsLv3Targets.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv3Targets.Text = "Lv3Targets";
+            this.lvcSpellsLv3Targets.Width = 75;
             // 
             // lvcSpellsLv3Cost
             // 
@@ -394,12 +399,14 @@ namespace SF3.X002_Editor.Forms
             this.lvcSpellsLv4Distance.AspectName = "Lv4Distance";
             this.lvcSpellsLv4Distance.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv4Distance.Text = "Lv4Distance";
+            this.lvcSpellsLv4Distance.Width = 85;
             // 
             // lvcSpellsLv4Targets
             // 
             this.lvcSpellsLv4Targets.AspectName = "Lv4Targets";
             this.lvcSpellsLv4Targets.AspectToStringFormat = "{0:X}";
             this.lvcSpellsLv4Targets.Text = "Lv4Targets";
+            this.lvcSpellsLv4Targets.Width = 75;
             // 
             // lvcSpellsLv4Cost
             // 
@@ -545,7 +552,7 @@ namespace SF3.X002_Editor.Forms
             // 
             this.lvcItemsPrice.AspectName = "Price";
             this.lvcItemsPrice.AspectToStringFormat = "";
-            this.lvcItemsPrice.Text = "Price (dec)";
+            this.lvcItemsPrice.Text = "Price";
             this.lvcItemsPrice.Width = 70;
             // 
             // lvcItemsWeaponType

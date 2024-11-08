@@ -325,7 +325,7 @@ namespace SF3.X1_Editor.Forms
             this.lvcTileDataUnknownA.AspectName = "TileUnknownA";
             this.lvcTileDataUnknownA.AspectToStringFormat = "{0:X}";
             this.lvcTileDataUnknownA.Text = "UnknownA";
-            this.lvcTileDataUnknownA.Width = 65;
+            this.lvcTileDataUnknownA.Width = 70;
             // 
             // lvcTileDataSand
             // 
@@ -339,28 +339,28 @@ namespace SF3.X1_Editor.Forms
             this.lvcTileDataUnknownC.AspectName = "TileUnknownC";
             this.lvcTileDataUnknownC.AspectToStringFormat = "{0:X}";
             this.lvcTileDataUnknownC.Text = "UnknownC";
-            this.lvcTileDataUnknownC.Width = 65;
+            this.lvcTileDataUnknownC.Width = 70;
             // 
             // lvcTileDataUnknownD
             // 
             this.lvcTileDataUnknownD.AspectName = "TileUnknownD";
             this.lvcTileDataUnknownD.AspectToStringFormat = "{0:X}";
             this.lvcTileDataUnknownD.Text = "UnknownD";
-            this.lvcTileDataUnknownD.Width = 65;
+            this.lvcTileDataUnknownD.Width = 70;
             // 
             // lvcTileDataUnknownE
             // 
             this.lvcTileDataUnknownE.AspectName = "TileUnknownE";
             this.lvcTileDataUnknownE.AspectToStringFormat = "{0:X}";
             this.lvcTileDataUnknownE.Text = "UnknownE";
-            this.lvcTileDataUnknownE.Width = 65;
+            this.lvcTileDataUnknownE.Width = 70;
             // 
             // lvcTileDataUnknownF
             // 
             this.lvcTileDataUnknownF.AspectName = "TileUnknownF";
             this.lvcTileDataUnknownF.AspectToStringFormat = "{0:X}";
             this.lvcTileDataUnknownF.Text = "UnknownF";
-            this.lvcTileDataUnknownF.Width = 65;
+            this.lvcTileDataUnknownF.Width = 70;
             // 
             // tabWarpTable
             // 
@@ -743,8 +743,7 @@ namespace SF3.X1_Editor.Forms
             // 
             this.lvcNonBattleEnterXPos.AspectName = "EnterXPos";
             this.lvcNonBattleEnterXPos.AspectToStringFormat = "";
-            this.lvcNonBattleEnterXPos.Text = "xPos(Dec)";
-            this.lvcNonBattleEnterXPos.Width = 70;
+            this.lvcNonBattleEnterXPos.Text = "xPos";
             // 
             // lvcNonBattleEnterPlus0x06
             // 
@@ -757,8 +756,7 @@ namespace SF3.X1_Editor.Forms
             // 
             this.lvcNonBattleEnterZPos.AspectName = "EnterZPos";
             this.lvcNonBattleEnterZPos.AspectToStringFormat = "";
-            this.lvcNonBattleEnterZPos.Text = "zPos(Dec)";
-            this.lvcNonBattleEnterZPos.Width = 70;
+            this.lvcNonBattleEnterZPos.Text = "zPos";
             // 
             // lvcNonBattleEnterDirection
             // 
@@ -891,7 +889,7 @@ namespace SF3.X1_Editor.Forms
             // 
             this.lvcTownNpcsXPos.AspectName = "NpcXPos";
             this.lvcTownNpcsXPos.AspectToStringFormat = "";
-            this.lvcTownNpcsXPos.Text = "xPos(dec)";
+            this.lvcTownNpcsXPos.Text = "xPos";
             // 
             // lvcTownNpcsPlus0x0A
             // 
@@ -918,7 +916,7 @@ namespace SF3.X1_Editor.Forms
             // 
             this.lvcTownNpcsZPos.AspectName = "NpcZPos";
             this.lvcTownNpcsZPos.AspectToStringFormat = "";
-            this.lvcTownNpcsZPos.Text = "zPos(dec)";
+            this.lvcTownNpcsZPos.Text = "zPos";
             // 
             // lvcTownNpcsPlus0x12
             // 
