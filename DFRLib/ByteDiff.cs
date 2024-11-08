@@ -17,21 +17,11 @@ namespace DFRLib {
         /// <param name="fileToPath">The altered file to compare to.</param>
         /// <returns>A list containing all differences between the two files.</returns>
         public static List<ByteDiffChunk> MakeByteDiffChunks(string fileFromPath, string fileToPath, ByteDiffChunkBuilderOptions? options = null) {
-            FileStream fileStreamFrom = null;
-            FileStream fileStreamTo = null;
-
-            try {
-                fileStreamFrom = new FileStream(fileFromPath, FileMode.Open, FileAccess.Read);
-                fileStreamTo = new FileStream(fileToPath, FileMode.Open, FileAccess.Read);
-
+            using (FileStream fileStreamFrom = new FileStream(fileFromPath, FileMode.Open, FileAccess.Read),
+                              fileStreamTo = new FileStream(fileToPath, FileMode.Open, FileAccess.Read)) {
                 var fileStreamFromLen = fileStreamFrom.Length;
                 var fileStreamToLen = fileStreamTo.Length;
-
                 return MakeByteDiffChunks(fileStreamFrom, fileStreamTo, options);
-            }
-            finally {
-                fileStreamFrom?.Close();
-                fileStreamTo?.Close();
             }
         }
 
@@ -41,8 +31,11 @@ namespace DFRLib {
         /// <param name="fileFromPath">The original bytes to compare to.</param>
         /// <param name="fileToPath">The altered bytes to compare to.</param>
         /// <returns>A list containing all differences between the two sets of bytes.</returns>
-        public static List<ByteDiffChunk> MakeByteDiffChunks(byte[] bytesFrom, byte[] bytesTo, ByteDiffChunkBuilderOptions? options = null)
-            => MakeByteDiffChunks(new MemoryStream(bytesFrom), new MemoryStream(bytesTo), options);
+        public static List<ByteDiffChunk> MakeByteDiffChunks(byte[] bytesFrom, byte[] bytesTo, ByteDiffChunkBuilderOptions? options = null) {
+            using (MemoryStream bytesFromStream = new MemoryStream(bytesFrom),
+                                bytesToStream = new MemoryStream(bytesTo))
+                return MakeByteDiffChunks(bytesFromStream, bytesToStream, options);
+        }
 
         /// <summary>
         /// Creates a list of differences between two streams.
@@ -114,8 +107,7 @@ namespace DFRLib {
         /// </summary>
         /// <param name="stream">Stream containing DFR text.</param>
         public ByteDiff(Stream stream) {
-            try {
-                var reader = new StreamReader(stream);
+            using (var reader = new StreamReader(stream, Encoding.UTF8, false, 256, true)) {
                 var chunkList = new List<ByteDiffChunk>();
                 string line;
                 while ((line = reader.ReadLine()?.Trim()) != null) {
@@ -126,9 +118,6 @@ namespace DFRLib {
                         chunkList.Add(new ByteDiffChunk(line));
                 }
                 Chunks = chunkList;
-            }
-            finally {
-                stream.Close();
             }
         }
 

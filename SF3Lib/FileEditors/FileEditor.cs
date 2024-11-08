@@ -89,16 +89,12 @@ namespace SF3.FileEditors {
         /// <param name="filename">The file to load.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
         public virtual bool LoadFile(string filename) {
-            FileStream stream = null;
             try {
-                stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                return LoadFile(filename, stream);
+                using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
+                    return LoadFile(filename, stream);
             }
             catch (Exception) {
                 return false;
-            }
-            finally {
-                stream?.Close();
             }
         }
 
@@ -107,9 +103,11 @@ namespace SF3.FileEditors {
                 if (IsLoaded)
                     _ = CloseFile();
 
-                var memoryStream = new MemoryStream();
-                stream.CopyTo(memoryStream);
-                var newData = memoryStream.ToArray();
+                byte[] newData;
+                using (var memoryStream = new MemoryStream()) {
+                    stream.CopyTo(memoryStream);
+                    newData = memoryStream.ToArray();
+                }
 
                 PreLoaded?.Invoke(this, EventArgs.Empty);
 
@@ -135,12 +133,9 @@ namespace SF3.FileEditors {
             if (Data == null)
                 throw new FileEditorNotLoadedException();
 
-            FileStream stream = null;
             try {
                 PreSaved?.Invoke(this, EventArgs.Empty);
-
-                stream = new FileStream(filename, FileMode.Create, FileAccess.Write);
-                stream.Write(Data, 0, Data.Length);
+                File.WriteAllBytes(filename, Data);
                 Filename = filename;
 
                 IsModified = false;
@@ -149,9 +144,6 @@ namespace SF3.FileEditors {
             }
             catch (Exception) {
                 return false;
-            }
-            finally {
-                stream?.Close();
             }
 
             return true;

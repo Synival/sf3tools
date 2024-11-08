@@ -32,10 +32,8 @@ namespace DFRTool.GUI.Forms {
             _isDialogMode = true;
         }
 
-        protected override bool ProcessDialogKey(Keys keyData)
-        {
-            if (_isDialogMode && ModifierKeys == Keys.None && keyData == Keys.Escape)
-            {
+        protected override bool ProcessDialogKey(Keys keyData) {
+            if (_isDialogMode && ModifierKeys == Keys.None && keyData == Keys.Escape) {
                 Close();
                 return true;
             }
@@ -93,29 +91,16 @@ namespace DFRTool.GUI.Forms {
             }
 
             try {
-                FileStream origStream = null;
-                Stream alteredStream = null;
                 string dfrText = null;
-
-                try {
-                    origStream = new FileStream(tbOriginalFile.Text, FileMode.Open, FileAccess.Read);
-                    alteredStream = (Data != null)
-                        ? (Stream) new MemoryStream(Data)
-                        : new FileStream(tbAlteredFile.Text, FileMode.Open, FileAccess.Read);
-
+                using (Stream origStream = new FileStream(tbOriginalFile.Text, FileMode.Open, FileAccess.Read),
+                              alteredStream = (Data != null)
+                                ? (Stream) new MemoryStream(Data)
+                                : new FileStream(tbAlteredFile.Text, FileMode.Open, FileAccess.Read)) {
                     var diffChunk = new ByteDiff(origStream, alteredStream, new ByteDiffChunkBuilderOptions {
                         CombineAppendedChunks = cbCombineAllAppendedData.Checked
                     });
                     dfrText = diffChunk.ToDFR();
                 }
-                catch {
-                    throw;
-                }
-                finally {
-                    origStream?.Close();
-                    alteredStream?.Close();
-                }
-
                 File.WriteAllText(tbOutputFile.Text, dfrText);
             }
             catch (Exception ex) {

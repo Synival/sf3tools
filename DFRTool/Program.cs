@@ -50,12 +50,12 @@ namespace DFRTool {
                 if (args[i].ToLower() == "apply") {
                     command = Command.Apply;
                     commandArg = i;
-                    break;  
+                    break;
                 }
                 else if (args[i].ToLower() == "create") {
                     command = Command.Create;
                     commandArg = i;
-                    break;  
+                    break;
                 }
             }
 
@@ -154,9 +154,7 @@ namespace DFRTool {
             var dfrFilename = extra[1];
 
             try {
-                FileStream? dfrFile = null;
-                try {
-                    dfrFile = new FileStream(dfrFilename, FileMode.Open, FileAccess.Read);
+                using (var dfrFile = new FileStream(dfrFilename, FileMode.Open, FileAccess.Read)) {
                     var diff = new ByteDiff(dfrFile);
 
                     var oldBytes = File.ReadAllBytes(fileToPatchName);
@@ -164,14 +162,6 @@ namespace DFRTool {
                     dfrFile.Close();
 
                     File.WriteAllBytes(fileToPatchName, newBytes);
-                }
-                catch (Exception ex) {
-                    Console.Error.WriteLine(ex.Message);
-                    return 1;
-                }
-                finally {
-                    if (dfrFile != null)
-                        dfrFile.Close();
                 }
             }
             catch (Exception ex) {

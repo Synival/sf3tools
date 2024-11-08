@@ -77,31 +77,31 @@ namespace SF3.Tables {
         /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
         public bool LoadFromResourceFile(Func<int, string, int, T> makeTFunc, ContinueReadingPredicate pred) {
             var rows = new Dictionary<int, T>();
-            FileStream stream = null;
             try {
                 // Get the size of our rows so we can determine the expLimitAddress of elements.
                 var size = makeTFunc(0, "", Address).Size;
 
                 // Read all elements.
-                stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read);
-                var xml = MakeXmlReader(stream);
-                _ = xml.Read();
-
-                T prevModel = null;
-                while (!xml.EOF) {
+                using (var stream = new FileStream(ResourceFile, FileMode.Open, FileAccess.Read)) {
+                    var xml = MakeXmlReader(stream);
                     _ = xml.Read();
-                    if (xml.HasAttributes) {
-                        var id = Convert.ToInt32(xml.GetAttribute(0), 16);
-                        var name = xml.GetAttribute(1);
-                        var newModel = makeTFunc(id, name, Address + id * size);
-                        if (pred != null && !pred(rows, prevModel, newModel))
-                            break;
 
-                        rows.Add(id, newModel);
+                    T prevModel = null;
+                    while (!xml.EOF) {
+                        _ = xml.Read();
+                        if (xml.HasAttributes) {
+                            var id = Convert.ToInt32(xml.GetAttribute(0), 16);
+                            var name = xml.GetAttribute(1);
+                            var newModel = makeTFunc(id, name, Address + id * size);
+                            if (pred != null && !pred(rows, prevModel, newModel))
+                                break;
 
-                        if (id < 0 || (MaxSize != null && id >= MaxSize))
-                            throw new IndexOutOfRangeException();
-                        prevModel = newModel;
+                            rows.Add(id, newModel);
+
+                            if (id < 0 || (MaxSize != null && id >= MaxSize))
+                                throw new IndexOutOfRangeException();
+                            prevModel = newModel;
+                        }
                     }
                 }
             }
@@ -110,7 +110,6 @@ namespace SF3.Tables {
             }
             finally {
                 _rows = rows.OrderBy(x => x.Key).Select(x => x.Value).ToArray();
-                stream?.Close();
             }
             return true;
         }

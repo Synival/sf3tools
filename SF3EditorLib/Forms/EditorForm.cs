@@ -124,19 +124,13 @@ namespace SF3.Editor.Forms {
         }
 
         private bool LoadFile(string filename) {
-            FileStream stream = null;
             try {
-                try {
-                    stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                }
-                catch (Exception e) {
-                    ErrorMessage("Error trying to load file:\n\n" + e.Message + "\n\nIt is probably in use by another process.");
-                    return false;
-                }
-                return LoadFile(filename, stream);
+                using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
+                    return LoadFile(filename, stream);
             }
-            finally {
-                stream?.Close();
+            catch (Exception e) {
+                ErrorMessage("Error trying to load file:\n\n" + e.Message + "\n\nIt is probably in use by another process.");
+                return false;
             }
         }
 
@@ -271,31 +265,30 @@ namespace SF3.Editor.Forms {
             if (openfile.ShowDialog() != DialogResult.OK)
                 return false;
 
-            FileStream file = null;
             try {
-                file = File.Open(openfile.FileName, FileMode.Open, FileAccess.Read);
-                var diff = new ByteDiff(file);
-                var oldBytes = FileEditor.GetAllData();
-                var newBytes = diff.ApplyTo(oldBytes);
+                using (var file = File.Open(openfile.FileName, FileMode.Open, FileAccess.Read)) {
+                    var diff = new ByteDiff(file);
+                    var oldBytes = FileEditor.GetAllData();
+                    var newBytes = diff.ApplyTo(oldBytes);
 
-                var filename = FileEditor.Filename;
-                if (!CloseFile())
-                    return false;
-                if (!LoadFile(filename, new MemoryStream(newBytes))) {
-                    if (FileEditor != null)
-                        FileEditor.IsModified = true;
-                    return false;
+                    var filename = FileEditor.Filename;
+                    if (!CloseFile())
+                        return false;
+                    using (var newBytesStream = new MemoryStream(newBytes)) {
+                        if (!LoadFile(filename, newBytesStream)) {
+                            if (FileEditor != null)
+                                FileEditor.IsModified = true;
+                            return false;
+                        }
+                    }
+
+                    FileEditor.IsModified = true;
+                    InfoMessage("DFR file successfully applied.");
                 }
-
-                FileEditor.IsModified = true;
-                InfoMessage("DFR file successfully applied.");
             }
             catch (Exception e) {
                 ErrorMessage("Error loading DFR file:\n\n" + e.Message);
                 return false;
-            }
-            finally {
-                file.Close();
             }
 
             return true;

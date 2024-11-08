@@ -19,29 +19,28 @@ namespace CommonLib.Utils {
         /// <param name="filename">XML file to parse.</param>
         /// <returns>a Dictionary of values (attribute "value") with their names (attribute "name").</returns>
         public static Dictionary<int, string> GetValueNameDictionaryFromXML(string filename) {
-            var stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read)) {
+                var settings = new XmlReaderSettings {
+                    IgnoreComments = true,
+                    IgnoreWhitespace = true
+                };
 
-            var settings = new XmlReaderSettings {
-                IgnoreComments = true,
-                IgnoreWhitespace = true
-            };
-
-            var xml = XmlReader.Create(stream, settings);
-            _ = xml.Read();
-
-            var nameDict = new Dictionary<int, string>();
-            while (!xml.EOF) {
+                var xml = XmlReader.Create(stream, settings);
                 _ = xml.Read();
-                if (xml.HasAttributes) {
-                    var valueStr = xml.GetAttribute("value");
-                    var name = xml.GetAttribute("name");
 
-                    if (valueStr != null && name != null)
-                        nameDict.Add(Convert.ToInt32(valueStr, 16), name);
+                var nameDict = new Dictionary<int, string>();
+                while (!xml.EOF) {
+                    _ = xml.Read();
+                    if (xml.HasAttributes) {
+                        var valueStr = xml.GetAttribute("value");
+                        var name = xml.GetAttribute("name");
+
+                        if (valueStr != null && name != null)
+                            nameDict.Add(Convert.ToInt32(valueStr, 16), name);
+                    }
                 }
+                return nameDict;
             }
-
-            return nameDict;
         }
     }
 }
