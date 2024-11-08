@@ -223,7 +223,7 @@
             // lvcHeaderAddress
             // 
             this.lvcHeaderAddress.AspectName = "Address";
-            this.lvcHeaderAddress.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderAddress.AspectToStringFormat = "{0:X4}";
             this.lvcHeaderAddress.IsEditable = false;
             this.lvcHeaderAddress.Text = "Address";
             // 
@@ -394,7 +394,7 @@
             // lvcSlotTab1Address
             // 
             this.lvcSlotTab1Address.AspectName = "Address";
-            this.lvcSlotTab1Address.AspectToStringFormat = "{0:X}";
+            this.lvcSlotTab1Address.AspectToStringFormat = "{0:X4}";
             this.lvcSlotTab1Address.IsEditable = false;
             this.lvcSlotTab1Address.Text = "Address";
             this.lvcSlotTab1Address.Width = 50;
@@ -1029,7 +1029,7 @@
             // lvcSpawnZonesAddress
             // 
             this.lvcSpawnZonesAddress.AspectName = "Address";
-            this.lvcSpawnZonesAddress.AspectToStringFormat = "{0:X}";
+            this.lvcSpawnZonesAddress.AspectToStringFormat = "{0:X4}";
             this.lvcSpawnZonesAddress.IsEditable = false;
             this.lvcSpawnZonesAddress.Text = "Address";
             this.lvcSpawnZonesAddress.Width = 50;
@@ -1159,7 +1159,7 @@
             // lvcAITargetPositionAddress
             // 
             this.lvcAITargetPositionAddress.AspectName = "Address";
-            this.lvcAITargetPositionAddress.AspectToStringFormat = "{0:X}";
+            this.lvcAITargetPositionAddress.AspectToStringFormat = "{0:X4}";
             this.lvcAITargetPositionAddress.IsEditable = false;
             this.lvcAITargetPositionAddress.Text = "Address";
             this.lvcAITargetPositionAddress.Width = 50;
@@ -1255,7 +1255,7 @@
             // lvcScriptedMovementAddress
             // 
             this.lvcScriptedMovementAddress.AspectName = "Address";
-            this.lvcScriptedMovementAddress.AspectToStringFormat = "{0:X}";
+            this.lvcScriptedMovementAddress.AspectToStringFormat = "{0:X4}";
             this.lvcScriptedMovementAddress.IsEditable = false;
             this.lvcScriptedMovementAddress.Text = "Address";
             this.lvcScriptedMovementAddress.Width = 50;

@@ -138,14 +138,14 @@ namespace SF3.IconPointerEditor.Forms
             // lvcItemIconAddress
             // 
             this.lvcItemIconAddress.AspectName = "Address";
-            this.lvcItemIconAddress.AspectToStringFormat = "{0:X}";
+            this.lvcItemIconAddress.AspectToStringFormat = "{0:X4}";
             this.lvcItemIconAddress.IsEditable = false;
             this.lvcItemIconAddress.Text = "Address";
             // 
             // lvcItemIconOffset
             // 
             this.lvcItemIconOffset.AspectName = "TheItemIcon";
-            this.lvcItemIconOffset.AspectToStringFormat = "{0:X}";
+            this.lvcItemIconOffset.AspectToStringFormat = "{0:X4}";
             this.lvcItemIconOffset.Text = "ItemIcon offset";
             this.lvcItemIconOffset.Width = 90;
             // 
@@ -233,7 +233,7 @@ namespace SF3.IconPointerEditor.Forms
             // lvcSpellIconAddress
             // 
             this.lvcSpellIconAddress.AspectName = "Address";
-            this.lvcSpellIconAddress.AspectToStringFormat = "{0:X}";
+            this.lvcSpellIconAddress.AspectToStringFormat = "{0:X4}";
             this.lvcSpellIconAddress.IsEditable = false;
             this.lvcSpellIconAddress.Text = "Address";
             this.lvcSpellIconAddress.Width = 50;
@@ -241,14 +241,14 @@ namespace SF3.IconPointerEditor.Forms
             // lvcSpellIconOffset
             // 
             this.lvcSpellIconOffset.AspectName = "TheSpellIcon";
-            this.lvcSpellIconOffset.AspectToStringFormat = "{0:X}";
+            this.lvcSpellIconOffset.AspectToStringFormat = "{0:X4}";
             this.lvcSpellIconOffset.Text = "Spell Icon offset";
             this.lvcSpellIconOffset.Width = 90;
             // 
             // lvcSpellIconViewOffset
             // 
             this.lvcSpellIconViewOffset.AspectName = "RealOffset";
-            this.lvcSpellIconViewOffset.AspectToStringFormat = "{0:X}";
+            this.lvcSpellIconViewOffset.AspectToStringFormat = "{0:X4}";
             this.lvcSpellIconViewOffset.Text = "Offset in file for viewing";
             this.lvcSpellIconViewOffset.Width = 130;
             // 

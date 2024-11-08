@@ -445,7 +445,7 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsAddress
             // 
             this.lvcSpellsAddress.AspectName = "Address";
-            this.lvcSpellsAddress.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsAddress.AspectToStringFormat = "{0:X4}";
             this.lvcSpellsAddress.IsEditable = false;
             this.lvcSpellsAddress.Text = "Address";
             this.lvcSpellsAddress.Width = 62;
@@ -460,7 +460,6 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS1LearnedAt
             // 
             this.lvcSpellsS1LearnedAt.AspectName = "S1LearnedAt";
-            this.lvcSpellsS1LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS1LearnedAt.Text = "S1LearnedAt";
             this.lvcSpellsS1LearnedAt.Width = 75;
             // 
@@ -474,14 +473,12 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS1LearnedLevel
             // 
             this.lvcSpellsS1LearnedLevel.AspectName = "S1LearnedLevel";
-            this.lvcSpellsS1LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS1LearnedLevel.Text = "S1LearnedLevel";
             this.lvcSpellsS1LearnedLevel.Width = 95;
             // 
             // lvcSpellsS2LearnedAt
             // 
             this.lvcSpellsS2LearnedAt.AspectName = "S2LearnedAt";
-            this.lvcSpellsS2LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS2LearnedAt.Text = "S2LearnedAt";
             this.lvcSpellsS2LearnedAt.Width = 75;
             // 
@@ -502,7 +499,6 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS3LearnedAt
             // 
             this.lvcSpellsS3LearnedAt.AspectName = "S3LearnedAt";
-            this.lvcSpellsS3LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS3LearnedAt.Text = "S3LearnedAt";
             this.lvcSpellsS3LearnedAt.Width = 75;
             // 
@@ -516,14 +512,12 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS3LearnedLevel
             // 
             this.lvcSpellsS3LearnedLevel.AspectName = "S3LearnedLevel";
-            this.lvcSpellsS3LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS3LearnedLevel.Text = "S3LearnedLevel";
             this.lvcSpellsS3LearnedLevel.Width = 95;
             // 
             // lvcSpellsS4LearnedAt
             // 
             this.lvcSpellsS4LearnedAt.AspectName = "S4LearnedAt";
-            this.lvcSpellsS4LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS4LearnedAt.Text = "S4LearnedAt";
             this.lvcSpellsS4LearnedAt.Width = 75;
             // 
@@ -537,14 +531,12 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS4LearnedLevel
             // 
             this.lvcSpellsS4LearnedLevel.AspectName = "S4LearnedLevel";
-            this.lvcSpellsS4LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS4LearnedLevel.Text = "S4LearnedLevel";
             this.lvcSpellsS4LearnedLevel.Width = 95;
             // 
             // lvcSpellsS5LearnedAt
             // 
             this.lvcSpellsS5LearnedAt.AspectName = "S5LearnedAt";
-            this.lvcSpellsS5LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS5LearnedAt.Text = "S5LearnedAt";
             this.lvcSpellsS5LearnedAt.Width = 75;
             // 
@@ -558,14 +550,12 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS5LearnedLevel
             // 
             this.lvcSpellsS5LearnedLevel.AspectName = "S5LearnedLevel";
-            this.lvcSpellsS5LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS5LearnedLevel.Text = "S5LearnedLevel";
             this.lvcSpellsS5LearnedLevel.Width = 95;
             // 
             // lvcSpellsS6LearnedAt
             // 
             this.lvcSpellsS6LearnedAt.AspectName = "S6LearnedAt";
-            this.lvcSpellsS6LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS6LearnedAt.Text = "S6LearnedAt";
             this.lvcSpellsS6LearnedAt.Width = 75;
             // 
@@ -579,14 +569,12 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS6LearnedLevel
             // 
             this.lvcSpellsS6LearnedLevel.AspectName = "S6LearnedLevel";
-            this.lvcSpellsS6LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS6LearnedLevel.Text = "S6LearnedLevel";
             this.lvcSpellsS6LearnedLevel.Width = 95;
             // 
             // lvcSpellsS7LearnedAt
             // 
             this.lvcSpellsS7LearnedAt.AspectName = "S7LearnedAt";
-            this.lvcSpellsS7LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS7LearnedAt.Text = "S7LearnedAt";
             this.lvcSpellsS7LearnedAt.Width = 75;
             // 
@@ -600,14 +588,12 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS7LearnedLevel
             // 
             this.lvcSpellsS7LearnedLevel.AspectName = "S7LearnedLevel";
-            this.lvcSpellsS7LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS7LearnedLevel.Text = "S7LearnedLevel";
             this.lvcSpellsS7LearnedLevel.Width = 95;
             // 
             // lvcSpellsS8LearnedAt
             // 
             this.lvcSpellsS8LearnedAt.AspectName = "S8LearnedAt";
-            this.lvcSpellsS8LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS8LearnedAt.Text = "S8LearnedAt";
             this.lvcSpellsS8LearnedAt.Width = 75;
             // 
@@ -621,14 +607,12 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS8LearnedLevel
             // 
             this.lvcSpellsS8LearnedLevel.AspectName = "S8LearnedLevel";
-            this.lvcSpellsS8LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS8LearnedLevel.Text = "S8LearnedLevel";
             this.lvcSpellsS8LearnedLevel.Width = 95;
             // 
             // lvcSpellsS9LearnedAt
             // 
             this.lvcSpellsS9LearnedAt.AspectName = "S9LearnedAt";
-            this.lvcSpellsS9LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS9LearnedAt.Text = "S9LearnedAt";
             this.lvcSpellsS9LearnedAt.Width = 75;
             // 
@@ -642,14 +626,12 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS9LearnedLevel
             // 
             this.lvcSpellsS9LearnedLevel.AspectName = "S9LearnedLevel";
-            this.lvcSpellsS9LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS9LearnedLevel.Text = "S9LearnedLevel";
             this.lvcSpellsS9LearnedLevel.Width = 95;
             // 
             // lvcSpellsS10LearnedAt
             // 
             this.lvcSpellsS10LearnedAt.AspectName = "S10LearnedAt";
-            this.lvcSpellsS10LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS10LearnedAt.Text = "S10LearnedAt";
             this.lvcSpellsS10LearnedAt.Width = 75;
             // 
@@ -663,14 +645,12 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS10LearnedLevel
             // 
             this.lvcSpellsS10LearnedLevel.AspectName = "S10LearnedLevel";
-            this.lvcSpellsS10LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS10LearnedLevel.Text = "S10LearnedLevel";
             this.lvcSpellsS10LearnedLevel.Width = 95;
             // 
             // lvcSpellsS11LearnedAt
             // 
             this.lvcSpellsS11LearnedAt.AspectName = "S11LearnedAt";
-            this.lvcSpellsS11LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS11LearnedAt.Text = "S11LearnedAt";
             this.lvcSpellsS11LearnedAt.Width = 75;
             // 
@@ -684,14 +664,12 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS11LearnedLevel
             // 
             this.lvcSpellsS11LearnedLevel.AspectName = "S11LearnedLevel";
-            this.lvcSpellsS11LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS11LearnedLevel.Text = "S11LearnedLevel";
             this.lvcSpellsS11LearnedLevel.Width = 95;
             // 
             // lvcSpellsS12LearnedAt
             // 
             this.lvcSpellsS12LearnedAt.AspectName = "S12LearnedAt";
-            this.lvcSpellsS12LearnedAt.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS12LearnedAt.Text = "S12LearnedAt";
             this.lvcSpellsS12LearnedAt.Width = 75;
             // 
@@ -705,7 +683,6 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcSpellsS12LearnedLevel
             // 
             this.lvcSpellsS12LearnedLevel.AspectName = "S12LearnedLevel";
-            this.lvcSpellsS12LearnedLevel.AspectToStringFormat = "{0:X}";
             this.lvcSpellsS12LearnedLevel.Text = "S12LearnedLevel";
             this.lvcSpellsS12LearnedLevel.Width = 95;
             // 
@@ -843,7 +820,7 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcStatsAddress
             // 
             this.lvcStatsAddress.AspectName = "Address";
-            this.lvcStatsAddress.AspectToStringFormat = "{0:X}";
+            this.lvcStatsAddress.AspectToStringFormat = "{0:X4}";
             this.lvcStatsAddress.IsEditable = false;
             this.lvcStatsAddress.Text = "Address";
             // 
@@ -1220,7 +1197,7 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcEquipStatisticsAddress
             // 
             this.lvcEquipStatisticsAddress.AspectName = "Address";
-            this.lvcEquipStatisticsAddress.AspectToStringFormat = "{0:X}";
+            this.lvcEquipStatisticsAddress.AspectToStringFormat = "{0:X4}";
             this.lvcEquipStatisticsAddress.IsEditable = false;
             this.lvcEquipStatisticsAddress.Text = "Address";
             // 
@@ -1456,7 +1433,7 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcMiscellaneousAddress
             // 
             this.lvcMiscellaneousAddress.AspectName = "Address";
-            this.lvcMiscellaneousAddress.AspectToStringFormat = "{0:X}";
+            this.lvcMiscellaneousAddress.AspectToStringFormat = "{0:X4}";
             this.lvcMiscellaneousAddress.IsEditable = false;
             this.lvcMiscellaneousAddress.Text = "Address";
             // 
@@ -1659,14 +1636,13 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcInitialInfoAddress
             // 
             this.lvcInitialInfoAddress.AspectName = "Address";
-            this.lvcInitialInfoAddress.AspectToStringFormat = "{0:X}";
+            this.lvcInitialInfoAddress.AspectToStringFormat = "{0:X4}";
             this.lvcInitialInfoAddress.IsEditable = false;
             this.lvcInitialInfoAddress.Text = "Address";
             // 
             // lvcInitialInfoDefaultName
             // 
             this.lvcInitialInfoDefaultName.AspectName = "Name";
-            this.lvcInitialInfoDefaultName.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoDefaultName.IsEditable = false;
             this.lvcInitialInfoDefaultName.Text = "DefaultName";
             this.lvcInitialInfoDefaultName.Width = 90;
@@ -1747,7 +1723,6 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcInitialInfoWeapon1Exp
             // 
             this.lvcInitialInfoWeapon1Exp.AspectName = "Weapon1Exp";
-            this.lvcInitialInfoWeapon1Exp.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoWeapon1Exp.Text = "Weapon1Exp";
             this.lvcInitialInfoWeapon1Exp.Width = 80;
             // 
@@ -1760,7 +1735,6 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcInitialInfoWeapon2Exp
             // 
             this.lvcInitialInfoWeapon2Exp.AspectName = "Weapon2Exp";
-            this.lvcInitialInfoWeapon2Exp.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoWeapon2Exp.Text = "Weapon2Exp";
             this.lvcInitialInfoWeapon2Exp.Width = 80;
             // 
@@ -1773,7 +1747,6 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcInitialInfoWeapon3Exp
             // 
             this.lvcInitialInfoWeapon3Exp.AspectName = "Weapon3Exp";
-            this.lvcInitialInfoWeapon3Exp.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoWeapon3Exp.Text = "Weapon3Exp";
             this.lvcInitialInfoWeapon3Exp.Width = 80;
             // 
@@ -1786,7 +1759,6 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcInitialInfoWeapon4Exp
             // 
             this.lvcInitialInfoWeapon4Exp.AspectName = "Weapon4Exp";
-            this.lvcInitialInfoWeapon4Exp.AspectToStringFormat = "{0:X}";
             this.lvcInitialInfoWeapon4Exp.Text = "Weapon4Exp";
             this.lvcInitialInfoWeapon4Exp.Width = 80;
             // 
@@ -1849,14 +1821,13 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcWeaponLevelReqAddress
             // 
             this.lvcWeaponLevelReqAddress.AspectName = "Address";
-            this.lvcWeaponLevelReqAddress.AspectToStringFormat = "{0:X}";
+            this.lvcWeaponLevelReqAddress.AspectToStringFormat = "{0:X4}";
             this.lvcWeaponLevelReqAddress.IsEditable = false;
             this.lvcWeaponLevelReqAddress.Text = "Address";
             // 
             // lvcWeaponLevelReqTable
             // 
             this.lvcWeaponLevelReqTable.AspectName = "Name";
-            this.lvcWeaponLevelReqTable.AspectToStringFormat = "{0:X}";
             this.lvcWeaponLevelReqTable.IsEditable = false;
             this.lvcWeaponLevelReqTable.Text = "Table";
             this.lvcWeaponLevelReqTable.Width = 120;
@@ -1864,28 +1835,24 @@ namespace SF3.X033_X031_Editor.Forms
             // lvcWeaponLevelReqWLevel1
             // 
             this.lvcWeaponLevelReqWLevel1.AspectName = "WLevel1";
-            this.lvcWeaponLevelReqWLevel1.AspectToStringFormat = "{0:X}";
             this.lvcWeaponLevelReqWLevel1.Text = "WLevel1";
             this.lvcWeaponLevelReqWLevel1.Width = 70;
             // 
             // lvcWeaponLevelReqWLevel2
             // 
             this.lvcWeaponLevelReqWLevel2.AspectName = "WLevel2";
-            this.lvcWeaponLevelReqWLevel2.AspectToStringFormat = "{0:X}";
             this.lvcWeaponLevelReqWLevel2.Text = "WLevel2";
             this.lvcWeaponLevelReqWLevel2.Width = 70;
             // 
             // lvcWeaponLevelReqWLevel3
             // 
             this.lvcWeaponLevelReqWLevel3.AspectName = "WLevel3";
-            this.lvcWeaponLevelReqWLevel3.AspectToStringFormat = "{0:X}";
             this.lvcWeaponLevelReqWLevel3.Text = "WLevel3";
             this.lvcWeaponLevelReqWLevel3.Width = 70;
             // 
             // lvcWeaponLevelReqWLevel4
             // 
             this.lvcWeaponLevelReqWLevel4.AspectName = "WLevel4";
-            this.lvcWeaponLevelReqWLevel4.AspectToStringFormat = "{0:X}";
             this.lvcWeaponLevelReqWLevel4.Text = "WLevel4";
             this.lvcWeaponLevelReqWLevel4.Width = 70;
             // 

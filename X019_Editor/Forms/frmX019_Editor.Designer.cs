@@ -240,7 +240,7 @@ namespace SF3.X019_Editor.Forms
             // lvcMonsterTab1Address
             // 
             this.lvcMonsterTab1Address.AspectName = "Address";
-            this.lvcMonsterTab1Address.AspectToStringFormat = "{0:X}";
+            this.lvcMonsterTab1Address.AspectToStringFormat = "{0:X4}";
             this.lvcMonsterTab1Address.IsEditable = false;
             this.lvcMonsterTab1Address.Text = "Address";
             // 
@@ -446,7 +446,6 @@ namespace SF3.X019_Editor.Forms
             // lvcMonsterTab2Spell1Level
             // 
             this.lvcMonsterTab2Spell1Level.AspectName = "Spell1Level";
-            this.lvcMonsterTab2Spell1Level.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2Spell1Level.Text = "Spell1Level";
             this.lvcMonsterTab2Spell1Level.Width = 70;
             // 
@@ -460,7 +459,6 @@ namespace SF3.X019_Editor.Forms
             // lvcMonsterTab2Spell2Level
             // 
             this.lvcMonsterTab2Spell2Level.AspectName = "Spell2Level";
-            this.lvcMonsterTab2Spell2Level.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2Spell2Level.Text = "Spell2Level";
             this.lvcMonsterTab2Spell2Level.Width = 70;
             // 
@@ -474,7 +472,6 @@ namespace SF3.X019_Editor.Forms
             // lvcMonsterTab2Spell3Level
             // 
             this.lvcMonsterTab2Spell3Level.AspectName = "Spell3Level";
-            this.lvcMonsterTab2Spell3Level.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2Spell3Level.Text = "Spell3Level";
             this.lvcMonsterTab2Spell3Level.Width = 70;
             // 
@@ -488,7 +485,6 @@ namespace SF3.X019_Editor.Forms
             // lvcMonsterTab2Spell4Level
             // 
             this.lvcMonsterTab2Spell4Level.AspectName = "Spell4Level";
-            this.lvcMonsterTab2Spell4Level.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab2Spell4Level.Text = "Spell4Level";
             this.lvcMonsterTab2Spell4Level.Width = 70;
             // 
@@ -803,7 +799,6 @@ namespace SF3.X019_Editor.Forms
             // lvcMonsterTab4Gold
             // 
             this.lvcMonsterTab4Gold.AspectName = "Gold";
-            this.lvcMonsterTab4Gold.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab4Gold.Text = "Gold";
             // 
             // lvcMonsterTab4Drop
@@ -830,14 +825,12 @@ namespace SF3.X019_Editor.Forms
             // lvcMonsterTab4SlowPlus
             // 
             this.lvcMonsterTab4SlowPlus.AspectName = "SlowPlus";
-            this.lvcMonsterTab4SlowPlus.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab4SlowPlus.Text = "Slow+%";
             this.lvcMonsterTab4SlowPlus.Width = 70;
             // 
             // lvcMonsterTab4SupportPlus
             // 
             this.lvcMonsterTab4SupportPlus.AspectName = "SupportPlus";
-            this.lvcMonsterTab4SupportPlus.AspectToStringFormat = "{0:X}";
             this.lvcMonsterTab4SupportPlus.Text = "Support+%";
             this.lvcMonsterTab4SupportPlus.Width = 70;
             // 

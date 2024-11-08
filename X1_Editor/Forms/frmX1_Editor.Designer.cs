@@ -245,7 +245,7 @@ namespace SF3.X1_Editor.Forms
             // lvcTileDataAddress
             // 
             this.lvcTileDataAddress.AspectName = "Address";
-            this.lvcTileDataAddress.AspectToStringFormat = "{0:X}";
+            this.lvcTileDataAddress.AspectToStringFormat = "{0:X4}";
             this.lvcTileDataAddress.IsEditable = false;
             this.lvcTileDataAddress.Text = "Address";
             this.lvcTileDataAddress.Width = 50;
@@ -428,7 +428,7 @@ namespace SF3.X1_Editor.Forms
             // lvcWarpTableAddress
             // 
             this.lvcWarpTableAddress.AspectName = "Address";
-            this.lvcWarpTableAddress.AspectToStringFormat = "{0:X}";
+            this.lvcWarpTableAddress.AspectToStringFormat = "{0:X4}";
             this.lvcWarpTableAddress.IsEditable = false;
             this.lvcWarpTableAddress.Text = "Address";
             this.lvcWarpTableAddress.Width = 50;
@@ -520,7 +520,7 @@ namespace SF3.X1_Editor.Forms
             // lvcBattlePointersAddress
             // 
             this.lvcBattlePointersAddress.AspectName = "Address";
-            this.lvcBattlePointersAddress.AspectToStringFormat = "{0:X}";
+            this.lvcBattlePointersAddress.AspectToStringFormat = "{0:X4}";
             this.lvcBattlePointersAddress.IsEditable = false;
             this.lvcBattlePointersAddress.Text = "Address";
             this.lvcBattlePointersAddress.Width = 50;
@@ -602,7 +602,7 @@ namespace SF3.X1_Editor.Forms
             // lvcArrowsAddress
             // 
             this.lvcArrowsAddress.AspectName = "Address";
-            this.lvcArrowsAddress.AspectToStringFormat = "{0:X}";
+            this.lvcArrowsAddress.AspectToStringFormat = "{0:X4}";
             this.lvcArrowsAddress.IsEditable = false;
             this.lvcArrowsAddress.Text = "Address";
             this.lvcArrowsAddress.Width = 50;
@@ -721,7 +721,7 @@ namespace SF3.X1_Editor.Forms
             // lvcNonBattleEnterAddress
             // 
             this.lvcNonBattleEnterAddress.AspectName = "Address";
-            this.lvcNonBattleEnterAddress.AspectToStringFormat = "{0:X}";
+            this.lvcNonBattleEnterAddress.AspectToStringFormat = "{0:X4}";
             this.lvcNonBattleEnterAddress.IsEditable = false;
             this.lvcNonBattleEnterAddress.Text = "Address";
             this.lvcNonBattleEnterAddress.Width = 50;
@@ -763,13 +763,13 @@ namespace SF3.X1_Editor.Forms
             // lvcNonBattleEnterDirection
             // 
             this.lvcNonBattleEnterDirection.AspectName = "EnterDirection";
-            this.lvcNonBattleEnterDirection.AspectToStringFormat = "{0:X}";
+            this.lvcNonBattleEnterDirection.AspectToStringFormat = "{0:X4}";
             this.lvcNonBattleEnterDirection.Text = "Direction";
             // 
             // lvcNonBattleEnterCamera
             // 
             this.lvcNonBattleEnterCamera.AspectName = "EnterCamera";
-            this.lvcNonBattleEnterCamera.AspectToStringFormat = "{0:X}";
+            this.lvcNonBattleEnterCamera.AspectToStringFormat = "{0:X4}";
             this.lvcNonBattleEnterCamera.Text = "Camera";
             this.lvcNonBattleEnterCamera.Width = 50;
             // 
@@ -862,7 +862,7 @@ namespace SF3.X1_Editor.Forms
             // lvcTownNpcsAddress
             // 
             this.lvcTownNpcsAddress.AspectName = "Address";
-            this.lvcTownNpcsAddress.AspectToStringFormat = "{0:X}";
+            this.lvcTownNpcsAddress.AspectToStringFormat = "{0:X4}";
             this.lvcTownNpcsAddress.IsEditable = false;
             this.lvcTownNpcsAddress.Text = "Address";
             this.lvcTownNpcsAddress.Width = 50;
@@ -1020,7 +1020,7 @@ namespace SF3.X1_Editor.Forms
             // lvcInteractablesAddress
             // 
             this.lvcInteractablesAddress.AspectName = "Address";
-            this.lvcInteractablesAddress.AspectToStringFormat = "{0:X}";
+            this.lvcInteractablesAddress.AspectToStringFormat = "{0:X4}";
             this.lvcInteractablesAddress.IsEditable = false;
             this.lvcInteractablesAddress.Text = "Address";
             this.lvcInteractablesAddress.Width = 50;
@@ -1028,7 +1028,7 @@ namespace SF3.X1_Editor.Forms
             // lvcInteractablesDirectionSearched
             // 
             this.lvcInteractablesDirectionSearched.AspectName = "Searched";
-            this.lvcInteractablesDirectionSearched.AspectToStringFormat = "{0:X}";
+            this.lvcInteractablesDirectionSearched.AspectToStringFormat = "{0:X4}";
             this.lvcInteractablesDirectionSearched.Text = "Direction/Searched";
             this.lvcInteractablesDirectionSearched.Width = 110;
             // 
@@ -1042,7 +1042,7 @@ namespace SF3.X1_Editor.Forms
             // lvcInteractablesFlagUsed
             // 
             this.lvcInteractablesFlagUsed.AspectName = "FlagUse";
-            this.lvcInteractablesFlagUsed.AspectToStringFormat = "{0:X}";
+            this.lvcInteractablesFlagUsed.AspectToStringFormat = "{0:X4}";
             this.lvcInteractablesFlagUsed.Text = "FlagUsed";
             // 
             // lvcInteractablesUnknown1
@@ -1055,14 +1055,14 @@ namespace SF3.X1_Editor.Forms
             // lvcInteractablesEventTypeCode
             // 
             this.lvcInteractablesEventTypeCode.AspectName = "EventType";
-            this.lvcInteractablesEventTypeCode.AspectToStringFormat = "{0:X}";
+            this.lvcInteractablesEventTypeCode.AspectToStringFormat = "{0:X4}";
             this.lvcInteractablesEventTypeCode.Text = "EventType/Code";
             this.lvcInteractablesEventTypeCode.Width = 95;
             // 
             // lvcInteractablesItemTextCode
             // 
             this.lvcInteractablesItemTextCode.AspectName = "EventParameter";
-            this.lvcInteractablesItemTextCode.AspectToStringFormat = "{0:X}";
+            this.lvcInteractablesItemTextCode.AspectToStringFormat = "{0:X4}";
             this.lvcInteractablesItemTextCode.Text = "Item/Text/Code";
             this.lvcInteractablesItemTextCode.Width = 120;
             // 

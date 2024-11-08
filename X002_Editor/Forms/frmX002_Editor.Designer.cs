@@ -283,7 +283,7 @@ namespace SF3.X002_Editor.Forms
             // lvcSpellsAddress
             // 
             this.lvcSpellsAddress.AspectName = "Address";
-            this.lvcSpellsAddress.AspectToStringFormat = "{0:X}";
+            this.lvcSpellsAddress.AspectToStringFormat = "{0:X4}";
             this.lvcSpellsAddress.IsEditable = false;
             this.lvcSpellsAddress.Text = "Address";
             this.lvcSpellsAddress.Width = 52;
@@ -529,7 +529,7 @@ namespace SF3.X002_Editor.Forms
             // lvcItemsAddress
             // 
             this.lvcItemsAddress.AspectName = "Address";
-            this.lvcItemsAddress.AspectToStringFormat = "{0:X}";
+            this.lvcItemsAddress.AspectToStringFormat = "{0:X4}";
             this.lvcItemsAddress.IsEditable = false;
             this.lvcItemsAddress.Text = "Address";
             this.lvcItemsAddress.Width = 54;
@@ -577,14 +577,12 @@ namespace SF3.X002_Editor.Forms
             // lvcItemsAttackRank
             // 
             this.lvcItemsAttackRank.AspectName = "AttackRank";
-            this.lvcItemsAttackRank.AspectToStringFormat = "{0:X}";
             this.lvcItemsAttackRank.Text = "AttackRank";
             this.lvcItemsAttackRank.Width = 75;
             // 
             // lvcItemsSpellRank
             // 
             this.lvcItemsSpellRank.AspectName = "SpellRank";
-            this.lvcItemsSpellRank.AspectToStringFormat = "{0:X}";
             this.lvcItemsSpellRank.Text = "SpellRank";
             this.lvcItemsSpellRank.Width = 70;
             // 
@@ -624,7 +622,6 @@ namespace SF3.X002_Editor.Forms
             // lvcItemsStatUp1
             // 
             this.lvcItemsStatUp1.AspectName = "StatUp1";
-            this.lvcItemsStatUp1.AspectToStringFormat = "{0:X}";
             this.lvcItemsStatUp1.Text = "StatUp1";
             // 
             // lvcItemsStatType2
@@ -637,7 +634,6 @@ namespace SF3.X002_Editor.Forms
             // lvcItemsStatUp2
             // 
             this.lvcItemsStatUp2.AspectName = "StatUp2";
-            this.lvcItemsStatUp2.AspectToStringFormat = "{0:X}";
             this.lvcItemsStatUp2.Text = "StatUp2";
             // 
             // lvcItemsStatType3
@@ -650,7 +646,6 @@ namespace SF3.X002_Editor.Forms
             // lvcItemsStatUp3
             // 
             this.lvcItemsStatUp3.AspectName = "StatUp3";
-            this.lvcItemsStatUp3.AspectToStringFormat = "{0:X}";
             this.lvcItemsStatUp3.Text = "StatUp3";
             // 
             // lvcItemsStatType4
@@ -663,7 +658,6 @@ namespace SF3.X002_Editor.Forms
             // lvcItemsStatUp4
             // 
             this.lvcItemsStatUp4.AspectName = "StatUp4";
-            this.lvcItemsStatUp4.AspectToStringFormat = "{0:X}";
             this.lvcItemsStatUp4.Text = "StatUp4";
             // 
             // lvcItemsSpellUse
@@ -676,7 +670,6 @@ namespace SF3.X002_Editor.Forms
             // lvcItemsSpellUseLv
             // 
             this.lvcItemsSpellUseLv.AspectName = "SpellUseLv";
-            this.lvcItemsSpellUseLv.AspectToStringFormat = "{0:X}";
             this.lvcItemsSpellUseLv.Text = "SpellUseLv";
             this.lvcItemsSpellUseLv.Width = 70;
             // 
@@ -845,14 +838,13 @@ namespace SF3.X002_Editor.Forms
             // lvcWeaponSpellsAddress
             // 
             this.lvcWeaponSpellsAddress.AspectName = "Address";
-            this.lvcWeaponSpellsAddress.AspectToStringFormat = "{0:X}";
+            this.lvcWeaponSpellsAddress.AspectToStringFormat = "{0:X4}";
             this.lvcWeaponSpellsAddress.IsEditable = false;
             this.lvcWeaponSpellsAddress.Text = "Address";
             // 
             // lvcWeaponSpellsName
             // 
             this.lvcWeaponSpellsName.AspectName = "Name";
-            this.lvcWeaponSpellsName.AspectToStringFormat = "{0:X}";
             this.lvcWeaponSpellsName.IsEditable = false;
             this.lvcWeaponSpellsName.Text = "DefaultName";
             this.lvcWeaponSpellsName.Width = 120;
@@ -867,28 +859,24 @@ namespace SF3.X002_Editor.Forms
             // lvcWeaponSpellsWeaponLv0
             // 
             this.lvcWeaponSpellsWeaponLv0.AspectName = "Weapon0";
-            this.lvcWeaponSpellsWeaponLv0.AspectToStringFormat = "{0:X}";
             this.lvcWeaponSpellsWeaponLv0.Text = "WeaponLv0";
             this.lvcWeaponSpellsWeaponLv0.Width = 78;
             // 
             // lvcWeaponSpellsWeaponLv1
             // 
             this.lvcWeaponSpellsWeaponLv1.AspectName = "Weapon1";
-            this.lvcWeaponSpellsWeaponLv1.AspectToStringFormat = "{0:X}";
             this.lvcWeaponSpellsWeaponLv1.Text = "WeaponLv1";
             this.lvcWeaponSpellsWeaponLv1.Width = 81;
             // 
             // lvcWeaponSpellsWeaponLv2
             // 
             this.lvcWeaponSpellsWeaponLv2.AspectName = "Weapon2";
-            this.lvcWeaponSpellsWeaponLv2.AspectToStringFormat = "{0:X}";
             this.lvcWeaponSpellsWeaponLv2.Text = "WeaponLv2";
             this.lvcWeaponSpellsWeaponLv2.Width = 76;
             // 
             // lvcWeaponSpellsWeaponLv3
             // 
             this.lvcWeaponSpellsWeaponLv3.AspectName = "Weapon3";
-            this.lvcWeaponSpellsWeaponLv3.AspectToStringFormat = "{0:X}";
             this.lvcWeaponSpellsWeaponLv3.Text = "WeaponLv3";
             this.lvcWeaponSpellsWeaponLv3.Width = 81;
             // 
@@ -959,7 +947,7 @@ namespace SF3.X002_Editor.Forms
             // lvcLoadedAddress
             // 
             this.lvcLoadedAddress.AspectName = "Address";
-            this.lvcLoadedAddress.AspectToStringFormat = "{0:X}";
+            this.lvcLoadedAddress.AspectToStringFormat = "{0:X4}";
             this.lvcLoadedAddress.IsEditable = false;
             this.lvcLoadedAddress.Text = "Address";
             this.lvcLoadedAddress.Width = 54;
@@ -1104,7 +1092,7 @@ namespace SF3.X002_Editor.Forms
             // lvcLoadedOverrideAddress
             // 
             this.lvcLoadedOverrideAddress.AspectName = "Address";
-            this.lvcLoadedOverrideAddress.AspectToStringFormat = "{0:X}";
+            this.lvcLoadedOverrideAddress.AspectToStringFormat = "{0:X4}";
             this.lvcLoadedOverrideAddress.IsEditable = false;
             this.lvcLoadedOverrideAddress.Text = "Address";
             this.lvcLoadedOverrideAddress.Width = 54;
@@ -1258,7 +1246,7 @@ namespace SF3.X002_Editor.Forms
             // lvcStatBoostAddress
             // 
             this.lvcStatBoostAddress.AspectName = "Address";
-            this.lvcStatBoostAddress.AspectToStringFormat = "{0:X}";
+            this.lvcStatBoostAddress.AspectToStringFormat = "{0:X4}";
             this.lvcStatBoostAddress.IsEditable = false;
             this.lvcStatBoostAddress.Text = "Address";
             this.lvcStatBoostAddress.Width = 54;
@@ -1273,7 +1261,6 @@ namespace SF3.X002_Editor.Forms
             // lvcStatBoostStatValue
             // 
             this.lvcStatBoostStatValue.AspectName = "Stat";
-            this.lvcStatBoostStatValue.AspectToStringFormat = "{0:X}";
             this.lvcStatBoostStatValue.Text = "StatValue";
             this.lvcStatBoostStatValue.Width = 70;
             // 
@@ -1336,7 +1323,7 @@ namespace SF3.X002_Editor.Forms
             // lvcWeaponRankAttackAddress
             // 
             this.lvcWeaponRankAttackAddress.AspectName = "Address";
-            this.lvcWeaponRankAttackAddress.AspectToStringFormat = "{0:X}";
+            this.lvcWeaponRankAttackAddress.AspectToStringFormat = "{0:X4}";
             this.lvcWeaponRankAttackAddress.IsEditable = false;
             this.lvcWeaponRankAttackAddress.Text = "Address";
             this.lvcWeaponRankAttackAddress.Width = 54;
@@ -1351,28 +1338,24 @@ namespace SF3.X002_Editor.Forms
             // lvcWeaponRankAttackSkill0AtkPlus
             // 
             this.lvcWeaponRankAttackSkill0AtkPlus.AspectName = "Skill0";
-            this.lvcWeaponRankAttackSkill0AtkPlus.AspectToStringFormat = "{0:X}";
             this.lvcWeaponRankAttackSkill0AtkPlus.Text = "Skill0 atk+";
             this.lvcWeaponRankAttackSkill0AtkPlus.Width = 70;
             // 
             // lvcWeaponRankAttackSkill1AtkPlus
             // 
             this.lvcWeaponRankAttackSkill1AtkPlus.AspectName = "Skill1";
-            this.lvcWeaponRankAttackSkill1AtkPlus.AspectToStringFormat = "{0:X}";
             this.lvcWeaponRankAttackSkill1AtkPlus.Text = "Skill1 atk+";
             this.lvcWeaponRankAttackSkill1AtkPlus.Width = 80;
             // 
             // lvcWeaponRankAttackSkill2AtkPlus
             // 
             this.lvcWeaponRankAttackSkill2AtkPlus.AspectName = "Skill2";
-            this.lvcWeaponRankAttackSkill2AtkPlus.AspectToStringFormat = "{0:X}";
             this.lvcWeaponRankAttackSkill2AtkPlus.Text = "Skill2 atk+";
             this.lvcWeaponRankAttackSkill2AtkPlus.Width = 77;
             // 
             // lvcWeaponRankAttackSkill3AtkPlus
             // 
             this.lvcWeaponRankAttackSkill3AtkPlus.AspectName = "Skill3";
-            this.lvcWeaponRankAttackSkill3AtkPlus.AspectToStringFormat = "{0:X}";
             this.lvcWeaponRankAttackSkill3AtkPlus.Text = "Skill3 atk+";
             this.lvcWeaponRankAttackSkill3AtkPlus.Width = 77;
             // 
@@ -1431,7 +1414,7 @@ namespace SF3.X002_Editor.Forms
             // lvcAttackResistAddress
             // 
             this.lvcAttackResistAddress.AspectName = "Address";
-            this.lvcAttackResistAddress.AspectToStringFormat = "{0:X}";
+            this.lvcAttackResistAddress.AspectToStringFormat = "{0:X4}";
             this.lvcAttackResistAddress.IsEditable = false;
             this.lvcAttackResistAddress.Text = "Address";
             this.lvcAttackResistAddress.Width = 54;
@@ -1446,14 +1429,12 @@ namespace SF3.X002_Editor.Forms
             // lvcAttackResistAttackSpell
             // 
             this.lvcAttackResistAttackSpell.AspectName = "Attack";
-            this.lvcAttackResistAttackSpell.AspectToStringFormat = "{0:X}";
             this.lvcAttackResistAttackSpell.Text = "Attack spell";
             this.lvcAttackResistAttackSpell.Width = 70;
             // 
             // lvcAttackResistResistSpell
             // 
             this.lvcAttackResistResistSpell.AspectName = "Resist";
-            this.lvcAttackResistResistSpell.AspectToStringFormat = "{0:X}";
             this.lvcAttackResistResistSpell.Text = "Resist spell";
             this.lvcAttackResistResistSpell.Width = 80;
             // 
@@ -1517,7 +1498,7 @@ namespace SF3.X002_Editor.Forms
             // lvcWarpTableScn1Address
             // 
             this.lvcWarpTableScn1Address.AspectName = "Address";
-            this.lvcWarpTableScn1Address.AspectToStringFormat = "{0:X}";
+            this.lvcWarpTableScn1Address.AspectToStringFormat = "{0:X4}";
             this.lvcWarpTableScn1Address.DisplayIndex = 2;
             this.lvcWarpTableScn1Address.IsEditable = false;
             this.lvcWarpTableScn1Address.Text = "Address";
