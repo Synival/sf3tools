@@ -3,7 +3,7 @@ using NDesk.Options;
 
 namespace DFRTool {
     internal class Program {
-        private const string c_Version = "1.1";
+        private const string c_Version = "1.1.1";
 
         private const string c_VersionString =
             "DFRTool v" + c_Version + "\n";
@@ -154,15 +154,10 @@ namespace DFRTool {
             var dfrFilename = extra[1];
 
             try {
-                using (var dfrFile = new FileStream(dfrFilename, FileMode.Open, FileAccess.Read)) {
-                    var diff = new ByteDiff(dfrFile);
-
-                    var oldBytes = File.ReadAllBytes(fileToPatchName);
-                    var newBytes = diff.ApplyTo(oldBytes);
-                    dfrFile.Close();
-
-                    File.WriteAllBytes(fileToPatchName, newBytes);
-                }
+                var diff = new ByteDiff(dfrFilename);
+                var oldBytes = File.ReadAllBytes(fileToPatchName);
+                var newBytes = diff.ApplyTo(oldBytes);
+                File.WriteAllBytes(fileToPatchName, newBytes);
             }
             catch (Exception ex) {
                 Console.Error.WriteLine(ex.Message);

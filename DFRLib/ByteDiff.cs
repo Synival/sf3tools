@@ -74,6 +74,33 @@ namespace DFRLib {
 
             return chunkBuilder.FetchChunks();
         }
+        /// <summary>
+        /// Creates a list of differences read from a DFR file.
+        /// </summary>
+        /// <param name="dfrFilename">Name of the DFR file.</param>
+        public static List<ByteDiffChunk> MakeByteDiffChunks(string dfrFilename) {
+            using (var stream = new FileStream(dfrFilename, FileMode.Open, FileAccess.Read))
+                return MakeByteDiffChunks(stream);
+        }
+
+        /// <summary>
+        /// Creates a list of differences using a stream of text in DFR format.
+        /// </summary>
+        /// <param name="dfrStream">Stream containing DFR text.</param>
+        public static List<ByteDiffChunk> MakeByteDiffChunks(Stream dfrStream) {
+            using (var reader = new StreamReader(dfrStream, Encoding.UTF8, false, 256, true)) {
+                var chunkList = new List<ByteDiffChunk>();
+                string line;
+                while ((line = reader.ReadLine()?.Trim()) != null) {
+                    int index;
+                    if ((index = line.IndexOf(';')) >= 0)
+                        line = line.Substring(0, index).Trim();
+                    if (line.Length > 0)
+                        chunkList.Add(new ByteDiffChunk(line));
+                }
+                return chunkList;
+            }
+        }
 
         /// <summary>
         /// Creates a diff between two files.
@@ -103,22 +130,19 @@ namespace DFRLib {
         }
 
         /// <summary>
+        /// Creates a diff based on a file in DFR format.
+        /// </summary>
+        /// <param name="dfrFilename">Filename of the DFR file.</param>
+        public ByteDiff(string dfrFilename) {
+            Chunks = MakeByteDiffChunks(dfrFilename);
+        }
+
+        /// <summary>
         /// Creates a diff based on a stream of text in DFR format.
         /// </summary>
-        /// <param name="stream">Stream containing DFR text.</param>
-        public ByteDiff(Stream stream) {
-            using (var reader = new StreamReader(stream, Encoding.UTF8, false, 256, true)) {
-                var chunkList = new List<ByteDiffChunk>();
-                string line;
-                while ((line = reader.ReadLine()?.Trim()) != null) {
-                    int index;
-                    if ((index = line.IndexOf(';')) >= 0)
-                        line = line.Substring(0, index).Trim();
-                    if (line.Length > 0)
-                        chunkList.Add(new ByteDiffChunk(line));
-                }
-                Chunks = chunkList;
-            }
+        /// <param name="dfrStream">Stream containing DFR text.</param>
+        public ByteDiff(Stream dfrStream) {
+            Chunks = MakeByteDiffChunks(dfrStream);
         }
 
         /// <summary>
