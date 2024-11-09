@@ -73,6 +73,7 @@
             this.btnGenerateDFR.TabIndex = 24;
             this.btnGenerateDFR.Text = "Generate DFR";
             this.btnGenerateDFR.UseVisualStyleBackColor = true;
+            this.btnGenerateDFR.Click += new System.EventHandler(this.btnGenerateDFR_Click);
             // 
             // labelSeparator2
             // 
@@ -153,6 +154,7 @@
             this.btnOutputFile.TabIndex = 19;
             this.btnOutputFile.Text = "Output File...";
             this.btnOutputFile.UseVisualStyleBackColor = true;
+            this.btnOutputFile.Click += new System.EventHandler(this.btnOutputFile_Click);
             // 
             // btnAlteredFile
             // 
@@ -162,6 +164,7 @@
             this.btnAlteredFile.TabIndex = 15;
             this.btnAlteredFile.Text = "Altered File...";
             this.btnAlteredFile.UseVisualStyleBackColor = true;
+            this.btnAlteredFile.Click += new System.EventHandler(this.btnAlteredFile_Click);
             // 
             // btnOriginalFile
             // 
@@ -171,6 +174,7 @@
             this.btnOriginalFile.TabIndex = 13;
             this.btnOriginalFile.Text = "Original File...";
             this.btnOriginalFile.UseVisualStyleBackColor = true;
+            this.btnOriginalFile.Click += new System.EventHandler(this.btnOriginalFile_Click);
             // 
             // CreateDFRControl
             // 

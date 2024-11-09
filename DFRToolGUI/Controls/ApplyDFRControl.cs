@@ -13,5 +13,25 @@ namespace DFRTool.GUI.Controls {
         public ApplyDFRControl() {
             InitializeComponent();
         }
+
+        private void btnOriginalFile_Click(object sender, EventArgs e) {
+
+        }
+
+        private void btnDFRFile_Click(object sender, EventArgs e) {
+
+        }
+
+        private void cbApplyToOriginalFile_CheckedChanged(object sender, EventArgs e) {
+
+        }
+
+        private void btnOutputFile_Click(object sender, EventArgs e) {
+
+        }
+
+        private void btnApplyDFR_Click(object sender, EventArgs e) {
+
+        }
     }
 }

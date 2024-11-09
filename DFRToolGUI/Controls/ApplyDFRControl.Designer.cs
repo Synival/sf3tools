@@ -48,6 +48,7 @@
             this.cbApplyToOriginalFile.TabIndex = 19;
             this.cbApplyToOriginalFile.Text = "Apply DFR to Original File";
             this.cbApplyToOriginalFile.UseVisualStyleBackColor = true;
+            this.cbApplyToOriginalFile.CheckedChanged += new System.EventHandler(this.cbApplyToOriginalFile_CheckedChanged);
             // 
             // btnApplyDFR
             // 
@@ -58,6 +59,7 @@
             this.btnApplyDFR.TabIndex = 23;
             this.btnApplyDFR.Text = "Apply DFR";
             this.btnApplyDFR.UseVisualStyleBackColor = true;
+            this.btnApplyDFR.Click += new System.EventHandler(this.btnApplyDFR_Click);
             // 
             // labelSeparator2
             // 
@@ -121,6 +123,7 @@
             this.btnOutputFile.TabIndex = 20;
             this.btnOutputFile.Text = "Output File...";
             this.btnOutputFile.UseVisualStyleBackColor = true;
+            this.btnOutputFile.Click += new System.EventHandler(this.btnOutputFile_Click);
             // 
             // btnDFRFile
             // 
@@ -130,6 +133,7 @@
             this.btnDFRFile.TabIndex = 15;
             this.btnDFRFile.Text = "DFR File...";
             this.btnDFRFile.UseVisualStyleBackColor = true;
+            this.btnDFRFile.Click += new System.EventHandler(this.btnDFRFile_Click);
             // 
             // tbOriginalFile
             // 
@@ -149,6 +153,7 @@
             this.btnOriginalFile.TabIndex = 13;
             this.btnOriginalFile.Text = "Original File...";
             this.btnOriginalFile.UseVisualStyleBackColor = true;
+            this.btnOriginalFile.Click += new System.EventHandler(this.btnOriginalFile_Click);
             // 
             // labelSelectInputFiles
             // 
