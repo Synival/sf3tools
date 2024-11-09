@@ -1,3 +1,41 @@
+## 2024-11-10
+
+A few nice extra features of quality-of-life changes that deserve to be released
+sooner rather than later. Enjoy :)
+
+### DFRTool
+
+- 'apply' command now requires an output file by default
+- The input file can still be patched with the '-i' command line option
+
+### DFRToolGUI
+
+- The GUI DFRTool has been upgraded to have an 'Apply DFR ' mode as well. This haves
+  identically to the command line version.
+
+### All Editors
+
+- Changed all hex values to decimal if the value was player-facing or otherwise made
+  sense to be a decimal (e.g, weapon level or friendship experience)
+- Hex values are now displayed with a fixed-width font and at least 2 digits to
+  better differentiate themselves from decimal values
+- Larger hex values like addresses should now have at least 4 digits shown
+- Fixed signedness: hopefully all values that can be negative are shown as such now
+- Applied consistent capitalization to all lists of data (e.g, monsters, spells, items)
+- Fixed many misspellings, typos and inconsistent names in lists of data
+- Expanded columns that wouldn't fit their names and displayed "..." (this may still
+  happen depending on your OS or settings)
+- Renamed "Generate DFR File" to "Create DFR File" for consistency
+- Applying a DFR file now pops open the "DFRTool" in "Apply" mode, similar to the
+  "Create DFR File" option
+- Changed DFR hotkeys for "Apply" and "Create" to Ctrl+A and Ctrl+C respectively
+
+### X013 Editor
+
+- Added "SpecialEffects" table for Scenario 3 + Premium Disk to modify the table of
+    status effects for specials
+- Added 10 "Unknown" byte values to the debuff%-by-luck table
+
 ## 2024-11-08
 
 This version marks a major milestone in development. All the table code has been
