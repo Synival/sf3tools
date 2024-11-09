@@ -13,13 +13,20 @@ namespace SF3.FileEditors {
         public MPD_FileEditor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
         }
 
+        class MapOffsets {
+            public int[,] Offsets = new int[64, 64];
+        }
+
         public override bool LoadFile(string filename, Stream stream) {
             // Load MPDFile data
             var pos = stream.Position;
             Chunks = new ChunkCollection(stream);
             stream.Position = pos;
 
-            Chunk5Editor = new ByteEditor(Chunks[5].Decompress());
+            ChunkEditors = new IByteEditor[Chunks.Chunks.Length];
+            ChunkEditors[2] = new ByteEditor(Chunks[2].Data);
+            ChunkEditors[5] = new ByteEditor(Chunks[5].Decompress());
+
             return base.LoadFile(filename, stream);
         }
 
@@ -28,7 +35,7 @@ namespace SF3.FileEditors {
                 return false;
 
             Chunks = null;
-            Chunk5Editor = null;
+            ChunkEditors = null;
             return true;
         }
 
@@ -39,25 +46,34 @@ namespace SF3.FileEditors {
             var headerAddrPtr = GetDouble(0x0000) - 0x290000;
             var headerAddr = GetDouble(headerAddrPtr) - 0x290000;
 
-            return new List<ITable>() {
+            var tables = new List<ITable>() {
                 (Header       = new HeaderTable     (this, headerAddr)),
-                (TileRows     = new TileRowTable    (Chunk5Editor, 0x4000)),
-                (ItemTileRows = new ItemTileRowTable(Chunk5Editor, 0x6000)),
+                (TileRows     = new TileRowTable    (ChunkEditors[5], 0x4000)),
+                (ItemTileRows = new ItemTileRowTable(ChunkEditors[5], 0x6000)),
             };
+
+            if (Chunks[2].Data?.Length >= (64 * 64 * 2))
+                tables.Add(SurfaceCharacterRows = new SurfaceCharacterRowTable(ChunkEditors[2], 0x0000));
+
+            return tables;
         }
 
         public override void DestroyTables() {
-            Header       = null;
-            TileRows     = null;
-            ItemTileRows = null;
+            Header               = null;
+            SurfaceCharacterRows = null;
+            TileRows             = null;
+            ItemTileRows         = null;
         }
 
         public ChunkCollection Chunks { get; private set; }
 
-        public IByteEditor Chunk5Editor { get; private set; }
+        public IByteEditor[] ChunkEditors { get; private set; }
 
         [BulkCopyRecurse]
         public HeaderTable Header { get; private set; }
+
+        [BulkCopyRecurse]
+        public SurfaceCharacterRowTable SurfaceCharacterRows { get; private set; }
 
         [BulkCopyRecurse]
         public TileRowTable TileRows { get; private set; }

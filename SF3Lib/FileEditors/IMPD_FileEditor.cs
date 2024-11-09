@@ -9,11 +9,12 @@ namespace SF3.FileEditors {
         ChunkCollection Chunks { get; }
 
         /// <summary>
-        /// Byte editor for decompressed data in Chunk 5
+        /// Byte editor for (de)compressed data for chunks
         /// </summary>
-        IByteEditor Chunk5Editor { get; }
+        IByteEditor[] ChunkEditors { get; }
 
         HeaderTable Header { get; }
+        SurfaceCharacterRowTable SurfaceCharacterRows { get; }
         TileRowTable TileRows { get; }
         ItemTileRowTable ItemTileRows { get; }
     }
