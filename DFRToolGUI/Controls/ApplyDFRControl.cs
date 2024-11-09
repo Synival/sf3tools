@@ -92,7 +92,7 @@ namespace DFRTool.GUI.Controls {
         }
 
         private void btnApplyDFR_Click(object sender, EventArgs e) {
-            if (InputData != null && tbInputFile.Text.Length == 0) {
+            if (InputData == null && tbInputFile.Text.Length == 0) {
                 InfoMessage("Please select an input file.");
                 return;
             }
