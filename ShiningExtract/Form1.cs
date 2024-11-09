@@ -1,5 +1,5 @@
-using MDPLib;
-using static MDPLib.Extensions.BinaryReaderExtensions;
+using MPDLib;
+using static MPDLib.Extensions.BinaryReaderExtensions;
 
 namespace ShiningExtract
 {

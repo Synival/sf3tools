@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace MDPLib {
+namespace MPDLib {
     public class ChunkDefinition {
         public ChunkDefinition(int offset, int length) {
             Offset = offset;

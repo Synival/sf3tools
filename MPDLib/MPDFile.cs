@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using MDPLib.Extensions;
+using MPDLib.Extensions;
 
-namespace MDPLib {
+namespace MPDLib {
     /// <summary>
     /// 
     /// </summary>

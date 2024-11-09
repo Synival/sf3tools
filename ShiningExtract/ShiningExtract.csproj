@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MDPLib\MDPLib.csproj" />
+    <ProjectReference Include="..\MPDLib\MPDLib.csproj" />
   </ItemGroup>
 
 </Project>
