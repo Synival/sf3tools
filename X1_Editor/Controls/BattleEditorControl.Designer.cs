@@ -1321,6 +1321,7 @@ namespace SF3.X1_Editor.Controls {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.tabMain);
             this.Name = "BattleEditorControl";
             this.Size = new System.Drawing.Size(917, 534);
