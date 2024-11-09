@@ -25,9 +25,9 @@ namespace DFRTool.GUI.Forms {
             this.MinimizeBox = false;
             InitializeComponent();
 
-            btnAlteredFile.Enabled = false;
-            tbAlteredFile.Enabled = false;
-            tbAlteredFile.Text = "(Data Read from Editor)";
+            btnCreate_AlteredFile.Enabled = false;
+            tbCreate_AlteredFile.Enabled = false;
+            tbCreate_AlteredFile.Text = "(Data Read from Editor)";
             Data = data;
             _isDialogMode = true;
         }
@@ -40,29 +40,29 @@ namespace DFRTool.GUI.Forms {
             return base.ProcessDialogKey(keyData);
         }
 
-        private void btnOriginalFile_Click(object sender, EventArgs e) {
+        private void btnCreate_OriginalFile_Click(object sender, EventArgs e) {
             var dialog = new OpenFileDialog {
                 Filter = "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*"
             };
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
-            tbOriginalFile.Text = dialog.FileName;
+            tbCreate_OriginalFile.Text = dialog.FileName;
         }
 
-        private void btnAlteredFile_Click(object sender, EventArgs e) {
+        private void btnCreate_AlteredFile_Click(object sender, EventArgs e) {
             var dialog = new OpenFileDialog {
                 Filter = "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*"
             };
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
-            tbAlteredFile.Text = dialog.FileName;
+            tbCreate_AlteredFile.Text = dialog.FileName;
         }
 
-        private void btnOutputFile_Click(object sender, EventArgs e) {
+        private void btnCreate_OutputFile_Click(object sender, EventArgs e) {
             var dialog = new SaveFileDialog();
 
-            var originalFileSplit = tbOriginalFile.Text.Split('\\');
-            var suggestedName = (originalFileSplit.Length >= 1 && tbOriginalFile.Text != "")
+            var originalFileSplit = tbCreate_OriginalFile.Text.Split('\\');
+            var suggestedName = (originalFileSplit.Length >= 1 && tbCreate_OriginalFile.Text != "")
                 ? originalFileSplit[originalFileSplit.Length - 1] + ".DFR"
                 : "Patch.BIN.DFR";
 
@@ -71,37 +71,37 @@ namespace DFRTool.GUI.Forms {
 
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
-            tbOutputFile.Text = dialog.FileName;
+            tbCreate_OutputFile.Text = dialog.FileName;
         }
 
-        private void btnGenerateDFR_Click(object sender, EventArgs e) {
-            if (tbOriginalFile.Text.Length == 0) {
+        private void btnCreate_GenerateDFR_Click(object sender, EventArgs e) {
+            if (tbCreate_OriginalFile.Text.Length == 0) {
                 InfoMessage("Please select an original file.");
                 return;
             }
 
-            if (Data == null && tbAlteredFile.Text.Length == 0) {
+            if (Data == null && tbCreate_AlteredFile.Text.Length == 0) {
                 InfoMessage("Please select an altered file.");
                 return;
             }
 
-            if (tbOutputFile.Text.Length == 0) {
+            if (tbCreate_OutputFile.Text.Length == 0) {
                 InfoMessage("Please select a destination for the DFR file.");
                 return;
             }
 
             try {
                 string dfrText = null;
-                using (Stream origStream = new FileStream(tbOriginalFile.Text, FileMode.Open, FileAccess.Read),
+                using (Stream origStream = new FileStream(tbCreate_OriginalFile.Text, FileMode.Open, FileAccess.Read),
                               alteredStream = (Data != null)
                                 ? (Stream) new MemoryStream(Data)
-                                : new FileStream(tbAlteredFile.Text, FileMode.Open, FileAccess.Read)) {
+                                : new FileStream(tbCreate_AlteredFile.Text, FileMode.Open, FileAccess.Read)) {
                     var diffChunk = new ByteDiff(origStream, alteredStream, new ByteDiffChunkBuilderOptions {
-                        CombineAppendedChunks = cbCombineAllAppendedData.Checked
+                        CombineAppendedChunks = cbCreate_CombineAllAppendedData.Checked
                     });
                     dfrText = diffChunk.ToDFR();
                 }
-                File.WriteAllText(tbOutputFile.Text, dfrText);
+                File.WriteAllText(tbCreate_OutputFile.Text, dfrText);
             }
             catch (Exception ex) {
                 ErrorMessage("DFR generation failed:\n\n" + ex.Message);
@@ -110,9 +110,9 @@ namespace DFRTool.GUI.Forms {
 
             InfoMessage("DFR file generated successfully.");
 
-            if (cbOpenWhenGenerated.Checked) {
+            if (cbCreate_OpenWhenGenerated.Checked) {
                 _ = new Process {
-                    StartInfo = new ProcessStartInfo(tbOutputFile.Text) {
+                    StartInfo = new ProcessStartInfo(tbCreate_OutputFile.Text) {
                         UseShellExecute = true
                     }
                 }.Start();
