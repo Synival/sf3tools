@@ -8,18 +8,13 @@
   <ItemGroup>
     <None Remove="Resources\Elements.xml" />
     <None Remove="Resources\FriendshipBonusTypeList.xml" />
-    <None Remove="Resources\ItemTileRows.xml" />
     <None Remove="Resources\SpellTargets.xml" />
-    <None Remove="Resources\TileRows.xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\FriendshipBonusTypeList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Elements.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ItemTileRows.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\SpellTargets.xml">
@@ -32,9 +27,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\BattlePointersList.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\TileRows.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\WeaponTypes.xml">

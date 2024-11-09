@@ -3,11 +3,11 @@ using SF3.Models;
 
 namespace SF3.Tables {
     public class TileRowTable : Table<TileRow> {
-        public TileRowTable(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public TileRowTable(IByteEditor fileEditor, int address) : base(fileEditor, address) {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new TileRow(FileEditor, id, name, address));
+            => LoadUntilMax((id, address) => new TileRow(FileEditor, id, "Y" + (63 - id), address));
 
         public override int? MaxSize => 64;
     }

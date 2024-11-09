@@ -43,6 +43,9 @@ namespace SF3.Tables {
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
     public abstract class Table<T> : Table, ITable<T> where T : class, IModel {
+        protected Table(IByteEditor fileEditor, int address) : base(fileEditor, null, address) {
+        }
+
         protected Table(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }
 
@@ -78,7 +81,7 @@ namespace SF3.Tables {
         public bool LoadFromResourceFile(Func<int, string, int, T> makeTFunc, ContinueReadingPredicate pred) {
             var rows = new Dictionary<int, T>();
             try {
-                // Get the size of our rows so we can determine the expLimitAddress of elements.
+                // Get the size of our rows so we can determine the address of elements.
                 var size = makeTFunc(0, "", Address).Size;
 
                 // Read all elements.
@@ -110,6 +113,48 @@ namespace SF3.Tables {
             }
             finally {
                 _rows = rows.OrderBy(x => x.Key).Select(x => x.Value).ToArray();
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Loads all rows until MaxSize is reached.
+        /// </summary>
+        /// <param name="makeTFunc">Factory function to make the model.</param>
+        /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
+        public bool LoadUntilMax(Func<int, int, T> makeTFunc)
+            => LoadUntilMax(makeTFunc, null);
+
+        /// <summary>
+        /// Loads all rows until MaxSize is reached.
+        /// </summary>
+        /// <param name="makeTFunc">Factory function to make the model.</param>
+        /// <param name="pred">Optional predicate function to check whether or not resource adding should continue.</param>
+        /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
+        public bool LoadUntilMax(Func<int, int, T> makeTFunc, ContinueReadingPredicate pred) {
+            var rowDict = new Dictionary<int, T>();
+            var rows = new T[(int) MaxSize];
+
+            try {
+                T prevModel = null;
+                var address = Address;
+                for (var id = 0; id < rows.Length; ++id) {
+                    var newModel = makeTFunc(id, address);
+                    if (pred != null && !pred(rowDict, prevModel, newModel))
+                        break;
+
+                    rowDict[id] = newModel;
+                    rows[id] = newModel;
+                    address += newModel.Size;
+
+                    prevModel = newModel;
+                }
+            }
+            catch {
+                return false;
+            }
+            finally {
+                _rows = rows;
             }
             return true;
         }

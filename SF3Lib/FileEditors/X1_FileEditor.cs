@@ -36,7 +36,7 @@ namespace SF3.FileEditors {
             battlePointersPointerAddress = GetDouble(battlePointersPointerPointerAddress) - sub;
             battlePointersAddress = GetDouble(battlePointersPointerAddress);
 
-            // A value higher means a pointer is on the expLimitAddress, meaning we are in a battle. If it is not a
+            // A value higher means a pointer is on the address, meaning we are in a battle. If it is not a
             // pointer we are at our destination so we know a town is loaded.
             if ((Scenario == ScenarioType.Scenario1 && battlePointersAddress > 0x0605F000) || battlePointersAddress > 0x0605e000) {
                 battlePointersAddress -= sub;

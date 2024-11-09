@@ -3,7 +3,6 @@ using CommonLib.Attributes;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Types;
-using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.FileEditors {
     public class MPD_FileEditor : SF3FileEditor, IMPD_FileEditor {
@@ -12,8 +11,8 @@ namespace SF3.FileEditors {
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (TileRows     = new TileRowTable    (this, ResourceFile("TileRows.xml"),     0x4000)),
-                (ItemTileRows = new ItemTileRowTable(this, ResourceFile("ItemTileRows.xml"), 0x6000)),
+                (TileRows     = new TileRowTable    (this, 0x4000)),
+                (ItemTileRows = new ItemTileRowTable(this, 0x6000)),
             };
         }
 
