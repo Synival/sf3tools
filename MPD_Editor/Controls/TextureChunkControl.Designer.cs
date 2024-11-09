@@ -31,13 +31,16 @@ namespace SF3.X1_Editor.Controls {
             this.lvcHeaderTextureIdStart = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabTextures = new System.Windows.Forms.TabPage();
+            this.textureControl = new SF3.MPDEditor.Controls.TextureControl();
             this.olvTextures = new BrightIdeasSoftware.ObjectListView();
+            this.lvcTexturesID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTexturesName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTexturesAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTexturesWidth = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTexturesHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTexturesImageDataOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTexturesID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
+            this.highlightTextRenderer2 = new BrightIdeasSoftware.HighlightTextRenderer();
             this.tabHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -128,6 +131,7 @@ namespace SF3.X1_Editor.Controls {
             // 
             // tabTextures
             // 
+            this.tabTextures.Controls.Add(this.textureControl);
             this.tabTextures.Controls.Add(this.olvTextures);
             this.tabTextures.Location = new System.Drawing.Point(4, 22);
             this.tabTextures.Name = "tabTextures";
@@ -135,6 +139,16 @@ namespace SF3.X1_Editor.Controls {
             this.tabTextures.TabIndex = 4;
             this.tabTextures.Text = "Textures";
             this.tabTextures.UseVisualStyleBackColor = true;
+            // 
+            // textureControl
+            // 
+            this.textureControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textureControl.BackColor = System.Drawing.Color.Transparent;
+            this.textureControl.Data = null;
+            this.textureControl.Location = new System.Drawing.Point(740, 339);
+            this.textureControl.Name = "textureControl";
+            this.textureControl.Size = new System.Drawing.Size(150, 150);
+            this.textureControl.TabIndex = 2;
             // 
             // olvTextures
             // 
@@ -170,6 +184,12 @@ namespace SF3.X1_Editor.Controls {
             this.olvTextures.UseCompatibleStateImageBehavior = false;
             this.olvTextures.View = System.Windows.Forms.View.Details;
             // 
+            // lvcTexturesID
+            // 
+            this.lvcTexturesID.AspectName = "ID";
+            this.lvcTexturesID.AspectToStringFormat = "{0:X2}";
+            this.lvcTexturesID.Text = "ID";
+            // 
             // lvcTexturesName
             // 
             this.lvcTexturesName.AspectName = "Name";
@@ -200,11 +220,15 @@ namespace SF3.X1_Editor.Controls {
             this.lvcTexturesImageDataOffset.Text = "ImageDataOffset";
             this.lvcTexturesImageDataOffset.Width = 100;
             // 
-            // lvcTexturesID
+            // highlightTextRenderer1
             // 
-            this.lvcTexturesID.AspectName = "ID";
-            this.lvcTexturesID.AspectToStringFormat = "{0:X2}";
-            this.lvcTexturesID.Text = "ID";
+            this.highlightTextRenderer1.StringComparison = System.StringComparison.CurrentCultureIgnoreCase;
+            this.highlightTextRenderer1.TextToHighlight = null;
+            // 
+            // highlightTextRenderer2
+            // 
+            this.highlightTextRenderer2.StringComparison = System.StringComparison.CurrentCultureIgnoreCase;
+            this.highlightTextRenderer2.TextToHighlight = null;
             // 
             // TextureChunkControl
             // 
@@ -240,5 +264,8 @@ namespace SF3.X1_Editor.Controls {
         private BrightIdeasSoftware.OLVColumn lvcTexturesHeight;
         private BrightIdeasSoftware.OLVColumn lvcTexturesImageDataOffset;
         private BrightIdeasSoftware.OLVColumn lvcTexturesID;
+        private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
+        private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer2;
+        private MPDEditor.Controls.TextureControl textureControl;
     }
 }

@@ -36,14 +36,33 @@ namespace SF3.MPD_Editor.Forms {
                 foreach (var tcec in textureChunkEditorControls)
                     tcec.Tabs.SelectedIndex = e.TabPageIndex;
             };
-            foreach (var bec in textureChunkEditorControls)
-                bec.Tabs.Selected += tabSyncFunc;
+            foreach (var tcec in textureChunkEditorControls) {
+                tcec.Tabs.Selected += tabSyncFunc;
+                tcec.OLVTextures.ItemSelectionChanged += (s, e) => OnTextureChanged(s, e, tcec);
+            }
 
             InitializeEditor(menuStrip2, textureChunkOLVs);
 
             // Scenario is currently irrelevant.
             // TODO: fetch by name, not by index!!
             MenuStrip.Items.Remove(MenuStrip.Items[2]);
+        }
+
+        private void OnTextureChanged(object sender, ListViewItemSelectionChangedEventArgs e, TextureChunkControl tcec) {
+            var item = (OLVListItem) e.Item;
+            var texture = (Texture) item.RowObject;
+
+            var data = new ushort[texture.Width, texture.Height];
+            var off = texture.ImageDataOffset;
+            for (var y = 0; y < texture.Height; y++) {
+                for (var x = 0; x < texture.Width; x++) {
+                    var texPixel = (ushort) texture.Editor.GetWord(off);
+                    off += 2;
+                    data[x, y] = texPixel;
+                }
+            }
+
+            tcec.TextureControl.Data = data;
         }
 
         protected override string FileDialogFilter
