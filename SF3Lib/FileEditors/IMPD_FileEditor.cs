@@ -4,9 +4,9 @@ using SF3.Tables.MPD;
 namespace SF3.FileEditors {
     public interface IMPD_FileEditor : ISF3FileEditor {
         /// <summary>
-        /// All data and functions for an MPD file
+        /// Entries for all chunks in the MPD file
         /// </summary>
-        MPDFile MPDFile { get; }
+        ChunkCollection Chunks { get; }
 
         /// <summary>
         /// Byte editor for decompressed data in Chunk 5

@@ -16,11 +16,11 @@ namespace SF3.FileEditors {
         public override bool LoadFile(string filename, Stream stream) {
             // Load MPDFile data
             var pos = stream.Position;
-            MPDFile = new MPDFile(stream);
+            Chunks = new ChunkCollection(stream);
             stream.Position = pos;
 
             // TODO: we need a ByteEditor!! Because this is not a file!!
-            var chunk5Data = MPDFile.Chunks[5].Decompress();
+            var chunk5Data = Chunks[5].Decompress();
             Chunk5Editor = new FileEditor(this.NameContext);
             using (var memoryStream = new MemoryStream(chunk5Data))
                 ((FileEditor) Chunk5Editor).LoadFile(this.Filename + " (Chunk5)", memoryStream);
@@ -48,14 +48,8 @@ namespace SF3.FileEditors {
             ItemTileRows = null;
         }
 
-        /// <summary>
-        /// All data and functions for an MPD file
-        /// </summary>
-        public MPDFile MPDFile { get; private set; }
+        public ChunkCollection Chunks { get; private set; }
 
-        /// <summary>
-        /// Byte editor for decompressed data in Chunk 5
-        /// </summary>
         public IByteEditor Chunk5Editor { get; private set; }
 
         [BulkCopyRecurse]

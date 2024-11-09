@@ -5,10 +5,11 @@ using MPDLib.Extensions;
 
 namespace MPDLib {
     /// <summary>
-    /// 
+    /// A collection of chunks read from an MPD file.
     /// </summary>
-    public class MPDFile {
-        public MPDFile(Stream stream) {
+    /// TODO: make this an actual collection!
+    public class ChunkCollection {
+        public ChunkCollection(Stream stream) {
             FetchChunks(stream);
         }
 
@@ -37,6 +38,8 @@ namespace MPDLib {
             }
             return data;
         }
+
+        public Chunk this[int index] => Chunks[index];
 
         public Chunk[] Chunks { get; private set; }
     }

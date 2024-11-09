@@ -20,7 +20,7 @@ namespace ShiningExtract
                 {
                     string baseFilename = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
 
-                    var mpdFile = new MPDFile(stream);
+                    var mpdFile = new ChunkCollection(stream);
                     var decompressedChunks = mpdFile.DecompressAllChunks(Path.Combine(textBox1.Text, baseFilename));
 
                     Directory.CreateDirectory(textBox1.Text);
