@@ -949,6 +949,7 @@ namespace SF3.MPD_Editor.Forms {
             this.olvHeader.UseAlternatingBackColors = true;
             this.olvHeader.UseCompatibleStateImageBehavior = false;
             this.olvHeader.View = System.Windows.Forms.View.Details;
+            this.olvHeader.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcHeaderName
             // 

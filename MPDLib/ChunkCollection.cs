@@ -16,16 +16,22 @@ namespace MPDLib {
         private void FetchChunks(Stream stream) {
             using (var reader = new BinaryReader(stream, Encoding.UTF8, true)) {
                 _ = stream.Seek(0x2000, SeekOrigin.Begin);
-                Chunks = new Chunk[20];
+                var chunkList = new List<Chunk>();
 
-                for (int i = 0; i < Chunks.Length; i++) {
-                    var offset = reader.ReadLittleEndianInt32() - 0x290000;
+                for (int i = 0; i < 32; i++) {
+                    var offset = reader.ReadLittleEndianInt32();
                     var size = reader.ReadLittleEndianInt32();
+                    if (offset == 0)
+                        break;
+                    offset -= 0x00290000;
+
                     var pos = stream.Seek(0, SeekOrigin.Current);
                     stream.Seek(offset, SeekOrigin.Begin);
-                    Chunks[i] = new Chunk(stream, size);
+                    chunkList.Add(new Chunk(stream, size));
                     _ = stream.Seek(pos, SeekOrigin.Begin);
                 }
+
+                Chunks = chunkList.ToArray();
             }
         }
 
