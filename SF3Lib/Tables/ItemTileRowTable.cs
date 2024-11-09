@@ -1,8 +1,7 @@
 ﻿using SF3.FileEditors;
-using SF3.Tables;
-using SF3.TileEditor.Models;
+using SF3.Models;
 
-namespace SF3.TileEditor.Tables {
+namespace SF3.Tables {
     public class ItemTileRowTable : Table<ItemTileRow> {
         public ItemTileRowTable(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }

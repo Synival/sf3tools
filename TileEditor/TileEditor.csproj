@@ -58,14 +58,8 @@
     <Compile Include="Forms\frmTileEditor.Designer.cs">
       <DependentUpon>frmTileEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="FileEditors\ITileFileEditor.cs" />
-    <Compile Include="Models\TileRow.cs" />
-    <Compile Include="Tables\TileRowTable.cs" />
-    <Compile Include="Models\ItemTileRow.cs" />
-    <Compile Include="Tables\ItemTileRowTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FileEditors\TileFileEditor.cs" />
     <EmbeddedResource Include="Forms\frmTileEditor.resx">
       <DependentUpon>frmTileEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,12 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="phoenixSword.ico" />
-    <Content Include="Resources\TileRows.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ItemTileRows.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="treasure.ico" />
   </ItemGroup>
   <ItemGroup>

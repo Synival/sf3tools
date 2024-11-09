@@ -1,11 +1,7 @@
 ﻿using SF3.FileEditors;
-using SF3.Models;
 
-namespace SF3.TileEditor.Models {
+namespace SF3.Models {
     public class TileRow : Model {
-        //TILES
-        private readonly int theSpellIcon;
-        private readonly int realOffset;
         private readonly int x0;
         private readonly int x1;
         private readonly int x2;
@@ -70,8 +66,6 @@ namespace SF3.TileEditor.Models {
         private readonly int x61;
         private readonly int x62;
         private readonly int x63;
-        private readonly int offset;
-        private readonly int sub;
 
         public TileRow(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 128) {

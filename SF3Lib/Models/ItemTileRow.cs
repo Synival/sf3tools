@@ -1,16 +1,7 @@
 ﻿using SF3.FileEditors;
-using SF3.Models;
 
-namespace SF3.TileEditor.Models {
+namespace SF3.Models {
     public class ItemTileRow : Model {
-        //Item Tiles
-        private readonly int theItemIcon;
-
-        private readonly int offset;
-        private readonly int sub;
-
-        private readonly int theSpellIcon;
-        private readonly int realOffset;
         private readonly int x0;
         private readonly int x1;
         private readonly int x2;

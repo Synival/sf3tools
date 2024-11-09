@@ -1,7 +1,6 @@
-﻿using SF3.FileEditors;
-using SF3.TileEditor.Tables;
+﻿using SF3.Tables;
 
-namespace SF3.TileEditor.FileEditors {
+namespace SF3.FileEditors {
     public interface ITileFileEditor : ISF3FileEditor {
         TileRowTable TileRows { get; }
         ItemTileRowTable ItemTileRows { get; }
