@@ -84,9 +84,9 @@ namespace DFRTool.GUI.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.createDFRControl1.BackColor = System.Drawing.Color.Transparent;
-            this.createDFRControl1.Location = new System.Drawing.Point(0, 0);
+            this.createDFRControl1.Location = new System.Drawing.Point(3, 6);
             this.createDFRControl1.Name = "createDFRControl1";
-            this.createDFRControl1.Size = new System.Drawing.Size(691, 204);
+            this.createDFRControl1.Size = new System.Drawing.Size(685, 195);
             this.createDFRControl1.TabIndex = 0;
             // 
             // applyDFRControl1
@@ -95,9 +95,9 @@ namespace DFRTool.GUI.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.applyDFRControl1.BackColor = System.Drawing.Color.Transparent;
-            this.applyDFRControl1.Location = new System.Drawing.Point(0, 0);
+            this.applyDFRControl1.Location = new System.Drawing.Point(3, 6);
             this.applyDFRControl1.Name = "applyDFRControl1";
-            this.applyDFRControl1.Size = new System.Drawing.Size(691, 204);
+            this.applyDFRControl1.Size = new System.Drawing.Size(685, 195);
             this.applyDFRControl1.TabIndex = 0;
             // 
             // frmDFRTool

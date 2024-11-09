@@ -39,6 +39,9 @@ namespace DFRTool.GUI.Controls {
         }
 
         private void btnAlteredFile_Click(object sender, EventArgs e) {
+            if (AlteredData != null)
+                return;
+
             var dialog = new OpenFileDialog {
                 Filter = "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*"
             };

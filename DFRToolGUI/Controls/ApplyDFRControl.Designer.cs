@@ -82,7 +82,6 @@
             this.tbOutputFile.Name = "tbOutputFile";
             this.tbOutputFile.Size = new System.Drawing.Size(570, 20);
             this.tbOutputFile.TabIndex = 21;
-            this.tbOutputFile.Text = "(Same as Original File)";
             // 
             // tbDFRFile
             // 
