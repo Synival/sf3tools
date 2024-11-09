@@ -32,10 +32,11 @@ namespace SF3.MPD_Editor.Forms {
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
-                new PopulateOLVTabConfig(tabHeader,            olvHeader,            FileEditor.Header),
-                new PopulateOLVTabConfig(tabSurfaceCharacters, olvSurfaceCharacters, FileEditor.TileSurfaceCharacterRows),
-                new PopulateOLVTabConfig(tabItemTiles,         olvItemTiles,         FileEditor.TileItemRows),
-                new PopulateOLVTabConfig(tabTiles,             olvTiles,             FileEditor.TileRows),
+                new PopulateOLVTabConfig(tabHeader,                olvHeader,            FileEditor.Header),
+                new PopulateOLVTabConfig(tabTileSurfaceCharacters, olvSurfaceCharacters, FileEditor.TileSurfaceCharacterRows),
+                new PopulateOLVTabConfig(tabTileHeightmap,         olvTileHeightmap,     FileEditor.TileHeightmapRows),
+                new PopulateOLVTabConfig(tabTileItems,             olvItemTiles,         FileEditor.TileItemRows),
+                new PopulateOLVTabConfig(tabTiles,                 olvTiles,             FileEditor.TileRows),
             });
         }
 

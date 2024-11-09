@@ -47,9 +47,10 @@ namespace SF3.FileEditors {
             var headerAddr = GetDouble(headerAddrPtr) - 0x290000;
 
             var tables = new List<ITable>() {
-                (Header         = new HeaderTable       (this, headerAddr)),
-                (TileRows       = new TileRowTable      (ChunkEditors[5], 0x4000)),
-                (TileItemRows   = new TileItemRowTable  (ChunkEditors[5], 0x6000)),
+                (Header            = new HeaderTable          (this, headerAddr)),
+                (TileHeightmapRows = new TileHeightmapRowTable(ChunkEditors[5], 0x0000)),
+                (TileRows          = new TileRowTable         (ChunkEditors[5], 0x4000)),
+                (TileItemRows      = new TileItemRowTable     (ChunkEditors[5], 0x6000)),
             };
 
             if (Chunks[2].Data?.Length >= (64 * 64 * 2))
@@ -61,6 +62,7 @@ namespace SF3.FileEditors {
         public override void DestroyTables() {
             Header                   = null;
             TileSurfaceCharacterRows = null;
+            TileHeightmapRows        = null;
             TileRows                 = null;
             TileItemRows             = null;
         }
@@ -74,6 +76,9 @@ namespace SF3.FileEditors {
 
         [BulkCopyRecurse]
         public TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; private set; }
+
+        [BulkCopyRecurse]
+        public TileHeightmapRowTable TileHeightmapRows { get; private set; }
 
         [BulkCopyRecurse]
         public TileRowTable TileRows { get; private set; }
