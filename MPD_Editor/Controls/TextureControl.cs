@@ -42,6 +42,9 @@ namespace SF3.MPDEditor.Controls {
                     _textureImage = value;
                     var newSize = new Size(value.Width * 4, value.Height * 4);
                     var sizeDiff = new Point(newSize.Width - this.Size.Width, newSize.Height - this.Size.Height);
+
+                    // Forcing the size to 0 clears the render buffer.
+                    this.Size = new Size(0, 0);
                     this.Size = newSize;
 
                     var widthMagnitude  = Anchor.HasFlag(AnchorStyles.Right)  ? 1.00 : Anchor.HasFlag(AnchorStyles.Left) ? 0.00 : 0.50;

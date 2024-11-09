@@ -13,9 +13,12 @@ namespace SF3.MPDEditor.Extensions {
         public static Bitmap GetImage(this Texture texture) {
             var image = new Bitmap(texture.Width, texture.Height, PixelFormat.Format16bppArgb1555);
 
-            BitmapData bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.WriteOnly, image.PixelFormat);
-            Marshal.Copy(texture.BitmapDataARGB1555, 0, bmpData.Scan0, texture.BitmapDataARGB1555.Length);
-            image.UnlockBits(bmpData);
+            var imageData = texture.BitmapDataARGB1555;
+            if (imageData != null) {
+                BitmapData bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.WriteOnly, image.PixelFormat);
+                Marshal.Copy(texture.BitmapDataARGB1555, 0, bmpData.Scan0, texture.BitmapDataARGB1555.Length);
+                image.UnlockBits(bmpData);
+            }
 
             return image;
         }

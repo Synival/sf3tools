@@ -58,8 +58,6 @@ namespace SF3.MPDEditor.Controls {
                     for (int x = 0; x < Images.GetLength(0); x++) {
                         var originalImage = Images[x, y] as Bitmap;
                         if (originalImage != null) {
-                            bool flipHoriz = (Flags[x, y] & 0x10) != 0;
-                            bool flipVert  = (Flags[x, y] & 0x20) != 0;
 
                             var image = originalImage.Clone(new Rectangle(0, 0, originalImage.Width, originalImage.Height), PixelFormat.Format16bppArgb1555);
 
@@ -86,6 +84,16 @@ namespace SF3.MPDEditor.Controls {
                                 image.UnlockBits(bmpData);
                             }
 #endif
+
+                            if ((Flags[x, y] & 0x03) == 1)
+                                image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                            else if ((Flags[x, y] & 0x03) == 2)
+                                image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            else if ((Flags[x, y] & 0x03) == 3)
+                                image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+
+                            bool flipHoriz = (Flags[x, y] & 0x10) != 0;
+                            bool flipVert  = (Flags[x, y] & 0x20) != 0;
 
                             if (flipHoriz && flipVert)
                                 image.RotateFlip(RotateFlipType.RotateNoneFlipXY);

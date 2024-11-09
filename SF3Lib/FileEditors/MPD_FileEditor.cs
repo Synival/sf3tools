@@ -29,8 +29,15 @@ namespace SF3.FileEditors {
             ChunkEditors[5] = new ByteEditor(Chunks[5].Decompress());
 
             // Texture editors.
-            for (int i = 0; i < 4; i++)
-                ChunkEditors[i + 6] = new ByteEditor(Chunks[i + 6].Decompress());
+            for (int i = 0; i < 4; i++) {
+                try {
+                    ChunkEditors[i + 6] = new ByteEditor(Chunks[i + 6].Decompress());
+                }
+                catch {
+                    // TODO: This is likely failing because the texture is the wrong encoding.
+                    //       Finding a table that determines whether this is 16- or 8-bit would be great.
+                }
+            }
 
             return base.LoadFile(filename, stream);
         }
