@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
+using SF3.Models.X1_Battle;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Tables.Shared;
@@ -78,12 +79,12 @@ namespace SF3.FileEditors {
                 BattlePointersTable.Load();
 
                 // Get the address of the selected battle, or, if it's not available, the first available in the BattlePointersTable.
-                this.BattleTables = new Dictionary<MapLeaderType, BattleTable>();
+                this.Battles = new Dictionary<MapLeaderType, Battle>();
                 foreach (var mapLeader in (MapLeaderType[]) Enum.GetValues(typeof(MapLeaderType))) {
                     int mapIndex = (int) mapLeader;
                     var battleTableAddress = BattlePointersTable.Rows[mapIndex].BattlePointer;
                     if (battleTableAddress != 0)
-                        BattleTables.Add(mapLeader, new BattleTable(this, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
+                        Battles.Add(mapLeader, new Battle(this, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
                 }
 
                 // Determine the location of the TileMovementTable, which isn't so straight-forward.
@@ -115,7 +116,7 @@ namespace SF3.FileEditors {
             else {
                 // No battle, so none of these tables exist.
                 battlePointersAddress = -1;
-                BattleTables = null;
+                Battles = null;
                 tileMovementAddress = -1;
             }
 
@@ -135,8 +136,8 @@ namespace SF3.FileEditors {
                 tables.Add(ArrowTable = new ArrowTable(this, ResourceFile("X1Arrow.xml"), arrowAddress));
 
             // Add tables for battle tables.
-            if (BattleTables != null)
-                tables.AddRange(BattleTables.SelectMany(x => x.Value.Tables));
+            if (Battles != null)
+                tables.AddRange(Battles.SelectMany(x => x.Value.Tables));
 
             if (tileMovementAddress >= 0)
                 tables.Add(TileMovementTable = new TileMovementTable(this, ResourceFile("MovementTypes.xml"), tileMovementAddress));
@@ -154,9 +155,9 @@ namespace SF3.FileEditors {
             EnterTable          = null;
             ArrowTable          = null;
 
-            if (BattleTables != null) {
-                BattleTables.Clear();
-                BattleTables = null;
+            if (Battles != null) {
+                Battles.Clear();
+                Battles = null;
             }
 
             TileMovementTable   = null;
@@ -194,7 +195,7 @@ namespace SF3.FileEditors {
         public ArrowTable ArrowTable { get; private set; }
 
         [BulkCopyRecurse]
-        public Dictionary<MapLeaderType, BattleTable> BattleTables { get; private set; }
+        public Dictionary<MapLeaderType, Battle> Battles { get; private set; }
 
         [BulkCopyRecurse]
         public TileMovementTable TileMovementTable { get; private set; }

@@ -45,12 +45,12 @@ namespace SF3.Tests.FileEditors {
                 Assert.IsNull(editor.EnterTable);
                 Assert.IsNull(editor.ArrowTable);
 
-                Assert.AreEqual(testCase.ExpectedBattleCount, editor.BattleTables?.Count);
+                Assert.AreEqual(testCase.ExpectedBattleCount, editor.Battles?.Count);
 
                 if (testCase.MapLeader != null) {
-                    Assert.IsNotNull(editor.BattleTables);
-                    Assert.IsTrue(editor.BattleTables.ContainsKey((MapLeaderType) testCase.MapLeader));
-                    var battle = editor.BattleTables[(MapLeaderType) testCase.MapLeader];
+                    Assert.IsNotNull(editor.Battles);
+                    Assert.IsTrue(editor.Battles.ContainsKey((MapLeaderType) testCase.MapLeader));
+                    var battle = editor.Battles[(MapLeaderType) testCase.MapLeader];
 
                     Assert.IsNotNull(battle.HeaderTable);
                     Assert.IsNotNull(battle.SlotTable);
@@ -81,7 +81,7 @@ namespace SF3.Tests.FileEditors {
                 Assert.IsNotNull(editor.NpcTable);
                 Assert.IsNotNull(editor.EnterTable);
 
-                Assert.IsNull(editor.BattleTables);
+                Assert.IsNull(editor.Battles);
 
                 Assert.IsNull(editor.TileMovementTable);
 

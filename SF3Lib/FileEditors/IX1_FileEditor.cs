@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SF3.Models.X1_Battle;
 using SF3.Tables.Shared;
 using SF3.Tables.X1_All;
 using SF3.Tables.X1_Battle;
@@ -18,7 +19,7 @@ namespace SF3.FileEditors {
         EnterTable EnterTable { get; }
         ArrowTable ArrowTable { get; }
 
-        Dictionary<MapLeaderType, BattleTable> BattleTables { get; }
+        Dictionary<MapLeaderType, Battle> Battles { get; }
 
         TileMovementTable TileMovementTable { get; }
     }
