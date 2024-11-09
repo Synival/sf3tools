@@ -1,4 +1,4 @@
-﻿using static CommonLib.Utils.Utils;
+using static CommonLib.Utils.Utils;
 
 namespace CommonLib.NamedValues {
     /// <summary>

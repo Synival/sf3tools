@@ -1,4 +1,4 @@
-﻿using SF3.Types;
+using SF3.Types;
 using static SF3.Tests.TestDataPaths;
 
 namespace SF3.Tests {

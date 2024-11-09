@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Types;

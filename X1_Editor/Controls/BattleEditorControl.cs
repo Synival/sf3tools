@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+using System.Windows.Forms;
 using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
 

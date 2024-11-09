@@ -1,4 +1,4 @@
-﻿namespace DFRLib.Types {
+namespace DFRLib.Types {
     /// <summary>
     /// The type of command to issue to the DFRTool.
     /// </summary>

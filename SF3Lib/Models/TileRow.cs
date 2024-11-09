@@ -1,4 +1,4 @@
-﻿using SF3.FileEditors;
+using SF3.FileEditors;
 
 namespace SF3.Models {
     public class TileRow : Model {

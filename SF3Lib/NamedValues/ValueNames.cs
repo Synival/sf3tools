@@ -1,4 +1,4 @@
-﻿using CommonLib.NamedValues;
+using CommonLib.NamedValues;
 
 namespace SF3.NamedValues {
     public static class ValueNames {

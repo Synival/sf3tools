@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using CommonLib.NamedValues;
 using SF3.Types;
 

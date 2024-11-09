@@ -1,4 +1,4 @@
-﻿namespace SF3.X1_Editor.Controls {
+namespace SF3.X1_Editor.Controls {
     partial class BattleEditorControl {
         /// <summary> 
         /// Required designer variable.

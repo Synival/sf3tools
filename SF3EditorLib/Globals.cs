@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace SF3.Editor {
     public static class Globals {

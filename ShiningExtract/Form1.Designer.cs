@@ -1,4 +1,4 @@
-﻿namespace ShiningExtract
+namespace ShiningExtract
 {
     partial class Form1
     {

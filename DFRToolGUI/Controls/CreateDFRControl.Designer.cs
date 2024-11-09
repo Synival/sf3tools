@@ -1,4 +1,4 @@
-﻿namespace DFRTool.GUI.Controls {
+namespace DFRTool.GUI.Controls {
     partial class CreateDFRControl {
         /// <summary> 
         /// Required designer variable.

@@ -1,4 +1,4 @@
-﻿namespace SF3.MPD_Editor.Forms {
+namespace SF3.MPD_Editor.Forms {
     partial class frmMPDEditor {
         /// <summary>
         /// Required designer variable.

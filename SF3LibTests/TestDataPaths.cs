@@ -1,4 +1,4 @@
-﻿using SF3.Types;
+using SF3.Types;
 
 namespace SF3.Tests {
     internal static class TestDataPaths {

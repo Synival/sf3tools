@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;

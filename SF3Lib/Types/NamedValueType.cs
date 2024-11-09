@@ -1,4 +1,4 @@
-﻿namespace SF3.Types {
+namespace SF3.Types {
     /// <summary>
     /// List of named values for SF3.
     /// </summary>

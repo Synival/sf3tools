@@ -1,4 +1,4 @@
-﻿using CommonLib.Attributes;
+using CommonLib.Attributes;
 using SF3.FileEditors;
 
 namespace SF3.Models {
