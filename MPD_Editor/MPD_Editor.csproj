@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\BattleMapControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BattleMapControl.Designer.cs">
+      <DependentUpon>BattleMapControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TextureChunkControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\BattleMapControl.resx">
+      <DependentUpon>BattleMapControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TextureChunkControl.resx">
       <DependentUpon>TextureChunkControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,6 +115,7 @@
   <ItemGroup>
     <Content Include="phoenixSword.ico" />
     <Content Include="treasure.ico" />
+    <Content Include="Resources\Water.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonLib\CommonLib.csproj">

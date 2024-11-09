@@ -85,9 +85,10 @@ namespace SF3.MPD_Editor.Forms {
             if (!base.OnLoad())
                 return false;
 
-            return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
+            var populateResult = tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
                 new PopulateOLVTabConfig(tabHeader,                olvHeader,                FileEditor.Header),
                 new PopulateOLVTabConfig(tabTileSurfaceCharacters, olvTileSurfaceCharacters, FileEditor.TileSurfaceCharacterRows),
+                new PopulateOLVTabConfig(tabBattleMap,             null,                     FileEditor.TileSurfaceCharacterRows),
                 new PopulateOLVTabConfig(tabTileHeightmap,         olvTileHeightmap,         FileEditor.TileHeightmapRows),
                 new PopulateOLVTabConfig(tabTileHeights,           olvTileHeights,           FileEditor.TileHeightRows),
                 new PopulateOLVTabConfig(tabTileTerrain,           olvTileTerrain,           FileEditor.TileTerrainRows),
@@ -98,6 +99,12 @@ namespace SF3.MPD_Editor.Forms {
                 new PopulateTextureChunkTabConfig(tabTextures3, FileEditor.TextureChunks?[2]),
                 new PopulateTextureChunkTabConfig(tabTextures4, FileEditor.TextureChunks?[3]),
             });
+
+            if (FileEditor.TileSurfaceCharacterRows != null) {
+                this.battleMapControl1.UpdateTextures(FileEditor.TileSurfaceCharacterRows.TextureData, FileEditor.TextureChunks);
+            }
+
+            return populateResult;
         }
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);

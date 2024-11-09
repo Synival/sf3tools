@@ -13,6 +13,16 @@ namespace SF3.Models.MPD {
             }
         }
 
+        public ushort[] Tiles {
+            get {
+                // TODO: somehow cache this?
+                var tiles = new ushort[64];
+                for (int i = 0 ; i < tiles.Length; i++)
+                    tiles[i] = (ushort) Editor.GetWord(xAddress[i]);
+                return tiles;
+            }
+        }
+
         // This is NUTs, but the ObjectListView is excrutiatingly slow with array indexing, so we're stuck
         // with 64 individual properties.
         public int X0Tile { get => Editor.GetWord(xAddress[0]); set => Editor.SetWord(xAddress[0], value); }

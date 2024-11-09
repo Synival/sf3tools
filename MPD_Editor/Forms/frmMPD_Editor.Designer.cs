@@ -194,6 +194,7 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTileSurfaceCharactersX61Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileSurfaceCharactersX62Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileSurfaceCharactersX63Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tabBattleMap = new System.Windows.Forms.TabPage();
             this.tabTileHeightmap = new System.Windows.Forms.TabPage();
             this.olvTileHeightmap = new BrightIdeasSoftware.ObjectListView();
             this.lvcTileHeightmapName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -399,12 +400,13 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTileTerrainX62Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileTerrainX63Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabTextures1 = new System.Windows.Forms.TabPage();
-            this.textureChunkControl1 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.tabTextures2 = new System.Windows.Forms.TabPage();
-            this.textureChunkControl2 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.tabTextures3 = new System.Windows.Forms.TabPage();
-            this.textureChunkControl3 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.tabTextures4 = new System.Windows.Forms.TabPage();
+            this.battleMapControl1 = new SF3.MPDEditor.Controls.BattleMapControl();
+            this.textureChunkControl1 = new SF3.X1_Editor.Controls.TextureChunkControl();
+            this.textureChunkControl2 = new SF3.X1_Editor.Controls.TextureChunkControl();
+            this.textureChunkControl3 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.textureChunkControl4 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.menuStrip2.SuspendLayout();
             this.tabTileItems.SuspendLayout();
@@ -414,6 +416,7 @@ namespace SF3.MPD_Editor.Forms {
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).BeginInit();
             this.tabTileSurfaceCharacters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileSurfaceCharacters)).BeginInit();
+            this.tabBattleMap.SuspendLayout();
             this.tabTileHeightmap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileHeightmap)).BeginInit();
             this.tabTileHeights.SuspendLayout();
@@ -1098,6 +1101,7 @@ namespace SF3.MPD_Editor.Forms {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tabHeader);
             this.tabMain.Controls.Add(this.tabTileSurfaceCharacters);
+            this.tabMain.Controls.Add(this.tabBattleMap);
             this.tabMain.Controls.Add(this.tabTileHeightmap);
             this.tabMain.Controls.Add(this.tabTileHeights);
             this.tabMain.Controls.Add(this.tabTileTerrain);
@@ -1982,6 +1986,17 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTileSurfaceCharactersX63Tile.AspectToStringFormat = "{0:X}";
             this.lvcTileSurfaceCharactersX63Tile.Text = "X63";
             this.lvcTileSurfaceCharactersX63Tile.Width = 50;
+            // 
+            // tabBattleMap
+            // 
+            this.tabBattleMap.AutoScroll = true;
+            this.tabBattleMap.Controls.Add(this.battleMapControl1);
+            this.tabBattleMap.Location = new System.Drawing.Point(4, 22);
+            this.tabBattleMap.Name = "tabBattleMap";
+            this.tabBattleMap.Size = new System.Drawing.Size(756, 480);
+            this.tabBattleMap.TabIndex = 13;
+            this.tabBattleMap.Text = "Battle Map";
+            this.tabBattleMap.UseVisualStyleBackColor = true;
             // 
             // tabTileHeightmap
             // 
@@ -3877,17 +3892,6 @@ namespace SF3.MPD_Editor.Forms {
             this.tabTextures1.Text = "Textures1";
             this.tabTextures1.UseVisualStyleBackColor = true;
             // 
-            // textureChunkControl1
-            // 
-            this.textureChunkControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textureChunkControl1.BackColor = System.Drawing.Color.Transparent;
-            this.textureChunkControl1.Location = new System.Drawing.Point(-4, 0);
-            this.textureChunkControl1.Name = "textureChunkControl1";
-            this.textureChunkControl1.Size = new System.Drawing.Size(764, 484);
-            this.textureChunkControl1.TabIndex = 0;
-            // 
             // tabTextures2
             // 
             this.tabTextures2.Controls.Add(this.textureChunkControl2);
@@ -3898,17 +3902,6 @@ namespace SF3.MPD_Editor.Forms {
             this.tabTextures2.TabIndex = 10;
             this.tabTextures2.Text = "Textures2";
             this.tabTextures2.UseVisualStyleBackColor = true;
-            // 
-            // textureChunkControl2
-            // 
-            this.textureChunkControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textureChunkControl2.BackColor = System.Drawing.Color.Transparent;
-            this.textureChunkControl2.Location = new System.Drawing.Point(-4, 0);
-            this.textureChunkControl2.Name = "textureChunkControl2";
-            this.textureChunkControl2.Size = new System.Drawing.Size(764, 484);
-            this.textureChunkControl2.TabIndex = 1;
             // 
             // tabTextures3
             // 
@@ -3921,17 +3914,6 @@ namespace SF3.MPD_Editor.Forms {
             this.tabTextures3.Text = "Textures3";
             this.tabTextures3.UseVisualStyleBackColor = true;
             // 
-            // textureChunkControl3
-            // 
-            this.textureChunkControl3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textureChunkControl3.BackColor = System.Drawing.Color.Transparent;
-            this.textureChunkControl3.Location = new System.Drawing.Point(-4, 0);
-            this.textureChunkControl3.Name = "textureChunkControl3";
-            this.textureChunkControl3.Size = new System.Drawing.Size(764, 484);
-            this.textureChunkControl3.TabIndex = 1;
-            // 
             // tabTextures4
             // 
             this.tabTextures4.Controls.Add(this.textureChunkControl4);
@@ -3942,6 +3924,48 @@ namespace SF3.MPD_Editor.Forms {
             this.tabTextures4.TabIndex = 12;
             this.tabTextures4.Text = "Textures4";
             this.tabTextures4.UseVisualStyleBackColor = true;
+            // 
+            // battleMapControl1
+            // 
+            this.battleMapControl1.BackColor = System.Drawing.Color.Transparent;
+            this.battleMapControl1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("battleMapControl1.BackgroundImage")));
+            this.battleMapControl1.Location = new System.Drawing.Point(0, 0);
+            this.battleMapControl1.Name = "battleMapControl1";
+            this.battleMapControl1.Size = new System.Drawing.Size(1536, 1536);
+            this.battleMapControl1.TabIndex = 0;
+            // 
+            // textureChunkControl1
+            // 
+            this.textureChunkControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textureChunkControl1.BackColor = System.Drawing.Color.Transparent;
+            this.textureChunkControl1.Location = new System.Drawing.Point(-4, 0);
+            this.textureChunkControl1.Name = "textureChunkControl1";
+            this.textureChunkControl1.Size = new System.Drawing.Size(764, 484);
+            this.textureChunkControl1.TabIndex = 0;
+            // 
+            // textureChunkControl2
+            // 
+            this.textureChunkControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textureChunkControl2.BackColor = System.Drawing.Color.Transparent;
+            this.textureChunkControl2.Location = new System.Drawing.Point(-4, 0);
+            this.textureChunkControl2.Name = "textureChunkControl2";
+            this.textureChunkControl2.Size = new System.Drawing.Size(764, 484);
+            this.textureChunkControl2.TabIndex = 1;
+            // 
+            // textureChunkControl3
+            // 
+            this.textureChunkControl3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textureChunkControl3.BackColor = System.Drawing.Color.Transparent;
+            this.textureChunkControl3.Location = new System.Drawing.Point(-4, 0);
+            this.textureChunkControl3.Name = "textureChunkControl3";
+            this.textureChunkControl3.Size = new System.Drawing.Size(764, 484);
+            this.textureChunkControl3.TabIndex = 1;
             // 
             // textureChunkControl4
             // 
@@ -3977,6 +4001,7 @@ namespace SF3.MPD_Editor.Forms {
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).EndInit();
             this.tabTileSurfaceCharacters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvTileSurfaceCharacters)).EndInit();
+            this.tabBattleMap.ResumeLayout(false);
             this.tabTileHeightmap.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvTileHeightmap)).EndInit();
             this.tabTileHeights.ResumeLayout(false);
@@ -4375,6 +4400,8 @@ namespace SF3.MPD_Editor.Forms {
         private X1_Editor.Controls.TextureChunkControl textureChunkControl2;
         private X1_Editor.Controls.TextureChunkControl textureChunkControl3;
         private X1_Editor.Controls.TextureChunkControl textureChunkControl4;
+        private System.Windows.Forms.TabPage tabBattleMap;
+        private MPDEditor.Controls.BattleMapControl battleMapControl1;
     }
 }
 

@@ -85,13 +85,13 @@ namespace SF3.Editor.Extensions {
             public bool CanPopulate => Table != null;
 
             public bool Populate() {
-                ObjectListView.ClearObjects();
+                ObjectListView?.ClearObjects();
                 if (!Table.IsLoaded && !Table.Load()) {
                     // TODO: we really should be throwing an exception here instead...
                     ErrorMessage("Could not load " + Table.ResourceFile);
                     return false;
                 }
-                ObjectListView.AddObjects(RowObjs);
+                ObjectListView?.AddObjects(RowObjs);
                 return true;
             }
         }
