@@ -101,7 +101,7 @@ namespace DFRTool.GUI.Forms
             this.tabCommand_Create.TabIndex = 1;
             this.tabCommand_Create.Text = "Create DFR File";
             // 
-            // cbCreate_CombineAllAppendedData
+            // cbCombineAllAppendedData
             // 
             this.cbCreate_CombineAllAppendedData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbCreate_CombineAllAppendedData.AutoSize = true;
@@ -114,7 +114,7 @@ namespace DFRTool.GUI.Forms
             this.cbCreate_CombineAllAppendedData.Text = "Combine all appended data";
             this.cbCreate_CombineAllAppendedData.UseVisualStyleBackColor = true;
             // 
-            // cbCreate_OpenWhenGenerated
+            // cbOpenWhenGenerated
             // 
             this.cbCreate_OpenWhenGenerated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbCreate_OpenWhenGenerated.AutoSize = true;
@@ -127,7 +127,7 @@ namespace DFRTool.GUI.Forms
             this.cbCreate_OpenWhenGenerated.Text = "Open automatically when generated\r\n(.DFR files can be opened in any text editor)";
             this.cbCreate_OpenWhenGenerated.UseVisualStyleBackColor = true;
             // 
-            // btnCreate_GenerateDFR
+            // btnGenerateDFR
             // 
             this.btnCreate_GenerateDFR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreate_GenerateDFR.Location = new System.Drawing.Point(598, 173);
@@ -138,7 +138,7 @@ namespace DFRTool.GUI.Forms
             this.btnCreate_GenerateDFR.UseVisualStyleBackColor = true;
             this.btnCreate_GenerateDFR.Click += new System.EventHandler(this.btnCreate_GenerateDFR_Click);
             // 
-            // labelCreate_Separator2
+            // labelSeparator2
             // 
             this.labelCreate_Separator2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -148,7 +148,7 @@ namespace DFRTool.GUI.Forms
             this.labelCreate_Separator2.Size = new System.Drawing.Size(679, 2);
             this.labelCreate_Separator2.TabIndex = 8;
             // 
-            // tbCreate_OutputFile
+            // tbOutputFile
             // 
             this.tbCreate_OutputFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -159,7 +159,7 @@ namespace DFRTool.GUI.Forms
             this.tbCreate_OutputFile.Size = new System.Drawing.Size(586, 20);
             this.tbCreate_OutputFile.TabIndex = 8;
             // 
-            // tbCreate_AlteredFile
+            // tbAlteredFile
             // 
             this.tbCreate_AlteredFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -169,7 +169,7 @@ namespace DFRTool.GUI.Forms
             this.tbCreate_AlteredFile.Size = new System.Drawing.Size(586, 20);
             this.tbCreate_AlteredFile.TabIndex = 4;
             // 
-            // tbCreate_OriginalFile
+            // tbOriginalFile
             // 
             this.tbCreate_OriginalFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -179,7 +179,7 @@ namespace DFRTool.GUI.Forms
             this.tbCreate_OriginalFile.Size = new System.Drawing.Size(586, 20);
             this.tbCreate_OriginalFile.TabIndex = 2;
             // 
-            // labelCreate_OutputFile
+            // labelOutputFile
             // 
             this.labelCreate_OutputFile.AutoSize = true;
             this.labelCreate_OutputFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -189,7 +189,7 @@ namespace DFRTool.GUI.Forms
             this.labelCreate_OutputFile.TabIndex = 6;
             this.labelCreate_OutputFile.Text = "Select Output Destination";
             // 
-            // labelCreate_SelectInputs
+            // labelSelectInputs
             // 
             this.labelCreate_SelectInputs.AutoSize = true;
             this.labelCreate_SelectInputs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -199,7 +199,7 @@ namespace DFRTool.GUI.Forms
             this.labelCreate_SelectInputs.TabIndex = 0;
             this.labelCreate_SelectInputs.Text = "Select Input Files";
             // 
-            // labelCreate_Separator1
+            // labelSeparator1
             // 
             this.labelCreate_Separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -209,7 +209,7 @@ namespace DFRTool.GUI.Forms
             this.labelCreate_Separator1.Size = new System.Drawing.Size(679, 2);
             this.labelCreate_Separator1.TabIndex = 5;
             // 
-            // btnCreate_OutputFile
+            // btnOutputFile
             // 
             this.btnCreate_OutputFile.Location = new System.Drawing.Point(6, 104);
             this.btnCreate_OutputFile.Name = "btnCreate_OutputFile";
@@ -219,7 +219,7 @@ namespace DFRTool.GUI.Forms
             this.btnCreate_OutputFile.UseVisualStyleBackColor = true;
             this.btnCreate_OutputFile.Click += new System.EventHandler(this.btnCreate_OutputFile_Click);
             // 
-            // btnCreate_AlteredFile
+            // btnAlteredFile
             // 
             this.btnCreate_AlteredFile.Location = new System.Drawing.Point(6, 49);
             this.btnCreate_AlteredFile.Name = "btnCreate_AlteredFile";
@@ -229,7 +229,7 @@ namespace DFRTool.GUI.Forms
             this.btnCreate_AlteredFile.UseVisualStyleBackColor = true;
             this.btnCreate_AlteredFile.Click += new System.EventHandler(this.btnCreate_AlteredFile_Click);
             // 
-            // btnCreate_OriginalFile
+            // btnOriginalFile
             // 
             this.btnCreate_OriginalFile.Location = new System.Drawing.Point(6, 24);
             this.btnCreate_OriginalFile.Name = "btnCreate_OriginalFile";
@@ -261,7 +261,7 @@ namespace DFRTool.GUI.Forms
             this.tabCommand_Apply.TabIndex = 0;
             this.tabCommand_Apply.Text = "Apply DFR File";
             // 
-            // cbApply_ApplyToOriginalFile
+            // cbApplyToOriginalFile
             // 
             this.cbApply_ApplyToOriginalFile.AutoSize = true;
             this.cbApply_ApplyToOriginalFile.Checked = true;
@@ -273,7 +273,7 @@ namespace DFRTool.GUI.Forms
             this.cbApply_ApplyToOriginalFile.Text = "Apply DFR to Original File";
             this.cbApply_ApplyToOriginalFile.UseVisualStyleBackColor = true;
             // 
-            // btnApply_ApplyDFR
+            // btnApplyDFR
             // 
             this.btnApply_ApplyDFR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnApply_ApplyDFR.Location = new System.Drawing.Point(598, 173);
@@ -283,7 +283,7 @@ namespace DFRTool.GUI.Forms
             this.btnApply_ApplyDFR.Text = "Apply DFR";
             this.btnApply_ApplyDFR.UseVisualStyleBackColor = true;
             // 
-            // labelApply_Separator2
+            // labelSeparator2
             // 
             this.labelApply_Separator2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -293,7 +293,7 @@ namespace DFRTool.GUI.Forms
             this.labelApply_Separator2.Size = new System.Drawing.Size(679, 2);
             this.labelApply_Separator2.TabIndex = 10;
             // 
-            // tbApply_OutputFile
+            // tbOutputFile
             // 
             this.tbApply_OutputFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -306,7 +306,7 @@ namespace DFRTool.GUI.Forms
             this.tbApply_OutputFile.TabIndex = 9;
             this.tbApply_OutputFile.Text = "(Same as Original File)";
             // 
-            // tbApply_DFRFile
+            // tbDFRFile
             // 
             this.tbApply_DFRFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -316,7 +316,7 @@ namespace DFRTool.GUI.Forms
             this.tbApply_DFRFile.Size = new System.Drawing.Size(586, 20);
             this.tbApply_DFRFile.TabIndex = 4;
             // 
-            // labelApply_SelectOutputDestination
+            // labelSelectOutputDestination
             // 
             this.labelApply_SelectOutputDestination.AutoSize = true;
             this.labelApply_SelectOutputDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -326,7 +326,7 @@ namespace DFRTool.GUI.Forms
             this.labelApply_SelectOutputDestination.TabIndex = 6;
             this.labelApply_SelectOutputDestination.Text = "Select Output Destination";
             // 
-            // labelApply_Separator1
+            // labelSeparator1
             // 
             this.labelApply_Separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -336,7 +336,7 @@ namespace DFRTool.GUI.Forms
             this.labelApply_Separator1.Size = new System.Drawing.Size(679, 2);
             this.labelApply_Separator1.TabIndex = 5;
             // 
-            // btnApply_OutputFile
+            // btnOutputFile
             // 
             this.btnApply_OutputFile.Enabled = false;
             this.btnApply_OutputFile.Location = new System.Drawing.Point(6, 129);
@@ -346,7 +346,7 @@ namespace DFRTool.GUI.Forms
             this.btnApply_OutputFile.Text = "Output File...";
             this.btnApply_OutputFile.UseVisualStyleBackColor = true;
             // 
-            // btnApply_DFRFile
+            // btnDFRFile
             // 
             this.btnApply_DFRFile.Location = new System.Drawing.Point(6, 49);
             this.btnApply_DFRFile.Name = "btnApply_DFRFile";
@@ -355,7 +355,7 @@ namespace DFRTool.GUI.Forms
             this.btnApply_DFRFile.Text = "DFR File...";
             this.btnApply_DFRFile.UseVisualStyleBackColor = true;
             // 
-            // tbApply_OriginalFile
+            // tbOriginalFile
             // 
             this.tbApply_OriginalFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -365,7 +365,7 @@ namespace DFRTool.GUI.Forms
             this.tbApply_OriginalFile.Size = new System.Drawing.Size(586, 20);
             this.tbApply_OriginalFile.TabIndex = 2;
             // 
-            // btnApply_OriginalFile
+            // btnOriginalFile
             // 
             this.btnApply_OriginalFile.Location = new System.Drawing.Point(6, 24);
             this.btnApply_OriginalFile.Name = "btnApply_OriginalFile";
@@ -374,7 +374,7 @@ namespace DFRTool.GUI.Forms
             this.btnApply_OriginalFile.Text = "Original File...";
             this.btnApply_OriginalFile.UseVisualStyleBackColor = true;
             // 
-            // labelApply_SelectInputFiles
+            // labelSelectInputFiles
             // 
             this.labelApply_SelectInputFiles.AutoSize = true;
             this.labelApply_SelectInputFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
