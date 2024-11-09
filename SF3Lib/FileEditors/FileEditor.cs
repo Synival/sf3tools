@@ -61,13 +61,13 @@ namespace SF3.FileEditors {
                     newData = memoryStream.ToArray();
                 }
 
-                PreLoaded?.Invoke(this, EventArgs.Empty);
+                PreFileLoaded?.Invoke(this, EventArgs.Empty);
 
                 Filename = filename;
                 Data = newData;
 
                 UpdateTitle();
-                Loaded?.Invoke(this, EventArgs.Empty);
+                FileLoaded?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception) {
                 return false;
@@ -81,13 +81,13 @@ namespace SF3.FileEditors {
                 throw new FileEditorNotLoadedException();
 
             try {
-                PreSaved?.Invoke(this, EventArgs.Empty);
+                PreFileSaved?.Invoke(this, EventArgs.Empty);
                 File.WriteAllBytes(filename, Data);
                 Filename = filename;
 
                 IsModified = false;
                 UpdateTitle();
-                Saved?.Invoke(this, EventArgs.Empty);
+                FileSaved?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception) {
                 return false;
@@ -100,25 +100,25 @@ namespace SF3.FileEditors {
             if (!IsLoaded)
                 return true;
 
-            PreClosed?.Invoke(this, EventArgs.Empty);
+            PreFileClosed?.Invoke(this, EventArgs.Empty);
 
             Data = null;
             Filename = null;
             IsModified = false;
 
             UpdateTitle();
-            Closed?.Invoke(this, EventArgs.Empty);
+            FileClosed?.Invoke(this, EventArgs.Empty);
             return true;
         }
 
         public string EditorTitle(string formTitle) => formTitle + (IsLoaded ? " - " + Title : "");
 
-        public event EventHandler PreLoaded;
-        public event EventHandler Loaded;
-        public event EventHandler PreSaved;
-        public event EventHandler Saved;
-        public event EventHandler PreClosed;
-        public event EventHandler Closed;
+        public event EventHandler PreFileLoaded;
+        public event EventHandler FileLoaded;
+        public event EventHandler PreFileSaved;
+        public event EventHandler FileSaved;
+        public event EventHandler PreFileClosed;
+        public event EventHandler FileClosed;
         public event EventHandler TitleChanged;
 
         /// <summary>

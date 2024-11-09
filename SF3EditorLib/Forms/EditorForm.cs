@@ -172,12 +172,12 @@ namespace SF3.Editor.Forms {
 
         private void AttachFileEditor(IFileEditor fileEditor) {
             fileEditor.TitleChanged    += (obj, args) => UpdateTitle();
-            fileEditor.PreLoaded       += (obj, eargs) => PreFileLoaded?.Invoke(this, eargs);
-            fileEditor.Loaded          += (obj, eargs) => FileLoaded?.Invoke(this, eargs);
-            fileEditor.PreClosed       += (obj, eargs) => PreFileClosed?.Invoke(this, eargs);
-            fileEditor.Closed          += (obj, eargs) => FileClosed?.Invoke(this, eargs);
-            fileEditor.PreSaved        += (obj, eargs) => PreFileSaved?.Invoke(this, eargs);
-            fileEditor.Saved           += (obj, eargs) => FileSaved?.Invoke(this, eargs);
+            fileEditor.PreFileLoaded   += (obj, eargs) => PreFileLoaded?.Invoke(this, eargs);
+            fileEditor.FileLoaded      += (obj, eargs) => FileLoaded?.Invoke(this, eargs);
+            fileEditor.PreFileClosed   += (obj, eargs) => PreFileClosed?.Invoke(this, eargs);
+            fileEditor.FileClosed      += (obj, eargs) => FileClosed?.Invoke(this, eargs);
+            fileEditor.PreFileSaved    += (obj, eargs) => PreFileSaved?.Invoke(this, eargs);
+            fileEditor.FileSaved       += (obj, eargs) => FileSaved?.Invoke(this, eargs);
             fileEditor.ModifiedChanged += (obj, eargs) => FileModifiedChanged?.Invoke(this, eargs);
             fileEditor.IsLoadedChanged += (obj, eargs) => FileIsLoadedChanged?.Invoke(this, eargs);
         }

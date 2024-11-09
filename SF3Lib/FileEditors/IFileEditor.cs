@@ -8,14 +8,14 @@ namespace SF3.FileEditors {
     /// </summary>
     public interface IFileEditor : IByteEditor {
         /// <summary>
-        /// Loads a file's binary data for editing. Invokes events 'PreLoaded' and 'Loaded'.
+        /// Loads a file's binary data for editing. Invokes events 'PreFileLoaded' and 'FileLoaded'.
         /// </summary>
         /// <param name="filename">The file to load.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
         bool LoadFile(string filename);
 
         /// <summary>
-        /// Loads a stream of binary data for editing. Invokes events 'PreLoaded' and 'Loaded'.
+        /// Loads a stream of binary data for editing. Invokes events 'PreFileLoaded' and 'FileLoaded'.
         /// </summary>
         /// <param name="filename">The filename of 'stream' to be stored.</param>
         /// <param name="stream">The data stream to load.</param>
@@ -23,14 +23,14 @@ namespace SF3.FileEditors {
         bool LoadFile(string filename, Stream stream);
 
         /// <summary>
-        /// Saves a file's binary data for editing. Invokes events 'PreSaved' and 'Saved'.
+        /// Saves a file's binary data for editing. Invokes events 'PreFileSaved' and 'FileSaved'.
         /// </summary>
         /// <param name="filename">The file to load.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
         bool SaveFile(string filename);
 
         /// <summary>
-        /// Closes a file if opened. Invokes events 'PreClosed' and 'Closed' if a file is open.
+        /// Closes a file if opened. Invokes events 'PreFileClosed' and 'FileClosed' if a file is open.
         /// </summary>
         /// <returns>'true' if a file was closed, otherwise 'false'.</returns>
         bool CloseFile();
@@ -63,32 +63,32 @@ namespace SF3.FileEditors {
         /// <summary>
         /// Event that occurs before a file is opened.
         /// </summary>
-        event EventHandler PreLoaded;
+        event EventHandler PreFileLoaded;
 
         /// <summary>
         /// Event that occurs when a file is opened.
         /// </summary>
-        event EventHandler Loaded;
+        event EventHandler FileLoaded;
 
         /// <summary>
         /// Event that occurs before a file is saved.
         /// </summary>
-        event EventHandler PreSaved;
+        event EventHandler PreFileSaved;
 
         /// <summary>
         /// Event that occurs when a file is saved.
         /// </summary>
-        event EventHandler Saved;
+        event EventHandler FileSaved;
 
         /// <summary>
         /// Event that occurs before a file is closed.
         /// </summary>
-        event EventHandler PreClosed;
+        event EventHandler PreFileClosed;
 
         /// <summary>
         /// Event that occurs when a file is closed.
         /// </summary>
-        event EventHandler Closed;
+        event EventHandler FileClosed;
 
         /// <summary>
         /// Event that occurs whenever the 'Title' property is changed.
