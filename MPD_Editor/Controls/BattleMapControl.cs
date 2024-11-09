@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows.Forms;
 using SF3.Models.MPD.TextureChunk;
@@ -10,7 +11,7 @@ namespace SF3.MPDEditor.Controls {
         public BattleMapControl() {
             InitializeComponent();
 
-            SetStyle(ControlStyles.OptimizedDoubleBuffer | 
+            SetStyle(ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.UserPaint |
                      ControlStyles.AllPaintingInWmPaint, true);
         }
@@ -30,6 +31,8 @@ namespace SF3.MPDEditor.Controls {
             UniqueImages = new Dictionary<int, Image>();
             Images = new Image[textureData.GetLength(1), textureData.GetLength(0)];
             Flags = new byte[textureData.GetLength(1), textureData.GetLength(0)];
+
+            UniqueImages.Add(0xFF, null);
 
             for (int y = 0; y < textureData.GetLength(1); y++) {
                 for (int x = 0; x < textureData.GetLength(0); x++) {
@@ -53,8 +56,45 @@ namespace SF3.MPDEditor.Controls {
             using (var graphics = Graphics.FromImage(FullImage)) {
                 for (int y = 0; y < Images.GetLength(1); y++) {
                     for (int x = 0; x < Images.GetLength(0); x++) {
-                        if (Images[x, y] != null) {
-                            graphics.DrawImage(Images[x, y], x * 24, y * 24, 24, 24);
+                        var originalImage = Images[x, y] as Bitmap;
+                        if (originalImage != null) {
+                            bool flipHoriz = (Flags[x, y] & 0x10) != 0;
+                            bool flipVert  = (Flags[x, y] & 0x20) != 0;
+
+                            var image = originalImage.Clone(new Rectangle(0, 0, originalImage.Width, originalImage.Height), PixelFormat.Format16bppArgb1555);
+
+                            // TODO: WIP code to shade the image in case normals are actually working!
+#if false
+                            if ((x + y) % 2 == 0) {
+                                var bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadOnly, image.PixelFormat);
+                                unsafe {
+                                    ushort* ptr = (ushort*) bmpData.Scan0;
+                                    var size = image.Width * image.Height;
+                                    for (int i = 0; i < size; i++) {
+                                        var val = *ptr;
+                                        var channel1 = (val >>  0) & 0x1F;
+                                        var channel2 = (val >>  5) & 0x1F;
+                                        var channel3 = (val >> 10) & 0x1F;
+                                        var newVal = (ushort) ((val & 0x8000) +
+                                            ((channel1 / 2) <<  0) +
+                                            ((channel2 / 2) <<  5) +
+                                            ((channel3 / 2) << 10));
+                                        *ptr = newVal;
+                                        ptr++;
+                                    }
+                                }
+                                image.UnlockBits(bmpData);
+                            }
+#endif
+
+                            if (flipHoriz && flipVert)
+                                image.RotateFlip(RotateFlipType.RotateNoneFlipXY);
+                            else if (flipHoriz)
+                                image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                            else if (flipVert)
+                                image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
+                            graphics.DrawImage(image, x * 24, y * 24, 24, 24);
                         }
                     }
                 }
