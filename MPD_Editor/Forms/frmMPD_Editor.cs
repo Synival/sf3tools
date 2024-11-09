@@ -23,7 +23,7 @@ namespace SF3.MPD_Editor.Forms {
         }
 
         protected override string FileDialogFilter
-            => "SF3 Data (*_decompressed.BIN)|*_decompressed.BIN|" + base.FileDialogFilter;
+            => "SF3 Data (*.MPD)|*.MPD|" + base.FileDialogFilter;
 
         protected override IFileEditor MakeFileEditor() => new MPD_FileEditor(Scenario);
 
