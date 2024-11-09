@@ -1,55 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SF3.MPDEditor.Controls {
     public partial class TextureControl : UserControl {
         public TextureControl() {
             InitializeComponent();
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            SetStyle(ControlStyles.Opaque, true);
+        }
+
+        protected override CreateParams CreateParams {
+            get {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x00000020; // WS_EX_TRANSPARENT
+                return cp;
+            }
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e) {
         }
 
         protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
-            if (Data == null)
-                return;
 
-            var brushes = new Brush[256];
-            for (int i = 0; i < brushes.Length; i++)
-                brushes[i] = new SolidBrush(Color.FromArgb(i, i, i));
+            e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            e.Graphics.InterpolationMode  = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            e.Graphics.PixelOffsetMode    = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed;
+            e.Graphics.SmoothingMode      = System.Drawing.Drawing2D.SmoothingMode.None;
 
-            for (int x = 0; x < Data.GetLength(0); x++) {
-                for (int y = 0; y < Data.GetLength(1); y++) {
-                    ushort color = Data[x, y];
-                    byte a = ((color & 0x8000) == 0) ? (byte) 0 : (byte) 255;
-                    byte r = (byte) (((color >>  0) & 0x1F) * 8.25);
-                    byte g = (byte) (((color >>  5) & 0x1F) * 8.25);
-                    byte b = (byte) (((color >> 10) & 0x1F) * 8.25);
-
-                    var brush = new SolidBrush(Color.FromArgb(a, r, g, b));
-
-                    var rect = new RectangleF(x * 4, y * 4, 4, 4);
-                    e.Graphics.FillRectangle(brush, rect);
-                }
-            }
+            if (_textureImage != null)
+                e.Graphics.DrawImage(TextureImage, 0, 0, _textureImage.Width * 4, _textureImage.Height * 4);
         }
 
-        private ushort[,] _data = null;
+        private Image _textureImage = null;
 
-        public ushort[,] Data {
-            get => _data;
+        public Image TextureImage {
+            get => _textureImage;
             set {
-                if (_data != value) {
-                    _data = value;
-                    var newSize = new Size(_data.GetLength(0) * 4, _data.GetLength(1) * 4);
+                if (_textureImage != value) {
+                    _textureImage = value;
+                    var newSize = new Size(value.Width * 4, value.Height * 4);
                     var sizeDiff = new Point(newSize.Width - this.Size.Width, newSize.Height - this.Size.Height);
                     this.Size = newSize;
-                    this.Location = new Point(this.Location.X - sizeDiff.X, this.Location.Y - sizeDiff.Y);
+
+                    var widthMagnitude  = Anchor.HasFlag(AnchorStyles.Right)  ? 1.00 : Anchor.HasFlag(AnchorStyles.Left) ? 0.00 : 0.50;
+                    var heightMagnitude = Anchor.HasFlag(AnchorStyles.Bottom) ? 1.00 : Anchor.HasFlag(AnchorStyles.Top)  ? 0.00 : 0.50;
+
+                    this.Location = new Point(
+                        (int) (this.Location.X - sizeDiff.X * widthMagnitude),
+                        (int) (this.Location.Y - sizeDiff.Y * heightMagnitude)
+                    );
                     Invalidate();
                 }
             }

@@ -69,6 +69,32 @@ namespace SF3.Models.MPD.TextureChunk {
             }
         }
 
-        public ushort[,] ImageData { get; private set; }
+        private ushort[,] _imageData = null;
+
+        public ushort[,] ImageData {
+            get => _imageData;
+            set {
+                if (_imageData != value) {
+                    _imageData = value;
+
+                    var imageDataBytes = new byte[value.GetLength(0) * value.GetLength(1) * 2];
+                    int pos = 0;
+                    for (int y = 0; y < value.GetLength(1); y++) {
+                        for (int x = 0; x < value.GetLength(0); x++) {
+                            // Swap red and blue channels.
+                            var lowerChannel = value[x, y] & 0x001F;
+                            var upperChannel = value[x, y] & 0x7F00;
+                            var newBits = (value[x, y] & ~0x7C1F) | (lowerChannel << 10) | (upperChannel >> 10);
+                            imageDataBytes[pos++] = (byte) ((newBits & 0x00FF));
+                            imageDataBytes[pos++] = (byte) ((newBits & 0xFF00) >> 8);
+                        }
+                    }
+
+                    BitmapDataARGB1555 = imageDataBytes;
+                }
+            }
+        }
+
+        public byte[] BitmapDataARGB1555 { get; private set; }
     }
 }

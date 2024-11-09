@@ -64,6 +64,7 @@
     <Compile Include="Controls\TextureControl.Designer.cs">
       <DependentUpon>TextureControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\TextureExtensions.cs" />
     <Compile Include="Forms\frmMPD_Editor.cs">
       <SubType>Form</SubType>
     </Compile>

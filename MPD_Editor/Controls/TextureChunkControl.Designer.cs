@@ -144,7 +144,6 @@ namespace SF3.X1_Editor.Controls {
             // 
             this.textureControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.textureControl.BackColor = System.Drawing.Color.Transparent;
-            this.textureControl.Data = null;
             this.textureControl.Location = new System.Drawing.Point(740, 339);
             this.textureControl.Name = "textureControl";
             this.textureControl.Size = new System.Drawing.Size(150, 150);

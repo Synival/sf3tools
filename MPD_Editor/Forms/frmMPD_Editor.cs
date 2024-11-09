@@ -7,6 +7,7 @@ using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.FileEditors;
 using SF3.Models.MPD.TextureChunk;
+using SF3.MPDEditor.Extensions;
 using SF3.X1_Editor.Controls;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
@@ -51,7 +52,7 @@ namespace SF3.MPD_Editor.Forms {
         private void OnTextureChanged(object sender, ListViewItemSelectionChangedEventArgs e, TextureChunkControl tcec) {
             var item = (OLVListItem) e.Item;
             var texture = (Texture) item.RowObject;
-            tcec.TextureControl.Data = texture.ImageData;
+            tcec.TextureControl.TextureImage = texture.GetImage();
         }
 
         protected override string FileDialogFilter
