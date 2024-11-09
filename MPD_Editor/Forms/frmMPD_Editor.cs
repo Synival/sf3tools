@@ -32,8 +32,8 @@ namespace SF3.MPD_Editor.Forms {
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
-                new PopulateOLVTabConfig(tabPage1, objectListView1, FileEditor.TileRows),
-                new PopulateOLVTabConfig(tabItems, olvItems, FileEditor.ItemTileRows),
+                new PopulateOLVTabConfig(tabItemTiles, olvItemTiles, FileEditor.ItemTileRows),
+                new PopulateOLVTabConfig(tabTiles, olvTiles, FileEditor.TileRows),
             });
         }
 
@@ -49,8 +49,8 @@ namespace SF3.MPD_Editor.Forms {
                 return false;
             }
 */
-            olvItems.ClearObjects();
-            objectListView1.ClearObjects();
+            olvItemTiles.ClearObjects();
+            olvTiles.ClearObjects();
 
 /*
             olvItems.AddObjects(PresetList.getPresetList());
