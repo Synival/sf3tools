@@ -33,8 +33,8 @@ namespace SF3.MPD_Editor.Forms {
 
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
                 new PopulateOLVTabConfig(tabHeader,            olvHeader,            FileEditor.Header),
-                new PopulateOLVTabConfig(tabSurfaceCharacters, olvSurfaceCharacters, FileEditor.SurfaceCharacterRows),
-                new PopulateOLVTabConfig(tabItemTiles,         olvItemTiles,         FileEditor.ItemTileRows),
+                new PopulateOLVTabConfig(tabSurfaceCharacters, olvSurfaceCharacters, FileEditor.TileSurfaceCharacterRows),
+                new PopulateOLVTabConfig(tabItemTiles,         olvItemTiles,         FileEditor.TileItemRows),
                 new PopulateOLVTabConfig(tabTiles,             olvTiles,             FileEditor.TileRows),
             });
         }

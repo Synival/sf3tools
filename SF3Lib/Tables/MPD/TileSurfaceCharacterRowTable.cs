@@ -2,8 +2,8 @@ using SF3.FileEditors;
 using SF3.Models.MPD;
 
 namespace SF3.Tables.MPD {
-    public class SurfaceCharacterRowTable : Table<SurfaceCharacterRow> {
-        public SurfaceCharacterRowTable(IByteEditor fileEditor, int address) : base(fileEditor, address) {
+    public class TileSurfaceCharacterRowTable : Table<TileSurfaceCharacterRow> {
+        public TileSurfaceCharacterRowTable(IByteEditor fileEditor, int address) : base(fileEditor, address) {
         }
 
         public override bool Load() {
@@ -13,7 +13,7 @@ namespace SF3.Tables.MPD {
                 var block = id / 4;
                 var y = id % 4;
                 address = Address + ((block * 256) + y * 4) * 2;
-                return new SurfaceCharacterRow(FileEditor, id, "Y" + id, address);
+                return new TileSurfaceCharacterRow(FileEditor, id, "Y" + id, address);
             });
         }
 

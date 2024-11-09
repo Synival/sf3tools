@@ -47,22 +47,22 @@ namespace SF3.FileEditors {
             var headerAddr = GetDouble(headerAddrPtr) - 0x290000;
 
             var tables = new List<ITable>() {
-                (Header       = new HeaderTable     (this, headerAddr)),
-                (TileRows     = new TileRowTable    (ChunkEditors[5], 0x4000)),
-                (ItemTileRows = new ItemTileRowTable(ChunkEditors[5], 0x6000)),
+                (Header         = new HeaderTable       (this, headerAddr)),
+                (TileRows       = new TileRowTable      (ChunkEditors[5], 0x4000)),
+                (TileItemRows   = new TileItemRowTable  (ChunkEditors[5], 0x6000)),
             };
 
             if (Chunks[2].Data?.Length >= (64 * 64 * 2))
-                tables.Add(SurfaceCharacterRows = new SurfaceCharacterRowTable(ChunkEditors[2], 0x0000));
+                tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(ChunkEditors[2], 0x0000));
 
             return tables;
         }
 
         public override void DestroyTables() {
-            Header               = null;
-            SurfaceCharacterRows = null;
-            TileRows             = null;
-            ItemTileRows         = null;
+            Header                   = null;
+            TileSurfaceCharacterRows = null;
+            TileRows                 = null;
+            TileItemRows             = null;
         }
 
         public ChunkCollection Chunks { get; private set; }
@@ -73,12 +73,12 @@ namespace SF3.FileEditors {
         public HeaderTable Header { get; private set; }
 
         [BulkCopyRecurse]
-        public SurfaceCharacterRowTable SurfaceCharacterRows { get; private set; }
+        public TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; private set; }
 
         [BulkCopyRecurse]
         public TileRowTable TileRows { get; private set; }
 
         [BulkCopyRecurse]
-        public ItemTileRowTable ItemTileRows { get; private set; }
+        public TileItemRowTable TileItemRows { get; private set; }
     }
 }

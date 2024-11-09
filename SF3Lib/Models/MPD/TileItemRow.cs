@@ -1,10 +1,10 @@
 using SF3.FileEditors;
 
 namespace SF3.Models.MPD {
-    public class ItemTileRow : Model {
+    public class TileItemRow : Model {
         private readonly int[] xAddress = new int[64];
 
-        public ItemTileRow(IByteEditor editor, int id, string name, int address)
+        public TileItemRow(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 64) {
             for (var i = 0; i < xAddress.Length; i++)
                 xAddress[i] = Address + i;

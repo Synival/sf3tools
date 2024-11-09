@@ -1,10 +1,10 @@
 using SF3.FileEditors;
 
 namespace SF3.Models.MPD {
-    public class SurfaceCharacterRow : Model {
+    public class TileSurfaceCharacterRow : Model {
         private readonly int[] xAddress = new int[64];
 
-        public SurfaceCharacterRow(IByteEditor editor, int id, string name, int address)
+        public TileSurfaceCharacterRow(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 128) {
             for (var i = 0; i < xAddress.Length; i++) {
                 int block = i / 4;
