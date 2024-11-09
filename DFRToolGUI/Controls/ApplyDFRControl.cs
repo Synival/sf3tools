@@ -6,7 +6,9 @@ using static CommonLib.Win.Utils.MessageUtils;
 
 namespace DFRTool.GUI.Controls {
     public partial class ApplyDFRControl : UserControl {
+        private const string c_changesAppliedToEditorData = "(Changes Applied to Editor Data)";
         private const string c_changesAppliedToOriginalFile = "(Changes Applied to Original File)";
+
         private string _lastValidOutputFile = "";
 
         public ApplyDFRControl() {
@@ -14,11 +16,22 @@ namespace DFRTool.GUI.Controls {
             UpdateOutputFileControls();
         }
 
+        bool _updatingOutputFileControls = false;
+
         private void UpdateOutputFileControls() {
+            if (_updatingOutputFileControls)
+                return;
+            _updatingOutputFileControls = true;
+
+            if (ApplyInMemory)
+                this.cbApplyToOriginalFile.Enabled = false;
+
             // Do nothing if the control was enabled and should stay enabled.
-            bool shouldBeEnabled = !cbApplyToOriginalFile.Checked;
+            bool shouldBeEnabled = !cbApplyToOriginalFile.Checked && !ApplyInMemory;
             if (shouldBeEnabled && tbOutputFile.Enabled)
                 return;
+
+            this.cbApplyToOriginalFile.Enabled = !ApplyInMemory;
 
             // Remember the last enabled value so we can put it back later if necessary.
             if (tbOutputFile.Enabled)
@@ -27,7 +40,13 @@ namespace DFRTool.GUI.Controls {
             btnOutputFile.Enabled = shouldBeEnabled;
             tbOutputFile.Enabled  = shouldBeEnabled;
 
-            tbOutputFile.Text = shouldBeEnabled ? _lastValidOutputFile : c_changesAppliedToOriginalFile;
+            tbOutputFile.Text = shouldBeEnabled
+                ? _lastValidOutputFile
+                : ApplyInMemory
+                    ? c_changesAppliedToEditorData
+                    : c_changesAppliedToOriginalFile;
+
+            _updatingOutputFileControls = false;
         }
 
         private void btnOriginalFile_Click(object sender, EventArgs e) {
@@ -82,17 +101,24 @@ namespace DFRTool.GUI.Controls {
                 return;
             }
 
-            var outputFilename = cbApplyToOriginalFile.Checked ? tbOriginalFile.Text : tbOutputFile.Text;
-            if (outputFilename.Length == 0) {
-                InfoMessage("Please select a destination for the altered file.");
-                return;
+            string outputFilename = null;
+            if (!ApplyInMemory) {
+                outputFilename = cbApplyToOriginalFile.Checked ? tbOriginalFile.Text : tbOutputFile.Text;
+                if (outputFilename.Length == 0) {
+                    InfoMessage("Please select a destination for the altered file.");
+                    return;
+                }
             }
 
             try {
                 var input = File.ReadAllBytes(tbOriginalFile.Text);
                 var diff = new ByteDiff(tbDFRFile.Text);
                 var output = diff.ApplyTo(input);
-                File.WriteAllBytes(outputFilename, output);
+
+                if (ApplyInMemory)
+                    InMemoryOutput = output;
+                else
+                    File.WriteAllBytes(outputFilename, output);
             }
             catch (Exception ex) {
                 ErrorMessage("DFR application failed:\n\n" + ex.Message);
@@ -102,6 +128,28 @@ namespace DFRTool.GUI.Controls {
             InfoMessage("DFR file applied successfully.");
             ApplyDFR(this, EventArgs.Empty);
         }
+
+        private bool _applyInMemory = false;
+
+        /// <summary>
+        /// When set, the editor will set its byte[] output to InMemoryOutput rather than output
+        /// to a file. The output file selection options are disabled.
+        /// </summary>
+        public bool ApplyInMemory {
+            get => _applyInMemory;
+            set {
+                if (_applyInMemory != value) {
+                    _applyInMemory = value;
+                    UpdateOutputFileControls();
+                }
+            }
+        }
+
+        /// <summary>
+        /// In-memory output set upon applying a DFR instead of outputting to a file.
+        /// Set if ApplyInMemory is 'true'.
+        /// </summary>
+        public byte[] InMemoryOutput { get; private set; } = null;
 
         /// <summary>
         /// Event triggered after a DFR file is successfully applied.

@@ -260,35 +260,32 @@ namespace SF3.Editor.Forms {
             if (!IsLoaded)
                 return false;
 
-            var openfile = new OpenFileDialog {
-                Filter = "DFR Files (*.DFR)|*.DFR|All Files (*.*)|*.*"
-            };
-            if (openfile.ShowDialog() != DialogResult.OK)
+            var form = new frmDFRTool(CommandType.Apply, dialogMode: true);
+            //form.ApplyDFROriginalData = FileEditor.GetAllData();
+            form.ApplyDFRInMemory = true;
+            var dialogResult = form.ShowDialog();
+            if (dialogResult != DialogResult.OK)
                 return false;
 
             try {
-                using (var file = File.Open(openfile.FileName, FileMode.Open, FileAccess.Read)) {
-                    var diff = new ByteDiff(file);
-                    var oldBytes = FileEditor.GetAllData();
-                    var newBytes = diff.ApplyTo(oldBytes);
+                var filename = FileEditor.Filename;
+                var newBytes = form.ApplyDFRInMemoryOutput;
+                if (newBytes == null)
+                    throw new NullReferenceException("Internal error: No result from 'Apply DFR' command!");
 
-                    var filename = FileEditor.Filename;
-                    if (!CloseFile())
+                if (!CloseFile())
+                    return false;
+                using (var newBytesStream = new MemoryStream(newBytes)) {
+                    if (!LoadFile(filename, newBytesStream)) {
+                        if (FileEditor != null)
+                            FileEditor.IsModified = true;
                         return false;
-                    using (var newBytesStream = new MemoryStream(newBytes)) {
-                        if (!LoadFile(filename, newBytesStream)) {
-                            if (FileEditor != null)
-                                FileEditor.IsModified = true;
-                            return false;
-                        }
                     }
-
-                    FileEditor.IsModified = true;
-                    InfoMessage("DFR file successfully applied.");
                 }
+                FileEditor.IsModified = true;
             }
             catch (Exception e) {
-                ErrorMessage("Error loading DFR file:\n\n" + e.Message);
+                ErrorMessage("Error loading modified data:\n\n" + e.Message);
                 return false;
             }
 

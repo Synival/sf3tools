@@ -70,6 +70,19 @@ namespace DFRTool.GUI.Forms {
             set => createDFRControl1.AlteredData = value;
         }
 
+        /// <summary>
+        /// When set, the "Apply" command will output its contents to ApplyDFRInMemoryOutput.
+        /// </summary>
+        public bool ApplyDFRInMemory {
+            get => applyDFRControl1.ApplyInMemory;
+            set => applyDFRControl1.ApplyInMemory = value;
+        }
+
+        /// <summary>
+        /// Result of the "Apply" command when ApplyInMemory is set to 'true'.
+        /// </summary>
+        public byte[] ApplyDFRInMemoryOutput => applyDFRControl1.InMemoryOutput;
+
         protected override bool ProcessDialogKey(Keys keyData) {
             if (_isDialogMode && ModifierKeys == Keys.None && keyData == Keys.Escape) {
                 Close();
