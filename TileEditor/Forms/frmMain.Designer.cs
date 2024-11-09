@@ -29,13 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp_OpensChunk5Files = new System.Windows.Forms.ToolStripMenuItem();
             this.tabItems = new System.Windows.Forms.TabPage();
             this.olvItems = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -200,7 +196,7 @@
             this.olvStatUp4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSpellUse = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSpellUseLv = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.menuStrip1.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             this.tabItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvItems)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -208,61 +204,29 @@
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuStrip2
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(764, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiHelp});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(52, 24);
+            this.menuStrip2.TabIndex = 1;
             // 
-            // fileToolStripMenuItem
+            // tsmiHelp
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveAsToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiHelp_OpensChunk5Files});
+            this.tsmiHelp.Name = "tsmiHelp";
+            this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
+            this.tsmiHelp.Text = "&Help";
             // 
-            // openToolStripMenuItem
+            // tsmiHelp_OpensChunk5Files
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.openToolStripMenuItem.Text = "Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            this.saveAsToolStripMenuItem.Enabled = false;
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.saveAsToolStripMenuItem.Text = "Save As";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem,
-            this.toolStripMenuItem5});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aboutToolStripMenuItem.Text = "Version 0.02";
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem5.Text = "Opens chunk5 files";
+            this.tsmiHelp_OpensChunk5Files.Name = "tsmiHelp_OpensChunk5Files";
+            this.tsmiHelp_OpensChunk5Files.Size = new System.Drawing.Size(174, 22);
+            this.tsmiHelp_OpensChunk5Files.Text = "Opens chunk5 files";
             // 
             // tabItems
             // 
@@ -343,6 +307,9 @@
             this.olvItems.AllColumns.Add(this.olvColumn132);
             this.olvItems.AllColumns.Add(this.olvColumn133);
             this.olvItems.AllowColumnReorder = true;
+            this.olvItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.olvItems.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
@@ -415,7 +382,7 @@
             this.olvItems.GridLines = true;
             this.olvItems.HasCollapsibleGroups = false;
             this.olvItems.HideSelection = false;
-            this.olvItems.Location = new System.Drawing.Point(0, 0);
+            this.olvItems.Location = new System.Drawing.Point(3, 3);
             this.olvItems.MenuLabelGroupBy = "";
             this.olvItems.Name = "olvItems";
             this.olvItems.ShowGroups = false;
@@ -428,17 +395,18 @@
             // 
             // olvColumn1
             // 
-            this.olvColumn1.AspectName = "SizeName";
+            this.olvColumn1.AspectName = "Name";
             this.olvColumn1.IsEditable = false;
             this.olvColumn1.Text = "Name";
-            this.olvColumn1.Width = 80;
+            this.olvColumn1.Width = 90;
             // 
             // olvColumn2
             // 
-            this.olvColumn2.AspectName = "SizeAddress";
+            this.olvColumn2.AspectName = "Address";
             this.olvColumn2.AspectToStringFormat = "{0:X}";
             this.olvColumn2.IsEditable = false;
             this.olvColumn2.Text = "Address";
+            this.olvColumn2.Width = 90;
             // 
             // olvColumn3
             // 
@@ -890,6 +858,9 @@
             // 
             // tabMain
             // 
+            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tabItems);
             this.tabMain.Controls.Add(this.tabPage1);
             this.tabMain.Location = new System.Drawing.Point(0, 27);
@@ -897,7 +868,6 @@
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(764, 506);
             this.tabMain.TabIndex = 0;
-            this.tabMain.SelectedIndexChanged += new System.EventHandler(this.tabMain_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -980,6 +950,9 @@
             this.objectListView1.AllColumns.Add(this.olvColumn73);
             this.objectListView1.AllColumns.Add(this.olvColumn74);
             this.objectListView1.AllowColumnReorder = true;
+            this.objectListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView1.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn23,
@@ -1076,7 +1049,7 @@
             this.olvColumn26.AspectToStringFormat = "{0:X}";
             this.olvColumn26.IsEditable = false;
             this.olvColumn26.Text = "Address";
-            this.olvColumn26.Width = 50;
+            this.olvColumn26.Width = 90;
             // 
             // olvColumn29
             // 
@@ -1097,12 +1070,14 @@
             this.olvColumn6.AspectName = "X2Tile";
             this.olvColumn6.AspectToStringFormat = "{0:X}";
             this.olvColumn6.Text = "X2";
+            this.olvColumn6.Width = 50;
             // 
             // olvColumn7
             // 
             this.olvColumn7.AspectName = "X3Tile";
             this.olvColumn7.AspectToStringFormat = "{0:X}";
             this.olvColumn7.Text = "X3";
+            this.olvColumn7.Width = 50;
             // 
             // olvColumn11
             // 
@@ -1549,13 +1524,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 534);
             this.Controls.Add(this.tabMain);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuStrip2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
-            this.Text = "Sf3 Tile editor";
-            this.Resize += new System.EventHandler(this.frmMonsterEditor_Resize);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.Text = "SF3 Tile Editor";
+            this.Controls.SetChildIndex(this.menuStrip2, 0);
+            this.Controls.SetChildIndex(this.tabMain, 0);
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.tabItems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvItems)).EndInit();
             this.tabMain.ResumeLayout(false);
@@ -1567,12 +1543,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
         private BrightIdeasSoftware.OLVColumn lvcID;
         private BrightIdeasSoftware.OLVColumn lvcAddress;
         private BrightIdeasSoftware.OLVColumn lvcName;
@@ -1611,7 +1583,7 @@
         private BrightIdeasSoftware.OLVColumn olvColumn24;
         private BrightIdeasSoftware.OLVColumn olvColumn26;
         private BrightIdeasSoftware.OLVColumn olvColumn29;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_OpensChunk5Files;
         private BrightIdeasSoftware.OLVColumn olvColumn5;
         private BrightIdeasSoftware.OLVColumn olvColumn6;
         private BrightIdeasSoftware.OLVColumn olvColumn7;

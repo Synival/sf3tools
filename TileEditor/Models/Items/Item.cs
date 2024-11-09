@@ -1,7 +1,8 @@
-﻿using static STHAEditor.Forms.frmMain;
+﻿using SF3.FileEditors;
+using SF3.Models;
 
 namespace STHAEditor.Models.Items {
-    public class Item {
+    public class TileRow : Model {
         //TILES
         private readonly int theSpellIcon;
         private readonly int realOffset;
@@ -72,404 +73,392 @@ namespace STHAEditor.Models.Items {
         private readonly int offset;
         private readonly int sub;
 
-        public Item(int id, string text) {
-            if (Globals.scenario == 1)
-                offset = 0x00004000;
-
-            ID = id;
-            Name = text;
-
-            var start = offset + (id * 128);
-            x0 = start;
-            x1 = start + 2;
-            x2 = start + 4;
-            x3 = start + 6;
-            x4 = start + 8;
-            x5 = start + 10;
-            x6 = start + 12;
-            x7 = start + 14;
-            x8 = start + 16;
-            x9 = start + 18;
-            x10 = start + 20;
-            x11 = start + 22;
-            x12 = start + 24;
-            x13 = start + 26;
-            x14 = start + 28;
-            x15 = start + 30;
-            x16 = start + 32;
-            x17 = start + 34;
-            x18 = start + 36;
-            x19 = start + 38;
-            x20 = start + 40;
-            x21 = start + 42;
-            x22 = start + 44;
-            x23 = start + 46;
-            x24 = start + 48;
-            x25 = start + 50;
-            x26 = start + 52;
-            x27 = start + 54;
-            x28 = start + 56;
-            x29 = start + 58;
-            x30 = start + 60;
-            x31 = start + 62;
-            x32 = start + 64;
-            x33 = start + 66;
-            x34 = start + 68;
-            x35 = start + 70;
-            x36 = start + 72;
-            x37 = start + 74;
-            x38 = start + 76;
-            x39 = start + 78;
-            x40 = start + 80;
-            x41 = start + 82;
-            x42 = start + 84;
-            x43 = start + 86;
-            x44 = start + 88;
-            x45 = start + 90;
-            x46 = start + 92;
-            x47 = start + 94;
-            x48 = start + 96;
-            x49 = start + 98;
-            x50 = start + 100;
-            x51 = start + 102;
-            x52 = start + 104;
-            x53 = start + 106;
-            x54 = start + 108;
-            x55 = start + 110;
-            x56 = start + 112;
-            x57 = start + 114;
-            x58 = start + 116;
-            x59 = start + 118;
-            x60 = start + 120;
-            x61 = start + 122;
-            x62 = start + 124;
-            x63 = start + 126;
-
-            Address = offset + (id * 128);
+        public TileRow(IByteEditor editor, int id, string name, int address)
+        : base(editor, id, name, address, 128) {
+            x0  = Address;
+            x1  = Address + 2;
+            x2  = Address + 4;
+            x3  = Address + 6;
+            x4  = Address + 8;
+            x5  = Address + 10;
+            x6  = Address + 12;
+            x7  = Address + 14;
+            x8  = Address + 16;
+            x9  = Address + 18;
+            x10 = Address + 20;
+            x11 = Address + 22;
+            x12 = Address + 24;
+            x13 = Address + 26;
+            x14 = Address + 28;
+            x15 = Address + 30;
+            x16 = Address + 32;
+            x17 = Address + 34;
+            x18 = Address + 36;
+            x19 = Address + 38;
+            x20 = Address + 40;
+            x21 = Address + 42;
+            x22 = Address + 44;
+            x23 = Address + 46;
+            x24 = Address + 48;
+            x25 = Address + 50;
+            x26 = Address + 52;
+            x27 = Address + 54;
+            x28 = Address + 56;
+            x29 = Address + 58;
+            x30 = Address + 60;
+            x31 = Address + 62;
+            x32 = Address + 64;
+            x33 = Address + 66;
+            x34 = Address + 68;
+            x35 = Address + 70;
+            x36 = Address + 72;
+            x37 = Address + 74;
+            x38 = Address + 76;
+            x39 = Address + 78;
+            x40 = Address + 80;
+            x41 = Address + 82;
+            x42 = Address + 84;
+            x43 = Address + 86;
+            x44 = Address + 88;
+            x45 = Address + 90;
+            x46 = Address + 92;
+            x47 = Address + 94;
+            x48 = Address + 96;
+            x49 = Address + 98;
+            x50 = Address + 100;
+            x51 = Address + 102;
+            x52 = Address + 104;
+            x53 = Address + 106;
+            x54 = Address + 108;
+            x55 = Address + 110;
+            x56 = Address + 112;
+            x57 = Address + 114;
+            x58 = Address + 116;
+            x59 = Address + 118;
+            x60 = Address + 120;
+            x61 = Address + 122;
+            x62 = Address + 124;
+            x63 = Address + 126;
         }
 
-        public int ID { get; }
-        public string Name { get; }
-        public int Address { get; }
-
         public int X0Tile {
-            get => FileEditor.getWord(x0);
-            set => FileEditor.setWord(x0, value);
+            get => Editor.GetWord(x0);
+            set => Editor.SetWord(x0, value);
         }
 
         public int X1Tile {
-            get => FileEditor.getWord(x1);
-            set => FileEditor.setWord(x1, value);
+            get => Editor.GetWord(x1);
+            set => Editor.SetWord(x1, value);
         }
 
         public int X2Tile {
-            get => FileEditor.getWord(x2);
-            set => FileEditor.setWord(x2, value);
+            get => Editor.GetWord(x2);
+            set => Editor.SetWord(x2, value);
         }
 
         public int X3Tile {
-            get => FileEditor.getWord(x3);
-            set => FileEditor.setWord(x3, value);
+            get => Editor.GetWord(x3);
+            set => Editor.SetWord(x3, value);
         }
 
         public int X4Tile {
-            get => FileEditor.getWord(x4);
-            set => FileEditor.setWord(x4, value);
+            get => Editor.GetWord(x4);
+            set => Editor.SetWord(x4, value);
         }
 
         public int X5Tile {
-            get => FileEditor.getWord(x5);
-            set => FileEditor.setWord(x5, value);
+            get => Editor.GetWord(x5);
+            set => Editor.SetWord(x5, value);
         }
 
         public int X6Tile {
-            get => FileEditor.getWord(x6);
-            set => FileEditor.setWord(x6, value);
+            get => Editor.GetWord(x6);
+            set => Editor.SetWord(x6, value);
         }
 
         public int X7Tile {
-            get => FileEditor.getWord(x7);
-            set => FileEditor.setWord(x7, value);
+            get => Editor.GetWord(x7);
+            set => Editor.SetWord(x7, value);
         }
 
         public int X8Tile {
-            get => FileEditor.getWord(x8);
-            set => FileEditor.setWord(x8, value);
+            get => Editor.GetWord(x8);
+            set => Editor.SetWord(x8, value);
         }
 
         public int X9Tile {
-            get => FileEditor.getWord(x9);
-            set => FileEditor.setWord(x9, value);
+            get => Editor.GetWord(x9);
+            set => Editor.SetWord(x9, value);
         }
 
         public int X10Tile {
-            get => FileEditor.getWord(x10);
-            set => FileEditor.setWord(x10, value);
+            get => Editor.GetWord(x10);
+            set => Editor.SetWord(x10, value);
         }
 
         public int X11Tile {
-            get => FileEditor.getWord(x11);
-            set => FileEditor.setWord(x11, value);
+            get => Editor.GetWord(x11);
+            set => Editor.SetWord(x11, value);
         }
 
         public int X12Tile {
-            get => FileEditor.getWord(x12);
-            set => FileEditor.setWord(x12, value);
+            get => Editor.GetWord(x12);
+            set => Editor.SetWord(x12, value);
         }
 
         public int X13Tile {
-            get => FileEditor.getWord(x13);
-            set => FileEditor.setWord(x13, value);
+            get => Editor.GetWord(x13);
+            set => Editor.SetWord(x13, value);
         }
 
         public int X14Tile {
-            get => FileEditor.getWord(x14);
-            set => FileEditor.setWord(x14, value);
+            get => Editor.GetWord(x14);
+            set => Editor.SetWord(x14, value);
         }
 
         public int X15Tile {
-            get => FileEditor.getWord(x15);
-            set => FileEditor.setWord(x15, value);
+            get => Editor.GetWord(x15);
+            set => Editor.SetWord(x15, value);
         }
 
         public int X16Tile {
-            get => FileEditor.getWord(x16);
-            set => FileEditor.setWord(x16, value);
+            get => Editor.GetWord(x16);
+            set => Editor.SetWord(x16, value);
         }
 
         public int X17Tile {
-            get => FileEditor.getWord(x17);
-            set => FileEditor.setWord(x17, value);
+            get => Editor.GetWord(x17);
+            set => Editor.SetWord(x17, value);
         }
 
         public int X18Tile {
-            get => FileEditor.getWord(x18);
-            set => FileEditor.setWord(x18, value);
+            get => Editor.GetWord(x18);
+            set => Editor.SetWord(x18, value);
         }
 
         public int X19Tile {
-            get => FileEditor.getWord(x19);
-            set => FileEditor.setWord(x19, value);
+            get => Editor.GetWord(x19);
+            set => Editor.SetWord(x19, value);
         }
 
         public int X20Tile {
-            get => FileEditor.getWord(x20);
-            set => FileEditor.setWord(x20, value);
+            get => Editor.GetWord(x20);
+            set => Editor.SetWord(x20, value);
         }
 
         public int X21Tile {
-            get => FileEditor.getWord(x21);
-            set => FileEditor.setWord(x21, value);
+            get => Editor.GetWord(x21);
+            set => Editor.SetWord(x21, value);
         }
 
         public int X22Tile {
-            get => FileEditor.getWord(x22);
-            set => FileEditor.setWord(x22, value);
+            get => Editor.GetWord(x22);
+            set => Editor.SetWord(x22, value);
         }
 
         public int X23Tile {
-            get => FileEditor.getWord(x23);
-            set => FileEditor.setWord(x23, value);
+            get => Editor.GetWord(x23);
+            set => Editor.SetWord(x23, value);
         }
 
         public int X24Tile {
-            get => FileEditor.getWord(x24);
-            set => FileEditor.setWord(x24, value);
+            get => Editor.GetWord(x24);
+            set => Editor.SetWord(x24, value);
         }
 
         public int X25Tile {
-            get => FileEditor.getWord(x25);
-            set => FileEditor.setWord(x25, value);
+            get => Editor.GetWord(x25);
+            set => Editor.SetWord(x25, value);
         }
 
         public int X26Tile {
-            get => FileEditor.getWord(x26);
-            set => FileEditor.setWord(x26, value);
+            get => Editor.GetWord(x26);
+            set => Editor.SetWord(x26, value);
         }
 
         public int X27Tile {
-            get => FileEditor.getWord(x27);
-            set => FileEditor.setWord(x27, value);
+            get => Editor.GetWord(x27);
+            set => Editor.SetWord(x27, value);
         }
 
         public int X28Tile {
-            get => FileEditor.getWord(x28);
-            set => FileEditor.setWord(x28, value);
+            get => Editor.GetWord(x28);
+            set => Editor.SetWord(x28, value);
         }
 
         public int X29Tile {
-            get => FileEditor.getWord(x29);
-            set => FileEditor.setWord(x29, value);
+            get => Editor.GetWord(x29);
+            set => Editor.SetWord(x29, value);
         }
 
         public int X30Tile {
-            get => FileEditor.getWord(x30);
-            set => FileEditor.setWord(x30, value);
+            get => Editor.GetWord(x30);
+            set => Editor.SetWord(x30, value);
         }
 
         public int X31Tile {
-            get => FileEditor.getWord(x31);
-            set => FileEditor.setWord(x31, value);
+            get => Editor.GetWord(x31);
+            set => Editor.SetWord(x31, value);
         }
 
         public int X32Tile {
-            get => FileEditor.getWord(x32);
-            set => FileEditor.setWord(x32, value);
+            get => Editor.GetWord(x32);
+            set => Editor.SetWord(x32, value);
         }
 
         public int X33Tile {
-            get => FileEditor.getWord(x33);
-            set => FileEditor.setWord(x33, value);
+            get => Editor.GetWord(x33);
+            set => Editor.SetWord(x33, value);
         }
 
         public int X34Tile {
-            get => FileEditor.getWord(x34);
-            set => FileEditor.setWord(x34, value);
+            get => Editor.GetWord(x34);
+            set => Editor.SetWord(x34, value);
         }
 
         public int X35Tile {
-            get => FileEditor.getWord(x35);
-            set => FileEditor.setWord(x35, value);
+            get => Editor.GetWord(x35);
+            set => Editor.SetWord(x35, value);
         }
 
         public int X36Tile {
-            get => FileEditor.getWord(x36);
-            set => FileEditor.setWord(x36, value);
+            get => Editor.GetWord(x36);
+            set => Editor.SetWord(x36, value);
         }
 
         public int X37Tile {
-            get => FileEditor.getWord(x37);
-            set => FileEditor.setWord(x37, value);
+            get => Editor.GetWord(x37);
+            set => Editor.SetWord(x37, value);
         }
 
         public int X38Tile {
-            get => FileEditor.getWord(x38);
-            set => FileEditor.setWord(x38, value);
+            get => Editor.GetWord(x38);
+            set => Editor.SetWord(x38, value);
         }
 
         public int X39Tile {
-            get => FileEditor.getWord(x39);
-            set => FileEditor.setWord(x39, value);
+            get => Editor.GetWord(x39);
+            set => Editor.SetWord(x39, value);
         }
 
         public int X40Tile {
-            get => FileEditor.getWord(x40);
-            set => FileEditor.setWord(x40, value);
+            get => Editor.GetWord(x40);
+            set => Editor.SetWord(x40, value);
         }
 
         public int X41Tile {
-            get => FileEditor.getWord(x41);
-            set => FileEditor.setWord(x41, value);
+            get => Editor.GetWord(x41);
+            set => Editor.SetWord(x41, value);
         }
 
         public int X42Tile {
-            get => FileEditor.getWord(x42);
-            set => FileEditor.setWord(x42, value);
+            get => Editor.GetWord(x42);
+            set => Editor.SetWord(x42, value);
         }
 
         public int X43Tile {
-            get => FileEditor.getWord(x43);
-            set => FileEditor.setWord(x43, value);
+            get => Editor.GetWord(x43);
+            set => Editor.SetWord(x43, value);
         }
 
         public int X44Tile {
-            get => FileEditor.getWord(x44);
-            set => FileEditor.setWord(x44, value);
+            get => Editor.GetWord(x44);
+            set => Editor.SetWord(x44, value);
         }
 
         public int X45Tile {
-            get => FileEditor.getWord(x45);
-            set => FileEditor.setWord(x45, value);
+            get => Editor.GetWord(x45);
+            set => Editor.SetWord(x45, value);
         }
 
         public int X46Tile {
-            get => FileEditor.getWord(x46);
-            set => FileEditor.setWord(x46, value);
+            get => Editor.GetWord(x46);
+            set => Editor.SetWord(x46, value);
         }
 
         public int X47Tile {
-            get => FileEditor.getWord(x47);
-            set => FileEditor.setWord(x47, value);
+            get => Editor.GetWord(x47);
+            set => Editor.SetWord(x47, value);
         }
 
         public int X48Tile {
-            get => FileEditor.getWord(x48);
-            set => FileEditor.setWord(x48, value);
+            get => Editor.GetWord(x48);
+            set => Editor.SetWord(x48, value);
         }
 
         public int X49Tile {
-            get => FileEditor.getWord(x49);
-            set => FileEditor.setWord(x49, value);
+            get => Editor.GetWord(x49);
+            set => Editor.SetWord(x49, value);
         }
 
         public int X50Tile {
-            get => FileEditor.getWord(x50);
-            set => FileEditor.setWord(x50, value);
+            get => Editor.GetWord(x50);
+            set => Editor.SetWord(x50, value);
         }
 
         public int X51Tile {
-            get => FileEditor.getWord(x51);
-            set => FileEditor.setWord(x51, value);
+            get => Editor.GetWord(x51);
+            set => Editor.SetWord(x51, value);
         }
 
         public int X52Tile {
-            get => FileEditor.getWord(x52);
-            set => FileEditor.setWord(x52, value);
+            get => Editor.GetWord(x52);
+            set => Editor.SetWord(x52, value);
         }
 
         public int X53Tile {
-            get => FileEditor.getWord(x53);
-            set => FileEditor.setWord(x53, value);
+            get => Editor.GetWord(x53);
+            set => Editor.SetWord(x53, value);
         }
 
         public int X54Tile {
-            get => FileEditor.getWord(x54);
-            set => FileEditor.setWord(x54, value);
+            get => Editor.GetWord(x54);
+            set => Editor.SetWord(x54, value);
         }
 
         public int X55Tile {
-            get => FileEditor.getWord(x55);
-            set => FileEditor.setWord(x55, value);
+            get => Editor.GetWord(x55);
+            set => Editor.SetWord(x55, value);
         }
 
         public int X56Tile {
-            get => FileEditor.getWord(x56);
-            set => FileEditor.setWord(x56, value);
+            get => Editor.GetWord(x56);
+            set => Editor.SetWord(x56, value);
         }
 
         public int X57Tile {
-            get => FileEditor.getWord(x57);
-            set => FileEditor.setWord(x57, value);
+            get => Editor.GetWord(x57);
+            set => Editor.SetWord(x57, value);
         }
 
         public int X58Tile {
-            get => FileEditor.getWord(x58);
-            set => FileEditor.setWord(x58, value);
+            get => Editor.GetWord(x58);
+            set => Editor.SetWord(x58, value);
         }
 
         public int X59Tile {
-            get => FileEditor.getWord(x59);
-            set => FileEditor.setWord(x59, value);
+            get => Editor.GetWord(x59);
+            set => Editor.SetWord(x59, value);
         }
 
         public int X60Tile {
-            get => FileEditor.getWord(x60);
-            set => FileEditor.setWord(x60, value);
+            get => Editor.GetWord(x60);
+            set => Editor.SetWord(x60, value);
         }
 
         public int X61Tile {
-            get => FileEditor.getWord(x61);
-            set => FileEditor.setWord(x61, value);
+            get => Editor.GetWord(x61);
+            set => Editor.SetWord(x61, value);
         }
 
         public int X62Tile {
-            get => FileEditor.getWord(x62);
-            set => FileEditor.setWord(x62, value);
+            get => Editor.GetWord(x62);
+            set => Editor.SetWord(x62, value);
         }
 
         public int X63Tile {
-            get => FileEditor.getWord(x63);
-            set => FileEditor.setWord(x63, value);
+            get => Editor.GetWord(x63);
+            set => Editor.SetWord(x63, value);
         }
     }
 }
