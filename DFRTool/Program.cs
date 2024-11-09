@@ -1,4 +1,5 @@
 using DFRLib;
+using DFRLib.Types;
 using NDesk.Options;
 
 namespace DFRTool {
@@ -31,11 +32,6 @@ namespace DFRTool {
             "  -c, --combined-appends    merges all appended changes into one row\n" +
             "\n";
 
-        private enum Command {
-            Apply = 0,
-            Create = 1
-        };
-
         private static int Main(string[] args) {
             // Complain if no command was found.
             if (args == null || args.Length == 0) {
@@ -44,16 +40,16 @@ namespace DFRTool {
             }
 
             // Look for an 'apply' or 'create' keyword first.
-            Command? command = null;
+            CommandType? command = null;
             int commandArg = -1;
             for (int i = 0; i < args.Length; i++) {
                 if (args[i].ToLower() == "apply") {
-                    command = Command.Apply;
+                    command = CommandType.Apply;
                     commandArg = i;
                     break;
                 }
                 else if (args[i].ToLower() == "create") {
-                    command = Command.Create;
+                    command = CommandType.Create;
                     commandArg = i;
                     break;
                 }
@@ -116,10 +112,10 @@ namespace DFRTool {
             }
 
             switch (command) {
-                case Command.Apply:
+                case CommandType.Apply:
                     return Apply(remainingArgs);
 
-                case Command.Create:
+                case CommandType.Create:
                     return Create(remainingArgs);
 
                 default:
