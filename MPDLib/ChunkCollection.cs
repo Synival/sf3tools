@@ -29,6 +29,11 @@ namespace MPDLib {
             }
         }
 
+        /// <summary>
+        /// Processes all chunks and returns them decompressed
+        /// </summary>
+        /// <param name="logFileBaseFilename">Optional filename for logging</param>
+        /// <returns></returns>
         public byte[][] DecompressAllChunks(string logFileBaseFilename = null) {
             var data = new byte[Chunks.Length][];
             for (int c = 5; c < Chunks.Length; c++) {
@@ -39,8 +44,17 @@ namespace MPDLib {
             return data;
         }
 
+        /// <summary>
+        /// Gets a specific chunk at 'index'
+        /// </summary>
+        /// <param name="index">Index of chunk to get</param>
+        /// <returns>A Chunk at 'index'. Throws an exception if out of range.</returns>
         public Chunk this[int index] => Chunks[index];
 
+        /// <summary>
+        /// All chunks loaded.
+        /// TODO: make this private, and let us iterate over it from the outside?
+        /// </summary>
         public Chunk[] Chunks { get; private set; }
     }
 }

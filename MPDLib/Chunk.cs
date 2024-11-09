@@ -1,8 +1,10 @@
 ﻿using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace MPDLib {
+    /// <summary>
+    /// Definition for a single chunk that can possibly be compressed or decompressed.
+    /// </summary>
     public class Chunk {
         public Chunk(Stream stream, int size) {
             Size = size;
@@ -13,6 +15,12 @@ namespace MPDLib {
                 stream.Read(Data, 0, size);
         }
 
+        /// <summary>
+        /// Processed compressed chunk data and returns an uncompressed byte[].
+        /// All credit to AggroCrag for this decompression code!
+        /// </summary>
+        /// <param name="logFile"></param>
+        /// <returns></returns>
         public byte[] Decompress(string logFile = null) {
             logFile = "MyLog.txt";
 
@@ -74,7 +82,14 @@ namespace MPDLib {
             }
         }
 
+        /// <summary>
+        /// Size of the chunk in the MPD file
+        /// </summary>
         public int Size { get; }
+
+        /// <summary>
+        /// Data read from the MPD file
+        /// </summary>
         public byte[] Data { get; }
     }
 }

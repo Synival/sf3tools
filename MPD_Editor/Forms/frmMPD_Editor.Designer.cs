@@ -26,7 +26,6 @@ namespace SF3.MPD_Editor.Forms {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMPDEditor));
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiHelp_OpensChunk5Files = new System.Windows.Forms.ToolStripMenuItem();
             this.tabItemTiles = new System.Windows.Forms.TabPage();
             this.olvItemTiles = new BrightIdeasSoftware.ObjectListView();
             this.lvcItemTilesName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -192,6 +191,9 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTilesX61Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTilesX62Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTilesX63Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tsmiHelp_Credits1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp_Credits2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp_Separator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip2.SuspendLayout();
             this.tabItemTiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvItemTiles)).BeginInit();
@@ -209,22 +211,18 @@ namespace SF3.MPD_Editor.Forms {
             this.tsmiHelp});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(52, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(172, 24);
             this.menuStrip2.TabIndex = 1;
             // 
             // tsmiHelp
             // 
             this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiHelp_OpensChunk5Files});
+            this.tsmiHelp_Separator1,
+            this.tsmiHelp_Credits1,
+            this.tsmiHelp_Credits2});
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
             this.tsmiHelp.Text = "&Help";
-            // 
-            // tsmiHelp_OpensChunk5Files
-            // 
-            this.tsmiHelp_OpensChunk5Files.Name = "tsmiHelp_OpensChunk5Files";
-            this.tsmiHelp_OpensChunk5Files.Size = new System.Drawing.Size(174, 22);
-            this.tsmiHelp_OpensChunk5Files.Text = "Opens chunk5 files";
             // 
             // tabItemTiles
             // 
@@ -971,168 +969,144 @@ namespace SF3.MPD_Editor.Forms {
             // 
             this.lvcHeaderUnknown1.AspectName = "Unknown1";
             this.lvcHeaderUnknown1.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderUnknown1.IsEditable = true;
             this.lvcHeaderUnknown1.Text = "Unknown1";
             // 
             // lvcHeaderUnknown2
             // 
             this.lvcHeaderUnknown2.AspectName = "Unknown2";
             this.lvcHeaderUnknown2.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderUnknown2.IsEditable = true;
             this.lvcHeaderUnknown2.Text = "Unknown2";
             // 
             // lvcHeaderOffset1
             // 
             this.lvcHeaderOffset1.AspectName = "Offset1";
             this.lvcHeaderOffset1.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffset1.IsEditable = true;
             this.lvcHeaderOffset1.Text = "Offset1";
             // 
             // lvcHeaderOffset2
             // 
             this.lvcHeaderOffset2.AspectName = "Offset2";
             this.lvcHeaderOffset2.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffset2.IsEditable = true;
             this.lvcHeaderOffset2.Text = "Offset2";
             // 
             // lvcHeaderOffset3
             // 
             this.lvcHeaderOffset3.AspectName = "Offset3";
             this.lvcHeaderOffset3.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffset3.IsEditable = true;
             this.lvcHeaderOffset3.Text = "Offset3";
             // 
             // lvcHeaderUnknown3
             // 
             this.lvcHeaderUnknown3.AspectName = "Unknown3";
             this.lvcHeaderUnknown3.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderUnknown3.IsEditable = true;
             this.lvcHeaderUnknown3.Text = "Unknown3";
             // 
             // lvcHeaderUnknown4
             // 
             this.lvcHeaderUnknown4.AspectName = "Unknown4";
             this.lvcHeaderUnknown4.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderUnknown4.IsEditable = true;
             this.lvcHeaderUnknown4.Text = "Unknown4";
             // 
             // lvcHeaderOffset4
             // 
             this.lvcHeaderOffset4.AspectName = "Offset4";
             this.lvcHeaderOffset4.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffset4.IsEditable = true;
             this.lvcHeaderOffset4.Text = "Offset4";
             // 
             // lvcHeaderOffsetTextureGroups
             // 
             this.lvcHeaderOffsetTextureGroups.AspectName = "OffsetTextureGroups";
             this.lvcHeaderOffsetTextureGroups.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffsetTextureGroups.IsEditable = true;
             this.lvcHeaderOffsetTextureGroups.Text = "OffsetTextureGroups";
             // 
             // lvcHeaderOffset6
             // 
             this.lvcHeaderOffset6.AspectName = "Offset6";
             this.lvcHeaderOffset6.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffset6.IsEditable = true;
             this.lvcHeaderOffset6.Text = "Offset6";
             // 
             // lvcHeaderOffset7
             // 
             this.lvcHeaderOffset7.AspectName = "Offset7";
             this.lvcHeaderOffset7.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffset7.IsEditable = true;
             this.lvcHeaderOffset7.Text = "Offset7";
             // 
             // lvcHeaderOffsetMesh1
             // 
             this.lvcHeaderOffsetMesh1.AspectName = "OffsetMesh1";
             this.lvcHeaderOffsetMesh1.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffsetMesh1.IsEditable = true;
             this.lvcHeaderOffsetMesh1.Text = "OffsetMesh1";
             // 
             // lvcHeaderOffsetMesh2
             // 
             this.lvcHeaderOffsetMesh2.AspectName = "OffsetMesh2";
             this.lvcHeaderOffsetMesh2.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffsetMesh2.IsEditable = true;
             this.lvcHeaderOffsetMesh2.Text = "OffsetMesh2";
             // 
             // lvcHeaderOffsetMesh3
             // 
             this.lvcHeaderOffsetMesh3.AspectName = "OffsetMesh3";
             this.lvcHeaderOffsetMesh3.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffsetMesh3.IsEditable = true;
             this.lvcHeaderOffsetMesh3.Text = "OffsetMesh3";
             // 
             // lvcHeaderConst1
             // 
             this.lvcHeaderConst1.AspectName = "Const1";
             this.lvcHeaderConst1.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderConst1.IsEditable = true;
             this.lvcHeaderConst1.Text = "Const1";
             // 
             // lvcHeaderConst2
             // 
             this.lvcHeaderConst2.AspectName = "Const2";
             this.lvcHeaderConst2.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderConst2.IsEditable = true;
             this.lvcHeaderConst2.Text = "Const2";
             // 
             // lvcHeaderOffsetTextureAnimAlt
             // 
             this.lvcHeaderOffsetTextureAnimAlt.AspectName = "OffsetTextureAnimAlt";
             this.lvcHeaderOffsetTextureAnimAlt.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffsetTextureAnimAlt.IsEditable = true;
             this.lvcHeaderOffsetTextureAnimAlt.Text = "OffsetTextureAnimAlt";
             // 
             // lvcHeaderOffsetPal1
             // 
             this.lvcHeaderOffsetPal1.AspectName = "OffsetPal1";
             this.lvcHeaderOffsetPal1.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffsetPal1.IsEditable = true;
             this.lvcHeaderOffsetPal1.Text = "OffsetPal1";
             // 
             // lvcHeaderOffsetPal2
             // 
             this.lvcHeaderOffsetPal2.AspectName = "OffsetPal2";
             this.lvcHeaderOffsetPal2.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffsetPal2.IsEditable = true;
             this.lvcHeaderOffsetPal2.Text = "OffsetPal2";
             // 
             // lvcHeaderUnknown5
             // 
             this.lvcHeaderUnknown5.AspectName = "Unknown5";
             this.lvcHeaderUnknown5.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderUnknown5.IsEditable = true;
             this.lvcHeaderUnknown5.Text = "Unknown5";
             // 
             // lvcHeaderConst3
             // 
             this.lvcHeaderConst3.AspectName = "Const3";
             this.lvcHeaderConst3.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderConst3.IsEditable = true;
             this.lvcHeaderConst3.Text = "Const3";
             // 
             // lvcHeaderUnknown6
             // 
             this.lvcHeaderUnknown6.AspectName = "Unknown6";
             this.lvcHeaderUnknown6.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderUnknown6.IsEditable = true;
             this.lvcHeaderUnknown6.Text = "Unknown6";
             // 
             // lvcHeaderUnknown7
             // 
             this.lvcHeaderUnknown7.AspectName = "Unknown7";
             this.lvcHeaderUnknown7.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderUnknown7.IsEditable = true;
             this.lvcHeaderUnknown7.Text = "Unknown7";
             // 
             // lvcHeaderOffset12
             // 
             this.lvcHeaderOffset12.AspectName = "Offset12";
             this.lvcHeaderOffset12.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderOffset12.IsEditable = true;
             this.lvcHeaderOffset12.Text = "Offset12";
             // 
             // tabTiles
@@ -1764,6 +1738,23 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTilesX63Tile.Text = "X63";
             this.lvcTilesX63Tile.Width = 50;
             // 
+            // tsmiHelp_Credits1
+            // 
+            this.tsmiHelp_Credits1.Name = "tsmiHelp_Credits1";
+            this.tsmiHelp_Credits1.Size = new System.Drawing.Size(257, 22);
+            this.tsmiHelp_Credits1.Text = "All credit to AggroCrag for the";
+            // 
+            // tsmiHelp_Credits2
+            // 
+            this.tsmiHelp_Credits2.Name = "tsmiHelp_Credits2";
+            this.tsmiHelp_Credits2.Size = new System.Drawing.Size(257, 22);
+            this.tsmiHelp_Credits2.Text = "compression/decompression code";
+            // 
+            // tsmiHelp_Separator1
+            // 
+            this.tsmiHelp_Separator1.Name = "tsmiHelp_Separator1";
+            this.tsmiHelp_Separator1.Size = new System.Drawing.Size(254, 6);
+            // 
             // frmMPDEditor
             // 
             this.AllowDrop = true;
@@ -1804,7 +1795,6 @@ namespace SF3.MPD_Editor.Forms {
         private BrightIdeasSoftware.OLVColumn lvcTilesName;
         private BrightIdeasSoftware.OLVColumn lvcTilesAddress;
         private BrightIdeasSoftware.OLVColumn lvcTilesX0Tile;
-        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_OpensChunk5Files;
         private BrightIdeasSoftware.OLVColumn lvcTilesX1Tile;
         private BrightIdeasSoftware.OLVColumn lvcTilesX2Tile;
         private BrightIdeasSoftware.OLVColumn lvcTilesX3Tile;
@@ -1960,6 +1950,9 @@ namespace SF3.MPD_Editor.Forms {
         private BrightIdeasSoftware.OLVColumn lvcHeaderUnknown6;
         private BrightIdeasSoftware.OLVColumn lvcHeaderUnknown7;
         private BrightIdeasSoftware.OLVColumn lvcHeaderOffset12;
+        private System.Windows.Forms.ToolStripSeparator tsmiHelp_Separator1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_Credits1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_Credits2;
     }
 }
 
