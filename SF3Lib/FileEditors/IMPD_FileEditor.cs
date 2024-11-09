@@ -1,5 +1,5 @@
 using MPDLib;
-using SF3.Models.MPD;
+using SF3.Models.MPD.TextureChunk;
 using SF3.Tables.MPD;
 
 namespace SF3.FileEditors {

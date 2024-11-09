@@ -1,0 +1,38 @@
+﻿using System.Collections.Generic;
+using CommonLib.Attributes;
+using SF3.FileEditors;
+using SF3.Tables;
+using SF3.Tables.MPD.TextureChunk;
+
+namespace SF3.Models.MPD.TextureChunk {
+    public class TextureChunk {
+        public TextureChunk(IByteEditor editor, int address, string name) {
+            Editor  = editor;
+            Address = address;
+            Name    = name;
+
+            HeaderTable  = new HeaderTable(Editor, 0x00);
+            HeaderTable.Load();
+            TextureTable = new TextureTable(Editor, 0x04, HeaderTable.Rows[0].NumTextures);
+
+            Tables = new List<ITable>() {
+                HeaderTable,
+                TextureTable
+            };
+        }
+
+        [BulkCopyRowName]
+        public string Name { get; }
+
+        public IByteEditor Editor { get; }
+        public int Address { get; }
+
+        public List<ITable> Tables { get; }
+
+        [BulkCopyRecurse]
+        public HeaderTable HeaderTable { get; }
+
+        [BulkCopyRecurse]
+        public TextureTable TextureTable { get; }
+    }
+}

@@ -13,7 +13,9 @@ namespace SF3.X1_Editor.Controls {
         public TabControl Tabs => this.tabMain;
 
         public TabPage TabHeader => this.tabHeader;
+        public TabPage TabTextures => this.tabTextures;
 
         public ObjectListView OLVHeader => this.olvHeader;
+        public ObjectListView OLVTextures => this.olvTextures;
     }
 }

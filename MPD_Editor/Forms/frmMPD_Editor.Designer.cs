@@ -3879,6 +3879,9 @@ namespace SF3.MPD_Editor.Forms {
             // 
             // textureChunkControl1
             // 
+            this.textureChunkControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textureChunkControl1.BackColor = System.Drawing.Color.Transparent;
             this.textureChunkControl1.Location = new System.Drawing.Point(-4, 0);
             this.textureChunkControl1.Name = "textureChunkControl1";
@@ -3898,6 +3901,9 @@ namespace SF3.MPD_Editor.Forms {
             // 
             // textureChunkControl2
             // 
+            this.textureChunkControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textureChunkControl2.BackColor = System.Drawing.Color.Transparent;
             this.textureChunkControl2.Location = new System.Drawing.Point(-4, 0);
             this.textureChunkControl2.Name = "textureChunkControl2";
@@ -3917,6 +3923,9 @@ namespace SF3.MPD_Editor.Forms {
             // 
             // textureChunkControl3
             // 
+            this.textureChunkControl3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textureChunkControl3.BackColor = System.Drawing.Color.Transparent;
             this.textureChunkControl3.Location = new System.Drawing.Point(-4, 0);
             this.textureChunkControl3.Name = "textureChunkControl3";
@@ -3936,6 +3945,9 @@ namespace SF3.MPD_Editor.Forms {
             // 
             // textureChunkControl4
             // 
+            this.textureChunkControl4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textureChunkControl4.BackColor = System.Drawing.Color.Transparent;
             this.textureChunkControl4.Location = new System.Drawing.Point(-4, 0);
             this.textureChunkControl4.Name = "textureChunkControl4";

@@ -31,9 +31,17 @@ namespace SF3.X1_Editor.Controls {
             this.lvcHeaderTextureIdStart = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabTextures = new System.Windows.Forms.TabPage();
+            this.olvTextures = new BrightIdeasSoftware.ObjectListView();
+            this.lvcTexturesName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTexturesAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTexturesWidth = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTexturesHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTexturesImageDataOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).BeginInit();
             this.tabMain.SuspendLayout();
+            this.tabTextures.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvTextures)).BeginInit();
             this.SuspendLayout();
             // 
             // tabHeader
@@ -81,7 +89,7 @@ namespace SF3.X1_Editor.Controls {
             // 
             this.lvcHeaderName.AspectName = "Name";
             this.lvcHeaderName.IsEditable = false;
-            this.lvcHeaderName.Text = "SizeList";
+            this.lvcHeaderName.Text = "Name";
             // 
             // lvcHeaderAddress
             // 
@@ -92,11 +100,13 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcHeaderNumTextures
             // 
+            this.lvcHeaderNumTextures.AspectName = "NumTextures";
             this.lvcHeaderNumTextures.Text = "# Textures";
             this.lvcHeaderNumTextures.Width = 65;
             // 
             // lvcHeaderTextureIdStart
             // 
+            this.lvcHeaderTextureIdStart.AspectName = "TextureIdStart";
             this.lvcHeaderTextureIdStart.Text = "Texture ID Start";
             this.lvcHeaderTextureIdStart.Width = 90;
             // 
@@ -116,12 +126,75 @@ namespace SF3.X1_Editor.Controls {
             // 
             // tabTextures
             // 
+            this.tabTextures.Controls.Add(this.olvTextures);
             this.tabTextures.Location = new System.Drawing.Point(4, 22);
             this.tabTextures.Name = "tabTextures";
             this.tabTextures.Size = new System.Drawing.Size(909, 508);
             this.tabTextures.TabIndex = 4;
             this.tabTextures.Text = "Textures";
             this.tabTextures.UseVisualStyleBackColor = true;
+            // 
+            // olvTextures
+            // 
+            this.olvTextures.AllColumns.Add(this.lvcTexturesName);
+            this.olvTextures.AllColumns.Add(this.lvcTexturesAddress);
+            this.olvTextures.AllColumns.Add(this.lvcTexturesWidth);
+            this.olvTextures.AllColumns.Add(this.lvcTexturesHeight);
+            this.olvTextures.AllColumns.Add(this.lvcTexturesImageDataOffset);
+            this.olvTextures.AllowColumnReorder = true;
+            this.olvTextures.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.olvTextures.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvTextures.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvcTexturesName,
+            this.lvcTexturesAddress,
+            this.lvcTexturesWidth,
+            this.lvcTexturesHeight,
+            this.lvcTexturesImageDataOffset});
+            this.olvTextures.FullRowSelect = true;
+            this.olvTextures.GridLines = true;
+            this.olvTextures.HasCollapsibleGroups = false;
+            this.olvTextures.HideSelection = false;
+            this.olvTextures.Location = new System.Drawing.Point(3, 3);
+            this.olvTextures.MenuLabelGroupBy = "";
+            this.olvTextures.Name = "olvTextures";
+            this.olvTextures.ShowGroups = false;
+            this.olvTextures.Size = new System.Drawing.Size(903, 502);
+            this.olvTextures.TabIndex = 1;
+            this.olvTextures.UseAlternatingBackColors = true;
+            this.olvTextures.UseCompatibleStateImageBehavior = false;
+            this.olvTextures.View = System.Windows.Forms.View.Details;
+            // 
+            // lvcTexturesName
+            // 
+            this.lvcTexturesName.AspectName = "Name";
+            this.lvcTexturesName.IsEditable = false;
+            this.lvcTexturesName.Text = "Name";
+            // 
+            // lvcTexturesAddress
+            // 
+            this.lvcTexturesAddress.AspectName = "Address";
+            this.lvcTexturesAddress.AspectToStringFormat = "{0:X4}";
+            this.lvcTexturesAddress.IsEditable = false;
+            this.lvcTexturesAddress.Text = "Address";
+            // 
+            // lvcTexturesWidth
+            // 
+            this.lvcTexturesWidth.AspectName = "Width";
+            this.lvcTexturesWidth.Text = "Width";
+            // 
+            // lvcTexturesHeight
+            // 
+            this.lvcTexturesHeight.AspectName = "Height";
+            this.lvcTexturesHeight.Text = "Height";
+            // 
+            // lvcTexturesImageDataOffset
+            // 
+            this.lvcTexturesImageDataOffset.AspectName = "ImageDataOffset";
+            this.lvcTexturesImageDataOffset.AspectToStringFormat = "{0:X4}";
+            this.lvcTexturesImageDataOffset.Text = "ImageDataOffset";
+            this.lvcTexturesImageDataOffset.Width = 100;
             // 
             // TextureChunkControl
             // 
@@ -134,6 +207,8 @@ namespace SF3.X1_Editor.Controls {
             this.tabHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).EndInit();
             this.tabMain.ResumeLayout(false);
+            this.tabTextures.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvTextures)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -148,5 +223,11 @@ namespace SF3.X1_Editor.Controls {
         private System.Windows.Forms.TabPage tabTextures;
         private BrightIdeasSoftware.OLVColumn lvcHeaderNumTextures;
         private BrightIdeasSoftware.OLVColumn lvcHeaderTextureIdStart;
+        private BrightIdeasSoftware.ObjectListView olvTextures;
+        private BrightIdeasSoftware.OLVColumn lvcTexturesName;
+        private BrightIdeasSoftware.OLVColumn lvcTexturesAddress;
+        private BrightIdeasSoftware.OLVColumn lvcTexturesWidth;
+        private BrightIdeasSoftware.OLVColumn lvcTexturesHeight;
+        private BrightIdeasSoftware.OLVColumn lvcTexturesImageDataOffset;
     }
 }

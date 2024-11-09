@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using CommonLib.Attributes;
 using MPDLib;
-using SF3.Models.MPD;
+using SF3.Models.MPD.TextureChunk;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Tables.MPD;
@@ -65,7 +65,7 @@ namespace SF3.FileEditors {
             TextureChunks = new TextureChunk[4];
             for (int i = 0; i < 4; i++) {
                 if (Chunks[i + 6].Data?.Length > 0)
-                    TextureChunks[i] = new TextureChunk();
+                    TextureChunks[i] = new TextureChunk(ChunkEditors[i + 6], 0x00, "TextureChunk" + (i + 1));
             }
 
             return tables;

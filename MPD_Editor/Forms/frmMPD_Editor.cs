@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using CommonLib.Extensions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.FileEditors;
-using SF3.Models.MPD;
+using SF3.Models.MPD.TextureChunk;
+using SF3.X1_Editor.Controls;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
 namespace SF3.MPD_Editor.Forms {
@@ -17,7 +20,26 @@ namespace SF3.MPD_Editor.Forms {
 
         public frmMPDEditor() {
             InitializeComponent();
-            InitializeEditor(menuStrip2);
+
+            // Gather all tables in our battleEditors.
+            // TODO: InitializeEditor() should do just do this recursively
+            var textureChunkEditorControls = new List<TextureChunkControl>() {
+                textureChunkControl1,
+                textureChunkControl2,
+                textureChunkControl3,
+                textureChunkControl4,
+            };
+            var textureChunkOLVs = textureChunkEditorControls.SelectMany(x => x.GetAllObjectsOfTypeInFields<ObjectListView>(false)).ToList();
+
+            // Synchronize the tabs in the battle editors
+            void tabSyncFunc(object sender, TabControlEventArgs e) {
+                foreach (var tcec in textureChunkEditorControls)
+                    tcec.Tabs.SelectedIndex = e.TabPageIndex;
+            };
+            foreach (var bec in textureChunkEditorControls)
+                bec.Tabs.Selected += tabSyncFunc;
+
+            InitializeEditor(menuStrip2, textureChunkOLVs);
 
             // Scenario is currently irrelevant.
             // TODO: fetch by name, not by index!!
@@ -42,20 +64,11 @@ namespace SF3.MPD_Editor.Forms {
 
             public bool Populate() {
                 // TODO: more tables!
-                return true;
-#if false
-                var tcec = TabPage.Controls[0] as TextureChunkEditorControl;
-                return bec.Tabs.PopulateTabs(new List<IPopulateTabConfig>() {
-                    new PopulateOLVTabConfig(bec.TabHeader,           bec.OLVHeader,           BattleTable.HeaderTable),
-                    new PopulateOLVTabConfig(bec.TabSlotTab1,         bec.OLVSlotTab1,         BattleTable.SlotTable),
-                    new PopulateOLVTabConfig(bec.TabSlotTab2,         bec.OLVSlotTab2,         BattleTable.SlotTable),
-                    new PopulateOLVTabConfig(bec.TabSlotTab3,         bec.OLVSlotTab3,         BattleTable.SlotTable),
-                    new PopulateOLVTabConfig(bec.TabSlotTab4,         bec.OLVSlotTab4,         BattleTable.SlotTable),
-                    new PopulateOLVTabConfig(bec.TabSpawnZones,       bec.OLVSpawnZones,       BattleTable.SpawnZoneTable),
-                    new PopulateOLVTabConfig(bec.TabAITargetPosition, bec.OLVAITargetPosition, BattleTable.AITable),
-                    new PopulateOLVTabConfig(bec.TabScriptedMovement, bec.OLVScriptedMovement, BattleTable.CustomMovementTable)
+                var tcec = TabPage.Controls[0] as TextureChunkControl;
+                return tcec.Tabs.PopulateTabs(new List<IPopulateTabConfig>() {
+                    new PopulateOLVTabConfig(tcec.TabHeader,   tcec.OLVHeader,   TextureChunk.HeaderTable),
+                    new PopulateOLVTabConfig(tcec.TabTextures, tcec.OLVTextures, TextureChunk.TextureTable),
                 });
-#endif
             }
         }
 
