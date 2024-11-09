@@ -4,6 +4,7 @@ using CommonLib.Attributes;
 using SF3.Exceptions;
 using SF3.NamedValues;
 using SF3.Tables;
+using SF3.Tables.IconPointer;
 using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 

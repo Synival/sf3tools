@@ -1,4 +1,4 @@
-using SF3.Tables;
+using SF3.Tables.MPD;
 
 namespace SF3.FileEditors {
     public interface IMPD_FileEditor : ISF3FileEditor {

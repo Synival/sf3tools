@@ -4,6 +4,10 @@ using System.Linq;
 using CommonLib.Attributes;
 using SF3.NamedValues;
 using SF3.Tables;
+using SF3.Tables.Shared;
+using SF3.Tables.X1_All;
+using SF3.Tables.X1_Battle;
+using SF3.Tables.X1_Town;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 
@@ -47,10 +51,12 @@ namespace SF3.FileEditors {
                 IsBattle = false;
             }
 
+            // The "Treasure" table is the only table present in all X1 files regardless of scenario or town/battle status.
+            treasureAddress = GetDouble(0x000c) - sub;
+
             if (isScn1OrBTL99) {
                 hasLargeEnemyTable = true;
 
-                treasureAddress      = GetDouble(0x000c) - sub;
                 warpAddress          = -1; // X002 editor has Scenario1 WarpTable, and provides the address itself.
                 npcAddress           = (IsBattle == true) ? -1 : battlePointersPointerAddress; // same address
                 enterAddress         = GetDouble(0x0024) - sub;
@@ -59,11 +65,10 @@ namespace SF3.FileEditors {
             else {
                 hasLargeEnemyTable = false;
 
-                treasureAddress      = GetDouble(0x000c) - sub;
                 warpAddress          = GetDouble(0x0018) - sub;
                 npcAddress           = (IsBattle == true) ? -1 : battlePointersPointerAddress; // same address
-                enterAddress         = GetDouble(0x0030) - sub;
-                arrowAddress         = GetDouble(0x0060) - sub;
+                enterAddress         = (IsBattle == true) ? -1 : GetDouble(0x0030) - sub;
+                arrowAddress         = (IsBattle == true) ? -1 : GetDouble(0x0060) - sub;
             }
 
             // If this is a battle, we need to get the addresses for a lot of battle-specific stuff.

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CommonLib.Attributes;
 using SF3.NamedValues;
 using SF3.Tables;
+using SF3.Tables.X019;
 using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 

@@ -1,4 +1,4 @@
-using SF3.Tables;
+using SF3.Tables.X013;
 
 namespace SF3.FileEditors {
     public interface IX013_FileEditor : ISF3FileEditor {

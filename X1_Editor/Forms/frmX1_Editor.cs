@@ -7,7 +7,7 @@ using CommonLib.Extensions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.FileEditors;
-using SF3.Tables;
+using SF3.Tables.X1_Battle;
 using SF3.Types;
 using SF3.X1_Editor.Controls;
 using static SF3.Editor.Extensions.TabControlExtensions;

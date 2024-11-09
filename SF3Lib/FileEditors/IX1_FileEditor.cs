@@ -1,5 +1,8 @@
 using System.Collections.Generic;
-using SF3.Tables;
+using SF3.Tables.Shared;
+using SF3.Tables.X1_All;
+using SF3.Tables.X1_Battle;
+using SF3.Tables.X1_Town;
 using SF3.Types;
 
 namespace SF3.FileEditors {

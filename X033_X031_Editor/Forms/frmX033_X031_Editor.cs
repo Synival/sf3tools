@@ -4,7 +4,7 @@ using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.FileEditors;
-using SF3.Models;
+using SF3.Models.X033_X031;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
 namespace SF3.X033_X031_Editor.Forms {

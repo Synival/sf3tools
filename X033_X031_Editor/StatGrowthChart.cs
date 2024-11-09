@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using CommonLib.Statistics;
 using SF3.Statistics;
-using SF3.Tables;
+using SF3.Tables.X033_X031;
 using SF3.Types;
 using ProbableStatsDict = System.Collections.Generic.Dictionary<SF3.Types.StatType, SF3.X033_X031_Editor.StatGrowthChart.ProbableStats>;
 using StatDict = System.Collections.Generic.Dictionary<SF3.Types.StatType, double>;
