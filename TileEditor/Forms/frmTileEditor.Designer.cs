@@ -1,7 +1,5 @@
-﻿namespace STHAEditor.Forms
-{
-    partial class frmMain
-    {
+﻿namespace SF3.TileEditor.Forms {
+    partial class frmTileEditor {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,182 +22,181 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+        private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTileEditor));
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_OpensChunk5Files = new System.Windows.Forms.ToolStripMenuItem();
             this.tabItems = new System.Windows.Forms.TabPage();
             this.olvItems = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn75 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn76 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn77 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn78 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn79 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn80 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn81 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn82 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn83 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn84 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn85 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn86 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn87 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn88 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn89 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn90 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn91 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn92 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn93 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn94 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn95 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn96 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn97 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn98 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn100 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn101 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn102 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn103 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn104 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn105 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn106 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn107 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn108 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn109 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn110 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn111 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn112 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn113 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn114 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn115 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn116 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn117 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn118 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn119 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn120 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn121 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn122 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn123 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn124 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn125 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn126 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn127 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn128 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn129 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn130 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn131 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn132 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn133 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn10 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn75 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn76 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn77 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn78 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn79 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn80 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn81 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn82 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn83 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn84 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn85 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn86 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn87 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn88 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn89 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn90 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn91 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn92 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn93 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn94 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn95 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn96 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn97 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn98 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn99 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn100 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn101 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn102 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn103 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn104 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn105 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn106 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn107 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn108 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn109 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn110 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn111 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn112 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn113 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn114 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn115 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn116 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn117 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn118 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn119 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn120 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn121 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn122 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn123 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn124 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn125 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn126 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn127 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn128 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn129 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn130 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn131 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn132 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn133 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn23 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn24 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn26 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn29 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn11 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn12 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn13 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn14 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn16 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn17 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn18 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn19 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn21 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn22 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn25 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn27 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn28 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn31 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn32 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn33 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn34 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn35 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn36 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn37 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn38 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn39 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn40 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn41 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn42 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn43 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn44 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn45 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn46 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn47 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn48 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn49 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn50 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn51 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn52 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn53 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn54 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn55 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn56 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn57 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn58 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn59 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn60 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn61 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn62 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn63 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn64 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn65 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn66 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn67 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn68 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn69 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn70 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn71 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn72 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn73 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn74 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvEffectsEquip = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcRequirements = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcRange = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcAttack = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcDefense = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvAttackRank = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvSpellRank = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvPhysicalAttribute = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvUnknown1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvMonsterType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvUnknown2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatType1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatUp1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatType2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatUp2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatType3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatUp3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatType4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvStatUp4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvSpellUse = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvSpellUseLv = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn23 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn24 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn26 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn29 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn11 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn12 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn13 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn14 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn15 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn16 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn17 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn18 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn19 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn20 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn21 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn22 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn25 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn27 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn28 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn30 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn31 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn32 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn33 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn34 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn35 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn36 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn37 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn38 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn39 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn40 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn41 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn42 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn43 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn44 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn45 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn46 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn47 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn48 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn49 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn50 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn51 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn52 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn53 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn54 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn55 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn56 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn57 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn58 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn59 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn60 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn61 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn62 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn63 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn64 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn65 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn66 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn67 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn68 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn69 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn70 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn71 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn72 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn73 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn74 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcPrice = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcWeaponType = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvEffectsEquip = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcRequirements = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcRange = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcAttack = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.lvcDefense = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvAttackRank = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvSpellRank = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvPhysicalAttribute = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvUnknown1 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvMonsterType = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvUnknown2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvStatType1 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvStatUp1 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvStatType2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvStatUp2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvStatType3 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvStatUp3 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvStatType4 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvStatUp4 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvSpellUse = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
+            this.olvSpellUseLv = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
             this.menuStrip2.SuspendLayout();
             this.tabItems.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvItems)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvItems)).BeginInit();
             this.tabMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.objectListView1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip2
@@ -307,8 +302,8 @@
             this.olvItems.AllColumns.Add(this.olvColumn132);
             this.olvItems.AllColumns.Add(this.olvColumn133);
             this.olvItems.AllowColumnReorder = true;
-            this.olvItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvItems.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvItems.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -858,8 +853,8 @@
             // 
             // tabMain
             // 
-            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tabItems);
             this.tabMain.Controls.Add(this.tabPage1);
@@ -950,8 +945,8 @@
             this.objectListView1.AllColumns.Add(this.olvColumn73);
             this.objectListView1.AllColumns.Add(this.olvColumn74);
             this.objectListView1.AllowColumnReorder = true;
-            this.objectListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.objectListView1.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView1.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -1525,7 +1520,7 @@
             this.ClientSize = new System.Drawing.Size(764, 534);
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.menuStrip2);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.Text = "SF3 Tile Editor";
             this.Controls.SetChildIndex(this.menuStrip2, 0);
@@ -1533,10 +1528,10 @@
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             this.tabItems.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvItems)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.olvItems)).EndInit();
             this.tabMain.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.objectListView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -3,20 +3,24 @@ using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.FileEditors;
-using SF3.TileEditor;
+using SF3.TileEditor.FileEditors;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
-namespace STHAEditor.Forms {
+namespace SF3.TileEditor.Forms {
 
-    public partial class frmMain : EditorForm {
+    public partial class frmTileEditor : EditorForm {
         // Used to display version in the application
         protected override string Version => "0.3";
 
         public new ITileFileEditor FileEditor => base.FileEditor as ITileFileEditor;
 
-        public frmMain() {
+        public frmTileEditor() {
             InitializeComponent();
             InitializeEditor(menuStrip2);
+
+            // Scenario is currently irrelevant.
+            // TODO: fetch by name, not by index!!
+            MenuStrip.Items.Remove(MenuStrip.Items[2]);
         }
 
         protected override string FileDialogFilter

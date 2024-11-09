@@ -1,7 +1,7 @@
 ﻿using SF3.FileEditors;
 using SF3.Models;
 
-namespace STHAEditor.Models.Items {
+namespace SF3.TileEditor.Models {
     public class TileRow : Model {
         //TILES
         private readonly int theSpellIcon;

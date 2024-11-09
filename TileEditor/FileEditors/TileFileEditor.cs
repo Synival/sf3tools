@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using CommonLib.Attributes;
+using SF3.FileEditors;
 using SF3.NamedValues;
 using SF3.Tables;
-using SF3.TileEditor;
+using SF3.TileEditor.Tables;
 using SF3.Types;
-using STHAEditor.Models.Items;
-using STHAEditor.Models.Presets;
 using static CommonLib.Utils.ResourceUtils;
 
-namespace SF3.FileEditors {
+namespace SF3.TileEditor.FileEditors {
     public class TileFileEditor : SF3FileEditor, ITileFileEditor {
         public TileFileEditor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
         }

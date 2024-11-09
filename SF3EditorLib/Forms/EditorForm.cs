@@ -487,6 +487,11 @@ namespace SF3.Editor.Forms {
         protected virtual IFileEditor MakeFileEditor() => throw new NotImplementedException();
 
         /// <summary>
+        /// The main menu strip.
+        /// </summary>
+        protected MenuStrip MenuStrip => menuStrip1;
+
+        /// <summary>
         /// Triggered when Scenario has a new value.
         /// </summary>
         public event EventHandler ScenarioChanged;

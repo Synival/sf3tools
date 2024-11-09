@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace STHAEditor {
+namespace SF3.TileEditor {
     static class Program {
         /// <summary>
         /// The main entry point for the application.
@@ -10,7 +10,7 @@ namespace STHAEditor {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.frmMain());
+            Application.Run(new Forms.frmTileEditor());
         }
     }
 }
