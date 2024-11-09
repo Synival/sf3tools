@@ -47,8 +47,8 @@ namespace DFRTool.GUI.Forms
             this.tabCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabCommand.Controls.Add(this.tabCommand_Create);
             this.tabCommand.Controls.Add(this.tabCommand_Apply);
+            this.tabCommand.Controls.Add(this.tabCommand_Create);
             this.tabCommand.Location = new System.Drawing.Point(3, 3);
             this.tabCommand.Name = "tabCommand";
             this.tabCommand.SelectedIndex = 0;
@@ -64,7 +64,7 @@ namespace DFRTool.GUI.Forms
             this.tabCommand_Create.Padding = new System.Windows.Forms.Padding(3);
             this.tabCommand_Create.Size = new System.Drawing.Size(691, 204);
             this.tabCommand_Create.TabIndex = 1;
-            this.tabCommand_Create.Text = "Create DFR File";
+            this.tabCommand_Create.Text = "Create DFR";
             // 
             // tabCommand_Apply
             // 
@@ -75,7 +75,7 @@ namespace DFRTool.GUI.Forms
             this.tabCommand_Apply.Padding = new System.Windows.Forms.Padding(3);
             this.tabCommand_Apply.Size = new System.Drawing.Size(691, 204);
             this.tabCommand_Apply.TabIndex = 0;
-            this.tabCommand_Apply.Text = "Apply DFR File";
+            this.tabCommand_Apply.Text = "Apply DFR";
             // 
             // createDFRControl1
             // 
@@ -94,7 +94,9 @@ namespace DFRTool.GUI.Forms
             this.applyDFRControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.applyDFRControl1.ApplyInMemory = false;
             this.applyDFRControl1.BackColor = System.Drawing.Color.Transparent;
+            this.applyDFRControl1.InputData = null;
             this.applyDFRControl1.Location = new System.Drawing.Point(3, 6);
             this.applyDFRControl1.Name = "applyDFRControl1";
             this.applyDFRControl1.Size = new System.Drawing.Size(685, 195);
@@ -112,7 +114,7 @@ namespace DFRTool.GUI.Forms
             this.MaximumSize = new System.Drawing.Size(2400, 275);
             this.MinimumSize = new System.Drawing.Size(520, 275);
             this.Name = "frmDFRTool";
-            this.Text = "DFRTool v1.1 (Compatible with 25.1 patcher)";
+            this.Text = "DFRTool v1.1.1 (Compatible with 25.1 patcher)";
             this.tabCommand.ResumeLayout(false);
             this.tabCommand_Create.ResumeLayout(false);
             this.tabCommand_Apply.ResumeLayout(false);

@@ -71,11 +71,11 @@ namespace DFRTool.GUI.Forms {
         }
 
         /// <summary>
-        /// When set, the "Apply" command will use explicit "original file" data instead of an actual file.
+        /// When set, the "Apply" command will use explicit "input file" data instead of an actual file.
         /// </summary>
-        public byte[] ApplyDFROriginalData {
-            get => applyDFRControl1.OriginalData;
-            set => applyDFRControl1.OriginalData = value;
+        public byte[] ApplyDFRInputData {
+            get => applyDFRControl1.InputData;
+            set => applyDFRControl1.InputData = value;
         }
 
         /// <summary>

@@ -8,7 +8,7 @@ namespace DFRTool.GUI.Controls {
     public partial class ApplyDFRControl : UserControl {
         private const string c_dataReadFromEditor           = "(Data Read from Editor)";
         private const string c_changesAppliedToEditorData   = "(Changes Applied to Editor Data)";
-        private const string c_changesAppliedToOriginalFile = "(Changes Applied to Original File)";
+        private const string c_changesAppliedToInputFile = "(Changes Applied to Input File)";
 
         private string _lastValidOutputFile = "";
 
@@ -25,14 +25,14 @@ namespace DFRTool.GUI.Controls {
             _updatingOutputFileControls = true;
 
             if (ApplyInMemory)
-                this.cbApplyToOriginalFile.Enabled = false;
+                this.cbApplyToInputFile.Enabled = false;
 
             // Do nothing if the control was enabled and should stay enabled.
-            bool shouldBeEnabled = !cbApplyToOriginalFile.Checked && !ApplyInMemory;
+            bool shouldBeEnabled = !cbApplyToInputFile.Checked && !ApplyInMemory;
             if (shouldBeEnabled && tbOutputFile.Enabled)
                 return;
 
-            this.cbApplyToOriginalFile.Enabled = !ApplyInMemory;
+            this.cbApplyToInputFile.Enabled = !ApplyInMemory;
 
             // Remember the last enabled value so we can put it back later if necessary.
             if (tbOutputFile.Enabled)
@@ -45,27 +45,27 @@ namespace DFRTool.GUI.Controls {
                 ? _lastValidOutputFile
                 : ApplyInMemory
                     ? c_changesAppliedToEditorData
-                    : c_changesAppliedToOriginalFile;
+                    : c_changesAppliedToInputFile;
 
             _updatingOutputFileControls = false;
         }
 
-        private void btnOriginalFile_Click(object sender, EventArgs e) {
+        private void btnInputFile_Click(object sender, EventArgs e) {
             var dialog = new OpenFileDialog {
                 Filter = "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*"
             };
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
 
-            tbOriginalFile.Text = dialog.FileName;
+            tbInputFile.Text = dialog.FileName;
         }
 
         private void btnDFRFile_Click(object sender, EventArgs e) {
             var dialog = new OpenFileDialog();
 
-            var originalFileSplit = tbOriginalFile.Text.Split('\\');
-            var suggestedName = (originalFileSplit.Length >= 1 && tbOriginalFile.Text != "")
-                ? originalFileSplit[originalFileSplit.Length - 1] + ".DFR"
+            var inputFileSplit = tbInputFile.Text.Split('\\');
+            var suggestedName = (inputFileSplit.Length >= 1 && tbInputFile.Text != "")
+                ? inputFileSplit[inputFileSplit.Length - 1] + ".DFR"
                 : "Patch.BIN.DFR";
 
             dialog.Filter = "DFR Files (*.DFR)|*.DFR|All Files (*.*)|*.*";
@@ -76,10 +76,10 @@ namespace DFRTool.GUI.Controls {
             tbDFRFile.Text = dialog.FileName;
         }
 
-        private void cbApplyToOriginalFile_CheckedChanged(object sender, EventArgs e) => UpdateOutputFileControls();
+        private void cbApplyToInputFile_CheckedChanged(object sender, EventArgs e) => UpdateOutputFileControls();
 
         private void btnOutputFile_Click(object sender, EventArgs e) {
-            if (cbApplyToOriginalFile.Checked)
+            if (cbApplyToInputFile.Checked)
                 return;
 
             var dialog = new SaveFileDialog {
@@ -92,8 +92,8 @@ namespace DFRTool.GUI.Controls {
         }
 
         private void btnApplyDFR_Click(object sender, EventArgs e) {
-            if (OriginalData != null && tbOriginalFile.Text.Length == 0) {
-                InfoMessage("Please select an original file.");
+            if (InputData != null && tbInputFile.Text.Length == 0) {
+                InfoMessage("Please select an input file.");
                 return;
             }
 
@@ -104,15 +104,15 @@ namespace DFRTool.GUI.Controls {
 
             string outputFilename = null;
             if (!ApplyInMemory) {
-                outputFilename = cbApplyToOriginalFile.Checked ? tbOriginalFile.Text : tbOutputFile.Text;
+                outputFilename = cbApplyToInputFile.Checked ? tbInputFile.Text : tbOutputFile.Text;
                 if (outputFilename.Length == 0) {
-                    InfoMessage("Please select a destination for the altered file.");
+                    InfoMessage("Please select a destination for the patched file.");
                     return;
                 }
             }
 
             try {
-                var input = OriginalData ?? File.ReadAllBytes(tbOriginalFile.Text);
+                var input = InputData ?? File.ReadAllBytes(tbInputFile.Text);
                 var diff = new ByteDiff(tbDFRFile.Text);
                 var output = diff.ApplyTo(input);
 
@@ -130,19 +130,19 @@ namespace DFRTool.GUI.Controls {
             ApplyDFR(this, EventArgs.Empty);
         }
 
-        private byte[] _originalData = null;
+        private byte[] _inputData = null;
 
         /// <summary>
-        /// When set, the control will use explicit "original file" data instead of an actual file.
+        /// When set, the control will use explicit "input file" data instead of an actual file.
         /// </summary>
-        public byte[] OriginalData {
-            get => _originalData;
+        public byte[] InputData {
+            get => _inputData;
             set {
-                if (_originalData != value) {
-                    _originalData = value;
-                    btnOriginalFile.Enabled = (value == null);
-                    tbOriginalFile.Enabled = (value == null);
-                    tbOriginalFile.Text = (value == null) ? "" : c_dataReadFromEditor;
+                if (_inputData != value) {
+                    _inputData = value;
+                    btnInputFile.Enabled = (value == null);
+                    tbInputFile.Enabled = (value == null);
+                    tbInputFile.Text = (value == null) ? "" : c_dataReadFromEditor;
                 }
             }
         }

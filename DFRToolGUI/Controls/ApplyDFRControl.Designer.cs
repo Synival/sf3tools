@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.cbApplyToOriginalFile = new System.Windows.Forms.CheckBox();
+            this.cbApplyToInputFile = new System.Windows.Forms.CheckBox();
             this.btnApplyDFR = new System.Windows.Forms.Button();
             this.labelSeparator2 = new System.Windows.Forms.Label();
             this.tbOutputFile = new System.Windows.Forms.TextBox();
@@ -32,23 +32,21 @@
             this.labelSeparator1 = new System.Windows.Forms.Label();
             this.btnOutputFile = new System.Windows.Forms.Button();
             this.btnDFRFile = new System.Windows.Forms.Button();
-            this.tbOriginalFile = new System.Windows.Forms.TextBox();
-            this.btnOriginalFile = new System.Windows.Forms.Button();
+            this.tbInputFile = new System.Windows.Forms.TextBox();
+            this.btnInputFile = new System.Windows.Forms.Button();
             this.labelSelectInputFiles = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // cbApplyToOriginalFile
+            // cbApplyToInputFile
             // 
-            this.cbApplyToOriginalFile.AutoSize = true;
-            this.cbApplyToOriginalFile.Checked = true;
-            this.cbApplyToOriginalFile.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbApplyToOriginalFile.Location = new System.Drawing.Point(3, 101);
-            this.cbApplyToOriginalFile.Name = "cbApplyToOriginalFile";
-            this.cbApplyToOriginalFile.Size = new System.Drawing.Size(146, 17);
-            this.cbApplyToOriginalFile.TabIndex = 19;
-            this.cbApplyToOriginalFile.Text = "Apply DFR to Original File";
-            this.cbApplyToOriginalFile.UseVisualStyleBackColor = true;
-            this.cbApplyToOriginalFile.CheckedChanged += new System.EventHandler(this.cbApplyToOriginalFile_CheckedChanged);
+            this.cbApplyToInputFile.AutoSize = true;
+            this.cbApplyToInputFile.Location = new System.Drawing.Point(3, 101);
+            this.cbApplyToInputFile.Name = "cbApplyToInputFile";
+            this.cbApplyToInputFile.Size = new System.Drawing.Size(135, 17);
+            this.cbApplyToInputFile.TabIndex = 19;
+            this.cbApplyToInputFile.Text = "Apply DFR to Input File";
+            this.cbApplyToInputFile.UseVisualStyleBackColor = true;
+            this.cbApplyToInputFile.CheckedChanged += new System.EventHandler(this.cbApplyToInputFile_CheckedChanged);
             // 
             // btnApplyDFR
             // 
@@ -134,25 +132,25 @@
             this.btnDFRFile.UseVisualStyleBackColor = true;
             this.btnDFRFile.Click += new System.EventHandler(this.btnDFRFile_Click);
             // 
-            // tbOriginalFile
+            // tbInputFile
             // 
-            this.tbOriginalFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbInputFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbOriginalFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbOriginalFile.Location = new System.Drawing.Point(93, 19);
-            this.tbOriginalFile.Name = "tbOriginalFile";
-            this.tbOriginalFile.Size = new System.Drawing.Size(570, 20);
-            this.tbOriginalFile.TabIndex = 14;
+            this.tbInputFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbInputFile.Location = new System.Drawing.Point(93, 19);
+            this.tbInputFile.Name = "tbInputFile";
+            this.tbInputFile.Size = new System.Drawing.Size(570, 20);
+            this.tbInputFile.TabIndex = 14;
             // 
-            // btnOriginalFile
+            // btnInputFile
             // 
-            this.btnOriginalFile.Location = new System.Drawing.Point(0, 18);
-            this.btnOriginalFile.Name = "btnOriginalFile";
-            this.btnOriginalFile.Size = new System.Drawing.Size(87, 22);
-            this.btnOriginalFile.TabIndex = 13;
-            this.btnOriginalFile.Text = "Original File...";
-            this.btnOriginalFile.UseVisualStyleBackColor = true;
-            this.btnOriginalFile.Click += new System.EventHandler(this.btnOriginalFile_Click);
+            this.btnInputFile.Location = new System.Drawing.Point(0, 18);
+            this.btnInputFile.Name = "btnInputFile";
+            this.btnInputFile.Size = new System.Drawing.Size(87, 22);
+            this.btnInputFile.TabIndex = 13;
+            this.btnInputFile.Text = "Input File...";
+            this.btnInputFile.UseVisualStyleBackColor = true;
+            this.btnInputFile.Click += new System.EventHandler(this.btnInputFile_Click);
             // 
             // labelSelectInputFiles
             // 
@@ -169,7 +167,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.cbApplyToOriginalFile);
+            this.Controls.Add(this.cbApplyToInputFile);
             this.Controls.Add(this.btnApplyDFR);
             this.Controls.Add(this.labelSeparator2);
             this.Controls.Add(this.tbOutputFile);
@@ -178,8 +176,8 @@
             this.Controls.Add(this.labelSeparator1);
             this.Controls.Add(this.btnOutputFile);
             this.Controls.Add(this.btnDFRFile);
-            this.Controls.Add(this.tbOriginalFile);
-            this.Controls.Add(this.btnOriginalFile);
+            this.Controls.Add(this.tbInputFile);
+            this.Controls.Add(this.btnInputFile);
             this.Controls.Add(this.labelSelectInputFiles);
             this.Name = "ApplyDFRControl";
             this.Size = new System.Drawing.Size(663, 192);
@@ -190,7 +188,7 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckBox cbApplyToOriginalFile;
+        private System.Windows.Forms.CheckBox cbApplyToInputFile;
         private System.Windows.Forms.Button btnApplyDFR;
         private System.Windows.Forms.Label labelSeparator2;
         private System.Windows.Forms.TextBox tbOutputFile;
@@ -199,8 +197,8 @@
         private System.Windows.Forms.Label labelSeparator1;
         private System.Windows.Forms.Button btnOutputFile;
         private System.Windows.Forms.Button btnDFRFile;
-        private System.Windows.Forms.TextBox tbOriginalFile;
-        private System.Windows.Forms.Button btnOriginalFile;
+        private System.Windows.Forms.TextBox tbInputFile;
+        private System.Windows.Forms.Button btnInputFile;
         private System.Windows.Forms.Label labelSelectInputFiles;
     }
 }

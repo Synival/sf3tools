@@ -269,7 +269,7 @@ namespace SF3.Editor.Forms {
                     return false;
 
             var form = new frmDFRTool(CommandType.Apply, dialogMode: true);
-            form.ApplyDFROriginalData = FileEditor.GetAllData();
+            form.ApplyDFRInputData = FileEditor.GetAllData();
             form.ApplyDFRInMemory = true;
             var dialogResult = form.ShowDialog();
             if (dialogResult != DialogResult.OK)
