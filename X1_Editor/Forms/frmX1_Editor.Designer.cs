@@ -1109,10 +1109,11 @@ namespace SF3.X1_Editor.Forms
             this.becBattle_Synbios.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.becBattle_Synbios.Location = new System.Drawing.Point(0, 0);
+            this.becBattle_Synbios.BackColor = System.Drawing.Color.Transparent;
+            this.becBattle_Synbios.Location = new System.Drawing.Point(-4, 0);
             this.becBattle_Synbios.Margin = new System.Windows.Forms.Padding(0);
             this.becBattle_Synbios.Name = "becBattle_Synbios";
-            this.becBattle_Synbios.Size = new System.Drawing.Size(913, 487);
+            this.becBattle_Synbios.Size = new System.Drawing.Size(917, 487);
             this.becBattle_Synbios.TabIndex = 0;
             // 
             // tabBattle_Medion
@@ -1130,10 +1131,11 @@ namespace SF3.X1_Editor.Forms
             this.becBattle_Medion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.becBattle_Medion.Location = new System.Drawing.Point(0, 0);
+            this.becBattle_Medion.BackColor = System.Drawing.Color.Transparent;
+            this.becBattle_Medion.Location = new System.Drawing.Point(-4, 0);
             this.becBattle_Medion.Margin = new System.Windows.Forms.Padding(0);
             this.becBattle_Medion.Name = "becBattle_Medion";
-            this.becBattle_Medion.Size = new System.Drawing.Size(913, 487);
+            this.becBattle_Medion.Size = new System.Drawing.Size(917, 487);
             this.becBattle_Medion.TabIndex = 1;
             // 
             // tabBattle_Julian
@@ -1151,10 +1153,11 @@ namespace SF3.X1_Editor.Forms
             this.becBattle_Julian.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.becBattle_Julian.Location = new System.Drawing.Point(0, 0);
+            this.becBattle_Julian.BackColor = System.Drawing.Color.Transparent;
+            this.becBattle_Julian.Location = new System.Drawing.Point(-4, 0);
             this.becBattle_Julian.Margin = new System.Windows.Forms.Padding(0);
             this.becBattle_Julian.Name = "becBattle_Julian";
-            this.becBattle_Julian.Size = new System.Drawing.Size(913, 487);
+            this.becBattle_Julian.Size = new System.Drawing.Size(917, 487);
             this.becBattle_Julian.TabIndex = 1;
             // 
             // tabBattle_Extra
@@ -1172,10 +1175,11 @@ namespace SF3.X1_Editor.Forms
             this.becBattle_Extra.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.becBattle_Extra.Location = new System.Drawing.Point(0, 0);
+            this.becBattle_Extra.BackColor = System.Drawing.Color.Transparent;
+            this.becBattle_Extra.Location = new System.Drawing.Point(-4, 0);
             this.becBattle_Extra.Margin = new System.Windows.Forms.Padding(0);
             this.becBattle_Extra.Name = "becBattle_Extra";
-            this.becBattle_Extra.Size = new System.Drawing.Size(913, 487);
+            this.becBattle_Extra.Size = new System.Drawing.Size(917, 487);
             this.becBattle_Extra.TabIndex = 1;
             // 
             // tsmiScenario

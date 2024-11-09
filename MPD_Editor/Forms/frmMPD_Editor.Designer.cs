@@ -399,9 +399,13 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTileTerrainX62Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileTerrainX63Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabTextures1 = new System.Windows.Forms.TabPage();
+            this.textureChunkControl1 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.tabTextures2 = new System.Windows.Forms.TabPage();
+            this.textureChunkControl2 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.tabTextures3 = new System.Windows.Forms.TabPage();
+            this.textureChunkControl3 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.tabTextures4 = new System.Windows.Forms.TabPage();
+            this.textureChunkControl4 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.menuStrip2.SuspendLayout();
             this.tabTileItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileItems)).BeginInit();
@@ -416,6 +420,10 @@ namespace SF3.MPD_Editor.Forms {
             ((System.ComponentModel.ISupportInitialize)(this.olvTileHeights)).BeginInit();
             this.tabTileTerrain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileTerrain)).BeginInit();
+            this.tabTextures1.SuspendLayout();
+            this.tabTextures2.SuspendLayout();
+            this.tabTextures3.SuspendLayout();
+            this.tabTextures4.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip2
@@ -3860,39 +3868,79 @@ namespace SF3.MPD_Editor.Forms {
             // 
             // tabTextures1
             // 
+            this.tabTextures1.Controls.Add(this.textureChunkControl1);
             this.tabTextures1.Location = new System.Drawing.Point(4, 22);
+            this.tabTextures1.Margin = new System.Windows.Forms.Padding(0);
             this.tabTextures1.Name = "tabTextures1";
             this.tabTextures1.Size = new System.Drawing.Size(756, 480);
             this.tabTextures1.TabIndex = 9;
             this.tabTextures1.Text = "Textures1";
             this.tabTextures1.UseVisualStyleBackColor = true;
             // 
+            // textureChunkControl1
+            // 
+            this.textureChunkControl1.BackColor = System.Drawing.Color.Transparent;
+            this.textureChunkControl1.Location = new System.Drawing.Point(-4, 0);
+            this.textureChunkControl1.Name = "textureChunkControl1";
+            this.textureChunkControl1.Size = new System.Drawing.Size(764, 484);
+            this.textureChunkControl1.TabIndex = 0;
+            // 
             // tabTextures2
             // 
+            this.tabTextures2.Controls.Add(this.textureChunkControl2);
             this.tabTextures2.Location = new System.Drawing.Point(4, 22);
+            this.tabTextures2.Margin = new System.Windows.Forms.Padding(0);
             this.tabTextures2.Name = "tabTextures2";
             this.tabTextures2.Size = new System.Drawing.Size(756, 480);
             this.tabTextures2.TabIndex = 10;
             this.tabTextures2.Text = "Textures2";
             this.tabTextures2.UseVisualStyleBackColor = true;
             // 
+            // textureChunkControl2
+            // 
+            this.textureChunkControl2.BackColor = System.Drawing.Color.Transparent;
+            this.textureChunkControl2.Location = new System.Drawing.Point(-4, 0);
+            this.textureChunkControl2.Name = "textureChunkControl2";
+            this.textureChunkControl2.Size = new System.Drawing.Size(764, 484);
+            this.textureChunkControl2.TabIndex = 1;
+            // 
             // tabTextures3
             // 
+            this.tabTextures3.Controls.Add(this.textureChunkControl3);
             this.tabTextures3.Location = new System.Drawing.Point(4, 22);
+            this.tabTextures3.Margin = new System.Windows.Forms.Padding(0);
             this.tabTextures3.Name = "tabTextures3";
             this.tabTextures3.Size = new System.Drawing.Size(756, 480);
             this.tabTextures3.TabIndex = 11;
             this.tabTextures3.Text = "Textures3";
             this.tabTextures3.UseVisualStyleBackColor = true;
             // 
+            // textureChunkControl3
+            // 
+            this.textureChunkControl3.BackColor = System.Drawing.Color.Transparent;
+            this.textureChunkControl3.Location = new System.Drawing.Point(-4, 0);
+            this.textureChunkControl3.Name = "textureChunkControl3";
+            this.textureChunkControl3.Size = new System.Drawing.Size(764, 484);
+            this.textureChunkControl3.TabIndex = 1;
+            // 
             // tabTextures4
             // 
+            this.tabTextures4.Controls.Add(this.textureChunkControl4);
             this.tabTextures4.Location = new System.Drawing.Point(4, 22);
+            this.tabTextures4.Margin = new System.Windows.Forms.Padding(0);
             this.tabTextures4.Name = "tabTextures4";
             this.tabTextures4.Size = new System.Drawing.Size(756, 480);
             this.tabTextures4.TabIndex = 12;
             this.tabTextures4.Text = "Textures4";
             this.tabTextures4.UseVisualStyleBackColor = true;
+            // 
+            // textureChunkControl4
+            // 
+            this.textureChunkControl4.BackColor = System.Drawing.Color.Transparent;
+            this.textureChunkControl4.Location = new System.Drawing.Point(-4, 0);
+            this.textureChunkControl4.Name = "textureChunkControl4";
+            this.textureChunkControl4.Size = new System.Drawing.Size(764, 484);
+            this.textureChunkControl4.TabIndex = 1;
             // 
             // frmMPDEditor
             // 
@@ -3923,6 +3971,10 @@ namespace SF3.MPD_Editor.Forms {
             ((System.ComponentModel.ISupportInitialize)(this.olvTileHeights)).EndInit();
             this.tabTileTerrain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvTileTerrain)).EndInit();
+            this.tabTextures1.ResumeLayout(false);
+            this.tabTextures2.ResumeLayout(false);
+            this.tabTextures3.ResumeLayout(false);
+            this.tabTextures4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4307,6 +4359,10 @@ namespace SF3.MPD_Editor.Forms {
         private System.Windows.Forms.TabPage tabTextures2;
         private System.Windows.Forms.TabPage tabTextures3;
         private System.Windows.Forms.TabPage tabTextures4;
+        private X1_Editor.Controls.TextureChunkControl textureChunkControl1;
+        private X1_Editor.Controls.TextureChunkControl textureChunkControl2;
+        private X1_Editor.Controls.TextureChunkControl textureChunkControl3;
+        private X1_Editor.Controls.TextureChunkControl textureChunkControl4;
     }
 }
 

@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\TextureChunkControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TextureChunkControl.Designer.cs">
+      <DependentUpon>TextureChunkControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmMPD_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\TextureChunkControl.resx">
+      <DependentUpon>TextureChunkControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMPD_Editor.resx">
       <DependentUpon>frmMPD_Editor.cs</DependentUpon>
     </EmbeddedResource>
