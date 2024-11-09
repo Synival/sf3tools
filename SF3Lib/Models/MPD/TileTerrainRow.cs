@@ -1,10 +1,10 @@
 using SF3.FileEditors;
 
 namespace SF3.Models.MPD {
-    public class TileHeightRow : Model {
+    public class TileTerrainRow : Model {
         private readonly int[] xAddress = new int[64];
 
-        public TileHeightRow(IByteEditor editor, int id, string name, int address)
+        public TileTerrainRow(IByteEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 128) {
             for (var i = 0; i < xAddress.Length; i++)
                 xAddress[i] = Address + i * 2;

@@ -49,7 +49,8 @@ namespace SF3.FileEditors {
             var tables = new List<ITable>() {
                 (Header            = new HeaderTable          (this, headerAddr)),
                 (TileHeightmapRows = new TileHeightmapRowTable(ChunkEditors[5], 0x0000)),
-                (TileRows          = new TileRowTable         (ChunkEditors[5], 0x4000)),
+                (TileHeightRows    = new TileHeightRowTable   (ChunkEditors[5], 0x4000)),
+                (TileTerrainRows   = new TileTerrainRowTable  (ChunkEditors[5], 0x4001)),
                 (TileItemRows      = new TileItemRowTable     (ChunkEditors[5], 0x6000)),
             };
 
@@ -63,7 +64,8 @@ namespace SF3.FileEditors {
             Header                   = null;
             TileSurfaceCharacterRows = null;
             TileHeightmapRows        = null;
-            TileRows                 = null;
+            TileHeightRows           = null;
+            TileTerrainRows          = null;
             TileItemRows             = null;
         }
 
@@ -81,7 +83,10 @@ namespace SF3.FileEditors {
         public TileHeightmapRowTable TileHeightmapRows { get; private set; }
 
         [BulkCopyRecurse]
-        public TileRowTable TileRows { get; private set; }
+        public TileHeightRowTable TileHeightRows { get; private set; }
+
+        [BulkCopyRecurse]
+        public TileTerrainRowTable TileTerrainRows { get; private set; }
 
         [BulkCopyRecurse]
         public TileItemRowTable TileItemRows { get; private set; }

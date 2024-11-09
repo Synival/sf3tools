@@ -16,7 +16,8 @@ namespace SF3.FileEditors {
         HeaderTable Header { get; }
         TileHeightmapRowTable TileHeightmapRows { get; }
         TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; }
-        TileRowTable TileRows { get; }
+        TileHeightRowTable TileHeightRows { get; }
+        TileTerrainRowTable TileTerrainRows { get; }
         TileItemRowTable TileItemRows { get; }
     }
 }

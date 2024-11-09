@@ -35,8 +35,9 @@ namespace SF3.MPD_Editor.Forms {
                 new PopulateOLVTabConfig(tabHeader,                olvHeader,                FileEditor.Header),
                 new PopulateOLVTabConfig(tabTileSurfaceCharacters, olvTileSurfaceCharacters, FileEditor.TileSurfaceCharacterRows),
                 new PopulateOLVTabConfig(tabTileHeightmap,         olvTileHeightmap,         FileEditor.TileHeightmapRows),
+                new PopulateOLVTabConfig(tabTileHeights,           olvTileHeights,           FileEditor.TileHeightRows),
+                new PopulateOLVTabConfig(tabTileTerrain,           olvTileTerrain,           FileEditor.TileTerrainRows),
                 new PopulateOLVTabConfig(tabTileItems,             olvTileItems,             FileEditor.TileItemRows),
-                new PopulateOLVTabConfig(tabTiles,                 olvTiles,                 FileEditor.TileRows),
             });
         }
 
