@@ -6,7 +6,8 @@ using static CommonLib.Win.Utils.MessageUtils;
 
 namespace DFRTool.GUI.Controls {
     public partial class ApplyDFRControl : UserControl {
-        private const string c_changesAppliedToEditorData = "(Changes Applied to Editor Data)";
+        private const string c_dataReadFromEditor           = "(Data Read from Editor)";
+        private const string c_changesAppliedToEditorData   = "(Changes Applied to Editor Data)";
         private const string c_changesAppliedToOriginalFile = "(Changes Applied to Original File)";
 
         private string _lastValidOutputFile = "";
@@ -91,7 +92,7 @@ namespace DFRTool.GUI.Controls {
         }
 
         private void btnApplyDFR_Click(object sender, EventArgs e) {
-            if (tbOriginalFile.Text.Length == 0) {
+            if (OriginalData != null && tbOriginalFile.Text.Length == 0) {
                 InfoMessage("Please select an original file.");
                 return;
             }
@@ -111,7 +112,7 @@ namespace DFRTool.GUI.Controls {
             }
 
             try {
-                var input = File.ReadAllBytes(tbOriginalFile.Text);
+                var input = OriginalData ?? File.ReadAllBytes(tbOriginalFile.Text);
                 var diff = new ByteDiff(tbDFRFile.Text);
                 var output = diff.ApplyTo(input);
 
@@ -127,6 +128,23 @@ namespace DFRTool.GUI.Controls {
 
             InfoMessage("DFR file applied successfully.");
             ApplyDFR(this, EventArgs.Empty);
+        }
+
+        private byte[] _originalData = null;
+
+        /// <summary>
+        /// When set, the control will use explicit "original file" data instead of an actual file.
+        /// </summary>
+        public byte[] OriginalData {
+            get => _originalData;
+            set {
+                if (_originalData != value) {
+                    _originalData = value;
+                    btnOriginalFile.Enabled = (value == null);
+                    tbOriginalFile.Enabled = (value == null);
+                    tbOriginalFile.Text = (value == null) ? "" : c_dataReadFromEditor;
+                }
+            }
         }
 
         private bool _applyInMemory = false;

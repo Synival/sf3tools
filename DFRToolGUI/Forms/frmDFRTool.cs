@@ -63,11 +63,19 @@ namespace DFRTool.GUI.Forms {
         }
 
         /// <summary>
-        /// When set, the "Create" command will use explicit data instead of data from a file.
+        /// When set, the "Create" command will use explicit "altered file" data instead of an actual file.
         /// </summary>
         public byte[] CreateDFRAlteredData {
             get => createDFRControl1.AlteredData;
             set => createDFRControl1.AlteredData = value;
+        }
+
+        /// <summary>
+        /// When set, the "Apply" command will use explicit "original file" data instead of an actual file.
+        /// </summary>
+        public byte[] ApplyDFROriginalData {
+            get => applyDFRControl1.OriginalData;
+            set => applyDFRControl1.OriginalData = value;
         }
 
         /// <summary>

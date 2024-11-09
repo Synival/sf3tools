@@ -7,6 +7,8 @@ using static CommonLib.Win.Utils.MessageUtils;
 
 namespace DFRTool.GUI.Controls {
     public partial class CreateDFRControl : UserControl {
+        private const string c_dataReadFromEditor = "(Data Read from Editor)";
+
         public CreateDFRControl() {
             InitializeComponent();
 
@@ -15,7 +17,7 @@ namespace DFRTool.GUI.Controls {
         private byte[] _alteredData = null;
 
         /// <summary>
-        /// When set, the control will use explicit data instead of data from a file.
+        /// When set, the control will use explicit "altered file" data instead of an actual file.
         /// </summary>
         public byte[] AlteredData {
             get => _alteredData;
@@ -24,7 +26,7 @@ namespace DFRTool.GUI.Controls {
                     _alteredData = value;
                     btnAlteredFile.Enabled = (value == null);
                     tbAlteredFile.Enabled = (value == null);
-                    tbAlteredFile.Text = (value == null) ? "" : "(Data Read from Editor)";
+                    tbAlteredFile.Text = (value == null) ? "" : c_dataReadFromEditor;
                 }
             }
         }
