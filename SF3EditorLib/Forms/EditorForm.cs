@@ -8,6 +8,7 @@ using BrightIdeasSoftware;
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using DFRLib;
+using DFRLib.Types;
 using DFRTool.GUI.Forms;
 using SF3.Editor.Extensions;
 using SF3.FileEditors;
@@ -298,7 +299,8 @@ namespace SF3.Editor.Forms {
         /// Opens the DFRToolGUI as a modal dialog with the current editor data as its "Altered File".
         /// </summary>
         public bool GenerateDFRFile() {
-            var form = new frmDFRTool(FileEditor.GetAllData());
+            var form = new frmDFRTool(CommandType.Create, dialogMode: true);
+            form.CreateDFRAlteredData = FileEditor.GetAllData();
             _ = form.ShowDialog();
             return true;
         }
