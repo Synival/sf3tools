@@ -1,13 +1,10 @@
 ﻿using System;
-//using System.Text;
-using System.Xml;
 using System.IO;
+using System.Xml;
 using static STHAEditor.Forms.frmMain;
 
-namespace STHAEditor.Models.Presets
-{
-    public static class PresetList
-    {
+namespace STHAEditor.Models.Presets {
+    public static class PresetList {
         private static Preset[] presetssorted;
         private static Preset[] presets;
 
@@ -17,49 +14,30 @@ namespace STHAEditor.Models.Presets
         /// Initialises static class
         /// </summary>
         /// <returns>True or False if abilityList.xml does not exist/is in use</returns>
-        public static bool loadPresetList()
-        {
-
-
-
+        public static bool loadPresetList() {
             if (Globals.scenario == 1)
-            {
-
                 r = "Resources/scenario1Items.xml";
-            }
             if (Globals.scenario == 2)
-            {
-
                 r = "Resources/scenario2Items.xml";
-            }
             if (Globals.scenario == 3)
-            {
-
                 r = "Resources/scenario3Items.xml";
-            }
             if (Globals.scenario == 4)
-            {
-
                 r = "Resources/PDItems.xml";
-            }
-
-
-
-
 
             presetssorted = new Preset[0];
             presets = new Preset[300]; //max size 
             try {
-                FileStream stream = new FileStream(r, FileMode.Open);
+                var stream = new FileStream(r, FileMode.Open);
 
-                XmlReaderSettings settings = new XmlReaderSettings();
-                settings.IgnoreComments = true;
-                settings.IgnoreWhitespace = true;
-                XmlReader xml = XmlTextReader.Create(stream, settings);
-                xml.Read();
+                var settings = new XmlReaderSettings {
+                    IgnoreComments = true,
+                    IgnoreWhitespace = true
+                };
+                var xml = XmlTextReader.Create(stream, settings);
+                _=xml.Read();
                 Preset[] old;
                 while (!xml.EOF) {
-                    xml.Read();
+                    _=xml.Read();
                     if (xml.HasAttributes) {
                         old = new Preset[presetssorted.Length];
                         presetssorted.CopyTo(old, 0);
@@ -70,21 +48,14 @@ namespace STHAEditor.Models.Presets
                     }
                 }
                 stream.Close();
-            } catch (FileLoadException) {
+            }
+            catch (FileLoadException) {
                 return false;
-            //} catch (FileNotFoundException) {
-              //  return false;
             }
             return true;
         }
 
-        public static Preset[] getPresetList()
-        {
-            return presetssorted;
-        }
-        public static Preset getPreset(int id)
-        {
-            return presets[id];
-        }
+        public static Preset[] getPresetList() => presetssorted;
+        public static Preset getPreset(int id) => presets[id];
     }
 }
