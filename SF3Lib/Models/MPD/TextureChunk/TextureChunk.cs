@@ -13,7 +13,8 @@ namespace SF3.Models.MPD.TextureChunk {
 
             HeaderTable  = new HeaderTable(Editor, 0x00);
             HeaderTable.Load();
-            TextureTable = new TextureTable(Editor, 0x04, HeaderTable.Rows[0].NumTextures);
+            var header = HeaderTable.Rows[0];
+            TextureTable = new TextureTable(Editor, 0x04, header.NumTextures, header.TextureIdStart);
 
             Tables = new List<ITable>() {
                 HeaderTable,

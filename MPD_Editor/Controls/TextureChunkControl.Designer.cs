@@ -37,6 +37,7 @@ namespace SF3.X1_Editor.Controls {
             this.lvcTexturesWidth = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTexturesHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTexturesImageDataOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTexturesID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -107,6 +108,7 @@ namespace SF3.X1_Editor.Controls {
             // lvcHeaderTextureIdStart
             // 
             this.lvcHeaderTextureIdStart.AspectName = "TextureIdStart";
+            this.lvcHeaderTextureIdStart.AspectToStringFormat = "{0:X2}";
             this.lvcHeaderTextureIdStart.Text = "Texture ID Start";
             this.lvcHeaderTextureIdStart.Width = 90;
             // 
@@ -136,6 +138,7 @@ namespace SF3.X1_Editor.Controls {
             // 
             // olvTextures
             // 
+            this.olvTextures.AllColumns.Add(this.lvcTexturesID);
             this.olvTextures.AllColumns.Add(this.lvcTexturesName);
             this.olvTextures.AllColumns.Add(this.lvcTexturesAddress);
             this.olvTextures.AllColumns.Add(this.lvcTexturesWidth);
@@ -147,6 +150,7 @@ namespace SF3.X1_Editor.Controls {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvTextures.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvTextures.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvcTexturesID,
             this.lvcTexturesName,
             this.lvcTexturesAddress,
             this.lvcTexturesWidth,
@@ -196,6 +200,12 @@ namespace SF3.X1_Editor.Controls {
             this.lvcTexturesImageDataOffset.Text = "ImageDataOffset";
             this.lvcTexturesImageDataOffset.Width = 100;
             // 
+            // lvcTexturesID
+            // 
+            this.lvcTexturesID.AspectName = "ID";
+            this.lvcTexturesID.AspectToStringFormat = "{0:X2}";
+            this.lvcTexturesID.Text = "ID";
+            // 
             // TextureChunkControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -229,5 +239,6 @@ namespace SF3.X1_Editor.Controls {
         private BrightIdeasSoftware.OLVColumn lvcTexturesWidth;
         private BrightIdeasSoftware.OLVColumn lvcTexturesHeight;
         private BrightIdeasSoftware.OLVColumn lvcTexturesImageDataOffset;
+        private BrightIdeasSoftware.OLVColumn lvcTexturesID;
     }
 }
