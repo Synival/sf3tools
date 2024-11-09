@@ -19,13 +19,17 @@ namespace SF3.FileEditors {
             Chunks = new ChunkCollection(stream);
             stream.Position = pos;
 
-            // TODO: we need a ByteEditor!! Because this is not a file!!
-            var chunk5Data = Chunks[5].Decompress();
-            Chunk5Editor = new FileEditor(this.NameContext);
-            using (var memoryStream = new MemoryStream(chunk5Data))
-                ((FileEditor) Chunk5Editor).LoadFile(this.Filename + " (Chunk5)", memoryStream);
-
+            Chunk5Editor = new ByteEditor(Chunks[5].Decompress());
             return base.LoadFile(filename, stream);
+        }
+
+        public override bool CloseFile() {
+            if (!base.CloseFile())
+                return false;
+
+            Chunks = null;
+            Chunk5Editor = null;
+            return true;
         }
 
         public override bool SaveFile(string filename)

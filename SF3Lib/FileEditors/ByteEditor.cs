@@ -7,11 +7,18 @@ namespace SF3.FileEditors {
     /// Used for modifying any set of bytes.
     /// </summary>
     public class ByteEditor : IByteEditor {
+        public ByteEditor() {
+        }
+
+        public ByteEditor(byte[] data) {
+            _ = SetData(data);
+        }
+
         private byte[] _data = null;
 
         protected byte[] Data {
             get => _data;
-            set {
+            private set {
                 if (_data != value) {
                     _data = value;
                     IsLoaded = _data != null;
@@ -23,7 +30,7 @@ namespace SF3.FileEditors {
 
         public bool IsLoaded {
             get => _isLoaded;
-            set {
+            private set {
                 if (_isLoaded != value) {
                     _isLoaded = value;
                     IsLoadedChanged?.Invoke(this, EventArgs.Empty);
@@ -41,6 +48,11 @@ namespace SF3.FileEditors {
                     ModifiedChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
+        }
+
+        public virtual bool SetData(byte[] data) {
+            Data = data;
+            return true;
         }
 
         public byte[] GetAllData() {

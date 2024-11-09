@@ -64,7 +64,7 @@ namespace SF3.FileEditors {
                 PreFileLoaded?.Invoke(this, EventArgs.Empty);
 
                 Filename = filename;
-                Data = newData;
+                _ = SetData(newData);
 
                 UpdateTitle();
                 FileLoaded?.Invoke(this, EventArgs.Empty);
@@ -102,7 +102,7 @@ namespace SF3.FileEditors {
 
             PreFileClosed?.Invoke(this, EventArgs.Empty);
 
-            Data = null;
+            _ = SetData(null);
             Filename = null;
             IsModified = false;
 
