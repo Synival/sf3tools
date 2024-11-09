@@ -194,74 +194,6 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTileSurfaceCharactersX61Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileSurfaceCharactersX62Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileSurfaceCharactersX63Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabTiles = new System.Windows.Forms.TabPage();
-            this.olvTiles = new BrightIdeasSoftware.ObjectListView();
-            this.lvcTilesName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX0Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX1Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX2Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX3Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX4Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX5Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX6Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX7Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX8Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX9Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX10Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX11Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX12Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX13Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX14Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX15Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX16Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX17Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX18Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX19Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX20Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX21Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX22Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX23Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX24Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX25Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX26Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX27Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX28Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX29Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX30Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX31Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX32Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX33Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX34Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX35Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX36Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX37Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX38Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX39Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX40Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX41Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX42Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX43Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX44Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX45Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX46Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX47Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX48Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX49Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX50Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX51Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX52Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX53Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX54Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX55Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX56Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX57Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX58Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX59Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX60Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX61Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX62Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTilesX63Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabTileHeightmap = new System.Windows.Forms.TabPage();
             this.olvTileHeightmap = new BrightIdeasSoftware.ObjectListView();
             this.lvcTileHeightmapName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -330,6 +262,74 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTileHeightmapX61Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileHeightmapX62Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileHeightmapX63Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tabTiles = new System.Windows.Forms.TabPage();
+            this.olvTiles = new BrightIdeasSoftware.ObjectListView();
+            this.lvcTilesName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX0Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX1Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX2Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX3Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX4Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX5Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX6Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX7Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX8Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX9Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX10Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX11Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX12Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX13Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX14Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX15Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX16Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX17Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX18Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX19Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX20Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX21Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX22Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX23Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX24Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX25Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX26Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX27Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX28Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX29Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX30Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX31Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX32Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX33Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX34Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX35Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX36Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX37Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX38Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX39Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX40Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX41Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX42Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX43Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX44Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX45Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX46Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX47Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX48Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX49Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX50Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX51Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX52Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX53Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX54Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX55Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX56Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX57Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX58Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX59Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX60Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX61Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX62Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcTilesX63Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.menuStrip2.SuspendLayout();
             this.tabTileItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileItems)).BeginInit();
@@ -338,10 +338,10 @@ namespace SF3.MPD_Editor.Forms {
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).BeginInit();
             this.tabTileSurfaceCharacters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileSurfaceCharacters)).BeginInit();
-            this.tabTiles.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvTiles)).BeginInit();
             this.tabTileHeightmap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileHeightmap)).BeginInit();
+            this.tabTiles.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvTiles)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip2
@@ -1017,8 +1017,8 @@ namespace SF3.MPD_Editor.Forms {
             this.tabMain.Controls.Add(this.tabHeader);
             this.tabMain.Controls.Add(this.tabTileSurfaceCharacters);
             this.tabMain.Controls.Add(this.tabTileHeightmap);
-            this.tabMain.Controls.Add(this.tabTileItems);
             this.tabMain.Controls.Add(this.tabTiles);
+            this.tabMain.Controls.Add(this.tabTileItems);
             this.tabMain.Location = new System.Drawing.Point(0, 27);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
@@ -1273,7 +1273,7 @@ namespace SF3.MPD_Editor.Forms {
             // 
             this.tabTileSurfaceCharacters.Controls.Add(this.olvTileSurfaceCharacters);
             this.tabTileSurfaceCharacters.Location = new System.Drawing.Point(4, 22);
-            this.tabTileSurfaceCharacters.Name = "tabSurfaceCharacters";
+            this.tabTileSurfaceCharacters.Name = "tabTileSurfaceCharacters";
             this.tabTileSurfaceCharacters.Size = new System.Drawing.Size(756, 480);
             this.tabTileSurfaceCharacters.TabIndex = 6;
             this.tabTileSurfaceCharacters.Text = "Surface Characters";
@@ -1895,6 +1895,633 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTileSurfaceCharactersX63Tile.AspectToStringFormat = "{0:X}";
             this.lvcTileSurfaceCharactersX63Tile.Text = "X63";
             this.lvcTileSurfaceCharactersX63Tile.Width = 50;
+            // 
+            // tabTileHeightmap
+            // 
+            this.tabTileHeightmap.Controls.Add(this.olvTileHeightmap);
+            this.tabTileHeightmap.Location = new System.Drawing.Point(4, 22);
+            this.tabTileHeightmap.Name = "tabTileHeightmap";
+            this.tabTileHeightmap.Size = new System.Drawing.Size(756, 480);
+            this.tabTileHeightmap.TabIndex = 7;
+            this.tabTileHeightmap.Text = "Tile Heightmap";
+            this.tabTileHeightmap.UseVisualStyleBackColor = true;
+            // 
+            // olvTileHeightmap
+            // 
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapName);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapAddress);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX0Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX1Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX2Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX3Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX4Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX5Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX6Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX7Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX8Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX9Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX10Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX11Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX12Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX13Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX14Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX15Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX16Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX17Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX18Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX19Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX20Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX21Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX22Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX23Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX24Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX25Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX26Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX27Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX28Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX29Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX30Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX31Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX32Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX33Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX34Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX35Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX36Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX37Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX38Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX39Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX40Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX41Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX42Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX43Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX44Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX45Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX46Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX47Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX48Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX49Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX50Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX51Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX52Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX53Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX54Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX55Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX56Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX57Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX58Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX59Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX60Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX61Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX62Tile);
+            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX63Tile);
+            this.olvTileHeightmap.AllowColumnReorder = true;
+            this.olvTileHeightmap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.olvTileHeightmap.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvTileHeightmap.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvcTileHeightmapName,
+            this.lvcTileHeightmapAddress,
+            this.lvcTileHeightmapX0Tile,
+            this.lvcTileHeightmapX1Tile,
+            this.lvcTileHeightmapX2Tile,
+            this.lvcTileHeightmapX3Tile,
+            this.lvcTileHeightmapX4Tile,
+            this.lvcTileHeightmapX5Tile,
+            this.lvcTileHeightmapX6Tile,
+            this.lvcTileHeightmapX7Tile,
+            this.lvcTileHeightmapX8Tile,
+            this.lvcTileHeightmapX9Tile,
+            this.lvcTileHeightmapX10Tile,
+            this.lvcTileHeightmapX11Tile,
+            this.lvcTileHeightmapX12Tile,
+            this.lvcTileHeightmapX13Tile,
+            this.lvcTileHeightmapX14Tile,
+            this.lvcTileHeightmapX15Tile,
+            this.lvcTileHeightmapX16Tile,
+            this.lvcTileHeightmapX17Tile,
+            this.lvcTileHeightmapX18Tile,
+            this.lvcTileHeightmapX19Tile,
+            this.lvcTileHeightmapX20Tile,
+            this.lvcTileHeightmapX21Tile,
+            this.lvcTileHeightmapX22Tile,
+            this.lvcTileHeightmapX23Tile,
+            this.lvcTileHeightmapX24Tile,
+            this.lvcTileHeightmapX25Tile,
+            this.lvcTileHeightmapX26Tile,
+            this.lvcTileHeightmapX27Tile,
+            this.lvcTileHeightmapX28Tile,
+            this.lvcTileHeightmapX29Tile,
+            this.lvcTileHeightmapX30Tile,
+            this.lvcTileHeightmapX31Tile,
+            this.lvcTileHeightmapX32Tile,
+            this.lvcTileHeightmapX33Tile,
+            this.lvcTileHeightmapX34Tile,
+            this.lvcTileHeightmapX35Tile,
+            this.lvcTileHeightmapX36Tile,
+            this.lvcTileHeightmapX37Tile,
+            this.lvcTileHeightmapX38Tile,
+            this.lvcTileHeightmapX39Tile,
+            this.lvcTileHeightmapX40Tile,
+            this.lvcTileHeightmapX41Tile,
+            this.lvcTileHeightmapX42Tile,
+            this.lvcTileHeightmapX43Tile,
+            this.lvcTileHeightmapX44Tile,
+            this.lvcTileHeightmapX45Tile,
+            this.lvcTileHeightmapX46Tile,
+            this.lvcTileHeightmapX47Tile,
+            this.lvcTileHeightmapX48Tile,
+            this.lvcTileHeightmapX49Tile,
+            this.lvcTileHeightmapX50Tile,
+            this.lvcTileHeightmapX51Tile,
+            this.lvcTileHeightmapX52Tile,
+            this.lvcTileHeightmapX53Tile,
+            this.lvcTileHeightmapX54Tile,
+            this.lvcTileHeightmapX55Tile,
+            this.lvcTileHeightmapX56Tile,
+            this.lvcTileHeightmapX57Tile,
+            this.lvcTileHeightmapX58Tile,
+            this.lvcTileHeightmapX59Tile,
+            this.lvcTileHeightmapX60Tile,
+            this.lvcTileHeightmapX61Tile,
+            this.lvcTileHeightmapX62Tile,
+            this.lvcTileHeightmapX63Tile});
+            this.olvTileHeightmap.FullRowSelect = true;
+            this.olvTileHeightmap.GridLines = true;
+            this.olvTileHeightmap.HasCollapsibleGroups = false;
+            this.olvTileHeightmap.HideSelection = false;
+            this.olvTileHeightmap.Location = new System.Drawing.Point(3, 3);
+            this.olvTileHeightmap.MenuLabelGroupBy = "";
+            this.olvTileHeightmap.Name = "olvTileHeightmap";
+            this.olvTileHeightmap.ShowGroups = false;
+            this.olvTileHeightmap.Size = new System.Drawing.Size(750, 474);
+            this.olvTileHeightmap.TabIndex = 3;
+            this.olvTileHeightmap.UseAlternatingBackColors = true;
+            this.olvTileHeightmap.UseCompatibleStateImageBehavior = false;
+            this.olvTileHeightmap.View = System.Windows.Forms.View.Details;
+            // 
+            // lvcTileHeightmapName
+            // 
+            this.lvcTileHeightmapName.AspectName = "Name";
+            this.lvcTileHeightmapName.IsEditable = false;
+            this.lvcTileHeightmapName.Text = "Name";
+            this.lvcTileHeightmapName.Width = 90;
+            // 
+            // lvcTileHeightmapAddress
+            // 
+            this.lvcTileHeightmapAddress.AspectName = "Address";
+            this.lvcTileHeightmapAddress.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapAddress.IsEditable = false;
+            this.lvcTileHeightmapAddress.Text = "Address";
+            this.lvcTileHeightmapAddress.Width = 90;
+            // 
+            // lvcTileHeightmapX0Tile
+            // 
+            this.lvcTileHeightmapX0Tile.AspectName = "X0Tile";
+            this.lvcTileHeightmapX0Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX0Tile.Text = "X0";
+            this.lvcTileHeightmapX0Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX1Tile
+            // 
+            this.lvcTileHeightmapX1Tile.AspectName = "X1Tile";
+            this.lvcTileHeightmapX1Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX1Tile.Text = "X1";
+            this.lvcTileHeightmapX1Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX2Tile
+            // 
+            this.lvcTileHeightmapX2Tile.AspectName = "X2Tile";
+            this.lvcTileHeightmapX2Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX2Tile.Text = "X2";
+            this.lvcTileHeightmapX2Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX3Tile
+            // 
+            this.lvcTileHeightmapX3Tile.AspectName = "X3Tile";
+            this.lvcTileHeightmapX3Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX3Tile.Text = "X3";
+            this.lvcTileHeightmapX3Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX4Tile
+            // 
+            this.lvcTileHeightmapX4Tile.AspectName = "X4Tile";
+            this.lvcTileHeightmapX4Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX4Tile.Text = "X4";
+            this.lvcTileHeightmapX4Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX5Tile
+            // 
+            this.lvcTileHeightmapX5Tile.AspectName = "X5Tile";
+            this.lvcTileHeightmapX5Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX5Tile.Text = "X5";
+            this.lvcTileHeightmapX5Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX6Tile
+            // 
+            this.lvcTileHeightmapX6Tile.AspectName = "X6Tile";
+            this.lvcTileHeightmapX6Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX6Tile.Text = "X6";
+            this.lvcTileHeightmapX6Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX7Tile
+            // 
+            this.lvcTileHeightmapX7Tile.AspectName = "X7Tile";
+            this.lvcTileHeightmapX7Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX7Tile.Text = "X7";
+            this.lvcTileHeightmapX7Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX8Tile
+            // 
+            this.lvcTileHeightmapX8Tile.AspectName = "X8Tile";
+            this.lvcTileHeightmapX8Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX8Tile.Text = "X8";
+            this.lvcTileHeightmapX8Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX9Tile
+            // 
+            this.lvcTileHeightmapX9Tile.AspectName = "X9Tile";
+            this.lvcTileHeightmapX9Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX9Tile.Text = "X9";
+            this.lvcTileHeightmapX9Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX10Tile
+            // 
+            this.lvcTileHeightmapX10Tile.AspectName = "X10Tile";
+            this.lvcTileHeightmapX10Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX10Tile.Text = "X10";
+            this.lvcTileHeightmapX10Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX11Tile
+            // 
+            this.lvcTileHeightmapX11Tile.AspectName = "X11Tile";
+            this.lvcTileHeightmapX11Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX11Tile.Text = "X11";
+            this.lvcTileHeightmapX11Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX12Tile
+            // 
+            this.lvcTileHeightmapX12Tile.AspectName = "X12Tile";
+            this.lvcTileHeightmapX12Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX12Tile.Text = "X12";
+            this.lvcTileHeightmapX12Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX13Tile
+            // 
+            this.lvcTileHeightmapX13Tile.AspectName = "X13Tile";
+            this.lvcTileHeightmapX13Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX13Tile.Text = "X13";
+            this.lvcTileHeightmapX13Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX14Tile
+            // 
+            this.lvcTileHeightmapX14Tile.AspectName = "X14Tile";
+            this.lvcTileHeightmapX14Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX14Tile.Text = "X14";
+            this.lvcTileHeightmapX14Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX15Tile
+            // 
+            this.lvcTileHeightmapX15Tile.AspectName = "X15Tile";
+            this.lvcTileHeightmapX15Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX15Tile.Text = "X15";
+            this.lvcTileHeightmapX15Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX16Tile
+            // 
+            this.lvcTileHeightmapX16Tile.AspectName = "X16Tile";
+            this.lvcTileHeightmapX16Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX16Tile.Text = "X16";
+            this.lvcTileHeightmapX16Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX17Tile
+            // 
+            this.lvcTileHeightmapX17Tile.AspectName = "X17Tile";
+            this.lvcTileHeightmapX17Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX17Tile.Text = "X17";
+            this.lvcTileHeightmapX17Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX18Tile
+            // 
+            this.lvcTileHeightmapX18Tile.AspectName = "X18Tile";
+            this.lvcTileHeightmapX18Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX18Tile.Text = "X18";
+            this.lvcTileHeightmapX18Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX19Tile
+            // 
+            this.lvcTileHeightmapX19Tile.AspectName = "X19Tile";
+            this.lvcTileHeightmapX19Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX19Tile.Text = "X19";
+            this.lvcTileHeightmapX19Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX20Tile
+            // 
+            this.lvcTileHeightmapX20Tile.AspectName = "X20Tile";
+            this.lvcTileHeightmapX20Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX20Tile.Text = "X20";
+            this.lvcTileHeightmapX20Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX21Tile
+            // 
+            this.lvcTileHeightmapX21Tile.AspectName = "X21Tile";
+            this.lvcTileHeightmapX21Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX21Tile.Text = "X21";
+            this.lvcTileHeightmapX21Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX22Tile
+            // 
+            this.lvcTileHeightmapX22Tile.AspectName = "X22Tile";
+            this.lvcTileHeightmapX22Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX22Tile.Text = "X22";
+            this.lvcTileHeightmapX22Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX23Tile
+            // 
+            this.lvcTileHeightmapX23Tile.AspectName = "X23Tile";
+            this.lvcTileHeightmapX23Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX23Tile.Text = "X23";
+            this.lvcTileHeightmapX23Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX24Tile
+            // 
+            this.lvcTileHeightmapX24Tile.AspectName = "X24Tile";
+            this.lvcTileHeightmapX24Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX24Tile.Text = "X24";
+            this.lvcTileHeightmapX24Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX25Tile
+            // 
+            this.lvcTileHeightmapX25Tile.AspectName = "X25Tile";
+            this.lvcTileHeightmapX25Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX25Tile.Text = "X25";
+            this.lvcTileHeightmapX25Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX26Tile
+            // 
+            this.lvcTileHeightmapX26Tile.AspectName = "X26Tile";
+            this.lvcTileHeightmapX26Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX26Tile.Text = "X26";
+            this.lvcTileHeightmapX26Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX27Tile
+            // 
+            this.lvcTileHeightmapX27Tile.AspectName = "X27Tile";
+            this.lvcTileHeightmapX27Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX27Tile.Text = "X27";
+            this.lvcTileHeightmapX27Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX28Tile
+            // 
+            this.lvcTileHeightmapX28Tile.AspectName = "X28Tile";
+            this.lvcTileHeightmapX28Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX28Tile.Text = "X28";
+            this.lvcTileHeightmapX28Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX29Tile
+            // 
+            this.lvcTileHeightmapX29Tile.AspectName = "X29Tile";
+            this.lvcTileHeightmapX29Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX29Tile.Text = "X29";
+            this.lvcTileHeightmapX29Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX30Tile
+            // 
+            this.lvcTileHeightmapX30Tile.AspectName = "X30Tile";
+            this.lvcTileHeightmapX30Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX30Tile.Text = "X30";
+            this.lvcTileHeightmapX30Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX31Tile
+            // 
+            this.lvcTileHeightmapX31Tile.AspectName = "X31Tile";
+            this.lvcTileHeightmapX31Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX31Tile.Text = "X31";
+            this.lvcTileHeightmapX31Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX32Tile
+            // 
+            this.lvcTileHeightmapX32Tile.AspectName = "X32Tile";
+            this.lvcTileHeightmapX32Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX32Tile.Text = "X32";
+            this.lvcTileHeightmapX32Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX33Tile
+            // 
+            this.lvcTileHeightmapX33Tile.AspectName = "X33Tile";
+            this.lvcTileHeightmapX33Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX33Tile.Text = "X33";
+            this.lvcTileHeightmapX33Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX34Tile
+            // 
+            this.lvcTileHeightmapX34Tile.AspectName = "X34Tile";
+            this.lvcTileHeightmapX34Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX34Tile.Text = "X34";
+            this.lvcTileHeightmapX34Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX35Tile
+            // 
+            this.lvcTileHeightmapX35Tile.AspectName = "X35Tile";
+            this.lvcTileHeightmapX35Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX35Tile.Text = "X35";
+            this.lvcTileHeightmapX35Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX36Tile
+            // 
+            this.lvcTileHeightmapX36Tile.AspectName = "X36Tile";
+            this.lvcTileHeightmapX36Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX36Tile.Text = "X36";
+            this.lvcTileHeightmapX36Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX37Tile
+            // 
+            this.lvcTileHeightmapX37Tile.AspectName = "X37Tile";
+            this.lvcTileHeightmapX37Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX37Tile.Text = "X37";
+            this.lvcTileHeightmapX37Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX38Tile
+            // 
+            this.lvcTileHeightmapX38Tile.AspectName = "X38Tile";
+            this.lvcTileHeightmapX38Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX38Tile.Text = "X38";
+            this.lvcTileHeightmapX38Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX39Tile
+            // 
+            this.lvcTileHeightmapX39Tile.AspectName = "X39Tile";
+            this.lvcTileHeightmapX39Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX39Tile.Text = "X39";
+            this.lvcTileHeightmapX39Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX40Tile
+            // 
+            this.lvcTileHeightmapX40Tile.AspectName = "X40Tile";
+            this.lvcTileHeightmapX40Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX40Tile.Text = "X40";
+            this.lvcTileHeightmapX40Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX41Tile
+            // 
+            this.lvcTileHeightmapX41Tile.AspectName = "X41Tile";
+            this.lvcTileHeightmapX41Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX41Tile.Text = "X41";
+            this.lvcTileHeightmapX41Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX42Tile
+            // 
+            this.lvcTileHeightmapX42Tile.AspectName = "X42Tile";
+            this.lvcTileHeightmapX42Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX42Tile.Text = "X42";
+            this.lvcTileHeightmapX42Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX43Tile
+            // 
+            this.lvcTileHeightmapX43Tile.AspectName = "X43Tile";
+            this.lvcTileHeightmapX43Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX43Tile.Text = "X43";
+            this.lvcTileHeightmapX43Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX44Tile
+            // 
+            this.lvcTileHeightmapX44Tile.AspectName = "X44Tile";
+            this.lvcTileHeightmapX44Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX44Tile.Text = "X44";
+            this.lvcTileHeightmapX44Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX45Tile
+            // 
+            this.lvcTileHeightmapX45Tile.AspectName = "X45Tile";
+            this.lvcTileHeightmapX45Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX45Tile.Text = "X45";
+            this.lvcTileHeightmapX45Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX46Tile
+            // 
+            this.lvcTileHeightmapX46Tile.AspectName = "X46Tile";
+            this.lvcTileHeightmapX46Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX46Tile.Text = "X46";
+            this.lvcTileHeightmapX46Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX47Tile
+            // 
+            this.lvcTileHeightmapX47Tile.AspectName = "X47Tile";
+            this.lvcTileHeightmapX47Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX47Tile.Text = "X47";
+            this.lvcTileHeightmapX47Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX48Tile
+            // 
+            this.lvcTileHeightmapX48Tile.AspectName = "X48Tile";
+            this.lvcTileHeightmapX48Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX48Tile.Text = "X48";
+            this.lvcTileHeightmapX48Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX49Tile
+            // 
+            this.lvcTileHeightmapX49Tile.AspectName = "X49Tile";
+            this.lvcTileHeightmapX49Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX49Tile.Text = "X49";
+            this.lvcTileHeightmapX49Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX50Tile
+            // 
+            this.lvcTileHeightmapX50Tile.AspectName = "X50Tile";
+            this.lvcTileHeightmapX50Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX50Tile.Text = "X50";
+            this.lvcTileHeightmapX50Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX51Tile
+            // 
+            this.lvcTileHeightmapX51Tile.AspectName = "X51Tile";
+            this.lvcTileHeightmapX51Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX51Tile.Text = "X51";
+            this.lvcTileHeightmapX51Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX52Tile
+            // 
+            this.lvcTileHeightmapX52Tile.AspectName = "X52Tile";
+            this.lvcTileHeightmapX52Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX52Tile.Text = "X52";
+            this.lvcTileHeightmapX52Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX53Tile
+            // 
+            this.lvcTileHeightmapX53Tile.AspectName = "X53Tile";
+            this.lvcTileHeightmapX53Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX53Tile.Text = "X53";
+            this.lvcTileHeightmapX53Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX54Tile
+            // 
+            this.lvcTileHeightmapX54Tile.AspectName = "X54Tile";
+            this.lvcTileHeightmapX54Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX54Tile.Text = "X54";
+            this.lvcTileHeightmapX54Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX55Tile
+            // 
+            this.lvcTileHeightmapX55Tile.AspectName = "X55Tile";
+            this.lvcTileHeightmapX55Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX55Tile.Text = "X55";
+            this.lvcTileHeightmapX55Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX56Tile
+            // 
+            this.lvcTileHeightmapX56Tile.AspectName = "X56Tile";
+            this.lvcTileHeightmapX56Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX56Tile.Text = "X56";
+            this.lvcTileHeightmapX56Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX57Tile
+            // 
+            this.lvcTileHeightmapX57Tile.AspectName = "X57Tile";
+            this.lvcTileHeightmapX57Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX57Tile.Text = "X57";
+            this.lvcTileHeightmapX57Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX58Tile
+            // 
+            this.lvcTileHeightmapX58Tile.AspectName = "X58Tile";
+            this.lvcTileHeightmapX58Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX58Tile.Text = "X58";
+            this.lvcTileHeightmapX58Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX59Tile
+            // 
+            this.lvcTileHeightmapX59Tile.AspectName = "X59Tile";
+            this.lvcTileHeightmapX59Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX59Tile.Text = "X59";
+            this.lvcTileHeightmapX59Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX60Tile
+            // 
+            this.lvcTileHeightmapX60Tile.AspectName = "X60Tile";
+            this.lvcTileHeightmapX60Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX60Tile.Text = "X60";
+            this.lvcTileHeightmapX60Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX61Tile
+            // 
+            this.lvcTileHeightmapX61Tile.AspectName = "X61Tile";
+            this.lvcTileHeightmapX61Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX61Tile.Text = "X61";
+            this.lvcTileHeightmapX61Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX62Tile
+            // 
+            this.lvcTileHeightmapX62Tile.AspectName = "X62Tile";
+            this.lvcTileHeightmapX62Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX62Tile.Text = "X62";
+            this.lvcTileHeightmapX62Tile.Width = 50;
+            // 
+            // lvcTileHeightmapX63Tile
+            // 
+            this.lvcTileHeightmapX63Tile.AspectName = "X63Tile";
+            this.lvcTileHeightmapX63Tile.AspectToStringFormat = "{0:X}";
+            this.lvcTileHeightmapX63Tile.Text = "X63";
+            this.lvcTileHeightmapX63Tile.Width = 50;
             // 
             // tabTiles
             // 
@@ -2525,633 +3152,6 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTilesX63Tile.Text = "X63";
             this.lvcTilesX63Tile.Width = 50;
             // 
-            // tabTileHeightmap
-            // 
-            this.tabTileHeightmap.Controls.Add(this.olvTileHeightmap);
-            this.tabTileHeightmap.Location = new System.Drawing.Point(4, 22);
-            this.tabTileHeightmap.Name = "tabTileHeightmap";
-            this.tabTileHeightmap.Size = new System.Drawing.Size(756, 480);
-            this.tabTileHeightmap.TabIndex = 7;
-            this.tabTileHeightmap.Text = "Tile Heightmap";
-            this.tabTileHeightmap.UseVisualStyleBackColor = true;
-            // 
-            // olvTileHeightmap
-            // 
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapName);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapAddress);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX0Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX1Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX2Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX3Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX4Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX5Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX6Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX7Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX8Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX9Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX10Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX11Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX12Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX13Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX14Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX15Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX16Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX17Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX18Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX19Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX20Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX21Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX22Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX23Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX24Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX25Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX26Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX27Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX28Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX29Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX30Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX31Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX32Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX33Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX34Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX35Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX36Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX37Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX38Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX39Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX40Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX41Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX42Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX43Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX44Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX45Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX46Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX47Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX48Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX49Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX50Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX51Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX52Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX53Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX54Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX55Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX56Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX57Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX58Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX59Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX60Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX61Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX62Tile);
-            this.olvTileHeightmap.AllColumns.Add(this.lvcTileHeightmapX63Tile);
-            this.olvTileHeightmap.AllowColumnReorder = true;
-            this.olvTileHeightmap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvTileHeightmap.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvTileHeightmap.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcTileHeightmapName,
-            this.lvcTileHeightmapAddress,
-            this.lvcTileHeightmapX0Tile,
-            this.lvcTileHeightmapX1Tile,
-            this.lvcTileHeightmapX2Tile,
-            this.lvcTileHeightmapX3Tile,
-            this.lvcTileHeightmapX4Tile,
-            this.lvcTileHeightmapX5Tile,
-            this.lvcTileHeightmapX6Tile,
-            this.lvcTileHeightmapX7Tile,
-            this.lvcTileHeightmapX8Tile,
-            this.lvcTileHeightmapX9Tile,
-            this.lvcTileHeightmapX10Tile,
-            this.lvcTileHeightmapX11Tile,
-            this.lvcTileHeightmapX12Tile,
-            this.lvcTileHeightmapX13Tile,
-            this.lvcTileHeightmapX14Tile,
-            this.lvcTileHeightmapX15Tile,
-            this.lvcTileHeightmapX16Tile,
-            this.lvcTileHeightmapX17Tile,
-            this.lvcTileHeightmapX18Tile,
-            this.lvcTileHeightmapX19Tile,
-            this.lvcTileHeightmapX20Tile,
-            this.lvcTileHeightmapX21Tile,
-            this.lvcTileHeightmapX22Tile,
-            this.lvcTileHeightmapX23Tile,
-            this.lvcTileHeightmapX24Tile,
-            this.lvcTileHeightmapX25Tile,
-            this.lvcTileHeightmapX26Tile,
-            this.lvcTileHeightmapX27Tile,
-            this.lvcTileHeightmapX28Tile,
-            this.lvcTileHeightmapX29Tile,
-            this.lvcTileHeightmapX30Tile,
-            this.lvcTileHeightmapX31Tile,
-            this.lvcTileHeightmapX32Tile,
-            this.lvcTileHeightmapX33Tile,
-            this.lvcTileHeightmapX34Tile,
-            this.lvcTileHeightmapX35Tile,
-            this.lvcTileHeightmapX36Tile,
-            this.lvcTileHeightmapX37Tile,
-            this.lvcTileHeightmapX38Tile,
-            this.lvcTileHeightmapX39Tile,
-            this.lvcTileHeightmapX40Tile,
-            this.lvcTileHeightmapX41Tile,
-            this.lvcTileHeightmapX42Tile,
-            this.lvcTileHeightmapX43Tile,
-            this.lvcTileHeightmapX44Tile,
-            this.lvcTileHeightmapX45Tile,
-            this.lvcTileHeightmapX46Tile,
-            this.lvcTileHeightmapX47Tile,
-            this.lvcTileHeightmapX48Tile,
-            this.lvcTileHeightmapX49Tile,
-            this.lvcTileHeightmapX50Tile,
-            this.lvcTileHeightmapX51Tile,
-            this.lvcTileHeightmapX52Tile,
-            this.lvcTileHeightmapX53Tile,
-            this.lvcTileHeightmapX54Tile,
-            this.lvcTileHeightmapX55Tile,
-            this.lvcTileHeightmapX56Tile,
-            this.lvcTileHeightmapX57Tile,
-            this.lvcTileHeightmapX58Tile,
-            this.lvcTileHeightmapX59Tile,
-            this.lvcTileHeightmapX60Tile,
-            this.lvcTileHeightmapX61Tile,
-            this.lvcTileHeightmapX62Tile,
-            this.lvcTileHeightmapX63Tile});
-            this.olvTileHeightmap.FullRowSelect = true;
-            this.olvTileHeightmap.GridLines = true;
-            this.olvTileHeightmap.HasCollapsibleGroups = false;
-            this.olvTileHeightmap.HideSelection = false;
-            this.olvTileHeightmap.Location = new System.Drawing.Point(3, 3);
-            this.olvTileHeightmap.MenuLabelGroupBy = "";
-            this.olvTileHeightmap.Name = "olvTileHeightmap";
-            this.olvTileHeightmap.ShowGroups = false;
-            this.olvTileHeightmap.Size = new System.Drawing.Size(750, 474);
-            this.olvTileHeightmap.TabIndex = 3;
-            this.olvTileHeightmap.UseAlternatingBackColors = true;
-            this.olvTileHeightmap.UseCompatibleStateImageBehavior = false;
-            this.olvTileHeightmap.View = System.Windows.Forms.View.Details;
-            // 
-            // lvcTileHeightmapName
-            // 
-            this.lvcTileHeightmapName.AspectName = "Name";
-            this.lvcTileHeightmapName.IsEditable = false;
-            this.lvcTileHeightmapName.Text = "Name";
-            this.lvcTileHeightmapName.Width = 90;
-            // 
-            // lvcTileHeightmapAddress
-            // 
-            this.lvcTileHeightmapAddress.AspectName = "Address";
-            this.lvcTileHeightmapAddress.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapAddress.IsEditable = false;
-            this.lvcTileHeightmapAddress.Text = "Address";
-            this.lvcTileHeightmapAddress.Width = 90;
-            // 
-            // lvcTileHeightmapX0Tile
-            // 
-            this.lvcTileHeightmapX0Tile.AspectName = "X0Tile";
-            this.lvcTileHeightmapX0Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX0Tile.Text = "X0";
-            this.lvcTileHeightmapX0Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX1Tile
-            // 
-            this.lvcTileHeightmapX1Tile.AspectName = "X1Tile";
-            this.lvcTileHeightmapX1Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX1Tile.Text = "X1";
-            this.lvcTileHeightmapX1Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX2Tile
-            // 
-            this.lvcTileHeightmapX2Tile.AspectName = "X2Tile";
-            this.lvcTileHeightmapX2Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX2Tile.Text = "X2";
-            this.lvcTileHeightmapX2Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX3Tile
-            // 
-            this.lvcTileHeightmapX3Tile.AspectName = "X3Tile";
-            this.lvcTileHeightmapX3Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX3Tile.Text = "X3";
-            this.lvcTileHeightmapX3Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX4Tile
-            // 
-            this.lvcTileHeightmapX4Tile.AspectName = "X4Tile";
-            this.lvcTileHeightmapX4Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX4Tile.Text = "X4";
-            this.lvcTileHeightmapX4Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX5Tile
-            // 
-            this.lvcTileHeightmapX5Tile.AspectName = "X5Tile";
-            this.lvcTileHeightmapX5Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX5Tile.Text = "X5";
-            this.lvcTileHeightmapX5Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX6Tile
-            // 
-            this.lvcTileHeightmapX6Tile.AspectName = "X6Tile";
-            this.lvcTileHeightmapX6Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX6Tile.Text = "X6";
-            this.lvcTileHeightmapX6Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX7Tile
-            // 
-            this.lvcTileHeightmapX7Tile.AspectName = "X7Tile";
-            this.lvcTileHeightmapX7Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX7Tile.Text = "X7";
-            this.lvcTileHeightmapX7Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX8Tile
-            // 
-            this.lvcTileHeightmapX8Tile.AspectName = "X8Tile";
-            this.lvcTileHeightmapX8Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX8Tile.Text = "X8";
-            this.lvcTileHeightmapX8Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX9Tile
-            // 
-            this.lvcTileHeightmapX9Tile.AspectName = "X9Tile";
-            this.lvcTileHeightmapX9Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX9Tile.Text = "X9";
-            this.lvcTileHeightmapX9Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX10Tile
-            // 
-            this.lvcTileHeightmapX10Tile.AspectName = "X10Tile";
-            this.lvcTileHeightmapX10Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX10Tile.Text = "X10";
-            this.lvcTileHeightmapX10Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX11Tile
-            // 
-            this.lvcTileHeightmapX11Tile.AspectName = "X11Tile";
-            this.lvcTileHeightmapX11Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX11Tile.Text = "X11";
-            this.lvcTileHeightmapX11Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX12Tile
-            // 
-            this.lvcTileHeightmapX12Tile.AspectName = "X12Tile";
-            this.lvcTileHeightmapX12Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX12Tile.Text = "X12";
-            this.lvcTileHeightmapX12Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX13Tile
-            // 
-            this.lvcTileHeightmapX13Tile.AspectName = "X13Tile";
-            this.lvcTileHeightmapX13Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX13Tile.Text = "X13";
-            this.lvcTileHeightmapX13Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX14Tile
-            // 
-            this.lvcTileHeightmapX14Tile.AspectName = "X14Tile";
-            this.lvcTileHeightmapX14Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX14Tile.Text = "X14";
-            this.lvcTileHeightmapX14Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX15Tile
-            // 
-            this.lvcTileHeightmapX15Tile.AspectName = "X15Tile";
-            this.lvcTileHeightmapX15Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX15Tile.Text = "X15";
-            this.lvcTileHeightmapX15Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX16Tile
-            // 
-            this.lvcTileHeightmapX16Tile.AspectName = "X16Tile";
-            this.lvcTileHeightmapX16Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX16Tile.Text = "X16";
-            this.lvcTileHeightmapX16Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX17Tile
-            // 
-            this.lvcTileHeightmapX17Tile.AspectName = "X17Tile";
-            this.lvcTileHeightmapX17Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX17Tile.Text = "X17";
-            this.lvcTileHeightmapX17Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX18Tile
-            // 
-            this.lvcTileHeightmapX18Tile.AspectName = "X18Tile";
-            this.lvcTileHeightmapX18Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX18Tile.Text = "X18";
-            this.lvcTileHeightmapX18Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX19Tile
-            // 
-            this.lvcTileHeightmapX19Tile.AspectName = "X19Tile";
-            this.lvcTileHeightmapX19Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX19Tile.Text = "X19";
-            this.lvcTileHeightmapX19Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX20Tile
-            // 
-            this.lvcTileHeightmapX20Tile.AspectName = "X20Tile";
-            this.lvcTileHeightmapX20Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX20Tile.Text = "X20";
-            this.lvcTileHeightmapX20Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX21Tile
-            // 
-            this.lvcTileHeightmapX21Tile.AspectName = "X21Tile";
-            this.lvcTileHeightmapX21Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX21Tile.Text = "X21";
-            this.lvcTileHeightmapX21Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX22Tile
-            // 
-            this.lvcTileHeightmapX22Tile.AspectName = "X22Tile";
-            this.lvcTileHeightmapX22Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX22Tile.Text = "X22";
-            this.lvcTileHeightmapX22Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX23Tile
-            // 
-            this.lvcTileHeightmapX23Tile.AspectName = "X23Tile";
-            this.lvcTileHeightmapX23Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX23Tile.Text = "X23";
-            this.lvcTileHeightmapX23Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX24Tile
-            // 
-            this.lvcTileHeightmapX24Tile.AspectName = "X24Tile";
-            this.lvcTileHeightmapX24Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX24Tile.Text = "X24";
-            this.lvcTileHeightmapX24Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX25Tile
-            // 
-            this.lvcTileHeightmapX25Tile.AspectName = "X25Tile";
-            this.lvcTileHeightmapX25Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX25Tile.Text = "X25";
-            this.lvcTileHeightmapX25Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX26Tile
-            // 
-            this.lvcTileHeightmapX26Tile.AspectName = "X26Tile";
-            this.lvcTileHeightmapX26Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX26Tile.Text = "X26";
-            this.lvcTileHeightmapX26Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX27Tile
-            // 
-            this.lvcTileHeightmapX27Tile.AspectName = "X27Tile";
-            this.lvcTileHeightmapX27Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX27Tile.Text = "X27";
-            this.lvcTileHeightmapX27Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX28Tile
-            // 
-            this.lvcTileHeightmapX28Tile.AspectName = "X28Tile";
-            this.lvcTileHeightmapX28Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX28Tile.Text = "X28";
-            this.lvcTileHeightmapX28Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX29Tile
-            // 
-            this.lvcTileHeightmapX29Tile.AspectName = "X29Tile";
-            this.lvcTileHeightmapX29Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX29Tile.Text = "X29";
-            this.lvcTileHeightmapX29Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX30Tile
-            // 
-            this.lvcTileHeightmapX30Tile.AspectName = "X30Tile";
-            this.lvcTileHeightmapX30Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX30Tile.Text = "X30";
-            this.lvcTileHeightmapX30Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX31Tile
-            // 
-            this.lvcTileHeightmapX31Tile.AspectName = "X31Tile";
-            this.lvcTileHeightmapX31Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX31Tile.Text = "X31";
-            this.lvcTileHeightmapX31Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX32Tile
-            // 
-            this.lvcTileHeightmapX32Tile.AspectName = "X32Tile";
-            this.lvcTileHeightmapX32Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX32Tile.Text = "X32";
-            this.lvcTileHeightmapX32Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX33Tile
-            // 
-            this.lvcTileHeightmapX33Tile.AspectName = "X33Tile";
-            this.lvcTileHeightmapX33Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX33Tile.Text = "X33";
-            this.lvcTileHeightmapX33Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX34Tile
-            // 
-            this.lvcTileHeightmapX34Tile.AspectName = "X34Tile";
-            this.lvcTileHeightmapX34Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX34Tile.Text = "X34";
-            this.lvcTileHeightmapX34Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX35Tile
-            // 
-            this.lvcTileHeightmapX35Tile.AspectName = "X35Tile";
-            this.lvcTileHeightmapX35Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX35Tile.Text = "X35";
-            this.lvcTileHeightmapX35Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX36Tile
-            // 
-            this.lvcTileHeightmapX36Tile.AspectName = "X36Tile";
-            this.lvcTileHeightmapX36Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX36Tile.Text = "X36";
-            this.lvcTileHeightmapX36Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX37Tile
-            // 
-            this.lvcTileHeightmapX37Tile.AspectName = "X37Tile";
-            this.lvcTileHeightmapX37Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX37Tile.Text = "X37";
-            this.lvcTileHeightmapX37Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX38Tile
-            // 
-            this.lvcTileHeightmapX38Tile.AspectName = "X38Tile";
-            this.lvcTileHeightmapX38Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX38Tile.Text = "X38";
-            this.lvcTileHeightmapX38Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX39Tile
-            // 
-            this.lvcTileHeightmapX39Tile.AspectName = "X39Tile";
-            this.lvcTileHeightmapX39Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX39Tile.Text = "X39";
-            this.lvcTileHeightmapX39Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX40Tile
-            // 
-            this.lvcTileHeightmapX40Tile.AspectName = "X40Tile";
-            this.lvcTileHeightmapX40Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX40Tile.Text = "X40";
-            this.lvcTileHeightmapX40Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX41Tile
-            // 
-            this.lvcTileHeightmapX41Tile.AspectName = "X41Tile";
-            this.lvcTileHeightmapX41Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX41Tile.Text = "X41";
-            this.lvcTileHeightmapX41Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX42Tile
-            // 
-            this.lvcTileHeightmapX42Tile.AspectName = "X42Tile";
-            this.lvcTileHeightmapX42Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX42Tile.Text = "X42";
-            this.lvcTileHeightmapX42Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX43Tile
-            // 
-            this.lvcTileHeightmapX43Tile.AspectName = "X43Tile";
-            this.lvcTileHeightmapX43Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX43Tile.Text = "X43";
-            this.lvcTileHeightmapX43Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX44Tile
-            // 
-            this.lvcTileHeightmapX44Tile.AspectName = "X44Tile";
-            this.lvcTileHeightmapX44Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX44Tile.Text = "X44";
-            this.lvcTileHeightmapX44Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX45Tile
-            // 
-            this.lvcTileHeightmapX45Tile.AspectName = "X45Tile";
-            this.lvcTileHeightmapX45Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX45Tile.Text = "X45";
-            this.lvcTileHeightmapX45Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX46Tile
-            // 
-            this.lvcTileHeightmapX46Tile.AspectName = "X46Tile";
-            this.lvcTileHeightmapX46Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX46Tile.Text = "X46";
-            this.lvcTileHeightmapX46Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX47Tile
-            // 
-            this.lvcTileHeightmapX47Tile.AspectName = "X47Tile";
-            this.lvcTileHeightmapX47Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX47Tile.Text = "X47";
-            this.lvcTileHeightmapX47Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX48Tile
-            // 
-            this.lvcTileHeightmapX48Tile.AspectName = "X48Tile";
-            this.lvcTileHeightmapX48Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX48Tile.Text = "X48";
-            this.lvcTileHeightmapX48Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX49Tile
-            // 
-            this.lvcTileHeightmapX49Tile.AspectName = "X49Tile";
-            this.lvcTileHeightmapX49Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX49Tile.Text = "X49";
-            this.lvcTileHeightmapX49Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX50Tile
-            // 
-            this.lvcTileHeightmapX50Tile.AspectName = "X50Tile";
-            this.lvcTileHeightmapX50Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX50Tile.Text = "X50";
-            this.lvcTileHeightmapX50Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX51Tile
-            // 
-            this.lvcTileHeightmapX51Tile.AspectName = "X51Tile";
-            this.lvcTileHeightmapX51Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX51Tile.Text = "X51";
-            this.lvcTileHeightmapX51Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX52Tile
-            // 
-            this.lvcTileHeightmapX52Tile.AspectName = "X52Tile";
-            this.lvcTileHeightmapX52Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX52Tile.Text = "X52";
-            this.lvcTileHeightmapX52Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX53Tile
-            // 
-            this.lvcTileHeightmapX53Tile.AspectName = "X53Tile";
-            this.lvcTileHeightmapX53Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX53Tile.Text = "X53";
-            this.lvcTileHeightmapX53Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX54Tile
-            // 
-            this.lvcTileHeightmapX54Tile.AspectName = "X54Tile";
-            this.lvcTileHeightmapX54Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX54Tile.Text = "X54";
-            this.lvcTileHeightmapX54Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX55Tile
-            // 
-            this.lvcTileHeightmapX55Tile.AspectName = "X55Tile";
-            this.lvcTileHeightmapX55Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX55Tile.Text = "X55";
-            this.lvcTileHeightmapX55Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX56Tile
-            // 
-            this.lvcTileHeightmapX56Tile.AspectName = "X56Tile";
-            this.lvcTileHeightmapX56Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX56Tile.Text = "X56";
-            this.lvcTileHeightmapX56Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX57Tile
-            // 
-            this.lvcTileHeightmapX57Tile.AspectName = "X57Tile";
-            this.lvcTileHeightmapX57Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX57Tile.Text = "X57";
-            this.lvcTileHeightmapX57Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX58Tile
-            // 
-            this.lvcTileHeightmapX58Tile.AspectName = "X58Tile";
-            this.lvcTileHeightmapX58Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX58Tile.Text = "X58";
-            this.lvcTileHeightmapX58Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX59Tile
-            // 
-            this.lvcTileHeightmapX59Tile.AspectName = "X59Tile";
-            this.lvcTileHeightmapX59Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX59Tile.Text = "X59";
-            this.lvcTileHeightmapX59Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX60Tile
-            // 
-            this.lvcTileHeightmapX60Tile.AspectName = "X60Tile";
-            this.lvcTileHeightmapX60Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX60Tile.Text = "X60";
-            this.lvcTileHeightmapX60Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX61Tile
-            // 
-            this.lvcTileHeightmapX61Tile.AspectName = "X61Tile";
-            this.lvcTileHeightmapX61Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX61Tile.Text = "X61";
-            this.lvcTileHeightmapX61Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX62Tile
-            // 
-            this.lvcTileHeightmapX62Tile.AspectName = "X62Tile";
-            this.lvcTileHeightmapX62Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX62Tile.Text = "X62";
-            this.lvcTileHeightmapX62Tile.Width = 50;
-            // 
-            // lvcTileHeightmapX63Tile
-            // 
-            this.lvcTileHeightmapX63Tile.AspectName = "X63Tile";
-            this.lvcTileHeightmapX63Tile.AspectToStringFormat = "{0:X}";
-            this.lvcTileHeightmapX63Tile.Text = "X63";
-            this.lvcTileHeightmapX63Tile.Width = 50;
-            // 
             // frmMPDEditor
             // 
             this.AllowDrop = true;
@@ -3174,10 +3174,10 @@ namespace SF3.MPD_Editor.Forms {
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).EndInit();
             this.tabTileSurfaceCharacters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvTileSurfaceCharacters)).EndInit();
-            this.tabTiles.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvTiles)).EndInit();
             this.tabTileHeightmap.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvTileHeightmap)).EndInit();
+            this.tabTiles.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvTiles)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
