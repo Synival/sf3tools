@@ -14,28 +14,49 @@ namespace SF3.FileEditors {
         }
 
         public override bool LoadFile(string filename, Stream stream) {
-            var mpdFile = new MPDFile(stream);
-            var chunk5Data = mpdFile.Chunks[5].Decompress();
+            // Load MPDFile data
+            var pos = stream.Position;
+            MPDFile = new MPDFile(stream);
+            stream.Position = pos;
 
-            using (var chunk5Stream = new MemoryStream(chunk5Data))
-                return base.LoadFile(filename, chunk5Stream);
+            // TODO: we need a ByteEditor!! Because this is not a file!!
+            var chunk5Data = MPDFile.Chunks[5].Decompress();
+            Chunk5Editor = new FileEditor(this.NameContext);
+            using (var memoryStream = new MemoryStream(chunk5Data))
+                ((FileEditor) Chunk5Editor).LoadFile(this.Filename + " (Chunk5)", memoryStream);
+
+            return base.LoadFile(filename, stream);
         }
 
         public override bool SaveFile(string filename)
             => throw new NotImplementedException();
 
         public override IEnumerable<ITable> MakeTables() {
+            var headerAddrPtr = GetDouble(0x0000) - 0x290000;
+            var headerAddr = GetDouble(headerAddrPtr) - 0x290000;
+
             return new List<ITable>() {
-                (TileRows     = null),
-                (TileRows     = new TileRowTable    (this, 0x4000)),
-                (ItemTileRows = new ItemTileRowTable(this, 0x6000)),
+                (Header       = new HeaderTable     (this, headerAddr)),
+                (TileRows     = new TileRowTable    (Chunk5Editor, 0x4000)),
+                (ItemTileRows = new ItemTileRowTable(Chunk5Editor, 0x6000)),
             };
         }
 
         public override void DestroyTables() {
+            Header       = null;
             TileRows     = null;
             ItemTileRows = null;
         }
+
+        /// <summary>
+        /// All data and functions for an MPD file
+        /// </summary>
+        public MPDFile MPDFile { get; private set; }
+
+        /// <summary>
+        /// Byte editor for decompressed data in Chunk 5
+        /// </summary>
+        public IByteEditor Chunk5Editor { get; private set; }
 
         [BulkCopyRecurse]
         public HeaderTable Header { get; private set; }
