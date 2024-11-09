@@ -263,6 +263,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
+    <ProjectReference Include="..\MPDLib\MPDLib.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Resources\DroprateList.xml">

@@ -38,7 +38,9 @@ namespace SF3.Editor.Forms {
         /// Function to be called after derived class's InitializeComponent() is called.
         /// </summary>
         public void InitializeEditor(ToolStrip toolStrip = null, IEnumerable<ObjectListView> extraOLVs = null) {
+            // Merge menu bars!
             if (toolStrip != null) {
+                // Gather EditorForm's menu items in the form of a dictionary.
                 var menuItems = new Dictionary<string, ToolStripMenuItem>();
                 foreach (var ti in menuStrip1.Items) {
                     if (ti is ToolStripMenuItem tsmi)
@@ -48,8 +50,11 @@ namespace SF3.Editor.Forms {
                 // It's dangerous to modify the list as we iterate over it, so store the actions for later.
                 var actions = new List<Action>();
 
+                // Add menus one by one.
                 foreach (var ti in toolStrip.Items) {
+                    // If this is a top-level dropdown menu, see if they can be merged.
                     if (ti is ToolStripMenuItem tsmi) {
+                        // If the menu already exists, append each item.
                         var tsmiCopy = tsmi;
                         if (menuItems.ContainsKey(tsmi.Text)) {
                             actions.Add(() => {
@@ -58,19 +63,22 @@ namespace SF3.Editor.Forms {
                                 tsmiCopy.DropDownItems.Clear();
                             });
                         }
-                        else {
+                        // The enu doesn't exist - just add it.
+                        else
                             actions.Add(() => menuStrip1.Items.Insert(menuStrip1.Items.IndexOf(tsmiHelp), tsmi));
-                        }
                     }
+                    // (Untested) This is just a single button. Just add it.
                     else {
                         var tsi = ti as ToolStripItem;
                         actions.Add(() => menuStrip1.Items.Add(tsi));
                     }
                 }
 
+                // Perform queued actions.
                 foreach (var action in actions)
                     action();
 
+                // Destroy everything left of the now-merged menu.
                 toolStrip.Items.Clear();
                 Controls.Remove(toolStrip);
             }

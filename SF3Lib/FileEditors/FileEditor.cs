@@ -129,7 +129,7 @@ namespace SF3.FileEditors {
         /// </summary>
         /// <param name="filename">The file to load.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
-        public bool SaveFile(string filename) {
+        public virtual bool SaveFile(string filename) {
             if (Data == null)
                 throw new FileEditorNotLoadedException();
 
