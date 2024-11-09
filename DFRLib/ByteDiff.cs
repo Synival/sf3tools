@@ -74,6 +74,7 @@ namespace DFRLib {
 
             return chunkBuilder.FetchChunks();
         }
+
         /// <summary>
         /// Creates a list of differences read from a DFR file.
         /// </summary>

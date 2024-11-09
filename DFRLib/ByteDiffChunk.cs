@@ -153,8 +153,8 @@ namespace DFRLib {
             for (var i = 0; i < BytesFrom.Length; i++) {
                 if (data[i + (int) Address] != BytesFrom[i]) {
                     throw new ArgumentException(
-                        "Expected " + BytesFrom[i].ToString("X2") + " at address " + Address.ToString("X") +
-                        ", instead got " + data[i + (int) Address]);
+                        "Expected 0x" + BytesFrom[i].ToString("X2") + " at address 0x" + Address.ToString("X") +
+                        ", instead got 0x" + data[i + (int) Address]);
                 }
             }
 
