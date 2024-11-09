@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SF3.Models.MPD.TextureChunk;
 using SF3.MPDEditor.Extensions;
@@ -14,6 +9,10 @@ namespace SF3.MPDEditor.Controls {
     public partial class BattleMapControl : UserControl {
         public BattleMapControl() {
             InitializeComponent();
+
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | 
+                     ControlStyles.UserPaint |
+                     ControlStyles.AllPaintingInWmPaint, true);
         }
 
         protected override void OnPaint(PaintEventArgs e) {
