@@ -51,18 +51,7 @@ namespace SF3.MPD_Editor.Forms {
         private void OnTextureChanged(object sender, ListViewItemSelectionChangedEventArgs e, TextureChunkControl tcec) {
             var item = (OLVListItem) e.Item;
             var texture = (Texture) item.RowObject;
-
-            var data = new ushort[texture.Width, texture.Height];
-            var off = texture.ImageDataOffset;
-            for (var y = 0; y < texture.Height; y++) {
-                for (var x = 0; x < texture.Width; x++) {
-                    var texPixel = (ushort) texture.Editor.GetWord(off);
-                    off += 2;
-                    data[x, y] = texPixel;
-                }
-            }
-
-            tcec.TextureControl.Data = data;
+            tcec.TextureControl.Data = texture.ImageData;
         }
 
         protected override string FileDialogFilter
