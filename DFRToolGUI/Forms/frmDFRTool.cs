@@ -15,13 +15,15 @@ namespace DFRTool.GUI.Forms {
 
             // Dialog mode starts in the middle of the screen, can't be minimized, and can be closed with the escape key.
             if (dialogMode) {
+                this.DialogResult = DialogResult.Cancel;
                 this.StartPosition = FormStartPosition.CenterScreen;
                 this.MinimizeBox = false;
                 InitializeComponent();
+                this.createDFRControl1.CreateDFR += CloseDialogWithSuccess;
+                this.applyDFRControl1.ApplyDFR += CloseDialogWithSuccess;
             }
-            else {
+            else
                 InitializeComponent();
-            }
 
             // If a command was supplied, for the tab.
             switch (command) {
@@ -53,6 +55,11 @@ namespace DFRTool.GUI.Forms {
                 this.Controls.Remove(tabCommand);
                 this.BackColor = System.Drawing.SystemColors.Control;
             }
+        }
+
+        private void CloseDialogWithSuccess(object sender, EventArgs e) {
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         /// <summary>

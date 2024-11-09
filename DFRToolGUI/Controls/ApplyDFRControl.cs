@@ -87,6 +87,12 @@ namespace DFRTool.GUI.Controls {
             }
 
             InfoMessage("DFR file applied successfully.");
+            ApplyDFR(this, EventArgs.Empty);
         }
+
+        /// <summary>
+        /// Event triggered after a DFR file is successfully applied.
+        /// </summary>
+        public event EventHandler ApplyDFR;
     }
 }

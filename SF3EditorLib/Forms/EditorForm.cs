@@ -301,8 +301,8 @@ namespace SF3.Editor.Forms {
         public bool GenerateDFRFile() {
             var form = new frmDFRTool(CommandType.Create, dialogMode: true);
             form.CreateDFRAlteredData = FileEditor.GetAllData();
-            _ = form.ShowDialog();
-            return true;
+            var dialogResult = form.ShowDialog();
+            return (dialogResult == DialogResult.OK);
         }
 
         /// <summary>

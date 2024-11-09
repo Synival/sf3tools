@@ -61,7 +61,7 @@
             this.cbOpenWhenGenerated.Name = "cbOpenWhenGenerated";
             this.cbOpenWhenGenerated.Size = new System.Drawing.Size(233, 30);
             this.cbOpenWhenGenerated.TabIndex = 23;
-            this.cbOpenWhenGenerated.Text = "Open automatically when generated\r\n(.DFR files can be opened in any text editor)";
+            this.cbOpenWhenGenerated.Text = "Open automatically when created\r\n(.DFR files can be opened in any text editor)";
             this.cbOpenWhenGenerated.UseVisualStyleBackColor = true;
             // 
             // btnGenerateDFR
@@ -71,7 +71,7 @@
             this.btnGenerateDFR.Name = "btnGenerateDFR";
             this.btnGenerateDFR.Size = new System.Drawing.Size(87, 25);
             this.btnGenerateDFR.TabIndex = 24;
-            this.btnGenerateDFR.Text = "Generate DFR";
+            this.btnGenerateDFR.Text = "Create DFR";
             this.btnGenerateDFR.UseVisualStyleBackColor = true;
             this.btnGenerateDFR.Click += new System.EventHandler(this.btnGenerateDFR_Click);
             // 

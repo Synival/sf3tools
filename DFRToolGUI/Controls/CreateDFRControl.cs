@@ -96,11 +96,11 @@ namespace DFRTool.GUI.Controls {
                 File.WriteAllText(tbOutputFile.Text, dfrText);
             }
             catch (Exception ex) {
-                ErrorMessage("DFR generation failed:\n\n" + ex.Message);
+                ErrorMessage("DFR creation failed:\n\n" + ex.Message);
                 return;
             }
 
-            InfoMessage("DFR file generated successfully.");
+            InfoMessage("DFR file created successfully.");
 
             if (cbOpenWhenGenerated.Checked) {
                 _ = new Process {
@@ -109,6 +109,13 @@ namespace DFRTool.GUI.Controls {
                     }
                 }.Start();
             }
+
+            CreateDFR(this, EventArgs.Empty);
         }
+
+        /// <summary>
+        /// Event triggered after a DFR file is successfully created.
+        /// </summary>
+        public event EventHandler CreateDFR;
     }
 }

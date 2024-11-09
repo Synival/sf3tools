@@ -149,7 +149,7 @@ namespace SF3.Editor.Forms
             this.tsmiFile_GenerateDFRFile.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.D)));
             this.tsmiFile_GenerateDFRFile.Size = new System.Drawing.Size(240, 22);
-            this.tsmiFile_GenerateDFRFile.Text = "Generate DFR File...";
+            this.tsmiFile_GenerateDFRFile.Text = "Create DFR File...";
             this.tsmiFile_GenerateDFRFile.Click += new System.EventHandler(this.tsmiFile_generateDFRFile_Click);
             // 
             // tsSeparator_File3
