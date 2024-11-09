@@ -20,15 +20,15 @@ namespace ShiningExtract
                 {
                     string baseFilename = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
 
-                    var mpdFile = new MPDFile();
-                    mpdFile.FetchChunkDefinitions(stream);
-                    var decompressedChunks = mpdFile.DecompressAllChunks(stream, Path.Combine(textBox1.Text, baseFilename));
+                    var mpdFile = new MPDFile(stream);
+                    var decompressedChunks = mpdFile.DecompressAllChunks(Path.Combine(textBox1.Text, baseFilename));
 
                     Directory.CreateDirectory(textBox1.Text);
                     Directory.CreateDirectory(textBox2.Text);
 
-                    foreach (var kv in decompressedChunks)
-                        File.WriteAllBytes(Path.Combine(textBox2.Text, baseFilename + "_" + kv.Key + "_decompressed.bin"), kv.Value);
+                    for (int i = 0; i < decompressedChunks.Length; i++)
+                        if (decompressedChunks[i] != null)
+                            File.WriteAllBytes(Path.Combine(textBox2.Text, baseFilename + "_" + i + "_decompressed.bin"), decompressedChunks[i]);
                 }
             }
         }
@@ -51,8 +51,8 @@ namespace ShiningExtract
             {
                 using (var stream = openFileDialog1.OpenFile()) {
                     string baseFilename = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
-                    var chunk = new ChunkDefinition(0, (int)stream.Length);
-                    var output = chunk.Decompress(stream, Path.Combine(textBox1.Text, baseFilename + "_" + "_log.txt"));
+                    var chunk = new Chunk(stream, (int)stream.Length);
+                    var output = chunk.Decompress(Path.Combine(textBox1.Text, baseFilename + "_" + "_log.txt"));
                     File.WriteAllBytes(Path.Combine(textBox2.Text, baseFilename + "_decompressed.bin"), output);
                 }
             }

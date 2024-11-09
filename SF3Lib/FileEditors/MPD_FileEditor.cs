@@ -13,9 +13,8 @@ namespace SF3.FileEditors {
         }
 
         public override bool LoadFile(string filename, Stream stream) {
-            var mpdFile = new MPDFile();
-            mpdFile.FetchChunkDefinitions(stream);
-            var chunk5Data = mpdFile.Chunks[5].Decompress(stream);
+            var mpdFile = new MPDFile(stream);
+            var chunk5Data = mpdFile.Chunks[5].Decompress();
 
             using (var chunk5Stream = new MemoryStream(chunk5Data))
                 return base.LoadFile(filename, chunk5Stream);

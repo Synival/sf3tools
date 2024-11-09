@@ -3,25 +3,29 @@ using System.Linq;
 using System.Text;
 
 namespace MPDLib {
-    public class ChunkDefinition {
-        public ChunkDefinition(int offset, int length) {
-            Offset = offset;
-            Length = length;
+    public class Chunk {
+        public Chunk(Stream stream, int size) {
+            Size = size;
+
+            // Snarf all the data.
+            Data = new byte[size];
+            if (size > 0)
+                stream.Read(Data, 0, size);
         }
 
-        public byte[] Decompress(Stream stream, string logFile = null) {
-            stream.Seek(Offset, SeekOrigin.Begin);
+        public byte[] Decompress(string logFile = null) {
+            logFile = "MyLog.txt";
 
-            using (var reader = new BinaryReader(stream, Encoding.UTF8, true))
             using (var logWriter = (logFile == null) ? null : new StreamWriter(logFile)) {
                 byte[] outputArray = new byte[0x10000];
                 int outputPosition = 0;
                 bool prevRaw = false;
                 int bufferLoc = 0;
 
-                while ((reader.BaseStream.Position - Offset) < Length) {
-                    byte ctrl1 = reader.ReadByte();
-                    byte ctrl2 = reader.ReadByte();
+                int pos = 0;
+                while (pos < Size) {
+                    byte ctrl1 = Data[pos++];
+                    byte ctrl2 = Data[pos++];
                     int control = ctrl1 << 8 | ctrl2;
                     for (int i = 0; i < 16; i++) {
                         //1 == control
@@ -29,9 +33,9 @@ namespace MPDLib {
                             if (prevRaw) {
                                 logWriter?.WriteLine();
                             }
-                            int currentLoc = (int)(reader.BaseStream.Position - Offset);
-                            byte val1 = reader.ReadByte();
-                            byte val2 = reader.ReadByte();
+                            int currentLoc = pos;
+                            byte val1 = Data[pos++];
+                            byte val2 = Data[pos++];
                             if (val1 == 0 && val2 == 0) {
                                 logWriter?.WriteLine(bufferLoc.ToString("X2") + ": Ending due to 0000 control value at " + currentLoc.ToString("X2"));
                                 break;
@@ -51,11 +55,11 @@ namespace MPDLib {
                         }
                         else //2 == data
                         {
-                            if (!prevRaw) {
-                                logWriter?.Write(bufferLoc.ToString("X2") + ": Raw at " +(reader.BaseStream.Position - Offset).ToString("X2") + ": ");
-                            }
-                            byte val1 = reader.ReadByte();
-                            byte val2 = reader.ReadByte();
+                            if (!prevRaw)
+                                logWriter?.Write(bufferLoc.ToString("X2") + ": Raw at " + pos.ToString("X2") + ": ");
+
+                            byte val1 = Data[pos++];
+                            byte val2 = Data[pos++];
                             outputArray[outputPosition++] = val1;
                             outputArray[outputPosition++] = val2;
                             logWriter?.Write(val1.ToString("X2"));
@@ -70,7 +74,7 @@ namespace MPDLib {
             }
         }
 
-        public int Offset { get; }
-        public int Length { get; }
+        public int Size { get; }
+        public byte[] Data { get; }
     }
 }

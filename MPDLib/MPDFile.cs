@@ -8,25 +8,36 @@ namespace MPDLib {
     /// 
     /// </summary>
     public class MPDFile {
-        public void FetchChunkDefinitions(Stream stream) {
+        public MPDFile(Stream stream) {
+            FetchChunks(stream);
+        }
+
+        private void FetchChunks(Stream stream) {
             using (var reader = new BinaryReader(stream, Encoding.UTF8, true)) {
-                stream.Seek(0x2000, SeekOrigin.Begin);
-                Chunks = new ChunkDefinition[32];
-                for (int i = 0; i < Chunks.Length; i++)
-                    Chunks[i] = new ChunkDefinition(reader.ReadLittleEndianInt32() - 0x290000, reader.ReadLittleEndianInt32());
+                _ = stream.Seek(0x2000, SeekOrigin.Begin);
+                Chunks = new Chunk[20];
+
+                for (int i = 0; i < Chunks.Length; i++) {
+                    var offset = reader.ReadLittleEndianInt32() - 0x290000;
+                    var size = reader.ReadLittleEndianInt32();
+                    var pos = stream.Seek(0, SeekOrigin.Current);
+                    stream.Seek(offset, SeekOrigin.Begin);
+                    Chunks[i] = new Chunk(stream, size);
+                    _ = stream.Seek(pos, SeekOrigin.Begin);
+                }
             }
         }
 
-        public Dictionary<int, byte[]> DecompressAllChunks(Stream stream, string logFileBaseFilename = null) {
-            var data = new Dictionary<int, byte[]>();
+        public byte[][] DecompressAllChunks(string logFileBaseFilename = null) {
+            var data = new byte[Chunks.Length][];
             for (int c = 5; c < Chunks.Length; c++) {
                 var chunk = Chunks[c];
-                if (chunk.Length > 0 && c != 20)
-                    data[c] = chunk.Decompress(stream, logFileBaseFilename + "_" + c + "_log.txt");
+                if (chunk.Size > 0 && c != 20)
+                    data[c] = chunk.Decompress(logFileBaseFilename + "_" + c + "_log.txt");
             }
             return data;
         }
 
-        public ChunkDefinition[] Chunks { get; private set; }
+        public Chunk[] Chunks { get; private set; }
     }
 }
