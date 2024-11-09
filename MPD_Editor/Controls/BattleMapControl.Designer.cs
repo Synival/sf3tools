@@ -32,10 +32,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.MaximumSize = new System.Drawing.Size(1536, 1536);
-            this.MinimumSize = new System.Drawing.Size(1536, 1536);
+            this.MaximumSize = new System.Drawing.Size(1024, 1024);
+            this.MinimumSize = new System.Drawing.Size(1024, 1024);
             this.Name = "BattleMapControl";
-            this.Size = new System.Drawing.Size(1536, 1536);
+            this.Size = new System.Drawing.Size(1024, 1024);
             this.ResumeLayout(false);
 
         }
