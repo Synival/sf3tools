@@ -1,7 +1,7 @@
 using CommonLib.Attributes;
 using SF3.FileEditors;
 
-namespace SF3.Models.X1_Battle {
+namespace SF3.Models.X1.Battle {
     public class SpawnZone : Model {
         private readonly int unknown00;
         private readonly int unknown02;

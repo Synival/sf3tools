@@ -1,7 +1,7 @@
 using CommonLib.Attributes;
 using SF3.FileEditors;
 
-namespace SF3.Models.X1_Town {
+namespace SF3.Models.X1.Town {
     public class Arrow : Model {
         private readonly int unknown0; //2 byte
         private readonly int textID; //2 byte

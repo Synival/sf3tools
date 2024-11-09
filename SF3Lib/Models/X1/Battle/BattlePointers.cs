@@ -1,7 +1,7 @@
 using CommonLib.Attributes;
 using SF3.FileEditors;
 
-namespace SF3.Models.X1_Battle {
+namespace SF3.Models.X1.Battle {
     public class BattlePointers : Model {
         private readonly int battlePointer;
 

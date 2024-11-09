@@ -1,7 +1,7 @@
 using SF3.FileEditors;
-using SF3.Models.X1_Town;
+using SF3.Models.X1.Town;
 
-namespace SF3.Tables.X1_Town {
+namespace SF3.Tables.X1.Town {
     public class NpcTable : Table<Npc> {
         public NpcTable(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }

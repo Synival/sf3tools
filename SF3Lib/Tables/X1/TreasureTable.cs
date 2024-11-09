@@ -1,7 +1,7 @@
 using SF3.FileEditors;
-using SF3.Models.X1_All;
+using SF3.Models.X1;
 
-namespace SF3.Tables.X1_All {
+namespace SF3.Tables.X1 {
     public class TreasureTable : Table<Treasure> {
         public TreasureTable(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }

@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
-using SF3.Models.X1_Battle;
+using SF3.Models.X1.Battle;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Tables.Shared;
-using SF3.Tables.X1_All;
-using SF3.Tables.X1_Battle;
-using SF3.Tables.X1_Town;
+using SF3.Tables.X1;
+using SF3.Tables.X1.Battle;
+using SF3.Tables.X1.Town;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 

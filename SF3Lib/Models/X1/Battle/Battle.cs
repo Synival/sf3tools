@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using CommonLib.Attributes;
 using SF3.FileEditors;
 using SF3.Tables;
-using SF3.Tables.X1_Battle;
+using SF3.Tables.X1.Battle;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 
-namespace SF3.Models.X1_Battle {
+namespace SF3.Models.X1.Battle {
     public class Battle {
         public Battle(IByteEditor editor, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable) {
             Editor    = editor;

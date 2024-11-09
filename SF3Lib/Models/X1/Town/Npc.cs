@@ -1,7 +1,7 @@
 using CommonLib.Attributes;
 using SF3.FileEditors;
 
-namespace SF3.Models.X1_Town {
+namespace SF3.Models.X1.Town {
     public class Npc : Model {
         private readonly int spriteID;
         private readonly int unknown1;
