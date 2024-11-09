@@ -7,10 +7,27 @@ using static CommonLib.Win.Utils.MessageUtils;
 namespace DFRTool.GUI.Controls {
     public partial class ApplyDFRControl : UserControl {
         private const string c_changesAppliedToOriginalFile = "(Changes Applied to Original File)";
+        private string _lastValidOutputFile = "";
 
         public ApplyDFRControl() {
             InitializeComponent();
-            tbOutputFile.Text = cbApplyToOriginalFile.Checked ? c_changesAppliedToOriginalFile : "";
+            UpdateOutputFileControls();
+        }
+
+        private void UpdateOutputFileControls() {
+            // Do nothing if the control was enabled and should stay enabled.
+            bool shouldBeEnabled = !cbApplyToOriginalFile.Checked;
+            if (shouldBeEnabled && tbOutputFile.Enabled)
+                return;
+
+            // Remember the last enabled value so we can put it back later if necessary.
+            if (tbOutputFile.Enabled)
+                _lastValidOutputFile = tbOutputFile.Text;
+
+            btnOutputFile.Enabled = shouldBeEnabled;
+            tbOutputFile.Enabled  = shouldBeEnabled;
+
+            tbOutputFile.Text = shouldBeEnabled ? _lastValidOutputFile : c_changesAppliedToOriginalFile;
         }
 
         private void btnOriginalFile_Click(object sender, EventArgs e) {
@@ -39,12 +56,7 @@ namespace DFRTool.GUI.Controls {
             tbDFRFile.Text = dialog.FileName;
         }
 
-        private void cbApplyToOriginalFile_CheckedChanged(object sender, EventArgs e) {
-            bool isChecked = cbApplyToOriginalFile.Checked;
-            btnOutputFile.Enabled = !isChecked;
-            tbOutputFile.Enabled = !isChecked;
-            tbOutputFile.Text = isChecked ? c_changesAppliedToOriginalFile : "";
-        }
+        private void cbApplyToOriginalFile_CheckedChanged(object sender, EventArgs e) => UpdateOutputFileControls();
 
         private void btnOutputFile_Click(object sender, EventArgs e) {
             if (cbApplyToOriginalFile.Checked)
@@ -55,6 +67,7 @@ namespace DFRTool.GUI.Controls {
             };
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
+
             tbOutputFile.Text = dialog.FileName;
         }
 
