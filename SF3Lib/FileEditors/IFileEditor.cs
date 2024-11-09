@@ -36,14 +36,14 @@ namespace SF3.FileEditors {
         bool CloseFile();
 
         /// <summary>
-        /// 'True' when the file is loaded.
-        /// </summary>
-        bool IsLoaded { get; }
-
-        /// <summary>
-        /// Filename of the file loaded.
+        /// Filename of the file loaded, with full path.
         /// </summary>
         string Filename { get; }
+
+        /// <summary>
+        /// Filename without the path.
+        /// </summary>
+        string ShortFilename { get; }
 
         /// <summary>
         /// The title of the file being modified for display
@@ -94,10 +94,5 @@ namespace SF3.FileEditors {
         /// Event that occurs whenever the 'Title' property is changed.
         /// </summary>
         event EventHandler TitleChanged;
-
-        /// <summary>
-        /// Event that occurs whenever the 'IsLoaded' property is changed.
-        /// </summary>
-        event EventHandler IsLoadedChanged;
     }
 }

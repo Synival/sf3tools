@@ -5,7 +5,6 @@ namespace SF3.FileEditors {
     /// Wrapper class for editing a byte[].
     /// </summary>
     public interface IByteEditor {
-
         /// <summary>
         /// Returns a copy of all data loaded into the editor.
         /// </summary>
@@ -99,9 +98,19 @@ namespace SF3.FileEditors {
         void SetBit(int location, int bit, bool value);
 
         /// <summary>
+        /// 'True' when the file is loaded.
+        /// </summary>
+        bool IsLoaded { get; }
+
+        /// <summary>
         /// 'True' when the data is modified.
         /// </summary>
         bool IsModified { get; set; }
+
+        /// <summary>
+        /// Event that occurs when the 'Modified' property is changed.
+        /// </summary>
+        event EventHandler IsLoadedChanged;
 
         /// <summary>
         /// Event that occurs when the 'Modified' property is changed.
