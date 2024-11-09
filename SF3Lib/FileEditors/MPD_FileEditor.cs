@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using CommonLib.Attributes;
 using MPDLib;
+using SF3.Models.MPD;
 using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Tables.MPD;
@@ -26,6 +27,10 @@ namespace SF3.FileEditors {
             ChunkEditors = new IByteEditor[Chunks.Chunks.Length];
             ChunkEditors[2] = new ByteEditor(Chunks[2].Data);
             ChunkEditors[5] = new ByteEditor(Chunks[5].Decompress());
+
+            // Texture editors.
+            for (int i = 0; i < 4; i++)
+                ChunkEditors[i + 6] = new ByteEditor(Chunks[i + 6].Decompress());
 
             return base.LoadFile(filename, stream);
         }
@@ -57,6 +62,12 @@ namespace SF3.FileEditors {
             if (Chunks[2].Data?.Length >= (64 * 64 * 2))
                 tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(ChunkEditors[2], 0x0000));
 
+            TextureChunks = new TextureChunk[4];
+            for (int i = 0; i < 4; i++) {
+                if (Chunks[i + 6].Data?.Length > 0)
+                    TextureChunks[i] = new TextureChunk();
+            }
+
             return tables;
         }
 
@@ -67,6 +78,7 @@ namespace SF3.FileEditors {
             TileHeightRows           = null;
             TileTerrainRows          = null;
             TileItemRows             = null;
+            TextureChunks            = null;
         }
 
         public ChunkCollection Chunks { get; private set; }
@@ -90,5 +102,8 @@ namespace SF3.FileEditors {
 
         [BulkCopyRecurse]
         public TileItemRowTable TileItemRows { get; private set; }
+
+        [BulkCopyRecurse]
+        public TextureChunk[] TextureChunks { get; private set; }
     }
 }

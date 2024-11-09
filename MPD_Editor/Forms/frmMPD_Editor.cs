@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Windows.Forms;
 using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.FileEditors;
+using SF3.Models.MPD;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
 namespace SF3.MPD_Editor.Forms {
@@ -27,6 +29,36 @@ namespace SF3.MPD_Editor.Forms {
 
         protected override IFileEditor MakeFileEditor() => new MPD_FileEditor(Scenario);
 
+        private class PopulateTextureChunkTabConfig : IPopulateTabConfig {
+            public PopulateTextureChunkTabConfig(TabPage tabPage, TextureChunk textureChunk) {
+                TabPage = tabPage;
+                TextureChunk = textureChunk;
+            }
+
+            public TabPage TabPage { get; }
+            public TextureChunk TextureChunk { get; }
+
+            public bool CanPopulate => TextureChunk != null;
+
+            public bool Populate() {
+                // TODO: more tables!
+                return true;
+#if false
+                var tcec = TabPage.Controls[0] as TextureChunkEditorControl;
+                return bec.Tabs.PopulateTabs(new List<IPopulateTabConfig>() {
+                    new PopulateOLVTabConfig(bec.TabHeader,           bec.OLVHeader,           BattleTable.HeaderTable),
+                    new PopulateOLVTabConfig(bec.TabSlotTab1,         bec.OLVSlotTab1,         BattleTable.SlotTable),
+                    new PopulateOLVTabConfig(bec.TabSlotTab2,         bec.OLVSlotTab2,         BattleTable.SlotTable),
+                    new PopulateOLVTabConfig(bec.TabSlotTab3,         bec.OLVSlotTab3,         BattleTable.SlotTable),
+                    new PopulateOLVTabConfig(bec.TabSlotTab4,         bec.OLVSlotTab4,         BattleTable.SlotTable),
+                    new PopulateOLVTabConfig(bec.TabSpawnZones,       bec.OLVSpawnZones,       BattleTable.SpawnZoneTable),
+                    new PopulateOLVTabConfig(bec.TabAITargetPosition, bec.OLVAITargetPosition, BattleTable.AITable),
+                    new PopulateOLVTabConfig(bec.TabScriptedMovement, bec.OLVScriptedMovement, BattleTable.CustomMovementTable)
+                });
+#endif
+            }
+        }
+
         protected override bool OnLoad() {
             if (!base.OnLoad())
                 return false;
@@ -38,6 +70,11 @@ namespace SF3.MPD_Editor.Forms {
                 new PopulateOLVTabConfig(tabTileHeights,           olvTileHeights,           FileEditor.TileHeightRows),
                 new PopulateOLVTabConfig(tabTileTerrain,           olvTileTerrain,           FileEditor.TileTerrainRows),
                 new PopulateOLVTabConfig(tabTileItems,             olvTileItems,             FileEditor.TileItemRows),
+
+                new PopulateTextureChunkTabConfig(tabTextures1, FileEditor.TextureChunks?[0]),
+                new PopulateTextureChunkTabConfig(tabTextures2, FileEditor.TextureChunks?[1]),
+                new PopulateTextureChunkTabConfig(tabTextures3, FileEditor.TextureChunks?[2]),
+                new PopulateTextureChunkTabConfig(tabTextures4, FileEditor.TextureChunks?[3]),
             });
         }
 

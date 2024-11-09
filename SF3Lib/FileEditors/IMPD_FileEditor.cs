@@ -1,4 +1,5 @@
 using MPDLib;
+using SF3.Models.MPD;
 using SF3.Tables.MPD;
 
 namespace SF3.FileEditors {
@@ -19,5 +20,6 @@ namespace SF3.FileEditors {
         TileHeightRowTable TileHeightRows { get; }
         TileTerrainRowTable TileTerrainRows { get; }
         TileItemRowTable TileItemRows { get; }
+        TextureChunk[] TextureChunks { get; }
     }
 }

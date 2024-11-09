@@ -398,6 +398,10 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTileTerrainX61Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileTerrainX62Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileTerrainX63Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tabTextures1 = new System.Windows.Forms.TabPage();
+            this.tabTextures2 = new System.Windows.Forms.TabPage();
+            this.tabTextures3 = new System.Windows.Forms.TabPage();
+            this.tabTextures4 = new System.Windows.Forms.TabPage();
             this.menuStrip2.SuspendLayout();
             this.tabTileItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileItems)).BeginInit();
@@ -1090,6 +1094,10 @@ namespace SF3.MPD_Editor.Forms {
             this.tabMain.Controls.Add(this.tabTileHeights);
             this.tabMain.Controls.Add(this.tabTileTerrain);
             this.tabMain.Controls.Add(this.tabTileItems);
+            this.tabMain.Controls.Add(this.tabTextures1);
+            this.tabMain.Controls.Add(this.tabTextures2);
+            this.tabMain.Controls.Add(this.tabTextures3);
+            this.tabMain.Controls.Add(this.tabTextures4);
             this.tabMain.Location = new System.Drawing.Point(0, 27);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
@@ -3850,6 +3858,42 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTileTerrainX63Tile.Text = "X63";
             this.lvcTileTerrainX63Tile.Width = 50;
             // 
+            // tabTextures1
+            // 
+            this.tabTextures1.Location = new System.Drawing.Point(4, 22);
+            this.tabTextures1.Name = "tabTextures1";
+            this.tabTextures1.Size = new System.Drawing.Size(756, 480);
+            this.tabTextures1.TabIndex = 9;
+            this.tabTextures1.Text = "Textures1";
+            this.tabTextures1.UseVisualStyleBackColor = true;
+            // 
+            // tabTextures2
+            // 
+            this.tabTextures2.Location = new System.Drawing.Point(4, 22);
+            this.tabTextures2.Name = "tabTextures2";
+            this.tabTextures2.Size = new System.Drawing.Size(756, 480);
+            this.tabTextures2.TabIndex = 10;
+            this.tabTextures2.Text = "Textures2";
+            this.tabTextures2.UseVisualStyleBackColor = true;
+            // 
+            // tabTextures3
+            // 
+            this.tabTextures3.Location = new System.Drawing.Point(4, 22);
+            this.tabTextures3.Name = "tabTextures3";
+            this.tabTextures3.Size = new System.Drawing.Size(756, 480);
+            this.tabTextures3.TabIndex = 11;
+            this.tabTextures3.Text = "Textures3";
+            this.tabTextures3.UseVisualStyleBackColor = true;
+            // 
+            // tabTextures4
+            // 
+            this.tabTextures4.Location = new System.Drawing.Point(4, 22);
+            this.tabTextures4.Name = "tabTextures4";
+            this.tabTextures4.Size = new System.Drawing.Size(756, 480);
+            this.tabTextures4.TabIndex = 12;
+            this.tabTextures4.Text = "Textures4";
+            this.tabTextures4.UseVisualStyleBackColor = true;
+            // 
             // frmMPDEditor
             // 
             this.AllowDrop = true;
@@ -4259,6 +4303,10 @@ namespace SF3.MPD_Editor.Forms {
         private BrightIdeasSoftware.OLVColumn lvcTileTerrainX61Tile;
         private BrightIdeasSoftware.OLVColumn lvcTileTerrainX62Tile;
         private BrightIdeasSoftware.OLVColumn lvcTileTerrainX63Tile;
+        private System.Windows.Forms.TabPage tabTextures1;
+        private System.Windows.Forms.TabPage tabTextures2;
+        private System.Windows.Forms.TabPage tabTextures3;
+        private System.Windows.Forms.TabPage tabTextures4;
     }
 }
 
