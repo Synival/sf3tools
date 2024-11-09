@@ -26,6 +26,7 @@ namespace SF3.FileEditors {
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
+                (TileRows     = null),
                 (TileRows     = new TileRowTable    (this, 0x4000)),
                 (ItemTileRows = new ItemTileRowTable(this, 0x6000)),
             };
@@ -35,6 +36,9 @@ namespace SF3.FileEditors {
             TileRows     = null;
             ItemTileRows = null;
         }
+
+        [BulkCopyRecurse]
+        public HeaderTable Header { get; private set; }
 
         [BulkCopyRecurse]
         public TileRowTable TileRows { get; private set; }

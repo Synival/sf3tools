@@ -32,32 +32,10 @@ namespace SF3.MPD_Editor.Forms {
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
+                new PopulateOLVTabConfig(tabHeader,    olvHeader,    FileEditor.Header),
                 new PopulateOLVTabConfig(tabItemTiles, olvItemTiles, FileEditor.ItemTileRows),
-                new PopulateOLVTabConfig(tabTiles, olvTiles, FileEditor.TileRows),
+                new PopulateOLVTabConfig(tabTiles,     olvTiles,     FileEditor.TileRows),
             });
-        }
-
-        private bool initialise() {
-/*
-            if (!ItemList.loadItemList()) {
-                _ = MessageBox.Show("Could not load Resources/itemList.xml.");
-                return false;
-            }
-
-            if (!PresetList.loadPresetList()) {
-                _ = MessageBox.Show("Could not load Resources/spellIndexList.xml.");
-                return false;
-            }
-*/
-            olvItemTiles.ClearObjects();
-            olvTiles.ClearObjects();
-
-/*
-            olvItems.AddObjects(PresetList.getPresetList());
-            objectListView1.AddObjects(ItemList.getItemList());
-*/
-
-            return true;
         }
 
         private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
