@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SF3 Tile Editor")]
+[assembly: AssemblyTitle("SF3 MPD Editor")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SF3.TileEditor")]
+[assembly: AssemblyProduct("SF3.MPD_Editor")]
 [assembly: AssemblyCopyright("Copyright © Boneidol and RikaPSO  2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -6,8 +6,8 @@ using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.FileEditors {
-    public class TileFileEditor : SF3FileEditor, ITileFileEditor {
-        public TileFileEditor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
+    public class MPD_FileEditor : SF3FileEditor, IMPD_FileEditor {
+        public MPD_FileEditor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
         }
 
         public override IEnumerable<ITable> MakeTables() {

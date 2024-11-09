@@ -5,15 +5,15 @@ using SF3.Editor.Forms;
 using SF3.FileEditors;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
-namespace SF3.TileEditor.Forms {
+namespace SF3.MPD_Editor.Forms {
 
-    public partial class frmTileEditor : EditorForm {
+    public partial class frmMPDEditor : EditorForm {
         // Used to display version in the application
         protected override string Version => "0.3";
 
-        public new ITileFileEditor FileEditor => base.FileEditor as ITileFileEditor;
+        public new IMPD_FileEditor FileEditor => base.FileEditor as IMPD_FileEditor;
 
-        public frmTileEditor() {
+        public frmMPDEditor() {
             InitializeComponent();
             InitializeEditor(menuStrip2);
 
@@ -25,7 +25,7 @@ namespace SF3.TileEditor.Forms {
         protected override string FileDialogFilter
             => "SF3 Data (*_decompressed.BIN)|*_decompressed.BIN|" + base.FileDialogFilter;
 
-        protected override IFileEditor MakeFileEditor() => new TileFileEditor(Scenario);
+        protected override IFileEditor MakeFileEditor() => new MPD_FileEditor(Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())

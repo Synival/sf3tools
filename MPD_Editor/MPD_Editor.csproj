@@ -8,8 +8,8 @@
     <ProjectGuid>{1A06A3B9-19FD-49FF-91ED-BFBBDD692422}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SF3.TileEditor</RootNamespace>
-    <AssemblyName>SF3 Tile editor</AssemblyName>
+    <RootNamespace>SF3.MPDEditor</RootNamespace>
+    <AssemblyName>SF3 MPD editor</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>treasure.ico</ApplicationIcon>
@@ -52,16 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\frmTileEditor.cs">
+    <Compile Include="Forms\frmMPD_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmTileEditor.Designer.cs">
-      <DependentUpon>frmTileEditor.cs</DependentUpon>
+    <Compile Include="Forms\frmMPD_Editor.Designer.cs">
+      <DependentUpon>frmMPD_Editor.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\frmTileEditor.resx">
-      <DependentUpon>frmTileEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmMPD_Editor.resx">
+      <DependentUpon>frmMPD_Editor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

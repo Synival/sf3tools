@@ -1,5 +1,5 @@
-﻿namespace SF3.TileEditor.Forms {
-    partial class frmTileEditor {
+﻿namespace SF3.MPD_Editor.Forms {
+    partial class frmMPDEditor {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTileEditor));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMPDEditor));
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_OpensChunk5Files = new System.Windows.Forms.ToolStripMenuItem();
@@ -1521,8 +1521,8 @@
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.menuStrip2);
             this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
-            this.Name = "frmMain";
-            this.Text = "SF3 Tile Editor";
+            this.Name = "frmMPD_Editor";
+            this.Text = "SF3 MPD Editor";
             this.Controls.SetChildIndex(this.menuStrip2, 0);
             this.Controls.SetChildIndex(this.tabMain, 0);
             this.menuStrip2.ResumeLayout(false);
