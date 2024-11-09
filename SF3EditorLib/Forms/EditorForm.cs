@@ -222,6 +222,17 @@ namespace SF3.Editor.Forms {
             return success;
         }
 
+        private DialogResult PromptForSave() {
+            var result = MessageBox.Show(SavePromptString, "Save Changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.Cancel) {
+                return result;
+            }
+            else if (result == DialogResult.Yes)
+                if (!Save())
+                    return DialogResult.Cancel;
+            return result;
+        }
+
         /// <summary>
         /// Closes a file if open.
         /// If may prompt the user to save if the file has been modified.
@@ -233,16 +244,9 @@ namespace SF3.Editor.Forms {
             if (FileEditor == null)
                 return true;
 
-            if (!force && FileEditor.IsModified) {
-                var result = MessageBox.Show(SavePromptString, "Save Changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (result == DialogResult.Cancel) {
+            if (!force && FileEditor.IsModified)
+                if (PromptForSave() == DialogResult.Cancel)
                     return false;
-                }
-                else if (result == DialogResult.Yes) {
-                    if (!SaveFileDialog())
-                        return false;
-                }
-            }
 
             ObjectListViews.ForEach(x => x.ClearObjects());
             _ = FileEditor.CloseFile();
@@ -260,6 +264,10 @@ namespace SF3.Editor.Forms {
             if (!IsLoaded)
                 return false;
 
+            if (FileEditor.IsModified)
+                if (PromptForSave() == DialogResult.Cancel)
+                    return false;
+
             var form = new frmDFRTool(CommandType.Apply, dialogMode: true);
             form.ApplyDFROriginalData = FileEditor.GetAllData();
             form.ApplyDFRInMemory = true;
@@ -273,7 +281,7 @@ namespace SF3.Editor.Forms {
                 if (newBytes == null)
                     throw new NullReferenceException("Internal error: No result from 'Apply DFR' command!");
 
-                if (!CloseFile())
+                if (!CloseFile(true))
                     return false;
                 using (var newBytesStream = new MemoryStream(newBytes)) {
                     if (!LoadFile(filename, newBytesStream)) {
