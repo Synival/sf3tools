@@ -11,7 +11,7 @@ namespace DFRTool {
 
         private const string c_ShortUsageString =
             "Usage:\n" +
-            "  dfrtool [GENERAL_OPTIONS] apply [APPLY_OPTIONS]... bin_file dfr_file\n" +
+            "  dfrtool [GENERAL_OPTIONS] apply [APPLY_OPTIONS]... bin_file dfr_file <output_file | -i>\n" +
             "  dfrtool [GENERAL_OPTIONS] create [CREATE_OPTIONS]... original_file altered_file\n";
         private const string c_ErrorUsageString =
             c_ShortUsageString +
@@ -26,7 +26,7 @@ namespace DFRTool {
             "  --version                 print DFRTool version\n" +
             "\n" +
             "Apply Options:\n" +
-            "  (none)\n" +
+            "  -i, --to-input            apply changes to the input .BIN file\n" +
             "\n" +
             "Create Ootions:\n" +
             "  -c, --combined-appends    merges all appended changes into one row\n" +
@@ -77,7 +77,7 @@ namespace DFRTool {
                 extraArgsBeforeCommand = generalOptions.Parse(generalArgs).ToArray();
             }
             catch (Exception e) {
-                Console.WriteLine("Exception caught: " + e.Message);
+                Console.WriteLine("Error: " + e.Message);
                 Console.Error.Write(c_ErrorUsageString);
                 return 1;
             }
@@ -119,14 +119,16 @@ namespace DFRTool {
                     return Create(remainingArgs);
 
                 default:
-                    Console.Error.WriteLine("Fatal error: unimplemented command '" + command.ToString() + "'");
+                    Console.Error.WriteLine("Internal error: unimplemented command '" + command.ToString() + "'");
                     return 1;
             }
         }
 
         private static int Apply(string[] args) {
+            var applyToInputFile = false;
+
             var options = new OptionSet() {
-                // more options coming sometime!
+               { "i|to-input", v => applyToInputFile = true },
             };
 
             string[] extra;
@@ -134,34 +136,40 @@ namespace DFRTool {
                 extra = options.Parse(args).ToArray();
             }
             catch (Exception e) {
-                Console.WriteLine("Exception caught: " + e.Message);
+                Console.WriteLine("Error: " + e.Message);
                 Console.Error.Write(c_ErrorUsageString);
                 return 1;
             }
 
+            int requiredArguments = applyToInputFile ? 2 : 3;
+
             // Require two arguments.
-            if (extra.Length != 2) {
+            if (extra.Length != requiredArguments) {
                 Console.Error.WriteLine("Incorrect number of 'apply' arguments.");
                 Console.Error.Write(c_ErrorUsageString);
                 return 1;
             }
 
-            var fileToPatchName = extra[0];
+            var inputFilename = extra[0];
             var dfrFilename = extra[1];
+            var outputFilename = applyToInputFile ? inputFilename : extra[2];
 
             try {
                 var diff = new ByteDiff(dfrFilename);
-                var oldBytes = File.ReadAllBytes(fileToPatchName);
+                var oldBytes = File.ReadAllBytes(inputFilename);
                 var newBytes = diff.ApplyTo(oldBytes);
-                File.WriteAllBytes(fileToPatchName, newBytes);
+                File.WriteAllBytes(outputFilename, newBytes);
             }
             catch (Exception ex) {
-                Console.Error.WriteLine(ex.Message);
+                Console.Error.WriteLine("Error: " + ex.Message);
                 return 1;
             }
 
-            // We did it! Write the DFR file.
-            Console.WriteLine(fileToPatchName + " patched successfully.");
+            // We did it! Give the user a nice message.
+            if (applyToInputFile)
+                Console.WriteLine(outputFilename + " created successfully.");
+            else
+                Console.WriteLine(outputFilename + " patched successfully.");
             return 0;
         }
 
@@ -177,7 +185,7 @@ namespace DFRTool {
                 extra = options.Parse(args).ToArray();
             }
             catch (Exception e) {
-                Console.WriteLine("Exception caught: " + e.Message);
+                Console.WriteLine("Error: " + e.Message);
                 Console.Error.Write(c_ErrorUsageString);
                 return 1;
             }
@@ -200,7 +208,7 @@ namespace DFRTool {
                 });
             }
             catch (Exception ex) {
-                Console.Error.WriteLine(ex.Message);
+                Console.Error.WriteLine("Error: " + ex.Message);
                 return 1;
             }
 
