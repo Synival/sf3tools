@@ -96,6 +96,34 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcItemTilesX62Treasure = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcItemTilesX63Treasure = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
+            this.tabHeader = new System.Windows.Forms.TabPage();
+            this.olvHeader = new BrightIdeasSoftware.ObjectListView();
+            this.lvcHeaderName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderUnknown1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderUnknown2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffset1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffset2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffset3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderUnknown3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderUnknown4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffset4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffsetTextureGroups = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffset6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffset7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffsetMesh1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffsetMesh2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffsetMesh3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderConst1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderConst2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffsetTextureAnimAlt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffsetPal1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffsetPal2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderUnknown5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderConst3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderUnknown6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderUnknown7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcHeaderOffset12 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabTiles = new System.Windows.Forms.TabPage();
             this.olvTiles = new BrightIdeasSoftware.ObjectListView();
             this.lvcTilesName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -164,18 +192,14 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTilesX61Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTilesX62Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTilesX63Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabHeader = new System.Windows.Forms.TabPage();
-            this.olvHeader = new BrightIdeasSoftware.ObjectListView();
-            this.lvcHeaderName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcHeaderAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.menuStrip2.SuspendLayout();
             this.tabItemTiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvItemTiles)).BeginInit();
             this.tabMain.SuspendLayout();
-            this.tabTiles.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvTiles)).BeginInit();
             this.tabHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).BeginInit();
+            this.tabTiles.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvTiles)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip2
@@ -844,6 +868,273 @@ namespace SF3.MPD_Editor.Forms {
             this.tabMain.Size = new System.Drawing.Size(764, 506);
             this.tabMain.TabIndex = 0;
             // 
+            // tabHeader
+            // 
+            this.tabHeader.Controls.Add(this.olvHeader);
+            this.tabHeader.Location = new System.Drawing.Point(4, 22);
+            this.tabHeader.Name = "tabHeader";
+            this.tabHeader.Size = new System.Drawing.Size(756, 480);
+            this.tabHeader.TabIndex = 5;
+            this.tabHeader.Text = "Header";
+            this.tabHeader.UseVisualStyleBackColor = true;
+            // 
+            // olvHeader
+            // 
+            this.olvHeader.AllColumns.Add(this.lvcHeaderName);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderAddress);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderUnknown1);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderUnknown2);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffset1);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffset2);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffset3);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderUnknown3);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderUnknown4);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffset4);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffsetTextureGroups);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffset6);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffset7);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffsetMesh1);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffsetMesh2);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffsetMesh3);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderConst1);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderConst2);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffsetTextureAnimAlt);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffsetPal1);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffsetPal2);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderUnknown5);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderConst3);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderUnknown6);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderUnknown7);
+            this.olvHeader.AllColumns.Add(this.lvcHeaderOffset12);
+            this.olvHeader.AllowColumnReorder = true;
+            this.olvHeader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.olvHeader.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvHeader.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvcHeaderName,
+            this.lvcHeaderAddress,
+            this.lvcHeaderUnknown1,
+            this.lvcHeaderUnknown2,
+            this.lvcHeaderOffset1,
+            this.lvcHeaderOffset2,
+            this.lvcHeaderOffset3,
+            this.lvcHeaderUnknown3,
+            this.lvcHeaderUnknown4,
+            this.lvcHeaderOffset4,
+            this.lvcHeaderOffsetTextureGroups,
+            this.lvcHeaderOffset6,
+            this.lvcHeaderOffset7,
+            this.lvcHeaderOffsetMesh1,
+            this.lvcHeaderOffsetMesh2,
+            this.lvcHeaderOffsetMesh3,
+            this.lvcHeaderConst1,
+            this.lvcHeaderConst2,
+            this.lvcHeaderOffsetTextureAnimAlt,
+            this.lvcHeaderOffsetPal1,
+            this.lvcHeaderOffsetPal2,
+            this.lvcHeaderUnknown5,
+            this.lvcHeaderConst3,
+            this.lvcHeaderUnknown6,
+            this.lvcHeaderUnknown7,
+            this.lvcHeaderOffset12});
+            this.olvHeader.FullRowSelect = true;
+            this.olvHeader.GridLines = true;
+            this.olvHeader.HasCollapsibleGroups = false;
+            this.olvHeader.HideSelection = false;
+            this.olvHeader.Location = new System.Drawing.Point(3, 3);
+            this.olvHeader.MenuLabelGroupBy = "";
+            this.olvHeader.Name = "olvHeader";
+            this.olvHeader.ShowGroups = false;
+            this.olvHeader.Size = new System.Drawing.Size(750, 474);
+            this.olvHeader.TabIndex = 1;
+            this.olvHeader.UseAlternatingBackColors = true;
+            this.olvHeader.UseCompatibleStateImageBehavior = false;
+            this.olvHeader.View = System.Windows.Forms.View.Details;
+            // 
+            // lvcHeaderName
+            // 
+            this.lvcHeaderName.AspectName = "Name";
+            this.lvcHeaderName.IsEditable = false;
+            this.lvcHeaderName.Text = "Name";
+            this.lvcHeaderName.Width = 90;
+            // 
+            // lvcHeaderAddress
+            // 
+            this.lvcHeaderAddress.AspectName = "Address";
+            this.lvcHeaderAddress.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderAddress.IsEditable = false;
+            this.lvcHeaderAddress.Text = "Address";
+            this.lvcHeaderAddress.Width = 90;
+            // 
+            // lvcHeaderUnknown1
+            // 
+            this.lvcHeaderUnknown1.AspectName = "Unknown1";
+            this.lvcHeaderUnknown1.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderUnknown1.IsEditable = true;
+            this.lvcHeaderUnknown1.Text = "Unknown1";
+            // 
+            // lvcHeaderUnknown2
+            // 
+            this.lvcHeaderUnknown2.AspectName = "Unknown2";
+            this.lvcHeaderUnknown2.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderUnknown2.IsEditable = true;
+            this.lvcHeaderUnknown2.Text = "Unknown2";
+            // 
+            // lvcHeaderOffset1
+            // 
+            this.lvcHeaderOffset1.AspectName = "Offset1";
+            this.lvcHeaderOffset1.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffset1.IsEditable = true;
+            this.lvcHeaderOffset1.Text = "Offset1";
+            // 
+            // lvcHeaderOffset2
+            // 
+            this.lvcHeaderOffset2.AspectName = "Offset2";
+            this.lvcHeaderOffset2.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffset2.IsEditable = true;
+            this.lvcHeaderOffset2.Text = "Offset2";
+            // 
+            // lvcHeaderOffset3
+            // 
+            this.lvcHeaderOffset3.AspectName = "Offset3";
+            this.lvcHeaderOffset3.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffset3.IsEditable = true;
+            this.lvcHeaderOffset3.Text = "Offset3";
+            // 
+            // lvcHeaderUnknown3
+            // 
+            this.lvcHeaderUnknown3.AspectName = "Unknown3";
+            this.lvcHeaderUnknown3.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderUnknown3.IsEditable = true;
+            this.lvcHeaderUnknown3.Text = "Unknown3";
+            // 
+            // lvcHeaderUnknown4
+            // 
+            this.lvcHeaderUnknown4.AspectName = "Unknown4";
+            this.lvcHeaderUnknown4.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderUnknown4.IsEditable = true;
+            this.lvcHeaderUnknown4.Text = "Unknown4";
+            // 
+            // lvcHeaderOffset4
+            // 
+            this.lvcHeaderOffset4.AspectName = "Offset4";
+            this.lvcHeaderOffset4.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffset4.IsEditable = true;
+            this.lvcHeaderOffset4.Text = "Offset4";
+            // 
+            // lvcHeaderOffsetTextureGroups
+            // 
+            this.lvcHeaderOffsetTextureGroups.AspectName = "OffsetTextureGroups";
+            this.lvcHeaderOffsetTextureGroups.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffsetTextureGroups.IsEditable = true;
+            this.lvcHeaderOffsetTextureGroups.Text = "OffsetTextureGroups";
+            // 
+            // lvcHeaderOffset6
+            // 
+            this.lvcHeaderOffset6.AspectName = "Offset6";
+            this.lvcHeaderOffset6.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffset6.IsEditable = true;
+            this.lvcHeaderOffset6.Text = "Offset6";
+            // 
+            // lvcHeaderOffset7
+            // 
+            this.lvcHeaderOffset7.AspectName = "Offset7";
+            this.lvcHeaderOffset7.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffset7.IsEditable = true;
+            this.lvcHeaderOffset7.Text = "Offset7";
+            // 
+            // lvcHeaderOffsetMesh1
+            // 
+            this.lvcHeaderOffsetMesh1.AspectName = "OffsetMesh1";
+            this.lvcHeaderOffsetMesh1.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffsetMesh1.IsEditable = true;
+            this.lvcHeaderOffsetMesh1.Text = "OffsetMesh1";
+            // 
+            // lvcHeaderOffsetMesh2
+            // 
+            this.lvcHeaderOffsetMesh2.AspectName = "OffsetMesh2";
+            this.lvcHeaderOffsetMesh2.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffsetMesh2.IsEditable = true;
+            this.lvcHeaderOffsetMesh2.Text = "OffsetMesh2";
+            // 
+            // lvcHeaderOffsetMesh3
+            // 
+            this.lvcHeaderOffsetMesh3.AspectName = "OffsetMesh3";
+            this.lvcHeaderOffsetMesh3.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffsetMesh3.IsEditable = true;
+            this.lvcHeaderOffsetMesh3.Text = "OffsetMesh3";
+            // 
+            // lvcHeaderConst1
+            // 
+            this.lvcHeaderConst1.AspectName = "Const1";
+            this.lvcHeaderConst1.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderConst1.IsEditable = true;
+            this.lvcHeaderConst1.Text = "Const1";
+            // 
+            // lvcHeaderConst2
+            // 
+            this.lvcHeaderConst2.AspectName = "Const2";
+            this.lvcHeaderConst2.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderConst2.IsEditable = true;
+            this.lvcHeaderConst2.Text = "Const2";
+            // 
+            // lvcHeaderOffsetTextureAnimAlt
+            // 
+            this.lvcHeaderOffsetTextureAnimAlt.AspectName = "OffsetTextureAnimAlt";
+            this.lvcHeaderOffsetTextureAnimAlt.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffsetTextureAnimAlt.IsEditable = true;
+            this.lvcHeaderOffsetTextureAnimAlt.Text = "OffsetTextureAnimAlt";
+            // 
+            // lvcHeaderOffsetPal1
+            // 
+            this.lvcHeaderOffsetPal1.AspectName = "OffsetPal1";
+            this.lvcHeaderOffsetPal1.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffsetPal1.IsEditable = true;
+            this.lvcHeaderOffsetPal1.Text = "OffsetPal1";
+            // 
+            // lvcHeaderOffsetPal2
+            // 
+            this.lvcHeaderOffsetPal2.AspectName = "OffsetPal2";
+            this.lvcHeaderOffsetPal2.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffsetPal2.IsEditable = true;
+            this.lvcHeaderOffsetPal2.Text = "OffsetPal2";
+            // 
+            // lvcHeaderUnknown5
+            // 
+            this.lvcHeaderUnknown5.AspectName = "Unknown5";
+            this.lvcHeaderUnknown5.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderUnknown5.IsEditable = true;
+            this.lvcHeaderUnknown5.Text = "Unknown5";
+            // 
+            // lvcHeaderConst3
+            // 
+            this.lvcHeaderConst3.AspectName = "Const3";
+            this.lvcHeaderConst3.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderConst3.IsEditable = true;
+            this.lvcHeaderConst3.Text = "Const3";
+            // 
+            // lvcHeaderUnknown6
+            // 
+            this.lvcHeaderUnknown6.AspectName = "Unknown6";
+            this.lvcHeaderUnknown6.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderUnknown6.IsEditable = true;
+            this.lvcHeaderUnknown6.Text = "Unknown6";
+            // 
+            // lvcHeaderUnknown7
+            // 
+            this.lvcHeaderUnknown7.AspectName = "Unknown7";
+            this.lvcHeaderUnknown7.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderUnknown7.IsEditable = true;
+            this.lvcHeaderUnknown7.Text = "Unknown7";
+            // 
+            // lvcHeaderOffset12
+            // 
+            this.lvcHeaderOffset12.AspectName = "Offset12";
+            this.lvcHeaderOffset12.AspectToStringFormat = "{0:X}";
+            this.lvcHeaderOffset12.IsEditable = true;
+            this.lvcHeaderOffset12.Text = "Offset12";
+            // 
             // tabTiles
             // 
             this.tabTiles.Controls.Add(this.olvTiles);
@@ -1473,57 +1764,6 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTilesX63Tile.Text = "X63";
             this.lvcTilesX63Tile.Width = 50;
             // 
-            // tabHeader
-            // 
-            this.tabHeader.Controls.Add(this.olvHeader);
-            this.tabHeader.Location = new System.Drawing.Point(4, 22);
-            this.tabHeader.Name = "tabHeader";
-            this.tabHeader.Size = new System.Drawing.Size(756, 480);
-            this.tabHeader.TabIndex = 5;
-            this.tabHeader.Text = "Header";
-            this.tabHeader.UseVisualStyleBackColor = true;
-            // 
-            // olvHeader
-            // 
-            this.olvHeader.AllColumns.Add(this.lvcHeaderName);
-            this.olvHeader.AllColumns.Add(this.lvcHeaderAddress);
-            this.olvHeader.AllowColumnReorder = true;
-            this.olvHeader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvHeader.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvHeader.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcHeaderName,
-            this.lvcHeaderAddress});
-            this.olvHeader.FullRowSelect = true;
-            this.olvHeader.GridLines = true;
-            this.olvHeader.HasCollapsibleGroups = false;
-            this.olvHeader.HideSelection = false;
-            this.olvHeader.Location = new System.Drawing.Point(3, 3);
-            this.olvHeader.MenuLabelGroupBy = "";
-            this.olvHeader.Name = "olvHeader";
-            this.olvHeader.ShowGroups = false;
-            this.olvHeader.Size = new System.Drawing.Size(750, 474);
-            this.olvHeader.TabIndex = 1;
-            this.olvHeader.UseAlternatingBackColors = true;
-            this.olvHeader.UseCompatibleStateImageBehavior = false;
-            this.olvHeader.View = System.Windows.Forms.View.Details;
-            // 
-            // lvcHeaderName
-            // 
-            this.lvcHeaderName.AspectName = "Name";
-            this.lvcHeaderName.IsEditable = false;
-            this.lvcHeaderName.Text = "Name";
-            this.lvcHeaderName.Width = 90;
-            // 
-            // lvcHeaderAddress
-            // 
-            this.lvcHeaderAddress.AspectName = "Address";
-            this.lvcHeaderAddress.AspectToStringFormat = "{0:X}";
-            this.lvcHeaderAddress.IsEditable = false;
-            this.lvcHeaderAddress.Text = "Address";
-            this.lvcHeaderAddress.Width = 90;
-            // 
             // frmMPDEditor
             // 
             this.AllowDrop = true;
@@ -1542,10 +1782,10 @@ namespace SF3.MPD_Editor.Forms {
             this.tabItemTiles.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvItemTiles)).EndInit();
             this.tabMain.ResumeLayout(false);
-            this.tabTiles.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvTiles)).EndInit();
             this.tabHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).EndInit();
+            this.tabTiles.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvTiles)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1696,6 +1936,30 @@ namespace SF3.MPD_Editor.Forms {
         private BrightIdeasSoftware.ObjectListView olvHeader;
         private BrightIdeasSoftware.OLVColumn lvcHeaderName;
         private BrightIdeasSoftware.OLVColumn lvcHeaderAddress;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderUnknown1;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderUnknown2;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffset1;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffset2;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffset3;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderUnknown3;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderUnknown4;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffset4;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffsetTextureGroups;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffset6;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffset7;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffsetMesh1;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffsetMesh2;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffsetMesh3;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderConst1;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderConst2;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffsetTextureAnimAlt;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffsetPal1;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffsetPal2;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderUnknown5;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderConst3;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderUnknown6;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderUnknown7;
+        private BrightIdeasSoftware.OLVColumn lvcHeaderOffset12;
     }
 }
 
