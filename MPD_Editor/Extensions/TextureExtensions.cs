@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using SF3.Models.MPD.TextureChunk;
@@ -11,15 +12,27 @@ namespace SF3.MPDEditor.Extensions {
         /// <param name="texture">This texture whose Bitmap image should be generated.</param>
         /// <returns>A bitmap image for the texture.</returns>
         public static Bitmap CreateBitmap(this Texture texture) {
-            var image = new Bitmap(texture.Width, texture.Height, PixelFormat.Format16bppArgb1555);
+            Bitmap image = null;
+            byte[] imageData = null;
 
-            var imageData = texture.BitmapDataARGB1555;
-            if (imageData != null) {
+            // Determine what format to use and what data to copy in.
+            if (texture.BitmapDataARGB1555 != null) {
+                image = new Bitmap(texture.Width, texture.Height, PixelFormat.Format16bppArgb1555);
+                imageData = texture.BitmapDataARGB1555;
+            }
+            else if (texture.BitmapDataPalette != null) {
+                image = new Bitmap(texture.Width, texture.Height, PixelFormat.Format8bppIndexed);
+                imageData = texture.BitmapDataPalette;
+            }
+            else
+                throw new InvalidOperationException("Unhandled bitmap type");
+
+            // Update bitmap data.
+            if (image != null && imageData != null) {
                 BitmapData bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.WriteOnly, image.PixelFormat);
-                Marshal.Copy(texture.BitmapDataARGB1555, 0, bmpData.Scan0, texture.BitmapDataARGB1555.Length);
+                Marshal.Copy(imageData, 0, bmpData.Scan0, imageData.Length);
                 image.UnlockBits(bmpData);
             }
-
             return image;
         }
     }

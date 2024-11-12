@@ -31,7 +31,6 @@ namespace SF3.X1_Editor.Controls {
             this.lvcHeaderTextureIdStart = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabTextures = new System.Windows.Forms.TabPage();
-            this.textureControl = new SF3.MPDEditor.Controls.TextureControl();
             this.olvTextures = new BrightIdeasSoftware.ObjectListView();
             this.lvcTexturesID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTexturesName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -41,6 +40,8 @@ namespace SF3.X1_Editor.Controls {
             this.lvcTexturesImageDataOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
             this.highlightTextRenderer2 = new BrightIdeasSoftware.HighlightTextRenderer();
+            this.lvcTexturesAssumedPixelFormat = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.textureControl = new SF3.MPDEditor.Controls.TextureControl();
             this.tabHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -140,15 +141,6 @@ namespace SF3.X1_Editor.Controls {
             this.tabTextures.Text = "Textures";
             this.tabTextures.UseVisualStyleBackColor = true;
             // 
-            // textureControl
-            // 
-            this.textureControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textureControl.BackColor = System.Drawing.Color.Transparent;
-            this.textureControl.Location = new System.Drawing.Point(740, 339);
-            this.textureControl.Name = "textureControl";
-            this.textureControl.Size = new System.Drawing.Size(150, 150);
-            this.textureControl.TabIndex = 2;
-            // 
             // olvTextures
             // 
             this.olvTextures.AllColumns.Add(this.lvcTexturesID);
@@ -157,6 +149,7 @@ namespace SF3.X1_Editor.Controls {
             this.olvTextures.AllColumns.Add(this.lvcTexturesWidth);
             this.olvTextures.AllColumns.Add(this.lvcTexturesHeight);
             this.olvTextures.AllColumns.Add(this.lvcTexturesImageDataOffset);
+            this.olvTextures.AllColumns.Add(this.lvcTexturesAssumedPixelFormat);
             this.olvTextures.AllowColumnReorder = true;
             this.olvTextures.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -168,7 +161,8 @@ namespace SF3.X1_Editor.Controls {
             this.lvcTexturesAddress,
             this.lvcTexturesWidth,
             this.lvcTexturesHeight,
-            this.lvcTexturesImageDataOffset});
+            this.lvcTexturesImageDataOffset,
+            this.lvcTexturesAssumedPixelFormat});
             this.olvTextures.FullRowSelect = true;
             this.olvTextures.GridLines = true;
             this.olvTextures.HasCollapsibleGroups = false;
@@ -229,6 +223,23 @@ namespace SF3.X1_Editor.Controls {
             this.highlightTextRenderer2.StringComparison = System.StringComparison.CurrentCultureIgnoreCase;
             this.highlightTextRenderer2.TextToHighlight = null;
             // 
+            // lvcTexturesAssumedPixelFormat
+            // 
+            this.lvcTexturesAssumedPixelFormat.AspectName = "AssumedPixelFormat";
+            this.lvcTexturesAssumedPixelFormat.IsEditable = false;
+            this.lvcTexturesAssumedPixelFormat.Text = "(Assumed) Pixel Format";
+            this.lvcTexturesAssumedPixelFormat.Width = 130;
+            // 
+            // textureControl
+            // 
+            this.textureControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textureControl.BackColor = System.Drawing.Color.Transparent;
+            this.textureControl.Location = new System.Drawing.Point(740, 339);
+            this.textureControl.Name = "textureControl";
+            this.textureControl.Size = new System.Drawing.Size(150, 150);
+            this.textureControl.TabIndex = 2;
+            this.textureControl.TextureImage = null;
+            // 
             // TextureChunkControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -266,5 +277,6 @@ namespace SF3.X1_Editor.Controls {
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer2;
         private MPDEditor.Controls.TextureControl textureControl;
+        private BrightIdeasSoftware.OLVColumn lvcTexturesAssumedPixelFormat;
     }
 }

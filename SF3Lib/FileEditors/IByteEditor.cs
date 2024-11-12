@@ -6,6 +6,11 @@ namespace SF3.FileEditors {
     /// </summary>
     public interface IByteEditor {
         /// <summary>
+        /// Reference to the byte array. Please don't modify it!
+        /// </summary>
+        byte[] Data { get; }
+
+        /// <summary>
         /// Used to load or unload data for the editor. Use 'null' to unload data.
         /// </summary>
         /// <param name="data">Data to load. Can be set to 'null' to unload data.</param>

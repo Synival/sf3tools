@@ -58,63 +58,64 @@ namespace SF3.MPDEditor.Controls {
 
                         // Generate a new bitmap for this texture.
                         var image = texture?.CreateBitmap();
-
-                        // Texture flag 0x80 will darken the texture.
-                        if ((textureFlags & 0x80) != 0) {
-                            if (image.PixelFormat == PixelFormat.Format16bppArgb1555) {
-                                var bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadOnly, image.PixelFormat);
-                                unsafe {
-                                    ushort* ptr = (ushort*) bmpData.Scan0;
-                                    var size = image.Width * image.Height;
-                                    for (int i = 0; i < size; i++) {
-                                        var val = *ptr;
-                                        var channel1 = (val >>  0) & 0x1F;
-                                        var channel2 = (val >>  5) & 0x1F;
-                                        var channel3 = (val >> 10) & 0x1F;
-                                        var newVal = (ushort) ((val & 0x8000) +
-                                            ((channel1 * 3 / 4) <<  0) +
-                                            ((channel2 * 3 / 4) <<  5) +
-                                            ((channel3 * 3 / 4) << 10));
-                                        *ptr = newVal;
-                                        ptr++;
+                        if (image != null) {
+                            // Texture flag 0x80 will darken the texture.
+                            if ((textureFlags & 0x80) != 0) {
+                                if (image.PixelFormat == PixelFormat.Format16bppArgb1555) {
+                                    var bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadOnly, image.PixelFormat);
+                                    unsafe {
+                                        ushort* ptr = (ushort*) bmpData.Scan0;
+                                        var size = image.Width * image.Height;
+                                        for (int i = 0; i < size; i++) {
+                                            var val = *ptr;
+                                            var channel1 = (val >>  0) & 0x1F;
+                                            var channel2 = (val >>  5) & 0x1F;
+                                            var channel3 = (val >> 10) & 0x1F;
+                                            var newVal = (ushort) ((val & 0x8000) +
+                                                ((channel1 * 3 / 4) <<  0) +
+                                                ((channel2 * 3 / 4) <<  5) +
+                                                ((channel3 * 3 / 4) << 10));
+                                            *ptr = newVal;
+                                            ptr++;
+                                        }
                                     }
+                                    image.UnlockBits(bmpData);
                                 }
-                                image.UnlockBits(bmpData);
                             }
-                        }
 
-                        // Bits 0x03 determine rotation (before flipping).
-                        var rotateFlag = textureFlags & 0x03;
-                        if (rotateFlag == 1)
-                            image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                        else if (rotateFlag == 2)
-                            image.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                        else if (rotateFlag == 3)
-                            image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                            // Bits 0x03 determine rotation (before flipping).
+                            var rotateFlag = textureFlags & 0x03;
+                            if (rotateFlag == 1)
+                                image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                            else if (rotateFlag == 2)
+                                image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            else if (rotateFlag == 3)
+                                image.RotateFlip(RotateFlipType.Rotate90FlipNone);
 
-                        // Bits 0x30 determine flipping (after rotation).
-                        bool flipHoriz = (textureFlags & 0x10) != 0;
-                        bool flipVert  = (textureFlags & 0x20) != 0;
-                        if (flipHoriz && flipVert)
-                            image.RotateFlip(RotateFlipType.RotateNoneFlipXY);
-                        else if (flipHoriz)
-                            image.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                        else if (flipVert)
-                            image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                            // Bits 0x30 determine flipping (after rotation).
+                            bool flipHoriz = (textureFlags & 0x10) != 0;
+                            bool flipVert  = (textureFlags & 0x20) != 0;
+                            if (flipHoriz && flipVert)
+                                image.RotateFlip(RotateFlipType.RotateNoneFlipXY);
+                            else if (flipHoriz)
+                                image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                            else if (flipVert)
+                                image.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
 #if DEBUG
-                        // Anything we missed?
-                        var unhandledBits = textureFlags & ~0xB3;
-                        if (unhandledBits != 0x00) {
-                            // Let's just let the debugger handle this.
-                            try {
-                                throw new NotImplementedException("Unhandled battle map texture bits: " + unhandledBits.ToString("X2"));
+                            // Anything we missed?
+                            var unhandledBits = textureFlags & ~0xB3;
+                            if (unhandledBits != 0x00) {
+                                // Let's just let the debugger handle this.
+                                try {
+                                    throw new NotImplementedException("Unhandled battle map texture bits: " + unhandledBits.ToString("X2"));
+                                }
+                                catch { }
                             }
-                            catch { }
-                        }
 #endif
 
-                        UniqueImages.Add(key, image);
+                            UniqueImages.Add(key, image);
+                        }
                     }
 
                     Images[x, y] = UniqueImages.ContainsKey(key) ? UniqueImages[key] : null;
