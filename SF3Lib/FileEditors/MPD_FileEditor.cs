@@ -14,15 +14,17 @@ namespace SF3.FileEditors {
         public MPD_FileEditor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
         }
 
-        class MapOffsets {
-            public int[,] Offsets = new int[64, 64];
-        }
+        public override bool SaveFile(string filename)
+            => throw new NotImplementedException();
 
-        public override bool LoadFile(string filename, Stream stream) {
-            // Load MPDFile data
-            var pos = stream.Position;
-            Chunks = new ChunkCollection(stream);
-            stream.Position = pos;
+        public override IEnumerable<ITable> MakeTables() {
+            // Get address for the header
+            var headerAddrPtr = GetDouble(0x0000) - 0x290000;
+            var headerAddr = GetDouble(headerAddrPtr) - 0x290000;
+
+            // Create chunk data
+            using (var stream = new MemoryStream(Data))
+                Chunks = new ChunkCollection(stream);
 
             ChunkEditors = new IByteEditor[Chunks.Chunks.Length];
             ChunkEditors[2] = new ByteEditor(Chunks[2].Data);
@@ -38,25 +40,6 @@ namespace SF3.FileEditors {
                     //       Finding a table that determines whether this is 16- or 8-bit would be great.
                 }
             }
-
-            return base.LoadFile(filename, stream);
-        }
-
-        public override bool CloseFile() {
-            if (!base.CloseFile())
-                return false;
-
-            Chunks = null;
-            ChunkEditors = null;
-            return true;
-        }
-
-        public override bool SaveFile(string filename)
-            => throw new NotImplementedException();
-
-        public override IEnumerable<ITable> MakeTables() {
-            var headerAddrPtr = GetDouble(0x0000) - 0x290000;
-            var headerAddr = GetDouble(headerAddrPtr) - 0x290000;
 
             var tables = new List<ITable>() {
                 (Header            = new HeaderTable          (this, headerAddr)),
@@ -88,6 +71,8 @@ namespace SF3.FileEditors {
             TileTerrainRows          = null;
             TileItemRows             = null;
             TextureChunks            = null;
+            ChunkEditors             = null;
+            Chunks                   = null;
         }
 
         public ChunkCollection Chunks { get; private set; }

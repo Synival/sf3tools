@@ -16,7 +16,7 @@ namespace SF3.FileEditors {
 
         private byte[] _data = null;
 
-        protected byte[] Data {
+        public byte[] Data {
             get => _data;
             private set {
                 if (_data != value) {
