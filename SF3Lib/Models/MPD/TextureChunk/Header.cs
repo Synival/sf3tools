@@ -23,6 +23,5 @@ namespace SF3.Models.MPD.TextureChunk {
             get => Editor.GetWord(textureIdStartAddress);
             set => Editor.SetWord(textureIdStartAddress, value);
         }
-
     }
 }

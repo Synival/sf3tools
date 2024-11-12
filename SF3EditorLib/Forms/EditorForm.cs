@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Extensions;
@@ -98,6 +99,8 @@ namespace SF3.Editor.Forms {
             onScenarioChanged(null, EventArgs.Empty);
 
             FileIsLoadedChanged += (obj, eargs) => {
+                tsmiFile_OpenPrevious.Enabled    = IsLoaded;
+                tsmiFile_OpenNext.Enabled        = IsLoaded;
                 tsmiFile_Save.Enabled            = IsLoaded && FileEditor.IsModified;
                 tsmiFile_SaveAs.Enabled          = IsLoaded;
                 tsmiFile_ApplyDFRFile.Enabled    = IsLoaded;
@@ -574,5 +577,31 @@ namespace SF3.Editor.Forms {
         protected virtual void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
 
         private void tsmiEdit_UseDropdowns_Click(object sender, EventArgs e) => Globals.UseDropdowns = !Globals.UseDropdowns;
+
+        private string[] GetOtherFilesAtDirectoryForOpenFilter() {
+            var path = Path.GetDirectoryName(FileEditor.Filename);
+            var filters = FileDialogFilter.Split('|')[1].Split(';');
+            return filters.SelectMany(x => Directory.GetFiles(path, x)).OrderBy(x => x).ToArray();
+        }
+
+        private void tsmiFile_OpenPrevious_Click(object sender, EventArgs e) {
+            var filesInDir = GetOtherFilesAtDirectoryForOpenFilter();
+            if (filesInDir.Length <= 1)
+                return;
+
+            var index = filesInDir.Select((x, i) => new {x, i}).FirstOrDefault(x => x.x == FileEditor.Filename)?.i;
+            var indexToLoad = (index == null) ? 0 : (index == 0) ? (filesInDir.Length - 1) : ((int) index - 1);
+            _ = LoadFile(filesInDir[indexToLoad]);
+        }
+
+        private void tsmiFile_OpenNext_Click(object sender, EventArgs e) {
+            var filesInDir = GetOtherFilesAtDirectoryForOpenFilter();
+            if (filesInDir.Length <= 1)
+                return;
+
+            var index = filesInDir.Select((x, i) => new {x, i}).FirstOrDefault(x => x.x == FileEditor.Filename)?.i;
+            var indexToLoad = (index == null) ? 0 : (index == filesInDir.Length - 1) ? 0 : ((int) index + 1);
+            _ = LoadFile(filesInDir[indexToLoad]);
+        }
     }
 }

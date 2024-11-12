@@ -52,6 +52,8 @@ namespace SF3.Editor.Forms
             this.tsmiScenario_PremiumDisk = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_OpenPrevious = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile_OpenNext = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,6 +74,8 @@ namespace SF3.Editor.Forms
             // 
             this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile_Open,
+            this.tsmiFile_OpenPrevious,
+            this.tsmiFile_OpenNext,
             this.tsmiFile_Save,
             this.tsmiFile_SaveAs,
             this.tsSeparator_File1,
@@ -259,6 +263,30 @@ namespace SF3.Editor.Forms
             this.tsmiHelp_Version.Size = new System.Drawing.Size(190, 22);
             this.tsmiHelp_Version.Text = "Version (set internally)";
             // 
+            // tsmiFile_OpenPrevious
+            // 
+            this.tsmiFile_OpenPrevious.Enabled = false;
+            this.tsmiFile_OpenPrevious.Name = "tsmiFile_OpenPrevious";
+            this.tsmiFile_OpenPrevious.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.Oemcomma)));
+            this.tsmiFile_OpenPrevious.ShowShortcutKeys = false;
+            this.tsmiFile_OpenPrevious.Size = new System.Drawing.Size(204, 22);
+            this.tsmiFile_OpenPrevious.Text = "Open Previous";
+            this.tsmiFile_OpenPrevious.Visible = false;
+            this.tsmiFile_OpenPrevious.Click += new System.EventHandler(this.tsmiFile_OpenPrevious_Click);
+            // 
+            // tsmiFile_OpenNext
+            // 
+            this.tsmiFile_OpenNext.Enabled = false;
+            this.tsmiFile_OpenNext.Name = "tsmiFile_OpenNext";
+            this.tsmiFile_OpenNext.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.OemPeriod)));
+            this.tsmiFile_OpenNext.ShowShortcutKeys = false;
+            this.tsmiFile_OpenNext.Size = new System.Drawing.Size(204, 22);
+            this.tsmiFile_OpenNext.Text = "Open Next";
+            this.tsmiFile_OpenNext.Visible = false;
+            this.tsmiFile_OpenNext.Click += new System.EventHandler(this.tsmiFile_OpenNext_Click);
+            // 
             // EditorForm
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
@@ -298,5 +326,7 @@ namespace SF3.Editor.Forms
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_Save;
         private System.Windows.Forms.ToolStripMenuItem tsmiEdit;
         private System.Windows.Forms.ToolStripMenuItem tsmiEdit_UseDropdowns;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_OpenPrevious;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_OpenNext;
     }
 }
