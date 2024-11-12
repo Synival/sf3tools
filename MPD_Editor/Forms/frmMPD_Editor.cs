@@ -87,6 +87,7 @@ namespace SF3.MPD_Editor.Forms {
 
             var populateResult = tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
                 new PopulateOLVTabConfig(tabHeader,                olvHeader,                FileEditor.Header),
+                new PopulateOLVTabConfig(tabChunkHeader,           olvChunkHeader,           FileEditor.ChunkHeader),
                 new PopulateOLVTabConfig(tabTileSurfaceCharacters, olvTileSurfaceCharacters, FileEditor.TileSurfaceCharacterRows),
                 new PopulateOLVTabConfig(tabBattleMap,             null,                     FileEditor.TileSurfaceCharacterRows),
                 new PopulateOLVTabConfig(tabTileHeightmap,         olvTileHeightmap,         FileEditor.TileHeightmapRows),

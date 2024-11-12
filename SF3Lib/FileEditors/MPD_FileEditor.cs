@@ -60,6 +60,7 @@ namespace SF3.FileEditors {
 
             var tables = new List<ITable>() {
                 (Header            = new HeaderTable          (this, headerAddr)),
+                (ChunkHeader       = new ChunkHeaderTable     (this, 0x2000)),
                 (TileHeightmapRows = new TileHeightmapRowTable(ChunkEditors[5], 0x0000)),
                 (TileHeightRows    = new TileHeightRowTable   (ChunkEditors[5], 0x4000)),
                 (TileTerrainRows   = new TileTerrainRowTable  (ChunkEditors[5], 0x4001)),
@@ -80,6 +81,7 @@ namespace SF3.FileEditors {
 
         public override void DestroyTables() {
             Header                   = null;
+            ChunkHeader              = null;
             TileSurfaceCharacterRows = null;
             TileHeightmapRows        = null;
             TileHeightRows           = null;
@@ -94,6 +96,9 @@ namespace SF3.FileEditors {
 
         [BulkCopyRecurse]
         public HeaderTable Header { get; private set; }
+
+        [BulkCopyRecurse]
+        public ChunkHeaderTable ChunkHeader { get; private set; }
 
         [BulkCopyRecurse]
         public TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; private set; }

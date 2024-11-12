@@ -15,6 +15,7 @@ namespace SF3.FileEditors {
         IByteEditor[] ChunkEditors { get; }
 
         HeaderTable Header { get; }
+        ChunkHeaderTable ChunkHeader { get; }
         TileHeightmapRowTable TileHeightmapRows { get; }
         TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; }
         TileHeightRowTable TileHeightRows { get; }

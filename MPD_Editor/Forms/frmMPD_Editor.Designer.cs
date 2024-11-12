@@ -100,7 +100,6 @@ namespace SF3.MPD_Editor.Forms {
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabHeader = new System.Windows.Forms.TabPage();
             this.olvHeader = new BrightIdeasSoftware.ObjectListView();
-            this.lvcHeaderName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcHeaderAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcHeaderUnknown1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcHeaderUnknown2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -126,6 +125,13 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcHeaderUnknown6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcHeaderUnknown7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcHeaderOffset12 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tabChunkHeader = new System.Windows.Forms.TabPage();
+            this.olvChunkHeader = new BrightIdeasSoftware.ObjectListView();
+            this.lvcChunkHeaderID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcChunkHeaderName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcChunkHeaderAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcChunkHeaderChunkAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lvcChunkHeaderChunkSize = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tabTileSurfaceCharacters = new System.Windows.Forms.TabPage();
             this.olvTileSurfaceCharacters = new BrightIdeasSoftware.ObjectListView();
             this.lvcTileSurfaceCharactersName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -194,8 +200,6 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTileSurfaceCharactersX61Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileSurfaceCharactersX62Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lvcTileSurfaceCharactersX63Tile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabBattleMap = new System.Windows.Forms.TabPage();
-            this.battleMapControl1 = new SF3.MPDEditor.Controls.BattleMapControl();
             this.tabTileHeightmap = new System.Windows.Forms.TabPage();
             this.olvTileHeightmap = new BrightIdeasSoftware.ObjectListView();
             this.lvcTileHeightmapName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -408,15 +412,18 @@ namespace SF3.MPD_Editor.Forms {
             this.textureChunkControl3 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.tabTextures4 = new System.Windows.Forms.TabPage();
             this.textureChunkControl4 = new SF3.X1_Editor.Controls.TextureChunkControl();
+            this.tabBattleMap = new System.Windows.Forms.TabPage();
+            this.battleMapControl1 = new SF3.MPDEditor.Controls.BattleMapControl();
             this.menuStrip2.SuspendLayout();
             this.tabTileItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileItems)).BeginInit();
             this.tabMain.SuspendLayout();
             this.tabHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).BeginInit();
+            this.tabChunkHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvChunkHeader)).BeginInit();
             this.tabTileSurfaceCharacters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileSurfaceCharacters)).BeginInit();
-            this.tabBattleMap.SuspendLayout();
             this.tabTileHeightmap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileHeightmap)).BeginInit();
             this.tabTileHeights.SuspendLayout();
@@ -427,6 +434,7 @@ namespace SF3.MPD_Editor.Forms {
             this.tabTextures2.SuspendLayout();
             this.tabTextures3.SuspendLayout();
             this.tabTextures4.SuspendLayout();
+            this.tabBattleMap.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip2
@@ -1100,8 +1108,8 @@ namespace SF3.MPD_Editor.Forms {
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tabHeader);
+            this.tabMain.Controls.Add(this.tabChunkHeader);
             this.tabMain.Controls.Add(this.tabTileSurfaceCharacters);
-            this.tabMain.Controls.Add(this.tabBattleMap);
             this.tabMain.Controls.Add(this.tabTileHeightmap);
             this.tabMain.Controls.Add(this.tabTileHeights);
             this.tabMain.Controls.Add(this.tabTileTerrain);
@@ -1110,6 +1118,7 @@ namespace SF3.MPD_Editor.Forms {
             this.tabMain.Controls.Add(this.tabTextures2);
             this.tabMain.Controls.Add(this.tabTextures3);
             this.tabMain.Controls.Add(this.tabTextures4);
+            this.tabMain.Controls.Add(this.tabBattleMap);
             this.tabMain.Location = new System.Drawing.Point(0, 27);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
@@ -1128,7 +1137,6 @@ namespace SF3.MPD_Editor.Forms {
             // 
             // olvHeader
             // 
-            this.olvHeader.AllColumns.Add(this.lvcHeaderName);
             this.olvHeader.AllColumns.Add(this.lvcHeaderAddress);
             this.olvHeader.AllColumns.Add(this.lvcHeaderUnknown1);
             this.olvHeader.AllColumns.Add(this.lvcHeaderUnknown2);
@@ -1160,7 +1168,6 @@ namespace SF3.MPD_Editor.Forms {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvHeader.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvHeader.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcHeaderName,
             this.lvcHeaderAddress,
             this.lvcHeaderUnknown1,
             this.lvcHeaderUnknown2,
@@ -1200,13 +1207,6 @@ namespace SF3.MPD_Editor.Forms {
             this.olvHeader.UseCompatibleStateImageBehavior = false;
             this.olvHeader.View = System.Windows.Forms.View.Details;
             this.olvHeader.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
-            // 
-            // lvcHeaderName
-            // 
-            this.lvcHeaderName.AspectName = "Name";
-            this.lvcHeaderName.IsEditable = false;
-            this.lvcHeaderName.Text = "Name";
-            this.lvcHeaderName.Width = 90;
             // 
             // lvcHeaderAddress
             // 
@@ -1359,6 +1359,82 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcHeaderOffset12.AspectName = "Offset12";
             this.lvcHeaderOffset12.AspectToStringFormat = "{0:X}";
             this.lvcHeaderOffset12.Text = "Offset12";
+            // 
+            // tabChunkHeader
+            // 
+            this.tabChunkHeader.Controls.Add(this.olvChunkHeader);
+            this.tabChunkHeader.Location = new System.Drawing.Point(4, 22);
+            this.tabChunkHeader.Name = "tabChunkHeader";
+            this.tabChunkHeader.Size = new System.Drawing.Size(756, 480);
+            this.tabChunkHeader.TabIndex = 14;
+            this.tabChunkHeader.Text = "Chunk Header";
+            this.tabChunkHeader.UseVisualStyleBackColor = true;
+            // 
+            // olvChunkHeader
+            // 
+            this.olvChunkHeader.AllColumns.Add(this.lvcChunkHeaderID);
+            this.olvChunkHeader.AllColumns.Add(this.lvcChunkHeaderName);
+            this.olvChunkHeader.AllColumns.Add(this.lvcChunkHeaderAddress);
+            this.olvChunkHeader.AllColumns.Add(this.lvcChunkHeaderChunkAddress);
+            this.olvChunkHeader.AllColumns.Add(this.lvcChunkHeaderChunkSize);
+            this.olvChunkHeader.AllowColumnReorder = true;
+            this.olvChunkHeader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.olvChunkHeader.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            this.olvChunkHeader.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvcChunkHeaderID,
+            this.lvcChunkHeaderName,
+            this.lvcChunkHeaderAddress,
+            this.lvcChunkHeaderChunkAddress,
+            this.lvcChunkHeaderChunkSize});
+            this.olvChunkHeader.FullRowSelect = true;
+            this.olvChunkHeader.GridLines = true;
+            this.olvChunkHeader.HasCollapsibleGroups = false;
+            this.olvChunkHeader.HideSelection = false;
+            this.olvChunkHeader.Location = new System.Drawing.Point(3, 3);
+            this.olvChunkHeader.MenuLabelGroupBy = "";
+            this.olvChunkHeader.Name = "olvChunkHeader";
+            this.olvChunkHeader.ShowGroups = false;
+            this.olvChunkHeader.Size = new System.Drawing.Size(750, 474);
+            this.olvChunkHeader.TabIndex = 2;
+            this.olvChunkHeader.UseAlternatingBackColors = true;
+            this.olvChunkHeader.UseCompatibleStateImageBehavior = false;
+            this.olvChunkHeader.View = System.Windows.Forms.View.Details;
+            // 
+            // lvcChunkHeaderID
+            // 
+            this.lvcChunkHeaderID.AspectName = "ID";
+            this.lvcChunkHeaderID.Text = "ID";
+            // 
+            // lvcChunkHeaderName
+            // 
+            this.lvcChunkHeaderName.AspectName = "Name";
+            this.lvcChunkHeaderName.IsEditable = false;
+            this.lvcChunkHeaderName.Text = "Name";
+            this.lvcChunkHeaderName.Width = 90;
+            // 
+            // lvcChunkHeaderAddress
+            // 
+            this.lvcChunkHeaderAddress.AspectName = "Address";
+            this.lvcChunkHeaderAddress.AspectToStringFormat = "{0:X}";
+            this.lvcChunkHeaderAddress.IsEditable = false;
+            this.lvcChunkHeaderAddress.Text = "Address";
+            this.lvcChunkHeaderAddress.Width = 90;
+            // 
+            // lvcChunkHeaderChunkAddress
+            // 
+            this.lvcChunkHeaderChunkAddress.AspectName = "ChunkAddress";
+            this.lvcChunkHeaderChunkAddress.AspectToStringFormat = "{0:X4}";
+            this.lvcChunkHeaderChunkAddress.Text = "Chunk Address";
+            this.lvcChunkHeaderChunkAddress.Width = 95;
+            // 
+            // lvcChunkHeaderChunkSize
+            // 
+            this.lvcChunkHeaderChunkSize.AspectName = "ChunkSize";
+            this.lvcChunkHeaderChunkSize.AspectToStringFormat = "";
+            this.lvcChunkHeaderChunkSize.Text = "Chunk Size";
+            this.lvcChunkHeaderChunkSize.Width = 75;
             // 
             // tabTileSurfaceCharacters
             // 
@@ -1986,28 +2062,6 @@ namespace SF3.MPD_Editor.Forms {
             this.lvcTileSurfaceCharactersX63Tile.AspectToStringFormat = "{0:X}";
             this.lvcTileSurfaceCharactersX63Tile.Text = "X63";
             this.lvcTileSurfaceCharactersX63Tile.Width = 50;
-            // 
-            // tabBattleMap
-            // 
-            this.tabBattleMap.AutoScroll = true;
-            this.tabBattleMap.Controls.Add(this.battleMapControl1);
-            this.tabBattleMap.Location = new System.Drawing.Point(4, 22);
-            this.tabBattleMap.Name = "tabBattleMap";
-            this.tabBattleMap.Size = new System.Drawing.Size(756, 480);
-            this.tabBattleMap.TabIndex = 13;
-            this.tabBattleMap.Text = "Battle Map";
-            this.tabBattleMap.UseVisualStyleBackColor = true;
-            // 
-            // battleMapControl1
-            // 
-            this.battleMapControl1.BackColor = System.Drawing.Color.Transparent;
-            this.battleMapControl1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("battleMapControl1.BackgroundImage")));
-            this.battleMapControl1.Location = new System.Drawing.Point(0, 0);
-            this.battleMapControl1.MaximumSize = new System.Drawing.Size(1024, 1024);
-            this.battleMapControl1.MinimumSize = new System.Drawing.Size(1024, 1024);
-            this.battleMapControl1.Name = "battleMapControl1";
-            this.battleMapControl1.Size = new System.Drawing.Size(1024, 1024);
-            this.battleMapControl1.TabIndex = 0;
             // 
             // tabTileHeightmap
             // 
@@ -3980,6 +4034,28 @@ namespace SF3.MPD_Editor.Forms {
             this.textureChunkControl4.Size = new System.Drawing.Size(764, 484);
             this.textureChunkControl4.TabIndex = 1;
             // 
+            // tabBattleMap
+            // 
+            this.tabBattleMap.AutoScroll = true;
+            this.tabBattleMap.Controls.Add(this.battleMapControl1);
+            this.tabBattleMap.Location = new System.Drawing.Point(4, 22);
+            this.tabBattleMap.Name = "tabBattleMap";
+            this.tabBattleMap.Size = new System.Drawing.Size(756, 480);
+            this.tabBattleMap.TabIndex = 13;
+            this.tabBattleMap.Text = "Battle Map Viewer";
+            this.tabBattleMap.UseVisualStyleBackColor = true;
+            // 
+            // battleMapControl1
+            // 
+            this.battleMapControl1.BackColor = System.Drawing.Color.Transparent;
+            this.battleMapControl1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("battleMapControl1.BackgroundImage")));
+            this.battleMapControl1.Location = new System.Drawing.Point(0, 0);
+            this.battleMapControl1.MaximumSize = new System.Drawing.Size(1024, 1024);
+            this.battleMapControl1.MinimumSize = new System.Drawing.Size(1024, 1024);
+            this.battleMapControl1.Name = "battleMapControl1";
+            this.battleMapControl1.Size = new System.Drawing.Size(1024, 1024);
+            this.battleMapControl1.TabIndex = 0;
+            // 
             // frmMPDEditor
             // 
             this.AllowDrop = true;
@@ -4001,9 +4077,10 @@ namespace SF3.MPD_Editor.Forms {
             this.tabMain.ResumeLayout(false);
             this.tabHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).EndInit();
+            this.tabChunkHeader.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvChunkHeader)).EndInit();
             this.tabTileSurfaceCharacters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvTileSurfaceCharacters)).EndInit();
-            this.tabBattleMap.ResumeLayout(false);
             this.tabTileHeightmap.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvTileHeightmap)).EndInit();
             this.tabTileHeights.ResumeLayout(false);
@@ -4014,6 +4091,7 @@ namespace SF3.MPD_Editor.Forms {
             this.tabTextures2.ResumeLayout(false);
             this.tabTextures3.ResumeLayout(false);
             this.tabTextures4.ResumeLayout(false);
+            this.tabBattleMap.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4161,7 +4239,6 @@ namespace SF3.MPD_Editor.Forms {
         private System.Windows.Forms.TabPage tabHeader;
         private System.Windows.Forms.TabPage tabTileHeights;
         private BrightIdeasSoftware.ObjectListView olvHeader;
-        private BrightIdeasSoftware.OLVColumn lvcHeaderName;
         private BrightIdeasSoftware.OLVColumn lvcHeaderAddress;
         private BrightIdeasSoftware.OLVColumn lvcHeaderUnknown1;
         private BrightIdeasSoftware.OLVColumn lvcHeaderUnknown2;
@@ -4404,6 +4481,13 @@ namespace SF3.MPD_Editor.Forms {
         private X1_Editor.Controls.TextureChunkControl textureChunkControl4;
         private System.Windows.Forms.TabPage tabBattleMap;
         private MPDEditor.Controls.BattleMapControl battleMapControl1;
+        private System.Windows.Forms.TabPage tabChunkHeader;
+        private BrightIdeasSoftware.ObjectListView olvChunkHeader;
+        private BrightIdeasSoftware.OLVColumn lvcChunkHeaderID;
+        private BrightIdeasSoftware.OLVColumn lvcChunkHeaderName;
+        private BrightIdeasSoftware.OLVColumn lvcChunkHeaderAddress;
+        private BrightIdeasSoftware.OLVColumn lvcChunkHeaderChunkAddress;
+        private BrightIdeasSoftware.OLVColumn lvcChunkHeaderChunkSize;
     }
 }
 
