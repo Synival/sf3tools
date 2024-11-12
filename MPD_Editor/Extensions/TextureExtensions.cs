@@ -10,7 +10,7 @@ namespace SF3.MPDEditor.Extensions {
         /// </summary>
         /// <param name="texture">This texture whose Bitmap image should be generated.</param>
         /// <returns>A bitmap image for the texture.</returns>
-        public static Bitmap GetImage(this Texture texture) {
+        public static Bitmap CreateBitmap(this Texture texture) {
             var image = new Bitmap(texture.Width, texture.Height, PixelFormat.Format16bppArgb1555);
 
             var imageData = texture.BitmapDataARGB1555;

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using CommonLib.Attributes;
 using MPDLib;
 using SF3.Models.MPD.TextureChunk;
@@ -23,12 +22,21 @@ namespace SF3.FileEditors {
             var headerAddr = GetDouble(headerAddrPtr) - 0x290000;
 
             // Create chunk data
-            using (var stream = new MemoryStream(Data))
-                Chunks = new ChunkCollection(stream);
+            ChunkHeader = new ChunkHeaderTable(this, 0x2000);
+            _ = ChunkHeader.Load();
 
-            ChunkEditors = new IByteEditor[Chunks.Chunks.Length];
-            ChunkEditors[2] = new ByteEditor(Chunks[2].Data);
-            ChunkEditors[5] = new ByteEditor(Chunks[5].Decompress());
+            Chunks = new Chunk[ChunkHeader.Rows.Length];
+            for (int i = 0; i < Chunks.Length; i++) {
+                var chunkInfo = ChunkHeader.Rows[i];
+                if (chunkInfo.ChunkAddress > 0)
+                    Chunks[i] = new Chunk(Data, chunkInfo.ChunkAddress - 0x00290000, chunkInfo.ChunkSize);
+            }
+
+            ChunkEditors = new IByteEditor[Chunks.Length];
+            if (Chunks[2]?.Data != null)
+                ChunkEditors[2] = new ByteEditor(Chunks[2].Data);
+            if (Chunks[5]?.Data != null)
+                ChunkEditors[5] = new ByteEditor(Chunks[5].Decompress());
 
             // Texture editors.
             for (int i = 0; i < 4; i++) {
@@ -43,7 +51,7 @@ namespace SF3.FileEditors {
 
             var tables = new List<ITable>() {
                 (Header            = new HeaderTable          (this, headerAddr)),
-                (ChunkHeader       = new ChunkHeaderTable     (this, 0x2000)),
+                ChunkHeader,
                 (TileHeightmapRows = new TileHeightmapRowTable(ChunkEditors[5], 0x0000)),
                 (TileHeightRows    = new TileHeightRowTable   (ChunkEditors[5], 0x4000)),
                 (TileTerrainRows   = new TileTerrainRowTable  (ChunkEditors[5], 0x4001)),
@@ -75,8 +83,6 @@ namespace SF3.FileEditors {
             Chunks                   = null;
         }
 
-        public ChunkCollection Chunks { get; private set; }
-
         public IByteEditor[] ChunkEditors { get; private set; }
 
         [BulkCopyRecurse]
@@ -84,6 +90,8 @@ namespace SF3.FileEditors {
 
         [BulkCopyRecurse]
         public ChunkHeaderTable ChunkHeader { get; private set; }
+
+        public Chunk[] Chunks { get; private set; }
 
         [BulkCopyRecurse]
         public TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; private set; }

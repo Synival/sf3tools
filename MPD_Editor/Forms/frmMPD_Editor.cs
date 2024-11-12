@@ -52,7 +52,7 @@ namespace SF3.MPD_Editor.Forms {
         private void OnTextureChanged(object sender, ListViewItemSelectionChangedEventArgs e, TextureChunkControl tcec) {
             var item = (OLVListItem) e.Item;
             var texture = (Texture) item.RowObject;
-            tcec.TextureControl.TextureImage = texture.GetImage();
+            tcec.TextureControl.TextureImage = texture.CreateBitmap();
         }
 
         protected override string FileDialogFilter
@@ -89,7 +89,6 @@ namespace SF3.MPD_Editor.Forms {
                 new PopulateOLVTabConfig(tabHeader,                olvHeader,                FileEditor.Header),
                 new PopulateOLVTabConfig(tabChunkHeader,           olvChunkHeader,           FileEditor.ChunkHeader),
                 new PopulateOLVTabConfig(tabTileSurfaceCharacters, olvTileSurfaceCharacters, FileEditor.TileSurfaceCharacterRows),
-                new PopulateOLVTabConfig(tabBattleMap,             null,                     FileEditor.TileSurfaceCharacterRows),
                 new PopulateOLVTabConfig(tabTileHeightmap,         olvTileHeightmap,         FileEditor.TileHeightmapRows),
                 new PopulateOLVTabConfig(tabTileHeights,           olvTileHeights,           FileEditor.TileHeightRows),
                 new PopulateOLVTabConfig(tabTileTerrain,           olvTileTerrain,           FileEditor.TileTerrainRows),
@@ -99,11 +98,15 @@ namespace SF3.MPD_Editor.Forms {
                 new PopulateTextureChunkTabConfig(tabTextures2, FileEditor.TextureChunks?[1]),
                 new PopulateTextureChunkTabConfig(tabTextures3, FileEditor.TextureChunks?[2]),
                 new PopulateTextureChunkTabConfig(tabTextures4, FileEditor.TextureChunks?[3]),
+
+                // TODO: just a true/false predicate would work here
+                new PopulateOLVTabConfig(tabBattleMap, null, FileEditor.Header), // Should always be present
             });
 
-            if (FileEditor.TileSurfaceCharacterRows != null) {
+            if (FileEditor.TileSurfaceCharacterRows != null)
                 this.battleMapControl1.UpdateTextures(FileEditor.TileSurfaceCharacterRows.TextureData, FileEditor.TextureChunks);
-            }
+            else
+                this.battleMapControl1.UpdateTextures(null, null);
 
             return populateResult;
         }

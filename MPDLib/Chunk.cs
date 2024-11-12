@@ -15,6 +15,16 @@ namespace MPDLib {
                 stream.Read(Data, 0, size);
         }
 
+        public Chunk(byte[] data, int offset, int size) {
+            Size = size;
+
+            // Snarf all the data.
+            Data = new byte[size];
+            if (size > 0)
+                using (Stream stream = new MemoryStream(data, offset, size))
+                    stream.Read(Data, 0, size);
+        }
+
         /// <summary>
         /// Processed compressed chunk data and returns an uncompressed byte[].
         /// All credit to AggroCrag for this decompression code!
