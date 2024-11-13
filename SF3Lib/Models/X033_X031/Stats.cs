@@ -1,7 +1,7 @@
 using System;
 using CommonLib.Attributes;
 using CommonLib.Statistics;
-using SF3.FileEditors;
+using SF3.StreamEditors;
 using SF3.Statistics;
 using SF3.Types;
 

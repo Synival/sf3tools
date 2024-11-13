@@ -1,4 +1,4 @@
-using SF3.FileEditors;
+using SF3.StreamEditors;
 using SF3.Models.IconPointer;
 
 namespace SF3.Tables.IconPointer {

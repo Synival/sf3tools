@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.FileEditors;
+using SF3.StreamEditors;
 using SF3.Types;
 
 namespace SF3.Models.X019 {

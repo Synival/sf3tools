@@ -1,6 +1,6 @@
 using System;
 
-namespace SF3.FileEditors {
+namespace SF3.StreamEditors {
     /// <summary>
     /// Wrapper class for editing a byte[].
     /// </summary>

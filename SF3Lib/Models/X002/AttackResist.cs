@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.FileEditors;
+using SF3.StreamEditors;
 
 namespace SF3.Models.X002 {
     public class AttackResist : Model {

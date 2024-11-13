@@ -1,4 +1,4 @@
-using SF3.FileEditors;
+using SF3.StreamEditors;
 using SF3.Models.X019;
 
 namespace SF3.Tables.X019 {

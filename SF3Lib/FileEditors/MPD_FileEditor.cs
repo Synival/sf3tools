@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using MPDLib;
+using SF3.StreamEditors;
 using SF3.Models.MPD.TextureChunk;
 using SF3.NamedValues;
 using SF3.Tables;

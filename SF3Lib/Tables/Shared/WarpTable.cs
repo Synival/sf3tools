@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using CommonLib.Extensions;
 using CommonLib.Utils;
-using SF3.FileEditors;
+using SF3.StreamEditors;
 using SF3.Models.Shared;
 
 namespace SF3.Tables.Shared {

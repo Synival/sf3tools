@@ -1,5 +1,5 @@
 ﻿using CommonLib.Attributes;
-using SF3.FileEditors;
+using SF3.StreamEditors;
 
 namespace SF3.Models.MPD {
     public class Color : Model {

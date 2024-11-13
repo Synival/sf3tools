@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CommonLib.Attributes;
-using SF3.FileEditors;
+using SF3.StreamEditors;
 using SF3.Models;
 using static SF3.Utils.ResourceUtils;
 

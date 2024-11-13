@@ -1,5 +1,5 @@
 using CommonLib.NamedValues;
-using SF3.FileEditors;
+using SF3.StreamEditors;
 using SF3.Models.IconPointer;
 using SF3.Types;
 

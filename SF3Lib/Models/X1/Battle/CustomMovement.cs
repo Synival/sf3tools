@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.FileEditors;
+using SF3.StreamEditors;
 
 namespace SF3.Models.X1.Battle {
     public class CustomMovement : Model {

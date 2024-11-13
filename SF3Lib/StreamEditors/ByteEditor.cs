@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using SF3.Exceptions;
 
-namespace SF3.FileEditors {
+namespace SF3.StreamEditors {
     /// <summary>
     /// Used for modifying any set of bytes.
     /// </summary>
@@ -73,7 +73,7 @@ namespace SF3.FileEditors {
 
             uint value = 0;
             for (var i = 0; i < bytes; i++)
-                value += ((uint) Data[location + i]) << ((bytes - i - 1) * 8);
+                value += (uint) Data[location + i] << (bytes - i - 1) * 8;
             return value;
         }
 
@@ -157,7 +157,7 @@ namespace SF3.FileEditors {
             if (location >= Data.Length)
                 throw new FileEditorReadException();
 
-            return ((Data[location] >> (bit - 1) & 0x01) == 1) ? true : false;
+            return (Data[location] >> bit - 1 & 0x01) == 1 ? true : false;
         }
 
         public void SetBit(int location, int bit, bool value) {
@@ -170,7 +170,7 @@ namespace SF3.FileEditors {
             if (location >= Data.Length)
                 throw new FileEditorReadException();
 
-            var bitmask = (byte)(1 << (bit - 1));
+            var bitmask = (byte)(1 << bit - 1);
 
             if (value) {
                 if ((Data[location] & bitmask) == 0x00) {

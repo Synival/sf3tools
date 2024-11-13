@@ -1,4 +1,5 @@
 using MPDLib;
+using SF3.StreamEditors;
 using SF3.Models.MPD.TextureChunk;
 using SF3.Tables.MPD;
 

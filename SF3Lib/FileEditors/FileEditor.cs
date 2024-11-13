@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using CommonLib.NamedValues;
+using SF3.StreamEditors;
 using SF3.Exceptions;
 
 namespace SF3.FileEditors {

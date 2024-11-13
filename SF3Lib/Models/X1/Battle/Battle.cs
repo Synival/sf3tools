@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using CommonLib.Attributes;
-using SF3.FileEditors;
+using SF3.StreamEditors;
 using SF3.Tables;
 using SF3.Tables.X1.Battle;
 using SF3.Types;
