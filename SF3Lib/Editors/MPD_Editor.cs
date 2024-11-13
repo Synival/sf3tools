@@ -104,6 +104,15 @@ namespace SF3.Editors {
             return tables;
         }
 
+        public override void Dispose() {
+            base.Dispose();
+            if (ChunkEditors != null) {
+                foreach (var ci in ChunkEditors.Where(ci => ci != null))
+                    ci.Dispose();
+                ChunkEditors = null;
+            }
+        }
+
         public IByteEditor[] ChunkEditors { get; private set; }
 
         [BulkCopyRecurse]

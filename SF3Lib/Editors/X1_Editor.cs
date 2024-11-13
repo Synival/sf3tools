@@ -155,7 +155,7 @@ namespace SF3.Editors {
 
         public override void Dispose() {
             if (Battles != null) {
-                foreach (var b in Battles)
+                foreach (var b in Battles.Where(x => x.Value != null))
                     b.Value.Dispose();
                 Battles.Clear();
             }
