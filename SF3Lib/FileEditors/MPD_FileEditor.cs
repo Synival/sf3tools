@@ -17,9 +17,23 @@ namespace SF3.FileEditors {
             => throw new NotImplementedException();
 
         public override IEnumerable<ITable> MakeTables() {
-            // Get address for the header
-            var headerAddrPtr = GetDouble(0x0000) - 0x290000;
-            var headerAddr = GetDouble(headerAddrPtr) - 0x290000;
+            var ramOffset = 0x290000;
+
+            // Create and load Header
+            var headerAddrPtr = GetDouble(0x0000) - ramOffset;
+            var headerAddr = GetDouble(headerAddrPtr) - ramOffset;
+            Header = new HeaderTable(this, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
+            _ = Header.Load();
+            var header = Header.Rows[0];
+
+            // Load palettes
+            Palettes = new ColorTable[3];
+            if (header.OffsetPal1 > 0)
+                Palettes[0] = new ColorTable(this, header.OffsetPal1 - ramOffset, 256);
+            if (header.OffsetPal2 > 0)
+                Palettes[1] = new ColorTable(this, header.OffsetPal2 - ramOffset, 256);
+            if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 > 0)
+                Palettes[2] = new ColorTable(this, Header.Rows[0].OffsetPal3 - ramOffset, 256);
 
             // Create chunk data
             ChunkHeader = new ChunkHeaderTable(this, 0x2000);
@@ -29,12 +43,15 @@ namespace SF3.FileEditors {
             for (int i = 0; i < Chunks.Length; i++) {
                 var chunkInfo = ChunkHeader.Rows[i];
                 if (chunkInfo.ChunkAddress > 0)
-                    Chunks[i] = new Chunk(Data, chunkInfo.ChunkAddress - 0x00290000, chunkInfo.ChunkSize);
+                    Chunks[i] = new Chunk(Data, chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
             }
 
             ChunkEditors = new IByteEditor[Chunks.Length];
-            if (Chunks[2]?.Data != null)
+            if (Chunks[2]?.Data?.Length > 0)
                 ChunkEditors[2] = new ByteEditor(Chunks[2].Data);
+            // TODO: this works, but it's kind of a dumb hack!!
+            else if (Chunks[20]?.Data?.Length == 52992)
+                ChunkEditors[2] = new ByteEditor(Chunks[20].Data);
             if (Chunks[5]?.Data != null)
                 ChunkEditors[5] = new ByteEditor(Chunks[5].Decompress());
 
@@ -50,7 +67,7 @@ namespace SF3.FileEditors {
             }
 
             var tables = new List<ITable>() {
-                (Header            = new HeaderTable          (this, headerAddr)),
+                Header,
                 ChunkHeader,
                 (TileHeightmapRows = new TileHeightmapRowTable(ChunkEditors[5], 0x0000)),
                 (TileHeightRows    = new TileHeightRowTable   (ChunkEditors[5], 0x4000)),
@@ -58,13 +75,20 @@ namespace SF3.FileEditors {
                 (TileItemRows      = new TileItemRowTable     (ChunkEditors[5], 0x6000)),
             };
 
-            if (Chunks[2].Data?.Length >= (64 * 64 * 2))
+            if (ChunkEditors[2]?.Data?.Length >= (64 * 64 * 2))
                 tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(ChunkEditors[2], 0x0000));
+
+            for (var i = 0; i < Palettes.Length; i++)
+                if (Palettes[i] != null)
+                    tables.Add(Palettes[i]);
 
             TextureChunks = new TextureChunk[4];
             for (int i = 0; i < 4; i++) {
-                if (Chunks[i + 6].Data?.Length > 0)
+                if (Chunks[i + 6].Data?.Length > 0) {
                     TextureChunks[i] = new TextureChunk(ChunkEditors[i + 6], 0x00, "TextureChunk" + (i + 1));
+                    tables.Add(TextureChunks[i].HeaderTable);
+                    tables.Add(TextureChunks[i].TextureTable);
+                }
             }
 
             return tables;
@@ -87,6 +111,9 @@ namespace SF3.FileEditors {
 
         [BulkCopyRecurse]
         public HeaderTable Header { get; private set; }
+
+        [BulkCopyRecurse]
+        public ColorTable[] Palettes { get; private set; }
 
         [BulkCopyRecurse]
         public ChunkHeaderTable ChunkHeader { get; private set; }

@@ -10,6 +10,7 @@ namespace SF3.FileEditors {
         IByteEditor[] ChunkEditors { get; }
 
         HeaderTable Header { get; }
+        ColorTable[] Palettes { get; }
         ChunkHeaderTable ChunkHeader { get; }
         Chunk[] Chunks { get; }
         TileHeightmapRowTable TileHeightmapRows { get; }
