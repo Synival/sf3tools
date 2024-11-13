@@ -8,6 +8,7 @@ using SF3.Models.MPD.TextureChunk;
 using SF3.Tables;
 using SF3.Tables.MPD;
 using SF3.Types;
+using System.Linq;
 
 namespace SF3.Editors {
     public class MPD_Editor : ScenarioTableEditor, IMPD_Editor {
@@ -95,6 +96,10 @@ namespace SF3.Editors {
                     tables.Add(TextureChunks[i].TextureTable);
                 }
             }
+
+            // Add some callbacks to chunk editors.
+            foreach (var ci in ChunkEditors.Where(ci => ci != null))
+                ci.IsModifiedChanged += (s, e) => Editor.IsModified |= ci.IsModified;
 
             return tables;
         }
