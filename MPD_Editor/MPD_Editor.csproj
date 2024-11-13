@@ -122,13 +122,13 @@
       <Project>{DBD21823-582A-4A42-92AB-3294E013A4A4}</Project>
       <Name>CommonLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SF3EditorLib\SF3EditorLib.csproj">
-      <Project>{5fe40461-c218-45be-8947-9b4a8d8291fd}</Project>
-      <Name>SF3EditorLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ObjectListView\ObjectListView\ObjectListView2008.csproj">
       <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
       <Name>ObjectListView2008</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SF3LibWin\SF3LibWin.csproj">
+      <Project>{5fe40461-c218-45be-8947-9b4a8d8291fd}</Project>
+      <Name>SF3LibWin</Name>
     </ProjectReference>
     <ProjectReference Include="..\SF3Lib\SF3Lib.csproj">
       <Project>{e0fa4c78-8adf-4b68-a63b-74c76e868940}</Project>
