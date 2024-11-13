@@ -43,10 +43,6 @@ namespace SF3.MPD_Editor.Forms {
             }
 
             InitializeEditor(menuStrip2, textureChunkOLVs);
-
-            // Scenario is currently irrelevant.
-            // TODO: fetch by name, not by index!!
-            MenuStrip.Items.Remove(MenuStrip.Items[2]);
         }
 
         private void OnTextureChanged(object sender, ListViewItemSelectionChangedEventArgs e, TextureChunkControl tcec) {
