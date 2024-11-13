@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using BrightIdeasSoftware;
-using CommonLib.NamedValues;
-using SF3.RawEditors;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.Editors;
@@ -29,7 +27,7 @@ namespace SF3.X019_Editor.Forms {
                 + base.FileDialogFilter;
 
         protected override IBaseEditor MakeEditor(IFileLoader loader)
-            => Editors.X019_Editor.Create(loader.RawEditor, loader.NameGetterContext, Scenario);
+            => Editors.X019_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())

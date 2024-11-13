@@ -9,11 +9,6 @@ namespace SF3.Editors {
     /// </summary>
     public interface ITableEditor : IBaseEditor {
         /// <summary>
-        /// The context for which to get named values.
-        /// </summary>
-        INameGetterContext NameGetterContext { get; }
-
-        /// <summary>
         /// Collection of Tables initialized upon loading.
         /// </summary>
         IEnumerable<ITable> Tables { get; }

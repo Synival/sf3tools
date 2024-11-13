@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
-using SF3.Loaders;
+using SF3.Editors;
 using static SF3.Editor.Utils.ControlUtils;
 
 namespace SF3.Editor.Extensions {
@@ -56,8 +56,8 @@ namespace SF3.Editor.Extensions {
         /// </summary>
         /// <param name="olv">The ObjectListView to enhance.</param>
         /// <param name="fileEditorFetcher">The function that fetchers the current FileLoader associated for this ObjectListView.</param>
-        public static void Enhance(this ObjectListView olv, FileEditorFetcher fileEditorFetcher) {
-            olv.SetFileEditorFetcher(fileEditorFetcher);
+        public static void Enhance(this ObjectListView olv, EditorFetcher fileEditorFetcher) {
+            olv.SetEditorFetcher(fileEditorFetcher);
             olv.OwnerDraw = true;
             olv.DefaultRenderer = GlobalHexRenderer;
             foreach (var lvc in olv.AllColumns)
@@ -81,7 +81,7 @@ namespace SF3.Editor.Extensions {
             lvc.AspectGetter = obj => {
                 AspectToStringConverterDelegate converter = null;
 
-                var nameContext = ((ObjectListView) lvc.ListView).GetFileEditor()?.NameGetterContext;
+                var nameContext = ((ObjectListView) lvc.ListView).GetEditor()?.NameGetterContext;
                 if (nameContext != null) {
                     var property = obj.GetType().GetProperty(lvc.AspectName);
                     if (property != null) {
@@ -137,7 +137,7 @@ namespace SF3.Editor.Extensions {
         /// <returns>The control to use when editing - a ComboBox for named values, otherwise the return value of 'oldDelegate'.</returns>
         private static Control NamedValueEditorCreator(object obj, OLVColumn model, object value, EditorCreatorDelegate oldDelegate) {
             if (Globals.UseDropdowns) {
-                var nameContext = ((ObjectListView) model.ListView).GetFileEditor()?.NameGetterContext;
+                var nameContext = ((ObjectListView) model.ListView).GetEditor()?.NameGetterContext;
                 if (nameContext != null) {
                     var property = obj.GetType().GetProperty(model.AspectName);
                     var attr = property.GetCustomAttribute<NameGetterAttribute>();
@@ -193,16 +193,16 @@ namespace SF3.Editor.Extensions {
             }
         }
 
-        private static Dictionary<ObjectListView, FileEditorFetcher> _olvFileEditorFetchers = new Dictionary<ObjectListView, FileEditorFetcher>();
-        public delegate IFileLoader FileEditorFetcher();
+        public delegate IBaseEditor EditorFetcher();
+        private static Dictionary<ObjectListView, EditorFetcher> _olvEditorFetchers = new Dictionary<ObjectListView, EditorFetcher>();
 
-        public static void SetFileEditorFetcher(this ObjectListView olv, FileEditorFetcher fetcher)
-            => _olvFileEditorFetchers[olv] = fetcher;
+        public static void SetEditorFetcher(this ObjectListView olv, EditorFetcher fetcher)
+            => _olvEditorFetchers[olv] = fetcher;
 
-        public static FileEditorFetcher GetFileEditorFetcher(this ObjectListView olv)
-            => _olvFileEditorFetchers.TryGetValue(olv, out FileEditorFetcher fetcher) ? fetcher : null;
+        public static EditorFetcher GetEditorFetcher(this ObjectListView olv)
+            => _olvEditorFetchers.TryGetValue(olv, out EditorFetcher fetcher) ? fetcher : null;
 
-        public static IFileLoader GetFileEditor(this ObjectListView olv)
-            => (olv.GetFileEditorFetcher() is var fetcher) ? fetcher() : null;
+        public static IBaseEditor GetEditor(this ObjectListView olv)
+            => (olv.GetEditorFetcher() is var fetcher) ? fetcher() : null;
     }
 }

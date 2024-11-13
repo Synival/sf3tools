@@ -9,6 +9,7 @@ using SF3.Editor.Forms;
 using SF3.Editors;
 using SF3.Loaders;
 using SF3.Models.X1.Battle;
+using SF3.NamedValues;
 using SF3.Types;
 using SF3.X1_Editor.Controls;
 using static SF3.Editor.Extensions.TabControlExtensions;
@@ -60,7 +61,7 @@ namespace SF3.X1_Editor.Forms {
             => (IsBTL99 ? "SF3 Data (X1BTL99.BIN)|X1BTL99.BIN|" : "SF3 Data (X1*.BIN)|X1*.BIN|") + base.FileDialogFilter;
 
         protected override IBaseEditor MakeEditor(IFileLoader loader)
-            => Editors.X1_Editor.Create(loader.RawEditor, loader.NameGetterContext, Scenario, IsBTL99);
+            => Editors.X1_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario, IsBTL99);
 
         private class PopulateBattleTabConfig : IPopulateTabConfig {
             public PopulateBattleTabConfig(TabPage tabPage, Dictionary<MapLeaderType, Battle> battleTable, MapLeaderType mapLeader) {

@@ -1,5 +1,4 @@
 ﻿using System;
-using CommonLib.NamedValues;
 using SF3.RawEditors;
 using SF3.Editors;
 
@@ -43,11 +42,6 @@ namespace SF3.Loaders {
         /// The title of the loaded data being modified for display.
         /// </summary>
         string Title { get; }
-
-        /// <summary>
-        /// The context for fetching named values.
-        /// </summary>
-        INameGetterContext NameGetterContext { get; }
 
         /// <summary>
         /// Event that occurs when the 'Modified' property of the editor is changed.

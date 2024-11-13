@@ -1,12 +1,10 @@
 ﻿using System;
-using CommonLib.NamedValues;
 using SF3.RawEditors;
 using SF3.Editors;
 
 namespace SF3.Loaders {
     public abstract class EditorLoader : IEditorLoader {
-        protected EditorLoader(INameGetterContext nameGetterContext) {
-            NameGetterContext = nameGetterContext;
+        protected EditorLoader() {
             _title = UnloadedTitle;
             _onModifiedChangedDelegate = new EventHandler((o, e) => {
                 IsModifiedChanged?.Invoke(this, EventArgs.Empty);
@@ -63,7 +61,12 @@ namespace SF3.Loaders {
             get => _editor;
             set {
                 if (_editor != value) {
+                    var oldEditor = _editor;
                     _editor = value;
+
+                    if (oldEditor != null)
+                        oldEditor.Dispose();
+
                     UpdateTitle();
                 }
             }
@@ -144,8 +147,6 @@ namespace SF3.Loaders {
                 title += " (" + editorTitle + ")";
             Title = title;
         }
-
-        public INameGetterContext NameGetterContext { get; }
 
         public string EditorTitle(string formTitle) {
             var title = Title;

@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using CommonLib.NamedValues;
 using SF3.RawEditors;
 using SF3.Editors;
 using SF3.Exceptions;
@@ -10,8 +9,6 @@ namespace SF3.Loaders {
     /// Used for loading, saving, reading, and modifying .BIN files.
     /// </summary>
     public class FileLoader : EditorLoader, IFileLoader {
-        public FileLoader(INameGetterContext nameContext) : base(nameContext) { }
-
         public virtual bool LoadFile(string filename, Func<IFileLoader, IBaseEditor> createEditor) {
             try {
                 using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))

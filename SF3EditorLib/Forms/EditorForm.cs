@@ -8,14 +8,11 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
-using DFRLib;
 using DFRLib.Types;
 using DFRTool.GUI.Forms;
-using SF3.RawEditors;
 using SF3.Editor.Extensions;
 using SF3.Editors;
 using SF3.Loaders;
-using SF3.NamedValues;
 using SF3.Types;
 using static CommonLib.Win.Utils.MessageUtils;
 
@@ -31,6 +28,8 @@ namespace SF3.Editor.Forms {
 
             tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
             Globals.UseDropdownsChanged += (s, e) => tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
+
+            AttachFileEditor(FileLoader);
         }
 
         public EditorForm(IContainer container) {
@@ -120,7 +119,7 @@ namespace SF3.Editor.Forms {
                 ObjectListViews.AddRange(extraOLVs);
 
             foreach (var olv in ObjectListViews)
-                olv.Enhance(() => FileLoader);
+                olv.Enhance(() => FileLoader.Editor);
 
             UpdateTitle();
         }
@@ -153,9 +152,6 @@ namespace SF3.Editor.Forms {
             // Close the file first, and don't proceed if the user aborted it.
             if (!CloseFile())
                 return false;
-
-            FileLoader = new FileLoader(new NameGetterContext(Scenario));
-            AttachFileEditor(FileLoader);
 
             var success = new Func<bool>(() => {
                 try {
@@ -265,7 +261,6 @@ namespace SF3.Editor.Forms {
             ObjectListViews.ForEach(x => x.ClearObjects());
             _ = FileLoader.Close();
             FileLoader.Dispose();
-            FileLoader = null;
             return true;
         }
 
@@ -347,7 +342,7 @@ namespace SF3.Editor.Forms {
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
-                var copyFileLoader = new FileLoader(new NameGetterContext(Scenario));
+                var copyFileLoader = new FileLoader();
                 if (!copyFileLoader.LoadFile(copyToFilename, MakeEditor)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
@@ -367,7 +362,7 @@ namespace SF3.Editor.Forms {
                 return;
             }
 
-            ProduceAndPresentBulkCopyReport(result, FileLoader.NameGetterContext);
+            ProduceAndPresentBulkCopyReport(result, FileLoader.Editor.NameGetterContext);
         }
 
         /// <summary>
@@ -389,7 +384,7 @@ namespace SF3.Editor.Forms {
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
-                var copyFileEditor = new FileLoader(new NameGetterContext(Scenario));
+                var copyFileEditor = new FileLoader();
                 if (!copyFileEditor.LoadFile(copyFromFilename, MakeEditor)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
@@ -405,7 +400,7 @@ namespace SF3.Editor.Forms {
             }
 
             ObjectListViews.ForEach(x => x.RefreshAllItems());
-            ProduceAndPresentBulkCopyReport(result, FileLoader.NameGetterContext);
+            ProduceAndPresentBulkCopyReport(result, FileLoader.Editor.NameGetterContext);
         }
 
         private void ProduceAndPresentBulkCopyReport(ObjectExtensions.BulkCopyPropertiesResult result, INameGetterContext nameContext) {
@@ -479,7 +474,7 @@ namespace SF3.Editor.Forms {
         /// <summary>
         /// FileLoader open for the current file.
         /// </summary>
-        protected IFileLoader FileLoader { get; private set; }
+        protected IFileLoader FileLoader { get; } = new FileLoader();
 
         /// <summary>
         /// All ObjectListView's present in the form. Populated automatically.
