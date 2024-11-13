@@ -13,10 +13,9 @@ namespace SF3.Editors.MPD {
         ColorTable[] Palettes { get; }
         ChunkHeaderTable ChunkHeader { get; }
         Chunk[] Chunks { get; }
-        TileHeightmapRowTable TileHeightmapRows { get; }
         TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; }
-        TileHeightRowTable TileHeightRows { get; }
-        TileTerrainRowTable TileTerrainRows { get; }
+        TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; }
+        TileHeightTerrainRowTable TileHeightTerrainRows { get; }
         TileItemRowTable TileItemRows { get; }
         TextureChunkEditor[] TextureChunks { get; }
     }

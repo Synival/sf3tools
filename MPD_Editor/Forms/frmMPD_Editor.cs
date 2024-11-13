@@ -92,9 +92,8 @@ namespace SF3.MPD_Editor.Forms {
                 new PopulateOLVTabConfig(tabPalette3,              olvPalette3,              Editor.Palettes?[2]),
                 new PopulateOLVTabConfig(tabChunkHeader,           olvChunkHeader,           Editor.ChunkHeader),
                 new PopulateOLVTabConfig(tabTileSurfaceCharacters, olvTileSurfaceCharacters, Editor.TileSurfaceCharacterRows),
-                new PopulateOLVTabConfig(tabTileHeightmap,         olvTileHeightmap,         Editor.TileHeightmapRows),
-                new PopulateOLVTabConfig(tabTileHeights,           olvTileHeights,           Editor.TileHeightRows),
-                new PopulateOLVTabConfig(tabTileTerrain,           olvTileTerrain,           Editor.TileTerrainRows),
+                new PopulateOLVTabConfig(tabSurfaceHeightmap,      olvSurfaceHeightmap,      Editor.TileSurfaceHeightmapRows),
+                new PopulateOLVTabConfig(tabTileHeightTerrain,     olvTileHeightTerrain,     Editor.TileHeightTerrainRows),
                 new PopulateOLVTabConfig(tabTileItems,             olvTileItems,             Editor.TileItemRows),
 
                 new PopulateTextureChunkTabConfig(tabChunk6, Editor.TextureChunks?[0]),

@@ -74,10 +74,9 @@ namespace SF3.Editors.MPD {
             var tables = new List<ITable>() {
                 Header,
                 ChunkHeader,
-                (TileHeightmapRows = new TileHeightmapRowTable(ChunkEditors[5], 0x0000)),
-                (TileHeightRows    = new TileHeightRowTable   (ChunkEditors[5], 0x4000)),
-                (TileTerrainRows   = new TileTerrainRowTable  (ChunkEditors[5], 0x4001)),
-                (TileItemRows      = new TileItemRowTable     (ChunkEditors[5], 0x6000)),
+                (TileSurfaceHeightmapRows = new TileSurfaceHeightmapRowTable(ChunkEditors[5], 0x0000)),
+                (TileHeightTerrainRows    = new TileHeightTerrainRowTable   (ChunkEditors[5], 0x4000)),
+                (TileItemRows             = new TileItemRowTable            (ChunkEditors[5], 0x6000)),
             };
 
             if (ChunkEditors[2]?.Data?.Length >= 64 * 64 * 2)
@@ -129,13 +128,10 @@ namespace SF3.Editors.MPD {
         public TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; private set; }
 
         [BulkCopyRecurse]
-        public TileHeightmapRowTable TileHeightmapRows { get; private set; }
+        public TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; private set; }
 
         [BulkCopyRecurse]
-        public TileHeightRowTable TileHeightRows { get; private set; }
-
-        [BulkCopyRecurse]
-        public TileTerrainRowTable TileTerrainRows { get; private set; }
+        public TileHeightTerrainRowTable TileHeightTerrainRows { get; private set; }
 
         [BulkCopyRecurse]
         public TileItemRowTable TileItemRows { get; private set; }
