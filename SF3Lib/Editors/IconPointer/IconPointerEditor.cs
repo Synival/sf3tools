@@ -9,7 +9,7 @@ using SF3.Tables.IconPointer;
 using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 
-namespace SF3.Editors {
+namespace SF3.Editors.IconPointer {
     public class IconPointerEditor : ScenarioTableEditor, IIconPointerEditor {
         protected IconPointerEditor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }
@@ -68,18 +68,18 @@ namespace SF3.Editors {
                     throw new ArgumentException(nameof(Scenario));
             }
 
-            bool isX021 = (spellIconAddress_X021 >= 0 && spellIconAddress_X021 < Editor.Size &&
-                           itemIconAddress_X021  >= 0 && itemIconAddress_X021  < Editor.Size);
-            bool isX026 = (spellIconAddress_X026 >= 0 && spellIconAddress_X026 < Editor.Size &&
-                           itemIconAddress_X026  >= 0 && itemIconAddress_X026  < Editor.Size);
+            var isX021 = spellIconAddress_X021 >= 0 && spellIconAddress_X021 < Editor.Size &&
+                           itemIconAddress_X021  >= 0 && itemIconAddress_X021  < Editor.Size;
+            var isX026 = spellIconAddress_X026 >= 0 && spellIconAddress_X026 < Editor.Size &&
+                           itemIconAddress_X026  >= 0 && itemIconAddress_X026  < Editor.Size;
 
             if (!(isX021 || isX026))
                 throw new FileEditorException("This doesn't look like an X021 or X026 file");
             else if (isX021 && isX026)
                 throw new FileEditorException("This looks like both an X021 and X026 file");
 
-            int spellIconAddress = isX026 ? spellIconAddress_X026 : spellIconAddress_X021;
-            int itemIconAddress  = isX026 ? itemIconAddress_X026  : itemIconAddress_X021;
+            var spellIconAddress = isX026 ? spellIconAddress_X026 : spellIconAddress_X021;
+            var itemIconAddress  = isX026 ? itemIconAddress_X026  : itemIconAddress_X021;
             var has16BitIconAddr = Scenario == ScenarioType.Scenario1 && isX026;
 
             return new List<ITable>() {

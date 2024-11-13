@@ -9,7 +9,7 @@ using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 using static SF3.Utils.ResourceUtils;
 
-namespace SF3.Editors {
+namespace SF3.Editors.X013 {
     public class X013_Editor : ScenarioTableEditor, IX013_Editor {
         protected X013_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }
@@ -38,7 +38,7 @@ namespace SF3.Editors {
             int supportTypeAddress;
             int weaponSpellRankAddress;
 
-            int checkVersion2 = Editor.GetByte(0x000A);
+            var checkVersion2 = Editor.GetByte(0x000A);
 
             switch (Scenario) {
                 case ScenarioType.Scenario1:

@@ -9,7 +9,7 @@ using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 using static SF3.Utils.ResourceUtils;
 
-namespace SF3.Editors {
+namespace SF3.Editors.X033_X031 {
     public class X033_X031_Editor : ScenarioTableEditor, IX033_X031_Editor {
         protected X033_X031_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }

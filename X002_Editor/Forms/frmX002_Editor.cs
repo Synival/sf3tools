@@ -4,6 +4,7 @@ using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.Editors;
+using SF3.Editors.X002;
 using SF3.Loaders;
 using SF3.NamedValues;
 using static SF3.Editor.Extensions.TabControlExtensions;
@@ -23,7 +24,7 @@ namespace SF3.X002_Editor.Forms {
         protected override string FileDialogFilter => "SF3 Data (X002.BIN)|X002.BIN|" + base.FileDialogFilter;
 
         protected override IBaseEditor MakeEditor(IFileLoader loader)
-            => Editors.X002_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
+            => Editors.X002.X002_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())

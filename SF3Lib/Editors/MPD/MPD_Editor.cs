@@ -8,9 +8,8 @@ using SF3.Tables;
 using SF3.Tables.MPD;
 using SF3.Types;
 using System.Linq;
-using SF3.Editors.MPD;
 
-namespace SF3.Editors {
+namespace SF3.Editors.MPD {
     public class MPD_Editor : ScenarioTableEditor, IMPD_Editor {
         protected MPD_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }
@@ -46,7 +45,7 @@ namespace SF3.Editors {
             _ = ChunkHeader.Load();
 
             Chunks = new Chunk[ChunkHeader.Rows.Length];
-            for (int i = 0; i < Chunks.Length; i++) {
+            for (var i = 0; i < Chunks.Length; i++) {
                 var chunkInfo = ChunkHeader.Rows[i];
                 if (chunkInfo.ChunkAddress > 0)
                     Chunks[i] = new Chunk(((ByteEditor) Editor).Data, chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
@@ -62,7 +61,7 @@ namespace SF3.Editors {
                 ChunkEditors[5] = new ByteEditor(Chunks[5].Decompress());
 
             // Texture editors.
-            for (int i = 0; i < 4; i++) {
+            for (var i = 0; i < 4; i++) {
                 try {
                     ChunkEditors[i + 6] = new ByteEditor(Chunks[i + 6].Decompress());
                 }
@@ -81,7 +80,7 @@ namespace SF3.Editors {
                 (TileItemRows      = new TileItemRowTable     (ChunkEditors[5], 0x6000)),
             };
 
-            if (ChunkEditors[2]?.Data?.Length >= (64 * 64 * 2))
+            if (ChunkEditors[2]?.Data?.Length >= 64 * 64 * 2)
                 tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(ChunkEditors[2], 0x0000));
 
             for (var i = 0; i < Palettes.Length; i++)
@@ -89,7 +88,7 @@ namespace SF3.Editors {
                     tables.Add(Palettes[i]);
 
             TextureChunks = new TextureChunkEditor[4];
-            for (int i = 0; i < 4; i++) {
+            for (var i = 0; i < 4; i++) {
                 if (Chunks[i + 6].Data?.Length > 0) {
                     TextureChunks[i] = TextureChunkEditor.Create(ChunkEditors[i + 6], NameGetterContext, 0x00, "TextureChunk" + (i + 1));
                     tables.Add(TextureChunks[i].HeaderTable);

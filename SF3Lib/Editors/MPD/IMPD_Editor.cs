@@ -1,9 +1,8 @@
 using MPDLib;
 using SF3.RawEditors;
 using SF3.Tables.MPD;
-using SF3.Editors.MPD;
 
-namespace SF3.Editors {
+namespace SF3.Editors.MPD {
     public interface IMPD_Editor : IScenarioTableEditor {
         /// <summary>
         /// Byte editor for (de)compressed data for chunks

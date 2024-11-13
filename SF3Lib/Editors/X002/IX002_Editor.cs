@@ -1,7 +1,7 @@
 using SF3.Tables.Shared;
 using SF3.Tables.X002;
 
-namespace SF3.Editors {
+namespace SF3.Editors.X002 {
     public interface IX002_Editor : IScenarioTableEditor {
         ItemTable ItemTable { get; }
         SpellTable SpellTable { get; }

@@ -10,7 +10,7 @@ using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 using static SF3.Utils.ResourceUtils;
 
-namespace SF3.Editors {
+namespace SF3.Editors.X002 {
     public class X002_Editor : ScenarioTableEditor, IX002_Editor {
         protected X002_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }
@@ -23,7 +23,7 @@ namespace SF3.Editors {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            int checkVersion2 = Editor.GetByte(0x000B);
+            var checkVersion2 = Editor.GetByte(0x000B);
 
             int attackResistAddress;
             int itemAddress;
@@ -37,7 +37,7 @@ namespace SF3.Editors {
 
             switch (Scenario) {
                 case ScenarioType.Scenario1:
-                    var isOriginalJpVersion = (checkVersion2 == 0x10);
+                    var isOriginalJpVersion = checkVersion2 == 0x10;
                     attackResistAddress   = 0x0cb5;
                     itemAddress           = isOriginalJpVersion ? 0x2b1c : 0x2b28;
                     loadingAddress        = isOriginalJpVersion ? 0x4798 : 0x47A4;
@@ -50,7 +50,7 @@ namespace SF3.Editors {
                     break;
 
                 case ScenarioType.Scenario2:
-                    var isScn2Ver1003 = (checkVersion2 == 0x2C);
+                    var isScn2Ver1003 = checkVersion2 == 0x2C;
                     attackResistAddress   = isScn2Ver1003 ? 0x0cd5 : 0x0d15;
                     itemAddress           = isScn2Ver1003 ? 0x2e58 : 0x2e9c;
                     loadingAddress        = isScn2Ver1003 ? 0x4b94 : 0x4bd8;

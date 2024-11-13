@@ -58,7 +58,7 @@ namespace SF3.MPD_Editor.Forms {
             => "SF3 Data (*.MPD)|*.MPD|" + base.FileDialogFilter;
 
         protected override IBaseEditor MakeEditor(IFileLoader loader)
-            => Editors.MPD_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
+            => Editors.MPD.MPD_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
         private class PopulateTextureChunkTabConfig : IPopulateTabConfig {
             public PopulateTextureChunkTabConfig(TabPage tabPage, TextureChunkEditor textureChunk) {
