@@ -107,9 +107,9 @@ namespace SF3.MPD_Editor.Forms {
             });
 
             if (Editor.TileSurfaceCharacterRows != null)
-                this.battleMapControl1.UpdateTextures(Editor.TileSurfaceCharacterRows.TextureData, Editor.TextureChunks);
+                this.surfaceMapControl.UpdateTextures(Editor.TileSurfaceCharacterRows.TextureData, Editor.TextureChunks);
             else
-                this.battleMapControl1.UpdateTextures(null, null);
+                this.surfaceMapControl.UpdateTextures(null, null);
 
             return populateResult;
         }

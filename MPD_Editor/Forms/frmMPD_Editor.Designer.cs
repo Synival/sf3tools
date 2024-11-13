@@ -435,7 +435,7 @@ namespace SF3.MPD_Editor.Forms {
             this.tabChunk9 = new System.Windows.Forms.TabPage();
             this.textureChunkControl4 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.tabSurfaceMap = new System.Windows.Forms.TabPage();
-            this.battleMapControl1 = new SF3.MPDEditor.Controls.SurfaceMapControl();
+            this.surfaceMapControl = new SF3.MPDEditor.Controls.SurfaceMapControl();
             this.menuStrip2.SuspendLayout();
             this.tabTileItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileItems)).BeginInit();
@@ -4307,7 +4307,7 @@ namespace SF3.MPD_Editor.Forms {
             // tabSurfaceMap
             // 
             this.tabSurfaceMap.AutoScroll = true;
-            this.tabSurfaceMap.Controls.Add(this.battleMapControl1);
+            this.tabSurfaceMap.Controls.Add(this.surfaceMapControl);
             this.tabSurfaceMap.Location = new System.Drawing.Point(4, 22);
             this.tabSurfaceMap.Name = "tabSurfaceMap";
             this.tabSurfaceMap.Size = new System.Drawing.Size(756, 480);
@@ -4315,16 +4315,16 @@ namespace SF3.MPD_Editor.Forms {
             this.tabSurfaceMap.Text = "Surface Map Viewer";
             this.tabSurfaceMap.UseVisualStyleBackColor = true;
             // 
-            // battleMapControl1
+            // surfaceMapControl
             // 
-            this.battleMapControl1.BackColor = System.Drawing.Color.Transparent;
-            this.battleMapControl1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("battleMapControl1.BackgroundImage")));
-            this.battleMapControl1.Location = new System.Drawing.Point(0, 0);
-            this.battleMapControl1.MaximumSize = new System.Drawing.Size(1024, 1024);
-            this.battleMapControl1.MinimumSize = new System.Drawing.Size(1024, 1024);
-            this.battleMapControl1.Name = "battleMapControl1";
-            this.battleMapControl1.Size = new System.Drawing.Size(1024, 1024);
-            this.battleMapControl1.TabIndex = 0;
+            this.surfaceMapControl.BackColor = System.Drawing.Color.Transparent;
+            this.surfaceMapControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("surfaceMapControl.BackgroundImage")));
+            this.surfaceMapControl.Location = new System.Drawing.Point(0, 0);
+            this.surfaceMapControl.MaximumSize = new System.Drawing.Size(1024, 1024);
+            this.surfaceMapControl.MinimumSize = new System.Drawing.Size(1024, 1024);
+            this.surfaceMapControl.Name = "surfaceMapControl";
+            this.surfaceMapControl.Size = new System.Drawing.Size(1024, 1024);
+            this.surfaceMapControl.TabIndex = 0;
             // 
             // frmMPDEditor
             // 
@@ -4756,7 +4756,7 @@ namespace SF3.MPD_Editor.Forms {
         private X1_Editor.Controls.TextureChunkControl textureChunkControl3;
         private X1_Editor.Controls.TextureChunkControl textureChunkControl4;
         private System.Windows.Forms.TabPage tabSurfaceMap;
-        private MPDEditor.Controls.SurfaceMapControl battleMapControl1;
+        private MPDEditor.Controls.SurfaceMapControl surfaceMapControl;
         private System.Windows.Forms.TabPage tabChunkHeader;
         private BrightIdeasSoftware.ObjectListView olvChunkHeader;
         private BrightIdeasSoftware.OLVColumn lvcChunkHeaderID;
