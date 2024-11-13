@@ -3,7 +3,7 @@ using SF3.Models.X1;
 
 namespace SF3.Tables.X1 {
     public class TreasureTable : Table<Treasure> {
-        public TreasureTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public TreasureTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

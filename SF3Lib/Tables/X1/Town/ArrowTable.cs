@@ -3,7 +3,7 @@ using SF3.Models.X1.Town;
 
 namespace SF3.Tables.X1.Town {
     public class ArrowTable : Table<Arrow> {
-        public ArrowTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public ArrowTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

@@ -4,7 +4,7 @@ using SF3.Models.X033_X031;
 namespace SF3.Tables.X033_X031 {
     public class WeaponLevelTable : Table<WeaponLevel> {
 
-        public WeaponLevelTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public WeaponLevelTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

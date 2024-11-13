@@ -3,7 +3,7 @@ using SF3.Models.X013;
 
 namespace SF3.Tables.X013 {
     public class MagicBonusTable : Table<MagicBonus> {
-        public MagicBonusTable(IRawEditor fileEditor, string resourceFile, int address, bool has32BitValues) : base(fileEditor, resourceFile, address) {
+        public MagicBonusTable(IRawEditor editor, string resourceFile, int address, bool has32BitValues) : base(editor, resourceFile, address) {
             Has32BitValues = has32BitValues;
         }
 

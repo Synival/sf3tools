@@ -3,7 +3,7 @@ using SF3.Models.X013;
 
 namespace SF3.Tables.X013 {
     public class SpecialChanceTable : Table<SpecialChance> {
-        public SpecialChanceTable(IRawEditor fileEditor, string resourceFile, int address, bool hasLargeTable) : base(fileEditor, resourceFile, address) {
+        public SpecialChanceTable(IRawEditor editor, string resourceFile, int address, bool hasLargeTable) : base(editor, resourceFile, address) {
             HasLargeTable = hasLargeTable;
         }
 

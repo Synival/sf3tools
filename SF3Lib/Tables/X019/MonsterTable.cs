@@ -3,7 +3,7 @@ using SF3.Models.X019;
 
 namespace SF3.Tables.X019 {
     public class MonsterTable : Table<Monster> {
-        public MonsterTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public MonsterTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

@@ -3,7 +3,7 @@ using SF3.Models.MPD;
 
 namespace SF3.Tables.MPD {
     public class ChunkHeaderTable : Table<ChunkHeader> {
-        public ChunkHeaderTable(IRawEditor fileEditor, int address) : base(fileEditor, address) {
+        public ChunkHeaderTable(IRawEditor editor, int address) : base(editor, address) {
         }
 
         public override bool Load()

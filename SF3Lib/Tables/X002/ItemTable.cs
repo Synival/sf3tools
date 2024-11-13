@@ -3,7 +3,7 @@ using SF3.Models.X002;
 
 namespace SF3.Tables.X002 {
     public class ItemTable : Table<Item> {
-        public ItemTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public ItemTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

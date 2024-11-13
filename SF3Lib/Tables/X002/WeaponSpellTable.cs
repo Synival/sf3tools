@@ -3,7 +3,7 @@ using SF3.Models.X002;
 
 namespace SF3.Tables.X002 {
     public class WeaponSpellTable : Table<WeaponSpell> {
-        public WeaponSpellTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public WeaponSpellTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

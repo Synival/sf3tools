@@ -3,7 +3,7 @@ using SF3.Models.X1.Battle;
 
 namespace SF3.Tables.X1.Battle {
     public class AITable : Table<AI> {
-        public AITable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public AITable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

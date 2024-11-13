@@ -3,7 +3,7 @@ using SF3.Models.MPD;
 
 namespace SF3.Tables.MPD {
     public class TileHeightmapRowTable : Table<TileHeightmapRow> {
-        public TileHeightmapRowTable(IRawEditor fileEditor, int address) : base(fileEditor, address) {
+        public TileHeightmapRowTable(IRawEditor editor, int address) : base(editor, address) {
         }
 
         public override bool Load() {

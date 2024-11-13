@@ -3,7 +3,7 @@ using SF3.Models.MPD;
 
 namespace SF3.Tables.MPD {
     public class HeaderTable : Table<Header> {
-        public HeaderTable(IRawEditor fileEditor, int address, bool hasPalette3) : base(fileEditor, address) {
+        public HeaderTable(IRawEditor editor, int address, bool hasPalette3) : base(editor, address) {
             HasPalette3 = hasPalette3;
         }
 

@@ -3,7 +3,7 @@ using SF3.Models.X002;
 
 namespace SF3.Tables.X002 {
     public class AttackResistTable : Table<AttackResist> {
-        public AttackResistTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public AttackResistTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

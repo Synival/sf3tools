@@ -3,7 +3,7 @@ using SF3.Models.X1.Town;
 
 namespace SF3.Tables.X1.Town {
     public class EnterTable : Table<Enter> {
-        public EnterTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public EnterTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

@@ -3,7 +3,7 @@ using SF3.Models.X1.Battle;
 
 namespace SF3.Tables.X1.Battle {
     public class CustomMovementTable : Table<CustomMovement> {
-        public CustomMovementTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public CustomMovementTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

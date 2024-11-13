@@ -3,7 +3,7 @@ using SF3.Models.X002;
 
 namespace SF3.Tables.X002 {
     public class LoadingTable : Table<Loading> {
-        public LoadingTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public LoadingTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

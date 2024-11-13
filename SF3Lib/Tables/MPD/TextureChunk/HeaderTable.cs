@@ -3,7 +3,7 @@ using SF3.Models.MPD.TextureChunk;
 
 namespace SF3.Tables.MPD.TextureChunk {
     public class HeaderTable : Table<Header> {
-        public HeaderTable(IRawEditor fileEditor, int address) : base(fileEditor, address) {
+        public HeaderTable(IRawEditor editor, int address) : base(editor, address) {
         }
 
         public override bool Load()

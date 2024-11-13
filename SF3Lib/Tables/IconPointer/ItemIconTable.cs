@@ -3,7 +3,7 @@ using SF3.Models.IconPointer;
 
 namespace SF3.Tables.IconPointer {
     public class ItemIconTable : Table<ItemIcon> {
-        public ItemIconTable(IRawEditor fileEditor, string resourceFile, int address, bool has16BitIconAddr) : base(fileEditor, resourceFile, address) {
+        public ItemIconTable(IRawEditor editor, string resourceFile, int address, bool has16BitIconAddr) : base(editor, resourceFile, address) {
             Has16BitIconAddr = has16BitIconAddr;
         }
 

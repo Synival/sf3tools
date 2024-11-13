@@ -3,7 +3,7 @@ using SF3.Models.Shared;
 
 namespace SF3.Tables.Shared {
     public class TileMovementTable : Table<TileMovement> {
-        public TileMovementTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public TileMovementTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

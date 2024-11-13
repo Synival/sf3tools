@@ -4,7 +4,7 @@ using SF3.Models.MPD;
 
 namespace SF3.Tables.MPD {
     public class TileSurfaceCharacterRowTable : Table<TileSurfaceCharacterRow> {
-        public TileSurfaceCharacterRowTable(IRawEditor fileEditor, int address) : base(fileEditor, address) {
+        public TileSurfaceCharacterRowTable(IRawEditor editor, int address) : base(editor, address) {
         }
 
         public override bool Load() {

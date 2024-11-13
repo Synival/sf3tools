@@ -3,7 +3,7 @@ using SF3.Models.MPD;
 
 namespace SF3.Tables.MPD {
     public class ColorTable : Table<Color> {
-        public ColorTable(IRawEditor fileEditor, int address, int colors) : base(fileEditor, address) {
+        public ColorTable(IRawEditor editor, int address, int colors) : base(editor, address) {
             MaxSize = colors;
         }
 

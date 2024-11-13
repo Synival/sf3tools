@@ -3,7 +3,7 @@ using SF3.Models.X013;
 
 namespace SF3.Tables.X013 {
     public class SoulmateTable : Table<Soulmate> {
-        public SoulmateTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public SoulmateTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

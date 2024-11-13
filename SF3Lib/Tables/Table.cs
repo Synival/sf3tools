@@ -12,8 +12,8 @@ namespace SF3.Tables {
     /// Base implementation for any table of SF3 data that can be modified.
     /// </summary>
     public abstract class Table : ITable {
-        protected Table(IRawEditor fileEditor, string resourceFile, int address) {
-            FileEditor = fileEditor;
+        protected Table(IRawEditor editor, string resourceFile, int address) {
+            FileEditor = editor;
             ResourceFile = resourceFile;
             Address = address;
         }
@@ -43,10 +43,10 @@ namespace SF3.Tables {
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
     public abstract class Table<T> : Table, ITable<T> where T : class, IModel {
-        protected Table(IRawEditor fileEditor, int address) : base(fileEditor, null, address) {
+        protected Table(IRawEditor editor, int address) : base(editor, null, address) {
         }
 
-        protected Table(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        protected Table(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Reset() {
