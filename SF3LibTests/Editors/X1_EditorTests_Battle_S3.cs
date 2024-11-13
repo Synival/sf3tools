@@ -117,7 +117,7 @@ namespace SF3.Tests.Editors {
 
         [TestMethod]
         public void TreasureTable_HasExpectedData() {
-            var editor = TestCase.Create();
+            var editor = TestCase2.Create();
             var table = editor.TreasureTable;
 
             Assert.AreEqual(0x13, table.Rows[0].Searched);
