@@ -35,14 +35,7 @@ namespace SF3.Editors {
         /// <returns>A collection of unloaded ITable's.</returns>
         public abstract IEnumerable<ITable> MakeTables();
 
-        /// <summary>
-        /// Unsets or deinitialize any ITable's populated in MakeTables().
-        /// </summary>
-        public abstract void DestroyTables();
-
         public virtual void Dispose() {
-            DestroyTables();
-            Tables = null;
             Editor.Dispose();
         }
 

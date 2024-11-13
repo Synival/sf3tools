@@ -76,12 +76,6 @@ namespace SF3.Editors {
             };
         }
 
-        public override void DestroyTables() {
-            WeaponLevelTable = null;
-            StatsTable       = null;
-            InitialInfoTable = null;
-        }
-
         [BulkCopyRecurse]
         public WeaponLevelTable WeaponLevelTable { get; private set; }
 

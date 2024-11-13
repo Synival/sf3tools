@@ -88,11 +88,6 @@ namespace SF3.Editors {
             };
         }
 
-        public override void DestroyTables() {
-            SpellIconTable = null;
-            ItemIconTable  = null;
-        }
-
         [BulkCopyRecurse]
         public SpellIconTable SpellIconTable { get; private set; }
 

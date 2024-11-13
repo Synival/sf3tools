@@ -4,7 +4,6 @@ using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.RawEditors;
-using SF3.Models.X1.Battle;
 using SF3.Tables;
 using SF3.Tables.Shared;
 using SF3.Tables.X1;
@@ -12,6 +11,7 @@ using SF3.Tables.X1.Battle;
 using SF3.Tables.X1.Town;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
+using SF3.Editors.X1;
 
 namespace SF3.Editors {
     public class X1_Editor : ScenarioTableEditor, IX1_Editor {
@@ -87,12 +87,12 @@ namespace SF3.Editors {
                 BattlePointersTable.Load();
 
                 // Get the address of the selected battle, or, if it's not available, the first available in the BattlePointersTable.
-                this.Battles = new Dictionary<MapLeaderType, Battle>();
+                this.Battles = new Dictionary<MapLeaderType, BattleEditor>();
                 foreach (var mapLeader in (MapLeaderType[]) Enum.GetValues(typeof(MapLeaderType))) {
                     int mapIndex = (int) mapLeader;
                     var battleTableAddress = BattlePointersTable.Rows[mapIndex].BattlePointer;
                     if (battleTableAddress != 0)
-                        Battles.Add(mapLeader, new Battle(Editor, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
+                        Battles.Add(mapLeader, BattleEditor.Create(Editor, NameGetterContext, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
                 }
 
                 // Determine the location of the TileMovementTable, which isn't so straight-forward.
@@ -153,20 +153,12 @@ namespace SF3.Editors {
             return tables;
         }
 
-        public override void DestroyTables() {
-            TreasureTable       = null;
-            WarpTable           = null;
-            BattlePointersTable = null;
-            NpcTable            = null;
-            EnterTable          = null;
-            ArrowTable          = null;
-
+        public override void Dispose() {
             if (Battles != null) {
+                foreach (var b in Battles)
+                    b.Value.Dispose();
                 Battles.Clear();
-                Battles = null;
             }
-
-            TileMovementTable   = null;
         }
 
         public override string Title => base.Title + " Type: " + (IsBTL99 ? "BTL99" : (IsBattle == true) ? "Battle" : "Town");
@@ -189,7 +181,7 @@ namespace SF3.Editors {
         public ArrowTable ArrowTable { get; private set; }
 
         [BulkCopyRecurse]
-        public Dictionary<MapLeaderType, Battle> Battles { get; private set; }
+        public Dictionary<MapLeaderType, BattleEditor> Battles { get; private set; }
 
         [BulkCopyRecurse]
         public TileMovementTable TileMovementTable { get; private set; }

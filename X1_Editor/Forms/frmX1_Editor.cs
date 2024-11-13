@@ -7,8 +7,8 @@ using CommonLib.Extensions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.Editors;
+using SF3.Editors.X1;
 using SF3.Loaders;
-using SF3.Models.X1.Battle;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.X1_Editor.Controls;
@@ -64,13 +64,13 @@ namespace SF3.X1_Editor.Forms {
             => Editors.X1_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario, IsBTL99);
 
         private class PopulateBattleTabConfig : IPopulateTabConfig {
-            public PopulateBattleTabConfig(TabPage tabPage, Dictionary<MapLeaderType, Battle> battleTable, MapLeaderType mapLeader) {
+            public PopulateBattleTabConfig(TabPage tabPage, Dictionary<MapLeaderType, BattleEditor> battleTable, MapLeaderType mapLeader) {
                 TabPage = tabPage;
                 BattleTable = battleTable != null && battleTable.ContainsKey(mapLeader) ? battleTable[mapLeader] : null;
             }
 
             public TabPage TabPage { get; }
-            public Battle BattleTable { get; }
+            public BattleEditor BattleTable { get; }
 
             public bool CanPopulate => BattleTable != null;
 

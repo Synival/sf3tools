@@ -156,24 +156,6 @@ namespace SF3.Editors {
             return tables;
         }
 
-        public override void DestroyTables() {
-            SpecialsTable        = null;
-            SpecialEffectTable   = null;
-            SupportTypeTable     = null;
-            FriendshipExpTable   = null;
-            SupportStatsTable    = null;
-            SoulmateTable        = null;
-            SoulfailTable        = null;
-            MagicBonusTable      = null;
-            CritModTable         = null;
-            CritrateTable        = null;
-            SpecialChanceTable   = null;
-            ExpLimitTable        = null;
-            HealExpTable         = null;
-            WeaponSpellRankTable = null;
-            StatusEffectTable    = null;
-        }
-
         [BulkCopyRecurse]
         public SpecialTable SpecialsTable { get; private set; }
         [BulkCopyRecurse]

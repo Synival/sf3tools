@@ -107,18 +107,6 @@ namespace SF3.Editors {
             return tables;
         }
 
-        public override void DestroyTables() {
-            AttackResistTable   = null;
-            ItemTable           = null;
-            LoadedOverrideTable = null;
-            LoadingTable        = null;
-            WeaponSpellTable    = null;
-            SpellTable          = null;
-            StatBoostTable      = null;
-            WarpTable           = null;
-            WeaponRankTable     = null;
-        }
-
         [BulkCopyRecurse]
         public AttackResistTable AttackResistTable { get; private set; }
         [BulkCopyRecurse]

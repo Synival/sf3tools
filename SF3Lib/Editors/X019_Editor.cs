@@ -46,10 +46,6 @@ namespace SF3.Editors {
             };
         }
 
-        public override void DestroyTables() {
-            MonsterTable = null;
-        }
-
         [BulkCopyRecurse]
         public MonsterTable MonsterTable { get; private set; }
     }

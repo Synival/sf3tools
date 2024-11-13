@@ -104,18 +104,6 @@ namespace SF3.Editors {
             return tables;
         }
 
-        public override void DestroyTables() {
-            Header                   = null;
-            ChunkHeader              = null;
-            TileSurfaceCharacterRows = null;
-            TileHeightmapRows        = null;
-            TileHeightRows           = null;
-            TileTerrainRows          = null;
-            TileItemRows             = null;
-            TextureChunks            = null;
-            Chunks                   = null;
-        }
-
         public IByteEditor[] ChunkEditors { get; private set; }
 
         [BulkCopyRecurse]
