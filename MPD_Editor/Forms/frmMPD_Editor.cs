@@ -5,7 +5,7 @@ using BrightIdeasSoftware;
 using CommonLib.Extensions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
-using SF3.FileEditors;
+using SF3.Editors;
 using SF3.Models.MPD.TextureChunk;
 using SF3.MPDEditor.Extensions;
 using SF3.X1_Editor.Controls;
@@ -17,7 +17,7 @@ namespace SF3.MPD_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.3";
 
-        public new IMPD_FileEditor FileEditor => base.FileEditor as IMPD_FileEditor;
+        public new IMPD_Editor FileEditor => base.FileEditor as IMPD_Editor;
 
         public frmMPDEditor() {
             InitializeComponent();
@@ -54,7 +54,7 @@ namespace SF3.MPD_Editor.Forms {
         protected override string FileDialogFilter
             => "SF3 Data (*.MPD)|*.MPD|" + base.FileDialogFilter;
 
-        protected override IFileEditor MakeFileEditor() => new MPD_FileEditor(Scenario);
+        protected override IFileEditor MakeFileEditor() => new Editors.MPD_Editor(Scenario);
 
         private class PopulateTextureChunkTabConfig : IPopulateTabConfig {
             public PopulateTextureChunkTabConfig(TabPage tabPage, TextureChunk textureChunk) {

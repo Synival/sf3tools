@@ -1,4 +1,4 @@
-using SF3.FileEditors;
+using SF3.Editors;
 using SF3.Types;
 
 namespace SF3.Tests.FileEditors {
@@ -24,7 +24,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void MonsterTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X019_FileEditor(testCase.Scenario);
+                var editor = new X019_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
 
                 Assert.AreEqual(0, editor.MonsterTable.Rows[0].MaxHP);

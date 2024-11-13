@@ -8,9 +8,9 @@ using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 using static SF3.Utils.ResourceUtils;
 
-namespace SF3.FileEditors {
-    public class X013_FileEditor : SF3FileEditor, IX013_FileEditor {
-        public X013_FileEditor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
+namespace SF3.Editors {
+    public class X013_Editor : ScenarioTableEditor, IX013_Editor {
+        public X013_Editor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
         }
 
         public override IEnumerable<ITable> MakeTables() {

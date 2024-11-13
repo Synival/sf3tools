@@ -1,4 +1,4 @@
-using SF3.FileEditors;
+using SF3.Editors;
 using SF3.Types;
 
 namespace SF3.Tests.FileEditors {
@@ -34,7 +34,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void StatsTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X033_X031_FileEditor(testCase.Scenario);
+                var editor = new X033_X031_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
 
                 Assert.AreEqual(0x00, editor.StatsTable.Rows[0].CharacterClass);
@@ -59,7 +59,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void InitialInfoTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X033_X031_FileEditor(testCase.Scenario);
+                var editor = new X033_X031_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
 
                 if (testCase.Scenario == ScenarioType.Scenario1) {
@@ -92,7 +92,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void WeaponLevelTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X033_X031_FileEditor(testCase.Scenario);
+                var editor = new X033_X031_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
 
                 Assert.AreEqual(  70, editor.WeaponLevelTable.Rows[0].WLevel1);

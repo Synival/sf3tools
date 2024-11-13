@@ -12,8 +12,8 @@ using SF3.Tables.X1.Town;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 
-namespace SF3.FileEditors {
-    public class X1_FileEditor : SF3FileEditor, IX1_FileEditor {
+namespace SF3.Editors {
+    public class X1_FileEditor : ScenarioTableEditor, IX1_Editor {
         public X1_FileEditor(ScenarioType scenario, bool isBTL99) : base(scenario, new NameGetterContext(scenario)) {
             IsBTL99 = isBTL99;
         }

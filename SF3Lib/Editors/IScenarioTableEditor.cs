@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using SF3.Tables;
 using SF3.Types;
 
-namespace SF3.FileEditors {
+namespace SF3.Editors {
     /// <summary>
     /// IFileEditor specifically for files in Shining Force 3
     /// </summary>
-    public interface ISF3FileEditor : IFileEditor {
+    public interface IScenarioTableEditor : IFileEditor {
         /// <summary>
         /// The scenario/disc/file to edit.
         /// </summary>

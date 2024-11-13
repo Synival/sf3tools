@@ -8,9 +8,9 @@ using SF3.Tables.IconPointer;
 using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 
-namespace SF3.FileEditors {
-    public class IconPointerFileEditor : SF3FileEditor, IIconPointerFileEditor {
-        public IconPointerFileEditor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
+namespace SF3.Editors {
+    public class IconPointerEditor : ScenarioTableEditor, IIconPointerEditor {
+        public IconPointerEditor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
         }
 
         public override IEnumerable<ITable> MakeTables() {

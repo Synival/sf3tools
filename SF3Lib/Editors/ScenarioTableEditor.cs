@@ -4,12 +4,12 @@ using CommonLib.NamedValues;
 using SF3.Tables;
 using SF3.Types;
 
-namespace SF3.FileEditors {
+namespace SF3.Editors {
     /// <summary>
     /// IFileEditor specifically for files in Shining Force 3
     /// </summary>
-    public abstract class SF3FileEditor : FileEditor, ISF3FileEditor {
-        public SF3FileEditor(ScenarioType scenario, INameGetterContext nameContext) : base(nameContext) {
+    public abstract class ScenarioTableEditor : FileEditor, IScenarioTableEditor {
+        public ScenarioTableEditor(ScenarioType scenario, INameGetterContext nameContext) : base(nameContext) {
             Scenario = scenario;
         }
 

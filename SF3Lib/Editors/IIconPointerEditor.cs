@@ -1,7 +1,7 @@
 using SF3.Tables.IconPointer;
 
-namespace SF3.FileEditors {
-    public interface IIconPointerFileEditor : ISF3FileEditor {
+namespace SF3.Editors {
+    public interface IIconPointerEditor : IScenarioTableEditor {
         SpellIconTable SpellIconTable { get; }
         ItemIconTable ItemIconTable { get; }
     }

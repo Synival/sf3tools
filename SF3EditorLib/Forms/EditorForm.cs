@@ -12,7 +12,7 @@ using DFRLib;
 using DFRLib.Types;
 using DFRTool.GUI.Forms;
 using SF3.Editor.Extensions;
-using SF3.FileEditors;
+using SF3.Editors;
 using SF3.Types;
 using static CommonLib.Win.Utils.MessageUtils;
 

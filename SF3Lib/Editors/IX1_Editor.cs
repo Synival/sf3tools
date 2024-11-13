@@ -6,8 +6,8 @@ using SF3.Tables.X1.Battle;
 using SF3.Tables.X1.Town;
 using SF3.Types;
 
-namespace SF3.FileEditors {
-    public interface IX1_FileEditor : ISF3FileEditor {
+namespace SF3.Editors {
+    public interface IX1_Editor : IScenarioTableEditor {
         bool IsBTL99 { get; }
 
         bool? IsBattle { get; }

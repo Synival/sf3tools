@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
-using SF3.FileEditors;
+using SF3.Editors;
 using SF3.Models.X033_X031;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
@@ -12,7 +12,7 @@ namespace SF3.X033_X031_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.23";
 
-        public new IX033_X031_FileEditor FileEditor => base.FileEditor as IX033_X031_FileEditor;
+        public new IX033_X031_Editor FileEditor => base.FileEditor as IX033_X031_Editor;
         private StatGrowthChart _statGrowthChart;
 
         public frmX033_X031_Editor() {
@@ -23,7 +23,7 @@ namespace SF3.X033_X031_Editor.Forms {
 
         protected override string FileDialogFilter => "SF3 Data (X033.BIN;X031.BIN)|X033.BIN;X031.BIN|" + base.FileDialogFilter;
 
-        protected override IFileEditor MakeFileEditor() => new X033_X031_FileEditor(Scenario);
+        protected override IFileEditor MakeFileEditor() => new Editors.X033_X031_Editor(Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())

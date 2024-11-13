@@ -9,9 +9,9 @@ using SF3.Tables;
 using SF3.Tables.MPD;
 using SF3.Types;
 
-namespace SF3.FileEditors {
-    public class MPD_FileEditor : SF3FileEditor, IMPD_FileEditor {
-        public MPD_FileEditor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
+namespace SF3.Editors {
+    public class MPD_Editor : ScenarioTableEditor, IMPD_Editor {
+        public MPD_Editor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
         }
 
         public override bool SaveFile(string filename)

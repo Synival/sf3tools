@@ -1,4 +1,4 @@
-using SF3.FileEditors;
+using SF3.Editors;
 using SF3.Types;
 
 namespace SF3.Tests.FileEditors {
@@ -32,7 +32,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void CritModTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.CritModTable;
 
@@ -46,7 +46,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void CritrateTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.CritrateTable;
 
@@ -71,7 +71,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void ExpLimitTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.ExpLimitTable;
 
@@ -85,7 +85,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void FriendshipExpTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.FriendshipExpTable;
 
@@ -102,7 +102,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void HealExpTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.HealExpTable;
 
@@ -115,7 +115,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void MagicBonusTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.MagicBonusTable;
 
@@ -153,7 +153,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void SoulfailTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.SoulfailTable;
 
@@ -166,7 +166,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void SoulmateTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.SoulmateTable;
 
@@ -184,7 +184,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void SpecialChanceTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.SpecialChanceTable;
 
@@ -202,7 +202,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void SpecialsTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.SpecialsTable;
 
@@ -228,7 +228,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void StatusEffectTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.StatusEffectTable;
 
@@ -283,7 +283,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void SupportStatsTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.SupportStatsTable;
 
@@ -304,7 +304,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void SupportTypeTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.SupportTypeTable;
 
@@ -324,7 +324,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void WeaponSpellRankTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X013_FileEditor(testCase.Scenario);
+                var editor = new X013_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.WeaponSpellRankTable;
 

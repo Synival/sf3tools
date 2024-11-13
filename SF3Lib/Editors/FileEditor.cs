@@ -4,7 +4,7 @@ using CommonLib.NamedValues;
 using SF3.RawEditors;
 using SF3.Exceptions;
 
-namespace SF3.FileEditors {
+namespace SF3.Editors {
     /// <summary>
     /// Used for loading, saving, reading, and modifying .BIN files.
     /// </summary>

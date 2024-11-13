@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
-using SF3.FileEditors;
+using SF3.Editors;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
 namespace SF3.X013_Editor.Forms {
@@ -10,7 +10,7 @@ namespace SF3.X013_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.21";
 
-        public new IX013_FileEditor FileEditor => base.FileEditor as IX013_FileEditor;
+        public new IX013_Editor FileEditor => base.FileEditor as IX013_Editor;
 
         public frmX013_Editor() {
             InitializeComponent();
@@ -19,7 +19,7 @@ namespace SF3.X013_Editor.Forms {
 
         protected override string FileDialogFilter => "SF3 Data (X013.BIN)|X013.BIN|" + base.FileDialogFilter;
 
-        protected override IFileEditor MakeFileEditor() => new X013_FileEditor(Scenario);
+        protected override IFileEditor MakeFileEditor() => new Editors.X013_Editor(Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())

@@ -3,7 +3,7 @@ using System.IO;
 using CommonLib.NamedValues;
 using SF3.RawEditors;
 
-namespace SF3.FileEditors {
+namespace SF3.Editors {
     /// <summary>
     /// Used for loading, saving, reading, and modifying .BIN files.
     /// </summary>

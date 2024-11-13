@@ -6,7 +6,7 @@ using BrightIdeasSoftware;
 using CommonLib.Extensions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
-using SF3.FileEditors;
+using SF3.Editors;
 using SF3.Models.X1.Battle;
 using SF3.Types;
 using SF3.X1_Editor.Controls;
@@ -29,7 +29,7 @@ namespace SF3.X1_Editor.Forms {
             }
         }
 
-        public new IX1_FileEditor FileEditor => base.FileEditor as IX1_FileEditor;
+        public new IX1_Editor FileEditor => base.FileEditor as IX1_Editor;
 
         public frmX1_Editor() {
             InitializeComponent();

@@ -3,8 +3,8 @@ using SF3.RawEditors;
 using SF3.Models.MPD.TextureChunk;
 using SF3.Tables.MPD;
 
-namespace SF3.FileEditors {
-    public interface IMPD_FileEditor : ISF3FileEditor {
+namespace SF3.Editors {
+    public interface IMPD_Editor : IScenarioTableEditor {
         /// <summary>
         /// Byte editor for (de)compressed data for chunks
         /// </summary>

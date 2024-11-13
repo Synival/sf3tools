@@ -1,4 +1,4 @@
-using SF3.FileEditors;
+using SF3.Editors;
 using SF3.Types;
 
 namespace SF3.Tests.FileEditors {
@@ -38,7 +38,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void ItemTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X002_FileEditor(testCase.Scenario);
+                var editor = new X002_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.ItemTable;
 
@@ -70,7 +70,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void SpellTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X002_FileEditor(testCase.Scenario);
+                var editor = new X002_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.SpellTable;
 
@@ -99,7 +99,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void WeaponSpellTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X002_FileEditor(testCase.Scenario);
+                var editor = new X002_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.WeaponSpellTable;
 
@@ -128,7 +128,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void LoadingTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X002_FileEditor(testCase.Scenario);
+                var editor = new X002_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.LoadingTable;
 
@@ -148,7 +148,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void StatBoostTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X002_FileEditor(testCase.Scenario);
+                var editor = new X002_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.StatBoostTable;
 
@@ -167,7 +167,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void WeaponRankTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X002_FileEditor(testCase.Scenario);
+                var editor = new X002_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.WeaponRankTable;
 
@@ -183,7 +183,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void AttackResistTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X002_FileEditor(testCase.Scenario);
+                var editor = new X002_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.AttackResistTable;
 
@@ -197,7 +197,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void LoadedOverrideTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X002_FileEditor(testCase.Scenario);
+                var editor = new X002_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.LoadedOverrideTable;
 
@@ -233,7 +233,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void WarpTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X002_FileEditor(testCase.Scenario);
+                var editor = new X002_Editor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
                 var table = editor.WarpTable;
 

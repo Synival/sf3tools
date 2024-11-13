@@ -1,4 +1,4 @@
-using SF3.FileEditors;
+using SF3.Editors;
 using SF3.Types;
 
 namespace SF3.Tests.FileEditors {
@@ -38,7 +38,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void ItemIconTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new IconPointerFileEditor(testCase.Scenario);
+                var editor = new IconPointerEditor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
 
                 Assert.AreEqual(0x00, editor.ItemIconTable.Rows[0].TheItemIcon);
@@ -50,7 +50,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void SpellIconTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new IconPointerFileEditor(testCase.Scenario);
+                var editor = new IconPointerEditor(testCase.Scenario);
                 Assert.IsTrue(editor.LoadFile(testCase.Filename));
 
                 Assert.AreEqual(0x00, editor.SpellIconTable.Rows[0].TheSpellIcon);
