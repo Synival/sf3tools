@@ -35,7 +35,7 @@ namespace MPDLib {
             logFile = "MyLog.txt";
 
             using (var logWriter = (logFile == null) ? null : new StreamWriter(logFile)) {
-                byte[] outputArray = new byte[0x10000];
+                byte[] outputArray = new byte[0x20000];
                 int outputPosition = 0;
                 bool prevRaw = false;
                 int bufferLoc = 0;
@@ -52,8 +52,15 @@ namespace MPDLib {
                                 logWriter?.WriteLine();
                             }
                             int currentLoc = pos;
+
+                            if (pos >= Data.Length)
+                                goto unexpectedEOF;
                             byte val1 = Data[pos++];
+
+                            if (pos >= Data.Length)
+                                goto unexpectedEOF;
                             byte val2 = Data[pos++];
+
                             if (val1 == 0 && val2 == 0) {
                                 logWriter?.WriteLine(bufferLoc.ToString("X2") + ": Ending due to 0000 control value at " + currentLoc.ToString("X2"));
                                 break;
@@ -65,7 +72,12 @@ namespace MPDLib {
                                 bufferLoc += count * 2;
                                 int windowPos = outputPosition - offset * 2;
                                 for (int j = 0; j < count; j++) {
+                                    if (outputPosition >= outputArray.Length)
+                                        goto unexpectedEOF;
                                     outputArray[outputPosition++] = outputArray[windowPos++];
+
+                                    if (outputPosition >= outputArray.Length)
+                                        goto unexpectedEOF;
                                     outputArray[outputPosition++] = outputArray[windowPos++];
                                 }
                             }
@@ -76,10 +88,22 @@ namespace MPDLib {
                             if (!prevRaw)
                                 logWriter?.Write(bufferLoc.ToString("X2") + ": Raw at " + pos.ToString("X2") + ": ");
 
+                            if (pos >= Data.Length)
+                                goto unexpectedEOF;
                             byte val1 = Data[pos++];
+
+                            if (pos >= Data.Length)
+                                goto unexpectedEOF;
                             byte val2 = Data[pos++];
+
+                            if (outputPosition >= outputArray.Length)
+                                goto unexpectedEOF;
                             outputArray[outputPosition++] = val1;
+
+                            if (outputPosition >= outputArray.Length)
+                                goto unexpectedEOF;
                             outputArray[outputPosition++] = val2;
+
                             logWriter?.Write(val1.ToString("X2"));
                             logWriter?.Write(val2.ToString("X2"));
                             bufferLoc += 2;
@@ -88,6 +112,13 @@ namespace MPDLib {
                     }
                 }
 
+                return outputArray.Take(outputPosition).ToArray();
+
+            unexpectedEOF:
+                try {
+                    throw new System.IO.IOException("Unexpected end of data");
+                }
+                catch { }
                 return outputArray.Take(outputPosition).ToArray();
             }
         }
