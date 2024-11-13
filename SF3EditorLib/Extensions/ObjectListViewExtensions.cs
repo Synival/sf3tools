@@ -7,9 +7,9 @@ using BrightIdeasSoftware;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
 using SF3.Editors;
-using static SF3.Editor.Utils.ControlUtils;
+using static SF3.Win.Utils.ControlUtils;
 
-namespace SF3.Editor.Extensions {
+namespace SF3.Win.Extensions {
     public static class ObjectListViewExtensions {
         /// <summary>
         /// Runs RefreshItem() on all OLVListItem's in the property Items.

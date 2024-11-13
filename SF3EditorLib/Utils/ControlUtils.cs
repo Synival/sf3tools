@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using CommonLib.NamedValues;
 
-namespace SF3.Editor.Utils {
+namespace SF3.Win.Utils {
     public static class ControlUtils {
         /// <summary>
         /// Creates a combo box that can be bound to a named value.

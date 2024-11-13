@@ -10,13 +10,13 @@ using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using DFRLib.Types;
 using DFRTool.GUI.Forms;
-using SF3.Editor.Extensions;
+using SF3.Win.Extensions;
 using SF3.Editors;
 using SF3.Loaders;
 using SF3.Types;
 using static CommonLib.Win.Utils.MessageUtils;
 
-namespace SF3.Editor.Forms {
+namespace SF3.Win.Forms {
     /// <summary>
     /// Base editor form from which all other editors are derived.
     /// </summary>

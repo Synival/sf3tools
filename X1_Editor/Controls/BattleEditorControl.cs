@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 using BrightIdeasSoftware;
-using SF3.Editor.Extensions;
+using SF3.Win.Extensions;
 
 namespace SF3.X1_Editor.Controls {
     public partial class BattleEditorControl : UserControl {

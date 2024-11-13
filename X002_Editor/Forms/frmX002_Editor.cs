@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using BrightIdeasSoftware;
-using SF3.Editor.Extensions;
-using SF3.Editor.Forms;
+using SF3.Win.Extensions;
+using SF3.Win.Forms;
 using SF3.Editors;
 using SF3.Editors.X002;
 using SF3.Loaders;
 using SF3.NamedValues;
-using static SF3.Editor.Extensions.TabControlExtensions;
+using static SF3.Win.Extensions.TabControlExtensions;
 
 namespace SF3.X002_Editor.Forms {
     public partial class frmX002_Editor : EditorForm {

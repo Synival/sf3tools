@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using BrightIdeasSoftware;
-using SF3.Editor.Extensions;
-using SF3.Editor.Forms;
+using SF3.Win.Extensions;
+using SF3.Win.Forms;
 using SF3.Editors;
 using SF3.Loaders;
 using SF3.Models.X033_X031;
-using static SF3.Editor.Extensions.TabControlExtensions;
+using static SF3.Win.Extensions.TabControlExtensions;
 using SF3.NamedValues;
 using SF3.Editors.X033_X031;
 

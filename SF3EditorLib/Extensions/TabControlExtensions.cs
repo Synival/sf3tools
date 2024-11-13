@@ -5,7 +5,7 @@ using BrightIdeasSoftware;
 using SF3.Tables;
 using static CommonLib.Win.Utils.MessageUtils;
 
-namespace SF3.Editor.Extensions {
+namespace SF3.Win.Extensions {
     public static class TabControlExtensions {
         /// <summary>
         /// Adds or removes tabs based on their 'value' in a key-value Dictionary.

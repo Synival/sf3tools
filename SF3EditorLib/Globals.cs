@@ -1,6 +1,6 @@
 using System;
 
-namespace SF3.Editor {
+namespace SF3.Win {
     public static class Globals {
         private static bool _useDropdowns = true;
         public static bool UseDropdowns {

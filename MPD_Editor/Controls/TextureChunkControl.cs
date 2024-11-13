@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 using BrightIdeasSoftware;
-using SF3.Editor.Extensions;
+using SF3.Win.Extensions;
 using SF3.MPDEditor.Controls;
 
 namespace SF3.X1_Editor.Controls {

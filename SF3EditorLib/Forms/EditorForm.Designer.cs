@@ -1,7 +1,5 @@
-namespace SF3.Editor.Forms
-{
-    partial class EditorForm
-    {
+namespace SF3.Win.Forms {
+    partial class EditorForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@ namespace SF3.Editor.Forms
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@ namespace SF3.Editor.Forms
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,7 +90,7 @@ namespace SF3.Editor.Forms
             // tsmiFile_Open
             // 
             this.tsmiFile_Open.Name = "tsmiFile_Open";
-            this.tsmiFile_Open.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.tsmiFile_Open.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.tsmiFile_Open.Size = new System.Drawing.Size(204, 22);
             this.tsmiFile_Open.Text = "&Open...";
             this.tsmiFile_Open.Click += new System.EventHandler(this.tsmiFile_Open_Click);
@@ -104,7 +99,7 @@ namespace SF3.Editor.Forms
             // 
             this.tsmiFile_Save.Enabled = false;
             this.tsmiFile_Save.Name = "tsmiFile_Save";
-            this.tsmiFile_Save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.tsmiFile_Save.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.tsmiFile_Save.Size = new System.Drawing.Size(204, 22);
             this.tsmiFile_Save.Text = "&Save";
             this.tsmiFile_Save.Click += new System.EventHandler(this.tsmiFile_Save_Click);
@@ -113,7 +108,7 @@ namespace SF3.Editor.Forms
             // 
             this.tsmiFile_SaveAs.Enabled = false;
             this.tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
-            this.tsmiFile_SaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            this.tsmiFile_SaveAs.ShortcutKeys = ((System.Windows.Forms.Keys) (((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt)
             | System.Windows.Forms.Keys.S)));
             this.tsmiFile_SaveAs.Size = new System.Drawing.Size(204, 22);
             this.tsmiFile_SaveAs.Text = "Save &As...";
@@ -128,7 +123,7 @@ namespace SF3.Editor.Forms
             // 
             this.tsmiFile_Close.Enabled = false;
             this.tsmiFile_Close.Name = "tsmiFile_Close";
-            this.tsmiFile_Close.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.tsmiFile_Close.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
             this.tsmiFile_Close.Size = new System.Drawing.Size(204, 22);
             this.tsmiFile_Close.Text = "&Close";
             this.tsmiFile_Close.Click += new System.EventHandler(this.tsmiFile_Close_Click);
@@ -142,7 +137,7 @@ namespace SF3.Editor.Forms
             // 
             this.tsmiFile_ApplyDFRFile.Enabled = false;
             this.tsmiFile_ApplyDFRFile.Name = "tsmiFile_ApplyDFRFile";
-            this.tsmiFile_ApplyDFRFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.tsmiFile_ApplyDFRFile.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
             this.tsmiFile_ApplyDFRFile.Size = new System.Drawing.Size(204, 22);
             this.tsmiFile_ApplyDFRFile.Text = "Apply DFR File...";
             this.tsmiFile_ApplyDFRFile.Click += new System.EventHandler(this.tsmiFile_applyDFRFile_Click);
@@ -151,7 +146,7 @@ namespace SF3.Editor.Forms
             // 
             this.tsmiFile_GenerateDFRFile.Enabled = false;
             this.tsmiFile_GenerateDFRFile.Name = "tsmiFile_GenerateDFRFile";
-            this.tsmiFile_GenerateDFRFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.tsmiFile_GenerateDFRFile.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.tsmiFile_GenerateDFRFile.Size = new System.Drawing.Size(204, 22);
             this.tsmiFile_GenerateDFRFile.Text = "Create DFR File...";
             this.tsmiFile_GenerateDFRFile.Click += new System.EventHandler(this.tsmiFile_generateDFRFile_Click);
@@ -185,7 +180,7 @@ namespace SF3.Editor.Forms
             // tsmiFile_Exit
             // 
             this.tsmiFile_Exit.Name = "tsmiFile_Exit";
-            this.tsmiFile_Exit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.tsmiFile_Exit.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.tsmiFile_Exit.Size = new System.Drawing.Size(204, 22);
             this.tsmiFile_Exit.Text = "E&xit";
             this.tsmiFile_Exit.Click += new System.EventHandler(this.tsmiFile_Exit_Click);
@@ -201,7 +196,7 @@ namespace SF3.Editor.Forms
             // tsmiEdit_UseDropdowns
             // 
             this.tsmiEdit_UseDropdowns.Name = "tsmiEdit_UseDropdowns";
-            this.tsmiEdit_UseDropdowns.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.tsmiEdit_UseDropdowns.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
             this.tsmiEdit_UseDropdowns.Size = new System.Drawing.Size(295, 22);
             this.tsmiEdit_UseDropdowns.Text = "Use &Dropdowns for Named Values";
             this.tsmiEdit_UseDropdowns.Click += new System.EventHandler(this.tsmiEdit_UseDropdowns_Click);
@@ -220,7 +215,7 @@ namespace SF3.Editor.Forms
             // tsmiScenario_Scenario1
             // 
             this.tsmiScenario_Scenario1.Name = "tsmiScenario_Scenario1";
-            this.tsmiScenario_Scenario1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
+            this.tsmiScenario_Scenario1.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
             this.tsmiScenario_Scenario1.Size = new System.Drawing.Size(188, 22);
             this.tsmiScenario_Scenario1.Text = "Scenario &1";
             this.tsmiScenario_Scenario1.Click += new System.EventHandler(this.tsmiScenario_Scenario1_Click);
@@ -228,7 +223,7 @@ namespace SF3.Editor.Forms
             // tsmiScenario_Scenario2
             // 
             this.tsmiScenario_Scenario2.Name = "tsmiScenario_Scenario2";
-            this.tsmiScenario_Scenario2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
+            this.tsmiScenario_Scenario2.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
             this.tsmiScenario_Scenario2.Size = new System.Drawing.Size(188, 22);
             this.tsmiScenario_Scenario2.Text = "Scenario &2";
             this.tsmiScenario_Scenario2.Click += new System.EventHandler(this.tsmiScenario_Scenario2_Click);
@@ -236,7 +231,7 @@ namespace SF3.Editor.Forms
             // tsmiScenario_Scenario3
             // 
             this.tsmiScenario_Scenario3.Name = "tsmiScenario_Scenario3";
-            this.tsmiScenario_Scenario3.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
+            this.tsmiScenario_Scenario3.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
             this.tsmiScenario_Scenario3.Size = new System.Drawing.Size(188, 22);
             this.tsmiScenario_Scenario3.Text = "Scenario &3";
             this.tsmiScenario_Scenario3.Click += new System.EventHandler(this.tsmiScenario_Scenario3_Click);
@@ -244,7 +239,7 @@ namespace SF3.Editor.Forms
             // tsmiScenario_PremiumDisk
             // 
             this.tsmiScenario_PremiumDisk.Name = "tsmiScenario_PremiumDisk";
-            this.tsmiScenario_PremiumDisk.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D4)));
+            this.tsmiScenario_PremiumDisk.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D4)));
             this.tsmiScenario_PremiumDisk.Size = new System.Drawing.Size(188, 22);
             this.tsmiScenario_PremiumDisk.Text = "&Premium Disk";
             this.tsmiScenario_PremiumDisk.Click += new System.EventHandler(this.tsmiScenario_PremiumDisk_Click);
@@ -267,7 +262,7 @@ namespace SF3.Editor.Forms
             // 
             this.tsmiFile_OpenPrevious.Enabled = false;
             this.tsmiFile_OpenPrevious.Name = "tsmiFile_OpenPrevious";
-            this.tsmiFile_OpenPrevious.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            this.tsmiFile_OpenPrevious.ShortcutKeys = ((System.Windows.Forms.Keys) (((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt)
             | System.Windows.Forms.Keys.Oemcomma)));
             this.tsmiFile_OpenPrevious.ShowShortcutKeys = false;
             this.tsmiFile_OpenPrevious.Size = new System.Drawing.Size(204, 22);
@@ -279,7 +274,7 @@ namespace SF3.Editor.Forms
             // 
             this.tsmiFile_OpenNext.Enabled = false;
             this.tsmiFile_OpenNext.Name = "tsmiFile_OpenNext";
-            this.tsmiFile_OpenNext.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            this.tsmiFile_OpenNext.ShortcutKeys = ((System.Windows.Forms.Keys) (((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt)
             | System.Windows.Forms.Keys.OemPeriod)));
             this.tsmiFile_OpenNext.ShowShortcutKeys = false;
             this.tsmiFile_OpenNext.Size = new System.Drawing.Size(204, 22);

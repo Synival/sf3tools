@@ -4,15 +4,15 @@ using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Extensions;
-using SF3.Editor.Extensions;
-using SF3.Editor.Forms;
+using SF3.Win.Extensions;
+using SF3.Win.Forms;
 using SF3.Editors;
 using SF3.Editors.X1;
 using SF3.Loaders;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.X1_Editor.Controls;
-using static SF3.Editor.Extensions.TabControlExtensions;
+using static SF3.Win.Extensions.TabControlExtensions;
 
 namespace SF3.X1_Editor.Forms {
     public partial class frmX1_Editor : EditorForm {

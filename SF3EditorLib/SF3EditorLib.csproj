@@ -8,7 +8,7 @@
     <ProjectGuid>{5FE40461-C218-45BE-8947-9B4A8D8291FD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SF3.Editor</RootNamespace>
+    <RootNamespace>SF3.Win</RootNamespace>
     <AssemblyName>SF3EditorLib</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
