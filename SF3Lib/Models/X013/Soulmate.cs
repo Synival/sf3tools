@@ -1,11 +1,11 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.X013 {
     public class Soulmate : Model {
         private readonly int chance;
 
-        public Soulmate(IByteEditor editor, int id, string name, int address)
+        public Soulmate(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x01) {
             chance = Address; // 2 bytes
         }

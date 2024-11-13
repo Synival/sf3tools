@@ -1,9 +1,9 @@
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Models.X002;
 
 namespace SF3.Tables.X002 {
     public class ItemTable : Table<Item> {
-        public ItemTable(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public ItemTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }
 
         public override bool Load()

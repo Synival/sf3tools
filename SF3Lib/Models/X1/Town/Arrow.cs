@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.X1.Town {
     public class Arrow : Model {
@@ -10,7 +10,7 @@ namespace SF3.Models.X1.Town {
         private readonly int unknown8; //2 byte
         private readonly int unknownA; //2 byte
 
-        public Arrow(IByteEditor editor, int id, string name, int address)
+        public Arrow(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x0c) {
             unknown0  = Address; //2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
             textID    = Address + 0x02;

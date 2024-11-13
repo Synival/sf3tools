@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Tables;
 using SF3.Tables.X1.Battle;
 using SF3.Types;
@@ -8,7 +8,7 @@ using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Models.X1.Battle {
     public class Battle {
-        public Battle(IByteEditor editor, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable) {
+        public Battle(IRawEditor editor, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable) {
             Editor    = editor;
             MapLeader = mapLeader;
             Address   = address;
@@ -36,7 +36,7 @@ namespace SF3.Models.X1.Battle {
         [BulkCopyRowName]
         public string Name => MapLeader.ToString() + " Battle";
 
-        public IByteEditor Editor { get; }
+        public IRawEditor Editor { get; }
         public MapLeaderType MapLeader { get; }
         public int Address { get; }
 

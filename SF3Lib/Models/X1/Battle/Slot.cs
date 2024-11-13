@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Types;
 
 namespace SF3.Models.X1.Battle {
@@ -51,7 +51,7 @@ namespace SF3.Models.X1.Battle {
         private readonly int unknown39;
         private readonly int unknown40;
 
-        public Slot(IByteEditor editor, int id, string name, int address)
+        public Slot(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x34) {
             enemyID      = Address;      // 2 bytes  
             x            = Address +  2; // 2 bytes

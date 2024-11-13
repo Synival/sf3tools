@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Types;
 
 namespace SF3.Models.X002 {
@@ -25,7 +25,7 @@ namespace SF3.Models.X002 {
         private readonly int lv4Cost;
         private readonly int lv4Damage;
 
-        public Spell(IByteEditor editor, int id, string name, int address)
+        public Spell(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x14) {
             targetType  = Address;
             damageType  = Address + 1;

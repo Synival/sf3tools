@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Types;
 
 namespace SF3.Models.X013 {
@@ -9,7 +9,7 @@ namespace SF3.Models.X013 {
         private readonly int extraPow;
         private readonly int pow;
 
-        public Special(IByteEditor editor, int id, string name, int address)
+        public Special(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x04) {
             unknown1          = Address;     // 1 byte
             damageCalculation = Address + 1; // 1 byte

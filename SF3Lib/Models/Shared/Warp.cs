@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.Shared {
     public class Warp : Model {
@@ -8,7 +8,7 @@ namespace SF3.Models.Shared {
         private readonly int type;
         private readonly int map;
 
-        public Warp(IByteEditor editor, int id, string name, int address)
+        public Warp(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x04) {
             unknown1 = Address;
             unknown2 = Address + 1;

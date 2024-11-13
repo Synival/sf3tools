@@ -1,9 +1,9 @@
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Models.X1.Battle;
 
 namespace SF3.Tables.X1.Battle {
     public class CustomMovementTable : Table<CustomMovement> {
-        public CustomMovementTable(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public CustomMovementTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }
 
         public override bool Load()

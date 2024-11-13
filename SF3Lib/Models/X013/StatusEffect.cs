@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.X013 {
     public class StatusEffect : Model {
@@ -23,7 +23,7 @@ namespace SF3.Models.X013 {
         private readonly int unknown8;
         private readonly int luck9;
         private readonly int unknown9;
-        public StatusEffect(IByteEditor editor, int id, string name, int address)
+        public StatusEffect(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x18) {
             luck0    = Address;
             unknown0 = Address + 0x01;

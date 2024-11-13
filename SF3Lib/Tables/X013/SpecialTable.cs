@@ -1,9 +1,9 @@
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Models.X013;
 
 namespace SF3.Tables.X013 {
     public class SpecialTable : Table<Special> {
-        public SpecialTable(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public SpecialTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }
 
         public override bool Load()

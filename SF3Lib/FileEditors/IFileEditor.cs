@@ -1,13 +1,13 @@
 using System;
 using System.IO;
 using CommonLib.NamedValues;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.FileEditors {
     /// <summary>
     /// Used for loading, saving, reading, and modifying .BIN files.
     /// </summary>
-    public interface IFileEditor : IByteEditor {
+    public interface IFileEditor : IRawEditor {
         /// <summary>
         /// Loads a file's binary data for editing. Invokes events 'PreFileLoaded' and 'FileLoaded'.
         /// </summary>

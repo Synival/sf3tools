@@ -1,9 +1,9 @@
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Models.X1.Battle;
 
 namespace SF3.Tables.X1.Battle {
     public class SlotTable : Table<Slot> {
-        public SlotTable(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public SlotTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }
 
         public override bool Load()

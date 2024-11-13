@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using MPDLib;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Models.MPD.TextureChunk;
 using SF3.NamedValues;
 using SF3.Tables;
@@ -47,7 +47,7 @@ namespace SF3.FileEditors {
                     Chunks[i] = new Chunk(Data, chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
             }
 
-            ChunkEditors = new IByteEditor[Chunks.Length];
+            ChunkEditors = new IRawEditor[Chunks.Length];
             if (Chunks[2]?.Data?.Length > 0)
                 ChunkEditors[2] = new ByteEditor(Chunks[2].Data);
             // TODO: this works, but it's kind of a dumb hack!!
@@ -108,7 +108,7 @@ namespace SF3.FileEditors {
             Chunks                   = null;
         }
 
-        public IByteEditor[] ChunkEditors { get; private set; }
+        public IRawEditor[] ChunkEditors { get; private set; }
 
         [BulkCopyRecurse]
         public HeaderTable Header { get; private set; }

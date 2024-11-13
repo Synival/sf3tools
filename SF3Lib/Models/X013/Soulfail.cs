@@ -1,11 +1,11 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.X013 {
     public class Soulfail : Model {
         private readonly int expLost;
 
-        public Soulfail(IByteEditor editor, int id, string name, int address)
+        public Soulfail(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x01) {
             expLost = Address; // 1 bytes
         }

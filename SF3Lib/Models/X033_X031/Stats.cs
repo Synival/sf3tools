@@ -1,7 +1,7 @@
 using System;
 using CommonLib.Attributes;
 using CommonLib.Statistics;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Statistics;
 using SF3.Types;
 
@@ -141,7 +141,7 @@ namespace SF3.Models.X033_X031 {
         private readonly int accessoryEquipable3;
         private readonly int accessoryEquipable4;
 
-        public Stats(IByteEditor editor, int id, string name, int address)
+        public Stats(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x7B) {
             character           = Address + 0x00;
             characterClass      = Address + 0x01;

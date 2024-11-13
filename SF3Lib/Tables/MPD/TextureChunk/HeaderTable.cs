@@ -1,9 +1,9 @@
-﻿using SF3.StreamEditors;
+﻿using SF3.RawEditors;
 using SF3.Models.MPD.TextureChunk;
 
 namespace SF3.Tables.MPD.TextureChunk {
     public class HeaderTable : Table<Header> {
-        public HeaderTable(IByteEditor fileEditor, int address) : base(fileEditor, address) {
+        public HeaderTable(IRawEditor fileEditor, int address) : base(fileEditor, address) {
         }
 
         public override bool Load()

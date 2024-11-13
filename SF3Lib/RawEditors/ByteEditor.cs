@@ -2,11 +2,11 @@ using System;
 using System.Text;
 using SF3.Exceptions;
 
-namespace SF3.StreamEditors {
+namespace SF3.RawEditors {
     /// <summary>
     /// Used for modifying any set of bytes.
     /// </summary>
-    public class ByteEditor : IByteEditor {
+    public class ByteEditor : IRawEditor {
         public ByteEditor() {
         }
 

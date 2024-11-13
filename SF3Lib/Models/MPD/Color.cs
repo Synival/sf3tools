@@ -1,9 +1,9 @@
 ﻿using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.MPD {
     public class Color : Model {
-        public Color(IByteEditor editor, int id, string name, int address)
+        public Color(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 2) {
         }
 

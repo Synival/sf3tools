@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Tables;
 using SF3.Tables.MPD.TextureChunk;
 
 namespace SF3.Models.MPD.TextureChunk {
     public class TextureChunk {
-        public TextureChunk(IByteEditor editor, int address, string name) {
+        public TextureChunk(IRawEditor editor, int address, string name) {
             Editor  = editor;
             Address = address;
             Name    = name;
@@ -25,7 +25,7 @@ namespace SF3.Models.MPD.TextureChunk {
         [BulkCopyRowName]
         public string Name { get; }
 
-        public IByteEditor Editor { get; }
+        public IRawEditor Editor { get; }
         public int Address { get; }
 
         public List<ITable> Tables { get; }

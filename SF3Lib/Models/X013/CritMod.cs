@@ -1,12 +1,12 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.X013 {
     public class CritMod : Model {
         private readonly int advantage;
         private readonly int disadvantage;
 
-        public CritMod(IByteEditor editor, int id, string name, int address)
+        public CritMod(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x12) {
             advantage    = Address + 0x01; // 1 byte
             disadvantage = Address + 0x11; // 1 byte

@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Types;
 
 namespace SF3.Models.X002 {
@@ -13,7 +13,7 @@ namespace SF3.Models.X002 {
         private readonly int unknown;
         private readonly int chr;
 
-        public Loading(IByteEditor editor, int id, string name, int address)
+        public Loading(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x10) {
             locationID = Address;        // 2 bytes
             x1         = Address + 0x02; // 2 bytes

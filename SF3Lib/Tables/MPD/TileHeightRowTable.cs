@@ -1,9 +1,9 @@
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Models.MPD;
 
 namespace SF3.Tables.MPD {
     public class TileHeightRowTable : Table<TileHeightRow> {
-        public TileHeightRowTable(IByteEditor fileEditor, int address) : base(fileEditor, address) {
+        public TileHeightRowTable(IRawEditor fileEditor, int address) : base(fileEditor, address) {
         }
 
         public override bool Load() {

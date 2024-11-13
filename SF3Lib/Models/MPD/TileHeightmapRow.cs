@@ -1,10 +1,10 @@
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.MPD {
     public class TileHeightmapRow : Model {
         private readonly int[] xAddress = new int[64];
 
-        public TileHeightmapRow(IByteEditor editor, int id, string name, int address)
+        public TileHeightmapRow(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 256) {
             for (var i = 0; i < xAddress.Length; i++)
                 xAddress[i] = Address + i * 4;

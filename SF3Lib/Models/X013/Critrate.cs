@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.X013 {
     public class Critrate : Model {
@@ -10,7 +10,7 @@ namespace SF3.Models.X013 {
         private readonly int fourSpecial;
         private readonly int fiveSpecial;
 
-        public Critrate(IByteEditor editor, int id, string name, int address)
+        public Critrate(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x08) {
             noSpecial    = Address;     // 1 byte
             oneSpecial   = Address + 1; // 1 byte

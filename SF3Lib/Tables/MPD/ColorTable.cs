@@ -1,9 +1,9 @@
-﻿using SF3.StreamEditors;
+﻿using SF3.RawEditors;
 using SF3.Models.MPD;
 
 namespace SF3.Tables.MPD {
     public class ColorTable : Table<Color> {
-        public ColorTable(IByteEditor fileEditor, int address, int colors) : base(fileEditor, address) {
+        public ColorTable(IRawEditor fileEditor, int address, int colors) : base(fileEditor, address) {
             MaxSize = colors;
         }
 

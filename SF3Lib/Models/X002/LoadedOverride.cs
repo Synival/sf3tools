@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Types;
 
 namespace SF3.Models.X002 {
@@ -18,7 +18,7 @@ namespace SF3.Models.X002 {
         private readonly int julChr;
         private readonly int extraChr;
 
-        public LoadedOverride(IByteEditor editor, int id, string name, int address)
+        public LoadedOverride(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x28) {
             mapID      = Address;        // 2 bytes
             synMusic   = Address + 0x02; // 1 byte

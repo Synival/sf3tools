@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.Shared {
     public class TileMovement : Model {
@@ -21,7 +21,7 @@ namespace SF3.Models.Shared {
         private readonly int unknown0e;
         private readonly int unknown0f;
 
-        public TileMovement(IByteEditor editor, int id, string name, int address)
+        public TileMovement(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x10) {
             noEntry       = Address;
             unknown01     = Address + 0x01;

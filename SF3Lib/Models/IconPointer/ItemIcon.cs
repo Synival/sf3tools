@@ -1,11 +1,11 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.IconPointer {
     public class ItemIcon : Model {
         private readonly int theItemIcon;
 
-        public ItemIcon(IByteEditor editor, int id, string name, int address, bool has16BitIconAddr)
+        public ItemIcon(IRawEditor editor, int id, string name, int address, bool has16BitIconAddr)
         : base(editor, id, name, address, has16BitIconAddr ? 0x02 : 0x04) {
             Has16BitIconAddr = has16BitIconAddr;
             theItemIcon = Address; // 2 or 4 bytes

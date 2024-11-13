@@ -1,4 +1,4 @@
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Models;
 
 namespace SF3.Tables {
@@ -21,7 +21,7 @@ namespace SF3.Tables {
         /// <summary>
         /// The editor used for this table.
         /// </summary>
-        IByteEditor FileEditor { get; }
+        IRawEditor FileEditor { get; }
 
         /// <summary>
         /// The address of the first row of the table.

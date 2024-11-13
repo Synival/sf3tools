@@ -1,10 +1,10 @@
 using System;
 
-namespace SF3.StreamEditors {
+namespace SF3.RawEditors {
     /// <summary>
     /// Wrapper class for editing a byte[].
     /// </summary>
-    public interface IByteEditor {
+    public interface IRawEditor {
         /// <summary>
         /// Reference to the byte array. Please don't modify it!
         /// </summary>

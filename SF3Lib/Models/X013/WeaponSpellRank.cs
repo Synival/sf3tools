@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.X013 {
     public class WeaponSpellRank : Model {
@@ -9,7 +9,7 @@ namespace SF3.Models.X013 {
         private readonly int rankA;
         private readonly int rankS;
 
-        public WeaponSpellRank(IByteEditor editor, int id, string name, int address)
+        public WeaponSpellRank(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x05) {
             rankNone = Address;     // 1 byte
             rankC    = Address + 1; // 1 byte

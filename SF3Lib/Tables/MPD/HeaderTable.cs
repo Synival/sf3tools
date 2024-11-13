@@ -1,9 +1,9 @@
-﻿using SF3.StreamEditors;
+﻿using SF3.RawEditors;
 using SF3.Models.MPD;
 
 namespace SF3.Tables.MPD {
     public class HeaderTable : Table<Header> {
-        public HeaderTable(IByteEditor fileEditor, int address, bool hasPalette3) : base(fileEditor, address) {
+        public HeaderTable(IRawEditor fileEditor, int address, bool hasPalette3) : base(fileEditor, address) {
             HasPalette3 = hasPalette3;
         }
 

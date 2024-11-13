@@ -1,6 +1,6 @@
 ﻿using System;
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Types;
 
 namespace SF3.Models.MPD.TextureChunk {
@@ -9,7 +9,7 @@ namespace SF3.Models.MPD.TextureChunk {
         private readonly int heightAddress;
         private readonly int imageDataOffsetAddress;
 
-        public Texture(IByteEditor editor, int id, string name, int address, int? nextImageDataOffset = null)
+        public Texture(IRawEditor editor, int id, string name, int address, int? nextImageDataOffset = null)
         : base(editor, id, name, address, 0x4) {
             widthAddress           = Address;     // 1 byte
             heightAddress          = Address + 1; // 1 byte

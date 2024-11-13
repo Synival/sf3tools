@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.X013 {
     public class SpecialChance : Model {
@@ -10,7 +10,7 @@ namespace SF3.Models.X013 {
         private readonly int fourSpecials3;
         private readonly int fourSpecials2;
 
-        public SpecialChance(IByteEditor editor, int id, string name, int address, bool hasLargeTable)
+        public SpecialChance(IRawEditor editor, int id, string name, int address, bool hasLargeTable)
         : base(editor, id, name, address, hasLargeTable ? 0x4a : 0x3a) {
             if (hasLargeTable) {
                 twoSpecials2   = Address + 0x01; // 1 byte

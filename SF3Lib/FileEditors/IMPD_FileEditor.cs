@@ -1,5 +1,5 @@
 using MPDLib;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Models.MPD.TextureChunk;
 using SF3.Tables.MPD;
 
@@ -8,7 +8,7 @@ namespace SF3.FileEditors {
         /// <summary>
         /// Byte editor for (de)compressed data for chunks
         /// </summary>
-        IByteEditor[] ChunkEditors { get; }
+        IRawEditor[] ChunkEditors { get; }
 
         HeaderTable Header { get; }
         ColorTable[] Palettes { get; }

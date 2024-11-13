@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Types;
 
 namespace SF3.Models.X033_X031 {
@@ -24,7 +24,7 @@ namespace SF3.Models.X033_X031 {
         private readonly int weapon4Type; // for exp
         private readonly int weapon4Exp; //2 bytes
 
-        public InitialInfo(IByteEditor editor, int id, string name, int address)
+        public InitialInfo(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x20) {
             character      = Address + 0x00;
             characterClass = Address + 0x01;

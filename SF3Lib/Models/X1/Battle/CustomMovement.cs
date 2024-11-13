@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.X1.Battle {
     public class CustomMovement : Model {
@@ -14,7 +14,7 @@ namespace SF3.Models.X1.Battle {
         private readonly int zPos4;
         private readonly int ending;
 
-        public CustomMovement(IByteEditor editor, int id, string name, int address)
+        public CustomMovement(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x16) {
             unknown00 = Address;      // 2 bytes
             xPos1     = Address +  2; // 2 bytes

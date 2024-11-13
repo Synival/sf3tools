@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.X013 {
     public class MagicBonus : Model {
@@ -12,7 +12,7 @@ namespace SF3.Models.X013 {
         private readonly int darkBonus;
         private readonly int unknownBonus;
 
-        public MagicBonus(IByteEditor editor, int id, string name, int address, bool has32BitValues)
+        public MagicBonus(IRawEditor editor, int id, string name, int address, bool has32BitValues)
         : base(editor, id, name, address, has32BitValues ? 0x20 : 0x08) {
             Has32BitValues = has32BitValues;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Models;
 using static SF3.Utils.ResourceUtils;
 
@@ -12,7 +12,7 @@ namespace SF3.Tables {
     /// Base implementation for any table of SF3 data that can be modified.
     /// </summary>
     public abstract class Table : ITable {
-        protected Table(IByteEditor fileEditor, string resourceFile, int address) {
+        protected Table(IRawEditor fileEditor, string resourceFile, int address) {
             FileEditor = fileEditor;
             ResourceFile = resourceFile;
             Address = address;
@@ -30,7 +30,7 @@ namespace SF3.Tables {
         /// <returns>'true' if successful (or no data is loaded), 'false' on failure.</returns>
         public abstract bool Reset();
 
-        public IByteEditor FileEditor { get; }
+        public IRawEditor FileEditor { get; }
         public string ResourceFile { get; }
         public int Address { get; }
 
@@ -43,10 +43,10 @@ namespace SF3.Tables {
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
     public abstract class Table<T> : Table, ITable<T> where T : class, IModel {
-        protected Table(IByteEditor fileEditor, int address) : base(fileEditor, null, address) {
+        protected Table(IRawEditor fileEditor, int address) : base(fileEditor, null, address) {
         }
 
-        protected Table(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        protected Table(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }
 
         public override bool Reset() {

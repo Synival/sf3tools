@@ -1,9 +1,9 @@
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Models.MPD;
 
 namespace SF3.Tables.MPD {
     public class TileTerrainRowTable : Table<TileTerrainRow> {
-        public TileTerrainRowTable(IByteEditor fileEditor, int address) : base(fileEditor, address) {
+        public TileTerrainRowTable(IRawEditor fileEditor, int address) : base(fileEditor, address) {
         }
 
         public override bool Load() {

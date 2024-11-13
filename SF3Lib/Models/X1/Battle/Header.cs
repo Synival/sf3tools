@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.X1.Battle {
     public class Header : Model {
@@ -14,7 +14,7 @@ namespace SF3.Models.X1.Battle {
         private readonly int unknown8;
         private readonly int unknown9;
 
-        public Header(IByteEditor editor, int id, string name, int address)
+        public Header(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x0A) {
             unknown1  = Address;     // 1 byte
             tableSize = Address + 1; // 1 byte

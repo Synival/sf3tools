@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using CommonLib.Extensions;
 using CommonLib.Utils;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Models.Shared;
 
 namespace SF3.Tables.Shared {
     public class WarpTable : Table<Warp> {
-        public WarpTable(IByteEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
+        public WarpTable(IRawEditor fileEditor, string resourceFile, int address) : base(fileEditor, resourceFile, address) {
         }
 
         public override bool Load() {

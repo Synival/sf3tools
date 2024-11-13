@@ -1,5 +1,5 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 using SF3.Types;
 
 namespace SF3.Models.X019 {
@@ -72,7 +72,7 @@ namespace SF3.Models.X019 {
         private readonly int unknown19;
         private readonly int unknown20;
 
-        public Monster(IByteEditor editor, int id, string name, int address)
+        public Monster(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x4C) {
             maxHP             = Address; // 2 bytes
             maxMP             = Address + 2;

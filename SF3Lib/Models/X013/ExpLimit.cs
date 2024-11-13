@@ -1,12 +1,12 @@
 using CommonLib.Attributes;
-using SF3.StreamEditors;
+using SF3.RawEditors;
 
 namespace SF3.Models.X013 {
     public class ExpLimit : Model {
         private readonly int expCheck;
         private readonly int expReplacement;
 
-        public ExpLimit(IByteEditor editor, int id, string name, int address)
+        public ExpLimit(IRawEditor editor, int id, string name, int address)
         : base(editor, id, name, address, 0x07) {
             expCheck       = Address;     // 1 byte
             expReplacement = Address + 6; // 1 byte
