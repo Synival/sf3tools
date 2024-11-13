@@ -59,6 +59,9 @@ namespace SF3.X1_Editor.Forms {
         protected override string FileDialogFilter
             => (IsBTL99 ? "SF3 Data (X1BTL99.BIN)|X1BTL99.BIN|" : "SF3 Data (X1*.BIN)|X1*.BIN|") + base.FileDialogFilter;
 
+        protected override IBaseEditor MakeEditor(IFileLoader loader)
+            => Editors.X1_Editor.Create(loader.RawEditor, loader.NameGetterContext, Scenario, IsBTL99);
+
         private class PopulateBattleTabConfig : IPopulateTabConfig {
             public PopulateBattleTabConfig(TabPage tabPage, Dictionary<MapLeaderType, Battle> battleTable, MapLeaderType mapLeader) {
                 TabPage = tabPage;

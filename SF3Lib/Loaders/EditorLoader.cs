@@ -58,16 +58,24 @@ namespace SF3.Loaders {
             return true;
         }
 
-        public IBaseEditor Editor { get; set; }
-
-        private IRawEditor _editor = null;
-
-        public IRawEditor RawEditor {
+        private IBaseEditor _editor = null;
+        public IBaseEditor Editor {
             get => _editor;
             set {
                 if (_editor != value) {
+                    _editor = value;
+                    UpdateTitle();
+                }
+            }
+        }
+  
+        private IRawEditor _rawEditor = null;
+        public IRawEditor RawEditor {
+            get => _rawEditor;
+            set {
+                if (_rawEditor != value) {
                     var oldIsLoaded = IsLoaded;
-                    var oldEditor = _editor;
+                    var oldEditor = _rawEditor;
 
                     if (oldEditor != null) {
                         PreClosed?.Invoke(this, EventArgs.Empty);
@@ -77,7 +85,7 @@ namespace SF3.Loaders {
                         PreLoaded?.Invoke(this, EventArgs.Empty);
                     }
 
-                    _editor = value;
+                    _rawEditor = value;
 
                     if (oldEditor != null) {
                         Closed?.Invoke(this, EventArgs.Empty);
@@ -130,10 +138,11 @@ namespace SF3.Loaders {
         }
 
         protected void UpdateTitle() {
-            Title = IsLoaded ? (LoadedTitle + ((RawEditor?.IsModified == true) ? "*" : "")) : UnloadedTitle;
+            var title = IsLoaded ? (LoadedTitle + ((RawEditor?.IsModified == true) ? "*" : "")) : UnloadedTitle;
             var editorTitle = Editor?.Title ?? "";
             if (editorTitle.Length > 0)
-                Title += " (" + editorTitle + ")";
+                title += " (" + editorTitle + ")";
+            Title = title;
         }
 
         public INameGetterContext NameGetterContext { get; }

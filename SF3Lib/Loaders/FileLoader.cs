@@ -30,7 +30,9 @@ namespace SF3.Loaders {
                         stream.CopyTo(memoryStream);
                         newData = memoryStream.ToArray();
                     }
-                    return new ByteEditor(newData);
+                    var newEditor = new ByteEditor(newData);
+                    Filename = filename;
+                    return newEditor;
                 }
                 catch (Exception) {
                     return null;
@@ -79,6 +81,5 @@ namespace SF3.Loaders {
         }
 
         protected override string LoadedTitle => ShortFilename;
-        protected override string UnloadedTitle => "(no file)";
     }
 }

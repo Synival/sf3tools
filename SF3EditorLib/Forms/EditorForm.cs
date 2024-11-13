@@ -176,16 +176,16 @@ namespace SF3.Editor.Forms {
             return true;
         }
 
-        private void AttachFileEditor(IFileLoader fileEditor) {
-            fileEditor.TitleChanged      += (obj, args) => UpdateTitle();
-            fileEditor.PreLoaded         += (obj, args) => PreFileLoaded?.Invoke(this, args);
-            fileEditor.Loaded            += (obj, args) => FileLoaded?.Invoke(this, args);
-            fileEditor.PreClosed         += (obj, args) => PreFileClosed?.Invoke(this, args);
-            fileEditor.Closed            += (obj, args) => FileClosed?.Invoke(this, args);
-            fileEditor.PreSaved          += (obj, args) => PreFileSaved?.Invoke(this, args);
-            fileEditor.Saved             += (obj, args) => FileSaved?.Invoke(this, args);
-            fileEditor.IsModifiedChanged += (obj, args) => FileModifiedChanged?.Invoke(this, args);
-            fileEditor.IsLoadedChanged   += (obj, args) => FileIsLoadedChanged?.Invoke(this, args);
+        private void AttachFileEditor(IFileLoader loader) {
+            loader.TitleChanged      += (obj, args) => UpdateTitle();
+            loader.PreLoaded         += (obj, args) => PreFileLoaded?.Invoke(this, args);
+            loader.Loaded            += (obj, args) => FileLoaded?.Invoke(this, args);
+            loader.PreClosed         += (obj, args) => PreFileClosed?.Invoke(this, args);
+            loader.Closed            += (obj, args) => FileClosed?.Invoke(this, args);
+            loader.PreSaved          += (obj, args) => PreFileSaved?.Invoke(this, args);
+            loader.Saved             += (obj, args) => FileSaved?.Invoke(this, args);
+            loader.IsModifiedChanged += (obj, args) => FileModifiedChanged?.Invoke(this, args);
+            loader.IsLoadedChanged   += (obj, args) => FileIsLoadedChanged?.Invoke(this, args);
         }
 
         /// <summary>
@@ -347,14 +347,14 @@ namespace SF3.Editor.Forms {
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
-                var copyFileEditor = new FileLoader(new NameGetterContext(Scenario));
-                if (!copyFileEditor.LoadFile(copyToFilename, MakeEditor)) {
+                var copyFileLoader = new FileLoader(new NameGetterContext(Scenario));
+                if (!copyFileLoader.LoadFile(copyToFilename, MakeEditor)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
 
-                result = FileLoader.BulkCopyProperties(copyFileEditor);
-                if (!copyFileEditor.SaveFile(copyToFilename)) {
+                result = FileLoader.Editor.BulkCopyProperties(copyFileLoader.Editor);
+                if (!copyFileLoader.SaveFile(copyToFilename)) {
                     ErrorMessage("Error trying to update file.");
                     return;
                 }
@@ -394,7 +394,7 @@ namespace SF3.Editor.Forms {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
-                result = copyFileEditor.BulkCopyProperties(FileLoader);
+                result = copyFileEditor.Editor.BulkCopyProperties(FileLoader.Editor);
             }
             catch (Exception e) {
                 //wrong file was selected
@@ -490,9 +490,7 @@ namespace SF3.Editor.Forms {
         /// The title to set when using UpdateTitle().
         /// </summary>
         /// <returns></returns>
-        protected virtual string MakeTitle() => (FileLoader?.IsLoaded == true)
-            ? FileLoader.EditorTitle(_baseTitle)
-            : _baseTitle;
+        protected virtual string MakeTitle() => FileLoader?.EditorTitle(_baseTitle) ?? _baseTitle;
 
         /// <summary>
         /// File filter for OpenFileDialog() and SaveFileDialog(). Must be overridden.
