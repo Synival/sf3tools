@@ -434,8 +434,8 @@ namespace SF3.MPD_Editor.Forms {
             this.textureChunkControl3 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.tabChunk9 = new System.Windows.Forms.TabPage();
             this.textureChunkControl4 = new SF3.X1_Editor.Controls.TextureChunkControl();
-            this.tabBattleMap = new System.Windows.Forms.TabPage();
-            this.battleMapControl1 = new SF3.MPDEditor.Controls.BattleMapControl();
+            this.tabSurfaceMap = new System.Windows.Forms.TabPage();
+            this.battleMapControl1 = new SF3.MPDEditor.Controls.SurfaceMapControl();
             this.menuStrip2.SuspendLayout();
             this.tabTileItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileItems)).BeginInit();
@@ -462,7 +462,7 @@ namespace SF3.MPD_Editor.Forms {
             this.tabChunk7.SuspendLayout();
             this.tabChunk8.SuspendLayout();
             this.tabChunk9.SuspendLayout();
-            this.tabBattleMap.SuspendLayout();
+            this.tabSurfaceMap.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip2
@@ -1149,7 +1149,7 @@ namespace SF3.MPD_Editor.Forms {
             this.tabMain.Controls.Add(this.tabChunk7);
             this.tabMain.Controls.Add(this.tabChunk8);
             this.tabMain.Controls.Add(this.tabChunk9);
-            this.tabMain.Controls.Add(this.tabBattleMap);
+            this.tabMain.Controls.Add(this.tabSurfaceMap);
             this.tabMain.Location = new System.Drawing.Point(0, 27);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
@@ -4304,16 +4304,16 @@ namespace SF3.MPD_Editor.Forms {
             this.textureChunkControl4.Size = new System.Drawing.Size(764, 484);
             this.textureChunkControl4.TabIndex = 1;
             // 
-            // tabBattleMap
+            // tabSurfaceMap
             // 
-            this.tabBattleMap.AutoScroll = true;
-            this.tabBattleMap.Controls.Add(this.battleMapControl1);
-            this.tabBattleMap.Location = new System.Drawing.Point(4, 22);
-            this.tabBattleMap.Name = "tabBattleMap";
-            this.tabBattleMap.Size = new System.Drawing.Size(756, 480);
-            this.tabBattleMap.TabIndex = 13;
-            this.tabBattleMap.Text = "Battle Map Viewer";
-            this.tabBattleMap.UseVisualStyleBackColor = true;
+            this.tabSurfaceMap.AutoScroll = true;
+            this.tabSurfaceMap.Controls.Add(this.battleMapControl1);
+            this.tabSurfaceMap.Location = new System.Drawing.Point(4, 22);
+            this.tabSurfaceMap.Name = "tabSurfaceMap";
+            this.tabSurfaceMap.Size = new System.Drawing.Size(756, 480);
+            this.tabSurfaceMap.TabIndex = 13;
+            this.tabSurfaceMap.Text = "Surface Map Viewer";
+            this.tabSurfaceMap.UseVisualStyleBackColor = true;
             // 
             // battleMapControl1
             // 
@@ -4367,7 +4367,7 @@ namespace SF3.MPD_Editor.Forms {
             this.tabChunk7.ResumeLayout(false);
             this.tabChunk8.ResumeLayout(false);
             this.tabChunk9.ResumeLayout(false);
-            this.tabBattleMap.ResumeLayout(false);
+            this.tabSurfaceMap.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4755,8 +4755,8 @@ namespace SF3.MPD_Editor.Forms {
         private X1_Editor.Controls.TextureChunkControl textureChunkControl2;
         private X1_Editor.Controls.TextureChunkControl textureChunkControl3;
         private X1_Editor.Controls.TextureChunkControl textureChunkControl4;
-        private System.Windows.Forms.TabPage tabBattleMap;
-        private MPDEditor.Controls.BattleMapControl battleMapControl1;
+        private System.Windows.Forms.TabPage tabSurfaceMap;
+        private MPDEditor.Controls.SurfaceMapControl battleMapControl1;
         private System.Windows.Forms.TabPage tabChunkHeader;
         private BrightIdeasSoftware.ObjectListView olvChunkHeader;
         private BrightIdeasSoftware.OLVColumn lvcChunkHeaderID;

@@ -8,8 +8,8 @@ using SF3.Editors.MPD;
 using SF3.MPDEditor.Extensions;
 
 namespace SF3.MPDEditor.Controls {
-    public partial class BattleMapControl : UserControl {
-        public BattleMapControl() {
+    public partial class SurfaceMapControl : UserControl {
+        public SurfaceMapControl() {
             InitializeComponent();
 
             SetStyle(ControlStyles.OptimizedDoubleBuffer |

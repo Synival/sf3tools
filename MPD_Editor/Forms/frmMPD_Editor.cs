@@ -103,7 +103,7 @@ namespace SF3.MPD_Editor.Forms {
                 new PopulateTextureChunkTabConfig(tabChunk9, Editor.TextureChunks?[3]),
 
                 // TODO: just a true/false predicate would work here
-                new PopulateOLVTabConfig(tabBattleMap, null, Editor.Header), // Should always be present
+                new PopulateOLVTabConfig(tabSurfaceMap, null, Editor.Header), // Should always be present
             });
 
             if (Editor.TileSurfaceCharacterRows != null)
