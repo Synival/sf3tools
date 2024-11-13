@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
+using CommonLib.NamedValues;
+using SF3.RawEditors;
 using SF3.Models.X1.Battle;
-using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Tables.Shared;
 using SF3.Tables.X1;
@@ -13,9 +14,16 @@ using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Editors {
-    public class X1_FileEditor : ScenarioTableEditor, IX1_Editor {
-        public X1_FileEditor(ScenarioType scenario, bool isBTL99) : base(scenario, new NameGetterContext(scenario)) {
+    public class X1_Editor : ScenarioTableEditor, IX1_Editor {
+        protected X1_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(editor, nameContext, scenario) {
             IsBTL99 = isBTL99;
+        }
+
+        public static X1_Editor Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) {
+            var newEditor = new X1_Editor(editor, nameContext, scenario, isBTL99);
+            if (!newEditor.Init())
+                throw new InvalidOperationException("Couldn't initialize tables");
+            return newEditor;
         }
 
         public override IEnumerable<ITable> MakeTables() {
@@ -38,8 +46,8 @@ namespace SF3.Editors {
             var battlePointersPointerPointerAddress = isScn1OrBTL99 ? 0x0018 : 0x0024;
             sub = IsBTL99 ? 0x06060000 : (Scenario == ScenarioType.Scenario1) ? 0x0605f000 : 0x0605e000;
 
-            battlePointersPointerAddress = GetDouble(battlePointersPointerPointerAddress) - sub;
-            battlePointersAddress = GetDouble(battlePointersPointerAddress);
+            battlePointersPointerAddress = Editor.GetDouble(battlePointersPointerPointerAddress) - sub;
+            battlePointersAddress = Editor.GetDouble(battlePointersPointerAddress);
 
             // A value higher means a pointer is on the address, meaning we are in a battle. If it is not a
             // pointer we are at our destination so we know a town is loaded.
@@ -53,29 +61,29 @@ namespace SF3.Editors {
             }
 
             // The "Treasure" table is the only table present in all X1 files regardless of scenario or town/battle status.
-            treasureAddress = GetDouble(0x000c) - sub;
+            treasureAddress = Editor.GetDouble(0x000c) - sub;
 
             if (isScn1OrBTL99) {
                 hasLargeEnemyTable = true;
 
                 warpAddress          = -1; // X002 editor has Scenario1 WarpTable, and provides the address itself.
                 npcAddress           = (IsBattle == true) ? -1 : battlePointersPointerAddress; // same address
-                enterAddress         = GetDouble(0x0024) - sub;
+                enterAddress         = Editor.GetDouble(0x0024) - sub;
                 arrowAddress         = -1; // Not present in Scenario1
             }
             else {
                 hasLargeEnemyTable = false;
 
-                warpAddress          = GetDouble(0x0018) - sub;
+                warpAddress          = Editor.GetDouble(0x0018) - sub;
                 npcAddress           = (IsBattle == true) ? -1 : battlePointersPointerAddress; // same address
-                enterAddress         = (IsBattle == true) ? -1 : GetDouble(0x0030) - sub;
-                arrowAddress         = (IsBattle == true) ? -1 : GetDouble(0x0060) - sub;
+                enterAddress         = (IsBattle == true) ? -1 : Editor.GetDouble(0x0030) - sub;
+                arrowAddress         = (IsBattle == true) ? -1 : Editor.GetDouble(0x0060) - sub;
             }
 
             // If this is a battle, we need to get the addresses for a lot of battle-specific stuff.
             if (IsBattle == true) {
                 // Load the BattlePointersTable early so we can use it to determine the addresses of other tables.
-                BattlePointersTable = new BattlePointersTable(this, ResourceFile("BattlePointersList.xml"), battlePointersAddress);
+                BattlePointersTable = new BattlePointersTable(Editor, ResourceFile("BattlePointersList.xml"), battlePointersAddress);
                 BattlePointersTable.Load();
 
                 // Get the address of the selected battle, or, if it's not available, the first available in the BattlePointersTable.
@@ -84,7 +92,7 @@ namespace SF3.Editors {
                     int mapIndex = (int) mapLeader;
                     var battleTableAddress = BattlePointersTable.Rows[mapIndex].BattlePointer;
                     if (battleTableAddress != 0)
-                        Battles.Add(mapLeader, new Battle(this, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
+                        Battles.Add(mapLeader, new Battle(Editor, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
                 }
 
                 // Determine the location of the TileMovementTable, which isn't so straight-forward.
@@ -92,13 +100,13 @@ namespace SF3.Editors {
                 if (!isScn1OrBTL99) {
                     // First, look inside a function for its address.
                     // The value we want is 0xac bytes later always (except for X1BTL330-339 and X1BTLP05)
-                    int tileMovementAddressPointer = GetDouble(0x000001c4) - sub + 0x00ac;
+                    int tileMovementAddressPointer = Editor.GetDouble(0x000001c4) - sub + 0x00ac;
 
                     // No problems with this method in Scenario 2.
                     if (Scenario == ScenarioType.Scenario2)
-                        tileMovementAddress = GetDouble(tileMovementAddressPointer) - sub;
+                        tileMovementAddress = Editor.GetDouble(tileMovementAddressPointer) - sub;
                     else {
-                        tileMovementAddress = GetDouble(tileMovementAddressPointer);
+                        tileMovementAddress = Editor.GetDouble(tileMovementAddressPointer);
 
                         // Is this a valid pointer to memory?
                         if (tileMovementAddress < 0x06070000 && tileMovementAddress > 0)
@@ -107,7 +115,7 @@ namespace SF3.Editors {
                         // and locate the table directly.
                         // TODO: does this pointer exist in other X1BTL* files?
                         else
-                            tileMovementAddress = GetDouble(0x0024) - sub + 0x14;
+                            tileMovementAddress = Editor.GetDouble(0x0024) - sub + 0x14;
                     }
                 }
                 else
@@ -123,31 +131,29 @@ namespace SF3.Editors {
             // Add tables present outside of the battle tables.
             var tables = new List<ITable>();
             if (treasureAddress >= 0)
-                tables.Add(TreasureTable = new TreasureTable(this, ResourceFile("X1Treasure.xml"), treasureAddress));
+                tables.Add(TreasureTable = new TreasureTable(Editor, ResourceFile("X1Treasure.xml"), treasureAddress));
             if (warpAddress >= 0)
-                tables.Add(WarpTable = new WarpTable(this, null, warpAddress));
+                tables.Add(WarpTable = new WarpTable(Editor, null, warpAddress));
             if (battlePointersAddress >= 0)
                 tables.Add(BattlePointersTable);
             if (npcAddress >= 0)
-                tables.Add(NpcTable = new NpcTable(this, ResourceFile("X1Npc.xml"), npcAddress));
+                tables.Add(NpcTable = new NpcTable(Editor, ResourceFile("X1Npc.xml"), npcAddress));
             if (enterAddress >= 0)
-                tables.Add(EnterTable = new EnterTable(this, ResourceFile("X1Enter.xml"), enterAddress));
+                tables.Add(EnterTable = new EnterTable(Editor, ResourceFile("X1Enter.xml"), enterAddress));
             if (arrowAddress >= 0)
-                tables.Add(ArrowTable = new ArrowTable(this, ResourceFile("X1Arrow.xml"), arrowAddress));
+                tables.Add(ArrowTable = new ArrowTable(Editor, ResourceFile("X1Arrow.xml"), arrowAddress));
 
             // Add tables for battle tables.
             if (Battles != null)
                 tables.AddRange(Battles.SelectMany(x => x.Value.Tables));
 
             if (tileMovementAddress >= 0)
-                tables.Add(TileMovementTable = new TileMovementTable(this, ResourceFile("MovementTypes.xml"), tileMovementAddress));
+                tables.Add(TileMovementTable = new TileMovementTable(Editor, ResourceFile("MovementTypes.xml"), tileMovementAddress));
 
             return tables;
         }
 
         public override void DestroyTables() {
-            IsBattle            = null;
-
             TreasureTable       = null;
             WarpTable           = null;
             BattlePointersTable = null;
@@ -163,23 +169,11 @@ namespace SF3.Editors {
             TileMovementTable   = null;
         }
 
-        protected override string BaseTitle => IsLoaded
-            ? base.BaseTitle + " (Type: " + (IsBTL99 ? "BTL99" : (IsBattle == true) ? "Battle" : "Town") + ")"
-            : base.BaseTitle;
+        public override string Title => base.Title + " Type: " + (IsBTL99 ? "BTL99" : (IsBattle == true) ? "Battle" : "Town");
 
         public bool IsBTL99 { get; }
 
-        private bool? _isBattle;
-
-        public bool? IsBattle {
-            get => _isBattle;
-            set {
-                if (_isBattle != value) {
-                    _isBattle = value;
-                    UpdateTitle();
-                }
-            }
-        }
+        public bool IsBattle { get; private set; }
 
         [BulkCopyRecurse]
         public TreasureTable TreasureTable { get; private set; }

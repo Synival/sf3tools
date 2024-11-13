@@ -1,21 +1,14 @@
-using System;
+﻿using System;
 
 namespace SF3.RawEditors {
     /// <summary>
-    /// Wrapper class for editing a byte[].
+    /// Helper class for modifying any kind of data blob and tracking whether or not it's been edited.
     /// </summary>
-    public interface IRawEditor {
+    public interface IRawEditor : IDisposable {
         /// <summary>
-        /// Reference to the byte array. Please don't modify it!
+        /// The amount of data being edited.
         /// </summary>
-        byte[] Data { get; }
-
-        /// <summary>
-        /// Used to load or unload data for the editor. Use 'null' to unload data.
-        /// </summary>
-        /// <param name="data">Data to load. Can be set to 'null' to unload data.</param>
-        /// <returns>'true' on success.</returns>
-        bool SetData(byte[] data);
+        int Size { get; }
 
         /// <summary>
         /// Returns a copy of all data loaded into the editor.
@@ -110,11 +103,6 @@ namespace SF3.RawEditors {
         void SetBit(int location, int bit, bool value);
 
         /// <summary>
-        /// 'True' when the file is loaded.
-        /// </summary>
-        bool IsLoaded { get; }
-
-        /// <summary>
         /// 'True' when the data is modified.
         /// </summary>
         bool IsModified { get; set; }
@@ -122,11 +110,6 @@ namespace SF3.RawEditors {
         /// <summary>
         /// Event that occurs when the 'Modified' property is changed.
         /// </summary>
-        event EventHandler IsLoadedChanged;
-
-        /// <summary>
-        /// Event that occurs when the 'Modified' property is changed.
-        /// </summary>
-        event EventHandler ModifiedChanged;
+        event EventHandler IsModifiedChanged;
     }
 }

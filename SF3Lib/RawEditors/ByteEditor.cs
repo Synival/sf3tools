@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Text;
 using SF3.Exceptions;
 
@@ -6,37 +7,14 @@ namespace SF3.RawEditors {
     /// <summary>
     /// Used for modifying any set of bytes.
     /// </summary>
-    public class ByteEditor : IRawEditor {
-        public ByteEditor() {
-        }
-
+    public class ByteEditor : IByteEditor {
         public ByteEditor(byte[] data) {
             _ = SetData(data);
         }
 
-        private byte[] _data = null;
+        public byte[] Data { get; private set; }
 
-        public byte[] Data {
-            get => _data;
-            private set {
-                if (_data != value) {
-                    _data = value;
-                    IsLoaded = _data != null;
-                }
-            }
-        }
-
-        private bool _isLoaded = false;
-
-        public bool IsLoaded {
-            get => _isLoaded;
-            private set {
-                if (_isLoaded != value) {
-                    _isLoaded = value;
-                    IsLoadedChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
+        public int Size => Data.Length;
 
         private bool _isModified = false;
 
@@ -45,13 +23,14 @@ namespace SF3.RawEditors {
             set {
                 if (_isModified != value) {
                     _isModified = value;
-                    ModifiedChanged?.Invoke(this, EventArgs.Empty);
+                    IsModifiedChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
 
         public virtual bool SetData(byte[] data) {
             Data = data;
+            IsModified = false;
             return true;
         }
 
@@ -186,7 +165,9 @@ namespace SF3.RawEditors {
             }
         }
 
-        public event EventHandler ModifiedChanged;
-        public event EventHandler IsLoadedChanged;
+        public void Dispose() {
+        }
+
+        public event EventHandler IsModifiedChanged;
     }
 }

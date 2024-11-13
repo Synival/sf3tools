@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
-using SF3.NamedValues;
+using CommonLib.NamedValues;
+using SF3.RawEditors;
 using SF3.Tables;
 using SF3.Tables.X013;
 using SF3.Types;
@@ -10,7 +11,14 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Editors {
     public class X013_Editor : ScenarioTableEditor, IX013_Editor {
-        public X013_Editor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
+        protected X013_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
+        }
+
+        public static X013_Editor Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) {
+            var newEditor = new X013_Editor(editor, nameContext, scenario);
+            if (!newEditor.Init())
+                throw new InvalidOperationException("Couldn't initialize tables");
+            return newEditor;
         }
 
         public override IEnumerable<ITable> MakeTables() {
@@ -30,7 +38,7 @@ namespace SF3.Editors {
             int supportTypeAddress;
             int weaponSpellRankAddress;
 
-            int checkVersion2 = GetByte(0x000A);
+            int checkVersion2 = Editor.GetByte(0x000A);
 
             switch (Scenario) {
                 case ScenarioType.Scenario1:
@@ -126,24 +134,24 @@ namespace SF3.Editors {
             }
 
             var tables = new List<ITable>() {
-                (SpecialsTable        = new SpecialTable(this, ResourceFileForScenario(Scenario, "Specials.xml"), specialAddress)),
-                (SupportTypeTable     = new SupportTypeTable(this, ResourceFileForScenario(Scenario, "Characters.xml"), supportTypeAddress)),
-                (FriendshipExpTable   = new FriendshipExpTable(this, ResourceFile("ExpList.xml"), friendshipExpAddress)),
-                (SupportStatsTable    = new SupportStatsTable(this, ResourceFile("X013StatList.xml"), supportStatsAddress)),
-                (SoulmateTable        = new SoulmateTable(this, ResourceFile("SoulmateList.xml"), soulmateAddress)),
-                (SoulfailTable        = new SoulfailTable(this, ResourceFile("Soulfail.xml"), soulFailAddress)),
-                (MagicBonusTable      = new MagicBonusTable(this, ResourceFileForScenario(Scenario, "MagicBonus.xml"), magicBonusAddress, Scenario == ScenarioType.Scenario1)),
-                (CritModTable         = new CritModTable(this, ResourceFile("CritModList.xml"), critModAddress)),
-                (CritrateTable        = new CritrateTable(this, ResourceFile("CritrateList.xml"), critrateAddress)),
-                (SpecialChanceTable   = new SpecialChanceTable(this, ResourceFile("SpecialChanceList.xml"), specialChanceAddress, Scenario <= ScenarioType.Scenario2)),
-                (ExpLimitTable        = new ExpLimitTable(this, ResourceFile("ExpLimitList.xml"), expLimitAddress)),
-                (HealExpTable         = new HealExpTable(this, ResourceFile("HealExpList.xml"), healExpAddress)),
-                (WeaponSpellRankTable = new WeaponSpellRankTable(this, ResourceFile("WeaponSpellRankList.xml"), weaponSpellRankAddress)),
-                (StatusEffectTable    = new StatusEffectTable(this, ResourceFile("StatusGroupList.xml"), statusEffectAddress)),
+                (SpecialsTable        = new SpecialTable(Editor, ResourceFileForScenario(Scenario, "Specials.xml"), specialAddress)),
+                (SupportTypeTable     = new SupportTypeTable(Editor, ResourceFileForScenario(Scenario, "Characters.xml"), supportTypeAddress)),
+                (FriendshipExpTable   = new FriendshipExpTable(Editor, ResourceFile("ExpList.xml"), friendshipExpAddress)),
+                (SupportStatsTable    = new SupportStatsTable(Editor, ResourceFile("X013StatList.xml"), supportStatsAddress)),
+                (SoulmateTable        = new SoulmateTable(Editor, ResourceFile("SoulmateList.xml"), soulmateAddress)),
+                (SoulfailTable        = new SoulfailTable(Editor, ResourceFile("Soulfail.xml"), soulFailAddress)),
+                (MagicBonusTable      = new MagicBonusTable(Editor, ResourceFileForScenario(Scenario, "MagicBonus.xml"), magicBonusAddress, Scenario == ScenarioType.Scenario1)),
+                (CritModTable         = new CritModTable(Editor, ResourceFile("CritModList.xml"), critModAddress)),
+                (CritrateTable        = new CritrateTable(Editor, ResourceFile("CritrateList.xml"), critrateAddress)),
+                (SpecialChanceTable   = new SpecialChanceTable(Editor, ResourceFile("SpecialChanceList.xml"), specialChanceAddress, Scenario <= ScenarioType.Scenario2)),
+                (ExpLimitTable        = new ExpLimitTable(Editor, ResourceFile("ExpLimitList.xml"), expLimitAddress)),
+                (HealExpTable         = new HealExpTable(Editor, ResourceFile("HealExpList.xml"), healExpAddress)),
+                (WeaponSpellRankTable = new WeaponSpellRankTable(Editor, ResourceFile("WeaponSpellRankList.xml"), weaponSpellRankAddress)),
+                (StatusEffectTable    = new StatusEffectTable(Editor, ResourceFile("StatusGroupList.xml"), statusEffectAddress)),
             };
 
             if (specialEffectAddress >= 0)
-                tables.Add(SpecialEffectTable = new SpecialEffectTable(this, ResourceFile("SpecialEffects.xml"), specialEffectAddress));
+                tables.Add(SpecialEffectTable = new SpecialEffectTable(Editor, ResourceFile("SpecialEffects.xml"), specialEffectAddress));
 
             return tables;
         }

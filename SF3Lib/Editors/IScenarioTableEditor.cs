@@ -1,20 +1,8 @@
-using System.Collections.Generic;
-using SF3.Tables;
-using SF3.Types;
-
 namespace SF3.Editors {
     /// <summary>
-    /// IFileEditor specifically for files in Shining Force 3
+    /// Table editor that also has a Scenario associated with it. Seems like overkill, but this is so frequent,
+    /// we might as well have it to avoid lots of code duplication.
     /// </summary>
-    public interface IScenarioTableEditor : IFileEditor {
-        /// <summary>
-        /// The scenario/disc/file to edit.
-        /// </summary>
-        ScenarioType Scenario { get; }
-
-        /// <summary>
-        /// Collection of Tables initialized upon loading.
-        /// </summary>
-        IEnumerable<ITable> Tables { get; }
+    public interface IScenarioTableEditor : IScenarioEditor, ITableEditor {
     }
 }

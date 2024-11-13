@@ -6,6 +6,7 @@ using CommonLib.Extensions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.Editors;
+using SF3.Loaders;
 using SF3.Models.MPD.TextureChunk;
 using SF3.MPDEditor.Extensions;
 using SF3.X1_Editor.Controls;
@@ -17,7 +18,7 @@ namespace SF3.MPD_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.3";
 
-        public new IMPD_Editor FileEditor => base.FileEditor as IMPD_Editor;
+        public IMPD_Editor Editor => base.FileLoader.Editor as IMPD_Editor;
 
         public frmMPDEditor() {
             InitializeComponent();
@@ -54,7 +55,8 @@ namespace SF3.MPD_Editor.Forms {
         protected override string FileDialogFilter
             => "SF3 Data (*.MPD)|*.MPD|" + base.FileDialogFilter;
 
-        protected override IFileEditor MakeFileEditor() => new Editors.MPD_Editor(Scenario);
+        protected override IBaseEditor MakeEditor(IFileLoader loader)
+            => Editors.MPD_Editor.Create(loader.RawEditor, loader.NameGetterContext, Scenario);
 
         private class PopulateTextureChunkTabConfig : IPopulateTabConfig {
             public PopulateTextureChunkTabConfig(TabPage tabPage, TextureChunk textureChunk) {
@@ -82,28 +84,28 @@ namespace SF3.MPD_Editor.Forms {
                 return false;
 
             var populateResult = tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
-                new PopulateOLVTabConfig(tabHeader,                olvHeader,                FileEditor.Header),
-                new PopulateOLVTabConfig(tabPalette1,              olvPalette1,              FileEditor.Palettes?[0]),
-                new PopulateOLVTabConfig(tabPalette2,              olvPalette2,              FileEditor.Palettes?[1]),
-                new PopulateOLVTabConfig(tabPalette3,              olvPalette3,              FileEditor.Palettes?[2]),
-                new PopulateOLVTabConfig(tabChunkHeader,           olvChunkHeader,           FileEditor.ChunkHeader),
-                new PopulateOLVTabConfig(tabTileSurfaceCharacters, olvTileSurfaceCharacters, FileEditor.TileSurfaceCharacterRows),
-                new PopulateOLVTabConfig(tabTileHeightmap,         olvTileHeightmap,         FileEditor.TileHeightmapRows),
-                new PopulateOLVTabConfig(tabTileHeights,           olvTileHeights,           FileEditor.TileHeightRows),
-                new PopulateOLVTabConfig(tabTileTerrain,           olvTileTerrain,           FileEditor.TileTerrainRows),
-                new PopulateOLVTabConfig(tabTileItems,             olvTileItems,             FileEditor.TileItemRows),
+                new PopulateOLVTabConfig(tabHeader,                olvHeader,                Editor.Header),
+                new PopulateOLVTabConfig(tabPalette1,              olvPalette1,              Editor.Palettes?[0]),
+                new PopulateOLVTabConfig(tabPalette2,              olvPalette2,              Editor.Palettes?[1]),
+                new PopulateOLVTabConfig(tabPalette3,              olvPalette3,              Editor.Palettes?[2]),
+                new PopulateOLVTabConfig(tabChunkHeader,           olvChunkHeader,           Editor.ChunkHeader),
+                new PopulateOLVTabConfig(tabTileSurfaceCharacters, olvTileSurfaceCharacters, Editor.TileSurfaceCharacterRows),
+                new PopulateOLVTabConfig(tabTileHeightmap,         olvTileHeightmap,         Editor.TileHeightmapRows),
+                new PopulateOLVTabConfig(tabTileHeights,           olvTileHeights,           Editor.TileHeightRows),
+                new PopulateOLVTabConfig(tabTileTerrain,           olvTileTerrain,           Editor.TileTerrainRows),
+                new PopulateOLVTabConfig(tabTileItems,             olvTileItems,             Editor.TileItemRows),
 
-                new PopulateTextureChunkTabConfig(tabChunk6, FileEditor.TextureChunks?[0]),
-                new PopulateTextureChunkTabConfig(tabChunk7, FileEditor.TextureChunks?[1]),
-                new PopulateTextureChunkTabConfig(tabChunk8, FileEditor.TextureChunks?[2]),
-                new PopulateTextureChunkTabConfig(tabChunk9, FileEditor.TextureChunks?[3]),
+                new PopulateTextureChunkTabConfig(tabChunk6, Editor.TextureChunks?[0]),
+                new PopulateTextureChunkTabConfig(tabChunk7, Editor.TextureChunks?[1]),
+                new PopulateTextureChunkTabConfig(tabChunk8, Editor.TextureChunks?[2]),
+                new PopulateTextureChunkTabConfig(tabChunk9, Editor.TextureChunks?[3]),
 
                 // TODO: just a true/false predicate would work here
-                new PopulateOLVTabConfig(tabBattleMap, null, FileEditor.Header), // Should always be present
+                new PopulateOLVTabConfig(tabBattleMap, null, Editor.Header), // Should always be present
             });
 
-            if (FileEditor.TileSurfaceCharacterRows != null)
-                this.battleMapControl1.UpdateTextures(FileEditor.TileSurfaceCharacterRows.TextureData, FileEditor.TextureChunks);
+            if (Editor.TileSurfaceCharacterRows != null)
+                this.battleMapControl1.UpdateTextures(Editor.TileSurfaceCharacterRows.TextureData, Editor.TextureChunks);
             else
                 this.battleMapControl1.UpdateTextures(null, null);
 

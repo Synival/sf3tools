@@ -1,4 +1,6 @@
+using SF3.RawEditors;
 using SF3.Editors;
+using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Tests.FileEditors {
@@ -11,6 +13,9 @@ namespace SF3.Tests.FileEditors {
                 ExpectedSpellIconRows = spellIconRows;
                 ExpectedSpellRealOffsetStart = spellRealOffsetStart;
             }
+
+            public IconPointerEditor Create()
+                => IconPointerEditor.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedItemIconRows { get; }
             public int ExpectedSpellIconRows { get; }
@@ -38,8 +43,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void ItemIconTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new IconPointerEditor(testCase.Scenario);
-                Assert.IsTrue(editor.LoadFile(testCase.Filename));
+                var editor = testCase.Create();
 
                 Assert.AreEqual(0x00, editor.ItemIconTable.Rows[0].TheItemIcon);
                 Assert.AreEqual(0x26, editor.ItemIconTable.Rows[1].TheItemIcon);
@@ -50,8 +54,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void SpellIconTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new IconPointerEditor(testCase.Scenario);
-                Assert.IsTrue(editor.LoadFile(testCase.Filename));
+                var editor = testCase.Create();
 
                 Assert.AreEqual(0x00, editor.SpellIconTable.Rows[0].TheSpellIcon);
                 Assert.AreEqual(testCase.ExpectedSpellRealOffsetStart + editor.SpellIconTable.Rows[0].TheSpellIcon, editor.SpellIconTable.Rows[0].RealOffset);

@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
-using SF3.NamedValues;
+using CommonLib.NamedValues;
+using SF3.RawEditors;
 using SF3.Tables;
 using SF3.Tables.X033_X031;
 using SF3.Types;
@@ -10,12 +11,19 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Editors {
     public class X033_X031_Editor : ScenarioTableEditor, IX033_X031_Editor {
-        public X033_X031_Editor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
+        protected X033_X031_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
+        }
+
+        public static X033_X031_Editor Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) {
+            var newEditor = new X033_X031_Editor(editor, nameContext, scenario);
+            if (!newEditor.Init())
+                throw new InvalidOperationException("Couldn't initialize tables");
+            return newEditor;
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            var checkType     = GetByte(0x00000009);     //if it's 0x07 we're in a x033.bin
-            var checkVersion2 = GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
+            var checkType     = Editor.GetByte(0x00000009);     //if it's 0x07 we're in a x033.bin
+            var checkVersion2 = Editor.GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
             var isX033        = checkType == 0x07;
 
             int statsAddress;
@@ -62,9 +70,9 @@ namespace SF3.Editors {
             }
 
             return new List<ITable>() {
-                (WeaponLevelTable = new WeaponLevelTable(this, ResourceFile("WeaponLevel.xml"), weaponLevelAddress)),
-                (StatsTable       = new StatsTable(this, ResourceFileForScenario(Scenario, "ClassList.xml"), statsAddress)),
-                (InitialInfoTable = new InitialInfoTable(this, ResourceFileForScenario(Scenario, "ClassEquip.xml"), initialInfoAddress)),
+                (WeaponLevelTable = new WeaponLevelTable(Editor, ResourceFile("WeaponLevel.xml"), weaponLevelAddress)),
+                (StatsTable       = new StatsTable(Editor, ResourceFileForScenario(Scenario, "ClassList.xml"), statsAddress)),
+                (InitialInfoTable = new InitialInfoTable(Editor, ResourceFileForScenario(Scenario, "ClassEquip.xml"), initialInfoAddress)),
             };
         }
 

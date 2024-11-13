@@ -7,6 +7,7 @@ using CommonLib.Extensions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.Editors;
+using SF3.Loaders;
 using SF3.Models.X1.Battle;
 using SF3.Types;
 using SF3.X1_Editor.Controls;
@@ -29,7 +30,7 @@ namespace SF3.X1_Editor.Forms {
             }
         }
 
-        public new IX1_Editor FileEditor => base.FileEditor as IX1_Editor;
+        public IX1_Editor Editor => base.FileLoader.Editor as IX1_Editor;
 
         public frmX1_Editor() {
             InitializeComponent();
@@ -57,8 +58,6 @@ namespace SF3.X1_Editor.Forms {
 
         protected override string FileDialogFilter
             => (IsBTL99 ? "SF3 Data (X1BTL99.BIN)|X1BTL99.BIN|" : "SF3 Data (X1*.BIN)|X1*.BIN|") + base.FileDialogFilter;
-
-        protected override IFileEditor MakeFileEditor() => new X1_FileEditor(Scenario, IsBTL99);
 
         private class PopulateBattleTabConfig : IPopulateTabConfig {
             public PopulateBattleTabConfig(TabPage tabPage, Dictionary<MapLeaderType, Battle> battleTable, MapLeaderType mapLeader) {
@@ -91,17 +90,17 @@ namespace SF3.X1_Editor.Forms {
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
-                new PopulateOLVTabConfig(tabInteractables, olvInteractables, FileEditor.TreasureTable),
-                new PopulateOLVTabConfig(tabBattlePointers, olvBattlePointers, FileEditor.BattlePointersTable),
-                new PopulateOLVTabConfig(tabTownNpcs, olvTownNpcs, FileEditor.NpcTable),
-                new PopulateOLVTabConfig(tabNonBattleEnter, olvNonBattleEnter, FileEditor.EnterTable),
-                new PopulateOLVTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpTable),
-                new PopulateOLVTabConfig(tabArrows, olvArrows, FileEditor.ArrowTable),
-                new PopulateOLVTabConfig(tabTileData, olvTileData, FileEditor.TileMovementTable),
-                new PopulateBattleTabConfig(tabBattle_Synbios, FileEditor.Battles, MapLeaderType.Synbios),
-                new PopulateBattleTabConfig(tabBattle_Medion , FileEditor.Battles, MapLeaderType.Medion),
-                new PopulateBattleTabConfig(tabBattle_Julian , FileEditor.Battles, MapLeaderType.Julian),
-                new PopulateBattleTabConfig(tabBattle_Extra,   FileEditor.Battles, MapLeaderType.Extra),
+                new PopulateOLVTabConfig(tabInteractables, olvInteractables, Editor.TreasureTable),
+                new PopulateOLVTabConfig(tabBattlePointers, olvBattlePointers, Editor.BattlePointersTable),
+                new PopulateOLVTabConfig(tabTownNpcs, olvTownNpcs, Editor.NpcTable),
+                new PopulateOLVTabConfig(tabNonBattleEnter, olvNonBattleEnter, Editor.EnterTable),
+                new PopulateOLVTabConfig(tabWarpTable, olvWarpTable, Editor.WarpTable),
+                new PopulateOLVTabConfig(tabArrows, olvArrows, Editor.ArrowTable),
+                new PopulateOLVTabConfig(tabTileData, olvTileData, Editor.TileMovementTable),
+                new PopulateBattleTabConfig(tabBattle_Synbios, Editor.Battles, MapLeaderType.Synbios),
+                new PopulateBattleTabConfig(tabBattle_Medion , Editor.Battles, MapLeaderType.Medion),
+                new PopulateBattleTabConfig(tabBattle_Julian , Editor.Battles, MapLeaderType.Julian),
+                new PopulateBattleTabConfig(tabBattle_Extra,   Editor.Battles, MapLeaderType.Extra),
             });
         }
 

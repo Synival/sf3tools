@@ -6,11 +6,6 @@
     <PublishUrl>publish\</PublishUrl>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Loaders\**" />
-    <EmbeddedResource Remove="Loaders\**" />
-    <None Remove="Loaders\**" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Resources\Elements.xml" />
     <None Remove="Resources\FriendshipBonusTypeList.xml" />
     <None Remove="Resources\SpellTargets.xml" />

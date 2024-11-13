@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using BrightIdeasSoftware;
+using CommonLib.NamedValues;
+using SF3.RawEditors;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.Editors;
+using SF3.Loaders;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
 namespace SF3.X013_Editor.Forms {
@@ -10,7 +13,7 @@ namespace SF3.X013_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.21";
 
-        public new IX013_Editor FileEditor => base.FileEditor as IX013_Editor;
+        public IX013_Editor Editor => base.FileLoader.Editor as IX013_Editor;
 
         public frmX013_Editor() {
             InitializeComponent();
@@ -19,28 +22,29 @@ namespace SF3.X013_Editor.Forms {
 
         protected override string FileDialogFilter => "SF3 Data (X013.BIN)|X013.BIN|" + base.FileDialogFilter;
 
-        protected override IFileEditor MakeFileEditor() => new Editors.X013_Editor(Scenario);
+        protected override IBaseEditor MakeEditor(IFileLoader loader)
+            => Editors.X013_Editor.Create(loader.RawEditor, loader.NameGetterContext, Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
-                new PopulateOLVTabConfig(tabSpecials, olvSpecials, FileEditor.SpecialsTable),
-                new PopulateOLVTabConfig(tabSpecialEffects, olvSpecialEffects, FileEditor.SpecialEffectTable),
-                new PopulateOLVTabConfig(tabFriendshipExp, olvFriendshipExp, FileEditor.FriendshipExpTable),
-                new PopulateOLVTabConfig(tabSupportType, olvSupportType, FileEditor.SupportTypeTable),
-                new PopulateOLVTabConfig(tabSupportStats, olvSupportStats, FileEditor.SupportStatsTable),
-                new PopulateOLVTabConfig(tabSoulmate, olvSoulmate, FileEditor.SoulmateTable),
-                new PopulateOLVTabConfig(tabSoulmateChanceFail, olvSoulmateChanceFail, FileEditor.SoulfailTable),
-                new PopulateOLVTabConfig(tabMagicBonus, olvMagicBonus, FileEditor.MagicBonusTable),
-                new PopulateOLVTabConfig(tabCritVantages, olvCritVantages, FileEditor.CritModTable),
-                new PopulateOLVTabConfig(tabCritCounterRate, olvCritCounterRate, FileEditor.CritrateTable),
-                new PopulateOLVTabConfig(tabSpecialChance, olvSpecialChance, FileEditor.SpecialChanceTable),
-                new PopulateOLVTabConfig(tabExpLimit, olvExpLimit, FileEditor.ExpLimitTable),
-                new PopulateOLVTabConfig(tabHealExp, olvHealExp, FileEditor.HealExpTable),
-                new PopulateOLVTabConfig(tabWeaponSpellRank, olvWeaponSpellRank, FileEditor.WeaponSpellRankTable),
-                new PopulateOLVTabConfig(tabStatusGroups, olvStatusGroups, FileEditor.StatusEffectTable)
+                new PopulateOLVTabConfig(tabSpecials, olvSpecials, Editor.SpecialsTable),
+                new PopulateOLVTabConfig(tabSpecialEffects, olvSpecialEffects, Editor.SpecialEffectTable),
+                new PopulateOLVTabConfig(tabFriendshipExp, olvFriendshipExp, Editor.FriendshipExpTable),
+                new PopulateOLVTabConfig(tabSupportType, olvSupportType, Editor.SupportTypeTable),
+                new PopulateOLVTabConfig(tabSupportStats, olvSupportStats, Editor.SupportStatsTable),
+                new PopulateOLVTabConfig(tabSoulmate, olvSoulmate, Editor.SoulmateTable),
+                new PopulateOLVTabConfig(tabSoulmateChanceFail, olvSoulmateChanceFail, Editor.SoulfailTable),
+                new PopulateOLVTabConfig(tabMagicBonus, olvMagicBonus, Editor.MagicBonusTable),
+                new PopulateOLVTabConfig(tabCritVantages, olvCritVantages, Editor.CritModTable),
+                new PopulateOLVTabConfig(tabCritCounterRate, olvCritCounterRate, Editor.CritrateTable),
+                new PopulateOLVTabConfig(tabSpecialChance, olvSpecialChance, Editor.SpecialChanceTable),
+                new PopulateOLVTabConfig(tabExpLimit, olvExpLimit, Editor.ExpLimitTable),
+                new PopulateOLVTabConfig(tabHealExp, olvHealExp, Editor.HealExpTable),
+                new PopulateOLVTabConfig(tabWeaponSpellRank, olvWeaponSpellRank, Editor.WeaponSpellRankTable),
+                new PopulateOLVTabConfig(tabStatusGroups, olvStatusGroups, Editor.StatusEffectTable)
             });
         }
 

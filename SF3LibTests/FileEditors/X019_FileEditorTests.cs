@@ -1,4 +1,6 @@
+using SF3.RawEditors;
 using SF3.Editors;
+using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Tests.FileEditors {
@@ -9,6 +11,9 @@ namespace SF3.Tests.FileEditors {
             : base(scenario, filename) {
                 ExpectedRows = expectedRows;
             }
+
+            public X019_Editor Create()
+                => X019_Editor.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedRows { get; }
         }
@@ -24,8 +29,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void MonsterTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X019_Editor(testCase.Scenario);
-                Assert.IsTrue(editor.LoadFile(testCase.Filename));
+                var editor = testCase.Create();
 
                 Assert.AreEqual(0, editor.MonsterTable.Rows[0].MaxHP);
                 Assert.AreEqual(0, editor.MonsterTable.Rows[0].MaxMP);

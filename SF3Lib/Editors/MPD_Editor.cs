@@ -1,53 +1,57 @@
 using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
+using CommonLib.NamedValues;
 using MPDLib;
 using SF3.RawEditors;
 using SF3.Models.MPD.TextureChunk;
-using SF3.NamedValues;
 using SF3.Tables;
 using SF3.Tables.MPD;
 using SF3.Types;
 
 namespace SF3.Editors {
     public class MPD_Editor : ScenarioTableEditor, IMPD_Editor {
-        public MPD_Editor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
+        protected MPD_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }
 
-        public override bool SaveFile(string filename)
-            => throw new NotImplementedException();
+        public static MPD_Editor Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) {
+            var newEditor = new MPD_Editor(editor, nameContext, scenario);
+            if (!newEditor.Init())
+                throw new InvalidOperationException("Couldn't initialize tables");
+            return newEditor;
+        }
 
         public override IEnumerable<ITable> MakeTables() {
             var ramOffset = 0x290000;
 
             // Create and load Header
-            var headerAddrPtr = GetDouble(0x0000) - ramOffset;
-            var headerAddr = GetDouble(headerAddrPtr) - ramOffset;
-            Header = new HeaderTable(this, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
+            var headerAddrPtr = Editor.GetDouble(0x0000) - ramOffset;
+            var headerAddr = Editor.GetDouble(headerAddrPtr) - ramOffset;
+            Header = new HeaderTable(Editor, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
             _ = Header.Load();
             var header = Header.Rows[0];
 
             // Load palettes
             Palettes = new ColorTable[3];
             if (header.OffsetPal1 > 0)
-                Palettes[0] = new ColorTable(this, header.OffsetPal1 - ramOffset, 256);
+                Palettes[0] = new ColorTable(Editor, header.OffsetPal1 - ramOffset, 256);
             if (header.OffsetPal2 > 0)
-                Palettes[1] = new ColorTable(this, header.OffsetPal2 - ramOffset, 256);
+                Palettes[1] = new ColorTable(Editor, header.OffsetPal2 - ramOffset, 256);
             if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 > 0)
-                Palettes[2] = new ColorTable(this, Header.Rows[0].OffsetPal3 - ramOffset, 256);
+                Palettes[2] = new ColorTable(Editor, Header.Rows[0].OffsetPal3 - ramOffset, 256);
 
             // Create chunk data
-            ChunkHeader = new ChunkHeaderTable(this, 0x2000);
+            ChunkHeader = new ChunkHeaderTable(Editor, 0x2000);
             _ = ChunkHeader.Load();
 
             Chunks = new Chunk[ChunkHeader.Rows.Length];
             for (int i = 0; i < Chunks.Length; i++) {
                 var chunkInfo = ChunkHeader.Rows[i];
                 if (chunkInfo.ChunkAddress > 0)
-                    Chunks[i] = new Chunk(Data, chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
+                    Chunks[i] = new Chunk(((ByteEditor) Editor).Data, chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
             }
 
-            ChunkEditors = new IRawEditor[Chunks.Length];
+            ChunkEditors = new IByteEditor[Chunks.Length];
             if (Chunks[2]?.Data?.Length > 0)
                 ChunkEditors[2] = new ByteEditor(Chunks[2].Data);
             // TODO: this works, but it's kind of a dumb hack!!
@@ -104,11 +108,10 @@ namespace SF3.Editors {
             TileTerrainRows          = null;
             TileItemRows             = null;
             TextureChunks            = null;
-            ChunkEditors             = null;
             Chunks                   = null;
         }
 
-        public IRawEditor[] ChunkEditors { get; private set; }
+        public IByteEditor[] ChunkEditors { get; private set; }
 
         [BulkCopyRecurse]
         public HeaderTable Header { get; private set; }

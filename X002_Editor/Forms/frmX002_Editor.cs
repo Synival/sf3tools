@@ -4,6 +4,7 @@ using BrightIdeasSoftware;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.Editors;
+using SF3.Loaders;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
 namespace SF3.X002_Editor.Forms {
@@ -11,7 +12,7 @@ namespace SF3.X002_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.24";
 
-        public new IX002_Editor FileEditor => base.FileEditor as IX002_Editor;
+        public IX002_Editor Editor => base.FileLoader.Editor as IX002_Editor;
 
         public frmX002_Editor() {
             InitializeComponent();
@@ -20,22 +21,23 @@ namespace SF3.X002_Editor.Forms {
 
         protected override string FileDialogFilter => "SF3 Data (X002.BIN)|X002.BIN|" + base.FileDialogFilter;
 
-        protected override IFileEditor MakeFileEditor() => new Editors.X002_Editor(Scenario);
+        protected override IBaseEditor MakeEditor(IFileLoader loader)
+            => Editors.X002_Editor.Create(loader.RawEditor, loader.NameGetterContext, Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>()             {
-                new PopulateOLVTabConfig(tabItems, olvItems, FileEditor.ItemTable),
-                new PopulateOLVTabConfig(tabSpells, olvSpells, FileEditor.SpellTable),
-                new PopulateOLVTabConfig(tabWeaponSpells, olvWeaponSpells, FileEditor.WeaponSpellTable),
-                new PopulateOLVTabConfig(tabLoaded, olvLoaded, FileEditor.LoadingTable),
-                new PopulateOLVTabConfig(tabLoadedOverride, olvLoadedOverride, FileEditor.LoadedOverrideTable),
-                new PopulateOLVTabConfig(tabStatBoost, olvStatBoost, FileEditor.StatBoostTable),
-                new PopulateOLVTabConfig(tabWeaponRankAttack, olvWeaponRankAttack, FileEditor.WeaponRankTable),
-                new PopulateOLVTabConfig(tabAttackResist, olvAttackResist, FileEditor.AttackResistTable),
-                new PopulateOLVTabConfig(tabWarpTable, olvWarpTable, FileEditor.WarpTable),
+                new PopulateOLVTabConfig(tabItems, olvItems, Editor.ItemTable),
+                new PopulateOLVTabConfig(tabSpells, olvSpells, Editor.SpellTable),
+                new PopulateOLVTabConfig(tabWeaponSpells, olvWeaponSpells, Editor.WeaponSpellTable),
+                new PopulateOLVTabConfig(tabLoaded, olvLoaded, Editor.LoadingTable),
+                new PopulateOLVTabConfig(tabLoadedOverride, olvLoadedOverride, Editor.LoadedOverrideTable),
+                new PopulateOLVTabConfig(tabStatBoost, olvStatBoost, Editor.StatBoostTable),
+                new PopulateOLVTabConfig(tabWeaponRankAttack, olvWeaponRankAttack, Editor.WeaponRankTable),
+                new PopulateOLVTabConfig(tabAttackResist, olvAttackResist, Editor.AttackResistTable),
+                new PopulateOLVTabConfig(tabWarpTable, olvWarpTable, Editor.WarpTable),
             });
         }
 

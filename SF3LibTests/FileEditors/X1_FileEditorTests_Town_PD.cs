@@ -1,4 +1,6 @@
+using SF3.RawEditors;
 using SF3.Editors;
+using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Tests.FileEditors {
@@ -10,14 +12,16 @@ namespace SF3.Tests.FileEditors {
                 string filename)
             : base(scenario, filename) {
             }
+
+            public X1_Editor Create()
+                => X1_Editor.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario, false);
         }
 
         private static readonly X1_TestCase TestCase = new X1_TestCase(ScenarioType.PremiumDisk, "X1DREAM.BIN");
 
         [TestMethod]
         public void EnterTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, false);
-            Assert.IsTrue(editor.LoadFile(TestCase.Filename));
+            var editor = TestCase.Create();
             var table = editor.EnterTable;
 
             Assert.AreEqual(0xFFFF, table.Rows[1].Entered);
@@ -33,8 +37,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void NpcTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, false);
-            Assert.IsTrue(editor.LoadFile(TestCase.Filename));
+            var editor = TestCase.Create();
             var table = editor.NpcTable;
 
             Assert.AreEqual(0xC7, table.Rows[0].SpriteID);
@@ -50,8 +53,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void TreasureTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, false);
-            Assert.IsTrue(editor.LoadFile(TestCase.Filename));
+            var editor = TestCase.Create();
             var table = editor.TreasureTable;
 
             Assert.AreEqual(0xFFFF, table.Rows[0].Searched);
@@ -64,8 +66,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void ArrowTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, false);
-            Assert.IsTrue(editor.LoadFile(TestCase.Filename));
+            var editor = TestCase.Create();
             var table = editor.ArrowTable;
 
             Assert.AreEqual(0xFFFF, table.Rows[0].ArrowText);
@@ -76,8 +77,7 @@ namespace SF3.Tests.FileEditors {
 
         [TestMethod]
         public void WarpTable_HasExpectedData() {
-            var editor = new X1_FileEditor(TestCase.Scenario, false);
-            Assert.IsTrue(editor.LoadFile(TestCase.Filename));
+            var editor = TestCase.Create();
             var table = editor.WarpTable;
 
             Assert.AreEqual(0x00, table.Rows[0].WarpMap);

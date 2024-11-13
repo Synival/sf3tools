@@ -12,7 +12,7 @@ namespace SF3.Tables.MPD.TextureChunk {
             var size = new Texture(Editor, StartID, "Texture0", Address).Size;
             return LoadUntilMax((id, address) => {
                 var nextImageDataOffset = (id + 1 >= MaxSize)
-                    ? Editor.Data.Length
+                    ? Editor.Size
                     : new Texture(Editor, StartID + id + 1, "", address + size).ImageDataOffset;
                 return new Texture(Editor, StartID + id, "Texture" + (StartID + id), address, nextImageDataOffset);
             });

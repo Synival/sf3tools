@@ -1,4 +1,6 @@
+using SF3.RawEditors;
 using SF3.Editors;
+using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Tests.FileEditors {
@@ -14,6 +16,9 @@ namespace SF3.Tests.FileEditors {
                 MapLeader = mapLeader;
                 ExpectedBattleCount = expectedBattleCount;
             }
+
+            public X1_Editor Create()
+                => X1_Editor.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario, false);
 
             public MapLeaderType? MapLeader { get; }
             public int? ExpectedBattleCount { get; }
@@ -36,8 +41,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void BattleFiles_HaveExpectedTables() {
             TestCase.Run(BattleTestCases, testCase => {
-                var editor = new X1_FileEditor(testCase.Scenario, false);
-                Assert.IsTrue(editor.LoadFile(testCase.Filename));
+                var editor = testCase.Create();
 
                 Assert.IsNotNull(editor.TreasureTable);
                 Assert.IsNotNull(editor.BattlePointersTable);
@@ -73,8 +77,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void TownFiles_HaveExpectedTables() {
             TestCase.Run(TownTestCases, testCase => {
-                var editor = new X1_FileEditor(testCase.Scenario, false);
-                Assert.IsTrue(editor.LoadFile(testCase.Filename));
+                var editor = testCase.Create();
 
                 Assert.IsNotNull(editor.TreasureTable);
                 Assert.IsNull(editor.BattlePointersTable);

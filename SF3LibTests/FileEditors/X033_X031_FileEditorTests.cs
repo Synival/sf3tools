@@ -1,4 +1,6 @@
+using SF3.RawEditors;
 using SF3.Editors;
+using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Tests.FileEditors {
@@ -15,6 +17,9 @@ namespace SF3.Tests.FileEditors {
                 ExpectedStatsRows = expectedStatsRows;
                 ExpectedInitialInfoRows = expectedInitialInfoRows;
             }
+
+            public X033_X031_Editor Create()
+                => X033_X031_Editor.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedStatsRows { get; }
             public int ExpectedInitialInfoRows { get; }
@@ -34,8 +39,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void StatsTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X033_X031_Editor(testCase.Scenario);
-                Assert.IsTrue(editor.LoadFile(testCase.Filename));
+                var editor = testCase.Create();
 
                 Assert.AreEqual(0x00, editor.StatsTable.Rows[0].CharacterClass);
                 Assert.AreEqual(0x00, editor.StatsTable.Rows[0].CharacterID);
@@ -59,8 +63,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void InitialInfoTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X033_X031_Editor(testCase.Scenario);
-                Assert.IsTrue(editor.LoadFile(testCase.Filename));
+                var editor = testCase.Create();
 
                 if (testCase.Scenario == ScenarioType.Scenario1) {
                     Assert.AreEqual(0x00, editor.InitialInfoTable.Rows[0].CharacterE);
@@ -92,8 +95,7 @@ namespace SF3.Tests.FileEditors {
         [TestMethod]
         public void WeaponLevelTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = new X033_X031_Editor(testCase.Scenario);
-                Assert.IsTrue(editor.LoadFile(testCase.Filename));
+                var editor = testCase.Create();
 
                 Assert.AreEqual(  70, editor.WeaponLevelTable.Rows[0].WLevel1);
                 Assert.AreEqual( 150, editor.WeaponLevelTable.Rows[0].WLevel2);

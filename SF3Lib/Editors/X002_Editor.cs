@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
-using SF3.NamedValues;
+using CommonLib.NamedValues;
+using SF3.RawEditors;
 using SF3.Tables;
 using SF3.Tables.Shared;
 using SF3.Tables.X002;
@@ -11,11 +12,18 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Editors {
     public class X002_Editor : ScenarioTableEditor, IX002_Editor {
-        public X002_Editor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
+        protected X002_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
+        }
+
+        public static X002_Editor Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) {
+            var newEditor = new X002_Editor(editor, nameContext, scenario);
+            if (!newEditor.Init())
+                throw new InvalidOperationException("Couldn't initialize tables");
+            return newEditor;
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            int checkVersion2 = GetByte(0x000B);
+            int checkVersion2 = Editor.GetByte(0x000B);
 
             int attackResistAddress;
             int itemAddress;
@@ -83,18 +91,18 @@ namespace SF3.Editors {
             }
 
             var tables = new List<ITable>() {
-                (AttackResistTable   = new AttackResistTable(this, ResourceFile("AttackResistList.xml"), attackResistAddress)),
-                (ItemTable           = new ItemTable(this, ResourceFileForScenario(Scenario, "Items.xml"), itemAddress)),
-                (LoadedOverrideTable = new LoadedOverrideTable(this, ResourceFileForScenario(Scenario, "LoadedOverrideList.xml"), loadedOverrideAddress)),
-                (LoadingTable        = new LoadingTable(this, ResourceFileForScenario(Scenario, "LoadList.xml"), loadingAddress)),
-                (WeaponSpellTable    = new WeaponSpellTable(this, ResourceFileForScenario(Scenario, "WeaponSpells.xml"), presetAddress)),
-                (SpellTable          = new SpellTable(this, ResourceFileForScenario(Scenario, "Spells.xml"), spellAddress)),
-                (StatBoostTable      = new StatBoostTable(this, ResourceFile("X002StatList.xml"), statBoostAddress)),
-                (WeaponRankTable     = new WeaponRankTable(this, ResourceFile("WeaponRankList.xml"), weaponRankAddress)),
+                (AttackResistTable   = new AttackResistTable(Editor, ResourceFile("AttackResistList.xml"), attackResistAddress)),
+                (ItemTable           = new ItemTable(Editor, ResourceFileForScenario(Scenario, "Items.xml"), itemAddress)),
+                (LoadedOverrideTable = new LoadedOverrideTable(Editor, ResourceFileForScenario(Scenario, "LoadedOverrideList.xml"), loadedOverrideAddress)),
+                (LoadingTable        = new LoadingTable(Editor, ResourceFileForScenario(Scenario, "LoadList.xml"), loadingAddress)),
+                (WeaponSpellTable    = new WeaponSpellTable(Editor, ResourceFileForScenario(Scenario, "WeaponSpells.xml"), presetAddress)),
+                (SpellTable          = new SpellTable(Editor, ResourceFileForScenario(Scenario, "Spells.xml"), spellAddress)),
+                (StatBoostTable      = new StatBoostTable(Editor, ResourceFile("X002StatList.xml"), statBoostAddress)),
+                (WeaponRankTable     = new WeaponRankTable(Editor, ResourceFile("WeaponRankList.xml"), weaponRankAddress)),
             };
 
             if (Scenario == ScenarioType.Scenario1)
-                tables.Add(WarpTable = new WarpTable(this, ResourceFileForScenario(ScenarioType.Scenario1, "Warps.xml"), warpAddress));
+                tables.Add(WarpTable = new WarpTable(Editor, ResourceFileForScenario(ScenarioType.Scenario1, "Warps.xml"), warpAddress));
 
             return tables;
         }

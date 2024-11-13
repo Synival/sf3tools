@@ -8,7 +8,7 @@ namespace SF3.Editors {
         /// <summary>
         /// Byte editor for (de)compressed data for chunks
         /// </summary>
-        IRawEditor[] ChunkEditors { get; }
+        IByteEditor[] ChunkEditors { get; }
 
         HeaderTable Header { get; }
         ColorTable[] Palettes { get; }

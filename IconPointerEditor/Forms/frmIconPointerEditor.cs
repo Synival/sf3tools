@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using BrightIdeasSoftware;
+using SF3.RawEditors;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.Editors;
+using SF3.Loaders;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
 namespace SF3.IconPointerEditor.Forms {
@@ -10,7 +12,7 @@ namespace SF3.IconPointerEditor.Forms {
         // Used to display version in the application
         protected override string Version => "0.13";
 
-        public new IIconPointerEditor FileEditor => base.FileEditor as IIconPointerEditor;
+        public IIconPointerEditor Editor => base.FileLoader.Editor as IIconPointerEditor;
 
         public frmIconPointerEditor() {
             InitializeComponent();
@@ -20,15 +22,16 @@ namespace SF3.IconPointerEditor.Forms {
         protected override string FileDialogFilter
             => "SF3 Data (X011.BIN;X021.BIN;X026.BIN)|X011.BIN;X021.BIN;X026.BIN|" + base.FileDialogFilter;
 
-        protected override IFileEditor MakeFileEditor() => new Editors.IconPointerEditor(Scenario);
+        protected override IBaseEditor MakeEditor(IFileLoader loader)
+            => Editors.IconPointerEditor.Create(loader.RawEditor, loader.NameGetterContext, Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
-                new PopulateOLVTabConfig(tabSpellIcons, olvSpellIcons, FileEditor.SpellIconTable),
-                new PopulateOLVTabConfig(tabItemIcons, olvItemIcons, FileEditor.ItemIconTable)
+                new PopulateOLVTabConfig(tabSpellIcons, olvSpellIcons, Editor.SpellIconTable),
+                new PopulateOLVTabConfig(tabItemIcons, olvItemIcons, Editor.ItemIconTable)
             });
         }
 

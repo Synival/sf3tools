@@ -11,8 +11,11 @@ using CommonLib.NamedValues;
 using DFRLib;
 using DFRLib.Types;
 using DFRTool.GUI.Forms;
+using SF3.RawEditors;
 using SF3.Editor.Extensions;
 using SF3.Editors;
+using SF3.Loaders;
+using SF3.NamedValues;
 using SF3.Types;
 using static CommonLib.Win.Utils.MessageUtils;
 
@@ -101,7 +104,7 @@ namespace SF3.Editor.Forms {
             FileIsLoadedChanged += (obj, eargs) => {
                 tsmiFile_OpenPrevious.Enabled    = IsLoaded;
                 tsmiFile_OpenNext.Enabled        = IsLoaded;
-                tsmiFile_Save.Enabled            = IsLoaded && FileEditor.IsModified;
+                tsmiFile_Save.Enabled            = IsLoaded && FileLoader.IsModified;
                 tsmiFile_SaveAs.Enabled          = IsLoaded;
                 tsmiFile_ApplyDFRFile.Enabled    = IsLoaded;
                 tsmiFile_GenerateDFRFile.Enabled = IsLoaded;
@@ -110,14 +113,14 @@ namespace SF3.Editor.Forms {
                 tsmiFile_Close.Enabled           = IsLoaded;
             };
 
-            FileModifiedChanged += (obj, eargs) => tsmiFile_Save.Enabled = IsLoaded && FileEditor.IsModified;
+            FileModifiedChanged += (obj, eargs) => tsmiFile_Save.Enabled = IsLoaded && FileLoader.IsModified;
 
             ObjectListViews = this.GetAllObjectsOfTypeInFields<ObjectListView>(false);
             if (extraOLVs != null)
                 ObjectListViews.AddRange(extraOLVs);
 
             foreach (var olv in ObjectListViews)
-                olv.Enhance(() => FileEditor);
+                olv.Enhance(() => FileLoader);
 
             UpdateTitle();
         }
@@ -151,12 +154,12 @@ namespace SF3.Editor.Forms {
             if (!CloseFile())
                 return false;
 
-            FileEditor = MakeFileEditor();
-            AttachFileEditor(FileEditor);
+            FileLoader = new FileLoader(new NameGetterContext(Scenario));
+            AttachFileEditor(FileLoader);
 
             var success = new Func<bool>(() => {
                 try {
-                    return FileEditor.LoadFile(filename, stream) && OnLoad();
+                    return FileLoader.LoadFile(filename, stream, MakeEditor) && OnLoad();
                 }
                 catch {
                     return false;
@@ -173,16 +176,16 @@ namespace SF3.Editor.Forms {
             return true;
         }
 
-        private void AttachFileEditor(IFileEditor fileEditor) {
-            fileEditor.TitleChanged    += (obj, args) => UpdateTitle();
-            fileEditor.PreFileLoaded   += (obj, eargs) => PreFileLoaded?.Invoke(this, eargs);
-            fileEditor.FileLoaded      += (obj, eargs) => FileLoaded?.Invoke(this, eargs);
-            fileEditor.PreFileClosed   += (obj, eargs) => PreFileClosed?.Invoke(this, eargs);
-            fileEditor.FileClosed      += (obj, eargs) => FileClosed?.Invoke(this, eargs);
-            fileEditor.PreFileSaved    += (obj, eargs) => PreFileSaved?.Invoke(this, eargs);
-            fileEditor.FileSaved       += (obj, eargs) => FileSaved?.Invoke(this, eargs);
-            fileEditor.ModifiedChanged += (obj, eargs) => FileModifiedChanged?.Invoke(this, eargs);
-            fileEditor.IsLoadedChanged += (obj, eargs) => FileIsLoadedChanged?.Invoke(this, eargs);
+        private void AttachFileEditor(IFileLoader fileEditor) {
+            fileEditor.TitleChanged      += (obj, args) => UpdateTitle();
+            fileEditor.PreLoaded         += (obj, args) => PreFileLoaded?.Invoke(this, args);
+            fileEditor.Loaded            += (obj, args) => FileLoaded?.Invoke(this, args);
+            fileEditor.PreClosed         += (obj, args) => PreFileClosed?.Invoke(this, args);
+            fileEditor.Closed            += (obj, args) => FileClosed?.Invoke(this, args);
+            fileEditor.PreSaved          += (obj, args) => PreFileSaved?.Invoke(this, args);
+            fileEditor.Saved             += (obj, args) => FileSaved?.Invoke(this, args);
+            fileEditor.IsModifiedChanged += (obj, args) => FileModifiedChanged?.Invoke(this, args);
+            fileEditor.IsLoadedChanged   += (obj, args) => FileIsLoadedChanged?.Invoke(this, args);
         }
 
         /// <summary>
@@ -192,14 +195,14 @@ namespace SF3.Editor.Forms {
         /// </summary>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
         public bool SaveFileDialog() {
-            if (FileEditor == null)
+            if (FileLoader == null)
                 return false;
 
             ObjectListViews.ForEach(x => x.FinishCellEdit());
 
             var savefile = new SaveFileDialog {
                 Filter = FileDialogFilter,
-                FileName = Path.GetFileName(FileEditor.Filename)
+                FileName = Path.GetFileName(FileLoader.Filename)
             };
             if (savefile.ShowDialog() != DialogResult.OK)
                 return false;
@@ -213,15 +216,15 @@ namespace SF3.Editor.Forms {
         /// </summary>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
         public bool Save() {
-            if (FileEditor == null || !FileEditor.IsModified)
+            if (FileLoader == null || !FileLoader.IsModified)
                 return false;
-            return SaveFile(FileEditor.Filename);
+            return SaveFile(FileLoader.Filename);
         }
 
         private bool SaveFile(string filename) {
             var success = true;
             try {
-                if (!FileEditor.SaveFile(filename))
+                if (!FileLoader.SaveFile(filename))
                     success = false;
             }
             catch {
@@ -252,16 +255,17 @@ namespace SF3.Editor.Forms {
         /// <returns>'true' if no file was open or the file was closed. Returns 'false' if the user clicked 'cancel' when
         /// prompted to save changes.</returns>
         public bool CloseFile(bool force = false) {
-            if (FileEditor == null)
+            if (FileLoader == null)
                 return true;
 
-            if (!force && FileEditor.IsModified)
+            if (!force && FileLoader.IsModified)
                 if (PromptForSave() == DialogResult.Cancel)
                     return false;
 
             ObjectListViews.ForEach(x => x.ClearObjects());
-            _ = FileEditor.CloseFile();
-            FileEditor = null;
+            _ = FileLoader.Close();
+            FileLoader.Dispose();
+            FileLoader = null;
             return true;
         }
 
@@ -275,19 +279,19 @@ namespace SF3.Editor.Forms {
             if (!IsLoaded)
                 return false;
 
-            if (FileEditor.IsModified)
+            if (FileLoader.IsModified)
                 if (PromptForSave() == DialogResult.Cancel)
                     return false;
 
             var form = new frmDFRTool(CommandType.Apply, dialogMode: true);
-            form.ApplyDFRInputData = FileEditor.GetAllData();
+            form.ApplyDFRInputData = FileLoader.RawEditor.GetAllData();
             form.ApplyDFRInMemory = true;
             var dialogResult = form.ShowDialog();
             if (dialogResult != DialogResult.OK)
                 return false;
 
             try {
-                var filename = FileEditor.Filename;
+                var filename = FileLoader.Filename;
                 var newBytes = form.ApplyDFRInMemoryOutput;
                 if (newBytes == null)
                     throw new NullReferenceException("Internal error: No result from 'Apply DFR' command!");
@@ -296,12 +300,12 @@ namespace SF3.Editor.Forms {
                     return false;
                 using (var newBytesStream = new MemoryStream(newBytes)) {
                     if (!LoadFile(filename, newBytesStream)) {
-                        if (FileEditor != null)
-                            FileEditor.IsModified = true;
+                        if (FileLoader != null)
+                            FileLoader.IsModified = true;
                         return false;
                     }
                 }
-                FileEditor.IsModified = true;
+                FileLoader.IsModified = true;
             }
             catch (Exception e) {
                 ErrorMessage("Error loading modified data:\n\n" + e.Message);
@@ -315,8 +319,11 @@ namespace SF3.Editor.Forms {
         /// Opens the DFRToolGUI as a modal dialog with the current editor data as its "Altered File".
         /// </summary>
         public bool GenerateDFRFile() {
+            if (!IsLoaded)
+                return false;
+
             var form = new frmDFRTool(CommandType.Create, dialogMode: true);
-            form.CreateDFRAlteredData = FileEditor.GetAllData();
+            form.CreateDFRAlteredData = FileLoader.RawEditor.GetAllData();
             var dialogResult = form.ShowDialog();
             return (dialogResult == DialogResult.OK);
         }
@@ -325,7 +332,7 @@ namespace SF3.Editor.Forms {
         /// Opens a dialog to perform a bulk copy of tables to another .BIN file.
         /// </summary>
         public void CopyTablesTo() {
-            if (FileEditor == null)
+            if (FileLoader == null)
                 return;
 
             ObjectListViews.ForEach(x => x.FinishCellEdit());
@@ -340,13 +347,13 @@ namespace SF3.Editor.Forms {
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
-                var copyFileEditor = MakeFileEditor();
-                if (!copyFileEditor.LoadFile(copyToFilename)) {
+                var copyFileEditor = new FileLoader(new NameGetterContext(Scenario));
+                if (!copyFileEditor.LoadFile(copyToFilename, MakeEditor)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
 
-                result = FileEditor.BulkCopyProperties(copyFileEditor);
+                result = FileLoader.BulkCopyProperties(copyFileEditor);
                 if (!copyFileEditor.SaveFile(copyToFilename)) {
                     ErrorMessage("Error trying to update file.");
                     return;
@@ -360,14 +367,14 @@ namespace SF3.Editor.Forms {
                 return;
             }
 
-            ProduceAndPresentBulkCopyReport(result, FileEditor.NameContext);
+            ProduceAndPresentBulkCopyReport(result, FileLoader.NameGetterContext);
         }
 
         /// <summary>
         /// Opens a dialog to perform a bulk copy of tables from another .BIN file.
         /// </summary>
         public void CopyTablesFrom() {
-            if (FileEditor == null)
+            if (FileLoader == null)
                 return;
 
             ObjectListViews.ForEach(x => x.FinishCellEdit());
@@ -382,12 +389,12 @@ namespace SF3.Editor.Forms {
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
-                var copyFileEditor = MakeFileEditor();
-                if (!copyFileEditor.LoadFile(copyFromFilename)) {
+                var copyFileEditor = new FileLoader(new NameGetterContext(Scenario));
+                if (!copyFileEditor.LoadFile(copyFromFilename, MakeEditor)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
-                result = copyFileEditor.BulkCopyProperties(FileEditor);
+                result = copyFileEditor.BulkCopyProperties(FileLoader);
             }
             catch (Exception e) {
                 //wrong file was selected
@@ -398,7 +405,7 @@ namespace SF3.Editor.Forms {
             }
 
             ObjectListViews.ForEach(x => x.RefreshAllItems());
-            ProduceAndPresentBulkCopyReport(result, FileEditor.NameContext);
+            ProduceAndPresentBulkCopyReport(result, FileLoader.NameGetterContext);
         }
 
         private void ProduceAndPresentBulkCopyReport(ObjectExtensions.BulkCopyPropertiesResult result, INameGetterContext nameContext) {
@@ -467,12 +474,12 @@ namespace SF3.Editor.Forms {
         /// <summary>
         /// Is 'true' when a file has been loaded.
         /// </summary>
-        public bool IsLoaded => FileEditor?.IsLoaded == true;
+        public bool IsLoaded => FileLoader?.IsLoaded == true;
 
         /// <summary>
-        /// FileEditor open for the current file.
+        /// FileLoader open for the current file.
         /// </summary>
-        protected IFileEditor FileEditor { get; private set; }
+        protected IFileLoader FileLoader { get; private set; }
 
         /// <summary>
         /// All ObjectListView's present in the form. Populated automatically.
@@ -483,8 +490,8 @@ namespace SF3.Editor.Forms {
         /// The title to set when using UpdateTitle().
         /// </summary>
         /// <returns></returns>
-        protected virtual string MakeTitle() => (FileEditor?.IsLoaded == true)
-            ? FileEditor.EditorTitle(_baseTitle)
+        protected virtual string MakeTitle() => (FileLoader?.IsLoaded == true)
+            ? FileLoader.EditorTitle(_baseTitle)
             : _baseTitle;
 
         /// <summary>
@@ -493,9 +500,10 @@ namespace SF3.Editor.Forms {
         protected virtual string FileDialogFilter => "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*";
 
         /// <summary>
-        /// Factory method for creating an IFileEditor in OpenFileDialog(). Must be overridden.
+        /// Factory method for creating an IBaseEditor in OpenFileDialog(). Must be overridden.
+        /// (Cannot be abstract because then the VS component editor wouldn't work)
         /// </summary>
-        protected virtual IFileEditor MakeFileEditor() => throw new NotImplementedException();
+        protected virtual IBaseEditor MakeEditor(IFileLoader loader) => throw new NotImplementedException();
 
         /// <summary>
         /// The main menu strip.
@@ -513,47 +521,47 @@ namespace SF3.Editor.Forms {
         public event EventHandler TitleChanged;
 
         /// <summary>
-        /// Triggered before FileEditor loads a file.
+        /// Triggered before FileLoader loads a file.
         /// </summary>
         public event EventHandler PreFileLoaded;
 
         /// <summary>
-        /// Triggered after FileEditor loads a file.
+        /// Triggered after FileLoader loads a file.
         /// </summary>
         public event EventHandler FileLoaded;
 
         /// <summary>
-        /// Triggered before FileEditor saves a file.
+        /// Triggered before FileLoader saves a file.
         /// </summary>
         public event EventHandler PreFileSaved;
 
         /// <summary>
-        /// Triggered after FileEditor saves a file.
+        /// Triggered after FileLoader saves a file.
         /// </summary>
         public event EventHandler FileSaved;
 
         /// <summary>
-        /// Triggered before FileEditor closes a file.
+        /// Triggered before FileLoader closes a file.
         /// </summary>
         public event EventHandler PreFileClosed;
 
         /// <summary>
-        /// Triggered after FileEditor closes a file.
+        /// Triggered after FileLoader closes a file.
         /// </summary>
         public event EventHandler FileClosed;
 
         /// <summary>
-        /// Triggered after FileEditor's modified state has been changed.
+        /// Triggered after FileLoader's modified state has been changed.
         /// </summary>
         public event EventHandler FileModifiedChanged;
 
         /// <summary>
-        /// Triggered after FileEditor's loaded state has been changed.
+        /// Triggered after FileLoader's loaded state has been changed.
         /// </summary>
         public event EventHandler FileIsLoadedChanged;
 
         protected virtual void EditorForm_FormClosing(object sender, FormClosingEventArgs e) {
-            if (FileEditor?.IsModified == true) {
+            if (FileLoader?.IsModified == true) {
                 if (!CloseFile())
                     e.Cancel = true;
             }
@@ -579,7 +587,7 @@ namespace SF3.Editor.Forms {
         private void tsmiEdit_UseDropdowns_Click(object sender, EventArgs e) => Globals.UseDropdowns = !Globals.UseDropdowns;
 
         private string[] GetOtherFilesAtDirectoryForOpenFilter() {
-            var path = Path.GetDirectoryName(FileEditor.Filename);
+            var path = Path.GetDirectoryName(FileLoader.Filename);
             var filters = FileDialogFilter.Split('|')[1].Split(';');
             return filters.SelectMany(x => Directory.GetFiles(path, x)).OrderBy(x => x).ToArray();
         }
@@ -589,7 +597,7 @@ namespace SF3.Editor.Forms {
             if (filesInDir.Length <= 1)
                 return;
 
-            var index = filesInDir.Select((x, i) => new {x, i}).FirstOrDefault(x => x.x == FileEditor.Filename)?.i;
+            var index = filesInDir.Select((x, i) => new {x, i}).FirstOrDefault(x => x.x == FileLoader.Filename)?.i;
             var indexToLoad = (index == null) ? 0 : (index == 0) ? (filesInDir.Length - 1) : ((int) index - 1);
             _ = LoadFile(filesInDir[indexToLoad]);
         }
@@ -599,7 +607,7 @@ namespace SF3.Editor.Forms {
             if (filesInDir.Length <= 1)
                 return;
 
-            var index = filesInDir.Select((x, i) => new {x, i}).FirstOrDefault(x => x.x == FileEditor.Filename)?.i;
+            var index = filesInDir.Select((x, i) => new {x, i}).FirstOrDefault(x => x.x == FileLoader.Filename)?.i;
             var indexToLoad = (index == null) ? 0 : (index == filesInDir.Length - 1) ? 0 : ((int) index + 1);
             _ = LoadFile(filesInDir[indexToLoad]);
         }

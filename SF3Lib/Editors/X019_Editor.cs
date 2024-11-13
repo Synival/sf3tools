@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
-using SF3.NamedValues;
+using CommonLib.NamedValues;
+using SF3.RawEditors;
 using SF3.Tables;
 using SF3.Tables.X019;
 using SF3.Types;
@@ -9,12 +10,19 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Editors {
     public class X019_Editor : ScenarioTableEditor, IX019_Editor {
-        public X019_Editor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
+        protected X019_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
+        }
+
+        public static X019_Editor Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) {
+            var newEditor = new X019_Editor(editor, nameContext, scenario);
+            if (!newEditor.Init())
+                throw new InvalidOperationException("Couldn't initialize tables");
+            return newEditor;
         }
 
         public override IEnumerable<ITable> MakeTables() {
             int monsterTableAddress;
-            bool isPDX044 = GetDouble(0x08) == 0x060780A4;
+            bool isPDX044 = Editor.GetDouble(0x08) == 0x060780A4;
 
             switch (Scenario) {
                 case ScenarioType.Scenario1:
@@ -34,7 +42,7 @@ namespace SF3.Editors {
             }
 
             return new List<ITable>() {
-                (MonsterTable = new MonsterTable(this, ResourceFileForScenario(Scenario, "Monsters.xml"), monsterTableAddress))
+                (MonsterTable = new MonsterTable(Editor, ResourceFileForScenario(Scenario, "Monsters.xml"), monsterTableAddress))
             };
         }
 

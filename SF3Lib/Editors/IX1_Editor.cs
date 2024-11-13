@@ -10,7 +10,7 @@ namespace SF3.Editors {
     public interface IX1_Editor : IScenarioTableEditor {
         bool IsBTL99 { get; }
 
-        bool? IsBattle { get; }
+        bool IsBattle { get; }
 
         TreasureTable TreasureTable { get; }
         WarpTable WarpTable { get; }

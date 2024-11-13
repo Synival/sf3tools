@@ -1,8 +1,12 @@
 using System.Collections.Generic;
 using BrightIdeasSoftware;
+using CommonLib.NamedValues;
+using SF3.RawEditors;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.Editors;
+using SF3.Loaders;
+using SF3.NamedValues;
 using SF3.Types;
 using static SF3.Editor.Extensions.TabControlExtensions;
 
@@ -11,7 +15,7 @@ namespace SF3.X019_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.16";
 
-        public new IX019_Editor FileEditor => base.FileEditor as IX019_Editor;
+        public IX019_Editor Editor => base.FileLoader.Editor as IX019_Editor;
 
         public frmX019_Editor() {
             InitializeComponent();
@@ -24,18 +28,19 @@ namespace SF3.X019_Editor.Forms {
                     : "SF3 Data (X019.BIN)|X019.BIN|")
                 + base.FileDialogFilter;
 
-        protected override IFileEditor MakeFileEditor() => new Editors.X019_Editor(Scenario);
+        protected override IBaseEditor MakeEditor(IFileLoader loader)
+            => Editors.X019_Editor.Create(loader.RawEditor, loader.NameGetterContext, Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
-                new PopulateOLVTabConfig(tabMonsterTab1, olvMonsterTab1, FileEditor.MonsterTable),
-                new PopulateOLVTabConfig(tabMonsterTab2, olvMonsterTab2, FileEditor.MonsterTable),
-                new PopulateOLVTabConfig(tabMonsterTab3, olvMonsterTab3, FileEditor.MonsterTable),
-                new PopulateOLVTabConfig(tabMonsterTab4, olvMonsterTab4, FileEditor.MonsterTable),
-                new PopulateOLVTabConfig(tabMonsterTab5, olvMonsterTab5, FileEditor.MonsterTable),
+                new PopulateOLVTabConfig(tabMonsterTab1, olvMonsterTab1, Editor.MonsterTable),
+                new PopulateOLVTabConfig(tabMonsterTab2, olvMonsterTab2, Editor.MonsterTable),
+                new PopulateOLVTabConfig(tabMonsterTab3, olvMonsterTab3, Editor.MonsterTable),
+                new PopulateOLVTabConfig(tabMonsterTab4, olvMonsterTab4, Editor.MonsterTable),
+                new PopulateOLVTabConfig(tabMonsterTab5, olvMonsterTab5, Editor.MonsterTable),
             });
         }
 
