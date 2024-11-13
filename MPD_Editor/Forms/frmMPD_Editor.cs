@@ -6,6 +6,7 @@ using CommonLib.Extensions;
 using SF3.Editor.Extensions;
 using SF3.Editor.Forms;
 using SF3.Editors;
+using SF3.Editors.MPD;
 using SF3.Loaders;
 using SF3.Models.MPD.TextureChunk;
 using SF3.MPDEditor.Extensions;
@@ -60,13 +61,13 @@ namespace SF3.MPD_Editor.Forms {
             => Editors.MPD_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
         private class PopulateTextureChunkTabConfig : IPopulateTabConfig {
-            public PopulateTextureChunkTabConfig(TabPage tabPage, TextureChunk textureChunk) {
+            public PopulateTextureChunkTabConfig(TabPage tabPage, TextureChunkEditor textureChunk) {
                 TabPage = tabPage;
                 TextureChunk = textureChunk;
             }
 
             public TabPage TabPage { get; }
-            public TextureChunk TextureChunk { get; }
+            public TextureChunkEditor TextureChunk { get; }
 
             public bool CanPopulate => TextureChunk != null;
 

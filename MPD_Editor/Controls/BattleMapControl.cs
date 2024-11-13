@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows.Forms;
-using SF3.Models.MPD.TextureChunk;
+using SF3.Editors.MPD;
 using SF3.MPDEditor.Extensions;
 
 namespace SF3.MPDEditor.Controls {
@@ -28,7 +28,7 @@ namespace SF3.MPDEditor.Controls {
         public byte[,] Flags { get; private set; } = null;
         public Image FullImage { get; private set; } = null;
 
-        public void UpdateTextures(ushort[,] textureData, TextureChunk[] textureChunks) {
+        public void UpdateTextures(ushort[,] textureData, TextureChunkEditor[] textureChunks) {
             if (textureData == null || textureChunks == null) {
                 UniqueImages = null;
                 Images = null;

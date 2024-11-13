@@ -4,11 +4,11 @@ using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using MPDLib;
 using SF3.RawEditors;
-using SF3.Models.MPD.TextureChunk;
 using SF3.Tables;
 using SF3.Tables.MPD;
 using SF3.Types;
 using System.Linq;
+using SF3.Editors.MPD;
 
 namespace SF3.Editors {
     public class MPD_Editor : ScenarioTableEditor, IMPD_Editor {
@@ -88,10 +88,10 @@ namespace SF3.Editors {
                 if (Palettes[i] != null)
                     tables.Add(Palettes[i]);
 
-            TextureChunks = new TextureChunk[4];
+            TextureChunks = new TextureChunkEditor[4];
             for (int i = 0; i < 4; i++) {
                 if (Chunks[i + 6].Data?.Length > 0) {
-                    TextureChunks[i] = new TextureChunk(ChunkEditors[i + 6], 0x00, "TextureChunk" + (i + 1));
+                    TextureChunks[i] = TextureChunkEditor.Create(ChunkEditors[i + 6], NameGetterContext, 0x00, "TextureChunk" + (i + 1));
                     tables.Add(TextureChunks[i].HeaderTable);
                     tables.Add(TextureChunks[i].TextureTable);
                 }
@@ -133,6 +133,6 @@ namespace SF3.Editors {
         public TileItemRowTable TileItemRows { get; private set; }
 
         [BulkCopyRecurse]
-        public TextureChunk[] TextureChunks { get; private set; }
+        public TextureChunkEditor[] TextureChunks { get; private set; }
     }
 }

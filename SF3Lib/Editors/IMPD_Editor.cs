@@ -1,7 +1,7 @@
 using MPDLib;
 using SF3.RawEditors;
-using SF3.Models.MPD.TextureChunk;
 using SF3.Tables.MPD;
+using SF3.Editors.MPD;
 
 namespace SF3.Editors {
     public interface IMPD_Editor : IScenarioTableEditor {
@@ -19,6 +19,6 @@ namespace SF3.Editors {
         TileHeightRowTable TileHeightRows { get; }
         TileTerrainRowTable TileTerrainRows { get; }
         TileItemRowTable TileItemRows { get; }
-        TextureChunk[] TextureChunks { get; }
+        TextureChunkEditor[] TextureChunks { get; }
     }
 }
