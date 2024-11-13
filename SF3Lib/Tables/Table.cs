@@ -13,7 +13,7 @@ namespace SF3.Tables {
     /// </summary>
     public abstract class Table : ITable {
         protected Table(IRawEditor editor, string resourceFile, int address) {
-            FileEditor = editor;
+            Editor = editor;
             ResourceFile = resourceFile;
             Address = address;
         }
@@ -30,7 +30,7 @@ namespace SF3.Tables {
         /// <returns>'true' if successful (or no data is loaded), 'false' on failure.</returns>
         public abstract bool Reset();
 
-        public IRawEditor FileEditor { get; }
+        public IRawEditor Editor { get; }
         public string ResourceFile { get; }
         public int Address { get; }
 

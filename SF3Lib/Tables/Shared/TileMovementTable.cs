@@ -7,7 +7,7 @@ namespace SF3.Tables.Shared {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new TileMovement(FileEditor, id, name, address));
+            => LoadFromResourceFile((id, name, address) => new TileMovement(Editor, id, name, address));
 
         public override int? MaxSize => 31;
     }

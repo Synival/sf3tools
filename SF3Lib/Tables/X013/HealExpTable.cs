@@ -7,7 +7,7 @@ namespace SF3.Tables.X013 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new HealExp(FileEditor, id, name, address));
+            => LoadFromResourceFile((id, name, address) => new HealExp(Editor, id, name, address));
 
         public override int? MaxSize => 2;
     }

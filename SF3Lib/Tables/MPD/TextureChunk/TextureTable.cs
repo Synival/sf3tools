@@ -9,12 +9,12 @@ namespace SF3.Tables.MPD.TextureChunk {
         }
 
         public override bool Load() {
-            var size = new Texture(FileEditor, StartID, "Texture0", Address).Size;
+            var size = new Texture(Editor, StartID, "Texture0", Address).Size;
             return LoadUntilMax((id, address) => {
                 var nextImageDataOffset = (id + 1 >= MaxSize)
-                    ? FileEditor.Data.Length
-                    : new Texture(FileEditor, StartID + id + 1, "", address + size).ImageDataOffset;
-                return new Texture(FileEditor, StartID + id, "Texture" + (StartID + id), address, nextImageDataOffset);
+                    ? Editor.Data.Length
+                    : new Texture(Editor, StartID + id + 1, "", address + size).ImageDataOffset;
+                return new Texture(Editor, StartID + id, "Texture" + (StartID + id), address, nextImageDataOffset);
             });
         }
 

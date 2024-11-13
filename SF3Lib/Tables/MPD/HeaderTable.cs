@@ -8,7 +8,7 @@ namespace SF3.Tables.MPD {
         }
 
         public override bool Load()
-            => LoadUntilMax((id, address) => new Header(FileEditor, id, "Header", address, HasPalette3));
+            => LoadUntilMax((id, address) => new Header(Editor, id, "Header", address, HasPalette3));
 
         public override int? MaxSize => 1;
         public bool HasPalette3 { get; }

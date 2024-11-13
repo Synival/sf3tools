@@ -21,7 +21,7 @@ namespace SF3.Tables.Shared {
             for (var i = 0; prevModel == null || prevModel.WarpType != 0x01 && prevModel.WarpType != 0xff; i++) {
                 if (i == MaxSize)
                     throw new IndexOutOfRangeException();
-                var newRow = new Warp(FileEditor, i, values.ContainsKey(i) ? values[i] : "WarpIndex" + i, address);
+                var newRow = new Warp(Editor, i, values.ContainsKey(i) ? values[i] : "WarpIndex" + i, address);
                 address += newRow.Size;
                 _rows = _rows.ExpandedWith(newRow);
                 prevModel = newRow;

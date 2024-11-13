@@ -7,7 +7,7 @@ namespace SF3.Tables.X1.Battle {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new BattlePointers(FileEditor, id, name, address));
+            => LoadFromResourceFile((id, name, address) => new BattlePointers(Editor, id, name, address));
 
         public override int? MaxSize => 5;
     }

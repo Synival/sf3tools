@@ -7,7 +7,7 @@ namespace SF3.Tables.X033_X031 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new InitialInfo(FileEditor, id, name, address));
+            => LoadFromResourceFile((id, name, address) => new InitialInfo(Editor, id, name, address));
 
         public override int? MaxSize => 100;
     }

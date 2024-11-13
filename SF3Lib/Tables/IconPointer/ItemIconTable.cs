@@ -8,7 +8,7 @@ namespace SF3.Tables.IconPointer {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new ItemIcon(FileEditor, id, name, address, Has16BitIconAddr));
+            => LoadFromResourceFile((id, name, address) => new ItemIcon(Editor, id, name, address, Has16BitIconAddr));
 
         public override int? MaxSize => 300;
 

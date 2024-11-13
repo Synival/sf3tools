@@ -7,8 +7,8 @@ namespace SF3.Tables.MPD {
         }
 
         public override bool Load() {
-            var size = new TileTerrainRow(FileEditor, 0, "", Address).Size;
-            return LoadUntilMax((id, address) => new TileTerrainRow(FileEditor, id, "Y" + id, Address + (63 - id) * size));
+            var size = new TileTerrainRow(Editor, 0, "", Address).Size;
+            return LoadUntilMax((id, address) => new TileTerrainRow(Editor, id, "Y" + id, Address + (63 - id) * size));
         }
 
         public override int? MaxSize => 64;

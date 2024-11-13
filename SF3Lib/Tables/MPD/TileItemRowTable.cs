@@ -7,8 +7,8 @@ namespace SF3.Tables.MPD {
         }
 
         public override bool Load() {
-            var size = new TileItemRow(FileEditor, 0, "", Address).Size;
-            return LoadUntilMax((id, address) => new TileItemRow(FileEditor, id, "Y" + id, Address + (63 - id) * size));
+            var size = new TileItemRow(Editor, 0, "", Address).Size;
+            return LoadUntilMax((id, address) => new TileItemRow(Editor, id, "Y" + id, Address + (63 - id) * size));
         }
 
         public override int? MaxSize => 64;

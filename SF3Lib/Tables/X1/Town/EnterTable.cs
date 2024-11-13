@@ -8,7 +8,7 @@ namespace SF3.Tables.X1.Town {
 
         public override bool Load()
             => LoadFromResourceFile(
-                (id, name, address) => new Enter(FileEditor, id, name, address),
+                (id, name, address) => new Enter(Editor, id, name, address),
                 (rows, prev, cur) => prev == null || prev.Entered != 0xffff);
 
         public override int? MaxSize => 100;

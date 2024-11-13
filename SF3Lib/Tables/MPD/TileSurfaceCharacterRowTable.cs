@@ -14,7 +14,7 @@ namespace SF3.Tables.MPD {
                 var block = (63 - id) / 4;
                 var y = (63 - id) % 4;
                 address = Address + ((block * 256) + y * 4) * 2;
-                return new TileSurfaceCharacterRow(FileEditor, id, "Y" + id, address);
+                return new TileSurfaceCharacterRow(Editor, id, "Y" + id, address);
             });
         }
 

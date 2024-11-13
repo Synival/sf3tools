@@ -7,7 +7,7 @@ namespace SF3.Tables.X019 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new Monster(FileEditor, id, name, address));
+            => LoadFromResourceFile((id, name, address) => new Monster(Editor, id, name, address));
 
         public override int? MaxSize => 256;
     }

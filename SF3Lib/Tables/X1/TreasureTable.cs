@@ -8,7 +8,7 @@ namespace SF3.Tables.X1 {
 
         public override bool Load()
             => LoadFromResourceFile(
-                (id, name, address) => new Treasure(FileEditor, id, name, address),
+                (id, name, address) => new Treasure(Editor, id, name, address),
                 (rows, prev, cur) => prev == null || prev.Searched != 0xffff);
 
         public override int? MaxSize => 255;
