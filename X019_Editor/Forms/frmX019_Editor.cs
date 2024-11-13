@@ -11,7 +11,7 @@ namespace SF3.X019_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.16";
 
-        public new IX019_FileEditor FileEditor => base.FileEditor as IX019_FileEditor;
+        public new IX019_Editor FileEditor => base.FileEditor as IX019_Editor;
 
         public frmX019_Editor() {
             InitializeComponent();

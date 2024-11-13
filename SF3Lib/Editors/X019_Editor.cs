@@ -8,7 +8,7 @@ using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Editors {
-    public class X019_Editor : ScenarioTableEditor, IX019_FileEditor {
+    public class X019_Editor : ScenarioTableEditor, IX019_Editor {
         public X019_Editor(ScenarioType scenario) : base(scenario, new NameGetterContext(scenario)) {
         }
 
