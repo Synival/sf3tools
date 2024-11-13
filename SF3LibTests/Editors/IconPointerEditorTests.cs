@@ -3,9 +3,9 @@ using SF3.Editors;
 using SF3.NamedValues;
 using SF3.Types;
 
-namespace SF3.Tests.FileEditors {
+namespace SF3.Tests.Editors {
     [TestClass]
-    public class IconPointerFileEditorTests {
+    public class IconPointerEditorTests {
         private class IPETestCase : TestCase {
             public IPETestCase(ScenarioType scenario, string filename, int itemIconRows, int spellIconRows, int spellRealOffsetStart)
             : base(scenario, filename) {

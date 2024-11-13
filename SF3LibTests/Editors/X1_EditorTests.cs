@@ -3,9 +3,9 @@ using SF3.Editors;
 using SF3.NamedValues;
 using SF3.Types;
 
-namespace SF3.Tests.FileEditors {
+namespace SF3.Tests.Editors {
     [TestClass]
-    public class X1_FileEditorTests {
+    public class X1_EditorTests {
         private class X1_TestCase : TestCase {
             public X1_TestCase(
                 ScenarioType scenario,

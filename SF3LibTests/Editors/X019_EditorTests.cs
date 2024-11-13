@@ -3,9 +3,9 @@ using SF3.Editors;
 using SF3.NamedValues;
 using SF3.Types;
 
-namespace SF3.Tests.FileEditors {
+namespace SF3.Tests.Editors {
     [TestClass]
-    public class X019_FileEditorTests {
+    public class X019_EditorTests {
         private class X019_TestCase : TestCase {
             public X019_TestCase(ScenarioType scenario, string filename, int expectedRows)
             : base(scenario, filename) {
