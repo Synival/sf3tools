@@ -9,7 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MPDLib\MPDLib.csproj" />
+    <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
+    <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 
-namespace MPDLib {
+namespace CommonLib {
     /// <summary>
     /// Definition for a single chunk that can possibly be compressed or decompressed.
     /// </summary>

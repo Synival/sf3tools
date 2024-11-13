@@ -1,5 +1,4 @@
-using MPDLib;
-using static MPDLib.Extensions.BinaryReaderExtensions;
+using CommonLib;
 
 namespace ShiningExtract
 {

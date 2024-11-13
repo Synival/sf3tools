@@ -1,19 +1,18 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using MPDLib.Extensions;
+﻿using System.Text;
+using CommonLib;
+using CommonLib.Extensions;
 
-namespace MPDLib {
+namespace ShiningExtract {
     /// <summary>
     /// A collection of chunks read from an MPD file.
     /// </summary>
     /// TODO: make this an actual collection!
     public class ChunkCollection {
         public ChunkCollection(Stream stream) {
-            FetchChunks(stream);
+            Chunks = FetchChunks(stream);
         }
 
-        private void FetchChunks(Stream stream) {
+        private static Chunk[] FetchChunks(Stream stream) {
             using (var reader = new BinaryReader(stream, Encoding.UTF8, true)) {
                 _ = stream.Seek(0x2000, SeekOrigin.Begin);
                 var chunkList = new List<Chunk>();
@@ -31,7 +30,7 @@ namespace MPDLib {
                     _ = stream.Seek(pos, SeekOrigin.Begin);
                 }
 
-                Chunks = chunkList.ToArray();
+                return chunkList.ToArray();
             }
         }
 
@@ -40,7 +39,7 @@ namespace MPDLib {
         /// </summary>
         /// <param name="logFileBaseFilename">Optional filename for logging</param>
         /// <returns></returns>
-        public byte[][] DecompressAllChunks(string logFileBaseFilename = null) {
+        public byte[][] DecompressAllChunks(string? logFileBaseFilename = null) {
             var data = new byte[Chunks.Length][];
             for (int c = 5; c < Chunks.Length; c++) {
                 var chunk = Chunks[c];

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace MPDLib.Extensions {
+namespace CommonLib.Extensions {
     public static class BinaryReaderExtensions {
         /// <summary>
         /// Reads a 32-bit little endian integer from a BinaryReader
