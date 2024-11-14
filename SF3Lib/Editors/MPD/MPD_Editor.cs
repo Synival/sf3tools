@@ -51,19 +51,24 @@ namespace SF3.Editors.MPD {
                     Chunks[i] = new Chunk(((ByteEditor) Editor).Data, chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
             }
 
+            CompressedEditors = new ICompressedEditor[Chunks.Length];
             ChunkEditors = new IByteEditor[Chunks.Length];
+
             if (Chunks[2]?.Data?.Length > 0)
                 ChunkEditors[2] = new ByteEditor(Chunks[2].Data);
             // TODO: this works, but it's kind of a dumb hack!!
             else if (Chunks[20]?.Data?.Length == 52992)
                 ChunkEditors[2] = new ByteEditor(Chunks[20].Data);
-            if (Chunks[5]?.Data != null)
-                ChunkEditors[5] = new ByteEditor(Chunks[5].Decompress());
+            if (Chunks[5]?.Data != null) {
+                CompressedEditors[5] = new CompressedEditor(Chunks[5].Data);
+                ChunkEditors[5] = CompressedEditors[5].DecompressedEditor;
+            }
 
-            // Texture editors.
-            for (var i = 0; i < 4; i++) {
+            // Texture editors, in chunks (6...9)
+            for (var i = 6; i <= 9; i++) {
                 try {
-                    ChunkEditors[i + 6] = new ByteEditor(Chunks[i + 6].Decompress());
+                    CompressedEditors[i] = new CompressedEditor(Chunks[i].Data);
+                    ChunkEditors[i] = CompressedEditors[i].DecompressedEditor;
                 }
                 catch {
                     // TODO: This is likely failing because the texture is the wrong encoding.
@@ -88,22 +93,48 @@ namespace SF3.Editors.MPD {
 
             TextureChunks = new TextureChunkEditor[4];
             for (var i = 0; i < 4; i++) {
-                if (Chunks[i + 6].Data?.Length > 0) {
-                    TextureChunks[i] = TextureChunkEditor.Create(ChunkEditors[i + 6], NameGetterContext, 0x00, "TextureChunk" + (i + 1));
+                int chunkIndex = i + 6;
+                if (Chunks[chunkIndex].Data?.Length > 0) {
+                    TextureChunks[i] = TextureChunkEditor.Create(ChunkEditors[chunkIndex], NameGetterContext, 0x00, "TextureChunk" + (i + 1));
                     tables.Add(TextureChunks[i].HeaderTable);
                     tables.Add(TextureChunks[i].TextureTable);
                 }
             }
 
-            // Add some callbacks to chunk editors.
-            foreach (var ci in ChunkEditors.Where(ci => ci != null))
+            // Add some callbacks to all child editors.
+            foreach (var ci in CompressedEditors
+                .Concat(ChunkEditors)
+                .Where(ci => ci != null)
+            ) {
+                // If the editor is marked as unmodified (such as after a save), mark child editors as unmodified as well.
+                Editor.IsModifiedChanged += (s, e) => ci.IsModified &= Editor.IsModified;
+
+                // If any of the child editors are marked as modified, mark the parent editor as modified as well.
                 ci.IsModifiedChanged += (s, e) => Editor.IsModified |= ci.IsModified;
+            }
 
             return tables;
         }
 
+        public override bool OnFinalize() {
+            bool success = true;
+            foreach (var ci in CompressedEditors
+                .Concat(ChunkEditors)
+                .Where(ci => ci != null)
+            ) {
+                success &= ci.Finalize();
+            }
+            return success;
+        }
+
         public override void Dispose() {
             base.Dispose();
+
+            if (CompressedEditors != null) {
+                foreach (var ci in CompressedEditors.Where(ci => ci != null))
+                    ci.Dispose();
+                CompressedEditors = null;
+            }
             if (ChunkEditors != null) {
                 foreach (var ci in ChunkEditors.Where(ci => ci != null))
                     ci.Dispose();
@@ -111,6 +142,7 @@ namespace SF3.Editors.MPD {
             }
         }
 
+        public ICompressedEditor[] CompressedEditors { get; private set; }
         public IByteEditor[] ChunkEditors { get; private set; }
 
         [BulkCopyRecurse]
