@@ -3,6 +3,7 @@ using System.IO;
 using CommonLib.NamedValues;
 using SF3.RawEditors;
 using SF3.Editors;
+using static SF3.Loaders.FileLoaderDelegates;
 
 namespace SF3.Loaders {
     /// <summary>
@@ -15,7 +16,7 @@ namespace SF3.Loaders {
         /// <param name="filename">The file to load.</param>
         /// <param name="createEditor">Callback to create an editor once after creating the data editor.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
-        bool LoadFile(string filename, Func<IFileLoader, IBaseEditor> createEditor);
+        bool LoadFile(string filename, FileLoaderCreateEditorDelegate createEditor);
 
         /// <summary>
         /// Loads a stream of binary data for editing. Invokes events 'PreLoaded' and 'Loaded'.
@@ -24,7 +25,7 @@ namespace SF3.Loaders {
         /// <param name="stream">The data stream to load.</param>
         /// <param name="createEditor">Callback to create an editor once after creating the data editor.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
-        bool LoadFile(string filename, Stream stream, Func<IFileLoader, IBaseEditor> createEditor);
+        bool LoadFile(string filename, Stream stream, FileLoaderCreateEditorDelegate createEditor);
 
         /// <summary>
         /// Saves a file's binary data for editing. Invokes events 'PreSaved' and 'Saved'.

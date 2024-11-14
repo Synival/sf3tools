@@ -14,6 +14,10 @@ namespace SF3.Loaders {
 
         private readonly EventHandler _onModifiedChangedDelegate;
 
+        public delegate IRawEditor EditorLoaderCreateRawEditorDelegate(IEditorLoader loader);
+        public delegate IBaseEditor EditorLoaderCreateEditorDelegate(IEditorLoader loader);
+        public delegate bool EditorLoaderSaveDelegate(IEditorLoader loader);
+
         /// <summary>
         /// Performs loading of an editor provided. Invokes events 'PreLoaded' and 'Loaded'.
         /// Complete ownership of 'editor' is transferred to the EditorLoader when this is invoked.
@@ -21,12 +25,12 @@ namespace SF3.Loaders {
         /// </summary>
         /// <param name="createEditor">Callback to create an editor when possible.</param>
         /// <returns>'true' a new editor was loaded, otherwise 'false'.</returns>
-        protected bool PerformLoad(Func<IRawEditor> createRawEditor, Func<IEditorLoader, IBaseEditor> createEditor) {
+        protected bool PerformLoad(EditorLoaderCreateRawEditorDelegate createRawEditor, EditorLoaderCreateEditorDelegate createEditor) {
             if (createEditor == null)
                 return false;
             if (IsLoaded && !Close())
                 return false;
-            if ((RawEditor = createRawEditor()) == null)
+            if ((RawEditor = createRawEditor(this)) == null)
                 return false;
             if ((Editor = createEditor(this)) == null) {
                 RawEditor = null;
@@ -41,7 +45,7 @@ namespace SF3.Loaders {
         /// </summary>
         /// <param name="saveAction">The function to save the editor when possible.</param>
         /// <returns>'true' if saveAction was invokvd and returned success.</returns>
-        protected bool PerformSave(Func<IEditorLoader, bool> saveAction) {
+        protected bool PerformSave(EditorLoaderSaveDelegate saveAction) {
             if (saveAction == null)
                 return false;
             if (RawEditor == null)

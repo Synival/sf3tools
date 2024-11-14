@@ -3,13 +3,29 @@ using System.IO;
 using SF3.RawEditors;
 using SF3.Editors;
 using SF3.Exceptions;
+using static SF3.Loaders.FileLoaderDelegates;
 
 namespace SF3.Loaders {
     /// <summary>
     /// Used for loading, saving, reading, and modifying .BIN files.
     /// </summary>
-    public class FileLoader : EditorLoader, IFileLoader {
-        public virtual bool LoadFile(string filename, Func<IFileLoader, IBaseEditor> createEditor) {
+    public partial class FileLoader : EditorLoader, IFileLoader {
+        public FileLoader() {
+            _createRawEditor = (IFileLoader loader, string filename, Stream stream) => {
+                    byte[] newData;
+                    using (var memoryStream = new MemoryStream()) {
+                        stream.CopyTo(memoryStream);
+                        newData = memoryStream.ToArray();
+                    }
+                    return new ByteEditor(newData);
+            };
+        }
+
+        public FileLoader(FileLoaderCreateRawEditorDelegate createRawEditor) {
+            _createRawEditor = createRawEditor;
+        }
+
+        public virtual bool LoadFile(string filename, FileLoaderCreateEditorDelegate createEditor) {
             try {
                 using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
                     return LoadFile(filename, stream, createEditor);
@@ -19,15 +35,12 @@ namespace SF3.Loaders {
             }
         }
 
-        public virtual bool LoadFile(string filename, Stream stream, Func<IFileLoader, IBaseEditor> createEditor) {
-            return PerformLoad(() => {
+        public virtual bool LoadFile(string filename, Stream stream, FileLoaderCreateEditorDelegate createEditor) {
+            return PerformLoad(e => {
                 try {
-                    byte[] newData;
-                    using (var memoryStream = new MemoryStream()) {
-                        stream.CopyTo(memoryStream);
-                        newData = memoryStream.ToArray();
-                    }
-                    var newEditor = new ByteEditor(newData);
+                    var newEditor = _createRawEditor(this, filename, stream);
+                    if (newEditor == null)
+                        return null;
                     Filename = filename;
                     return newEditor;
                 }
@@ -51,6 +64,8 @@ namespace SF3.Loaders {
                 }
             });
         }
+
+        private readonly FileLoaderCreateRawEditorDelegate _createRawEditor;
 
         private string _filename = null;
 
