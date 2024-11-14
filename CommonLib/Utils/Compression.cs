@@ -132,21 +132,18 @@ namespace CommonLib.Utils {
             }
 
             void AppendClose() {
-                //control value set to 00
+                // control value set to 00
                 compressedBytes[currentOutputLocation++] = 0;
                 compressedBytes[currentOutputLocation++] = 0;
                 currentControl |= (ushort) (1 << (15 - controlCounter));
                 CommitControlValue();
-                currentOutputLocation -= 2; //cheap hack--we don't need the NEXT control value
+                currentOutputLocation -= 2; // cheap hack -- we don't need the NEXT control value
             }
-
-            // first value is guaranteed to be appended raw
-            AppendRawValue();
 
             while (currentLocation < data.Length) {
                 int seekLocation = currentLocation - 2;
 
-                // match must be higher than 4--impossible to represent anything smaller.
+                // match must be higher than 4 -- impossible to represent anything smaller.
                 int largestMatch = MINIMUM_COPY_LENGTH;
                 int bestOffset = -1;
                 while (seekLocation >= 0 && ((currentLocation - seekLocation) < 0x1000)) {
