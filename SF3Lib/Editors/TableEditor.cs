@@ -35,9 +35,20 @@ namespace SF3.Editors {
         /// <returns>A collection of unloaded ITable's.</returns>
         public abstract IEnumerable<ITable> MakeTables();
 
-        public virtual void Dispose() {
-            Editor.Dispose();
+        /// <summary>
+        /// Performs finalization tasks, aborting finalization if 'false' is returned.
+        /// </summary>
+        /// <returns>'true' if successful, 'false' if not.</returns>
+        public virtual bool OnFinalize() => Editor.Finalize();
+
+        public bool Finalize() {
+            if (!OnFinalize())
+                return false;
+            Finalized?.Invoke(this, EventArgs.Empty);
+            return true;
         }
+
+        public virtual void Dispose() => Editor.Dispose();
 
         /// <summary>
         /// The underlying data editor for this table editor.
@@ -49,5 +60,7 @@ namespace SF3.Editors {
         public IEnumerable<ITable> Tables { get; private set; }
 
         public virtual string Title => "";
+
+        public event EventHandler Finalized;
     }
 }

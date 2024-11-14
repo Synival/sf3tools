@@ -53,8 +53,6 @@ namespace SF3.Loaders {
         public virtual bool SaveFile(string filename) {
             if (!IsLoaded)
                 throw new FileEditorNotLoadedException();
-            if (!RawEditor.Finalize())
-                return false;
             return PerformSave(el => {
                 try {
                     File.WriteAllBytes(filename, el.RawEditor.GetAllData());

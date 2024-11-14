@@ -46,9 +46,9 @@ namespace SF3.Loaders {
         /// <param name="saveAction">The function to save the editor when possible.</param>
         /// <returns>'true' if saveAction was invokvd and returned success.</returns>
         protected bool PerformSave(EditorLoaderSaveDelegate saveAction) {
-            if (saveAction == null)
+            if (saveAction == null || RawEditor == null || Editor == null)
                 return false;
-            if (RawEditor == null)
+            if (!Editor.Finalize())
                 return false;
 
             PreSaved?.Invoke(this, EventArgs.Empty);

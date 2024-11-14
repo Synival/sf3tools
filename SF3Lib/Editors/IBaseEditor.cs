@@ -7,6 +7,12 @@ namespace SF3.Editors {
     /// </summary>
     public interface IBaseEditor : IDisposable {
         /// <summary>
+        /// Perform any extra tasks that need to be performed before saving.
+        /// </summary>
+        /// <returns>'true' if finalization was successful, otherwise 'false'.</returns>
+        bool Finalize();
+
+        /// <summary>
         /// The context for fetching named values.
         /// </summary>
         INameGetterContext NameGetterContext { get; }
@@ -15,5 +21,10 @@ namespace SF3.Editors {
         /// The name of this editor for display.
         /// </summary>
         string Title { get; }
+
+        /// <summary>
+        /// Triggered when Finalize() completes successfully.
+        /// </summary>
+        event EventHandler Finalized;
     }
 }
