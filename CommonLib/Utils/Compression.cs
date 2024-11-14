@@ -86,116 +86,94 @@ namespace CommonLib.Utils {
         /// <param name="logFile">Optional log output file. Can be 'null' to write no log.</param>
         /// <returns>A compressed set of bytes.</returns>
         public static byte[] Compress(byte[] data, string logFile = null) {
-            return CompressBytes(data);
-        }
+            const int MAXIMUM_COPY_LENGTH = 66; //...why?
+            const int MINIMUM_COPY_LENGTH = 3;
 
-        public static byte[] CompressBytes(byte[] buffer) {
-            return new CompressionEngine(buffer).Compress();
-        }
+            // gamble: will we ever end up with that catastrophic state where we compress the file bigger than it originally was?
+            // (gamble lost -- for low sizes like 4 bytes, the compressed version is actually larger, by double.
+            //  let's add at least 8 bytes.)
+            byte[] compressedBytes = new byte[(int) (data.Length * 1.25) + 8];
 
-        private class CompressionEngine {
-            private const int MAXIMUM_COPY_LENGTH = 66; //...why?
-            private const int MINIMUM_COPY_LENGTH = 3;
-            private byte[] _decompressedBytes;
-            private byte[] _compressedBytes;
-            private int _currentControlLocation;
-            private ushort _currentControl;
-            private int _currentLocation;
-            private int _currentOutputLocation;
-            private int _controlCounter = 0;
+            int currentLocation = 0;
+            ushort currentControl = 0;
+            int currentControlLocation = 0;
+            int currentOutputLocation = 2;
+            int controlCounter = 0;
 
-            public CompressionEngine(byte[] buffer) {
-                _decompressedBytes = buffer;
-                // gamble: will we ever end up with that catastrophic state where we compress the file bigger than it originally was?
-                // (gamble lost -- for low sizes like 4 bytes, the compressed version is actually larger, by double.
-                //  let's add at least 8 bytes.)
-                _compressedBytes = new byte[(int) (buffer.Length * 1.25) + 8];
+            bool MatchOffsets(int location1, int location2)
+                => data[location1] == data[location2] && data[location1 + 1] == data[location2 + 1];
+
+            void CommitControlValue() {
+                compressedBytes[currentControlLocation] = (byte) ((currentControl >> 8) & 0xFF);
+                compressedBytes[currentControlLocation + 1] = (byte) ((currentControl >> 0) & 0xFF);
+                currentControlLocation += 0x22;
+                currentOutputLocation += 2;
+                currentControl = 0;
+                controlCounter = 0;
             }
 
-            public byte[] Compress() {
-                _currentLocation = 0;
-                _currentControl = 0;
-                _currentControlLocation = 0;
-                _currentOutputLocation = 2;
-
-                // first value is guaranteed to be appended raw
-                AppendRawValue();
-
-                while (_currentLocation < _decompressedBytes.Length) {
-                    int seekLocation = _currentLocation - 2;
-
-                    // match must be higher than 4--impossible to represent anything smaller.
-                    int largestMatch = MINIMUM_COPY_LENGTH;
-                    int bestOffset = -1;
-                    while (seekLocation >= 0 && ((_currentLocation - seekLocation) < 0x1000)) {
-                        int currentMatch = 0;
-                        while (currentMatch < MAXIMUM_COPY_LENGTH && (_currentLocation + currentMatch < _decompressedBytes.Length) && MatchOffsets(seekLocation + currentMatch, _currentLocation + currentMatch)) {
-                            currentMatch += 2;
-                        }
-                        if (currentMatch > largestMatch) {
-                            bestOffset = seekLocation;
-                            largestMatch = currentMatch;
-                        }
-                        if (currentMatch == MAXIMUM_COPY_LENGTH) {
-                            break;
-                        }
-                        seekLocation -= 2;
-                    }
-                    if (bestOffset != -1) {
-                        AppendRemoteValue(largestMatch / 2, (_currentLocation - bestOffset) / 2);
-                        _currentLocation += largestMatch;
-                    }
-                    else {
-                        AppendRawValue();
-                    }
-                }
-                AppendClose();
-                return _compressedBytes.Take(_currentOutputLocation).ToArray();
-            }
-
-            private bool MatchOffsets(int location1, int location2) {
-                return _decompressedBytes[location1] == _decompressedBytes[location2] && _decompressedBytes[location1 + 1] == _decompressedBytes[location2 + 1];
-            }
-
-            private void AppendRawValue() {
-                _compressedBytes[_currentOutputLocation++] = _decompressedBytes[_currentLocation++];
-                _compressedBytes[_currentOutputLocation++] = _decompressedBytes[_currentLocation++];
-                _controlCounter++;
-                if (_controlCounter == 16) {
+            void AppendRawValue() {
+                compressedBytes[currentOutputLocation++] = data[currentLocation++];
+                compressedBytes[currentOutputLocation++] = data[currentLocation++];
+                controlCounter++;
+                if (controlCounter == 16)
                     CommitControlValue();
-                }
             }
 
-            private void AppendRemoteValue(int count, int offset) {
+            void AppendRemoteValue(int count, int offset) {
                 ushort combinedValue = (ushort)((offset << 5) | (count - 2));
                 byte[] bytes = BitConverter.GetBytes(combinedValue);
-                _compressedBytes[_currentOutputLocation++] = bytes[1];
-                _compressedBytes[_currentOutputLocation++] = bytes[0];
-                _currentControl |= (ushort) (1 << (15 - _controlCounter));
-                _controlCounter++;
-                if (_controlCounter == 16) {
+                compressedBytes[currentOutputLocation++] = bytes[1];
+                compressedBytes[currentOutputLocation++] = bytes[0];
+                currentControl |= (ushort) (1 << (15 - controlCounter));
+                controlCounter++;
+                if (controlCounter == 16)
                     CommitControlValue();
-                }
             }
 
-            private void AppendClose() {
+            void AppendClose() {
                 //control value set to 00
-                _compressedBytes[_currentOutputLocation++] = 0;
-                _compressedBytes[_currentOutputLocation++] = 0;
-                _currentControl |= (ushort) (1 << (15 - _controlCounter));
+                compressedBytes[currentOutputLocation++] = 0;
+                compressedBytes[currentOutputLocation++] = 0;
+                currentControl |= (ushort) (1 << (15 - controlCounter));
                 CommitControlValue();
-                _currentOutputLocation -= 2; //cheap hack--we don't need the NEXT control value
+                currentOutputLocation -= 2; //cheap hack--we don't need the NEXT control value
             }
 
-            private void CommitControlValue() {
-                _compressedBytes[_currentControlLocation] = (byte) ((_currentControl >> 8) & 0xFF);
-                _compressedBytes[_currentControlLocation + 1] = (byte) ((_currentControl >> 0) & 0xFF);
-                _currentControlLocation += 0x22;
-                _currentOutputLocation += 2;
-                _currentControl = 0;
-                _controlCounter = 0;
+            // first value is guaranteed to be appended raw
+            AppendRawValue();
+
+            while (currentLocation < data.Length) {
+                int seekLocation = currentLocation - 2;
+
+                // match must be higher than 4--impossible to represent anything smaller.
+                int largestMatch = MINIMUM_COPY_LENGTH;
+                int bestOffset = -1;
+                while (seekLocation >= 0 && ((currentLocation - seekLocation) < 0x1000)) {
+                    int currentMatch = 0;
+                    while (currentMatch < MAXIMUM_COPY_LENGTH && (currentLocation + currentMatch < data.Length) &&
+                           MatchOffsets(seekLocation + currentMatch, currentLocation + currentMatch)) {
+                        currentMatch += 2;
+                    }
+                    if (currentMatch > largestMatch) {
+                        bestOffset = seekLocation;
+                        largestMatch = currentMatch;
+                    }
+                    if (currentMatch == MAXIMUM_COPY_LENGTH)
+                        break;
+
+                    seekLocation -= 2;
+                }
+                if (bestOffset != -1) {
+                    AppendRemoteValue(largestMatch / 2, (currentLocation - bestOffset) / 2);
+                    currentLocation += largestMatch;
+                }
+                else
+                    AppendRawValue();
             }
+
+            AppendClose();
+            return compressedBytes.Take(currentOutputLocation).ToArray();
         }
-
     }
 }
