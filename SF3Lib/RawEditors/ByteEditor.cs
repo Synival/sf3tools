@@ -165,8 +165,9 @@ namespace SF3.RawEditors {
             }
         }
 
-        public void Dispose() {
-        }
+        public void Dispose() { }
+
+        public bool Finalize() => true;
 
         public event EventHandler IsModifiedChanged;
     }

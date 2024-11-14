@@ -103,6 +103,13 @@ namespace SF3.RawEditors {
         void SetBit(int location, int bit, bool value);
 
         /// <summary>
+        /// Makes any pending changes necessary before data should be saved.
+        /// Should be invoked before any save operations.
+        /// </summary>
+        /// <returns>'true' on success, otherwise 'false'.</returns>
+        bool Finalize();
+
+        /// <summary>
         /// 'True' when the data is modified.
         /// </summary>
         bool IsModified { get; set; }
