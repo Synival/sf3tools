@@ -23,12 +23,7 @@ namespace CommonLib.Utils {
 
                 int pos = 0;
                 while (pos < data.Length) {
-                    if (pos >= data.Length)
-                        goto unexpectedEOF;
                     byte ctrl1 = data[pos++];
-
-                    if (pos >= data.Length)
-                        goto unexpectedEOF;
                     byte ctrl2 = data[pos++];
 
                     int control = ctrl1 << 8 | ctrl2;
@@ -40,12 +35,7 @@ namespace CommonLib.Utils {
                             }
                             int currentLoc = pos;
 
-                            if (pos >= data.Length)
-                                goto unexpectedEOF;
                             byte val1 = data[pos++];
-
-                            if (pos >= data.Length)
-                                goto unexpectedEOF;
                             byte val2 = data[pos++];
 
                             if (val1 == 0 && val2 == 0) {
@@ -59,12 +49,7 @@ namespace CommonLib.Utils {
                                 bufferLoc += count * 2;
                                 int windowPos = outputPosition - offset * 2;
                                 for (int j = 0; j < count; j++) {
-                                    if (outputPosition >= outputArray.Length || windowPos >= outputArray.Length || windowPos < 0)
-                                        goto unexpectedEOF;
                                     outputArray[outputPosition++] = outputArray[windowPos++];
-
-                                    if (outputPosition >= outputArray.Length || windowPos >= outputArray.Length || windowPos < 0)
-                                        goto unexpectedEOF;
                                     outputArray[outputPosition++] = outputArray[windowPos++];
                                 }
                             }
@@ -75,20 +60,10 @@ namespace CommonLib.Utils {
                             if (!prevRaw)
                                 logWriter?.Write(bufferLoc.ToString("X2") + ": Raw at " + pos.ToString("X2") + ": ");
 
-                            if (pos >= data.Length)
-                                goto unexpectedEOF;
                             byte val1 = data[pos++];
-
-                            if (pos >= data.Length)
-                                goto unexpectedEOF;
                             byte val2 = data[pos++];
 
-                            if (outputPosition >= outputArray.Length)
-                                goto unexpectedBufferTooSmall;
                             outputArray[outputPosition++] = val1;
-
-                            if (outputPosition >= outputArray.Length)
-                                goto unexpectedBufferTooSmall;
                             outputArray[outputPosition++] = val2;
 
                             logWriter?.Write(val1.ToString("X2"));
@@ -99,20 +74,6 @@ namespace CommonLib.Utils {
                     }
                 }
 
-                return outputArray.Take(outputPosition).ToArray();
-
-            unexpectedEOF:
-                try {
-                    throw new System.IO.IOException("Unexpected end of data");
-                }
-                catch { }
-                return outputArray.Take(outputPosition).ToArray();
-
-            unexpectedBufferTooSmall:
-                try {
-                    throw new System.IO.IOException("Ran out of space to write data -- please fix this function!");
-                }
-                catch { }
                 return outputArray.Take(outputPosition).ToArray();
             }
         }
@@ -193,17 +154,11 @@ namespace CommonLib.Utils {
             }
 
             private bool matchOffsets(int location1, int location2) {
-                if (location1 + 1 >= decompressedBytes.Length || location2 + 1 >= decompressedBytes.Length)
-                    return false;
                 return decompressedBytes[location1] == decompressedBytes[location2] && decompressedBytes[location1 + 1] == decompressedBytes[location2 + 1];
             }
 
             private void appendRawValue() {
-                if (currentOutputLocation >= compressedBytes.Length || currentLocation >= decompressedBytes.Length)
-                    return;
                 compressedBytes[currentOutputLocation++] = decompressedBytes[currentLocation++];
-                if (currentOutputLocation >= compressedBytes.Length || currentLocation >= decompressedBytes.Length)
-                    return;
                 compressedBytes[currentOutputLocation++] = decompressedBytes[currentLocation++];
                 controlCounter++;
                 if (controlCounter == 16) {
@@ -214,11 +169,7 @@ namespace CommonLib.Utils {
             private void appendRemoteValue(int count, int offset) {
                 ushort combinedValue = (ushort)((offset << 5) | (count - 2));
                 byte[] bytes = BitConverter.GetBytes(combinedValue);
-                if (currentOutputLocation >= compressedBytes.Length)
-                    return;
                 compressedBytes[currentOutputLocation++] = bytes[1];
-                if (currentOutputLocation >= compressedBytes.Length)
-                    return;
                 compressedBytes[currentOutputLocation++] = bytes[0];
                 currentControl |= (ushort) (1 << (15 - controlCounter));
                 controlCounter++;
@@ -229,11 +180,7 @@ namespace CommonLib.Utils {
 
             private void appendClose() {
                 //control value set to 00
-                if (currentOutputLocation >= compressedBytes.Length)
-                    return;
                 compressedBytes[currentOutputLocation++] = 0;
-                if (currentOutputLocation >= compressedBytes.Length)
-                    return;
                 compressedBytes[currentOutputLocation++] = 0;
                 currentControl |= (ushort) (1 << (15 - controlCounter));
                 commitControlValue();
@@ -241,11 +188,7 @@ namespace CommonLib.Utils {
             }
 
             private void commitControlValue() {
-                if (currentControlLocation >= compressedBytes.Length)
-                    return;
                 compressedBytes[currentControlLocation] = (byte) ((currentControl >> 8) & 0xFF);
-                if (currentControlLocation >= compressedBytes.Length)
-                    return;
                 compressedBytes[currentControlLocation + 1] = (byte) ((currentControl >> 0) & 0xFF);
                 currentControlLocation += 0x22;
                 currentOutputLocation += 2;
