@@ -143,8 +143,10 @@ namespace SF3.Editors.X1 {
                 tables.Add(ArrowTable = new ArrowTable(Editor, ResourceFile("X1Arrow.xml"), arrowAddress));
 
             // Add tables for battle tables.
-            if (Battles != null)
-                tables.AddRange(Battles.SelectMany(x => x.Value.Tables));
+            if (Battles != null) {
+                var battleEditors = Battles.Select(x => x.Value).Where(x => x != null).ToList();
+                tables.AddRange(battleEditors.SelectMany(x => x.Tables));
+            }
 
             if (tileMovementAddress >= 0)
                 tables.Add(TileMovementTable = new TileMovementTable(Editor, ResourceFile("MovementTypes.xml"), tileMovementAddress));
