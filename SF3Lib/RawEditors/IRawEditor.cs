@@ -118,5 +118,10 @@ namespace SF3.RawEditors {
         /// Event that occurs when the 'Modified' property is changed.
         /// </summary>
         event EventHandler IsModifiedChanged;
+
+        /// <summary>
+        /// Event that occurs when the Finalize() is completed successfully.
+        /// </summary>
+        event EventHandler Finalized;
     }
 }

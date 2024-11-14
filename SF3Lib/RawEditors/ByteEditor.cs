@@ -165,10 +165,18 @@ namespace SF3.RawEditors {
             }
         }
 
-        public void Dispose() { }
+        public virtual void Dispose() { }
 
-        public bool Finalize() => true;
+        public virtual bool OnFinalize() => true;
+
+        public bool Finalize() {
+            if (!OnFinalize())
+                return false;
+            Finalized?.Invoke(this, EventArgs.Empty);
+            return true;
+        }
 
         public event EventHandler IsModifiedChanged;
+        public event EventHandler Finalized;
     }
 }
