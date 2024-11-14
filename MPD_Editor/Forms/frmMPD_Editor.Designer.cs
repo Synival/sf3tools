@@ -368,6 +368,8 @@ namespace SF3.MPD_Editor.Forms {
             this.textureChunkControl4 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.tabSurfaceMap = new System.Windows.Forms.TabPage();
             this.surfaceMapControl = new SF3.MPDEditor.Controls.SurfaceMapControl();
+            this.tabChunk10 = new System.Windows.Forms.TabPage();
+            this.textureChunkControl5 = new SF3.X1_Editor.Controls.TextureChunkControl();
             this.menuStrip2.SuspendLayout();
             this.tabTileItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvTileItems)).BeginInit();
@@ -393,6 +395,7 @@ namespace SF3.MPD_Editor.Forms {
             this.tabChunk8.SuspendLayout();
             this.tabChunk9.SuspendLayout();
             this.tabSurfaceMap.SuspendLayout();
+            this.tabChunk10.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip2
@@ -1078,6 +1081,7 @@ namespace SF3.MPD_Editor.Forms {
             this.tabMain.Controls.Add(this.tabChunk7);
             this.tabMain.Controls.Add(this.tabChunk8);
             this.tabMain.Controls.Add(this.tabChunk9);
+            this.tabMain.Controls.Add(this.tabChunk10);
             this.tabMain.Controls.Add(this.tabSurfaceMap);
             this.tabMain.Location = new System.Drawing.Point(0, 27);
             this.tabMain.Name = "tabMain";
@@ -3628,6 +3632,27 @@ namespace SF3.MPD_Editor.Forms {
             this.surfaceMapControl.Size = new System.Drawing.Size(1024, 1024);
             this.surfaceMapControl.TabIndex = 0;
             // 
+            // tabChunk10
+            // 
+            this.tabChunk10.Controls.Add(this.textureChunkControl5);
+            this.tabChunk10.Location = new System.Drawing.Point(4, 22);
+            this.tabChunk10.Name = "tabChunk10";
+            this.tabChunk10.Size = new System.Drawing.Size(756, 480);
+            this.tabChunk10.TabIndex = 18;
+            this.tabChunk10.Text = "Chunk10";
+            this.tabChunk10.UseVisualStyleBackColor = true;
+            // 
+            // textureChunkControl5
+            // 
+            this.textureChunkControl5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textureChunkControl5.BackColor = System.Drawing.Color.Transparent;
+            this.textureChunkControl5.Location = new System.Drawing.Point(-4, 0);
+            this.textureChunkControl5.Name = "textureChunkControl5";
+            this.textureChunkControl5.Size = new System.Drawing.Size(764, 484);
+            this.textureChunkControl5.TabIndex = 2;
+            // 
             // frmMPDEditor
             // 
             this.AllowDrop = true;
@@ -3668,6 +3693,7 @@ namespace SF3.MPD_Editor.Forms {
             this.tabChunk8.ResumeLayout(false);
             this.tabChunk9.ResumeLayout(false);
             this.tabSurfaceMap.ResumeLayout(false);
+            this.tabChunk10.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4018,6 +4044,8 @@ namespace SF3.MPD_Editor.Forms {
         private BrightIdeasSoftware.OLVColumn lvcPalette2HtmlColor;
         private BrightIdeasSoftware.OLVColumn lvcPalette3HtmlColor;
         private BrightIdeasSoftware.OLVColumn lvcHeaderOffsetPal3;
+        private System.Windows.Forms.TabPage tabChunk10;
+        private X1_Editor.Controls.TextureChunkControl textureChunkControl5;
     }
 }
 

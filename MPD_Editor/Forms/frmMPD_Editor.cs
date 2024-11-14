@@ -32,6 +32,7 @@ namespace SF3.MPD_Editor.Forms {
                 textureChunkControl2,
                 textureChunkControl3,
                 textureChunkControl4,
+                textureChunkControl5,
             };
             var textureChunkOLVs = textureChunkEditorControls.SelectMany(x => x.GetAllObjectsOfTypeInFields<ObjectListView>(false)).ToList();
 
@@ -96,10 +97,11 @@ namespace SF3.MPD_Editor.Forms {
                 new PopulateOLVTabConfig(tabTileHeightTerrain,     olvTileHeightTerrain,     Editor.TileHeightTerrainRows),
                 new PopulateOLVTabConfig(tabTileItems,             olvTileItems,             Editor.TileItemRows),
 
-                new PopulateTextureChunkTabConfig(tabChunk6, Editor.TextureChunks?[0]),
-                new PopulateTextureChunkTabConfig(tabChunk7, Editor.TextureChunks?[1]),
-                new PopulateTextureChunkTabConfig(tabChunk8, Editor.TextureChunks?[2]),
-                new PopulateTextureChunkTabConfig(tabChunk9, Editor.TextureChunks?[3]),
+                new PopulateTextureChunkTabConfig(tabChunk6,  Editor.TextureChunks?[0]),
+                new PopulateTextureChunkTabConfig(tabChunk7,  Editor.TextureChunks?[1]),
+                new PopulateTextureChunkTabConfig(tabChunk8,  Editor.TextureChunks?[2]),
+                new PopulateTextureChunkTabConfig(tabChunk9,  Editor.TextureChunks?[3]),
+                new PopulateTextureChunkTabConfig(tabChunk10, Editor.TextureChunks?[4]),
 
                 // TODO: just a true/false predicate would work here
                 new PopulateOLVTabConfig(tabSurfaceMap, null, Editor.Header), // Should always be present

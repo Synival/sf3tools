@@ -64,8 +64,8 @@ namespace SF3.Editors.MPD {
                 ChunkEditors[5] = CompressedEditors[5].DecompressedEditor;
             }
 
-            // Texture editors, in chunks (6...9)
-            for (var i = 6; i <= 9; i++) {
+            // Texture editors, in chunks (6...10)
+            for (var i = 6; i <= 10; i++) {
                 try {
                     CompressedEditors[i] = new CompressedEditor(Chunks[i].Data);
                     ChunkEditors[i] = CompressedEditors[i].DecompressedEditor;
@@ -91,8 +91,8 @@ namespace SF3.Editors.MPD {
                 if (Palettes[i] != null)
                     tables.Add(Palettes[i]);
 
-            TextureChunks = new TextureChunkEditor[4];
-            for (var i = 0; i < 4; i++) {
+            TextureChunks = new TextureChunkEditor[5];
+            for (var i = 0; i < TextureChunks.Length; i++) {
                 int chunkIndex = i + 6;
                 if (Chunks[chunkIndex].Data?.Length > 0) {
                     TextureChunks[i] = TextureChunkEditor.Create(ChunkEditors[chunkIndex], NameGetterContext, 0x00, "TextureChunk" + (i + 1));
