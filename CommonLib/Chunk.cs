@@ -26,8 +26,8 @@ namespace CommonLib {
         /// </summary>
         /// <param name="logFile"></param>
         /// <returns></returns>
-        public byte[] Decompress(string logFile = null)
-            => Utils.Compression.Decompress(Data, logFile);
+        public byte[] Decompress()
+            => Utils.Compression.Decompress(Data);
 
         /// <summary>
         /// Size of the chunk in the MPD file

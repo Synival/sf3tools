@@ -12,3 +12,4 @@ obj/
 *.pubxml.user
 *.swp
 d2u.sh
+Private/

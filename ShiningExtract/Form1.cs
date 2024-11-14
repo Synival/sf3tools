@@ -1,27 +1,21 @@
 using CommonLib;
 using static CommonLib.Utils.Compression;
 
-namespace ShiningExtract
-{
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
+namespace ShiningExtract {
+    public partial class Form1 : Form {
+        public Form1() {
             InitializeComponent();
             textBox1.Text = Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + "\\Shining";
             textBox2.Text = Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + "\\Shining";
         }
 
-        private void extractChunkButton_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                using (var stream = openFileDialog1.OpenFile())
-                {
+        private void extractChunkButton_Click(object sender, EventArgs e) {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK) {
+                using (var stream = openFileDialog1.OpenFile()) {
                     string baseFilename = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
 
                     var mpdFile = new ChunkCollection(stream);
-                    var decompressedChunks = mpdFile.DecompressAllChunks(Path.Combine(textBox1.Text, baseFilename));
+                    var decompressedChunks = mpdFile.DecompressAllChunks();
 
                     Directory.CreateDirectory(textBox1.Text);
                     Directory.CreateDirectory(textBox2.Text);
@@ -33,10 +27,8 @@ namespace ShiningExtract
             }
         }
 
-        private void compressButton_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
+        private void compressButton_Click(object sender, EventArgs e) {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK) {
                 byte[] decompressedData = File.ReadAllBytes(openFileDialog1.FileName);
                 string baseFilename = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
                 Directory.CreateDirectory(textBox1.Text);
@@ -45,14 +37,12 @@ namespace ShiningExtract
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
+        private void button1_Click(object sender, EventArgs e) {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK) {
                 using (var stream = openFileDialog1.OpenFile()) {
                     string baseFilename = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
                     var chunk = new Chunk(stream, (int)stream.Length);
-                    var output = chunk.Decompress(Path.Combine(textBox1.Text, baseFilename + "_" + "_log.txt"));
+                    var output = chunk.Decompress();
                     File.WriteAllBytes(Path.Combine(textBox2.Text, baseFilename + "_decompressed.bin"), output);
                 }
             }

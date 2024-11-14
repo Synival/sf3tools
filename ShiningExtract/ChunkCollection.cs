@@ -37,14 +37,13 @@ namespace ShiningExtract {
         /// <summary>
         /// Processes all chunks and returns them decompressed
         /// </summary>
-        /// <param name="logFileBaseFilename">Optional filename for logging</param>
         /// <returns></returns>
-        public byte[][] DecompressAllChunks(string? logFileBaseFilename = null) {
+        public byte[][] DecompressAllChunks() {
             var data = new byte[Chunks.Length][];
             for (int c = 5; c < Chunks.Length; c++) {
                 var chunk = Chunks[c];
                 if (chunk.Size > 0 && c != 20)
-                    data[c] = chunk.Decompress(logFileBaseFilename + "_" + c + "_log.txt");
+                    data[c] = chunk.Decompress();
             }
             return data;
         }
