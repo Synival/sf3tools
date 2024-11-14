@@ -9,7 +9,7 @@ namespace SF3.Tests {
             { ScenarioType.PremiumDisk, "G:/" },
         };
 
-        internal static string ResourcePath(ScenarioType scenario, string resource)
+        public static string ResourcePath(ScenarioType scenario, string resource = "")
             => ScenarioDataPath[scenario] + resource;
     }
 }

@@ -1,4 +1,5 @@
 using CommonLib;
+using static CommonLib.Utils.Compression;
 
 namespace ShiningExtract
 {
@@ -39,7 +40,7 @@ namespace ShiningExtract
                 byte[] decompressedData = File.ReadAllBytes(openFileDialog1.FileName);
                 string baseFilename = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
                 Directory.CreateDirectory(textBox1.Text);
-                byte[] compressed = ShiningCompressor.CompressBytes(decompressedData);
+                byte[] compressed = Compress(decompressedData);
                 File.WriteAllBytes(Path.Combine(textBox2.Text, baseFilename + "_compressed.bin"), compressed);
             }
         }
