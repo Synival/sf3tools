@@ -16,13 +16,13 @@ namespace SF3.MPDEditor.Extensions {
             byte[] imageData = null;
 
             // Determine what format to use and what data to copy in.
-            if (texture.BitmapDataARGB1555 != null) {
+            if (texture.CachedBitmapDataARGB1555 != null) {
                 image = new Bitmap(texture.Width, texture.Height, PixelFormat.Format16bppArgb1555);
-                imageData = texture.BitmapDataARGB1555;
+                imageData = texture.CachedBitmapDataARGB1555;
             }
-            else if (texture.BitmapDataPalette != null) {
+            else if (texture.CachedBitmapDataPalette != null) {
                 image = new Bitmap(texture.Width, texture.Height, PixelFormat.Format8bppIndexed);
-                imageData = texture.BitmapDataPalette;
+                imageData = texture.CachedBitmapDataPalette;
             }
             else
                 throw new InvalidOperationException("Unhandled bitmap type");

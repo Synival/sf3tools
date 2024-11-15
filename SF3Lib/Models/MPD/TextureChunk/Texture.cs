@@ -47,31 +47,12 @@ namespace SF3.Models.MPD.TextureChunk {
 
             try {
                 if (AssumedPixelFormat == TexturePixelFormat.ABGR1555) {
-                    var data = new ushort[Width, Height];
-                    var off = ImageDataOffset;
-                    for (var y = 0; y < Height; y++) {
-                        for (var x = 0; x < Width; x++) {
-                            var texPixel = (ushort) Editor.GetWord(off);
-                            off += 2;
-                            data[x, y] = texPixel;
-                        }
-                    }
-
-                    ImageData8Bit = null;
-                    ImageData16Bit = data;
+                    CachedImageData8Bit = null;
+                    CachedImageData16Bit = ImageData16Bit;
                 }
                 else {
-                    var data = new byte[Width, Height];
-                    var off = ImageDataOffset;
-                    for (var y = 0; y < Height; y++) {
-                        for (var x = 0; x < Width; x++) {
-                            var texPixel = (byte) Editor.GetByte(off++);
-                            data[x, y] = texPixel;
-                        }
-                    }
-
-                    ImageData8Bit = data;
-                    ImageData16Bit = null;
+                    CachedImageData8Bit = ImageData8Bit;
+                    CachedImageData16Bit = null;
                 }
 
                 return true;
@@ -110,15 +91,44 @@ namespace SF3.Models.MPD.TextureChunk {
             }
         }
 
-        private ushort[,] _imageData16Bit = null;
-
         public ushort[,] ImageData16Bit {
-            get => _imageData16Bit;
+            protected get {
+                var data = new ushort[Width, Height];
+                var off = ImageDataOffset;
+                for (var y = 0; y < Height; y++) {
+                    for (var x = 0; x < Width; x++) {
+                        var texPixel = (ushort) Editor.GetWord(off);
+                        off += 2;
+                        data[x, y] = texPixel;
+                    }
+                }
+                return data;
+            }
             set {
-                if (_imageData16Bit != value) {
-                    _imageData16Bit = value;
+                if (value.GetLength(0) != Width || value.GetLength(1) != Height)
+                    throw new ArgumentException("Incoming data dimensions must match specified width/height");
+
+                var off = ImageDataOffset;
+                for (var y = 0; y < Height; y++) {
+                    for (var x = 0; x < Width; x++) {
+                        Editor.SetWord(off, value[x, y]);
+                        off += 2;
+                    }
+                }
+
+                CachedImageData16Bit = value;
+            }
+        }
+
+        private ushort[,] _cachedImageData16Bit = null;
+
+        public ushort[,] CachedImageData16Bit {
+            get => (ushort[,]) _cachedImageData16Bit.Clone();
+            private set {
+                if (_cachedImageData16Bit != value) {
+                    _cachedImageData16Bit = value;
                     if (value == null) {
-                        BitmapDataARGB1555 = null;
+                        CachedBitmapDataARGB1555 = null;
                         return;
                     }
 
@@ -135,20 +145,45 @@ namespace SF3.Models.MPD.TextureChunk {
                         }
                     }
 
-                    BitmapDataARGB1555 = imageDataBytes;
+                    CachedBitmapDataARGB1555 = imageDataBytes;
                 }
             }
         }
 
-        private byte[,] _imageData8Bit = null;
-
-        public byte[,] ImageData8Bit {
-            get => _imageData8Bit;
+        protected byte[,] ImageData8Bit {
+            get {
+                var data = new byte[Width, Height];
+                var off = ImageDataOffset;
+                for (var y = 0; y < Height; y++) {
+                    for (var x = 0; x < Width; x++) {
+                        var texPixel = (byte) Editor.GetByte(off++);
+                        data[x, y] = texPixel;
+                    }
+                }
+                return data;
+            }
             set {
-                if (_imageData8Bit != value) {
-                    _imageData8Bit = value;
+                if (value.GetLength(0) != Width || value.GetLength(1) != Height)
+                    throw new ArgumentException("Incoming data dimensions must match specified width/height");
+
+                var off = ImageDataOffset;
+                for (var y = 0; y < Height; y++)
+                    for (var x = 0; x < Width; x++)
+                        Editor.SetByte(off++, value[x, y]);
+
+                CachedImageData8Bit = value;
+            }
+        }
+
+        private byte[,] _cachedImageData8Bit = null;
+
+        public byte[,] CachedImageData8Bit {
+            get => (byte[,]) _cachedImageData8Bit.Clone();
+            set {
+                if (_cachedImageData8Bit != value) {
+                    _cachedImageData8Bit = value;
                     if (value == null) {
-                        BitmapDataPalette = null;
+                        CachedBitmapDataPalette = null;
                         return;
                     }
 
@@ -157,7 +192,7 @@ namespace SF3.Models.MPD.TextureChunk {
                     for (int y = 0; y < value.GetLength(1); y++)
                         for (int x = 0; x < value.GetLength(0); x++)
                             imageDataBytes[pos++] = value[x, y];
-                    BitmapDataPalette = imageDataBytes;
+                    CachedBitmapDataPalette = imageDataBytes;
                 }
             }
         }
@@ -165,11 +200,11 @@ namespace SF3.Models.MPD.TextureChunk {
         /// <summary>
         /// Image data for 16-bit ARGB1555 format.
         /// </summary>
-        public byte[] BitmapDataARGB1555 { get; private set; } = null;
+        public byte[] CachedBitmapDataARGB1555 { get; private set; } = null;
 
         /// <summary>
         /// Image data for 8-bit palette format.
         /// </summary>
-        public byte[] BitmapDataPalette { get; private set; } = null;
+        public byte[] CachedBitmapDataPalette { get; private set; } = null;
     }
 }
