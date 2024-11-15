@@ -47,7 +47,5 @@ namespace SF3.X013_Editor.Forms {
                 new PopulateOLVTabConfig(tabStatusGroups, olvStatusGroups, Editor.StatusEffectTable)
             });
         }
-
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
     }
 }

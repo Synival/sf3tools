@@ -119,7 +119,6 @@ namespace SF3.IconPointerEditor.Forms
             this.olvItemIcons.UseAlternatingBackColors = true;
             this.olvItemIcons.UseCompatibleStateImageBehavior = false;
             this.olvItemIcons.View = System.Windows.Forms.View.Details;
-            this.olvItemIcons.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcItemIconName
             // 
@@ -206,7 +205,6 @@ namespace SF3.IconPointerEditor.Forms
             this.olvSpellIcons.UseAlternatingBackColors = true;
             this.olvSpellIcons.UseCompatibleStateImageBehavior = false;
             this.olvSpellIcons.View = System.Windows.Forms.View.Details;
-            this.olvSpellIcons.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSpellIconName
             // 

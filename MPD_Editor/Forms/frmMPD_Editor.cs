@@ -46,6 +46,11 @@ namespace SF3.MPD_Editor.Forms {
                 tcec.OLVTextures.ItemSelectionChanged += (s, e) => OnTextureChanged(s, e, tcec);
             }
 
+            tabMain.Selected += (s, e) => {
+                if (tabMain.SelectedTab == tabSurfaceMap && Editor.TileSurfaceCharacterRows?.TextureData != null)
+                    surfaceMapControl.UpdateTextures(Editor.TileSurfaceCharacterRows.TextureData, Editor.TextureChunks);
+            };
+
             InitializeEditor(menuStrip2, textureChunkOLVs);
         }
 
@@ -114,7 +119,5 @@ namespace SF3.MPD_Editor.Forms {
 
             return populateResult;
         }
-
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
     }
 }

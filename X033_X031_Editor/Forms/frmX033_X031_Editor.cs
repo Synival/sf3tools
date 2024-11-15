@@ -52,8 +52,6 @@ namespace SF3.X033_X031_Editor.Forms {
             return true;
         }
 
-        private void olvCellEditStarting(object sender, CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
-
         private void tsmiDebug_DebugCurve_Click(object sender, EventArgs e) {
             Stats.DebugGrowthValues = !Stats.DebugGrowthValues;
             tsmiDebug_DebugCurve.Checked = Stats.DebugGrowthValues;

@@ -35,7 +35,5 @@ namespace SF3.IconPointerEditor.Forms {
                 new PopulateOLVTabConfig(tabItemIcons, olvItemIcons, Editor.ItemIconTable)
             });
         }
-
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
     }
 }

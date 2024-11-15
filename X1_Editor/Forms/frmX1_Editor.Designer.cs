@@ -225,7 +225,6 @@ namespace SF3.X1_Editor.Forms
             this.olvTileData.UseAlternatingBackColors = true;
             this.olvTileData.UseCompatibleStateImageBehavior = false;
             this.olvTileData.View = System.Windows.Forms.View.Details;
-            this.olvTileData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcTileDataName
             // 
@@ -408,7 +407,6 @@ namespace SF3.X1_Editor.Forms
             this.olvWarpTable.UseAlternatingBackColors = true;
             this.olvWarpTable.UseCompatibleStateImageBehavior = false;
             this.olvWarpTable.View = System.Windows.Forms.View.Details;
-            this.olvWarpTable.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcWarpTableName
             // 
@@ -500,7 +498,6 @@ namespace SF3.X1_Editor.Forms
             this.olvBattlePointers.UseAlternatingBackColors = true;
             this.olvBattlePointers.UseCompatibleStateImageBehavior = false;
             this.olvBattlePointers.View = System.Windows.Forms.View.Details;
-            this.olvBattlePointers.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcBattlePointersName
             // 
@@ -582,7 +579,6 @@ namespace SF3.X1_Editor.Forms
             this.olvArrows.UseAlternatingBackColors = true;
             this.olvArrows.UseCompatibleStateImageBehavior = false;
             this.olvArrows.View = System.Windows.Forms.View.Details;
-            this.olvArrows.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcArrowsName
             // 
@@ -701,7 +697,6 @@ namespace SF3.X1_Editor.Forms
             this.olvNonBattleEnter.UseAlternatingBackColors = true;
             this.olvNonBattleEnter.UseCompatibleStateImageBehavior = false;
             this.olvNonBattleEnter.View = System.Windows.Forms.View.Details;
-            this.olvNonBattleEnter.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcNonBattleEnterName
             // 
@@ -840,7 +835,6 @@ namespace SF3.X1_Editor.Forms
             this.olvTownNpcs.UseAlternatingBackColors = true;
             this.olvTownNpcs.UseCompatibleStateImageBehavior = false;
             this.olvTownNpcs.View = System.Windows.Forms.View.Details;
-            this.olvTownNpcs.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcTownNpcsName
             // 
@@ -998,7 +992,6 @@ namespace SF3.X1_Editor.Forms
             this.olvInteractables.UseAlternatingBackColors = true;
             this.olvInteractables.UseCompatibleStateImageBehavior = false;
             this.olvInteractables.View = System.Windows.Forms.View.Details;
-            this.olvInteractables.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcInteractablesName
             // 

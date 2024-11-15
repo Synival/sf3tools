@@ -598,7 +598,6 @@ namespace SF3.MPD_Editor.Forms {
             this.olvTileItems.UseAlternatingBackColors = true;
             this.olvTileItems.UseCompatibleStateImageBehavior = false;
             this.olvTileItems.View = System.Windows.Forms.View.Details;
-            this.olvTileItems.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcTileItemsName
             // 
@@ -1172,7 +1171,6 @@ namespace SF3.MPD_Editor.Forms {
             this.olvHeader.UseAlternatingBackColors = true;
             this.olvHeader.UseCompatibleStateImageBehavior = false;
             this.olvHeader.View = System.Windows.Forms.View.Details;
-            this.olvHeader.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcHeaderAddress
             // 
@@ -3057,7 +3055,6 @@ namespace SF3.MPD_Editor.Forms {
             this.olvTileHeightTerrain.UseAlternatingBackColors = true;
             this.olvTileHeightTerrain.UseCompatibleStateImageBehavior = false;
             this.olvTileHeightTerrain.View = System.Windows.Forms.View.Details;
-            this.olvTileHeightTerrain.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcTileHeightTerrain
             // 

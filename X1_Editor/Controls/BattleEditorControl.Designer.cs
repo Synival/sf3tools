@@ -212,7 +212,6 @@ namespace SF3.X1_Editor.Controls {
             this.olvHeader.UseAlternatingBackColors = true;
             this.olvHeader.UseCompatibleStateImageBehavior = false;
             this.olvHeader.View = System.Windows.Forms.View.Details;
-            this.olvHeader.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcHeaderSizeList
             // 
@@ -374,7 +373,6 @@ namespace SF3.X1_Editor.Controls {
             this.olvSlotTab1.UseAlternatingBackColors = true;
             this.olvSlotTab1.UseCompatibleStateImageBehavior = false;
             this.olvSlotTab1.View = System.Windows.Forms.View.Details;
-            this.olvSlotTab1.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSlotTab1Name
             // 
@@ -536,7 +534,6 @@ namespace SF3.X1_Editor.Controls {
             this.olvSlotTab2.UseAlternatingBackColors = true;
             this.olvSlotTab2.UseCompatibleStateImageBehavior = false;
             this.olvSlotTab2.View = System.Windows.Forms.View.Details;
-            this.olvSlotTab2.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSlotTab2Name
             // 
@@ -720,7 +717,6 @@ namespace SF3.X1_Editor.Controls {
             this.olvSlotTab3.UseAlternatingBackColors = true;
             this.olvSlotTab3.UseCompatibleStateImageBehavior = false;
             this.olvSlotTab3.View = System.Windows.Forms.View.Details;
-            this.olvSlotTab3.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSlotTab3Name
             // 
@@ -868,7 +864,6 @@ namespace SF3.X1_Editor.Controls {
             this.olvSlotTab4.UseAlternatingBackColors = true;
             this.olvSlotTab4.UseCompatibleStateImageBehavior = false;
             this.olvSlotTab4.View = System.Windows.Forms.View.Details;
-            this.olvSlotTab4.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSlotTab4Name
             // 
@@ -1009,7 +1004,6 @@ namespace SF3.X1_Editor.Controls {
             this.olvSpawnZones.UseAlternatingBackColors = true;
             this.olvSpawnZones.UseCompatibleStateImageBehavior = false;
             this.olvSpawnZones.View = System.Windows.Forms.View.Details;
-            this.olvSpawnZones.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSpawnZonesName
             // 
@@ -1135,7 +1129,6 @@ namespace SF3.X1_Editor.Controls {
             this.olvAITargetPosition.UseAlternatingBackColors = true;
             this.olvAITargetPosition.UseCompatibleStateImageBehavior = false;
             this.olvAITargetPosition.View = System.Windows.Forms.View.Details;
-            this.olvAITargetPosition.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcAITargetPositionName
             // 

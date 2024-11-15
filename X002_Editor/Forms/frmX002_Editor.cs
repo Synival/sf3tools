@@ -43,8 +43,6 @@ namespace SF3.X002_Editor.Forms {
             });
         }
 
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
-
         private void tsmiDebug_ShowDebugColumns_Click(object sender, EventArgs e) {
             bool isChecked = !tsmiDebug_ShowDebugColumns.Checked;
             tsmiDebug_ShowDebugColumns.Checked = isChecked;

@@ -214,7 +214,6 @@ namespace SF3.X019_Editor.Forms
             this.olvMonsterTab1.UseAlternatingBackColors = true;
             this.olvMonsterTab1.UseCompatibleStateImageBehavior = false;
             this.olvMonsterTab1.View = System.Windows.Forms.View.Details;
-            this.olvMonsterTab1.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcMonsterTab1Name
             // 
@@ -420,7 +419,6 @@ namespace SF3.X019_Editor.Forms
             this.olvMonsterTab2.UseAlternatingBackColors = true;
             this.olvMonsterTab2.UseCompatibleStateImageBehavior = false;
             this.olvMonsterTab2.View = System.Windows.Forms.View.Details;
-            this.olvMonsterTab2.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcMonsterTab2Name
             // 
@@ -600,7 +598,6 @@ namespace SF3.X019_Editor.Forms
             this.olvMonsterTab3.UseAlternatingBackColors = true;
             this.olvMonsterTab3.UseCompatibleStateImageBehavior = false;
             this.olvMonsterTab3.View = System.Windows.Forms.View.Details;
-            this.olvMonsterTab3.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcMonsterTab3Name
             // 
@@ -780,7 +777,6 @@ namespace SF3.X019_Editor.Forms
             this.olvMonsterTab4.UseAlternatingBackColors = true;
             this.olvMonsterTab4.UseCompatibleStateImageBehavior = false;
             this.olvMonsterTab4.View = System.Windows.Forms.View.Details;
-            this.olvMonsterTab4.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcMonsterTab4Name
             // 
@@ -904,7 +900,6 @@ namespace SF3.X019_Editor.Forms
             this.olvMonsterTab5.UseAlternatingBackColors = true;
             this.olvMonsterTab5.UseCompatibleStateImageBehavior = false;
             this.olvMonsterTab5.View = System.Windows.Forms.View.Details;
-            this.olvMonsterTab5.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcMonsterTab5Name
             // 

@@ -60,6 +60,8 @@ namespace SF3.Win.Extensions {
             olv.SetEditorFetcher(fileEditorFetcher);
             olv.OwnerDraw = true;
             olv.DefaultRenderer = GlobalHexRenderer;
+            olv.CellEditStarting += (s, e) => olv.EnhanceOlvCellEditControl(e);
+
             foreach (var lvc in olv.AllColumns)
                 lvc.Enhance();
         }

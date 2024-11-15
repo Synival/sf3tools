@@ -122,7 +122,7 @@ namespace SF3.Editors.MPD {
 
         public bool Recompress(bool onlyModified) {
             // Don't bother doing anything if no chunks have been modified.
-            if (onlyModified && !CompressedEditors.Where(x => x != null).Any(x => x.IsModified))
+            if (onlyModified && !ChildEditors.Any(x => x.IsModified))
                 return true;
 
             const int ramOffset = 0x290000;
@@ -132,12 +132,13 @@ namespace SF3.Editors.MPD {
             var chunkPositions = new int[Chunks.Length];
 
             for (int i = 0; i < Chunks.Length; i++) {
+                var compressedEditor = CompressedEditors[i];
+
                 // Finalize compressed chunks.
-                var ce = CompressedEditors[i];
-                if (ce != null && (!onlyModified || ce.IsModified)) {
-                    if (!ce.Recompress())
+                if (compressedEditor != null && (!onlyModified || compressedEditor.IsModified)) {
+                    if (!compressedEditor.Recompress())
                         return false;
-                    Chunks[i] = new Chunk(ce.Data, 0, ce.Data.Length);
+                    Chunks[i] = new Chunk(compressedEditor.Data, 0, compressedEditor.Data.Length);
                 }
 
                 // Update the chunk address/size table.

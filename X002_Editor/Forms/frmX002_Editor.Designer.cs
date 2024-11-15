@@ -270,7 +270,6 @@ namespace SF3.X002_Editor.Forms
             this.olvSpells.UseAlternatingBackColors = true;
             this.olvSpells.UseCompatibleStateImageBehavior = false;
             this.olvSpells.View = System.Windows.Forms.View.Details;
-            this.olvSpells.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcSpellsID
             // 
@@ -523,7 +522,6 @@ namespace SF3.X002_Editor.Forms
             this.olvItems.UseAlternatingBackColors = true;
             this.olvItems.UseCompatibleStateImageBehavior = false;
             this.olvItems.View = System.Windows.Forms.View.Details;
-            this.olvItems.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcItemsID
             // 
@@ -833,7 +831,6 @@ namespace SF3.X002_Editor.Forms
             this.olvWeaponSpells.UseAlternatingBackColors = true;
             this.olvWeaponSpells.UseCompatibleStateImageBehavior = false;
             this.olvWeaponSpells.View = System.Windows.Forms.View.Details;
-            this.olvWeaponSpells.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcWeaponSpellsID
             // 
@@ -941,7 +938,6 @@ namespace SF3.X002_Editor.Forms
             this.olvLoaded.UseAlternatingBackColors = true;
             this.olvLoaded.UseCompatibleStateImageBehavior = false;
             this.olvLoaded.View = System.Windows.Forms.View.Details;
-            this.olvLoaded.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcLoadedID
             // 
@@ -1086,7 +1082,6 @@ namespace SF3.X002_Editor.Forms
             this.olvLoadedOverride.UseAlternatingBackColors = true;
             this.olvLoadedOverride.UseCompatibleStateImageBehavior = false;
             this.olvLoadedOverride.View = System.Windows.Forms.View.Details;
-            this.olvLoadedOverride.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcLoadedOverrideID
             // 
@@ -1240,7 +1235,6 @@ namespace SF3.X002_Editor.Forms
             this.olvStatBoost.UseAlternatingBackColors = true;
             this.olvStatBoost.UseCompatibleStateImageBehavior = false;
             this.olvStatBoost.View = System.Windows.Forms.View.Details;
-            this.olvStatBoost.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcStatBoostID
             // 
@@ -1317,7 +1311,6 @@ namespace SF3.X002_Editor.Forms
             this.olvWeaponRankAttack.UseAlternatingBackColors = true;
             this.olvWeaponRankAttack.UseCompatibleStateImageBehavior = false;
             this.olvWeaponRankAttack.View = System.Windows.Forms.View.Details;
-            this.olvWeaponRankAttack.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcWeaponRankAttackID
             // 
@@ -1408,7 +1401,6 @@ namespace SF3.X002_Editor.Forms
             this.olvAttackResist.UseAlternatingBackColors = true;
             this.olvAttackResist.UseCompatibleStateImageBehavior = false;
             this.olvAttackResist.View = System.Windows.Forms.View.Details;
-            this.olvAttackResist.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcAttackResistID
             // 
@@ -1491,7 +1483,6 @@ namespace SF3.X002_Editor.Forms
             this.olvWarpTable.UseAlternatingBackColors = true;
             this.olvWarpTable.UseCompatibleStateImageBehavior = false;
             this.olvWarpTable.View = System.Windows.Forms.View.Details;
-            this.olvWarpTable.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.olvCellEditStarting);
             // 
             // lvcWarpTableScn1ID
             // 

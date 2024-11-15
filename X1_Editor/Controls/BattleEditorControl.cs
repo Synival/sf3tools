@@ -8,8 +8,6 @@ namespace SF3.X1_Editor.Controls {
             InitializeComponent();
         }
 
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
-
         public TabControl Tabs => this.tabMain;
 
         public TabPage TabHeader => this.tabHeader;

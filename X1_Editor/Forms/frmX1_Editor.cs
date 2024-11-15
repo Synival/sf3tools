@@ -108,8 +108,6 @@ namespace SF3.X1_Editor.Forms {
             });
         }
 
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
-
         private void tsmiScenario_BTL99_Click(object sender, EventArgs e) => IsBTL99 = !IsBTL99;
     }
 }

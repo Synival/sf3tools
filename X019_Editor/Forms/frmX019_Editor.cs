@@ -42,7 +42,5 @@ namespace SF3.X019_Editor.Forms {
                 new PopulateOLVTabConfig(tabMonsterTab5, olvMonsterTab5, Editor.MonsterTable),
             });
         }
-
-        private void olvCellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e) => (sender as ObjectListView).EnhanceOlvCellEditControl(e);
     }
 }
