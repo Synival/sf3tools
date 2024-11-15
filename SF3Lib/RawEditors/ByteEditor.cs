@@ -1,6 +1,7 @@
 using System;
-using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
+using CommonLib;
 using SF3.Exceptions;
 
 namespace SF3.RawEditors {
@@ -9,28 +10,54 @@ namespace SF3.RawEditors {
     /// </summary>
     public class ByteEditor : IByteEditor {
         public ByteEditor(byte[] data) {
-            _ = SetData(data);
+            using (var guard = IsModifiedChangeBlocker())
+                _ = SetData(data);
         }
 
         public byte[] Data { get; private set; }
 
         public int Size => Data.Length;
 
+        private int _isModifiedGuard = 0;
         private bool _isModified = false;
 
-        public bool IsModified {
+        public virtual bool IsModified {
             get => _isModified;
             set {
-                if (_isModified != value) {
+                if (_isModifiedGuard == 0 && _isModified != value) {
                     _isModified = value;
                     IsModifiedChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
 
+        public ScopeGuard IsModifiedChangeBlocker()
+            => new ScopeGuard(() => _isModifiedGuard++, () => _isModifiedGuard--);
+
+        public event EventHandler IsModifiedChanged;
+
+        [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int memcmp(byte[] lhs, byte[] rhs, long count);
+
         public virtual bool SetData(byte[] data) {
+            var oldData = Data;
             Data = data;
-            IsModified = false;
+
+            // Determine if this will result in a modified state. Don't bother to do any of this if
+            // 'IsModified' can't be modified anyway.
+            if (_isModifiedGuard == 0) {
+                if (data?.Length != oldData?.Length)
+                    IsModified = true;
+                else if (data == null || oldData == null)
+                    IsModified = true;
+                else {
+                    unsafe {
+                        if (memcmp(oldData, data, data.Length) != 0)
+                            IsModified = true;
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -176,7 +203,6 @@ namespace SF3.RawEditors {
             return true;
         }
 
-        public event EventHandler IsModifiedChanged;
         public event EventHandler Finalized;
     }
 }

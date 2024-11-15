@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib;
 using CommonLib.NamedValues;
 using SF3.RawEditors;
 using SF3.Tables;
@@ -13,7 +14,22 @@ namespace SF3.Editors {
         protected TableEditor(IRawEditor editor, INameGetterContext nameContext) {
             Editor = editor;
             NameGetterContext = nameContext;
+
+            // TODO: remove this when we Dispose() ourselves!!
+            Editor.IsModifiedChanged += (s, e) => this.IsModifiedChanged?.Invoke(this, EventArgs.Empty);
         }
+
+        private int _isModifiedGuard = 0;
+
+        public virtual bool IsModified {
+            get => Editor.IsModified;
+            set => Editor.IsModified = value;
+        }
+
+        public ScopeGuard IsModifiedChangeBlocker()
+            => new ScopeGuard(() => _isModifiedGuard++, () => _isModifiedGuard--);
+
+        public event EventHandler IsModifiedChanged;
 
         /// <summary>
         /// Initializes all tables by running MakeTables(). Should be called IMMEDIATELY after creation,
@@ -51,9 +67,9 @@ namespace SF3.Editors {
         public virtual void Dispose() => Editor.Dispose();
 
         /// <summary>
-        /// The underlying data editor for this table editor.
+        /// The underlying data editor for this table editor. Don't modify this directly!!
         /// </summary>
-        protected IRawEditor Editor { get; }
+        public IRawEditor Editor { get; }
 
         public INameGetterContext NameGetterContext { get; }
 

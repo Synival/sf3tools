@@ -1,6 +1,7 @@
 ﻿using System;
 using SF3.RawEditors;
 using SF3.Editors;
+using CommonLib;
 
 namespace SF3.Loaders {
     public abstract class EditorLoader : IEditorLoader {
@@ -22,21 +23,31 @@ namespace SF3.Loaders {
         /// Performs loading of an editor provided. Invokes events 'PreLoaded' and 'Loaded'.
         /// Complete ownership of 'editor' is transferred to the EditorLoader when this is invoked.
         /// If the editor could not be used, it is immediately disposed of via Dispose().
+        /// If the editor is already loaded, this will return 'false'.
         /// </summary>
         /// <param name="createEditor">Callback to create an editor when possible.</param>
         /// <returns>'true' a new editor was loaded, otherwise 'false'.</returns>
         protected bool PerformLoad(EditorLoaderCreateRawEditorDelegate createRawEditor, EditorLoaderCreateEditorDelegate createEditor) {
-            if (createEditor == null)
+            if (createRawEditor == null || createEditor == null || IsLoaded)
                 return false;
-            if (IsLoaded && !Close())
-                return false;
+
+            PreLoaded?.Invoke(this, EventArgs.Empty);
+
             if ((RawEditor = createRawEditor(this)) == null)
                 return false;
             if ((Editor = createEditor(this)) == null) {
                 RawEditor = null;
                 return false;
             }
-            return IsLoaded;
+
+            Editor.IsModifiedChanged += _onModifiedChangedDelegate;
+
+            Loaded?.Invoke(this, EventArgs.Empty);
+            if (!IsLoaded)
+                return false;
+
+            IsLoadedChanged?.Invoke(this, EventArgs.Empty);
+            return true;
         }
 
         /// <summary>
@@ -46,17 +57,20 @@ namespace SF3.Loaders {
         /// <param name="saveAction">The function to save the editor when possible.</param>
         /// <returns>'true' if saveAction was invokvd and returned success.</returns>
         protected bool PerformSave(EditorLoaderSaveDelegate saveAction) {
-            if (saveAction == null || RawEditor == null || Editor == null)
-                return false;
-            if (!Editor.Finalize())
+            if (saveAction == null || RawEditor == null || Editor == null || !IsLoaded)
                 return false;
 
             PreSaved?.Invoke(this, EventArgs.Empty);
+
+            if (!Editor.Finalize())
+                return false;
             if (!saveAction(this))
                 return false;
-            RawEditor.IsModified = false;
-            Saved?.Invoke(this, EventArgs.Empty);
+            IsModified = false;
+            if (IsModified == true)
+                return false;
 
+            Saved?.Invoke(this, EventArgs.Empty);
             return true;
         }
 
@@ -81,45 +95,33 @@ namespace SF3.Loaders {
             get => _rawEditor;
             set {
                 if (_rawEditor != value) {
-                    var oldIsLoaded = IsLoaded;
                     var oldEditor = _rawEditor;
-
-                    if (oldEditor != null) {
-                        PreClosed?.Invoke(this, EventArgs.Empty);
-                        oldEditor.IsModifiedChanged -= _onModifiedChangedDelegate;
-                    }
-                    if (value != null) {
-                        PreLoaded?.Invoke(this, EventArgs.Empty);
-                    }
-
                     _rawEditor = value;
 
-                    if (oldEditor != null) {
-                        Closed?.Invoke(this, EventArgs.Empty);
+                    if (oldEditor != null)
                         oldEditor.Dispose();
-                    }
-                    if (value != null) {
-                        value.IsModifiedChanged += _onModifiedChangedDelegate;
-                        Loaded?.Invoke(this, EventArgs.Empty);
-                    }
-
-                    if (IsLoaded != oldIsLoaded)
-                        IsLoadedChanged?.Invoke(this, EventArgs.Empty);
 
                     UpdateTitle();
                 }
             }
         }
 
-        public bool IsModified {
-            get => RawEditor?.IsModified ?? false;
+        private int _isModifiedGuard = 0;
+
+        public virtual bool IsModified {
+            get => Editor?.IsModified ?? false;
             set {
-                if (RawEditor != null)
-                    RawEditor.IsModified = value;
+                if (_isModifiedGuard == 0 && Editor != null)
+                    Editor.IsModified = value;
             }
         }
 
-        public bool IsLoaded => RawEditor != null;
+        public ScopeGuard IsModifiedChangeBlocker()
+            => new ScopeGuard(() => _isModifiedGuard++, () => _isModifiedGuard--);
+
+        public event EventHandler IsModifiedChanged;
+
+        public bool IsLoaded => RawEditor != null && Editor != null;
 
         /// <summary>
         /// Editor-specific implementation of determining the title for a loaded editor.
@@ -166,11 +168,26 @@ namespace SF3.Loaders {
         public bool Close() {
             if (!IsLoaded)
                 return true;
+
+            PreClosed?.Invoke(this, EventArgs.Empty);
+
             if (!OnClose())
                 return !IsLoaded;
+
+            if (Editor != null)
+                Editor.IsModifiedChanged -= _onModifiedChangedDelegate;
+
             Editor = null;
             RawEditor = null;
-            return !IsLoaded;
+
+            Closed?.Invoke(this, EventArgs.Empty);
+
+            // TODO: Shouldn't ever be possible... Maybe throw/assert here?
+            if (IsLoaded)
+                return false;
+
+            IsLoadedChanged?.Invoke(this, EventArgs.Empty);
+            return true;
         }
 
         public virtual void Dispose() {
@@ -187,7 +204,6 @@ namespace SF3.Loaders {
         }
 
         public event EventHandler IsLoadedChanged;
-        public event EventHandler IsModifiedChanged;
         public event EventHandler PreLoaded;
         public event EventHandler Loaded;
         public event EventHandler PreSaved;

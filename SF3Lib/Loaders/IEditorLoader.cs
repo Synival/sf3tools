@@ -6,7 +6,7 @@ namespace SF3.Loaders {
     /// <summary>
     /// Interface for loading editors.
     /// </summary>
-    public interface IEditorLoader : IDisposable {
+    public interface IEditorLoader : IModifiable, IDisposable {
         /// <summary>
         /// Closes an editor if opened. Invokes events 'PreClosed' and 'Closed' if an editor was closed.
         /// </summary>
@@ -29,11 +29,6 @@ namespace SF3.Loaders {
         IRawEditor RawEditor { get; }
 
         /// <summary>
-        /// Returns the 'IsModified' property of the DataEditor ('false' if the editor isn't open).
-        /// </summary>
-        bool IsModified { get; set; }
-
-        /// <summary>
         /// 'True' when the editor is loaded.
         /// </summary>
         bool IsLoaded { get; }
@@ -42,11 +37,6 @@ namespace SF3.Loaders {
         /// The title of the loaded data being modified for display.
         /// </summary>
         string Title { get; }
-
-        /// <summary>
-        /// Event that occurs when the 'Modified' property of the editor is changed.
-        /// </summary>
-        event EventHandler IsModifiedChanged;
 
         /// <summary>
         /// Event that occurs when the 'IsLoaded' property is changed.

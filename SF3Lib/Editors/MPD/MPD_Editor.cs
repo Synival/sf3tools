@@ -120,7 +120,11 @@ namespace SF3.Editors.MPD {
         [DllImport("msvcrt.dll", SetLastError = false)]
         private static extern IntPtr memcpy(IntPtr dest, IntPtr src, int count);
 
-        public override bool OnFinalize() {
+        public bool Recompress(bool onlyModified) {
+            // Don't bother doing anything if no chunks have been modified.
+            if (onlyModified && !CompressedEditors.Where(x => x != null).Any(x => x.IsModified))
+                return true;
+
             const int ramOffset = 0x290000;
 
             // We'll need to completely rewrite this file. Start by recompressing chunks.
@@ -130,8 +134,8 @@ namespace SF3.Editors.MPD {
             for (int i = 0; i < Chunks.Length; i++) {
                 // Finalize compressed chunks.
                 var ce = CompressedEditors[i];
-                if (ce != null) {
-                    if (!ce.Finalize())
+                if (ce != null && (!onlyModified || ce.IsModified)) {
+                    if (!ce.Recompress())
                         return false;
                     Chunks[i] = new Chunk(ce.Data, 0, ce.Data.Length);
                 }
@@ -147,6 +151,10 @@ namespace SF3.Editors.MPD {
                     ChunkHeader.Rows[i].ChunkSize    = Chunks[i].Size;
                     chunkPositions[i] = currentChunkPos;
                     currentChunkPos += Chunks[i].Size;
+
+                    // Enforce alignment of 4.
+                    if (currentChunkPos % 4 != 0)
+                        currentChunkPos += (4 - (currentChunkPos % 4));
                 }
             }
 
@@ -174,6 +182,18 @@ namespace SF3.Editors.MPD {
             return true;
         }
 
+        public override bool IsModified {
+            get => base.IsModified | ChildEditors.Any(x => x.IsModified);
+            set {
+                base.IsModified = value;
+                foreach (var ce in ChildEditors)
+                    ce.IsModified = value;
+            }
+        }
+
+        public override bool OnFinalize()
+            => Recompress(true);
+
         public override void Dispose() {
             base.Dispose();
 
@@ -191,6 +211,7 @@ namespace SF3.Editors.MPD {
 
         public ICompressedEditor[] CompressedEditors { get; private set; }
         public IByteEditor[] ChunkEditors { get; private set; }
+        public IByteEditor[] ChildEditors => CompressedEditors.Concat(ChunkEditors).Where(x => x != null).ToArray();
 
         [BulkCopyRecurse]
         public HeaderTable Header { get; private set; }

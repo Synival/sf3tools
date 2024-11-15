@@ -4,39 +4,45 @@ using static CommonLib.Utils.Compression;
 namespace SF3.RawEditors {
     public class CompressedEditor : ByteEditor, ICompressedEditor {
         public CompressedEditor(byte[] data) : base(data) {
-            IsModifiedChanged += (s, e) => {
-                // If the compressed data is marked as modified, so should the decompressed data.
-                if (IsModified)
-                    DecompressedEditor.IsModified = true;
-                // If we still need recompression, we're still modified.
-                else
-                    IsModified |= NeedsRecompression;
-            };
         }
 
-        public override bool SetData(byte[] data) {
+        public override bool SetData(byte[] data)
+            => SetData(data, updateDecompressedData: true);
+
+        public bool SetData(byte[] data, bool updateDecompressedData = true) {
             if (!base.SetData(data))
                 return false;
 
-            var decompressedData = Decompress(data);
-            if (DecompressedEditor == null) {
-                DecompressedEditor = new ByteEditor(decompressedData);
+            if (updateDecompressedData) {
+                var decompressedData = Decompress(data);
+                if (DecompressedEditor == null) {
+                    DecompressedEditor = new ByteEditor(decompressedData);
 
-                DecompressedEditor.IsModifiedChanged += (s, e) => {
-                    // When decompressed data is marked as modified, mark that we need compression.
-                    if (DecompressedEditor.IsModified)
-                        NeedsRecompression = true;
-                    // If we still need recompression, we're still modified.
-                    else
-                        DecompressedEditor.IsModified |= NeedsRecompression;
-                };
+                    DecompressedEditor.IsModifiedChanged += (s, e) => {
+                        // When decompressed data is marked as modified, mark that we need compression.
+                        if (DecompressedEditor.IsModified) {
+                            NeedsRecompression = true;
+                            IsModified = true;
+                        }
+
+                        // NOTE: We allow DecompressedEditor.IsModified to be 'false' while the parent's
+                        //       'NeedsCompression' value is true.
+                    };
+                }
+                else
+                    DecompressedEditor.SetData(decompressedData);
             }
-            else {
-                // TODO: supress any changes to 'IsModified' here using some kind of stack guard
-                DecompressedEditor.SetData(decompressedData);
+
+            return true;
+        }
+
+        public bool Recompress() {
+            using (var modifyGuard2 = DecompressedEditor.IsModifiedChangeBlocker()) {
+                if (!SetData(Compress(DecompressedEditor.Data)))
+                    return false;
                 NeedsRecompression = false;
-                DecompressedEditor.IsModified = false;
             }
+            DecompressedEditor.IsModified = false;
             return true;
         }
 
@@ -45,7 +51,7 @@ namespace SF3.RawEditors {
                 return false;
             if (!DecompressedEditor.Finalize())
                 return false;
-            if (!SetData(Compress(DecompressedEditor.Data)))
+            if (NeedsRecompression && !Recompress())
                 return false;
             return true;
         }
@@ -64,8 +70,18 @@ namespace SF3.RawEditors {
             set {
                 if (_needsRecompression != value) {
                     _needsRecompression = value;
+                    if (_needsRecompression == true)
+                        IsModified = true;
                     NeedsRecompressionChanged?.Invoke(this, EventArgs.Empty);
                 }
+            }
+        }
+
+        public override bool IsModified {
+            get => base.IsModified;
+            set {
+                // Don't allow IsModified to be set to 'false' as long as there's data that needs recompression.
+                base.IsModified = NeedsRecompression | value;
             }
         }
 

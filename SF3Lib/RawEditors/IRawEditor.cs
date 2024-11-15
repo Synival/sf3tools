@@ -1,10 +1,11 @@
 ﻿using System;
+using CommonLib;
 
 namespace SF3.RawEditors {
     /// <summary>
     /// Helper class for modifying any kind of data blob and tracking whether or not it's been edited.
     /// </summary>
-    public interface IRawEditor : IDisposable {
+    public interface IRawEditor : IModifiable, IDisposable {
         /// <summary>
         /// The amount of data being edited.
         /// </summary>
@@ -108,16 +109,6 @@ namespace SF3.RawEditors {
         /// </summary>
         /// <returns>'true' on success, otherwise 'false'.</returns>
         bool Finalize();
-
-        /// <summary>
-        /// 'True' when the data is modified.
-        /// </summary>
-        bool IsModified { get; set; }
-
-        /// <summary>
-        /// Event that occurs when the 'Modified' property is changed.
-        /// </summary>
-        event EventHandler IsModifiedChanged;
 
         /// <summary>
         /// Event that occurs when the Finalize() is completed successfully.

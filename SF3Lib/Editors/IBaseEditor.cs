@@ -1,11 +1,12 @@
 ﻿using System;
 using CommonLib.NamedValues;
+using SF3.RawEditors;
 
 namespace SF3.Editors {
     /// <summary>
     /// Any kind of editor.
     /// </summary>
-    public interface IBaseEditor : IDisposable {
+    public interface IBaseEditor : IModifiable, IDisposable {
         /// <summary>
         /// Perform any extra tasks that need to be performed before saving.
         /// </summary>
