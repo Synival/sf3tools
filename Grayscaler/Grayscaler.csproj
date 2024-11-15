@@ -11,4 +11,8 @@
     <Folder Include="Private\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
+  </ItemGroup>
+
 </Project>
