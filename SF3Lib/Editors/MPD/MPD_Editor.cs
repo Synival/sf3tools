@@ -8,6 +8,7 @@ using SF3.Tables.MPD;
 using SF3.Types;
 using System.Linq;
 using CommonLib;
+using System.Runtime.InteropServices;
 
 namespace SF3.Editors.MPD {
     public class MPD_Editor : ScenarioTableEditor, IMPD_Editor {
@@ -22,7 +23,7 @@ namespace SF3.Editors.MPD {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            var ramOffset = 0x290000;
+            const int ramOffset = 0x290000;
 
             // Create and load Header
             var headerAddrPtr = Editor.GetDouble(0x0000) - ramOffset;
@@ -116,15 +117,61 @@ namespace SF3.Editors.MPD {
             return tables;
         }
 
+        [DllImport("msvcrt.dll", SetLastError = false)]
+        private static extern IntPtr memcpy(IntPtr dest, IntPtr src, int count);
+
         public override bool OnFinalize() {
-            bool success = true;
-            foreach (var ci in CompressedEditors
-                .Concat(ChunkEditors)
-                .Where(ci => ci != null)
-            ) {
-                success &= ci.Finalize();
+            const int ramOffset = 0x290000;
+
+            // We'll need to completely rewrite this file. Start by recompressing chunks.
+            var currentChunkPos = 0x2100;
+            var chunkPositions = new int[Chunks.Length];
+
+            for (int i = 0; i < Chunks.Length; i++) {
+                // Finalize compressed chunks.
+                var ce = CompressedEditors[i];
+                if (ce != null) {
+                    if (!ce.Finalize())
+                        return false;
+                    Chunks[i] = new Chunk(ce.Data, 0, ce.Data.Length);
+                }
+
+                // Update the chunk address/size table.
+                if (Chunks[i] == null) {
+                    ChunkHeader.Rows[i].ChunkAddress = 0;
+                    ChunkHeader.Rows[i].ChunkSize    = 0;
+                    chunkPositions[i] = 0;
+                }
+                else {
+                    ChunkHeader.Rows[i].ChunkAddress = currentChunkPos + ramOffset;
+                    ChunkHeader.Rows[i].ChunkSize    = Chunks[i].Size;
+                    chunkPositions[i] = currentChunkPos;
+                    currentChunkPos += Chunks[i].Size;
+                }
             }
-            return success;
+
+            // Start rebuilding new data.
+            var newData = new byte[currentChunkPos];
+            var inputData = Editor.GetAllData();
+
+            unsafe {
+                fixed (byte* output = newData) {
+                    // Copy first 0x2100 bytes into our new data.
+                    fixed (byte* input = inputData)
+                        memcpy((IntPtr) output, (IntPtr) input, 0x2100);
+
+                    // Copy all chunk data into our new data.
+                    for (int i = 0; i < Chunks.Length; i++)
+                        if (Chunks[i] != null)
+                            fixed (byte* input = Chunks[i].Data)
+                                _ = memcpy((IntPtr) (output + chunkPositions[i]), (IntPtr) input, Chunks[i].Size);
+                }
+            }
+
+            if (!((IByteEditor) Editor).SetData(newData))
+                return false;
+
+            return true;
         }
 
         public override void Dispose() {

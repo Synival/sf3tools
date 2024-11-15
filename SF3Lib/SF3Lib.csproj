@@ -4,6 +4,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SF3</RootNamespace>
     <PublishUrl>publish\</PublishUrl>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\Elements.xml" />

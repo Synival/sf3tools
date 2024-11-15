@@ -34,6 +34,7 @@ namespace SF3.RawEditors {
             else {
                 // TODO: supress any changes to 'IsModified' here using some kind of stack guard
                 DecompressedEditor.SetData(decompressedData);
+                NeedsRecompression = false;
                 DecompressedEditor.IsModified = false;
             }
             return true;
@@ -44,9 +45,8 @@ namespace SF3.RawEditors {
                 return false;
             if (!DecompressedEditor.Finalize())
                 return false;
-
-            // TODO: perform compression here!!
-
+            if (!SetData(Compress(DecompressedEditor.Data)))
+                return false;
             return true;
         }
 
