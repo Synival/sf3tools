@@ -52,24 +52,24 @@ namespace SF3.Editors.MPD {
                     Chunks[i] = new Chunk(((ByteEditor) Editor).Data, chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
             }
 
-            CompressedEditors = new ICompressedEditor[Chunks.Length];
-            ChunkEditors = new IByteEditor[Chunks.Length];
+            ChunkEditors = new IChunkEditor[Chunks.Length];
 
-            if (Chunks[2]?.Data?.Length > 0)
-                ChunkEditors[2] = new ByteEditor(Chunks[2].Data);
-            // TODO: this works, but it's kind of a dumb hack!!
-            else if (Chunks[20]?.Data?.Length == 52992)
-                ChunkEditors[2] = new ByteEditor(Chunks[20].Data);
-            if (Chunks[5]?.Data != null) {
-                CompressedEditors[5] = new CompressedEditor(Chunks[5].Data);
-                ChunkEditors[5] = CompressedEditors[5].DecompressedEditor;
+            if (Chunks[2]?.Data?.Length > 0) {
+                SurfaceChunk = Chunks[2];
+                SurfaceChunkEditor = ChunkEditors[2] = new ChunkEditor(SurfaceChunk.Data, false);
             }
+            // TODO: this works, but it's kind of a dumb hack!!
+            else if (Chunks[20]?.Data?.Length == 52992) {
+                SurfaceChunk = Chunks[20];
+                SurfaceChunkEditor = ChunkEditors[20] = new ChunkEditor(SurfaceChunk.Data, false);
+            }
+            if (Chunks[5]?.Data != null)
+                ChunkEditors[5] = new ChunkEditor(Chunks[5].Data, true);
 
             // Texture editors, in chunks (6...10)
             for (var i = 6; i <= 10; i++) {
                 try {
-                    CompressedEditors[i] = new CompressedEditor(Chunks[i].Data);
-                    ChunkEditors[i] = CompressedEditors[i].DecompressedEditor;
+                    ChunkEditors[i] = new ChunkEditor(Chunks[i].Data, true);
                 }
                 catch {
                     // TODO: This is likely failing because the texture is the wrong encoding.
@@ -80,13 +80,13 @@ namespace SF3.Editors.MPD {
             var tables = new List<ITable>() {
                 Header,
                 ChunkHeader,
-                (TileSurfaceHeightmapRows = new TileSurfaceHeightmapRowTable(ChunkEditors[5], 0x0000)),
-                (TileHeightTerrainRows    = new TileHeightTerrainRowTable   (ChunkEditors[5], 0x4000)),
-                (TileItemRows             = new TileItemRowTable            (ChunkEditors[5], 0x6000)),
+                (TileSurfaceHeightmapRows = new TileSurfaceHeightmapRowTable(ChunkEditors[5].DecompressedEditor, 0x0000)),
+                (TileHeightTerrainRows    = new TileHeightTerrainRowTable   (ChunkEditors[5].DecompressedEditor, 0x4000)),
+                (TileItemRows             = new TileItemRowTable            (ChunkEditors[5].DecompressedEditor, 0x6000)),
             };
 
-            if (ChunkEditors[2]?.Data?.Length >= 64 * 64 * 2)
-                tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(ChunkEditors[2], 0x0000));
+            if (SurfaceChunkEditor?.Data?.Length >= 64 * 64 * 2)
+                tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(SurfaceChunkEditor.DecompressedEditor, 0x0000));
 
             for (var i = 0; i < Palettes.Length; i++)
                 if (Palettes[i] != null)
@@ -96,22 +96,19 @@ namespace SF3.Editors.MPD {
             for (var i = 0; i < TextureChunks.Length; i++) {
                 int chunkIndex = i + 6;
                 if (Chunks[chunkIndex].Data?.Length > 0) {
-                    TextureChunks[i] = TextureChunkEditor.Create(ChunkEditors[chunkIndex], NameGetterContext, 0x00, "TextureChunk" + (i + 1));
+                    TextureChunks[i] = TextureChunkEditor.Create(ChunkEditors[chunkIndex].DecompressedEditor, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
                     tables.Add(TextureChunks[i].HeaderTable);
                     tables.Add(TextureChunks[i].TextureTable);
                 }
             }
 
             // Add some callbacks to all child editors.
-            foreach (var ci in CompressedEditors
-                .Concat(ChunkEditors)
-                .Where(ci => ci != null)
-            ) {
+            foreach (var ce in ChunkEditors.Where(ce => ce != null)) {
                 // If the editor is marked as unmodified (such as after a save), mark child editors as unmodified as well.
-                Editor.IsModifiedChanged += (s, e) => ci.IsModified &= Editor.IsModified;
+                Editor.IsModifiedChanged += (s, e) => ce.IsModified &= Editor.IsModified;
 
                 // If any of the child editors are marked as modified, mark the parent editor as modified as well.
-                ci.IsModifiedChanged += (s, e) => Editor.IsModified |= ci.IsModified;
+                ce.IsModifiedChanged += (s, e) => Editor.IsModified |= ce.IsModified;
             }
 
             return tables;
@@ -122,7 +119,7 @@ namespace SF3.Editors.MPD {
 
         public bool Recompress(bool onlyModified) {
             // Don't bother doing anything if no chunks have been modified.
-            if (onlyModified && !ChildEditors.Any(x => x.IsModified))
+            if (onlyModified && !ChunkEditors.Any(x => x != null && (x.IsModified || x.NeedsRecompression)))
                 return true;
 
             const int ramOffset = 0x290000;
@@ -132,13 +129,15 @@ namespace SF3.Editors.MPD {
             var chunkPositions = new int[Chunks.Length];
 
             for (int i = 0; i < Chunks.Length; i++) {
-                var compressedEditor = CompressedEditors[i];
+                var chunkEditor = ChunkEditors[i];
 
                 // Finalize compressed chunks.
-                if (compressedEditor != null && (!onlyModified || compressedEditor.IsModified)) {
-                    if (!compressedEditor.Recompress())
+                if (chunkEditor != null && (!onlyModified || chunkEditor.NeedsRecompression || chunkEditor.IsModified)) {
+                    if (chunkEditor.IsCompressed && !chunkEditor.Recompress())
                         return false;
-                    Chunks[i] = new Chunk(compressedEditor.Data, 0, compressedEditor.Data.Length);
+
+                    // TODO: thie invalidates any references!!! maybe just update the thing???
+                    Chunks[i] = new Chunk(chunkEditor.Data, 0, chunkEditor.Data.Length);
                 }
 
                 // Update the chunk address/size table.
@@ -184,10 +183,10 @@ namespace SF3.Editors.MPD {
         }
 
         public override bool IsModified {
-            get => base.IsModified | ChildEditors.Any(x => x.IsModified);
+            get => base.IsModified | ChunkEditors.Any(x => x != null && x.IsModified);
             set {
                 base.IsModified = value;
-                foreach (var ce in ChildEditors)
+                foreach (var ce in ChunkEditors.Where(x => x != null))
                     ce.IsModified = value;
             }
         }
@@ -197,22 +196,14 @@ namespace SF3.Editors.MPD {
 
         public override void Dispose() {
             base.Dispose();
-
-            if (CompressedEditors != null) {
-                foreach (var ci in CompressedEditors.Where(ci => ci != null))
-                    ci.Dispose();
-                CompressedEditors = null;
-            }
-            if (ChunkEditors != null) {
+            if (ChunkEditors != null)
                 foreach (var ci in ChunkEditors.Where(ci => ci != null))
                     ci.Dispose();
-                ChunkEditors = null;
-            }
         }
 
-        public ICompressedEditor[] CompressedEditors { get; private set; }
-        public IByteEditor[] ChunkEditors { get; private set; }
-        public IByteEditor[] ChildEditors => CompressedEditors.Concat(ChunkEditors).Where(x => x != null).ToArray();
+        public IChunkEditor[] ChunkEditors { get; private set; }
+
+        public IChunkEditor SurfaceChunkEditor { get; private set; }
 
         [BulkCopyRecurse]
         public HeaderTable Header { get; private set; }
@@ -224,6 +215,8 @@ namespace SF3.Editors.MPD {
         public ChunkHeaderTable ChunkHeader { get; private set; }
 
         public Chunk[] Chunks { get; private set; }
+
+        public Chunk SurfaceChunk { get; private set; }
 
         [BulkCopyRecurse]
         public TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; private set; }

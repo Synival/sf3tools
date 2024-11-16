@@ -16,17 +16,14 @@ namespace SF3.Editors.MPD {
         /// <summary>
         /// Byte editor for (de)compressed data for chunks
         /// </summary>
-        IByteEditor[] ChunkEditors { get; }
-
-        /// <summary>
-        /// All assigned child editors, including both CompressedEditors and ChunkEditors.
-        /// </summary>
-        IByteEditor[] ChildEditors { get; }
+        IChunkEditor[] ChunkEditors { get; }
+        IChunkEditor SurfaceChunkEditor { get; }
 
         HeaderTable Header { get; }
         ColorTable[] Palettes { get; }
         ChunkHeaderTable ChunkHeader { get; }
         Chunk[] Chunks { get; }
+        Chunk SurfaceChunk { get; }
         TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; }
         TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; }
         TileHeightTerrainRowTable TileHeightTerrainRows { get; }

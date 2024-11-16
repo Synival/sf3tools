@@ -19,7 +19,7 @@ namespace SF3.Tests.Editors {
         {
             // Arrange
             var mpdEditor = MakeEditor();
-            var editor = new CompressedEditor(mpdEditor.CompressedEditors[5].Data);
+            var editor = new CompressedEditor(mpdEditor.ChunkEditors[5].Data);
             Assert.IsFalse(editor.NeedsRecompression);
             Assert.IsFalse(editor.IsModified);
             Assert.IsFalse(editor.DecompressedEditor.IsModified);
@@ -39,7 +39,7 @@ namespace SF3.Tests.Editors {
         {
             // Arrange
             var mpdEditor = MakeEditor();
-            var editor = new CompressedEditor(mpdEditor.CompressedEditors[5].Data);
+            var editor = new CompressedEditor(mpdEditor.ChunkEditors[5].Data);
             editor.Recompress();
             editor.IsModified = false;
             Assert.IsFalse(editor.NeedsRecompression);
@@ -63,7 +63,7 @@ namespace SF3.Tests.Editors {
             var editor = MakeEditor();
 
             // Assert
-            foreach (var ce in editor.ChildEditors)
+            foreach (var ce in editor.ChunkEditors.Where(x => x != null))
                 Assert.IsFalse(ce.IsModified);
             Assert.IsFalse(editor.Editor.IsModified);
             Assert.IsFalse(editor.IsModified);
@@ -81,21 +81,22 @@ namespace SF3.Tests.Editors {
             // Assert
             Assert.IsTrue(recompressResult);
 
-            // NOTE: Recompressing an actual .MPD file uses a different algorithm than originally used
-            //       so the content of the chunks will have been modified from the original test data.
-            //       The MPD_Editor should be an a modified state.
-
             for (int i = 0; i < editor.Chunks.Length; i++) {
                 var chunkEditor = editor.ChunkEditors[i];
-                var compressedEditor = editor.CompressedEditors[i];
+                if (chunkEditor == null)
+                    continue;
 
-                if (chunkEditor != null)
+                if (!chunkEditor.IsCompressed)
                     Assert.IsFalse(chunkEditor.IsModified);
-                if (compressedEditor != null) {
-                    // Chunks 9 and 10 is actually unmodified, how about that!
+                else {
+                    // NOTE: Recompressing an actual .MPD file uses a different algorithm than originally used
+                    //       so the content of the chunks will have been modified from the original test data.
+                    //       The MPD_Editor should be an a modified state.
+                    //       Chunks 9 and 10 are actually unmodified, how about that!
                     var expectedResult = (i == 9 || i == 10) ? false : true;
-                    Assert.IsFalse(compressedEditor.NeedsRecompression);
-                    Assert.AreEqual(expectedResult, compressedEditor.IsModified);
+                    Assert.IsFalse(chunkEditor.NeedsRecompression);
+                    Assert.IsFalse(chunkEditor.DecompressedEditor.IsModified);
+                    Assert.AreEqual(expectedResult, chunkEditor.IsModified);
                 }
             }
 
@@ -117,8 +118,10 @@ namespace SF3.Tests.Editors {
 
             // Assert
             Assert.IsTrue(recompressResult);
-            foreach (var ce in editor.ChildEditors)
+            foreach (var ce in editor.ChunkEditors.Where(x => x != null)) {
                 Assert.IsFalse(ce.IsModified);
+                Assert.IsFalse(ce.DecompressedEditor.IsModified);
+            }
             Assert.IsFalse(editor.Editor.IsModified);
         }
 
@@ -127,8 +130,8 @@ namespace SF3.Tests.Editors {
         {
             // Arrange
             var editor = MakeEditor();
-            Assert.IsFalse(editor.CompressedEditors[6].IsModified);
             Assert.IsFalse(editor.ChunkEditors[6].IsModified);
+            Assert.IsFalse(editor.ChunkEditors[6].DecompressedEditor.IsModified);
             Assert.IsFalse(editor.Editor.IsModified);
             Assert.IsFalse(editor.IsModified);
 
@@ -136,8 +139,8 @@ namespace SF3.Tests.Editors {
             editor.TextureChunks[0].TextureTable.Rows[0].Width *= 2;
 
             // Assert
-            Assert.IsTrue(editor.CompressedEditors[6].IsModified);
             Assert.IsTrue(editor.ChunkEditors[6].IsModified);
+            Assert.IsTrue(editor.ChunkEditors[6].DecompressedEditor.IsModified);
             Assert.IsTrue(editor.Editor.IsModified);
             Assert.IsTrue(editor.IsModified);
         }
@@ -152,8 +155,10 @@ namespace SF3.Tests.Editors {
             editor.Finalize();
 
             // Assert
-            foreach (var ce in editor.ChildEditors)
+            foreach (var ce in editor.ChunkEditors.Where(x => x != null)) {
                 Assert.IsFalse(ce.IsModified);
+                Assert.IsFalse(ce.DecompressedEditor.IsModified);
+            }
             Assert.IsFalse(editor.Editor.IsModified);
         }
 
@@ -170,14 +175,12 @@ namespace SF3.Tests.Editors {
             // Assert
             for (int i = 0; i < editor.Chunks.Length; i++) {
                 var chunkEditor = editor.ChunkEditors[i];
-                var compressedEditor = editor.CompressedEditors[i];
+                if (chunkEditor == null)
+                    continue;
 
-                if (chunkEditor != null)
-                    Assert.IsFalse(chunkEditor.IsModified);
-
+                Assert.IsFalse(chunkEditor.DecompressedEditor.IsModified);
                 var expectedModifiedFlag = (i == 6);
-                if (compressedEditor != null)
-                    Assert.AreEqual(expectedModifiedFlag, compressedEditor.IsModified);
+                Assert.AreEqual(expectedModifiedFlag, chunkEditor.IsModified);
             }
 
             Assert.IsTrue(editor.Editor.IsModified);
@@ -209,15 +212,15 @@ namespace SF3.Tests.Editors {
             // Arrange
             var editor = MakeEditor();
             editor.Editor.IsModified = true;
-            Assert.IsFalse(editor.CompressedEditors.Where(x => x != null).Any(x => x.NeedsRecompression));
-            Assert.IsFalse(editor.ChildEditors.Any(x => x.IsModified));
+            Assert.IsFalse(editor.ChunkEditors.Where(x => x != null).Any(x => x.NeedsRecompression));
+            Assert.IsFalse(editor.ChunkEditors.Where(x => x != null).Any(x => x.IsModified));
 
             // Act
             editor.Editor.IsModified = false;
 
             // Assert
-            Assert.IsFalse(editor.CompressedEditors.Where(x => x != null).Any(x => x.NeedsRecompression));
-            Assert.IsFalse(editor.ChildEditors.Any(x => x.IsModified));
+            Assert.IsFalse(editor.ChunkEditors.Where(x => x != null).Any(x => x.NeedsRecompression));
+            Assert.IsFalse(editor.ChunkEditors.Where(x => x != null).Any(x => x.IsModified));
             Assert.IsFalse(editor.Editor.IsModified);
             Assert.IsFalse(editor.IsModified);
         }
@@ -228,19 +231,19 @@ namespace SF3.Tests.Editors {
             // Arrange
             var editor = MakeEditor();
             editor.Editor.IsModified = true;
-            Assert.IsFalse(editor.CompressedEditors.Where(x => x != null).Any(x => x.NeedsRecompression));
-            Assert.IsFalse(editor.ChildEditors.Any(x => x.IsModified));
-            var compressedEditor = editor.CompressedEditors[5];
+            Assert.IsFalse(editor.ChunkEditors.Where(x => x != null).Any(x => x.NeedsRecompression));
+            Assert.IsFalse(editor.ChunkEditors.Where(x => x != null).Any(x => x.IsModified));
+            var chunkEditor = editor.ChunkEditors[5];
 
             // Act
-            compressedEditor.NeedsRecompression = true;
+            chunkEditor.NeedsRecompression = true;
 
             // Assert
-            Assert.IsFalse(editor.CompressedEditors.Where(x => x != null && x != compressedEditor).Any(x => x.NeedsRecompression));
-            Assert.IsFalse(editor.ChildEditors.Where(x => x != compressedEditor).Any(x => x.IsModified));
+            Assert.IsFalse(editor.ChunkEditors.Where(x => x != null && x != chunkEditor).Any(x => x.NeedsRecompression));
+            Assert.IsFalse(editor.ChunkEditors.Where(x => x != null && x != chunkEditor).Any(x => x.IsModified));
 
-            Assert.IsTrue(compressedEditor.NeedsRecompression);
-            Assert.IsTrue(compressedEditor.IsModified);
+            Assert.IsTrue(chunkEditor.NeedsRecompression);
+            Assert.IsTrue(chunkEditor.IsModified);
 
             Assert.IsTrue(editor.Editor.IsModified);
             Assert.IsTrue(editor.IsModified);
@@ -252,19 +255,19 @@ namespace SF3.Tests.Editors {
             // Arrange
             var editor = MakeEditor();
             editor.Editor.IsModified = true;
-            Assert.IsFalse(editor.CompressedEditors.Where(x => x != null).Any(x => x.NeedsRecompression));
-            Assert.IsFalse(editor.ChildEditors.Any(x => x.IsModified));
-            var compressedEditor = editor.CompressedEditors[5];
-            compressedEditor.NeedsRecompression = true;
+            Assert.IsFalse(editor.ChunkEditors.Where(x => x != null).Any(x => x.NeedsRecompression));
+            Assert.IsFalse(editor.ChunkEditors.Where(x => x != null).Any(x => x.IsModified));
+            var chunkEditor = editor.ChunkEditors[5];
+            chunkEditor.NeedsRecompression = true;
 
             // Act
             editor.IsModified = false;
 
             // Assert
-            Assert.IsTrue(compressedEditor.NeedsRecompression);
-            Assert.IsTrue(compressedEditor.IsModified);
-            Assert.IsFalse(editor.CompressedEditors.Where(x => x != null && x != compressedEditor).Any(x => x.NeedsRecompression));
-            Assert.IsFalse(editor.ChildEditors.Where(x => x != compressedEditor).Any(x => x.IsModified));
+            Assert.IsTrue(chunkEditor.NeedsRecompression);
+            Assert.IsTrue(chunkEditor.IsModified);
+            Assert.IsFalse(editor.ChunkEditors.Where(x => x != null && x != chunkEditor).Any(x => x.NeedsRecompression));
+            Assert.IsFalse(editor.ChunkEditors.Where(x => x != null && x != chunkEditor).Any(x => x.IsModified));
             Assert.IsFalse(editor.Editor.IsModified);
             Assert.IsTrue(editor.IsModified);
         }

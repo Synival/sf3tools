@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using CommonLib;
 
 namespace SF3.RawEditors
@@ -91,7 +89,7 @@ namespace SF3.RawEditors
             set {
                 if (value == true && IsCompressed == false)
                     throw new ArgumentException("This ChunkEditor is not compressed");
-                NeedsRecompression = value;
+                CompressedEditor.NeedsRecompression = value;
             }
         }
 
