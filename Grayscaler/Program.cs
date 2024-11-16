@@ -5,9 +5,13 @@ using SF3.Types;
 
 namespace Grayscaler {
     public class Program {
+        private const string c_path = "";
+                                   // ^
+                                   //  `-- Enter the path for all your MPD files here!
+
         public static void Main(string[] args) {
             // Get a list of all .MPD files in a folder called 'Private' relative to this project.
-            var files = Directory.GetFiles("../../../Private/", "*.MPD");
+            var files = Directory.GetFiles(c_path, "*.MPD");
 
             // (NameGetterContext is irrelevant for this project. It's used to get named values
             //  for stuff, like character names, classes, spells, items, etc.)
