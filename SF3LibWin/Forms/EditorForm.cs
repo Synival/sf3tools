@@ -244,6 +244,11 @@ namespace SF3.Win.Forms {
         }
 
         /// <summary>
+        /// Function called after closing is performed.
+        /// </summary>
+        protected virtual bool OnClose() => true;
+
+        /// <summary>
         /// Closes a file if open.
         /// If may prompt the user to save if the file has been modified.
         /// </summary>
@@ -261,7 +266,8 @@ namespace SF3.Win.Forms {
             ObjectListViews.ForEach(x => x.ClearObjects());
             _ = FileLoader.Close();
             FileLoader.Dispose();
-            return true;
+
+            return OnClose();
         }
 
         /// <summary>

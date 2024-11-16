@@ -40,20 +40,22 @@ namespace SF3.MPDEditor.Controls {
             set {
                 if (_textureImage != value) {
                     _textureImage = value;
-                    var newSize = new Size(value.Width * 4, value.Height * 4);
-                    var sizeDiff = new Point(newSize.Width - this.Size.Width, newSize.Height - this.Size.Height);
+                    if (_textureImage != null) {
+                        var newSize = new Size(value.Width * 4, value.Height * 4);
+                        var sizeDiff = new Point(newSize.Width - this.Size.Width, newSize.Height - this.Size.Height);
 
-                    // Forcing the size to 0 clears the render buffer.
-                    this.Size = new Size(0, 0);
-                    this.Size = newSize;
+                        // Forcing the size to 0 clears the render buffer.
+                        this.Size = new Size(0, 0);
+                        this.Size = newSize;
 
-                    var widthMagnitude  = Anchor.HasFlag(AnchorStyles.Right)  ? 1.00 : Anchor.HasFlag(AnchorStyles.Left) ? 0.00 : 0.50;
-                    var heightMagnitude = Anchor.HasFlag(AnchorStyles.Bottom) ? 1.00 : Anchor.HasFlag(AnchorStyles.Top)  ? 0.00 : 0.50;
+                        var widthMagnitude  = Anchor.HasFlag(AnchorStyles.Right)  ? 1.00 : Anchor.HasFlag(AnchorStyles.Left) ? 0.00 : 0.50;
+                        var heightMagnitude = Anchor.HasFlag(AnchorStyles.Bottom) ? 1.00 : Anchor.HasFlag(AnchorStyles.Top)  ? 0.00 : 0.50;
 
-                    this.Location = new Point(
-                        (int) (this.Location.X - sizeDiff.X * widthMagnitude),
-                        (int) (this.Location.Y - sizeDiff.Y * heightMagnitude)
-                    );
+                        this.Location = new Point(
+                            (int) (this.Location.X - sizeDiff.X * widthMagnitude),
+                            (int) (this.Location.Y - sizeDiff.Y * heightMagnitude)
+                        );
+                    }
                     Invalidate();
                 }
             }

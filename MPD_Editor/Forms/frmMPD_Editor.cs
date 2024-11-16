@@ -13,6 +13,7 @@ using SF3.MPDEditor.Extensions;
 using SF3.NamedValues;
 using SF3.X1_Editor.Controls;
 using static SF3.Win.Extensions.TabControlExtensions;
+using System;
 
 namespace SF3.MPD_Editor.Forms {
 
@@ -41,23 +42,30 @@ namespace SF3.MPD_Editor.Forms {
                 foreach (var tcec in textureChunkEditorControls)
                     tcec.Tabs.SelectedIndex = e.TabPageIndex;
             };
+
             foreach (var tcec in textureChunkEditorControls) {
                 tcec.Tabs.Selected += tabSyncFunc;
-                tcec.OLVTextures.ItemSelectionChanged += (s, e) => OnTextureChanged(s, e, tcec);
+                tcec.OLVTextures.ItemSelectionChanged += (s, e) => OnTextureChanged(s, e, tcec.OLVTextures, tcec);
+                tcec.OLVTextures.ItemsChanged += (s, e) => OnTextureChanged(s, e, tcec.OLVTextures, tcec);
             }
 
             tabMain.Selected += (s, e) => {
-                if (tabMain.SelectedTab == tabSurfaceMap && Editor.TileSurfaceCharacterRows?.TextureData != null)
+                if (tabMain.SelectedTab == tabSurfaceMap && Editor?.TileSurfaceCharacterRows?.TextureData != null)
                     surfaceMapControl.UpdateTextures(Editor.TileSurfaceCharacterRows.TextureData, Editor.TextureChunks);
             };
+            surfaceMapControl.Hide();
 
             InitializeEditor(menuStrip2, textureChunkOLVs);
         }
 
-        private void OnTextureChanged(object sender, ListViewItemSelectionChangedEventArgs e, TextureChunkControl tcec) {
-            var item = (OLVListItem) e.Item;
-            var texture = (Texture) item.RowObject;
-            tcec.TextureControl.TextureImage = texture.CreateBitmap();
+        private void OnTextureChanged(object sender, EventArgs e, ObjectListView olv, TextureChunkControl tcec) {
+            var item = (OLVListItem) olv.SelectedItem;
+            if (item == null)
+                tcec.TextureControl.TextureImage = null;
+            else {
+                var texture = (Texture) item.RowObject;
+                tcec.TextureControl.TextureImage = texture.CreateBitmap();
+            }
         }
 
         protected override string FileDialogFilter
@@ -112,12 +120,24 @@ namespace SF3.MPD_Editor.Forms {
                 new PopulateOLVTabConfig(tabSurfaceMap, null, Editor.Header), // Should always be present
             });
 
-            if (Editor.TileSurfaceCharacterRows != null)
-                this.surfaceMapControl.UpdateTextures(Editor.TileSurfaceCharacterRows.TextureData, Editor.TextureChunks);
-            else
-                this.surfaceMapControl.UpdateTextures(null, null);
+            if (Editor.TileSurfaceCharacterRows != null) {
+                surfaceMapControl.UpdateTextures(Editor.TileSurfaceCharacterRows.TextureData, Editor.TextureChunks);
+                surfaceMapControl.Show();
+            }
+            else {
+                surfaceMapControl.Hide();
+                surfaceMapControl.UpdateTextures(null, null);
+            }
 
             return populateResult;
+        }
+
+        protected override bool OnClose() {
+            if (!base.OnClose())
+                return false;
+            surfaceMapControl.Hide();
+            surfaceMapControl.UpdateTextures(null, null);
+            return true;
         }
     }
 }
