@@ -33,70 +33,70 @@ namespace SF3.MPD_Editor.Forms {
             olvTileItems = new BrightIdeasSoftware.ObjectListView();
             lvcTileItemsName = new BrightIdeasSoftware.OLVColumn();
             lvcTileItemsAddress = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX0Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX1Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX2Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX3Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX4Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX5Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX6Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX7Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX8Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX9Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX10Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX11Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX12Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX13Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX14Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX15Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX16Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX17Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX18Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX19Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX20Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX21Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX22Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX23Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX24Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX25Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX26Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX27Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX28Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX29Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX30Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX31Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX32Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX33Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX34Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX35Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX36Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX37Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX38Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX39Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX40Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX41Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX42Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX43Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX44Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX45Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX46Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX47Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX48Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX49Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX50Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX51Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX52Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX53Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX54Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX55Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX56Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX57Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX58Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX59Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX60Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX61Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX62Treasure = new BrightIdeasSoftware.OLVColumn();
-            lvcTileItemsX63Treasure = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX0Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX1Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX2Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX3Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX4Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX5Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX6Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX7Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX8Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX9Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX10Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX11Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX12Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX13Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX14Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX15Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX16Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX17Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX18Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX19Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX20Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX21Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX22Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX23Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX24Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX25Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX26Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX27Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX28Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX29Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX30Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX31Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX32Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX33Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX34Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX35Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX36Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX37Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX38Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX39Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX40Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX41Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX42Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX43Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX44Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX45Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX46Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX47Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX48Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX49Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX50Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX51Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX52Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX53Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX54Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX55Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX56Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX57Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX58Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX59Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX60Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX61Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX62Tile = new BrightIdeasSoftware.OLVColumn();
+            lvcTileItemsX63Tile = new BrightIdeasSoftware.OLVColumn();
             tabMain = new System.Windows.Forms.TabControl();
             tabHeader = new System.Windows.Forms.TabPage();
             olvHeader = new BrightIdeasSoftware.ObjectListView();
@@ -447,74 +447,74 @@ namespace SF3.MPD_Editor.Forms {
             // 
             olvTileItems.AllColumns.Add(lvcTileItemsName);
             olvTileItems.AllColumns.Add(lvcTileItemsAddress);
-            olvTileItems.AllColumns.Add(lvcTileItemsX0Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX1Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX2Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX3Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX4Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX5Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX6Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX7Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX8Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX9Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX10Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX11Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX12Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX13Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX14Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX15Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX16Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX17Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX18Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX19Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX20Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX21Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX22Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX23Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX24Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX25Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX26Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX27Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX28Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX29Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX30Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX31Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX32Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX33Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX34Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX35Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX36Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX37Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX38Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX39Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX40Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX41Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX42Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX43Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX44Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX45Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX46Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX47Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX48Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX49Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX50Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX51Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX52Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX53Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX54Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX55Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX56Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX57Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX58Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX59Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX60Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX61Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX62Treasure);
-            olvTileItems.AllColumns.Add(lvcTileItemsX63Treasure);
+            olvTileItems.AllColumns.Add(lvcTileItemsX0Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX1Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX2Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX3Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX4Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX5Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX6Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX7Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX8Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX9Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX10Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX11Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX12Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX13Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX14Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX15Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX16Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX17Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX18Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX19Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX20Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX21Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX22Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX23Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX24Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX25Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX26Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX27Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX28Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX29Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX30Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX31Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX32Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX33Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX34Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX35Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX36Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX37Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX38Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX39Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX40Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX41Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX42Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX43Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX44Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX45Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX46Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX47Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX48Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX49Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX50Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX51Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX52Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX53Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX54Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX55Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX56Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX57Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX58Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX59Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX60Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX61Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX62Tile);
+            olvTileItems.AllColumns.Add(lvcTileItemsX63Tile);
             olvTileItems.AllowColumnReorder = true;
             olvTileItems.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             olvTileItems.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            olvTileItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcTileItemsName, lvcTileItemsAddress, lvcTileItemsX0Treasure, lvcTileItemsX1Treasure, lvcTileItemsX2Treasure, lvcTileItemsX3Treasure, lvcTileItemsX4Treasure, lvcTileItemsX5Treasure, lvcTileItemsX6Treasure, lvcTileItemsX7Treasure, lvcTileItemsX8Treasure, lvcTileItemsX9Treasure, lvcTileItemsX10Treasure, lvcTileItemsX11Treasure, lvcTileItemsX12Treasure, lvcTileItemsX13Treasure, lvcTileItemsX14Treasure, lvcTileItemsX15Treasure, lvcTileItemsX16Treasure, lvcTileItemsX17Treasure, lvcTileItemsX18Treasure, lvcTileItemsX19Treasure, lvcTileItemsX20Treasure, lvcTileItemsX21Treasure, lvcTileItemsX22Treasure, lvcTileItemsX23Treasure, lvcTileItemsX24Treasure, lvcTileItemsX25Treasure, lvcTileItemsX26Treasure, lvcTileItemsX27Treasure, lvcTileItemsX28Treasure, lvcTileItemsX29Treasure, lvcTileItemsX30Treasure, lvcTileItemsX31Treasure, lvcTileItemsX32Treasure, lvcTileItemsX33Treasure, lvcTileItemsX34Treasure, lvcTileItemsX35Treasure, lvcTileItemsX36Treasure, lvcTileItemsX37Treasure, lvcTileItemsX38Treasure, lvcTileItemsX39Treasure, lvcTileItemsX40Treasure, lvcTileItemsX41Treasure, lvcTileItemsX42Treasure, lvcTileItemsX43Treasure, lvcTileItemsX44Treasure, lvcTileItemsX45Treasure, lvcTileItemsX46Treasure, lvcTileItemsX47Treasure, lvcTileItemsX48Treasure, lvcTileItemsX49Treasure, lvcTileItemsX50Treasure, lvcTileItemsX51Treasure, lvcTileItemsX52Treasure, lvcTileItemsX53Treasure, lvcTileItemsX54Treasure, lvcTileItemsX55Treasure, lvcTileItemsX56Treasure, lvcTileItemsX57Treasure, lvcTileItemsX58Treasure, lvcTileItemsX59Treasure, lvcTileItemsX60Treasure, lvcTileItemsX61Treasure, lvcTileItemsX62Treasure, lvcTileItemsX63Treasure });
+            olvTileItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcTileItemsName, lvcTileItemsAddress, lvcTileItemsX0Tile, lvcTileItemsX1Tile, lvcTileItemsX2Tile, lvcTileItemsX3Tile, lvcTileItemsX4Tile, lvcTileItemsX5Tile, lvcTileItemsX6Tile, lvcTileItemsX7Tile, lvcTileItemsX8Tile, lvcTileItemsX9Tile, lvcTileItemsX10Tile, lvcTileItemsX11Tile, lvcTileItemsX12Tile, lvcTileItemsX13Tile, lvcTileItemsX14Tile, lvcTileItemsX15Tile, lvcTileItemsX16Tile, lvcTileItemsX17Tile, lvcTileItemsX18Tile, lvcTileItemsX19Tile, lvcTileItemsX20Tile, lvcTileItemsX21Tile, lvcTileItemsX22Tile, lvcTileItemsX23Tile, lvcTileItemsX24Tile, lvcTileItemsX25Tile, lvcTileItemsX26Tile, lvcTileItemsX27Tile, lvcTileItemsX28Tile, lvcTileItemsX29Tile, lvcTileItemsX30Tile, lvcTileItemsX31Tile, lvcTileItemsX32Tile, lvcTileItemsX33Tile, lvcTileItemsX34Tile, lvcTileItemsX35Tile, lvcTileItemsX36Tile, lvcTileItemsX37Tile, lvcTileItemsX38Tile, lvcTileItemsX39Tile, lvcTileItemsX40Tile, lvcTileItemsX41Tile, lvcTileItemsX42Tile, lvcTileItemsX43Tile, lvcTileItemsX44Tile, lvcTileItemsX45Tile, lvcTileItemsX46Tile, lvcTileItemsX47Tile, lvcTileItemsX48Tile, lvcTileItemsX49Tile, lvcTileItemsX50Tile, lvcTileItemsX51Tile, lvcTileItemsX52Tile, lvcTileItemsX53Tile, lvcTileItemsX54Tile, lvcTileItemsX55Tile, lvcTileItemsX56Tile, lvcTileItemsX57Tile, lvcTileItemsX58Tile, lvcTileItemsX59Tile, lvcTileItemsX60Tile, lvcTileItemsX61Tile, lvcTileItemsX62Tile, lvcTileItemsX63Tile });
             olvTileItems.FullRowSelect = true;
             olvTileItems.GridLines = true;
             olvTileItems.HasCollapsibleGroups = false;
@@ -544,453 +544,453 @@ namespace SF3.MPD_Editor.Forms {
             lvcTileItemsAddress.Text = "Address";
             lvcTileItemsAddress.Width = 90;
             // 
-            // lvcTileItemsX0Treasure
+            // lvcTileItemsX0Tile
             // 
-            lvcTileItemsX0Treasure.AspectName = "X0Treasure";
-            lvcTileItemsX0Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX0Treasure.Text = "X0";
-            lvcTileItemsX0Treasure.Width = 50;
+            lvcTileItemsX0Tile.AspectName = "X0Tile";
+            lvcTileItemsX0Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX0Tile.Text = "X0";
+            lvcTileItemsX0Tile.Width = 50;
             // 
-            // lvcTileItemsX1Treasure
+            // lvcTileItemsX1Tile
             // 
-            lvcTileItemsX1Treasure.AspectName = "X1Treasure";
-            lvcTileItemsX1Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX1Treasure.Text = "X1";
-            lvcTileItemsX1Treasure.Width = 50;
+            lvcTileItemsX1Tile.AspectName = "X1Tile";
+            lvcTileItemsX1Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX1Tile.Text = "X1";
+            lvcTileItemsX1Tile.Width = 50;
             // 
-            // lvcTileItemsX2Treasure
+            // lvcTileItemsX2Tile
             // 
-            lvcTileItemsX2Treasure.AspectName = "X2Treasure";
-            lvcTileItemsX2Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX2Treasure.Text = "X2";
-            lvcTileItemsX2Treasure.Width = 50;
+            lvcTileItemsX2Tile.AspectName = "X2Tile";
+            lvcTileItemsX2Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX2Tile.Text = "X2";
+            lvcTileItemsX2Tile.Width = 50;
             // 
-            // lvcTileItemsX3Treasure
+            // lvcTileItemsX3Tile
             // 
-            lvcTileItemsX3Treasure.AspectName = "X3Treasure";
-            lvcTileItemsX3Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX3Treasure.Text = "X3";
-            lvcTileItemsX3Treasure.Width = 50;
+            lvcTileItemsX3Tile.AspectName = "X3Tile";
+            lvcTileItemsX3Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX3Tile.Text = "X3";
+            lvcTileItemsX3Tile.Width = 50;
             // 
-            // lvcTileItemsX4Treasure
+            // lvcTileItemsX4Tile
             // 
-            lvcTileItemsX4Treasure.AspectName = "X4Treasure";
-            lvcTileItemsX4Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX4Treasure.Text = "X4";
-            lvcTileItemsX4Treasure.Width = 50;
+            lvcTileItemsX4Tile.AspectName = "X4Tile";
+            lvcTileItemsX4Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX4Tile.Text = "X4";
+            lvcTileItemsX4Tile.Width = 50;
             // 
-            // lvcTileItemsX5Treasure
+            // lvcTileItemsX5Tile
             // 
-            lvcTileItemsX5Treasure.AspectName = "X5Treasure";
-            lvcTileItemsX5Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX5Treasure.Text = "X5";
-            lvcTileItemsX5Treasure.Width = 50;
+            lvcTileItemsX5Tile.AspectName = "X5Tile";
+            lvcTileItemsX5Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX5Tile.Text = "X5";
+            lvcTileItemsX5Tile.Width = 50;
             // 
-            // lvcTileItemsX6Treasure
+            // lvcTileItemsX6Tile
             // 
-            lvcTileItemsX6Treasure.AspectName = "X6Treasure";
-            lvcTileItemsX6Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX6Treasure.Text = "X6";
-            lvcTileItemsX6Treasure.Width = 50;
+            lvcTileItemsX6Tile.AspectName = "X6Tile";
+            lvcTileItemsX6Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX6Tile.Text = "X6";
+            lvcTileItemsX6Tile.Width = 50;
             // 
-            // lvcTileItemsX7Treasure
+            // lvcTileItemsX7Tile
             // 
-            lvcTileItemsX7Treasure.AspectName = "X7Treasure";
-            lvcTileItemsX7Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX7Treasure.Text = "X7";
-            lvcTileItemsX7Treasure.Width = 50;
+            lvcTileItemsX7Tile.AspectName = "X7Tile";
+            lvcTileItemsX7Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX7Tile.Text = "X7";
+            lvcTileItemsX7Tile.Width = 50;
             // 
-            // lvcTileItemsX8Treasure
+            // lvcTileItemsX8Tile
             // 
-            lvcTileItemsX8Treasure.AspectName = "X8Treasure";
-            lvcTileItemsX8Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX8Treasure.Text = "X8";
-            lvcTileItemsX8Treasure.Width = 50;
+            lvcTileItemsX8Tile.AspectName = "X8Tile";
+            lvcTileItemsX8Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX8Tile.Text = "X8";
+            lvcTileItemsX8Tile.Width = 50;
             // 
-            // lvcTileItemsX9Treasure
+            // lvcTileItemsX9Tile
             // 
-            lvcTileItemsX9Treasure.AspectName = "X9Treasure";
-            lvcTileItemsX9Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX9Treasure.Text = "X9";
-            lvcTileItemsX9Treasure.Width = 50;
+            lvcTileItemsX9Tile.AspectName = "X9Tile";
+            lvcTileItemsX9Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX9Tile.Text = "X9";
+            lvcTileItemsX9Tile.Width = 50;
             // 
-            // lvcTileItemsX10Treasure
+            // lvcTileItemsX10Tile
             // 
-            lvcTileItemsX10Treasure.AspectName = "X10Treasure";
-            lvcTileItemsX10Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX10Treasure.Text = "X10";
-            lvcTileItemsX10Treasure.Width = 50;
+            lvcTileItemsX10Tile.AspectName = "X10Tile";
+            lvcTileItemsX10Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX10Tile.Text = "X10";
+            lvcTileItemsX10Tile.Width = 50;
             // 
-            // lvcTileItemsX11Treasure
+            // lvcTileItemsX11Tile
             // 
-            lvcTileItemsX11Treasure.AspectName = "X11Treasure";
-            lvcTileItemsX11Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX11Treasure.Text = "X11";
-            lvcTileItemsX11Treasure.Width = 50;
+            lvcTileItemsX11Tile.AspectName = "X11Tile";
+            lvcTileItemsX11Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX11Tile.Text = "X11";
+            lvcTileItemsX11Tile.Width = 50;
             // 
-            // lvcTileItemsX12Treasure
+            // lvcTileItemsX12Tile
             // 
-            lvcTileItemsX12Treasure.AspectName = "X12Treasure";
-            lvcTileItemsX12Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX12Treasure.Text = "X12";
-            lvcTileItemsX12Treasure.Width = 50;
+            lvcTileItemsX12Tile.AspectName = "X12Tile";
+            lvcTileItemsX12Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX12Tile.Text = "X12";
+            lvcTileItemsX12Tile.Width = 50;
             // 
-            // lvcTileItemsX13Treasure
+            // lvcTileItemsX13Tile
             // 
-            lvcTileItemsX13Treasure.AspectName = "X13Treasure";
-            lvcTileItemsX13Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX13Treasure.Text = "X13";
-            lvcTileItemsX13Treasure.Width = 50;
+            lvcTileItemsX13Tile.AspectName = "X13Tile";
+            lvcTileItemsX13Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX13Tile.Text = "X13";
+            lvcTileItemsX13Tile.Width = 50;
             // 
-            // lvcTileItemsX14Treasure
+            // lvcTileItemsX14Tile
             // 
-            lvcTileItemsX14Treasure.AspectName = "X14Treasure";
-            lvcTileItemsX14Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX14Treasure.Text = "X14";
-            lvcTileItemsX14Treasure.Width = 50;
+            lvcTileItemsX14Tile.AspectName = "X14Tile";
+            lvcTileItemsX14Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX14Tile.Text = "X14";
+            lvcTileItemsX14Tile.Width = 50;
             // 
-            // lvcTileItemsX15Treasure
+            // lvcTileItemsX15Tile
             // 
-            lvcTileItemsX15Treasure.AspectName = "X15Treasure";
-            lvcTileItemsX15Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX15Treasure.Text = "X15";
-            lvcTileItemsX15Treasure.Width = 50;
+            lvcTileItemsX15Tile.AspectName = "X15Tile";
+            lvcTileItemsX15Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX15Tile.Text = "X15";
+            lvcTileItemsX15Tile.Width = 50;
             // 
-            // lvcTileItemsX16Treasure
+            // lvcTileItemsX16Tile
             // 
-            lvcTileItemsX16Treasure.AspectName = "X16Treasure";
-            lvcTileItemsX16Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX16Treasure.Text = "X16";
-            lvcTileItemsX16Treasure.Width = 50;
+            lvcTileItemsX16Tile.AspectName = "X16Tile";
+            lvcTileItemsX16Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX16Tile.Text = "X16";
+            lvcTileItemsX16Tile.Width = 50;
             // 
-            // lvcTileItemsX17Treasure
+            // lvcTileItemsX17Tile
             // 
-            lvcTileItemsX17Treasure.AspectName = "X17Treasure";
-            lvcTileItemsX17Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX17Treasure.Text = "X17";
-            lvcTileItemsX17Treasure.Width = 50;
+            lvcTileItemsX17Tile.AspectName = "X17Tile";
+            lvcTileItemsX17Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX17Tile.Text = "X17";
+            lvcTileItemsX17Tile.Width = 50;
             // 
-            // lvcTileItemsX18Treasure
+            // lvcTileItemsX18Tile
             // 
-            lvcTileItemsX18Treasure.AspectName = "X18Treasure";
-            lvcTileItemsX18Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX18Treasure.Text = "X18";
-            lvcTileItemsX18Treasure.Width = 50;
+            lvcTileItemsX18Tile.AspectName = "X18Tile";
+            lvcTileItemsX18Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX18Tile.Text = "X18";
+            lvcTileItemsX18Tile.Width = 50;
             // 
-            // lvcTileItemsX19Treasure
+            // lvcTileItemsX19Tile
             // 
-            lvcTileItemsX19Treasure.AspectName = "X19Treasure";
-            lvcTileItemsX19Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX19Treasure.Text = "X19";
-            lvcTileItemsX19Treasure.Width = 50;
+            lvcTileItemsX19Tile.AspectName = "X19Tile";
+            lvcTileItemsX19Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX19Tile.Text = "X19";
+            lvcTileItemsX19Tile.Width = 50;
             // 
-            // lvcTileItemsX20Treasure
+            // lvcTileItemsX20Tile
             // 
-            lvcTileItemsX20Treasure.AspectName = "X20Treasure";
-            lvcTileItemsX20Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX20Treasure.Text = "X20";
-            lvcTileItemsX20Treasure.Width = 50;
+            lvcTileItemsX20Tile.AspectName = "X20Tile";
+            lvcTileItemsX20Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX20Tile.Text = "X20";
+            lvcTileItemsX20Tile.Width = 50;
             // 
-            // lvcTileItemsX21Treasure
+            // lvcTileItemsX21Tile
             // 
-            lvcTileItemsX21Treasure.AspectName = "X21Treasure";
-            lvcTileItemsX21Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX21Treasure.Text = "X21";
-            lvcTileItemsX21Treasure.Width = 50;
+            lvcTileItemsX21Tile.AspectName = "X21Tile";
+            lvcTileItemsX21Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX21Tile.Text = "X21";
+            lvcTileItemsX21Tile.Width = 50;
             // 
-            // lvcTileItemsX22Treasure
+            // lvcTileItemsX22Tile
             // 
-            lvcTileItemsX22Treasure.AspectName = "X22Treasure";
-            lvcTileItemsX22Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX22Treasure.Text = "X22";
-            lvcTileItemsX22Treasure.Width = 50;
+            lvcTileItemsX22Tile.AspectName = "X22Tile";
+            lvcTileItemsX22Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX22Tile.Text = "X22";
+            lvcTileItemsX22Tile.Width = 50;
             // 
-            // lvcTileItemsX23Treasure
+            // lvcTileItemsX23Tile
             // 
-            lvcTileItemsX23Treasure.AspectName = "X23Treasure";
-            lvcTileItemsX23Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX23Treasure.Text = "X23";
-            lvcTileItemsX23Treasure.Width = 50;
+            lvcTileItemsX23Tile.AspectName = "X23Tile";
+            lvcTileItemsX23Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX23Tile.Text = "X23";
+            lvcTileItemsX23Tile.Width = 50;
             // 
-            // lvcTileItemsX24Treasure
+            // lvcTileItemsX24Tile
             // 
-            lvcTileItemsX24Treasure.AspectName = "X24Treasure";
-            lvcTileItemsX24Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX24Treasure.Text = "X24";
-            lvcTileItemsX24Treasure.Width = 50;
+            lvcTileItemsX24Tile.AspectName = "X24Tile";
+            lvcTileItemsX24Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX24Tile.Text = "X24";
+            lvcTileItemsX24Tile.Width = 50;
             // 
-            // lvcTileItemsX25Treasure
+            // lvcTileItemsX25Tile
             // 
-            lvcTileItemsX25Treasure.AspectName = "X25Treasure";
-            lvcTileItemsX25Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX25Treasure.Text = "X25";
-            lvcTileItemsX25Treasure.Width = 50;
+            lvcTileItemsX25Tile.AspectName = "X25Tile";
+            lvcTileItemsX25Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX25Tile.Text = "X25";
+            lvcTileItemsX25Tile.Width = 50;
             // 
-            // lvcTileItemsX26Treasure
+            // lvcTileItemsX26Tile
             // 
-            lvcTileItemsX26Treasure.AspectName = "X26Treasure";
-            lvcTileItemsX26Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX26Treasure.Text = "X26";
-            lvcTileItemsX26Treasure.Width = 50;
+            lvcTileItemsX26Tile.AspectName = "X26Tile";
+            lvcTileItemsX26Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX26Tile.Text = "X26";
+            lvcTileItemsX26Tile.Width = 50;
             // 
-            // lvcTileItemsX27Treasure
+            // lvcTileItemsX27Tile
             // 
-            lvcTileItemsX27Treasure.AspectName = "X27Treasure";
-            lvcTileItemsX27Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX27Treasure.Text = "X27";
-            lvcTileItemsX27Treasure.Width = 50;
+            lvcTileItemsX27Tile.AspectName = "X27Tile";
+            lvcTileItemsX27Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX27Tile.Text = "X27";
+            lvcTileItemsX27Tile.Width = 50;
             // 
-            // lvcTileItemsX28Treasure
+            // lvcTileItemsX28Tile
             // 
-            lvcTileItemsX28Treasure.AspectName = "X28Treasure";
-            lvcTileItemsX28Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX28Treasure.Text = "X28";
-            lvcTileItemsX28Treasure.Width = 50;
+            lvcTileItemsX28Tile.AspectName = "X28Tile";
+            lvcTileItemsX28Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX28Tile.Text = "X28";
+            lvcTileItemsX28Tile.Width = 50;
             // 
-            // lvcTileItemsX29Treasure
+            // lvcTileItemsX29Tile
             // 
-            lvcTileItemsX29Treasure.AspectName = "X29Treasure";
-            lvcTileItemsX29Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX29Treasure.Text = "X29";
-            lvcTileItemsX29Treasure.Width = 50;
+            lvcTileItemsX29Tile.AspectName = "X29Tile";
+            lvcTileItemsX29Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX29Tile.Text = "X29";
+            lvcTileItemsX29Tile.Width = 50;
             // 
-            // lvcTileItemsX30Treasure
+            // lvcTileItemsX30Tile
             // 
-            lvcTileItemsX30Treasure.AspectName = "X30Treasure";
-            lvcTileItemsX30Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX30Treasure.Text = "X30";
-            lvcTileItemsX30Treasure.Width = 50;
+            lvcTileItemsX30Tile.AspectName = "X30Tile";
+            lvcTileItemsX30Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX30Tile.Text = "X30";
+            lvcTileItemsX30Tile.Width = 50;
             // 
-            // lvcTileItemsX31Treasure
+            // lvcTileItemsX31Tile
             // 
-            lvcTileItemsX31Treasure.AspectName = "X31Treasure";
-            lvcTileItemsX31Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX31Treasure.Text = "X31";
-            lvcTileItemsX31Treasure.Width = 50;
+            lvcTileItemsX31Tile.AspectName = "X31Tile";
+            lvcTileItemsX31Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX31Tile.Text = "X31";
+            lvcTileItemsX31Tile.Width = 50;
             // 
-            // lvcTileItemsX32Treasure
+            // lvcTileItemsX32Tile
             // 
-            lvcTileItemsX32Treasure.AspectName = "X32Treasure";
-            lvcTileItemsX32Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX32Treasure.Text = "X32";
-            lvcTileItemsX32Treasure.Width = 50;
+            lvcTileItemsX32Tile.AspectName = "X32Tile";
+            lvcTileItemsX32Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX32Tile.Text = "X32";
+            lvcTileItemsX32Tile.Width = 50;
             // 
-            // lvcTileItemsX33Treasure
+            // lvcTileItemsX33Tile
             // 
-            lvcTileItemsX33Treasure.AspectName = "X33Treasure";
-            lvcTileItemsX33Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX33Treasure.Text = "X33";
-            lvcTileItemsX33Treasure.Width = 50;
+            lvcTileItemsX33Tile.AspectName = "X33Tile";
+            lvcTileItemsX33Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX33Tile.Text = "X33";
+            lvcTileItemsX33Tile.Width = 50;
             // 
-            // lvcTileItemsX34Treasure
+            // lvcTileItemsX34Tile
             // 
-            lvcTileItemsX34Treasure.AspectName = "X34Treasure";
-            lvcTileItemsX34Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX34Treasure.Text = "X34";
-            lvcTileItemsX34Treasure.Width = 50;
+            lvcTileItemsX34Tile.AspectName = "X34Tile";
+            lvcTileItemsX34Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX34Tile.Text = "X34";
+            lvcTileItemsX34Tile.Width = 50;
             // 
-            // lvcTileItemsX35Treasure
+            // lvcTileItemsX35Tile
             // 
-            lvcTileItemsX35Treasure.AspectName = "X35Treasure";
-            lvcTileItemsX35Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX35Treasure.Text = "X35";
-            lvcTileItemsX35Treasure.Width = 50;
+            lvcTileItemsX35Tile.AspectName = "X35Tile";
+            lvcTileItemsX35Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX35Tile.Text = "X35";
+            lvcTileItemsX35Tile.Width = 50;
             // 
-            // lvcTileItemsX36Treasure
+            // lvcTileItemsX36Tile
             // 
-            lvcTileItemsX36Treasure.AspectName = "X36Treasure";
-            lvcTileItemsX36Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX36Treasure.Text = "X36";
-            lvcTileItemsX36Treasure.Width = 50;
+            lvcTileItemsX36Tile.AspectName = "X36Tile";
+            lvcTileItemsX36Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX36Tile.Text = "X36";
+            lvcTileItemsX36Tile.Width = 50;
             // 
-            // lvcTileItemsX37Treasure
+            // lvcTileItemsX37Tile
             // 
-            lvcTileItemsX37Treasure.AspectName = "X37Treasure";
-            lvcTileItemsX37Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX37Treasure.Text = "X37";
-            lvcTileItemsX37Treasure.Width = 50;
+            lvcTileItemsX37Tile.AspectName = "X37Tile";
+            lvcTileItemsX37Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX37Tile.Text = "X37";
+            lvcTileItemsX37Tile.Width = 50;
             // 
-            // lvcTileItemsX38Treasure
+            // lvcTileItemsX38Tile
             // 
-            lvcTileItemsX38Treasure.AspectName = "X38Treasure";
-            lvcTileItemsX38Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX38Treasure.Text = "X38";
-            lvcTileItemsX38Treasure.Width = 50;
+            lvcTileItemsX38Tile.AspectName = "X38Tile";
+            lvcTileItemsX38Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX38Tile.Text = "X38";
+            lvcTileItemsX38Tile.Width = 50;
             // 
-            // lvcTileItemsX39Treasure
+            // lvcTileItemsX39Tile
             // 
-            lvcTileItemsX39Treasure.AspectName = "X39Treasure";
-            lvcTileItemsX39Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX39Treasure.Text = "X39";
-            lvcTileItemsX39Treasure.Width = 50;
+            lvcTileItemsX39Tile.AspectName = "X39Tile";
+            lvcTileItemsX39Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX39Tile.Text = "X39";
+            lvcTileItemsX39Tile.Width = 50;
             // 
-            // lvcTileItemsX40Treasure
+            // lvcTileItemsX40Tile
             // 
-            lvcTileItemsX40Treasure.AspectName = "X40Treasure";
-            lvcTileItemsX40Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX40Treasure.Text = "X40";
-            lvcTileItemsX40Treasure.Width = 50;
+            lvcTileItemsX40Tile.AspectName = "X40Tile";
+            lvcTileItemsX40Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX40Tile.Text = "X40";
+            lvcTileItemsX40Tile.Width = 50;
             // 
-            // lvcTileItemsX41Treasure
+            // lvcTileItemsX41Tile
             // 
-            lvcTileItemsX41Treasure.AspectName = "X41Treasure";
-            lvcTileItemsX41Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX41Treasure.Text = "X41";
-            lvcTileItemsX41Treasure.Width = 50;
+            lvcTileItemsX41Tile.AspectName = "X41Tile";
+            lvcTileItemsX41Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX41Tile.Text = "X41";
+            lvcTileItemsX41Tile.Width = 50;
             // 
-            // lvcTileItemsX42Treasure
+            // lvcTileItemsX42Tile
             // 
-            lvcTileItemsX42Treasure.AspectName = "X42Treasure";
-            lvcTileItemsX42Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX42Treasure.Text = "X42";
-            lvcTileItemsX42Treasure.Width = 50;
+            lvcTileItemsX42Tile.AspectName = "X42Tile";
+            lvcTileItemsX42Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX42Tile.Text = "X42";
+            lvcTileItemsX42Tile.Width = 50;
             // 
-            // lvcTileItemsX43Treasure
+            // lvcTileItemsX43Tile
             // 
-            lvcTileItemsX43Treasure.AspectName = "X43Treasure";
-            lvcTileItemsX43Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX43Treasure.Text = "X43";
-            lvcTileItemsX43Treasure.Width = 50;
+            lvcTileItemsX43Tile.AspectName = "X43Tile";
+            lvcTileItemsX43Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX43Tile.Text = "X43";
+            lvcTileItemsX43Tile.Width = 50;
             // 
-            // lvcTileItemsX44Treasure
+            // lvcTileItemsX44Tile
             // 
-            lvcTileItemsX44Treasure.AspectName = "X44Treasure";
-            lvcTileItemsX44Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX44Treasure.Text = "X44";
-            lvcTileItemsX44Treasure.Width = 50;
+            lvcTileItemsX44Tile.AspectName = "X44Tile";
+            lvcTileItemsX44Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX44Tile.Text = "X44";
+            lvcTileItemsX44Tile.Width = 50;
             // 
-            // lvcTileItemsX45Treasure
+            // lvcTileItemsX45Tile
             // 
-            lvcTileItemsX45Treasure.AspectName = "X45Treasure";
-            lvcTileItemsX45Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX45Treasure.Text = "X45";
-            lvcTileItemsX45Treasure.Width = 50;
+            lvcTileItemsX45Tile.AspectName = "X45Tile";
+            lvcTileItemsX45Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX45Tile.Text = "X45";
+            lvcTileItemsX45Tile.Width = 50;
             // 
-            // lvcTileItemsX46Treasure
+            // lvcTileItemsX46Tile
             // 
-            lvcTileItemsX46Treasure.AspectName = "X46Treasure";
-            lvcTileItemsX46Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX46Treasure.Text = "X46";
-            lvcTileItemsX46Treasure.Width = 50;
+            lvcTileItemsX46Tile.AspectName = "X46Tile";
+            lvcTileItemsX46Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX46Tile.Text = "X46";
+            lvcTileItemsX46Tile.Width = 50;
             // 
-            // lvcTileItemsX47Treasure
+            // lvcTileItemsX47Tile
             // 
-            lvcTileItemsX47Treasure.AspectName = "X47Treasure";
-            lvcTileItemsX47Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX47Treasure.Text = "X47";
-            lvcTileItemsX47Treasure.Width = 50;
+            lvcTileItemsX47Tile.AspectName = "X47Tile";
+            lvcTileItemsX47Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX47Tile.Text = "X47";
+            lvcTileItemsX47Tile.Width = 50;
             // 
-            // lvcTileItemsX48Treasure
+            // lvcTileItemsX48Tile
             // 
-            lvcTileItemsX48Treasure.AspectName = "X48Treasure";
-            lvcTileItemsX48Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX48Treasure.Text = "X48";
-            lvcTileItemsX48Treasure.Width = 50;
+            lvcTileItemsX48Tile.AspectName = "X48Tile";
+            lvcTileItemsX48Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX48Tile.Text = "X48";
+            lvcTileItemsX48Tile.Width = 50;
             // 
-            // lvcTileItemsX49Treasure
+            // lvcTileItemsX49Tile
             // 
-            lvcTileItemsX49Treasure.AspectName = "X49Treasure";
-            lvcTileItemsX49Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX49Treasure.Text = "X49";
-            lvcTileItemsX49Treasure.Width = 50;
+            lvcTileItemsX49Tile.AspectName = "X49Tile";
+            lvcTileItemsX49Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX49Tile.Text = "X49";
+            lvcTileItemsX49Tile.Width = 50;
             // 
-            // lvcTileItemsX50Treasure
+            // lvcTileItemsX50Tile
             // 
-            lvcTileItemsX50Treasure.AspectName = "X50Treasure";
-            lvcTileItemsX50Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX50Treasure.Text = "X50";
-            lvcTileItemsX50Treasure.Width = 50;
+            lvcTileItemsX50Tile.AspectName = "X50Tile";
+            lvcTileItemsX50Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX50Tile.Text = "X50";
+            lvcTileItemsX50Tile.Width = 50;
             // 
-            // lvcTileItemsX51Treasure
+            // lvcTileItemsX51Tile
             // 
-            lvcTileItemsX51Treasure.AspectName = "X51Treasure";
-            lvcTileItemsX51Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX51Treasure.Text = "X51";
-            lvcTileItemsX51Treasure.Width = 50;
+            lvcTileItemsX51Tile.AspectName = "X51Tile";
+            lvcTileItemsX51Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX51Tile.Text = "X51";
+            lvcTileItemsX51Tile.Width = 50;
             // 
-            // lvcTileItemsX52Treasure
+            // lvcTileItemsX52Tile
             // 
-            lvcTileItemsX52Treasure.AspectName = "X52Treasure";
-            lvcTileItemsX52Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX52Treasure.Text = "X52";
-            lvcTileItemsX52Treasure.Width = 50;
+            lvcTileItemsX52Tile.AspectName = "X52Tile";
+            lvcTileItemsX52Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX52Tile.Text = "X52";
+            lvcTileItemsX52Tile.Width = 50;
             // 
-            // lvcTileItemsX53Treasure
+            // lvcTileItemsX53Tile
             // 
-            lvcTileItemsX53Treasure.AspectName = "X53Treasure";
-            lvcTileItemsX53Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX53Treasure.Text = "X53";
-            lvcTileItemsX53Treasure.Width = 50;
+            lvcTileItemsX53Tile.AspectName = "X53Tile";
+            lvcTileItemsX53Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX53Tile.Text = "X53";
+            lvcTileItemsX53Tile.Width = 50;
             // 
-            // lvcTileItemsX54Treasure
+            // lvcTileItemsX54Tile
             // 
-            lvcTileItemsX54Treasure.AspectName = "X54Treasure";
-            lvcTileItemsX54Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX54Treasure.Text = "X54";
-            lvcTileItemsX54Treasure.Width = 50;
+            lvcTileItemsX54Tile.AspectName = "X54Tile";
+            lvcTileItemsX54Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX54Tile.Text = "X54";
+            lvcTileItemsX54Tile.Width = 50;
             // 
-            // lvcTileItemsX55Treasure
+            // lvcTileItemsX55Tile
             // 
-            lvcTileItemsX55Treasure.AspectName = "X55Treasure";
-            lvcTileItemsX55Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX55Treasure.Text = "X55";
-            lvcTileItemsX55Treasure.Width = 50;
+            lvcTileItemsX55Tile.AspectName = "X55Tile";
+            lvcTileItemsX55Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX55Tile.Text = "X55";
+            lvcTileItemsX55Tile.Width = 50;
             // 
-            // lvcTileItemsX56Treasure
+            // lvcTileItemsX56Tile
             // 
-            lvcTileItemsX56Treasure.AspectName = "X56Treasure";
-            lvcTileItemsX56Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX56Treasure.Text = "X56";
-            lvcTileItemsX56Treasure.Width = 50;
+            lvcTileItemsX56Tile.AspectName = "X56Tile";
+            lvcTileItemsX56Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX56Tile.Text = "X56";
+            lvcTileItemsX56Tile.Width = 50;
             // 
-            // lvcTileItemsX57Treasure
+            // lvcTileItemsX57Tile
             // 
-            lvcTileItemsX57Treasure.AspectName = "X57Treasure";
-            lvcTileItemsX57Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX57Treasure.Text = "X57";
-            lvcTileItemsX57Treasure.Width = 50;
+            lvcTileItemsX57Tile.AspectName = "X57Tile";
+            lvcTileItemsX57Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX57Tile.Text = "X57";
+            lvcTileItemsX57Tile.Width = 50;
             // 
-            // lvcTileItemsX58Treasure
+            // lvcTileItemsX58Tile
             // 
-            lvcTileItemsX58Treasure.AspectName = "X58Treasure";
-            lvcTileItemsX58Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX58Treasure.Text = "X58";
-            lvcTileItemsX58Treasure.Width = 50;
+            lvcTileItemsX58Tile.AspectName = "X58Tile";
+            lvcTileItemsX58Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX58Tile.Text = "X58";
+            lvcTileItemsX58Tile.Width = 50;
             // 
-            // lvcTileItemsX59Treasure
+            // lvcTileItemsX59Tile
             // 
-            lvcTileItemsX59Treasure.AspectName = "X59Treasure";
-            lvcTileItemsX59Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX59Treasure.Text = "X59";
-            lvcTileItemsX59Treasure.Width = 50;
+            lvcTileItemsX59Tile.AspectName = "X59Tile";
+            lvcTileItemsX59Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX59Tile.Text = "X59";
+            lvcTileItemsX59Tile.Width = 50;
             // 
-            // lvcTileItemsX60Treasure
+            // lvcTileItemsX60Tile
             // 
-            lvcTileItemsX60Treasure.AspectName = "X60Treasure";
-            lvcTileItemsX60Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX60Treasure.Text = "X60";
-            lvcTileItemsX60Treasure.Width = 50;
+            lvcTileItemsX60Tile.AspectName = "X60Tile";
+            lvcTileItemsX60Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX60Tile.Text = "X60";
+            lvcTileItemsX60Tile.Width = 50;
             // 
-            // lvcTileItemsX61Treasure
+            // lvcTileItemsX61Tile
             // 
-            lvcTileItemsX61Treasure.AspectName = "X61Treasure";
-            lvcTileItemsX61Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX61Treasure.Text = "X61";
-            lvcTileItemsX61Treasure.Width = 50;
+            lvcTileItemsX61Tile.AspectName = "X61Tile";
+            lvcTileItemsX61Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX61Tile.Text = "X61";
+            lvcTileItemsX61Tile.Width = 50;
             // 
-            // lvcTileItemsX62Treasure
+            // lvcTileItemsX62Tile
             // 
-            lvcTileItemsX62Treasure.AspectName = "X62Treasure";
-            lvcTileItemsX62Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX62Treasure.Text = "X62";
-            lvcTileItemsX62Treasure.Width = 50;
+            lvcTileItemsX62Tile.AspectName = "X62Tile";
+            lvcTileItemsX62Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX62Tile.Text = "X62";
+            lvcTileItemsX62Tile.Width = 50;
             // 
-            // lvcTileItemsX63Treasure
+            // lvcTileItemsX63Tile
             // 
-            lvcTileItemsX63Treasure.AspectName = "X63Treasure";
-            lvcTileItemsX63Treasure.AspectToStringFormat = "{0:X}";
-            lvcTileItemsX63Treasure.Text = "X63";
-            lvcTileItemsX63Treasure.Width = 50;
+            lvcTileItemsX63Tile.AspectName = "X63Tile";
+            lvcTileItemsX63Tile.AspectToStringFormat = "{0:X}";
+            lvcTileItemsX63Tile.Text = "X63";
+            lvcTileItemsX63Tile.Width = 50;
             // 
             // tabMain
             // 
@@ -3377,7 +3377,6 @@ namespace SF3.MPD_Editor.Forms {
         private BrightIdeasSoftware.ObjectListView olvTileItems;
         private BrightIdeasSoftware.OLVColumn lvcTileItemsName;
         private BrightIdeasSoftware.OLVColumn lvcTileItemsAddress;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX0Treasure;
         private System.Windows.Forms.TabControl tabMain;
         private BrightIdeasSoftware.ObjectListView olvTileHeightTerrain;
         private BrightIdeasSoftware.OLVColumn lvcTileHeightTerrain;
@@ -3386,9 +3385,6 @@ namespace SF3.MPD_Editor.Forms {
         private BrightIdeasSoftware.OLVColumn lvcTileHeightTerrainX1Tile;
         private BrightIdeasSoftware.OLVColumn lvcTileHeightTerrainX2Tile;
         private BrightIdeasSoftware.OLVColumn lvcTileHeightTerrainX3Tile;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX1Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX2Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX3Treasure;
         private BrightIdeasSoftware.OLVColumn lvcTileHeightTerrainX4Tile;
         private BrightIdeasSoftware.OLVColumn lvcTileHeightTerrainX5Tile;
         private BrightIdeasSoftware.OLVColumn lvcTileHeightTerrainX6Tile;
@@ -3449,66 +3445,70 @@ namespace SF3.MPD_Editor.Forms {
         private BrightIdeasSoftware.OLVColumn lvcTileHeightTerrainX61Tile;
         private BrightIdeasSoftware.OLVColumn lvcTileHeightTerrainX62Tile;
         private BrightIdeasSoftware.OLVColumn lvcTileHeightTerrainX63Tile;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX4Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX5Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX6Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX7Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX8Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX9Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX10Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX11Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX12Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX13Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX14Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX15Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX16Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX17Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX18Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX19Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX20Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX21Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX22Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX23Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX24Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX25Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX26Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX27Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX28Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX29Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX30Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX31Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX32Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX33Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX34Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX35Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX36Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX37Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX38Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX39Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX40Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX41Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX42Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX43Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX44Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX45Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX46Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX47Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX48Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX49Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX50Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX51Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX52Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX53Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX54Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX55Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX56Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX57Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX58Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX59Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX60Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX61Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX62Treasure;
-        private BrightIdeasSoftware.OLVColumn lvcTileItemsX63Treasure;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX0Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX1Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX2Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX3Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX4Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX5Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX6Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX7Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX8Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX9Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX10Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX11Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX12Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX13Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX14Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX15Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX16Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX17Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX18Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX19Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX20Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX21Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX22Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX23Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX24Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX25Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX26Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX27Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX28Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX29Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX30Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX31Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX32Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX33Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX34Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX35Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX36Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX37Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX38Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX39Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX40Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX41Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX42Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX43Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX44Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX45Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX46Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX47Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX48Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX49Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX50Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX51Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX52Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX53Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX54Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX55Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX56Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX57Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX58Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX59Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX60Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX61Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX62Tile;
+        private BrightIdeasSoftware.OLVColumn lvcTileItemsX63Tile;
         private System.Windows.Forms.TabPage tabHeader;
         private System.Windows.Forms.TabPage tabTileHeightTerrain;
         private BrightIdeasSoftware.ObjectListView olvHeader;
