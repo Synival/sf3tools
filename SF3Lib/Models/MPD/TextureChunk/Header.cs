@@ -1,4 +1,5 @@
 ﻿using CommonLib.Attributes;
+using SF3.BulkOperations;
 using SF3.RawEditors;
 
 namespace SF3.Models.MPD.TextureChunk {
@@ -13,12 +14,14 @@ namespace SF3.Models.MPD.TextureChunk {
         }
 
         [BulkCopy]
+        [DataMetadata(displayName: "# Textures", displayOrder: 0)]
         public int NumTextures {
             get => Editor.GetWord(numTexturesAddress);
             set => Editor.SetWord(numTexturesAddress, value);
         }
 
         [BulkCopy]
+        [DataMetadata(displayName: "Texture ID Start", displayOrder: 1, displayFormat: "X2")]
         public int TextureIdStart {
             get => Editor.GetWord(textureIdStartAddress);
             set => Editor.SetWord(textureIdStartAddress, value);

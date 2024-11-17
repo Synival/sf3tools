@@ -1,5 +1,6 @@
 ﻿using System;
 using CommonLib.Attributes;
+using SF3.BulkOperations;
 using SF3.RawEditors;
 using SF3.Types;
 
@@ -62,9 +63,8 @@ namespace SF3.Models.MPD.TextureChunk {
             }
         }
 
-        public TexturePixelFormat AssumedPixelFormat { get; }
-
         [BulkCopy]
+        [DataMetadata(displayOrder: 0)]
         public int Width {
             get => Editor.GetByte(widthAddress);
             set {
@@ -74,6 +74,7 @@ namespace SF3.Models.MPD.TextureChunk {
         }
 
         [BulkCopy]
+        [DataMetadata(displayOrder: 1)]
         public int Height {
             get => Editor.GetByte(heightAddress);
             set {
@@ -83,6 +84,7 @@ namespace SF3.Models.MPD.TextureChunk {
         }
 
         [BulkCopy]
+        [DataMetadata(displayOrder: 2, displayFormat: "X4")]
         public int ImageDataOffset {
             get => Editor.GetWord(imageDataOffsetAddress);
             set {
@@ -90,6 +92,9 @@ namespace SF3.Models.MPD.TextureChunk {
                 UpdateImageData();
             }
         }
+
+        [DataMetadata(displayName: "(Assumed) Pixel Format", displayOrder: 3)]
+        public TexturePixelFormat AssumedPixelFormat { get; }
 
         public ushort[,] ImageData16Bit {
             protected get {
