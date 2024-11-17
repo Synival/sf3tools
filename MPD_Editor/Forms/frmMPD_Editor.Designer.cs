@@ -3211,7 +3211,7 @@ namespace SF3.MPD_Editor.Forms {
             // 
             textureChunkControl1.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             textureChunkControl1.BackColor = System.Drawing.Color.Transparent;
-            textureChunkControl1.Location = new System.Drawing.Point(-5, 0);
+            textureChunkControl1.Location = new System.Drawing.Point(-4, 1);
             textureChunkControl1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             textureChunkControl1.Name = "textureChunkControl1";
             textureChunkControl1.Size = new System.Drawing.Size(891, 558);
@@ -3232,7 +3232,7 @@ namespace SF3.MPD_Editor.Forms {
             // 
             textureChunkControl2.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             textureChunkControl2.BackColor = System.Drawing.Color.Transparent;
-            textureChunkControl2.Location = new System.Drawing.Point(-5, 0);
+            textureChunkControl2.Location = new System.Drawing.Point(-4, 1);
             textureChunkControl2.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             textureChunkControl2.Name = "textureChunkControl2";
             textureChunkControl2.Size = new System.Drawing.Size(891, 558);
@@ -3253,7 +3253,7 @@ namespace SF3.MPD_Editor.Forms {
             // 
             textureChunkControl3.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             textureChunkControl3.BackColor = System.Drawing.Color.Transparent;
-            textureChunkControl3.Location = new System.Drawing.Point(-5, 0);
+            textureChunkControl3.Location = new System.Drawing.Point(-4, 1);
             textureChunkControl3.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             textureChunkControl3.Name = "textureChunkControl3";
             textureChunkControl3.Size = new System.Drawing.Size(891, 558);
@@ -3274,7 +3274,7 @@ namespace SF3.MPD_Editor.Forms {
             // 
             textureChunkControl4.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             textureChunkControl4.BackColor = System.Drawing.Color.Transparent;
-            textureChunkControl4.Location = new System.Drawing.Point(-5, 0);
+            textureChunkControl4.Location = new System.Drawing.Point(-4, 1);
             textureChunkControl4.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             textureChunkControl4.Name = "textureChunkControl4";
             textureChunkControl4.Size = new System.Drawing.Size(891, 558);
@@ -3295,7 +3295,7 @@ namespace SF3.MPD_Editor.Forms {
             // 
             textureChunkControl5.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             textureChunkControl5.BackColor = System.Drawing.Color.Transparent;
-            textureChunkControl5.Location = new System.Drawing.Point(-5, 0);
+            textureChunkControl5.Location = new System.Drawing.Point(-4, 1);
             textureChunkControl5.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             textureChunkControl5.Name = "textureChunkControl5";
             textureChunkControl5.Size = new System.Drawing.Size(891, 558);
