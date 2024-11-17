@@ -63,11 +63,7 @@ namespace SF3Editor {
                 else
                     lvc.AspectToStringFormat = "";
 
-                var headerTextWidth = TextRenderer.MeasureText(lvc.Text, DefaultFont).Width + 8;
-                var aspectTextSample = string.Format(lvc.AspectToStringFormat, 0);
-                var aspectTextWidth = TextRenderer.MeasureText(aspectTextSample, hexFont).Width + 4;
-                lvc.Width = Math.Max(Math.Max(headerTextWidth, aspectTextWidth), attr.MinWidth);
-
+                lvc.Width = Math.Max(30, attr.MinWidth);
                 lvcColumns.Add(lvc);
             }
 

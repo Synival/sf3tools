@@ -57,10 +57,19 @@ namespace SF3.Win.Extensions {
         /// <param name="olv">The ObjectListView to enhance.</param>
         /// <param name="fileEditorFetcher">The function that fetchers the current FileLoader associated for this ObjectListView.</param>
         public static void Enhance(this ObjectListView olv, EditorFetcher fileEditorFetcher) {
+            var hexFont = new Font("Courier New", Control.DefaultFont.Size);
+
             // Make sure the column can fit its text.
             foreach (var lvc in olv.AllColumns) {
-                var minWidth = TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width + 8;
-                lvc.Width = Math.Max(minWidth, lvc.Width);
+                if (lvc.HeaderFont == null)
+                    lvc.HeaderFont = new Font(Control.DefaultFont, !lvc.IsEditable ? FontStyle.Italic : FontStyle.Regular);
+                else if (!lvc.IsEditable)
+                    lvc.HeaderFont = new Font(lvc.HeaderFont, !lvc.IsEditable ? FontStyle.Italic : FontStyle.Regular);
+
+                var headerTextWidth = TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width + 8;
+                var aspectTextSample = string.Format(lvc.AspectToStringFormat ?? "", 0);
+                var aspectTextWidth = TextRenderer.MeasureText(aspectTextSample, hexFont).Width + 4;
+                lvc.Width = Math.Max(Math.Max(headerTextWidth, aspectTextWidth), lvc.Width);
             }
 
             olv.SetEditorFetcher(fileEditorFetcher);
