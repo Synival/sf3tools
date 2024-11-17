@@ -1,4 +1,5 @@
 using CommonLib.Attributes;
+using SF3.BulkOperations;
 using SF3.RawEditors;
 
 namespace SF3.Models {
@@ -14,9 +15,15 @@ namespace SF3.Models {
         public IRawEditor Editor { get; protected set; }
 
         [BulkCopyRowName]
+        [DataMetadata(displayOrder: -1)]
         public string Name { get; protected set; }
+
+        [DataMetadata(intDisplayMode: IntDisplayMode.Hex, displayOrder: -3)]
         public int ID { get; protected set; }
+
+        [DataMetadata(displayName: "Address", displayOrder: -2, intDisplayMode: IntDisplayMode.Hex, displayFormat: "{0:X4}")]
         public int Address { get; protected set; }
+
         public int Size { get; protected set; }
     }
 }
