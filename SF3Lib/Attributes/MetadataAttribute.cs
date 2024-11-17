@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SF3.BulkOperations {
+namespace SF3.Attributes {
     public enum EditorCapabilities {
         Hidden,
         Auto
@@ -11,8 +11,8 @@ namespace SF3.BulkOperations {
         Hex
     }
 
-    public class DataMetadataAttribute : Attribute {
-        public DataMetadataAttribute(
+    public class MetadataAttribute : Attribute {
+        public MetadataAttribute(
             EditorCapabilities editorCapabilities = EditorCapabilities.Auto,
             string displayName = null,
             int displayOrder = 0,

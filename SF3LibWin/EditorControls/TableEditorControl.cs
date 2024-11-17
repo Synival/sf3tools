@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
-using SF3.BulkOperations;
+using SF3.Attributes;
 using SF3.Tables;
 using SF3.Tables.MPD;
 using SF3.Win.Extensions;
@@ -28,10 +28,10 @@ namespace SF3.Win.EditorControls {
                 .ToList();
 
             var props = columnProperties
-                .Select(x => new { Property = x, Attributes = x.GetCustomAttributes(typeof(DataMetadataAttribute), true) })
+                .Select(x => new { Property = x, Attributes = x.GetCustomAttributes(typeof(MetadataAttribute), true) })
                 .Where(x => x.Attributes.Length == 1)
-                .OrderBy(x => ((DataMetadataAttribute) x.Attributes[0]).DisplayOrder)
-                .ToDictionary(x => x.Property, x => (DataMetadataAttribute) x.Attributes[0]);
+                .OrderBy(x => ((MetadataAttribute) x.Attributes[0]).DisplayOrder)
+                .ToDictionary(x => x.Property, x => (MetadataAttribute) x.Attributes[0]);
 
             var lvcColumns = new List<OLVColumn>();
             Font hexFont = null;

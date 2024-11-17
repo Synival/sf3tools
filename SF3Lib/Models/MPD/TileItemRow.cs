@@ -1,4 +1,4 @@
-using SF3.BulkOperations;
+using SF3.Attributes;
 using SF3.RawEditors;
 
 namespace SF3.Models.MPD {
@@ -11,7 +11,7 @@ namespace SF3.Models.MPD {
                 xAddress[i] = Address + i;
         }
 
-        private class TileMetadataAttribute : DataMetadataAttribute {
+        private class TileMetadataAttribute : MetadataAttribute {
             public TileMetadataAttribute(int x) : base(displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X2") { }
         }
 
