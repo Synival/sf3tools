@@ -26,25 +26,33 @@ namespace SF3.Win.Extensions {
         /// Renderer that will display hex values will a special font.
         /// </summary>
         private class HexRenderer : BaseRenderer {
-            public static Font HexFont { get; private set; }
-            private static bool _useHexFont = false;
+            public static readonly Font _defaultFont = Control.DefaultFont;
+            public static readonly Font _hexFont = new Font("Courier New", Control.DefaultFont.Size);
+            public static readonly Color _darkGray = Color.FromArgb(96, 96, 96);
 
-            public HexRenderer() {
-            }
+            private Font _currentRenderFont = Control.DefaultFont;
+            private Color _currentRenderColor = Color.Black;
+
+            public static Font GetCellFont(string formatString)
+                => formatString.StartsWith("{0:X") ? _hexFont : _defaultFont;
 
             public override bool RenderSubItem(DrawListViewSubItemEventArgs e, Graphics g, Rectangle cellBounds, object rowObject) {
                 var lvc = ((ObjectListView) e.Item.ListView).GetColumn(e.ColumnIndex);
                 _ = lvc.AspectGetter(rowObject);
-                _useHexFont = lvc.AspectToStringConverter == null && (lvc.AspectToStringFormat?.StartsWith("{0:X") == true);
+
+                // If an AspectToStringConverter was supplied, this is probably a named value. Just use the default font.
+                var formatString = (lvc.AspectToStringConverter == null) ? (lvc.AspectToStringFormat ?? "") : "";
+                _currentRenderFont = GetCellFont(formatString);
+                _currentRenderColor = lvc.IsEditable ? Color.Black : _darkGray;
+
                 return base.RenderSubItem(e, g, cellBounds, rowObject);
             }
 
+            protected override Color GetForegroundColor()
+                => _currentRenderColor;
+
             public override void Render(Graphics g, Rectangle r) {
-                if (_useHexFont) {
-                    if (HexFont == null)
-                        HexFont = new Font("Courier New", Font.Size);
-                    this.Font = HexFont;
-                }
+                Font = _currentRenderFont;
                 base.Render(g, r);
             }
         }
@@ -141,13 +149,32 @@ namespace SF3.Win.Extensions {
                     e.Column.PutValue(e.RowObject, cb.SelectedValue);
                     olv.RefreshItem(e.ListViewItem);
                 };
+
+                // Auto-expand the ComboBox when opened.
+                // This needs to happen at a specific point: when the data is populated, and the correct item is selected.
+                // Normally we can wait for a SelectedIndexChanged event, but if the selected index is changed to 0,
+                // no change took place and the event will not trigger. In that case, just trigger on GotFocus.
+                if ((int) e.Value != 0) {
+                    void selectedIndexChangedFunc(object sender, EventArgs args) {
+                        cb.DroppedDown = true;
+                        cb.SelectedIndexChanged -= selectedIndexChangedFunc;
+                    };
+                    cb.SelectedIndexChanged += selectedIndexChangedFunc;
+                }
+                else {
+                    void selectedIndexChangedFunc(object sender, EventArgs args) {
+                        cb.DroppedDown = true;
+                        cb.GotFocus -= selectedIndexChangedFunc;
+                    };
+                    cb.GotFocus += selectedIndexChangedFunc;
+                }
             }
             else if (e.Control is NumericUpDown control) {
+                control.Font = HexRenderer.GetCellFont(e.Column.AspectToStringFormat ?? "");
+
                 // Ensure that strings displayed in hex format are edited in hex format.
-                if (e.Column.AspectToStringFormat?.StartsWith("{0:X") == true) {
-                    control.Font = HexRenderer.HexFont;
+                if (e.Column.AspectToStringFormat?.StartsWith("{0:X") == true)
                     control.Hexadecimal = true;
-                }
             }
         }
 
