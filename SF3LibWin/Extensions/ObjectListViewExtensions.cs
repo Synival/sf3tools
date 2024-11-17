@@ -42,7 +42,7 @@ namespace SF3.Win.Extensions {
             public override void Render(Graphics g, Rectangle r) {
                 if (_useHexFont) {
                     if (HexFont == null)
-                        HexFont = new Font("Lucida Sans Typewriter", Font.Size);
+                        HexFont = new Font("Courier New", Font.Size);
                     this.Font = HexFont;
                 }
                 base.Render(g, r);
@@ -59,7 +59,7 @@ namespace SF3.Win.Extensions {
         public static void Enhance(this ObjectListView olv, EditorFetcher fileEditorFetcher) {
             // Make sure the column can fit its text.
             foreach (var lvc in olv.AllColumns) {
-                var minWidth = TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width;
+                var minWidth = TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width + 8;
                 lvc.Width = Math.Max(minWidth, lvc.Width);
             }
 
