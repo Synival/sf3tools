@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
-using SF3.Editors;
+using CommonLib.NamedValues;
 using static SF3.Win.Utils.ControlUtils;
 
 namespace SF3.Win.Extensions {
@@ -55,8 +55,16 @@ namespace SF3.Win.Extensions {
         /// Applies some neat extensions to the ObjectListView.
         /// </summary>
         /// <param name="olv">The ObjectListView to enhance.</param>
-        /// <param name="fileEditorFetcher">The function that fetchers the current FileLoader associated for this ObjectListView.</param>
-        public static void Enhance(this ObjectListView olv, EditorFetcher fileEditorFetcher) {
+        /// <param name="nameGetterContext">Name getter context used for display and editing named values.</param>
+        public static void Enhance(this ObjectListView olv, INameGetterContext nameGetterContext)
+            => Enhance(olv, () => nameGetterContext);
+
+        /// <summary>
+        /// Applies some neat extensions to the ObjectListView.
+        /// </summary>
+        /// <param name="olv">The ObjectListView to enhance.</param>
+        /// <param name="nameGetterContextFetcher">Callback function for getting the NameGetterContext associated for this ObjectListView.</param>
+        public static void Enhance(this ObjectListView olv, NameGetterContextFetcher nameGetterContextFetcher) {
             var hexFont = new Font("Courier New", Control.DefaultFont.Size);
 
             // Make sure the column can fit its text.
@@ -72,7 +80,7 @@ namespace SF3.Win.Extensions {
                 lvc.Width = Math.Max(Math.Max(headerTextWidth, aspectTextWidth), lvc.Width);
             }
 
-            olv.SetEditorFetcher(fileEditorFetcher);
+            olv.SetNameGetterContextFetcher(nameGetterContextFetcher);
             olv.OwnerDraw = true;
             olv.DefaultRenderer = GlobalHexRenderer;
             olv.CellEditStarting += (s, e) => olv.EnhanceOlvCellEditControl(e);
@@ -98,7 +106,7 @@ namespace SF3.Win.Extensions {
             lvc.AspectGetter = obj => {
                 AspectToStringConverterDelegate converter = null;
 
-                var nameContext = ((ObjectListView) lvc.ListView).GetEditor()?.NameGetterContext;
+                var nameContext = ((ObjectListView) lvc.ListView).GetNameGetterContext();
                 if (nameContext != null) {
                     var property = obj.GetType().GetProperty(lvc.AspectName);
                     if (property != null) {
@@ -154,7 +162,7 @@ namespace SF3.Win.Extensions {
         /// <returns>The control to use when editing - a ComboBox for named values, otherwise the return value of 'oldDelegate'.</returns>
         private static Control NamedValueEditorCreator(object obj, OLVColumn model, object value, EditorCreatorDelegate oldDelegate) {
             if (Globals.UseDropdowns) {
-                var nameContext = ((ObjectListView) model.ListView).GetEditor()?.NameGetterContext;
+                var nameContext = ((ObjectListView) model.ListView).GetNameGetterContext();
                 if (nameContext != null) {
                     var property = obj.GetType().GetProperty(model.AspectName);
                     if (property != null) {
@@ -212,16 +220,16 @@ namespace SF3.Win.Extensions {
             }
         }
 
-        public delegate IBaseEditor EditorFetcher();
-        private static Dictionary<ObjectListView, EditorFetcher> _olvEditorFetchers = new Dictionary<ObjectListView, EditorFetcher>();
+        public delegate INameGetterContext NameGetterContextFetcher();
+        private static Dictionary<ObjectListView, NameGetterContextFetcher> _olvNameGetterContextFetchers = new Dictionary<ObjectListView, NameGetterContextFetcher>();
 
-        public static void SetEditorFetcher(this ObjectListView olv, EditorFetcher fetcher)
-            => _olvEditorFetchers[olv] = fetcher;
+        public static void SetNameGetterContextFetcher(this ObjectListView olv, NameGetterContextFetcher fetcher)
+            => _olvNameGetterContextFetchers[olv] = fetcher;
 
-        public static EditorFetcher GetEditorFetcher(this ObjectListView olv)
-            => _olvEditorFetchers.TryGetValue(olv, out EditorFetcher fetcher) ? fetcher : null;
+        public static NameGetterContextFetcher GetNameGetterContextFetcher(this ObjectListView olv)
+            => _olvNameGetterContextFetchers.TryGetValue(olv, out NameGetterContextFetcher fetcher) ? fetcher : null;
 
-        public static IBaseEditor GetEditor(this ObjectListView olv)
-            => (olv.GetEditorFetcher() is var fetcher) ? fetcher() : null;
+        public static INameGetterContext GetNameGetterContext(this ObjectListView olv)
+            => (olv.GetNameGetterContextFetcher() is var fetcher) ? fetcher() : null;
     }
 }

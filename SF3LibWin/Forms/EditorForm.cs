@@ -119,7 +119,7 @@ namespace SF3.Win.Forms {
                 ObjectListViews.AddRange(extraOLVs);
 
             foreach (var olv in ObjectListViews)
-                olv.Enhance(() => FileLoader.Editor);
+                olv.Enhance(() => FileLoader.Editor?.NameGetterContext);
 
             UpdateTitle();
         }
