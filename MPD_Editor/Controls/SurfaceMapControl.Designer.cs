@@ -23,21 +23,19 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SurfaceMapControl));
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // SurfaceMapControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.MaximumSize = new System.Drawing.Size(1024, 1024);
-            this.MinimumSize = new System.Drawing.Size(1024, 1024);
-            this.Name = "SurfaceMapControl";
-            this.Size = new System.Drawing.Size(1024, 1024);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.Color.FromArgb(  64,   64,   64);
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            MaximumSize = new System.Drawing.Size(1195, 1182);
+            MinimumSize = new System.Drawing.Size(1195, 1182);
+            Name = "SurfaceMapControl";
+            Size = new System.Drawing.Size(1195, 1182);
+            ResumeLayout(false);
         }
 
         #endregion

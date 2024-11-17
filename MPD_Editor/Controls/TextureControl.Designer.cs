@@ -23,16 +23,17 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // TextureControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
-            this.Name = "TextureControl";
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.Color.Transparent;
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "TextureControl";
+            Size = new System.Drawing.Size(175, 173);
+            ResumeLayout(false);
         }
 
         #endregion

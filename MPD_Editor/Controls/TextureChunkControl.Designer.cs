@@ -23,237 +23,223 @@ namespace SF3.X1_Editor.Controls {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.tabHeader = new System.Windows.Forms.TabPage();
-            this.olvHeader = new BrightIdeasSoftware.ObjectListView();
-            this.lvcHeaderName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcHeaderAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcHeaderNumTextures = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcHeaderTextureIdStart = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabMain = new System.Windows.Forms.TabControl();
-            this.tabTextures = new System.Windows.Forms.TabPage();
-            this.olvTextures = new BrightIdeasSoftware.ObjectListView();
-            this.lvcTexturesID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTexturesName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTexturesAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTexturesWidth = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTexturesHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcTexturesImageDataOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
-            this.highlightTextRenderer2 = new BrightIdeasSoftware.HighlightTextRenderer();
-            this.lvcTexturesAssumedPixelFormat = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.textureControl = new SF3.MPDEditor.Controls.TextureControl();
-            this.tabHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).BeginInit();
-            this.tabMain.SuspendLayout();
-            this.tabTextures.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvTextures)).BeginInit();
-            this.SuspendLayout();
+            tabHeader = new System.Windows.Forms.TabPage();
+            olvHeader = new BrightIdeasSoftware.ObjectListView();
+            lvcHeaderName = new BrightIdeasSoftware.OLVColumn();
+            lvcHeaderAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcHeaderNumTextures = new BrightIdeasSoftware.OLVColumn();
+            lvcHeaderTextureIdStart = new BrightIdeasSoftware.OLVColumn();
+            tabMain = new System.Windows.Forms.TabControl();
+            tabTextures = new System.Windows.Forms.TabPage();
+            textureControl = new MPDEditor.Controls.TextureControl();
+            olvTextures = new BrightIdeasSoftware.ObjectListView();
+            lvcTexturesID = new BrightIdeasSoftware.OLVColumn();
+            lvcTexturesName = new BrightIdeasSoftware.OLVColumn();
+            lvcTexturesAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcTexturesWidth = new BrightIdeasSoftware.OLVColumn();
+            lvcTexturesHeight = new BrightIdeasSoftware.OLVColumn();
+            lvcTexturesImageDataOffset = new BrightIdeasSoftware.OLVColumn();
+            lvcTexturesAssumedPixelFormat = new BrightIdeasSoftware.OLVColumn();
+            highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
+            highlightTextRenderer2 = new BrightIdeasSoftware.HighlightTextRenderer();
+            tabHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvHeader).BeginInit();
+            tabMain.SuspendLayout();
+            tabTextures.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvTextures).BeginInit();
+            SuspendLayout();
             // 
             // tabHeader
             // 
-            this.tabHeader.Controls.Add(this.olvHeader);
-            this.tabHeader.Location = new System.Drawing.Point(4, 22);
-            this.tabHeader.Name = "tabHeader";
-            this.tabHeader.Size = new System.Drawing.Size(909, 508);
-            this.tabHeader.TabIndex = 3;
-            this.tabHeader.Text = "Header";
-            this.tabHeader.UseVisualStyleBackColor = true;
+            tabHeader.Controls.Add(olvHeader);
+            tabHeader.Location = new System.Drawing.Point(4, 24);
+            tabHeader.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabHeader.Name = "tabHeader";
+            tabHeader.Size = new System.Drawing.Size(1062, 588);
+            tabHeader.TabIndex = 3;
+            tabHeader.Text = "Header";
+            tabHeader.UseVisualStyleBackColor = true;
             // 
             // olvHeader
             // 
-            this.olvHeader.AllColumns.Add(this.lvcHeaderName);
-            this.olvHeader.AllColumns.Add(this.lvcHeaderAddress);
-            this.olvHeader.AllColumns.Add(this.lvcHeaderNumTextures);
-            this.olvHeader.AllColumns.Add(this.lvcHeaderTextureIdStart);
-            this.olvHeader.AllowColumnReorder = true;
-            this.olvHeader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvHeader.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvHeader.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcHeaderName,
-            this.lvcHeaderAddress,
-            this.lvcHeaderNumTextures,
-            this.lvcHeaderTextureIdStart});
-            this.olvHeader.FullRowSelect = true;
-            this.olvHeader.GridLines = true;
-            this.olvHeader.HasCollapsibleGroups = false;
-            this.olvHeader.HideSelection = false;
-            this.olvHeader.Location = new System.Drawing.Point(3, 3);
-            this.olvHeader.MenuLabelGroupBy = "";
-            this.olvHeader.Name = "olvHeader";
-            this.olvHeader.ShowGroups = false;
-            this.olvHeader.Size = new System.Drawing.Size(903, 502);
-            this.olvHeader.TabIndex = 0;
-            this.olvHeader.UseAlternatingBackColors = true;
-            this.olvHeader.UseCompatibleStateImageBehavior = false;
-            this.olvHeader.View = System.Windows.Forms.View.Details;
+            olvHeader.AllColumns.Add(lvcHeaderName);
+            olvHeader.AllColumns.Add(lvcHeaderAddress);
+            olvHeader.AllColumns.Add(lvcHeaderNumTextures);
+            olvHeader.AllColumns.Add(lvcHeaderTextureIdStart);
+            olvHeader.AllowColumnReorder = true;
+            olvHeader.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvHeader.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvHeader.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcHeaderName, lvcHeaderAddress, lvcHeaderNumTextures, lvcHeaderTextureIdStart });
+            olvHeader.FullRowSelect = true;
+            olvHeader.GridLines = true;
+            olvHeader.HasCollapsibleGroups = false;
+            olvHeader.Location = new System.Drawing.Point(4, 3);
+            olvHeader.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvHeader.MenuLabelGroupBy = "";
+            olvHeader.Name = "olvHeader";
+            olvHeader.ShowGroups = false;
+            olvHeader.Size = new System.Drawing.Size(1053, 579);
+            olvHeader.TabIndex = 0;
+            olvHeader.UseAlternatingBackColors = true;
+            olvHeader.UseCompatibleStateImageBehavior = false;
+            olvHeader.View = System.Windows.Forms.View.Details;
             // 
             // lvcHeaderName
             // 
-            this.lvcHeaderName.AspectName = "Name";
-            this.lvcHeaderName.IsEditable = false;
-            this.lvcHeaderName.Text = "Name";
+            lvcHeaderName.AspectName = "Name";
+            lvcHeaderName.IsEditable = false;
+            lvcHeaderName.Text = "Name";
             // 
             // lvcHeaderAddress
             // 
-            this.lvcHeaderAddress.AspectName = "Address";
-            this.lvcHeaderAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcHeaderAddress.IsEditable = false;
-            this.lvcHeaderAddress.Text = "Address";
+            lvcHeaderAddress.AspectName = "Address";
+            lvcHeaderAddress.AspectToStringFormat = "{0:X4}";
+            lvcHeaderAddress.IsEditable = false;
+            lvcHeaderAddress.Text = "Address";
             // 
             // lvcHeaderNumTextures
             // 
-            this.lvcHeaderNumTextures.AspectName = "NumTextures";
-            this.lvcHeaderNumTextures.Text = "# Textures";
-            this.lvcHeaderNumTextures.Width = 65;
+            lvcHeaderNumTextures.AspectName = "NumTextures";
+            lvcHeaderNumTextures.Text = "# Textures";
+            lvcHeaderNumTextures.Width = 65;
             // 
             // lvcHeaderTextureIdStart
             // 
-            this.lvcHeaderTextureIdStart.AspectName = "TextureIdStart";
-            this.lvcHeaderTextureIdStart.AspectToStringFormat = "{0:X2}";
-            this.lvcHeaderTextureIdStart.Text = "Texture ID Start";
-            this.lvcHeaderTextureIdStart.Width = 90;
+            lvcHeaderTextureIdStart.AspectName = "TextureIdStart";
+            lvcHeaderTextureIdStart.AspectToStringFormat = "{0:X2}";
+            lvcHeaderTextureIdStart.Text = "Texture ID Start";
+            lvcHeaderTextureIdStart.Width = 90;
             // 
             // tabMain
             // 
-            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabMain.Controls.Add(this.tabHeader);
-            this.tabMain.Controls.Add(this.tabTextures);
-            this.tabMain.Location = new System.Drawing.Point(0, 0);
-            this.tabMain.Margin = new System.Windows.Forms.Padding(0);
-            this.tabMain.Name = "tabMain";
-            this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(917, 534);
-            this.tabMain.TabIndex = 0;
+            tabMain.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tabMain.Controls.Add(tabHeader);
+            tabMain.Controls.Add(tabTextures);
+            tabMain.Location = new System.Drawing.Point(0, 0);
+            tabMain.Margin = new System.Windows.Forms.Padding(0);
+            tabMain.Name = "tabMain";
+            tabMain.SelectedIndex = 0;
+            tabMain.Size = new System.Drawing.Size(1070, 616);
+            tabMain.TabIndex = 0;
             // 
             // tabTextures
             // 
-            this.tabTextures.Controls.Add(this.textureControl);
-            this.tabTextures.Controls.Add(this.olvTextures);
-            this.tabTextures.Location = new System.Drawing.Point(4, 22);
-            this.tabTextures.Name = "tabTextures";
-            this.tabTextures.Size = new System.Drawing.Size(909, 508);
-            this.tabTextures.TabIndex = 4;
-            this.tabTextures.Text = "Textures";
-            this.tabTextures.UseVisualStyleBackColor = true;
-            // 
-            // olvTextures
-            // 
-            this.olvTextures.AllColumns.Add(this.lvcTexturesID);
-            this.olvTextures.AllColumns.Add(this.lvcTexturesName);
-            this.olvTextures.AllColumns.Add(this.lvcTexturesAddress);
-            this.olvTextures.AllColumns.Add(this.lvcTexturesWidth);
-            this.olvTextures.AllColumns.Add(this.lvcTexturesHeight);
-            this.olvTextures.AllColumns.Add(this.lvcTexturesImageDataOffset);
-            this.olvTextures.AllColumns.Add(this.lvcTexturesAssumedPixelFormat);
-            this.olvTextures.AllowColumnReorder = true;
-            this.olvTextures.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvTextures.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvTextures.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcTexturesID,
-            this.lvcTexturesName,
-            this.lvcTexturesAddress,
-            this.lvcTexturesWidth,
-            this.lvcTexturesHeight,
-            this.lvcTexturesImageDataOffset,
-            this.lvcTexturesAssumedPixelFormat});
-            this.olvTextures.FullRowSelect = true;
-            this.olvTextures.GridLines = true;
-            this.olvTextures.HasCollapsibleGroups = false;
-            this.olvTextures.HideSelection = false;
-            this.olvTextures.Location = new System.Drawing.Point(3, 3);
-            this.olvTextures.MenuLabelGroupBy = "";
-            this.olvTextures.Name = "olvTextures";
-            this.olvTextures.ShowGroups = false;
-            this.olvTextures.Size = new System.Drawing.Size(903, 502);
-            this.olvTextures.TabIndex = 1;
-            this.olvTextures.UseAlternatingBackColors = true;
-            this.olvTextures.UseCompatibleStateImageBehavior = false;
-            this.olvTextures.View = System.Windows.Forms.View.Details;
-            // 
-            // lvcTexturesID
-            // 
-            this.lvcTexturesID.AspectName = "ID";
-            this.lvcTexturesID.AspectToStringFormat = "{0:X2}";
-            this.lvcTexturesID.Text = "ID";
-            // 
-            // lvcTexturesName
-            // 
-            this.lvcTexturesName.AspectName = "Name";
-            this.lvcTexturesName.IsEditable = false;
-            this.lvcTexturesName.Text = "Name";
-            // 
-            // lvcTexturesAddress
-            // 
-            this.lvcTexturesAddress.AspectName = "Address";
-            this.lvcTexturesAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcTexturesAddress.IsEditable = false;
-            this.lvcTexturesAddress.Text = "Address";
-            // 
-            // lvcTexturesWidth
-            // 
-            this.lvcTexturesWidth.AspectName = "Width";
-            this.lvcTexturesWidth.Text = "Width";
-            // 
-            // lvcTexturesHeight
-            // 
-            this.lvcTexturesHeight.AspectName = "Height";
-            this.lvcTexturesHeight.Text = "Height";
-            // 
-            // lvcTexturesImageDataOffset
-            // 
-            this.lvcTexturesImageDataOffset.AspectName = "ImageDataOffset";
-            this.lvcTexturesImageDataOffset.AspectToStringFormat = "{0:X4}";
-            this.lvcTexturesImageDataOffset.Text = "ImageDataOffset";
-            this.lvcTexturesImageDataOffset.Width = 100;
-            // 
-            // highlightTextRenderer1
-            // 
-            this.highlightTextRenderer1.StringComparison = System.StringComparison.CurrentCultureIgnoreCase;
-            this.highlightTextRenderer1.TextToHighlight = null;
-            // 
-            // highlightTextRenderer2
-            // 
-            this.highlightTextRenderer2.StringComparison = System.StringComparison.CurrentCultureIgnoreCase;
-            this.highlightTextRenderer2.TextToHighlight = null;
-            // 
-            // lvcTexturesAssumedPixelFormat
-            // 
-            this.lvcTexturesAssumedPixelFormat.AspectName = "AssumedPixelFormat";
-            this.lvcTexturesAssumedPixelFormat.IsEditable = false;
-            this.lvcTexturesAssumedPixelFormat.Text = "(Assumed) Pixel Format";
-            this.lvcTexturesAssumedPixelFormat.Width = 130;
+            tabTextures.Controls.Add(textureControl);
+            tabTextures.Controls.Add(olvTextures);
+            tabTextures.Location = new System.Drawing.Point(4, 24);
+            tabTextures.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabTextures.Name = "tabTextures";
+            tabTextures.Size = new System.Drawing.Size(1062, 588);
+            tabTextures.TabIndex = 4;
+            tabTextures.Text = "Textures";
+            tabTextures.UseVisualStyleBackColor = true;
             // 
             // textureControl
             // 
-            this.textureControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textureControl.BackColor = System.Drawing.Color.Transparent;
-            this.textureControl.Location = new System.Drawing.Point(740, 339);
-            this.textureControl.Name = "textureControl";
-            this.textureControl.Size = new System.Drawing.Size(150, 150);
-            this.textureControl.TabIndex = 2;
-            this.textureControl.TextureImage = null;
+            textureControl.Anchor =  System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            textureControl.BackColor = System.Drawing.Color.Transparent;
+            textureControl.Location = new System.Drawing.Point(863, 391);
+            textureControl.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            textureControl.Name = "textureControl";
+            textureControl.Size = new System.Drawing.Size(175, 173);
+            textureControl.TabIndex = 2;
+            textureControl.TextureImage = null;
+            // 
+            // olvTextures
+            // 
+            olvTextures.AllColumns.Add(lvcTexturesID);
+            olvTextures.AllColumns.Add(lvcTexturesName);
+            olvTextures.AllColumns.Add(lvcTexturesAddress);
+            olvTextures.AllColumns.Add(lvcTexturesWidth);
+            olvTextures.AllColumns.Add(lvcTexturesHeight);
+            olvTextures.AllColumns.Add(lvcTexturesImageDataOffset);
+            olvTextures.AllColumns.Add(lvcTexturesAssumedPixelFormat);
+            olvTextures.AllowColumnReorder = true;
+            olvTextures.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvTextures.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvTextures.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcTexturesID, lvcTexturesName, lvcTexturesAddress, lvcTexturesWidth, lvcTexturesHeight, lvcTexturesImageDataOffset, lvcTexturesAssumedPixelFormat });
+            olvTextures.FullRowSelect = true;
+            olvTextures.GridLines = true;
+            olvTextures.HasCollapsibleGroups = false;
+            olvTextures.Location = new System.Drawing.Point(4, 3);
+            olvTextures.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvTextures.MenuLabelGroupBy = "";
+            olvTextures.Name = "olvTextures";
+            olvTextures.ShowGroups = false;
+            olvTextures.Size = new System.Drawing.Size(1053, 579);
+            olvTextures.TabIndex = 1;
+            olvTextures.UseAlternatingBackColors = true;
+            olvTextures.UseCompatibleStateImageBehavior = false;
+            olvTextures.View = System.Windows.Forms.View.Details;
+            // 
+            // lvcTexturesID
+            // 
+            lvcTexturesID.AspectName = "ID";
+            lvcTexturesID.AspectToStringFormat = "{0:X2}";
+            lvcTexturesID.Text = "ID";
+            // 
+            // lvcTexturesName
+            // 
+            lvcTexturesName.AspectName = "Name";
+            lvcTexturesName.IsEditable = false;
+            lvcTexturesName.Text = "Name";
+            // 
+            // lvcTexturesAddress
+            // 
+            lvcTexturesAddress.AspectName = "Address";
+            lvcTexturesAddress.AspectToStringFormat = "{0:X4}";
+            lvcTexturesAddress.IsEditable = false;
+            lvcTexturesAddress.Text = "Address";
+            // 
+            // lvcTexturesWidth
+            // 
+            lvcTexturesWidth.AspectName = "Width";
+            lvcTexturesWidth.Text = "Width";
+            // 
+            // lvcTexturesHeight
+            // 
+            lvcTexturesHeight.AspectName = "Height";
+            lvcTexturesHeight.Text = "Height";
+            // 
+            // lvcTexturesImageDataOffset
+            // 
+            lvcTexturesImageDataOffset.AspectName = "ImageDataOffset";
+            lvcTexturesImageDataOffset.AspectToStringFormat = "{0:X4}";
+            lvcTexturesImageDataOffset.Text = "ImageDataOffset";
+            lvcTexturesImageDataOffset.Width = 100;
+            // 
+            // lvcTexturesAssumedPixelFormat
+            // 
+            lvcTexturesAssumedPixelFormat.AspectName = "AssumedPixelFormat";
+            lvcTexturesAssumedPixelFormat.IsEditable = false;
+            lvcTexturesAssumedPixelFormat.Text = "(Assumed) Pixel Format";
+            lvcTexturesAssumedPixelFormat.Width = 130;
+            // 
+            // highlightTextRenderer1
+            // 
+            highlightTextRenderer1.StringComparison = System.StringComparison.CurrentCultureIgnoreCase;
+            highlightTextRenderer1.TextToHighlight = null;
+            // 
+            // highlightTextRenderer2
+            // 
+            highlightTextRenderer2.StringComparison = System.StringComparison.CurrentCultureIgnoreCase;
+            highlightTextRenderer2.TextToHighlight = null;
             // 
             // TextureChunkControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.tabMain);
-            this.Name = "TextureChunkControl";
-            this.Size = new System.Drawing.Size(917, 534);
-            this.tabHeader.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvHeader)).EndInit();
-            this.tabMain.ResumeLayout(false);
-            this.tabTextures.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvTextures)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.Color.Transparent;
+            Controls.Add(tabMain);
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "TextureChunkControl";
+            Size = new System.Drawing.Size(1070, 616);
+            tabHeader.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvHeader).EndInit();
+            tabMain.ResumeLayout(false);
+            tabTextures.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvTextures).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
