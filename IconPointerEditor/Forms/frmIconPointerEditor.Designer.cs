@@ -26,253 +26,238 @@ namespace SF3.IconPointerEditor.Forms
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmIconPointerEditor));
-            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiHelp_OpenInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabItemIcons = new System.Windows.Forms.TabPage();
-            this.olvItemIcons = new BrightIdeasSoftware.ObjectListView();
-            this.lvcItemIconName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcItemIconHexID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcItemIconAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcItemIconOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabMain = new System.Windows.Forms.TabControl();
-            this.tabSpellIcons = new System.Windows.Forms.TabPage();
-            this.olvSpellIcons = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSpellIconName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellIconSpellName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellIconHexID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellIconAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellIconOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellIconViewOffset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.menuStrip2.SuspendLayout();
-            this.tabItemIcons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvItemIcons)).BeginInit();
-            this.tabMain.SuspendLayout();
-            this.tabSpellIcons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvSpellIcons)).BeginInit();
-            this.SuspendLayout();
+        private void InitializeComponent() {
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(frmIconPointerEditor));
+            menuStrip2 = new System.Windows.Forms.MenuStrip();
+            tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiHelp_OpenInfo = new System.Windows.Forms.ToolStripMenuItem();
+            tabItemIcons = new System.Windows.Forms.TabPage();
+            olvItemIcons = new BrightIdeasSoftware.ObjectListView();
+            lvcItemIconName = new BrightIdeasSoftware.OLVColumn();
+            lvcItemIconHexID = new BrightIdeasSoftware.OLVColumn();
+            lvcItemIconAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcItemIconOffset = new BrightIdeasSoftware.OLVColumn();
+            tabMain = new System.Windows.Forms.TabControl();
+            tabSpellIcons = new System.Windows.Forms.TabPage();
+            olvSpellIcons = new BrightIdeasSoftware.ObjectListView();
+            lvcSpellIconName = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellIconSpellName = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellIconHexID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellIconAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellIconOffset = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellIconViewOffset = new BrightIdeasSoftware.OLVColumn();
+            menuStrip2.SuspendLayout();
+            tabItemIcons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvItemIcons).BeginInit();
+            tabMain.SuspendLayout();
+            tabSpellIcons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvSpellIcons).BeginInit();
+            SuspendLayout();
             // 
             // menuStrip2
             // 
-            this.menuStrip2.Dock = System.Windows.Forms.DockStyle.None;
-            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiHelp});
-            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(764, 24);
-            this.menuStrip2.TabIndex = 1;
-            this.menuStrip2.Text = "menuStrip2";
+            menuStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp });
+            menuStrip2.Location = new System.Drawing.Point(0, 0);
+            menuStrip2.Name = "menuStrip2";
+            menuStrip2.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            menuStrip2.Size = new System.Drawing.Size(53, 24);
+            menuStrip2.TabIndex = 1;
+            menuStrip2.Text = "menuStrip2";
             // 
             // tsmiHelp
             // 
-            this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiHelp_OpenInfo});
-            this.tsmiHelp.Name = "tsmiHelp";
-            this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
-            this.tsmiHelp.Text = "&Help";
+            tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp_OpenInfo });
+            tsmiHelp.Name = "tsmiHelp";
+            tsmiHelp.Size = new System.Drawing.Size(44, 20);
+            tsmiHelp.Text = "&Help";
             // 
             // tsmiHelp_OpenInfo
             // 
-            this.tsmiHelp_OpenInfo.Name = "tsmiHelp_OpenInfo";
-            this.tsmiHelp_OpenInfo.Size = new System.Drawing.Size(224, 22);
-            this.tsmiHelp_OpenInfo.Text = "Opens X011, X021, X026 Files";
+            tsmiHelp_OpenInfo.Name = "tsmiHelp_OpenInfo";
+            tsmiHelp_OpenInfo.Size = new System.Drawing.Size(224, 22);
+            tsmiHelp_OpenInfo.Text = "Opens X011, X021, X026 Files";
             // 
             // tabItemIcons
             // 
-            this.tabItemIcons.Controls.Add(this.olvItemIcons);
-            this.tabItemIcons.Location = new System.Drawing.Point(4, 22);
-            this.tabItemIcons.Name = "tabItemIcons";
-            this.tabItemIcons.Size = new System.Drawing.Size(756, 480);
-            this.tabItemIcons.TabIndex = 3;
-            this.tabItemIcons.Text = "Item Icons";
-            this.tabItemIcons.UseVisualStyleBackColor = true;
+            tabItemIcons.Controls.Add(olvItemIcons);
+            tabItemIcons.Location = new System.Drawing.Point(4, 24);
+            tabItemIcons.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabItemIcons.Name = "tabItemIcons";
+            tabItemIcons.Size = new System.Drawing.Size(883, 556);
+            tabItemIcons.TabIndex = 3;
+            tabItemIcons.Text = "Item Icons";
+            tabItemIcons.UseVisualStyleBackColor = true;
             // 
             // olvItemIcons
             // 
-            this.olvItemIcons.AllColumns.Add(this.lvcItemIconName);
-            this.olvItemIcons.AllColumns.Add(this.lvcItemIconHexID);
-            this.olvItemIcons.AllColumns.Add(this.lvcItemIconAddress);
-            this.olvItemIcons.AllColumns.Add(this.lvcItemIconOffset);
-            this.olvItemIcons.AllowColumnReorder = true;
-            this.olvItemIcons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvItemIcons.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvItemIcons.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcItemIconName,
-            this.lvcItemIconHexID,
-            this.lvcItemIconAddress,
-            this.lvcItemIconOffset});
-            this.olvItemIcons.FullRowSelect = true;
-            this.olvItemIcons.GridLines = true;
-            this.olvItemIcons.HasCollapsibleGroups = false;
-            this.olvItemIcons.HideSelection = false;
-            this.olvItemIcons.Location = new System.Drawing.Point(3, 3);
-            this.olvItemIcons.MenuLabelGroupBy = "";
-            this.olvItemIcons.Name = "olvItemIcons";
-            this.olvItemIcons.ShowGroups = false;
-            this.olvItemIcons.Size = new System.Drawing.Size(750, 474);
-            this.olvItemIcons.TabIndex = 0;
-            this.olvItemIcons.UseAlternatingBackColors = true;
-            this.olvItemIcons.UseCompatibleStateImageBehavior = false;
-            this.olvItemIcons.View = System.Windows.Forms.View.Details;
+            olvItemIcons.AllColumns.Add(lvcItemIconName);
+            olvItemIcons.AllColumns.Add(lvcItemIconHexID);
+            olvItemIcons.AllColumns.Add(lvcItemIconAddress);
+            olvItemIcons.AllColumns.Add(lvcItemIconOffset);
+            olvItemIcons.AllowColumnReorder = true;
+            olvItemIcons.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvItemIcons.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvItemIcons.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcItemIconName, lvcItemIconHexID, lvcItemIconAddress, lvcItemIconOffset });
+            olvItemIcons.FullRowSelect = true;
+            olvItemIcons.GridLines = true;
+            olvItemIcons.HasCollapsibleGroups = false;
+            olvItemIcons.Location = new System.Drawing.Point(4, 3);
+            olvItemIcons.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvItemIcons.MenuLabelGroupBy = "";
+            olvItemIcons.Name = "olvItemIcons";
+            olvItemIcons.ShowGroups = false;
+            olvItemIcons.Size = new System.Drawing.Size(874, 546);
+            olvItemIcons.TabIndex = 0;
+            olvItemIcons.UseAlternatingBackColors = true;
+            olvItemIcons.UseCompatibleStateImageBehavior = false;
+            olvItemIcons.View = System.Windows.Forms.View.Details;
             // 
             // lvcItemIconName
             // 
-            this.lvcItemIconName.AspectName = "Name";
-            this.lvcItemIconName.IsEditable = false;
-            this.lvcItemIconName.Text = "Name";
-            this.lvcItemIconName.Width = 120;
+            lvcItemIconName.AspectName = "Name";
+            lvcItemIconName.IsEditable = false;
+            lvcItemIconName.Text = "Name";
+            lvcItemIconName.Width = 120;
             // 
             // lvcItemIconHexID
             // 
-            this.lvcItemIconHexID.AspectName = "ID";
-            this.lvcItemIconHexID.AspectToStringFormat = "{0:X}";
-            this.lvcItemIconHexID.IsEditable = false;
-            this.lvcItemIconHexID.Text = "Hex ID";
+            lvcItemIconHexID.AspectName = "ID";
+            lvcItemIconHexID.AspectToStringFormat = "{0:X}";
+            lvcItemIconHexID.IsEditable = false;
+            lvcItemIconHexID.Text = "Hex ID";
             // 
             // lvcItemIconAddress
             // 
-            this.lvcItemIconAddress.AspectName = "Address";
-            this.lvcItemIconAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcItemIconAddress.IsEditable = false;
-            this.lvcItemIconAddress.Text = "Address";
+            lvcItemIconAddress.AspectName = "Address";
+            lvcItemIconAddress.AspectToStringFormat = "{0:X4}";
+            lvcItemIconAddress.IsEditable = false;
+            lvcItemIconAddress.Text = "Address";
             // 
             // lvcItemIconOffset
             // 
-            this.lvcItemIconOffset.AspectName = "TheItemIcon";
-            this.lvcItemIconOffset.AspectToStringFormat = "{0:X4}";
-            this.lvcItemIconOffset.Text = "ItemIcon offset";
-            this.lvcItemIconOffset.Width = 90;
+            lvcItemIconOffset.AspectName = "TheItemIcon";
+            lvcItemIconOffset.AspectToStringFormat = "{0:X4}";
+            lvcItemIconOffset.Text = "ItemIcon offset";
+            lvcItemIconOffset.Width = 90;
             // 
             // tabMain
             // 
-            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabMain.Controls.Add(this.tabItemIcons);
-            this.tabMain.Controls.Add(this.tabSpellIcons);
-            this.tabMain.Location = new System.Drawing.Point(0, 27);
-            this.tabMain.Name = "tabMain";
-            this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(764, 506);
-            this.tabMain.TabIndex = 0;
+            tabMain.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tabMain.Controls.Add(tabItemIcons);
+            tabMain.Controls.Add(tabSpellIcons);
+            tabMain.Location = new System.Drawing.Point(0, 31);
+            tabMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabMain.Name = "tabMain";
+            tabMain.SelectedIndex = 0;
+            tabMain.Size = new System.Drawing.Size(891, 584);
+            tabMain.TabIndex = 0;
             // 
             // tabSpellIcons
             // 
-            this.tabSpellIcons.Controls.Add(this.olvSpellIcons);
-            this.tabSpellIcons.Location = new System.Drawing.Point(4, 22);
-            this.tabSpellIcons.Name = "tabSpellIcons";
-            this.tabSpellIcons.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSpellIcons.Size = new System.Drawing.Size(756, 480);
-            this.tabSpellIcons.TabIndex = 4;
-            this.tabSpellIcons.Text = "Spell Icons";
-            this.tabSpellIcons.UseVisualStyleBackColor = true;
+            tabSpellIcons.Controls.Add(olvSpellIcons);
+            tabSpellIcons.Location = new System.Drawing.Point(4, 24);
+            tabSpellIcons.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSpellIcons.Name = "tabSpellIcons";
+            tabSpellIcons.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSpellIcons.Size = new System.Drawing.Size(883, 556);
+            tabSpellIcons.TabIndex = 4;
+            tabSpellIcons.Text = "Spell Icons";
+            tabSpellIcons.UseVisualStyleBackColor = true;
             // 
             // olvSpellIcons
             // 
-            this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconName);
-            this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconSpellName);
-            this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconHexID);
-            this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconAddress);
-            this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconOffset);
-            this.olvSpellIcons.AllColumns.Add(this.lvcSpellIconViewOffset);
-            this.olvSpellIcons.AllowColumnReorder = true;
-            this.olvSpellIcons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvSpellIcons.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvSpellIcons.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcSpellIconName,
-            this.lvcSpellIconSpellName,
-            this.lvcSpellIconHexID,
-            this.lvcSpellIconAddress,
-            this.lvcSpellIconOffset,
-            this.lvcSpellIconViewOffset});
-            this.olvSpellIcons.FullRowSelect = true;
-            this.olvSpellIcons.GridLines = true;
-            this.olvSpellIcons.HasCollapsibleGroups = false;
-            this.olvSpellIcons.HideSelection = false;
-            this.olvSpellIcons.Location = new System.Drawing.Point(3, 3);
-            this.olvSpellIcons.MenuLabelGroupBy = "";
-            this.olvSpellIcons.Name = "olvSpellIcons";
-            this.olvSpellIcons.ShowGroups = false;
-            this.olvSpellIcons.Size = new System.Drawing.Size(750, 474);
-            this.olvSpellIcons.TabIndex = 1;
-            this.olvSpellIcons.UseAlternatingBackColors = true;
-            this.olvSpellIcons.UseCompatibleStateImageBehavior = false;
-            this.olvSpellIcons.View = System.Windows.Forms.View.Details;
+            olvSpellIcons.AllColumns.Add(lvcSpellIconName);
+            olvSpellIcons.AllColumns.Add(lvcSpellIconSpellName);
+            olvSpellIcons.AllColumns.Add(lvcSpellIconHexID);
+            olvSpellIcons.AllColumns.Add(lvcSpellIconAddress);
+            olvSpellIcons.AllColumns.Add(lvcSpellIconOffset);
+            olvSpellIcons.AllColumns.Add(lvcSpellIconViewOffset);
+            olvSpellIcons.AllowColumnReorder = true;
+            olvSpellIcons.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvSpellIcons.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvSpellIcons.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcSpellIconName, lvcSpellIconSpellName, lvcSpellIconHexID, lvcSpellIconAddress, lvcSpellIconOffset, lvcSpellIconViewOffset });
+            olvSpellIcons.FullRowSelect = true;
+            olvSpellIcons.GridLines = true;
+            olvSpellIcons.HasCollapsibleGroups = false;
+            olvSpellIcons.Location = new System.Drawing.Point(4, 3);
+            olvSpellIcons.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvSpellIcons.MenuLabelGroupBy = "";
+            olvSpellIcons.Name = "olvSpellIcons";
+            olvSpellIcons.ShowGroups = false;
+            olvSpellIcons.Size = new System.Drawing.Size(874, 546);
+            olvSpellIcons.TabIndex = 1;
+            olvSpellIcons.UseAlternatingBackColors = true;
+            olvSpellIcons.UseCompatibleStateImageBehavior = false;
+            olvSpellIcons.View = System.Windows.Forms.View.Details;
             // 
             // lvcSpellIconName
             // 
-            this.lvcSpellIconName.AspectName = "Name";
-            this.lvcSpellIconName.IsEditable = false;
-            this.lvcSpellIconName.Text = "Icon Name";
-            this.lvcSpellIconName.Width = 120;
+            lvcSpellIconName.AspectName = "Name";
+            lvcSpellIconName.IsEditable = false;
+            lvcSpellIconName.Text = "Icon Name";
+            lvcSpellIconName.Width = 120;
             // 
             // lvcSpellIconSpellName
             // 
-            this.lvcSpellIconSpellName.AspectName = "SpellID";
-            this.lvcSpellIconSpellName.IsEditable = false;
-            this.lvcSpellIconSpellName.Text = "Spell Name";
-            this.lvcSpellIconSpellName.Width = 120;
+            lvcSpellIconSpellName.AspectName = "SpellID";
+            lvcSpellIconSpellName.IsEditable = false;
+            lvcSpellIconSpellName.Text = "Spell Name";
+            lvcSpellIconSpellName.Width = 120;
             // 
             // lvcSpellIconHexID
             // 
-            this.lvcSpellIconHexID.AspectName = "ID";
-            this.lvcSpellIconHexID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellIconHexID.IsEditable = false;
-            this.lvcSpellIconHexID.Text = "Hex ID";
-            this.lvcSpellIconHexID.Width = 50;
+            lvcSpellIconHexID.AspectName = "ID";
+            lvcSpellIconHexID.AspectToStringFormat = "{0:X}";
+            lvcSpellIconHexID.IsEditable = false;
+            lvcSpellIconHexID.Text = "Hex ID";
+            lvcSpellIconHexID.Width = 50;
             // 
             // lvcSpellIconAddress
             // 
-            this.lvcSpellIconAddress.AspectName = "Address";
-            this.lvcSpellIconAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcSpellIconAddress.IsEditable = false;
-            this.lvcSpellIconAddress.Text = "Address";
-            this.lvcSpellIconAddress.Width = 50;
+            lvcSpellIconAddress.AspectName = "Address";
+            lvcSpellIconAddress.AspectToStringFormat = "{0:X4}";
+            lvcSpellIconAddress.IsEditable = false;
+            lvcSpellIconAddress.Text = "Address";
+            lvcSpellIconAddress.Width = 50;
             // 
             // lvcSpellIconOffset
             // 
-            this.lvcSpellIconOffset.AspectName = "TheSpellIcon";
-            this.lvcSpellIconOffset.AspectToStringFormat = "{0:X4}";
-            this.lvcSpellIconOffset.Text = "Spell Icon offset";
-            this.lvcSpellIconOffset.Width = 90;
+            lvcSpellIconOffset.AspectName = "TheSpellIcon";
+            lvcSpellIconOffset.AspectToStringFormat = "{0:X4}";
+            lvcSpellIconOffset.Text = "Spell Icon offset";
+            lvcSpellIconOffset.Width = 90;
             // 
             // lvcSpellIconViewOffset
             // 
-            this.lvcSpellIconViewOffset.AspectName = "RealOffset";
-            this.lvcSpellIconViewOffset.AspectToStringFormat = "{0:X4}";
-            this.lvcSpellIconViewOffset.Text = "Offset in file for viewing";
-            this.lvcSpellIconViewOffset.Width = 130;
+            lvcSpellIconViewOffset.AspectName = "RealOffset";
+            lvcSpellIconViewOffset.AspectToStringFormat = "{0:X4}";
+            lvcSpellIconViewOffset.Text = "Offset in file for viewing";
+            lvcSpellIconViewOffset.Width = 130;
             // 
             // frmIconPointerEditor
             // 
-            this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(764, 534);
-            this.Controls.Add(this.menuStrip2);
-            this.Controls.Add(this.tabMain);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmIconPointerEditor";
-            this.Text = "SF3 Icon Pointer Editor";
-            this.Controls.SetChildIndex(this.tabMain, 0);
-            this.Controls.SetChildIndex(this.menuStrip2, 0);
-            this.menuStrip2.ResumeLayout(false);
-            this.menuStrip2.PerformLayout();
-            this.tabItemIcons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvItemIcons)).EndInit();
-            this.tabMain.ResumeLayout(false);
-            this.tabSpellIcons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvSpellIcons)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AllowDrop = true;
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(891, 616);
+            Controls.Add(menuStrip2);
+            Controls.Add(tabMain);
+            Icon = (System.Drawing.Icon) resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "frmIconPointerEditor";
+            Text = "SF3 Icon Pointer Editor";
+            Controls.SetChildIndex(tabMain, 0);
+            Controls.SetChildIndex(menuStrip2, 0);
+            menuStrip2.ResumeLayout(false);
+            menuStrip2.PerformLayout();
+            tabItemIcons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvItemIcons).EndInit();
+            tabMain.ResumeLayout(false);
+            tabSpellIcons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvSpellIcons).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
