@@ -29,7 +29,8 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.Color.MistyRose;
+            BackColor = System.Drawing.Color.Transparent;
+            Margin = new System.Windows.Forms.Padding(0);
             Name = "MasterEditorControl";
             ResumeLayout(false);
         }

@@ -84,7 +84,8 @@ namespace SF3Editor {
             olv.MenuLabelGroupBy = "";
             olv.Name = "TestOLV";
             olv.ShowGroups = false;
-            olv.Size = masterEditorControl1.Size;
+            olv.Location = new Point(masterEditorControl1.Padding.Left, masterEditorControl1.Padding.Top);
+            olv.Size = new Size(masterEditorControl1.Size.Width - masterEditorControl1.Padding.Horizontal, masterEditorControl1.Size.Height - masterEditorControl1.Padding.Vertical);
             olv.TabIndex = 1;
             olv.UseAlternatingBackColors = true;
             olv.UseCompatibleStateImageBehavior = false;
