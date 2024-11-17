@@ -8,7 +8,7 @@ namespace SF3.Tables.MPD {
         }
 
         public override bool Load()
-            => LoadUntilMax((id, address) => new Color(Editor, id, "Color" + id, address));
+            => LoadUntilMax((id, address) => new Color(Editor, id, "Color " + id.ToString("D3"), address));
 
         public override int? MaxSize { get; }
     }

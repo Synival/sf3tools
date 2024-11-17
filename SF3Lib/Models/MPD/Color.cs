@@ -1,4 +1,5 @@
 ﻿using CommonLib.Attributes;
+using SF3.BulkOperations;
 using SF3.RawEditors;
 
 namespace SF3.Models.MPD {
@@ -8,11 +9,13 @@ namespace SF3.Models.MPD {
         }
 
         [BulkCopy]
+        [DataMetadata(displayName: "Color ABGR1555", displayOrder: 0, displayFormat: "X4")]
         public int ColorABGR1555 {
             get => Editor.GetWord(Address);
             set => Editor.SetWord(Address, value);
         }
 
+        [DataMetadata(displayName: "HTML Color", displayOrder: 1, displayFormat: "X", minWidth: 80)]
         public string HtmlColor {
             get {
                 // TODO: behavior for the 0x8000 bit
@@ -21,7 +24,7 @@ namespace SF3.Models.MPD {
                 var g = (value >>  5) & 0x1F;
                 var b = (value >> 10) & 0x1F;
 
-                return "#" +
+                return (((value & 0x8000) != 0) ? "1|#" : "0|#") +
                     (r * 255 / 31).ToString("X2") +
                     (g * 255 / 31).ToString("X2") +
                     (b * 255 / 31).ToString("X2");

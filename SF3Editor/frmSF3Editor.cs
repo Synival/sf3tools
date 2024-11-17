@@ -20,7 +20,7 @@ namespace SF3Editor {
                 new NameGetterContext(ScenarioType.Scenario1),
                 ScenarioType.Scenario1);
 
-            var table = mpdEditor.ChunkHeader;
+            var table = mpdEditor.Palettes[0];
             var tableEditorControl = new TableEditorControl(table, mpdEditor.NameGetterContext);
 
             var olv = tableEditorControl.Create();

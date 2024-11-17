@@ -14,7 +14,7 @@ namespace SF3.Win.EditorControls {
     public class TableEditorControl : ITableEditorControl {
         private static int s_controlIndex = 1;
 
-        public TableEditorControl(ChunkHeaderTable table, INameGetterContext nameGetterContext) {
+        public TableEditorControl(Table table, INameGetterContext nameGetterContext) {
             Table = table;
             NameGetterContext = nameGetterContext;
         }
