@@ -1,13 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <OutputType>Library</OutputType>
-    <RootNamespace>CommonLib.Win</RootNamespace>
+    <Nullable>enable</Nullable>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SF3.Editor</RootNamespace>
+    <AssemblyName>SF3 Editor</AssemblyName>
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
+    <ProjectReference Include="..\SF3LibWin\SF3LibWin.csproj" />
   </ItemGroup>
+
 </Project>

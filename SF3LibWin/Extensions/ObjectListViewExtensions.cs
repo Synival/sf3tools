@@ -142,11 +142,13 @@ namespace SF3.Win.Extensions {
                 var nameContext = ((ObjectListView) model.ListView).GetEditor()?.NameGetterContext;
                 if (nameContext != null) {
                     var property = obj.GetType().GetProperty(model.AspectName);
-                    var attr = property.GetCustomAttribute<NameGetterAttribute>();
-                    if (attr != null && nameContext.CanGetInfo(obj, property, attr.Parameters)) {
-                        var intValue = (int) property.GetValue(obj);
-                        if (nameContext.CanGetName(obj, property, intValue, attr.Parameters))
-                            return MakeNamedValueComboBox(nameContext.GetInfo(obj, property, attr.Parameters), intValue);
+                    if (property != null) {
+                        var attr = property.GetCustomAttribute<NameGetterAttribute>();
+                        if (attr != null && nameContext.CanGetInfo(obj, property, attr.Parameters)) {
+                            var intValue = (int) property.GetValue(obj);
+                            if (nameContext.CanGetName(obj, property, intValue, attr.Parameters))
+                                return MakeNamedValueComboBox(nameContext.GetInfo(obj, property, attr.Parameters), intValue);
+                        }
                     }
                 }
             }

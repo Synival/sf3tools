@@ -1,112 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1D20A93D-B1F0-4DAF-9B7B-072EF671C02D}</ProjectGuid>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DFRTool.GUI</RootNamespace>
-    <AssemblyName>DFRToolGUI</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <PlatformTarget>x64</PlatformTarget>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Design" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Controls\ApplyDFRControl.cs">
+    <Compile Update="Controls\ApplyDFRControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ApplyDFRControl.Designer.cs">
-      <DependentUpon>ApplyDFRControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CreateDFRControl.cs">
+    <Compile Update="Controls\CreateDFRControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\CreateDFRControl.Designer.cs">
-      <DependentUpon>CreateDFRControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmDFRTool.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmDFRTool.Designer.cs">
-      <DependentUpon>frmDFRTool.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\ApplyDFRControl.resx">
-      <DependentUpon>ApplyDFRControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CreateDFRControl.resx">
-      <DependentUpon>CreateDFRControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmDFRTool.resx">
-      <DependentUpon>frmDFRTool.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonLibWin\CommonLibWin.csproj">
-      <Project>{5fe12345-c218-45be-8947-b90000000000}</Project>
-      <Name>CommonLibWin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CommonLib\CommonLib.csproj">
-      <Project>{dbd21823-582a-4a42-92ab-3294e013a4a4}</Project>
-      <Name>CommonLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DFRLib\DFRLib.csproj">
-      <Project>{374A86FE-863F-4509-922D-CAE6E0FEA139}</Project>
-      <Name>DFRLib</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\CommonLibWin\CommonLibWin.csproj" />
+    <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
+    <ProjectReference Include="..\DFRLib\DFRLib.csproj" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

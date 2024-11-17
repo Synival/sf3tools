@@ -1035,7 +1035,7 @@ namespace BrightIdeasSoftware
         [Category("Appearance - ObjectListView"),
          Description("The image list from which group header will take their images"),
          DefaultValue(null)]
-        public ImageList GroupImageList {
+        public new ImageList GroupImageList {
             get { return this.groupImageList; }
             set {
                 this.groupImageList = value;
@@ -2835,7 +2835,7 @@ namespace BrightIdeasSoftware
         /// <remarks>See AddObjects() for more details</remarks>
         public virtual void AddObject(object modelObject) {
             if (this.InvokeRequired)
-                this.Invoke((MethodInvoker)delegate() { this.AddObject(modelObject); });
+                this.Invoke((System.Windows.Forms.MethodInvoker)delegate() { this.AddObject(modelObject); });
             else
                 this.AddObjects(new object[] { modelObject });
         }
@@ -2852,7 +2852,7 @@ namespace BrightIdeasSoftware
         /// </remarks>
         public virtual void AddObjects(ICollection modelObjects) {
             if (this.InvokeRequired) {
-                this.Invoke((MethodInvoker)delegate() { this.AddObjects(modelObjects); });
+                this.Invoke((System.Windows.Forms.MethodInvoker)delegate() { this.AddObjects(modelObjects); });
                 return;
             }
             this.InsertObjects(this.GetItemCount(), modelObjects);
@@ -3027,7 +3027,7 @@ namespace BrightIdeasSoftware
         /// </summary>
         public virtual void BuildList() {
             if (this.InvokeRequired)
-                this.Invoke(new MethodInvoker(this.BuildList));
+                this.Invoke(new System.Windows.Forms.MethodInvoker(this.BuildList));
             else
                 this.BuildList(true);
         }
@@ -3193,7 +3193,7 @@ namespace BrightIdeasSoftware
         /// <remark>This method can safely be called from background threads.</remark>
         public virtual void ClearObjects() {
             if (this.InvokeRequired)
-                this.Invoke(new MethodInvoker(this.ClearObjects));
+                this.Invoke(new System.Windows.Forms.MethodInvoker(this.ClearObjects));
             else
                 this.SetObjects(null);
         }
@@ -3401,7 +3401,7 @@ namespace BrightIdeasSoftware
         ///</remarks>
         public virtual void InsertObjects(int index, ICollection modelObjects) {
             if (this.InvokeRequired) {
-                this.Invoke((MethodInvoker)delegate() {
+                this.Invoke((System.Windows.Forms.MethodInvoker)delegate() {
                     this.InsertObjects(index, modelObjects);
                 });
                 return;
@@ -3745,7 +3745,7 @@ namespace BrightIdeasSoftware
         /// <remarks>See RemoveObjects() for more details</remarks>
         public virtual void RemoveObject(object modelObject) {
             if (this.InvokeRequired)
-                this.Invoke((MethodInvoker)delegate() { this.RemoveObject(modelObject); });
+                this.Invoke((System.Windows.Forms.MethodInvoker)delegate() { this.RemoveObject(modelObject); });
             else
                 this.RemoveObjects(new object[] { modelObject });
         }
@@ -3759,7 +3759,7 @@ namespace BrightIdeasSoftware
         /// </remarks>
         public virtual void RemoveObjects(ICollection modelObjects) {
             if (this.InvokeRequired) {
-                this.Invoke((MethodInvoker)delegate() { this.RemoveObjects(modelObjects); });
+                this.Invoke((System.Windows.Forms.MethodInvoker)delegate() { this.RemoveObjects(modelObjects); });
                 return;
             }
             if (modelObjects == null)
@@ -3821,7 +3821,7 @@ namespace BrightIdeasSoftware
         /// <param name="preserveState">Should the state of the list be preserved as far as is possible.</param>
         public virtual void SetObjects(IEnumerable collection, bool preserveState) {
             if (this.InvokeRequired) {
-                this.Invoke((MethodInvoker)delegate { this.SetObjects(collection, preserveState); });
+                this.Invoke((System.Windows.Forms.MethodInvoker)delegate { this.SetObjects(collection, preserveState); });
                 return;
             }
 
@@ -3891,7 +3891,9 @@ namespace BrightIdeasSoftware
 
             // Now that we have stored our state, convert it to a byte array
             using (MemoryStream ms = new MemoryStream()) {
+#pragma warning disable SYSLIB0011
                 BinaryFormatter serializer = new BinaryFormatter();
+#pragma warning restore SYSLIB0011
                 serializer.Serialize(ms, olvState);
                 return ms.ToArray();
             }
@@ -3905,7 +3907,9 @@ namespace BrightIdeasSoftware
         /// <returns>Returns true if the state was restored</returns>
         public virtual bool RestoreState(byte[] state) {
             using (MemoryStream ms = new MemoryStream(state)) {
+#pragma warning disable SYSLIB0011
                 BinaryFormatter deserializer = new BinaryFormatter();
+#pragma warning restore SYSLIB0011
                 ObjectListViewState olvState;
                 try {
                     olvState = deserializer.Deserialize(ms) as ObjectListViewState;
@@ -4514,7 +4518,7 @@ namespace BrightIdeasSoftware
             //System.Diagnostics.Debug.WriteLine("WM_DESTROY");
 
             // Recreate the header control when the listview control is destroyed
-            this.BeginInvoke((MethodInvoker)delegate {
+            this.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate {
                 this.headerControl = null;
                 this.HeaderControl.WordWrap = this.HeaderWordWrap;
             });
@@ -4526,7 +4530,7 @@ namespace BrightIdeasSoftware
             else {
                 this.cellToolTip.PushSettings();
                 base.WndProc(ref m);
-                this.BeginInvoke((MethodInvoker)delegate {
+                this.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate {
                     this.UpdateCellToolTipHandle();
                     this.cellToolTip.PopSettings();
                 });
@@ -5329,7 +5333,7 @@ namespace BrightIdeasSoftware
                 return;
             this.lastMenuItemClicked.Checked = !this.lastMenuItemClicked.Checked;
             col.IsVisible = this.lastMenuItemClicked.Checked;
-            this.BeginInvoke(new MethodInvoker(this.RebuildColumns));
+            this.BeginInvoke(new System.Windows.Forms.MethodInvoker(this.RebuildColumns));
         }
         ToolStripMenuItem lastMenuItemClicked;
 
@@ -5351,7 +5355,7 @@ namespace BrightIdeasSoftware
             // at this point, the DisplayIndex's of the columns are not yet as they are
             // going to be. So we have to invoke a method to run later that will remember
             // what the real DisplayIndex's are.
-            this.BeginInvoke(new MethodInvoker(this.RememberDisplayIndicies));
+            this.BeginInvoke(new System.Windows.Forms.MethodInvoker(this.RememberDisplayIndicies));
         }
 
         private void RememberDisplayIndicies() {
@@ -5891,7 +5895,7 @@ namespace BrightIdeasSoftware
         /// </remarks>
         public virtual void RefreshObjects(IList modelObjects) {
             if (this.InvokeRequired) {
-                this.Invoke((MethodInvoker)delegate { this.RefreshObjects(modelObjects); });
+                this.Invoke((System.Windows.Forms.MethodInvoker)delegate { this.RefreshObjects(modelObjects); });
                 return;
             }
             foreach (object modelObject in modelObjects) {
@@ -6055,7 +6059,7 @@ namespace BrightIdeasSoftware
         /// <param name="columnToSort">The column whose values will be used for the sorting</param>
         public virtual void Sort(OLVColumn columnToSort) {
             if (this.InvokeRequired) {
-                this.Invoke((MethodInvoker)delegate { this.Sort(columnToSort); });
+                this.Invoke((System.Windows.Forms.MethodInvoker)delegate { this.Sort(columnToSort); });
             } else {
                 this.Sort(columnToSort, this.LastSortOrder);
             }
@@ -6073,7 +6077,7 @@ namespace BrightIdeasSoftware
         /// and the rows within each group will be sorted by the given column.</remarks>
         public virtual void Sort(OLVColumn columnToSort, SortOrder order) {
             if (this.InvokeRequired) {
-                this.Invoke((MethodInvoker)delegate { this.Sort(columnToSort, order); });
+                this.Invoke((System.Windows.Forms.MethodInvoker)delegate { this.Sort(columnToSort, order); });
             } else {
                 this.DoSort(columnToSort, order);
                 this.PostProcessRows();
@@ -6977,7 +6981,7 @@ namespace BrightIdeasSoftware
                 !String.IsNullOrEmpty(args.SubItem.Url)) {
                 // We have to delay the running of this process otherwise we can generate
                 // a series of MouseUp events (don't ask me why)
-                this.BeginInvoke((MethodInvoker)delegate { ProcessHyperlinkClicked(args); });
+                this.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate { ProcessHyperlinkClicked(args); });
             }
 
             // No one handled it so check to see if we should start editing.
@@ -7094,7 +7098,7 @@ namespace BrightIdeasSoftware
         protected override void OnHandleCreated(EventArgs e) {
             base.OnHandleCreated(e);
 
-            this.Invoke((MethodInvoker)this.OnControlCreated);
+            this.Invoke((System.Windows.Forms.MethodInvoker)this.OnControlCreated);
         }
 
         /// <summary>
@@ -7372,7 +7376,7 @@ namespace BrightIdeasSoftware
                 if (cb.Created)
                     cb.SelectedValue = value;
                 else
-                    this.BeginInvoke(new MethodInvoker(delegate {
+                    this.BeginInvoke(new System.Windows.Forms.MethodInvoker(delegate {
                         cb.SelectedValue = value;
                     }));
                 return;
