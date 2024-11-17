@@ -57,6 +57,12 @@ namespace SF3.Win.Extensions {
         /// <param name="olv">The ObjectListView to enhance.</param>
         /// <param name="fileEditorFetcher">The function that fetchers the current FileLoader associated for this ObjectListView.</param>
         public static void Enhance(this ObjectListView olv, EditorFetcher fileEditorFetcher) {
+            // Make sure the column can fit its text.
+            foreach (var lvc in olv.AllColumns) {
+                var minWidth = TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width;
+                lvc.Width = Math.Max(minWidth, lvc.Width);
+            }
+
             olv.SetEditorFetcher(fileEditorFetcher);
             olv.OwnerDraw = true;
             olv.DefaultRenderer = GlobalHexRenderer;
