@@ -14,14 +14,14 @@ namespace SF3.Models.MPD {
         }
 
         [BulkCopy]
-        [DataMetadata(displayName: "Chunk Address", intDisplayMode: IntDisplayMode.Hex, displayFormat: "{0:X4}", isPointer: true)]
+        [DataMetadata(displayName: "Chunk Address", isPointer: true)]
         public int ChunkAddress {
             get => Editor.GetDouble(chunkAddressAddress);
             set => Editor.SetDouble(chunkAddressAddress, value);
         }
 
         [BulkCopy]
-        [DataMetadata(displayName: "Chunk Size", intDisplayMode: IntDisplayMode.Decimal)]
+        [DataMetadata(displayName: "Chunk Size", displayFormat: "X4")]
         public int ChunkSize {
             get => Editor.GetDouble(chunkSizeAddress);
             set => Editor.SetDouble(chunkSizeAddress, value);

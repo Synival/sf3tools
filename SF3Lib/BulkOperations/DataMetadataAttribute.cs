@@ -16,23 +16,23 @@ namespace SF3.BulkOperations {
             EditorCapabilities editorCapabilities = EditorCapabilities.Auto,
             string displayName = null,
             int displayOrder = 0,
-            IntDisplayMode intDisplayMode = IntDisplayMode.Decimal,
-            string displayFormat = "",
-            bool isPointer = false
+            string displayFormat = null,
+            bool isPointer = false,
+            int minWidth = 0
         ) {
             EditorCapabilities = editorCapabilities;
             DisplayName        = displayName;
             DisplayOrder       = displayOrder;
-            IntDisplayMode     = intDisplayMode;
             DisplayFormat      = displayFormat;
             IsPointer          = isPointer;
+            MinWidth           = minWidth;
         }
 
         public EditorCapabilities EditorCapabilities { get; }
         public string DisplayName { get; }
         public int DisplayOrder { get; }
-        public IntDisplayMode IntDisplayMode { get; }
         public string DisplayFormat { get; }
         public bool IsPointer { get; }
+        public int MinWidth { get; }
     }
 }
