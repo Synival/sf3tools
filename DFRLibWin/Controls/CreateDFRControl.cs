@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using DFRLib;
 using static CommonLib.Win.Utils.MessageUtils;
 
-namespace DFRTool.GUI.Controls {
+namespace DFRLib.Win.Controls {
     public partial class CreateDFRControl : UserControl {
         private const string c_dataReadFromEditor = "(Data Read from Editor)";
 
@@ -14,12 +14,12 @@ namespace DFRTool.GUI.Controls {
 
         }
 
-        private byte[] _alteredData = null;
+        private byte[]? _alteredData = null;
 
         /// <summary>
         /// When set, the control will use explicit "altered file" data instead of an actual file.
         /// </summary>
-        public byte[] AlteredData {
+        public byte[]? AlteredData {
             get => _alteredData;
             set {
                 if (_alteredData != value) {
@@ -85,7 +85,7 @@ namespace DFRTool.GUI.Controls {
             }
 
             try {
-                string dfrText = null;
+                string? dfrText = null;
                 using (Stream origStream = new FileStream(tbOriginalFile.Text, FileMode.Open, FileAccess.Read),
                               alteredStream = (AlteredData != null)
                                 ? (Stream) new MemoryStream(AlteredData)
@@ -112,12 +112,12 @@ namespace DFRTool.GUI.Controls {
                 }.Start();
             }
 
-            CreateDFR(this, EventArgs.Empty);
+            CreateDFR?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
         /// Event triggered after a DFR file is successfully created.
         /// </summary>
-        public event EventHandler CreateDFR;
+        public event EventHandler? CreateDFR;
     }
 }

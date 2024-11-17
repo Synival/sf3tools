@@ -1,6 +1,6 @@
 using System;
 using System.Windows.Forms;
-using DFRTool.GUI.Forms;
+using DFRLib.Win.Forms;
 
 namespace DFRTool.GUI {
     internal static class Program {

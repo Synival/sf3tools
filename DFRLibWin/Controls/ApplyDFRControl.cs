@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using DFRLib;
 using static CommonLib.Win.Utils.MessageUtils;
 
-namespace DFRTool.GUI.Controls {
+namespace DFRLib.Win.Controls {
     public partial class ApplyDFRControl : UserControl {
         private const string c_dataReadFromEditor           = "(Data Read from Editor)";
         private const string c_changesAppliedToEditorData   = "(Changes Applied to Editor Data)";
@@ -102,7 +102,7 @@ namespace DFRTool.GUI.Controls {
                 return;
             }
 
-            string outputFilename = null;
+            string? outputFilename = null;
             if (!ApplyInMemory) {
                 outputFilename = cbApplyToInputFile.Checked ? tbInputFile.Text : tbOutputFile.Text;
                 if (outputFilename.Length == 0) {
@@ -119,7 +119,7 @@ namespace DFRTool.GUI.Controls {
                 if (ApplyInMemory)
                     InMemoryOutput = output;
                 else
-                    File.WriteAllBytes(outputFilename, output);
+                    File.WriteAllBytes(outputFilename!, output);
             }
             catch (Exception ex) {
                 ErrorMessage("DFR application failed:\n\n" + ex.Message);
@@ -127,15 +127,15 @@ namespace DFRTool.GUI.Controls {
             }
 
             InfoMessage("DFR file applied successfully.");
-            ApplyDFR(this, EventArgs.Empty);
+            ApplyDFR?.Invoke(this, EventArgs.Empty);
         }
 
-        private byte[] _inputData = null;
+        private byte[]? _inputData = null;
 
         /// <summary>
         /// When set, the control will use explicit "input file" data instead of an actual file.
         /// </summary>
-        public byte[] InputData {
+        public byte[]? InputData {
             get => _inputData;
             set {
                 if (_inputData != value) {
@@ -167,11 +167,11 @@ namespace DFRTool.GUI.Controls {
         /// In-memory output set upon applying a DFR instead of outputting to a file.
         /// Set if ApplyInMemory is 'true'.
         /// </summary>
-        public byte[] InMemoryOutput { get; private set; } = null;
+        public byte[]? InMemoryOutput { get; private set; } = null;
 
         /// <summary>
         /// Event triggered after a DFR file is successfully applied.
         /// </summary>
-        public event EventHandler ApplyDFR;
+        public event EventHandler? ApplyDFR;
     }
 }

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DFRLib.Types;
 
-namespace DFRTool.GUI.Forms {
+namespace DFRLib.Win.Forms {
     public partial class frmDFRTool : Form {
         bool _isDialogMode = true;
 
@@ -51,13 +51,13 @@ namespace DFRTool.GUI.Forms {
                 this.Height -= heightDiff;
                 this.MaximumSize = new System.Drawing.Size(this.MaximumSize.Width - widthDiff, this.MaximumSize.Height - heightDiff);
 
-                this.Controls.AddRange(tabCommand.SelectedTab.Controls.Cast<Control>().ToArray());
+                this.Controls.AddRange(tabCommand.SelectedTab!.Controls.Cast<Control>().ToArray());
                 this.Controls.Remove(tabCommand);
                 this.BackColor = System.Drawing.SystemColors.Control;
             }
         }
 
-        private void CloseDialogWithSuccess(object sender, EventArgs e) {
+        private void CloseDialogWithSuccess(object? sender, EventArgs e) {
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -65,7 +65,7 @@ namespace DFRTool.GUI.Forms {
         /// <summary>
         /// When set, the "Create" command will use explicit "altered file" data instead of an actual file.
         /// </summary>
-        public byte[] CreateDFRAlteredData {
+        public byte[]? CreateDFRAlteredData {
             get => createDFRControl1.AlteredData;
             set => createDFRControl1.AlteredData = value;
         }
@@ -73,7 +73,7 @@ namespace DFRTool.GUI.Forms {
         /// <summary>
         /// When set, the "Apply" command will use explicit "input file" data instead of an actual file.
         /// </summary>
-        public byte[] ApplyDFRInputData {
+        public byte[]? ApplyDFRInputData {
             get => applyDFRControl1.InputData;
             set => applyDFRControl1.InputData = value;
         }
@@ -89,7 +89,7 @@ namespace DFRTool.GUI.Forms {
         /// <summary>
         /// Result of the "Apply" command when ApplyInMemory is set to 'true'.
         /// </summary>
-        public byte[] ApplyDFRInMemoryOutput => applyDFRControl1.InMemoryOutput;
+        public byte[]? ApplyDFRInMemoryOutput => applyDFRControl1.InMemoryOutput;
 
         protected override bool ProcessDialogKey(Keys keyData) {
             if (_isDialogMode && ModifierKeys == Keys.None && keyData == Keys.Escape) {

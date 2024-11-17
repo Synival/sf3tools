@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DFRTool.GUI.Forms
+namespace DFRLib.Win.Forms
 {
     partial class frmDFRTool
     {
@@ -35,8 +35,8 @@ namespace DFRTool.GUI.Forms
             this.tabCommand = new System.Windows.Forms.TabControl();
             this.tabCommand_Create = new System.Windows.Forms.TabPage();
             this.tabCommand_Apply = new System.Windows.Forms.TabPage();
-            this.createDFRControl1 = new DFRTool.GUI.Controls.CreateDFRControl();
-            this.applyDFRControl1 = new DFRTool.GUI.Controls.ApplyDFRControl();
+            this.createDFRControl1 = new DFRLib.Win.Controls.CreateDFRControl();
+            this.applyDFRControl1 = new DFRLib.Win.Controls.ApplyDFRControl();
             this.tabCommand.SuspendLayout();
             this.tabCommand_Create.SuspendLayout();
             this.tabCommand_Apply.SuspendLayout();

@@ -2,17 +2,25 @@
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
     <OutputType>Library</OutputType>
-    <RootNamespace>SF3.Win</RootNamespace>
+    <Nullable>enable</Nullable>
+    <RootNamespace>DFRLib.Win</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonLibWin\CommonLibWin.csproj" />
-    <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
     <ProjectReference Include="..\DFRLib\DFRLib.csproj" />
-    <ProjectReference Include="..\DFRLibWin\DFRLibWin.csproj" />
-    <ProjectReference Include="..\ObjectListView\ObjectListView\ObjectListView2008.csproj" />
-    <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Controls\ApplyDFRControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\CreateDFRControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\frmDFRTool.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

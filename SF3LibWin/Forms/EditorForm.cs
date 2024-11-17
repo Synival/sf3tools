@@ -9,12 +9,12 @@ using BrightIdeasSoftware;
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using DFRLib.Types;
-using DFRTool.GUI.Forms;
 using SF3.Win.Extensions;
 using SF3.Editors;
 using SF3.Loaders;
 using SF3.Types;
 using static CommonLib.Win.Utils.MessageUtils;
+using DFRLib.Win.Forms;
 
 namespace SF3.Win.Forms {
     /// <summary>

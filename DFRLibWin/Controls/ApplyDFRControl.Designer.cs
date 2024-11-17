@@ -1,4 +1,4 @@
-namespace DFRTool.GUI.Controls {
+namespace DFRLib.Win.Controls {
     partial class ApplyDFRControl {
         /// <summary> 
         /// Required designer variable.
