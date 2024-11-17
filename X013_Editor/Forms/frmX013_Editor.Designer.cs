@@ -23,1798 +23,1659 @@ namespace SF3.X013_Editor.Forms {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX013_Editor));
-            this.tabMain = new System.Windows.Forms.TabControl();
-            this.tabSpecials = new System.Windows.Forms.TabPage();
-            this.olvSpecials = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSpecialsName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsIsSetH = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsMinPowH = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsElementMidPowH = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsPowerMaxPowH = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng0d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng1d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng2d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng3d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng4d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng5d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng6d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng7d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng8d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng9d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng10d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng11d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng12d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng13d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialsRng14d = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabSpecialEffects = new System.Windows.Forms.TabPage();
-            this.olvSpecialEffects = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSpecialEffectsName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialEffectsID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialEffectsAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialEffectsSpecial = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabFriendshipExp = new System.Windows.Forms.TabPage();
-            this.olvFriendshipExp = new BrightIdeasSoftware.ObjectListView();
-            this.lvcFriendshipExpName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpAlly = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpPartner = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpFriend = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpTrusted = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcFriendshipExpSoulmate = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabSupportType = new System.Windows.Forms.TabPage();
-            this.olvSupportType = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSupportTypeName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportTypeID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportTypeAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportTypeSupportA = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportTypeSupportB = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabSupportStats = new System.Windows.Forms.TabPage();
-            this.olvSupportStats = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSupportStatsName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportStatsID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportStatsAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportStatsSLvlStat1 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportStatsSLvlStat2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportStatsSLvlStat3 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSupportStatsSLvlStat4 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabSoulmate = new System.Windows.Forms.TabPage();
-            this.olvSoulmate = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSoulmateName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSoulmateID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSoulmateAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSoulmateChance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabSoulmateChanceFail = new System.Windows.Forms.TabPage();
-            this.olvSoulmateChanceFail = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSoulmateChanceFailName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSoulmateChanceFailID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSoulmateChanceFailAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSoulmateChanceFailExpLost = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabMagicBonus = new System.Windows.Forms.TabPage();
-            this.olvMagicBonus = new BrightIdeasSoftware.ObjectListView();
-            this.lvcMagicBonusDefaultUser = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusEarthBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusFireBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusIceBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusSparkBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusWindBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusLightBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusDarkBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMagicBonusUnknownBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabCritVantages = new System.Windows.Forms.TabPage();
-            this.olvCritVantages = new BrightIdeasSoftware.ObjectListView();
-            this.lvcCritVantagesName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritVantagesAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritVantagesAdvantageModifier = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritVantagesDisadvantageModifier = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabCritCounterRate = new System.Windows.Forms.TabPage();
-            this.olvCritCounterRate = new BrightIdeasSoftware.ObjectListView();
-            this.lvcCritCounterRateName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateHave0Specials = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateHave1Specials = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateHave2Specials = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateHave3Specials = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateHave4Specials = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCritCounterRateHave5Specials = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabSpecialChance = new System.Windows.Forms.TabPage();
-            this.olvSpecialChance = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSpecialChanceSpecialProcRate = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceTwoSpecials2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceThreeSpecials3 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceThreeSpecials2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceFourSpecials4 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceFourSpecials3 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpecialChanceFourSpecials2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabExpLimit = new System.Windows.Forms.TabPage();
-            this.olvExpLimit = new BrightIdeasSoftware.ObjectListView();
-            this.lvcExpLimitName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcExpLimitAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcExpLimitCheckedValue = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcExpLimitReplacedValue = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabHealExp = new System.Windows.Forms.TabPage();
-            this.olvHealExp = new BrightIdeasSoftware.ObjectListView();
-            this.lvcHealExpName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcHealExpAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcHealExpBonus = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabWeaponSpellRank = new System.Windows.Forms.TabPage();
-            this.olvWeaponSpellRank = new BrightIdeasSoftware.ObjectListView();
-            this.lvcWeaponSpellRankTable = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankRankNone = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankRankC = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankRankB = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankRankA = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponSpellRankRankS = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabStatusGroups = new System.Windows.Forms.TabPage();
-            this.olvStatusGroups = new BrightIdeasSoftware.ObjectListView();
-            this.lvcStatusGroupsName = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsID = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsAddress = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck0Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck1Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck2Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck3Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck4Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck5Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck6Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck7Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck8Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsLuck9Chance = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsUnknown0 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsUnknown1 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsUnknown2 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsUnknown3 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsUnknown4 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsUnknown5 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsUnknown6 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsUnknown7 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsUnknown8 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatusGroupsUnknown9 = ((BrightIdeasSoftware.OLVColumn) (new BrightIdeasSoftware.OLVColumn()));
-            this.tabMain.SuspendLayout();
-            this.tabSpecials.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvSpecials)).BeginInit();
-            this.tabSpecialEffects.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvSpecialEffects)).BeginInit();
-            this.tabFriendshipExp.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvFriendshipExp)).BeginInit();
-            this.tabSupportType.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvSupportType)).BeginInit();
-            this.tabSupportStats.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvSupportStats)).BeginInit();
-            this.tabSoulmate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvSoulmate)).BeginInit();
-            this.tabSoulmateChanceFail.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvSoulmateChanceFail)).BeginInit();
-            this.tabMagicBonus.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvMagicBonus)).BeginInit();
-            this.tabCritVantages.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvCritVantages)).BeginInit();
-            this.tabCritCounterRate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvCritCounterRate)).BeginInit();
-            this.tabSpecialChance.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvSpecialChance)).BeginInit();
-            this.tabExpLimit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvExpLimit)).BeginInit();
-            this.tabHealExp.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvHealExp)).BeginInit();
-            this.tabWeaponSpellRank.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvWeaponSpellRank)).BeginInit();
-            this.tabStatusGroups.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.olvStatusGroups)).BeginInit();
-            this.SuspendLayout();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX013_Editor));
+            tabMain = new System.Windows.Forms.TabControl();
+            tabSpecials = new System.Windows.Forms.TabPage();
+            olvSpecials = new BrightIdeasSoftware.ObjectListView();
+            lvcSpecialsName = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsIsSetH = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsMinPowH = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsElementMidPowH = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsPowerMaxPowH = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng0d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng1d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng2d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng3d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng4d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng5d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng6d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng7d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng8d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng9d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng10d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng11d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng12d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng13d = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialsRng14d = new BrightIdeasSoftware.OLVColumn();
+            tabSpecialEffects = new System.Windows.Forms.TabPage();
+            olvSpecialEffects = new BrightIdeasSoftware.ObjectListView();
+            lvcSpecialEffectsName = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialEffectsID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialEffectsAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialEffectsSpecial = new BrightIdeasSoftware.OLVColumn();
+            tabFriendshipExp = new System.Windows.Forms.TabPage();
+            olvFriendshipExp = new BrightIdeasSoftware.ObjectListView();
+            lvcFriendshipExpName = new BrightIdeasSoftware.OLVColumn();
+            lvcFriendshipExpID = new BrightIdeasSoftware.OLVColumn();
+            lvcFriendshipExpAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcFriendshipExpAlly = new BrightIdeasSoftware.OLVColumn();
+            lvcFriendshipExpPartner = new BrightIdeasSoftware.OLVColumn();
+            lvcFriendshipExpFriend = new BrightIdeasSoftware.OLVColumn();
+            lvcFriendshipExpTrusted = new BrightIdeasSoftware.OLVColumn();
+            lvcFriendshipExpSoulmate = new BrightIdeasSoftware.OLVColumn();
+            tabSupportType = new System.Windows.Forms.TabPage();
+            olvSupportType = new BrightIdeasSoftware.ObjectListView();
+            lvcSupportTypeName = new BrightIdeasSoftware.OLVColumn();
+            lvcSupportTypeID = new BrightIdeasSoftware.OLVColumn();
+            lvcSupportTypeAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcSupportTypeSupportA = new BrightIdeasSoftware.OLVColumn();
+            lvcSupportTypeSupportB = new BrightIdeasSoftware.OLVColumn();
+            tabSupportStats = new System.Windows.Forms.TabPage();
+            olvSupportStats = new BrightIdeasSoftware.ObjectListView();
+            lvcSupportStatsName = new BrightIdeasSoftware.OLVColumn();
+            lvcSupportStatsID = new BrightIdeasSoftware.OLVColumn();
+            lvcSupportStatsAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcSupportStatsSLvlStat1 = new BrightIdeasSoftware.OLVColumn();
+            lvcSupportStatsSLvlStat2 = new BrightIdeasSoftware.OLVColumn();
+            lvcSupportStatsSLvlStat3 = new BrightIdeasSoftware.OLVColumn();
+            lvcSupportStatsSLvlStat4 = new BrightIdeasSoftware.OLVColumn();
+            tabSoulmate = new System.Windows.Forms.TabPage();
+            olvSoulmate = new BrightIdeasSoftware.ObjectListView();
+            lvcSoulmateName = new BrightIdeasSoftware.OLVColumn();
+            lvcSoulmateID = new BrightIdeasSoftware.OLVColumn();
+            lvcSoulmateAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcSoulmateChance = new BrightIdeasSoftware.OLVColumn();
+            tabSoulmateChanceFail = new System.Windows.Forms.TabPage();
+            olvSoulmateChanceFail = new BrightIdeasSoftware.ObjectListView();
+            lvcSoulmateChanceFailName = new BrightIdeasSoftware.OLVColumn();
+            lvcSoulmateChanceFailID = new BrightIdeasSoftware.OLVColumn();
+            lvcSoulmateChanceFailAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcSoulmateChanceFailExpLost = new BrightIdeasSoftware.OLVColumn();
+            tabMagicBonus = new System.Windows.Forms.TabPage();
+            olvMagicBonus = new BrightIdeasSoftware.ObjectListView();
+            lvcMagicBonusDefaultUser = new BrightIdeasSoftware.OLVColumn();
+            lvcMagicBonusID = new BrightIdeasSoftware.OLVColumn();
+            lvcMagicBonusAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcMagicBonusEarthBonus = new BrightIdeasSoftware.OLVColumn();
+            lvcMagicBonusFireBonus = new BrightIdeasSoftware.OLVColumn();
+            lvcMagicBonusIceBonus = new BrightIdeasSoftware.OLVColumn();
+            lvcMagicBonusSparkBonus = new BrightIdeasSoftware.OLVColumn();
+            lvcMagicBonusWindBonus = new BrightIdeasSoftware.OLVColumn();
+            lvcMagicBonusLightBonus = new BrightIdeasSoftware.OLVColumn();
+            lvcMagicBonusDarkBonus = new BrightIdeasSoftware.OLVColumn();
+            lvcMagicBonusUnknownBonus = new BrightIdeasSoftware.OLVColumn();
+            tabCritVantages = new System.Windows.Forms.TabPage();
+            olvCritVantages = new BrightIdeasSoftware.ObjectListView();
+            lvcCritVantagesName = new BrightIdeasSoftware.OLVColumn();
+            lvcCritVantagesAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcCritVantagesAdvantageModifier = new BrightIdeasSoftware.OLVColumn();
+            lvcCritVantagesDisadvantageModifier = new BrightIdeasSoftware.OLVColumn();
+            tabCritCounterRate = new System.Windows.Forms.TabPage();
+            olvCritCounterRate = new BrightIdeasSoftware.ObjectListView();
+            lvcCritCounterRateName = new BrightIdeasSoftware.OLVColumn();
+            lvcCritCounterRateAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcCritCounterRateHave0Specials = new BrightIdeasSoftware.OLVColumn();
+            lvcCritCounterRateHave1Specials = new BrightIdeasSoftware.OLVColumn();
+            lvcCritCounterRateHave2Specials = new BrightIdeasSoftware.OLVColumn();
+            lvcCritCounterRateHave3Specials = new BrightIdeasSoftware.OLVColumn();
+            lvcCritCounterRateHave4Specials = new BrightIdeasSoftware.OLVColumn();
+            lvcCritCounterRateHave5Specials = new BrightIdeasSoftware.OLVColumn();
+            tabSpecialChance = new System.Windows.Forms.TabPage();
+            olvSpecialChance = new BrightIdeasSoftware.ObjectListView();
+            lvcSpecialChanceSpecialProcRate = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialChanceAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialChanceTwoSpecials2 = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialChanceThreeSpecials3 = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialChanceThreeSpecials2 = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialChanceFourSpecials4 = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialChanceFourSpecials3 = new BrightIdeasSoftware.OLVColumn();
+            lvcSpecialChanceFourSpecials2 = new BrightIdeasSoftware.OLVColumn();
+            tabExpLimit = new System.Windows.Forms.TabPage();
+            olvExpLimit = new BrightIdeasSoftware.ObjectListView();
+            lvcExpLimitName = new BrightIdeasSoftware.OLVColumn();
+            lvcExpLimitAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcExpLimitCheckedValue = new BrightIdeasSoftware.OLVColumn();
+            lvcExpLimitReplacedValue = new BrightIdeasSoftware.OLVColumn();
+            tabHealExp = new System.Windows.Forms.TabPage();
+            olvHealExp = new BrightIdeasSoftware.ObjectListView();
+            lvcHealExpName = new BrightIdeasSoftware.OLVColumn();
+            lvcHealExpAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcHealExpBonus = new BrightIdeasSoftware.OLVColumn();
+            tabWeaponSpellRank = new System.Windows.Forms.TabPage();
+            olvWeaponSpellRank = new BrightIdeasSoftware.ObjectListView();
+            lvcWeaponSpellRankTable = new BrightIdeasSoftware.OLVColumn();
+            lvcWeaponSpellRankID = new BrightIdeasSoftware.OLVColumn();
+            lvcWeaponSpellRankAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcWeaponSpellRankRankNone = new BrightIdeasSoftware.OLVColumn();
+            lvcWeaponSpellRankRankC = new BrightIdeasSoftware.OLVColumn();
+            lvcWeaponSpellRankRankB = new BrightIdeasSoftware.OLVColumn();
+            lvcWeaponSpellRankRankA = new BrightIdeasSoftware.OLVColumn();
+            lvcWeaponSpellRankRankS = new BrightIdeasSoftware.OLVColumn();
+            tabStatusGroups = new System.Windows.Forms.TabPage();
+            olvStatusGroups = new BrightIdeasSoftware.ObjectListView();
+            lvcStatusGroupsName = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsID = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsLuck0Chance = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsUnknown0 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsLuck1Chance = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsUnknown1 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsLuck2Chance = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsUnknown2 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsLuck3Chance = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsUnknown3 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsLuck4Chance = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsUnknown4 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsLuck5Chance = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsUnknown5 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsLuck6Chance = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsUnknown6 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsLuck7Chance = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsUnknown7 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsLuck8Chance = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsUnknown8 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsLuck9Chance = new BrightIdeasSoftware.OLVColumn();
+            lvcStatusGroupsUnknown9 = new BrightIdeasSoftware.OLVColumn();
+            tabMain.SuspendLayout();
+            tabSpecials.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvSpecials).BeginInit();
+            tabSpecialEffects.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvSpecialEffects).BeginInit();
+            tabFriendshipExp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvFriendshipExp).BeginInit();
+            tabSupportType.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvSupportType).BeginInit();
+            tabSupportStats.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvSupportStats).BeginInit();
+            tabSoulmate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvSoulmate).BeginInit();
+            tabSoulmateChanceFail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvSoulmateChanceFail).BeginInit();
+            tabMagicBonus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvMagicBonus).BeginInit();
+            tabCritVantages.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvCritVantages).BeginInit();
+            tabCritCounterRate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvCritCounterRate).BeginInit();
+            tabSpecialChance.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvSpecialChance).BeginInit();
+            tabExpLimit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvExpLimit).BeginInit();
+            tabHealExp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvHealExp).BeginInit();
+            tabWeaponSpellRank.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvWeaponSpellRank).BeginInit();
+            tabStatusGroups.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvStatusGroups).BeginInit();
+            SuspendLayout();
             // 
             // tabMain
             // 
-            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabMain.Controls.Add(this.tabSpecials);
-            this.tabMain.Controls.Add(this.tabSpecialEffects);
-            this.tabMain.Controls.Add(this.tabFriendshipExp);
-            this.tabMain.Controls.Add(this.tabSupportType);
-            this.tabMain.Controls.Add(this.tabSupportStats);
-            this.tabMain.Controls.Add(this.tabSoulmate);
-            this.tabMain.Controls.Add(this.tabSoulmateChanceFail);
-            this.tabMain.Controls.Add(this.tabMagicBonus);
-            this.tabMain.Controls.Add(this.tabCritVantages);
-            this.tabMain.Controls.Add(this.tabCritCounterRate);
-            this.tabMain.Controls.Add(this.tabSpecialChance);
-            this.tabMain.Controls.Add(this.tabExpLimit);
-            this.tabMain.Controls.Add(this.tabHealExp);
-            this.tabMain.Controls.Add(this.tabWeaponSpellRank);
-            this.tabMain.Controls.Add(this.tabStatusGroups);
-            this.tabMain.Location = new System.Drawing.Point(0, 27);
-            this.tabMain.Name = "tabMain";
-            this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(764, 506);
-            this.tabMain.TabIndex = 0;
+            tabMain.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tabMain.Controls.Add(tabSpecials);
+            tabMain.Controls.Add(tabSpecialEffects);
+            tabMain.Controls.Add(tabFriendshipExp);
+            tabMain.Controls.Add(tabSupportType);
+            tabMain.Controls.Add(tabSupportStats);
+            tabMain.Controls.Add(tabSoulmate);
+            tabMain.Controls.Add(tabSoulmateChanceFail);
+            tabMain.Controls.Add(tabMagicBonus);
+            tabMain.Controls.Add(tabCritVantages);
+            tabMain.Controls.Add(tabCritCounterRate);
+            tabMain.Controls.Add(tabSpecialChance);
+            tabMain.Controls.Add(tabExpLimit);
+            tabMain.Controls.Add(tabHealExp);
+            tabMain.Controls.Add(tabWeaponSpellRank);
+            tabMain.Controls.Add(tabStatusGroups);
+            tabMain.Location = new System.Drawing.Point(0, 31);
+            tabMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabMain.Name = "tabMain";
+            tabMain.SelectedIndex = 0;
+            tabMain.Size = new System.Drawing.Size(891, 584);
+            tabMain.TabIndex = 0;
             // 
             // tabSpecials
             // 
-            this.tabSpecials.Controls.Add(this.olvSpecials);
-            this.tabSpecials.Location = new System.Drawing.Point(4, 22);
-            this.tabSpecials.Name = "tabSpecials";
-            this.tabSpecials.Size = new System.Drawing.Size(756, 480);
-            this.tabSpecials.TabIndex = 3;
-            this.tabSpecials.Text = "Specials";
-            this.tabSpecials.UseVisualStyleBackColor = true;
+            tabSpecials.Controls.Add(olvSpecials);
+            tabSpecials.Location = new System.Drawing.Point(4, 24);
+            tabSpecials.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSpecials.Name = "tabSpecials";
+            tabSpecials.Size = new System.Drawing.Size(883, 556);
+            tabSpecials.TabIndex = 3;
+            tabSpecials.Text = "Specials";
+            tabSpecials.UseVisualStyleBackColor = true;
             // 
             // olvSpecials
             // 
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsName);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsID);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsAddress);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsIsSetH);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsMinPowH);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsElementMidPowH);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsPowerMaxPowH);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng0d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng1d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng2d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng3d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng4d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng5d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng6d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng7d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng8d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng9d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng10d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng11d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng12d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng13d);
-            this.olvSpecials.AllColumns.Add(this.lvcSpecialsRng14d);
-            this.olvSpecials.AllowColumnReorder = true;
-            this.olvSpecials.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvSpecials.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvSpecials.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcSpecialsName,
-            this.lvcSpecialsID,
-            this.lvcSpecialsAddress,
-            this.lvcSpecialsIsSetH,
-            this.lvcSpecialsMinPowH,
-            this.lvcSpecialsElementMidPowH,
-            this.lvcSpecialsPowerMaxPowH,
-            this.lvcSpecialsRng0d,
-            this.lvcSpecialsRng1d,
-            this.lvcSpecialsRng2d,
-            this.lvcSpecialsRng3d,
-            this.lvcSpecialsRng4d,
-            this.lvcSpecialsRng5d,
-            this.lvcSpecialsRng6d,
-            this.lvcSpecialsRng7d,
-            this.lvcSpecialsRng8d,
-            this.lvcSpecialsRng9d,
-            this.lvcSpecialsRng10d,
-            this.lvcSpecialsRng11d,
-            this.lvcSpecialsRng12d,
-            this.lvcSpecialsRng13d,
-            this.lvcSpecialsRng14d});
-            this.olvSpecials.FullRowSelect = true;
-            this.olvSpecials.GridLines = true;
-            this.olvSpecials.HasCollapsibleGroups = false;
-            this.olvSpecials.HideSelection = false;
-            this.olvSpecials.Location = new System.Drawing.Point(3, 3);
-            this.olvSpecials.MenuLabelGroupBy = "";
-            this.olvSpecials.Name = "olvSpecials";
-            this.olvSpecials.ShowGroups = false;
-            this.olvSpecials.Size = new System.Drawing.Size(750, 474);
-            this.olvSpecials.TabIndex = 0;
-            this.olvSpecials.UseAlternatingBackColors = true;
-            this.olvSpecials.UseCompatibleStateImageBehavior = false;
-            this.olvSpecials.View = System.Windows.Forms.View.Details;
+            olvSpecials.AllColumns.Add(lvcSpecialsName);
+            olvSpecials.AllColumns.Add(lvcSpecialsID);
+            olvSpecials.AllColumns.Add(lvcSpecialsAddress);
+            olvSpecials.AllColumns.Add(lvcSpecialsIsSetH);
+            olvSpecials.AllColumns.Add(lvcSpecialsMinPowH);
+            olvSpecials.AllColumns.Add(lvcSpecialsElementMidPowH);
+            olvSpecials.AllColumns.Add(lvcSpecialsPowerMaxPowH);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng0d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng1d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng2d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng3d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng4d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng5d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng6d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng7d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng8d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng9d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng10d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng11d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng12d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng13d);
+            olvSpecials.AllColumns.Add(lvcSpecialsRng14d);
+            olvSpecials.AllowColumnReorder = true;
+            olvSpecials.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvSpecials.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvSpecials.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcSpecialsName, lvcSpecialsID, lvcSpecialsAddress, lvcSpecialsIsSetH, lvcSpecialsMinPowH, lvcSpecialsElementMidPowH, lvcSpecialsPowerMaxPowH, lvcSpecialsRng0d, lvcSpecialsRng1d, lvcSpecialsRng2d, lvcSpecialsRng3d, lvcSpecialsRng4d, lvcSpecialsRng5d, lvcSpecialsRng6d, lvcSpecialsRng7d, lvcSpecialsRng8d, lvcSpecialsRng9d, lvcSpecialsRng10d, lvcSpecialsRng11d, lvcSpecialsRng12d, lvcSpecialsRng13d, lvcSpecialsRng14d });
+            olvSpecials.FullRowSelect = true;
+            olvSpecials.GridLines = true;
+            olvSpecials.HasCollapsibleGroups = false;
+            olvSpecials.Location = new System.Drawing.Point(4, 3);
+            olvSpecials.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvSpecials.MenuLabelGroupBy = "";
+            olvSpecials.Name = "olvSpecials";
+            olvSpecials.ShowGroups = false;
+            olvSpecials.Size = new System.Drawing.Size(874, 546);
+            olvSpecials.TabIndex = 0;
+            olvSpecials.UseAlternatingBackColors = true;
+            olvSpecials.UseCompatibleStateImageBehavior = false;
+            olvSpecials.View = System.Windows.Forms.View.Details;
             // 
             // lvcSpecialsName
             // 
-            this.lvcSpecialsName.AspectName = "Name";
-            this.lvcSpecialsName.IsEditable = false;
-            this.lvcSpecialsName.Text = "Name";
-            this.lvcSpecialsName.Width = 80;
+            lvcSpecialsName.AspectName = "Name";
+            lvcSpecialsName.IsEditable = false;
+            lvcSpecialsName.Text = "Name";
+            lvcSpecialsName.Width = 80;
             // 
             // lvcSpecialsID
             // 
-            this.lvcSpecialsID.AspectName = "ID";
-            this.lvcSpecialsID.AspectToStringFormat = "{0:X}";
-            this.lvcSpecialsID.IsEditable = false;
-            this.lvcSpecialsID.Text = "Hex ID";
+            lvcSpecialsID.AspectName = "ID";
+            lvcSpecialsID.AspectToStringFormat = "{0:X}";
+            lvcSpecialsID.IsEditable = false;
+            lvcSpecialsID.Text = "Hex ID";
             // 
             // lvcSpecialsAddress
             // 
-            this.lvcSpecialsAddress.AspectName = "Address";
-            this.lvcSpecialsAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcSpecialsAddress.IsEditable = false;
-            this.lvcSpecialsAddress.Text = "Address";
+            lvcSpecialsAddress.AspectName = "Address";
+            lvcSpecialsAddress.AspectToStringFormat = "{0:X4}";
+            lvcSpecialsAddress.IsEditable = false;
+            lvcSpecialsAddress.Text = "Address";
             // 
             // lvcSpecialsIsSetH
             // 
-            this.lvcSpecialsIsSetH.AspectName = "Unknown1";
-            this.lvcSpecialsIsSetH.AspectToStringFormat = "{0:X}";
-            this.lvcSpecialsIsSetH.Text = "isSet H";
+            lvcSpecialsIsSetH.AspectName = "Unknown1";
+            lvcSpecialsIsSetH.AspectToStringFormat = "{0:X}";
+            lvcSpecialsIsSetH.Text = "isSet H";
             // 
             // lvcSpecialsMinPowH
             // 
-            this.lvcSpecialsMinPowH.AspectName = "DamageCalc";
-            this.lvcSpecialsMinPowH.Text = "damageCalc/minPow H";
-            this.lvcSpecialsMinPowH.Width = 125;
+            lvcSpecialsMinPowH.AspectName = "DamageCalc";
+            lvcSpecialsMinPowH.Text = "damageCalc/minPow H";
+            lvcSpecialsMinPowH.Width = 125;
             // 
             // lvcSpecialsElementMidPowH
             // 
-            this.lvcSpecialsElementMidPowH.AspectName = "ExtraPow";
-            this.lvcSpecialsElementMidPowH.Text = "Element/midPow H";
-            this.lvcSpecialsElementMidPowH.Width = 108;
+            lvcSpecialsElementMidPowH.AspectName = "ExtraPow";
+            lvcSpecialsElementMidPowH.Text = "Element/midPow H";
+            lvcSpecialsElementMidPowH.Width = 108;
             // 
             // lvcSpecialsPowerMaxPowH
             // 
-            this.lvcSpecialsPowerMaxPowH.AspectName = "Pow";
-            this.lvcSpecialsPowerMaxPowH.Text = "Power/maxPow H";
-            this.lvcSpecialsPowerMaxPowH.Width = 99;
+            lvcSpecialsPowerMaxPowH.AspectName = "Pow";
+            lvcSpecialsPowerMaxPowH.Text = "Power/maxPow H";
+            lvcSpecialsPowerMaxPowH.Width = 99;
             // 
             // lvcSpecialsRng0d
             // 
-            this.lvcSpecialsRng0d.AspectName = "ranResult0";
-            this.lvcSpecialsRng0d.IsEditable = false;
-            this.lvcSpecialsRng0d.Text = "rng0d";
-            this.lvcSpecialsRng0d.Width = 44;
+            lvcSpecialsRng0d.AspectName = "ranResult0";
+            lvcSpecialsRng0d.IsEditable = false;
+            lvcSpecialsRng0d.Text = "rng0d";
+            lvcSpecialsRng0d.Width = 44;
             // 
             // lvcSpecialsRng1d
             // 
-            this.lvcSpecialsRng1d.AspectName = "ranResult1";
-            this.lvcSpecialsRng1d.IsEditable = false;
-            this.lvcSpecialsRng1d.Text = "rng1d";
-            this.lvcSpecialsRng1d.Width = 44;
+            lvcSpecialsRng1d.AspectName = "ranResult1";
+            lvcSpecialsRng1d.IsEditable = false;
+            lvcSpecialsRng1d.Text = "rng1d";
+            lvcSpecialsRng1d.Width = 44;
             // 
             // lvcSpecialsRng2d
             // 
-            this.lvcSpecialsRng2d.AspectName = "ranResult2";
-            this.lvcSpecialsRng2d.IsEditable = false;
-            this.lvcSpecialsRng2d.Text = "rng2d";
-            this.lvcSpecialsRng2d.Width = 44;
+            lvcSpecialsRng2d.AspectName = "ranResult2";
+            lvcSpecialsRng2d.IsEditable = false;
+            lvcSpecialsRng2d.Text = "rng2d";
+            lvcSpecialsRng2d.Width = 44;
             // 
             // lvcSpecialsRng3d
             // 
-            this.lvcSpecialsRng3d.AspectName = "ranResult3";
-            this.lvcSpecialsRng3d.IsEditable = false;
-            this.lvcSpecialsRng3d.Text = "rng3d";
-            this.lvcSpecialsRng3d.Width = 44;
+            lvcSpecialsRng3d.AspectName = "ranResult3";
+            lvcSpecialsRng3d.IsEditable = false;
+            lvcSpecialsRng3d.Text = "rng3d";
+            lvcSpecialsRng3d.Width = 44;
             // 
             // lvcSpecialsRng4d
             // 
-            this.lvcSpecialsRng4d.AspectName = "ranResult4";
-            this.lvcSpecialsRng4d.IsEditable = false;
-            this.lvcSpecialsRng4d.Text = "rng4d";
-            this.lvcSpecialsRng4d.Width = 44;
+            lvcSpecialsRng4d.AspectName = "ranResult4";
+            lvcSpecialsRng4d.IsEditable = false;
+            lvcSpecialsRng4d.Text = "rng4d";
+            lvcSpecialsRng4d.Width = 44;
             // 
             // lvcSpecialsRng5d
             // 
-            this.lvcSpecialsRng5d.AspectName = "ranResult5";
-            this.lvcSpecialsRng5d.IsEditable = false;
-            this.lvcSpecialsRng5d.Text = "rng5d";
-            this.lvcSpecialsRng5d.Width = 44;
+            lvcSpecialsRng5d.AspectName = "ranResult5";
+            lvcSpecialsRng5d.IsEditable = false;
+            lvcSpecialsRng5d.Text = "rng5d";
+            lvcSpecialsRng5d.Width = 44;
             // 
             // lvcSpecialsRng6d
             // 
-            this.lvcSpecialsRng6d.AspectName = "ranResult6";
-            this.lvcSpecialsRng6d.IsEditable = false;
-            this.lvcSpecialsRng6d.Text = "rng6d";
-            this.lvcSpecialsRng6d.Width = 44;
+            lvcSpecialsRng6d.AspectName = "ranResult6";
+            lvcSpecialsRng6d.IsEditable = false;
+            lvcSpecialsRng6d.Text = "rng6d";
+            lvcSpecialsRng6d.Width = 44;
             // 
             // lvcSpecialsRng7d
             // 
-            this.lvcSpecialsRng7d.AspectName = "ranResult7";
-            this.lvcSpecialsRng7d.IsEditable = false;
-            this.lvcSpecialsRng7d.Text = "rng7d";
-            this.lvcSpecialsRng7d.Width = 44;
+            lvcSpecialsRng7d.AspectName = "ranResult7";
+            lvcSpecialsRng7d.IsEditable = false;
+            lvcSpecialsRng7d.Text = "rng7d";
+            lvcSpecialsRng7d.Width = 44;
             // 
             // lvcSpecialsRng8d
             // 
-            this.lvcSpecialsRng8d.AspectName = "ranResult8";
-            this.lvcSpecialsRng8d.IsEditable = false;
-            this.lvcSpecialsRng8d.Text = "rng8d";
-            this.lvcSpecialsRng8d.Width = 44;
+            lvcSpecialsRng8d.AspectName = "ranResult8";
+            lvcSpecialsRng8d.IsEditable = false;
+            lvcSpecialsRng8d.Text = "rng8d";
+            lvcSpecialsRng8d.Width = 44;
             // 
             // lvcSpecialsRng9d
             // 
-            this.lvcSpecialsRng9d.AspectName = "ranResult9";
-            this.lvcSpecialsRng9d.IsEditable = false;
-            this.lvcSpecialsRng9d.Text = "rng9d";
-            this.lvcSpecialsRng9d.Width = 44;
+            lvcSpecialsRng9d.AspectName = "ranResult9";
+            lvcSpecialsRng9d.IsEditable = false;
+            lvcSpecialsRng9d.Text = "rng9d";
+            lvcSpecialsRng9d.Width = 44;
             // 
             // lvcSpecialsRng10d
             // 
-            this.lvcSpecialsRng10d.AspectName = "ranResult10";
-            this.lvcSpecialsRng10d.IsEditable = false;
-            this.lvcSpecialsRng10d.Text = "rng10d";
-            this.lvcSpecialsRng10d.Width = 46;
+            lvcSpecialsRng10d.AspectName = "ranResult10";
+            lvcSpecialsRng10d.IsEditable = false;
+            lvcSpecialsRng10d.Text = "rng10d";
+            lvcSpecialsRng10d.Width = 46;
             // 
             // lvcSpecialsRng11d
             // 
-            this.lvcSpecialsRng11d.AspectName = "ranResult11";
-            this.lvcSpecialsRng11d.IsEditable = false;
-            this.lvcSpecialsRng11d.Text = "rng11d";
-            this.lvcSpecialsRng11d.Width = 46;
+            lvcSpecialsRng11d.AspectName = "ranResult11";
+            lvcSpecialsRng11d.IsEditable = false;
+            lvcSpecialsRng11d.Text = "rng11d";
+            lvcSpecialsRng11d.Width = 46;
             // 
             // lvcSpecialsRng12d
             // 
-            this.lvcSpecialsRng12d.AspectName = "ranResult12";
-            this.lvcSpecialsRng12d.IsEditable = false;
-            this.lvcSpecialsRng12d.Text = "rng12d";
-            this.lvcSpecialsRng12d.Width = 46;
+            lvcSpecialsRng12d.AspectName = "ranResult12";
+            lvcSpecialsRng12d.IsEditable = false;
+            lvcSpecialsRng12d.Text = "rng12d";
+            lvcSpecialsRng12d.Width = 46;
             // 
             // lvcSpecialsRng13d
             // 
-            this.lvcSpecialsRng13d.AspectName = "ranResult13";
-            this.lvcSpecialsRng13d.IsEditable = false;
-            this.lvcSpecialsRng13d.Text = "rng13d";
-            this.lvcSpecialsRng13d.Width = 46;
+            lvcSpecialsRng13d.AspectName = "ranResult13";
+            lvcSpecialsRng13d.IsEditable = false;
+            lvcSpecialsRng13d.Text = "rng13d";
+            lvcSpecialsRng13d.Width = 46;
             // 
             // lvcSpecialsRng14d
             // 
-            this.lvcSpecialsRng14d.AspectName = "ranResult14";
-            this.lvcSpecialsRng14d.IsEditable = false;
-            this.lvcSpecialsRng14d.Text = "rng14d";
-            this.lvcSpecialsRng14d.Width = 46;
+            lvcSpecialsRng14d.AspectName = "ranResult14";
+            lvcSpecialsRng14d.IsEditable = false;
+            lvcSpecialsRng14d.Text = "rng14d";
+            lvcSpecialsRng14d.Width = 46;
             // 
             // tabSpecialEffects
             // 
-            this.tabSpecialEffects.Controls.Add(this.olvSpecialEffects);
-            this.tabSpecialEffects.Location = new System.Drawing.Point(4, 22);
-            this.tabSpecialEffects.Name = "tabSpecialEffects";
-            this.tabSpecialEffects.Size = new System.Drawing.Size(756, 480);
-            this.tabSpecialEffects.TabIndex = 17;
-            this.tabSpecialEffects.Text = "SpecialEffects scn3,pd";
-            this.tabSpecialEffects.UseVisualStyleBackColor = true;
+            tabSpecialEffects.Controls.Add(olvSpecialEffects);
+            tabSpecialEffects.Location = new System.Drawing.Point(4, 24);
+            tabSpecialEffects.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSpecialEffects.Name = "tabSpecialEffects";
+            tabSpecialEffects.Size = new System.Drawing.Size(883, 556);
+            tabSpecialEffects.TabIndex = 17;
+            tabSpecialEffects.Text = "SpecialEffects scn3,pd";
+            tabSpecialEffects.UseVisualStyleBackColor = true;
             // 
             // olvSpecialEffects
             // 
-            this.olvSpecialEffects.AllColumns.Add(this.lvcSpecialEffectsName);
-            this.olvSpecialEffects.AllColumns.Add(this.lvcSpecialEffectsID);
-            this.olvSpecialEffects.AllColumns.Add(this.lvcSpecialEffectsAddress);
-            this.olvSpecialEffects.AllColumns.Add(this.lvcSpecialEffectsSpecial);
-            this.olvSpecialEffects.AllowColumnReorder = true;
-            this.olvSpecialEffects.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvSpecialEffects.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvSpecialEffects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcSpecialEffectsName,
-            this.lvcSpecialEffectsID,
-            this.lvcSpecialEffectsAddress,
-            this.lvcSpecialEffectsSpecial});
-            this.olvSpecialEffects.FullRowSelect = true;
-            this.olvSpecialEffects.GridLines = true;
-            this.olvSpecialEffects.HasCollapsibleGroups = false;
-            this.olvSpecialEffects.HideSelection = false;
-            this.olvSpecialEffects.Location = new System.Drawing.Point(3, 3);
-            this.olvSpecialEffects.MenuLabelGroupBy = "";
-            this.olvSpecialEffects.Name = "olvSpecialEffects";
-            this.olvSpecialEffects.ShowGroups = false;
-            this.olvSpecialEffects.Size = new System.Drawing.Size(750, 474);
-            this.olvSpecialEffects.TabIndex = 3;
-            this.olvSpecialEffects.UseAlternatingBackColors = true;
-            this.olvSpecialEffects.UseCompatibleStateImageBehavior = false;
-            this.olvSpecialEffects.View = System.Windows.Forms.View.Details;
+            olvSpecialEffects.AllColumns.Add(lvcSpecialEffectsName);
+            olvSpecialEffects.AllColumns.Add(lvcSpecialEffectsID);
+            olvSpecialEffects.AllColumns.Add(lvcSpecialEffectsAddress);
+            olvSpecialEffects.AllColumns.Add(lvcSpecialEffectsSpecial);
+            olvSpecialEffects.AllowColumnReorder = true;
+            olvSpecialEffects.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvSpecialEffects.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvSpecialEffects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcSpecialEffectsName, lvcSpecialEffectsID, lvcSpecialEffectsAddress, lvcSpecialEffectsSpecial });
+            olvSpecialEffects.FullRowSelect = true;
+            olvSpecialEffects.GridLines = true;
+            olvSpecialEffects.HasCollapsibleGroups = false;
+            olvSpecialEffects.Location = new System.Drawing.Point(4, 3);
+            olvSpecialEffects.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvSpecialEffects.MenuLabelGroupBy = "";
+            olvSpecialEffects.Name = "olvSpecialEffects";
+            olvSpecialEffects.ShowGroups = false;
+            olvSpecialEffects.Size = new System.Drawing.Size(874, 546);
+            olvSpecialEffects.TabIndex = 3;
+            olvSpecialEffects.UseAlternatingBackColors = true;
+            olvSpecialEffects.UseCompatibleStateImageBehavior = false;
+            olvSpecialEffects.View = System.Windows.Forms.View.Details;
             // 
             // lvcSpecialEffectsName
             // 
-            this.lvcSpecialEffectsName.AspectName = "Name";
-            this.lvcSpecialEffectsName.IsEditable = false;
-            this.lvcSpecialEffectsName.Text = "Name";
-            this.lvcSpecialEffectsName.Width = 100;
+            lvcSpecialEffectsName.AspectName = "Name";
+            lvcSpecialEffectsName.IsEditable = false;
+            lvcSpecialEffectsName.Text = "Name";
+            lvcSpecialEffectsName.Width = 100;
             // 
             // lvcSpecialEffectsID
             // 
-            this.lvcSpecialEffectsID.AspectName = "ID";
-            this.lvcSpecialEffectsID.AspectToStringFormat = "{0:X}";
-            this.lvcSpecialEffectsID.IsEditable = false;
-            this.lvcSpecialEffectsID.Text = "Hex ID";
+            lvcSpecialEffectsID.AspectName = "ID";
+            lvcSpecialEffectsID.AspectToStringFormat = "{0:X}";
+            lvcSpecialEffectsID.IsEditable = false;
+            lvcSpecialEffectsID.Text = "Hex ID";
             // 
             // lvcSpecialEffectsAddress
             // 
-            this.lvcSpecialEffectsAddress.AspectName = "Address";
-            this.lvcSpecialEffectsAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcSpecialEffectsAddress.IsEditable = false;
-            this.lvcSpecialEffectsAddress.Text = "Address";
+            lvcSpecialEffectsAddress.AspectName = "Address";
+            lvcSpecialEffectsAddress.AspectToStringFormat = "{0:X4}";
+            lvcSpecialEffectsAddress.IsEditable = false;
+            lvcSpecialEffectsAddress.Text = "Address";
             // 
             // lvcSpecialEffectsSpecial
             // 
-            this.lvcSpecialEffectsSpecial.AspectName = "Special";
-            this.lvcSpecialEffectsSpecial.Text = "Special";
-            this.lvcSpecialEffectsSpecial.Width = 120;
+            lvcSpecialEffectsSpecial.AspectName = "Special";
+            lvcSpecialEffectsSpecial.Text = "Special";
+            lvcSpecialEffectsSpecial.Width = 120;
             // 
             // tabFriendshipExp
             // 
-            this.tabFriendshipExp.Controls.Add(this.olvFriendshipExp);
-            this.tabFriendshipExp.Location = new System.Drawing.Point(4, 22);
-            this.tabFriendshipExp.Name = "tabFriendshipExp";
-            this.tabFriendshipExp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFriendshipExp.Size = new System.Drawing.Size(756, 480);
-            this.tabFriendshipExp.TabIndex = 4;
-            this.tabFriendshipExp.Text = "Friendship Exp";
-            this.tabFriendshipExp.UseVisualStyleBackColor = true;
+            tabFriendshipExp.Controls.Add(olvFriendshipExp);
+            tabFriendshipExp.Location = new System.Drawing.Point(4, 24);
+            tabFriendshipExp.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabFriendshipExp.Name = "tabFriendshipExp";
+            tabFriendshipExp.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabFriendshipExp.Size = new System.Drawing.Size(883, 556);
+            tabFriendshipExp.TabIndex = 4;
+            tabFriendshipExp.Text = "Friendship Exp";
+            tabFriendshipExp.UseVisualStyleBackColor = true;
             // 
             // olvFriendshipExp
             // 
-            this.olvFriendshipExp.AllColumns.Add(this.lvcFriendshipExpName);
-            this.olvFriendshipExp.AllColumns.Add(this.lvcFriendshipExpID);
-            this.olvFriendshipExp.AllColumns.Add(this.lvcFriendshipExpAddress);
-            this.olvFriendshipExp.AllColumns.Add(this.lvcFriendshipExpAlly);
-            this.olvFriendshipExp.AllColumns.Add(this.lvcFriendshipExpPartner);
-            this.olvFriendshipExp.AllColumns.Add(this.lvcFriendshipExpFriend);
-            this.olvFriendshipExp.AllColumns.Add(this.lvcFriendshipExpTrusted);
-            this.olvFriendshipExp.AllColumns.Add(this.lvcFriendshipExpSoulmate);
-            this.olvFriendshipExp.AllowColumnReorder = true;
-            this.olvFriendshipExp.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvFriendshipExp.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvFriendshipExp.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcFriendshipExpName,
-            this.lvcFriendshipExpID,
-            this.lvcFriendshipExpAddress,
-            this.lvcFriendshipExpAlly,
-            this.lvcFriendshipExpPartner,
-            this.lvcFriendshipExpFriend,
-            this.lvcFriendshipExpTrusted,
-            this.lvcFriendshipExpSoulmate});
-            this.olvFriendshipExp.FullRowSelect = true;
-            this.olvFriendshipExp.GridLines = true;
-            this.olvFriendshipExp.HasCollapsibleGroups = false;
-            this.olvFriendshipExp.HideSelection = false;
-            this.olvFriendshipExp.Location = new System.Drawing.Point(3, 3);
-            this.olvFriendshipExp.MenuLabelGroupBy = "";
-            this.olvFriendshipExp.Name = "olvFriendshipExp";
-            this.olvFriendshipExp.ShowGroups = false;
-            this.olvFriendshipExp.Size = new System.Drawing.Size(750, 474);
-            this.olvFriendshipExp.TabIndex = 1;
-            this.olvFriendshipExp.UseAlternatingBackColors = true;
-            this.olvFriendshipExp.UseCompatibleStateImageBehavior = false;
-            this.olvFriendshipExp.View = System.Windows.Forms.View.Details;
+            olvFriendshipExp.AllColumns.Add(lvcFriendshipExpName);
+            olvFriendshipExp.AllColumns.Add(lvcFriendshipExpID);
+            olvFriendshipExp.AllColumns.Add(lvcFriendshipExpAddress);
+            olvFriendshipExp.AllColumns.Add(lvcFriendshipExpAlly);
+            olvFriendshipExp.AllColumns.Add(lvcFriendshipExpPartner);
+            olvFriendshipExp.AllColumns.Add(lvcFriendshipExpFriend);
+            olvFriendshipExp.AllColumns.Add(lvcFriendshipExpTrusted);
+            olvFriendshipExp.AllColumns.Add(lvcFriendshipExpSoulmate);
+            olvFriendshipExp.AllowColumnReorder = true;
+            olvFriendshipExp.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvFriendshipExp.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvFriendshipExp.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcFriendshipExpName, lvcFriendshipExpID, lvcFriendshipExpAddress, lvcFriendshipExpAlly, lvcFriendshipExpPartner, lvcFriendshipExpFriend, lvcFriendshipExpTrusted, lvcFriendshipExpSoulmate });
+            olvFriendshipExp.FullRowSelect = true;
+            olvFriendshipExp.GridLines = true;
+            olvFriendshipExp.HasCollapsibleGroups = false;
+            olvFriendshipExp.Location = new System.Drawing.Point(4, 3);
+            olvFriendshipExp.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvFriendshipExp.MenuLabelGroupBy = "";
+            olvFriendshipExp.Name = "olvFriendshipExp";
+            olvFriendshipExp.ShowGroups = false;
+            olvFriendshipExp.Size = new System.Drawing.Size(874, 546);
+            olvFriendshipExp.TabIndex = 1;
+            olvFriendshipExp.UseAlternatingBackColors = true;
+            olvFriendshipExp.UseCompatibleStateImageBehavior = false;
+            olvFriendshipExp.View = System.Windows.Forms.View.Details;
             // 
             // lvcFriendshipExpName
             // 
-            this.lvcFriendshipExpName.AspectName = "Name";
-            this.lvcFriendshipExpName.IsEditable = false;
-            this.lvcFriendshipExpName.Text = "Name";
+            lvcFriendshipExpName.AspectName = "Name";
+            lvcFriendshipExpName.IsEditable = false;
+            lvcFriendshipExpName.Text = "Name";
             // 
             // lvcFriendshipExpID
             // 
-            this.lvcFriendshipExpID.AspectName = "ID";
-            this.lvcFriendshipExpID.AspectToStringFormat = "{0:X}";
-            this.lvcFriendshipExpID.IsEditable = false;
-            this.lvcFriendshipExpID.Text = "Hex ID";
+            lvcFriendshipExpID.AspectName = "ID";
+            lvcFriendshipExpID.AspectToStringFormat = "{0:X}";
+            lvcFriendshipExpID.IsEditable = false;
+            lvcFriendshipExpID.Text = "Hex ID";
             // 
             // lvcFriendshipExpAddress
             // 
-            this.lvcFriendshipExpAddress.AspectName = "Address";
-            this.lvcFriendshipExpAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcFriendshipExpAddress.IsEditable = false;
-            this.lvcFriendshipExpAddress.Text = "Address";
+            lvcFriendshipExpAddress.AspectName = "Address";
+            lvcFriendshipExpAddress.AspectToStringFormat = "{0:X4}";
+            lvcFriendshipExpAddress.IsEditable = false;
+            lvcFriendshipExpAddress.Text = "Address";
             // 
             // lvcFriendshipExpAlly
             // 
-            this.lvcFriendshipExpAlly.AspectName = "SLvl0";
-            this.lvcFriendshipExpAlly.Text = "Ally";
+            lvcFriendshipExpAlly.AspectName = "SLvl0";
+            lvcFriendshipExpAlly.Text = "Ally";
             // 
             // lvcFriendshipExpPartner
             // 
-            this.lvcFriendshipExpPartner.AspectName = "SLvl1";
-            this.lvcFriendshipExpPartner.Text = "Partner";
-            this.lvcFriendshipExpPartner.Width = 115;
+            lvcFriendshipExpPartner.AspectName = "SLvl1";
+            lvcFriendshipExpPartner.Text = "Partner";
+            lvcFriendshipExpPartner.Width = 115;
             // 
             // lvcFriendshipExpFriend
             // 
-            this.lvcFriendshipExpFriend.AspectName = "SLvl2";
-            this.lvcFriendshipExpFriend.Text = "Friend";
-            this.lvcFriendshipExpFriend.Width = 125;
+            lvcFriendshipExpFriend.AspectName = "SLvl2";
+            lvcFriendshipExpFriend.Text = "Friend";
+            lvcFriendshipExpFriend.Width = 125;
             // 
             // lvcFriendshipExpTrusted
             // 
-            this.lvcFriendshipExpTrusted.AspectName = "SLvl3";
-            this.lvcFriendshipExpTrusted.Text = "Trusted";
+            lvcFriendshipExpTrusted.AspectName = "SLvl3";
+            lvcFriendshipExpTrusted.Text = "Trusted";
             // 
             // lvcFriendshipExpSoulmate
             // 
-            this.lvcFriendshipExpSoulmate.AspectName = "SLvl4";
-            this.lvcFriendshipExpSoulmate.Text = "Soulmate";
+            lvcFriendshipExpSoulmate.AspectName = "SLvl4";
+            lvcFriendshipExpSoulmate.Text = "Soulmate";
             // 
             // tabSupportType
             // 
-            this.tabSupportType.Controls.Add(this.olvSupportType);
-            this.tabSupportType.Location = new System.Drawing.Point(4, 22);
-            this.tabSupportType.Name = "tabSupportType";
-            this.tabSupportType.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSupportType.Size = new System.Drawing.Size(756, 480);
-            this.tabSupportType.TabIndex = 5;
-            this.tabSupportType.Text = "SupportType";
-            this.tabSupportType.UseVisualStyleBackColor = true;
+            tabSupportType.Controls.Add(olvSupportType);
+            tabSupportType.Location = new System.Drawing.Point(4, 24);
+            tabSupportType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSupportType.Name = "tabSupportType";
+            tabSupportType.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSupportType.Size = new System.Drawing.Size(883, 556);
+            tabSupportType.TabIndex = 5;
+            tabSupportType.Text = "SupportType";
+            tabSupportType.UseVisualStyleBackColor = true;
             // 
             // olvSupportType
             // 
-            this.olvSupportType.AllColumns.Add(this.lvcSupportTypeName);
-            this.olvSupportType.AllColumns.Add(this.lvcSupportTypeID);
-            this.olvSupportType.AllColumns.Add(this.lvcSupportTypeAddress);
-            this.olvSupportType.AllColumns.Add(this.lvcSupportTypeSupportA);
-            this.olvSupportType.AllColumns.Add(this.lvcSupportTypeSupportB);
-            this.olvSupportType.AllowColumnReorder = true;
-            this.olvSupportType.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvSupportType.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvSupportType.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcSupportTypeName,
-            this.lvcSupportTypeID,
-            this.lvcSupportTypeAddress,
-            this.lvcSupportTypeSupportA,
-            this.lvcSupportTypeSupportB});
-            this.olvSupportType.FullRowSelect = true;
-            this.olvSupportType.GridLines = true;
-            this.olvSupportType.HasCollapsibleGroups = false;
-            this.olvSupportType.HideSelection = false;
-            this.olvSupportType.Location = new System.Drawing.Point(3, 3);
-            this.olvSupportType.MenuLabelGroupBy = "";
-            this.olvSupportType.Name = "olvSupportType";
-            this.olvSupportType.ShowGroups = false;
-            this.olvSupportType.Size = new System.Drawing.Size(750, 474);
-            this.olvSupportType.TabIndex = 2;
-            this.olvSupportType.UseAlternatingBackColors = true;
-            this.olvSupportType.UseCompatibleStateImageBehavior = false;
-            this.olvSupportType.View = System.Windows.Forms.View.Details;
+            olvSupportType.AllColumns.Add(lvcSupportTypeName);
+            olvSupportType.AllColumns.Add(lvcSupportTypeID);
+            olvSupportType.AllColumns.Add(lvcSupportTypeAddress);
+            olvSupportType.AllColumns.Add(lvcSupportTypeSupportA);
+            olvSupportType.AllColumns.Add(lvcSupportTypeSupportB);
+            olvSupportType.AllowColumnReorder = true;
+            olvSupportType.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvSupportType.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvSupportType.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcSupportTypeName, lvcSupportTypeID, lvcSupportTypeAddress, lvcSupportTypeSupportA, lvcSupportTypeSupportB });
+            olvSupportType.FullRowSelect = true;
+            olvSupportType.GridLines = true;
+            olvSupportType.HasCollapsibleGroups = false;
+            olvSupportType.Location = new System.Drawing.Point(4, 3);
+            olvSupportType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvSupportType.MenuLabelGroupBy = "";
+            olvSupportType.Name = "olvSupportType";
+            olvSupportType.ShowGroups = false;
+            olvSupportType.Size = new System.Drawing.Size(874, 546);
+            olvSupportType.TabIndex = 2;
+            olvSupportType.UseAlternatingBackColors = true;
+            olvSupportType.UseCompatibleStateImageBehavior = false;
+            olvSupportType.View = System.Windows.Forms.View.Details;
             // 
             // lvcSupportTypeName
             // 
-            this.lvcSupportTypeName.AspectName = "Name";
-            this.lvcSupportTypeName.IsEditable = false;
-            this.lvcSupportTypeName.Text = "Name";
+            lvcSupportTypeName.AspectName = "Name";
+            lvcSupportTypeName.IsEditable = false;
+            lvcSupportTypeName.Text = "Name";
             // 
             // lvcSupportTypeID
             // 
-            this.lvcSupportTypeID.AspectName = "ID";
-            this.lvcSupportTypeID.AspectToStringFormat = "{0:X}";
-            this.lvcSupportTypeID.IsEditable = false;
-            this.lvcSupportTypeID.Text = "Hex ID";
+            lvcSupportTypeID.AspectName = "ID";
+            lvcSupportTypeID.AspectToStringFormat = "{0:X}";
+            lvcSupportTypeID.IsEditable = false;
+            lvcSupportTypeID.Text = "Hex ID";
             // 
             // lvcSupportTypeAddress
             // 
-            this.lvcSupportTypeAddress.AspectName = "Address";
-            this.lvcSupportTypeAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcSupportTypeAddress.IsEditable = false;
-            this.lvcSupportTypeAddress.Text = "Address";
+            lvcSupportTypeAddress.AspectName = "Address";
+            lvcSupportTypeAddress.AspectToStringFormat = "{0:X4}";
+            lvcSupportTypeAddress.IsEditable = false;
+            lvcSupportTypeAddress.Text = "Address";
             // 
             // lvcSupportTypeSupportA
             // 
-            this.lvcSupportTypeSupportA.AspectName = "SupportA";
-            this.lvcSupportTypeSupportA.AspectToStringFormat = "{0:X}";
-            this.lvcSupportTypeSupportA.Text = "SupportA";
-            this.lvcSupportTypeSupportA.Width = 120;
+            lvcSupportTypeSupportA.AspectName = "SupportA";
+            lvcSupportTypeSupportA.AspectToStringFormat = "{0:X}";
+            lvcSupportTypeSupportA.Text = "SupportA";
+            lvcSupportTypeSupportA.Width = 120;
             // 
             // lvcSupportTypeSupportB
             // 
-            this.lvcSupportTypeSupportB.AspectName = "SupportB";
-            this.lvcSupportTypeSupportB.AspectToStringFormat = "{0:X}";
-            this.lvcSupportTypeSupportB.Text = "SupportB";
-            this.lvcSupportTypeSupportB.Width = 120;
+            lvcSupportTypeSupportB.AspectName = "SupportB";
+            lvcSupportTypeSupportB.AspectToStringFormat = "{0:X}";
+            lvcSupportTypeSupportB.Text = "SupportB";
+            lvcSupportTypeSupportB.Width = 120;
             // 
             // tabSupportStats
             // 
-            this.tabSupportStats.Controls.Add(this.olvSupportStats);
-            this.tabSupportStats.Location = new System.Drawing.Point(4, 22);
-            this.tabSupportStats.Name = "tabSupportStats";
-            this.tabSupportStats.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSupportStats.Size = new System.Drawing.Size(756, 480);
-            this.tabSupportStats.TabIndex = 6;
-            this.tabSupportStats.Text = "SupportStats";
-            this.tabSupportStats.UseVisualStyleBackColor = true;
+            tabSupportStats.Controls.Add(olvSupportStats);
+            tabSupportStats.Location = new System.Drawing.Point(4, 24);
+            tabSupportStats.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSupportStats.Name = "tabSupportStats";
+            tabSupportStats.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSupportStats.Size = new System.Drawing.Size(883, 556);
+            tabSupportStats.TabIndex = 6;
+            tabSupportStats.Text = "SupportStats";
+            tabSupportStats.UseVisualStyleBackColor = true;
             // 
             // olvSupportStats
             // 
-            this.olvSupportStats.AllColumns.Add(this.lvcSupportStatsName);
-            this.olvSupportStats.AllColumns.Add(this.lvcSupportStatsID);
-            this.olvSupportStats.AllColumns.Add(this.lvcSupportStatsAddress);
-            this.olvSupportStats.AllColumns.Add(this.lvcSupportStatsSLvlStat1);
-            this.olvSupportStats.AllColumns.Add(this.lvcSupportStatsSLvlStat2);
-            this.olvSupportStats.AllColumns.Add(this.lvcSupportStatsSLvlStat3);
-            this.olvSupportStats.AllColumns.Add(this.lvcSupportStatsSLvlStat4);
-            this.olvSupportStats.AllowColumnReorder = true;
-            this.olvSupportStats.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvSupportStats.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvSupportStats.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcSupportStatsName,
-            this.lvcSupportStatsID,
-            this.lvcSupportStatsAddress,
-            this.lvcSupportStatsSLvlStat1,
-            this.lvcSupportStatsSLvlStat2,
-            this.lvcSupportStatsSLvlStat3,
-            this.lvcSupportStatsSLvlStat4});
-            this.olvSupportStats.FullRowSelect = true;
-            this.olvSupportStats.GridLines = true;
-            this.olvSupportStats.HasCollapsibleGroups = false;
-            this.olvSupportStats.HideSelection = false;
-            this.olvSupportStats.Location = new System.Drawing.Point(3, 3);
-            this.olvSupportStats.MenuLabelGroupBy = "";
-            this.olvSupportStats.Name = "olvSupportStats";
-            this.olvSupportStats.ShowGroups = false;
-            this.olvSupportStats.Size = new System.Drawing.Size(750, 474);
-            this.olvSupportStats.TabIndex = 1;
-            this.olvSupportStats.UseAlternatingBackColors = true;
-            this.olvSupportStats.UseCompatibleStateImageBehavior = false;
-            this.olvSupportStats.View = System.Windows.Forms.View.Details;
+            olvSupportStats.AllColumns.Add(lvcSupportStatsName);
+            olvSupportStats.AllColumns.Add(lvcSupportStatsID);
+            olvSupportStats.AllColumns.Add(lvcSupportStatsAddress);
+            olvSupportStats.AllColumns.Add(lvcSupportStatsSLvlStat1);
+            olvSupportStats.AllColumns.Add(lvcSupportStatsSLvlStat2);
+            olvSupportStats.AllColumns.Add(lvcSupportStatsSLvlStat3);
+            olvSupportStats.AllColumns.Add(lvcSupportStatsSLvlStat4);
+            olvSupportStats.AllowColumnReorder = true;
+            olvSupportStats.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvSupportStats.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvSupportStats.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcSupportStatsName, lvcSupportStatsID, lvcSupportStatsAddress, lvcSupportStatsSLvlStat1, lvcSupportStatsSLvlStat2, lvcSupportStatsSLvlStat3, lvcSupportStatsSLvlStat4 });
+            olvSupportStats.FullRowSelect = true;
+            olvSupportStats.GridLines = true;
+            olvSupportStats.HasCollapsibleGroups = false;
+            olvSupportStats.Location = new System.Drawing.Point(4, 3);
+            olvSupportStats.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvSupportStats.MenuLabelGroupBy = "";
+            olvSupportStats.Name = "olvSupportStats";
+            olvSupportStats.ShowGroups = false;
+            olvSupportStats.Size = new System.Drawing.Size(874, 546);
+            olvSupportStats.TabIndex = 1;
+            olvSupportStats.UseAlternatingBackColors = true;
+            olvSupportStats.UseCompatibleStateImageBehavior = false;
+            olvSupportStats.View = System.Windows.Forms.View.Details;
             // 
             // lvcSupportStatsName
             // 
-            this.lvcSupportStatsName.AspectName = "Name";
-            this.lvcSupportStatsName.IsEditable = false;
-            this.lvcSupportStatsName.Text = "Name";
-            this.lvcSupportStatsName.Width = 160;
+            lvcSupportStatsName.AspectName = "Name";
+            lvcSupportStatsName.IsEditable = false;
+            lvcSupportStatsName.Text = "Name";
+            lvcSupportStatsName.Width = 160;
             // 
             // lvcSupportStatsID
             // 
-            this.lvcSupportStatsID.AspectName = "ID";
-            this.lvcSupportStatsID.AspectToStringFormat = "{0:X}";
-            this.lvcSupportStatsID.IsEditable = false;
-            this.lvcSupportStatsID.Text = "Hex ID";
+            lvcSupportStatsID.AspectName = "ID";
+            lvcSupportStatsID.AspectToStringFormat = "{0:X}";
+            lvcSupportStatsID.IsEditable = false;
+            lvcSupportStatsID.Text = "Hex ID";
             // 
             // lvcSupportStatsAddress
             // 
-            this.lvcSupportStatsAddress.AspectName = "Address";
-            this.lvcSupportStatsAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcSupportStatsAddress.IsEditable = false;
-            this.lvcSupportStatsAddress.Text = "Address";
+            lvcSupportStatsAddress.AspectName = "Address";
+            lvcSupportStatsAddress.AspectToStringFormat = "{0:X4}";
+            lvcSupportStatsAddress.IsEditable = false;
+            lvcSupportStatsAddress.Text = "Address";
             // 
             // lvcSupportStatsSLvlStat1
             // 
-            this.lvcSupportStatsSLvlStat1.AspectName = "SLvlStat1";
-            this.lvcSupportStatsSLvlStat1.Text = "SLvlStat1";
+            lvcSupportStatsSLvlStat1.AspectName = "SLvlStat1";
+            lvcSupportStatsSLvlStat1.Text = "SLvlStat1";
             // 
             // lvcSupportStatsSLvlStat2
             // 
-            this.lvcSupportStatsSLvlStat2.AspectName = "SLvlStat2";
-            this.lvcSupportStatsSLvlStat2.Text = "SLvlStat2";
+            lvcSupportStatsSLvlStat2.AspectName = "SLvlStat2";
+            lvcSupportStatsSLvlStat2.Text = "SLvlStat2";
             // 
             // lvcSupportStatsSLvlStat3
             // 
-            this.lvcSupportStatsSLvlStat3.AspectName = "SLvlStat3";
-            this.lvcSupportStatsSLvlStat3.Text = "SLvlStat3";
+            lvcSupportStatsSLvlStat3.AspectName = "SLvlStat3";
+            lvcSupportStatsSLvlStat3.Text = "SLvlStat3";
             // 
             // lvcSupportStatsSLvlStat4
             // 
-            this.lvcSupportStatsSLvlStat4.AspectName = "SLvlStat4";
-            this.lvcSupportStatsSLvlStat4.Text = "SLvlStat4";
+            lvcSupportStatsSLvlStat4.AspectName = "SLvlStat4";
+            lvcSupportStatsSLvlStat4.Text = "SLvlStat4";
             // 
             // tabSoulmate
             // 
-            this.tabSoulmate.Controls.Add(this.olvSoulmate);
-            this.tabSoulmate.Location = new System.Drawing.Point(4, 22);
-            this.tabSoulmate.Name = "tabSoulmate";
-            this.tabSoulmate.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSoulmate.Size = new System.Drawing.Size(756, 480);
-            this.tabSoulmate.TabIndex = 7;
-            this.tabSoulmate.Text = "Soulmate";
-            this.tabSoulmate.UseVisualStyleBackColor = true;
+            tabSoulmate.Controls.Add(olvSoulmate);
+            tabSoulmate.Location = new System.Drawing.Point(4, 24);
+            tabSoulmate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSoulmate.Name = "tabSoulmate";
+            tabSoulmate.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSoulmate.Size = new System.Drawing.Size(883, 556);
+            tabSoulmate.TabIndex = 7;
+            tabSoulmate.Text = "Soulmate";
+            tabSoulmate.UseVisualStyleBackColor = true;
             // 
             // olvSoulmate
             // 
-            this.olvSoulmate.AllColumns.Add(this.lvcSoulmateName);
-            this.olvSoulmate.AllColumns.Add(this.lvcSoulmateID);
-            this.olvSoulmate.AllColumns.Add(this.lvcSoulmateAddress);
-            this.olvSoulmate.AllColumns.Add(this.lvcSoulmateChance);
-            this.olvSoulmate.AllowColumnReorder = true;
-            this.olvSoulmate.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvSoulmate.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvSoulmate.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcSoulmateName,
-            this.lvcSoulmateID,
-            this.lvcSoulmateAddress,
-            this.lvcSoulmateChance});
-            this.olvSoulmate.FullRowSelect = true;
-            this.olvSoulmate.GridLines = true;
-            this.olvSoulmate.HasCollapsibleGroups = false;
-            this.olvSoulmate.HideSelection = false;
-            this.olvSoulmate.Location = new System.Drawing.Point(3, 3);
-            this.olvSoulmate.MenuLabelGroupBy = "";
-            this.olvSoulmate.Name = "olvSoulmate";
-            this.olvSoulmate.ShowGroups = false;
-            this.olvSoulmate.Size = new System.Drawing.Size(750, 474);
-            this.olvSoulmate.TabIndex = 2;
-            this.olvSoulmate.UseAlternatingBackColors = true;
-            this.olvSoulmate.UseCompatibleStateImageBehavior = false;
-            this.olvSoulmate.View = System.Windows.Forms.View.Details;
+            olvSoulmate.AllColumns.Add(lvcSoulmateName);
+            olvSoulmate.AllColumns.Add(lvcSoulmateID);
+            olvSoulmate.AllColumns.Add(lvcSoulmateAddress);
+            olvSoulmate.AllColumns.Add(lvcSoulmateChance);
+            olvSoulmate.AllowColumnReorder = true;
+            olvSoulmate.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvSoulmate.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvSoulmate.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcSoulmateName, lvcSoulmateID, lvcSoulmateAddress, lvcSoulmateChance });
+            olvSoulmate.FullRowSelect = true;
+            olvSoulmate.GridLines = true;
+            olvSoulmate.HasCollapsibleGroups = false;
+            olvSoulmate.Location = new System.Drawing.Point(4, 3);
+            olvSoulmate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvSoulmate.MenuLabelGroupBy = "";
+            olvSoulmate.Name = "olvSoulmate";
+            olvSoulmate.ShowGroups = false;
+            olvSoulmate.Size = new System.Drawing.Size(874, 546);
+            olvSoulmate.TabIndex = 2;
+            olvSoulmate.UseAlternatingBackColors = true;
+            olvSoulmate.UseCompatibleStateImageBehavior = false;
+            olvSoulmate.View = System.Windows.Forms.View.Details;
             // 
             // lvcSoulmateName
             // 
-            this.lvcSoulmateName.AspectName = "Name";
-            this.lvcSoulmateName.IsEditable = false;
-            this.lvcSoulmateName.Text = "Name";
-            this.lvcSoulmateName.Width = 150;
+            lvcSoulmateName.AspectName = "Name";
+            lvcSoulmateName.IsEditable = false;
+            lvcSoulmateName.Text = "Name";
+            lvcSoulmateName.Width = 150;
             // 
             // lvcSoulmateID
             // 
-            this.lvcSoulmateID.AspectName = "ID";
-            this.lvcSoulmateID.AspectToStringFormat = "{0:X}";
-            this.lvcSoulmateID.IsEditable = false;
-            this.lvcSoulmateID.Text = "Hex ID";
+            lvcSoulmateID.AspectName = "ID";
+            lvcSoulmateID.AspectToStringFormat = "{0:X}";
+            lvcSoulmateID.IsEditable = false;
+            lvcSoulmateID.Text = "Hex ID";
             // 
             // lvcSoulmateAddress
             // 
-            this.lvcSoulmateAddress.AspectName = "Address";
-            this.lvcSoulmateAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcSoulmateAddress.IsEditable = false;
-            this.lvcSoulmateAddress.Text = "Address";
+            lvcSoulmateAddress.AspectName = "Address";
+            lvcSoulmateAddress.AspectToStringFormat = "{0:X4}";
+            lvcSoulmateAddress.IsEditable = false;
+            lvcSoulmateAddress.Text = "Address";
             // 
             // lvcSoulmateChance
             // 
-            this.lvcSoulmateChance.AspectName = "Chance";
-            this.lvcSoulmateChance.Text = "Chance";
+            lvcSoulmateChance.AspectName = "Chance";
+            lvcSoulmateChance.Text = "Chance";
             // 
             // tabSoulmateChanceFail
             // 
-            this.tabSoulmateChanceFail.Controls.Add(this.olvSoulmateChanceFail);
-            this.tabSoulmateChanceFail.Location = new System.Drawing.Point(4, 22);
-            this.tabSoulmateChanceFail.Name = "tabSoulmateChanceFail";
-            this.tabSoulmateChanceFail.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSoulmateChanceFail.Size = new System.Drawing.Size(756, 480);
-            this.tabSoulmateChanceFail.TabIndex = 8;
-            this.tabSoulmateChanceFail.Text = "Soulmate chance fail";
-            this.tabSoulmateChanceFail.UseVisualStyleBackColor = true;
+            tabSoulmateChanceFail.Controls.Add(olvSoulmateChanceFail);
+            tabSoulmateChanceFail.Location = new System.Drawing.Point(4, 24);
+            tabSoulmateChanceFail.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSoulmateChanceFail.Name = "tabSoulmateChanceFail";
+            tabSoulmateChanceFail.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSoulmateChanceFail.Size = new System.Drawing.Size(883, 556);
+            tabSoulmateChanceFail.TabIndex = 8;
+            tabSoulmateChanceFail.Text = "Soulmate chance fail";
+            tabSoulmateChanceFail.UseVisualStyleBackColor = true;
             // 
             // olvSoulmateChanceFail
             // 
-            this.olvSoulmateChanceFail.AllColumns.Add(this.lvcSoulmateChanceFailName);
-            this.olvSoulmateChanceFail.AllColumns.Add(this.lvcSoulmateChanceFailID);
-            this.olvSoulmateChanceFail.AllColumns.Add(this.lvcSoulmateChanceFailAddress);
-            this.olvSoulmateChanceFail.AllColumns.Add(this.lvcSoulmateChanceFailExpLost);
-            this.olvSoulmateChanceFail.AllowColumnReorder = true;
-            this.olvSoulmateChanceFail.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvSoulmateChanceFail.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvSoulmateChanceFail.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcSoulmateChanceFailName,
-            this.lvcSoulmateChanceFailID,
-            this.lvcSoulmateChanceFailAddress,
-            this.lvcSoulmateChanceFailExpLost});
-            this.olvSoulmateChanceFail.FullRowSelect = true;
-            this.olvSoulmateChanceFail.GridLines = true;
-            this.olvSoulmateChanceFail.HasCollapsibleGroups = false;
-            this.olvSoulmateChanceFail.HideSelection = false;
-            this.olvSoulmateChanceFail.Location = new System.Drawing.Point(3, 3);
-            this.olvSoulmateChanceFail.MenuLabelGroupBy = "";
-            this.olvSoulmateChanceFail.Name = "olvSoulmateChanceFail";
-            this.olvSoulmateChanceFail.ShowGroups = false;
-            this.olvSoulmateChanceFail.Size = new System.Drawing.Size(750, 474);
-            this.olvSoulmateChanceFail.TabIndex = 2;
-            this.olvSoulmateChanceFail.UseAlternatingBackColors = true;
-            this.olvSoulmateChanceFail.UseCompatibleStateImageBehavior = false;
-            this.olvSoulmateChanceFail.View = System.Windows.Forms.View.Details;
+            olvSoulmateChanceFail.AllColumns.Add(lvcSoulmateChanceFailName);
+            olvSoulmateChanceFail.AllColumns.Add(lvcSoulmateChanceFailID);
+            olvSoulmateChanceFail.AllColumns.Add(lvcSoulmateChanceFailAddress);
+            olvSoulmateChanceFail.AllColumns.Add(lvcSoulmateChanceFailExpLost);
+            olvSoulmateChanceFail.AllowColumnReorder = true;
+            olvSoulmateChanceFail.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvSoulmateChanceFail.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvSoulmateChanceFail.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcSoulmateChanceFailName, lvcSoulmateChanceFailID, lvcSoulmateChanceFailAddress, lvcSoulmateChanceFailExpLost });
+            olvSoulmateChanceFail.FullRowSelect = true;
+            olvSoulmateChanceFail.GridLines = true;
+            olvSoulmateChanceFail.HasCollapsibleGroups = false;
+            olvSoulmateChanceFail.Location = new System.Drawing.Point(4, 3);
+            olvSoulmateChanceFail.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvSoulmateChanceFail.MenuLabelGroupBy = "";
+            olvSoulmateChanceFail.Name = "olvSoulmateChanceFail";
+            olvSoulmateChanceFail.ShowGroups = false;
+            olvSoulmateChanceFail.Size = new System.Drawing.Size(874, 546);
+            olvSoulmateChanceFail.TabIndex = 2;
+            olvSoulmateChanceFail.UseAlternatingBackColors = true;
+            olvSoulmateChanceFail.UseCompatibleStateImageBehavior = false;
+            olvSoulmateChanceFail.View = System.Windows.Forms.View.Details;
             // 
             // lvcSoulmateChanceFailName
             // 
-            this.lvcSoulmateChanceFailName.AspectName = "Name";
-            this.lvcSoulmateChanceFailName.IsEditable = false;
-            this.lvcSoulmateChanceFailName.Text = "Name";
+            lvcSoulmateChanceFailName.AspectName = "Name";
+            lvcSoulmateChanceFailName.IsEditable = false;
+            lvcSoulmateChanceFailName.Text = "Name";
             // 
             // lvcSoulmateChanceFailID
             // 
-            this.lvcSoulmateChanceFailID.AspectName = "ID";
-            this.lvcSoulmateChanceFailID.AspectToStringFormat = "{0:X}";
-            this.lvcSoulmateChanceFailID.IsEditable = false;
-            this.lvcSoulmateChanceFailID.Text = "Hex ID";
+            lvcSoulmateChanceFailID.AspectName = "ID";
+            lvcSoulmateChanceFailID.AspectToStringFormat = "{0:X}";
+            lvcSoulmateChanceFailID.IsEditable = false;
+            lvcSoulmateChanceFailID.Text = "Hex ID";
             // 
             // lvcSoulmateChanceFailAddress
             // 
-            this.lvcSoulmateChanceFailAddress.AspectName = "Address";
-            this.lvcSoulmateChanceFailAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcSoulmateChanceFailAddress.IsEditable = false;
-            this.lvcSoulmateChanceFailAddress.Text = "Address";
+            lvcSoulmateChanceFailAddress.AspectName = "Address";
+            lvcSoulmateChanceFailAddress.AspectToStringFormat = "{0:X4}";
+            lvcSoulmateChanceFailAddress.IsEditable = false;
+            lvcSoulmateChanceFailAddress.Text = "Address";
             // 
             // lvcSoulmateChanceFailExpLost
             // 
-            this.lvcSoulmateChanceFailExpLost.AspectName = "ExpLost";
-            this.lvcSoulmateChanceFailExpLost.Text = "ExpLost";
+            lvcSoulmateChanceFailExpLost.AspectName = "ExpLost";
+            lvcSoulmateChanceFailExpLost.Text = "ExpLost";
             // 
             // tabMagicBonus
             // 
-            this.tabMagicBonus.Controls.Add(this.olvMagicBonus);
-            this.tabMagicBonus.Location = new System.Drawing.Point(4, 22);
-            this.tabMagicBonus.Name = "tabMagicBonus";
-            this.tabMagicBonus.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMagicBonus.Size = new System.Drawing.Size(756, 480);
-            this.tabMagicBonus.TabIndex = 9;
-            this.tabMagicBonus.Text = "MagicBonus";
-            this.tabMagicBonus.UseVisualStyleBackColor = true;
+            tabMagicBonus.Controls.Add(olvMagicBonus);
+            tabMagicBonus.Location = new System.Drawing.Point(4, 24);
+            tabMagicBonus.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabMagicBonus.Name = "tabMagicBonus";
+            tabMagicBonus.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabMagicBonus.Size = new System.Drawing.Size(883, 556);
+            tabMagicBonus.TabIndex = 9;
+            tabMagicBonus.Text = "MagicBonus";
+            tabMagicBonus.UseVisualStyleBackColor = true;
             // 
             // olvMagicBonus
             // 
-            this.olvMagicBonus.AllColumns.Add(this.lvcMagicBonusDefaultUser);
-            this.olvMagicBonus.AllColumns.Add(this.lvcMagicBonusID);
-            this.olvMagicBonus.AllColumns.Add(this.lvcMagicBonusAddress);
-            this.olvMagicBonus.AllColumns.Add(this.lvcMagicBonusEarthBonus);
-            this.olvMagicBonus.AllColumns.Add(this.lvcMagicBonusFireBonus);
-            this.olvMagicBonus.AllColumns.Add(this.lvcMagicBonusIceBonus);
-            this.olvMagicBonus.AllColumns.Add(this.lvcMagicBonusSparkBonus);
-            this.olvMagicBonus.AllColumns.Add(this.lvcMagicBonusWindBonus);
-            this.olvMagicBonus.AllColumns.Add(this.lvcMagicBonusLightBonus);
-            this.olvMagicBonus.AllColumns.Add(this.lvcMagicBonusDarkBonus);
-            this.olvMagicBonus.AllColumns.Add(this.lvcMagicBonusUnknownBonus);
-            this.olvMagicBonus.AllowColumnReorder = true;
-            this.olvMagicBonus.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvMagicBonus.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvMagicBonus.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcMagicBonusDefaultUser,
-            this.lvcMagicBonusID,
-            this.lvcMagicBonusAddress,
-            this.lvcMagicBonusEarthBonus,
-            this.lvcMagicBonusFireBonus,
-            this.lvcMagicBonusIceBonus,
-            this.lvcMagicBonusSparkBonus,
-            this.lvcMagicBonusWindBonus,
-            this.lvcMagicBonusLightBonus,
-            this.lvcMagicBonusDarkBonus,
-            this.lvcMagicBonusUnknownBonus});
-            this.olvMagicBonus.FullRowSelect = true;
-            this.olvMagicBonus.GridLines = true;
-            this.olvMagicBonus.HasCollapsibleGroups = false;
-            this.olvMagicBonus.HideSelection = false;
-            this.olvMagicBonus.Location = new System.Drawing.Point(3, 3);
-            this.olvMagicBonus.MenuLabelGroupBy = "";
-            this.olvMagicBonus.Name = "olvMagicBonus";
-            this.olvMagicBonus.ShowGroups = false;
-            this.olvMagicBonus.Size = new System.Drawing.Size(750, 474);
-            this.olvMagicBonus.TabIndex = 3;
-            this.olvMagicBonus.UseAlternatingBackColors = true;
-            this.olvMagicBonus.UseCompatibleStateImageBehavior = false;
-            this.olvMagicBonus.View = System.Windows.Forms.View.Details;
+            olvMagicBonus.AllColumns.Add(lvcMagicBonusDefaultUser);
+            olvMagicBonus.AllColumns.Add(lvcMagicBonusID);
+            olvMagicBonus.AllColumns.Add(lvcMagicBonusAddress);
+            olvMagicBonus.AllColumns.Add(lvcMagicBonusEarthBonus);
+            olvMagicBonus.AllColumns.Add(lvcMagicBonusFireBonus);
+            olvMagicBonus.AllColumns.Add(lvcMagicBonusIceBonus);
+            olvMagicBonus.AllColumns.Add(lvcMagicBonusSparkBonus);
+            olvMagicBonus.AllColumns.Add(lvcMagicBonusWindBonus);
+            olvMagicBonus.AllColumns.Add(lvcMagicBonusLightBonus);
+            olvMagicBonus.AllColumns.Add(lvcMagicBonusDarkBonus);
+            olvMagicBonus.AllColumns.Add(lvcMagicBonusUnknownBonus);
+            olvMagicBonus.AllowColumnReorder = true;
+            olvMagicBonus.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvMagicBonus.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvMagicBonus.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcMagicBonusDefaultUser, lvcMagicBonusID, lvcMagicBonusAddress, lvcMagicBonusEarthBonus, lvcMagicBonusFireBonus, lvcMagicBonusIceBonus, lvcMagicBonusSparkBonus, lvcMagicBonusWindBonus, lvcMagicBonusLightBonus, lvcMagicBonusDarkBonus, lvcMagicBonusUnknownBonus });
+            olvMagicBonus.FullRowSelect = true;
+            olvMagicBonus.GridLines = true;
+            olvMagicBonus.HasCollapsibleGroups = false;
+            olvMagicBonus.Location = new System.Drawing.Point(4, 3);
+            olvMagicBonus.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvMagicBonus.MenuLabelGroupBy = "";
+            olvMagicBonus.Name = "olvMagicBonus";
+            olvMagicBonus.ShowGroups = false;
+            olvMagicBonus.Size = new System.Drawing.Size(874, 546);
+            olvMagicBonus.TabIndex = 3;
+            olvMagicBonus.UseAlternatingBackColors = true;
+            olvMagicBonus.UseCompatibleStateImageBehavior = false;
+            olvMagicBonus.View = System.Windows.Forms.View.Details;
             // 
             // lvcMagicBonusDefaultUser
             // 
-            this.lvcMagicBonusDefaultUser.AspectName = "Name";
-            this.lvcMagicBonusDefaultUser.IsEditable = false;
-            this.lvcMagicBonusDefaultUser.Text = "DefaultUser";
-            this.lvcMagicBonusDefaultUser.Width = 70;
+            lvcMagicBonusDefaultUser.AspectName = "Name";
+            lvcMagicBonusDefaultUser.IsEditable = false;
+            lvcMagicBonusDefaultUser.Text = "DefaultUser";
+            lvcMagicBonusDefaultUser.Width = 70;
             // 
             // lvcMagicBonusID
             // 
-            this.lvcMagicBonusID.AspectName = "ID";
-            this.lvcMagicBonusID.AspectToStringFormat = "{0:X}";
-            this.lvcMagicBonusID.IsEditable = false;
-            this.lvcMagicBonusID.Text = "Hex ID";
-            this.lvcMagicBonusID.Width = 55;
+            lvcMagicBonusID.AspectName = "ID";
+            lvcMagicBonusID.AspectToStringFormat = "{0:X}";
+            lvcMagicBonusID.IsEditable = false;
+            lvcMagicBonusID.Text = "Hex ID";
+            lvcMagicBonusID.Width = 55;
             // 
             // lvcMagicBonusAddress
             // 
-            this.lvcMagicBonusAddress.AspectName = "Address";
-            this.lvcMagicBonusAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcMagicBonusAddress.IsEditable = false;
-            this.lvcMagicBonusAddress.Text = "Address";
-            this.lvcMagicBonusAddress.Width = 55;
+            lvcMagicBonusAddress.AspectName = "Address";
+            lvcMagicBonusAddress.AspectToStringFormat = "{0:X4}";
+            lvcMagicBonusAddress.IsEditable = false;
+            lvcMagicBonusAddress.Text = "Address";
+            lvcMagicBonusAddress.Width = 55;
             // 
             // lvcMagicBonusEarthBonus
             // 
-            this.lvcMagicBonusEarthBonus.AspectName = "EarthBonus";
-            this.lvcMagicBonusEarthBonus.Text = "EarthBonus";
-            this.lvcMagicBonusEarthBonus.Width = 70;
+            lvcMagicBonusEarthBonus.AspectName = "EarthBonus";
+            lvcMagicBonusEarthBonus.Text = "EarthBonus";
+            lvcMagicBonusEarthBonus.Width = 70;
             // 
             // lvcMagicBonusFireBonus
             // 
-            this.lvcMagicBonusFireBonus.AspectName = "FireBonus";
-            this.lvcMagicBonusFireBonus.Text = "FireBonus";
-            this.lvcMagicBonusFireBonus.Width = 65;
+            lvcMagicBonusFireBonus.AspectName = "FireBonus";
+            lvcMagicBonusFireBonus.Text = "FireBonus";
+            lvcMagicBonusFireBonus.Width = 65;
             // 
             // lvcMagicBonusIceBonus
             // 
-            this.lvcMagicBonusIceBonus.AspectName = "IceBonus";
-            this.lvcMagicBonusIceBonus.Text = "IceBonus";
+            lvcMagicBonusIceBonus.AspectName = "IceBonus";
+            lvcMagicBonusIceBonus.Text = "IceBonus";
             // 
             // lvcMagicBonusSparkBonus
             // 
-            this.lvcMagicBonusSparkBonus.AspectName = "SparkBonus";
-            this.lvcMagicBonusSparkBonus.Text = "SparkBonus";
-            this.lvcMagicBonusSparkBonus.Width = 80;
+            lvcMagicBonusSparkBonus.AspectName = "SparkBonus";
+            lvcMagicBonusSparkBonus.Text = "SparkBonus";
+            lvcMagicBonusSparkBonus.Width = 80;
             // 
             // lvcMagicBonusWindBonus
             // 
-            this.lvcMagicBonusWindBonus.AspectName = "WindBonus";
-            this.lvcMagicBonusWindBonus.Text = "WindBonus";
-            this.lvcMagicBonusWindBonus.Width = 70;
+            lvcMagicBonusWindBonus.AspectName = "WindBonus";
+            lvcMagicBonusWindBonus.Text = "WindBonus";
+            lvcMagicBonusWindBonus.Width = 70;
             // 
             // lvcMagicBonusLightBonus
             // 
-            this.lvcMagicBonusLightBonus.AspectName = "LightBonus";
-            this.lvcMagicBonusLightBonus.Text = "LightBonus";
-            this.lvcMagicBonusLightBonus.Width = 70;
+            lvcMagicBonusLightBonus.AspectName = "LightBonus";
+            lvcMagicBonusLightBonus.Text = "LightBonus";
+            lvcMagicBonusLightBonus.Width = 70;
             // 
             // lvcMagicBonusDarkBonus
             // 
-            this.lvcMagicBonusDarkBonus.AspectName = "DarkBonus";
-            this.lvcMagicBonusDarkBonus.Text = "DarkBonus";
-            this.lvcMagicBonusDarkBonus.Width = 65;
+            lvcMagicBonusDarkBonus.AspectName = "DarkBonus";
+            lvcMagicBonusDarkBonus.Text = "DarkBonus";
+            lvcMagicBonusDarkBonus.Width = 65;
             // 
             // lvcMagicBonusUnknownBonus
             // 
-            this.lvcMagicBonusUnknownBonus.AspectName = "UnknownBonus";
-            this.lvcMagicBonusUnknownBonus.Text = "UnknownBonus";
-            this.lvcMagicBonusUnknownBonus.Width = 90;
+            lvcMagicBonusUnknownBonus.AspectName = "UnknownBonus";
+            lvcMagicBonusUnknownBonus.Text = "UnknownBonus";
+            lvcMagicBonusUnknownBonus.Width = 90;
             // 
             // tabCritVantages
             // 
-            this.tabCritVantages.Controls.Add(this.olvCritVantages);
-            this.tabCritVantages.Location = new System.Drawing.Point(4, 22);
-            this.tabCritVantages.Name = "tabCritVantages";
-            this.tabCritVantages.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCritVantages.Size = new System.Drawing.Size(756, 480);
-            this.tabCritVantages.TabIndex = 10;
-            this.tabCritVantages.Text = "Crit vantages";
-            this.tabCritVantages.UseVisualStyleBackColor = true;
+            tabCritVantages.Controls.Add(olvCritVantages);
+            tabCritVantages.Location = new System.Drawing.Point(4, 24);
+            tabCritVantages.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabCritVantages.Name = "tabCritVantages";
+            tabCritVantages.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabCritVantages.Size = new System.Drawing.Size(883, 556);
+            tabCritVantages.TabIndex = 10;
+            tabCritVantages.Text = "Crit vantages";
+            tabCritVantages.UseVisualStyleBackColor = true;
             // 
             // olvCritVantages
             // 
-            this.olvCritVantages.AllColumns.Add(this.lvcCritVantagesName);
-            this.olvCritVantages.AllColumns.Add(this.lvcCritVantagesAddress);
-            this.olvCritVantages.AllColumns.Add(this.lvcCritVantagesAdvantageModifier);
-            this.olvCritVantages.AllColumns.Add(this.lvcCritVantagesDisadvantageModifier);
-            this.olvCritVantages.AllowColumnReorder = true;
-            this.olvCritVantages.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvCritVantages.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvCritVantages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcCritVantagesName,
-            this.lvcCritVantagesAddress,
-            this.lvcCritVantagesAdvantageModifier,
-            this.lvcCritVantagesDisadvantageModifier});
-            this.olvCritVantages.FullRowSelect = true;
-            this.olvCritVantages.GridLines = true;
-            this.olvCritVantages.HasCollapsibleGroups = false;
-            this.olvCritVantages.HideSelection = false;
-            this.olvCritVantages.Location = new System.Drawing.Point(3, 3);
-            this.olvCritVantages.MenuLabelGroupBy = "";
-            this.olvCritVantages.Name = "olvCritVantages";
-            this.olvCritVantages.ShowGroups = false;
-            this.olvCritVantages.Size = new System.Drawing.Size(750, 474);
-            this.olvCritVantages.TabIndex = 2;
-            this.olvCritVantages.UseAlternatingBackColors = true;
-            this.olvCritVantages.UseCompatibleStateImageBehavior = false;
-            this.olvCritVantages.View = System.Windows.Forms.View.Details;
+            olvCritVantages.AllColumns.Add(lvcCritVantagesName);
+            olvCritVantages.AllColumns.Add(lvcCritVantagesAddress);
+            olvCritVantages.AllColumns.Add(lvcCritVantagesAdvantageModifier);
+            olvCritVantages.AllColumns.Add(lvcCritVantagesDisadvantageModifier);
+            olvCritVantages.AllowColumnReorder = true;
+            olvCritVantages.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvCritVantages.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvCritVantages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcCritVantagesName, lvcCritVantagesAddress, lvcCritVantagesAdvantageModifier, lvcCritVantagesDisadvantageModifier });
+            olvCritVantages.FullRowSelect = true;
+            olvCritVantages.GridLines = true;
+            olvCritVantages.HasCollapsibleGroups = false;
+            olvCritVantages.Location = new System.Drawing.Point(4, 3);
+            olvCritVantages.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvCritVantages.MenuLabelGroupBy = "";
+            olvCritVantages.Name = "olvCritVantages";
+            olvCritVantages.ShowGroups = false;
+            olvCritVantages.Size = new System.Drawing.Size(874, 546);
+            olvCritVantages.TabIndex = 2;
+            olvCritVantages.UseAlternatingBackColors = true;
+            olvCritVantages.UseCompatibleStateImageBehavior = false;
+            olvCritVantages.View = System.Windows.Forms.View.Details;
             // 
             // lvcCritVantagesName
             // 
-            this.lvcCritVantagesName.AspectName = "Name";
-            this.lvcCritVantagesName.IsEditable = false;
-            this.lvcCritVantagesName.Text = "Name";
-            this.lvcCritVantagesName.Width = 80;
+            lvcCritVantagesName.AspectName = "Name";
+            lvcCritVantagesName.IsEditable = false;
+            lvcCritVantagesName.Text = "Name";
+            lvcCritVantagesName.Width = 80;
             // 
             // lvcCritVantagesAddress
             // 
-            this.lvcCritVantagesAddress.AspectName = "Address";
-            this.lvcCritVantagesAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcCritVantagesAddress.IsEditable = false;
-            this.lvcCritVantagesAddress.Text = "Address";
+            lvcCritVantagesAddress.AspectName = "Address";
+            lvcCritVantagesAddress.AspectToStringFormat = "{0:X4}";
+            lvcCritVantagesAddress.IsEditable = false;
+            lvcCritVantagesAddress.Text = "Address";
             // 
             // lvcCritVantagesAdvantageModifier
             // 
-            this.lvcCritVantagesAdvantageModifier.AspectName = "Advantage";
-            this.lvcCritVantagesAdvantageModifier.Text = "Advantage modifier";
-            this.lvcCritVantagesAdvantageModifier.Width = 120;
+            lvcCritVantagesAdvantageModifier.AspectName = "Advantage";
+            lvcCritVantagesAdvantageModifier.Text = "Advantage modifier";
+            lvcCritVantagesAdvantageModifier.Width = 120;
             // 
             // lvcCritVantagesDisadvantageModifier
             // 
-            this.lvcCritVantagesDisadvantageModifier.AspectName = "Disadvantage";
-            this.lvcCritVantagesDisadvantageModifier.Text = "Disadvantage modifier";
-            this.lvcCritVantagesDisadvantageModifier.Width = 120;
+            lvcCritVantagesDisadvantageModifier.AspectName = "Disadvantage";
+            lvcCritVantagesDisadvantageModifier.Text = "Disadvantage modifier";
+            lvcCritVantagesDisadvantageModifier.Width = 120;
             // 
             // tabCritCounterRate
             // 
-            this.tabCritCounterRate.Controls.Add(this.olvCritCounterRate);
-            this.tabCritCounterRate.Location = new System.Drawing.Point(4, 22);
-            this.tabCritCounterRate.Name = "tabCritCounterRate";
-            this.tabCritCounterRate.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCritCounterRate.Size = new System.Drawing.Size(756, 480);
-            this.tabCritCounterRate.TabIndex = 11;
-            this.tabCritCounterRate.Text = "Crit/CounterRate";
-            this.tabCritCounterRate.UseVisualStyleBackColor = true;
+            tabCritCounterRate.Controls.Add(olvCritCounterRate);
+            tabCritCounterRate.Location = new System.Drawing.Point(4, 24);
+            tabCritCounterRate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabCritCounterRate.Name = "tabCritCounterRate";
+            tabCritCounterRate.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabCritCounterRate.Size = new System.Drawing.Size(883, 556);
+            tabCritCounterRate.TabIndex = 11;
+            tabCritCounterRate.Text = "Crit/CounterRate";
+            tabCritCounterRate.UseVisualStyleBackColor = true;
             // 
             // olvCritCounterRate
             // 
-            this.olvCritCounterRate.AllColumns.Add(this.lvcCritCounterRateName);
-            this.olvCritCounterRate.AllColumns.Add(this.lvcCritCounterRateAddress);
-            this.olvCritCounterRate.AllColumns.Add(this.lvcCritCounterRateHave0Specials);
-            this.olvCritCounterRate.AllColumns.Add(this.lvcCritCounterRateHave1Specials);
-            this.olvCritCounterRate.AllColumns.Add(this.lvcCritCounterRateHave2Specials);
-            this.olvCritCounterRate.AllColumns.Add(this.lvcCritCounterRateHave3Specials);
-            this.olvCritCounterRate.AllColumns.Add(this.lvcCritCounterRateHave4Specials);
-            this.olvCritCounterRate.AllColumns.Add(this.lvcCritCounterRateHave5Specials);
-            this.olvCritCounterRate.AllowColumnReorder = true;
-            this.olvCritCounterRate.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvCritCounterRate.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvCritCounterRate.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcCritCounterRateName,
-            this.lvcCritCounterRateAddress,
-            this.lvcCritCounterRateHave0Specials,
-            this.lvcCritCounterRateHave1Specials,
-            this.lvcCritCounterRateHave2Specials,
-            this.lvcCritCounterRateHave3Specials,
-            this.lvcCritCounterRateHave4Specials,
-            this.lvcCritCounterRateHave5Specials});
-            this.olvCritCounterRate.FullRowSelect = true;
-            this.olvCritCounterRate.GridLines = true;
-            this.olvCritCounterRate.HasCollapsibleGroups = false;
-            this.olvCritCounterRate.HideSelection = false;
-            this.olvCritCounterRate.Location = new System.Drawing.Point(3, 3);
-            this.olvCritCounterRate.MenuLabelGroupBy = "";
-            this.olvCritCounterRate.Name = "olvCritCounterRate";
-            this.olvCritCounterRate.ShowGroups = false;
-            this.olvCritCounterRate.Size = new System.Drawing.Size(750, 474);
-            this.olvCritCounterRate.TabIndex = 2;
-            this.olvCritCounterRate.UseAlternatingBackColors = true;
-            this.olvCritCounterRate.UseCompatibleStateImageBehavior = false;
-            this.olvCritCounterRate.View = System.Windows.Forms.View.Details;
+            olvCritCounterRate.AllColumns.Add(lvcCritCounterRateName);
+            olvCritCounterRate.AllColumns.Add(lvcCritCounterRateAddress);
+            olvCritCounterRate.AllColumns.Add(lvcCritCounterRateHave0Specials);
+            olvCritCounterRate.AllColumns.Add(lvcCritCounterRateHave1Specials);
+            olvCritCounterRate.AllColumns.Add(lvcCritCounterRateHave2Specials);
+            olvCritCounterRate.AllColumns.Add(lvcCritCounterRateHave3Specials);
+            olvCritCounterRate.AllColumns.Add(lvcCritCounterRateHave4Specials);
+            olvCritCounterRate.AllColumns.Add(lvcCritCounterRateHave5Specials);
+            olvCritCounterRate.AllowColumnReorder = true;
+            olvCritCounterRate.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvCritCounterRate.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvCritCounterRate.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcCritCounterRateName, lvcCritCounterRateAddress, lvcCritCounterRateHave0Specials, lvcCritCounterRateHave1Specials, lvcCritCounterRateHave2Specials, lvcCritCounterRateHave3Specials, lvcCritCounterRateHave4Specials, lvcCritCounterRateHave5Specials });
+            olvCritCounterRate.FullRowSelect = true;
+            olvCritCounterRate.GridLines = true;
+            olvCritCounterRate.HasCollapsibleGroups = false;
+            olvCritCounterRate.Location = new System.Drawing.Point(4, 3);
+            olvCritCounterRate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvCritCounterRate.MenuLabelGroupBy = "";
+            olvCritCounterRate.Name = "olvCritCounterRate";
+            olvCritCounterRate.ShowGroups = false;
+            olvCritCounterRate.Size = new System.Drawing.Size(874, 546);
+            olvCritCounterRate.TabIndex = 2;
+            olvCritCounterRate.UseAlternatingBackColors = true;
+            olvCritCounterRate.UseCompatibleStateImageBehavior = false;
+            olvCritCounterRate.View = System.Windows.Forms.View.Details;
             // 
             // lvcCritCounterRateName
             // 
-            this.lvcCritCounterRateName.AspectName = "Name";
-            this.lvcCritCounterRateName.IsEditable = false;
-            this.lvcCritCounterRateName.Text = "Name";
-            this.lvcCritCounterRateName.Width = 120;
+            lvcCritCounterRateName.AspectName = "Name";
+            lvcCritCounterRateName.IsEditable = false;
+            lvcCritCounterRateName.Text = "Name";
+            lvcCritCounterRateName.Width = 120;
             // 
             // lvcCritCounterRateAddress
             // 
-            this.lvcCritCounterRateAddress.AspectName = "Address";
-            this.lvcCritCounterRateAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcCritCounterRateAddress.IsEditable = false;
-            this.lvcCritCounterRateAddress.Text = "Address";
+            lvcCritCounterRateAddress.AspectName = "Address";
+            lvcCritCounterRateAddress.AspectToStringFormat = "{0:X4}";
+            lvcCritCounterRateAddress.IsEditable = false;
+            lvcCritCounterRateAddress.Text = "Address";
             // 
             // lvcCritCounterRateHave0Specials
             // 
-            this.lvcCritCounterRateHave0Specials.AspectName = "NoSpecial";
-            this.lvcCritCounterRateHave0Specials.Text = "Have 0 Specials";
-            this.lvcCritCounterRateHave0Specials.Width = 90;
+            lvcCritCounterRateHave0Specials.AspectName = "NoSpecial";
+            lvcCritCounterRateHave0Specials.Text = "Have 0 Specials";
+            lvcCritCounterRateHave0Specials.Width = 90;
             // 
             // lvcCritCounterRateHave1Specials
             // 
-            this.lvcCritCounterRateHave1Specials.AspectName = "OneSpecial";
-            this.lvcCritCounterRateHave1Specials.Text = "Have 1 Specials";
-            this.lvcCritCounterRateHave1Specials.Width = 90;
+            lvcCritCounterRateHave1Specials.AspectName = "OneSpecial";
+            lvcCritCounterRateHave1Specials.Text = "Have 1 Specials";
+            lvcCritCounterRateHave1Specials.Width = 90;
             // 
             // lvcCritCounterRateHave2Specials
             // 
-            this.lvcCritCounterRateHave2Specials.AspectName = "TwoSpecial";
-            this.lvcCritCounterRateHave2Specials.Text = "Have 2 Specials";
-            this.lvcCritCounterRateHave2Specials.Width = 90;
+            lvcCritCounterRateHave2Specials.AspectName = "TwoSpecial";
+            lvcCritCounterRateHave2Specials.Text = "Have 2 Specials";
+            lvcCritCounterRateHave2Specials.Width = 90;
             // 
             // lvcCritCounterRateHave3Specials
             // 
-            this.lvcCritCounterRateHave3Specials.AspectName = "ThreeSpecial";
-            this.lvcCritCounterRateHave3Specials.Text = "Have 3 Specials";
-            this.lvcCritCounterRateHave3Specials.Width = 90;
+            lvcCritCounterRateHave3Specials.AspectName = "ThreeSpecial";
+            lvcCritCounterRateHave3Specials.Text = "Have 3 Specials";
+            lvcCritCounterRateHave3Specials.Width = 90;
             // 
             // lvcCritCounterRateHave4Specials
             // 
-            this.lvcCritCounterRateHave4Specials.AspectName = "FourSpecial";
-            this.lvcCritCounterRateHave4Specials.Text = "Have 4 Specials";
-            this.lvcCritCounterRateHave4Specials.Width = 90;
+            lvcCritCounterRateHave4Specials.AspectName = "FourSpecial";
+            lvcCritCounterRateHave4Specials.Text = "Have 4 Specials";
+            lvcCritCounterRateHave4Specials.Width = 90;
             // 
             // lvcCritCounterRateHave5Specials
             // 
-            this.lvcCritCounterRateHave5Specials.AspectName = "FiveSpecial";
-            this.lvcCritCounterRateHave5Specials.Text = "Have 5 Specials";
-            this.lvcCritCounterRateHave5Specials.Width = 90;
+            lvcCritCounterRateHave5Specials.AspectName = "FiveSpecial";
+            lvcCritCounterRateHave5Specials.Text = "Have 5 Specials";
+            lvcCritCounterRateHave5Specials.Width = 90;
             // 
             // tabSpecialChance
             // 
-            this.tabSpecialChance.Controls.Add(this.olvSpecialChance);
-            this.tabSpecialChance.Location = new System.Drawing.Point(4, 22);
-            this.tabSpecialChance.Name = "tabSpecialChance";
-            this.tabSpecialChance.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSpecialChance.Size = new System.Drawing.Size(756, 480);
-            this.tabSpecialChance.TabIndex = 12;
-            this.tabSpecialChance.Text = "Special Chance";
-            this.tabSpecialChance.UseVisualStyleBackColor = true;
+            tabSpecialChance.Controls.Add(olvSpecialChance);
+            tabSpecialChance.Location = new System.Drawing.Point(4, 24);
+            tabSpecialChance.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSpecialChance.Name = "tabSpecialChance";
+            tabSpecialChance.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSpecialChance.Size = new System.Drawing.Size(883, 556);
+            tabSpecialChance.TabIndex = 12;
+            tabSpecialChance.Text = "Special Chance";
+            tabSpecialChance.UseVisualStyleBackColor = true;
             // 
             // olvSpecialChance
             // 
-            this.olvSpecialChance.AllColumns.Add(this.lvcSpecialChanceSpecialProcRate);
-            this.olvSpecialChance.AllColumns.Add(this.lvcSpecialChanceAddress);
-            this.olvSpecialChance.AllColumns.Add(this.lvcSpecialChanceTwoSpecials2);
-            this.olvSpecialChance.AllColumns.Add(this.lvcSpecialChanceThreeSpecials3);
-            this.olvSpecialChance.AllColumns.Add(this.lvcSpecialChanceThreeSpecials2);
-            this.olvSpecialChance.AllColumns.Add(this.lvcSpecialChanceFourSpecials4);
-            this.olvSpecialChance.AllColumns.Add(this.lvcSpecialChanceFourSpecials3);
-            this.olvSpecialChance.AllColumns.Add(this.lvcSpecialChanceFourSpecials2);
-            this.olvSpecialChance.AllowColumnReorder = true;
-            this.olvSpecialChance.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvSpecialChance.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvSpecialChance.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcSpecialChanceSpecialProcRate,
-            this.lvcSpecialChanceAddress,
-            this.lvcSpecialChanceTwoSpecials2,
-            this.lvcSpecialChanceThreeSpecials3,
-            this.lvcSpecialChanceThreeSpecials2,
-            this.lvcSpecialChanceFourSpecials4,
-            this.lvcSpecialChanceFourSpecials3,
-            this.lvcSpecialChanceFourSpecials2});
-            this.olvSpecialChance.FullRowSelect = true;
-            this.olvSpecialChance.GridLines = true;
-            this.olvSpecialChance.HasCollapsibleGroups = false;
-            this.olvSpecialChance.HideSelection = false;
-            this.olvSpecialChance.Location = new System.Drawing.Point(3, 3);
-            this.olvSpecialChance.MenuLabelGroupBy = "";
-            this.olvSpecialChance.Name = "olvSpecialChance";
-            this.olvSpecialChance.ShowGroups = false;
-            this.olvSpecialChance.Size = new System.Drawing.Size(750, 474);
-            this.olvSpecialChance.TabIndex = 4;
-            this.olvSpecialChance.UseAlternatingBackColors = true;
-            this.olvSpecialChance.UseCompatibleStateImageBehavior = false;
-            this.olvSpecialChance.View = System.Windows.Forms.View.Details;
+            olvSpecialChance.AllColumns.Add(lvcSpecialChanceSpecialProcRate);
+            olvSpecialChance.AllColumns.Add(lvcSpecialChanceAddress);
+            olvSpecialChance.AllColumns.Add(lvcSpecialChanceTwoSpecials2);
+            olvSpecialChance.AllColumns.Add(lvcSpecialChanceThreeSpecials3);
+            olvSpecialChance.AllColumns.Add(lvcSpecialChanceThreeSpecials2);
+            olvSpecialChance.AllColumns.Add(lvcSpecialChanceFourSpecials4);
+            olvSpecialChance.AllColumns.Add(lvcSpecialChanceFourSpecials3);
+            olvSpecialChance.AllColumns.Add(lvcSpecialChanceFourSpecials2);
+            olvSpecialChance.AllowColumnReorder = true;
+            olvSpecialChance.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvSpecialChance.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvSpecialChance.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcSpecialChanceSpecialProcRate, lvcSpecialChanceAddress, lvcSpecialChanceTwoSpecials2, lvcSpecialChanceThreeSpecials3, lvcSpecialChanceThreeSpecials2, lvcSpecialChanceFourSpecials4, lvcSpecialChanceFourSpecials3, lvcSpecialChanceFourSpecials2 });
+            olvSpecialChance.FullRowSelect = true;
+            olvSpecialChance.GridLines = true;
+            olvSpecialChance.HasCollapsibleGroups = false;
+            olvSpecialChance.Location = new System.Drawing.Point(4, 3);
+            olvSpecialChance.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvSpecialChance.MenuLabelGroupBy = "";
+            olvSpecialChance.Name = "olvSpecialChance";
+            olvSpecialChance.ShowGroups = false;
+            olvSpecialChance.Size = new System.Drawing.Size(874, 546);
+            olvSpecialChance.TabIndex = 4;
+            olvSpecialChance.UseAlternatingBackColors = true;
+            olvSpecialChance.UseCompatibleStateImageBehavior = false;
+            olvSpecialChance.View = System.Windows.Forms.View.Details;
             // 
             // lvcSpecialChanceSpecialProcRate
             // 
-            this.lvcSpecialChanceSpecialProcRate.AspectName = "Name";
-            this.lvcSpecialChanceSpecialProcRate.IsEditable = false;
-            this.lvcSpecialChanceSpecialProcRate.Text = "Special Proc rate";
-            this.lvcSpecialChanceSpecialProcRate.Width = 95;
+            lvcSpecialChanceSpecialProcRate.AspectName = "Name";
+            lvcSpecialChanceSpecialProcRate.IsEditable = false;
+            lvcSpecialChanceSpecialProcRate.Text = "Special Proc rate";
+            lvcSpecialChanceSpecialProcRate.Width = 95;
             // 
             // lvcSpecialChanceAddress
             // 
-            this.lvcSpecialChanceAddress.AspectName = "Address";
-            this.lvcSpecialChanceAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcSpecialChanceAddress.IsEditable = false;
-            this.lvcSpecialChanceAddress.Text = "Address";
-            this.lvcSpecialChanceAddress.Width = 55;
+            lvcSpecialChanceAddress.AspectName = "Address";
+            lvcSpecialChanceAddress.AspectToStringFormat = "{0:X4}";
+            lvcSpecialChanceAddress.IsEditable = false;
+            lvcSpecialChanceAddress.Text = "Address";
+            lvcSpecialChanceAddress.Width = 55;
             // 
             // lvcSpecialChanceTwoSpecials2
             // 
-            this.lvcSpecialChanceTwoSpecials2.AspectName = "TwoSpecials2";
-            this.lvcSpecialChanceTwoSpecials2.Text = "TwoSpecials2";
-            this.lvcSpecialChanceTwoSpecials2.Width = 80;
+            lvcSpecialChanceTwoSpecials2.AspectName = "TwoSpecials2";
+            lvcSpecialChanceTwoSpecials2.Text = "TwoSpecials2";
+            lvcSpecialChanceTwoSpecials2.Width = 80;
             // 
             // lvcSpecialChanceThreeSpecials3
             // 
-            this.lvcSpecialChanceThreeSpecials3.AspectName = "ThreeSpecials3";
-            this.lvcSpecialChanceThreeSpecials3.Text = "ThreeSpecials3";
-            this.lvcSpecialChanceThreeSpecials3.Width = 90;
+            lvcSpecialChanceThreeSpecials3.AspectName = "ThreeSpecials3";
+            lvcSpecialChanceThreeSpecials3.Text = "ThreeSpecials3";
+            lvcSpecialChanceThreeSpecials3.Width = 90;
             // 
             // lvcSpecialChanceThreeSpecials2
             // 
-            this.lvcSpecialChanceThreeSpecials2.AspectName = "ThreeSpecials2";
-            this.lvcSpecialChanceThreeSpecials2.Text = "ThreeSpecials2";
-            this.lvcSpecialChanceThreeSpecials2.Width = 90;
+            lvcSpecialChanceThreeSpecials2.AspectName = "ThreeSpecials2";
+            lvcSpecialChanceThreeSpecials2.Text = "ThreeSpecials2";
+            lvcSpecialChanceThreeSpecials2.Width = 90;
             // 
             // lvcSpecialChanceFourSpecials4
             // 
-            this.lvcSpecialChanceFourSpecials4.AspectName = "FourSpecials4";
-            this.lvcSpecialChanceFourSpecials4.Text = "FourSpecials4";
-            this.lvcSpecialChanceFourSpecials4.Width = 80;
+            lvcSpecialChanceFourSpecials4.AspectName = "FourSpecials4";
+            lvcSpecialChanceFourSpecials4.Text = "FourSpecials4";
+            lvcSpecialChanceFourSpecials4.Width = 80;
             // 
             // lvcSpecialChanceFourSpecials3
             // 
-            this.lvcSpecialChanceFourSpecials3.AspectName = "FourSpecials3";
-            this.lvcSpecialChanceFourSpecials3.Text = "FourSpecials3";
-            this.lvcSpecialChanceFourSpecials3.Width = 80;
+            lvcSpecialChanceFourSpecials3.AspectName = "FourSpecials3";
+            lvcSpecialChanceFourSpecials3.Text = "FourSpecials3";
+            lvcSpecialChanceFourSpecials3.Width = 80;
             // 
             // lvcSpecialChanceFourSpecials2
             // 
-            this.lvcSpecialChanceFourSpecials2.AspectName = "FourSpecials2";
-            this.lvcSpecialChanceFourSpecials2.Text = "FourSpecials2";
-            this.lvcSpecialChanceFourSpecials2.Width = 80;
+            lvcSpecialChanceFourSpecials2.AspectName = "FourSpecials2";
+            lvcSpecialChanceFourSpecials2.Text = "FourSpecials2";
+            lvcSpecialChanceFourSpecials2.Width = 80;
             // 
             // tabExpLimit
             // 
-            this.tabExpLimit.Controls.Add(this.olvExpLimit);
-            this.tabExpLimit.Location = new System.Drawing.Point(4, 22);
-            this.tabExpLimit.Name = "tabExpLimit";
-            this.tabExpLimit.Padding = new System.Windows.Forms.Padding(3);
-            this.tabExpLimit.Size = new System.Drawing.Size(756, 480);
-            this.tabExpLimit.TabIndex = 13;
-            this.tabExpLimit.Text = "Exp Limit";
-            this.tabExpLimit.UseVisualStyleBackColor = true;
+            tabExpLimit.Controls.Add(olvExpLimit);
+            tabExpLimit.Location = new System.Drawing.Point(4, 24);
+            tabExpLimit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabExpLimit.Name = "tabExpLimit";
+            tabExpLimit.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabExpLimit.Size = new System.Drawing.Size(883, 556);
+            tabExpLimit.TabIndex = 13;
+            tabExpLimit.Text = "Exp Limit";
+            tabExpLimit.UseVisualStyleBackColor = true;
             // 
             // olvExpLimit
             // 
-            this.olvExpLimit.AllColumns.Add(this.lvcExpLimitName);
-            this.olvExpLimit.AllColumns.Add(this.lvcExpLimitAddress);
-            this.olvExpLimit.AllColumns.Add(this.lvcExpLimitCheckedValue);
-            this.olvExpLimit.AllColumns.Add(this.lvcExpLimitReplacedValue);
-            this.olvExpLimit.AllowColumnReorder = true;
-            this.olvExpLimit.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvExpLimit.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvExpLimit.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcExpLimitName,
-            this.lvcExpLimitAddress,
-            this.lvcExpLimitCheckedValue,
-            this.lvcExpLimitReplacedValue});
-            this.olvExpLimit.FullRowSelect = true;
-            this.olvExpLimit.GridLines = true;
-            this.olvExpLimit.HasCollapsibleGroups = false;
-            this.olvExpLimit.HideSelection = false;
-            this.olvExpLimit.Location = new System.Drawing.Point(3, 3);
-            this.olvExpLimit.MenuLabelGroupBy = "";
-            this.olvExpLimit.Name = "olvExpLimit";
-            this.olvExpLimit.ShowGroups = false;
-            this.olvExpLimit.Size = new System.Drawing.Size(750, 474);
-            this.olvExpLimit.TabIndex = 3;
-            this.olvExpLimit.UseAlternatingBackColors = true;
-            this.olvExpLimit.UseCompatibleStateImageBehavior = false;
-            this.olvExpLimit.View = System.Windows.Forms.View.Details;
+            olvExpLimit.AllColumns.Add(lvcExpLimitName);
+            olvExpLimit.AllColumns.Add(lvcExpLimitAddress);
+            olvExpLimit.AllColumns.Add(lvcExpLimitCheckedValue);
+            olvExpLimit.AllColumns.Add(lvcExpLimitReplacedValue);
+            olvExpLimit.AllowColumnReorder = true;
+            olvExpLimit.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvExpLimit.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvExpLimit.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcExpLimitName, lvcExpLimitAddress, lvcExpLimitCheckedValue, lvcExpLimitReplacedValue });
+            olvExpLimit.FullRowSelect = true;
+            olvExpLimit.GridLines = true;
+            olvExpLimit.HasCollapsibleGroups = false;
+            olvExpLimit.Location = new System.Drawing.Point(4, 3);
+            olvExpLimit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvExpLimit.MenuLabelGroupBy = "";
+            olvExpLimit.Name = "olvExpLimit";
+            olvExpLimit.ShowGroups = false;
+            olvExpLimit.Size = new System.Drawing.Size(874, 546);
+            olvExpLimit.TabIndex = 3;
+            olvExpLimit.UseAlternatingBackColors = true;
+            olvExpLimit.UseCompatibleStateImageBehavior = false;
+            olvExpLimit.View = System.Windows.Forms.View.Details;
             // 
             // lvcExpLimitName
             // 
-            this.lvcExpLimitName.AspectName = "Name";
-            this.lvcExpLimitName.IsEditable = false;
-            this.lvcExpLimitName.Text = "Name";
+            lvcExpLimitName.AspectName = "Name";
+            lvcExpLimitName.IsEditable = false;
+            lvcExpLimitName.Text = "Name";
             // 
             // lvcExpLimitAddress
             // 
-            this.lvcExpLimitAddress.AspectName = "Address";
-            this.lvcExpLimitAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcExpLimitAddress.IsEditable = false;
-            this.lvcExpLimitAddress.Text = "Address";
+            lvcExpLimitAddress.AspectName = "Address";
+            lvcExpLimitAddress.AspectToStringFormat = "{0:X4}";
+            lvcExpLimitAddress.IsEditable = false;
+            lvcExpLimitAddress.Text = "Address";
             // 
             // lvcExpLimitCheckedValue
             // 
-            this.lvcExpLimitCheckedValue.AspectName = "ExpCheck";
-            this.lvcExpLimitCheckedValue.Text = "Checked Value";
-            this.lvcExpLimitCheckedValue.Width = 100;
+            lvcExpLimitCheckedValue.AspectName = "ExpCheck";
+            lvcExpLimitCheckedValue.Text = "Checked Value";
+            lvcExpLimitCheckedValue.Width = 100;
             // 
             // lvcExpLimitReplacedValue
             // 
-            this.lvcExpLimitReplacedValue.AspectName = "ExpReplacement";
-            this.lvcExpLimitReplacedValue.Text = "Replaced Value";
-            this.lvcExpLimitReplacedValue.Width = 115;
+            lvcExpLimitReplacedValue.AspectName = "ExpReplacement";
+            lvcExpLimitReplacedValue.Text = "Replaced Value";
+            lvcExpLimitReplacedValue.Width = 115;
             // 
             // tabHealExp
             // 
-            this.tabHealExp.Controls.Add(this.olvHealExp);
-            this.tabHealExp.Location = new System.Drawing.Point(4, 22);
-            this.tabHealExp.Name = "tabHealExp";
-            this.tabHealExp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHealExp.Size = new System.Drawing.Size(756, 480);
-            this.tabHealExp.TabIndex = 14;
-            this.tabHealExp.Text = "HealExp";
-            this.tabHealExp.UseVisualStyleBackColor = true;
+            tabHealExp.Controls.Add(olvHealExp);
+            tabHealExp.Location = new System.Drawing.Point(4, 24);
+            tabHealExp.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabHealExp.Name = "tabHealExp";
+            tabHealExp.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabHealExp.Size = new System.Drawing.Size(883, 556);
+            tabHealExp.TabIndex = 14;
+            tabHealExp.Text = "HealExp";
+            tabHealExp.UseVisualStyleBackColor = true;
             // 
             // olvHealExp
             // 
-            this.olvHealExp.AllColumns.Add(this.lvcHealExpName);
-            this.olvHealExp.AllColumns.Add(this.lvcHealExpAddress);
-            this.olvHealExp.AllColumns.Add(this.lvcHealExpBonus);
-            this.olvHealExp.AllowColumnReorder = true;
-            this.olvHealExp.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvHealExp.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvHealExp.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcHealExpName,
-            this.lvcHealExpAddress,
-            this.lvcHealExpBonus});
-            this.olvHealExp.FullRowSelect = true;
-            this.olvHealExp.GridLines = true;
-            this.olvHealExp.HasCollapsibleGroups = false;
-            this.olvHealExp.HideSelection = false;
-            this.olvHealExp.Location = new System.Drawing.Point(3, 3);
-            this.olvHealExp.MenuLabelGroupBy = "";
-            this.olvHealExp.Name = "olvHealExp";
-            this.olvHealExp.ShowGroups = false;
-            this.olvHealExp.Size = new System.Drawing.Size(750, 474);
-            this.olvHealExp.TabIndex = 4;
-            this.olvHealExp.UseAlternatingBackColors = true;
-            this.olvHealExp.UseCompatibleStateImageBehavior = false;
-            this.olvHealExp.View = System.Windows.Forms.View.Details;
+            olvHealExp.AllColumns.Add(lvcHealExpName);
+            olvHealExp.AllColumns.Add(lvcHealExpAddress);
+            olvHealExp.AllColumns.Add(lvcHealExpBonus);
+            olvHealExp.AllowColumnReorder = true;
+            olvHealExp.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvHealExp.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvHealExp.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcHealExpName, lvcHealExpAddress, lvcHealExpBonus });
+            olvHealExp.FullRowSelect = true;
+            olvHealExp.GridLines = true;
+            olvHealExp.HasCollapsibleGroups = false;
+            olvHealExp.Location = new System.Drawing.Point(4, 3);
+            olvHealExp.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvHealExp.MenuLabelGroupBy = "";
+            olvHealExp.Name = "olvHealExp";
+            olvHealExp.ShowGroups = false;
+            olvHealExp.Size = new System.Drawing.Size(874, 546);
+            olvHealExp.TabIndex = 4;
+            olvHealExp.UseAlternatingBackColors = true;
+            olvHealExp.UseCompatibleStateImageBehavior = false;
+            olvHealExp.View = System.Windows.Forms.View.Details;
             // 
             // lvcHealExpName
             // 
-            this.lvcHealExpName.AspectName = "Name";
-            this.lvcHealExpName.IsEditable = false;
-            this.lvcHealExpName.Text = "Name";
+            lvcHealExpName.AspectName = "Name";
+            lvcHealExpName.IsEditable = false;
+            lvcHealExpName.Text = "Name";
             // 
             // lvcHealExpAddress
             // 
-            this.lvcHealExpAddress.AspectName = "Address";
-            this.lvcHealExpAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcHealExpAddress.IsEditable = false;
-            this.lvcHealExpAddress.Text = "Address";
+            lvcHealExpAddress.AspectName = "Address";
+            lvcHealExpAddress.AspectToStringFormat = "{0:X4}";
+            lvcHealExpAddress.IsEditable = false;
+            lvcHealExpAddress.Text = "Address";
             // 
             // lvcHealExpBonus
             // 
-            this.lvcHealExpBonus.AspectName = "HealBonus";
-            this.lvcHealExpBonus.Text = "HealExpBonus";
-            this.lvcHealExpBonus.Width = 100;
+            lvcHealExpBonus.AspectName = "HealBonus";
+            lvcHealExpBonus.Text = "HealExpBonus";
+            lvcHealExpBonus.Width = 100;
             // 
             // tabWeaponSpellRank
             // 
-            this.tabWeaponSpellRank.Controls.Add(this.olvWeaponSpellRank);
-            this.tabWeaponSpellRank.Location = new System.Drawing.Point(4, 22);
-            this.tabWeaponSpellRank.Name = "tabWeaponSpellRank";
-            this.tabWeaponSpellRank.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWeaponSpellRank.Size = new System.Drawing.Size(756, 480);
-            this.tabWeaponSpellRank.TabIndex = 15;
-            this.tabWeaponSpellRank.Text = "WeaponSpellRank";
-            this.tabWeaponSpellRank.UseVisualStyleBackColor = true;
+            tabWeaponSpellRank.Controls.Add(olvWeaponSpellRank);
+            tabWeaponSpellRank.Location = new System.Drawing.Point(4, 24);
+            tabWeaponSpellRank.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabWeaponSpellRank.Name = "tabWeaponSpellRank";
+            tabWeaponSpellRank.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabWeaponSpellRank.Size = new System.Drawing.Size(883, 556);
+            tabWeaponSpellRank.TabIndex = 15;
+            tabWeaponSpellRank.Text = "WeaponSpellRank";
+            tabWeaponSpellRank.UseVisualStyleBackColor = true;
             // 
             // olvWeaponSpellRank
             // 
-            this.olvWeaponSpellRank.AllColumns.Add(this.lvcWeaponSpellRankTable);
-            this.olvWeaponSpellRank.AllColumns.Add(this.lvcWeaponSpellRankID);
-            this.olvWeaponSpellRank.AllColumns.Add(this.lvcWeaponSpellRankAddress);
-            this.olvWeaponSpellRank.AllColumns.Add(this.lvcWeaponSpellRankRankNone);
-            this.olvWeaponSpellRank.AllColumns.Add(this.lvcWeaponSpellRankRankC);
-            this.olvWeaponSpellRank.AllColumns.Add(this.lvcWeaponSpellRankRankB);
-            this.olvWeaponSpellRank.AllColumns.Add(this.lvcWeaponSpellRankRankA);
-            this.olvWeaponSpellRank.AllColumns.Add(this.lvcWeaponSpellRankRankS);
-            this.olvWeaponSpellRank.AllowColumnReorder = true;
-            this.olvWeaponSpellRank.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvWeaponSpellRank.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvWeaponSpellRank.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcWeaponSpellRankTable,
-            this.lvcWeaponSpellRankID,
-            this.lvcWeaponSpellRankAddress,
-            this.lvcWeaponSpellRankRankNone,
-            this.lvcWeaponSpellRankRankC,
-            this.lvcWeaponSpellRankRankB,
-            this.lvcWeaponSpellRankRankA,
-            this.lvcWeaponSpellRankRankS});
-            this.olvWeaponSpellRank.FullRowSelect = true;
-            this.olvWeaponSpellRank.GridLines = true;
-            this.olvWeaponSpellRank.HasCollapsibleGroups = false;
-            this.olvWeaponSpellRank.HideSelection = false;
-            this.olvWeaponSpellRank.Location = new System.Drawing.Point(3, 3);
-            this.olvWeaponSpellRank.MenuLabelGroupBy = "";
-            this.olvWeaponSpellRank.Name = "olvWeaponSpellRank";
-            this.olvWeaponSpellRank.ShowGroups = false;
-            this.olvWeaponSpellRank.Size = new System.Drawing.Size(750, 474);
-            this.olvWeaponSpellRank.TabIndex = 4;
-            this.olvWeaponSpellRank.UseAlternatingBackColors = true;
-            this.olvWeaponSpellRank.UseCompatibleStateImageBehavior = false;
-            this.olvWeaponSpellRank.View = System.Windows.Forms.View.Details;
+            olvWeaponSpellRank.AllColumns.Add(lvcWeaponSpellRankTable);
+            olvWeaponSpellRank.AllColumns.Add(lvcWeaponSpellRankID);
+            olvWeaponSpellRank.AllColumns.Add(lvcWeaponSpellRankAddress);
+            olvWeaponSpellRank.AllColumns.Add(lvcWeaponSpellRankRankNone);
+            olvWeaponSpellRank.AllColumns.Add(lvcWeaponSpellRankRankC);
+            olvWeaponSpellRank.AllColumns.Add(lvcWeaponSpellRankRankB);
+            olvWeaponSpellRank.AllColumns.Add(lvcWeaponSpellRankRankA);
+            olvWeaponSpellRank.AllColumns.Add(lvcWeaponSpellRankRankS);
+            olvWeaponSpellRank.AllowColumnReorder = true;
+            olvWeaponSpellRank.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvWeaponSpellRank.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvWeaponSpellRank.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcWeaponSpellRankTable, lvcWeaponSpellRankID, lvcWeaponSpellRankAddress, lvcWeaponSpellRankRankNone, lvcWeaponSpellRankRankC, lvcWeaponSpellRankRankB, lvcWeaponSpellRankRankA, lvcWeaponSpellRankRankS });
+            olvWeaponSpellRank.FullRowSelect = true;
+            olvWeaponSpellRank.GridLines = true;
+            olvWeaponSpellRank.HasCollapsibleGroups = false;
+            olvWeaponSpellRank.Location = new System.Drawing.Point(4, 3);
+            olvWeaponSpellRank.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvWeaponSpellRank.MenuLabelGroupBy = "";
+            olvWeaponSpellRank.Name = "olvWeaponSpellRank";
+            olvWeaponSpellRank.ShowGroups = false;
+            olvWeaponSpellRank.Size = new System.Drawing.Size(874, 546);
+            olvWeaponSpellRank.TabIndex = 4;
+            olvWeaponSpellRank.UseAlternatingBackColors = true;
+            olvWeaponSpellRank.UseCompatibleStateImageBehavior = false;
+            olvWeaponSpellRank.View = System.Windows.Forms.View.Details;
             // 
             // lvcWeaponSpellRankTable
             // 
-            this.lvcWeaponSpellRankTable.AspectName = "Name";
-            this.lvcWeaponSpellRankTable.IsEditable = false;
-            this.lvcWeaponSpellRankTable.Text = "Table";
-            this.lvcWeaponSpellRankTable.Width = 70;
+            lvcWeaponSpellRankTable.AspectName = "Name";
+            lvcWeaponSpellRankTable.IsEditable = false;
+            lvcWeaponSpellRankTable.Text = "Table";
+            lvcWeaponSpellRankTable.Width = 70;
             // 
             // lvcWeaponSpellRankID
             // 
-            this.lvcWeaponSpellRankID.AspectName = "ID";
-            this.lvcWeaponSpellRankID.AspectToStringFormat = "{0:X}";
-            this.lvcWeaponSpellRankID.IsEditable = false;
-            this.lvcWeaponSpellRankID.Text = "Hex ID";
-            this.lvcWeaponSpellRankID.Width = 55;
+            lvcWeaponSpellRankID.AspectName = "ID";
+            lvcWeaponSpellRankID.AspectToStringFormat = "{0:X}";
+            lvcWeaponSpellRankID.IsEditable = false;
+            lvcWeaponSpellRankID.Text = "Hex ID";
+            lvcWeaponSpellRankID.Width = 55;
             // 
             // lvcWeaponSpellRankAddress
             // 
-            this.lvcWeaponSpellRankAddress.AspectName = "Address";
-            this.lvcWeaponSpellRankAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcWeaponSpellRankAddress.IsEditable = false;
-            this.lvcWeaponSpellRankAddress.Text = "Address";
-            this.lvcWeaponSpellRankAddress.Width = 55;
+            lvcWeaponSpellRankAddress.AspectName = "Address";
+            lvcWeaponSpellRankAddress.AspectToStringFormat = "{0:X4}";
+            lvcWeaponSpellRankAddress.IsEditable = false;
+            lvcWeaponSpellRankAddress.Text = "Address";
+            lvcWeaponSpellRankAddress.Width = 55;
             // 
             // lvcWeaponSpellRankRankNone
             // 
-            this.lvcWeaponSpellRankRankNone.AspectName = "RankNone";
-            this.lvcWeaponSpellRankRankNone.Text = "RankNone";
-            this.lvcWeaponSpellRankRankNone.Width = 70;
+            lvcWeaponSpellRankRankNone.AspectName = "RankNone";
+            lvcWeaponSpellRankRankNone.Text = "RankNone";
+            lvcWeaponSpellRankRankNone.Width = 70;
             // 
             // lvcWeaponSpellRankRankC
             // 
-            this.lvcWeaponSpellRankRankC.AspectName = "RankC";
-            this.lvcWeaponSpellRankRankC.Text = "RankC";
-            this.lvcWeaponSpellRankRankC.Width = 65;
+            lvcWeaponSpellRankRankC.AspectName = "RankC";
+            lvcWeaponSpellRankRankC.Text = "RankC";
+            lvcWeaponSpellRankRankC.Width = 65;
             // 
             // lvcWeaponSpellRankRankB
             // 
-            this.lvcWeaponSpellRankRankB.AspectName = "RankB";
-            this.lvcWeaponSpellRankRankB.Text = "RankB";
+            lvcWeaponSpellRankRankB.AspectName = "RankB";
+            lvcWeaponSpellRankRankB.Text = "RankB";
             // 
             // lvcWeaponSpellRankRankA
             // 
-            this.lvcWeaponSpellRankRankA.AspectName = "RankA";
-            this.lvcWeaponSpellRankRankA.Text = "RankA";
-            this.lvcWeaponSpellRankRankA.Width = 80;
+            lvcWeaponSpellRankRankA.AspectName = "RankA";
+            lvcWeaponSpellRankRankA.Text = "RankA";
+            lvcWeaponSpellRankRankA.Width = 80;
             // 
             // lvcWeaponSpellRankRankS
             // 
-            this.lvcWeaponSpellRankRankS.AspectName = "RankS";
-            this.lvcWeaponSpellRankRankS.Text = "RankS";
-            this.lvcWeaponSpellRankRankS.Width = 70;
+            lvcWeaponSpellRankRankS.AspectName = "RankS";
+            lvcWeaponSpellRankRankS.Text = "RankS";
+            lvcWeaponSpellRankRankS.Width = 70;
             // 
             // tabStatusGroups
             // 
-            this.tabStatusGroups.Controls.Add(this.olvStatusGroups);
-            this.tabStatusGroups.Location = new System.Drawing.Point(4, 22);
-            this.tabStatusGroups.Name = "tabStatusGroups";
-            this.tabStatusGroups.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStatusGroups.Size = new System.Drawing.Size(756, 480);
-            this.tabStatusGroups.TabIndex = 16;
-            this.tabStatusGroups.Text = "StatusGroups";
-            this.tabStatusGroups.UseVisualStyleBackColor = true;
+            tabStatusGroups.Controls.Add(olvStatusGroups);
+            tabStatusGroups.Location = new System.Drawing.Point(4, 24);
+            tabStatusGroups.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabStatusGroups.Name = "tabStatusGroups";
+            tabStatusGroups.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabStatusGroups.Size = new System.Drawing.Size(883, 556);
+            tabStatusGroups.TabIndex = 16;
+            tabStatusGroups.Text = "StatusGroups";
+            tabStatusGroups.UseVisualStyleBackColor = true;
             // 
             // olvStatusGroups
             // 
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsName);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsID);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsAddress);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck0Chance);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown0);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck1Chance);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown1);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck2Chance);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown2);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck3Chance);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown3);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck4Chance);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown4);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck5Chance);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown5);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck6Chance);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown6);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck7Chance);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown7);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck8Chance);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown8);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsLuck9Chance);
-            this.olvStatusGroups.AllColumns.Add(this.lvcStatusGroupsUnknown9);
-            this.olvStatusGroups.AllowColumnReorder = true;
-            this.olvStatusGroups.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvStatusGroups.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvStatusGroups.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcStatusGroupsName,
-            this.lvcStatusGroupsID,
-            this.lvcStatusGroupsAddress,
-            this.lvcStatusGroupsLuck0Chance,
-            this.lvcStatusGroupsUnknown0,
-            this.lvcStatusGroupsLuck1Chance,
-            this.lvcStatusGroupsUnknown1,
-            this.lvcStatusGroupsLuck2Chance,
-            this.lvcStatusGroupsUnknown2,
-            this.lvcStatusGroupsLuck3Chance,
-            this.lvcStatusGroupsUnknown3,
-            this.lvcStatusGroupsLuck4Chance,
-            this.lvcStatusGroupsUnknown4,
-            this.lvcStatusGroupsLuck5Chance,
-            this.lvcStatusGroupsUnknown5,
-            this.lvcStatusGroupsLuck6Chance,
-            this.lvcStatusGroupsUnknown6,
-            this.lvcStatusGroupsLuck7Chance,
-            this.lvcStatusGroupsUnknown7,
-            this.lvcStatusGroupsLuck8Chance,
-            this.lvcStatusGroupsUnknown8,
-            this.lvcStatusGroupsLuck9Chance,
-            this.lvcStatusGroupsUnknown9});
-            this.olvStatusGroups.FullRowSelect = true;
-            this.olvStatusGroups.GridLines = true;
-            this.olvStatusGroups.HasCollapsibleGroups = false;
-            this.olvStatusGroups.HideSelection = false;
-            this.olvStatusGroups.Location = new System.Drawing.Point(3, 3);
-            this.olvStatusGroups.MenuLabelGroupBy = "";
-            this.olvStatusGroups.Name = "olvStatusGroups";
-            this.olvStatusGroups.ShowGroups = false;
-            this.olvStatusGroups.Size = new System.Drawing.Size(750, 474);
-            this.olvStatusGroups.TabIndex = 4;
-            this.olvStatusGroups.UseAlternatingBackColors = true;
-            this.olvStatusGroups.UseCompatibleStateImageBehavior = false;
-            this.olvStatusGroups.View = System.Windows.Forms.View.Details;
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsName);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsID);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsAddress);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsLuck0Chance);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsUnknown0);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsLuck1Chance);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsUnknown1);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsLuck2Chance);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsUnknown2);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsLuck3Chance);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsUnknown3);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsLuck4Chance);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsUnknown4);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsLuck5Chance);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsUnknown5);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsLuck6Chance);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsUnknown6);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsLuck7Chance);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsUnknown7);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsLuck8Chance);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsUnknown8);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsLuck9Chance);
+            olvStatusGroups.AllColumns.Add(lvcStatusGroupsUnknown9);
+            olvStatusGroups.AllowColumnReorder = true;
+            olvStatusGroups.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvStatusGroups.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvStatusGroups.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcStatusGroupsName, lvcStatusGroupsID, lvcStatusGroupsAddress, lvcStatusGroupsLuck0Chance, lvcStatusGroupsUnknown0, lvcStatusGroupsLuck1Chance, lvcStatusGroupsUnknown1, lvcStatusGroupsLuck2Chance, lvcStatusGroupsUnknown2, lvcStatusGroupsLuck3Chance, lvcStatusGroupsUnknown3, lvcStatusGroupsLuck4Chance, lvcStatusGroupsUnknown4, lvcStatusGroupsLuck5Chance, lvcStatusGroupsUnknown5, lvcStatusGroupsLuck6Chance, lvcStatusGroupsUnknown6, lvcStatusGroupsLuck7Chance, lvcStatusGroupsUnknown7, lvcStatusGroupsLuck8Chance, lvcStatusGroupsUnknown8, lvcStatusGroupsLuck9Chance, lvcStatusGroupsUnknown9 });
+            olvStatusGroups.FullRowSelect = true;
+            olvStatusGroups.GridLines = true;
+            olvStatusGroups.HasCollapsibleGroups = false;
+            olvStatusGroups.Location = new System.Drawing.Point(4, 3);
+            olvStatusGroups.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvStatusGroups.MenuLabelGroupBy = "";
+            olvStatusGroups.Name = "olvStatusGroups";
+            olvStatusGroups.ShowGroups = false;
+            olvStatusGroups.Size = new System.Drawing.Size(874, 546);
+            olvStatusGroups.TabIndex = 4;
+            olvStatusGroups.UseAlternatingBackColors = true;
+            olvStatusGroups.UseCompatibleStateImageBehavior = false;
+            olvStatusGroups.View = System.Windows.Forms.View.Details;
             // 
             // lvcStatusGroupsName
             // 
-            this.lvcStatusGroupsName.AspectName = "Name";
-            this.lvcStatusGroupsName.IsEditable = false;
-            this.lvcStatusGroupsName.Text = "Status Group";
-            this.lvcStatusGroupsName.Width = 140;
+            lvcStatusGroupsName.AspectName = "Name";
+            lvcStatusGroupsName.IsEditable = false;
+            lvcStatusGroupsName.Text = "Status Group";
+            lvcStatusGroupsName.Width = 140;
             // 
             // lvcStatusGroupsID
             // 
-            this.lvcStatusGroupsID.AspectName = "ID";
-            this.lvcStatusGroupsID.AspectToStringFormat = "{0:X}";
-            this.lvcStatusGroupsID.IsEditable = false;
-            this.lvcStatusGroupsID.Text = "StatusGroup ID";
-            this.lvcStatusGroupsID.Width = 87;
+            lvcStatusGroupsID.AspectName = "ID";
+            lvcStatusGroupsID.AspectToStringFormat = "{0:X}";
+            lvcStatusGroupsID.IsEditable = false;
+            lvcStatusGroupsID.Text = "StatusGroup ID";
+            lvcStatusGroupsID.Width = 87;
             // 
             // lvcStatusGroupsAddress
             // 
-            this.lvcStatusGroupsAddress.AspectName = "Address";
-            this.lvcStatusGroupsAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcStatusGroupsAddress.IsEditable = false;
-            this.lvcStatusGroupsAddress.Text = "Address";
-            this.lvcStatusGroupsAddress.Width = 56;
+            lvcStatusGroupsAddress.AspectName = "Address";
+            lvcStatusGroupsAddress.AspectToStringFormat = "{0:X4}";
+            lvcStatusGroupsAddress.IsEditable = false;
+            lvcStatusGroupsAddress.Text = "Address";
+            lvcStatusGroupsAddress.Width = 56;
             // 
             // lvcStatusGroupsLuck0Chance
             // 
-            this.lvcStatusGroupsLuck0Chance.AspectName = "StatusLuck0";
-            this.lvcStatusGroupsLuck0Chance.AspectToStringFormat = "";
-            this.lvcStatusGroupsLuck0Chance.Text = "Luck0Chance%";
-            this.lvcStatusGroupsLuck0Chance.Width = 90;
-            // 
-            // lvcStatusGroupsLuck1Chance
-            // 
-            this.lvcStatusGroupsLuck1Chance.AspectName = "StatusLuck1";
-            this.lvcStatusGroupsLuck1Chance.AspectToStringFormat = "";
-            this.lvcStatusGroupsLuck1Chance.Text = "Luck1Chance%";
-            this.lvcStatusGroupsLuck1Chance.Width = 90;
-            // 
-            // lvcStatusGroupsLuck2Chance
-            // 
-            this.lvcStatusGroupsLuck2Chance.AspectName = "StatusLuck2";
-            this.lvcStatusGroupsLuck2Chance.AspectToStringFormat = "";
-            this.lvcStatusGroupsLuck2Chance.Text = "Luck2Chance%";
-            this.lvcStatusGroupsLuck2Chance.Width = 90;
-            // 
-            // lvcStatusGroupsLuck3Chance
-            // 
-            this.lvcStatusGroupsLuck3Chance.AspectName = "StatusLuck3";
-            this.lvcStatusGroupsLuck3Chance.AspectToStringFormat = "";
-            this.lvcStatusGroupsLuck3Chance.Text = "Luck3Chance%";
-            this.lvcStatusGroupsLuck3Chance.Width = 90;
-            // 
-            // lvcStatusGroupsLuck4Chance
-            // 
-            this.lvcStatusGroupsLuck4Chance.AspectName = "StatusLuck4";
-            this.lvcStatusGroupsLuck4Chance.AspectToStringFormat = "";
-            this.lvcStatusGroupsLuck4Chance.Text = "Luck4Chance%";
-            this.lvcStatusGroupsLuck4Chance.Width = 90;
-            // 
-            // lvcStatusGroupsLuck5Chance
-            // 
-            this.lvcStatusGroupsLuck5Chance.AspectName = "StatusLuck5";
-            this.lvcStatusGroupsLuck5Chance.AspectToStringFormat = "";
-            this.lvcStatusGroupsLuck5Chance.Text = "Luck5Chance%";
-            this.lvcStatusGroupsLuck5Chance.Width = 90;
-            // 
-            // lvcStatusGroupsLuck6Chance
-            // 
-            this.lvcStatusGroupsLuck6Chance.AspectName = "StatusLuck6";
-            this.lvcStatusGroupsLuck6Chance.AspectToStringFormat = "";
-            this.lvcStatusGroupsLuck6Chance.Text = "Luck6Chance%";
-            this.lvcStatusGroupsLuck6Chance.Width = 90;
-            // 
-            // lvcStatusGroupsLuck7Chance
-            // 
-            this.lvcStatusGroupsLuck7Chance.AspectName = "StatusLuck7";
-            this.lvcStatusGroupsLuck7Chance.AspectToStringFormat = "";
-            this.lvcStatusGroupsLuck7Chance.Text = "Luck7Chance%";
-            this.lvcStatusGroupsLuck7Chance.Width = 90;
-            // 
-            // lvcStatusGroupsLuck8Chance
-            // 
-            this.lvcStatusGroupsLuck8Chance.AspectName = "StatusLuck8";
-            this.lvcStatusGroupsLuck8Chance.Text = "Luck8Chance%";
-            this.lvcStatusGroupsLuck8Chance.Width = 90;
-            // 
-            // lvcStatusGroupsLuck9Chance
-            // 
-            this.lvcStatusGroupsLuck9Chance.AspectName = "StatusLuck9";
-            this.lvcStatusGroupsLuck9Chance.Text = "Luck9Chance%";
-            this.lvcStatusGroupsLuck9Chance.Width = 90;
+            lvcStatusGroupsLuck0Chance.AspectName = "StatusLuck0";
+            lvcStatusGroupsLuck0Chance.AspectToStringFormat = "";
+            lvcStatusGroupsLuck0Chance.Text = "Luck0Chance%";
+            lvcStatusGroupsLuck0Chance.Width = 90;
             // 
             // lvcStatusGroupsUnknown0
             // 
-            this.lvcStatusGroupsUnknown0.AspectName = "StatusUnknown0";
-            this.lvcStatusGroupsUnknown0.Text = "Unknown0";
-            this.lvcStatusGroupsUnknown0.Width = 75;
+            lvcStatusGroupsUnknown0.AspectName = "StatusUnknown0";
+            lvcStatusGroupsUnknown0.Text = "Unknown0";
+            lvcStatusGroupsUnknown0.Width = 75;
+            // 
+            // lvcStatusGroupsLuck1Chance
+            // 
+            lvcStatusGroupsLuck1Chance.AspectName = "StatusLuck1";
+            lvcStatusGroupsLuck1Chance.AspectToStringFormat = "";
+            lvcStatusGroupsLuck1Chance.Text = "Luck1Chance%";
+            lvcStatusGroupsLuck1Chance.Width = 90;
             // 
             // lvcStatusGroupsUnknown1
             // 
-            this.lvcStatusGroupsUnknown1.AspectName = "StatusUnknown1";
-            this.lvcStatusGroupsUnknown1.Text = "Unknown1";
-            this.lvcStatusGroupsUnknown1.Width = 75;
+            lvcStatusGroupsUnknown1.AspectName = "StatusUnknown1";
+            lvcStatusGroupsUnknown1.Text = "Unknown1";
+            lvcStatusGroupsUnknown1.Width = 75;
+            // 
+            // lvcStatusGroupsLuck2Chance
+            // 
+            lvcStatusGroupsLuck2Chance.AspectName = "StatusLuck2";
+            lvcStatusGroupsLuck2Chance.AspectToStringFormat = "";
+            lvcStatusGroupsLuck2Chance.Text = "Luck2Chance%";
+            lvcStatusGroupsLuck2Chance.Width = 90;
             // 
             // lvcStatusGroupsUnknown2
             // 
-            this.lvcStatusGroupsUnknown2.AspectName = "StatusUnknown2";
-            this.lvcStatusGroupsUnknown2.Text = "Unknown2";
-            this.lvcStatusGroupsUnknown2.Width = 75;
+            lvcStatusGroupsUnknown2.AspectName = "StatusUnknown2";
+            lvcStatusGroupsUnknown2.Text = "Unknown2";
+            lvcStatusGroupsUnknown2.Width = 75;
+            // 
+            // lvcStatusGroupsLuck3Chance
+            // 
+            lvcStatusGroupsLuck3Chance.AspectName = "StatusLuck3";
+            lvcStatusGroupsLuck3Chance.AspectToStringFormat = "";
+            lvcStatusGroupsLuck3Chance.Text = "Luck3Chance%";
+            lvcStatusGroupsLuck3Chance.Width = 90;
             // 
             // lvcStatusGroupsUnknown3
             // 
-            this.lvcStatusGroupsUnknown3.AspectName = "StatusUnknown3";
-            this.lvcStatusGroupsUnknown3.Text = "Unknown3";
-            this.lvcStatusGroupsUnknown3.Width = 75;
+            lvcStatusGroupsUnknown3.AspectName = "StatusUnknown3";
+            lvcStatusGroupsUnknown3.Text = "Unknown3";
+            lvcStatusGroupsUnknown3.Width = 75;
+            // 
+            // lvcStatusGroupsLuck4Chance
+            // 
+            lvcStatusGroupsLuck4Chance.AspectName = "StatusLuck4";
+            lvcStatusGroupsLuck4Chance.AspectToStringFormat = "";
+            lvcStatusGroupsLuck4Chance.Text = "Luck4Chance%";
+            lvcStatusGroupsLuck4Chance.Width = 90;
             // 
             // lvcStatusGroupsUnknown4
             // 
-            this.lvcStatusGroupsUnknown4.AspectName = "StatusUnknown4";
-            this.lvcStatusGroupsUnknown4.Text = "Unknown4";
-            this.lvcStatusGroupsUnknown4.Width = 75;
+            lvcStatusGroupsUnknown4.AspectName = "StatusUnknown4";
+            lvcStatusGroupsUnknown4.Text = "Unknown4";
+            lvcStatusGroupsUnknown4.Width = 75;
+            // 
+            // lvcStatusGroupsLuck5Chance
+            // 
+            lvcStatusGroupsLuck5Chance.AspectName = "StatusLuck5";
+            lvcStatusGroupsLuck5Chance.AspectToStringFormat = "";
+            lvcStatusGroupsLuck5Chance.Text = "Luck5Chance%";
+            lvcStatusGroupsLuck5Chance.Width = 90;
             // 
             // lvcStatusGroupsUnknown5
             // 
-            this.lvcStatusGroupsUnknown5.AspectName = "StatusUnknown5";
-            this.lvcStatusGroupsUnknown5.Text = "Unknown5";
-            this.lvcStatusGroupsUnknown5.Width = 75;
+            lvcStatusGroupsUnknown5.AspectName = "StatusUnknown5";
+            lvcStatusGroupsUnknown5.Text = "Unknown5";
+            lvcStatusGroupsUnknown5.Width = 75;
+            // 
+            // lvcStatusGroupsLuck6Chance
+            // 
+            lvcStatusGroupsLuck6Chance.AspectName = "StatusLuck6";
+            lvcStatusGroupsLuck6Chance.AspectToStringFormat = "";
+            lvcStatusGroupsLuck6Chance.Text = "Luck6Chance%";
+            lvcStatusGroupsLuck6Chance.Width = 90;
             // 
             // lvcStatusGroupsUnknown6
             // 
-            this.lvcStatusGroupsUnknown6.AspectName = "StatusUnknown6";
-            this.lvcStatusGroupsUnknown6.Text = "Unknown6";
-            this.lvcStatusGroupsUnknown6.Width = 75;
+            lvcStatusGroupsUnknown6.AspectName = "StatusUnknown6";
+            lvcStatusGroupsUnknown6.Text = "Unknown6";
+            lvcStatusGroupsUnknown6.Width = 75;
+            // 
+            // lvcStatusGroupsLuck7Chance
+            // 
+            lvcStatusGroupsLuck7Chance.AspectName = "StatusLuck7";
+            lvcStatusGroupsLuck7Chance.AspectToStringFormat = "";
+            lvcStatusGroupsLuck7Chance.Text = "Luck7Chance%";
+            lvcStatusGroupsLuck7Chance.Width = 90;
             // 
             // lvcStatusGroupsUnknown7
             // 
-            this.lvcStatusGroupsUnknown7.AspectName = "StatusUnknown7";
-            this.lvcStatusGroupsUnknown7.Text = "Unknown7";
-            this.lvcStatusGroupsUnknown7.Width = 75;
+            lvcStatusGroupsUnknown7.AspectName = "StatusUnknown7";
+            lvcStatusGroupsUnknown7.Text = "Unknown7";
+            lvcStatusGroupsUnknown7.Width = 75;
+            // 
+            // lvcStatusGroupsLuck8Chance
+            // 
+            lvcStatusGroupsLuck8Chance.AspectName = "StatusLuck8";
+            lvcStatusGroupsLuck8Chance.Text = "Luck8Chance%";
+            lvcStatusGroupsLuck8Chance.Width = 90;
             // 
             // lvcStatusGroupsUnknown8
             // 
-            this.lvcStatusGroupsUnknown8.AspectName = "StatusUnknown8";
-            this.lvcStatusGroupsUnknown8.Text = "Unknown8";
-            this.lvcStatusGroupsUnknown8.Width = 75;
+            lvcStatusGroupsUnknown8.AspectName = "StatusUnknown8";
+            lvcStatusGroupsUnknown8.Text = "Unknown8";
+            lvcStatusGroupsUnknown8.Width = 75;
+            // 
+            // lvcStatusGroupsLuck9Chance
+            // 
+            lvcStatusGroupsLuck9Chance.AspectName = "StatusLuck9";
+            lvcStatusGroupsLuck9Chance.Text = "Luck9Chance%";
+            lvcStatusGroupsLuck9Chance.Width = 90;
             // 
             // lvcStatusGroupsUnknown9
             // 
-            this.lvcStatusGroupsUnknown9.AspectName = "StatusUnknown9";
-            this.lvcStatusGroupsUnknown9.Text = "Unknown9";
-            this.lvcStatusGroupsUnknown9.Width = 75;
+            lvcStatusGroupsUnknown9.AspectName = "StatusUnknown9";
+            lvcStatusGroupsUnknown9.Text = "Unknown9";
+            lvcStatusGroupsUnknown9.Width = 75;
             // 
             // frmX013_Editor
             // 
-            this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 534);
-            this.Controls.Add(this.tabMain);
-            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
-            this.Name = "frmX013_Editor";
-            this.Text = "SF3 X013 Editor";
-            this.Controls.SetChildIndex(this.tabMain, 0);
-            this.tabMain.ResumeLayout(false);
-            this.tabSpecials.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvSpecials)).EndInit();
-            this.tabSpecialEffects.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvSpecialEffects)).EndInit();
-            this.tabFriendshipExp.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvFriendshipExp)).EndInit();
-            this.tabSupportType.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvSupportType)).EndInit();
-            this.tabSupportStats.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvSupportStats)).EndInit();
-            this.tabSoulmate.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvSoulmate)).EndInit();
-            this.tabSoulmateChanceFail.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvSoulmateChanceFail)).EndInit();
-            this.tabMagicBonus.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvMagicBonus)).EndInit();
-            this.tabCritVantages.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvCritVantages)).EndInit();
-            this.tabCritCounterRate.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvCritCounterRate)).EndInit();
-            this.tabSpecialChance.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvSpecialChance)).EndInit();
-            this.tabExpLimit.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvExpLimit)).EndInit();
-            this.tabHealExp.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvHealExp)).EndInit();
-            this.tabWeaponSpellRank.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvWeaponSpellRank)).EndInit();
-            this.tabStatusGroups.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.olvStatusGroups)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AllowDrop = true;
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(892, 616);
+            Controls.Add(tabMain);
+            Icon = (System.Drawing.Icon) resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "frmX013_Editor";
+            Text = "SF3 X013 Editor";
+            Controls.SetChildIndex(tabMain, 0);
+            tabMain.ResumeLayout(false);
+            tabSpecials.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvSpecials).EndInit();
+            tabSpecialEffects.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvSpecialEffects).EndInit();
+            tabFriendshipExp.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvFriendshipExp).EndInit();
+            tabSupportType.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvSupportType).EndInit();
+            tabSupportStats.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvSupportStats).EndInit();
+            tabSoulmate.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvSoulmate).EndInit();
+            tabSoulmateChanceFail.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvSoulmateChanceFail).EndInit();
+            tabMagicBonus.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvMagicBonus).EndInit();
+            tabCritVantages.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvCritVantages).EndInit();
+            tabCritCounterRate.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvCritCounterRate).EndInit();
+            tabSpecialChance.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvSpecialChance).EndInit();
+            tabExpLimit.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvExpLimit).EndInit();
+            tabHealExp.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvHealExp).EndInit();
+            tabWeaponSpellRank.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvWeaponSpellRank).EndInit();
+            tabStatusGroups.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvStatusGroups).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
