@@ -26,9 +26,8 @@ namespace SF3.Win.Extensions {
         /// Renderer that will display hex values will a special font.
         /// </summary>
         private class HexRenderer : BaseRenderer {
-            public static readonly Font _defaultFont = Control.DefaultFont;
-            public static readonly Font _hexFont = new Font("Courier New", Control.DefaultFont.Size);
-            public static readonly Color _darkGray = Color.FromArgb(96, 96, 96);
+            private static readonly Font _defaultFont = Control.DefaultFont;
+            private static readonly Font _hexFont = new Font("Courier New", Control.DefaultFont.Size);
 
             private Font _currentRenderFont = Control.DefaultFont;
             private Color _currentRenderColor = Color.Black;
@@ -43,7 +42,7 @@ namespace SF3.Win.Extensions {
                 // If an AspectToStringConverter was supplied, this is probably a named value. Just use the default font.
                 var formatString = (lvc.AspectToStringConverter == null) ? (lvc.AspectToStringFormat ?? "") : "";
                 _currentRenderFont = GetCellFont(formatString);
-                _currentRenderColor = lvc.IsEditable ? Color.Black : _darkGray;
+                _currentRenderColor = lvc.IsEditable ? Color.Black : _readOnlyColor;
 
                 return base.RenderSubItem(e, g, cellBounds, rowObject);
             }
@@ -67,6 +66,9 @@ namespace SF3.Win.Extensions {
         public static void Enhance(this ObjectListView olv, INameGetterContext nameGetterContext)
             => Enhance(olv, () => nameGetterContext);
 
+        private static readonly Color _headerBackColor = Color.FromArgb(244, 244, 244);
+        private static readonly Color _readOnlyColor = Color.FromArgb(96, 96, 96);
+
         /// <summary>
         /// Applies some neat extensions to the ObjectListView.
         /// </summary>
@@ -74,13 +76,22 @@ namespace SF3.Win.Extensions {
         /// <param name="nameGetterContextFetcher">Callback function for getting the NameGetterContext associated for this ObjectListView.</param>
         public static void Enhance(this ObjectListView olv, NameGetterContextFetcher nameGetterContextFetcher) {
             var hexFont = new Font("Courier New", Control.DefaultFont.Size);
+            olv.HeaderUsesThemes = false;
+
+            olv.HeaderFormatStyle = new HeaderFormatStyle();
+            var olvStyle = olv.HeaderFormatStyle;
+            olvStyle.SetFont(Control.DefaultFont);
+            olvStyle.Normal.BackColor = _headerBackColor;
 
             // Make sure the column can fit its text.
             foreach (var lvc in olv.AllColumns) {
-                if (lvc.HeaderFont == null)
-                    lvc.HeaderFont = new Font(Control.DefaultFont, !lvc.IsEditable ? FontStyle.Italic : FontStyle.Regular);
-                else if (!lvc.IsEditable)
-                    lvc.HeaderFont = new Font(lvc.HeaderFont, !lvc.IsEditable ? FontStyle.Italic : FontStyle.Regular);
+                if (!lvc.IsEditable) {
+                    lvc.HeaderFormatStyle = new HeaderFormatStyle();
+                    var lvcStyle = lvc.HeaderFormatStyle;
+                    lvcStyle.SetFont(Control.DefaultFont);
+                    lvcStyle.SetForeColor(_readOnlyColor);
+                    lvcStyle.Normal.BackColor = _headerBackColor;
+                }
 
                 var headerTextWidth = TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width + 8;
                 var aspectTextSample = string.Format(lvc.AspectToStringFormat ?? "", 0);
