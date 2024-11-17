@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using DFRLib;
@@ -10,8 +11,11 @@ namespace DFRLib.Win.Controls {
         private const string c_dataReadFromEditor = "(Data Read from Editor)";
 
         public CreateDFRControl() {
+            SuspendLayout();
             InitializeComponent();
-
+            labelSelectInputs.Font = new Font(labelSelectInputs.Font, FontStyle.Bold);
+            labelOutputFile.Font = new Font(labelOutputFile.Font, FontStyle.Bold);
+            ResumeLayout();
         }
 
         private byte[]? _alteredData = null;

@@ -23,167 +23,172 @@ namespace DFRLib.Win.Controls {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.cbApplyToInputFile = new System.Windows.Forms.CheckBox();
-            this.btnApplyDFR = new System.Windows.Forms.Button();
-            this.labelSeparator2 = new System.Windows.Forms.Label();
-            this.tbOutputFile = new System.Windows.Forms.TextBox();
-            this.tbDFRFile = new System.Windows.Forms.TextBox();
-            this.labelSelectOutputDestination = new System.Windows.Forms.Label();
-            this.labelSeparator1 = new System.Windows.Forms.Label();
-            this.btnOutputFile = new System.Windows.Forms.Button();
-            this.btnDFRFile = new System.Windows.Forms.Button();
-            this.tbInputFile = new System.Windows.Forms.TextBox();
-            this.btnInputFile = new System.Windows.Forms.Button();
-            this.labelSelectInputFiles = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            cbApplyToInputFile = new System.Windows.Forms.CheckBox();
+            btnApplyDFR = new System.Windows.Forms.Button();
+            labelSeparator2 = new System.Windows.Forms.Label();
+            tbOutputFile = new System.Windows.Forms.TextBox();
+            tbDFRFile = new System.Windows.Forms.TextBox();
+            labelSelectOutputDestination = new System.Windows.Forms.Label();
+            labelSeparator1 = new System.Windows.Forms.Label();
+            btnOutputFile = new System.Windows.Forms.Button();
+            btnDFRFile = new System.Windows.Forms.Button();
+            tbInputFile = new System.Windows.Forms.TextBox();
+            btnInputFile = new System.Windows.Forms.Button();
+            labelSelectInputFiles = new System.Windows.Forms.Label();
+            SuspendLayout();
             // 
             // cbApplyToInputFile
             // 
-            this.cbApplyToInputFile.AutoSize = true;
-            this.cbApplyToInputFile.Location = new System.Drawing.Point(3, 101);
-            this.cbApplyToInputFile.Name = "cbApplyToInputFile";
-            this.cbApplyToInputFile.Size = new System.Drawing.Size(135, 17);
-            this.cbApplyToInputFile.TabIndex = 19;
-            this.cbApplyToInputFile.Text = "Apply DFR to Input File";
-            this.cbApplyToInputFile.UseVisualStyleBackColor = true;
-            this.cbApplyToInputFile.CheckedChanged += new System.EventHandler(this.cbApplyToInputFile_CheckedChanged);
+            cbApplyToInputFile.AutoSize = true;
+            cbApplyToInputFile.Location = new System.Drawing.Point(4, 117);
+            cbApplyToInputFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cbApplyToInputFile.Name = "cbApplyToInputFile";
+            cbApplyToInputFile.Size = new System.Drawing.Size(147, 19);
+            cbApplyToInputFile.TabIndex = 19;
+            cbApplyToInputFile.Text = "Apply DFR to Input File";
+            cbApplyToInputFile.UseVisualStyleBackColor = true;
+            cbApplyToInputFile.CheckedChanged += cbApplyToInputFile_CheckedChanged;
             // 
             // btnApplyDFR
             // 
-            this.btnApplyDFR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApplyDFR.Location = new System.Drawing.Point(576, 167);
-            this.btnApplyDFR.Name = "btnApplyDFR";
-            this.btnApplyDFR.Size = new System.Drawing.Size(87, 25);
-            this.btnApplyDFR.TabIndex = 23;
-            this.btnApplyDFR.Text = "Apply DFR";
-            this.btnApplyDFR.UseVisualStyleBackColor = true;
-            this.btnApplyDFR.Click += new System.EventHandler(this.btnApplyDFR_Click);
+            btnApplyDFR.Anchor =  System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnApplyDFR.Location = new System.Drawing.Point(672, 193);
+            btnApplyDFR.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnApplyDFR.Name = "btnApplyDFR";
+            btnApplyDFR.Size = new System.Drawing.Size(102, 29);
+            btnApplyDFR.TabIndex = 23;
+            btnApplyDFR.Text = "Apply DFR";
+            btnApplyDFR.UseVisualStyleBackColor = true;
+            btnApplyDFR.Click += btnApplyDFR_Click;
             // 
             // labelSeparator2
             // 
-            this.labelSeparator2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelSeparator2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelSeparator2.Location = new System.Drawing.Point(0, 153);
-            this.labelSeparator2.Name = "labelSeparator2";
-            this.labelSeparator2.Size = new System.Drawing.Size(663, 2);
-            this.labelSeparator2.TabIndex = 22;
+            labelSeparator2.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            labelSeparator2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            labelSeparator2.Location = new System.Drawing.Point(0, 177);
+            labelSeparator2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelSeparator2.Name = "labelSeparator2";
+            labelSeparator2.Size = new System.Drawing.Size(774, 2);
+            labelSeparator2.TabIndex = 22;
             // 
             // tbOutputFile
             // 
-            this.tbOutputFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbOutputFile.BackColor = System.Drawing.SystemColors.Window;
-            this.tbOutputFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbOutputFile.Enabled = false;
-            this.tbOutputFile.Location = new System.Drawing.Point(93, 124);
-            this.tbOutputFile.Name = "tbOutputFile";
-            this.tbOutputFile.Size = new System.Drawing.Size(570, 20);
-            this.tbOutputFile.TabIndex = 21;
+            tbOutputFile.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tbOutputFile.BackColor = System.Drawing.SystemColors.Window;
+            tbOutputFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            tbOutputFile.Enabled = false;
+            tbOutputFile.Location = new System.Drawing.Point(108, 143);
+            tbOutputFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tbOutputFile.Name = "tbOutputFile";
+            tbOutputFile.Size = new System.Drawing.Size(665, 23);
+            tbOutputFile.TabIndex = 21;
             // 
             // tbDFRFile
             // 
-            this.tbDFRFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDFRFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbDFRFile.Location = new System.Drawing.Point(93, 44);
-            this.tbDFRFile.Name = "tbDFRFile";
-            this.tbDFRFile.Size = new System.Drawing.Size(570, 20);
-            this.tbDFRFile.TabIndex = 16;
+            tbDFRFile.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tbDFRFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            tbDFRFile.Location = new System.Drawing.Point(108, 51);
+            tbDFRFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tbDFRFile.Name = "tbDFRFile";
+            tbDFRFile.Size = new System.Drawing.Size(665, 23);
+            tbDFRFile.TabIndex = 16;
             // 
             // labelSelectOutputDestination
             // 
-            this.labelSelectOutputDestination.AutoSize = true;
-            this.labelSelectOutputDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSelectOutputDestination.Location = new System.Drawing.Point(0, 81);
-            this.labelSelectOutputDestination.Name = "labelSelectOutputDestination";
-            this.labelSelectOutputDestination.Size = new System.Drawing.Size(153, 13);
-            this.labelSelectOutputDestination.TabIndex = 18;
-            this.labelSelectOutputDestination.Text = "Select Output Destination";
+            labelSelectOutputDestination.AutoSize = true;
+            labelSelectOutputDestination.Location = new System.Drawing.Point(0, 93);
+            labelSelectOutputDestination.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelSelectOutputDestination.Name = "labelSelectOutputDestination";
+            labelSelectOutputDestination.Size = new System.Drawing.Size(142, 15);
+            labelSelectOutputDestination.TabIndex = 18;
+            labelSelectOutputDestination.Text = "Select Output Destination";
             // 
             // labelSeparator1
             // 
-            this.labelSeparator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelSeparator1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelSeparator1.Location = new System.Drawing.Point(0, 72);
-            this.labelSeparator1.Name = "labelSeparator1";
-            this.labelSeparator1.Size = new System.Drawing.Size(663, 2);
-            this.labelSeparator1.TabIndex = 17;
+            labelSeparator1.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            labelSeparator1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            labelSeparator1.Location = new System.Drawing.Point(0, 83);
+            labelSeparator1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelSeparator1.Name = "labelSeparator1";
+            labelSeparator1.Size = new System.Drawing.Size(774, 2);
+            labelSeparator1.TabIndex = 17;
             // 
             // btnOutputFile
             // 
-            this.btnOutputFile.Enabled = false;
-            this.btnOutputFile.Location = new System.Drawing.Point(0, 123);
-            this.btnOutputFile.Name = "btnOutputFile";
-            this.btnOutputFile.Size = new System.Drawing.Size(87, 22);
-            this.btnOutputFile.TabIndex = 20;
-            this.btnOutputFile.Text = "Output File...";
-            this.btnOutputFile.UseVisualStyleBackColor = true;
-            this.btnOutputFile.Click += new System.EventHandler(this.btnOutputFile_Click);
+            btnOutputFile.Enabled = false;
+            btnOutputFile.Location = new System.Drawing.Point(0, 142);
+            btnOutputFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnOutputFile.Name = "btnOutputFile";
+            btnOutputFile.Size = new System.Drawing.Size(102, 25);
+            btnOutputFile.TabIndex = 20;
+            btnOutputFile.Text = "Output File...";
+            btnOutputFile.UseVisualStyleBackColor = true;
+            btnOutputFile.Click += btnOutputFile_Click;
             // 
             // btnDFRFile
             // 
-            this.btnDFRFile.Location = new System.Drawing.Point(0, 43);
-            this.btnDFRFile.Name = "btnDFRFile";
-            this.btnDFRFile.Size = new System.Drawing.Size(87, 22);
-            this.btnDFRFile.TabIndex = 15;
-            this.btnDFRFile.Text = "DFR File...";
-            this.btnDFRFile.UseVisualStyleBackColor = true;
-            this.btnDFRFile.Click += new System.EventHandler(this.btnDFRFile_Click);
+            btnDFRFile.Location = new System.Drawing.Point(0, 50);
+            btnDFRFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnDFRFile.Name = "btnDFRFile";
+            btnDFRFile.Size = new System.Drawing.Size(102, 25);
+            btnDFRFile.TabIndex = 15;
+            btnDFRFile.Text = "DFR File...";
+            btnDFRFile.UseVisualStyleBackColor = true;
+            btnDFRFile.Click += btnDFRFile_Click;
             // 
             // tbInputFile
             // 
-            this.tbInputFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbInputFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbInputFile.Location = new System.Drawing.Point(93, 19);
-            this.tbInputFile.Name = "tbInputFile";
-            this.tbInputFile.Size = new System.Drawing.Size(570, 20);
-            this.tbInputFile.TabIndex = 14;
+            tbInputFile.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tbInputFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            tbInputFile.Location = new System.Drawing.Point(108, 22);
+            tbInputFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tbInputFile.Name = "tbInputFile";
+            tbInputFile.Size = new System.Drawing.Size(665, 23);
+            tbInputFile.TabIndex = 14;
             // 
             // btnInputFile
             // 
-            this.btnInputFile.Location = new System.Drawing.Point(0, 18);
-            this.btnInputFile.Name = "btnInputFile";
-            this.btnInputFile.Size = new System.Drawing.Size(87, 22);
-            this.btnInputFile.TabIndex = 13;
-            this.btnInputFile.Text = "Input File...";
-            this.btnInputFile.UseVisualStyleBackColor = true;
-            this.btnInputFile.Click += new System.EventHandler(this.btnInputFile_Click);
+            btnInputFile.Location = new System.Drawing.Point(0, 21);
+            btnInputFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnInputFile.Name = "btnInputFile";
+            btnInputFile.Size = new System.Drawing.Size(102, 25);
+            btnInputFile.TabIndex = 13;
+            btnInputFile.Text = "Input File...";
+            btnInputFile.UseVisualStyleBackColor = true;
+            btnInputFile.Click += btnInputFile_Click;
             // 
             // labelSelectInputFiles
             // 
-            this.labelSelectInputFiles.AutoSize = true;
-            this.labelSelectInputFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSelectInputFiles.Location = new System.Drawing.Point(0, 0);
-            this.labelSelectInputFiles.Name = "labelSelectInputFiles";
-            this.labelSelectInputFiles.Size = new System.Drawing.Size(106, 13);
-            this.labelSelectInputFiles.TabIndex = 12;
-            this.labelSelectInputFiles.Text = "Select Input Files";
+            labelSelectInputFiles.AutoSize = true;
+            labelSelectInputFiles.Location = new System.Drawing.Point(0, 0);
+            labelSelectInputFiles.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelSelectInputFiles.Name = "labelSelectInputFiles";
+            labelSelectInputFiles.Size = new System.Drawing.Size(95, 15);
+            labelSelectInputFiles.TabIndex = 12;
+            labelSelectInputFiles.Text = "Select Input Files";
             // 
             // ApplyDFRControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.cbApplyToInputFile);
-            this.Controls.Add(this.btnApplyDFR);
-            this.Controls.Add(this.labelSeparator2);
-            this.Controls.Add(this.tbOutputFile);
-            this.Controls.Add(this.tbDFRFile);
-            this.Controls.Add(this.labelSelectOutputDestination);
-            this.Controls.Add(this.labelSeparator1);
-            this.Controls.Add(this.btnOutputFile);
-            this.Controls.Add(this.btnDFRFile);
-            this.Controls.Add(this.tbInputFile);
-            this.Controls.Add(this.btnInputFile);
-            this.Controls.Add(this.labelSelectInputFiles);
-            this.Name = "ApplyDFRControl";
-            this.Size = new System.Drawing.Size(663, 192);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.Color.Transparent;
+            Controls.Add(cbApplyToInputFile);
+            Controls.Add(btnApplyDFR);
+            Controls.Add(labelSeparator2);
+            Controls.Add(tbOutputFile);
+            Controls.Add(tbDFRFile);
+            Controls.Add(labelSelectOutputDestination);
+            Controls.Add(labelSeparator1);
+            Controls.Add(btnOutputFile);
+            Controls.Add(btnDFRFile);
+            Controls.Add(tbInputFile);
+            Controls.Add(btnInputFile);
+            Controls.Add(labelSelectInputFiles);
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "ApplyDFRControl";
+            Size = new System.Drawing.Size(774, 222);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

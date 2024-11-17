@@ -29,104 +29,102 @@ namespace DFRLib.Win.Forms
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDFRTool));
-            this.tabCommand = new System.Windows.Forms.TabControl();
-            this.tabCommand_Create = new System.Windows.Forms.TabPage();
-            this.tabCommand_Apply = new System.Windows.Forms.TabPage();
-            this.createDFRControl1 = new DFRLib.Win.Controls.CreateDFRControl();
-            this.applyDFRControl1 = new DFRLib.Win.Controls.ApplyDFRControl();
-            this.tabCommand.SuspendLayout();
-            this.tabCommand_Create.SuspendLayout();
-            this.tabCommand_Apply.SuspendLayout();
-            this.SuspendLayout();
+        private void InitializeComponent() {
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDFRTool));
+            tabCommand = new TabControl();
+            tabCommand_Apply = new TabPage();
+            applyDFRControl1 = new Controls.ApplyDFRControl();
+            tabCommand_Create = new TabPage();
+            createDFRControl1 = new Controls.CreateDFRControl();
+            tabCommand.SuspendLayout();
+            tabCommand_Apply.SuspendLayout();
+            tabCommand_Create.SuspendLayout();
+            SuspendLayout();
             // 
             // tabCommand
             // 
-            this.tabCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabCommand.Controls.Add(this.tabCommand_Apply);
-            this.tabCommand.Controls.Add(this.tabCommand_Create);
-            this.tabCommand.Location = new System.Drawing.Point(3, 3);
-            this.tabCommand.Name = "tabCommand";
-            this.tabCommand.SelectedIndex = 0;
-            this.tabCommand.Size = new System.Drawing.Size(699, 230);
-            this.tabCommand.TabIndex = 13;
-            // 
-            // tabCommand_Create
-            // 
-            this.tabCommand_Create.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
-            this.tabCommand_Create.Controls.Add(this.createDFRControl1);
-            this.tabCommand_Create.Location = new System.Drawing.Point(4, 22);
-            this.tabCommand_Create.Name = "tabCommand_Create";
-            this.tabCommand_Create.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCommand_Create.Size = new System.Drawing.Size(691, 204);
-            this.tabCommand_Create.TabIndex = 1;
-            this.tabCommand_Create.Text = "Create DFR";
+            tabCommand.Anchor =  AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabCommand.Controls.Add(tabCommand_Apply);
+            tabCommand.Controls.Add(tabCommand_Create);
+            tabCommand.Location = new Point(4, 3);
+            tabCommand.Margin = new Padding(4, 3, 4, 3);
+            tabCommand.Name = "tabCommand";
+            tabCommand.SelectedIndex = 0;
+            tabCommand.Size = new Size(580, 249);
+            tabCommand.TabIndex = 13;
             // 
             // tabCommand_Apply
             // 
-            this.tabCommand_Apply.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
-            this.tabCommand_Apply.Controls.Add(this.applyDFRControl1);
-            this.tabCommand_Apply.Location = new System.Drawing.Point(4, 22);
-            this.tabCommand_Apply.Name = "tabCommand_Apply";
-            this.tabCommand_Apply.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCommand_Apply.Size = new System.Drawing.Size(691, 204);
-            this.tabCommand_Apply.TabIndex = 0;
-            this.tabCommand_Apply.Text = "Apply DFR";
-            // 
-            // createDFRControl1
-            // 
-            this.createDFRControl1.AlteredData = null;
-            this.createDFRControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.createDFRControl1.BackColor = System.Drawing.Color.Transparent;
-            this.createDFRControl1.Location = new System.Drawing.Point(3, 6);
-            this.createDFRControl1.Name = "createDFRControl1";
-            this.createDFRControl1.Size = new System.Drawing.Size(685, 195);
-            this.createDFRControl1.TabIndex = 0;
+            tabCommand_Apply.BackColor = Color.FromArgb(  249,   249,   249);
+            tabCommand_Apply.Controls.Add(applyDFRControl1);
+            tabCommand_Apply.Location = new Point(4, 24);
+            tabCommand_Apply.Margin = new Padding(4, 3, 4, 3);
+            tabCommand_Apply.Name = "tabCommand_Apply";
+            tabCommand_Apply.Padding = new Padding(4, 3, 4, 3);
+            tabCommand_Apply.Size = new Size(572, 221);
+            tabCommand_Apply.TabIndex = 0;
+            tabCommand_Apply.Text = "Apply DFR";
             // 
             // applyDFRControl1
             // 
-            this.applyDFRControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.applyDFRControl1.ApplyInMemory = false;
-            this.applyDFRControl1.BackColor = System.Drawing.Color.Transparent;
-            this.applyDFRControl1.InputData = null;
-            this.applyDFRControl1.Location = new System.Drawing.Point(3, 6);
-            this.applyDFRControl1.Name = "applyDFRControl1";
-            this.applyDFRControl1.Size = new System.Drawing.Size(685, 195);
-            this.applyDFRControl1.TabIndex = 0;
+            applyDFRControl1.Anchor =  AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            applyDFRControl1.ApplyInMemory = false;
+            applyDFRControl1.BackColor = Color.Transparent;
+            applyDFRControl1.InputData = null;
+            applyDFRControl1.Location = new Point(0, 3);
+            applyDFRControl1.Margin = new Padding(4, 3, 4, 3);
+            applyDFRControl1.Name = "applyDFRControl1";
+            applyDFRControl1.Size = new Size(572, 218);
+            applyDFRControl1.TabIndex = 0;
+            // 
+            // tabCommand_Create
+            // 
+            tabCommand_Create.BackColor = Color.FromArgb(  249,   249,   249);
+            tabCommand_Create.Controls.Add(createDFRControl1);
+            tabCommand_Create.Location = new Point(4, 24);
+            tabCommand_Create.Margin = new Padding(4, 3, 4, 3);
+            tabCommand_Create.Name = "tabCommand_Create";
+            tabCommand_Create.Padding = new Padding(4, 3, 4, 3);
+            tabCommand_Create.Size = new Size(808, 221);
+            tabCommand_Create.TabIndex = 1;
+            tabCommand_Create.Text = "Create DFR";
+            // 
+            // createDFRControl1
+            // 
+            createDFRControl1.AlteredData = null;
+            createDFRControl1.Anchor =  AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            createDFRControl1.BackColor = Color.Transparent;
+            createDFRControl1.Location = new Point(0, 3);
+            createDFRControl1.Margin = new Padding(4, 3, 4, 3);
+            createDFRControl1.Name = "createDFRControl1";
+            createDFRControl1.Size = new Size(808, 218);
+            createDFRControl1.TabIndex = 0;
             // 
             // frmDFRTool
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(706, 236);
-            this.Controls.Add(this.tabCommand);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(2400, 275);
-            this.MinimumSize = new System.Drawing.Size(520, 275);
-            this.Name = "frmDFRTool";
-            this.Text = "DFRTool v1.1.1 (Compatible with 25.1 patcher)";
-            this.tabCommand.ResumeLayout(false);
-            this.tabCommand_Create.ResumeLayout(false);
-            this.tabCommand_Apply.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Window;
+            ClientSize = new Size(588, 256);
+            Controls.Add(tabCommand);
+            Icon = (Icon) resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            MaximumSize = new Size(2797, 295);
+            MinimumSize = new Size(604, 295);
+            Name = "frmDFRTool";
+            Text = "DFRTool v1.1.1 (Compatible with 25.1 patcher)";
+            tabCommand.ResumeLayout(false);
+            tabCommand_Apply.ResumeLayout(false);
+            tabCommand_Create.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
         private TabControl tabCommand;
         private TabPage tabCommand_Apply;
         private TabPage tabCommand_Create;
-        private Controls.CreateDFRControl createDFRControl1;
         private Controls.ApplyDFRControl applyDFRControl1;
+        private Controls.CreateDFRControl createDFRControl1;
     }
 }

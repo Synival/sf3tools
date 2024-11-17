@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using DFRLib;
@@ -13,8 +14,12 @@ namespace DFRLib.Win.Controls {
         private string _lastValidOutputFile = "";
 
         public ApplyDFRControl() {
+            SuspendLayout();
             InitializeComponent();
+            labelSelectInputFiles.Font = new Font(labelSelectInputFiles.Font, FontStyle.Bold);
+            labelSelectOutputDestination.Font = new Font(labelSelectOutputDestination.Font, FontStyle.Bold);
             UpdateOutputFileControls();
+            ResumeLayout();
         }
 
         bool _updatingOutputFileControls = false;
