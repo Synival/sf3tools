@@ -26,2213 +26,2014 @@ namespace SF3.X033_X031_Editor.Forms
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX033_X031_Editor));
-            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiHelp_X031forInCombatEtc = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDebug = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDebug_DebugCurve = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabSpells = new System.Windows.Forms.TabPage();
-            this.olvSpells = new BrightIdeasSoftware.ObjectListView();
-            this.lvcSpellsID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsNameStatus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS1LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS1LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS1LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS2LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS2LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS2LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS3LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS3LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS3LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS4LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS4LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS4LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS5LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS5LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS5LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS6LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS6LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS6LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS7LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS7LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS7LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS8LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS8LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS8LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS9LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS9LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS9LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS10LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS10LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS10LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS11LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS11LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS11LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS12LearnedAt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS12LearnedID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcSpellsS12LearnedLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabStats = new System.Windows.Forms.TabPage();
-            this.olvStats = new BrightIdeasSoftware.ObjectListView();
-            this.lvcStatsID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsCharacterID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsCharacterClass = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsHPPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsHPCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsHPCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsHPCurve10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsHPCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsHPCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsHPCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsHPCurve30_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsMPPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsMPCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsMPCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsMPCurve10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsMPCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsMPCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsMPCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsMPCurve30_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAtkPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAtkCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAtkCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAtkCurve10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAtkCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAtkCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAtkCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAtkCurve30_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsDefPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsDefCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsDefCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsDefCurve10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsDefCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsDefCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsDefCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsDefCurve30_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAgiPromote = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAgiCurve1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAgiCurve5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAgiCurve10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAgiCurve12_15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAgiCurve14_20 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAgiCurve17_30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcStatsAgiCurve30_99 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabMain = new System.Windows.Forms.TabControl();
-            this.tabEquipStatistics = new System.Windows.Forms.TabPage();
-            this.olvEquipStatistics = new BrightIdeasSoftware.ObjectListView();
-            this.lvcEquipStatisticsID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsNameStatus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeapon1Special1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeapon1Special2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeapon1Special3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeapon2Special1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeapon2Special2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeapon2Special3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeapon3Special1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeapon3Special2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeapon3Special3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeapon4Special1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeapon4Special2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeapon4Special3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeaponEquipable1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeaponEquipable2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeaponEquipable3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsWeaponEquipable4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsAccessoryEquipable1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsAccessoryEquipable2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsAccessoryEquipable3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcEquipStatisticsAccessoryEquipable4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabMiscellaneous = new System.Windows.Forms.TabPage();
-            this.olvMiscellaneous = new BrightIdeasSoftware.ObjectListView();
-            this.lvcMiscellaneousID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousTurns = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousHPRegen = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousMPRegen = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousNameStatus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousLuck = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousMov = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousEarthRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousFireRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousIceRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousSparkRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousWindRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousLightRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousDarkRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousUnknownRes = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousSlowPercent = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousSupportPercent = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousMagicBonus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcMiscellaneousMovementType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabInitialInfo = new System.Windows.Forms.TabPage();
-            this.olvInitialInfo = new BrightIdeasSoftware.ObjectListView();
-            this.lvcInitialInfoID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoDefaultName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoCharacterID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoClass = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoLevel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoSex = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoWeapon = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoAccessoryEq = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoItem1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoItem2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoItem3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoItem4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoWeapon1Type = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoWeapon1Exp = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoWeapon2Type = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoWeapon2Exp = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoWeapon3Type = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoWeapon3Exp = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoWeapon4Type = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcInitialInfoWeapon4Exp = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabWeaponLevelReq = new System.Windows.Forms.TabPage();
-            this.olvWeaponLevelReq = new BrightIdeasSoftware.ObjectListView();
-            this.lvcWeaponLevelReqID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponLevelReqAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponLevelReqTable = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponLevelReqWLevel1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponLevelReqWLevel2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponLevelReqWLevel3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcWeaponLevelReqWLevel4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabCurveCalc = new System.Windows.Forms.TabPage();
-            this.olvCurveCalc = new BrightIdeasSoftware.ObjectListView();
-            this.lvcCurveCalcID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcNameStatus = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcHPGroup1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcHPGroup2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcHPGroup3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcHPGroup4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcHPGroup5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcHPGroup6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcMPGroup1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcMPGroup2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcMPGroup3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcMPGroup4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcMPGroup5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcMPGroup6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcAtkGroup1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcAtkGroup2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcAtkGroup3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcAtkGroup4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcAtkGroup5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcAtkGroup6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcDefGroup1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcDefGroup2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcDefGroup3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcDefGroup4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcDefGroup5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcDefGroup6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcAgiGroup1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcAgiGroup2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcAgiGroup3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcAgiGroup4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcAgiGroup5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.lvcCurveCalcAgiGroup6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tabCurveGraph = new System.Windows.Forms.TabPage();
-            this.cbCurveGraphCharacter = new System.Windows.Forms.ComboBox();
-            this.CurveGraph = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.menuStrip2.SuspendLayout();
-            this.tabSpells.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvSpells)).BeginInit();
-            this.tabStats.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvStats)).BeginInit();
-            this.tabMain.SuspendLayout();
-            this.tabEquipStatistics.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvEquipStatistics)).BeginInit();
-            this.tabMiscellaneous.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvMiscellaneous)).BeginInit();
-            this.tabInitialInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvInitialInfo)).BeginInit();
-            this.tabWeaponLevelReq.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvWeaponLevelReq)).BeginInit();
-            this.tabCurveCalc.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvCurveCalc)).BeginInit();
-            this.tabCurveGraph.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CurveGraph)).BeginInit();
-            this.SuspendLayout();
+        private void InitializeComponent() {
+            var chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            var legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            var series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX033_X031_Editor));
+            menuStrip2 = new System.Windows.Forms.MenuStrip();
+            tsmiDebug = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiDebug_DebugCurve = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiHelp_X031forInCombatEtc = new System.Windows.Forms.ToolStripMenuItem();
+            tabSpells = new System.Windows.Forms.TabPage();
+            olvSpells = new BrightIdeasSoftware.ObjectListView();
+            lvcSpellsID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsNameStatus = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS1LearnedAt = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS1LearnedID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS1LearnedLevel = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS2LearnedAt = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS2LearnedID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS2LearnedLevel = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS3LearnedAt = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS3LearnedID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS3LearnedLevel = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS4LearnedAt = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS4LearnedID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS4LearnedLevel = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS5LearnedAt = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS5LearnedID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS5LearnedLevel = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS6LearnedAt = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS6LearnedID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS6LearnedLevel = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS7LearnedAt = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS7LearnedID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS7LearnedLevel = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS8LearnedAt = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS8LearnedID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS8LearnedLevel = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS9LearnedAt = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS9LearnedID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS9LearnedLevel = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS10LearnedAt = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS10LearnedID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS10LearnedLevel = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS11LearnedAt = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS11LearnedID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS11LearnedLevel = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS12LearnedAt = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS12LearnedID = new BrightIdeasSoftware.OLVColumn();
+            lvcSpellsS12LearnedLevel = new BrightIdeasSoftware.OLVColumn();
+            tabStats = new System.Windows.Forms.TabPage();
+            olvStats = new BrightIdeasSoftware.ObjectListView();
+            lvcStatsID = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsName = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsCharacterID = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsCharacterClass = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsHPPromote = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsHPCurve1 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsHPCurve5 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsHPCurve10 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsHPCurve12_15 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsHPCurve14_20 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsHPCurve17_30 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsHPCurve30_99 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsMPPromote = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsMPCurve1 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsMPCurve5 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsMPCurve10 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsMPCurve12_15 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsMPCurve14_20 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsMPCurve17_30 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsMPCurve30_99 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAtkPromote = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAtkCurve1 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAtkCurve5 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAtkCurve10 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAtkCurve12_15 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAtkCurve14_20 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAtkCurve17_30 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAtkCurve30_99 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsDefPromote = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsDefCurve1 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsDefCurve5 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsDefCurve10 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsDefCurve12_15 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsDefCurve14_20 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsDefCurve17_30 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsDefCurve30_99 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAgiPromote = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAgiCurve1 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAgiCurve5 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAgiCurve10 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAgiCurve12_15 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAgiCurve14_20 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAgiCurve17_30 = new BrightIdeasSoftware.OLVColumn();
+            lvcStatsAgiCurve30_99 = new BrightIdeasSoftware.OLVColumn();
+            tabMain = new System.Windows.Forms.TabControl();
+            tabEquipStatistics = new System.Windows.Forms.TabPage();
+            olvEquipStatistics = new BrightIdeasSoftware.ObjectListView();
+            lvcEquipStatisticsID = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsNameStatus = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeapon1Special1 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeapon1Special2 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeapon1Special3 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeapon2Special1 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeapon2Special2 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeapon2Special3 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeapon3Special1 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeapon3Special2 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeapon3Special3 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeapon4Special1 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeapon4Special2 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeapon4Special3 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeaponEquipable1 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeaponEquipable2 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeaponEquipable3 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsWeaponEquipable4 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsAccessoryEquipable1 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsAccessoryEquipable2 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsAccessoryEquipable3 = new BrightIdeasSoftware.OLVColumn();
+            lvcEquipStatisticsAccessoryEquipable4 = new BrightIdeasSoftware.OLVColumn();
+            tabMiscellaneous = new System.Windows.Forms.TabPage();
+            olvMiscellaneous = new BrightIdeasSoftware.ObjectListView();
+            lvcMiscellaneousID = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousTurns = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousHPRegen = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousMPRegen = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousNameStatus = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousLuck = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousMov = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousEarthRes = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousFireRes = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousIceRes = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousSparkRes = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousWindRes = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousLightRes = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousDarkRes = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousUnknownRes = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousSlowPercent = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousSupportPercent = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousMagicBonus = new BrightIdeasSoftware.OLVColumn();
+            lvcMiscellaneousMovementType = new BrightIdeasSoftware.OLVColumn();
+            tabInitialInfo = new System.Windows.Forms.TabPage();
+            olvInitialInfo = new BrightIdeasSoftware.ObjectListView();
+            lvcInitialInfoID = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoDefaultName = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoCharacterID = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoClass = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoLevel = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoSex = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoWeapon = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoAccessoryEq = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoItem1 = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoItem2 = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoItem3 = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoItem4 = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoWeapon1Type = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoWeapon1Exp = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoWeapon2Type = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoWeapon2Exp = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoWeapon3Type = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoWeapon3Exp = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoWeapon4Type = new BrightIdeasSoftware.OLVColumn();
+            lvcInitialInfoWeapon4Exp = new BrightIdeasSoftware.OLVColumn();
+            tabWeaponLevelReq = new System.Windows.Forms.TabPage();
+            olvWeaponLevelReq = new BrightIdeasSoftware.ObjectListView();
+            lvcWeaponLevelReqID = new BrightIdeasSoftware.OLVColumn();
+            lvcWeaponLevelReqAddress = new BrightIdeasSoftware.OLVColumn();
+            lvcWeaponLevelReqTable = new BrightIdeasSoftware.OLVColumn();
+            lvcWeaponLevelReqWLevel1 = new BrightIdeasSoftware.OLVColumn();
+            lvcWeaponLevelReqWLevel2 = new BrightIdeasSoftware.OLVColumn();
+            lvcWeaponLevelReqWLevel3 = new BrightIdeasSoftware.OLVColumn();
+            lvcWeaponLevelReqWLevel4 = new BrightIdeasSoftware.OLVColumn();
+            tabCurveCalc = new System.Windows.Forms.TabPage();
+            olvCurveCalc = new BrightIdeasSoftware.ObjectListView();
+            lvcCurveCalcID = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcNameStatus = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcHPGroup1 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcHPGroup2 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcHPGroup3 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcHPGroup4 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcHPGroup5 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcHPGroup6 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcMPGroup1 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcMPGroup2 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcMPGroup3 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcMPGroup4 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcMPGroup5 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcMPGroup6 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcAtkGroup1 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcAtkGroup2 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcAtkGroup3 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcAtkGroup4 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcAtkGroup5 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcAtkGroup6 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcDefGroup1 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcDefGroup2 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcDefGroup3 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcDefGroup4 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcDefGroup5 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcDefGroup6 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcAgiGroup1 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcAgiGroup2 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcAgiGroup3 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcAgiGroup4 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcAgiGroup5 = new BrightIdeasSoftware.OLVColumn();
+            lvcCurveCalcAgiGroup6 = new BrightIdeasSoftware.OLVColumn();
+            tabCurveGraph = new System.Windows.Forms.TabPage();
+            cbCurveGraphCharacter = new System.Windows.Forms.ComboBox();
+            CurveGraph = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            menuStrip2.SuspendLayout();
+            tabSpells.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvSpells).BeginInit();
+            tabStats.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvStats).BeginInit();
+            tabMain.SuspendLayout();
+            tabEquipStatistics.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvEquipStatistics).BeginInit();
+            tabMiscellaneous.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvMiscellaneous).BeginInit();
+            tabInitialInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvInitialInfo).BeginInit();
+            tabWeaponLevelReq.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvWeaponLevelReq).BeginInit();
+            tabCurveCalc.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) olvCurveCalc).BeginInit();
+            tabCurveGraph.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) CurveGraph).BeginInit();
+            SuspendLayout();
             // 
             // menuStrip2
             // 
-            this.menuStrip2.Dock = System.Windows.Forms.DockStyle.None;
-            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiDebug,
-            this.tsmiHelp});
-            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(764, 24);
-            this.menuStrip2.TabIndex = 1;
-            this.menuStrip2.Text = "menuStrip2";
-            // 
-            // tsmiHelp
-            // 
-            this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiHelp_X031forInCombatEtc});
-            this.tsmiHelp.Name = "tsmiHelp";
-            this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
-            this.tsmiHelp.Text = "&Help";
-            // 
-            // tsmiHelp_X031forInCombatEtc
-            // 
-            this.tsmiHelp_X031forInCombatEtc.Name = "tsmiHelp_X031forInCombatEtc";
-            this.tsmiHelp_X031forInCombatEtc.Size = new System.Drawing.Size(299, 22);
-            this.tsmiHelp_X031forInCombatEtc.Text = "X031 for incombat, X033 for out of combat";
+            menuStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiDebug, tsmiHelp });
+            menuStrip2.Location = new System.Drawing.Point(0, 0);
+            menuStrip2.Name = "menuStrip2";
+            menuStrip2.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            menuStrip2.Size = new System.Drawing.Size(107, 24);
+            menuStrip2.TabIndex = 1;
+            menuStrip2.Text = "menuStrip2";
             // 
             // tsmiDebug
             // 
-            this.tsmiDebug.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiDebug_DebugCurve});
-            this.tsmiDebug.Name = "tsmiDebug";
-            this.tsmiDebug.Size = new System.Drawing.Size(54, 20);
-            this.tsmiDebug.Text = "&Debug";
+            tsmiDebug.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiDebug_DebugCurve });
+            tsmiDebug.Name = "tsmiDebug";
+            tsmiDebug.Size = new System.Drawing.Size(54, 20);
+            tsmiDebug.Text = "&Debug";
             // 
             // tsmiDebug_DebugCurve
             // 
-            this.tsmiDebug_DebugCurve.Name = "tsmiDebug_DebugCurve";
-            this.tsmiDebug_DebugCurve.Size = new System.Drawing.Size(180, 22);
-            this.tsmiDebug_DebugCurve.Text = "&Debug Curve";
-            this.tsmiDebug_DebugCurve.Click += new System.EventHandler(this.tsmiDebug_DebugCurve_Click);
+            tsmiDebug_DebugCurve.Name = "tsmiDebug_DebugCurve";
+            tsmiDebug_DebugCurve.Size = new System.Drawing.Size(143, 22);
+            tsmiDebug_DebugCurve.Text = "&Debug Curve";
+            tsmiDebug_DebugCurve.Click += tsmiDebug_DebugCurve_Click;
+            // 
+            // tsmiHelp
+            // 
+            tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp_X031forInCombatEtc });
+            tsmiHelp.Name = "tsmiHelp";
+            tsmiHelp.Size = new System.Drawing.Size(44, 20);
+            tsmiHelp.Text = "&Help";
+            // 
+            // tsmiHelp_X031forInCombatEtc
+            // 
+            tsmiHelp_X031forInCombatEtc.Name = "tsmiHelp_X031forInCombatEtc";
+            tsmiHelp_X031forInCombatEtc.Size = new System.Drawing.Size(299, 22);
+            tsmiHelp_X031forInCombatEtc.Text = "X031 for incombat, X033 for out of combat";
             // 
             // tabSpells
             // 
-            this.tabSpells.Controls.Add(this.olvSpells);
-            this.tabSpells.Location = new System.Drawing.Point(4, 22);
-            this.tabSpells.Name = "tabSpells";
-            this.tabSpells.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSpells.Size = new System.Drawing.Size(756, 480);
-            this.tabSpells.TabIndex = 4;
-            this.tabSpells.Text = "Spells";
-            this.tabSpells.UseVisualStyleBackColor = true;
+            tabSpells.Controls.Add(olvSpells);
+            tabSpells.Location = new System.Drawing.Point(4, 24);
+            tabSpells.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSpells.Name = "tabSpells";
+            tabSpells.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabSpells.Size = new System.Drawing.Size(883, 556);
+            tabSpells.TabIndex = 4;
+            tabSpells.Text = "Spells";
+            tabSpells.UseVisualStyleBackColor = true;
             // 
             // olvSpells
             // 
-            this.olvSpells.AllColumns.Add(this.lvcSpellsID);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsAddress);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsNameStatus);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS1LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS1LearnedID);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS1LearnedLevel);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS2LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS2LearnedID);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS2LearnedLevel);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS3LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS3LearnedID);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS3LearnedLevel);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS4LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS4LearnedID);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS4LearnedLevel);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS5LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS5LearnedID);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS5LearnedLevel);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS6LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS6LearnedID);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS6LearnedLevel);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS7LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS7LearnedID);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS7LearnedLevel);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS8LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS8LearnedID);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS8LearnedLevel);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS9LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS9LearnedID);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS9LearnedLevel);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS10LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS10LearnedID);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS10LearnedLevel);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS11LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS11LearnedID);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS11LearnedLevel);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS12LearnedAt);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS12LearnedID);
-            this.olvSpells.AllColumns.Add(this.lvcSpellsS12LearnedLevel);
-            this.olvSpells.AllowColumnReorder = true;
-            this.olvSpells.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvSpells.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvSpells.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcSpellsID,
-            this.lvcSpellsAddress,
-            this.lvcSpellsNameStatus,
-            this.lvcSpellsS1LearnedAt,
-            this.lvcSpellsS1LearnedID,
-            this.lvcSpellsS1LearnedLevel,
-            this.lvcSpellsS2LearnedAt,
-            this.lvcSpellsS2LearnedID,
-            this.lvcSpellsS2LearnedLevel,
-            this.lvcSpellsS3LearnedAt,
-            this.lvcSpellsS3LearnedID,
-            this.lvcSpellsS3LearnedLevel,
-            this.lvcSpellsS4LearnedAt,
-            this.lvcSpellsS4LearnedID,
-            this.lvcSpellsS4LearnedLevel,
-            this.lvcSpellsS5LearnedAt,
-            this.lvcSpellsS5LearnedID,
-            this.lvcSpellsS5LearnedLevel,
-            this.lvcSpellsS6LearnedAt,
-            this.lvcSpellsS6LearnedID,
-            this.lvcSpellsS6LearnedLevel,
-            this.lvcSpellsS7LearnedAt,
-            this.lvcSpellsS7LearnedID,
-            this.lvcSpellsS7LearnedLevel,
-            this.lvcSpellsS8LearnedAt,
-            this.lvcSpellsS8LearnedID,
-            this.lvcSpellsS8LearnedLevel,
-            this.lvcSpellsS9LearnedAt,
-            this.lvcSpellsS9LearnedID,
-            this.lvcSpellsS9LearnedLevel,
-            this.lvcSpellsS10LearnedAt,
-            this.lvcSpellsS10LearnedID,
-            this.lvcSpellsS10LearnedLevel,
-            this.lvcSpellsS11LearnedAt,
-            this.lvcSpellsS11LearnedID,
-            this.lvcSpellsS11LearnedLevel,
-            this.lvcSpellsS12LearnedAt,
-            this.lvcSpellsS12LearnedID,
-            this.lvcSpellsS12LearnedLevel});
-            this.olvSpells.FullRowSelect = true;
-            this.olvSpells.GridLines = true;
-            this.olvSpells.HasCollapsibleGroups = false;
-            this.olvSpells.HideSelection = false;
-            this.olvSpells.Location = new System.Drawing.Point(3, 3);
-            this.olvSpells.MenuLabelGroupBy = "";
-            this.olvSpells.Name = "olvSpells";
-            this.olvSpells.ShowGroups = false;
-            this.olvSpells.Size = new System.Drawing.Size(750, 474);
-            this.olvSpells.TabIndex = 1;
-            this.olvSpells.UseAlternatingBackColors = true;
-            this.olvSpells.UseCompatibleStateImageBehavior = false;
-            this.olvSpells.View = System.Windows.Forms.View.Details;
+            olvSpells.AllColumns.Add(lvcSpellsID);
+            olvSpells.AllColumns.Add(lvcSpellsAddress);
+            olvSpells.AllColumns.Add(lvcSpellsNameStatus);
+            olvSpells.AllColumns.Add(lvcSpellsS1LearnedAt);
+            olvSpells.AllColumns.Add(lvcSpellsS1LearnedID);
+            olvSpells.AllColumns.Add(lvcSpellsS1LearnedLevel);
+            olvSpells.AllColumns.Add(lvcSpellsS2LearnedAt);
+            olvSpells.AllColumns.Add(lvcSpellsS2LearnedID);
+            olvSpells.AllColumns.Add(lvcSpellsS2LearnedLevel);
+            olvSpells.AllColumns.Add(lvcSpellsS3LearnedAt);
+            olvSpells.AllColumns.Add(lvcSpellsS3LearnedID);
+            olvSpells.AllColumns.Add(lvcSpellsS3LearnedLevel);
+            olvSpells.AllColumns.Add(lvcSpellsS4LearnedAt);
+            olvSpells.AllColumns.Add(lvcSpellsS4LearnedID);
+            olvSpells.AllColumns.Add(lvcSpellsS4LearnedLevel);
+            olvSpells.AllColumns.Add(lvcSpellsS5LearnedAt);
+            olvSpells.AllColumns.Add(lvcSpellsS5LearnedID);
+            olvSpells.AllColumns.Add(lvcSpellsS5LearnedLevel);
+            olvSpells.AllColumns.Add(lvcSpellsS6LearnedAt);
+            olvSpells.AllColumns.Add(lvcSpellsS6LearnedID);
+            olvSpells.AllColumns.Add(lvcSpellsS6LearnedLevel);
+            olvSpells.AllColumns.Add(lvcSpellsS7LearnedAt);
+            olvSpells.AllColumns.Add(lvcSpellsS7LearnedID);
+            olvSpells.AllColumns.Add(lvcSpellsS7LearnedLevel);
+            olvSpells.AllColumns.Add(lvcSpellsS8LearnedAt);
+            olvSpells.AllColumns.Add(lvcSpellsS8LearnedID);
+            olvSpells.AllColumns.Add(lvcSpellsS8LearnedLevel);
+            olvSpells.AllColumns.Add(lvcSpellsS9LearnedAt);
+            olvSpells.AllColumns.Add(lvcSpellsS9LearnedID);
+            olvSpells.AllColumns.Add(lvcSpellsS9LearnedLevel);
+            olvSpells.AllColumns.Add(lvcSpellsS10LearnedAt);
+            olvSpells.AllColumns.Add(lvcSpellsS10LearnedID);
+            olvSpells.AllColumns.Add(lvcSpellsS10LearnedLevel);
+            olvSpells.AllColumns.Add(lvcSpellsS11LearnedAt);
+            olvSpells.AllColumns.Add(lvcSpellsS11LearnedID);
+            olvSpells.AllColumns.Add(lvcSpellsS11LearnedLevel);
+            olvSpells.AllColumns.Add(lvcSpellsS12LearnedAt);
+            olvSpells.AllColumns.Add(lvcSpellsS12LearnedID);
+            olvSpells.AllColumns.Add(lvcSpellsS12LearnedLevel);
+            olvSpells.AllowColumnReorder = true;
+            olvSpells.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvSpells.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvSpells.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcSpellsID, lvcSpellsAddress, lvcSpellsNameStatus, lvcSpellsS1LearnedAt, lvcSpellsS1LearnedID, lvcSpellsS1LearnedLevel, lvcSpellsS2LearnedAt, lvcSpellsS2LearnedID, lvcSpellsS2LearnedLevel, lvcSpellsS3LearnedAt, lvcSpellsS3LearnedID, lvcSpellsS3LearnedLevel, lvcSpellsS4LearnedAt, lvcSpellsS4LearnedID, lvcSpellsS4LearnedLevel, lvcSpellsS5LearnedAt, lvcSpellsS5LearnedID, lvcSpellsS5LearnedLevel, lvcSpellsS6LearnedAt, lvcSpellsS6LearnedID, lvcSpellsS6LearnedLevel, lvcSpellsS7LearnedAt, lvcSpellsS7LearnedID, lvcSpellsS7LearnedLevel, lvcSpellsS8LearnedAt, lvcSpellsS8LearnedID, lvcSpellsS8LearnedLevel, lvcSpellsS9LearnedAt, lvcSpellsS9LearnedID, lvcSpellsS9LearnedLevel, lvcSpellsS10LearnedAt, lvcSpellsS10LearnedID, lvcSpellsS10LearnedLevel, lvcSpellsS11LearnedAt, lvcSpellsS11LearnedID, lvcSpellsS11LearnedLevel, lvcSpellsS12LearnedAt, lvcSpellsS12LearnedID, lvcSpellsS12LearnedLevel });
+            olvSpells.FullRowSelect = true;
+            olvSpells.GridLines = true;
+            olvSpells.HasCollapsibleGroups = false;
+            olvSpells.Location = new System.Drawing.Point(4, 3);
+            olvSpells.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvSpells.MenuLabelGroupBy = "";
+            olvSpells.Name = "olvSpells";
+            olvSpells.ShowGroups = false;
+            olvSpells.Size = new System.Drawing.Size(874, 546);
+            olvSpells.TabIndex = 1;
+            olvSpells.UseAlternatingBackColors = true;
+            olvSpells.UseCompatibleStateImageBehavior = false;
+            olvSpells.View = System.Windows.Forms.View.Details;
             // 
             // lvcSpellsID
             // 
-            this.lvcSpellsID.AspectName = "ID";
-            this.lvcSpellsID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsID.IsEditable = false;
-            this.lvcSpellsID.Text = "ID";
-            this.lvcSpellsID.Width = 30;
+            lvcSpellsID.AspectName = "ID";
+            lvcSpellsID.AspectToStringFormat = "{0:X}";
+            lvcSpellsID.IsEditable = false;
+            lvcSpellsID.Text = "ID";
+            lvcSpellsID.Width = 30;
             // 
             // lvcSpellsAddress
             // 
-            this.lvcSpellsAddress.AspectName = "Address";
-            this.lvcSpellsAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcSpellsAddress.IsEditable = false;
-            this.lvcSpellsAddress.Text = "Address";
-            this.lvcSpellsAddress.Width = 62;
+            lvcSpellsAddress.AspectName = "Address";
+            lvcSpellsAddress.AspectToStringFormat = "{0:X4}";
+            lvcSpellsAddress.IsEditable = false;
+            lvcSpellsAddress.Text = "Address";
+            lvcSpellsAddress.Width = 62;
             // 
             // lvcSpellsNameStatus
             // 
-            this.lvcSpellsNameStatus.AspectName = "Name";
-            this.lvcSpellsNameStatus.IsEditable = false;
-            this.lvcSpellsNameStatus.Text = "nameStatus";
-            this.lvcSpellsNameStatus.Width = 90;
+            lvcSpellsNameStatus.AspectName = "Name";
+            lvcSpellsNameStatus.IsEditable = false;
+            lvcSpellsNameStatus.Text = "nameStatus";
+            lvcSpellsNameStatus.Width = 90;
             // 
             // lvcSpellsS1LearnedAt
             // 
-            this.lvcSpellsS1LearnedAt.AspectName = "S1LearnedAt";
-            this.lvcSpellsS1LearnedAt.Text = "S1LearnedAt";
-            this.lvcSpellsS1LearnedAt.Width = 80;
+            lvcSpellsS1LearnedAt.AspectName = "S1LearnedAt";
+            lvcSpellsS1LearnedAt.Text = "S1LearnedAt";
+            lvcSpellsS1LearnedAt.Width = 80;
             // 
             // lvcSpellsS1LearnedID
             // 
-            this.lvcSpellsS1LearnedID.AspectName = "S1LearnedID";
-            this.lvcSpellsS1LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS1LearnedID.Text = "S1LearnedID";
-            this.lvcSpellsS1LearnedID.Width = 90;
+            lvcSpellsS1LearnedID.AspectName = "S1LearnedID";
+            lvcSpellsS1LearnedID.AspectToStringFormat = "{0:X}";
+            lvcSpellsS1LearnedID.Text = "S1LearnedID";
+            lvcSpellsS1LearnedID.Width = 90;
             // 
             // lvcSpellsS1LearnedLevel
             // 
-            this.lvcSpellsS1LearnedLevel.AspectName = "S1LearnedLevel";
-            this.lvcSpellsS1LearnedLevel.Text = "S1LearnedLevel";
-            this.lvcSpellsS1LearnedLevel.Width = 100;
+            lvcSpellsS1LearnedLevel.AspectName = "S1LearnedLevel";
+            lvcSpellsS1LearnedLevel.Text = "S1LearnedLevel";
+            lvcSpellsS1LearnedLevel.Width = 100;
             // 
             // lvcSpellsS2LearnedAt
             // 
-            this.lvcSpellsS2LearnedAt.AspectName = "S2LearnedAt";
-            this.lvcSpellsS2LearnedAt.Text = "S2LearnedAt";
-            this.lvcSpellsS2LearnedAt.Width = 80;
+            lvcSpellsS2LearnedAt.AspectName = "S2LearnedAt";
+            lvcSpellsS2LearnedAt.Text = "S2LearnedAt";
+            lvcSpellsS2LearnedAt.Width = 80;
             // 
             // lvcSpellsS2LearnedID
             // 
-            this.lvcSpellsS2LearnedID.AspectName = "S2LearnedID";
-            this.lvcSpellsS2LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS2LearnedID.Text = "S2LearnedID";
-            this.lvcSpellsS2LearnedID.Width = 90;
+            lvcSpellsS2LearnedID.AspectName = "S2LearnedID";
+            lvcSpellsS2LearnedID.AspectToStringFormat = "{0:X}";
+            lvcSpellsS2LearnedID.Text = "S2LearnedID";
+            lvcSpellsS2LearnedID.Width = 90;
             // 
             // lvcSpellsS2LearnedLevel
             // 
-            this.lvcSpellsS2LearnedLevel.AspectName = "S2LearnedLevel";
-            this.lvcSpellsS2LearnedLevel.Text = "S2LearnedLevel";
-            this.lvcSpellsS2LearnedLevel.Width = 100;
+            lvcSpellsS2LearnedLevel.AspectName = "S2LearnedLevel";
+            lvcSpellsS2LearnedLevel.Text = "S2LearnedLevel";
+            lvcSpellsS2LearnedLevel.Width = 100;
             // 
             // lvcSpellsS3LearnedAt
             // 
-            this.lvcSpellsS3LearnedAt.AspectName = "S3LearnedAt";
-            this.lvcSpellsS3LearnedAt.Text = "S3LearnedAt";
-            this.lvcSpellsS3LearnedAt.Width = 80;
+            lvcSpellsS3LearnedAt.AspectName = "S3LearnedAt";
+            lvcSpellsS3LearnedAt.Text = "S3LearnedAt";
+            lvcSpellsS3LearnedAt.Width = 80;
             // 
             // lvcSpellsS3LearnedID
             // 
-            this.lvcSpellsS3LearnedID.AspectName = "S3LearnedID";
-            this.lvcSpellsS3LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS3LearnedID.Text = "S3LearnedID";
-            this.lvcSpellsS3LearnedID.Width = 90;
+            lvcSpellsS3LearnedID.AspectName = "S3LearnedID";
+            lvcSpellsS3LearnedID.AspectToStringFormat = "{0:X}";
+            lvcSpellsS3LearnedID.Text = "S3LearnedID";
+            lvcSpellsS3LearnedID.Width = 90;
             // 
             // lvcSpellsS3LearnedLevel
             // 
-            this.lvcSpellsS3LearnedLevel.AspectName = "S3LearnedLevel";
-            this.lvcSpellsS3LearnedLevel.Text = "S3LearnedLevel";
-            this.lvcSpellsS3LearnedLevel.Width = 100;
+            lvcSpellsS3LearnedLevel.AspectName = "S3LearnedLevel";
+            lvcSpellsS3LearnedLevel.Text = "S3LearnedLevel";
+            lvcSpellsS3LearnedLevel.Width = 100;
             // 
             // lvcSpellsS4LearnedAt
             // 
-            this.lvcSpellsS4LearnedAt.AspectName = "S4LearnedAt";
-            this.lvcSpellsS4LearnedAt.Text = "S4LearnedAt";
-            this.lvcSpellsS4LearnedAt.Width = 80;
+            lvcSpellsS4LearnedAt.AspectName = "S4LearnedAt";
+            lvcSpellsS4LearnedAt.Text = "S4LearnedAt";
+            lvcSpellsS4LearnedAt.Width = 80;
             // 
             // lvcSpellsS4LearnedID
             // 
-            this.lvcSpellsS4LearnedID.AspectName = "S4LearnedID";
-            this.lvcSpellsS4LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS4LearnedID.Text = "S4LearnedID";
-            this.lvcSpellsS4LearnedID.Width = 90;
+            lvcSpellsS4LearnedID.AspectName = "S4LearnedID";
+            lvcSpellsS4LearnedID.AspectToStringFormat = "{0:X}";
+            lvcSpellsS4LearnedID.Text = "S4LearnedID";
+            lvcSpellsS4LearnedID.Width = 90;
             // 
             // lvcSpellsS4LearnedLevel
             // 
-            this.lvcSpellsS4LearnedLevel.AspectName = "S4LearnedLevel";
-            this.lvcSpellsS4LearnedLevel.Text = "S4LearnedLevel";
-            this.lvcSpellsS4LearnedLevel.Width = 100;
+            lvcSpellsS4LearnedLevel.AspectName = "S4LearnedLevel";
+            lvcSpellsS4LearnedLevel.Text = "S4LearnedLevel";
+            lvcSpellsS4LearnedLevel.Width = 100;
             // 
             // lvcSpellsS5LearnedAt
             // 
-            this.lvcSpellsS5LearnedAt.AspectName = "S5LearnedAt";
-            this.lvcSpellsS5LearnedAt.Text = "S5LearnedAt";
-            this.lvcSpellsS5LearnedAt.Width = 80;
+            lvcSpellsS5LearnedAt.AspectName = "S5LearnedAt";
+            lvcSpellsS5LearnedAt.Text = "S5LearnedAt";
+            lvcSpellsS5LearnedAt.Width = 80;
             // 
             // lvcSpellsS5LearnedID
             // 
-            this.lvcSpellsS5LearnedID.AspectName = "S5LearnedID";
-            this.lvcSpellsS5LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS5LearnedID.Text = "S5LearnedID";
-            this.lvcSpellsS5LearnedID.Width = 90;
+            lvcSpellsS5LearnedID.AspectName = "S5LearnedID";
+            lvcSpellsS5LearnedID.AspectToStringFormat = "{0:X}";
+            lvcSpellsS5LearnedID.Text = "S5LearnedID";
+            lvcSpellsS5LearnedID.Width = 90;
             // 
             // lvcSpellsS5LearnedLevel
             // 
-            this.lvcSpellsS5LearnedLevel.AspectName = "S5LearnedLevel";
-            this.lvcSpellsS5LearnedLevel.Text = "S5LearnedLevel";
-            this.lvcSpellsS5LearnedLevel.Width = 100;
+            lvcSpellsS5LearnedLevel.AspectName = "S5LearnedLevel";
+            lvcSpellsS5LearnedLevel.Text = "S5LearnedLevel";
+            lvcSpellsS5LearnedLevel.Width = 100;
             // 
             // lvcSpellsS6LearnedAt
             // 
-            this.lvcSpellsS6LearnedAt.AspectName = "S6LearnedAt";
-            this.lvcSpellsS6LearnedAt.Text = "S6LearnedAt";
-            this.lvcSpellsS6LearnedAt.Width = 80;
+            lvcSpellsS6LearnedAt.AspectName = "S6LearnedAt";
+            lvcSpellsS6LearnedAt.Text = "S6LearnedAt";
+            lvcSpellsS6LearnedAt.Width = 80;
             // 
             // lvcSpellsS6LearnedID
             // 
-            this.lvcSpellsS6LearnedID.AspectName = "S6LearnedID";
-            this.lvcSpellsS6LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS6LearnedID.Text = "S6LearnedID";
-            this.lvcSpellsS6LearnedID.Width = 90;
+            lvcSpellsS6LearnedID.AspectName = "S6LearnedID";
+            lvcSpellsS6LearnedID.AspectToStringFormat = "{0:X}";
+            lvcSpellsS6LearnedID.Text = "S6LearnedID";
+            lvcSpellsS6LearnedID.Width = 90;
             // 
             // lvcSpellsS6LearnedLevel
             // 
-            this.lvcSpellsS6LearnedLevel.AspectName = "S6LearnedLevel";
-            this.lvcSpellsS6LearnedLevel.Text = "S6LearnedLevel";
-            this.lvcSpellsS6LearnedLevel.Width = 100;
+            lvcSpellsS6LearnedLevel.AspectName = "S6LearnedLevel";
+            lvcSpellsS6LearnedLevel.Text = "S6LearnedLevel";
+            lvcSpellsS6LearnedLevel.Width = 100;
             // 
             // lvcSpellsS7LearnedAt
             // 
-            this.lvcSpellsS7LearnedAt.AspectName = "S7LearnedAt";
-            this.lvcSpellsS7LearnedAt.Text = "S7LearnedAt";
-            this.lvcSpellsS7LearnedAt.Width = 80;
+            lvcSpellsS7LearnedAt.AspectName = "S7LearnedAt";
+            lvcSpellsS7LearnedAt.Text = "S7LearnedAt";
+            lvcSpellsS7LearnedAt.Width = 80;
             // 
             // lvcSpellsS7LearnedID
             // 
-            this.lvcSpellsS7LearnedID.AspectName = "S7LearnedID";
-            this.lvcSpellsS7LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS7LearnedID.Text = "S7LearnedID";
-            this.lvcSpellsS7LearnedID.Width = 90;
+            lvcSpellsS7LearnedID.AspectName = "S7LearnedID";
+            lvcSpellsS7LearnedID.AspectToStringFormat = "{0:X}";
+            lvcSpellsS7LearnedID.Text = "S7LearnedID";
+            lvcSpellsS7LearnedID.Width = 90;
             // 
             // lvcSpellsS7LearnedLevel
             // 
-            this.lvcSpellsS7LearnedLevel.AspectName = "S7LearnedLevel";
-            this.lvcSpellsS7LearnedLevel.Text = "S7LearnedLevel";
-            this.lvcSpellsS7LearnedLevel.Width = 100;
+            lvcSpellsS7LearnedLevel.AspectName = "S7LearnedLevel";
+            lvcSpellsS7LearnedLevel.Text = "S7LearnedLevel";
+            lvcSpellsS7LearnedLevel.Width = 100;
             // 
             // lvcSpellsS8LearnedAt
             // 
-            this.lvcSpellsS8LearnedAt.AspectName = "S8LearnedAt";
-            this.lvcSpellsS8LearnedAt.Text = "S8LearnedAt";
-            this.lvcSpellsS8LearnedAt.Width = 80;
+            lvcSpellsS8LearnedAt.AspectName = "S8LearnedAt";
+            lvcSpellsS8LearnedAt.Text = "S8LearnedAt";
+            lvcSpellsS8LearnedAt.Width = 80;
             // 
             // lvcSpellsS8LearnedID
             // 
-            this.lvcSpellsS8LearnedID.AspectName = "S8LearnedID";
-            this.lvcSpellsS8LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS8LearnedID.Text = "S8LearnedID";
-            this.lvcSpellsS8LearnedID.Width = 90;
+            lvcSpellsS8LearnedID.AspectName = "S8LearnedID";
+            lvcSpellsS8LearnedID.AspectToStringFormat = "{0:X}";
+            lvcSpellsS8LearnedID.Text = "S8LearnedID";
+            lvcSpellsS8LearnedID.Width = 90;
             // 
             // lvcSpellsS8LearnedLevel
             // 
-            this.lvcSpellsS8LearnedLevel.AspectName = "S8LearnedLevel";
-            this.lvcSpellsS8LearnedLevel.Text = "S8LearnedLevel";
-            this.lvcSpellsS8LearnedLevel.Width = 100;
+            lvcSpellsS8LearnedLevel.AspectName = "S8LearnedLevel";
+            lvcSpellsS8LearnedLevel.Text = "S8LearnedLevel";
+            lvcSpellsS8LearnedLevel.Width = 100;
             // 
             // lvcSpellsS9LearnedAt
             // 
-            this.lvcSpellsS9LearnedAt.AspectName = "S9LearnedAt";
-            this.lvcSpellsS9LearnedAt.Text = "S9LearnedAt";
-            this.lvcSpellsS9LearnedAt.Width = 80;
+            lvcSpellsS9LearnedAt.AspectName = "S9LearnedAt";
+            lvcSpellsS9LearnedAt.Text = "S9LearnedAt";
+            lvcSpellsS9LearnedAt.Width = 80;
             // 
             // lvcSpellsS9LearnedID
             // 
-            this.lvcSpellsS9LearnedID.AspectName = "S9LearnedID";
-            this.lvcSpellsS9LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS9LearnedID.Text = "S9LearnedID";
-            this.lvcSpellsS9LearnedID.Width = 90;
+            lvcSpellsS9LearnedID.AspectName = "S9LearnedID";
+            lvcSpellsS9LearnedID.AspectToStringFormat = "{0:X}";
+            lvcSpellsS9LearnedID.Text = "S9LearnedID";
+            lvcSpellsS9LearnedID.Width = 90;
             // 
             // lvcSpellsS9LearnedLevel
             // 
-            this.lvcSpellsS9LearnedLevel.AspectName = "S9LearnedLevel";
-            this.lvcSpellsS9LearnedLevel.Text = "S9LearnedLevel";
-            this.lvcSpellsS9LearnedLevel.Width = 100;
+            lvcSpellsS9LearnedLevel.AspectName = "S9LearnedLevel";
+            lvcSpellsS9LearnedLevel.Text = "S9LearnedLevel";
+            lvcSpellsS9LearnedLevel.Width = 100;
             // 
             // lvcSpellsS10LearnedAt
             // 
-            this.lvcSpellsS10LearnedAt.AspectName = "S10LearnedAt";
-            this.lvcSpellsS10LearnedAt.Text = "S10LearnedAt";
-            this.lvcSpellsS10LearnedAt.Width = 80;
+            lvcSpellsS10LearnedAt.AspectName = "S10LearnedAt";
+            lvcSpellsS10LearnedAt.Text = "S10LearnedAt";
+            lvcSpellsS10LearnedAt.Width = 80;
             // 
             // lvcSpellsS10LearnedID
             // 
-            this.lvcSpellsS10LearnedID.AspectName = "S10LearnedID";
-            this.lvcSpellsS10LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS10LearnedID.Text = "S10LearnedID";
-            this.lvcSpellsS10LearnedID.Width = 90;
+            lvcSpellsS10LearnedID.AspectName = "S10LearnedID";
+            lvcSpellsS10LearnedID.AspectToStringFormat = "{0:X}";
+            lvcSpellsS10LearnedID.Text = "S10LearnedID";
+            lvcSpellsS10LearnedID.Width = 90;
             // 
             // lvcSpellsS10LearnedLevel
             // 
-            this.lvcSpellsS10LearnedLevel.AspectName = "S10LearnedLevel";
-            this.lvcSpellsS10LearnedLevel.Text = "S10LearnedLevel";
-            this.lvcSpellsS10LearnedLevel.Width = 100;
+            lvcSpellsS10LearnedLevel.AspectName = "S10LearnedLevel";
+            lvcSpellsS10LearnedLevel.Text = "S10LearnedLevel";
+            lvcSpellsS10LearnedLevel.Width = 100;
             // 
             // lvcSpellsS11LearnedAt
             // 
-            this.lvcSpellsS11LearnedAt.AspectName = "S11LearnedAt";
-            this.lvcSpellsS11LearnedAt.Text = "S11LearnedAt";
-            this.lvcSpellsS11LearnedAt.Width = 80;
+            lvcSpellsS11LearnedAt.AspectName = "S11LearnedAt";
+            lvcSpellsS11LearnedAt.Text = "S11LearnedAt";
+            lvcSpellsS11LearnedAt.Width = 80;
             // 
             // lvcSpellsS11LearnedID
             // 
-            this.lvcSpellsS11LearnedID.AspectName = "S11LearnedID";
-            this.lvcSpellsS11LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS11LearnedID.Text = "S11LearnedID";
-            this.lvcSpellsS11LearnedID.Width = 90;
+            lvcSpellsS11LearnedID.AspectName = "S11LearnedID";
+            lvcSpellsS11LearnedID.AspectToStringFormat = "{0:X}";
+            lvcSpellsS11LearnedID.Text = "S11LearnedID";
+            lvcSpellsS11LearnedID.Width = 90;
             // 
             // lvcSpellsS11LearnedLevel
             // 
-            this.lvcSpellsS11LearnedLevel.AspectName = "S11LearnedLevel";
-            this.lvcSpellsS11LearnedLevel.Text = "S11LearnedLevel";
-            this.lvcSpellsS11LearnedLevel.Width = 100;
+            lvcSpellsS11LearnedLevel.AspectName = "S11LearnedLevel";
+            lvcSpellsS11LearnedLevel.Text = "S11LearnedLevel";
+            lvcSpellsS11LearnedLevel.Width = 100;
             // 
             // lvcSpellsS12LearnedAt
             // 
-            this.lvcSpellsS12LearnedAt.AspectName = "S12LearnedAt";
-            this.lvcSpellsS12LearnedAt.Text = "S12LearnedAt";
-            this.lvcSpellsS12LearnedAt.Width = 80;
+            lvcSpellsS12LearnedAt.AspectName = "S12LearnedAt";
+            lvcSpellsS12LearnedAt.Text = "S12LearnedAt";
+            lvcSpellsS12LearnedAt.Width = 80;
             // 
             // lvcSpellsS12LearnedID
             // 
-            this.lvcSpellsS12LearnedID.AspectName = "S12LearnedID";
-            this.lvcSpellsS12LearnedID.AspectToStringFormat = "{0:X}";
-            this.lvcSpellsS12LearnedID.Text = "S12LearnedID";
-            this.lvcSpellsS12LearnedID.Width = 90;
+            lvcSpellsS12LearnedID.AspectName = "S12LearnedID";
+            lvcSpellsS12LearnedID.AspectToStringFormat = "{0:X}";
+            lvcSpellsS12LearnedID.Text = "S12LearnedID";
+            lvcSpellsS12LearnedID.Width = 90;
             // 
             // lvcSpellsS12LearnedLevel
             // 
-            this.lvcSpellsS12LearnedLevel.AspectName = "S12LearnedLevel";
-            this.lvcSpellsS12LearnedLevel.Text = "S12LearnedLevel";
-            this.lvcSpellsS12LearnedLevel.Width = 100;
+            lvcSpellsS12LearnedLevel.AspectName = "S12LearnedLevel";
+            lvcSpellsS12LearnedLevel.Text = "S12LearnedLevel";
+            lvcSpellsS12LearnedLevel.Width = 100;
             // 
             // tabStats
             // 
-            this.tabStats.Controls.Add(this.olvStats);
-            this.tabStats.Location = new System.Drawing.Point(4, 22);
-            this.tabStats.Name = "tabStats";
-            this.tabStats.Size = new System.Drawing.Size(756, 480);
-            this.tabStats.TabIndex = 3;
-            this.tabStats.Text = "Stats";
-            this.tabStats.UseVisualStyleBackColor = true;
+            tabStats.Controls.Add(olvStats);
+            tabStats.Location = new System.Drawing.Point(4, 24);
+            tabStats.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabStats.Name = "tabStats";
+            tabStats.Size = new System.Drawing.Size(883, 556);
+            tabStats.TabIndex = 3;
+            tabStats.Text = "Stats";
+            tabStats.UseVisualStyleBackColor = true;
             // 
             // olvStats
             // 
-            this.olvStats.AllColumns.Add(this.lvcStatsID);
-            this.olvStats.AllColumns.Add(this.lvcStatsAddress);
-            this.olvStats.AllColumns.Add(this.lvcStatsName);
-            this.olvStats.AllColumns.Add(this.lvcStatsCharacterID);
-            this.olvStats.AllColumns.Add(this.lvcStatsCharacterClass);
-            this.olvStats.AllColumns.Add(this.lvcStatsHPPromote);
-            this.olvStats.AllColumns.Add(this.lvcStatsHPCurve1);
-            this.olvStats.AllColumns.Add(this.lvcStatsHPCurve5);
-            this.olvStats.AllColumns.Add(this.lvcStatsHPCurve10);
-            this.olvStats.AllColumns.Add(this.lvcStatsHPCurve12_15);
-            this.olvStats.AllColumns.Add(this.lvcStatsHPCurve14_20);
-            this.olvStats.AllColumns.Add(this.lvcStatsHPCurve17_30);
-            this.olvStats.AllColumns.Add(this.lvcStatsHPCurve30_99);
-            this.olvStats.AllColumns.Add(this.lvcStatsMPPromote);
-            this.olvStats.AllColumns.Add(this.lvcStatsMPCurve1);
-            this.olvStats.AllColumns.Add(this.lvcStatsMPCurve5);
-            this.olvStats.AllColumns.Add(this.lvcStatsMPCurve10);
-            this.olvStats.AllColumns.Add(this.lvcStatsMPCurve12_15);
-            this.olvStats.AllColumns.Add(this.lvcStatsMPCurve14_20);
-            this.olvStats.AllColumns.Add(this.lvcStatsMPCurve17_30);
-            this.olvStats.AllColumns.Add(this.lvcStatsMPCurve30_99);
-            this.olvStats.AllColumns.Add(this.lvcStatsAtkPromote);
-            this.olvStats.AllColumns.Add(this.lvcStatsAtkCurve1);
-            this.olvStats.AllColumns.Add(this.lvcStatsAtkCurve5);
-            this.olvStats.AllColumns.Add(this.lvcStatsAtkCurve10);
-            this.olvStats.AllColumns.Add(this.lvcStatsAtkCurve12_15);
-            this.olvStats.AllColumns.Add(this.lvcStatsAtkCurve14_20);
-            this.olvStats.AllColumns.Add(this.lvcStatsAtkCurve17_30);
-            this.olvStats.AllColumns.Add(this.lvcStatsAtkCurve30_99);
-            this.olvStats.AllColumns.Add(this.lvcStatsDefPromote);
-            this.olvStats.AllColumns.Add(this.lvcStatsDefCurve1);
-            this.olvStats.AllColumns.Add(this.lvcStatsDefCurve5);
-            this.olvStats.AllColumns.Add(this.lvcStatsDefCurve10);
-            this.olvStats.AllColumns.Add(this.lvcStatsDefCurve12_15);
-            this.olvStats.AllColumns.Add(this.lvcStatsDefCurve14_20);
-            this.olvStats.AllColumns.Add(this.lvcStatsDefCurve17_30);
-            this.olvStats.AllColumns.Add(this.lvcStatsDefCurve30_99);
-            this.olvStats.AllColumns.Add(this.lvcStatsAgiPromote);
-            this.olvStats.AllColumns.Add(this.lvcStatsAgiCurve1);
-            this.olvStats.AllColumns.Add(this.lvcStatsAgiCurve5);
-            this.olvStats.AllColumns.Add(this.lvcStatsAgiCurve10);
-            this.olvStats.AllColumns.Add(this.lvcStatsAgiCurve12_15);
-            this.olvStats.AllColumns.Add(this.lvcStatsAgiCurve14_20);
-            this.olvStats.AllColumns.Add(this.lvcStatsAgiCurve17_30);
-            this.olvStats.AllColumns.Add(this.lvcStatsAgiCurve30_99);
-            this.olvStats.AllowColumnReorder = true;
-            this.olvStats.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvStats.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvStats.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcStatsID,
-            this.lvcStatsAddress,
-            this.lvcStatsName,
-            this.lvcStatsCharacterID,
-            this.lvcStatsCharacterClass,
-            this.lvcStatsHPPromote,
-            this.lvcStatsHPCurve1,
-            this.lvcStatsHPCurve5,
-            this.lvcStatsHPCurve10,
-            this.lvcStatsHPCurve12_15,
-            this.lvcStatsHPCurve14_20,
-            this.lvcStatsHPCurve17_30,
-            this.lvcStatsHPCurve30_99,
-            this.lvcStatsMPPromote,
-            this.lvcStatsMPCurve1,
-            this.lvcStatsMPCurve5,
-            this.lvcStatsMPCurve10,
-            this.lvcStatsMPCurve12_15,
-            this.lvcStatsMPCurve14_20,
-            this.lvcStatsMPCurve17_30,
-            this.lvcStatsMPCurve30_99,
-            this.lvcStatsAtkPromote,
-            this.lvcStatsAtkCurve1,
-            this.lvcStatsAtkCurve5,
-            this.lvcStatsAtkCurve10,
-            this.lvcStatsAtkCurve12_15,
-            this.lvcStatsAtkCurve14_20,
-            this.lvcStatsAtkCurve17_30,
-            this.lvcStatsAtkCurve30_99,
-            this.lvcStatsDefPromote,
-            this.lvcStatsDefCurve1,
-            this.lvcStatsDefCurve5,
-            this.lvcStatsDefCurve10,
-            this.lvcStatsDefCurve12_15,
-            this.lvcStatsDefCurve14_20,
-            this.lvcStatsDefCurve17_30,
-            this.lvcStatsDefCurve30_99,
-            this.lvcStatsAgiPromote,
-            this.lvcStatsAgiCurve1,
-            this.lvcStatsAgiCurve5,
-            this.lvcStatsAgiCurve10,
-            this.lvcStatsAgiCurve12_15,
-            this.lvcStatsAgiCurve14_20,
-            this.lvcStatsAgiCurve17_30,
-            this.lvcStatsAgiCurve30_99});
-            this.olvStats.FullRowSelect = true;
-            this.olvStats.GridLines = true;
-            this.olvStats.HasCollapsibleGroups = false;
-            this.olvStats.HideSelection = false;
-            this.olvStats.Location = new System.Drawing.Point(3, 3);
-            this.olvStats.MenuLabelGroupBy = "";
-            this.olvStats.Name = "olvStats";
-            this.olvStats.ShowGroups = false;
-            this.olvStats.Size = new System.Drawing.Size(750, 474);
-            this.olvStats.TabIndex = 0;
-            this.olvStats.UseAlternatingBackColors = true;
-            this.olvStats.UseCompatibleStateImageBehavior = false;
-            this.olvStats.View = System.Windows.Forms.View.Details;
+            olvStats.AllColumns.Add(lvcStatsID);
+            olvStats.AllColumns.Add(lvcStatsAddress);
+            olvStats.AllColumns.Add(lvcStatsName);
+            olvStats.AllColumns.Add(lvcStatsCharacterID);
+            olvStats.AllColumns.Add(lvcStatsCharacterClass);
+            olvStats.AllColumns.Add(lvcStatsHPPromote);
+            olvStats.AllColumns.Add(lvcStatsHPCurve1);
+            olvStats.AllColumns.Add(lvcStatsHPCurve5);
+            olvStats.AllColumns.Add(lvcStatsHPCurve10);
+            olvStats.AllColumns.Add(lvcStatsHPCurve12_15);
+            olvStats.AllColumns.Add(lvcStatsHPCurve14_20);
+            olvStats.AllColumns.Add(lvcStatsHPCurve17_30);
+            olvStats.AllColumns.Add(lvcStatsHPCurve30_99);
+            olvStats.AllColumns.Add(lvcStatsMPPromote);
+            olvStats.AllColumns.Add(lvcStatsMPCurve1);
+            olvStats.AllColumns.Add(lvcStatsMPCurve5);
+            olvStats.AllColumns.Add(lvcStatsMPCurve10);
+            olvStats.AllColumns.Add(lvcStatsMPCurve12_15);
+            olvStats.AllColumns.Add(lvcStatsMPCurve14_20);
+            olvStats.AllColumns.Add(lvcStatsMPCurve17_30);
+            olvStats.AllColumns.Add(lvcStatsMPCurve30_99);
+            olvStats.AllColumns.Add(lvcStatsAtkPromote);
+            olvStats.AllColumns.Add(lvcStatsAtkCurve1);
+            olvStats.AllColumns.Add(lvcStatsAtkCurve5);
+            olvStats.AllColumns.Add(lvcStatsAtkCurve10);
+            olvStats.AllColumns.Add(lvcStatsAtkCurve12_15);
+            olvStats.AllColumns.Add(lvcStatsAtkCurve14_20);
+            olvStats.AllColumns.Add(lvcStatsAtkCurve17_30);
+            olvStats.AllColumns.Add(lvcStatsAtkCurve30_99);
+            olvStats.AllColumns.Add(lvcStatsDefPromote);
+            olvStats.AllColumns.Add(lvcStatsDefCurve1);
+            olvStats.AllColumns.Add(lvcStatsDefCurve5);
+            olvStats.AllColumns.Add(lvcStatsDefCurve10);
+            olvStats.AllColumns.Add(lvcStatsDefCurve12_15);
+            olvStats.AllColumns.Add(lvcStatsDefCurve14_20);
+            olvStats.AllColumns.Add(lvcStatsDefCurve17_30);
+            olvStats.AllColumns.Add(lvcStatsDefCurve30_99);
+            olvStats.AllColumns.Add(lvcStatsAgiPromote);
+            olvStats.AllColumns.Add(lvcStatsAgiCurve1);
+            olvStats.AllColumns.Add(lvcStatsAgiCurve5);
+            olvStats.AllColumns.Add(lvcStatsAgiCurve10);
+            olvStats.AllColumns.Add(lvcStatsAgiCurve12_15);
+            olvStats.AllColumns.Add(lvcStatsAgiCurve14_20);
+            olvStats.AllColumns.Add(lvcStatsAgiCurve17_30);
+            olvStats.AllColumns.Add(lvcStatsAgiCurve30_99);
+            olvStats.AllowColumnReorder = true;
+            olvStats.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvStats.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvStats.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcStatsID, lvcStatsAddress, lvcStatsName, lvcStatsCharacterID, lvcStatsCharacterClass, lvcStatsHPPromote, lvcStatsHPCurve1, lvcStatsHPCurve5, lvcStatsHPCurve10, lvcStatsHPCurve12_15, lvcStatsHPCurve14_20, lvcStatsHPCurve17_30, lvcStatsHPCurve30_99, lvcStatsMPPromote, lvcStatsMPCurve1, lvcStatsMPCurve5, lvcStatsMPCurve10, lvcStatsMPCurve12_15, lvcStatsMPCurve14_20, lvcStatsMPCurve17_30, lvcStatsMPCurve30_99, lvcStatsAtkPromote, lvcStatsAtkCurve1, lvcStatsAtkCurve5, lvcStatsAtkCurve10, lvcStatsAtkCurve12_15, lvcStatsAtkCurve14_20, lvcStatsAtkCurve17_30, lvcStatsAtkCurve30_99, lvcStatsDefPromote, lvcStatsDefCurve1, lvcStatsDefCurve5, lvcStatsDefCurve10, lvcStatsDefCurve12_15, lvcStatsDefCurve14_20, lvcStatsDefCurve17_30, lvcStatsDefCurve30_99, lvcStatsAgiPromote, lvcStatsAgiCurve1, lvcStatsAgiCurve5, lvcStatsAgiCurve10, lvcStatsAgiCurve12_15, lvcStatsAgiCurve14_20, lvcStatsAgiCurve17_30, lvcStatsAgiCurve30_99 });
+            olvStats.FullRowSelect = true;
+            olvStats.GridLines = true;
+            olvStats.HasCollapsibleGroups = false;
+            olvStats.Location = new System.Drawing.Point(4, 3);
+            olvStats.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvStats.MenuLabelGroupBy = "";
+            olvStats.Name = "olvStats";
+            olvStats.ShowGroups = false;
+            olvStats.Size = new System.Drawing.Size(874, 546);
+            olvStats.TabIndex = 0;
+            olvStats.UseAlternatingBackColors = true;
+            olvStats.UseCompatibleStateImageBehavior = false;
+            olvStats.View = System.Windows.Forms.View.Details;
             // 
             // lvcStatsID
             // 
-            this.lvcStatsID.AspectName = "ID";
-            this.lvcStatsID.AspectToStringFormat = "{0:X}";
-            this.lvcStatsID.IsEditable = false;
-            this.lvcStatsID.Text = "ID";
-            this.lvcStatsID.Width = 30;
+            lvcStatsID.AspectName = "ID";
+            lvcStatsID.AspectToStringFormat = "{0:X}";
+            lvcStatsID.IsEditable = false;
+            lvcStatsID.Text = "ID";
+            lvcStatsID.Width = 30;
             // 
             // lvcStatsAddress
             // 
-            this.lvcStatsAddress.AspectName = "Address";
-            this.lvcStatsAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcStatsAddress.IsEditable = false;
-            this.lvcStatsAddress.Text = "Address";
+            lvcStatsAddress.AspectName = "Address";
+            lvcStatsAddress.AspectToStringFormat = "{0:X4}";
+            lvcStatsAddress.IsEditable = false;
+            lvcStatsAddress.Text = "Address";
             // 
             // lvcStatsName
             // 
-            this.lvcStatsName.AspectName = "Name";
-            this.lvcStatsName.IsEditable = false;
-            this.lvcStatsName.Text = "nameStatus";
-            this.lvcStatsName.Width = 90;
+            lvcStatsName.AspectName = "Name";
+            lvcStatsName.IsEditable = false;
+            lvcStatsName.Text = "nameStatus";
+            lvcStatsName.Width = 90;
             // 
             // lvcStatsCharacterID
             // 
-            this.lvcStatsCharacterID.AspectName = "CharacterID";
-            this.lvcStatsCharacterID.AspectToStringFormat = "{0:X}";
-            this.lvcStatsCharacterID.HeaderForeColor = System.Drawing.Color.White;
-            this.lvcStatsCharacterID.Text = "characterID";
-            this.lvcStatsCharacterID.Width = 80;
+            lvcStatsCharacterID.AspectName = "CharacterID";
+            lvcStatsCharacterID.AspectToStringFormat = "{0:X}";
+            lvcStatsCharacterID.HeaderForeColor = System.Drawing.Color.White;
+            lvcStatsCharacterID.Text = "characterID";
+            lvcStatsCharacterID.Width = 80;
             // 
             // lvcStatsCharacterClass
             // 
-            this.lvcStatsCharacterClass.AspectName = "CharacterClass";
-            this.lvcStatsCharacterClass.AspectToStringFormat = "{0:X}";
-            this.lvcStatsCharacterClass.Text = "Class";
-            this.lvcStatsCharacterClass.Width = 150;
+            lvcStatsCharacterClass.AspectName = "CharacterClass";
+            lvcStatsCharacterClass.AspectToStringFormat = "{0:X}";
+            lvcStatsCharacterClass.Text = "Class";
+            lvcStatsCharacterClass.Width = 150;
             // 
             // lvcStatsHPPromote
             // 
-            this.lvcStatsHPPromote.AspectName = "HPPromote";
-            this.lvcStatsHPPromote.Text = "HPPromote";
-            this.lvcStatsHPPromote.Width = 70;
+            lvcStatsHPPromote.AspectName = "HPPromote";
+            lvcStatsHPPromote.Text = "HPPromote";
+            lvcStatsHPPromote.Width = 70;
             // 
             // lvcStatsHPCurve1
             // 
-            this.lvcStatsHPCurve1.AspectName = "HPCurve1";
-            this.lvcStatsHPCurve1.Text = "HPLv1";
-            this.lvcStatsHPCurve1.Width = 50;
+            lvcStatsHPCurve1.AspectName = "HPCurve1";
+            lvcStatsHPCurve1.Text = "HPLv1";
+            lvcStatsHPCurve1.Width = 50;
             // 
             // lvcStatsHPCurve5
             // 
-            this.lvcStatsHPCurve5.AspectName = "HPCurve5";
-            this.lvcStatsHPCurve5.Text = "HPLv5";
-            this.lvcStatsHPCurve5.Width = 50;
+            lvcStatsHPCurve5.AspectName = "HPCurve5";
+            lvcStatsHPCurve5.Text = "HPLv5";
+            lvcStatsHPCurve5.Width = 50;
             // 
             // lvcStatsHPCurve10
             // 
-            this.lvcStatsHPCurve10.AspectName = "HPCurve10";
-            this.lvcStatsHPCurve10.Text = "HPLv10";
-            this.lvcStatsHPCurve10.Width = 65;
+            lvcStatsHPCurve10.AspectName = "HPCurve10";
+            lvcStatsHPCurve10.Text = "HPLv10";
+            lvcStatsHPCurve10.Width = 65;
             // 
             // lvcStatsHPCurve12_15
             // 
-            this.lvcStatsHPCurve12_15.AspectName = "HPCurve12_15";
-            this.lvcStatsHPCurve12_15.Text = "HPLv12/15";
-            this.lvcStatsHPCurve12_15.Width = 75;
+            lvcStatsHPCurve12_15.AspectName = "HPCurve12_15";
+            lvcStatsHPCurve12_15.Text = "HPLv12/15";
+            lvcStatsHPCurve12_15.Width = 75;
             // 
             // lvcStatsHPCurve14_20
             // 
-            this.lvcStatsHPCurve14_20.AspectName = "HPCurve14_20";
-            this.lvcStatsHPCurve14_20.Text = "HPLv14/20";
-            this.lvcStatsHPCurve14_20.Width = 75;
+            lvcStatsHPCurve14_20.AspectName = "HPCurve14_20";
+            lvcStatsHPCurve14_20.Text = "HPLv14/20";
+            lvcStatsHPCurve14_20.Width = 75;
             // 
             // lvcStatsHPCurve17_30
             // 
-            this.lvcStatsHPCurve17_30.AspectName = "HPCurve17_30";
-            this.lvcStatsHPCurve17_30.Text = "HPLv17/30";
-            this.lvcStatsHPCurve17_30.Width = 75;
+            lvcStatsHPCurve17_30.AspectName = "HPCurve17_30";
+            lvcStatsHPCurve17_30.Text = "HPLv17/30";
+            lvcStatsHPCurve17_30.Width = 75;
             // 
             // lvcStatsHPCurve30_99
             // 
-            this.lvcStatsHPCurve30_99.AspectName = "HPCurve30_99";
-            this.lvcStatsHPCurve30_99.Text = "HPLv30/99";
-            this.lvcStatsHPCurve30_99.Width = 75;
+            lvcStatsHPCurve30_99.AspectName = "HPCurve30_99";
+            lvcStatsHPCurve30_99.Text = "HPLv30/99";
+            lvcStatsHPCurve30_99.Width = 75;
             // 
             // lvcStatsMPPromote
             // 
-            this.lvcStatsMPPromote.AspectName = "MPPromote";
-            this.lvcStatsMPPromote.Text = "MPPromote";
-            this.lvcStatsMPPromote.Width = 70;
+            lvcStatsMPPromote.AspectName = "MPPromote";
+            lvcStatsMPPromote.Text = "MPPromote";
+            lvcStatsMPPromote.Width = 70;
             // 
             // lvcStatsMPCurve1
             // 
-            this.lvcStatsMPCurve1.AspectName = "MPCurve1";
-            this.lvcStatsMPCurve1.Text = "MPLv1";
-            this.lvcStatsMPCurve1.Width = 50;
+            lvcStatsMPCurve1.AspectName = "MPCurve1";
+            lvcStatsMPCurve1.Text = "MPLv1";
+            lvcStatsMPCurve1.Width = 50;
             // 
             // lvcStatsMPCurve5
             // 
-            this.lvcStatsMPCurve5.AspectName = "MPCurve5";
-            this.lvcStatsMPCurve5.Text = "MPLv5";
-            this.lvcStatsMPCurve5.Width = 50;
+            lvcStatsMPCurve5.AspectName = "MPCurve5";
+            lvcStatsMPCurve5.Text = "MPLv5";
+            lvcStatsMPCurve5.Width = 50;
             // 
             // lvcStatsMPCurve10
             // 
-            this.lvcStatsMPCurve10.AspectName = "MPCurve10";
-            this.lvcStatsMPCurve10.Text = "MPLv10";
-            this.lvcStatsMPCurve10.Width = 62;
+            lvcStatsMPCurve10.AspectName = "MPCurve10";
+            lvcStatsMPCurve10.Text = "MPLv10";
+            lvcStatsMPCurve10.Width = 62;
             // 
             // lvcStatsMPCurve12_15
             // 
-            this.lvcStatsMPCurve12_15.AspectName = "MPCurve12_15";
-            this.lvcStatsMPCurve12_15.Text = "MPLv12/15";
-            this.lvcStatsMPCurve12_15.Width = 75;
+            lvcStatsMPCurve12_15.AspectName = "MPCurve12_15";
+            lvcStatsMPCurve12_15.Text = "MPLv12/15";
+            lvcStatsMPCurve12_15.Width = 75;
             // 
             // lvcStatsMPCurve14_20
             // 
-            this.lvcStatsMPCurve14_20.AspectName = "MPCurve14_20";
-            this.lvcStatsMPCurve14_20.Text = "MPLv14/20";
-            this.lvcStatsMPCurve14_20.Width = 75;
+            lvcStatsMPCurve14_20.AspectName = "MPCurve14_20";
+            lvcStatsMPCurve14_20.Text = "MPLv14/20";
+            lvcStatsMPCurve14_20.Width = 75;
             // 
             // lvcStatsMPCurve17_30
             // 
-            this.lvcStatsMPCurve17_30.AspectName = "MPCurve17_30";
-            this.lvcStatsMPCurve17_30.Text = "MPLv17/30";
-            this.lvcStatsMPCurve17_30.Width = 75;
+            lvcStatsMPCurve17_30.AspectName = "MPCurve17_30";
+            lvcStatsMPCurve17_30.Text = "MPLv17/30";
+            lvcStatsMPCurve17_30.Width = 75;
             // 
             // lvcStatsMPCurve30_99
             // 
-            this.lvcStatsMPCurve30_99.AspectName = "MPCurve30_99";
-            this.lvcStatsMPCurve30_99.Text = "MPLv30/99";
-            this.lvcStatsMPCurve30_99.Width = 75;
+            lvcStatsMPCurve30_99.AspectName = "MPCurve30_99";
+            lvcStatsMPCurve30_99.Text = "MPLv30/99";
+            lvcStatsMPCurve30_99.Width = 75;
             // 
             // lvcStatsAtkPromote
             // 
-            this.lvcStatsAtkPromote.AspectName = "AtkPromote";
-            this.lvcStatsAtkPromote.Text = "AtkPromote";
-            this.lvcStatsAtkPromote.Width = 73;
+            lvcStatsAtkPromote.AspectName = "AtkPromote";
+            lvcStatsAtkPromote.Text = "AtkPromote";
+            lvcStatsAtkPromote.Width = 73;
             // 
             // lvcStatsAtkCurve1
             // 
-            this.lvcStatsAtkCurve1.AspectName = "AtkCurve1";
-            this.lvcStatsAtkCurve1.Text = "AtkLv1";
-            this.lvcStatsAtkCurve1.Width = 53;
+            lvcStatsAtkCurve1.AspectName = "AtkCurve1";
+            lvcStatsAtkCurve1.Text = "AtkLv1";
+            lvcStatsAtkCurve1.Width = 53;
             // 
             // lvcStatsAtkCurve5
             // 
-            this.lvcStatsAtkCurve5.AspectName = "AtkCurve5";
-            this.lvcStatsAtkCurve5.Text = "AtkLv5";
-            this.lvcStatsAtkCurve5.Width = 67;
+            lvcStatsAtkCurve5.AspectName = "AtkCurve5";
+            lvcStatsAtkCurve5.Text = "AtkLv5";
+            lvcStatsAtkCurve5.Width = 67;
             // 
             // lvcStatsAtkCurve10
             // 
-            this.lvcStatsAtkCurve10.AspectName = "AtkCurve10";
-            this.lvcStatsAtkCurve10.Text = "AtkLv10";
-            this.lvcStatsAtkCurve10.Width = 70;
+            lvcStatsAtkCurve10.AspectName = "AtkCurve10";
+            lvcStatsAtkCurve10.Text = "AtkLv10";
+            lvcStatsAtkCurve10.Width = 70;
             // 
             // lvcStatsAtkCurve12_15
             // 
-            this.lvcStatsAtkCurve12_15.AspectName = "AtkCurve12_15";
-            this.lvcStatsAtkCurve12_15.Text = "AtkLv12/15";
-            this.lvcStatsAtkCurve12_15.Width = 70;
+            lvcStatsAtkCurve12_15.AspectName = "AtkCurve12_15";
+            lvcStatsAtkCurve12_15.Text = "AtkLv12/15";
+            lvcStatsAtkCurve12_15.Width = 70;
             // 
             // lvcStatsAtkCurve14_20
             // 
-            this.lvcStatsAtkCurve14_20.AspectName = "AtkCurve14_20";
-            this.lvcStatsAtkCurve14_20.Text = "AtkLv14/20";
-            this.lvcStatsAtkCurve14_20.Width = 70;
+            lvcStatsAtkCurve14_20.AspectName = "AtkCurve14_20";
+            lvcStatsAtkCurve14_20.Text = "AtkLv14/20";
+            lvcStatsAtkCurve14_20.Width = 70;
             // 
             // lvcStatsAtkCurve17_30
             // 
-            this.lvcStatsAtkCurve17_30.AspectName = "AtkCurve17_30";
-            this.lvcStatsAtkCurve17_30.Text = "AtkLv17/30";
-            this.lvcStatsAtkCurve17_30.Width = 70;
+            lvcStatsAtkCurve17_30.AspectName = "AtkCurve17_30";
+            lvcStatsAtkCurve17_30.Text = "AtkLv17/30";
+            lvcStatsAtkCurve17_30.Width = 70;
             // 
             // lvcStatsAtkCurve30_99
             // 
-            this.lvcStatsAtkCurve30_99.AspectName = "AtkCurve30_99";
-            this.lvcStatsAtkCurve30_99.Text = "AtkLv30/99";
-            this.lvcStatsAtkCurve30_99.Width = 70;
+            lvcStatsAtkCurve30_99.AspectName = "AtkCurve30_99";
+            lvcStatsAtkCurve30_99.Text = "AtkLv30/99";
+            lvcStatsAtkCurve30_99.Width = 70;
             // 
             // lvcStatsDefPromote
             // 
-            this.lvcStatsDefPromote.AspectName = "DefPromote";
-            this.lvcStatsDefPromote.Text = "DefPromote";
-            this.lvcStatsDefPromote.Width = 73;
+            lvcStatsDefPromote.AspectName = "DefPromote";
+            lvcStatsDefPromote.Text = "DefPromote";
+            lvcStatsDefPromote.Width = 73;
             // 
             // lvcStatsDefCurve1
             // 
-            this.lvcStatsDefCurve1.AspectName = "DefCurve1";
-            this.lvcStatsDefCurve1.Text = "DefLv1";
-            this.lvcStatsDefCurve1.Width = 53;
+            lvcStatsDefCurve1.AspectName = "DefCurve1";
+            lvcStatsDefCurve1.Text = "DefLv1";
+            lvcStatsDefCurve1.Width = 53;
             // 
             // lvcStatsDefCurve5
             // 
-            this.lvcStatsDefCurve5.AspectName = "DefCurve5";
-            this.lvcStatsDefCurve5.Text = "DefLv5";
-            this.lvcStatsDefCurve5.Width = 67;
+            lvcStatsDefCurve5.AspectName = "DefCurve5";
+            lvcStatsDefCurve5.Text = "DefLv5";
+            lvcStatsDefCurve5.Width = 67;
             // 
             // lvcStatsDefCurve10
             // 
-            this.lvcStatsDefCurve10.AspectName = "DefCurve10";
-            this.lvcStatsDefCurve10.Text = "DefLv2";
-            this.lvcStatsDefCurve10.Width = 70;
+            lvcStatsDefCurve10.AspectName = "DefCurve10";
+            lvcStatsDefCurve10.Text = "DefLv2";
+            lvcStatsDefCurve10.Width = 70;
             // 
             // lvcStatsDefCurve12_15
             // 
-            this.lvcStatsDefCurve12_15.AspectName = "DefCurve12_15";
-            this.lvcStatsDefCurve12_15.Text = "DefLv12/15";
-            this.lvcStatsDefCurve12_15.Width = 70;
+            lvcStatsDefCurve12_15.AspectName = "DefCurve12_15";
+            lvcStatsDefCurve12_15.Text = "DefLv12/15";
+            lvcStatsDefCurve12_15.Width = 70;
             // 
             // lvcStatsDefCurve14_20
             // 
-            this.lvcStatsDefCurve14_20.AspectName = "DefCurve14_20";
-            this.lvcStatsDefCurve14_20.Text = "DefLv14/20";
-            this.lvcStatsDefCurve14_20.Width = 70;
+            lvcStatsDefCurve14_20.AspectName = "DefCurve14_20";
+            lvcStatsDefCurve14_20.Text = "DefLv14/20";
+            lvcStatsDefCurve14_20.Width = 70;
             // 
             // lvcStatsDefCurve17_30
             // 
-            this.lvcStatsDefCurve17_30.AspectName = "DefCurve17_30";
-            this.lvcStatsDefCurve17_30.Text = "DefLv17/30";
-            this.lvcStatsDefCurve17_30.Width = 70;
+            lvcStatsDefCurve17_30.AspectName = "DefCurve17_30";
+            lvcStatsDefCurve17_30.Text = "DefLv17/30";
+            lvcStatsDefCurve17_30.Width = 70;
             // 
             // lvcStatsDefCurve30_99
             // 
-            this.lvcStatsDefCurve30_99.AspectName = "DefCurve30_99";
-            this.lvcStatsDefCurve30_99.Text = "DefLv30/99";
-            this.lvcStatsDefCurve30_99.Width = 70;
+            lvcStatsDefCurve30_99.AspectName = "DefCurve30_99";
+            lvcStatsDefCurve30_99.Text = "DefLv30/99";
+            lvcStatsDefCurve30_99.Width = 70;
             // 
             // lvcStatsAgiPromote
             // 
-            this.lvcStatsAgiPromote.AspectName = "AgiPromote";
-            this.lvcStatsAgiPromote.Text = "AgiPromote";
-            this.lvcStatsAgiPromote.Width = 73;
+            lvcStatsAgiPromote.AspectName = "AgiPromote";
+            lvcStatsAgiPromote.Text = "AgiPromote";
+            lvcStatsAgiPromote.Width = 73;
             // 
             // lvcStatsAgiCurve1
             // 
-            this.lvcStatsAgiCurve1.AspectName = "AgiCurve1";
-            this.lvcStatsAgiCurve1.Text = "AgiLv1";
-            this.lvcStatsAgiCurve1.Width = 53;
+            lvcStatsAgiCurve1.AspectName = "AgiCurve1";
+            lvcStatsAgiCurve1.Text = "AgiLv1";
+            lvcStatsAgiCurve1.Width = 53;
             // 
             // lvcStatsAgiCurve5
             // 
-            this.lvcStatsAgiCurve5.AspectName = "AgiCurve5";
-            this.lvcStatsAgiCurve5.Text = "AgiLv5";
-            this.lvcStatsAgiCurve5.Width = 67;
+            lvcStatsAgiCurve5.AspectName = "AgiCurve5";
+            lvcStatsAgiCurve5.Text = "AgiLv5";
+            lvcStatsAgiCurve5.Width = 67;
             // 
             // lvcStatsAgiCurve10
             // 
-            this.lvcStatsAgiCurve10.AspectName = "AgiCurve10";
-            this.lvcStatsAgiCurve10.Text = "AgiLv10";
-            this.lvcStatsAgiCurve10.Width = 70;
+            lvcStatsAgiCurve10.AspectName = "AgiCurve10";
+            lvcStatsAgiCurve10.Text = "AgiLv10";
+            lvcStatsAgiCurve10.Width = 70;
             // 
             // lvcStatsAgiCurve12_15
             // 
-            this.lvcStatsAgiCurve12_15.AspectName = "AgiCurve12_15";
-            this.lvcStatsAgiCurve12_15.Text = "AgiLv12/15";
-            this.lvcStatsAgiCurve12_15.Width = 70;
+            lvcStatsAgiCurve12_15.AspectName = "AgiCurve12_15";
+            lvcStatsAgiCurve12_15.Text = "AgiLv12/15";
+            lvcStatsAgiCurve12_15.Width = 70;
             // 
             // lvcStatsAgiCurve14_20
             // 
-            this.lvcStatsAgiCurve14_20.AspectName = "AgiCurve14_20";
-            this.lvcStatsAgiCurve14_20.Text = "AgiLv14/20";
-            this.lvcStatsAgiCurve14_20.Width = 70;
+            lvcStatsAgiCurve14_20.AspectName = "AgiCurve14_20";
+            lvcStatsAgiCurve14_20.Text = "AgiLv14/20";
+            lvcStatsAgiCurve14_20.Width = 70;
             // 
             // lvcStatsAgiCurve17_30
             // 
-            this.lvcStatsAgiCurve17_30.AspectName = "AgiCurve17_30";
-            this.lvcStatsAgiCurve17_30.Text = "AgiLv17/30";
-            this.lvcStatsAgiCurve17_30.Width = 70;
+            lvcStatsAgiCurve17_30.AspectName = "AgiCurve17_30";
+            lvcStatsAgiCurve17_30.Text = "AgiLv17/30";
+            lvcStatsAgiCurve17_30.Width = 70;
             // 
             // lvcStatsAgiCurve30_99
             // 
-            this.lvcStatsAgiCurve30_99.AspectName = "AgiCurve30_99";
-            this.lvcStatsAgiCurve30_99.Text = "AgiLv30/99";
-            this.lvcStatsAgiCurve30_99.Width = 70;
+            lvcStatsAgiCurve30_99.AspectName = "AgiCurve30_99";
+            lvcStatsAgiCurve30_99.Text = "AgiLv30/99";
+            lvcStatsAgiCurve30_99.Width = 70;
             // 
             // tabMain
             // 
-            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabMain.Controls.Add(this.tabStats);
-            this.tabMain.Controls.Add(this.tabSpells);
-            this.tabMain.Controls.Add(this.tabEquipStatistics);
-            this.tabMain.Controls.Add(this.tabMiscellaneous);
-            this.tabMain.Controls.Add(this.tabInitialInfo);
-            this.tabMain.Controls.Add(this.tabWeaponLevelReq);
-            this.tabMain.Controls.Add(this.tabCurveCalc);
-            this.tabMain.Controls.Add(this.tabCurveGraph);
-            this.tabMain.Location = new System.Drawing.Point(0, 27);
-            this.tabMain.Name = "tabMain";
-            this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(764, 506);
-            this.tabMain.TabIndex = 0;
-            this.tabMain.Click += new System.EventHandler(this.tabMain_Click);
+            tabMain.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tabMain.Controls.Add(tabStats);
+            tabMain.Controls.Add(tabSpells);
+            tabMain.Controls.Add(tabEquipStatistics);
+            tabMain.Controls.Add(tabMiscellaneous);
+            tabMain.Controls.Add(tabInitialInfo);
+            tabMain.Controls.Add(tabWeaponLevelReq);
+            tabMain.Controls.Add(tabCurveCalc);
+            tabMain.Controls.Add(tabCurveGraph);
+            tabMain.Location = new System.Drawing.Point(0, 31);
+            tabMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabMain.Name = "tabMain";
+            tabMain.SelectedIndex = 0;
+            tabMain.Size = new System.Drawing.Size(891, 584);
+            tabMain.TabIndex = 0;
+            tabMain.Click += tabMain_Click;
             // 
             // tabEquipStatistics
             // 
-            this.tabEquipStatistics.Controls.Add(this.olvEquipStatistics);
-            this.tabEquipStatistics.Location = new System.Drawing.Point(4, 22);
-            this.tabEquipStatistics.Name = "tabEquipStatistics";
-            this.tabEquipStatistics.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEquipStatistics.Size = new System.Drawing.Size(756, 480);
-            this.tabEquipStatistics.TabIndex = 5;
-            this.tabEquipStatistics.Text = "EquipStatistics";
-            this.tabEquipStatistics.UseVisualStyleBackColor = true;
+            tabEquipStatistics.Controls.Add(olvEquipStatistics);
+            tabEquipStatistics.Location = new System.Drawing.Point(4, 24);
+            tabEquipStatistics.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabEquipStatistics.Name = "tabEquipStatistics";
+            tabEquipStatistics.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabEquipStatistics.Size = new System.Drawing.Size(883, 556);
+            tabEquipStatistics.TabIndex = 5;
+            tabEquipStatistics.Text = "EquipStatistics";
+            tabEquipStatistics.UseVisualStyleBackColor = true;
             // 
             // olvEquipStatistics
             // 
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsID);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsAddress);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsNameStatus);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeapon1Special1);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeapon1Special2);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeapon1Special3);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeapon2Special1);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeapon2Special2);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeapon2Special3);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeapon3Special1);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeapon3Special2);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeapon3Special3);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeapon4Special1);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeapon4Special2);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeapon4Special3);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeaponEquipable1);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeaponEquipable2);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeaponEquipable3);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsWeaponEquipable4);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsAccessoryEquipable1);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsAccessoryEquipable2);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsAccessoryEquipable3);
-            this.olvEquipStatistics.AllColumns.Add(this.lvcEquipStatisticsAccessoryEquipable4);
-            this.olvEquipStatistics.AllowColumnReorder = true;
-            this.olvEquipStatistics.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvEquipStatistics.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvEquipStatistics.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcEquipStatisticsID,
-            this.lvcEquipStatisticsAddress,
-            this.lvcEquipStatisticsNameStatus,
-            this.lvcEquipStatisticsWeapon1Special1,
-            this.lvcEquipStatisticsWeapon1Special2,
-            this.lvcEquipStatisticsWeapon1Special3,
-            this.lvcEquipStatisticsWeapon2Special1,
-            this.lvcEquipStatisticsWeapon2Special2,
-            this.lvcEquipStatisticsWeapon2Special3,
-            this.lvcEquipStatisticsWeapon3Special1,
-            this.lvcEquipStatisticsWeapon3Special2,
-            this.lvcEquipStatisticsWeapon3Special3,
-            this.lvcEquipStatisticsWeapon4Special1,
-            this.lvcEquipStatisticsWeapon4Special2,
-            this.lvcEquipStatisticsWeapon4Special3,
-            this.lvcEquipStatisticsWeaponEquipable1,
-            this.lvcEquipStatisticsWeaponEquipable2,
-            this.lvcEquipStatisticsWeaponEquipable3,
-            this.lvcEquipStatisticsWeaponEquipable4,
-            this.lvcEquipStatisticsAccessoryEquipable1,
-            this.lvcEquipStatisticsAccessoryEquipable2,
-            this.lvcEquipStatisticsAccessoryEquipable3,
-            this.lvcEquipStatisticsAccessoryEquipable4});
-            this.olvEquipStatistics.FullRowSelect = true;
-            this.olvEquipStatistics.GridLines = true;
-            this.olvEquipStatistics.HasCollapsibleGroups = false;
-            this.olvEquipStatistics.HideSelection = false;
-            this.olvEquipStatistics.Location = new System.Drawing.Point(3, 3);
-            this.olvEquipStatistics.MenuLabelGroupBy = "";
-            this.olvEquipStatistics.Name = "olvEquipStatistics";
-            this.olvEquipStatistics.ShowGroups = false;
-            this.olvEquipStatistics.Size = new System.Drawing.Size(750, 474);
-            this.olvEquipStatistics.TabIndex = 1;
-            this.olvEquipStatistics.UseAlternatingBackColors = true;
-            this.olvEquipStatistics.UseCompatibleStateImageBehavior = false;
-            this.olvEquipStatistics.View = System.Windows.Forms.View.Details;
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsID);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsAddress);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsNameStatus);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeapon1Special1);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeapon1Special2);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeapon1Special3);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeapon2Special1);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeapon2Special2);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeapon2Special3);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeapon3Special1);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeapon3Special2);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeapon3Special3);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeapon4Special1);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeapon4Special2);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeapon4Special3);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeaponEquipable1);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeaponEquipable2);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeaponEquipable3);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsWeaponEquipable4);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsAccessoryEquipable1);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsAccessoryEquipable2);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsAccessoryEquipable3);
+            olvEquipStatistics.AllColumns.Add(lvcEquipStatisticsAccessoryEquipable4);
+            olvEquipStatistics.AllowColumnReorder = true;
+            olvEquipStatistics.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvEquipStatistics.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvEquipStatistics.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcEquipStatisticsID, lvcEquipStatisticsAddress, lvcEquipStatisticsNameStatus, lvcEquipStatisticsWeapon1Special1, lvcEquipStatisticsWeapon1Special2, lvcEquipStatisticsWeapon1Special3, lvcEquipStatisticsWeapon2Special1, lvcEquipStatisticsWeapon2Special2, lvcEquipStatisticsWeapon2Special3, lvcEquipStatisticsWeapon3Special1, lvcEquipStatisticsWeapon3Special2, lvcEquipStatisticsWeapon3Special3, lvcEquipStatisticsWeapon4Special1, lvcEquipStatisticsWeapon4Special2, lvcEquipStatisticsWeapon4Special3, lvcEquipStatisticsWeaponEquipable1, lvcEquipStatisticsWeaponEquipable2, lvcEquipStatisticsWeaponEquipable3, lvcEquipStatisticsWeaponEquipable4, lvcEquipStatisticsAccessoryEquipable1, lvcEquipStatisticsAccessoryEquipable2, lvcEquipStatisticsAccessoryEquipable3, lvcEquipStatisticsAccessoryEquipable4 });
+            olvEquipStatistics.FullRowSelect = true;
+            olvEquipStatistics.GridLines = true;
+            olvEquipStatistics.HasCollapsibleGroups = false;
+            olvEquipStatistics.Location = new System.Drawing.Point(4, 3);
+            olvEquipStatistics.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvEquipStatistics.MenuLabelGroupBy = "";
+            olvEquipStatistics.Name = "olvEquipStatistics";
+            olvEquipStatistics.ShowGroups = false;
+            olvEquipStatistics.Size = new System.Drawing.Size(874, 546);
+            olvEquipStatistics.TabIndex = 1;
+            olvEquipStatistics.UseAlternatingBackColors = true;
+            olvEquipStatistics.UseCompatibleStateImageBehavior = false;
+            olvEquipStatistics.View = System.Windows.Forms.View.Details;
             // 
             // lvcEquipStatisticsID
             // 
-            this.lvcEquipStatisticsID.AspectName = "ID";
-            this.lvcEquipStatisticsID.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsID.IsEditable = false;
-            this.lvcEquipStatisticsID.Text = "ID";
-            this.lvcEquipStatisticsID.Width = 30;
+            lvcEquipStatisticsID.AspectName = "ID";
+            lvcEquipStatisticsID.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsID.IsEditable = false;
+            lvcEquipStatisticsID.Text = "ID";
+            lvcEquipStatisticsID.Width = 30;
             // 
             // lvcEquipStatisticsAddress
             // 
-            this.lvcEquipStatisticsAddress.AspectName = "Address";
-            this.lvcEquipStatisticsAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcEquipStatisticsAddress.IsEditable = false;
-            this.lvcEquipStatisticsAddress.Text = "Address";
+            lvcEquipStatisticsAddress.AspectName = "Address";
+            lvcEquipStatisticsAddress.AspectToStringFormat = "{0:X4}";
+            lvcEquipStatisticsAddress.IsEditable = false;
+            lvcEquipStatisticsAddress.Text = "Address";
             // 
             // lvcEquipStatisticsNameStatus
             // 
-            this.lvcEquipStatisticsNameStatus.AspectName = "Name";
-            this.lvcEquipStatisticsNameStatus.IsEditable = false;
-            this.lvcEquipStatisticsNameStatus.Text = "nameStatus";
-            this.lvcEquipStatisticsNameStatus.Width = 90;
+            lvcEquipStatisticsNameStatus.AspectName = "Name";
+            lvcEquipStatisticsNameStatus.IsEditable = false;
+            lvcEquipStatisticsNameStatus.Text = "nameStatus";
+            lvcEquipStatisticsNameStatus.Width = 90;
             // 
             // lvcEquipStatisticsWeapon1Special1
             // 
-            this.lvcEquipStatisticsWeapon1Special1.AspectName = "Weapon1Special1";
-            this.lvcEquipStatisticsWeapon1Special1.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeapon1Special1.Text = "Weapon1Special1";
-            this.lvcEquipStatisticsWeapon1Special1.Width = 115;
+            lvcEquipStatisticsWeapon1Special1.AspectName = "Weapon1Special1";
+            lvcEquipStatisticsWeapon1Special1.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeapon1Special1.Text = "Weapon1Special1";
+            lvcEquipStatisticsWeapon1Special1.Width = 115;
             // 
             // lvcEquipStatisticsWeapon1Special2
             // 
-            this.lvcEquipStatisticsWeapon1Special2.AspectName = "Weapon1Special2";
-            this.lvcEquipStatisticsWeapon1Special2.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeapon1Special2.Text = "Weapon1Special2";
-            this.lvcEquipStatisticsWeapon1Special2.Width = 115;
+            lvcEquipStatisticsWeapon1Special2.AspectName = "Weapon1Special2";
+            lvcEquipStatisticsWeapon1Special2.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeapon1Special2.Text = "Weapon1Special2";
+            lvcEquipStatisticsWeapon1Special2.Width = 115;
             // 
             // lvcEquipStatisticsWeapon1Special3
             // 
-            this.lvcEquipStatisticsWeapon1Special3.AspectName = "Weapon1Special3";
-            this.lvcEquipStatisticsWeapon1Special3.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeapon1Special3.Text = "Weapon1Special3";
-            this.lvcEquipStatisticsWeapon1Special3.Width = 115;
+            lvcEquipStatisticsWeapon1Special3.AspectName = "Weapon1Special3";
+            lvcEquipStatisticsWeapon1Special3.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeapon1Special3.Text = "Weapon1Special3";
+            lvcEquipStatisticsWeapon1Special3.Width = 115;
             // 
             // lvcEquipStatisticsWeapon2Special1
             // 
-            this.lvcEquipStatisticsWeapon2Special1.AspectName = "Weapon2Special1";
-            this.lvcEquipStatisticsWeapon2Special1.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeapon2Special1.Text = "Weapon2Special1";
-            this.lvcEquipStatisticsWeapon2Special1.Width = 115;
+            lvcEquipStatisticsWeapon2Special1.AspectName = "Weapon2Special1";
+            lvcEquipStatisticsWeapon2Special1.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeapon2Special1.Text = "Weapon2Special1";
+            lvcEquipStatisticsWeapon2Special1.Width = 115;
             // 
             // lvcEquipStatisticsWeapon2Special2
             // 
-            this.lvcEquipStatisticsWeapon2Special2.AspectName = "Weapon2Special2";
-            this.lvcEquipStatisticsWeapon2Special2.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeapon2Special2.Text = "Weapon2Special2";
-            this.lvcEquipStatisticsWeapon2Special2.Width = 115;
+            lvcEquipStatisticsWeapon2Special2.AspectName = "Weapon2Special2";
+            lvcEquipStatisticsWeapon2Special2.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeapon2Special2.Text = "Weapon2Special2";
+            lvcEquipStatisticsWeapon2Special2.Width = 115;
             // 
             // lvcEquipStatisticsWeapon2Special3
             // 
-            this.lvcEquipStatisticsWeapon2Special3.AspectName = "Weapon2Special3";
-            this.lvcEquipStatisticsWeapon2Special3.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeapon2Special3.Text = "Weapon2Special3";
-            this.lvcEquipStatisticsWeapon2Special3.Width = 115;
+            lvcEquipStatisticsWeapon2Special3.AspectName = "Weapon2Special3";
+            lvcEquipStatisticsWeapon2Special3.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeapon2Special3.Text = "Weapon2Special3";
+            lvcEquipStatisticsWeapon2Special3.Width = 115;
             // 
             // lvcEquipStatisticsWeapon3Special1
             // 
-            this.lvcEquipStatisticsWeapon3Special1.AspectName = "Weapon3Special1";
-            this.lvcEquipStatisticsWeapon3Special1.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeapon3Special1.Text = "Weapon3Special1";
-            this.lvcEquipStatisticsWeapon3Special1.Width = 115;
+            lvcEquipStatisticsWeapon3Special1.AspectName = "Weapon3Special1";
+            lvcEquipStatisticsWeapon3Special1.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeapon3Special1.Text = "Weapon3Special1";
+            lvcEquipStatisticsWeapon3Special1.Width = 115;
             // 
             // lvcEquipStatisticsWeapon3Special2
             // 
-            this.lvcEquipStatisticsWeapon3Special2.AspectName = "Weapon3Special2";
-            this.lvcEquipStatisticsWeapon3Special2.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeapon3Special2.Text = "Weapon3Special2";
-            this.lvcEquipStatisticsWeapon3Special2.Width = 115;
+            lvcEquipStatisticsWeapon3Special2.AspectName = "Weapon3Special2";
+            lvcEquipStatisticsWeapon3Special2.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeapon3Special2.Text = "Weapon3Special2";
+            lvcEquipStatisticsWeapon3Special2.Width = 115;
             // 
             // lvcEquipStatisticsWeapon3Special3
             // 
-            this.lvcEquipStatisticsWeapon3Special3.AspectName = "Weapon3Special3";
-            this.lvcEquipStatisticsWeapon3Special3.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeapon3Special3.Text = "Weapon3Special3";
-            this.lvcEquipStatisticsWeapon3Special3.Width = 115;
+            lvcEquipStatisticsWeapon3Special3.AspectName = "Weapon3Special3";
+            lvcEquipStatisticsWeapon3Special3.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeapon3Special3.Text = "Weapon3Special3";
+            lvcEquipStatisticsWeapon3Special3.Width = 115;
             // 
             // lvcEquipStatisticsWeapon4Special1
             // 
-            this.lvcEquipStatisticsWeapon4Special1.AspectName = "Weapon4Special1";
-            this.lvcEquipStatisticsWeapon4Special1.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeapon4Special1.Text = "Weapon4Special1";
-            this.lvcEquipStatisticsWeapon4Special1.Width = 115;
+            lvcEquipStatisticsWeapon4Special1.AspectName = "Weapon4Special1";
+            lvcEquipStatisticsWeapon4Special1.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeapon4Special1.Text = "Weapon4Special1";
+            lvcEquipStatisticsWeapon4Special1.Width = 115;
             // 
             // lvcEquipStatisticsWeapon4Special2
             // 
-            this.lvcEquipStatisticsWeapon4Special2.AspectName = "Weapon4Special2";
-            this.lvcEquipStatisticsWeapon4Special2.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeapon4Special2.Text = "Weapon4Special2";
-            this.lvcEquipStatisticsWeapon4Special2.Width = 115;
+            lvcEquipStatisticsWeapon4Special2.AspectName = "Weapon4Special2";
+            lvcEquipStatisticsWeapon4Special2.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeapon4Special2.Text = "Weapon4Special2";
+            lvcEquipStatisticsWeapon4Special2.Width = 115;
             // 
             // lvcEquipStatisticsWeapon4Special3
             // 
-            this.lvcEquipStatisticsWeapon4Special3.AspectName = "Weapon4Special3";
-            this.lvcEquipStatisticsWeapon4Special3.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeapon4Special3.Text = "Weapon4Special3";
-            this.lvcEquipStatisticsWeapon4Special3.Width = 115;
+            lvcEquipStatisticsWeapon4Special3.AspectName = "Weapon4Special3";
+            lvcEquipStatisticsWeapon4Special3.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeapon4Special3.Text = "Weapon4Special3";
+            lvcEquipStatisticsWeapon4Special3.Width = 115;
             // 
             // lvcEquipStatisticsWeaponEquipable1
             // 
-            this.lvcEquipStatisticsWeaponEquipable1.AspectName = "WeaponEquipable1";
-            this.lvcEquipStatisticsWeaponEquipable1.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeaponEquipable1.Text = "WeaponEquipable1";
-            this.lvcEquipStatisticsWeaponEquipable1.Width = 120;
+            lvcEquipStatisticsWeaponEquipable1.AspectName = "WeaponEquipable1";
+            lvcEquipStatisticsWeaponEquipable1.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeaponEquipable1.Text = "WeaponEquipable1";
+            lvcEquipStatisticsWeaponEquipable1.Width = 120;
             // 
             // lvcEquipStatisticsWeaponEquipable2
             // 
-            this.lvcEquipStatisticsWeaponEquipable2.AspectName = "WeaponEquipable2";
-            this.lvcEquipStatisticsWeaponEquipable2.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeaponEquipable2.Text = "WeaponEquipable2";
-            this.lvcEquipStatisticsWeaponEquipable2.Width = 120;
+            lvcEquipStatisticsWeaponEquipable2.AspectName = "WeaponEquipable2";
+            lvcEquipStatisticsWeaponEquipable2.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeaponEquipable2.Text = "WeaponEquipable2";
+            lvcEquipStatisticsWeaponEquipable2.Width = 120;
             // 
             // lvcEquipStatisticsWeaponEquipable3
             // 
-            this.lvcEquipStatisticsWeaponEquipable3.AspectName = "WeaponEquipable3";
-            this.lvcEquipStatisticsWeaponEquipable3.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeaponEquipable3.Text = "WeaponEquipable3";
-            this.lvcEquipStatisticsWeaponEquipable3.Width = 120;
+            lvcEquipStatisticsWeaponEquipable3.AspectName = "WeaponEquipable3";
+            lvcEquipStatisticsWeaponEquipable3.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeaponEquipable3.Text = "WeaponEquipable3";
+            lvcEquipStatisticsWeaponEquipable3.Width = 120;
             // 
             // lvcEquipStatisticsWeaponEquipable4
             // 
-            this.lvcEquipStatisticsWeaponEquipable4.AspectName = "WeaponEquipable4";
-            this.lvcEquipStatisticsWeaponEquipable4.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsWeaponEquipable4.Text = "WeaponEquipable4";
-            this.lvcEquipStatisticsWeaponEquipable4.Width = 120;
+            lvcEquipStatisticsWeaponEquipable4.AspectName = "WeaponEquipable4";
+            lvcEquipStatisticsWeaponEquipable4.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsWeaponEquipable4.Text = "WeaponEquipable4";
+            lvcEquipStatisticsWeaponEquipable4.Width = 120;
             // 
             // lvcEquipStatisticsAccessoryEquipable1
             // 
-            this.lvcEquipStatisticsAccessoryEquipable1.AspectName = "AccessoryEquipable1";
-            this.lvcEquipStatisticsAccessoryEquipable1.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsAccessoryEquipable1.Text = "AccessoryEquipable1";
-            this.lvcEquipStatisticsAccessoryEquipable1.Width = 120;
+            lvcEquipStatisticsAccessoryEquipable1.AspectName = "AccessoryEquipable1";
+            lvcEquipStatisticsAccessoryEquipable1.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsAccessoryEquipable1.Text = "AccessoryEquipable1";
+            lvcEquipStatisticsAccessoryEquipable1.Width = 120;
             // 
             // lvcEquipStatisticsAccessoryEquipable2
             // 
-            this.lvcEquipStatisticsAccessoryEquipable2.AspectName = "AccessoryEquipable2";
-            this.lvcEquipStatisticsAccessoryEquipable2.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsAccessoryEquipable2.Text = "AccessoryEquipable2";
-            this.lvcEquipStatisticsAccessoryEquipable2.Width = 120;
+            lvcEquipStatisticsAccessoryEquipable2.AspectName = "AccessoryEquipable2";
+            lvcEquipStatisticsAccessoryEquipable2.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsAccessoryEquipable2.Text = "AccessoryEquipable2";
+            lvcEquipStatisticsAccessoryEquipable2.Width = 120;
             // 
             // lvcEquipStatisticsAccessoryEquipable3
             // 
-            this.lvcEquipStatisticsAccessoryEquipable3.AspectName = "AccessoryEquipable3";
-            this.lvcEquipStatisticsAccessoryEquipable3.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsAccessoryEquipable3.Text = "AccessoryEquipable3";
-            this.lvcEquipStatisticsAccessoryEquipable3.Width = 120;
+            lvcEquipStatisticsAccessoryEquipable3.AspectName = "AccessoryEquipable3";
+            lvcEquipStatisticsAccessoryEquipable3.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsAccessoryEquipable3.Text = "AccessoryEquipable3";
+            lvcEquipStatisticsAccessoryEquipable3.Width = 120;
             // 
             // lvcEquipStatisticsAccessoryEquipable4
             // 
-            this.lvcEquipStatisticsAccessoryEquipable4.AspectName = "AccessoryEquipable4";
-            this.lvcEquipStatisticsAccessoryEquipable4.AspectToStringFormat = "{0:X}";
-            this.lvcEquipStatisticsAccessoryEquipable4.Text = "AccessoryEquipable4";
-            this.lvcEquipStatisticsAccessoryEquipable4.Width = 120;
+            lvcEquipStatisticsAccessoryEquipable4.AspectName = "AccessoryEquipable4";
+            lvcEquipStatisticsAccessoryEquipable4.AspectToStringFormat = "{0:X}";
+            lvcEquipStatisticsAccessoryEquipable4.Text = "AccessoryEquipable4";
+            lvcEquipStatisticsAccessoryEquipable4.Width = 120;
             // 
             // tabMiscellaneous
             // 
-            this.tabMiscellaneous.Controls.Add(this.olvMiscellaneous);
-            this.tabMiscellaneous.Location = new System.Drawing.Point(4, 22);
-            this.tabMiscellaneous.Name = "tabMiscellaneous";
-            this.tabMiscellaneous.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMiscellaneous.Size = new System.Drawing.Size(756, 480);
-            this.tabMiscellaneous.TabIndex = 6;
-            this.tabMiscellaneous.Text = "Miscellaneous";
-            this.tabMiscellaneous.UseVisualStyleBackColor = true;
+            tabMiscellaneous.Controls.Add(olvMiscellaneous);
+            tabMiscellaneous.Location = new System.Drawing.Point(4, 24);
+            tabMiscellaneous.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabMiscellaneous.Name = "tabMiscellaneous";
+            tabMiscellaneous.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabMiscellaneous.Size = new System.Drawing.Size(883, 556);
+            tabMiscellaneous.TabIndex = 6;
+            tabMiscellaneous.Text = "Miscellaneous";
+            tabMiscellaneous.UseVisualStyleBackColor = true;
             // 
             // olvMiscellaneous
             // 
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousID);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousAddress);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousTurns);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousHPRegen);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousMPRegen);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousNameStatus);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousLuck);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousMov);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousEarthRes);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousFireRes);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousIceRes);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousSparkRes);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousWindRes);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousLightRes);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousDarkRes);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousUnknownRes);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousSlowPercent);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousSupportPercent);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousMagicBonus);
-            this.olvMiscellaneous.AllColumns.Add(this.lvcMiscellaneousMovementType);
-            this.olvMiscellaneous.AllowColumnReorder = true;
-            this.olvMiscellaneous.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvMiscellaneous.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvMiscellaneous.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcMiscellaneousID,
-            this.lvcMiscellaneousAddress,
-            this.lvcMiscellaneousTurns,
-            this.lvcMiscellaneousHPRegen,
-            this.lvcMiscellaneousMPRegen,
-            this.lvcMiscellaneousNameStatus,
-            this.lvcMiscellaneousLuck,
-            this.lvcMiscellaneousMov,
-            this.lvcMiscellaneousEarthRes,
-            this.lvcMiscellaneousFireRes,
-            this.lvcMiscellaneousIceRes,
-            this.lvcMiscellaneousSparkRes,
-            this.lvcMiscellaneousWindRes,
-            this.lvcMiscellaneousLightRes,
-            this.lvcMiscellaneousDarkRes,
-            this.lvcMiscellaneousUnknownRes,
-            this.lvcMiscellaneousSlowPercent,
-            this.lvcMiscellaneousSupportPercent,
-            this.lvcMiscellaneousMagicBonus,
-            this.lvcMiscellaneousMovementType});
-            this.olvMiscellaneous.FullRowSelect = true;
-            this.olvMiscellaneous.GridLines = true;
-            this.olvMiscellaneous.HasCollapsibleGroups = false;
-            this.olvMiscellaneous.HideSelection = false;
-            this.olvMiscellaneous.Location = new System.Drawing.Point(3, 3);
-            this.olvMiscellaneous.MenuLabelGroupBy = "";
-            this.olvMiscellaneous.Name = "olvMiscellaneous";
-            this.olvMiscellaneous.ShowGroups = false;
-            this.olvMiscellaneous.Size = new System.Drawing.Size(750, 474);
-            this.olvMiscellaneous.TabIndex = 2;
-            this.olvMiscellaneous.UseAlternatingBackColors = true;
-            this.olvMiscellaneous.UseCompatibleStateImageBehavior = false;
-            this.olvMiscellaneous.View = System.Windows.Forms.View.Details;
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousID);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousAddress);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousTurns);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousHPRegen);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousMPRegen);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousNameStatus);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousLuck);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousMov);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousEarthRes);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousFireRes);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousIceRes);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousSparkRes);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousWindRes);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousLightRes);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousDarkRes);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousUnknownRes);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousSlowPercent);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousSupportPercent);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousMagicBonus);
+            olvMiscellaneous.AllColumns.Add(lvcMiscellaneousMovementType);
+            olvMiscellaneous.AllowColumnReorder = true;
+            olvMiscellaneous.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvMiscellaneous.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvMiscellaneous.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcMiscellaneousID, lvcMiscellaneousAddress, lvcMiscellaneousTurns, lvcMiscellaneousHPRegen, lvcMiscellaneousMPRegen, lvcMiscellaneousNameStatus, lvcMiscellaneousLuck, lvcMiscellaneousMov, lvcMiscellaneousEarthRes, lvcMiscellaneousFireRes, lvcMiscellaneousIceRes, lvcMiscellaneousSparkRes, lvcMiscellaneousWindRes, lvcMiscellaneousLightRes, lvcMiscellaneousDarkRes, lvcMiscellaneousUnknownRes, lvcMiscellaneousSlowPercent, lvcMiscellaneousSupportPercent, lvcMiscellaneousMagicBonus, lvcMiscellaneousMovementType });
+            olvMiscellaneous.FullRowSelect = true;
+            olvMiscellaneous.GridLines = true;
+            olvMiscellaneous.HasCollapsibleGroups = false;
+            olvMiscellaneous.Location = new System.Drawing.Point(4, 3);
+            olvMiscellaneous.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvMiscellaneous.MenuLabelGroupBy = "";
+            olvMiscellaneous.Name = "olvMiscellaneous";
+            olvMiscellaneous.ShowGroups = false;
+            olvMiscellaneous.Size = new System.Drawing.Size(874, 546);
+            olvMiscellaneous.TabIndex = 2;
+            olvMiscellaneous.UseAlternatingBackColors = true;
+            olvMiscellaneous.UseCompatibleStateImageBehavior = false;
+            olvMiscellaneous.View = System.Windows.Forms.View.Details;
             // 
             // lvcMiscellaneousID
             // 
-            this.lvcMiscellaneousID.AspectName = "ID";
-            this.lvcMiscellaneousID.AspectToStringFormat = "{0:X}";
-            this.lvcMiscellaneousID.IsEditable = false;
-            this.lvcMiscellaneousID.Text = "ID";
-            this.lvcMiscellaneousID.Width = 30;
+            lvcMiscellaneousID.AspectName = "ID";
+            lvcMiscellaneousID.AspectToStringFormat = "{0:X}";
+            lvcMiscellaneousID.IsEditable = false;
+            lvcMiscellaneousID.Text = "ID";
+            lvcMiscellaneousID.Width = 30;
             // 
             // lvcMiscellaneousAddress
             // 
-            this.lvcMiscellaneousAddress.AspectName = "Address";
-            this.lvcMiscellaneousAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcMiscellaneousAddress.IsEditable = false;
-            this.lvcMiscellaneousAddress.Text = "Address";
+            lvcMiscellaneousAddress.AspectName = "Address";
+            lvcMiscellaneousAddress.AspectToStringFormat = "{0:X4}";
+            lvcMiscellaneousAddress.IsEditable = false;
+            lvcMiscellaneousAddress.Text = "Address";
             // 
             // lvcMiscellaneousTurns
             // 
-            this.lvcMiscellaneousTurns.AspectName = "BaseTurns";
-            this.lvcMiscellaneousTurns.DisplayIndex = 5;
-            this.lvcMiscellaneousTurns.Text = "Turns";
+            lvcMiscellaneousTurns.AspectName = "BaseTurns";
+            lvcMiscellaneousTurns.DisplayIndex = 5;
+            lvcMiscellaneousTurns.Text = "Turns";
             // 
             // lvcMiscellaneousHPRegen
             // 
-            this.lvcMiscellaneousHPRegen.AspectName = "BaseHPRegen";
-            this.lvcMiscellaneousHPRegen.DisplayIndex = 6;
-            this.lvcMiscellaneousHPRegen.Text = "HPRegen";
+            lvcMiscellaneousHPRegen.AspectName = "BaseHPRegen";
+            lvcMiscellaneousHPRegen.DisplayIndex = 6;
+            lvcMiscellaneousHPRegen.Text = "HPRegen";
             // 
             // lvcMiscellaneousMPRegen
             // 
-            this.lvcMiscellaneousMPRegen.AspectName = "BaseMPRegen";
-            this.lvcMiscellaneousMPRegen.DisplayIndex = 7;
-            this.lvcMiscellaneousMPRegen.Text = "MPRegen";
+            lvcMiscellaneousMPRegen.AspectName = "BaseMPRegen";
+            lvcMiscellaneousMPRegen.DisplayIndex = 7;
+            lvcMiscellaneousMPRegen.Text = "MPRegen";
             // 
             // lvcMiscellaneousNameStatus
             // 
-            this.lvcMiscellaneousNameStatus.AspectName = "Name";
-            this.lvcMiscellaneousNameStatus.DisplayIndex = 2;
-            this.lvcMiscellaneousNameStatus.IsEditable = false;
-            this.lvcMiscellaneousNameStatus.Text = "nameStatus";
-            this.lvcMiscellaneousNameStatus.Width = 75;
+            lvcMiscellaneousNameStatus.AspectName = "Name";
+            lvcMiscellaneousNameStatus.DisplayIndex = 2;
+            lvcMiscellaneousNameStatus.IsEditable = false;
+            lvcMiscellaneousNameStatus.Text = "nameStatus";
+            lvcMiscellaneousNameStatus.Width = 75;
             // 
             // lvcMiscellaneousLuck
             // 
-            this.lvcMiscellaneousLuck.AspectName = "BaseLuck";
-            this.lvcMiscellaneousLuck.AutoCompleteEditor = false;
-            this.lvcMiscellaneousLuck.DisplayIndex = 3;
-            this.lvcMiscellaneousLuck.Text = "Luck";
-            this.lvcMiscellaneousLuck.Width = 40;
+            lvcMiscellaneousLuck.AspectName = "BaseLuck";
+            lvcMiscellaneousLuck.AutoCompleteEditor = false;
+            lvcMiscellaneousLuck.DisplayIndex = 3;
+            lvcMiscellaneousLuck.Text = "Luck";
+            lvcMiscellaneousLuck.Width = 40;
             // 
             // lvcMiscellaneousMov
             // 
-            this.lvcMiscellaneousMov.AspectName = "BaseMov";
-            this.lvcMiscellaneousMov.DisplayIndex = 4;
-            this.lvcMiscellaneousMov.Text = "Mov";
-            this.lvcMiscellaneousMov.Width = 34;
+            lvcMiscellaneousMov.AspectName = "BaseMov";
+            lvcMiscellaneousMov.DisplayIndex = 4;
+            lvcMiscellaneousMov.Text = "Mov";
+            lvcMiscellaneousMov.Width = 34;
             // 
             // lvcMiscellaneousEarthRes
             // 
-            this.lvcMiscellaneousEarthRes.AspectName = "EarthRes";
-            this.lvcMiscellaneousEarthRes.Text = "EarthRes";
-            this.lvcMiscellaneousEarthRes.Width = 58;
+            lvcMiscellaneousEarthRes.AspectName = "EarthRes";
+            lvcMiscellaneousEarthRes.Text = "EarthRes";
+            lvcMiscellaneousEarthRes.Width = 58;
             // 
             // lvcMiscellaneousFireRes
             // 
-            this.lvcMiscellaneousFireRes.AspectName = "FireRes";
-            this.lvcMiscellaneousFireRes.Text = "FireRes";
-            this.lvcMiscellaneousFireRes.Width = 55;
+            lvcMiscellaneousFireRes.AspectName = "FireRes";
+            lvcMiscellaneousFireRes.Text = "FireRes";
+            lvcMiscellaneousFireRes.Width = 55;
             // 
             // lvcMiscellaneousIceRes
             // 
-            this.lvcMiscellaneousIceRes.AspectName = "IceRes";
-            this.lvcMiscellaneousIceRes.Text = "IceRes";
-            this.lvcMiscellaneousIceRes.Width = 55;
+            lvcMiscellaneousIceRes.AspectName = "IceRes";
+            lvcMiscellaneousIceRes.Text = "IceRes";
+            lvcMiscellaneousIceRes.Width = 55;
             // 
             // lvcMiscellaneousSparkRes
             // 
-            this.lvcMiscellaneousSparkRes.AspectName = "SparkRes";
-            this.lvcMiscellaneousSparkRes.Text = "SparkRes";
+            lvcMiscellaneousSparkRes.AspectName = "SparkRes";
+            lvcMiscellaneousSparkRes.Text = "SparkRes";
             // 
             // lvcMiscellaneousWindRes
             // 
-            this.lvcMiscellaneousWindRes.AspectName = "WindRes";
-            this.lvcMiscellaneousWindRes.Text = "WindRes";
-            this.lvcMiscellaneousWindRes.Width = 58;
+            lvcMiscellaneousWindRes.AspectName = "WindRes";
+            lvcMiscellaneousWindRes.Text = "WindRes";
+            lvcMiscellaneousWindRes.Width = 58;
             // 
             // lvcMiscellaneousLightRes
             // 
-            this.lvcMiscellaneousLightRes.AspectName = "LightRes";
-            this.lvcMiscellaneousLightRes.Text = "LightRes";
+            lvcMiscellaneousLightRes.AspectName = "LightRes";
+            lvcMiscellaneousLightRes.Text = "LightRes";
             // 
             // lvcMiscellaneousDarkRes
             // 
-            this.lvcMiscellaneousDarkRes.AspectName = "DarkRes";
-            this.lvcMiscellaneousDarkRes.Text = "DarkRes";
+            lvcMiscellaneousDarkRes.AspectName = "DarkRes";
+            lvcMiscellaneousDarkRes.Text = "DarkRes";
             // 
             // lvcMiscellaneousUnknownRes
             // 
-            this.lvcMiscellaneousUnknownRes.AspectName = "UnknownRes";
-            this.lvcMiscellaneousUnknownRes.Text = "UnknownRes";
-            this.lvcMiscellaneousUnknownRes.Width = 83;
+            lvcMiscellaneousUnknownRes.AspectName = "UnknownRes";
+            lvcMiscellaneousUnknownRes.Text = "UnknownRes";
+            lvcMiscellaneousUnknownRes.Width = 83;
             // 
             // lvcMiscellaneousSlowPercent
             // 
-            this.lvcMiscellaneousSlowPercent.AspectName = "Slow";
-            this.lvcMiscellaneousSlowPercent.Text = "Slow%";
-            this.lvcMiscellaneousSlowPercent.Width = 55;
+            lvcMiscellaneousSlowPercent.AspectName = "Slow";
+            lvcMiscellaneousSlowPercent.Text = "Slow%";
+            lvcMiscellaneousSlowPercent.Width = 55;
             // 
             // lvcMiscellaneousSupportPercent
             // 
-            this.lvcMiscellaneousSupportPercent.AspectName = "Support";
-            this.lvcMiscellaneousSupportPercent.Text = "Support%";
-            this.lvcMiscellaneousSupportPercent.Width = 65;
+            lvcMiscellaneousSupportPercent.AspectName = "Support";
+            lvcMiscellaneousSupportPercent.Text = "Support%";
+            lvcMiscellaneousSupportPercent.Width = 65;
             // 
             // lvcMiscellaneousMagicBonus
             // 
-            this.lvcMiscellaneousMagicBonus.AspectName = "MagicBonus";
-            this.lvcMiscellaneousMagicBonus.AspectToStringFormat = "{0:X}";
-            this.lvcMiscellaneousMagicBonus.Text = "MagicBonus";
-            this.lvcMiscellaneousMagicBonus.Width = 100;
+            lvcMiscellaneousMagicBonus.AspectName = "MagicBonus";
+            lvcMiscellaneousMagicBonus.AspectToStringFormat = "{0:X}";
+            lvcMiscellaneousMagicBonus.Text = "MagicBonus";
+            lvcMiscellaneousMagicBonus.Width = 100;
             // 
             // lvcMiscellaneousMovementType
             // 
-            this.lvcMiscellaneousMovementType.AspectName = "MovementType";
-            this.lvcMiscellaneousMovementType.AspectToStringFormat = "{0:X}";
-            this.lvcMiscellaneousMovementType.Text = "MovementType";
-            this.lvcMiscellaneousMovementType.Width = 120;
+            lvcMiscellaneousMovementType.AspectName = "MovementType";
+            lvcMiscellaneousMovementType.AspectToStringFormat = "{0:X}";
+            lvcMiscellaneousMovementType.Text = "MovementType";
+            lvcMiscellaneousMovementType.Width = 120;
             // 
             // tabInitialInfo
             // 
-            this.tabInitialInfo.Controls.Add(this.olvInitialInfo);
-            this.tabInitialInfo.Location = new System.Drawing.Point(4, 22);
-            this.tabInitialInfo.Name = "tabInitialInfo";
-            this.tabInitialInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInitialInfo.Size = new System.Drawing.Size(756, 480);
-            this.tabInitialInfo.TabIndex = 7;
-            this.tabInitialInfo.Text = "Initial Info";
-            this.tabInitialInfo.UseVisualStyleBackColor = true;
+            tabInitialInfo.Controls.Add(olvInitialInfo);
+            tabInitialInfo.Location = new System.Drawing.Point(4, 24);
+            tabInitialInfo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabInitialInfo.Name = "tabInitialInfo";
+            tabInitialInfo.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabInitialInfo.Size = new System.Drawing.Size(883, 556);
+            tabInitialInfo.TabIndex = 7;
+            tabInitialInfo.Text = "Initial Info";
+            tabInitialInfo.UseVisualStyleBackColor = true;
             // 
             // olvInitialInfo
             // 
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoID);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoAddress);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoDefaultName);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoCharacterID);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoClass);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoLevel);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoSex);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoWeapon);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoAccessoryEq);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoItem1);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoItem2);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoItem3);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoItem4);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoWeapon1Type);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoWeapon1Exp);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoWeapon2Type);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoWeapon2Exp);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoWeapon3Type);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoWeapon3Exp);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoWeapon4Type);
-            this.olvInitialInfo.AllColumns.Add(this.lvcInitialInfoWeapon4Exp);
-            this.olvInitialInfo.AllowColumnReorder = true;
-            this.olvInitialInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvInitialInfo.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvInitialInfo.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcInitialInfoID,
-            this.lvcInitialInfoAddress,
-            this.lvcInitialInfoDefaultName,
-            this.lvcInitialInfoCharacterID,
-            this.lvcInitialInfoClass,
-            this.lvcInitialInfoLevel,
-            this.lvcInitialInfoSex,
-            this.lvcInitialInfoWeapon,
-            this.lvcInitialInfoAccessoryEq,
-            this.lvcInitialInfoItem1,
-            this.lvcInitialInfoItem2,
-            this.lvcInitialInfoItem3,
-            this.lvcInitialInfoItem4,
-            this.lvcInitialInfoWeapon1Type,
-            this.lvcInitialInfoWeapon1Exp,
-            this.lvcInitialInfoWeapon2Type,
-            this.lvcInitialInfoWeapon2Exp,
-            this.lvcInitialInfoWeapon3Type,
-            this.lvcInitialInfoWeapon3Exp,
-            this.lvcInitialInfoWeapon4Type,
-            this.lvcInitialInfoWeapon4Exp});
-            this.olvInitialInfo.FullRowSelect = true;
-            this.olvInitialInfo.GridLines = true;
-            this.olvInitialInfo.HasCollapsibleGroups = false;
-            this.olvInitialInfo.HideSelection = false;
-            this.olvInitialInfo.Location = new System.Drawing.Point(3, 3);
-            this.olvInitialInfo.MenuLabelGroupBy = "";
-            this.olvInitialInfo.Name = "olvInitialInfo";
-            this.olvInitialInfo.ShowGroups = false;
-            this.olvInitialInfo.Size = new System.Drawing.Size(750, 474);
-            this.olvInitialInfo.TabIndex = 2;
-            this.olvInitialInfo.UseAlternatingBackColors = true;
-            this.olvInitialInfo.UseCompatibleStateImageBehavior = false;
-            this.olvInitialInfo.View = System.Windows.Forms.View.Details;
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoID);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoAddress);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoDefaultName);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoCharacterID);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoClass);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoLevel);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoSex);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoWeapon);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoAccessoryEq);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoItem1);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoItem2);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoItem3);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoItem4);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoWeapon1Type);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoWeapon1Exp);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoWeapon2Type);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoWeapon2Exp);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoWeapon3Type);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoWeapon3Exp);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoWeapon4Type);
+            olvInitialInfo.AllColumns.Add(lvcInitialInfoWeapon4Exp);
+            olvInitialInfo.AllowColumnReorder = true;
+            olvInitialInfo.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvInitialInfo.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvInitialInfo.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcInitialInfoID, lvcInitialInfoAddress, lvcInitialInfoDefaultName, lvcInitialInfoCharacterID, lvcInitialInfoClass, lvcInitialInfoLevel, lvcInitialInfoSex, lvcInitialInfoWeapon, lvcInitialInfoAccessoryEq, lvcInitialInfoItem1, lvcInitialInfoItem2, lvcInitialInfoItem3, lvcInitialInfoItem4, lvcInitialInfoWeapon1Type, lvcInitialInfoWeapon1Exp, lvcInitialInfoWeapon2Type, lvcInitialInfoWeapon2Exp, lvcInitialInfoWeapon3Type, lvcInitialInfoWeapon3Exp, lvcInitialInfoWeapon4Type, lvcInitialInfoWeapon4Exp });
+            olvInitialInfo.FullRowSelect = true;
+            olvInitialInfo.GridLines = true;
+            olvInitialInfo.HasCollapsibleGroups = false;
+            olvInitialInfo.Location = new System.Drawing.Point(4, 3);
+            olvInitialInfo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvInitialInfo.MenuLabelGroupBy = "";
+            olvInitialInfo.Name = "olvInitialInfo";
+            olvInitialInfo.ShowGroups = false;
+            olvInitialInfo.Size = new System.Drawing.Size(874, 546);
+            olvInitialInfo.TabIndex = 2;
+            olvInitialInfo.UseAlternatingBackColors = true;
+            olvInitialInfo.UseCompatibleStateImageBehavior = false;
+            olvInitialInfo.View = System.Windows.Forms.View.Details;
             // 
             // lvcInitialInfoID
             // 
-            this.lvcInitialInfoID.AspectName = "ID";
-            this.lvcInitialInfoID.AspectToStringFormat = "{0:X}";
-            this.lvcInitialInfoID.IsEditable = false;
-            this.lvcInitialInfoID.Text = "ID";
-            this.lvcInitialInfoID.Width = 30;
+            lvcInitialInfoID.AspectName = "ID";
+            lvcInitialInfoID.AspectToStringFormat = "{0:X}";
+            lvcInitialInfoID.IsEditable = false;
+            lvcInitialInfoID.Text = "ID";
+            lvcInitialInfoID.Width = 30;
             // 
             // lvcInitialInfoAddress
             // 
-            this.lvcInitialInfoAddress.AspectName = "Address";
-            this.lvcInitialInfoAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcInitialInfoAddress.IsEditable = false;
-            this.lvcInitialInfoAddress.Text = "Address";
+            lvcInitialInfoAddress.AspectName = "Address";
+            lvcInitialInfoAddress.AspectToStringFormat = "{0:X4}";
+            lvcInitialInfoAddress.IsEditable = false;
+            lvcInitialInfoAddress.Text = "Address";
             // 
             // lvcInitialInfoDefaultName
             // 
-            this.lvcInitialInfoDefaultName.AspectName = "Name";
-            this.lvcInitialInfoDefaultName.IsEditable = false;
-            this.lvcInitialInfoDefaultName.Text = "DefaultName";
-            this.lvcInitialInfoDefaultName.Width = 90;
+            lvcInitialInfoDefaultName.AspectName = "Name";
+            lvcInitialInfoDefaultName.IsEditable = false;
+            lvcInitialInfoDefaultName.Text = "DefaultName";
+            lvcInitialInfoDefaultName.Width = 90;
             // 
             // lvcInitialInfoCharacterID
             // 
-            this.lvcInitialInfoCharacterID.AspectName = "CharacterE";
-            this.lvcInitialInfoCharacterID.AspectToStringFormat = "{0:X}";
-            this.lvcInitialInfoCharacterID.Text = "CharacterID";
-            this.lvcInitialInfoCharacterID.Width = 70;
+            lvcInitialInfoCharacterID.AspectName = "CharacterE";
+            lvcInitialInfoCharacterID.AspectToStringFormat = "{0:X}";
+            lvcInitialInfoCharacterID.Text = "CharacterID";
+            lvcInitialInfoCharacterID.Width = 70;
             // 
             // lvcInitialInfoClass
             // 
-            this.lvcInitialInfoClass.AspectName = "CharacterClassE";
-            this.lvcInitialInfoClass.Text = "Class";
-            this.lvcInitialInfoClass.Width = 150;
+            lvcInitialInfoClass.AspectName = "CharacterClassE";
+            lvcInitialInfoClass.Text = "Class";
+            lvcInitialInfoClass.Width = 150;
             // 
             // lvcInitialInfoLevel
             // 
-            this.lvcInitialInfoLevel.AspectName = "Level";
-            this.lvcInitialInfoLevel.Text = "Level";
-            this.lvcInitialInfoLevel.Width = 50;
+            lvcInitialInfoLevel.AspectName = "Level";
+            lvcInitialInfoLevel.Text = "Level";
+            lvcInitialInfoLevel.Width = 50;
             // 
             // lvcInitialInfoSex
             // 
-            this.lvcInitialInfoSex.AspectName = "Sex";
-            this.lvcInitialInfoSex.Text = "Sex";
-            this.lvcInitialInfoSex.Width = 75;
+            lvcInitialInfoSex.AspectName = "Sex";
+            lvcInitialInfoSex.Text = "Sex";
+            lvcInitialInfoSex.Width = 75;
             // 
             // lvcInitialInfoWeapon
             // 
-            this.lvcInitialInfoWeapon.AspectName = "Weapon";
-            this.lvcInitialInfoWeapon.AspectToStringFormat = "{0:X}";
-            this.lvcInitialInfoWeapon.Text = "WeaponEq";
-            this.lvcInitialInfoWeapon.Width = 120;
+            lvcInitialInfoWeapon.AspectName = "Weapon";
+            lvcInitialInfoWeapon.AspectToStringFormat = "{0:X}";
+            lvcInitialInfoWeapon.Text = "WeaponEq";
+            lvcInitialInfoWeapon.Width = 120;
             // 
             // lvcInitialInfoAccessoryEq
             // 
-            this.lvcInitialInfoAccessoryEq.AspectName = "Accessory";
-            this.lvcInitialInfoAccessoryEq.AspectToStringFormat = "{0:X}";
-            this.lvcInitialInfoAccessoryEq.Text = "AccessorryEq";
-            this.lvcInitialInfoAccessoryEq.Width = 120;
+            lvcInitialInfoAccessoryEq.AspectName = "Accessory";
+            lvcInitialInfoAccessoryEq.AspectToStringFormat = "{0:X}";
+            lvcInitialInfoAccessoryEq.Text = "AccessorryEq";
+            lvcInitialInfoAccessoryEq.Width = 120;
             // 
             // lvcInitialInfoItem1
             // 
-            this.lvcInitialInfoItem1.AspectName = "Item1";
-            this.lvcInitialInfoItem1.AspectToStringFormat = "{0:X}";
-            this.lvcInitialInfoItem1.Text = "Item1";
-            this.lvcInitialInfoItem1.Width = 120;
+            lvcInitialInfoItem1.AspectName = "Item1";
+            lvcInitialInfoItem1.AspectToStringFormat = "{0:X}";
+            lvcInitialInfoItem1.Text = "Item1";
+            lvcInitialInfoItem1.Width = 120;
             // 
             // lvcInitialInfoItem2
             // 
-            this.lvcInitialInfoItem2.AspectName = "Item2";
-            this.lvcInitialInfoItem2.AspectToStringFormat = "{0:X}";
-            this.lvcInitialInfoItem2.Text = "Item2";
-            this.lvcInitialInfoItem2.Width = 120;
+            lvcInitialInfoItem2.AspectName = "Item2";
+            lvcInitialInfoItem2.AspectToStringFormat = "{0:X}";
+            lvcInitialInfoItem2.Text = "Item2";
+            lvcInitialInfoItem2.Width = 120;
             // 
             // lvcInitialInfoItem3
             // 
-            this.lvcInitialInfoItem3.AspectName = "Item3";
-            this.lvcInitialInfoItem3.AspectToStringFormat = "{0:X}";
-            this.lvcInitialInfoItem3.Text = "Item3";
-            this.lvcInitialInfoItem3.Width = 120;
+            lvcInitialInfoItem3.AspectName = "Item3";
+            lvcInitialInfoItem3.AspectToStringFormat = "{0:X}";
+            lvcInitialInfoItem3.Text = "Item3";
+            lvcInitialInfoItem3.Width = 120;
             // 
             // lvcInitialInfoItem4
             // 
-            this.lvcInitialInfoItem4.AspectName = "Item4";
-            this.lvcInitialInfoItem4.AspectToStringFormat = "{0:X}";
-            this.lvcInitialInfoItem4.Text = "Item4";
-            this.lvcInitialInfoItem4.Width = 120;
+            lvcInitialInfoItem4.AspectName = "Item4";
+            lvcInitialInfoItem4.AspectToStringFormat = "{0:X}";
+            lvcInitialInfoItem4.Text = "Item4";
+            lvcInitialInfoItem4.Width = 120;
             // 
             // lvcInitialInfoWeapon1Type
             // 
-            this.lvcInitialInfoWeapon1Type.AspectName = "Weapon1Type";
-            this.lvcInitialInfoWeapon1Type.Text = "Weapon1Type";
-            this.lvcInitialInfoWeapon1Type.Width = 150;
+            lvcInitialInfoWeapon1Type.AspectName = "Weapon1Type";
+            lvcInitialInfoWeapon1Type.Text = "Weapon1Type";
+            lvcInitialInfoWeapon1Type.Width = 150;
             // 
             // lvcInitialInfoWeapon1Exp
             // 
-            this.lvcInitialInfoWeapon1Exp.AspectName = "Weapon1Exp";
-            this.lvcInitialInfoWeapon1Exp.Text = "Weapon1Exp";
-            this.lvcInitialInfoWeapon1Exp.Width = 80;
+            lvcInitialInfoWeapon1Exp.AspectName = "Weapon1Exp";
+            lvcInitialInfoWeapon1Exp.Text = "Weapon1Exp";
+            lvcInitialInfoWeapon1Exp.Width = 80;
             // 
             // lvcInitialInfoWeapon2Type
             // 
-            this.lvcInitialInfoWeapon2Type.AspectName = "Weapon2Type";
-            this.lvcInitialInfoWeapon2Type.Text = "Weapon2Type";
-            this.lvcInitialInfoWeapon2Type.Width = 150;
+            lvcInitialInfoWeapon2Type.AspectName = "Weapon2Type";
+            lvcInitialInfoWeapon2Type.Text = "Weapon2Type";
+            lvcInitialInfoWeapon2Type.Width = 150;
             // 
             // lvcInitialInfoWeapon2Exp
             // 
-            this.lvcInitialInfoWeapon2Exp.AspectName = "Weapon2Exp";
-            this.lvcInitialInfoWeapon2Exp.Text = "Weapon2Exp";
-            this.lvcInitialInfoWeapon2Exp.Width = 80;
+            lvcInitialInfoWeapon2Exp.AspectName = "Weapon2Exp";
+            lvcInitialInfoWeapon2Exp.Text = "Weapon2Exp";
+            lvcInitialInfoWeapon2Exp.Width = 80;
             // 
             // lvcInitialInfoWeapon3Type
             // 
-            this.lvcInitialInfoWeapon3Type.AspectName = "Weapon3Type";
-            this.lvcInitialInfoWeapon3Type.Text = "Weapon3Type";
-            this.lvcInitialInfoWeapon3Type.Width = 150;
+            lvcInitialInfoWeapon3Type.AspectName = "Weapon3Type";
+            lvcInitialInfoWeapon3Type.Text = "Weapon3Type";
+            lvcInitialInfoWeapon3Type.Width = 150;
             // 
             // lvcInitialInfoWeapon3Exp
             // 
-            this.lvcInitialInfoWeapon3Exp.AspectName = "Weapon3Exp";
-            this.lvcInitialInfoWeapon3Exp.Text = "Weapon3Exp";
-            this.lvcInitialInfoWeapon3Exp.Width = 80;
+            lvcInitialInfoWeapon3Exp.AspectName = "Weapon3Exp";
+            lvcInitialInfoWeapon3Exp.Text = "Weapon3Exp";
+            lvcInitialInfoWeapon3Exp.Width = 80;
             // 
             // lvcInitialInfoWeapon4Type
             // 
-            this.lvcInitialInfoWeapon4Type.AspectName = "Weapon4Type";
-            this.lvcInitialInfoWeapon4Type.Text = "Weapon4Type";
-            this.lvcInitialInfoWeapon4Type.Width = 150;
+            lvcInitialInfoWeapon4Type.AspectName = "Weapon4Type";
+            lvcInitialInfoWeapon4Type.Text = "Weapon4Type";
+            lvcInitialInfoWeapon4Type.Width = 150;
             // 
             // lvcInitialInfoWeapon4Exp
             // 
-            this.lvcInitialInfoWeapon4Exp.AspectName = "Weapon4Exp";
-            this.lvcInitialInfoWeapon4Exp.Text = "Weapon4Exp";
-            this.lvcInitialInfoWeapon4Exp.Width = 80;
+            lvcInitialInfoWeapon4Exp.AspectName = "Weapon4Exp";
+            lvcInitialInfoWeapon4Exp.Text = "Weapon4Exp";
+            lvcInitialInfoWeapon4Exp.Width = 80;
             // 
             // tabWeaponLevelReq
             // 
-            this.tabWeaponLevelReq.Controls.Add(this.olvWeaponLevelReq);
-            this.tabWeaponLevelReq.Location = new System.Drawing.Point(4, 22);
-            this.tabWeaponLevelReq.Name = "tabWeaponLevelReq";
-            this.tabWeaponLevelReq.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWeaponLevelReq.Size = new System.Drawing.Size(756, 480);
-            this.tabWeaponLevelReq.TabIndex = 8;
-            this.tabWeaponLevelReq.Text = "WeaponLevelReq";
-            this.tabWeaponLevelReq.UseVisualStyleBackColor = true;
+            tabWeaponLevelReq.Controls.Add(olvWeaponLevelReq);
+            tabWeaponLevelReq.Location = new System.Drawing.Point(4, 24);
+            tabWeaponLevelReq.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabWeaponLevelReq.Name = "tabWeaponLevelReq";
+            tabWeaponLevelReq.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabWeaponLevelReq.Size = new System.Drawing.Size(883, 556);
+            tabWeaponLevelReq.TabIndex = 8;
+            tabWeaponLevelReq.Text = "WeaponLevelReq";
+            tabWeaponLevelReq.UseVisualStyleBackColor = true;
             // 
             // olvWeaponLevelReq
             // 
-            this.olvWeaponLevelReq.AllColumns.Add(this.lvcWeaponLevelReqID);
-            this.olvWeaponLevelReq.AllColumns.Add(this.lvcWeaponLevelReqAddress);
-            this.olvWeaponLevelReq.AllColumns.Add(this.lvcWeaponLevelReqTable);
-            this.olvWeaponLevelReq.AllColumns.Add(this.lvcWeaponLevelReqWLevel1);
-            this.olvWeaponLevelReq.AllColumns.Add(this.lvcWeaponLevelReqWLevel2);
-            this.olvWeaponLevelReq.AllColumns.Add(this.lvcWeaponLevelReqWLevel3);
-            this.olvWeaponLevelReq.AllColumns.Add(this.lvcWeaponLevelReqWLevel4);
-            this.olvWeaponLevelReq.AllowColumnReorder = true;
-            this.olvWeaponLevelReq.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvWeaponLevelReq.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvWeaponLevelReq.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcWeaponLevelReqID,
-            this.lvcWeaponLevelReqAddress,
-            this.lvcWeaponLevelReqTable,
-            this.lvcWeaponLevelReqWLevel1,
-            this.lvcWeaponLevelReqWLevel2,
-            this.lvcWeaponLevelReqWLevel3,
-            this.lvcWeaponLevelReqWLevel4});
-            this.olvWeaponLevelReq.FullRowSelect = true;
-            this.olvWeaponLevelReq.GridLines = true;
-            this.olvWeaponLevelReq.HasCollapsibleGroups = false;
-            this.olvWeaponLevelReq.HideSelection = false;
-            this.olvWeaponLevelReq.Location = new System.Drawing.Point(3, 3);
-            this.olvWeaponLevelReq.MenuLabelGroupBy = "";
-            this.olvWeaponLevelReq.Name = "olvWeaponLevelReq";
-            this.olvWeaponLevelReq.ShowGroups = false;
-            this.olvWeaponLevelReq.Size = new System.Drawing.Size(750, 474);
-            this.olvWeaponLevelReq.TabIndex = 3;
-            this.olvWeaponLevelReq.UseAlternatingBackColors = true;
-            this.olvWeaponLevelReq.UseCompatibleStateImageBehavior = false;
-            this.olvWeaponLevelReq.View = System.Windows.Forms.View.Details;
+            olvWeaponLevelReq.AllColumns.Add(lvcWeaponLevelReqID);
+            olvWeaponLevelReq.AllColumns.Add(lvcWeaponLevelReqAddress);
+            olvWeaponLevelReq.AllColumns.Add(lvcWeaponLevelReqTable);
+            olvWeaponLevelReq.AllColumns.Add(lvcWeaponLevelReqWLevel1);
+            olvWeaponLevelReq.AllColumns.Add(lvcWeaponLevelReqWLevel2);
+            olvWeaponLevelReq.AllColumns.Add(lvcWeaponLevelReqWLevel3);
+            olvWeaponLevelReq.AllColumns.Add(lvcWeaponLevelReqWLevel4);
+            olvWeaponLevelReq.AllowColumnReorder = true;
+            olvWeaponLevelReq.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvWeaponLevelReq.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvWeaponLevelReq.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcWeaponLevelReqID, lvcWeaponLevelReqAddress, lvcWeaponLevelReqTable, lvcWeaponLevelReqWLevel1, lvcWeaponLevelReqWLevel2, lvcWeaponLevelReqWLevel3, lvcWeaponLevelReqWLevel4 });
+            olvWeaponLevelReq.FullRowSelect = true;
+            olvWeaponLevelReq.GridLines = true;
+            olvWeaponLevelReq.HasCollapsibleGroups = false;
+            olvWeaponLevelReq.Location = new System.Drawing.Point(4, 3);
+            olvWeaponLevelReq.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvWeaponLevelReq.MenuLabelGroupBy = "";
+            olvWeaponLevelReq.Name = "olvWeaponLevelReq";
+            olvWeaponLevelReq.ShowGroups = false;
+            olvWeaponLevelReq.Size = new System.Drawing.Size(874, 546);
+            olvWeaponLevelReq.TabIndex = 3;
+            olvWeaponLevelReq.UseAlternatingBackColors = true;
+            olvWeaponLevelReq.UseCompatibleStateImageBehavior = false;
+            olvWeaponLevelReq.View = System.Windows.Forms.View.Details;
             // 
             // lvcWeaponLevelReqID
             // 
-            this.lvcWeaponLevelReqID.AspectName = "ID";
-            this.lvcWeaponLevelReqID.AspectToStringFormat = "{0:X}";
-            this.lvcWeaponLevelReqID.IsEditable = false;
-            this.lvcWeaponLevelReqID.Text = "ID";
-            this.lvcWeaponLevelReqID.Width = 30;
+            lvcWeaponLevelReqID.AspectName = "ID";
+            lvcWeaponLevelReqID.AspectToStringFormat = "{0:X}";
+            lvcWeaponLevelReqID.IsEditable = false;
+            lvcWeaponLevelReqID.Text = "ID";
+            lvcWeaponLevelReqID.Width = 30;
             // 
             // lvcWeaponLevelReqAddress
             // 
-            this.lvcWeaponLevelReqAddress.AspectName = "Address";
-            this.lvcWeaponLevelReqAddress.AspectToStringFormat = "{0:X4}";
-            this.lvcWeaponLevelReqAddress.IsEditable = false;
-            this.lvcWeaponLevelReqAddress.Text = "Address";
+            lvcWeaponLevelReqAddress.AspectName = "Address";
+            lvcWeaponLevelReqAddress.AspectToStringFormat = "{0:X4}";
+            lvcWeaponLevelReqAddress.IsEditable = false;
+            lvcWeaponLevelReqAddress.Text = "Address";
             // 
             // lvcWeaponLevelReqTable
             // 
-            this.lvcWeaponLevelReqTable.AspectName = "Name";
-            this.lvcWeaponLevelReqTable.IsEditable = false;
-            this.lvcWeaponLevelReqTable.Text = "Table";
-            this.lvcWeaponLevelReqTable.Width = 120;
+            lvcWeaponLevelReqTable.AspectName = "Name";
+            lvcWeaponLevelReqTable.IsEditable = false;
+            lvcWeaponLevelReqTable.Text = "Table";
+            lvcWeaponLevelReqTable.Width = 120;
             // 
             // lvcWeaponLevelReqWLevel1
             // 
-            this.lvcWeaponLevelReqWLevel1.AspectName = "WLevel1";
-            this.lvcWeaponLevelReqWLevel1.Text = "WLevel1";
-            this.lvcWeaponLevelReqWLevel1.Width = 70;
+            lvcWeaponLevelReqWLevel1.AspectName = "WLevel1";
+            lvcWeaponLevelReqWLevel1.Text = "WLevel1";
+            lvcWeaponLevelReqWLevel1.Width = 70;
             // 
             // lvcWeaponLevelReqWLevel2
             // 
-            this.lvcWeaponLevelReqWLevel2.AspectName = "WLevel2";
-            this.lvcWeaponLevelReqWLevel2.Text = "WLevel2";
-            this.lvcWeaponLevelReqWLevel2.Width = 70;
+            lvcWeaponLevelReqWLevel2.AspectName = "WLevel2";
+            lvcWeaponLevelReqWLevel2.Text = "WLevel2";
+            lvcWeaponLevelReqWLevel2.Width = 70;
             // 
             // lvcWeaponLevelReqWLevel3
             // 
-            this.lvcWeaponLevelReqWLevel3.AspectName = "WLevel3";
-            this.lvcWeaponLevelReqWLevel3.Text = "WLevel3";
-            this.lvcWeaponLevelReqWLevel3.Width = 70;
+            lvcWeaponLevelReqWLevel3.AspectName = "WLevel3";
+            lvcWeaponLevelReqWLevel3.Text = "WLevel3";
+            lvcWeaponLevelReqWLevel3.Width = 70;
             // 
             // lvcWeaponLevelReqWLevel4
             // 
-            this.lvcWeaponLevelReqWLevel4.AspectName = "WLevel4";
-            this.lvcWeaponLevelReqWLevel4.Text = "WLevel4";
-            this.lvcWeaponLevelReqWLevel4.Width = 70;
+            lvcWeaponLevelReqWLevel4.AspectName = "WLevel4";
+            lvcWeaponLevelReqWLevel4.Text = "WLevel4";
+            lvcWeaponLevelReqWLevel4.Width = 70;
             // 
             // tabCurveCalc
             // 
-            this.tabCurveCalc.Controls.Add(this.olvCurveCalc);
-            this.tabCurveCalc.Location = new System.Drawing.Point(4, 22);
-            this.tabCurveCalc.Name = "tabCurveCalc";
-            this.tabCurveCalc.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCurveCalc.Size = new System.Drawing.Size(756, 480);
-            this.tabCurveCalc.TabIndex = 9;
-            this.tabCurveCalc.Text = "Curve Calc";
-            this.tabCurveCalc.UseVisualStyleBackColor = true;
+            tabCurveCalc.Controls.Add(olvCurveCalc);
+            tabCurveCalc.Location = new System.Drawing.Point(4, 24);
+            tabCurveCalc.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabCurveCalc.Name = "tabCurveCalc";
+            tabCurveCalc.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabCurveCalc.Size = new System.Drawing.Size(883, 556);
+            tabCurveCalc.TabIndex = 9;
+            tabCurveCalc.Text = "Curve Calc";
+            tabCurveCalc.UseVisualStyleBackColor = true;
             // 
             // olvCurveCalc
             // 
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcID);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcNameStatus);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcHPGroup1);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcHPGroup2);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcHPGroup3);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcHPGroup4);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcHPGroup5);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcHPGroup6);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcMPGroup1);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcMPGroup2);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcMPGroup3);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcMPGroup4);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcMPGroup5);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcMPGroup6);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcAtkGroup1);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcAtkGroup2);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcAtkGroup3);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcAtkGroup4);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcAtkGroup5);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcAtkGroup6);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcDefGroup1);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcDefGroup2);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcDefGroup3);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcDefGroup4);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcDefGroup5);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcDefGroup6);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcAgiGroup1);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcAgiGroup2);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcAgiGroup3);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcAgiGroup4);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcAgiGroup5);
-            this.olvCurveCalc.AllColumns.Add(this.lvcCurveCalcAgiGroup6);
-            this.olvCurveCalc.AllowColumnReorder = true;
-            this.olvCurveCalc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvCurveCalc.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.olvCurveCalc.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvcCurveCalcID,
-            this.lvcCurveCalcNameStatus,
-            this.lvcCurveCalcHPGroup1,
-            this.lvcCurveCalcHPGroup2,
-            this.lvcCurveCalcHPGroup3,
-            this.lvcCurveCalcHPGroup4,
-            this.lvcCurveCalcHPGroup5,
-            this.lvcCurveCalcHPGroup6,
-            this.lvcCurveCalcMPGroup1,
-            this.lvcCurveCalcMPGroup2,
-            this.lvcCurveCalcMPGroup3,
-            this.lvcCurveCalcMPGroup4,
-            this.lvcCurveCalcMPGroup5,
-            this.lvcCurveCalcMPGroup6,
-            this.lvcCurveCalcAtkGroup1,
-            this.lvcCurveCalcAtkGroup2,
-            this.lvcCurveCalcAtkGroup3,
-            this.lvcCurveCalcAtkGroup4,
-            this.lvcCurveCalcAtkGroup5,
-            this.lvcCurveCalcAtkGroup6,
-            this.lvcCurveCalcDefGroup1,
-            this.lvcCurveCalcDefGroup2,
-            this.lvcCurveCalcDefGroup3,
-            this.lvcCurveCalcDefGroup4,
-            this.lvcCurveCalcDefGroup5,
-            this.lvcCurveCalcDefGroup6,
-            this.lvcCurveCalcAgiGroup1,
-            this.lvcCurveCalcAgiGroup2,
-            this.lvcCurveCalcAgiGroup3,
-            this.lvcCurveCalcAgiGroup4,
-            this.lvcCurveCalcAgiGroup5,
-            this.lvcCurveCalcAgiGroup6});
-            this.olvCurveCalc.Cursor = System.Windows.Forms.Cursors.Default;
-            this.olvCurveCalc.FullRowSelect = true;
-            this.olvCurveCalc.GridLines = true;
-            this.olvCurveCalc.HasCollapsibleGroups = false;
-            this.olvCurveCalc.HideSelection = false;
-            this.olvCurveCalc.Location = new System.Drawing.Point(3, 3);
-            this.olvCurveCalc.MenuLabelGroupBy = "";
-            this.olvCurveCalc.Name = "olvCurveCalc";
-            this.olvCurveCalc.ShowGroups = false;
-            this.olvCurveCalc.Size = new System.Drawing.Size(750, 474);
-            this.olvCurveCalc.TabIndex = 1;
-            this.olvCurveCalc.UseAlternatingBackColors = true;
-            this.olvCurveCalc.UseCompatibleStateImageBehavior = false;
-            this.olvCurveCalc.View = System.Windows.Forms.View.Details;
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcID);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcNameStatus);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcHPGroup1);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcHPGroup2);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcHPGroup3);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcHPGroup4);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcHPGroup5);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcHPGroup6);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcMPGroup1);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcMPGroup2);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcMPGroup3);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcMPGroup4);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcMPGroup5);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcMPGroup6);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcAtkGroup1);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcAtkGroup2);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcAtkGroup3);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcAtkGroup4);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcAtkGroup5);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcAtkGroup6);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcDefGroup1);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcDefGroup2);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcDefGroup3);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcDefGroup4);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcDefGroup5);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcDefGroup6);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcAgiGroup1);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcAgiGroup2);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcAgiGroup3);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcAgiGroup4);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcAgiGroup5);
+            olvCurveCalc.AllColumns.Add(lvcCurveCalcAgiGroup6);
+            olvCurveCalc.AllowColumnReorder = true;
+            olvCurveCalc.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            olvCurveCalc.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
+            olvCurveCalc.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcCurveCalcID, lvcCurveCalcNameStatus, lvcCurveCalcHPGroup1, lvcCurveCalcHPGroup2, lvcCurveCalcHPGroup3, lvcCurveCalcHPGroup4, lvcCurveCalcHPGroup5, lvcCurveCalcHPGroup6, lvcCurveCalcMPGroup1, lvcCurveCalcMPGroup2, lvcCurveCalcMPGroup3, lvcCurveCalcMPGroup4, lvcCurveCalcMPGroup5, lvcCurveCalcMPGroup6, lvcCurveCalcAtkGroup1, lvcCurveCalcAtkGroup2, lvcCurveCalcAtkGroup3, lvcCurveCalcAtkGroup4, lvcCurveCalcAtkGroup5, lvcCurveCalcAtkGroup6, lvcCurveCalcDefGroup1, lvcCurveCalcDefGroup2, lvcCurveCalcDefGroup3, lvcCurveCalcDefGroup4, lvcCurveCalcDefGroup5, lvcCurveCalcDefGroup6, lvcCurveCalcAgiGroup1, lvcCurveCalcAgiGroup2, lvcCurveCalcAgiGroup3, lvcCurveCalcAgiGroup4, lvcCurveCalcAgiGroup5, lvcCurveCalcAgiGroup6 });
+            olvCurveCalc.FullRowSelect = true;
+            olvCurveCalc.GridLines = true;
+            olvCurveCalc.HasCollapsibleGroups = false;
+            olvCurveCalc.Location = new System.Drawing.Point(4, 3);
+            olvCurveCalc.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            olvCurveCalc.MenuLabelGroupBy = "";
+            olvCurveCalc.Name = "olvCurveCalc";
+            olvCurveCalc.ShowGroups = false;
+            olvCurveCalc.Size = new System.Drawing.Size(874, 546);
+            olvCurveCalc.TabIndex = 1;
+            olvCurveCalc.UseAlternatingBackColors = true;
+            olvCurveCalc.UseCompatibleStateImageBehavior = false;
+            olvCurveCalc.View = System.Windows.Forms.View.Details;
             // 
             // lvcCurveCalcID
             // 
-            this.lvcCurveCalcID.AspectName = "ID";
-            this.lvcCurveCalcID.AspectToStringFormat = "{0:X}";
-            this.lvcCurveCalcID.IsEditable = false;
-            this.lvcCurveCalcID.Text = "ID";
-            this.lvcCurveCalcID.Width = 30;
+            lvcCurveCalcID.AspectName = "ID";
+            lvcCurveCalcID.AspectToStringFormat = "{0:X}";
+            lvcCurveCalcID.IsEditable = false;
+            lvcCurveCalcID.Text = "ID";
+            lvcCurveCalcID.Width = 30;
             // 
             // lvcCurveCalcNameStatus
             // 
-            this.lvcCurveCalcNameStatus.AspectName = "Name";
-            this.lvcCurveCalcNameStatus.IsEditable = false;
-            this.lvcCurveCalcNameStatus.Text = "nameStatus";
-            this.lvcCurveCalcNameStatus.Width = 90;
+            lvcCurveCalcNameStatus.AspectName = "Name";
+            lvcCurveCalcNameStatus.IsEditable = false;
+            lvcCurveCalcNameStatus.Text = "nameStatus";
+            lvcCurveCalcNameStatus.Width = 90;
             // 
             // lvcCurveCalcHPGroup1
             // 
-            this.lvcCurveCalcHPGroup1.AspectName = "HPgroup1";
-            this.lvcCurveCalcHPGroup1.AspectToStringFormat = "";
-            this.lvcCurveCalcHPGroup1.IsEditable = false;
-            this.lvcCurveCalcHPGroup1.Text = "HPgroup1";
+            lvcCurveCalcHPGroup1.AspectName = "HPgroup1";
+            lvcCurveCalcHPGroup1.AspectToStringFormat = "";
+            lvcCurveCalcHPGroup1.IsEditable = false;
+            lvcCurveCalcHPGroup1.Text = "HPgroup1";
             // 
             // lvcCurveCalcHPGroup2
             // 
-            this.lvcCurveCalcHPGroup2.AspectName = "HPgroup2";
-            this.lvcCurveCalcHPGroup2.AspectToStringFormat = "";
-            this.lvcCurveCalcHPGroup2.IsEditable = false;
-            this.lvcCurveCalcHPGroup2.Text = "HPgroup2";
+            lvcCurveCalcHPGroup2.AspectName = "HPgroup2";
+            lvcCurveCalcHPGroup2.AspectToStringFormat = "";
+            lvcCurveCalcHPGroup2.IsEditable = false;
+            lvcCurveCalcHPGroup2.Text = "HPgroup2";
             // 
             // lvcCurveCalcHPGroup3
             // 
-            this.lvcCurveCalcHPGroup3.AspectName = "HPgroup3";
-            this.lvcCurveCalcHPGroup3.AspectToStringFormat = "";
-            this.lvcCurveCalcHPGroup3.IsEditable = false;
-            this.lvcCurveCalcHPGroup3.Text = "HPgroup3";
+            lvcCurveCalcHPGroup3.AspectName = "HPgroup3";
+            lvcCurveCalcHPGroup3.AspectToStringFormat = "";
+            lvcCurveCalcHPGroup3.IsEditable = false;
+            lvcCurveCalcHPGroup3.Text = "HPgroup3";
             // 
             // lvcCurveCalcHPGroup4
             // 
-            this.lvcCurveCalcHPGroup4.AspectName = "HPgroup4";
-            this.lvcCurveCalcHPGroup4.AspectToStringFormat = "";
-            this.lvcCurveCalcHPGroup4.IsEditable = false;
-            this.lvcCurveCalcHPGroup4.Text = "HPgroup4";
+            lvcCurveCalcHPGroup4.AspectName = "HPgroup4";
+            lvcCurveCalcHPGroup4.AspectToStringFormat = "";
+            lvcCurveCalcHPGroup4.IsEditable = false;
+            lvcCurveCalcHPGroup4.Text = "HPgroup4";
             // 
             // lvcCurveCalcHPGroup5
             // 
-            this.lvcCurveCalcHPGroup5.AspectName = "HPgroup5";
-            this.lvcCurveCalcHPGroup5.AspectToStringFormat = "";
-            this.lvcCurveCalcHPGroup5.IsEditable = false;
-            this.lvcCurveCalcHPGroup5.Text = "HPgroup5";
+            lvcCurveCalcHPGroup5.AspectName = "HPgroup5";
+            lvcCurveCalcHPGroup5.AspectToStringFormat = "";
+            lvcCurveCalcHPGroup5.IsEditable = false;
+            lvcCurveCalcHPGroup5.Text = "HPgroup5";
             // 
             // lvcCurveCalcHPGroup6
             // 
-            this.lvcCurveCalcHPGroup6.AspectName = "HPgroup6";
-            this.lvcCurveCalcHPGroup6.AspectToStringFormat = "";
-            this.lvcCurveCalcHPGroup6.IsEditable = false;
-            this.lvcCurveCalcHPGroup6.Text = "HPgroup6";
+            lvcCurveCalcHPGroup6.AspectName = "HPgroup6";
+            lvcCurveCalcHPGroup6.AspectToStringFormat = "";
+            lvcCurveCalcHPGroup6.IsEditable = false;
+            lvcCurveCalcHPGroup6.Text = "HPgroup6";
             // 
             // lvcCurveCalcMPGroup1
             // 
-            this.lvcCurveCalcMPGroup1.AspectName = "MPgroup1";
-            this.lvcCurveCalcMPGroup1.AspectToStringFormat = "";
-            this.lvcCurveCalcMPGroup1.IsEditable = false;
-            this.lvcCurveCalcMPGroup1.Text = "MPgroup1";
-            this.lvcCurveCalcMPGroup1.Width = 62;
+            lvcCurveCalcMPGroup1.AspectName = "MPgroup1";
+            lvcCurveCalcMPGroup1.AspectToStringFormat = "";
+            lvcCurveCalcMPGroup1.IsEditable = false;
+            lvcCurveCalcMPGroup1.Text = "MPgroup1";
+            lvcCurveCalcMPGroup1.Width = 62;
             // 
             // lvcCurveCalcMPGroup2
             // 
-            this.lvcCurveCalcMPGroup2.AspectName = "MPgroup2";
-            this.lvcCurveCalcMPGroup2.AspectToStringFormat = "";
-            this.lvcCurveCalcMPGroup2.IsEditable = false;
-            this.lvcCurveCalcMPGroup2.Text = "MPgroup2";
-            this.lvcCurveCalcMPGroup2.Width = 62;
+            lvcCurveCalcMPGroup2.AspectName = "MPgroup2";
+            lvcCurveCalcMPGroup2.AspectToStringFormat = "";
+            lvcCurveCalcMPGroup2.IsEditable = false;
+            lvcCurveCalcMPGroup2.Text = "MPgroup2";
+            lvcCurveCalcMPGroup2.Width = 62;
             // 
             // lvcCurveCalcMPGroup3
             // 
-            this.lvcCurveCalcMPGroup3.AspectName = "MPgroup3";
-            this.lvcCurveCalcMPGroup3.AspectToStringFormat = "";
-            this.lvcCurveCalcMPGroup3.IsEditable = false;
-            this.lvcCurveCalcMPGroup3.Text = "MPgroup3";
-            this.lvcCurveCalcMPGroup3.Width = 62;
+            lvcCurveCalcMPGroup3.AspectName = "MPgroup3";
+            lvcCurveCalcMPGroup3.AspectToStringFormat = "";
+            lvcCurveCalcMPGroup3.IsEditable = false;
+            lvcCurveCalcMPGroup3.Text = "MPgroup3";
+            lvcCurveCalcMPGroup3.Width = 62;
             // 
             // lvcCurveCalcMPGroup4
             // 
-            this.lvcCurveCalcMPGroup4.AspectName = "MPgroup4";
-            this.lvcCurveCalcMPGroup4.AspectToStringFormat = "";
-            this.lvcCurveCalcMPGroup4.IsEditable = false;
-            this.lvcCurveCalcMPGroup4.Text = "MPgroup4";
-            this.lvcCurveCalcMPGroup4.Width = 62;
+            lvcCurveCalcMPGroup4.AspectName = "MPgroup4";
+            lvcCurveCalcMPGroup4.AspectToStringFormat = "";
+            lvcCurveCalcMPGroup4.IsEditable = false;
+            lvcCurveCalcMPGroup4.Text = "MPgroup4";
+            lvcCurveCalcMPGroup4.Width = 62;
             // 
             // lvcCurveCalcMPGroup5
             // 
-            this.lvcCurveCalcMPGroup5.AspectName = "MPgroup5";
-            this.lvcCurveCalcMPGroup5.AspectToStringFormat = "";
-            this.lvcCurveCalcMPGroup5.IsEditable = false;
-            this.lvcCurveCalcMPGroup5.Text = "MPgroup5";
-            this.lvcCurveCalcMPGroup5.Width = 62;
+            lvcCurveCalcMPGroup5.AspectName = "MPgroup5";
+            lvcCurveCalcMPGroup5.AspectToStringFormat = "";
+            lvcCurveCalcMPGroup5.IsEditable = false;
+            lvcCurveCalcMPGroup5.Text = "MPgroup5";
+            lvcCurveCalcMPGroup5.Width = 62;
             // 
             // lvcCurveCalcMPGroup6
             // 
-            this.lvcCurveCalcMPGroup6.AspectName = "MPgroup6";
-            this.lvcCurveCalcMPGroup6.AspectToStringFormat = "";
-            this.lvcCurveCalcMPGroup6.IsEditable = false;
-            this.lvcCurveCalcMPGroup6.Text = "MPgroup6";
-            this.lvcCurveCalcMPGroup6.Width = 62;
+            lvcCurveCalcMPGroup6.AspectName = "MPgroup6";
+            lvcCurveCalcMPGroup6.AspectToStringFormat = "";
+            lvcCurveCalcMPGroup6.IsEditable = false;
+            lvcCurveCalcMPGroup6.Text = "MPgroup6";
+            lvcCurveCalcMPGroup6.Width = 62;
             // 
             // lvcCurveCalcAtkGroup1
             // 
-            this.lvcCurveCalcAtkGroup1.AspectName = "Atkgroup1";
-            this.lvcCurveCalcAtkGroup1.AspectToStringFormat = "";
-            this.lvcCurveCalcAtkGroup1.IsEditable = false;
-            this.lvcCurveCalcAtkGroup1.Text = "Atkgroup1";
-            this.lvcCurveCalcAtkGroup1.Width = 67;
+            lvcCurveCalcAtkGroup1.AspectName = "Atkgroup1";
+            lvcCurveCalcAtkGroup1.AspectToStringFormat = "";
+            lvcCurveCalcAtkGroup1.IsEditable = false;
+            lvcCurveCalcAtkGroup1.Text = "Atkgroup1";
+            lvcCurveCalcAtkGroup1.Width = 67;
             // 
             // lvcCurveCalcAtkGroup2
             // 
-            this.lvcCurveCalcAtkGroup2.AspectName = "Atkgroup2";
-            this.lvcCurveCalcAtkGroup2.AspectToStringFormat = "";
-            this.lvcCurveCalcAtkGroup2.IsEditable = false;
-            this.lvcCurveCalcAtkGroup2.Text = "Atkgroup2";
-            this.lvcCurveCalcAtkGroup2.Width = 67;
+            lvcCurveCalcAtkGroup2.AspectName = "Atkgroup2";
+            lvcCurveCalcAtkGroup2.AspectToStringFormat = "";
+            lvcCurveCalcAtkGroup2.IsEditable = false;
+            lvcCurveCalcAtkGroup2.Text = "Atkgroup2";
+            lvcCurveCalcAtkGroup2.Width = 67;
             // 
             // lvcCurveCalcAtkGroup3
             // 
-            this.lvcCurveCalcAtkGroup3.AspectName = "Atkgroup3";
-            this.lvcCurveCalcAtkGroup3.AspectToStringFormat = "";
-            this.lvcCurveCalcAtkGroup3.IsEditable = false;
-            this.lvcCurveCalcAtkGroup3.Text = "Atkgroup3";
-            this.lvcCurveCalcAtkGroup3.Width = 67;
+            lvcCurveCalcAtkGroup3.AspectName = "Atkgroup3";
+            lvcCurveCalcAtkGroup3.AspectToStringFormat = "";
+            lvcCurveCalcAtkGroup3.IsEditable = false;
+            lvcCurveCalcAtkGroup3.Text = "Atkgroup3";
+            lvcCurveCalcAtkGroup3.Width = 67;
             // 
             // lvcCurveCalcAtkGroup4
             // 
-            this.lvcCurveCalcAtkGroup4.AspectName = "Atkgroup4";
-            this.lvcCurveCalcAtkGroup4.AspectToStringFormat = "";
-            this.lvcCurveCalcAtkGroup4.IsEditable = false;
-            this.lvcCurveCalcAtkGroup4.Text = "Atkgroup4";
-            this.lvcCurveCalcAtkGroup4.Width = 67;
+            lvcCurveCalcAtkGroup4.AspectName = "Atkgroup4";
+            lvcCurveCalcAtkGroup4.AspectToStringFormat = "";
+            lvcCurveCalcAtkGroup4.IsEditable = false;
+            lvcCurveCalcAtkGroup4.Text = "Atkgroup4";
+            lvcCurveCalcAtkGroup4.Width = 67;
             // 
             // lvcCurveCalcAtkGroup5
             // 
-            this.lvcCurveCalcAtkGroup5.AspectName = "Atkgroup5";
-            this.lvcCurveCalcAtkGroup5.AspectToStringFormat = "";
-            this.lvcCurveCalcAtkGroup5.IsEditable = false;
-            this.lvcCurveCalcAtkGroup5.Text = "Atkgroup5";
-            this.lvcCurveCalcAtkGroup5.Width = 67;
+            lvcCurveCalcAtkGroup5.AspectName = "Atkgroup5";
+            lvcCurveCalcAtkGroup5.AspectToStringFormat = "";
+            lvcCurveCalcAtkGroup5.IsEditable = false;
+            lvcCurveCalcAtkGroup5.Text = "Atkgroup5";
+            lvcCurveCalcAtkGroup5.Width = 67;
             // 
             // lvcCurveCalcAtkGroup6
             // 
-            this.lvcCurveCalcAtkGroup6.AspectName = "Atkgroup6";
-            this.lvcCurveCalcAtkGroup6.AspectToStringFormat = "";
-            this.lvcCurveCalcAtkGroup6.IsEditable = false;
-            this.lvcCurveCalcAtkGroup6.Text = "Atkgroup6";
-            this.lvcCurveCalcAtkGroup6.Width = 67;
+            lvcCurveCalcAtkGroup6.AspectName = "Atkgroup6";
+            lvcCurveCalcAtkGroup6.AspectToStringFormat = "";
+            lvcCurveCalcAtkGroup6.IsEditable = false;
+            lvcCurveCalcAtkGroup6.Text = "Atkgroup6";
+            lvcCurveCalcAtkGroup6.Width = 67;
             // 
             // lvcCurveCalcDefGroup1
             // 
-            this.lvcCurveCalcDefGroup1.AspectName = "Defgroup1";
-            this.lvcCurveCalcDefGroup1.AspectToStringFormat = "";
-            this.lvcCurveCalcDefGroup1.IsEditable = false;
-            this.lvcCurveCalcDefGroup1.Text = "Defgroup1";
-            this.lvcCurveCalcDefGroup1.Width = 67;
+            lvcCurveCalcDefGroup1.AspectName = "Defgroup1";
+            lvcCurveCalcDefGroup1.AspectToStringFormat = "";
+            lvcCurveCalcDefGroup1.IsEditable = false;
+            lvcCurveCalcDefGroup1.Text = "Defgroup1";
+            lvcCurveCalcDefGroup1.Width = 67;
             // 
             // lvcCurveCalcDefGroup2
             // 
-            this.lvcCurveCalcDefGroup2.AspectName = "Defgroup2";
-            this.lvcCurveCalcDefGroup2.AspectToStringFormat = "";
-            this.lvcCurveCalcDefGroup2.IsEditable = false;
-            this.lvcCurveCalcDefGroup2.Text = "Defgroup2";
-            this.lvcCurveCalcDefGroup2.Width = 67;
+            lvcCurveCalcDefGroup2.AspectName = "Defgroup2";
+            lvcCurveCalcDefGroup2.AspectToStringFormat = "";
+            lvcCurveCalcDefGroup2.IsEditable = false;
+            lvcCurveCalcDefGroup2.Text = "Defgroup2";
+            lvcCurveCalcDefGroup2.Width = 67;
             // 
             // lvcCurveCalcDefGroup3
             // 
-            this.lvcCurveCalcDefGroup3.AspectName = "Defgroup3";
-            this.lvcCurveCalcDefGroup3.AspectToStringFormat = "";
-            this.lvcCurveCalcDefGroup3.IsEditable = false;
-            this.lvcCurveCalcDefGroup3.Text = "Defgroup3";
-            this.lvcCurveCalcDefGroup3.Width = 67;
+            lvcCurveCalcDefGroup3.AspectName = "Defgroup3";
+            lvcCurveCalcDefGroup3.AspectToStringFormat = "";
+            lvcCurveCalcDefGroup3.IsEditable = false;
+            lvcCurveCalcDefGroup3.Text = "Defgroup3";
+            lvcCurveCalcDefGroup3.Width = 67;
             // 
             // lvcCurveCalcDefGroup4
             // 
-            this.lvcCurveCalcDefGroup4.AspectName = "Defgroup4";
-            this.lvcCurveCalcDefGroup4.AspectToStringFormat = "";
-            this.lvcCurveCalcDefGroup4.IsEditable = false;
-            this.lvcCurveCalcDefGroup4.Text = "Defgroup4";
-            this.lvcCurveCalcDefGroup4.Width = 67;
+            lvcCurveCalcDefGroup4.AspectName = "Defgroup4";
+            lvcCurveCalcDefGroup4.AspectToStringFormat = "";
+            lvcCurveCalcDefGroup4.IsEditable = false;
+            lvcCurveCalcDefGroup4.Text = "Defgroup4";
+            lvcCurveCalcDefGroup4.Width = 67;
             // 
             // lvcCurveCalcDefGroup5
             // 
-            this.lvcCurveCalcDefGroup5.AspectName = "Defgroup5";
-            this.lvcCurveCalcDefGroup5.AspectToStringFormat = "";
-            this.lvcCurveCalcDefGroup5.IsEditable = false;
-            this.lvcCurveCalcDefGroup5.Text = "Defgroup5";
-            this.lvcCurveCalcDefGroup5.Width = 67;
+            lvcCurveCalcDefGroup5.AspectName = "Defgroup5";
+            lvcCurveCalcDefGroup5.AspectToStringFormat = "";
+            lvcCurveCalcDefGroup5.IsEditable = false;
+            lvcCurveCalcDefGroup5.Text = "Defgroup5";
+            lvcCurveCalcDefGroup5.Width = 67;
             // 
             // lvcCurveCalcDefGroup6
             // 
-            this.lvcCurveCalcDefGroup6.AspectName = "Defgroup6";
-            this.lvcCurveCalcDefGroup6.AspectToStringFormat = "";
-            this.lvcCurveCalcDefGroup6.IsEditable = false;
-            this.lvcCurveCalcDefGroup6.Text = "Defgroup6";
-            this.lvcCurveCalcDefGroup6.Width = 67;
+            lvcCurveCalcDefGroup6.AspectName = "Defgroup6";
+            lvcCurveCalcDefGroup6.AspectToStringFormat = "";
+            lvcCurveCalcDefGroup6.IsEditable = false;
+            lvcCurveCalcDefGroup6.Text = "Defgroup6";
+            lvcCurveCalcDefGroup6.Width = 67;
             // 
             // lvcCurveCalcAgiGroup1
             // 
-            this.lvcCurveCalcAgiGroup1.AspectName = "Agigroup1";
-            this.lvcCurveCalcAgiGroup1.AspectToStringFormat = "";
-            this.lvcCurveCalcAgiGroup1.IsEditable = false;
-            this.lvcCurveCalcAgiGroup1.Text = "Agigroup1";
-            this.lvcCurveCalcAgiGroup1.Width = 67;
+            lvcCurveCalcAgiGroup1.AspectName = "Agigroup1";
+            lvcCurveCalcAgiGroup1.AspectToStringFormat = "";
+            lvcCurveCalcAgiGroup1.IsEditable = false;
+            lvcCurveCalcAgiGroup1.Text = "Agigroup1";
+            lvcCurveCalcAgiGroup1.Width = 67;
             // 
             // lvcCurveCalcAgiGroup2
             // 
-            this.lvcCurveCalcAgiGroup2.AspectName = "Agigroup2";
-            this.lvcCurveCalcAgiGroup2.AspectToStringFormat = "";
-            this.lvcCurveCalcAgiGroup2.IsEditable = false;
-            this.lvcCurveCalcAgiGroup2.Text = "Agigroup2";
-            this.lvcCurveCalcAgiGroup2.Width = 67;
+            lvcCurveCalcAgiGroup2.AspectName = "Agigroup2";
+            lvcCurveCalcAgiGroup2.AspectToStringFormat = "";
+            lvcCurveCalcAgiGroup2.IsEditable = false;
+            lvcCurveCalcAgiGroup2.Text = "Agigroup2";
+            lvcCurveCalcAgiGroup2.Width = 67;
             // 
             // lvcCurveCalcAgiGroup3
             // 
-            this.lvcCurveCalcAgiGroup3.AspectName = "Agigroup3";
-            this.lvcCurveCalcAgiGroup3.AspectToStringFormat = "";
-            this.lvcCurveCalcAgiGroup3.IsEditable = false;
-            this.lvcCurveCalcAgiGroup3.Text = "Agigroup3";
-            this.lvcCurveCalcAgiGroup3.Width = 67;
+            lvcCurveCalcAgiGroup3.AspectName = "Agigroup3";
+            lvcCurveCalcAgiGroup3.AspectToStringFormat = "";
+            lvcCurveCalcAgiGroup3.IsEditable = false;
+            lvcCurveCalcAgiGroup3.Text = "Agigroup3";
+            lvcCurveCalcAgiGroup3.Width = 67;
             // 
             // lvcCurveCalcAgiGroup4
             // 
-            this.lvcCurveCalcAgiGroup4.AspectName = "Agigroup4";
-            this.lvcCurveCalcAgiGroup4.AspectToStringFormat = "";
-            this.lvcCurveCalcAgiGroup4.IsEditable = false;
-            this.lvcCurveCalcAgiGroup4.Text = "Agigroup4";
-            this.lvcCurveCalcAgiGroup4.Width = 67;
+            lvcCurveCalcAgiGroup4.AspectName = "Agigroup4";
+            lvcCurveCalcAgiGroup4.AspectToStringFormat = "";
+            lvcCurveCalcAgiGroup4.IsEditable = false;
+            lvcCurveCalcAgiGroup4.Text = "Agigroup4";
+            lvcCurveCalcAgiGroup4.Width = 67;
             // 
             // lvcCurveCalcAgiGroup5
             // 
-            this.lvcCurveCalcAgiGroup5.AspectName = "Agigroup5";
-            this.lvcCurveCalcAgiGroup5.AspectToStringFormat = "";
-            this.lvcCurveCalcAgiGroup5.IsEditable = false;
-            this.lvcCurveCalcAgiGroup5.Text = "Agigroup5";
-            this.lvcCurveCalcAgiGroup5.Width = 67;
+            lvcCurveCalcAgiGroup5.AspectName = "Agigroup5";
+            lvcCurveCalcAgiGroup5.AspectToStringFormat = "";
+            lvcCurveCalcAgiGroup5.IsEditable = false;
+            lvcCurveCalcAgiGroup5.Text = "Agigroup5";
+            lvcCurveCalcAgiGroup5.Width = 67;
             // 
             // lvcCurveCalcAgiGroup6
             // 
-            this.lvcCurveCalcAgiGroup6.AspectName = "Agigroup6";
-            this.lvcCurveCalcAgiGroup6.AspectToStringFormat = "";
-            this.lvcCurveCalcAgiGroup6.IsEditable = false;
-            this.lvcCurveCalcAgiGroup6.Text = "Agigroup6";
-            this.lvcCurveCalcAgiGroup6.Width = 67;
+            lvcCurveCalcAgiGroup6.AspectName = "Agigroup6";
+            lvcCurveCalcAgiGroup6.AspectToStringFormat = "";
+            lvcCurveCalcAgiGroup6.IsEditable = false;
+            lvcCurveCalcAgiGroup6.Text = "Agigroup6";
+            lvcCurveCalcAgiGroup6.Width = 67;
             // 
             // tabCurveGraph
             // 
-            this.tabCurveGraph.Controls.Add(this.cbCurveGraphCharacter);
-            this.tabCurveGraph.Controls.Add(this.CurveGraph);
-            this.tabCurveGraph.Location = new System.Drawing.Point(4, 22);
-            this.tabCurveGraph.Name = "tabCurveGraph";
-            this.tabCurveGraph.Size = new System.Drawing.Size(756, 480);
-            this.tabCurveGraph.TabIndex = 10;
-            this.tabCurveGraph.Text = "Curve Graph";
-            this.tabCurveGraph.UseVisualStyleBackColor = true;
+            tabCurveGraph.Controls.Add(cbCurveGraphCharacter);
+            tabCurveGraph.Controls.Add(CurveGraph);
+            tabCurveGraph.Location = new System.Drawing.Point(4, 24);
+            tabCurveGraph.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabCurveGraph.Name = "tabCurveGraph";
+            tabCurveGraph.Size = new System.Drawing.Size(883, 556);
+            tabCurveGraph.TabIndex = 10;
+            tabCurveGraph.Text = "Curve Graph";
+            tabCurveGraph.UseVisualStyleBackColor = true;
             // 
             // cbCurveGraphCharacter
             // 
-            this.cbCurveGraphCharacter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCurveGraphCharacter.FormattingEnabled = true;
-            this.cbCurveGraphCharacter.Location = new System.Drawing.Point(4, 4);
-            this.cbCurveGraphCharacter.Name = "cbCurveGraphCharacter";
-            this.cbCurveGraphCharacter.Size = new System.Drawing.Size(133, 21);
-            this.cbCurveGraphCharacter.TabIndex = 1;
-            this.cbCurveGraphCharacter.SelectedIndexChanged += new System.EventHandler(this.CurveGraphCharacterComboBox_SelectedIndexChanged);
+            cbCurveGraphCharacter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbCurveGraphCharacter.FormattingEnabled = true;
+            cbCurveGraphCharacter.Location = new System.Drawing.Point(5, 5);
+            cbCurveGraphCharacter.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cbCurveGraphCharacter.Name = "cbCurveGraphCharacter";
+            cbCurveGraphCharacter.Size = new System.Drawing.Size(154, 23);
+            cbCurveGraphCharacter.TabIndex = 1;
+            cbCurveGraphCharacter.SelectedIndexChanged += CurveGraphCharacterComboBox_SelectedIndexChanged;
             // 
             // CurveGraph
             // 
-            this.CurveGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            CurveGraph.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             chartArea1.AxisX.Minimum = 1D;
             chartArea1.Name = "ChartArea1";
-            this.CurveGraph.ChartAreas.Add(chartArea1);
+            CurveGraph.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
-            this.CurveGraph.Legends.Add(legend1);
-            this.CurveGraph.Location = new System.Drawing.Point(4, 31);
-            this.CurveGraph.Name = "CurveGraph";
+            CurveGraph.Legends.Add(legend1);
+            CurveGraph.Location = new System.Drawing.Point(5, 36);
+            CurveGraph.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            CurveGraph.Name = "CurveGraph";
             series1.BorderWidth = 2;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series1.Color = System.Drawing.Color.FromArgb(  192,   192,   0);
             series1.Legend = "Legend1";
             series1.Name = "HP";
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2240,7 +2041,7 @@ namespace SF3.X033_X031_Editor.Forms
             series2.BorderWidth = 2;
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series2.Color = System.Drawing.Color.FromArgb(  192,   0,   192);
             series2.Legend = "Legend1";
             series2.Name = "MP";
             series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2264,7 +2065,7 @@ namespace SF3.X033_X031_Editor.Forms
             series5.BorderWidth = 2;
             series5.ChartArea = "ChartArea1";
             series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series5.Color = System.Drawing.Color.FromArgb(  0,   0,   192);
             series5.Legend = "Legend1";
             series5.Name = "Agi";
             series5.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2273,7 +2074,7 @@ namespace SF3.X033_X031_Editor.Forms
             series6.BorderWidth = 2;
             series6.ChartArea = "ChartArea1";
             series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series6.Color = System.Drawing.Color.FromArgb(  192,   192,   0);
             series6.Legend = "Legend1";
             series6.Name = "Likely HP";
             series6.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2282,7 +2083,7 @@ namespace SF3.X033_X031_Editor.Forms
             series7.BorderWidth = 2;
             series7.ChartArea = "ChartArea1";
             series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series7.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series7.Color = System.Drawing.Color.FromArgb(  192,   0,   192);
             series7.Legend = "Legend1";
             series7.Name = "Likely MP";
             series7.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2309,7 +2110,7 @@ namespace SF3.X033_X031_Editor.Forms
             series10.BorderWidth = 2;
             series10.ChartArea = "ChartArea1";
             series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series10.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series10.Color = System.Drawing.Color.FromArgb(  128,   0,   0,   192);
             series10.Legend = "Legend1";
             series10.Name = "Likely Agi";
             series10.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2317,7 +2118,7 @@ namespace SF3.X033_X031_Editor.Forms
             series11.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent50;
             series11.ChartArea = "ChartArea1";
             series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series11.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series11.Color = System.Drawing.Color.FromArgb(  128,   192,   192,   0);
             series11.Legend = "Legend1";
             series11.Name = "HP Range 1 (50% Likely)";
             series11.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2326,7 +2127,7 @@ namespace SF3.X033_X031_Editor.Forms
             series12.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent50;
             series12.ChartArea = "ChartArea1";
             series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series12.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series12.Color = System.Drawing.Color.FromArgb(  128,   192,   0,   192);
             series12.Legend = "Legend1";
             series12.Name = "MP Range 1 (50% Likely)";
             series12.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2335,7 +2136,7 @@ namespace SF3.X033_X031_Editor.Forms
             series13.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent50;
             series13.ChartArea = "ChartArea1";
             series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series13.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            series13.Color = System.Drawing.Color.FromArgb(  128,   255,   0,   0);
             series13.Legend = "Legend1";
             series13.Name = "Atk Range 1 (50% Likely)";
             series13.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2344,7 +2145,7 @@ namespace SF3.X033_X031_Editor.Forms
             series14.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent50;
             series14.ChartArea = "ChartArea1";
             series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series14.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            series14.Color = System.Drawing.Color.FromArgb(  128,   0,   128,   0);
             series14.Legend = "Legend1";
             series14.Name = "Def Range 1 (50% Likely)";
             series14.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2353,7 +2154,7 @@ namespace SF3.X033_X031_Editor.Forms
             series15.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent50;
             series15.ChartArea = "ChartArea1";
             series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series15.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series15.Color = System.Drawing.Color.FromArgb(  128,   0,   0,   192);
             series15.Legend = "Legend1";
             series15.Name = "Agi Range 1 (50% Likely)";
             series15.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2362,7 +2163,7 @@ namespace SF3.X033_X031_Editor.Forms
             series16.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent70;
             series16.ChartArea = "ChartArea1";
             series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series16.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series16.Color = System.Drawing.Color.FromArgb(  128,   192,   192,   0);
             series16.Legend = "Legend1";
             series16.Name = "HP Range 2 (99% Likely)";
             series16.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2371,7 +2172,7 @@ namespace SF3.X033_X031_Editor.Forms
             series17.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent70;
             series17.ChartArea = "ChartArea1";
             series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series17.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series17.Color = System.Drawing.Color.FromArgb(  128,   192,   0,   192);
             series17.Legend = "Legend1";
             series17.Name = "MP Range 2 (99% Likely)";
             series17.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2380,7 +2181,7 @@ namespace SF3.X033_X031_Editor.Forms
             series18.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent70;
             series18.ChartArea = "ChartArea1";
             series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series18.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            series18.Color = System.Drawing.Color.FromArgb(  128,   255,   0,   0);
             series18.Legend = "Legend1";
             series18.Name = "Atk Range 2 (99% Likely)";
             series18.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2389,7 +2190,7 @@ namespace SF3.X033_X031_Editor.Forms
             series19.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent70;
             series19.ChartArea = "ChartArea1";
             series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series19.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            series19.Color = System.Drawing.Color.FromArgb(  128,   0,   128,   0);
             series19.Legend = "Legend1";
             series19.Name = "Def Range 2 (99% Likely)";
             series19.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -2398,71 +2199,71 @@ namespace SF3.X033_X031_Editor.Forms
             series20.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.Percent70;
             series20.ChartArea = "ChartArea1";
             series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
-            series20.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series20.Color = System.Drawing.Color.FromArgb(  128,   0,   0,   192);
             series20.Legend = "Legend1";
             series20.Name = "Agi Range 2 (99% Likely)";
             series20.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
             series20.YValuesPerPoint = 2;
             series20.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            this.CurveGraph.Series.Add(series1);
-            this.CurveGraph.Series.Add(series2);
-            this.CurveGraph.Series.Add(series3);
-            this.CurveGraph.Series.Add(series4);
-            this.CurveGraph.Series.Add(series5);
-            this.CurveGraph.Series.Add(series6);
-            this.CurveGraph.Series.Add(series7);
-            this.CurveGraph.Series.Add(series8);
-            this.CurveGraph.Series.Add(series9);
-            this.CurveGraph.Series.Add(series10);
-            this.CurveGraph.Series.Add(series11);
-            this.CurveGraph.Series.Add(series12);
-            this.CurveGraph.Series.Add(series13);
-            this.CurveGraph.Series.Add(series14);
-            this.CurveGraph.Series.Add(series15);
-            this.CurveGraph.Series.Add(series16);
-            this.CurveGraph.Series.Add(series17);
-            this.CurveGraph.Series.Add(series18);
-            this.CurveGraph.Series.Add(series19);
-            this.CurveGraph.Series.Add(series20);
-            this.CurveGraph.Size = new System.Drawing.Size(749, 446);
-            this.CurveGraph.TabIndex = 0;
-            this.CurveGraph.Text = "chartCurveGraph";
+            CurveGraph.Series.Add(series1);
+            CurveGraph.Series.Add(series2);
+            CurveGraph.Series.Add(series3);
+            CurveGraph.Series.Add(series4);
+            CurveGraph.Series.Add(series5);
+            CurveGraph.Series.Add(series6);
+            CurveGraph.Series.Add(series7);
+            CurveGraph.Series.Add(series8);
+            CurveGraph.Series.Add(series9);
+            CurveGraph.Series.Add(series10);
+            CurveGraph.Series.Add(series11);
+            CurveGraph.Series.Add(series12);
+            CurveGraph.Series.Add(series13);
+            CurveGraph.Series.Add(series14);
+            CurveGraph.Series.Add(series15);
+            CurveGraph.Series.Add(series16);
+            CurveGraph.Series.Add(series17);
+            CurveGraph.Series.Add(series18);
+            CurveGraph.Series.Add(series19);
+            CurveGraph.Series.Add(series20);
+            CurveGraph.Size = new System.Drawing.Size(874, 515);
+            CurveGraph.TabIndex = 0;
+            CurveGraph.Text = "chartCurveGraph";
             // 
             // frmX033_X031_Editor
             // 
-            this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(764, 534);
-            this.Controls.Add(this.menuStrip2);
-            this.Controls.Add(this.tabMain);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmX033_X031_Editor";
-            this.Text = "SF3 X033/X031 Editor";
-            this.Controls.SetChildIndex(this.tabMain, 0);
-            this.Controls.SetChildIndex(this.menuStrip2, 0);
-            this.menuStrip2.ResumeLayout(false);
-            this.menuStrip2.PerformLayout();
-            this.tabSpells.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvSpells)).EndInit();
-            this.tabStats.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvStats)).EndInit();
-            this.tabMain.ResumeLayout(false);
-            this.tabEquipStatistics.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvEquipStatistics)).EndInit();
-            this.tabMiscellaneous.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvMiscellaneous)).EndInit();
-            this.tabInitialInfo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvInitialInfo)).EndInit();
-            this.tabWeaponLevelReq.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvWeaponLevelReq)).EndInit();
-            this.tabCurveCalc.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvCurveCalc)).EndInit();
-            this.tabCurveGraph.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.CurveGraph)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AllowDrop = true;
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(891, 616);
+            Controls.Add(menuStrip2);
+            Controls.Add(tabMain);
+            Icon = (System.Drawing.Icon) resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "frmX033_X031_Editor";
+            Text = "SF3 X033/X031 Editor";
+            Controls.SetChildIndex(tabMain, 0);
+            Controls.SetChildIndex(menuStrip2, 0);
+            menuStrip2.ResumeLayout(false);
+            menuStrip2.PerformLayout();
+            tabSpells.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvSpells).EndInit();
+            tabStats.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvStats).EndInit();
+            tabMain.ResumeLayout(false);
+            tabEquipStatistics.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvEquipStatistics).EndInit();
+            tabMiscellaneous.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvMiscellaneous).EndInit();
+            tabInitialInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvInitialInfo).EndInit();
+            tabWeaponLevelReq.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvWeaponLevelReq).EndInit();
+            tabCurveCalc.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) olvCurveCalc).EndInit();
+            tabCurveGraph.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) CurveGraph).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
