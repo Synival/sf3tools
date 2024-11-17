@@ -6,6 +6,7 @@ using SF3.NamedValues;
 using SF3.RawEditors;
 using SF3.Types;
 using SF3.Win.EditorControls;
+using static SF3.Win.Extensions.ObjectListViewExtensions;
 
 namespace SF3Editor {
     public partial class frmSF3Editor : Form {
