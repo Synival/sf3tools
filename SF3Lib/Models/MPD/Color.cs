@@ -9,7 +9,7 @@ namespace SF3.Models.MPD {
         }
 
         [BulkCopy]
-        [DataMetadata(displayName: "Color ABGR1555", displayOrder: 0, displayFormat: "X4")]
+        [DataMetadata(displayName: "Color (ABGR1555)", displayOrder: 0, displayFormat: "X4")]
         public int ColorABGR1555 {
             get => Editor.GetWord(Address);
             set => Editor.SetWord(Address, value);
