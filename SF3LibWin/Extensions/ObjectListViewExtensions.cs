@@ -226,21 +226,42 @@ namespace SF3.Win.Extensions {
             }
 
             new public int Value {
-                get { return decimal.ToInt32(base.Value); }
-                set { base.Value = new decimal(value); }
+                get => decimal.ToInt32(base.Value);
+                set => base.Value = new decimal(value);
             }
         }
+
+        private class UInt32UpDown : NumericUpDown
+        {
+            public UInt32UpDown() {
+                this.DecimalPlaces = 0;
+                this.Minimum = uint.MinValue;
+                this.Maximum = uint.MaxValue;
+            }
+
+            new public uint Value {
+                get => decimal.ToUInt32(base.Value);
+                set => base.Value = new decimal(value);
+            }
+        }
+
+        private static bool _namedValuesRegistered = false;
 
         /// <summary>
         /// Performs ObjectListView.EditorRegistry.Register() for all SF3 NamedValues.
         /// </summary>
         public static void RegisterNamedValues() {
+            if (_namedValuesRegistered == true)
+                return;
+            _namedValuesRegistered = true;
+
             /// BIG HACK to get existing editor delegates.
             var creatorMapField = ObjectListView.EditorRegistry.GetType().GetField(
                 "creatorMap", BindingFlags.NonPublic | BindingFlags.Instance);
             var creatorMap = (Dictionary<Type, EditorCreatorDelegate>) creatorMapField.GetValue(ObjectListView.EditorRegistry);
 
             ObjectListView.EditorRegistry.Register(typeof(int), typeof(Int32UpDown));
+            ObjectListView.EditorRegistry.Register(typeof(uint), typeof(UInt32UpDown));
 
             var typesToHijack = new Type[] {
                 typeof(short),
