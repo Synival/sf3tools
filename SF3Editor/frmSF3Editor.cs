@@ -24,10 +24,9 @@ namespace SF3Editor {
             var tableEditorControl = new TableEditorControl(table, mpdEditor.NameGetterContext);
 
             var olv = tableEditorControl.Create();
-            olv.Location = new Point(masterEditorControl1.Padding.Left, masterEditorControl1.Padding.Top);
-            olv.Size = new Size(masterEditorControl1.Size.Width - masterEditorControl1.Padding.Horizontal, masterEditorControl1.Size.Height - masterEditorControl1.Padding.Vertical);
-
+            olv.Dock = DockStyle.Fill;
             masterEditorControl1.Controls.Add(olv);
+
             ResumeLayout();
 
         }

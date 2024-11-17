@@ -36,6 +36,8 @@ namespace SF3.Win.EditorControls {
             var lvcColumns = new List<OLVColumn>();
             Font hexFont = null;
 
+            var lvcNameBase = "lvcTableEditorControl" + s_controlIndex;
+
             foreach (var kv in props) {
                 var prop = kv.Key;
                 var attr = kv.Value;
@@ -43,7 +45,7 @@ namespace SF3.Win.EditorControls {
                 if (attr.EditorCapabilities == EditorCapabilities.Hidden)
                     continue;
 
-                var lvc = new OLVColumn("lvcTest" + prop.Name, prop.Name);
+                var lvc = new OLVColumn(lvcNameBase + prop.Name, prop.Name);
                 if (hexFont == null)
                     hexFont = new Font("Courier New", Control.DefaultFont.Size);
 
@@ -65,7 +67,6 @@ namespace SF3.Win.EditorControls {
             var olv = new ObjectListView();
             ((System.ComponentModel.ISupportInitialize) olv).BeginInit();
             olv.AllowColumnReorder = true;
-            olv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             olv.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
             olv.FullRowSelect = true;
             olv.GridLines = true;
