@@ -14,6 +14,7 @@ namespace SF3Editor {
         public frmSF3Editor() {
             SuspendLayout();
             InitializeComponent();
+            RegisterNamedValues();
 
             var mpdEditor = MPD_Editor.Create(
                 new ByteEditor(File.ReadAllBytes(c_mpdPath)),
@@ -28,7 +29,6 @@ namespace SF3Editor {
             masterEditorControl1.Controls.Add(olv);
 
             ResumeLayout();
-
         }
     }
 }
