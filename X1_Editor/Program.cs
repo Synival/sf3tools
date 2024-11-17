@@ -9,7 +9,6 @@ namespace SF3.X1_Editor {
         /// </summary>
         [STAThread]
         private static void Main() {
-            ObjectListViewExtensions.RegisterNamedValues();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Forms.frmX1_Editor());

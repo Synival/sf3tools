@@ -15,6 +15,7 @@ using SF3.Loaders;
 using SF3.Types;
 using static CommonLib.Win.Utils.MessageUtils;
 using DFRLib.Win.Forms;
+using static SF3.Win.Extensions.ObjectListViewExtensions;
 
 namespace SF3.Win.Forms {
     /// <summary>
@@ -25,6 +26,7 @@ namespace SF3.Win.Forms {
 
         public EditorForm() {
             InitializeComponent();
+            RegisterNamedValues();
 
             tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
             Globals.UseDropdownsChanged += (s, e) => tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
