@@ -18,6 +18,11 @@ namespace SF3.Win.EditorControls {
         void Destroy();
 
         /// <summary>
+        /// Name to identify this editor control.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
         /// The control instantiated upon Create().
         /// </summary>
         Control Control { get; }

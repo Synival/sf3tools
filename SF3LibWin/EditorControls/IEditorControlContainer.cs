@@ -9,8 +9,8 @@ namespace SF3.Win.EditorControls {
         /// <summary>
         /// Creates a child editor control.
         /// </summary>
-        /// <returns>'true' on successful creation, otherwise 'false'.</returns>
-        bool CreateChild(IEditorControl child);
+        /// <returns>The control created, or 'null' if it was not possible.</returns>
+        Control CreateChild(IEditorControl child);
 
         /// <summary>
         /// Collection of child controls.

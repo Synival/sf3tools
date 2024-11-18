@@ -13,12 +13,16 @@ namespace SF3.Win.EditorControls {
     public class TableEditorControl : EditorControlBase, ITableEditorControl {
         private static int s_controlIndex = 1;
 
-        public TableEditorControl(Table table, INameGetterContext nameGetterContext) {
+        public TableEditorControl(string name, Table table, INameGetterContext nameGetterContext)
+        : base(name) {
             Table = table;
             NameGetterContext = nameGetterContext;
         }
 
         public override Control Create() {
+            if (Table == null)
+                return null;
+
             var columnType = Table.RowObjs.GetType().GetElementType()!;
             var columnProperties = columnType
                 .GetProperties()

@@ -6,6 +6,9 @@ namespace SF3.Win.EditorControls {
     public class EditorControlContainer : EditorControlBase, IEditorControlContainer {
         private static int s_controlIndex = 1;
 
+        public EditorControlContainer(string name) : base(name) {
+        }
+
         public override Control Create() {
             var tabControl = new TabControl();
 
@@ -28,7 +31,26 @@ namespace SF3.Win.EditorControls {
             TabControl = null;
         }
 
-        public bool CreateChild(IEditorControl child) => throw new NotImplementedException();
+        public Control CreateChild(IEditorControl child) {
+            var childControl = child.Create();
+            if (childControl == null)
+                return null;
+
+            var tabPage = new TabPage(child.Name);
+
+            TabControl.SuspendLayout();
+            tabPage.SuspendLayout();
+
+            childControl.Dock = DockStyle.Fill;
+
+            tabPage.Controls.Add(childControl);
+            TabControl.Controls.Add(tabPage);
+
+            tabPage.ResumeLayout();
+            TabControl.ResumeLayout();
+
+            return childControl;
+        }
 
         private TabControl TabControl { get; set; } = null;
 

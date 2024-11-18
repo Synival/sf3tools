@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 namespace SF3.Win.EditorControls {
     public abstract class EditorControlBase : IEditorControl {
+        protected EditorControlBase(string name) {
+            Name = name;
+        }
+
         public abstract Control Create();
 
         public virtual void Destroy() {
@@ -18,6 +22,7 @@ namespace SF3.Win.EditorControls {
 
         public virtual void Dispose() => Destroy();
 
+        public string Name { get; }
         public Control Control { get; protected set; } = null;
     }
 }
