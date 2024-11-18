@@ -81,7 +81,13 @@ namespace SF3.Win.EditorControls {
             olv.AllColumns.AddRange(lvcColumns);
             olv.Columns.AddRange(lvcColumns.ToArray());
             olv.Enhance(NameGetterContext);
-            olv.AddObjects(Table.RowObjs);
+            try {
+                olv.AddObjects(Table.RowObjs);
+            }
+            catch {
+                olv.ClearObjects();
+                throw;
+            }
             ((System.ComponentModel.ISupportInitialize) olv).EndInit();
             olv.ResumeLayout();
 

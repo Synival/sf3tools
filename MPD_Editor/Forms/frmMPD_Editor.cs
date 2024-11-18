@@ -46,8 +46,24 @@ namespace SF3.MPD_Editor.Forms {
                 return false;
 
             SuspendLayout();
-            EditorControl = new MPD_EditorControl(FileLoader.Filename, Editor);
-            Control = EditorControl.Create();
+    
+            try {
+                EditorControl = new MPD_EditorControl(FileLoader.Filename, Editor);
+                Control = EditorControl.Create();
+            }
+            catch {
+                if (EditorControl != null) {
+                    EditorControl.Dispose();
+                    EditorControl = null;
+                }
+                if (Control != null) {
+                    Control.Dispose();
+                    Control = null;
+                }
+                ResumeLayout();
+                return false;
+            }
+
             Control.Dock = DockStyle.Fill;
             Controls.Add(Control);
             Control.BringToFront(); // If this isn't in the front, the menu is placed behind it (eep)

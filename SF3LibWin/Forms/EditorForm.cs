@@ -168,6 +168,7 @@ namespace SF3.Win.Forms {
                 //wrong file was selected
                 ErrorMessage("Data in '" + filename + "' appears corrupt or invalid.\n" +
                              "Is this the correct type of file?");
+                CloseFile();
                 return false;
             }
 
