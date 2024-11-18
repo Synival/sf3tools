@@ -21,10 +21,8 @@ namespace SF3.Win.EditorControls.MPD {
             _ = CreateChild(new TableEditorControl("Tile Height + Terrain", Editor.TileHeightTerrainRows, ngc));
             _ = CreateChild(new TableEditorControl("Object Locations", Editor.TileItemRows, ngc));
 
-            for (var i = 0; i < Editor.TextureChunks.Length; i++) {
-                // TODO: make TextureChunkEditorControl!
-                // CreateChild(new TextureChunkEditorControl("Textures " + (i + 1), Editor.TextureChunk[i], ngc));
-            }
+            for (var i = 0; i < Editor.TextureChunks.Length; i++)
+                _ = CreateChild(new TextureChunkEditorControl("Textures " + (i + 1), Editor.TextureChunks[i]));
 
             return Control;
         }
