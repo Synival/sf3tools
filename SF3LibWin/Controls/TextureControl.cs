@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SF3.MPDEditor.Controls {
+namespace SF3.Win.Controls {
     public partial class TextureControl : UserControl {
         public TextureControl() {
             InitializeComponent();

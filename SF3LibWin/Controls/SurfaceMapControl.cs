@@ -5,9 +5,9 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows.Forms;
 using SF3.Editors.MPD;
-using SF3.MPDEditor.Extensions;
+using SF3.Win.Extensions;
 
-namespace SF3.MPDEditor.Controls {
+namespace SF3.Win.Controls {
     public partial class SurfaceMapControl : UserControl {
         public SurfaceMapControl() {
             InitializeComponent();

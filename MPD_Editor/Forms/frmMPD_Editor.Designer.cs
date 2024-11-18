@@ -369,7 +369,7 @@ namespace SF3.MPD_Editor.Forms {
             tabChunk10 = new System.Windows.Forms.TabPage();
             textureChunkControl5 = new X1_Editor.Controls.TextureChunkControl();
             tabSurfaceMap = new System.Windows.Forms.TabPage();
-            surfaceMapControl = new MPDEditor.Controls.SurfaceMapControl();
+            surfaceMapControl = new SF3.Win.Controls.SurfaceMapControl();
             menuStrip2.SuspendLayout();
             tabTileItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) olvTileItems).BeginInit();
@@ -3685,7 +3685,7 @@ namespace SF3.MPD_Editor.Forms {
         private X1_Editor.Controls.TextureChunkControl textureChunkControl3;
         private X1_Editor.Controls.TextureChunkControl textureChunkControl4;
         private System.Windows.Forms.TabPage tabSurfaceMap;
-        private MPDEditor.Controls.SurfaceMapControl surfaceMapControl;
+        private SF3.Win.Controls.SurfaceMapControl surfaceMapControl;
         private System.Windows.Forms.TabPage tabChunkHeader;
         private BrightIdeasSoftware.ObjectListView olvChunkHeader;
         private BrightIdeasSoftware.OLVColumn lvcChunkHeaderID;

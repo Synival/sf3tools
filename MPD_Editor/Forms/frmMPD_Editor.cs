@@ -9,7 +9,6 @@ using SF3.Editors;
 using SF3.Editors.MPD;
 using SF3.Loaders;
 using SF3.Models.MPD.TextureChunk;
-using SF3.MPDEditor.Extensions;
 using SF3.NamedValues;
 using SF3.X1_Editor.Controls;
 using static SF3.Win.Extensions.TabControlExtensions;

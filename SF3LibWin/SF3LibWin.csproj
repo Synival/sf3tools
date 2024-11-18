@@ -15,4 +15,12 @@
     <ProjectReference Include="..\ObjectListView\ObjectListView\ObjectListView2008.csproj" />
     <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Controls\SurfaceMapControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\TextureControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

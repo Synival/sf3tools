@@ -31,7 +31,7 @@ namespace SF3.X1_Editor.Controls {
             lvcHeaderTextureIdStart = new BrightIdeasSoftware.OLVColumn();
             tabMain = new System.Windows.Forms.TabControl();
             tabTextures = new System.Windows.Forms.TabPage();
-            textureControl = new MPDEditor.Controls.TextureControl();
+            textureControl = new SF3.Win.Controls.TextureControl();
             olvTextures = new BrightIdeasSoftware.ObjectListView();
             lvcTexturesID = new BrightIdeasSoftware.OLVColumn();
             lvcTexturesName = new BrightIdeasSoftware.OLVColumn();
@@ -261,7 +261,7 @@ namespace SF3.X1_Editor.Controls {
         private BrightIdeasSoftware.OLVColumn lvcTexturesID;
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer2;
-        private MPDEditor.Controls.TextureControl textureControl;
+        private SF3.Win.Controls.TextureControl textureControl;
         private BrightIdeasSoftware.OLVColumn lvcTexturesAssumedPixelFormat;
     }
 }

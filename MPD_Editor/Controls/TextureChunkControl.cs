@@ -1,7 +1,6 @@
 using System.Windows.Forms;
 using BrightIdeasSoftware;
-using SF3.Win.Extensions;
-using SF3.MPDEditor.Controls;
+using SF3.Win.Controls;
 
 namespace SF3.X1_Editor.Controls {
     public partial class TextureChunkControl : UserControl {

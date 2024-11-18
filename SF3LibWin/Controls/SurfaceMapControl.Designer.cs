@@ -1,4 +1,4 @@
-﻿namespace SF3.MPDEditor.Controls {
+﻿namespace SF3.Win.Controls {
     partial class SurfaceMapControl {
         /// <summary> 
         /// Required designer variable.

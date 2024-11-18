@@ -10,13 +10,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Controls\SurfaceMapControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Controls\TextureChunkControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Controls\TextureControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -30,5 +24,8 @@
     <ProjectReference Include="..\ObjectListView\ObjectListView\ObjectListView2008.csproj" />
     <ProjectReference Include="..\SF3LibWin\SF3LibWin.csproj" />
     <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

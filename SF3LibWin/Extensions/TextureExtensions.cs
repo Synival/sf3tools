@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using SF3.Models.MPD.TextureChunk;
 
-namespace SF3.MPDEditor.Extensions {
+namespace SF3.Win.Extensions {
     public static class TextureExtensions {
         /// <summary>
         /// Creates a bitmap image using an a texture's BitmapDataARGB1555.
