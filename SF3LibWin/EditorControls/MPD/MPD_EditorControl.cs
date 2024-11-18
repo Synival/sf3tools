@@ -12,17 +12,27 @@ namespace SF3.Win.EditorControls.MPD {
 
             var ngc = Editor.NameGetterContext;
 
-            _ = CreateChild(new TableEditorControl("Header", Editor.Header, ngc));
-            for (var i = 0; i < Editor.Palettes.Length; i++)
-                _ = CreateChild(new TableEditorControl("Palette" + (i + 1).ToString(), Editor.Palettes[i], ngc));
-            _ = CreateChild(new TableEditorControl("Chunk Header", Editor.ChunkHeader, ngc));
-            _ = CreateChild(new TableEditorControl("Surface Characters", Editor.TileSurfaceCharacterRows, ngc));
-            _ = CreateChild(new TableEditorControl("Surface Heightmap", Editor.TileSurfaceHeightmapRows, ngc));
-            _ = CreateChild(new TableEditorControl("Tile Height + Terrain", Editor.TileHeightTerrainRows, ngc));
-            _ = CreateChild(new TableEditorControl("Object Locations", Editor.TileItemRows, ngc));
+            var headerContainer = new EditorControlContainer("Headers");
+            _ = CreateChild(headerContainer);
+            _ = headerContainer.CreateChild(new TableEditorControl("Header", Editor.Header, ngc));
+            _ = headerContainer.CreateChild(new TableEditorControl("Chunk Header", Editor.ChunkHeader, ngc));
 
+            var paletteContainer = new EditorControlContainer("Palettes");
+            _ = CreateChild(paletteContainer);
+            for (var i = 0; i < Editor.Palettes.Length; i++)
+                _ = paletteContainer.CreateChild(new TableEditorControl("Palette" + (i + 1).ToString(), Editor.Palettes[i], ngc));
+
+            var surfaceContainer = new EditorControlContainer("Surface");
+            _ = CreateChild(surfaceContainer);
+            _ = surfaceContainer.CreateChild(new TableEditorControl("Textures", Editor.TileSurfaceCharacterRows, ngc));
+            _ = surfaceContainer.CreateChild(new TableEditorControl("Heightmap", Editor.TileSurfaceHeightmapRows, ngc));
+            _ = surfaceContainer.CreateChild(new TableEditorControl("Height + Terrain Type", Editor.TileHeightTerrainRows, ngc));
+            _ = surfaceContainer.CreateChild(new TableEditorControl("Object Locations", Editor.TileItemRows, ngc));
+
+            var textureContainer = new EditorControlContainer("Textures");
+            _ = CreateChild(textureContainer);
             for (var i = 0; i < Editor.TextureChunks.Length; i++)
-                _ = CreateChild(new TextureChunkEditorControl("Textures " + (i + 1), Editor.TextureChunks[i]));
+                _ = textureContainer.CreateChild(new TextureChunkEditorControl("Chunk " + (i + 6), Editor.TextureChunks[i]));
 
             return Control;
         }
