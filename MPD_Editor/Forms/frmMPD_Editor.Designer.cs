@@ -29,17 +29,20 @@ namespace SF3.MPD_Editor.Forms {
             tsmiHelp_Separator1 = new System.Windows.Forms.ToolStripSeparator();
             tsmiHelp_Credits1 = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_Credits2 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiTextures = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiTextures_ImportFolder = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiTextures_ExportToFolder = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip2
             // 
             menuStrip2.Dock = System.Windows.Forms.DockStyle.None;
-            menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp });
+            menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiTextures, tsmiHelp });
             menuStrip2.Location = new System.Drawing.Point(0, 0);
             menuStrip2.Name = "menuStrip2";
             menuStrip2.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            menuStrip2.Size = new System.Drawing.Size(173, 24);
+            menuStrip2.Size = new System.Drawing.Size(235, 24);
             menuStrip2.TabIndex = 1;
             // 
             // tsmiHelp
@@ -66,6 +69,29 @@ namespace SF3.MPD_Editor.Forms {
             tsmiHelp_Credits2.Size = new System.Drawing.Size(257, 22);
             tsmiHelp_Credits2.Text = "compression/decompression code";
             // 
+            // tsmiTextures
+            // 
+            tsmiTextures.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiTextures_ImportFolder, tsmiTextures_ExportToFolder });
+            tsmiTextures.Name = "tsmiTextures";
+            tsmiTextures.Size = new System.Drawing.Size(62, 20);
+            tsmiTextures.Text = "&Textures";
+            // 
+            // tsmiTextures_ImportFolder
+            // 
+            tsmiTextures_ImportFolder.Enabled = false;
+            tsmiTextures_ImportFolder.Name = "tsmiTextures_ImportFolder";
+            tsmiTextures_ImportFolder.Size = new System.Drawing.Size(180, 22);
+            tsmiTextures_ImportFolder.Text = "&Import Folder...";
+            tsmiTextures_ImportFolder.Click += tsmiTextures_ImportFolder_Click;
+            // 
+            // tsmiTextures_ExportToFolder
+            // 
+            tsmiTextures_ExportToFolder.Enabled = false;
+            tsmiTextures_ExportToFolder.Name = "tsmiTextures_ExportToFolder";
+            tsmiTextures_ExportToFolder.Size = new System.Drawing.Size(180, 22);
+            tsmiTextures_ExportToFolder.Text = "&Export to Folder...";
+            tsmiTextures_ExportToFolder.Click += tsmiTextures_ExportToFolder_Click;
+            // 
             // frmMPDEditor
             // 
             AllowDrop = true;
@@ -90,6 +116,9 @@ namespace SF3.MPD_Editor.Forms {
         private System.Windows.Forms.ToolStripSeparator tsmiHelp_Separator1;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp_Credits1;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp_Credits2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTextures;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTextures_ImportFolder;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTextures_ExportToFolder;
     }
 }
 
