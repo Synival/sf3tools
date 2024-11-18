@@ -31,25 +31,29 @@ namespace SF3.Win.EditorControls {
             TabControl = null;
         }
 
-        public Control CreateChild(IEditorControl child) {
-            var childControl = child.Create();
-            if (childControl == null)
+        public Control CreateChild(IEditorControl child, bool autoFill = true)
+            => CreateChild(child.Name, child.Create(), autoFill);
+
+        public Control CreateChild(string name, Control child, bool autoFill = true) {
+            if (child == null)
                 return null;
 
-            var tabPage = new TabPage(child.Name);
+            var tabPage = new TabPage(name);
 
             TabControl.SuspendLayout();
             tabPage.SuspendLayout();
 
-            childControl.Dock = DockStyle.Fill;
+            if (autoFill)
+                child.Dock = DockStyle.Fill;
 
-            tabPage.Controls.Add(childControl);
+            tabPage.AutoScroll = true;
+            tabPage.Controls.Add(child);
             TabControl.Controls.Add(tabPage);
 
             tabPage.ResumeLayout();
             TabControl.ResumeLayout();
 
-            return childControl;
+            return child;
         }
 
         private TabControl TabControl { get; set; } = null;
