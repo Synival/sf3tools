@@ -1,5 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using SF3.Editors.MPD;
+using SF3.Win.Controls;
 
 namespace SF3.Win.EditorControls.MPD {
     public class MPD_EditorControl : EditorControlContainer {
@@ -23,7 +25,21 @@ namespace SF3.Win.EditorControls.MPD {
                 _ = paletteContainer.CreateChild(new TableEditorControl("Palette" + (i + 1).ToString(), Editor.Palettes[i], ngc));
 
             var surfaceContainer = new EditorControlContainer("Surface");
-            _ = CreateChild(surfaceContainer);
+            var surfaceTabControl = (TabControl) CreateChild(surfaceContainer);
+            var surfaceMapControl = (Editor.TileSurfaceCharacterRows != null) ? new SurfaceMapControl() : null;
+            _ = surfaceContainer.CreateChild("Viewer", surfaceMapControl, autoFill: false);
+
+            if (surfaceMapControl != null) {
+                var surfaceMapControlTab = (TabPage) surfaceMapControl.Parent;
+                void updateSurfaceMapControl(object sender, EventArgs eventArgs) {
+                    if (surfaceTabControl.SelectedTab == surfaceMapControlTab && Editor?.TileSurfaceCharacterRows?.TextureData != null)
+                        surfaceMapControl.UpdateTextures(Editor.TileSurfaceCharacterRows.TextureData, Editor.TextureChunks);
+                };
+
+                surfaceTabControl.Selected += updateSurfaceMapControl;
+                surfaceMapControl.UpdateTextures(Editor.TileSurfaceCharacterRows.TextureData, Editor.TextureChunks);
+            }
+
             _ = surfaceContainer.CreateChild(new TableEditorControl("Textures", Editor.TileSurfaceCharacterRows, ngc));
             _ = surfaceContainer.CreateChild(new TableEditorControl("Heightmap", Editor.TileSurfaceHeightmapRows, ngc));
             _ = surfaceContainer.CreateChild(new TableEditorControl("Height + Terrain Type", Editor.TileHeightTerrainRows, ngc));
