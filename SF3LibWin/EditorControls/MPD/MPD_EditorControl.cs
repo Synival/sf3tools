@@ -5,7 +5,7 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.EditorControls.MPD {
     public class MPD_EditorControl : EditorControlContainer {
-        public MPD_EditorControl(string name, MPD_Editor editor) : base(name) {
+        public MPD_EditorControl(string name, IMPD_Editor editor) : base(name) {
             Editor = editor;
         }
 
@@ -53,6 +53,6 @@ namespace SF3.Win.EditorControls.MPD {
             return Control;
         }
 
-        public MPD_Editor Editor { get; }
+        public IMPD_Editor Editor { get; }
     }
 }

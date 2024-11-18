@@ -10,22 +10,13 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Controls\TextureChunkControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="phoenixSword.ico" />
     <Content Include="treasure.ico" />
-    <Content Include="Resources\Water.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
     <ProjectReference Include="..\ObjectListView\ObjectListView\ObjectListView2008.csproj" />
     <ProjectReference Include="..\SF3LibWin\SF3LibWin.csproj" />
     <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

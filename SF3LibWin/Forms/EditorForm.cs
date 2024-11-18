@@ -258,7 +258,7 @@ namespace SF3.Win.Forms {
         /// <returns>'true' if no file was open or the file was closed. Returns 'false' if the user clicked 'cancel' when
         /// prompted to save changes.</returns>
         public bool CloseFile(bool force = false) {
-            if (FileLoader == null)
+            if (FileLoader == null || !FileLoader.IsLoaded)
                 return true;
 
             if (!force && FileLoader.IsModified)
