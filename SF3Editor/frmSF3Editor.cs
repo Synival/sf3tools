@@ -1,4 +1,3 @@
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using SF3.Editors.MPD;
@@ -13,21 +12,25 @@ namespace SF3Editor {
         const string c_mpdPath = "";
 
         public frmSF3Editor() {
-            SuspendLayout();
-            InitializeComponent();
             RegisterNamedValues();
 
+            SuspendLayout();
+            InitializeComponent();
+
+            var containerControl = new EditorControlContainer();
+
+            var control = containerControl.Create();
+            control.Dock = DockStyle.Fill;
+            Controls.Add(control);
+
+#if false
             var mpdEditor = MPD_Editor.Create(
                 new ByteEditor(File.ReadAllBytes(c_mpdPath)),
                 new NameGetterContext(ScenarioType.Scenario1),
                 ScenarioType.Scenario1);
-
-            var table = mpdEditor.Palettes[0];
+            var table = mpdEditor.TextureChunks[0].HeaderTable;
             var tableEditorControl = new TableEditorControl(table, mpdEditor.NameGetterContext);
-
-            var olv = tableEditorControl.Create();
-            olv.Dock = DockStyle.Fill;
-            masterEditorControl1.Controls.Add(olv);
+#endif
 
             ResumeLayout();
         }

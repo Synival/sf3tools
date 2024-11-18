@@ -7,11 +7,10 @@ using BrightIdeasSoftware;
 using CommonLib.NamedValues;
 using SF3.Attributes;
 using SF3.Tables;
-using SF3.Tables.MPD;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.EditorControls {
-    public class TableEditorControl : ITableEditorControl {
+    public class TableEditorControl : EditorControlBase, ITableEditorControl {
         private static int s_controlIndex = 1;
 
         public TableEditorControl(Table table, INameGetterContext nameGetterContext) {
@@ -19,8 +18,7 @@ namespace SF3.Win.EditorControls {
             NameGetterContext = nameGetterContext;
         }
 
-        public Control Create() {
-
+        public override Control Create() {
             var columnType = Table.RowObjs.GetType().GetElementType()!;
             var columnProperties = columnType
                 .GetProperties()
@@ -65,6 +63,7 @@ namespace SF3.Win.EditorControls {
             }
 
             var olv = new ObjectListView();
+            olv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) olv).BeginInit();
             olv.AllowColumnReorder = true;
             olv.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
@@ -84,28 +83,21 @@ namespace SF3.Win.EditorControls {
             olv.Enhance(NameGetterContext);
             olv.AddObjects(Table.RowObjs);
             ((System.ComponentModel.ISupportInitialize) olv).EndInit();
+            olv.ResumeLayout();
 
+            Control = olv;
             OLVControl = olv;
             return olv;
         }
 
-        public void Destroy() {
-            if (Control == null)
-                return;
-            Control.Dispose();
-            Control = null;
+        public override void Destroy() {
+            base.Destroy();
             OLVControl = null;
-        }
-
-        public void Dispose() {
-            Destroy();
         }
 
         public Table Table { get; }
         public INameGetterContext NameGetterContext { get; }
 
         private ObjectListView OLVControl { get; set; } = null;
-
-        public Control Control { get; private set; } = null;
     }
 }
