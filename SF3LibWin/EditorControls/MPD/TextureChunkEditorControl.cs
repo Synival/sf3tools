@@ -1,5 +1,10 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
+using BrightIdeasSoftware;
 using SF3.Editors.MPD;
+using SF3.Models.MPD.TextureChunk;
+using SF3.Win.Controls;
+using SF3.Win.Extensions;
 
 namespace SF3.Win.EditorControls.MPD {
     public class TextureChunkEditorControl : EditorControlContainer {
@@ -13,10 +18,24 @@ namespace SF3.Win.EditorControls.MPD {
             var ngc = Editor.NameGetterContext;
 
             _ = CreateChild(new TableEditorControl("Header", Editor.HeaderTable, ngc));
-            _ = CreateChild(new TableEditorControl("Textures", Editor.TextureTable, ngc));
+            var textureTableControl = CreateChild(new TableEditorControl("Textures", Editor.TextureTable, ngc)) as ObjectListView;
+            var textureTabPage = textureTableControl?.Parent;
 
-            // TODO: texture viewer!!
+            // Add a texture viewer on the right side of the 'Textures' tab.
+            if (textureTabPage != null) {
+                var textureViewer = new TextureControl();
+                textureViewer.Dock = DockStyle.Right;
+                textureTabPage.Controls.Add(textureViewer);
 
+                void OnTextureChanged(object sender, EventArgs e) {
+                    var item = (OLVListItem) textureTableControl.SelectedItem;
+                    textureViewer.TextureImage = (item != null) ? ((Texture) item.RowObject).CreateBitmap() : null;
+                };
+
+                textureTableControl.ItemSelectionChanged += (s, e) => OnTextureChanged(s, e);
+            }
+
+            // Return the top-level control.
             return Control;
         }
 

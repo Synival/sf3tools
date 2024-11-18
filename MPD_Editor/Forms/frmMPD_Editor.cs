@@ -36,7 +36,7 @@ namespace SF3.MPD_Editor.Forms {
             };
             var textureChunkOLVs = textureChunkEditorControls.SelectMany(x => x.GetAllObjectsOfTypeInFields<ObjectListView>(false)).ToList();
 
-            // Synchronize the tabs in the battle editors
+            // Synchronize the tabs in the texture chunks.
             void tabSyncFunc(object sender, TabControlEventArgs e) {
                 foreach (var tcec in textureChunkEditorControls)
                     tcec.Tabs.SelectedIndex = e.TabPageIndex;
