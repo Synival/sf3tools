@@ -44,17 +44,13 @@ namespace SF3.Win.EditorControls {
                 var prop = kv.Key;
                 var attr = kv.Value;
 
-                if (attr.EditorCapabilities == EditorCapabilities.Hidden)
-                    continue;
-
                 var lvc = new OLVColumn(lvcNameBase + prop.Name, prop.Name);
                 if (hexFont == null)
                     hexFont = new Font("Courier New", Control.DefaultFont.Size);
 
-                if (attr.EditorCapabilities == EditorCapabilities.Auto)
-                    lvc.IsEditable = prop.GetSetMethod() != null;
-
+                lvc.IsEditable = prop.GetSetMethod() != null;
                 lvc.Text = attr.DisplayName ?? prop.Name;
+
                 if (attr.DisplayFormat != null && attr.DisplayFormat != string.Empty)
                     lvc.AspectToStringFormat = "{0:" + attr.DisplayFormat + "}";
                 else if (attr.IsPointer)
