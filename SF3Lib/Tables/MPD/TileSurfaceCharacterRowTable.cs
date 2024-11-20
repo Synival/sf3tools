@@ -20,16 +20,14 @@ namespace SF3.Tables.MPD {
 
         public override int? MaxSize => 64;
 
-        public ushort[,] TextureData {
-            get {
-                var textureData = new ushort[64, 64];
-                for (int y = 0; y < textureData.GetLength(1); y++) {
-                    var tiles = Rows[y].Tiles;
-                    for (int x = 0; x < textureData.GetLength(0); x++)
-                        textureData[x, y] = tiles[x];
-                }
-                return textureData;
+        public ushort[,] Make2DTextureData() {
+            var textureData = new ushort[64, 64];
+            for (int y = 0; y < textureData.GetLength(1); y++) {
+                var tiles = Rows[y].Tiles;
+                for (int x = 0; x < textureData.GetLength(0); x++)
+                    textureData[x, y] = tiles[x];
             }
+            return textureData;
         }
     }
 }

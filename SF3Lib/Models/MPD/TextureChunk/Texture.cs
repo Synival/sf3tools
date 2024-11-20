@@ -195,6 +195,7 @@ namespace SF3.Models.MPD.TextureChunk {
                     for (int y = 0; y < value.GetLength(1); y++)
                         for (int x = 0; x < value.GetLength(0); x++)
                             imageDataBytes[pos++] = value[x, y];
+
                     CachedBitmapDataPalette = imageDataBytes;
                 }
             }

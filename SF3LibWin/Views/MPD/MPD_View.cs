@@ -31,13 +31,15 @@ namespace SF3.Win.Views.MPD {
 
             if (surfaceMapControl != null) {
                 var surfaceMapControlTab = (TabPage) surfaceMapControl.Parent;
+                var textureData = Editor?.TileSurfaceCharacterRows?.Make2DTextureData();
+
                 void updateSurfaceMapControl(object sender, EventArgs eventArgs) {
-                    if (surfaceTabControl.SelectedTab == surfaceMapControlTab && Editor?.TileSurfaceCharacterRows?.TextureData != null)
-                        surfaceMapControl.UpdateTextures(Editor.TileSurfaceCharacterRows.TextureData, Editor.TextureChunks);
+                    if (surfaceTabControl.SelectedTab == surfaceMapControlTab && textureData != null)
+                        surfaceMapControl.UpdateTextures(textureData, Editor.TextureChunks);
                 };
 
                 surfaceTabControl.Selected += updateSurfaceMapControl;
-                surfaceMapControl.UpdateTextures(Editor.TileSurfaceCharacterRows.TextureData, Editor.TextureChunks);
+                surfaceMapControl.UpdateTextures(textureData, Editor.TextureChunks);
             }
 
             _ = surfaceContainer.CreateChild(new TableView("Textures", Editor.TileSurfaceCharacterRows, ngc));
