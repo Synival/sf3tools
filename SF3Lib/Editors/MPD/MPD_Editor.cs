@@ -9,6 +9,8 @@ using SF3.Types;
 using System.Linq;
 using CommonLib;
 using System.Runtime.InteropServices;
+using SF3.Tables.MPD.TextureChunk;
+using SF3.Tables.MPD.TextureGroup;
 
 namespace SF3.Editors.MPD {
     public class MPD_Editor : ScenarioTableEditor, IMPD_Editor {
@@ -28,7 +30,7 @@ namespace SF3.Editors.MPD {
             // Create and load Header
             var headerAddrPtr = Editor.GetDouble(0x0000) - ramOffset;
             var headerAddr = Editor.GetDouble(headerAddrPtr) - ramOffset;
-            Header = new HeaderTable(Editor, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
+            Header = new Tables.MPD.HeaderTable(Editor, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
             _ = Header.Load();
             var header = Header.Rows[0];
 
@@ -46,7 +48,7 @@ namespace SF3.Editors.MPD {
             Offset2Table = (header.Offset2 != 0) ? new UnknownUInt32Table(Editor, header.Offset2 - ramOffset, 1)  : null;
             Offset3Table = (header.Offset3 != 0) ? new UnknownUInt16Table(Editor, header.Offset3 - ramOffset, 32) : null;
             Offset4Table = (header.Offset4 != 0) ? new Offset4Table(Editor, header.Offset4 - ramOffset) : null;
-            TextureGroupTable = (header.OffsetTextureGroups != 0) ? new TextureGroupTable(Editor, header.OffsetTextureGroups - ramOffset) : null;
+            TextureGroupHeader = (header.OffsetTextureGroups != 0) ? new Tables.MPD.TextureGroup.HeaderTable(Editor, header.OffsetTextureGroups - ramOffset) : null;
 
             // Create chunk data
             ChunkHeader = new ChunkHeaderTable(Editor, 0x2000);
@@ -104,8 +106,8 @@ namespace SF3.Editors.MPD {
                 (TileItemRows             = new TileItemRowTable            (ChunkEditors[5].DecompressedEditor, 0x6000)),
             };
 
-            if (TextureGroupTable != null)
-                tables.Add(TextureGroupTable);
+            if (TextureGroupHeader != null)
+                tables.Add(TextureGroupHeader);
 
             for (var i = 0; i < Palettes.Length; i++)
                 if (Palettes[i] != null)
@@ -119,8 +121,8 @@ namespace SF3.Editors.MPD {
                 tables.Add(Offset3Table);
             if (Offset4Table != null)
                 tables.Add(Offset4Table);
-            if (TextureGroupTable != null)
-                tables.Add(TextureGroupTable);
+            if (TextureGroupHeader != null)
+                tables.Add(TextureGroupHeader);
 
             if (SurfaceChunkEditor?.Data?.Length >= 64 * 64 * 2)
                 tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(SurfaceChunkEditor.DecompressedEditor, 0x0000));
@@ -244,7 +246,7 @@ namespace SF3.Editors.MPD {
         public IChunkEditor SurfaceChunkEditor { get; private set; }
 
         [BulkCopyRecurse]
-        public HeaderTable Header { get; private set; }
+        public Tables.MPD.HeaderTable Header { get; private set; }
 
         [BulkCopyRecurse]
         public ColorTable[] Palettes { get; private set; }
@@ -265,7 +267,7 @@ namespace SF3.Editors.MPD {
         public Offset4Table Offset4Table { get; private set; }
 
         [BulkCopyRecurse]
-        public TextureGroupTable TextureGroupTable { get; private set; }
+        public Tables.MPD.TextureGroup.HeaderTable TextureGroupHeader { get; private set; }
 
         public Chunk[] Chunks { get; private set; }
 

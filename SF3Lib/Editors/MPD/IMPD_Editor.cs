@@ -2,6 +2,8 @@ using CommonLib;
 using SF3.RawEditors;
 using SF3.Tables;
 using SF3.Tables.MPD;
+using SF3.Tables.MPD.TextureChunk;
+using SF3.Tables.MPD.TextureGroup;
 
 namespace SF3.Editors.MPD {
     public interface IMPD_Editor : IScenarioTableEditor {
@@ -20,14 +22,14 @@ namespace SF3.Editors.MPD {
         IChunkEditor[] ChunkEditors { get; }
         IChunkEditor SurfaceChunkEditor { get; }
 
-        HeaderTable Header { get; }
+        Tables.MPD.HeaderTable Header { get; }
         ColorTable[] Palettes { get; }
         ChunkHeaderTable ChunkHeader { get; }
         UnknownUInt16Table Offset1Table { get; }
         UnknownUInt32Table Offset2Table { get; }
         UnknownUInt16Table Offset3Table { get; }
         Offset4Table Offset4Table { get; }
-        TextureGroupTable TextureGroupTable { get; }
+        Tables.MPD.TextureGroup.HeaderTable TextureGroupHeader { get; }
 
         Chunk[] Chunks { get; }
         Chunk SurfaceChunk { get; }
