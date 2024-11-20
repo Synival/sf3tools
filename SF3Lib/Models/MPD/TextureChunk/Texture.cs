@@ -65,7 +65,7 @@ namespace SF3.Models.MPD.TextureChunk {
         }
 
         [BulkCopy]
-        [Metadata(displayOrder: 0)]
+        [ViewModelData(displayOrder: 0)]
         public int Width {
             get => Editor.GetByte(widthAddress);
             set {
@@ -75,7 +75,7 @@ namespace SF3.Models.MPD.TextureChunk {
         }
 
         [BulkCopy]
-        [Metadata(displayOrder: 1)]
+        [ViewModelData(displayOrder: 1)]
         public int Height {
             get => Editor.GetByte(heightAddress);
             set {
@@ -85,7 +85,7 @@ namespace SF3.Models.MPD.TextureChunk {
         }
 
         [BulkCopy]
-        [Metadata(displayOrder: 2, displayFormat: "X4")]
+        [ViewModelData(displayOrder: 2, displayFormat: "X4")]
         public int ImageDataOffset {
             get => Editor.GetWord(imageDataOffsetAddress);
             set {
@@ -94,7 +94,7 @@ namespace SF3.Models.MPD.TextureChunk {
             }
         }
 
-        [Metadata(displayName: "(Assumed) Pixel Format", displayOrder: 3)]
+        [ViewModelData(displayName: "(Assumed) Pixel Format", displayOrder: 3)]
         public TexturePixelFormat AssumedPixelFormat { get; }
 
         public ushort[,] ImageData16Bit {

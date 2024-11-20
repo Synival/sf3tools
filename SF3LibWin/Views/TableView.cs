@@ -30,10 +30,10 @@ namespace SF3.Win.Views {
                 .ToList();
 
             var props = columnProperties
-                .Select(x => new { Property = x, Attributes = x.GetCustomAttributes(typeof(MetadataAttribute), true) })
+                .Select(x => new { Property = x, Attributes = x.GetCustomAttributes(typeof(ViewModelDataAttribute), true) })
                 .Where(x => x.Attributes.Length == 1)
-                .OrderBy(x => ((MetadataAttribute) x.Attributes[0]).DisplayOrder)
-                .ToDictionary(x => x.Property, x => (MetadataAttribute) x.Attributes[0]);
+                .OrderBy(x => ((ViewModelDataAttribute) x.Attributes[0]).DisplayOrder)
+                .ToDictionary(x => x.Property, x => (ViewModelDataAttribute) x.Attributes[0]);
 
             var lvcColumns = new List<OLVColumn>();
             Font hexFont = null;

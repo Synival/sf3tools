@@ -14,14 +14,14 @@ namespace SF3.Models.MPD {
         }
 
         [BulkCopy]
-        [Metadata(displayName: "Chunk Address", isPointer: true)]
+        [ViewModelData(displayName: "Chunk Address", isPointer: true)]
         public int ChunkAddress {
             get => Editor.GetDouble(chunkAddressAddress);
             set => Editor.SetDouble(chunkAddressAddress, value);
         }
 
         [BulkCopy]
-        [Metadata(displayName: "Chunk Size", displayFormat: "X4")]
+        [ViewModelData(displayName: "Chunk Size", displayFormat: "X4")]
         public int ChunkSize {
             get => Editor.GetDouble(chunkSizeAddress);
             set => Editor.SetDouble(chunkSizeAddress, value);

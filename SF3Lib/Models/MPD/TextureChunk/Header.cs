@@ -14,14 +14,14 @@ namespace SF3.Models.MPD.TextureChunk {
         }
 
         [BulkCopy]
-        [Metadata(displayName: "# Textures", displayOrder: 0)]
+        [ViewModelData(displayName: "# Textures", displayOrder: 0)]
         public int NumTextures {
             get => Editor.GetWord(numTexturesAddress);
             set => Editor.SetWord(numTexturesAddress, value);
         }
 
         [BulkCopy]
-        [Metadata(displayName: "Texture ID Start", displayOrder: 1, displayFormat: "X2")]
+        [ViewModelData(displayName: "Texture ID Start", displayOrder: 1, displayFormat: "X2")]
         public int TextureIdStart {
             get => Editor.GetWord(textureIdStartAddress);
             set => Editor.SetWord(textureIdStartAddress, value);

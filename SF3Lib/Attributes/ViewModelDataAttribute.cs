@@ -1,8 +1,8 @@
 ﻿using System;
 
 namespace SF3.Attributes {
-    public class MetadataAttribute : Attribute {
-        public MetadataAttribute(
+    public class ViewModelDataAttribute : Attribute {
+        public ViewModelDataAttribute(
             string displayName   = null,
             int    displayOrder  = 0,
             string displayFormat = null,

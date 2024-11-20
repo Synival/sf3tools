@@ -19,11 +19,11 @@ namespace SF3.Models.IconPointer {
         public int RealOffsetStart { get; }
 
         [NameGetter(NamedValueType.Spell)]
-        [Metadata(displayName: "Spell Name", displayOrder: 0, minWidth: 120)]
+        [ViewModelData(displayName: "Spell Name", displayOrder: 0, minWidth: 120)]
         public int SpellID => ID;
 
         [BulkCopy]
-        [Metadata(displayName: "Icon Offset", displayOrder: 1, displayFormat: "X4")]
+        [ViewModelData(displayName: "Icon Offset", displayOrder: 1, displayFormat: "X4")]
         public int TheSpellIcon {
             get {
                 return Has16BitIconAddr
@@ -39,7 +39,7 @@ namespace SF3.Models.IconPointer {
         }
 
         [BulkCopy]
-        [Metadata(displayName: "Offset in File for Viewing", displayOrder: 2, displayFormat: "X4")]
+        [ViewModelData(displayName: "Offset in File for Viewing", displayOrder: 2, displayFormat: "X4")]
         public int RealOffset {
             get => TheSpellIcon + RealOffsetStart;
             set => TheSpellIcon = value - RealOffsetStart;
