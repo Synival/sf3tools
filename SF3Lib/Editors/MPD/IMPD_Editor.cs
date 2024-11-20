@@ -27,6 +27,8 @@ namespace SF3.Editors.MPD {
         UnknownUInt32Table Offset2Table { get; }
         UnknownUInt16Table Offset3Table { get; }
         Offset4Table Offset4Table { get; }
+        TextureGroupTable TextureGroupTable { get; }
+
         Chunk[] Chunks { get; }
         Chunk SurfaceChunk { get; }
         TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; }

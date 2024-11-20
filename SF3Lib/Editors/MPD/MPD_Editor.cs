@@ -41,6 +41,13 @@ namespace SF3.Editors.MPD {
             if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 > 0)
                 Palettes[2] = new ColorTable(Editor, Header.Rows[0].OffsetPal3 - ramOffset, 256);
 
+            // Create other tables from header offsets.
+            Offset1Table = (header.Offset1 != 0) ? new UnknownUInt16Table(Editor, header.Offset1 - ramOffset, 32) : null;
+            Offset2Table = (header.Offset2 != 0) ? new UnknownUInt32Table(Editor, header.Offset2 - ramOffset, 1)  : null;
+            Offset3Table = (header.Offset3 != 0) ? new UnknownUInt16Table(Editor, header.Offset3 - ramOffset, 32) : null;
+            Offset4Table = (header.Offset4 != 0) ? new Offset4Table(Editor, header.Offset4 - ramOffset) : null;
+            TextureGroupTable = (header.OffsetTextureGroups != 0) ? new TextureGroupTable(Editor, header.OffsetTextureGroups - ramOffset) : null;
+
             // Create chunk data
             ChunkHeader = new ChunkHeaderTable(Editor, 0x2000);
             _ = ChunkHeader.Load();
@@ -88,12 +95,6 @@ namespace SF3.Editors.MPD {
             }
             UpdateChunkTableDecompressedSizes();
 
-            // Create unknown tables.
-            Offset1Table = (header.Offset1 != 0) ? new UnknownUInt16Table(Editor, header.Offset1 - ramOffset, 32) : null;
-            Offset2Table = (header.Offset2 != 0) ? new UnknownUInt32Table(Editor, header.Offset2 - ramOffset, 1)  : null;
-            Offset3Table = (header.Offset3 != 0) ? new UnknownUInt16Table(Editor, header.Offset3 - ramOffset, 32) : null;
-            Offset4Table = (header.Offset4 != 0) ? new Offset4Table(Editor, header.Offset4 - ramOffset) : null;
-
             // Build a list of all data tables.
             var tables = new List<ITable>() {
                 Header,
@@ -103,12 +104,26 @@ namespace SF3.Editors.MPD {
                 (TileItemRows             = new TileItemRowTable            (ChunkEditors[5].DecompressedEditor, 0x6000)),
             };
 
-            if (SurfaceChunkEditor?.Data?.Length >= 64 * 64 * 2)
-                tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(SurfaceChunkEditor.DecompressedEditor, 0x0000));
+            if (TextureGroupTable != null)
+                tables.Add(TextureGroupTable);
 
             for (var i = 0; i < Palettes.Length; i++)
                 if (Palettes[i] != null)
                     tables.Add(Palettes[i]);
+
+            if (Offset1Table != null)
+                tables.Add(Offset1Table);
+            if (Offset2Table != null)
+                tables.Add(Offset2Table);
+            if (Offset3Table != null)
+                tables.Add(Offset3Table);
+            if (Offset4Table != null)
+                tables.Add(Offset4Table);
+            if (TextureGroupTable != null)
+                tables.Add(TextureGroupTable);
+
+            if (SurfaceChunkEditor?.Data?.Length >= 64 * 64 * 2)
+                tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(SurfaceChunkEditor.DecompressedEditor, 0x0000));
 
             TextureChunks = new TextureChunkEditor[5];
             for (var i = 0; i < TextureChunks.Length; i++) {
@@ -119,15 +134,6 @@ namespace SF3.Editors.MPD {
                     tables.Add(TextureChunks[i].TextureTable);
                 }
             }
-
-            if (Offset1Table != null)
-                tables.Add(Offset1Table);
-            if (Offset2Table != null)
-                tables.Add(Offset2Table);
-            if (Offset3Table != null)
-                tables.Add(Offset3Table);
-            if (Offset4Table != null)
-                tables.Add(Offset4Table);
 
             // Add some callbacks to all child editors.
             foreach (var ce in ChunkEditors.Where(ce => ce != null)) {
@@ -257,6 +263,9 @@ namespace SF3.Editors.MPD {
 
         [BulkCopyRecurse]
         public Offset4Table Offset4Table { get; private set; }
+
+        [BulkCopyRecurse]
+        public TextureGroupTable TextureGroupTable { get; private set; }
 
         public Chunk[] Chunks { get; private set; }
 
