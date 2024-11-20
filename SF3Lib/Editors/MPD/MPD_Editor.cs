@@ -88,6 +88,11 @@ namespace SF3.Editors.MPD {
             }
             UpdateChunkTableDecompressedSizes();
 
+            // Create unknown tables.
+            Offset1Table = (header.Offset1 != 0) ? new UnknownUInt16Table(Editor, header.Offset1 - ramOffset, 32) : null;
+            Offset2Table = (header.Offset1 != 0) ? new UnknownUInt32Table(Editor, header.Offset2 - ramOffset, 1)  : null;
+            Offset3Table = (header.Offset1 != 0) ? new UnknownUInt16Table(Editor, header.Offset3 - ramOffset, 32) : null;
+
             // Build a list of all data tables.
             var tables = new List<ITable>() {
                 Header,
@@ -113,6 +118,13 @@ namespace SF3.Editors.MPD {
                     tables.Add(TextureChunks[i].TextureTable);
                 }
             }
+
+            if (Offset1Table != null)
+                tables.Add(Offset1Table);
+            if (Offset2Table != null)
+                tables.Add(Offset2Table);
+            if (Offset3Table != null)
+                tables.Add(Offset3Table);
 
             // Add some callbacks to all child editors.
             foreach (var ce in ChunkEditors.Where(ce => ce != null)) {
@@ -230,6 +242,15 @@ namespace SF3.Editors.MPD {
 
         [BulkCopyRecurse]
         public ChunkHeaderTable ChunkHeader { get; private set; }
+
+        [BulkCopyRecurse]
+        public UnknownUInt16Table Offset1Table { get; private set; }
+
+        [BulkCopyRecurse]
+        public UnknownUInt32Table Offset2Table { get; private set; }
+
+        [BulkCopyRecurse]
+        public UnknownUInt16Table Offset3Table { get; private set; }
 
         public Chunk[] Chunks { get; private set; }
 

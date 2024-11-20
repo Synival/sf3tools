@@ -1,5 +1,6 @@
 using CommonLib;
 using SF3.RawEditors;
+using SF3.Tables;
 using SF3.Tables.MPD;
 
 namespace SF3.Editors.MPD {
@@ -22,6 +23,9 @@ namespace SF3.Editors.MPD {
         HeaderTable Header { get; }
         ColorTable[] Palettes { get; }
         ChunkHeaderTable ChunkHeader { get; }
+        UnknownUInt16Table Offset1Table { get; }
+        UnknownUInt32Table Offset2Table { get; }
+        UnknownUInt16Table Offset3Table { get; }
         Chunk[] Chunks { get; }
         Chunk SurfaceChunk { get; }
         TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; }
