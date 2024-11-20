@@ -70,7 +70,7 @@ namespace SF3.Tests.Compression {
                             var compressed1 = Compress(decompressed1);
                             var decompressed2 = Decompress(compressed1);
 
-                            Assert.IsTrue(ByteArraysAreEqual(decompressed1, decompressed2), "Chunk" + i + " failed (" + data.Length + " bytes)");
+                            Assert.IsTrue(ByteArraysAreEqual(decompressed1, decompressed2), "Chunk" + i.ToString("D2") + " failed (" + data.Length + " bytes)");
                         }
                     }
                 });
@@ -102,7 +102,7 @@ namespace SF3.Tests.Compression {
                             var compressed1 = Compress(decompressed1);
                             var decompressed2 = Decompress(compressed1);
 
-                            Assert.IsTrue(ByteArraysAreEqual(decompressed1, decompressed2), "Chunk" + i + " failed (" + data.Length + " bytes)");
+                            Assert.IsTrue(ByteArraysAreEqual(decompressed1, decompressed2), "Chunk" + i.ToString("D2") + " failed (" + data.Length + " bytes)");
                         }
                     }
                 });

@@ -7,7 +7,7 @@ namespace SF3.Tables.MPD {
         }
 
         public override bool Load()
-            => LoadUntilMax((id, address) => new ChunkHeader(Editor, id, "Chunk" + id, address));
+            => LoadUntilMax((id, address) => new ChunkHeader(Editor, id, "Chunk" + id.ToString("D2"), address));
 
         public override int? MaxSize => 32;
     }

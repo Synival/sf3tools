@@ -18,7 +18,7 @@ namespace SF3.Tables.MPD.TextureGroup {
 
                 int addr = tex.FramesAddress;
                 for (var i = 0; i < tex.NumFrames; i++) {
-                    var newModel = new FrameModel(Editor, id++, "Group" + tex.ID + " Frame" + (i + 1), addr, tex.TextureID, i + 1);
+                    var newModel = new FrameModel(Editor, id++, tex.Name + "_" + (i + 1), addr, tex.TextureID, i + 1);
                     frameModels.Add(newModel);
                     addr += newModel.Size;
                 }
