@@ -16,6 +16,18 @@
     <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Controls\SByteUpDownControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ByteUpDownControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\Int16UpDownControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\UInt16UpDownControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Controls\SurfaceMapControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

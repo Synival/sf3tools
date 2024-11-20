@@ -7,6 +7,7 @@ using BrightIdeasSoftware;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
+using SF3.Win.Controls;
 using static SF3.Win.Utils.ControlUtils;
 
 namespace SF3.Win.Extensions {
@@ -217,34 +218,6 @@ namespace SF3.Win.Extensions {
             return oldDelegate(obj, model, value);
         }
 
-        private class Int32UpDown : NumericUpDown
-        {
-            public Int32UpDown() {
-                this.DecimalPlaces = 0;
-                this.Minimum = int.MinValue;
-                this.Maximum = int.MaxValue;
-            }
-
-            new public int Value {
-                get => decimal.ToInt32(base.Value);
-                set => base.Value = new decimal(value);
-            }
-        }
-
-        private class UInt32UpDown : NumericUpDown
-        {
-            public UInt32UpDown() {
-                this.DecimalPlaces = 0;
-                this.Minimum = uint.MinValue;
-                this.Maximum = uint.MaxValue;
-            }
-
-            new public uint Value {
-                get => decimal.ToUInt32(base.Value);
-                set => base.Value = new decimal(value);
-            }
-        }
-
         private static bool _namedValuesRegistered = false;
 
         /// <summary>
@@ -260,8 +233,12 @@ namespace SF3.Win.Extensions {
                 "creatorMap", BindingFlags.NonPublic | BindingFlags.Instance);
             var creatorMap = (Dictionary<Type, EditorCreatorDelegate>) creatorMapField.GetValue(ObjectListView.EditorRegistry);
 
-            ObjectListView.EditorRegistry.Register(typeof(int), typeof(Int32UpDown));
-            ObjectListView.EditorRegistry.Register(typeof(uint), typeof(UInt32UpDown));
+            ObjectListView.EditorRegistry.Register(typeof(sbyte), typeof(SByteUpDownControl));
+            ObjectListView.EditorRegistry.Register(typeof(byte), typeof(ByteUpDownControl));
+            ObjectListView.EditorRegistry.Register(typeof(short), typeof(Int16UpDownControl));
+            ObjectListView.EditorRegistry.Register(typeof(ushort), typeof(UInt16UpDownControl));
+            ObjectListView.EditorRegistry.Register(typeof(int), typeof(Int32UpDownControl));
+            ObjectListView.EditorRegistry.Register(typeof(uint), typeof(UInt32UpDownControl));
 
             var typesToHijack = new Type[] {
                 typeof(short),
