@@ -90,8 +90,9 @@ namespace SF3.Editors.MPD {
 
             // Create unknown tables.
             Offset1Table = (header.Offset1 != 0) ? new UnknownUInt16Table(Editor, header.Offset1 - ramOffset, 32) : null;
-            Offset2Table = (header.Offset1 != 0) ? new UnknownUInt32Table(Editor, header.Offset2 - ramOffset, 1)  : null;
-            Offset3Table = (header.Offset1 != 0) ? new UnknownUInt16Table(Editor, header.Offset3 - ramOffset, 32) : null;
+            Offset2Table = (header.Offset2 != 0) ? new UnknownUInt32Table(Editor, header.Offset2 - ramOffset, 1)  : null;
+            Offset3Table = (header.Offset3 != 0) ? new UnknownUInt16Table(Editor, header.Offset3 - ramOffset, 32) : null;
+            Offset4Table = (header.Offset4 != 0) ? new Offset4Table(Editor, header.Offset4 - ramOffset) : null;
 
             // Build a list of all data tables.
             var tables = new List<ITable>() {
@@ -125,6 +126,8 @@ namespace SF3.Editors.MPD {
                 tables.Add(Offset2Table);
             if (Offset3Table != null)
                 tables.Add(Offset3Table);
+            if (Offset4Table != null)
+                tables.Add(Offset4Table);
 
             // Add some callbacks to all child editors.
             foreach (var ce in ChunkEditors.Where(ce => ce != null)) {
@@ -251,6 +254,9 @@ namespace SF3.Editors.MPD {
 
         [BulkCopyRecurse]
         public UnknownUInt16Table Offset3Table { get; private set; }
+
+        [BulkCopyRecurse]
+        public Offset4Table Offset4Table { get; private set; }
 
         public Chunk[] Chunks { get; private set; }
 

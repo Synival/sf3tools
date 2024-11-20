@@ -21,6 +21,7 @@ namespace SF3.Win.Views.MPD {
             _ = headerContainer.CreateChild(new TableView("Offset 1 Table", Editor.Offset1Table, ngc));
             _ = headerContainer.CreateChild(new TableView("Offset 2 Table", Editor.Offset2Table, ngc));
             _ = headerContainer.CreateChild(new TableView("Offset 3 Table", Editor.Offset3Table, ngc));
+            _ = headerContainer.CreateChild(new TableView("Offset 4 Table", Editor.Offset4Table, ngc));
 
             var paletteContainer = new TabView("Palettes");
             _ = CreateChild(paletteContainer);

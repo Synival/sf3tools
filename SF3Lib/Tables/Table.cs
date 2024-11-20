@@ -133,7 +133,7 @@ namespace SF3.Tables {
         /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
         public bool LoadUntilMax(Func<int, int, T> makeTFunc, ContinueReadingPredicate pred) {
             var rowDict = new Dictionary<int, T>();
-            var rows = new T[(int) MaxSize];
+            var rows = new T[MaxSize ?? 256];
 
             try {
                 T prevModel = null;
