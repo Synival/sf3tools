@@ -6,6 +6,24 @@ namespace CommonLib.Utils {
     public static class PixelConversion {
         public struct PixelChannels {
             public byte a, r, g, b;
+
+            public ushort ToARGB1555()
+                => (ushort) (((a >= 127) ? 0x8000 : 0x0000) |
+                             ((r >> 3) << 10) |
+                             ((g >> 3) << 5)  |
+                             ((b >> 3) << 0));
+
+            public ushort ToABGR1555()
+                => (ushort) (((a >= 127) ? 0x8000 : 0x0000) |
+                             ((b >> 3) << 10) |
+                             ((g >> 3) << 5)  |
+                             ((r >> 3) << 0));
+
+            public uint ToARGB8888()
+                => (uint ) ((a << 24) |
+                            (r << 16) |
+                            (g << 8)  |
+                            (b << 0));
         }
 
         public static ushort ABGR1555toARGB1555(ushort input)

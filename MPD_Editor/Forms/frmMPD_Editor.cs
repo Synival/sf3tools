@@ -11,9 +11,10 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using static CommonLib.Win.Utils.MessageUtils;
 using System.Diagnostics;
 using SF3.Types;
+using static CommonLib.Win.Utils.MessageUtils;
+using static CommonLib.Utils.PixelConversion;
 
 namespace SF3.MPD_Editor.Forms {
 
@@ -156,29 +157,23 @@ namespace SF3.MPD_Editor.Forms {
                                 int pos = 0;
                                 for (int y = 0; y < texture.Height; y++) {
                                     for (int x = 0; x < texture.Width; x++) {
-                                        var byte1 = readBytes[pos++];
-                                        var byte2 = readBytes[pos++];
-                                        var byte3 = readBytes[pos++];
-                                        var byte4 = readBytes[pos++];
+                                        var byteB = readBytes[pos++];
+                                        var byteG = readBytes[pos++];
+                                        var byteR = readBytes[pos++];
+                                        var byteA = readBytes[pos++];
 
-                                        var a = (ushort) ((byte4 >= 127) ? 0x8000 : 0x0000);
-                                        var r = (ushort) (byte3 >> 3);
-                                        var g = (ushort) (byte2 >> 3);
-                                        var b = (ushort) (byte1 >> 3);
+                                        var channels = new PixelChannels() { a = byteA, r = byteR, g = byteG, b = byteB };
+                                        var abgr1555 = channels.ToABGR1555();
 
-                                        var cachedA = (ushort) (texture.CachedImageData16Bit[x, y] & 0x8000);
-                                        var cachedR = (ushort) ((texture.CachedImageData16Bit[x, y] >> 0) & 0x1F);
-                                        var cachedG = (ushort) ((texture.CachedImageData16Bit[x, y] >> 5) & 0x1F);
-                                        var cachedB = (ushort) ((texture.CachedImageData16Bit[x, y] >> 10) & 0x1F);
-
-                                        if (a == 0) {
-                                            r = cachedR;
-                                            g = cachedG;
-                                            b = cachedB;
+                                        // If the alpha channel is clear, preserve whatever color was originally used.
+                                        // This should prevent marking data as 'modified' too often.
+                                        if ((abgr1555 & 0x8000) == 0) {
+                                            var cached = ABGR1555toChannels(texture.CachedImageData16Bit[x, y]);
+                                            cached.a = 0;
+                                            abgr1555 = cached.ToABGR1555();
                                         }
 
-                                        ushort pixelABGR = (ushort) (a | (r << 0) | (g << 5) | (b << 10));
-                                        newImageData[x, y] = pixelABGR;
+                                        newImageData[x, y] = abgr1555;
                                     }
                                 }
 
