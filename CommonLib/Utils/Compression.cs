@@ -13,16 +13,16 @@ namespace CommonLib.Utils {
         /// </summary>
         /// <param name="data">The compressed data to decompress.</param>
         /// <returns>A decompressed set of bytes.</returns>
-        public static byte[] Decompress(byte[] data) {
+        public static byte[] Decompress(byte[] data, int? maxOutput = null) {
             if (data.Length % 2 == 1)
                 throw new ArgumentException(nameof(data) + ": must be an even number of bytes");
 
-            byte[] outputArray = new byte[0x20000];
+            byte[] outputArray = new byte[maxOutput ?? 0x20000];
             int outputPosition = 0;
             int bufferLoc = 0;
 
             int pos = 0;
-            while (pos < data.Length) {
+            while (pos < data.Length && (!maxOutput.HasValue || outputPosition < maxOutput.Value)) {
                 byte ctrl1 = data[pos++];
                 byte ctrl2 = data[pos++];
 
