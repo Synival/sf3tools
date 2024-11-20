@@ -32,7 +32,7 @@
             BackColor = System.Drawing.Color.Transparent;
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "TextureControl";
-            Size = new System.Drawing.Size(175, 173);
+            Size = new System.Drawing.Size(64, 64);
             ResumeLayout(false);
         }
 
