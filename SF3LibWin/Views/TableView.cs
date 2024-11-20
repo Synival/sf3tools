@@ -48,7 +48,7 @@ namespace SF3.Win.Views {
                 if (hexFont == null)
                     hexFont = new Font("Courier New", Control.DefaultFont.Size);
 
-                lvc.IsEditable = prop.GetSetMethod() != null;
+                lvc.IsEditable = !attr.IsReadOnly && prop.GetSetMethod() != null;
                 lvc.Text = attr.DisplayName ?? prop.Name;
 
                 if (attr.DisplayFormat != null && attr.DisplayFormat != string.Empty)

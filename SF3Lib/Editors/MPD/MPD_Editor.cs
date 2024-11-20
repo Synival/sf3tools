@@ -52,6 +52,7 @@ namespace SF3.Editors.MPD {
                     Chunks[i] = new Chunk(((ByteEditor) Editor).Data, chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
             }
 
+            // Assign all chunk editors.
             ChunkEditors = new IChunkEditor[Chunks.Length];
 
             if (Chunks[2]?.Data?.Length > 0) {
@@ -77,6 +78,17 @@ namespace SF3.Editors.MPD {
                 }
             }
 
+            // We should have all the uncompressed data now. Update read-only info of our chunk table.
+            for (var i = 0; i < ChunkHeader.Rows.Length; i++) {
+                ChunkHeader.Rows[i].CompressionType =
+                    (ChunkEditors[i] == null && (Chunks[i]?.Data?.Length ?? 0) == 0) ? "--" :
+                    (ChunkEditors[i] == null) ? "(WIP)" :
+                    ChunkEditors[i].IsCompressed ? "Compressed" :
+                    "Uncompressed";
+            }
+            UpdateChunkTableDecompressedSizes();
+
+            // Build a list of all data tables.
             var tables = new List<ITable>() {
                 Header,
                 ChunkHeader,
@@ -112,6 +124,11 @@ namespace SF3.Editors.MPD {
             }
 
             return tables;
+        }
+
+        private void UpdateChunkTableDecompressedSizes() {
+            for (var i = 0; i < ChunkHeader.Rows.Length; i++)
+                ChunkHeader.Rows[i].DecompressedSize = ChunkEditors[i]?.DecompressedEditor?.Size ?? 0;
         }
 
         [DllImport("msvcrt.dll", SetLastError = false)]
