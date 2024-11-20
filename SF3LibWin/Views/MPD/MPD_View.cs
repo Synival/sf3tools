@@ -3,9 +3,9 @@ using System.Windows.Forms;
 using SF3.Editors.MPD;
 using SF3.Win.Controls;
 
-namespace SF3.Win.EditorControls.MPD {
-    public class MPD_EditorControl : EditorControlContainer {
-        public MPD_EditorControl(string name, IMPD_Editor editor) : base(name) {
+namespace SF3.Win.Views.MPD {
+    public class MPD_View : TabView {
+        public MPD_View(string name, IMPD_Editor editor) : base(name) {
             Editor = editor;
         }
 
@@ -14,17 +14,17 @@ namespace SF3.Win.EditorControls.MPD {
 
             var ngc = Editor.NameGetterContext;
 
-            var headerContainer = new EditorControlContainer("Headers");
+            var headerContainer = new TabView("Headers");
             _ = CreateChild(headerContainer);
-            _ = headerContainer.CreateChild(new TableEditorControl("Header", Editor.Header, ngc));
-            _ = headerContainer.CreateChild(new TableEditorControl("Chunk Header", Editor.ChunkHeader, ngc));
+            _ = headerContainer.CreateChild(new TableView("Header", Editor.Header, ngc));
+            _ = headerContainer.CreateChild(new TableView("Chunk Header", Editor.ChunkHeader, ngc));
 
-            var paletteContainer = new EditorControlContainer("Palettes");
+            var paletteContainer = new TabView("Palettes");
             _ = CreateChild(paletteContainer);
             for (var i = 0; i < Editor.Palettes.Length; i++)
-                _ = paletteContainer.CreateChild(new TableEditorControl("Palette" + (i + 1).ToString(), Editor.Palettes[i], ngc));
+                _ = paletteContainer.CreateChild(new TableView("Palette" + (i + 1).ToString(), Editor.Palettes[i], ngc));
 
-            var surfaceContainer = new EditorControlContainer("Surface");
+            var surfaceContainer = new TabView("Surface");
             var surfaceTabControl = (TabControl) CreateChild(surfaceContainer);
             var surfaceMapControl = (Editor.TileSurfaceCharacterRows != null) ? new SurfaceMapControl() : null;
             _ = surfaceContainer.CreateChild("Viewer", surfaceMapControl, autoFill: false);
@@ -40,15 +40,15 @@ namespace SF3.Win.EditorControls.MPD {
                 surfaceMapControl.UpdateTextures(Editor.TileSurfaceCharacterRows.TextureData, Editor.TextureChunks);
             }
 
-            _ = surfaceContainer.CreateChild(new TableEditorControl("Textures", Editor.TileSurfaceCharacterRows, ngc));
-            _ = surfaceContainer.CreateChild(new TableEditorControl("Heightmap", Editor.TileSurfaceHeightmapRows, ngc));
-            _ = surfaceContainer.CreateChild(new TableEditorControl("Height + Terrain Type", Editor.TileHeightTerrainRows, ngc));
-            _ = surfaceContainer.CreateChild(new TableEditorControl("Object Locations", Editor.TileItemRows, ngc));
+            _ = surfaceContainer.CreateChild(new TableView("Textures", Editor.TileSurfaceCharacterRows, ngc));
+            _ = surfaceContainer.CreateChild(new TableView("Heightmap", Editor.TileSurfaceHeightmapRows, ngc));
+            _ = surfaceContainer.CreateChild(new TableView("Height + Terrain Type", Editor.TileHeightTerrainRows, ngc));
+            _ = surfaceContainer.CreateChild(new TableView("Object Locations", Editor.TileItemRows, ngc));
 
-            var textureContainer = new EditorControlContainer("Textures");
+            var textureContainer = new TabView("Textures");
             _ = CreateChild(textureContainer);
             for (var i = 0; i < Editor.TextureChunks.Length; i++)
-                _ = textureContainer.CreateChild(new TextureChunkEditorControl("Chunk " + (i + 6), Editor.TextureChunks[i]));
+                _ = textureContainer.CreateChild(new TextureChunkView("Chunk " + (i + 6), Editor.TextureChunks[i]));
 
             return Control;
         }

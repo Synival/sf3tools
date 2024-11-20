@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace SF3.Win.EditorControls {
-    public class EditorControlContainer : EditorControlBase, IEditorControlContainer {
+namespace SF3.Win.Views {
+    public class TabView : ViewBase, ITabView {
         private static int s_controlIndex = 1;
 
-        public EditorControlContainer(string name) : base(name) {
+        public TabView(string name) : base(name) {
         }
 
         private static bool s_inSelectCousinTabs = false;
@@ -15,7 +15,7 @@ namespace SF3.Win.EditorControls {
             var tabControl = new TabControl();
 
             tabControl.SuspendLayout();
-            tabControl.Name = "tabsControlEditorControl" + (s_controlIndex++);
+            tabControl.Name = "tabsControlView" + (s_controlIndex++);
             tabControl.TabIndex = 1;
             tabControl.ResumeLayout();
 
@@ -85,7 +85,6 @@ namespace SF3.Win.EditorControls {
             };
 
             Control = tabControl;
-            TabControl = tabControl;
             return tabControl;
         }
 
@@ -95,10 +94,9 @@ namespace SF3.Win.EditorControls {
             _childControls.Clear();
 
             base.Destroy();
-            TabControl = null;
         }
 
-        public Control CreateChild(IEditorControl child, bool autoFill = true)
+        public Control CreateChild(IView child, bool autoFill = true)
             => CreateChild(child.Name, child.Create(), autoFill);
 
         public Control CreateChild(string name, Control child, bool autoFill = true) {
@@ -123,7 +121,7 @@ namespace SF3.Win.EditorControls {
             return child;
         }
 
-        private TabControl TabControl { get; set; } = null;
+        public TabControl TabControl => (TabControl) Control;
 
         private List<Control> _childControls = new List<Control>();
 

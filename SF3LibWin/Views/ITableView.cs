@@ -1,8 +1,8 @@
 ﻿using CommonLib.NamedValues;
 using SF3.Tables;
 
-namespace SF3.Win.EditorControls {
-    public interface ITableEditorControl : IEditorControl {
+namespace SF3.Win.Views {
+    public interface ITableView : IView {
         /// <summary>
         /// The table that is to be edited.
         /// </summary>

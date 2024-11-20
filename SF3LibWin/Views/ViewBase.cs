@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SF3.Win.EditorControls {
-    public abstract class EditorControlBase : IEditorControl {
-        protected EditorControlBase(string name) {
+namespace SF3.Win.Views {
+    public abstract class ViewBase : IView {
+        protected ViewBase(string name) {
             Name = name;
         }
 

@@ -9,11 +9,11 @@ using SF3.Attributes;
 using SF3.Tables;
 using SF3.Win.Extensions;
 
-namespace SF3.Win.EditorControls {
-    public class TableEditorControl : EditorControlBase, ITableEditorControl {
+namespace SF3.Win.Views {
+    public class TableView : ViewBase, ITableView {
         private static int s_controlIndex = 1;
 
-        public TableEditorControl(string name, Table table, INameGetterContext nameGetterContext)
+        public TableView(string name, Table table, INameGetterContext nameGetterContext)
         : base(name) {
             Table = table;
             NameGetterContext = nameGetterContext;
@@ -38,7 +38,7 @@ namespace SF3.Win.EditorControls {
             var lvcColumns = new List<OLVColumn>();
             Font hexFont = null;
 
-            var lvcNameBase = "lvcTableEditorControl" + s_controlIndex;
+            var lvcNameBase = "lvcTableView" + s_controlIndex;
 
             foreach (var kv in props) {
                 var prop = kv.Key;
@@ -72,7 +72,7 @@ namespace SF3.Win.EditorControls {
             olv.HasCollapsibleGroups = false;
             olv.HideSelection = false;
             olv.MenuLabelGroupBy = "";
-            olv.Name = "olvTableEditorControl" + (s_controlIndex++);
+            olv.Name = "olvTableView" + (s_controlIndex++);
             olv.ShowGroups = false;
             olv.TabIndex = 1;
             olv.UseAlternatingBackColors = true;

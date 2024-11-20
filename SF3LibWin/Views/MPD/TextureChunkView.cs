@@ -6,9 +6,9 @@ using SF3.Models.MPD.TextureChunk;
 using SF3.Win.Controls;
 using SF3.Win.Extensions;
 
-namespace SF3.Win.EditorControls.MPD {
-    public class TextureChunkEditorControl : EditorControlContainer {
-        public TextureChunkEditorControl(string name, TextureChunkEditor editor) : base(name) {
+namespace SF3.Win.Views.MPD {
+    public class TextureChunkView : TabView {
+        public TextureChunkView(string name, TextureChunkEditor editor) : base(name) {
             Editor = editor;
         }
 
@@ -17,8 +17,8 @@ namespace SF3.Win.EditorControls.MPD {
 
             var ngc = Editor.NameGetterContext;
 
-            _ = CreateChild(new TableEditorControl("Header", Editor.HeaderTable, ngc));
-            var textureTableControl = CreateChild(new TableEditorControl("Textures", Editor.TextureTable, ngc)) as ObjectListView;
+            _ = CreateChild(new TableView("Header", Editor.HeaderTable, ngc));
+            var textureTableControl = CreateChild(new TableView("Textures", Editor.TextureTable, ngc)) as ObjectListView;
             var textureTabPage = textureTableControl?.Parent;
 
             // Add a texture viewer on the right side of the 'Textures' tab.

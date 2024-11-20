@@ -6,8 +6,8 @@ using SF3.Editors.MPD;
 using SF3.NamedValues;
 using SF3.RawEditors;
 using SF3.Types;
-using SF3.Win.EditorControls;
-using SF3.Win.EditorControls.MPD;
+using SF3.Win.Views;
+using SF3.Win.Views.MPD;
 using static SF3.Win.Extensions.ObjectListViewExtensions;
 
 namespace SF3Editor {
@@ -22,19 +22,19 @@ namespace SF3Editor {
             SuspendLayout();
             InitializeComponent();
 
-            var controlContainer = new EditorControlContainer("Test Container");
+            var controlContainer = new TabView("Test Container");
             var controlContainerControl = controlContainer.Create();
 
             var iconPointerEditorBinsToLoad = new string[] {"X011.BIN", "X021.BIN"};
             foreach (var bin in iconPointerEditorBinsToLoad) {
                 var iconPointerEditor = IconPointerEditor.Create(new ByteEditor(File.ReadAllBytes(c_discPath + bin)), c_nameGetterContext, c_scenario);
-                _ = controlContainer.CreateChild(new IconPointerEditorControl(bin, iconPointerEditor));
+                _ = controlContainer.CreateChild(new IconPointerView(bin, iconPointerEditor));
             }
 
             var mpdsToLoad = new string[] {"BTL02.MPD", "BTL03.MPD", "BTL04A.MPD"};
             foreach (var mpd in mpdsToLoad) {
                 var mpdEditor = MPD_Editor.Create(new ByteEditor(File.ReadAllBytes(c_discPath + mpd)), c_nameGetterContext, c_scenario);
-                _ = controlContainer.CreateChild(new MPD_EditorControl(mpd, mpdEditor));
+                _ = controlContainer.CreateChild(new MPD_View(mpd, mpdEditor));
             }
 
             controlContainerControl.Dock = DockStyle.Fill;

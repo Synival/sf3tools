@@ -4,7 +4,7 @@ using SF3.Editors;
 using SF3.Editors.MPD;
 using SF3.Loaders;
 using SF3.NamedValues;
-using SF3.Win.EditorControls.MPD;
+using SF3.Win.Views.MPD;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Linq;
 using System.IO;
@@ -23,7 +23,7 @@ namespace SF3.MPD_Editor.Forms {
         protected override string Version => "0.3";
 
         public IMPD_Editor Editor => base.FileLoader.Editor as IMPD_Editor;
-        public MPD_EditorControl EditorControl { get; private set; } = null;
+        public MPD_View View { get; private set; } = null;
         public Control Control { get; private set; } = null;
 
         public frmMPDEditor() {
@@ -49,13 +49,13 @@ namespace SF3.MPD_Editor.Forms {
             SuspendLayout();
     
             try {
-                EditorControl = new MPD_EditorControl(FileLoader.Filename, Editor);
-                Control = EditorControl.Create();
+                View = new MPD_View(FileLoader.Filename, Editor);
+                Control = View.Create();
             }
             catch {
-                if (EditorControl != null) {
-                    EditorControl.Dispose();
-                    EditorControl = null;
+                if (View != null) {
+                    View.Dispose();
+                    View = null;
                 }
                 if (Control != null) {
                     Control.Dispose();
@@ -82,9 +82,9 @@ namespace SF3.MPD_Editor.Forms {
                 Control.Dispose();
                 Control = null;
             }
-            if (EditorControl != null) {
-                EditorControl.Dispose();
-                EditorControl = null;
+            if (View != null) {
+                View.Dispose();
+                View = null;
             }
             ResumeLayout();
 
