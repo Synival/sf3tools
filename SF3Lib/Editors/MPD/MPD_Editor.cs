@@ -85,7 +85,10 @@ namespace SF3.Editors.MPD {
                     var frame = TextureGroupFrames.Rows[i];
                     if (frame.CompressedTextureOffset != 0xFFFE) {
                         var textureGroup = TextureGroupHeader.Rows[frame.GroupID];
-                        // TODO: where's the data????
+                        var totalBytes = frame.Width * frame.Height * 2;
+                        // TODO: this is super inefficient!!!
+                        var bytes = Chunks[3].Data.Skip(frame.CompressedTextureOffset).Take(totalBytes).ToArray();
+                        TextureGroupFrameEditors[i] = new CompressedEditor(bytes, totalBytes);
                     }
                 }
             }
@@ -183,6 +186,8 @@ namespace SF3.Editors.MPD {
         private static extern IntPtr memcpy(IntPtr dest, IntPtr src, int count);
 
         public bool Recompress(bool onlyModified) {
+            // TODO: update group texture frame textures as well!!
+
             // Don't bother doing anything if no chunks have been modified.
             if (onlyModified && !ChunkEditors.Any(x => x != null && (x.IsModified || x.NeedsRecompression)))
                 return true;

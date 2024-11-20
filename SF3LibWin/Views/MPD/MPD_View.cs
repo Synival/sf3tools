@@ -43,7 +43,10 @@ namespace SF3.Win.Views.MPD {
 
                 void OnTextureChanged(object sender, EventArgs e) {
                     var item = (OLVListItem) framesControl.SelectedItem;
-                    textureViewer.TextureImage = (item != null) ? ((FrameModel) item.RowObject).CreateBitmap() : null;
+                    var frame = (FrameModel) item?.RowObject;
+                    textureViewer.TextureImage = (frame == null || Editor.TextureGroupFrameEditors[frame.ID] == null)
+                        ? (System.Drawing.Image) null
+                        : frame.CreateBitmap(Editor.TextureGroupFrameEditors[frame.ID].DecompressedEditor);
                 };
 
                 framesControl.ItemSelectionChanged += (s, e) => OnTextureChanged(s, e);
