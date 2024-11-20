@@ -3,18 +3,29 @@ using static CommonLib.Utils.Compression;
 
 namespace SF3.RawEditors {
     public class CompressedEditor : ByteEditor, ICompressedEditor {
-        public CompressedEditor(byte[] data) : base(data) {
+        public CompressedEditor(byte[] data, int? maxDecompressedSize = null) : base(data) {
+            MaxDecompressedSize = maxDecompressedSize;
+            _hasInit = true;
+
+            using (IsModifiedChangeBlocker())
+                _ = SetData(data);
         }
 
-        public override bool SetData(byte[] data)
-            => SetData(data, updateDecompressedData: true);
+        // TODO: This _hasInit is a ugly workaround for the fact that a virtual method
+        //       is called in the base constructor. Bad!!!
+        private bool _hasInit = false;
+        public override bool SetData(byte[] data) {
+            if (!_hasInit)
+                return false;
+            return SetData(data, updateDecompressedData: true);
+        }
 
         public bool SetData(byte[] data, bool updateDecompressedData = true) {
             if (!base.SetData(data))
                 return false;
 
             if (updateDecompressedData) {
-                var decompressedData = Decompress(data);
+                var decompressedData = Decompress(data, MaxDecompressedSize);
                 if (DecompressedEditor == null) {
                     DecompressedEditor = new ByteEditor(decompressedData);
 
@@ -84,6 +95,8 @@ namespace SF3.RawEditors {
                 base.IsModified = NeedsRecompression | value;
             }
         }
+
+        public int? MaxDecompressedSize { get; }
 
         public event EventHandler NeedsRecompressionChanged;
     }
