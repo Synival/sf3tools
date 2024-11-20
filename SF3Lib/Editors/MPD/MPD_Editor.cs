@@ -157,7 +157,13 @@ namespace SF3.Editors.MPD {
             }
 
             // Add some callbacks to all child editors.
-            foreach (var ce in ((IBaseEditor[])ChunkEditors).Concat((IBaseEditor[]) TextureGroupFrameEditors).Where(ce => ce != null)) {
+            var editors = ChunkEditors
+                .Cast<IRawEditor>()
+                .Concat(TextureGroupFrameEditors.Cast<IRawEditor>())
+                .Where(x => x != null)
+                .ToArray();
+
+            foreach (var ce in editors) {
                 // If the editor is marked as unmodified (such as after a save), mark child editors as unmodified as well.
                 Editor.IsModifiedChanged += (s, e) => ce.IsModified &= Editor.IsModified;
 
