@@ -9,7 +9,6 @@ using SF3.Types;
 using System.Linq;
 using CommonLib;
 using System.Runtime.InteropServices;
-using SF3.Tables.MPD.TextureChunk;
 using SF3.Tables.MPD.TextureGroup;
 
 namespace SF3.Editors.MPD {
@@ -48,7 +47,12 @@ namespace SF3.Editors.MPD {
             Offset2Table = (header.Offset2 != 0) ? new UnknownUInt32Table(Editor, header.Offset2 - ramOffset, 1)  : null;
             Offset3Table = (header.Offset3 != 0) ? new UnknownUInt16Table(Editor, header.Offset3 - ramOffset, 32) : null;
             Offset4Table = (header.Offset4 != 0) ? new Offset4Table(Editor, header.Offset4 - ramOffset) : null;
-            TextureGroupHeader = (header.OffsetTextureGroups != 0) ? new Tables.MPD.TextureGroup.HeaderTable(Editor, header.OffsetTextureGroups - ramOffset) : null;
+
+            if (header.OffsetTextureGroups != 0) {
+                TextureGroupHeader = new Tables.MPD.TextureGroup.HeaderTable(Editor, header.OffsetTextureGroups - ramOffset);
+                TextureGroupHeader.Load();
+                TextureGroupFrames = new FrameTable(Editor, TextureGroupHeader.Address, TextureGroupHeader.Rows);
+            }
 
             // Create chunk data
             ChunkHeader = new ChunkHeaderTable(Editor, 0x2000);
@@ -123,6 +127,8 @@ namespace SF3.Editors.MPD {
                 tables.Add(Offset4Table);
             if (TextureGroupHeader != null)
                 tables.Add(TextureGroupHeader);
+            if (TextureGroupFrames != null)
+                tables.Add(TextureGroupFrames);
 
             if (SurfaceChunkEditor?.Data?.Length >= 64 * 64 * 2)
                 tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(SurfaceChunkEditor.DecompressedEditor, 0x0000));
@@ -268,6 +274,9 @@ namespace SF3.Editors.MPD {
 
         [BulkCopyRecurse]
         public Tables.MPD.TextureGroup.HeaderTable TextureGroupHeader { get; private set; }
+
+        [BulkCopyRecurse]
+        public FrameTable TextureGroupFrames { get; private set; }
 
         public Chunk[] Chunks { get; private set; }
 

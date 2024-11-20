@@ -133,18 +133,19 @@ namespace SF3.Tables {
         /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
         public bool LoadUntilMax(Func<int, int, T> makeTFunc, ContinueReadingPredicate pred) {
             var rowDict = new Dictionary<int, T>();
-            var rows = new T[MaxSize ?? 256];
+            var rows = new List<T>();
 
             try {
                 T prevModel = null;
                 var address = Address;
-                for (var id = 0; id < rows.Length; ++id) {
+                var max = MaxSize ?? 65536;
+                for (var id = 0; id < max; ++id) {
                     var newModel = makeTFunc(id, address);
                     if (pred != null && !pred(rowDict, prevModel, newModel))
                         break;
 
                     rowDict[id] = newModel;
-                    rows[id] = newModel;
+                    rows.Add(newModel);
                     address += newModel.Size;
 
                     prevModel = newModel;
@@ -154,7 +155,7 @@ namespace SF3.Tables {
                 return false;
             }
             finally {
-                _rows = rows;
+                _rows = rows.ToArray();
             }
             return true;
         }

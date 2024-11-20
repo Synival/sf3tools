@@ -29,14 +29,18 @@ namespace SF3.Editors.MPD {
         UnknownUInt32Table Offset2Table { get; }
         UnknownUInt16Table Offset3Table { get; }
         Offset4Table Offset4Table { get; }
+
         Tables.MPD.TextureGroup.HeaderTable TextureGroupHeader { get; }
+        FrameTable TextureGroupFrames { get; }
 
         Chunk[] Chunks { get; }
+
         Chunk SurfaceChunk { get; }
         TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; }
         TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; }
         TileHeightTerrainRowTable TileHeightTerrainRows { get; }
         TileItemRowTable TileItemRows { get; }
+
         TextureChunkEditor[] TextureChunks { get; }
     }
 }

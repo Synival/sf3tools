@@ -26,6 +26,7 @@ namespace SF3.Win.Views.MPD {
             var textureGroupContainer = new TabView("Texture Groups");
             _ = CreateChild(textureGroupContainer);
             _ = textureGroupContainer.CreateChild(new TableView("Header", Editor.TextureGroupHeader, ngc));
+            _ = textureGroupContainer.CreateChild(new TableView("Frames", Editor.TextureGroupFrames, ngc));
 
             var paletteContainer = new TabView("Palettes");
             _ = CreateChild(paletteContainer);
