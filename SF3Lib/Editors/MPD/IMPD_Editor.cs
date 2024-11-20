@@ -32,6 +32,7 @@ namespace SF3.Editors.MPD {
 
         Tables.MPD.TextureGroup.HeaderTable TextureGroupHeader { get; }
         FrameTable TextureGroupFrames { get; }
+        CompressedEditor[] TextureGroupFrameEditors { get; }
 
         Chunk[] Chunks { get; }
 

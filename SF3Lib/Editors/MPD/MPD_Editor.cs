@@ -52,6 +52,7 @@ namespace SF3.Editors.MPD {
                 TextureGroupHeader = new Tables.MPD.TextureGroup.HeaderTable(Editor, header.OffsetTextureGroups - ramOffset);
                 TextureGroupHeader.Load();
                 TextureGroupFrames = new FrameTable(Editor, TextureGroupHeader.Address, TextureGroupHeader.Rows);
+                TextureGroupFrames.Load();
             }
 
             // Create chunk data
@@ -77,6 +78,18 @@ namespace SF3.Editors.MPD {
                 SurfaceChunk = Chunks[20];
                 SurfaceChunkEditor = ChunkEditors[20] = new ChunkEditor(SurfaceChunk.Data, false);
             }
+
+            if (Chunks[3]?.Data?.Length > 0 && TextureGroupFrames != null) {
+                TextureGroupFrameEditors = new CompressedEditor[TextureGroupFrames.Rows.Length];
+                for (var i = 0; i < TextureGroupFrames.Rows.Length; i++) {
+                    var frame = TextureGroupFrames.Rows[i];
+                    if (frame.CompressedTextureOffset != 0xFFFE) {
+                        var textureGroup = TextureGroupHeader.Rows[frame.GroupID];
+                        // TODO: where's the data????
+                    }
+                }
+            }
+
             if (Chunks[5]?.Data != null)
                 ChunkEditors[5] = new ChunkEditor(Chunks[5].Data, true);
 
@@ -144,7 +157,7 @@ namespace SF3.Editors.MPD {
             }
 
             // Add some callbacks to all child editors.
-            foreach (var ce in ChunkEditors.Where(ce => ce != null)) {
+            foreach (var ce in ((IBaseEditor[])ChunkEditors).Concat((IBaseEditor[]) TextureGroupFrameEditors).Where(ce => ce != null)) {
                 // If the editor is marked as unmodified (such as after a save), mark child editors as unmodified as well.
                 Editor.IsModifiedChanged += (s, e) => ce.IsModified &= Editor.IsModified;
 
@@ -245,6 +258,9 @@ namespace SF3.Editors.MPD {
             if (ChunkEditors != null)
                 foreach (var ci in ChunkEditors.Where(ci => ci != null))
                     ci.Dispose();
+            if (TextureGroupFrameEditors != null)
+                foreach (var ci in TextureGroupFrameEditors.Where(tgfe => tgfe != null))
+                    ci.Dispose();
         }
 
         public IChunkEditor[] ChunkEditors { get; private set; }
@@ -277,6 +293,8 @@ namespace SF3.Editors.MPD {
 
         [BulkCopyRecurse]
         public FrameTable TextureGroupFrames { get; private set; }
+
+        public CompressedEditor[] TextureGroupFrameEditors { get; private set; }
 
         public Chunk[] Chunks { get; private set; }
 
