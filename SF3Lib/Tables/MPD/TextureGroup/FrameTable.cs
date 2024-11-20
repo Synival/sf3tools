@@ -18,11 +18,11 @@ namespace SF3.Tables.MPD.TextureGroup {
 
                 int addr = tex.FramesAddress;
                 for (var i = 0; i < tex.NumFrames; i++) {
-                    var newModel = new FrameModel(Editor, id++, tex.Name + "_" + (i + 1), addr, tex.ID, tex.TextureID, i + 1);
+                    var newModel = new FrameModel(Editor, id++, tex.Name + "_" + (i + 1), addr, tex.TextureID, tex.Width, tex.Height, tex.ID, i + 1);
                     frameModels.Add(newModel);
                     addr += newModel.Size;
                 }
-                frameModels.Add(new FrameModel(Editor, id++, "--", addr, tex.ID, tex.TextureID, 0));
+                frameModels.Add(new FrameModel(Editor, id++, "--", addr, tex.TextureID, tex.Width, tex.Height, tex.ID, 0));
             }
 
             _rows = frameModels.ToArray();
