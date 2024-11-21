@@ -9,7 +9,7 @@ namespace SF3.Tables.X1.Town {
         public override bool Load()
             => LoadFromResourceFile(
                 (id, name, address) => new Enter(Editor, id, name, address),
-                (rows, prev, cur) => prev == null || prev.Entered != 0xffff);
+                (rows, models) => models.Entered != 0xFFFF);
 
         public override int? MaxSize => 100;
     }

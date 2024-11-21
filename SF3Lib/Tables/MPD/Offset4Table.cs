@@ -15,7 +15,7 @@ namespace SF3.Tables.MPD {
                     var atEnd = ((uint) Editor.GetDouble(address)) == 0xFFFF_FFFF;
                     return new Offset4Model(Editor, id, atEnd ? "--" : ("Row " + id), address);
                 },
-                (currentRows, prevModel, currentModel) => prevModel?.Value1 != 0xFFFF_FFFF);
+                (currentRows, model) => model.Value1 != 0xFFFF_FFFF);
         }
     }
 }

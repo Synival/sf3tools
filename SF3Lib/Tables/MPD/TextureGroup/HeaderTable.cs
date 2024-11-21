@@ -15,7 +15,7 @@ namespace SF3.Tables.MPD.TextureGroup {
                     var atEnd = (uint) Editor.GetWord(address) == 0xFFFF;
                     return new HeaderModel(Editor, id, atEnd ? "--" : "TexGroup" + id, address);
                 },
-                (currentRows, prevModel, currentModel) => prevModel?.TextureID != 0xFFFF);
+                (currentRows, model) => model.TextureID != 0xFFFF);
         }
     }
 }

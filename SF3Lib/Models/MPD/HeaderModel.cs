@@ -3,7 +3,7 @@ using SF3.Attributes;
 using SF3.RawEditors;
 
 namespace SF3.Models.MPD {
-    public class Header : Model {
+    public class HeaderModel : Model {
         private readonly int unknown1Address;             // int16  Unknown. Might be map id.
         private readonly int unknown2Address;             // int16  Always zero 0x0000
         private readonly int offset1Address;              // int32  Always 0x0c. Pointer to 0x20 unknown int16. See (#header-offset-1).
@@ -30,7 +30,7 @@ namespace SF3.Models.MPD {
         private readonly int unknown7Address;             // int32  Unknown. Small value in upper int16, 0x0000 in lower int16. May me FIXED.
         private readonly int offset12Address;             // int32  Pointer to unknown list of exactly 8 uint16 in two block with 4 uint16 each.
 
-        public Header(IRawEditor editor, int id, string name, int address, bool hasPalette3)
+        public HeaderModel(IRawEditor editor, int id, string name, int address, bool hasPalette3)
         : base(editor, id, name, address, 0x58) {
             unknown1Address             = Address;        // 2 bytes
             unknown2Address             = Address + 0x02; // 2 bytes

@@ -9,7 +9,7 @@ namespace SF3.Tables.X1.Town {
         public override bool Load()
             => LoadFromResourceFile(
                 (id, name, address) => new Arrow(Editor, id, name, address),
-                (rows, prev, cur) => prev == null || prev.ArrowUnknown0 != 0xffff);
+                (rows, model) => model.ArrowUnknown0 != 0xFFFF);
 
         public override int? MaxSize => 100;
     }

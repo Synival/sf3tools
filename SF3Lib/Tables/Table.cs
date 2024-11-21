@@ -59,10 +59,9 @@ namespace SF3.Tables {
         /// If 'false' is returned, the 'currentModel' will not be committed.
         /// </summary>
         /// <param name="currentRows">The dictionary of rows by ID read thus far.</param>
-        /// <param name="prevModel">The last model read and committed to the table.</param>
-        /// <param name="currentModel">The model just read that is about to be committed to the table unless 'false' is returned.</param>
+        /// <param name="newModel">The last model read from the table.</param>
         /// <returns>'true' if reading should continue, 'false' if reading should not continue.</returns>
-        public delegate bool ContinueReadingPredicate(Dictionary<int, T> currentRows, T prevModel, T currentModel);
+        public delegate bool ContinueReadingPredicate(Dictionary<int, T> currentRows, T newModel);
 
         /// <summary>
         /// Loads all rows from the resource file, sorted by value.
@@ -77,8 +76,9 @@ namespace SF3.Tables {
         /// </summary>
         /// <param name="makeTFunc">Factory function to make the model.</param>
         /// <param name="pred">Optional predicate function to check whether or not the reader should continue.</param>
+        /// <param name="addEndModel">If 'ture', any new model loaded will still be added if 'pred' returns 'false'.</param>
         /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
-        public bool LoadFromResourceFile(Func<int, string, int, T> makeTFunc, ContinueReadingPredicate pred) {
+        public bool LoadFromResourceFile(Func<int, string, int, T> makeTFunc, ContinueReadingPredicate pred, bool addEndModel = true) {
             var rows = new Dictionary<int, T>();
             try {
                 // Get the size of our rows so we can determine the address of elements.
@@ -96,13 +96,17 @@ namespace SF3.Tables {
                             var id = Convert.ToInt32(xml.GetAttribute(0), 16);
                             var name = xml.GetAttribute(1);
                             var newModel = makeTFunc(id, name, Address + id * size);
-                            if (pred != null && !pred(rows, prevModel, newModel))
+                            var predResult = (pred != null) ? pred(rows, newModel) : true;
+                            if (!predResult && !addEndModel)
                                 break;
-
-                            rows.Add(id, newModel);
 
                             if (id < 0 || (MaxSize != null && id >= MaxSize))
                                 throw new IndexOutOfRangeException();
+
+                            rows.Add(id, newModel);
+                            if (!predResult && addEndModel)
+                                break;
+
                             prevModel = newModel;
                         }
                     }
@@ -130,8 +134,9 @@ namespace SF3.Tables {
         /// </summary>
         /// <param name="makeTFunc">Factory function to make the model.</param>
         /// <param name="pred">Optional predicate function to check whether or not resource adding should continue.</param>
+        /// <param name="addEndModel">If 'ture', any new model loaded will still be added if 'pred' returns 'false'.</param>
         /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
-        public bool LoadUntilMax(Func<int, int, T> makeTFunc, ContinueReadingPredicate pred) {
+        public bool LoadUntilMax(Func<int, int, T> makeTFunc, ContinueReadingPredicate pred, bool addEndModel = true) {
             var rowDict = new Dictionary<int, T>();
             var rows = new List<T>();
 
@@ -141,12 +146,16 @@ namespace SF3.Tables {
                 var max = MaxSize ?? 65536;
                 for (var id = 0; id < max; ++id) {
                     var newModel = makeTFunc(id, address);
-                    if (pred != null && !pred(rowDict, prevModel, newModel))
+                    var predResult = (pred != null) ? pred(rowDict, newModel) : true;
+                    if (!predResult && !addEndModel)
                         break;
 
                     rowDict[id] = newModel;
                     rows.Add(newModel);
                     address += newModel.Size;
+
+                    if (!predResult && addEndModel)
+                        break;
 
                     prevModel = newModel;
                 }

@@ -162,7 +162,7 @@ namespace SF3.Editors.MPD {
             // Add some callbacks to all child editors.
             var editors = ChunkEditors
                 .Cast<IRawEditor>()
-                .Concat(TextureGroupFrameEditors.Cast<IRawEditor>())
+                .Concat(TextureGroupFrameEditors?.Cast<IRawEditor>() ?? new IRawEditor[0])
                 .Where(x => x != null)
                 .ToArray();
 
