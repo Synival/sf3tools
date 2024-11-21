@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using SF3.Editors.MPD;
-using SF3.Models.MPD.TextureGroup;
+using SF3.Models.MPD.TextureAnimation;
 using SF3.Win.Controls;
 using SF3.Win.Extensions;
 
@@ -25,32 +25,6 @@ namespace SF3.Win.Views.MPD {
             _ = headerContainer.CreateChild(new TableView("Offset 2 Table", Editor.Offset2Table, ngc));
             _ = headerContainer.CreateChild(new TableView("Offset 3 Table", Editor.Offset3Table, ngc));
             _ = headerContainer.CreateChild(new TableView("Offset 4 Table", Editor.Offset4Table, ngc));
-
-            // TODO: make this its own view
-            var textureGroupContainer = new TabView("Texture Groups");
-            _ = CreateChild(textureGroupContainer);
-            _ = textureGroupContainer.CreateChild(new TableView("Header", Editor.TextureGroupHeader, ngc));
-            var framesControl = (ObjectListView) textureGroupContainer.CreateChild(new TableView("Frames", Editor.TextureGroupFrames, ngc));
-
-            // TODO: extract everything here to do with showing this editor into its own utility function!
-            var framesTabPage = framesControl?.Parent;
-
-            // Add a texture viewer on the right side of the 'Textures' tab.
-            if (framesTabPage != null) {
-                var textureViewer = new TextureControl();
-                textureViewer.Dock = DockStyle.Right;
-                framesTabPage.Controls.Add(textureViewer);
-
-                void OnTextureChanged(object sender, EventArgs e) {
-                    var item = (OLVListItem) framesControl.SelectedItem;
-                    var frame = (FrameModel) item?.RowObject;
-                    textureViewer.TextureImage = (frame == null || Editor.TextureGroupFrameEditors[frame.ID] == null)
-                        ? (System.Drawing.Image) null
-                        : frame.CreateBitmap(Editor.TextureGroupFrameEditors[frame.ID].DecompressedEditor);
-                };
-
-                framesControl.ItemSelectionChanged += (s, e) => OnTextureChanged(s, e);
-            }
 
             var paletteContainer = new TabView("Palettes");
             _ = CreateChild(paletteContainer);
@@ -84,6 +58,30 @@ namespace SF3.Win.Views.MPD {
             _ = CreateChild(textureContainer);
             for (var i = 0; i < Editor.TextureChunks.Length; i++)
                 _ = textureContainer.CreateChild(new TextureChunkView("Chunk " + (i + 6), Editor.TextureChunks[i]));
+
+            _ = textureContainer.CreateChild(new TableView("Animations", Editor.TextureAnimations, ngc));
+            var framesControl = (ObjectListView) textureContainer.CreateChild(new TableView("Anim. Frames", Editor.TextureAnimFrames, ngc));
+
+            // TODO: extract everything here to do with showing this editor into its own utility function!
+            var framesTabPage = framesControl?.Parent;
+
+            // Add a texture viewer on the right side of the 'Textures' tab.
+            if (framesTabPage != null) {
+                var textureViewer = new TextureControl();
+                textureViewer.Dock = DockStyle.Right;
+                framesTabPage.Controls.Add(textureViewer);
+
+                void OnTextureChanged(object sender, EventArgs e) {
+                    var item = (OLVListItem) framesControl.SelectedItem;
+                    var frame = (FrameModel) item?.RowObject;
+                    textureViewer.TextureImage = (frame == null || Editor.TextureAnimFrameEditors[frame.ID] == null)
+                        ? (System.Drawing.Image) null
+                        : frame.CreateBitmap(Editor.TextureAnimFrameEditors[frame.ID].DecompressedEditor);
+                };
+
+                framesControl.ItemSelectionChanged += (s, e) => OnTextureChanged(s, e);
+            }
+
 
             return Control;
         }

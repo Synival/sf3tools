@@ -1,9 +1,9 @@
-﻿using SF3.Models.MPD.TextureGroup;
+﻿using SF3.Models.MPD.TextureAnimation;
 using SF3.RawEditors;
 
-namespace SF3.Tables.MPD.TextureGroup {
-    public class HeaderTable : Table<HeaderModel> {
-        public HeaderTable(IRawEditor editor, int address, bool is32Bit) : base(editor, address) {
+namespace SF3.Tables.MPD.TextureAnimation {
+    public class TextureAnimationTable : Table<TextureAnimationModel> {
+        public TextureAnimationTable(IRawEditor editor, int address, bool is32Bit) : base(editor, address) {
             Is32Bit = is32Bit;
             _textureEndId = is32Bit ? 0xFFFF_FFFF : 0xFFFF;
         }
@@ -13,7 +13,7 @@ namespace SF3.Tables.MPD.TextureGroup {
                 (id, address) => {
                     uint textureId = Editor.GetData(address, Is32Bit ? 4 : 2);
                     var atEnd = textureId == _textureEndId;
-                    return new HeaderModel(Editor, id, atEnd ? "--" : "TexGroup" + id, address, Is32Bit);
+                    return new TextureAnimationModel(Editor, id, atEnd ? "--" : "TexAnim" + id, address, Is32Bit);
                 },
                 (currentRows, model) => model.TextureID != _textureEndId);
         }

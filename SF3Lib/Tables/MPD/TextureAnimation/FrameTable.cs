@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using SF3.Models.MPD.TextureGroup;
+using SF3.Models.MPD.TextureAnimation;
 using SF3.RawEditors;
 
-namespace SF3.Tables.MPD.TextureGroup {
+namespace SF3.Tables.MPD.TextureAnimation {
     public class FrameTable : Table<FrameModel> {
-        public FrameTable(IRawEditor editor, int address, bool is32Bit, IEnumerable<HeaderModel> textures) : base(editor, address) {
+        public FrameTable(IRawEditor editor, int address, bool is32Bit, IEnumerable<TextureAnimationModel> textures) : base(editor, address) {
             Is32Bit = is32Bit;
             Textures = textures;
             _textureIdEnd = Is32Bit ? 0xFFFF_FFFF : 0xFFFF;
@@ -32,7 +32,7 @@ namespace SF3.Tables.MPD.TextureGroup {
         }
 
         public bool Is32Bit { get; }
-        public IEnumerable<HeaderModel> Textures { get; }
+        public IEnumerable<TextureAnimationModel> Textures { get; }
 
         private uint _textureIdEnd;
     }

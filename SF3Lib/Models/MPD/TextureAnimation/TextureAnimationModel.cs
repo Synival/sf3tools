@@ -2,14 +2,14 @@
 using SF3.Attributes;
 using SF3.RawEditors;
 
-namespace SF3.Models.MPD.TextureGroup {
-    public class HeaderModel : Model {
+namespace SF3.Models.MPD.TextureAnimation {
+    public class TextureAnimationModel : Model {
         private readonly int _textureIdAddress;
         private readonly int _widthAddress;
         private readonly int _heightAddress;
         private readonly int _unknownAddress;
 
-        public HeaderModel(IRawEditor editor, int id, string name, int address, bool is32Bit)
+        public TextureAnimationModel(IRawEditor editor, int id, string name, int address, bool is32Bit)
         : base(editor, id, name, address, 0x0A) {
             Is32Bit = is32Bit;
 
@@ -23,7 +23,7 @@ namespace SF3.Models.MPD.TextureGroup {
             _unknownAddress   = Address + 0x03 * _bytesPerProperty; 
             FramesAddress     = Address + 0x04 * _bytesPerProperty; // variable sizes
 
-            // Determine the number of frames. That will determine the size of this texture group.
+            // Determine the number of frames. That will determine the size of this animation.
             // TODO: how in the world do we model this?? a separate table each?
             var frameCount = 0;
             var pos = FramesAddress;

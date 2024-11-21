@@ -2,8 +2,7 @@ using CommonLib;
 using SF3.RawEditors;
 using SF3.Tables;
 using SF3.Tables.MPD;
-using SF3.Tables.MPD.TextureChunk;
-using SF3.Tables.MPD.TextureGroup;
+using SF3.Tables.MPD.TextureAnimation;
 
 namespace SF3.Editors.MPD {
     public interface IMPD_Editor : IScenarioTableEditor {
@@ -30,9 +29,9 @@ namespace SF3.Editors.MPD {
         UnknownUInt16Table Offset3Table { get; }
         Offset4Table Offset4Table { get; }
 
-        Tables.MPD.TextureGroup.HeaderTable TextureGroupHeader { get; }
-        FrameTable TextureGroupFrames { get; }
-        CompressedEditor[] TextureGroupFrameEditors { get; }
+        TextureAnimationTable TextureAnimations { get; }
+        FrameTable TextureAnimFrames { get; }
+        CompressedEditor[] TextureAnimFrameEditors { get; }
 
         Chunk[] Chunks { get; }
 

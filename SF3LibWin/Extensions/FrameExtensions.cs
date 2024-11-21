@@ -2,7 +2,7 @@
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using CommonLib.Utils;
-using SF3.Models.MPD.TextureGroup;
+using SF3.Models.MPD.TextureAnimation;
 using SF3.RawEditors;
 
 namespace SF3.Win.Extensions {

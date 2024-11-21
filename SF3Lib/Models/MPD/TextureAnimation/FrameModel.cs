@@ -3,18 +3,18 @@ using CommonLib.Attributes;
 using SF3.Attributes;
 using SF3.RawEditors;
 
-namespace SF3.Models.MPD.TextureGroup {
+namespace SF3.Models.MPD.TextureAnimation {
     public class FrameModel : Model {
         private readonly int _compressedTextureOffsetAddress;
         private readonly int _unknownAddress;
 
-        public FrameModel(IRawEditor editor, int id, string name, int address, bool is32Bit, int texId, int width, int height, int groupId, int frameNum)
+        public FrameModel(IRawEditor editor, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum)
         : base(editor, id, name, address, is32Bit ? 0x08 : 0x04) {
             Is32Bit   = is32Bit;
             TextureID = texId;
             Width     = width;
             Height    = height;
-            GroupID   = groupId;
+            texAnimID = texAnimId;
             FrameNum  = frameNum;
 
             _bytesPerProperty = is32Bit ? 0x04 : 0x02;
@@ -34,8 +34,8 @@ namespace SF3.Models.MPD.TextureGroup {
         [ViewModelData(displayName: "Height", displayOrder: 2)]
         public int Height { get; }
 
-        [ViewModelData(displayName: "Group ID", displayOrder: 3, displayFormat: "X2")]
-        public int GroupID { get; }
+        [ViewModelData(displayName: "Tex. Anim ID", displayOrder: 3, displayFormat: "X2")]
+        public int texAnimID { get; }
 
         public int FrameNum { get; }
 

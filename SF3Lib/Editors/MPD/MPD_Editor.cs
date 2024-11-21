@@ -9,7 +9,7 @@ using SF3.Types;
 using System.Linq;
 using CommonLib;
 using System.Runtime.InteropServices;
-using SF3.Tables.MPD.TextureGroup;
+using SF3.Tables.MPD.TextureAnimation;
 
 namespace SF3.Editors.MPD {
     public class MPD_Editor : ScenarioTableEditor, IMPD_Editor {
@@ -50,11 +50,11 @@ namespace SF3.Editors.MPD {
             Offset3Table = (header.Offset3 != 0) ? new UnknownUInt16Table(Editor, header.Offset3 - ramOffset, 32) : null;
             Offset4Table = (header.Offset4 != 0) ? new Offset4Table(Editor, header.Offset4 - ramOffset) : null;
 
-            if (header.OffsetTextureGroups != 0) {
-                TextureGroupHeader = new Tables.MPD.TextureGroup.HeaderTable(Editor, header.OffsetTextureGroups - ramOffset, areAnimatedTextures32Bit);
-                TextureGroupHeader.Load();
-                TextureGroupFrames = new FrameTable(Editor, TextureGroupHeader.Address, areAnimatedTextures32Bit, TextureGroupHeader.Rows);
-                TextureGroupFrames.Load();
+            if (header.OffsetTextureAnimations != 0) {
+                TextureAnimations = new TextureAnimationTable(Editor, header.OffsetTextureAnimations - ramOffset, areAnimatedTextures32Bit);
+                TextureAnimations.Load();
+                TextureAnimFrames = new FrameTable(Editor, TextureAnimations.Address, areAnimatedTextures32Bit, TextureAnimations.Rows);
+                TextureAnimFrames.Load();
             }
 
             // Create chunk data
@@ -81,17 +81,16 @@ namespace SF3.Editors.MPD {
                 SurfaceChunkEditor = ChunkEditors[20] = new ChunkEditor(SurfaceChunk.Data, false);
             }
 
-            if (Chunks[3]?.Data?.Length > 0 && TextureGroupFrames != null) {
-                TextureGroupFrameEditors = new CompressedEditor[TextureGroupFrames.Rows.Length];
+            if (Chunks[3]?.Data?.Length > 0 && TextureAnimFrames != null) {
+                TextureAnimFrameEditors = new CompressedEditor[TextureAnimFrames.Rows.Length];
                 var frameOffsetEndId = areAnimatedTextures32Bit ? 0xFFFF_FFFEu : 0xFFFFu;
-                for (var i = 0; i < TextureGroupFrames.Rows.Length; i++) {
-                    var frame = TextureGroupFrames.Rows[i];
+                for (var i = 0; i < TextureAnimFrames.Rows.Length; i++) {
+                    var frame = TextureAnimFrames.Rows[i];
                     if (frame.CompressedTextureOffset != frameOffsetEndId) {
-                        var textureGroup = TextureGroupHeader.Rows[frame.GroupID];
                         var totalBytes = frame.Width * frame.Height * 2;
                         // TODO: this is super inefficient!!!
                         var bytes = Chunks[3].Data.Skip((int) frame.CompressedTextureOffset).Take(totalBytes).ToArray();
-                        TextureGroupFrameEditors[i] = new CompressedEditor(bytes, totalBytes);
+                        TextureAnimFrameEditors[i] = new CompressedEditor(bytes, totalBytes);
                     }
                 }
             }
@@ -129,8 +128,8 @@ namespace SF3.Editors.MPD {
                 (TileItemRows             = new TileItemRowTable            (ChunkEditors[5].DecompressedEditor, 0x6000)),
             };
 
-            if (TextureGroupHeader != null)
-                tables.Add(TextureGroupHeader);
+            if (TextureAnimations != null)
+                tables.Add(TextureAnimations);
 
             for (var i = 0; i < Palettes.Length; i++)
                 if (Palettes[i] != null)
@@ -144,10 +143,10 @@ namespace SF3.Editors.MPD {
                 tables.Add(Offset3Table);
             if (Offset4Table != null)
                 tables.Add(Offset4Table);
-            if (TextureGroupHeader != null)
-                tables.Add(TextureGroupHeader);
-            if (TextureGroupFrames != null)
-                tables.Add(TextureGroupFrames);
+            if (TextureAnimations != null)
+                tables.Add(TextureAnimations);
+            if (TextureAnimFrames != null)
+                tables.Add(TextureAnimFrames);
 
             if (SurfaceChunkEditor?.Data?.Length >= 64 * 64 * 2)
                 tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(SurfaceChunkEditor.DecompressedEditor, 0x0000));
@@ -165,7 +164,7 @@ namespace SF3.Editors.MPD {
             // Add some callbacks to all child editors.
             var editors = ChunkEditors
                 .Cast<IRawEditor>()
-                .Concat(TextureGroupFrameEditors?.Cast<IRawEditor>() ?? new IRawEditor[0])
+                .Concat(TextureAnimFrameEditors?.Cast<IRawEditor>() ?? new IRawEditor[0])
                 .Where(x => x != null)
                 .ToArray();
 
@@ -272,8 +271,8 @@ namespace SF3.Editors.MPD {
             if (ChunkEditors != null)
                 foreach (var ci in ChunkEditors.Where(ci => ci != null))
                     ci.Dispose();
-            if (TextureGroupFrameEditors != null)
-                foreach (var ci in TextureGroupFrameEditors.Where(tgfe => tgfe != null))
+            if (TextureAnimFrameEditors != null)
+                foreach (var ci in TextureAnimFrameEditors.Where(tgfe => tgfe != null))
                     ci.Dispose();
         }
 
@@ -303,12 +302,12 @@ namespace SF3.Editors.MPD {
         public Offset4Table Offset4Table { get; private set; }
 
         [BulkCopyRecurse]
-        public Tables.MPD.TextureGroup.HeaderTable TextureGroupHeader { get; private set; }
+        public TextureAnimationTable TextureAnimations { get; private set; }
 
         [BulkCopyRecurse]
-        public FrameTable TextureGroupFrames { get; private set; }
+        public FrameTable TextureAnimFrames { get; private set; }
 
-        public CompressedEditor[] TextureGroupFrameEditors { get; private set; }
+        public CompressedEditor[] TextureAnimFrameEditors { get; private set; }
 
         public Chunk[] Chunks { get; private set; }
 

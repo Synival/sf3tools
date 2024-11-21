@@ -12,7 +12,7 @@ namespace SF3.Models.MPD {
         private readonly int unknown3Address;             // int16  Unknown small value. maybe some count?
         private readonly int unknown4Address;             // int16  Always zero
         private readonly int offset4Address;              // int32  Always 0x90. Pointer to unknown structure. See (#header-offset-4)
-        private readonly int offsetTextureGroupsAddress;  // int32  Offset to list of texture groups. See (#texture-groups)
+        private readonly int offsetTextureAnimationsAddress;  // int32  Offset to list of texture groups. See (#texture-groups)
         private readonly int offset6Address;              // int32  Pointer to unknown list.
         private readonly int offset7Address;              // int32  Pointer to unknown list.
         private readonly int offsetMesh1Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
@@ -40,7 +40,7 @@ namespace SF3.Models.MPD {
             unknown3Address             = Address + 0x10; // 2 bytes
             unknown4Address             = Address + 0x12; // 2 bytes
             offset4Address              = Address + 0x14; // 4 bytes
-            offsetTextureGroupsAddress  = Address + 0x18; // 4 bytes
+            offsetTextureAnimationsAddress = Address + 0x18; // 4 bytes
             offset6Address              = Address + 0x1C; // 4 bytes
             offset7Address              = Address + 0x20; // 4 bytes
             offsetMesh1Address          = Address + 0x24; // 4 bytes
@@ -127,9 +127,9 @@ namespace SF3.Models.MPD {
 
         [BulkCopy]
         [ViewModelData(displayOrder: 8, isPointer: true)]
-        public int OffsetTextureGroups {
-            get => Editor.GetDouble(offsetTextureGroupsAddress);
-            set => Editor.SetDouble(offsetTextureGroupsAddress, value);
+        public int OffsetTextureAnimations {
+            get => Editor.GetDouble(offsetTextureAnimationsAddress);
+            set => Editor.SetDouble(offsetTextureAnimationsAddress, value);
         }
 
         [BulkCopy]
