@@ -86,7 +86,7 @@ namespace SF3.Editors.MPD {
                 var frameOffsetEndId = areAnimatedTextures32Bit ? 0xFFFF_FFFEu : 0xFFFFu;
                 for (var i = 0; i < TextureAnimFrames.Rows.Length; i++) {
                     var frame = TextureAnimFrames.Rows[i];
-                    if (frame.CompressedTextureOffset != frameOffsetEndId) {
+                    if (frame.FrameNum > 0 && frame.CompressedTextureOffset != frameOffsetEndId) {
                         var totalBytes = frame.Width * frame.Height * 2;
                         // TODO: this is super inefficient!!!
                         var bytes = Chunks[3].Data.Skip((int) frame.CompressedTextureOffset).Take(totalBytes).ToArray();

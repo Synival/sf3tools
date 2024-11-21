@@ -31,7 +31,7 @@ namespace SF3.Models.MPD.TextureAnimation {
             if (TextureID != _textureEndId) {
                 while (true) {
                     var frameOffset = Editor.GetData(pos, _bytesPerProperty);
-                    pos += 4;
+                    pos += _bytesPerProperty;
                     if (frameOffset == _frameEndOffset)
                         break;
                     pos += _bytesPerProperty;
