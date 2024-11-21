@@ -1,21 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SF3.Models.MPD.TextureGroup;
+﻿using SF3.Models.MPD.TextureGroup;
 using SF3.RawEditors;
 
 namespace SF3.Tables.MPD.TextureGroup {
     public class HeaderTable : Table<HeaderModel> {
-        public HeaderTable(IRawEditor editor, int address) : base(editor, address) {
+        public HeaderTable(IRawEditor editor, int address, bool is32Bit) : base(editor, address) {
+            Is32Bit = is32Bit;
+            _textureEndId = is32Bit ? 0xFFFF_FFFF : 0xFFFF;
         }
 
         public override bool Load() {
             return LoadUntilMax(
                 (id, address) => {
-                    var atEnd = (uint) Editor.GetWord(address) == 0xFFFF;
-                    return new HeaderModel(Editor, id, atEnd ? "--" : "TexGroup" + id, address);
+                    uint textureId = Editor.GetData(address, Is32Bit ? 4 : 2);
+                    var atEnd = textureId == _textureEndId;
+                    return new HeaderModel(Editor, id, atEnd ? "--" : "TexGroup" + id, address, Is32Bit);
                 },
-                (currentRows, model) => model.TextureID != 0xFFFF);
+                (currentRows, model) => model.TextureID != _textureEndId);
         }
+
+        public bool Is32Bit { get; }
+
+        private uint _textureEndId;
     }
 }

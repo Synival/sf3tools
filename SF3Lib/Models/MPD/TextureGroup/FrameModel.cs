@@ -5,14 +5,25 @@ using SF3.RawEditors;
 
 namespace SF3.Models.MPD.TextureGroup {
     public class FrameModel : Model {
-        public FrameModel(IRawEditor editor, int id, string name, int address, int texId, int width, int height, int groupId, int frameNum)
-        : base(editor, id, name, address, 0x04) {
+        private readonly int _compressedTextureOffsetAddress;
+        private readonly int _unknownAddress;
+
+        public FrameModel(IRawEditor editor, int id, string name, int address, bool is32Bit, int texId, int width, int height, int groupId, int frameNum)
+        : base(editor, id, name, address, is32Bit ? 0x08 : 0x04) {
+            Is32Bit   = is32Bit;
             TextureID = texId;
             Width     = width;
             Height    = height;
             GroupID   = groupId;
             FrameNum  = frameNum;
+
+            _bytesPerProperty = is32Bit ? 0x04 : 0x02;
+
+            _compressedTextureOffsetAddress = Address + 0 * _bytesPerProperty;
+            _unknownAddress                 = Address + 1 * _bytesPerProperty;
         }
+
+        public bool Is32Bit { get; }
 
         [ViewModelData(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public int TextureID { get; }
@@ -33,16 +44,18 @@ namespace SF3.Models.MPD.TextureGroup {
 
         [BulkCopy]
         [ViewModelData(displayName: "Texture Offset", displayOrder: 5, displayFormat: "X4")]
-        public ushort CompressedTextureOffset {
-            get => (ushort) Editor.GetWord(Address);
-            set => Editor.SetWord(Address, value);
+        public uint CompressedTextureOffset {
+            get => Editor.GetData(_compressedTextureOffsetAddress, _bytesPerProperty);
+            set => Editor.SetData(_compressedTextureOffsetAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
         [ViewModelData(displayName: "Unknown", displayOrder: 6, displayFormat: "X4")]
-        public ushort Unknown {
-            get => (ushort) Editor.GetWord(Address + 2);
-            set => Editor.SetWord(Address + 2, value);
+        public uint Unknown {
+            get => Editor.GetData(_unknownAddress, _bytesPerProperty);
+            set => Editor.SetData(_unknownAddress, value, _bytesPerProperty);
         }
+
+        private readonly int _bytesPerProperty;
     }
 }

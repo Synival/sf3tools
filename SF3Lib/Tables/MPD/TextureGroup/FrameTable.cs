@@ -4,8 +4,10 @@ using SF3.RawEditors;
 
 namespace SF3.Tables.MPD.TextureGroup {
     public class FrameTable : Table<FrameModel> {
-        public FrameTable(IRawEditor editor, int address, IEnumerable<HeaderModel> textures) : base(editor, address) {
+        public FrameTable(IRawEditor editor, int address, bool is32Bit, IEnumerable<HeaderModel> textures) : base(editor, address) {
+            Is32Bit = is32Bit;
             Textures = textures;
+            _textureIdEnd = Is32Bit ? 0xFFFF_FFFF : 0xFFFF;
         }
 
         public override bool Load() {
@@ -13,22 +15,25 @@ namespace SF3.Tables.MPD.TextureGroup {
 
             int id = 0;
             foreach (var tex in Textures) {
-                if (tex.TextureID == 0xFFFF)
+                if (tex.TextureID == _textureIdEnd)
                     break;
 
                 int addr = tex.FramesAddress;
                 for (var i = 0; i < tex.NumFrames; i++) {
-                    var newModel = new FrameModel(Editor, id++, tex.Name + "_" + (i + 1), addr, tex.TextureID, tex.Width, tex.Height, tex.ID, i + 1);
+                    var newModel = new FrameModel(Editor, id++, tex.Name + "_" + (i + 1), addr, Is32Bit, (int) tex.TextureID, (int) tex.Width, (int) tex.Height, tex.ID, i + 1);
                     frameModels.Add(newModel);
                     addr += newModel.Size;
                 }
-                frameModels.Add(new FrameModel(Editor, id++, "--", addr, tex.TextureID, tex.Width, tex.Height, tex.ID, 0));
+                frameModels.Add(new FrameModel(Editor, id++, "--", addr, Is32Bit, (int) tex.TextureID, (int) tex.Width, (int) tex.Height, tex.ID, 0));
             }
 
             _rows = frameModels.ToArray();
             return true;
         }
 
+        public bool Is32Bit { get; }
         public IEnumerable<HeaderModel> Textures { get; }
+
+        private uint _textureIdEnd;
     }
 }

@@ -9,25 +9,32 @@ namespace SF3.Models.MPD.TextureGroup {
         private readonly int _heightAddress;
         private readonly int _unknownAddress;
 
-        public HeaderModel(IRawEditor editor, int id, string name, int address)
+        public HeaderModel(IRawEditor editor, int id, string name, int address, bool is32Bit)
         : base(editor, id, name, address, 0x0A) {
-            _textureIdAddress = Address + 0x00; // 2 bytes
-            _widthAddress     = Address + 0x02; // 2 bytes
-            _heightAddress    = Address + 0x04; // 2 bytes
-            _unknownAddress   = Address + 0x06; // 2 bytes
-            FramesAddress     = Address + 0x08; // variable; multiple of 4 bytes
+            Is32Bit = is32Bit;
+
+            _bytesPerProperty = Is32Bit ? 0x04 : 0x02;
+            _textureEndId     = Is32Bit ? 0xFFFF_FFFF : 0xFFFF;
+            _frameEndOffset   = Is32Bit ? 0xFFFF_FFFE : 0xFFFE;
+
+            _textureIdAddress = Address + 0x00 * _bytesPerProperty; 
+            _widthAddress     = Address + 0x01 * _bytesPerProperty; 
+            _heightAddress    = Address + 0x02 * _bytesPerProperty; 
+            _unknownAddress   = Address + 0x03 * _bytesPerProperty; 
+            FramesAddress     = Address + 0x04 * _bytesPerProperty; // variable sizes
 
             // Determine the number of frames. That will determine the size of this texture group.
             // TODO: how in the world do we model this?? a separate table each?
             var frameCount = 0;
             var pos = FramesAddress;
-            if (TextureID != 0xFFFF) {
+
+            if (TextureID != _textureEndId) {
                 while (true) {
-                    var frameOffset = (ushort) Editor.GetWord(pos);
-                    pos += 2;
-                    if (frameOffset == 0xFFFE)
+                    var frameOffset = Editor.GetData(pos, _bytesPerProperty);
+                    pos += 4;
+                    if (frameOffset == _frameEndOffset)
                         break;
-                    pos += 2;
+                    pos += _bytesPerProperty;
                     frameCount++;
                 }
             }
@@ -36,38 +43,43 @@ namespace SF3.Models.MPD.TextureGroup {
             NumFrames = frameCount;
         }
 
+        public bool Is32Bit { get; }
         public int FramesAddress { get; }
 
         [BulkCopy]
         [ViewModelData(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
-        public int TextureID {
-            get => Editor.GetWord(_textureIdAddress);
-            set => Editor.SetWord(_textureIdAddress, value);
+        public uint TextureID {
+            get => Editor.GetData(_textureIdAddress, _bytesPerProperty);
+            set => Editor.SetData(_textureIdAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
         [ViewModelData(displayName: "Width", displayOrder: 1)]
-        public int Width {
-            get => Editor.GetWord(_widthAddress);
-            set => Editor.SetWord(_widthAddress, value);
+        public uint Width {
+            get => Editor.GetData(_widthAddress, _bytesPerProperty);
+            set => Editor.SetData(_widthAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
         [ViewModelData(displayName: "Height", displayOrder: 2)]
-        public int Height {
-            get => Editor.GetWord(_heightAddress);
-            set => Editor.SetWord(_heightAddress, value);
+        public uint Height {
+            get => Editor.GetData(_heightAddress, _bytesPerProperty);
+            set => Editor.SetData(_heightAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
         [ViewModelData(displayName: "Unknown", displayOrder: 3, displayFormat: "X4")]
-        public int Unknown {
-            get => Editor.GetWord(_unknownAddress);
-            set => Editor.SetWord(_unknownAddress, value);
+        public uint Unknown {
+            get => Editor.GetData(_unknownAddress, _bytesPerProperty);
+            set => Editor.SetData(_unknownAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
         [ViewModelData(displayName: "# Frames", displayOrder: 4, isReadOnly: true)]
         public int NumFrames { get; }
+
+        private readonly int _bytesPerProperty;
+        private readonly uint _textureEndId;
+        private readonly uint _frameEndOffset;
     }
 }

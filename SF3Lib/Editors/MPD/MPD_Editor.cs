@@ -26,6 +26,8 @@ namespace SF3.Editors.MPD {
         public override IEnumerable<ITable> MakeTables() {
             const int ramOffset = 0x290000;
 
+            bool areAnimatedTextures32Bit = Scenario >= ScenarioType.Scenario3;
+
             // Create and load Header
             var headerAddrPtr = Editor.GetDouble(0x0000) - ramOffset;
             var headerAddr = Editor.GetDouble(headerAddrPtr) - ramOffset;
@@ -49,9 +51,9 @@ namespace SF3.Editors.MPD {
             Offset4Table = (header.Offset4 != 0) ? new Offset4Table(Editor, header.Offset4 - ramOffset) : null;
 
             if (header.OffsetTextureGroups != 0) {
-                TextureGroupHeader = new Tables.MPD.TextureGroup.HeaderTable(Editor, header.OffsetTextureGroups - ramOffset);
+                TextureGroupHeader = new Tables.MPD.TextureGroup.HeaderTable(Editor, header.OffsetTextureGroups - ramOffset, areAnimatedTextures32Bit);
                 TextureGroupHeader.Load();
-                TextureGroupFrames = new FrameTable(Editor, TextureGroupHeader.Address, TextureGroupHeader.Rows);
+                TextureGroupFrames = new FrameTable(Editor, TextureGroupHeader.Address, areAnimatedTextures32Bit, TextureGroupHeader.Rows);
                 TextureGroupFrames.Load();
             }
 
@@ -81,13 +83,14 @@ namespace SF3.Editors.MPD {
 
             if (Chunks[3]?.Data?.Length > 0 && TextureGroupFrames != null) {
                 TextureGroupFrameEditors = new CompressedEditor[TextureGroupFrames.Rows.Length];
+                var frameOffsetEndId = areAnimatedTextures32Bit ? 0xFFFF_FFFEu : 0xFFFFu;
                 for (var i = 0; i < TextureGroupFrames.Rows.Length; i++) {
                     var frame = TextureGroupFrames.Rows[i];
-                    if (frame.CompressedTextureOffset != 0xFFFE) {
+                    if (frame.CompressedTextureOffset != frameOffsetEndId) {
                         var textureGroup = TextureGroupHeader.Rows[frame.GroupID];
                         var totalBytes = frame.Width * frame.Height * 2;
                         // TODO: this is super inefficient!!!
-                        var bytes = Chunks[3].Data.Skip(frame.CompressedTextureOffset).Take(totalBytes).ToArray();
+                        var bytes = Chunks[3].Data.Skip((int) frame.CompressedTextureOffset).Take(totalBytes).ToArray();
                         TextureGroupFrameEditors[i] = new CompressedEditor(bytes, totalBytes);
                     }
                 }
