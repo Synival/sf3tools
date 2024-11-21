@@ -1,5 +1,6 @@
 ﻿using System;
 using CommonLib.Attributes;
+using CommonLib.Utils;
 using SF3.Attributes;
 using SF3.RawEditors;
 using SF3.Types;
@@ -141,10 +142,7 @@ namespace SF3.Models.MPD.TextureChunk {
                     int pos = 0;
                     for (int y = 0; y < value.GetLength(1); y++) {
                         for (int x = 0; x < value.GetLength(0); x++) {
-                            // Swap red and blue channels.
-                            var lowerChannel = value[x, y] & 0x001F;
-                            var upperChannel = value[x, y] & 0x7F00;
-                            var newBits = (value[x, y] & ~0x7C1F) | (lowerChannel << 10) | (upperChannel >> 10);
+                            var newBits = PixelConversion.ARGB1555toABGR1555(value[x, y]);
                             imageDataBytes[pos++] = (byte) ((newBits & 0x00FF));
                             imageDataBytes[pos++] = (byte) ((newBits & 0xFF00) >> 8);
                         }

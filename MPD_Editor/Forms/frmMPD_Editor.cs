@@ -145,7 +145,6 @@ namespace SF3.MPD_Editor.Forms {
                             using (var bitmap = new Bitmap(texture.Width, texture.Height, PixelFormat.Format32bppArgb)) {
                                 using (var graphics = Graphics.FromImage(bitmap)) {
                                     graphics.DrawImage(image, new Point(0, 0));
-                                    graphics.Flush();
                                 }
                                 var readBytes = new byte[texture.Width * texture.Height * 4];
 
