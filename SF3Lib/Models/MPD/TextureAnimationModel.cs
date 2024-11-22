@@ -2,7 +2,7 @@
 using SF3.Attributes;
 using SF3.RawEditors;
 
-namespace SF3.Models.MPD.TextureAnimation {
+namespace SF3.Models.MPD {
     public class TextureAnimationModel : Model {
         private readonly int _textureIdAddress;
         private readonly int _widthAddress;
@@ -17,10 +17,10 @@ namespace SF3.Models.MPD.TextureAnimation {
             _textureEndId     = Is32Bit ? 0xFFFF_FFFF : 0xFFFF;
             _frameEndOffset   = Is32Bit ? 0xFFFF_FFFE : 0xFFFE;
 
-            _textureIdAddress = Address + 0x00 * _bytesPerProperty; 
-            _widthAddress     = Address + 0x01 * _bytesPerProperty; 
-            _heightAddress    = Address + 0x02 * _bytesPerProperty; 
-            _unknownAddress   = Address + 0x03 * _bytesPerProperty; 
+            _textureIdAddress = Address + 0x00 * _bytesPerProperty;
+            _widthAddress     = Address + 0x01 * _bytesPerProperty;
+            _heightAddress    = Address + 0x02 * _bytesPerProperty;
+            _unknownAddress   = Address + 0x03 * _bytesPerProperty;
             FramesAddress     = Address + 0x04 * _bytesPerProperty; // variable sizes
 
             // Determine the number of frames. That will determine the size of this animation.

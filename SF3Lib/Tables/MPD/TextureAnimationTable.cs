@@ -1,7 +1,7 @@
-﻿using SF3.Models.MPD.TextureAnimation;
+﻿using SF3.Models.MPD;
 using SF3.RawEditors;
 
-namespace SF3.Tables.MPD.TextureAnimation {
+namespace SF3.Tables.MPD {
     public class TextureAnimationTable : Table<TextureAnimationModel> {
         public TextureAnimationTable(IRawEditor editor, int address, bool is32Bit) : base(editor, address) {
             Is32Bit = is32Bit;
@@ -11,7 +11,7 @@ namespace SF3.Tables.MPD.TextureAnimation {
         public override bool Load() {
             return LoadUntilMax(
                 (id, address) => {
-                    uint textureId = Editor.GetData(address, Is32Bit ? 4 : 2);
+                    var textureId = Editor.GetData(address, Is32Bit ? 4 : 2);
                     var atEnd = textureId == _textureEndId;
                     return new TextureAnimationModel(Editor, id, atEnd ? "--" : "TexAnim" + id, address, Is32Bit);
                 },

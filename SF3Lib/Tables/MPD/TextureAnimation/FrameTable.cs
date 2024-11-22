@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SF3.Models.MPD;
 using SF3.Models.MPD.TextureAnimation;
 using SF3.RawEditors;
 

@@ -2,7 +2,7 @@
 using SF3.Attributes;
 using SF3.RawEditors;
 
-namespace SF3.Models.MPD.Offset4 {
+namespace SF3.Models.MPD {
     public class Offset4Model : Model {
         private readonly int _unknown1Address;
         private readonly int _pointer1Address;
