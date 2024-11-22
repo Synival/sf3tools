@@ -2,6 +2,7 @@ using CommonLib;
 using SF3.RawEditors;
 using SF3.Tables;
 using SF3.Tables.MPD;
+using SF3.Tables.MPD.Offset4;
 using SF3.Tables.MPD.TextureAnimation;
 
 namespace SF3.Editors.MPD {

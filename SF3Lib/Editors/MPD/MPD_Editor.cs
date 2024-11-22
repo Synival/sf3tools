@@ -10,6 +10,7 @@ using System.Linq;
 using CommonLib;
 using System.Runtime.InteropServices;
 using SF3.Tables.MPD.TextureAnimation;
+using SF3.Tables.MPD.Offset4;
 
 namespace SF3.Editors.MPD {
     public class MPD_Editor : ScenarioTableEditor, IMPD_Editor {
