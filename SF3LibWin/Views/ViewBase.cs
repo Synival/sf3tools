@@ -14,10 +14,11 @@ namespace SF3.Win.Views {
         public abstract Control Create();
 
         public virtual void Destroy() {
-            if (Control == null)
-                return;
-            Control.Dispose();
-            Control = null;
+            if (Control != null) {
+                Control.Parent = null;
+                Control.Dispose();
+                Control = null;
+            }
         }
 
         public virtual void Dispose() => Destroy();

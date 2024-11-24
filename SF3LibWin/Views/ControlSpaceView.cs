@@ -18,10 +18,15 @@ namespace SF3.Win.Views {
         }
 
         public override void Destroy() {
-            foreach (var c in _childViews)
-                c.Destroy();
-            _childViews.Clear();
-            _childViews = null;
+            Control?.Hide();
+
+            if (_childViews != null) {
+                foreach (var c in _childViews)
+                    c.Destroy();
+                _childViews.Clear();
+                _childViews = null;
+            }
+
             base.Destroy();
         }
 

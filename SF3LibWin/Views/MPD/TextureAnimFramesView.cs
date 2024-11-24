@@ -33,27 +33,31 @@ namespace SF3.Win.Views.MPD {
             }
             TextureControl.Dock = DockStyle.Right;
 
-            void OnTextureChanged(object sender, EventArgs e) {
-                var item = (OLVListItem) OLVControl.SelectedItem;
-                var frame = (FrameModel) item?.RowObject;
-                TextureControl.TextureImage = (frame == null || Editor.TextureAnimFrameEditors[frame.ID] == null)
-                    ? (System.Drawing.Image) null
-                    : frame.CreateBitmap(Editor.TextureAnimFrameEditors[frame.ID].DecompressedEditor);
-            };
-
-            OLVControl.ItemSelectionChanged += (s, e) => OnTextureChanged(s, e);
+            OLVControl.ItemSelectionChanged += OnTextureChanged;
             return Control;
         }
 
+        void OnTextureChanged(object sender, EventArgs e) {
+            var item = (OLVListItem) OLVControl.SelectedItem;
+            var frame = (FrameModel) item?.RowObject;
+            TextureControl.TextureImage = (frame == null || Editor.TextureAnimFrameEditors[frame.ID] == null)
+                ? (System.Drawing.Image) null
+                : frame.CreateBitmap(Editor.TextureAnimFrameEditors[frame.ID].DecompressedEditor);
+        }
+
         public override void Destroy() {
-            if (TableView != null) {
-                TableView.Destroy();
+            Control?.Hide();
+
+            if (OLVControl != null) {
+                OLVControl.ItemSelectionChanged -= OnTextureChanged;
                 OLVControl = null;
             }
-            if (TextureView != null) {
+            TextureControl = null;
+
+            if (TableView != null)
+                TableView.Destroy();
+            if (TextureView != null)
                 TextureView.Destroy();
-                TextureControl = null;
-            }
 
             base.Destroy();
         }

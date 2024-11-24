@@ -16,61 +16,87 @@ namespace SF3.Win.Views {
         : base(name) {
             Table = table;
             NameGetterContext = nameGetterContext;
+            ModelType = (Table == null) ? null : Table.RowObjs.GetType().GetElementType()!;
         }
 
-        public override Control Create() {
-            if (Table == null)
+        private static Dictionary<string, Stack<ObjectListView>> _cachedOLVControls = new Dictionary<string, Stack<ObjectListView>>();
+
+        private ObjectListView PopCachedOLV() {
+            var key = ModelType.AssemblyQualifiedName;
+            if (!_cachedOLVControls.ContainsKey(key))
+                return null;
+            var stack = _cachedOLVControls[key];
+            if (stack.Count == 0)
                 return null;
 
-            var columnType = Table.RowObjs.GetType().GetElementType()!;
-            var vm = columnType.GetDataViewModel();
+            var olv = stack.Pop();
+            olv.Show();
+            return olv;
+        }
 
-            var lvcColumns = new List<OLVColumn>();
-            Font hexFont = null;
+        private void PushCachedOLV() {
+            var key = ModelType.AssemblyQualifiedName;
+            if (!_cachedOLVControls.ContainsKey(key))
+                _cachedOLVControls.Add(key, new Stack<ObjectListView>());
+            _cachedOLVControls[key].Push(OLVControl);
+        }
 
-            var lvcNameBase = "lvcTableView" + s_controlIndex;
+        private ObjectListView GetOLV() {
+            var olv = PopCachedOLV();
+            if (olv == null) {
+                var vm = ModelType.GetDataViewModel();
 
-            foreach (var kv in vm.Properties) {
-                var prop = kv.Key;
-                var attr = kv.Value;
+                var lvcColumns = new List<OLVColumn>();
+                Font hexFont = null;
 
-                var lvc = new OLVColumn(lvcNameBase + prop.Name, prop.Name);
-                if (hexFont == null)
-                    hexFont = new Font("Courier New", Control.DefaultFont.Size);
+                var lvcNameBase = "lvcTableView" + s_controlIndex;
 
-                lvc.IsEditable = !attr.IsReadOnly && prop.GetSetMethod() != null;
-                lvc.Text = attr.DisplayName ?? prop.Name;
+                foreach (var kv in vm.Properties) {
+                    var prop = kv.Key;
+                    var attr = kv.Value;
 
-                if (attr.DisplayFormat != null && attr.DisplayFormat != string.Empty)
-                    lvc.AspectToStringFormat = "{0:" + attr.DisplayFormat + "}";
-                else if (attr.IsPointer)
-                    lvc.AspectToStringFormat = "{0:X6}";
-                else
-                    lvc.AspectToStringFormat = "";
+                    var lvc = new OLVColumn(lvcNameBase + prop.Name, prop.Name);
+                    if (hexFont == null)
+                        hexFont = new Font("Courier New", Control.DefaultFont.Size);
 
-                lvc.Width = Math.Max(30, attr.MinWidth);
-                lvcColumns.Add(lvc);
+                    lvc.IsEditable = !attr.IsReadOnly && prop.GetSetMethod() != null;
+                    lvc.Text = attr.DisplayName ?? prop.Name;
+
+                    if (attr.DisplayFormat != null && attr.DisplayFormat != string.Empty)
+                        lvc.AspectToStringFormat = "{0:" + attr.DisplayFormat + "}";
+                    else if (attr.IsPointer)
+                        lvc.AspectToStringFormat = "{0:X6}";
+                    else
+                        lvc.AspectToStringFormat = "";
+
+                    lvc.Width = Math.Max(30, attr.MinWidth);
+                    lvcColumns.Add(lvc);
+                }
+
+                olv = new ObjectListView();
+                olv.SuspendLayout();
+                ((System.ComponentModel.ISupportInitialize) olv).BeginInit();
+                olv.AllowColumnReorder = true;
+                olv.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
+                olv.FullRowSelect = true;
+                olv.GridLines = true;
+                olv.HasCollapsibleGroups = false;
+                olv.HideSelection = false;
+                olv.MenuLabelGroupBy = "";
+                olv.Name = "olvTableView" + (s_controlIndex++);
+                olv.ShowGroups = false;
+                olv.TabIndex = 1;
+                olv.UseAlternatingBackColors = true;
+                olv.UseCompatibleStateImageBehavior = false;
+                olv.View = View.Details;
+                olv.AllColumns.AddRange(lvcColumns);
+                olv.Columns.AddRange(lvcColumns.ToArray());
+                olv.Enhance(NameGetterContext);
+            }
+            else {
+                olv.SuspendLayout();
             }
 
-            var olv = new ObjectListView();
-            olv.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) olv).BeginInit();
-            olv.AllowColumnReorder = true;
-            olv.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
-            olv.FullRowSelect = true;
-            olv.GridLines = true;
-            olv.HasCollapsibleGroups = false;
-            olv.HideSelection = false;
-            olv.MenuLabelGroupBy = "";
-            olv.Name = "olvTableView" + (s_controlIndex++);
-            olv.ShowGroups = false;
-            olv.TabIndex = 1;
-            olv.UseAlternatingBackColors = true;
-            olv.UseCompatibleStateImageBehavior = false;
-            olv.View = View.Details;
-            olv.AllColumns.AddRange(lvcColumns);
-            olv.Columns.AddRange(lvcColumns.ToArray());
-            olv.Enhance(NameGetterContext);
             try {
                 olv.AddObjects(Table.RowObjs);
             }
@@ -81,19 +107,34 @@ namespace SF3.Win.Views {
             ((System.ComponentModel.ISupportInitialize) olv).EndInit();
             olv.ResumeLayout();
 
-            Control = olv;
-            OLVControl = olv;
             return olv;
         }
 
+        public override Control Create() {
+            if (Table == null)
+                return null;
+
+            OLVControl = GetOLV();
+            Control = OLVControl;
+            return Control;
+        }
+
         public override void Destroy() {
-            OLVControl = null;
+            Control?.Hide();
+
+            if (OLVControl != null) {
+                OLVControl.ClearObjects();
+                OLVControl.Parent = null;  
+                PushCachedOLV();
+                OLVControl = null;
+                Control = null;
+            }
             base.Destroy();
         }
 
         public Table Table { get; }
+        public Type ModelType { get; }
         public INameGetterContext NameGetterContext { get; }
-
         public ObjectListView OLVControl { get; private set; } = null;
     }
 }

@@ -77,14 +77,15 @@ namespace SF3.MPD_Editor.Forms {
             bool wasFocused = ContainsFocus;
 
             SuspendLayout();
-            if (Control != null) {
-                Controls.Remove(Control);
-                Control.Dispose();
-                Control = null;
-            }
             if (View != null) {
+                View.Destroy();
                 View.Dispose();
                 View = null;
+            }
+            if (Control != null) {
+                Control.Parent = null;
+                Control.Dispose();
+                Control = null;
             }
             ResumeLayout();
 
