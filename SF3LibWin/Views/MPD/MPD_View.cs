@@ -60,28 +60,7 @@ namespace SF3.Win.Views.MPD {
                 _ = textureContainer.CreateChild(new TextureChunkView("Chunk " + (i + 6), Editor.TextureChunks[i]));
 
             _ = textureContainer.CreateChild(new TableView("Animations", Editor.TextureAnimations, ngc));
-            var framesControl = (ObjectListView) textureContainer.CreateChild(new TableView("Anim. Frames", Editor.TextureAnimFrames, ngc));
-
-            // TODO: extract everything here to do with showing this editor into its own utility function!
-            var framesTabPage = framesControl?.Parent;
-
-            // Add a texture viewer on the right side of the 'Textures' tab.
-            if (framesTabPage != null) {
-                var textureViewer = new TextureControl();
-                textureViewer.Dock = DockStyle.Right;
-                framesTabPage.Controls.Add(textureViewer);
-
-                void OnTextureChanged(object sender, EventArgs e) {
-                    var item = (OLVListItem) framesControl.SelectedItem;
-                    var frame = (FrameModel) item?.RowObject;
-                    textureViewer.TextureImage = (frame == null || Editor.TextureAnimFrameEditors[frame.ID] == null)
-                        ? (System.Drawing.Image) null
-                        : frame.CreateBitmap(Editor.TextureAnimFrameEditors[frame.ID].DecompressedEditor);
-                };
-
-                framesControl.ItemSelectionChanged += (s, e) => OnTextureChanged(s, e);
-            }
-
+            _ = textureContainer.CreateChild(new TextureAnimFramesView("Anim. Frames", Editor, ngc));
 
             return Control;
         }
