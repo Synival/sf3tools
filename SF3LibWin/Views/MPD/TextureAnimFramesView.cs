@@ -8,7 +8,7 @@ using SF3.Win.Controls;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.MPD {
-    public class TextureAnimFramesView : ViewBase {
+    public class TextureAnimFramesView : ControlSpaceView {
         private static int _s_tableCounter = 1;
         private static int _s_containerCounter = 1;
         private static int _s_textureViewerCounter = 1;
@@ -19,40 +19,32 @@ namespace SF3.Win.Views.MPD {
         }
 
         public override Control Create() {
-            var framesControl = (ObjectListView) TableView.Create();
-            if (framesControl == null)
+            if (base.Create() == null)
                 return null;
 
-            var container = new Control(null, "TextureAnimFramesViewContainer" + _s_containerCounter++);
-            container.Padding = new Padding();
-            container.Margin = new Padding();
+            OLVControl = (ObjectListView) CreateChild(TableView);
+            if (OLVControl == null)
+                return null;
 
-            framesControl.Parent = container;
-            framesControl.Dock = DockStyle.Fill;
-
-            var textureViewer = new TextureControl();
-            textureViewer.Name = "TextureAnimFramesViewTextureViewer" + _s_textureViewerCounter++;
-            textureViewer.Parent = container;
-            textureViewer.Dock = DockStyle.Right;
+            TextureViewer = (TextureControl) CreateChild("TextureAnimFramesViewTextureViewer" + _s_textureViewerCounter++, new TextureControl(), autoFill: false);
+            TextureViewer.Dock = DockStyle.Right;
 
             void OnTextureChanged(object sender, EventArgs e) {
-                var item = (OLVListItem) framesControl.SelectedItem;
+                var item = (OLVListItem) OLVControl.SelectedItem;
                 var frame = (FrameModel) item?.RowObject;
-                textureViewer.TextureImage = (frame == null || Editor.TextureAnimFrameEditors[frame.ID] == null)
+                TextureViewer.TextureImage = (frame == null || Editor.TextureAnimFrameEditors[frame.ID] == null)
                     ? (System.Drawing.Image) null
                     : frame.CreateBitmap(Editor.TextureAnimFrameEditors[frame.ID].DecompressedEditor);
             };
 
-            framesControl.ItemSelectionChanged += (s, e) => OnTextureChanged(s, e);
-
-            Control = container;
-            OLVControl = framesControl;
-            TextureViewer = textureViewer;
+            OLVControl.ItemSelectionChanged += (s, e) => OnTextureChanged(s, e);
             return Control;
         }
 
         public override void Destroy() {
             TableView.Destroy();
+            TableView = null;
+
             TextureViewer.Dispose();
             TextureViewer = null;
 
@@ -60,7 +52,7 @@ namespace SF3.Win.Views.MPD {
         }
 
         public IMPD_Editor Editor { get; }
-        public TableView TableView { get; }
+        public TableView TableView { get; private set; }
 
         public ObjectListView OLVControl { get; private set; }
         public TextureControl TextureViewer { get; private set; }
