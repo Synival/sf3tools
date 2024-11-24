@@ -1,13 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using SF3.Attributes;
 using SF3.ViewModels;
 
 namespace SF3.Extensions {
     public static class TypeExtensions {
-        public static DataViewModel CreateDataViewModel(this Type type) {
+        private static Dictionary<string, DataViewModel> _cachedDataViewModels = new Dictionary<string, DataViewModel>();
+
+        /// <summary>
+        /// Retrieves the auto-generated DataViewModel for the specified type by reflecting on ViewModelDataAttribute's.
+        /// </summary>
+        /// <param name="type">The type whose DataViewModel to retrieve.</param>
+        /// <returns>A reference to a unique DataViewModel instance associated with 'type'.</returns>
+        public static DataViewModel GetDataViewModel(this Type type) {
+            if (_cachedDataViewModels.ContainsKey(type.AssemblyQualifiedName))
+                return _cachedDataViewModels[type.AssemblyQualifiedName];
+
             var columnProperties = type
                 .GetProperties()
                 // TODO: this should actually order by inheriency chain, not "is this me?"
@@ -20,7 +29,9 @@ namespace SF3.Extensions {
                 .OrderBy(x => ((ViewModelDataAttribute) x.Attributes[0]).DisplayOrder)
                 .ToDictionary(x => x.Property, x => (ViewModelDataAttribute) x.Attributes[0]);
 
-            return new DataViewModel(props);
+            var vm = new DataViewModel(props);
+            _cachedDataViewModels.Add(type.AssemblyQualifiedName, vm);
+            return vm;
         }
     }
 }

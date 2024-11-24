@@ -23,7 +23,7 @@ namespace SF3.Win.Views {
                 return null;
 
             var columnType = Table.RowObjs.GetType().GetElementType()!;
-            var vm = columnType.CreateDataViewModel();
+            var vm = columnType.GetDataViewModel();
 
             var lvcColumns = new List<OLVColumn>();
             Font hexFont = null;
