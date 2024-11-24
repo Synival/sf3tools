@@ -1,29 +1,23 @@
 ﻿using System;
 using System.Windows.Forms;
 using SF3.Editors.MPD;
-using SF3.Win.Controls;
 
 namespace SF3.Win.Views.MPD {
     public class SurfaceView : TabView {
         public SurfaceView(string name, IMPD_Editor editor) : base(name) {
             Editor = editor;
+            SurfaceMapView = new SurfaceMapView("Viewer", Editor);
         }
 
         public override Control Create() {
             if (base.Create() == null)
                 return null;
 
-            // TODO: this should be its own view
-            var surfaceMapView = (Editor.TileSurfaceCharacterRows != null) ? new ControlView<SurfaceMapControl>("Viewer") : null;
-            _ = CreateChild(surfaceMapView, autoFill: false);
-            _surfaceMapControl = (SurfaceMapControl) (surfaceMapView?.Control);
-
-            if (_surfaceMapControl != null) {
-                _surfaceMapControlTab = (TabPage) _surfaceMapControl.Parent;
+            _ = CreateChild(SurfaceMapView, autoFill: false);
+            if (SurfaceMapView.SurfaceMapControl != null) {
+                _surfaceMapControlTab = (TabPage) SurfaceMapView.SurfaceMapControl.Parent;
                 TabControl.Selected += UpdateSurfaceMapControl;
-
-                var textureData = Editor?.TileSurfaceCharacterRows?.Make2DTextureData();
-                _surfaceMapControl.UpdateTextures(textureData, Editor.TextureChunks);
+                SurfaceMapView.UpdateMap();
             }
 
             var ngc = Editor.NameGetterContext;
@@ -37,20 +31,15 @@ namespace SF3.Win.Views.MPD {
         }
 
         private TabPage _surfaceMapControlTab = null;
-        private SurfaceMapControl _surfaceMapControl = null;
 
         void UpdateSurfaceMapControl(object sender, EventArgs eventArgs) {
-            if (TabControl.SelectedTab != _surfaceMapControlTab)
-                return;
-
-            var textureData = Editor?.TileSurfaceCharacterRows?.Make2DTextureData();
-            _surfaceMapControl.UpdateTextures(textureData, Editor.TextureChunks);
+            if (TabControl.SelectedTab == _surfaceMapControlTab)
+                SurfaceMapView.UpdateMap();
         }
 
         public override void Destroy() {
-            if (_surfaceMapControl != null) {
+            if (_surfaceMapControlTab != null) {
                 TabControl.Selected -= UpdateSurfaceMapControl;
-                _surfaceMapControl = null;
                 _surfaceMapControlTab = null;
             }
 
@@ -58,5 +47,6 @@ namespace SF3.Win.Views.MPD {
         }
 
         public IMPD_Editor Editor { get; }
+        public SurfaceMapView SurfaceMapView { get; }
     }
 }
