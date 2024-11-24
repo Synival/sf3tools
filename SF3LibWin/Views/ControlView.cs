@@ -7,6 +7,7 @@ namespace SF3.Win.Views {
 
         public override Control Create() {
             Control = new T();
+            Control.Name = Name;
             return Control;
         }
     }
