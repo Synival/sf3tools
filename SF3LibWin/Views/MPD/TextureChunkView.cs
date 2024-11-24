@@ -12,24 +12,26 @@ namespace SF3.Win.Views.MPD {
             Editor = editor;
 
             var ngc = Editor.NameGetterContext;
-            HeaderView        = new TableView("Header", Editor.HeaderTable, ngc);
-            TextureView       = new TableView("Textures", Editor.TextureTable, ngc);
-            TextureViewerView = new ControlView<TextureControl>("Texture");
+            HeaderView   = new TableView("Header", Editor.HeaderTable, ngc);
+            TexturesView = new TableView("Textures", Editor.TextureTable, ngc);
+            TextureView  = new TextureView("Texture");
         }
 
         public override Control Create() {
             base.Create();
 
             _ = CreateChild(HeaderView);
-            var textureTableControl = CreateChild(TextureView) as ObjectListView;
+            var textureTableControl = CreateChild(TexturesView) as ObjectListView;
 
             // Add a texture viewer on the right side of the 'Textures' tab.
             var textureTabPage = textureTableControl?.Parent;
             if (textureTabPage != null) {
-                var textureViewer = (TextureControl) TextureViewerView.Create();
-                textureViewer.Dock = DockStyle.Right;
-                textureTabPage.Controls.Add(textureViewer);
-                textureTableControl.ItemSelectionChanged += OnTextureChanged;
+                var textureControl = (TextureControl) TextureView.Create();
+                if (textureControl != null) {
+                    textureControl.Dock = DockStyle.Right;
+                    textureTabPage.Controls.Add(textureControl);
+                    textureTableControl.ItemSelectionChanged += OnTextureChanged;
+                }
             }
 
             // Return the top-level control.
@@ -37,28 +39,26 @@ namespace SF3.Win.Views.MPD {
         }
 
         private void OnTextureChanged(object sender, EventArgs e) {
-            var item = (OLVListItem) TextureView.OLVControl.SelectedItem;
-            ((TextureControl) TextureViewerView.Control).TextureImage = (item != null) ? ((Texture) item.RowObject).CreateBitmap() : null;
+            var item = (OLVListItem) TexturesView.OLVControl.SelectedItem;
+            TextureView.Image = (item != null) ? ((Texture) item.RowObject).CreateBitmap() : null;
         }
 
         public override void Destroy() {
             Control?.Hide();
 
-            HeaderView?.Destroy();
+            if (TexturesView.OLVControl != null)
+                TexturesView.OLVControl.ItemSelectionChanged -= OnTextureChanged;
 
-            if (TextureView != null) {
-                TextureView.OLVControl.ItemSelectionChanged -= OnTextureChanged;
-                TextureView.Destroy();
-            }
-
-            TextureViewerView?.Destroy();
+            HeaderView.Destroy();
+            TexturesView.Destroy();
+            TextureView.Destroy();
 
             base.Destroy();
         }
 
         public TextureChunkEditor Editor { get; }
         public TableView HeaderView { get; }
-        public TableView TextureView { get; }
-        public ControlView<TextureControl> TextureViewerView { get; }
+        public TableView TexturesView { get; }
+        public TextureView TextureView { get; }
     }
 }
