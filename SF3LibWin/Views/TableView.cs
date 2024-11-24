@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
-using SF3.Attributes;
 using SF3.Tables;
+using SF3.Extensions;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views {
@@ -24,23 +23,14 @@ namespace SF3.Win.Views {
                 return null;
 
             var columnType = Table.RowObjs.GetType().GetElementType()!;
-            var columnProperties = columnType
-                .GetProperties()
-                .OrderBy(x => x.DeclaringType == columnType ? 1 : 0)
-                .ToList();
-
-            var props = columnProperties
-                .Select(x => new { Property = x, Attributes = x.GetCustomAttributes(typeof(ViewModelDataAttribute), true) })
-                .Where(x => x.Attributes.Length == 1)
-                .OrderBy(x => ((ViewModelDataAttribute) x.Attributes[0]).DisplayOrder)
-                .ToDictionary(x => x.Property, x => (ViewModelDataAttribute) x.Attributes[0]);
+            var vm = columnType.CreateDataViewModel();
 
             var lvcColumns = new List<OLVColumn>();
             Font hexFont = null;
 
             var lvcNameBase = "lvcTableView" + s_controlIndex;
 
-            foreach (var kv in props) {
+            foreach (var kv in vm.Properties) {
                 var prop = kv.Key;
                 var attr = kv.Value;
 
@@ -97,13 +87,13 @@ namespace SF3.Win.Views {
         }
 
         public override void Destroy() {
-            base.Destroy();
             OLVControl = null;
+            base.Destroy();
         }
 
         public Table Table { get; }
         public INameGetterContext NameGetterContext { get; }
 
-        private ObjectListView OLVControl { get; set; } = null;
+        public ObjectListView OLVControl { get; private set; } = null;
     }
 }

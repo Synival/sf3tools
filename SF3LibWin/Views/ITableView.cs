@@ -1,4 +1,5 @@
-﻿using CommonLib.NamedValues;
+﻿using BrightIdeasSoftware;
+using CommonLib.NamedValues;
 using SF3.Tables;
 
 namespace SF3.Win.Views {
@@ -12,5 +13,10 @@ namespace SF3.Win.Views {
         /// The name getter context used to fetch named values for viewing and editing.
         /// </summary>
         INameGetterContext NameGetterContext { get; }
+
+        /// <summary>
+        /// The ObjectListView control created during Create().
+        /// </summary>
+        ObjectListView OLVControl { get; }
     }
 }
