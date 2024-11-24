@@ -12,6 +12,8 @@ namespace SF3.Win.Views {
         private static bool s_inSelectCousinTabs = false;
 
         public override Control Create() {
+            _childViews = new List<IView>();
+
             var tabControl = new TabControl();
 
             tabControl.SuspendLayout();
@@ -89,42 +91,45 @@ namespace SF3.Win.Views {
         }
 
         public override void Destroy() {
-            foreach (var c in ChildControls)
-                c.Dispose();
-            _childControls.Clear();
+            foreach (var c in _childViews)
+                c.Destroy();
+            _childViews.Clear();
+            _childViews = null;
 
             base.Destroy();
         }
 
-        public Control CreateChild(IView child, bool autoFill = true)
-            => CreateChild(child.Name, child.Create(), autoFill);
-
-        public Control CreateChild(string name, Control child, bool autoFill = true) {
-            if (child == null)
+        public Control CreateChild(IView childView, bool autoFill = true) {
+            if (childView == null)
                 return null;
 
-            var tabPage = new TabPage(name);
+            var childControl = childView.Create();
+            if (childControl == null)
+                return null;
+
+            // TODO: the name should be internal, not used for display.
+            var tabPage = new TabPage(childView.Name);
 
             TabControl.SuspendLayout();
             tabPage.SuspendLayout();
 
             if (autoFill)
-                child.Dock = DockStyle.Fill;
+                childControl.Dock = DockStyle.Fill;
 
             tabPage.AutoScroll = true;
-            tabPage.Controls.Add(child);
+            tabPage.Controls.Add(childControl);
             TabControl.Controls.Add(tabPage);
 
             tabPage.ResumeLayout();
             TabControl.ResumeLayout();
 
-            return child;
+            _childViews.Add(childView);
+            return childControl;
         }
 
         public TabControl TabControl => (TabControl) Control;
 
-        private List<Control> _childControls = new List<Control>();
-
-        public IEnumerable<Control> ChildControls => _childControls;
+        private List<IView> _childViews = null;
+        public IEnumerable<IView> ChildViews => _childViews;
     }
 }

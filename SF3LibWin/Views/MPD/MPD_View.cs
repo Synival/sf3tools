@@ -33,8 +33,9 @@ namespace SF3.Win.Views.MPD {
 
             var surfaceContainer = new TabView("Surface");
             var surfaceTabControl = (TabControl) CreateChild(surfaceContainer);
-            var surfaceMapControl = (Editor.TileSurfaceCharacterRows != null) ? new SurfaceMapControl() : null;
-            _ = surfaceContainer.CreateChild("Viewer", surfaceMapControl, autoFill: false);
+            var surfaceMapView = (Editor.TileSurfaceCharacterRows != null) ? new ControlView<SurfaceMapControl>("Viewer") : null;
+            _ = surfaceContainer.CreateChild(surfaceMapView, autoFill: false);
+            var surfaceMapControl = (SurfaceMapControl) (surfaceMapView?.Control);
 
             if (surfaceMapControl != null) {
                 var surfaceMapControlTab = (TabPage) surfaceMapControl.Parent;

@@ -7,7 +7,7 @@ namespace SF3.Win.Views {
         }
 
         public override Control Create() {
-            ChildControls = new List<Control>();
+            _childViews = new List<IView>();
 
             var container = new Control(null, Name);
             container.Padding = new Padding();
@@ -18,29 +18,32 @@ namespace SF3.Win.Views {
         }
 
         public override void Destroy() {
-            foreach (var c in ChildControls)
-                c.Dispose();
-            ((List<Control>) ChildControls).Clear();
-            ChildControls = null;
+            foreach (var c in _childViews)
+                c.Destroy();
+            _childViews.Clear();
+            _childViews = null;
             base.Destroy();
         }
 
-        public Control CreateChild(IView child, bool autoFill = true)
-            => CreateChild(child.Name, child.Create(), autoFill);
+        public Control CreateChild(IView childView, bool autoFill = true) {
+            if (childView == null)
+                return null;
 
-        public Control CreateChild(string name, Control child, bool autoFill = true) {
-            if (child == null)
+            var childControl = childView.Create();
+            if (childControl == null)
                 return null;
 
             Control.SuspendLayout();
             if (autoFill)
-                child.Dock = DockStyle.Fill;
-            Control.Controls.Add(child);
+                childControl.Dock = DockStyle.Fill;
+            Control.Controls.Add(childControl);
             Control.ResumeLayout();
 
-            return child;
+            _childViews.Add(childView);
+            return childControl;
         }
 
-        public IEnumerable<Control> ChildControls { get; private set; } = null;
+        private List<IView> _childViews = null;
+        public IEnumerable<IView> ChildViews => _childViews;
     }
 }
