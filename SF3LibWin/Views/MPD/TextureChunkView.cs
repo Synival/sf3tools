@@ -10,35 +10,55 @@ namespace SF3.Win.Views.MPD {
     public class TextureChunkView : TabView {
         public TextureChunkView(string name, TextureChunkEditor editor) : base(name) {
             Editor = editor;
+
+            var ngc = Editor.NameGetterContext;
+            HeaderView        = new TableView("Header", Editor.HeaderTable, ngc);
+            TextureView       = new TableView("Textures", Editor.TextureTable, ngc);
+            TextureViewerView = new ControlView<TextureControl>("Texture");
         }
 
         public override Control Create() {
             base.Create();
 
-            var ngc = Editor.NameGetterContext;
-
-            _ = CreateChild(new TableView("Header", Editor.HeaderTable, ngc));
-            var textureTableControl = CreateChild(new TableView("Textures", Editor.TextureTable, ngc)) as ObjectListView;
-            var textureTabPage = textureTableControl?.Parent;
+            _ = CreateChild(HeaderView);
+            var textureTableControl = CreateChild(TextureView) as ObjectListView;
 
             // Add a texture viewer on the right side of the 'Textures' tab.
+            var textureTabPage = textureTableControl?.Parent;
             if (textureTabPage != null) {
-                var textureViewer = new TextureControl();
+                var textureViewer = (TextureControl) TextureViewerView.Create();
                 textureViewer.Dock = DockStyle.Right;
                 textureTabPage.Controls.Add(textureViewer);
-
-                void OnTextureChanged(object sender, EventArgs e) {
-                    var item = (OLVListItem) textureTableControl.SelectedItem;
-                    textureViewer.TextureImage = (item != null) ? ((Texture) item.RowObject).CreateBitmap() : null;
-                };
-
-                textureTableControl.ItemSelectionChanged += (s, e) => OnTextureChanged(s, e);
+                textureTableControl.ItemSelectionChanged += OnTextureChanged;
             }
 
             // Return the top-level control.
             return Control;
         }
 
+        private void OnTextureChanged(object sender, EventArgs e) {
+            var item = (OLVListItem) TextureView.OLVControl.SelectedItem;
+            ((TextureControl) TextureViewerView.Control).TextureImage = (item != null) ? ((Texture) item.RowObject).CreateBitmap() : null;
+        }
+
+        public override void Destroy() {
+            Control?.Hide();
+
+            HeaderView?.Destroy();
+
+            if (TextureView != null) {
+                TextureView.OLVControl.ItemSelectionChanged -= OnTextureChanged;
+                TextureView.Destroy();
+            }
+
+            TextureViewerView?.Destroy();
+
+            base.Destroy();
+        }
+
         public TextureChunkEditor Editor { get; }
+        public TableView HeaderView { get; }
+        public TableView TextureView { get; }
+        public ControlView<TextureControl> TextureViewerView { get; }
     }
 }

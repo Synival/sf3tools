@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using BrightIdeasSoftware;
 using SF3.Editors.MPD;
-using SF3.Models.MPD.TextureAnimation;
 using SF3.Win.Controls;
-using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.MPD {
     public class MPD_View : TabView {
