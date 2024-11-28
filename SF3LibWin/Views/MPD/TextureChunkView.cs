@@ -12,7 +12,7 @@ namespace SF3.Win.Views.MPD {
             Editor = editor;
 
             var ngc = Editor.NameGetterContext;
-            HeaderView   = new TableView("Header", Editor.HeaderTable, ngc);
+            HeaderView   = new TableView("Header", Editor.TextureHeaderTable, ngc);
             TexturesView = new TableView("Textures", Editor.TextureTable, ngc);
             TextureView  = new TextureView("Texture");
         }

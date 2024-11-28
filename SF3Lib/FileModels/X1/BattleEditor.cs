@@ -33,7 +33,7 @@ namespace SF3.FileModels.X1 {
             var customMovementAddress = aiAddress + 0x84;
 
             return new List<ITable>() {
-                (HeaderTable         = new HeaderTable(Editor, ResourceFile("X1Top.xml"), headerAddress)),
+                (BattleHeaderTable   = new BattleHeaderTable(Editor, ResourceFile("X1Top.xml"), headerAddress)),
                 (SlotTable           = new SlotTable(Editor, ResourceFile(HasLargeEnemyTable ? "X1List.xml" : "X1OtherList.xml"), slotAddress)),
                 (SpawnZoneTable      = new SpawnZoneTable(Editor, ResourceFile("UnknownAIList.xml"), spawnZoneAddress)),
                 (AITable             = new AITable(Editor, ResourceFile("X1AI.xml"), aiAddress)),
@@ -49,7 +49,7 @@ namespace SF3.FileModels.X1 {
         public bool HasLargeEnemyTable { get; }
 
         [BulkCopyRecurse]
-        public HeaderTable HeaderTable { get; private set; }
+        public BattleHeaderTable BattleHeaderTable { get; private set; }
         [BulkCopyRecurse]
         public SlotTable SlotTable { get; private set; }
         [BulkCopyRecurse]

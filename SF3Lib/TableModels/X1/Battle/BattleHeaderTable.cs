@@ -2,8 +2,8 @@ using SF3.RawEditors;
 using SF3.Models.X1.Battle;
 
 namespace SF3.TableModels.X1.Battle {
-    public class HeaderTable : Table<Header> {
-        public HeaderTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+    public class BattleHeaderTable : Table<Header> {
+        public BattleHeaderTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

@@ -20,12 +20,12 @@ namespace SF3.FileModels.MPD {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            HeaderTable  = new HeaderTable(Editor, 0x00);
-            HeaderTable.Load();
-            var header = HeaderTable.Rows[0];
+            TextureHeaderTable  = new TextureHeaderTable(Editor, 0x00);
+            TextureHeaderTable.Load();
+            var header = TextureHeaderTable.Rows[0];
 
             return new List<ITable>() {
-                HeaderTable,
+                TextureHeaderTable,
                 (TextureTable = new TextureTable(Editor, 0x04, header.NumTextures, header.TextureIdStart)),
             };
         }
@@ -37,7 +37,7 @@ namespace SF3.FileModels.MPD {
 
 
         [BulkCopyRecurse]
-        public HeaderTable HeaderTable { get; private set; }
+        public TextureHeaderTable TextureHeaderTable { get; private set; }
 
         [BulkCopyRecurse]
         public TextureTable TextureTable { get; private set; }

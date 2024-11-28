@@ -12,7 +12,7 @@ namespace SF3.Win.Views.MPD {
                 return null;
 
             var ngc = Editor.NameGetterContext;
-            _ = CreateChild(new TableView("Header",         Editor.Header, ngc));
+            _ = CreateChild(new TableView("Header",         Editor.MPDHeader, ngc));
             _ = CreateChild(new TableView("Chunk Header",   Editor.ChunkHeader, ngc));
             _ = CreateChild(new TableView("Offset 1 Table", Editor.Offset1Table, ngc));
             _ = CreateChild(new TableView("Offset 2 Table", Editor.Offset2Table, ngc));

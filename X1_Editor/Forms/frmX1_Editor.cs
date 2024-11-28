@@ -61,7 +61,7 @@ namespace SF3.X1_Editor.Forms {
             => (IsBTL99 ? "SF3 Data (X1BTL99.BIN)|X1BTL99.BIN|" : "SF3 Data (X1*.BIN)|X1*.BIN|") + base.FileDialogFilter;
 
         protected override IBaseEditor MakeEditor(IModelFileLoader loader)
-            => Editors.X1.X1_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario, IsBTL99);
+            => FileModels.X1.X1_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario, IsBTL99);
 
         private class PopulateBattleTabConfig : IPopulateTabConfig {
             public PopulateBattleTabConfig(TabPage tabPage, Dictionary<MapLeaderType, BattleEditor> battleTable, MapLeaderType mapLeader) {
@@ -77,7 +77,7 @@ namespace SF3.X1_Editor.Forms {
             public bool Populate() {
                 var bec = TabPage.Controls[0] as BattleEditorControl;
                 return bec.Tabs.PopulateTabs(new List<IPopulateTabConfig>() {
-                    new PopulateOLVTabConfig(bec.TabHeader,           bec.OLVHeader,           BattleTable.HeaderTable),
+                    new PopulateOLVTabConfig(bec.TabHeader,           bec.OLVHeader,           BattleTable.BattleHeaderTable),
                     new PopulateOLVTabConfig(bec.TabSlotTab1,         bec.OLVSlotTab1,         BattleTable.SlotTable),
                     new PopulateOLVTabConfig(bec.TabSlotTab2,         bec.OLVSlotTab2,         BattleTable.SlotTable),
                     new PopulateOLVTabConfig(bec.TabSlotTab3,         bec.OLVSlotTab3,         BattleTable.SlotTable),

@@ -67,7 +67,7 @@ namespace SF3.Tests.Editors {
         public void HeaderTable_HasExpectedData() {
             var editor = TestCase.Create();
             var battle = editor.Battles[MapLeaderType.Synbios];
-            var table = battle.HeaderTable;
+            var table = battle.BattleHeaderTable;
 
             Assert.AreEqual(   0, table.Rows[0].SizeUnknown1);
             Assert.AreEqual(  16, table.Rows[0].TableSize);

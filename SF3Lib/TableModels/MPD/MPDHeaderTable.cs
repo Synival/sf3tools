@@ -2,8 +2,8 @@
 using SF3.Models.MPD;
 
 namespace SF3.TableModels.MPD {
-    public class HeaderTable : Table<HeaderModel> {
-        public HeaderTable(IRawEditor editor, int address, bool hasPalette3) : base(editor, address) {
+    public class MPDHeaderTable : Table<HeaderModel> {
+        public MPDHeaderTable(IRawEditor editor, int address, bool hasPalette3) : base(editor, address) {
             HasPalette3 = hasPalette3;
         }
 

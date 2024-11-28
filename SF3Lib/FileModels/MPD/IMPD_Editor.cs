@@ -21,7 +21,7 @@ namespace SF3.FileModels.MPD {
         IChunkEditor[] ChunkEditors { get; }
         IChunkEditor SurfaceChunkEditor { get; }
 
-        Tables.MPD.HeaderTable Header { get; }
+        MPDHeaderTable MPDHeader { get; }
         ColorTable[] Palettes { get; }
         ChunkHeaderTable ChunkHeader { get; }
         UnknownUInt16Table Offset1Table { get; }

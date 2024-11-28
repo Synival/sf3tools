@@ -56,7 +56,7 @@ namespace SF3.Tests.Editors {
                     Assert.IsTrue(editor.Battles.ContainsKey((MapLeaderType) testCase.MapLeader));
                     var battle = editor.Battles[(MapLeaderType) testCase.MapLeader];
 
-                    Assert.IsNotNull(battle.HeaderTable);
+                    Assert.IsNotNull(battle.BattleHeaderTable);
                     Assert.IsNotNull(battle.SlotTable);
                     Assert.IsNotNull(battle.SpawnZoneTable);
                     Assert.IsNotNull(battle.AITable);

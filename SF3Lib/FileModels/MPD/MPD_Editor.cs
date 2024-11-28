@@ -31,9 +31,9 @@ namespace SF3.FileModels.MPD {
             // Create and load Header
             var headerAddrPtr = Editor.GetDouble(0x0000) - ramOffset;
             var headerAddr = Editor.GetDouble(headerAddrPtr) - ramOffset;
-            Header = new Tables.MPD.HeaderTable(Editor, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
-            _ = Header.Load();
-            var header = Header.Rows[0];
+            MPDHeader = new MPDHeaderTable(Editor, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
+            _ = MPDHeader.Load();
+            var header = MPDHeader.Rows[0];
 
             // Load palettes
             Palettes = new ColorTable[3];
@@ -42,7 +42,7 @@ namespace SF3.FileModels.MPD {
             if (header.OffsetPal2 > 0)
                 Palettes[1] = new ColorTable(Editor, header.OffsetPal2 - ramOffset, 256);
             if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 > 0)
-                Palettes[2] = new ColorTable(Editor, Header.Rows[0].OffsetPal3 - ramOffset, 256);
+                Palettes[2] = new ColorTable(Editor, MPDHeader.Rows[0].OffsetPal3 - ramOffset, 256);
 
             // Create other tables from header offsets.
             Offset1Table = (header.Offset1 != 0) ? new UnknownUInt16Table(Editor, header.Offset1 - ramOffset, 32) : null;
@@ -121,7 +121,7 @@ namespace SF3.FileModels.MPD {
 
             // Build a list of all data tables.
             var tables = new List<ITable>() {
-                Header,
+                MPDHeader,
                 ChunkHeader,
                 (TileSurfaceHeightmapRows = new TileSurfaceHeightmapRowTable(ChunkEditors[5].DecompressedEditor, 0x0000)),
                 (TileHeightTerrainRows    = new TileHeightTerrainRowTable   (ChunkEditors[5].DecompressedEditor, 0x4000)),
@@ -156,7 +156,7 @@ namespace SF3.FileModels.MPD {
                 int chunkIndex = i + 6;
                 if (Chunks[chunkIndex].Data?.Length > 0) {
                     TextureChunks[i] = TextureChunkEditor.Create(ChunkEditors[chunkIndex].DecompressedEditor, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
-                    tables.Add(TextureChunks[i].HeaderTable);
+                    tables.Add(TextureChunks[i].TextureHeaderTable);
                     tables.Add(TextureChunks[i].TextureTable);
                 }
             }
@@ -281,7 +281,7 @@ namespace SF3.FileModels.MPD {
         public IChunkEditor SurfaceChunkEditor { get; private set; }
 
         [BulkCopyRecurse]
-        public Tables.MPD.HeaderTable Header { get; private set; }
+        public MPDHeaderTable MPDHeader { get; private set; }
 
         [BulkCopyRecurse]
         public ColorTable[] Palettes { get; private set; }

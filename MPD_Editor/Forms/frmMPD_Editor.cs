@@ -37,10 +37,10 @@ namespace SF3.MPD_Editor.Forms {
             => "SF3 Data (*.MPD)|*.MPD|" + base.FileDialogFilter;
 
         protected override IBaseEditor MakeModel(IModelFileLoader loader)
-            => Editors.MPD.MPD_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
+            => FileModels.MPD.MPD_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
         protected override IView MakeView(IModelFileLoader loader, IBaseEditor model)
-            => new MPD_View(loader.Filename, (Editors.MPD.MPD_Editor) model);
+            => new MPD_View(loader.Filename, (FileModels.MPD.MPD_Editor) model);
 
         private void tsmiTextures_ImportFolder_Click(object sender, System.EventArgs e) {
             using (var dialog = new CommonOpenFileDialog() {
