@@ -2,7 +2,7 @@
 using CommonLib.NamedValues;
 using SF3.RawEditors;
 
-namespace SF3.Editors {
+namespace SF3.FileModels {
     /// <summary>
     /// Any kind of editor.
     /// </summary>

@@ -12,7 +12,7 @@ using SF3.Tables.X1.Town;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 
-namespace SF3.Editors.X1 {
+namespace SF3.FileModels.X1 {
     public class X1_Editor : ScenarioTableEditor, IX1_Editor {
         protected X1_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(editor, nameContext, scenario) {
             IsBTL99 = isBTL99;

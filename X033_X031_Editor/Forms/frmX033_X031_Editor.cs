@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using BrightIdeasSoftware;
 using SF3.Win.Extensions;
 using SF3.Win.Forms;
-using SF3.Editors;
+using SF3.FileModels;
 using SF3.ModelLoaders;
 using SF3.Models.X033_X031;
 using static SF3.Win.Extensions.TabControlExtensions;
 using SF3.NamedValues;
-using SF3.Editors.X033_X031;
+using SF3.FileModels.X033_X031;
 
 namespace SF3.X033_X031_Editor.Forms {
     public partial class frmX033_X031_Editor : EditorForm {

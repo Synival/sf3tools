@@ -8,7 +8,7 @@ using SF3.Tables.X019;
 using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 
-namespace SF3.Editors.X019 {
+namespace SF3.FileModels.X019 {
     public class X019_Editor : ScenarioTableEditor, IX019_Editor {
         protected X019_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }

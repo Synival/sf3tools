@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using SF3.Editors.IconPointer;
+using SF3.FileModels.IconPointer;
 
 namespace SF3.Win.Views.MPD {
     public class IconPointerView : TabView {

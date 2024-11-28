@@ -1,6 +1,6 @@
 using SF3.Win.Forms;
-using SF3.Editors;
-using SF3.Editors.MPD;
+using SF3.FileModels;
+using SF3.FileModels.MPD;
 using SF3.ModelLoaders;
 using SF3.NamedValues;
 using SF3.Win.Views.MPD;

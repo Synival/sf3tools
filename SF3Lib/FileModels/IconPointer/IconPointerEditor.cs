@@ -9,7 +9,7 @@ using SF3.Tables.IconPointer;
 using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 
-namespace SF3.Editors.IconPointer {
+namespace SF3.FileModels.IconPointer {
     public class IconPointerEditor : ScenarioTableEditor, IIconPointerEditor {
         protected IconPointerEditor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }

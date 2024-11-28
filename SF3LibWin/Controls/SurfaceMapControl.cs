@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows.Forms;
-using SF3.Editors.MPD;
+using SF3.FileModels.MPD;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Controls {

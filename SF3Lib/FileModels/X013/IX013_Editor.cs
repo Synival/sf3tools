@@ -1,6 +1,6 @@
 using SF3.Tables.X013;
 
-namespace SF3.Editors.X013 {
+namespace SF3.FileModels.X013 {
     public interface IX013_Editor : IScenarioTableEditor {
         SpecialTable SpecialsTable { get; }
         SpecialEffectTable SpecialEffectTable { get; }

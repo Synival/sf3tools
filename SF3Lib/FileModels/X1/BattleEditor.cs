@@ -7,7 +7,7 @@ using SF3.Tables.X1.Battle;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 
-namespace SF3.Editors.X1 {
+namespace SF3.FileModels.X1 {
     public class BattleEditor : TableEditor {
         protected BattleEditor(IRawEditor editor, INameGetterContext nameContext, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable)
         : base(editor, nameContext) {

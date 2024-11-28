@@ -5,7 +5,7 @@ using SF3.RawEditors;
 using SF3.Tables;
 using SF3.Tables.MPD.TextureChunk;
 
-namespace SF3.Editors.MPD {
+namespace SF3.FileModels.MPD {
     public class TextureChunkEditor : TableEditor {
         protected TextureChunkEditor(IRawEditor editor, INameGetterContext nameContext, int address, string name)
         : base(editor, nameContext) {

@@ -1,7 +1,7 @@
 using SF3.RawEditors;
 using SF3.NamedValues;
 using SF3.Types;
-using SF3.Editors.X019;
+using SF3.FileModels.X019;
 
 namespace SF3.Tests.Editors {
     [TestClass]

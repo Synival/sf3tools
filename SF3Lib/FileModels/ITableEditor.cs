@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CommonLib.NamedValues;
 using SF3.Tables;
 
-namespace SF3.Editors {
+namespace SF3.FileModels {
     /// <summary>
     /// Editor for any kind of file that has tables.
     /// </summary>

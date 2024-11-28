@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using SF3.Editors;
+using SF3.FileModels;
 using SF3.RawEditors;
 
 namespace SF3.ModelLoaders {

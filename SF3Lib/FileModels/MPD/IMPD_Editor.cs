@@ -4,7 +4,7 @@ using SF3.Tables;
 using SF3.Tables.MPD;
 using SF3.Tables.MPD.TextureAnimation;
 
-namespace SF3.Editors.MPD {
+namespace SF3.FileModels.MPD {
     public interface IMPD_Editor : IScenarioTableEditor {
         /// <summary>
         /// Recompresses compressed chunks, updating the ChunkHeader however necessary.

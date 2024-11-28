@@ -11,7 +11,7 @@ using CommonLib;
 using System.Runtime.InteropServices;
 using SF3.Tables.MPD.TextureAnimation;
 
-namespace SF3.Editors.MPD {
+namespace SF3.FileModels.MPD {
     public class MPD_Editor : ScenarioTableEditor, IMPD_Editor {
         protected MPD_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }

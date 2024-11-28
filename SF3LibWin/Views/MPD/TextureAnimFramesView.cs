@@ -2,7 +2,7 @@ using System;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
-using SF3.Editors.MPD;
+using SF3.FileModels.MPD;
 using SF3.Models.MPD.TextureAnimation;
 using SF3.Win.Extensions;
 
