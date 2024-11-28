@@ -17,8 +17,8 @@ namespace SF3.Tests.Models.Files {
                 ExpectedBattleCount = expectedBattleCount;
             }
 
-            public X1_Battle Create()
-                => X1_Battle.Create(new ByteData(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario, false);
+            public X1_File Create()
+                => X1_File.Create(new ByteData(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario, false);
 
             public MapLeaderType? MapLeader { get; }
             public int? ExpectedBattleCount { get; }

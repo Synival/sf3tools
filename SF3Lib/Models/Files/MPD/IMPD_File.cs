@@ -9,7 +9,7 @@ namespace SF3.Models.Files.MPD {
     public interface IMPD_File : IScenarioTableFile {
         /// <summary>
         /// Recompresses compressed chunks, updating the ChunkHeader however necessary.
-        /// All of the editor's data will be updated to contain the new recompressed data.
+        /// All of the file's data will be updated to contain the new recompressed data.
         /// This could result in a different data size.
         /// </summary>
         /// <param name="onlyModified">Only perform updates for modified compressed chunks.</param>
@@ -17,10 +17,10 @@ namespace SF3.Models.Files.MPD {
         bool Recompress(bool onlyModified);
 
         /// <summary>
-        /// Byte editor for (de)compressed data for chunks
+        /// Byte data for (de)compressed data for chunks
         /// </summary>
-        IChunkData[] ChunkEditors { get; }
-        IChunkData SurfaceChunkEditor { get; }
+        IChunkData[] ChunkData { get; }
+        IChunkData SurfaceChunkData { get; }
 
         MPDHeaderTable MPDHeader { get; }
         ColorTable[] Palettes { get; }

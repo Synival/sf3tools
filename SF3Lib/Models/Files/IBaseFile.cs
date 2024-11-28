@@ -3,7 +3,7 @@ using CommonLib.NamedValues;
 
 namespace SF3.Models.Files {
     /// <summary>
-    /// Any kind of editor.
+    /// Any kind of file.
     /// </summary>
     public interface IBaseFile : IModifiable, IDisposable {
         /// <summary>
@@ -18,7 +18,7 @@ namespace SF3.Models.Files {
         INameGetterContext NameGetterContext { get; }
 
         /// <summary>
-        /// The name of this editor for display.
+        /// The name of this file for display.
         /// </summary>
         string Title { get; }
 

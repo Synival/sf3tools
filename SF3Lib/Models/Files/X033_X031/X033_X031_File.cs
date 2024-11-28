@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
-using SF3.Models.Files;
 using SF3.Models.Tables;
 using SF3.Models.Tables.X033_X031;
 using SF3.RawData;
@@ -12,14 +11,14 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X033_X031 {
     public class X033_X031_File : ScenarioTableFile, IX033_X031_File {
-        protected X033_X031_File(IRawData editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
+        protected X033_X031_File(IRawData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }
 
-        public static X033_X031_File Create(IRawData editor, INameGetterContext nameContext, ScenarioType scenario) {
-            var newEditor = new X033_X031_File(editor, nameContext, scenario);
-            if (!newEditor.Init())
+        public static X033_X031_File Create(IRawData data, INameGetterContext nameContext, ScenarioType scenario) {
+            var newFile = new X033_X031_File(data, nameContext, scenario);
+            if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");
-            return newEditor;
+            return newFile;
         }
 
         public override IEnumerable<ITable> MakeTables() {

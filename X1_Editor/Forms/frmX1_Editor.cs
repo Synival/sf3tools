@@ -31,7 +31,7 @@ namespace SF3.X1_Editor.Forms {
             }
         }
 
-        public IX1_Battle File => base.FileLoader.Model as IX1_Battle;
+        public IX1_File File => base.FileLoader.Model as IX1_File;
 
         public frmX1_Editor() {
             InitializeComponent();
@@ -61,7 +61,7 @@ namespace SF3.X1_Editor.Forms {
             => (IsBTL99 ? "SF3 Data (X1BTL99.BIN)|X1BTL99.BIN|" : "SF3 Data (X1*.BIN)|X1*.BIN|") + base.FileDialogFilter;
 
         protected override IBaseFile MakeEditor(IModelFileLoader loader)
-            => X1_Battle.Create(loader.RawData, new NameGetterContext(Scenario), Scenario, IsBTL99);
+            => X1_File.Create(loader.RawData, new NameGetterContext(Scenario), Scenario, IsBTL99);
 
         private class PopulateBattleTabConfig : IPopulateTabConfig {
             public PopulateBattleTabConfig(TabPage tabPage, Dictionary<MapLeaderType, X1_FileBattle> battleTable, MapLeaderType mapLeader) {

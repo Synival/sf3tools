@@ -26,7 +26,7 @@ namespace Grayscaler {
                 // Get a raw data editing context for the file.
                 var byteEditor = new ByteData(File.ReadAllBytes(file));
 
-                // Create an MPD editor that works with our new ByteEditor.
+                // Create an MPD file that works with our new ByteData.
                 var mpdFile = MPD_File.Create(byteEditor, nameGetter, scenario);
 
                 // Gather all textures into one collection.

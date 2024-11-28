@@ -8,11 +8,11 @@ using SF3.RawData;
 
 namespace SF3.Models.Files {
     /// <summary>
-    /// Editor for any kind of file that has tables.
+    /// File for any kind of file that has tables.
     /// </summary>
     public abstract class TableFile : ITableFile {
-        protected TableFile(IRawData editor, INameGetterContext nameContext) {
-            Data = editor;
+        protected TableFile(IRawData data, INameGetterContext nameContext) {
+            Data = data;
             NameGetterContext = nameContext;
 
             // TODO: remove this when we Dispose() ourselves!!
@@ -67,7 +67,7 @@ namespace SF3.Models.Files {
         public virtual void Dispose() => Data.Dispose();
 
         /// <summary>
-        /// The underlying data editor for this table editor. Don't modify this directly!!
+        /// The underlying data for this table file. Don't modify this directly!!
         /// </summary>
         public IRawData Data { get; }
 

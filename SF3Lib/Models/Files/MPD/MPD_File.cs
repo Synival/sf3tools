@@ -6,7 +6,6 @@ using SF3.Types;
 using System.Linq;
 using CommonLib;
 using System.Runtime.InteropServices;
-using SF3.Models.Files;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.Models.Tables.MPD.TextureAnimation;
@@ -14,14 +13,14 @@ using SF3.RawData;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
-        protected MPD_File(IRawData editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
+        protected MPD_File(IRawData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }
 
-        public static MPD_File Create(IRawData editor, INameGetterContext nameContext, ScenarioType scenario) {
-            var newEditor = new MPD_File(editor, nameContext, scenario);
-            if (!newEditor.Init())
+        public static MPD_File Create(IRawData data, INameGetterContext nameContext, ScenarioType scenario) {
+            var newFile = new MPD_File(data, nameContext, scenario);
+            if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");
-            return newEditor;
+            return newFile;
         }
 
         public override IEnumerable<ITable> MakeTables() {
@@ -70,16 +69,16 @@ namespace SF3.Models.Files.MPD {
             }
 
             // Assign all chunk editors.
-            ChunkEditors = new IChunkData[Chunks.Length];
+            ChunkData = new IChunkData[Chunks.Length];
 
             if (Chunks[2]?.Data?.Length > 0) {
                 SurfaceChunk = Chunks[2];
-                SurfaceChunkEditor = ChunkEditors[2] = new ChunkData(SurfaceChunk.Data, false);
+                SurfaceChunkData = ChunkData[2] = new ChunkData(SurfaceChunk.Data, false);
             }
             // TODO: this works, but it's kind of a dumb hack!!
             else if (Chunks[20]?.Data?.Length == 52992) {
                 SurfaceChunk = Chunks[20];
-                SurfaceChunkEditor = ChunkEditors[20] = new ChunkData(SurfaceChunk.Data, false);
+                SurfaceChunkData = ChunkData[20] = new ChunkData(SurfaceChunk.Data, false);
             }
 
             if (Chunks[3]?.Data?.Length > 0 && TextureAnimFrames != null) {
@@ -97,12 +96,12 @@ namespace SF3.Models.Files.MPD {
             }
 
             if (Chunks[5]?.Data != null)
-                ChunkEditors[5] = new ChunkData(Chunks[5].Data, true);
+                ChunkData[5] = new ChunkData(Chunks[5].Data, true);
 
             // Texture editors, in chunks (6...10)
             for (var i = 6; i <= 10; i++) {
                 try {
-                    ChunkEditors[i] = new ChunkData(Chunks[i].Data, true);
+                    ChunkData[i] = new ChunkData(Chunks[i].Data, true);
                 }
                 catch {
                     // TODO: This is likely failing because the texture is the wrong encoding.
@@ -113,9 +112,9 @@ namespace SF3.Models.Files.MPD {
             // We should have all the uncompressed data now. Update read-only info of our chunk table.
             for (var i = 0; i < ChunkHeader.Rows.Length; i++) {
                 ChunkHeader.Rows[i].CompressionType =
-                    ChunkEditors[i] == null && (Chunks[i]?.Data?.Length ?? 0) == 0 ? "--" :
-                    ChunkEditors[i] == null ? "(WIP)" :
-                    ChunkEditors[i].IsCompressed ? "Compressed" :
+                    ChunkData[i] == null && (Chunks[i]?.Data?.Length ?? 0) == 0 ? "--" :
+                    ChunkData[i] == null ? "(WIP)" :
+                    ChunkData[i].IsCompressed ? "Compressed" :
                     "Uncompressed";
             }
             UpdateChunkTableDecompressedSizes();
@@ -124,9 +123,9 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>() {
                 MPDHeader,
                 ChunkHeader,
-                (TileSurfaceHeightmapRows = new TileSurfaceHeightmapRowTable(ChunkEditors[5].DecompressedData, 0x0000)),
-                (TileHeightTerrainRows    = new TileHeightTerrainRowTable   (ChunkEditors[5].DecompressedData, 0x4000)),
-                (TileItemRows             = new TileItemRowTable            (ChunkEditors[5].DecompressedData, 0x6000)),
+                (TileSurfaceHeightmapRows = new TileSurfaceHeightmapRowTable(ChunkData[5].DecompressedData, 0x0000)),
+                (TileHeightTerrainRows    = new TileHeightTerrainRowTable   (ChunkData[5].DecompressedData, 0x4000)),
+                (TileItemRows             = new TileItemRowTable            (ChunkData[5].DecompressedData, 0x6000)),
             };
 
             if (TextureAnimations != null)
@@ -149,31 +148,31 @@ namespace SF3.Models.Files.MPD {
             if (TextureAnimFrames != null)
                 tables.Add(TextureAnimFrames);
 
-            if (SurfaceChunkEditor?.Data?.Length >= 64 * 64 * 2)
-                tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(SurfaceChunkEditor.DecompressedData, 0x0000));
+            if (SurfaceChunkData?.Data?.Length >= 64 * 64 * 2)
+                tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(SurfaceChunkData.DecompressedData, 0x0000));
 
             TextureChunks = new MPD_FileTextureChunk[5];
             for (var i = 0; i < TextureChunks.Length; i++) {
                 var chunkIndex = i + 6;
                 if (Chunks[chunkIndex].Data?.Length > 0) {
-                    TextureChunks[i] = MPD_FileTextureChunk.Create(ChunkEditors[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
+                    TextureChunks[i] = MPD_FileTextureChunk.Create(ChunkData[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
                     tables.Add(TextureChunks[i].TextureHeaderTable);
                     tables.Add(TextureChunks[i].TextureTable);
                 }
             }
 
             // Add some callbacks to all child editors.
-            var editors = ChunkEditors
+            var editors = ChunkData
                 .Cast<IRawData>()
                 .Concat(TextureAnimFrameEditors?.Cast<IRawData>() ?? new IRawData[0])
                 .Where(x => x != null)
                 .ToArray();
 
             foreach (var ce in editors) {
-                // If the editor is marked as unmodified (such as after a save), mark child editors as unmodified as well.
+                // If the data is marked as unmodified (such as after a save), mark child editors as unmodified as well.
                 Data.IsModifiedChanged += (s, e) => ce.IsModified &= Data.IsModified;
 
-                // If any of the child editors are marked as modified, mark the parent editor as modified as well.
+                // If any of the child editors are marked as modified, mark the parent data as modified as well.
                 ce.IsModifiedChanged += (s, e) => Data.IsModified |= ce.IsModified;
             }
 
@@ -182,7 +181,7 @@ namespace SF3.Models.Files.MPD {
 
         private void UpdateChunkTableDecompressedSizes() {
             for (var i = 0; i < ChunkHeader.Rows.Length; i++)
-                ChunkHeader.Rows[i].DecompressedSize = ChunkEditors[i]?.DecompressedData?.Size ?? 0;
+                ChunkHeader.Rows[i].DecompressedSize = ChunkData[i]?.DecompressedData?.Size ?? 0;
         }
 
         [DllImport("msvcrt.dll", SetLastError = false)]
@@ -192,7 +191,7 @@ namespace SF3.Models.Files.MPD {
             // TODO: update group texture frame textures as well!!
 
             // Don't bother doing anything if no chunks have been modified.
-            if (onlyModified && !ChunkEditors.Any(x => x != null && (x.IsModified || x.NeedsRecompression)))
+            if (onlyModified && !ChunkData.Any(x => x != null && (x.IsModified || x.NeedsRecompression)))
                 return true;
 
             const int ramOffset = 0x290000;
@@ -202,7 +201,7 @@ namespace SF3.Models.Files.MPD {
             var chunkPositions = new int[Chunks.Length];
 
             for (var i = 0; i < Chunks.Length; i++) {
-                var chunkEditor = ChunkEditors[i];
+                var chunkEditor = ChunkData[i];
 
                 // Finalize compressed chunks.
                 if (chunkEditor != null && (!onlyModified || chunkEditor.NeedsRecompression || chunkEditor.IsModified)) {
@@ -256,10 +255,10 @@ namespace SF3.Models.Files.MPD {
         }
 
         public override bool IsModified {
-            get => base.IsModified | ChunkEditors.Any(x => x != null && x.IsModified);
+            get => base.IsModified | ChunkData.Any(x => x != null && x.IsModified);
             set {
                 base.IsModified = value;
-                foreach (var ce in ChunkEditors.Where(x => x != null))
+                foreach (var ce in ChunkData.Where(x => x != null))
                     ce.IsModified = value;
             }
         }
@@ -269,17 +268,17 @@ namespace SF3.Models.Files.MPD {
 
         public override void Dispose() {
             base.Dispose();
-            if (ChunkEditors != null)
-                foreach (var ci in ChunkEditors.Where(ci => ci != null))
+            if (ChunkData != null)
+                foreach (var ci in ChunkData.Where(ci => ci != null))
                     ci.Dispose();
             if (TextureAnimFrameEditors != null)
                 foreach (var ci in TextureAnimFrameEditors.Where(tgfe => tgfe != null))
                     ci.Dispose();
         }
 
-        public IChunkData[] ChunkEditors { get; private set; }
+        public IChunkData[] ChunkData { get; private set; }
 
-        public IChunkData SurfaceChunkEditor { get; private set; }
+        public IChunkData SurfaceChunkData { get; private set; }
 
         [BulkCopyRecurse]
         public MPDHeaderTable MPDHeader { get; private set; }

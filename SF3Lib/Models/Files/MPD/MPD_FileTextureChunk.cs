@@ -1,23 +1,22 @@
 ﻿using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
-using SF3.Models.Files;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.TextureChunk;
 using SF3.RawData;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_FileTextureChunk : TableFile {
-        protected MPD_FileTextureChunk(IRawData editor, INameGetterContext nameContext, int address, string name)
-        : base(editor, nameContext) {
+        protected MPD_FileTextureChunk(IRawData data, INameGetterContext nameContext, int address, string name)
+        : base(data, nameContext) {
             Address = address;
             Name    = name;
         }
 
-        public static MPD_FileTextureChunk Create(IRawData editor, INameGetterContext nameContext, int address, string name) {
-            var newEditor = new MPD_FileTextureChunk(editor, nameContext, address, name);
-            newEditor.Init();
-            return newEditor;
+        public static MPD_FileTextureChunk Create(IRawData data, INameGetterContext nameContext, int address, string name) {
+            var newFile = new MPD_FileTextureChunk(data, nameContext, address, name);
+            newFile.Init();
+            return newFile;
         }
 
         public override IEnumerable<ITable> MakeTables() {

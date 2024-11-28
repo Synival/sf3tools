@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
-using SF3.Models.Files;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X1;
@@ -14,16 +13,16 @@ using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X1 {
-    public class X1_Battle : ScenarioTableFile, IX1_Battle {
-        protected X1_Battle(IRawData editor, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(editor, nameContext, scenario) {
+    public class X1_File : ScenarioTableFile, IX1_File {
+        protected X1_File(IRawData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(data, nameContext, scenario) {
             IsBTL99 = isBTL99;
         }
 
-        public static X1_Battle Create(IRawData editor, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) {
-            var newEditor = new X1_Battle(editor, nameContext, scenario, isBTL99);
-            if (!newEditor.Init())
+        public static X1_File Create(IRawData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) {
+            var newFile = new X1_File(data, nameContext, scenario, isBTL99);
+            if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");
-            return newEditor;
+            return newFile;
         }
 
         public override IEnumerable<ITable> MakeTables() {

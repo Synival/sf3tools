@@ -13,8 +13,8 @@ namespace SF3.Tests.Models.Files {
             : base(scenario, filename) {
             }
 
-            public X1_Battle Create()
-                => X1_Battle.Create(new ByteData(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario, false);
+            public X1_File Create()
+                => X1_File.Create(new ByteData(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario, false);
         }
 
         private static readonly X1_TestCase TestCase = new X1_TestCase(ScenarioType.Scenario3, "X1BEER.BIN");
