@@ -2,7 +2,7 @@
 using SF3.RawData;
 using static CommonLib.Utils.Compression;
 
-namespace SF3.Tests.RawEditors {
+namespace SF3.Tests.RawData {
     [TestClass]
     public class CompressedDataTests {
         private static readonly byte[] _compressedTestData = Compress(Encoding.UTF8.GetBytes("Hello, world!!"));
