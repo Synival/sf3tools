@@ -4,16 +4,16 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views.MPD {
     public class SurfaceMapView : ControlView<SurfaceMapControl> {
-        public SurfaceMapView(string name, IMPD_File editor) : base(name) {
-            Editor = editor;
+        public SurfaceMapView(string name, IMPD_File model) : base(name) {
+            Model = model;
         }
 
         public override Control Create()
-            => (Editor.TileSurfaceCharacterRows == null) ? null : base.Create();
+            => (Model.TileSurfaceCharacterRows == null) ? null : base.Create();
 
         public void UpdateMap() {
-            var textureData = Editor.TileSurfaceCharacterRows?.Make2DTextureData();
-            SurfaceMapControl.UpdateTextures(textureData, Editor.TextureChunks);
+            var textureData = Model.TileSurfaceCharacterRows?.Make2DTextureData();
+            SurfaceMapControl.UpdateTextures(textureData, Model.TextureChunks);
         }
 
         public override void RefreshContent() {
@@ -23,7 +23,7 @@ namespace SF3.Win.Views.MPD {
             // TODO: how to refresh???
         }
 
-        public IMPD_File Editor { get; }
+        public IMPD_File Model { get; }
 
         public SurfaceMapControl SurfaceMapControl => (SurfaceMapControl) Control;
     }

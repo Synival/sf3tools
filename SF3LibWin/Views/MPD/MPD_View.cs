@@ -3,22 +3,22 @@ using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
     public class MPD_View : TabView {
-        public MPD_View(string name, IMPD_File editor) : base(name) {
-            Editor = editor;
+        public MPD_View(string name, IMPD_File model) : base(name) {
+            Model = model;
         }
 
         public override Control Create() {
             if (base.Create() == null)
                 return null;
 
-            _ = CreateChild(new HeadersView("Headers", Editor));
-            _ = CreateChild(new PalettesView("Palettes", Editor));
-            _ = CreateChild(new SurfaceView("Surface", Editor));
-            _ = CreateChild(new TexturesView("Textures", Editor));
+            _ = CreateChild(new HeadersView("Headers", Model));
+            _ = CreateChild(new PalettesView("Palettes", Model));
+            _ = CreateChild(new SurfaceView("Surface", Model));
+            _ = CreateChild(new TexturesView("Textures", Model));
 
             return Control;
         }
 
-        public IMPD_File Editor { get; }
+        public IMPD_File Model { get; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace SF3.RawData {
     /// <summary>
-    /// Editor that automatically decompresses its incoming data in a sub-editor called 'DecompressedEditor'.
+    /// Data that automatically decompresses its incoming bytes into a "sub-data" object called 'DecompressedData'.
     /// Upon Finalize(), it will update its own compressed data using the decompressed snapshot.
     /// </summary>
     public interface ICompressedData : IByteData {

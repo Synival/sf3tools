@@ -8,9 +8,9 @@ using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.MPD {
     public class TextureAnimFramesView : ControlSpaceView {
-        public TextureAnimFramesView(string name, IMPD_File editor, INameGetterContext nameGetterContext) : base(name) {
-            Editor      = editor;
-            TableView   = new TableView("Frames", editor.TextureAnimFrames, nameGetterContext);
+        public TextureAnimFramesView(string name, IMPD_File model, INameGetterContext nameGetterContext) : base(name) {
+            Model       = model;
+            TableView   = new TableView("Frames", model.TextureAnimFrames, nameGetterContext);
             TextureView = new TextureView("Texture");
         }
 
@@ -36,9 +36,9 @@ namespace SF3.Win.Views.MPD {
         void OnTextureChanged(object sender, EventArgs e) {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
             var frame = (FrameModel) item?.RowObject;
-            TextureView.Image = (frame == null || Editor.TextureAnimFrameEditors[frame.ID] == null)
+            TextureView.Image = (frame == null || Model.TextureAnimFrameEditors[frame.ID] == null)
                 ? (System.Drawing.Image) null
-                : frame.CreateBitmap(Editor.TextureAnimFrameEditors[frame.ID].DecompressedData);
+                : frame.CreateBitmap(Model.TextureAnimFrameEditors[frame.ID].DecompressedData);
         }
 
         public override void Destroy() {
@@ -53,7 +53,7 @@ namespace SF3.Win.Views.MPD {
             base.Destroy();
         }
 
-        public IMPD_File Editor { get; }
+        public IMPD_File Model { get; }
         public TableView TableView { get; private set; }
         public TextureView TextureView { get; private set; }
     }

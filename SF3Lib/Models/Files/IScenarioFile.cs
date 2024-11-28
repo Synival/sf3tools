@@ -2,7 +2,7 @@ using SF3.Types;
 
 namespace SF3.Models.Files {
     /// <summary>
-    /// Editor for a specific SF3 Scenario.
+    /// File for a specific SF3 Scenario.
     /// </summary>
     public interface IScenarioFile : IBaseFile {
         /// <summary>

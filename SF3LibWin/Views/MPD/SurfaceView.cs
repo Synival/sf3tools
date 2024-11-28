@@ -4,9 +4,9 @@ using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
     public class SurfaceView : TabView {
-        public SurfaceView(string name, IMPD_File editor) : base(name) {
-            Editor = editor;
-            SurfaceMapView = new SurfaceMapView("Viewer", Editor);
+        public SurfaceView(string name, IMPD_File model) : base(name) {
+            Model = model;
+            SurfaceMapView = new SurfaceMapView("Viewer", Model);
         }
 
         public override Control Create() {
@@ -20,12 +20,12 @@ namespace SF3.Win.Views.MPD {
                 SurfaceMapView.UpdateMap();
             }
 
-            var ngc = Editor.NameGetterContext;
+            var ngc = Model.NameGetterContext;
 
-            _ = CreateChild(new TableView("Textures", Editor.TileSurfaceCharacterRows, ngc));
-            _ = CreateChild(new TableView("Heightmap", Editor.TileSurfaceHeightmapRows, ngc));
-            _ = CreateChild(new TableView("Height + Terrain Type", Editor.TileHeightTerrainRows, ngc));
-            _ = CreateChild(new TableView("Object Locations", Editor.TileItemRows, ngc));
+            _ = CreateChild(new TableView("Textures", Model.TileSurfaceCharacterRows, ngc));
+            _ = CreateChild(new TableView("Heightmap", Model.TileSurfaceHeightmapRows, ngc));
+            _ = CreateChild(new TableView("Height + Terrain Type", Model.TileHeightTerrainRows, ngc));
+            _ = CreateChild(new TableView("Object Locations", Model.TileItemRows, ngc));
 
             return Control;
         }
@@ -46,7 +46,7 @@ namespace SF3.Win.Views.MPD {
             base.Destroy();
         }
 
-        public IMPD_File Editor { get; }
+        public IMPD_File Model { get; }
         public SurfaceMapView SurfaceMapView { get; }
     }
 }

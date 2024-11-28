@@ -3,20 +3,20 @@ using SF3.Models.Files.IconPointer;
 
 namespace SF3.Win.Views.MPD {
     public class IconPointerView : TabView {
-        public IconPointerView(string name, IconPointerFile editor) : base(name) {
-            Editor = editor;
+        public IconPointerView(string name, IconPointerFile model) : base(name) {
+            Model = model;
         }
 
         public override Control Create() {
             base.Create();
 
-            var ngc = Editor.NameGetterContext;
-            CreateChild(new TableView("Item Icons",  Editor.ItemIconTable,  ngc));
-            CreateChild(new TableView("Spell Icons", Editor.SpellIconTable, ngc));
+            var ngc = Model.NameGetterContext;
+            CreateChild(new TableView("Item Icons",  Model.ItemIconTable,  ngc));
+            CreateChild(new TableView("Spell Icons", Model.SpellIconTable, ngc));
 
             return Control;
         }
 
-        public IconPointerFile Editor { get; }
+        public IconPointerFile Model { get; }
     }
 }

@@ -8,12 +8,12 @@ using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.MPD {
     public class TextureChunkView : TabView {
-        public TextureChunkView(string name, MPD_FileTextureChunk editor) : base(name) {
-            Editor = editor;
+        public TextureChunkView(string name, MPD_FileTextureChunk model) : base(name) {
+            Model = model;
 
-            var ngc = Editor.NameGetterContext;
-            HeaderView   = new TableView("Header", Editor.TextureHeaderTable, ngc);
-            TexturesView = new TableView("Textures", Editor.TextureTable, ngc);
+            var ngc = Model.NameGetterContext;
+            HeaderView   = new TableView("Header", Model.TextureHeaderTable, ngc);
+            TexturesView = new TableView("Textures", Model.TextureTable, ngc);
             TextureView  = new TextureView("Texture");
         }
 
@@ -56,7 +56,7 @@ namespace SF3.Win.Views.MPD {
             base.Destroy();
         }
 
-        public MPD_FileTextureChunk Editor { get; }
+        public MPD_FileTextureChunk Model { get; }
         public TableView HeaderView { get; }
         public TableView TexturesView { get; }
         public TextureView TextureView { get; }

@@ -3,23 +3,23 @@ using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
     public class TexturesView : TabView {
-        public TexturesView(string name, IMPD_File editor) : base(name) {
-            Editor = editor;
+        public TexturesView(string name, IMPD_File model) : base(name) {
+            Model = model;
         }
 
         public override Control Create() {
             if (base.Create() == null)
                 return null;
 
-            var ngc = Editor.NameGetterContext;
-            for (var i = 0; i < Editor.TextureChunks.Length; i++)
-                _ = CreateChild(new TextureChunkView("Chunk " + (i + 6), Editor.TextureChunks[i]));
-            _ = CreateChild(new TableView("Animations", Editor.TextureAnimations, ngc));
-            _ = CreateChild(new TextureAnimFramesView("Anim. Frames", Editor, ngc));
+            var ngc = Model.NameGetterContext;
+            for (var i = 0; i < Model.TextureChunks.Length; i++)
+                _ = CreateChild(new TextureChunkView("Chunk " + (i + 6), Model.TextureChunks[i]));
+            _ = CreateChild(new TableView("Animations", Model.TextureAnimations, ngc));
+            _ = CreateChild(new TextureAnimFramesView("Anim. Frames", Model, ngc));
 
             return Control;
         }
 
-        public IMPD_File Editor { get; }
+        public IMPD_File Model { get; }
     }
 }

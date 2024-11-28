@@ -5,7 +5,7 @@ using SF3.Models.Tables;
 
 namespace SF3.Models.Files {
     /// <summary>
-    /// Editor for any kind of file that has tables.
+    /// Any kind of file that has tables.
     /// </summary>
     public interface ITableFile : IBaseFile {
         /// <summary>
