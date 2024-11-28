@@ -3,9 +3,9 @@ using SF3.NamedValues;
 using SF3.Types;
 using SF3.Models.Files.X002;
 
-namespace SF3.Tests.Editors {
+namespace SF3.Tests.Models.Files {
     [TestClass]
-    public class X002_EditorTests {
+    public class X002_FileTests {
         private class X002_TestCase : TestCase {
             public X002_TestCase(
                 ScenarioType scenario,
@@ -46,26 +46,26 @@ namespace SF3.Tests.Editors {
                 var editor = testCase.Create();
                 var table = editor.ItemTable;
 
-                Assert.AreEqual(  0, table.Rows[0].Price);
-                Assert.AreEqual(  0, table.Rows[0].WeaponType);
-                Assert.AreEqual(  0, table.Rows[0].SpellUse);
-                Assert.AreEqual(  0, table.Rows[0].StatType1);
-                Assert.AreEqual(  0, table.Rows[0].Range);
-                Assert.AreEqual(  0, table.Rows[0].Attack);
+                Assert.AreEqual(0, table.Rows[0].Price);
+                Assert.AreEqual(0, table.Rows[0].WeaponType);
+                Assert.AreEqual(0, table.Rows[0].SpellUse);
+                Assert.AreEqual(0, table.Rows[0].StatType1);
+                Assert.AreEqual(0, table.Rows[0].Range);
+                Assert.AreEqual(0, table.Rows[0].Attack);
 
-                Assert.AreEqual( 50, table.Rows[1].Price);
-                Assert.AreEqual( 10, table.Rows[1].WeaponType);
-                Assert.AreEqual(  0, table.Rows[1].SpellUse);
+                Assert.AreEqual(50, table.Rows[1].Price);
+                Assert.AreEqual(10, table.Rows[1].WeaponType);
+                Assert.AreEqual(0, table.Rows[1].SpellUse);
                 Assert.AreEqual(testCase.Scenario == ScenarioType.Scenario1 ? 20 : 0, table.Rows[1].StatType1);
                 Assert.AreEqual(0x21, table.Rows[1].Range);
-                Assert.AreEqual(  3, table.Rows[1].Attack);
+                Assert.AreEqual(3, table.Rows[1].Attack);
 
                 Assert.AreEqual(250, table.Rows[2].Price);
-                Assert.AreEqual( 10, table.Rows[2].WeaponType);
-                Assert.AreEqual(  0, table.Rows[2].SpellUse);
+                Assert.AreEqual(10, table.Rows[2].WeaponType);
+                Assert.AreEqual(0, table.Rows[2].SpellUse);
                 Assert.AreEqual(testCase.Scenario == ScenarioType.Scenario1 ? 20 : 0, table.Rows[2].StatType1);
                 Assert.AreEqual(0x21, table.Rows[2].Range);
-                Assert.AreEqual(  7, table.Rows[2].Attack);
+                Assert.AreEqual(7, table.Rows[2].Attack);
 
                 Assert.AreEqual(testCase.ExpectedItems, table.Rows.Length);
             });
@@ -77,23 +77,23 @@ namespace SF3.Tests.Editors {
                 var editor = testCase.Create();
                 var table = editor.SpellTable;
 
-                Assert.AreEqual(  0, table.Rows[0].Element);
-                Assert.AreEqual(  0, table.Rows[0].Lv1Cost);
-                Assert.AreEqual(  0, table.Rows[0].Lv1Damage);
-                Assert.AreEqual(  0, table.Rows[0].Lv1Distance);
-                Assert.AreEqual(  1, table.Rows[0].Lv1Targets);
+                Assert.AreEqual(0, table.Rows[0].Element);
+                Assert.AreEqual(0, table.Rows[0].Lv1Cost);
+                Assert.AreEqual(0, table.Rows[0].Lv1Damage);
+                Assert.AreEqual(0, table.Rows[0].Lv1Distance);
+                Assert.AreEqual(1, table.Rows[0].Lv1Targets);
 
-                Assert.AreEqual(  1, table.Rows[1].Element);
-                Assert.AreEqual(  2, table.Rows[1].Lv1Cost);
-                Assert.AreEqual(  8, table.Rows[1].Lv1Damage);
+                Assert.AreEqual(1, table.Rows[1].Element);
+                Assert.AreEqual(2, table.Rows[1].Lv1Cost);
+                Assert.AreEqual(8, table.Rows[1].Lv1Damage);
                 Assert.AreEqual(0x21, table.Rows[1].Lv1Distance);
-                Assert.AreEqual(  1, table.Rows[1].Lv1Targets);
+                Assert.AreEqual(1, table.Rows[1].Lv1Targets);
 
-                Assert.AreEqual(  2, table.Rows[2].Element);
-                Assert.AreEqual(  3, table.Rows[2].Lv1Cost);
-                Assert.AreEqual( 10, table.Rows[2].Lv1Damage);
+                Assert.AreEqual(2, table.Rows[2].Element);
+                Assert.AreEqual(3, table.Rows[2].Lv1Cost);
+                Assert.AreEqual(10, table.Rows[2].Lv1Damage);
                 Assert.AreEqual(0x21, table.Rows[2].Lv1Distance);
-                Assert.AreEqual(  1, table.Rows[2].Lv1Targets);
+                Assert.AreEqual(1, table.Rows[2].Lv1Targets);
 
                 Assert.AreEqual(testCase.ExpectedSpells, table.Rows.Length);
             });
@@ -105,23 +105,23 @@ namespace SF3.Tests.Editors {
                 var editor = testCase.Create();
                 var table = editor.WeaponSpellTable;
 
-                Assert.AreEqual(   0, table.Rows[0].SpellID2);
-                Assert.AreEqual(   0, table.Rows[0].Weapon0);
-                Assert.AreEqual(   0, table.Rows[0].Weapon1);
-                Assert.AreEqual(   0, table.Rows[0].Weapon2);
-                Assert.AreEqual(   0, table.Rows[0].Weapon3);
+                Assert.AreEqual(0, table.Rows[0].SpellID2);
+                Assert.AreEqual(0, table.Rows[0].Weapon0);
+                Assert.AreEqual(0, table.Rows[0].Weapon1);
+                Assert.AreEqual(0, table.Rows[0].Weapon2);
+                Assert.AreEqual(0, table.Rows[0].Weapon3);
 
                 Assert.AreEqual(0x27, table.Rows[1].SpellID2);
-                Assert.AreEqual(   1, table.Rows[1].Weapon0);
-                Assert.AreEqual(   1, table.Rows[1].Weapon1);
-                Assert.AreEqual(   1, table.Rows[1].Weapon2);
-                Assert.AreEqual(   2, table.Rows[1].Weapon3);
+                Assert.AreEqual(1, table.Rows[1].Weapon0);
+                Assert.AreEqual(1, table.Rows[1].Weapon1);
+                Assert.AreEqual(1, table.Rows[1].Weapon2);
+                Assert.AreEqual(2, table.Rows[1].Weapon3);
 
                 Assert.AreEqual(0x12, table.Rows[2].SpellID2);
-                Assert.AreEqual(   1, table.Rows[2].Weapon0);
-                Assert.AreEqual(   1, table.Rows[2].Weapon1);
-                Assert.AreEqual(   2, table.Rows[2].Weapon2);
-                Assert.AreEqual(   2, table.Rows[2].Weapon3);
+                Assert.AreEqual(1, table.Rows[2].Weapon0);
+                Assert.AreEqual(1, table.Rows[2].Weapon1);
+                Assert.AreEqual(2, table.Rows[2].Weapon2);
+                Assert.AreEqual(2, table.Rows[2].Weapon3);
 
                 Assert.AreEqual(testCase.ExpectedWeaponSpells, table.Rows.Length);
             });
@@ -134,13 +134,13 @@ namespace SF3.Tests.Editors {
                 var table = editor.LoadingTable;
 
                 Assert.AreEqual(1, table.Rows[0].LocationID);
-                Assert.AreEqual(testCase.Scenario <= ScenarioType.Scenario2 ? 27 :  0, table.Rows[0].Music);
+                Assert.AreEqual(testCase.Scenario <= ScenarioType.Scenario2 ? 27 : 0, table.Rows[0].Music);
 
                 Assert.AreEqual(2, table.Rows[1].LocationID);
                 Assert.AreEqual(testCase.Scenario <= ScenarioType.Scenario2 ? 29 : 12, table.Rows[1].Music);
 
                 Assert.AreEqual(3, table.Rows[2].LocationID);
-                Assert.AreEqual(testCase.Scenario <= ScenarioType.Scenario2 ?  0 : 12, table.Rows[2].Music);
+                Assert.AreEqual(testCase.Scenario <= ScenarioType.Scenario2 ? 0 : 12, table.Rows[2].Music);
 
                 Assert.AreEqual(testCase.ExpectedLoads, table.Rows.Length);
             });
@@ -200,19 +200,19 @@ namespace SF3.Tests.Editors {
 
                 switch (editor.Scenario) {
                     case ScenarioType.Scenario1:
-                        Assert.AreEqual(   0, table.Rows[0].SynChr);
+                        Assert.AreEqual(0, table.Rows[0].SynChr);
                         Assert.AreEqual(0x1D, table.Rows[0].SynMpd);
                         Assert.AreEqual(0x20, table.Rows[0].SynMusic);
                         break;
 
                     case ScenarioType.Scenario2:
-                        Assert.AreEqual(   0, table.Rows[0].MedChr);
+                        Assert.AreEqual(0, table.Rows[0].MedChr);
                         Assert.AreEqual(0x1A, table.Rows[0].MedMpd);
                         Assert.AreEqual(0x20, table.Rows[0].MedMusic);
                         break;
 
                     case ScenarioType.Scenario3:
-                        Assert.AreEqual(   0, table.Rows[0].JulChr);
+                        Assert.AreEqual(0, table.Rows[0].JulChr);
                         Assert.AreEqual(0xE6, table.Rows[0].JulMpd);
                         Assert.AreEqual(0x3F, table.Rows[0].JulMusic);
                         break;

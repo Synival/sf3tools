@@ -3,9 +3,9 @@ using SF3.NamedValues;
 using SF3.Types;
 using SF3.Models.Files.X1;
 
-namespace SF3.Tests.Editors {
+namespace SF3.Tests.Models.Files {
     [TestClass]
-    public class X1_EditorTests_Battle_S1 {
+    public class X1_FileTests_Battle_S1 {
         private class X1_TestCase : TestCase {
             public X1_TestCase(
                 ScenarioType scenario,
@@ -68,7 +68,7 @@ namespace SF3.Tests.Editors {
             var battle = editor.Battles[MapLeaderType.Synbios];
             var table = battle.BattleHeaderTable;
 
-            Assert.AreEqual( 0, table.Rows[0].SizeUnknown1);
+            Assert.AreEqual(0, table.Rows[0].SizeUnknown1);
             Assert.AreEqual(26, table.Rows[0].TableSize);
 
             Assert.AreEqual(1, table.Rows.Length);

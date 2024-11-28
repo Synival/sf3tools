@@ -3,9 +3,9 @@ using SF3.NamedValues;
 using SF3.Types;
 using SF3.Models.Files.X1;
 
-namespace SF3.Tests.Editors {
+namespace SF3.Tests.Models.Files {
     [TestClass]
-    public class X1_EditorTests_Battle_S2 {
+    public class X1_FileTests_Battle_S2 {
         private class X1_TestCase : TestCase {
             public X1_TestCase(
                 ScenarioType scenario,
@@ -56,7 +56,7 @@ namespace SF3.Tests.Editors {
             Assert.AreEqual(21, table.Rows[0].CustomMovementX1);
             Assert.AreEqual(17, table.Rows[0].CustomMovementZ1);
 
-            Assert.AreEqual( 0, table.Rows[1].CustomMovementX1);
+            Assert.AreEqual(0, table.Rows[1].CustomMovementX1);
             Assert.AreEqual(63, table.Rows[1].CustomMovementZ1);
 
             Assert.AreEqual(33, table.Rows.Length);
@@ -68,8 +68,8 @@ namespace SF3.Tests.Editors {
             var battle = editor.Battles[MapLeaderType.Medion];
             var table = battle.BattleHeaderTable;
 
-            Assert.AreEqual(   0, table.Rows[0].SizeUnknown1);
-            Assert.AreEqual(  27, table.Rows[0].TableSize);
+            Assert.AreEqual(0, table.Rows[0].SizeUnknown1);
+            Assert.AreEqual(27, table.Rows[0].TableSize);
 
             Assert.AreEqual(1, table.Rows.Length);
         }
@@ -82,7 +82,7 @@ namespace SF3.Tests.Editors {
 
             Assert.AreEqual(0xFFFF, table.Rows[0].EnemyID);
             Assert.AreEqual(22, table.Rows[0].EnemyX);
-            Assert.AreEqual( 8, table.Rows[0].EnemyY);
+            Assert.AreEqual(8, table.Rows[0].EnemyY);
 
             Assert.AreEqual(0x45, table.Rows[12].EnemyID);
             Assert.AreEqual(26, table.Rows[12].EnemyX);

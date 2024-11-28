@@ -3,9 +3,9 @@ using SF3.NamedValues;
 using SF3.Types;
 using SF3.Models.Files.X033_X031;
 
-namespace SF3.Tests.Editors {
+namespace SF3.Tests.Models.Files {
     [TestClass]
-    public class X033_X031_EditorTests {
+    public class X033_X031_FileTests {
         private class X033_X031_TestCase : TestCase {
             public X033_X031_TestCase(
                 ScenarioType scenario,
@@ -97,9 +97,9 @@ namespace SF3.Tests.Editors {
             TestCase.Run(TestCases, testCase => {
                 var editor = testCase.Create();
 
-                Assert.AreEqual(  70, editor.WeaponLevelTable.Rows[0].WLevel1);
-                Assert.AreEqual( 150, editor.WeaponLevelTable.Rows[0].WLevel2);
-                Assert.AreEqual( 250, editor.WeaponLevelTable.Rows[0].WLevel3);
+                Assert.AreEqual(70, editor.WeaponLevelTable.Rows[0].WLevel1);
+                Assert.AreEqual(150, editor.WeaponLevelTable.Rows[0].WLevel2);
+                Assert.AreEqual(250, editor.WeaponLevelTable.Rows[0].WLevel3);
                 Assert.AreEqual(9999, editor.WeaponLevelTable.Rows[0].WLevel4);
 
                 Assert.AreEqual(1, editor.WeaponLevelTable.Rows.Length);

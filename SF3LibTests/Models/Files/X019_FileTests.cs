@@ -3,9 +3,9 @@ using SF3.NamedValues;
 using SF3.Types;
 using SF3.Models.Files.X019;
 
-namespace SF3.Tests.Editors {
+namespace SF3.Tests.Models.Files {
     [TestClass]
-    public class X019_EditorTests {
+    public class X019_FileTests {
         private class X019_TestCase : TestCase {
             public X019_TestCase(ScenarioType scenario, string filename, int expectedRows)
             : base(scenario, filename) {
@@ -37,7 +37,7 @@ namespace SF3.Tests.Editors {
                 // TODO: maybe more data?
 
                 Assert.AreEqual(10, editor.MonsterTable.Rows[1].MaxHP);
-                Assert.AreEqual( 0, editor.MonsterTable.Rows[1].MaxMP);
+                Assert.AreEqual(0, editor.MonsterTable.Rows[1].MaxMP);
                 Assert.AreEqual(12, editor.MonsterTable.Rows[1].Attack);
                 // TODO: maybe more data?
 

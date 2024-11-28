@@ -3,9 +3,9 @@ using SF3.NamedValues;
 using SF3.Types;
 using SF3.Models.Files.X013;
 
-namespace SF3.Tests.Editors {
+namespace SF3.Tests.Models.Files {
     [TestClass]
-    public class X013_EditorTests {
+    public class X013_FileTests {
         private class X013_TestCase : TestCase {
             public X013_TestCase(
                 ScenarioType scenario,
@@ -40,7 +40,7 @@ namespace SF3.Tests.Editors {
                 var editor = testCase.Create();
                 var table = editor.CritModTable;
 
-                Assert.AreEqual( 20, table.Rows[0].Advantage);
+                Assert.AreEqual(20, table.Rows[0].Advantage);
                 Assert.AreEqual(236, table.Rows[0].Disadvantage);
 
                 Assert.AreEqual(1, table.Rows.Length);
@@ -65,7 +65,7 @@ namespace SF3.Tests.Editors {
                 Assert.AreEqual(30, table.Rows[1].TwoSpecial);
                 Assert.AreEqual(40, table.Rows[1].ThreeSpecial);
                 Assert.AreEqual(50, table.Rows[1].FourSpecial);
-                Assert.AreEqual( 0, table.Rows[1].FiveSpecial);
+                Assert.AreEqual(0, table.Rows[1].FiveSpecial);
 
                 Assert.AreEqual(2, table.Rows.Length);
             });
@@ -90,7 +90,7 @@ namespace SF3.Tests.Editors {
                 var editor = testCase.Create();
                 var table = editor.FriendshipExpTable;
 
-                Assert.AreEqual( 0, table.Rows[0].SLvl0);
+                Assert.AreEqual(0, table.Rows[0].SLvl0);
                 Assert.AreEqual(10, table.Rows[0].SLvl1);
                 Assert.AreEqual(20, table.Rows[0].SLvl2);
                 Assert.AreEqual(30, table.Rows[0].SLvl3);
@@ -167,12 +167,12 @@ namespace SF3.Tests.Editors {
                 var editor = testCase.Create();
                 var table = editor.SoulmateTable;
 
-                Assert.AreEqual( 5, table.Rows[0].Chance);
+                Assert.AreEqual(5, table.Rows[0].Chance);
                 Assert.AreEqual(15, table.Rows[1].Chance);
                 Assert.AreEqual(15, table.Rows[2].Chance);
                 Assert.AreEqual(15, table.Rows[3].Chance);
                 Assert.AreEqual(15, table.Rows[4].Chance);
-                Assert.AreEqual( 5, table.Rows[5].Chance);
+                Assert.AreEqual(5, table.Rows[5].Chance);
 
                 Assert.AreEqual(1770, table.Rows.Length);
             });
@@ -227,48 +227,48 @@ namespace SF3.Tests.Editors {
                 var table = editor.StatusEffectTable;
 
                 Assert.AreEqual(100, table.Rows[0].StatusLuck0);
-                Assert.AreEqual( 95, table.Rows[0].StatusLuck1);
-                Assert.AreEqual( 91, table.Rows[0].StatusLuck2);
-                Assert.AreEqual( 87, table.Rows[0].StatusLuck3);
-                Assert.AreEqual( 83, table.Rows[0].StatusLuck4);
-                Assert.AreEqual( 79, table.Rows[0].StatusLuck5);
-                Assert.AreEqual( 76, table.Rows[0].StatusLuck6);
-                Assert.AreEqual( 73, table.Rows[0].StatusLuck7);
-                Assert.AreEqual( 70, table.Rows[0].StatusLuck8);
-                Assert.AreEqual( 60, table.Rows[0].StatusLuck9);
- 
+                Assert.AreEqual(95, table.Rows[0].StatusLuck1);
+                Assert.AreEqual(91, table.Rows[0].StatusLuck2);
+                Assert.AreEqual(87, table.Rows[0].StatusLuck3);
+                Assert.AreEqual(83, table.Rows[0].StatusLuck4);
+                Assert.AreEqual(79, table.Rows[0].StatusLuck5);
+                Assert.AreEqual(76, table.Rows[0].StatusLuck6);
+                Assert.AreEqual(73, table.Rows[0].StatusLuck7);
+                Assert.AreEqual(70, table.Rows[0].StatusLuck8);
+                Assert.AreEqual(60, table.Rows[0].StatusLuck9);
+
                 Assert.AreEqual(100, table.Rows[1].StatusLuck0);
-                Assert.AreEqual( 90, table.Rows[1].StatusLuck1);
-                Assert.AreEqual( 85, table.Rows[1].StatusLuck2);
-                Assert.AreEqual( 80, table.Rows[1].StatusLuck3);
-                Assert.AreEqual( 75, table.Rows[1].StatusLuck4);
-                Assert.AreEqual( 70, table.Rows[1].StatusLuck5);
-                Assert.AreEqual( 65, table.Rows[1].StatusLuck6);
-                Assert.AreEqual( 60, table.Rows[1].StatusLuck7);
-                Assert.AreEqual( 55, table.Rows[1].StatusLuck8);
-                Assert.AreEqual(  0, table.Rows[1].StatusLuck9);
+                Assert.AreEqual(90, table.Rows[1].StatusLuck1);
+                Assert.AreEqual(85, table.Rows[1].StatusLuck2);
+                Assert.AreEqual(80, table.Rows[1].StatusLuck3);
+                Assert.AreEqual(75, table.Rows[1].StatusLuck4);
+                Assert.AreEqual(70, table.Rows[1].StatusLuck5);
+                Assert.AreEqual(65, table.Rows[1].StatusLuck6);
+                Assert.AreEqual(60, table.Rows[1].StatusLuck7);
+                Assert.AreEqual(55, table.Rows[1].StatusLuck8);
+                Assert.AreEqual(0, table.Rows[1].StatusLuck9);
 
                 Assert.AreEqual(100, table.Rows[2].StatusLuck0);
-                Assert.AreEqual( 80, table.Rows[2].StatusLuck1);
-                Assert.AreEqual( 74, table.Rows[2].StatusLuck2);
-                Assert.AreEqual( 68, table.Rows[2].StatusLuck3);
-                Assert.AreEqual( 62, table.Rows[2].StatusLuck4);
-                Assert.AreEqual( 56, table.Rows[2].StatusLuck5);
-                Assert.AreEqual( 50, table.Rows[2].StatusLuck6);
-                Assert.AreEqual( 45, table.Rows[2].StatusLuck7);
-                Assert.AreEqual( 40, table.Rows[2].StatusLuck8);
-                Assert.AreEqual(  0, table.Rows[2].StatusLuck9);
+                Assert.AreEqual(80, table.Rows[2].StatusLuck1);
+                Assert.AreEqual(74, table.Rows[2].StatusLuck2);
+                Assert.AreEqual(68, table.Rows[2].StatusLuck3);
+                Assert.AreEqual(62, table.Rows[2].StatusLuck4);
+                Assert.AreEqual(56, table.Rows[2].StatusLuck5);
+                Assert.AreEqual(50, table.Rows[2].StatusLuck6);
+                Assert.AreEqual(45, table.Rows[2].StatusLuck7);
+                Assert.AreEqual(40, table.Rows[2].StatusLuck8);
+                Assert.AreEqual(0, table.Rows[2].StatusLuck9);
 
                 Assert.AreEqual(100, table.Rows[3].StatusLuck0);
-                Assert.AreEqual( 75, table.Rows[3].StatusLuck1);
-                Assert.AreEqual( 65, table.Rows[3].StatusLuck2);
-                Assert.AreEqual( 55, table.Rows[3].StatusLuck3);
-                Assert.AreEqual( 45, table.Rows[3].StatusLuck4);
-                Assert.AreEqual( 35, table.Rows[3].StatusLuck5);
-                Assert.AreEqual( 25, table.Rows[3].StatusLuck6);
-                Assert.AreEqual( 15, table.Rows[3].StatusLuck7);
-                Assert.AreEqual(  0, table.Rows[3].StatusLuck8);
-                Assert.AreEqual(  0, table.Rows[3].StatusLuck9);
+                Assert.AreEqual(75, table.Rows[3].StatusLuck1);
+                Assert.AreEqual(65, table.Rows[3].StatusLuck2);
+                Assert.AreEqual(55, table.Rows[3].StatusLuck3);
+                Assert.AreEqual(45, table.Rows[3].StatusLuck4);
+                Assert.AreEqual(35, table.Rows[3].StatusLuck5);
+                Assert.AreEqual(25, table.Rows[3].StatusLuck6);
+                Assert.AreEqual(15, table.Rows[3].StatusLuck7);
+                Assert.AreEqual(0, table.Rows[3].StatusLuck8);
+                Assert.AreEqual(0, table.Rows[3].StatusLuck9);
 
                 Assert.AreEqual(4, table.Rows.Length);
             });
@@ -280,8 +280,8 @@ namespace SF3.Tests.Editors {
                 var editor = testCase.Create();
                 var table = editor.SupportStatsTable;
 
-                Assert.AreEqual( 5, table.Rows[0].SLvlStat1);
-                Assert.AreEqual( 7, table.Rows[0].SLvlStat2);
+                Assert.AreEqual(5, table.Rows[0].SLvlStat1);
+                Assert.AreEqual(7, table.Rows[0].SLvlStat2);
                 Assert.AreEqual(10, table.Rows[0].SLvlStat3);
                 Assert.AreEqual(15, table.Rows[0].SLvlStat4);
 

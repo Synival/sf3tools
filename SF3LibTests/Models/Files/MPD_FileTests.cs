@@ -4,9 +4,9 @@ using SF3.RawEditors;
 using SF3.Types;
 using static SF3.Tests.TestDataPaths;
 
-namespace SF3.Tests.Editors {
+namespace SF3.Tests.Models.Files {
     [TestClass]
-    public class MPD_EditorTests {
+    public class MPD_FileTests {
         private static MPD_File MakeEditor() {
             var scenario = ScenarioType.Scenario1;
             var nameGetterContext = new NameGetterContext(scenario);
@@ -15,8 +15,7 @@ namespace SF3.Tests.Editors {
         }
 
         [TestMethod]
-        public void ChunkEditor_WithDifferentOriginalCompressionAlgorithmForData_Recompress_UpdatesCompressedData()
-        {
+        public void ChunkEditor_WithDifferentOriginalCompressionAlgorithmForData_Recompress_UpdatesCompressedData() {
             // Arrange
             var mpdEditor = MakeEditor();
             var editor = new CompressedEditor(mpdEditor.ChunkEditors[5].Data);
@@ -35,8 +34,7 @@ namespace SF3.Tests.Editors {
         }
 
         [TestMethod]
-        public void ChunkEditor_WithDifferentOriginalCompressionAlgorithmForData_RecompressAgain_IsModifiedIsFalse()
-        {
+        public void ChunkEditor_WithDifferentOriginalCompressionAlgorithmForData_RecompressAgain_IsModifiedIsFalse() {
             // Arrange
             var mpdEditor = MakeEditor();
             var editor = new CompressedEditor(mpdEditor.ChunkEditors[5].Data);
@@ -57,8 +55,7 @@ namespace SF3.Tests.Editors {
         }
 
         [TestMethod]
-        public void Create_WithoutChanges_NothingHasIsModifiedFlag()
-        {
+        public void Create_WithoutChanges_NothingHasIsModifiedFlag() {
             // Arrange + Act
             var editor = MakeEditor();
 
@@ -70,8 +67,7 @@ namespace SF3.Tests.Editors {
         }
 
         [TestMethod]
-        public void Recompress_WithoutChanges_HasExpectedIsModifiedFlags()
-        {
+        public void Recompress_WithoutChanges_HasExpectedIsModifiedFlags() {
             // Arrange
             var editor = MakeEditor();
 
@@ -81,7 +77,7 @@ namespace SF3.Tests.Editors {
             // Assert
             Assert.IsTrue(recompressResult);
 
-            for (int i = 0; i < editor.Chunks.Length; i++) {
+            for (var i = 0; i < editor.Chunks.Length; i++) {
                 var chunkEditor = editor.ChunkEditors[i];
                 if (chunkEditor == null)
                     continue;
@@ -93,7 +89,7 @@ namespace SF3.Tests.Editors {
                     //       so the content of the chunks will have been modified from the original test data.
                     //       The MPD_Editor should be an a modified state.
                     //       Chunks 9 and 10 are actually unmodified, how about that!
-                    var expectedResult = (i == 9 || i == 10) ? false : true;
+                    var expectedResult = i == 9 || i == 10 ? false : true;
                     Assert.IsFalse(chunkEditor.NeedsRecompression);
                     Assert.IsFalse(chunkEditor.DecompressedEditor.IsModified);
                     Assert.AreEqual(expectedResult, chunkEditor.IsModified);
@@ -105,8 +101,7 @@ namespace SF3.Tests.Editors {
         }
 
         [TestMethod]
-        public void Recompress_WithoutChanges_ASecondTime_ResultsInExpectedState()
-        {
+        public void Recompress_WithoutChanges_ASecondTime_ResultsInExpectedState() {
             // Arrange
             var editor = MakeEditor();
             editor.Recompress(false);
@@ -126,8 +121,7 @@ namespace SF3.Tests.Editors {
         }
 
         [TestMethod]
-        public void TextureChunks_DataIsModified_SetsIfModifiedFlags()
-        {
+        public void TextureChunks_DataIsModified_SetsIfModifiedFlags() {
             // Arrange
             var editor = MakeEditor();
             Assert.IsFalse(editor.ChunkEditors[6].IsModified);
@@ -146,8 +140,7 @@ namespace SF3.Tests.Editors {
         }
 
         [TestMethod]
-        public void Finalize_WithoutChanges_NothingHasIsModifiedFlag()
-        {
+        public void Finalize_WithoutChanges_NothingHasIsModifiedFlag() {
             // Arrange
             var editor = MakeEditor();
 
@@ -163,8 +156,7 @@ namespace SF3.Tests.Editors {
         }
 
         [TestMethod]
-        public void Finalize_WithChanges_CompressedEditorHasIsModifiedFlag()
-        {
+        public void Finalize_WithChanges_CompressedEditorHasIsModifiedFlag() {
             // Arrange
             var editor = MakeEditor();
             editor.TextureChunks[0].TextureTable.Rows[0].Width *= 2;
@@ -173,13 +165,13 @@ namespace SF3.Tests.Editors {
             editor.Finalize();
 
             // Assert
-            for (int i = 0; i < editor.Chunks.Length; i++) {
+            for (var i = 0; i < editor.Chunks.Length; i++) {
                 var chunkEditor = editor.ChunkEditors[i];
                 if (chunkEditor == null)
                     continue;
 
                 Assert.IsFalse(chunkEditor.DecompressedEditor.IsModified);
-                var expectedModifiedFlag = (i == 6);
+                var expectedModifiedFlag = i == 6;
                 Assert.AreEqual(expectedModifiedFlag, chunkEditor.IsModified);
             }
 
@@ -189,7 +181,7 @@ namespace SF3.Tests.Editors {
 
         [TestMethod]
         public void ChunkEditor_SettingIsModifiedToTrue_SetsEditorIsModifiedToTrue() {
-            for (int chunkToTest = 0; chunkToTest < 32; chunkToTest++) {
+            for (var chunkToTest = 0; chunkToTest < 32; chunkToTest++) {
                 // Arrange
                 var editor = MakeEditor();
                 var chunkEditor = editor.ChunkEditors[chunkToTest];
@@ -207,8 +199,7 @@ namespace SF3.Tests.Editors {
         }
 
         [TestMethod]
-        public void Editor_IsModified_SettingToFalseWhenNoRecompressionIsRequired_IsSetToFalse()
-        {
+        public void Editor_IsModified_SettingToFalseWhenNoRecompressionIsRequired_IsSetToFalse() {
             // Arrange
             var editor = MakeEditor();
             editor.Editor.IsModified = true;
@@ -226,8 +217,7 @@ namespace SF3.Tests.Editors {
         }
 
         [TestMethod]
-        public void CompressedEditor_NeedsRecompressionSet_ResultsInExpectedEditorState()
-        {
+        public void CompressedEditor_NeedsRecompressionSet_ResultsInExpectedEditorState() {
             // Arrange
             var editor = MakeEditor();
             editor.Editor.IsModified = true;
@@ -250,8 +240,7 @@ namespace SF3.Tests.Editors {
         }
 
         [TestMethod]
-        public void Editor_IsModifiedSetToFalseWhenRecompressionIsRequired_IsStillTrue()
-        {
+        public void Editor_IsModifiedSetToFalseWhenRecompressionIsRequired_IsStillTrue() {
             // Arrange
             var editor = MakeEditor();
             editor.Editor.IsModified = true;
