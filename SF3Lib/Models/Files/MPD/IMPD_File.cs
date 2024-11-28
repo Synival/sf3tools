@@ -6,7 +6,7 @@ using SF3.Models.Tables.MPD.TextureAnimation;
 using SF3.RawEditors;
 
 namespace SF3.Models.Files.MPD {
-    public interface IMPD_Editor : IScenarioTableEditor {
+    public interface IMPD_File : IScenarioTableFile {
         /// <summary>
         /// Recompresses compressed chunks, updating the ChunkHeader however necessary.
         /// All of the editor's data will be updated to contain the new recompressed data.
@@ -42,6 +42,6 @@ namespace SF3.Models.Files.MPD {
         TileHeightTerrainRowTable TileHeightTerrainRows { get; }
         TileItemRowTable TileItemRows { get; }
 
-        TextureChunkEditor[] TextureChunks { get; }
+        MPD_FileTextureChunk[] TextureChunks { get; }
     }
 }

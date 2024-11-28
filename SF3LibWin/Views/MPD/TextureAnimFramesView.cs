@@ -8,7 +8,7 @@ using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.MPD {
     public class TextureAnimFramesView : ControlSpaceView {
-        public TextureAnimFramesView(string name, IMPD_Editor editor, INameGetterContext nameGetterContext) : base(name) {
+        public TextureAnimFramesView(string name, IMPD_File editor, INameGetterContext nameGetterContext) : base(name) {
             Editor      = editor;
             TableView   = new TableView("Frames", editor.TextureAnimFrames, nameGetterContext);
             TextureView = new TextureView("Texture");
@@ -53,7 +53,7 @@ namespace SF3.Win.Views.MPD {
             base.Destroy();
         }
 
-        public IMPD_Editor Editor { get; }
+        public IMPD_File Editor { get; }
         public TableView TableView { get; private set; }
         public TextureView TextureView { get; private set; }
     }

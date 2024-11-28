@@ -11,12 +11,12 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.IconPointer;
 
 namespace SF3.Models.Files.IconPointer {
-    public class IconPointerEditor : ScenarioTableEditor, IIconPointerEditor {
-        protected IconPointerEditor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
+    public class IconPointerFile : ScenarioTableFile, IIconPointerFile {
+        protected IconPointerFile(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }
 
-        public static IconPointerEditor Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) {
-            var newEditor = new IconPointerEditor(editor, nameContext, scenario);
+        public static IconPointerFile Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) {
+            var newEditor = new IconPointerFile(editor, nameContext, scenario);
             if (!newEditor.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");
             return newEditor;

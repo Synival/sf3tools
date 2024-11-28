@@ -7,7 +7,7 @@ using SF3.Models.Tables.X1.Town;
 using SF3.Types;
 
 namespace SF3.Models.Files.X1 {
-    public interface IX1_Editor : IScenarioTableEditor {
+    public interface IX1_Battle : IScenarioTableFile {
         bool IsBTL99 { get; }
 
         bool IsBattle { get; }
@@ -19,7 +19,7 @@ namespace SF3.Models.Files.X1 {
         EnterTable EnterTable { get; }
         ArrowTable ArrowTable { get; }
 
-        Dictionary<MapLeaderType, BattleEditor> Battles { get; }
+        Dictionary<MapLeaderType, X1_FileBattle> Battles { get; }
 
         TileMovementTable TileMovementTable { get; }
     }

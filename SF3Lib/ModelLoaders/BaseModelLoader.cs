@@ -16,7 +16,7 @@ namespace SF3.ModelLoaders {
         private readonly EventHandler _onModifiedChangedDelegate;
 
         public delegate IRawEditor BaseModelLoaderCreateRawEditorDelegate(IModelLoader loader);
-        public delegate IBaseEditor BaseModelLoaderCreateModelDelegate(IModelLoader loader);
+        public delegate IBaseFile BaseModelLoaderCreateModelDelegate(IModelLoader loader);
         public delegate bool BaseModelLoaderSaveDelegate(IModelLoader loader);
 
         /// <summary>
@@ -74,8 +74,8 @@ namespace SF3.ModelLoaders {
             return true;
         }
 
-        private IBaseEditor _model = null;
-        public IBaseEditor Model {
+        private IBaseFile _model = null;
+        public IBaseFile Model {
             get => _model;
             set {
                 if (_model != value) {

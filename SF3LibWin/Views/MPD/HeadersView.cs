@@ -3,7 +3,7 @@ using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
     public class HeadersView : TabView {
-        public HeadersView(string name, IMPD_Editor editor) : base(name) {
+        public HeadersView(string name, IMPD_File editor) : base(name) {
             Editor = editor;            
         }
 
@@ -22,6 +22,6 @@ namespace SF3.Win.Views.MPD {
             return Control;
         }
 
-        public IMPD_Editor Editor { get; }
+        public IMPD_File Editor { get; }
     }
 }

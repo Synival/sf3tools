@@ -6,7 +6,7 @@ namespace SF3.Models.Files {
     /// <summary>
     /// Any kind of editor.
     /// </summary>
-    public interface IBaseEditor : IModifiable, IDisposable {
+    public interface IBaseFile : IModifiable, IDisposable {
         /// <summary>
         /// Perform any extra tasks that need to be performed before saving.
         /// </summary>

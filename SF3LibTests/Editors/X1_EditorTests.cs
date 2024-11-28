@@ -17,8 +17,8 @@ namespace SF3.Tests.Editors {
                 ExpectedBattleCount = expectedBattleCount;
             }
 
-            public X1_Editor Create()
-                => X1_Editor.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario, false);
+            public X1_Battle Create()
+                => X1_Battle.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario, false);
 
             public MapLeaderType? MapLeader { get; }
             public int? ExpectedBattleCount { get; }

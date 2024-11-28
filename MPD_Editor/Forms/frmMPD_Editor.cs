@@ -21,7 +21,7 @@ namespace SF3.MPD_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.3";
 
-        public IMPD_Editor Editor => base.ModelLoader.Model as IMPD_Editor;
+        public IMPD_File File => base.ModelLoader.Model as IMPD_File;
 
         public frmMPDEditor() {
             InitializeComponent();
@@ -36,11 +36,11 @@ namespace SF3.MPD_Editor.Forms {
         protected override string FileDialogFilter
             => "SF3 Data (*.MPD)|*.MPD|" + base.FileDialogFilter;
 
-        protected override IBaseEditor MakeModel(IModelFileLoader loader)
-            => Models.Files.MPD.MPD_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
+        protected override IBaseFile MakeModel(IModelFileLoader loader)
+            => MPD_File.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
-        protected override IView MakeView(IModelFileLoader loader, IBaseEditor model)
-            => new MPD_View(loader.Filename, (Models.Files.MPD.MPD_Editor) model);
+        protected override IView MakeView(IModelFileLoader loader, IBaseFile model)
+            => new MPD_View(loader.Filename, (MPD_File) model);
 
         private void tsmiTextures_ImportFolder_Click(object sender, System.EventArgs e) {
             using (var dialog = new CommonOpenFileDialog() {
@@ -57,7 +57,7 @@ namespace SF3.MPD_Editor.Forms {
                 var path = dialog.FileName;
                 var files = Directory.GetFiles(path);
 
-                var textures = Editor.TextureChunks
+                var textures = File.TextureChunks
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable.Rows)
                     .ToList();
@@ -158,7 +158,7 @@ namespace SF3.MPD_Editor.Forms {
 
                 var path = dialog.FileName;
 
-                var textures = Editor.TextureChunks
+                var textures = File.TextureChunks
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable.Rows)
                     .ToList();

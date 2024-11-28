@@ -4,7 +4,7 @@ using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
     public class SurfaceView : TabView {
-        public SurfaceView(string name, IMPD_Editor editor) : base(name) {
+        public SurfaceView(string name, IMPD_File editor) : base(name) {
             Editor = editor;
             SurfaceMapView = new SurfaceMapView("Viewer", Editor);
         }
@@ -46,7 +46,7 @@ namespace SF3.Win.Views.MPD {
             base.Destroy();
         }
 
-        public IMPD_Editor Editor { get; }
+        public IMPD_File Editor { get; }
         public SurfaceMapView SurfaceMapView { get; }
     }
 }

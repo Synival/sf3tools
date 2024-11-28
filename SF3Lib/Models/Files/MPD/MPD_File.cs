@@ -13,12 +13,12 @@ using SF3.Models.Tables.MPD;
 using SF3.Models.Tables.MPD.TextureAnimation;
 
 namespace SF3.Models.Files.MPD {
-    public class MPD_Editor : ScenarioTableEditor, IMPD_Editor {
-        protected MPD_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
+    public class MPD_File : ScenarioTableFile, IMPD_File {
+        protected MPD_File(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }
 
-        public static MPD_Editor Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) {
-            var newEditor = new MPD_Editor(editor, nameContext, scenario);
+        public static MPD_File Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) {
+            var newEditor = new MPD_File(editor, nameContext, scenario);
             if (!newEditor.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");
             return newEditor;
@@ -152,11 +152,11 @@ namespace SF3.Models.Files.MPD {
             if (SurfaceChunkEditor?.Data?.Length >= 64 * 64 * 2)
                 tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(SurfaceChunkEditor.DecompressedEditor, 0x0000));
 
-            TextureChunks = new TextureChunkEditor[5];
+            TextureChunks = new MPD_FileTextureChunk[5];
             for (var i = 0; i < TextureChunks.Length; i++) {
                 var chunkIndex = i + 6;
                 if (Chunks[chunkIndex].Data?.Length > 0) {
-                    TextureChunks[i] = TextureChunkEditor.Create(ChunkEditors[chunkIndex].DecompressedEditor, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
+                    TextureChunks[i] = MPD_FileTextureChunk.Create(ChunkEditors[chunkIndex].DecompressedEditor, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
                     tables.Add(TextureChunks[i].TextureHeaderTable);
                     tables.Add(TextureChunks[i].TextureTable);
                 }
@@ -327,6 +327,6 @@ namespace SF3.Models.Files.MPD {
         public TileItemRowTable TileItemRows { get; private set; }
 
         [BulkCopyRecurse]
-        public TextureChunkEditor[] TextureChunks { get; private set; }
+        public MPD_FileTextureChunk[] TextureChunks { get; private set; }
     }
 }

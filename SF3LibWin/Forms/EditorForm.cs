@@ -505,7 +505,7 @@ namespace SF3.Win.Forms {
         /// Factory method for creating an IBaseEditor in OpenFileDialog(). Must be overridden.
         /// (Cannot be abstract because then the VS component editor wouldn't work)
         /// </summary>
-        protected virtual IBaseEditor MakeEditor(IModelFileLoader loader) => throw new NotImplementedException();
+        protected virtual IBaseFile MakeEditor(IModelFileLoader loader) => throw new NotImplementedException();
 
         /// <summary>
         /// The main menu strip.

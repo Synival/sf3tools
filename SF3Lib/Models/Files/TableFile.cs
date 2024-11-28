@@ -10,8 +10,8 @@ namespace SF3.Models.Files {
     /// <summary>
     /// Editor for any kind of file that has tables.
     /// </summary>
-    public abstract class TableEditor : ITableEditor {
-        protected TableEditor(IRawEditor editor, INameGetterContext nameContext) {
+    public abstract class TableFile : ITableFile {
+        protected TableFile(IRawEditor editor, INameGetterContext nameContext) {
             Editor = editor;
             NameGetterContext = nameContext;
 

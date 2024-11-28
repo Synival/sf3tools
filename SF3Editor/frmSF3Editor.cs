@@ -27,13 +27,13 @@ namespace SF3Editor {
 
             var iconPointerEditorBinsToLoad = new string[] {"X011.BIN", "X021.BIN"};
             foreach (var bin in iconPointerEditorBinsToLoad) {
-                var iconPointerEditor = IconPointerEditor.Create(new ByteEditor(File.ReadAllBytes(c_discPath + bin)), c_nameGetterContext, c_scenario);
+                var iconPointerEditor = IconPointerFile.Create(new ByteEditor(File.ReadAllBytes(c_discPath + bin)), c_nameGetterContext, c_scenario);
                 _ = controlContainer.CreateChild(new IconPointerView(bin, iconPointerEditor));
             }
 
             var mpdsToLoad = new string[] {"BTL02.MPD", "BTL03.MPD", "BTL04A.MPD"};
             foreach (var mpd in mpdsToLoad) {
-                var mpdEditor = MPD_Editor.Create(new ByteEditor(File.ReadAllBytes(c_discPath + mpd)), c_nameGetterContext, c_scenario);
+                var mpdEditor = MPD_File.Create(new ByteEditor(File.ReadAllBytes(c_discPath + mpd)), c_nameGetterContext, c_scenario);
                 _ = controlContainer.CreateChild(new MPD_View(mpd, mpdEditor));
             }
 

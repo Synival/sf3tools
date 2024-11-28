@@ -28,7 +28,7 @@ namespace SF3.Win.Controls {
         public byte[,] Flags { get; private set; } = null;
         public Image FullImage { get; private set; } = null;
 
-        public void UpdateTextures(ushort[,] textureData, TextureChunkEditor[] textureChunks) {
+        public void UpdateTextures(ushort[,] textureData, MPD_FileTextureChunk[] textureChunks) {
             if (textureData == null || textureChunks == null) {
                 UniqueImages = null;
                 Images = null;

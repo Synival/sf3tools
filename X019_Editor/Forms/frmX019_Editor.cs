@@ -14,7 +14,7 @@ namespace SF3.X019_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.16";
 
-        public IX019_Editor Editor => base.FileLoader.Model as IX019_Editor;
+        public IX019_File File => base.FileLoader.Model as IX019_File;
 
         public frmX019_Editor() {
             InitializeComponent();
@@ -27,19 +27,19 @@ namespace SF3.X019_Editor.Forms {
                     : "SF3 Data (X019.BIN)|X019.BIN|")
                 + base.FileDialogFilter;
 
-        protected override IBaseEditor MakeEditor(IModelFileLoader loader)
-            => Models.Files.X019.X019_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
+        protected override IBaseFile MakeEditor(IModelFileLoader loader)
+            => X019_File.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
-                new PopulateOLVTabConfig(tabMonsterTab1, olvMonsterTab1, Editor.MonsterTable),
-                new PopulateOLVTabConfig(tabMonsterTab2, olvMonsterTab2, Editor.MonsterTable),
-                new PopulateOLVTabConfig(tabMonsterTab3, olvMonsterTab3, Editor.MonsterTable),
-                new PopulateOLVTabConfig(tabMonsterTab4, olvMonsterTab4, Editor.MonsterTable),
-                new PopulateOLVTabConfig(tabMonsterTab5, olvMonsterTab5, Editor.MonsterTable),
+                new PopulateOLVTabConfig(tabMonsterTab1, olvMonsterTab1, File.MonsterTable),
+                new PopulateOLVTabConfig(tabMonsterTab2, olvMonsterTab2, File.MonsterTable),
+                new PopulateOLVTabConfig(tabMonsterTab3, olvMonsterTab3, File.MonsterTable),
+                new PopulateOLVTabConfig(tabMonsterTab4, olvMonsterTab4, File.MonsterTable),
+                new PopulateOLVTabConfig(tabMonsterTab5, olvMonsterTab5, File.MonsterTable),
             });
         }
     }

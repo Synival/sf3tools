@@ -3,7 +3,7 @@ using SF3.Models.Files.IconPointer;
 
 namespace SF3.Win.Views.MPD {
     public class IconPointerView : TabView {
-        public IconPointerView(string name, IconPointerEditor editor) : base(name) {
+        public IconPointerView(string name, IconPointerFile editor) : base(name) {
             Editor = editor;
         }
 
@@ -17,6 +17,6 @@ namespace SF3.Win.Views.MPD {
             return Control;
         }
 
-        public IconPointerEditor Editor { get; }
+        public IconPointerFile Editor { get; }
     }
 }

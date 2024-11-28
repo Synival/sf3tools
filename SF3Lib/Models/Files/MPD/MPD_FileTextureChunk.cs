@@ -7,15 +7,15 @@ using SF3.Models.Tables.MPD.TextureChunk;
 using SF3.RawEditors;
 
 namespace SF3.Models.Files.MPD {
-    public class TextureChunkEditor : TableEditor {
-        protected TextureChunkEditor(IRawEditor editor, INameGetterContext nameContext, int address, string name)
+    public class MPD_FileTextureChunk : TableFile {
+        protected MPD_FileTextureChunk(IRawEditor editor, INameGetterContext nameContext, int address, string name)
         : base(editor, nameContext) {
             Address = address;
             Name    = name;
         }
 
-        public static TextureChunkEditor Create(IRawEditor editor, INameGetterContext nameContext, int address, string name) {
-            var newEditor = new TextureChunkEditor(editor, nameContext, address, name);
+        public static MPD_FileTextureChunk Create(IRawEditor editor, INameGetterContext nameContext, int address, string name) {
+            var newEditor = new MPD_FileTextureChunk(editor, nameContext, address, name);
             newEditor.Init();
             return newEditor;
         }

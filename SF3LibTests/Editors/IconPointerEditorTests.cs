@@ -14,8 +14,8 @@ namespace SF3.Tests.Editors {
                 ExpectedSpellRealOffsetStart = spellRealOffsetStart;
             }
 
-            public IconPointerEditor Create()
-                => IconPointerEditor.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
+            public IconPointerFile Create()
+                => IconPointerFile.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedItemIconRows { get; }
             public int ExpectedSpellIconRows { get; }

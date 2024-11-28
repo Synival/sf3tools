@@ -3,7 +3,7 @@ using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X002;
 
 namespace SF3.Models.Files.X002 {
-    public interface IX002_Editor : IScenarioTableEditor {
+    public interface IX002_File : IScenarioTableFile {
         ItemTable ItemTable { get; }
         SpellTable SpellTable { get; }
         WeaponSpellTable WeaponSpellTable { get; }

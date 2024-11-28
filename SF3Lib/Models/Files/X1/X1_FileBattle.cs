@@ -9,16 +9,16 @@ using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X1 {
-    public class BattleEditor : TableEditor {
-        protected BattleEditor(IRawEditor editor, INameGetterContext nameContext, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable)
+    public class X1_FileBattle : TableFile {
+        protected X1_FileBattle(IRawEditor editor, INameGetterContext nameContext, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable)
         : base(editor, nameContext) {
             MapLeader = mapLeader;
             Address   = address;
             HasLargeEnemyTable = hasLargeEnemyTable;
         }
 
-        public static BattleEditor Create(IRawEditor editor, INameGetterContext nameContext, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable) {
-            var newEditor = new BattleEditor(editor, nameContext, mapLeader, address, hasLargeEnemyTable);
+        public static X1_FileBattle Create(IRawEditor editor, INameGetterContext nameContext, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable) {
+            var newEditor = new X1_FileBattle(editor, nameContext, mapLeader, address, hasLargeEnemyTable);
             _ = newEditor.Init();
             return newEditor;
         }

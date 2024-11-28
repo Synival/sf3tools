@@ -14,13 +14,13 @@ using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X1 {
-    public class X1_Editor : ScenarioTableEditor, IX1_Editor {
-        protected X1_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(editor, nameContext, scenario) {
+    public class X1_Battle : ScenarioTableFile, IX1_Battle {
+        protected X1_Battle(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(editor, nameContext, scenario) {
             IsBTL99 = isBTL99;
         }
 
-        public static X1_Editor Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) {
-            var newEditor = new X1_Editor(editor, nameContext, scenario, isBTL99);
+        public static X1_Battle Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) {
+            var newEditor = new X1_Battle(editor, nameContext, scenario, isBTL99);
             if (!newEditor.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");
             return newEditor;
@@ -87,12 +87,12 @@ namespace SF3.Models.Files.X1 {
                 BattlePointersTable.Load();
 
                 // Get the address of the selected battle, or, if it's not available, the first available in the BattlePointersTable.
-                Battles = new Dictionary<MapLeaderType, BattleEditor>();
+                Battles = new Dictionary<MapLeaderType, X1_FileBattle>();
                 foreach (var mapLeader in (MapLeaderType[]) Enum.GetValues(typeof(MapLeaderType))) {
                     var mapIndex = (int) mapLeader;
                     var battleTableAddress = BattlePointersTable.Rows[mapIndex].BattlePointer;
                     if (battleTableAddress != 0)
-                        Battles.Add(mapLeader, BattleEditor.Create(Editor, NameGetterContext, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
+                        Battles.Add(mapLeader, X1_FileBattle.Create(Editor, NameGetterContext, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
                 }
 
                 // Determine the location of the TileMovementTable, which isn't so straight-forward.
@@ -183,7 +183,7 @@ namespace SF3.Models.Files.X1 {
         public ArrowTable ArrowTable { get; private set; }
 
         [BulkCopyRecurse]
-        public Dictionary<MapLeaderType, BattleEditor> Battles { get; private set; }
+        public Dictionary<MapLeaderType, X1_FileBattle> Battles { get; private set; }
 
         [BulkCopyRecurse]
         public TileMovementTable TileMovementTable { get; private set; }

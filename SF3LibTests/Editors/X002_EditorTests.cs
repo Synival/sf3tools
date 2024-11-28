@@ -23,8 +23,8 @@ namespace SF3.Tests.Editors {
                 ExpectedLoadedOverrides = expectedLoadedOverrides;
             }
 
-            public X002_Editor Create()
-                => X002_Editor.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
+            public X002_File Create()
+                => X002_File.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedItems { get; }
             public int ExpectedSpells { get; }

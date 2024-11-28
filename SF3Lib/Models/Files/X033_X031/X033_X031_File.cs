@@ -11,12 +11,12 @@ using static CommonLib.Utils.ResourceUtils;
 using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X033_X031 {
-    public class X033_X031_Editor : ScenarioTableEditor, IX033_X031_Editor {
-        protected X033_X031_Editor(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
+    public class X033_X031_File : ScenarioTableFile, IX033_X031_File {
+        protected X033_X031_File(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }
 
-        public static X033_X031_Editor Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) {
-            var newEditor = new X033_X031_Editor(editor, nameContext, scenario);
+        public static X033_X031_File Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) {
+            var newEditor = new X033_X031_File(editor, nameContext, scenario);
             if (!newEditor.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");
             return newEditor;

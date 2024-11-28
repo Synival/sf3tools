@@ -19,8 +19,8 @@ namespace SF3.Tests.Editors {
                 ExpectedSupportTypes = expectedSupportTypes;
             }
 
-            public X013_Editor Create()
-                => X013_Editor.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
+            public X013_File Create()
+                => X013_File.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedMagicBonuses { get; }
             public int ExpectedSpecials { get; }

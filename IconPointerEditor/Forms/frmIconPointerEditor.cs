@@ -13,7 +13,7 @@ namespace SF3.IconPointerEditor.Forms {
         // Used to display version in the application
         protected override string Version => "0.13";
 
-        public IIconPointerEditor Editor => base.FileLoader.Model as IIconPointerEditor;
+        public IIconPointerFile File => base.FileLoader.Model as IIconPointerFile;
 
         public frmIconPointerEditor() {
             InitializeComponent();
@@ -23,16 +23,16 @@ namespace SF3.IconPointerEditor.Forms {
         protected override string FileDialogFilter
             => "SF3 Data (X011.BIN;X021.BIN;X026.BIN)|X011.BIN;X021.BIN;X026.BIN|" + base.FileDialogFilter;
 
-        protected override IBaseEditor MakeEditor(IModelFileLoader loader)
-            => Models.Files.IconPointer.IconPointerEditor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
+        protected override IBaseFile MakeEditor(IModelFileLoader loader)
+            => IconPointerFile.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
-                new PopulateOLVTabConfig(tabSpellIcons, olvSpellIcons, Editor.SpellIconTable),
-                new PopulateOLVTabConfig(tabItemIcons, olvItemIcons, Editor.ItemIconTable)
+                new PopulateOLVTabConfig(tabSpellIcons, olvSpellIcons, File.SpellIconTable),
+                new PopulateOLVTabConfig(tabItemIcons, olvItemIcons, File.ItemIconTable)
             });
         }
     }

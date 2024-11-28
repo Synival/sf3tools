@@ -18,8 +18,8 @@ namespace SF3.Tests.Editors {
                 ExpectedInitialInfoRows = expectedInitialInfoRows;
             }
 
-            public X033_X031_Editor Create()
-                => X033_X031_Editor.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
+            public X033_X031_File Create()
+                => X033_X031_File.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedStatsRows { get; }
             public int ExpectedInitialInfoRows { get; }

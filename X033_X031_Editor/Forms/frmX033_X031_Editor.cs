@@ -15,7 +15,7 @@ namespace SF3.X033_X031_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.23";
 
-        public IX033_X031_Editor Editor => base.FileLoader.Model as IX033_X031_Editor;
+        public IX033_X031_File File => base.FileLoader.Model as IX033_X031_File;
         private StatGrowthChart _statGrowthChart;
 
         public frmX033_X031_Editor() {
@@ -26,27 +26,27 @@ namespace SF3.X033_X031_Editor.Forms {
 
         protected override string FileDialogFilter => "SF3 Data (X033.BIN;X031.BIN)|X033.BIN;X031.BIN|" + base.FileDialogFilter;
 
-        protected override IBaseEditor MakeEditor(IModelFileLoader loader)
-            => Models.Files.X033_X031.X033_X031_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
+        protected override IBaseFile MakeEditor(IModelFileLoader loader)
+            => X033_X031_File.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())
                 return false;
 
             if (!tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
-                new PopulateOLVTabConfig(tabStats, olvStats, Editor.StatsTable),
-                new PopulateOLVTabConfig(tabSpells, olvSpells, Editor.StatsTable),
-                new PopulateOLVTabConfig(tabEquipStatistics, olvEquipStatistics, Editor.StatsTable),
-                new PopulateOLVTabConfig(tabMiscellaneous, olvMiscellaneous, Editor.StatsTable),
-                new PopulateOLVTabConfig(tabInitialInfo, olvInitialInfo, Editor.InitialInfoTable),
-                new PopulateOLVTabConfig(tabWeaponLevelReq, olvWeaponLevelReq, Editor.WeaponLevelTable),
-                new PopulateOLVTabConfig(tabCurveCalc, olvCurveCalc, Editor.StatsTable)
+                new PopulateOLVTabConfig(tabStats, olvStats, File.StatsTable),
+                new PopulateOLVTabConfig(tabSpells, olvSpells, File.StatsTable),
+                new PopulateOLVTabConfig(tabEquipStatistics, olvEquipStatistics, File.StatsTable),
+                new PopulateOLVTabConfig(tabMiscellaneous, olvMiscellaneous, File.StatsTable),
+                new PopulateOLVTabConfig(tabInitialInfo, olvInitialInfo, File.InitialInfoTable),
+                new PopulateOLVTabConfig(tabWeaponLevelReq, olvWeaponLevelReq, File.WeaponLevelTable),
+                new PopulateOLVTabConfig(tabCurveCalc, olvCurveCalc, File.StatsTable)
             })) {
                 return false;
             }
 
             // Update curve graph controls.
-            cbCurveGraphCharacter.DataSource = Editor.StatsTable.Rows;
+            cbCurveGraphCharacter.DataSource = File.StatsTable.Rows;
             cbCurveGraphCharacter.DisplayMember = "Name";
 
             return true;
@@ -59,11 +59,11 @@ namespace SF3.X033_X031_Editor.Forms {
 
         private void tabMain_Click(object sender, EventArgs e) {
             olvCurveCalc.ClearObjects();
-            if (Editor?.StatsTable != null)
-                olvCurveCalc.AddObjects(Editor?.StatsTable.Rows);
+            if (File?.StatsTable != null)
+                olvCurveCalc.AddObjects(File?.StatsTable.Rows);
         }
 
         private void CurveGraphCharacterComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            => _statGrowthChart.RefreshCurveGraph(Editor.StatsTable, cbCurveGraphCharacter);
+            => _statGrowthChart.RefreshCurveGraph(File.StatsTable, cbCurveGraphCharacter);
     }
 }

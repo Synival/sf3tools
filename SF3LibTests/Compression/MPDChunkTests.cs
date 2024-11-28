@@ -27,7 +27,7 @@ namespace SF3.Tests.Compression {
 
                 var nameGetterContext = new NameGetterContext(st);
                 TestCase.Run(testCases, testCase => {
-                    using (var mpdFile = MPD_Editor.Create(
+                    using (var mpdFile = MPD_File.Create(
                         new ByteEditor(File.ReadAllBytes(testCase.Filename)), nameGetterContext, st)) {
                         var data = mpdFile.ChunkEditors[5]?.Data;
                         if (data == null)
@@ -57,7 +57,7 @@ namespace SF3.Tests.Compression {
 
                 var nameGetterContext = new NameGetterContext(st);
                 TestCase.Run(testCases, testCase => {
-                    using (var mpdFile = MPD_Editor.Create(
+                    using (var mpdFile = MPD_File.Create(
                         new ByteEditor(File.ReadAllBytes(testCase.Filename)), nameGetterContext, st)) {
 
                         for (int i = 6; i <= 10; i++) {
@@ -89,7 +89,7 @@ namespace SF3.Tests.Compression {
 
                 var nameGetterContext = new NameGetterContext(st);
                 TestCase.Run(testCases, testCase => {
-                    using (var mpdFile = MPD_Editor.Create(
+                    using (var mpdFile = MPD_File.Create(
                         new ByteEditor(File.ReadAllBytes(testCase.Filename)), nameGetterContext, st)) {
 
                         for (int i = 6; i <= 10; i++) {

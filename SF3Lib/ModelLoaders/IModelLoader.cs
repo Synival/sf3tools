@@ -21,7 +21,7 @@ namespace SF3.ModelLoaders {
         /// <summary>
         /// The model loaded and created, backed by an underlying IRawEditor.
         /// </summary>
-        IBaseEditor Model { get; }
+        IBaseFile Model { get; }
 
         /// <summary>
         /// The raw editor that exists when IsLoaded is 'true'.

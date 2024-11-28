@@ -12,8 +12,8 @@ namespace SF3.Tests.Editors {
                 ExpectedRows = expectedRows;
             }
 
-            public X019_Editor Create()
-                => X019_Editor.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
+            public X019_File Create()
+                => X019_File.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedRows { get; }
         }

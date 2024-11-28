@@ -2,7 +2,7 @@ using SF3.Models.Files;
 using SF3.Models.Tables.X013;
 
 namespace SF3.Models.Files.X013 {
-    public interface IX013_Editor : IScenarioTableEditor {
+    public interface IX013_File : IScenarioTableFile {
         SpecialTable SpecialsTable { get; }
         SpecialEffectTable SpecialEffectTable { get; }
         SupportTypeTable SupportTypeTable { get; }

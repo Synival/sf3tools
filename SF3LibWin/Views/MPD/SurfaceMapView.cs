@@ -4,7 +4,7 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views.MPD {
     public class SurfaceMapView : ControlView<SurfaceMapControl> {
-        public SurfaceMapView(string name, IMPD_Editor editor) : base(name) {
+        public SurfaceMapView(string name, IMPD_File editor) : base(name) {
             Editor = editor;
         }
 
@@ -23,7 +23,7 @@ namespace SF3.Win.Views.MPD {
             // TODO: how to refresh???
         }
 
-        public IMPD_Editor Editor { get; }
+        public IMPD_File Editor { get; }
 
         public SurfaceMapControl SurfaceMapControl => (SurfaceMapControl) Control;
     }

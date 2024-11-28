@@ -7,11 +7,11 @@ using static SF3.Tests.TestDataPaths;
 namespace SF3.Tests.Editors {
     [TestClass]
     public class MPD_EditorTests {
-        private static MPD_Editor MakeEditor() {
+        private static MPD_File MakeEditor() {
             var scenario = ScenarioType.Scenario1;
             var nameGetterContext = new NameGetterContext(scenario);
             var byteEditor = new ByteEditor(File.ReadAllBytes(ResourcePath(scenario, "BTL02.MPD")));
-            return MPD_Editor.Create(byteEditor, nameGetterContext, scenario);
+            return MPD_File.Create(byteEditor, nameGetterContext, scenario);
         }
 
         [TestMethod]

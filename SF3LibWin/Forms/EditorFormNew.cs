@@ -514,13 +514,13 @@ namespace SF3.Win.Forms {
         /// Factory method for creating a model after the ModelLoader has finished loading the raw file. Must be overridden.
         /// (Cannot be abstract because then the VS component editor wouldn't work)
         /// </summary>
-        protected virtual IBaseEditor MakeModel(IModelFileLoader loader) => throw new NotImplementedException();
+        protected virtual IBaseFile MakeModel(IModelFileLoader loader) => throw new NotImplementedException();
 
         /// <summary>
         /// Factory method for creating a view for a model created using MakeModel(). Must be overridden.
         /// (Cannot be abstract because then the VS component editor wouldn't work)
         /// </summary>
-        protected virtual IView MakeView(IModelFileLoader loader, IBaseEditor model) => throw new NotImplementedException();
+        protected virtual IView MakeView(IModelFileLoader loader, IBaseFile model) => throw new NotImplementedException();
 
         /// <summary>
         /// The main menu strip.

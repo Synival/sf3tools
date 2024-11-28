@@ -13,8 +13,8 @@ namespace SF3.Tests.Editors {
             : base(scenario, filename) {
             }
 
-            public X1_Editor Create()
-                => X1_Editor.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario, false);
+            public X1_Battle Create()
+                => X1_Battle.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario, false);
         }
 
         private static readonly X1_TestCase TestCase = new X1_TestCase(ScenarioType.PremiumDisk, "X1BTLP04.BIN");
