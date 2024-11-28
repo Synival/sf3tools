@@ -1,12 +1,12 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.MPD {
     public class TileItemRow : Struct {
         private readonly int[] xAddress = new int[64];
 
-        public TileItemRow(IRawEditor editor, int id, string name, int address)
+        public TileItemRow(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 64) {
             for (var i = 0; i < xAddress.Length; i++)
                 xAddress[i] = Address + i;

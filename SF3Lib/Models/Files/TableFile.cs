@@ -4,26 +4,26 @@ using System.Linq;
 using CommonLib;
 using CommonLib.NamedValues;
 using SF3.Models.Tables;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Files {
     /// <summary>
     /// Editor for any kind of file that has tables.
     /// </summary>
     public abstract class TableFile : ITableFile {
-        protected TableFile(IRawEditor editor, INameGetterContext nameContext) {
-            Editor = editor;
+        protected TableFile(IRawData editor, INameGetterContext nameContext) {
+            Data = editor;
             NameGetterContext = nameContext;
 
             // TODO: remove this when we Dispose() ourselves!!
-            Editor.IsModifiedChanged += (s, e) => IsModifiedChanged?.Invoke(this, EventArgs.Empty);
+            Data.IsModifiedChanged += (s, e) => IsModifiedChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private int _isModifiedGuard = 0;
 
         public virtual bool IsModified {
-            get => Editor.IsModified;
-            set => Editor.IsModified = value;
+            get => Data.IsModified;
+            set => Data.IsModified = value;
         }
 
         public ScopeGuard IsModifiedChangeBlocker()
@@ -55,7 +55,7 @@ namespace SF3.Models.Files {
         /// Performs finalization tasks, aborting finalization if 'false' is returned.
         /// </summary>
         /// <returns>'true' if successful, 'false' if not.</returns>
-        public virtual bool OnFinalize() => Editor.Finalize();
+        public virtual bool OnFinalize() => Data.Finalize();
 
         public bool Finalize() {
             if (!OnFinalize())
@@ -64,12 +64,12 @@ namespace SF3.Models.Files {
             return true;
         }
 
-        public virtual void Dispose() => Editor.Dispose();
+        public virtual void Dispose() => Data.Dispose();
 
         /// <summary>
         /// The underlying data editor for this table editor. Don't modify this directly!!
         /// </summary>
-        public IRawEditor Editor { get; }
+        public IRawData Data { get; }
 
         public INameGetterContext NameGetterContext { get; }
 

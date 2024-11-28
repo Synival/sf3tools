@@ -1,8 +1,8 @@
-namespace SF3.RawEditors {
+namespace SF3.RawData {
     /// <summary>
     /// Wrapper class for editing a byte[].
     /// </summary>
-    public interface IByteEditor : IRawEditor {
+    public interface IByteData : IRawData {
         /// <summary>
         /// Reference to the byte array. Please don't modify it!
         /// </summary>

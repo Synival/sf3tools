@@ -1,6 +1,6 @@
 ﻿using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.MPD {
     public class MPDHeaderModel : Struct {
@@ -30,7 +30,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int unknown7Address;             // int32  Unknown. Small value in upper int16, 0x0000 in lower int16. May me FIXED.
         private readonly int offset12Address;             // int32  Pointer to unknown list of exactly 8 uint16 in two block with 4 uint16 each.
 
-        public MPDHeaderModel(IRawEditor editor, int id, string name, int address, bool hasPalette3)
+        public MPDHeaderModel(IRawData editor, int id, string name, int address, bool hasPalette3)
         : base(editor, id, name, address, 0x58) {
             unknown1Address             = Address;        // 2 bytes
             unknown2Address             = Address + 0x02; // 2 bytes

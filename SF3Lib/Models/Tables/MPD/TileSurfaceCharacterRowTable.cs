@@ -1,11 +1,11 @@
 using System.Linq;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Tables;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class TileSurfaceCharacterRowTable : Table<TileSurfaceCharacterRow> {
-        public TileSurfaceCharacterRowTable(IRawEditor editor, int address) : base(editor, address) {
+        public TileSurfaceCharacterRowTable(IRawData editor, int address) : base(editor, address) {
         }
 
         public override bool Load() {

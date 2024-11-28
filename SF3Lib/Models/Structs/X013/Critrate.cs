@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.X013 {
     public class Critrate : Struct {
@@ -11,7 +11,7 @@ namespace SF3.Models.Structs.X013 {
         private readonly int fourSpecial;
         private readonly int fiveSpecial;
 
-        public Critrate(IRawEditor editor, int id, string name, int address)
+        public Critrate(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x08) {
             noSpecial    = Address;     // 1 byte
             oneSpecial   = Address + 1; // 1 byte

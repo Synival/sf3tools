@@ -1,10 +1,10 @@
 using SF3.Models.Structs.X013;
 using SF3.Models.Tables;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class SpecialChanceTable : Table<SpecialChance> {
-        public SpecialChanceTable(IRawEditor editor, string resourceFile, int address, bool hasLargeTable) : base(editor, resourceFile, address) {
+        public SpecialChanceTable(IRawData editor, string resourceFile, int address, bool hasLargeTable) : base(editor, resourceFile, address) {
             HasLargeTable = hasLargeTable;
         }
 

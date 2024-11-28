@@ -1,6 +1,6 @@
 ﻿using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.MPD {
     public class TextureAnimationModel : Struct {
@@ -9,7 +9,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int _heightAddress;
         private readonly int _unknownAddress;
 
-        public TextureAnimationModel(IRawEditor editor, int id, string name, int address, bool is32Bit)
+        public TextureAnimationModel(IRawData editor, int id, string name, int address, bool is32Bit)
         : base(editor, id, name, address, 0x0A) {
             Is32Bit = is32Bit;
 

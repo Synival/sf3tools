@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X1 {
@@ -12,7 +12,7 @@ namespace SF3.Models.Structs.X1 {
         private readonly int eventType;
         private readonly int itemID;
 
-        public Treasure(IRawEditor editor, int id, string name, int address)
+        public Treasure(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x0C) {
             searched    = Address; //2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
             eventNumber = Address + 0x02;

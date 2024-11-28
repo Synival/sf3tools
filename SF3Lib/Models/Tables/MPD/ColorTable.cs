@@ -1,10 +1,10 @@
 ﻿using SF3.Models.Structs.MPD;
 using SF3.Models.Tables;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class ColorTable : Table<Color> {
-        public ColorTable(IRawEditor editor, int address, int colors) : base(editor, address) {
+        public ColorTable(IRawData editor, int address, int colors) : base(editor, address) {
             MaxSize = colors;
         }
 

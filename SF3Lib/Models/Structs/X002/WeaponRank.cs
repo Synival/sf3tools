@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.X002 {
     public class WeaponRank : Struct {
@@ -9,7 +9,7 @@ namespace SF3.Models.Structs.X002 {
         private readonly int skill2;
         private readonly int skill3;
 
-        public WeaponRank(IRawEditor editor, int id, string name, int address)
+        public WeaponRank(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x04) {
             skill0 = Address;     // 1 byte
             skill1 = Address + 1; // 1 byte

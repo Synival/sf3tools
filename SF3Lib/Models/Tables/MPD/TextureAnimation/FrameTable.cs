@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using SF3.RawEditors;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.TextureAnimation;
 using SF3.Models.Tables;
+using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD.TextureAnimation {
     public class FrameTable : Table<FrameModel> {
-        public FrameTable(IRawEditor editor, int address, bool is32Bit, IEnumerable<TextureAnimationModel> textures) : base(editor, address) {
+        public FrameTable(IRawData editor, int address, bool is32Bit, IEnumerable<TextureAnimationModel> textures) : base(editor, address) {
             Is32Bit = is32Bit;
             Textures = textures;
             _textureIdEnd = Is32Bit ? 0xFFFF_FFFF : 0xFFFF;

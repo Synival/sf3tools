@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using SF3.RawEditors;
 using SF3.Models.Structs;
+using SF3.RawData;
 
 namespace SF3.Models.Tables {
     public class UnknownUInt32Table : Table<UnknownUInt32Struct> {
-        public UnknownUInt32Table(IRawEditor editor, int address, int count)
+        public UnknownUInt32Table(IRawData editor, int address, int count)
         : base(editor, address) {
             MaxSize = count;
             FormatString = "X" + MaxSize.ToString().Length;

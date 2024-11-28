@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.X013 {
     public class MagicBonus : Struct {
@@ -13,7 +13,7 @@ namespace SF3.Models.Structs.X013 {
         private readonly int darkBonus;
         private readonly int unknownBonus;
 
-        public MagicBonus(IRawEditor editor, int id, string name, int address, bool has32BitValues)
+        public MagicBonus(IRawData editor, int id, string name, int address, bool has32BitValues)
         : base(editor, id, name, address, has32BitValues ? 0x20 : 0x08) {
             Has32BitValues = has32BitValues;
 

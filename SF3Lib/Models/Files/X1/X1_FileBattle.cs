@@ -4,20 +4,20 @@ using CommonLib.NamedValues;
 using SF3.Models.Files;
 using SF3.Models.Tables;
 using SF3.Models.Tables.X1.Battle;
-using SF3.RawEditors;
+using SF3.RawData;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X1 {
     public class X1_FileBattle : TableFile {
-        protected X1_FileBattle(IRawEditor editor, INameGetterContext nameContext, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable)
+        protected X1_FileBattle(IRawData editor, INameGetterContext nameContext, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable)
         : base(editor, nameContext) {
             MapLeader = mapLeader;
             Address   = address;
             HasLargeEnemyTable = hasLargeEnemyTable;
         }
 
-        public static X1_FileBattle Create(IRawEditor editor, INameGetterContext nameContext, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable) {
+        public static X1_FileBattle Create(IRawData editor, INameGetterContext nameContext, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable) {
             var newEditor = new X1_FileBattle(editor, nameContext, mapLeader, address, hasLargeEnemyTable);
             _ = newEditor.Init();
             return newEditor;
@@ -34,11 +34,11 @@ namespace SF3.Models.Files.X1 {
             var customMovementAddress = aiAddress + 0x84;
 
             return new List<ITable>() {
-                (BattleHeaderTable   = new BattleHeaderTable(Editor, ResourceFile("X1Top.xml"), headerAddress)),
-                (SlotTable           = new SlotTable(Editor, ResourceFile(HasLargeEnemyTable ? "X1List.xml" : "X1OtherList.xml"), slotAddress)),
-                (SpawnZoneTable      = new SpawnZoneTable(Editor, ResourceFile("UnknownAIList.xml"), spawnZoneAddress)),
-                (AITable             = new AITable(Editor, ResourceFile("X1AI.xml"), aiAddress)),
-                (CustomMovementTable = new CustomMovementTable(Editor, ResourceFile("X1AI.xml"), customMovementAddress)),
+                (BattleHeaderTable   = new BattleHeaderTable(Data, ResourceFile("X1Top.xml"), headerAddress)),
+                (SlotTable           = new SlotTable(Data, ResourceFile(HasLargeEnemyTable ? "X1List.xml" : "X1OtherList.xml"), slotAddress)),
+                (SpawnZoneTable      = new SpawnZoneTable(Data, ResourceFile("UnknownAIList.xml"), spawnZoneAddress)),
+                (AITable             = new AITable(Data, ResourceFile("X1AI.xml"), aiAddress)),
+                (CustomMovementTable = new CustomMovementTable(Data, ResourceFile("X1AI.xml"), customMovementAddress)),
             };
         }
 

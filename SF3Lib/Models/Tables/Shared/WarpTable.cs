@@ -4,11 +4,11 @@ using CommonLib.Extensions;
 using CommonLib.Utils;
 using SF3.Models.Structs.Shared;
 using SF3.Models.Tables;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Tables.Shared {
     public class WarpTable : Table<Warp> {
-        public WarpTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        public WarpTable(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load() {

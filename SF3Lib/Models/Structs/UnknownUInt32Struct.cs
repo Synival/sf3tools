@@ -1,9 +1,9 @@
 ﻿using CommonLib.Attributes;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs {
     public class UnknownUInt32Struct : Struct {
-        public UnknownUInt32Struct(IRawEditor editor, int id, string name, int address)
+        public UnknownUInt32Struct(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x04) {
         }
 

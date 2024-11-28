@@ -1,7 +1,7 @@
 ﻿using System;
-using SF3.RawEditors;
 using CommonLib;
 using SF3.Models.Files;
+using SF3.RawData;
 
 namespace SF3.ModelLoaders {
     public abstract class BaseModelLoader : IModelLoader {
@@ -15,7 +15,7 @@ namespace SF3.ModelLoaders {
 
         private readonly EventHandler _onModifiedChangedDelegate;
 
-        public delegate IRawEditor BaseModelLoaderCreateRawEditorDelegate(IModelLoader loader);
+        public delegate IRawData BaseModelLoaderCreateRawEditorDelegate(IModelLoader loader);
         public delegate IBaseFile BaseModelLoaderCreateModelDelegate(IModelLoader loader);
         public delegate bool BaseModelLoaderSaveDelegate(IModelLoader loader);
 
@@ -33,10 +33,10 @@ namespace SF3.ModelLoaders {
 
             PreLoaded?.Invoke(this, EventArgs.Empty);
 
-            if ((RawEditor = createRawEditor(this)) == null)
+            if ((RawData = createRawEditor(this)) == null)
                 return false;
             if ((Model = createModel(this)) == null) {
-                RawEditor = null;
+                RawData = null;
                 return false;
             }
 
@@ -57,7 +57,7 @@ namespace SF3.ModelLoaders {
         /// <param name="saveAction">The function to save the model when possible.</param>
         /// <returns>'true' if saveAction was invokvd and returned success.</returns>
         protected bool PerformSave(BaseModelLoaderSaveDelegate saveAction) {
-            if (saveAction == null || RawEditor == null || Model == null || !IsLoaded)
+            if (saveAction == null || RawData == null || Model == null || !IsLoaded)
                 return false;
 
             PreSaved?.Invoke(this, EventArgs.Empty);
@@ -90,16 +90,16 @@ namespace SF3.ModelLoaders {
             }
         }
   
-        private IRawEditor _rawEditor = null;
-        public IRawEditor RawEditor {
-            get => _rawEditor;
+        private IRawData _rawData = null;
+        public IRawData RawData {
+            get => _rawData;
             set {
-                if (_rawEditor != value) {
-                    var oldEditor = _rawEditor;
-                    _rawEditor = value;
+                if (_rawData != value) {
+                    var oldData = _rawData;
+                    _rawData = value;
 
-                    if (oldEditor != null)
-                        oldEditor.Dispose();
+                    if (oldData != null)
+                        oldData.Dispose();
 
                     UpdateTitle();
                 }
@@ -121,7 +121,7 @@ namespace SF3.ModelLoaders {
 
         public event EventHandler IsModifiedChanged;
 
-        public bool IsLoaded => RawEditor != null && Model != null;
+        public bool IsLoaded => RawData != null && Model != null;
 
         /// <summary>
         /// Model-specific implementation of determining the title for a loaded model.
@@ -147,7 +147,7 @@ namespace SF3.ModelLoaders {
         }
 
         protected void UpdateTitle() {
-            var title = IsLoaded ? (LoadedTitle + ((RawEditor?.IsModified == true) ? "*" : "")) : UnloadedTitle;
+            var title = IsLoaded ? (LoadedTitle + ((RawData?.IsModified == true) ? "*" : "")) : UnloadedTitle;
             var modelTitle = Model?.Title ?? "";
             if (modelTitle.Length > 0)
                 title += " (" + modelTitle + ")";
@@ -178,7 +178,7 @@ namespace SF3.ModelLoaders {
                 Model.IsModifiedChanged -= _onModifiedChangedDelegate;
 
             Model = null;
-            RawEditor = null;
+            RawData = null;
 
             Closed?.Invoke(this, EventArgs.Empty);
 
@@ -197,9 +197,9 @@ namespace SF3.ModelLoaders {
                 Model.Dispose();
                 Model = null;
             }
-            if (RawEditor != null) {
-                RawEditor.Dispose();
-                RawEditor = null;
+            if (RawData != null) {
+                RawData.Dispose();
+                RawData = null;
             }
         }
 

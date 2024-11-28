@@ -1,6 +1,6 @@
 ﻿using SF3.Models.Files.MPD;
 using SF3.NamedValues;
-using SF3.RawEditors;
+using SF3.RawData;
 using SF3.Types;
 
 namespace Grayscaler {
@@ -24,13 +24,13 @@ namespace Grayscaler {
                 Console.Write(file + ": ");
 
                 // Get a raw data editing context for the file.
-                var byteEditor = new ByteEditor(File.ReadAllBytes(file));
+                var byteEditor = new ByteData(File.ReadAllBytes(file));
 
                 // Create an MPD editor that works with our new ByteEditor.
-                var mpdEditor = MPD_File.Create(byteEditor, nameGetter, scenario);
+                var mpdFile = MPD_File.Create(byteEditor, nameGetter, scenario);
 
                 // Gather all textures into one collection.
-                var textures = mpdEditor.TextureChunks.Where(x => x != null && x.TextureTable != null).SelectMany(x => x.TextureTable.Rows).ToArray();
+                var textures = mpdFile.TextureChunks.Where(x => x != null && x.TextureTable != null).SelectMany(x => x.TextureTable.Rows).ToArray();
                 Console.WriteLine(textures.Length + " textures");
 
                 // Transform every texture in ABGR1555 format to grayscale.
@@ -41,10 +41,10 @@ namespace Grayscaler {
                 }
 
                 // This will compress chunks and update the chunk table header.
-                mpdEditor.Finalize();
+                mpdFile.Finalize();
 
                 // Write it back out!
-                var output = mpdEditor.Editor.GetAllData();
+                var output = mpdFile.Data.GetAllData();
                 File.WriteAllBytes(file, output);
             };
         }

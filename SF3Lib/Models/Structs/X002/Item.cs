@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X002 {
@@ -29,7 +29,7 @@ namespace SF3.Models.Structs.X002 {
         private readonly int SpellOnUseLocation;
         private readonly int SpellLvOnUseLocation;
 
-        public Item(IRawEditor editor, int id, string name, int address)
+        public Item(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x18) {
             PriceLocation                = Address;     // 2 bytes. only thing that is 2 bytes
             WeaponTypeLocation           = Address + 2; // 1 byte

@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X013 {
@@ -8,7 +8,7 @@ namespace SF3.Models.Structs.X013 {
         private readonly int supportA;
         private readonly int supportB;
 
-        public SupportType(IRawEditor editor, int id, string name, int address)
+        public SupportType(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x02) {
             supportA = Address;     // 1 byte
             supportB = Address + 1; // 1 byte

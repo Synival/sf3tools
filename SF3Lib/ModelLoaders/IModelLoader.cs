@@ -1,6 +1,6 @@
 ﻿using System;
-using SF3.RawEditors;
 using SF3.Models.Files;
+using SF3.RawData;
 
 namespace SF3.ModelLoaders {
     /// <summary>
@@ -19,14 +19,14 @@ namespace SF3.ModelLoaders {
         string ModelTitle(string formTitle);
 
         /// <summary>
-        /// The model loaded and created, backed by an underlying IRawEditor.
+        /// The model loaded and created, backed by an underlying IRawData.
         /// </summary>
         IBaseFile Model { get; }
 
         /// <summary>
-        /// The raw editor that exists when IsLoaded is 'true'.
+        /// The raw data that exists when IsLoaded is 'true'.
         /// </summary>
-        IRawEditor RawEditor { get; }
+        IRawData RawData { get; }
 
         /// <summary>
         /// 'True' when the model is loaded.

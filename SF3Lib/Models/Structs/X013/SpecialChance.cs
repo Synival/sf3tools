@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.X013 {
     public class SpecialChance : Struct {
@@ -11,7 +11,7 @@ namespace SF3.Models.Structs.X013 {
         private readonly int fourSpecials3;
         private readonly int fourSpecials2;
 
-        public SpecialChance(IRawEditor editor, int id, string name, int address, bool hasLargeTable)
+        public SpecialChance(IRawData editor, int id, string name, int address, bool hasLargeTable)
         : base(editor, id, name, address, hasLargeTable ? 0x4a : 0x3a) {
             if (hasLargeTable) {
                 twoSpecials2   = Address + 0x01; // 1 byte

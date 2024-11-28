@@ -37,7 +37,7 @@ namespace SF3.MPD_Editor.Forms {
             => "SF3 Data (*.MPD)|*.MPD|" + base.FileDialogFilter;
 
         protected override IBaseFile MakeModel(IModelFileLoader loader)
-            => MPD_File.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
+            => MPD_File.Create(loader.RawData, new NameGetterContext(Scenario), Scenario);
 
         protected override IView MakeView(IModelFileLoader loader, IBaseFile model)
             => new MPD_View(loader.Filename, (MPD_File) model);

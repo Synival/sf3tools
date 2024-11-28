@@ -1,7 +1,7 @@
 ﻿using System;
 using CommonLib;
 
-namespace SF3.RawEditors {
+namespace SF3 {
     /// <summary>
     /// Helper class for modifying any kind of data blob and tracking whether or not it's been edited.
     /// </summary>

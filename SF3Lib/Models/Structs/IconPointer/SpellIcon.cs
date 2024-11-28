@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.IconPointer {
@@ -8,7 +8,7 @@ namespace SF3.Models.Structs.IconPointer {
         //SPELLS
         private readonly int theSpellIcon;
 
-        public SpellIcon(IRawEditor editor, int id, string name, int address, bool has16BitIconAddr, int realOffsetStart)
+        public SpellIcon(IRawData editor, int id, string name, int address, bool has16BitIconAddr, int realOffsetStart)
         : base(editor, id, name, address, has16BitIconAddr ? 0x02 : 0x04) {
             Has16BitIconAddr = has16BitIconAddr;
             RealOffsetStart = realOffsetStart;

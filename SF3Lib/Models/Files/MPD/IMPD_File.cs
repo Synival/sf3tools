@@ -3,7 +3,7 @@ using SF3.Models.Files;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.Models.Tables.MPD.TextureAnimation;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Files.MPD {
     public interface IMPD_File : IScenarioTableFile {
@@ -19,8 +19,8 @@ namespace SF3.Models.Files.MPD {
         /// <summary>
         /// Byte editor for (de)compressed data for chunks
         /// </summary>
-        IChunkEditor[] ChunkEditors { get; }
-        IChunkEditor SurfaceChunkEditor { get; }
+        IChunkData[] ChunkEditors { get; }
+        IChunkData SurfaceChunkEditor { get; }
 
         MPDHeaderTable MPDHeader { get; }
         ColorTable[] Palettes { get; }
@@ -32,7 +32,7 @@ namespace SF3.Models.Files.MPD {
 
         TextureAnimationTable TextureAnimations { get; }
         FrameTable TextureAnimFrames { get; }
-        CompressedEditor[] TextureAnimFrameEditors { get; }
+        CompressedData[] TextureAnimFrameEditors { get; }
 
         Chunk[] Chunks { get; }
 

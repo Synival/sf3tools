@@ -1,12 +1,12 @@
 using CommonLib.NamedValues;
 using SF3.Models.Structs.IconPointer;
 using SF3.Models.Tables;
-using SF3.RawEditors;
+using SF3.RawData;
 using SF3.Types;
 
 namespace SF3.Models.Tables.IconPointer {
     public class SpellIconTable : Table<SpellIcon> {
-        public SpellIconTable(IRawEditor editor, string resourceFile, int address, bool has16BitIconAddr, int realOffsetStart)
+        public SpellIconTable(IRawData editor, string resourceFile, int address, bool has16BitIconAddr, int realOffsetStart)
         : base(editor, resourceFile, address) {
             Has16BitIconAddr = has16BitIconAddr;
             RealOffsetStart  = realOffsetStart;

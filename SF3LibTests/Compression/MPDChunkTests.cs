@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
-using SF3.RawEditors;
+using SF3.RawData;
 using SF3.Types;
 using static CommonLib.Utils.Compression;
 
@@ -28,7 +28,7 @@ namespace SF3.Tests.Compression {
                 var nameGetterContext = new NameGetterContext(st);
                 TestCase.Run(testCases, testCase => {
                     using (var mpdFile = MPD_File.Create(
-                        new ByteEditor(File.ReadAllBytes(testCase.Filename)), nameGetterContext, st)) {
+                        new ByteData(File.ReadAllBytes(testCase.Filename)), nameGetterContext, st)) {
                         var data = mpdFile.ChunkEditors[5]?.Data;
                         if (data == null)
                             return;
@@ -58,7 +58,7 @@ namespace SF3.Tests.Compression {
                 var nameGetterContext = new NameGetterContext(st);
                 TestCase.Run(testCases, testCase => {
                     using (var mpdFile = MPD_File.Create(
-                        new ByteEditor(File.ReadAllBytes(testCase.Filename)), nameGetterContext, st)) {
+                        new ByteData(File.ReadAllBytes(testCase.Filename)), nameGetterContext, st)) {
 
                         for (int i = 6; i <= 10; i++) {
                             var data = mpdFile.ChunkEditors[i]?.Data;
@@ -90,7 +90,7 @@ namespace SF3.Tests.Compression {
                 var nameGetterContext = new NameGetterContext(st);
                 TestCase.Run(testCases, testCase => {
                     using (var mpdFile = MPD_File.Create(
-                        new ByteEditor(File.ReadAllBytes(testCase.Filename)), nameGetterContext, st)) {
+                        new ByteData(File.ReadAllBytes(testCase.Filename)), nameGetterContext, st)) {
 
                         for (int i = 6; i <= 10; i++) {
                             var data = mpdFile.ChunkEditors[i]?.Data;

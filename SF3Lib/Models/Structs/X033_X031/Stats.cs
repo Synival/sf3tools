@@ -2,7 +2,7 @@ using System;
 using CommonLib.Attributes;
 using CommonLib.Statistics;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 using SF3.Statistics;
 using SF3.Types;
 
@@ -142,7 +142,7 @@ namespace SF3.Models.Structs.X033_X031 {
         private readonly int accessoryEquipable3;
         private readonly int accessoryEquipable4;
 
-        public Stats(IRawEditor editor, int id, string name, int address)
+        public Stats(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x7B) {
             character           = Address + 0x00;
             characterClass      = Address + 0x01;

@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class CustomMovement : Struct {
@@ -15,7 +15,7 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int zPos4;
         private readonly int ending;
 
-        public CustomMovement(IRawEditor editor, int id, string name, int address)
+        public CustomMovement(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x16) {
             unknown00 = Address;      // 2 bytes
             xPos1     = Address +  2; // 2 bytes

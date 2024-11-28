@@ -1,7 +1,7 @@
-using SF3.RawEditors;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Models.Files.X1;
+using SF3.RawData;
 
 namespace SF3.Tests.Models.Files {
     [TestClass]
@@ -14,7 +14,7 @@ namespace SF3.Tests.Models.Files {
             }
 
             public X1_Battle Create()
-                => X1_Battle.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario, false);
+                => X1_Battle.Create(new ByteData(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario, false);
         }
 
         private static readonly X1_TestCase TestCase = new X1_TestCase(ScenarioType.Scenario1, "X1BAL_3.BIN");

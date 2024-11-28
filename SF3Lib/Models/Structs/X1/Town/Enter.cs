@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.X1.Town {
     public class Enter : Struct {
@@ -13,7 +13,7 @@ namespace SF3.Models.Structs.X1.Town {
         private readonly int camera;    // 2 bytes
         private readonly int unknownE;  // 2 bytes
 
-        public Enter(IRawEditor editor, int id, string name, int address)
+        public Enter(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x10) {
             enterID   = Address;        // 2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
             unknown2  = Address + 0x02; // unknown+0x02

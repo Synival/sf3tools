@@ -4,12 +4,12 @@ using System.Text;
 using CommonLib;
 using SF3.Exceptions;
 
-namespace SF3.RawEditors {
+namespace SF3.RawData {
     /// <summary>
     /// Used for modifying any set of bytes.
     /// </summary>
-    public class ByteEditor : IByteEditor {
-        public ByteEditor(byte[] data) {
+    public class ByteData : IByteData {
+        public ByteData(byte[] data) {
             using (var guard = IsModifiedChangeBlocker())
                 _ = SetData(data);
         }

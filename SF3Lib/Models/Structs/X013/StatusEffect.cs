@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.X013 {
     public class StatusEffect : Struct {
@@ -24,7 +24,7 @@ namespace SF3.Models.Structs.X013 {
         private readonly int unknown8;
         private readonly int luck9;
         private readonly int unknown9;
-        public StatusEffect(IRawEditor editor, int id, string name, int address)
+        public StatusEffect(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x18) {
             luck0    = Address;
             unknown0 = Address + 0x01;

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Models.Tables {
@@ -12,7 +12,7 @@ namespace SF3.Models.Tables {
     /// Base implementation for any table of SF3 data that can be modified.
     /// </summary>
     public abstract class Table : ITable {
-        protected Table(IRawEditor editor, string resourceFile, int address) {
+        protected Table(IRawData editor, string resourceFile, int address) {
             Editor = editor;
             ResourceFile = resourceFile;
             Address = address;
@@ -30,7 +30,7 @@ namespace SF3.Models.Tables {
         /// <returns>'true' if successful (or no data is loaded), 'false' on failure.</returns>
         public abstract bool Reset();
 
-        public IRawEditor Editor { get; }
+        public IRawData Editor { get; }
         public string ResourceFile { get; }
         public int Address { get; }
 
@@ -43,10 +43,10 @@ namespace SF3.Models.Tables {
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
     public abstract class Table<T> : Table, ITable<T> where T : class, IStruct {
-        protected Table(IRawEditor editor, int address) : base(editor, null, address) {
+        protected Table(IRawData editor, int address) : base(editor, null, address) {
         }
 
-        protected Table(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        protected Table(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Reset() {

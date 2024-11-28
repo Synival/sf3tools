@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.Shared {
     public class Warp : Struct {
@@ -9,7 +9,7 @@ namespace SF3.Models.Structs.Shared {
         private readonly int type;
         private readonly int map;
 
-        public Warp(IRawEditor editor, int id, string name, int address)
+        public Warp(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x04) {
             unknown1 = Address;
             unknown2 = Address + 1;

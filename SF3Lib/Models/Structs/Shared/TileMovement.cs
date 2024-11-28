@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.Shared {
     public class TileMovement : Struct {
@@ -22,7 +22,7 @@ namespace SF3.Models.Structs.Shared {
         private readonly int unknown0e;
         private readonly int unknown0f;
 
-        public TileMovement(IRawEditor editor, int id, string name, int address)
+        public TileMovement(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x10) {
             noEntry       = Address;
             unknown01     = Address + 0x01;

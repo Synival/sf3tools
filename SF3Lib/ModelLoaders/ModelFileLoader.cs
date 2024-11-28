@@ -1,7 +1,7 @@
 using System;
 using System.IO;
-using SF3.RawEditors;
 using SF3.Exceptions;
+using SF3.RawData;
 using static SF3.ModelLoaders.ModelFileLoaderDelegates;
 
 namespace SF3.ModelLoaders {
@@ -16,7 +16,7 @@ namespace SF3.ModelLoaders {
                         stream.CopyTo(memoryStream);
                         newData = memoryStream.ToArray();
                     }
-                    return new ByteEditor(newData);
+                    return new ByteData(newData);
             };
         }
 
@@ -54,7 +54,7 @@ namespace SF3.ModelLoaders {
                 throw new ModelFileLoaderNotLoadedException();
             return PerformSave(el => {
                 try {
-                    File.WriteAllBytes(filename, el.RawEditor.GetAllData());
+                    File.WriteAllBytes(filename, el.RawData.GetAllData());
                     Filename = filename;
                     return true;
                 }

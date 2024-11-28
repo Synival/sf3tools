@@ -1,10 +1,10 @@
 using SF3.Models.Structs.X013;
 using SF3.Models.Tables;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class HealExpTable : Table<HealExp> {
-        public HealExpTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        public HealExpTable(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

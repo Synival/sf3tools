@@ -1,13 +1,13 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.X002 {
     public class AttackResist : Struct {
         private readonly int attack;
         private readonly int resist;
 
-        public AttackResist(IRawEditor editor, int id, string name, int address)
+        public AttackResist(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0xD3) {
             attack = Address;        // 1 byte
             resist = Address + 0xd2; // 1 byte

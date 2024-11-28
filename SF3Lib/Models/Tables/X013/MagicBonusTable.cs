@@ -1,10 +1,10 @@
 using SF3.Models.Structs.X013;
 using SF3.Models.Tables;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class MagicBonusTable : Table<MagicBonus> {
-        public MagicBonusTable(IRawEditor editor, string resourceFile, int address, bool has32BitValues) : base(editor, resourceFile, address) {
+        public MagicBonusTable(IRawData editor, string resourceFile, int address, bool has32BitValues) : base(editor, resourceFile, address) {
             Has32BitValues = has32BitValues;
         }
 

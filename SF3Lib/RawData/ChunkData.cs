@@ -1,21 +1,19 @@
 ﻿using System;
 using CommonLib;
 
-namespace SF3.RawEditors
-{
-    public class ChunkEditor : IChunkEditor
-    {
-        public ChunkEditor(byte[] data, bool chunkIsCompressed) {
+namespace SF3.RawData {
+    public class ChunkData : IChunkData {
+        public ChunkData(byte[] data, bool chunkIsCompressed) {
             IsCompressed = chunkIsCompressed;
 
             if (chunkIsCompressed) {
-                CompressedEditor = new CompressedEditor(data);
+                CompressedEditor = new CompressedData(data);
                 ChildEditor = CompressedEditor;
                 DecompressedEditor = CompressedEditor.DecompressedEditor;
             }
             else {
                 CompressedEditor = null;
-                ChildEditor = new ByteEditor(data);
+                ChildEditor = new ByteData(data);
                 DecompressedEditor = ChildEditor;
             }
 
@@ -70,9 +68,9 @@ namespace SF3.RawEditors
         }
 
         public bool IsCompressed { get; }
-        private ICompressedEditor CompressedEditor { get; }
-        private IByteEditor ChildEditor { get; }
-        public IByteEditor DecompressedEditor { get; }
+        private ICompressedData CompressedEditor { get; }
+        private IByteData ChildEditor { get; }
+        public IByteData DecompressedEditor { get; }
 
         public byte[] Data => ChildEditor.Data;
         public int Size => ChildEditor.Size;

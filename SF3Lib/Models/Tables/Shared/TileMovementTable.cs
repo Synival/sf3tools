@@ -1,10 +1,10 @@
 using SF3.Models.Structs.Shared;
 using SF3.Models.Tables;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Tables.Shared {
     public class TileMovementTable : Table<TileMovement> {
-        public TileMovementTable(IRawEditor editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        public TileMovementTable(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
         }
 
         public override bool Load()

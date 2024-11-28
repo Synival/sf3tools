@@ -1,9 +1,9 @@
 ﻿using System;
 using static CommonLib.Utils.Compression;
 
-namespace SF3.RawEditors {
-    public class CompressedEditor : ByteEditor, ICompressedEditor {
-        public CompressedEditor(byte[] data, int? maxDecompressedSize = null) : base(data) {
+namespace SF3.RawData {
+    public class CompressedData : ByteData, ICompressedData {
+        public CompressedData(byte[] data, int? maxDecompressedSize = null) : base(data) {
             MaxDecompressedSize = maxDecompressedSize;
             _hasInit = true;
 
@@ -27,7 +27,7 @@ namespace SF3.RawEditors {
             if (updateDecompressedData) {
                 var decompressedData = Decompress(data, MaxDecompressedSize);
                 if (DecompressedEditor == null) {
-                    DecompressedEditor = new ByteEditor(decompressedData);
+                    DecompressedEditor = new ByteData(decompressedData);
 
                     DecompressedEditor.IsModifiedChanged += (s, e) => {
                         // When decompressed data is marked as modified, mark that we need compression.
@@ -73,7 +73,7 @@ namespace SF3.RawEditors {
 
         public byte[] DecompressedData => DecompressedEditor.Data;
 
-        public IByteEditor DecompressedEditor { get; private set; }
+        public IByteData DecompressedEditor { get; private set; }
 
         public bool _needsRecompression = false;
         public bool NeedsRecompression {

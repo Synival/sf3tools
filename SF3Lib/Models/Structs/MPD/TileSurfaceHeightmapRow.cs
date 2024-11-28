@@ -1,12 +1,12 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.MPD {
     public class TileSurfaceHeightmapRow : Struct {
         private readonly int[] xAddress = new int[64];
 
-        public TileSurfaceHeightmapRow(IRawEditor editor, int id, string name, int address)
+        public TileSurfaceHeightmapRow(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 256) {
             for (var i = 0; i < xAddress.Length; i++)
                 xAddress[i] = Address + i * 4;

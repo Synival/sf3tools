@@ -1,10 +1,10 @@
 ﻿using SF3.Models.Structs.MPD;
 using SF3.Models.Tables;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class MPDHeaderTable : Table<MPDHeaderModel> {
-        public MPDHeaderTable(IRawEditor editor, int address, bool hasPalette3) : base(editor, address) {
+        public MPDHeaderTable(IRawData editor, int address, bool hasPalette3) : base(editor, address) {
             HasPalette3 = hasPalette3;
         }
 

@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.X013 {
     public class SupportStats : Struct {
@@ -9,7 +9,7 @@ namespace SF3.Models.Structs.X013 {
         private readonly int sLvlStat3;
         private readonly int sLvlStat4;
 
-        public SupportStats(IRawEditor editor, int id, string name, int address)
+        public SupportStats(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x04) {
             sLvlStat1 = Address;     // 1 byte
             sLvlStat2 = Address + 1; // 1 byte

@@ -1,148 +1,148 @@
 ﻿using System.Text;
-using SF3.RawEditors;
+using SF3.RawData;
 using static CommonLib.Utils.Compression;
 
 namespace SF3.Tests.RawEditors {
     [TestClass]
-    public class CompressedEditorTests {
+    public class CompressedDataTests {
         private static readonly byte[] _compressedTestData = Compress(Encoding.UTF8.GetBytes("Hello, world!!"));
 
         [TestMethod]
         public void Constructor_ResultsInExpectedState()
         {
             // Arrange + Act
-            var editor = new CompressedEditor(_compressedTestData);
+            var data = new CompressedData(_compressedTestData);
 
             // Assert
-            Assert.IsFalse(editor.NeedsRecompression);
-            Assert.IsFalse(editor.IsModified);
-            Assert.IsFalse(editor.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.NeedsRecompression);
+            Assert.IsFalse(data.IsModified);
+            Assert.IsFalse(data.DecompressedEditor.IsModified);
         }
 
         [TestMethod]
-        public void Recompress_WithoutDecompressedEditorChanges_ResultsInExpectedState()
+        public void Recompress_WithoutDeCompressedDataChanges_ResultsInExpectedState()
         {
             // Arrange
-            var editor = new CompressedEditor(_compressedTestData);
+            var data = new CompressedData(_compressedTestData);
 
             // Act
-            var recompressResult = editor.Recompress();
+            var recompressResult = data.Recompress();
 
             // Assert
             Assert.IsTrue(recompressResult);
-            Assert.IsFalse(editor.NeedsRecompression);
-            Assert.IsFalse(editor.IsModified);
-            Assert.IsFalse(editor.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.NeedsRecompression);
+            Assert.IsFalse(data.IsModified);
+            Assert.IsFalse(data.DecompressedEditor.IsModified);
         }
 
         [TestMethod]
-        public void DecompressedEditor_IsModifiedIsSet_ResultsInExpectedState()
+        public void DeCompressedData_IsModifiedIsSet_ResultsInExpectedState()
         {
             // Arrange
-            var editor = new CompressedEditor(_compressedTestData);
+            var data = new CompressedData(_compressedTestData);
 
             // Act
-            editor.DecompressedEditor.IsModified = true;
+            data.DecompressedEditor.IsModified = true;
 
             // Assert
-            Assert.IsTrue(editor.NeedsRecompression);
-            Assert.IsTrue(editor.IsModified);
-            Assert.IsTrue(editor.DecompressedEditor.IsModified);
+            Assert.IsTrue(data.NeedsRecompression);
+            Assert.IsTrue(data.IsModified);
+            Assert.IsTrue(data.DecompressedEditor.IsModified);
         }
 
         [TestMethod]
-        public void DecompressedEditor_IsModifiedIsToggled_ResultsInExpectedState()
+        public void DeCompressedData_IsModifiedIsToggled_ResultsInExpectedState()
         {
             // Arrange
-            var editor = new CompressedEditor(_compressedTestData);
+            var data = new CompressedData(_compressedTestData);
 
             // Act
-            editor.DecompressedEditor.IsModified = true;
-            editor.DecompressedEditor.IsModified = false;
+            data.DecompressedEditor.IsModified = true;
+            data.DecompressedEditor.IsModified = false;
 
             // Assert
-            Assert.IsTrue(editor.NeedsRecompression);
-            Assert.IsTrue(editor.IsModified);
-            Assert.IsFalse(editor.DecompressedEditor.IsModified);
+            Assert.IsTrue(data.NeedsRecompression);
+            Assert.IsTrue(data.IsModified);
+            Assert.IsFalse(data.DecompressedEditor.IsModified);
         }
 
         [TestMethod]
-        public void Recompress_AfterModificationsInDecompressedEditor_ResultsInExpectedState()
+        public void Recompress_AfterModificationsInDeCompressedData_ResultsInExpectedState()
         {
             // Arrange
-            var editor = new CompressedEditor(_compressedTestData);
-            editor.DecompressedEditor.IsModified = true;
+            var data = new CompressedData(_compressedTestData);
+            data.DecompressedEditor.IsModified = true;
 
             // Act
-            var recompressResult = editor.Recompress();
+            var recompressResult = data.Recompress();
 
             // Assert
             Assert.IsTrue(recompressResult);
-            Assert.IsFalse(editor.NeedsRecompression);
-            Assert.IsTrue(editor.IsModified);
-            Assert.IsFalse(editor.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.NeedsRecompression);
+            Assert.IsTrue(data.IsModified);
+            Assert.IsFalse(data.DecompressedEditor.IsModified);
         }
 
         [TestMethod]
         public void NeedsRecompression_SetToTrue_SetsItselfAndIsModifiedToTrue()
         {
             // Arrange
-            var editor = new CompressedEditor(_compressedTestData);
+            var data = new CompressedData(_compressedTestData);
 
             // Act
-            editor.NeedsRecompression = true;
+            data.NeedsRecompression = true;
 
             // Assert
-            Assert.IsTrue(editor.NeedsRecompression);
-            Assert.IsTrue(editor.IsModified);
-            Assert.IsFalse(editor.DecompressedEditor.IsModified);
+            Assert.IsTrue(data.NeedsRecompression);
+            Assert.IsTrue(data.IsModified);
+            Assert.IsFalse(data.DecompressedEditor.IsModified);
         }
 
         [TestMethod]
         public void NeedsRecompression_ToggledOnAndOff_StillHasIsModifiedFlagSet()
         {
             // Arrange
-            var editor = new CompressedEditor(_compressedTestData);
+            var data = new CompressedData(_compressedTestData);
 
             // Act
-            editor.NeedsRecompression = true;
-            editor.NeedsRecompression = false;
+            data.NeedsRecompression = true;
+            data.NeedsRecompression = false;
 
             // Assert
-            Assert.IsFalse(editor.NeedsRecompression);
-            Assert.IsTrue(editor.IsModified);
-            Assert.IsFalse(editor.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.NeedsRecompression);
+            Assert.IsTrue(data.IsModified);
+            Assert.IsFalse(data.DecompressedEditor.IsModified);
         }
 
         [TestMethod]
         public void IsModified_SetToTrue_ResultsInTrue()
         {
             // Arrange
-            var editor = new CompressedEditor(_compressedTestData);
+            var data = new CompressedData(_compressedTestData);
 
             // Act
-            editor.IsModified = true;
+            data.IsModified = true;
 
             // Assert
-            Assert.IsTrue(editor.IsModified);
-            Assert.IsFalse(editor.NeedsRecompression);
-            Assert.IsFalse(editor.DecompressedEditor.IsModified);
+            Assert.IsTrue(data.IsModified);
+            Assert.IsFalse(data.NeedsRecompression);
+            Assert.IsFalse(data.DecompressedEditor.IsModified);
         }
 
         [TestMethod]
         public void IsModified_SetWhenNeedsRecompressionIsTrue_IsModifiedIsStillTrue()
         {
             // Arrange
-            var editor = new CompressedEditor(_compressedTestData);
-            editor.NeedsRecompression = true;
+            var data = new CompressedData(_compressedTestData);
+            data.NeedsRecompression = true;
 
             // Act
-            editor.IsModified = false;
+            data.IsModified = false;
 
             // Assert
-            Assert.IsTrue(editor.NeedsRecompression);
-            Assert.IsTrue(editor.IsModified);
-            Assert.IsFalse(editor.DecompressedEditor.IsModified);
+            Assert.IsTrue(data.NeedsRecompression);
+            Assert.IsTrue(data.IsModified);
+            Assert.IsFalse(data.DecompressedEditor.IsModified);
         }
     }
 }

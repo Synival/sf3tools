@@ -1,12 +1,12 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.MPD {
     public class TileSurfaceCharacterRow : Struct {
         private readonly int[] xAddress = new int[64];
 
-        public TileSurfaceCharacterRow(IRawEditor editor, int id, string name, int address)
+        public TileSurfaceCharacterRow(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 128) {
             for (var i = 0; i < xAddress.Length; i++) {
                 var block = i / 4;

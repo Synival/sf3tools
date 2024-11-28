@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
-using SF3.RawEditors;
 using SF3.Types;
 using System.Linq;
 using CommonLib;
@@ -11,13 +10,14 @@ using SF3.Models.Files;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.Models.Tables.MPD.TextureAnimation;
+using SF3.RawData;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
-        protected MPD_File(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
+        protected MPD_File(IRawData editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }
 
-        public static MPD_File Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) {
+        public static MPD_File Create(IRawData editor, INameGetterContext nameContext, ScenarioType scenario) {
             var newEditor = new MPD_File(editor, nameContext, scenario);
             if (!newEditor.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");
@@ -30,60 +30,60 @@ namespace SF3.Models.Files.MPD {
             var areAnimatedTextures32Bit = Scenario >= ScenarioType.Scenario3;
 
             // Create and load Header
-            var headerAddrPtr = Editor.GetDouble(0x0000) - ramOffset;
-            var headerAddr = Editor.GetDouble(headerAddrPtr) - ramOffset;
-            MPDHeader = new MPDHeaderTable(Editor, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
+            var headerAddrPtr = Data.GetDouble(0x0000) - ramOffset;
+            var headerAddr = Data.GetDouble(headerAddrPtr) - ramOffset;
+            MPDHeader = new MPDHeaderTable(Data, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
             _ = MPDHeader.Load();
             var header = MPDHeader.Rows[0];
 
             // Load palettes
             Palettes = new ColorTable[3];
             if (header.OffsetPal1 > 0)
-                Palettes[0] = new ColorTable(Editor, header.OffsetPal1 - ramOffset, 256);
+                Palettes[0] = new ColorTable(Data, header.OffsetPal1 - ramOffset, 256);
             if (header.OffsetPal2 > 0)
-                Palettes[1] = new ColorTable(Editor, header.OffsetPal2 - ramOffset, 256);
+                Palettes[1] = new ColorTable(Data, header.OffsetPal2 - ramOffset, 256);
             if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 > 0)
-                Palettes[2] = new ColorTable(Editor, MPDHeader.Rows[0].OffsetPal3 - ramOffset, 256);
+                Palettes[2] = new ColorTable(Data, MPDHeader.Rows[0].OffsetPal3 - ramOffset, 256);
 
             // Create other tables from header offsets.
-            Offset1Table = header.Offset1 != 0 ? new UnknownUInt16Table(Editor, header.Offset1 - ramOffset, 32) : null;
-            Offset2Table = header.Offset2 != 0 ? new UnknownUInt32Table(Editor, header.Offset2 - ramOffset, 1) : null;
-            Offset3Table = header.Offset3 != 0 ? new UnknownUInt16Table(Editor, header.Offset3 - ramOffset, 32) : null;
-            Offset4Table = header.Offset4 != 0 ? new Offset4Table(Editor, header.Offset4 - ramOffset) : null;
+            Offset1Table = header.Offset1 != 0 ? new UnknownUInt16Table(Data, header.Offset1 - ramOffset, 32) : null;
+            Offset2Table = header.Offset2 != 0 ? new UnknownUInt32Table(Data, header.Offset2 - ramOffset, 1) : null;
+            Offset3Table = header.Offset3 != 0 ? new UnknownUInt16Table(Data, header.Offset3 - ramOffset, 32) : null;
+            Offset4Table = header.Offset4 != 0 ? new Offset4Table(Data, header.Offset4 - ramOffset) : null;
 
             if (header.OffsetTextureAnimations != 0) {
-                TextureAnimations = new TextureAnimationTable(Editor, header.OffsetTextureAnimations - ramOffset, areAnimatedTextures32Bit);
+                TextureAnimations = new TextureAnimationTable(Data, header.OffsetTextureAnimations - ramOffset, areAnimatedTextures32Bit);
                 TextureAnimations.Load();
-                TextureAnimFrames = new FrameTable(Editor, TextureAnimations.Address, areAnimatedTextures32Bit, TextureAnimations.Rows);
+                TextureAnimFrames = new FrameTable(Data, TextureAnimations.Address, areAnimatedTextures32Bit, TextureAnimations.Rows);
                 TextureAnimFrames.Load();
             }
 
             // Create chunk data
-            ChunkHeader = new ChunkHeaderTable(Editor, 0x2000);
+            ChunkHeader = new ChunkHeaderTable(Data, 0x2000);
             _ = ChunkHeader.Load();
 
             Chunks = new Chunk[ChunkHeader.Rows.Length];
             for (var i = 0; i < Chunks.Length; i++) {
                 var chunkInfo = ChunkHeader.Rows[i];
                 if (chunkInfo.ChunkAddress > 0)
-                    Chunks[i] = new Chunk(((ByteEditor) Editor).Data, chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
+                    Chunks[i] = new Chunk(((ByteData) Data).Data, chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
             }
 
             // Assign all chunk editors.
-            ChunkEditors = new IChunkEditor[Chunks.Length];
+            ChunkEditors = new IChunkData[Chunks.Length];
 
             if (Chunks[2]?.Data?.Length > 0) {
                 SurfaceChunk = Chunks[2];
-                SurfaceChunkEditor = ChunkEditors[2] = new ChunkEditor(SurfaceChunk.Data, false);
+                SurfaceChunkEditor = ChunkEditors[2] = new ChunkData(SurfaceChunk.Data, false);
             }
             // TODO: this works, but it's kind of a dumb hack!!
             else if (Chunks[20]?.Data?.Length == 52992) {
                 SurfaceChunk = Chunks[20];
-                SurfaceChunkEditor = ChunkEditors[20] = new ChunkEditor(SurfaceChunk.Data, false);
+                SurfaceChunkEditor = ChunkEditors[20] = new ChunkData(SurfaceChunk.Data, false);
             }
 
             if (Chunks[3]?.Data?.Length > 0 && TextureAnimFrames != null) {
-                TextureAnimFrameEditors = new CompressedEditor[TextureAnimFrames.Rows.Length];
+                TextureAnimFrameEditors = new CompressedData[TextureAnimFrames.Rows.Length];
                 var frameOffsetEndId = areAnimatedTextures32Bit ? 0xFFFF_FFFEu : 0xFFFFu;
                 for (var i = 0; i < TextureAnimFrames.Rows.Length; i++) {
                     var frame = TextureAnimFrames.Rows[i];
@@ -91,18 +91,18 @@ namespace SF3.Models.Files.MPD {
                         var totalBytes = frame.Width * frame.Height * 2;
                         // TODO: this is super inefficient!!!
                         var bytes = Chunks[3].Data.Skip((int) frame.CompressedTextureOffset).Take(totalBytes).ToArray();
-                        TextureAnimFrameEditors[i] = new CompressedEditor(bytes, totalBytes);
+                        TextureAnimFrameEditors[i] = new CompressedData(bytes, totalBytes);
                     }
                 }
             }
 
             if (Chunks[5]?.Data != null)
-                ChunkEditors[5] = new ChunkEditor(Chunks[5].Data, true);
+                ChunkEditors[5] = new ChunkData(Chunks[5].Data, true);
 
             // Texture editors, in chunks (6...10)
             for (var i = 6; i <= 10; i++) {
                 try {
-                    ChunkEditors[i] = new ChunkEditor(Chunks[i].Data, true);
+                    ChunkEditors[i] = new ChunkData(Chunks[i].Data, true);
                 }
                 catch {
                     // TODO: This is likely failing because the texture is the wrong encoding.
@@ -164,17 +164,17 @@ namespace SF3.Models.Files.MPD {
 
             // Add some callbacks to all child editors.
             var editors = ChunkEditors
-                .Cast<IRawEditor>()
-                .Concat(TextureAnimFrameEditors?.Cast<IRawEditor>() ?? new IRawEditor[0])
+                .Cast<IRawData>()
+                .Concat(TextureAnimFrameEditors?.Cast<IRawData>() ?? new IRawData[0])
                 .Where(x => x != null)
                 .ToArray();
 
             foreach (var ce in editors) {
                 // If the editor is marked as unmodified (such as after a save), mark child editors as unmodified as well.
-                Editor.IsModifiedChanged += (s, e) => ce.IsModified &= Editor.IsModified;
+                Data.IsModifiedChanged += (s, e) => ce.IsModified &= Data.IsModified;
 
                 // If any of the child editors are marked as modified, mark the parent editor as modified as well.
-                ce.IsModifiedChanged += (s, e) => Editor.IsModified |= ce.IsModified;
+                ce.IsModifiedChanged += (s, e) => Data.IsModified |= ce.IsModified;
             }
 
             return tables;
@@ -233,7 +233,7 @@ namespace SF3.Models.Files.MPD {
 
             // Start rebuilding new data.
             var newData = new byte[currentChunkPos];
-            var inputData = Editor.GetAllData();
+            var inputData = Data.GetAllData();
 
             unsafe {
                 fixed (byte* output = newData) {
@@ -249,7 +249,7 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
-            if (!((IByteEditor) Editor).SetData(newData))
+            if (!((IByteData) Data).SetData(newData))
                 return false;
 
             return true;
@@ -277,9 +277,9 @@ namespace SF3.Models.Files.MPD {
                     ci.Dispose();
         }
 
-        public IChunkEditor[] ChunkEditors { get; private set; }
+        public IChunkData[] ChunkEditors { get; private set; }
 
-        public IChunkEditor SurfaceChunkEditor { get; private set; }
+        public IChunkData SurfaceChunkEditor { get; private set; }
 
         [BulkCopyRecurse]
         public MPDHeaderTable MPDHeader { get; private set; }
@@ -308,7 +308,7 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public FrameTable TextureAnimFrames { get; private set; }
 
-        public CompressedEditor[] TextureAnimFrameEditors { get; private set; }
+        public CompressedData[] TextureAnimFrameEditors { get; private set; }
 
         public Chunk[] Chunks { get; private set; }
 

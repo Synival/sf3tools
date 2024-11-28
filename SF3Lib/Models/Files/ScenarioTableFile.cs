@@ -1,5 +1,5 @@
 using CommonLib.NamedValues;
-using SF3.RawEditors;
+using SF3.RawData;
 using SF3.Types;
 
 namespace SF3.Models.Files {
@@ -8,7 +8,7 @@ namespace SF3.Models.Files {
     /// we might as well have it to avoid lots of code duplication.
     /// </summary>
     public abstract class ScenarioTableFile : TableFile, IScenarioFile {
-        protected ScenarioTableFile(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext) {
+        protected ScenarioTableFile(IRawData editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext) {
             Scenario = scenario;
         }
 

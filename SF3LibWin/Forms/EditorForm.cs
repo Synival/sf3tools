@@ -288,7 +288,7 @@ namespace SF3.Win.Forms {
                     return false;
 
             var form = new frmDFRTool(CommandType.Apply, dialogMode: true);
-            form.ApplyDFRInputData = FileLoader.RawEditor.GetAllData();
+            form.ApplyDFRInputData = FileLoader.RawData.GetAllData();
             form.ApplyDFRInMemory = true;
             var dialogResult = form.ShowDialog();
             if (dialogResult != DialogResult.OK)
@@ -327,7 +327,7 @@ namespace SF3.Win.Forms {
                 return false;
 
             var form = new frmDFRTool(CommandType.Create, dialogMode: true);
-            form.CreateDFRAlteredData = FileLoader.RawEditor.GetAllData();
+            form.CreateDFRAlteredData = FileLoader.RawData.GetAllData();
             var dialogResult = form.ShowDialog();
             return (dialogResult == DialogResult.OK);
         }

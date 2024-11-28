@@ -5,16 +5,16 @@ using CommonLib.NamedValues;
 using SF3.Models.Files;
 using SF3.Models.Tables;
 using SF3.Models.Tables.X019;
-using SF3.RawEditors;
+using SF3.RawData;
 using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X019 {
     public class X019_File : ScenarioTableFile, IX019_File {
-        protected X019_File(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
+        protected X019_File(IRawData editor, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
         }
 
-        public static X019_File Create(IRawEditor editor, INameGetterContext nameContext, ScenarioType scenario) {
+        public static X019_File Create(IRawData editor, INameGetterContext nameContext, ScenarioType scenario) {
             var newEditor = new X019_File(editor, nameContext, scenario);
             if (!newEditor.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");
@@ -23,7 +23,7 @@ namespace SF3.Models.Files.X019 {
 
         public override IEnumerable<ITable> MakeTables() {
             int monsterTableAddress;
-            var isPDX044 = Editor.GetDouble(0x08) == 0x060780A4;
+            var isPDX044 = Data.GetDouble(0x08) == 0x060780A4;
 
             switch (Scenario) {
                 case ScenarioType.Scenario1:
@@ -43,7 +43,7 @@ namespace SF3.Models.Files.X019 {
             }
 
             return new List<ITable>() {
-                (MonsterTable = new MonsterTable(Editor, ResourceFileForScenario(Scenario, "Monsters.xml"), monsterTableAddress))
+                (MonsterTable = new MonsterTable(Data, ResourceFileForScenario(Scenario, "Monsters.xml"), monsterTableAddress))
             };
         }
 

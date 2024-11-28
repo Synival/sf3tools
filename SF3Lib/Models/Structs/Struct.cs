@@ -1,9 +1,9 @@
 using CommonLib.Attributes;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs {
     public abstract class Struct : IStruct {
-        public Struct(IRawEditor editor, int id, string name, int address, int size) {
+        public Struct(IRawData editor, int id, string name, int address, int size) {
             Editor  = editor;
             Name    = name;
             ID      = id;
@@ -11,7 +11,7 @@ namespace SF3.Models.Structs {
             Size    = size;
         }
 
-        public IRawEditor Editor { get; protected set; }
+        public IRawData Editor { get; protected set; }
 
         [TableViewModelColumn(displayOrder: -3, displayFormat: "X2", minWidth: 45)]
         public int ID { get; protected set; }

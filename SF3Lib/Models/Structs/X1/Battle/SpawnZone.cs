@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class SpawnZone : Struct {
@@ -14,7 +14,7 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int unknown0E;
         private readonly int unknown10;
 
-        public SpawnZone(IRawEditor editor, int id, string name, int address)
+        public SpawnZone(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x12) {
             unknown00 = Address;        // 2 bytes  
             unknown02 = Address + 0x02; // 2 bytes

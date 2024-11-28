@@ -2,8 +2,8 @@
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using CommonLib.Utils;
-using SF3.RawEditors;
 using SF3.Models.Structs.MPD.TextureAnimation;
+using SF3.RawData;
 
 namespace SF3.Win.Extensions {
     public static class FrameExtensions {
@@ -12,7 +12,7 @@ namespace SF3.Win.Extensions {
         /// </summary>
         /// <param name="texture">This texture whose Bitmap image should be generated.</param>
         /// <returns>A bitmap image for the texture.</returns>
-        public static Bitmap CreateBitmap(this FrameModel frame, IByteEditor textureEditor) {
+        public static Bitmap CreateBitmap(this FrameModel frame, IByteData textureEditor) {
             // TODO: massive refactoring!
             var imageDataInput = textureEditor.GetAllData();
             var imageDataOutput = new byte[imageDataInput.Length];

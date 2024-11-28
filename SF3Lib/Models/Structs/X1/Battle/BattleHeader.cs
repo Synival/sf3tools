@@ -1,6 +1,6 @@
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class BattleHeader : Struct {
@@ -15,7 +15,7 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int unknown8;
         private readonly int unknown9;
 
-        public BattleHeader(IRawEditor editor, int id, string name, int address)
+        public BattleHeader(IRawData editor, int id, string name, int address)
         : base(editor, id, name, address, 0x0A) {
             unknown1  = Address;     // 1 byte
             tableSize = Address + 1; // 1 byte

@@ -1,5 +1,5 @@
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Tables {
     /// <summary>
@@ -21,7 +21,7 @@ namespace SF3.Models.Tables {
         /// <summary>
         /// The editor used for this table.
         /// </summary>
-        IRawEditor Editor { get; }
+        IRawData Editor { get; }
 
         /// <summary>
         /// The address of the first row of the table.

@@ -1,6 +1,5 @@
 ﻿using System;
 using CommonLib.NamedValues;
-using SF3.RawEditors;
 
 namespace SF3.Models.Files {
     /// <summary>

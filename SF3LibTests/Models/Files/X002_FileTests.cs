@@ -1,7 +1,7 @@
-using SF3.RawEditors;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Models.Files.X002;
+using SF3.RawData;
 
 namespace SF3.Tests.Models.Files {
     [TestClass]
@@ -24,7 +24,7 @@ namespace SF3.Tests.Models.Files {
             }
 
             public X002_File Create()
-                => X002_File.Create(new ByteEditor(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
+                => X002_File.Create(new ByteData(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedItems { get; }
             public int ExpectedSpells { get; }

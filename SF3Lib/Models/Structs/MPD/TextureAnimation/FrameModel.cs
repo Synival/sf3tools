@@ -1,14 +1,14 @@
 ﻿using System;
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawEditors;
+using SF3.RawData;
 
 namespace SF3.Models.Structs.MPD.TextureAnimation {
     public class FrameModel : Struct {
         private readonly int _compressedTextureOffsetAddress;
         private readonly int _unknownAddress;
 
-        public FrameModel(IRawEditor editor, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum)
+        public FrameModel(IRawData editor, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum)
         : base(editor, id, name, address, is32Bit ? 0x08 : 0x04) {
             Is32Bit   = is32Bit;
             TextureID = texId;
