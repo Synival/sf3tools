@@ -10,7 +10,7 @@ namespace SF3.ModelLoaders {
     /// </summary>
     public partial class ModelFileLoader : BaseModelLoader, IModelFileLoader {
         public ModelFileLoader() {
-            _createRawEditor = (IModelFileLoader loader, string filename, Stream stream) => {
+            _createRawData = (IModelFileLoader loader, string filename, Stream stream) => {
                     byte[] newData;
                     using (var memoryStream = new MemoryStream()) {
                         stream.CopyTo(memoryStream);
@@ -20,8 +20,8 @@ namespace SF3.ModelLoaders {
             };
         }
 
-        public ModelFileLoader(ModelFileLoaderCreateRawEditorDelegate createRawEditor) {
-            _createRawEditor = createRawEditor;
+        public ModelFileLoader(ModelFileLoaderCreateRawDataDelegate createRawEditor) {
+            _createRawData = createRawEditor;
         }
 
         public virtual bool LoadFile(string filename, ModelFileLoaderCreateModelDelegate createModel) {
@@ -37,11 +37,11 @@ namespace SF3.ModelLoaders {
         public virtual bool LoadFile(string filename, Stream stream, ModelFileLoaderCreateModelDelegate createModel) {
             return PerformLoad(e => {
                 try {
-                    var newEditor = _createRawEditor(this, filename, stream);
-                    if (newEditor == null)
+                    var newData = _createRawData(this, filename, stream);
+                    if (newData == null)
                         return null;
                     Filename = filename;
-                    return newEditor;
+                    return newData;
                 }
                 catch (Exception) {
                     return null;
@@ -64,7 +64,7 @@ namespace SF3.ModelLoaders {
             });
         }
 
-        private readonly ModelFileLoaderCreateRawEditorDelegate _createRawEditor;
+        private readonly ModelFileLoaderCreateRawDataDelegate _createRawData;
 
         private string _filename = null;
 

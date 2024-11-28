@@ -31,7 +31,7 @@ namespace SF3.Win.Forms {
             tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
             Globals.UseDropdownsChanged += (s, e) => tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
 
-            AttachFileEditor(FileLoader);
+            AttachFileLoader(FileLoader);
         }
 
         public EditorForm(IContainer container) {
@@ -157,7 +157,7 @@ namespace SF3.Win.Forms {
 
             var success = new Func<bool>(() => {
                 try {
-                    return FileLoader.LoadFile(filename, stream, MakeEditor) && OnLoad();
+                    return FileLoader.LoadFile(filename, stream, CreateModel) && OnLoad();
                 }
                 catch {
                     return false;
@@ -175,7 +175,7 @@ namespace SF3.Win.Forms {
             return true;
         }
 
-        private void AttachFileEditor(IModelFileLoader loader) {
+        private void AttachFileLoader(IModelFileLoader loader) {
             loader.TitleChanged      += (obj, args) => UpdateTitle();
             loader.PreLoaded         += (obj, args) => PreFileLoaded?.Invoke(this, args);
             loader.Loaded            += (obj, args) => FileLoaded?.Invoke(this, args);
@@ -352,7 +352,7 @@ namespace SF3.Win.Forms {
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyFileLoader = new ModelFileLoader();
-                if (!copyFileLoader.LoadFile(copyToFilename, MakeEditor)) {
+                if (!copyFileLoader.LoadFile(copyToFilename, CreateModel)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
@@ -394,7 +394,7 @@ namespace SF3.Win.Forms {
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyFileEditor = new ModelFileLoader();
-                if (!copyFileEditor.LoadFile(copyFromFilename, MakeEditor)) {
+                if (!copyFileEditor.LoadFile(copyFromFilename, CreateModel)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
@@ -502,10 +502,10 @@ namespace SF3.Win.Forms {
         protected virtual string FileDialogFilter => "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*";
 
         /// <summary>
-        /// Factory method for creating an IBaseEditor in OpenFileDialog(). Must be overridden.
+        /// Factory method for creating an IBaseFile in OpenFileDialog(). Must be overridden.
         /// (Cannot be abstract because then the VS component editor wouldn't work)
         /// </summary>
-        protected virtual IBaseFile MakeEditor(IModelFileLoader loader) => throw new NotImplementedException();
+        protected virtual IBaseFile CreateModel(IModelFileLoader loader) => throw new NotImplementedException();
 
         /// <summary>
         /// The main menu strip.

@@ -12,9 +12,9 @@ namespace SF3.Win.Extensions {
         /// </summary>
         /// <param name="texture">This texture whose Bitmap image should be generated.</param>
         /// <returns>A bitmap image for the texture.</returns>
-        public static Bitmap CreateBitmap(this FrameModel frame, IByteData textureEditor) {
+        public static Bitmap CreateBitmap(this FrameModel frame, IByteData textureData) {
             // TODO: massive refactoring!
-            var imageDataInput = textureEditor.GetAllData();
+            var imageDataInput = textureData.GetAllData();
             var imageDataOutput = new byte[imageDataInput.Length];
 
             for (int i = 0; i < imageDataInput.Length; i += 2) {

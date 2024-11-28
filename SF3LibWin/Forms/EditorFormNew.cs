@@ -144,10 +144,10 @@ namespace SF3.Win.Forms {
 
             bool PerformLoad() {
                 try {
-                    if (!ModelLoader.LoadFile(filename, stream, MakeModel))
+                    if (!ModelLoader.LoadFile(filename, stream, CreateModel))
                         return false;
 
-                    if ((View = MakeView(ModelLoader, ModelLoader.Model)) == null)
+                    if ((View = CreateView(ModelLoader, ModelLoader.Model)) == null)
                         return false;
 
                     SuspendLayout();
@@ -363,7 +363,7 @@ namespace SF3.Win.Forms {
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyModelLoader = new ModelFileLoader();
-                if (!copyModelLoader.LoadFile(copyToFilename, MakeModel)) {
+                if (!copyModelLoader.LoadFile(copyToFilename, CreateModel)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
@@ -403,7 +403,7 @@ namespace SF3.Win.Forms {
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyModelLoader = new ModelFileLoader();
-                if (!copyModelLoader.LoadFile(copyFromFilename, MakeModel)) {
+                if (!copyModelLoader.LoadFile(copyFromFilename, CreateModel)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
@@ -514,13 +514,13 @@ namespace SF3.Win.Forms {
         /// Factory method for creating a model after the ModelLoader has finished loading the raw file. Must be overridden.
         /// (Cannot be abstract because then the VS component editor wouldn't work)
         /// </summary>
-        protected virtual IBaseFile MakeModel(IModelFileLoader loader) => throw new NotImplementedException();
+        protected virtual IBaseFile CreateModel(IModelFileLoader loader) => throw new NotImplementedException();
 
         /// <summary>
         /// Factory method for creating a view for a model created using MakeModel(). Must be overridden.
         /// (Cannot be abstract because then the VS component editor wouldn't work)
         /// </summary>
-        protected virtual IView MakeView(IModelFileLoader loader, IBaseFile model) => throw new NotImplementedException();
+        protected virtual IView CreateView(IModelFileLoader loader, IBaseFile model) => throw new NotImplementedException();
 
         /// <summary>
         /// The main menu strip.

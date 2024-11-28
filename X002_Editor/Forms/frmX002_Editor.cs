@@ -23,14 +23,14 @@ namespace SF3.X002_Editor.Forms {
 
         protected override string FileDialogFilter => "SF3 Data (X002.BIN)|X002.BIN|" + base.FileDialogFilter;
 
-        protected override IBaseFile MakeEditor(IModelFileLoader loader)
+        protected override IBaseFile CreateModel(IModelFileLoader loader)
             => X002_File.Create(loader.RawData, new NameGetterContext(Scenario), Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())
                 return false;
 
-            return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>()             {
+            return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
                 new PopulateOLVTabConfig(tabItems, olvItems, File.ItemTable),
                 new PopulateOLVTabConfig(tabSpells, olvSpells, File.SpellTable),
                 new PopulateOLVTabConfig(tabWeaponSpells, olvWeaponSpells, File.WeaponSpellTable),

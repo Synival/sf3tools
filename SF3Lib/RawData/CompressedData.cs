@@ -36,7 +36,7 @@ namespace SF3.RawData {
                             IsModified = true;
                         }
 
-                        // NOTE: We allow DecompressedEditor.IsModified to be 'false' while the parent's
+                        // NOTE: We allow DecompressedData.IsModified to be 'false' while the parent's
                         //       'NeedsCompression' value is true.
                     };
                 }

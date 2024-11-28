@@ -32,7 +32,7 @@ namespace SF3.Models.Files.MPD {
 
         TextureAnimationTable TextureAnimations { get; }
         FrameTable TextureAnimFrames { get; }
-        CompressedData[] TextureAnimFrameEditors { get; }
+        CompressedData[] TextureAnimFrameData { get; }
 
         Chunk[] Chunks { get; }
 

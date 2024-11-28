@@ -144,8 +144,8 @@ namespace SF3.Models.Files.X1 {
 
             // Add tables for battle tables.
             if (Battles != null) {
-                var battleEditors = Battles.Select(x => x.Value).Where(x => x != null).ToList();
-                tables.AddRange(battleEditors.SelectMany(x => x.Tables));
+                var battles = Battles.Select(x => x.Value).Where(x => x != null).ToList();
+                tables.AddRange(battles.SelectMany(x => x.Tables));
             }
 
             if (tileMovementAddress >= 0)

@@ -15,7 +15,7 @@ namespace SF3.ModelLoaders {
 
         private readonly EventHandler _onModifiedChangedDelegate;
 
-        public delegate IRawData BaseModelLoaderCreateRawEditorDelegate(IModelLoader loader);
+        public delegate IRawData BaseModelLoaderCreateRawDataDelegate(IModelLoader loader);
         public delegate IBaseFile BaseModelLoaderCreateModelDelegate(IModelLoader loader);
         public delegate bool BaseModelLoaderSaveDelegate(IModelLoader loader);
 
@@ -27,13 +27,13 @@ namespace SF3.ModelLoaders {
         /// </summary>
         /// <param name="createModel">Callback to create an model when possible.</param>
         /// <returns>'true' a new model was loaded and successfully created. Otherwise, 'false'.</returns>
-        protected bool PerformLoad(BaseModelLoaderCreateRawEditorDelegate createRawEditor, BaseModelLoaderCreateModelDelegate createModel) {
-            if (createRawEditor == null || createModel == null || IsLoaded)
+        protected bool PerformLoad(BaseModelLoaderCreateRawDataDelegate createRawData, BaseModelLoaderCreateModelDelegate createModel) {
+            if (createRawData == null || createModel == null || IsLoaded)
                 return false;
 
             PreLoaded?.Invoke(this, EventArgs.Empty);
 
-            if ((RawData = createRawEditor(this)) == null)
+            if ((RawData = createRawData(this)) == null)
                 return false;
             if ((Model = createModel(this)) == null) {
                 RawData = null;

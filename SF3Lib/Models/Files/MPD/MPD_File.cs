@@ -82,7 +82,7 @@ namespace SF3.Models.Files.MPD {
             }
 
             if (Chunks[3]?.Data?.Length > 0 && TextureAnimFrames != null) {
-                TextureAnimFrameEditors = new CompressedData[TextureAnimFrames.Rows.Length];
+                TextureAnimFrameData = new CompressedData[TextureAnimFrames.Rows.Length];
                 var frameOffsetEndId = areAnimatedTextures32Bit ? 0xFFFF_FFFEu : 0xFFFFu;
                 for (var i = 0; i < TextureAnimFrames.Rows.Length; i++) {
                     var frame = TextureAnimFrames.Rows[i];
@@ -90,7 +90,7 @@ namespace SF3.Models.Files.MPD {
                         var totalBytes = frame.Width * frame.Height * 2;
                         // TODO: this is super inefficient!!!
                         var bytes = Chunks[3].Data.Skip((int) frame.CompressedTextureOffset).Take(totalBytes).ToArray();
-                        TextureAnimFrameEditors[i] = new CompressedData(bytes, totalBytes);
+                        TextureAnimFrameData[i] = new CompressedData(bytes, totalBytes);
                     }
                 }
             }
@@ -164,7 +164,7 @@ namespace SF3.Models.Files.MPD {
             // Add some callbacks to all child editors.
             var editors = ChunkData
                 .Cast<IRawData>()
-                .Concat(TextureAnimFrameEditors?.Cast<IRawData>() ?? new IRawData[0])
+                .Concat(TextureAnimFrameData?.Cast<IRawData>() ?? new IRawData[0])
                 .Where(x => x != null)
                 .ToArray();
 
@@ -201,15 +201,15 @@ namespace SF3.Models.Files.MPD {
             var chunkPositions = new int[Chunks.Length];
 
             for (var i = 0; i < Chunks.Length; i++) {
-                var chunkEditor = ChunkData[i];
+                var chunkData = ChunkData[i];
 
                 // Finalize compressed chunks.
-                if (chunkEditor != null && (!onlyModified || chunkEditor.NeedsRecompression || chunkEditor.IsModified)) {
-                    if (chunkEditor.IsCompressed && !chunkEditor.Recompress())
+                if (chunkData != null && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified)) {
+                    if (chunkData.IsCompressed && !chunkData.Recompress())
                         return false;
 
                     // TODO: thie invalidates any references!!! maybe just update the thing???
-                    Chunks[i] = new Chunk(chunkEditor.Data, 0, chunkEditor.Data.Length);
+                    Chunks[i] = new Chunk(chunkData.Data, 0, chunkData.Data.Length);
                 }
 
                 // Update the chunk address/size table.
@@ -271,8 +271,8 @@ namespace SF3.Models.Files.MPD {
             if (ChunkData != null)
                 foreach (var ci in ChunkData.Where(ci => ci != null))
                     ci.Dispose();
-            if (TextureAnimFrameEditors != null)
-                foreach (var ci in TextureAnimFrameEditors.Where(tgfe => tgfe != null))
+            if (TextureAnimFrameData != null)
+                foreach (var ci in TextureAnimFrameData.Where(tgfe => tgfe != null))
                     ci.Dispose();
         }
 
@@ -307,7 +307,7 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public FrameTable TextureAnimFrames { get; private set; }
 
-        public CompressedData[] TextureAnimFrameEditors { get; private set; }
+        public CompressedData[] TextureAnimFrameData { get; private set; }
 
         public Chunk[] Chunks { get; private set; }
 

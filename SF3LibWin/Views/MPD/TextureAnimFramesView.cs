@@ -36,9 +36,9 @@ namespace SF3.Win.Views.MPD {
         void OnTextureChanged(object sender, EventArgs e) {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
             var frame = (FrameModel) item?.RowObject;
-            TextureView.Image = (frame == null || Model.TextureAnimFrameEditors[frame.ID] == null)
+            TextureView.Image = (frame == null || Model.TextureAnimFrameData[frame.ID] == null)
                 ? (System.Drawing.Image) null
-                : frame.CreateBitmap(Model.TextureAnimFrameEditors[frame.ID].DecompressedData);
+                : frame.CreateBitmap(Model.TextureAnimFrameData[frame.ID].DecompressedData);
         }
 
         public override void Destroy() {

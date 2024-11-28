@@ -24,10 +24,10 @@ namespace Grayscaler {
                 Console.Write(file + ": ");
 
                 // Get a raw data editing context for the file.
-                var byteEditor = new ByteData(File.ReadAllBytes(file));
+                var byteData = new ByteData(File.ReadAllBytes(file));
 
                 // Create an MPD file that works with our new ByteData.
-                var mpdFile = MPD_File.Create(byteEditor, nameGetter, scenario);
+                var mpdFile = MPD_File.Create(byteData, nameGetter, scenario);
 
                 // Gather all textures into one collection.
                 var textures = mpdFile.TextureChunks.Where(x => x != null && x.TextureTable != null).SelectMany(x => x.TextureTable.Rows).ToArray();

@@ -22,7 +22,7 @@ namespace SF3.X013_Editor.Forms {
 
         protected override string FileDialogFilter => "SF3 Data (X013.BIN)|X013.BIN|" + base.FileDialogFilter;
 
-        protected override IBaseFile MakeEditor(IModelFileLoader loader)
+        protected override IBaseFile CreateModel(IModelFileLoader loader)
             => X013_File.Create(loader.RawData, new NameGetterContext(Scenario), Scenario);
 
         protected override bool OnLoad() {

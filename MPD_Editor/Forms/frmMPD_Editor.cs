@@ -36,10 +36,10 @@ namespace SF3.MPD_Editor.Forms {
         protected override string FileDialogFilter
             => "SF3 Data (*.MPD)|*.MPD|" + base.FileDialogFilter;
 
-        protected override IBaseFile MakeModel(IModelFileLoader loader)
+        protected override IBaseFile CreateModel(IModelFileLoader loader)
             => MPD_File.Create(loader.RawData, new NameGetterContext(Scenario), Scenario);
 
-        protected override IView MakeView(IModelFileLoader loader, IBaseFile model)
+        protected override IView CreateView(IModelFileLoader loader, IBaseFile model)
             => new MPD_View(loader.Filename, (MPD_File) model);
 
         private void tsmiTextures_ImportFolder_Click(object sender, System.EventArgs e) {
