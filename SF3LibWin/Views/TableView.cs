@@ -132,6 +132,12 @@ namespace SF3.Win.Views {
             base.Destroy();
         }
 
+        public override void RefreshContent() {
+            if (OLVControl == null)
+                return;
+            OLVControl.RefreshAllItems();
+        }
+
         public Table Table { get; }
         public Type ModelType { get; }
         public INameGetterContext NameGetterContext { get; }

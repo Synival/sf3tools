@@ -16,6 +16,13 @@ namespace SF3.Win.Views.MPD {
             SurfaceMapControl.UpdateTextures(textureData, Editor.TextureChunks);
         }
 
+        public override void RefreshContent() {
+            if (SurfaceMapControl == null)
+                return;
+
+            // TODO: how to refresh???
+        }
+
         public IMPD_Editor Editor { get; }
 
         public SurfaceMapControl SurfaceMapControl => (SurfaceMapControl) Control;

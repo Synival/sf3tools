@@ -48,6 +48,11 @@ namespace SF3.Win.Views {
             return childControl;
         }
 
+        public override void RefreshContent() {
+            foreach (var child in ChildViews)
+                child.RefreshContent();
+        }
+
         private List<IView> _childViews = null;
         public IEnumerable<IView> ChildViews => _childViews;
     }

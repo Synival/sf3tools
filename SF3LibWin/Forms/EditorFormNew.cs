@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -9,13 +8,13 @@ using BrightIdeasSoftware;
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using DFRLib.Types;
-using SF3.Win.Extensions;
 using SF3.Editors;
 using SF3.Loaders;
 using SF3.Types;
 using static CommonLib.Win.Utils.MessageUtils;
 using DFRLib.Win.Forms;
 using static SF3.Win.Extensions.ObjectListViewExtensions;
+using SF3.Win.Views;
 
 namespace SF3.Win.Forms {
     /// <summary>
@@ -33,12 +32,6 @@ namespace SF3.Win.Forms {
 
             AttachFileEditor(FileLoader);
         }
-/*
-        public EditorFormNew(IContainer container) {
-            container.Add(this);
-            InitializeComponent();
-        }
-*/
 
         /// <summary>
         /// Function to be called after derived class's InitializeComponent() is called.
@@ -117,13 +110,6 @@ namespace SF3.Win.Forms {
 
             FileModifiedChanged += (obj, eargs) => tsmiFile_Save.Enabled = IsLoaded && FileLoader.IsModified;
 
-            ObjectListViews = this.GetAllObjectsOfTypeInFields<ObjectListView>(false);
-            if (extraOLVs != null)
-                ObjectListViews.AddRange(extraOLVs);
-
-            foreach (var olv in ObjectListViews)
-                olv.Enhance(() => FileLoader.Editor?.NameGetterContext);
-
             UpdateTitle();
         }
 
@@ -156,15 +142,32 @@ namespace SF3.Win.Forms {
             if (!CloseFile())
                 return false;
 
-            var success = new Func<bool>(() => {
+            bool PerformLoad() {
                 try {
-                    return FileLoader.LoadFile(filename, stream, MakeEditor) && OnLoad();
+                    if (!FileLoader.LoadFile(filename, stream, MakeModel))
+                        return false;
+
+                    if ((View = MakeView(FileLoader, FileLoader.Editor)) == null)
+                        return false;
+
+                    SuspendLayout();
+                    var control = View.Create();
+                    control.Dock = DockStyle.Fill;
+                    Controls.Add(control);
+                    control.BringToFront(); // If this isn't in the front, the menu is placed behind it (eep)
+                    ResumeLayout();
+
+                    if (!OnLoad())
+                        return false;
+
+                    return true;
                 }
                 catch {
                     return false;
                 }
-            })();
+            }
 
+            var success = PerformLoad();
             if (!success) {
                 //wrong file was selected
                 ErrorMessage("Data in '" + filename + "' appears corrupt or invalid.\n" +
@@ -197,8 +200,6 @@ namespace SF3.Win.Forms {
         public bool SaveFileDialog() {
             if (FileLoader == null)
                 return false;
-
-            ObjectListViews.ForEach(x => x.FinishCellEdit());
 
             var savefile = new SaveFileDialog {
                 Filter = FileDialogFilter,
@@ -267,9 +268,20 @@ namespace SF3.Win.Forms {
                 if (PromptForSave() == DialogResult.Cancel)
                     return false;
 
-            ObjectListViews.ForEach(x => x.ClearObjects());
+            bool wasFocused = ContainsFocus;
+
+            SuspendLayout();
+            if (View != null) {
+                View.Destroy();
+                View.Dispose();
+                View = null;
+            }
+            ResumeLayout();
+
+            if (wasFocused && !ContainsFocus)
+                _ = Focus();
+
             _ = FileLoader.Close();
-            FileLoader.Dispose();
 
             return OnClose();
         }
@@ -340,8 +352,6 @@ namespace SF3.Win.Forms {
             if (FileLoader == null)
                 return;
 
-            ObjectListViews.ForEach(x => x.FinishCellEdit());
-
             var saveFileDialog = new SaveFileDialog {
                 Title = "Copy Tables To",
                 Filter = FileDialogFilter
@@ -353,7 +363,7 @@ namespace SF3.Win.Forms {
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyFileLoader = new FileLoader();
-                if (!copyFileLoader.LoadFile(copyToFilename, MakeEditor)) {
+                if (!copyFileLoader.LoadFile(copyToFilename, MakeModel)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
@@ -382,8 +392,6 @@ namespace SF3.Win.Forms {
             if (FileLoader == null)
                 return;
 
-            ObjectListViews.ForEach(x => x.FinishCellEdit());
-
             var openFileDialog = new OpenFileDialog {
                 Title = "Copy Tables From",
                 Filter = FileDialogFilter
@@ -395,7 +403,7 @@ namespace SF3.Win.Forms {
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyFileEditor = new FileLoader();
-                if (!copyFileEditor.LoadFile(copyFromFilename, MakeEditor)) {
+                if (!copyFileEditor.LoadFile(copyFromFilename, MakeModel)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
@@ -409,7 +417,7 @@ namespace SF3.Win.Forms {
                 return;
             }
 
-            ObjectListViews.ForEach(x => x.RefreshAllItems());
+            View.RefreshContent();
             ProduceAndPresentBulkCopyReport(result, FileLoader.Editor.NameGetterContext);
         }
 
@@ -487,9 +495,9 @@ namespace SF3.Win.Forms {
         protected IFileLoader FileLoader { get; } = new FileLoader();
 
         /// <summary>
-        /// All ObjectListView's present in the form. Populated automatically.
+        /// The view for the current model.
         /// </summary>
-        protected List<ObjectListView> ObjectListViews { get; private set; }
+        protected IView View { get; private set; } = null;
 
         /// <summary>
         /// The title to set when using UpdateTitle().
@@ -503,10 +511,16 @@ namespace SF3.Win.Forms {
         protected virtual string FileDialogFilter => "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*";
 
         /// <summary>
-        /// Factory method for creating an IBaseEditor in OpenFileDialog(). Must be overridden.
+        /// Factory method for creating a model after the FileLoader has finished loading the raw file. Must be overridden.
         /// (Cannot be abstract because then the VS component editor wouldn't work)
         /// </summary>
-        protected virtual IBaseEditor MakeEditor(IFileLoader loader) => throw new NotImplementedException();
+        protected virtual IBaseEditor MakeModel(IFileLoader loader) => throw new NotImplementedException();
+
+        /// <summary>
+        /// Factory method for creating a view for a model created using MakeModel(). Must be overridden.
+        /// (Cannot be abstract because then the VS component editor wouldn't work)
+        /// </summary>
+        protected virtual IView MakeView(IFileLoader loader, IBaseEditor model) => throw new NotImplementedException();
 
         /// <summary>
         /// The main menu strip.

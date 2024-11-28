@@ -12,5 +12,11 @@ namespace SF3.Win.Views {
             get => TextureControl.TextureImage;
             set => TextureControl.TextureImage = value;
         }
+
+        public override void RefreshContent() {
+            var old = TextureControl.TextureImage;
+            TextureControl.TextureImage = null;
+            TextureControl.TextureImage = old;
+        }
     }
 }

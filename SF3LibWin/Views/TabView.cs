@@ -131,6 +131,11 @@ namespace SF3.Win.Views {
             return childControl;
         }
 
+        public override void RefreshContent() {
+            foreach (var child in ChildViews)
+                child.RefreshContent();
+        }
+
         public TabControl TabControl => (TabControl) Control;
 
         private List<IView> _childViews = null;

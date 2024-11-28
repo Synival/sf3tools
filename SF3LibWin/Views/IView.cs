@@ -18,6 +18,11 @@ namespace SF3.Win.Views {
         void Destroy();
 
         /// <summary>
+        /// Forces the view to re-examine its content and before a data and screen refresh.
+        /// </summary>
+        void RefreshContent();
+
+        /// <summary>
         /// Name to identify this editor control.
         /// </summary>
         string Name { get; }

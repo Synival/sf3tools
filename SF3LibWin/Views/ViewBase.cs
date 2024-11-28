@@ -23,6 +23,8 @@ namespace SF3.Win.Views {
 
         public virtual void Dispose() => Destroy();
 
+        public abstract void RefreshContent();
+
         public string Name { get; }
         public Control Control { get; protected set; } = null;
     }

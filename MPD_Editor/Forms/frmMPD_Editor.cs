@@ -15,6 +15,7 @@ using System.Diagnostics;
 using SF3.Types;
 using static CommonLib.Win.Utils.MessageUtils;
 using static CommonLib.Utils.PixelConversion;
+using SF3.Win.Views;
 
 namespace SF3.MPD_Editor.Forms {
     public partial class frmMPDEditor : EditorFormNew {
@@ -22,8 +23,6 @@ namespace SF3.MPD_Editor.Forms {
         protected override string Version => "0.3";
 
         public IMPD_Editor Editor => base.FileLoader.Editor as IMPD_Editor;
-        public MPD_View View { get; private set; } = null;
-        public Control Control { get; private set; } = null;
 
         public frmMPDEditor() {
             InitializeComponent();
@@ -38,64 +37,11 @@ namespace SF3.MPD_Editor.Forms {
         protected override string FileDialogFilter
             => "SF3 Data (*.MPD)|*.MPD|" + base.FileDialogFilter;
 
-        protected override IBaseEditor MakeEditor(IFileLoader loader)
+        protected override IBaseEditor MakeModel(IFileLoader loader)
             => Editors.MPD.MPD_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
-        protected override bool OnLoad() {
-            if (!base.OnLoad())
-                return false;
-
-            SuspendLayout();
-    
-            try {
-                View = new MPD_View(FileLoader.Filename, Editor);
-                Control = View.Create();
-            }
-            catch {
-                if (View != null) {
-                    View.Dispose();
-                    View = null;
-                }
-                if (Control != null) {
-                    Control.Dispose();
-                    Control = null;
-                }
-                ResumeLayout();
-                return false;
-            }
-
-            Control.Dock = DockStyle.Fill;
-            Controls.Add(Control);
-            Control.BringToFront(); // If this isn't in the front, the menu is placed behind it (eep)
-            ResumeLayout();
-
-            return true;
-        }
-
-        protected override bool OnClose() {
-            bool wasFocused = ContainsFocus;
-
-            SuspendLayout();
-            if (View != null) {
-                View.Destroy();
-                View.Dispose();
-                View = null;
-            }
-            if (Control != null) {
-                Control.Parent = null;
-                Control.Dispose();
-                Control = null;
-            }
-            ResumeLayout();
-
-            if (!base.OnClose())
-                return false;
-
-            if (wasFocused && !ContainsFocus)
-                Focus();
-
-            return true;
-        }
+        protected override IView MakeView(IFileLoader loader, IBaseEditor model)
+            => new MPD_View(loader.Filename, (Editors.MPD.MPD_Editor) model);
 
         private void tsmiTextures_ImportFolder_Click(object sender, System.EventArgs e) {
             using (var dialog = new CommonOpenFileDialog() {
