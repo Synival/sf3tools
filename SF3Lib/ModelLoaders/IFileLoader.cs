@@ -3,9 +3,9 @@ using System.IO;
 using CommonLib.NamedValues;
 using SF3.RawEditors;
 using SF3.Editors;
-using static SF3.Loaders.FileLoaderDelegates;
+using static SF3.ModelLoaders.FileLoaderDelegates;
 
-namespace SF3.Loaders {
+namespace SF3.ModelLoaders {
     /// <summary>
     /// Used for loading, saving, reading, and modifying .BIN files.
     /// </summary>

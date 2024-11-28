@@ -2,7 +2,7 @@
 using SF3.Editors;
 using SF3.RawEditors;
 
-namespace SF3.Loaders {
+namespace SF3.ModelLoaders {
     public static class FileLoaderDelegates {
 
         public delegate IBaseEditor FileLoaderCreateEditorDelegate(IFileLoader loader);

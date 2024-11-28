@@ -2,7 +2,7 @@ using System.Windows.Forms;
 using SF3.Win.Forms;
 using SF3.Editors;
 using SF3.Editors.MPD;
-using SF3.Loaders;
+using SF3.ModelLoaders;
 using SF3.NamedValues;
 using SF3.Win.Views.MPD;
 using Microsoft.WindowsAPICodePack.Dialogs;

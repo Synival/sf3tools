@@ -2,7 +2,7 @@
 using SF3.RawEditors;
 using SF3.Editors;
 
-namespace SF3.Loaders {
+namespace SF3.ModelLoaders {
     /// <summary>
     /// Interface for loading editors.
     /// </summary>

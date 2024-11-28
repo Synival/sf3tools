@@ -3,7 +3,7 @@ using SF3.RawEditors;
 using SF3.Editors;
 using CommonLib;
 
-namespace SF3.Loaders {
+namespace SF3.ModelLoaders {
     public abstract class EditorLoader : IEditorLoader {
         protected EditorLoader() {
             _title = UnloadedTitle;

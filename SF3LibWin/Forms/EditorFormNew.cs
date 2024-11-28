@@ -9,7 +9,7 @@ using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using DFRLib.Types;
 using SF3.Editors;
-using SF3.Loaders;
+using SF3.ModelLoaders;
 using SF3.Types;
 using static CommonLib.Win.Utils.MessageUtils;
 using DFRLib.Win.Forms;

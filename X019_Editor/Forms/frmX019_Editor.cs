@@ -4,7 +4,7 @@ using SF3.Win.Extensions;
 using SF3.Win.Forms;
 using SF3.Editors;
 using SF3.Editors.X019;
-using SF3.Loaders;
+using SF3.ModelLoaders;
 using SF3.NamedValues;
 using SF3.Types;
 using static SF3.Win.Extensions.TabControlExtensions;
