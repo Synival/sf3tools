@@ -26,8 +26,8 @@ namespace CommonLib.Extensions {
             var props = columnProperties
                 .Select(x => new { Property = x, Attributes = x.GetCustomAttributes(typeof(DataViewModelColumnAttribute), true) })
                 .Where(x => x.Attributes.Length == 1)
-                .OrderBy(x => ((DataViewModelColumnAttribute) x.Attributes[0]).DisplayOrder)
-                .ToDictionary(x => x.Property, x => (DataViewModelColumnAttribute) x.Attributes[0]);
+                .OrderBy(x => ((DataViewModelColumnAttribute) x.Attributes[0]).Column.DisplayOrder)
+                .ToDictionary(x => x.Property, x => ((DataViewModelColumnAttribute) x.Attributes[0]).Column);
 
             var vm = new DataViewModel(props);
             _cachedDataViewModels.Add(type.AssemblyQualifiedName, vm);

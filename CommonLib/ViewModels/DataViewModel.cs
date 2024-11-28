@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using CommonLib.Attributes;
 
 namespace CommonLib.ViewModels {
     public class DataViewModel {
-        public DataViewModel(Dictionary<PropertyInfo, DataViewModelColumnAttribute> properties) {
+        public DataViewModel(Dictionary<PropertyInfo, DataViewModelColumn> properties) {
             Properties = properties;
         }
 
-        public Dictionary<PropertyInfo, DataViewModelColumnAttribute> Properties { get; }
+        public Dictionary<PropertyInfo, DataViewModelColumn> Properties { get; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using CommonLib.ViewModels;
 
 namespace CommonLib.Attributes {
     public class DataViewModelColumnAttribute : Attribute {
@@ -10,19 +11,16 @@ namespace CommonLib.Attributes {
             int    minWidth      = 0,
             bool   isReadOnly    = false
         ) {
-            DisplayName   = displayName;
-            DisplayOrder  = displayOrder;
-            DisplayFormat = displayFormat;
-            IsPointer     = isPointer;
-            MinWidth      = minWidth;
-            IsReadOnly    = isReadOnly;
+            Column = new DataViewModelColumn(
+                displayName:   displayName,
+                displayOrder:  displayOrder,
+                displayFormat: displayFormat,
+                isPointer:     isPointer,
+                minWidth:      minWidth,
+                isReadOnly:    isReadOnly
+            );
         }
 
-        public string DisplayName { get; }
-        public int DisplayOrder { get; }
-        public string DisplayFormat { get; }
-        public bool IsPointer { get; }
-        public int MinWidth { get; }
-        public bool IsReadOnly { get; }
+        public readonly DataViewModelColumn Column;
     }
 }
