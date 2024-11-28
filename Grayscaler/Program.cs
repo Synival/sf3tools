@@ -40,9 +40,7 @@ namespace Grayscaler {
                     .Where(x => x.FrameNum > 0)
                     .ToArray();
 
-                var textures = textures1.Cast<ITexture>().Concat(textures2).ToArray();
-
-                Console.WriteLine(textures.Length + " textures");
+                Console.WriteLine((textures1.Length + textures2.Length) + " textures");
 
                 // Transform every texture in ABGR1555 format to grayscale.
                 foreach (var tc in textures1) {
@@ -50,15 +48,16 @@ namespace Grayscaler {
                         continue;
                     tc.RawImageData16Bit = MakeTextureGrayscale(tc.ImageData16Bit);
                 }
+
                 foreach (var tc in textures2) {
                     if (tc.AssumedPixelFormat != TexturePixelFormat.ABGR1555)
                         continue;
-                    var frameData = mpdFile.TextureAnimFrameData[tc.ID];
-                    tc.UpdateImageData(frameData, MakeTextureGrayscale(tc.ImageData16Bit));
+                    var frameData = mpdFile.TextureAnimFrameData[tc.ID].DecompressedData;
+                    _ = tc.UpdateImageData(frameData, MakeTextureGrayscale(tc.ImageData16Bit));
                 }
 
                 // This will compress chunks and update the chunk table header.
-                mpdFile.Finish();
+                _ = mpdFile.Finish();
 
                 // Write it back out!
                 var output = mpdFile.Data.GetAllData();

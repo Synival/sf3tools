@@ -82,6 +82,8 @@ namespace SF3.Models.Files.MPD {
             }
 
             if (Chunks[3]?.Data?.Length > 0 && TextureAnimFrames != null) {
+                ChunkData[3] = new ChunkData(Chunks[3].Data, false);
+
                 TextureAnimFrameData = new CompressedData[TextureAnimFrames.Rows.Length];
                 var frameOffsetEndId = areAnimatedTextures32Bit ? 0xFFFF_FFFEu : 0xFFFFu;
                 for (var i = 0; i < TextureAnimFrames.Rows.Length; i++) {
@@ -89,7 +91,7 @@ namespace SF3.Models.Files.MPD {
                     if (frame.FrameNum > 0 && frame.CompressedTextureOffset != frameOffsetEndId) {
                         var totalBytes = frame.Width * frame.Height * 2;
                         // TODO: this is super inefficient!!!
-                        var bytes = Chunks[3].Data.Skip((int) frame.CompressedTextureOffset).Take(totalBytes).ToArray();
+                        var bytes = ChunkData[3].Data.Skip((int) frame.CompressedTextureOffset).Take(totalBytes).ToArray();
                         TextureAnimFrameData[i] = new CompressedData(bytes, totalBytes);
                         _ = frame.FetchAndAssignImageData(TextureAnimFrameData[i].DecompressedData);
                     }
@@ -190,7 +192,7 @@ namespace SF3.Models.Files.MPD {
 
         public bool Recompress(bool onlyModified) {
             var chunksModified = ChunkData.Any(x => x != null && (x.IsModified || x.NeedsRecompression));
-            var framesModified = TextureAnimFrameData.Any(x => x != null && (x.IsModified || x.NeedsRecompression));
+            var framesModified = TextureAnimFrameData?.Any(x => x != null && (x.IsModified || x.NeedsRecompression)) ?? false;
 
             // Don't bother doing anything if no chunks have been modified.
             if (onlyModified && !chunksModified && !framesModified)
@@ -198,7 +200,31 @@ namespace SF3.Models.Files.MPD {
 
             const int ramOffset = 0x290000;
 
-            // TODO: Rebuild Chunk[3] with updated animated texture frames.
+            // Rebuild Chunk[3] with updated animated texture frames.
+            // TODO: check for data collisions!!!! grow and shrink this chunk!!!!
+            if (TextureAnimFrameData != null) {
+                var chunk3 = ChunkData[3].DecompressedData;
+                for (var i = 0; i < TextureAnimFrameData.Length; i++) {
+                    var frameData = TextureAnimFrameData[i];
+                    if (frameData == null)
+                        continue;
+
+                    if (!onlyModified || frameData.NeedsRecompression || frameData.IsModified) {
+                        var oldSize = TextureAnimFrameData[i].Data.Length;
+                        _ = frameData.Recompress();
+                        var newSize = TextureAnimFrameData[i].Data.Length;
+
+                        if (newSize > oldSize) {
+                            throw new NotImplementedException("We can't expand animated textures yet :(");
+                        }
+
+                        var off = (int) TextureAnimFrames.Rows[i].CompressedTextureOffset;
+                        var compressedFrameData = TextureAnimFrameData[i].Data;
+                        for (var j = 0; j < compressedFrameData.Length; j++)
+                            chunk3.SetByte(off++, compressedFrameData[j]);
+                    }
+                }
+            }
 
             // We'll need to completely rewrite this file. Start by recompressing chunks.
             var currentChunkPos = 0x2100;
