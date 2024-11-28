@@ -37,8 +37,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void CritModTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.CritModTable;
+                var file = testCase.Create();
+                var table = file.CritModTable;
 
                 Assert.AreEqual(20, table.Rows[0].Advantage);
                 Assert.AreEqual(236, table.Rows[0].Disadvantage);
@@ -50,8 +50,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void CritrateTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.CritrateTable;
+                var file = testCase.Create();
+                var table = file.CritrateTable;
 
                 Assert.AreEqual(testCase.Scenario == ScenarioType.Scenario1 ? 0 : 3, table.Rows[0].NoSpecial);
                 Assert.AreEqual(20, table.Rows[0].OneSpecial);
@@ -74,8 +74,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void ExpLimitTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.ExpLimitTable;
+                var file = testCase.Create();
+                var table = file.ExpLimitTable;
 
                 Assert.AreEqual(49, table.Rows[0].ExpCheck);
                 Assert.AreEqual(49, table.Rows[0].ExpReplacement);
@@ -87,8 +87,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void FriendshipExpTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.FriendshipExpTable;
+                var file = testCase.Create();
+                var table = file.FriendshipExpTable;
 
                 Assert.AreEqual(0, table.Rows[0].SLvl0);
                 Assert.AreEqual(10, table.Rows[0].SLvl1);
@@ -103,8 +103,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void HealExpTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.HealExpTable;
+                var file = testCase.Create();
+                var table = file.HealExpTable;
 
                 Assert.AreEqual(10, table.Rows[0].HealBonus);
 
@@ -115,8 +115,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void MagicBonusTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.MagicBonusTable;
+                var file = testCase.Create();
+                var table = file.MagicBonusTable;
 
                 Assert.AreEqual(0, table.Rows[0].EarthBonus);
                 Assert.AreEqual(0, table.Rows[0].FireBonus);
@@ -152,8 +152,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void SoulfailTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.SoulfailTable;
+                var file = testCase.Create();
+                var table = file.SoulfailTable;
 
                 Assert.AreEqual(246, table.Rows[0].ExpLost);
 
@@ -164,8 +164,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void SoulmateTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.SoulmateTable;
+                var file = testCase.Create();
+                var table = file.SoulmateTable;
 
                 Assert.AreEqual(5, table.Rows[0].Chance);
                 Assert.AreEqual(15, table.Rows[1].Chance);
@@ -181,8 +181,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void SpecialChanceTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.SpecialChanceTable;
+                var file = testCase.Create();
+                var table = file.SpecialChanceTable;
 
                 Assert.AreEqual(59, table.Rows[0].TwoSpecials2);
                 Assert.AreEqual(69, table.Rows[0].ThreeSpecials2);
@@ -198,8 +198,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void SpecialsTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.SpecialsTable;
+                var file = testCase.Create();
+                var table = file.SpecialsTable;
 
                 Assert.AreEqual(0, table.Rows[0].Unknown1);
                 Assert.AreEqual(0, table.Rows[0].DamageCalc);
@@ -223,8 +223,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void StatusEffectTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.StatusEffectTable;
+                var file = testCase.Create();
+                var table = file.StatusEffectTable;
 
                 Assert.AreEqual(100, table.Rows[0].StatusLuck0);
                 Assert.AreEqual(95, table.Rows[0].StatusLuck1);
@@ -277,8 +277,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void SupportStatsTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.SupportStatsTable;
+                var file = testCase.Create();
+                var table = file.SupportStatsTable;
 
                 Assert.AreEqual(5, table.Rows[0].SLvlStat1);
                 Assert.AreEqual(7, table.Rows[0].SLvlStat2);
@@ -297,8 +297,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void SupportTypeTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.SupportTypeTable;
+                var file = testCase.Create();
+                var table = file.SupportTypeTable;
 
                 Assert.AreEqual(1, table.Rows[0].SupportA);
                 Assert.AreEqual(0, table.Rows[0].SupportB);
@@ -316,8 +316,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void WeaponSpellRankTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.WeaponSpellRankTable;
+                var file = testCase.Create();
+                var table = file.WeaponSpellRankTable;
 
                 Assert.AreEqual(0, table.Rows[0].RankNone);
                 Assert.AreEqual(0, table.Rows[0].RankC);

@@ -19,7 +19,7 @@ namespace SF3.Models.Tables {
         bool Reset();
 
         /// <summary>
-        /// The editor used for this table.
+        /// The raw data used for this table.
         /// </summary>
         IRawData Data { get; }
 

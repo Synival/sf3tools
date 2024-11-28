@@ -43,8 +43,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void ItemTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.ItemTable;
+                var file = testCase.Create();
+                var table = file.ItemTable;
 
                 Assert.AreEqual(0, table.Rows[0].Price);
                 Assert.AreEqual(0, table.Rows[0].WeaponType);
@@ -74,8 +74,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void SpellTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.SpellTable;
+                var file = testCase.Create();
+                var table = file.SpellTable;
 
                 Assert.AreEqual(0, table.Rows[0].Element);
                 Assert.AreEqual(0, table.Rows[0].Lv1Cost);
@@ -102,8 +102,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void WeaponSpellTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.WeaponSpellTable;
+                var file = testCase.Create();
+                var table = file.WeaponSpellTable;
 
                 Assert.AreEqual(0, table.Rows[0].SpellID2);
                 Assert.AreEqual(0, table.Rows[0].Weapon0);
@@ -130,8 +130,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void LoadingTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.LoadingTable;
+                var file = testCase.Create();
+                var table = file.LoadingTable;
 
                 Assert.AreEqual(1, table.Rows[0].LocationID);
                 Assert.AreEqual(testCase.Scenario <= ScenarioType.Scenario2 ? 27 : 0, table.Rows[0].Music);
@@ -149,8 +149,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void StatBoostTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.StatBoostTable;
+                var file = testCase.Create();
+                var table = file.StatBoostTable;
 
                 Assert.AreEqual(3, table.Rows[0].Stat);
                 Assert.AreEqual(3, table.Rows[1].Stat);
@@ -167,8 +167,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void WeaponRankTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.WeaponRankTable;
+                var file = testCase.Create();
+                var table = file.WeaponRankTable;
 
                 Assert.AreEqual(0, table.Rows[0].Skill0);
                 Assert.AreEqual(3, table.Rows[1].Skill1);
@@ -182,8 +182,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void AttackResistTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.AttackResistTable;
+                var file = testCase.Create();
+                var table = file.AttackResistTable;
 
                 Assert.AreEqual(15, table.Rows[0].Attack);
                 Assert.AreEqual(30, table.Rows[0].Resist);
@@ -195,10 +195,10 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void LoadedOverrideTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.LoadedOverrideTable;
+                var file = testCase.Create();
+                var table = file.LoadedOverrideTable;
 
-                switch (editor.Scenario) {
+                switch (file.Scenario) {
                     case ScenarioType.Scenario1:
                         Assert.AreEqual(0, table.Rows[0].SynChr);
                         Assert.AreEqual(0x1D, table.Rows[0].SynMpd);
@@ -230,8 +230,8 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void WarpTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
-                var table = editor.WarpTable;
+                var file = testCase.Create();
+                var table = file.WarpTable;
 
                 // Only Scenario1 has a warp table in X002.BIN
                 if (testCase.Scenario != ScenarioType.Scenario1) {

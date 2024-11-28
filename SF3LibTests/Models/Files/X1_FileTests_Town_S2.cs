@@ -21,8 +21,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void EnterTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var table = editor.EnterTable;
+            var file = TestCase.Create();
+            var table = file.EnterTable;
 
             Assert.AreEqual(400, table.Rows[0].EnterXPos);
             Assert.AreEqual(400, table.Rows[0].EnterZPos);
@@ -38,8 +38,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void NpcTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var table = editor.NpcTable;
+            var file = TestCase.Create();
+            var table = file.NpcTable;
 
             Assert.AreEqual(0x45, table.Rows[0].SpriteID);
             Assert.AreEqual(784, table.Rows[0].NpcXPos);
@@ -54,8 +54,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void TreasureTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var table = editor.TreasureTable;
+            var file = TestCase.Create();
+            var table = file.TreasureTable;
 
             Assert.AreEqual(0x00, table.Rows[0].Searched);
             Assert.AreEqual(0x909, table.Rows[0].EventParameter);
@@ -72,8 +72,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void ArrowTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var table = editor.ArrowTable;
+            var file = TestCase.Create();
+            var table = file.ArrowTable;
 
             Assert.AreEqual(0x8C7, table.Rows[0].ArrowText);
             Assert.AreEqual(0x28, table.Rows[0].ArrowWarp);
@@ -86,8 +86,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void WarpTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var table = editor.WarpTable;
+            var file = TestCase.Create();
+            var table = file.WarpTable;
 
             Assert.AreEqual(0x4D, table.Rows[0].WarpMap);
             Assert.AreEqual(0x00, table.Rows[0].WarpType);

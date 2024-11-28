@@ -21,8 +21,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void AITable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var battle = editor.Battles[MapLeaderType.Synbios];
+            var file = TestCase.Create();
+            var battle = file.Battles[MapLeaderType.Synbios];
             var table = battle.AITable;
 
             Assert.AreEqual(29, table.Rows[0].TargetX);
@@ -36,8 +36,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void BattlePointersTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var table = editor.BattlePointersTable;
+            var file = TestCase.Create();
+            var table = file.BattlePointersTable;
 
             Assert.AreEqual(0x6061170, table.Rows[0].BattlePointer);
             Assert.AreEqual(0, table.Rows[1].BattlePointer);
@@ -49,8 +49,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void CustomMovementTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var battle = editor.Battles[MapLeaderType.Synbios];
+            var file = TestCase.Create();
+            var battle = file.Battles[MapLeaderType.Synbios];
             var table = battle.CustomMovementTable;
 
             Assert.AreEqual(27, table.Rows[0].CustomMovementX1);
@@ -64,8 +64,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void HeaderTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var battle = editor.Battles[MapLeaderType.Synbios];
+            var file = TestCase.Create();
+            var battle = file.Battles[MapLeaderType.Synbios];
             var table = battle.BattleHeaderTable;
 
             Assert.AreEqual(0, table.Rows[0].SizeUnknown1);
@@ -76,8 +76,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void SlotTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var battle = editor.Battles[MapLeaderType.Synbios];
+            var file = TestCase.Create();
+            var battle = file.Battles[MapLeaderType.Synbios];
             var table = battle.SlotTable;
 
             Assert.AreEqual(0xFFFF, table.Rows[0].EnemyID);
@@ -93,8 +93,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void SpawnZoneTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var battle = editor.Battles[MapLeaderType.Synbios];
+            var file = TestCase.Create();
+            var battle = file.Battles[MapLeaderType.Synbios];
             var table = battle.SpawnZoneTable;
 
             Assert.AreEqual(0x400, table.Rows[0].UnknownAI00);
@@ -112,8 +112,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void TreasureTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var table = editor.TreasureTable;
+            var file = TestCase.Create();
+            var table = file.TreasureTable;
 
             Assert.AreEqual(0x8013, table.Rows[0].Searched);
             Assert.AreEqual(0x53, table.Rows[0].EventParameter);

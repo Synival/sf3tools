@@ -7,13 +7,13 @@ namespace SF3.Win.Views {
     /// </summary>
     public interface IView : IDisposable {
         /// <summary>
-        /// Called when the editor is ready to be instantiated.
+        /// Called when a view is ready to be created, Creates the Control in its entirety.
         /// </summary>
         /// <returns>The new Control created, or 'null' on failure.</returns>
         Control Create();
 
         /// <summary>
-        /// Called when an editor is ready to be discarded. Called automatically on disposal.
+        /// Called when a view is ready to be discarded. Called automatically on disposal.
         /// </summary>
         void Destroy();
 
@@ -23,7 +23,7 @@ namespace SF3.Win.Views {
         void RefreshContent();
 
         /// <summary>
-        /// Name to identify this editor control.
+        /// Name to identify this view.
         /// </summary>
         string Name { get; }
 

@@ -21,8 +21,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void EnterTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var table = editor.EnterTable;
+            var file = TestCase.Create();
+            var table = file.EnterTable;
 
             Assert.AreEqual(1472, table.Rows[0].EnterXPos);
             Assert.AreEqual(480, table.Rows[0].EnterZPos);
@@ -38,8 +38,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void NpcTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var table = editor.NpcTable;
+            var file = TestCase.Create();
+            var table = file.NpcTable;
 
             Assert.AreEqual(0x42, table.Rows[0].SpriteID);
             Assert.AreEqual(1592, table.Rows[0].NpcXPos);
@@ -54,8 +54,8 @@ namespace SF3.Tests.Models.Files {
 
         [TestMethod]
         public void TreasureTable_HasExpectedData() {
-            var editor = TestCase.Create();
-            var table = editor.TreasureTable;
+            var file = TestCase.Create();
+            var table = file.TreasureTable;
 
             Assert.AreEqual(0xC302, table.Rows[0].Searched);
             Assert.AreEqual(0xF2D0, table.Rows[0].EventParameter);

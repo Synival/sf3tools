@@ -11,9 +11,9 @@ namespace SF3.RawData {
         int Size { get; }
 
         /// <summary>
-        /// Returns a copy of all data loaded into the editor.
+        /// Returns a copy of all raw data loaded.
         /// </summary>
-        /// <returns>A copy of the editor's data.</returns>
+        /// <returns>A copy of the raw data loaded as a byte[].</returns>
         byte[] GetAllData();
 
         /// <summary>

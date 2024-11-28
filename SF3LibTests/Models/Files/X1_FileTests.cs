@@ -41,20 +41,20 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void BattleFiles_HaveExpectedTables() {
             TestCase.Run(BattleTestCases, testCase => {
-                var editor = testCase.Create();
+                var file = testCase.Create();
 
-                Assert.IsNotNull(editor.TreasureTable);
-                Assert.IsNotNull(editor.BattlePointersTable);
-                Assert.IsNull(editor.NpcTable);
-                Assert.IsNull(editor.EnterTable);
-                Assert.IsNull(editor.ArrowTable);
+                Assert.IsNotNull(file.TreasureTable);
+                Assert.IsNotNull(file.BattlePointersTable);
+                Assert.IsNull(file.NpcTable);
+                Assert.IsNull(file.EnterTable);
+                Assert.IsNull(file.ArrowTable);
 
-                Assert.AreEqual(testCase.ExpectedBattleCount, editor.Battles?.Count);
+                Assert.AreEqual(testCase.ExpectedBattleCount, file.Battles?.Count);
 
                 if (testCase.MapLeader != null) {
-                    Assert.IsNotNull(editor.Battles);
-                    Assert.IsTrue(editor.Battles.ContainsKey((MapLeaderType) testCase.MapLeader));
-                    var battle = editor.Battles[(MapLeaderType) testCase.MapLeader];
+                    Assert.IsNotNull(file.Battles);
+                    Assert.IsTrue(file.Battles.ContainsKey((MapLeaderType) testCase.MapLeader));
+                    var battle = file.Battles[(MapLeaderType) testCase.MapLeader];
 
                     Assert.IsNotNull(battle.BattleHeaderTable);
                     Assert.IsNotNull(battle.SlotTable);
@@ -64,12 +64,12 @@ namespace SF3.Tests.Models.Files {
                 }
 
                 if (testCase.Scenario == ScenarioType.Scenario1) {
-                    Assert.IsNull(editor.WarpTable);
-                    Assert.IsNull(editor.TileMovementTable);
+                    Assert.IsNull(file.WarpTable);
+                    Assert.IsNull(file.TileMovementTable);
                 }
                 else {
-                    Assert.IsNotNull(editor.WarpTable);
-                    Assert.IsNotNull(editor.TileMovementTable);
+                    Assert.IsNotNull(file.WarpTable);
+                    Assert.IsNotNull(file.TileMovementTable);
                 }
             });
         }
@@ -77,24 +77,24 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void TownFiles_HaveExpectedTables() {
             TestCase.Run(TownTestCases, testCase => {
-                var editor = testCase.Create();
+                var file = testCase.Create();
 
-                Assert.IsNotNull(editor.TreasureTable);
-                Assert.IsNull(editor.BattlePointersTable);
-                Assert.IsNotNull(editor.NpcTable);
-                Assert.IsNotNull(editor.EnterTable);
+                Assert.IsNotNull(file.TreasureTable);
+                Assert.IsNull(file.BattlePointersTable);
+                Assert.IsNotNull(file.NpcTable);
+                Assert.IsNotNull(file.EnterTable);
 
-                Assert.IsNull(editor.Battles);
+                Assert.IsNull(file.Battles);
 
-                Assert.IsNull(editor.TileMovementTable);
+                Assert.IsNull(file.TileMovementTable);
 
                 if (testCase.Scenario == ScenarioType.Scenario1) {
-                    Assert.IsNull(editor.WarpTable);
-                    Assert.IsNull(editor.ArrowTable);
+                    Assert.IsNull(file.WarpTable);
+                    Assert.IsNull(file.ArrowTable);
                 }
                 else {
-                    Assert.IsNotNull(editor.WarpTable);
-                    Assert.IsNotNull(editor.ArrowTable);
+                    Assert.IsNotNull(file.WarpTable);
+                    Assert.IsNotNull(file.ArrowTable);
                 }
             });
         }

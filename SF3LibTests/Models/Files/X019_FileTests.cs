@@ -29,19 +29,19 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void MonsterTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
+                var file = testCase.Create();
 
-                Assert.AreEqual(0, editor.MonsterTable.Rows[0].MaxHP);
-                Assert.AreEqual(0, editor.MonsterTable.Rows[0].MaxMP);
-                Assert.AreEqual(0, editor.MonsterTable.Rows[0].Attack);
+                Assert.AreEqual(0, file.MonsterTable.Rows[0].MaxHP);
+                Assert.AreEqual(0, file.MonsterTable.Rows[0].MaxMP);
+                Assert.AreEqual(0, file.MonsterTable.Rows[0].Attack);
                 // TODO: maybe more data?
 
-                Assert.AreEqual(10, editor.MonsterTable.Rows[1].MaxHP);
-                Assert.AreEqual(0, editor.MonsterTable.Rows[1].MaxMP);
-                Assert.AreEqual(12, editor.MonsterTable.Rows[1].Attack);
+                Assert.AreEqual(10, file.MonsterTable.Rows[1].MaxHP);
+                Assert.AreEqual(0, file.MonsterTable.Rows[1].MaxMP);
+                Assert.AreEqual(12, file.MonsterTable.Rows[1].Attack);
                 // TODO: maybe more data?
 
-                Assert.AreEqual(testCase.ExpectedRows, editor.MonsterTable.Rows.Length);
+                Assert.AreEqual(testCase.ExpectedRows, file.MonsterTable.Rows.Length);
             });
         }
     }

@@ -43,29 +43,29 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void ItemIconTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
+                var file = testCase.Create();
 
-                Assert.AreEqual(0x00, editor.ItemIconTable.Rows[0].TheItemIcon);
-                Assert.AreEqual(0x26, editor.ItemIconTable.Rows[1].TheItemIcon);
-                Assert.AreEqual(testCase.ExpectedItemIconRows, editor.ItemIconTable.Rows.Length);
+                Assert.AreEqual(0x00, file.ItemIconTable.Rows[0].TheItemIcon);
+                Assert.AreEqual(0x26, file.ItemIconTable.Rows[1].TheItemIcon);
+                Assert.AreEqual(testCase.ExpectedItemIconRows, file.ItemIconTable.Rows.Length);
             });
         }
 
         [TestMethod]
         public void SpellIconTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
-                var editor = testCase.Create();
+                var file = testCase.Create();
 
-                Assert.AreEqual(0x00, editor.SpellIconTable.Rows[0].TheSpellIcon);
-                Assert.AreEqual(testCase.ExpectedSpellRealOffsetStart + editor.SpellIconTable.Rows[0].TheSpellIcon, editor.SpellIconTable.Rows[0].RealOffset);
+                Assert.AreEqual(0x00, file.SpellIconTable.Rows[0].TheSpellIcon);
+                Assert.AreEqual(testCase.ExpectedSpellRealOffsetStart + file.SpellIconTable.Rows[0].TheSpellIcon, file.SpellIconTable.Rows[0].RealOffset);
 
-                Assert.AreEqual(0x18, editor.SpellIconTable.Rows[1].TheSpellIcon);
-                Assert.AreEqual(testCase.ExpectedSpellRealOffsetStart + editor.SpellIconTable.Rows[1].TheSpellIcon, editor.SpellIconTable.Rows[1].RealOffset);
+                Assert.AreEqual(0x18, file.SpellIconTable.Rows[1].TheSpellIcon);
+                Assert.AreEqual(testCase.ExpectedSpellRealOffsetStart + file.SpellIconTable.Rows[1].TheSpellIcon, file.SpellIconTable.Rows[1].RealOffset);
 
-                Assert.AreEqual(0x176, editor.SpellIconTable.Rows[2].TheSpellIcon);
-                Assert.AreEqual(testCase.ExpectedSpellRealOffsetStart + editor.SpellIconTable.Rows[2].TheSpellIcon, editor.SpellIconTable.Rows[2].RealOffset);
+                Assert.AreEqual(0x176, file.SpellIconTable.Rows[2].TheSpellIcon);
+                Assert.AreEqual(testCase.ExpectedSpellRealOffsetStart + file.SpellIconTable.Rows[2].TheSpellIcon, file.SpellIconTable.Rows[2].RealOffset);
 
-                Assert.AreEqual(testCase.ExpectedSpellIconRows, editor.SpellIconTable.Rows.Length);
+                Assert.AreEqual(testCase.ExpectedSpellIconRows, file.SpellIconTable.Rows.Length);
             });
         }
     }
