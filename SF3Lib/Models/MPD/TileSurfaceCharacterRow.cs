@@ -1,4 +1,4 @@
-using SF3.Attributes;
+using CommonLib.Attributes;
 using SF3.RawEditors;
 
 namespace SF3.Models.MPD {
@@ -24,7 +24,7 @@ namespace SF3.Models.MPD {
             }
         }
 
-        private class TileMetadataAttribute : ViewModelDataAttribute {
+        private class TileMetadataAttribute : DataViewModelColumnAttribute {
             public TileMetadataAttribute(int x) : base(displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X4", minWidth: 50) { }
         }
 

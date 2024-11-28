@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SF3.Attributes;
-using SF3.ViewModels;
+using CommonLib.Attributes;
+using CommonLib.ViewModels;
 
-namespace SF3.Extensions {
+namespace CommonLib.Extensions {
     public static class TypeExtensions {
         private static Dictionary<string, DataViewModel> _cachedDataViewModels = new Dictionary<string, DataViewModel>();
 
@@ -24,10 +24,10 @@ namespace SF3.Extensions {
                 .ToList();
 
             var props = columnProperties
-                .Select(x => new { Property = x, Attributes = x.GetCustomAttributes(typeof(ViewModelDataAttribute), true) })
+                .Select(x => new { Property = x, Attributes = x.GetCustomAttributes(typeof(DataViewModelColumnAttribute), true) })
                 .Where(x => x.Attributes.Length == 1)
-                .OrderBy(x => ((ViewModelDataAttribute) x.Attributes[0]).DisplayOrder)
-                .ToDictionary(x => x.Property, x => (ViewModelDataAttribute) x.Attributes[0]);
+                .OrderBy(x => ((DataViewModelColumnAttribute) x.Attributes[0]).DisplayOrder)
+                .ToDictionary(x => x.Property, x => (DataViewModelColumnAttribute) x.Attributes[0]);
 
             var vm = new DataViewModel(props);
             _cachedDataViewModels.Add(type.AssemblyQualifiedName, vm);

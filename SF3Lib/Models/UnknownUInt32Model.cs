@@ -1,5 +1,4 @@
 ﻿using CommonLib.Attributes;
-using SF3.Attributes;
 using SF3.RawEditors;
 
 namespace SF3.Models
@@ -10,7 +9,7 @@ namespace SF3.Models
         }
 
         [BulkCopy]
-        [ViewModelData(displayName: "UInt32 Value", displayFormat: "X8")]
+        [DataViewModelColumn(displayName: "UInt32 Value", displayFormat: "X8")]
         public uint Value {
             get => (uint) Editor.GetDouble(Address);
             set => Editor.SetDouble(Address, (int) value);

@@ -1,5 +1,4 @@
 using CommonLib.Attributes;
-using SF3.Attributes;
 using SF3.RawEditors;
 
 namespace SF3.Models {
@@ -14,14 +13,14 @@ namespace SF3.Models {
 
         public IRawEditor Editor { get; protected set; }
 
-        [ViewModelData(displayOrder: -3, displayFormat: "X2", minWidth: 45)]
+        [DataViewModelColumn(displayOrder: -3, displayFormat: "X2", minWidth: 45)]
         public int ID { get; protected set; }
 
-        [ViewModelData(displayOrder: -2, displayFormat: "X4")]
+        [DataViewModelColumn(displayOrder: -2, displayFormat: "X4")]
         public int Address { get; protected set; }
 
         [BulkCopyRowName]
-        [ViewModelData(displayOrder: -1, minWidth: 120)]
+        [DataViewModelColumn(displayOrder: -1, minWidth: 120)]
         public string Name { get; protected set; }
 
         public int Size { get; protected set; }

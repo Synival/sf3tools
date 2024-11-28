@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
+using CommonLib.Extensions;
 using SF3.Tables;
-using SF3.Extensions;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views {

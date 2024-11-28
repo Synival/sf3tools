@@ -1,5 +1,4 @@
 ﻿using CommonLib.Attributes;
-using SF3.Attributes;
 using SF3.RawEditors;
 
 namespace SF3.Models.MPD {
@@ -18,14 +17,14 @@ namespace SF3.Models.MPD {
         }
 
         [BulkCopy]
-        [ViewModelData(displayName: "Unknown1", displayOrder: 0, displayFormat: "X8")]
+        [DataViewModelColumn(displayName: "Unknown1", displayOrder: 0, displayFormat: "X8")]
         public uint Unknown1 {
             get => (uint) Editor.GetDouble(_unknown1Address);
             set => Editor.SetDouble(_unknown1Address, (int) value);
         }
 
         [BulkCopy]
-        [ViewModelData(displayName: "UInt16Table1", displayOrder: 1, isPointer: true)]
+        [DataViewModelColumn(displayName: "UInt16Table1", displayOrder: 1, isPointer: true)]
         public uint UInt16Table1 {
             get => (uint) Editor.GetDouble(_pointer1Address);
             set {
@@ -36,7 +35,7 @@ namespace SF3.Models.MPD {
         }
 
         [BulkCopy]
-        [ViewModelData(displayName: "UInt16Table2", displayOrder: 2, isPointer: true)]
+        [DataViewModelColumn(displayName: "UInt16Table2", displayOrder: 2, isPointer: true)]
         public uint UInt16Table2 {
             get => (uint) Editor.GetDouble(_pointer2Address);
             set {
@@ -47,7 +46,7 @@ namespace SF3.Models.MPD {
         }
 
         [BulkCopy]
-        [ViewModelData(displayName: "Unknown2", displayOrder: 3, displayFormat: "X8")]
+        [DataViewModelColumn(displayName: "Unknown2", displayOrder: 3, displayFormat: "X8")]
         public uint Unknown2 {
             get => (uint) Editor.GetDouble(_unknown2Address);
             set {

@@ -1,5 +1,4 @@
 ﻿using CommonLib.Attributes;
-using SF3.Attributes;
 using SF3.RawEditors;
 
 namespace SF3.Models
@@ -10,7 +9,7 @@ namespace SF3.Models
         }
 
         [BulkCopy]
-        [ViewModelData(displayName: "UInt16 Value", displayFormat: "X4")]
+        [DataViewModelColumn(displayName: "UInt16 Value", displayFormat: "X4")]
         public ushort Value {
             get => (ushort) Editor.GetWord(Address);
             set => Editor.SetWord(Address, value);

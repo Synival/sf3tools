@@ -1,5 +1,4 @@
 ﻿using CommonLib.Attributes;
-using SF3.Attributes;
 using SF3.RawEditors;
 
 namespace SF3.Models.MPD {
@@ -9,13 +8,13 @@ namespace SF3.Models.MPD {
         }
 
         [BulkCopy]
-        [ViewModelData(displayName: "Color (ABGR1555)", displayOrder: 0, displayFormat: "X4")]
+        [DataViewModelColumn(displayName: "Color (ABGR1555)", displayOrder: 0, displayFormat: "X4")]
         public int ColorABGR1555 {
             get => Editor.GetWord(Address);
             set => Editor.SetWord(Address, value);
         }
 
-        [ViewModelData(displayName: "HTML Color", displayOrder: 1, displayFormat: "X", minWidth: 80)]
+        [DataViewModelColumn(displayName: "HTML Color", displayOrder: 1, displayFormat: "X", minWidth: 80)]
         public string HtmlColor {
             get {
                 // TODO: behavior for the 0x8000 bit

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace SF3.Attributes {
-    public class ViewModelDataAttribute : Attribute {
-        public ViewModelDataAttribute(
+namespace CommonLib.Attributes {
+    public class DataViewModelColumnAttribute : Attribute {
+        public DataViewModelColumnAttribute(
             string displayName   = null,
             int    displayOrder  = 0,
             string displayFormat = null,

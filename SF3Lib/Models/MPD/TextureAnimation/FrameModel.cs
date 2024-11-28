@@ -1,6 +1,5 @@
 ﻿using System;
 using CommonLib.Attributes;
-using SF3.Attributes;
 using SF3.RawEditors;
 
 namespace SF3.Models.MPD.TextureAnimation {
@@ -25,32 +24,32 @@ namespace SF3.Models.MPD.TextureAnimation {
 
         public bool Is32Bit { get; }
 
-        [ViewModelData(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
+        [DataViewModelColumn(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public int TextureID { get; }
 
-        [ViewModelData(displayName: "Width", displayOrder: 1)]
+        [DataViewModelColumn(displayName: "Width", displayOrder: 1)]
         public int Width { get; }
 
-        [ViewModelData(displayName: "Height", displayOrder: 2)]
+        [DataViewModelColumn(displayName: "Height", displayOrder: 2)]
         public int Height { get; }
 
-        [ViewModelData(displayName: "Tex. Anim ID", displayOrder: 3, displayFormat: "X2")]
+        [DataViewModelColumn(displayName: "Tex. Anim ID", displayOrder: 3, displayFormat: "X2")]
         public int texAnimID { get; }
 
         public int FrameNum { get; }
 
-        [ViewModelData(displayName: "Frame #", displayOrder: 4)]
+        [DataViewModelColumn(displayName: "Frame #", displayOrder: 4)]
         public string FrameNumStr => (FrameNum == 0) ? "" : FrameNum.ToString();
 
         [BulkCopy]
-        [ViewModelData(displayName: "Texture Offset", displayOrder: 5, displayFormat: "X4")]
+        [DataViewModelColumn(displayName: "Texture Offset", displayOrder: 5, displayFormat: "X4")]
         public uint CompressedTextureOffset {
             get => Editor.GetData(_compressedTextureOffsetAddress, _bytesPerProperty);
             set => Editor.SetData(_compressedTextureOffsetAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
-        [ViewModelData(displayName: "Unknown", displayOrder: 6, displayFormat: "X4")]
+        [DataViewModelColumn(displayName: "Unknown", displayOrder: 6, displayFormat: "X4")]
         public uint Unknown {
             get => Editor.GetData(_unknownAddress, _bytesPerProperty);
             set => Editor.SetData(_unknownAddress, value, _bytesPerProperty);

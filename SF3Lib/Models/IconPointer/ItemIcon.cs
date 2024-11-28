@@ -1,5 +1,4 @@
 using CommonLib.Attributes;
-using SF3.Attributes;
 using SF3.RawEditors;
 
 namespace SF3.Models.IconPointer {
@@ -15,7 +14,7 @@ namespace SF3.Models.IconPointer {
         public bool Has16BitIconAddr { get; }
 
         [BulkCopy]
-        [ViewModelData(displayName: "Icon Offset", displayOrder: 0, displayFormat: "X4")]
+        [DataViewModelColumn(displayName: "Icon Offset", displayOrder: 0, displayFormat: "X4")]
         public int TheItemIcon {
             get {
                 return Has16BitIconAddr
