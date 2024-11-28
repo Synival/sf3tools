@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using SF3.Tables.Shared;
-using SF3.Tables.X1;
-using SF3.Tables.X1.Battle;
-using SF3.Tables.X1.Town;
+using SF3.TableModels.Shared;
+using SF3.TableModels.X1;
+using SF3.TableModels.X1.Battle;
+using SF3.TableModels.X1.Town;
 using SF3.Types;
 
 namespace SF3.FileModels.X1 {

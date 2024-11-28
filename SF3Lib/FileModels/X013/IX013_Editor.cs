@@ -1,4 +1,4 @@
-using SF3.Tables.X013;
+using SF3.TableModels.X013;
 
 namespace SF3.FileModels.X013 {
     public interface IX013_Editor : IScenarioTableEditor {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.RawEditors;
-using SF3.Tables;
-using SF3.Tables.X019;
+using SF3.TableModels;
+using SF3.TableModels.X019;
 using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 

@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.RawEditors;
-using SF3.Tables;
-using SF3.Tables.X1.Battle;
+using SF3.TableModels;
+using SF3.TableModels.X1.Battle;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 

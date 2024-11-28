@@ -2,8 +2,8 @@
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.RawEditors;
-using SF3.Tables;
-using SF3.Tables.MPD.TextureChunk;
+using SF3.TableModels;
+using SF3.TableModels.MPD.TextureChunk;
 
 namespace SF3.FileModels.MPD {
     public class TextureChunkEditor : TableEditor {

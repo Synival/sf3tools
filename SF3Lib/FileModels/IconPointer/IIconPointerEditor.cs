@@ -1,4 +1,4 @@
-using SF3.Tables.IconPointer;
+using SF3.TableModels.IconPointer;
 
 namespace SF3.FileModels.IconPointer {
     public interface IIconPointerEditor : IScenarioTableEditor {

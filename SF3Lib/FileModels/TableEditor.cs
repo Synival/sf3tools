@@ -4,7 +4,7 @@ using System.Linq;
 using CommonLib;
 using CommonLib.NamedValues;
 using SF3.RawEditors;
-using SF3.Tables;
+using SF3.TableModels;
 
 namespace SF3.FileModels {
     /// <summary>

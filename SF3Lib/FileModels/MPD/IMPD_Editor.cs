@@ -1,8 +1,8 @@
 using CommonLib;
 using SF3.RawEditors;
-using SF3.Tables;
-using SF3.Tables.MPD;
-using SF3.Tables.MPD.TextureAnimation;
+using SF3.TableModels;
+using SF3.TableModels.MPD;
+using SF3.TableModels.MPD.TextureAnimation;
 
 namespace SF3.FileModels.MPD {
     public interface IMPD_Editor : IScenarioTableEditor {

@@ -4,8 +4,8 @@ using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.RawEditors;
 using SF3.Exceptions;
-using SF3.Tables;
-using SF3.Tables.IconPointer;
+using SF3.TableModels;
+using SF3.TableModels.IconPointer;
 using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 
