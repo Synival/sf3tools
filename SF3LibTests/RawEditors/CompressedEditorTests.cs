@@ -16,7 +16,7 @@ namespace SF3.Tests.RawEditors {
             // Assert
             Assert.IsFalse(data.NeedsRecompression);
             Assert.IsFalse(data.IsModified);
-            Assert.IsFalse(data.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.DecompressedData.IsModified);
         }
 
         [TestMethod]
@@ -32,7 +32,7 @@ namespace SF3.Tests.RawEditors {
             Assert.IsTrue(recompressResult);
             Assert.IsFalse(data.NeedsRecompression);
             Assert.IsFalse(data.IsModified);
-            Assert.IsFalse(data.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.DecompressedData.IsModified);
         }
 
         [TestMethod]
@@ -42,12 +42,12 @@ namespace SF3.Tests.RawEditors {
             var data = new CompressedData(_compressedTestData);
 
             // Act
-            data.DecompressedEditor.IsModified = true;
+            data.DecompressedData.IsModified = true;
 
             // Assert
             Assert.IsTrue(data.NeedsRecompression);
             Assert.IsTrue(data.IsModified);
-            Assert.IsTrue(data.DecompressedEditor.IsModified);
+            Assert.IsTrue(data.DecompressedData.IsModified);
         }
 
         [TestMethod]
@@ -57,13 +57,13 @@ namespace SF3.Tests.RawEditors {
             var data = new CompressedData(_compressedTestData);
 
             // Act
-            data.DecompressedEditor.IsModified = true;
-            data.DecompressedEditor.IsModified = false;
+            data.DecompressedData.IsModified = true;
+            data.DecompressedData.IsModified = false;
 
             // Assert
             Assert.IsTrue(data.NeedsRecompression);
             Assert.IsTrue(data.IsModified);
-            Assert.IsFalse(data.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.DecompressedData.IsModified);
         }
 
         [TestMethod]
@@ -71,7 +71,7 @@ namespace SF3.Tests.RawEditors {
         {
             // Arrange
             var data = new CompressedData(_compressedTestData);
-            data.DecompressedEditor.IsModified = true;
+            data.DecompressedData.IsModified = true;
 
             // Act
             var recompressResult = data.Recompress();
@@ -80,7 +80,7 @@ namespace SF3.Tests.RawEditors {
             Assert.IsTrue(recompressResult);
             Assert.IsFalse(data.NeedsRecompression);
             Assert.IsTrue(data.IsModified);
-            Assert.IsFalse(data.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.DecompressedData.IsModified);
         }
 
         [TestMethod]
@@ -95,7 +95,7 @@ namespace SF3.Tests.RawEditors {
             // Assert
             Assert.IsTrue(data.NeedsRecompression);
             Assert.IsTrue(data.IsModified);
-            Assert.IsFalse(data.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.DecompressedData.IsModified);
         }
 
         [TestMethod]
@@ -111,7 +111,7 @@ namespace SF3.Tests.RawEditors {
             // Assert
             Assert.IsFalse(data.NeedsRecompression);
             Assert.IsTrue(data.IsModified);
-            Assert.IsFalse(data.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.DecompressedData.IsModified);
         }
 
         [TestMethod]
@@ -126,7 +126,7 @@ namespace SF3.Tests.RawEditors {
             // Assert
             Assert.IsTrue(data.IsModified);
             Assert.IsFalse(data.NeedsRecompression);
-            Assert.IsFalse(data.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.DecompressedData.IsModified);
         }
 
         [TestMethod]
@@ -142,7 +142,7 @@ namespace SF3.Tests.RawEditors {
             // Assert
             Assert.IsTrue(data.NeedsRecompression);
             Assert.IsTrue(data.IsModified);
-            Assert.IsFalse(data.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.DecompressedData.IsModified);
         }
     }
 }

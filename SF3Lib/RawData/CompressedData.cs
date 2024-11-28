@@ -26,12 +26,12 @@ namespace SF3.RawData {
 
             if (updateDecompressedData) {
                 var decompressedData = Decompress(data, MaxDecompressedSize);
-                if (DecompressedEditor == null) {
-                    DecompressedEditor = new ByteData(decompressedData);
+                if (DecompressedData == null) {
+                    DecompressedData = new ByteData(decompressedData);
 
-                    DecompressedEditor.IsModifiedChanged += (s, e) => {
+                    DecompressedData.IsModifiedChanged += (s, e) => {
                         // When decompressed data is marked as modified, mark that we need compression.
-                        if (DecompressedEditor.IsModified) {
+                        if (DecompressedData.IsModified) {
                             NeedsRecompression = true;
                             IsModified = true;
                         }
@@ -41,26 +41,26 @@ namespace SF3.RawData {
                     };
                 }
                 else
-                    DecompressedEditor.SetData(decompressedData);
+                    DecompressedData.SetData(decompressedData);
             }
 
             return true;
         }
 
         public bool Recompress() {
-            using (var modifyGuard2 = DecompressedEditor.IsModifiedChangeBlocker()) {
-                if (!SetData(Compress(DecompressedEditor.Data)))
+            using (var modifyGuard2 = DecompressedData.IsModifiedChangeBlocker()) {
+                if (!SetData(Compress(DecompressedData.Data)))
                     return false;
                 NeedsRecompression = false;
             }
-            DecompressedEditor.IsModified = false;
+            DecompressedData.IsModified = false;
             return true;
         }
 
         public override bool OnFinalize() {
             if (!base.OnFinalize())
                 return false;
-            if (!DecompressedEditor.Finalize())
+            if (!DecompressedData.Finalize())
                 return false;
             if (NeedsRecompression && !Recompress())
                 return false;
@@ -68,12 +68,10 @@ namespace SF3.RawData {
         }
 
         public override void Dispose() {
-            DecompressedEditor.Dispose();
+            DecompressedData.Dispose();
         }
 
-        public byte[] DecompressedData => DecompressedEditor.Data;
-
-        public IByteData DecompressedEditor { get; private set; }
+        public IByteData DecompressedData { get; private set; }
 
         public bool _needsRecompression = false;
         public bool NeedsRecompression {

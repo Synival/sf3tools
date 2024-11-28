@@ -21,7 +21,7 @@ namespace SF3.Tests.Models.Files {
             var data = new CompressedData(mpdFile.ChunkEditors[5].Data);
             Assert.IsFalse(data.NeedsRecompression);
             Assert.IsFalse(data.IsModified);
-            Assert.IsFalse(data.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.DecompressedData.IsModified);
 
             // Act
             var recompressResult = data.Recompress();
@@ -30,7 +30,7 @@ namespace SF3.Tests.Models.Files {
             Assert.IsTrue(recompressResult);
             Assert.IsFalse(data.NeedsRecompression);
             Assert.IsTrue(data.IsModified);
-            Assert.IsFalse(data.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.DecompressedData.IsModified);
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace SF3.Tests.Models.Files {
             data.IsModified = false;
             Assert.IsFalse(data.NeedsRecompression);
             Assert.IsFalse(data.IsModified);
-            Assert.IsFalse(data.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.DecompressedData.IsModified);
 
             // Act
             var recompressResult = data.Recompress();
@@ -51,7 +51,7 @@ namespace SF3.Tests.Models.Files {
             Assert.IsTrue(recompressResult);
             Assert.IsFalse(data.NeedsRecompression);
             Assert.IsFalse(data.IsModified);
-            Assert.IsFalse(data.DecompressedEditor.IsModified);
+            Assert.IsFalse(data.DecompressedData.IsModified);
         }
 
         [TestMethod]
@@ -91,7 +91,7 @@ namespace SF3.Tests.Models.Files {
                     //       Chunks 9 and 10 are actually unmodified, how about that!
                     var expectedResult = i == 9 || i == 10 ? false : true;
                     Assert.IsFalse(chunkEditor.NeedsRecompression);
-                    Assert.IsFalse(chunkEditor.DecompressedEditor.IsModified);
+                    Assert.IsFalse(chunkEditor.DecompressedData.IsModified);
                     Assert.AreEqual(expectedResult, chunkEditor.IsModified);
                 }
             }
@@ -115,7 +115,7 @@ namespace SF3.Tests.Models.Files {
             Assert.IsTrue(recompressResult);
             foreach (var ce in data.ChunkEditors.Where(x => x != null)) {
                 Assert.IsFalse(ce.IsModified);
-                Assert.IsFalse(ce.DecompressedEditor.IsModified);
+                Assert.IsFalse(ce.DecompressedData.IsModified);
             }
             Assert.IsFalse(data.Data.IsModified);
         }
@@ -125,7 +125,7 @@ namespace SF3.Tests.Models.Files {
             // Arrange
             var data = MakeFile();
             Assert.IsFalse(data.ChunkEditors[6].IsModified);
-            Assert.IsFalse(data.ChunkEditors[6].DecompressedEditor.IsModified);
+            Assert.IsFalse(data.ChunkEditors[6].DecompressedData.IsModified);
             Assert.IsFalse(data.Data.IsModified);
             Assert.IsFalse(data.IsModified);
 
@@ -134,7 +134,7 @@ namespace SF3.Tests.Models.Files {
 
             // Assert
             Assert.IsTrue(data.ChunkEditors[6].IsModified);
-            Assert.IsTrue(data.ChunkEditors[6].DecompressedEditor.IsModified);
+            Assert.IsTrue(data.ChunkEditors[6].DecompressedData.IsModified);
             Assert.IsTrue(data.Data.IsModified);
             Assert.IsTrue(data.IsModified);
         }
@@ -150,7 +150,7 @@ namespace SF3.Tests.Models.Files {
             // Assert
             foreach (var ce in data.ChunkEditors.Where(x => x != null)) {
                 Assert.IsFalse(ce.IsModified);
-                Assert.IsFalse(ce.DecompressedEditor.IsModified);
+                Assert.IsFalse(ce.DecompressedData.IsModified);
             }
             Assert.IsFalse(data.Data.IsModified);
         }
@@ -170,7 +170,7 @@ namespace SF3.Tests.Models.Files {
                 if (chunkEditor == null)
                     continue;
 
-                Assert.IsFalse(chunkEditor.DecompressedEditor.IsModified);
+                Assert.IsFalse(chunkEditor.DecompressedData.IsModified);
                 var expectedModifiedFlag = i == 6;
                 Assert.AreEqual(expectedModifiedFlag, chunkEditor.IsModified);
             }

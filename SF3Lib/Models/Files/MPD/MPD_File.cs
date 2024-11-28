@@ -124,9 +124,9 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>() {
                 MPDHeader,
                 ChunkHeader,
-                (TileSurfaceHeightmapRows = new TileSurfaceHeightmapRowTable(ChunkEditors[5].DecompressedEditor, 0x0000)),
-                (TileHeightTerrainRows    = new TileHeightTerrainRowTable   (ChunkEditors[5].DecompressedEditor, 0x4000)),
-                (TileItemRows             = new TileItemRowTable            (ChunkEditors[5].DecompressedEditor, 0x6000)),
+                (TileSurfaceHeightmapRows = new TileSurfaceHeightmapRowTable(ChunkEditors[5].DecompressedData, 0x0000)),
+                (TileHeightTerrainRows    = new TileHeightTerrainRowTable   (ChunkEditors[5].DecompressedData, 0x4000)),
+                (TileItemRows             = new TileItemRowTable            (ChunkEditors[5].DecompressedData, 0x6000)),
             };
 
             if (TextureAnimations != null)
@@ -150,13 +150,13 @@ namespace SF3.Models.Files.MPD {
                 tables.Add(TextureAnimFrames);
 
             if (SurfaceChunkEditor?.Data?.Length >= 64 * 64 * 2)
-                tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(SurfaceChunkEditor.DecompressedEditor, 0x0000));
+                tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(SurfaceChunkEditor.DecompressedData, 0x0000));
 
             TextureChunks = new MPD_FileTextureChunk[5];
             for (var i = 0; i < TextureChunks.Length; i++) {
                 var chunkIndex = i + 6;
                 if (Chunks[chunkIndex].Data?.Length > 0) {
-                    TextureChunks[i] = MPD_FileTextureChunk.Create(ChunkEditors[chunkIndex].DecompressedEditor, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
+                    TextureChunks[i] = MPD_FileTextureChunk.Create(ChunkEditors[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
                     tables.Add(TextureChunks[i].TextureHeaderTable);
                     tables.Add(TextureChunks[i].TextureTable);
                 }
@@ -182,7 +182,7 @@ namespace SF3.Models.Files.MPD {
 
         private void UpdateChunkTableDecompressedSizes() {
             for (var i = 0; i < ChunkHeader.Rows.Length; i++)
-                ChunkHeader.Rows[i].DecompressedSize = ChunkEditors[i]?.DecompressedEditor?.Size ?? 0;
+                ChunkHeader.Rows[i].DecompressedSize = ChunkEditors[i]?.DecompressedData?.Size ?? 0;
         }
 
         [DllImport("msvcrt.dll", SetLastError = false)]

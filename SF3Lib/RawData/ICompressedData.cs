@@ -15,14 +15,9 @@ namespace SF3.RawData {
         bool Recompress();
 
         /// <summary>
-        /// Decompressed data generated from its incoming compressed data. Do not modify!!
-        /// </summary>
-        byte[] DecompressedData { get; }
-
-        /// <summary>
         /// Editor for 'DecompressedData'.
         /// </summary>
-        IByteData DecompressedEditor { get; }
+        IByteData DecompressedData { get; }
 
         /// <summary>
         /// If 'true', this means the decompressed data has been modified and is out of sync with compressed data.

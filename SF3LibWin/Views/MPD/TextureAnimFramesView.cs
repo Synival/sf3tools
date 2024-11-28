@@ -38,7 +38,7 @@ namespace SF3.Win.Views.MPD {
             var frame = (FrameModel) item?.RowObject;
             TextureView.Image = (frame == null || Editor.TextureAnimFrameEditors[frame.ID] == null)
                 ? (System.Drawing.Image) null
-                : frame.CreateBitmap(Editor.TextureAnimFrameEditors[frame.ID].DecompressedEditor);
+                : frame.CreateBitmap(Editor.TextureAnimFrameEditors[frame.ID].DecompressedData);
         }
 
         public override void Destroy() {

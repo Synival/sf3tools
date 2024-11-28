@@ -9,12 +9,12 @@ namespace SF3.RawData {
             if (chunkIsCompressed) {
                 CompressedEditor = new CompressedData(data);
                 ChildEditor = CompressedEditor;
-                DecompressedEditor = CompressedEditor.DecompressedEditor;
+                DecompressedData = CompressedEditor.DecompressedData;
             }
             else {
                 CompressedEditor = null;
                 ChildEditor = new ByteData(data);
-                DecompressedEditor = ChildEditor;
+                DecompressedData = ChildEditor;
             }
 
             if (CompressedEditor != null)
@@ -70,7 +70,7 @@ namespace SF3.RawData {
         public bool IsCompressed { get; }
         private ICompressedData CompressedEditor { get; }
         private IByteData ChildEditor { get; }
-        public IByteData DecompressedEditor { get; }
+        public IByteData DecompressedData { get; }
 
         public byte[] Data => ChildEditor.Data;
         public int Size => ChildEditor.Size;
@@ -79,8 +79,6 @@ namespace SF3.RawData {
             get => ChildEditor.IsModified;
             set => ChildEditor.IsModified = value;
         }
-
-        public byte[] DecompressedData => DecompressedEditor.Data;
 
         public bool NeedsRecompression {
             get => IsCompressed ? CompressedEditor.NeedsRecompression : false;
