@@ -30,7 +30,7 @@ namespace SF3.Win.Forms {
             tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
             Globals.UseDropdownsChanged += (s, e) => tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
 
-            AttachFileEditor(FileLoader);
+            AttachModelLoader(ModelLoader);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace SF3.Win.Forms {
             FileIsLoadedChanged += (obj, eargs) => {
                 tsmiFile_OpenPrevious.Enabled    = IsLoaded;
                 tsmiFile_OpenNext.Enabled        = IsLoaded;
-                tsmiFile_Save.Enabled            = IsLoaded && FileLoader.IsModified;
+                tsmiFile_Save.Enabled            = IsLoaded && ModelLoader.IsModified;
                 tsmiFile_SaveAs.Enabled          = IsLoaded;
                 tsmiFile_ApplyDFRFile.Enabled    = IsLoaded;
                 tsmiFile_GenerateDFRFile.Enabled = IsLoaded;
@@ -108,7 +108,7 @@ namespace SF3.Win.Forms {
                 tsmiFile_Close.Enabled           = IsLoaded;
             };
 
-            FileModifiedChanged += (obj, eargs) => tsmiFile_Save.Enabled = IsLoaded && FileLoader.IsModified;
+            FileModifiedChanged += (obj, eargs) => tsmiFile_Save.Enabled = IsLoaded && ModelLoader.IsModified;
 
             UpdateTitle();
         }
@@ -144,10 +144,10 @@ namespace SF3.Win.Forms {
 
             bool PerformLoad() {
                 try {
-                    if (!FileLoader.LoadFile(filename, stream, MakeModel))
+                    if (!ModelLoader.LoadFile(filename, stream, MakeModel))
                         return false;
 
-                    if ((View = MakeView(FileLoader, FileLoader.Editor)) == null)
+                    if ((View = MakeView(ModelLoader, ModelLoader.Model)) == null)
                         return false;
 
                     SuspendLayout();
@@ -179,7 +179,7 @@ namespace SF3.Win.Forms {
             return true;
         }
 
-        private void AttachFileEditor(IFileLoader loader) {
+        private void AttachModelLoader(IModelFileLoader loader) {
             loader.TitleChanged      += (obj, args) => UpdateTitle();
             loader.PreLoaded         += (obj, args) => PreFileLoaded?.Invoke(this, args);
             loader.Loaded            += (obj, args) => FileLoaded?.Invoke(this, args);
@@ -198,12 +198,12 @@ namespace SF3.Win.Forms {
         /// </summary>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
         public bool SaveFileDialog() {
-            if (FileLoader == null)
+            if (ModelLoader == null)
                 return false;
 
             var savefile = new SaveFileDialog {
                 Filter = FileDialogFilter,
-                FileName = Path.GetFileName(FileLoader.Filename)
+                FileName = Path.GetFileName(ModelLoader.Filename)
             };
             if (savefile.ShowDialog() != DialogResult.OK)
                 return false;
@@ -217,15 +217,15 @@ namespace SF3.Win.Forms {
         /// </summary>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
         public bool Save() {
-            if (FileLoader == null || !FileLoader.IsModified)
+            if (ModelLoader == null || !ModelLoader.IsModified)
                 return false;
-            return SaveFile(FileLoader.Filename);
+            return SaveFile(ModelLoader.Filename);
         }
 
         private bool SaveFile(string filename) {
             var success = true;
             try {
-                if (!FileLoader.SaveFile(filename))
+                if (!ModelLoader.SaveFile(filename))
                     success = false;
             }
             catch {
@@ -261,10 +261,10 @@ namespace SF3.Win.Forms {
         /// <returns>'true' if no file was open or the file was closed. Returns 'false' if the user clicked 'cancel' when
         /// prompted to save changes.</returns>
         public bool CloseFile(bool force = false) {
-            if (FileLoader == null || !FileLoader.IsLoaded)
+            if (ModelLoader == null || !ModelLoader.IsLoaded)
                 return true;
 
-            if (!force && FileLoader.IsModified)
+            if (!force && ModelLoader.IsModified)
                 if (PromptForSave() == DialogResult.Cancel)
                     return false;
 
@@ -281,7 +281,7 @@ namespace SF3.Win.Forms {
             if (wasFocused && !ContainsFocus)
                 _ = Focus();
 
-            _ = FileLoader.Close();
+            _ = ModelLoader.Close();
 
             return OnClose();
         }
@@ -296,19 +296,19 @@ namespace SF3.Win.Forms {
             if (!IsLoaded)
                 return false;
 
-            if (FileLoader.IsModified)
+            if (ModelLoader.IsModified)
                 if (PromptForSave() == DialogResult.Cancel)
                     return false;
 
             var form = new frmDFRTool(CommandType.Apply, dialogMode: true);
-            form.ApplyDFRInputData = FileLoader.RawEditor.GetAllData();
+            form.ApplyDFRInputData = ModelLoader.RawEditor.GetAllData();
             form.ApplyDFRInMemory = true;
             var dialogResult = form.ShowDialog();
             if (dialogResult != DialogResult.OK)
                 return false;
 
             try {
-                var filename = FileLoader.Filename;
+                var filename = ModelLoader.Filename;
                 var newBytes = form.ApplyDFRInMemoryOutput;
                 if (newBytes == null)
                     throw new NullReferenceException("Internal error: No result from 'Apply DFR' command!");
@@ -317,12 +317,12 @@ namespace SF3.Win.Forms {
                     return false;
                 using (var newBytesStream = new MemoryStream(newBytes)) {
                     if (!LoadFile(filename, newBytesStream)) {
-                        if (FileLoader != null)
-                            FileLoader.IsModified = true;
+                        if (ModelLoader != null)
+                            ModelLoader.IsModified = true;
                         return false;
                     }
                 }
-                FileLoader.IsModified = true;
+                ModelLoader.IsModified = true;
             }
             catch (Exception e) {
                 ErrorMessage("Error loading modified data:\n\n" + e.Message);
@@ -340,7 +340,7 @@ namespace SF3.Win.Forms {
                 return false;
 
             var form = new frmDFRTool(CommandType.Create, dialogMode: true);
-            form.CreateDFRAlteredData = FileLoader.RawEditor.GetAllData();
+            form.CreateDFRAlteredData = ModelLoader.RawEditor.GetAllData();
             var dialogResult = form.ShowDialog();
             return (dialogResult == DialogResult.OK);
         }
@@ -349,7 +349,7 @@ namespace SF3.Win.Forms {
         /// Opens a dialog to perform a bulk copy of tables to another .BIN file.
         /// </summary>
         public void CopyTablesTo() {
-            if (FileLoader == null)
+            if (ModelLoader == null)
                 return;
 
             var saveFileDialog = new SaveFileDialog {
@@ -362,14 +362,14 @@ namespace SF3.Win.Forms {
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
-                var copyFileLoader = new FileLoader();
-                if (!copyFileLoader.LoadFile(copyToFilename, MakeModel)) {
+                var copyModelLoader = new ModelFileLoader();
+                if (!copyModelLoader.LoadFile(copyToFilename, MakeModel)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
 
-                result = FileLoader.Editor.BulkCopyProperties(copyFileLoader.Editor);
-                if (!copyFileLoader.SaveFile(copyToFilename)) {
+                result = ModelLoader.Model.BulkCopyProperties(copyModelLoader.Model);
+                if (!copyModelLoader.SaveFile(copyToFilename)) {
                     ErrorMessage("Error trying to update file.");
                     return;
                 }
@@ -382,14 +382,14 @@ namespace SF3.Win.Forms {
                 return;
             }
 
-            ProduceAndPresentBulkCopyReport(result, FileLoader.Editor.NameGetterContext);
+            ProduceAndPresentBulkCopyReport(result, ModelLoader.Model.NameGetterContext);
         }
 
         /// <summary>
         /// Opens a dialog to perform a bulk copy of tables from another .BIN file.
         /// </summary>
         public void CopyTablesFrom() {
-            if (FileLoader == null)
+            if (ModelLoader == null)
                 return;
 
             var openFileDialog = new OpenFileDialog {
@@ -402,12 +402,12 @@ namespace SF3.Win.Forms {
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
-                var copyFileEditor = new FileLoader();
-                if (!copyFileEditor.LoadFile(copyFromFilename, MakeModel)) {
+                var copyModelLoader = new ModelFileLoader();
+                if (!copyModelLoader.LoadFile(copyFromFilename, MakeModel)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
-                result = copyFileEditor.Editor.BulkCopyProperties(FileLoader.Editor);
+                result = copyModelLoader.Model.BulkCopyProperties(ModelLoader.Model);
             }
             catch (Exception e) {
                 //wrong file was selected
@@ -418,7 +418,7 @@ namespace SF3.Win.Forms {
             }
 
             View.RefreshContent();
-            ProduceAndPresentBulkCopyReport(result, FileLoader.Editor.NameGetterContext);
+            ProduceAndPresentBulkCopyReport(result, ModelLoader.Model.NameGetterContext);
         }
 
         private void ProduceAndPresentBulkCopyReport(ObjectExtensions.BulkCopyPropertiesResult result, INameGetterContext nameContext) {
@@ -487,12 +487,12 @@ namespace SF3.Win.Forms {
         /// <summary>
         /// Is 'true' when a file has been loaded.
         /// </summary>
-        public bool IsLoaded => FileLoader?.IsLoaded == true;
+        public bool IsLoaded => ModelLoader?.IsLoaded == true;
 
         /// <summary>
-        /// FileLoader open for the current file.
+        /// IModelFileLoader open for the current file.
         /// </summary>
-        protected IFileLoader FileLoader { get; } = new FileLoader();
+        protected IModelFileLoader ModelLoader { get; } = new ModelFileLoader();
 
         /// <summary>
         /// The view for the current model.
@@ -503,7 +503,7 @@ namespace SF3.Win.Forms {
         /// The title to set when using UpdateTitle().
         /// </summary>
         /// <returns></returns>
-        protected virtual string MakeTitle() => FileLoader?.EditorTitle(_baseTitle) ?? _baseTitle;
+        protected virtual string MakeTitle() => ModelLoader?.ModelTitle(_baseTitle) ?? _baseTitle;
 
         /// <summary>
         /// File filter for OpenFileDialog() and SaveFileDialog(). Must be overridden.
@@ -511,16 +511,16 @@ namespace SF3.Win.Forms {
         protected virtual string FileDialogFilter => "BIN Files (*.BIN)|*.BIN|All Files (*.*)|*.*";
 
         /// <summary>
-        /// Factory method for creating a model after the FileLoader has finished loading the raw file. Must be overridden.
+        /// Factory method for creating a model after the ModelLoader has finished loading the raw file. Must be overridden.
         /// (Cannot be abstract because then the VS component editor wouldn't work)
         /// </summary>
-        protected virtual IBaseEditor MakeModel(IFileLoader loader) => throw new NotImplementedException();
+        protected virtual IBaseEditor MakeModel(IModelFileLoader loader) => throw new NotImplementedException();
 
         /// <summary>
         /// Factory method for creating a view for a model created using MakeModel(). Must be overridden.
         /// (Cannot be abstract because then the VS component editor wouldn't work)
         /// </summary>
-        protected virtual IView MakeView(IFileLoader loader, IBaseEditor model) => throw new NotImplementedException();
+        protected virtual IView MakeView(IModelFileLoader loader, IBaseEditor model) => throw new NotImplementedException();
 
         /// <summary>
         /// The main menu strip.
@@ -578,7 +578,7 @@ namespace SF3.Win.Forms {
         public event EventHandler FileIsLoadedChanged;
 
         protected virtual void EditorForm_FormClosing(object sender, FormClosingEventArgs e) {
-            if (FileLoader?.IsModified == true) {
+            if (ModelLoader?.IsModified == true) {
                 if (!CloseFile())
                     e.Cancel = true;
             }
@@ -604,7 +604,7 @@ namespace SF3.Win.Forms {
         private void tsmiEdit_UseDropdowns_Click(object sender, EventArgs e) => Globals.UseDropdowns = !Globals.UseDropdowns;
 
         private string[] GetOtherFilesAtDirectoryForOpenFilter() {
-            var path = Path.GetDirectoryName(FileLoader.Filename);
+            var path = Path.GetDirectoryName(ModelLoader.Filename);
             var filters = FileDialogFilter.Split('|')[1].Split(';');
             return filters.SelectMany(x => Directory.GetFiles(path, x)).OrderBy(x => x).ToArray();
         }
@@ -614,7 +614,7 @@ namespace SF3.Win.Forms {
             if (filesInDir.Length <= 1)
                 return;
 
-            var index = filesInDir.Select((x, i) => new {x, i}).FirstOrDefault(x => x.x == FileLoader.Filename)?.i;
+            var index = filesInDir.Select((x, i) => new {x, i}).FirstOrDefault(x => x.x == ModelLoader.Filename)?.i;
             var indexToLoad = (index == null) ? 0 : (index == 0) ? (filesInDir.Length - 1) : ((int) index - 1);
             _ = LoadFile(filesInDir[indexToLoad]);
         }
@@ -624,7 +624,7 @@ namespace SF3.Win.Forms {
             if (filesInDir.Length <= 1)
                 return;
 
-            var index = filesInDir.Select((x, i) => new {x, i}).FirstOrDefault(x => x.x == FileLoader.Filename)?.i;
+            var index = filesInDir.Select((x, i) => new {x, i}).FirstOrDefault(x => x.x == ModelLoader.Filename)?.i;
             var indexToLoad = (index == null) ? 0 : (index == filesInDir.Length - 1) ? 0 : ((int) index + 1);
             _ = LoadFile(filesInDir[indexToLoad]);
         }

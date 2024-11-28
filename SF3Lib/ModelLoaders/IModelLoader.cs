@@ -4,32 +4,32 @@ using SF3.Editors;
 
 namespace SF3.ModelLoaders {
     /// <summary>
-    /// Interface for loading editors.
+    /// Interface for loading models.
     /// </summary>
-    public interface IEditorLoader : IModifiable, IDisposable {
+    public interface IModelLoader : IModifiable, IDisposable {
         /// <summary>
-        /// Closes an editor if opened. Invokes events 'PreClosed' and 'Closed' if an editor was closed.
+        /// Closes a model if opened. Invokes events 'PreClosed' and 'Closed' if an model was closed.
         /// </summary>
         /// <returns>'true' if 'IsLoaded' is 'false' after closing is completed or aborted.  Otherwise 'false'.</returns>
         bool Close();
 
         /// <summary>
-        /// The title used for the editor, with the current editor and '*' indicating modification.
+        /// The title used for the model, considering whether or not one is loaded.
         /// </summary>
-        string EditorTitle(string formTitle);
+        string ModelTitle(string formTitle);
 
         /// <summary>
-        /// The "real" editor used, backed by an underlying IDataEditor.
+        /// The model loaded and created, backed by an underlying IRawEditor.
         /// </summary>
-        IBaseEditor Editor { get; }
+        IBaseEditor Model { get; }
 
         /// <summary>
-        /// The editor that exists when IsLoaded is 'true'.
+        /// The raw editor that exists when IsLoaded is 'true'.
         /// </summary>
         IRawEditor RawEditor { get; }
 
         /// <summary>
-        /// 'True' when the editor is loaded.
+        /// 'True' when the model is loaded.
         /// </summary>
         bool IsLoaded { get; }
 

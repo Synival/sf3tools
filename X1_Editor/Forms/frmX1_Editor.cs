@@ -31,7 +31,7 @@ namespace SF3.X1_Editor.Forms {
             }
         }
 
-        public IX1_Editor Editor => base.FileLoader.Editor as IX1_Editor;
+        public IX1_Editor Editor => base.FileLoader.Model as IX1_Editor;
 
         public frmX1_Editor() {
             InitializeComponent();
@@ -60,7 +60,7 @@ namespace SF3.X1_Editor.Forms {
         protected override string FileDialogFilter
             => (IsBTL99 ? "SF3 Data (X1BTL99.BIN)|X1BTL99.BIN|" : "SF3 Data (X1*.BIN)|X1*.BIN|") + base.FileDialogFilter;
 
-        protected override IBaseEditor MakeEditor(IFileLoader loader)
+        protected override IBaseEditor MakeEditor(IModelFileLoader loader)
             => Editors.X1.X1_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario, IsBTL99);
 
         private class PopulateBattleTabConfig : IPopulateTabConfig {

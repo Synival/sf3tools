@@ -121,7 +121,7 @@ namespace SF3.Win.Forms {
                 ObjectListViews.AddRange(extraOLVs);
 
             foreach (var olv in ObjectListViews)
-                olv.Enhance(() => FileLoader.Editor?.NameGetterContext);
+                olv.Enhance(() => FileLoader.Model?.NameGetterContext);
 
             UpdateTitle();
         }
@@ -175,7 +175,7 @@ namespace SF3.Win.Forms {
             return true;
         }
 
-        private void AttachFileEditor(IFileLoader loader) {
+        private void AttachFileEditor(IModelFileLoader loader) {
             loader.TitleChanged      += (obj, args) => UpdateTitle();
             loader.PreLoaded         += (obj, args) => PreFileLoaded?.Invoke(this, args);
             loader.Loaded            += (obj, args) => FileLoaded?.Invoke(this, args);
@@ -351,13 +351,13 @@ namespace SF3.Win.Forms {
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
-                var copyFileLoader = new FileLoader();
+                var copyFileLoader = new ModelFileLoader();
                 if (!copyFileLoader.LoadFile(copyToFilename, MakeEditor)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
 
-                result = FileLoader.Editor.BulkCopyProperties(copyFileLoader.Editor);
+                result = FileLoader.Model.BulkCopyProperties(copyFileLoader.Model);
                 if (!copyFileLoader.SaveFile(copyToFilename)) {
                     ErrorMessage("Error trying to update file.");
                     return;
@@ -371,7 +371,7 @@ namespace SF3.Win.Forms {
                 return;
             }
 
-            ProduceAndPresentBulkCopyReport(result, FileLoader.Editor.NameGetterContext);
+            ProduceAndPresentBulkCopyReport(result, FileLoader.Model.NameGetterContext);
         }
 
         /// <summary>
@@ -393,12 +393,12 @@ namespace SF3.Win.Forms {
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
-                var copyFileEditor = new FileLoader();
+                var copyFileEditor = new ModelFileLoader();
                 if (!copyFileEditor.LoadFile(copyFromFilename, MakeEditor)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
-                result = copyFileEditor.Editor.BulkCopyProperties(FileLoader.Editor);
+                result = copyFileEditor.Model.BulkCopyProperties(FileLoader.Model);
             }
             catch (Exception e) {
                 //wrong file was selected
@@ -409,7 +409,7 @@ namespace SF3.Win.Forms {
             }
 
             ObjectListViews.ForEach(x => x.RefreshAllItems());
-            ProduceAndPresentBulkCopyReport(result, FileLoader.Editor.NameGetterContext);
+            ProduceAndPresentBulkCopyReport(result, FileLoader.Model.NameGetterContext);
         }
 
         private void ProduceAndPresentBulkCopyReport(ObjectExtensions.BulkCopyPropertiesResult result, INameGetterContext nameContext) {
@@ -483,7 +483,7 @@ namespace SF3.Win.Forms {
         /// <summary>
         /// FileLoader open for the current file.
         /// </summary>
-        protected IFileLoader FileLoader { get; } = new FileLoader();
+        protected IModelFileLoader FileLoader { get; } = new ModelFileLoader();
 
         /// <summary>
         /// All ObjectListView's present in the form. Populated automatically.
@@ -494,7 +494,7 @@ namespace SF3.Win.Forms {
         /// The title to set when using UpdateTitle().
         /// </summary>
         /// <returns></returns>
-        protected virtual string MakeTitle() => FileLoader?.EditorTitle(_baseTitle) ?? _baseTitle;
+        protected virtual string MakeTitle() => FileLoader?.ModelTitle(_baseTitle) ?? _baseTitle;
 
         /// <summary>
         /// File filter for OpenFileDialog() and SaveFileDialog(). Must be overridden.
@@ -505,7 +505,7 @@ namespace SF3.Win.Forms {
         /// Factory method for creating an IBaseEditor in OpenFileDialog(). Must be overridden.
         /// (Cannot be abstract because then the VS component editor wouldn't work)
         /// </summary>
-        protected virtual IBaseEditor MakeEditor(IFileLoader loader) => throw new NotImplementedException();
+        protected virtual IBaseEditor MakeEditor(IModelFileLoader loader) => throw new NotImplementedException();
 
         /// <summary>
         /// The main menu strip.

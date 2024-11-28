@@ -4,8 +4,8 @@ using SF3.Editors;
 using CommonLib;
 
 namespace SF3.ModelLoaders {
-    public abstract class EditorLoader : IEditorLoader {
-        protected EditorLoader() {
+    public abstract class BaseModelLoader : IModelLoader {
+        protected BaseModelLoader() {
             _title = UnloadedTitle;
             _onModifiedChangedDelegate = new EventHandler((o, e) => {
                 IsModifiedChanged?.Invoke(this, EventArgs.Empty);
@@ -15,32 +15,32 @@ namespace SF3.ModelLoaders {
 
         private readonly EventHandler _onModifiedChangedDelegate;
 
-        public delegate IRawEditor EditorLoaderCreateRawEditorDelegate(IEditorLoader loader);
-        public delegate IBaseEditor EditorLoaderCreateEditorDelegate(IEditorLoader loader);
-        public delegate bool EditorLoaderSaveDelegate(IEditorLoader loader);
+        public delegate IRawEditor BaseModelLoaderCreateRawEditorDelegate(IModelLoader loader);
+        public delegate IBaseEditor BaseModelLoaderCreateModelDelegate(IModelLoader loader);
+        public delegate bool BaseModelLoaderSaveDelegate(IModelLoader loader);
 
         /// <summary>
-        /// Performs loading of an editor provided. Invokes events 'PreLoaded' and 'Loaded'.
-        /// Complete ownership of 'editor' is transferred to the EditorLoader when this is invoked.
-        /// If the editor could not be used, it is immediately disposed of via Dispose().
-        /// If the editor is already loaded, this will return 'false'.
+        /// Performs loading of a model provided. Invokes events 'PreLoaded' and 'Loaded'.
+        /// Complete ownership of 'model' is transferred to the BaseModelLoader when this is invoked.
+        /// If the model could not be used, it is immediately disposed of via Dispose().
+        /// If the model is already loaded, this will return 'false'.
         /// </summary>
-        /// <param name="createEditor">Callback to create an editor when possible.</param>
-        /// <returns>'true' a new editor was loaded, otherwise 'false'.</returns>
-        protected bool PerformLoad(EditorLoaderCreateRawEditorDelegate createRawEditor, EditorLoaderCreateEditorDelegate createEditor) {
-            if (createRawEditor == null || createEditor == null || IsLoaded)
+        /// <param name="createModel">Callback to create an model when possible.</param>
+        /// <returns>'true' a new model was loaded and successfully created. Otherwise, 'false'.</returns>
+        protected bool PerformLoad(BaseModelLoaderCreateRawEditorDelegate createRawEditor, BaseModelLoaderCreateModelDelegate createModel) {
+            if (createRawEditor == null || createModel == null || IsLoaded)
                 return false;
 
             PreLoaded?.Invoke(this, EventArgs.Empty);
 
             if ((RawEditor = createRawEditor(this)) == null)
                 return false;
-            if ((Editor = createEditor(this)) == null) {
+            if ((Model = createModel(this)) == null) {
                 RawEditor = null;
                 return false;
             }
 
-            Editor.IsModifiedChanged += _onModifiedChangedDelegate;
+            Model.IsModifiedChanged += _onModifiedChangedDelegate;
 
             Loaded?.Invoke(this, EventArgs.Empty);
             if (!IsLoaded)
@@ -51,18 +51,18 @@ namespace SF3.ModelLoaders {
         }
 
         /// <summary>
-        /// Performs saving of an editor if one is loaded. Invokes events 'PreSaved' and 'Saved'.
-        /// 'Editor.IsModified' is automatically reset to 'false' upon saving.
+        /// Performs saving of a model if one is loaded. Invokes events 'PreSaved' and 'Saved'.
+        /// 'Model.IsModified' is automatically reset to 'false' upon saving.
         /// </summary>
-        /// <param name="saveAction">The function to save the editor when possible.</param>
+        /// <param name="saveAction">The function to save the model when possible.</param>
         /// <returns>'true' if saveAction was invokvd and returned success.</returns>
-        protected bool PerformSave(EditorLoaderSaveDelegate saveAction) {
-            if (saveAction == null || RawEditor == null || Editor == null || !IsLoaded)
+        protected bool PerformSave(BaseModelLoaderSaveDelegate saveAction) {
+            if (saveAction == null || RawEditor == null || Model == null || !IsLoaded)
                 return false;
 
             PreSaved?.Invoke(this, EventArgs.Empty);
 
-            if (!Editor.Finalize())
+            if (!Model.Finalize())
                 return false;
             if (!saveAction(this))
                 return false;
@@ -74,16 +74,16 @@ namespace SF3.ModelLoaders {
             return true;
         }
 
-        private IBaseEditor _editor = null;
-        public IBaseEditor Editor {
-            get => _editor;
+        private IBaseEditor _model = null;
+        public IBaseEditor Model {
+            get => _model;
             set {
-                if (_editor != value) {
-                    var oldEditor = _editor;
-                    _editor = value;
+                if (_model != value) {
+                    var oldModel = _model;
+                    _model = value;
 
-                    if (oldEditor != null)
-                        oldEditor.Dispose();
+                    if (oldModel != null)
+                        oldModel.Dispose();
 
                     UpdateTitle();
                 }
@@ -109,10 +109,10 @@ namespace SF3.ModelLoaders {
         private int _isModifiedGuard = 0;
 
         public virtual bool IsModified {
-            get => Editor?.IsModified ?? false;
+            get => Model?.IsModified ?? false;
             set {
-                if (_isModifiedGuard == 0 && Editor != null)
-                    Editor.IsModified = value;
+                if (_isModifiedGuard == 0 && Model != null)
+                    Model.IsModified = value;
             }
         }
 
@@ -121,16 +121,16 @@ namespace SF3.ModelLoaders {
 
         public event EventHandler IsModifiedChanged;
 
-        public bool IsLoaded => RawEditor != null && Editor != null;
+        public bool IsLoaded => RawEditor != null && Model != null;
 
         /// <summary>
-        /// Editor-specific implementation of determining the title for a loaded editor.
-        /// The implementation doesn't need to concern itself with details like whether the editor has been modified or not.
+        /// Model-specific implementation of determining the title for a loaded model.
+        /// The implementation doesn't need to concern itself with details like whether the model has been modified or not.
         /// </summary>
         protected abstract string LoadedTitle { get; }
 
         /// <summary>
-        /// The title to display when no editor is loaded.
+        /// The title to display when no model is loaded.
         /// </summary>
         protected virtual string UnloadedTitle => "";
 
@@ -148,19 +148,19 @@ namespace SF3.ModelLoaders {
 
         protected void UpdateTitle() {
             var title = IsLoaded ? (LoadedTitle + ((RawEditor?.IsModified == true) ? "*" : "")) : UnloadedTitle;
-            var editorTitle = Editor?.Title ?? "";
-            if (editorTitle.Length > 0)
-                title += " (" + editorTitle + ")";
+            var modelTitle = Model?.Title ?? "";
+            if (modelTitle.Length > 0)
+                title += " (" + modelTitle + ")";
             Title = title;
         }
 
-        public string EditorTitle(string formTitle) {
+        public string ModelTitle(string formTitle) {
             var title = Title;
             return formTitle + ((title == "") ? "" : (" - " + title));
         }
 
         /// <summary>
-        /// Editor-specific implementation of closing.
+        /// Model-specific implementation of closing.
         /// </summary>
         /// <returns>'true' if closing was successful and can continue. Otherwise, 'false'.</returns>
         protected virtual bool OnClose() => true;
@@ -174,10 +174,10 @@ namespace SF3.ModelLoaders {
             if (!OnClose())
                 return !IsLoaded;
 
-            if (Editor != null)
-                Editor.IsModifiedChanged -= _onModifiedChangedDelegate;
+            if (Model != null)
+                Model.IsModifiedChanged -= _onModifiedChangedDelegate;
 
-            Editor = null;
+            Model = null;
             RawEditor = null;
 
             Closed?.Invoke(this, EventArgs.Empty);
@@ -193,9 +193,9 @@ namespace SF3.ModelLoaders {
         public virtual void Dispose() {
             // TODO: what to do if close failed? throw or something?
             _ = Close();
-            if (Editor != null) {
-                Editor.Dispose();
-                Editor = null;
+            if (Model != null) {
+                Model.Dispose();
+                Model = null;
             }
             if (RawEditor != null) {
                 RawEditor.Dispose();

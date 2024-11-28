@@ -1,4 +1,3 @@
-using System.Windows.Forms;
 using SF3.Win.Forms;
 using SF3.Editors;
 using SF3.Editors.MPD;
@@ -22,7 +21,7 @@ namespace SF3.MPD_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.3";
 
-        public IMPD_Editor Editor => base.FileLoader.Editor as IMPD_Editor;
+        public IMPD_Editor Editor => base.ModelLoader.Model as IMPD_Editor;
 
         public frmMPDEditor() {
             InitializeComponent();
@@ -37,10 +36,10 @@ namespace SF3.MPD_Editor.Forms {
         protected override string FileDialogFilter
             => "SF3 Data (*.MPD)|*.MPD|" + base.FileDialogFilter;
 
-        protected override IBaseEditor MakeModel(IFileLoader loader)
+        protected override IBaseEditor MakeModel(IModelFileLoader loader)
             => Editors.MPD.MPD_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
-        protected override IView MakeView(IFileLoader loader, IBaseEditor model)
+        protected override IView MakeView(IModelFileLoader loader, IBaseEditor model)
             => new MPD_View(loader.Filename, (Editors.MPD.MPD_Editor) model);
 
         private void tsmiTextures_ImportFolder_Click(object sender, System.EventArgs e) {

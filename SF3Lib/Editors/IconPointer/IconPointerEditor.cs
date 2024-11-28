@@ -74,9 +74,9 @@ namespace SF3.Editors.IconPointer {
                            itemIconAddress_X026  >= 0 && itemIconAddress_X026  < Editor.Size;
 
             if (!(isX021 || isX026))
-                throw new FileEditorException("This doesn't look like an X021 or X026 file");
+                throw new ModelFileLoaderException("This doesn't look like an X021 or X026 file");
             else if (isX021 && isX026)
-                throw new FileEditorException("This looks like both an X021 and X026 file");
+                throw new ModelFileLoaderException("This looks like both an X021 and X026 file");
 
             var spellIconAddress = isX026 ? spellIconAddress_X026 : spellIconAddress_X021;
             var itemIconAddress  = isX026 ? itemIconAddress_X026  : itemIconAddress_X021;

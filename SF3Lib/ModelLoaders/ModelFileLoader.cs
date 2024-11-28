@@ -1,17 +1,16 @@
 using System;
 using System.IO;
 using SF3.RawEditors;
-using SF3.Editors;
 using SF3.Exceptions;
-using static SF3.ModelLoaders.FileLoaderDelegates;
+using static SF3.ModelLoaders.ModelFileLoaderDelegates;
 
 namespace SF3.ModelLoaders {
     /// <summary>
     /// Used for loading, saving, reading, and modifying .BIN files.
     /// </summary>
-    public partial class FileLoader : EditorLoader, IFileLoader {
-        public FileLoader() {
-            _createRawEditor = (IFileLoader loader, string filename, Stream stream) => {
+    public partial class ModelFileLoader : BaseModelLoader, IModelFileLoader {
+        public ModelFileLoader() {
+            _createRawEditor = (IModelFileLoader loader, string filename, Stream stream) => {
                     byte[] newData;
                     using (var memoryStream = new MemoryStream()) {
                         stream.CopyTo(memoryStream);
@@ -21,21 +20,21 @@ namespace SF3.ModelLoaders {
             };
         }
 
-        public FileLoader(FileLoaderCreateRawEditorDelegate createRawEditor) {
+        public ModelFileLoader(ModelFileLoaderCreateRawEditorDelegate createRawEditor) {
             _createRawEditor = createRawEditor;
         }
 
-        public virtual bool LoadFile(string filename, FileLoaderCreateEditorDelegate createEditor) {
+        public virtual bool LoadFile(string filename, ModelFileLoaderCreateModelDelegate createModel) {
             try {
                 using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
-                    return LoadFile(filename, stream, createEditor);
+                    return LoadFile(filename, stream, createModel);
             }
             catch (Exception) {
                 return false;
             }
         }
 
-        public virtual bool LoadFile(string filename, Stream stream, FileLoaderCreateEditorDelegate createEditor) {
+        public virtual bool LoadFile(string filename, Stream stream, ModelFileLoaderCreateModelDelegate createModel) {
             return PerformLoad(e => {
                 try {
                     var newEditor = _createRawEditor(this, filename, stream);
@@ -47,12 +46,12 @@ namespace SF3.ModelLoaders {
                 catch (Exception) {
                     return null;
                 }
-            }, el => createEditor((IFileLoader) el));
+            }, el => createModel((IModelFileLoader) el));
         }
 
         public virtual bool SaveFile(string filename) {
             if (!IsLoaded)
-                throw new FileEditorNotLoadedException();
+                throw new ModelFileLoaderNotLoadedException();
             return PerformSave(el => {
                 try {
                     File.WriteAllBytes(filename, el.RawEditor.GetAllData());
@@ -65,7 +64,7 @@ namespace SF3.ModelLoaders {
             });
         }
 
-        private readonly FileLoaderCreateRawEditorDelegate _createRawEditor;
+        private readonly ModelFileLoaderCreateRawEditorDelegate _createRawEditor;
 
         private string _filename = null;
 

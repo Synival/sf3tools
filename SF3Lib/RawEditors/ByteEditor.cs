@@ -73,9 +73,9 @@ namespace SF3.RawEditors {
             if (bytes < 1 || bytes > 4)
                 throw new ArgumentOutOfRangeException(nameof(bytes));
             if (Data == null)
-                throw new FileEditorNotLoadedException();
+                throw new NullReferenceException(nameof(Data));
             if (location + bytes > Data.Length)
-                throw new FileEditorReadException();
+                throw new ArgumentOutOfRangeException(nameof(location) + " + " + nameof(bytes));
 
             uint value = 0;
             for (var i = 0; i < bytes; i++)
@@ -89,19 +89,13 @@ namespace SF3.RawEditors {
 
         public string GetString(int location, int length) {
             if (Data == null)
-                throw new FileEditorNotLoadedException();
+                throw new ArgumentNullException(nameof(Data));
 
             var value = new byte[length];
             for (var i = 0; i < length; i++) {
-                try {
-                    if (Data[location + i] == 0x0)
-                        break;
-                    value[i] = Data[location + i];
-                }
-                catch (IndexOutOfRangeException) {
-                    //wrong kind of file was selected to load
-                    throw new FileEditorReadException();
-                }
+                if (Data[location + i] == 0x0)
+                    break;
+                value[i] = Data[location + i];
             }
             var InputText = Encoding.GetEncoding("shift-jis");
             return InputText.GetString(value);
@@ -113,9 +107,9 @@ namespace SF3.RawEditors {
             if (bytes < 1 || bytes > 4)
                 throw new ArgumentOutOfRangeException(nameof(bytes));
             if (Data == null)
-                throw new FileEditorNotLoadedException();
+                throw new NullReferenceException(nameof(Data));
             if (location + bytes > Data.Length)
-                throw new FileEditorReadException();
+                throw new ArgumentOutOfRangeException(nameof(location) + " + " + nameof(bytes));
 
             var converted = BitConverter.GetBytes(value);
 
@@ -134,7 +128,7 @@ namespace SF3.RawEditors {
 
         public void SetString(int location, int length, string value) {
             if (Data == null)
-                throw new FileEditorNotLoadedException();
+                throw new NullReferenceException(nameof(Data));
             var OutputText = Encoding.GetEncoding("shift-jis");
             var name = OutputText.GetBytes(value);
             for (var i = 0; i < name.Length; i++) {
@@ -159,9 +153,9 @@ namespace SF3.RawEditors {
             if (bit < 1 || bit > 8)
                 throw new ArgumentOutOfRangeException(nameof(bit));
             if (Data == null)
-                throw new FileEditorNotLoadedException();
+                throw new NullReferenceException(nameof(Data));
             if (location >= Data.Length)
-                throw new FileEditorReadException();
+                throw new ArgumentOutOfRangeException(nameof(location));
 
             return (Data[location] >> bit - 1 & 0x01) == 1 ? true : false;
         }
@@ -172,9 +166,9 @@ namespace SF3.RawEditors {
             if (bit < 1 || bit > 8)
                 throw new ArgumentOutOfRangeException(nameof(bit));
             if (Data == null)
-                throw new FileEditorNotLoadedException();
+                throw new NullReferenceException(nameof(Data));
             if (location >= Data.Length)
-                throw new FileEditorReadException();
+                throw new ArgumentOutOfRangeException(nameof(location));
 
             var bitmask = (byte)(1 << bit - 1);
 

@@ -14,7 +14,7 @@ namespace SF3.X002_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.24";
 
-        public IX002_Editor Editor => base.FileLoader.Editor as IX002_Editor;
+        public IX002_Editor Editor => base.FileLoader.Model as IX002_Editor;
 
         public frmX002_Editor() {
             InitializeComponent();
@@ -23,7 +23,7 @@ namespace SF3.X002_Editor.Forms {
 
         protected override string FileDialogFilter => "SF3 Data (X002.BIN)|X002.BIN|" + base.FileDialogFilter;
 
-        protected override IBaseEditor MakeEditor(IFileLoader loader)
+        protected override IBaseEditor MakeEditor(IModelFileLoader loader)
             => Editors.X002.X002_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
         protected override bool OnLoad() {
