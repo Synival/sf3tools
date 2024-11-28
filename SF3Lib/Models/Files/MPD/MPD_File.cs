@@ -117,6 +117,7 @@ namespace SF3.Models.Files.MPD {
                 ChunkHeader.Rows[i].CompressionType =
                     ChunkData[i] == null && (Chunks[i]?.Data?.Length ?? 0) == 0 ? "--" :
                     ChunkData[i] == null ? "(WIP)" :
+                    (i == 3) ? "Individually Compressed" :
                     ChunkData[i].IsCompressed ? "Compressed" :
                     "Uncompressed";
             }

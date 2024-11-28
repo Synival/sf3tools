@@ -28,7 +28,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Compression Type", displayOrder: 2, isReadOnly: true)]
+        [TableViewModelColumn(displayName: "Compression Type", displayOrder: 2, isReadOnly: true, minWidth: 150)]
         public string CompressionType { get; set; } = "(Unset)";
 
         [BulkCopy]
