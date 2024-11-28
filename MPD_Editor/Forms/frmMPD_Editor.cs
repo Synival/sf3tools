@@ -17,8 +17,7 @@ using static CommonLib.Win.Utils.MessageUtils;
 using static CommonLib.Utils.PixelConversion;
 
 namespace SF3.MPD_Editor.Forms {
-
-    public partial class frmMPDEditor : EditorForm {
+    public partial class frmMPDEditor : EditorFormNew {
         // Used to display version in the application
         protected override string Version => "0.3";
 

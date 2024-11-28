@@ -34,5 +34,8 @@
     <Compile Update="Controls\TextureControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Forms\EditorFormNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
