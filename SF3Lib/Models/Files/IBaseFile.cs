@@ -10,7 +10,7 @@ namespace SF3.Models.Files {
         /// Perform any extra tasks that need to be performed before saving.
         /// </summary>
         /// <returns>'true' if finalization was successful, otherwise 'false'.</returns>
-        bool Finalize();
+        bool Finish();
 
         /// <summary>
         /// The context for fetching named values.
@@ -23,8 +23,8 @@ namespace SF3.Models.Files {
         string Title { get; }
 
         /// <summary>
-        /// Triggered when Finalize() completes successfully.
+        /// Triggered when Finish() completes successfully.
         /// </summary>
-        event EventHandler Finalized;
+        event EventHandler Finished;
     }
 }

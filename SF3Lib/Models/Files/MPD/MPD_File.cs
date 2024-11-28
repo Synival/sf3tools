@@ -203,7 +203,7 @@ namespace SF3.Models.Files.MPD {
             for (var i = 0; i < Chunks.Length; i++) {
                 var chunkData = ChunkData[i];
 
-                // Finalize compressed chunks.
+                // Finish compressed chunks.
                 if (chunkData != null && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified)) {
                     if (chunkData.IsCompressed && !chunkData.Recompress())
                         return false;
@@ -263,7 +263,7 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public override bool OnFinalize()
+        public override bool OnFinish()
             => Recompress(true);
 
         public override void Dispose() {

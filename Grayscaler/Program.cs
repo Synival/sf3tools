@@ -41,7 +41,7 @@ namespace Grayscaler {
                 }
 
                 // This will compress chunks and update the chunk table header.
-                mpdFile.Finalize();
+                mpdFile.Finish();
 
                 // Write it back out!
                 var output = mpdFile.Data.GetAllData();

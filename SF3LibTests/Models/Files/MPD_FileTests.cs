@@ -140,12 +140,12 @@ namespace SF3.Tests.Models.Files {
         }
 
         [TestMethod]
-        public void Finalize_WithoutChanges_NothingHasIsModifiedFlag() {
+        public void Finish_WithoutChanges_NothingHasIsModifiedFlag() {
             // Arrange
             var data = MakeFile();
 
             // Act
-            data.Finalize();
+            data.Finish();
 
             // Assert
             foreach (var ce in data.ChunkData.Where(x => x != null)) {
@@ -156,13 +156,13 @@ namespace SF3.Tests.Models.Files {
         }
 
         [TestMethod]
-        public void Finalize_WithChanges_CompressedDataHasIsModifiedFlag() {
+        public void Finish_WithChanges_CompressedDataHasIsModifiedFlag() {
             // Arrange
             var data = MakeFile();
             data.TextureChunks[0].TextureTable.Rows[0].Width *= 2;
 
             // Act
-            data.Finalize();
+            data.Finish();
 
             // Assert
             for (var i = 0; i < data.Chunks.Length; i++) {

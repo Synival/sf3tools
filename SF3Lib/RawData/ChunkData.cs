@@ -19,15 +19,15 @@ namespace SF3.RawData {
 
             if (CompressedData != null)
                 CompressedData.NeedsRecompressionChanged += OnNeedsRecompressionChanged;
-            ChildData.Finalized += OnFinalized;
+            ChildData.Finished += OnFinished;
             ChildData.IsModifiedChanged += OnIsModifiedChanged;
         }
 
         public void OnNeedsRecompressionChanged(object sender, EventArgs eventArgs)
             => NeedsRecompressionChanged?.Invoke(sender, eventArgs);
 
-        public void OnFinalized(object sender, EventArgs eventArgs)
-            => Finalized?.Invoke(sender, eventArgs);
+        public void OnFinished(object sender, EventArgs eventArgs)
+            => Finished?.Invoke(sender, eventArgs);
 
         public void OnIsModifiedChanged(object sender, EventArgs eventArgs)
             => IsModifiedChanged?.Invoke(sender, eventArgs);
@@ -52,13 +52,13 @@ namespace SF3.RawData {
         public void SetDouble(int location, int value) => ChildData.SetDouble(location, value);
         public void SetString(int location, int length, string value) => ChildData.SetString(location, length, value);
         public void SetBit(int location, int bit, bool value) => ChildData.SetBit(location, bit, value);
-        public bool Finalize() => ChildData.Finalize();
+        public bool Finish() => ChildData.Finish();
         public ScopeGuard IsModifiedChangeBlocker() => ChildData.IsModifiedChangeBlocker();
 
         public void Dispose() {
             if (CompressedData != null)
                 CompressedData.NeedsRecompressionChanged -= OnNeedsRecompressionChanged;
-            ChildData.Finalized -= OnFinalized;
+            ChildData.Finished -= OnFinished;
             ChildData.IsModifiedChanged -= OnIsModifiedChanged;
 
             if (CompressedData != null)
@@ -90,7 +90,7 @@ namespace SF3.RawData {
         }
 
         public event EventHandler NeedsRecompressionChanged;
-        public event EventHandler Finalized;
+        public event EventHandler Finished;
         public event EventHandler IsModifiedChanged;
     }
 }

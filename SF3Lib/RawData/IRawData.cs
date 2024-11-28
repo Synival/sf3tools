@@ -107,11 +107,11 @@ namespace SF3.RawData {
         /// Should be invoked before any save operations.
         /// </summary>
         /// <returns>'true' on success, otherwise 'false'.</returns>
-        bool Finalize();
+        bool Finish();
 
         /// <summary>
-        /// Event that occurs when the Finalize() is completed successfully.
+        /// Event that occurs when the Finish() is completed successfully.
         /// </summary>
-        event EventHandler Finalized;
+        event EventHandler Finished;
     }
 }

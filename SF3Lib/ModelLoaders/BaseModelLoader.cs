@@ -62,7 +62,7 @@ namespace SF3.ModelLoaders {
 
             PreSaved?.Invoke(this, EventArgs.Empty);
 
-            if (!Model.Finalize())
+            if (!Model.Finish())
                 return false;
             if (!saveAction(this))
                 return false;

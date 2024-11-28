@@ -188,15 +188,15 @@ namespace SF3.RawData {
 
         public virtual void Dispose() { }
 
-        public virtual bool OnFinalize() => true;
+        public virtual bool OnFinish() => true;
 
-        public bool Finalize() {
-            if (!OnFinalize())
+        public bool Finish() {
+            if (!OnFinish())
                 return false;
-            Finalized?.Invoke(this, EventArgs.Empty);
+            Finished?.Invoke(this, EventArgs.Empty);
             return true;
         }
 
-        public event EventHandler Finalized;
+        public event EventHandler Finished;
     }
 }

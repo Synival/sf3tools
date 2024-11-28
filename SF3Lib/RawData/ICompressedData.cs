@@ -3,7 +3,7 @@
 namespace SF3.RawData {
     /// <summary>
     /// Data that automatically decompresses its incoming bytes into a "sub-data" object called 'DecompressedData'.
-    /// Upon Finalize(), it will update its own compressed data using the decompressed snapshot.
+    /// Upon Finish(), it will update its own compressed data using the decompressed snapshot.
     /// </summary>
     public interface ICompressedData : IByteData {
         /// <summary>
@@ -16,7 +16,7 @@ namespace SF3.RawData {
 
         /// <summary>
         /// Decompressed data initialized with the data from the ICompressedData. May become out of sync withe the
-        /// ICompressedData's data, in which case it should be Finalized (committed).
+        /// ICompressedData's data, in which case it should be "finished" (finalized / committed).
         /// </summary>
         IByteData DecompressedData { get; }
 

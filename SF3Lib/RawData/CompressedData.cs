@@ -57,10 +57,10 @@ namespace SF3.RawData {
             return true;
         }
 
-        public override bool OnFinalize() {
-            if (!base.OnFinalize())
+        public override bool OnFinish() {
+            if (!base.OnFinish())
                 return false;
-            if (!DecompressedData.Finalize())
+            if (!DecompressedData.Finish())
                 return false;
             if (NeedsRecompression && !Recompress())
                 return false;

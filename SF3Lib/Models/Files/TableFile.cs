@@ -52,15 +52,15 @@ namespace SF3.Models.Files {
         public abstract IEnumerable<ITable> MakeTables();
 
         /// <summary>
-        /// Performs finalization tasks, aborting finalization if 'false' is returned.
+        /// Performs finishing tasks, aborting finishing if 'false' is returned.
         /// </summary>
         /// <returns>'true' if successful, 'false' if not.</returns>
-        public virtual bool OnFinalize() => Data.Finalize();
+        public virtual bool OnFinish() => Data.Finish();
 
-        public bool Finalize() {
-            if (!OnFinalize())
+        public bool Finish() {
+            if (!OnFinish())
                 return false;
-            Finalized?.Invoke(this, EventArgs.Empty);
+            Finished?.Invoke(this, EventArgs.Empty);
             return true;
         }
 
@@ -77,6 +77,6 @@ namespace SF3.Models.Files {
 
         public virtual string Title => "";
 
-        public event EventHandler Finalized;
+        public event EventHandler Finished;
     }
 }
