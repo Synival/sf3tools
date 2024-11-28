@@ -6,12 +6,12 @@ using SF3.RawData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureChunk {
-    public class Texture : Struct, ITexture {
+    public class TextureModel : Struct, ITexture {
         private readonly int widthAddress;
         private readonly int heightAddress;
         private readonly int imageDataOffsetAddress;
 
-        public Texture(IRawData data, int id, string name, int address, int? nextImageDataOffset = null)
+        public TextureModel(IRawData data, int id, string name, int address, int? nextImageDataOffset = null)
         : base(data, id, name, address, GlobalSize) {
             widthAddress           = Address;     // 1 byte
             heightAddress          = Address + 1; // 1 byte

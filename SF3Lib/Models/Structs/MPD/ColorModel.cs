@@ -3,8 +3,8 @@ using SF3.Models.Structs;
 using SF3.RawData;
 
 namespace SF3.Models.Structs.MPD {
-    public class Color : Struct {
-        public Color(IRawData data, int id, string name, int address)
+    public class ColorModel : Struct {
+        public ColorModel(IRawData data, int id, string name, int address)
         : base(data, id, name, address, 2) {
         }
 
