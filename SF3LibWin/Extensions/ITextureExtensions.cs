@@ -2,27 +2,29 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using SF3.Models.Structs.MPD.TextureChunk;
 
 namespace SF3.Win.Extensions {
-    public static class TextureExtensions {
+    public static class ITextureExtensions {
         /// <summary>
         /// Creates a bitmap image using an a texture's BitmapDataARGB1555.
         /// </summary>
         /// <param name="texture">This texture whose Bitmap image should be generated.</param>
         /// <returns>A bitmap image for the texture.</returns>
-        public static Bitmap CreateBitmap(this Texture texture) {
+        public static Bitmap CreateBitmap(this ITexture texture) {
+            if (!texture.ImageIsLoaded)
+                return null;
+
             Bitmap image = null;
             byte[] imageData = null;
 
             // Determine what format to use and what data to copy in.
-            if (texture.CachedBitmapDataARGB1555 != null) {
+            if (texture.BytesPerPixel == 2 && texture.BitmapDataARGB1555 != null) {
                 image = new Bitmap(texture.Width, texture.Height, PixelFormat.Format16bppArgb1555);
-                imageData = texture.CachedBitmapDataARGB1555;
+                imageData = texture.BitmapDataARGB1555;
             }
-            else if (texture.CachedBitmapDataPalette != null) {
+            else if (texture.BytesPerPixel == 1 && texture.BitmapDataIndexed != null) {
                 image = new Bitmap(texture.Width, texture.Height, PixelFormat.Format8bppIndexed);
-                imageData = texture.CachedBitmapDataPalette;
+                imageData = texture.BitmapDataIndexed;
             }
             else
                 throw new InvalidOperationException("Unhandled bitmap type");

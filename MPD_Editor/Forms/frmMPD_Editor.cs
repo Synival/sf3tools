@@ -113,7 +113,7 @@ namespace SF3.MPD_Editor.Forms {
                                         // If the alpha channel is clear, preserve whatever color was originally used.
                                         // This should prevent marking data as 'modified' too often.
                                         if ((abgr1555 & 0x8000) == 0) {
-                                            var cached = ABGR1555toChannels(texture.CachedImageData16Bit[x, y]);
+                                            var cached = ABGR1555toChannels(texture.ImageData16Bit[x, y]);
                                             cached.a = 0;
                                             abgr1555 = cached.ToABGR1555();
                                         }
@@ -122,7 +122,7 @@ namespace SF3.MPD_Editor.Forms {
                                     }
                                 }
 
-                                texture.ImageData16Bit = newImageData;
+                                texture.RawImageData16Bit = newImageData;
                             }
                             succeeded++;
                         }
@@ -173,7 +173,7 @@ namespace SF3.MPD_Editor.Forms {
                         if (texture.AssumedPixelFormat == Types.TexturePixelFormat.ABGR1555) {
                             using (var bitmap = new Bitmap(texture.Width, texture.Height, PixelFormat.Format16bppArgb1555)) {
                                 var bitmapData = bitmap.LockBits(new Rectangle(0, 0, texture.Width, texture.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
-                                Marshal.Copy(texture.CachedBitmapDataARGB1555, 0, bitmapData.Scan0, texture.CachedBitmapDataARGB1555.Length);
+                                Marshal.Copy(texture.BitmapDataARGB1555, 0, bitmapData.Scan0, texture.BitmapDataARGB1555.Length);
                                 bitmap.UnlockBits(bitmapData);
                                 bitmap.Save(filename, ImageFormat.Png);
                             }

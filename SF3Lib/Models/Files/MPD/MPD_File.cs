@@ -91,6 +91,7 @@ namespace SF3.Models.Files.MPD {
                         // TODO: this is super inefficient!!!
                         var bytes = Chunks[3].Data.Skip((int) frame.CompressedTextureOffset).Take(totalBytes).ToArray();
                         TextureAnimFrameData[i] = new CompressedData(bytes, totalBytes);
+                        _ = frame.FetchAndAssignImageData(TextureAnimFrameData[i].DecompressedData);
                     }
                 }
             }
@@ -188,13 +189,16 @@ namespace SF3.Models.Files.MPD {
         private static extern IntPtr memcpy(IntPtr dest, IntPtr src, int count);
 
         public bool Recompress(bool onlyModified) {
-            // TODO: update group texture frame textures as well!!
+            var chunksModified = ChunkData.Any(x => x != null && (x.IsModified || x.NeedsRecompression));
+            var framesModified = TextureAnimFrameData.Any(x => x != null && (x.IsModified || x.NeedsRecompression));
 
             // Don't bother doing anything if no chunks have been modified.
-            if (onlyModified && !ChunkData.Any(x => x != null && (x.IsModified || x.NeedsRecompression)))
+            if (onlyModified && !chunksModified && !framesModified)
                 return true;
 
             const int ramOffset = 0x290000;
+
+            // TODO: Rebuild Chunk[3] with updated animated texture frames.
 
             // We'll need to completely rewrite this file. Start by recompressing chunks.
             var currentChunkPos = 0x2100;

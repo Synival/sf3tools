@@ -1,10 +1,11 @@
 ﻿using System;
 using CommonLib.Attributes;
-using SF3.Models.Structs;
+using CommonLib.Utils;
 using SF3.RawData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureAnimation {
-    public class FrameModel : Struct {
+    public class FrameModel : Struct, ITexture {
         private readonly int _compressedTextureOffsetAddress;
         private readonly int _unknownAddress;
 
@@ -23,7 +24,72 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             _unknownAddress                 = Address + 1 * _bytesPerProperty;
         }
 
+        public ushort[,] FetchAndAssignImageData(IRawData data) {
+            var imageData = new ushort[Width, Height];
+            var off = 0;
+            for (var y = 0; y < Height; y++) {
+                for (var x = 0; x < Width; x++) {
+                    var texPixel = (ushort) data.GetWord(off);
+                    off += 2;
+                    imageData[x, y] = texPixel;
+                }
+            }
+
+            ImageData16Bit = imageData;
+            ImageIsLoaded = true;
+            return imageData;
+        }
+
+        public ushort[,] UpdateImageData(IRawData data, ushort[,] imageData) {
+            if (imageData.GetLength(0) != Width || imageData.GetLength(1) != Height)
+                throw new ArgumentException("Incoming data dimensions must match specified width/height");
+
+            var off = 0;
+            for (var y = 0; y < Height; y++) {
+                for (var x = 0; x < Width; x++) {
+                    data.SetWord(off, imageData[x, y]);
+                    off += 2;
+                }
+            }
+
+            ImageData16Bit = imageData;
+            ImageIsLoaded = true;
+            return imageData;
+        }
+
+        /// <summary>
+        /// Used for Scenario 3 and PD, which has 32-bit member variables instead of 16-bit.
+        /// </summary>
         public bool Is32Bit { get; }
+
+        public bool ImageIsLoaded { get; private set; } = false;
+
+        public int BytesPerPixel => 2;
+
+        public TexturePixelFormat AssumedPixelFormat => TexturePixelFormat.ABGR1555;
+
+        // Not supported. Images are always non-indexed.
+        public byte[,] ImageData8Bit {
+            get => throw new NotSupportedException();
+            set => throw new NotSupportedException();
+        }
+
+        public ushort[,] _imageData16Bit = null;
+
+        public ushort[,] ImageData16Bit {
+            get => _imageData16Bit;
+            private set {
+                if (_imageData16Bit != value) {
+                    _imageData16Bit = value;
+                    BitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToABGR1555BitmapData(value);
+                }
+            }
+        }
+
+        // Not supported. Images are always non-indexed.
+        public byte[] BitmapDataIndexed => throw new NotSupportedException();
+
+        public byte[] BitmapDataARGB1555 { get; private set; } = null;
 
         [TableViewModelColumn(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public int TextureID { get; }

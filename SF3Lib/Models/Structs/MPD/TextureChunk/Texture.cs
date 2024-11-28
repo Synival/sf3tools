@@ -1,12 +1,12 @@
 ﻿using System;
 using CommonLib.Attributes;
+using CommonLib.Extensions;
 using CommonLib.Utils;
-using SF3.Models.Structs;
 using SF3.RawData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureChunk {
-    public class Texture : Struct {
+    public class Texture : Struct, ITexture {
         private readonly int widthAddress;
         private readonly int heightAddress;
         private readonly int imageDataOffsetAddress;
@@ -20,15 +20,21 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             if (nextImageDataOffset.HasValue && Width > 0 && Height > 0) {
                 var imageDataSize = nextImageDataOffset.Value - ImageDataOffset;
                 var bytesPerPixel =  imageDataSize / (double) Width /  Height;
-                if (bytesPerPixel == 2.00)
+                if (bytesPerPixel == 2.00) {
+                    BytesPerPixel = 2;
                     AssumedPixelFormat = TexturePixelFormat.ABGR1555;
-                else if (bytesPerPixel == 1.00)
+                }
+                else if (bytesPerPixel == 1.00) {
+                    BytesPerPixel = 1;
                     AssumedPixelFormat = TexturePixelFormat.UnknownPalette;
+                }
                 else {
                     try {
                         throw new ArgumentException("Unhandled bytes per pixel: " + bytesPerPixel.ToString());
                     }
                     catch { }
+
+                    BytesPerPixel = 2;
                     AssumedPixelFormat = TexturePixelFormat.ABGR1555;
                 }
             }
@@ -36,7 +42,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 AssumedPixelFormat = TexturePixelFormat.ABGR1555;
 
             _readyForImageData = true;
-            UpdateImageData();
+            _ = UpdateImageData();
         }
 
         public static int GlobalSize => 0x04;
@@ -49,17 +55,19 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
             try {
                 if (AssumedPixelFormat == TexturePixelFormat.ABGR1555) {
-                    CachedImageData8Bit = null;
-                    CachedImageData16Bit = ImageData16Bit;
+                    ImageData8Bit = null;
+                    ImageData16Bit = RawImageData16Bit;
                 }
                 else {
-                    CachedImageData8Bit = ImageData8Bit;
-                    CachedImageData16Bit = null;
+                    ImageData8Bit = RawImageData8Bit;
+                    ImageData16Bit = null;
                 }
 
+                ImageIsLoaded = true;
                 return true;
             }
             catch {
+                ImageIsLoaded = false;
                 return false;
             }
         }
@@ -94,11 +102,73 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             }
         }
 
+        public bool ImageIsLoaded { get; private set; } = false;
+
+        public int BytesPerPixel { get; }
+
         [TableViewModelColumn(displayName: "(Assumed) Pixel Format", displayOrder: 3)]
         public TexturePixelFormat AssumedPixelFormat { get; }
 
+        private byte[,] _cachedImageData8Bit = null;
+        public byte[,] ImageData8Bit {
+            get => (BytesPerPixel == 1) ? (byte[,]) _cachedImageData8Bit.Clone() : throw new InvalidOperationException();
+            protected set {
+                if (_cachedImageData8Bit == value)
+                    return;
+                _cachedImageData8Bit = value;
+                BitmapDataIndexed = value?.To1DArray();
+            }
+        }
+
+        private ushort[,] _cachedImageData16Bit = null;
         public ushort[,] ImageData16Bit {
-            protected get {
+            get => (BytesPerPixel == 2) ? (ushort[,]) _cachedImageData16Bit.Clone() : throw new InvalidOperationException();
+            protected set {
+                if (_cachedImageData16Bit == value)
+                    return;
+                _cachedImageData16Bit = value;
+                BitmapDataARGB1555 = (value != null) ? BitmapUtils.ConvertABGR1555DataToABGR1555BitmapData(value) : null;
+            }
+        }
+
+        public byte[] BitmapDataARGB1555 { get; private set; } = null;
+        public byte[] BitmapDataIndexed { get; private set; } = null;
+
+        public byte[,] RawImageData8Bit {
+            get {
+                if (BytesPerPixel != 1)
+                    throw new InvalidOperationException();
+
+                var data = new byte[Width, Height];
+                var off = ImageDataOffset;
+                for (var y = 0; y < Height; y++) {
+                    for (var x = 0; x < Width; x++) {
+                        var texPixel = (byte) Data.GetByte(off++);
+                        data[x, y] = texPixel;
+                    }
+                }
+                return data;
+            }
+            set {
+                if (BytesPerPixel != 1)
+                    throw new InvalidOperationException();
+                if (value.GetLength(0) != Width || value.GetLength(1) != Height)
+                    throw new ArgumentException("Incoming data dimensions must match specified width/height");
+
+                var off = ImageDataOffset;
+                for (var y = 0; y < Height; y++)
+                    for (var x = 0; x < Width; x++)
+                        Data.SetByte(off++, value[x, y]);
+
+                ImageData8Bit = value;
+            }
+        }
+
+        public ushort[,] RawImageData16Bit {
+            get {
+                if (BytesPerPixel != 2)
+                    throw new InvalidOperationException();
+
                 var data = new ushort[Width, Height];
                 var off = ImageDataOffset;
                 for (var y = 0; y < Height; y++) {
@@ -111,6 +181,8 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 return data;
             }
             set {
+                if (BytesPerPixel != 2)
+                    throw new InvalidOperationException();
                 if (value.GetLength(0) != Width || value.GetLength(1) != Height)
                     throw new ArgumentException("Incoming data dimensions must match specified width/height");
 
@@ -122,93 +194,8 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                     }
                 }
 
-                CachedImageData16Bit = value;
+                ImageData16Bit = value;
             }
         }
-
-        private ushort[,] _cachedImageData16Bit = null;
-
-        public ushort[,] CachedImageData16Bit {
-            get => (ushort[,]) _cachedImageData16Bit.Clone();
-            private set {
-                if (_cachedImageData16Bit != value) {
-                    _cachedImageData16Bit = value;
-                    if (value == null) {
-                        CachedBitmapDataARGB1555 = null;
-                        return;
-                    }
-
-                    var imageDataBytes = new byte[value.GetLength(0) * value.GetLength(1) * 2];
-                    var pos = 0;
-                    for (var y = 0; y < value.GetLength(1); y++) {
-                        for (var x = 0; x < value.GetLength(0); x++) {
-                            var newBits = PixelConversion.ARGB1555toABGR1555(value[x, y]);
-                            imageDataBytes[pos++] = (byte) (newBits & 0x00FF);
-                            imageDataBytes[pos++] = (byte) ((newBits & 0xFF00) >> 8);
-                        }
-                    }
-
-                    CachedBitmapDataARGB1555 = imageDataBytes;
-                }
-            }
-        }
-
-        protected byte[,] ImageData8Bit {
-            get {
-                var data = new byte[Width, Height];
-                var off = ImageDataOffset;
-                for (var y = 0; y < Height; y++) {
-                    for (var x = 0; x < Width; x++) {
-                        var texPixel = (byte) Data.GetByte(off++);
-                        data[x, y] = texPixel;
-                    }
-                }
-                return data;
-            }
-            set {
-                if (value.GetLength(0) != Width || value.GetLength(1) != Height)
-                    throw new ArgumentException("Incoming data dimensions must match specified width/height");
-
-                var off = ImageDataOffset;
-                for (var y = 0; y < Height; y++)
-                    for (var x = 0; x < Width; x++)
-                        Data.SetByte(off++, value[x, y]);
-
-                CachedImageData8Bit = value;
-            }
-        }
-
-        private byte[,] _cachedImageData8Bit = null;
-
-        public byte[,] CachedImageData8Bit {
-            get => (byte[,]) _cachedImageData8Bit.Clone();
-            set {
-                if (_cachedImageData8Bit != value) {
-                    _cachedImageData8Bit = value;
-                    if (value == null) {
-                        CachedBitmapDataPalette = null;
-                        return;
-                    }
-
-                    var imageDataBytes = new byte[value.GetLength(0) * value.GetLength(1)];
-                    var pos = 0;
-                    for (var y = 0; y < value.GetLength(1); y++)
-                        for (var x = 0; x < value.GetLength(0); x++)
-                            imageDataBytes[pos++] = value[x, y];
-
-                    CachedBitmapDataPalette = imageDataBytes;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Image data for 16-bit ARGB1555 format.
-        /// </summary>
-        public byte[] CachedBitmapDataARGB1555 { get; private set; } = null;
-
-        /// <summary>
-        /// Image data for 8-bit palette format.
-        /// </summary>
-        public byte[] CachedBitmapDataPalette { get; private set; } = null;
     }
 }

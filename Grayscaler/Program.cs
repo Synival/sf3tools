@@ -1,4 +1,5 @@
-﻿using SF3.Models.Files.MPD;
+﻿using SF3;
+using SF3.Models.Files.MPD;
 using SF3.NamedValues;
 using SF3.RawData;
 using SF3.Types;
@@ -30,14 +31,30 @@ namespace Grayscaler {
                 var mpdFile = MPD_File.Create(byteData, nameGetter, scenario);
 
                 // Gather all textures into one collection.
-                var textures = mpdFile.TextureChunks.Where(x => x != null && x.TextureTable != null).SelectMany(x => x.TextureTable.Rows).ToArray();
+                var textures1 = mpdFile.TextureChunks
+                    .Where(x => x != null && x.TextureTable != null)
+                    .SelectMany(x => x.TextureTable.Rows)
+                    .ToArray();
+
+                var textures2 = mpdFile.TextureAnimFrames.Rows
+                    .Where(x => x.FrameNum > 0)
+                    .ToArray();
+
+                var textures = textures1.Cast<ITexture>().Concat(textures2).ToArray();
+
                 Console.WriteLine(textures.Length + " textures");
 
                 // Transform every texture in ABGR1555 format to grayscale.
-                foreach (var tc in textures) {
+                foreach (var tc in textures1) {
                     if (tc.AssumedPixelFormat != TexturePixelFormat.ABGR1555)
                         continue;
-                    tc.ImageData16Bit = MakeTextureGrayscale(tc.CachedImageData16Bit);
+                    tc.RawImageData16Bit = MakeTextureGrayscale(tc.ImageData16Bit);
+                }
+                foreach (var tc in textures2) {
+                    if (tc.AssumedPixelFormat != TexturePixelFormat.ABGR1555)
+                        continue;
+                    var frameData = mpdFile.TextureAnimFrameData[tc.ID];
+                    tc.UpdateImageData(frameData, MakeTextureGrayscale(tc.ImageData16Bit));
                 }
 
                 // This will compress chunks and update the chunk table header.
