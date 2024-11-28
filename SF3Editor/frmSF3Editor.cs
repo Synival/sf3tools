@@ -1,8 +1,8 @@
 using System.IO;
 using System.Windows.Forms;
 using CommonLib.NamedValues;
-using SF3.FileModels.IconPointer;
-using SF3.FileModels.MPD;
+using SF3.Models.Files.IconPointer;
+using SF3.Models.Files.MPD;
 using SF3.NamedValues;
 using SF3.RawEditors;
 using SF3.Types;

@@ -8,13 +8,13 @@ using BrightIdeasSoftware;
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using DFRLib.Types;
-using SF3.FileModels;
 using SF3.ModelLoaders;
 using SF3.Types;
 using static CommonLib.Win.Utils.MessageUtils;
 using DFRLib.Win.Forms;
 using static SF3.Win.Extensions.ObjectListViewExtensions;
 using SF3.Win.Views;
+using SF3.Models.Files;
 
 namespace SF3.Win.Forms {
     /// <summary>

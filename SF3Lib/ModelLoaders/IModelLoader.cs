@@ -1,6 +1,6 @@
 ﻿using System;
 using SF3.RawEditors;
-using SF3.FileModels;
+using SF3.Models.Files;
 
 namespace SF3.ModelLoaders {
     /// <summary>

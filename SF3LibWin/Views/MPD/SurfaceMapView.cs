@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using SF3.FileModels.MPD;
+using SF3.Models.Files.MPD;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views.MPD {

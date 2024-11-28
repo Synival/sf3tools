@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using BrightIdeasSoftware;
 using SF3.Win.Extensions;
 using SF3.Win.Forms;
-using SF3.FileModels;
 using SF3.ModelLoaders;
 using static SF3.Win.Extensions.TabControlExtensions;
 using SF3.NamedValues;
-using SF3.FileModels.IconPointer;
+using SF3.Models.Files;
+using SF3.Models.Files.IconPointer;
 
 namespace SF3.IconPointerEditor.Forms {
     public partial class frmIconPointerEditor : EditorForm {
@@ -24,7 +24,7 @@ namespace SF3.IconPointerEditor.Forms {
             => "SF3 Data (X011.BIN;X021.BIN;X026.BIN)|X011.BIN;X021.BIN;X026.BIN|" + base.FileDialogFilter;
 
         protected override IBaseEditor MakeEditor(IModelFileLoader loader)
-            => FileModels.IconPointer.IconPointerEditor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
+            => Models.Files.IconPointer.IconPointerEditor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())

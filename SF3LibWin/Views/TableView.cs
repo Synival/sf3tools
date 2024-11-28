@@ -5,8 +5,8 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
 using CommonLib.Extensions;
-using SF3.TableModels;
 using SF3.Win.Extensions;
+using SF3.Models.Tables;
 
 namespace SF3.Win.Views {
     public class TableView : ViewBase, ITableView {

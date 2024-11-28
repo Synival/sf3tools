@@ -1,6 +1,4 @@
 using SF3.Win.Forms;
-using SF3.FileModels;
-using SF3.FileModels.MPD;
 using SF3.ModelLoaders;
 using SF3.NamedValues;
 using SF3.Win.Views.MPD;
@@ -15,6 +13,8 @@ using SF3.Types;
 using static CommonLib.Win.Utils.MessageUtils;
 using static CommonLib.Utils.PixelConversion;
 using SF3.Win.Views;
+using SF3.Models.Files;
+using SF3.Models.Files.MPD;
 
 namespace SF3.MPD_Editor.Forms {
     public partial class frmMPDEditor : EditorFormNew {
@@ -37,10 +37,10 @@ namespace SF3.MPD_Editor.Forms {
             => "SF3 Data (*.MPD)|*.MPD|" + base.FileDialogFilter;
 
         protected override IBaseEditor MakeModel(IModelFileLoader loader)
-            => FileModels.MPD.MPD_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
+            => Models.Files.MPD.MPD_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
         protected override IView MakeView(IModelFileLoader loader, IBaseEditor model)
-            => new MPD_View(loader.Filename, (FileModels.MPD.MPD_Editor) model);
+            => new MPD_View(loader.Filename, (Models.Files.MPD.MPD_Editor) model);
 
         private void tsmiTextures_ImportFolder_Click(object sender, System.EventArgs e) {
             using (var dialog = new CommonOpenFileDialog() {

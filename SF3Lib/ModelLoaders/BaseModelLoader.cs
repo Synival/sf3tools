@@ -1,7 +1,7 @@
 ﻿using System;
 using SF3.RawEditors;
-using SF3.FileModels;
 using CommonLib;
+using SF3.Models.Files;
 
 namespace SF3.ModelLoaders {
     public abstract class BaseModelLoader : IModelLoader {

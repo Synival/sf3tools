@@ -2,8 +2,8 @@
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using CommonLib.Utils;
-using SF3.Structs.MPD.TextureAnimation;
 using SF3.RawEditors;
+using SF3.Models.Structs.MPD.TextureAnimation;
 
 namespace SF3.Win.Extensions {
     public static class FrameExtensions {

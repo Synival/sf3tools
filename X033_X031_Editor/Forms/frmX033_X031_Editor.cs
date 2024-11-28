@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using BrightIdeasSoftware;
 using SF3.Win.Extensions;
 using SF3.Win.Forms;
-using SF3.FileModels;
 using SF3.ModelLoaders;
-using SF3.Structs.X033_X031;
 using static SF3.Win.Extensions.TabControlExtensions;
 using SF3.NamedValues;
-using SF3.FileModels.X033_X031;
+using SF3.Models.Structs.X033_X031;
+using SF3.Models.Files;
+using SF3.Models.Files.X033_X031;
 
 namespace SF3.X033_X031_Editor.Forms {
     public partial class frmX033_X031_Editor : EditorForm {
@@ -27,7 +27,7 @@ namespace SF3.X033_X031_Editor.Forms {
         protected override string FileDialogFilter => "SF3 Data (X033.BIN;X031.BIN)|X033.BIN;X031.BIN|" + base.FileDialogFilter;
 
         protected override IBaseEditor MakeEditor(IModelFileLoader loader)
-            => FileModels.X033_X031.X033_X031_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
+            => Models.Files.X033_X031.X033_X031_Editor.Create(loader.RawEditor, new NameGetterContext(Scenario), Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())
