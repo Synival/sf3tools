@@ -7,8 +7,8 @@ namespace SF3.Models.Structs.X013 {
         private readonly int expCheck;
         private readonly int expReplacement;
 
-        public ExpLimit(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x07) {
+        public ExpLimit(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x07) {
             expCheck       = Address;     // 1 byte
             expReplacement = Address + 6; // 1 byte
         }

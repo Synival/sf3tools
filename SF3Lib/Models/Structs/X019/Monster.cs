@@ -73,8 +73,8 @@ namespace SF3.Models.Structs.X019 {
         private readonly int unknown19;
         private readonly int unknown20;
 
-        public Monster(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x4C) {
+        public Monster(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x4C) {
             maxHP             = Address; // 2 bytes
             maxMP             = Address + 2;
             level             = Address + 3;

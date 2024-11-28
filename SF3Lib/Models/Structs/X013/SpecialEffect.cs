@@ -7,8 +7,8 @@ namespace SF3.Models.Structs.X013 {
     public class SpecialEffect : Struct {
         private readonly int specialAddress;
 
-        public SpecialEffect(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x01) {
+        public SpecialEffect(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x01) {
             specialAddress  = Address; // 1 byte
         }
 

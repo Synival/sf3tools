@@ -14,8 +14,8 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int unknown0E;
         private readonly int unknown10;
 
-        public SpawnZone(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x12) {
+        public SpawnZone(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x12) {
             unknown00 = Address;        // 2 bytes  
             unknown02 = Address + 0x02; // 2 bytes
             unknown04 = Address + 0x04; // 2 bytes

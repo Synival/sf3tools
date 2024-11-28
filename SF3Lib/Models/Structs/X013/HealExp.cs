@@ -6,8 +6,8 @@ namespace SF3.Models.Structs.X013 {
     public class HealExp : Struct {
         private readonly int healExp;
 
-        public HealExp(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x01) {
+        public HealExp(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x01) {
             healExp = Address; // 1 byte
         }
 

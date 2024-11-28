@@ -11,8 +11,8 @@ namespace SF3.Models.Structs.X013 {
         private readonly int fourSpecials3;
         private readonly int fourSpecials2;
 
-        public SpecialChance(IRawData editor, int id, string name, int address, bool hasLargeTable)
-        : base(editor, id, name, address, hasLargeTable ? 0x4a : 0x3a) {
+        public SpecialChance(IRawData data, int id, string name, int address, bool hasLargeTable)
+        : base(data, id, name, address, hasLargeTable ? 0x4a : 0x3a) {
             if (hasLargeTable) {
                 twoSpecials2   = Address + 0x01; // 1 byte
                 threeSpecials3 = Address + 0x15; // 1 byte

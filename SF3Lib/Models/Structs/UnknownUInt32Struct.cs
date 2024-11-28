@@ -3,8 +3,8 @@ using SF3.RawData;
 
 namespace SF3.Models.Structs {
     public class UnknownUInt32Struct : Struct {
-        public UnknownUInt32Struct(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x04) {
+        public UnknownUInt32Struct(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x04) {
         }
 
         [BulkCopy]

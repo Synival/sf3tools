@@ -7,8 +7,8 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int targetX;
         private readonly int targetY;
 
-        public AI(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x04) {
+        public AI(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x04) {
             targetX = Address;     // 2 bytes
             targetY = Address + 2; // 2 bytes
         }

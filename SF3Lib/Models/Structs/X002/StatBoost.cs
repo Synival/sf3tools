@@ -6,8 +6,8 @@ namespace SF3.Models.Structs.X002 {
     public class StatBoost : Struct {
         private readonly int stat;
 
-        public StatBoost(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x01) {
+        public StatBoost(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x01) {
             stat = Address; // 1 byte
         }
 

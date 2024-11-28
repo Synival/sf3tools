@@ -8,8 +8,8 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         private readonly int _compressedTextureOffsetAddress;
         private readonly int _unknownAddress;
 
-        public FrameModel(IRawData editor, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum)
-        : base(editor, id, name, address, is32Bit ? 0x08 : 0x04) {
+        public FrameModel(IRawData data, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum)
+        : base(data, id, name, address, is32Bit ? 0x08 : 0x04) {
             Is32Bit   = is32Bit;
             TextureID = texId;
             Width     = width;

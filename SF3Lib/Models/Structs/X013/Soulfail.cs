@@ -6,8 +6,8 @@ namespace SF3.Models.Structs.X013 {
     public class Soulfail : Struct {
         private readonly int expLost;
 
-        public Soulfail(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x01) {
+        public Soulfail(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x01) {
             expLost = Address; // 1 bytes
         }
 

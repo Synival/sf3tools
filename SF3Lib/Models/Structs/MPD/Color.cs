@@ -4,8 +4,8 @@ using SF3.RawData;
 
 namespace SF3.Models.Structs.MPD {
     public class Color : Struct {
-        public Color(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 2) {
+        public Color(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 2) {
         }
 
         [BulkCopy]

@@ -10,8 +10,8 @@ namespace SF3.Models.Structs.X013 {
         private readonly int sLvl3;
         private readonly int sLvl4;
 
-        public FriendshipExp(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x04) {
+        public FriendshipExp(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x04) {
             sLvl0 = Address;     // 1 byte
             sLvl1 = Address + 1; // 1 byte
             sLvl2 = Address + 2; // 1 byte

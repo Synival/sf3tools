@@ -24,8 +24,8 @@ namespace SF3.Models.Structs.X013 {
         private readonly int unknown8;
         private readonly int luck9;
         private readonly int unknown9;
-        public StatusEffect(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x18) {
+        public StatusEffect(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x18) {
             luck0    = Address;
             unknown0 = Address + 0x01;
             luck1    = Address + 0x02;

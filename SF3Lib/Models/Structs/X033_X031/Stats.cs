@@ -142,8 +142,8 @@ namespace SF3.Models.Structs.X033_X031 {
         private readonly int accessoryEquipable3;
         private readonly int accessoryEquipable4;
 
-        public Stats(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x7B) {
+        public Stats(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x7B) {
             character           = Address + 0x00;
             characterClass      = Address + 0x01;
             hpPromote           = Address + 0x02;

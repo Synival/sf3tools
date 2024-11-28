@@ -11,8 +11,8 @@ namespace SF3.Models.Structs.X1.Town {
         private readonly int unknown8; //2 byte
         private readonly int unknownA; //2 byte
 
-        public Arrow(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x0c) {
+        public Arrow(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x0c) {
             unknown0  = Address; //2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
             textID    = Address + 0x02;
             unknown4  = Address + 0x04;

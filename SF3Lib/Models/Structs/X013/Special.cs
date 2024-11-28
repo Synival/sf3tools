@@ -10,8 +10,8 @@ namespace SF3.Models.Structs.X013 {
         private readonly int extraPow;
         private readonly int pow;
 
-        public Special(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x04) {
+        public Special(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x04) {
             unknown1          = Address;     // 1 byte
             damageCalculation = Address + 1; // 1 byte
             extraPow          = Address + 2; // 1 byte

@@ -12,8 +12,8 @@ namespace SF3.Models.Structs.X1 {
         private readonly int eventType;
         private readonly int itemID;
 
-        public Treasure(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x0C) {
+        public Treasure(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x0C) {
             searched    = Address; //2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
             eventNumber = Address + 0x02;
             flagUsed    = Address + 0x04;

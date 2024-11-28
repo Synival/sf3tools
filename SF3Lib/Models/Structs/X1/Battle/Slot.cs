@@ -52,8 +52,8 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int unknown39;
         private readonly int unknown40;
 
-        public Slot(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x34) {
+        public Slot(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x34) {
             enemyID      = Address;      // 2 bytes  
             x            = Address +  2; // 2 bytes
             y            = Address +  4; // 2 bytes

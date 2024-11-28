@@ -11,8 +11,8 @@ namespace SF3.Models.Structs.X002 {
         private readonly int weaponLv2;
         private readonly int weaponLv3;
 
-        public WeaponSpell(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x05) {
+        public WeaponSpell(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x05) {
             spell     = Address;     // 2 bytes
             weaponLv0 = Address + 1; // 1 byte
             weaponLv1 = Address + 2; // 1 byte

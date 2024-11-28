@@ -26,8 +26,8 @@ namespace SF3.Models.Structs.X002 {
         private readonly int lv4Cost;
         private readonly int lv4Damage;
 
-        public Spell(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x14) {
+        public Spell(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x14) {
             targetType  = Address;
             damageType  = Address + 1;
             element     = Address + 2;

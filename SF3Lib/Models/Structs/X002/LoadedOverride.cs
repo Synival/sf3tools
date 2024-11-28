@@ -19,8 +19,8 @@ namespace SF3.Models.Structs.X002 {
         private readonly int julChr;
         private readonly int extraChr;
 
-        public LoadedOverride(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x28) {
+        public LoadedOverride(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x28) {
             mapID      = Address;        // 2 bytes
             synMusic   = Address + 0x02; // 1 byte
             medMusic   = Address + 0x03; // 1 byte

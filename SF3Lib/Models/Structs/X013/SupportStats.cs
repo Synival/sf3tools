@@ -9,8 +9,8 @@ namespace SF3.Models.Structs.X013 {
         private readonly int sLvlStat3;
         private readonly int sLvlStat4;
 
-        public SupportStats(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x04) {
+        public SupportStats(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x04) {
             sLvlStat1 = Address;     // 1 byte
             sLvlStat2 = Address + 1; // 1 byte
             sLvlStat3 = Address + 2; // 1 byte

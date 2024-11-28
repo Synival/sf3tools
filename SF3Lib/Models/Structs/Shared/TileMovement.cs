@@ -22,8 +22,8 @@ namespace SF3.Models.Structs.Shared {
         private readonly int unknown0e;
         private readonly int unknown0f;
 
-        public TileMovement(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x10) {
+        public TileMovement(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x10) {
             noEntry       = Address;
             unknown01     = Address + 0x01;
             grassland     = Address + 0x02;

@@ -25,8 +25,8 @@ namespace SF3.Models.Structs.X033_X031 {
         private readonly int weapon4Type; // for exp
         private readonly int weapon4Exp; //2 bytes
 
-        public InitialInfo(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x20) {
+        public InitialInfo(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x20) {
             character      = Address + 0x00;
             characterClass = Address + 0x01;
             level          = Address + 0x02;

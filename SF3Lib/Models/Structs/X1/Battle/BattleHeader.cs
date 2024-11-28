@@ -15,8 +15,8 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int unknown8;
         private readonly int unknown9;
 
-        public BattleHeader(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x0A) {
+        public BattleHeader(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x0A) {
             unknown1  = Address;     // 1 byte
             tableSize = Address + 1; // 1 byte
             unknown2  = Address + 2; // 1 byte

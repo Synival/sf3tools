@@ -11,8 +11,8 @@ namespace SF3.Models.Structs.X013 {
         private readonly int fourSpecial;
         private readonly int fiveSpecial;
 
-        public Critrate(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x08) {
+        public Critrate(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x08) {
             noSpecial    = Address;     // 1 byte
             oneSpecial   = Address + 1; // 1 byte
             twoSpecial   = Address + 2; // 1 byte

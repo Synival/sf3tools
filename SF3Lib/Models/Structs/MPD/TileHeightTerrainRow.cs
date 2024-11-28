@@ -6,8 +6,8 @@ namespace SF3.Models.Structs.MPD {
     public class TileHeightTerrainRow : Struct {
         private readonly int[] xAddress = new int[64];
 
-        public TileHeightTerrainRow(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 128) {
+        public TileHeightTerrainRow(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 128) {
             for (var i = 0; i < xAddress.Length; i++)
                 xAddress[i] = Address + i * 2;
         }

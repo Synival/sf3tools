@@ -9,8 +9,8 @@ namespace SF3.Models.Structs.Shared {
         private readonly int type;
         private readonly int map;
 
-        public Warp(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 0x04) {
+        public Warp(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 0x04) {
             unknown1 = Address;
             unknown2 = Address + 1;
             type     = Address + 2;

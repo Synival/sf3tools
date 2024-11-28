@@ -7,8 +7,8 @@ namespace SF3.Models.Structs.MPD {
         private readonly int chunkAddressAddress;
         private readonly int chunkSizeAddress;
 
-        public ChunkHeader(IRawData editor, int id, string name, int address)
-        : base(editor, id, name, address, 8) {
+        public ChunkHeader(IRawData data, int id, string name, int address)
+        : base(data, id, name, address, 8) {
             chunkAddressAddress = Address;     // 4 bytes
             chunkSizeAddress    = Address + 4; // 4 bytes
         }
