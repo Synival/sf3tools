@@ -20,35 +20,35 @@ namespace SF3.Models.Structs.X013 {
 
         [BulkCopy]
         public int Unknown1 {
-            get => Editor.GetByte(unknown1);
-            set => Editor.SetByte(unknown1, (byte) value);
+            get => Data.GetByte(unknown1);
+            set => Data.SetByte(unknown1, (byte) value);
         }
 
         [BulkCopy]
         public int DamageCalc {
-            get => Editor.GetByte(damageCalculation);
-            set => Editor.SetByte(damageCalculation, (byte) value);
+            get => Data.GetByte(damageCalculation);
+            set => Data.SetByte(damageCalculation, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.SpecialElement, nameof(DamageCalc))]
         public int ExtraPow {
-            get => Editor.GetByte(extraPow);
-            set => Editor.SetByte(extraPow, (byte) value);
+            get => Data.GetByte(extraPow);
+            set => Data.SetByte(extraPow, (byte) value);
         }
 
         [BulkCopy]
         public int Pow {
-            get => Editor.GetByte(pow);
-            set => Editor.SetByte(pow, (byte) value);
+            get => Data.GetByte(pow);
+            set => Data.SetByte(pow, (byte) value);
         }
 
         private int lowerRngFunc(int randomNumber) {
             int r1, r2, r3, machh;
 
-            r1 = Editor.GetByte(extraPow);
+            r1 = Data.GetByte(extraPow);
             ;
-            r1 -= Editor.GetByte(damageCalculation);
+            r1 -= Data.GetByte(damageCalculation);
             ;
             r3 = randomNumber;
 
@@ -74,7 +74,7 @@ namespace SF3.Models.Structs.X013 {
             r2 <<= 2;
             r2 -= r2;
             r1 -= r2;
-            r1 += Editor.GetByte(damageCalculation);
+            r1 += Data.GetByte(damageCalculation);
 
             return r1;
         }
@@ -91,9 +91,9 @@ namespace SF3.Models.Structs.X013 {
         private int upperRngFunc(int randomNumber) {
             int r1, r2, r3, machh;
 
-            r1 = Editor.GetByte(extraPow);
-            r2 = Editor.GetByte(pow);
-            r2 = Editor.GetByte(extraPow) - r2;
+            r1 = Data.GetByte(extraPow);
+            r2 = Data.GetByte(pow);
+            r2 = Data.GetByte(extraPow) - r2;
             r3 = randomNumber;
             r1 = r3;
             r1 -= 7;
@@ -111,7 +111,7 @@ namespace SF3.Models.Structs.X013 {
             r2 <<= 2;
             r2 -= r2;
             r1 -= r2;
-            r1 = Editor.GetByte(extraPow) + r1;
+            r1 = Data.GetByte(extraPow) + r1;
 
             return r1;
         }

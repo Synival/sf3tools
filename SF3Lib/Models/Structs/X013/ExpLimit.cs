@@ -15,14 +15,14 @@ namespace SF3.Models.Structs.X013 {
 
         [BulkCopy]
         public int ExpCheck {
-            get => Editor.GetByte(expCheck);
-            set => Editor.SetByte(expCheck, (byte) value);
+            get => Data.GetByte(expCheck);
+            set => Data.SetByte(expCheck, (byte) value);
         }
 
         [BulkCopy]
         public int ExpReplacement {
-            get => Editor.GetByte(expReplacement);
-            set => Editor.SetByte(expReplacement, (byte) value);
+            get => Data.GetByte(expReplacement);
+            set => Data.SetByte(expReplacement, (byte) value);
         }
     }
 }

@@ -29,56 +29,56 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [BulkCopy]
         public int UnknownAI00 {
-            get => Editor.GetWord(unknown00);
-            set => Editor.SetWord(unknown00, value);
+            get => Data.GetWord(unknown00);
+            set => Data.SetWord(unknown00, value);
         }
 
         [BulkCopy]
         public int UnknownAI02 {
-            get => Editor.GetWord(unknown02);
-            set => Editor.SetWord(unknown02, value);
+            get => Data.GetWord(unknown02);
+            set => Data.SetWord(unknown02, value);
         }
 
         [BulkCopy]
         public int UnknownAI04 {
-            get => Editor.GetWord(unknown04);
-            set => Editor.SetWord(unknown04, value);
+            get => Data.GetWord(unknown04);
+            set => Data.SetWord(unknown04, value);
         }
 
         [BulkCopy]
         public int UnknownAI06 {
-            get => Editor.GetWord(unknown06);
-            set => Editor.SetWord(unknown06, value);
+            get => Data.GetWord(unknown06);
+            set => Data.SetWord(unknown06, value);
         }
 
         [BulkCopy]
         public int UnknownAI08 {
-            get => Editor.GetWord(unknown08);
-            set => Editor.SetWord(unknown08, value);
+            get => Data.GetWord(unknown08);
+            set => Data.SetWord(unknown08, value);
         }
 
         [BulkCopy]
         public int UnknownAI0A {
-            get => Editor.GetWord(unknown0A);
-            set => Editor.SetWord(unknown0A, value);
+            get => Data.GetWord(unknown0A);
+            set => Data.SetWord(unknown0A, value);
         }
 
         [BulkCopy]
         public int UnknownAI0C {
-            get => Editor.GetWord(unknown0C);
-            set => Editor.SetWord(unknown0C, value);
+            get => Data.GetWord(unknown0C);
+            set => Data.SetWord(unknown0C, value);
         }
 
         [BulkCopy]
         public int UnknownAI0E {
-            get => Editor.GetWord(unknown0E);
-            set => Editor.SetWord(unknown0E, value);
+            get => Data.GetWord(unknown0E);
+            set => Data.SetWord(unknown0E, value);
         }
 
         [BulkCopy]
         public int UnknownAI10 {
-            get => Editor.GetWord(unknown10);
-            set => Editor.SetWord(unknown10, value);
+            get => Data.GetWord(unknown10);
+            set => Data.SetWord(unknown10, value);
         }
     }
 }

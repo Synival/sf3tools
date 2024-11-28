@@ -23,45 +23,45 @@ namespace SF3.Models.Structs.X1 {
         }
 
         public string MPDTieIn
-            => Editor.GetWord(eventNumber) <= 0x0f
-                ? (Editor.GetWord(eventNumber) + 0x30).ToString("X")
+            => Data.GetWord(eventNumber) <= 0x0f
+                ? (Data.GetWord(eventNumber) + 0x30).ToString("X")
                 : "";
 
         [BulkCopy]
         public int Searched {
-            get => Editor.GetWord(searched);
-            set => Editor.SetWord(searched, value);
+            get => Data.GetWord(searched);
+            set => Data.SetWord(searched, value);
         }
 
         [BulkCopy]
         public int EventNumber {
-            get => Editor.GetWord(eventNumber);
-            set => Editor.SetWord(eventNumber, value);
+            get => Data.GetWord(eventNumber);
+            set => Data.SetWord(eventNumber, value);
         }
 
         [BulkCopy]
         public int FlagUse {
-            get => Editor.GetWord(flagUsed);
-            set => Editor.SetWord(flagUsed, value);
+            get => Data.GetWord(flagUsed);
+            set => Data.SetWord(flagUsed, value);
         }
 
         [BulkCopy]
         public int UnknownTreasure {
-            get => Editor.GetWord(unknown);
-            set => Editor.SetWord(unknown, value);
+            get => Data.GetWord(unknown);
+            set => Data.SetWord(unknown, value);
         }
 
         [BulkCopy]
         public int EventType {
-            get => Editor.GetWord(eventType);
-            set => Editor.SetWord(eventType, value);
+            get => Data.GetWord(eventType);
+            set => Data.SetWord(eventType, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.EventParameter, nameof(EventType))]
         public int EventParameter {
-            get => Editor.GetWord(itemID);
-            set => Editor.SetWord(itemID, value);
+            get => Data.GetWord(itemID);
+            set => Data.SetWord(itemID, value);
         }
     }
 }

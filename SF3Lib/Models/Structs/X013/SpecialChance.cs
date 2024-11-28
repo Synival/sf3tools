@@ -33,38 +33,38 @@ namespace SF3.Models.Structs.X013 {
 
         [BulkCopy]
         public int TwoSpecials2 {
-            get => Editor.GetByte(twoSpecials2);
-            set => Editor.SetByte(twoSpecials2, (byte) value);
+            get => Data.GetByte(twoSpecials2);
+            set => Data.SetByte(twoSpecials2, (byte) value);
         }
 
         [BulkCopy]
         public int ThreeSpecials3 {
-            get => Editor.GetByte(threeSpecials3);
-            set => Editor.SetByte(threeSpecials3, (byte) value);
+            get => Data.GetByte(threeSpecials3);
+            set => Data.SetByte(threeSpecials3, (byte) value);
         }
 
         [BulkCopy]
         public int ThreeSpecials2 {
-            get => Editor.GetByte(threeSpecials2);
-            set => Editor.SetByte(threeSpecials2, (byte) value);
+            get => Data.GetByte(threeSpecials2);
+            set => Data.SetByte(threeSpecials2, (byte) value);
         }
 
         [BulkCopy]
         public int FourSpecials4 {
-            get => Editor.GetByte(fourSpecials4);
-            set => Editor.SetByte(fourSpecials4, (byte) value);
+            get => Data.GetByte(fourSpecials4);
+            set => Data.SetByte(fourSpecials4, (byte) value);
         }
 
         [BulkCopy]
         public int FourSpecials3 {
-            get => Editor.GetByte(fourSpecials3);
-            set => Editor.SetByte(fourSpecials3, (byte) value);
+            get => Data.GetByte(fourSpecials3);
+            set => Data.SetByte(fourSpecials3, (byte) value);
         }
 
         [BulkCopy]
         public int FourSpecials2 {
-            get => Editor.GetByte(fourSpecials2);
-            set => Editor.SetByte(fourSpecials2, (byte) value);
+            get => Data.GetByte(fourSpecials2);
+            set => Data.SetByte(fourSpecials2, (byte) value);
         }
     }
 }

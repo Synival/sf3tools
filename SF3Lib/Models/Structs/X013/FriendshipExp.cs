@@ -21,32 +21,32 @@ namespace SF3.Models.Structs.X013 {
 
         [BulkCopy]
         public int SLvl0 {
-            get => Editor.GetByte(sLvl0);
-            set => Editor.SetByte(sLvl0, (byte) value);
+            get => Data.GetByte(sLvl0);
+            set => Data.SetByte(sLvl0, (byte) value);
         }
 
         [BulkCopy]
         public int SLvl1 {
-            get => Editor.GetByte(sLvl1);
-            set => Editor.SetByte(sLvl1, (byte) value);
+            get => Data.GetByte(sLvl1);
+            set => Data.SetByte(sLvl1, (byte) value);
         }
 
         [BulkCopy]
         public int SLvl2 {
-            get => Editor.GetByte(sLvl2);
-            set => Editor.SetByte(sLvl2, (byte) value);
+            get => Data.GetByte(sLvl2);
+            set => Data.SetByte(sLvl2, (byte) value);
         }
 
         [BulkCopy]
         public int SLvl3 {
-            get => Editor.GetByte(sLvl3);
-            set => Editor.SetByte(sLvl3, (byte) value);
+            get => Data.GetByte(sLvl3);
+            set => Data.SetByte(sLvl3, (byte) value);
         }
 
         [BulkCopy]
         public int SLvl4 {
-            get => Editor.GetByte(sLvl4);
-            set => Editor.SetByte(sLvl4, (byte) value);
+            get => Data.GetByte(sLvl4);
+            set => Data.SetByte(sLvl4, (byte) value);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace SF3.Models.Structs.MPD {
 
             if (TextureID != _textureEndId) {
                 while (true) {
-                    var frameOffset = Editor.GetData(pos, _bytesPerProperty);
+                    var frameOffset = Data.GetData(pos, _bytesPerProperty);
                     pos += _bytesPerProperty;
                     if (frameOffset == _frameEndOffset)
                         break;
@@ -49,29 +49,29 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public uint TextureID {
-            get => Editor.GetData(_textureIdAddress, _bytesPerProperty);
-            set => Editor.SetData(_textureIdAddress, value, _bytesPerProperty);
+            get => Data.GetData(_textureIdAddress, _bytesPerProperty);
+            set => Data.SetData(_textureIdAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Width", displayOrder: 1)]
         public uint Width {
-            get => Editor.GetData(_widthAddress, _bytesPerProperty);
-            set => Editor.SetData(_widthAddress, value, _bytesPerProperty);
+            get => Data.GetData(_widthAddress, _bytesPerProperty);
+            set => Data.SetData(_widthAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Height", displayOrder: 2)]
         public uint Height {
-            get => Editor.GetData(_heightAddress, _bytesPerProperty);
-            set => Editor.SetData(_heightAddress, value, _bytesPerProperty);
+            get => Data.GetData(_heightAddress, _bytesPerProperty);
+            set => Data.SetData(_heightAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Unknown", displayOrder: 3, displayFormat: "X4")]
         public uint Unknown {
-            get => Editor.GetData(_unknownAddress, _bytesPerProperty);
-            set => Editor.SetData(_unknownAddress, value, _bytesPerProperty);
+            get => Data.GetData(_unknownAddress, _bytesPerProperty);
+            set => Data.SetData(_unknownAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]

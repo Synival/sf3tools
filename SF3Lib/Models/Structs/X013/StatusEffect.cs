@@ -50,122 +50,122 @@ namespace SF3.Models.Structs.X013 {
 
         [BulkCopy]
         public int StatusLuck0 {
-            get => Editor.GetByte(luck0);
-            set => Editor.SetByte(luck0, (byte) value);
+            get => Data.GetByte(luck0);
+            set => Data.SetByte(luck0, (byte) value);
         }
 
         [BulkCopy]
         public int StatusUnknown0 {
-            get => Editor.GetByte(unknown0);
-            set => Editor.SetByte(unknown0, (byte) value);
+            get => Data.GetByte(unknown0);
+            set => Data.SetByte(unknown0, (byte) value);
         }
 
         [BulkCopy]
         public int StatusLuck1 {
-            get => Editor.GetByte(luck1);
-            set => Editor.SetByte(luck1, (byte) value);
+            get => Data.GetByte(luck1);
+            set => Data.SetByte(luck1, (byte) value);
         }
 
         [BulkCopy]
         public int StatusUnknown1 {
-            get => Editor.GetByte(unknown1);
-            set => Editor.SetByte(unknown1, (byte) value);
+            get => Data.GetByte(unknown1);
+            set => Data.SetByte(unknown1, (byte) value);
         }
 
         [BulkCopy]
         public int StatusLuck2 {
-            get => Editor.GetByte(luck2);
-            set => Editor.SetByte(luck2, (byte) value);
+            get => Data.GetByte(luck2);
+            set => Data.SetByte(luck2, (byte) value);
         }
 
         [BulkCopy]
         public int StatusUnknown2 {
-            get => Editor.GetByte(unknown2);
-            set => Editor.SetByte(unknown2, (byte) value);
+            get => Data.GetByte(unknown2);
+            set => Data.SetByte(unknown2, (byte) value);
         }
 
         [BulkCopy]
         public int StatusLuck3 {
-            get => Editor.GetByte(luck3);
-            set => Editor.SetByte(luck3, (byte) value);
+            get => Data.GetByte(luck3);
+            set => Data.SetByte(luck3, (byte) value);
         }
 
         [BulkCopy]
         public int StatusUnknown3 {
-            get => Editor.GetByte(unknown3);
-            set => Editor.SetByte(unknown3, (byte) value);
+            get => Data.GetByte(unknown3);
+            set => Data.SetByte(unknown3, (byte) value);
         }
 
         [BulkCopy]
         public int StatusLuck4 {
-            get => Editor.GetByte(luck4);
-            set => Editor.SetByte(luck4, (byte) value);
+            get => Data.GetByte(luck4);
+            set => Data.SetByte(luck4, (byte) value);
         }
 
         [BulkCopy]
         public int StatusUnknown4 {
-            get => Editor.GetByte(unknown4);
-            set => Editor.SetByte(unknown4, (byte) value);
+            get => Data.GetByte(unknown4);
+            set => Data.SetByte(unknown4, (byte) value);
         }
 
         [BulkCopy]
         public int StatusLuck5 {
-            get => Editor.GetByte(luck5);
-            set => Editor.SetByte(luck5, (byte) value);
+            get => Data.GetByte(luck5);
+            set => Data.SetByte(luck5, (byte) value);
         }
 
         [BulkCopy]
         public int StatusUnknown5 {
-            get => Editor.GetByte(unknown5);
-            set => Editor.SetByte(unknown5, (byte) value);
+            get => Data.GetByte(unknown5);
+            set => Data.SetByte(unknown5, (byte) value);
         }
 
         [BulkCopy]
         public int StatusLuck6 {
-            get => Editor.GetByte(luck6);
-            set => Editor.SetByte(luck6, (byte) value);
+            get => Data.GetByte(luck6);
+            set => Data.SetByte(luck6, (byte) value);
         }
 
         [BulkCopy]
         public int StatusUnknown6 {
-            get => Editor.GetByte(unknown6);
-            set => Editor.SetByte(unknown6, (byte) value);
+            get => Data.GetByte(unknown6);
+            set => Data.SetByte(unknown6, (byte) value);
         }
 
         [BulkCopy]
         public int StatusLuck7 {
-            get => Editor.GetByte(luck7);
-            set => Editor.SetByte(luck7, (byte) value);
+            get => Data.GetByte(luck7);
+            set => Data.SetByte(luck7, (byte) value);
         }
 
         [BulkCopy]
         public int StatusUnknown7 {
-            get => Editor.GetByte(unknown7);
-            set => Editor.SetByte(unknown7, (byte) value);
+            get => Data.GetByte(unknown7);
+            set => Data.SetByte(unknown7, (byte) value);
         }
 
         [BulkCopy]
         public int StatusLuck8 {
-            get => Editor.GetByte(luck8);
-            set => Editor.SetByte(luck8, (byte) value);
+            get => Data.GetByte(luck8);
+            set => Data.SetByte(luck8, (byte) value);
         }
 
         [BulkCopy]
         public int StatusUnknown8 {
-            get => Editor.GetByte(unknown8);
-            set => Editor.SetByte(unknown8, (byte) value);
+            get => Data.GetByte(unknown8);
+            set => Data.SetByte(unknown8, (byte) value);
         }
 
         [BulkCopy]
         public int StatusLuck9 {
-            get => Editor.GetByte(luck9);
-            set => Editor.SetByte(luck9, (byte) value);
+            get => Data.GetByte(luck9);
+            set => Data.SetByte(luck9, (byte) value);
         }
 
         [BulkCopy]
         public int StatusUnknown9 {
-            get => Editor.GetByte(unknown9);
-            set => Editor.SetByte(unknown9, (byte) value);
+            get => Data.GetByte(unknown9);
+            set => Data.SetByte(unknown9, (byte) value);
         }
     }
 }

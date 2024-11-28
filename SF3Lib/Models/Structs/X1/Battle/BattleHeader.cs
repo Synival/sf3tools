@@ -31,62 +31,62 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [BulkCopy]
         public int SizeUnknown1 {
-            get => Editor.GetByte(unknown1);
-            set => Editor.SetByte(unknown1, (byte) value);
+            get => Data.GetByte(unknown1);
+            set => Data.SetByte(unknown1, (byte) value);
         }
 
         [BulkCopy]
         public int TableSize {
-            get => Editor.GetByte(tableSize);
-            set => Editor.SetByte(tableSize, (byte) value);
+            get => Data.GetByte(tableSize);
+            set => Data.SetByte(tableSize, (byte) value);
         }
 
         [BulkCopy]
         public int SizeUnknown2 {
-            get => Editor.GetByte(unknown2);
-            set => Editor.SetByte(unknown2, (byte) value);
+            get => Data.GetByte(unknown2);
+            set => Data.SetByte(unknown2, (byte) value);
         }
 
         [BulkCopy]
         public int SizeUnknown3 {
-            get => Editor.GetByte(unknown3);
-            set => Editor.SetByte(unknown3, (byte) value);
+            get => Data.GetByte(unknown3);
+            set => Data.SetByte(unknown3, (byte) value);
         }
 
         [BulkCopy]
         public int SizeUnknown4 {
-            get => Editor.GetByte(unknown4);
-            set => Editor.SetByte(unknown4, (byte) value);
+            get => Data.GetByte(unknown4);
+            set => Data.SetByte(unknown4, (byte) value);
         }
 
         [BulkCopy]
         public int SizeUnknown5 {
-            get => Editor.GetByte(unknown5);
-            set => Editor.SetByte(unknown5, (byte) value);
+            get => Data.GetByte(unknown5);
+            set => Data.SetByte(unknown5, (byte) value);
         }
 
         [BulkCopy]
         public int SizeUnknown6 {
-            get => Editor.GetByte(unknown6);
-            set => Editor.SetByte(unknown6, (byte) value);
+            get => Data.GetByte(unknown6);
+            set => Data.SetByte(unknown6, (byte) value);
         }
 
         [BulkCopy]
         public int SizeUnknown7 {
-            get => Editor.GetByte(unknown7);
-            set => Editor.SetByte(unknown7, (byte) value);
+            get => Data.GetByte(unknown7);
+            set => Data.SetByte(unknown7, (byte) value);
         }
 
         [BulkCopy]
         public int SizeUnknown8 {
-            get => Editor.GetByte(unknown8);
-            set => Editor.SetByte(unknown8, (byte) value);
+            get => Data.GetByte(unknown8);
+            set => Data.SetByte(unknown8, (byte) value);
         }
 
         [BulkCopy]
         public int SizeUnknown9 {
-            get => Editor.GetByte(unknown9);
-            set => Editor.SetByte(unknown9, (byte) value);
+            get => Data.GetByte(unknown9);
+            set => Data.SetByte(unknown9, (byte) value);
         }
     }
 }

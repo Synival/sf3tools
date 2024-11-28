@@ -13,8 +13,8 @@ namespace SF3.Models.Structs.X002 {
 
         [BulkCopy]
         public int Stat {
-            get => Editor.GetByte(stat);
-            set => Editor.SetByte(stat, (byte) value);
+            get => Data.GetByte(stat);
+            set => Data.SetByte(stat, (byte) value);
         }
     }
 }

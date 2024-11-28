@@ -58,147 +58,147 @@ namespace SF3.Models.Structs.X002 {
 
         [BulkCopy]
         public int Price {
-            get => Editor.GetWord(PriceLocation);
-            set => Editor.SetWord(PriceLocation, value);
+            get => Data.GetWord(PriceLocation);
+            set => Data.SetWord(PriceLocation, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int WeaponType {
-            get => Editor.GetByte(WeaponTypeLocation);
-            set => Editor.SetByte(WeaponTypeLocation, (byte) value);
+            get => Data.GetByte(WeaponTypeLocation);
+            set => Data.SetByte(WeaponTypeLocation, (byte) value);
         }
 
         [BulkCopy]
         public int EffectsEquip {
-            get => Editor.GetByte(EffectsEquipLocation);
-            set => Editor.SetByte(EffectsEquipLocation, (byte) value);
+            get => Data.GetByte(EffectsEquipLocation);
+            set => Data.SetByte(EffectsEquipLocation, (byte) value);
         }
 
         public bool Cursed {
-            get => Editor.GetBit(EffectsEquipLocation, 1);
-            set => Editor.SetBit(EffectsEquipLocation, 1, value);
+            get => Data.GetBit(EffectsEquipLocation, 1);
+            set => Data.SetBit(EffectsEquipLocation, 1, value);
         }
 
         public bool CanCrack {
-            get => Editor.GetBit(EffectsEquipLocation, 2);
-            set => Editor.SetBit(EffectsEquipLocation, 2, value);
+            get => Data.GetBit(EffectsEquipLocation, 2);
+            set => Data.SetBit(EffectsEquipLocation, 2, value);
         }
 
         public bool HealingItem {
-            get => Editor.GetBit(EffectsEquipLocation, 3);
-            set => Editor.SetBit(EffectsEquipLocation, 3, value);
+            get => Data.GetBit(EffectsEquipLocation, 3);
+            set => Data.SetBit(EffectsEquipLocation, 3, value);
         }
 
         public bool CannotUnequip {
-            get => Editor.GetBit(EffectsEquipLocation, 4);
-            set => Editor.SetBit(EffectsEquipLocation, 4, value);
+            get => Data.GetBit(EffectsEquipLocation, 4);
+            set => Data.SetBit(EffectsEquipLocation, 4, value);
         }
 
         public bool Rare {
-            get => Editor.GetBit(EffectsEquipLocation, 5);
-            set => Editor.SetBit(EffectsEquipLocation, 5, value);
+            get => Data.GetBit(EffectsEquipLocation, 5);
+            set => Data.SetBit(EffectsEquipLocation, 5, value);
         }
 
         public bool FakeRare //shows rare message when selling, but does not add to deals
         {
-            get => Editor.GetBit(EffectsEquipLocation, 6);
-            set => Editor.SetBit(EffectsEquipLocation, 6, value);
+            get => Data.GetBit(EffectsEquipLocation, 6);
+            set => Data.SetBit(EffectsEquipLocation, 6, value);
         }
 
         public bool HealingItem2 //higher tier healing has this
         {
-            get => Editor.GetBit(EffectsEquipLocation, 7);
-            set => Editor.SetBit(EffectsEquipLocation, 7, value);
+            get => Data.GetBit(EffectsEquipLocation, 7);
+            set => Data.SetBit(EffectsEquipLocation, 7, value);
         }
 
         [BulkCopy]
         public int Requirements {
-            get => Editor.GetByte(RequirementLocation);
-            set => Editor.SetByte(RequirementLocation, (byte) value);
+            get => Data.GetByte(RequirementLocation);
+            set => Data.SetByte(RequirementLocation, (byte) value);
         }
 
         public bool RequiredPromo {
-            get => Editor.GetBit(RequirementLocation, 1);
-            set => Editor.SetBit(RequirementLocation, 1, value);
+            get => Data.GetBit(RequirementLocation, 1);
+            set => Data.SetBit(RequirementLocation, 1, value);
         }
 
         public bool RequiredPromo2 //apostle of light
         {
-            get => Editor.GetBit(RequirementLocation, 2);
-            set => Editor.SetBit(RequirementLocation, 2, value);
+            get => Data.GetBit(RequirementLocation, 2);
+            set => Data.SetBit(RequirementLocation, 2, value);
         }
 
         public bool RequiredHero //Synbios, Medion, Julian, Gracia, Cyclops
         {
-            get => Editor.GetBit(RequirementLocation, 3);
-            set => Editor.SetBit(RequirementLocation, 3, value);
+            get => Data.GetBit(RequirementLocation, 3);
+            set => Data.SetBit(RequirementLocation, 3, value);
         }
 
         public bool RequiredMale {
-            get => Editor.GetBit(RequirementLocation, 4);
-            set => Editor.SetBit(RequirementLocation, 4, value);
+            get => Data.GetBit(RequirementLocation, 4);
+            set => Data.SetBit(RequirementLocation, 4, value);
         }
 
         public bool RequiredFemale {
-            get => Editor.GetBit(RequirementLocation, 5);
-            set => Editor.SetBit(RequirementLocation, 5, value);
+            get => Data.GetBit(RequirementLocation, 5);
+            set => Data.SetBit(RequirementLocation, 5, value);
         }
 
         [BulkCopy]
         public int Range {
-            get => Editor.GetByte(RangeLocation);
-            set => Editor.SetByte(RangeLocation, (byte) value);
+            get => Data.GetByte(RangeLocation);
+            set => Data.SetByte(RangeLocation, (byte) value);
         }
 
         [BulkCopy]
         public int Attack {
-            get => Editor.GetByte(AttackLocation);
-            set => Editor.SetByte(AttackLocation, (byte) value);
+            get => Data.GetByte(AttackLocation);
+            set => Data.SetByte(AttackLocation, (byte) value);
         }
 
         [BulkCopy]
         public int Defense {
-            get => Editor.GetByte(DefenseLocation);
-            set => Editor.SetByte(DefenseLocation, (byte) value);
+            get => Data.GetByte(DefenseLocation);
+            set => Data.SetByte(DefenseLocation, (byte) value);
         }
 
         [BulkCopy]
         public int AttackRank {
-            get => Editor.GetByte(AttackUpRankLocation);
-            set => Editor.SetByte(AttackUpRankLocation, (byte) value);
+            get => Data.GetByte(AttackUpRankLocation);
+            set => Data.SetByte(AttackUpRankLocation, (byte) value);
         }
 
         [BulkCopy]
         public int SpellRank {
-            get => Editor.GetByte(SpellUpRankLocation);
-            set => Editor.SetByte(SpellUpRankLocation, (byte) value);
+            get => Data.GetByte(SpellUpRankLocation);
+            set => Data.SetByte(SpellUpRankLocation, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.EffectiveType)]
         public int PhysicalAttribute {
-            get => Editor.GetByte(PhysicalAttributeLocation);
-            set => Editor.SetByte(PhysicalAttributeLocation, (byte) value);
+            get => Data.GetByte(PhysicalAttributeLocation);
+            set => Data.SetByte(PhysicalAttributeLocation, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown1 {
-            get => Editor.GetByte(Unknown1Location);
-            set => Editor.SetByte(Unknown1Location, (byte) value);
+            get => Data.GetByte(Unknown1Location);
+            set => Data.SetByte(Unknown1Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.EffectiveType)]
         public int MonsterType {
-            get => Editor.GetByte(MonsterTypeAttributeLocation);
-            set => Editor.SetByte(MonsterTypeAttributeLocation, (byte) value);
+            get => Data.GetByte(MonsterTypeAttributeLocation);
+            set => Data.SetByte(MonsterTypeAttributeLocation, (byte) value);
         }
 
         [BulkCopy]
         public int Unknown2 {
-            get => Editor.GetByte(Unknown2Location);
-            set => Editor.SetByte(Unknown2Location, (byte) value);
+            get => Data.GetByte(Unknown2Location);
+            set => Data.SetByte(Unknown2Location, (byte) value);
         }
 
         int conditionallySignedStatUp(int type, int value)
@@ -207,70 +207,70 @@ namespace SF3.Models.Structs.X002 {
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
         public int StatType1 {
-            get => Editor.GetByte(StatType1Location);
-            set => Editor.SetByte(StatType1Location, (byte) value);
+            get => Data.GetByte(StatType1Location);
+            set => Data.SetByte(StatType1Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.StatUpValueType, nameof(StatType1))]
         public int StatUp1 {
-            get => conditionallySignedStatUp(StatType1, Editor.GetByte(StatUp1Location));
-            set => Editor.SetByte(StatUp1Location, (byte) value);
+            get => conditionallySignedStatUp(StatType1, Data.GetByte(StatUp1Location));
+            set => Data.SetByte(StatUp1Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
         public int StatType2 {
-            get => Editor.GetByte(StatType2Location);
-            set => Editor.SetByte(StatType2Location, (byte) value);
+            get => Data.GetByte(StatType2Location);
+            set => Data.SetByte(StatType2Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.StatUpValueType, nameof(StatType2))]
         public int StatUp2 {
-            get => conditionallySignedStatUp(StatType2, Editor.GetByte(StatUp2Location));
-            set => Editor.SetByte(StatUp2Location, (byte) value);
+            get => conditionallySignedStatUp(StatType2, Data.GetByte(StatUp2Location));
+            set => Data.SetByte(StatUp2Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
         public int StatType3 {
-            get => Editor.GetByte(StatType3Location);
-            set => Editor.SetByte(StatType3Location, (byte) value);
+            get => Data.GetByte(StatType3Location);
+            set => Data.SetByte(StatType3Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.StatUpValueType, nameof(StatType3))]
         public int StatUp3 {
-            get => conditionallySignedStatUp(StatType3, Editor.GetByte(StatUp3Location));
-            set => Editor.SetByte(StatUp3Location, (byte) value);
+            get => conditionallySignedStatUp(StatType3, Data.GetByte(StatUp3Location));
+            set => Data.SetByte(StatUp3Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
         public int StatType4 {
-            get => Editor.GetByte(StatType4Location);
-            set => Editor.SetByte(StatType4Location, (byte) value);
+            get => Data.GetByte(StatType4Location);
+            set => Data.SetByte(StatType4Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.StatUpValueType, nameof(StatType4))]
         public int StatUp4 {
-            get => conditionallySignedStatUp(StatType4, Editor.GetByte(StatUp4Location));
-            set => Editor.SetByte(StatUp4Location, (byte) value);
+            get => conditionallySignedStatUp(StatType4, Data.GetByte(StatUp4Location));
+            set => Data.SetByte(StatUp4Location, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int SpellUse {
-            get => Editor.GetByte(SpellOnUseLocation);
-            set => Editor.SetByte(SpellOnUseLocation, (byte) value);
+            get => Data.GetByte(SpellOnUseLocation);
+            set => Data.SetByte(SpellOnUseLocation, (byte) value);
         }
 
         [BulkCopy]
         public int SpellUseLv {
-            get => Editor.GetByte(SpellLvOnUseLocation);
-            set => Editor.SetByte(SpellLvOnUseLocation, (byte) value);
+            get => Data.GetByte(SpellLvOnUseLocation);
+            set => Data.SetByte(SpellLvOnUseLocation, (byte) value);
         }
     }
 }

@@ -19,26 +19,26 @@ namespace SF3.Models.Structs.X013 {
 
         [BulkCopy]
         public int SLvlStat1 {
-            get => Editor.GetByte(sLvlStat1);
-            set => Editor.SetByte(sLvlStat1, (byte) value);
+            get => Data.GetByte(sLvlStat1);
+            set => Data.SetByte(sLvlStat1, (byte) value);
         }
 
         [BulkCopy]
         public int SLvlStat2 {
-            get => Editor.GetByte(sLvlStat2);
-            set => Editor.SetByte(sLvlStat2, (byte) value);
+            get => Data.GetByte(sLvlStat2);
+            set => Data.SetByte(sLvlStat2, (byte) value);
         }
 
         [BulkCopy]
         public int SLvlStat3 {
-            get => Editor.GetByte(sLvlStat3);
-            set => Editor.SetByte(sLvlStat3, (byte) value);
+            get => Data.GetByte(sLvlStat3);
+            set => Data.SetByte(sLvlStat3, (byte) value);
         }
 
         [BulkCopy]
         public int SLvlStat4 {
-            get => Editor.GetByte(sLvlStat4);
-            set => Editor.SetByte(sLvlStat4, (byte) value);
+            get => Data.GetByte(sLvlStat4);
+            set => Data.SetByte(sLvlStat4, (byte) value);
         }
     }
 }

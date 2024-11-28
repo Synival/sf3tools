@@ -15,14 +15,14 @@ namespace SF3.Models.Structs.X002 {
 
         [BulkCopy]
         public int Attack {
-            get => Editor.GetByte(attack);
-            set => Editor.SetByte(attack, (byte) value);
+            get => Data.GetByte(attack);
+            set => Data.SetByte(attack, (byte) value);
         }
 
         [BulkCopy]
         public int Resist {
-            get => Editor.GetByte(resist);
-            set => Editor.SetByte(resist, (byte) value);
+            get => Data.GetByte(resist);
+            set => Data.SetByte(resist, (byte) value);
         }
     }
 }

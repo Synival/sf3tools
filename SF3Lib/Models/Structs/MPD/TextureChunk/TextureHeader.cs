@@ -16,15 +16,15 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         [BulkCopy]
         [TableViewModelColumn(displayName: "# Textures", displayOrder: 0)]
         public int NumTextures {
-            get => Editor.GetWord(numTexturesAddress);
-            set => Editor.SetWord(numTexturesAddress, value);
+            get => Data.GetWord(numTexturesAddress);
+            set => Data.SetWord(numTexturesAddress, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Texture ID Start", displayOrder: 1, displayFormat: "X2")]
         public int TextureIdStart {
-            get => Editor.GetWord(textureIdStartAddress);
-            set => Editor.SetWord(textureIdStartAddress, value);
+            get => Data.GetWord(textureIdStartAddress);
+            set => Data.SetWord(textureIdStartAddress, value);
         }
     }
 }

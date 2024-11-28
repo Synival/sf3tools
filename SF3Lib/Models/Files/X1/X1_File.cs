@@ -65,7 +65,7 @@ namespace SF3.Models.Files.X1 {
             if (isScn1OrBTL99) {
                 hasLargeEnemyTable = true;
 
-                warpAddress          = -1; // X002 editor has Scenario1 WarpTable, and provides the address itself.
+                warpAddress          = -1; // X002 file has Scenario1 WarpTable, and provides the address itself.
                 npcAddress           = IsBattle == true ? -1 : battlePointersPointerAddress; // same address
                 enterAddress         = Data.GetDouble(0x0024) - sub;
                 arrowAddress         = -1; // Not present in Scenario1

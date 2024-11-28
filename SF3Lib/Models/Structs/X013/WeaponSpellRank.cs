@@ -21,32 +21,32 @@ namespace SF3.Models.Structs.X013 {
 
         [BulkCopy]
         public int RankNone {
-            get => Editor.GetByte(rankNone);
-            set => Editor.SetByte(rankNone, (byte) value);
+            get => Data.GetByte(rankNone);
+            set => Data.SetByte(rankNone, (byte) value);
         }
 
         [BulkCopy]
         public int RankC {
-            get => Editor.GetByte(rankC);
-            set => Editor.SetByte(rankC, (byte) value);
+            get => Data.GetByte(rankC);
+            set => Data.SetByte(rankC, (byte) value);
         }
 
         [BulkCopy]
         public int RankB {
-            get => Editor.GetByte(rankB);
-            set => Editor.SetByte(rankB, (byte) value);
+            get => Data.GetByte(rankB);
+            set => Data.SetByte(rankB, (byte) value);
         }
 
         [BulkCopy]
         public int RankA {
-            get => Editor.GetByte(rankA);
-            set => Editor.SetByte(rankA, (byte) value);
+            get => Data.GetByte(rankA);
+            set => Data.SetByte(rankA, (byte) value);
         }
 
         [BulkCopy]
         public int RankS {
-            get => Editor.GetByte(rankS);
-            set => Editor.SetByte(rankS, (byte) value);
+            get => Data.GetByte(rankS);
+            set => Data.SetByte(rankS, (byte) value);
         }
     }
 }

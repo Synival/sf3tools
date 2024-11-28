@@ -20,40 +20,40 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayName: "Unknown1", displayOrder: 0, displayFormat: "X8")]
         public uint Unknown1 {
-            get => (uint) Editor.GetDouble(_unknown1Address);
-            set => Editor.SetDouble(_unknown1Address, (int) value);
+            get => (uint) Data.GetDouble(_unknown1Address);
+            set => Data.SetDouble(_unknown1Address, (int) value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "UInt16Table1", displayOrder: 1, isPointer: true)]
         public uint UInt16Table1 {
-            get => (uint) Editor.GetDouble(_pointer1Address);
+            get => (uint) Data.GetDouble(_pointer1Address);
             set {
                 // Don't allow setting if this is out of range.
                 if (Unknown1 != 0xFFFF_FFFF)
-                    Editor.SetDouble(_pointer1Address, (int) value);
+                    Data.SetDouble(_pointer1Address, (int) value);
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "UInt16Table2", displayOrder: 2, isPointer: true)]
         public uint UInt16Table2 {
-            get => (uint) Editor.GetDouble(_pointer2Address);
+            get => (uint) Data.GetDouble(_pointer2Address);
             set {
                 // Don't allow setting if this is out of range.
                 if (Unknown1 != 0xFFFF_FFFF)
-                    Editor.SetDouble(_pointer2Address, (int) value);
+                    Data.SetDouble(_pointer2Address, (int) value);
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Unknown2", displayOrder: 3, displayFormat: "X8")]
         public uint Unknown2 {
-            get => (uint) Editor.GetDouble(_unknown2Address);
+            get => (uint) Data.GetDouble(_unknown2Address);
             set {
                 // Don't allow setting if this is out of range.
                 if (Unknown1 != 0xFFFF_FFFF)
-                    Editor.SetDouble(_unknown2Address, (int) value);
+                    Data.SetDouble(_unknown2Address, (int) value);
             }
         }
     }

@@ -16,15 +16,15 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayName: "Chunk Address", isPointer: true, displayOrder: 0)]
         public int ChunkAddress {
-            get => Editor.GetDouble(chunkAddressAddress);
-            set => Editor.SetDouble(chunkAddressAddress, value);
+            get => Data.GetDouble(chunkAddressAddress);
+            set => Data.SetDouble(chunkAddressAddress, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Chunk Size", displayFormat: "X4", displayOrder: 1)]
         public int ChunkSize {
-            get => Editor.GetDouble(chunkSizeAddress);
-            set => Editor.SetDouble(chunkSizeAddress, value);
+            get => Data.GetDouble(chunkSizeAddress);
+            set => Data.SetDouble(chunkSizeAddress, value);
         }
 
         [BulkCopy]

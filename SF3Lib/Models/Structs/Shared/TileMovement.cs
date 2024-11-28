@@ -45,98 +45,98 @@ namespace SF3.Models.Structs.Shared {
 
         [BulkCopy]
         public int TileNoEntry {
-            get => Editor.GetByte(noEntry);
-            set => Editor.SetByte(noEntry, (byte) value);
+            get => Data.GetByte(noEntry);
+            set => Data.SetByte(noEntry, (byte) value);
         }
 
         [BulkCopy]
         public int TileUnknown1 {
-            get => Editor.GetByte(unknown01);
-            set => Editor.SetByte(unknown01, (byte) value);
+            get => Data.GetByte(unknown01);
+            set => Data.SetByte(unknown01, (byte) value);
         }
 
         [BulkCopy]
         public int TileGrassland {
-            get => Editor.GetByte(grassland);
-            set => Editor.SetByte(grassland, (byte) value);
+            get => Data.GetByte(grassland);
+            set => Data.SetByte(grassland, (byte) value);
         }
 
         [BulkCopy]
         public int TileDirt {
-            get => Editor.GetByte(dirt);
-            set => Editor.SetByte(dirt, (byte) value);
+            get => Data.GetByte(dirt);
+            set => Data.SetByte(dirt, (byte) value);
         }
 
         [BulkCopy]
         public int TileDarkGrass {
-            get => Editor.GetByte(darkGrass);
-            set => Editor.SetByte(darkGrass, (byte) value);
+            get => Data.GetByte(darkGrass);
+            set => Data.SetByte(darkGrass, (byte) value);
         }
 
         [BulkCopy]
         public int TileForest {
-            get => Editor.GetByte(forest);
-            set => Editor.SetByte(forest, (byte) value);
+            get => Data.GetByte(forest);
+            set => Data.SetByte(forest, (byte) value);
         }
 
         [BulkCopy]
         public int TileBrownMountain {
-            get => Editor.GetByte(brownMountain);
-            set => Editor.SetByte(brownMountain, (byte) value);
+            get => Data.GetByte(brownMountain);
+            set => Data.SetByte(brownMountain, (byte) value);
         }
 
         [BulkCopy]
         public int TileDesert {
-            get => Editor.GetByte(desert);
-            set => Editor.SetByte(desert, (byte) value);
+            get => Data.GetByte(desert);
+            set => Data.SetByte(desert, (byte) value);
         }
 
         [BulkCopy]
         public int TileGreyMountain {
-            get => Editor.GetByte(greyMountain);
-            set => Editor.SetByte(greyMountain, (byte) value);
+            get => Data.GetByte(greyMountain);
+            set => Data.SetByte(greyMountain, (byte) value);
         }
 
         [BulkCopy]
         public int TileUnknown9 {
-            get => Editor.GetByte(unknown09);
-            set => Editor.SetByte(unknown09, (byte) value);
+            get => Data.GetByte(unknown09);
+            set => Data.SetByte(unknown09, (byte) value);
         }
 
         [BulkCopy]
         public int TileUnknownA {
-            get => Editor.GetByte(unknown0a);
-            set => Editor.SetByte(unknown0a, (byte) value);
+            get => Data.GetByte(unknown0a);
+            set => Data.SetByte(unknown0a, (byte) value);
         }
 
         [BulkCopy]
         public int TileUnknownB {
-            get => Editor.GetByte(unknown0b);
-            set => Editor.SetByte(unknown0b, (byte) value);
+            get => Data.GetByte(unknown0b);
+            set => Data.SetByte(unknown0b, (byte) value);
         }
 
         [BulkCopy]
         public int TileUnknownC {
-            get => Editor.GetByte(unknown0c);
-            set => Editor.SetByte(unknown0c, (byte) value);
+            get => Data.GetByte(unknown0c);
+            set => Data.SetByte(unknown0c, (byte) value);
         }
 
         [BulkCopy]
         public int TileUnknownD {
-            get => Editor.GetByte(unknown0d);
-            set => Editor.SetByte(unknown0d, (byte) value);
+            get => Data.GetByte(unknown0d);
+            set => Data.SetByte(unknown0d, (byte) value);
         }
 
         [BulkCopy]
         public int TileUnknownE {
-            get => Editor.GetByte(unknown0e);
-            set => Editor.SetByte(unknown0e, (byte) value);
+            get => Data.GetByte(unknown0e);
+            set => Data.SetByte(unknown0e, (byte) value);
         }
 
         [BulkCopy]
         public int TileUnknownF {
-            get => Editor.GetByte(unknown0f);
-            set => Editor.SetByte(unknown0f, (byte) value);
+            get => Data.GetByte(unknown0f);
+            set => Data.SetByte(unknown0f, (byte) value);
         }
     }
 }

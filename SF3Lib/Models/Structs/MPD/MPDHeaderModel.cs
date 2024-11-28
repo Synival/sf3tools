@@ -72,179 +72,179 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X4")]
         public int Unknown1 {
-            get => Editor.GetWord(unknown1Address);
-            set => Editor.SetWord(unknown1Address, value);
+            get => Data.GetWord(unknown1Address);
+            set => Data.SetWord(unknown1Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
         public int Unknown2 {
-            get => Editor.GetDouble(unknown2Address);
-            set => Editor.SetDouble(unknown2Address, value);
+            get => Data.GetDouble(unknown2Address);
+            set => Data.SetDouble(unknown2Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 2, isPointer: true)]
         public int Offset1 {
-            get => Editor.GetDouble(offset1Address);
-            set => Editor.SetDouble(offset1Address, value);
+            get => Data.GetDouble(offset1Address);
+            set => Data.SetDouble(offset1Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 3, isPointer: true)]
         public int Offset2 {
-            get => Editor.GetDouble(offset2Address);
-            set => Editor.SetDouble(offset2Address, value);
+            get => Data.GetDouble(offset2Address);
+            set => Data.SetDouble(offset2Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 4, isPointer: true)]
         public int Offset3 {
-            get => Editor.GetDouble(offset3Address);
-            set => Editor.SetDouble(offset3Address, value);
+            get => Data.GetDouble(offset3Address);
+            set => Data.SetDouble(offset3Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 5, displayFormat: "X2")]
         public int Unknown3 {
-            get => Editor.GetWord(unknown3Address);
-            set => Editor.SetWord(unknown3Address, value);
+            get => Data.GetWord(unknown3Address);
+            set => Data.SetWord(unknown3Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 6, displayFormat: "X2")]
         public int Unknown4 {
-            get => Editor.GetWord(unknown4Address);
-            set => Editor.SetWord(unknown4Address, value);
+            get => Data.GetWord(unknown4Address);
+            set => Data.SetWord(unknown4Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 7, isPointer: true)]
         public int Offset4 {
-            get => Editor.GetDouble(offset4Address);
-            set => Editor.SetDouble(offset4Address, value);
+            get => Data.GetDouble(offset4Address);
+            set => Data.SetDouble(offset4Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 8, isPointer: true)]
         public int OffsetTextureAnimations {
-            get => Editor.GetDouble(offsetTextureAnimationsAddress);
-            set => Editor.SetDouble(offsetTextureAnimationsAddress, value);
+            get => Data.GetDouble(offsetTextureAnimationsAddress);
+            set => Data.SetDouble(offsetTextureAnimationsAddress, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 9, isPointer: true)]
         public int Offset6 {
-            get => Editor.GetDouble(offset6Address);
-            set => Editor.SetDouble(offset6Address, value);
+            get => Data.GetDouble(offset6Address);
+            set => Data.SetDouble(offset6Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 10, isPointer: true)]
         public int Offset7 {
-            get => Editor.GetDouble(offset7Address);
-            set => Editor.SetDouble(offset7Address, value);
+            get => Data.GetDouble(offset7Address);
+            set => Data.SetDouble(offset7Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 11, isPointer: true)]
         public int OffsetMesh1 {
-            get => Editor.GetDouble(offsetMesh1Address);
-            set => Editor.SetDouble(offsetMesh1Address, value);
+            get => Data.GetDouble(offsetMesh1Address);
+            set => Data.SetDouble(offsetMesh1Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 12, isPointer: true)]
         public int OffsetMesh2 {
-            get => Editor.GetDouble(offsetMesh2Address);
-            set => Editor.SetDouble(offsetMesh2Address, value);
+            get => Data.GetDouble(offsetMesh2Address);
+            set => Data.SetDouble(offsetMesh2Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 13, isPointer: true)]
         public int OffsetMesh3 {
-            get => Editor.GetDouble(offsetMesh3Address);
-            set => Editor.SetDouble(offsetMesh3Address, value);
+            get => Data.GetDouble(offsetMesh3Address);
+            set => Data.SetDouble(offsetMesh3Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 14, displayFormat: "X8")]
         public int Const1 {
-            get => Editor.GetDouble(const1Address);
-            set => Editor.SetDouble(const1Address, value);
+            get => Data.GetDouble(const1Address);
+            set => Data.SetDouble(const1Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 15, displayFormat: "X8")]
         public int Const2 {
-            get => Editor.GetDouble(const2Address);
-            set => Editor.SetDouble(const2Address, value);
+            get => Data.GetDouble(const2Address);
+            set => Data.SetDouble(const2Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 16, isPointer: true)]
         public int OffsetTextureAnimAlt {
-            get => Editor.GetDouble(offsetTextureAnimAltAddress);
-            set => Editor.SetDouble(offsetTextureAnimAltAddress, value);
+            get => Data.GetDouble(offsetTextureAnimAltAddress);
+            set => Data.SetDouble(offsetTextureAnimAltAddress, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 17, isPointer: true)]
         public int OffsetPal1 {
-            get => Editor.GetDouble(offsetPal1Address);
-            set => Editor.SetDouble(offsetPal1Address, value);
+            get => Data.GetDouble(offsetPal1Address);
+            set => Data.SetDouble(offsetPal1Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 18, isPointer: true)]
         public int OffsetPal2 {
-            get => Editor.GetDouble(offsetPal2Address);
-            set => Editor.SetDouble(offsetPal2Address, value);
+            get => Data.GetDouble(offsetPal2Address);
+            set => Data.SetDouble(offsetPal2Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 19, isPointer: true)]
         public int OffsetPal3 {
-            get => offsetPal3Address >= 0 ? Editor.GetDouble(offsetPal3Address) : 0;
+            get => offsetPal3Address >= 0 ? Data.GetDouble(offsetPal3Address) : 0;
             set {
                 if (offsetPal3Address >= 0)
-                    Editor.SetDouble(offsetPal3Address, value);
+                    Data.SetDouble(offsetPal3Address, value);
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 20, displayFormat: "X4")]
         public int Unknown5 {
-            get => Editor.GetDouble(unknown5Address);
-            set => Editor.SetDouble(unknown5Address, value);
+            get => Data.GetDouble(unknown5Address);
+            set => Data.SetDouble(unknown5Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 21, displayFormat: "X4")]
         public int Const3 {
-            get => Editor.GetDouble(const3Address);
-            set => Editor.SetDouble(const3Address, value);
+            get => Data.GetDouble(const3Address);
+            set => Data.SetDouble(const3Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 22, displayFormat: "X8")]
         public int Unknown6 {
-            get => Editor.GetDouble(unknown6Address);
-            set => Editor.SetDouble(unknown6Address, value);
+            get => Data.GetDouble(unknown6Address);
+            set => Data.SetDouble(unknown6Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 23, displayFormat: "X8")]
         public int Unknown7 {
-            get => Editor.GetDouble(unknown7Address);
-            set => Editor.SetDouble(unknown7Address, value);
+            get => Data.GetDouble(unknown7Address);
+            set => Data.SetDouble(unknown7Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 24, isPointer: true)]
         public int Offset12 {
-            get => Editor.GetDouble(offset12Address);
-            set => Editor.SetDouble(offset12Address, value);
+            get => Data.GetDouble(offset12Address);
+            set => Data.SetDouble(offset12Address, value);
         }
     }
 }

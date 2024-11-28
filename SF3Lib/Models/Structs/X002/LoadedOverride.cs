@@ -38,88 +38,88 @@ namespace SF3.Models.Structs.X002 {
 
         [BulkCopy]
         public int MOMapID {
-            get => Editor.GetWord(mapID);
-            set => Editor.SetWord(mapID, value);
+            get => Data.GetWord(mapID);
+            set => Data.SetWord(mapID, value);
         }
 
         [BulkCopy]
         public int SynMusic {
-            get => Editor.GetByte(synMusic);
-            set => Editor.SetByte(synMusic, (byte) value);
+            get => Data.GetByte(synMusic);
+            set => Data.SetByte(synMusic, (byte) value);
         }
 
         [BulkCopy]
         public int MedMusic {
-            get => Editor.GetByte(medMusic);
-            set => Editor.SetByte(medMusic, (byte) value);
+            get => Data.GetByte(medMusic);
+            set => Data.SetByte(medMusic, (byte) value);
         }
 
         [BulkCopy]
         public int JulMusic {
-            get => Editor.GetByte(julMusic);
-            set => Editor.SetByte(julMusic, (byte) value);
+            get => Data.GetByte(julMusic);
+            set => Data.SetByte(julMusic, (byte) value);
         }
 
         [BulkCopy]
         public int ExtraMusic {
-            get => Editor.GetByte(extraMusic);
-            set => Editor.SetByte(extraMusic, (byte) value);
+            get => Data.GetByte(extraMusic);
+            set => Data.SetByte(extraMusic, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int SynMpd {
-            get => Editor.GetDouble(synMpd);
-            set => Editor.SetDouble(synMpd, value);
+            get => Data.GetDouble(synMpd);
+            set => Data.SetDouble(synMpd, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int MedMpd {
-            get => Editor.GetDouble(medMpd);
-            set => Editor.SetDouble(medMpd, value);
+            get => Data.GetDouble(medMpd);
+            set => Data.SetDouble(medMpd, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int JulMpd {
-            get => Editor.GetDouble(julMpd);
-            set => Editor.SetDouble(julMpd, value);
+            get => Data.GetDouble(julMpd);
+            set => Data.SetDouble(julMpd, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int ExtraMpd {
-            get => Editor.GetDouble(extraMpd);
-            set => Editor.SetDouble(extraMpd, value);
+            get => Data.GetDouble(extraMpd);
+            set => Data.SetDouble(extraMpd, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int SynChr {
-            get => Editor.GetDouble(synChr);
-            set => Editor.SetDouble(synChr, value);
+            get => Data.GetDouble(synChr);
+            set => Data.SetDouble(synChr, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int MedChr {
-            get => Editor.GetDouble(medChr);
-            set => Editor.SetDouble(medChr, value);
+            get => Data.GetDouble(medChr);
+            set => Data.SetDouble(medChr, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int JulChr {
-            get => Editor.GetDouble(julChr);
-            set => Editor.SetDouble(julChr, value);
+            get => Data.GetDouble(julChr);
+            set => Data.SetDouble(julChr, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int ExtraChr {
-            get => Editor.GetDouble(extraChr);
-            set => Editor.SetDouble(extraChr, value);
+            get => Data.GetDouble(extraChr);
+            set => Data.SetDouble(extraChr, value);
         }
     }
 }

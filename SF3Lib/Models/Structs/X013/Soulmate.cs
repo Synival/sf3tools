@@ -13,8 +13,8 @@ namespace SF3.Models.Structs.X013 {
 
         [BulkCopy]
         public int Chance {
-            get => Editor.GetByte(chance);
-            set => Editor.SetByte(chance, (byte) value);
+            get => Data.GetByte(chance);
+            set => Data.SetByte(chance, (byte) value);
         }
     }
 }

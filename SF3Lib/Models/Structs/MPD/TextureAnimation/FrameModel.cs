@@ -45,15 +45,15 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         [BulkCopy]
         [TableViewModelColumn(displayName: "Texture Offset", displayOrder: 5, displayFormat: "X4")]
         public uint CompressedTextureOffset {
-            get => Editor.GetData(_compressedTextureOffsetAddress, _bytesPerProperty);
-            set => Editor.SetData(_compressedTextureOffsetAddress, value, _bytesPerProperty);
+            get => Data.GetData(_compressedTextureOffsetAddress, _bytesPerProperty);
+            set => Data.SetData(_compressedTextureOffsetAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Unknown", displayOrder: 6, displayFormat: "X4")]
         public uint Unknown {
-            get => Editor.GetData(_unknownAddress, _bytesPerProperty);
-            set => Editor.SetData(_unknownAddress, value, _bytesPerProperty);
+            get => Data.GetData(_unknownAddress, _bytesPerProperty);
+            set => Data.SetData(_unknownAddress, value, _bytesPerProperty);
         }
 
         private readonly int _bytesPerProperty;

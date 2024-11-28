@@ -13,8 +13,8 @@ namespace SF3.Models.Structs.X013 {
 
         [BulkCopy]
         public int ExpLost {
-            get => Editor.GetByte(expLost);
-            set => Editor.SetByte(expLost, (byte) value);
+            get => Data.GetByte(expLost);
+            set => Data.SetByte(expLost, (byte) value);
         }
     }
 }

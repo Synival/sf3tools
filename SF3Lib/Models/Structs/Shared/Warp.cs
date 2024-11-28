@@ -19,26 +19,26 @@ namespace SF3.Models.Structs.Shared {
 
         [BulkCopy]
         public int WarpUnknown1 {
-            get => Editor.GetByte(unknown1);
-            set => Editor.SetByte(unknown1, (byte) value);
+            get => Data.GetByte(unknown1);
+            set => Data.SetByte(unknown1, (byte) value);
         }
 
         [BulkCopy]
         public int WarpUnknown2 {
-            get => Editor.GetByte(unknown2);
-            set => Editor.SetByte(unknown2, (byte) value);
+            get => Data.GetByte(unknown2);
+            set => Data.SetByte(unknown2, (byte) value);
         }
 
         [BulkCopy]
         public int WarpType {
-            get => Editor.GetByte(type);
-            set => Editor.SetByte(type, (byte) value);
+            get => Data.GetByte(type);
+            set => Data.SetByte(type, (byte) value);
         }
 
         [BulkCopy]
         public int WarpMap {
-            get => Editor.GetByte(map);
-            set => Editor.SetByte(map, (byte) value);
+            get => Data.GetByte(map);
+            set => Data.SetByte(map, (byte) value);
         }
     }
 }

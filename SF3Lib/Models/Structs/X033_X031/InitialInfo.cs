@@ -49,122 +49,122 @@ namespace SF3.Models.Structs.X033_X031 {
 
         [BulkCopy]
         public int CharacterE {
-            get => Editor.GetByte(character);
-            set => Editor.SetByte(character, (byte) value);
+            get => Data.GetByte(character);
+            set => Data.SetByte(character, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.CharacterClass)]
         public int CharacterClassE {
-            get => Editor.GetByte(characterClass);
-            set => Editor.SetByte(characterClass, (byte) value);
+            get => Data.GetByte(characterClass);
+            set => Data.SetByte(characterClass, (byte) value);
         }
 
         [BulkCopy]
         public int Level {
-            get => Editor.GetByte(level);
-            set => Editor.SetByte(level, (byte) value);
+            get => Data.GetByte(level);
+            set => Data.SetByte(level, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Sex)]
         public int Sex {
-            get => Editor.GetByte(sex);
-            set => Editor.SetByte(sex, (byte) value);
+            get => Data.GetByte(sex);
+            set => Data.SetByte(sex, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Weapon {
-            get => Editor.GetWord(weapon);
-            set => Editor.SetWord(weapon, value);
+            get => Data.GetWord(weapon);
+            set => Data.SetWord(weapon, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Accessory {
-            get => Editor.GetWord(accessory);
-            set => Editor.SetWord(accessory, value);
+            get => Data.GetWord(accessory);
+            set => Data.SetWord(accessory, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Item1 {
-            get => Editor.GetWord(item1);
-            set => Editor.SetWord(item1, value);
+            get => Data.GetWord(item1);
+            set => Data.SetWord(item1, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Item2 {
-            get => Editor.GetWord(item2);
-            set => Editor.SetWord(item2, value);
+            get => Data.GetWord(item2);
+            set => Data.SetWord(item2, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Item3 {
-            get => Editor.GetWord(item3);
-            set => Editor.SetWord(item3, value);
+            get => Data.GetWord(item3);
+            set => Data.SetWord(item3, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Item4 {
-            get => Editor.GetWord(item4);
-            set => Editor.SetWord(item4, value);
+            get => Data.GetWord(item4);
+            set => Data.SetWord(item4, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int Weapon1Type {
-            get => Editor.GetByte(weapon1Type);
-            set => Editor.SetByte(weapon1Type, (byte) value);
+            get => Data.GetByte(weapon1Type);
+            set => Data.SetByte(weapon1Type, (byte) value);
         }
 
         [BulkCopy]
         public int Weapon1Exp {
-            get => Editor.GetWord(weapon1Exp);
-            set => Editor.SetWord(weapon1Exp, value);
+            get => Data.GetWord(weapon1Exp);
+            set => Data.SetWord(weapon1Exp, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int Weapon2Type {
-            get => Editor.GetByte(weapon2Type);
-            set => Editor.SetByte(weapon2Type, (byte) value);
+            get => Data.GetByte(weapon2Type);
+            set => Data.SetByte(weapon2Type, (byte) value);
         }
 
         [BulkCopy]
         public int Weapon2Exp {
-            get => Editor.GetWord(weapon2Exp);
-            set => Editor.SetWord(weapon2Exp, value);
+            get => Data.GetWord(weapon2Exp);
+            set => Data.SetWord(weapon2Exp, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int Weapon3Type {
-            get => Editor.GetByte(weapon3Type);
-            set => Editor.SetByte(weapon3Type, (byte) value);
+            get => Data.GetByte(weapon3Type);
+            set => Data.SetByte(weapon3Type, (byte) value);
         }
 
         [BulkCopy]
         public int Weapon3Exp {
-            get => Editor.GetWord(weapon3Exp);
-            set => Editor.SetWord(weapon3Exp, value);
+            get => Data.GetWord(weapon3Exp);
+            set => Data.SetWord(weapon3Exp, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int Weapon4Type {
-            get => Editor.GetByte(weapon4Type);
-            set => Editor.SetByte(weapon4Type, (byte) value);
+            get => Data.GetByte(weapon4Type);
+            set => Data.SetByte(weapon4Type, (byte) value);
         }
 
         [BulkCopy]
         public int Weapon4Exp {
-            get => Editor.GetWord(weapon4Exp);
-            set => Editor.SetWord(weapon4Exp, value);
+            get => Data.GetWord(weapon4Exp);
+            set => Data.SetWord(weapon4Exp, value);
         }
     }
 }

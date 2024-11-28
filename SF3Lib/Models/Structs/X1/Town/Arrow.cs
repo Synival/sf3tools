@@ -23,38 +23,38 @@ namespace SF3.Models.Structs.X1.Town {
 
         [BulkCopy]
         public int ArrowUnknown0 {
-            get => Editor.GetWord(unknown0);
-            set => Editor.SetWord(unknown0, value);
+            get => Data.GetWord(unknown0);
+            set => Data.SetWord(unknown0, value);
         }
 
         [BulkCopy]
         public int ArrowText {
-            get => Editor.GetWord(textID);
-            set => Editor.SetWord(textID, value);
+            get => Data.GetWord(textID);
+            set => Data.SetWord(textID, value);
         }
 
         [BulkCopy]
         public int ArrowUnknown4 {
-            get => Editor.GetWord(unknown4);
-            set => Editor.SetWord(unknown4, value);
+            get => Data.GetWord(unknown4);
+            set => Data.SetWord(unknown4, value);
         }
 
         [BulkCopy]
         public int ArrowWarp {
-            get => Editor.GetWord(warpInMPD);
-            set => Editor.SetWord(warpInMPD, value);
+            get => Data.GetWord(warpInMPD);
+            set => Data.SetWord(warpInMPD, value);
         }
 
         [BulkCopy]
         public int ArrowUnknown8 {
-            get => Editor.GetWord(unknown8);
-            set => Editor.SetWord(unknown8, value);
+            get => Data.GetWord(unknown8);
+            set => Data.SetWord(unknown8, value);
         }
 
         [BulkCopy]
         public int ArrowUnknownA {
-            get => Editor.GetWord(unknownA);
-            set => Editor.SetWord(unknownA, value);
+            get => Data.GetWord(unknownA);
+            set => Data.SetWord(unknownA, value);
         }
     }
 }

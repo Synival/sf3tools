@@ -13,8 +13,8 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [BulkCopy]
         public int BattlePointer {
-            get => Editor.GetDouble(battlePointer);
-            set => Editor.SetDouble(battlePointer, value);
+            get => Data.GetDouble(battlePointer);
+            set => Data.SetDouble(battlePointer, value);
         }
     }
 }

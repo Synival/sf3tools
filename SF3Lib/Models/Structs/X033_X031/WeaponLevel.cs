@@ -19,26 +19,26 @@ namespace SF3.Models.Structs.X033_X031 {
 
         [BulkCopy]
         public int WLevel1 {
-            get => Editor.GetWord(level1);
-            set => Editor.SetWord(level1, value);
+            get => Data.GetWord(level1);
+            set => Data.SetWord(level1, value);
         }
 
         [BulkCopy]
         public int WLevel2 {
-            get => Editor.GetWord(level2);
-            set => Editor.SetWord(level2, value);
+            get => Data.GetWord(level2);
+            set => Data.SetWord(level2, value);
         }
 
         [BulkCopy]
         public int WLevel3 {
-            get => Editor.GetWord(level3);
-            set => Editor.SetWord(level3, value);
+            get => Data.GetWord(level3);
+            set => Data.SetWord(level3, value);
         }
 
         [BulkCopy]
         public int WLevel4 {
-            get => Editor.GetWord(level4);
-            set => Editor.SetWord(level4, value);
+            get => Data.GetWord(level4);
+            set => Data.SetWord(level4, value);
         }
     }
 }

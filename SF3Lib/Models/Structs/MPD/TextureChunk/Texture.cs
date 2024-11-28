@@ -67,9 +67,9 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0)]
         public int Width {
-            get => Editor.GetByte(widthAddress);
+            get => Data.GetByte(widthAddress);
             set {
-                Editor.SetByte(widthAddress, (byte) value);
+                Data.SetByte(widthAddress, (byte) value);
                 UpdateImageData();
             }
         }
@@ -77,9 +77,9 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 1)]
         public int Height {
-            get => Editor.GetByte(heightAddress);
+            get => Data.GetByte(heightAddress);
             set {
-                Editor.SetByte(heightAddress, (byte) value);
+                Data.SetByte(heightAddress, (byte) value);
                 UpdateImageData();
             }
         }
@@ -87,9 +87,9 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 2, displayFormat: "X4")]
         public int ImageDataOffset {
-            get => Editor.GetWord(imageDataOffsetAddress);
+            get => Data.GetWord(imageDataOffsetAddress);
             set {
-                Editor.SetWord(imageDataOffsetAddress, value);
+                Data.SetWord(imageDataOffsetAddress, value);
                 UpdateImageData();
             }
         }
@@ -103,7 +103,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 var off = ImageDataOffset;
                 for (var y = 0; y < Height; y++) {
                     for (var x = 0; x < Width; x++) {
-                        var texPixel = (ushort) Editor.GetWord(off);
+                        var texPixel = (ushort) Data.GetWord(off);
                         off += 2;
                         data[x, y] = texPixel;
                     }
@@ -117,7 +117,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 var off = ImageDataOffset;
                 for (var y = 0; y < Height; y++) {
                     for (var x = 0; x < Width; x++) {
-                        Editor.SetWord(off, value[x, y]);
+                        Data.SetWord(off, value[x, y]);
                         off += 2;
                     }
                 }
@@ -159,7 +159,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 var off = ImageDataOffset;
                 for (var y = 0; y < Height; y++) {
                     for (var x = 0; x < Width; x++) {
-                        var texPixel = (byte) Editor.GetByte(off++);
+                        var texPixel = (byte) Data.GetByte(off++);
                         data[x, y] = texPixel;
                     }
                 }
@@ -172,7 +172,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 var off = ImageDataOffset;
                 for (var y = 0; y < Height; y++)
                     for (var x = 0; x < Width; x++)
-                        Editor.SetByte(off++, value[x, y]);
+                        Data.SetByte(off++, value[x, y]);
 
                 CachedImageData8Bit = value;
             }

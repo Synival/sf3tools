@@ -23,38 +23,38 @@ namespace SF3.Models.Structs.X013 {
 
         [BulkCopy]
         public int NoSpecial {
-            get => Editor.GetByte(noSpecial);
-            set => Editor.SetByte(noSpecial, (byte) value);
+            get => Data.GetByte(noSpecial);
+            set => Data.SetByte(noSpecial, (byte) value);
         }
 
         [BulkCopy]
         public int OneSpecial {
-            get => Editor.GetByte(oneSpecial);
-            set => Editor.SetByte(oneSpecial, (byte) value);
+            get => Data.GetByte(oneSpecial);
+            set => Data.SetByte(oneSpecial, (byte) value);
         }
 
         [BulkCopy]
         public int TwoSpecial {
-            get => Editor.GetByte(twoSpecial);
-            set => Editor.SetByte(twoSpecial, (byte) value);
+            get => Data.GetByte(twoSpecial);
+            set => Data.SetByte(twoSpecial, (byte) value);
         }
 
         [BulkCopy]
         public int ThreeSpecial {
-            get => Editor.GetByte(threeSpecial);
-            set => Editor.SetByte(threeSpecial, (byte) value);
+            get => Data.GetByte(threeSpecial);
+            set => Data.SetByte(threeSpecial, (byte) value);
         }
 
         [BulkCopy]
         public int FourSpecial {
-            get => Editor.GetByte(fourSpecial);
-            set => Editor.SetByte(fourSpecial, (byte) value);
+            get => Data.GetByte(fourSpecial);
+            set => Data.SetByte(fourSpecial, (byte) value);
         }
 
         [BulkCopy]
         public int FiveSpecial {
-            get => Editor.GetByte(fiveSpecial);
-            set => Editor.SetByte(fiveSpecial, (byte) value);
+            get => Data.GetByte(fiveSpecial);
+            set => Data.SetByte(fiveSpecial, (byte) value);
         }
     }
 }

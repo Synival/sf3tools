@@ -267,11 +267,11 @@ namespace SF3.Models.Structs.X033_X031 {
             accessoryEquipable4 = Address + 0x7a;
         }
 
-        public bool IsPromoted => Editor.GetByte(characterClass) >= 0x20;
+        public bool IsPromoted => Data.GetByte(characterClass) >= 0x20;
 
         public PromotionLevelType PromotionLevel {
             get {
-                var chClass = Editor.GetByte(characterClass);
+                var chClass = Data.GetByte(characterClass);
                 return chClass < 0x20 ? PromotionLevelType.Unpromoted :
                        chClass < 0x48 ? PromotionLevelType.Promotion1 :
                                         PromotionLevelType.Promotion2;
@@ -388,63 +388,63 @@ namespace SF3.Models.Structs.X033_X031 {
 
         [BulkCopy]
         public int CharacterID {
-            get => Editor.GetByte(character);
-            set => Editor.SetByte(character, (byte) value);
+            get => Data.GetByte(character);
+            set => Data.SetByte(character, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.CharacterClass)]
         public int CharacterClass {
-            get => Editor.GetByte(characterClass);
-            set => Editor.SetByte(characterClass, (byte) value);
+            get => Data.GetByte(characterClass);
+            set => Data.SetByte(characterClass, (byte) value);
         }
 
         [BulkCopy]
         public int HPPromote {
-            get => Editor.GetByte(hpPromote);
-            set => Editor.SetByte(hpPromote, (byte) value);
+            get => Data.GetByte(hpPromote);
+            set => Data.SetByte(hpPromote, (byte) value);
         }
 
         [BulkCopy]
         public int HPCurve1 {
-            get => Editor.GetByte(hpCurve1);
-            set => Editor.SetByte(hpCurve1, (byte) value);
+            get => Data.GetByte(hpCurve1);
+            set => Data.SetByte(hpCurve1, (byte) value);
         }
 
         [BulkCopy]
         public int HPCurve5 {
-            get => Editor.GetByte(hpCurve5);
-            set => Editor.SetByte(hpCurve5, (byte) value);
+            get => Data.GetByte(hpCurve5);
+            set => Data.SetByte(hpCurve5, (byte) value);
         }
 
         [BulkCopy]
         public int HPCurve10 {
-            get => Editor.GetByte(hpCurve10);
-            set => Editor.SetByte(hpCurve10, (byte) value);
+            get => Data.GetByte(hpCurve10);
+            set => Data.SetByte(hpCurve10, (byte) value);
         }
 
         [BulkCopy]
         public int HPCurve12_15 {
-            get => Editor.GetByte(hpCurve12_15);
-            set => Editor.SetByte(hpCurve12_15, (byte) value);
+            get => Data.GetByte(hpCurve12_15);
+            set => Data.SetByte(hpCurve12_15, (byte) value);
         }
 
         [BulkCopy]
         public int HPCurve14_20 {
-            get => Editor.GetByte(hpCurve14_20);
-            set => Editor.SetByte(hpCurve14_20, (byte) value);
+            get => Data.GetByte(hpCurve14_20);
+            set => Data.SetByte(hpCurve14_20, (byte) value);
         }
 
         [BulkCopy]
         public int HPCurve17_30 {
-            get => Editor.GetByte(hpCurve17_30);
-            set => Editor.SetByte(hpCurve17_30, (byte) value);
+            get => Data.GetByte(hpCurve17_30);
+            set => Data.SetByte(hpCurve17_30, (byte) value);
         }
 
         [BulkCopy]
         public int HPCurve30_99 {
-            get => Editor.GetByte(hpCurve30_99);
-            set => Editor.SetByte(hpCurve30_99, (byte) value);
+            get => Data.GetByte(hpCurve30_99);
+            set => Data.SetByte(hpCurve30_99, (byte) value);
         }
 
         public string HPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 0);
@@ -456,50 +456,50 @@ namespace SF3.Models.Structs.X033_X031 {
 
         [BulkCopy]
         public int MPPromote {
-            get => Editor.GetByte(mpPromote);
-            set => Editor.SetByte(mpPromote, (byte) value);
+            get => Data.GetByte(mpPromote);
+            set => Data.SetByte(mpPromote, (byte) value);
         }
 
         [BulkCopy]
         public int MPCurve1 {
-            get => Editor.GetByte(mpCurve1);
-            set => Editor.SetByte(mpCurve1, (byte) value);
+            get => Data.GetByte(mpCurve1);
+            set => Data.SetByte(mpCurve1, (byte) value);
         }
 
         [BulkCopy]
         public int MPCurve5 {
-            get => Editor.GetByte(mpCurve5);
-            set => Editor.SetByte(mpCurve5, (byte) value);
+            get => Data.GetByte(mpCurve5);
+            set => Data.SetByte(mpCurve5, (byte) value);
         }
 
         [BulkCopy]
         public int MPCurve10 {
-            get => Editor.GetByte(mpCurve10);
-            set => Editor.SetByte(mpCurve10, (byte) value);
+            get => Data.GetByte(mpCurve10);
+            set => Data.SetByte(mpCurve10, (byte) value);
         }
 
         [BulkCopy]
         public int MPCurve12_15 {
-            get => Editor.GetByte(mpCurve12_15);
-            set => Editor.SetByte(mpCurve12_15, (byte) value);
+            get => Data.GetByte(mpCurve12_15);
+            set => Data.SetByte(mpCurve12_15, (byte) value);
         }
 
         [BulkCopy]
         public int MPCurve14_20 {
-            get => Editor.GetByte(mpCurve14_20);
-            set => Editor.SetByte(mpCurve14_20, (byte) value);
+            get => Data.GetByte(mpCurve14_20);
+            set => Data.SetByte(mpCurve14_20, (byte) value);
         }
 
         [BulkCopy]
         public int MPCurve17_30 {
-            get => Editor.GetByte(mpCurve17_30);
-            set => Editor.SetByte(mpCurve17_30, (byte) value);
+            get => Data.GetByte(mpCurve17_30);
+            set => Data.SetByte(mpCurve17_30, (byte) value);
         }
 
         [BulkCopy]
         public int MPCurve30_99 {
-            get => Editor.GetByte(mpCurve30_99);
-            set => Editor.SetByte(mpCurve30_99, (byte) value);
+            get => Data.GetByte(mpCurve30_99);
+            set => Data.SetByte(mpCurve30_99, (byte) value);
         }
 
         public string MPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 0);
@@ -511,50 +511,50 @@ namespace SF3.Models.Structs.X033_X031 {
 
         [BulkCopy]
         public int AtkPromote {
-            get => Editor.GetByte(atkPromote);
-            set => Editor.SetByte(atkPromote, (byte) value);
+            get => Data.GetByte(atkPromote);
+            set => Data.SetByte(atkPromote, (byte) value);
         }
 
         [BulkCopy]
         public int AtkCurve1 {
-            get => Editor.GetByte(atkCurve1);
-            set => Editor.SetByte(atkCurve1, (byte) value);
+            get => Data.GetByte(atkCurve1);
+            set => Data.SetByte(atkCurve1, (byte) value);
         }
 
         [BulkCopy]
         public int AtkCurve5 {
-            get => Editor.GetByte(atkCurve5);
-            set => Editor.SetByte(atkCurve5, (byte) value);
+            get => Data.GetByte(atkCurve5);
+            set => Data.SetByte(atkCurve5, (byte) value);
         }
 
         [BulkCopy]
         public int AtkCurve10 {
-            get => Editor.GetByte(atkCurve10);
-            set => Editor.SetByte(atkCurve10, (byte) value);
+            get => Data.GetByte(atkCurve10);
+            set => Data.SetByte(atkCurve10, (byte) value);
         }
 
         [BulkCopy]
         public int AtkCurve12_15 {
-            get => Editor.GetByte(atkCurve12_15);
-            set => Editor.SetByte(atkCurve12_15, (byte) value);
+            get => Data.GetByte(atkCurve12_15);
+            set => Data.SetByte(atkCurve12_15, (byte) value);
         }
 
         [BulkCopy]
         public int AtkCurve14_20 {
-            get => Editor.GetByte(atkCurve14_20);
-            set => Editor.SetByte(atkCurve14_20, (byte) value);
+            get => Data.GetByte(atkCurve14_20);
+            set => Data.SetByte(atkCurve14_20, (byte) value);
         }
 
         [BulkCopy]
         public int AtkCurve17_30 {
-            get => Editor.GetByte(atkCurve17_30);
-            set => Editor.SetByte(atkCurve17_30, (byte) value);
+            get => Data.GetByte(atkCurve17_30);
+            set => Data.SetByte(atkCurve17_30, (byte) value);
         }
 
         [BulkCopy]
         public int AtkCurve30_99 {
-            get => Editor.GetByte(atkCurve30_99);
-            set => Editor.SetByte(atkCurve30_99, (byte) value);
+            get => Data.GetByte(atkCurve30_99);
+            set => Data.SetByte(atkCurve30_99, (byte) value);
         }
 
         public string Atkgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 0);
@@ -566,50 +566,50 @@ namespace SF3.Models.Structs.X033_X031 {
 
         [BulkCopy]
         public int DefPromote {
-            get => Editor.GetByte(defPromote);
-            set => Editor.SetByte(defPromote, (byte) value);
+            get => Data.GetByte(defPromote);
+            set => Data.SetByte(defPromote, (byte) value);
         }
 
         [BulkCopy]
         public int DefCurve1 {
-            get => Editor.GetByte(defCurve1);
-            set => Editor.SetByte(defCurve1, (byte) value);
+            get => Data.GetByte(defCurve1);
+            set => Data.SetByte(defCurve1, (byte) value);
         }
 
         [BulkCopy]
         public int DefCurve5 {
-            get => Editor.GetByte(defCurve5);
-            set => Editor.SetByte(defCurve5, (byte) value);
+            get => Data.GetByte(defCurve5);
+            set => Data.SetByte(defCurve5, (byte) value);
         }
 
         [BulkCopy]
         public int DefCurve10 {
-            get => Editor.GetByte(defCurve10);
-            set => Editor.SetByte(defCurve10, (byte) value);
+            get => Data.GetByte(defCurve10);
+            set => Data.SetByte(defCurve10, (byte) value);
         }
 
         [BulkCopy]
         public int DefCurve12_15 {
-            get => Editor.GetByte(defCurve12_15);
-            set => Editor.SetByte(defCurve12_15, (byte) value);
+            get => Data.GetByte(defCurve12_15);
+            set => Data.SetByte(defCurve12_15, (byte) value);
         }
 
         [BulkCopy]
         public int DefCurve14_20 {
-            get => Editor.GetByte(defCurve14_20);
-            set => Editor.SetByte(defCurve14_20, (byte) value);
+            get => Data.GetByte(defCurve14_20);
+            set => Data.SetByte(defCurve14_20, (byte) value);
         }
 
         [BulkCopy]
         public int DefCurve17_30 {
-            get => Editor.GetByte(defCurve17_30);
-            set => Editor.SetByte(defCurve17_30, (byte) value);
+            get => Data.GetByte(defCurve17_30);
+            set => Data.SetByte(defCurve17_30, (byte) value);
         }
 
         [BulkCopy]
         public int DefCurve30_99 {
-            get => Editor.GetByte(defCurve30_99);
-            set => Editor.SetByte(defCurve30_99, (byte) value);
+            get => Data.GetByte(defCurve30_99);
+            set => Data.SetByte(defCurve30_99, (byte) value);
         }
 
         public string Defgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 0);
@@ -621,50 +621,50 @@ namespace SF3.Models.Structs.X033_X031 {
 
         [BulkCopy]
         public int AgiPromote {
-            get => Editor.GetByte(agiPromote);
-            set => Editor.SetByte(agiPromote, (byte) value);
+            get => Data.GetByte(agiPromote);
+            set => Data.SetByte(agiPromote, (byte) value);
         }
 
         [BulkCopy]
         public int AgiCurve1 {
-            get => Editor.GetByte(agiCurve1);
-            set => Editor.SetByte(agiCurve1, (byte) value);
+            get => Data.GetByte(agiCurve1);
+            set => Data.SetByte(agiCurve1, (byte) value);
         }
 
         [BulkCopy]
         public int AgiCurve5 {
-            get => Editor.GetByte(agiCurve5);
-            set => Editor.SetByte(agiCurve5, (byte) value);
+            get => Data.GetByte(agiCurve5);
+            set => Data.SetByte(agiCurve5, (byte) value);
         }
 
         [BulkCopy]
         public int AgiCurve10 {
-            get => Editor.GetByte(agiCurve10);
-            set => Editor.SetByte(agiCurve10, (byte) value);
+            get => Data.GetByte(agiCurve10);
+            set => Data.SetByte(agiCurve10, (byte) value);
         }
 
         [BulkCopy]
         public int AgiCurve12_15 {
-            get => Editor.GetByte(agiCurve12_15);
-            set => Editor.SetByte(agiCurve12_15, (byte) value);
+            get => Data.GetByte(agiCurve12_15);
+            set => Data.SetByte(agiCurve12_15, (byte) value);
         }
 
         [BulkCopy]
         public int AgiCurve14_20 {
-            get => Editor.GetByte(agiCurve14_20);
-            set => Editor.SetByte(agiCurve14_20, (byte) value);
+            get => Data.GetByte(agiCurve14_20);
+            set => Data.SetByte(agiCurve14_20, (byte) value);
         }
 
         [BulkCopy]
         public int AgiCurve17_30 {
-            get => Editor.GetByte(agiCurve17_30);
-            set => Editor.SetByte(agiCurve17_30, (byte) value);
+            get => Data.GetByte(agiCurve17_30);
+            set => Data.SetByte(agiCurve17_30, (byte) value);
         }
 
         [BulkCopy]
         public int AgiCurve30_99 {
-            get => Editor.GetByte(agiCurve30_99);
-            set => Editor.SetByte(agiCurve30_99, (byte) value);
+            get => Data.GetByte(agiCurve30_99);
+            set => Data.SetByte(agiCurve30_99, (byte) value);
         }
 
         public string Agigroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 0);
@@ -676,473 +676,473 @@ namespace SF3.Models.Structs.X033_X031 {
 
         [BulkCopy]
         public int S1LearnedAt {
-            get => Editor.GetByte(s1LearnedAt);
-            set => Editor.SetByte(s1LearnedAt, (byte) value);
+            get => Data.GetByte(s1LearnedAt);
+            set => Data.SetByte(s1LearnedAt, (byte) value);
         }
 
         [BulkCopy]
         public int S1LearnedLevel {
-            get => Editor.GetByte(s1LearnedLevel);
-            set => Editor.SetByte(s1LearnedLevel, (byte) value);
+            get => Data.GetByte(s1LearnedLevel);
+            set => Data.SetByte(s1LearnedLevel, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int S1LearnedID {
-            get => Editor.GetByte(s1LearnedID);
-            set => Editor.SetByte(s1LearnedID, (byte) value);
+            get => Data.GetByte(s1LearnedID);
+            set => Data.SetByte(s1LearnedID, (byte) value);
         }
 
         [BulkCopy]
         public int S2LearnedAt {
-            get => Editor.GetByte(s2LearnedAt);
-            set => Editor.SetByte(s2LearnedAt, (byte) value);
+            get => Data.GetByte(s2LearnedAt);
+            set => Data.SetByte(s2LearnedAt, (byte) value);
         }
 
         [BulkCopy]
         public int S2LearnedLevel {
-            get => Editor.GetByte(s2LearnedLevel);
-            set => Editor.SetByte(s2LearnedLevel, (byte) value);
+            get => Data.GetByte(s2LearnedLevel);
+            set => Data.SetByte(s2LearnedLevel, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int S2LearnedID {
-            get => Editor.GetByte(s2LearnedID);
-            set => Editor.SetByte(s2LearnedID, (byte) value);
+            get => Data.GetByte(s2LearnedID);
+            set => Data.SetByte(s2LearnedID, (byte) value);
         }
 
         [BulkCopy]
         public int S3LearnedAt {
-            get => Editor.GetByte(s3LearnedAt);
-            set => Editor.SetByte(s3LearnedAt, (byte) value);
+            get => Data.GetByte(s3LearnedAt);
+            set => Data.SetByte(s3LearnedAt, (byte) value);
         }
 
         [BulkCopy]
         public int S3LearnedLevel {
-            get => Editor.GetByte(s3LearnedLevel);
-            set => Editor.SetByte(s3LearnedLevel, (byte) value);
+            get => Data.GetByte(s3LearnedLevel);
+            set => Data.SetByte(s3LearnedLevel, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int S3LearnedID {
-            get => Editor.GetByte(s3LearnedID);
-            set => Editor.SetByte(s3LearnedID, (byte) value);
+            get => Data.GetByte(s3LearnedID);
+            set => Data.SetByte(s3LearnedID, (byte) value);
         }
 
         [BulkCopy]
         public int S4LearnedAt {
-            get => Editor.GetByte(s4LearnedAt);
-            set => Editor.SetByte(s4LearnedAt, (byte) value);
+            get => Data.GetByte(s4LearnedAt);
+            set => Data.SetByte(s4LearnedAt, (byte) value);
         }
 
         [BulkCopy]
         public int S4LearnedLevel {
-            get => Editor.GetByte(s4LearnedLevel);
-            set => Editor.SetByte(s4LearnedLevel, (byte) value);
+            get => Data.GetByte(s4LearnedLevel);
+            set => Data.SetByte(s4LearnedLevel, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int S4LearnedID {
-            get => Editor.GetByte(s4LearnedID);
-            set => Editor.SetByte(s4LearnedID, (byte) value);
+            get => Data.GetByte(s4LearnedID);
+            set => Data.SetByte(s4LearnedID, (byte) value);
         }
 
         [BulkCopy]
         public int S5LearnedAt {
-            get => Editor.GetByte(s5LearnedAt);
-            set => Editor.SetByte(s5LearnedAt, (byte) value);
+            get => Data.GetByte(s5LearnedAt);
+            set => Data.SetByte(s5LearnedAt, (byte) value);
         }
 
         [BulkCopy]
         public int S5LearnedLevel {
-            get => Editor.GetByte(s5LearnedLevel);
-            set => Editor.SetByte(s5LearnedLevel, (byte) value);
+            get => Data.GetByte(s5LearnedLevel);
+            set => Data.SetByte(s5LearnedLevel, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int S5LearnedID {
-            get => Editor.GetByte(s5LearnedID);
-            set => Editor.SetByte(s5LearnedID, (byte) value);
+            get => Data.GetByte(s5LearnedID);
+            set => Data.SetByte(s5LearnedID, (byte) value);
         }
 
         [BulkCopy]
         public int S6LearnedAt {
-            get => Editor.GetByte(s6LearnedAt);
-            set => Editor.SetByte(s6LearnedAt, (byte) value);
+            get => Data.GetByte(s6LearnedAt);
+            set => Data.SetByte(s6LearnedAt, (byte) value);
         }
 
         [BulkCopy]
         public int S6LearnedLevel {
-            get => Editor.GetByte(s6LearnedLevel);
-            set => Editor.SetByte(s6LearnedLevel, (byte) value);
+            get => Data.GetByte(s6LearnedLevel);
+            set => Data.SetByte(s6LearnedLevel, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int S6LearnedID {
-            get => Editor.GetByte(s6LearnedID);
-            set => Editor.SetByte(s6LearnedID, (byte) value);
+            get => Data.GetByte(s6LearnedID);
+            set => Data.SetByte(s6LearnedID, (byte) value);
         }
 
         [BulkCopy]
         public int S7LearnedAt {
-            get => Editor.GetByte(s7LearnedAt);
-            set => Editor.SetByte(s7LearnedAt, (byte) value);
+            get => Data.GetByte(s7LearnedAt);
+            set => Data.SetByte(s7LearnedAt, (byte) value);
         }
 
         [BulkCopy]
         public int S7LearnedLevel {
-            get => Editor.GetByte(s7LearnedLevel);
-            set => Editor.SetByte(s7LearnedLevel, (byte) value);
+            get => Data.GetByte(s7LearnedLevel);
+            set => Data.SetByte(s7LearnedLevel, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int S7LearnedID {
-            get => Editor.GetByte(s7LearnedID);
-            set => Editor.SetByte(s7LearnedID, (byte) value);
+            get => Data.GetByte(s7LearnedID);
+            set => Data.SetByte(s7LearnedID, (byte) value);
         }
 
         [BulkCopy]
         public int S8LearnedAt {
-            get => Editor.GetByte(s8LearnedAt);
-            set => Editor.SetByte(s8LearnedAt, (byte) value);
+            get => Data.GetByte(s8LearnedAt);
+            set => Data.SetByte(s8LearnedAt, (byte) value);
         }
 
         [BulkCopy]
         public int S8LearnedLevel {
-            get => Editor.GetByte(s8LearnedLevel);
-            set => Editor.SetByte(s8LearnedLevel, (byte) value);
+            get => Data.GetByte(s8LearnedLevel);
+            set => Data.SetByte(s8LearnedLevel, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int S8LearnedID {
-            get => Editor.GetByte(s8LearnedID);
-            set => Editor.SetByte(s8LearnedID, (byte) value);
+            get => Data.GetByte(s8LearnedID);
+            set => Data.SetByte(s8LearnedID, (byte) value);
         }
 
         [BulkCopy]
         public int S9LearnedAt {
-            get => Editor.GetByte(s9LearnedAt);
-            set => Editor.SetByte(s9LearnedAt, (byte) value);
+            get => Data.GetByte(s9LearnedAt);
+            set => Data.SetByte(s9LearnedAt, (byte) value);
         }
 
         [BulkCopy]
         public int S9LearnedLevel {
-            get => Editor.GetByte(s9LearnedLevel);
-            set => Editor.SetByte(s9LearnedLevel, (byte) value);
+            get => Data.GetByte(s9LearnedLevel);
+            set => Data.SetByte(s9LearnedLevel, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int S9LearnedID {
-            get => Editor.GetByte(s9LearnedID);
-            set => Editor.SetByte(s9LearnedID, (byte) value);
+            get => Data.GetByte(s9LearnedID);
+            set => Data.SetByte(s9LearnedID, (byte) value);
         }
 
         [BulkCopy]
         public int S10LearnedAt {
-            get => Editor.GetByte(s10LearnedAt);
-            set => Editor.SetByte(s10LearnedAt, (byte) value);
+            get => Data.GetByte(s10LearnedAt);
+            set => Data.SetByte(s10LearnedAt, (byte) value);
         }
 
         [BulkCopy]
         public int S10LearnedLevel {
-            get => Editor.GetByte(s10LearnedLevel);
-            set => Editor.SetByte(s10LearnedLevel, (byte) value);
+            get => Data.GetByte(s10LearnedLevel);
+            set => Data.SetByte(s10LearnedLevel, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int S10LearnedID {
-            get => Editor.GetByte(s10LearnedID);
-            set => Editor.SetByte(s10LearnedID, (byte) value);
+            get => Data.GetByte(s10LearnedID);
+            set => Data.SetByte(s10LearnedID, (byte) value);
         }
 
         [BulkCopy]
         public int S11LearnedAt {
-            get => Editor.GetByte(s11LearnedAt);
-            set => Editor.SetByte(s11LearnedAt, (byte) value);
+            get => Data.GetByte(s11LearnedAt);
+            set => Data.SetByte(s11LearnedAt, (byte) value);
         }
 
         [BulkCopy]
         public int S11LearnedLevel {
-            get => Editor.GetByte(s11LearnedLevel);
-            set => Editor.SetByte(s11LearnedLevel, (byte) value);
+            get => Data.GetByte(s11LearnedLevel);
+            set => Data.SetByte(s11LearnedLevel, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int S11LearnedID {
-            get => Editor.GetByte(s11LearnedID);
-            set => Editor.SetByte(s11LearnedID, (byte) value);
+            get => Data.GetByte(s11LearnedID);
+            set => Data.SetByte(s11LearnedID, (byte) value);
         }
 
         [BulkCopy]
         public int S12LearnedAt {
-            get => Editor.GetByte(s12LearnedAt);
-            set => Editor.SetByte(s12LearnedAt, (byte) value);
+            get => Data.GetByte(s12LearnedAt);
+            set => Data.SetByte(s12LearnedAt, (byte) value);
         }
 
         [BulkCopy]
         public int S12LearnedLevel {
-            get => Editor.GetByte(s12LearnedLevel);
-            set => Editor.SetByte(s12LearnedLevel, (byte) value);
+            get => Data.GetByte(s12LearnedLevel);
+            set => Data.SetByte(s12LearnedLevel, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int S12LearnedID {
-            get => Editor.GetByte(s12LearnedID);
-            set => Editor.SetByte(s12LearnedID, (byte) value);
+            get => Data.GetByte(s12LearnedID);
+            set => Data.SetByte(s12LearnedID, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon1Special1 {
-            get => Editor.GetByte(weapon1Special1);
-            set => Editor.SetByte(weapon1Special1, (byte) value);
+            get => Data.GetByte(weapon1Special1);
+            set => Data.SetByte(weapon1Special1, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon1Special2 {
-            get => Editor.GetByte(weapon1Special2);
-            set => Editor.SetByte(weapon1Special2, (byte) value);
+            get => Data.GetByte(weapon1Special2);
+            set => Data.SetByte(weapon1Special2, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon1Special3 {
-            get => Editor.GetByte(weapon1Special3);
-            set => Editor.SetByte(weapon1Special3, (byte) value);
+            get => Data.GetByte(weapon1Special3);
+            set => Data.SetByte(weapon1Special3, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon2Special1 {
-            get => Editor.GetByte(weapon2Special1);
-            set => Editor.SetByte(weapon2Special1, (byte) value);
+            get => Data.GetByte(weapon2Special1);
+            set => Data.SetByte(weapon2Special1, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon2Special2 {
-            get => Editor.GetByte(weapon2Special2);
-            set => Editor.SetByte(weapon2Special2, (byte) value);
+            get => Data.GetByte(weapon2Special2);
+            set => Data.SetByte(weapon2Special2, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon2Special3 {
-            get => Editor.GetByte(weapon2Special3);
-            set => Editor.SetByte(weapon2Special3, (byte) value);
+            get => Data.GetByte(weapon2Special3);
+            set => Data.SetByte(weapon2Special3, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon3Special1 {
-            get => Editor.GetByte(weapon3Special1);
-            set => Editor.SetByte(weapon3Special1, (byte) value);
+            get => Data.GetByte(weapon3Special1);
+            set => Data.SetByte(weapon3Special1, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon3Special2 {
-            get => Editor.GetByte(weapon3Special2);
-            set => Editor.SetByte(weapon3Special2, (byte) value);
+            get => Data.GetByte(weapon3Special2);
+            set => Data.SetByte(weapon3Special2, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon3Special3 {
-            get => Editor.GetByte(weapon3Special3);
-            set => Editor.SetByte(weapon3Special3, (byte) value);
+            get => Data.GetByte(weapon3Special3);
+            set => Data.SetByte(weapon3Special3, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon4Special1 {
-            get => Editor.GetByte(weapon4Special1);
-            set => Editor.SetByte(weapon4Special1, (byte) value);
+            get => Data.GetByte(weapon4Special1);
+            set => Data.SetByte(weapon4Special1, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon4Special2 {
-            get => Editor.GetByte(weapon4Special2);
-            set => Editor.SetByte(weapon4Special2, (byte) value);
+            get => Data.GetByte(weapon4Special2);
+            set => Data.SetByte(weapon4Special2, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon4Special3 {
-            get => Editor.GetByte(weapon4Special3);
-            set => Editor.SetByte(weapon4Special3, (byte) value);
+            get => Data.GetByte(weapon4Special3);
+            set => Data.SetByte(weapon4Special3, (byte) value);
         }
 
         [BulkCopy]
         public int BaseLuck {
-            get => Editor.GetByte(baseLuck);
-            set => Editor.SetByte(baseLuck, (byte) value);
+            get => Data.GetByte(baseLuck);
+            set => Data.SetByte(baseLuck, (byte) value);
         }
 
         [BulkCopy]
         public int BaseMov {
-            get => Editor.GetByte(baseMov);
-            set => Editor.SetByte(baseMov, (byte) value);
+            get => Data.GetByte(baseMov);
+            set => Data.SetByte(baseMov, (byte) value);
         }
 
         [BulkCopy]
         public int BaseTurns {
-            get => Editor.GetByte(baseTurns);
-            set => Editor.SetByte(baseTurns, (byte) value);
+            get => Data.GetByte(baseTurns);
+            set => Data.SetByte(baseTurns, (byte) value);
         }
 
         [BulkCopy]
         public int BaseHPRegen {
-            get => Editor.GetByte(baseHPRegen);
-            set => Editor.SetByte(baseHPRegen, (byte) value);
+            get => Data.GetByte(baseHPRegen);
+            set => Data.SetByte(baseHPRegen, (byte) value);
         }
 
         [BulkCopy]
         public int BaseMPRegen {
-            get => Editor.GetByte(baseMPRegen);
-            set => Editor.SetByte(baseMPRegen, (byte) value);
+            get => Data.GetByte(baseMPRegen);
+            set => Data.SetByte(baseMPRegen, (byte) value);
         }
 
         [BulkCopy]
         public int EarthRes {
-            get => (sbyte) Editor.GetByte(earthRes);
-            set => Editor.SetByte(earthRes, (byte) value);
+            get => (sbyte) Data.GetByte(earthRes);
+            set => Data.SetByte(earthRes, (byte) value);
         }
 
         [BulkCopy]
         public int FireRes {
-            get => (sbyte) Editor.GetByte(fireRes);
-            set => Editor.SetByte(fireRes, (byte) value);
+            get => (sbyte) Data.GetByte(fireRes);
+            set => Data.SetByte(fireRes, (byte) value);
         }
 
         [BulkCopy]
         public int IceRes {
-            get => (sbyte) Editor.GetByte(iceRes);
-            set => Editor.SetByte(iceRes, (byte) value);
+            get => (sbyte) Data.GetByte(iceRes);
+            set => Data.SetByte(iceRes, (byte) value);
         }
 
         [BulkCopy]
         public int SparkRes {
-            get => (sbyte) Editor.GetByte(sparkRes);
-            set => Editor.SetByte(sparkRes, (byte) value);
+            get => (sbyte) Data.GetByte(sparkRes);
+            set => Data.SetByte(sparkRes, (byte) value);
         }
 
         [BulkCopy]
         public int WindRes {
-            get => (sbyte) Editor.GetByte(windRes);
-            set => Editor.SetByte(windRes, (byte) value);
+            get => (sbyte) Data.GetByte(windRes);
+            set => Data.SetByte(windRes, (byte) value);
         }
 
         [BulkCopy]
         public int LightRes {
-            get => (sbyte) Editor.GetByte(lightRes);
-            set => Editor.SetByte(lightRes, (byte) value);
+            get => (sbyte) Data.GetByte(lightRes);
+            set => Data.SetByte(lightRes, (byte) value);
         }
 
         [BulkCopy]
         public int DarkRes {
-            get => (sbyte) Editor.GetByte(darkRes);
-            set => Editor.SetByte(darkRes, (byte) value);
+            get => (sbyte) Data.GetByte(darkRes);
+            set => Data.SetByte(darkRes, (byte) value);
         }
 
         [BulkCopy]
         public int UnknownRes {
-            get => (sbyte) Editor.GetByte(unknownRes);
-            set => Editor.SetByte(unknownRes, (byte) value);
+            get => (sbyte) Data.GetByte(unknownRes);
+            set => Data.SetByte(unknownRes, (byte) value);
         }
 
         [BulkCopy]
         public int Slow {
-            get => Editor.GetByte(slow);
-            set => Editor.SetByte(slow, (byte) value);
+            get => Data.GetByte(slow);
+            set => Data.SetByte(slow, (byte) value);
         }
 
         [BulkCopy]
         public int Support {
-            get => Editor.GetByte(support);
-            set => Editor.SetByte(support, (byte) value);
+            get => Data.GetByte(support);
+            set => Data.SetByte(support, (byte) value);
         }
 
         [BulkCopy]
         public int MagicBonus {
-            get => Editor.GetByte(magicBonus);
-            set => Editor.SetByte(magicBonus, (byte) value);
+            get => Data.GetByte(magicBonus);
+            set => Data.SetByte(magicBonus, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.MovementType)]
         public int MovementType {
-            get => Editor.GetByte(movementType);
-            set => Editor.SetByte(movementType, (byte) value);
+            get => Data.GetByte(movementType);
+            set => Data.SetByte(movementType, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int WeaponEquipable1 {
-            get => Editor.GetByte(weaponEquipable1);
-            set => Editor.SetByte(weaponEquipable1, (byte) value);
+            get => Data.GetByte(weaponEquipable1);
+            set => Data.SetByte(weaponEquipable1, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int WeaponEquipable2 {
-            get => Editor.GetByte(weaponEquipable2);
-            set => Editor.SetByte(weaponEquipable2, (byte) value);
+            get => Data.GetByte(weaponEquipable2);
+            set => Data.SetByte(weaponEquipable2, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int WeaponEquipable3 {
-            get => Editor.GetByte(weaponEquipable3);
-            set => Editor.SetByte(weaponEquipable3, (byte) value);
+            get => Data.GetByte(weaponEquipable3);
+            set => Data.SetByte(weaponEquipable3, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int WeaponEquipable4 {
-            get => Editor.GetByte(weaponEquipable4);
-            set => Editor.SetByte(weaponEquipable4, (byte) value);
+            get => Data.GetByte(weaponEquipable4);
+            set => Data.SetByte(weaponEquipable4, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int AccessoryEquipable1 {
-            get => Editor.GetByte(accessoryEquipable1);
-            set => Editor.SetByte(accessoryEquipable1, (byte) value);
+            get => Data.GetByte(accessoryEquipable1);
+            set => Data.SetByte(accessoryEquipable1, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int AccessoryEquipable2 {
-            get => Editor.GetByte(accessoryEquipable2);
-            set => Editor.SetByte(accessoryEquipable2, (byte) value);
+            get => Data.GetByte(accessoryEquipable2);
+            set => Data.SetByte(accessoryEquipable2, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int AccessoryEquipable3 {
-            get => Editor.GetByte(accessoryEquipable3);
-            set => Editor.SetByte(accessoryEquipable3, (byte) value);
+            get => Data.GetByte(accessoryEquipable3);
+            set => Data.SetByte(accessoryEquipable3, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int AccessoryEquipable4 {
-            get => Editor.GetByte(accessoryEquipable4);
-            set => Editor.SetByte(accessoryEquipable4, (byte) value);
+            get => Data.GetByte(accessoryEquipable4);
+            set => Data.SetByte(accessoryEquipable4, (byte) value);
         }
     }
 }

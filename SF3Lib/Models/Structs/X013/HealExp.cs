@@ -13,8 +13,8 @@ namespace SF3.Models.Structs.X013 {
 
         [BulkCopy]
         public int HealBonus {
-            get => Editor.GetByte(healExp);
-            set => Editor.SetByte(healExp, (byte) value);
+            get => Data.GetByte(healExp);
+            set => Data.SetByte(healExp, (byte) value);
         }
     }
 }

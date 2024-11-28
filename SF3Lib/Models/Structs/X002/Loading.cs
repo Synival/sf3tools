@@ -28,54 +28,54 @@ namespace SF3.Models.Structs.X002 {
 
         [BulkCopy]
         public int LocationID {
-            get => Editor.GetWord(locationID);
-            set => Editor.SetWord(locationID, value);
+            get => Data.GetWord(locationID);
+            set => Data.SetWord(locationID, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int X1 {
-            get => Editor.GetWord(x1);
-            set => Editor.SetWord(x1, value);
+            get => Data.GetWord(x1);
+            set => Data.SetWord(x1, value);
         }
 
         [BulkCopy]
         public int CHP {
-            get => Editor.GetWord(chp);
-            set => Editor.SetWord(chp, value);
+            get => Data.GetWord(chp);
+            set => Data.SetWord(chp, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int X5 {
-            get => Editor.GetWord(x5);
-            set => Editor.SetWord(x5, value);
+            get => Data.GetWord(x5);
+            set => Data.SetWord(x5, value);
         }
 
         [BulkCopy]
         public int Music {
-            get => Editor.GetWord(music);
-            set => Editor.SetWord(music, value);
+            get => Data.GetWord(music);
+            set => Data.SetWord(music, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int MPD {
-            get => Editor.GetWord(mpd);
-            set => Editor.SetWord(mpd, value);
+            get => Data.GetWord(mpd);
+            set => Data.SetWord(mpd, value);
         }
 
         [BulkCopy]
         public int LoadUnknown {
-            get => Editor.GetWord(unknown);
-            set => Editor.SetWord(unknown, value);
+            get => Data.GetWord(unknown);
+            set => Data.SetWord(unknown, value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int CHR {
-            get => Editor.GetWord(chr);
-            set => Editor.SetWord(chr, value);
+            get => Data.GetWord(chr);
+            set => Data.SetWord(chr, value);
         }
     }
 }

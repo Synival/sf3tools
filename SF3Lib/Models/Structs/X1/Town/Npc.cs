@@ -32,72 +32,72 @@ namespace SF3.Models.Structs.X1.Town {
         }
 
         public string NpcTieIn
-            => Editor.GetWord(spriteID) > 0x0f && Editor.GetWord(spriteID) != 0xffff ? (ID + 0x3D).ToString("X") : "";
+            => Data.GetWord(spriteID) > 0x0f && Data.GetWord(spriteID) != 0xffff ? (ID + 0x3D).ToString("X") : "";
 
         [BulkCopy]
         public int SpriteID {
-            get => Editor.GetWord(spriteID);
-            set => Editor.SetWord(spriteID, value);
+            get => Data.GetWord(spriteID);
+            set => Data.SetWord(spriteID, value);
         }
 
         [BulkCopy]
         public int NpcUnknown {
-            get => Editor.GetWord(unknown1);
-            set => Editor.SetWord(unknown1, value);
+            get => Data.GetWord(unknown1);
+            set => Data.SetWord(unknown1, value);
         }
 
         [BulkCopy]
         public int NpcTable {
-            get => Editor.GetDouble(table);
-            set => Editor.SetDouble(table, value);
+            get => Data.GetDouble(table);
+            set => Data.SetDouble(table, value);
         }
 
         [BulkCopy]
         public int NpcXPos {
-            get => Editor.GetWord(xPos);
-            set => Editor.SetWord(xPos, value);
+            get => Data.GetWord(xPos);
+            set => Data.SetWord(xPos, value);
         }
 
         [BulkCopy]
         public int NpcZPos {
-            get => Editor.GetWord(zPos);
-            set => Editor.SetWord(zPos, value);
+            get => Data.GetWord(zPos);
+            set => Data.SetWord(zPos, value);
         }
 
         [BulkCopy]
         public int NpcDirection {
-            get => Editor.GetWord(direction);
-            set => Editor.SetWord(direction, value);
+            get => Data.GetWord(direction);
+            set => Data.SetWord(direction, value);
         }
 
         [BulkCopy]
         public int NpcUnknownA {
-            get => Editor.GetWord(unknownA);
-            set => Editor.SetWord(unknownA, value);
+            get => Data.GetWord(unknownA);
+            set => Data.SetWord(unknownA, value);
         }
 
         [BulkCopy]
         public int NpcUnknownC {
-            get => Editor.GetWord(unknownC);
-            set => Editor.SetWord(unknownC, value);
+            get => Data.GetWord(unknownC);
+            set => Data.SetWord(unknownC, value);
         }
 
         [BulkCopy]
         public int NpcUnknownE {
-            get => Editor.GetWord(unknownE);
-            set => Editor.SetWord(unknownE, value);
+            get => Data.GetWord(unknownE);
+            set => Data.SetWord(unknownE, value);
         }
 
         [BulkCopy]
         public int NpcUnknown12 {
-            get => Editor.GetWord(unknown12);
-            set => Editor.SetWord(unknown12, value);
+            get => Data.GetWord(unknown12);
+            set => Data.SetWord(unknown12, value);
         }
 
         [BulkCopy]
         public int NpcUnknown16 {
-            get => Editor.GetWord(unknown16);
-            set => Editor.SetWord(unknown16, value);
+            get => Data.GetWord(unknown16);
+            set => Data.SetWord(unknown16, value);
         }
     }
 }

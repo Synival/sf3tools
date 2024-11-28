@@ -11,8 +11,7 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X013 {
     public class X013_File : ScenarioTableFile, IX013_File {
-        protected X013_File(IRawData editor
-, INameGetterContext nameContext, ScenarioType scenario) : base(editor, nameContext, scenario) {
+        protected X013_File(IRawData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }
 
         public static X013_File Create(IRawData data, INameGetterContext nameContext, ScenarioType scenario) {

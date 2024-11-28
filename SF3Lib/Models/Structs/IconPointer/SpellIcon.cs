@@ -27,14 +27,14 @@ namespace SF3.Models.Structs.IconPointer {
         public int TheSpellIcon {
             get {
                 return Has16BitIconAddr
-                    ? Editor.GetWord(theSpellIcon)
-                    : Editor.GetDouble(theSpellIcon);
+                    ? Data.GetWord(theSpellIcon)
+                    : Data.GetDouble(theSpellIcon);
             }
             set {
                 if (Has16BitIconAddr)
-                    Editor.SetWord(theSpellIcon, value);
+                    Data.SetWord(theSpellIcon, value);
                 else
-                    Editor.SetDouble(theSpellIcon, value);
+                    Data.SetDouble(theSpellIcon, value);
             }
         }
 

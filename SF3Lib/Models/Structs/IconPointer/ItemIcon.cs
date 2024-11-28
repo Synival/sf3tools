@@ -1,5 +1,4 @@
 using CommonLib.Attributes;
-using SF3.Models.Structs;
 using SF3.RawData;
 
 namespace SF3.Models.Structs.IconPointer {
@@ -19,14 +18,14 @@ namespace SF3.Models.Structs.IconPointer {
         public int TheItemIcon {
             get {
                 return Has16BitIconAddr
-                    ? Editor.GetWord(theItemIcon)
-                    : Editor.GetDouble(theItemIcon);
+                    ? Data.GetWord(theItemIcon)
+                    : Data.GetDouble(theItemIcon);
             }
             set {
                 if (Has16BitIconAddr)
-                    Editor.SetWord(theItemIcon, value);
+                    Data.SetWord(theItemIcon, value);
                 else
-                    Editor.SetDouble(theItemIcon, value);
+                    Data.SetDouble(theItemIcon, value);
             }
         }
     }

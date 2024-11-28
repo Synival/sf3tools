@@ -27,50 +27,50 @@ namespace SF3.Models.Structs.X1.Town {
 
         [BulkCopy]
         public int Entered {
-            get => Editor.GetWord(enterID);
-            set => Editor.SetWord(enterID, value);
+            get => Data.GetWord(enterID);
+            set => Data.SetWord(enterID, value);
         }
 
         [BulkCopy]
         public int EnterUnknown2 {
-            get => Editor.GetWord(unknown2);
-            set => Editor.SetWord(unknown2, value);
+            get => Data.GetWord(unknown2);
+            set => Data.SetWord(unknown2, value);
         }
 
         [BulkCopy]
         public int EnterXPos {
-            get => Editor.GetWord(xPos);
-            set => Editor.SetWord(xPos, value);
+            get => Data.GetWord(xPos);
+            set => Data.SetWord(xPos, value);
         }
 
         [BulkCopy]
         public int EnterUnknown6 {
-            get => Editor.GetWord(unknown6);
-            set => Editor.SetWord(unknown6, value);
+            get => Data.GetWord(unknown6);
+            set => Data.SetWord(unknown6, value);
         }
 
         [BulkCopy]
         public int EnterZPos {
-            get => Editor.GetWord(zPos);
-            set => Editor.SetWord(zPos, value);
+            get => Data.GetWord(zPos);
+            set => Data.SetWord(zPos, value);
         }
 
         [BulkCopy]
         public int EnterDirection {
-            get => Editor.GetWord(direction);
-            set => Editor.SetWord(direction, value);
+            get => Data.GetWord(direction);
+            set => Data.SetWord(direction, value);
         }
 
         [BulkCopy]
         public int EnterCamera {
-            get => Editor.GetWord(camera);
-            set => Editor.SetWord(camera, value);
+            get => Data.GetWord(camera);
+            set => Data.SetWord(camera, value);
         }
 
         [BulkCopy]
         public int EnterUnknownE {
-            get => Editor.GetWord(unknownE);
-            set => Editor.SetWord(unknownE, value);
+            get => Data.GetWord(unknownE);
+            set => Data.SetWord(unknownE, value);
         }
     }
 }

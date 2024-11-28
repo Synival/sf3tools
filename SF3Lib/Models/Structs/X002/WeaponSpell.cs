@@ -23,32 +23,32 @@ namespace SF3.Models.Structs.X002 {
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int SpellID2 {
-            get => Editor.GetByte(spell);
-            set => Editor.SetByte(spell, (byte) value);
+            get => Data.GetByte(spell);
+            set => Data.SetByte(spell, (byte) value);
         }
 
         [BulkCopy]
         public int Weapon0 {
-            get => Editor.GetByte(weaponLv0);
-            set => Editor.SetByte(weaponLv0, (byte) value);
+            get => Data.GetByte(weaponLv0);
+            set => Data.SetByte(weaponLv0, (byte) value);
         }
 
         [BulkCopy]
         public int Weapon1 {
-            get => Editor.GetByte(weaponLv1);
-            set => Editor.SetByte(weaponLv1, (byte) value);
+            get => Data.GetByte(weaponLv1);
+            set => Data.SetByte(weaponLv1, (byte) value);
         }
 
         [BulkCopy]
         public int Weapon2 {
-            get => Editor.GetByte(weaponLv2);
-            set => Editor.SetByte(weaponLv2, (byte) value);
+            get => Data.GetByte(weaponLv2);
+            set => Data.SetByte(weaponLv2, (byte) value);
         }
 
         [BulkCopy]
         public int Weapon3 {
-            get => Editor.GetByte(weaponLv3);
-            set => Editor.SetByte(weaponLv3, (byte) value);
+            get => Data.GetByte(weaponLv3);
+            set => Data.SetByte(weaponLv3, (byte) value);
         }
     }
 }

@@ -15,14 +15,14 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [BulkCopy]
         public int TargetX {
-            get => Editor.GetWord(targetX);
-            set => Editor.SetWord(targetX, value);
+            get => Data.GetWord(targetX);
+            set => Data.SetWord(targetX, value);
         }
 
         [BulkCopy]
         public int TargetY {
-            get => Editor.GetWord(targetY);
-            set => Editor.SetWord(targetY, value);
+            get => Data.GetWord(targetY);
+            set => Data.SetWord(targetY, value);
         }
     }
 }

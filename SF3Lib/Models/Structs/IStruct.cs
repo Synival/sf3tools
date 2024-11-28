@@ -5,7 +5,7 @@ namespace SF3.Models.Structs {
     /// Abstraction of any model stored in SF3 data tables.
     /// </summary>
     public interface IStruct {
-        IRawData Editor { get; }
+        IRawData Data { get; }
         string Name { get; }
         int ID { get; }
         int Address { get; }

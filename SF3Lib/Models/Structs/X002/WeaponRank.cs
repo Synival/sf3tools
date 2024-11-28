@@ -19,26 +19,26 @@ namespace SF3.Models.Structs.X002 {
 
         [BulkCopy]
         public int Skill0 {
-            get => Editor.GetByte(skill0);
-            set => Editor.SetByte(skill0, (byte) value);
+            get => Data.GetByte(skill0);
+            set => Data.SetByte(skill0, (byte) value);
         }
 
         [BulkCopy]
         public int Skill1 {
-            get => Editor.GetByte(skill1);
-            set => Editor.SetByte(skill1, (byte) value);
+            get => Data.GetByte(skill1);
+            set => Data.SetByte(skill1, (byte) value);
         }
 
         [BulkCopy]
         public int Skill2 {
-            get => Editor.GetByte(skill2);
-            set => Editor.SetByte(skill2, (byte) value);
+            get => Data.GetByte(skill2);
+            set => Data.SetByte(skill2, (byte) value);
         }
 
         [BulkCopy]
         public int Skill3 {
-            get => Editor.GetByte(skill3);
-            set => Editor.SetByte(skill3, (byte) value);
+            get => Data.GetByte(skill3);
+            set => Data.SetByte(skill3, (byte) value);
         }
     }
 }

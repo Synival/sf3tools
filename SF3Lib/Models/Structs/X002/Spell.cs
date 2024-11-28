@@ -53,123 +53,123 @@ namespace SF3.Models.Structs.X002 {
         [BulkCopy]
         [NameGetter(NamedValueType.SpellTarget)]
         public int SpellTarget {
-            get => Editor.GetByte(targetType);
-            set => Editor.SetByte(targetType, (byte) value);
+            get => Data.GetByte(targetType);
+            set => Data.SetByte(targetType, (byte) value);
         }
 
         [BulkCopy]
         public int SpellType {
-            get => Editor.GetByte(damageType);
-            set => Editor.SetByte(damageType, (byte) value);
+            get => Data.GetByte(damageType);
+            set => Data.SetByte(damageType, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.Element)]
         public int Element {
-            get => Editor.GetByte(element);
-            set => Editor.SetByte(element, (byte) value);
+            get => Data.GetByte(element);
+            set => Data.SetByte(element, (byte) value);
         }
 
         [BulkCopy]
         public int SpellUnknown2 {
-            get => Editor.GetByte(unknown2);
-            set => Editor.SetByte(unknown2, (byte) value);
+            get => Data.GetByte(unknown2);
+            set => Data.SetByte(unknown2, (byte) value);
         }
 
         [BulkCopy]
         public int Lv1Distance {
-            get => Editor.GetByte(lv1Distance);
-            set => Editor.SetByte(lv1Distance, (byte) value);
+            get => Data.GetByte(lv1Distance);
+            set => Data.SetByte(lv1Distance, (byte) value);
         }
 
         [BulkCopy]
         public int Lv1Targets {
-            get => Editor.GetByte(lv1Targets);
-            set => Editor.SetByte(lv1Targets, (byte) value);
+            get => Data.GetByte(lv1Targets);
+            set => Data.SetByte(lv1Targets, (byte) value);
         }
 
         [BulkCopy]
         public int Lv1Cost {
-            get => Editor.GetByte(lv1Cost);
-            set => Editor.SetByte(lv1Cost, (byte) value);
+            get => Data.GetByte(lv1Cost);
+            set => Data.SetByte(lv1Cost, (byte) value);
         }
 
         [BulkCopy]
         public int Lv1Damage {
-            get => Editor.GetByte(lv1Damage);
-            set => Editor.SetByte(lv1Damage, (byte) value);
+            get => Data.GetByte(lv1Damage);
+            set => Data.SetByte(lv1Damage, (byte) value);
         }
 
         [BulkCopy]
         public int Lv2Distance {
-            get => Editor.GetByte(lv2Distance);
-            set => Editor.SetByte(lv2Distance, (byte) value);
+            get => Data.GetByte(lv2Distance);
+            set => Data.SetByte(lv2Distance, (byte) value);
         }
 
         [BulkCopy]
         public int Lv2Targets {
-            get => Editor.GetByte(lv2Targets);
-            set => Editor.SetByte(lv2Targets, (byte) value);
+            get => Data.GetByte(lv2Targets);
+            set => Data.SetByte(lv2Targets, (byte) value);
         }
 
         [BulkCopy]
         public int Lv2Cost {
-            get => Editor.GetByte(lv2Cost);
-            set => Editor.SetByte(lv2Cost, (byte) value);
+            get => Data.GetByte(lv2Cost);
+            set => Data.SetByte(lv2Cost, (byte) value);
         }
 
         [BulkCopy]
         public int Lv2Damage {
-            get => Editor.GetByte(lv2Damage);
-            set => Editor.SetByte(lv2Damage, (byte) value);
+            get => Data.GetByte(lv2Damage);
+            set => Data.SetByte(lv2Damage, (byte) value);
         }
 
         [BulkCopy]
         public int Lv3Distance {
-            get => Editor.GetByte(lv3Distance);
-            set => Editor.SetByte(lv3Distance, (byte) value);
+            get => Data.GetByte(lv3Distance);
+            set => Data.SetByte(lv3Distance, (byte) value);
         }
 
         [BulkCopy]
         public int Lv3Targets {
-            get => Editor.GetByte(lv3Targets);
-            set => Editor.SetByte(lv3Targets, (byte) value);
+            get => Data.GetByte(lv3Targets);
+            set => Data.SetByte(lv3Targets, (byte) value);
         }
 
         [BulkCopy]
         public int Lv3Cost {
-            get => Editor.GetByte(lv3Cost);
-            set => Editor.SetByte(lv3Cost, (byte) value);
+            get => Data.GetByte(lv3Cost);
+            set => Data.SetByte(lv3Cost, (byte) value);
         }
 
         [BulkCopy]
         public int Lv3Damage {
-            get => Editor.GetByte(lv3Damage);
-            set => Editor.SetByte(lv3Damage, (byte) value);
+            get => Data.GetByte(lv3Damage);
+            set => Data.SetByte(lv3Damage, (byte) value);
         }
 
         [BulkCopy]
         public int Lv4Distance {
-            get => Editor.GetByte(lv4Distance);
-            set => Editor.SetByte(lv4Distance, (byte) value);
+            get => Data.GetByte(lv4Distance);
+            set => Data.SetByte(lv4Distance, (byte) value);
         }
 
         [BulkCopy]
         public int Lv4Targets {
-            get => Editor.GetByte(lv4Targets);
-            set => Editor.SetByte(lv4Targets, (byte) value);
+            get => Data.GetByte(lv4Targets);
+            set => Data.SetByte(lv4Targets, (byte) value);
         }
 
         [BulkCopy]
         public int Lv4Cost {
-            get => Editor.GetByte(lv4Cost);
-            set => Editor.SetByte(lv4Cost, (byte) value);
+            get => Data.GetByte(lv4Cost);
+            set => Data.SetByte(lv4Cost, (byte) value);
         }
 
         [BulkCopy]
         public int Lv4Damage {
-            get => Editor.GetByte(lv4Damage);
-            set => Editor.SetByte(lv4Damage, (byte) value);
+            get => Data.GetByte(lv4Damage);
+            set => Data.SetByte(lv4Damage, (byte) value);
         }
     }
 }

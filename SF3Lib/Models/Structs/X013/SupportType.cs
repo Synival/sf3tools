@@ -17,15 +17,15 @@ namespace SF3.Models.Structs.X013 {
         [BulkCopy]
         [NameGetter(NamedValueType.FriendshipBonusType)]
         public int SupportA {
-            get => Editor.GetByte(supportA);
-            set => Editor.SetByte(supportA, (byte) value);
+            get => Data.GetByte(supportA);
+            set => Data.SetByte(supportA, (byte) value);
         }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FriendshipBonusType)]
         public int SupportB {
-            get => Editor.GetByte(supportB);
-            set => Editor.SetByte(supportB, (byte) value);
+            get => Data.GetByte(supportB);
+            set => Data.SetByte(supportB, (byte) value);
         }
     }
 }

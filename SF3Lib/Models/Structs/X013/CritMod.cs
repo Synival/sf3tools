@@ -15,14 +15,14 @@ namespace SF3.Models.Structs.X013 {
 
         [BulkCopy]
         public int Advantage {
-            get => Editor.GetByte(advantage);
-            set => Editor.SetByte(advantage, (byte) value);
+            get => Data.GetByte(advantage);
+            set => Data.SetByte(advantage, (byte) value);
         }
 
         [BulkCopy]
         public int Disadvantage {
-            get => Editor.GetByte(disadvantage);
-            set => Editor.SetByte(disadvantage, (byte) value);
+            get => Data.GetByte(disadvantage);
+            set => Data.SetByte(disadvantage, (byte) value);
         }
     }
 }

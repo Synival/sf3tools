@@ -31,62 +31,62 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [BulkCopy]
         public int CustomMovementUnknown {
-            get => Editor.GetWord(unknown00);
-            set => Editor.SetWord(unknown00, value);
+            get => Data.GetWord(unknown00);
+            set => Data.SetWord(unknown00, value);
         }
 
         [BulkCopy]
         public int CustomMovementX1 {
-            get => Editor.GetWord(xPos1);
-            set => Editor.SetWord(xPos1, value);
+            get => Data.GetWord(xPos1);
+            set => Data.SetWord(xPos1, value);
         }
 
         [BulkCopy]
         public int CustomMovementZ1 {
-            get => Editor.GetWord(zPos1);
-            set => Editor.SetWord(zPos1, value);
+            get => Data.GetWord(zPos1);
+            set => Data.SetWord(zPos1, value);
         }
 
         [BulkCopy]
         public int CustomMovementX2 {
-            get => Editor.GetWord(xPos2);
-            set => Editor.SetWord(xPos2, value);
+            get => Data.GetWord(xPos2);
+            set => Data.SetWord(xPos2, value);
         }
 
         [BulkCopy]
         public int CustomMovementZ2 {
-            get => Editor.GetWord(zPos2);
-            set => Editor.SetWord(zPos2, value);
+            get => Data.GetWord(zPos2);
+            set => Data.SetWord(zPos2, value);
         }
 
         [BulkCopy]
         public int CustomMovementX3 {
-            get => Editor.GetWord(xPos3);
-            set => Editor.SetWord(xPos3, value);
+            get => Data.GetWord(xPos3);
+            set => Data.SetWord(xPos3, value);
         }
 
         [BulkCopy]
         public int CustomMovementZ3 {
-            get => Editor.GetWord(zPos3);
-            set => Editor.SetWord(zPos3, value);
+            get => Data.GetWord(zPos3);
+            set => Data.SetWord(zPos3, value);
         }
 
         [BulkCopy]
         public int CustomMovementX4 {
-            get => Editor.GetWord(xPos4);
-            set => Editor.SetWord(xPos4, value);
+            get => Data.GetWord(xPos4);
+            set => Data.SetWord(xPos4, value);
         }
 
         [BulkCopy]
         public int CustomMovementZ4 {
-            get => Editor.GetWord(zPos4);
-            set => Editor.SetWord(zPos4, value);
+            get => Data.GetWord(zPos4);
+            set => Data.SetWord(zPos4, value);
         }
 
         [BulkCopy]
         public int CustomMovementEnd {
-            get => Editor.GetDouble(ending);
-            set => Editor.SetDouble(ending, value);
+            get => Data.GetDouble(ending);
+            set => Data.SetDouble(ending, value);
         }
     }
 }

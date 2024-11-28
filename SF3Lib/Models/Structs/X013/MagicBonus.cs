@@ -43,89 +43,89 @@ namespace SF3.Models.Structs.X013 {
 
         [BulkCopy]
         public int EarthBonus {
-            get => Has32BitValues ? Editor.GetDouble(earthBonus) : (sbyte) Editor.GetByte(earthBonus);
+            get => Has32BitValues ? Data.GetDouble(earthBonus) : (sbyte) Data.GetByte(earthBonus);
             set {
                 if (Has32BitValues)
-                    Editor.SetDouble(earthBonus, value);
+                    Data.SetDouble(earthBonus, value);
                 else
-                    Editor.SetByte(earthBonus, (byte) value);
+                    Data.SetByte(earthBonus, (byte) value);
             }
         }
 
         [BulkCopy]
         public int FireBonus {
-            get => Has32BitValues ? Editor.GetDouble(fireBonus) : (sbyte) Editor.GetByte(fireBonus);
+            get => Has32BitValues ? Data.GetDouble(fireBonus) : (sbyte) Data.GetByte(fireBonus);
             set {
                 if (Has32BitValues)
-                    Editor.SetDouble(fireBonus, value);
+                    Data.SetDouble(fireBonus, value);
                 else
-                    Editor.SetByte(fireBonus, (byte) value);
+                    Data.SetByte(fireBonus, (byte) value);
             }
         }
 
         [BulkCopy]
         public int IceBonus {
-            get => Has32BitValues ? Editor.GetDouble(iceBonus) : (sbyte) Editor.GetByte(iceBonus);
+            get => Has32BitValues ? Data.GetDouble(iceBonus) : (sbyte) Data.GetByte(iceBonus);
             set {
                 if (Has32BitValues)
-                    Editor.SetDouble(iceBonus, value);
+                    Data.SetDouble(iceBonus, value);
                 else
-                    Editor.SetByte(iceBonus, (byte) value);
+                    Data.SetByte(iceBonus, (byte) value);
             }
         }
 
         [BulkCopy]
         public int SparkBonus {
-            get => Has32BitValues ? Editor.GetDouble(sparkBonus) : (sbyte) Editor.GetByte(sparkBonus);
+            get => Has32BitValues ? Data.GetDouble(sparkBonus) : (sbyte) Data.GetByte(sparkBonus);
             set {
                 if (Has32BitValues)
-                    Editor.SetDouble(sparkBonus, value);
+                    Data.SetDouble(sparkBonus, value);
                 else
-                    Editor.SetByte(sparkBonus, (byte) value);
+                    Data.SetByte(sparkBonus, (byte) value);
             }
         }
 
         [BulkCopy]
         public int WindBonus {
-            get => Has32BitValues ? Editor.GetDouble(windBonus) : (sbyte) Editor.GetByte(windBonus);
+            get => Has32BitValues ? Data.GetDouble(windBonus) : (sbyte) Data.GetByte(windBonus);
             set {
                 if (Has32BitValues)
-                    Editor.SetDouble(windBonus, value);
+                    Data.SetDouble(windBonus, value);
                 else
-                    Editor.SetByte(windBonus, (byte) value);
+                    Data.SetByte(windBonus, (byte) value);
             }
         }
 
         [BulkCopy]
         public int LightBonus {
-            get => Has32BitValues ? Editor.GetDouble(lightBonus) : (sbyte) Editor.GetByte(lightBonus);
+            get => Has32BitValues ? Data.GetDouble(lightBonus) : (sbyte) Data.GetByte(lightBonus);
             set {
                 if (Has32BitValues)
-                    Editor.SetDouble(lightBonus, value);
+                    Data.SetDouble(lightBonus, value);
                 else
-                    Editor.SetByte(lightBonus, (byte) value);
+                    Data.SetByte(lightBonus, (byte) value);
             }
         }
 
         [BulkCopy]
         public int DarkBonus {
-            get => Has32BitValues ? Editor.GetDouble(darkBonus) : (sbyte) Editor.GetByte(darkBonus);
+            get => Has32BitValues ? Data.GetDouble(darkBonus) : (sbyte) Data.GetByte(darkBonus);
             set {
                 if (Has32BitValues)
-                    Editor.SetDouble(darkBonus, value);
+                    Data.SetDouble(darkBonus, value);
                 else
-                    Editor.SetByte(darkBonus, (byte) value);
+                    Data.SetByte(darkBonus, (byte) value);
             }
         }
 
         [BulkCopy]
         public int UnknownBonus {
-            get => Has32BitValues ? Editor.GetDouble(unknownBonus) : (sbyte) Editor.GetByte(unknownBonus);
+            get => Has32BitValues ? Data.GetDouble(unknownBonus) : (sbyte) Data.GetByte(unknownBonus);
             set {
                 if (Has32BitValues)
-                    Editor.SetDouble(unknownBonus, value);
+                    Data.SetDouble(unknownBonus, value);
                 else
-                    Editor.SetByte(unknownBonus, (byte) value);
+                    Data.SetByte(unknownBonus, (byte) value);
             }
         }
     }
