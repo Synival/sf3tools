@@ -20,8 +20,8 @@ namespace SF3.ModelLoaders {
             };
         }
 
-        public ModelFileLoader(ModelFileLoaderCreateRawDataDelegate createRawEditor) {
-            _createRawData = createRawEditor;
+        public ModelFileLoader(ModelFileLoaderCreateRawDataDelegate createRawData) {
+            _createRawData = createRawData;
         }
 
         public virtual bool LoadFile(string filename, ModelFileLoaderCreateModelDelegate createModel) {

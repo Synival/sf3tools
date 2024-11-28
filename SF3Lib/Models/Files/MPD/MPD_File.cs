@@ -68,7 +68,7 @@ namespace SF3.Models.Files.MPD {
                     Chunks[i] = new Chunk(((ByteData) Data).Data, chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
             }
 
-            // Assign all chunk editors.
+            // Assign all chunk data.
             ChunkData = new IChunkData[Chunks.Length];
 
             if (Chunks[2]?.Data?.Length > 0) {
@@ -98,7 +98,7 @@ namespace SF3.Models.Files.MPD {
             if (Chunks[5]?.Data != null)
                 ChunkData[5] = new ChunkData(Chunks[5].Data, true);
 
-            // Texture editors, in chunks (6...10)
+            // Texture data, in chunks (6...10)
             for (var i = 6; i <= 10; i++) {
                 try {
                     ChunkData[i] = new ChunkData(Chunks[i].Data, true);
@@ -161,19 +161,19 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
-            // Add some callbacks to all child editors.
-            var editors = ChunkData
+            // Add some callbacks to all child data.
+            var allData = ChunkData
                 .Cast<IRawData>()
                 .Concat(TextureAnimFrameData?.Cast<IRawData>() ?? new IRawData[0])
                 .Where(x => x != null)
                 .ToArray();
 
-            foreach (var ce in editors) {
-                // If the data is marked as unmodified (such as after a save), mark child editors as unmodified as well.
-                Data.IsModifiedChanged += (s, e) => ce.IsModified &= Data.IsModified;
+            foreach (var d in allData) {
+                // If the data is marked as unmodified (such as after a save), mark child data as unmodified as well.
+                Data.IsModifiedChanged += (s, e) => d.IsModified &= Data.IsModified;
 
-                // If any of the child editors are marked as modified, mark the parent data as modified as well.
-                ce.IsModifiedChanged += (s, e) => Data.IsModified |= ce.IsModified;
+                // If any of the child data is marked as modified, mark the parent data as modified as well.
+                d.IsModifiedChanged += (s, e) => Data.IsModified |= d.IsModified;
             }
 
             return tables;

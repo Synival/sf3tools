@@ -393,12 +393,12 @@ namespace SF3.Win.Forms {
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
-                var copyFileEditor = new ModelFileLoader();
-                if (!copyFileEditor.LoadFile(copyFromFilename, CreateModel)) {
+                var copyFileLoader = new ModelFileLoader();
+                if (!copyFileLoader.LoadFile(copyFromFilename, CreateModel)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
-                result = copyFileEditor.Model.BulkCopyProperties(FileLoader.Model);
+                result = copyFileLoader.Model.BulkCopyProperties(FileLoader.Model);
             }
             catch (Exception e) {
                 //wrong file was selected
