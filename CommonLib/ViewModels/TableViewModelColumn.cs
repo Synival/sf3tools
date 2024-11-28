@@ -1,6 +1,6 @@
 ﻿namespace CommonLib.ViewModels {
-    public class DataViewModelColumn {
-        public DataViewModelColumn(string displayName, int displayOrder, string displayFormat, bool isPointer, int minWidth, bool isReadOnly) {
+    public class TableViewModelColumn {
+        public TableViewModelColumn(string displayName, int displayOrder, string displayFormat, bool isPointer, int minWidth, bool isReadOnly) {
             DisplayName   = displayName;
             DisplayOrder  = displayOrder;
             DisplayFormat = displayFormat;

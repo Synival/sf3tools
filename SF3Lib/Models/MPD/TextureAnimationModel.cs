@@ -46,35 +46,35 @@ namespace SF3.Models.MPD {
         public int FramesAddress { get; }
 
         [BulkCopy]
-        [DataViewModelColumn(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
+        [TableViewModelColumn(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public uint TextureID {
             get => Editor.GetData(_textureIdAddress, _bytesPerProperty);
             set => Editor.SetData(_textureIdAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
-        [DataViewModelColumn(displayName: "Width", displayOrder: 1)]
+        [TableViewModelColumn(displayName: "Width", displayOrder: 1)]
         public uint Width {
             get => Editor.GetData(_widthAddress, _bytesPerProperty);
             set => Editor.SetData(_widthAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
-        [DataViewModelColumn(displayName: "Height", displayOrder: 2)]
+        [TableViewModelColumn(displayName: "Height", displayOrder: 2)]
         public uint Height {
             get => Editor.GetData(_heightAddress, _bytesPerProperty);
             set => Editor.SetData(_heightAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
-        [DataViewModelColumn(displayName: "Unknown", displayOrder: 3, displayFormat: "X4")]
+        [TableViewModelColumn(displayName: "Unknown", displayOrder: 3, displayFormat: "X4")]
         public uint Unknown {
             get => Editor.GetData(_unknownAddress, _bytesPerProperty);
             set => Editor.SetData(_unknownAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
-        [DataViewModelColumn(displayName: "# Frames", displayOrder: 4, isReadOnly: true)]
+        [TableViewModelColumn(displayName: "# Frames", displayOrder: 4, isReadOnly: true)]
         public int NumFrames { get; }
 
         private readonly int _bytesPerProperty;

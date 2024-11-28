@@ -24,7 +24,7 @@ namespace SF3.Models.MPD {
             }
         }
 
-        private class TileMetadataAttribute : DataViewModelColumnAttribute {
+        private class TileMetadataAttribute : TableViewModelColumnAttribute {
             public TileMetadataAttribute(int x) : base(displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X4", minWidth: 50) { }
         }
 

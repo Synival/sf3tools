@@ -14,7 +14,7 @@ namespace SF3.Models.IconPointer {
         public bool Has16BitIconAddr { get; }
 
         [BulkCopy]
-        [DataViewModelColumn(displayName: "Icon Offset", displayOrder: 0, displayFormat: "X4")]
+        [TableViewModelColumn(displayName: "Icon Offset", displayOrder: 0, displayFormat: "X4")]
         public int TheItemIcon {
             get {
                 return Has16BitIconAddr

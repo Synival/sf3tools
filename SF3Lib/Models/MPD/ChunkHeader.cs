@@ -13,25 +13,25 @@ namespace SF3.Models.MPD {
         }
 
         [BulkCopy]
-        [DataViewModelColumn(displayName: "Chunk Address", isPointer: true, displayOrder: 0)]
+        [TableViewModelColumn(displayName: "Chunk Address", isPointer: true, displayOrder: 0)]
         public int ChunkAddress {
             get => Editor.GetDouble(chunkAddressAddress);
             set => Editor.SetDouble(chunkAddressAddress, value);
         }
 
         [BulkCopy]
-        [DataViewModelColumn(displayName: "Chunk Size", displayFormat: "X4", displayOrder: 1)]
+        [TableViewModelColumn(displayName: "Chunk Size", displayFormat: "X4", displayOrder: 1)]
         public int ChunkSize {
             get => Editor.GetDouble(chunkSizeAddress);
             set => Editor.SetDouble(chunkSizeAddress, value);
         }
 
         [BulkCopy]
-        [DataViewModelColumn(displayName: "Compression Type", displayOrder: 2, isReadOnly: true)]
+        [TableViewModelColumn(displayName: "Compression Type", displayOrder: 2, isReadOnly: true)]
         public string CompressionType { get; set; } = "(Unset)";
 
         [BulkCopy]
-        [DataViewModelColumn(displayName: "Un/decompressed Size", displayFormat: "X4", displayOrder: 3, isReadOnly: true)]
+        [TableViewModelColumn(displayName: "Un/decompressed Size", displayFormat: "X4", displayOrder: 3, isReadOnly: true)]
         public int DecompressedSize { get; set; } = 0;
     }
 }

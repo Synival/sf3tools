@@ -24,32 +24,32 @@ namespace SF3.Models.MPD.TextureAnimation {
 
         public bool Is32Bit { get; }
 
-        [DataViewModelColumn(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
+        [TableViewModelColumn(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public int TextureID { get; }
 
-        [DataViewModelColumn(displayName: "Width", displayOrder: 1)]
+        [TableViewModelColumn(displayName: "Width", displayOrder: 1)]
         public int Width { get; }
 
-        [DataViewModelColumn(displayName: "Height", displayOrder: 2)]
+        [TableViewModelColumn(displayName: "Height", displayOrder: 2)]
         public int Height { get; }
 
-        [DataViewModelColumn(displayName: "Tex. Anim ID", displayOrder: 3, displayFormat: "X2")]
+        [TableViewModelColumn(displayName: "Tex. Anim ID", displayOrder: 3, displayFormat: "X2")]
         public int texAnimID { get; }
 
         public int FrameNum { get; }
 
-        [DataViewModelColumn(displayName: "Frame #", displayOrder: 4)]
+        [TableViewModelColumn(displayName: "Frame #", displayOrder: 4)]
         public string FrameNumStr => (FrameNum == 0) ? "" : FrameNum.ToString();
 
         [BulkCopy]
-        [DataViewModelColumn(displayName: "Texture Offset", displayOrder: 5, displayFormat: "X4")]
+        [TableViewModelColumn(displayName: "Texture Offset", displayOrder: 5, displayFormat: "X4")]
         public uint CompressedTextureOffset {
             get => Editor.GetData(_compressedTextureOffsetAddress, _bytesPerProperty);
             set => Editor.SetData(_compressedTextureOffsetAddress, value, _bytesPerProperty);
         }
 
         [BulkCopy]
-        [DataViewModelColumn(displayName: "Unknown", displayOrder: 6, displayFormat: "X4")]
+        [TableViewModelColumn(displayName: "Unknown", displayOrder: 6, displayFormat: "X4")]
         public uint Unknown {
             get => Editor.GetData(_unknownAddress, _bytesPerProperty);
             set => Editor.SetData(_unknownAddress, value, _bytesPerProperty);

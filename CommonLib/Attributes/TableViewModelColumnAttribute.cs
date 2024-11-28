@@ -2,8 +2,8 @@
 using CommonLib.ViewModels;
 
 namespace CommonLib.Attributes {
-    public class DataViewModelColumnAttribute : Attribute {
-        public DataViewModelColumnAttribute(
+    public class TableViewModelColumnAttribute : Attribute {
+        public TableViewModelColumnAttribute(
             string displayName   = null,
             int    displayOrder  = 0,
             string displayFormat = null,
@@ -11,7 +11,7 @@ namespace CommonLib.Attributes {
             int    minWidth      = 0,
             bool   isReadOnly    = false
         ) {
-            Column = new DataViewModelColumn(
+            Column = new TableViewModelColumn(
                 displayName:   displayName,
                 displayOrder:  displayOrder,
                 displayFormat: displayFormat,
@@ -21,6 +21,6 @@ namespace CommonLib.Attributes {
             );
         }
 
-        public readonly DataViewModelColumn Column;
+        public readonly TableViewModelColumn Column;
     }
 }

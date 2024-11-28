@@ -11,7 +11,7 @@ namespace SF3.Models.MPD {
                 xAddress[i] = Address + i * 2;
         }
 
-        private class TileMetadataAttribute : DataViewModelColumnAttribute {
+        private class TileMetadataAttribute : TableViewModelColumnAttribute {
             public TileMetadataAttribute(int x) : base(displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X4", minWidth: 50) { }
         }
 

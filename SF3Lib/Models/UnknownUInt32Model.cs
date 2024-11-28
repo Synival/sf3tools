@@ -9,7 +9,7 @@ namespace SF3.Models
         }
 
         [BulkCopy]
-        [DataViewModelColumn(displayName: "UInt32 Value", displayFormat: "X8")]
+        [TableViewModelColumn(displayName: "UInt32 Value", displayFormat: "X8")]
         public uint Value {
             get => (uint) Editor.GetDouble(Address);
             set => Editor.SetDouble(Address, (int) value);

@@ -6,16 +6,16 @@ using CommonLib.ViewModels;
 
 namespace CommonLib.Extensions {
     public static class TypeExtensions {
-        private static Dictionary<string, DataViewModel> _cachedDataViewModels = new Dictionary<string, DataViewModel>();
+        private static Dictionary<string, TableViewModel> _cachedTableViewModels = new Dictionary<string, TableViewModel>();
 
         /// <summary>
-        /// Retrieves the auto-generated DataViewModel for the specified type by reflecting on ViewModelDataAttribute's.
+        /// Retrieves the auto-generated TableViewModel for the specified type by reflecting on TableViewModelColumnAttribute's.
         /// </summary>
-        /// <param name="type">The type whose DataViewModel to retrieve.</param>
-        /// <returns>A reference to a unique DataViewModel instance associated with 'type'.</returns>
-        public static DataViewModel GetDataViewModel(this Type type) {
-            if (_cachedDataViewModels.ContainsKey(type.AssemblyQualifiedName))
-                return _cachedDataViewModels[type.AssemblyQualifiedName];
+        /// <param name="type">The type whose TableViewModel to retrieve.</param>
+        /// <returns>A reference to a unique TableViewModel instance associated with 'type'.</returns>
+        public static TableViewModel GetTableViewModel(this Type type) {
+            if (_cachedTableViewModels.ContainsKey(type.AssemblyQualifiedName))
+                return _cachedTableViewModels[type.AssemblyQualifiedName];
 
             var columnProperties = type
                 .GetProperties()
@@ -24,13 +24,13 @@ namespace CommonLib.Extensions {
                 .ToList();
 
             var props = columnProperties
-                .Select(x => new { Property = x, Attributes = x.GetCustomAttributes(typeof(DataViewModelColumnAttribute), true) })
+                .Select(x => new { Property = x, Attributes = x.GetCustomAttributes(typeof(TableViewModelColumnAttribute), true) })
                 .Where(x => x.Attributes.Length == 1)
-                .OrderBy(x => ((DataViewModelColumnAttribute) x.Attributes[0]).Column.DisplayOrder)
-                .ToDictionary(x => x.Property, x => ((DataViewModelColumnAttribute) x.Attributes[0]).Column);
+                .OrderBy(x => ((TableViewModelColumnAttribute) x.Attributes[0]).Column.DisplayOrder)
+                .ToDictionary(x => x.Property, x => ((TableViewModelColumnAttribute) x.Attributes[0]).Column);
 
-            var vm = new DataViewModel(props);
-            _cachedDataViewModels.Add(type.AssemblyQualifiedName, vm);
+            var vm = new TableViewModel(props);
+            _cachedTableViewModels.Add(type.AssemblyQualifiedName, vm);
             return vm;
         }
     }

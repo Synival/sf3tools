@@ -44,7 +44,7 @@ namespace SF3.Win.Views {
         private ObjectListView GetOLV() {
             var olv = PopCachedOLV();
             if (olv == null) {
-                var vm = ModelType.GetDataViewModel();
+                var vm = ModelType.GetTableViewModel();
 
                 var lvcColumns = new List<OLVColumn>();
                 Font hexFont = null;
