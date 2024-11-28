@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CommonLib.Extensions;
 using CommonLib.Utils;
 using SF3.RawEditors;
-using SF3.Models.Shared;
+using SF3.Structs.Shared;
 
 namespace SF3.TableModels.Shared {
     public class WarpTable : Table<Warp> {

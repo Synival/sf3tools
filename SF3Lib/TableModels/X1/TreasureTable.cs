@@ -1,5 +1,5 @@
 using SF3.RawEditors;
-using SF3.Models.X1;
+using SF3.Structs.X1;
 
 namespace SF3.TableModels.X1 {
     public class TreasureTable : Table<Treasure> {

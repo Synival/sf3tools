@@ -1,5 +1,5 @@
 using SF3.RawEditors;
-using SF3.Models.X019;
+using SF3.Structs.X019;
 
 namespace SF3.TableModels.X019 {
     public class MonsterTable : Table<Monster> {

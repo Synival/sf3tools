@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using SF3.FileModels.MPD;
-using SF3.Models.MPD.TextureChunk;
+using SF3.Structs.MPD.TextureChunk;
 using SF3.Win.Controls;
 using SF3.Win.Extensions;
 

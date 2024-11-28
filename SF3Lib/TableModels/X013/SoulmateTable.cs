@@ -1,5 +1,5 @@
 using SF3.RawEditors;
-using SF3.Models.X013;
+using SF3.Structs.X013;
 
 namespace SF3.TableModels.X013 {
     public class SoulmateTable : Table<Soulmate> {

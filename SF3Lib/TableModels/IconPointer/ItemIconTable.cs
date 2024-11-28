@@ -1,5 +1,5 @@
 using SF3.RawEditors;
-using SF3.Models.IconPointer;
+using SF3.Structs.IconPointer;
 
 namespace SF3.TableModels.IconPointer {
     public class ItemIconTable : Table<ItemIcon> {

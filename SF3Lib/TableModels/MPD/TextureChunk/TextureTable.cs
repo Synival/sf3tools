@@ -1,5 +1,5 @@
 ﻿using SF3.RawEditors;
-using SF3.Models.MPD.TextureChunk;
+using SF3.Structs.MPD.TextureChunk;
 
 namespace SF3.TableModels.MPD.TextureChunk {
     public class TextureTable : Table<Texture> {

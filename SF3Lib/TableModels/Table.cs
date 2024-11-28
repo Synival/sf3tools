@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using CommonLib.Attributes;
 using SF3.RawEditors;
-using SF3.Models;
+using SF3.Structs;
 using static SF3.Utils.ResourceUtils;
 
 namespace SF3.TableModels {
@@ -35,14 +35,14 @@ namespace SF3.TableModels {
         public int Address { get; }
 
         public abstract bool IsLoaded { get; }
-        public abstract IModel[] RowObjs { get; }
+        public abstract IStruct[] RowObjs { get; }
         public virtual int? MaxSize => null;
     }
 
     /// <summary>
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
-    public abstract class Table<T> : Table, ITable<T> where T : class, IModel {
+    public abstract class Table<T> : Table, ITable<T> where T : class, IStruct {
         protected Table(IRawEditor editor, int address) : base(editor, null, address) {
         }
 
@@ -169,7 +169,7 @@ namespace SF3.TableModels {
             return true;
         }
 
-        public override IModel[] RowObjs => _rows;
+        public override IStruct[] RowObjs => _rows;
 
         [BulkCopyRecurse]
         public T[] Rows => _rows;

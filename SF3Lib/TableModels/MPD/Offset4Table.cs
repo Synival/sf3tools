@@ -1,4 +1,4 @@
-﻿using SF3.Models.MPD;
+﻿using SF3.Structs.MPD;
 using SF3.RawEditors;
 
 namespace SF3.TableModels.MPD {

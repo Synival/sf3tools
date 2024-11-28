@@ -1,5 +1,5 @@
 using SF3.RawEditors;
-using SF3.Models;
+using SF3.Structs;
 
 namespace SF3.TableModels {
     /// <summary>
@@ -41,7 +41,7 @@ namespace SF3.TableModels {
         /// <summary>
         /// An mutable array of rows.
         /// </summary>
-        IModel[] RowObjs { get; }
+        IStruct[] RowObjs { get; }
 
         /// <summary>
         /// The maximum allowed size the table can be. Optional.
@@ -52,7 +52,7 @@ namespace SF3.TableModels {
     /// <summary>
     /// Interface for a specific table of SF3 data that can be modified.
     /// </summary>
-    public interface ITable<T> : ITable where T : class, IModel {
+    public interface ITable<T> : ITable where T : class, IStruct {
         /// <summary>
         /// A mutable array of rows of type T.
         /// </summary>

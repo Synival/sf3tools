@@ -1,5 +1,5 @@
 using SF3.RawEditors;
-using SF3.Models.Shared;
+using SF3.Structs.Shared;
 
 namespace SF3.TableModels.Shared {
     public class TileMovementTable : Table<TileMovement> {

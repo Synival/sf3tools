@@ -1,5 +1,5 @@
 using SF3.RawEditors;
-using SF3.Models.X1.Town;
+using SF3.Structs.X1.Town;
 
 namespace SF3.TableModels.X1.Town {
     public class EnterTable : Table<Enter> {

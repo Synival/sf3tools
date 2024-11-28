@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using SF3.Models.MPD.TextureChunk;
+using SF3.Structs.MPD.TextureChunk;
 
 namespace SF3.Win.Extensions {
     public static class TextureExtensions {

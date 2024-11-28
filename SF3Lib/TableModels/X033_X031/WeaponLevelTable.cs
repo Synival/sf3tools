@@ -1,5 +1,5 @@
 using SF3.RawEditors;
-using SF3.Models.X033_X031;
+using SF3.Structs.X033_X031;
 
 namespace SF3.TableModels.X033_X031 {
     public class WeaponLevelTable : Table<WeaponLevel> {

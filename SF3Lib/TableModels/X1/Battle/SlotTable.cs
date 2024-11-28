@@ -1,5 +1,5 @@
 using SF3.RawEditors;
-using SF3.Models.X1.Battle;
+using SF3.Structs.X1.Battle;
 
 namespace SF3.TableModels.X1.Battle {
     public class SlotTable : Table<Slot> {

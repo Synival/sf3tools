@@ -1,6 +1,6 @@
 using CommonLib.NamedValues;
 using SF3.RawEditors;
-using SF3.Models.IconPointer;
+using SF3.Structs.IconPointer;
 using SF3.Types;
 
 namespace SF3.TableModels.IconPointer {

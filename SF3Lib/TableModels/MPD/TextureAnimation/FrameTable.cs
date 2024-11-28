@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using SF3.Models.MPD;
-using SF3.Models.MPD.TextureAnimation;
+using SF3.Structs.MPD;
+using SF3.Structs.MPD.TextureAnimation;
 using SF3.RawEditors;
 
 namespace SF3.TableModels.MPD.TextureAnimation {

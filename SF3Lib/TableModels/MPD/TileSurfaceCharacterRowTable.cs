@@ -1,6 +1,6 @@
 using System.Linq;
 using SF3.RawEditors;
-using SF3.Models.MPD;
+using SF3.Structs.MPD;
 
 namespace SF3.TableModels.MPD {
     public class TileSurfaceCharacterRowTable : Table<TileSurfaceCharacterRow> {

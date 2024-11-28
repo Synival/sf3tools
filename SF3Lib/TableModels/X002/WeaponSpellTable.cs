@@ -1,5 +1,5 @@
 using SF3.RawEditors;
-using SF3.Models.X002;
+using SF3.Structs.X002;
 
 namespace SF3.TableModels.X002 {
     public class WeaponSpellTable : Table<WeaponSpell> {
