@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.Shared {
     public class TileMovementTable : Table<TileMovement> {
-        public TileMovementTable(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        public TileMovementTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load()

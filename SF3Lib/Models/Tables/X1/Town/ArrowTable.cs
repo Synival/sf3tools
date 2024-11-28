@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X1.Town {
     public class ArrowTable : Table<Arrow> {
-        public ArrowTable(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        public ArrowTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load()

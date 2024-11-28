@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD.TextureChunk {
     public class TextureHeaderTable : Table<TextureHeader> {
-        public TextureHeaderTable(IRawData editor, int address) : base(editor, address) {
+        public TextureHeaderTable(IRawData data, int address) : base(data, address) {
         }
 
         public override bool Load()

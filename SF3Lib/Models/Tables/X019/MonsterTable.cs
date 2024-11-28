@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X019 {
     public class MonsterTable : Table<Monster> {
-        public MonsterTable(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        public MonsterTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load()

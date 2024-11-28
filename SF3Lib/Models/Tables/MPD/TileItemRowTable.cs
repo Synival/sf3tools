@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class TileItemRowTable : Table<TileItemRow> {
-        public TileItemRowTable(IRawData editor, int address) : base(editor, address) {
+        public TileItemRowTable(IRawData data, int address) : base(data, address) {
         }
 
         public override bool Load() {

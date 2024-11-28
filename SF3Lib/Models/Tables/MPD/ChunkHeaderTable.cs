@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class ChunkHeaderTable : Table<ChunkHeader> {
-        public ChunkHeaderTable(IRawData editor, int address) : base(editor, address) {
+        public ChunkHeaderTable(IRawData data, int address) : base(data, address) {
         }
 
         public override bool Load()

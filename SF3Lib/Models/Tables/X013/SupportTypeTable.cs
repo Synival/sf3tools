@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class SupportTypeTable : Table<SupportType> {
-        public SupportTypeTable(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        public SupportTypeTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load()

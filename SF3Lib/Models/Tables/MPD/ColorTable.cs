@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class ColorTable : Table<Color> {
-        public ColorTable(IRawData editor, int address, int colors) : base(editor, address) {
+        public ColorTable(IRawData data, int address, int colors) : base(data, address) {
             MaxSize = colors;
         }
 

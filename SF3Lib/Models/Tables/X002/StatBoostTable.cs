@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X002 {
     public class StatBoostTable : Table<StatBoost> {
-        public StatBoostTable(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        public StatBoostTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load()

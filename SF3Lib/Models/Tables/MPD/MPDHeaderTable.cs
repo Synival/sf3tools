@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class MPDHeaderTable : Table<MPDHeaderModel> {
-        public MPDHeaderTable(IRawData editor, int address, bool hasPalette3) : base(editor, address) {
+        public MPDHeaderTable(IRawData data, int address, bool hasPalette3) : base(data, address) {
             HasPalette3 = hasPalette3;
         }
 

@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class TextureAnimationTable : Table<TextureAnimationModel> {
-        public TextureAnimationTable(IRawData editor, int address, bool is32Bit) : base(editor, address) {
+        public TextureAnimationTable(IRawData data, int address, bool is32Bit) : base(data, address) {
             Is32Bit = is32Bit;
             _textureEndId = is32Bit ? 0xFFFF_FFFF : 0xFFFF;
         }

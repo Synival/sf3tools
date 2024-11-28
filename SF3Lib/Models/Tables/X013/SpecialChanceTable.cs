@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class SpecialChanceTable : Table<SpecialChance> {
-        public SpecialChanceTable(IRawData editor, string resourceFile, int address, bool hasLargeTable) : base(editor, resourceFile, address) {
+        public SpecialChanceTable(IRawData data, string resourceFile, int address, bool hasLargeTable) : base(data, resourceFile, address) {
             HasLargeTable = hasLargeTable;
         }
 

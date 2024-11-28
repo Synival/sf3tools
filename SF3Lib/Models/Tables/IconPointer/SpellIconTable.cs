@@ -6,8 +6,8 @@ using SF3.Types;
 
 namespace SF3.Models.Tables.IconPointer {
     public class SpellIconTable : Table<SpellIcon> {
-        public SpellIconTable(IRawData editor, string resourceFile, int address, bool has16BitIconAddr, int realOffsetStart)
-        : base(editor, resourceFile, address) {
+        public SpellIconTable(IRawData data, string resourceFile, int address, bool has16BitIconAddr, int realOffsetStart)
+        : base(data, resourceFile, address) {
             Has16BitIconAddr = has16BitIconAddr;
             RealOffsetStart  = realOffsetStart;
         }

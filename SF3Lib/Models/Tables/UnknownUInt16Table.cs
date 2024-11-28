@@ -6,8 +6,8 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables {
     public class UnknownUInt16Table : Table<UnknownUInt16Struct> {
-        public UnknownUInt16Table(IRawData editor, int address, int count)
-        : base(editor, address) {
+        public UnknownUInt16Table(IRawData data, int address, int count)
+        : base(data, address) {
             MaxSize = count;
             FormatString = "X" + MaxSize.ToString().Length;
         }

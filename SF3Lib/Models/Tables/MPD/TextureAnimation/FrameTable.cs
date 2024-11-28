@@ -6,7 +6,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD.TextureAnimation {
     public class FrameTable : Table<FrameModel> {
-        public FrameTable(IRawData editor, int address, bool is32Bit, IEnumerable<TextureAnimationModel> textures) : base(editor, address) {
+        public FrameTable(IRawData data, int address, bool is32Bit, IEnumerable<TextureAnimationModel> textures) : base(data, address) {
             Is32Bit = is32Bit;
             Textures = textures;
             _textureIdEnd = Is32Bit ? 0xFFFF_FFFF : 0xFFFF;

@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X1.Battle {
     public class BattleHeaderTable : Table<BattleHeader> {
-        public BattleHeaderTable(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        public BattleHeaderTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load()

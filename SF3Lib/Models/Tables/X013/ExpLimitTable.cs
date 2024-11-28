@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class ExpLimitTable : Table<ExpLimit> {
-        public ExpLimitTable(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        public ExpLimitTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load()

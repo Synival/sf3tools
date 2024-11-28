@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD.TextureChunk {
     public class TextureTable : Table<Texture> {
-        public TextureTable(IRawData editor, int address, int textureCount, int startId) : base(editor, address) {
+        public TextureTable(IRawData data, int address, int textureCount, int startId) : base(data, address) {
             MaxSize = textureCount;
             StartID = startId;
         }

@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X033_X031 {
     public class StatsTable : Table<Stats> {
-        public StatsTable(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        public StatsTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load()

@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X002 {
     public class SpellTable : Table<Spell> {
-        public SpellTable(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        public SpellTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load()
