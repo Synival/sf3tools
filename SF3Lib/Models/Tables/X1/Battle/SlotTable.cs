@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.X1.Battle {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new Slot(Editor, id, name, address));
+            => LoadFromResourceFile((id, name, address) => new Slot(Data, id, name, address));
 
         public override int? MaxSize => 256;
 

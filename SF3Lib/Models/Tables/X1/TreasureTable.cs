@@ -9,7 +9,7 @@ namespace SF3.Models.Tables.X1 {
 
         public override bool Load()
             => LoadFromResourceFile(
-                (id, name, address) => new Treasure(Editor, id, name, address),
+                (id, name, address) => new Treasure(Data, id, name, address),
                 (rows, model) => model.Searched != 0xFFFF);
 
         public override int? MaxSize => 255;

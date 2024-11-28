@@ -8,8 +8,8 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public override bool Load() {
-            var size = new TileItemRow(Editor, 0, "", Address).Size;
-            return LoadUntilMax((id, address) => new TileItemRow(Editor, id, "Y" + id.ToString("D2"), Address + (63 - id) * size));
+            var size = new TileItemRow(Data, 0, "", Address).Size;
+            return LoadUntilMax((id, address) => new TileItemRow(Data, id, "Y" + id.ToString("D2"), Address + (63 - id) * size));
         }
 
         public override int? MaxSize => 64;

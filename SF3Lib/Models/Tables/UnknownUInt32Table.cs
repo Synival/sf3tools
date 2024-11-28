@@ -13,7 +13,7 @@ namespace SF3.Models.Tables {
         }
 
         public override bool Load() => LoadUntilMax((id, address)
-            => new UnknownUInt32Struct(Editor, id, "Unknown UInt32 " + id.ToString(FormatString), address));
+            => new UnknownUInt32Struct(Data, id, "Unknown UInt32 " + id.ToString(FormatString), address));
 
         public override int? MaxSize { get; }
 

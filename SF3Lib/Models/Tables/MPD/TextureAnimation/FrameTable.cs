@@ -22,11 +22,11 @@ namespace SF3.Models.Tables.MPD.TextureAnimation {
 
                 var addr = tex.FramesAddress;
                 for (var i = 0; i < tex.NumFrames; i++) {
-                    var newModel = new FrameModel(Editor, id++, tex.Name + "_" + (i + 1), addr, Is32Bit, (int) tex.TextureID, (int) tex.Width, (int) tex.Height, tex.ID, i + 1);
+                    var newModel = new FrameModel(Data, id++, tex.Name + "_" + (i + 1), addr, Is32Bit, (int) tex.TextureID, (int) tex.Width, (int) tex.Height, tex.ID, i + 1);
                     frameModels.Add(newModel);
                     addr += newModel.Size;
                 }
-                frameModels.Add(new FrameModel(Editor, id++, "--", addr, Is32Bit, (int) tex.TextureID, (int) tex.Width, (int) tex.Height, tex.ID, 0));
+                frameModels.Add(new FrameModel(Data, id++, "--", addr, Is32Bit, (int) tex.TextureID, (int) tex.Width, (int) tex.Height, tex.ID, 0));
             }
 
             _rows = frameModels.ToArray();

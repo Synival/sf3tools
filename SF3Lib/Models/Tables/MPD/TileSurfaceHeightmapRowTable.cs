@@ -8,8 +8,8 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public override bool Load() {
-            var size = new TileSurfaceHeightmapRow(Editor, 0, "", Address).Size;
-            return LoadUntilMax((id, address) => new TileSurfaceHeightmapRow(Editor, id, "Y" + id.ToString("D2"), Address + (63 - id) * size));
+            var size = new TileSurfaceHeightmapRow(Data, 0, "", Address).Size;
+            return LoadUntilMax((id, address) => new TileSurfaceHeightmapRow(Data, id, "Y" + id.ToString("D2"), Address + (63 - id) * size));
         }
 
         public override int? MaxSize => 64;

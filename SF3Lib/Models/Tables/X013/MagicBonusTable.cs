@@ -9,7 +9,7 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new MagicBonus(Editor, id, name, address, Has32BitValues));
+            => LoadFromResourceFile((id, name, address) => new MagicBonus(Data, id, name, address, Has32BitValues));
 
         public override int? MaxSize => 256;
 

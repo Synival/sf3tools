@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.X002 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new StatBoost(Editor, id, name, address));
+            => LoadFromResourceFile((id, name, address) => new StatBoost(Data, id, name, address));
 
         public override int? MaxSize => 300;
     }

@@ -12,9 +12,9 @@ namespace SF3.Models.Tables.MPD {
         public override bool Load() {
             return LoadUntilMax(
                 (id, address) => {
-                    var textureId = Editor.GetData(address, Is32Bit ? 4 : 2);
+                    var textureId = Data.GetData(address, Is32Bit ? 4 : 2);
                     var atEnd = textureId == _textureEndId;
-                    return new TextureAnimationModel(Editor, id, atEnd ? "--" : "TexAnim" + id, address, Is32Bit);
+                    return new TextureAnimationModel(Data, id, atEnd ? "--" : "TexAnim" + id, address, Is32Bit);
                 },
                 (currentRows, model) => model.TextureID != _textureEndId);
         }

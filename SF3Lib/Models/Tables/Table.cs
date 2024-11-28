@@ -12,25 +12,25 @@ namespace SF3.Models.Tables {
     /// Base implementation for any table of SF3 data that can be modified.
     /// </summary>
     public abstract class Table : ITable {
-        protected Table(IRawData editor, string resourceFile, int address) {
-            Editor = editor;
+        protected Table(IRawData data, string resourceFile, int address) {
+            Data = data;
             ResourceFile = resourceFile;
             Address = address;
         }
 
         /// <summary>
-        /// Loads data from the file editor provided in the constructor.
+        /// Loads models from the raw data provided provided in the constructor.
         /// </summary>
-        /// <returns>'true' if ResourceFile was loaded successfully, otherwise 'false'.</returns>
+        /// <returns>'true' if models were loaded successfully, otherwise 'false'.</returns>
         public abstract bool Load();
 
         /// <summary>
-        /// Resets all data loaded from Load().
+        /// Resets all models loaded from Load().
         /// </summary>
-        /// <returns>'true' if successful (or no data is loaded), 'false' on failure.</returns>
+        /// <returns>'true' if successful (or no models are loaded), 'false' on failure.</returns>
         public abstract bool Reset();
 
-        public IRawData Editor { get; }
+        public IRawData Data { get; }
         public string ResourceFile { get; }
         public int Address { get; }
 
@@ -43,10 +43,10 @@ namespace SF3.Models.Tables {
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
     public abstract class Table<T> : Table, ITable<T> where T : class, IStruct {
-        protected Table(IRawData editor, int address) : base(editor, null, address) {
+        protected Table(IRawData data, int address) : base(data, null, address) {
         }
 
-        protected Table(IRawData editor, string resourceFile, int address) : base(editor, resourceFile, address) {
+        protected Table(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Reset() {

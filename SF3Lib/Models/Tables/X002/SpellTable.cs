@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.X002 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new Spell(Editor, id, name, address));
+            => LoadFromResourceFile((id, name, address) => new Spell(Data, id, name, address));
 
         public override int? MaxSize => 78;
     }

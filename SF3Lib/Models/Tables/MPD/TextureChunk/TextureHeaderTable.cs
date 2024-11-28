@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.MPD.TextureChunk {
         }
 
         public override bool Load()
-            => LoadUntilMax((id, address) => new TextureHeader(Editor, id, "Header", address));
+            => LoadUntilMax((id, address) => new TextureHeader(Data, id, "Header", address));
 
         public override int? MaxSize => 1;
     }

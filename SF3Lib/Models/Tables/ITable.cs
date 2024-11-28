@@ -21,7 +21,7 @@ namespace SF3.Models.Tables {
         /// <summary>
         /// The editor used for this table.
         /// </summary>
-        IRawData Editor { get; }
+        IRawData Data { get; }
 
         /// <summary>
         /// The address of the first row of the table.

@@ -9,7 +9,7 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new SpecialChance(Editor, id, name, address, HasLargeTable));
+            => LoadFromResourceFile((id, name, address) => new SpecialChance(Data, id, name, address, HasLargeTable));
 
         public override int? MaxSize => 1;
 

@@ -9,7 +9,7 @@ namespace SF3.Models.Tables.X033_X031 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new WeaponLevel(Editor, id, name, address));
+            => LoadFromResourceFile((id, name, address) => new WeaponLevel(Data, id, name, address));
 
         public override int? MaxSize => 2;
     }

@@ -13,7 +13,7 @@ namespace SF3.Models.Tables.IconPointer {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new SpellIcon(Editor, id, name, address, Has16BitIconAddr, RealOffsetStart));
+            => LoadFromResourceFile((id, name, address) => new SpellIcon(Data, id, name, address, Has16BitIconAddr, RealOffsetStart));
 
         public override int? MaxSize => 256;
 

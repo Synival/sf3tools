@@ -9,7 +9,7 @@ namespace SF3.Models.Tables.X1.Town {
 
         public override bool Load()
             => LoadFromResourceFile(
-                (id, name, address) => new Enter(Editor, id, name, address),
+                (id, name, address) => new Enter(Data, id, name, address),
                 (rows, models) => models.Entered != 0xFFFF);
 
         public override int? MaxSize => 100;

@@ -10,8 +10,8 @@ namespace SF3.Models.Tables.MPD {
         public override bool Load() {
             return LoadUntilMax(
                 (id, address) => {
-                    var atEnd = (uint) Editor.GetDouble(address) == 0xFFFF_FFFF;
-                    return new Offset4Model(Editor, id, atEnd ? "--" : "Row " + id, address);
+                    var atEnd = (uint) Data.GetDouble(address) == 0xFFFF_FFFF;
+                    return new Offset4Model(Data, id, atEnd ? "--" : "Row " + id, address);
                 },
                 (currentRows, model) => model.Unknown1 != 0xFFFF_FFFF);
         }
