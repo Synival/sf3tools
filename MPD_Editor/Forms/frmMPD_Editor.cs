@@ -15,6 +15,10 @@ using static CommonLib.Utils.PixelConversion;
 using SF3.Win.Views;
 using SF3.Models.Files;
 using SF3.Models.Files.MPD;
+using System.Collections.Generic;
+using SF3.Models.Structs.MPD.TextureChunk;
+using SF3.Models.Structs.MPD.TextureAnimation;
+using System;
 
 namespace SF3.MPD_Editor.Forms {
     public partial class frmMPDEditor : EditorFormNew {
@@ -57,23 +61,34 @@ namespace SF3.MPD_Editor.Forms {
                 var path = dialog.FileName;
                 var files = Directory.GetFiles(path);
 
-                var textures = File.TextureChunks
+                var textures1 = File.TextureChunks
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable.Rows)
-                    .ToList();
+                    .Where(x => x.ImageIsLoaded)
+                    .ToDictionary(x => x.Name, x => (ITexture) x);
+
+                var textures2 = File.TextureAnimFrames?.Rows
+                    ?.Where(x => x.ImageIsLoaded)
+                    ?.ToDictionary(x => x.Name, x => (ITexture) x)
+                    ?? [];
+
+                var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 
                 int succeeded = 0;
                 int failed = 0;
                 int missing = 0;
                 int skipped = 0;
 
-                foreach (var texture in textures) {
+                foreach (var textureKv in textures) {
+                    var name = textureKv.Key;
+                    var texture = textureKv.Value;
+
                     if (texture.AssumedPixelFormat != TexturePixelFormat.ABGR1555) {
                         skipped++;
                         continue;
                     }
 
-                    var filename = files.FirstOrDefault(x => Path.GetFileNameWithoutExtension(x).ToLower() == texture.Name.ToLower());
+                    var filename = files.FirstOrDefault(x => Path.GetFileNameWithoutExtension(x).ToLower() == name.ToLower());
                     if (filename == null) {
                         missing++;
                         continue;
@@ -122,7 +137,12 @@ namespace SF3.MPD_Editor.Forms {
                                     }
                                 }
 
-                                texture.RawImageData16Bit = newImageData;
+                                if (texture is TextureModel tm)
+                                    tm.RawImageData16Bit = newImageData;
+                                else if (texture is FrameModel fm)
+                                    _ = fm.UpdateImageData(File.TextureAnimFrameData[fm.ID].DecompressedData, newImageData);
+                                else
+                                    throw new NotSupportedException("Not sure what this is, but it's not supported here");
                             }
                             succeeded++;
                         }
@@ -158,17 +178,28 @@ namespace SF3.MPD_Editor.Forms {
 
                 var path = dialog.FileName;
 
-                var textures = File.TextureChunks
+                var textures1 = File.TextureChunks
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable.Rows)
-                    .ToList();
+                    .Where(x => x.ImageIsLoaded)
+                    .ToDictionary(x => x.Name, x => (ITexture) x);
+
+                var textures2 = File.TextureAnimFrames?.Rows
+                    ?.Where(x => x.ImageIsLoaded)
+                    ?.ToDictionary(x => x.Name, x => (ITexture) x)
+                    ?? [];
+
+                var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 
                 int succeeded = 0;
                 int failed = 0;
                 int skipped = 0;
 
-                foreach (var texture in textures) {
-                    var filename = Path.Combine(path, texture.Name + ".png");
+                foreach (var textureKv in textures) {
+                    var name = textureKv.Key;
+                    var texture = textureKv.Value;
+
+                    var filename = Path.Combine(path, name + ".png");
                     try {
                         if (texture.AssumedPixelFormat == Types.TexturePixelFormat.ABGR1555) {
                             using (var bitmap = new Bitmap(texture.Width, texture.Height, PixelFormat.Format16bppArgb1555)) {
