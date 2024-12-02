@@ -10,6 +10,7 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.Models.Tables.MPD.TextureAnimation;
 using SF3.RawData;
+using System.IO;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
@@ -83,19 +84,7 @@ namespace SF3.Models.Files.MPD {
 
             if (Chunks[3]?.Data?.Length > 0 && TextureAnimFrames != null) {
                 ChunkData[3] = new ChunkData(Chunks[3].Data, false);
-
-                TextureAnimFrameData = new CompressedData[TextureAnimFrames.Rows.Length];
-                var frameOffsetEndId = areAnimatedTextures32Bit ? 0xFFFF_FFFEu : 0xFFFFu;
-                for (var i = 0; i < TextureAnimFrames.Rows.Length; i++) {
-                    var frame = TextureAnimFrames.Rows[i];
-                    if (frame.FrameNum > 0 && frame.CompressedTextureOffset != frameOffsetEndId) {
-                        var totalBytes = frame.Width * frame.Height * 2;
-                        // TODO: this is super inefficient!!!
-                        var bytes = ChunkData[3].Data.Skip((int) frame.CompressedTextureOffset).Take(totalBytes).ToArray();
-                        TextureAnimFrameData[i] = new CompressedData(bytes, totalBytes);
-                        _ = frame.FetchAndAssignImageData(TextureAnimFrameData[i].DecompressedData);
-                    }
-                }
+                BuildTextureAnimFrameData();
             }
 
             if (Chunks[5]?.Data != null)
@@ -183,6 +172,29 @@ namespace SF3.Models.Files.MPD {
             return tables;
         }
 
+        private void BuildTextureAnimFrameData() {
+            var areAnimatedTextures32Bit = Scenario >= ScenarioType.Scenario3;
+
+            TextureAnimFrameData = new CompressedData[TextureAnimFrames.Rows.Length];
+            var frameOffsetEndId = areAnimatedTextures32Bit ? 0xFFFF_FFFEu : 0xFFFFu;
+            for (var i = 0; i < TextureAnimFrames.Rows.Length; i++) {
+                var frame = TextureAnimFrames.Rows[i];
+                if (frame.FrameNum > 0 && frame.CompressedTextureOffset != frameOffsetEndId) {
+                    var totalBytes = frame.Width * frame.Height * 2;
+
+                    var bytes = new byte[totalBytes];
+                    unsafe {
+                        fixed (byte* dest = bytes, src = ChunkData[3].Data)
+                            _ = memcpy((IntPtr) dest, (IntPtr) (src + frame.CompressedTextureOffset), totalBytes);
+                    }
+
+                    TextureAnimFrameData[i] = new CompressedData(bytes, totalBytes);
+                    _ = TextureAnimFrameData[i].Recompress(); // Sets the correct compressed size, which wasn't available before
+                    _ = frame.FetchAndAssignImageData(TextureAnimFrameData[i].DecompressedData);
+                }
+            }
+        }
+
         private void UpdateChunkTableDecompressedSizes() {
             for (var i = 0; i < ChunkHeader.Rows.Length; i++)
                 ChunkHeader.Rows[i].DecompressedSize = ChunkData[i]?.DecompressedData?.Size ?? 0;
@@ -192,77 +204,18 @@ namespace SF3.Models.Files.MPD {
         private static extern IntPtr memcpy(IntPtr dest, IntPtr src, int count);
 
         public bool Recompress(bool onlyModified) {
-            var chunksModified = ChunkData.Any(x => x != null && (x.IsModified || x.NeedsRecompression));
             var framesModified = TextureAnimFrameData?.Any(x => x != null && (x.IsModified || x.NeedsRecompression)) ?? false;
+            var chunksModified = framesModified || ChunkData.Any(x => x != null && (x.IsModified || x.NeedsRecompression));
 
             // Don't bother doing anything if no chunks have been modified.
-            if (onlyModified && !chunksModified && !framesModified)
+            if (onlyModified && !framesModified && !chunksModified)
                 return true;
 
-            const int ramOffset = 0x290000;
-
-            // Rebuild Chunk[3] with updated animated texture frames.
-            // TODO: check for data collisions!!!! grow and shrink this chunk!!!!
-            if (TextureAnimFrameData != null) {
-                var chunk3 = ChunkData[3].DecompressedData;
-                for (var i = 0; i < TextureAnimFrameData.Length; i++) {
-                    var frameData = TextureAnimFrameData[i];
-                    if (frameData == null)
-                        continue;
-
-                    if (!onlyModified || frameData.NeedsRecompression || frameData.IsModified) {
-                        var oldSize = TextureAnimFrameData[i].Data.Length;
-                        _ = frameData.Recompress();
-                        var newSize = TextureAnimFrameData[i].Data.Length;
-
-                        if (newSize > oldSize) {
-                            throw new NotImplementedException("We can't expand animated textures yet :(");
-                        }
-
-                        var off = (int) TextureAnimFrames.Rows[i].CompressedTextureOffset;
-                        var compressedFrameData = TextureAnimFrameData[i].Data;
-                        for (var j = 0; j < compressedFrameData.Length; j++)
-                            chunk3.SetByte(off++, compressedFrameData[j]);
-                    }
-                }
-            }
-
-            // We'll need to completely rewrite this file. Start by recompressing chunks.
-            var currentChunkPos = 0x2100;
-            var chunkPositions = new int[Chunks.Length];
-
-            for (var i = 0; i < Chunks.Length; i++) {
-                var chunkData = ChunkData[i];
-
-                // Finish compressed chunks.
-                if (chunkData != null && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified)) {
-                    if (chunkData.IsCompressed && !chunkData.Recompress())
-                        return false;
-
-                    // TODO: thie invalidates any references!!! maybe just update the thing???
-                    Chunks[i] = new Chunk(chunkData.Data, 0, chunkData.Data.Length);
-                }
-
-                // Update the chunk address/size table.
-                if (Chunks[i] == null) {
-                    ChunkHeader.Rows[i].ChunkAddress = 0;
-                    ChunkHeader.Rows[i].ChunkSize    = 0;
-                    chunkPositions[i] = 0;
-                }
-                else {
-                    ChunkHeader.Rows[i].ChunkAddress = currentChunkPos + ramOffset;
-                    ChunkHeader.Rows[i].ChunkSize    = Chunks[i].Size;
-                    chunkPositions[i] = currentChunkPos;
-                    currentChunkPos += Chunks[i].Size;
-
-                    // Enforce alignment of 4.
-                    if (currentChunkPos % 4 != 0)
-                        currentChunkPos += 4 - currentChunkPos % 4;
-                }
-            }
+            RebuildChunk3(onlyModified);
+            RebuildChunkTable(onlyModified, out var chunkPositions, out var chunkTableEnd);
 
             // Start rebuilding new data.
-            var newData = new byte[currentChunkPos];
+            var newData = new byte[chunkTableEnd];
             var inputData = Data.GetAllData();
 
             unsafe {
@@ -283,6 +236,93 @@ namespace SF3.Models.Files.MPD {
                 return false;
 
             return true;
+        }
+
+        private void RebuildChunk3(bool onlyModified) {
+            if (TextureAnimFrameData == null)
+                return;
+
+            var framesGroupedByOffset = TextureAnimFrames.Rows
+                .Select((x, i) => new { Index = i, Texture = x })
+                .Where(x => x != null && x.Texture.ImageIsLoaded)
+                .GroupBy(x => x.Texture.CompressedTextureOffset)
+                .OrderBy(x => x.Key)
+                .ToDictionary(x => x.Key, x => x.ToList());
+
+            var chunk3 = ChunkData[3].DecompressedData;
+            var newChunk3Textures = new List<byte[]>();
+
+            int newLength = 0;
+            foreach (var frameGroup in framesGroupedByOffset) {
+                var firstFrame = frameGroup.Value.First();
+                var frameData = TextureAnimFrameData[firstFrame.Index];
+
+                if (!onlyModified || frameData.NeedsRecompression || frameData.IsModified)
+                    _ = frameData.Recompress();
+
+                newLength += frameData.Data.Length;
+            }
+
+            var newChunk3Data = new byte[newLength];
+            int off = 0;
+            foreach (var frameGroup in framesGroupedByOffset) {
+                foreach (var frame in frameGroup.Value)
+                    TextureAnimFrames.Rows[frame.Index].CompressedTextureOffset = (uint) off;
+
+                var firstFrame = frameGroup.Value.First();
+                var frameData = TextureAnimFrameData[firstFrame.Index];
+
+                unsafe {
+                    fixed (byte* dest = newChunk3Data, src = frameData.Data)
+                        _ = memcpy((IntPtr) (dest + off), (IntPtr) src, frameData.Data.Length);
+                    off += frameData.Data.Length;
+                }
+            }
+
+            Chunks[3] = new Chunk(new MemoryStream(newChunk3Data), newChunk3Data.Length);
+            ChunkData[3] = new ChunkData(Chunks[3].Data, false);
+            BuildTextureAnimFrameData();
+        }
+
+        private void RebuildChunkTable(bool onlyModified, out int[] chunkPositions, out int chunkTableEnd) {
+            // We'll need to completely rewrite this file. Start by recompressing chunks.
+            var currentChunkPos = 0x2100;
+            chunkPositions = new int[Chunks.Length];
+
+            const int ramOffset = 0x290000;
+
+            for (var i = 0; i < Chunks.Length; i++) {
+                var chunkData = ChunkData[i];
+
+                // Finish compressed chunks.
+                if (chunkData != null && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified)) {
+                    if (chunkData.IsCompressed && !chunkData.Recompress())
+                        continue;
+
+                    // TODO: thie invalidates any references!!! maybe just update the thing???
+                    Chunks[i] = new Chunk(chunkData.Data, 0, chunkData.Data.Length);
+                    ChunkData[i] = new ChunkData(Chunks[i].Data, ChunkData[i].IsCompressed);
+                }
+
+                // Update the chunk address/size table.
+                if (Chunks[i] == null) {
+                    ChunkHeader.Rows[i].ChunkAddress = 0;
+                    ChunkHeader.Rows[i].ChunkSize    = 0;
+                    chunkPositions[i] = 0;
+                }
+                else {
+                    ChunkHeader.Rows[i].ChunkAddress = currentChunkPos + ramOffset;
+                    ChunkHeader.Rows[i].ChunkSize    = Chunks[i].Size;
+                    chunkPositions[i] = currentChunkPos;
+                    currentChunkPos += Chunks[i].Size;
+
+                    // Enforce alignment of 4.
+                    if (currentChunkPos % 4 != 0)
+                        currentChunkPos += 4 - currentChunkPos % 4;
+                }
+            }
+
+            chunkTableEnd = currentChunkPos;
         }
 
         public override bool IsModified {
