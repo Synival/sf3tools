@@ -1,5 +1,7 @@
-﻿using CommonLib.Attributes;
+﻿using System.Collections.Generic;
+using CommonLib.Attributes;
 using SF3.Models.Structs;
+using SF3.Models.Structs.MPD.TextureAnimation;
 using SF3.RawData;
 
 namespace SF3.Models.Structs.MPD {
@@ -24,23 +26,27 @@ namespace SF3.Models.Structs.MPD {
             FramesAddress     = Address + 0x04 * _bytesPerProperty; // variable sizes
 
             // Determine the number of frames. That will determine the size of this animation.
-            // TODO: how in the world do we model this?? a separate table each?
-            var frameCount = 0;
             var pos = FramesAddress;
 
+            var frames = new List<FrameModel>();
+            var frameId = 0;
             if (TextureID != _textureEndId) {
                 while (true) {
                     var frameOffset = Data.GetData(pos, _bytesPerProperty);
-                    pos += _bytesPerProperty;
-                    if (frameOffset == _frameEndOffset)
+                    if (frameOffset == _frameEndOffset) {
+                        pos += _bytesPerProperty;
                         break;
-                    pos += _bytesPerProperty;
-                    frameCount++;
+                    }
+
+                    var newFrame = new FrameModel(Data, frameId, "TexAnim" + id + "_" + (frameId + 1), pos, is32Bit, (int) TextureID, (int) Width, (int) Height, id, frameId + 1);
+                    frames.Add(newFrame);
+                    frameId++;
+                    pos += newFrame.Size;
                 }
             }
 
             Size = pos - Address;
-            NumFrames = frameCount;
+            Frames = frames.ToArray();
         }
 
         public bool Is32Bit { get; }
@@ -76,7 +82,10 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "# Frames", displayOrder: 4, isReadOnly: true)]
-        public int NumFrames { get; }
+        public int NumFrames => Frames?.Length ?? 0;
+
+        [BulkCopyRecurse]
+        public FrameModel[] Frames { get; } = null;
 
         private readonly int _bytesPerProperty;
         private readonly uint _textureEndId;

@@ -4,13 +4,17 @@ using BrightIdeasSoftware;
 using CommonLib.NamedValues;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.TextureAnimation;
+using SF3.Models.Tables.MPD.TextureAnimation;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.MPD {
     public class TextureAnimFramesView : ControlSpaceView {
         public TextureAnimFramesView(string name, IMPD_File model, INameGetterContext nameGetterContext) : base(name) {
+            var frameTable = new AllFramesTable(model.TextureAnimations.Data, model.TextureAnimations.Address, model.TextureAnimations.Rows);
+            frameTable.Load();
+
             Model       = model;
-            TableView   = new TableView("Frames", model.TextureAnimFrames, nameGetterContext);
+            TableView   = new TableView("Frames", frameTable, nameGetterContext);
             TextureView = new TextureView("Texture");
         }
 

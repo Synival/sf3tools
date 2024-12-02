@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CommonLib;
 using SF3.Models.Files;
 using SF3.Models.Tables;
@@ -31,8 +32,11 @@ namespace SF3.Models.Files.MPD {
         Offset4Table Offset4Table { get; }
 
         TextureAnimationTable TextureAnimations { get; }
-        FrameTable TextureAnimFrames { get; }
-        CompressedData[] TextureAnimFrameData { get; }
+
+        /// <summary>
+        /// The compressed data for each texture in Chunk3, keyed by its offset.
+        /// </summary>
+        Dictionary<uint, CompressedData> Chunk3Frames { get; }
 
         Chunk[] Chunks { get; }
 

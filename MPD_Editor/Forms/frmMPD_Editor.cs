@@ -61,16 +61,18 @@ namespace SF3.MPD_Editor.Forms {
                 var path = dialog.FileName;
                 var files = Directory.GetFiles(path);
 
-                var textures1 = File.TextureChunks
+                var textures1 = (File.TextureChunks == null) ? [] : File.TextureChunks
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable.Rows)
                     .Where(x => x.ImageIsLoaded)
                     .ToDictionary(x => x.Name, x => (ITexture) x);
 
-                var textures2 = File.TextureAnimFrames?.Rows
-                    ?.Where(x => x.ImageIsLoaded)
-                    ?.ToDictionary(x => x.Name, x => (ITexture) x)
-                    ?? [];
+                var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations.Rows
+                    .SelectMany(x => x.Frames)
+                    .GroupBy(x => x.CompressedTextureOffset)
+                    .Select(x => x.First())
+                    .Where(x => x.ImageIsLoaded)
+                    .ToDictionary(x => x.Name, x => (ITexture) x);
 
                 var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 
@@ -139,8 +141,17 @@ namespace SF3.MPD_Editor.Forms {
 
                                 if (texture is TextureModel tm)
                                     tm.RawImageData16Bit = newImageData;
-                                else if (texture is FrameModel fm)
-                                    _ = fm.UpdateImageData(File.TextureAnimFrameData[fm.ID].DecompressedData, newImageData);
+                                else if (texture is FrameModel fm) {
+                                    _ = fm.UpdateImageData(File.Chunk3Frames[fm.CompressedTextureOffset].DecompressedData, newImageData);
+
+                                    var sharedTextures = File.TextureAnimations.Rows
+                                        .SelectMany(x => x.Frames)
+                                        .Where(x => x != fm && x.CompressedTextureOffset == fm.CompressedTextureOffset)
+                                        .ToArray();
+
+                                    foreach (var st in sharedTextures)
+                                        _ = st.FetchAndAssignImageData(File.Chunk3Frames[st.CompressedTextureOffset].DecompressedData);
+                                }
                                 else
                                     throw new NotSupportedException("Not sure what this is, but it's not supported here");
                             }
@@ -178,16 +189,18 @@ namespace SF3.MPD_Editor.Forms {
 
                 var path = dialog.FileName;
 
-                var textures1 = File.TextureChunks
+                var textures1 = (File.TextureChunks == null) ? [] : File.TextureChunks
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable.Rows)
                     .Where(x => x.ImageIsLoaded)
                     .ToDictionary(x => x.Name, x => (ITexture) x);
 
-                var textures2 = File.TextureAnimFrames?.Rows
-                    ?.Where(x => x.ImageIsLoaded)
-                    ?.ToDictionary(x => x.Name, x => (ITexture) x)
-                    ?? [];
+                var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations.Rows
+                    .SelectMany(x => x.Frames)
+                    .GroupBy(x => x.CompressedTextureOffset)
+                    .Select(x => x.First())
+                    .Where(x => x.ImageIsLoaded)
+                    .ToDictionary(x => x.Name, x => (ITexture) x);
 
                 var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 

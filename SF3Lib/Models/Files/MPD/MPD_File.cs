@@ -8,7 +8,6 @@ using CommonLib;
 using System.Runtime.InteropServices;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
-using SF3.Models.Tables.MPD.TextureAnimation;
 using SF3.RawData;
 using System.IO;
 
@@ -53,9 +52,7 @@ namespace SF3.Models.Files.MPD {
 
             if (header.OffsetTextureAnimations != 0) {
                 TextureAnimations = new TextureAnimationTable(Data, header.OffsetTextureAnimations - ramOffset, areAnimatedTextures32Bit);
-                TextureAnimations.Load();
-                TextureAnimFrames = new FrameTable(Data, TextureAnimations.Address, areAnimatedTextures32Bit, TextureAnimations.Rows);
-                TextureAnimFrames.Load();
+                _ = TextureAnimations.Load();
             }
 
             // Create chunk data
@@ -82,7 +79,7 @@ namespace SF3.Models.Files.MPD {
                 SurfaceChunkData = ChunkData[20] = new ChunkData(SurfaceChunk.Data, false);
             }
 
-            if (Chunks[3]?.Data?.Length > 0 && TextureAnimFrames != null) {
+            if (Chunks[3]?.Data?.Length > 0 && TextureAnimations != null) {
                 ChunkData[3] = new ChunkData(Chunks[3].Data, false);
                 BuildTextureAnimFrameData();
             }
@@ -138,8 +135,6 @@ namespace SF3.Models.Files.MPD {
                 tables.Add(Offset4Table);
             if (TextureAnimations != null)
                 tables.Add(TextureAnimations);
-            if (TextureAnimFrames != null)
-                tables.Add(TextureAnimFrames);
 
             if (SurfaceChunkData?.Data?.Length >= 64 * 64 * 2)
                 tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(SurfaceChunkData.DecompressedData, 0x0000));
@@ -156,9 +151,8 @@ namespace SF3.Models.Files.MPD {
 
             // Add some callbacks to all child data.
             var allData = ChunkData
-                .Cast<IRawData>()
-                .Concat(TextureAnimFrameData?.Cast<IRawData>() ?? new IRawData[0])
                 .Where(x => x != null)
+                .Cast<IRawData>()
                 .ToArray();
 
             foreach (var d in allData) {
@@ -174,23 +168,29 @@ namespace SF3.Models.Files.MPD {
 
         private void BuildTextureAnimFrameData() {
             var areAnimatedTextures32Bit = Scenario >= ScenarioType.Scenario3;
+            Chunk3Frames = new Dictionary<uint, CompressedData>();
 
-            TextureAnimFrameData = new CompressedData[TextureAnimFrames.Rows.Length];
-            var frameOffsetEndId = areAnimatedTextures32Bit ? 0xFFFF_FFFEu : 0xFFFFu;
-            for (var i = 0; i < TextureAnimFrames.Rows.Length; i++) {
-                var frame = TextureAnimFrames.Rows[i];
-                if (frame.FrameNum > 0 && frame.CompressedTextureOffset != frameOffsetEndId) {
+            foreach (var anim in TextureAnimations.Rows) {
+                foreach (var frame in anim.Frames) {
+                    var offset = frame.CompressedTextureOffset;
+                    if (Chunk3Frames.ContainsKey(offset)) {
+                        _ = frame.FetchAndAssignImageData(Chunk3Frames[offset].DecompressedData);
+                        continue;
+                    }
+
                     var totalBytes = frame.Width * frame.Height * 2;
 
                     var bytes = new byte[totalBytes];
                     unsafe {
                         fixed (byte* dest = bytes, src = ChunkData[3].Data)
-                            _ = memcpy((IntPtr) dest, (IntPtr) (src + frame.CompressedTextureOffset), totalBytes);
+                            _ = memcpy((IntPtr) dest, (IntPtr) (src + offset), totalBytes);
                     }
 
-                    TextureAnimFrameData[i] = new CompressedData(bytes, totalBytes);
-                    _ = TextureAnimFrameData[i].Recompress(); // Sets the correct compressed size, which wasn't available before
-                    _ = frame.FetchAndAssignImageData(TextureAnimFrameData[i].DecompressedData);
+                    var newData = new CompressedData(bytes, totalBytes);
+                    _ = newData.Recompress(); // Sets the correct compressed size, which wasn't available before
+                    _ = frame.FetchAndAssignImageData(newData.DecompressedData);
+
+                    Chunk3Frames.Add(offset, newData);
                 }
             }
         }
@@ -204,7 +204,7 @@ namespace SF3.Models.Files.MPD {
         private static extern IntPtr memcpy(IntPtr dest, IntPtr src, int count);
 
         public bool Recompress(bool onlyModified) {
-            var framesModified = TextureAnimFrameData?.Any(x => x != null && (x.IsModified || x.NeedsRecompression)) ?? false;
+            var framesModified = Chunk3Frames?.Any(x => x.Value.IsModified || x.Value.NeedsRecompression) ?? false;
             var chunksModified = framesModified || ChunkData.Any(x => x != null && (x.IsModified || x.NeedsRecompression));
 
             // Don't bother doing anything if no chunks have been modified.
@@ -239,39 +239,36 @@ namespace SF3.Models.Files.MPD {
         }
 
         private void RebuildChunk3(bool onlyModified) {
-            if (TextureAnimFrameData == null)
+            if (Chunk3Frames == null)
                 return;
-
-            var framesGroupedByOffset = TextureAnimFrames.Rows
-                .Select((x, i) => new { Index = i, Texture = x })
-                .Where(x => x != null && x.Texture.ImageIsLoaded)
-                .GroupBy(x => x.Texture.CompressedTextureOffset)
-                .OrderBy(x => x.Key)
-                .ToDictionary(x => x.Key, x => x.ToList());
 
             var chunk3 = ChunkData[3].DecompressedData;
             var newChunk3Textures = new List<byte[]>();
 
-            int newLength = 0;
-            foreach (var frameGroup in framesGroupedByOffset) {
-                var firstFrame = frameGroup.Value.First();
-                var frameData = TextureAnimFrameData[firstFrame.Index];
+            var orderedChunk3Frames = Chunk3Frames.OrderBy(x => x.Key).ToList();
 
+            // Recompress texture frames and determine the new total size of Chunk[3].
+            int newLength = 0;
+            foreach (var frameDataKv in orderedChunk3Frames) {
+                var frameData = frameDataKv.Value;
                 if (!onlyModified || frameData.NeedsRecompression || frameData.IsModified)
                     _ = frameData.Recompress();
-
                 newLength += frameData.Data.Length;
             }
 
+            // Create new data for Chunk[3], updating existing texture offsets along the way.
             var newChunk3Data = new byte[newLength];
             int off = 0;
-            foreach (var frameGroup in framesGroupedByOffset) {
-                foreach (var frame in frameGroup.Value)
-                    TextureAnimFrames.Rows[frame.Index].CompressedTextureOffset = (uint) off;
+            foreach (var frameDataKv in orderedChunk3Frames) {
+                // Update all frames with the previous offset to the new offset.
+                var frameOffset = frameDataKv.Key;
+                foreach (var anim in TextureAnimations.Rows)
+                    foreach (var frame in anim.Frames)
+                        if (frame.CompressedTextureOffset == frameOffset)
+                            frame.CompressedTextureOffset = (uint) off;
 
-                var firstFrame = frameGroup.Value.First();
-                var frameData = TextureAnimFrameData[firstFrame.Index];
-
+                // Copy compressed data into the new Chunk[3].
+                var frameData = frameDataKv.Value;
                 unsafe {
                     fixed (byte* dest = newChunk3Data, src = frameData.Data)
                         _ = memcpy((IntPtr) (dest + off), (IntPtr) src, frameData.Data.Length);
@@ -279,8 +276,11 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
+            // Finally rewrite Chunk[3].
             Chunks[3] = new Chunk(new MemoryStream(newChunk3Data), newChunk3Data.Length);
             ChunkData[3] = new ChunkData(Chunks[3].Data, false);
+
+            // Rebuild stuff that uses Chunk[3] data.
             BuildTextureAnimFrameData();
         }
 
@@ -339,12 +339,15 @@ namespace SF3.Models.Files.MPD {
 
         public override void Dispose() {
             base.Dispose();
-            if (ChunkData != null)
-                foreach (var ci in ChunkData.Where(ci => ci != null))
-                    ci.Dispose();
-            if (TextureAnimFrameData != null)
-                foreach (var ci in TextureAnimFrameData.Where(tgfe => tgfe != null))
-                    ci.Dispose();
+            if (ChunkData != null) {
+                foreach (var cd in ChunkData.Where(x => x != null))
+                    cd.Dispose();
+            }
+            if (Chunk3Frames != null) {
+                foreach (var cd in Chunk3Frames)
+                    cd.Value.Dispose();
+                Chunk3Frames.Clear();
+            }
         }
 
         public IChunkData[] ChunkData { get; private set; }
@@ -375,10 +378,7 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public TextureAnimationTable TextureAnimations { get; private set; }
 
-        [BulkCopyRecurse]
-        public FrameTable TextureAnimFrames { get; private set; }
-
-        public CompressedData[] TextureAnimFrameData { get; private set; }
+        public Dictionary<uint, CompressedData> Chunk3Frames { get; private set; }
 
         public Chunk[] Chunks { get; private set; }
 
