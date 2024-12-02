@@ -6,19 +6,6 @@ namespace SF3.Win.Controls {
     public partial class TextureControl : UserControl {
         public TextureControl() {
             InitializeComponent();
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            SetStyle(ControlStyles.Opaque, true);
-        }
-
-        protected override CreateParams CreateParams {
-            get {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x00000020; // WS_EX_TRANSPARENT
-                return cp;
-            }
-        }
-
-        protected override void OnPaintBackground(PaintEventArgs e) {
         }
 
         protected override void OnPaint(PaintEventArgs e) {
@@ -43,9 +30,6 @@ namespace SF3.Win.Controls {
                     if (_textureImage != null) {
                         var newSize = new Size(value.Width * 4, value.Height * 4);
                         var sizeDiff = new Point(newSize.Width - this.Size.Width, newSize.Height - this.Size.Height);
-
-                        // Forcing the size to 0 clears the render buffer.
-                        this.Size = new Size(0, 0);
                         this.Size = newSize;
 
                         var widthMagnitude  = Anchor.HasFlag(AnchorStyles.Right)  ? 1.00 : Anchor.HasFlag(AnchorStyles.Left) ? 0.00 : 0.50;
@@ -56,11 +40,10 @@ namespace SF3.Win.Controls {
                             (int) (this.Location.Y - sizeDiff.Y * heightMagnitude)
                         );
                     }
-                    else {
-                        this.Size = new Size(0, 0);
+                    else
                         this.Size = new Size(64, 64);
-                    }
-                    Invalidate();
+
+                    Refresh();
                 }
             }
         }
