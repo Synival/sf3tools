@@ -116,8 +116,8 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Unknown", displayOrder: 6, displayFormat: "X4")]
-        public uint Unknown {
+        [TableViewModelColumn(displayName: "Duration (30fps)", displayOrder: 6)]
+        public uint Duration {
             get => Data.GetData(_unknownAddress, _bytesPerProperty);
             set => Data.SetData(_unknownAddress, value, _bytesPerProperty);
         }

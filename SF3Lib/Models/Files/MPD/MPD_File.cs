@@ -186,11 +186,13 @@ namespace SF3.Models.Files.MPD {
                             _ = memcpy((IntPtr) dest, (IntPtr) (src + offset), totalBytes);
                     }
 
-                    var newData = new CompressedData(bytes, totalBytes);
-                    _ = newData.Recompress(); // Sets the correct compressed size, which wasn't available before
-                    _ = frame.FetchAndAssignImageData(newData.DecompressedData);
-
-                    Chunk3Frames.Add(offset, newData);
+                    try {
+                        var newData = new CompressedData(bytes, totalBytes);
+                        _ = newData.Recompress(); // Sets the correct compressed size, which wasn't available before
+                        _ = frame.FetchAndAssignImageData(newData.DecompressedData);
+                        Chunk3Frames.Add(offset, newData);
+                    }
+                    catch {}
                 }
             }
         }
