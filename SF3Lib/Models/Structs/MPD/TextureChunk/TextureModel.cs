@@ -1,12 +1,10 @@
 ﻿using System;
 using CommonLib.Attributes;
-using CommonLib.Extensions;
-using CommonLib.Utils;
 using SF3.RawData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureChunk {
-    public class TextureModel : Struct, ITexture {
+    public class TextureModel : Struct {
         private readonly int widthAddress;
         private readonly int heightAddress;
         private readonly int imageDataOffsetAddress;
@@ -22,11 +20,11 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 var bytesPerPixel =  imageDataSize / (double) Width /  Height;
                 if (bytesPerPixel == 2.00) {
                     BytesPerPixel = 2;
-                    AssumedPixelFormat = TexturePixelFormat.ABGR1555;
+                    AssumedPixelFormat2 = TexturePixelFormat.ABGR1555;
                 }
                 else if (bytesPerPixel == 1.00) {
                     BytesPerPixel = 1;
-                    AssumedPixelFormat = TexturePixelFormat.UnknownPalette;
+                    AssumedPixelFormat2 = TexturePixelFormat.UnknownPalette;
                 }
                 else {
                     try {
@@ -35,39 +33,32 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                     catch { }
 
                     BytesPerPixel = 2;
-                    AssumedPixelFormat = TexturePixelFormat.ABGR1555;
+                    AssumedPixelFormat2 = TexturePixelFormat.ABGR1555;
                 }
             }
             else
-                AssumedPixelFormat = TexturePixelFormat.ABGR1555;
+                AssumedPixelFormat2 = TexturePixelFormat.ABGR1555;
 
             _readyForImageData = true;
-            _ = UpdateImageData();
+            _ = UpdateTexture();
         }
 
         public static int GlobalSize => 0x04;
 
         private bool _readyForImageData = false;
 
-        private bool UpdateImageData() {
+        private bool UpdateTexture() {
             if (!_readyForImageData)
                 return false;
 
             try {
-                if (AssumedPixelFormat == TexturePixelFormat.ABGR1555) {
-                    ImageData8Bit = null;
-                    ImageData16Bit = RawImageData16Bit;
-                }
-                else {
-                    ImageData8Bit = RawImageData8Bit;
-                    ImageData16Bit = null;
-                }
-
-                ImageIsLoaded = true;
+                if (AssumedPixelFormat2 == TexturePixelFormat.ABGR1555)
+                    Texture = new TextureABGR1555(RawImageData16Bit);
+                else
+                    Texture = new TextureIndexed(RawImageData8Bit);
                 return true;
             }
             catch {
-                ImageIsLoaded = false;
                 return false;
             }
         }
@@ -78,7 +69,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             get => Data.GetByte(widthAddress);
             set {
                 Data.SetByte(widthAddress, (byte) value);
-                UpdateImageData();
+                UpdateTexture();
             }
         }
 
@@ -88,7 +79,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             get => Data.GetByte(heightAddress);
             set {
                 Data.SetByte(heightAddress, (byte) value);
-                UpdateImageData();
+                UpdateTexture();
             }
         }
 
@@ -98,41 +89,17 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             get => Data.GetWord(imageDataOffsetAddress);
             set {
                 Data.SetWord(imageDataOffsetAddress, value);
-                UpdateImageData();
+                UpdateTexture();
             }
         }
 
-        public bool ImageIsLoaded { get; private set; } = false;
+        public bool TextureIsLoaded => Texture != null;
 
         public int BytesPerPixel { get; }
 
         [TableViewModelColumn(displayName: "(Assumed) Pixel Format", displayOrder: 3)]
-        public TexturePixelFormat AssumedPixelFormat { get; }
+        public TexturePixelFormat AssumedPixelFormat2 { get; }
 
-        private byte[,] _cachedImageData8Bit = null;
-        public byte[,] ImageData8Bit {
-            get => (BytesPerPixel == 1) ? (byte[,]) _cachedImageData8Bit.Clone() : throw new InvalidOperationException();
-            protected set {
-                if (_cachedImageData8Bit == value)
-                    return;
-                _cachedImageData8Bit = value;
-                BitmapDataIndexed = value?.To1DArray();
-            }
-        }
-
-        private ushort[,] _cachedImageData16Bit = null;
-        public ushort[,] ImageData16Bit {
-            get => (BytesPerPixel == 2) ? (ushort[,]) _cachedImageData16Bit.Clone() : throw new InvalidOperationException();
-            protected set {
-                if (_cachedImageData16Bit == value)
-                    return;
-                _cachedImageData16Bit = value;
-                BitmapDataARGB1555 = (value != null) ? BitmapUtils.ConvertABGR1555DataToABGR1555BitmapData(value) : null;
-            }
-        }
-
-        public byte[] BitmapDataARGB1555 { get; private set; } = null;
-        public byte[] BitmapDataIndexed { get; private set; } = null;
 
         public byte[,] RawImageData8Bit {
             get {
@@ -160,7 +127,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                     for (var x = 0; x < Width; x++)
                         Data.SetByte(off++, value[x, y]);
 
-                ImageData8Bit = value;
+                UpdateTexture();
             }
         }
 
@@ -194,8 +161,10 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                     }
                 }
 
-                ImageData16Bit = value;
+                UpdateTexture();
             }
         }
+
+        public ITexture Texture { get; private set; }
     }
 }

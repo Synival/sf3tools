@@ -6,20 +6,14 @@ namespace SF3 {
     /// </summary>
     public interface ITexture {
         /// <summary>
-        /// 'true' when the image data has been set.
-        /// </summary>
-        bool ImageIsLoaded { get; }
-
-        /// <summary>
         /// The number of bytes per pixel, in an inclusive range from (1 - 4).
         /// </summary>
         int BytesPerPixel { get; }
 
         /// <summary>
-        /// Pixel format that is inferred based on data or other factors.
-        /// Maybe not necesarilly be how the texture is employed.
+        /// Pixel format that determines what kinds of data are available.
         /// </summary>
-        TexturePixelFormat AssumedPixelFormat { get; }
+        TexturePixelFormat PixelFormat { get; }
 
         /// <summary>
         /// Width of the image.

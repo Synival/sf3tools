@@ -64,7 +64,7 @@ namespace SF3.MPD_Editor.Forms {
                 var textures1 = (File.TextureChunks == null) ? [] : File.TextureChunks
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable.Rows)
-                    .Where(x => x.ImageIsLoaded)
+                    .Where(x => x.TextureIsLoaded)
                     .ToDictionary(x => x.Name, x => (ITexture) x);
 
                 var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations.Rows
@@ -85,7 +85,7 @@ namespace SF3.MPD_Editor.Forms {
                     var name = textureKv.Key;
                     var texture = textureKv.Value;
 
-                    if (texture.AssumedPixelFormat != TexturePixelFormat.ABGR1555) {
+                    if (texture.PixelFormat != TexturePixelFormat.ABGR1555) {
                         skipped++;
                         continue;
                     }
@@ -104,7 +104,7 @@ namespace SF3.MPD_Editor.Forms {
                             continue;
                         }
 
-                        if (texture.AssumedPixelFormat == TexturePixelFormat.ABGR1555) {
+                        if (texture.PixelFormat == TexturePixelFormat.ABGR1555) {
                             using (var bitmap = new Bitmap(texture.Width, texture.Height, PixelFormat.Format32bppArgb)) {
                                 using (var graphics = Graphics.FromImage(bitmap)) {
                                     graphics.DrawImage(image, new Point(0, 0));
@@ -192,7 +192,7 @@ namespace SF3.MPD_Editor.Forms {
                 var textures1 = (File.TextureChunks == null) ? [] : File.TextureChunks
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable.Rows)
-                    .Where(x => x.ImageIsLoaded)
+                    .Where(x => x.TextureIsLoaded)
                     .ToDictionary(x => x.Name, x => (ITexture) x);
 
                 var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations.Rows
@@ -214,7 +214,7 @@ namespace SF3.MPD_Editor.Forms {
 
                     var filename = Path.Combine(path, name + ".png");
                     try {
-                        if (texture.AssumedPixelFormat == Types.TexturePixelFormat.ABGR1555) {
+                        if (texture.PixelFormat == TexturePixelFormat.ABGR1555) {
                             using (var bitmap = new Bitmap(texture.Width, texture.Height, PixelFormat.Format16bppArgb1555)) {
                                 var bitmapData = bitmap.LockBits(new Rectangle(0, 0, texture.Width, texture.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
                                 Marshal.Copy(texture.BitmapDataARGB1555, 0, bitmapData.Scan0, texture.BitmapDataARGB1555.Length);

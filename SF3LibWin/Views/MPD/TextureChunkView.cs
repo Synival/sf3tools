@@ -40,7 +40,7 @@ namespace SF3.Win.Views.MPD {
 
         private void OnTextureChanged(object sender, EventArgs e) {
             var item = (OLVListItem) TexturesView.OLVControl.SelectedItem;
-            TextureView.Image = (item != null) ? ((TextureModel) item.RowObject).CreateBitmap() : null;
+            TextureView.Image = ((TextureModel) item?.RowObject)?.Texture?.CreateBitmap();
         }
 
         public override void Destroy() {

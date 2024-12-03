@@ -68,6 +68,9 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
 
         public TexturePixelFormat AssumedPixelFormat => TexturePixelFormat.ABGR1555;
 
+        // TODO: remove me when refactoring!!!
+        public TexturePixelFormat PixelFormat => AssumedPixelFormat;
+
         // Not supported. Images are always non-indexed.
         public byte[,] ImageData8Bit {
             get => throw new NotSupportedException();

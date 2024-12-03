@@ -34,25 +34,22 @@ namespace Grayscaler {
                 var textures1 = (mpdFile.TextureChunks == null) ? [] : mpdFile.TextureChunks
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable.Rows)
+                    .Where(x => x.TextureIsLoaded && x.Texture.PixelFormat == TexturePixelFormat.ABGR1555)
                     .ToArray();
 
                 var textures2 = (mpdFile.TextureAnimations == null) ? [] : mpdFile.TextureAnimations.Rows
                     .SelectMany(x => x.Frames)
                     .Where(x => x.FrameNum > 0)
+                    .Where(x => x.ImageIsLoaded && x.PixelFormat == TexturePixelFormat.ABGR1555)
                     .ToArray();
 
                 Console.WriteLine((textures1.Length + textures2.Length) + " textures");
 
                 // Transform every texture in ABGR1555 format to grayscale.
-                foreach (var tc in textures1) {
-                    if (tc.AssumedPixelFormat != TexturePixelFormat.ABGR1555)
-                        continue;
-                    tc.RawImageData16Bit = MakeTextureGrayscale(tc.ImageData16Bit);
-                }
+                foreach (var tc in textures1)
+                    tc.RawImageData16Bit = MakeTextureGrayscale(tc.Texture.ImageData16Bit);
 
                 foreach (var tc in textures2) {
-                    if (tc.AssumedPixelFormat != TexturePixelFormat.ABGR1555)
-                        continue;
                     var frameData = mpdFile.Chunk3Frames[tc.CompressedTextureOffset].DecompressedData;
                     _ = tc.UpdateImageData(frameData, MakeTextureGrayscale(tc.ImageData16Bit));
                 }

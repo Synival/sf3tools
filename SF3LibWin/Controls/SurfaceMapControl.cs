@@ -54,7 +54,7 @@ namespace SF3.Win.Controls {
                         var texture = textureChunks
                             .Select(a => a.TextureTable)
                             .SelectMany(a => a.Rows)
-                            .FirstOrDefault(a => a.ID == textureId);
+                            .FirstOrDefault(a => a.ID == textureId)?.Texture;
 
                         // Generate a new bitmap for this texture.
                         var image = texture?.CreateBitmap();

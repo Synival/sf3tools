@@ -11,9 +11,6 @@ namespace SF3.Win.Extensions {
         /// <param name="texture">This texture whose Bitmap image should be generated.</param>
         /// <returns>A bitmap image for the texture.</returns>
         public static Bitmap CreateBitmap(this ITexture texture) {
-            if (!texture.ImageIsLoaded)
-                return null;
-
             Bitmap image = null;
             byte[] imageData = null;
 
