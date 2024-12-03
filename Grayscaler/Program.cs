@@ -40,7 +40,7 @@ namespace Grayscaler {
                 var textures2 = (mpdFile.TextureAnimations == null) ? [] : mpdFile.TextureAnimations.Rows
                     .SelectMany(x => x.Frames)
                     .Where(x => x.FrameNum > 0)
-                    .Where(x => x.ImageIsLoaded && x.PixelFormat == TexturePixelFormat.ABGR1555)
+                    .Where(x => x.TextureIsLoaded && x.Texture.PixelFormat == TexturePixelFormat.ABGR1555)
                     .ToArray();
 
                 Console.WriteLine((textures1.Length + textures2.Length) + " textures");
@@ -51,7 +51,7 @@ namespace Grayscaler {
 
                 foreach (var tc in textures2) {
                     var frameData = mpdFile.Chunk3Frames[tc.CompressedTextureOffset].DecompressedData;
-                    _ = tc.UpdateImageData(frameData, MakeTextureGrayscale(tc.ImageData16Bit));
+                    _ = tc.UpdateTexture(frameData, MakeTextureGrayscale(tc.Texture.ImageData16Bit));
                 }
 
                 // This will compress chunks and update the chunk table header.

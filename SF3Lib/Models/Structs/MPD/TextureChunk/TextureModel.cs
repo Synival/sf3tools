@@ -40,22 +40,21 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 AssumedPixelFormat2 = TexturePixelFormat.ABGR1555;
 
             _readyForImageData = true;
-            _ = UpdateTexture();
+            _ = FetchAndCacheTexture();
         }
 
         public static int GlobalSize => 0x04;
 
-        private bool _readyForImageData = false;
+        private readonly bool _readyForImageData = false;
 
-        private bool UpdateTexture() {
+        private bool FetchAndCacheTexture() {
             if (!_readyForImageData)
                 return false;
 
             try {
-                if (AssumedPixelFormat2 == TexturePixelFormat.ABGR1555)
-                    Texture = new TextureABGR1555(RawImageData16Bit);
-                else
-                    Texture = new TextureIndexed(RawImageData8Bit);
+                Texture =AssumedPixelFormat2 == TexturePixelFormat.ABGR1555
+                    ? new TextureABGR1555(RawImageData16Bit)
+                    : (ITexture) new TextureIndexed(RawImageData8Bit);
                 return true;
             }
             catch {
@@ -69,7 +68,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             get => Data.GetByte(widthAddress);
             set {
                 Data.SetByte(widthAddress, (byte) value);
-                UpdateTexture();
+                FetchAndCacheTexture();
             }
         }
 
@@ -79,7 +78,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             get => Data.GetByte(heightAddress);
             set {
                 Data.SetByte(heightAddress, (byte) value);
-                UpdateTexture();
+                FetchAndCacheTexture();
             }
         }
 
@@ -89,7 +88,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             get => Data.GetWord(imageDataOffsetAddress);
             set {
                 Data.SetWord(imageDataOffsetAddress, value);
-                UpdateTexture();
+                FetchAndCacheTexture();
             }
         }
 
@@ -99,7 +98,6 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         [TableViewModelColumn(displayName: "(Assumed) Pixel Format", displayOrder: 3)]
         public TexturePixelFormat AssumedPixelFormat2 { get; }
-
 
         public byte[,] RawImageData8Bit {
             get {
@@ -127,7 +125,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                     for (var x = 0; x < Width; x++)
                         Data.SetByte(off++, value[x, y]);
 
-                UpdateTexture();
+                FetchAndCacheTexture();
             }
         }
 
@@ -161,7 +159,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                     }
                 }
 
-                UpdateTexture();
+                FetchAndCacheTexture();
             }
         }
 

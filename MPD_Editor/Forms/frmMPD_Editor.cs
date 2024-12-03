@@ -71,7 +71,7 @@ namespace SF3.MPD_Editor.Forms {
                     .SelectMany(x => x.Frames)
                     .GroupBy(x => x.CompressedTextureOffset)
                     .Select(x => x.First())
-                    .Where(x => x.ImageIsLoaded)
+                    .Where(x => x.TextureIsLoaded)
                     .ToDictionary(x => x.Name, x => (ITexture) x);
 
                 var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
@@ -142,7 +142,7 @@ namespace SF3.MPD_Editor.Forms {
                                 if (texture is TextureModel tm)
                                     tm.RawImageData16Bit = newImageData;
                                 else if (texture is FrameModel fm) {
-                                    _ = fm.UpdateImageData(File.Chunk3Frames[fm.CompressedTextureOffset].DecompressedData, newImageData);
+                                    _ = fm.UpdateTexture(File.Chunk3Frames[fm.CompressedTextureOffset].DecompressedData, newImageData);
 
                                     var sharedTextures = File.TextureAnimations.Rows
                                         .SelectMany(x => x.Frames)
@@ -150,7 +150,7 @@ namespace SF3.MPD_Editor.Forms {
                                         .ToArray();
 
                                     foreach (var st in sharedTextures)
-                                        _ = st.FetchAndAssignImageData(File.Chunk3Frames[st.CompressedTextureOffset].DecompressedData);
+                                        _ = st.FetchAndCacheTexture(File.Chunk3Frames[st.CompressedTextureOffset].DecompressedData);
                                 }
                                 else
                                     throw new NotSupportedException("Not sure what this is, but it's not supported here");
@@ -199,7 +199,7 @@ namespace SF3.MPD_Editor.Forms {
                     .SelectMany(x => x.Frames)
                     .GroupBy(x => x.CompressedTextureOffset)
                     .Select(x => x.First())
-                    .Where(x => x.ImageIsLoaded)
+                    .Where(x => x.TextureIsLoaded)
                     .ToDictionary(x => x.Name, x => (ITexture) x);
 
                 var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);

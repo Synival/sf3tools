@@ -103,7 +103,7 @@ namespace TextureExtractor {
 
                             var frames = (mpdFile.TextureAnimations == null) ? [] : mpdFile.TextureAnimations.Rows
                                 .SelectMany(x => x.Frames)
-                                .Where(x => tileSurfaceCharacterIDs.Contains(x.TextureID) && x.ImageIsLoaded && x.AssumedPixelFormat == TexturePixelFormat.ABGR1555 && x.Width % 2 == 0 && x.Height % 2 == 0)
+                                .Where(x => tileSurfaceCharacterIDs.Contains(x.TextureID) && x.TextureIsLoaded && x.Texture.PixelFormat == TexturePixelFormat.ABGR1555 && x.Width % 2 == 0 && x.Height % 2 == 0)
                                 .ToArray();
 
                             Console.WriteLine(textures.Length + " eligable surface textures, " + frames.Length + " animation frames");
@@ -111,7 +111,7 @@ namespace TextureExtractor {
                             // Convert textures to a texture reference format with all the information we need.
                             var textureRefs = textures
                                 .SelectMany(x => GenerateTextureRefs(filename, x.ID, 0, x.Texture))
-                                .Concat(frames.SelectMany(x => GenerateTextureRefs(filename, x.TextureID, x.FrameNum, x)));
+                                .Concat(frames.SelectMany(x => GenerateTextureRefs(filename, x.TextureID, x.FrameNum, x.Texture)));
 
                             int uniqueCount = 0;
                             foreach (var tr in textureRefs) {

@@ -174,7 +174,7 @@ namespace SF3.Models.Files.MPD {
                 foreach (var frame in anim.Frames) {
                     var offset = frame.CompressedTextureOffset;
                     if (Chunk3Frames.ContainsKey(offset)) {
-                        _ = frame.FetchAndAssignImageData(Chunk3Frames[offset].DecompressedData);
+                        _ = frame.FetchAndCacheTexture(Chunk3Frames[offset].DecompressedData);
                         continue;
                     }
 
@@ -189,7 +189,7 @@ namespace SF3.Models.Files.MPD {
                     try {
                         var newData = new CompressedData(bytes, totalBytes);
                         _ = newData.Recompress(); // Sets the correct compressed size, which wasn't available before
-                        _ = frame.FetchAndAssignImageData(newData.DecompressedData);
+                        _ = frame.FetchAndCacheTexture(newData.DecompressedData);
                         Chunk3Frames.Add(offset, newData);
                     }
                     catch {}

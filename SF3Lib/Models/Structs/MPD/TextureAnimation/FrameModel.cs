@@ -1,11 +1,10 @@
 ﻿using System;
 using CommonLib.Attributes;
-using CommonLib.Utils;
 using SF3.RawData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureAnimation {
-    public class FrameModel : Struct, ITexture {
+    public class FrameModel : Struct {
         private readonly int _compressedTextureOffsetAddress;
         private readonly int _unknownAddress;
 
@@ -24,7 +23,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             _unknownAddress                 = Address + 1 * _bytesPerProperty;
         }
 
-        public ushort[,] FetchAndAssignImageData(IRawData data) {
+        public ushort[,] FetchAndCacheTexture(IRawData data) {
             var imageData = new ushort[Width, Height];
             var off = 0;
             for (var y = 0; y < Height; y++) {
@@ -35,12 +34,12 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 }
             }
 
-            ImageData16Bit = imageData;
-            ImageIsLoaded = true;
+            // TODO: support TextureIndexed
+            Texture = new TextureABGR1555(imageData);
             return imageData;
         }
 
-        public ushort[,] UpdateImageData(IRawData data, ushort[,] imageData) {
+        public ushort[,] UpdateTexture(IRawData data, ushort[,] imageData) {
             if (imageData.GetLength(0) != Width || imageData.GetLength(1) != Height)
                 throw new ArgumentException("Incoming data dimensions must match specified width/height");
 
@@ -52,8 +51,8 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 }
             }
 
-            ImageData16Bit = imageData;
-            ImageIsLoaded = true;
+            // TODO: support TextureIndexed
+            Texture = new TextureABGR1555(imageData);
             return imageData;
         }
 
@@ -62,37 +61,9 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         /// </summary>
         public bool Is32Bit { get; }
 
-        public bool ImageIsLoaded { get; private set; } = false;
-
-        public int BytesPerPixel => 2;
+        public bool TextureIsLoaded => Texture != null;
 
         public TexturePixelFormat AssumedPixelFormat => TexturePixelFormat.ABGR1555;
-
-        // TODO: remove me when refactoring!!!
-        public TexturePixelFormat PixelFormat => AssumedPixelFormat;
-
-        // Not supported. Images are always non-indexed.
-        public byte[,] ImageData8Bit {
-            get => throw new NotSupportedException();
-            set => throw new NotSupportedException();
-        }
-
-        public ushort[,] _imageData16Bit = null;
-
-        public ushort[,] ImageData16Bit {
-            get => _imageData16Bit;
-            private set {
-                if (_imageData16Bit != value) {
-                    _imageData16Bit = value;
-                    BitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToABGR1555BitmapData(value);
-                }
-            }
-        }
-
-        // Not supported. Images are always non-indexed.
-        public byte[] BitmapDataIndexed => throw new NotSupportedException();
-
-        public byte[] BitmapDataARGB1555 { get; private set; } = null;
 
         [TableViewModelColumn(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public int TextureID { get; }
@@ -126,5 +97,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         }
 
         private readonly int _bytesPerProperty;
+
+        public ITexture Texture { get; private set; }
     }
 }
