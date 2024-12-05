@@ -68,10 +68,10 @@ namespace SF3.Models.Files.IconPointer {
                     throw new ArgumentException(nameof(Scenario));
             }
 
-            var isX021 = spellIconAddress_X021 >= 0 && spellIconAddress_X021 < Data.Size &&
-                         itemIconAddress_X021  >= 0 && itemIconAddress_X021  < Data.Size;
-            var isX026 = spellIconAddress_X026 >= 0 && spellIconAddress_X026 < Data.Size &&
-                         itemIconAddress_X026  >= 0 && itemIconAddress_X026  < Data.Size;
+            var isX021 = spellIconAddress_X021 >= 0 && spellIconAddress_X021 < Data.Length &&
+                         itemIconAddress_X021  >= 0 && itemIconAddress_X021  < Data.Length;
+            var isX026 = spellIconAddress_X026 >= 0 && spellIconAddress_X026 < Data.Length &&
+                         itemIconAddress_X026  >= 0 && itemIconAddress_X026  < Data.Length;
 
             if (!(isX021 || isX026))
                 throw new ModelFileLoaderException("This doesn't look like an X021 or X026 file");

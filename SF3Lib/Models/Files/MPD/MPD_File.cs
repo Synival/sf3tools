@@ -199,7 +199,7 @@ namespace SF3.Models.Files.MPD {
 
         private void UpdateChunkTableDecompressedSizes() {
             for (var i = 0; i < ChunkHeader.Rows.Length; i++)
-                ChunkHeader.Rows[i].DecompressedSize = ChunkData[i]?.DecompressedData?.Size ?? 0;
+                ChunkHeader.Rows[i].DecompressedSize = ChunkData[i]?.DecompressedData?.Length ?? 0;
         }
 
         [DllImport("msvcrt.dll", SetLastError = false)]

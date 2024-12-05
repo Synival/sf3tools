@@ -16,7 +16,7 @@ namespace SF3.RawData {
 
         public byte[] Data { get; private set; }
 
-        public int Size => Data.Length;
+        public int Length => Data.Length;
 
         private int _isModifiedGuard = 0;
         private bool _isModified = false;

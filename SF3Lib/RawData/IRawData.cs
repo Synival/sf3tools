@@ -8,7 +8,7 @@ namespace SF3.RawData {
         /// <summary>
         /// The amount of data being edited.
         /// </summary>
-        int Size { get; }
+        int Length { get; }
 
         /// <summary>
         /// Returns a copy of all raw data loaded.
