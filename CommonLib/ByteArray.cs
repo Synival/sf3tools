@@ -20,11 +20,7 @@ namespace CommonLib {
         /// </summary>
         /// <param name="bytes">The byte array to transfer into the new ByteArray.</param>
         public ByteArray(byte[] bytes) {
-            Bytes = new byte[bytes.Length];
-            unsafe {
-                fixed (byte* dest = Bytes, src = bytes)
-                    _ = memcpy((IntPtr) dest, (IntPtr) src, bytes.Length);
-            }
+            Bytes = (byte[]) bytes.Clone();
         }
 
         [DllImport("msvcrt.dll", SetLastError = false)]
@@ -111,6 +107,60 @@ namespace CommonLib {
                 ExpandOrContractAt(offset + currentSize, sizeDiff);
             else
                 ExpandOrContractAt(offset + currentSize + sizeDiff, sizeDiff);
+        }
+
+        /// <summary>
+        /// Gets a copy of all data.
+        /// </summary>
+        /// <returns>A byte[] containing a copy of all data.</returns>
+        public byte[] GetDataCopy() => (byte[]) Bytes.Clone();
+
+        /// <summary>
+        /// Gets a copy of all data in a specific range.
+        /// </summary>
+        /// <param name="offset">The start of the data to get.</param>
+        /// <param name="length">The length of the data to get.</param>
+        /// <returns>A byte[] containing a copy of data from 'offset' of size 'length'.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the requested data is out of range of 'length' is less than 0.</exception>
+        public byte[] GetDataCopyAt(int offset, int length) {
+            if (offset < 0 || offset >= Bytes.Length)
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            if (length < 0 || offset + length >= Bytes.Length)
+                throw new ArgumentOutOfRangeException(nameof(length));
+
+            var bytes = new byte[length];
+            unsafe {
+                fixed (byte* dest = bytes, src = Bytes)
+                    _ = memcpy((IntPtr) dest, (IntPtr) src + offset, length);
+            }
+
+            return bytes;
+        }
+
+        /// <summary>
+        /// Sets all data to 'data', updating size.
+        /// </summary>
+        /// <param name="data"></param>
+        public void SetDataTo(byte[] data) => Bytes = (byte[]) data.Clone();
+
+        /// <summary>
+        /// Replaces data at 'offset' to data supplied by 'data'.
+        /// </summary>
+        /// <param name="offset">The start position of the data to be replaced.</param>
+        /// <param name="data">The data that the byte array at point 'offset' should be replaced with.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the offset is out of range or 'offset + data.Length'
+        /// is greater than the length of the byte array.</exception>
+        public void SetDataAtTo(int offset, byte[] data) {
+            if (offset < 0 || offset >= Bytes.Length)
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            if (offset + data.Length >= Bytes.Length)
+                throw new ArgumentOutOfRangeException(nameof(data));
+
+            unsafe {
+                fixed (byte* dest = Bytes, src = data)
+                    _ = memcpy((IntPtr) dest + offset, (IntPtr) src, data.Length);
+            }
+
         }
 
         public int Length => Bytes.Length;

@@ -107,5 +107,43 @@ namespace CommonLib.Tests {
             for (int i = 0; i < 15; i++)
                 Assert.AreEqual(expectedData[i], byteArray[i]);
         }
+
+        [TestMethod]
+        public void GetDataCopy_ReturnsCloneOfData() {
+            var byteArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var dataCopy = byteArray.GetDataCopy();
+            Assert.AreEqual(10, dataCopy.Length);
+            for (int i = 0; i < 10; i++)
+                Assert.AreEqual(i, dataCopy[i]);
+        }
+
+        [TestMethod]
+        public void GetDataCopyAt_ReturnsCloneOfData() {
+            var byteArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var dataCopy = byteArray.GetDataCopyAt(3, 5);
+            Assert.AreEqual(5, dataCopy.Length);
+            for (int i = 0; i < 5; i++)
+                Assert.AreEqual(i + 3, dataCopy[i]);
+        }
+
+        [TestMethod]
+        public void SetDataTo_SetsData() {
+            var byteArray = new ByteArray(0);
+            byteArray.SetDataTo([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            Assert.AreEqual(10, byteArray.Length);
+            for (int i = 0; i < 10; i++)
+                Assert.AreEqual(i, byteArray[i]);
+        }
+
+        [TestMethod]
+        public void SetDataAtTo_SetsData() {
+            var byteArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            byteArray.SetDataAtTo(4, [50, 100, 150]);
+            Assert.AreEqual(10, byteArray.Length);
+
+            var expectedData = new byte[]{0, 1, 2, 3, 50, 100, 150, 7, 8, 9};
+            for (int i = 0; i < 10; i++)
+                Assert.AreEqual(expectedData[i], byteArray[i]);
+        }
     }
 }
