@@ -1,4 +1,4 @@
-namespace SF3.Tests {
+namespace CommonLib.Tests {
     public class TestCase {
         public TestCase(string name) {
             Name = name;

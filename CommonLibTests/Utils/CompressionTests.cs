@@ -1,5 +1,4 @@
-﻿using SF3.Tests;
-using static CommonLib.Utils.Compression;
+﻿using static CommonLib.Utils.Compression;
 
 namespace CommonLib.Tests.Utils {
     [TestClass]
