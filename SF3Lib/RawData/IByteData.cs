@@ -1,12 +1,14 @@
+using CommonLib;
+
 namespace SF3.RawData {
     /// <summary>
     /// Wrapper class for editing a byte[].
     /// </summary>
     public interface IByteData : IRawData {
         /// <summary>
-        /// Reference to the byte array. Please don't modify it!
+        /// Reference to the byte array.
         /// </summary>
-        byte[] Data { get; }
+        ByteArray Data { get; }
 
         /// <summary>
         /// Sets the data to edit. Should also set 'IsModified' to 'false'.

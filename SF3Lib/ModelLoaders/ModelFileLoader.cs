@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using CommonLib;
 using SF3.Exceptions;
 using SF3.RawData;
 using static SF3.ModelLoaders.ModelFileLoaderDelegates;
@@ -11,12 +12,12 @@ namespace SF3.ModelLoaders {
     public partial class ModelFileLoader : BaseModelLoader, IModelFileLoader {
         public ModelFileLoader() {
             _createRawData = (IModelFileLoader loader, string filename, Stream stream) => {
-                    byte[] newData;
-                    using (var memoryStream = new MemoryStream()) {
-                        stream.CopyTo(memoryStream);
-                        newData = memoryStream.ToArray();
-                    }
-                    return new ByteData(newData);
+                byte[] newData;
+                using (var memoryStream = new MemoryStream()) {
+                    stream.CopyTo(memoryStream);
+                    newData = memoryStream.ToArray();
+                }
+                return new ByteData(new ByteArray(newData));
             };
         }
 

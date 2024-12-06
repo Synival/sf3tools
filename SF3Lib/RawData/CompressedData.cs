@@ -1,23 +1,29 @@
 ﻿using System;
+using CommonLib;
 using static CommonLib.Utils.Compression;
 
 namespace SF3.RawData {
     public class CompressedData : ByteData, ICompressedData {
-        public CompressedData(byte[] data, int? maxDecompressedSize = null) : base(data) {
+        public CompressedData(ByteArray byteArray, int? maxDecompressedSize = null) : base(byteArray) {
+            if (byteArray == null)
+                throw new NullReferenceException(nameof(byteArray));
+
             MaxDecompressedSize = maxDecompressedSize;
             _hasInit = true;
-
-            using (IsModifiedChangeBlocker())
-                _ = SetData(data);
+            InitData();
         }
 
         // TODO: This _hasInit is a ugly workaround for the fact that a virtual method
         //       is called in the base constructor. Bad!!!
         private bool _hasInit = false;
-        public override bool SetData(byte[] data) {
+
+        public override bool SetData(byte[] data) => SetData(data, updateDecompressedData: true);
+
+        protected override void InitData() {
             if (!_hasInit)
-                return false;
-            return SetData(data, updateDecompressedData: true);
+                return;
+            base.InitData();
+            UpdateDecompressedData();
         }
 
         public bool SetData(byte[] data, bool updateDecompressedData = true) {
@@ -26,33 +32,35 @@ namespace SF3.RawData {
 
             if (!base.SetData(data))
                 return false;
-
-            if (updateDecompressedData) {
-                var decompressedData = Decompress(data, MaxDecompressedSize);
-                if (DecompressedData == null) {
-                    DecompressedData = new ByteData(decompressedData);
-
-                    DecompressedData.IsModifiedChanged += (s, e) => {
-                        // When decompressed data is marked as modified, mark that we need compression.
-                        if (DecompressedData.IsModified) {
-                            NeedsRecompression = true;
-                            IsModified = true;
-                        }
-
-                        // NOTE: We allow DecompressedData.IsModified to be 'false' while the parent's
-                        //       'NeedsCompression' value is true.
-                    };
-                }
-                else
-                    DecompressedData.SetData(decompressedData);
-            }
-
+            if (updateDecompressedData)
+                UpdateDecompressedData();
             return true;
+        }
+
+        private void UpdateDecompressedData() {
+            var bytes = Data.GetDataCopy();
+            var decompressedData = Decompress(bytes, MaxDecompressedSize);
+            if (DecompressedData == null) {
+                DecompressedData = new ByteData(new ByteArray(decompressedData));
+
+                DecompressedData.IsModifiedChanged += (s, e) => {
+                    // When decompressed data is marked as modified, mark that we need compression.
+                    if (DecompressedData.IsModified) {
+                        NeedsRecompression = true;
+                        IsModified = true;
+                    }
+
+                    // NOTE: We allow DecompressedData.IsModified to be 'false' while the parent's
+                    //       'NeedsCompression' value is true.
+                };
+            }
+            else
+                DecompressedData.SetData(decompressedData);
         }
 
         public bool Recompress() {
             using (var modifyGuard2 = DecompressedData.IsModifiedChangeBlocker()) {
-                if (!SetData(Compress(DecompressedData.Data)))
+                if (!SetData(Compress(DecompressedData.Data.GetDataCopy())))
                     return false;
                 NeedsRecompression = false;
             }

@@ -150,7 +150,7 @@ namespace SF3.MPD_Editor.Forms {
                                         .ToArray();
 
                                     foreach (var st in sharedTextures)
-                                        _ = st.FetchAndCacheTexture(File.Chunk3Frames[st.CompressedTextureOffset].DecompressedData);
+                                        st.FetchAndCacheTexture(File.Chunk3Frames[st.CompressedTextureOffset].DecompressedData, TexturePixelFormat.ABGR1555);
                                 }
                                 else
                                     throw new NotSupportedException("Not sure what this is, but it's not supported here");

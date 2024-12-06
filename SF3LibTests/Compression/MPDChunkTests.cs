@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using CommonLib;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
 using SF3.RawData;
@@ -28,13 +29,13 @@ namespace SF3.Tests.Compression {
                 var nameGetterContext = new NameGetterContext(st);
                 TestCase.Run(testCases, testCase => {
                     using (var mpdFile = MPD_File.Create(
-                        new ByteData(File.ReadAllBytes(testCase.Filename)), nameGetterContext, st)) {
+                        new ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
                         var data = mpdFile.ChunkData[5]?.Data;
                         if (data == null)
                             return;
 
                         // Let's go!
-                        var decompressed1 = Decompress(data);
+                        var decompressed1 = Decompress(data.GetDataCopy());
                         var compressed1 = Compress(decompressed1);
                         var decompressed2 = Decompress(compressed1);
 
@@ -58,7 +59,7 @@ namespace SF3.Tests.Compression {
                 var nameGetterContext = new NameGetterContext(st);
                 TestCase.Run(testCases, testCase => {
                     using (var mpdFile = MPD_File.Create(
-                        new ByteData(File.ReadAllBytes(testCase.Filename)), nameGetterContext, st)) {
+                        new ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
 
                         for (int i = 6; i <= 10; i++) {
                             var data = mpdFile.ChunkData[i]?.Data;
@@ -66,7 +67,7 @@ namespace SF3.Tests.Compression {
                                 continue;
 
                             // Let's go!
-                            var decompressed1 = Decompress(data);
+                            var decompressed1 = Decompress(data.GetDataCopy());
                             var compressed1 = Compress(decompressed1);
                             var decompressed2 = Decompress(compressed1);
 
@@ -90,7 +91,7 @@ namespace SF3.Tests.Compression {
                 var nameGetterContext = new NameGetterContext(st);
                 TestCase.Run(testCases, testCase => {
                     using (var mpdFile = MPD_File.Create(
-                        new ByteData(File.ReadAllBytes(testCase.Filename)), nameGetterContext, st)) {
+                        new ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
 
                         for (int i = 6; i <= 10; i++) {
                             var data = mpdFile.ChunkData[i]?.Data;
@@ -98,7 +99,7 @@ namespace SF3.Tests.Compression {
                                 continue;
 
                             // Let's go!
-                            var decompressed1 = Decompress(data);
+                            var decompressed1 = Decompress(data.GetDataCopy());
                             var compressed1 = Compress(decompressed1);
                             var decompressed2 = Decompress(compressed1);
 

@@ -2,6 +2,7 @@
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using CommonLib;
 using SF3;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
@@ -77,7 +78,7 @@ namespace TextureExtractor {
                     Console.Write(Path.GetFileName(file) + ": ");
 
                     // Get a raw data editing context for the file.
-                    var byteData = new ByteData(File.ReadAllBytes(file));
+                    var byteData = new ByteData(new ByteArray(File.ReadAllBytes(file)));
 
                     // Create an MPD file that works with our new ByteData.
                     try {

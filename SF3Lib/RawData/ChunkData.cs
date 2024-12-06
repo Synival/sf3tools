@@ -3,17 +3,20 @@ using CommonLib;
 
 namespace SF3.RawData {
     public class ChunkData : IChunkData {
-        public ChunkData(byte[] data, bool chunkIsCompressed) {
+        public ChunkData(ByteArray byteArray, bool chunkIsCompressed) {
+            if (byteArray == null)
+                throw new NullReferenceException(nameof(byteArray));
+
             IsCompressed = chunkIsCompressed;
 
             if (chunkIsCompressed) {
-                CompressedData = new CompressedData(data);
+                CompressedData = new CompressedData(byteArray);
                 ChildData = CompressedData;
                 DecompressedData = CompressedData.DecompressedData;
             }
             else {
                 CompressedData = null;
-                ChildData = new ByteData(data);
+                ChildData = new ByteData(byteArray);
                 DecompressedData = ChildData;
             }
 
@@ -72,7 +75,7 @@ namespace SF3.RawData {
         private IByteData ChildData { get; }
         public IByteData DecompressedData { get; }
 
-        public byte[] Data => ChildData.Data;
+        public ByteArray Data => ChildData.Data;
         public int Length => ChildData.Length;
 
         public bool IsModified {

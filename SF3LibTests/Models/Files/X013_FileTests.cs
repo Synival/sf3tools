@@ -2,6 +2,7 @@ using SF3.NamedValues;
 using SF3.Types;
 using SF3.Models.Files.X013;
 using SF3.RawData;
+using CommonLib;
 
 namespace SF3.Tests.Models.Files {
     [TestClass]
@@ -20,7 +21,7 @@ namespace SF3.Tests.Models.Files {
             }
 
             public X013_File Create()
-                => X013_File.Create(new ByteData(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
+                => X013_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedMagicBonuses { get; }
             public int ExpectedSpecials { get; }

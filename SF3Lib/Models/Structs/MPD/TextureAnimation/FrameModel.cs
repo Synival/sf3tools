@@ -23,7 +23,14 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             _unknownAddress                 = Address + 1 * _bytesPerProperty;
         }
 
-        public ushort[,] FetchAndCacheTexture(IRawData data) {
+        public void FetchAndCacheTexture(IRawData data, TexturePixelFormat assumedPixelFormat) {
+            if (assumedPixelFormat == TexturePixelFormat.ABGR1555)
+                FetchAndCacheTextureABGR1555(data);
+            else
+                FetchAndCacheTextureIndexed(data, assumedPixelFormat);
+        }
+
+        private void FetchAndCacheTextureABGR1555(IRawData data) {
             var imageData = new ushort[Width, Height];
             var off = 0;
             for (var y = 0; y < Height; y++) {
@@ -34,9 +41,17 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 }
             }
 
-            // TODO: support TextureIndexed
             Texture = new TextureABGR1555(imageData);
-            return imageData;
+        }
+
+        private void FetchAndCacheTextureIndexed(IRawData data, TexturePixelFormat assumedPixelFormat) {
+            var imageData = new byte[Width, Height];
+            var off = 0;
+            for (var y = 0; y < Height; y++)
+                for (var x = 0; x < Width; x++)
+                    imageData[x, y] = (byte) data.GetByte(off++);
+
+            Texture = new TextureIndexed(imageData, assumedPixelFormat);
         }
 
         public ushort[,] UpdateTexture(IRawData data, ushort[,] imageData) {

@@ -1,4 +1,5 @@
-﻿using SF3;
+﻿using CommonLib;
+using SF3;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
 using SF3.RawData;
@@ -25,7 +26,7 @@ namespace Grayscaler {
                 Console.Write(file + ": ");
 
                 // Get a raw data editing context for the file.
-                var byteData = new ByteData(File.ReadAllBytes(file));
+                var byteData = new ByteData(new ByteArray(File.ReadAllBytes(file)));
 
                 // Create an MPD file that works with our new ByteData.
                 var mpdFile = MPD_File.Create(byteData, nameGetter, scenario);

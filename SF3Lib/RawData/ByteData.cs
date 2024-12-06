@@ -9,12 +9,14 @@ namespace SF3.RawData {
     /// Used for modifying any set of bytes.
     /// </summary>
     public class ByteData : IByteData {
-        public ByteData(byte[] data) {
-            using (var guard = IsModifiedChangeBlocker())
-                _ = SetData(data);
+        public ByteData(ByteArray byteArray) {
+            if (byteArray == null)
+                throw new NullReferenceException(nameof(byteArray));
+            Data = byteArray;
+            InitData();
         }
 
-        public byte[] Data { get; private set; }
+        public ByteArray Data { get; private set; }
 
         public int Length => Data.Length;
 
@@ -43,15 +45,13 @@ namespace SF3.RawData {
             if (data == null)
                 throw new NullReferenceException(nameof(data));
 
-            var oldData = Data;
-            Data = data;
+            var oldData = Data.GetDataCopy();
+            Data.SetDataTo(data);
 
             // Determine if this will result in a modified state. Don't bother to do any of this if
             // 'IsModified' can't be modified anyway.
             if (_isModifiedGuard == 0) {
-                if (data?.Length != oldData?.Length)
-                    IsModified = true;
-                else if (data == null || oldData == null)
+                if (data.Length != oldData.Length)
                     IsModified = true;
                 else {
                     unsafe {
@@ -64,11 +64,10 @@ namespace SF3.RawData {
             return true;
         }
 
-        public byte[] GetAllData() {
-            var newData = new byte[Data.Length];
-            Data.CopyTo(newData, 0);
-            return Data;
+        protected virtual void InitData() {
         }
+
+        public byte[] GetAllData() => Data.GetDataCopy();
 
         public uint GetData(int location, int bytes) {
             if (location < 0)

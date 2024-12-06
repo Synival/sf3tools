@@ -1,3 +1,4 @@
+using CommonLib;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
 using SF3.RawData;
@@ -10,7 +11,7 @@ namespace SF3.Tests.Models.Files {
         private static MPD_File MakeFile() {
             var scenario = ScenarioType.Scenario1;
             var nameGetterContext = new NameGetterContext(scenario);
-            var data = new ByteData(File.ReadAllBytes(ResourcePath(scenario, "BTL02.MPD")));
+            var data = new ByteData(new ByteArray(File.ReadAllBytes(ResourcePath(scenario, "BTL02.MPD"))));
             return MPD_File.Create(data, nameGetterContext, scenario);
         }
 

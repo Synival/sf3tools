@@ -63,7 +63,7 @@ namespace SF3.Models.Files.MPD {
             for (var i = 0; i < Chunks.Length; i++) {
                 var chunkInfo = ChunkHeader.Rows[i];
                 if (chunkInfo.ChunkAddress > 0)
-                    Chunks[i] = new Chunk(((ByteData) Data).Data, chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
+                    Chunks[i] = new Chunk(((ByteData) Data).Data.GetDataCopy(), chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
             }
 
             // Assign all chunk data.
@@ -167,32 +167,42 @@ namespace SF3.Models.Files.MPD {
         }
 
         private void BuildTextureAnimFrameData() {
-            var areAnimatedTextures32Bit = Scenario >= ScenarioType.Scenario3;
-            Chunk3Frames = new Dictionary<uint, CompressedData>();
+            if (Chunk3Frames == null)
+                Chunk3Frames = new Dictionary<uint, CompressedData>();
+            else
+                Chunk3Frames.Clear();
+
+            var chunk3Textures = new Dictionary<uint, ITexture>();
 
             foreach (var anim in TextureAnimations.Rows) {
                 foreach (var frame in anim.Frames) {
                     var offset = frame.CompressedTextureOffset;
                     if (Chunk3Frames.ContainsKey(offset)) {
-                        _ = frame.FetchAndCacheTexture(Chunk3Frames[offset].DecompressedData);
+                        frame.FetchAndCacheTexture(Chunk3Frames[offset].DecompressedData, chunk3Textures[offset].PixelFormat);
                         continue;
                     }
 
-                    var totalBytes = frame.Width * frame.Height * 2;
+                    var uncompressedBytes8 = frame.Width * frame.Height * 2;
+                    var uncompressedBytes16 = frame.Width * frame.Height * 2;
+                    var compressedBytes = Math.Min(uncompressedBytes16, ChunkData[3].Data.Length - (int) offset);
+                    var bytes = ChunkData[3].Data.GetDataCopyAt((int) offset, compressedBytes);
 
-                    var bytes = new byte[totalBytes];
-                    unsafe {
-                        fixed (byte* dest = bytes, src = ChunkData[3].Data)
-                            _ = memcpy((IntPtr) dest, (IntPtr) (src + offset), totalBytes);
+                    CompressedData newData = null;
+                    try {
+                        newData = new CompressedData(new ByteArray(bytes), uncompressedBytes16);
+                        frame.FetchAndCacheTexture(newData.DecompressedData, TexturePixelFormat.ABGR1555);
+                    }
+                    catch {
+                        newData = new CompressedData(new ByteArray(bytes), uncompressedBytes8);
+                        frame.FetchAndCacheTexture(newData.DecompressedData, TexturePixelFormat.UnknownPalette);
                     }
 
-                    try {
-                        var newData = new CompressedData(bytes, totalBytes);
+                    if (newData != null && frame.Texture != null) {
                         _ = newData.Recompress(); // Sets the correct compressed size, which wasn't available before
-                        _ = frame.FetchAndCacheTexture(newData.DecompressedData);
+                        newData.IsModified = false;
+                        chunk3Textures.Add(offset, frame.Texture);
                         Chunk3Frames.Add(offset, newData);
                     }
-                    catch {}
                 }
             }
         }
@@ -227,10 +237,13 @@ namespace SF3.Models.Files.MPD {
                         memcpy((IntPtr) output, (IntPtr) input, 0x2100);
 
                     // Copy all chunk data into our new data.
-                    for (var i = 0; i < Chunks.Length; i++)
-                        if (Chunks[i] != null)
-                            fixed (byte* input = Chunks[i].Data)
+                    for (var i = 0; i < Chunks.Length; i++) {
+                        if (Chunks[i] != null) {
+                            var dataCopy = Chunks[i].Data.GetDataCopy();
+                            fixed (byte* input = dataCopy)
                                 _ = memcpy((IntPtr) (output + chunkPositions[i]), (IntPtr) input, Chunks[i].Size);
+                        }
+                    }
                 }
             }
 
@@ -272,15 +285,14 @@ namespace SF3.Models.Files.MPD {
                 // Copy compressed data into the new Chunk[3].
                 var frameData = frameDataKv.Value;
                 unsafe {
-                    fixed (byte* dest = newChunk3Data, src = frameData.Data)
+                    fixed (byte* dest = newChunk3Data, src = frameData.Data.GetDataCopy())
                         _ = memcpy((IntPtr) (dest + off), (IntPtr) src, frameData.Data.Length);
                     off += frameData.Data.Length;
                 }
             }
 
             // Finally rewrite Chunk[3].
-            Chunks[3] = new Chunk(new MemoryStream(newChunk3Data), newChunk3Data.Length);
-            ChunkData[3] = new ChunkData(Chunks[3].Data, false);
+            Chunks[3].Data.SetDataTo(newChunk3Data);
 
             // Rebuild stuff that uses Chunk[3] data.
             BuildTextureAnimFrameData();
@@ -297,14 +309,9 @@ namespace SF3.Models.Files.MPD {
                 var chunkData = ChunkData[i];
 
                 // Finish compressed chunks.
-                if (chunkData != null && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified)) {
-                    if (chunkData.IsCompressed && !chunkData.Recompress())
-                        continue;
-
-                    // TODO: thie invalidates any references!!! maybe just update the thing???
-                    Chunks[i] = new Chunk(chunkData.Data, 0, chunkData.Data.Length);
-                    ChunkData[i] = new ChunkData(Chunks[i].Data, ChunkData[i].IsCompressed);
-                }
+                if (chunkData != null && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified))
+                    if (chunkData.IsCompressed)
+                        chunkData.Recompress();
 
                 // Update the chunk address/size table.
                 if (Chunks[i] == null) {

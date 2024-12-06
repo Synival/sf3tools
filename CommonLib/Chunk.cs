@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace CommonLib {
     /// <summary>
@@ -7,17 +8,32 @@ namespace CommonLib {
     public class Chunk {
         public Chunk(Stream stream, int size) {
             // Snarf all the data.
-            Data = new byte[size];
-            if (size > 0)
-                stream.Read(Data, 0, size);
+            Data = new ByteArray(size);
+            if (size > 0) {
+                var bytes = new byte[size];
+                _ = stream.Read(bytes, 0, size);
+                Data.SetDataTo(bytes);
+            }
+        }
+
+        public Chunk(byte[] data) {
+            Data = new ByteArray(data);
+        }
+
+        public Chunk(ByteArray data) {
+            Data = data;
         }
 
         public Chunk(byte[] data, int offset, int size) {
             // Snarf all the data.
-            Data = new byte[size];
-            if (size > 0)
-                using (Stream stream = new MemoryStream(data, offset, size))
-                    stream.Read(Data, 0, size);
+            Data = new ByteArray(size);
+            if (size > 0) {
+                using (Stream stream = new MemoryStream(data, offset, size)) {
+                    var bytes = new byte[size];
+                    _ = stream.Read(bytes, 0, size);
+                    Data.SetDataTo(bytes);
+                }
+            }
         }
 
         /// <summary>
@@ -27,7 +43,7 @@ namespace CommonLib {
         /// <param name="logFile"></param>
         /// <returns></returns>
         public byte[] Decompress()
-            => Utils.Compression.Decompress(Data);
+            => Utils.Compression.Decompress(Data.GetDataCopy());
 
         /// <summary>
         /// Size of the chunk in the MPD file
@@ -37,6 +53,6 @@ namespace CommonLib {
         /// <summary>
         /// Data read from the MPD file
         /// </summary>
-        public byte[] Data { get; }
+        public ByteArray Data { get; }
     }
 }

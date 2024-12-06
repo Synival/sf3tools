@@ -2,6 +2,7 @@ using SF3.NamedValues;
 using SF3.Types;
 using SF3.Models.Files.IconPointer;
 using SF3.RawData;
+using CommonLib;
 
 namespace SF3.Tests.Models.Files {
     [TestClass]
@@ -15,7 +16,7 @@ namespace SF3.Tests.Models.Files {
             }
 
             public IconPointerFile Create()
-                => IconPointerFile.Create(new ByteData(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario);
+                => IconPointerFile.Create(new ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedItemIconRows { get; }
             public int ExpectedSpellIconRows { get; }

@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using CommonLib;
 using SF3.RawData;
 using static CommonLib.Utils.Compression;
 
@@ -11,7 +12,7 @@ namespace SF3.Tests.RawData {
         public void Constructor_ResultsInExpectedState()
         {
             // Arrange + Act
-            var data = new CompressedData(_compressedTestData);
+            var data = new CompressedData(new ByteArray(_compressedTestData));
 
             // Assert
             Assert.IsFalse(data.NeedsRecompression);
@@ -23,7 +24,7 @@ namespace SF3.Tests.RawData {
         public void Recompress_WithoutDeCompressedDataChanges_ResultsInExpectedState()
         {
             // Arrange
-            var data = new CompressedData(_compressedTestData);
+            var data = new CompressedData(new ByteArray(_compressedTestData));
 
             // Act
             var recompressResult = data.Recompress();
@@ -39,7 +40,7 @@ namespace SF3.Tests.RawData {
         public void DeCompressedData_IsModifiedIsSet_ResultsInExpectedState()
         {
             // Arrange
-            var data = new CompressedData(_compressedTestData);
+            var data = new CompressedData(new ByteArray(_compressedTestData));
 
             // Act
             data.DecompressedData.IsModified = true;
@@ -54,7 +55,7 @@ namespace SF3.Tests.RawData {
         public void DeCompressedData_IsModifiedIsToggled_ResultsInExpectedState()
         {
             // Arrange
-            var data = new CompressedData(_compressedTestData);
+            var data = new CompressedData(new ByteArray(_compressedTestData));
 
             // Act
             data.DecompressedData.IsModified = true;
@@ -70,7 +71,7 @@ namespace SF3.Tests.RawData {
         public void Recompress_AfterModificationsInDeCompressedData_ResultsInExpectedState()
         {
             // Arrange
-            var data = new CompressedData(_compressedTestData);
+            var data = new CompressedData(new ByteArray(_compressedTestData));
             data.DecompressedData.IsModified = true;
 
             // Act
@@ -87,7 +88,7 @@ namespace SF3.Tests.RawData {
         public void NeedsRecompression_SetToTrue_SetsItselfAndIsModifiedToTrue()
         {
             // Arrange
-            var data = new CompressedData(_compressedTestData);
+            var data = new CompressedData(new ByteArray(_compressedTestData));
 
             // Act
             data.NeedsRecompression = true;
@@ -102,7 +103,7 @@ namespace SF3.Tests.RawData {
         public void NeedsRecompression_ToggledOnAndOff_StillHasIsModifiedFlagSet()
         {
             // Arrange
-            var data = new CompressedData(_compressedTestData);
+            var data = new CompressedData(new ByteArray(_compressedTestData));
 
             // Act
             data.NeedsRecompression = true;
@@ -118,7 +119,7 @@ namespace SF3.Tests.RawData {
         public void IsModified_SetToTrue_ResultsInTrue()
         {
             // Arrange
-            var data = new CompressedData(_compressedTestData);
+            var data = new CompressedData(new ByteArray(_compressedTestData));
 
             // Act
             data.IsModified = true;
@@ -133,7 +134,7 @@ namespace SF3.Tests.RawData {
         public void IsModified_SetWhenNeedsRecompressionIsTrue_IsModifiedIsStillTrue()
         {
             // Arrange
-            var data = new CompressedData(_compressedTestData);
+            var data = new CompressedData(new ByteArray(_compressedTestData));
             data.NeedsRecompression = true;
 
             // Act

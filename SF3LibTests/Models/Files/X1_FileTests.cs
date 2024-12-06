@@ -2,6 +2,7 @@ using SF3.NamedValues;
 using SF3.Types;
 using SF3.Models.Files.X1;
 using SF3.RawData;
+using CommonLib;
 
 namespace SF3.Tests.Models.Files {
     [TestClass]
@@ -18,7 +19,7 @@ namespace SF3.Tests.Models.Files {
             }
 
             public X1_File Create()
-                => X1_File.Create(new ByteData(File.ReadAllBytes(Filename)), new NameGetterContext(Scenario), Scenario, false);
+                => X1_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario, false);
 
             public MapLeaderType? MapLeader { get; }
             public int? ExpectedBattleCount { get; }
