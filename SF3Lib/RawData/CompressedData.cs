@@ -21,6 +21,9 @@ namespace SF3.RawData {
         }
 
         public bool SetData(byte[] data, bool updateDecompressedData = true) {
+            if (data == null)
+                throw new NullReferenceException(nameof(data));
+
             if (!base.SetData(data))
                 return false;
 

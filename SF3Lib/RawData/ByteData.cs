@@ -40,6 +40,9 @@ namespace SF3.RawData {
         private static extern int memcmp(byte[] lhs, byte[] rhs, long count);
 
         public virtual bool SetData(byte[] data) {
+            if (data == null)
+                throw new NullReferenceException(nameof(data));
+
             var oldData = Data;
             Data = data;
 
@@ -72,8 +75,6 @@ namespace SF3.RawData {
                 throw new ArgumentOutOfRangeException(nameof(location));
             if (bytes < 1 || bytes > 4)
                 throw new ArgumentOutOfRangeException(nameof(bytes));
-            if (Data == null)
-                throw new NullReferenceException(nameof(Data));
             if (location + bytes > Data.Length)
                 throw new ArgumentOutOfRangeException(nameof(location) + " + " + nameof(bytes));
 
@@ -88,9 +89,6 @@ namespace SF3.RawData {
         public int GetDouble(int location) => (int) GetData(location, 4);
 
         public string GetString(int location, int length) {
-            if (Data == null)
-                throw new ArgumentNullException(nameof(Data));
-
             var value = new byte[length];
             for (var i = 0; i < length; i++) {
                 if (Data[location + i] == 0x0)
@@ -106,8 +104,6 @@ namespace SF3.RawData {
                 throw new ArgumentOutOfRangeException(nameof(location));
             if (bytes < 1 || bytes > 4)
                 throw new ArgumentOutOfRangeException(nameof(bytes));
-            if (Data == null)
-                throw new NullReferenceException(nameof(Data));
             if (location + bytes > Data.Length)
                 throw new ArgumentOutOfRangeException(nameof(location) + " + " + nameof(bytes));
 
@@ -127,8 +123,6 @@ namespace SF3.RawData {
         public void SetDouble(int location, int value) => SetData(location, (uint) value, 4);
 
         public void SetString(int location, int length, string value) {
-            if (Data == null)
-                throw new NullReferenceException(nameof(Data));
             var OutputText = Encoding.GetEncoding("shift-jis");
             var name = OutputText.GetBytes(value);
             for (var i = 0; i < name.Length; i++) {
@@ -152,8 +146,6 @@ namespace SF3.RawData {
                 throw new ArgumentOutOfRangeException(nameof(location));
             if (bit < 1 || bit > 8)
                 throw new ArgumentOutOfRangeException(nameof(bit));
-            if (Data == null)
-                throw new NullReferenceException(nameof(Data));
             if (location >= Data.Length)
                 throw new ArgumentOutOfRangeException(nameof(location));
 
@@ -165,8 +157,6 @@ namespace SF3.RawData {
                 throw new ArgumentOutOfRangeException(nameof(location));
             if (bit < 1 || bit > 8)
                 throw new ArgumentOutOfRangeException(nameof(bit));
-            if (Data == null)
-                throw new NullReferenceException(nameof(Data));
             if (location >= Data.Length)
                 throw new ArgumentOutOfRangeException(nameof(location));
 
