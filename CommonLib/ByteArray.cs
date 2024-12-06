@@ -125,7 +125,7 @@ namespace CommonLib {
         public byte[] GetDataCopyAt(int offset, int length) {
             if (offset < 0 || offset >= Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
-            if (length < 0 || offset + length >= Bytes.Length)
+            if (length < 0 || offset + length > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(length));
 
             var bytes = new byte[length];
@@ -153,7 +153,7 @@ namespace CommonLib {
         public void SetDataAtTo(int offset, byte[] data) {
             if (offset < 0 || offset >= Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
-            if (offset + data.Length >= Bytes.Length)
+            if (offset + data.Length > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(data));
 
             unsafe {
