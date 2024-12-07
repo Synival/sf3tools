@@ -26,6 +26,16 @@ namespace CommonLib {
         [DllImport("msvcrt.dll", SetLastError = false)]
         private static extern IntPtr memcpy(IntPtr dest, IntPtr src, int count);
 
+        [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int memcmp(IntPtr lhs, IntPtr rhs, long count);
+
+        private static bool ByteArraysAreEqual(byte[] lhs, byte[] rhs) {
+            unsafe {
+                fixed (byte* lhsPtr = lhs, rhsPtr = rhs)
+                    return lhs.Length == rhs.Length && memcmp((IntPtr) lhsPtr, (IntPtr) rhsPtr, lhs.Length) == 0;
+            }
+        }
+
         public void Resize(int size)
             => ResizeAt(0, Bytes.Length, size);
 
@@ -75,6 +85,7 @@ namespace CommonLib {
                 }
             }
 
+            Resized?.Invoke(this, new ByteArrayResizedArgs(offset, bytesToAddOrRemove));
             return Bytes.Length;
         }
 
@@ -108,7 +119,10 @@ namespace CommonLib {
             return bytes;
         }
 
-        public void SetDataTo(byte[] data) => Bytes = (byte[]) data.Clone();
+        public void SetDataTo(byte[] data) {
+            Resize(data.Length);
+            SetDataAtTo(0, data);
+        }
 
         public void SetDataAtTo(int offset, byte[] data) {
             if (offset < 0 || offset >= Bytes.Length)
@@ -117,19 +131,33 @@ namespace CommonLib {
                 throw new ArgumentOutOfRangeException(nameof(data));
 
             unsafe {
-                fixed (byte* dest = Bytes, src = data)
-                    _ = memcpy((IntPtr) dest + offset, (IntPtr) src, data.Length);
-            }
+                fixed (byte* dest = Bytes, src = data) {
+                    var destPtr = (IntPtr) dest + offset;
+                    var srcPtr = (IntPtr) src;
 
+                    if (memcmp(destPtr, srcPtr, data.Length) != 0) {
+                        _ = memcpy((IntPtr) dest + offset, (IntPtr) src, data.Length);
+                        Modified?.Invoke(this, EventArgs.Empty);
+                    }
+                }
+            }
         }
 
         public int Length => Bytes.Length;
 
         public byte this[int index] {
             get => Bytes[index];
-            set => Bytes[index] = value;
+            set {
+                if (Bytes[index] != value) {
+                    Bytes[index] = value;
+                    Modified?.Invoke(this, EventArgs.Empty);
+                }
+            }
         }
 
         private byte[] Bytes { get; set; }
+
+        public event EventHandler Modified;
+        public event ByteArrayResizedHandler Resized;
     }
 }

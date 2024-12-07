@@ -1,4 +1,25 @@
-﻿namespace CommonLib {
+﻿using System;
+
+namespace CommonLib {
+    public class ByteArrayResizedArgs {
+        public ByteArrayResizedArgs(int offset, int bytesAddedOrRemoved) {
+            Offset = offset;
+            BytesAddedOrRemoved = bytesAddedOrRemoved;
+        }
+
+        /// <summary>
+        /// The position at which bytes were added or removed.
+        /// </summary>
+        public int Offset { get; }
+
+        /// <summary>
+        /// The number of bytes added (positive) or removed (negative).
+        /// </summary>
+        public int BytesAddedOrRemoved { get; }
+    }
+
+    public delegate void ByteArrayResizedHandler(object sender, ByteArrayResizedArgs args);
+
     public interface IByteArray {
         /// <summary>
         /// Resizes the byte[] array, adding 0's to the end for additional data or truncating data at the end.
@@ -57,5 +78,8 @@
         int Length { get; }
 
         byte this[int index] { get; set; }
+
+        event EventHandler Modified;
+        event ByteArrayResizedHandler Resized;
     }
 }
