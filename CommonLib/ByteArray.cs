@@ -6,7 +6,7 @@ namespace CommonLib {
     /// Wrapper for a byte[] that can be resized. Use this if you need an unchanging reference to a byte[] that must be
     /// recreated due to size changes.
     /// </summary>
-    public class ByteArray {
+    public class ByteArray : IByteArray {
         /// <summary>
         /// Creates a new ByteArray with a new byte[] of size 'size'.
         /// </summary>
@@ -26,20 +26,9 @@ namespace CommonLib {
         [DllImport("msvcrt.dll", SetLastError = false)]
         private static extern IntPtr memcpy(IntPtr dest, IntPtr src, int count);
 
-        /// <summary>
-        /// Resizes the byte[] array, adding 0's to the end for additional data or truncating data at the end.
-        /// </summary>
-        /// <param name="size">The new size of the byte[] array.</param>
         public void Resize(int size)
             => ResizeAt(0, Bytes.Length, size);
 
-        /// <summary>
-        /// Adds or removes bytes at a specific offset. Use this to expand or contract the byte[] array at specific points.
-        /// Bytes are added or removed at the 'offset' position, not before.
-        /// </summary>
-        /// <param name="offset">The offset at which to add or remove data.</param>
-        /// <param name="bytesToAddOrRemove">The number of bytes to add (positive value) or remove (negative value). A value of 0 will do nothing.</param>
-        /// <returns>The new size of the byte[] array.</returns>
         public int ExpandOrContractAt(int offset, int bytesToAddOrRemove) {
             if (bytesToAddOrRemove == 0)
                 return Bytes.Length;
@@ -89,13 +78,6 @@ namespace CommonLib {
             return Bytes.Length;
         }
 
-        /// <summary>
-        /// Resizes a specific region 
-        /// </summary>
-        /// <param name="offset">The starting offset of the range to resize.</param>
-        /// <param name="currentSize">The size of the region of resize.</param>
-        /// <param name="newSize">The new size of the region.</param>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void ResizeAt(int offset, int currentSize, int newSize) {
             if (offset < 0 || offset + currentSize > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
@@ -109,19 +91,8 @@ namespace CommonLib {
                 ExpandOrContractAt(offset + currentSize + sizeDiff, sizeDiff);
         }
 
-        /// <summary>
-        /// Gets a copy of all data.
-        /// </summary>
-        /// <returns>A byte[] containing a copy of all data.</returns>
         public byte[] GetDataCopy() => (byte[]) Bytes.Clone();
 
-        /// <summary>
-        /// Gets a copy of all data in a specific range.
-        /// </summary>
-        /// <param name="offset">The start of the data to get.</param>
-        /// <param name="length">The length of the data to get.</param>
-        /// <returns>A byte[] containing a copy of data from 'offset' of size 'length'.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the requested data is out of range of 'length' is less than 0.</exception>
         public byte[] GetDataCopyAt(int offset, int length) {
             if (offset < 0 || offset >= Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
@@ -137,19 +108,8 @@ namespace CommonLib {
             return bytes;
         }
 
-        /// <summary>
-        /// Sets all data to 'data', updating size.
-        /// </summary>
-        /// <param name="data"></param>
         public void SetDataTo(byte[] data) => Bytes = (byte[]) data.Clone();
 
-        /// <summary>
-        /// Replaces data at 'offset' to data supplied by 'data'.
-        /// </summary>
-        /// <param name="offset">The start position of the data to be replaced.</param>
-        /// <param name="data">The data that the byte array at point 'offset' should be replaced with.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the offset is out of range or 'offset + data.Length'
-        /// is greater than the length of the byte array.</exception>
         public void SetDataAtTo(int offset, byte[] data) {
             if (offset < 0 || offset >= Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
