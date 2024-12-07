@@ -13,6 +13,8 @@ using System.IO;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
+        private const int c_RamOffset = 0x290000;
+
         protected MPD_File(IRawData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }
 
@@ -24,13 +26,12 @@ namespace SF3.Models.Files.MPD {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            const int ramOffset = 0x290000;
 
             var areAnimatedTextures32Bit = Scenario >= ScenarioType.Scenario3;
 
             // Create and load Header
-            var headerAddrPtr = Data.GetDouble(0x0000) - ramOffset;
-            var headerAddr = Data.GetDouble(headerAddrPtr) - ramOffset;
+            var headerAddrPtr = Data.GetDouble(0x0000) - c_RamOffset;
+            var headerAddr = Data.GetDouble(headerAddrPtr) - c_RamOffset;
             MPDHeader = new MPDHeaderTable(Data, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
             _ = MPDHeader.Load();
             var header = MPDHeader.Rows[0];
@@ -38,20 +39,20 @@ namespace SF3.Models.Files.MPD {
             // Load palettes
             Palettes = new ColorTable[3];
             if (header.OffsetPal1 > 0)
-                Palettes[0] = new ColorTable(Data, header.OffsetPal1 - ramOffset, 256);
+                Palettes[0] = new ColorTable(Data, header.OffsetPal1 - c_RamOffset, 256);
             if (header.OffsetPal2 > 0)
-                Palettes[1] = new ColorTable(Data, header.OffsetPal2 - ramOffset, 256);
+                Palettes[1] = new ColorTable(Data, header.OffsetPal2 - c_RamOffset, 256);
             if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 > 0)
-                Palettes[2] = new ColorTable(Data, MPDHeader.Rows[0].OffsetPal3 - ramOffset, 256);
+                Palettes[2] = new ColorTable(Data, MPDHeader.Rows[0].OffsetPal3 - c_RamOffset, 256);
 
             // Create other tables from header offsets.
-            Offset1Table = header.Offset1 != 0 ? new UnknownUInt16Table(Data, header.Offset1 - ramOffset, 32) : null;
-            Offset2Table = header.Offset2 != 0 ? new UnknownUInt32Table(Data, header.Offset2 - ramOffset, 1) : null;
-            Offset3Table = header.Offset3 != 0 ? new UnknownUInt16Table(Data, header.Offset3 - ramOffset, 32) : null;
-            Offset4Table = header.Offset4 != 0 ? new Offset4Table(Data, header.Offset4 - ramOffset) : null;
+            Offset1Table = header.Offset1 != 0 ? new UnknownUInt16Table(Data, header.Offset1 - c_RamOffset, 32) : null;
+            Offset2Table = header.Offset2 != 0 ? new UnknownUInt32Table(Data, header.Offset2 - c_RamOffset, 1) : null;
+            Offset3Table = header.Offset3 != 0 ? new UnknownUInt16Table(Data, header.Offset3 - c_RamOffset, 32) : null;
+            Offset4Table = header.Offset4 != 0 ? new Offset4Table(Data, header.Offset4 - c_RamOffset) : null;
 
             if (header.OffsetTextureAnimations != 0) {
-                TextureAnimations = new TextureAnimationTable(Data, header.OffsetTextureAnimations - ramOffset, areAnimatedTextures32Bit);
+                TextureAnimations = new TextureAnimationTable(Data, header.OffsetTextureAnimations - c_RamOffset, areAnimatedTextures32Bit);
                 _ = TextureAnimations.Load();
             }
 
@@ -63,7 +64,7 @@ namespace SF3.Models.Files.MPD {
             for (var i = 0; i < Chunks.Length; i++) {
                 var chunkInfo = ChunkHeader.Rows[i];
                 if (chunkInfo.ChunkAddress > 0)
-                    Chunks[i] = new Chunk(((ByteData) Data).GetDataCopy(), chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
+                    Chunks[i] = new Chunk(((ByteData) Data).GetDataCopy(), chunkInfo.ChunkAddress - c_RamOffset, chunkInfo.ChunkSize);
             }
 
             // Assign all chunk data.
