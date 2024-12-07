@@ -301,7 +301,7 @@ namespace SF3.Win.Forms {
                     return false;
 
             var form = new frmDFRTool(CommandType.Apply, dialogMode: true);
-            form.ApplyDFRInputData = ModelLoader.RawData.GetAllData();
+            form.ApplyDFRInputData = ModelLoader.RawData.GetDataCopy();
             form.ApplyDFRInMemory = true;
             var dialogResult = form.ShowDialog();
             if (dialogResult != DialogResult.OK)
@@ -340,7 +340,7 @@ namespace SF3.Win.Forms {
                 return false;
 
             var form = new frmDFRTool(CommandType.Create, dialogMode: true);
-            form.CreateDFRAlteredData = ModelLoader.RawData.GetAllData();
+            form.CreateDFRAlteredData = ModelLoader.RawData.GetDataCopy();
             var dialogResult = form.ShowDialog();
             return (dialogResult == DialogResult.OK);
         }

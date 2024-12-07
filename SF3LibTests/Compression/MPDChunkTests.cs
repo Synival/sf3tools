@@ -30,7 +30,7 @@ namespace SF3.Tests.Compression {
                 TestCase.Run(testCases, testCase => {
                     using (var mpdFile = MPD_File.Create(
                         new ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
-                        var data = mpdFile.ChunkData[5]?.Data;
+                        var data = mpdFile.ChunkData[5];
                         if (data == null)
                             return;
 
@@ -62,7 +62,7 @@ namespace SF3.Tests.Compression {
                         new ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
 
                         for (int i = 6; i <= 10; i++) {
-                            var data = mpdFile.ChunkData[i]?.Data;
+                            var data = mpdFile.ChunkData[i];
                             if (data == null || data.Length == 8)
                                 continue;
 
@@ -94,7 +94,7 @@ namespace SF3.Tests.Compression {
                         new ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
 
                         for (int i = 6; i <= 10; i++) {
-                            var data = mpdFile.ChunkData[i]?.Data;
+                            var data = mpdFile.ChunkData[i];
                             if (data == null || data.Length != 8)
                                 continue;
 

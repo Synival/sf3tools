@@ -59,7 +59,7 @@ namespace Grayscaler {
                 _ = mpdFile.Finish();
 
                 // Write it back out!
-                var output = mpdFile.Data.GetAllData();
+                var output = mpdFile.Data.GetDataCopy();
                 File.WriteAllBytes(file, output);
             };
         }

@@ -22,7 +22,7 @@ namespace SF3.RawData {
         private void OnDataResized(object sender, ByteArrayResizedArgs args) => IsModified = true;
         private void OnDataModified(object sender, EventArgs e) => IsModified = true;
 
-        public ByteArray Data { get; private set; }
+        protected ByteArray Data { get; private set; }
 
         public int Length => Data.Length;
 
@@ -50,17 +50,15 @@ namespace SF3.RawData {
         public virtual bool SetData(byte[] data) {
             if (data == null)
                 throw new NullReferenceException(nameof(data));
-
-            var oldData = Data.GetDataCopy();
             Data.SetDataTo(data);
-
             return true;
         }
 
         protected virtual void InitData() {
         }
 
-        public byte[] GetAllData() => Data.GetDataCopy();
+        public byte[] GetDataCopy() => Data.GetDataCopy();
+        public byte[] GetDataCopyAt(int offset, int length) => Data.GetDataCopyAt(offset, length);
 
         public uint GetData(int location, int bytes) {
             if (location < 0)

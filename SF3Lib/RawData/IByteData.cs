@@ -6,11 +6,6 @@ namespace SF3.RawData {
     /// </summary>
     public interface IByteData : IRawData {
         /// <summary>
-        /// Reference to the byte array.
-        /// </summary>
-        ByteArray Data { get; }
-
-        /// <summary>
         /// Sets the data to edit. Should also set 'IsModified' to 'false'.
         /// </summary>
         /// <param name="data">The data to modify.</param>

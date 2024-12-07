@@ -60,7 +60,7 @@ namespace SF3.RawData {
 
         public bool Recompress() {
             using (var modifyGuard2 = DecompressedData.IsModifiedChangeBlocker()) {
-                if (!SetData(Compress(DecompressedData.Data.GetDataCopy())))
+                if (!SetData(Compress(DecompressedData.GetDataCopy())))
                     return false;
                 NeedsRecompression = false;
             }

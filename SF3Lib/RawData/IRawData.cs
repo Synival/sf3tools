@@ -14,7 +14,13 @@ namespace SF3.RawData {
         /// Returns a copy of all raw data loaded.
         /// </summary>
         /// <returns>A copy of the raw data loaded as a byte[].</returns>
-        byte[] GetAllData();
+        byte[] GetDataCopy();
+
+        /// <summary>
+        /// Returns a copy of raw data loaded in a specific range.
+        /// </summary>
+        /// <returns>A copy of the raw data loaded at a specific range as a byte[].</returns>
+        byte[] GetDataCopyAt(int offset, int length);
 
         /// <summary>
         /// Gets the value of 1, 2, 3 or 4 contiguous bytes at an address.

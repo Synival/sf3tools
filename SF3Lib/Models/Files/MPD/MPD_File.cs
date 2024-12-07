@@ -63,7 +63,7 @@ namespace SF3.Models.Files.MPD {
             for (var i = 0; i < Chunks.Length; i++) {
                 var chunkInfo = ChunkHeader.Rows[i];
                 if (chunkInfo.ChunkAddress > 0)
-                    Chunks[i] = new Chunk(((ByteData) Data).Data.GetDataCopy(), chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
+                    Chunks[i] = new Chunk(((ByteData) Data).GetDataCopy(), chunkInfo.ChunkAddress - ramOffset, chunkInfo.ChunkSize);
             }
 
             // Assign all chunk data.
@@ -136,7 +136,7 @@ namespace SF3.Models.Files.MPD {
             if (TextureAnimations != null)
                 tables.Add(TextureAnimations);
 
-            if (SurfaceChunkData?.Data?.Length >= 64 * 64 * 2)
+            if (SurfaceChunkData?.Length >= 64 * 64 * 2)
                 tables.Add(TileSurfaceCharacterRows = new TileSurfaceCharacterRowTable(SurfaceChunkData.DecompressedData, 0x0000));
 
             TextureChunks = new MPD_FileTextureChunk[5];
@@ -184,8 +184,8 @@ namespace SF3.Models.Files.MPD {
 
                     var uncompressedBytes8 = frame.Width * frame.Height * 2;
                     var uncompressedBytes16 = frame.Width * frame.Height * 2;
-                    var compressedBytes = Math.Min(uncompressedBytes16, ChunkData[3].Data.Length - (int) offset);
-                    var bytes = ChunkData[3].Data.GetDataCopyAt((int) offset, compressedBytes);
+                    var compressedBytes = Math.Min(uncompressedBytes16, ChunkData[3].Length - (int) offset);
+                    var bytes = ChunkData[3].GetDataCopyAt((int) offset, compressedBytes);
 
                     CompressedData newData = null;
                     try {
@@ -228,7 +228,7 @@ namespace SF3.Models.Files.MPD {
 
             // Start rebuilding new data.
             var newData = new byte[chunkTableEnd];
-            var inputData = Data.GetAllData();
+            var inputData = Data.GetDataCopy();
 
             unsafe {
                 fixed (byte* output = newData) {
@@ -268,7 +268,7 @@ namespace SF3.Models.Files.MPD {
                 var frameData = frameDataKv.Value;
                 if (!onlyModified || frameData.NeedsRecompression || frameData.IsModified)
                     _ = frameData.Recompress();
-                newLength += frameData.Data.Length;
+                newLength += frameData.Length;
             }
 
             // Create new data for Chunk[3], updating existing texture offsets along the way.
@@ -285,9 +285,9 @@ namespace SF3.Models.Files.MPD {
                 // Copy compressed data into the new Chunk[3].
                 var frameData = frameDataKv.Value;
                 unsafe {
-                    fixed (byte* dest = newChunk3Data, src = frameData.Data.GetDataCopy())
-                        _ = memcpy((IntPtr) (dest + off), (IntPtr) src, frameData.Data.Length);
-                    off += frameData.Data.Length;
+                    fixed (byte* dest = newChunk3Data, src = frameData.GetDataCopy())
+                        _ = memcpy((IntPtr) (dest + off), (IntPtr) src, frameData.Length);
+                    off += frameData.Length;
                 }
             }
 

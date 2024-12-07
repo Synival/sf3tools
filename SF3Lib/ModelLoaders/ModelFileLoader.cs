@@ -55,7 +55,7 @@ namespace SF3.ModelLoaders {
                 throw new ModelFileLoaderNotLoadedException();
             return PerformSave(el => {
                 try {
-                    File.WriteAllBytes(filename, el.RawData.GetAllData());
+                    File.WriteAllBytes(filename, el.RawData.GetDataCopy());
                     Filename = filename;
                     return true;
                 }

@@ -19,7 +19,7 @@ namespace SF3.Tests.Models.Files {
         public void ChunkData_WithDifferentOriginalCompressionAlgorithmForData_Recompress_UpdatesCompressedData() {
             // Arrange
             var mpdFile = MakeFile();
-            var data = new CompressedData(mpdFile.ChunkData[5].Data);
+            var data = new CompressedData(new ByteArray(mpdFile.ChunkData[5].GetDataCopy()));
             Assert.IsFalse(data.NeedsRecompression);
             Assert.IsFalse(data.IsModified);
             Assert.IsFalse(data.DecompressedData.IsModified);
@@ -38,7 +38,7 @@ namespace SF3.Tests.Models.Files {
         public void ChunkData_WithDifferentOriginalCompressionAlgorithmForData_RecompressAgain_IsModifiedIsFalse() {
             // Arrange
             var mpdFile = MakeFile();
-            var data = new CompressedData(mpdFile.ChunkData[5].Data);
+            var data = new CompressedData(new ByteArray(mpdFile.ChunkData[5].GetDataCopy()));
             data.Recompress();
             data.IsModified = false;
             Assert.IsFalse(data.NeedsRecompression);

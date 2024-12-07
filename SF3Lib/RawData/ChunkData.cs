@@ -42,7 +42,8 @@ namespace SF3.RawData {
         }
 
         public bool SetData(byte[] data) => ChildData.SetData(data);
-        public byte[] GetAllData() => ChildData.GetAllData();
+        public byte[] GetDataCopy() => ChildData.GetDataCopy();
+        public byte[] GetDataCopyAt(int offset, int length) => ChildData.GetDataCopyAt(offset, length);
         public uint GetData(int location, int bytes) => ChildData.GetData(location, bytes);
         public int GetByte(int location) => ChildData.GetByte(location);
         public int GetWord(int location) => ChildData.GetWord(location);
@@ -75,7 +76,6 @@ namespace SF3.RawData {
         private IByteData ChildData { get; }
         public IByteData DecompressedData { get; }
 
-        public ByteArray Data => ChildData.Data;
         public int Length => ChildData.Length;
 
         public bool IsModified {
