@@ -2,7 +2,6 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 using CommonLib;
-using SF3.Exceptions;
 
 namespace SF3.RawData {
     /// <summary>
@@ -12,9 +11,16 @@ namespace SF3.RawData {
         public ByteData(ByteArray byteArray) {
             if (byteArray == null)
                 throw new NullReferenceException(nameof(byteArray));
+
             Data = byteArray;
+            Data.Modified += OnDataModified;
+            Data.Resized += OnDataResized;
+
             InitData();
         }
+
+        private void OnDataResized(object sender, ByteArrayResizedArgs args) => IsModified = true;
+        private void OnDataModified(object sender, EventArgs e) => IsModified = true;
 
         public ByteArray Data { get; private set; }
 
@@ -47,19 +53,6 @@ namespace SF3.RawData {
 
             var oldData = Data.GetDataCopy();
             Data.SetDataTo(data);
-
-            // Determine if this will result in a modified state. Don't bother to do any of this if
-            // 'IsModified' can't be modified anyway.
-            if (_isModifiedGuard == 0) {
-                if (data.Length != oldData.Length)
-                    IsModified = true;
-                else {
-                    unsafe {
-                        if (memcmp(oldData, data, data.Length) != 0)
-                            IsModified = true;
-                    }
-                }
-            }
 
             return true;
         }
@@ -110,10 +103,7 @@ namespace SF3.RawData {
 
             for (var i = 0; i < bytes; i++) {
                 var b = converted[bytes - i - 1];
-                if (Data[location + i] != b) {
-                    Data[location + i] = b;
-                    IsModified = true;
-                }
+                Data[location + i] = b;
             }
         }
 
@@ -122,22 +112,15 @@ namespace SF3.RawData {
         public void SetDouble(int location, int value) => SetData(location, (uint) value, 4);
 
         public void SetString(int location, int length, string value) {
-            var OutputText = Encoding.GetEncoding("shift-jis");
-            var name = OutputText.GetBytes(value);
-            for (var i = 0; i < name.Length; i++) {
-                if (Data[location + i] != name[i]) {
-                    Data[location + i] = name[i];
-                    IsModified = true;
-                }
-            }
-            if (name.Length < length) {
-                for (var i = name.Length; i < length; i++) {
-                    if (Data[location + i] != 0x00) {
-                        Data[location + i] = 0x00;
-                        IsModified = true;
-                    }
-                }
-            }
+            var encoding = Encoding.GetEncoding("shift-jis");
+            var bytes = encoding.GetBytes(value);
+
+            for (var i = 0; i < bytes.Length; i++)
+                Data[location + i] = bytes[i];
+
+            if (bytes.Length < length)
+                for (var i = bytes.Length; i < length; i++)
+                    Data[location + i] = 0x00;
         }
 
         public bool GetBit(int location, int bit) {
@@ -161,21 +144,16 @@ namespace SF3.RawData {
 
             var bitmask = (byte)(1 << bit - 1);
 
-            if (value) {
-                if ((Data[location] & bitmask) == 0x00) {
-                    Data[location] |= bitmask;
-                    IsModified = true;
-                }
-            }
-            else {
-                if ((Data[location] & bitmask) != 0x00) {
-                    Data[location] &= (byte) ~bitmask;
-                    IsModified = true;
-                }
-            }
+            if (value)
+                Data[location] |= bitmask;
+            else
+                Data[location] &= (byte) ~bitmask;
         }
 
-        public virtual void Dispose() { }
+        public virtual void Dispose() {
+            Data.Modified -= OnDataModified;
+            Data.Resized -= OnDataResized;
+        }
 
         public virtual bool OnFinish() => true;
 
