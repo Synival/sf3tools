@@ -47,7 +47,7 @@ namespace SF3.RawData {
         [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern int memcmp(byte[] lhs, byte[] rhs, long count);
 
-        public virtual bool SetData(byte[] data) {
+        public virtual bool SetDataTo(byte[] data) {
             if (data == null)
                 throw new NullReferenceException(nameof(data));
             Data.SetDataTo(data);

@@ -17,7 +17,7 @@ namespace SF3.RawData {
         //       is called in the base constructor. Bad!!!
         private bool _hasInit = false;
 
-        public override bool SetData(byte[] data) => SetData(data, updateDecompressedData: true);
+        public override bool SetDataTo(byte[] data) => SetDataTo(data, updateDecompressedData: true);
 
         protected override void InitData() {
             if (!_hasInit)
@@ -26,11 +26,11 @@ namespace SF3.RawData {
             UpdateDecompressedData();
         }
 
-        public bool SetData(byte[] data, bool updateDecompressedData = true) {
+        public bool SetDataTo(byte[] data, bool updateDecompressedData = true) {
             if (data == null)
                 throw new NullReferenceException(nameof(data));
 
-            if (!base.SetData(data))
+            if (!base.SetDataTo(data))
                 return false;
             if (updateDecompressedData)
                 UpdateDecompressedData();
@@ -55,12 +55,12 @@ namespace SF3.RawData {
                 };
             }
             else
-                DecompressedData.SetData(decompressedData);
+                DecompressedData.SetDataTo(decompressedData);
         }
 
         public bool Recompress() {
             using (var modifyGuard2 = DecompressedData.IsModifiedChangeBlocker()) {
-                if (!SetData(Compress(DecompressedData.GetDataCopy())))
+                if (!SetDataTo(Compress(DecompressedData.GetDataCopy())))
                     return false;
                 NeedsRecompression = false;
             }

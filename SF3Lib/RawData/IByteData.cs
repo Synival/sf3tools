@@ -10,6 +10,6 @@ namespace SF3.RawData {
         /// </summary>
         /// <param name="data">The data to modify.</param>
         /// <returns>'true' if the data was set, otherwise 'false'.</returns>
-        bool SetData(byte[] data);
+        bool SetDataTo(byte[] data);
     }
 }

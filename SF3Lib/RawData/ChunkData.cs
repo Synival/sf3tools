@@ -41,7 +41,7 @@ namespace SF3.RawData {
             return CompressedData.Recompress();
         }
 
-        public bool SetData(byte[] data) => ChildData.SetData(data);
+        public bool SetDataTo(byte[] data) => ChildData.SetDataTo(data);
         public byte[] GetDataCopy() => ChildData.GetDataCopy();
         public byte[] GetDataCopyAt(int offset, int length) => ChildData.GetDataCopyAt(offset, length);
         public uint GetData(int location, int bytes) => ChildData.GetData(location, bytes);

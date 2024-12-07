@@ -247,7 +247,7 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
-            if (!((IByteData) Data).SetData(newData))
+            if (!((IByteData) Data).SetDataTo(newData))
                 return false;
 
             return true;
