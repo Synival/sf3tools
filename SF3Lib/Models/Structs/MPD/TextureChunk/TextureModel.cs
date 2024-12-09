@@ -20,11 +20,11 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 var bytesPerPixel =  imageDataSize / (double) Width /  Height;
                 if (bytesPerPixel == 2.00) {
                     BytesPerPixel = 2;
-                    AssumedPixelFormat2 = TexturePixelFormat.ABGR1555;
+                    AssumedPixelFormat = TexturePixelFormat.ABGR1555;
                 }
                 else if (bytesPerPixel == 1.00) {
                     BytesPerPixel = 1;
-                    AssumedPixelFormat2 = TexturePixelFormat.UnknownPalette;
+                    AssumedPixelFormat = TexturePixelFormat.UnknownPalette;
                 }
                 else {
                     try {
@@ -33,11 +33,11 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                     catch { }
 
                     BytesPerPixel = 2;
-                    AssumedPixelFormat2 = TexturePixelFormat.ABGR1555;
+                    AssumedPixelFormat = TexturePixelFormat.ABGR1555;
                 }
             }
             else
-                AssumedPixelFormat2 = TexturePixelFormat.ABGR1555;
+                AssumedPixelFormat = TexturePixelFormat.ABGR1555;
 
             _readyForImageData = true;
             _ = FetchAndCacheTexture();
@@ -52,7 +52,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 return false;
 
             try {
-                Texture =AssumedPixelFormat2 == TexturePixelFormat.ABGR1555
+                Texture = AssumedPixelFormat == TexturePixelFormat.ABGR1555
                     ? new TextureABGR1555(RawImageData16Bit)
                     : (ITexture) new TextureIndexed(RawImageData8Bit);
                 return true;
@@ -97,7 +97,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         public int BytesPerPixel { get; }
 
         [TableViewModelColumn(displayName: "(Assumed) Pixel Format", displayOrder: 3)]
-        public TexturePixelFormat AssumedPixelFormat2 { get; }
+        public TexturePixelFormat AssumedPixelFormat { get; }
 
         public byte[,] RawImageData8Bit {
             get {
