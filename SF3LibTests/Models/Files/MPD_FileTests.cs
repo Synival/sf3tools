@@ -16,6 +16,27 @@ namespace SF3.Tests.Models.Files {
         }
 
         [TestMethod]
+        public void Create_NothingIsModified() {
+            // Arrange + Act
+            var mpdFile = MakeFile();
+
+            // Assert
+            Assert.IsFalse(mpdFile.IsModified);
+            foreach (var cd in mpdFile.ChunkData) {
+                if (cd != null) {
+                    Assert.IsFalse(cd.IsModified);
+                    Assert.IsFalse(cd.DecompressedData.IsModified);
+                }
+            }
+            foreach (var c3fKv in mpdFile.Chunk3Frames) {
+                if (c3fKv.Value != null) {
+                    Assert.IsFalse(c3fKv.Value.IsModified);
+                    Assert.IsFalse(c3fKv.Value.DecompressedData.IsModified);
+                }
+            }
+        }
+
+        [TestMethod]
         public void ChunkData_WithDifferentOriginalCompressionAlgorithmForData_Recompress_UpdatesCompressedData() {
             // Arrange
             var mpdFile = MakeFile();
@@ -78,13 +99,16 @@ namespace SF3.Tests.Models.Files {
             // Assert
             Assert.IsTrue(recompressResult);
 
-            for (var i = 0; i < data.Chunks.Length; i++) {
+            for (var i = 0; i < data.ChunkData.Length; i++) {
                 var chunkData = data.ChunkData[i];
                 if (chunkData == null)
                     continue;
 
-                if (!chunkData.IsCompressed)
-                    Assert.IsFalse(chunkData.IsModified);
+                if (!chunkData.IsCompressed) {
+                    // NOTE: ChunkData[3] is re-written, so 'IsModified' will be 'true' in this case.
+                    var expectedResult = i != 3 ? false : true;
+                    Assert.AreEqual(expectedResult, chunkData.IsModified);
+                }
                 else {
                     // NOTE: Recompressing an actual .MPD file uses a different algorithm than originally used
                     //       so the content of the chunks will have been modified from the original test data.
@@ -157,7 +181,7 @@ namespace SF3.Tests.Models.Files {
         }
 
         [TestMethod]
-        public void Finish_WithChanges_CompressedDataHasIsModifiedFlag() {
+        public void Finish_WithChanges_ExpectedDataHasIsModifiedFlag() {
             // Arrange
             var data = MakeFile();
             data.TextureChunks[0].TextureTable.Rows[0].Width *= 2;
@@ -166,13 +190,15 @@ namespace SF3.Tests.Models.Files {
             data.Finish();
 
             // Assert
-            for (var i = 0; i < data.Chunks.Length; i++) {
+            for (var i = 0; i < data.ChunkData.Length; i++) {
                 var chunkData = data.ChunkData[i];
                 if (chunkData == null)
                     continue;
 
-                Assert.IsFalse(chunkData.DecompressedData.IsModified);
-                var expectedModifiedFlag = i == 6;
+                if (chunkData.IsCompressed)
+                    Assert.IsFalse(chunkData.DecompressedData.IsModified);
+
+                var expectedModifiedFlag = i == 3 || i == 6;
                 Assert.AreEqual(expectedModifiedFlag, chunkData.IsModified);
             }
 
