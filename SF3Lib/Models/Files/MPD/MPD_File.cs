@@ -184,7 +184,7 @@ namespace SF3.Models.Files.MPD {
                         continue;
                     }
 
-                    var uncompressedBytes8 = frame.Width * frame.Height * 2;
+                    var uncompressedBytes8 = frame.Width * frame.Height;
                     var uncompressedBytes16 = frame.Width * frame.Height * 2;
                     var compressedBytes = Math.Min(uncompressedBytes16, ChunkData[3].Length - (int) offset);
                     var bytes = ChunkData[3].GetDataCopyAt((int) offset, compressedBytes);
