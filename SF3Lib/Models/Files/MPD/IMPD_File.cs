@@ -1,9 +1,6 @@
 using System.Collections.Generic;
-using CommonLib;
-using SF3.Models.Files;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
-using SF3.Models.Tables.MPD.TextureAnimation;
 using SF3.RawData;
 
 namespace SF3.Models.Files.MPD {
@@ -38,9 +35,6 @@ namespace SF3.Models.Files.MPD {
         /// </summary>
         Dictionary<uint, CompressedData> Chunk3Frames { get; }
 
-        Chunk[] Chunks { get; }
-
-        Chunk SurfaceChunk { get; }
         TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; }
         TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; }
         TileHeightTerrainRowTable TileHeightTerrainRows { get; }
