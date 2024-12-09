@@ -30,7 +30,11 @@ namespace SF3.Models.Structs.MPD {
 
             var frames = new List<FrameModel>();
             var frameId = 0;
-            if (TextureID != _textureEndId) {
+
+            // This happens in Scn2 SARA23.MPD for some reason...
+            if (TextureID == _frameEndOffset)
+                pos = Address + _bytesPerProperty;
+            else if (TextureID != _textureEndId) {
                 while (true) {
                     var frameOffset = Data.GetData(pos, _bytesPerProperty);
                     if (frameOffset == _frameEndOffset) {
