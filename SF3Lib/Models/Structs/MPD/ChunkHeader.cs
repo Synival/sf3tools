@@ -1,5 +1,4 @@
 ﻿using CommonLib.Attributes;
-using SF3.Models.Structs;
 using SF3.RawData;
 
 namespace SF3.Models.Structs.MPD {
@@ -27,12 +26,15 @@ namespace SF3.Models.Structs.MPD {
             set => Data.SetDouble(chunkSizeAddress, value);
         }
 
+        [TableViewModelColumn(displayName: "Exists", displayOrder: 2)]
+        public bool Exists => ChunkAddress > 0;
+
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Compression Type", displayOrder: 2, isReadOnly: true, minWidth: 150)]
+        [TableViewModelColumn(displayName: "Compression Type", displayOrder: 3, isReadOnly: true, minWidth: 150)]
         public string CompressionType { get; set; } = "(Unset)";
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Un/decompressed Size", displayFormat: "X4", displayOrder: 3, isReadOnly: true)]
+        [TableViewModelColumn(displayName: "Un/decompressed Size", displayFormat: "X4", displayOrder: 4, isReadOnly: true)]
         public int DecompressedSize { get; set; } = 0;
     }
 }
