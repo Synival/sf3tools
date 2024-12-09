@@ -154,6 +154,7 @@ namespace SF3.Models.Files.MPD {
             var allData = ChunkData
                 .Where(x => x != null)
                 .Cast<IRawData>()
+                .Concat(Chunk3Frames.Where(x => x.Value != null).Select(x => x.Value))
                 .ToArray();
 
             foreach (var d in allData) {
