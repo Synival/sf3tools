@@ -6,7 +6,7 @@ namespace SF3.RawData {
     /// </summary>
     public interface IByteData : IRawData {
         /// <summary>
-        /// Sets the data to edit. Should also set 'IsModified' to 'false'.
+        /// Sets the data to edit.
         /// </summary>
         /// <param name="data">The data to modify.</param>
         /// <returns>'true' if the data was set, otherwise 'false'.</returns>
