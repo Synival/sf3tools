@@ -65,14 +65,14 @@ namespace SF3.MPD_Editor.Forms {
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable.Rows)
                     .Where(x => x.TextureIsLoaded)
-                    .ToDictionary(x => x.Name, x => (ITexture) x);
+                    .ToDictionary(x => x.Name, x => new { Model = (object) x, x.Texture });
 
                 var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations.Rows
                     .SelectMany(x => x.Frames)
                     .GroupBy(x => x.CompressedTextureOffset)
                     .Select(x => x.First())
                     .Where(x => x.TextureIsLoaded)
-                    .ToDictionary(x => x.Name, x => (ITexture) x);
+                    .ToDictionary(x => x.Name, x => new { Model = (object) x, x.Texture });
 
                 var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 
@@ -83,7 +83,8 @@ namespace SF3.MPD_Editor.Forms {
 
                 foreach (var textureKv in textures) {
                     var name = textureKv.Key;
-                    var texture = textureKv.Value;
+                    var model = textureKv.Value.Model;
+                    var texture = textureKv.Value.Texture;
 
                     if (texture.PixelFormat != TexturePixelFormat.ABGR1555) {
                         skipped++;
@@ -139,9 +140,9 @@ namespace SF3.MPD_Editor.Forms {
                                     }
                                 }
 
-                                if (texture is TextureModel tm)
+                                if (model is TextureModel tm)
                                     tm.RawImageData16Bit = newImageData;
-                                else if (texture is FrameModel fm) {
+                                else if (model is FrameModel fm) {
                                     _ = fm.UpdateTexture(File.Chunk3Frames[fm.CompressedTextureOffset].DecompressedData, newImageData);
 
                                     var sharedTextures = File.TextureAnimations.Rows
@@ -193,14 +194,14 @@ namespace SF3.MPD_Editor.Forms {
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable.Rows)
                     .Where(x => x.TextureIsLoaded)
-                    .ToDictionary(x => x.Name, x => (ITexture) x);
+                    .ToDictionary(x => x.Name, x => x.Texture);
 
                 var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations.Rows
                     .SelectMany(x => x.Frames)
                     .GroupBy(x => x.CompressedTextureOffset)
                     .Select(x => x.First())
                     .Where(x => x.TextureIsLoaded)
-                    .ToDictionary(x => x.Name, x => (ITexture) x);
+                    .ToDictionary(x => x.Name, x => x.Texture);
 
                 var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 
