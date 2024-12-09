@@ -15,7 +15,6 @@ using static CommonLib.Utils.PixelConversion;
 using SF3.Win.Views;
 using SF3.Models.Files;
 using SF3.Models.Files.MPD;
-using System.Collections.Generic;
 using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.Models.Structs.MPD.TextureAnimation;
 using System;
@@ -25,7 +24,7 @@ namespace SF3.MPD_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.3";
 
-        public IMPD_File File => base.ModelLoader.Model as IMPD_File;
+        public IMPD_File File => ModelLoader.Model as IMPD_File;
 
         public frmMPDEditor() {
             InitializeComponent();
