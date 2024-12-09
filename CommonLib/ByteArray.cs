@@ -40,10 +40,10 @@ namespace CommonLib {
             => ResizeAt(0, Bytes.Length, size);
 
         public int ExpandOrContractAt(int offset, int bytesToAddOrRemove) {
-            if (bytesToAddOrRemove == 0)
-                return Bytes.Length;
             if (offset < 0 || offset > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
+            if (bytesToAddOrRemove == 0)
+                return Bytes.Length;
 
             // Make sure we can't remove more bytes than are available.
             if (bytesToAddOrRemove < 0 && -bytesToAddOrRemove > Bytes.Length - offset)
@@ -90,8 +90,10 @@ namespace CommonLib {
         }
 
         public void ResizeAt(int offset, int currentSize, int newSize) {
-            if (offset < 0 || offset + currentSize > Bytes.Length)
+            if (offset < 0 || offset > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
+            if (offset + currentSize > Bytes.Length)
+                throw new ArgumentOutOfRangeException(nameof(currentSize));
             if (newSize < 0)
                 throw new ArgumentOutOfRangeException(nameof(newSize));
 
@@ -105,7 +107,7 @@ namespace CommonLib {
         public byte[] GetDataCopy() => (byte[]) Bytes.Clone();
 
         public byte[] GetDataCopyAt(int offset, int length) {
-            if (offset < 0 || offset >= Bytes.Length)
+            if (offset < 0 || offset > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
             if (length < 0 || offset + length > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(length));
@@ -125,7 +127,7 @@ namespace CommonLib {
         }
 
         public void SetDataAtTo(int offset, byte[] data) {
-            if (offset < 0 || offset >= Bytes.Length)
+            if (offset < 0 || offset > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
             if (offset + data.Length > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(data));
