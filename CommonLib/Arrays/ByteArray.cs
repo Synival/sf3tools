@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace CommonLib {
+namespace CommonLib.Arrays {
     /// <summary>
     /// Wrapper for a byte[] that can be resized. Use this if you need an unchanging reference to a byte[] that must be
     /// recreated due to size changes.

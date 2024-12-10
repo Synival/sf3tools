@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommonLib {
+namespace CommonLib.Arrays {
     public class ByteArrayResizedArgs {
         public ByteArrayResizedArgs(int offset, int bytesAddedOrRemoved) {
             Offset = offset;

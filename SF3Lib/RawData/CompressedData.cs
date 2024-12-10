@@ -1,5 +1,5 @@
 ﻿using System;
-using CommonLib;
+using CommonLib.Arrays;
 using static CommonLib.Utils.Compression;
 
 namespace SF3.RawData {

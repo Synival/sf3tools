@@ -2,6 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 using CommonLib;
+using CommonLib.Arrays;
 
 namespace SF3.RawData {
     /// <summary>

@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using CommonLib;
+using CommonLib.Arrays;
 using SF3.RawData;
 using static CommonLib.Utils.Compression;
 

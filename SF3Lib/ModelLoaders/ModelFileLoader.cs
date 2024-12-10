@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using CommonLib;
+using CommonLib.Arrays;
 using SF3.Exceptions;
 using SF3.RawData;
 using static SF3.ModelLoaders.ModelFileLoaderDelegates;

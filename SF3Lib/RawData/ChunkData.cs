@@ -1,5 +1,6 @@
 ﻿using System;
 using CommonLib;
+using CommonLib.Arrays;
 
 namespace SF3.RawData {
     public class ChunkData : IChunkData {

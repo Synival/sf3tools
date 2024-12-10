@@ -2,7 +2,7 @@ using SF3.NamedValues;
 using SF3.Types;
 using SF3.Models.Files.IconPointer;
 using SF3.RawData;
-using CommonLib;
+using CommonLib.Arrays;
 
 namespace SF3.Tests.Models.Files {
     [TestClass]
