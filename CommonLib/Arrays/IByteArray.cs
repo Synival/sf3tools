@@ -1,6 +1,23 @@
 ﻿using System;
 
 namespace CommonLib.Arrays {
+    public class ByteArrayModifiedArgs {
+        public ByteArrayModifiedArgs(int offset, int length) {
+            Offset = offset;
+            Length = length;
+        }
+
+        /// <summary>
+        /// The position at which bytes were modified.
+        /// </summary>
+        public int Offset { get; }
+
+        /// <summary>
+        /// The number of bytes at this offset that were modified.
+        /// </summary>
+        public int Length { get; }
+    }
+
     public class ByteArrayResizedArgs {
         public ByteArrayResizedArgs(int offset, int bytesAddedOrRemoved) {
             Offset = offset;
@@ -17,6 +34,8 @@ namespace CommonLib.Arrays {
         /// </summary>
         public int BytesAddedOrRemoved { get; }
     }
+
+    public delegate void ByteArrayModifiedHandler(object sender, ByteArrayModifiedArgs args);
 
     public delegate void ByteArrayResizedHandler(object sender, ByteArrayResizedArgs args);
 
@@ -79,7 +98,7 @@ namespace CommonLib.Arrays {
 
         byte this[int index] { get; set; }
 
-        event EventHandler Modified;
+        event ByteArrayModifiedHandler Modified;
         event ByteArrayResizedHandler Resized;
     }
 }

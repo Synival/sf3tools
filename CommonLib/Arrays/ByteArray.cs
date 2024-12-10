@@ -139,7 +139,10 @@ namespace CommonLib.Arrays {
 
                     if (memcmp(destPtr, srcPtr, data.Length) != 0) {
                         _ = memcpy((IntPtr) dest + offset, (IntPtr) src, data.Length);
-                        Modified?.Invoke(this, EventArgs.Empty);
+
+                        // This is technically wrong, since we don't know if all these bytes were modified,
+                        // but whatever, let's keep it simple.
+                        Modified?.Invoke(this, new ByteArrayModifiedArgs(offset, data.Length));
                     }
                 }
             }
@@ -152,14 +155,14 @@ namespace CommonLib.Arrays {
             set {
                 if (Bytes[index] != value) {
                     Bytes[index] = value;
-                    Modified?.Invoke(this, EventArgs.Empty);
+                    Modified?.Invoke(this, new ByteArrayModifiedArgs(index, 1));
                 }
             }
         }
 
         private byte[] Bytes { get; set; }
 
-        public event EventHandler Modified;
+        public event ByteArrayModifiedHandler Modified;
         public event ByteArrayResizedHandler Resized;
     }
 }

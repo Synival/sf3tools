@@ -38,7 +38,7 @@ namespace CommonLib.Arrays {
         public void SetDataAtTo(int offset, byte[] data) => throw new NotImplementedException();
         public void SetDataTo(byte[] data) => throw new NotImplementedException();
 
-        public event EventHandler Modified;
+        public event ByteArrayModifiedHandler Modified;
         public event ByteArrayResizedHandler Resized;
     }
 }

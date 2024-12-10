@@ -21,7 +21,7 @@ namespace SF3.RawData {
         }
 
         private void OnDataResized(object sender, ByteArrayResizedArgs args) => IsModified = true;
-        private void OnDataModified(object sender, EventArgs e) => IsModified = true;
+        private void OnDataModified(object sender, ByteArrayModifiedArgs e) => IsModified = true;
 
         protected IByteArray Data { get; private set; }
 
