@@ -148,6 +148,8 @@ namespace CommonLib.Arrays {
             }
         }
 
+        public void Dispose() { }
+
         public int Length => Bytes.Length;
 
         public byte this[int index] {

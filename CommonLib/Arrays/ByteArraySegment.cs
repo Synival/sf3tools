@@ -13,6 +13,17 @@ namespace CommonLib.Arrays {
             ParentArray = parentArray;
             Offset = offset;
             Length = length;
+
+            parentArray.Modified += OnParentModified;
+            parentArray.Resized += OnParentResized;
+        }
+
+        public void OnParentModified(object sender, ByteArrayModifiedArgs args) {
+            // TODO: do lots of stuff!
+        }
+
+        public void OnParentResized(object sender, ByteArrayResizedArgs args) {
+            // TODO: do lots of stuff!
         }
 
         private IByteArray ParentArray { get; }
@@ -37,6 +48,11 @@ namespace CommonLib.Arrays {
         public void ResizeAt(int offset, int currentSize, int newSize) => throw new NotImplementedException();
         public void SetDataAtTo(int offset, byte[] data) => throw new NotImplementedException();
         public void SetDataTo(byte[] data) => throw new NotImplementedException();
+
+        public void Dispose() {
+            ParentArray.Modified -= OnParentModified;
+            ParentArray.Resized -= OnParentResized;
+        }
 
         public event ByteArrayModifiedHandler Modified;
         public event ByteArrayResizedHandler Resized;

@@ -39,7 +39,7 @@ namespace CommonLib.Arrays {
 
     public delegate void ByteArrayResizedHandler(object sender, ByteArrayResizedArgs args);
 
-    public interface IByteArray {
+    public interface IByteArray : IDisposable {
         /// <summary>
         /// Resizes the byte[] array, adding 0's to the end for additional data or truncating data at the end.
         /// </summary>
