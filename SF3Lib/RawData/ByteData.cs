@@ -8,7 +8,7 @@ namespace SF3.RawData {
     /// Used for modifying any set of bytes.
     /// </summary>
     public class ByteData : IByteData {
-        public ByteData(ByteArray byteArray) {
+        public ByteData(IByteArray byteArray) {
             if (byteArray == null)
                 throw new NullReferenceException(nameof(byteArray));
 
@@ -22,7 +22,7 @@ namespace SF3.RawData {
         private void OnDataResized(object sender, ByteArrayResizedArgs args) => IsModified = true;
         private void OnDataModified(object sender, EventArgs e) => IsModified = true;
 
-        protected ByteArray Data { get; private set; }
+        protected IByteArray Data { get; private set; }
 
         public int Length => Data.Length;
 

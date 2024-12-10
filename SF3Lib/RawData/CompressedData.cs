@@ -4,7 +4,7 @@ using static CommonLib.Utils.Compression;
 
 namespace SF3.RawData {
     public class CompressedData : ByteData, ICompressedData {
-        public CompressedData(ByteArray byteArray, int? maxDecompressedSize = null) : base(byteArray) {
+        public CompressedData(IByteArray byteArray, int? maxDecompressedSize = null) : base(byteArray) {
             if (byteArray == null)
                 throw new NullReferenceException(nameof(byteArray));
 
