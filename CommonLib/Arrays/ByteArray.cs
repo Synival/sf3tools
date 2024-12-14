@@ -85,7 +85,7 @@ namespace CommonLib.Arrays {
             else {
                 var bytesToRemove = -bytesToAddOrRemove;
                 if (invokeEvents)
-                    PreRangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, bytesToRemove, 0, 0, false));
+                    PreRangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, 0, 0, -bytesToRemove, false));
 
                 // Copy data after the removed data.
                 var destPos = offset;
@@ -96,7 +96,7 @@ namespace CommonLib.Arrays {
                         _ = memcpy((IntPtr) dest + destPos, (IntPtr) src + srcPos, copySize);
                 }
                 if (invokeEvents)
-                    RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, bytesToRemove, 0, 0, false));
+                    RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, 0, 0, -bytesToRemove, false));
             }
             return Bytes.Length;
         }

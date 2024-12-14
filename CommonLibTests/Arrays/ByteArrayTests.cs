@@ -183,6 +183,32 @@ namespace CommonLib.Tests.Arrays {
         }
 
         [TestMethod]
+        public void ExpandOrContractAt_Contract_TriggersModified() {
+            var byteArray = new ByteArray(10);
+            for (var i = 0; i < 10; i++)
+                byteArray[i] = (byte) i;
+
+            var modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
+                args = a;
+            };
+            byteArray.ExpandOrContractAt(3, -4);
+
+            Assert.AreEqual(1, modifiedCount);
+            Assert.IsNotNull(args);
+
+            Assert.AreEqual(3, args.Offset);
+            Assert.AreEqual(0, args.Length);
+            Assert.AreEqual(-4, args.LengthChange);
+            Assert.AreEqual(0, args.OffsetChange);
+            Assert.IsFalse(args.Moved);
+            Assert.IsTrue(args.Resized);
+            Assert.IsFalse(args.Modified);
+        }
+
+        [TestMethod]
         public void ExpandOrContractAt_Expand_HasExpectedSizeAndData() {
             var byteArray = new ByteArray(10);
             for (var i = 0; i < 10; i++)
@@ -194,6 +220,32 @@ namespace CommonLib.Tests.Arrays {
             var expectedData = new byte[]{0, 1, 2, 0, 0, 0, 0, 0, 3, 4, 5, 6, 7, 8, 9};
             for (var i = 0; i < 15; i++)
                 Assert.AreEqual(expectedData[i], byteArray[i]);
+        }
+
+        [TestMethod]
+        public void ExpandOrContractAt_Expand_TriggersModified() {
+            var byteArray = new ByteArray(10);
+            for (var i = 0; i < 10; i++)
+                byteArray[i] = (byte) i;
+
+            var modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
+                args = a;
+            };
+            byteArray.ExpandOrContractAt(3, 5);
+
+            Assert.AreEqual(1, modifiedCount);
+            Assert.IsNotNull(args);
+
+            Assert.AreEqual(3, args.Offset);
+            Assert.AreEqual(0, args.Length);
+            Assert.AreEqual(5, args.LengthChange);
+            Assert.AreEqual(0, args.OffsetChange);
+            Assert.IsFalse(args.Moved);
+            Assert.IsTrue(args.Resized);
+            Assert.IsFalse(args.Modified);
         }
 
         [TestMethod]
