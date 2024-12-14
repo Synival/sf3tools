@@ -14,6 +14,32 @@ namespace CommonLib.Tests.Arrays {
         }
 
         [TestMethod]
+        public void IndexerSet_TriggersModifiedEvent() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            int modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            arraySegment.RangeModified += (s, a) => {
+                modifiedCount++;
+                args = a;
+            };
+
+            arraySegment[2] = 100;
+
+            Assert.AreEqual(1, modifiedCount);
+            Assert.IsNotNull(args);
+
+            Assert.AreEqual(2, args.Offset);
+            Assert.AreEqual(1, args.Length);
+            Assert.AreEqual(0, args.LengthChange);
+            Assert.AreEqual(0, args.OffsetChange);
+            Assert.IsFalse(args.Moved);
+            Assert.IsFalse(args.Resized);
+            Assert.IsTrue(args.Modified);
+        }
+
+        [TestMethod]
         public void IndexerSet_OutOfRange_ThrowsException() {
             var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
             var arraySegment = new ByteArraySegment(parentArray, 3, 4);
@@ -39,6 +65,31 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => arraySegment[-1]);
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => arraySegment[4]);
+        }
+
+        [TestMethod]
+        public void ParentIndexerSet_WithinAndOutOfRange_TriggersExpectedModifiedEvents() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            for (int i = 0; i < parentArray.Length; i++)
+                parentArray[i] = (byte) (100 + i);
+
+            Assert.AreEqual(4, args.Count);
+
+            for (int i = 0; i < args.Count; i++) {
+                var a = args[i];
+                Assert.AreEqual(i, a.Offset);
+                Assert.AreEqual(1, a.Length);
+                Assert.AreEqual(0, a.LengthChange);
+                Assert.AreEqual(0, a.OffsetChange);
+                Assert.IsFalse(a.Moved);
+                Assert.IsFalse(a.Resized);
+                Assert.IsTrue(a.Modified);
+            }
         }
 
         [TestMethod]
