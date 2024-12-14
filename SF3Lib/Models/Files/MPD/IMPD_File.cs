@@ -4,6 +4,16 @@ using SF3.Models.Tables.MPD;
 using SF3.RawData;
 
 namespace SF3.Models.Files.MPD {
+    public class Chunk3Frame {
+        public Chunk3Frame(int offset, CompressedData data) {
+            Offset = offset;
+            Data = data;
+        }
+
+        public int Offset { get; }
+        public CompressedData Data { get; }
+    };
+
     public interface IMPD_File : IScenarioTableFile {
         /// <summary>
         /// Recompresses compressed chunks, updating the ChunkHeader however necessary.
@@ -31,9 +41,9 @@ namespace SF3.Models.Files.MPD {
         TextureAnimationTable TextureAnimations { get; }
 
         /// <summary>
-        /// The compressed data for each texture in Chunk3, keyed by its offset.
+        /// The compressed data for each texture in Chunk3, paired with an offset.
         /// </summary>
-        Dictionary<uint, CompressedData> Chunk3Frames { get; }
+        List<Chunk3Frame> Chunk3Frames { get; }
 
         TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; }
         TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; }

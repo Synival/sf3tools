@@ -29,10 +29,8 @@ namespace SF3.Tests.Models.Files {
                 }
             }
             foreach (var c3fKv in mpdFile.Chunk3Frames) {
-                if (c3fKv.Value != null) {
-                    Assert.IsFalse(c3fKv.Value.IsModified);
-                    Assert.IsFalse(c3fKv.Value.DecompressedData.IsModified);
-                }
+                Assert.IsFalse(c3fKv.Data.IsModified);
+                Assert.IsFalse(c3fKv.Data.DecompressedData.IsModified);
             }
         }
 

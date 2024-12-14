@@ -141,17 +141,8 @@ namespace SF3.MPD_Editor.Forms {
 
                                 if (model is TextureModel tm)
                                     tm.RawImageData16Bit = newImageData;
-                                else if (model is FrameModel fm) {
-                                    _ = fm.UpdateTexture(File.Chunk3Frames[fm.CompressedTextureOffset].DecompressedData, newImageData);
-
-                                    var sharedTextures = File.TextureAnimations.Rows
-                                        .SelectMany(x => x.Frames)
-                                        .Where(x => x != fm && x.CompressedTextureOffset == fm.CompressedTextureOffset)
-                                        .ToArray();
-
-                                    foreach (var st in sharedTextures)
-                                        st.FetchAndCacheTexture(File.Chunk3Frames[st.CompressedTextureOffset].DecompressedData, TexturePixelFormat.ABGR1555);
-                                }
+                                else if (model is FrameModel fm)
+                                    _ = fm.UpdateTexture(File.Chunk3Frames.First(x => x.Offset == fm.CompressedTextureOffset).Data.DecompressedData, newImageData);
                                 else
                                     throw new NotSupportedException("Not sure what this is, but it's not supported here");
                             }

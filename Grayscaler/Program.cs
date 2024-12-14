@@ -8,7 +8,7 @@ using SF3.Types;
 
 namespace Grayscaler {
     public class Program {
-        private const string c_path = "";
+        private const string c_path = "../../../Private";
                                    // ^
                                    //  `-- Enter the path for all your MPD files here!
 
@@ -52,7 +52,8 @@ namespace Grayscaler {
                     tc.RawImageData16Bit = MakeTextureGrayscale(tc.Texture.ImageData16Bit);
 
                 foreach (var tc in textures2) {
-                    var frameData = mpdFile.Chunk3Frames[tc.CompressedTextureOffset].DecompressedData;
+                    // TODO: This shouldn't have to go through the trouble of finding the frameData
+                    var frameData = mpdFile.Chunk3Frames.First(x => x.Offset == tc.CompressedTextureOffset).Data.DecompressedData;
                     _ = tc.UpdateTexture(frameData, MakeTextureGrayscale(tc.Texture.ImageData16Bit));
                 }
 

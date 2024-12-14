@@ -47,8 +47,8 @@ namespace SF3.Tests.Compression {
                             .ToDictionary(x => x.Key, x => x.First());
 
                         foreach (var c3fKv in mpdFile.Chunk3Frames) {
-                            var frame = allFrames[c3fKv.Key];
-                            var compressedByteArray = c3fKv.Value.GetDataCopy();
+                            var frame = allFrames[(uint) c3fKv.Offset];
+                            var compressedByteArray = c3fKv.Data.GetDataCopy();
                             var bytesPerPixel = (frame.AssumedPixelFormat == TexturePixelFormat.ABGR1555) ? 2 : 1;
                             var expectedUncompressedDataSize = frame.Width * frame.Height * bytesPerPixel;
 
