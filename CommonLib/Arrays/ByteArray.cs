@@ -160,11 +160,15 @@ namespace CommonLib.Arrays {
             bool needsResize = length != data.Length;
             bool needsModify = false;
             if (data.Length > 0) {
+                var compareSize = Math.Min(length, data.Length);
                 unsafe {
                     fixed (byte* dest = Bytes, src = data) {
                         var destPtr = (IntPtr) dest + offset;
                         var srcPtr = (IntPtr) src;
-                        needsModify = (memcmp(destPtr, srcPtr, data.Length) != 0);
+                        needsModify = (memcmp(destPtr, srcPtr, compareSize) != 0);
+
+                        for (var i = compareSize; !needsModify && i < data.Length; i++)
+                            needsModify = src[i] != 0;
                     }
                 }
             }

@@ -459,5 +459,29 @@ namespace CommonLib.Tests.Arrays {
             Assert.IsTrue(args.Resized);
             Assert.IsTrue(args.Modified);
         }
+
+        [TestMethod]
+        public void SetDataAtTo_WithNonZeroNewBytes_TriggersModified() {
+            var byteArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+            int modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
+                args = a;
+            };
+            byteArray.SetDataAtTo(4, 3, [4, 5, 6, 0, 0, 1]);
+
+            Assert.AreEqual(1, modifiedCount);
+            Assert.IsNotNull(args);
+
+            Assert.AreEqual(4, args.Offset);
+            Assert.AreEqual(3, args.Length);
+            Assert.AreEqual(3, args.LengthChange);
+            Assert.AreEqual(0, args.OffsetChange);
+            Assert.IsFalse(args.Moved);
+            Assert.IsTrue(args.Resized);
+            Assert.IsTrue(args.Modified);
+        }
     }
 }
