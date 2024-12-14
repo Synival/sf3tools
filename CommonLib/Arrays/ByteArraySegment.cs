@@ -164,8 +164,22 @@ namespace CommonLib.Arrays {
                 ParentArray.ResizeAt(Offset + offset, currentSize, newSize);
         }
 
-        public void SetDataAtTo(int offset, int length, byte[] data) => throw new NotImplementedException();
-        public void SetDataTo(byte[] data) => throw new NotImplementedException();
+        public void SetDataTo(byte[] data) {
+            using (var insideIncr = InsideIncr())
+                ParentArray.SetDataAtTo(Offset, Length, data);
+        }
+
+        public void SetDataAtTo(int offset, int length, byte[] data) {
+            if (offset < 0 || offset > Length)
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            if (length < 0 || offset + length > Length)
+                throw new ArgumentOutOfRangeException(nameof(length));
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+
+            using (var insideIncr = InsideIncr())
+                ParentArray.SetDataAtTo(Offset + offset, length, data);
+        }
 
         public void Dispose() {
             ParentArray.PreRangeModified -= OnParentPreRangeModified;

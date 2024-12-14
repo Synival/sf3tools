@@ -798,5 +798,79 @@ namespace CommonLib.Tests.Arrays {
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual(i + 4, dataCopy[i]);
         }
+
+        [TestMethod]
+        public void SetDataTo_UpdatesDataAndResizesParent() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            arraySegment.SetDataTo([10, 20, 30, 40, 50, 60]);
+
+            Assert.AreEqual(6, arraySegment.Length);
+            Assert.AreEqual(12, parentArray.Length);
+
+            for (var i = 0; i < arraySegment.Length; i++)
+                Assert.AreEqual((i + 1) * 10, arraySegment[i]);
+        }
+
+        [TestMethod]
+        public void SetDataTo_TriggersModified() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            arraySegment.SetDataTo([10, 20, 30, 40, 50, 60]);
+
+            var a = args[0];
+            Assert.AreEqual(0, a.Offset);
+            Assert.AreEqual(4, a.Length);
+            Assert.AreEqual(2, a.LengthChange);
+            Assert.AreEqual(0, a.OffsetChange);
+            Assert.IsFalse(a.Moved);
+            Assert.IsTrue(a.Resized);
+            Assert.IsTrue(a.Modified);
+        }
+
+        [TestMethod]
+        public void SetDataAtTo_UpdatesDataAndResizesParent() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            arraySegment.SetDataAtTo(1, 2, [10, 20, 30, 40, 50, 60]);
+
+            Assert.AreEqual(8, arraySegment.Length);
+            Assert.AreEqual(14, parentArray.Length);
+
+            Assert.AreEqual( 3, arraySegment[0]);
+            Assert.AreEqual(10, arraySegment[1]);
+            Assert.AreEqual(20, arraySegment[2]);
+            Assert.AreEqual(30, arraySegment[3]);
+            Assert.AreEqual(40, arraySegment[4]);
+            Assert.AreEqual(50, arraySegment[5]);
+            Assert.AreEqual(60, arraySegment[6]);
+            Assert.AreEqual( 6, arraySegment[7]);
+        }
+
+        [TestMethod]
+        public void SetDataAtTo_TriggersModified() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            arraySegment.SetDataAtTo(1, 2, [10, 20, 30, 40, 50, 60]);
+
+            var a = args[0];
+            Assert.AreEqual(1, a.Offset);
+            Assert.AreEqual(2, a.Length);
+            Assert.AreEqual(4, a.LengthChange);
+            Assert.AreEqual(0, a.OffsetChange);
+            Assert.IsFalse(a.Moved);
+            Assert.IsTrue(a.Resized);
+            Assert.IsTrue(a.Modified);
+        }
     }
 }
