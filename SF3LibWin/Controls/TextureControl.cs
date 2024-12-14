@@ -6,6 +6,7 @@ namespace SF3.Win.Controls {
     public partial class TextureControl : UserControl {
         public TextureControl() {
             InitializeComponent();
+            DoubleBuffered = true;
         }
 
         protected override void OnPaint(PaintEventArgs e) {
