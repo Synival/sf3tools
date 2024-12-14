@@ -133,8 +133,24 @@ namespace CommonLib.Arrays {
         public int ExpandOrContractAt(int offset, int bytesToAddOrRemove) => throw new NotImplementedException();
         public byte[] GetDataCopy() => throw new NotImplementedException();
         public byte[] GetDataCopyAt(int offset, int length) => throw new NotImplementedException();
-        public void Resize(int size) => throw new NotImplementedException();
-        public void ResizeAt(int offset, int currentSize, int newSize) => throw new NotImplementedException();
+
+        public void Resize(int size) {
+            using (var insideIncr = InsideIncr())
+                ParentArray.ResizeAt(Offset, Length, size);
+        }
+
+        public void ResizeAt(int offset, int currentSize, int newSize) {
+            if (offset < 0 || offset > Length)
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            if (currentSize < 0 || offset + currentSize > Length)
+                throw new ArgumentOutOfRangeException(nameof(currentSize));
+            if (newSize < 0)
+                throw new ArgumentOutOfRangeException(nameof(newSize));
+
+            using (var insideIncr = InsideIncr())
+                ParentArray.ResizeAt(Offset + offset, currentSize, newSize);
+        }
+
         public void SetDataAtTo(int offset, int length, byte[] data) => throw new NotImplementedException();
         public void SetDataTo(byte[] data) => throw new NotImplementedException();
 
@@ -145,5 +161,7 @@ namespace CommonLib.Arrays {
 
         public event ByteArrayRangeModifiedHandler PreRangeModified;
         public event ByteArrayRangeModifiedHandler RangeModified;
+
+        private ScopeGuard InsideIncr() => new ScopeGuard(() => _resizingInside++, () => _resizingInside--);
     }
 }

@@ -97,14 +97,100 @@ namespace CommonLib.Tests.Arrays {
         public void Resize_Contract_UpdatesLengthAndContractsParent() {
             var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
             var arraySegment = new ByteArraySegment(parentArray, 3, 4);
-            throw new NotImplementedException();
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            arraySegment.Resize(2);
+
+            Assert.AreEqual(3, arraySegment.Offset);
+            Assert.AreEqual(2, arraySegment.Length);
+            Assert.AreEqual(8, parentArray.Length);
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(0, a.Offset);
+            Assert.AreEqual(4, a.Length);
+            Assert.AreEqual(0, a.OffsetChange);
+            Assert.AreEqual(-2, a.LengthChange);
+            Assert.AreEqual(false, a.Moved);
+            Assert.AreEqual(true, a.Resized);
+            Assert.AreEqual(false, a.Modified);
         }
 
         [TestMethod]
         public void Resize_Expand_UpdatesLengthAndExpandsParent() {
             var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
             var arraySegment = new ByteArraySegment(parentArray, 3, 4);
-            throw new NotImplementedException();
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            arraySegment.Resize(6);
+
+            Assert.AreEqual(3, arraySegment.Offset);
+            Assert.AreEqual(6, arraySegment.Length);
+            Assert.AreEqual(12, parentArray.Length);
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(0, a.Offset);
+            Assert.AreEqual(4, a.Length);
+            Assert.AreEqual(0, a.OffsetChange);
+            Assert.AreEqual(2, a.LengthChange);
+            Assert.AreEqual(false, a.Moved);
+            Assert.AreEqual(true, a.Resized);
+            Assert.AreEqual(false, a.Modified);
+        }
+
+        [TestMethod]
+        public void ResizeAt_Contract_UpdatesLengthAndContractsParent() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            arraySegment.ResizeAt(1, 2, 0);
+
+            Assert.AreEqual(3, arraySegment.Offset);
+            Assert.AreEqual(2, arraySegment.Length);
+            Assert.AreEqual(8, parentArray.Length);
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(1, a.Offset);
+            Assert.AreEqual(2, a.Length);
+            Assert.AreEqual(0, a.OffsetChange);
+            Assert.AreEqual(-2, a.LengthChange);
+            Assert.AreEqual(false, a.Moved);
+            Assert.AreEqual(true, a.Resized);
+            Assert.AreEqual(false, a.Modified);
+        }
+
+        [TestMethod]
+        public void ResizeAt_Expand_UpdatesLengthAndContractsParent() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            arraySegment.ResizeAt(1, 2, 4);
+
+            Assert.AreEqual(3, arraySegment.Offset);
+            Assert.AreEqual(6, arraySegment.Length);
+            Assert.AreEqual(12, parentArray.Length);
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(1, a.Offset);
+            Assert.AreEqual(2, a.Length);
+            Assert.AreEqual(0, a.OffsetChange);
+            Assert.AreEqual(2, a.LengthChange);
+            Assert.AreEqual(false, a.Moved);
+            Assert.AreEqual(true, a.Resized);
+            Assert.AreEqual(false, a.Modified);
         }
 
         [TestMethod]
