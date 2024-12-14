@@ -191,21 +191,23 @@ namespace SF3.Models.Files.MPD {
                     var uncompressedBytes16 = frame.Width * frame.Height * 2;
 
                     CompressedData newData = null;
+                    IByteArray byteArray = null;
+
                     try {
                         var compressedBytes = Math.Min(uncompressedBytes16 + 8, ChunkData[3].Length - (int) offset);
-                        var bytes = ChunkData[3].GetDataCopyAt((int) offset, compressedBytes);
-                        newData = new CompressedData(new ByteArray(bytes), uncompressedBytes16);
+                        byteArray = new ByteArray(ChunkData[3].GetDataCopyAt((int) offset, compressedBytes));
+                        newData = new CompressedData(byteArray, uncompressedBytes16);
                         frame.FetchAndCacheTexture(newData.DecompressedData, TexturePixelFormat.ABGR1555);
                     }
                     catch {
                         var compressedBytes = Math.Min(uncompressedBytes8 + 8, ChunkData[3].Length - (int) offset);
-                        var bytes = ChunkData[3].GetDataCopyAt((int) offset, compressedBytes);
-                        newData = new CompressedData(new ByteArray(bytes), uncompressedBytes8);
+                        byteArray = new ByteArray(ChunkData[3].GetDataCopyAt((int) offset, compressedBytes));
+                        newData = new CompressedData(byteArray, uncompressedBytes8);
                         frame.FetchAndCacheTexture(newData.DecompressedData, TexturePixelFormat.UnknownPalette);
                     }
 
                     if (newData != null && frame.Texture != null) {
-                        _ = newData.Recompress(); // Sets the correct compressed size, which wasn't available before
+                        byteArray.Resize(newData.LastDataReadForDecompress.Value); // Sets the correct compressed size, which wasn't available before
                         newData.IsModified = false;
                         chunk3Textures.Add(offset, frame.Texture);
                         Chunk3Frames.Add(offset, newData);

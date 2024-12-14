@@ -39,7 +39,9 @@ namespace SF3.RawData {
 
         private void UpdateDecompressedData() {
             var bytes = Data.GetDataCopy();
-            var decompressedData = Decompress(bytes, MaxDecompressedSize);
+            var decompressedData = Decompress(bytes, MaxDecompressedSize, out var lastDataReadForDecompress);
+            LastDataReadForDecompress = lastDataReadForDecompress;
+
             if (DecompressedData == null) {
                 DecompressedData = new ByteData(new ByteArray(decompressedData));
 
@@ -106,6 +108,7 @@ namespace SF3.RawData {
         }
 
         public int? MaxDecompressedSize { get; }
+        public int? LastDataReadForDecompress { get; private set; } = null;
 
         public event EventHandler NeedsRecompressionChanged;
     }

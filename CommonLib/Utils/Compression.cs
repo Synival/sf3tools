@@ -7,13 +7,16 @@ namespace CommonLib.Utils {
     /// Utilities for compression and decompression. Used for MPD chunks, for example.
     /// </summary>
     public static class Compression {
+        public static byte[] Decompress(byte[] data)
+            => Decompress(data, null, out _);
+
         /// <summary>
         /// Takes a compressed byte array and returns its decompressed data.
         /// All credit to AggroCrag for the original decompression code!
         /// </summary>
         /// <param name="data">The compressed data to decompress.</param>
         /// <returns>A decompressed set of bytes.</returns>
-        public static byte[] Decompress(byte[] data, int? maxOutput = null) {
+        public static byte[] Decompress(byte[] data, int? maxOutput, out int bytesRead) {
             if (data.Length % 2 == 1)
                 throw new ArgumentException(nameof(data) + ": must be an even number of bytes");
 
@@ -60,6 +63,7 @@ namespace CommonLib.Utils {
                 }
             }
 
+            bytesRead = pos;
             return outputArray.Take(outputPosition).ToArray();
         }
 
