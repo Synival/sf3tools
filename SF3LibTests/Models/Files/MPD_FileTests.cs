@@ -102,11 +102,8 @@ namespace SF3.Tests.Models.Files {
                 if (chunkData == null)
                     continue;
 
-                if (!chunkData.IsCompressed) {
-                    // NOTE: ChunkData[3] is re-written, so 'IsModified' will be 'true' in this case.
-                    var expectedResult = i != 3 ? false : true;
-                    Assert.AreEqual(expectedResult, chunkData.IsModified);
-                }
+                if (!chunkData.IsCompressed)
+                    Assert.AreEqual(false, chunkData.IsModified);
                 else {
                     // NOTE: Recompressing an actual .MPD file uses a different algorithm than originally used
                     //       so the content of the chunks will have been modified from the original test data.
@@ -196,7 +193,7 @@ namespace SF3.Tests.Models.Files {
                 if (chunkData.IsCompressed)
                     Assert.IsFalse(chunkData.DecompressedData.IsModified);
 
-                var expectedModifiedFlag = i == 3 || i == 6;
+                var expectedModifiedFlag = i == 6;
                 Assert.AreEqual(expectedModifiedFlag, chunkData.IsModified);
             }
 
