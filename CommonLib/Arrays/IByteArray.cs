@@ -81,6 +81,7 @@ namespace CommonLib.Arrays {
 
         byte this[int index] { get; set; }
 
+        event ByteArrayRangeModifiedHandler PreRangeModified;
         event ByteArrayRangeModifiedHandler RangeModified;
     }
 }

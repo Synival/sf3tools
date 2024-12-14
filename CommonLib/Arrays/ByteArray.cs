@@ -68,6 +68,8 @@ namespace CommonLib.Arrays {
 
             if (bytesToAddOrRemove > 0) {
                 var bytesToAdd = bytesToAddOrRemove;
+                if (invokeEvents)
+                    PreRangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, 0, 0, bytesToAdd, false));
 
                 // Copy data after the freshly-added padded 0's.
                 var destPos = offset + bytesToAdd;
@@ -82,6 +84,8 @@ namespace CommonLib.Arrays {
             }
             else {
                 var bytesToRemove = -bytesToAddOrRemove;
+                if (invokeEvents)
+                    PreRangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, bytesToRemove, 0, 0, false));
 
                 // Copy data after the removed data.
                 var destPos = offset;
@@ -111,13 +115,16 @@ namespace CommonLib.Arrays {
                 return false;
 
             var sizeDiff = newSize - currentSize;
+            if (invokeEvents)
+                PreRangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, currentSize, 0, sizeDiff, false));
+
             if (sizeDiff >= 0)
                 _ = ExpandOrContractAtReal(offset + currentSize, sizeDiff, false);
             else
                 _ = ExpandOrContractAtReal(offset + currentSize + sizeDiff, sizeDiff, false);
 
             if (invokeEvents)
-                RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, currentSize, 0, newSize - currentSize, false));
+                RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, currentSize, 0, sizeDiff, false));
 
             return true;
         }
@@ -139,20 +146,10 @@ namespace CommonLib.Arrays {
             return bytes;
         }
 
-        public void SetDataTo(byte[] data) {
-            if (data == null)
-                throw new ArgumentNullException(nameof(data));
+        public void SetDataTo(byte[] data)
+            => SetDataAtTo(0, Bytes.Length, data);
 
-            var oldLength = Bytes.Length;
-            var wasModified = SetDataAtToReal(0, oldLength, data, false);
-            if (oldLength != data.Length || wasModified)
-                RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(0, oldLength, 0, data.Length - oldLength, wasModified));
-        }
-
-        public void SetDataAtTo(int offset, int length, byte[] data)
-            => SetDataAtToReal(offset, length, data, true);
-
-        public bool SetDataAtToReal(int offset, int length, byte[] data, bool invokeEvents) {
+        public void SetDataAtTo(int offset, int length, byte[] data) {
             if (offset < 0 || offset > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
             if (length < 0 || offset + length > Bytes.Length)
@@ -160,26 +157,36 @@ namespace CommonLib.Arrays {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
-            bool wasResized = ResizeAtReal(offset, length, data.Length, false);
-            bool wasModified = false;
+            bool needsResize = length != data.Length;
+            bool needsModify = false;
             if (data.Length > 0) {
                 unsafe {
                     fixed (byte* dest = Bytes, src = data) {
                         var destPtr = (IntPtr) dest + offset;
                         var srcPtr = (IntPtr) src;
-
-                        if (memcmp(destPtr, srcPtr, data.Length) != 0) {
-                            _ = memcpy((IntPtr) dest + offset, (IntPtr) src, data.Length);
-                            wasModified = true;
-                        }
+                        needsModify = (memcmp(destPtr, srcPtr, data.Length) != 0);
                     }
                 }
             }
 
-            if (invokeEvents && (wasResized || wasModified))
-                RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, length, 0, data.Length - length, wasModified));
+            if (!needsResize && !needsModify)
+                return;
 
-            return wasModified;
+            PreRangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, length, 0, data.Length - length, needsModify));
+
+            _ = ResizeAtReal(offset, length, data.Length, false);
+            if (data.Length > 0) {
+                unsafe {
+                    fixed (byte* dest = Bytes, src = data) {
+                        var destPtr = (IntPtr) dest + offset;
+                        var srcPtr = (IntPtr) src;
+                        if (needsModify)
+                            _ = memcpy(destPtr, srcPtr, data.Length);
+                    }
+                }
+            }
+
+            RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, length, 0, data.Length - length, needsModify));
         }
 
         public void Dispose() { }
@@ -190,6 +197,7 @@ namespace CommonLib.Arrays {
             get => Bytes[index];
             set {
                 if (Bytes[index] != value) {
+                    PreRangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(index, 1, 0, 0, true));
                     Bytes[index] = value;
                     RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(index, 1, 0, 0, true));
                 }
@@ -198,6 +206,7 @@ namespace CommonLib.Arrays {
 
         private byte[] Bytes { get; set; }
 
+        public event ByteArrayRangeModifiedHandler PreRangeModified;
         public event ByteArrayRangeModifiedHandler RangeModified;
     }
 }

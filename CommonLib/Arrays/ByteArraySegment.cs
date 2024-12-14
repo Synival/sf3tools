@@ -15,7 +15,8 @@ namespace CommonLib.Arrays {
             Offset = offset;
             Length = length;
 
-            parentArray.RangeModified += OnParentRangeModified;
+            parentArray.PreRangeModified += OnParentPreRangeModified;
+            parentArray.RangeModified    += OnParentRangeModified;
         }
 
         /// <summary>
@@ -26,7 +27,13 @@ namespace CommonLib.Arrays {
         /// </summary>
         private int _resizingInside = 0;
 
-        public void OnParentRangeModified(object sender, ByteArrayRangeModifiedArgs args) {
+        public void OnParentPreRangeModified(object sender, ByteArrayRangeModifiedArgs args)
+            => OnParentRangeModifiedReal(sender, args, isPre: true);
+
+        public void OnParentRangeModified(object sender, ByteArrayRangeModifiedArgs args)
+            => OnParentRangeModifiedReal(sender, args, isPre: false);
+
+        public void OnParentRangeModifiedReal(object sender, ByteArrayRangeModifiedArgs args, bool isPre) {
             // TODO: moving!
             if (args.Moved)
                 throw new NotImplementedException();
@@ -59,9 +66,9 @@ namespace CommonLib.Arrays {
                     return;
 
                 // If the change was before the ByteArraySegment start, just adjust the offset.
-                if (argEnd < Offset || (argEnd == Offset && _resizingInside == 0)) {
+                if (argEnd < 0 || (argEnd == 0 && _resizingInside == 0)) {
                     UpdateModifiedRange(0, Length);
-                    offsetChange = 0;
+                    offsetChange = args.LengthChange;
                     return;
                 }
 
@@ -96,16 +103,15 @@ namespace CommonLib.Arrays {
                 HandleModified();
 
             if (modifiedStart.HasValue && modifiedEnd.HasValue) {
-                Offset += offsetChange;
-                Length += lengthChange;
-
                 var modifiedLength = modifiedEnd.Value - modifiedStart.Value;
-                RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(
-                    modifiedStart.Value,
-                    modifiedLength,
-                    offsetChange,
-                    lengthChange,
-                    wasModified));
+
+                if (isPre)
+                    PreRangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(modifiedStart.Value, modifiedLength, offsetChange, lengthChange, wasModified));
+                else {
+                    Offset += offsetChange;
+                    Length += lengthChange;
+                    RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(modifiedStart.Value, modifiedLength, offsetChange, lengthChange, wasModified));
+                }
             }
         }
 
@@ -133,9 +139,11 @@ namespace CommonLib.Arrays {
         public void SetDataTo(byte[] data) => throw new NotImplementedException();
 
         public void Dispose() {
-            ParentArray.RangeModified -= OnParentRangeModified;
+            ParentArray.PreRangeModified -= OnParentPreRangeModified;
+            ParentArray.RangeModified    -= OnParentRangeModified;
         }
 
+        public event ByteArrayRangeModifiedHandler PreRangeModified;
         public event ByteArrayRangeModifiedHandler RangeModified;
     }
 }

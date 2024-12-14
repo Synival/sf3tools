@@ -1,4 +1,5 @@
 ﻿using CommonLib.Arrays;
+using CommonLib.Exceptions;
 
 namespace CommonLib.Tests.Arrays {
     [TestClass]
@@ -94,81 +95,303 @@ namespace CommonLib.Tests.Arrays {
 
         [TestMethod]
         public void Resize_Contract_UpdatesLengthAndContractsParent() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
             throw new NotImplementedException();
         }
 
         [TestMethod]
         public void Resize_Expand_UpdatesLengthAndExpandsParent() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
             throw new NotImplementedException();
         }
 
         [TestMethod]
         public void ParentContracted_BeforeBeginning_MovesSegment() {
-            throw new NotImplementedException();
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(0, 2, 0);
+
+            Assert.AreEqual(1, arraySegment.Offset);
+            Assert.AreEqual(4, arraySegment.Length);
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(0, a.Offset);
+            Assert.AreEqual(arraySegment.Length, a.Length);
+            Assert.AreEqual(-2, a.OffsetChange);
+            Assert.AreEqual(0, a.LengthChange);
+            Assert.AreEqual(true, a.Moved);
+            Assert.AreEqual(false, a.Resized);
+            Assert.AreEqual(false, a.Modified);
         }
 
         [TestMethod]
         public void ParentExpanded_BeforeBeginning_MovesSegment() {
-            throw new NotImplementedException();
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(0, 2, 4);
+
+            Assert.AreEqual(5, arraySegment.Offset);
+            Assert.AreEqual(4, arraySegment.Length);
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(0, a.Offset);
+            Assert.AreEqual(arraySegment.Length, a.Length);
+            Assert.AreEqual(2, a.OffsetChange);
+            Assert.AreEqual(0, a.LengthChange);
+            Assert.AreEqual(true, a.Moved);
+            Assert.AreEqual(false, a.Resized);
+            Assert.AreEqual(false, a.Modified);
         }
 
         [TestMethod]
         public void ParentContracted_AtBeginning_MovesSegment() {
-            throw new NotImplementedException();
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(0, 3, 1);
+
+            Assert.AreEqual(1, arraySegment.Offset);
+            Assert.AreEqual(4, arraySegment.Length);
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(0, a.Offset);
+            Assert.AreEqual(arraySegment.Length, a.Length);
+            Assert.AreEqual(-2, a.OffsetChange);
+            Assert.AreEqual(0, a.LengthChange);
+            Assert.AreEqual(true, a.Moved);
+            Assert.AreEqual(false, a.Resized);
+            Assert.AreEqual(false, a.Modified);
         }
 
         [TestMethod]
         public void ParentExpanded_AtBeginning_MovesSegment() {
-            throw new NotImplementedException();
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(0, 3, 5);
+
+            Assert.AreEqual(5, arraySegment.Offset);
+            Assert.AreEqual(4, arraySegment.Length);
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(0, a.Offset);
+            Assert.AreEqual(arraySegment.Length, a.Length);
+            Assert.AreEqual(2, a.OffsetChange);
+            Assert.AreEqual(0, a.LengthChange);
+            Assert.AreEqual(true, a.Moved);
+            Assert.AreEqual(false, a.Resized);
+            Assert.AreEqual(false, a.Modified);
         }
 
         [TestMethod]
         public void ParentContracted_AtEnd_DoesNothingToSegment() {
-            throw new NotImplementedException();
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(7, 3, 1);
+
+            Assert.AreEqual(3, arraySegment.Offset);
+            Assert.AreEqual(4, arraySegment.Length);
+
+            Assert.AreEqual(0, args.Count);
         }
 
         [TestMethod]
         public void ParentExpanded_AtEnd_DoesNothingToSegment() {
-            throw new NotImplementedException();
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(7, 3, 5);
+
+            Assert.AreEqual(3, arraySegment.Offset);
+            Assert.AreEqual(4, arraySegment.Length);
+
+            Assert.AreEqual(0, args.Count);
         }
 
         [TestMethod]
         public void ParentContracted_AfterEnd_DoesNothingToSegment() {
-            throw new NotImplementedException();
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(8, 2, 1);
+
+            Assert.AreEqual(3, arraySegment.Offset);
+            Assert.AreEqual(4, arraySegment.Length);
+
+            Assert.AreEqual(0, args.Count);
         }
 
         [TestMethod]
         public void ParentExpanded_AfterEnd_DoesNothingToSegment() {
-            throw new NotImplementedException();
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(8, 2, 5);
+
+            Assert.AreEqual(3, arraySegment.Offset);
+            Assert.AreEqual(4, arraySegment.Length);
+
+            Assert.AreEqual(0, args.Count);
+        }
+
+        [TestMethod]
+        public void ParentContracted_FullyInside_ResizesSegment() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(3, 4, 2);
+
+            Assert.AreEqual(3, arraySegment.Offset);
+            Assert.AreEqual(2, arraySegment.Length);
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(0, a.Offset);
+            Assert.AreEqual(4, a.Length);
+            Assert.AreEqual(0, a.OffsetChange);
+            Assert.AreEqual(-2, a.LengthChange);
+            Assert.AreEqual(false, a.Moved);
+            Assert.AreEqual(true, a.Resized);
+            Assert.AreEqual(false, a.Modified);
         }
 
         [TestMethod]
         public void ParentContracted_Inside_ResizesSegment() {
-            throw new NotImplementedException();
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(4, 2, 0);
+
+            Assert.AreEqual(3, arraySegment.Offset);
+            Assert.AreEqual(2, arraySegment.Length);
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(1, a.Offset);
+            Assert.AreEqual(2, a.Length);
+            Assert.AreEqual(0, a.OffsetChange);
+            Assert.AreEqual(-2, a.LengthChange);
+            Assert.AreEqual(false, a.Moved);
+            Assert.AreEqual(true, a.Resized);
+            Assert.AreEqual(false, a.Modified);
+        }
+
+        [TestMethod]
+        public void ParentExpanded_FullyInside_ResizesSegment() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(3, 4, 6);
+
+            Assert.AreEqual(3, arraySegment.Offset);
+            Assert.AreEqual(6, arraySegment.Length);
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(0, a.Offset);
+            Assert.AreEqual(4, a.Length);
+            Assert.AreEqual(0, a.OffsetChange);
+            Assert.AreEqual(2, a.LengthChange);
+            Assert.AreEqual(false, a.Moved);
+            Assert.AreEqual(true, a.Resized);
+            Assert.AreEqual(false, a.Modified);
         }
 
         [TestMethod]
         public void ParentExpanded_Inside_ResizesSegment() {
-            throw new NotImplementedException();
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(4, 2, 4);
+
+            Assert.AreEqual(3, arraySegment.Offset);
+            Assert.AreEqual(6, arraySegment.Length);
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(1, a.Offset);
+            Assert.AreEqual(2, a.Length);
+            Assert.AreEqual(0, a.OffsetChange);
+            Assert.AreEqual(2, a.LengthChange);
+            Assert.AreEqual(false, a.Moved);
+            Assert.AreEqual(true, a.Resized);
+            Assert.AreEqual(false, a.Modified);
         }
 
         [TestMethod]
         public void ParentContracted_SpanningBeginning_ThrowsExceptionAndAbortsResize() {
-            throw new NotImplementedException();
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var oldLength = parentArray.Length;
+
+            Assert.ThrowsException<InvalidByteArraySegmentRangeException>(() => parentArray.ResizeAt(0, 4, 5));
+            Assert.AreEqual(oldLength, parentArray.Length);
         }
 
         [TestMethod]
         public void ParentExpanded_SpanningBeginning_ThrowsExceptionAndAbortsResize() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
             throw new NotImplementedException();
         }
 
         [TestMethod]
         public void ParentContracted_SpanningEnd_ThrowsExceptionAndAbortsResize() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
             throw new NotImplementedException();
         }
 
         [TestMethod]
         public void ParentExpanded_SpanningEnd_ThrowsExceptionAndAbortsResize() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
             throw new NotImplementedException();
         }
     }
