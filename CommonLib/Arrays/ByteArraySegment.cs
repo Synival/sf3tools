@@ -181,6 +181,22 @@ namespace CommonLib.Arrays {
                 ParentArray.SetDataAtTo(Offset + offset, length, data);
         }
 
+        /// <summary>
+        /// Changes the offset and length of the ByteArraySegment without triggering any modification events.
+        /// </summary>
+        /// <param name="offset">The new Offset of the ByteArraySegment.</param>
+        /// <param name="length">The new Length of the ByteArraySegment.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if 'offset' or 'length' exceeds range of the parent array.</exception>
+        public void Redefine(int offset, int length) {
+            if (offset < 0 || offset > ParentArray.Length)
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            if (length < 0 || offset + length > ParentArray.Length)
+                throw new ArgumentOutOfRangeException(nameof(length));
+
+            Offset = offset;
+            Length = length;
+        }
+
         public void Dispose() {
             ParentArray.PreRangeModified -= OnParentPreRangeModified;
             ParentArray.RangeModified    -= OnParentRangeModified;
