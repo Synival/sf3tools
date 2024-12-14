@@ -21,7 +21,7 @@ namespace SF3.RawData {
 
         private void OnDataRangeModified(object sender, ByteArrayRangeModifiedArgs args) => IsModified = true;
 
-        protected IByteArray Data { get; private set; }
+        public IByteArray Data { get; private set; }
 
         public int Length => Data.Length;
 

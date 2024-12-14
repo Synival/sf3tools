@@ -77,6 +77,7 @@ namespace SF3.RawData {
         private IByteData ChildData { get; }
         public IByteData DecompressedData { get; }
 
+        public IByteArray Data => ChildData.Data;
         public int Length => ChildData.Length;
 
         public bool IsModified {
