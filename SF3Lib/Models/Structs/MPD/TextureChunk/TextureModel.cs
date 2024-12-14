@@ -1,4 +1,5 @@
 ﻿using System;
+using CommonLib.Arrays;
 using CommonLib.Attributes;
 using SF3.RawData;
 using SF3.Types;
@@ -120,10 +121,12 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 if (value.GetLength(0) != Width || value.GetLength(1) != Height)
                     throw new ArgumentException("Incoming data dimensions must match specified width/height");
 
-                var off = ImageDataOffset;
+                var off = 0;
+                var newData = new ByteData(new ByteArray(Width * Height));
                 for (var y = 0; y < Height; y++)
                     for (var x = 0; x < Width; x++)
-                        Data.SetByte(off++, value[x, y]);
+                        newData.SetByte(off++, value[x, y]);
+                Data.Data.SetDataAtTo(ImageDataOffset, newData.Length, newData.GetDataCopy());
 
                 FetchAndCacheTexture();
             }
@@ -151,13 +154,15 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 if (value.GetLength(0) != Width || value.GetLength(1) != Height)
                     throw new ArgumentException("Incoming data dimensions must match specified width/height");
 
-                var off = ImageDataOffset;
+                var off = 0;
+                var newData = new ByteData(new ByteArray(Width * Height * 2));
                 for (var y = 0; y < Height; y++) {
                     for (var x = 0; x < Width; x++) {
-                        Data.SetWord(off, value[x, y]);
+                        newData.SetWord(off, value[x, y]);
                         off += 2;
                     }
                 }
+                Data.Data.SetDataAtTo(ImageDataOffset, newData.Length, newData.GetDataCopy());
 
                 FetchAndCacheTexture();
             }
