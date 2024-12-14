@@ -37,9 +37,15 @@ namespace CommonLib.Arrays {
         }
 
         public void Resize(int size)
-            => ResizeAt(0, Bytes.Length, size);
+            => ResizeReal(size, true);
 
-        public int ExpandOrContractAt(int offset, int bytesToAddOrRemove) {
+        public bool ResizeReal(int size, bool invokeEvents)
+            => ResizeAtReal(0, Bytes.Length, size, invokeEvents);
+
+        public int ExpandOrContractAt(int offset, int bytesToAddOrRemove)
+            => ExpandOrContractAtReal(offset, bytesToAddOrRemove, true);
+
+        private int ExpandOrContractAtReal(int offset, int bytesToAddOrRemove, bool invokeEvents) {
             if (offset < 0 || offset > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
             if (bytesToAddOrRemove == 0)
@@ -71,6 +77,8 @@ namespace CommonLib.Arrays {
                     fixed (byte* dest = Bytes, src = oldBytes)
                         _ = memcpy((IntPtr) dest + destPos, (IntPtr) src + srcPos, copySize);
                 }
+                if (invokeEvents)
+                    RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, 0, 0, bytesToAdd, false));
             }
             else {
                 var bytesToRemove = -bytesToAddOrRemove;
@@ -83,25 +91,35 @@ namespace CommonLib.Arrays {
                     fixed (byte* dest = Bytes, src = oldBytes)
                         _ = memcpy((IntPtr) dest + destPos, (IntPtr) src + srcPos, copySize);
                 }
+                if (invokeEvents)
+                    RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, bytesToRemove, 0, 0, false));
             }
-
-            Resized?.Invoke(this, new ByteArrayResizedArgs(offset, bytesToAddOrRemove));
             return Bytes.Length;
         }
 
-        public void ResizeAt(int offset, int currentSize, int newSize) {
+        public void ResizeAt(int offset, int currentSize, int newSize)
+            => ResizeAtReal(offset, currentSize, newSize, true);
+
+        public bool ResizeAtReal(int offset, int currentSize, int newSize, bool invokeEvents) {
             if (offset < 0 || offset > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
             if (offset + currentSize > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(currentSize));
             if (newSize < 0)
                 throw new ArgumentOutOfRangeException(nameof(newSize));
+            if (currentSize == newSize)
+                return false;
 
             var sizeDiff = newSize - currentSize;
             if (sizeDiff >= 0)
-                ExpandOrContractAt(offset + currentSize, sizeDiff);
+                _ = ExpandOrContractAtReal(offset + currentSize, sizeDiff, false);
             else
-                ExpandOrContractAt(offset + currentSize + sizeDiff, sizeDiff);
+                _ = ExpandOrContractAtReal(offset + currentSize + sizeDiff, sizeDiff, false);
+
+            if (invokeEvents)
+                RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, currentSize, 0, newSize - currentSize, false));
+
+            return true;
         }
 
         public byte[] GetDataCopy() => (byte[]) Bytes.Clone();
@@ -122,16 +140,28 @@ namespace CommonLib.Arrays {
         }
 
         public void SetDataTo(byte[] data) {
-            Resize(data.Length);
-            SetDataAtTo(0, data);
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+
+            var oldLength = Bytes.Length;
+            var wasModified = SetDataAtToReal(0, oldLength, data, false);
+            if (oldLength != data.Length || wasModified)
+                RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(0, oldLength, 0, data.Length - oldLength, wasModified));
         }
 
-        public void SetDataAtTo(int offset, byte[] data) {
+        public void SetDataAtTo(int offset, int length, byte[] data)
+            => SetDataAtToReal(offset, length, data, true);
+
+        public bool SetDataAtToReal(int offset, int length, byte[] data, bool invokeEvents) {
             if (offset < 0 || offset > Bytes.Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
-            if (offset + data.Length > Bytes.Length)
-                throw new ArgumentOutOfRangeException(nameof(data));
+            if (length < 0 || offset + length > Bytes.Length)
+                throw new ArgumentOutOfRangeException(nameof(length));
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
 
+            bool wasResized = ResizeAtReal(offset, length, data.Length, false);
+            bool wasModified = false;
             unsafe {
                 fixed (byte* dest = Bytes, src = data) {
                     var destPtr = (IntPtr) dest + offset;
@@ -139,13 +169,15 @@ namespace CommonLib.Arrays {
 
                     if (memcmp(destPtr, srcPtr, data.Length) != 0) {
                         _ = memcpy((IntPtr) dest + offset, (IntPtr) src, data.Length);
-
-                        // This is technically wrong, since we don't know if all these bytes were modified,
-                        // but whatever, let's keep it simple.
-                        Modified?.Invoke(this, new ByteArrayModifiedArgs(offset, data.Length));
+                        wasModified = true;
                     }
                 }
             }
+
+            if (invokeEvents && (wasResized || wasModified))
+                RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, length, 0, data.Length - length, wasModified));
+
+            return wasModified;
         }
 
         public void Dispose() { }
@@ -157,14 +189,13 @@ namespace CommonLib.Arrays {
             set {
                 if (Bytes[index] != value) {
                     Bytes[index] = value;
-                    Modified?.Invoke(this, new ByteArrayModifiedArgs(index, 1));
+                    RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(index, 1, 0, 0, true));
                 }
             }
         }
 
         private byte[] Bytes { get; set; }
 
-        public event ByteArrayModifiedHandler Modified;
-        public event ByteArrayResizedHandler Resized;
+        public event ByteArrayRangeModifiedHandler RangeModified;
     }
 }

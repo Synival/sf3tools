@@ -1,43 +1,25 @@
 ﻿using System;
 
 namespace CommonLib.Arrays {
-    public class ByteArrayModifiedArgs {
-        public ByteArrayModifiedArgs(int offset, int length) {
-            Offset = offset;
-            Length = length;
+    public class ByteArrayRangeModifiedArgs {
+        public ByteArrayRangeModifiedArgs(int offset, int length, int offsetChange, int lengthChange, bool modified) {
+            Offset       = offset;
+            Length       = length;
+            OffsetChange = offsetChange;
+            LengthChange = lengthChange;
+            Modified     = modified;
         }
 
-        /// <summary>
-        /// The position at which bytes were modified.
-        /// </summary>
         public int Offset { get; }
-
-        /// <summary>
-        /// The number of bytes at this offset that were modified.
-        /// </summary>
         public int Length { get; }
+        public int OffsetChange { get; }
+        public bool Moved => OffsetChange != 0;
+        public int LengthChange { get; }
+        public bool Resized => LengthChange != 0;
+        public bool Modified { get; }
     }
 
-    public class ByteArrayResizedArgs {
-        public ByteArrayResizedArgs(int offset, int bytesAddedOrRemoved) {
-            Offset = offset;
-            BytesAddedOrRemoved = bytesAddedOrRemoved;
-        }
-
-        /// <summary>
-        /// The position at which bytes were added or removed.
-        /// </summary>
-        public int Offset { get; }
-
-        /// <summary>
-        /// The number of bytes added (positive) or removed (negative).
-        /// </summary>
-        public int BytesAddedOrRemoved { get; }
-    }
-
-    public delegate void ByteArrayModifiedHandler(object sender, ByteArrayModifiedArgs args);
-
-    public delegate void ByteArrayResizedHandler(object sender, ByteArrayResizedArgs args);
+    public delegate void ByteArrayRangeModifiedHandler(object sender, ByteArrayRangeModifiedArgs args);
 
     public interface IByteArray : IDisposable {
         /// <summary>
@@ -89,16 +71,16 @@ namespace CommonLib.Arrays {
         /// Replaces data at 'offset' to data supplied by 'data'.
         /// </summary>
         /// <param name="offset">The start position of the data to be replaced.</param>
+        /// <param name="length">The length of the data to be replaced.</param>
         /// <param name="data">The data that the byte array at point 'offset' should be replaced with.</param>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the offset is out of range or 'offset + data.Length'
         /// is greater than the length of the byte array.</exception>
-        void SetDataAtTo(int offset, byte[] data);
+        void SetDataAtTo(int offset, int length, byte[] data);
 
         int Length { get; }
 
         byte this[int index] { get; set; }
 
-        event ByteArrayModifiedHandler Modified;
-        event ByteArrayResizedHandler Resized;
+        event ByteArrayRangeModifiedHandler RangeModified;
     }
 }

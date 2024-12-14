@@ -30,17 +30,31 @@ namespace CommonLib.Tests.Arrays {
         public void Indexer_ChangesData_TriggersModified() {
             var byteArray = new ByteArray(10);
             var modifiedCount = 0;
-            byteArray.Modified += (s, a) => { modifiedCount++; };
 
-            byteArray[0] = 1;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
+                args = a;
+            };
+
+            byteArray[5] = 1;
             Assert.AreEqual(1, modifiedCount);
+            Assert.IsNotNull(args);
+
+            Assert.AreEqual(5, args.Offset);
+            Assert.AreEqual(1, args.Length);
+            Assert.AreEqual(0, args.LengthChange);
+            Assert.AreEqual(0, args.OffsetChange);
+            Assert.IsFalse(args.Moved);
+            Assert.IsFalse(args.Resized);
+            Assert.IsTrue(args.Modified);
         }
 
         [TestMethod]
         public void Indexer_DoesntChangeData_DoesntTriggerModified() {
             var byteArray = new ByteArray(10);
             var modifiedCount = 0;
-            byteArray.Modified += (s, a) => { modifiedCount++; };
+            byteArray.RangeModified += (s, a) => { modifiedCount++; };
 
             byteArray[0] = 0;
             Assert.AreEqual(0, modifiedCount);
@@ -94,17 +108,24 @@ namespace CommonLib.Tests.Arrays {
             for (var i = 0; i < 10; i++)
                 byteArray[i] = (byte) i;
 
-            var resizedCount = 0;
-            ByteArrayResizedArgs? args = null;
-            byteArray.Resized += (s, a) => {
-                resizedCount++;
+            var modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
                 args = a;
             };
             byteArray.ResizeAt(3, 5, 1);
 
-            Assert.AreEqual(1, resizedCount);
-            Assert.AreEqual(4, args?.Offset);
-            Assert.AreEqual(-4, args?.BytesAddedOrRemoved);
+            Assert.IsNotNull(args);
+            Assert.AreEqual(1, modifiedCount);
+
+            Assert.AreEqual(3, args.Offset);
+            Assert.AreEqual(5, args.Length);
+            Assert.AreEqual(-4, args.LengthChange);
+            Assert.AreEqual(0, args.OffsetChange);
+            Assert.IsFalse(args.Moved);
+            Assert.IsTrue(args.Resized);
+            Assert.IsFalse(args.Modified);
         }
 
         [TestMethod]
@@ -127,19 +148,25 @@ namespace CommonLib.Tests.Arrays {
             for (var i = 0; i < 10; i++)
                 byteArray[i] = (byte) i;
 
-            var resizedCount = 0;
-            ByteArrayResizedArgs? args = null;
-            byteArray.Resized += (s, a) => {
-                resizedCount++;
+            var modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
                 args = a;
             };
             byteArray.ResizeAt(3, 5, 10);
 
-            Assert.AreEqual(1, resizedCount);
-            Assert.AreEqual(8, args?.Offset);
-            Assert.AreEqual(5, args?.BytesAddedOrRemoved);
-        }
+            Assert.AreEqual(1, modifiedCount);
+            Assert.IsNotNull(args);
 
+            Assert.AreEqual(3, args.Offset);
+            Assert.AreEqual(5, args.Length);
+            Assert.AreEqual(5, args.LengthChange);
+            Assert.AreEqual(0, args.OffsetChange);
+            Assert.IsFalse(args.Moved);
+            Assert.IsTrue(args.Resized);
+            Assert.IsFalse(args.Modified);
+        }
 
         [TestMethod]
         public void ExpandOrContractAt_Contract_HasExpectedSizeAndData() {
@@ -199,43 +226,70 @@ namespace CommonLib.Tests.Arrays {
         [TestMethod]
         public void SetDataTo_WithSizeChanges_TriggersResizedAndModified() {
             var byteArray = new ByteArray([0, 1, 2, 3, 4, 5]);
-            int resizedCount = 0, modifiedCount = 0;
-            byteArray.Resized += (s, a) => { resizedCount++; };
-            byteArray.Modified += (s, a) => { modifiedCount++; };
+
+            int modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
+                args = a;
+            };
             byteArray.SetDataTo([0, 1, 2, 3, 4, 5, 6]);
 
-            Assert.AreEqual(1, resizedCount);
             Assert.AreEqual(1, modifiedCount);
+            Assert.IsNotNull(args);
+
+            Assert.AreEqual(0, args.Offset);
+            Assert.AreEqual(6, args.Length);
+            Assert.AreEqual(1, args.LengthChange);
+            Assert.AreEqual(0, args.OffsetChange);
+            Assert.IsFalse(args.Moved);
+            Assert.IsTrue(args.Resized);
+            Assert.IsTrue(args.Modified);
         }
 
         [TestMethod]
         public void SetDataTo_WithOnlyModifications_TriggersOnlyModified() {
             var byteArray = new ByteArray([0, 1, 2, 3, 4, 5]);
-            int resizedCount = 0, modifiedCount = 0;
-            byteArray.Resized += (s, a) => { resizedCount++; };
-            byteArray.Modified += (s, a) => { modifiedCount++; };
+
+            int modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
+                args = a;
+            };
             byteArray.SetDataTo([0, 1, 2, 3, 4, 50]);
 
-            Assert.AreEqual(0, resizedCount);
             Assert.AreEqual(1, modifiedCount);
+            Assert.IsNotNull(args);
+
+            Assert.AreEqual(0, args.Offset);
+            Assert.AreEqual(6, args.Length);
+            Assert.AreEqual(0, args.LengthChange);
+            Assert.AreEqual(0, args.OffsetChange);
+            Assert.IsFalse(args.Moved);
+            Assert.IsFalse(args.Resized);
+            Assert.IsTrue(args.Modified);
         }
 
         [TestMethod]
         public void SetDataTo_WithNoChanges_TriggersNothing() {
             var byteArray = new ByteArray([0, 1, 2, 3, 4, 5]);
-            int resizedCount = 0, modifiedCount = 0;
-            byteArray.Resized += (s, a) => { resizedCount++; };
-            byteArray.Modified += (s, a) => { modifiedCount++; };
+
+            int modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
+                args = a;
+            };
             byteArray.SetDataTo([0, 1, 2, 3, 4, 5]);
 
-            Assert.AreEqual(0, resizedCount);
             Assert.AreEqual(0, modifiedCount);
         }
 
         [TestMethod]
-        public void SetDataAtTo_SetsData() {
+        public void SetDataAtTo_WithChanges_ModifiesData() {
             var byteArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-            byteArray.SetDataAtTo(4, [50, 100, 150]);
+            byteArray.SetDataAtTo(4, 3, [50, 100, 150]);
             Assert.AreEqual(10, byteArray.Length);
 
             var expectedData = new byte[]{0, 1, 2, 3, 50, 100, 150, 7, 8, 9};
@@ -246,21 +300,112 @@ namespace CommonLib.Tests.Arrays {
         [TestMethod]
         public void SetDataAtTo_WithChanges_TriggersModified() {
             var byteArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-            var modifiedCount = 0;
-            byteArray.Modified += (s, a) => { modifiedCount++; };
-            byteArray.SetDataAtTo(4, [50, 100, 150]);
+
+            int modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
+                args = a;
+            };
+            byteArray.SetDataAtTo(4, 3, [50, 100, 150]);
 
             Assert.AreEqual(1, modifiedCount);
+            Assert.IsNotNull(args);
+
+            Assert.AreEqual(4, args.Offset);
+            Assert.AreEqual(3, args.Length);
+            Assert.AreEqual(0, args.LengthChange);
+            Assert.AreEqual(0, args.OffsetChange);
+            Assert.IsFalse(args.Moved);
+            Assert.IsFalse(args.Resized);
+            Assert.IsTrue(args.Modified);
         }
 
         [TestMethod]
         public void SetDataAtTo_WithoutChanges_DoesntTriggerModified() {
             var byteArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-            var modifiedCount = 0;
-            byteArray.Modified += (s, a) => { modifiedCount++; };
-            byteArray.SetDataAtTo(4, [4, 5, 6]);
+
+            int modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
+                args = a;
+            };
+            byteArray.SetDataAtTo(4, 3, [4, 5, 6]);
 
             Assert.AreEqual(0, modifiedCount);
+        }
+
+        [TestMethod]
+        public void SetDataAtTo_WithNoChangesAndExpanded_TriggersModified() {
+            var byteArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+            int modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
+                args = a;
+            };
+            byteArray.SetDataAtTo(4, 3, [4, 5, 6, 0, 0]);
+
+            Assert.AreEqual(1, modifiedCount);
+            Assert.IsNotNull(args);
+
+            Assert.AreEqual(4, args.Offset);
+            Assert.AreEqual(3, args.Length);
+            Assert.AreEqual(2, args.LengthChange);
+            Assert.AreEqual(0, args.OffsetChange);
+            Assert.IsFalse(args.Moved);
+            Assert.IsTrue(args.Resized);
+            Assert.IsFalse(args.Modified);
+        }
+
+        [TestMethod]
+        public void SetDataAtTo_WithNoChangesAndContracted_TriggersModified() {
+            var byteArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+            int modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
+                args = a;
+            };
+            byteArray.SetDataAtTo(4, 3, [4, 5]);
+
+            Assert.AreEqual(1, modifiedCount);
+            Assert.IsNotNull(args);
+
+            Assert.AreEqual(4, args.Offset);
+            Assert.AreEqual(3, args.Length);
+            Assert.AreEqual(-1, args.LengthChange);
+            Assert.AreEqual(0, args.OffsetChange);
+            Assert.IsFalse(args.Moved);
+            Assert.IsTrue(args.Resized);
+            Assert.IsFalse(args.Modified);
+        }
+
+        [TestMethod]
+        public void SetDataAtTo_WithChangesAndResize_TriggersModified() {
+            var byteArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+            int modifiedCount = 0;
+            ByteArrayRangeModifiedArgs? args = null;
+            byteArray.RangeModified += (s, a) => {
+                modifiedCount++;
+                args = a;
+            };
+            byteArray.SetDataAtTo(4, 3, [40, 50, 60, 70]);
+
+            Assert.AreEqual(1, modifiedCount);
+            Assert.IsNotNull(args);
+
+            Assert.AreEqual(4, args.Offset);
+            Assert.AreEqual(3, args.Length);
+            Assert.AreEqual(1, args.LengthChange);
+            Assert.AreEqual(0, args.OffsetChange);
+            Assert.IsFalse(args.Moved);
+            Assert.IsTrue(args.Resized);
+            Assert.IsTrue(args.Modified);
         }
     }
 }

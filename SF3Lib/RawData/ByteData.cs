@@ -14,14 +14,12 @@ namespace SF3.RawData {
                 throw new NullReferenceException(nameof(byteArray));
 
             Data = byteArray;
-            Data.Modified += OnDataModified;
-            Data.Resized += OnDataResized;
+            Data.RangeModified += OnDataRangeModified;
 
             InitData();
         }
 
-        private void OnDataResized(object sender, ByteArrayResizedArgs args) => IsModified = true;
-        private void OnDataModified(object sender, ByteArrayModifiedArgs e) => IsModified = true;
+        private void OnDataRangeModified(object sender, ByteArrayRangeModifiedArgs args) => IsModified = true;
 
         protected IByteArray Data { get; private set; }
 
@@ -150,8 +148,7 @@ namespace SF3.RawData {
         }
 
         public virtual void Dispose() {
-            Data.Modified -= OnDataModified;
-            Data.Resized -= OnDataResized;
+            Data.RangeModified -= OnDataRangeModified;
         }
 
         public virtual bool OnFinish() => true;
