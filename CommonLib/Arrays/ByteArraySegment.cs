@@ -137,8 +137,15 @@ namespace CommonLib.Arrays {
                 return ParentArray.ExpandOrContractAt(Offset + offset, bytesToAddOrRemove);
         }
 
-        public byte[] GetDataCopy() => throw new NotImplementedException();
-        public byte[] GetDataCopyAt(int offset, int length) => throw new NotImplementedException();
+        public byte[] GetDataCopy() => ParentArray.GetDataCopyAt(Offset, Length);
+
+        public byte[] GetDataCopyAt(int offset, int length) {
+            if (offset < 0 || offset > Length)
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            if (length < 0 || offset + length > Length)
+                throw new ArgumentOutOfRangeException(nameof(length));
+            return ParentArray.GetDataCopyAt(Offset + offset, length);
+        }
 
         public void Resize(int size) {
             using (var insideIncr = InsideIncr())

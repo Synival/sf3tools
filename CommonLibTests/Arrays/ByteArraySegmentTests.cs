@@ -774,5 +774,29 @@ namespace CommonLib.Tests.Arrays {
             Assert.ThrowsException<InvalidByteArraySegmentRangeException>(() => parentArray.ResizeAt(0, 10, 12));
             Assert.AreEqual(oldLength, parentArray.Length);
         }
+
+        [TestMethod]
+        public void GetDataCopy_ReturnsExpectedData() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var dataCopy = arraySegment.GetDataCopy();
+
+            Assert.AreEqual(4, dataCopy.Length);
+            for (var i = 0; i < 4; i++)
+                Assert.AreEqual(i + 3, dataCopy[i]);
+        }
+
+        [TestMethod]
+        public void GetDataCopyAt_ReturnsExpectedData() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var dataCopy = arraySegment.GetDataCopyAt(1, 2);
+
+            Assert.AreEqual(2, dataCopy.Length);
+            for (var i = 0; i < 2; i++)
+                Assert.AreEqual(i + 4, dataCopy[i]);
+        }
     }
 }
