@@ -115,7 +115,7 @@ namespace CommonLib.Arrays {
             }
         }
 
-        private IByteArray ParentArray { get; }
+        public IByteArray ParentArray { get; }
 
         public int Offset { get; private set; }
 

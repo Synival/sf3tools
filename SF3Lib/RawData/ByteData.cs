@@ -19,7 +19,11 @@ namespace SF3.RawData {
             InitData();
         }
 
-        private void OnDataRangeModified(object sender, ByteArrayRangeModifiedArgs args) => IsModified = true;
+        private void OnDataRangeModified(object sender, ByteArrayRangeModifiedArgs args) {
+            // Ignore moving data, which would be a modification for a *parent* byte array,
+            // but not the one the ByteData about.
+            IsModified = args.Modified || args.Resized;
+        }
 
         public IByteArray Data { get; private set; }
 

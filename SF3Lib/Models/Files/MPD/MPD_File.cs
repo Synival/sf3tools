@@ -27,8 +27,8 @@ namespace SF3.Models.Files.MPD {
         byte[] FetchChunkDataCopy(int chunkIndex)
             => Data.GetDataCopyAt(ChunkHeader.Rows[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader.Rows[chunkIndex].ChunkSize);
 
-        ByteArray FetchChunkByteArray(int chunkIndex)
-            => new ByteArray(Data.GetDataCopyAt(ChunkHeader.Rows[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader.Rows[chunkIndex].ChunkSize));
+        ByteArraySegment FetchChunkByteArray(int chunkIndex)
+            => new ByteArraySegment(Data.Data, ChunkHeader.Rows[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader.Rows[chunkIndex].ChunkSize);
 
         IChunkData FetchChunkData(int chunkIndex, bool chunkIsCompressed)
             => new ChunkData(FetchChunkByteArray(chunkIndex), chunkIsCompressed);
@@ -239,34 +239,9 @@ namespace SF3.Models.Files.MPD {
             // Fetch chunk data. We need to do this before the chunk table is optimized, otherwise we can't fetch
             // existing data that hasn't been copied into ChunkData[] because the offset will be wrong.
             var chunks = ChunkHeader.Rows;
-            var chunkData = chunks.Select((x, i) => x.Exists ? FetchChunkDataCopy(i) : null).ToArray();
 
-            // Optimize the chunk table.
-            RebuildChunkTable(onlyModified, out var chunkPositions, out var chunkTableEnd);
-
-            // Start rebuilding new data.
-            var newData = new byte[chunkTableEnd];
-            unsafe {
-                fixed (byte* output = newData) {
-                    // Copy first 0x2100 bytes into our new data.
-                    var headerData = Data.GetDataCopyAt(0, 0x2100);
-                    fixed (byte* input = headerData)
-                        _ = memcpy((IntPtr) output, (IntPtr) input, headerData.Length);
-
-                    // Copy all chunk data into our new data.
-                    for (var i = 0; i < chunks.Length; i++) {
-                        if (chunks[i].Exists && chunks[i].ChunkSize > 0) {
-                            var data = ChunkData[i]?.GetDataCopy() ?? chunkData[i];
-                            fixed (byte* input = data)
-                                _ = memcpy((IntPtr) (output + chunkPositions[i]), (IntPtr) input, data.Length);
-                        }
-                    }
-                }
-            }
-
-            if (!((IByteData) Data).SetDataTo(newData))
-                return false;
-
+            // Recompress and update the chunk table.
+            RebuildChunkTable(onlyModified);
             return true;
         }
 
@@ -319,10 +294,9 @@ namespace SF3.Models.Files.MPD {
             BuildTextureAnimFrameData();
         }
 
-        private void RebuildChunkTable(bool onlyModified, out int[] chunkPositions, out int chunkTableEnd) {
+        private void RebuildChunkTable(bool onlyModified) {
             // We'll need to completely rewrite this file. Start by recompressing chunks.
             var currentChunkPos = 0x2100;
-            chunkPositions = new int[ChunkData.Length];
 
             for (var i = 0; i < ChunkData.Length; i++) {
                 var chunk = ChunkHeader.Rows[i];
@@ -330,7 +304,11 @@ namespace SF3.Models.Files.MPD {
                     continue;
 
                 var chunkData = ChunkData[i];
-                chunkPositions[i] = currentChunkPos;
+                var chunkByteArray = (ByteArraySegment) chunkData?.Data;
+
+                // Enforce alignment by inserting bytes where necessary before this chunk begins.
+                if (chunkByteArray != null && chunkByteArray.Offset < currentChunkPos)
+                    chunkByteArray.ParentArray.ExpandOrContractAt(chunkByteArray.Offset, currentChunkPos - chunkByteArray.Offset);
 
                 // Finish compressed chunks.
                 if (chunkData != null && chunkData.IsCompressed && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified))
@@ -348,8 +326,6 @@ namespace SF3.Models.Files.MPD {
                 if (currentChunkPos % 4 != 0)
                     currentChunkPos += 4 - currentChunkPos % 4;
             }
-
-            chunkTableEnd = currentChunkPos;
         }
 
         public override bool IsModified {
