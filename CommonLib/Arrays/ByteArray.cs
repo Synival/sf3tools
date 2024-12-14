@@ -162,14 +162,16 @@ namespace CommonLib.Arrays {
 
             bool wasResized = ResizeAtReal(offset, length, data.Length, false);
             bool wasModified = false;
-            unsafe {
-                fixed (byte* dest = Bytes, src = data) {
-                    var destPtr = (IntPtr) dest + offset;
-                    var srcPtr = (IntPtr) src;
+            if (data.Length > 0) {
+                unsafe {
+                    fixed (byte* dest = Bytes, src = data) {
+                        var destPtr = (IntPtr) dest + offset;
+                        var srcPtr = (IntPtr) src;
 
-                    if (memcmp(destPtr, srcPtr, data.Length) != 0) {
-                        _ = memcpy((IntPtr) dest + offset, (IntPtr) src, data.Length);
-                        wasModified = true;
+                        if (memcmp(destPtr, srcPtr, data.Length) != 0) {
+                            _ = memcpy((IntPtr) dest + offset, (IntPtr) src, data.Length);
+                            wasModified = true;
+                        }
                     }
                 }
             }
