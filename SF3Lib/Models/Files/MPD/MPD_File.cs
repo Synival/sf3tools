@@ -111,7 +111,28 @@ namespace SF3.Models.Files.MPD {
                     ChunkData[i].IsCompressed ? "Compressed" :
                     "Uncompressed";
             }
-            UpdateChunkTableDecompressedSizes();
+
+            // Add triggers to update the chunk table when chunks are resized or moved.
+            for (var i = 0; i < chunks.Length; i++) {
+                if (ChunkData[i] == null)
+                    continue;
+
+                var chunkData = ChunkData[i];
+                var chunkHeader = ChunkHeader.Rows[i];
+
+                chunkHeader.DecompressedSize = chunkData.DecompressedData.Length;
+                chunkData.DecompressedData.Data.RangeModified += (s, a) => {
+                    if (a.Resized)
+                        chunkHeader.DecompressedSize = chunkData.DecompressedData.Length;
+                };
+
+                chunkData.Data.RangeModified += (s, a) => {
+                    if (a.Moved)
+                        chunkHeader.ChunkAddress = ((ByteArraySegment) chunkData.Data).Offset + c_RamOffset;
+                    if (a.Resized)
+                        chunkHeader.ChunkSize = chunkData.Data.Length;
+                };
+            }
 
             // Build a list of all data tables.
             var tables = new List<ITable>() {
@@ -216,11 +237,6 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        private void UpdateChunkTableDecompressedSizes() {
-            for (var i = 0; i < ChunkHeader.Rows.Length; i++)
-                ChunkHeader.Rows[i].DecompressedSize = ChunkData[i]?.DecompressedData?.Length ?? 0;
-        }
-
         [DllImport("msvcrt.dll", SetLastError = false)]
         private static extern IntPtr memcpy(IntPtr dest, IntPtr src, int count);
 
@@ -313,13 +329,6 @@ namespace SF3.Models.Files.MPD {
                 // Finish compressed chunks.
                 if (chunkData != null && chunkData.IsCompressed && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified))
                     _ = chunkData.Recompress();
-
-                // Update the chunk address/size table.
-                chunk.ChunkAddress = currentChunkPos + c_RamOffset;
-                if (chunkData != null) {
-                    chunk.ChunkSize = chunkData.Length;
-                    chunk.DecompressedSize = chunkData.DecompressedData.Length;
-                }
 
                 // Advance chunk position, enforcing an alignment of 4.
                 currentChunkPos += chunk.ChunkSize;
