@@ -135,6 +135,8 @@ namespace TextureExtractor {
 
             var allTextures = texturesFound.SelectMany(x => x.Value).ToArray();
             var orderedTextures = allTextures
+                .OrderBy(x => x.Filename)
+                .ThenBy(x => x.ID)
                 .GroupBy(x => x.Hash)
                 .Select(x => new KeyValuePair<string, List<TextureRef>>(x.Key, x.ToList()))
                 .OrderBy(x => x.Value[0].Filename)
@@ -147,7 +149,7 @@ namespace TextureExtractor {
                 var subPath = Path.Combine(c_outputPath);
                 _ = Directory.CreateDirectory(subPath);
 
-                var refStr = "Tex" + tex.ID + "_Frame" + tex.Frame + "_x" + texRefs.Value.Count.ToString("D4") + "_" + tex.Width + "x" + tex.Height + "_" + tex.Hash;
+                var refStr = tex.Hash + "_Tex" + tex.ID + "_Frame" + tex.Frame + "_x" + texRefs.Value.Count.ToString("D4") + "_" + tex.Width + "x" + tex.Height;
                 var outputPath = Path.Combine(subPath, refStr + ".BMP");
                 Console.WriteLine("Writing: " + outputPath);
 #pragma warning disable CA1416 // Validate platform compatibility
