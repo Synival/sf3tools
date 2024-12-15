@@ -12,6 +12,13 @@ namespace SF3.RawData {
         IByteArray Data { get; }
 
         /// <summary>
+        /// Sets the data to edit.
+        /// </summary>
+        /// <param name="data">The data to modify.</param>
+        /// <returns>'true' if the data was set, otherwise 'false'.</returns>
+        bool SetDataTo(byte[] data);
+
+        /// <summary>
         /// The amount of data being edited.
         /// </summary>
         int Length { get; }
