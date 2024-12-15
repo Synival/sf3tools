@@ -32,6 +32,7 @@ namespace SF3.Win.Views.MPD {
                     textureTabPage.Controls.Add(textureControl);
                     textureTableControl.ItemSelectionChanged += OnTextureChanged;
                 }
+                TabControl.SelectedTab = (TabPage) textureTabPage;
             }
 
             // Return the top-level control.
