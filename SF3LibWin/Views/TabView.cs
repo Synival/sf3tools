@@ -103,7 +103,10 @@ namespace SF3.Win.Views {
             base.Destroy();
         }
 
-        public Control CreateChild(IView childView, bool autoFill = true) {
+        public Control CreateChild(IView childView, bool autoFill = true)
+            => CreateCustomChild(childView, autoFill, (name) => new TabPage(name) { AutoScroll = true });
+
+        public Control CreateCustomChild(IView childView, bool autoFill, Func<string, Control> createTabDelegate) {
             if (childView == null)
                 return null;
 
@@ -112,7 +115,7 @@ namespace SF3.Win.Views {
                 return null;
 
             // TODO: the name should be internal, not used for display.
-            var tabPage = new TabPage(childView.Name);
+            var tabPage = createTabDelegate(childView.Name);
 
             TabControl.SuspendLayout();
             tabPage.SuspendLayout();
@@ -120,7 +123,6 @@ namespace SF3.Win.Views {
             if (autoFill)
                 childControl.Dock = DockStyle.Fill;
 
-            tabPage.AutoScroll = true;
             tabPage.Controls.Add(childControl);
             TabControl.Controls.Add(tabPage);
 

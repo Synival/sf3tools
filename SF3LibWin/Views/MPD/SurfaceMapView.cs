@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using SF3.Models.Files.MPD;
+﻿using SF3.Models.Files.MPD;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views.MPD {
@@ -8,18 +7,12 @@ namespace SF3.Win.Views.MPD {
             Model = model;
         }
 
-        public override Control Create()
-            => (Model.TileSurfaceCharacterRows == null) ? null : base.Create();
-
         public void UpdateMap() {
             var textureData = Model.TileSurfaceCharacterRows?.Make2DTextureData();
             SurfaceMapControl.UpdateTextures(textureData, Model.TextureChunks);
         }
 
         public override void RefreshContent() {
-            if (SurfaceMapControl == null)
-                return;
-
             // TODO: how to refresh???
         }
 

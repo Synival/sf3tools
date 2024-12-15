@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using SF3.Models.Files.MPD;
 
@@ -6,19 +7,22 @@ namespace SF3.Win.Views.MPD {
     public class SurfaceView : TabView {
         public SurfaceView(string name, IMPD_File model) : base(name) {
             Model = model;
-            SurfaceMapView = new SurfaceMapView("Viewer", Model);
+        }
+
+        public class NoScrollTabPage : TabPage {
+            public NoScrollTabPage(string text) : base(text) { }
+            protected override Point ScrollToControl(Control control) => DisplayRectangle.Location;
         }
 
         public override Control Create() {
             if (base.Create() == null)
                 return null;
 
-            _ = CreateChild(SurfaceMapView, autoFill: false);
-            if (SurfaceMapView.SurfaceMapControl != null) {
-                _surfaceMapControlTab = (TabPage) SurfaceMapView.SurfaceMapControl.Parent;
-                TabControl.Selected += UpdateSurfaceMapControl;
-                SurfaceMapView.UpdateMap();
-            }
+            SurfaceMapView = new SurfaceMapView("Tiles", Model);
+            _ = CreateCustomChild(SurfaceMapView, autoFill: false, (name) => new NoScrollTabPage(name) { AutoScroll = true });
+            _surfaceMapControlTab = (TabPage) SurfaceMapView.SurfaceMapControl.Parent;
+            TabControl.Selected += UpdateSurfaceMapControl;
+            SurfaceMapView.UpdateMap();
 
             var ngc = Model.NameGetterContext;
 
@@ -34,19 +38,19 @@ namespace SF3.Win.Views.MPD {
 
         void UpdateSurfaceMapControl(object sender, EventArgs eventArgs) {
             if (TabControl.SelectedTab == _surfaceMapControlTab)
-                SurfaceMapView.UpdateMap();
+                SurfaceMapView?.UpdateMap();
         }
 
         public override void Destroy() {
-            if (_surfaceMapControlTab != null) {
+            if (SurfaceMapView != null) {
                 TabControl.Selected -= UpdateSurfaceMapControl;
                 _surfaceMapControlTab = null;
+                SurfaceMapView = null;
             }
-
             base.Destroy();
         }
 
         public IMPD_File Model { get; }
-        public SurfaceMapView SurfaceMapView { get; }
+        public SurfaceMapView SurfaceMapView { get; private set; }
     }
 }
