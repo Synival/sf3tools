@@ -32,9 +32,6 @@ namespace SF3.Tests.Compression {
                     if (st == ScenarioType.Scenario3 && testCase.Filename.EndsWith("BTL42.MPD"))
                         return;
 
-                    if (!testCase.Filename.EndsWith("BTL02.MPD"))
-                        return;
-
                     using (var mpdFile = MPD_File.Create(
                         new ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
                         if (mpdFile.Chunk3Frames == null || mpdFile.Chunk3Frames.Count == 0)

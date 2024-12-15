@@ -14,6 +14,7 @@ using SF3.Models.Structs.MPD.TextureChunk;
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
         private const int c_RamOffset = 0x290000;
+        private const int c_SurfaceChunkSize = 0xCF00;
 
         protected MPD_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }
@@ -73,10 +74,9 @@ namespace SF3.Models.Files.MPD {
             // Assign all chunk data.
             ChunkData = new IChunkData[chunks.Length];
 
-            if (chunks[2].Exists)
+            if (chunks[2].Exists && chunks[2].ChunkSize == c_SurfaceChunkSize)
                 _surfaceChunkIndex = 2;
-            // TODO: this works, but it's kind of a dumb hack!!
-            else if (chunks[20].Exists && chunks[20].ChunkSize == 52992)
+            else if (chunks[20].Exists && chunks[20].ChunkSize == c_SurfaceChunkSize)
                 _surfaceChunkIndex = 20;
             else
                 _surfaceChunkIndex = -1;
@@ -84,10 +84,10 @@ namespace SF3.Models.Files.MPD {
             if (_surfaceChunkIndex != -1)
                 ChunkData[_surfaceChunkIndex] = FetchChunkData(_surfaceChunkIndex, false);
 
-            if (chunks[3].Exists && TextureAnimations != null)
+            if (chunks[3].Exists && chunks[3].Size > 0 && TextureAnimations != null)
                 ChunkData[3] = FetchChunkData(3, false);
 
-            if (chunks[5].Exists)
+            if (chunks[5].Exists && chunks[5].Size > 0)
                 ChunkData[5] = FetchChunkData(5, true);
 
             // Texture data, in chunks (6...10)
@@ -104,8 +104,8 @@ namespace SF3.Models.Files.MPD {
             // We should have all the uncompressed data now. Update read-only info of our chunk table.
             for (var i = 0; i < chunks.Length; i++) {
                 ChunkHeader.Rows[i].CompressionType =
-                    ChunkData[i] == null && chunks[i].Exists ? "--" :
-                    ChunkData[i] == null ? "(WIP)" :
+                    (ChunkData[i] == null && chunks[i].Exists && chunks[i].Size > 0) ? "(WIP)" :
+                    ChunkData[i] == null ? "--" :
                     (i == 3) ? "Individually Compressed" :
                     ChunkData[i].IsCompressed ? "Compressed" :
                     "Uncompressed";
@@ -365,7 +365,7 @@ namespace SF3.Models.Files.MPD {
 
         public IChunkData[] ChunkData { get; private set; }
 
-        public IChunkData SurfaceChunkData => ChunkData[_surfaceChunkIndex];
+        public IChunkData SurfaceChunkData => (_surfaceChunkIndex >= 0) ? ChunkData[_surfaceChunkIndex] : null;
 
         [BulkCopyRecurse]
         public MPDHeaderTable MPDHeader { get; private set; }
