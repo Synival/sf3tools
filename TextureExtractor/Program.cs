@@ -18,16 +18,14 @@ namespace TextureExtractor {
         private const string c_outputPath = "../../../Private/Output";
 
         private class TextureRef {
-            public TextureRef(string filename, int id, int frame, int width, int height, byte[] imageData) {
+            public TextureRef(string filename, int id, int frame, int width, int height, byte[] imageData, string hash) {
                 Filename  = filename;
                 ID        = id;
                 Frame     = frame;
                 Width     = width;
                 Height    = height;
                 ImageData = imageData;
-
-                using (var md5 = MD5.Create())
-                    Hash = BitConverter.ToString(md5.ComputeHash(ImageData)).Replace("-", "").ToLower();
+                Hash      = hash;
             }
 
             public string Filename;
@@ -56,7 +54,7 @@ namespace TextureExtractor {
         }
 
         private static TextureRef[] GenerateTextureRefs(string filename, int id, int frame, ITexture texture)
-            => [new TextureRef(filename, id, frame, texture.Width, texture.Height, texture.BitmapDataARGB1555)];
+            => [new TextureRef(filename, id, frame, texture.Width, texture.Height, texture.BitmapDataARGB1555, texture.Hash)];
 
         public static void Main(string[] args) {
             // Get a list of all .MPD files in a folder called 'Private' relative to this project.
@@ -135,25 +133,24 @@ namespace TextureExtractor {
                 }
             }
 
-            var orderedTextures = texturesFound
-                .Select(x => x.Value)
-                .OrderBy(x => x[0].ID)
-                .ThenBy(x => x[0].Frame)
-                .ThenByDescending(x => x.Count)
-                .ThenBy(x => x[0].Width + x[0].Height)
-                .ThenBy(x => x[0].Hash)
+            var allTextures = texturesFound.SelectMany(x => x.Value).ToArray();
+            var orderedTextures = allTextures
+                .GroupBy(x => x.Hash)
+                .Select(x => new KeyValuePair<string, List<TextureRef>>(x.Key, x.ToList()))
+                .OrderBy(x => x.Value[0].Filename)
                 .ToList();
 
             Directory.CreateDirectory(c_outputPath);
 
             foreach (var texRefs in orderedTextures) {
-                var tex = texRefs[0];
+                var tex = texRefs.Value[0];
                 var subPath = Path.Combine(c_outputPath);
-                Directory.CreateDirectory(subPath);
+                _ = Directory.CreateDirectory(subPath);
 
-                var refStr = "Tex" + tex.ID + "_Frame" + tex.Frame + "_x" + texRefs.Count.ToString("D4") + "_" + tex.Width + "x" + tex.Height + "_" + tex.Hash;
+                var refStr = "Tex" + tex.ID + "_Frame" + tex.Frame + "_x" + texRefs.Value.Count.ToString("D4") + "_" + tex.Width + "x" + tex.Height + "_" + tex.Hash;
                 var outputPath = Path.Combine(subPath, refStr + ".BMP");
                 Console.WriteLine("Writing: " + outputPath);
+#pragma warning disable CA1416 // Validate platform compatibility
                 using (var bitmap = new Bitmap(tex.Width, tex.Height, PixelFormat.Format16bppArgb1555)) {
                     var imageData = tex.ImageData;
                     var bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
@@ -161,6 +158,7 @@ namespace TextureExtractor {
                     bitmap.UnlockBits(bmpData);
                     bitmap.Save(outputPath);
                 }
+#pragma warning restore CA1416 // Validate platform compatibility
             }
         }
     }

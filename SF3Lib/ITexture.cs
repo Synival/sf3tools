@@ -45,5 +45,10 @@ namespace SF3 {
         /// Image data for 16-bit ARGB1555 format. Cannot be set; it is based on data from ImageData16Bit. Only usable when BytesPerPixel is 2.
         /// </summary>
         byte[] BitmapDataARGB1555 { get; }
+
+        /// <summary>
+        /// Hash for identifying this as a unique texture.
+        /// </summary>
+        string Hash { get; }
     }
 }

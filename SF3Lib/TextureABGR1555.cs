@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using CommonLib.Utils;
 using SF3.Types;
 
@@ -7,6 +8,9 @@ namespace SF3 {
         public TextureABGR1555(ushort[,] data) {
             _data = data;
             _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToABGR1555BitmapData(data);
+
+            using (var md5 = MD5.Create())
+                Hash = BitConverter.ToString(md5.ComputeHash(_bitmapDataARGB1555)).Replace("-", "").ToLower();
         }
 
         private readonly ushort[,] _data;
@@ -22,5 +26,7 @@ namespace SF3 {
 
         public byte[,] ImageData8Bit => throw new NotSupportedException();
         public byte[] BitmapDataIndexed => throw new NotSupportedException();
+
+        public string Hash { get; }
     }
 }

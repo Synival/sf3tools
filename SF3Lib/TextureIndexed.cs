@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Security.Cryptography;
 using CommonLib.Extensions;
-using CommonLib.Utils;
 using SF3.Types;
 
 namespace SF3 {
@@ -8,6 +8,9 @@ namespace SF3 {
         public TextureIndexed(byte[,] data, TexturePixelFormat format = TexturePixelFormat.UnknownPalette) {
             _data = data;
             PixelFormat = format;
+
+            using (var md5 = MD5.Create())
+                Hash = BitConverter.ToString(md5.ComputeHash(data.To1DArray())).Replace("-", "").ToLower();
         }
 
         private readonly byte[,] _data;
@@ -22,5 +25,7 @@ namespace SF3 {
 
         public ushort[,] ImageData16Bit => throw new NotSupportedException();
         public byte[] BitmapDataARGB1555 => throw new NotSupportedException();
+
+        public string Hash { get; }
     }
 }
