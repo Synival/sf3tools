@@ -9,8 +9,15 @@ using SF3.Win.Extensions;
 
 namespace SF3.Win.Controls {
     public partial class SurfaceMapControl : UserControl {
+        public const int WidthInTiles = 64;
+        public const int HeightInTiles = 64;
+        public const int TileResolution = 16;
+
         public SurfaceMapControl() {
+            SuspendLayout();
             InitializeComponent();
+            Size = MaximumSize = new Size(WidthInTiles  * TileResolution, HeightInTiles * TileResolution);
+            ResumeLayout();
 
             SetStyle(ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.UserPaint |
@@ -19,8 +26,15 @@ namespace SF3.Win.Controls {
 
         protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
-            if (FullImage != null)
-                e.Graphics.DrawImage(FullImage, 0, 0);
+            if (FullImage != null) {
+                var rect = e.ClipRectangle;
+                e.Graphics.DrawImage(FullImage, rect.X, rect.Y, rect, GraphicsUnit.Pixel);
+            }
+
+            if (_tileX.HasValue && _tileY.HasValue) {
+                var rect = new Rectangle(_tileX.Value * TileResolution, _tileY.Value * TileResolution, TileResolution - 1, TileResolution - 1);
+                e.Graphics.DrawRectangle(Pens.White, rect);
+            }
         }
 
         public Dictionary<int, Image> UniqueImages { get; private set; } = null;
@@ -140,18 +154,52 @@ namespace SF3.Win.Controls {
                 }
             }
 
-            FullImage = new Bitmap(16 * 64, 16 * 64);
+            FullImage = new Bitmap(TileResolution * WidthInTiles, TileResolution * HeightInTiles);
             using (var graphics = Graphics.FromImage(FullImage)) {
                 for (int y = 0; y < Images.GetLength(1); y++) {
                     for (int x = 0; x < Images.GetLength(0); x++) {
                         var image = Images[x, y];
                         if (image != null)
-                            graphics.DrawImage(image, x * 16, y * 16, 16, 16);
+                            graphics.DrawImage(image, x * TileResolution, y * TileResolution, TileResolution, TileResolution);
                     }
                 }
             }
 
             Invalidate();
+        }
+
+        private int? _tileX = null;
+        private int? _tileY = null;
+
+        private void UpdateTilePosition(int? x, int? y) {
+            // All invalid tile values should be -1, -1.
+            if (x < 0 || y < 0 || x >= WidthInTiles || y >= HeightInTiles) {
+                x = null;
+                y = null;
+            }
+
+            // Early exit if no change is necessary.
+            if (_tileX == x && _tileY == y)
+                return;
+
+            if (_tileX.HasValue && _tileY.HasValue)
+                Invalidate(new Rectangle(_tileX.Value * TileResolution, _tileY.Value * TileResolution, TileResolution, TileResolution));
+
+            _tileX = x;
+            _tileY = y;
+
+            if (_tileX.HasValue && _tileY.HasValue)
+                Invalidate(new Rectangle(_tileX.Value * TileResolution, _tileY.Value * TileResolution, TileResolution, TileResolution));
+        }
+
+        protected override void OnMouseLeave(EventArgs e) {
+            base.OnMouseLeave(e);
+            UpdateTilePosition(null, null);
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e) {
+            base.OnMouseMove(e);
+            UpdateTilePosition(e.Location.X / TileResolution, e.Location.Y / TileResolution);
         }
     }
 }

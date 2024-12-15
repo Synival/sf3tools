@@ -31,10 +31,8 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.FromArgb(  64,   64,   64);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            MaximumSize = new System.Drawing.Size(1195, 1182);
-            MinimumSize = new System.Drawing.Size(1195, 1182);
             Name = "SurfaceMapControl";
-            Size = new System.Drawing.Size(1195, 1182);
+            Size = new System.Drawing.Size(1024, 1024);
             ResumeLayout(false);
         }
 
