@@ -24,14 +24,14 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             _unknownAddress                 = Address + 1 * _bytesPerProperty;
         }
 
-        public void FetchAndCacheTexture(IByteData data, TexturePixelFormat assumedPixelFormat) {
+        public void FetchAndCacheTexture(IByteData data, TexturePixelFormat assumedPixelFormat, ITexture referenceTexture) {
             if (assumedPixelFormat == TexturePixelFormat.ABGR1555)
-                FetchAndCacheTextureABGR1555(data);
+                FetchAndCacheTextureABGR1555(data, referenceTexture);
             else
-                FetchAndCacheTextureIndexed(data, assumedPixelFormat);
+                FetchAndCacheTextureIndexed(data, assumedPixelFormat, referenceTexture);
         }
 
-        private void FetchAndCacheTextureABGR1555(IByteData data) {
+        private void FetchAndCacheTextureABGR1555(IByteData data, ITexture referenceTexture) {
             var imageData = new ushort[Width, Height];
             var off = 0;
             for (var y = 0; y < Height; y++) {
@@ -42,20 +42,20 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 }
             }
 
-            Texture = new TextureABGR1555(imageData);
+            Texture = new TextureABGR1555(imageData, referenceTexture?.Hash ?? "NOTEX-");
         }
 
-        private void FetchAndCacheTextureIndexed(IByteData data, TexturePixelFormat assumedPixelFormat) {
+        private void FetchAndCacheTextureIndexed(IByteData data, TexturePixelFormat assumedPixelFormat, ITexture referenceTexture) {
             var imageData = new byte[Width, Height];
             var off = 0;
             for (var y = 0; y < Height; y++)
                 for (var x = 0; x < Width; x++)
                     imageData[x, y] = (byte) data.GetByte(off++);
 
-            Texture = new TextureIndexed(imageData, assumedPixelFormat);
+            Texture = new TextureIndexed(imageData, assumedPixelFormat, referenceTexture?.Hash ?? "NOTEX-");
         }
 
-        public ushort[,] UpdateTexture(IByteData data, ushort[,] imageData) {
+        public ushort[,] UpdateTextureABGR1555(IByteData data, ushort[,] imageData, ITexture referenceTexture) {
             if (imageData.GetLength(0) != Width || imageData.GetLength(1) != Height)
                 throw new ArgumentException("Incoming data dimensions must match specified width/height");
 
@@ -69,10 +69,11 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             }
             data.Data.SetDataTo(newData.GetDataCopy());
 
-            // TODO: support TextureIndexed
-            Texture = new TextureABGR1555(imageData);
+            Texture = new TextureABGR1555(imageData, referenceTexture?.Hash ?? "NOTEX-");
             return imageData;
         }
+
+        // TODO: UpdateTextureIndexed()
 
         /// <summary>
         /// Used for Scenario 3 and PD, which has 32-bit member variables instead of 16-bit.

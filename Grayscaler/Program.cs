@@ -54,7 +54,8 @@ namespace Grayscaler {
                 foreach (var tc in textures2) {
                     // TODO: This shouldn't have to go through the trouble of finding the frameData
                     var frameData = mpdFile.Chunk3Frames.First(x => x.Offset == tc.CompressedTextureOffset).Data.DecompressedData;
-                    _ = tc.UpdateTexture(frameData, MakeTextureGrayscale(tc.Texture.ImageData16Bit));
+                    var referenceTex = textures1.FirstOrDefault(x => x.ID == tc.TextureID)?.Texture;
+                    _ = tc.UpdateTextureABGR1555(frameData, MakeTextureGrayscale(tc.Texture.ImageData16Bit), referenceTex);
                 }
 
                 // This will compress chunks and update the chunk table header.

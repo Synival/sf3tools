@@ -9,6 +9,7 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.RawData;
 using CommonLib.Arrays;
+using SF3.Models.Structs.MPD.TextureChunk;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
@@ -83,10 +84,8 @@ namespace SF3.Models.Files.MPD {
             if (_surfaceChunkIndex != -1)
                 ChunkData[_surfaceChunkIndex] = FetchChunkData(_surfaceChunkIndex, false);
 
-            if (chunks[3].Exists && TextureAnimations != null) {
+            if (chunks[3].Exists && TextureAnimations != null)
                 ChunkData[3] = FetchChunkData(3, false);
-                BuildTextureAnimFrameData();
-            }
 
             if (chunks[5].Exists)
                 ChunkData[5] = FetchChunkData(5, true);
@@ -150,8 +149,10 @@ namespace SF3.Models.Files.MPD {
                         if (a.Resized || a.Modified) {
                             var offset = ((ByteArraySegment) c3frame.Data.Data).Offset;
                             var affectedFrames = TextureAnimations.Rows.SelectMany(x => x.Frames).Where(x => x.CompressedTextureOffset == offset).ToArray();
-                            foreach (var frame in affectedFrames)
-                                    frame.FetchAndCacheTexture(c3frame.Data.DecompressedData, frame.AssumedPixelFormat);
+                            foreach (var frame in affectedFrames) {
+                                var referenceTex = GetTextureModelByID(frame.TextureID)?.Texture;
+                                frame.FetchAndCacheTexture(c3frame.Data.DecompressedData, frame.AssumedPixelFormat, referenceTex);
+                            }
                         }
                     };
                 }
@@ -197,6 +198,9 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
+            // Now that textures are loaded, build the texture animation frame data.
+            BuildTextureAnimFrameData();
+
             // Add some callbacks to all child data.
             var allData = ChunkData
                 .Where(x => x != null)
@@ -215,7 +219,16 @@ namespace SF3.Models.Files.MPD {
             return tables;
         }
 
+        private TextureModel GetTextureModelByID(int textureId) {
+            if (TextureChunks == null)
+                return null;
+            return TextureChunks.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x.Rows).FirstOrDefault(x => x.ID == textureId);
+        }
+
         private void BuildTextureAnimFrameData() {
+            if (ChunkData[3] == null)
+                return;
+
             if (Chunk3Frames == null)
                 Chunk3Frames = new List<Chunk3Frame>();
             else
@@ -227,8 +240,10 @@ namespace SF3.Models.Files.MPD {
                 foreach (var frame in anim.Frames) {
                     var offset = frame.CompressedTextureOffset;
                     var existingFrame = Chunk3Frames.FirstOrDefault(x => x.Offset == offset);
+                    var referenceTex = GetTextureModelByID(frame.TextureID)?.Texture;
+
                     if (existingFrame != null) {
-                        frame.FetchAndCacheTexture(existingFrame.Data.DecompressedData, chunk3Textures[offset].PixelFormat);
+                        frame.FetchAndCacheTexture(existingFrame.Data.DecompressedData, chunk3Textures[offset].PixelFormat, referenceTex);
                         continue;
                     }
 
@@ -242,13 +257,13 @@ namespace SF3.Models.Files.MPD {
                         var compressedBytes = Math.Min(uncompressedBytes16 + 8, ChunkData[3].Length - (int) offset);
                         byteArray = new ByteArraySegment(ChunkData[3].Data, (int) offset, compressedBytes);
                         newData = new CompressedData(byteArray, uncompressedBytes16);
-                        frame.FetchAndCacheTexture(newData.DecompressedData, TexturePixelFormat.ABGR1555);
+                        frame.FetchAndCacheTexture(newData.DecompressedData, TexturePixelFormat.ABGR1555, referenceTex);
                     }
                     catch {
                         var compressedBytes = Math.Min(uncompressedBytes8 + 8, ChunkData[3].Length - (int) offset);
                         byteArray = new ByteArraySegment(ChunkData[3].Data, (int) offset, compressedBytes);
                         newData = new CompressedData(byteArray, uncompressedBytes8);
-                        frame.FetchAndCacheTexture(newData.DecompressedData, TexturePixelFormat.UnknownPalette);
+                        frame.FetchAndCacheTexture(newData.DecompressedData, TexturePixelFormat.UnknownPalette, referenceTex);
                     }
 
                     if (newData != null && frame.Texture != null) {

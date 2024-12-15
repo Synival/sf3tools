@@ -5,12 +5,12 @@ using SF3.Types;
 
 namespace SF3 {
     public class TextureIndexed : ITexture {
-        public TextureIndexed(byte[,] data, TexturePixelFormat format = TexturePixelFormat.UnknownPalette) {
+        public TextureIndexed(byte[,] data, TexturePixelFormat format = TexturePixelFormat.UnknownPalette, string hashPrefix = "") {
             _data = data;
             PixelFormat = format;
 
             using (var md5 = MD5.Create())
-                Hash = BitConverter.ToString(md5.ComputeHash(data.To1DArray())).Replace("-", "").ToLower();
+                Hash = hashPrefix + BitConverter.ToString(md5.ComputeHash(data.To1DArray())).Replace("-", "").ToLower();
         }
 
         private readonly byte[,] _data;

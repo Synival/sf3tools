@@ -141,8 +141,10 @@ namespace SF3.MPD_Editor.Forms {
 
                                 if (model is TextureModel tm)
                                     tm.RawImageData16Bit = newImageData;
-                                else if (model is FrameModel fm)
-                                    _ = fm.UpdateTexture(File.Chunk3Frames.First(x => x.Offset == fm.CompressedTextureOffset).Data.DecompressedData, newImageData);
+                                else if (model is FrameModel fm) {
+                                    var referenceTex = File.TextureChunks.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x.Rows).FirstOrDefault(x => x.ID == fm.TextureID)?.Texture;
+                                    _ = fm.UpdateTextureABGR1555(File.Chunk3Frames.First(x => x.Offset == fm.CompressedTextureOffset).Data.DecompressedData, newImageData, referenceTex);
+                                }
                                 else
                                     throw new NotSupportedException("Not sure what this is, but it's not supported here");
                             }

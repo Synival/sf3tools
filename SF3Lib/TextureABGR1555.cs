@@ -5,12 +5,12 @@ using SF3.Types;
 
 namespace SF3 {
     public class TextureABGR1555 : ITexture {
-        public TextureABGR1555(ushort[,] data) {
+        public TextureABGR1555(ushort[,] data, string hashPrefix = "") {
             _data = data;
             _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToABGR1555BitmapData(data);
 
             using (var md5 = MD5.Create())
-                Hash = BitConverter.ToString(md5.ComputeHash(_bitmapDataARGB1555)).Replace("-", "").ToLower();
+                Hash = hashPrefix + BitConverter.ToString(md5.ComputeHash(_bitmapDataARGB1555)).Replace("-", "").ToLower();
         }
 
         private readonly ushort[,] _data;
