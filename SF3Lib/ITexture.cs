@@ -1,6 +1,23 @@
+using System.Collections.Generic;
 using SF3.Types;
 
 namespace SF3 {
+    public class TagKey {
+        public TagKey(byte bitFlags) {
+            BitFlags = bitFlags;
+        }
+
+        public byte BitFlags { get; }
+    };
+
+    public class TagValue {
+        public TagValue(string name) {
+            Name = name;
+        }
+
+        public string Name { get; }
+    }
+
     /// <summary>
     /// Interface for any object that contains texture data.
     /// </summary>
@@ -52,8 +69,8 @@ namespace SF3 {
         string Hash { get; }
 
         /// <summary>
-        /// Tag for identifying textures with the same Hash.
+        /// Tags for identifying textures with the same Hash.
         /// </summary>
-        string Tag { get; }
+        Dictionary<TagKey, TagValue> Tags { get; }
     }
 }

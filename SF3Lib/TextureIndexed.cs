@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using CommonLib.Extensions;
 using SF3.Types;
 
 namespace SF3 {
     public class TextureIndexed : ITexture {
-        public TextureIndexed(byte[,] data, TexturePixelFormat format = TexturePixelFormat.UnknownPalette, string tag = "", string hashPrefix = "") {
+        public TextureIndexed(byte[,] data, TexturePixelFormat format = TexturePixelFormat.UnknownPalette, Dictionary<TagKey, TagValue> tags = null, string hashPrefix = "") {
             _data = data;
-            Tag = tag;
+            Tags = (tags == null) ? new Dictionary<TagKey, TagValue>() : tags.ToDictionary(x => x.Key, x => x.Value);
             PixelFormat = format;
 
             using (var md5 = MD5.Create())
@@ -28,6 +30,6 @@ namespace SF3 {
         public byte[] BitmapDataARGB1555 => throw new NotSupportedException();
 
         public string Hash { get; }
-        public string Tag { get; }
+        public Dictionary<TagKey, TagValue> Tags { get; }
     }
 }

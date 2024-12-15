@@ -114,6 +114,23 @@ namespace SF3.Win.Controls {
                             }
 #endif
 
+                            // Indicate unidentified textures.
+                            var expectedTag = new TagKey(textureFlags);
+                            if (!texture.Tags.ContainsKey(expectedTag)) {
+                                // NOTE: Graphics.FromImage() throws an OutOfMemoryException due to a bad GDI+ implementation,
+                                // so we have to do it this way.
+                                using var questionMark = new Bitmap(image.Width / 2, image.Height / 2);
+                                using (var g = Graphics.FromImage(questionMark)) {
+                                    g.Clear(Color.Black);
+                                    g.DrawString("?", new Font(new FontFamily("Consolas"), (int) (questionMark.Width * 0.75)), Brushes.White, 0, 0);
+                                    g.Flush();
+                                }
+
+                                var posX = image.Width  - questionMark.Width;
+                                var posY = image.Height - questionMark.Height;
+                                image.SafeDrawImage(questionMark, posX, posY);
+                            }
+
                             UniqueImages.Add(key, image);
                         }
                     }

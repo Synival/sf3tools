@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.Attributes;
 using SF3.RawData;
@@ -41,21 +43,21 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 AssumedPixelFormat = TexturePixelFormat.ABGR1555;
 
             _readyForImageData = true;
-            _ = FetchAndCacheTexture("(tags not implemented)");
+            _ = FetchAndCacheTexture(null);
         }
 
         public static int GlobalSize => 0x04;
 
         private readonly bool _readyForImageData = false;
 
-        private bool FetchAndCacheTexture(string tag) {
+        private bool FetchAndCacheTexture(Dictionary<TagKey, TagValue> tags) {
             if (!_readyForImageData)
                 return false;
 
             try {
                 Texture = AssumedPixelFormat == TexturePixelFormat.ABGR1555
-                    ? new TextureABGR1555(RawImageData16Bit, tag: tag)
-                    : (ITexture) new TextureIndexed(RawImageData8Bit, tag: tag);
+                    ? new TextureABGR1555(RawImageData16Bit, tags: tags)
+                    : (ITexture) new TextureIndexed(RawImageData8Bit, tags: tags);
                 return true;
             }
             catch {
@@ -69,7 +71,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             get => Data.GetByte(widthAddress);
             set {
                 Data.SetByte(widthAddress, (byte) value);
-                FetchAndCacheTexture(Texture?.Tag ?? "");
+                FetchAndCacheTexture(Texture?.Tags);
             }
         }
 
@@ -79,7 +81,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             get => Data.GetByte(heightAddress);
             set {
                 Data.SetByte(heightAddress, (byte) value);
-                FetchAndCacheTexture(Texture?.Tag ?? "");
+                FetchAndCacheTexture(Texture?.Tags);
             }
         }
 
@@ -89,7 +91,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             get => Data.GetWord(imageDataOffsetAddress);
             set {
                 Data.SetWord(imageDataOffsetAddress, value);
-                FetchAndCacheTexture(Texture?.Tag ?? "");
+                FetchAndCacheTexture(Texture?.Tags);
             }
         }
 
@@ -97,10 +99,10 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         public TexturePixelFormat AssumedPixelFormat { get; }
 
         [TableViewModelColumn(displayName: "Internal Hash", displayOrder: 4, minWidth: 225)]
-        public string Hash => Texture?.Hash ?? "";        
+        public string Hash => Texture?.Hash ?? "";
 
-        [TableViewModelColumn(displayName: "Tag", displayOrder: 5, minWidth: 200)]
-        public string Tag => Texture?.Tag ?? "";        
+        [TableViewModelColumn(displayName: "Tags", displayOrder: 5, minWidth: 200)]
+        public string Tags => (Texture.Tags == null) ? "" : string.Join(", ", Texture.Tags.Select(x => x.Key + "|" + x.Value));
 
         public bool TextureIsLoaded => Texture != null;
 
@@ -134,7 +136,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                         newData.SetByte(off++, value[x, y]);
                 Data.Data.SetDataAtTo(ImageDataOffset, newData.Length, newData.GetDataCopy());
 
-                FetchAndCacheTexture(Texture?.Tag ?? "");
+                FetchAndCacheTexture(Texture?.Tags);
             }
         }
 
@@ -170,7 +172,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 }
                 Data.Data.SetDataAtTo(ImageDataOffset, newData.Length, newData.GetDataCopy());
 
-                FetchAndCacheTexture(Texture?.Tag ?? "");
+                FetchAndCacheTexture(Texture?.Tags);
             }
         }
 

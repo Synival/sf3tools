@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using CommonLib.Utils;
 using SF3.Types;
 
 namespace SF3 {
     public class TextureABGR1555 : ITexture {
-        public TextureABGR1555(ushort[,] data, string tag = "", string hashPrefix = "") {
+        public TextureABGR1555(ushort[,] data, Dictionary<TagKey, TagValue> tags = null, string hashPrefix = "") {
             _data = data;
-            Tag = tag;
+            Tags = (tags == null) ? new Dictionary<TagKey, TagValue>() : tags.ToDictionary(x => x.Key, x => x.Value);
             _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToABGR1555BitmapData(data);
 
             using (var md5 = MD5.Create())
@@ -29,6 +31,6 @@ namespace SF3 {
         public byte[] BitmapDataIndexed => throw new NotSupportedException();
 
         public string Hash { get; }
-        public string Tag { get; }
+        public Dictionary<TagKey, TagValue> Tags { get; }
     }
 }

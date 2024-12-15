@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.Attributes;
 using SF3.RawData;
@@ -42,7 +43,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 }
             }
 
-            Texture = new TextureABGR1555(imageData, tag: referenceTexture?.Tag ?? "", hashPrefix: referenceTexture?.Hash ?? "NOTEX");
+            Texture = new TextureABGR1555(imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
 
         private void FetchAndCacheTextureIndexed(IByteData data, TexturePixelFormat assumedPixelFormat, ITexture referenceTexture) {
@@ -52,7 +53,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 for (var x = 0; x < Width; x++)
                     imageData[x, y] = (byte) data.GetByte(off++);
 
-            Texture = new TextureIndexed(imageData, assumedPixelFormat, tag: referenceTexture?.Tag ?? "", hashPrefix: referenceTexture?.Hash ?? "NOTEX");
+            Texture = new TextureIndexed(imageData, assumedPixelFormat, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
 
         public ushort[,] UpdateTextureABGR1555(IByteData data, ushort[,] imageData, ITexture referenceTexture) {
@@ -69,7 +70,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             }
             data.Data.SetDataTo(newData.GetDataCopy());
 
-            Texture = new TextureABGR1555(imageData, tag: referenceTexture?.Tag ?? "", hashPrefix: referenceTexture?.Hash ?? "NOTEX");
+            Texture = new TextureABGR1555(imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
             return imageData;
         }
 
@@ -116,10 +117,10 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         }
 
         [TableViewModelColumn(displayName: "Internal Hash", displayOrder: 7, minWidth: 450)]
-        public string Hash => Texture?.Hash ?? "";        
+        public string Hash => Texture?.Hash ?? "";
 
-        [TableViewModelColumn(displayName: "Tag", displayOrder: 8, minWidth: 200)]
-        public string Tag => Texture?.Tag ?? "";        
+        [TableViewModelColumn(displayName: "Tags", displayOrder: 8, minWidth: 200)]
+        public string Tags => (Texture.Tags == null) ? "" : string.Join(", ", Texture.Tags.Select(x => x.Key + "|" + x.Value));
 
         private readonly int _bytesPerProperty;
 
