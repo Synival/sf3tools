@@ -5,8 +5,9 @@ using SF3.Types;
 
 namespace SF3 {
     public class TextureABGR1555 : ITexture {
-        public TextureABGR1555(ushort[,] data, string hashPrefix = "") {
+        public TextureABGR1555(ushort[,] data, string tag = "", string hashPrefix = "") {
             _data = data;
+            Tag = tag;
             _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToABGR1555BitmapData(data);
 
             using (var md5 = MD5.Create())
@@ -28,5 +29,6 @@ namespace SF3 {
         public byte[] BitmapDataIndexed => throw new NotSupportedException();
 
         public string Hash { get; }
+        public string Tag { get; }
     }
 }

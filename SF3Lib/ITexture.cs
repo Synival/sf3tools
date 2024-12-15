@@ -50,5 +50,10 @@ namespace SF3 {
         /// Hash for identifying this as a unique texture.
         /// </summary>
         string Hash { get; }
+
+        /// <summary>
+        /// Tag for identifying textures with the same Hash.
+        /// </summary>
+        string Tag { get; }
     }
 }

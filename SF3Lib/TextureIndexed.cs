@@ -5,12 +5,13 @@ using SF3.Types;
 
 namespace SF3 {
     public class TextureIndexed : ITexture {
-        public TextureIndexed(byte[,] data, TexturePixelFormat format = TexturePixelFormat.UnknownPalette, string hashPrefix = "") {
+        public TextureIndexed(byte[,] data, TexturePixelFormat format = TexturePixelFormat.UnknownPalette, string tag = "", string hashPrefix = "") {
             _data = data;
+            Tag = tag;
             PixelFormat = format;
 
             using (var md5 = MD5.Create())
-                Hash = (hashPrefix == "" ? "" : (hashPrefix + "-"))  + BitConverter.ToString(md5.ComputeHash(data.To1DArray())).Replace("-", "").ToLower();
+                Hash = (hashPrefix == "" ? "" : (hashPrefix + "-")) + BitConverter.ToString(md5.ComputeHash(data.To1DArray())).Replace("-", "").ToLower();
         }
 
         private readonly byte[,] _data;
@@ -27,5 +28,6 @@ namespace SF3 {
         public byte[] BitmapDataARGB1555 => throw new NotSupportedException();
 
         public string Hash { get; }
+        public string Tag { get; }
     }
 }
