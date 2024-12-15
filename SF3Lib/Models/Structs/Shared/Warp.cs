@@ -9,7 +9,7 @@ namespace SF3.Models.Structs.Shared {
         private readonly int type;
         private readonly int map;
 
-        public Warp(IRawData data, int id, string name, int address)
+        public Warp(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x04) {
             unknown1 = Address;
             unknown2 = Address + 1;

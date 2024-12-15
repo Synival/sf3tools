@@ -21,7 +21,7 @@ namespace SF3.Models.Tables {
         /// <summary>
         /// The raw data used for this table.
         /// </summary>
-        IRawData Data { get; }
+        IByteData Data { get; }
 
         /// <summary>
         /// The address of the first row of the table.

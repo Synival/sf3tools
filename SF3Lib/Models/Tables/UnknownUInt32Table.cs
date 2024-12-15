@@ -6,7 +6,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables {
     public class UnknownUInt32Table : Table<UnknownUInt32Struct> {
-        public UnknownUInt32Table(IRawData data, int address, int count)
+        public UnknownUInt32Table(IByteData data, int address, int count)
         : base(data, address) {
             MaxSize = count;
             FormatString = "X" + MaxSize.ToString().Length;

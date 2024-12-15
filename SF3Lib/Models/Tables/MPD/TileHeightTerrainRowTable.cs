@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class TileHeightTerrainRowTable : Table<TileHeightTerrainRow> {
-        public TileHeightTerrainRowTable(IRawData data, int address) : base(data, address) {
+        public TileHeightTerrainRowTable(IByteData data, int address) : base(data, address) {
         }
 
         public override bool Load() {

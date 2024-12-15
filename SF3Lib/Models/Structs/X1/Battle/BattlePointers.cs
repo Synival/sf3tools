@@ -6,7 +6,7 @@ namespace SF3.Models.Structs.X1.Battle {
     public class BattlePointers : Struct {
         private readonly int battlePointer;
 
-        public BattlePointers(IRawData data, int id, string name, int address)
+        public BattlePointers(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x04) {
             battlePointer = Address; // 2 bytes 
         }

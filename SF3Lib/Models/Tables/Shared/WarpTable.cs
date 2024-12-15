@@ -8,7 +8,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.Shared {
     public class WarpTable : Table<Warp> {
-        public WarpTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        public WarpTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load() {

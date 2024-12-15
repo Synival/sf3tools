@@ -9,7 +9,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         private readonly int _compressedTextureOffsetAddress;
         private readonly int _unknownAddress;
 
-        public FrameModel(IRawData data, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum)
+        public FrameModel(IByteData data, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum)
         : base(data, id, name, address, is32Bit ? 0x08 : 0x04) {
             Is32Bit   = is32Bit;
             TextureID = texId;
@@ -24,14 +24,14 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             _unknownAddress                 = Address + 1 * _bytesPerProperty;
         }
 
-        public void FetchAndCacheTexture(IRawData data, TexturePixelFormat assumedPixelFormat) {
+        public void FetchAndCacheTexture(IByteData data, TexturePixelFormat assumedPixelFormat) {
             if (assumedPixelFormat == TexturePixelFormat.ABGR1555)
                 FetchAndCacheTextureABGR1555(data);
             else
                 FetchAndCacheTextureIndexed(data, assumedPixelFormat);
         }
 
-        private void FetchAndCacheTextureABGR1555(IRawData data) {
+        private void FetchAndCacheTextureABGR1555(IByteData data) {
             var imageData = new ushort[Width, Height];
             var off = 0;
             for (var y = 0; y < Height; y++) {
@@ -45,7 +45,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             Texture = new TextureABGR1555(imageData);
         }
 
-        private void FetchAndCacheTextureIndexed(IRawData data, TexturePixelFormat assumedPixelFormat) {
+        private void FetchAndCacheTextureIndexed(IByteData data, TexturePixelFormat assumedPixelFormat) {
             var imageData = new byte[Width, Height];
             var off = 0;
             for (var y = 0; y < Height; y++)
@@ -55,7 +55,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             Texture = new TextureIndexed(imageData, assumedPixelFormat);
         }
 
-        public ushort[,] UpdateTexture(IRawData data, ushort[,] imageData) {
+        public ushort[,] UpdateTexture(IByteData data, ushort[,] imageData) {
             if (imageData.GetLength(0) != Width || imageData.GetLength(1) != Height)
                 throw new ArgumentException("Incoming data dimensions must match specified width/height");
 

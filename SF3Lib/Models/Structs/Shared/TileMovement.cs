@@ -22,7 +22,7 @@ namespace SF3.Models.Structs.Shared {
         private readonly int unknown0e;
         private readonly int unknown0f;
 
-        public TileMovement(IRawData data, int id, string name, int address)
+        public TileMovement(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x10) {
             noEntry       = Address;
             unknown01     = Address + 0x01;

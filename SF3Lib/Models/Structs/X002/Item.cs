@@ -29,7 +29,7 @@ namespace SF3.Models.Structs.X002 {
         private readonly int SpellOnUseLocation;
         private readonly int SpellLvOnUseLocation;
 
-        public Item(IRawData data, int id, string name, int address)
+        public Item(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x18) {
             PriceLocation                = Address;     // 2 bytes. only thing that is 2 bytes
             WeaponTypeLocation           = Address + 2; // 1 byte

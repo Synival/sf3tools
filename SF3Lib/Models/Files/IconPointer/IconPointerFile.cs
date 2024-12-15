@@ -11,10 +11,10 @@ using SF3.RawData;
 
 namespace SF3.Models.Files.IconPointer {
     public class IconPointerFile : ScenarioTableFile, IIconPointerFile {
-        protected IconPointerFile(IRawData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
+        protected IconPointerFile(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }
 
-        public static IconPointerFile Create(IRawData data, INameGetterContext nameContext, ScenarioType scenario) {
+        public static IconPointerFile Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
             var newFile = new IconPointerFile(data, nameContext, scenario);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");

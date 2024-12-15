@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X1 {
     public class TreasureTable : Table<Treasure> {
-        public TreasureTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        public TreasureTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load()

@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X1.Battle {
     public class SpawnZoneTable : Table<SpawnZone> {
-        public SpawnZoneTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        public SpawnZoneTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load()

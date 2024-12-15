@@ -6,7 +6,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD.TextureAnimation {
     public class AllFramesTable : Table<FrameModel> {
-        public AllFramesTable(IRawData data, int address, IEnumerable<TextureAnimationModel> animations) : base(data, address) {
+        public AllFramesTable(IByteData data, int address, IEnumerable<TextureAnimationModel> animations) : base(data, address) {
             Animations = animations;
         }
 

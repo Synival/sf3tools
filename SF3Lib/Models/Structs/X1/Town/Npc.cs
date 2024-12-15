@@ -16,7 +16,7 @@ namespace SF3.Models.Structs.X1.Town {
         private readonly int unknown12;
         private readonly int unknown16;
 
-        public Npc(IRawData data, int id, string name, int address)
+        public Npc(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x18) {
             spriteID  = Address;        // 2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
             unknown1  = Address + 0x02; // unknown + 0x02

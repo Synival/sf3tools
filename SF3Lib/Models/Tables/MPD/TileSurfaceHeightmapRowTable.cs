@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class TileSurfaceHeightmapRowTable : Table<TileSurfaceHeightmapRow> {
-        public TileSurfaceHeightmapRowTable(IRawData data, int address) : base(data, address) {
+        public TileSurfaceHeightmapRowTable(IByteData data, int address) : base(data, address) {
         }
 
         public override bool Load() {

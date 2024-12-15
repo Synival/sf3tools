@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class HealExpTable : Table<HealExp> {
-        public HealExpTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        public HealExpTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load()

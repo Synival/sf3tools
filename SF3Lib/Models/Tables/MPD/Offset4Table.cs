@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class Offset4Table : Table<Offset4Model> {
-        public Offset4Table(IRawData data, int address) : base(data, address) {
+        public Offset4Table(IByteData data, int address) : base(data, address) {
         }
 
         public override bool Load() {

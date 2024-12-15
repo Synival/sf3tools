@@ -14,10 +14,10 @@ namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
         private const int c_RamOffset = 0x290000;
 
-        protected MPD_File(IRawData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
+        protected MPD_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }
 
-        public static MPD_File Create(IRawData data, INameGetterContext nameContext, ScenarioType scenario) {
+        public static MPD_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
             var newFile = new MPD_File(data, nameContext, scenario);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");
@@ -200,7 +200,7 @@ namespace SF3.Models.Files.MPD {
             // Add some callbacks to all child data.
             var allData = ChunkData
                 .Where(x => x != null)
-                .Cast<IRawData>()
+                .Cast<IByteData>()
                 .Concat(Chunk3Frames.Select(x => x.Data))
                 .ToArray();
 

@@ -8,7 +8,7 @@ namespace SF3.Models.Structs.X013 {
         private readonly int supportA;
         private readonly int supportB;
 
-        public SupportType(IRawData data, int id, string name, int address)
+        public SupportType(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x02) {
             supportA = Address;     // 1 byte
             supportB = Address + 1; // 1 byte

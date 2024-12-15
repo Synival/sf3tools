@@ -73,7 +73,7 @@ namespace SF3.Models.Structs.X019 {
         private readonly int unknown19;
         private readonly int unknown20;
 
-        public Monster(IRawData data, int id, string name, int address)
+        public Monster(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x4C) {
             maxHP             = Address; // 2 bytes
             maxMP             = Address + 2;

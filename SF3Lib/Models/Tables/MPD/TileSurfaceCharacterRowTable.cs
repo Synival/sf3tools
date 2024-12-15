@@ -5,7 +5,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class TileSurfaceCharacterRowTable : Table<TileSurfaceCharacterRow> {
-        public TileSurfaceCharacterRowTable(IRawData data, int address) : base(data, address) {
+        public TileSurfaceCharacterRowTable(IByteData data, int address) : base(data, address) {
         }
 
         public override bool Load() {

@@ -7,13 +7,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_FileTextureChunk : TableFile {
-        protected MPD_FileTextureChunk(IRawData data, INameGetterContext nameContext, int address, string name)
+        protected MPD_FileTextureChunk(IByteData data, INameGetterContext nameContext, int address, string name)
         : base(data, nameContext) {
             Address = address;
             Name    = name;
         }
 
-        public static MPD_FileTextureChunk Create(IRawData data, INameGetterContext nameContext, int address, string name) {
+        public static MPD_FileTextureChunk Create(IByteData data, INameGetterContext nameContext, int address, string name) {
             var newFile = new MPD_FileTextureChunk(data, nameContext, address, name);
             newFile.Init();
             return newFile;

@@ -9,7 +9,7 @@ namespace SF3.Models.Structs.X033_X031 {
         private readonly int level3;
         private readonly int level4;
 
-        public WeaponLevel(IRawData data, int id, string name, int address)
+        public WeaponLevel(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x11) {
             level1 = Address + 0x02; // 4 bytes
             level2 = Address + 0x06; // 4 bytes

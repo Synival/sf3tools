@@ -14,11 +14,11 @@ using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
-        protected X1_File(IRawData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(data, nameContext, scenario) {
+        protected X1_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(data, nameContext, scenario) {
             IsBTL99 = isBTL99;
         }
 
-        public static X1_File Create(IRawData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) {
+        public static X1_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) {
             var newFile = new X1_File(data, nameContext, scenario, isBTL99);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");

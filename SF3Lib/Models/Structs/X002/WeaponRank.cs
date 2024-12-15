@@ -9,7 +9,7 @@ namespace SF3.Models.Structs.X002 {
         private readonly int skill2;
         private readonly int skill3;
 
-        public WeaponRank(IRawData data, int id, string name, int address)
+        public WeaponRank(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x04) {
             skill0 = Address;     // 1 byte
             skill1 = Address + 1; // 1 byte

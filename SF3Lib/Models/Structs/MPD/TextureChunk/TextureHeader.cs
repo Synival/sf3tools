@@ -7,7 +7,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         private readonly int numTexturesAddress;
         private readonly int textureIdStartAddress;
 
-        public TextureHeader(IRawData data, int id, string name, int address)
+        public TextureHeader(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x4) {
             numTexturesAddress    = Address;
             textureIdStartAddress = Address + 2;

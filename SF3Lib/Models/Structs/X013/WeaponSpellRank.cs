@@ -10,7 +10,7 @@ namespace SF3.Models.Structs.X013 {
         private readonly int rankA;
         private readonly int rankS;
 
-        public WeaponSpellRank(IRawData data, int id, string name, int address)
+        public WeaponSpellRank(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x05) {
             rankNone = Address;     // 1 byte
             rankC    = Address + 1; // 1 byte

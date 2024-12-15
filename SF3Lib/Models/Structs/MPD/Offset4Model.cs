@@ -9,7 +9,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int _pointer2Address;
         private readonly int _unknown2Address;
 
-        public Offset4Model(IRawData data, int id, string name, int address)
+        public Offset4Model(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x10) {
             _unknown1Address = Address + 0x00;  // 4 bytes
             _pointer1Address = Address + 0x04;  // 4 bytes

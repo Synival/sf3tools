@@ -15,7 +15,7 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int zPos4;
         private readonly int ending;
 
-        public CustomMovement(IRawData data, int id, string name, int address)
+        public CustomMovement(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x16) {
             unknown00 = Address;      // 2 bytes
             xPos1     = Address +  2; // 2 bytes

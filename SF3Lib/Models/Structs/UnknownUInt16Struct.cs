@@ -3,7 +3,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Structs {
     public class UnknownUInt16Struct : Struct {
-        public UnknownUInt16Struct(IRawData data, int id, string name, int address)
+        public UnknownUInt16Struct(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x02) {
         }
 

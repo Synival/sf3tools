@@ -10,7 +10,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         private readonly int heightAddress;
         private readonly int imageDataOffsetAddress;
 
-        public TextureModel(IRawData data, int id, string name, int address, int? nextImageDataOffset = null)
+        public TextureModel(IByteData data, int id, string name, int address, int? nextImageDataOffset = null)
         : base(data, id, name, address, GlobalSize) {
             widthAddress           = Address;     // 1 byte
             heightAddress          = Address + 1; // 1 byte

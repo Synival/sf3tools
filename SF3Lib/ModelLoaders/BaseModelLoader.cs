@@ -15,7 +15,7 @@ namespace SF3.ModelLoaders {
 
         private readonly EventHandler _onModifiedChangedDelegate;
 
-        public delegate IRawData BaseModelLoaderCreateRawDataDelegate(IModelLoader loader);
+        public delegate IByteData BaseModelLoaderCreateRawDataDelegate(IModelLoader loader);
         public delegate IBaseFile BaseModelLoaderCreateModelDelegate(IModelLoader loader);
         public delegate bool BaseModelLoaderSaveDelegate(IModelLoader loader);
 
@@ -90,8 +90,8 @@ namespace SF3.ModelLoaders {
             }
         }
   
-        private IRawData _rawData = null;
-        public IRawData RawData {
+        private IByteData _rawData = null;
+        public IByteData RawData {
             get => _rawData;
             set {
                 if (_rawData != value) {

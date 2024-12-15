@@ -5,7 +5,7 @@ namespace SF3.RawData {
     /// <summary>
     /// Helper class for modifying any kind of data blob and tracking whether or not it's been edited.
     /// </summary>
-    public interface IRawData : IModifiable, IDisposable {
+    public interface IByteData : IModifiable, IDisposable {
         /// <summary>
         /// A reference to the underlying ByteArray.
         /// </summary>

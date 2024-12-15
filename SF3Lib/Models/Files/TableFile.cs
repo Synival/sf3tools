@@ -11,7 +11,7 @@ namespace SF3.Models.Files {
     /// File for any kind of file that has tables.
     /// </summary>
     public abstract class TableFile : ITableFile {
-        protected TableFile(IRawData data, INameGetterContext nameContext) {
+        protected TableFile(IByteData data, INameGetterContext nameContext) {
             Data = data;
             NameGetterContext = nameContext;
 
@@ -69,7 +69,7 @@ namespace SF3.Models.Files {
         /// <summary>
         /// The underlying data for this table file. Don't modify this directly!!
         /// </summary>
-        public IRawData Data { get; }
+        public IByteData Data { get; }
 
         public INameGetterContext NameGetterContext { get; }
 

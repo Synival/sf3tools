@@ -11,7 +11,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int _heightAddress;
         private readonly int _unknownAddress;
 
-        public TextureAnimationModel(IRawData data, int id, string name, int address, bool is32Bit)
+        public TextureAnimationModel(IByteData data, int id, string name, int address, bool is32Bit)
         : base(data, id, name, address, 0x0A) {
             Is32Bit = is32Bit;
 

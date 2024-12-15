@@ -8,7 +8,7 @@ namespace SF3.Models.Files {
     /// we might as well have it to avoid lots of code duplication.
     /// </summary>
     public abstract class ScenarioTableFile : TableFile, IScenarioFile {
-        protected ScenarioTableFile(IRawData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext) {
+        protected ScenarioTableFile(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext) {
             Scenario = scenario;
         }
 

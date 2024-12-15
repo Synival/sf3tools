@@ -8,7 +8,7 @@ namespace SF3.Models.Structs.IconPointer {
         //SPELLS
         private readonly int theSpellIcon;
 
-        public SpellIcon(IRawData data, int id, string name, int address, bool has16BitIconAddr, int realOffsetStart)
+        public SpellIcon(IByteData data, int id, string name, int address, bool has16BitIconAddr, int realOffsetStart)
         : base(data, id, name, address, has16BitIconAddr ? 0x02 : 0x04) {
             Has16BitIconAddr = has16BitIconAddr;
             RealOffsetStart = realOffsetStart;

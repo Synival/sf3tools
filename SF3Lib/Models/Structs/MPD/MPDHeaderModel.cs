@@ -30,7 +30,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int unknown7Address;             // int32  Unknown. Small value in upper int16, 0x0000 in lower int16. May me FIXED.
         private readonly int offset12Address;             // int32  Pointer to unknown list of exactly 8 uint16 in two block with 4 uint16 each.
 
-        public MPDHeaderModel(IRawData data, int id, string name, int address, bool hasPalette3)
+        public MPDHeaderModel(IByteData data, int id, string name, int address, bool hasPalette3)
         : base(data, id, name, address, 0x58) {
             unknown1Address             = Address;        // 2 bytes
             unknown2Address             = Address + 0x02; // 2 bytes

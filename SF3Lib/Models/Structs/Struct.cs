@@ -3,7 +3,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Structs {
     public abstract class Struct : IStruct {
-        public Struct(IRawData data, int id, string name, int address, int size) {
+        public Struct(IByteData data, int id, string name, int address, int size) {
             Data    = data;
             Name    = name;
             ID      = id;
@@ -11,7 +11,7 @@ namespace SF3.Models.Structs {
             Size    = size;
         }
 
-        public IRawData Data { get; protected set; }
+        public IByteData Data { get; protected set; }
 
         [TableViewModelColumn(displayOrder: -3, displayFormat: "X2", minWidth: 45)]
         public int ID { get; protected set; }

@@ -12,7 +12,7 @@ namespace SF3.Models.Tables {
     /// Base implementation for any table of SF3 data that can be modified.
     /// </summary>
     public abstract class Table : ITable {
-        protected Table(IRawData data, string resourceFile, int address) {
+        protected Table(IByteData data, string resourceFile, int address) {
             Data = data;
             ResourceFile = resourceFile;
             Address = address;
@@ -30,7 +30,7 @@ namespace SF3.Models.Tables {
         /// <returns>'true' if successful (or no models are loaded), 'false' on failure.</returns>
         public abstract bool Reset();
 
-        public IRawData Data { get; }
+        public IByteData Data { get; }
         public string ResourceFile { get; }
         public int Address { get; }
 
@@ -43,10 +43,10 @@ namespace SF3.Models.Tables {
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
     public abstract class Table<T> : Table, ITable<T> where T : class, IStruct {
-        protected Table(IRawData data, int address) : base(data, null, address) {
+        protected Table(IByteData data, int address) : base(data, null, address) {
         }
 
-        protected Table(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected Table(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Reset() {

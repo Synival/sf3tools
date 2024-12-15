@@ -14,7 +14,7 @@ namespace SF3.Models.Structs.X002 {
         private readonly int unknown;
         private readonly int chr;
 
-        public Loading(IRawData data, int id, string name, int address)
+        public Loading(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x10) {
             locationID = Address;        // 2 bytes
             x1         = Address + 0x02; // 2 bytes

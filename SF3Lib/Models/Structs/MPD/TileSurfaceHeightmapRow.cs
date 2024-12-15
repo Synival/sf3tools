@@ -6,7 +6,7 @@ namespace SF3.Models.Structs.MPD {
     public class TileSurfaceHeightmapRow : Struct {
         private readonly int[] xAddress = new int[64];
 
-        public TileSurfaceHeightmapRow(IRawData data, int id, string name, int address)
+        public TileSurfaceHeightmapRow(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 256) {
             for (var i = 0; i < xAddress.Length; i++)
                 xAddress[i] = Address + i * 4;

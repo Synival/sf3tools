@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class MagicBonusTable : Table<MagicBonus> {
-        public MagicBonusTable(IRawData data, string resourceFile, int address, bool has32BitValues) : base(data, resourceFile, address) {
+        public MagicBonusTable(IByteData data, string resourceFile, int address, bool has32BitValues) : base(data, resourceFile, address) {
             Has32BitValues = has32BitValues;
         }
 

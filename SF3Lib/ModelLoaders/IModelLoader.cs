@@ -26,7 +26,7 @@ namespace SF3.ModelLoaders {
         /// <summary>
         /// The raw data that exists when IsLoaded is 'true'.
         /// </summary>
-        IRawData RawData { get; }
+        IByteData RawData { get; }
 
         /// <summary>
         /// 'True' when the model is loaded.

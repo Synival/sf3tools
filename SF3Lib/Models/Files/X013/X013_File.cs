@@ -11,10 +11,10 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X013 {
     public class X013_File : ScenarioTableFile, IX013_File {
-        protected X013_File(IRawData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
+        protected X013_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }
 
-        public static X013_File Create(IRawData data, INameGetterContext nameContext, ScenarioType scenario) {
+        public static X013_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
             var newFile = new X013_File(data, nameContext, scenario);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");

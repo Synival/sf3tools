@@ -4,7 +4,7 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X002 {
     public class LoadingTable : Table<Loading> {
-        public LoadingTable(IRawData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        public LoadingTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
         public override bool Load()

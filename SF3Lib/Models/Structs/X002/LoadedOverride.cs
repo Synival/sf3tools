@@ -19,7 +19,7 @@ namespace SF3.Models.Structs.X002 {
         private readonly int julChr;
         private readonly int extraChr;
 
-        public LoadedOverride(IRawData data, int id, string name, int address)
+        public LoadedOverride(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x28) {
             mapID      = Address;        // 2 bytes
             synMusic   = Address + 0x02; // 1 byte
