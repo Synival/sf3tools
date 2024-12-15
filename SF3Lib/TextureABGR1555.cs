@@ -10,7 +10,7 @@ namespace SF3 {
             _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToABGR1555BitmapData(data);
 
             using (var md5 = MD5.Create())
-                Hash = hashPrefix + BitConverter.ToString(md5.ComputeHash(_bitmapDataARGB1555)).Replace("-", "").ToLower();
+                Hash = (hashPrefix == "" ? "" : (hashPrefix + "-")) + BitConverter.ToString(md5.ComputeHash(_bitmapDataARGB1555)).Replace("-", "").ToLower();
         }
 
         private readonly ushort[,] _data;

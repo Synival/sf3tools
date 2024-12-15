@@ -42,7 +42,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 }
             }
 
-            Texture = new TextureABGR1555(imageData, referenceTexture?.Hash ?? "NOTEX-");
+            Texture = new TextureABGR1555(imageData, referenceTexture?.Hash ?? "NOTEX");
         }
 
         private void FetchAndCacheTextureIndexed(IByteData data, TexturePixelFormat assumedPixelFormat, ITexture referenceTexture) {
@@ -52,7 +52,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 for (var x = 0; x < Width; x++)
                     imageData[x, y] = (byte) data.GetByte(off++);
 
-            Texture = new TextureIndexed(imageData, assumedPixelFormat, referenceTexture?.Hash ?? "NOTEX-");
+            Texture = new TextureIndexed(imageData, assumedPixelFormat, referenceTexture?.Hash ?? "NOTEX");
         }
 
         public ushort[,] UpdateTextureABGR1555(IByteData data, ushort[,] imageData, ITexture referenceTexture) {
@@ -69,7 +69,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             }
             data.Data.SetDataTo(newData.GetDataCopy());
 
-            Texture = new TextureABGR1555(imageData, referenceTexture?.Hash ?? "NOTEX-");
+            Texture = new TextureABGR1555(imageData, referenceTexture?.Hash ?? "NOTEX");
             return imageData;
         }
 
@@ -114,6 +114,9 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             get => Data.GetData(_unknownAddress, _bytesPerProperty);
             set => Data.SetData(_unknownAddress, value, _bytesPerProperty);
         }
+
+        [TableViewModelColumn(displayName: "Internal Hash", displayOrder: 7, minWidth: 450)]
+        public string Hash => Texture?.Hash ?? "";        
 
         private readonly int _bytesPerProperty;
 

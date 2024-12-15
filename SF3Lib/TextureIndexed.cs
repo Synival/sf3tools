@@ -10,7 +10,7 @@ namespace SF3 {
             PixelFormat = format;
 
             using (var md5 = MD5.Create())
-                Hash = hashPrefix + BitConverter.ToString(md5.ComputeHash(data.To1DArray())).Replace("-", "").ToLower();
+                Hash = (hashPrefix == "" ? "" : (hashPrefix + "-"))  + BitConverter.ToString(md5.ComputeHash(data.To1DArray())).Replace("-", "").ToLower();
         }
 
         private readonly byte[,] _data;

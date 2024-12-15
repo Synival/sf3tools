@@ -93,12 +93,15 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             }
         }
 
+        [TableViewModelColumn(displayName: "(Assumed) Pixel Format", displayOrder: 3)]
+        public TexturePixelFormat AssumedPixelFormat { get; }
+
+        [TableViewModelColumn(displayName: "Internal Hash", displayOrder: 4, minWidth: 225)]
+        public string Hash => Texture?.Hash ?? "";        
+
         public bool TextureIsLoaded => Texture != null;
 
         public int BytesPerPixel { get; }
-
-        [TableViewModelColumn(displayName: "(Assumed) Pixel Format", displayOrder: 3)]
-        public TexturePixelFormat AssumedPixelFormat { get; }
 
         public byte[,] RawImageData8Bit {
             get {
