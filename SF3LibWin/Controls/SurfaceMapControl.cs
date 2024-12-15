@@ -18,22 +18,24 @@ namespace SF3.Win.Controls {
             InitializeComponent();
             Size = MaximumSize = new Size(WidthInTiles  * TileResolution, HeightInTiles * TileResolution);
             ResumeLayout();
-
-            SetStyle(ControlStyles.OptimizedDoubleBuffer |
-                     ControlStyles.UserPaint |
-                     ControlStyles.AllPaintingInWmPaint, true);
         }
 
         protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
+
             if (FullImage != null) {
                 var rect = e.ClipRectangle;
                 e.Graphics.DrawImage(FullImage, rect.X, rect.Y, rect, GraphicsUnit.Pixel);
             }
+            else {
+                var rect = e.ClipRectangle;
+                e.Graphics.FillRectangle(Brushes.Transparent, rect.X, rect.Y, rect.Width, rect.Height);
+            }
 
             if (_tileX.HasValue && _tileY.HasValue) {
-                var rect = new Rectangle(_tileX.Value * TileResolution, _tileY.Value * TileResolution, TileResolution - 1, TileResolution - 1);
-                e.Graphics.DrawRectangle(Pens.White, rect);
+                var rect = new Rectangle(_tileX.Value * TileResolution, _tileY.Value * TileResolution, TileResolution, TileResolution);
+                if (rect.IntersectsWith(e.ClipRectangle))
+                    e.Graphics.DrawRectangle(Pens.White, rect.X, rect.Y, rect.Width - 1, rect.Height - 1);
             }
         }
 
