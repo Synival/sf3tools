@@ -25,7 +25,14 @@
         private void InitializeComponent() {
             SuspendLayout();
             components = new System.ComponentModel.Container();
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+
+            API = OpenTK.Windowing.Common.ContextAPI.OpenGL;
+            APIVersion = new System.Version(3, 3, 0, 0);
+            Flags = OpenTK.Windowing.Common.ContextFlags.Default;
+            IsEventDriven = true;
+            Profile = OpenTK.Windowing.Common.ContextProfile.Core;
+            SharedContext = null;
+
             BackColor = System.Drawing.Color.FromArgb(  64,   64,   64);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "SurfaceMap3DControl";
