@@ -1,5 +1,5 @@
 ﻿namespace SF3.Win.Controls {
-    partial class SurfaceMapControl {
+    partial class SurfaceMap2DControl {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -25,13 +25,12 @@
         private void InitializeComponent() {
             SuspendLayout();
             // 
-            // SurfaceMapControl
+            // SurfaceMap2DControl
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.FromArgb(  64,   64,   64);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            Name = "SurfaceMapControl";
+            Name = "SurfaceMap2DControl";
             Size = new System.Drawing.Size(1024, 1024);
             ResumeLayout(false);
         }

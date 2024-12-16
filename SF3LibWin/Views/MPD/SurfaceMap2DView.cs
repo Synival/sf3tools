@@ -2,8 +2,8 @@
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views.MPD {
-    public class SurfaceMapView : ControlView<SurfaceMapControl> {
-        public SurfaceMapView(string name, IMPD_File model) : base(name) {
+    public class SurfaceMap2DView : ControlView<SurfaceMap2DControl> {
+        public SurfaceMap2DView(string name, IMPD_File model) : base(name) {
             Model = model;
         }
 
@@ -18,6 +18,6 @@ namespace SF3.Win.Views.MPD {
 
         public IMPD_File Model { get; }
 
-        public SurfaceMapControl SurfaceMapControl => (SurfaceMapControl) Control;
+        public SurfaceMap2DControl SurfaceMapControl => (SurfaceMap2DControl) Control;
     }
 }

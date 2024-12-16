@@ -8,12 +8,12 @@ using SF3.Models.Files.MPD;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Controls {
-    public partial class SurfaceMapControl : UserControl {
+    public partial class SurfaceMap2DControl : UserControl {
         public const int WidthInTiles = 64;
         public const int HeightInTiles = 64;
         public const int TileResolution = 16;
 
-        public SurfaceMapControl() {
+        public SurfaceMap2DControl() {
             SuspendLayout();
             InitializeComponent();
             Size = MaximumSize = new Size(WidthInTiles  * TileResolution, HeightInTiles * TileResolution);

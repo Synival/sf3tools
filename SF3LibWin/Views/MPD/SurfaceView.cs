@@ -18,11 +18,17 @@ namespace SF3.Win.Views.MPD {
             if (base.Create() == null)
                 return null;
 
-            SurfaceMapView = new SurfaceMapView("Tiles", Model);
-            _ = CreateCustomChild(SurfaceMapView, autoFill: false, (name) => new NoScrollTabPage(name) { AutoScroll = true });
-            _surfaceMapControlTab = (TabPage) SurfaceMapView.SurfaceMapControl.Parent;
-            TabControl.Selected += UpdateSurfaceMapControl;
-            SurfaceMapView.UpdateMap();
+            SurfaceMap2DView = new SurfaceMap2DView("Tiles (2D)", Model);
+            _ = CreateCustomChild(SurfaceMap2DView, autoFill: false, (name) => new NoScrollTabPage(name) { AutoScroll = true });
+            _surfaceMap2DControlTab = (TabPage) SurfaceMap2DView.SurfaceMapControl.Parent;
+            SurfaceMap2DView.UpdateMap();
+
+            SurfaceMap3DView = new SurfaceMap3DView("Tiles (3D)", Model);
+            _ = CreateChild(SurfaceMap3DView, autoFill: true);
+            _surfaceMap3DControlTab = (TabPage) SurfaceMap3DView.SurfaceMapControl.Parent;
+            SurfaceMap3DView.UpdateMap();
+
+            TabControl.Selected += UpdateSurfaceMapControls;
 
             var ngc = Model.NameGetterContext;
 
@@ -34,23 +40,35 @@ namespace SF3.Win.Views.MPD {
             return Control;
         }
 
-        private TabPage _surfaceMapControlTab = null;
+        private TabPage _surfaceMap2DControlTab = null;
+        private TabPage _surfaceMap3DControlTab = null;
 
-        void UpdateSurfaceMapControl(object sender, EventArgs eventArgs) {
-            if (TabControl.SelectedTab == _surfaceMapControlTab)
-                SurfaceMapView?.UpdateMap();
+        void UpdateSurfaceMapControls(object sender, EventArgs eventArgs) {
+            if (TabControl.SelectedTab == _surfaceMap2DControlTab)
+                SurfaceMap2DView?.UpdateMap();
+            if (TabControl.SelectedTab == _surfaceMap3DControlTab)
+                SurfaceMap3DView?.UpdateMap();
         }
 
         public override void Destroy() {
-            if (SurfaceMapView != null) {
-                TabControl.Selected -= UpdateSurfaceMapControl;
-                _surfaceMapControlTab = null;
-                SurfaceMapView = null;
+            if (TabControl != null)
+                TabControl.Selected -= UpdateSurfaceMapControls;
+
+            if (SurfaceMap2DView != null) {
+                _surfaceMap2DControlTab = null;
+                SurfaceMap2DView = null;
             }
+
+            if (SurfaceMap3DView != null) {
+                _surfaceMap3DControlTab = null;
+                SurfaceMap3DView = null;
+            }
+
             base.Destroy();
         }
 
         public IMPD_File Model { get; }
-        public SurfaceMapView SurfaceMapView { get; private set; }
+        public SurfaceMap2DView SurfaceMap2DView { get; private set; }
+        public SurfaceMap3DView SurfaceMap3DView { get; private set; }
     }
 }

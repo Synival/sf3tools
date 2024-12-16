@@ -28,7 +28,7 @@
     <Compile Update="Controls\UInt16UpDownControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Controls\SurfaceMapControl.cs">
+    <Compile Update="Controls\SurfaceMap2DControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Controls\TextureControl.cs">
