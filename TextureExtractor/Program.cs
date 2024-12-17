@@ -88,7 +88,7 @@ namespace TextureExtractor {
                             }
 
                             var tileSurfaceCharacterIDs = mpdFile.TileSurfaceCharacterRows.Rows
-                                .SelectMany(x => x.Tiles)
+                                .SelectMany(x => x.GetRowCopy())
                                 .Select(x => x & 0xFF)
                                 .Distinct()
                                 .ToArray();

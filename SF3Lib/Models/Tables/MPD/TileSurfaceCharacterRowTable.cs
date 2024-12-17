@@ -24,7 +24,7 @@ namespace SF3.Models.Tables.MPD {
         public ushort[,] Make2DTextureData() {
             var textureData = new ushort[64, 64];
             for (var y = 0; y < textureData.GetLength(1); y++) {
-                var tiles = Rows[y].Tiles;
+                var tiles = Rows[y].GetRowCopy();
                 for (var x = 0; x < textureData.GetLength(0); x++)
                     textureData[x, y] = tiles[x];
             }

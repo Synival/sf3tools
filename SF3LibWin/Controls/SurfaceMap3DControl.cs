@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL;
@@ -64,7 +65,7 @@ namespace SF3.Win.Controls {
                 var handle = GL.GetUniformLocation(_shader.Handle, "projection");
                 var matrix = Matrix4.CreatePerspectiveFieldOfView(
                     MathHelper.DegreesToRadians(45.0f), (float) ClientSize.Width / ClientSize.Height,
-                    0.1f, 100.0f);
+                    0.1f, 300.0f);
                 GL.UniformMatrix4(handle, false, ref matrix);
             }
         }
@@ -74,14 +75,16 @@ namespace SF3.Win.Controls {
             MakeCurrent();
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            if (_model == null)
+                return;
 
             _shader.Use();
             var handle = GL.GetUniformLocation(_shader.Handle, "model");
-            var matrix = Matrix4.CreateRotationY(MathHelper.DegreesToRadians(_frame * 5));
+            var matrix = Matrix4.CreateRotationY(MathHelper.DegreesToRadians(_frame * 0.2f));
             GL.UniformMatrix4(handle, false, ref matrix);
 
             handle = GL.GetUniformLocation(_shader.Handle, "view");
-            matrix *= Matrix4.LookAt(new Vector3(0.0f, (float) Math.Sin(MathHelper.DegreesToRadians(_frame)) * 4.0f + 5.0f, 10.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector3(0.0f, 1.0f, 0.0f));
+            matrix *= Matrix4.LookAt(new Vector3(0.0f, (float) Math.Sin(MathHelper.DegreesToRadians(_frame * 0.1f)) * 40.0f + 50.0f, 100.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector3(0.0f, 1.0f, 0.0f));
             GL.UniformMatrix4(handle, false, ref matrix);
 
             _model.Draw();
@@ -90,7 +93,43 @@ namespace SF3.Win.Controls {
         }
 
         public void UpdateModel(ushort[,] textureData, MPD_FileTextureChunk[] textureChunks, TileSurfaceHeightmapRow[] heightmap) {
-            // TODO: actual work!
+            MakeCurrent();
+
+            if (_model != null) {
+                _model.Dispose();
+                _model = null;
+                Invalidate();
+            }
+
+            if (textureData == null || heightmap == null)
+                return;
+
+            var quads = new List<Quad>();
+            var offX = (float) textureData.GetLength(0) / -2;
+            var offY = (float) textureData.GetLength(1) / -2;
+
+            for (var y = 0; y < textureData.GetLength(1); y++) {
+                for (var x = 0; x < textureData.GetLength(1); x++) {
+                    var key = textureData[x, y];
+                    var textureId = textureData[x, y] & 0xFF;
+                    var textureFlags = (byte) ((textureData[x, y] >> 8) & 0xFF);
+
+                    if (textureId == 0xFF)
+                        continue;
+
+                    var heights = heightmap[y][x];
+                    if (heights != 0)
+                        ;
+                    quads.Add(new Quad([
+                        new Vector3(x + 0 + offX, ((heights >> 8) & 0xFF) * 0.125f, y + 0 + offY),
+                        new Vector3(x + 1 + offX, ((heights >> 0) & 0xFF) * 0.125f, y + 0 + offY),
+                        new Vector3(x + 1 + offX, ((heights >> 24)  & 0xFF) * 0.125f, y + 1 + offY),
+                        new Vector3(x + 0 + offX, ((heights >> 16)  & 0xFF) * 0.125f, y + 1 + offY)
+                    ]));
+                }
+            }
+
+            _model = new QuadModel(quads.ToArray());
             Invalidate();
         }
 
@@ -100,7 +139,7 @@ namespace SF3.Win.Controls {
             if (_shader == null || !Visible)
                 return;
 
-            _frame = (_frame + 1) % 360;
+            _frame = (_frame + 1) % 3600;
             Invalidate();
         }
 

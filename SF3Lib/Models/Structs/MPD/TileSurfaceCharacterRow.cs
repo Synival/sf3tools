@@ -1,5 +1,4 @@
 using CommonLib.Attributes;
-using SF3.Models.Structs;
 using SF3.RawData;
 
 namespace SF3.Models.Structs.MPD {
@@ -15,14 +14,17 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        public ushort[] Tiles {
-            get {
-                // TODO: somehow cache this?
-                var tiles = new ushort[64];
-                for (var i = 0; i < tiles.Length; i++)
-                    tiles[i] = (ushort) Data.GetWord(xAddress[i]);
-                return tiles;
-            }
+        public ushort[] GetRowCopy() {
+            // TODO: somehow cache this?
+            var tiles = new ushort[64];
+            for (var i = 0; i < tiles.Length; i++)
+                tiles[i] = (ushort) Data.GetWord(xAddress[i]);
+            return tiles;
+        }
+
+        public int this[int index] {
+            get => Data.GetWord(xAddress[index]);
+            set => Data.SetWord(xAddress[index], value);
         }
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {

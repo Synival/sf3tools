@@ -1,5 +1,4 @@
 using CommonLib.Attributes;
-using SF3.Models.Structs;
 using SF3.RawData;
 
 namespace SF3.Models.Structs.MPD {
@@ -10,6 +9,11 @@ namespace SF3.Models.Structs.MPD {
         : base(data, id, name, address, 128) {
             for (var i = 0; i < xAddress.Length; i++)
                 xAddress[i] = Address + i * 2;
+        }
+
+        public int this[int index] {
+            get => Data.GetWord(xAddress[index]);
+            set => Data.SetWord(xAddress[index], value);
         }
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {
