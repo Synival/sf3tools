@@ -11,45 +11,45 @@ namespace SF3.Win.Controls {
     public partial class SurfaceMap3DControl : GLControl {
         public SurfaceMap3DControl() {
             InitializeComponent();
+
+            Disposed += (s, a) => {
+                if (_model != null) {
+                    _model.Dispose();
+                    _model = null;
+                }
+                if (_shader != null) {
+                    _shader.Dispose();
+                    _shader = null;
+                }
+                if (_timer != null) {
+                    _timer.Dispose();
+                    _timer = null;
+                }
+            };
         }
 
         protected override void OnLoad(EventArgs e) {
             base.OnLoad(e);
             MakeCurrent();
 
-            _shader = new Shader("Shaders/Shader.vert", "Shaders/Shader.frag");
-
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Less);
 
-            _vertexBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
-            GL.BufferData(BufferTarget.ArrayBuffer, _vertices.Length * sizeof(float), _vertices, BufferUsageHint.StaticDraw);
+            var quad = new Quad([
+                new Vector3(-1.0f,  0.0f,  1.0f),
+                new Vector3(-1.0f,  0.0f, -1.0f),
+                new Vector3(1.0f,  0.0f, -1.0f),
+                new Vector3(1.0f,  0.0f,  1.0f)
+            ]);
+            _model = new QuadModel([quad]);
 
-            _vertexArrayObject = GL.GenVertexArray();
-            GL.BindVertexArray(_vertexArrayObject);
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
-            GL.EnableVertexAttribArray(0);
-
-            _elementBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, _elementBufferObject);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, _indices.Length * sizeof(uint), _indices, BufferUsageHint.StaticDraw);
+            _shader = new Shader("Shaders/Shader.vert", "Shaders/Shader.frag");
 
             _timer = new Timer() { Interval = 1000 / 30 };
             _timer.Tick += (s, a) => UpdateCamera();
             _timer.Start();
             UpdateCamera();
-
-            Disposed += (s, a) => {
-                _shader.Dispose();
-                _shader = null;
-                GL.DeleteBuffer(_elementBufferObject);
-                GL.DeleteVertexArray(_vertexArrayObject);
-                GL.DeleteBuffer(_vertexBufferObject);
-                _timer.Dispose();
-                _timer = null;
-            };
         }
 
         protected override void OnResize(EventArgs e) {
@@ -84,8 +84,7 @@ namespace SF3.Win.Controls {
             matrix *= Matrix4.LookAt(new Vector3(0.0f, (float) Math.Sin(MathHelper.DegreesToRadians(_frame)) * 4.0f + 5.0f, 10.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector3(0.0f, 1.0f, 0.0f));
             GL.UniformMatrix4(handle, false, ref matrix);
 
-            GL.BindVertexArray(_vertexArrayObject);
-            GL.DrawElements(PrimitiveType.Triangles, _indices.Length, DrawElementsType.UnsignedInt, 0);
+            _model.Draw();
 
             SwapBuffers(); // Display the result.
         }
@@ -105,23 +104,8 @@ namespace SF3.Win.Controls {
             Invalidate();
         }
 
-        private float[] _vertices = {
-            -1.0f,  0.0f,  1.0f,
-            -1.0f,  0.0f, -1.0f,
-             1.0f,  0.0f, -1.0f,
-             1.0f,  0.0f,  1.0f,
-        };
-
-        private uint[] _indices = {
-            0, 1, 3,
-            1, 2, 3
-        };
-
-        private int _vertexBufferObject;
-        private int _elementBufferObject;
-        private int _vertexArrayObject;
-
-        private Shader _shader;
-        private Timer _timer;
+        private Shader _shader = null;
+        private QuadModel _model = null;
+        private Timer _timer = null;
     }
 }
