@@ -31,6 +31,10 @@ namespace SF3.Win.Controls {
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
             GL.EnableVertexAttribArray(0);
 
+            _elementBufferObject = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, _elementBufferObject);
+            GL.BufferData(BufferTarget.ElementArrayBuffer, _indices.Length * sizeof(uint), _indices, BufferUsageHint.StaticDraw);
+
             Disposed += (s, a) => {
                 _shader.Dispose();
                 GL.DeleteVertexArray(_vertexArrayObject);
@@ -54,7 +58,7 @@ namespace SF3.Win.Controls {
 
             GL.BindVertexArray(_vertexArrayObject);
             _shader.Use();
-            GL.DrawArrays(PrimitiveType.Triangles, 0, _vertices.Length / 3);
+            GL.DrawElements(PrimitiveType.Triangles, _indices.Length, DrawElementsType.UnsignedInt, 0);
 
             SwapBuffers(); // Display the result.
         }
@@ -65,16 +69,19 @@ namespace SF3.Win.Controls {
         }
 
         private readonly float[] _vertices = {
+            -0.25f,  0.5f, 0.0f, // Top-left vertex
             -0.5f,  -0.5f, 0.0f, // Bottom-left vertex
              0.5f,  -0.5f, 0.0f, // Bottom-right vertex
              0.25f,  0.5f, 0.0f, // Top-right vertex
+        };
 
-            -0.5f,  -0.5f, 0.0f, // Bottom-left vertex
-             0.25f,  0.5f, 0.0f, // Top-right vertex
-            -0.25f,  0.5f, 0.0f, // Top-left vertex
+        private readonly uint[] _indices = {
+            0, 1, 3,
+            1, 2, 3
         };
 
         private int _vertexBufferObject;
+        private int _elementBufferObject;
         private int _vertexArrayObject;
 
         private Shader _shader;
