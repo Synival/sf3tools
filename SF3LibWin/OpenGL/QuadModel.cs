@@ -9,8 +9,11 @@ namespace SF3.Win.OpenGL {
                 throw new ArgumentException(nameof(quads));
 
             _vertices = quads
-                .SelectMany(x => x.Vertices)
-                .SelectMany(x => new float[] { x.X, x.Y, x.Z })
+                .SelectMany(x => x.Vertices.Select((y, i) => new { Quad = x, Vertex = y, Color = x.Colors[i] }))
+                .SelectMany(x => new float[] {
+                    x.Vertex.X, x.Vertex.Y, x.Vertex.Z,
+                    x.Color.X,  x.Color.Y,  x.Color.Z
+                })
                 .ToArray();
 
             _indices = quads
@@ -27,8 +30,14 @@ namespace SF3.Win.OpenGL {
 
             _vertexArrayObject = GL.GenVertexArray();
             GL.BindVertexArray(_vertexArrayObject);
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+
+            var stride = 6 * sizeof(float);
+
+            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, stride, 0);
             GL.EnableVertexAttribArray(0);
+
+            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, stride, 3 * sizeof(float));
+            GL.EnableVertexAttribArray(1);
 
             _elementBufferObject = GL.GenBuffer();
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, _elementBufferObject);
