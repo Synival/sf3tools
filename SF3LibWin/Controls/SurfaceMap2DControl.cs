@@ -39,10 +39,10 @@ namespace SF3.Win.Controls {
             }
         }
 
-        public Dictionary<int, Image> UniqueImages { get; private set; } = null;
-        public Image[,] Images { get; private set; } = null;
+        public Dictionary<int, Bitmap> UniqueImages { get; private set; } = null;
+        public Bitmap[,] Images { get; private set; } = null;
         public byte[,] Flags { get; private set; } = null;
-        public Image FullImage { get; private set; } = null;
+        public Bitmap FullImage { get; private set; } = null;
 
         public void UpdateTextures(ushort[,] textureData, MPD_FileTextureChunk[] textureChunks) {
             if (textureData == null || textureChunks == null) {
@@ -56,8 +56,8 @@ namespace SF3.Win.Controls {
                 return;
             }
 
-            UniqueImages = new Dictionary<int, Image>();
-            Images = new Image[textureData.GetLength(1), textureData.GetLength(0)];
+            UniqueImages = new Dictionary<int, Bitmap>();
+            Images = new Bitmap[textureData.GetLength(1), textureData.GetLength(0)];
             Flags = new byte[textureData.GetLength(1), textureData.GetLength(0)];
 
             for (int y = 0; y < textureData.GetLength(1); y++) {

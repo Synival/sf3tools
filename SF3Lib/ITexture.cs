@@ -23,6 +23,11 @@ namespace SF3 {
     /// </summary>
     public interface ITexture {
         /// <summary>
+        /// ID for texture.
+        /// </summary>
+        int ID { get; }
+
+        /// <summary>
         /// The number of bytes per pixel, in an inclusive range from (1 - 4).
         /// </summary>
         int BytesPerPixel { get; }

@@ -37,6 +37,8 @@ namespace SF3.Win.Controls {
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Less);
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             _shader = new Shader("Shaders/Shader.vert", "Shaders/Shader.frag");
 
@@ -58,7 +60,7 @@ namespace SF3.Win.Controls {
                 _shader.Use();
                 var handle = GL.GetUniformLocation(_shader.Handle, "projection");
                 var matrix = Matrix4.CreatePerspectiveFieldOfView(
-                    MathHelper.DegreesToRadians(45.0f), (float) ClientSize.Width / ClientSize.Height,
+                    MathHelper.DegreesToRadians(22.50f), (float) ClientSize.Width / ClientSize.Height,
                     0.1f, 300.0f);
                 GL.UniformMatrix4(handle, false, ref matrix);
             }

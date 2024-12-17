@@ -43,7 +43,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 }
             }
 
-            Texture = new TextureABGR1555(imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
+            Texture = new TextureABGR1555(ID * 1000 + FrameNum, imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
 
         private void FetchAndCacheTextureIndexed(IByteData data, TexturePixelFormat assumedPixelFormat, ITexture referenceTexture) {
@@ -53,7 +53,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 for (var x = 0; x < Width; x++)
                     imageData[x, y] = (byte) data.GetByte(off++);
 
-            Texture = new TextureIndexed(imageData, assumedPixelFormat, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
+            Texture = new TextureIndexed(ID * 1000 + FrameNum, imageData, assumedPixelFormat, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
 
         public ushort[,] UpdateTextureABGR1555(IByteData data, ushort[,] imageData, ITexture referenceTexture) {
@@ -70,7 +70,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             }
             data.Data.SetDataTo(newData.GetDataCopy());
 
-            Texture = new TextureABGR1555(imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
+            Texture = new TextureABGR1555(ID * 1000 + FrameNum, imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
             return imageData;
         }
 

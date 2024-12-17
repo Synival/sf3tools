@@ -43,27 +43,35 @@ namespace SF3.Win.OpenGL {
             GL.DetachShader(Handle, fragmentShaderHandle);
             GL.DeleteShader(fragmentShaderHandle);
             GL.DeleteShader(vertexShaderHandle);
+
+            Use();
+            var handle = GL.GetUniformLocation(Handle, "texture0");
+            GL.Uniform1(handle, 0);
         }
 
         public void Use() => GL.UseProgram(Handle);
 
-        private bool disposedValue = false;
+        private bool disposed = false;
 
         protected virtual void Dispose(bool disposing) {
-            if (!disposedValue) {
-                GL.DeleteProgram(Handle);
-                disposedValue = true;
-            }
-        }
+            if (disposed)
+                return;
 
-        ~Shader() {
-            if (disposedValue == false)
-                System.Diagnostics.Debug.WriteLine("GPU Resource leak! Did you forget to call Dispose()?");
+            if (disposing)
+                GL.DeleteProgram(Handle);
+
+            disposed = true;
         }
 
         public void Dispose() {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        ~Shader() {
+            if (!disposed)
+                System.Diagnostics.Debug.WriteLine("GPU Resource leak! Did you forget to call Dispose()?");
+            Dispose(false);
         }
 
         public int Handle { get; }
