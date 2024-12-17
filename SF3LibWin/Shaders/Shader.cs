@@ -28,30 +28,30 @@ namespace SF3.Win.Shaders {
                     System.Diagnostics.Debug.WriteLine(GL.GetShaderInfoLog(fragmentShaderHandle));
             }
 
-            _handle = GL.CreateProgram();
-            GL.AttachShader(_handle, vertexShaderHandle);
-            GL.AttachShader(_handle, fragmentShaderHandle);
-            GL.LinkProgram(_handle);
+            Handle = GL.CreateProgram();
+            GL.AttachShader(Handle, vertexShaderHandle);
+            GL.AttachShader(Handle, fragmentShaderHandle);
+            GL.LinkProgram(Handle);
 
             {
-                GL.GetProgram(_handle, GetProgramParameterName.LinkStatus, out int success);
+                GL.GetProgram(Handle, GetProgramParameterName.LinkStatus, out int success);
                 if (success == 0)
-                    System.Diagnostics.Debug.WriteLine(GL.GetProgramInfoLog(_handle));
+                    System.Diagnostics.Debug.WriteLine(GL.GetProgramInfoLog(Handle));
             }
 
-            GL.DetachShader(_handle, vertexShaderHandle);
-            GL.DetachShader(_handle, fragmentShaderHandle);
+            GL.DetachShader(Handle, vertexShaderHandle);
+            GL.DetachShader(Handle, fragmentShaderHandle);
             GL.DeleteShader(fragmentShaderHandle);
             GL.DeleteShader(vertexShaderHandle);
         }
 
-        public void Use() => GL.UseProgram(_handle);
+        public void Use() => GL.UseProgram(Handle);
 
         private bool disposedValue = false;
 
         protected virtual void Dispose(bool disposing) {
             if (!disposedValue) {
-                GL.DeleteProgram(_handle);
+                GL.DeleteProgram(Handle);
                 disposedValue = true;
             }
         }
@@ -66,6 +66,6 @@ namespace SF3.Win.Shaders {
             GC.SuppressFinalize(this);
         }
 
-        private readonly int _handle;
+        public int Handle { get; }
     }
 }

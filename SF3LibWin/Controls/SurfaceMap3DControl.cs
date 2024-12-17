@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 using SF3.Win.Shaders;
@@ -35,10 +36,19 @@ namespace SF3.Win.Controls {
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, _elementBufferObject);
             GL.BufferData(BufferTarget.ElementArrayBuffer, _indices.Length * sizeof(uint), _indices, BufferUsageHint.StaticDraw);
 
+            _timer = new Timer() { Interval = 1000 / 30 };
+            _timer.Tick += (s, a) => UpdateCamera();
+            _timer.Start();
+            UpdateCamera();
+
             Disposed += (s, a) => {
                 _shader.Dispose();
+                _shader = null;
+                GL.DeleteBuffer(_elementBufferObject);
                 GL.DeleteVertexArray(_vertexArrayObject);
                 GL.DeleteBuffer(_vertexBufferObject);
+                _timer.Dispose();
+                _timer = null;
             };
         }
 
@@ -48,6 +58,15 @@ namespace SF3.Win.Controls {
 
             // Update OpenGL on the new size of the control.
             GL.Viewport(0, 0, ClientSize.Width, ClientSize.Height);
+
+            if (_shader != null) {
+                _shader.Use();
+                var handle = GL.GetUniformLocation(_shader.Handle, "projection");
+                var matrix = Matrix4.CreatePerspectiveFieldOfView(
+                    MathHelper.DegreesToRadians(45.0f), (float) ClientSize.Width / ClientSize.Height,
+                    0.1f, 100.0f);
+                GL.UniformMatrix4(handle, false, ref matrix);
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e) {
@@ -56,8 +75,16 @@ namespace SF3.Win.Controls {
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            GL.BindVertexArray(_vertexArrayObject);
             _shader.Use();
+            var handle = GL.GetUniformLocation(_shader.Handle, "model");
+            var matrix = Matrix4.CreateRotationY(MathHelper.DegreesToRadians(_frame * 5));
+            GL.UniformMatrix4(handle, false, ref matrix);
+
+            handle = GL.GetUniformLocation(_shader.Handle, "view");
+            matrix *= Matrix4.LookAt(new Vector3(0.0f, (float) Math.Sin(MathHelper.DegreesToRadians(_frame)) * 4.0f + 5.0f, 10.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector3(0.0f, 1.0f, 0.0f));
+            GL.UniformMatrix4(handle, false, ref matrix);
+
+            GL.BindVertexArray(_vertexArrayObject);
             GL.DrawElements(PrimitiveType.Triangles, _indices.Length, DrawElementsType.UnsignedInt, 0);
 
             SwapBuffers(); // Display the result.
@@ -68,14 +95,24 @@ namespace SF3.Win.Controls {
             Invalidate();
         }
 
-        private readonly float[] _vertices = {
-            -0.25f,  0.5f, 0.0f, // Top-left vertex
-            -0.5f,  -0.5f, 0.0f, // Bottom-left vertex
-             0.5f,  -0.5f, 0.0f, // Bottom-right vertex
-             0.25f,  0.5f, 0.0f, // Top-right vertex
+        private int _frame = 0;
+
+        private void UpdateCamera() {
+            if (_shader == null || !Visible)
+                return;
+
+            _frame = (_frame + 1) % 360;
+            Invalidate();
+        }
+
+        private float[] _vertices = {
+            -1.0f,  0.0f,  1.0f,
+            -1.0f,  0.0f, -1.0f,
+             1.0f,  0.0f, -1.0f,
+             1.0f,  0.0f,  1.0f,
         };
 
-        private readonly uint[] _indices = {
+        private uint[] _indices = {
             0, 1, 3,
             1, 2, 3
         };
@@ -85,5 +122,6 @@ namespace SF3.Win.Controls {
         private int _vertexArrayObject;
 
         private Shader _shader;
+        private Timer _timer;
     }
 }
