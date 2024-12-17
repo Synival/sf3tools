@@ -2,11 +2,11 @@
 using System.IO;
 using OpenTK.Graphics.OpenGL;
 
-namespace SF3.Win.Shaders {
+namespace SF3.Win.OpenGL {
     public class Shader : IDisposable {
         public Shader(string vertexPath, string fragmentPath) {
-            string vertexShaderSource   = File.ReadAllText(vertexPath);
-            string fragmentShaderSource = File.ReadAllText(fragmentPath);
+            var vertexShaderSource   = File.ReadAllText(vertexPath);
+            var fragmentShaderSource = File.ReadAllText(fragmentPath);
 
             var vertexShaderHandle = GL.CreateShader(ShaderType.VertexShader);
             GL.ShaderSource(vertexShaderHandle, vertexShaderSource);
@@ -16,14 +16,14 @@ namespace SF3.Win.Shaders {
 
             GL.CompileShader(vertexShaderHandle);
             {
-                GL.GetShader(vertexShaderHandle, ShaderParameter.CompileStatus, out int success);
+                GL.GetShader(vertexShaderHandle, ShaderParameter.CompileStatus, out var success);
                 if (success == 0)
                     System.Diagnostics.Debug.WriteLine(GL.GetShaderInfoLog(vertexShaderHandle));
             }
 
             GL.CompileShader(fragmentShaderHandle);
             {
-                GL.GetShader(fragmentShaderHandle, ShaderParameter.CompileStatus, out int success);
+                GL.GetShader(fragmentShaderHandle, ShaderParameter.CompileStatus, out var success);
                 if (success == 0)
                     System.Diagnostics.Debug.WriteLine(GL.GetShaderInfoLog(fragmentShaderHandle));
             }
@@ -34,7 +34,7 @@ namespace SF3.Win.Shaders {
             GL.LinkProgram(Handle);
 
             {
-                GL.GetProgram(Handle, GetProgramParameterName.LinkStatus, out int success);
+                GL.GetProgram(Handle, GetProgramParameterName.LinkStatus, out var success);
                 if (success == 0)
                     System.Diagnostics.Debug.WriteLine(GL.GetProgramInfoLog(Handle));
             }

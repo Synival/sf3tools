@@ -5,7 +5,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
-using SF3.Win.Shaders;
+using SF3.Win.OpenGL;
 
 namespace SF3.Win.Controls {
     public partial class SurfaceMap3DControl : GLControl {
