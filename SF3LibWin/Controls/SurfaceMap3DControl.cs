@@ -215,6 +215,8 @@ namespace SF3.Win.Controls {
 
             var texturesById = (textureChunks != null) ? textureChunks
                 .SelectMany(x => x.TextureTable.Rows)
+                .GroupBy(x => x.ID)
+                .Select(x => x.First())
                 .ToDictionary(x => x.ID, x => x.Texture)
                 : [];
 
@@ -429,6 +431,13 @@ namespace SF3.Win.Controls {
                 UpdateTilePosition(null, null);
             else
                 UpdateTilePosition((int) Math.Round(pixel[0] / (255.0f / WidthInTiles)), (int) Math.Round(pixel[1] / (255.0f / WidthInTiles)));
+        }
+
+        // TODO: temporary click function!! remove this when there's an actual 'edit' panel
+        protected override void OnClick(EventArgs e) {
+            base.OnClick(e);
+            if (_tileX != null && _tileY != null)
+                System.Diagnostics.Debug.WriteLine(_tileX.ToString() + ", " + _tileY.ToString());
         }
 
         public Shader TexturedShader { get; private set; }

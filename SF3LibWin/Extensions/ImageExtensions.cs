@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
-using static CommonLib.Utils.PixelConversion;
 
 namespace SF3.Win.Extensions {
     public static class ImageExtensions {
