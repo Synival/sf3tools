@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using static CommonLib.Utils.PixelConversion;
 
 namespace SF3.Win.Extensions {
     public static class BitmapExtensions {
@@ -17,6 +18,38 @@ namespace SF3.Win.Extensions {
             for (var iy = Math.Max(-y, 0); iy < from.Height && iy + y < to.Height; iy++)
                 for (var ix = Math.Max(-x, 0); ix < from.Width && ix + x < to.Width; ix++)
                     to.SetPixel(ix + x, iy + y, from.GetPixel(ix, iy));
+        }
+
+        public static byte[] GetABGRBytes(this Bitmap bitmap) {
+            if (bitmap.PixelFormat != PixelFormat.Format32bppArgb)
+                throw new ArgumentException(nameof(bitmap.PixelFormat));
+
+            var readBytes = new byte[bitmap.Width * bitmap.Height * 4];
+            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+            Marshal.Copy(bitmapData.Scan0, readBytes, 0, readBytes.Length);
+            bitmap.UnlockBits(bitmapData);
+
+            return readBytes;
+        }
+
+        public static TextureABGR1555 CreateTextureABGR1555(this Bitmap bitmap, int id, int frame, int duration) {
+            var data = new ushort[bitmap.Width, bitmap.Height];
+            var bitmapData = bitmap.GetABGRBytes();
+
+            int pos = 0;
+            for (var y = 0; y < bitmap.Height; y++) {
+                for (var x = 0; x < bitmap.Width; x++) {
+                    var channels = new PixelChannels() {
+                        b = bitmapData[pos++],
+                        g = bitmapData[pos++],
+                        r = bitmapData[pos++],
+                        a = bitmapData[pos++]
+                    };
+                    data[x, y] = channels.ToARGB1555();
+                }
+            }
+
+            return new TextureABGR1555(id, frame, duration, data);
         }
     }
 }

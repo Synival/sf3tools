@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using OpenTK.GLControl;
@@ -8,6 +9,7 @@ using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Tables.MPD;
+using SF3.Win.Extensions;
 using SF3.Win.OpenGL;
 
 namespace SF3.Win.Controls {
@@ -40,6 +42,7 @@ namespace SF3.Win.Controls {
                     SolidShader.Dispose();
                     SolidShader = null;
                 }
+
                 if (_framebufferHandle != 0) {
                     GL.DeleteFramebuffer(_framebufferHandle);
                     _framebufferHandle = 0;
@@ -48,6 +51,7 @@ namespace SF3.Win.Controls {
                     _framebufferColorTexture.Dispose();
                     _framebufferColorTexture = null;
                 }
+
                 if (_timer != null) {
                     _timer.Dispose();
                     _timer = null;
@@ -66,6 +70,11 @@ namespace SF3.Win.Controls {
 
             TexturedShader = new Shader("Shaders/Textured.vert", "Shaders/Textured.frag");
             SolidShader    = new Shader("Shaders/Solid.vert",    "Shaders/Solid.frag");
+
+            using (var tileHoverImage = (Bitmap) Image.FromFile("Images/TileHover.bmp")) {
+                var tileHoverTexture = tileHoverImage.CreateTextureABGR1555(9999, 0, 0);
+                _tileHoverTextureAnimation = new TextureAnimation(tileHoverTexture.ID, [tileHoverTexture]);
+            }
 
             _timer = new Timer() { Interval = 1000 / 60 };
             _timer.Tick += (s, a) => IncrementFrame();
@@ -393,8 +402,8 @@ namespace SF3.Win.Controls {
             TileModel = null;
 
             if (_tileX != null && _tileY != null) {
-                var quad = new Quad(GetTileVertices(_tileX.Value, _tileY.Value), new Vector3(1, 1, 1));
-                TileModel = new QuadModel([quad], SolidShader);
+                var quad = new Quad(GetTileVertices(_tileX.Value, _tileY.Value), _tileHoverTextureAnimation, 0);
+                TileModel = new QuadModel([quad], TexturedShader);
             }
 
             Invalidate();
@@ -432,6 +441,7 @@ namespace SF3.Win.Controls {
         private Timer _timer = null;
 
         private uint[,] _heightmap = new uint[WidthInTiles, HeightInTiles];
+        private TextureAnimation _tileHoverTextureAnimation = null;
 
         private int _framebufferHandle = 0;
         private Texture _framebufferColorTexture = null;

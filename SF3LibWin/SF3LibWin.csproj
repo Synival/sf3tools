@@ -42,6 +42,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Images\TileHover.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Shaders\Solid.frag">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
