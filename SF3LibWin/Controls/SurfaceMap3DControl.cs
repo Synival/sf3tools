@@ -7,6 +7,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
+using SF3.Models.Tables.MPD;
 using SF3.Win.OpenGL;
 
 namespace SF3.Win.Controls {
@@ -94,7 +95,7 @@ namespace SF3.Win.Controls {
             SwapBuffers(); // Display the result.
         }
 
-        public void UpdateModel(ushort[,] textureData, MPD_FileTextureChunk[] textureChunks, TileSurfaceHeightmapRow[] heightmap) {
+        public void UpdateModel(ushort[,] textureData, MPD_FileTextureChunk[] textureChunks, TextureAnimationTable textureAnimations, TileSurfaceHeightmapRow[] heightmap) {
             MakeCurrent();
 
             if (_model != null) {
@@ -114,6 +115,10 @@ namespace SF3.Win.Controls {
                 .SelectMany(x => x.TextureTable.Rows)
                 .ToDictionary(x => x.ID, x => x.Texture);
 
+            var animationsById = (textureAnimations != null) ? textureAnimations.Rows
+                .ToDictionary(x => (int) x.TextureID, x => x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray())
+                : [];
+
             for (var y = 0; y < textureData.GetLength(1); y++) {
                 for (var x = 0; x < textureData.GetLength(1); x++) {
                     var key = textureData[x, y];
@@ -122,7 +127,14 @@ namespace SF3.Win.Controls {
 
                     if (textureId == 0xFF || !texturesById.ContainsKey(textureId))
                         continue;
-                    var texture = texturesById[textureId];
+
+                    TextureAnimation anim = null;
+                    if (animationsById.ContainsKey(textureId))
+                        anim = new TextureAnimation(textureId, animationsById[textureId]);
+                    else if (texturesById.ContainsKey(textureId))
+                        anim = new TextureAnimation(textureId, [texturesById[textureId]]);
+                    else
+                        anim = null;
 
                     var heights = heightmap[y][x];
                     quads.Add(new Quad([
@@ -130,7 +142,7 @@ namespace SF3.Win.Controls {
                         new Vector3(x + 1 + offX, ((heights >>  0) & 0xFF) / 16f, y + 0 + offY),
                         new Vector3(x + 1 + offX, ((heights >> 24) & 0xFF) / 16f, y + 1 + offY),
                         new Vector3(x + 0 + offX, ((heights >> 16) & 0xFF) / 16f, y + 1 + offY)
-                    ], texture, textureFlags));
+                    ], anim, textureFlags));
                 }
             }
 
@@ -195,6 +207,7 @@ namespace SF3.Win.Controls {
 
             _frame = (_frame + 1) % 3600;
             CheckForKeys();
+            UpdateAnimatedTextures();
         }
 
         private bool KeyIsDown(Keys keyCode)
@@ -244,6 +257,13 @@ namespace SF3.Win.Controls {
                 if (oldPitch != Pitch)
                     Invalidate();
             }
+        }
+
+        private void UpdateAnimatedTextures() {
+            if (_frame % 2 == 0)
+                return;
+            if (_model?.UpdateAnimatedTextures() == true)
+                Invalidate();
         }
 
         private Shader _shader = null;

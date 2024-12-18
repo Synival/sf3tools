@@ -19,6 +19,10 @@ namespace SF3.Win.OpenGL {
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) TextureWrapMode.ClampToEdge);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) TextureWrapMode.ClampToEdge);
 
+            Update(image);
+        }
+
+        public void Update(Bitmap image) {
             var bitmapData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadOnly, image.PixelFormat);
             GL.TexImage2D(
                 TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba,

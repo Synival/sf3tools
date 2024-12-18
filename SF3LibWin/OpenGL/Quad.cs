@@ -3,12 +3,12 @@ using OpenTK.Mathematics;
 
 namespace SF3.Win.OpenGL {
     public class Quad {
-        public Quad(Vector3[] vertices, ITexture texture, byte textureFlags) {
+        public Quad(Vector3[] vertices, TextureAnimation textureAnim, byte textureFlags) {
             if (vertices == null || vertices.Length != 4)
                 throw new ArgumentException(nameof(vertices));
 
             Vertices = vertices;
-            Texture = texture;
+            TextureAnim = textureAnim;
             TextureFlags = textureFlags;
 
             var white = new Vector3(1, 1, 1);
@@ -16,7 +16,7 @@ namespace SF3.Win.OpenGL {
         }
 
         public Vector3[] Vertices { get; }
-        public ITexture Texture { get; }
+        public TextureAnimation TextureAnim { get; }
         public byte TextureFlags { get; }
         public Vector3[] Colors { get; }
     }

@@ -48,23 +48,25 @@ namespace SF3.Win.ThirdParty.TexturePacker {
         }
 
         public TextureAtlasNode Insert(ITexture tex) {
-            if (_nodeByTextureID.ContainsKey(tex.ID))
+            if (_nodeByTextureIDFrame.ContainsKey((tex.ID, tex.Frame)))
                 throw new ArgumentException(nameof(tex));
 
             var node = _rootNode.Insert(tex);
             if (node != null)
-                _nodeByTextureID[tex.ID] = node;
+                _nodeByTextureIDFrame[(tex.ID, tex.Frame)] = node;
 
             return node;
         }
 
-        public TextureAtlasNode GetNodeByTextureID(int id)
-            => _nodeByTextureID.ContainsKey(id) ? _nodeByTextureID[id] : null;
+        public TextureAtlasNode GetNodeByTextureIDFrame(int id, int frame) {
+            var key = (id, frame);
+            return _nodeByTextureIDFrame.ContainsKey(key) ? _nodeByTextureIDFrame[key] : null;
+        }
 
-        public Vector2[] GetUVCoordinatesByTextureID(int id, int width, int height, byte textureFlags) {
-            var node = GetNodeByTextureID(id);
+        public Vector2[] GetUVCoordinatesByTextureIDFrame(int id, int frame, int width, int height, byte textureFlags) {
+            var node = GetNodeByTextureIDFrame(id, frame);
             if (node == null)
-                throw new ArgumentException(nameof(id));
+                throw new ArgumentException(nameof(id) + ", " + nameof(frame));
 
             var widthf  = (float) width;
             var heightf = (float) height;
@@ -161,6 +163,6 @@ namespace SF3.Win.ThirdParty.TexturePacker {
         public bool TryRotate { get; }
 
         private readonly TextureAtlasNode _rootNode;
-        private readonly Dictionary<int, TextureAtlasNode> _nodeByTextureID = [];
+        private readonly Dictionary<(int, int), TextureAtlasNode> _nodeByTextureIDFrame = [];
     }
 }
