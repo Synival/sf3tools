@@ -42,7 +42,7 @@ namespace SF3.Win.Controls {
 
             _shader = new Shader("Shaders/Shader.vert", "Shaders/Shader.frag");
 
-            _timer = new Timer() { Interval = 1000 / 30 };
+            _timer = new Timer() { Interval = 1000 / 60 };
             _timer.Tick += (s, a) => UpdateCamera();
             _timer.Start();
 
@@ -80,7 +80,28 @@ namespace SF3.Win.Controls {
             GL.UniformMatrix4(handle, false, ref matrix);
 
             handle = GL.GetUniformLocation(_shader.Handle, "view");
-            matrix *= Matrix4.LookAt(new Vector3(0.0f, (float) Math.Sin(MathHelper.DegreesToRadians(_frame * 0.1f)) * 40.0f + 50.0f, 100.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector3(0.0f, 1.0f, 0.0f));
+
+            // Determine the position of the camera.
+            var posPitch = -22.5f;
+            var posYaw = _frame * 0.5f;
+
+            Position = new Vector3(0, 0, 100)
+                * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(posPitch))
+                * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(posYaw));
+
+            // Determine a moving target to point the camera toward.
+            var target = new Vector3(0, 10 + (float) Math.Sin(MathHelper.DegreesToRadians(_frame * 0.5f)) * 5.0f, 0);
+
+            // Calculate the pitch/yaw to point the camera to that target.
+            var posMinusTarget = Position - target;
+            Pitch = -MathHelper.RadiansToDegrees((float) Math.Atan2(posMinusTarget.Y, double.Hypot(posMinusTarget.X, posMinusTarget.Z)));
+            Yaw   =  MathHelper.RadiansToDegrees((float) Math.Atan2(posMinusTarget.X, posMinusTarget.Z));
+
+            // Determine the view matrix for our position and orientation.
+            matrix = Matrix4.CreateTranslation(-Position)
+                * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
+                * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
+
             GL.UniformMatrix4(handle, false, ref matrix);
 
             _model.Draw();
@@ -131,6 +152,21 @@ namespace SF3.Win.Controls {
             _model = new QuadModel(quads.ToArray());
             Invalidate();
         }
+
+        /// <summary>
+        /// Position of the camera
+        /// </summary>
+        public Vector3 Position { get; set; } = new Vector3(0, 0, 0);
+
+        /// <summary>
+        /// Pitch, in degrees
+        /// </summary>
+        public float Pitch { get; set; } = 0;
+
+        /// <summary>
+        /// Yaw, in degrees
+        /// </summary>
+        public float Yaw { get; set; } = 0;
 
         private int _frame = 0;
 
