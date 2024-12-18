@@ -54,7 +54,7 @@ namespace CommonLib.Utils {
             };
         }
 
-        public static PixelChannels ARGB88888oChannels(uint input) {
+        public static PixelChannels ARGB8888ToChannels(uint input) {
             return new PixelChannels {
                 a = (byte) ((input >> 24) & 0xFF),
                 r = (byte) ((input >> 16) & 0xFF),
