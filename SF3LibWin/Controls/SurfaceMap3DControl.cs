@@ -43,10 +43,11 @@ namespace SF3.Win.Controls {
             _shader = new Shader("Shaders/Shader.vert", "Shaders/Shader.frag");
 
             _timer = new Timer() { Interval = 1000 / 60 };
-            _timer.Tick += (s, a) => UpdateCamera();
+            _timer.Tick += (s, a) => IncrementFrame();
             _timer.Start();
 
-            UpdateCamera();
+            Position = new Vector3(0, 50, 100);
+            LookAtTarget(new Vector3(0, 10, 0));
         }
 
         protected override void OnResize(EventArgs e) {
@@ -76,26 +77,10 @@ namespace SF3.Win.Controls {
 
             _shader.Use();
             var handle = GL.GetUniformLocation(_shader.Handle, "model");
-            var matrix = Matrix4.CreateRotationY(MathHelper.DegreesToRadians(_frame * 0.2f));
+            var matrix = Matrix4.Identity;
             GL.UniformMatrix4(handle, false, ref matrix);
 
             handle = GL.GetUniformLocation(_shader.Handle, "view");
-
-            // Determine the position of the camera.
-            var posPitch = -22.5f;
-            var posYaw = _frame * 0.5f;
-
-            Position = new Vector3(0, 0, 100)
-                * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(posPitch))
-                * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(posYaw));
-
-            // Determine a moving target to point the camera toward.
-            var target = new Vector3(0, 10 + (float) Math.Sin(MathHelper.DegreesToRadians(_frame * 0.5f)) * 5.0f, 0);
-
-            // Calculate the pitch/yaw to point the camera to that target.
-            var posMinusTarget = Position - target;
-            Pitch = -MathHelper.RadiansToDegrees((float) Math.Atan2(posMinusTarget.Y, double.Hypot(posMinusTarget.X, posMinusTarget.Z)));
-            Yaw   =  MathHelper.RadiansToDegrees((float) Math.Atan2(posMinusTarget.X, posMinusTarget.Z));
 
             // Determine the view matrix for our position and orientation.
             matrix = Matrix4.CreateTranslation(-Position)
@@ -153,6 +138,13 @@ namespace SF3.Win.Controls {
             Invalidate();
         }
 
+        public void LookAtTarget(Vector3 target) {
+            // Calculate the pitch/yaw to point the camera to that target.
+            var posMinusTarget = Position - target;
+            Pitch = -MathHelper.RadiansToDegrees((float) Math.Atan2(posMinusTarget.Y, double.Hypot(posMinusTarget.X, posMinusTarget.Z)));
+            Yaw   =  MathHelper.RadiansToDegrees((float) Math.Atan2(posMinusTarget.X, posMinusTarget.Z));
+        }
+
         /// <summary>
         /// Position of the camera
         /// </summary>
@@ -168,14 +160,90 @@ namespace SF3.Win.Controls {
         /// </summary>
         public float Yaw { get; set; } = 0;
 
+        protected override void OnMouseDown(MouseEventArgs e) {
+            base.OnMouseDown(e);
+            Focus();
+        }
+
+        private Dictionary<Keys, bool> _keysPressed = [];
+
+        protected override void OnKeyDown(KeyEventArgs e) {
+            base.OnKeyDown(e);
+            _keysPressed[(Keys) ((int) e.KeyCode & 0xFFFF)] = true;
+        }
+
+        protected override void OnKeyUp(KeyEventArgs e) {
+            base.OnKeyUp(e);
+            _keysPressed[(Keys) ((int) e.KeyCode & 0xFFFF)] = false;
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+            _keysPressed[(Keys) ((int) keyData & 0xFFFF)] = true;
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        protected override void OnLostFocus(EventArgs e) {
+            base.OnLostFocus(e);
+            _keysPressed.Clear();
+        }
+
         private int _frame = 0;
 
-        private void UpdateCamera() {
-            if (_shader == null || !Visible)
+        private void IncrementFrame() {
+            if (!Visible)
                 return;
 
             _frame = (_frame + 1) % 3600;
-            Invalidate();
+            CheckForKeys();
+        }
+
+        private bool KeyIsDown(Keys keyCode)
+            => Visible && _keysPressed.ContainsKey(keyCode) && _keysPressed[keyCode];
+
+        private void CheckForKeys() {
+            var keysDown = _keysPressed.Where(x => x.Value == true).Select(x => x.Key).ToHashSet();
+
+            var moveUpKey    = keysDown.Contains(Keys.Subtract) || keysDown.Contains(Keys.Space);
+            var moveDownKey  = keysDown.Contains(Keys.Add) || keysDown.Contains(Keys.ControlKey);
+            var moveLeftKey  = keysDown.Contains(Keys.End) || keysDown.Contains(Keys.NumPad1) || keysDown.Contains(Keys.A);
+            var moveRightKey = keysDown.Contains(Keys.PageDown) || keysDown.Contains(Keys.NumPad3) || keysDown.Contains(Keys.D);
+
+            int moveX = (moveLeftKey ? -1 : 0) + (moveRightKey ? 1 : 0);
+            int moveY = (moveUpKey ? 1 : 0) + (moveDownKey ? -1 : 0);
+            int moveZ = (keysDown.Contains(Keys.W) ? -1 : 0) + (keysDown.Contains(Keys.S) ? 1 : 0);
+
+            var shiftFactor = keysDown.Contains(Keys.ShiftKey) ? 3 : 1;
+
+            if (moveX != 0 || moveY != 0 || moveZ != 0) {
+                var move = new Vector3(moveX, moveY * 0.5f, moveZ)
+                    * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
+                Position += move * 0.25f * shiftFactor;
+                Invalidate();
+            }
+
+            var rotateLeftKey  = keysDown.Contains(Keys.Left)  || keysDown.Contains(Keys.NumPad4);
+            var rotateRightKey = keysDown.Contains(Keys.Right) || keysDown.Contains(Keys.NumPad6);
+
+            int rotateYaw = (rotateLeftKey ? 1 : 0) + (rotateRightKey ? -1 : 0);
+            if (rotateYaw != 0) {
+                Yaw += rotateYaw * 1.0f * shiftFactor;
+                while (Yaw < 0)
+                    Yaw += 360;
+                while (Yaw >= 360)
+                    Yaw -= 360;
+                Invalidate();
+            }
+
+            var rotateUpKey   = keysDown.Contains(Keys.Up)   || keysDown.Contains(Keys.NumPad8);
+            var rotateDownKey = keysDown.Contains(Keys.Down) || keysDown.Contains(Keys.NumPad2);
+
+            int rotatePitch = (rotateUpKey ? -1 : 0) + (rotateDownKey ? 1 : 0);
+            if (rotatePitch != 0) {
+                var oldPitch = Pitch;
+                Pitch = Math.Clamp(Pitch + rotatePitch * 0.5f * shiftFactor, -180, 180);
+                if (oldPitch != Pitch)
+                    Invalidate();
+            }
         }
 
         private Shader _shader = null;
