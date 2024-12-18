@@ -16,13 +16,13 @@ namespace SF3.Win.Controls {
             InitializeComponent();
 
             Disposed += (s, a) => {
-                if (_model != null) {
-                    _model.Dispose();
-                    _model = null;
+                if (Model != null) {
+                    Model.Dispose();
+                    Model = null;
                 }
-                if (_shader != null) {
-                    _shader.Dispose();
-                    _shader = null;
+                if (Shader != null) {
+                    Shader.Dispose();
+                    Shader = null;
                 }
                 if (_timer != null) {
                     _timer.Dispose();
@@ -41,7 +41,7 @@ namespace SF3.Win.Controls {
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-            _shader = new Shader("Shaders/Shader.vert", "Shaders/Shader.frag");
+            Shader = new Shader("Shaders/Shader.vert", "Shaders/Shader.frag");
 
             _timer = new Timer() { Interval = 1000 / 60 };
             _timer.Tick += (s, a) => IncrementFrame();
@@ -58,9 +58,9 @@ namespace SF3.Win.Controls {
             // Update OpenGL on the new size of the control.
             GL.Viewport(0, 0, ClientSize.Width, ClientSize.Height);
 
-            if (_shader != null) {
-                _shader.Use();
-                var handle = GL.GetUniformLocation(_shader.Handle, "projection");
+            if (Shader != null) {
+                Shader.Use();
+                var handle = GL.GetUniformLocation(Shader.Handle, "projection");
                 var matrix = Matrix4.CreatePerspectiveFieldOfView(
                     MathHelper.DegreesToRadians(22.50f), (float) ClientSize.Width / ClientSize.Height,
                     0.1f, 300.0f);
@@ -73,15 +73,15 @@ namespace SF3.Win.Controls {
             MakeCurrent();
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            if (_model == null)
+            if (Model == null)
                 return;
 
-            _shader.Use();
-            var handle = GL.GetUniformLocation(_shader.Handle, "model");
+            Shader.Use();
+            var handle = GL.GetUniformLocation(Shader.Handle, "model");
             var matrix = Matrix4.Identity;
             GL.UniformMatrix4(handle, false, ref matrix);
 
-            handle = GL.GetUniformLocation(_shader.Handle, "view");
+            handle = GL.GetUniformLocation(Shader.Handle, "view");
 
             // Determine the view matrix for our position and orientation.
             matrix = Matrix4.CreateTranslation(-Position)
@@ -90,7 +90,7 @@ namespace SF3.Win.Controls {
 
             GL.UniformMatrix4(handle, false, ref matrix);
 
-            _model.Draw();
+            Model.Draw();
 
             SwapBuffers(); // Display the result.
         }
@@ -98,9 +98,9 @@ namespace SF3.Win.Controls {
         public void UpdateModel(ushort[,] textureData, MPD_FileTextureChunk[] textureChunks, TextureAnimationTable textureAnimations, TileSurfaceHeightmapRow[] heightmap) {
             MakeCurrent();
 
-            if (_model != null) {
-                _model.Dispose();
-                _model = null;
+            if (Model != null) {
+                Model.Dispose();
+                Model = null;
                 Invalidate();
             }
 
@@ -137,16 +137,23 @@ namespace SF3.Win.Controls {
                         anim = null;
 
                     var heights = heightmap[y][x];
-                    quads.Add(new Quad([
-                        new Vector3(x + 0 + offX, ((heights >>  8) & 0xFF) / 16f, y + 0 + offY),
-                        new Vector3(x + 1 + offX, ((heights >>  0) & 0xFF) / 16f, y + 0 + offY),
-                        new Vector3(x + 1 + offX, ((heights >> 24) & 0xFF) / 16f, y + 1 + offY),
-                        new Vector3(x + 0 + offX, ((heights >> 16) & 0xFF) / 16f, y + 1 + offY)
-                    ], anim, textureFlags));
+                    var vertices = new Vector3[] {
+                        (x + 0 + offX, ((heights >>  8) & 0xFF) / 16f, y + 0 + offY),
+                        (x + 1 + offX, ((heights >>  0) & 0xFF) / 16f, y + 0 + offY),
+                        (x + 1 + offX, ((heights >> 24) & 0xFF) / 16f, y + 1 + offY),
+                        (x + 0 + offX, ((heights >> 16) & 0xFF) / 16f, y + 1 + offY)
+                    };
+#if true
+                    quads.Add(new Quad(vertices, anim, textureFlags));
+                    // Colored quad for framebuffer
+#else
+                    // TODO: solid white texture
+                    quads.Add(new Quad(vertices, anim, textureFlags, new Vector3(x / 64.0f, y / 64.0f, 0)));
+#endif
                 }
             }
 
-            _model = new QuadModel(quads.ToArray());
+            Model = new QuadModel(quads.ToArray(), Shader);
             Invalidate();
         }
 
@@ -162,15 +169,24 @@ namespace SF3.Win.Controls {
         /// </summary>
         public Vector3 Position { get; set; } = new Vector3(0, 0, 0);
 
+        private float _pitch = 0;
+        private float _yaw = 0;
+
         /// <summary>
         /// Pitch, in degrees
         /// </summary>
-        public float Pitch { get; set; } = 0;
+        public float Pitch {
+            get => _pitch;
+            set => _pitch = Math.Clamp(value, -90, 90);
+        }
 
         /// <summary>
         /// Yaw, in degrees
         /// </summary>
-        public float Yaw { get; set; } = 0;
+        public float Yaw {
+            get => _yaw;
+            set => _yaw = value - 360.0f * ((int) value / 360);
+        }
 
         protected override void OnMouseDown(MouseEventArgs e) {
             base.OnMouseDown(e);
@@ -240,10 +256,6 @@ namespace SF3.Win.Controls {
             int rotateYaw = (rotateLeftKey ? 1 : 0) + (rotateRightKey ? -1 : 0);
             if (rotateYaw != 0) {
                 Yaw += rotateYaw * 1.0f * shiftFactor;
-                while (Yaw < 0)
-                    Yaw += 360;
-                while (Yaw >= 360)
-                    Yaw -= 360;
                 Invalidate();
             }
 
@@ -253,7 +265,7 @@ namespace SF3.Win.Controls {
             int rotatePitch = (rotateUpKey ? -1 : 0) + (rotateDownKey ? 1 : 0);
             if (rotatePitch != 0) {
                 var oldPitch = Pitch;
-                Pitch = Math.Clamp(Pitch + rotatePitch * 0.5f * shiftFactor, -180, 180);
+                Pitch += rotatePitch * 0.5f * shiftFactor;
                 if (oldPitch != Pitch)
                     Invalidate();
             }
@@ -262,12 +274,13 @@ namespace SF3.Win.Controls {
         private void UpdateAnimatedTextures() {
             if (_frame % 2 == 0)
                 return;
-            if (_model?.UpdateAnimatedTextures() == true)
+            if (Model?.UpdateAnimatedTextures() == true)
                 Invalidate();
         }
 
-        private Shader _shader = null;
-        private QuadModel _model = null;
+        public Shader Shader { get; private set; }
+        public QuadModel Model { get; private set; }
+
         private Timer _timer = null;
     }
 }

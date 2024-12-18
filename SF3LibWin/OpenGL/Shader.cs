@@ -47,6 +47,9 @@ namespace SF3.Win.OpenGL {
             Use();
             var handle = GL.GetUniformLocation(Handle, "texture0");
             GL.Uniform1(handle, 0);
+
+            // TODO: Determine from program
+            Stride = 8 * sizeof(float);
         }
 
         public void Use() => GL.UseProgram(Handle);
@@ -75,5 +78,6 @@ namespace SF3.Win.OpenGL {
         }
 
         public int Handle { get; }
+        public int Stride { get; }
     }
 }

@@ -6,13 +6,12 @@ using SF3.Win.ThirdParty.TexturePacker;
 
 namespace SF3.Win.OpenGL {
     public class QuadModel : IDisposable {
-        public QuadModel(Quad[] quads) {
+        public QuadModel(Quad[] quads, Shader shader) {
             if (quads == null)
                 throw new ArgumentNullException(nameof(quads));
 
-            _quadCount = quads.Length;
-            _textureAnims = quads.Select(x => x.TextureAnim).ToArray();
-            _textureFlags = quads.Select(x => x.TextureFlags).ToArray();
+            Quads = quads;
+            Shader = shader;
 
             var textures = quads
                 .Where(x => x.TextureAnim != null)
@@ -57,18 +56,16 @@ namespace SF3.Win.OpenGL {
             _vertexArrayObject = GL.GenVertexArray();
             GL.BindVertexArray(_vertexArrayObject);
 
-            var stride = 8 * sizeof(float);
-
             // Position
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, stride, 0);
+            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, Shader.Stride, 0);
             GL.EnableVertexAttribArray(0);
 
             // Color
-            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, stride, 3 * sizeof(float));
+            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, Shader.Stride, 3 * sizeof(float));
             GL.EnableVertexAttribArray(1);
 
             // Texture Coordinates
-            GL.VertexAttribPointer(2, 2, VertexAttribPointerType.Float, false, stride, 6 * sizeof(float));
+            GL.VertexAttribPointer(2, 2, VertexAttribPointerType.Float, false, Shader.Stride, 6 * sizeof(float));
             GL.EnableVertexAttribArray(2);
 
             _elementBufferObject = GL.GenBuffer();
@@ -87,21 +84,21 @@ namespace SF3.Win.OpenGL {
             // Update UV coordinates
             int pos = 6;
             bool modified = false;
-            for (var i = 0; i < _quadCount; i++) {
-                var textureAnim = _textureAnims[i];
+            foreach (var quad in Quads) {
+                var textureAnim = quad.TextureAnim;
                 if (textureAnim == null)
                     continue;
 
                 var frame = textureAnim.GetFrame(_frame);
                 var texCoords = _textureAtlas.GetUVCoordinatesByTextureIDFrame(
-                    frame.ID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, _textureFlags[i]);
+                    frame.ID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureFlags);
 
                 for (var j = 0; j < 4; j++) {
                     if (!modified && (_vertices[pos] != texCoords[j].X || _vertices[pos + 1] != texCoords[j].Y))
                         modified = true;
                     _vertices[pos]     = texCoords[j].X;
                     _vertices[pos + 1] = texCoords[j].Y;
-                    pos += 8;
+                    pos += Shader.Stride / sizeof(float);
                 }
             }
 
@@ -128,6 +125,7 @@ namespace SF3.Win.OpenGL {
             if (disposing) {
                 _textureAtlas?.Dispose();
                 _texture?.Dispose();
+                _textureBitmap?.Dispose();
                 GL.DeleteBuffer(_elementBufferObject);
                 GL.DeleteVertexArray(_vertexArrayObject);
                 GL.DeleteBuffer(_vertexBufferObject);
@@ -147,14 +145,12 @@ namespace SF3.Win.OpenGL {
             Dispose(false);
         }
 
-        private readonly int _quadCount;
+        public Quad[] Quads { get; }
+        public Shader Shader { get; }
 
-        private readonly TextureAnimation[] _textureAnims;
-        private readonly byte[] _textureFlags;
-
-        private readonly TextureAtlas _textureAtlas;
-        private readonly Bitmap _textureBitmap;
-        private readonly Texture _texture;
+        public TextureAtlas _textureAtlas { get; }
+        public Bitmap _textureBitmap { get; }
+        public Texture _texture { get; }
 
         private readonly float[] _vertices;
         private readonly uint[] _indices;
