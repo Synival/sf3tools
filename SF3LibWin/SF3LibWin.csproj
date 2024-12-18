@@ -42,10 +42,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Update="Shaders\Shader.frag">
+    <None Update="Shaders\Solid.frag">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Shaders\Shader.vert">
+    <None Update="Shaders\Solid.vert">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Shaders\Textured.frag">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Shaders\Textured.vert">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

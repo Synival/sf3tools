@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using OpenTK.Graphics.OpenGL;
 
 namespace SF3.Win.OpenGL {
@@ -48,8 +50,36 @@ namespace SF3.Win.OpenGL {
             var handle = GL.GetUniformLocation(Handle, "texture0");
             GL.Uniform1(handle, 0);
 
-            // TODO: Determine from program
-            Stride = 8 * sizeof(float);
+            // Get all shader attributes.
+            GL.GetProgram(Handle, GetProgramParameterName.ActiveAttributes, out var attribCount);
+            var _attributes = new ShaderAttribute[attribCount];
+
+            int offset = 0;
+            for (var i = 0; i < attribCount; i++) {
+                GL.GetActiveAttrib(Handle, i, 16, out var length, out var size, out var type, out var name);
+                _attributes[i] = new ShaderAttribute(i, size, type, offset, name);
+                offset += _attributes[i].Size;
+            }
+
+            Attributes = _attributes.OrderBy(x => x.Location).ToArray();
+            _attributesByName = Attributes.ToDictionary(x => x.Name);
+
+            VertexBufferStride = offset;
+        }
+
+        public ShaderAttribute GetAttributeByName(string name)
+            => _attributesByName.TryGetValue(name, out var value) ? value : null;
+
+        public int GetVertexBufferSize(int vertices)
+            => vertices * VertexBufferStride;
+
+        public void EnableVAO_Attribute(string attribName) {
+            var attrib = GetAttributeByName(attribName);
+            if (attrib == null)
+                return;
+
+            GL.VertexAttribPointer(attrib.Location, attrib.TypeElements, attrib.PointerType, false, VertexBufferStride, attrib.Offset);
+            GL.EnableVertexAttribArray(attrib.Location);
         }
 
         public void Use() => GL.UseProgram(Handle);
@@ -78,6 +108,9 @@ namespace SF3.Win.OpenGL {
         }
 
         public int Handle { get; }
-        public int Stride { get; }
+        public int VertexBufferStride { get; }
+        public ShaderAttribute[] Attributes { get; }
+
+        private Dictionary<string, ShaderAttribute> _attributesByName;
     }
 }

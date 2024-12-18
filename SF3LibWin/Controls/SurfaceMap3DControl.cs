@@ -1,4 +1,7 @@
-﻿using System;
+﻿// TODO: for testing, please remove!
+//#define USE_SOLID_SHADER
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -20,9 +23,13 @@ namespace SF3.Win.Controls {
                     Model.Dispose();
                     Model = null;
                 }
-                if (Shader != null) {
-                    Shader.Dispose();
-                    Shader = null;
+                if (TexturedShader != null) {
+                    TexturedShader.Dispose();
+                    TexturedShader= null;
+                }
+                if (SolidShader != null) {
+                    SolidShader.Dispose();
+                    SolidShader= null;
                 }
                 if (_timer != null) {
                     _timer.Dispose();
@@ -41,7 +48,8 @@ namespace SF3.Win.Controls {
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-            Shader = new Shader("Shaders/Shader.vert", "Shaders/Shader.frag");
+            TexturedShader = new Shader("Shaders/Textured.vert", "Shaders/Textured.frag");
+            SolidShader    = new Shader("Shaders/Solid.vert",    "Shaders/Solid.frag");
 
             _timer = new Timer() { Interval = 1000 / 60 };
             _timer.Tick += (s, a) => IncrementFrame();
@@ -58,13 +66,20 @@ namespace SF3.Win.Controls {
             // Update OpenGL on the new size of the control.
             GL.Viewport(0, 0, ClientSize.Width, ClientSize.Height);
 
-            if (Shader != null) {
-                Shader.Use();
-                var handle = GL.GetUniformLocation(Shader.Handle, "projection");
-                var matrix = Matrix4.CreatePerspectiveFieldOfView(
-                    MathHelper.DegreesToRadians(22.50f), (float) ClientSize.Width / ClientSize.Height,
-                    0.1f, 300.0f);
-                GL.UniformMatrix4(handle, false, ref matrix);
+            var projectionMatrix = Matrix4.CreatePerspectiveFieldOfView(
+                MathHelper.DegreesToRadians(22.50f), (float) ClientSize.Width / ClientSize.Height,
+                0.1f, 300.0f);
+
+            if (TexturedShader != null) {
+                TexturedShader.Use();
+                var handle = GL.GetUniformLocation(TexturedShader.Handle, "projection");
+                GL.UniformMatrix4(handle, false, ref projectionMatrix);
+            }
+
+            if (SolidShader != null) {
+                SolidShader.Use();
+                var handle = GL.GetUniformLocation(SolidShader.Handle, "projection");
+                GL.UniformMatrix4(handle, false, ref projectionMatrix);
             }
         }
 
@@ -76,18 +91,16 @@ namespace SF3.Win.Controls {
             if (Model == null)
                 return;
 
-            Shader.Use();
-            var handle = GL.GetUniformLocation(Shader.Handle, "model");
+            Model.Shader.Use();
+
+            var handle = GL.GetUniformLocation(Model.Shader.Handle, "model");
             var matrix = Matrix4.Identity;
             GL.UniformMatrix4(handle, false, ref matrix);
 
-            handle = GL.GetUniformLocation(Shader.Handle, "view");
-
-            // Determine the view matrix for our position and orientation.
+            handle = GL.GetUniformLocation(Model.Shader.Handle, "view");
             matrix = Matrix4.CreateTranslation(-Position)
                 * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
                 * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
-
             GL.UniformMatrix4(handle, false, ref matrix);
 
             Model.Draw();
@@ -143,17 +156,19 @@ namespace SF3.Win.Controls {
                         (x + 1 + offX, ((heights >> 24) & 0xFF) / 16f, y + 1 + offY),
                         (x + 0 + offX, ((heights >> 16) & 0xFF) / 16f, y + 1 + offY)
                     };
-#if true
-                    quads.Add(new Quad(vertices, anim, textureFlags));
-                    // Colored quad for framebuffer
+#if USE_SOLID_SHADER
+                    quads.Add(new Quad(vertices, new Vector3(x / 64.0f, y / 64.0f, 0)));
 #else
-                    // TODO: solid white texture
-                    quads.Add(new Quad(vertices, anim, textureFlags, new Vector3(x / 64.0f, y / 64.0f, 0)));
+                    quads.Add(new Quad(vertices, anim, textureFlags));
 #endif
                 }
             }
 
-            Model = new QuadModel(quads.ToArray(), Shader);
+#if USE_SOLID_SHADER
+            Model = new QuadModel(quads.ToArray(), SolidShader);
+#else
+            Model = new QuadModel(quads.ToArray(), TexturedShader);
+#endif
             Invalidate();
         }
 
@@ -278,7 +293,9 @@ namespace SF3.Win.Controls {
                 Invalidate();
         }
 
-        public Shader Shader { get; private set; }
+        public Shader TexturedShader { get; private set; }
+        public Shader SolidShader { get; private set; }
+
         public QuadModel Model { get; private set; }
 
         private Timer _timer = null;
