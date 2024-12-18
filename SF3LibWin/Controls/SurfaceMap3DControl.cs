@@ -1,7 +1,4 @@
-﻿// TODO: for testing, please remove!
-//#define USE_SOLID_SHADER
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,6 +12,9 @@ using SF3.Win.OpenGL;
 
 namespace SF3.Win.Controls {
     public partial class SurfaceMap3DControl : GLControl {
+        public const int WidthInTiles = 64;
+        public const int HeightInTiles = 64;
+
         public SurfaceMap3DControl() {
             InitializeComponent();
 
@@ -29,11 +29,19 @@ namespace SF3.Win.Controls {
                 }
                 if (TexturedShader != null) {
                     TexturedShader.Dispose();
-                    TexturedShader= null;
+                    TexturedShader = null;
                 }
                 if (SolidShader != null) {
                     SolidShader.Dispose();
-                    SolidShader= null;
+                    SolidShader = null;
+                }
+                if (_framebufferHandle != 0) {
+                    GL.DeleteFramebuffer(_framebufferHandle);
+                    _framebufferHandle = 0;
+                }
+                if (_framebufferColorTexture != null) {
+                    _framebufferColorTexture.Dispose();
+                    _framebufferColorTexture = null;
                 }
                 if (_timer != null) {
                     _timer.Dispose();
@@ -46,7 +54,6 @@ namespace SF3.Win.Controls {
             base.OnLoad(e);
             MakeCurrent();
 
-            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Less);
             GL.Enable(EnableCap.Blend);
@@ -61,12 +68,45 @@ namespace SF3.Win.Controls {
 
             Position = new Vector3(0, 50, 100);
             LookAtTarget(new Vector3(0, 10, 0));
+
+            UpdateFramebuffer();
         }
 
         protected override void OnResize(EventArgs e) {
             base.OnResize(e);
             MakeCurrent();
 
+            UpdateFramebuffer();
+            UpdateProjectionMatrices();
+        }
+
+        private void UpdateFramebuffer() {
+            int width = Width;
+            int height = Height;
+
+            // Update color texture.
+            if (_framebufferColorTexture != null)
+                _framebufferColorTexture.Dispose();
+            _framebufferColorTexture = new Texture(width, height, PixelInternalFormat.Rgb, PixelFormat.Rgb, PixelType.UnsignedByte);
+
+            // Update depth/stencil texture.
+            if (_framebufferDepthStencilTexture != null)
+                _framebufferDepthStencilTexture.Dispose();
+            _framebufferDepthStencilTexture = new Texture(width, height, PixelInternalFormat.Depth24Stencil8, PixelFormat.DepthStencil, PixelType.UnsignedInt248);
+
+            // (Re)create the framebuffer.
+            if (_framebufferHandle != 0)
+                GL.DeleteFramebuffer(_framebufferHandle);
+            _framebufferHandle = GL.GenFramebuffer();
+
+            // Attach txtures to the framebuffer.
+            GL.BindFramebuffer(FramebufferTarget.Framebuffer, _framebufferHandle);
+            GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.ColorAttachment0, TextureTarget.Texture2D, _framebufferColorTexture.Handle, 0);
+            GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.StencilAttachment, TextureTarget.Texture2D, _framebufferDepthStencilTexture.Handle, 0);
+            GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
+        }
+
+        private void UpdateProjectionMatrices() {
             // Update OpenGL on the new size of the control.
             GL.Viewport(0, 0, ClientSize.Width, ClientSize.Height);
 
@@ -91,25 +131,35 @@ namespace SF3.Win.Controls {
             base.OnPaint(e);
             MakeCurrent();
 
+            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            DrawScene(RenderModel);
+
+            GL.BindFramebuffer(FramebufferTarget.Framebuffer, _framebufferHandle);
+            GL.ClearColor(1, 1, 1, 1);
+            DrawScene(SelectModel);
+            GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
+
+            SwapBuffers();
+        }
+
+        private void DrawScene(QuadModel model) {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            if (model == null)
+                return;
 
-            if (RenderModel != null) {
-                RenderModel.Shader.Use();
+            model.Shader.Use();
 
-                var handle = GL.GetUniformLocation(RenderModel.Shader.Handle, "model");
-                var matrix = Matrix4.Identity;
-                GL.UniformMatrix4(handle, false, ref matrix);
+            var handle = GL.GetUniformLocation(model.Shader.Handle, "model");
+            var matrix = Matrix4.Identity;
+            GL.UniformMatrix4(handle, false, ref matrix);
 
-                handle = GL.GetUniformLocation(RenderModel.Shader.Handle, "view");
-                matrix = Matrix4.CreateTranslation(-Position)
-                    * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
-                    * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
-                GL.UniformMatrix4(handle, false, ref matrix);
+            handle = GL.GetUniformLocation(model.Shader.Handle, "view");
+            matrix = Matrix4.CreateTranslation(-Position)
+                * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
+                * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
+            GL.UniformMatrix4(handle, false, ref matrix);
 
-                RenderModel.Draw();
-            }
-
-            SwapBuffers(); // Display the result.
+            model.Draw();
         }
 
         public void UpdateModel(ushort[,] textureData, MPD_FileTextureChunk[] textureChunks, TextureAnimationTable textureAnimations, TileSurfaceHeightmapRow[] heightmap) {
@@ -125,8 +175,6 @@ namespace SF3.Win.Controls {
                 SelectModel = null;
             }
 
-            const int tileWidth = 64;
-            const int tileHeight = 64;
             const float offX = -32.0f;
             const float offY = -32.0f;
 
@@ -142,8 +190,8 @@ namespace SF3.Win.Controls {
             var renderQuads = new List<Quad>();
             var selectQuads = new List<Quad>();
 
-            for (var y = 0; y < tileWidth; y++) {
-                for (var x = 0; x < tileHeight; x++) {
+            for (var y = 0; y < WidthInTiles; y++) {
+                for (var x = 0; x < HeightInTiles; x++) {
                     TextureAnimation anim = null;
                     byte textureFlags = 0;
 
@@ -172,7 +220,7 @@ namespace SF3.Win.Controls {
                     if (anim != null)
                         renderQuads.Add(new Quad(vertices, anim, textureFlags));
 
-                    selectQuads.Add(new Quad(vertices, new Vector3(x / 64.0f, y / 64.0f, 0)));
+                    selectQuads.Add(new Quad(vertices, new Vector3(x / (float) WidthInTiles, y / (float) HeightInTiles, 0)));
                 }
             }
 
@@ -305,6 +353,48 @@ namespace SF3.Win.Controls {
                 Invalidate();
         }
 
+        private int? _tileX = null;
+        private int? _tileY = null;
+
+        private void UpdateTilePosition(int? x, int? y) {
+            // All invalid tile values should be -1, -1.
+            if (x < 0 || y < 0 || x >= WidthInTiles || y >= HeightInTiles) {
+                x = null;
+                y = null;
+            }
+
+            // Early exit if no change is necessary.
+            if (_tileX == x && _tileY == y)
+                return;
+
+            _tileX = x;
+            _tileY = y;
+
+            System.Diagnostics.Debug.WriteLine(_tileX.ToString() + ", " + _tileY.ToString());
+        }
+
+        protected override void OnMouseLeave(EventArgs e) {
+            base.OnMouseLeave(e);
+            UpdateTilePosition(null, null);
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e) {
+            base.OnMouseMove(e);
+
+            if (e.X < 0 || e.Y < 0 || e.X >= Width || e.Y >= Height)
+                return;
+
+            var pixel = new byte[3];
+            GL.BindFramebuffer(FramebufferTarget.ReadFramebuffer, _framebufferHandle);
+            GL.ReadPixels(e.X, Height - e.Y - 1, 1, 1, PixelFormat.Rgb, PixelType.UnsignedByte, pixel);
+            GL.BindFramebuffer(FramebufferTarget.ReadFramebuffer, 0);
+
+            if (pixel[2] == 255)
+                UpdateTilePosition(null, null);
+            else
+                UpdateTilePosition((int) Math.Round(pixel[0] / (255.0f / WidthInTiles)), (int) Math.Round(pixel[1] / (255.0f / WidthInTiles)));
+        }
+
         public Shader TexturedShader { get; private set; }
         public Shader SolidShader { get; private set; }
 
@@ -312,5 +402,9 @@ namespace SF3.Win.Controls {
         public QuadModel SelectModel { get; private set; }
 
         private Timer _timer = null;
+
+        private int _framebufferHandle = 0;
+        private Texture _framebufferColorTexture = null;
+        private Texture _framebufferDepthStencilTexture = null;
     }
 }

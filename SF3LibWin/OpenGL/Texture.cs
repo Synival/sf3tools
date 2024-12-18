@@ -22,6 +22,18 @@ namespace SF3.Win.OpenGL {
             Update(image);
         }
 
+        public Texture(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType) {
+            Handle = GL.GenTexture();
+            Use();
+
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) TextureMinFilter.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) TextureMagFilter.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) TextureWrapMode.ClampToEdge);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) TextureWrapMode.ClampToEdge);
+
+            Update(width, height, internalFormat, format, pixelType);
+        }
+
         public void Update(Bitmap image) {
             var bitmapData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadOnly, image.PixelFormat);
             GL.TexImage2D(
@@ -31,6 +43,9 @@ namespace SF3.Win.OpenGL {
             );
             image.UnlockBits(bitmapData);
         }
+
+        public void Update(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType)
+            => GL.TexImage2D(TextureTarget.Texture2D, 0, internalFormat, width, height, 0, format, pixelType, 0);
 
         public void Use(TextureUnit activeTexture = TextureUnit.Texture0) {
             GL.ActiveTexture(activeTexture);
