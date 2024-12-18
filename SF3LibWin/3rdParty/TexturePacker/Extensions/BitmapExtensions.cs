@@ -1,5 +1,6 @@
 ﻿// Original code by Thomas Alexander (https://gist.github.com/ttalexander2)
 // https://gist.github.com/ttalexander2/88a40eec0fd0ea5b31cc2453d6bbddad
+// Modified by Synival
 
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -31,12 +32,12 @@ namespace SF3.Win.ThirdParty.TexturePacker.Extensions {
                         if (alpha != 0) {
                             if (x < xMin)
                                 xMin = x;
-                            if (x > xMax)
-                                xMax = x;
+                            if (x + 1 > xMax)
+                                xMax = x + 1;
                             if (y < yMin)
                                 yMin = y;
-                            if (y > yMax)
-                                yMax = y;
+                            if (y + 1 > yMax)
+                                yMax = y + 1;
                         }
                     }
                 }

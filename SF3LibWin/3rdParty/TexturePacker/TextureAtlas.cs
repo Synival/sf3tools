@@ -1,5 +1,6 @@
 ﻿// Original code by Thomas Alexander (https://gist.github.com/ttalexander2)
 // https://gist.github.com/ttalexander2/88a40eec0fd0ea5b31cc2453d6bbddad
+// Modified by Synival
 
 using System;
 using System.Collections.Generic;
