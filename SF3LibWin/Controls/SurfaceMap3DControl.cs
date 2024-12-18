@@ -145,6 +145,9 @@ namespace SF3.Win.Controls {
             base.OnPaint(e);
             MakeCurrent();
 
+            UpdateShaderMVP(TexturedShader);
+            UpdateShaderMVP(SolidShader);
+
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             DrawScene(RenderModel, true);
 
@@ -156,24 +159,27 @@ namespace SF3.Win.Controls {
             SwapBuffers();
         }
 
-        private void DrawScene(QuadModel model, bool drawTile) {
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            if (model == null)
-                return;
+        private void UpdateShaderMVP(Shader shader) {
+            shader.Use();
 
-            model.Shader.Use();
-
-            var handle = GL.GetUniformLocation(model.Shader.Handle, "model");
+            var handle = GL.GetUniformLocation(shader.Handle, "model");
             var matrix = Matrix4.Identity;
             GL.UniformMatrix4(handle, false, ref matrix);
 
-            handle = GL.GetUniformLocation(model.Shader.Handle, "view");
+            handle = GL.GetUniformLocation(shader.Handle, "view");
             matrix = Matrix4.CreateTranslation(-Position)
                 * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
                 * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
             GL.UniformMatrix4(handle, false, ref matrix);
+        }
 
-            model.Draw();
+        private void DrawScene(QuadModel model, bool drawTile) {
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+            if (model != null) {
+                model.Shader.Use();
+                model.Draw();
+            }
 
             if (drawTile && TileModel != null) {
                 GL.Disable(EnableCap.DepthTest);
