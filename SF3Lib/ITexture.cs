@@ -28,6 +28,16 @@ namespace SF3 {
         int ID { get; }
 
         /// <summary>
+        /// Frame index of this texture.
+        /// </summary>
+        int Frame { get; }
+
+        /// <summary>
+        /// Length of time in 1/30 seconds that this frame is active.
+        /// </summary>
+        int Duration { get; }
+
+        /// <summary>
         /// The number of bytes per pixel, in an inclusive range from (1 - 4).
         /// </summary>
         int BytesPerPixel { get; }
