@@ -27,6 +27,11 @@ namespace SF3.Win.Controls {
                     SelectModel.Dispose();
                     SelectModel = null;
                 }
+                if (TileModel != null) {
+                    TileModel.Dispose();
+                    TileModel = null;
+                }
+
                 if (TexturedShader != null) {
                     TexturedShader.Dispose();
                     TexturedShader = null;
@@ -132,17 +137,17 @@ namespace SF3.Win.Controls {
             MakeCurrent();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-            DrawScene(RenderModel);
+            DrawScene(RenderModel, true);
 
             GL.BindFramebuffer(FramebufferTarget.Framebuffer, _framebufferHandle);
             GL.ClearColor(1, 1, 1, 1);
-            DrawScene(SelectModel);
+            DrawScene(SelectModel, false);
             GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
 
             SwapBuffers();
         }
 
-        private void DrawScene(QuadModel model) {
+        private void DrawScene(QuadModel model, bool drawTile) {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             if (model == null)
                 return;
@@ -160,10 +165,34 @@ namespace SF3.Win.Controls {
             GL.UniformMatrix4(handle, false, ref matrix);
 
             model.Draw();
+
+            if (drawTile && TileModel != null) {
+                GL.Disable(EnableCap.DepthTest);
+                TileModel.Shader.Use();
+                TileModel.Draw();
+                GL.Enable(EnableCap.DepthTest);
+            }
+        }
+
+        private Vector3[] GetTileVertices(int x, int y) {
+            const float offX = WidthInTiles / -2f;
+            const float offY = HeightInTiles / -2f;
+
+            var heights = _heightmap[x, y];
+            return [
+                (x + 0 + offX, ((heights >>  8) & 0xFF) / 16f, y + 0 + offY),
+                (x + 1 + offX, ((heights >>  0) & 0xFF) / 16f, y + 0 + offY),
+                (x + 1 + offX, ((heights >> 24) & 0xFF) / 16f, y + 1 + offY),
+                (x + 0 + offX, ((heights >> 16) & 0xFF) / 16f, y + 1 + offY)
+            ];
         }
 
         public void UpdateModel(ushort[,] textureData, MPD_FileTextureChunk[] textureChunks, TextureAnimationTable textureAnimations, TileSurfaceHeightmapRow[] heightmap) {
             MakeCurrent();
+
+            for (var y = 0; y < HeightInTiles; y++)
+                for (var x = 0; x < WidthInTiles; x++)
+                    _heightmap[x, y] = heightmap[y][x];
 
             if (RenderModel != null) {
                 RenderModel.Dispose();
@@ -174,9 +203,6 @@ namespace SF3.Win.Controls {
                 SelectModel.Dispose();
                 SelectModel = null;
             }
-
-            const float offX = -32.0f;
-            const float offY = -32.0f;
 
             var texturesById = (textureChunks != null) ? textureChunks
                 .SelectMany(x => x.TextureTable.Rows)
@@ -209,14 +235,7 @@ namespace SF3.Win.Controls {
                         }
                     }
 
-                    var heights = heightmap[y][x];
-                    var vertices = new Vector3[] {
-                        (x + 0 + offX, ((heights >>  8) & 0xFF) / 16f, y + 0 + offY),
-                        (x + 1 + offX, ((heights >>  0) & 0xFF) / 16f, y + 0 + offY),
-                        (x + 1 + offX, ((heights >> 24) & 0xFF) / 16f, y + 1 + offY),
-                        (x + 0 + offX, ((heights >> 16) & 0xFF) / 16f, y + 1 + offY)
-                    };
-
+                    var vertices = GetTileVertices(x, y);
                     if (anim != null)
                         renderQuads.Add(new Quad(vertices, anim, textureFlags));
 
@@ -370,7 +389,15 @@ namespace SF3.Win.Controls {
             _tileX = x;
             _tileY = y;
 
-            System.Diagnostics.Debug.WriteLine(_tileX.ToString() + ", " + _tileY.ToString());
+            TileModel?.Dispose();
+            TileModel = null;
+
+            if (_tileX != null && _tileY != null) {
+                var quad = new Quad(GetTileVertices(_tileX.Value, _tileY.Value), new Vector3(1, 1, 1));
+                TileModel = new QuadModel([quad], SolidShader);
+            }
+
+            Invalidate();
         }
 
         protected override void OnMouseLeave(EventArgs e) {
@@ -400,8 +427,11 @@ namespace SF3.Win.Controls {
 
         public QuadModel RenderModel { get; private set; }
         public QuadModel SelectModel { get; private set; }
+        public QuadModel TileModel { get; private set; }
 
         private Timer _timer = null;
+
+        private uint[,] _heightmap = new uint[WidthInTiles, HeightInTiles];
 
         private int _framebufferHandle = 0;
         private Texture _framebufferColorTexture = null;
