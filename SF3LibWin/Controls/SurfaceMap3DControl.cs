@@ -19,9 +19,13 @@ namespace SF3.Win.Controls {
             InitializeComponent();
 
             Disposed += (s, a) => {
-                if (Model != null) {
-                    Model.Dispose();
-                    Model = null;
+                if (RenderModel != null) {
+                    RenderModel.Dispose();
+                    RenderModel = null;
+                }
+                if (SelectModel != null) {
+                    SelectModel.Dispose();
+                    SelectModel = null;
                 }
                 if (TexturedShader != null) {
                     TexturedShader.Dispose();
@@ -88,22 +92,22 @@ namespace SF3.Win.Controls {
             MakeCurrent();
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            if (Model == null)
-                return;
 
-            Model.Shader.Use();
+            if (RenderModel != null) {
+                RenderModel.Shader.Use();
 
-            var handle = GL.GetUniformLocation(Model.Shader.Handle, "model");
-            var matrix = Matrix4.Identity;
-            GL.UniformMatrix4(handle, false, ref matrix);
+                var handle = GL.GetUniformLocation(RenderModel.Shader.Handle, "model");
+                var matrix = Matrix4.Identity;
+                GL.UniformMatrix4(handle, false, ref matrix);
 
-            handle = GL.GetUniformLocation(Model.Shader.Handle, "view");
-            matrix = Matrix4.CreateTranslation(-Position)
-                * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
-                * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
-            GL.UniformMatrix4(handle, false, ref matrix);
+                handle = GL.GetUniformLocation(RenderModel.Shader.Handle, "view");
+                matrix = Matrix4.CreateTranslation(-Position)
+                    * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
+                    * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
+                GL.UniformMatrix4(handle, false, ref matrix);
 
-            Model.Draw();
+                RenderModel.Draw();
+            }
 
             SwapBuffers(); // Display the result.
         }
@@ -111,43 +115,51 @@ namespace SF3.Win.Controls {
         public void UpdateModel(ushort[,] textureData, MPD_FileTextureChunk[] textureChunks, TextureAnimationTable textureAnimations, TileSurfaceHeightmapRow[] heightmap) {
             MakeCurrent();
 
-            if (Model != null) {
-                Model.Dispose();
-                Model = null;
+            if (RenderModel != null) {
+                RenderModel.Dispose();
+                RenderModel= null;
                 Invalidate();
             }
+            if (SelectModel != null) {
+                SelectModel.Dispose();
+                SelectModel = null;
+            }
 
-            if (textureData == null || heightmap == null)
-                return;
+            const int tileWidth = 64;
+            const int tileHeight = 64;
+            const float offX = -32.0f;
+            const float offY = -32.0f;
 
-            var quads = new List<Quad>();
-            var offX = (float) textureData.GetLength(0) / -2;
-            var offY = (float) textureData.GetLength(1) / -2;
-
-            var texturesById = textureChunks
+            var texturesById = (textureChunks != null) ? textureChunks
                 .SelectMany(x => x.TextureTable.Rows)
-                .ToDictionary(x => x.ID, x => x.Texture);
+                .ToDictionary(x => x.ID, x => x.Texture)
+                : [];
 
             var animationsById = (textureAnimations != null) ? textureAnimations.Rows
                 .ToDictionary(x => (int) x.TextureID, x => x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray())
                 : [];
 
-            for (var y = 0; y < textureData.GetLength(1); y++) {
-                for (var x = 0; x < textureData.GetLength(1); x++) {
-                    var key = textureData[x, y];
-                    var textureId = textureData[x, y] & 0xFF;
-                    var textureFlags = (byte) ((textureData[x, y] >> 8) & 0xFF);
+            var renderQuads = new List<Quad>();
+            var selectQuads = new List<Quad>();
 
-                    if (textureId == 0xFF || !texturesById.ContainsKey(textureId))
-                        continue;
-
+            for (var y = 0; y < tileWidth; y++) {
+                for (var x = 0; x < tileHeight; x++) {
                     TextureAnimation anim = null;
-                    if (animationsById.ContainsKey(textureId))
-                        anim = new TextureAnimation(textureId, animationsById[textureId]);
-                    else if (texturesById.ContainsKey(textureId))
-                        anim = new TextureAnimation(textureId, [texturesById[textureId]]);
-                    else
-                        anim = null;
+                    byte textureFlags = 0;
+
+                    if (textureData != null) {
+                        var key = textureData[x, y];
+                        var textureId = textureData[x, y] & 0xFF;
+                        textureFlags = (byte) ((textureData[x, y] >> 8) & 0xFF);
+
+                        // Get texture. Fetch animated textures if possible.
+                        if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
+                            if (animationsById.ContainsKey(textureId))
+                                anim = new TextureAnimation(textureId, animationsById[textureId]);
+                            else if (texturesById.ContainsKey(textureId))
+                                anim = new TextureAnimation(textureId, [texturesById[textureId]]);
+                        }
+                    }
 
                     var heights = heightmap[y][x];
                     var vertices = new Vector3[] {
@@ -156,19 +168,19 @@ namespace SF3.Win.Controls {
                         (x + 1 + offX, ((heights >> 24) & 0xFF) / 16f, y + 1 + offY),
                         (x + 0 + offX, ((heights >> 16) & 0xFF) / 16f, y + 1 + offY)
                     };
-#if USE_SOLID_SHADER
-                    quads.Add(new Quad(vertices, new Vector3(x / 64.0f, y / 64.0f, 0)));
-#else
-                    quads.Add(new Quad(vertices, anim, textureFlags));
-#endif
+
+                    if (anim != null)
+                        renderQuads.Add(new Quad(vertices, anim, textureFlags));
+
+                    selectQuads.Add(new Quad(vertices, new Vector3(x / 64.0f, y / 64.0f, 0)));
                 }
             }
 
-#if USE_SOLID_SHADER
-            Model = new QuadModel(quads.ToArray(), SolidShader);
-#else
-            Model = new QuadModel(quads.ToArray(), TexturedShader);
-#endif
+            if (renderQuads.Count > 0)
+                RenderModel = new QuadModel(renderQuads.ToArray(), TexturedShader);
+            if (selectQuads.Count > 0)
+                SelectModel = new QuadModel(selectQuads.ToArray(), SolidShader);
+
             Invalidate();
         }
 
@@ -289,14 +301,15 @@ namespace SF3.Win.Controls {
         private void UpdateAnimatedTextures() {
             if (_frame % 2 == 0)
                 return;
-            if (Model?.UpdateAnimatedTextures() == true)
+            if (RenderModel?.UpdateAnimatedTextures() == true)
                 Invalidate();
         }
 
         public Shader TexturedShader { get; private set; }
         public Shader SolidShader { get; private set; }
 
-        public QuadModel Model { get; private set; }
+        public QuadModel RenderModel { get; private set; }
+        public QuadModel SelectModel { get; private set; }
 
         private Timer _timer = null;
     }
