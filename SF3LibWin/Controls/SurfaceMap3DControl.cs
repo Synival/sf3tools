@@ -148,13 +148,15 @@ namespace SF3.Win.Controls {
             UpdateShaderMVP(TexturedShader);
             UpdateShaderMVP(SolidShader);
 
-            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-            DrawScene(RenderModel, true);
-
             GL.BindFramebuffer(FramebufferTarget.Framebuffer, _framebufferHandle);
             GL.ClearColor(1, 1, 1, 1);
             DrawScene(SelectModel, false);
             GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
+
+            UpdateTilePosition();
+
+            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            DrawScene(RenderModel, true);
 
             SwapBuffers();
         }
@@ -389,6 +391,23 @@ namespace SF3.Win.Controls {
                 Invalidate();
         }
 
+        protected override void OnMouseLeave(EventArgs e) {
+            base.OnMouseLeave(e);
+            UpdateMousePosition(null, null);
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e) {
+            base.OnMouseMove(e);
+
+            if (e.X < 0 || e.Y < 0 || e.X >= Width || e.Y >= Height)
+                UpdateMousePosition(null, null);
+            else
+                UpdateMousePosition(e.X, e.Y);
+        }
+
+        private int? _mouseX = null;
+        private int? _mouseY = null;
+
         private int? _tileX = null;
         private int? _tileY = null;
 
@@ -417,20 +436,25 @@ namespace SF3.Win.Controls {
             Invalidate();
         }
 
-        protected override void OnMouseLeave(EventArgs e) {
-            base.OnMouseLeave(e);
-            UpdateTilePosition(null, null);
+        private void UpdateMousePosition(int? x, int? y) {
+            if (_mouseX == x && _mouseY == y)
+                return;
+
+            _mouseX = x;
+            _mouseY = y;
+
+            UpdateTilePosition();
         }
 
-        protected override void OnMouseMove(MouseEventArgs e) {
-            base.OnMouseMove(e);
-
-            if (e.X < 0 || e.Y < 0 || e.X >= Width || e.Y >= Height)
+        private void UpdateTilePosition() {
+            if (_mouseX == null || _mouseY == null) {
+                UpdateTilePosition(null, null);
                 return;
+            }
 
             var pixel = new byte[3];
             GL.BindFramebuffer(FramebufferTarget.ReadFramebuffer, _framebufferHandle);
-            GL.ReadPixels(e.X, Height - e.Y - 1, 1, 1, PixelFormat.Rgb, PixelType.UnsignedByte, pixel);
+            GL.ReadPixels(_mouseX.Value, Height - _mouseY.Value - 1, 1, 1, PixelFormat.Rgb, PixelType.UnsignedByte, pixel);
             GL.BindFramebuffer(FramebufferTarget.ReadFramebuffer, 0);
 
             if (pixel[2] == 255)
