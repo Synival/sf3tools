@@ -47,8 +47,12 @@ namespace SF3.Win.OpenGL {
             GL.DeleteShader(vertexShaderHandle);
 
             using (Use()) {
-                var handle = GL.GetUniformLocation(Handle, "texture0");
-                GL.Uniform1(handle, 0);
+                // Texture uniforms need to be set.
+                for (int i = 0; i < 4; i++) {
+                    var handle = GL.GetUniformLocation(Handle, "texture" + i);
+                    if (handle >= 0)
+                        GL.Uniform1(handle, i);
+                }
 
                 // Get all shader attributes.
                 GL.GetProgram(Handle, GetProgramParameterName.ActiveAttributes, out var attribCount);
