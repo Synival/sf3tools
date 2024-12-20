@@ -7,19 +7,19 @@ namespace SF3.Win.Views.MPD {
     public class SurfaceView : TabView {
         public SurfaceView(string name, IMPD_File model) : base(name) {
             Model = model;
-            SurfaceMap3DView = new SurfaceMap3DView("Tiles (3D)", Model);
+            ViewerView = new MPD_ViewerView("Viewer", Model);
         }
 
         public override Control Create() {
             if (base.Create() == null)
                 return null;
 
-            CreateChild(SurfaceMap3DView, (c) => {
-                _surfaceMap3DControlTab = (TabPage) c.Parent;
-                SurfaceMap3DView.UpdateMap();
+            CreateChild(ViewerView, (c) => {
+                _viewerTab = (TabPage) c.Parent;
+                ViewerView.UpdateMap();
             }, autoFill: true);
 
-            TabControl.Selected += UpdateSurfaceMapControls;
+            TabControl.Selected += UpdateViewer;
 
             var ngc = Model.NameGetterContext;
 
@@ -31,11 +31,11 @@ namespace SF3.Win.Views.MPD {
             return Control;
         }
 
-        private TabPage _surfaceMap3DControlTab = null;
+        private TabPage _viewerTab = null;
 
-        void UpdateSurfaceMapControls(object sender, EventArgs eventArgs) {
-            if (TabControl.SelectedTab == _surfaceMap3DControlTab)
-                SurfaceMap3DView?.UpdateMap();
+        void UpdateViewer(object sender, EventArgs eventArgs) {
+            if (TabControl.SelectedTab == _viewerTab)
+                ViewerView?.UpdateMap();
         }
 
         public override void Destroy() {
@@ -43,15 +43,15 @@ namespace SF3.Win.Views.MPD {
                 return;
 
             if (TabControl != null)
-                TabControl.Selected -= UpdateSurfaceMapControls;
+                TabControl.Selected -= UpdateViewer;
 
-            SurfaceMap3DView.Destroy();
-            _surfaceMap3DControlTab = null;
+            ViewerView.Destroy();
+            _viewerTab = null;
 
             base.Destroy();
         }
 
         public IMPD_File Model { get; }
-        public SurfaceMap3DView SurfaceMap3DView { get; }
+        public MPD_ViewerView ViewerView { get; }
     }
 }

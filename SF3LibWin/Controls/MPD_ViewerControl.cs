@@ -13,11 +13,11 @@ using SF3.Win.Extensions;
 using SF3.Win.OpenGL;
 
 namespace SF3.Win.Controls {
-    public partial class SurfaceMap3DControl : GLControl {
+    public partial class MPD_ViewerControl : GLControl {
         public const int WidthInTiles = 64;
         public const int HeightInTiles = 64;
 
-        public SurfaceMap3DControl() {
+        public MPD_ViewerControl() {
             InitializeComponent();
 
             Disposed += (s, a) => {

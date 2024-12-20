@@ -2,14 +2,14 @@
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views.MPD {
-    public class SurfaceMap3DView : ControlView<SurfaceMap3DControl> {
-        public SurfaceMap3DView(string name, IMPD_File model) : base(name) {
+    public class MPD_ViewerView : ControlView<MPD_ViewerControl> {
+        public MPD_ViewerView(string name, IMPD_File model) : base(name) {
             Model = model;
         }
 
         public void UpdateMap() {
             var textureData = Model.TileSurfaceCharacterRows?.Make2DTextureData();
-            SurfaceMapControl.UpdateModel(textureData, Model.TextureChunks, Model.TextureAnimations, Model.TileSurfaceHeightmapRows.Rows);
+            ViewerControl.UpdateModel(textureData, Model.TextureChunks, Model.TextureAnimations, Model.TileSurfaceHeightmapRows.Rows);
         }
 
         public override void RefreshContent() {
@@ -21,6 +21,6 @@ namespace SF3.Win.Views.MPD {
 
         public IMPD_File Model { get; }
 
-        public SurfaceMap3DControl SurfaceMapControl => (SurfaceMap3DControl) Control;
+        public MPD_ViewerControl ViewerControl => (MPD_ViewerControl) Control;
     }
 }

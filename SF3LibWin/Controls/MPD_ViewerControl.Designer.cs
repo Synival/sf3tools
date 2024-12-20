@@ -1,5 +1,5 @@
 ﻿namespace SF3.Win.Controls {
-    partial class SurfaceMap3DControl {
+    partial class MPD_ViewerControl {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -35,7 +35,7 @@
 
             BackColor = System.Drawing.Color.FromArgb(  64,   64,   64);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            Name = "SurfaceMap3DControl";
+            Name = "MPD_ViewerControl";
             Size = new System.Drawing.Size(1024, 1024);
             ResumeLayout();
         }
