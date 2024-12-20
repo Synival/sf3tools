@@ -18,6 +18,7 @@ namespace SF3.Win.Controls {
         public const int HeightInTiles = 64;
         private const float c_offX = WidthInTiles / -2f;
         private const float c_offY = HeightInTiles / -2f;
+        private const MouseButtons c_MouseMiddleRight = MouseButtons.Middle | MouseButtons.Right;
 
         public MPD_ViewerControl() {
             InitializeComponent();
@@ -240,13 +241,13 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private Vector3[] GetTileVertices(int x, int y) {
-            var heights = _heightmap[x, y];
+        private Vector3[] GetTileVertices(Point pos) {
+            var heights = _heightmap[pos.X, pos.Y];
             return [
-                (x + 0 + c_offX, ((heights >>  8) & 0xFF) / 16f, y + 0 + c_offY),
-                (x + 1 + c_offX, ((heights >>  0) & 0xFF) / 16f, y + 0 + c_offY),
-                (x + 1 + c_offX, ((heights >> 24) & 0xFF) / 16f, y + 1 + c_offY),
-                (x + 0 + c_offX, ((heights >> 16) & 0xFF) / 16f, y + 1 + c_offY)
+                (pos.X + 0 + c_offX, ((heights >>  8) & 0xFF) / 16f, pos.Y + 0 + c_offY),
+                (pos.X + 1 + c_offX, ((heights >>  0) & 0xFF) / 16f, pos.Y + 0 + c_offY),
+                (pos.X + 1 + c_offX, ((heights >> 24) & 0xFF) / 16f, pos.Y + 1 + c_offY),
+                (pos.X + 0 + c_offX, ((heights >> 16) & 0xFF) / 16f, pos.Y + 1 + c_offY)
             ];
         }
 
@@ -302,7 +303,7 @@ namespace SF3.Win.Controls {
                         }
                     }
 
-                    var vertices = GetTileVertices(x, y);
+                    var vertices = GetTileVertices(new Point(x, y));
                     if (anim != null)
                         renderQuads.Add(new Quad(vertices, anim, textureFlags));
 
@@ -350,9 +351,9 @@ namespace SF3.Win.Controls {
         }
 
         private MouseButtons _mouseButtons = MouseButtons.None;
-        private const MouseButtons c_MouseMiddleRight = MouseButtons.Middle | MouseButtons.Right;
-        private int? _lastMouseX = null;
-        private int? _lastMouseY = null;
+        private Point? _mousePos = null;
+        private Point? _tilePos = null;
+        private Point? _lastMousePos = null;
 
         protected override void OnMouseDown(MouseEventArgs e) {
             base.OnMouseDown(e);
@@ -388,8 +389,7 @@ namespace SF3.Win.Controls {
             base.OnLostFocus(e);
             _keysPressed.Clear();
             _mouseButtons = MouseButtons.None;
-            _lastMouseX = null;
-            _lastMouseY = null;
+            _lastMousePos = null;
         }
 
         private int _frame = 0;
@@ -467,22 +467,24 @@ namespace SF3.Win.Controls {
         protected override void OnMouseLeave(EventArgs e) {
             base.OnMouseLeave(e);
             _mouseIsOver = false;
-            _lastMouseX = null;
-            _lastMouseY = null;
+            _lastMousePos = null;
             _mouseButtons = MouseButtons.None;
 
-            if (_mouseX != null || _mouseY != null)
-                UpdateMousePosition(null, null);
+            if (_mousePos != null)
+                UpdateMousePosition(null);
             else
-                UpdateTilePosition(null, null);
+                UpdateTilePosition(null);
         }
 
         private (Vector3, float) GetCurrentTileTargetAndDistance() {
-            var tileVertices = GetTileVertices(_tileX.Value, _tileY.Value);
+            if (!_tilePos.HasValue)
+                throw new NullReferenceException(nameof(_tilePos));
+
+            var tileVertices = GetTileVertices(_tilePos.Value);
             var target = new Vector3(
-                _tileX.Value + c_offX + 0.5f,
+                _tilePos.Value.X + c_offX + 0.5f,
                 tileVertices.Select(x => x.Y).Average(),
-                _tileY.Value + c_offY + 0.5f);
+                _tilePos.Value.Y + c_offY + 0.5f);
 
             var dist = (float) Math.Sqrt(
                 Math.Pow(target.X - Position.X, 2) +
@@ -496,13 +498,13 @@ namespace SF3.Win.Controls {
         protected override void OnMouseMove(MouseEventArgs e) {
             base.OnMouseMove(e);
 
-            if (_lastMouseX.HasValue && _lastMouseY.HasValue && (_lastMouseX != e.X || _lastMouseY != e.Y)) {
+            if (_lastMousePos.HasValue && (_lastMousePos != e.Location)) {
                 var shiftFactor = GetShiftFactor();
-                var deltaX = (e.X - _lastMouseX.Value) * shiftFactor;
-                var deltaY = (e.Y - _lastMouseY.Value) * shiftFactor;
+                var deltaX = (e.X - _lastMousePos.Value.X) * shiftFactor;
+                var deltaY = (e.Y - _lastMousePos.Value.Y) * shiftFactor;
 
                 // For middle+right drag, rotate around, keeping the tile over the mouse in place.
-                if ((_mouseButtons & c_MouseMiddleRight) == c_MouseMiddleRight && _tileX.HasValue && _tileY.HasValue) {
+                if ((_mouseButtons & c_MouseMiddleRight) == c_MouseMiddleRight && _tilePos.HasValue) {
                     // TODO: SIMPLYIFY ALL THIS, AND IMPROVE IT!!!
 
                     var (target, dist) = GetCurrentTileTargetAndDistance();
@@ -546,12 +548,11 @@ namespace SF3.Win.Controls {
             }
 
             if (e.X < 0 || e.Y < 0 || e.X >= Width || e.Y >= Height)
-                UpdateMousePosition(null, null);
+                UpdateMousePosition(null);
             else
-                UpdateMousePosition(e.X, e.Y);
+                UpdateMousePosition(e.Location);
 
-            _lastMouseX = e.X;
-            _lastMouseY = e.Y;
+            _lastMousePos = e.Location;
         }
 
         protected override void OnMouseWheel(MouseEventArgs e) {
@@ -564,7 +565,7 @@ namespace SF3.Win.Controls {
         }
 
         private void LookAtCurrentTileTarget() {
-            if (_tileX == null || _tileY == null)
+            if (!_tilePos.HasValue)
                 return;
 
             var (target, dist) = GetCurrentTileTargetAndDistance();
@@ -573,7 +574,7 @@ namespace SF3.Win.Controls {
         }
 
         private void PanToCurrentTileTarget() {
-            if (_tileX == null || _tileY == null)
+            if (!_tilePos.HasValue)
                 return;
 
             var (target, dist) = GetCurrentTileTargetAndDistance();
@@ -594,44 +595,33 @@ namespace SF3.Win.Controls {
 
         private bool _mouseIsOver = false;
 
-        private int? _mouseX = null;
-        private int? _mouseY = null;
-
-        private int? _tileX = null;
-        private int? _tileY = null;
-
-        private void UpdateTilePosition(int? x, int? y) {
-            // All invalid tile values should be -1, -1.
-            if (x < 0 || y < 0 || x >= WidthInTiles || y >= HeightInTiles) {
-                x = null;
-                y = null;
-            }
+        private void UpdateTilePosition(Point? pos) {
+            // All invalid tile values should be 'null'.
+            if (pos.HasValue && (pos.Value.X < 0 || pos.Value.Y < 0 || pos.Value.X >= WidthInTiles || pos.Value.Y >= HeightInTiles))
+                pos = null;
 
             // Early exit if no change is necessary.
-            if (_tileX == x && _tileY == y)
+            if (_tilePos == pos)
                 return;
 
-            _tileX = x;
-            _tileY = y;
+            _tilePos = pos;
 
             TileModel?.Dispose();
             TileModel = null;
 
-            if (_tileX != null && _tileY != null) {
-                var quad = new Quad(GetTileVertices(_tileX.Value, _tileY.Value), _tileHoverTextureAnimation, 0);
+            if (_tilePos != null) {
+                var quad = new Quad(GetTileVertices(_tilePos.Value), _tileHoverTextureAnimation, 0);
                 TileModel = new QuadModel([quad], TexturedShader);
             }
 
             Invalidate();
         }
 
-        private void UpdateMousePosition(int? x, int? y) {
-            if (_mouseX == x && _mouseY == y)
+        private void UpdateMousePosition(Point? pos) {
+            if (_mousePos == pos)
                 return;
 
-            _mouseX = x;
-            _mouseY = y;
-
+            _mousePos = pos;
             UpdateTilePosition();
         }
 
@@ -640,27 +630,31 @@ namespace SF3.Win.Controls {
             if ((_mouseButtons & c_MouseMiddleRight) == c_MouseMiddleRight)
                 return;
 
-            if (_mouseX == null || _mouseY == null) {
-                UpdateTilePosition(null, null);
+            if (_mousePos == null) {
+                UpdateTilePosition(null);
                 return;
             }
 
             var pixel = new byte[3];
             GL.BindFramebuffer(FramebufferTarget.ReadFramebuffer, _framebufferHandle);
-            GL.ReadPixels(_mouseX.Value, Height - _mouseY.Value - 1, 1, 1, PixelFormat.Rgb, PixelType.UnsignedByte, pixel);
+            GL.ReadPixels(_mousePos.Value.X, Height - _mousePos.Value.Y - 1, 1, 1, PixelFormat.Rgb, PixelType.UnsignedByte, pixel);
             GL.BindFramebuffer(FramebufferTarget.ReadFramebuffer, 0);
 
             if (pixel[2] == 255)
-                UpdateTilePosition(null, null);
-            else
-                UpdateTilePosition((int) Math.Round(pixel[0] / (255.0f / WidthInTiles)), (int) Math.Round(pixel[1] / (255.0f / WidthInTiles)));
+                UpdateTilePosition(null);
+            else {
+                UpdateTilePosition(new Point(
+                    (int) Math.Round(pixel[0] / (255.0f / WidthInTiles)),
+                    (int) Math.Round(pixel[1] / (255.0f / WidthInTiles))
+                ));
+            }
         }
 
         // TODO: temporary click function!! remove this when there's an actual 'edit' panel
         protected override void OnClick(EventArgs e) {
             base.OnClick(e);
-            if (_tileX != null && _tileY != null)
-                System.Diagnostics.Debug.WriteLine(_tileX.ToString() + ", " + _tileY.ToString());
+            if (_tilePos != null)
+                System.Diagnostics.Debug.WriteLine("Tile: " + _tilePos.ToString());
         }
 
         public Shader TexturedShader { get; private set; }
