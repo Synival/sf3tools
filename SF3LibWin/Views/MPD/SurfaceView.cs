@@ -7,6 +7,8 @@ namespace SF3.Win.Views.MPD {
     public class SurfaceView : TabView {
         public SurfaceView(string name, IMPD_File model) : base(name) {
             Model = model;
+            SurfaceMap2DView = new SurfaceMap2DView("Tiles (2D)", Model);
+            SurfaceMap3DView = new SurfaceMap3DView("Tiles (3D)", Model);
         }
 
         public class NoScrollTabPage : TabPage {
@@ -18,12 +20,10 @@ namespace SF3.Win.Views.MPD {
             if (base.Create() == null)
                 return null;
 
-            SurfaceMap2DView = new SurfaceMap2DView("Tiles (2D)", Model);
             _ = CreateCustomChild(SurfaceMap2DView, autoFill: false, (name) => new NoScrollTabPage(name) { AutoScroll = true });
             _surfaceMap2DControlTab = (TabPage) SurfaceMap2DView.SurfaceMapControl.Parent;
             SurfaceMap2DView.UpdateMap();
 
-            SurfaceMap3DView = new SurfaceMap3DView("Tiles (3D)", Model);
             _ = CreateChild(SurfaceMap3DView, autoFill: true);
             _surfaceMap3DControlTab = (TabPage) SurfaceMap3DView.SurfaceMapControl.Parent;
             SurfaceMap3DView.UpdateMap();
@@ -57,21 +57,17 @@ namespace SF3.Win.Views.MPD {
             if (TabControl != null)
                 TabControl.Selected -= UpdateSurfaceMapControls;
 
-            if (SurfaceMap2DView != null) {
-                _surfaceMap2DControlTab = null;
-                SurfaceMap2DView = null;
-            }
+            SurfaceMap2DView.Destroy();
+            _surfaceMap2DControlTab = null;
 
-            if (SurfaceMap3DView != null) {
-                _surfaceMap3DControlTab = null;
-                SurfaceMap3DView = null;
-            }
+            SurfaceMap3DView.Destroy();
+            _surfaceMap3DControlTab = null;
 
             base.Destroy();
         }
 
         public IMPD_File Model { get; }
-        public SurfaceMap2DView SurfaceMap2DView { get; private set; }
-        public SurfaceMap3DView SurfaceMap3DView { get; private set; }
+        public SurfaceMap2DView SurfaceMap2DView { get; }
+        public SurfaceMap3DView SurfaceMap3DView { get; }
     }
 }
