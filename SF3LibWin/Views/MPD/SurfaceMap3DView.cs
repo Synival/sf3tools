@@ -13,6 +13,9 @@ namespace SF3.Win.Views.MPD {
         }
 
         public override void RefreshContent() {
+            if (!IsCreated)
+                return;
+
             // TODO: how to refresh???
         }
 

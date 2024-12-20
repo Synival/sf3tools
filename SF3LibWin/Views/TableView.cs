@@ -120,6 +120,9 @@ namespace SF3.Win.Views {
         }
 
         public override void Destroy() {
+            if (!IsCreated)
+                return;
+
             Control?.Hide();
 
             if (OLVControl != null) {
@@ -133,8 +136,9 @@ namespace SF3.Win.Views {
         }
 
         public override void RefreshContent() {
-            if (OLVControl == null)
+            if (!IsCreated || OLVControl == null)
                 return;
+
             OLVControl.RefreshAllItems();
         }
 

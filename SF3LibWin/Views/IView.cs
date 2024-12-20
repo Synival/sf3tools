@@ -31,5 +31,10 @@ namespace SF3.Win.Views {
         /// The control instantiated upon Create().
         /// </summary>
         Control Control { get; }
+
+        /// <summary>
+        /// 'True' when Create() has been called successfully.
+        /// </summary>
+        bool IsCreated { get; }
     }
 }

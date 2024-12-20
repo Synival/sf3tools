@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SF3.Win.Views {
@@ -14,11 +9,12 @@ namespace SF3.Win.Views {
         public abstract Control Create();
 
         public virtual void Destroy() {
-            if (Control != null) {
-                Control.Parent = null;
-                Control.Dispose();
-                Control = null;
-            }
+            if (!IsCreated)
+                return;
+
+            Control.Parent = null;
+            Control.Dispose();
+            Control = null;
         }
 
         public virtual void Dispose() => Destroy();
@@ -27,5 +23,6 @@ namespace SF3.Win.Views {
 
         public string Name { get; }
         public Control Control { get; protected set; } = null;
+        public bool IsCreated => Control != null;
     }
 }

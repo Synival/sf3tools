@@ -17,6 +17,9 @@ namespace SF3.Win.Views {
         }
 
         public override void Destroy() {
+            if (!IsCreated)
+                return;
+
             Control?.Hide();
 
             if (_childViews != null) {
@@ -48,6 +51,9 @@ namespace SF3.Win.Views {
         }
 
         public override void RefreshContent() {
+            if (!IsCreated)
+                return;
+
             foreach (var child in ChildViews)
                 child.RefreshContent();
         }

@@ -51,6 +51,9 @@ namespace SF3.Win.Views.MPD {
         }
 
         public override void Destroy() {
+            if (!IsCreated)
+                return;
+
             if (TabControl != null)
                 TabControl.Selected -= UpdateSurfaceMapControls;
 

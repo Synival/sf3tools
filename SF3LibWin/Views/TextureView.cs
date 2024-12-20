@@ -13,6 +13,9 @@ namespace SF3.Win.Views {
         }
 
         public override void RefreshContent() {
+            if (!IsCreated)
+                return;
+
             var old = TextureControl.TextureImage;
             TextureControl.TextureImage = null;
             TextureControl.TextureImage = old;
