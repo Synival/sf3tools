@@ -11,6 +11,10 @@ namespace SF3.Win.OpenGL {
         public int ShaderHandle { get; set; } = 0;
         public TextureUnit ActiveTexture { get; internal set; }
         public int TextureHandle { get; set; } = 0;
+        // TODO: needs separate stats per framebuffer target!!
         public int FramebufferHandle { get; set; } = 0;
+        // TODO: needs separate stats per buffer target!!
+        public int BufferHandle { get; set; } = 0;
+        public int VertexArrayHandle { get; set; } = 0;
     }
 }

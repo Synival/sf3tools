@@ -31,17 +31,19 @@ namespace SF3.Win.OpenGL {
             _vertexBuffer = new float[shader.GetVertexBufferSize(Quads.Length * 4) / sizeof(float)];
             AssignVertexBufferPositions();
             AssignVertexBufferColors();
+
+            _vertexBufferObject = new Buffer();
+            using (_vertexBufferObject.Use(BufferTarget.ArrayBuffer)) {
+                GL.BufferData(BufferTarget.ArrayBuffer, _vertexBuffer.Length * sizeof(float), _vertexBuffer, BufferUsageHint.DynamicDraw);
+
+                // Create the VAO.
+                _vertexArrayObject = new VertexArray();
+                using (_vertexArrayObject.Use())
+                    foreach (var attr in new string[] { "position", "color", "texCoord0" })
+                        Shader.EnableVAO_Attribute(attr);
+            }
+
             _ = AssignVertexBufferTexCoords();
-
-            _vertexBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
-            GL.BufferData(BufferTarget.ArrayBuffer, _vertexBuffer.Length * sizeof(float), _vertexBuffer, BufferUsageHint.DynamicDraw);
-
-            // Create the VAO.
-            _vertexArrayObject = GL.GenVertexArray();
-            GL.BindVertexArray(_vertexArrayObject);
-            foreach (var attr in new string[] { "position", "color", "texCoord" })
-                Shader.EnableVAO_Attribute(attr);
 
             // Create indices for DrawElements().
             // TODO: quads are malformed :( :( :(
@@ -53,9 +55,9 @@ namespace SF3.Win.OpenGL {
                 })
                 .ToArray();
 
-            _elementBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, _elementBufferObject);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, _elementBuffer.Length * sizeof(uint), _elementBuffer, BufferUsageHint.StaticDraw);
+            _elementBufferObject = new Buffer();
+            using (_elementBufferObject.Use(BufferTarget.ElementArrayBuffer))
+                GL.BufferData(BufferTarget.ElementArrayBuffer, _elementBuffer.Length * sizeof(uint), _elementBuffer, BufferUsageHint.StaticDraw);
         }
 
         private void AssignVertexBufferColors() {
@@ -105,7 +107,7 @@ namespace SF3.Win.OpenGL {
             if (_texture == null)
                 return false;
 
-            var attr = Shader.GetAttributeByName("texCoord");
+            var attr = Shader.GetAttributeByName("texCoord0");
             if (attr == null)
                 return false;
 
@@ -130,19 +132,19 @@ namespace SF3.Win.OpenGL {
                 }
             }
 
-            if (modified) {
-                GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
-                GL.BufferData(BufferTarget.ArrayBuffer, _vertexBuffer.Length * sizeof(float), _vertexBuffer, BufferUsageHint.DynamicDraw);
+            if (modified && _vertexBufferObject != null) {
+                using (_vertexBufferObject.Use(BufferTarget.ArrayBuffer))
+                    GL.BufferData(BufferTarget.ArrayBuffer, _vertexBuffer.Length * sizeof(float), _vertexBuffer, BufferUsageHint.DynamicDraw);
             }
 
             return modified;
         }
 
         public void Draw() {
-            using (_texture?.Use()) {
-                GL.BindVertexArray(_vertexArrayObject);
+            using (_texture?.Use())
+            using (_vertexArrayObject.Use())
+            using (_elementBufferObject.Use(BufferTarget.ElementArrayBuffer))
                 GL.DrawElements(PrimitiveType.Triangles, _elementBuffer.Length, DrawElementsType.UnsignedInt, 0);
-            }
         }
 
         private bool disposed = false;
@@ -155,9 +157,9 @@ namespace SF3.Win.OpenGL {
                 _textureAtlas?.Dispose();
                 _texture?.Dispose();
                 _textureBitmap?.Dispose();
-                GL.DeleteBuffer(_elementBufferObject);
-                GL.DeleteVertexArray(_vertexArrayObject);
-                GL.DeleteBuffer(_vertexBufferObject);
+                _elementBufferObject?.Dispose();
+                _vertexArrayObject?.Dispose();
+                _vertexBufferObject?.Dispose();
             }
 
             disposed = true;
@@ -177,15 +179,15 @@ namespace SF3.Win.OpenGL {
         public Quad[] Quads { get; }
         public Shader Shader { get; }
 
-        public TextureAtlas _textureAtlas { get; }
-        public Bitmap _textureBitmap { get; }
-        public Texture _texture { get; }
+        private TextureAtlas _textureAtlas { get; }
+        private Bitmap _textureBitmap { get; }
+        private Texture _texture { get; }
+
+        private Buffer _vertexBufferObject { get; }
+        private VertexArray _vertexArrayObject { get; }
+        private Buffer _elementBufferObject { get; }
 
         private readonly float[] _vertexBuffer;
         private readonly uint[] _elementBuffer;
-
-        private readonly int _vertexBufferObject;
-        private readonly int _elementBufferObject;
-        private readonly int _vertexArrayObject;
     }
 }
