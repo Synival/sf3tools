@@ -80,8 +80,8 @@ namespace SF3.Win.Controls {
             _timer.Tick += (s, a) => IncrementFrame();
             _timer.Start();
 
-            Position = new Vector3(0, 50, 100);
-            LookAtTarget(new Vector3(0, 10, 0));
+            Position = new Vector3(0, 60, 120);
+            LookAtTarget(new Vector3(0, 5, 0));
 
             UpdateFramebuffer();
         }
