@@ -45,18 +45,9 @@ namespace SF3.Win.Controls {
                     SolidShader.Dispose();
                     SolidShader = null;
                 }
-
-                if (_framebufferHandle != 0) {
-                    GL.DeleteFramebuffer(_framebufferHandle);
-                    _framebufferHandle = 0;
-                }
-                if (_framebufferColorTexture != null) {
-                    _framebufferColorTexture.Dispose();
-                    _framebufferColorTexture = null;
-                }
-                if (_framebufferDepthStencilTexture != null) {
-                    _framebufferDepthStencilTexture.Dispose();
-                    _framebufferDepthStencilTexture = null;
+                if (Framebuffer != null) {
+                    Framebuffer.Dispose();
+                    Framebuffer = null;
                 }
 
                 if (_timer != null) {
@@ -121,29 +112,9 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateFramebuffer() {
-            int width = Width;
-            int height = Height;
-
-            // Update color texture.
-            if (_framebufferColorTexture != null)
-                _framebufferColorTexture.Dispose();
-            _framebufferColorTexture = new Texture(width, height, PixelInternalFormat.Rgb, PixelFormat.Rgb, PixelType.UnsignedByte);
-
-            // Update depth/stencil texture.
-            if (_framebufferDepthStencilTexture != null)
-                _framebufferDepthStencilTexture.Dispose();
-            _framebufferDepthStencilTexture = new Texture(width, height, PixelInternalFormat.Depth24Stencil8, PixelFormat.DepthStencil, PixelType.UnsignedInt248);
-
-            // (Re)create the framebuffer.
-            if (_framebufferHandle != 0)
-                GL.DeleteFramebuffer(_framebufferHandle);
-            _framebufferHandle = GL.GenFramebuffer();
-
-            // Attach txtures to the framebuffer.
-            GL.BindFramebuffer(FramebufferTarget.Framebuffer, _framebufferHandle);
-            GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.ColorAttachment0, TextureTarget.Texture2D, _framebufferColorTexture.Handle, 0);
-            GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.StencilAttachment, TextureTarget.Texture2D, _framebufferDepthStencilTexture.Handle, 0);
-            GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
+            if (Framebuffer != null)
+                Framebuffer.Dispose();
+            Framebuffer = new Framebuffer(Width, Height);
         }
 
         private void UpdateProjectionMatrices() {
@@ -174,7 +145,7 @@ namespace SF3.Win.Controls {
             UpdateShaderMVP(TexturedShader);
             UpdateShaderMVP(SolidShader);
 
-            GL.BindFramebuffer(FramebufferTarget.Framebuffer, _framebufferHandle);
+            Framebuffer.Use(FramebufferTarget.Framebuffer);
             GL.ClearColor(1, 1, 1, 1);
             GL.Enable(EnableCap.CullFace);
             DrawScene(SelectModel, false);
@@ -636,7 +607,7 @@ namespace SF3.Win.Controls {
             }
 
             var pixel = new byte[3];
-            GL.BindFramebuffer(FramebufferTarget.ReadFramebuffer, _framebufferHandle);
+            Framebuffer.Use(FramebufferTarget.ReadFramebuffer);
             GL.ReadPixels(_mousePos.Value.X, Height - _mousePos.Value.Y - 1, 1, 1, PixelFormat.Rgb, PixelType.UnsignedByte, pixel);
             GL.BindFramebuffer(FramebufferTarget.ReadFramebuffer, 0);
 
@@ -659,6 +630,7 @@ namespace SF3.Win.Controls {
 
         public Shader TexturedShader { get; private set; }
         public Shader SolidShader { get; private set; }
+        public Framebuffer Framebuffer { get; private set; }
 
         public QuadModel RenderModel { get; private set; }
         public QuadModel SelectModel { get; private set; }
@@ -668,9 +640,5 @@ namespace SF3.Win.Controls {
 
         private uint[,] _heightmap = new uint[WidthInTiles, HeightInTiles];
         private TextureAnimation _tileHoverTextureAnimation = null;
-
-        private int _framebufferHandle = 0;
-        private Texture _framebufferColorTexture = null;
-        private Texture _framebufferDepthStencilTexture = null;
     }
 }
