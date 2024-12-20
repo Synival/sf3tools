@@ -126,15 +126,17 @@ namespace SF3.Win.Controls {
                 0.1f, 300.0f);
 
             if (TexturedShader != null) {
-                TexturedShader.Use();
-                var handle = GL.GetUniformLocation(TexturedShader.Handle, "projection");
-                GL.UniformMatrix4(handle, false, ref projectionMatrix);
+                using (TexturedShader.Use()) {
+                    var handle = GL.GetUniformLocation(TexturedShader.Handle, "projection");
+                    GL.UniformMatrix4(handle, false, ref projectionMatrix);
+                }
             }
 
             if (SolidShader != null) {
-                SolidShader.Use();
-                var handle = GL.GetUniformLocation(SolidShader.Handle, "projection");
-                GL.UniformMatrix4(handle, false, ref projectionMatrix);
+                using (SolidShader.Use()) {
+                    var handle = GL.GetUniformLocation(SolidShader.Handle, "projection");
+                    GL.UniformMatrix4(handle, false, ref projectionMatrix);
+                }
             }
         }
 
@@ -145,12 +147,12 @@ namespace SF3.Win.Controls {
             UpdateShaderMVP(TexturedShader);
             UpdateShaderMVP(SolidShader);
 
-            Framebuffer.Use(FramebufferTarget.Framebuffer);
-            GL.ClearColor(1, 1, 1, 1);
-            GL.Enable(EnableCap.CullFace);
-            DrawScene(SelectModel, false);
-            GL.Disable(EnableCap.CullFace);
-            GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
+            using (Framebuffer.Use(FramebufferTarget.Framebuffer)) {
+                GL.ClearColor(1, 1, 1, 1);
+                GL.Enable(EnableCap.CullFace);
+                DrawScene(SelectModel, false);
+                GL.Disable(EnableCap.CullFace);
+            }
 
             UpdateTilePosition();
 
@@ -161,25 +163,25 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateShaderMVP(Shader shader) {
-            shader.Use();
+            using (shader.Use()) {
+                var handle = GL.GetUniformLocation(shader.Handle, "model");
+                var matrix = Matrix4.Identity;
+                GL.UniformMatrix4(handle, false, ref matrix);
 
-            var handle = GL.GetUniformLocation(shader.Handle, "model");
-            var matrix = Matrix4.Identity;
-            GL.UniformMatrix4(handle, false, ref matrix);
-
-            handle = GL.GetUniformLocation(shader.Handle, "view");
-            matrix = Matrix4.CreateTranslation(-Position)
-                * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
-                * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
-            GL.UniformMatrix4(handle, false, ref matrix);
+                handle = GL.GetUniformLocation(shader.Handle, "view");
+                matrix = Matrix4.CreateTranslation(-Position)
+                    * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
+                    * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
+                GL.UniformMatrix4(handle, false, ref matrix);
+            }
         }
 
         private void DrawScene(QuadModel model, bool isVisible) {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             if (model != null) {
-                model.Shader.Use();
-                model.Draw();
+                using (model.Shader.Use())
+                    model.Draw();
             }
 
             if (isVisible) {
@@ -205,8 +207,8 @@ namespace SF3.Win.Controls {
 
                 if (TileModel != null) {
                     GL.Disable(EnableCap.DepthTest);
-                    TileModel.Shader.Use();
-                    TileModel.Draw();
+                    using (TileModel.Shader.Use())
+                        TileModel.Draw();
                     GL.Enable(EnableCap.DepthTest);
                 }
             }
@@ -430,14 +432,8 @@ namespace SF3.Win.Controls {
                 Invalidate();
         }
 
-        protected override void OnMouseEnter(EventArgs e) {
-            base.OnMouseEnter(e);
-            _mouseIsOver = true;
-        }
-
         protected override void OnMouseLeave(EventArgs e) {
             base.OnMouseLeave(e);
-            _mouseIsOver = false;
             _lastMousePos = null;
             _mouseButtons = MouseButtons.None;
 
@@ -564,8 +560,6 @@ namespace SF3.Win.Controls {
         protected void OnMiddleDoubleClick(EventArgs e)
             => PanToCurrentTileTarget();
 
-        private bool _mouseIsOver = false;
-
         private void UpdateTilePosition(Point? pos) {
             // All invalid tile values should be 'null'.
             if (pos.HasValue && (pos.Value.X < 0 || pos.Value.Y < 0 || pos.Value.X >= WidthInTiles || pos.Value.Y >= HeightInTiles))
@@ -607,9 +601,8 @@ namespace SF3.Win.Controls {
             }
 
             var pixel = new byte[3];
-            Framebuffer.Use(FramebufferTarget.ReadFramebuffer);
-            GL.ReadPixels(_mousePos.Value.X, Height - _mousePos.Value.Y - 1, 1, 1, PixelFormat.Rgb, PixelType.UnsignedByte, pixel);
-            GL.BindFramebuffer(FramebufferTarget.ReadFramebuffer, 0);
+            using (Framebuffer.Use(FramebufferTarget.ReadFramebuffer))
+                GL.ReadPixels(_mousePos.Value.X, Height - _mousePos.Value.Y - 1, 1, 1, PixelFormat.Rgb, PixelType.UnsignedByte, pixel);
 
             if (pixel[2] == 255)
                 UpdateTilePosition(null);

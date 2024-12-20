@@ -15,8 +15,23 @@ namespace SF3.Win.OpenGL {
             GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
         }
 
-        public void Use(FramebufferTarget framebufferTarget)
-            => GL.BindFramebuffer(framebufferTarget, Handle);
+        public StackElement Use(FramebufferTarget framebufferTarget) {
+            var state = State.GetCurrentState();
+            if (state.FramebufferHandle == Handle)
+                return new StackElement();
+
+            var lastHandle = state.FramebufferHandle;
+            return new StackElement(
+                () => {
+                    GL.BindFramebuffer(framebufferTarget, Handle);
+                    state.FramebufferHandle = Handle;
+                },
+                () => {
+                    GL.BindFramebuffer(framebufferTarget, lastHandle);
+                    state.FramebufferHandle = lastHandle;
+                }
+            );
+        }
 
         private bool disposed = false;
 

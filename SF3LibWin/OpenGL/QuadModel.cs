@@ -139,9 +139,10 @@ namespace SF3.Win.OpenGL {
         }
 
         public void Draw() {
-            _texture?.Use();
-            GL.BindVertexArray(_vertexArrayObject);
-            GL.DrawElements(PrimitiveType.Triangles, _elementBuffer.Length, DrawElementsType.UnsignedInt, 0);
+            using (_texture?.Use()) {
+                GL.BindVertexArray(_vertexArrayObject);
+                GL.DrawElements(PrimitiveType.Triangles, _elementBuffer.Length, DrawElementsType.UnsignedInt, 0);
+            }
         }
 
         private bool disposed = false;

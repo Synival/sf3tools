@@ -46,25 +46,26 @@ namespace SF3.Win.OpenGL {
             GL.DeleteShader(fragmentShaderHandle);
             GL.DeleteShader(vertexShaderHandle);
 
-            Use();
-            var handle = GL.GetUniformLocation(Handle, "texture0");
-            GL.Uniform1(handle, 0);
+            using (Use()) {
+                var handle = GL.GetUniformLocation(Handle, "texture0");
+                GL.Uniform1(handle, 0);
 
-            // Get all shader attributes.
-            GL.GetProgram(Handle, GetProgramParameterName.ActiveAttributes, out var attribCount);
-            var _attributes = new ShaderAttribute[attribCount];
+                // Get all shader attributes.
+                GL.GetProgram(Handle, GetProgramParameterName.ActiveAttributes, out var attribCount);
+                var _attributes = new ShaderAttribute[attribCount];
 
-            int offset = 0;
-            for (var i = 0; i < attribCount; i++) {
-                GL.GetActiveAttrib(Handle, i, 16, out var length, out var size, out var type, out var name);
-                _attributes[i] = new ShaderAttribute(i, size, type, offset, name);
-                offset += _attributes[i].Size;
+                int offset = 0;
+                for (var i = 0; i < attribCount; i++) {
+                    GL.GetActiveAttrib(Handle, i, 16, out var length, out var size, out var type, out var name);
+                    _attributes[i] = new ShaderAttribute(i, size, type, offset, name);
+                    offset += _attributes[i].Size;
+                }
+
+                Attributes = _attributes.OrderBy(x => x.Location).ToArray();
+                _attributesByName = Attributes.ToDictionary(x => x.Name);
+
+                VertexBufferStride = offset;
             }
-
-            Attributes = _attributes.OrderBy(x => x.Location).ToArray();
-            _attributesByName = Attributes.ToDictionary(x => x.Name);
-
-            VertexBufferStride = offset;
         }
 
         public ShaderAttribute GetAttributeByName(string name)
@@ -82,7 +83,23 @@ namespace SF3.Win.OpenGL {
             GL.EnableVertexAttribArray(attrib.Location);
         }
 
-        public void Use() => GL.UseProgram(Handle);
+        public StackElement Use() {
+            var state = State.GetCurrentState();
+            if (state.ShaderHandle == Handle)
+                return new StackElement();
+
+            var lastHandle = state.ShaderHandle;
+            return new StackElement(
+                () => {
+                    GL.UseProgram(Handle);
+                    state.ShaderHandle = Handle;
+                },
+                () => {
+                    GL.UseProgram(lastHandle);
+                    state.ShaderHandle = lastHandle;
+                }
+            );
+        }
 
         private bool disposed = false;
 
