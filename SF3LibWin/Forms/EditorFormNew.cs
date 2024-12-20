@@ -176,6 +176,24 @@ namespace SF3.Win.Forms {
                 return false;
             }
 
+            // Focus the first control. Drill downward through control containers
+            // to find the bottom-most control.
+            var focusView = View;
+            var focusControl = View.Control;
+            while (focusControl != null && focusView is IContainerView cc) {
+                var firstChild = cc.ChildViews.FirstOrDefault();
+                var firstChildControl = firstChild?.Control;
+                if (firstChildControl == null)
+                    break;
+
+                focusView = firstChild;
+                focusControl = firstChildControl;
+            }
+            if (focusControl == null)
+                focusControl = this;
+
+            focusControl.Focus();
+
             return true;
         }
 
