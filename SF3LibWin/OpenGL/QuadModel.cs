@@ -48,8 +48,8 @@ namespace SF3.Win.OpenGL {
             _elementBuffer = quads
                 .Select((x, i) => new { Quad = x, StartIndex = (uint) i * 4 })
                 .SelectMany(x => new uint[] {
-                    x.StartIndex + 0, x.StartIndex + 1, x.StartIndex + 2,
-                    x.StartIndex + 0, x.StartIndex + 2, x.StartIndex + 3
+                    x.StartIndex + 2, x.StartIndex + 1, x.StartIndex + 0,
+                    x.StartIndex + 3, x.StartIndex + 2, x.StartIndex + 0
                 })
                 .ToArray();
 

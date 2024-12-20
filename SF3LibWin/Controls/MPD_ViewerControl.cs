@@ -92,6 +92,8 @@ namespace SF3.Win.Controls {
 
             UpdateFramebuffer();
             UpdateProjectionMatrices();
+
+            Invalidate();
         }
 
         private void UpdateFramebuffer() {
@@ -150,7 +152,9 @@ namespace SF3.Win.Controls {
 
             GL.BindFramebuffer(FramebufferTarget.Framebuffer, _framebufferHandle);
             GL.ClearColor(1, 1, 1, 1);
+            GL.Enable(EnableCap.CullFace);
             DrawScene(SelectModel, false);
+            GL.Disable(EnableCap.CullFace);
             GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
 
             UpdateTilePosition();
