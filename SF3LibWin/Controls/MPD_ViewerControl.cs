@@ -259,6 +259,8 @@ namespace SF3.Win.Controls {
                 : [];
 
             var animationsById = (textureAnimations != null) ? textureAnimations.Rows
+                .GroupBy(x => x.TextureID)
+                .Select(x => x.First())
                 .ToDictionary(x => (int) x.TextureID, x => x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray())
                 : [];
 
