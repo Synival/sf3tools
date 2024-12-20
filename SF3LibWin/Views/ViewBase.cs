@@ -1,4 +1,4 @@
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace SF3.Win.Views {
     public abstract class ViewBase : IView {
