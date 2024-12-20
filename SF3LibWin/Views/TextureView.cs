@@ -3,8 +3,7 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
     public class TextureView : ControlView<TextureControl> {
-        public TextureView(string name) : base(name) {
-        }
+        public TextureView(string name) : base(name) { }
 
         public TextureControl TextureControl => (TextureControl) Control;
 

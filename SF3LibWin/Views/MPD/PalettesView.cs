@@ -11,7 +11,7 @@ namespace SF3.Win.Views.MPD {
             if (base.Create() == null)
                 return null;
             for (var i = 0; i < Model.Palettes.Length; i++)
-                _ = CreateChild(new TableView("Palette" + (i + 1).ToString(), Model.Palettes[i], Model.NameGetterContext));
+                CreateChild(new TableView("Palette" + (i + 1).ToString(), Model.Palettes[i], Model.NameGetterContext));
             return Control;
         }
 

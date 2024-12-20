@@ -3,8 +3,7 @@ using System.Windows.Forms;
 
 namespace SF3.Win.Views {
     public class ControlSpaceView : ViewBase, IControlSpaceView {
-        public ControlSpaceView(string name) : base(name) {
-        }
+        public ControlSpaceView(string name) : base(name) { }
 
         public override Control Create() {
             _childViews = new List<IView>();

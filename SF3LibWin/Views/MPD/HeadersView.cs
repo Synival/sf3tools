@@ -12,12 +12,12 @@ namespace SF3.Win.Views.MPD {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            _ = CreateChild(new TableView("Header",         Model.MPDHeader, ngc));
-            _ = CreateChild(new TableView("Chunk Header",   Model.ChunkHeader, ngc));
-            _ = CreateChild(new TableView("Offset 1 Table", Model.Offset1Table, ngc));
-            _ = CreateChild(new TableView("Offset 2 Table", Model.Offset2Table, ngc));
-            _ = CreateChild(new TableView("Offset 3 Table", Model.Offset3Table, ngc));
-            _ = CreateChild(new TableView("Offset 4 Table", Model.Offset4Table, ngc));
+            CreateChild(new TableView("Header",         Model.MPDHeader,    ngc));
+            CreateChild(new TableView("Chunk Header",   Model.ChunkHeader,  ngc));
+            CreateChild(new TableView("Offset 1 Table", Model.Offset1Table, ngc));
+            CreateChild(new TableView("Offset 2 Table", Model.Offset2Table, ngc));
+            CreateChild(new TableView("Offset 3 Table", Model.Offset3Table, ngc));
+            CreateChild(new TableView("Offset 4 Table", Model.Offset4Table, ngc));
 
             return Control;
         }

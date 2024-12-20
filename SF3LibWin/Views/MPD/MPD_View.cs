@@ -11,10 +11,10 @@ namespace SF3.Win.Views.MPD {
             if (base.Create() == null)
                 return null;
 
-            _ = CreateChild(new HeadersView("Headers", Model));
-            _ = CreateChild(new PalettesView("Palettes", Model));
-            _ = CreateChild(new SurfaceView("Surface", Model));
-            _ = CreateChild(new TexturesView("Textures", Model));
+            CreateChild(new HeadersView ("Headers",  Model));
+            CreateChild(new PalettesView("Palettes", Model));
+            CreateChild(new SurfaceView ("Surface",  Model));
+            CreateChild(new TexturesView("Textures", Model));
 
             return Control;
         }

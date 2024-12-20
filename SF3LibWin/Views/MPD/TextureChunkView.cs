@@ -20,7 +20,7 @@ namespace SF3.Win.Views.MPD {
         public override Control Create() {
             base.Create();
 
-            _ = CreateChild(HeaderView);
+            CreateChild(HeaderView);
             var textureTableControl = CreateChild(TexturesView) as ObjectListView;
 
             // Add a texture viewer on the right side of the 'Textures' tab.
