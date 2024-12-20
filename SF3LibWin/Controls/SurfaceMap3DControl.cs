@@ -175,7 +175,7 @@ namespace SF3.Win.Controls {
             GL.UniformMatrix4(handle, false, ref matrix);
         }
 
-        private void DrawScene(QuadModel model, bool drawTile) {
+        private void DrawScene(QuadModel model, bool isVisible) {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             if (model != null) {
@@ -183,11 +183,33 @@ namespace SF3.Win.Controls {
                 model.Draw();
             }
 
-            if (drawTile && TileModel != null) {
-                GL.Disable(EnableCap.DepthTest);
-                TileModel.Shader.Use();
-                TileModel.Draw();
-                GL.Enable(EnableCap.DepthTest);
+            if (isVisible) {
+                // TODO: Code from SurfaceMap2DControl to indicate untagged tiles. Use this later somehow!!
+#if false
+                // Indicate unidentified textures.
+                var expectedTag = new TagKey(textureFlags);
+                if (!texture.Tags.ContainsKey(expectedTag)) {
+                    // NOTE: Graphics.FromImage() throws an OutOfMemoryException due to a bad GDI+ implementation,
+                    // so we have to do it this way.
+                    using var questionMark = new Bitmap(image.Width / 2, image.Height / 2);
+                    using (var g = Graphics.FromImage(questionMark)) {
+                        g.Clear(Color.Black);
+                        g.DrawString("?", new Font(new FontFamily("Consolas"), (int) (questionMark.Width * 0.75)), Brushes.White, 0, 0);
+                        g.Flush();
+                    }
+
+                    var posX = image.Width  - questionMark.Width;
+                    var posY = image.Height - questionMark.Height;
+                    image.SafeDrawImage(questionMark, posX, posY);
+                }
+#endif
+
+                if (TileModel != null) {
+                    GL.Disable(EnableCap.DepthTest);
+                    TileModel.Shader.Use();
+                    TileModel.Draw();
+                    GL.Enable(EnableCap.DepthTest);
+                }
             }
         }
 

@@ -7,23 +7,12 @@ namespace SF3.Win.Views.MPD {
     public class SurfaceView : TabView {
         public SurfaceView(string name, IMPD_File model) : base(name) {
             Model = model;
-            SurfaceMap2DView = new SurfaceMap2DView("Tiles (2D)", Model);
             SurfaceMap3DView = new SurfaceMap3DView("Tiles (3D)", Model);
-        }
-
-        public class NoScrollTabPage : TabPage {
-            public NoScrollTabPage(string text) : base(text) { }
-            protected override Point ScrollToControl(Control control) => DisplayRectangle.Location;
         }
 
         public override Control Create() {
             if (base.Create() == null)
                 return null;
-
-            CreateCustomChild(SurfaceMap2DView, (c) => {
-                _surfaceMap2DControlTab = (TabPage) c.Parent;
-                SurfaceMap2DView.UpdateMap();
-            }, autoFill: false, (name) => new NoScrollTabPage(name) { AutoScroll = true });
 
             CreateChild(SurfaceMap3DView, (c) => {
                 _surfaceMap3DControlTab = (TabPage) c.Parent;
@@ -42,12 +31,9 @@ namespace SF3.Win.Views.MPD {
             return Control;
         }
 
-        private TabPage _surfaceMap2DControlTab = null;
         private TabPage _surfaceMap3DControlTab = null;
 
         void UpdateSurfaceMapControls(object sender, EventArgs eventArgs) {
-            if (TabControl.SelectedTab == _surfaceMap2DControlTab)
-                SurfaceMap2DView?.UpdateMap();
             if (TabControl.SelectedTab == _surfaceMap3DControlTab)
                 SurfaceMap3DView?.UpdateMap();
         }
@@ -59,9 +45,6 @@ namespace SF3.Win.Views.MPD {
             if (TabControl != null)
                 TabControl.Selected -= UpdateSurfaceMapControls;
 
-            SurfaceMap2DView.Destroy();
-            _surfaceMap2DControlTab = null;
-
             SurfaceMap3DView.Destroy();
             _surfaceMap3DControlTab = null;
 
@@ -69,7 +52,6 @@ namespace SF3.Win.Views.MPD {
         }
 
         public IMPD_File Model { get; }
-        public SurfaceMap2DView SurfaceMap2DView { get; }
         public SurfaceMap3DView SurfaceMap3DView { get; }
     }
 }
