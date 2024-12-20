@@ -16,6 +16,8 @@ namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : GLControl {
         public const int WidthInTiles = 64;
         public const int HeightInTiles = 64;
+        private const float c_offX = WidthInTiles / -2f;
+        private const float c_offY = HeightInTiles / -2f;
 
         public MPD_ViewerControl() {
             InitializeComponent();
@@ -63,6 +65,23 @@ namespace SF3.Win.Controls {
             };
         }
 
+        protected override void WndProc(ref Message m) {
+            const int WM_RBUTTONDBLCLK   = 0x0206;
+            const int WM_NCMBUTTONDBLCLK = 0x0209;
+
+            switch (m.Msg) {
+                case WM_RBUTTONDBLCLK:
+                    OnRightDoubleClick(EventArgs.Empty);
+                    break;
+
+                case WM_NCMBUTTONDBLCLK:
+                    OnMiddleDoubleClick(EventArgs.Empty);
+                    break;
+            }
+
+            base.WndProc(ref m);
+        }
+
         protected override void OnLoad(EventArgs e) {
             base.OnLoad(e);
             MakeCurrent();
@@ -73,7 +92,7 @@ namespace SF3.Win.Controls {
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             TexturedShader = new Shader("Shaders/Textured.vert", "Shaders/Textured.frag");
-            SolidShader    = new Shader("Shaders/Solid.vert",    "Shaders/Solid.frag");
+            SolidShader    = new Shader("Shaders/Solid.vert", "Shaders/Solid.frag");
 
             using (var tileHoverImage = (Bitmap) Image.FromFile("Images/TileHover.bmp")) {
                 var tileHoverTexture = tileHoverImage.CreateTextureABGR1555(9999, 0, 0);
@@ -222,15 +241,12 @@ namespace SF3.Win.Controls {
         }
 
         private Vector3[] GetTileVertices(int x, int y) {
-            const float offX = WidthInTiles / -2f;
-            const float offY = HeightInTiles / -2f;
-
             var heights = _heightmap[x, y];
             return [
-                (x + 0 + offX, ((heights >>  8) & 0xFF) / 16f, y + 0 + offY),
-                (x + 1 + offX, ((heights >>  0) & 0xFF) / 16f, y + 0 + offY),
-                (x + 1 + offX, ((heights >> 24) & 0xFF) / 16f, y + 1 + offY),
-                (x + 0 + offX, ((heights >> 16) & 0xFF) / 16f, y + 1 + offY)
+                (x + 0 + c_offX, ((heights >>  8) & 0xFF) / 16f, y + 0 + c_offY),
+                (x + 1 + c_offX, ((heights >>  0) & 0xFF) / 16f, y + 0 + c_offY),
+                (x + 1 + c_offX, ((heights >> 24) & 0xFF) / 16f, y + 1 + c_offY),
+                (x + 0 + c_offX, ((heights >> 16) & 0xFF) / 16f, y + 1 + c_offY)
             ];
         }
 
@@ -333,9 +349,20 @@ namespace SF3.Win.Controls {
             set => _yaw = value - 360.0f * ((int) value / 360);
         }
 
+        private MouseButtons _mouseButtons = MouseButtons.None;
+        private const MouseButtons c_MouseMiddleRight = MouseButtons.Middle | MouseButtons.Right;
+        private int? _lastMouseX = null;
+        private int? _lastMouseY = null;
+
         protected override void OnMouseDown(MouseEventArgs e) {
             base.OnMouseDown(e);
             Focus();
+            _mouseButtons |= e.Button;
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e) {
+            base.OnMouseUp(e);
+            _mouseButtons &= ~e.Button;
         }
 
         private Dictionary<Keys, bool> _keysPressed = [];
@@ -360,6 +387,9 @@ namespace SF3.Win.Controls {
         protected override void OnLostFocus(EventArgs e) {
             base.OnLostFocus(e);
             _keysPressed.Clear();
+            _mouseButtons = MouseButtons.None;
+            _lastMouseX = null;
+            _lastMouseY = null;
         }
 
         private int _frame = 0;
@@ -376,6 +406,9 @@ namespace SF3.Win.Controls {
         private bool KeyIsDown(Keys keyCode)
             => Enabled && Focused && Visible && _keysPressed.ContainsKey(keyCode) && _keysPressed[keyCode];
 
+        private float GetShiftFactor()
+            => _keysPressed.TryGetValue(Keys.ShiftKey, out bool on) ? (on ? 3 : 1) : 1;
+
         private void CheckForKeys() {
             var keysDown = _keysPressed.Where(x => x.Value == true).Select(x => x.Key).ToHashSet();
 
@@ -388,10 +421,11 @@ namespace SF3.Win.Controls {
             int moveY = (moveUpKey ? 1 : 0) + (moveDownKey ? -1 : 0);
             int moveZ = (keysDown.Contains(Keys.W) ? -1 : 0) + (keysDown.Contains(Keys.S) ? 1 : 0);
 
-            var shiftFactor = keysDown.Contains(Keys.ShiftKey) ? 3 : 1;
+            var shiftFactor = GetShiftFactor();
 
             if (moveX != 0 || moveY != 0 || moveZ != 0) {
-                var move = new Vector3(moveX, moveY * 0.5f, moveZ)
+                var move = new Vector3(moveX, moveY * 0.5f, moveZ * 2.5f)
+                    * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(Pitch))
                     * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
                 Position += move * 0.25f * shiftFactor;
                 Invalidate();
@@ -425,19 +459,140 @@ namespace SF3.Win.Controls {
                 Invalidate();
         }
 
+        protected override void OnMouseEnter(EventArgs e) {
+            base.OnMouseEnter(e);
+            _mouseIsOver = true;
+        }
+
         protected override void OnMouseLeave(EventArgs e) {
             base.OnMouseLeave(e);
-            UpdateMousePosition(null, null);
+            _mouseIsOver = false;
+            _lastMouseX = null;
+            _lastMouseY = null;
+            _mouseButtons = MouseButtons.None;
+
+            if (_mouseX != null || _mouseY != null)
+                UpdateMousePosition(null, null);
+            else
+                UpdateTilePosition(null, null);
+        }
+
+        private (Vector3, float) GetCurrentTileTargetAndDistance() {
+            var tileVertices = GetTileVertices(_tileX.Value, _tileY.Value);
+            var target = new Vector3(
+                _tileX.Value + c_offX + 0.5f,
+                tileVertices.Select(x => x.Y).Average(),
+                _tileY.Value + c_offY + 0.5f);
+
+            var dist = (float) Math.Sqrt(
+                Math.Pow(target.X - Position.X, 2) +
+                Math.Pow(target.Y - Position.Y, 2) +
+                Math.Pow(target.Z - Position.Z, 2)
+            );
+
+            return (target, dist);
         }
 
         protected override void OnMouseMove(MouseEventArgs e) {
             base.OnMouseMove(e);
 
+            if (_lastMouseX.HasValue && _lastMouseY.HasValue && (_lastMouseX != e.X || _lastMouseY != e.Y)) {
+                var shiftFactor = GetShiftFactor();
+                var deltaX = (e.X - _lastMouseX.Value) * shiftFactor;
+                var deltaY = (e.Y - _lastMouseY.Value) * shiftFactor;
+
+                // For middle+right drag, rotate around, keeping the tile over the mouse in place.
+                if ((_mouseButtons & c_MouseMiddleRight) == c_MouseMiddleRight && _tileX.HasValue && _tileY.HasValue) {
+                    // TODO: SIMPLYIFY ALL THIS, AND IMPROVE IT!!!
+
+                    var (target, dist) = GetCurrentTileTargetAndDistance();
+                    var distVec = new Vector3(0, 0, dist);
+
+                    var distForward = -distVec
+                        * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(Pitch))
+                        * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
+                    var targetBackward = target - distForward;
+                    var targetBackwardOffset = Position - targetBackward;
+
+                    var deltaYaw   = deltaX / -10.0f;
+                    var deltaPitch = deltaY / -10.0f;
+                    Yaw   += deltaYaw;
+                    Pitch += deltaPitch;
+
+                    Position = target +
+                        distVec
+                            * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(Pitch))
+                            * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw))
+                        + new Vector3(targetBackwardOffset.X, 0, targetBackwardOffset.Z)
+                            // TODO: for some reason, applying pitch is really bogus here, so for now we don't have it :(
+                            * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(deltaYaw))
+                        + new Vector3(0, targetBackwardOffset.Y, 0);
+
+                    Invalidate();
+                }
+                // For middle drag, pan around.
+                else if ((_mouseButtons & MouseButtons.Middle) != 0) {
+                    Position += new Vector3(deltaX / -40.0f, deltaY / 40.0f, 0)
+                        * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(Pitch))
+                        * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
+                    Invalidate();
+                }
+                // For middle drag, look around.
+                else if ((_mouseButtons & MouseButtons.Right) != 0) {
+                    Yaw   += deltaX / -10.0f;
+                    Pitch += deltaY / -10.0f;
+                    Invalidate();
+                }
+            }
+
             if (e.X < 0 || e.Y < 0 || e.X >= Width || e.Y >= Height)
                 UpdateMousePosition(null, null);
             else
                 UpdateMousePosition(e.X, e.Y);
+
+            _lastMouseX = e.X;
+            _lastMouseY = e.Y;
         }
+
+        protected override void OnMouseWheel(MouseEventArgs e) {
+            base.OnMouseWheel(e);
+
+            Position += new Vector3(0, 0, e.Delta / -50 * GetShiftFactor())
+                * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(Pitch))
+                * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
+            Invalidate();
+        }
+
+        private void LookAtCurrentTileTarget() {
+            if (_tileX == null || _tileY == null)
+                return;
+
+            var (target, dist) = GetCurrentTileTargetAndDistance();
+            LookAtTarget(target);
+            Invalidate();
+        }
+
+        private void PanToCurrentTileTarget() {
+            if (_tileX == null || _tileY == null)
+                return;
+
+            var (target, dist) = GetCurrentTileTargetAndDistance();
+            var distVec = new Vector3(0, 0, dist);
+            var distForward = -distVec
+                * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(Pitch))
+                * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
+
+            Position = target - distForward;
+            Invalidate();
+        }
+
+        protected void OnRightDoubleClick(EventArgs e)
+            => LookAtCurrentTileTarget();
+
+        protected void OnMiddleDoubleClick(EventArgs e)
+            => PanToCurrentTileTarget();
+
+        private bool _mouseIsOver = false;
 
         private int? _mouseX = null;
         private int? _mouseY = null;
@@ -481,6 +636,10 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateTilePosition() {
+            // Changing the tile is locked while rotating around a tile.
+            if ((_mouseButtons & c_MouseMiddleRight) == c_MouseMiddleRight)
+                return;
+
             if (_mouseX == null || _mouseY == null) {
                 UpdateTilePosition(null, null);
                 return;
