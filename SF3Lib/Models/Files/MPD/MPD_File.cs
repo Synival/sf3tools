@@ -84,10 +84,10 @@ namespace SF3.Models.Files.MPD {
             if (_surfaceChunkIndex != -1)
                 ChunkData[_surfaceChunkIndex] = FetchChunkData(_surfaceChunkIndex, false);
 
-            if (chunks[3].Exists && chunks[3].Size > 0 && TextureAnimations != null)
+            if (chunks[3].Exists && chunks[3].ChunkSize > 0 && TextureAnimations != null)
                 ChunkData[3] = FetchChunkData(3, false);
 
-            if (chunks[5].Exists && chunks[5].Size > 0)
+            if (chunks[5].Exists && chunks[5].ChunkSize > 0)
                 ChunkData[5] = FetchChunkData(5, true);
 
             // Texture data, in chunks (6...10)
@@ -104,7 +104,7 @@ namespace SF3.Models.Files.MPD {
             // We should have all the uncompressed data now. Update read-only info of our chunk table.
             for (var i = 0; i < chunks.Length; i++) {
                 ChunkHeader.Rows[i].CompressionType =
-                    (ChunkData[i] == null && chunks[i].Exists && chunks[i].Size > 0) ? "(WIP)" :
+                    (ChunkData[i] == null && chunks[i].Exists && chunks[i].ChunkSize > 0) ? "(WIP)" :
                     ChunkData[i] == null ? "--" :
                     (i == 3) ? "Individually Compressed" :
                     ChunkData[i].IsCompressed ? "Compressed" :
@@ -205,7 +205,7 @@ namespace SF3.Models.Files.MPD {
             var allData = ChunkData
                 .Where(x => x != null)
                 .Cast<IByteData>()
-                .Concat(Chunk3Frames.Select(x => x.Data))
+                .Concat((Chunk3Frames != null) ? Chunk3Frames.Select(x => x.Data) : new CompressedData[0])
                 .ToArray();
 
             foreach (var d in allData) {
