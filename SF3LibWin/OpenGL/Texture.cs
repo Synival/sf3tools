@@ -71,7 +71,7 @@ namespace SF3.Win.OpenGL {
 
         ~Texture() {
             if (!disposed)
-                System.Diagnostics.Debug.WriteLine("GPU Resource leak! Did you forget to call Dispose()?");
+                System.Diagnostics.Debug.WriteLine("Texture: GPU Resource leak! Did you forget to call Dispose()?");
             Dispose(false);
         }
 

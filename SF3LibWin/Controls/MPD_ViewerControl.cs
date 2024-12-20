@@ -51,6 +51,10 @@ namespace SF3.Win.Controls {
                     _framebufferColorTexture.Dispose();
                     _framebufferColorTexture = null;
                 }
+                if (_framebufferDepthStencilTexture != null) {
+                    _framebufferDepthStencilTexture.Dispose();
+                    _framebufferDepthStencilTexture = null;
+                }
 
                 if (_timer != null) {
                     _timer.Dispose();

@@ -169,7 +169,7 @@ namespace SF3.Win.OpenGL {
 
         ~QuadModel() {
             if (!disposed)
-                System.Diagnostics.Debug.WriteLine("GPU Resource leak! Did you forget to call Dispose()?");
+                System.Diagnostics.Debug.WriteLine("QuadModel: GPU Resource leak! Did you forget to call Dispose()?");
             Dispose(false);
         }
 

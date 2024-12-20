@@ -103,7 +103,7 @@ namespace SF3.Win.OpenGL {
 
         ~Shader() {
             if (!disposed)
-                System.Diagnostics.Debug.WriteLine("GPU Resource leak! Did you forget to call Dispose()?");
+                System.Diagnostics.Debug.WriteLine("Shader: GPU Resource leak! Did you forget to call Dispose()?");
             Dispose(false);
         }
 
