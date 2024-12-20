@@ -6,7 +6,8 @@ namespace SF3.Win.Views {
     public class TabView : ViewBase, ITabView {
         private static int s_controlIndex = 1;
 
-        public TabView(string name) : base(name) {
+        public TabView(string name, bool lazyLoad = true) : base(name) {
+            LazyLoad = lazyLoad;
         }
 
         private static bool s_inSelectCousinTabs = false;
@@ -106,34 +107,57 @@ namespace SF3.Win.Views {
             base.Destroy();
         }
 
-        public Control CreateChild(IView childView, bool autoFill = true)
-            => CreateCustomChild(childView, autoFill, (name) => new TabPage(name) { AutoScroll = true });
+        public void CreateChild(IView childView, Action<Control> onCreate = null, bool autoFill = true)
+            => CreateCustomChild(childView, onCreate, autoFill, (name) => new TabPage(name) { AutoScroll = true });
 
-        public Control CreateCustomChild(IView childView, bool autoFill, Func<string, Control> createTabDelegate) {
+        public void CreateCustomChild(IView childView, Action<Control> onCreate, bool autoFill, Func<string, Control> createTabDelegate) {
             if (childView == null)
-                return null;
+                return;
 
-            var childControl = childView.Create();
-            if (childControl == null)
-                return null;
+            Control childControl = null;
 
             // TODO: the name should be internal, not used for display.
             var tabPage = createTabDelegate(childView.Name);
-
-            TabControl.SuspendLayout();
-            tabPage.SuspendLayout();
-
-            if (autoFill)
-                childControl.Dock = DockStyle.Fill;
-
-            tabPage.Controls.Add(childControl);
             TabControl.Controls.Add(tabPage);
 
-            tabPage.ResumeLayout();
-            TabControl.ResumeLayout();
+            void ChildViewCreate() {
+                if (childView.IsCreated)
+                    return;
+
+                if ((childControl = childView.Create()) == null) {
+                    onCreate?.Invoke(null);
+                    return;
+                }
+
+                TabControl.SuspendLayout();
+                tabPage.SuspendLayout();
+
+                if (autoFill)
+                    childControl.Dock = DockStyle.Fill;
+
+                tabPage.Controls.Add(childControl);
+                tabPage.ResumeLayout();
+                TabControl.ResumeLayout();
+
+                onCreate?.Invoke(childControl);
+            }
+
+            if (LazyLoad) {
+                void CreateIfConditionsAreRight() {
+                    if (!childView.IsCreated && TabControl.Visible && TabControl.SelectedTab == tabPage && tabPage.Visible)
+                        ChildViewCreate();
+                }
+
+                TabControl.Selected       += (s, e) => CreateIfConditionsAreRight();
+                TabControl.VisibleChanged += (s, e) => CreateIfConditionsAreRight();
+                tabPage.VisibleChanged    += (s, e) => CreateIfConditionsAreRight();
+
+                CreateIfConditionsAreRight();
+            }
+            else
+                ChildViewCreate();
 
             _childViews.Add(childView);
-            return childControl;
         }
 
         public override void RefreshContent() {
@@ -144,6 +168,7 @@ namespace SF3.Win.Views {
                 child.RefreshContent();
         }
 
+        public bool LazyLoad { get; set; }
         public TabControl TabControl => (TabControl) Control;
 
         private List<IView> _childViews = null;

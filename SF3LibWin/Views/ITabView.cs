@@ -7,6 +7,11 @@ namespace SF3.Win.Views {
     /// </summary>
     public interface ITabView : IContainerView {
         /// <summary>
+        /// When 'true', controls are Create()'d when the view is selected.
+        /// </summary>
+        bool LazyLoad { get; set; }
+
+        /// <summary>
         /// Reference to the Control as a TabControl.
         /// </summary>
         TabControl TabControl { get; }

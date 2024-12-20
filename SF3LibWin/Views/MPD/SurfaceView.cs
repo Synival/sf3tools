@@ -20,13 +20,15 @@ namespace SF3.Win.Views.MPD {
             if (base.Create() == null)
                 return null;
 
-            _ = CreateCustomChild(SurfaceMap2DView, autoFill: false, (name) => new NoScrollTabPage(name) { AutoScroll = true });
-            _surfaceMap2DControlTab = (TabPage) SurfaceMap2DView.SurfaceMapControl.Parent;
-            SurfaceMap2DView.UpdateMap();
+            CreateCustomChild(SurfaceMap2DView, (c) => {
+                _surfaceMap2DControlTab = (TabPage) c.Parent;
+                SurfaceMap2DView.UpdateMap();
+            }, autoFill: false, (name) => new NoScrollTabPage(name) { AutoScroll = true });
 
-            _ = CreateChild(SurfaceMap3DView, autoFill: true);
-            _surfaceMap3DControlTab = (TabPage) SurfaceMap3DView.SurfaceMapControl.Parent;
-            SurfaceMap3DView.UpdateMap();
+            CreateChild(SurfaceMap3DView, (c) => {
+                _surfaceMap3DControlTab = (TabPage) c.Parent;
+                SurfaceMap3DView.UpdateMap();
+            }, autoFill: true);
 
             TabControl.Selected += UpdateSurfaceMapControls;
 

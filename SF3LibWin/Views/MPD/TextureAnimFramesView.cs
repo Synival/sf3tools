@@ -22,18 +22,9 @@ namespace SF3.Win.Views.MPD {
             if (base.Create() == null)
                 return null;
 
-            if (CreateChild(TableView) == null) {
-                Destroy();
-                return null;
-            }
+            CreateChild(TableView, (c) => ((ObjectListView) c).ItemSelectionChanged += OnTextureChanged);
+            CreateChild(TextureView, (c) => c.Dock = DockStyle.Right, autoFill: false);
 
-            if (CreateChild(TextureView, autoFill: false) == null) {
-                Destroy();
-                return null;
-            }
-
-            TextureView.Control.Dock = DockStyle.Right;
-            TableView.OLVControl.ItemSelectionChanged += OnTextureChanged;
             return Control;
         }
 

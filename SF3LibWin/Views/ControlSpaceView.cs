@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SF3.Win.Views {
@@ -32,13 +33,15 @@ namespace SF3.Win.Views {
             base.Destroy();
         }
 
-        public Control CreateChild(IView childView, bool autoFill = true) {
+        public void CreateChild(IView childView, Action<Control> onCreate, bool autoFill = true) {
             if (childView == null)
-                return null;
+                return;
 
             var childControl = childView.Create();
-            if (childControl == null)
-                return null;
+            if (childControl == null) {
+                onCreate?.Invoke(null);
+                return;
+            }
 
             Control.SuspendLayout();
             if (autoFill)
@@ -47,7 +50,7 @@ namespace SF3.Win.Views {
             Control.ResumeLayout();
 
             _childViews.Add(childView);
-            return childControl;
+            onCreate?.Invoke(childControl);
         }
 
         public override void RefreshContent() {

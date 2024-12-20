@@ -21,19 +21,21 @@ namespace SF3.Win.Views.MPD {
             base.Create();
 
             CreateChild(HeaderView);
-            var textureTableControl = CreateChild(TexturesView) as ObjectListView;
+            CreateChild(TexturesView, (c) => {
+                var textureTableControl = (ObjectListView) c;
 
-            // Add a texture viewer on the right side of the 'Textures' tab.
-            var textureTabPage = textureTableControl?.Parent;
-            if (textureTabPage != null) {
-                var textureControl = (TextureControl) TextureView.Create();
-                if (textureControl != null) {
-                    textureControl.Dock = DockStyle.Right;
-                    textureTabPage.Controls.Add(textureControl);
-                    textureTableControl.ItemSelectionChanged += OnTextureChanged;
+                // Add a texture viewer on the right side of the 'Textures' tab.
+                var textureTabPage = textureTableControl?.Parent;
+                if (textureTabPage != null) {
+                    var textureControl = (TextureControl) TextureView.Create();
+                    if (textureControl != null) {
+                        textureControl.Dock = DockStyle.Right;
+                        textureTabPage.Controls.Add(textureControl);
+                        textureTableControl.ItemSelectionChanged += OnTextureChanged;
+                    }
+                    TabControl.SelectedTab = (TabPage) textureTabPage;
                 }
-                TabControl.SelectedTab = (TabPage) textureTabPage;
-            }
+            });
 
             // Return the top-level control.
             return Control;
