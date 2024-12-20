@@ -336,7 +336,8 @@ namespace SF3.Win.Controls {
 
         protected override void OnKeyDown(KeyEventArgs e) {
             base.OnKeyDown(e);
-            _keysPressed[(Keys) ((int) e.KeyCode & 0xFFFF)] = true;
+            if (Enabled && Focused && Visible)
+                _keysPressed[(Keys) ((int) e.KeyCode & 0xFFFF)] = true;
         }
 
         protected override void OnKeyUp(KeyEventArgs e) {
@@ -345,7 +346,8 @@ namespace SF3.Win.Controls {
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
-            _keysPressed[(Keys) ((int) keyData & 0xFFFF)] = true;
+            if (Enabled && Focused && Visible)
+                _keysPressed[(Keys) ((int) keyData & 0xFFFF)] = true;
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
@@ -366,7 +368,7 @@ namespace SF3.Win.Controls {
         }
 
         private bool KeyIsDown(Keys keyCode)
-            => Visible && _keysPressed.ContainsKey(keyCode) && _keysPressed[keyCode];
+            => Enabled && Focused && Visible && _keysPressed.ContainsKey(keyCode) && _keysPressed[keyCode];
 
         private void CheckForKeys() {
             var keysDown = _keysPressed.Where(x => x.Value == true).Select(x => x.Key).ToHashSet();
