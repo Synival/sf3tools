@@ -27,22 +27,10 @@ namespace SF3.Win.OpenGL {
             _textureBitmap = _textureAtlas.CreateBitmap();
             _texture = _textureBitmap != null ? new Texture(_textureBitmap) : null;
 
-            // Create the VBO.
+            // Create the vertex buffer with all the data needed for each vertex.
             _vertexBuffer = new float[shader.GetVertexBufferSize(Quads.Length * 4) / sizeof(float)];
             AssignVertexBufferPositions();
             AssignVertexBufferColors();
-
-            _vertexBufferObject = new Buffer();
-            using (_vertexBufferObject.Use(BufferTarget.ArrayBuffer)) {
-                GL.BufferData(BufferTarget.ArrayBuffer, _vertexBuffer.Length * sizeof(float), _vertexBuffer, BufferUsageHint.DynamicDraw);
-
-                // Create the VAO.
-                _vertexArrayObject = new VertexArray();
-                using (_vertexArrayObject.Use())
-                    foreach (var attr in new string[] { "position", "color", "texCoord0" })
-                        Shader.EnableVAO_Attribute(attr);
-            }
-
             _ = AssignVertexBufferTexCoords();
 
             // Create indices for DrawElements().
@@ -55,9 +43,20 @@ namespace SF3.Win.OpenGL {
                 })
                 .ToArray();
 
+            // Create the VBO.
+            _vertexBufferObject = new Buffer();
+            UpdateVBO();
+
+            // Create the EBO.
             _elementBufferObject = new Buffer();
-            using (_elementBufferObject.Use(BufferTarget.ElementArrayBuffer))
-                GL.BufferData(BufferTarget.ElementArrayBuffer, _elementBuffer.Length * sizeof(uint), _elementBuffer, BufferUsageHint.StaticDraw);
+            UpdateEBO();
+
+            // Create the VAO.
+            _vertexArrayObject = new VertexArray();
+            using (_vertexArrayObject.Use())
+            using (_vertexBufferObject.Use(BufferTarget.ArrayBuffer))
+                foreach (var attr in new string[] { "position", "color", "texCoord0" })
+                    Shader.EnableVAO_Attribute(attr);
         }
 
         private void AssignVertexBufferColors() {
@@ -65,6 +64,7 @@ namespace SF3.Win.OpenGL {
             if (attr == null)
                 return;
 
+            // TODO: offset should not come from the shader, but a layout defined in the VBO
             var pos = attr.Offset / sizeof(float);
             int i = 0;
             foreach (var quad in Quads) {
@@ -84,6 +84,7 @@ namespace SF3.Win.OpenGL {
             if (attr == null)
                 return;
 
+            // TODO: offset should not come from the shader, but a layout defined in the VBO
             var pos = attr.Offset / sizeof(float);
             foreach (var quad in Quads) {
                 for (var vertexIndex = 0; vertexIndex < 4; vertexIndex++) {
@@ -96,13 +97,6 @@ namespace SF3.Win.OpenGL {
             }
         }
 
-        private int _frame = 0;
-
-        public bool UpdateAnimatedTextures(int frameIncrement = 1) {
-            _frame += frameIncrement;
-            return AssignVertexBufferTexCoords();
-        }
-
         private bool AssignVertexBufferTexCoords() {
             if (_texture == null)
                 return false;
@@ -112,6 +106,8 @@ namespace SF3.Win.OpenGL {
                 return false;
 
             // Update UV coordinates
+
+            // TODO: offset should not come from the shader, but a layout defined in the VBO
             var pos = attr.Offset / sizeof(float);
             var modified = false;
             foreach (var quad in Quads) {
@@ -132,12 +128,28 @@ namespace SF3.Win.OpenGL {
                 }
             }
 
-            if (modified && _vertexBufferObject != null) {
-                using (_vertexBufferObject.Use(BufferTarget.ArrayBuffer))
-                    GL.BufferData(BufferTarget.ArrayBuffer, _vertexBuffer.Length * sizeof(float), _vertexBuffer, BufferUsageHint.DynamicDraw);
-            }
-
             return modified;
+        }
+
+        private void UpdateVBO() {
+            using (_vertexBufferObject.Use(BufferTarget.ArrayBuffer))
+                GL.BufferData(BufferTarget.ArrayBuffer, _vertexBuffer.Length * sizeof(float), _vertexBuffer, BufferUsageHint.DynamicDraw);
+
+        }
+
+        private void UpdateEBO() {
+            using (_elementBufferObject.Use(BufferTarget.ElementArrayBuffer))
+                GL.BufferData(BufferTarget.ElementArrayBuffer, _elementBuffer.Length * sizeof(uint), _elementBuffer, BufferUsageHint.StaticDraw);
+        }
+
+        private int _frame = 0;
+
+        public bool UpdateAnimatedTextures(int frameIncrement = 1) {
+            _frame += frameIncrement;
+            var result = AssignVertexBufferTexCoords();
+            if (result)
+                UpdateVBO();
+            return result;
         }
 
         public void Draw() {

@@ -83,6 +83,7 @@ namespace SF3.Win.OpenGL {
             if (attrib == null)
                 return;
 
+            // TODO: offset should not come from the shader, but a layout defined in the VBO
             GL.VertexAttribPointer(attrib.Location, attrib.TypeElements, attrib.PointerType, false, VertexBufferStride, attrib.Offset);
             GL.EnableVertexAttribArray(attrib.Location);
         }
