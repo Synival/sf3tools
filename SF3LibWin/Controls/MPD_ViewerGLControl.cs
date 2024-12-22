@@ -12,14 +12,14 @@ using SF3.Models.Tables.MPD;
 using SF3.Win.OpenGL;
 
 namespace SF3.Win.Controls {
-    public partial class MPD_ViewerControl : GLControl {
+    public partial class MPD_ViewerGLControl : GLControl {
         public const int WidthInTiles = 64;
         public const int HeightInTiles = 64;
         private const float c_offX = WidthInTiles / -2f;
         private const float c_offY = HeightInTiles / -2f;
         private const MouseButtons c_MouseMiddleRight = MouseButtons.Middle | MouseButtons.Right;
 
-        public MPD_ViewerControl() {
+        public MPD_ViewerGLControl() {
             InitializeComponent();
 
             Disposed += (s, a) => {
