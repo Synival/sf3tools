@@ -9,7 +9,6 @@ using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Tables.MPD;
-using SF3.Win.Extensions;
 using SF3.Win.OpenGL;
 
 namespace SF3.Win.Controls {
@@ -76,17 +75,9 @@ namespace SF3.Win.Controls {
             SolidShader    = new Shader("Shaders/Solid.vert", "Shaders/Solid.frag");
 
             _whiteTexture         = new Texture((Bitmap) Image.FromFile("Images/White.bmp"));
-            var transparentBitmap = (Bitmap) Image.FromFile("Images/Transparent.bmp");
-            _transparentTexture   = new Texture(transparentBitmap);
+            _transparentTexture   = new Texture((Bitmap) Image.FromFile("Images/Transparent.bmp"));
             _tileWireframeTexture = new Texture((Bitmap) Image.FromFile("Images/TileWireframe.bmp"));
-
-            using (var tileHoverImage = (Bitmap) Image.FromFile("Images/TileHover.bmp")) {
-                var tileHoverTexture = tileHoverImage.CreateTextureABGR1555(9999, 0, 0);
-                _tileHoverTextureAnimation = new TextureAnimation(tileHoverTexture.ID, [tileHoverTexture]);
-            }
-
-            var transparentBitmapTexture = transparentBitmap.CreateTextureABGR1555(9998, 0, 0);
-            _transparentTextureAnimation = new TextureAnimation(transparentBitmapTexture.ID, [transparentBitmapTexture]);
+            _tileHoverTexture     = new Texture((Bitmap) Image.FromFile("Images/TileHover.bmp"));
 
             _timer = new Timer() { Interval = 1000 / 60 };
             _timer.Tick += (s, a) => IncrementFrame();
@@ -97,7 +88,7 @@ namespace SF3.Win.Controls {
 
             UpdateFramebuffer();
 
-            _textures = [_whiteTexture, _transparentTexture, _tileWireframeTexture];
+            _textures = [_whiteTexture, _transparentTexture, _tileWireframeTexture, _tileHoverTexture];
             _shaders  = [TexturedShader, SolidShader];
         }
 
@@ -182,12 +173,14 @@ namespace SF3.Win.Controls {
                 using (TexturedShader.Use()) {
                     SurfaceModel?.Draw(TexturedShader);
                     if (DrawWireframe)
-                        UntexturedSurfaceModel?.Draw(TexturedShader);
+                        using (_transparentTexture.Use())
+                            UntexturedSurfaceModel?.Draw(TexturedShader);
                 }
             }
 
             if (TileModel != null) {
                 GL.Disable(EnableCap.DepthTest);
+                using (_tileHoverTexture.Use(TextureUnit.Texture0))
                 using (_transparentTexture.Use(TextureUnit.Texture1))
                     TileModel.Draw(TexturedShader);
                 GL.Enable(EnableCap.DepthTest);
@@ -284,7 +277,7 @@ namespace SF3.Win.Controls {
                     if (anim != null)
                         surfaceQuads.Add(new Quad(vertices, anim, textureFlags));
                     else
-                        untexturedSurfaceQuads.Add(new Quad(vertices, _transparentTextureAnimation, 0));
+                        untexturedSurfaceQuads.Add(new Quad(vertices));
 
                     surfaceSelectionQuads.Add(new Quad(vertices, new Vector3(x / (float) WidthInTiles, y / (float) HeightInTiles, 0)));
                 }
@@ -594,7 +587,7 @@ namespace SF3.Win.Controls {
             TileModel = null;
 
             if (_tilePos != null) {
-                var quad = new Quad(GetTileVertices(_tilePos.Value), _tileHoverTextureAnimation, 0);
+                var quad = new Quad(GetTileVertices(_tilePos.Value));
                 TileModel = new QuadModel([quad]);
             }
 
@@ -668,9 +661,7 @@ namespace SF3.Win.Controls {
         private Texture _tileWireframeTexture = null;
         private Texture _whiteTexture         = null;
         private Texture _transparentTexture   = null;
-
-        private TextureAnimation _tileHoverTextureAnimation   = null;
-        private TextureAnimation _transparentTextureAnimation = null;
+        private Texture _tileHoverTexture     = null;
 
         private QuadModel[] _surfaceModels   = null;
         private Shader[]    _shaders  = null;

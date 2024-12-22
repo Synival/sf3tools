@@ -20,9 +20,16 @@ namespace SF3.Win.OpenGL {
                 .Distinct()
                 .ToArray();
 
-            _textureAtlas = new TextureAtlas(textures, 0, true);
-            _textureBitmap = _textureAtlas.CreateBitmap();
-            _texture = _textureBitmap != null ? new Texture(_textureBitmap) : null;
+            if (textures.Length > 0) {
+                _textureAtlas = new TextureAtlas(textures, 0, true);
+                _textureBitmap = _textureAtlas.CreateBitmap();
+                _texture = _textureBitmap != null ? new Texture(_textureBitmap) : null;
+            }
+            else {
+                _textureAtlas = null;
+                _textureBitmap = null;
+                _texture = null;
+            }
 
             // Create the VBO.
             _vbo = new VBO([
@@ -36,9 +43,10 @@ namespace SF3.Win.OpenGL {
             _vertexBuffer = new float[_vbo.GetSizeInBytes(Quads.Length * 4) / sizeof(float)];
             AssignVertexBufferPositions();
             AssignVertexBufferColors();
-            _ = AssignVertexBufferTexCoords();
-            // TODO: do something better than this lazy UV coordinate thing!
-            AssignVertexBufferTexCoord1();
+            for (var i = 0; i < 4; i++)
+                AssignVertexBufferDefaultTexCoords(i);
+
+            _ = AssignVertexBufferAtlasTexCoords();
 
             // Assign data to the VBO.
             AssignVBO_Data();
@@ -97,7 +105,7 @@ namespace SF3.Win.OpenGL {
             }
         }
 
-        private bool AssignVertexBufferTexCoords() {
+        private bool AssignVertexBufferAtlasTexCoords() {
             if (_texture == null)
                 return false;
 
@@ -130,8 +138,8 @@ namespace SF3.Win.OpenGL {
             return modified;
         }
 
-        private void AssignVertexBufferTexCoord1() {
-            var vboAttr = _vbo.GetAttributeByName("texCoord1");
+        private void AssignVertexBufferDefaultTexCoords(int index) {
+            var vboAttr = _vbo.GetAttributeByName("texCoord" + index);
             if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
                 return;
 
@@ -165,7 +173,7 @@ namespace SF3.Win.OpenGL {
 
         public bool UpdateAnimatedTextures(int frameIncrement = 1) {
             _frame += frameIncrement;
-            var result = AssignVertexBufferTexCoords();
+            var result = AssignVertexBufferAtlasTexCoords();
             if (result)
                 AssignVBO_Data();
             return result;
