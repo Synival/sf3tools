@@ -41,8 +41,10 @@ namespace SF3.Win.OpenGL {
 
             // Create the vertex buffer with all the data needed for each vertex.
             _vertexBuffer = new float[_vbo.GetSizeInBytes(Quads.Length * 4) / sizeof(float)];
-            AssignVertexBufferPositions();
-            AssignVertexBufferColors();
+            var polyAttrNames = Quads.SelectMany(x => x.Attributes).Select(x => x.Name).Distinct().ToArray();
+            foreach (var polyAttrName in polyAttrNames)
+                AssignVertexBuffer(polyAttrName);
+
             for (var i = 0; i < 4; i++)
                 AssignVertexBufferDefaultTexCoords(i);
 
@@ -69,37 +71,23 @@ namespace SF3.Win.OpenGL {
             _vao = new VAO();
         }
 
-        private void AssignVertexBufferColors() {
-            var vboAttr = _vbo.GetAttributeByName("position");
-            if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
-                return;
-
-            var pos = vboAttr.OffsetInBytes.Value / sizeof(float);
-            int i = 0;
-            foreach (var quad in Quads) {
-                for (var vertexIndex = 0; vertexIndex < 4; vertexIndex++) {
-                    var color = quad.Colors[vertexIndex];
-                    _vertexBuffer[pos + 0] = color.X;
-                    _vertexBuffer[pos + 1] = color.Y;
-                    _vertexBuffer[pos + 2] = color.Z;
-                    pos += _vbo.StrideInBytes / sizeof(float);
-                }
-                i++;
-            }
-        }
-
-        private void AssignVertexBufferPositions() {
-            var vboAttr = _vbo.GetAttributeByName("color");
+        private void AssignVertexBuffer(string attrName) {
+            var vboAttr = _vbo.GetAttributeByName(attrName);
             if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
                 return;
 
             var pos = vboAttr.OffsetInBytes.Value / sizeof(float);
             foreach (var quad in Quads) {
-                for (var vertexIndex = 0; vertexIndex < 4; vertexIndex++) {
-                    var vertex = quad.Vertices[vertexIndex];
-                    _vertexBuffer[pos + 0] = vertex.X;
-                    _vertexBuffer[pos + 1] = vertex.Y;
-                    _vertexBuffer[pos + 2] = vertex.Z;
+                var polyAttr = quad.GetAttributeByName(attrName);
+                if (polyAttr == null || !vboAttr.IsAssignable(polyAttr))
+                    continue;
+
+                var vertices        = polyAttr.Data.GetLength(0);
+                var floatsPerVertex = polyAttr.Data.GetLength(1);
+
+                for (var i = 0; i < vertices; i++) {
+                    for (var j = 0; j < floatsPerVertex; j++)
+                        _vertexBuffer[pos + j] = polyAttr.Data[i, j];
                     pos += _vbo.StrideInBytes / sizeof(float);
                 }
             }
