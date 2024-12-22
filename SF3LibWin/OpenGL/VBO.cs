@@ -12,12 +12,19 @@ namespace SF3.Win.OpenGL {
                 attr.OffsetInBytes = off;
                 off += attr.SizeInBytes;
             }
+
+            StrideInBytes = off;
         }
 
         public VBO_Attribute GetAttributeByName(string name)
             => _attributesByName.TryGetValue(name, out var value) ? value : null;
 
+        public int GetSizeInBytes(int vertices)
+            => StrideInBytes * vertices;
+
         public VBO_Attribute[] Attributes { get; }
+        public int StrideInBytes { get; }
+
         private readonly Dictionary<string, VBO_Attribute> _attributesByName;
     }
 }

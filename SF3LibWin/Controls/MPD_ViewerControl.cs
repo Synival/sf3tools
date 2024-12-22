@@ -150,14 +150,14 @@ namespace SF3.Win.Controls {
             using (Framebuffer.Use(FramebufferTarget.Framebuffer)) {
                 GL.ClearColor(1, 1, 1, 1);
                 GL.Enable(EnableCap.CullFace);
-                DrawScene(SelectModel, false);
+                DrawScene(SelectModel, SolidShader, false);
                 GL.Disable(EnableCap.CullFace);
             }
 
             UpdateTilePosition();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-            DrawScene(RenderModel, true);
+            DrawScene(RenderModel, TexturedShader, true);
 
             SwapBuffers();
         }
@@ -176,13 +176,11 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private void DrawScene(QuadModel model, bool isVisible) {
+        private void DrawScene(QuadModel surfaceModel, Shader surfaceShader, bool isVisible) {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            if (model != null) {
-                using (model.Shader.Use())
-                    model.Draw();
-            }
+            if (surfaceModel != null)
+                surfaceModel.Draw(surfaceShader);
 
             if (isVisible) {
                 // TODO: Code from SurfaceMap2DControl to indicate untagged tiles. Use this later somehow!!
@@ -207,8 +205,7 @@ namespace SF3.Win.Controls {
 
                 if (TileModel != null) {
                     GL.Disable(EnableCap.DepthTest);
-                    using (TileModel.Shader.Use())
-                        TileModel.Draw();
+                    TileModel.Draw(TexturedShader);
                     GL.Enable(EnableCap.DepthTest);
                 }
             }
@@ -285,9 +282,9 @@ namespace SF3.Win.Controls {
             }
 
             if (renderQuads.Count > 0)
-                RenderModel = new QuadModel(renderQuads.ToArray(), TexturedShader);
+                RenderModel = new QuadModel(renderQuads.ToArray());
             if (selectQuads.Count > 0)
-                SelectModel = new QuadModel(selectQuads.ToArray(), SolidShader);
+                SelectModel = new QuadModel(selectQuads.ToArray());
 
             Invalidate();
         }
@@ -576,7 +573,7 @@ namespace SF3.Win.Controls {
 
             if (_tilePos != null) {
                 var quad = new Quad(GetTileVertices(_tilePos.Value), _tileHoverTextureAnimation, 0);
-                TileModel = new QuadModel([quad], TexturedShader);
+                TileModel = new QuadModel([quad]);
             }
 
             Invalidate();

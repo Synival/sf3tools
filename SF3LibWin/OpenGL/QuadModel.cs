@@ -6,14 +6,11 @@ using SF3.Win.ThirdParty.TexturePacker;
 
 namespace SF3.Win.OpenGL {
     public class QuadModel : IDisposable {
-        public QuadModel(Quad[] quads, Shader shader) {
+        public QuadModel(Quad[] quads) {
             if (quads == null)
-                throw new ArgumentNullException(nameof(quads));
-            if (shader == null)
                 throw new ArgumentNullException(nameof(quads));
 
             Quads = quads;
-            Shader = shader;
 
             // Create a texture atlas for this model and generate a texture for it.
             // TODO: let QuadModels share TextureAtlas' + Textures
@@ -35,7 +32,7 @@ namespace SF3.Win.OpenGL {
             ]);
 
             // Create the vertex buffer with all the data needed for each vertex.
-            _vertexBuffer = new float[shader.GetVertexBufferSize(Quads.Length * 4) / sizeof(float)];
+            _vertexBuffer = new float[_vertexBufferObject.GetSizeInBytes(Quads.Length * 4) / sizeof(float)];
             AssignVertexBufferPositions();
             AssignVertexBufferColors();
             _ = AssignVertexBufferTexCoords();
@@ -55,21 +52,13 @@ namespace SF3.Win.OpenGL {
 
             // Create the EBO.
             _elementBufferObject = new Buffer();
-            UpdateEBO();
+            AssignEBO_Data();
 
             // Create the VAO.
             _vertexArrayObject = new VertexArray();
-            using (_vertexArrayObject.Use())
-            using (_vertexBufferObject.Use(BufferTarget.ArrayBuffer))
-                foreach (var attr in _vertexBufferObject.Attributes)
-                    Shader.EnableVAO_Attribute(_vertexBufferObject, attr.Name);
         }
 
         private void AssignVertexBufferColors() {
-            var shaderAttr = Shader.GetAttributeByName("position");
-            if (shaderAttr == null)
-                return;
-
             var vboAttr = _vertexBufferObject.GetAttributeByName("position");
             if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
                 return;
@@ -82,17 +71,13 @@ namespace SF3.Win.OpenGL {
                     _vertexBuffer[pos + 0] = color.X;
                     _vertexBuffer[pos + 1] = color.Y;
                     _vertexBuffer[pos + 2] = color.Z;
-                    pos += Shader.VertexBufferStride / sizeof(float);
+                    pos += _vertexBufferObject.StrideInBytes / sizeof(float);
                 }
                 i++;
             }
         }
 
         private void AssignVertexBufferPositions() {
-            var shaderAttr = Shader.GetAttributeByName("color");
-            if (shaderAttr == null)
-                return;
-
             var vboAttr = _vertexBufferObject.GetAttributeByName("color");
             if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
                 return;
@@ -104,17 +89,13 @@ namespace SF3.Win.OpenGL {
                     _vertexBuffer[pos + 0] = vertex.X;
                     _vertexBuffer[pos + 1] = vertex.Y;
                     _vertexBuffer[pos + 2] = vertex.Z;
-                    pos += Shader.VertexBufferStride / sizeof(float);
+                    pos += _vertexBufferObject.StrideInBytes / sizeof(float);
                 }
             }
         }
 
         private bool AssignVertexBufferTexCoords() {
             if (_texture == null)
-                return false;
-
-            var shaderAttr = Shader.GetAttributeByName("texCoord0");
-            if (shaderAttr == null)
                 return false;
 
             var vboAttr = _vertexBufferObject.GetAttributeByName("texCoord0");
@@ -139,7 +120,7 @@ namespace SF3.Win.OpenGL {
                         modified = true;
                     _vertexBuffer[pos + 0] = texCoords[vertexIndex].X;
                     _vertexBuffer[pos + 1] = texCoords[vertexIndex].Y;
-                    pos += Shader.VertexBufferStride / sizeof(float);
+                    pos += _vertexBufferObject.StrideInBytes / sizeof(float);
                 }
             }
 
@@ -152,7 +133,7 @@ namespace SF3.Win.OpenGL {
 
         }
 
-        private void UpdateEBO() {
+        private void AssignEBO_Data() {
             using (_elementBufferObject.Use(BufferTarget.ElementArrayBuffer))
                 GL.BufferData(BufferTarget.ElementArrayBuffer, _elementBuffer.Length * sizeof(uint), _elementBuffer, BufferUsageHint.StaticDraw);
         }
@@ -167,10 +148,14 @@ namespace SF3.Win.OpenGL {
             return result;
         }
 
-        public void Draw() {
+        public void Draw(Shader shader) {
+            using (_vertexArrayObject.Use())
+                shader.AssignAttributes(_vertexBufferObject);
+
             using (_texture?.Use())
             using (_vertexArrayObject.Use())
             using (_elementBufferObject.Use(BufferTarget.ElementArrayBuffer))
+            using (shader.Use())
                 GL.DrawElements(PrimitiveType.Triangles, _elementBuffer.Length, DrawElementsType.UnsignedInt, 0);
         }
 
@@ -204,7 +189,6 @@ namespace SF3.Win.OpenGL {
         }
 
         public Quad[] Quads { get; }
-        public Shader Shader { get; }
 
         private TextureAtlas _textureAtlas { get; }
         private Bitmap _textureBitmap { get; }

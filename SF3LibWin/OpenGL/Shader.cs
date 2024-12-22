@@ -78,18 +78,19 @@ namespace SF3.Win.OpenGL {
         public int GetVertexBufferSize(int vertices)
             => vertices * VertexBufferStride;
 
-        public void EnableVAO_Attribute(VBO vbo, string attribName) {
-            var shaderAttr = GetAttributeByName(attribName);
-            if (shaderAttr == null)
-                return;
-
-            var vboAttr = vbo.GetAttributeByName(attribName);
-            if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
+        private void AssignAttribute(ShaderAttribute shaderAttr, VBO_Attribute vboAttr, int stride) {
+            if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue || !shaderAttr.IsAssignable(vboAttr))
                 GL.DisableVertexAttribArray(shaderAttr.Location);
             else {
-                GL.VertexAttribPointer(shaderAttr.Location, shaderAttr.TypeElements, shaderAttr.PointerType, false, VertexBufferStride, vboAttr.OffsetInBytes.Value);
+                GL.VertexAttribPointer(shaderAttr.Location, shaderAttr.TypeElements, shaderAttr.PointerType, false, stride, vboAttr.OffsetInBytes.Value);
                 GL.EnableVertexAttribArray(shaderAttr.Location);
             }
+        }
+
+        public void AssignAttributes(VBO vbo) {
+            using (vbo.Use(BufferTarget.ArrayBuffer))
+                foreach (var shaderAttr in Attributes)
+                    AssignAttribute(shaderAttr, vbo?.GetAttributeByName(shaderAttr.Name), vbo.StrideInBytes);
         }
 
         public StackElement Use() {
