@@ -20,18 +20,18 @@ namespace SF3.Win.OpenGL {
 
         public StackElement Use(BufferTarget bufferTarget) {
             var state = State.GetCurrentState();
-            if (state.BufferHandle == Handle)
+            if (state.BufferHandles[bufferTarget] == Handle)
                 return new StackElement();
 
-            var lastHandle = state.BufferHandle;
+            var lastHandle = state.BufferHandles[bufferTarget];
             return new StackElement(
                 () => {
                     GL.BindBuffer(bufferTarget, Handle);
-                    state.BufferHandle = Handle;
+                    state.BufferHandles[bufferTarget] = Handle;
                 },
                 () => {
                     GL.BindBuffer(bufferTarget, lastHandle);
-                    state.BufferHandle = lastHandle;
+                    state.BufferHandles[bufferTarget] = lastHandle;
                 }
             );
         }
