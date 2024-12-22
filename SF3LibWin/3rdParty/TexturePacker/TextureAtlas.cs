@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using OpenTK.Mathematics;
 using SF3.Win.Extensions;
@@ -111,9 +112,10 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             if (MaxX <= 0 || MaxY <= 0)
                 return null;
 
+            // TODO: just get the correct dimensinos for this thing...
             Bitmap atlas = new Bitmap(MaxX, MaxY);
             DrawPackedNodes(atlas);
-            return atlas.Trim(true);
+            return atlas.Trim(true) ?? new Bitmap(16, 16, PixelFormat.Format32bppArgb);
         }
 
         public void DrawPackedNodes(Bitmap atlas) {
