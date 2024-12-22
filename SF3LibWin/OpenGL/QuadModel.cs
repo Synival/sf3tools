@@ -29,6 +29,7 @@ namespace SF3.Win.OpenGL {
                 new VBO_Attribute(1, ActiveAttribType.FloatVec3, "position"),
                 new VBO_Attribute(1, ActiveAttribType.FloatVec3, "color"),
                 new VBO_Attribute(1, ActiveAttribType.FloatVec2, "texCoord0"),
+                new VBO_Attribute(1, ActiveAttribType.FloatVec2, "texCoord1"),
             ]);
 
             // Create the vertex buffer with all the data needed for each vertex.
@@ -36,6 +37,8 @@ namespace SF3.Win.OpenGL {
             AssignVertexBufferPositions();
             AssignVertexBufferColors();
             _ = AssignVertexBufferTexCoords();
+            // TODO: do something better than this lazy UV coordinate thing!
+            AssignVertexBufferTexCoord1();
 
             // Assign data to the VBO.
             AssignVBO_Data();
@@ -125,6 +128,26 @@ namespace SF3.Win.OpenGL {
             }
 
             return modified;
+        }
+
+        private void AssignVertexBufferTexCoord1() {
+            var vboAttr = _vbo.GetAttributeByName("texCoord1");
+            if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
+                return;
+
+            var pos = vboAttr.OffsetInBytes.Value / sizeof(float);
+            void SetTexCoord(int x, int y) {
+                _vertexBuffer[pos + 0] = x;
+                _vertexBuffer[pos + 1] = y;
+                pos += _vbo.StrideInBytes / sizeof(float);
+            };
+
+            foreach (var quad in Quads) {
+                SetTexCoord(0, 0);
+                SetTexCoord(1, 0);
+                SetTexCoord(1, 1);
+                SetTexCoord(0, 1);
+            }
         }
 
         private void AssignVBO_Data() {

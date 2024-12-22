@@ -144,14 +144,14 @@ namespace SF3.Win.Controls {
             using (Framebuffer.Use(FramebufferTarget.Framebuffer)) {
                 GL.ClearColor(1, 1, 1, 1);
                 GL.Enable(EnableCap.CullFace);
-                DrawScene(SurfaceSelectionModel, SolidShader, false);
+                DrawSelectionScene();
                 GL.Disable(EnableCap.CullFace);
             }
 
             UpdateTilePosition();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-            DrawScene(SurfaceModel, TexturedShader, true);
+            DrawScene();
 
             SwapBuffers();
         }
@@ -170,39 +170,52 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private void DrawScene(QuadModel surfaceModel, Shader surfaceShader, bool isVisible) {
+        private void DrawScene() {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            if (surfaceModel != null)
-                surfaceModel.Draw(surfaceShader);
-
-            if (isVisible) {
-                // TODO: Code from SurfaceMap2DControl to indicate untagged tiles. Use this later somehow!!
-#if false
-                // Indicate unidentified textures.
-                var expectedTag = new TagKey(textureFlags);
-                if (!texture.Tags.ContainsKey(expectedTag)) {
-                    // NOTE: Graphics.FromImage() throws an OutOfMemoryException due to a bad GDI+ implementation,
-                    // so we have to do it this way.
-                    using var questionMark = new Bitmap(image.Width / 2, image.Height / 2);
-                    using (var g = Graphics.FromImage(questionMark)) {
-                        g.Clear(Color.Black);
-                        g.DrawString("?", new Font(new FontFamily("Consolas"), (int) (questionMark.Width * 0.75)), Brushes.White, 0, 0);
-                        g.Flush();
-                    }
-
-                    var posX = image.Width  - questionMark.Width;
-                    var posY = image.Height - questionMark.Height;
-                    image.SafeDrawImage(questionMark, posX, posY);
-                }
-#endif
-
-                if (TileModel != null) {
-                    GL.Disable(EnableCap.DepthTest);
-                    TileModel.Draw(TexturedShader);
-                    GL.Enable(EnableCap.DepthTest);
+            if (SurfaceModel != null || UntexturedSurfaceModel != null) {
+                var tex1 = DrawWireframe ? _tileWireframeTexture.Use(TextureUnit.Texture1)
+                                         : _transparentTexture.Use(TextureUnit.Texture1);
+                using (tex1)
+                using (TexturedShader.Use()) {
+                    SurfaceModel?.Draw(TexturedShader);
+                    if (DrawWireframe)
+                        UntexturedSurfaceModel?.Draw(TexturedShader);
                 }
             }
+
+            if (TileModel != null) {
+                GL.Disable(EnableCap.DepthTest);
+                using (_transparentTexture.Use(TextureUnit.Texture1))
+                    TileModel.Draw(TexturedShader);
+                GL.Enable(EnableCap.DepthTest);
+            }
+
+            // TODO: Code from SurfaceMap2DControl to indicate untagged tiles. Use this later somehow!!
+#if false
+            // Indicate unidentified textures.
+            var expectedTag = new TagKey(textureFlags);
+            if (!texture.Tags.ContainsKey(expectedTag)) {
+                // NOTE: Graphics.FromImage() throws an OutOfMemoryException due to a bad GDI+ implementation,
+                // so we have to do it this way.
+                using var questionMark = new Bitmap(image.Width / 2, image.Height / 2);
+                using (var g = Graphics.FromImage(questionMark)) {
+                    g.Clear(Color.Black);
+                    g.DrawString("?", new Font(new FontFamily("Consolas"), (int) (questionMark.Width * 0.75)), Brushes.White, 0, 0);
+                    g.Flush();
+                }
+
+                var posX = image.Width  - questionMark.Width;
+                var posY = image.Height - questionMark.Height;
+                image.SafeDrawImage(questionMark, posX, posY);
+            }
+#endif
+        }
+
+        private void DrawSelectionScene() {
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            if (SurfaceSelectionModel != null)
+                SurfaceSelectionModel.Draw(SolidShader);
         }
 
         private Vector3[] GetTileVertices(Point pos) {
@@ -242,8 +255,9 @@ namespace SF3.Win.Controls {
                 .ToDictionary(x => (int) x.TextureID, x => x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray())
                 : [];
 
-            var surfaceQuads = new List<Quad>();
-            var surfaceSelectionQuads = new List<Quad>();
+            var surfaceQuads           = new List<Quad>();
+            var untexturedSurfaceQuads = new List<Quad>();
+            var surfaceSelectionQuads  = new List<Quad>();
 
             for (var y = 0; y < WidthInTiles; y++) {
                 for (var x = 0; x < HeightInTiles; x++) {
@@ -267,6 +281,8 @@ namespace SF3.Win.Controls {
                     var vertices = GetTileVertices(new Point(x, y));
                     if (anim != null)
                         surfaceQuads.Add(new Quad(vertices, anim, textureFlags));
+                    else
+                        untexturedSurfaceQuads.Add(new Quad(vertices, _transparentTextureAnimation, 0));
 
                     surfaceSelectionQuads.Add(new Quad(vertices, new Vector3(x / (float) WidthInTiles, y / (float) HeightInTiles, 0)));
                 }
@@ -277,6 +293,10 @@ namespace SF3.Win.Controls {
             if (surfaceQuads.Count > 0) {
                 SurfaceModel = new QuadModel(surfaceQuads.ToArray());
                 models.Add(SurfaceModel);
+            }
+            if (untexturedSurfaceQuads.Count > 0) {
+                UntexturedSurfaceModel = new QuadModel(untexturedSurfaceQuads.ToArray());
+                models.Add(UntexturedSurfaceModel);
             }
             if (surfaceSelectionQuads.Count > 0) {
                 SurfaceSelectionModel = new QuadModel(surfaceSelectionQuads.ToArray());
@@ -623,8 +643,21 @@ namespace SF3.Win.Controls {
         public Framebuffer Framebuffer { get; private set; }
 
         public QuadModel SurfaceModel { get; private set; }
+        public QuadModel UntexturedSurfaceModel { get; private set; }
         public QuadModel SurfaceSelectionModel { get; private set; }
         public QuadModel TileModel { get; private set; }
+
+        private bool _drawWireframe = true;
+
+        public bool DrawWireframe {
+            get => _drawWireframe;
+            set {
+                if (_drawWireframe != value) {
+                    _drawWireframe = value;
+                    Invalidate();
+                }
+            }
+        }
 
         private Timer _timer = null;
 
