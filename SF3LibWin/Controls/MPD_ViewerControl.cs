@@ -24,8 +24,8 @@ namespace SF3.Win.Controls {
             InitializeComponent();
 
             Disposed += (s, a) => {
-                if (_models != null)
-                    foreach (var model in _models)
+                if (_surfaceModels != null)
+                    foreach (var model in _surfaceModels)
                         model.Dispose();
 
                 if (_shaders != null)
@@ -35,6 +35,8 @@ namespace SF3.Win.Controls {
                 if (_textures != null)
                     foreach (var texture in _textures)
                         texture.Dispose();
+
+                TileModel?.Dispose();
 
                 if (Framebuffer != null)
                     Framebuffer.Dispose();
@@ -228,18 +230,18 @@ namespace SF3.Win.Controls {
             ];
         }
 
-        public void UpdateModel(ushort[,] textureData, MPD_FileTextureChunk[] textureChunks, TextureAnimationTable textureAnimations, TileSurfaceHeightmapRow[] heightmap) {
+        public void UpdateSurfaceModels(ushort[,] textureData, MPD_FileTextureChunk[] textureChunks, TextureAnimationTable textureAnimations, TileSurfaceHeightmapRow[] heightmap) {
             MakeCurrent();
 
             for (var y = 0; y < HeightInTiles; y++)
                 for (var x = 0; x < WidthInTiles; x++)
                     _heightmap[x, y] = heightmap[y][x];
 
-            if (_models != null) {
-                foreach (var model in _models)
+            if (_surfaceModels != null) {
+                foreach (var model in _surfaceModels)
                     model.Dispose();
                 Invalidate();
-                _models = null;
+                _surfaceModels = null;
             }
 
             var texturesById = (textureChunks != null) ? textureChunks
@@ -304,7 +306,7 @@ namespace SF3.Win.Controls {
             }
 
             if (models.Count > 0) {
-                _models = models.ToArray();
+                _surfaceModels = models.ToArray();
                 Invalidate();
             }
         }
@@ -670,7 +672,7 @@ namespace SF3.Win.Controls {
         private TextureAnimation _tileHoverTextureAnimation   = null;
         private TextureAnimation _transparentTextureAnimation = null;
 
-        private QuadModel[] _models   = null;
+        private QuadModel[] _surfaceModels   = null;
         private Shader[]    _shaders  = null;
         private Texture[]   _textures = null;
     }
