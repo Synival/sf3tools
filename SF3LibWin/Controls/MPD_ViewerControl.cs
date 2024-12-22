@@ -90,6 +90,9 @@ namespace SF3.Win.Controls {
 
             _textures = [_whiteTexture, _transparentTexture, _tileWireframeTexture, _tileHoverTexture];
             _shaders  = [TexturedShader, SolidShader];
+
+            foreach (var shader in _shaders)
+                UpdateShaderModelMatrix(shader, Matrix4.Identity);
         }
 
         protected override void OnResize(EventArgs e) {
@@ -131,8 +134,8 @@ namespace SF3.Win.Controls {
             base.OnPaint(e);
             MakeCurrent();
 
-            UpdateShaderMVP(TexturedShader);
-            UpdateShaderMVP(SolidShader);
+            UpdateShaderViewMatrix(TexturedShader);
+            UpdateShaderViewMatrix(SolidShader);
 
             using (Framebuffer.Use(FramebufferTarget.Framebuffer)) {
                 GL.ClearColor(1, 1, 1, 1);
@@ -149,16 +152,19 @@ namespace SF3.Win.Controls {
             SwapBuffers();
         }
 
-        private void UpdateShaderMVP(Shader shader) {
+        private void UpdateShaderViewMatrix(Shader shader) {
             using (shader.Use()) {
-                var handle = GL.GetUniformLocation(shader.Handle, "model");
-                var matrix = Matrix4.Identity;
-                GL.UniformMatrix4(handle, false, ref matrix);
-
-                handle = GL.GetUniformLocation(shader.Handle, "view");
-                matrix = Matrix4.CreateTranslation(-Position)
+                var handle = GL.GetUniformLocation(shader.Handle, "view");
+                var matrix = Matrix4.CreateTranslation(-Position)
                     * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
                     * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
+                GL.UniformMatrix4(handle, false, ref matrix);
+            }
+        }
+
+        private void UpdateShaderModelMatrix(Shader shader, Matrix4 matrix) {
+            using (shader.Use()) {
+                var handle = GL.GetUniformLocation(shader.Handle, "model");
                 GL.UniformMatrix4(handle, false, ref matrix);
             }
         }
@@ -167,14 +173,23 @@ namespace SF3.Win.Controls {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             if (SurfaceModel != null || UntexturedSurfaceModel != null) {
-                var tex1 = DrawWireframe ? _tileWireframeTexture.Use(TextureUnit.Texture1)
-                                         : _transparentTexture.Use(TextureUnit.Texture1);
-                using (tex1)
-                using (TexturedShader.Use()) {
+                using (TexturedShader.Use())
+                using (_transparentTexture.Use(TextureUnit.Texture1)) {
                     SurfaceModel?.Draw(TexturedShader);
-                    if (DrawWireframe)
-                        using (_transparentTexture.Use())
-                            UntexturedSurfaceModel?.Draw(TexturedShader);
+
+                    if (DrawWireframe) {
+                        GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+                        UpdateShaderModelMatrix(TexturedShader, Matrix4.CreateTranslation(0f, 0.01f, 0f));
+
+                        using (_tileWireframeTexture.Use(TextureUnit.Texture1)) {
+                            using (_transparentTexture.Use())
+                                UntexturedSurfaceModel?.Draw(TexturedShader);
+                            SurfaceModel?.Draw(TexturedShader);
+                        }
+
+                        UpdateShaderModelMatrix(TexturedShader, Matrix4.Identity);
+                        GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+                    }
                 }
             }
 
