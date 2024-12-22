@@ -2,8 +2,11 @@
 using OpenTK.Graphics.OpenGL;
 
 namespace SF3.Win.OpenGL {
-    public class VertexArray {
-        public VertexArray() {
+    public class VAO {
+        /// <summary>
+        /// Vertex Array Object.
+        /// </summary>
+        public VAO() {
             Handle = GL.GenVertexArray();
         }
 
@@ -40,7 +43,7 @@ namespace SF3.Win.OpenGL {
             GC.SuppressFinalize(this);
         }
 
-        ~VertexArray() {
+        ~VAO() {
             if (!disposed)
                 System.Diagnostics.Debug.WriteLine("VertexArray: GPU Resource leak! Did you forget to call Dispose()?");
             Dispose(false);

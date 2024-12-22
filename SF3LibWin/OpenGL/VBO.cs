@@ -3,6 +3,10 @@ using System.Linq;
 
 namespace SF3.Win.OpenGL {
     public class VBO : Buffer {
+        /// <summary>
+        /// Vertex Buffer Object.
+        /// </summary>
+        /// <param name="attributes">The attributes that this VBO should have.</param>
         public VBO(VBO_Attribute[] attributes) {
             Attributes = attributes;
             _attributesByName = Attributes.ToDictionary(x => x.Name);
