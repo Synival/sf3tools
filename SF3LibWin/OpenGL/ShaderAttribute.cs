@@ -9,8 +9,5 @@ namespace SF3.Win.OpenGL {
         }
 
         public int Location { get; }
-
-        public bool IsAssignable(VBO_Attribute vboAttr)
-            => vboAttr != null && Elements == vboAttr.Elements && Type == vboAttr.Type;
     }
 }

@@ -13,6 +13,9 @@ namespace SF3.Win.OpenGL {
             SizeInBytes   = elements * TypeSize;
         }
 
+        public bool IsAssignable(BaseAttribute vboAttr)
+            => vboAttr != null && Elements == vboAttr.Elements && Type == vboAttr.Type;
+
         public static VertexAttribPointerType GetTypePointerType(ActiveAttribType type) {
             switch (type) {
                 case ActiveAttribType.Float:
