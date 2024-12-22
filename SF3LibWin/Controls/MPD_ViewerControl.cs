@@ -73,10 +73,18 @@ namespace SF3.Win.Controls {
             TexturedShader = new Shader("Shaders/Textured.vert", "Shaders/Textured.frag");
             SolidShader    = new Shader("Shaders/Solid.vert", "Shaders/Solid.frag");
 
+            _whiteTexture         = new Texture((Bitmap) Image.FromFile("Images/White.bmp"));
+            var transparentBitmap = (Bitmap) Image.FromFile("Images/Transparent.bmp");
+            _transparentTexture   = new Texture(transparentBitmap);
+            _tileWireframeTexture = new Texture((Bitmap) Image.FromFile("Images/TileWireframe.bmp"));
+
             using (var tileHoverImage = (Bitmap) Image.FromFile("Images/TileHover.bmp")) {
                 var tileHoverTexture = tileHoverImage.CreateTextureABGR1555(9999, 0, 0);
                 _tileHoverTextureAnimation = new TextureAnimation(tileHoverTexture.ID, [tileHoverTexture]);
             }
+
+            var transparentBitmapTexture = transparentBitmap.CreateTextureABGR1555(9998, 0, 0);
+            _transparentTextureAnimation = new TextureAnimation(transparentBitmapTexture.ID, [transparentBitmapTexture]);
 
             _timer = new Timer() { Interval = 1000 / 60 };
             _timer.Tick += (s, a) => IncrementFrame();
@@ -87,7 +95,7 @@ namespace SF3.Win.Controls {
 
             UpdateFramebuffer();
 
-            _textures = [];
+            _textures = [_whiteTexture, _transparentTexture, _tileWireframeTexture];
             _shaders  = [TexturedShader, SolidShader];
         }
 
@@ -621,7 +629,13 @@ namespace SF3.Win.Controls {
         private Timer _timer = null;
 
         private uint[,] _heightmap = new uint[WidthInTiles, HeightInTiles];
-        private TextureAnimation _tileHoverTextureAnimation = null;
+
+        private Texture _tileWireframeTexture = null;
+        private Texture _whiteTexture         = null;
+        private Texture _transparentTexture   = null;
+
+        private TextureAnimation _tileHoverTextureAnimation   = null;
+        private TextureAnimation _transparentTextureAnimation = null;
 
         private QuadModel[] _models   = null;
         private Shader[]    _shaders  = null;

@@ -39,6 +39,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Images\White.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\Transparent.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\TileWireframe.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\TileHover.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
