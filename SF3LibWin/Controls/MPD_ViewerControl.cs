@@ -144,14 +144,14 @@ namespace SF3.Win.Controls {
             using (Framebuffer.Use(FramebufferTarget.Framebuffer)) {
                 GL.ClearColor(1, 1, 1, 1);
                 GL.Enable(EnableCap.CullFace);
-                DrawScene(SelectModel, SolidShader, false);
+                DrawScene(SurfaceSelectionModel, SolidShader, false);
                 GL.Disable(EnableCap.CullFace);
             }
 
             UpdateTilePosition();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-            DrawScene(RenderModel, TexturedShader, true);
+            DrawScene(SurfaceModel, TexturedShader, true);
 
             SwapBuffers();
         }
@@ -242,8 +242,8 @@ namespace SF3.Win.Controls {
                 .ToDictionary(x => (int) x.TextureID, x => x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray())
                 : [];
 
-            var renderQuads = new List<Quad>();
-            var selectQuads = new List<Quad>();
+            var surfaceQuads = new List<Quad>();
+            var surfaceSelectionQuads = new List<Quad>();
 
             for (var y = 0; y < WidthInTiles; y++) {
                 for (var x = 0; x < HeightInTiles; x++) {
@@ -266,21 +266,21 @@ namespace SF3.Win.Controls {
 
                     var vertices = GetTileVertices(new Point(x, y));
                     if (anim != null)
-                        renderQuads.Add(new Quad(vertices, anim, textureFlags));
+                        surfaceQuads.Add(new Quad(vertices, anim, textureFlags));
 
-                    selectQuads.Add(new Quad(vertices, new Vector3(x / (float) WidthInTiles, y / (float) HeightInTiles, 0)));
+                    surfaceSelectionQuads.Add(new Quad(vertices, new Vector3(x / (float) WidthInTiles, y / (float) HeightInTiles, 0)));
                 }
             }
 
             var models = new List<QuadModel>();
 
-            if (renderQuads.Count > 0) {
-                RenderModel = new QuadModel(renderQuads.ToArray());
-                models.Add(RenderModel);
+            if (surfaceQuads.Count > 0) {
+                SurfaceModel = new QuadModel(surfaceQuads.ToArray());
+                models.Add(SurfaceModel);
             }
-            if (selectQuads.Count > 0) {
-                SelectModel = new QuadModel(selectQuads.ToArray());
-                models.Add(SelectModel);
+            if (surfaceSelectionQuads.Count > 0) {
+                SurfaceSelectionModel = new QuadModel(surfaceSelectionQuads.ToArray());
+                models.Add(SurfaceSelectionModel);
             }
 
             if (models.Count > 0) {
@@ -425,7 +425,7 @@ namespace SF3.Win.Controls {
         private void UpdateAnimatedTextures() {
             if (_frame % 2 == 0)
                 return;
-            if (RenderModel?.UpdateAnimatedTextures() == true)
+            if (SurfaceModel?.UpdateAnimatedTextures() == true)
                 Invalidate();
         }
 
@@ -622,8 +622,8 @@ namespace SF3.Win.Controls {
         public Shader SolidShader { get; private set; }
         public Framebuffer Framebuffer { get; private set; }
 
-        public QuadModel RenderModel { get; private set; }
-        public QuadModel SelectModel { get; private set; }
+        public QuadModel SurfaceModel { get; private set; }
+        public QuadModel SurfaceSelectionModel { get; private set; }
         public QuadModel TileModel { get; private set; }
 
         private Timer _timer = null;
