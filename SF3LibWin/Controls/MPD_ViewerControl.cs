@@ -24,36 +24,23 @@ namespace SF3.Win.Controls {
             InitializeComponent();
 
             Disposed += (s, a) => {
-                if (RenderModel != null) {
-                    RenderModel.Dispose();
-                    RenderModel = null;
-                }
-                if (SelectModel != null) {
-                    SelectModel.Dispose();
-                    SelectModel = null;
-                }
-                if (TileModel != null) {
-                    TileModel.Dispose();
-                    TileModel = null;
-                }
+                if (_models != null)
+                    foreach (var model in _models)
+                        model.Dispose();
 
-                if (TexturedShader != null) {
-                    TexturedShader.Dispose();
-                    TexturedShader = null;
-                }
-                if (SolidShader != null) {
-                    SolidShader.Dispose();
-                    SolidShader = null;
-                }
-                if (Framebuffer != null) {
+                if (_shaders != null)
+                    foreach (var shader in _shaders)
+                        shader.Dispose();
+
+                if (_textures != null)
+                    foreach (var texture in _textures)
+                        texture.Dispose();
+
+                if (Framebuffer != null)
                     Framebuffer.Dispose();
-                    Framebuffer = null;
-                }
 
-                if (_timer != null) {
+                if (_timer != null)
                     _timer.Dispose();
-                    _timer = null;
-                }
             };
         }
 
@@ -99,6 +86,9 @@ namespace SF3.Win.Controls {
             LookAtTarget(new Vector3(0, 5, 0));
 
             UpdateFramebuffer();
+
+            _textures = [];
+            _shaders  = [TexturedShader, SolidShader];
         }
 
         protected override void OnResize(EventArgs e) {
@@ -118,6 +108,9 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateProjectionMatrices() {
+            if (_shaders == null || _shaders.Length == 0)
+                return;
+
             // Update OpenGL on the new size of the control.
             GL.Viewport(0, 0, ClientSize.Width, ClientSize.Height);
 
@@ -125,16 +118,9 @@ namespace SF3.Win.Controls {
                 MathHelper.DegreesToRadians(22.50f), (float) ClientSize.Width / ClientSize.Height,
                 0.1f, 300.0f);
 
-            if (TexturedShader != null) {
-                using (TexturedShader.Use()) {
-                    var handle = GL.GetUniformLocation(TexturedShader.Handle, "projection");
-                    GL.UniformMatrix4(handle, false, ref projectionMatrix);
-                }
-            }
-
-            if (SolidShader != null) {
-                using (SolidShader.Use()) {
-                    var handle = GL.GetUniformLocation(SolidShader.Handle, "projection");
+            foreach (var shader in _shaders) {
+                using (shader.Use()) {
+                    var handle = GL.GetUniformLocation(shader.Handle, "projection");
                     GL.UniformMatrix4(handle, false, ref projectionMatrix);
                 }
             }
@@ -228,14 +214,11 @@ namespace SF3.Win.Controls {
                 for (var x = 0; x < WidthInTiles; x++)
                     _heightmap[x, y] = heightmap[y][x];
 
-            if (RenderModel != null) {
-                RenderModel.Dispose();
-                RenderModel= null;
+            if (_models != null) {
+                foreach (var model in _models)
+                    model.Dispose();
                 Invalidate();
-            }
-            if (SelectModel != null) {
-                SelectModel.Dispose();
-                SelectModel = null;
+                _models = null;
             }
 
             var texturesById = (textureChunks != null) ? textureChunks
@@ -281,12 +264,21 @@ namespace SF3.Win.Controls {
                 }
             }
 
-            if (renderQuads.Count > 0)
-                RenderModel = new QuadModel(renderQuads.ToArray());
-            if (selectQuads.Count > 0)
-                SelectModel = new QuadModel(selectQuads.ToArray());
+            var models = new List<QuadModel>();
 
-            Invalidate();
+            if (renderQuads.Count > 0) {
+                RenderModel = new QuadModel(renderQuads.ToArray());
+                models.Add(RenderModel);
+            }
+            if (selectQuads.Count > 0) {
+                SelectModel = new QuadModel(selectQuads.ToArray());
+                models.Add(SelectModel);
+            }
+
+            if (models.Count > 0) {
+                _models = models.ToArray();
+                Invalidate();
+            }
         }
 
         public void LookAtTarget(Vector3 target) {
@@ -630,5 +622,9 @@ namespace SF3.Win.Controls {
 
         private uint[,] _heightmap = new uint[WidthInTiles, HeightInTiles];
         private TextureAnimation _tileHoverTextureAnimation = null;
+
+        private QuadModel[] _models   = null;
+        private Shader[]    _shaders  = null;
+        private Texture[]   _textures = null;
     }
 }

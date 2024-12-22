@@ -6,6 +6,7 @@ namespace SF3.Win.OpenGL {
         private static readonly Vector3 c_white = new Vector3(1, 1, 1);
         private static readonly Vector3[] c_allWhite = [c_white, c_white, c_white, c_white];
 
+        public Quad(Vector3[] vertices) : this(vertices, null, 0, c_white) { }
         public Quad(Vector3[] vertices, Vector3 color) : this(vertices, null, 0, [color, color, color, color]) { }
         public Quad(Vector3[] vertices, Vector3[] colors) : this(vertices, null, 0, colors) { }
         public Quad(Vector3[] vertices, TextureAnimation textureAnim, byte textureFlags) : this(vertices, textureAnim, textureFlags, c_allWhite) { }
