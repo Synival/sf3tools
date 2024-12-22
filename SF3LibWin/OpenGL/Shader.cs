@@ -58,17 +58,17 @@ namespace SF3.Win.OpenGL {
                 GL.GetProgram(Handle, GetProgramParameterName.ActiveAttributes, out var attribCount);
                 var _attributes = new ShaderAttribute[attribCount];
 
-                int offset = 0;
+                int stride = 0;
                 for (var i = 0; i < attribCount; i++) {
                     GL.GetActiveAttrib(Handle, i, 16, out var length, out var size, out var type, out var name);
-                    _attributes[i] = new ShaderAttribute(i, size, type, offset, name);
-                    offset += _attributes[i].Size;
+                    _attributes[i] = new ShaderAttribute(i, size, type, name);
+                    stride += _attributes[i].SizeInBytes;
                 }
 
                 Attributes = _attributes.OrderBy(x => x.Location).ToArray();
                 _attributesByName = Attributes.ToDictionary(x => x.Name);
 
-                VertexBufferStride = offset;
+                VertexBufferStride = stride;
             }
         }
 
@@ -78,14 +78,18 @@ namespace SF3.Win.OpenGL {
         public int GetVertexBufferSize(int vertices)
             => vertices * VertexBufferStride;
 
-        public void EnableVAO_Attribute(string attribName) {
-            var attrib = GetAttributeByName(attribName);
-            if (attrib == null)
+        public void EnableVAO_Attribute(VBO vbo, string attribName) {
+            var shaderAttr = GetAttributeByName(attribName);
+            if (shaderAttr == null)
                 return;
 
-            // TODO: offset should not come from the shader, but a layout defined in the VBO
-            GL.VertexAttribPointer(attrib.Location, attrib.TypeElements, attrib.PointerType, false, VertexBufferStride, attrib.Offset);
-            GL.EnableVertexAttribArray(attrib.Location);
+            var vboAttr = vbo.GetAttributeByName(attribName);
+            if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
+                GL.DisableVertexAttribArray(shaderAttr.Location);
+            else {
+                GL.VertexAttribPointer(shaderAttr.Location, shaderAttr.TypeElements, shaderAttr.PointerType, false, VertexBufferStride, vboAttr.OffsetInBytes.Value);
+                GL.EnableVertexAttribArray(shaderAttr.Location);
+            }
         }
 
         public StackElement Use() {

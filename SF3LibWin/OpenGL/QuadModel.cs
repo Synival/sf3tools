@@ -27,11 +27,21 @@ namespace SF3.Win.OpenGL {
             _textureBitmap = _textureAtlas.CreateBitmap();
             _texture = _textureBitmap != null ? new Texture(_textureBitmap) : null;
 
+            // Create the VBO.
+            _vertexBufferObject = new VBO([
+                new VBO_Attribute(1, ActiveAttribType.FloatVec3, "position"),
+                new VBO_Attribute(1, ActiveAttribType.FloatVec3, "color"),
+                new VBO_Attribute(1, ActiveAttribType.FloatVec2, "texCoord0"),
+            ]);
+
             // Create the vertex buffer with all the data needed for each vertex.
             _vertexBuffer = new float[shader.GetVertexBufferSize(Quads.Length * 4) / sizeof(float)];
             AssignVertexBufferPositions();
             AssignVertexBufferColors();
             _ = AssignVertexBufferTexCoords();
+
+            // Assign data to the VBO.
+            AssignVBO_Data();
 
             // Create indices for DrawElements().
             // TODO: quads are malformed :( :( :(
@@ -43,10 +53,6 @@ namespace SF3.Win.OpenGL {
                 })
                 .ToArray();
 
-            // Create the VBO.
-            _vertexBufferObject = new Buffer();
-            UpdateVBO();
-
             // Create the EBO.
             _elementBufferObject = new Buffer();
             UpdateEBO();
@@ -55,17 +61,20 @@ namespace SF3.Win.OpenGL {
             _vertexArrayObject = new VertexArray();
             using (_vertexArrayObject.Use())
             using (_vertexBufferObject.Use(BufferTarget.ArrayBuffer))
-                foreach (var attr in new string[] { "position", "color", "texCoord0" })
-                    Shader.EnableVAO_Attribute(attr);
+                foreach (var attr in _vertexBufferObject.Attributes)
+                    Shader.EnableVAO_Attribute(_vertexBufferObject, attr.Name);
         }
 
         private void AssignVertexBufferColors() {
-            var attr = Shader.GetAttributeByName("position");
-            if (attr == null)
+            var shaderAttr = Shader.GetAttributeByName("position");
+            if (shaderAttr == null)
                 return;
 
-            // TODO: offset should not come from the shader, but a layout defined in the VBO
-            var pos = attr.Offset / sizeof(float);
+            var vboAttr = _vertexBufferObject.GetAttributeByName("position");
+            if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
+                return;
+
+            var pos = vboAttr.OffsetInBytes.Value / sizeof(float);
             int i = 0;
             foreach (var quad in Quads) {
                 for (var vertexIndex = 0; vertexIndex < 4; vertexIndex++) {
@@ -80,12 +89,15 @@ namespace SF3.Win.OpenGL {
         }
 
         private void AssignVertexBufferPositions() {
-            var attr = Shader.GetAttributeByName("color");
-            if (attr == null)
+            var shaderAttr = Shader.GetAttributeByName("color");
+            if (shaderAttr == null)
                 return;
 
-            // TODO: offset should not come from the shader, but a layout defined in the VBO
-            var pos = attr.Offset / sizeof(float);
+            var vboAttr = _vertexBufferObject.GetAttributeByName("color");
+            if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
+                return;
+
+            var pos = vboAttr.OffsetInBytes.Value / sizeof(float);
             foreach (var quad in Quads) {
                 for (var vertexIndex = 0; vertexIndex < 4; vertexIndex++) {
                     var vertex = quad.Vertices[vertexIndex];
@@ -101,14 +113,17 @@ namespace SF3.Win.OpenGL {
             if (_texture == null)
                 return false;
 
-            var attr = Shader.GetAttributeByName("texCoord0");
-            if (attr == null)
+            var shaderAttr = Shader.GetAttributeByName("texCoord0");
+            if (shaderAttr == null)
                 return false;
 
-            // Update UV coordinates
+            var vboAttr = _vertexBufferObject.GetAttributeByName("texCoord0");
+            if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
+                return false;
 
-            // TODO: offset should not come from the shader, but a layout defined in the VBO
-            var pos = attr.Offset / sizeof(float);
+            var pos = vboAttr.OffsetInBytes.Value / sizeof(float);
+
+            // Update UV coordinates
             var modified = false;
             foreach (var quad in Quads) {
                 var textureAnim = quad.TextureAnim;
@@ -131,7 +146,7 @@ namespace SF3.Win.OpenGL {
             return modified;
         }
 
-        private void UpdateVBO() {
+        private void AssignVBO_Data() {
             using (_vertexBufferObject.Use(BufferTarget.ArrayBuffer))
                 GL.BufferData(BufferTarget.ArrayBuffer, _vertexBuffer.Length * sizeof(float), _vertexBuffer, BufferUsageHint.DynamicDraw);
 
@@ -148,7 +163,7 @@ namespace SF3.Win.OpenGL {
             _frame += frameIncrement;
             var result = AssignVertexBufferTexCoords();
             if (result)
-                UpdateVBO();
+                AssignVBO_Data();
             return result;
         }
 
@@ -195,7 +210,7 @@ namespace SF3.Win.OpenGL {
         private Bitmap _textureBitmap { get; }
         private Texture _texture { get; }
 
-        private Buffer _vertexBufferObject { get; }
+        private VBO _vertexBufferObject { get; }
         private VertexArray _vertexArrayObject { get; }
         private Buffer _elementBufferObject { get; }
 
