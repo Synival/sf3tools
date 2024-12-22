@@ -36,6 +36,7 @@ namespace SF3.Win.Controls {
                         texture.Dispose();
 
                 TileModel?.Dispose();
+                HelpModel?.Dispose();
 
                 if (Framebuffer != null)
                     Framebuffer.Dispose();
@@ -71,13 +72,15 @@ namespace SF3.Win.Controls {
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-            TexturedShader = new Shader("Shaders/Textured.vert", "Shaders/Textured.frag");
-            SolidShader    = new Shader("Shaders/Solid.vert", "Shaders/Solid.frag");
+            TextureShader    = new Shader("Shaders/Texture.vert",    "Shaders/Texture.frag");
+            TwoTextureShader = new Shader("Shaders/TwoTexture.vert", "Shaders/TwoTexture.frag");
+            SolidShader      = new Shader("Shaders/Solid.vert",      "Shaders/Solid.frag");
 
             _whiteTexture         = new Texture((Bitmap) Image.FromFile("Images/White.bmp"));
             _transparentTexture   = new Texture((Bitmap) Image.FromFile("Images/Transparent.bmp"));
             _tileWireframeTexture = new Texture((Bitmap) Image.FromFile("Images/TileWireframe.bmp"));
             _tileHoverTexture     = new Texture((Bitmap) Image.FromFile("Images/TileHover.bmp"));
+            _helpTexture          = new Texture((Bitmap) Image.FromFile("Images/ViewerHelp.bmp"));
 
             _timer = new Timer() { Interval = 1000 / 60 };
             _timer.Tick += (s, a) => IncrementFrame();
@@ -88,16 +91,29 @@ namespace SF3.Win.Controls {
 
             UpdateFramebuffer();
 
-            _textures = [_whiteTexture, _transparentTexture, _tileWireframeTexture, _tileHoverTexture];
-            _shaders  = [TexturedShader, SolidShader];
+            _textures = [_whiteTexture, _transparentTexture, _tileWireframeTexture, _tileHoverTexture, _helpTexture];
+            _shaders  = [TextureShader, TwoTextureShader, SolidShader];
 
             foreach (var shader in _shaders)
                 UpdateShaderModelMatrix(shader, Matrix4.Identity);
+
+            var helpWidth = _helpTexture.Width / _helpTexture.Height;
+            HelpModel = new QuadModel([
+                new Quad([
+                    new Vector3(-helpWidth,  1, 0),
+                    new Vector3(         0,  1, 0),
+                    new Vector3(         0,  0, 0),
+                    new Vector3(-helpWidth,  0, 0)
+                ])
+            ]);
         }
 
         protected override void OnResize(EventArgs e) {
             base.OnResize(e);
             MakeCurrent();
+
+            // Update OpenGL on the new size of the control.
+            GL.Viewport(0, 0, ClientSize.Width, ClientSize.Height);
 
             UpdateFramebuffer();
             UpdateProjectionMatrices();
@@ -111,16 +127,18 @@ namespace SF3.Win.Controls {
             Framebuffer = new Framebuffer(Width, Height);
         }
 
+        private void UpdateProjectionMatrix() {
+            ProjectionMatrix = Matrix4.CreatePerspectiveFieldOfView(
+                MathHelper.DegreesToRadians(22.50f), (float) ClientSize.Width / ClientSize.Height,
+                0.1f, 300.0f);
+        }
+
         private void UpdateProjectionMatrices() {
             if (_shaders == null || _shaders.Length == 0)
                 return;
 
-            // Update OpenGL on the new size of the control.
-            GL.Viewport(0, 0, ClientSize.Width, ClientSize.Height);
-
-            var projectionMatrix = Matrix4.CreatePerspectiveFieldOfView(
-                MathHelper.DegreesToRadians(22.50f), (float) ClientSize.Width / ClientSize.Height,
-                0.1f, 300.0f);
+            UpdateProjectionMatrix();
+            var projectionMatrix = ProjectionMatrix;
 
             foreach (var shader in _shaders) {
                 using (shader.Use()) {
@@ -134,8 +152,9 @@ namespace SF3.Win.Controls {
             base.OnPaint(e);
             MakeCurrent();
 
-            UpdateShaderViewMatrix(TexturedShader);
-            UpdateShaderViewMatrix(SolidShader);
+            UpdateViewMatrix();
+            foreach (var shader in _shaders)
+                UpdateShaderViewMatrix(shader, ViewMatrix);
 
             using (Framebuffer.Use(FramebufferTarget.Framebuffer)) {
                 GL.ClearColor(1, 1, 1, 1);
@@ -152,12 +171,15 @@ namespace SF3.Win.Controls {
             SwapBuffers();
         }
 
-        private void UpdateShaderViewMatrix(Shader shader) {
+        private void UpdateViewMatrix() {
+            ViewMatrix = Matrix4.CreateTranslation(-Position)
+                * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
+                * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
+        }
+
+        private void UpdateShaderViewMatrix(Shader shader, Matrix4 matrix) {
             using (shader.Use()) {
                 var handle = GL.GetUniformLocation(shader.Handle, "view");
-                var matrix = Matrix4.CreateTranslation(-Position)
-                    * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
-                    * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
                 GL.UniformMatrix4(handle, false, ref matrix);
             }
         }
@@ -172,33 +194,47 @@ namespace SF3.Win.Controls {
         private void DrawScene() {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            if (SurfaceModel != null || UntexturedSurfaceModel != null) {
-                using (TexturedShader.Use())
-                using (_transparentTexture.Use(TextureUnit.Texture1)) {
-                    SurfaceModel?.Draw(TexturedShader);
+            using (TextureShader.Use()) {
+                if (SurfaceModel != null || UntexturedSurfaceModel != null) {
+                    SurfaceModel?.Draw(TextureShader);
 
                     if (DrawWireframe) {
                         GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-                        UpdateShaderModelMatrix(TexturedShader, Matrix4.CreateTranslation(0f, 0.01f, 0f));
 
+                        using (TwoTextureShader.Use())
+                        using (_transparentTexture.Use(TextureUnit.Texture0))
                         using (_tileWireframeTexture.Use(TextureUnit.Texture1)) {
-                            using (_transparentTexture.Use())
-                                UntexturedSurfaceModel?.Draw(TexturedShader);
-                            SurfaceModel?.Draw(TexturedShader);
+                            UpdateShaderModelMatrix(TwoTextureShader, Matrix4.CreateTranslation(0f, 0.01f, 0f));
+                            UntexturedSurfaceModel?.Draw(TwoTextureShader);
+                            SurfaceModel?.Draw(TwoTextureShader);
+                            UpdateShaderModelMatrix(TwoTextureShader, Matrix4.Identity);
                         }
 
-                        UpdateShaderModelMatrix(TexturedShader, Matrix4.Identity);
                         GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
                     }
                 }
-            }
 
-            if (TileModel != null) {
-                GL.Disable(EnableCap.DepthTest);
-                using (_tileHoverTexture.Use(TextureUnit.Texture0))
-                using (_transparentTexture.Use(TextureUnit.Texture1))
-                    TileModel.Draw(TexturedShader);
-                GL.Enable(EnableCap.DepthTest);
+                if (TileModel != null) {
+                    GL.Disable(EnableCap.DepthTest);
+                    using (_tileHoverTexture.Use())
+                        TileModel.Draw(TextureShader);
+                    GL.Enable(EnableCap.DepthTest);
+                }
+
+                if (DrawHelp && HelpModel != null) {
+                    const float c_viewSize = 0.20f;
+                    UpdateShaderViewMatrix(TextureShader,
+                        Matrix4.CreateScale((float) Height / Width * 2f * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
+                        Matrix4.CreateTranslation(1, -1, 0) *
+                        ProjectionMatrix.Inverted());
+
+                    GL.Disable(EnableCap.DepthTest);
+                    using (_helpTexture.Use())
+                        HelpModel.Draw(TextureShader);
+                    GL.Enable(EnableCap.DepthTest);
+
+                    UpdateShaderViewMatrix(TextureShader, ViewMatrix);
+                }
             }
 
             // TODO: Code from SurfaceMap2DControl to indicate untagged tiles. Use this later somehow!!
@@ -412,8 +448,8 @@ namespace SF3.Win.Controls {
         private void CheckForKeys() {
             var keysDown = _keysPressed.Where(x => x.Value == true).Select(x => x.Key).ToHashSet();
 
-            var moveUpKey    = keysDown.Contains(Keys.Subtract) || keysDown.Contains(Keys.Space);
-            var moveDownKey  = keysDown.Contains(Keys.Add) || keysDown.Contains(Keys.ControlKey);
+            var moveUpKey    = keysDown.Contains(Keys.Subtract) || keysDown.Contains(Keys.R);
+            var moveDownKey  = keysDown.Contains(Keys.Add) || keysDown.Contains(Keys.F);
             var moveLeftKey  = keysDown.Contains(Keys.End) || keysDown.Contains(Keys.NumPad1) || keysDown.Contains(Keys.A);
             var moveRightKey = keysDown.Contains(Keys.PageDown) || keysDown.Contains(Keys.NumPad3) || keysDown.Contains(Keys.D);
 
@@ -648,7 +684,11 @@ namespace SF3.Win.Controls {
                 System.Diagnostics.Debug.WriteLine("Tile: " + _tilePos.ToString());
         }
 
-        public Shader TexturedShader { get; private set; }
+        public Matrix4 ProjectionMatrix { get; private set; }
+        public Matrix4 ViewMatrix { get; private set; }
+
+        public Shader TextureShader { get; private set; }
+        public Shader TwoTextureShader { get; private set; }
         public Shader SolidShader { get; private set; }
         public Framebuffer Framebuffer { get; private set; }
 
@@ -656,6 +696,7 @@ namespace SF3.Win.Controls {
         public QuadModel UntexturedSurfaceModel { get; private set; }
         public QuadModel SurfaceSelectionModel { get; private set; }
         public QuadModel TileModel { get; private set; }
+        public QuadModel HelpModel { get; private set; }
 
         private bool _drawWireframe = true;
 
@@ -669,6 +710,18 @@ namespace SF3.Win.Controls {
             }
         }
 
+        private bool _drawHelp = true;
+
+        public bool DrawHelp {
+            get => _drawHelp;
+            set {
+                if (_drawHelp != value) {
+                    _drawHelp = value;
+                    Invalidate();
+                }
+            }
+        }
+
         private Timer _timer = null;
 
         private uint[,] _heightmap = new uint[WidthInTiles, HeightInTiles];
@@ -677,9 +730,10 @@ namespace SF3.Win.Controls {
         private Texture _whiteTexture         = null;
         private Texture _transparentTexture   = null;
         private Texture _tileHoverTexture     = null;
+        private Texture _helpTexture          = null;
 
         private QuadModel[] _surfaceModels   = null;
-        private Shader[]    _shaders  = null;
-        private Texture[]   _textures = null;
+        private Shader[]  _shaders  = null;
+        private Texture[] _textures = null;
     }
 }

@@ -12,6 +12,9 @@ namespace SF3.Win.OpenGL {
                 throw new ArgumentException(nameof(image.PixelFormat));
 
             Handle = GL.GenTexture();
+            Width  = image.Width;
+            Height = image.Height;
+
             using (Use()) {
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) TextureMinFilter.Linear);
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) TextureMagFilter.Nearest);
@@ -24,6 +27,9 @@ namespace SF3.Win.OpenGL {
 
         public Texture(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType) {
             Handle = GL.GenTexture();
+            Width  = width;
+            Height = height;
+
             using (Use()) {
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) TextureMinFilter.Linear);
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) TextureMagFilter.Nearest);
@@ -34,6 +40,9 @@ namespace SF3.Win.OpenGL {
         }
 
         public void Update(Bitmap image) {
+            Width  = image.Width;
+            Height = image.Height;
+
             using (Use()) {
                 var bitmapData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadOnly, image.PixelFormat);
                 GL.TexImage2D(
@@ -45,8 +54,12 @@ namespace SF3.Win.OpenGL {
             }
         }
 
-        public void Update(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType)
-            => GL.TexImage2D(TextureTarget.Texture2D, 0, internalFormat, width, height, 0, format, pixelType, 0);
+        public void Update(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType) {
+            Width  = width;
+            Height = height;
+
+            GL.TexImage2D(TextureTarget.Texture2D, 0, internalFormat, width, height, 0, format, pixelType, 0);
+        }
 
         public StackElement Use(TextureUnit activeTexture = TextureUnit.Texture0) {
             var state = State.GetCurrentState();
@@ -102,5 +115,7 @@ namespace SF3.Win.OpenGL {
         }
 
         public int Handle { get; }
+        public int Width { get; private set; }
+        public int Height { get; private set; }
     }
 }
