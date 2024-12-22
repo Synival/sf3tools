@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SF3.Win.Controls {
-    public partial class MPD_ViewerControl2 : UserControl {
-        public MPD_ViewerControl2() {
+    public partial class MPD_ViewerControl : UserControl {
+        public MPD_ViewerControl() {
             SuspendLayout();
             InitializeComponent();
 

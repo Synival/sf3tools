@@ -1,5 +1,5 @@
 ﻿namespace SF3.Win.Controls {
-    partial class MPD_ViewerControl2 {
+    partial class MPD_ViewerControl {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MPD_ViewerControl2));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MPD_ViewerControl));
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             tsbToggleWireframe = new System.Windows.Forms.ToolStripButton();
             tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
@@ -65,7 +65,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(toolStrip1);
-            Name = "MPD_ViewerControl2";
+            Name = "MPD_ViewerControl";
             Size = new System.Drawing.Size(500, 500);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
