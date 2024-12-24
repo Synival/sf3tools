@@ -1,6 +1,4 @@
-﻿using CommonLib;
-using CommonLib.Arrays;
-using SF3;
+﻿using CommonLib.Arrays;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
 using SF3.RawData;
@@ -8,13 +6,14 @@ using SF3.Types;
 
 namespace Grayscaler {
     public class Program {
-        private const string c_path = "../../../Private";
+        private const string c_pathIn = "../../../Private";
+        private const string c_pathOut = "../../../Private/Bak";
                                    // ^
                                    //  `-- Enter the path for all your MPD files here!
 
         public static void Main(string[] args) {
             // Get a list of all .MPD files in a folder called 'Private' relative to this project.
-            var files = Directory.GetFiles(c_path, "*.MPD");
+            var filesIn = Directory.GetFiles(c_pathIn, "*.MPD");
 
             // (NameGetterContext is irrelevant for this project. It's used to get named values
             //  for stuff, like character names, classes, spells, items, etc.)
@@ -23,11 +22,11 @@ namespace Grayscaler {
 
             // For each file, update ALL textures in ALL their texture chunks.
             // (This doesn't update background/floor images or animated textures)
-            foreach (var file in files) {
-                Console.Write(file + ": ");
+            foreach (var fileIn in filesIn) {
+                Console.Write(fileIn + ": ");
 
                 // Get a raw data editing context for the file.
-                var byteData = new ByteData(new ByteArray(File.ReadAllBytes(file)));
+                var byteData = new ByteData(new ByteArray(File.ReadAllBytes(fileIn)));
 
                 // Create an MPD file that works with our new ByteData.
                 var mpdFile = MPD_File.Create(byteData, nameGetter, scenario);
@@ -63,7 +62,8 @@ namespace Grayscaler {
 
                 // Write it back out!
                 var output = mpdFile.Data.GetDataCopy();
-                File.WriteAllBytes(file, output);
+                var fileOut = Path.Combine(c_pathOut, Path.GetFileName(fileIn));
+                File.WriteAllBytes(fileOut, output);
             };
         }
 
@@ -79,9 +79,9 @@ namespace Grayscaler {
                     var value = imageData[x, y];
 
                     // Produce a luminance value from RGB channels.
-                    var r = (value >>  0) & 0x1F;
-                    var g = (value >>  5) & 0x1F;
-                    var b = (value >> 10) & 0x1F;
+                    const byte r = 0x0F; // (value >>  0) & 0x1F;
+                    const byte g = 0x0F; // (value >>  5) & 0x1F;
+                    const byte b = 0x0F; // (value >> 10) & 0x1F;
                     var l = Math.Min((int) (0.2126 * r + 0.7152 * g + 0.0722 * b), 0x1F);
 
                     // Update the value, preserving the transparency bit (0x8000).
