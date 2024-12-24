@@ -9,7 +9,13 @@ namespace SF3.Win.Views.MPD {
 
         public void UpdateMap() {
             var textureData = Model.TileSurfaceCharacterRows?.Make2DTextureData();
--            ViewerGLControl.UpdateSurfaceModels(textureData, Model.TextureChunks, Model.TextureAnimations, Model.TileSurfaceHeightmapRows.Rows);
+            ViewerGLControl.UpdateSurfaceModels(
+                textureData,
+                Model.TextureChunks,
+                Model.TextureAnimations,
+                Model.TileSurfaceHeightmapRows?.Rows,
+                Model.TileSurfaceVertexNormalMeshBlocks?.Rows
+            );
         }
 
         public override void RefreshContent() {

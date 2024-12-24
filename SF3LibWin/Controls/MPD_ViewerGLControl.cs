@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CommonLib.Extensions;
 using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Tables.MPD;
+using SF3.Win.Extensions;
 using SF3.Win.OpenGL;
 
 namespace SF3.Win.Controls {
@@ -203,7 +205,12 @@ namespace SF3.Win.Controls {
 
             using (_textureShader.Use()) {
                 if (_surfaceModel != null || _untexturedSurfaceModel != null) {
-                    _surfaceModel?.Draw(_textureShader);
+                    if (_drawNormals) {
+                        _surfaceModel?.Draw(_normalsShader, false);
+                        _untexturedSurfaceModel?.Draw(_normalsShader, false);
+                    }
+                    else
+                        _surfaceModel?.Draw(_textureShader);
 
                     if (DrawWireframe) {
                         GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
@@ -281,7 +288,13 @@ namespace SF3.Win.Controls {
             ];
         }
 
-        public void UpdateSurfaceModels(ushort[,] textureData, MPD_FileTextureChunk[] textureChunks, TextureAnimationTable textureAnimations, TileSurfaceHeightmapRow[] heightmap) {
+        public void UpdateSurfaceModels(
+            ushort[,] textureData,
+            MPD_FileTextureChunk[] textureChunks,
+            TextureAnimationTable textureAnimations,
+            TileSurfaceHeightmapRow[] heightmap,
+            TileSurfaceVertexNormalMesh[] vertexNormals)
+        {
             MakeCurrent();
 
             for (var y = 0; y < HeightInTiles; y++)
@@ -312,6 +325,24 @@ namespace SF3.Win.Controls {
             var untexturedSurfaceQuads = new List<Quad>();
             var surfaceSelectionQuads  = new List<Quad>();
 
+            Vector3 GetVertexNormal(int x, int y, int vertexX, int vertexY) {
+                if (vertexNormals == null)
+                    return new Vector3(0.0f, 1 / 32768.0f, 0.0f);
+
+                var blockNum = (y / 4) * 16 + (x / 4);
+                var block = vertexNormals[blockNum];
+
+                var xInBlock = x % 4 + vertexX;
+                var yInBlock = y % 4 + vertexY;
+                var normal = block[xInBlock, yInBlock];
+
+                return new Vector3(
+                    normal[0] / 32768.0f,
+                    normal[1] / 32768.0f,
+                    normal[2] / 32768.0f
+                );
+            };
+
             for (var y = 0; y < WidthInTiles; y++) {
                 for (var x = 0; x < HeightInTiles; x++) {
                     TextureAnimation anim = null;
@@ -331,11 +362,25 @@ namespace SF3.Win.Controls {
                         }
                     }
 
+                    var normalVertices = new Vector3[] {
+                        GetVertexNormal(x, 63 - y, 0, 1),
+                        GetVertexNormal(x, 63 - y, 1, 1),
+                        GetVertexNormal(x, 63 - y, 1, 0),
+                        GetVertexNormal(x, 63 - y, 0, 0),
+                    };
+                    var normalVboData = normalVertices.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
+
                     var vertices = GetTileVertices(new Point(x, y));
-                    if (anim != null)
-                        surfaceQuads.Add(new Quad(vertices, anim, textureFlags));
-                    else
-                        untexturedSurfaceQuads.Add(new Quad(vertices));
+                    if (anim != null) {
+                        var newQuad = new Quad(vertices, anim, textureFlags);
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
+                        surfaceQuads.Add(newQuad);
+                    }
+                    else {
+                        var newQuad = new Quad(vertices);
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
+                        untexturedSurfaceQuads.Add(newQuad);
+                    }
 
                     surfaceSelectionQuads.Add(new Quad(vertices, new Vector3(x / (float) WidthInTiles, y / (float) HeightInTiles, 0)));
                 }
