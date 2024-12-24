@@ -16,6 +16,7 @@ namespace SF3.Win.Controls {
 
             tsbToggleWireframe.Checked = GLControl.DrawWireframe;
             tsbToggleHelp.Checked      = GLControl.DrawHelp;
+            tsbToggleNormals.Checked   = GLControl.DrawNormals;
         }
 
         public MPD_ViewerGLControl GLControl { get; }
