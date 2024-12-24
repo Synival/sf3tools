@@ -46,9 +46,10 @@ namespace SF3.Win.Controls {
                     _timer.Dispose();
             };
 
-            var state = AppState.RetrieveAppState();
+            var state      = AppState.RetrieveAppState();
             _drawWireframe = state.ViewerDrawWireframe;
-            _drawHelp = state.ViewerDrawHelp;
+            _drawHelp      = state.ViewerDrawHelp;
+            _drawNormals   = state.ViewerDrawNormals;
         }
 
         protected override void WndProc(ref Message m) {
@@ -730,6 +731,21 @@ namespace SF3.Win.Controls {
                     _drawHelp = value;
                     var state = AppState.RetrieveAppState();
                     state.ViewerDrawHelp = value;
+                    state.Serialize();
+                    Invalidate();
+                }
+            }
+        }
+
+        private static bool _drawNormals = true;
+
+        public bool DrawNormals {
+            get => _drawNormals;
+            set {
+                if (_drawNormals != value) {
+                    _drawNormals = value;
+                    var state = AppState.RetrieveAppState();
+                    state.ViewerDrawNormals = value;
                     state.Serialize();
                     Invalidate();
                 }

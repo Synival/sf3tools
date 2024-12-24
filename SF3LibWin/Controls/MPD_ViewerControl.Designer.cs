@@ -27,13 +27,15 @@
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             tsbToggleWireframe = new System.Windows.Forms.ToolStripButton();
             tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            tsbToggleNormals = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbToggleWireframe, tsbToggleHelp });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbToggleWireframe, tsbToggleHelp, toolStripSeparator1, tsbToggleNormals });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(500, 31);
@@ -47,7 +49,8 @@
             tsbToggleWireframe.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbToggleWireframe.Name = "tsbToggleWireframe";
             tsbToggleWireframe.Size = new System.Drawing.Size(28, 28);
-            tsbToggleWireframe.Text = "Toggle Wireframe";
+            tsbToggleWireframe.Text = "Draw Wireframe";
+            tsbToggleWireframe.ToolTipText = "Show Wireframe";
             tsbToggleWireframe.Click += tsbToggleWireframe_Click;
             // 
             // tsbToggleHelp
@@ -57,10 +60,26 @@
             tsbToggleHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbToggleHelp.Name = "tsbToggleHelp";
             tsbToggleHelp.Size = new System.Drawing.Size(28, 28);
-            tsbToggleHelp.Text = "Toggle Help";
+            tsbToggleHelp.Text = "Show Help";
             tsbToggleHelp.Click += tsbToggleHelp_Click;
             // 
-            // MPD_ViewerControl2
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            // 
+            // tsbToggleNormals
+            // 
+            tsbToggleNormals.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbToggleNormals.Image = (System.Drawing.Image) resources.GetObject("tsbToggleNormals.Image");
+            tsbToggleNormals.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbToggleNormals.Name = "tsbToggleNormals";
+            tsbToggleNormals.Size = new System.Drawing.Size(28, 28);
+            tsbToggleNormals.Text = "Draw Normal Map";
+            tsbToggleNormals.ToolTipText = "Show Normal Map";
+            tsbToggleNormals.Click += tsbToggleNormals_Click;
+            // 
+            // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -78,5 +97,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbToggleWireframe;
         private System.Windows.Forms.ToolStripButton tsbToggleHelp;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton tsbToggleNormals;
     }
 }

@@ -29,5 +29,10 @@ namespace SF3.Win.Controls {
             GLControl.DrawHelp = !GLControl.DrawHelp;
             tsbToggleHelp.Checked = GLControl.DrawHelp;
         }
+
+        private void tsbToggleNormals_Click(object sender, EventArgs e) {
+            GLControl.DrawNormals = !GLControl.DrawNormals;
+            tsbToggleNormals.Checked = GLControl.DrawNormals;
+        }
     }
 }
