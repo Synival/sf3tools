@@ -20,9 +20,6 @@ namespace SF3.Win.Controls {
         private const float c_offY = HeightInTiles / -2f;
         private const MouseButtons c_MouseMiddleRight = MouseButtons.Middle | MouseButtons.Right;
 
-        public static bool InitDrawWireframe { get; set; } = true;
-        public static bool InitDrawHelp { get; set; } = true;
-
         public MPD_ViewerGLControl() {
             InitializeComponent();
 
@@ -48,6 +45,10 @@ namespace SF3.Win.Controls {
                 if (_timer != null)
                     _timer.Dispose();
             };
+
+            var state = AppState.RetrieveAppState();
+            _drawWireframe = state.ViewerDrawWireframe;
+            _drawHelp = state.ViewerDrawHelp;
         }
 
         protected override void WndProc(ref Message m) {
@@ -702,25 +703,31 @@ namespace SF3.Win.Controls {
         private QuadModel _tileModel;
         private QuadModel _helpModel;
 
-        private static bool _drawWireframe = InitDrawWireframe;
+        private static bool _drawWireframe = true;
 
         public bool DrawWireframe {
             get => _drawWireframe;
             set {
                 if (_drawWireframe != value) {
                     _drawWireframe = value;
+                    var state = AppState.RetrieveAppState();
+                    state.ViewerDrawWireframe = value;
+                    state.Serialize();
                     Invalidate();
                 }
             }
         }
 
-        private static bool _drawHelp = InitDrawHelp;
+        private static bool _drawHelp = true;
 
         public bool DrawHelp {
             get => _drawHelp;
             set {
                 if (_drawHelp != value) {
                     _drawHelp = value;
+                    var state = AppState.RetrieveAppState();
+                    state.ViewerDrawHelp = value;
+                    state.Serialize();
                     Invalidate();
                 }
             }

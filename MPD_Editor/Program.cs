@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using SF3.Win;
 
 namespace SF3.MPD_Editor {
     static class Program {
@@ -11,6 +12,8 @@ namespace SF3.MPD_Editor {
             if (Environment.OSVersion.Version.Major >= 6)
                 if (!SetProcessDPIAware())
                     throw new NotSupportedException("SetProcessDPIAware()");
+
+            AppState.RetrieveAppState("MPD Editor");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
