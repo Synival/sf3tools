@@ -32,12 +32,20 @@ namespace SF3.Win.OpenGL {
             }
 
             // Create the VBO.
-            _vbo = new VBO([
+            var quadAttrs = quads[0].Attributes.Select(x => new VBO_Attribute(x.Elements, x.Type, x.Name)).ToDictionary(x => x.Name);
+
+            var expectedAttrs = new VBO_Attribute[] {
                 new VBO_Attribute(1, ActiveAttribType.FloatVec3, "position"),
                 new VBO_Attribute(1, ActiveAttribType.FloatVec3, "color"),
                 new VBO_Attribute(1, ActiveAttribType.FloatVec2, "texCoord0"),
                 new VBO_Attribute(1, ActiveAttribType.FloatVec2, "texCoord1"),
-            ]);
+            }.ToDictionary(x => x.Name);
+
+            foreach (var ea in expectedAttrs)
+                if (!quadAttrs.ContainsKey(ea.Key))
+                    quadAttrs.Add(ea.Key, ea.Value);
+
+            _vbo = new VBO(quadAttrs.Select(x => x.Value).ToArray());
 
             // Create the vertex buffer with all the data needed for each vertex.
             _vertexBuffer = new float[_vbo.GetSizeInBytes(Quads.Length * 4) / sizeof(float)];

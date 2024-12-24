@@ -35,10 +35,17 @@ namespace SF3.Win.OpenGL {
             _attributesByName = Attributes.ToDictionary(x => x.Name);
         }
 
+        public void AddAttribute(PolyAttribute attr) {
+            if (_attributesByName.ContainsKey(attr.Name))
+                throw new ArgumentException(nameof(attr.Name));
+            Attributes.Add(attr);
+            _attributesByName.Add(attr.Name, attr);
+        }
+
         public PolyAttribute GetAttributeByName(string name)
             => _attributesByName.TryGetValue(name, out var value) ? value : null;
 
-        public PolyAttribute[] Attributes { get; }
+        public List<PolyAttribute> Attributes { get; }
         private Dictionary<string, PolyAttribute> _attributesByName;
 
         public TextureAnimation TextureAnim { get; }
