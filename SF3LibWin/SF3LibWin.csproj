@@ -72,6 +72,12 @@
     <None Update="Images\TileHover.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Shaders\Wireframe.vert">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Shaders\Wireframe.frag">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Shaders\Solid.frag">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

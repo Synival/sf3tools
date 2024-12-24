@@ -104,9 +104,9 @@ namespace SF3.Win.OpenGL {
 
         private static readonly Vector2[] c_noTextureCoords = [
             new Vector2(0, 0),
-            new Vector2(0, 0),
-            new Vector2(0, 0),
-            new Vector2(0, 0)
+            new Vector2(1, 0),
+            new Vector2(1, 1),
+            new Vector2(0, 1)
         ];
 
         private bool AssignVertexBufferAtlasTexCoords() {

@@ -84,6 +84,7 @@ namespace SF3.Win.Controls {
             _twoTextureShader = new Shader("Shaders/TwoTexture.vert", "Shaders/TwoTexture.frag");
             _solidShader      = new Shader("Shaders/Solid.vert",      "Shaders/Solid.frag");
             _normalsShader    = new Shader("Shaders/Normals.vert",    "Shaders/Normals.frag");
+            _wireframeShader  = new Shader("Shaders/Wireframe.vert",  "Shaders/Wireframe.frag");
 
             _whiteTexture         = new Texture((Bitmap) Image.FromFile("Images/White.bmp"));
             _transparentTexture   = new Texture((Bitmap) Image.FromFile("Images/Transparent.bmp"));
@@ -101,7 +102,7 @@ namespace SF3.Win.Controls {
             UpdateFramebuffer();
 
             _textures = [_whiteTexture, _transparentTexture, _tileWireframeTexture, _tileHoverTexture, _helpTexture];
-            _shaders  = [_textureShader, _twoTextureShader, _solidShader, _normalsShader];
+            _shaders  = [_textureShader, _twoTextureShader, _solidShader, _normalsShader, _wireframeShader];
 
             foreach (var shader in _shaders)
                 UpdateShaderModelMatrix(shader, Matrix4.Identity);
@@ -214,16 +215,17 @@ namespace SF3.Win.Controls {
 
                     if (DrawWireframe) {
                         GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+                        GL.DepthFunc(DepthFunction.Lequal);
 
-                        using (_twoTextureShader.Use())
-                        using (_transparentTexture.Use(TextureUnit.Texture0))
+                        using (_wireframeShader.Use())
                         using (_tileWireframeTexture.Use(TextureUnit.Texture1)) {
-                            UpdateShaderModelMatrix(_twoTextureShader, Matrix4.CreateTranslation(0f, 0.01f, 0f));
-                            _untexturedSurfaceModel?.Draw(_twoTextureShader);
-                            _surfaceModel?.Draw(_twoTextureShader);
-                            UpdateShaderModelMatrix(_twoTextureShader, Matrix4.Identity);
+                            UpdateShaderModelMatrix(_wireframeShader, Matrix4.CreateTranslation(0f, 0.02f, 0f));
+                            _untexturedSurfaceModel?.Draw(_wireframeShader, false);
+                            _surfaceModel?.Draw(_wireframeShader, false);
+                            UpdateShaderModelMatrix(_wireframeShader, Matrix4.Identity);
                         }
 
+                        GL.DepthFunc(DepthFunction.Less);
                         GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
                     }
                 }
@@ -743,6 +745,7 @@ namespace SF3.Win.Controls {
         private Shader _twoTextureShader;
         private Shader _solidShader;
         private Shader _normalsShader;
+        private Shader _wireframeShader;
 
         private Framebuffer _selectFramebuffer;
 
