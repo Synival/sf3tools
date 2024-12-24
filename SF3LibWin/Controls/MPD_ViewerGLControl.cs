@@ -290,6 +290,8 @@ namespace SF3.Win.Controls {
             ];
         }
 
+        private string[,] _debugText = new string[64, 64];
+
         public void UpdateSurfaceModels(
             ushort[,] textureData,
             MPD_FileTextureChunk[] textureChunks,
@@ -385,6 +387,11 @@ namespace SF3.Win.Controls {
                     }
 
                     surfaceSelectionQuads.Add(new Quad(vertices, new Vector3(x / (float) WidthInTiles, y / (float) HeightInTiles, 0)));
+                    _debugText[x, y] =
+                        "  [" + (x - 0.5) + ", " + (y - 0.5) + "] Pos: " + vertices[0] + ", Normal: " + normalVertices[0] + "\n" +
+                        "  [" + (x + 0.5) + ", " + (y - 0.5) + "] Pos: " + vertices[1] + ", Normal: " + normalVertices[1] + "\n" +
+                        "  [" + (x + 0.5) + ", " + (y + 0.5) + "] Pos: " + vertices[2] + ", Normal: " + normalVertices[2] + "\n" +
+                        "  [" + (x - 0.5) + ", " + (y + 0.5) + "] Pos: " + vertices[3] + ", Normal: " + normalVertices[3] + "\n";
                 }
             }
 
@@ -734,8 +741,11 @@ namespace SF3.Win.Controls {
         // TODO: temporary click function!! remove this when there's an actual 'edit' panel
         protected override void OnClick(EventArgs e) {
             base.OnClick(e);
-            if (_tilePos != null)
-                System.Diagnostics.Debug.WriteLine("Tile: " + _tilePos.ToString());
+            if (_tilePos == null)
+                return;
+
+            System.Diagnostics.Debug.WriteLine("Tile: " + _tilePos.ToString());
+            System.Diagnostics.Debug.Write(_debugText[_tilePos.Value.X, _tilePos.Value.Y]);
         }
 
         private Matrix4 _projectionMatrix;
