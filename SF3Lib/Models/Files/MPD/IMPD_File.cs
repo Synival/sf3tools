@@ -46,6 +46,7 @@ namespace SF3.Models.Files.MPD {
         List<Chunk3Frame> Chunk3Frames { get; }
 
         TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; }
+        TileSurfaceVertexNormalMeshBlocks TileSurfaceVertexNormalMeshBlocks { get; }
         TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; }
         TileHeightTerrainRowTable TileHeightTerrainRows { get; }
         TileItemRowTable TileItemRows { get; }
