@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using SF3.Win.ThirdParty.TexturePacker;
 
 namespace SF3.Win.OpenGL {
@@ -101,6 +102,13 @@ namespace SF3.Win.OpenGL {
             }
         }
 
+        private static readonly Vector2[] c_noTextureCoords = [
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0)
+        ];
+
         private bool AssignVertexBufferAtlasTexCoords() {
             if (_texture == null)
                 return false;
@@ -114,13 +122,11 @@ namespace SF3.Win.OpenGL {
             // Update UV coordinates
             var modified = false;
             foreach (var quad in Quads) {
-                var textureAnim = quad.TextureAnim;
-                if (textureAnim == null)
-                    continue;
-
-                var frame = textureAnim.GetFrame(_frame);
-                var texCoords = _textureAtlas.GetUVCoordinatesByTextureIDFrame(
-                    frame.ID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureFlags);
+                var frame = quad.TextureAnim?.GetFrame(_frame);
+                var texCoords = (frame != null)
+                    ? _textureAtlas.GetUVCoordinatesByTextureIDFrame(
+                        frame.ID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureFlags)
+                    : c_noTextureCoords;
 
                 for (var vertexIndex = 0; vertexIndex < 4; vertexIndex++) {
                     if (!modified && (_vertexBuffer[pos] != texCoords[vertexIndex].X || _vertexBuffer[pos + 1] != texCoords[vertexIndex].Y))
@@ -175,11 +181,11 @@ namespace SF3.Win.OpenGL {
             return result;
         }
 
-        public void Draw(Shader shader) {
+        public void Draw(Shader shader, bool withTextures = true) {
             using (_vao.Use())
                 shader.AssignAttributes(_vbo);
 
-            using (_texture?.Use())
+            using (withTextures ? _texture?.Use() : null)
             using (_vao.Use())
             using (_ebo.Use(BufferTarget.ElementArrayBuffer))
             using (shader.Use())
