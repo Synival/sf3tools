@@ -80,6 +80,7 @@ namespace SF3.Win.Controls {
             _textureShader    = new Shader("Shaders/Texture.vert",    "Shaders/Texture.frag");
             _twoTextureShader = new Shader("Shaders/TwoTexture.vert", "Shaders/TwoTexture.frag");
             _solidShader      = new Shader("Shaders/Solid.vert",      "Shaders/Solid.frag");
+            _normalsShader    = new Shader("Shaders/Normals.vert",    "Shaders/Normals.frag");
 
             _whiteTexture         = new Texture((Bitmap) Image.FromFile("Images/White.bmp"));
             _transparentTexture   = new Texture((Bitmap) Image.FromFile("Images/Transparent.bmp"));
@@ -97,7 +98,7 @@ namespace SF3.Win.Controls {
             UpdateFramebuffer();
 
             _textures = [_whiteTexture, _transparentTexture, _tileWireframeTexture, _tileHoverTexture, _helpTexture];
-            _shaders  = [_textureShader, _twoTextureShader, _solidShader];
+            _shaders  = [_textureShader, _twoTextureShader, _solidShader, _normalsShader];
 
             foreach (var shader in _shaders)
                 UpdateShaderModelMatrix(shader, Matrix4.Identity);
@@ -695,6 +696,8 @@ namespace SF3.Win.Controls {
         private Shader _textureShader;
         private Shader _twoTextureShader;
         private Shader _solidShader;
+        private Shader _normalsShader;
+
         private Framebuffer _selectFramebuffer;
 
         private QuadModel _surfaceModel;

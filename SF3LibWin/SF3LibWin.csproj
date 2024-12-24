@@ -78,6 +78,12 @@
     <None Update="Shaders\Solid.vert">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Shaders\Normals.frag">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Shaders\Normals.vert">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Shaders\TwoTexture.frag">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
