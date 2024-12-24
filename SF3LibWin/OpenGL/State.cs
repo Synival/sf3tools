@@ -11,14 +11,18 @@ namespace SF3.Win.OpenGL {
             => _state;
 
         public State() {
-            var values = (BufferTarget[]) Enum.GetValues(typeof(BufferTarget));
-            foreach (var value in values)
+            var btValues = (BufferTarget[]) Enum.GetValues(typeof(BufferTarget));
+            foreach (var value in btValues)
                 BufferHandles[value] = 0;
+
+            var tuValues = (TextureUnit[]) Enum.GetValues(typeof(TextureUnit));
+            foreach (var value in tuValues)
+                TextureHandles[value] = 0;
         }
 
         public int ShaderHandle { get; set; } = 0;
         public TextureUnit ActiveTexture { get; internal set; }
-        public int TextureHandle { get; set; } = 0;
+        public Dictionary<TextureUnit, int> TextureHandles { get; } = new Dictionary<TextureUnit, int>();
         // TODO: needs separate stats per framebuffer target!!
         public int FramebufferHandle { get; set; } = 0;
         public Dictionary<BufferTarget, int> BufferHandles { get; } = new Dictionary<BufferTarget, int>();

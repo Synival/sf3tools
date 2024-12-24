@@ -65,7 +65,9 @@ namespace SF3.Win.OpenGL {
             var state = State.GetCurrentState();
 
             var lastActiveTexture = state.ActiveTexture;
-            var lastHandle = state.TextureHandle;
+            var lastHandle = state.TextureHandles[activeTexture];
+            if (lastActiveTexture == activeTexture && lastHandle == Handle)
+                return null;
 
             return new StackElement(
                 () => {
@@ -75,13 +77,13 @@ namespace SF3.Win.OpenGL {
                     }
                     if (Handle != lastHandle) {
                         GL.BindTexture(TextureTarget.Texture2D, Handle);
-                        state.TextureHandle = Handle;
+                        state.TextureHandles[activeTexture] = Handle;
                     }
                 },
                 () => {
                     if (Handle != lastHandle) {
                         GL.BindTexture(TextureTarget.Texture2D, lastHandle);
-                        state.TextureHandle = lastHandle;
+                        state.TextureHandles[activeTexture] = lastHandle;
                     }
                     if (activeTexture != lastActiveTexture) {
                         GL.ActiveTexture(lastActiveTexture);
