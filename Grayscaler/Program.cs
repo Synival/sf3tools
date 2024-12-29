@@ -6,8 +6,8 @@ using SF3.Types;
 
 namespace Grayscaler {
     public class Program {
-        private const string c_pathIn = "../../../Private";
-        private const string c_pathOut = "../../../Private/Bak";
+        private const string c_pathIn = "../../../Private/Bak";
+        private const string c_pathOut = "../../../Private";
                                    // ^
                                    //  `-- Enter the path for all your MPD files here!
 
