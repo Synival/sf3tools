@@ -24,18 +24,18 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        public CompressedFixedVector this[int x, int y] {
+        public VECTOR this[int x, int y] {
             get {
-                return new CompressedFixedVector(
-                    Data.GetCompressedFixed(normalAddresses[x, y] + 0),
-                    Data.GetCompressedFixed(normalAddresses[x, y] + 2),
-                    Data.GetCompressedFixed(normalAddresses[x, y] + 4)
+                return new VECTOR(
+                    new FIXED(Data.GetCompressedFIXED(normalAddresses[x, y] + 0)),
+                    new FIXED(Data.GetCompressedFIXED(normalAddresses[x, y] + 2)),
+                    new FIXED(Data.GetCompressedFIXED(normalAddresses[x, y] + 4))
                 );
             }
             set {
-                Data.SetCompressedFixed(normalAddresses[x, y] + 0, value.X);
-                Data.SetCompressedFixed(normalAddresses[x, y] + 2, value.Y);
-                Data.SetCompressedFixed(normalAddresses[x, y] + 4, value.Z);
+                Data.SetCompressedFIXED(normalAddresses[x, y] + 0, new CompressedFIXED(value.X));
+                Data.SetCompressedFIXED(normalAddresses[x, y] + 2, new CompressedFIXED(value.Y));
+                Data.SetCompressedFIXED(normalAddresses[x, y] + 4, new CompressedFIXED(value.Z));
             }
         }
 

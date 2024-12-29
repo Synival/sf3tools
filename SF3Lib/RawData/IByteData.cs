@@ -62,10 +62,16 @@ namespace SF3.RawData {
         int GetDouble(int location);
 
         /// <summary>
-        /// Gets the value of a 16-bit FIXED at a location.
+        /// Gets the value of a 16-bit compressed FIXED at a location.
         /// </summary>
-        /// <param name="location">The address of the 16-bit FIXED.</param>
-        CompressedFixed GetCompressedFixed(int location);
+        /// <param name="location">The address of the 16-bit compressed FIXED.</param>
+        CompressedFIXED GetCompressedFIXED(int location);
+
+        /// <summary>
+        /// Gets the value of a 32-bit FIXED at a location.
+        /// </summary>
+        /// <param name="location">The address of the 32-bit FIXED.</param>
+        FIXED GetFIXED(int location);
 
         /// <summary>
         /// Returns the value of string data of a specific size at a location.
@@ -112,11 +118,18 @@ namespace SF3.RawData {
         void SetDouble(int location, int value);
 
         /// <summary>
-        /// Sets the value of a 16-bit FIXED at a location.
+        /// Sets the value of a 16-bit compressed FIXED at a location.
         /// </summary>
-        /// <param name="location">The address of the 16-bit FIXED.</param>
-        /// <param name="value">The new value of the 16-bit FIXED.</param>
-        void SetCompressedFixed(int location, CompressedFixed value);
+        /// <param name="location">The address of the 16-bit compressed FIXED.</param>
+        /// <param name="value">The new value of the 16-bit compressed FIXED.</param>
+        void SetCompressedFIXED(int location, CompressedFIXED value);
+
+        /// <summary>
+        /// Sets the value of a 32-bit FIXED at a location.
+        /// </summary>
+        /// <param name="location">The address of the 32-bit FIXED.</param>
+        /// <param name="value">The new value of the 32-bit FIXED.</param>
+        void SetFIXED(int location, FIXED value);
 
         /// <summary>
         /// Sets the value of string data of a specific size at a location.
