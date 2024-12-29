@@ -11,7 +11,6 @@ using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Tables.MPD;
 using SF3.Win.Extensions;
-using SF3.Win.Extensions.CompressedFixedVectorExtensions;
 using SF3.Win.OpenGL;
 
 namespace SF3.Win.Controls {

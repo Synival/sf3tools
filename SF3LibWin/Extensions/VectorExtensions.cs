@@ -1,4 +1,5 @@
-﻿using OpenTK.Mathematics;
+﻿using CommonLib.SGL;
+using OpenTK.Mathematics;
 
 namespace SF3.Win.Extensions {
     public static class VectorExtensions {
@@ -10,5 +11,8 @@ namespace SF3.Win.Extensions {
 
         public static float[] ToFloatArray(this Vector4 vec4)
             => [vec4.X, vec4.Y, vec4.Z, vec4.W];
+
+        public static Vector3 ToVector3(this VECTOR vec)
+            => new(vec.X.Float, vec.Y.Float, vec.Z.Float);
     }
 }
