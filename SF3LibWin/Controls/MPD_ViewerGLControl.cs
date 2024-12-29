@@ -340,9 +340,9 @@ namespace SF3.Win.Controls {
                 var normal = block[xInBlock, yInBlock];
 
                 return new Vector3(
-                    normal[0] / 32768.0f,
-                    normal[1] / 32768.0f,
-                    normal[2] / 32768.0f
+                    normal[0].Float,
+                    normal[1].Float,
+                    normal[2].Float
                 );
             };
 

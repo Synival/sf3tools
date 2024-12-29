@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using CommonLib;
 using CommonLib.Arrays;
+using CommonLib.SGL;
 
 namespace SF3.RawData {
     /// <summary>
@@ -80,6 +81,7 @@ namespace SF3.RawData {
         public int GetByte(int location) => (int) GetData(location, 1);
         public int GetWord(int location) => (int) GetData(location, 2);
         public int GetDouble(int location) => (int) GetData(location, 4);
+        public CompressedFixed GetCompressedFixed(int location) => new CompressedFixed((short) GetWord(location));
 
         public string GetString(int location, int length) {
             var value = new byte[length];
@@ -111,6 +113,7 @@ namespace SF3.RawData {
         public void SetByte(int location, byte value) => SetData(location, value, 1);
         public void SetWord(int location, int value) => SetData(location, (uint) value, 2);
         public void SetDouble(int location, int value) => SetData(location, (uint) value, 4);
+        public void SetCompressedFixed(int location, CompressedFixed value) => SetWord(location, value.Short);
 
         public void SetString(int location, int length, string value) {
             var encoding = Encoding.GetEncoding("shift-jis");

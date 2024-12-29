@@ -1,6 +1,7 @@
 ﻿using System;
 using CommonLib;
 using CommonLib.Arrays;
+using CommonLib.SGL;
 
 namespace SF3.RawData {
     public class ChunkData : IChunkData {
@@ -49,12 +50,14 @@ namespace SF3.RawData {
         public int GetByte(int location) => ChildData.GetByte(location);
         public int GetWord(int location) => ChildData.GetWord(location);
         public int GetDouble(int location) => ChildData.GetDouble(location);
+        public CompressedFixed GetCompressedFixed(int location) => ChildData.GetCompressedFixed(location);
         public string GetString(int location, int length) => ChildData.GetString(location, length);
         public bool GetBit(int location, int bit) => ChildData.GetBit(location, bit);
         public void SetData(int location, uint value, int bytes) => ChildData.SetData(location, value, bytes);
         public void SetByte(int location, byte value) => ChildData.SetByte(location, value);
         public void SetWord(int location, int value) => ChildData.SetWord(location, value);
         public void SetDouble(int location, int value) => ChildData.SetDouble(location, value);
+        public void SetCompressedFixed(int location, CompressedFixed value) => ChildData.SetCompressedFixed(location, value);
         public void SetString(int location, int length, string value) => ChildData.SetString(location, length, value);
         public void SetBit(int location, int bit, bool value) => ChildData.SetBit(location, bit, value);
         public bool Finish() => ChildData.Finish();

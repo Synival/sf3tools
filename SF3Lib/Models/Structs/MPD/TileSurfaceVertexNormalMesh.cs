@@ -1,5 +1,5 @@
 using System;
-using CommonLib.Attributes;
+using CommonLib.SGL;
 using SF3.RawData;
 
 namespace SF3.Models.Structs.MPD {
@@ -12,8 +12,8 @@ namespace SF3.Models.Structs.MPD {
 
         public TileSurfaceVertexNormalMesh(IByteData data, int id, string name, int address, int blockX, int blockY)
         : base(data, id, name, address, 6 * c_meshCount) {
-            BlockX   = blockX;
-            BlockY   = blockY;
+            BlockX = blockX;
+            BlockY = blockY;
 
             int pos = Address;
             for (var y = 0; y < c_meshHeight; y++) {
@@ -24,19 +24,20 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        public short[] this[int x, int y] {
+        public CompressedFixed[] this[int x, int y] {
             get {
-                return new short[] {
-                    (short) Data.GetWord(normalAddresses[x, y] + 0),
-                    (short) Data.GetWord(normalAddresses[x, y] + 2),
-                    (short) Data.GetWord(normalAddresses[x, y] + 4) };
+                return new CompressedFixed[] {
+                    Data.GetCompressedFixed(normalAddresses[x, y] + 0),
+                    Data.GetCompressedFixed(normalAddresses[x, y] + 2),
+                    Data.GetCompressedFixed(normalAddresses[x, y] + 4)
+                };
             }
             set {
                 if (value.Length != 3)
                     throw new ArgumentException(nameof(value));
-                Data.SetWord(normalAddresses[x, y] + 0, value[0]);
-                Data.SetWord(normalAddresses[x, y] + 2, value[1]);
-                Data.SetWord(normalAddresses[x, y] + 4, value[2]);
+                Data.SetCompressedFixed(normalAddresses[x, y] + 0, value[0]);
+                Data.SetCompressedFixed(normalAddresses[x, y] + 2, value[1]);
+                Data.SetCompressedFixed(normalAddresses[x, y] + 4, value[2]);
             }
         }
 

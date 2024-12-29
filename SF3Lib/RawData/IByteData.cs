@@ -1,5 +1,6 @@
 ﻿using System;
 using CommonLib.Arrays;
+using CommonLib.SGL;
 
 namespace SF3.RawData {
     /// <summary>
@@ -61,6 +62,12 @@ namespace SF3.RawData {
         int GetDouble(int location);
 
         /// <summary>
+        /// Gets the value of a 16-bit FIXED at a location.
+        /// </summary>
+        /// <param name="location">The address of the 16-bit FIXED.</param>
+        CompressedFixed GetCompressedFixed(int location);
+
+        /// <summary>
         /// Returns the value of string data of a specific size at a location.
         /// </summary>
         /// <param name="location">The address of the string.</param>
@@ -103,6 +110,13 @@ namespace SF3.RawData {
         /// <param name="location">The address of the 32-bit integer.</param>
         /// <param name="value">The new value of the 32-bit integer.</param>
         void SetDouble(int location, int value);
+
+        /// <summary>
+        /// Sets the value of a 16-bit FIXED at a location.
+        /// </summary>
+        /// <param name="location">The address of the 16-bit FIXED.</param>
+        /// <param name="value">The new value of the 16-bit FIXED.</param>
+        void SetCompressedFixed(int location, CompressedFixed value);
 
         /// <summary>
         /// Sets the value of string data of a specific size at a location.
