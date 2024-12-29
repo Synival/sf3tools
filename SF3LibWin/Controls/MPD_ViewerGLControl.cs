@@ -11,6 +11,7 @@ using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Tables.MPD;
 using SF3.Win.Extensions;
+using SF3.Win.Extensions.CompressedFixedVectorExtensions;
 using SF3.Win.OpenGL;
 
 namespace SF3.Win.Controls {
@@ -339,11 +340,7 @@ namespace SF3.Win.Controls {
                 var yInBlock = y % 4 + vertexY;
                 var normal = block[xInBlock, yInBlock];
 
-                return new Vector3(
-                    normal[0].Float,
-                    normal[1].Float,
-                    normal[2].Float
-                );
+                return normal.ToVector3();
             };
 
             for (var y = 0; y < WidthInTiles; y++) {
