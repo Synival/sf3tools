@@ -281,12 +281,11 @@ namespace SF3.Win.Controls {
         }
 
         private Vector3[] GetTileVertices(Point pos) {
-            var heights = _heightmap[pos.X, pos.Y];
             return [
-                (pos.X + 0 + c_offX, ((heights >>  8) & 0xFF) / 16f, pos.Y + 0 + c_offY),
-                (pos.X + 1 + c_offX, ((heights >>  0) & 0xFF) / 16f, pos.Y + 0 + c_offY),
-                (pos.X + 1 + c_offX, ((heights >> 24) & 0xFF) / 16f, pos.Y + 1 + c_offY),
-                (pos.X + 0 + c_offX, ((heights >> 16) & 0xFF) / 16f, pos.Y + 1 + c_offY)
+                (pos.X + 0 + c_offX, _heightmap[pos.X, pos.Y][0], pos.Y + 0 + c_offY),
+                (pos.X + 1 + c_offX, _heightmap[pos.X, pos.Y][1], pos.Y + 0 + c_offY),
+                (pos.X + 1 + c_offX, _heightmap[pos.X, pos.Y][2], pos.Y + 1 + c_offY),
+                (pos.X + 0 + c_offX, _heightmap[pos.X, pos.Y][3], pos.Y + 1 + c_offY)
             ];
         }
 
@@ -297,13 +296,13 @@ namespace SF3.Win.Controls {
             MPD_FileTextureChunk[] textureChunks,
             TextureAnimationTable textureAnimations,
             TileSurfaceHeightmapRow[] heightmap,
-            TileSurfaceVertexNormalMesh[] vertexNormals)
-        {
+            TileSurfaceVertexNormalMesh[] vertexNormals
+        ) {
             MakeCurrent();
 
             for (var y = 0; y < HeightInTiles; y++)
                 for (var x = 0; x < WidthInTiles; x++)
-                    _heightmap[x, y] = heightmap[y][x];
+                    _heightmap[x, y] = heightmap[y].GetHeights(x);
 
             if (_surfaceModels != null) {
                 foreach (var model in _surfaceModels)
@@ -812,7 +811,7 @@ namespace SF3.Win.Controls {
 
         private Timer _timer = null;
 
-        private uint[,] _heightmap = new uint[WidthInTiles, HeightInTiles];
+        private float[,][] _heightmap = new float[WidthInTiles, HeightInTiles][];
 
         private Texture _tileWireframeTexture = null;
         private Texture _whiteTexture         = null;

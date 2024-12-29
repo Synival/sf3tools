@@ -16,6 +16,18 @@ namespace SF3.Models.Structs.MPD {
             set => Data.SetDouble(xAddress[index], (int) value);
         }
 
+        public float[] GetHeights(int x)
+            => ConvertHeightsToFloatArray(this[x]);
+
+        public static float[] ConvertHeightsToFloatArray(uint heights) {
+            return new[] {
+                ((heights >>  8) & 0xFF) / 16f,
+                ((heights >>  0) & 0xFF) / 16f,
+                ((heights >> 24) & 0xFF) / 16f,
+                ((heights >> 16) & 0xFF) / 16f,
+            };
+        }
+
         private class TileMetadataAttribute : TableViewModelColumnAttribute {
             public TileMetadataAttribute(int x) : base(displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X8", minWidth: 75) { }
         }
