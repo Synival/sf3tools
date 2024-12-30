@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using CommonLib.Types;
 
 namespace CommonLib.SGL {
     public class QUAD {
@@ -11,10 +10,10 @@ namespace CommonLib.SGL {
             Vertices = vertices;
         }
 
-        public VECTOR GetCornerNormal(int corner) {
+        public VECTOR GetCornerNormal(CornerType corner) {
             return VECTOR.Cross(
-                Vertices[(2 + corner) % 4] - Vertices[(0 + corner) % 4],
-                Vertices[(1 + corner) % 4] - Vertices[(0 + corner) % 4]
+                Vertices[(2 + (int) corner) % 4] - Vertices[(0 + (int) corner) % 4],
+                Vertices[(1 + (int) corner) % 4] - Vertices[(0 + (int) corner) % 4]
             ).Normalized();
         }
 
@@ -23,10 +22,10 @@ namespace CommonLib.SGL {
                 return GetCornerNormal(0);
 
             var vertexNormals = new VECTOR[] {
-                GetCornerNormal(0),
-                GetCornerNormal(1),
-                GetCornerNormal(2),
-                GetCornerNormal(3),
+                GetCornerNormal(CornerType.TopLeft),
+                GetCornerNormal(CornerType.TopRight),
+                GetCornerNormal(CornerType.BottomRight),
+                GetCornerNormal(CornerType.BottomLeft),
             };
 
             return vertexNormals.Aggregate((a, b) => a + b).Normalized();

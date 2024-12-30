@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using CommonLib.SGL;
+using CommonLib.Types;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.RawData;
@@ -23,6 +25,39 @@ namespace SF3.Models.Files.MPD {
         /// <param name="onlyModified">Only perform updates for modified compressed chunks.</param>
         /// <returns>'true' on success, otherwise 'false'.</returns>
         bool Recompress(bool onlyModified);
+
+        /// <summary>
+        /// Calculates the "abnormal" for a tile at a given corner.
+        /// </summary>
+        /// <param name="tileX">X coordinate of the tile.</param>
+        /// <param name="tileY">Y coordinate of the tile.</param>
+        /// <param name="corner">Corner of the tile whose vertex abnormal should be calculated.</param>
+        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
+        /// <returns>A freshly-calculated abnormal for the vertex requested.</returns>
+        VECTOR CalculateSurfaceVertexAbnormal(int tileX, int tileY, CornerType corner, bool useMoreAccurateCalculations);
+
+        /// <summary>
+        /// Updates the vertex abnormal for a specific vertex of a tile.
+        /// </summary>
+        /// <param name="tileX">X coordinate of the tile.</param>
+        /// <param name="tileY">Y coordinate of the tile.</param>
+        /// <param name="corner">Corner of the tile whose vertex abnormal should be updated.</param>
+        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
+        void UpdateSurfaceVertexAbnormal(int tileX, int tileY, CornerType corner, bool useMoreAccurateCalculations);
+
+        /// <summary>
+        /// Recalculates vertex "abnormals" for a specific tile.
+        /// </summary>
+        /// <param name="tileX">X coordinate of the tile.</param>
+        /// <param name="tileY">Y coordinate of the tile.</param>
+        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
+        void UpdateSurfaceVertexAbnormals(int tileX, int tileY, bool useMoreAccurateCalculations);
+
+        /// <summary>
+        /// Recalculates all vertex "abnormals" for all tiles.
+        /// </summary>
+        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
+        void UpdateSurfaceVertexAbnormals(bool useMoreAccurateCalculations);
 
         /// <summary>
         /// Byte data for (de)compressed data for chunks

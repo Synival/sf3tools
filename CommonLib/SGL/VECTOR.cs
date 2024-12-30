@@ -112,5 +112,25 @@ namespace CommonLib.SGL {
 
             return vec;
         }
+
+        public CompressedFIXED[] PackageAbnormalForMPDFile() {
+            int Clamp(int num, int min, int max) => Math.Min(Math.Max(num, min), max);
+            var abnormalAsCompressedFixed = new CompressedFIXED[] {
+                new CompressedFIXED((short) Clamp(X.RawInt / 2, -0x8000, 0x7FFF)),
+                new CompressedFIXED((short) Clamp(Y.RawInt / 2,  0x0000, 0x7FFF)),
+                new CompressedFIXED((short) Clamp(Z.RawInt / 2, -0x8000, 0x7FFF)),
+            };
+
+            // Set the 0x0001 bit to '1' for each positive component and '0' for each negative component.
+            void SetOneBitToSign(ref CompressedFIXED f, byte valueIfSigned) {
+                f.RawShort = (short) ((((ushort) f.RawShort) & 0xFFFE) | (ushort) (f.RawShort >= 0 ? valueIfSigned : (1 - valueIfSigned)));
+            }
+
+            SetOneBitToSign(ref abnormalAsCompressedFixed[0], 0);
+            SetOneBitToSign(ref abnormalAsCompressedFixed[1], 1);
+            SetOneBitToSign(ref abnormalAsCompressedFixed[2], 0);
+
+            return abnormalAsCompressedFixed;
+        }
     }
 }

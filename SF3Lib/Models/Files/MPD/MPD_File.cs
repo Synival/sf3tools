@@ -10,6 +10,8 @@ using SF3.Models.Tables.MPD;
 using SF3.RawData;
 using CommonLib.Arrays;
 using SF3.Models.Structs.MPD.TextureChunk;
+using CommonLib.SGL;
+using CommonLib.Types;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
@@ -362,6 +364,107 @@ namespace SF3.Models.Files.MPD {
                 foreach (var cd in Chunk3Frames)
                     cd.Data.Dispose();
                 Chunk3Frames.Clear();
+            }
+        }
+
+        public VECTOR CalculateSurfaceVertexAbnormal(int tileX, int tileY, CornerType corner, bool useMoreAccurateCalculations) {
+            var heightmap = TileSurfaceHeightmapRows?.Rows;
+            if (heightmap == null) {
+                return new VECTOR(
+                    new FIXED(0, true),
+                    new FIXED(1, true),
+                    new FIXED(0, true)
+                );
+            }
+
+            var vertexX = tileX + corner.GetX();
+            var vertexY = tileY + corner.GetY();
+
+            // Determine the normals of the 4 quads surrounding the vertex.
+            var sumNormals = new List<VECTOR>();
+
+            void TryAddQuadNormal(int vx, int vy) {
+                if (vx >= 0 && vy >= 0 && vx <= 63 && vy <= 63) {
+                    var heights = heightmap[vy].GetHeights(vx);
+                    var quad = new QUAD(new VECTOR[] {
+                        new VECTOR(0.00f, heights[0], 0.00f),
+                        new VECTOR(1.00f, heights[1], 0.00f),
+                        new VECTOR(1.00f, heights[2], 1.00f),
+                        new VECTOR(0.00f, heights[3], 1.00f)
+                    });
+                    sumNormals.Add(quad.GetNormal(useMoreAccurateCalculations));
+                }
+            }
+
+            // Gather a list of all quad normals to use for averaging the vertex normal.
+            // On the edges of maps, there are fewer adjected polys to the vertex,
+            // so only add normals if they exist.
+            TryAddQuadNormal(vertexX - 1, vertexY - 1);
+            TryAddQuadNormal(vertexX - 0, vertexY - 1);
+            TryAddQuadNormal(vertexX - 0, vertexY - 0);
+            TryAddQuadNormal(vertexX - 1, vertexY - 0);
+
+            // Return the average of each normal (normalized) for Gouraud shading.
+            return VECTOR.GetAbnormalFromNormals(sumNormals.ToArray());
+        }
+
+        public void UpdateSurfaceVertexAbnormal(int tileX, int tileY, CornerType corner, bool useMoreAccurateCalculations) {
+            if (TileSurfaceHeightmapRows == null || TileSurfaceVertexNormalMeshBlocks == null)
+                return;
+
+            var abnormal = CalculateSurfaceVertexAbnormal(tileX, tileY, corner, useMoreAccurateCalculations);
+
+            // Get the vertex position for the entire mesh. Blocks are upside-down, so correct for this.
+            var vertexX = tileX + corner.GetX();
+            var vertexY = 64 - (tileY + corner.GetY());
+
+            // Get the vertex position within the block (only using the right/bottom sides if it's the last block).
+            var bx = (vertexX == 64) ? 4 : vertexX % 4;
+            var by = (vertexY == 64) ? 4 : vertexY % 4;
+
+            // Get the block to update.
+            int Clamp(int num, int min, int max) => Math.Min(Math.Max(num, min), max);
+            int blockNum = (Clamp(vertexY, 0, 63) / 4) * 16 + (Clamp(vertexX, 0, 63) / 4);
+
+            // Update the vertex.
+            var blocks = TileSurfaceVertexNormalMeshBlocks.Rows;
+            blocks[blockNum][bx, by] = abnormal;
+
+            // If updating the left/top sides (and not the overall edge), update adjacent blocks.
+            if (bx == 0 && vertexX > 0)
+                blocks[blockNum - 1][4, by] = abnormal;
+            if (by == 0 && vertexY > 0)
+                blocks[blockNum - 16][bx, 4] = abnormal;
+            if (bx == 0 && by == 0 && vertexX > 0 && vertexY > 0)
+                blocks[blockNum - 17][4, 4] = abnormal;
+        }
+
+        public void UpdateSurfaceVertexAbnormals(int tileX, int tileY, bool useMoreAccurateCalculations) {
+            if (TileSurfaceHeightmapRows == null || TileSurfaceVertexNormalMeshBlocks == null)
+                return;
+
+            UpdateSurfaceVertexAbnormal(tileX, tileY, CornerType.TopLeft,     useMoreAccurateCalculations);
+            UpdateSurfaceVertexAbnormal(tileX, tileY, CornerType.TopRight,    useMoreAccurateCalculations);
+            UpdateSurfaceVertexAbnormal(tileX, tileY, CornerType.BottomRight, useMoreAccurateCalculations);
+            UpdateSurfaceVertexAbnormal(tileX, tileY, CornerType.BottomLeft,  useMoreAccurateCalculations);
+        }
+
+        public void UpdateSurfaceVertexAbnormals(bool useMoreAccurateCalculations) {
+            if (TileSurfaceHeightmapRows == null || TileSurfaceVertexNormalMeshBlocks == null)
+                return;
+
+            for (var y = 0; y < 64; y++) {
+                for (var x = 0; x < 64; x++) {
+                    UpdateSurfaceVertexAbnormal(x, y, CornerType.TopLeft, useMoreAccurateCalculations);
+
+                    // Only update the right/bottom side vertices when necessary to avoid redundant recalculations.
+                    if (x == 63)
+                        UpdateSurfaceVertexAbnormal(x, y, CornerType.TopRight, useMoreAccurateCalculations);
+                    if (y == 63)
+                        UpdateSurfaceVertexAbnormal(x, y, CornerType.BottomLeft, useMoreAccurateCalculations);
+                    if (x == 63 && y == 63)
+                        UpdateSurfaceVertexAbnormal(x, y, CornerType.BottomRight, useMoreAccurateCalculations);
+                }
             }
         }
 
