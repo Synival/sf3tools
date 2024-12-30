@@ -69,10 +69,5 @@ namespace SF3.Win {
         public bool ViewerDrawWireframe { get; set; } = true;
         public bool ViewerDrawHelp { get; set; } = true;
         public bool ViewerDrawNormals { get; set; } = false;
-
-        /// <summary>
-        /// When set, calculations for quad and vertex normals are more accurate than those used in SF3.
-        /// </summary>
-        public bool UseMoreAccurateNormalCalculations { get; set; } = false;
     }
 }

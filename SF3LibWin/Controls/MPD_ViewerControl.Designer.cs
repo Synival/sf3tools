@@ -29,13 +29,16 @@
             tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleNormals = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            tsbRecalculateLightmapOriginalMath = new System.Windows.Forms.ToolStripButton();
+            tsbUpdateLightmapUpdatedMath = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbToggleWireframe, tsbToggleHelp, toolStripSeparator1, tsbToggleNormals });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbToggleWireframe, tsbToggleHelp, toolStripSeparator1, tsbToggleNormals, toolStripSeparator2, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(500, 31);
@@ -79,6 +82,31 @@
             tsbToggleNormals.ToolTipText = "Show Normal Map";
             tsbToggleNormals.Click += tsbToggleNormals_Click;
             // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
+            // 
+            // tsbRecalculateLightmapOriginalMath
+            // 
+            tsbRecalculateLightmapOriginalMath.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbRecalculateLightmapOriginalMath.Image = (System.Drawing.Image) resources.GetObject("tsbRecalculateLightmapOriginalMath.Image");
+            tsbRecalculateLightmapOriginalMath.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbRecalculateLightmapOriginalMath.Name = "tsbRecalculateLightmapOriginalMath";
+            tsbRecalculateLightmapOriginalMath.Size = new System.Drawing.Size(28, 28);
+            tsbRecalculateLightmapOriginalMath.Text = "Recalculate Lightmap (Original Math)";
+            tsbRecalculateLightmapOriginalMath.Click += tsbRecalculateLightmapOriginalMath_Click;
+            // 
+            // tsbUpdateLightmapUpdatedMath
+            // 
+            tsbUpdateLightmapUpdatedMath.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbUpdateLightmapUpdatedMath.Image = (System.Drawing.Image) resources.GetObject("tsbUpdateLightmapUpdatedMath.Image");
+            tsbUpdateLightmapUpdatedMath.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbUpdateLightmapUpdatedMath.Name = "tsbUpdateLightmapUpdatedMath";
+            tsbUpdateLightmapUpdatedMath.Size = new System.Drawing.Size(28, 28);
+            tsbUpdateLightmapUpdatedMath.Text = "Update Lightmap (Updated Math)";
+            tsbUpdateLightmapUpdatedMath.Click += tsbUpdateLightmapUpdatedMath_Click;
+            // 
             // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -99,5 +127,8 @@
         private System.Windows.Forms.ToolStripButton tsbToggleHelp;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton tsbToggleNormals;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton tsbRecalculateLightmapOriginalMath;
+        private System.Windows.Forms.ToolStripButton tsbUpdateLightmapUpdatedMath;
     }
 }

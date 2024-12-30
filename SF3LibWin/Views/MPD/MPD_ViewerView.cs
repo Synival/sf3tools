@@ -1,4 +1,6 @@
-﻿using SF3.Models.Files.MPD;
+﻿using System;
+using System.Windows.Forms;
+using SF3.Models.Files.MPD;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views.MPD {
@@ -7,15 +9,11 @@ namespace SF3.Win.Views.MPD {
             Model = model;
         }
 
-        public void UpdateMap() {
-            var textureData = Model.TileSurfaceCharacterRows?.Make2DTextureData();
-            ViewerGLControl.UpdateSurfaceModels(
-                textureData,
-                Model.TextureChunks,
-                Model.TextureAnimations,
-                Model.TileSurfaceHeightmapRows?.Rows,
-                Model.TileSurfaceVertexNormalMeshBlocks?.Rows
-            );
+        public override Control Create() {
+            var rval = base.Create();
+            if (ViewerControl != null)
+                ViewerControl.Model = Model;
+            return rval;
         }
 
         public override void RefreshContent() {
@@ -24,6 +22,8 @@ namespace SF3.Win.Views.MPD {
 
             // TODO: how to refresh???
         }
+
+        public void UpdateMap() => ViewerControl.UpdateMap();
 
         public IMPD_File Model { get; }
 

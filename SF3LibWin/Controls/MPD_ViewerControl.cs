@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
@@ -19,6 +20,7 @@ namespace SF3.Win.Controls {
             tsbToggleNormals.Checked   = GLControl.DrawNormals;
         }
 
+        public IMPD_File Model { get; set; }
         public MPD_ViewerGLControl GLControl { get; }
 
         private void tsbToggleWireframe_Click(object sender, EventArgs e) {
@@ -34,6 +36,36 @@ namespace SF3.Win.Controls {
         private void tsbToggleNormals_Click(object sender, EventArgs e) {
             GLControl.DrawNormals = !GLControl.DrawNormals;
             tsbToggleNormals.Checked = GLControl.DrawNormals;
+        }
+
+        public void UpdateMap() {
+            if (Model == null)
+                return;
+
+            var textureData = Model.TileSurfaceCharacterRows?.Make2DTextureData();
+            GLControl.UpdateSurfaceModels(
+                textureData,
+                Model.TextureChunks,
+                Model.TextureAnimations,
+                Model.TileSurfaceHeightmapRows?.Rows,
+                Model.TileSurfaceVertexNormalMeshBlocks?.Rows
+            );
+        }
+
+        private void tsbRecalculateLightmapOriginalMath_Click(object sender, EventArgs e) {
+            if (Model == null)
+                return;
+
+            Model.UpdateSurfaceVertexAbnormals(false);
+            UpdateMap();
+        }
+
+        private void tsbUpdateLightmapUpdatedMath_Click(object sender, EventArgs e) {
+            if (Model == null)
+                return;
+
+            Model.UpdateSurfaceVertexAbnormals(true);
+            UpdateMap();
         }
     }
 }
