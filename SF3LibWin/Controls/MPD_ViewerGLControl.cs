@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Extensions;
+using CommonLib.Types;
 using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
@@ -328,15 +329,16 @@ namespace SF3.Win.Controls {
             var untexturedSurfaceQuads = new List<Quad>();
             var surfaceSelectionQuads  = new List<Quad>();
 
-            Vector3 GetVertexNormal(int x, int y, int vertexX, int vertexY) {
-                if (vertexNormals == null)
-                    return new Vector3(0.0f, 1 / 32768.0f, 0.0f);
+            Vector3 GetVertexAbnormal(int tileX, int tileY, CornerType corner) {
+                // Blocks are upside-down.
+                var vertexX = tileX;
+                var vertexY = 63 - tileY;
 
-                var blockNum = (y / 4) * 16 + (x / 4);
+                var blockNum = (vertexY / 4) * 16 + (vertexX / 4);
                 var block = vertexNormals[blockNum];
 
-                var xInBlock = x % 4 + vertexX;
-                var yInBlock = y % 4 + vertexY;
+                var xInBlock = vertexX % 4 + corner.GetX();
+                var yInBlock = vertexY % 4 + (1 - corner.GetY());
                 var normal = block[xInBlock, yInBlock];
 
                 return normal.ToVector3();
@@ -361,32 +363,32 @@ namespace SF3.Win.Controls {
                         }
                     }
 
-                    var normalVertices = new Vector3[] {
-                        GetVertexNormal(x, 63 - y, 0, 1),
-                        GetVertexNormal(x, 63 - y, 1, 1),
-                        GetVertexNormal(x, 63 - y, 1, 0),
-                        GetVertexNormal(x, 63 - y, 0, 0),
+                    var vertexAbnormals = new Vector3[] {
+                        GetVertexAbnormal(x, y, CornerType.TopLeft),
+                        GetVertexAbnormal(x, y, CornerType.TopRight),
+                        GetVertexAbnormal(x, y, CornerType.BottomRight),
+                        GetVertexAbnormal(x, y, CornerType.BottomLeft),
                     };
-                    var normalVboData = normalVertices.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
+                    var abnormalVboData = vertexAbnormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
                     var vertices = GetTileVertices(new Point(x, y));
                     if (anim != null) {
                         var newQuad = new Quad(vertices, anim, textureFlags);
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, abnormalVboData));
                         surfaceQuads.Add(newQuad);
                     }
                     else {
                         var newQuad = new Quad(vertices);
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, abnormalVboData));
                         untexturedSurfaceQuads.Add(newQuad);
                     }
 
                     surfaceSelectionQuads.Add(new Quad(vertices, new Vector3(x / (float) WidthInTiles, y / (float) HeightInTiles, 0)));
                     _debugText[x, y] =
-                        "  [" + (x - 0.5) + ", " + (y - 0.5) + "] Pos: " + vertices[0] + ", Normal: " + normalVertices[0] + "\n" +
-                        "  [" + (x + 0.5) + ", " + (y - 0.5) + "] Pos: " + vertices[1] + ", Normal: " + normalVertices[1] + "\n" +
-                        "  [" + (x + 0.5) + ", " + (y + 0.5) + "] Pos: " + vertices[2] + ", Normal: " + normalVertices[2] + "\n" +
-                        "  [" + (x - 0.5) + ", " + (y + 0.5) + "] Pos: " + vertices[3] + ", Normal: " + normalVertices[3] + "\n";
+                        "  [" + (x - 0.5) + ", " + (y - 0.5) + "] Pos: " + vertices[0] + ", Normal: " + vertexAbnormals[0] + "\n" +
+                        "  [" + (x + 0.5) + ", " + (y - 0.5) + "] Pos: " + vertices[1] + ", Normal: " + vertexAbnormals[1] + "\n" +
+                        "  [" + (x + 0.5) + ", " + (y + 0.5) + "] Pos: " + vertices[2] + ", Normal: " + vertexAbnormals[2] + "\n" +
+                        "  [" + (x - 0.5) + ", " + (y + 0.5) + "] Pos: " + vertices[3] + ", Normal: " + vertexAbnormals[3] + "\n";
                 }
             }
 

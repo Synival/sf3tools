@@ -386,7 +386,7 @@ namespace SF3.Models.Files.MPD {
             void TryAddQuadNormal(int vx, int vy) {
                 if (vx >= 0 && vy >= 0 && vx <= 63 && vy <= 63) {
                     var heights = heightmap[vy].GetHeights(vx);
-                    var quad = new QUAD(new VECTOR[] {
+                    var quad = new POLYGON(new VECTOR[] {
                         new VECTOR(0.00f, heights[0], 0.00f),
                         new VECTOR(1.00f, heights[1], 0.00f),
                         new VECTOR(1.00f, heights[2], 1.00f),

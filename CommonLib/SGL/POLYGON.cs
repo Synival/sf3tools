@@ -3,8 +3,8 @@ using System.Linq;
 using CommonLib.Types;
 
 namespace CommonLib.SGL {
-    public class QUAD {
-        public QUAD(VECTOR[] vertices) {
+    public class POLYGON {
+        public POLYGON(VECTOR[] vertices) {
             if (vertices.Length != 4)
                 throw new ArgumentException(nameof(vertices));
             Vertices = vertices;

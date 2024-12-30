@@ -2,7 +2,7 @@
 
 namespace CommonLib.Tests.SGL {
     [TestClass]
-    public class QUADTests {
+    public class POLYGONTests {
         const float c_minDelta = 0.00025f;
         const bool c_useMoreAccurateMath = true;
 
@@ -14,7 +14,7 @@ namespace CommonLib.Tests.SGL {
 
         [TestMethod]
         public void GetAbnormal_With000Slope_ReturnsExpectedAbnormal() {
-            var quad = new QUAD([
+            var quad = new POLYGON([
                 new(10, 20, 30),
                 new(11, 20, 30),
                 new(11, 20, 31),
@@ -28,7 +28,7 @@ namespace CommonLib.Tests.SGL {
 
         [TestMethod]
         public void GetAbnormal_With025Slope_ReturnsExpectedAbnormal() {
-            var quad = new QUAD([
+            var quad = new POLYGON([
                 new(10, 20.25f, 30),
                 new(11, 20.25f, 30),
                 new(11, 20.00f, 31),
@@ -42,7 +42,7 @@ namespace CommonLib.Tests.SGL {
 
         [TestMethod]
         public void GetAbnormal_With050Slope_ReturnsExpectedAbnormal() {
-            var quad = new QUAD([
+            var quad = new POLYGON([
                 new(10, 20.5f, 30),
                 new(11, 20.5f, 30),
                 new(11, 20.0f, 31),
@@ -56,7 +56,7 @@ namespace CommonLib.Tests.SGL {
 
         [TestMethod]
         public void GetAbnormal_With100Slope_ReturnsExpectedAbnormal() {
-            var quad = new QUAD([
+            var quad = new POLYGON([
                 new(10, 21, 30),
                 new(11, 21, 30),
                 new(11, 20, 31),
@@ -70,7 +70,7 @@ namespace CommonLib.Tests.SGL {
 
         [TestMethod]
         public void GetAbnormal_With150Slope_ReturnsExpectedAbnormal() {
-            var quad = new QUAD([
+            var quad = new POLYGON([
                 new(10, 21.5f, 30),
                 new(11, 21.5f, 30),
                 new(11, 20.0f, 31),
@@ -84,7 +84,7 @@ namespace CommonLib.Tests.SGL {
 
         [TestMethod]
         public void GetAbnormal_With200Slope_ReturnsExpectedAbnormal() {
-            var quad = new QUAD([
+            var quad = new POLYGON([
                 new(10, 22.0f, 30),
                 new(11, 22.0f, 30),
                 new(11, 20.0f, 31),
@@ -98,25 +98,25 @@ namespace CommonLib.Tests.SGL {
 
         [TestMethod]
         public void GetAbnormal_CheckNESW_ReturnsExpectedAbnormal() {
-            var quadN = new QUAD([
+            var quadN = new POLYGON([
                 new(10, 21, 30),
                 new(11, 21, 30),
                 new(11, 20, 31),
                 new(10, 20, 31),
             ]);
-            var quadE = new QUAD([
+            var quadE = new POLYGON([
                 new(10, 20, 30),
                 new(11, 21, 30),
                 new(11, 21, 31),
                 new(10, 20, 31),
             ]);
-            var quadS = new QUAD([
+            var quadS = new POLYGON([
                 new(10, 20, 30),
                 new(11, 20, 30),
                 new(11, 21, 31),
                 new(10, 21, 31),
             ]);
-            var quadW = new QUAD([
+            var quadW = new POLYGON([
                 new(10, 21, 30),
                 new(11, 20, 30),
                 new(11, 20, 31),
@@ -136,7 +136,7 @@ namespace CommonLib.Tests.SGL {
 
         [TestMethod]
         public void GetNormal_With000Slope_ReturnsExpectedNormal() {
-            var quad = new QUAD([
+            var quad = new POLYGON([
                 new(10, 20, 30),
                 new(11, 20, 30),
                 new(11, 20, 31),
@@ -150,7 +150,7 @@ namespace CommonLib.Tests.SGL {
 
         [TestMethod]
         public void GetNormal_With100Slope_ReturnsExpectedNormal() {
-            var quad = new QUAD([
+            var quad = new POLYGON([
                 new(10, 21, 30),
                 new(11, 21, 30),
                 new(11, 20, 31),
