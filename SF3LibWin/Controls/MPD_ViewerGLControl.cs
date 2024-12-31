@@ -297,7 +297,27 @@ namespace SF3.Win.Controls {
         }
 
         private Vector3[] GetTileVertices(Point pos) {
-            var heights = Model.TileSurfaceHeightmapRows?.Rows[pos.Y]?.GetHeights(pos.X) ?? [0, 0, 0, 0];
+            float[] heights;
+
+            // For any tile whose character/texture ID has flag 0x80, the walking heightmap is used.
+            if (Model.TileSurfaceHeightmapRows != null && (Model.TileSurfaceCharacterRows?.Rows[pos.Y]?.GetTextureFlags(pos.X) & 0x80) == 0x80)
+                heights = Model.TileSurfaceHeightmapRows.Rows[pos.Y].GetHeights(pos.X);
+            // Otherwise, gather heights from the 5x5 block with the surface mesh's heightmap.
+            else if (Model.TileSurfaceVertexHeightMeshBlocks != null) {
+                var blockLocations = new BlockVertexLocation[] {
+                    GetBlockLocations(pos.X, pos.Y, CornerType.TopLeft,     true)[0],
+                    GetBlockLocations(pos.X, pos.Y, CornerType.TopRight,    true)[0],
+                    GetBlockLocations(pos.X, pos.Y, CornerType.BottomRight, true)[0],
+                    GetBlockLocations(pos.X, pos.Y, CornerType.BottomLeft,  true)[0],
+                };
+
+                heights = blockLocations
+                    .Select(x => Model.TileSurfaceVertexHeightMeshBlocks.Rows[x.Num][x.X, x.Y] / 16.0f)
+                    .ToArray();
+            }
+            else
+                heights = [0, 0, 0, 0];
+
             return [
                 (pos.X + 0 + c_offX, heights[0], pos.Y + 0 + c_offY),
                 (pos.X + 1 + c_offX, heights[1], pos.Y + 0 + c_offY),
