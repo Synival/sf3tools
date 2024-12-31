@@ -20,7 +20,18 @@ namespace SF3.Win.Controls {
             tsbToggleNormals.Checked   = GLControl.DrawNormals;
         }
 
-        public IMPD_File Model { get; set; }
+        private IMPD_File _model = null;
+
+        public IMPD_File Model {
+            get => _model;
+            set {
+                if (value != _model) {
+                    _model = value;
+                    GLControl.Model = value;
+                }
+            }
+        }
+
         public MPD_ViewerGLControl GLControl { get; }
 
         private void tsbToggleWireframe_Click(object sender, EventArgs e) {
@@ -42,14 +53,7 @@ namespace SF3.Win.Controls {
             if (Model == null)
                 return;
 
-            var textureData = Model.TileSurfaceCharacterRows?.Make2DTextureData();
-            GLControl.UpdateSurfaceModels(
-                textureData,
-                Model.TextureChunks,
-                Model.TextureAnimations,
-                Model.TileSurfaceHeightmapRows?.Rows,
-                Model.TileSurfaceVertexNormalMeshBlocks?.Rows
-            );
+            GLControl.UpdateSurfaceModels();
         }
 
         private void tsbRecalculateLightmapOriginalMath_Click(object sender, EventArgs e) {

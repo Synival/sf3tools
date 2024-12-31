@@ -282,28 +282,19 @@ namespace SF3.Win.Controls {
         }
 
         private Vector3[] GetTileVertices(Point pos) {
+            var heights = Model.TileSurfaceHeightmapRows?.Rows[pos.Y]?.GetHeights(pos.X) ?? [0, 0, 0, 0];
             return [
-                (pos.X + 0 + c_offX, _heightmap[pos.X, pos.Y][0], pos.Y + 0 + c_offY),
-                (pos.X + 1 + c_offX, _heightmap[pos.X, pos.Y][1], pos.Y + 0 + c_offY),
-                (pos.X + 1 + c_offX, _heightmap[pos.X, pos.Y][2], pos.Y + 1 + c_offY),
-                (pos.X + 0 + c_offX, _heightmap[pos.X, pos.Y][3], pos.Y + 1 + c_offY)
+                (pos.X + 0 + c_offX, heights[0], pos.Y + 0 + c_offY),
+                (pos.X + 1 + c_offX, heights[1], pos.Y + 0 + c_offY),
+                (pos.X + 1 + c_offX, heights[2], pos.Y + 1 + c_offY),
+                (pos.X + 0 + c_offX, heights[3], pos.Y + 1 + c_offY)
             ];
         }
 
         private string[,] _debugText = new string[64, 64];
 
-        public void UpdateSurfaceModels(
-            ushort[,] textureData,
-            MPD_FileTextureChunk[] textureChunks,
-            TextureAnimationTable textureAnimations,
-            TileSurfaceHeightmapRow[] heightmap,
-            TileSurfaceVertexNormalMesh[] vertexNormals
-        ) {
+        public void UpdateSurfaceModels() {
             MakeCurrent();
-
-            for (var y = 0; y < HeightInTiles; y++)
-                for (var x = 0; x < WidthInTiles; x++)
-                    _heightmap[x, y] = heightmap[y].GetHeights(x);
 
             if (_surfaceModels != null) {
                 foreach (var model in _surfaceModels)
@@ -312,14 +303,14 @@ namespace SF3.Win.Controls {
                 _surfaceModels = null;
             }
 
-            var texturesById = (textureChunks != null) ? textureChunks
+            var texturesById = (Model.TextureChunks != null) ? Model.TextureChunks
                 .SelectMany(x => x.TextureTable.Rows)
                 .GroupBy(x => x.ID)
                 .Select(x => x.First())
                 .ToDictionary(x => x.ID, x => x.Texture)
                 : [];
 
-            var animationsById = (textureAnimations != null) ? textureAnimations.Rows
+            var animationsById = (Model.TextureAnimations != null) ? Model.TextureAnimations.Rows
                 .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
                 .ToDictionary(x => (int) x.TextureID, x => x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray())
@@ -330,12 +321,15 @@ namespace SF3.Win.Controls {
             var surfaceSelectionQuads  = new List<Quad>();
 
             Vector3 GetVertexAbnormal(int tileX, int tileY, CornerType corner) {
+                if (Model.TileSurfaceVertexNormalMeshBlocks?.Rows == null)
+                    return new Vector3(0, 1 / 32768f, 0);
+
                 // Blocks are upside-down.
                 var vertexX = tileX;
                 var vertexY = 63 - tileY;
 
                 var blockNum = (vertexY / 4) * 16 + (vertexX / 4);
-                var block = vertexNormals[blockNum];
+                var block = Model.TileSurfaceVertexNormalMeshBlocks.Rows[blockNum];
 
                 var xInBlock = vertexX % 4 + corner.GetX();
                 var yInBlock = vertexY % 4 + (1 - corner.GetY());
@@ -344,6 +338,7 @@ namespace SF3.Win.Controls {
                 return normal.ToVector3();
             };
 
+            var textureData = Model.TileSurfaceCharacterRows?.Make2DTextureData();
             for (var y = 0; y < WidthInTiles; y++) {
                 for (var x = 0; x < HeightInTiles; x++) {
                     TextureAnimation anim = null;
@@ -419,6 +414,8 @@ namespace SF3.Win.Controls {
             Pitch = -MathHelper.RadiansToDegrees((float) Math.Atan2(posMinusTarget.Y, double.Hypot(posMinusTarget.X, posMinusTarget.Z)));
             Yaw   =  MathHelper.RadiansToDegrees((float) Math.Atan2(posMinusTarget.X, posMinusTarget.Z));
         }
+
+        public IMPD_File Model { get; set; }
 
         /// <summary>
         /// Position of the camera
@@ -808,8 +805,6 @@ namespace SF3.Win.Controls {
         }
 
         private Timer _timer = null;
-
-        private float[,][] _heightmap = new float[WidthInTiles, HeightInTiles][];
 
         private Texture _tileWireframeTexture = null;
         private Texture _whiteTexture         = null;
