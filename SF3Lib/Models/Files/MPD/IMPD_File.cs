@@ -98,6 +98,7 @@ namespace SF3.Models.Files.MPD {
 
         TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; }
         TileSurfaceVertexNormalMeshBlocks TileSurfaceVertexNormalMeshBlocks { get; }
+        TileSurfaceVertexHeightMeshBlocks TileSurfaceVertexHeightMeshBlocks { get; }
         TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; }
         TileHeightTerrainRowTable TileHeightTerrainRows { get; }
         TileItemRowTable TileItemRows { get; }

@@ -42,6 +42,6 @@ namespace SF3.Models.Structs.MPD {
 
         public int BlockX { get; }
         public int BlockY { get; }
-        public int BlockNum { get; }
+        public int BlockNum => ID;
     }
 }

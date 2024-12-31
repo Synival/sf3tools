@@ -191,6 +191,7 @@ namespace SF3.Models.Files.MPD {
             if (SurfaceChunkData?.Length >= 64 * 64 * 2) {
                 tables.Add(TileSurfaceCharacterRows          = new TileSurfaceCharacterRowTable     (SurfaceChunkData.DecompressedData, 0x0000));
                 tables.Add(TileSurfaceVertexNormalMeshBlocks = new TileSurfaceVertexNormalMeshBlocks(SurfaceChunkData.DecompressedData, 0x2000));
+                tables.Add(TileSurfaceVertexHeightMeshBlocks = new TileSurfaceVertexHeightMeshBlocks(SurfaceChunkData.DecompressedData, 0xB600));
             }
 
             TextureChunks = new MPD_FileTextureChunk[5];
@@ -483,6 +484,9 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public TileSurfaceVertexNormalMeshBlocks TileSurfaceVertexNormalMeshBlocks { get; private set; }
+
+        [BulkCopyRecurse]
+        public TileSurfaceVertexHeightMeshBlocks TileSurfaceVertexHeightMeshBlocks { get; private set; }
 
         [BulkCopyRecurse]
         public TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; private set; }
