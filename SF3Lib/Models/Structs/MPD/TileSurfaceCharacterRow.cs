@@ -1,3 +1,4 @@
+using System;
 using CommonLib.Attributes;
 using SF3.RawData;
 
@@ -21,6 +22,16 @@ namespace SF3.Models.Structs.MPD {
                 tiles[i] = (ushort) Data.GetWord(xAddress[i]);
             return tiles;
         }
+
+        public byte GetTextureFlags(int x)
+            => (byte) ((this[x] >> 8) & 0xFF);
+        public void SetTextureFlags(int x, byte value)
+            => this[x] = (this[x] & 0xFF) + (value << 8);
+
+        public byte GetTextureID(int x)
+            => (byte) (this[x] & 0xFF);
+        public void SetTextureID(int x, byte value)
+            => this[x] = (this[x] & 0xFF00) + value;
 
         public int this[int index] {
             get => Data.GetWord(xAddress[index]);

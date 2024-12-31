@@ -1,3 +1,4 @@
+using System;
 using CommonLib.Attributes;
 using SF3.RawData;
 
@@ -15,6 +16,16 @@ namespace SF3.Models.Structs.MPD {
             get => Data.GetWord(xAddress[index]);
             set => Data.SetWord(xAddress[index], value);
         }
+
+        public float GetHeight(int x)
+            => ((this[x] >> 8) & 0xFF) / 16f;
+        public void SetHeight(int x, float value)
+            => this[x] = (this[x] & 0xFF) + (((int) (value * 16f)) << 8);
+
+        public byte GetTerrainType(int x)
+            => (byte) (this[x] & 0xFF);
+        public void SetTerrainType(int x, byte value)
+            => this[x] = (this[x] & 0xFF00) + value;
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {
             public TileMetadataAttribute(int x) : base(displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X4", minWidth: 50) { }

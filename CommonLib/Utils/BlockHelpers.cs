@@ -23,7 +23,19 @@ namespace CommonLib.Utils {
             public int Num;
             public int X;
             public int Y;
+
+            public override string ToString()
+                => Num + "[" + X + ", " + Y + "]";
         }
+
+        /// <summary>
+        /// Retrieves the block number for a requested tile.
+        /// </summary>
+        /// <param name="tileX">X coordinate of the requested tile.</param>
+        /// <param name="tileY">Y coordinate of the requested tile.</param>
+        /// <returns>The block number for the requested tile.</returns>
+        public static int TileToBlockNum(int tileX, int tileY)
+            => (tileX / 4) + ((63 - tileY) / 4) * 16;
 
         /// <summary>
         /// Converts a tile X coordinate and corner to a vertex coordinate.
@@ -49,10 +61,11 @@ namespace CommonLib.Utils {
         /// <param name="tileX">X coordinate of a tile.</param>
         /// <param name="tileY">Y coordinate of a tile.</param>
         /// <param name="corner">Corner of the tile referenced by 'tileX' and 'tileY'.</param>
+        /// <param name="onlyInBlock">If 'true', only the location in the block belonging to 'tileX' and 'tileY' will be returned.</param>
         /// <returns>A set of shared block vertex locations for the tile's corner.</returns>
-        public static BlockVertexLocation[] GetBlockLocations(int tileX, int tileY, CornerType corner)
+        public static BlockVertexLocation[] GetBlockLocations(int tileX, int tileY, CornerType corner, bool onlyInBlock = false)
             // Get the vertex position for the entire mesh. Blocks are upside-down, so correct for this.
-            => GetBlockLocations(tileX + corner.GetX(), 64 - (tileY + corner.GetY()));
+            => GetBlockLocations(tileX + corner.GetX(), 64 - (tileY + corner.GetY()), onlyInBlock ? TileToBlockNum(tileX, tileY) : (int?) null);
 
         /// <summary>
         /// Converts a vertex position to a set of shared block locations.
@@ -60,7 +73,7 @@ namespace CommonLib.Utils {
         /// <param name="tileX">X coordinate of a vertex.</param>
         /// <param name="tileY">Y coordinate of a vertex.</param>
         /// <returns>A set of shared block vertex locations for the vertex.</returns>
-        public static BlockVertexLocation[] GetBlockLocations(int vertexX, int vertexY) {
+        public static BlockVertexLocation[] GetBlockLocations(int vertexX, int vertexY, int? onlyInBlockNum = null) {
             if (vertexX < 0 || vertexY < 0 || vertexX > 64 || vertexY > 64)
                 return new BlockVertexLocation[0];
 
@@ -72,15 +85,21 @@ namespace CommonLib.Utils {
             int Clamp(int num, int min, int max) => Math.Min(Math.Max(num, min), max);
             int blockNum = (Clamp(vertexY, 0, 63) / 4) * 16 + (Clamp(vertexX, 0, 63) / 4);
 
-            var locations = new List<BlockVertexLocation>() { new BlockVertexLocation(blockNum, bx, by) };
+            var locations = new List<BlockVertexLocation>();
+
+            void AddBlockVertexLocation(int blockNum2, int bx2, int by2) {
+                if (onlyInBlockNum.HasValue ? (blockNum2 == onlyInBlockNum.Value) : true)
+                    locations.Add(new BlockVertexLocation(blockNum2, bx2, by2));
+            }
+            AddBlockVertexLocation(blockNum, bx, by);
 
             // If requesting the left/top sides (and not the overall edge), provide adjacent blocks.
             if (bx == 0 && vertexX > 0)
-                locations.Add(new BlockVertexLocation(blockNum - 1, 4, by));
+                AddBlockVertexLocation(blockNum - 1, 4, by);
             if (by == 0 && vertexY > 0)
-                locations.Add(new BlockVertexLocation(blockNum - 16, bx, 4));
+                AddBlockVertexLocation(blockNum - 16, bx, 4);
             if (bx == 0 && by == 0 && vertexX > 0 && vertexY > 0)
-                locations.Add(new BlockVertexLocation(blockNum - 17, 4, 4));
+                AddBlockVertexLocation(blockNum - 17, 4, 4);
 
             return locations.ToArray();
         }
