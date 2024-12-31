@@ -1,3 +1,4 @@
+using System;
 using CommonLib.Attributes;
 using SF3.RawData;
 
@@ -19,6 +20,12 @@ namespace SF3.Models.Structs.MPD {
         public float[] GetHeights(int x)
             => ConvertHeightsToFloatArray(this[x]);
 
+        public void SetHeights(int x, float[] heights) {
+            if (heights.Length != 4)
+                throw new ArgumentException(nameof(heights));
+            this[x] = ConvertFloatArrayToHeights(heights);
+        }
+
         public static float[] ConvertHeightsToFloatArray(uint heights) {
             return new[] {
                 ((heights >>  8) & 0xFF) / 16f,
@@ -26,6 +33,16 @@ namespace SF3.Models.Structs.MPD {
                 ((heights >> 24) & 0xFF) / 16f,
                 ((heights >> 16) & 0xFF) / 16f,
             };
+        }
+
+        public static uint ConvertFloatArrayToHeights(float[] heights) {
+            if (heights.Length != 4)
+                throw new ArgumentException(nameof(heights));
+            return
+                ((((uint) (heights[0] * 16f)) & 0xFF) << 8) +
+                ((((uint) (heights[1] * 16f)) & 0xFF) << 0) +
+                ((((uint) (heights[2] * 16f)) & 0xFF) << 24) +
+                ((((uint) (heights[3] * 16f)) & 0xFF) << 16);
         }
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {
