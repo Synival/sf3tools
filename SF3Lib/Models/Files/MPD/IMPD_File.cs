@@ -4,6 +4,7 @@ using CommonLib.Types;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.RawData;
+using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Models.Files.MPD {
     public class Chunk3Frame {
@@ -44,6 +45,21 @@ namespace SF3.Models.Files.MPD {
         /// <param name="corner">Corner of the tile whose vertex abnormal should be updated.</param>
         /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
         void UpdateSurfaceVertexAbnormal(int tileX, int tileY, CornerType corner, bool useMoreAccurateCalculations);
+
+        /// <summary>
+        /// Updates the vertex abnormal for a specific vertex in the vertex mesh.
+        /// </summary>
+        /// <param name="vertexX">X coordinate of the vertex.</param>
+        /// <param name="vertexY">Y coordinate of the vertex.</param>
+        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
+        void UpdateSurfaceVertexAbnormal(int vertexX, int vertexY, bool useMoreAccurateCalculations);
+
+        /// <summary>
+        /// Updates the vertex abnormals in several blocks at once.
+        /// </summary>
+        /// <param name="locations">The locations of blocks to update.</param>
+        /// <param name="abnormal">The abnormal to be set into each block location.</param>
+        void UpdateSurfaceVertexAbnormals(BlockVertexLocation[] locations, VECTOR abnormal);
 
         /// <summary>
         /// Recalculates vertex "abnormals" for a specific tile.

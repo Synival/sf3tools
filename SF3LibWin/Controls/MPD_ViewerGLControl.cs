@@ -11,6 +11,7 @@ using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL;
+using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerGLControl : GLControl {
@@ -335,21 +336,13 @@ namespace SF3.Win.Controls {
             var surfaceSelectionQuads  = new List<Quad>();
 
             Vector3 GetVertexAbnormal(int tileX, int tileY, CornerType corner) {
-                if (Model.TileSurfaceVertexNormalMeshBlocks?.Rows == null)
-                    return new Vector3(0, 1 / 32768f, 0);
+                var locations = GetBlockLocations(tileX, tileY, corner);
+                if (locations.Length == 0 || Model.TileSurfaceVertexNormalMeshBlocks?.Rows == null)
+                    return new Vector3(0f, 1 / 32768f, 0f);
 
-                // Blocks are upside-down.
-                var vertexX = tileX;
-                var vertexY = 63 - tileY;
-
-                var blockNum = (vertexY / 4) * 16 + (vertexX / 4);
-                var block = Model.TileSurfaceVertexNormalMeshBlocks.Rows[blockNum];
-
-                var xInBlock = vertexX % 4 + corner.GetX();
-                var yInBlock = vertexY % 4 + (1 - corner.GetY());
-                var normal = block[xInBlock, yInBlock];
-
-                return normal.ToVector3();
+                // The vertex abnormals SHOULD be the same, so just use the first one.
+                var loc = locations[0];
+                return Model.TileSurfaceVertexNormalMeshBlocks.Rows[loc.Num][loc.X, loc.Y].ToVector3();
             };
 
             var textureData = Model.TileSurfaceCharacterRows?.Make2DTextureData();
