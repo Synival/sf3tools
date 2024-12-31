@@ -337,10 +337,8 @@ namespace SF3.Models.Files.MPD {
                 if (chunkData != null && chunkData.IsCompressed && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified))
                     _ = chunkData.Recompress();
 
-                // Advance chunk position, enforcing an alignment of 4.
+                // Advance chunk position.
                 currentChunkPos += chunk.ChunkSize;
-                if (currentChunkPos % 4 != 0)
-                    currentChunkPos += 4 - currentChunkPos % 4;
             }
         }
 
