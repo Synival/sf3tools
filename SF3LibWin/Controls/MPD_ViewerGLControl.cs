@@ -9,8 +9,6 @@ using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD;
-using SF3.Models.Tables.MPD;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL;
 
@@ -22,6 +20,10 @@ namespace SF3.Win.Controls {
         private const float c_offX = WidthInTiles / -2f;
         private const float c_offY = HeightInTiles / -2f;
         private const MouseButtons c_MouseMiddleRight = MouseButtons.Middle | MouseButtons.Right;
+
+        private static Vector3? s_lastPosition  = null;
+        private static float? s_lastPitch       = null;
+        private static float? s_lastYaw         = null;
 
         public MPD_ViewerGLControl() {
             InitializeComponent();
@@ -97,8 +99,20 @@ namespace SF3.Win.Controls {
             _timer.Tick += (s, a) => IncrementFrame();
             _timer.Start();
 
-            Position = new Vector3(0, 60, 120);
-            LookAtTarget(new Vector3(0, 5, 0));
+            if (!s_lastPosition.HasValue)
+                s_lastPosition = Position = new Vector3(0, 60, 120);
+            else
+                Position = s_lastPosition.Value;
+
+            if (!s_lastPitch.HasValue || !s_lastYaw.HasValue) {
+                LookAtTarget(new Vector3(0, 5, 0));
+                s_lastPitch = Pitch;
+                s_lastYaw   = Yaw;
+            }
+            else {
+                Pitch = s_lastPitch.Value;
+                Yaw   = s_lastYaw.Value;
+            }
 
             UpdateFramebuffer();
 
@@ -417,20 +431,32 @@ namespace SF3.Win.Controls {
 
         public IMPD_File Model { get; set; }
 
+        private Vector3 _position = new Vector3(0, 0, 0);
+        private float _pitch = 0;
+        private float _yaw = 0;
+
         /// <summary>
         /// Position of the camera
         /// </summary>
-        public Vector3 Position { get; set; } = new Vector3(0, 0, 0);
-
-        private float _pitch = 0;
-        private float _yaw = 0;
+        public Vector3 Position {
+            get => _position;
+            set {
+                if (value != _position) {
+                    _position = value;
+                    s_lastPosition = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Pitch, in degrees
         /// </summary>
         public float Pitch {
             get => _pitch;
-            set => _pitch = Math.Clamp(value, -90, 90);
+            set {
+                _pitch = Math.Clamp(value, -90, 90);
+                s_lastPitch = _pitch;
+            }
         }
 
         /// <summary>
@@ -438,7 +464,10 @@ namespace SF3.Win.Controls {
         /// </summary>
         public float Yaw {
             get => _yaw;
-            set => _yaw = value - 360.0f * ((int) value / 360);
+            set {
+                _yaw = value - 360.0f * ((int) value / 360);
+                s_lastYaw = _yaw;
+            }
         }
 
         private MouseButtons _mouseButtons = MouseButtons.None;
