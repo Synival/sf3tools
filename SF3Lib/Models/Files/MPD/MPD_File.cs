@@ -49,16 +49,16 @@ namespace SF3.Models.Files.MPD {
             var header = MPDHeader.Rows[0];
 
             // Load palettes
-            Palettes = new ColorTable[3];
+            TexturePalettes = new ColorTable[3];
             if (header.OffsetPal1 > 0)
-                Palettes[0] = new ColorTable(Data, header.OffsetPal1 - c_RamOffset, 256);
+                TexturePalettes[0] = new ColorTable(Data, header.OffsetPal1 - c_RamOffset, 256);
             if (header.OffsetPal2 > 0)
-                Palettes[1] = new ColorTable(Data, header.OffsetPal2 - c_RamOffset, 256);
+                TexturePalettes[1] = new ColorTable(Data, header.OffsetPal2 - c_RamOffset, 256);
             if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 > 0)
-                Palettes[2] = new ColorTable(Data, MPDHeader.Rows[0].OffsetPal3 - c_RamOffset, 256);
+                TexturePalettes[2] = new ColorTable(Data, MPDHeader.Rows[0].OffsetPal3 - c_RamOffset, 256);
 
             // Create other tables from header offsets.
-            Offset1Table = header.Offset1 != 0 ? new UnknownUInt16Table(Data, header.Offset1 - c_RamOffset, 32) : null;
+            LightPalette = header.Offset1 != 0 ? new ColorTable(Data, header.Offset1 - c_RamOffset, 32) : null;
             Offset2Table = header.Offset2 != 0 ? new UnknownUInt32Table(Data, header.Offset2 - c_RamOffset, 1) : null;
             Offset3Table = header.Offset3 != 0 ? new UnknownUInt16Table(Data, header.Offset3 - c_RamOffset, 32) : null;
             Offset4Table = header.Offset4 != 0 ? new Offset4Table(Data, header.Offset4 - c_RamOffset) : null;
@@ -158,12 +158,12 @@ namespace SF3.Models.Files.MPD {
             if (TextureAnimations != null)
                 tables.Add(TextureAnimations);
 
-            for (var i = 0; i < Palettes.Length; i++)
-                if (Palettes[i] != null)
-                    tables.Add(Palettes[i]);
+            for (var i = 0; i < TexturePalettes.Length; i++)
+                if (TexturePalettes[i] != null)
+                    tables.Add(TexturePalettes[i]);
 
-            if (Offset1Table != null)
-                tables.Add(Offset1Table);
+            if (LightPalette != null)
+                tables.Add(LightPalette);
             if (Offset2Table != null)
                 tables.Add(Offset2Table);
             if (Offset3Table != null)
@@ -467,13 +467,13 @@ namespace SF3.Models.Files.MPD {
         public MPDHeaderTable MPDHeader { get; private set; }
 
         [BulkCopyRecurse]
-        public ColorTable[] Palettes { get; private set; }
+        public ColorTable[] TexturePalettes { get; private set; }
 
         [BulkCopyRecurse]
         public ChunkHeaderTable ChunkHeader { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt16Table Offset1Table { get; private set; }
+        public ColorTable LightPalette { get; private set; }
 
         [BulkCopyRecurse]
         public UnknownUInt32Table Offset2Table { get; private set; }

@@ -82,9 +82,9 @@ namespace SF3.Models.Files.MPD {
         IChunkData SurfaceChunkData { get; }
 
         MPDHeaderTable MPDHeader { get; }
-        ColorTable[] Palettes { get; }
+        ColorTable[] TexturePalettes { get; }
         ChunkHeaderTable ChunkHeader { get; }
-        UnknownUInt16Table Offset1Table { get; }
+        ColorTable LightPalette { get; }
         UnknownUInt32Table Offset2Table { get; }
         UnknownUInt16Table Offset3Table { get; }
         Offset4Table Offset4Table { get; }

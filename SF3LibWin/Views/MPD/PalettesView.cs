@@ -10,8 +10,9 @@ namespace SF3.Win.Views.MPD {
         public override Control Create() {
             if (base.Create() == null)
                 return null;
-            for (var i = 0; i < Model.Palettes.Length; i++)
-                CreateChild(new TableView("Palette" + (i + 1).ToString(), Model.Palettes[i], Model.NameGetterContext));
+            CreateChild(new TableView("Light Palette", Model.LightPalette, Model.NameGetterContext));
+            for (var i = 0; i < Model.TexturePalettes.Length; i++)
+                CreateChild(new TableView("Texture Palette " + (i + 1).ToString(), Model.TexturePalettes[i], Model.NameGetterContext));
             return Control;
         }
 
