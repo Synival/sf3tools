@@ -104,6 +104,13 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
+            // Remember original offsets for chunks so we can preserve their positions in the chunk header.
+            // TODO: this doesn't account for chunks growing larger :(
+            // TODO: shouldn't need this at all when moving chunks is working.
+            _originalChunkOffset = new int[chunks.Length];
+            for (var i = 0; i < _originalChunkOffset.Length; i++)
+                _originalChunkOffset[i] = ((ByteArraySegment) (ChunkData[i]?.Data))?.Offset ?? 0;
+
             // We should have all the uncompressed data now. Update read-only info of our chunk table.
             for (var i = 0; i < chunks.Length; i++) {
                 ChunkHeader.Rows[i].CompressionType =
@@ -316,10 +323,10 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        private void RebuildChunkTable(bool onlyModified) {
-            // We'll need to completely rewrite this file. Start by recompressing chunks.
-            var currentChunkPos = 0x2100;
+        // TODO: shouldn't need this at all when moving chunks is working.
+        private int[] _originalChunkOffset;
 
+        private void RebuildChunkTable(bool onlyModified) {
             for (var i = 0; i < ChunkData.Length; i++) {
                 var chunk = ChunkHeader.Rows[i];
                 if (!chunk.Exists)
@@ -328,16 +335,21 @@ namespace SF3.Models.Files.MPD {
                 var chunkData = ChunkData[i];
                 var chunkByteArray = (ByteArraySegment) chunkData?.Data;
 
+                // TODO: shouldn't need this at all when moving chunks is working.
+                if (chunkByteArray != null) {
+                    if (chunkByteArray.Offset < _originalChunkOffset[i])
+                        chunkByteArray.ParentArray.ExpandOrContractAt(chunkByteArray.Offset, _originalChunkOffset[i] - chunkByteArray.Offset);
+                    else if (chunkByteArray.Offset > _originalChunkOffset[i])
+                        ; // TODO: scroll panes get super broken in this case!!
+                }
+
                 // Enforce alignment by inserting bytes where necessary before this chunk begins.
-                if (chunkByteArray != null && chunkByteArray.Offset < currentChunkPos)
-                    chunkByteArray.ParentArray.ExpandOrContractAt(chunkByteArray.Offset, currentChunkPos - chunkByteArray.Offset);
+                if (chunkByteArray != null && chunkByteArray.Offset % 4 != 0)
+                    chunkByteArray.ParentArray.ExpandOrContractAt(chunkByteArray.Offset, 4 - (chunkByteArray.Offset % 4));
 
                 // Finish compressed chunks.
                 if (chunkData != null && chunkData.IsCompressed && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified))
                     _ = chunkData.Recompress();
-
-                // Advance chunk position.
-                currentChunkPos += chunk.ChunkSize;
             }
         }
 
