@@ -89,6 +89,7 @@ namespace SF3.Win.Controls {
             _solidShader      = new Shader("Shaders/Solid.vert",      "Shaders/Solid.frag");
             _normalsShader    = new Shader("Shaders/Normals.vert",    "Shaders/Normals.frag");
             _wireframeShader  = new Shader("Shaders/Wireframe.vert",  "Shaders/Wireframe.frag");
+            _objectShader     = new Shader("Shaders/Object.vert",     "Shaders/Object.frag");
 
             _whiteTexture         = new Texture((Bitmap) Image.FromFile("Images/White.bmp"));
             _transparentTexture   = new Texture((Bitmap) Image.FromFile("Images/Transparent.bmp"));
@@ -118,7 +119,7 @@ namespace SF3.Win.Controls {
             UpdateFramebuffer();
 
             _textures = [_whiteTexture, _transparentTexture, _tileWireframeTexture, _tileHoverTexture, _helpTexture];
-            _shaders  = [_textureShader, _twoTextureShader, _solidShader, _normalsShader, _wireframeShader];
+            _shaders  = [_textureShader, _twoTextureShader, _solidShader, _normalsShader, _wireframeShader, _objectShader];
 
             foreach (var shader in _shaders)
                 UpdateShaderModelMatrix(shader, Matrix4.Identity);
@@ -220,52 +221,54 @@ namespace SF3.Win.Controls {
         private void DrawScene() {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            using (_textureShader.Use()) {
-                if (_surfaceModel != null || _untexturedSurfaceModel != null) {
-                    if (_drawNormals) {
+            if (_surfaceModel != null || _untexturedSurfaceModel != null) {
+                if (_drawNormals) {
+                    using (_normalsShader.Use()) {
                         _surfaceModel?.Draw(_normalsShader, false);
                         _untexturedSurfaceModel?.Draw(_normalsShader, false);
                     }
-                    else
-                        _surfaceModel?.Draw(_textureShader);
+                }
+                else
+                    _surfaceModel?.Draw(_objectShader);
 
-                    if (DrawWireframe) {
-                        GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-                        GL.DepthFunc(DepthFunction.Lequal);
+                if (DrawWireframe) {
+                    GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+                    GL.DepthFunc(DepthFunction.Lequal);
 
-                        using (_wireframeShader.Use())
-                        using (_tileWireframeTexture.Use(TextureUnit.Texture1)) {
-                            UpdateShaderModelMatrix(_wireframeShader, Matrix4.CreateTranslation(0f, 0.02f, 0f));
-                            _untexturedSurfaceModel?.Draw(_wireframeShader, false);
-                            _surfaceModel?.Draw(_wireframeShader, false);
-                            UpdateShaderModelMatrix(_wireframeShader, Matrix4.Identity);
-                        }
-
-                        GL.DepthFunc(DepthFunction.Less);
-                        GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+                    using (_wireframeShader.Use())
+                    using (_tileWireframeTexture.Use(TextureUnit.Texture1)) {
+                        UpdateShaderModelMatrix(_wireframeShader, Matrix4.CreateTranslation(0f, 0.02f, 0f));
+                        _untexturedSurfaceModel?.Draw(_wireframeShader, false);
+                        _surfaceModel?.Draw(_wireframeShader, false);
+                        UpdateShaderModelMatrix(_wireframeShader, Matrix4.Identity);
                     }
+
+                    GL.DepthFunc(DepthFunction.Less);
+                    GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
                 }
 
-                if (_tileModel != null) {
-                    GL.Disable(EnableCap.DepthTest);
-                    using (_tileHoverTexture.Use())
-                        _tileModel.Draw(_textureShader);
-                    GL.Enable(EnableCap.DepthTest);
-                }
+                using (_textureShader.Use()) {
+                    if (_tileModel != null) {
+                        GL.Disable(EnableCap.DepthTest);
+                        using (_tileHoverTexture.Use())
+                            _tileModel.Draw(_textureShader);
+                        GL.Enable(EnableCap.DepthTest);
+                    }
 
-                if (DrawHelp && _helpModel != null) {
-                    const float c_viewSize = 0.20f;
-                    UpdateShaderViewMatrix(_textureShader,
-                        Matrix4.CreateScale((float) Height / Width * 2f * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
-                        Matrix4.CreateTranslation(1, -1, 0) *
-                        _projectionMatrix.Inverted());
+                    if (DrawHelp && _helpModel != null) {
+                        const float c_viewSize = 0.20f;
+                        UpdateShaderViewMatrix(_textureShader,
+                            Matrix4.CreateScale((float) Height / Width * 2f * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
+                            Matrix4.CreateTranslation(1, -1, 0) *
+                            _projectionMatrix.Inverted());
 
-                    GL.Disable(EnableCap.DepthTest);
-                    using (_helpTexture.Use())
-                        _helpModel.Draw(_textureShader);
-                    GL.Enable(EnableCap.DepthTest);
+                        GL.Disable(EnableCap.DepthTest);
+                        using (_helpTexture.Use())
+                            _helpModel.Draw(_textureShader);
+                        GL.Enable(EnableCap.DepthTest);
 
-                    UpdateShaderViewMatrix(_textureShader, _viewMatrix);
+                        UpdateShaderViewMatrix(_textureShader, _viewMatrix);
+                    }
                 }
             }
 
@@ -792,6 +795,7 @@ namespace SF3.Win.Controls {
         private Shader _solidShader;
         private Shader _normalsShader;
         private Shader _wireframeShader;
+        private Shader _objectShader;
 
         private Framebuffer _selectFramebuffer;
 
