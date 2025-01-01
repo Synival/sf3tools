@@ -28,7 +28,8 @@ namespace CommonLib.SGL {
                 GetCornerNormal(CornerType.BottomLeft),
             };
 
-            return vertexNormals.Aggregate((a, b) => a + b).Normalized();
+            // Return the normal that will produce the most extreme lighting!
+            return vertexNormals.OrderBy(x => Math.Abs(x.Y.Float)).First();
         }
 
         public VECTOR GetAbnormal(bool useMoreAccurateMath) {
