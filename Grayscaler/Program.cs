@@ -6,13 +6,13 @@ using SF3.Types;
 
 namespace Grayscaler {
     public class Program {
-        private const string c_pathIn = "../../../Private/Bak";
+        private const string c_pathIn = "D:/";
         private const string c_pathOut = "../../../Private";
                                    // ^
                                    //  `-- Enter the path for all your MPD files here!
 
         public static void Main(string[] args) {
-            // Get a list of all .MPD files in a folder called 'Private' relative to this project.
+            // Get a list of all .MPD files from 'c_pathIn'.
             var filesIn = Directory.GetFiles(c_pathIn, "*.MPD");
 
             // (NameGetterContext is irrelevant for this project. It's used to get named values
@@ -21,7 +21,7 @@ namespace Grayscaler {
             var nameGetter = new NameGetterContext(scenario);
 
             // For each file, update ALL textures in ALL their texture chunks.
-            // (This doesn't update background/floor images or animated textures)
+            // (This doesn't update scroll panes)
             foreach (var fileIn in filesIn) {
                 Console.Write(fileIn + ": ");
 

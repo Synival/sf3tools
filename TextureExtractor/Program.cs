@@ -11,11 +11,18 @@ using SF3.Types;
 
 namespace TextureExtractor {
     public class Program {
-        private const string c_path = "../../../Private/MPD";
-                                    // ^
-                                    //  `-- Enter the path for all your MPD files here!
+        // ,--- Enter the paths for all your MPD files here!
+        // v
+        private static readonly Dictionary<ScenarioType, string> c_pathsIn = new() {
+            { ScenarioType.Scenario1,   "D:/" },
+            { ScenarioType.Scenario2,   "E:/" },
+            { ScenarioType.Scenario3,   "F:/" },
+            { ScenarioType.PremiumDisk, "G:/" },
+        };
 
-        private const string c_outputPath = "../../../Private/Output";
+        // ,--- All textures are dumped here!
+        // v
+        private const string c_pathOut = "../../../Private";
 
         private class TextureRef {
             public TextureRef(string filename, int id, int frame, int width, int height, byte[] imageData, string hash) {
@@ -57,23 +64,23 @@ namespace TextureExtractor {
             => [new TextureRef(filename, id, frame, texture.Width, texture.Height, texture.BitmapDataARGB1555, texture.Hash)];
 
         public static void Main(string[] args) {
-            // Get a list of all .MPD files in a folder called 'Private' relative to this project.
+            // Get a list of all .MPD files from all scenarios located at 'c_pathsIn[Scenario]'.
             var allFiles = Enum.GetValues<ScenarioType>()
-                .ToDictionary(x => x, x => Directory.GetFiles(Path.Combine(c_path, x.ToString())).OrderBy(x => FileSortKey(x)).ToList());
+                .ToDictionary(x => x, x => Directory.GetFiles(c_pathsIn[x], "*.MPD").OrderBy(x => FileSortKey(x)).ToList());
             var nameGetterContexts = Enum.GetValues<ScenarioType>()
                 .ToDictionary(x => x, x => new NameGetterContext(x));
 
             var texturesFound = new Dictionary<string, List<TextureRef>>();
 
             // For each file, fetch ALL textures in ALL their texture chunks.
-            // (This doesn't yet fetch background/floor images or animated textures)
+            // (This doesn't yet fetch floor images or scroll panes)
             foreach (var filesKv in allFiles) {
                 var scenario = filesKv.Key;
                 var nameGetter = nameGetterContexts[scenario];
 
                 foreach (var file in filesKv.Value) {
                     var filename = Path.GetFileNameWithoutExtension(file);
-                    Console.Write(Path.GetFileName(file) + ": ");
+                    Console.Write(scenario.ToString() + ": " + Path.GetFileName(file) + ": ");
 
                     // Get a raw data editing context for the file.
                     var byteData = new ByteData(new ByteArray(File.ReadAllBytes(file)));
@@ -142,15 +149,14 @@ namespace TextureExtractor {
                 .OrderBy(x => x.Value[0].Filename)
                 .ToList();
 
-            Directory.CreateDirectory(c_outputPath);
+            Directory.CreateDirectory(c_pathOut);
 
             foreach (var texRefs in orderedTextures) {
                 var tex = texRefs.Value[0];
-                var subPath = Path.Combine(c_outputPath);
-                _ = Directory.CreateDirectory(subPath);
+                _ = Directory.CreateDirectory(c_pathOut);
 
                 var refStr = tex.Hash + "_Tex" + tex.ID + "_Frame" + tex.Frame + "_x" + texRefs.Value.Count.ToString("D4") + "_" + tex.Width + "x" + tex.Height;
-                var outputPath = Path.Combine(subPath, refStr + ".BMP");
+                var outputPath = Path.Combine(c_pathOut, refStr + ".BMP");
                 Console.WriteLine("Writing: " + outputPath);
 #pragma warning disable CA1416 // Validate platform compatibility
                 using (var bitmap = new Bitmap(tex.Width, tex.Height, PixelFormat.Format16bppArgb1555)) {
