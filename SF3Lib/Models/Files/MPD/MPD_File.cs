@@ -136,31 +136,6 @@ namespace SF3.Models.Files.MPD {
                 };
             }
 
-            // Add triggers to update texture animation frames when their offsets or content are modified.
-            if (Chunk3Frames != null) {
-                foreach (var c3frame in Chunk3Frames) {
-                    c3frame.Data.Data.RangeModified += (s, a) => {
-                        if (a.Moved) {
-                            var newOffset = ((ByteArraySegment) c3frame.Data.Data).Offset;
-                            var oldOffset = newOffset - a.OffsetChange;
-                            var affectedFrames = TextureAnimations.Rows.SelectMany(x => x.Frames).Where(x => x.CompressedTextureOffset == oldOffset).ToArray();
-                            foreach (var frame in affectedFrames)
-                                frame.CompressedTextureOffset = (uint) newOffset;
-                        }
-                    };
-                    c3frame.Data.DecompressedData.Data.RangeModified += (s, a) => {
-                        if (a.Resized || a.Modified) {
-                            var offset = ((ByteArraySegment) c3frame.Data.Data).Offset;
-                            var affectedFrames = TextureAnimations.Rows.SelectMany(x => x.Frames).Where(x => x.CompressedTextureOffset == offset).ToArray();
-                            foreach (var frame in affectedFrames) {
-                                var referenceTex = GetTextureModelByID(frame.TextureID)?.Texture;
-                                frame.FetchAndCacheTexture(c3frame.Data.DecompressedData, frame.AssumedPixelFormat, referenceTex);
-                            }
-                        }
-                    };
-                }
-            }
-
             // Build a list of all data tables.
             var tables = new List<ITable>() {
                 MPDHeader,
@@ -279,6 +254,30 @@ namespace SF3.Models.Files.MPD {
                         Chunk3Frames.Add(new Chunk3Frame((int) offset, newData));
                     }
                 }
+            }
+
+            // Add triggers to update texture animation frames when their offsets or content are modified.
+            foreach (var c3frameLoop in Chunk3Frames) {
+                var c3frame = c3frameLoop;
+                c3frame.Data.Data.RangeModified += (s, a) => {
+                    if (a.Moved) {
+                        var newOffset = ((ByteArraySegment) c3frame.Data.Data).Offset;
+                        var oldOffset = newOffset - a.OffsetChange;
+                        var affectedFrames = TextureAnimations.Rows.SelectMany(x => x.Frames).Where(x => x.CompressedTextureOffset == oldOffset).ToArray();
+                        foreach (var frame in affectedFrames)
+                            frame.CompressedTextureOffset = (uint) newOffset;
+                    }
+                };
+                c3frame.Data.DecompressedData.Data.RangeModified += (s, a) => {
+                    if (a.Resized || a.Modified) {
+                        var offset = ((ByteArraySegment) c3frame.Data.Data).Offset;
+                        var affectedFrames = TextureAnimations.Rows.SelectMany(x => x.Frames).Where(x => x.CompressedTextureOffset == offset).ToArray();
+                        foreach (var frame in affectedFrames) {
+                            var referenceTex = GetTextureModelByID(frame.TextureID)?.Texture;
+                            frame.FetchAndCacheTexture(c3frame.Data.DecompressedData, frame.AssumedPixelFormat, referenceTex);
+                        }
+                    }
+                };
             }
         }
 
