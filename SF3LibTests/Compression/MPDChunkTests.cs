@@ -162,5 +162,54 @@ namespace SF3.Tests.Compression {
                 });
             }
         }
+
+        // TODO: This is failing because some files end up with extra four bytes.
+        //       The file should be valid, but we should get this test passing by removing the extra four 0's.
+        [TestMethod]
+        public void Recompress_AfterCompressingChunk5_ChunkTableIsAccurate() {
+            foreach (var st in Enum.GetValues<ScenarioType>()) {
+                var mpdFiles = Directory.GetFiles(TestDataPaths.ResourcePath(st), "*.MPD");
+                var testCases = mpdFiles
+                    .Select(x => x.Split('/'))
+                    .Select(x => x[x.Length - 1])
+                    .Select(x => new TestCase(st, x))
+                    .ToArray();
+
+                var nameGetterContext = new NameGetterContext(st);
+                TestCase.Run(testCases, testCase => {
+                    // This particular file in Scenario 3 appears to be a leftover from Scenario 2. It's the wrong format, so skip it.
+                    if (st == ScenarioType.Scenario3 && testCase.Filename.EndsWith("BTL42.MPD"))
+                        return;
+
+                    using (var mpdFile = MPD_File.Create(
+                        new ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
+                        if (mpdFile.Chunk3Frames == null || mpdFile.Chunk3Frames.Count == 0)
+                            return;
+                        if (mpdFile.TileSurfaceHeightmapRows == null)
+                            return;
+
+                        var rng = new Random();
+                        var rngBytes = new byte[4];
+                        foreach (var row in mpdFile.TileSurfaceHeightmapRows.Rows) {
+                            for (var x = 0; x < 64; x++) {
+                                rng.NextBytes(rngBytes);
+                                row.SetHeights(x, rngBytes.Select(x => x / 16f).ToArray());
+                            }
+                        }
+
+                        _ = mpdFile.Recompress(onlyModified: true);
+
+                        var pos = 0x292100;
+                        foreach (var ch in mpdFile.ChunkHeader.Rows) {
+                            if (ch.ChunkAddress != 0)
+                                Assert.AreEqual(pos, ch.ChunkAddress, "Chunk" + ch.ID + " is off");
+                            pos += ch.ChunkSize;
+                            if (pos % 4 != 0)
+                                pos += 4 - (pos % 4);
+                        }
+                    }
+                });
+            }
+        }
     }
 }

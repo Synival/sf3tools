@@ -104,13 +104,6 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
-            // Remember original offsets for chunks so we can preserve their positions in the chunk header.
-            // TODO: this doesn't account for chunks growing larger :(
-            // TODO: shouldn't need this at all when moving chunks is working.
-            _originalChunkOffset = new int[chunks.Length];
-            for (var i = 0; i < _originalChunkOffset.Length; i++)
-                _originalChunkOffset[i] = ((ByteArraySegment) (ChunkData[i]?.Data))?.Offset ?? 0;
-
             // We should have all the uncompressed data now. Update read-only info of our chunk table.
             for (var i = 0; i < chunks.Length; i++) {
                 ChunkHeader.Rows[i].CompressionType =
@@ -135,9 +128,19 @@ namespace SF3.Models.Files.MPD {
                         chunkHeader.DecompressedSize = chunkData.DecompressedData.Length;
                 };
 
+                int chunkNum = i;
                 chunkData.Data.RangeModified += (s, a) => {
-                    if (a.Moved)
-                        chunkHeader.ChunkAddress = ((ByteArraySegment) chunkData.Data).Offset + c_RamOffset;
+                    if (a.Moved) {
+                        var oldOffset = ChunkHeader.Rows[chunkNum].ChunkAddress - c_RamOffset;
+                        var newOffset = ((ByteArraySegment) chunkData.Data).Offset;
+                        var offsetDiff = newOffset - oldOffset;
+
+                        for (var j = chunkNum; j < ChunkHeader.Rows.Length; j++) {
+                            var ch = ChunkHeader.Rows[j];
+                            if (ch != null && ch.ChunkAddress != 0)
+                                ch.ChunkAddress += offsetDiff;
+                        }
+                    }
                     if (a.Resized)
                         chunkHeader.ChunkSize = chunkData.Data.Length;
                 };
@@ -323,10 +326,8 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        // TODO: shouldn't need this at all when moving chunks is working.
-        private int[] _originalChunkOffset;
-
         private void RebuildChunkTable(bool onlyModified) {
+            int expectedPos = 0x292100;
             for (var i = 0; i < ChunkData.Length; i++) {
                 var chunk = ChunkHeader.Rows[i];
                 if (!chunk.Exists)
@@ -335,21 +336,21 @@ namespace SF3.Models.Files.MPD {
                 var chunkData = ChunkData[i];
                 var chunkByteArray = (ByteArraySegment) chunkData?.Data;
 
-                // TODO: shouldn't need this at all when moving chunks is working.
-                if (chunkByteArray != null) {
-                    if (chunkByteArray.Offset < _originalChunkOffset[i])
-                        chunkByteArray.ParentArray.ExpandOrContractAt(chunkByteArray.Offset, _originalChunkOffset[i] - chunkByteArray.Offset);
-                    else if (chunkByteArray.Offset > _originalChunkOffset[i])
-                        ; // TODO: scroll panes get super broken in this case!!
-                }
-
                 // Enforce alignment by inserting bytes where necessary before this chunk begins.
-                if (chunkByteArray != null && chunkByteArray.Offset % 4 != 0)
-                    chunkByteArray.ParentArray.ExpandOrContractAt(chunkByteArray.Offset, 4 - (chunkByteArray.Offset % 4));
+                if (chunk.ChunkAddress % 4 != 0)
+                    Data.Data.ExpandOrContractAt(chunk.ChunkAddress - c_RamOffset, 4 - (chunk.ChunkAddress % 4));
+
+                if (chunk.ChunkAddress != expectedPos)
+                    expectedPos = chunk.ChunkAddress;
 
                 // Finish compressed chunks.
                 if (chunkData != null && chunkData.IsCompressed && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified))
                     _ = chunkData.Recompress();
+
+                // Move forward. Make sure the next chunk starts at an alignment of 4 bytes.
+                expectedPos += chunk.ChunkSize;
+                if (expectedPos % 4 != 0)
+                    expectedPos += 4 - (expectedPos % 4);
             }
         }
 
