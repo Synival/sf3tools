@@ -1,6 +1,9 @@
-﻿using CommonLib.Attributes;
+﻿using System;
+using CommonLib.Attributes;
+using CommonLib.Utils;
 using SF3.Models.Structs;
 using SF3.RawData;
+using static CommonLib.Utils.PixelConversion;
 
 namespace SF3.Models.Structs.MPD {
     public class ColorModel : Struct {
@@ -17,17 +20,11 @@ namespace SF3.Models.Structs.MPD {
 
         [TableViewModelColumn(displayName: "HTML Color", displayOrder: 1, displayFormat: "X", minWidth: 80)]
         public string HtmlColor {
-            get {
-                // TODO: behavior for the 0x8000 bit
-                var value = (ushort) Data.GetWord(Address);
-                var r = value >>  0 & 0x1F;
-                var g = value >>  5 & 0x1F;
-                var b = value >> 10 & 0x1F;
-
-                return ((value & 0x8000) != 0 ? "1|#" : "0|#") +
-                    (r * 255 / 31).ToString("X2") +
-                    (g * 255 / 31).ToString("X2") +
-                    (b * 255 / 31).ToString("X2");
+            get => ABGR1555toChannels((ushort) Data.GetWord(Address)).ToHtmlColor();
+            set {
+                if (!IsValidHtmlColor(value))
+                    return;
+                ColorABGR1555 = PixelChannels.FromHtmlColor(value).ToABGR1555();
             }
         }
     }

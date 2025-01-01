@@ -5,6 +5,23 @@ using System.Text;
 namespace CommonLib.Utils {
     public static class PixelConversion {
         public struct PixelChannels {
+            public static PixelChannels FromHtmlColor(string htmlColor) {
+                if (htmlColor == null)
+                    throw new ArgumentNullException(nameof(htmlColor));
+
+                if (htmlColor[0] == '#')
+                    htmlColor = htmlColor.Substring(1);
+                if (htmlColor.Length != 6 && htmlColor.Length != 8)
+                    throw new ArgumentException(nameof(htmlColor));
+
+                return new PixelChannels {
+                    r = Convert.ToByte(htmlColor.Substring(0, 2), 16),
+                    g = Convert.ToByte(htmlColor.Substring(2, 2), 16),
+                    b = Convert.ToByte(htmlColor.Substring(4, 2), 16),
+                    a = (htmlColor.Length == 6) ? (byte) 255 : Convert.ToByte(htmlColor.Substring(6, 2), 16),
+                };
+            }
+
             public byte a, r, g, b;
 
             public ushort ToARGB1555()
@@ -20,10 +37,26 @@ namespace CommonLib.Utils {
                              ((r >> 3) << 0));
 
             public uint ToARGB8888()
-                => (uint ) ((a << 24) |
-                            (r << 16) |
-                            (g << 8)  |
-                            (b << 0));
+                => (uint) ((a << 24) |
+                           (r << 16) |
+                           (g << 8)  |
+                           (b << 0));
+
+            public string ToHtmlColor() {
+                return "#" +
+                    r.ToString("X2") +
+                    g.ToString("X2") +
+                    b.ToString("X2") +
+                    a.ToString("X2");
+            }
+        }
+
+        public static bool IsValidHtmlColor(string htmlColor) {
+            if (htmlColor == null)
+                return false;
+            if (htmlColor[0] == '#')
+                htmlColor = htmlColor.Substring(1);
+            return htmlColor.Length == 6 || htmlColor.Length == 8;
         }
 
         public static ushort ABGR1555toARGB1555(ushort input)
