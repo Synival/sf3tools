@@ -102,7 +102,7 @@ namespace SF3.Models.Files.X002 {
             };
 
             if (Scenario == ScenarioType.Scenario1)
-                tables.Add(WarpTable = new WarpTable(Data, ResourceFileForScenario(ScenarioType.Scenario1, "Warps.xml"), warpAddress));
+                tables.Add(WarpTable = WarpTable.Create(Data, ResourceFileForScenario(ScenarioType.Scenario1, "Warps.xml"), warpAddress));
 
             return tables;
         }

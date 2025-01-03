@@ -119,7 +119,7 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             if (header.Offset3 != 0)
-                tables.Add(Offset3Table = new UnknownUInt16Table(Data, header.Offset3 - c_RamOffset, 32));
+                tables.Add(Offset3Table = UnknownUInt16Table.Create(Data, header.Offset3 - c_RamOffset, 32));
             if (header.Offset4 != 0)
                 tables.Add(Offset4Table = Offset4Table.Create(Data, header.Offset4 - c_RamOffset));
 

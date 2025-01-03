@@ -6,10 +6,16 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables {
     public class UnknownUInt16Table : Table<UnknownUInt16Struct> {
-        public UnknownUInt16Table(IByteData data, int address, int count)
+        protected UnknownUInt16Table(IByteData data, int address, int count)
         : base(data, address) {
             MaxSize = count;
             FormatString = "X" + MaxSize.ToString().Length;
+        }
+
+        public static UnknownUInt16Table Create(IByteData data, int address, int count) {
+            var newTable = new UnknownUInt16Table(data, address, count);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load() => LoadUntilMax((id, address)

@@ -6,10 +6,16 @@ using SF3.Types;
 
 namespace SF3.Models.Tables.IconPointer {
     public class SpellIconTable : Table<SpellIcon> {
-        public SpellIconTable(IByteData data, string resourceFile, int address, bool has16BitIconAddr, int realOffsetStart)
+        protected SpellIconTable(IByteData data, string resourceFile, int address, bool has16BitIconAddr, int realOffsetStart)
         : base(data, resourceFile, address) {
             Has16BitIconAddr = has16BitIconAddr;
             RealOffsetStart  = realOffsetStart;
+        }
+
+        public static SpellIconTable Create(IByteData data, string resourceFile, int address, bool has16BitIconAddr, int realOffsetStart) {
+            var newTable = new SpellIconTable(data, resourceFile, address, has16BitIconAddr, realOffsetStart);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

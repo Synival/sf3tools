@@ -4,8 +4,15 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.IconPointer {
     public class ItemIconTable : Table<ItemIcon> {
-        public ItemIconTable(IByteData data, string resourceFile, int address, bool has16BitIconAddr) : base(data, resourceFile, address) {
+        protected ItemIconTable(IByteData data, string resourceFile, int address, bool has16BitIconAddr)
+        : base(data, resourceFile, address) {
             Has16BitIconAddr = has16BitIconAddr;
+        }
+
+        public static ItemIconTable Create(IByteData data, string resourceFile, int address, bool has16BitIconAddr) {
+            var newTable = new ItemIconTable(data, resourceFile, address, has16BitIconAddr);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

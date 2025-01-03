@@ -132,7 +132,7 @@ namespace SF3.Models.Files.X1 {
             if (treasureAddress >= 0)
                 tables.Add(TreasureTable = new TreasureTable(Data, ResourceFile("X1Treasure.xml"), treasureAddress));
             if (warpAddress >= 0)
-                tables.Add(WarpTable = new WarpTable(Data, null, warpAddress));
+                tables.Add(WarpTable = WarpTable.Create(Data, null, warpAddress));
             if (battlePointersAddress >= 0)
                 tables.Add(BattlePointersTable);
             if (npcAddress >= 0)
@@ -149,7 +149,7 @@ namespace SF3.Models.Files.X1 {
             }
 
             if (tileMovementAddress >= 0)
-                tables.Add(TileMovementTable = new TileMovementTable(Data, ResourceFile("MovementTypes.xml"), tileMovementAddress));
+                tables.Add(TileMovementTable = TileMovementTable.Create(Data, ResourceFile("MovementTypes.xml"), tileMovementAddress));
 
             return tables;
         }
