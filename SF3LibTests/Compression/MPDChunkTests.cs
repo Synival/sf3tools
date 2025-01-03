@@ -24,8 +24,14 @@ namespace SF3.Tests.Compression {
                     .Select(x => x.Split('/'))
                     .Select(x => x[x.Length - 1])
                     .Select(x => new TestCase(st, x))
-                    // This particular file in Scenario 3 appears to be a leftover from Scenario 2. It's the wrong format, so skip it.
-                    .Where(x => !(x.Scenario == ScenarioType.Scenario3 && x.Filename.EndsWith("BTL42.MPD")))
+                    // These files in Scenario 3 appear to be a leftover from Scenario 2. They're the wrong format, so skip them.
+                    .Where(x => {
+                        return (x.Scenario != ScenarioType.Scenario3)
+                            ? true
+                            : !x.Filename.EndsWith("BTL42.MPD") &&
+                              !x.Filename.EndsWith("MUHASI.MPD") &&
+                              !x.Filename.EndsWith("SNIOKI.MPD");
+                    })
                     .ToArray()
                 );
             }
