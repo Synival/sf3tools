@@ -5,6 +5,7 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.ByteData;
 using static CommonLib.Utils.BlockHelpers;
+using SF3.Models.Files.MPD.Objects;
 
 namespace SF3.Models.Files.MPD {
     public class Chunk3Frame {
@@ -28,54 +29,6 @@ namespace SF3.Models.Files.MPD {
         bool Recompress(bool onlyModified);
 
         /// <summary>
-        /// Calculates the "abnormal" for a tile at a given corner.
-        /// </summary>
-        /// <param name="tileX">X coordinate of the tile.</param>
-        /// <param name="tileY">Y coordinate of the tile.</param>
-        /// <param name="corner">Corner of the tile whose vertex abnormal should be calculated.</param>
-        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
-        /// <returns>A freshly-calculated abnormal for the vertex requested.</returns>
-        VECTOR CalculateSurfaceVertexAbnormal(int tileX, int tileY, CornerType corner, bool useMoreAccurateCalculations);
-
-        /// <summary>
-        /// Updates the vertex abnormal for a specific vertex of a tile.
-        /// </summary>
-        /// <param name="tileX">X coordinate of the tile.</param>
-        /// <param name="tileY">Y coordinate of the tile.</param>
-        /// <param name="corner">Corner of the tile whose vertex abnormal should be updated.</param>
-        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
-        void UpdateSurfaceVertexAbnormal(int tileX, int tileY, CornerType corner, bool useMoreAccurateCalculations);
-
-        /// <summary>
-        /// Updates the vertex abnormal for a specific vertex in the vertex mesh.
-        /// </summary>
-        /// <param name="vertexX">X coordinate of the vertex.</param>
-        /// <param name="vertexY">Y coordinate of the vertex.</param>
-        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
-        void UpdateSurfaceVertexAbnormal(int vertexX, int vertexY, bool useMoreAccurateCalculations);
-
-        /// <summary>
-        /// Updates the vertex abnormals in several blocks at once.
-        /// </summary>
-        /// <param name="locations">The locations of blocks to update.</param>
-        /// <param name="abnormal">The abnormal to be set into each block location.</param>
-        void UpdateSurfaceVertexAbnormals(BlockVertexLocation[] locations, VECTOR abnormal);
-
-        /// <summary>
-        /// Recalculates vertex "abnormals" for a specific tile.
-        /// </summary>
-        /// <param name="tileX">X coordinate of the tile.</param>
-        /// <param name="tileY">Y coordinate of the tile.</param>
-        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
-        void UpdateSurfaceVertexAbnormals(int tileX, int tileY, bool useMoreAccurateCalculations);
-
-        /// <summary>
-        /// Recalculates all vertex "abnormals" for all tiles.
-        /// </summary>
-        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
-        void UpdateSurfaceVertexAbnormals(bool useMoreAccurateCalculations);
-
-        /// <summary>
         /// Byte data for (de)compressed data for chunks
         /// </summary>
         IChunkData[] ChunkData { get; }
@@ -96,13 +49,11 @@ namespace SF3.Models.Files.MPD {
         /// </summary>
         List<Chunk3Frame> Chunk3Frames { get; }
 
-        TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; }
-        TileSurfaceVertexNormalMeshBlocks TileSurfaceVertexNormalMeshBlocks { get; }
-        TileSurfaceVertexHeightMeshBlocks TileSurfaceVertexHeightMeshBlocks { get; }
         TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; }
         TileHeightTerrainRowTable TileHeightTerrainRows { get; }
         TileItemRowTable TileItemRows { get; }
 
-        MPD_FileTextureChunk[] TextureChunks { get; }
+        MPD_FileSurfaceModelChunkObj SurfaceModelChunkObj { get; }
+        MPD_FileTextureChunkObj[] TextureChunkObjs { get; }
     }
 }

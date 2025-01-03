@@ -57,18 +57,12 @@ namespace SF3.Win.Controls {
         }
 
         private void tsbRecalculateLightmapOriginalMath_Click(object sender, EventArgs e) {
-            if (Model == null)
-                return;
-
-            Model.UpdateSurfaceVertexAbnormals(false);
+            Model?.SurfaceModelChunkObj?.UpdateSurfaceVertexAbnormals(Model.TileSurfaceHeightmapRows, false);
             UpdateMap();
         }
 
         private void tsbUpdateLightmapUpdatedMath_Click(object sender, EventArgs e) {
-            if (Model == null)
-                return;
-
-            Model.UpdateSurfaceVertexAbnormals(true);
+            Model?.SurfaceModelChunkObj?.UpdateSurfaceVertexAbnormals(Model.TileSurfaceHeightmapRows, true);
             UpdateMap();
         }
     }

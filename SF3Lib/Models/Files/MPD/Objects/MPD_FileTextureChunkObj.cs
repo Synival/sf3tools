@@ -5,16 +5,16 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.TextureChunk;
 using SF3.ByteData;
 
-namespace SF3.Models.Files.MPD {
-    public class MPD_FileTextureChunk : TableFile {
-        protected MPD_FileTextureChunk(IByteData data, INameGetterContext nameContext, int address, string name)
+namespace SF3.Models.Files.MPD.Objects {
+    public class MPD_FileTextureChunkObj : TableFile {
+        protected MPD_FileTextureChunkObj(IByteData data, INameGetterContext nameContext, int address, string name)
         : base(data, nameContext) {
             Address = address;
             Name    = name;
         }
 
-        public static MPD_FileTextureChunk Create(IByteData data, INameGetterContext nameContext, int address, string name) {
-            var newFile = new MPD_FileTextureChunk(data, nameContext, address, name);
+        public static MPD_FileTextureChunkObj Create(IByteData data, INameGetterContext nameContext, int address, string name) {
+            var newFile = new MPD_FileTextureChunkObj(data, nameContext, address, name);
             newFile.Init();
             return newFile;
         }

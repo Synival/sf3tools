@@ -9,10 +9,8 @@ using SF3.Models.Tables.MPD;
 using SF3.ByteData;
 using CommonLib.Arrays;
 using SF3.Models.Structs.MPD.TextureChunk;
-using CommonLib.SGL;
-using CommonLib.Types;
-using static CommonLib.Utils.BlockHelpers;
 using SF3.Models.Structs.MPD;
+using SF3.Models.Files.MPD.Objects;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
@@ -215,16 +213,17 @@ namespace SF3.Models.Files.MPD {
 
             if (chunkDatas[5] != null)
                 tables.AddRange(MakeTileChunkTables(chunkDatas[5].DecompressedData));
-            if (surfaceModelChunk != null)
-                tables.AddRange(MakeSurfaceModelChunkTables(surfaceModelChunk.DecompressedData));
+            if (surfaceModelChunk != null) {
+                SurfaceModelChunkObj = MPD_FileSurfaceModelChunkObj.Create(surfaceModelChunk.DecompressedData, NameGetterContext, 0x00, "SurfaceModelChunk");
+                tables.AddRange(SurfaceModelChunkObj.Tables);
+            }
 
-            // TODO: refactor MPD_FileTextureChunk
-            TextureChunks = new MPD_FileTextureChunk[5];
-            for (var i = 0; i < TextureChunks.Length; i++) {
+            TextureChunkObjs = new MPD_FileTextureChunkObj[5];
+            for (var i = 0; i < TextureChunkObjs.Length; i++) {
                 var chunkIndex = i + 6;
                 if (chunkDatas[chunkIndex]?.Length > 0) {
-                    TextureChunks[i] = MPD_FileTextureChunk.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
-                    tables.AddRange(TextureChunks[i].Tables);
+                    TextureChunkObjs[i] = MPD_FileTextureChunkObj.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
+                    tables.AddRange(TextureChunkObjs[i].Tables);
                 }
             }
 
@@ -243,18 +242,10 @@ namespace SF3.Models.Files.MPD {
             };
         }
 
-        private ITable[] MakeSurfaceModelChunkTables(IByteData data) {
-            return new ITable[] {
-                (TileSurfaceCharacterRows          = TileSurfaceCharacterRowTable.Create     (data, 0x0000)),
-                (TileSurfaceVertexNormalMeshBlocks = TileSurfaceVertexNormalMeshBlocks.Create(data, 0x2000)),
-                (TileSurfaceVertexHeightMeshBlocks = TileSurfaceVertexHeightMeshBlocks.Create(data, 0xB600)),
-            };
-        }
-
         private TextureModel GetTextureModelByID(int textureId) {
-            if (TextureChunks == null)
+            if (TextureChunkObjs == null)
                 return null;
-            return TextureChunks.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x.Rows).FirstOrDefault(x => x.ID == textureId);
+            return TextureChunkObjs.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x.Rows).FirstOrDefault(x => x.ID == textureId);
         }
 
         // TODO: refactor this mess!!
@@ -442,86 +433,6 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public VECTOR CalculateSurfaceVertexAbnormal(int tileX, int tileY, CornerType corner, bool useMoreAccurateCalculations)
-            => CalculateSurfaceVertexAbnormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), useMoreAccurateCalculations);
-
-        public VECTOR CalculateSurfaceVertexAbnormal(int vertexX, int vertexY, bool useMoreAccurateCalculations) {
-            var heightmap = TileSurfaceHeightmapRows?.Rows;
-            if (heightmap == null) {
-                return new VECTOR(
-                    new FIXED(0, true),
-                    new FIXED(1, true),
-                    new FIXED(0, true)
-                );
-            }
-
-            // Determine the normals of the 4 quads surrounding the vertex.
-            var sumNormals = new List<VECTOR>();
-
-            void TryAddQuadNormal(int vx, int vy) {
-                if (vx >= 0 && vy >= 0 && vx <= 63 && vy <= 63) {
-                    var heights = heightmap[63 - vy].GetHeights(vx);
-                    var quad = new POLYGON(new VECTOR[] {
-                        new VECTOR(0.00f, heights[0], 0.00f),
-                        new VECTOR(1.00f, heights[1], 0.00f),
-                        new VECTOR(1.00f, heights[2], 1.00f),
-                        new VECTOR(0.00f, heights[3], 1.00f)
-                    });
-                    sumNormals.Add(quad.GetNormal(useMoreAccurateCalculations));
-                }
-            }
-
-            // Gather a list of all quad normals to use for averaging the vertex normal.
-            // On the edges of maps, there are fewer adjected polys to the vertex,
-            // so only add normals if they exist.
-            TryAddQuadNormal(vertexX - 1, vertexY - 1);
-            TryAddQuadNormal(vertexX - 0, vertexY - 1);
-            TryAddQuadNormal(vertexX - 0, vertexY - 0);
-            TryAddQuadNormal(vertexX - 1, vertexY - 0);
-
-            // Return the average of each normal (normalized) for Gouraud shading.
-            return VECTOR.GetAbnormalFromNormals(sumNormals.ToArray());
-        }
-
-        public void UpdateSurfaceVertexAbnormal(int tileX, int tileY, CornerType corner, bool useMoreAccurateCalculations)
-            => UpdateSurfaceVertexAbnormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), useMoreAccurateCalculations);
-
-        public void UpdateSurfaceVertexAbnormal(int vertexX, int vertexY, bool useMoreAccurateCalculations) {
-            if (TileSurfaceHeightmapRows == null || TileSurfaceVertexNormalMeshBlocks == null)
-                return;
-
-            var abnormal = CalculateSurfaceVertexAbnormal(vertexX, vertexY, useMoreAccurateCalculations);
-            var locations = GetBlockLocations(vertexX, vertexY);
-            UpdateSurfaceVertexAbnormals(locations, abnormal);
-        }
-
-        public void UpdateSurfaceVertexAbnormals(BlockVertexLocation[] locations, VECTOR abnormal) {
-            if (TileSurfaceVertexNormalMeshBlocks == null)
-                return;
-
-            var blocks = TileSurfaceVertexNormalMeshBlocks.Rows;
-            for (var i = 0; i < locations.Length; i++)
-                blocks[locations[i].Num][locations[i].X, locations[i].Y] = abnormal;
-        }
-
-        public void UpdateSurfaceVertexAbnormals(int tileX, int tileY, bool useMoreAccurateCalculations) {
-            if (TileSurfaceHeightmapRows == null || TileSurfaceVertexNormalMeshBlocks == null)
-                return;
-
-            UpdateSurfaceVertexAbnormal(tileX, tileY, CornerType.TopLeft,     useMoreAccurateCalculations);
-            UpdateSurfaceVertexAbnormal(tileX, tileY, CornerType.TopRight,    useMoreAccurateCalculations);
-            UpdateSurfaceVertexAbnormal(tileX, tileY, CornerType.BottomRight, useMoreAccurateCalculations);
-            UpdateSurfaceVertexAbnormal(tileX, tileY, CornerType.BottomLeft,  useMoreAccurateCalculations);
-        }
-
-        public void UpdateSurfaceVertexAbnormals(bool useMoreAccurateCalculations) {
-            if (TileSurfaceHeightmapRows == null || TileSurfaceVertexNormalMeshBlocks == null)
-                return;
-            for (var y = 0; y < 65; y++)
-                for (var x = 0; x < 65; x++)
-                    UpdateSurfaceVertexAbnormal(x, y, CornerType.TopLeft, useMoreAccurateCalculations);
-        }
-
         public IChunkData[] ChunkData { get; private set; }
 
         public IChunkData SurfaceChunkData => (_surfaceChunkIndex.HasValue) ? ChunkData[_surfaceChunkIndex.Value] : null;
@@ -553,15 +464,6 @@ namespace SF3.Models.Files.MPD {
         public List<Chunk3Frame> Chunk3Frames { get; private set; }
 
         [BulkCopyRecurse]
-        public TileSurfaceCharacterRowTable TileSurfaceCharacterRows { get; private set; }
-
-        [BulkCopyRecurse]
-        public TileSurfaceVertexNormalMeshBlocks TileSurfaceVertexNormalMeshBlocks { get; private set; }
-
-        [BulkCopyRecurse]
-        public TileSurfaceVertexHeightMeshBlocks TileSurfaceVertexHeightMeshBlocks { get; private set; }
-
-        [BulkCopyRecurse]
         public TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; private set; }
 
         [BulkCopyRecurse]
@@ -571,7 +473,10 @@ namespace SF3.Models.Files.MPD {
         public TileItemRowTable TileItemRows { get; private set; }
 
         [BulkCopyRecurse]
-        public MPD_FileTextureChunk[] TextureChunks { get; private set; }
+        public MPD_FileSurfaceModelChunkObj SurfaceModelChunkObj { get; private set; }
+
+        [BulkCopyRecurse]
+        public MPD_FileTextureChunkObj[] TextureChunkObjs { get; private set; }
 
         private int? _surfaceChunkIndex = null;
     }

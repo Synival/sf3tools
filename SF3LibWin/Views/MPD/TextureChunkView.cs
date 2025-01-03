@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
-using SF3.Models.Files.MPD;
+using SF3.Models.Files.MPD.Objects;
 using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.Win.Controls;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.MPD {
     public class TextureChunkView : TabView {
-        public TextureChunkView(string name, MPD_FileTextureChunk model) : base(name) {
+        public TextureChunkView(string name, MPD_FileTextureChunkObj model) : base(name) {
             Model = model;
 
             var ngc = Model.NameGetterContext;
@@ -62,7 +62,7 @@ namespace SF3.Win.Views.MPD {
             base.Destroy();
         }
 
-        public MPD_FileTextureChunk Model { get; }
+        public MPD_FileTextureChunkObj Model { get; }
         public TableView HeaderView { get; }
         public TableView TexturesView { get; }
         public TextureView TextureView { get; }
