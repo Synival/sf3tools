@@ -79,7 +79,7 @@ namespace SF3.Models.Files.MPD {
             _ = ChunkHeader.Load();
 
             foreach (var chunkHeader in ChunkHeader.Rows)
-                chunkHeader.CompressionType = chunkHeader.Exists ? "(WIP)" : "--";
+                chunkHeader.CompressionType = "--";
 
             return ChunkHeader;
         }
@@ -154,6 +154,11 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
+            // Add remaining unhandled chunks.
+            for (var i = 0; i < chunks.Length; i++)
+                if (ChunkData[i] == null && chunks[i].Exists)
+                    ChunkData[i] = MakeChunkData(i, false, "(WIP)");
+
             return ChunkData;
         }
 
@@ -169,14 +174,28 @@ namespace SF3.Models.Files.MPD {
 
             newChunk.Data.RangeModified += (s, a) => {
                 if (a.Moved) {
-                    var oldOffset = ChunkHeader.Rows[chunkIndex].ChunkAddress - c_RamOffset;
-                    var newOffset = ((ByteArraySegment) newChunk.Data).Offset;
-                    var offsetDiff = newOffset - oldOffset;
+                    var byteArraySegment = (ByteArraySegment) newChunk.Data;
 
-                    for (var j = chunkIndex; j < ChunkHeader.Rows.Length; j++) {
+                    // Figure out how much the offset has changed.
+                    var oldOffset = ChunkHeader.Rows[chunkIndex].ChunkAddress - c_RamOffset;
+                    var newOffset = byteArraySegment.Offset;
+                    var offsetDelta = newOffset - oldOffset;
+                    if (offsetDelta == 0)
+                        return;
+
+                    // Update the address in the chunk table.
+                    ChunkHeader.Rows[chunkIndex].ChunkAddress = newOffset + c_RamOffset;
+
+                    // Chunks after this one with something assigned to ChunkData[] will have their
+                    // ChunkAddress updated automatically. For chunks without a ChunkData[] after this one
+                    // (but before the next ChunkData), update addresses manually.
+                    for (var j = chunkIndex + 1; j < ChunkHeader.Rows.Length; j++) {
+                        if (ChunkData[j] != null)
+                            break;
+
                         var ch = ChunkHeader.Rows[j];
                         if (ch != null && ch.ChunkAddress != 0)
-                            ch.ChunkAddress += offsetDiff;
+                            ch.ChunkAddress += offsetDelta;
                     }
                 }
                 if (a.Resized)
@@ -208,8 +227,8 @@ namespace SF3.Models.Files.MPD {
             TextureChunks = new MPD_FileTextureChunk[5];
             for (var i = 0; i < TextureChunks.Length; i++) {
                 var chunkIndex = i + 6;
-                if (ChunkData[chunkIndex]?.Length > 0) {
-                    TextureChunks[i] = MPD_FileTextureChunk.Create(ChunkData[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
+                if (chunkDatas[chunkIndex]?.Length > 0) {
+                    TextureChunks[i] = MPD_FileTextureChunk.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
                     tables.AddRange(TextureChunks[i].Tables);
                 }
             }
@@ -369,30 +388,37 @@ namespace SF3.Models.Files.MPD {
         }
 
         private void RebuildChunkTable(bool onlyModified) {
-            int expectedPos = 0x292100;
+            int expectedRamAddr = 0x292100;
+            int lastChunkEndRamAddr = expectedRamAddr;
+
             for (var i = 0; i < ChunkData.Length; i++) {
                 var chunk = ChunkHeader.Rows[i];
-                if (chunk.Address == 0)
+                if (chunk.ChunkAddress == 0)
                     continue;
 
                 var chunkData = ChunkData[i];
                 var chunkByteArray = (ByteArraySegment) chunkData?.Data;
 
                 // Enforce alignment by inserting bytes where necessary before this chunk begins.
-                if (chunk.ChunkAddress % 4 != 0)
-                    Data.Data.ExpandOrContractAt(chunk.ChunkAddress - c_RamOffset, 4 - (chunk.ChunkAddress % 4));
-
-                if (chunk.ChunkAddress != expectedPos)
-                    expectedPos = chunk.ChunkAddress;
+                if (chunk.ChunkAddress != expectedRamAddr) {
+                    Data.Data.ResizeAt(
+                        lastChunkEndRamAddr - c_RamOffset,
+                        Math.Min(chunk.ChunkAddress - lastChunkEndRamAddr, Data.Data.Length),
+                        expectedRamAddr - lastChunkEndRamAddr
+                    );
+                }
 
                 // Finish compressed chunks.
                 if (chunkData != null && chunkData.IsCompressed && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified))
                     _ = chunkData.Recompress();
 
                 // Move forward. Make sure the next chunk starts at an alignment of 4 bytes.
-                expectedPos += chunk.ChunkSize;
-                if (expectedPos % 4 != 0)
-                    expectedPos += 4 - (expectedPos % 4);
+                expectedRamAddr += chunk.ChunkSize;
+                if (expectedRamAddr % 4 != 0)
+                    expectedRamAddr += 4 - (expectedRamAddr % 4);
+
+                // Keep track of where the last chunk ended. We'll add or remove zeroes here to enforce alignemnt.
+                lastChunkEndRamAddr = chunk.ChunkAddress + chunk.ChunkSize;
             }
         }
 

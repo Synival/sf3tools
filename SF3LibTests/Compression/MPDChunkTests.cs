@@ -163,8 +163,6 @@ namespace SF3.Tests.Compression {
             }
         }
 
-        // TODO: This is failing because some files end up with extra four bytes.
-        //       The file should be valid, but we should get this test passing by removing the extra four 0's.
         [TestMethod]
         public void Recompress_AfterCompressingChunk5_ChunkTableIsAccurate() {
             foreach (var st in Enum.GetValues<ScenarioType>()) {
@@ -202,11 +200,14 @@ namespace SF3.Tests.Compression {
                         var pos = 0x292100;
                         foreach (var ch in mpdFile.ChunkHeader.Rows) {
                             if (ch.ChunkAddress != 0)
-                                Assert.AreEqual(pos, ch.ChunkAddress, "Chunk" + ch.ID + " is off");
+                                Assert.AreEqual(pos, ch.ChunkAddress, "Chunk[" + ch.ID + "] is off");
                             pos += ch.ChunkSize;
                             if (pos % 4 != 0)
                                 pos += 4 - (pos % 4);
                         }
+
+                        // Attempt to create the file to make sure it's not corrupted.
+                        var recreatedMpdFile = MPD_File.Create(new ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetterContext, st);
                     }
                 });
             }
