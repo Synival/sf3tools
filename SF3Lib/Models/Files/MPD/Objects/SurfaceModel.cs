@@ -6,27 +6,28 @@ using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
+using SF3.Models.Tables.MPD.SurfaceModel;
 using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Models.Files.MPD.Objects {
-    public class MPD_FileSurfaceModelChunkObj : TableFile {
-        protected MPD_FileSurfaceModelChunkObj(IByteData data, INameGetterContext nameContext, int address, string name)
+    public class SurfaceModel : TableFile {
+        protected SurfaceModel(IByteData data, INameGetterContext nameContext, int address, string name)
         : base(data, nameContext) {
             Address = address;
             Name    = name;
         }
 
-        public static MPD_FileSurfaceModelChunkObj Create(IByteData data, INameGetterContext nameContext, int address, string name) {
-            var newFile = new MPD_FileSurfaceModelChunkObj(data, nameContext, address, name);
+        public static SurfaceModel Create(IByteData data, INameGetterContext nameContext, int address, string name) {
+            var newFile = new SurfaceModel(data, nameContext, address, name);
             newFile.Init();
             return newFile;
         }
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (CharacterRowTable      = TileSurfaceCharacterRowTable.Create     (Data, 0x0000)),
-                (VertexNormalMeshBlocks = TileSurfaceVertexNormalMeshBlocks.Create(Data, 0x2000)),
-                (VertexHeightMeshBlocks = TileSurfaceVertexHeightMeshBlocks.Create(Data, 0xB600)),
+                (CharacterRowTable      = TileTextureRowTable.Create     (Data, 0x0000)),
+                (VertexNormalMeshBlocks = VertexNormalMeshBlockTable.Create(Data, 0x2000)),
+                (VertexHeightMeshBlocks = VertexHeightMeshBlockTable.Create(Data, 0xB600)),
             };
         }
 
@@ -100,12 +101,12 @@ namespace SF3.Models.Files.MPD.Objects {
         public int Address { get; }
 
         [BulkCopyRecurse]
-        public TileSurfaceCharacterRowTable CharacterRowTable { get; private set; }
+        public TileTextureRowTable CharacterRowTable { get; private set; }
 
         [BulkCopyRecurse]
-        public TileSurfaceVertexNormalMeshBlocks VertexNormalMeshBlocks { get; private set; }
+        public VertexNormalMeshBlockTable VertexNormalMeshBlocks { get; private set; }
 
         [BulkCopyRecurse]
-        public TileSurfaceVertexHeightMeshBlocks VertexHeightMeshBlocks { get; private set; }
+        public VertexHeightMeshBlockTable VertexHeightMeshBlocks { get; private set; }
     }
 }

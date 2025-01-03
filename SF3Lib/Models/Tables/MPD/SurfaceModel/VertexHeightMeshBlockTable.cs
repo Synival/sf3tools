@@ -2,13 +2,13 @@
 using SF3.ByteData;
 using System;
 
-namespace SF3.Models.Tables.MPD {
-    public class TileSurfaceVertexHeightMeshBlocks : Table<TileSurfaceVertexHeightMesh> {
-        protected TileSurfaceVertexHeightMeshBlocks(IByteData data, int address) : base(data, address) {
+namespace SF3.Models.Tables.MPD.SurfaceModel {
+    public class VertexHeightMeshBlockTable : Table<TileSurfaceVertexHeightMesh> {
+        protected VertexHeightMeshBlockTable(IByteData data, int address) : base(data, address) {
         }
 
-        public static TileSurfaceVertexHeightMeshBlocks Create(IByteData data, int address) {
-            var newTable = new TileSurfaceVertexHeightMeshBlocks(data, address);
+        public static VertexHeightMeshBlockTable Create(IByteData data, int address) {
+            var newTable = new VertexHeightMeshBlockTable(data, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

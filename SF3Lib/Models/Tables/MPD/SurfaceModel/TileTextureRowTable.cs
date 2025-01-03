@@ -1,16 +1,15 @@
 using System.Linq;
 using SF3.Models.Structs.MPD;
-using SF3.Models.Tables;
 using SF3.ByteData;
 using System;
 
-namespace SF3.Models.Tables.MPD {
-    public class TileSurfaceCharacterRowTable : Table<TileSurfaceCharacterRow> {
-        protected TileSurfaceCharacterRowTable(IByteData data, int address) : base(data, address) {
+namespace SF3.Models.Tables.MPD.SurfaceModel {
+    public class TileTextureRowTable : Table<TileSurfaceCharacterRow> {
+        protected TileTextureRowTable(IByteData data, int address) : base(data, address) {
         }
 
-        public static TileSurfaceCharacterRowTable Create(IByteData data, int address) {
-            var newTable = new TileSurfaceCharacterRowTable(data, address);
+        public static TileTextureRowTable Create(IByteData data, int address) {
+            var newTable = new TileTextureRowTable(data, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

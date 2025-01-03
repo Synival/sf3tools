@@ -12,8 +12,8 @@ namespace SF3.Win.Views.MPD {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            for (var i = 0; i < Model.TextureChunkObjs.Length; i++)
-                CreateChild(new TextureChunkView("Chunk " + (i + 6), Model.TextureChunkObjs[i]));
+            for (var i = 0; i < Model.TextureCollections.Length; i++)
+                CreateChild(new TextureChunkView("Chunk " + (i + 6), Model.TextureCollections[i]));
             CreateChild(new TextureAnimationsView("Animations", Model, ngc));
             CreateChild(new TextureAnimFramesView("Anim. Frames", Model, ngc));
 

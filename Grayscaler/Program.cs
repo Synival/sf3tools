@@ -35,7 +35,7 @@ namespace Grayscaler {
                 var mpdFile = MPD_File.Create(byteData, nameGetter, scenario);
 
                 // Gather all textures into one collection.
-                var textures1 = (mpdFile.TextureChunkObjs == null) ? [] : mpdFile.TextureChunkObjs
+                var textures1 = (mpdFile.TextureCollections == null) ? [] : mpdFile.TextureCollections
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable.Rows)
                     .Where(x => x.TextureIsLoaded && x.Texture.PixelFormat == TexturePixelFormat.ABGR1555)

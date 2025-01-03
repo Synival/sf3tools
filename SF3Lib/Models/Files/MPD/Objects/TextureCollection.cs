@@ -2,19 +2,19 @@
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.Models.Tables;
-using SF3.Models.Tables.MPD.TextureChunk;
 using SF3.ByteData;
+using SF3.Models.Tables.MPD.TextureCollection;
 
 namespace SF3.Models.Files.MPD.Objects {
-    public class MPD_FileTextureChunkObj : TableFile {
-        protected MPD_FileTextureChunkObj(IByteData data, INameGetterContext nameContext, int address, string name)
+    public class TextureCollection : TableFile {
+        protected TextureCollection(IByteData data, INameGetterContext nameContext, int address, string name)
         : base(data, nameContext) {
             Address = address;
             Name    = name;
         }
 
-        public static MPD_FileTextureChunkObj Create(IByteData data, INameGetterContext nameContext, int address, string name) {
-            var newFile = new MPD_FileTextureChunkObj(data, nameContext, address, name);
+        public static TextureCollection Create(IByteData data, INameGetterContext nameContext, int address, string name) {
+            var newFile = new TextureCollection(data, nameContext, address, name);
             newFile.Init();
             return newFile;
         }

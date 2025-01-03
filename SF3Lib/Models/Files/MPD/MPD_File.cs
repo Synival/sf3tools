@@ -214,16 +214,16 @@ namespace SF3.Models.Files.MPD {
             if (chunkDatas[5] != null)
                 tables.AddRange(MakeTileChunkTables(chunkDatas[5].DecompressedData));
             if (surfaceModelChunk != null) {
-                SurfaceModelChunkObj = MPD_FileSurfaceModelChunkObj.Create(surfaceModelChunk.DecompressedData, NameGetterContext, 0x00, "SurfaceModelChunk");
-                tables.AddRange(SurfaceModelChunkObj.Tables);
+                SurfaceModel = SurfaceModel.Create(surfaceModelChunk.DecompressedData, NameGetterContext, 0x00, "SurfaceModelChunk");
+                tables.AddRange(SurfaceModel.Tables);
             }
 
-            TextureChunkObjs = new MPD_FileTextureChunkObj[5];
-            for (var i = 0; i < TextureChunkObjs.Length; i++) {
+            TextureCollections = new TextureCollection[5];
+            for (var i = 0; i < TextureCollections.Length; i++) {
                 var chunkIndex = i + 6;
                 if (chunkDatas[chunkIndex]?.Length > 0) {
-                    TextureChunkObjs[i] = MPD_FileTextureChunkObj.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
-                    tables.AddRange(TextureChunkObjs[i].Tables);
+                    TextureCollections[i] = TextureCollection.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
+                    tables.AddRange(TextureCollections[i].Tables);
                 }
             }
 
@@ -243,9 +243,9 @@ namespace SF3.Models.Files.MPD {
         }
 
         private TextureModel GetTextureModelByID(int textureId) {
-            if (TextureChunkObjs == null)
+            if (TextureCollections == null)
                 return null;
-            return TextureChunkObjs.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x.Rows).FirstOrDefault(x => x.ID == textureId);
+            return TextureCollections.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x.Rows).FirstOrDefault(x => x.ID == textureId);
         }
 
         // TODO: refactor this mess!!
@@ -473,10 +473,10 @@ namespace SF3.Models.Files.MPD {
         public TileItemRowTable TileItemRows { get; private set; }
 
         [BulkCopyRecurse]
-        public MPD_FileSurfaceModelChunkObj SurfaceModelChunkObj { get; private set; }
+        public SurfaceModel SurfaceModel { get; private set; }
 
         [BulkCopyRecurse]
-        public MPD_FileTextureChunkObj[] TextureChunkObjs { get; private set; }
+        public TextureCollection[] TextureCollections { get; private set; }
 
         private int? _surfaceChunkIndex = null;
     }

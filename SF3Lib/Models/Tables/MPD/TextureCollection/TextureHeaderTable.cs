@@ -1,9 +1,8 @@
 ﻿using SF3.Models.Structs.MPD.TextureChunk;
-using SF3.Models.Tables;
 using SF3.ByteData;
 using System;
 
-namespace SF3.Models.Tables.MPD.TextureChunk {
+namespace SF3.Models.Tables.MPD.TextureCollection {
     public class TextureHeaderTable : Table<TextureHeader> {
         protected TextureHeaderTable(IByteData data, int address) : base(data, address) {
         }

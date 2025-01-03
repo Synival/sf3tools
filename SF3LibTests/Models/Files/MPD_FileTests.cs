@@ -150,7 +150,7 @@ namespace SF3.Tests.Models.Files {
             Assert.IsFalse(data.IsModified);
 
             // Act
-            data.TextureChunkObjs[0].TextureTable.Rows[0].Width *= 2;
+            data.TextureCollections[0].TextureTable.Rows[0].Width *= 2;
 
             // Assert
             Assert.IsTrue(data.ChunkData[6].IsModified);
@@ -179,7 +179,7 @@ namespace SF3.Tests.Models.Files {
         public void Finish_WithChanges_ExpectedDataHasIsModifiedFlag() {
             // Arrange
             var data = MakeFile();
-            data.TextureChunkObjs[0].TextureTable.Rows[0].Width *= 2;
+            data.TextureCollections[0].TextureTable.Rows[0].Width *= 2;
 
             // Act
             data.Finish();

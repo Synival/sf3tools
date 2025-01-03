@@ -53,7 +53,7 @@ namespace SF3.Models.Files.MPD {
         TileHeightTerrainRowTable TileHeightTerrainRows { get; }
         TileItemRowTable TileItemRows { get; }
 
-        MPD_FileSurfaceModelChunkObj SurfaceModelChunkObj { get; }
-        MPD_FileTextureChunkObj[] TextureChunkObjs { get; }
+        SurfaceModel SurfaceModel { get; }
+        TextureCollection[] TextureCollections { get; }
     }
 }
