@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class TileItemRowTable : Table<TileItemRow> {
-        public TileItemRowTable(IByteData data, int address) : base(data, address) {
+        protected TileItemRowTable(IByteData data, int address) : base(data, address) {
+        }
+
+        public static TileItemRowTable Create(IByteData data, int address) {
+            var newTable = new TileItemRowTable(data, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load() {

@@ -1,10 +1,15 @@
 ﻿using SF3.Models.Structs.MPD;
-using SF3.Models.Tables;
 using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class ChunkHeaderTable : Table<ChunkHeader> {
-        public ChunkHeaderTable(IByteData data, int address) : base(data, address) {
+        protected ChunkHeaderTable(IByteData data, int address) : base(data, address) {
+        }
+
+        public static ChunkHeaderTable Create(IByteData data, int address) {
+            var newTable = new ChunkHeaderTable(data, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

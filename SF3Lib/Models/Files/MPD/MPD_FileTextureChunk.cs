@@ -20,13 +20,12 @@ namespace SF3.Models.Files.MPD {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            TextureHeaderTable  = new TextureHeaderTable(Data, 0x00);
-            TextureHeaderTable.Load();
+            TextureHeaderTable = TextureHeaderTable.Create(Data, 0x00);
             var header = TextureHeaderTable.Rows[0];
 
             return new List<ITable>() {
                 TextureHeaderTable,
-                (TextureTable = new TextureTable(Data, 0x04, header.NumTextures, header.TextureIdStart)),
+                (TextureTable = TextureTable.Create(Data, 0x04, header.NumTextures, header.TextureIdStart)),
             };
         }
 

@@ -10,8 +10,7 @@ using SF3.Win.Extensions;
 namespace SF3.Win.Views.MPD {
     public class TextureAnimFramesView : ControlSpaceView {
         public TextureAnimFramesView(string name, IMPD_File model, INameGetterContext nameGetterContext) : base(name) {
-            var frameTable = new AllFramesTable(model.TextureAnimations.Data, model.TextureAnimations.Address, model.TextureAnimations.Rows);
-            frameTable.Load();
+            var frameTable = AllFramesTable.Create(model.TextureAnimations.Data, model.TextureAnimations.Address, model.TextureAnimations.Rows);
 
             Model       = model;
             TableView   = new TableView("Frames", frameTable, nameGetterContext);

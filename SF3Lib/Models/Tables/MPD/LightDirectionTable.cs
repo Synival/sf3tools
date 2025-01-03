@@ -3,7 +3,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class LightDirectionTable : Table<LightDirection> {
-        public LightDirectionTable(IByteData data, int address) : base(data, address) {
+        protected LightDirectionTable(IByteData data, int address) : base(data, address) {
+        }
+
+        public static LightDirectionTable Create(IByteData data, int address) {
+            var newTable = new LightDirectionTable(data, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

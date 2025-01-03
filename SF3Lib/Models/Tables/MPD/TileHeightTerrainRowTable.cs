@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class TileHeightTerrainRowTable : Table<TileHeightTerrainRow> {
-        public TileHeightTerrainRowTable(IByteData data, int address) : base(data, address) {
+        protected TileHeightTerrainRowTable(IByteData data, int address) : base(data, address) {
+        }
+
+        public static TileHeightTerrainRowTable Create(IByteData data, int address) {
+            var newTable = new TileHeightTerrainRowTable(data, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load() {

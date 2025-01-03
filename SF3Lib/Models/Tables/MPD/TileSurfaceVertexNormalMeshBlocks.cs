@@ -3,7 +3,14 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class TileSurfaceVertexNormalMeshBlocks : Table<TileSurfaceVertexNormalMesh> {
-        public TileSurfaceVertexNormalMeshBlocks(IByteData data, int address) : base(data, address) { }
+        protected TileSurfaceVertexNormalMeshBlocks(IByteData data, int address) : base(data, address) {
+        }
+
+        public static TileSurfaceVertexNormalMeshBlocks Create(IByteData data, int address) {
+            var newTable = new TileSurfaceVertexNormalMeshBlocks(data, address);
+            newTable.Load();
+            return newTable;
+        }
 
         public override bool Load()
             => LoadUntilMax((id, address)

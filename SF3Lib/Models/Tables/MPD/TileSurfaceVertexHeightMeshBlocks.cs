@@ -3,7 +3,14 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class TileSurfaceVertexHeightMeshBlocks : Table<TileSurfaceVertexHeightMesh> {
-        public TileSurfaceVertexHeightMeshBlocks(IByteData data, int address) : base(data, address) { }
+        protected TileSurfaceVertexHeightMeshBlocks(IByteData data, int address) : base(data, address) {
+        }
+
+        public static TileSurfaceVertexHeightMeshBlocks Create(IByteData data, int address) {
+            var newTable = new TileSurfaceVertexHeightMeshBlocks(data, address);
+            newTable.Load();
+            return newTable;
+        }
 
         public override bool Load()
             => LoadUntilMax((id, address)

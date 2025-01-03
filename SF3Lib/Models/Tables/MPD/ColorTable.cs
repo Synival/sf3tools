@@ -3,8 +3,14 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD {
     public class ColorTable : Table<ColorModel> {
-        public ColorTable(IByteData data, int address, int colors) : base(data, address) {
+        protected ColorTable(IByteData data, int address, int colors) : base(data, address) {
             MaxSize = colors;
+        }
+
+        public static ColorTable Create(IByteData data, int address, int colors) {
+            var newTable = new ColorTable(data, address, colors);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

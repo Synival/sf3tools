@@ -6,8 +6,14 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.MPD.TextureAnimation {
     public class AllFramesTable : Table<FrameModel> {
-        public AllFramesTable(IByteData data, int address, IEnumerable<TextureAnimationModel> animations) : base(data, address) {
+        protected AllFramesTable(IByteData data, int address, IEnumerable<TextureAnimationModel> animations) : base(data, address) {
             Animations = animations;
+        }
+
+        public static AllFramesTable Create(IByteData data, int address, IEnumerable<TextureAnimationModel> animations) {
+            var newTable = new AllFramesTable(data, address, animations);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load() {

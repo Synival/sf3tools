@@ -57,8 +57,7 @@ namespace SF3.Models.Files.MPD {
         private MPDHeaderTable MakeHeaderTable() {
             var headerAddrPtr = Data.GetDouble(0x0000) - c_RamOffset;
             var headerAddr = Data.GetDouble(headerAddrPtr) - c_RamOffset;
-            MPDHeader = new MPDHeaderTable(Data, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
-            _ = MPDHeader.Load();
+            MPDHeader = MPDHeaderTable.Create(Data, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
             return MPDHeader;
         }
 
@@ -75,9 +74,7 @@ namespace SF3.Models.Files.MPD {
 
         private ChunkHeaderTable MakeChunkHeaderTable() {
             // Create chunk data
-            ChunkHeader = new ChunkHeaderTable(Data, 0x2000);
-            _ = ChunkHeader.Load();
-
+            ChunkHeader = ChunkHeaderTable.Create(Data, 0x2000);
             foreach (var chunkHeader in ChunkHeader.Rows)
                 chunkHeader.CompressionType = "--";
 
@@ -89,11 +86,11 @@ namespace SF3.Models.Files.MPD {
             var headerRamAddr = header.Address + c_RamOffset;
 
             if (header.OffsetPal1 >= c_RamOffset && header.OffsetPal1 < headerRamAddr)
-                TexturePalettes[0] = new ColorTable(Data, header.OffsetPal1 - c_RamOffset, Math.Min(256, (headerRamAddr - header.OffsetPal1) / 2));
+                TexturePalettes[0] = ColorTable.Create(Data, header.OffsetPal1 - c_RamOffset, Math.Min(256, (headerRamAddr - header.OffsetPal1) / 2));
             if (header.OffsetPal2 >= c_RamOffset && header.OffsetPal2 < headerRamAddr)
-                TexturePalettes[1] = new ColorTable(Data, header.OffsetPal2 - c_RamOffset, Math.Min(256, (headerRamAddr - header.OffsetPal2) / 2));
+                TexturePalettes[1] = ColorTable.Create(Data, header.OffsetPal2 - c_RamOffset, Math.Min(256, (headerRamAddr - header.OffsetPal2) / 2));
             if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 >= c_RamOffset && header.OffsetPal3 < headerRamAddr)
-                TexturePalettes[2] = new ColorTable(Data, header.OffsetPal3 - c_RamOffset, Math.Min(256, (headerRamAddr - header.OffsetPal3) / 2));
+                TexturePalettes[2] = ColorTable.Create(Data, header.OffsetPal3 - c_RamOffset, Math.Min(256, (headerRamAddr - header.OffsetPal3) / 2));
 
             return TexturePalettes.Where(x => x != null).ToArray();
         }
@@ -102,9 +99,9 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             if (header.OffsetLightPal != 0)
-                tables.Add(LightPalette = new ColorTable(Data, header.OffsetLightPal - c_RamOffset, 32));
+                tables.Add(LightPalette = ColorTable.Create(Data, header.OffsetLightPal - c_RamOffset, 32));
             if (header.OffsetLightDir != 0)
-                tables.Add(LightDirectionTable = new LightDirectionTable(Data, header.OffsetLightDir - c_RamOffset));
+                tables.Add(LightDirectionTable = LightDirectionTable.Create(Data, header.OffsetLightDir - c_RamOffset));
 
             return tables.ToArray();
         }
@@ -112,10 +109,8 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeTextureAnimationTables(MPDHeaderModel header, bool areAnimatedTextures32Bit) {
             var tables = new List<ITable>();
 
-            if (header.OffsetTextureAnimations != 0) {
-                tables.Add(TextureAnimations = new TextureAnimationTable(Data, header.OffsetTextureAnimations - c_RamOffset, areAnimatedTextures32Bit));
-                _ = TextureAnimations.Load();
-            }
+            if (header.OffsetTextureAnimations != 0)
+                tables.Add(TextureAnimations = TextureAnimationTable.Create(Data, header.OffsetTextureAnimations - c_RamOffset, areAnimatedTextures32Bit));
 
             return tables.ToArray();
         }
@@ -126,7 +121,7 @@ namespace SF3.Models.Files.MPD {
             if (header.Offset3 != 0)
                 tables.Add(Offset3Table = new UnknownUInt16Table(Data, header.Offset3 - c_RamOffset, 32));
             if (header.Offset4 != 0)
-                tables.Add(Offset4Table = new Offset4Table(Data, header.Offset4 - c_RamOffset));
+                tables.Add(Offset4Table = Offset4Table.Create(Data, header.Offset4 - c_RamOffset));
 
             return tables.ToArray();
         }
@@ -242,17 +237,17 @@ namespace SF3.Models.Files.MPD {
 
         private ITable[] MakeTileChunkTables(IByteData data) {
             return new ITable[] {
-                (TileSurfaceHeightmapRows = new TileSurfaceHeightmapRowTable(data, 0x0000)),
-                (TileHeightTerrainRows    = new TileHeightTerrainRowTable   (data, 0x4000)),
-                (TileItemRows             = new TileItemRowTable            (data, 0x6000)),
+                (TileSurfaceHeightmapRows = TileSurfaceHeightmapRowTable.Create(data, 0x0000)),
+                (TileHeightTerrainRows    = TileHeightTerrainRowTable.Create   (data, 0x4000)),
+                (TileItemRows             = TileItemRowTable.Create            (data, 0x6000)),
             };
         }
 
         private ITable[] MakeSurfaceModelChunkTables(IByteData data) {
             return new ITable[] {
-                (TileSurfaceCharacterRows          = new TileSurfaceCharacterRowTable     (data, 0x0000)),
-                (TileSurfaceVertexNormalMeshBlocks = new TileSurfaceVertexNormalMeshBlocks(data, 0x2000)),
-                (TileSurfaceVertexHeightMeshBlocks = new TileSurfaceVertexHeightMeshBlocks(data, 0xB600)),
+                (TileSurfaceCharacterRows          = TileSurfaceCharacterRowTable.Create     (data, 0x0000)),
+                (TileSurfaceVertexNormalMeshBlocks = TileSurfaceVertexNormalMeshBlocks.Create(data, 0x2000)),
+                (TileSurfaceVertexHeightMeshBlocks = TileSurfaceVertexHeightMeshBlocks.Create(data, 0xB600)),
             };
         }
 
