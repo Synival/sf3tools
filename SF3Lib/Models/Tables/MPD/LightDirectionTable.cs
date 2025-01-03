@@ -1,5 +1,6 @@
 ﻿using SF3.Models.Structs.MPD;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.MPD {
     public class LightDirectionTable : Table<LightDirection> {
@@ -8,7 +9,8 @@ namespace SF3.Models.Tables.MPD {
 
         public static LightDirectionTable Create(IByteData data, int address) {
             var newTable = new LightDirectionTable(data, address);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

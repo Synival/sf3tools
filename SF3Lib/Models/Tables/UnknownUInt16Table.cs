@@ -14,7 +14,8 @@ namespace SF3.Models.Tables {
 
         public static UnknownUInt16Table Create(IByteData data, int address, int count) {
             var newTable = new UnknownUInt16Table(data, address, count);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

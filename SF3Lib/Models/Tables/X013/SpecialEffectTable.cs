@@ -1,6 +1,7 @@
 using SF3.Models.Structs.X013;
 using SF3.Models.Tables;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.X013 {
     public class SpecialEffectTable : Table<SpecialEffect> {
@@ -9,7 +10,8 @@ namespace SF3.Models.Tables.X013 {
 
         public static SpecialEffectTable Create(IByteData data, string resourceFile, int address) {
             var newTable = new SpecialEffectTable(data, resourceFile, address);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

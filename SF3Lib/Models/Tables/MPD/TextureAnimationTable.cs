@@ -1,5 +1,6 @@
 ﻿using SF3.Models.Structs.MPD;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.MPD {
     public class TextureAnimationTable : Table<TextureAnimationModel> {
@@ -11,7 +12,8 @@ namespace SF3.Models.Tables.MPD {
 
         public static TextureAnimationTable Create(IByteData data, int address, bool is32Bit) {
             var newTable = new TextureAnimationTable(data, address, is32Bit);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

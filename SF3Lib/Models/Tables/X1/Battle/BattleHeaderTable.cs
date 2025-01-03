@@ -1,6 +1,7 @@
 using SF3.Models.Structs.X1.Battle;
 using SF3.Models.Tables;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.X1.Battle {
     public class BattleHeaderTable : Table<BattleHeader> {
@@ -9,7 +10,8 @@ namespace SF3.Models.Tables.X1.Battle {
 
         public static BattleHeaderTable Create(IByteData data, string resourceFile, int address) {
             var newTable = new BattleHeaderTable(data, resourceFile, address);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

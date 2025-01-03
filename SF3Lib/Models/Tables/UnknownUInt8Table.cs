@@ -14,7 +14,8 @@ namespace SF3.Models.Tables {
 
         public static UnknownUInt8Table Create(IByteData data, int address, int count) {
             var newTable = new UnknownUInt8Table(data, address, count);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

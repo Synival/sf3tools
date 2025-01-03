@@ -1,6 +1,7 @@
 using SF3.Models.Structs.MPD;
 using SF3.Models.Tables;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.MPD {
     public class TileSurfaceHeightmapRowTable : Table<TileSurfaceHeightmapRow> {
@@ -9,7 +10,8 @@ namespace SF3.Models.Tables.MPD {
 
         public static TileSurfaceHeightmapRowTable Create(IByteData data, int address) {
             var newTable = new TileSurfaceHeightmapRowTable(data, address);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

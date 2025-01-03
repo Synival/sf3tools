@@ -1,6 +1,7 @@
 using SF3.Models.Structs.X013;
 using SF3.Models.Tables;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.X013 {
     public class MagicBonusTable : Table<MagicBonus> {
@@ -10,7 +11,8 @@ namespace SF3.Models.Tables.X013 {
 
         public static MagicBonusTable Create(IByteData data, string resourceFile, int address, bool has32BitValues) {
             var newTable = new MagicBonusTable(data, resourceFile, address, has32BitValues);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

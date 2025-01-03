@@ -1,6 +1,7 @@
 using SF3.Models.Structs.X013;
 using SF3.Models.Tables;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.X013 {
     public class SpecialChanceTable : Table<SpecialChance> {
@@ -10,7 +11,8 @@ namespace SF3.Models.Tables.X013 {
 
         public static SpecialChanceTable Create(IByteData data, string resourceFile, int address, bool hasLargeTable) {
             var newTable = new SpecialChanceTable(data, resourceFile, address, hasLargeTable);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

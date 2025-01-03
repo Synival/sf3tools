@@ -1,5 +1,6 @@
 ﻿using SF3.Models.Structs.MPD;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.MPD {
     public class MPDHeaderTable : Table<MPDHeaderModel> {
@@ -9,7 +10,8 @@ namespace SF3.Models.Tables.MPD {
 
         public static MPDHeaderTable Create(IByteData data, int address, bool hasPalette3) {
             var newTable = new MPDHeaderTable(data, address, hasPalette3);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

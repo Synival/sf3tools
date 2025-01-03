@@ -1,6 +1,7 @@
 using SF3.Models.Structs.MPD;
 using SF3.Models.Tables;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.MPD {
     public class TileItemRowTable : Table<TileItemRow> {
@@ -9,7 +10,8 @@ namespace SF3.Models.Tables.MPD {
 
         public static TileItemRowTable Create(IByteData data, int address) {
             var newTable = new TileItemRowTable(data, address);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

@@ -13,7 +13,8 @@ namespace SF3.Models.Tables.Shared {
 
         public static WarpTable Create(IByteData data, string resourceFile, int address) {
             var newTable = new WarpTable(data, resourceFile, address);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

@@ -1,6 +1,7 @@
 using SF3.Models.Structs.X019;
 using SF3.Models.Tables;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.X019 {
     public class MonsterTable : Table<Monster> {
@@ -9,7 +10,8 @@ namespace SF3.Models.Tables.X019 {
 
         public static MonsterTable Create(IByteData data, string resourceFile, int address) {
             var newTable = new MonsterTable(data, resourceFile, address);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

@@ -3,6 +3,7 @@ using System.Linq;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.TextureAnimation;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.MPD.TextureAnimation {
     public class AllFramesTable : Table<FrameModel> {
@@ -12,7 +13,8 @@ namespace SF3.Models.Tables.MPD.TextureAnimation {
 
         public static AllFramesTable Create(IByteData data, int address, IEnumerable<TextureAnimationModel> animations) {
             var newTable = new AllFramesTable(data, address, animations);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

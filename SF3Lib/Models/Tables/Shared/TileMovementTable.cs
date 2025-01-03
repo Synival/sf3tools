@@ -1,6 +1,7 @@
 using SF3.Models.Structs.Shared;
 using SF3.Models.Tables;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.Shared {
     public class TileMovementTable : Table<TileMovement> {
@@ -9,7 +10,8 @@ namespace SF3.Models.Tables.Shared {
 
         public static TileMovementTable Create(IByteData data, string resourceFile, int address) {
             var newTable = new TileMovementTable(data, resourceFile, address);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

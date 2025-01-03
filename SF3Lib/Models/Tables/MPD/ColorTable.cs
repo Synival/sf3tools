@@ -1,5 +1,6 @@
 ﻿using SF3.Models.Structs.MPD;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.MPD {
     public class ColorTable : Table<ColorModel> {
@@ -9,7 +10,8 @@ namespace SF3.Models.Tables.MPD {
 
         public static ColorTable Create(IByteData data, int address, int colors) {
             var newTable = new ColorTable(data, address, colors);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

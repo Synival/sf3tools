@@ -1,6 +1,7 @@
 using SF3.Models.Structs.X002;
 using SF3.Models.Tables;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.X002 {
     public class SpellTable : Table<Spell> {
@@ -9,7 +10,8 @@ namespace SF3.Models.Tables.X002 {
 
         public static SpellTable Create(IByteData data, string resourceFile, int address) {
             var newTable = new SpellTable(data, resourceFile, address);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

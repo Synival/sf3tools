@@ -1,5 +1,6 @@
 ﻿using SF3.Models.Structs.MPD;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.MPD {
     public class Offset4Table : Table<Offset4Model> {
@@ -8,7 +9,8 @@ namespace SF3.Models.Tables.MPD {
 
         public static Offset4Table Create(IByteData data, int address) {
             var newTable = new Offset4Table(data, address);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

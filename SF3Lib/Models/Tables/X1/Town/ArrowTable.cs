@@ -1,6 +1,7 @@
 using SF3.Models.Structs.X1.Town;
 using SF3.Models.Tables;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.X1.Town {
     public class ArrowTable : Table<Arrow> {
@@ -9,7 +10,8 @@ namespace SF3.Models.Tables.X1.Town {
 
         public static ArrowTable Create(IByteData data, string resourceFile, int address) {
             var newTable = new ArrowTable(data, resourceFile, address);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

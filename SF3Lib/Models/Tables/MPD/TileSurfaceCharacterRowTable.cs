@@ -2,6 +2,7 @@ using System.Linq;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Tables;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.MPD {
     public class TileSurfaceCharacterRowTable : Table<TileSurfaceCharacterRow> {
@@ -10,7 +11,8 @@ namespace SF3.Models.Tables.MPD {
 
         public static TileSurfaceCharacterRowTable Create(IByteData data, int address) {
             var newTable = new TileSurfaceCharacterRowTable(data, address);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

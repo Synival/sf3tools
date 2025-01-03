@@ -1,6 +1,7 @@
 ﻿using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.Models.Tables;
 using SF3.ByteData;
+using System;
 
 namespace SF3.Models.Tables.MPD.TextureChunk {
     public class TextureHeaderTable : Table<TextureHeader> {
@@ -9,7 +10,8 @@ namespace SF3.Models.Tables.MPD.TextureChunk {
 
         public static TextureHeaderTable Create(IByteData data, int address) {
             var newTable = new TextureHeaderTable(data, address);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 

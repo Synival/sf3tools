@@ -3,6 +3,7 @@ using SF3.Models.Structs.IconPointer;
 using SF3.Models.Tables;
 using SF3.ByteData;
 using SF3.Types;
+using System;
 
 namespace SF3.Models.Tables.IconPointer {
     public class SpellIconTable : Table<SpellIcon> {
@@ -14,7 +15,8 @@ namespace SF3.Models.Tables.IconPointer {
 
         public static SpellIconTable Create(IByteData data, string resourceFile, int address, bool has16BitIconAddr, int realOffsetStart) {
             var newTable = new SpellIconTable(data, resourceFile, address, has16BitIconAddr, realOffsetStart);
-            newTable.Load();
+            if (!newTable.Load())
+                throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 
