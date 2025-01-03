@@ -1,7 +1,4 @@
-﻿using System;
-using CommonLib.Attributes;
-using CommonLib.Utils;
-using SF3.Models.Structs;
+﻿using CommonLib.Attributes;
 using SF3.RawData;
 using static CommonLib.Utils.PixelConversion;
 
@@ -13,8 +10,8 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Color (ABGR1555)", displayOrder: 0, displayFormat: "X4")]
-        public int ColorABGR1555 {
-            get => Data.GetWord(Address);
+        public ushort ColorABGR1555 {
+            get => (ushort) Data.GetWord(Address);
             set => Data.SetWord(Address, value);
         }
 

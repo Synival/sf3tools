@@ -85,14 +85,14 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 2, isPointer: true)]
-        public int Offset1 {
+        public int OffsetLightPal {
             get => Data.GetDouble(offset1Address);
             set => Data.SetDouble(offset1Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 3, isPointer: true)]
-        public int Offset2 {
+        public int OffsetLightDir {
             get => Data.GetDouble(offset2Address);
             set => Data.SetDouble(offset2Address, value);
         }

@@ -1,9 +1,9 @@
 ﻿using CommonLib.Arrays;
-using CommonLib.Utils;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
 using SF3.RawData;
 using SF3.Types;
+using static CommonLib.Utils.PixelConversion;
 
 namespace LightPaletteSetter {
     public class Program {
@@ -79,17 +79,43 @@ namespace LightPaletteSetter {
                 for (var i = 0; i < 32; i++)
                     lightingPalette[i].ColorABGR1555 = c_lighting.Palette[i];
 
+                // Update texture palettes.
+                var palettes = mpdFile.TexturePalettes
+                    .Select((x, i) => new { Obj = x, Index = i })
+                    .Where(x => x.Obj != null)
+                    .GroupBy(x => x.Obj.Address)
+                    .Select(x => x.First())
+                    .ToArray();
+
+                // Make palettes dark, too!
+                var headerAddr = mpdFile.MPDHeader.Address;
+                foreach (var palette in palettes) {
+                    if (palette.Obj.Address == headerAddr) {
+                        Console.WriteLine("  Palette[" + palette.Index + "] is same as header. Skipping");
+                        continue;
+                    }
+                    Console.WriteLine("  Updating Palette[" + palette.Index + "]...");
+                    for (var j = 0; j < 256; j++) {
+                        var row = palette.Obj.Rows[j];
+                        if (row.Address + 1 >= headerAddr)
+                            break;
+
+                        var channels = ABGR1555toChannels(row.ColorABGR1555);
+                        var max = Math.Max(channels.r, Math.Max(channels.g, channels.b));
+
+                        channels.r = (byte) Math.Round(channels.r * 0.375f);
+                        channels.g = (byte) Math.Round(channels.g * 0.375f + max * 0.125f);
+                        channels.b = (byte) Math.Round(channels.b * 0.375f + max * 0.25f);
+                        row.ColorABGR1555 = channels.ToABGR1555();
+                    }
+                }
+
                 // Update light direction.
-                var lightDirection = mpdFile.Offset2Table.Rows[0].Value;
-                if (c_lighting.Pitch.HasValue) {
-                    lightDirection &= ~0xFFFF0000;
-                    lightDirection |= (uint) (c_lighting.Pitch.Value << 16);
-                }
-                if (c_lighting.Yaw.HasValue) {
-                    lightDirection &= ~(uint) 0x0000FFFF;
-                    lightDirection |= c_lighting.Yaw.Value;
-                }
-                mpdFile.Offset2Table.Rows[0].Value = lightDirection;
+                var lightDirection = mpdFile.LightDirectionTable.Rows[0];
+                if (c_lighting.Pitch.HasValue)
+                    lightDirection.Pitch = c_lighting.Pitch.Value;
+                if (c_lighting.Yaw.HasValue)
+                    lightDirection.Yaw = c_lighting.Yaw.Value;
 
                 // This will compress chunks and update the chunk table header.
                 _ = mpdFile.Finish();
