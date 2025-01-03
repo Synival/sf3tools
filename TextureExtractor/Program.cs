@@ -1,12 +1,11 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 using CommonLib.Arrays;
 using SF3;
+using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
-using SF3.ByteData;
 using SF3.Types;
 
 namespace TextureExtractor {

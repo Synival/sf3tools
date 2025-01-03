@@ -1,7 +1,7 @@
 ﻿using CommonLib.Arrays;
+using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
-using SF3.ByteData;
 using SF3.Types;
 using static CommonLib.Utils.PixelConversion;
 
@@ -46,12 +46,12 @@ namespace LightPaletteSetter {
         );
 
         private const string c_pathIn = "D:/";
-                                      // ^
-                                      //  `-- Enter the path for all your MPD files here!
+        //                               ^
+        //                                `-- Enter the path for all your MPD files here!
 
         private const string c_pathOut = "../../../Private";
-                                      // ^
-                                      //  `-- Updated MPD files are dumped here!
+        //                                ^
+        //                                 `-- Updated MPD files are dumped here!
 
         private static readonly Lighting c_lighting = c_superDarkQuonusLighting;
 

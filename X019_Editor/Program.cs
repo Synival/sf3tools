@@ -1,6 +1,5 @@
 using System;
 using System.Windows.Forms;
-using SF3.Win.Extensions;
 
 namespace SF3.X019_Editor {
     internal static class Program {

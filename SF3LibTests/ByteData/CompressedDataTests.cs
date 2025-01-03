@@ -9,8 +9,7 @@ namespace SF3.Tests.ByteData {
         private static readonly byte[] _compressedTestData = Compress(Encoding.UTF8.GetBytes("Hello, world!!"));
 
         [TestMethod]
-        public void Constructor_ResultsInExpectedState()
-        {
+        public void Constructor_ResultsInExpectedState() {
             // Arrange + Act
             var data = new CompressedData(new ByteArray(_compressedTestData));
 
@@ -21,8 +20,7 @@ namespace SF3.Tests.ByteData {
         }
 
         [TestMethod]
-        public void Recompress_WithoutDeCompressedDataChanges_ResultsInExpectedState()
-        {
+        public void Recompress_WithoutDeCompressedDataChanges_ResultsInExpectedState() {
             // Arrange
             var data = new CompressedData(new ByteArray(_compressedTestData));
 
@@ -37,8 +35,7 @@ namespace SF3.Tests.ByteData {
         }
 
         [TestMethod]
-        public void DeCompressedData_IsModifiedIsSet_ResultsInExpectedState()
-        {
+        public void DeCompressedData_IsModifiedIsSet_ResultsInExpectedState() {
             // Arrange
             var data = new CompressedData(new ByteArray(_compressedTestData));
 
@@ -52,8 +49,7 @@ namespace SF3.Tests.ByteData {
         }
 
         [TestMethod]
-        public void DeCompressedData_IsModifiedIsToggled_ResultsInExpectedState()
-        {
+        public void DeCompressedData_IsModifiedIsToggled_ResultsInExpectedState() {
             // Arrange
             var data = new CompressedData(new ByteArray(_compressedTestData));
 
@@ -68,8 +64,7 @@ namespace SF3.Tests.ByteData {
         }
 
         [TestMethod]
-        public void Recompress_AfterModificationsInDeCompressedData_ResultsInExpectedState()
-        {
+        public void Recompress_AfterModificationsInDeCompressedData_ResultsInExpectedState() {
             // Arrange
             var data = new CompressedData(new ByteArray(_compressedTestData));
             data.DecompressedData.IsModified = true;
@@ -85,8 +80,7 @@ namespace SF3.Tests.ByteData {
         }
 
         [TestMethod]
-        public void NeedsRecompression_SetToTrue_SetsItselfAndIsModifiedToTrue()
-        {
+        public void NeedsRecompression_SetToTrue_SetsItselfAndIsModifiedToTrue() {
             // Arrange
             var data = new CompressedData(new ByteArray(_compressedTestData));
 
@@ -100,8 +94,7 @@ namespace SF3.Tests.ByteData {
         }
 
         [TestMethod]
-        public void NeedsRecompression_ToggledOnAndOff_StillHasIsModifiedFlagSet()
-        {
+        public void NeedsRecompression_ToggledOnAndOff_StillHasIsModifiedFlagSet() {
             // Arrange
             var data = new CompressedData(new ByteArray(_compressedTestData));
 
@@ -116,8 +109,7 @@ namespace SF3.Tests.ByteData {
         }
 
         [TestMethod]
-        public void IsModified_SetToTrue_ResultsInTrue()
-        {
+        public void IsModified_SetToTrue_ResultsInTrue() {
             // Arrange
             var data = new CompressedData(new ByteArray(_compressedTestData));
 
@@ -131,8 +123,7 @@ namespace SF3.Tests.ByteData {
         }
 
         [TestMethod]
-        public void IsModified_SetWhenNeedsRecompressionIsTrue_IsModifiedIsStillTrue()
-        {
+        public void IsModified_SetWhenNeedsRecompressionIsTrue_IsModifiedIsStillTrue() {
             // Arrange
             var data = new CompressedData(new ByteArray(_compressedTestData));
             data.NeedsRecompression = true;

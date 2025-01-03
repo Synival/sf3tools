@@ -1,18 +1,18 @@
 ﻿using CommonLib.Arrays;
+using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
-using SF3.ByteData;
 using SF3.Types;
 
 namespace Grayscaler {
     public class Program {
         private const string c_pathIn = "D:/";
-                                      // ^
-                                      //  `-- Enter the path for all your MPD files here!
+        //                               ^
+        //                                `-- Enter the path for all your MPD files here!
 
         private const string c_pathOut = "../../../Private";
-                                      // ^
-                                      //  `-- Updated MPD files are dumped here!
+        //                                ^
+        //                                 `-- Updated MPD files are dumped here!
 
         public static void Main(string[] args) {
             // Get a list of all .MPD files from 'c_pathIn'.

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommonLib.Extensions;
+﻿using CommonLib.Extensions;
 
 namespace CommonLib.Tests.Extensions {
     [TestClass]
     public class ArrayExtensions {
         [TestMethod]
-        public void To2DArray_OrdersDataProperly()
-        {
+        public void To2DArray_OrdersDataProperly() {
             int[] inputArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
             var resultArray = inputArray.To2DArray(3, 4);
 
@@ -29,8 +23,7 @@ namespace CommonLib.Tests.Extensions {
         }
 
         [TestMethod]
-        public void To1DArray_OrdersDataProperly()
-        {
+        public void To1DArray_OrdersDataProperly() {
             int[,] inputArray = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
             var resultArray = inputArray.To1DArray();
 
