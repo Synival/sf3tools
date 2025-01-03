@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X1.Battle {
     public class SlotTable : Table<Slot> {
-        public SlotTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected SlotTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static SlotTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new SlotTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

@@ -42,7 +42,7 @@ namespace SF3.Models.Files.X019 {
             }
 
             return new List<ITable>() {
-                (MonsterTable = new MonsterTable(Data, ResourceFileForScenario(Scenario, "Monsters.xml"), monsterTableAddress))
+                (MonsterTable = MonsterTable.Create(Data, ResourceFileForScenario(Scenario, "Monsters.xml"), monsterTableAddress))
             };
         }
 

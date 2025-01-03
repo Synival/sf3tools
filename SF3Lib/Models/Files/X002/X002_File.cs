@@ -91,14 +91,14 @@ namespace SF3.Models.Files.X002 {
             }
 
             var tables = new List<ITable>() {
-                (AttackResistTable   = new AttackResistTable(Data, ResourceFile("AttackResistList.xml"), attackResistAddress)),
-                (ItemTable           = new ItemTable(Data, ResourceFileForScenario(Scenario, "Items.xml"), itemAddress)),
-                (LoadedOverrideTable = new LoadedOverrideTable(Data, ResourceFileForScenario(Scenario, "LoadedOverrideList.xml"), loadedOverrideAddress)),
-                (LoadingTable        = new LoadingTable(Data, ResourceFileForScenario(Scenario, "LoadList.xml"), loadingAddress)),
-                (WeaponSpellTable    = new WeaponSpellTable(Data, ResourceFileForScenario(Scenario, "WeaponSpells.xml"), presetAddress)),
-                (SpellTable          = new SpellTable(Data, ResourceFileForScenario(Scenario, "Spells.xml"), spellAddress)),
-                (StatBoostTable      = new StatBoostTable(Data, ResourceFile("X002StatList.xml"), statBoostAddress)),
-                (WeaponRankTable     = new WeaponRankTable(Data, ResourceFile("WeaponRankList.xml"), weaponRankAddress)),
+                (AttackResistTable   = AttackResistTable.Create  (Data, ResourceFile("AttackResistList.xml"), attackResistAddress)),
+                (ItemTable           = ItemTable.Create          (Data, ResourceFileForScenario(Scenario, "Items.xml"), itemAddress)),
+                (LoadedOverrideTable = LoadedOverrideTable.Create(Data, ResourceFileForScenario(Scenario, "LoadedOverrideList.xml"), loadedOverrideAddress)),
+                (LoadingTable        = LoadingTable.Create       (Data, ResourceFileForScenario(Scenario, "LoadList.xml"), loadingAddress)),
+                (WeaponSpellTable    = WeaponSpellTable.Create   (Data, ResourceFileForScenario(Scenario, "WeaponSpells.xml"), presetAddress)),
+                (SpellTable          = SpellTable.Create         (Data, ResourceFileForScenario(Scenario, "Spells.xml"), spellAddress)),
+                (StatBoostTable      = StatBoostTable.Create     (Data, ResourceFile("X002StatList.xml"), statBoostAddress)),
+                (WeaponRankTable     = WeaponRankTable.Create    (Data, ResourceFile("WeaponRankList.xml"), weaponRankAddress)),
             };
 
             if (Scenario == ScenarioType.Scenario1)

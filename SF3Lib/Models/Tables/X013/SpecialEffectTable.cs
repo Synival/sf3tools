@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class SpecialEffectTable : Table<SpecialEffect> {
-        public SpecialEffectTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected SpecialEffectTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static SpecialEffectTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new SpecialEffectTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

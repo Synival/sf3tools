@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X002 {
     public class ItemTable : Table<Item> {
-        public ItemTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected ItemTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static ItemTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new ItemTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

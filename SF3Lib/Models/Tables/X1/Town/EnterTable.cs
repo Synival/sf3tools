@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X1.Town {
     public class EnterTable : Table<Enter> {
-        public EnterTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected EnterTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static EnterTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new EnterTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

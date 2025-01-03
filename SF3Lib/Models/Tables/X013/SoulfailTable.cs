@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class SoulfailTable : Table<Soulfail> {
-        public SoulfailTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected SoulfailTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static SoulfailTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new SoulfailTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

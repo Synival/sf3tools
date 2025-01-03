@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class SupportTypeTable : Table<SupportType> {
-        public SupportTypeTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected SupportTypeTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static SupportTypeTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new SupportTypeTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

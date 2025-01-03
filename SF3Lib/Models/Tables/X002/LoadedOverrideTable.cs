@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X002 {
     public class LoadedOverrideTable : Table<LoadedOverride> {
-        public LoadedOverrideTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected LoadedOverrideTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static LoadedOverrideTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new LoadedOverrideTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

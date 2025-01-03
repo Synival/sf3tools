@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class HealExpTable : Table<HealExp> {
-        public HealExpTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected HealExpTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static HealExpTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new HealExpTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

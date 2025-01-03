@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X1.Town {
     public class NpcTable : Table<Npc> {
-        public NpcTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected NpcTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static NpcTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new NpcTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

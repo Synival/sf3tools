@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class FriendshipExpTable : Table<FriendshipExp> {
-        public FriendshipExpTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected FriendshipExpTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static FriendshipExpTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new FriendshipExpTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

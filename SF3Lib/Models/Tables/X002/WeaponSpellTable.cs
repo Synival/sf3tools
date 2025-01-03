@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X002 {
     public class WeaponSpellTable : Table<WeaponSpell> {
-        public WeaponSpellTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected WeaponSpellTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static WeaponSpellTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new WeaponSpellTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X002 {
     public class StatBoostTable : Table<StatBoost> {
-        public StatBoostTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected StatBoostTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static StatBoostTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new StatBoostTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

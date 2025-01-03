@@ -70,9 +70,9 @@ namespace SF3.Models.Files.X033_X031 {
             }
 
             return new List<ITable>() {
-                (WeaponLevelTable = new WeaponLevelTable(Data, ResourceFile("WeaponLevel.xml"), weaponLevelAddress)),
-                (StatsTable       = new StatsTable(Data, ResourceFileForScenario(Scenario, "ClassList.xml"), statsAddress)),
-                (InitialInfoTable = new InitialInfoTable(Data, ResourceFileForScenario(Scenario, "ClassEquip.xml"), initialInfoAddress)),
+                (WeaponLevelTable = WeaponLevelTable.Create(Data, ResourceFile("WeaponLevel.xml"), weaponLevelAddress)),
+                (StatsTable       = StatsTable.Create      (Data, ResourceFileForScenario(Scenario, "ClassList.xml"), statsAddress)),
+                (InitialInfoTable = InitialInfoTable.Create(Data, ResourceFileForScenario(Scenario, "ClassEquip.xml"), initialInfoAddress)),
             };
         }
 

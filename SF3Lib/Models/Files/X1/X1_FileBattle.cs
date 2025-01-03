@@ -33,11 +33,11 @@ namespace SF3.Models.Files.X1 {
             var customMovementAddress = aiAddress + 0x84;
 
             return new List<ITable>() {
-                (BattleHeaderTable   = new BattleHeaderTable(Data, ResourceFile("X1Top.xml"), headerAddress)),
-                (SlotTable           = new SlotTable(Data, ResourceFile(HasLargeEnemyTable ? "X1List.xml" : "X1OtherList.xml"), slotAddress)),
-                (SpawnZoneTable      = new SpawnZoneTable(Data, ResourceFile("UnknownAIList.xml"), spawnZoneAddress)),
-                (AITable             = new AITable(Data, ResourceFile("X1AI.xml"), aiAddress)),
-                (CustomMovementTable = new CustomMovementTable(Data, ResourceFile("X1AI.xml"), customMovementAddress)),
+                (BattleHeaderTable   = BattleHeaderTable.Create  (Data, ResourceFile("X1Top.xml"), headerAddress)),
+                (SlotTable           = SlotTable.Create          (Data, ResourceFile(HasLargeEnemyTable ? "X1List.xml" : "X1OtherList.xml"), slotAddress)),
+                (SpawnZoneTable      = SpawnZoneTable.Create     (Data, ResourceFile("UnknownAIList.xml"), spawnZoneAddress)),
+                (AITable             = AITable.Create            (Data, ResourceFile("X1AI.xml"), aiAddress)),
+                (CustomMovementTable = CustomMovementTable.Create(Data, ResourceFile("X1AI.xml"), customMovementAddress)),
             };
         }
 

@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X002 {
     public class AttackResistTable : Table<AttackResist> {
-        public AttackResistTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected AttackResistTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static AttackResistTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new AttackResistTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class CritrateTable : Table<Critrate> {
-        public CritrateTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected CritrateTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static CritrateTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new CritrateTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

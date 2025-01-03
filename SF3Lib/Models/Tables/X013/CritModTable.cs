@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class CritModTable : Table<CritMod> {
-        public CritModTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected CritModTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static CritModTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new CritModTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X013 {
     public class ExpLimitTable : Table<ExpLimit> {
-        public ExpLimitTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected ExpLimitTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static ExpLimitTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new ExpLimitTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()

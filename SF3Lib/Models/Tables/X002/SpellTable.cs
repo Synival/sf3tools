@@ -4,7 +4,13 @@ using SF3.RawData;
 
 namespace SF3.Models.Tables.X002 {
     public class SpellTable : Table<Spell> {
-        public SpellTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected SpellTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        }
+
+        public static SpellTable Create(IByteData data, string resourceFile, int address) {
+            var newTable = new SpellTable(data, resourceFile, address);
+            newTable.Load();
+            return newTable;
         }
 
         public override bool Load()
