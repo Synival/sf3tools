@@ -27,7 +27,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [TableViewModelColumn(displayName: "Exists", displayOrder: 2)]
-        public bool Exists => ChunkAddress > 0;
+        public bool Exists => ChunkAddress > 0 && ChunkSize != 0;
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Compression Type", displayOrder: 3, isReadOnly: true, minWidth: 150)]

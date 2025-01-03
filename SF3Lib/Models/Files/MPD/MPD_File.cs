@@ -4,7 +4,6 @@ using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.Types;
 using System.Linq;
-using System.Runtime.InteropServices;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.RawData;
@@ -13,14 +12,14 @@ using SF3.Models.Structs.MPD.TextureChunk;
 using CommonLib.SGL;
 using CommonLib.Types;
 using static CommonLib.Utils.BlockHelpers;
+using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
         private const int c_RamOffset = 0x290000;
         private const int c_SurfaceChunkSize = 0xCF00;
 
-        protected MPD_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
-        }
+        protected MPD_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) { }
 
         public static MPD_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
             var newFile = new MPD_File(data, nameContext, scenario);
@@ -29,74 +28,125 @@ namespace SF3.Models.Files.MPD {
             return newFile;
         }
 
-        byte[] FetchChunkDataCopy(int chunkIndex)
-            => Data.GetDataCopyAt(ChunkHeader.Rows[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader.Rows[chunkIndex].ChunkSize);
-
-        ByteArraySegment FetchChunkByteArray(int chunkIndex)
-            => new ByteArraySegment(Data.Data, ChunkHeader.Rows[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader.Rows[chunkIndex].ChunkSize);
-
-        IChunkData FetchChunkData(int chunkIndex, bool chunkIsCompressed)
-            => new ChunkData(FetchChunkByteArray(chunkIndex), chunkIsCompressed);
-
         public override IEnumerable<ITable> MakeTables() {
             var areAnimatedTextures32Bit = Scenario >= ScenarioType.Scenario3;
 
-            // Create and load Header
+            // Load root headers
+            var header = MakeHeaderTable().Rows[0];
+            var headerTables = MakeHeaderTables(header, areAnimatedTextures32Bit);
+
+            // Load chunks
+            var chunks = MakeChunkHeaderTable().Rows;
+            var chunkDatas = MakeChunkDatas(chunks);
+            var chunkTables = MakeChunkTables(chunks, chunkDatas, SurfaceChunkData);
+
+            // Add two-way communication between 'Modified' events from the root IByteData and its children.
+            WireChildDataModifiedEvents();
+
+            // Build a list of all data tables.
+            var tables = new List<ITable>() {
+                MPDHeader,
+                ChunkHeader,
+            };
+            tables.AddRange(headerTables);
+            tables.AddRange(chunkTables);
+
+            return tables;
+        }
+
+        private MPDHeaderTable MakeHeaderTable() {
             var headerAddrPtr = Data.GetDouble(0x0000) - c_RamOffset;
             var headerAddr = Data.GetDouble(headerAddrPtr) - c_RamOffset;
             MPDHeader = new MPDHeaderTable(Data, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
             _ = MPDHeader.Load();
-            var header = MPDHeader.Rows[0];
+            return MPDHeader;
+        }
 
-            // Load palettes
-            TexturePalettes = new ColorTable[3];
-            if (header.OffsetPal1 >= c_RamOffset)
-                TexturePalettes[0] = new ColorTable(Data, header.OffsetPal1 - c_RamOffset, 256);
-            if (header.OffsetPal2 > c_RamOffset)
-                TexturePalettes[1] = new ColorTable(Data, header.OffsetPal2 - c_RamOffset, 256);
-            if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 > c_RamOffset)
-                TexturePalettes[2] = new ColorTable(Data, header.OffsetPal3 - c_RamOffset, 256);
+        private ITable[] MakeHeaderTables(MPDHeaderModel header, bool areAnimatedTextures32Bit) {
+            var tables = new List<ITable>();
 
-            // Create other tables from header offsets.
-            LightPalette = header.OffsetLightPal != 0 ? new ColorTable(Data, header.OffsetLightPal - c_RamOffset, 32) : null;
-            LightDirectionTable = header.OffsetLightDir != 0 ? new LightDirectionTable(Data, header.OffsetLightDir - c_RamOffset) : null;
-            Offset3Table = header.Offset3 != 0 ? new UnknownUInt16Table(Data, header.Offset3 - c_RamOffset, 32) : null;
-            Offset4Table = header.Offset4 != 0 ? new Offset4Table(Data, header.Offset4 - c_RamOffset) : null;
+            tables.AddRange(MakeLightingTables(header));
+            tables.AddRange(MakeTexturePaletteTables(header));
+            tables.AddRange(MakeTextureAnimationTables(header, areAnimatedTextures32Bit));
+            tables.AddRange(MakeUnknownTables(header));
 
-            if (header.OffsetTextureAnimations != 0) {
-                TextureAnimations = new TextureAnimationTable(Data, header.OffsetTextureAnimations - c_RamOffset, areAnimatedTextures32Bit);
-                _ = TextureAnimations.Load();
-            }
+            return tables.ToArray();
+        }
 
+        private ChunkHeaderTable MakeChunkHeaderTable() {
             // Create chunk data
             ChunkHeader = new ChunkHeaderTable(Data, 0x2000);
             _ = ChunkHeader.Load();
 
-            var chunks = ChunkHeader.Rows;
+            foreach (var chunkHeader in ChunkHeader.Rows)
+                chunkHeader.CompressionType = chunkHeader.Exists ? "(WIP)" : "--";
 
-            // Assign all chunk data.
+            return ChunkHeader;
+        }
+
+        private ITable[] MakeTexturePaletteTables(MPDHeaderModel header) {
+            TexturePalettes = new ColorTable[3];
+            var headerRamAddr = header.Address + c_RamOffset;
+
+            if (header.OffsetPal1 >= c_RamOffset && header.OffsetPal1 < headerRamAddr)
+                TexturePalettes[0] = new ColorTable(Data, header.OffsetPal1 - c_RamOffset, Math.Min(256, (headerRamAddr - header.OffsetPal1) / 2));
+            if (header.OffsetPal2 >= c_RamOffset && header.OffsetPal2 < headerRamAddr)
+                TexturePalettes[1] = new ColorTable(Data, header.OffsetPal2 - c_RamOffset, Math.Min(256, (headerRamAddr - header.OffsetPal2) / 2));
+            if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 >= c_RamOffset && header.OffsetPal3 < headerRamAddr)
+                TexturePalettes[2] = new ColorTable(Data, header.OffsetPal3 - c_RamOffset, Math.Min(256, (headerRamAddr - header.OffsetPal3) / 2));
+
+            return TexturePalettes.Where(x => x != null).ToArray();
+        }
+
+        private ITable[] MakeLightingTables(MPDHeaderModel header) {
+            var tables = new List<ITable>();
+
+            if (header.OffsetLightPal != 0)
+                tables.Add(LightPalette = new ColorTable(Data, header.OffsetLightPal - c_RamOffset, 32));
+            if (header.OffsetLightDir != 0)
+                tables.Add(LightDirectionTable = new LightDirectionTable(Data, header.OffsetLightDir - c_RamOffset));
+
+            return tables.ToArray();
+        }
+
+        private ITable[] MakeTextureAnimationTables(MPDHeaderModel header, bool areAnimatedTextures32Bit) {
+            var tables = new List<ITable>();
+
+            if (header.OffsetTextureAnimations != 0) {
+                tables.Add(TextureAnimations = new TextureAnimationTable(Data, header.OffsetTextureAnimations - c_RamOffset, areAnimatedTextures32Bit));
+                _ = TextureAnimations.Load();
+            }
+
+            return tables.ToArray();
+        }
+
+        private ITable[] MakeUnknownTables(MPDHeaderModel header) {
+            var tables = new List<ITable>();
+
+            if (header.Offset3 != 0)
+                tables.Add(Offset3Table = new UnknownUInt16Table(Data, header.Offset3 - c_RamOffset, 32));
+            if (header.Offset4 != 0)
+                tables.Add(Offset4Table = new Offset4Table(Data, header.Offset4 - c_RamOffset));
+
+            return tables.ToArray();
+        }
+
+        private IChunkData[] MakeChunkDatas(ChunkHeader[] chunks) {
             ChunkData = new IChunkData[chunks.Length];
 
-            if (chunks[2].Exists && chunks[2].ChunkSize == c_SurfaceChunkSize)
-                _surfaceChunkIndex = 2;
-            else if (chunks[20].Exists && chunks[20].ChunkSize == c_SurfaceChunkSize)
-                _surfaceChunkIndex = 20;
-            else
-                _surfaceChunkIndex = -1;
+            _surfaceChunkIndex = GetSurfaceChunkIndex(chunks);
+            if (_surfaceChunkIndex != null)
+                ChunkData[_surfaceChunkIndex.Value] = MakeChunkData(_surfaceChunkIndex.Value, false);
 
-            if (_surfaceChunkIndex != -1)
-                ChunkData[_surfaceChunkIndex] = FetchChunkData(_surfaceChunkIndex, false);
-
-            if (chunks[3].Exists && chunks[3].ChunkSize > 0 && TextureAnimations != null)
-                ChunkData[3] = FetchChunkData(3, false);
-
-            if (chunks[5].Exists && chunks[5].ChunkSize > 0)
-                ChunkData[5] = FetchChunkData(5, true);
+            if (chunks[3].Exists)
+                ChunkData[3] = MakeChunkData(3, false, "Individually Compressed");
+            if (chunks[5].Exists)
+                ChunkData[5] = MakeChunkData(5, true);
 
             // Texture data, in chunks (6...10)
             for (var i = 6; i <= 10; i++) {
                 try {
-                    ChunkData[i] = FetchChunkData(i, true);
+                    ChunkData[i] = MakeChunkData(i, true);
                 }
                 catch {
                     // TODO: This is likely failing because the texture is the wrong encoding.
@@ -104,110 +154,87 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
-            // We should have all the uncompressed data now. Update read-only info of our chunk table.
-            for (var i = 0; i < chunks.Length; i++) {
-                ChunkHeader.Rows[i].CompressionType =
-                    (ChunkData[i] == null && chunks[i].Exists && chunks[i].ChunkSize > 0) ? "(WIP)" :
-                    ChunkData[i] == null ? "--" :
-                    (i == 3) ? "Individually Compressed" :
-                    ChunkData[i].IsCompressed ? "Compressed" :
-                    "Uncompressed";
-            }
+            return ChunkData;
+        }
 
-            // Add triggers to update the chunk table when chunks are resized or moved.
-            for (var i = 0; i < chunks.Length; i++) {
-                if (ChunkData[i] == null)
-                    continue;
+        private IChunkData MakeChunkData(int chunkIndex, bool chunkIsCompressed, string compressionType = null) {
+            var newChunk = new ChunkData(new ByteArraySegment(Data.Data, ChunkHeader.Rows[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader.Rows[chunkIndex].ChunkSize), chunkIsCompressed);
+            var chunkHeader = ChunkHeader.Rows[chunkIndex];
 
-                var chunkData = ChunkData[i];
-                var chunkHeader = ChunkHeader.Rows[i];
-
-                chunkHeader.DecompressedSize = chunkData.DecompressedData.Length;
-                chunkData.DecompressedData.Data.RangeModified += (s, a) => {
-                    if (a.Resized)
-                        chunkHeader.DecompressedSize = chunkData.DecompressedData.Length;
-                };
-
-                int chunkNum = i;
-                chunkData.Data.RangeModified += (s, a) => {
-                    if (a.Moved) {
-                        var oldOffset = ChunkHeader.Rows[chunkNum].ChunkAddress - c_RamOffset;
-                        var newOffset = ((ByteArraySegment) chunkData.Data).Offset;
-                        var offsetDiff = newOffset - oldOffset;
-
-                        for (var j = chunkNum; j < ChunkHeader.Rows.Length; j++) {
-                            var ch = ChunkHeader.Rows[j];
-                            if (ch != null && ch.ChunkAddress != 0)
-                                ch.ChunkAddress += offsetDiff;
-                        }
-                    }
-                    if (a.Resized)
-                        chunkHeader.ChunkSize = chunkData.Data.Length;
-                };
-            }
-
-            // Build a list of all data tables.
-            var tables = new List<ITable>() {
-                MPDHeader,
-                ChunkHeader,
-                (TileSurfaceHeightmapRows = new TileSurfaceHeightmapRowTable(ChunkData[5].DecompressedData, 0x0000)),
-                (TileHeightTerrainRows    = new TileHeightTerrainRowTable   (ChunkData[5].DecompressedData, 0x4000)),
-                (TileItemRows             = new TileItemRowTable            (ChunkData[5].DecompressedData, 0x6000)),
+            chunkHeader.DecompressedSize = newChunk.DecompressedData.Length;
+            newChunk.DecompressedData.Data.RangeModified += (s, a) => {
+                if (a.Resized)
+                    chunkHeader.DecompressedSize = newChunk.DecompressedData.Length;
             };
 
-            if (TextureAnimations != null)
-                tables.Add(TextureAnimations);
+            newChunk.Data.RangeModified += (s, a) => {
+                if (a.Moved) {
+                    var oldOffset = ChunkHeader.Rows[chunkIndex].ChunkAddress - c_RamOffset;
+                    var newOffset = ((ByteArraySegment) newChunk.Data).Offset;
+                    var offsetDiff = newOffset - oldOffset;
 
-            for (var i = 0; i < TexturePalettes.Length; i++)
-                if (TexturePalettes[i] != null)
-                    tables.Add(TexturePalettes[i]);
+                    for (var j = chunkIndex; j < ChunkHeader.Rows.Length; j++) {
+                        var ch = ChunkHeader.Rows[j];
+                        if (ch != null && ch.ChunkAddress != 0)
+                            ch.ChunkAddress += offsetDiff;
+                    }
+                }
+                if (a.Resized)
+                    chunkHeader.ChunkSize = newChunk.Data.Length;
+            };
 
-            if (LightPalette != null)
-                tables.Add(LightPalette);
-            if (LightDirectionTable != null)
-                tables.Add(LightDirectionTable);
-            if (Offset3Table != null)
-                tables.Add(Offset3Table);
-            if (Offset4Table != null)
-                tables.Add(Offset4Table);
-            if (TextureAnimations != null)
-                tables.Add(TextureAnimations);
+            chunkHeader.CompressionType = compressionType ?? (chunkIsCompressed ? "Compressed" : "Uncompressed");
+            return newChunk;
+        }
 
-            if (SurfaceChunkData?.Length >= 64 * 64 * 2) {
-                tables.Add(TileSurfaceCharacterRows          = new TileSurfaceCharacterRowTable     (SurfaceChunkData.DecompressedData, 0x0000));
-                tables.Add(TileSurfaceVertexNormalMeshBlocks = new TileSurfaceVertexNormalMeshBlocks(SurfaceChunkData.DecompressedData, 0x2000));
-                tables.Add(TileSurfaceVertexHeightMeshBlocks = new TileSurfaceVertexHeightMeshBlocks(SurfaceChunkData.DecompressedData, 0xB600));
-            }
+        private int? GetSurfaceChunkIndex(ChunkHeader[] chunks) {
+            if (chunks[2].Exists && chunks[2].ChunkSize == c_SurfaceChunkSize)
+                return 2;
+            else if (chunks[20].Exists && chunks[20].ChunkSize == c_SurfaceChunkSize)
+                return 20;
+            else
+                return null;
+        }
 
+        private ITable[] MakeChunkTables(ChunkHeader[] chunkHeaders, IChunkData[] chunkDatas, IChunkData surfaceModelChunk) {
+            var tables = new List<ITable>();
+
+            if (chunkDatas[5] != null)
+                tables.AddRange(MakeTileChunkTables(chunkDatas[5].DecompressedData));
+            if (surfaceModelChunk != null)
+                tables.AddRange(MakeSurfaceModelChunkTables(surfaceModelChunk.DecompressedData));
+
+            // TODO: refactor MPD_FileTextureChunk
             TextureChunks = new MPD_FileTextureChunk[5];
             for (var i = 0; i < TextureChunks.Length; i++) {
                 var chunkIndex = i + 6;
                 if (ChunkData[chunkIndex]?.Length > 0) {
                     TextureChunks[i] = MPD_FileTextureChunk.Create(ChunkData[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
-                    tables.Add(TextureChunks[i].TextureHeaderTable);
-                    tables.Add(TextureChunks[i].TextureTable);
+                    tables.AddRange(TextureChunks[i].Tables);
                 }
             }
 
             // Now that textures are loaded, build the texture animation frame data.
+            // TODO: This function is a MESS. Please refactor it!!
             BuildTextureAnimFrameData();
 
-            // Add some callbacks to all child data.
-            var allData = ChunkData
-                .Where(x => x != null)
-                .Cast<IByteData>()
-                .Concat((Chunk3Frames != null) ? Chunk3Frames.Select(x => x.Data) : new CompressedData[0])
-                .ToArray();
+            return tables.ToArray();
+        }
 
-            foreach (var d in allData) {
-                // If the data is marked as unmodified (such as after a save), mark child data as unmodified as well.
-                Data.IsModifiedChanged += (s, e) => d.IsModified &= Data.IsModified;
+        private ITable[] MakeTileChunkTables(IByteData data) {
+            return new ITable[] {
+                (TileSurfaceHeightmapRows = new TileSurfaceHeightmapRowTable(data, 0x0000)),
+                (TileHeightTerrainRows    = new TileHeightTerrainRowTable   (data, 0x4000)),
+                (TileItemRows             = new TileItemRowTable            (data, 0x6000)),
+            };
+        }
 
-                // If any of the child data is marked as modified, mark the parent data as modified as well.
-                d.IsModifiedChanged += (s, e) => Data.IsModified |= d.IsModified;
-            }
-
-            return tables;
+        private ITable[] MakeSurfaceModelChunkTables(IByteData data) {
+            return new ITable[] {
+                (TileSurfaceCharacterRows          = new TileSurfaceCharacterRowTable     (data, 0x0000)),
+                (TileSurfaceVertexNormalMeshBlocks = new TileSurfaceVertexNormalMeshBlocks(data, 0x2000)),
+                (TileSurfaceVertexHeightMeshBlocks = new TileSurfaceVertexHeightMeshBlocks(data, 0xB600)),
+            };
         }
 
         private TextureModel GetTextureModelByID(int textureId) {
@@ -216,6 +243,7 @@ namespace SF3.Models.Files.MPD {
             return TextureChunks.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x.Rows).FirstOrDefault(x => x.ID == textureId);
         }
 
+        // TODO: refactor this mess!!
         private void BuildTextureAnimFrameData() {
             if (ChunkData[3] == null)
                 return;
@@ -291,8 +319,22 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        [DllImport("msvcrt.dll", SetLastError = false)]
-        private static extern IntPtr memcpy(IntPtr dest, IntPtr src, int count);
+        private void WireChildDataModifiedEvents() {
+            // Add some callbacks to all child data.
+            var allData = ChunkData
+                .Where(x => x != null)
+                .Cast<IByteData>()
+                .Concat((Chunk3Frames != null) ? Chunk3Frames.Select(x => x.Data) : new CompressedData[0])
+                .ToArray();
+
+            foreach (var d in allData) {
+                // If the data is marked as unmodified (such as after a save), mark child data as unmodified as well.
+                Data.IsModifiedChanged += (s, e) => d.IsModified &= Data.IsModified;
+
+                // If any of the child data is marked as modified, mark the parent data as modified as well.
+                d.IsModifiedChanged += (s, e) => Data.IsModified |= d.IsModified;
+            }
+        }
 
         public bool Recompress(bool onlyModified) {
             var framesModified = Chunk3Frames?.Any(x => x.Data.IsModified || x.Data.NeedsRecompression) ?? false;
@@ -330,7 +372,7 @@ namespace SF3.Models.Files.MPD {
             int expectedPos = 0x292100;
             for (var i = 0; i < ChunkData.Length; i++) {
                 var chunk = ChunkHeader.Rows[i];
-                if (!chunk.Exists)
+                if (chunk.Address == 0)
                     continue;
 
                 var chunkData = ChunkData[i];
@@ -461,7 +503,7 @@ namespace SF3.Models.Files.MPD {
 
         public IChunkData[] ChunkData { get; private set; }
 
-        public IChunkData SurfaceChunkData => (_surfaceChunkIndex >= 0) ? ChunkData[_surfaceChunkIndex] : null;
+        public IChunkData SurfaceChunkData => (_surfaceChunkIndex.HasValue) ? ChunkData[_surfaceChunkIndex.Value] : null;
 
         [BulkCopyRecurse]
         public MPDHeaderTable MPDHeader { get; private set; }
@@ -510,6 +552,6 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public MPD_FileTextureChunk[] TextureChunks { get; private set; }
 
-        private int _surfaceChunkIndex = -1;
+        private int? _surfaceChunkIndex = null;
     }
 }
