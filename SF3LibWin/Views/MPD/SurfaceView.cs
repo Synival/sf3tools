@@ -14,9 +14,9 @@ namespace SF3.Win.Views.MPD {
             var ngc = Model.NameGetterContext;
 
             CreateChild(new TableView("Textures",              Model.SurfaceModel?.CharacterRowTable, ngc));
-            CreateChild(new TableView("Heightmap",             Model.TileSurfaceHeightmapRows, ngc));
-            CreateChild(new TableView("Height + Terrain Type", Model.TileHeightTerrainRows, ngc));
-            CreateChild(new TableView("Object Locations",      Model.TileItemRows, ngc));
+            CreateChild(new TableView("Heightmap",             Model.Surface?.TileSurfaceHeightmapRows, ngc));
+            CreateChild(new TableView("Height + Terrain Type", Model.Surface?.TileHeightTerrainRows, ngc));
+            CreateChild(new TableView("Object Locations",      Model.Surface?.TileItemRows, ngc));
 
             return Control;
         }

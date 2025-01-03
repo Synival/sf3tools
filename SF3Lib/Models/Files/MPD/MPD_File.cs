@@ -211,10 +211,13 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeChunkTables(ChunkHeader[] chunkHeaders, IChunkData[] chunkDatas, IChunkData surfaceModelChunk) {
             var tables = new List<ITable>();
 
-            if (chunkDatas[5] != null)
-                tables.AddRange(MakeTileChunkTables(chunkDatas[5].DecompressedData));
+            if (chunkDatas[5] != null) {
+                Surface = Surface.Create(chunkDatas[5].DecompressedData, NameGetterContext, 0x00, "Surface");
+                tables.AddRange(Surface.Tables);
+            }
+
             if (surfaceModelChunk != null) {
-                SurfaceModel = SurfaceModel.Create(surfaceModelChunk.DecompressedData, NameGetterContext, 0x00, "SurfaceModelChunk");
+                SurfaceModel = SurfaceModel.Create(surfaceModelChunk.DecompressedData, NameGetterContext, 0x00, "SurfaceModel");
                 tables.AddRange(SurfaceModel.Tables);
             }
 
@@ -222,7 +225,7 @@ namespace SF3.Models.Files.MPD {
             for (var i = 0; i < TextureCollections.Length; i++) {
                 var chunkIndex = i + 6;
                 if (chunkDatas[chunkIndex]?.Length > 0) {
-                    TextureCollections[i] = TextureCollection.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureChunk" + (i + 1));
+                    TextureCollections[i] = TextureCollection.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureCollection" + (i + 1));
                     tables.AddRange(TextureCollections[i].Tables);
                 }
             }
@@ -232,14 +235,6 @@ namespace SF3.Models.Files.MPD {
             BuildTextureAnimFrameData();
 
             return tables.ToArray();
-        }
-
-        private ITable[] MakeTileChunkTables(IByteData data) {
-            return new ITable[] {
-                (TileSurfaceHeightmapRows = TileSurfaceHeightmapRowTable.Create(data, 0x0000)),
-                (TileHeightTerrainRows    = TileHeightTerrainRowTable.Create   (data, 0x4000)),
-                (TileItemRows             = TileItemRowTable.Create            (data, 0x6000)),
-            };
         }
 
         private TextureModel GetTextureModelByID(int textureId) {
@@ -464,13 +459,7 @@ namespace SF3.Models.Files.MPD {
         public List<Chunk3Frame> Chunk3Frames { get; private set; }
 
         [BulkCopyRecurse]
-        public TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; private set; }
-
-        [BulkCopyRecurse]
-        public TileHeightTerrainRowTable TileHeightTerrainRows { get; private set; }
-
-        [BulkCopyRecurse]
-        public TileItemRowTable TileItemRows { get; private set; }
+        public Surface Surface { get; private set; }
 
         [BulkCopyRecurse]
         public SurfaceModel SurfaceModel { get; private set; }

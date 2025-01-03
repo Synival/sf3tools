@@ -49,11 +49,8 @@ namespace SF3.Models.Files.MPD {
         /// </summary>
         List<Chunk3Frame> Chunk3Frames { get; }
 
-        TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; }
-        TileHeightTerrainRowTable TileHeightTerrainRows { get; }
-        TileItemRowTable TileItemRows { get; }
-
         SurfaceModel SurfaceModel { get; }
+        Surface Surface { get; }
         TextureCollection[] TextureCollections { get; }
     }
 }

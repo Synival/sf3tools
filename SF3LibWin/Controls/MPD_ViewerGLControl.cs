@@ -303,8 +303,8 @@ namespace SF3.Win.Controls {
             float[] heights;
 
             // For any tile whose character/texture ID has flag 0x80, the walking heightmap is used.
-            if (Model.TileSurfaceHeightmapRows != null && (Model.SurfaceModel?.CharacterRowTable?.Rows[pos.Y]?.GetTextureFlags(pos.X) & 0x80) == 0x80)
-                heights = Model.TileSurfaceHeightmapRows.Rows[pos.Y].GetHeights(pos.X);
+            if (Model.Surface?.TileSurfaceHeightmapRows != null && (Model.SurfaceModel?.CharacterRowTable?.Rows[pos.Y]?.GetTextureFlags(pos.X) & 0x80) == 0x80)
+                heights = Model.Surface?.TileSurfaceHeightmapRows.Rows[pos.Y].GetHeights(pos.X);
             // Otherwise, gather heights from the 5x5 block with the surface mesh's heightmap.
             else if (Model.SurfaceModel?.VertexHeightMeshBlocks != null) {
                 var blockLocations = new BlockVertexLocation[] {
