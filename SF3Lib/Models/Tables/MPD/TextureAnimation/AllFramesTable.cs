@@ -2,7 +2,7 @@
 using System.Linq;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.TextureAnimation;
-using SF3.RawData;
+using SF3.ByteData;
 
 namespace SF3.Models.Tables.MPD.TextureAnimation {
     public class AllFramesTable : Table<FrameModel> {

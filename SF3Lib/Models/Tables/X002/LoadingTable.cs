@@ -1,6 +1,6 @@
 using SF3.Models.Structs.X002;
 using SF3.Models.Tables;
-using SF3.RawData;
+using SF3.ByteData;
 
 namespace SF3.Models.Tables.X002 {
     public class LoadingTable : Table<Loading> {

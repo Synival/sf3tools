@@ -2,7 +2,7 @@
 using CommonLib.Arrays;
 using static CommonLib.Utils.Compression;
 
-namespace SF3.RawData {
+namespace SF3.ByteData {
     public class CompressedData : ByteData, ICompressedData {
         public CompressedData(IByteArray byteArray, int? maxDecompressedSize = null) : base(byteArray) {
             if (byteArray == null)

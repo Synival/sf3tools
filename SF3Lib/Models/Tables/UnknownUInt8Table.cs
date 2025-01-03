@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using SF3.Models.Structs;
-using SF3.RawData;
+using SF3.ByteData;
 
 namespace SF3.Models.Tables {
     public class UnknownUInt8Table : Table<UnknownUInt8Struct> {

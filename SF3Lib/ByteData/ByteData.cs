@@ -5,7 +5,7 @@ using CommonLib;
 using CommonLib.Arrays;
 using CommonLib.SGL;
 
-namespace SF3.RawData {
+namespace SF3.ByteData {
     /// <summary>
     /// Used for modifying any set of bytes.
     /// </summary>

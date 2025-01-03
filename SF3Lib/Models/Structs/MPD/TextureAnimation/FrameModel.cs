@@ -2,7 +2,7 @@
 using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.Attributes;
-using SF3.RawData;
+using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureAnimation {
@@ -60,7 +60,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             if (imageData.GetLength(0) != Width || imageData.GetLength(1) != Height)
                 throw new ArgumentException("Incoming data dimensions must match specified width/height");
 
-            var newData = new ByteData(new ByteArray(Width * Height * 2));
+            var newData = new SF3.ByteData.ByteData(new ByteArray(Width * Height * 2));
             var off = 0;
             for (var y = 0; y < Height; y++) {
                 for (var x = 0; x < Width; x++) {

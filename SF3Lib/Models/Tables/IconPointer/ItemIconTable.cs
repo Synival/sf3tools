@@ -1,6 +1,6 @@
 using SF3.Models.Structs.IconPointer;
 using SF3.Models.Tables;
-using SF3.RawData;
+using SF3.ByteData;
 
 namespace SF3.Models.Tables.IconPointer {
     public class ItemIconTable : Table<ItemIcon> {

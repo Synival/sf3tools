@@ -4,7 +4,7 @@ using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.Models.Tables;
 using SF3.Models.Tables.X019;
-using SF3.RawData;
+using SF3.ByteData;
 using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 

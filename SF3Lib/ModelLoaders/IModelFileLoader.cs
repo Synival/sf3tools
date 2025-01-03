@@ -10,7 +10,7 @@ namespace SF3.ModelLoaders {
         /// Loads a file's binary data for editing. Invokes events 'PreLoaded' and 'Loaded'.
         /// </summary>
         /// <param name="filename">The file to load.</param>
-        /// <param name="createModel">Callback to create a model once after creating the raw data.</param>
+        /// <param name="createModel">Callback to create a model once after creating the byte data.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
         bool LoadFile(string filename, ModelFileLoaderCreateModelDelegate createModel);
 
@@ -19,7 +19,7 @@ namespace SF3.ModelLoaders {
         /// </summary>
         /// <param name="filename">The filename of 'stream' to be stored.</param>
         /// <param name="stream">The data stream to load.</param>
-        /// <param name="createModel">Callback to create a model once after creating the raw data.</param>
+        /// <param name="createModel">Callback to create a model once after creating the byte data.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
         bool LoadFile(string filename, Stream stream, ModelFileLoaderCreateModelDelegate createModel);
 

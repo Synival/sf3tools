@@ -4,7 +4,7 @@ using CommonLib.Extensions;
 using CommonLib.Utils;
 using SF3.Models.Structs.Shared;
 using SF3.Models.Tables;
-using SF3.RawData;
+using SF3.ByteData;
 
 namespace SF3.Models.Tables.Shared {
     public class WarpTable : Table<Warp> {

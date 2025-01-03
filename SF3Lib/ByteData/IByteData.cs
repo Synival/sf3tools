@@ -2,7 +2,7 @@
 using CommonLib.Arrays;
 using CommonLib.SGL;
 
-namespace SF3.RawData {
+namespace SF3.ByteData {
     /// <summary>
     /// Helper class for modifying any kind of data blob and tracking whether or not it's been edited.
     /// </summary>
@@ -25,15 +25,15 @@ namespace SF3.RawData {
         int Length { get; }
 
         /// <summary>
-        /// Returns a copy of all raw data loaded.
+        /// Returns a copy of all byte data loaded.
         /// </summary>
-        /// <returns>A copy of the raw data loaded as a byte[].</returns>
+        /// <returns>A copy of the byte data loaded as a byte[].</returns>
         byte[] GetDataCopy();
 
         /// <summary>
-        /// Returns a copy of raw data loaded in a specific range.
+        /// Returns a copy of byte data loaded in a specific range.
         /// </summary>
-        /// <returns>A copy of the raw data loaded at a specific range as a byte[].</returns>
+        /// <returns>A copy of the byte data loaded at a specific range as a byte[].</returns>
         byte[] GetDataCopyAt(int offset, int length);
 
         /// <summary>

@@ -7,7 +7,7 @@ using SF3.Types;
 using static SF3.Utils.ResourceUtils;
 using SF3.Models.Tables;
 using SF3.Models.Tables.IconPointer;
-using SF3.RawData;
+using SF3.ByteData;
 
 namespace SF3.Models.Files.IconPointer {
     public class IconPointerFile : ScenarioTableFile, IIconPointerFile {

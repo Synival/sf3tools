@@ -1,6 +1,6 @@
 using SF3.Models.Structs.X013;
 using SF3.Models.Tables;
-using SF3.RawData;
+using SF3.ByteData;
 
 namespace SF3.Models.Tables.X013 {
     public class SoulmateTable : Table<Soulmate> {

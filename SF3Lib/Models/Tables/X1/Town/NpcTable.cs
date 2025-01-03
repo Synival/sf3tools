@@ -1,6 +1,6 @@
 using SF3.Models.Structs.X1.Town;
 using SF3.Models.Tables;
-using SF3.RawData;
+using SF3.ByteData;
 
 namespace SF3.Models.Tables.X1.Town {
     public class NpcTable : Table<Npc> {

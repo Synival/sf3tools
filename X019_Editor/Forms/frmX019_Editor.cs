@@ -28,7 +28,7 @@ namespace SF3.X019_Editor.Forms {
                 + base.FileDialogFilter;
 
         protected override IBaseFile CreateModel(IModelFileLoader loader)
-            => X019_File.Create(loader.RawData, new NameGetterContext(Scenario), Scenario);
+            => X019_File.Create(loader.ByteData, new NameGetterContext(Scenario), Scenario);
 
         protected override bool OnLoad() {
             if (!base.OnLoad())

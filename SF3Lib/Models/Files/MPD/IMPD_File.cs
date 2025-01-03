@@ -3,7 +3,7 @@ using CommonLib.SGL;
 using CommonLib.Types;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
-using SF3.RawData;
+using SF3.ByteData;
 using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Models.Files.MPD {

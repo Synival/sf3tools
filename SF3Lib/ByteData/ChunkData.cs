@@ -3,7 +3,7 @@ using CommonLib;
 using CommonLib.Arrays;
 using CommonLib.SGL;
 
-namespace SF3.RawData {
+namespace SF3.ByteData {
     public class ChunkData : IChunkData {
         public ChunkData(IByteArray byteArray, bool chunkIsCompressed) {
             if (byteArray == null)

@@ -5,7 +5,7 @@ using CommonLib.NamedValues;
 using SF3.Models.Files.IconPointer;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
-using SF3.RawData;
+using SF3.ByteData;
 using SF3.Types;
 using SF3.Win.Views;
 using SF3.Win.Views.MPD;

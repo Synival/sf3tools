@@ -6,7 +6,7 @@ using CommonLib.Arrays;
 using SF3;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
-using SF3.RawData;
+using SF3.ByteData;
 using SF3.Types;
 
 namespace TextureExtractor {
@@ -82,7 +82,7 @@ namespace TextureExtractor {
                     var filename = Path.GetFileNameWithoutExtension(file);
                     Console.Write(scenario.ToString() + ": " + Path.GetFileName(file) + ": ");
 
-                    // Get a raw data editing context for the file.
+                    // Get a byte data editing context for the file.
                     var byteData = new ByteData(new ByteArray(File.ReadAllBytes(file)));
 
                     // Create an MPD file that works with our new ByteData.

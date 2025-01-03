@@ -1,7 +1,7 @@
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Models.Files.X019;
-using SF3.RawData;
+using SF3.ByteData;
 using CommonLib.Arrays;
 
 namespace SF3.Tests.Models.Files {
@@ -14,7 +14,7 @@ namespace SF3.Tests.Models.Files {
             }
 
             public X019_File Create()
-                => X019_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario);
+                => X019_File.Create(new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedRows { get; }
         }

@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using CommonLib.Arrays;
 using SF3.Exceptions;
-using SF3.RawData;
+using SF3.ByteData;
 using static SF3.ModelLoaders.ModelFileLoaderDelegates;
 
 namespace SF3.ModelLoaders {
@@ -11,18 +11,18 @@ namespace SF3.ModelLoaders {
     /// </summary>
     public partial class ModelFileLoader : BaseModelLoader, IModelFileLoader {
         public ModelFileLoader() {
-            _createRawData = (IModelFileLoader loader, string filename, Stream stream) => {
+            _createByteData = (IModelFileLoader loader, string filename, Stream stream) => {
                 byte[] newData;
                 using (var memoryStream = new MemoryStream()) {
                     stream.CopyTo(memoryStream);
                     newData = memoryStream.ToArray();
                 }
-                return new ByteData(new ByteArray(newData));
+                return new SF3.ByteData.ByteData(new ByteArray(newData));
             };
         }
 
-        public ModelFileLoader(ModelFileLoaderCreateRawDataDelegate createRawData) {
-            _createRawData = createRawData;
+        public ModelFileLoader(ModelFileLoaderCreateByteDataDelegate createByteData) {
+            _createByteData = createByteData;
         }
 
         public virtual bool LoadFile(string filename, ModelFileLoaderCreateModelDelegate createModel) {
@@ -38,7 +38,7 @@ namespace SF3.ModelLoaders {
         public virtual bool LoadFile(string filename, Stream stream, ModelFileLoaderCreateModelDelegate createModel) {
             return PerformLoad(e => {
                 try {
-                    var newData = _createRawData(this, filename, stream);
+                    var newData = _createByteData(this, filename, stream);
                     if (newData == null)
                         return null;
                     Filename = filename;
@@ -55,7 +55,7 @@ namespace SF3.ModelLoaders {
                 throw new ModelFileLoaderNotLoadedException();
             return PerformSave(el => {
                 try {
-                    File.WriteAllBytes(filename, el.RawData.GetDataCopy());
+                    File.WriteAllBytes(filename, el.ByteData.GetDataCopy());
                     Filename = filename;
                     return true;
                 }
@@ -65,7 +65,7 @@ namespace SF3.ModelLoaders {
             });
         }
 
-        private readonly ModelFileLoaderCreateRawDataDelegate _createRawData;
+        private readonly ModelFileLoaderCreateByteDataDelegate _createByteData;
 
         private string _filename = null;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using SF3.Models.Files;
-using SF3.RawData;
+using SF3.ByteData;
 
 namespace SF3.ModelLoaders {
     /// <summary>
@@ -19,14 +19,14 @@ namespace SF3.ModelLoaders {
         string ModelTitle(string formTitle);
 
         /// <summary>
-        /// The model loaded and created, backed by an underlying IRawData.
+        /// The model loaded and created, backed by an underlying IByteData.
         /// </summary>
         IBaseFile Model { get; }
 
         /// <summary>
-        /// The raw data that exists when IsLoaded is 'true'.
+        /// The byte data that exists when IsLoaded is 'true'.
         /// </summary>
-        IByteData RawData { get; }
+        IByteData ByteData { get; }
 
         /// <summary>
         /// 'True' when the model is loaded.

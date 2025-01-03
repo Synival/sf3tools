@@ -2,7 +2,7 @@
 using CommonLib.Arrays;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
-using SF3.RawData;
+using SF3.ByteData;
 using SF3.Types;
 using static CommonLib.Utils.Compression;
 
@@ -33,7 +33,7 @@ namespace SF3.Tests.Compression {
                         return;
 
                     using (var mpdFile = MPD_File.Create(
-                        new ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
+                        new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
                         if (mpdFile.Chunk3Frames == null || mpdFile.Chunk3Frames.Count == 0)
                             return;
 
@@ -74,7 +74,7 @@ namespace SF3.Tests.Compression {
                         return;
 
                     using (var mpdFile = MPD_File.Create(
-                        new ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
+                        new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
                         var data = mpdFile.ChunkData[5];
                         if (data == null)
                             return;
@@ -108,7 +108,7 @@ namespace SF3.Tests.Compression {
                         return;
 
                     using (var mpdFile = MPD_File.Create(
-                        new ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
+                        new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
 
                         for (int i = 6; i <= 10; i++) {
                             var data = mpdFile.ChunkData[i];
@@ -144,7 +144,7 @@ namespace SF3.Tests.Compression {
                         return;
 
                     using (var mpdFile = MPD_File.Create(
-                        new ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
+                        new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
 
                         for (int i = 6; i <= 10; i++) {
                             var data = mpdFile.ChunkData[i];
@@ -180,7 +180,7 @@ namespace SF3.Tests.Compression {
                         return;
 
                     using (var mpdFile = MPD_File.Create(
-                        new ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
+                        new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), nameGetterContext, st)) {
                         if (mpdFile.Chunk3Frames == null || mpdFile.Chunk3Frames.Count == 0)
                             return;
                         if (mpdFile.TileSurfaceHeightmapRows == null)
@@ -207,7 +207,7 @@ namespace SF3.Tests.Compression {
                         }
 
                         // Attempt to create the file to make sure it's not corrupted.
-                        var recreatedMpdFile = MPD_File.Create(new ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetterContext, st);
+                        var recreatedMpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetterContext, st);
                     }
                 });
             }

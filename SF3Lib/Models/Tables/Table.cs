@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using CommonLib.Attributes;
 using SF3.Models.Structs;
-using SF3.RawData;
+using SF3.ByteData;
 using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Models.Tables {
@@ -19,7 +19,7 @@ namespace SF3.Models.Tables {
         }
 
         /// <summary>
-        /// Loads models from the raw data provided provided in the constructor.
+        /// Loads models from the byte data provided provided in the constructor.
         /// </summary>
         /// <returns>'true' if models were loaded successfully, otherwise 'false'.</returns>
         public abstract bool Load();

@@ -22,7 +22,7 @@ namespace SF3.IconPointerEditor.Forms {
             => "SF3 Data (X011.BIN;X021.BIN;X026.BIN)|X011.BIN;X021.BIN;X026.BIN|" + base.FileDialogFilter;
 
         protected override IBaseFile CreateModel(IModelFileLoader loader)
-            => IconPointerFile.Create(loader.RawData, new NameGetterContext(Scenario), Scenario);
+            => IconPointerFile.Create(loader.ByteData, new NameGetterContext(Scenario), Scenario);
 
         protected override IView CreateView(IModelFileLoader loader, IBaseFile model)
             => new IconPointerView(loader.Filename, (IconPointerFile) model);

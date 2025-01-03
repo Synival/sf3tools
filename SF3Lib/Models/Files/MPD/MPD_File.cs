@@ -6,7 +6,7 @@ using SF3.Types;
 using System.Linq;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
-using SF3.RawData;
+using SF3.ByteData;
 using CommonLib.Arrays;
 using SF3.Models.Structs.MPD.TextureChunk;
 using CommonLib.SGL;

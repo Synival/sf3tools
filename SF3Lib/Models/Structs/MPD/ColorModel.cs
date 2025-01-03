@@ -1,5 +1,5 @@
 ﻿using CommonLib.Attributes;
-using SF3.RawData;
+using SF3.ByteData;
 using static CommonLib.Utils.PixelConversion;
 
 namespace SF3.Models.Structs.MPD {

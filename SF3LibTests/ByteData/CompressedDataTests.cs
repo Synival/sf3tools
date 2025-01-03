@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using CommonLib.Arrays;
-using SF3.RawData;
+using SF3.ByteData;
 using static CommonLib.Utils.Compression;
 
-namespace SF3.Tests.RawData {
+namespace SF3.Tests.ByteData {
     [TestClass]
     public class CompressedDataTests {
         private static readonly byte[] _compressedTestData = Compress(Encoding.UTF8.GetBytes("Hello, world!!"));

@@ -1,6 +1,6 @@
 using SF3.Models.Structs.X033_X031;
 using SF3.Models.Tables;
-using SF3.RawData;
+using SF3.ByteData;
 
 namespace SF3.Models.Tables.X033_X031 {
     public class WeaponLevelTable : Table<WeaponLevel> {

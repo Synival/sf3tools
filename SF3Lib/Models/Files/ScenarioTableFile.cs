@@ -1,5 +1,5 @@
 using CommonLib.NamedValues;
-using SF3.RawData;
+using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Files {

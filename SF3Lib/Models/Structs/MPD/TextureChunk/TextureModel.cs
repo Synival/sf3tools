@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.Attributes;
-using SF3.RawData;
+using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureChunk {
@@ -130,7 +130,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                     throw new ArgumentException("Incoming data dimensions must match specified width/height");
 
                 var off = 0;
-                var newData = new ByteData(new ByteArray(Width * Height));
+                var newData = new SF3.ByteData.ByteData(new ByteArray(Width * Height));
                 for (var y = 0; y < Height; y++)
                     for (var x = 0; x < Width; x++)
                         newData.SetByte(off++, value[x, y]);
@@ -163,7 +163,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                     throw new ArgumentException("Incoming data dimensions must match specified width/height");
 
                 var off = 0;
-                var newData = new ByteData(new ByteArray(Width * Height * 2));
+                var newData = new SF3.ByteData.ByteData(new ByteArray(Width * Height * 2));
                 for (var y = 0; y < Height; y++) {
                     for (var x = 0; x < Width; x++) {
                         newData.SetWord(off, value[x, y]);

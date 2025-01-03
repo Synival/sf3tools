@@ -3,7 +3,7 @@ using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.TextureChunk;
-using SF3.RawData;
+using SF3.ByteData;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_FileTextureChunk : TableFile {

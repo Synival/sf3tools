@@ -1,7 +1,7 @@
 ﻿using System;
 using CommonLib;
 using SF3.Models.Files;
-using SF3.RawData;
+using SF3.ByteData;
 
 namespace SF3.ModelLoaders {
     public abstract class BaseModelLoader : IModelLoader {
@@ -15,7 +15,7 @@ namespace SF3.ModelLoaders {
 
         private readonly EventHandler _onModifiedChangedDelegate;
 
-        public delegate IByteData BaseModelLoaderCreateRawDataDelegate(IModelLoader loader);
+        public delegate IByteData BaseModelLoaderCreateByteDataDelegate(IModelLoader loader);
         public delegate IBaseFile BaseModelLoaderCreateModelDelegate(IModelLoader loader);
         public delegate bool BaseModelLoaderSaveDelegate(IModelLoader loader);
 
@@ -27,16 +27,16 @@ namespace SF3.ModelLoaders {
         /// </summary>
         /// <param name="createModel">Callback to create an model when possible.</param>
         /// <returns>'true' a new model was loaded and successfully created. Otherwise, 'false'.</returns>
-        protected bool PerformLoad(BaseModelLoaderCreateRawDataDelegate createRawData, BaseModelLoaderCreateModelDelegate createModel) {
-            if (createRawData == null || createModel == null || IsLoaded)
+        protected bool PerformLoad(BaseModelLoaderCreateByteDataDelegate createByteData, BaseModelLoaderCreateModelDelegate createModel) {
+            if (createByteData == null || createModel == null || IsLoaded)
                 return false;
 
             PreLoaded?.Invoke(this, EventArgs.Empty);
 
-            if ((RawData = createRawData(this)) == null)
+            if ((ByteData = createByteData(this)) == null)
                 return false;
             if ((Model = createModel(this)) == null) {
-                RawData = null;
+                ByteData = null;
                 return false;
             }
 
@@ -57,7 +57,7 @@ namespace SF3.ModelLoaders {
         /// <param name="saveAction">The function to save the model when possible.</param>
         /// <returns>'true' if saveAction was invokvd and returned success.</returns>
         protected bool PerformSave(BaseModelLoaderSaveDelegate saveAction) {
-            if (saveAction == null || RawData == null || Model == null || !IsLoaded)
+            if (saveAction == null || ByteData == null || Model == null || !IsLoaded)
                 return false;
 
             PreSaved?.Invoke(this, EventArgs.Empty);
@@ -90,13 +90,13 @@ namespace SF3.ModelLoaders {
             }
         }
   
-        private IByteData _rawData = null;
-        public IByteData RawData {
-            get => _rawData;
+        private IByteData _byteData = null;
+        public IByteData ByteData {
+            get => _byteData;
             set {
-                if (_rawData != value) {
-                    var oldData = _rawData;
-                    _rawData = value;
+                if (_byteData != value) {
+                    var oldData = _byteData;
+                    _byteData = value;
 
                     if (oldData != null)
                         oldData.Dispose();
@@ -121,7 +121,7 @@ namespace SF3.ModelLoaders {
 
         public event EventHandler IsModifiedChanged;
 
-        public bool IsLoaded => RawData != null && Model != null;
+        public bool IsLoaded => ByteData != null && Model != null;
 
         /// <summary>
         /// Model-specific implementation of determining the title for a loaded model.
@@ -147,7 +147,7 @@ namespace SF3.ModelLoaders {
         }
 
         protected void UpdateTitle() {
-            var title = IsLoaded ? (LoadedTitle + ((RawData?.IsModified == true) ? "*" : "")) : UnloadedTitle;
+            var title = IsLoaded ? (LoadedTitle + ((ByteData?.IsModified == true) ? "*" : "")) : UnloadedTitle;
             var modelTitle = Model?.Title ?? "";
             if (modelTitle.Length > 0)
                 title += " (" + modelTitle + ")";
@@ -178,7 +178,7 @@ namespace SF3.ModelLoaders {
                 Model.IsModifiedChanged -= _onModifiedChangedDelegate;
 
             Model = null;
-            RawData = null;
+            ByteData = null;
 
             Closed?.Invoke(this, EventArgs.Empty);
 
@@ -197,9 +197,9 @@ namespace SF3.ModelLoaders {
                 Model.Dispose();
                 Model = null;
             }
-            if (RawData != null) {
-                RawData.Dispose();
-                RawData = null;
+            if (ByteData != null) {
+                ByteData.Dispose();
+                ByteData = null;
             }
         }
 

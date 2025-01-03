@@ -1,5 +1,5 @@
 ﻿using SF3.Models.Structs.MPD;
-using SF3.RawData;
+using SF3.ByteData;
 
 namespace SF3.Models.Tables.MPD {
     public class Offset4Table : Table<Offset4Model> {

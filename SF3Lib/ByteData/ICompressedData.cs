@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SF3.RawData {
+namespace SF3.ByteData {
     /// <summary>
     /// Data that automatically decompresses its incoming bytes into a "sub-data" object called 'DecompressedData'.
     /// Upon Finish(), it will update its own compressed data using the decompressed snapshot.

@@ -1,7 +1,7 @@
 ﻿using CommonLib.Arrays;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
-using SF3.RawData;
+using SF3.ByteData;
 using SF3.Types;
 using static CommonLib.Utils.PixelConversion;
 
@@ -68,7 +68,7 @@ namespace LightPaletteSetter {
             foreach (var fileIn in filesIn) {
                 Console.WriteLine(fileIn);
 
-                // Get a raw data editing context for the file.
+                // Get a byte data editing context for the file.
                 var byteData = new ByteData(new ByteArray(File.ReadAllBytes(fileIn)));
 
                 // Create an MPD file that works with our new ByteData.
