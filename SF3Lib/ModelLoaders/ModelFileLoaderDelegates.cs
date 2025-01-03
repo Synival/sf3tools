@@ -1,6 +1,6 @@
 ﻿using System.IO;
-using SF3.Models.Files;
 using SF3.ByteData;
+using SF3.Models.Files;
 
 namespace SF3.ModelLoaders {
     public static class ModelFileLoaderDelegates {

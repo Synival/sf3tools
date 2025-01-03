@@ -2,8 +2,7 @@
 
 namespace SF3.Win.Controls {
 
-    public class Int32UpDownControl : NumericUpDown
-    {
+    public class Int32UpDownControl : NumericUpDown {
         public Int32UpDownControl() {
             this.DecimalPlaces = 0;
             this.Minimum = int.MinValue;

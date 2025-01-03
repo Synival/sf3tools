@@ -1,4 +1,3 @@
-using SF3.Models.Files;
 using SF3.Models.Tables.IconPointer;
 
 namespace SF3.Models.Files.IconPointer {

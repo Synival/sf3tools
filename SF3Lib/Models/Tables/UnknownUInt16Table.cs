@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SF3.Models.Structs;
 using SF3.ByteData;
+using SF3.Models.Structs;
 
 namespace SF3.Models.Tables {
     public class UnknownUInt16Table : Table<UnknownUInt16Struct> {

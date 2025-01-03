@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
-using SF3.Models.Tables;
 using SF3.ByteData;
+using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.TextureCollection;
 
 namespace SF3.Models.Files.MPD.Objects {

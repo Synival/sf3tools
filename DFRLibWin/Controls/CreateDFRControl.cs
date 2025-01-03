@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using DFRLib;
 using static CommonLib.Win.Utils.MessageUtils;
 
 namespace DFRLib.Win.Controls {

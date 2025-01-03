@@ -1,6 +1,6 @@
-﻿using SF3.Models.Structs.MPD;
+﻿using System;
 using SF3.ByteData;
-using System;
+using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
     public class MPDHeaderTable : Table<MPDHeaderModel> {

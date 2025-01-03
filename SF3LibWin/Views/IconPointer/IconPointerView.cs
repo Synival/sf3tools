@@ -11,7 +11,7 @@ namespace SF3.Win.Views.MPD {
             base.Create();
 
             var ngc = Model.NameGetterContext;
-            CreateChild(new TableView("Item Icons",  Model.ItemIconTable,  ngc));
+            CreateChild(new TableView("Item Icons",  Model.ItemIconTable, ngc));
             CreateChild(new TableView("Spell Icons", Model.SpellIconTable, ngc));
 
             return Control;

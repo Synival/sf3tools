@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
-using CommonLib.NamedValues;
 using CommonLib.Extensions;
-using SF3.Win.Extensions;
+using CommonLib.NamedValues;
 using SF3.Models.Tables;
+using SF3.Win.Extensions;
 
 namespace SF3.Win.Views {
     public class TableView : ViewBase, ITableView {
@@ -127,7 +127,7 @@ namespace SF3.Win.Views {
 
             if (OLVControl != null) {
                 OLVControl.ClearObjects();
-                OLVControl.Parent = null;  
+                OLVControl.Parent = null;
                 PushCachedOLV();
                 OLVControl = null;
                 Control = null;

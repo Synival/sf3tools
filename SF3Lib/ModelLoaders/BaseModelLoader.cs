@@ -1,7 +1,7 @@
 ﻿using System;
 using CommonLib;
-using SF3.Models.Files;
 using SF3.ByteData;
+using SF3.Models.Files;
 
 namespace SF3.ModelLoaders {
     public abstract class BaseModelLoader : IModelLoader {
@@ -89,7 +89,7 @@ namespace SF3.ModelLoaders {
                 }
             }
         }
-  
+
         private IByteData _byteData = null;
         public IByteData ByteData {
             get => _byteData;

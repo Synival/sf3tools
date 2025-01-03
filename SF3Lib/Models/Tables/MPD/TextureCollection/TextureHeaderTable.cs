@@ -1,6 +1,6 @@
-﻿using SF3.Models.Structs.MPD.TextureChunk;
+﻿using System;
 using SF3.ByteData;
-using System;
+using SF3.Models.Structs.MPD.TextureChunk;
 
 namespace SF3.Models.Tables.MPD.TextureCollection {
     public class TextureHeaderTable : Table<TextureHeader> {

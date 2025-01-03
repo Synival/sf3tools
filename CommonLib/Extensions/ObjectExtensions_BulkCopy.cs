@@ -12,12 +12,12 @@ namespace CommonLib.Extensions {
             => BulkReportTypeString(property.PropertyType);
 
         private static string BulkReportTypeString(Type type)
-        // This is useful for debugging, but a bit overwhelming for most folk!
-        #if true
+            // This is useful for debugging, but a bit overwhelming for most folk!
+#if true
             => "";
-        #else
+#else
             => " (" + type.Name + ")";
-        #endif
+#endif
 
         private static string GetBulkCopyRowName(this object obj, PropertyInfo property) {
             var rowNameProperties = obj
@@ -306,12 +306,12 @@ namespace CommonLib.Extensions {
                     if (rowReport == "")
                         continue;
 
-                // Other the other code to show array/dictionary keys.
-                #if true
+                    // Other the other code to show array/dictionary keys.
+#if true
                     report += rowReport.Indent("  ").TrimStart();
-                #else
+#else
                     report += "[" + row.Key + "]" + rowReport.Indent("  ").TrimStart();
-                #endif
+#endif
                 }
 
                 return report;

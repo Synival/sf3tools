@@ -20,9 +20,9 @@ namespace SF3.Win.Views.MPD {
 
             TabControl.Selected += UpdateViewer;
 
-            CreateChild(new HeadersView ("Headers",  Model));
+            CreateChild(new HeadersView("Headers", Model));
             CreateChild(new PalettesView("Palettes", Model));
-            CreateChild(new SurfaceView ("Surface",  Model));
+            CreateChild(new SurfaceView("Surface", Model));
             CreateChild(new TexturesView("Textures", Model));
 
             return Control;

@@ -1,7 +1,6 @@
-using SF3.Models.Structs.X1.Town;
-using SF3.Models.Tables;
-using SF3.ByteData;
 using System;
+using SF3.ByteData;
+using SF3.Models.Structs.X1.Town;
 
 namespace SF3.Models.Tables.X1.Town {
     public class ArrowTable : Table<Arrow> {

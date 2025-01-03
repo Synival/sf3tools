@@ -1,11 +1,8 @@
-﻿using System;
-using System.Globalization;
-using System.Reflection;
+﻿using System.Globalization;
 using System.Windows.Forms;
 
 namespace SF3.Win.Controls {
-    public class UInt32UpDownControl : NumericUpDown
-    {
+    public class UInt32UpDownControl : NumericUpDown {
         public UInt32UpDownControl() {
             this.DecimalPlaces = 0;
             this.Minimum = uint.MinValue;

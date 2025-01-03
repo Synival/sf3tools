@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using CommonLib.Attributes;
-using SF3.Models.Structs;
-using SF3.Models.Structs.MPD.TextureAnimation;
 using SF3.ByteData;
+using SF3.Models.Structs.MPD.TextureAnimation;
 
 namespace SF3.Models.Structs.MPD {
     public class TextureAnimationModel : Struct {

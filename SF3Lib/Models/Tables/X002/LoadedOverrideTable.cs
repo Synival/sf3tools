@@ -1,7 +1,6 @@
-using SF3.Models.Structs.X002;
-using SF3.Models.Tables;
-using SF3.ByteData;
 using System;
+using SF3.ByteData;
+using SF3.Models.Structs.X002;
 
 namespace SF3.Models.Tables.X002 {
     public class LoadedOverrideTable : Table<LoadedOverride> {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CommonLib.Attributes;
-using SF3.Models.Structs;
 using SF3.ByteData;
+using SF3.Models.Structs;
 using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Models.Tables {

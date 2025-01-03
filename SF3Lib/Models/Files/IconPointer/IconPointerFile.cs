@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
+using SF3.ByteData;
 using SF3.Exceptions;
-using SF3.Types;
-using static SF3.Utils.ResourceUtils;
 using SF3.Models.Tables;
 using SF3.Models.Tables.IconPointer;
-using SF3.ByteData;
+using SF3.Types;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.IconPointer {
     public class IconPointerFile : ScenarioTableFile, IIconPointerFile {
@@ -84,7 +84,7 @@ namespace SF3.Models.Files.IconPointer {
 
             return new List<ITable>() {
                 (SpellIconTable = SpellIconTable.Create(Data, ResourceFileForScenario(Scenario, "SpellIcons.xml"), spellIconAddress, has16BitIconAddr, spellIconRealOffsetStart)),
-                (ItemIconTable  = ItemIconTable.Create(Data, ResourceFileForScenario(Scenario, "Items.xml"), itemIconAddress, has16BitIconAddr))
+                (ItemIconTable  = ItemIconTable.Create (Data, ResourceFileForScenario(Scenario, "Items.xml"), itemIconAddress, has16BitIconAddr))
             };
         }
 

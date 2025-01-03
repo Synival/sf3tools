@@ -2,8 +2,7 @@
 
 namespace SF3.Win.Controls {
 
-    public class ByteUpDownControl : NumericUpDown
-    {
+    public class ByteUpDownControl : NumericUpDown {
         public ByteUpDownControl() {
             this.DecimalPlaces = 0;
             this.Minimum = byte.MinValue;

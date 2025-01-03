@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using CommonLib.Arrays;
 using SF3.Exceptions;
-using SF3.ByteData;
 using static SF3.ModelLoaders.ModelFileLoaderDelegates;
 
 namespace SF3.ModelLoaders {

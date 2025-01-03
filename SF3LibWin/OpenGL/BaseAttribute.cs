@@ -31,10 +31,14 @@ namespace SF3.Win.OpenGL {
 
         public static int GetTypeElements(ActiveAttribType type) {
             switch (type) {
-                case ActiveAttribType.Float:     return 1;
-                case ActiveAttribType.FloatVec2: return 2;
-                case ActiveAttribType.FloatVec3: return 3;
-                case ActiveAttribType.FloatVec4: return 4;
+                case ActiveAttribType.Float:
+                    return 1;
+                case ActiveAttribType.FloatVec2:
+                    return 2;
+                case ActiveAttribType.FloatVec3:
+                    return 3;
+                case ActiveAttribType.FloatVec4:
+                    return 4;
 
                 default:
                     throw new NotImplementedException(nameof(type) + ": " + type.GetType().Name + "." + type.ToString());
@@ -43,7 +47,9 @@ namespace SF3.Win.OpenGL {
 
         public static int GetPointerTypeSize(VertexAttribPointerType type) {
             switch (type) {
-                case VertexAttribPointerType.Float: return sizeof(float);
+                case VertexAttribPointerType.Float:
+                    return sizeof(float);
+
                 default:
                     throw new NotImplementedException(nameof(type) + ": " + type.GetType().Name + "." + type.ToString());
             }

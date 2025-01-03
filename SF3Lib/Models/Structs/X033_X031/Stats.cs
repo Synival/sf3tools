@@ -1,7 +1,6 @@
 using System;
 using CommonLib.Attributes;
 using CommonLib.Statistics;
-using SF3.Models.Structs;
 using SF3.ByteData;
 using SF3.Statistics;
 using SF3.Types;

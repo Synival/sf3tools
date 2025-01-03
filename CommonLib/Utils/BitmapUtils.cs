@@ -1,5 +1,3 @@
-using System;
-
 namespace CommonLib.Utils {
     public static class BitmapUtils {
         public static byte[] ConvertABGR1555DataToABGR1555BitmapData(ushort[,] imageData) {

@@ -1,5 +1,5 @@
-using SF3.Models.Structs;
 using SF3.ByteData;
+using SF3.Models.Structs;
 
 namespace SF3.Models.Tables {
     /// <summary>

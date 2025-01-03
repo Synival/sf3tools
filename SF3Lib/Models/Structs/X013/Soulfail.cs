@@ -1,5 +1,4 @@
 using CommonLib.Attributes;
-using SF3.Models.Structs;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.X013 {

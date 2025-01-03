@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.TextureAnimation;
-using SF3.ByteData;
-using System;
 
 namespace SF3.Models.Tables.MPD.TextureAnimation {
     public class AllFramesTable : Table<FrameModel> {

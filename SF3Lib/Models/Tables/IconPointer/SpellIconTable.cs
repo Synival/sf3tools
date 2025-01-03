@@ -1,9 +1,6 @@
-using CommonLib.NamedValues;
-using SF3.Models.Structs.IconPointer;
-using SF3.Models.Tables;
-using SF3.ByteData;
-using SF3.Types;
 using System;
+using SF3.ByteData;
+using SF3.Models.Structs.IconPointer;
 
 namespace SF3.Models.Tables.IconPointer {
     public class SpellIconTable : Table<SpellIcon> {

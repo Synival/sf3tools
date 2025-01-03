@@ -1,10 +1,10 @@
-using SF3.ByteData;
 using System;
+using System.Collections.Generic;
 using CommonLib.SGL;
 using CommonLib.Types;
-using System.Collections.Generic;
-using static CommonLib.Utils.BlockHelpers;
+using SF3.ByteData;
 using SF3.Models.Structs.MPD.Surface;
+using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Models.Tables.MPD.Surface {
     public class HeightmapRowTable : Table<HeightmapRow> {

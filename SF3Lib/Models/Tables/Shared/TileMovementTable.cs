@@ -1,7 +1,6 @@
-using SF3.Models.Structs.Shared;
-using SF3.Models.Tables;
-using SF3.ByteData;
 using System;
+using SF3.ByteData;
+using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.Shared {
     public class TileMovementTable : Table<TileMovement> {

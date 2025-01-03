@@ -1,5 +1,4 @@
-﻿using System;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 
 namespace SF3.Win.OpenGL {
     public class ShaderAttribute : BaseAttribute {

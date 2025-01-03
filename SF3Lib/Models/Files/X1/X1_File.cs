@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
+using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X1;
 using SF3.Models.Tables.X1.Battle;
 using SF3.Models.Tables.X1.Town;
-using SF3.ByteData;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 

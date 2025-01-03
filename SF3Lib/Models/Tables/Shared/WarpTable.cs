@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using CommonLib.Extensions;
 using CommonLib.Utils;
-using SF3.Models.Structs.Shared;
-using SF3.Models.Tables;
 using SF3.ByteData;
+using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.Shared {
     public class WarpTable : Table<Warp> {
