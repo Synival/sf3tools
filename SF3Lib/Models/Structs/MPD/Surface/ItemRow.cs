@@ -1,12 +1,11 @@
 using CommonLib.Attributes;
-using SF3.Models.Structs;
 using SF3.ByteData;
 
-namespace SF3.Models.Structs.MPD {
-    public class TileItemRow : Struct {
+namespace SF3.Models.Structs.MPD.Surface {
+    public class ItemRow : Struct {
         private readonly int[] xAddress = new int[64];
 
-        public TileItemRow(IByteData data, int id, string name, int address)
+        public ItemRow(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 64) {
             for (var i = 0; i < xAddress.Length; i++)
                 xAddress[i] = Address + i;

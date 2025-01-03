@@ -2,11 +2,11 @@ using System;
 using CommonLib.Attributes;
 using SF3.ByteData;
 
-namespace SF3.Models.Structs.MPD {
-    public class TileSurfaceCharacterRow : Struct {
+namespace SF3.Models.Structs.MPD.SurfaceModel {
+    public class TileTextureRow : Struct {
         private readonly int[] xAddress = new int[64];
 
-        public TileSurfaceCharacterRow(IByteData data, int id, string name, int address)
+        public TileTextureRow(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 128) {
             for (var i = 0; i < xAddress.Length; i++) {
                 var block = i / 4;
@@ -24,7 +24,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         public byte GetTextureFlags(int x)
-            => (byte) ((this[x] >> 8) & 0xFF);
+            => (byte) (this[x] >> 8 & 0xFF);
         public void SetTextureFlags(int x, byte value)
             => this[x] = (this[x] & 0xFF) + (value << 8);
 

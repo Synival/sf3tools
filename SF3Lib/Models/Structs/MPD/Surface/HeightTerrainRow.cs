@@ -2,11 +2,11 @@ using System;
 using CommonLib.Attributes;
 using SF3.ByteData;
 
-namespace SF3.Models.Structs.MPD {
-    public class TileHeightTerrainRow : Struct {
+namespace SF3.Models.Structs.MPD.Surface {
+    public class HeightTerrainRow : Struct {
         private readonly int[] xAddress = new int[64];
 
-        public TileHeightTerrainRow(IByteData data, int id, string name, int address)
+        public HeightTerrainRow(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 128) {
             for (var i = 0; i < xAddress.Length; i++)
                 xAddress[i] = Address + i * 2;

@@ -303,10 +303,10 @@ namespace SF3.Win.Controls {
             float[] heights;
 
             // For any tile whose character/texture ID has flag 0x80, the walking heightmap is used.
-            if (Model.Surface?.TileSurfaceHeightmapRows != null && (Model.SurfaceModel?.CharacterRowTable?.Rows[pos.Y]?.GetTextureFlags(pos.X) & 0x80) == 0x80)
-                heights = Model.Surface?.TileSurfaceHeightmapRows.Rows[pos.Y].GetHeights(pos.X);
+            if (Model.Surface?.HeightmapRowTable != null && (Model.SurfaceModel?.TileTextureRowTable?.Rows[pos.Y]?.GetTextureFlags(pos.X) & 0x80) == 0x80)
+                heights = Model.Surface?.HeightmapRowTable.Rows[pos.Y].GetHeights(pos.X);
             // Otherwise, gather heights from the 5x5 block with the surface mesh's heightmap.
-            else if (Model.SurfaceModel?.VertexHeightMeshBlocks != null) {
+            else if (Model.SurfaceModel?.VertexHeightBlockTable != null) {
                 var blockLocations = new BlockVertexLocation[] {
                     GetBlockLocations(pos.X, pos.Y, CornerType.TopLeft,     true)[0],
                     GetBlockLocations(pos.X, pos.Y, CornerType.TopRight,    true)[0],
@@ -315,7 +315,7 @@ namespace SF3.Win.Controls {
                 };
 
                 heights = blockLocations
-                    .Select(x => Model.SurfaceModel.VertexHeightMeshBlocks.Rows[x.Num][x.X, x.Y] / 16.0f)
+                    .Select(x => Model.SurfaceModel.VertexHeightBlockTable.Rows[x.Num][x.X, x.Y] / 16.0f)
                     .ToArray();
             }
             else
@@ -360,15 +360,15 @@ namespace SF3.Win.Controls {
 
             Vector3 GetVertexAbnormal(int tileX, int tileY, CornerType corner) {
                 var locations = GetBlockLocations(tileX, tileY, corner);
-                if (locations.Length == 0 || Model.SurfaceModel?.VertexNormalMeshBlocks?.Rows == null)
+                if (locations.Length == 0 || Model.SurfaceModel?.VertexNormalBlockTable?.Rows == null)
                     return new Vector3(0f, 1 / 32768f, 0f);
 
                 // The vertex abnormals SHOULD be the same, so just use the first one.
                 var loc = locations[0];
-                return Model.SurfaceModel.VertexNormalMeshBlocks.Rows[loc.Num][loc.X, loc.Y].ToVector3();
+                return Model.SurfaceModel.VertexNormalBlockTable.Rows[loc.Num][loc.X, loc.Y].ToVector3();
             };
 
-            var textureData = Model.SurfaceModel?.CharacterRowTable?.Make2DTextureData();
+            var textureData = Model.SurfaceModel?.TileTextureRowTable?.Make2DTextureData();
             for (var y = 0; y < WidthInTiles; y++) {
                 for (var x = 0; x < HeightInTiles; x++) {
                     TextureAnimation anim = null;

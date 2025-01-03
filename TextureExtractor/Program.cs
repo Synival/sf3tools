@@ -94,7 +94,7 @@ namespace TextureExtractor {
                                 continue;
                             }
 
-                            var tileSurfaceCharacterIDs = mpdFile.SurfaceModel.CharacterRowTable.Rows
+                            var tileSurfaceCharacterIDs = mpdFile.SurfaceModel.TileTextureRowTable.Rows
                                 .SelectMany(x => x.GetRowCopy())
                                 .Select(x => x & 0xFF)
                                 .Distinct()

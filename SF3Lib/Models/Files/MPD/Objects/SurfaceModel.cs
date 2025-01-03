@@ -5,7 +5,7 @@ using CommonLib.SGL;
 using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Tables;
-using SF3.Models.Tables.MPD;
+using SF3.Models.Tables.MPD.Surface;
 using SF3.Models.Tables.MPD.SurfaceModel;
 using static CommonLib.Utils.BlockHelpers;
 
@@ -25,9 +25,9 @@ namespace SF3.Models.Files.MPD.Objects {
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (CharacterRowTable      = TileTextureRowTable.Create     (Data, 0x0000)),
-                (VertexNormalMeshBlocks = VertexNormalMeshBlockTable.Create(Data, 0x2000)),
-                (VertexHeightMeshBlocks = VertexHeightMeshBlockTable.Create(Data, 0xB600)),
+                (TileTextureRowTable    = TileTextureRowTable.Create   (Data, 0x0000)),
+                (VertexNormalBlockTable = VertexNormalBlockTable.Create(Data, 0x2000)),
+                (VertexHeightBlockTable = VertexHeightBlockTable.Create(Data, 0xB600)),
             };
         }
 
@@ -38,7 +38,7 @@ namespace SF3.Models.Files.MPD.Objects {
         /// <param name="tileY">Y coordinate of the tile.</param>
         /// <param name="corner">Corner of the tile to update.</param>
         /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
-        public void UpdateSurfaceVertexAbnormal(int tileX, int tileY, CornerType corner, TileSurfaceHeightmapRowTable heightmap, bool useMoreAccurateCalculations)
+        public void UpdateSurfaceVertexAbnormal(int tileX, int tileY, CornerType corner, HeightmapRowTable heightmap, bool useMoreAccurateCalculations)
             => UpdateSurfaceVertexAbnormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), heightmap, useMoreAccurateCalculations);
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace SF3.Models.Files.MPD.Objects {
         /// <param name="vertexX">X coordinate of the vertex.</param>
         /// <param name="vertexY">Y coordinate of the vertex.</param>
         /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
-        public void UpdateSurfaceVertexAbnormal(int vertexX, int vertexY, TileSurfaceHeightmapRowTable heightmap, bool useMoreAccurateCalculations) {
+        public void UpdateSurfaceVertexAbnormal(int vertexX, int vertexY, HeightmapRowTable heightmap, bool useMoreAccurateCalculations) {
             if (heightmap == null)
                 return;
 
@@ -62,7 +62,7 @@ namespace SF3.Models.Files.MPD.Objects {
         /// <param name="locations">The locations of blocks to update.</param>
         /// <param name="abnormal">The abnormal to be set into each block location.</param>
         public void UpdateSurfaceVertexAbnormals(BlockVertexLocation[] locations, VECTOR abnormal) {
-            var blocks = VertexNormalMeshBlocks.Rows;
+            var blocks = VertexNormalBlockTable.Rows;
             for (var i = 0; i < locations.Length; i++)
                 blocks[locations[i].Num][locations[i].X, locations[i].Y] = abnormal;
         }
@@ -73,7 +73,7 @@ namespace SF3.Models.Files.MPD.Objects {
         /// <param name="tileX">X coordinate of the tile.</param>
         /// <param name="tileY">Y coordinate of the tile.</param>
         /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
-        public void UpdateSurfaceVertexAbnormals(int tileX, int tileY, TileSurfaceHeightmapRowTable heightmap, bool useMoreAccurateCalculations) {
+        public void UpdateSurfaceVertexAbnormals(int tileX, int tileY, HeightmapRowTable heightmap, bool useMoreAccurateCalculations) {
             if (heightmap == null)
                 return;
 
@@ -87,7 +87,7 @@ namespace SF3.Models.Files.MPD.Objects {
         /// Recalculates all vertex "abnormals" for all tiles.
         /// </summary>
         /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
-        public void UpdateSurfaceVertexAbnormals(TileSurfaceHeightmapRowTable heightmap, bool useMoreAccurateCalculations) {
+        public void UpdateSurfaceVertexAbnormals(HeightmapRowTable heightmap, bool useMoreAccurateCalculations) {
             if (heightmap == null)
                 return;
             for (var y = 0; y < 65; y++)
@@ -101,12 +101,12 @@ namespace SF3.Models.Files.MPD.Objects {
         public int Address { get; }
 
         [BulkCopyRecurse]
-        public TileTextureRowTable CharacterRowTable { get; private set; }
+        public TileTextureRowTable TileTextureRowTable { get; private set; }
 
         [BulkCopyRecurse]
-        public VertexNormalMeshBlockTable VertexNormalMeshBlocks { get; private set; }
+        public VertexNormalBlockTable VertexNormalBlockTable { get; private set; }
 
         [BulkCopyRecurse]
-        public VertexHeightMeshBlockTable VertexHeightMeshBlocks { get; private set; }
+        public VertexHeightBlockTable VertexHeightBlockTable { get; private set; }
     }
 }

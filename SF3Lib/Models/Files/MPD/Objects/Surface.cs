@@ -3,7 +3,7 @@ using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
-using SF3.Models.Tables.MPD;
+using SF3.Models.Tables.MPD.Surface;
 
 namespace SF3.Models.Files.MPD.Objects {
     public class Surface : TableFile {
@@ -21,9 +21,9 @@ namespace SF3.Models.Files.MPD.Objects {
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (TileSurfaceHeightmapRows = TileSurfaceHeightmapRowTable.Create(Data, 0x0000)),
-                (TileHeightTerrainRows    = TileHeightTerrainRowTable.Create   (Data, 0x4000)),
-                (TileItemRows             = TileItemRowTable.Create            (Data, 0x6000)),
+                (HeightmapRowTable     = HeightmapRowTable.Create    (Data, 0x0000)),
+                (HeightTerrainRowTable = HeightTerrainRowTable.Create(Data, 0x4000)),
+                (ItemRowTable          = ItemRowTable.Create         (Data, 0x6000)),
             };
         }
 
@@ -33,12 +33,12 @@ namespace SF3.Models.Files.MPD.Objects {
         public int Address { get; }
 
         [BulkCopyRecurse]
-        public TileSurfaceHeightmapRowTable TileSurfaceHeightmapRows { get; private set; }
+        public HeightmapRowTable HeightmapRowTable { get; private set; }
 
         [BulkCopyRecurse]
-        public TileHeightTerrainRowTable TileHeightTerrainRows { get; private set; }
+        public HeightTerrainRowTable HeightTerrainRowTable { get; private set; }
 
         [BulkCopyRecurse]
-        public TileItemRowTable TileItemRows { get; private set; }
+        public ItemRowTable ItemRowTable { get; private set; }
     }
 }

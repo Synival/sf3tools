@@ -139,7 +139,7 @@ namespace SF3.Tests.Compression {
 
                 var rng = new Random();
                 var rngBytes = new byte[4];
-                foreach (var row in mpdFile.Surface.TileSurfaceHeightmapRows.Rows) {
+                foreach (var row in mpdFile.Surface.HeightmapRowTable.Rows) {
                     for (var x = 0; x < 64; x++) {
                         rng.NextBytes(rngBytes);
                         row.SetHeights(x, rngBytes.Select(x => x / 16f).ToArray());

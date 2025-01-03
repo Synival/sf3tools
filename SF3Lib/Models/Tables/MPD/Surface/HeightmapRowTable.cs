@@ -1,26 +1,26 @@
-using SF3.Models.Structs.MPD;
 using SF3.ByteData;
 using System;
 using CommonLib.SGL;
 using CommonLib.Types;
-using static CommonLib.Utils.BlockHelpers;
 using System.Collections.Generic;
+using static CommonLib.Utils.BlockHelpers;
+using SF3.Models.Structs.MPD.Surface;
 
-namespace SF3.Models.Tables.MPD {
-    public class TileSurfaceHeightmapRowTable : Table<TileSurfaceHeightmapRow> {
-        protected TileSurfaceHeightmapRowTable(IByteData data, int address) : base(data, address) {
+namespace SF3.Models.Tables.MPD.Surface {
+    public class HeightmapRowTable : Table<HeightmapRow> {
+        protected HeightmapRowTable(IByteData data, int address) : base(data, address) {
         }
 
-        public static TileSurfaceHeightmapRowTable Create(IByteData data, int address) {
-            var newTable = new TileSurfaceHeightmapRowTable(data, address);
+        public static HeightmapRowTable Create(IByteData data, int address) {
+            var newTable = new HeightmapRowTable(data, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 
         public override bool Load() {
-            var size = new TileSurfaceHeightmapRow(Data, 0, "", Address).Size;
-            return LoadUntilMax((id, address) => new TileSurfaceHeightmapRow(Data, id, "Y" + id.ToString("D2"), Address + (63 - id) * size));
+            var size = new HeightmapRow(Data, 0, "", Address).Size;
+            return LoadUntilMax((id, address) => new HeightmapRow(Data, id, "Y" + id.ToString("D2"), Address + (63 - id) * size));
         }
 
         public override int? MaxSize => 64;

@@ -1,10 +1,9 @@
-using System.Linq;
-using SF3.Models.Structs.MPD;
 using SF3.ByteData;
 using System;
+using SF3.Models.Structs.MPD.SurfaceModel;
 
 namespace SF3.Models.Tables.MPD.SurfaceModel {
-    public class TileTextureRowTable : Table<TileSurfaceCharacterRow> {
+    public class TileTextureRowTable : Table<TileTextureRow> {
         protected TileTextureRowTable(IByteData data, int address) : base(data, address) {
         }
 
@@ -22,7 +21,7 @@ namespace SF3.Models.Tables.MPD.SurfaceModel {
                 var block = (63 - id) / 4;
                 var y = (63 - id) % 4;
                 address = Address + (block * 256 + y * 4) * 2;
-                return new TileSurfaceCharacterRow(Data, id, "Y" + id.ToString("D2"), address);
+                return new TileTextureRow(Data, id, "Y" + id.ToString("D2"), address);
             });
         }
 
