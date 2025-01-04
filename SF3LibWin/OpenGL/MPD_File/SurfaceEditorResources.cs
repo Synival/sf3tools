@@ -5,7 +5,7 @@ using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class EditorResources {
+    public class SurfaceEditorResources {
         private bool _isInitialized = false;
         public void Init() {
             if (_isInitialized)
@@ -58,7 +58,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GC.SuppressFinalize(this);
         }
 
-        ~EditorResources() {
+        ~SurfaceEditorResources() {
             if (!disposed)
                 System.Diagnostics.Debug.WriteLine(GetType().Name + ": GPU Resource leak! Did you forget to call Dispose()?");
             Dispose(false);
@@ -71,7 +71,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             TileModel = null;
 
             if (tilePos != null) {
-                var quad = new Quad(world.GetSurfaceModelTileVertices(model, tilePos.Value));
+                var quad = new Quad(SurfaceModelResources.GetTileVertices(model, tilePos.Value));
                 Models.Add(TileModel = new QuadModel([quad]));
             }
         }
