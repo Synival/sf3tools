@@ -25,6 +25,9 @@ namespace SF3.Win.Controls {
                 _world?.Dispose();
                 _world = null;
 
+                _editor?.Dispose();
+                _editor = null;
+
                 if (_selectFramebuffer != null)
                     _selectFramebuffer.Dispose();
 
@@ -64,8 +67,11 @@ namespace SF3.Win.Controls {
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-            _world = new World();
+            _world = new WorldResources();
             _world.Init();
+
+            _editor = new EditorResources();
+            _editor.Init();
 
             _timer = new Timer() { Interval = 1000 / 60 };
             _timer.Tick += (s, a) => IncrementFrame();
@@ -205,14 +211,14 @@ namespace SF3.Win.Controls {
                 }
 
                 using (_world.TextureShader.Use()) {
-                    if (_world.TileModel != null) {
+                    if (_editor.TileModel != null) {
                         GL.Disable(EnableCap.DepthTest);
-                        using (_world.TileHoverTexture.Use())
-                            _world.TileModel.Draw(_world.TextureShader);
+                        using (_editor.TileHoverTexture.Use())
+                            _editor.TileModel.Draw(_world.TextureShader);
                         GL.Enable(EnableCap.DepthTest);
                     }
 
-                    if (DrawHelp && _world.HelpModel != null) {
+                    if (DrawHelp && _editor.HelpModel != null) {
                         const float c_viewSize = 0.20f;
                         UpdateShaderViewMatrix(_world.TextureShader,
                             Matrix4.CreateScale((float) Height / Width * 2f * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
@@ -220,8 +226,8 @@ namespace SF3.Win.Controls {
                             _projectionMatrix.Inverted());
 
                         GL.Disable(EnableCap.DepthTest);
-                        using (_world.HelpTexture.Use())
-                            _world.HelpModel.Draw(_world.TextureShader);
+                        using (_editor.HelpTexture.Use())
+                            _editor.HelpModel.Draw(_world.TextureShader);
                         GL.Enable(EnableCap.DepthTest);
 
                         UpdateShaderViewMatrix(_world.TextureShader, _viewMatrix);
@@ -436,9 +442,9 @@ namespace SF3.Win.Controls {
 
             var tileVertices = _world.GetSurfaceModelTileVertices(Model, _tilePos.Value);
             var target = new Vector3(
-                _tilePos.Value.X + World.ModelOffsetX + 0.5f,
+                _tilePos.Value.X + WorldResources.ModelOffsetX + 0.5f,
                 tileVertices.Select(x => x.Y).Average(),
-                _tilePos.Value.Y + World.ModelOffsetZ + 0.5f);
+                _tilePos.Value.Y + WorldResources.ModelOffsetZ + 0.5f);
 
             var dist = (float) Math.Sqrt(
                 Math.Pow(target.X - Position.X, 2) +
@@ -557,7 +563,7 @@ namespace SF3.Win.Controls {
                 return;
 
             _tilePos = pos;
-            _world.UpdateTileModel(Model, _tilePos);
+            _editor.UpdateTileModel(Model, _world, _tilePos);
 
             Invalidate();
         }
@@ -588,8 +594,8 @@ namespace SF3.Win.Controls {
                 UpdateTilePosition(null);
             else {
                 UpdateTilePosition(new Point(
-                    (int) Math.Round(pixel[0] / (255.0f / World.WidthInTiles)),
-                    (int) Math.Round(pixel[1] / (255.0f / World.WidthInTiles))
+                    (int) Math.Round(pixel[0] / (255.0f / WorldResources.WidthInTiles)),
+                    (int) Math.Round(pixel[1] / (255.0f / WorldResources.WidthInTiles))
                 ));
             }
         }
@@ -656,6 +662,7 @@ namespace SF3.Win.Controls {
 
         private Timer _timer = null;
 
-        private World _world = null;
+        private WorldResources _world = null;
+        private EditorResources _editor = null;
     }
 }

@@ -12,7 +12,7 @@ using SF3.Win.Extensions;
 using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class World : IDisposable {
+    public class WorldResources : IDisposable {
         public const int WidthInTiles = 64;
         public const int HeightInTiles = 64;
 
@@ -40,19 +40,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 (WhiteTexture         = new Texture((Bitmap) Image.FromFile("Images/White.bmp"))),
                 (TransparentTexture   = new Texture((Bitmap) Image.FromFile("Images/Transparent.bmp"))),
                 (TileWireframeTexture = new Texture((Bitmap) Image.FromFile("Images/TileWireframe.bmp"))),
-                (TileHoverTexture     = new Texture((Bitmap) Image.FromFile("Images/TileHover.bmp"))),
-                (HelpTexture          = new Texture((Bitmap) Image.FromFile("Images/ViewerHelp.bmp"))),
             ];
-
-            var helpWidth = HelpTexture.Width / HelpTexture.Height;
-            HelpModel = new QuadModel([
-                new Quad([
-                    new Vector3(-helpWidth,  1, 0),
-                    new Vector3(         0,  1, 0),
-                    new Vector3(         0,  0, 0),
-                    new Vector3(-helpWidth,  0, 0)
-                ])
-            ]);
         }
 
         private bool disposed = false;
@@ -65,14 +53,25 @@ namespace SF3.Win.OpenGL.MPD_File {
                 SurfaceModels?.Dispose();
                 Shaders?.Dispose();
                 Textures?.Dispose();
-                TileModel?.Dispose();
-                HelpModel?.Dispose();
+
+                SurfaceModel = null;
+                UntexturedSurfaceModel = null;
+                SurfaceSelectionModel = null;
+
+                TextureShader = null;
+                TwoTextureShader = null;
+                SolidShader = null;
+                NormalsShader = null;
+                WireframeShader = null;
+                ObjectShader = null;
+
+                WhiteTexture = null;
+                TransparentTexture = null;
+                TileWireframeTexture = null;
 
                 SurfaceModels = null;
                 Shaders = null;
                 Textures = null;
-                TileModel = null;
-                HelpModel = null;
             }
 
             disposed = true;
@@ -83,7 +82,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GC.SuppressFinalize(this);
         }
 
-        ~World() {
+        ~WorldResources() {
             if (!disposed)
                 System.Diagnostics.Debug.WriteLine(GetType().Name + ": GPU Resource leak! Did you forget to call Dispose()?");
             Dispose(false);
@@ -230,16 +229,6 @@ namespace SF3.Win.OpenGL.MPD_File {
                 SurfaceModels.AddRange(models);
         }
 
-        public void UpdateTileModel(IMPD_File model, Point? tilePos) {
-            TileModel?.Dispose();
-            TileModel = null;
-
-            if (tilePos != null) {
-                var quad = new Quad(GetSurfaceModelTileVertices(model, tilePos.Value));
-                TileModel = new QuadModel([quad]);
-            }
-        }
-
         public QuadModel SurfaceModel { get; private set; } = null;
         public QuadModel UntexturedSurfaceModel { get; private set; } = null;
         public QuadModel SurfaceSelectionModel { get; private set; } = null;
@@ -254,15 +243,10 @@ namespace SF3.Win.OpenGL.MPD_File {
         public Texture TileWireframeTexture { get; private set; } = null;
         public Texture WhiteTexture { get; private set; } = null;
         public Texture TransparentTexture { get; private set; } = null;
-        public Texture TileHoverTexture { get; private set; } = null;
-        public Texture HelpTexture { get; private set; } = null;
 
         public DisposableList<QuadModel> SurfaceModels { get; private set; } = null;
         public DisposableList<Shader> Shaders { get; private set; } = null;
         public DisposableList<Texture> Textures { get; private set; } = null;
-
-        public QuadModel TileModel { get; private set; } = null;
-        public QuadModel HelpModel { get; private set; } = null;
 
         public string[,] SurfaceModelTileDebugText { get; } = new string[64, 64];
     }
