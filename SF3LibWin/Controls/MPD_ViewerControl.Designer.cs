@@ -32,13 +32,14 @@
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             tsbRecalculateLightmapOriginalMath = new System.Windows.Forms.ToolStripButton();
             tsbUpdateLightmapUpdatedMath = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbToggleWireframe, tsbToggleHelp, toolStripSeparator1, tsbToggleNormals, toolStripSeparator2, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbToggleWireframe, toolStripSeparator1, tsbToggleNormals, toolStripSeparator2, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator3, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(500, 31);
@@ -107,6 +108,11 @@
             tsbUpdateLightmapUpdatedMath.Text = "Update Lightmap (Updated Math)";
             tsbUpdateLightmapUpdatedMath.Click += tsbUpdateLightmapUpdatedMath_Click;
             // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
+            // 
             // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -130,5 +136,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton tsbRecalculateLightmapOriginalMath;
         private System.Windows.Forms.ToolStripButton tsbUpdateLightmapUpdatedMath;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
