@@ -26,12 +26,11 @@ namespace SF3.Win.Controls {
                 _surfaceModel?.Dispose();
                 _surfaceEditor?.Dispose();
 
-                _world        = null;
-                _surfaceModel = null;
-                _surfaceEditor       = null;
+                _world         = null;
+                _surfaceModel  = null;
+                _surfaceEditor = null;
 
-                if (_selectFramebuffer != null)
-                    _selectFramebuffer.Dispose();
+                _selectFramebuffer?.Dispose();
 
                 if (_timer != null)
                     _timer.Dispose();
@@ -96,7 +95,7 @@ namespace SF3.Win.Controls {
                 Yaw   = s_lastYaw.Value;
             }
 
-            UpdateFramebuffer();
+            UpdateSelectFramebuffer();
 
             foreach (var shader in _world.Shaders)
                 UpdateShaderModelMatrix(shader, Matrix4.Identity);
@@ -109,15 +108,14 @@ namespace SF3.Win.Controls {
             // Update OpenGL on the new size of the control.
             GL.Viewport(0, 0, ClientSize.Width, ClientSize.Height);
 
-            UpdateFramebuffer();
+            UpdateSelectFramebuffer();
             UpdateProjectionMatrices();
 
             Invalidate();
         }
 
-        private void UpdateFramebuffer() {
-            if (_selectFramebuffer != null)
-                _selectFramebuffer.Dispose();
+        private void UpdateSelectFramebuffer() {
+            _selectFramebuffer?.Dispose();
             _selectFramebuffer = new Framebuffer(Width, Height);
         }
 
