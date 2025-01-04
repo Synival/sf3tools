@@ -42,28 +42,32 @@ namespace MPD_Analyzer {
                             bool shouldHaveChunk20 = scenario >= ScenarioType.Scenario2;
                             bool hasChunk20 = mpdFile.ChunkHeader.Rows[20].ChunkAddress > 0;
                             if (shouldHaveChunk20 != hasChunk20)
-                                Console.WriteLine("  Chunk[20] problem! ShouldHave=" + shouldHaveChunk20 + ", DoesHave=" + hasChunk20);
+                                Console.WriteLine("  !!! Chunk[20] problem! ShouldHave=" + shouldHaveChunk20 + ", DoesHave=" + hasChunk20);
+                            if (mpdFile.ChunkHeader.Rows[20].ChunkSize > 0)
+                                Console.WriteLine("  Chunk20 exists: " + mpdFile.ChunkHeader.Rows[20].ChunkSize);
 
                             // Anything Scenario 2 or higher should have Chunk[21].
                             bool shouldHaveChunk21 = scenario >= ScenarioType.Scenario2;
                             bool hasChunk21 = mpdFile.ChunkHeader.Rows[21].ChunkAddress > 0;
                             if (shouldHaveChunk21 != hasChunk21)
-                                Console.WriteLine("  Chunk[21] problem! ShouldHave=" + shouldHaveChunk21 + ", DoesHave=" + hasChunk21);
+                                Console.WriteLine("  !!! Chunk[21] problem! ShouldHave=" + shouldHaveChunk21 + ", DoesHave=" + hasChunk21);
+                            if (mpdFile.ChunkHeader.Rows[21].ChunkSize > 0)
+                                Console.WriteLine("  Chunk21 exists: " + mpdFile.ChunkHeader.Rows[21].ChunkSize);
 
                             // Anything Scenario 3 or higher should have Palette3.
                             bool shouldHavePalette3 = scenario >= ScenarioType.Scenario3;
                             bool hasPalette3 = mpdFile.MPDHeader.Data.GetWord(mpdFile.MPDHeader.Address + 0x44) == 0x0029;
                             if (shouldHavePalette3 != hasPalette3)
-                                Console.WriteLine("  Palette3 problem! ShouldHave=" + shouldHavePalette3 + ", DoesHave=" + hasPalette3);
+                                Console.WriteLine("  !!! Palette3 problem! ShouldHave=" + shouldHavePalette3 + ", DoesHave=" + hasPalette3);
 
                             // Is this MPD file in the wrong format for this scenario? (Scenario 3 and Premium Disk are the same)
                             var expectedScenario = (scenario == ScenarioType.PremiumDisk) ? ScenarioType.Scenario3 : scenario;
                             if (mpdFile.Scenario != expectedScenario)
-                                Console.WriteLine("  Wrong scenario for this disc! ShouldBe=" + expectedScenario + ", Is=" + mpdFile.Scenario);
+                                Console.WriteLine("  !!! Wrong scenario for this disc! ShouldBe=" + expectedScenario + ", Is=" + mpdFile.Scenario);
                         }
                     }
                     catch (Exception e) {
-                        Console.WriteLine("  Exception: '" + e.Message + "'. Skipping!");
+                        Console.WriteLine("  !!! Exception: '" + e.Message + "'. Skipping!");
                     }
                 }
             }
