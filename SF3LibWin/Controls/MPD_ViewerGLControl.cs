@@ -12,8 +12,10 @@ namespace SF3.Win.Controls {
             InitializeComponent();
             InitToolstrip();
 
+            InitRendering();
+            InitControls();
+
             Disposed += (s, a) => {
-                OnDisposeRendering();
                 _timer?.Dispose();
                 _timer = null;
             };
@@ -25,11 +27,11 @@ namespace SF3.Win.Controls {
 
             switch (m.Msg) {
                 case WM_RBUTTONDBLCLK:
-                    OnRightDoubleClick(EventArgs.Empty);
+                    RightDoubleClick?.Invoke(this, EventArgs.Empty);
                     break;
 
                 case WM_NCMBUTTONDBLCLK:
-                    OnMiddleDoubleClick(EventArgs.Empty);
+                    MiddleDoubleClick?.Invoke(this, EventArgs.Empty);
                     break;
             }
 
@@ -38,29 +40,12 @@ namespace SF3.Win.Controls {
 
         protected override void OnLoad(EventArgs e) {
             base.OnLoad(e);
-            OnLoadRendering();
             _timer.Start();
-        }
-
-        protected override void OnResize(EventArgs e) {
-            base.OnResize(e);
-            OnResizeRendering();
-        }
-
-        protected override void OnPaint(PaintEventArgs e) {
-            base.OnPaint(e);
-            OnPaintRendering();
         }
 
         protected override void OnMouseDown(MouseEventArgs e) {
             base.OnMouseDown(e);
             Focus();
-            _mouseButtons |= e.Button;
-        }
-
-        protected override void OnMouseUp(MouseEventArgs e) {
-            base.OnMouseUp(e);
-            _mouseButtons &= ~e.Button;
         }
 
         // TODO: temporary click function!! remove this when there's an actual 'edit' panel
@@ -73,60 +58,9 @@ namespace SF3.Win.Controls {
             System.Diagnostics.Debug.Write(_surfaceModel.TileDebugText[_tilePos.Value.X, _tilePos.Value.Y]);
         }
 
-        protected override void OnMouseWheel(MouseEventArgs e) {
-            base.OnMouseWheel(e);
-            MoveCameraForward(e.Delta / -50 * GetShiftFactor());
-        }
-
-        protected void OnRightDoubleClick(EventArgs e)
-            => LookAtCurrentTileTarget();
-
-        protected void OnMiddleDoubleClick(EventArgs e)
-            => PanToCurrentTileTarget();
-
-        protected override void OnMouseMove(MouseEventArgs e) {
-            base.OnMouseMove(e);
-            OnMouseMoveControls(e);
-        }
-
-        protected override void OnMouseLeave(EventArgs e) {
-            base.OnMouseLeave(e);
-            _lastMousePos = null;
-            _mouseButtons = MouseButtons.None;
-
-            if (_mousePos != null)
-                UpdateMousePosition(null);
-            else
-                UpdateTilePosition(null);
-        }
-
-        protected override void OnKeyDown(KeyEventArgs e) {
-            base.OnKeyDown(e);
-            if (Enabled && Focused && Visible)
-                _keysPressed[(Keys) ((int) e.KeyCode & 0xFFFF)] = true;
-        }
-
-        protected override void OnKeyUp(KeyEventArgs e) {
-            base.OnKeyUp(e);
-            _keysPressed[(Keys) ((int) e.KeyCode & 0xFFFF)] = false;
-        }
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
-            if (Enabled && Focused && Visible)
-                _keysPressed[(Keys) ((int) keyData & 0xFFFF)] = true;
+            CmdKey?.Invoke(this, ref msg, keyData);
             return base.ProcessCmdKey(ref msg, keyData);
-        }
-
-        protected override void OnLostFocus(EventArgs e) {
-            base.OnLostFocus(e);
-            _keysPressed.Clear();
-            _mouseButtons = MouseButtons.None;
-            _lastMousePos = null;
-        }
-
-        private void OnFrameTick() {
-            OnFrameTickKeys();
-            OnFrameTickRendering();
         }
 
         private void InitToolstrip() {
@@ -140,10 +74,17 @@ namespace SF3.Win.Controls {
             if (!Visible)
                 return;
             _frame = (_frame + 1) % 3600;
-            OnFrameTick();
+            FrameTick?.Invoke(this, EventArgs.Empty);
         }
 
         public IMPD_File Model { get; set; }
+
+        public delegate void CmdKeyEventHandler(object? sender, ref Message msg, Keys keyData);
+
+        public event EventHandler RightDoubleClick;
+        public event EventHandler MiddleDoubleClick;
+        public event EventHandler FrameTick;
+        public event CmdKeyEventHandler CmdKey;
 
         private int _frame = 0;
         private Timer _timer = null;

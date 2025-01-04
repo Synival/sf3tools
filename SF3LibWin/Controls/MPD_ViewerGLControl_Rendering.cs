@@ -5,10 +5,12 @@ using SF3.Win.OpenGL.MPD_File;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerGLControl {
-        public void UpdateSurfaceModels() {
-            MakeCurrent();
-            _surfaceModel.Update(Model);
-            Invalidate();
+        private void InitRendering() {
+            Load      += (s, e) => OnLoadRendering();
+            Disposed  += (s, e) => OnDisposeRendering();
+            Resize    += (s, e) => OnResizeRendering();
+            Paint     += (s, e) => OnPaintRendering();
+            FrameTick += (s, e) => OnFrameTickRendering();
         }
 
         private void OnLoadRendering() {
@@ -81,6 +83,12 @@ namespace SF3.Win.Controls {
 
         private void OnFrameTickRendering()
             => UpdateAnimatedTextures();
+
+        public void UpdateSurfaceModels() {
+            MakeCurrent();
+            _surfaceModel.Update(Model);
+            Invalidate();
+        }
 
         private void UpdateSelectFramebuffer() {
             _selectFramebuffer?.Dispose();
