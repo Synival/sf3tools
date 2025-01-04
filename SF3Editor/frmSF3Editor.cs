@@ -1,4 +1,6 @@
+using System;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Arrays;
 using CommonLib.NamedValues;
@@ -23,6 +25,10 @@ namespace SF3Editor {
             SuspendLayout();
             InitializeComponent();
 
+            var nameGetters = Enum
+                .GetValues<ScenarioType>()
+                .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
+
             var controlContainer = new TabView("Test Container");
             var controlContainerControl = controlContainer.Create();
 
@@ -34,7 +40,7 @@ namespace SF3Editor {
 
             var mpdsToLoad = new string[] {"BTL02.MPD", "BTL03.MPD", "BTL04A.MPD"};
             foreach (var mpd in mpdsToLoad) {
-                var mpdFile = MPD_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(c_discPath + mpd))), c_nameGetterContext, c_scenario);
+                var mpdFile = MPD_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(c_discPath + mpd))), nameGetters);
                 controlContainer.CreateChild(new MPD_View(mpd, mpdFile));
             }
 

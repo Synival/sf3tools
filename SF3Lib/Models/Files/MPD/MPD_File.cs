@@ -17,13 +17,34 @@ namespace SF3.Models.Files.MPD {
         private const int c_RamOffset = 0x290000;
         private const int c_SurfaceChunkSize = 0xCF00;
 
-        protected MPD_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) { }
+        protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) : base(data, nameContexts[DetectScenario(data)], DetectScenario(data)) { }
 
-        public static MPD_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
-            var newFile = new MPD_File(data, nameContext, scenario);
+        public static MPD_File Create(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) {
+            var newFile = new MPD_File(data, nameContexts);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");
             return newFile;
+        }
+
+        public static ScenarioType DetectScenario(IByteData data) {
+            // Get addresses we need to check.
+            var headerAddrPtr = data.GetDouble(0x0000) - c_RamOffset;
+            var headerAddr    = data.GetDouble(headerAddrPtr) - c_RamOffset;
+            var palette3Addr  = data.GetDouble(headerAddr + 0x0044);
+            var chunk21Addr   = data.GetDouble(0x20A8);
+
+            // Determine some things about this MPD file.
+            var hasPalette3 = (palette3Addr & 0xFFFF0000) == 0x00290000;
+            var hasChunk21  = (chunk21Addr > 0);
+
+            // We should be able to accurately detect the scenario.
+            // Scenario 3 and the Premium Disk have the same MPD format.
+            if (hasPalette3)
+                return ScenarioType.Scenario3;
+            else if (hasChunk21)
+                return ScenarioType.Scenario2;
+            else
+                return ScenarioType.Scenario1;
         }
 
         public override IEnumerable<ITable> MakeTables() {

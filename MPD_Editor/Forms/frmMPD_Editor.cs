@@ -5,6 +5,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
+using CommonLib.NamedValues;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SF3.ModelLoaders;
 using SF3.Models.Files;
@@ -30,6 +32,15 @@ namespace SF3.MPD_Editor.Forms {
             InitializeComponent();
             InitializeEditor(menuStrip2);
 
+            // Scenario is auto-detected.
+            foreach (var i in MenuStrip.Items) {
+                var tsi = (ToolStripItem) i;
+                if (tsi.Name == "tsmiScenario") {
+                    MenuStrip.Items.Remove(tsi);
+                    break;
+                }
+            }
+
             FileIsLoadedChanged += (s, e) => {
                 tsmiTextures_ImportFolder.Enabled = IsLoaded;
                 tsmiTextures_ExportToFolder.Enabled = IsLoaded;
@@ -39,8 +50,12 @@ namespace SF3.MPD_Editor.Forms {
         protected override string FileDialogFilter
             => "SF3 Data (*.MPD)|*.MPD|" + base.FileDialogFilter;
 
-        protected override IBaseFile CreateModel(IModelFileLoader loader)
-            => MPD_File.Create(loader.ByteData, new NameGetterContext(Scenario), Scenario);
+        protected override IBaseFile CreateModel(IModelFileLoader loader) {
+            var nameGetters = Enum
+                .GetValues<ScenarioType>()
+                .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
+            return MPD_File.Create(loader.ByteData, nameGetters);
+        }
 
         protected override IView CreateView(IModelFileLoader loader, IBaseFile model)
             => new MPD_View(loader.Filename, (MPD_File) model);

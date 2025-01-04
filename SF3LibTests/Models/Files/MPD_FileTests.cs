@@ -1,4 +1,5 @@
 using CommonLib.Arrays;
+using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
@@ -9,10 +10,12 @@ namespace SF3.Tests.Models.Files {
     [TestClass]
     public class MPD_FileTests {
         private static MPD_File MakeFile() {
-            var scenario = ScenarioType.Scenario1;
-            var nameGetterContext = new NameGetterContext(scenario);
-            var data = new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(ResourcePath(scenario, "BTL02.MPD"))));
-            return MPD_File.Create(data, nameGetterContext, scenario);
+            var nameGetters = Enum
+                .GetValues<ScenarioType>()
+                .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
+
+            var data = new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(ResourcePath(ScenarioType.Scenario1, "BTL02.MPD"))));
+            return MPD_File.Create(data, nameGetters);
         }
 
         [TestMethod]

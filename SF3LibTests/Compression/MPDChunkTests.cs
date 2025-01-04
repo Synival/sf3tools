@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using CommonLib.Arrays;
+using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
@@ -24,14 +25,6 @@ namespace SF3.Tests.Compression {
                     .Select(x => x.Split('/'))
                     .Select(x => x[x.Length - 1])
                     .Select(x => new TestCase(st, x))
-                    // These files in Scenario 3 appear to be a leftover from Scenario 2. They're the wrong format, so skip them.
-                    .Where(x => {
-                        return (x.Scenario != ScenarioType.Scenario3)
-                            ? true
-                            : !x.Filename.EndsWith("BTL42.MPD") &&
-                              !x.Filename.EndsWith("MUHASI.MPD") &&
-                              !x.Filename.EndsWith("SNIOKI.MPD");
-                    })
                     .ToArray()
                 );
             }
@@ -40,14 +33,14 @@ namespace SF3.Tests.Compression {
         }
 
         private static void RunOnAllTestCases(Action<TestCase, MPD_File> func) {
+            var nameGetters = Enum
+                .GetValues<ScenarioType>()
+                .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
             var testCases = CreateAllTestCases();
             TestCase.Run(testCases, testCase => {
-                var scn = testCase.Scenario;
-                using (var mpdFile = MPD_File.Create(
-                    new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename))), new NameGetterContext(scn), scn)
-                ) {
+                var byteData = new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename)));
+                using (var mpdFile = MPD_File.Create(byteData, nameGetters))
                     func(testCase, mpdFile);
-                }
             });
         }
 
@@ -158,7 +151,10 @@ namespace SF3.Tests.Compression {
                 }
 
                 // Attempt to create the file to make sure it's not corrupted.
-                var recreatedMpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), mpdFile.NameGetterContext, mpdFile.Scenario);
+                var nameGetters = new Dictionary<ScenarioType, INameGetterContext>() {
+                    { mpdFile.Scenario, mpdFile.NameGetterContext }
+                };
+                var recreatedMpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetters);
             });
         }
     }

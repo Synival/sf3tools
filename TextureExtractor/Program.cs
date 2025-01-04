@@ -2,6 +2,7 @@
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using CommonLib.Arrays;
+using CommonLib.NamedValues;
 using SF3;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
@@ -67,7 +68,7 @@ namespace TextureExtractor {
             var allFiles = Enum.GetValues<ScenarioType>()
                 .ToDictionary(x => x, x => Directory.GetFiles(c_pathsIn[x], "*.MPD").OrderBy(x => FileSortKey(x)).ToList());
             var nameGetterContexts = Enum.GetValues<ScenarioType>()
-                .ToDictionary(x => x, x => new NameGetterContext(x));
+                .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
 
             var texturesFound = new Dictionary<string, List<TextureRef>>();
 
@@ -86,7 +87,7 @@ namespace TextureExtractor {
 
                     // Create an MPD file that works with our new ByteData.
                     try {
-                        using (var mpdFile = MPD_File.Create(byteData, nameGetter, scenario)) {
+                        using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts)) {
                             // Let's only gather tiles used in surface character rows.
                             if (mpdFile.SurfaceModel == null) {
                                 Console.WriteLine("No surface textures");

@@ -1,4 +1,5 @@
 ﻿using CommonLib.Arrays;
+using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
@@ -21,7 +22,9 @@ namespace Grayscaler {
             // (NameGetterContext is irrelevant for this project. It's used to get named values
             //  for stuff, like character names, classes, spells, items, etc.)
             var scenario = ScenarioType.Scenario1;
-            var nameGetter = new NameGetterContext(scenario);
+            var nameGetters = new Dictionary<ScenarioType, INameGetterContext>() {
+                { scenario, new NameGetterContext(scenario) }
+            };
 
             // For each file, update ALL textures in ALL their texture chunks.
             // (This doesn't update scroll panes)
@@ -32,7 +35,7 @@ namespace Grayscaler {
                 var byteData = new ByteData(new ByteArray(File.ReadAllBytes(fileIn)));
 
                 // Create an MPD file that works with our new ByteData.
-                var mpdFile = MPD_File.Create(byteData, nameGetter, scenario);
+                var mpdFile = MPD_File.Create(byteData, nameGetters);
 
                 // Gather all textures into one collection.
                 var textures1 = (mpdFile.TextureCollections == null) ? [] : mpdFile.TextureCollections

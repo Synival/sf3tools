@@ -54,7 +54,7 @@ namespace SF3.Models.Structs.MPD {
             int address2;
             if (hasPalette3) {
                 offsetPal3Address = Address + 0x44; // 4 bytes
-                address2      = Address + 0x48;
+                address2 = Address + 0x48;
             }
             else {
                 offsetPal3Address = -1;
@@ -66,6 +66,8 @@ namespace SF3.Models.Structs.MPD {
             unknown6Address             = address2 + 0x08; // 4 bytes
             unknown7Address             = address2 + 0x0C; // 4 bytes
             offset12Address             = address2 + 0x10; // 4 bytes
+
+            Size = (offset12Address - Address) + 0x04;
         }
 
         [BulkCopy]

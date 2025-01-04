@@ -68,7 +68,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleApps", "SampleApps", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextureExtractor", "TextureExtractor\TextureExtractor.csproj", "{F983BE50-106A-4E2B-8026-EC4B18A2B885}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightPaletteSetter", "LightPaletteSetter\LightPaletteSetter.csproj", "{EF731AA5-0B9B-4C68-A130-A32F50709F0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightPaletteSetter", "LightPaletteSetter\LightPaletteSetter.csproj", "{EF731AA5-0B9B-4C68-A130-A32F50709F0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPD_Analyzer", "MPD_Analyzer\MPD_Analyzer.csproj", "{81519AE3-94D5-4F2B-B987-09084BD6F2A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -168,6 +170,10 @@ Global
 		{EF731AA5-0B9B-4C68-A130-A32F50709F0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF731AA5-0B9B-4C68-A130-A32F50709F0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF731AA5-0B9B-4C68-A130-A32F50709F0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81519AE3-94D5-4F2B-B987-09084BD6F2A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81519AE3-94D5-4F2B-B987-09084BD6F2A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81519AE3-94D5-4F2B-B987-09084BD6F2A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81519AE3-94D5-4F2B-B987-09084BD6F2A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -201,6 +207,7 @@ Global
 		{276CACEF-0514-435D-91BF-F2D043C44667} = {937D14A0-1E8B-4E10-B344-BB5D61E18AF2}
 		{F983BE50-106A-4E2B-8026-EC4B18A2B885} = {276CACEF-0514-435D-91BF-F2D043C44667}
 		{EF731AA5-0B9B-4C68-A130-A32F50709F0A} = {276CACEF-0514-435D-91BF-F2D043C44667}
+		{81519AE3-94D5-4F2B-B987-09084BD6F2A8} = {276CACEF-0514-435D-91BF-F2D043C44667}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A670A182-55F0-4C8C-A7B1-076126D32B1C}
