@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CommonLib;
 using CommonLib.Extensions;
 using CommonLib.Types;
 using OpenTK.GLControl;
@@ -30,18 +31,9 @@ namespace SF3.Win.Controls {
             InitializeComponent();
 
             Disposed += (s, a) => {
-                if (_surfaceModels != null)
-                    foreach (var model in _surfaceModels)
-                        model.Dispose();
-
-                if (_shaders != null)
-                    foreach (var shader in _shaders)
-                        shader.Dispose();
-
-                if (_textures != null)
-                    foreach (var texture in _textures)
-                        texture.Dispose();
-
+                _surfaceModels.Dispose();
+                _shaders.Dispose();
+                _textures.Dispose();
                 _tileModel?.Dispose();
                 _helpModel?.Dispose();
 
@@ -118,8 +110,8 @@ namespace SF3.Win.Controls {
 
             UpdateFramebuffer();
 
-            _textures = [_whiteTexture, _transparentTexture, _tileWireframeTexture, _tileHoverTexture, _helpTexture];
-            _shaders  = [_textureShader, _twoTextureShader, _solidShader, _normalsShader, _wireframeShader, _objectShader];
+            _textures.AddRange([_whiteTexture, _transparentTexture, _tileWireframeTexture, _tileHoverTexture, _helpTexture]);
+            _shaders.AddRange([_textureShader, _twoTextureShader, _solidShader, _normalsShader, _wireframeShader, _objectShader]);
 
             foreach (var shader in _shaders)
                 UpdateShaderModelMatrix(shader, Matrix4.Identity);
@@ -161,7 +153,7 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateProjectionMatrices() {
-            if (_shaders == null || _shaders.Length == 0)
+            if (_shaders == null || _shaders.Count == 0)
                 return;
 
             UpdateProjectionMatrix();
@@ -334,12 +326,8 @@ namespace SF3.Win.Controls {
         public void UpdateSurfaceModels() {
             MakeCurrent();
 
-            if (_surfaceModels != null) {
-                foreach (var model in _surfaceModels)
-                    model.Dispose();
-                Invalidate();
-                _surfaceModels = null;
-            }
+            _surfaceModels.Dispose();
+            Invalidate();
 
             var texturesById = (Model.TextureCollections != null) ? Model.TextureCollections
                 .SelectMany(x => x.TextureTable.Rows)
@@ -433,7 +421,7 @@ namespace SF3.Win.Controls {
             }
 
             if (models.Count > 0) {
-                _surfaceModels = models.ToArray();
+                _surfaceModels.AddRange(models);
                 Invalidate();
             }
         }
@@ -858,8 +846,8 @@ namespace SF3.Win.Controls {
         private Texture _tileHoverTexture     = null;
         private Texture _helpTexture          = null;
 
-        private QuadModel[] _surfaceModels = null;
-        private Shader[]  _shaders         = null;
-        private Texture[] _textures        = null;
+        private DisposableList<QuadModel> _surfaceModels = [];
+        private DisposableList<Shader>    _shaders       = [];
+        private DisposableList<Texture>   _textures      = [];
     }
 }
