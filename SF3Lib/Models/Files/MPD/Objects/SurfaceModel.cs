@@ -37,23 +37,23 @@ namespace SF3.Models.Files.MPD.Objects {
         /// <param name="tileX">X coordinate of the tile.</param>
         /// <param name="tileY">Y coordinate of the tile.</param>
         /// <param name="corner">Corner of the tile to update.</param>
-        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
-        public void UpdateSurfaceVertexAbnormal(int tileX, int tileY, CornerType corner, HeightmapRowTable heightmap, bool useMoreAccurateCalculations)
-            => UpdateSurfaceVertexAbnormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), heightmap, useMoreAccurateCalculations);
+        /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
+        public void UpdateVertexAbnormal(int tileX, int tileY, CornerType corner, HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod)
+            => UpdateVertexAbnormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), heightmap, calculationMethod);
 
         /// <summary>
         /// Updates the vertex abnormal for a specific vertex in the vertex mesh.
         /// </summary>
         /// <param name="vertexX">X coordinate of the vertex.</param>
         /// <param name="vertexY">Y coordinate of the vertex.</param>
-        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
-        public void UpdateSurfaceVertexAbnormal(int vertexX, int vertexY, HeightmapRowTable heightmap, bool useMoreAccurateCalculations) {
+        /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
+        public void UpdateVertexAbnormal(int vertexX, int vertexY, HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod) {
             if (heightmap == null)
                 return;
 
-            var abnormal = heightmap.CalculateSurfaceVertexAbnormal(vertexX, vertexY, useMoreAccurateCalculations);
+            var abnormal = heightmap.CalculateVertexAbnormal(vertexX, vertexY, calculationMethod);
             var locations = GetBlockLocations(vertexX, vertexY);
-            UpdateSurfaceVertexAbnormals(locations, abnormal);
+            UpdateVertexAbnormals(locations, abnormal);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace SF3.Models.Files.MPD.Objects {
         /// </summary>
         /// <param name="locations">The locations of blocks to update.</param>
         /// <param name="abnormal">The abnormal to be set into each block location.</param>
-        public void UpdateSurfaceVertexAbnormals(BlockVertexLocation[] locations, VECTOR abnormal) {
+        public void UpdateVertexAbnormals(BlockVertexLocation[] locations, VECTOR abnormal) {
             var blocks = VertexNormalBlockTable.Rows;
             for (var i = 0; i < locations.Length; i++)
                 blocks[locations[i].Num][locations[i].X, locations[i].Y] = abnormal;
@@ -72,27 +72,27 @@ namespace SF3.Models.Files.MPD.Objects {
         /// </summary>
         /// <param name="tileX">X coordinate of the tile.</param>
         /// <param name="tileY">Y coordinate of the tile.</param>
-        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
-        public void UpdateSurfaceVertexAbnormals(int tileX, int tileY, HeightmapRowTable heightmap, bool useMoreAccurateCalculations) {
+        /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
+        public void UpdateVertexAbnormals(int tileX, int tileY, HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod) {
             if (heightmap == null)
                 return;
 
-            UpdateSurfaceVertexAbnormal(tileX, tileY, CornerType.TopLeft,     heightmap, useMoreAccurateCalculations);
-            UpdateSurfaceVertexAbnormal(tileX, tileY, CornerType.TopRight,    heightmap, useMoreAccurateCalculations);
-            UpdateSurfaceVertexAbnormal(tileX, tileY, CornerType.BottomRight, heightmap, useMoreAccurateCalculations);
-            UpdateSurfaceVertexAbnormal(tileX, tileY, CornerType.BottomLeft,  heightmap, useMoreAccurateCalculations);
+            UpdateVertexAbnormal(tileX, tileY, CornerType.TopLeft,     heightmap, calculationMethod);
+            UpdateVertexAbnormal(tileX, tileY, CornerType.TopRight,    heightmap, calculationMethod);
+            UpdateVertexAbnormal(tileX, tileY, CornerType.BottomRight, heightmap, calculationMethod);
+            UpdateVertexAbnormal(tileX, tileY, CornerType.BottomLeft,  heightmap, calculationMethod);
         }
 
         /// <summary>
         /// Recalculates all vertex "abnormals" for all tiles.
         /// </summary>
-        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
-        public void UpdateSurfaceVertexAbnormals(HeightmapRowTable heightmap, bool useMoreAccurateCalculations) {
+        /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
+        public void UpdateVertexAbnormals(HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod) {
             if (heightmap == null)
                 return;
             for (var y = 0; y < 65; y++)
                 for (var x = 0; x < 65; x++)
-                    UpdateSurfaceVertexAbnormal(x, y, CornerType.TopLeft, heightmap, useMoreAccurateCalculations);
+                    UpdateVertexAbnormal(x, y, CornerType.TopLeft, heightmap, calculationMethod);
         }
 
         [BulkCopyRowName]

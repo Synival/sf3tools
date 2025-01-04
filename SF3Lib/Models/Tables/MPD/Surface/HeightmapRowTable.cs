@@ -31,19 +31,19 @@ namespace SF3.Models.Tables.MPD.Surface {
         /// <param name="tileX">X coordinate of the tile.</param>
         /// <param name="tileY">Y coordinate of the tile.</param>
         /// <param name="corner">Corner of the tile whose vertex abnormal should be calculated.</param>
-        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
+        /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
         /// <returns>A freshly-calculated abnormal for the vertex requested.</returns>
-        public VECTOR CalculateSurfaceVertexAbnormal(int tileX, int tileY, CornerType corner, bool useMoreAccurateCalculations)
-            => CalculateSurfaceVertexAbnormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), useMoreAccurateCalculations);
+        public VECTOR CalculateVertexAbnormal(int tileX, int tileY, CornerType corner, POLYGON_NormalCalculationMethod calculationMethod)
+            => CalculateVertexAbnormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), calculationMethod);
 
         /// <summary>
         /// Calculates the vertex abnormal for a specific vertex of a tile.
         /// </summary>
         /// <param name="vertexX">X coordinate of the vertex.</param>
         /// <param name="vertexY">Y coordinate of the vertex.</param>
-        /// <param name="useMoreAccurateCalculations">When 'true', math more accurate than SF3 provided will be used.</param>
+        /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
         /// <returns>A freshly-calculated abnormal for the vertex requested.</returns>
-        public VECTOR CalculateSurfaceVertexAbnormal(int vertexX, int vertexY, bool useMoreAccurateCalculations) {
+        public VECTOR CalculateVertexAbnormal(int vertexX, int vertexY, POLYGON_NormalCalculationMethod calculationMethod) {
             // Determine the normals of the 4 quads surrounding the vertex.
             var sumNormals = new List<VECTOR>();
 
@@ -56,7 +56,7 @@ namespace SF3.Models.Tables.MPD.Surface {
                         new VECTOR(1.00f, heights[2], 1.00f),
                         new VECTOR(0.00f, heights[3], 1.00f)
                     });
-                    sumNormals.Add(quad.GetNormal(useMoreAccurateCalculations));
+                    sumNormals.Add(quad.GetNormal(calculationMethod));
                 }
             }
 

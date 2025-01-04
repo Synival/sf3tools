@@ -17,23 +17,45 @@ namespace CommonLib.SGL {
             ).Normalized();
         }
 
-        public VECTOR GetNormal(bool useMoreAccurateMath) {
-            if (!useMoreAccurateMath)
-                return GetCornerNormal(0);
+        public VECTOR GetNormal(POLYGON_NormalCalculationMethod calculationMethod) {
+            switch (calculationMethod) {
+                case POLYGON_NormalCalculationMethod.TopLeftTriangle:
+                    return GetCornerNormal(0);
 
-            var vertexNormals = new VECTOR[] {
-                GetCornerNormal(CornerType.TopLeft),
-                GetCornerNormal(CornerType.TopRight),
-                GetCornerNormal(CornerType.BottomRight),
-                GetCornerNormal(CornerType.BottomLeft),
-            };
+                case POLYGON_NormalCalculationMethod.AverageOfAllTriangles:
+                case POLYGON_NormalCalculationMethod.MostExtremeVerticalTriangle:
+                case POLYGON_NormalCalculationMethod.WeightedVerticalTriangles:
+                    var vertexNormals = new VECTOR[] {
+                        GetCornerNormal(CornerType.TopLeft),
+                        GetCornerNormal(CornerType.TopRight),
+                        GetCornerNormal(CornerType.BottomRight),
+                        GetCornerNormal(CornerType.BottomLeft),
+                    };
 
-            // Return the normal that will produce the most extreme lighting!
-            return vertexNormals.OrderBy(x => Math.Abs(x.Y.Float)).First();
+                    switch (calculationMethod) {
+                        case POLYGON_NormalCalculationMethod.AverageOfAllTriangles:
+                            return vertexNormals.Aggregate((a, b) => a + b).Normalized();
+
+                        case POLYGON_NormalCalculationMethod.MostExtremeVerticalTriangle:
+                            return vertexNormals.OrderBy(x => Math.Abs(x.Y.Float)).First();
+
+                        case POLYGON_NormalCalculationMethod.WeightedVerticalTriangles:
+                            return vertexNormals
+                                .Select(x => x * (1.01f - Math.Abs(x.Y.Float)))
+                                .Aggregate((a, b) => a + b)
+                                .Normalized();
+
+                        default:
+                            throw new NotImplementedException("Unreachable code!");
+                    }
+
+                default:
+                    throw new ArgumentException(nameof(calculationMethod));
+            }
         }
 
-        public VECTOR GetAbnormal(bool useMoreAccurateMath) {
-            var quadNormal = GetNormal(useMoreAccurateMath);
+        public VECTOR GetAbnormal(POLYGON_NormalCalculationMethod calculationMethod) {
+            var quadNormal = GetNormal(calculationMethod);
             return quadNormal.GetAbnormalFromNormal();
         }
 

@@ -1,10 +1,11 @@
 ﻿using CommonLib.SGL;
+using CommonLib.Types;
 
 namespace CommonLib.Tests.SGL {
     [TestClass]
     public class POLYGONTests {
         const float c_minDelta = 0.00025f;
-        const bool c_useMoreAccurateMath = true;
+        const POLYGON_NormalCalculationMethod c_calculationMethod = POLYGON_NormalCalculationMethod.TopLeftTriangle;
 
         public void AreVectorsEqual(VECTOR lhs, VECTOR rhs, float delta = 0.00f, string? name = null) {
             var diff = lhs - rhs;
@@ -21,7 +22,7 @@ namespace CommonLib.Tests.SGL {
                 new(10, 20, 31),
             ]);
 
-            var abnormal = quad.GetAbnormal(c_useMoreAccurateMath);
+            var abnormal = quad.GetAbnormal(c_calculationMethod);
 
             AreVectorsEqual(new VECTOR(0.0000000f, 0.0000305f, 0.0000000f), abnormal, 0.00001f);
         }
@@ -35,7 +36,7 @@ namespace CommonLib.Tests.SGL {
                 new(10, 20.00f, 31),
             ]);
 
-            var abnormal = quad.GetAbnormal(c_useMoreAccurateMath);
+            var abnormal = quad.GetAbnormal(c_calculationMethod);
 
             AreVectorsEqual(new VECTOR(0.0000000f, 0.0154724f, -0.2480469f), abnormal, c_minDelta);
         }
@@ -49,7 +50,7 @@ namespace CommonLib.Tests.SGL {
                 new(10, 20.0f, 31),
             ]);
 
-            var abnormal = quad.GetAbnormal(c_useMoreAccurateMath);
+            var abnormal = quad.GetAbnormal(c_calculationMethod);
 
             AreVectorsEqual(new VECTOR(0.0000000f, 0.0597229f, -0.4850158f), abnormal, c_minDelta);
         }
@@ -63,7 +64,7 @@ namespace CommonLib.Tests.SGL {
                 new(10, 20, 31),
             ]);
 
-            var abnormal = quad.GetAbnormal(c_useMoreAccurateMath);
+            var abnormal = quad.GetAbnormal(c_calculationMethod);
 
             AreVectorsEqual(new VECTOR(0.0000000f, 0.2111511f, -0.8943786f), abnormal, c_minDelta);
         }
@@ -77,7 +78,7 @@ namespace CommonLib.Tests.SGL {
                 new(10, 20.0f, 31),
             ]);
 
-            var abnormal = quad.GetAbnormal(c_useMoreAccurateMath);
+            var abnormal = quad.GetAbnormal(c_calculationMethod);
 
             AreVectorsEqual(new VECTOR(0.0000000f, 0.4000549f, -1.1999817f), abnormal, c_minDelta);
         }
@@ -91,7 +92,7 @@ namespace CommonLib.Tests.SGL {
                 new(10, 20.0f, 31),
             ]);
 
-            var abnormal = quad.GetAbnormal(c_useMoreAccurateMath);
+            var abnormal = quad.GetAbnormal(c_calculationMethod);
 
             AreVectorsEqual(new VECTOR(0.0000000f, 0.5858460f, -1.4145400f), abnormal, c_minDelta);
         }
@@ -123,10 +124,10 @@ namespace CommonLib.Tests.SGL {
                 new(10, 21, 31),
             ]);
 
-            var abnormalN = quadN.GetAbnormal(c_useMoreAccurateMath);
-            var abnormalE = quadE.GetAbnormal(c_useMoreAccurateMath);
-            var abnormalS = quadS.GetAbnormal(c_useMoreAccurateMath);
-            var abnormalW = quadW.GetAbnormal(c_useMoreAccurateMath);
+            var abnormalN = quadN.GetAbnormal(c_calculationMethod);
+            var abnormalE = quadE.GetAbnormal(c_calculationMethod);
+            var abnormalS = quadS.GetAbnormal(c_calculationMethod);
+            var abnormalW = quadW.GetAbnormal(c_calculationMethod);
 
             AreVectorsEqual(new VECTOR( 0.0000000f, 0.2111511f, -0.8943786f), abnormalN, c_minDelta, nameof(abnormalN));
             AreVectorsEqual(new VECTOR(-0.8943786f, 0.2111511f,  0.0000000f), abnormalE, c_minDelta, nameof(abnormalE));
@@ -143,7 +144,7 @@ namespace CommonLib.Tests.SGL {
                 new(10, 20, 31),
             ]);
 
-            var normal = quad.GetNormal(c_useMoreAccurateMath);
+            var normal = quad.GetNormal(c_calculationMethod);
 
             AreVectorsEqual(new VECTOR(0, 1, 0), normal);
         }
@@ -157,7 +158,7 @@ namespace CommonLib.Tests.SGL {
                 new(10, 20, 31),
             ]);
 
-            var normal = quad.GetNormal(c_useMoreAccurateMath);
+            var normal = quad.GetNormal(c_calculationMethod);
 
             AreVectorsEqual(new VECTOR(0, 0.70710678118f, 0.70710678118f), normal, 0.0001f);
         }

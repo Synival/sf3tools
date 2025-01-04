@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using CommonLib.Types;
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Controls {
@@ -57,12 +58,12 @@ namespace SF3.Win.Controls {
         }
 
         private void tsbRecalculateLightmapOriginalMath_Click(object sender, EventArgs e) {
-            Model?.SurfaceModel?.UpdateSurfaceVertexAbnormals(Model.Surface?.HeightmapRowTable, false);
+            Model?.SurfaceModel?.UpdateVertexAbnormals(Model.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.TopLeftTriangle);
             UpdateMap();
         }
 
         private void tsbUpdateLightmapUpdatedMath_Click(object sender, EventArgs e) {
-            Model?.SurfaceModel?.UpdateSurfaceVertexAbnormals(Model.Surface?.HeightmapRowTable, true);
+            Model?.SurfaceModel?.UpdateVertexAbnormals(Model.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles);
             UpdateMap();
         }
     }
