@@ -21,14 +21,14 @@ namespace SF3.Win.Controls {
             tsbToggleNormals.Checked   = GLControl.DrawNormals;
         }
 
-        private IMPD_File _model = null;
+        private IMPD_File _mpdFile = null;
 
-        public IMPD_File Model {
-            get => _model;
+        public IMPD_File MPD_File {
+            get => _mpdFile;
             set {
-                if (value != _model) {
-                    _model = value;
-                    GLControl.Model = value;
+                if (value != _mpdFile) {
+                    _mpdFile = value;
+                    GLControl.MPD_File = value;
                 }
             }
         }
@@ -50,21 +50,21 @@ namespace SF3.Win.Controls {
             tsbToggleNormals.Checked = GLControl.DrawNormals;
         }
 
-        public void UpdateMap() {
-            if (Model == null)
+        public void UpdateModels() {
+            if (MPD_File == null)
                 return;
 
             GLControl.UpdateSurfaceModels();
         }
 
         private void tsbRecalculateLightmapOriginalMath_Click(object sender, EventArgs e) {
-            Model?.SurfaceModel?.UpdateVertexAbnormals(Model.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.TopLeftTriangle);
-            UpdateMap();
+            MPD_File?.SurfaceModel?.UpdateVertexAbnormals(MPD_File.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.TopLeftTriangle);
+            UpdateModels();
         }
 
         private void tsbUpdateLightmapUpdatedMath_Click(object sender, EventArgs e) {
-            Model?.SurfaceModel?.UpdateVertexAbnormals(Model.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles);
-            UpdateMap();
+            MPD_File?.SurfaceModel?.UpdateVertexAbnormals(MPD_File.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles);
+            UpdateModels();
         }
     }
 }

@@ -64,14 +64,14 @@ namespace SF3.Win.OpenGL.MPD_File {
             Dispose(false);
         }
 
-        public void UpdateTileModel(IMPD_File model, WorldResources world, Point? tilePos) {
+        public void UpdateTileModel(IMPD_File mpdFile, WorldResources world, Point? tilePos) {
             TileModel?.Dispose();
             if (TileModel != null)
                 Models.Remove(TileModel);
             TileModel = null;
 
             if (tilePos != null) {
-                var quad = new Quad(SurfaceModelResources.GetTileVertices(model, tilePos.Value));
+                var quad = new Quad(SurfaceModelResources.GetTileVertices(mpdFile, tilePos.Value));
                 Models.Add(TileModel = new QuadModel([quad]));
             }
         }

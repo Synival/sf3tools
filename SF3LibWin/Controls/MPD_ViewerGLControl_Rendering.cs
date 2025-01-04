@@ -86,7 +86,7 @@ namespace SF3.Win.Controls {
 
         public void UpdateSurfaceModels() {
             MakeCurrent();
-            _surfaceModel.Update(Model);
+            _surfaceModel.Update(MPD_File);
             Invalidate();
         }
 

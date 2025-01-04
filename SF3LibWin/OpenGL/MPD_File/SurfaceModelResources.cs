@@ -47,14 +47,14 @@ namespace SF3.Win.OpenGL.MPD_File {
             Dispose(false);
         }
 
-        public static Vector3[] GetTileVertices(IMPD_File model, Point pos) {
+        public static Vector3[] GetTileVertices(IMPD_File mpdFile, Point pos) {
             float[] heights;
 
             // For any tile whose character/texture ID has flag 0x80, the walking heightmap is used.
-            if (model.Surface?.HeightmapRowTable != null && (model.SurfaceModel?.TileTextureRowTable?.Rows[pos.Y]?.GetTextureFlags(pos.X) & 0x80) == 0x80)
-                heights = model.Surface?.HeightmapRowTable.Rows[pos.Y].GetHeights(pos.X);
+            if (mpdFile.Surface?.HeightmapRowTable != null && (mpdFile.SurfaceModel?.TileTextureRowTable?.Rows[pos.Y]?.GetTextureFlags(pos.X) & 0x80) == 0x80)
+                heights = mpdFile.Surface?.HeightmapRowTable.Rows[pos.Y].GetHeights(pos.X);
             // Otherwise, gather heights from the 5x5 block with the surface mesh's heightmap.
-            else if (model.SurfaceModel?.VertexHeightBlockTable != null) {
+            else if (mpdFile.SurfaceModel?.VertexHeightBlockTable != null) {
                 var blockLocations = new BlockVertexLocation[] {
                     GetBlockLocations(pos.X, pos.Y, CornerType.TopLeft,     true)[0],
                     GetBlockLocations(pos.X, pos.Y, CornerType.TopRight,    true)[0],
@@ -63,7 +63,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 };
 
                 heights = blockLocations
-                    .Select(x => model.SurfaceModel.VertexHeightBlockTable.Rows[x.Num][x.X, x.Y] / 16.0f)
+                    .Select(x => mpdFile.SurfaceModel.VertexHeightBlockTable.Rows[x.Num][x.X, x.Y] / 16.0f)
                     .ToArray();
             }
             else
@@ -92,17 +92,17 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models = null;
         }
 
-        public void Update(IMPD_File Model) {
+        public void Update(IMPD_File mpdFile) {
             Reset();
 
-            var texturesById = Model.TextureCollections != null ? Model.TextureCollections
+            var texturesById = mpdFile.TextureCollections != null ? mpdFile.TextureCollections
                 .SelectMany(x => x.TextureTable.Rows)
                 .GroupBy(x => x.ID)
                 .Select(x => x.First())
                 .ToDictionary(x => x.ID, x => x.Texture)
                 : [];
 
-            var animationsById = Model.TextureAnimations != null ? Model.TextureAnimations.Rows
+            var animationsById = mpdFile.TextureAnimations != null ? mpdFile.TextureAnimations.Rows
                 .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
                 .ToDictionary(x => (int) x.TextureID, x => x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray())
@@ -114,15 +114,15 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             Vector3 GetVertexAbnormal(int tileX, int tileY, CornerType corner) {
                 var locations = GetBlockLocations(tileX, tileY, corner);
-                if (locations.Length == 0 || Model.SurfaceModel?.VertexNormalBlockTable?.Rows == null)
+                if (locations.Length == 0 || mpdFile.SurfaceModel?.VertexNormalBlockTable?.Rows == null)
                     return new Vector3(0f, 1 / 32768f, 0f);
 
                 // The vertex abnormals SHOULD be the same, so just use the first one.
                 var loc = locations[0];
-                return Model.SurfaceModel.VertexNormalBlockTable.Rows[loc.Num][loc.X, loc.Y].ToVector3();
+                return mpdFile.SurfaceModel.VertexNormalBlockTable.Rows[loc.Num][loc.X, loc.Y].ToVector3();
             };
 
-            var textureData = Model.SurfaceModel?.TileTextureRowTable?.Make2DTextureData();
+            var textureData = mpdFile.SurfaceModel?.TileTextureRowTable?.Make2DTextureData();
             for (var y = 0; y < WidthInTiles; y++) {
                 for (var x = 0; x < HeightInTiles; x++) {
                     TextureAnimation anim = null;
@@ -150,7 +150,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     };
                     var abnormalVboData = vertexAbnormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
-                    var vertices = GetTileVertices(Model, new Point(x, y));
+                    var vertices = GetTileVertices(mpdFile, new Point(x, y));
                     if (anim != null) {
                         var newQuad = new Quad(vertices, anim, textureFlags);
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, abnormalVboData));

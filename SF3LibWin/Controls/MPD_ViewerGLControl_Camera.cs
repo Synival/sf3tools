@@ -55,7 +55,7 @@ namespace SF3.Win.Controls {
             if (!_tilePos.HasValue)
                 return null;
 
-            var tileVertices = SurfaceModelResources.GetTileVertices(Model, _tilePos.Value);
+            var tileVertices = SurfaceModelResources.GetTileVertices(MPD_File, _tilePos.Value);
             var target = new Vector3(
                 _tilePos.Value.X + WorldResources.ModelOffsetX + 0.5f,
                 tileVertices.Select(x => x.Y).Average(),

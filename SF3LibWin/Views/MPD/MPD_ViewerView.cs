@@ -11,7 +11,7 @@ namespace SF3.Win.Views.MPD {
         public override Control Create() {
             var rval = base.Create();
             if (ViewerControl != null)
-                ViewerControl.Model = Model;
+                ViewerControl.MPD_File = Model;
             return rval;
         }
 
@@ -22,7 +22,7 @@ namespace SF3.Win.Views.MPD {
             // TODO: how to refresh???
         }
 
-        public void UpdateMap() => ViewerControl.UpdateMap();
+        public void UpdateMap() => ViewerControl.UpdateModels();
 
         public IMPD_File Model { get; }
 

@@ -39,7 +39,7 @@ namespace SF3.Win.Controls {
                 return;
 
             _tilePos = pos;
-            _surfaceEditor.UpdateTileModel(Model, _world, _tilePos);
+            _surfaceEditor.UpdateTileModel(MPD_File, _world, _tilePos);
 
             Invalidate();
         }

@@ -77,7 +77,7 @@ namespace SF3.Win.Controls {
             FrameTick?.Invoke(this, EventArgs.Empty);
         }
 
-        public IMPD_File Model { get; set; }
+        public IMPD_File MPD_File { get; set; }
 
         public delegate void CmdKeyEventHandler(object? sender, ref Message msg, Keys keyData);
 
