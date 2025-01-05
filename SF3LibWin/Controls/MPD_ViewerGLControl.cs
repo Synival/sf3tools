@@ -23,6 +23,7 @@ namespace SF3.Win.Controls {
             InitToolstrip();
             InitRendering();
             InitControls();
+            InitEditing();
         }
 
         protected override void WndProc(ref Message m) {
@@ -50,16 +51,6 @@ namespace SF3.Win.Controls {
         protected override void OnMouseDown(MouseEventArgs e) {
             base.OnMouseDown(e);
             Focus();
-        }
-
-        // TODO: temporary click function!! remove this when there's an actual 'edit' panel
-        protected override void OnClick(EventArgs e) {
-            base.OnClick(e);
-            if (_tilePos == null)
-                return;
-
-            System.Diagnostics.Debug.WriteLine("Tile: " + _tilePos.ToString());
-            System.Diagnostics.Debug.Write(_surfaceModel.TileDebugText[_tilePos.Value.X, _tilePos.Value.Y]);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {

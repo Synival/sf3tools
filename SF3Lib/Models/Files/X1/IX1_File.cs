@@ -18,7 +18,7 @@ namespace SF3.Models.Files.X1 {
         EnterTable EnterTable { get; }
         ArrowTable ArrowTable { get; }
 
-        Dictionary<MapLeaderType, X1_FileBattle> Battles { get; }
+        Dictionary<MapLeaderType, Battle> Battles { get; }
 
         TileMovementTable TileMovementTable { get; }
     }

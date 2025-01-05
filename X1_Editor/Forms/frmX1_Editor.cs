@@ -64,13 +64,13 @@ namespace SF3.X1_Editor.Forms {
             => X1_File.Create(loader.ByteData, new NameGetterContext(Scenario), Scenario, IsBTL99);
 
         private class PopulateBattleTabConfig : IPopulateTabConfig {
-            public PopulateBattleTabConfig(TabPage tabPage, Dictionary<MapLeaderType, X1_FileBattle> battleTable, MapLeaderType mapLeader) {
+            public PopulateBattleTabConfig(TabPage tabPage, Dictionary<MapLeaderType, Battle> battleTable, MapLeaderType mapLeader) {
                 TabPage = tabPage;
                 BattleTable = battleTable != null && battleTable.ContainsKey(mapLeader) ? battleTable[mapLeader] : null;
             }
 
             public TabPage TabPage { get; }
-            public X1_FileBattle BattleTable { get; }
+            public Battle BattleTable { get; }
 
             public bool CanPopulate => BattleTable != null;
 

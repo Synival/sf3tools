@@ -5,6 +5,18 @@ using SF3.Win.OpenGL.MPD_File;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerGLControl {
+        private void InitEditing() {
+            Click += (s, e) => OnClickEditing();
+        }
+
+        private void OnClickEditing() {
+            if (_tilePos == null)
+                return;
+
+            System.Diagnostics.Debug.WriteLine("Tile: " + _tilePos.ToString());
+            System.Diagnostics.Debug.Write(_surfaceModel.TileDebugText[_tilePos.Value.X, _tilePos.Value.Y]);
+        }
+
         private void UpdateTilePosition() {
             // Changing the tile is locked while rotating around a tile.
             if ((_mouseButtons & c_MouseMiddleRight) == c_MouseMiddleRight)

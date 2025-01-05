@@ -85,12 +85,12 @@ namespace SF3.Models.Files.X1 {
                 BattlePointersTable = BattlePointersTable.Create(Data, ResourceFile("BattlePointersList.xml"), battlePointersAddress);
 
                 // Get the address of the selected battle, or, if it's not available, the first available in the BattlePointersTable.
-                Battles = new Dictionary<MapLeaderType, X1_FileBattle>();
+                Battles = new Dictionary<MapLeaderType, Battle>();
                 foreach (var mapLeader in (MapLeaderType[]) Enum.GetValues(typeof(MapLeaderType))) {
                     var mapIndex = (int) mapLeader;
                     var battleTableAddress = BattlePointersTable.Rows[mapIndex].BattlePointer;
                     if (battleTableAddress != 0)
-                        Battles.Add(mapLeader, X1_FileBattle.Create(Data, NameGetterContext, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
+                        Battles.Add(mapLeader, Battle.Create(Data, NameGetterContext, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
                 }
 
                 // Determine the location of the TileMovementTable, which isn't so straight-forward.
@@ -181,7 +181,7 @@ namespace SF3.Models.Files.X1 {
         public ArrowTable ArrowTable { get; private set; }
 
         [BulkCopyRecurse]
-        public Dictionary<MapLeaderType, X1_FileBattle> Battles { get; private set; }
+        public Dictionary<MapLeaderType, Battle> Battles { get; private set; }
 
         [BulkCopyRecurse]
         public TileMovementTable TileMovementTable { get; private set; }
