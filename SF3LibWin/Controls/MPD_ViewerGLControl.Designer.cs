@@ -32,11 +32,12 @@
             IsEventDriven = true;
             Profile = OpenTK.Windowing.Common.ContextProfile.Core;
             SharedContext = null;
-
+            ImeMode = System.Windows.Forms.ImeMode.Inherit;
             BackColor = System.Drawing.Color.FromArgb(  64,   64,   64);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "MPD_ViewerControl_GLControl";
-            Size = new System.Drawing.Size(1024, 1024);
+            Size = new System.Drawing.Size(320, 240);
+            MinimumSize = new System.Drawing.Size(320, 240);
             ResumeLayout();
         }
 

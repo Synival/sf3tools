@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using OpenTK.GLControl;
 using SF3.Models.Files.MPD;
@@ -6,19 +7,22 @@ using SF3.Models.Files.MPD;
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerGLControl : GLControl {
         public MPD_ViewerGLControl() {
+            InitializeComponent();
+
+            // Horrible hack to make this work in Design mode.
+            if (!AppState.Initialized())
+                return;
+
             _timer = new Timer() { Interval = 1000 / 60 };
             _timer.Tick += (s, a) => IncrementFrame();
-
-            InitializeComponent();
-            InitToolstrip();
-
-            InitRendering();
-            InitControls();
-
             Disposed += (s, a) => {
                 _timer?.Dispose();
                 _timer = null;
             };
+
+            InitToolstrip();
+            InitRendering();
+            InitControls();
         }
 
         protected override void WndProc(ref Message m) {
@@ -40,7 +44,7 @@ namespace SF3.Win.Controls {
 
         protected override void OnLoad(EventArgs e) {
             base.OnLoad(e);
-            _timer.Start();
+            _timer?.Start();
         }
 
         protected override void OnMouseDown(MouseEventArgs e) {
@@ -59,7 +63,11 @@ namespace SF3.Win.Controls {
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
-            CmdKey?.Invoke(this, ref msg, keyData);
+            bool wasProcessed = false;
+            CmdKey?.Invoke(this, ref msg, keyData, ref wasProcessed);
+            if (wasProcessed)
+                return wasProcessed;
+
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
@@ -77,9 +85,11 @@ namespace SF3.Win.Controls {
             FrameTick?.Invoke(this, EventArgs.Empty);
         }
 
-        public IMPD_File MPD_File { get; set; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IMPD_File MPD_File { get; set; } = null;
 
-        public delegate void CmdKeyEventHandler(object? sender, ref Message msg, Keys keyData);
+        public delegate void CmdKeyEventHandler(object sender, ref Message msg, Keys keyData, ref bool wasProcessed);
 
         public event EventHandler RightDoubleClick;
         public event EventHandler MiddleDoubleClick;

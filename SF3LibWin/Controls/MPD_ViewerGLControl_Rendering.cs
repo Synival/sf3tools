@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using System.ComponentModel;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Win.OpenGL;
 using SF3.Win.OpenGL.MPD_File;
@@ -85,6 +86,9 @@ namespace SF3.Win.Controls {
             => UpdateAnimatedTextures();
 
         public void UpdateSurfaceModels() {
+            if (_surfaceModel == null)
+                return;
+
             MakeCurrent();
             _surfaceModel.Update(MPD_File);
             Invalidate();
@@ -226,6 +230,8 @@ namespace SF3.Win.Controls {
 
         private static bool _drawWireframe = true;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawWireframe {
             get => _drawWireframe;
             set {
@@ -241,6 +247,8 @@ namespace SF3.Win.Controls {
 
         private static bool _drawHelp = true;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawHelp {
             get => _drawHelp;
             set {
@@ -256,6 +264,8 @@ namespace SF3.Win.Controls {
 
         private static bool _drawNormals = true;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawNormals {
             get => _drawNormals;
             set {

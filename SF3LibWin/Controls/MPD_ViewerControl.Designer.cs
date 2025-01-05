@@ -26,13 +26,15 @@
             var resources = new System.ComponentModel.ComponentResourceManager(typeof(MPD_ViewerControl));
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             tsbToggleWireframe = new System.Windows.Forms.ToolStripButton();
-            tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleNormals = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             tsbRecalculateLightmapOriginalMath = new System.Windows.Forms.ToolStripButton();
             tsbUpdateLightmapUpdatedMath = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
+            tilePropertyControl1 = new TilePropertyControl();
+            mpdViewerGLControl1 = new MPD_ViewerGLControl();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -42,7 +44,7 @@
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbToggleWireframe, toolStripSeparator1, tsbToggleNormals, toolStripSeparator2, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator3, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new System.Drawing.Size(500, 31);
+            toolStrip1.Size = new System.Drawing.Size(789, 31);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -56,16 +58,6 @@
             tsbToggleWireframe.Text = "Draw Wireframe";
             tsbToggleWireframe.ToolTipText = "Show Wireframe";
             tsbToggleWireframe.Click += tsbToggleWireframe_Click;
-            // 
-            // tsbToggleHelp
-            // 
-            tsbToggleHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbToggleHelp.Image = (System.Drawing.Image) resources.GetObject("tsbToggleHelp.Image");
-            tsbToggleHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tsbToggleHelp.Name = "tsbToggleHelp";
-            tsbToggleHelp.Size = new System.Drawing.Size(28, 28);
-            tsbToggleHelp.Text = "Show Help";
-            tsbToggleHelp.Click += tsbToggleHelp_Click;
             // 
             // toolStripSeparator1
             // 
@@ -113,13 +105,52 @@
             toolStripSeparator3.Name = "toolStripSeparator3";
             toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
+            // tsbToggleHelp
+            // 
+            tsbToggleHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbToggleHelp.Image = (System.Drawing.Image) resources.GetObject("tsbToggleHelp.Image");
+            tsbToggleHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbToggleHelp.Name = "tsbToggleHelp";
+            tsbToggleHelp.Size = new System.Drawing.Size(28, 28);
+            tsbToggleHelp.Text = "Show Help";
+            tsbToggleHelp.Click += tsbToggleHelp_Click;
+            // 
+            // tilePropertyControl1
+            // 
+            tilePropertyControl1.Dock = System.Windows.Forms.DockStyle.Right;
+            tilePropertyControl1.Location = new System.Drawing.Point(582, 31);
+            tilePropertyControl1.MaximumSize = new System.Drawing.Size(207, 10000);
+            tilePropertyControl1.MinimumSize = new System.Drawing.Size(207, 446);
+            tilePropertyControl1.Name = "tilePropertyControl1";
+            tilePropertyControl1.Size = new System.Drawing.Size(207, 446);
+            tilePropertyControl1.TabIndex = 2;
+            // 
+            // mpdViewerGLControl1
+            // 
+            mpdViewerGLControl1.API = OpenTK.Windowing.Common.ContextAPI.OpenGL;
+            mpdViewerGLControl1.APIVersion = new System.Version(3, 3, 0, 0);
+            mpdViewerGLControl1.BackColor = System.Drawing.Color.FromArgb(  64,   64,   64);
+            mpdViewerGLControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            mpdViewerGLControl1.Flags = OpenTK.Windowing.Common.ContextFlags.Default;
+            mpdViewerGLControl1.IsEventDriven = true;
+            mpdViewerGLControl1.Location = new System.Drawing.Point(0, 31);
+            mpdViewerGLControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mpdViewerGLControl1.MinimumSize = new System.Drawing.Size(320, 240);
+            mpdViewerGLControl1.Name = "mpdViewerGLControl1";
+            mpdViewerGLControl1.Profile = OpenTK.Windowing.Common.ContextProfile.Core;
+            mpdViewerGLControl1.SharedContext = null;
+            mpdViewerGLControl1.Size = new System.Drawing.Size(582, 411);
+            mpdViewerGLControl1.TabIndex = 1;
+            // 
             // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(mpdViewerGLControl1);
+            Controls.Add(tilePropertyControl1);
             Controls.Add(toolStrip1);
             Name = "MPD_ViewerControl";
-            Size = new System.Drawing.Size(500, 500);
+            Size = new System.Drawing.Size(789, 442);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
@@ -137,5 +168,7 @@
         private System.Windows.Forms.ToolStripButton tsbRecalculateLightmapOriginalMath;
         private System.Windows.Forms.ToolStripButton tsbUpdateLightmapUpdatedMath;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private TilePropertyControl tilePropertyControl1;
+        private MPD_ViewerGLControl mpdViewerGLControl1;
     }
 }

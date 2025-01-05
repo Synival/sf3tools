@@ -6,14 +6,7 @@ using SF3.Models.Files.MPD;
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
         public MPD_ViewerControl() {
-            SuspendLayout();
             InitializeComponent();
-
-            GLControl = new MPD_ViewerGLControl();
-            GLControl.Dock = DockStyle.Fill;
-            Controls.Add(GLControl);
-            ResumeLayout();
-
             Disposed += (s, e) => GLControl.Dispose();
 
             tsbToggleWireframe.Checked = GLControl.DrawWireframe;
@@ -33,7 +26,7 @@ namespace SF3.Win.Controls {
             }
         }
 
-        public MPD_ViewerGLControl GLControl { get; }
+        public MPD_ViewerGLControl GLControl => mpdViewerGLControl1;
 
         private void tsbToggleWireframe_Click(object sender, EventArgs e) {
             GLControl.DrawWireframe = !GLControl.DrawWireframe;

@@ -18,7 +18,7 @@ namespace SF3.Win.Controls {
             MiddleDoubleClick += (s, e) => OnMiddleDoubleClickControls();
             KeyDown           += (s, e) => OnKeyDownControls(e);
             KeyUp             += (s, e) => OnKeyUpControls(e);
-            CmdKey            += (object s, ref Message msg, Keys k) => OnCmdKeyControls(k);
+            CmdKey            += (object s, ref Message msg, Keys k, ref bool wp) => OnCmdKeyControls(k, ref wp);
             LostFocus         += (s, e) => OnLostFocusControls();
             FrameTick         += (s, e) => OnFrameTickControls();
         }
@@ -113,9 +113,21 @@ namespace SF3.Win.Controls {
         private void OnKeyUpControls(KeyEventArgs e) =>
             _keysPressed[(Keys) ((int) e.KeyCode & 0xFFFF)] = false;
 
-        private void OnCmdKeyControls(Keys keyData) {
-            if (Enabled && Focused && Visible)
-                _keysPressed[(Keys) ((int) keyData & 0xFFFF)] = true;
+        private void OnCmdKeyControls(Keys keyData, ref bool wasProcessed) {
+            if (wasProcessed || !Enabled || !Focused || !Visible)
+                return;
+
+            var keyPressed = (Keys) ((int) keyData & 0xFFFF);
+            switch (keyPressed) {
+                case Keys.Up:
+                case Keys.Down:
+                case Keys.Left:
+                case Keys.Right:
+                    _keysPressed[keyPressed] = true;
+                    System.Diagnostics.Debug.WriteLine(keyPressed);
+                    wasProcessed = true;
+                break;
+            }
         }
 
         private void OnLostFocusControls() {

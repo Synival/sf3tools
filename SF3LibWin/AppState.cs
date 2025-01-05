@@ -13,6 +13,8 @@ namespace SF3.Win {
             FileFullPath = GetFileFullPath(appName);
         }
 
+        public static bool Initialized() => _globalAppState != null;
+
         public static AppState RetrieveAppState() {
             if (_globalAppState == null)
                 throw new InvalidOperationException("AppState not initialized");

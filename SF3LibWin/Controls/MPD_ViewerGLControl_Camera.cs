@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using OpenTK.Mathematics;
 using SF3.Win.OpenGL.MPD_File;
@@ -92,6 +93,8 @@ namespace SF3.Win.Controls {
         /// <summary>
         /// Position of the camera
         /// </summary>
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Vector3 Position {
             get => _position;
             set {
@@ -107,6 +110,8 @@ namespace SF3.Win.Controls {
         /// <summary>
         /// Pitch, in degrees
         /// </summary>
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public float Pitch {
             get => _pitch;
             set {
@@ -120,6 +125,8 @@ namespace SF3.Win.Controls {
         /// <summary>
         /// Yaw, in degrees
         /// </summary>
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public float Yaw {
             get => _yaw;
             set {
