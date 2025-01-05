@@ -65,12 +65,14 @@ namespace SF3.Win.Controls {
                     return;
 
                 _updatingControls++;
+                var oldValue = _tile.GetMoveHeightmap(corner);
                 _tile.SetMoveHeightmap(corner, value);
                 SetMoveHeightToAverageMoveHeight();
 
                 if (cbLinkHeightmaps.Checked) {
                     GetNUDModelVertexHeightmap(corner).Value = (decimal) value;
                     _tile.SetModelVertexHeightmap(corner, value);
+                    UpdateNeighboringIdenticalMoveHeightmapValues(corner, oldValue, value);
                 }
                 _updatingControls--;
 
@@ -87,9 +89,11 @@ namespace SF3.Win.Controls {
                 _updatingControls++;
                 _tile.SetModelVertexHeightmap(corner, value);
                 if (cbLinkHeightmaps.Checked) {
+                    var oldValue = _tile.GetMoveHeightmap(corner);
                     GetNUDMoveHeightmap(corner).Value = (decimal) value;
                     _tile.SetMoveHeightmap(corner, value);
                     SetMoveHeightToAverageMoveHeight();
+                    UpdateNeighboringIdenticalMoveHeightmapValues(corner, oldValue, value);
                 }
                 _updatingControls--;
 
@@ -145,7 +149,6 @@ namespace SF3.Win.Controls {
                 labelTileEdited.Text = "Tile: (" + _tile.X + ", " + _tile.Y + ")\n";
                 labelRealCoordinates.Text = "Real coordinates: (" + (_tile.X * 32 + 16) + "," + (_tile.Y * 32 + 16) + ")";
                 UpdateLinkHeightmapsCheckbox();
-                cbLinkHeightmaps.Enabled = _tile.MPD_File.SurfaceModel != null;
             }
 
             void InitNUD(NumericUpDown nud, decimal value) {
@@ -198,10 +201,13 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateLinkHeightmapsCheckbox() {
-            cbLinkHeightmaps.Checked =
-                _tile.MPD_File.SurfaceModel != null &&
-                !_tile.ModelUseMoveHeightmap &&
+            cbLinkHeightmaps.Enabled = _tile.MPD_File.SurfaceModel != null & !_tile.ModelUseMoveHeightmap;
+            cbLinkHeightmaps.Checked = cbLinkHeightmaps.Enabled &&
                 Enum.GetValues<CornerType>().All(x => _tile.GetMoveHeightmap(x) == _tile.GetModelVertexHeightmap(x));
+
+            var nuds = Enum.GetValues<CornerType>().Select(x => GetNUDModelVertexHeightmap(x)).ToArray();
+            foreach (var nud in nuds)
+                nud.Enabled = cbLinkHeightmaps.Enabled;
         }
 
         private void SetMoveHeightToAverageMoveHeight() {
@@ -239,6 +245,65 @@ namespace SF3.Win.Controls {
                     return nudModelVertexHeightmapBR;
                 default:
                     throw new ArgumentException(nameof(corner));
+            }
+        }
+
+        private struct TileAndCorner {
+            public int X;
+            public int Y;
+            public CornerType Corner;
+        }
+
+        private TileAndCorner[] GetAdjacentTilesAtCorner(CornerType corner) {
+            TileAndCorner[] GetUnfiltered() {
+                switch (corner) {
+                    case CornerType.TopLeft:
+                        return [
+                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y - 1, Corner = CornerType.BottomRight },
+                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y - 0, Corner = CornerType.TopRight },
+                            new TileAndCorner { X = _tile.X - 0, Y = _tile.Y - 1, Corner = CornerType.BottomLeft },
+                        ];
+
+                    case CornerType.TopRight:
+                        return [
+                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y - 1, Corner = CornerType.BottomLeft },
+                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y - 0, Corner = CornerType.TopLeft },
+                            new TileAndCorner { X = _tile.X + 0, Y = _tile.Y - 1, Corner = CornerType.BottomRight },
+                        ];
+
+                    case CornerType.BottomRight:
+                        return [
+                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y + 1, Corner = CornerType.TopLeft },
+                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y + 0, Corner = CornerType.BottomLeft },
+                            new TileAndCorner { X = _tile.X + 0, Y = _tile.Y + 1, Corner = CornerType.TopRight },
+                        ];
+
+                    case CornerType.BottomLeft:
+                        return [
+                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y + 1, Corner = CornerType.TopRight },
+                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y + 0, Corner = CornerType.BottomRight },
+                            new TileAndCorner { X = _tile.X - 0, Y = _tile.Y + 1, Corner = CornerType.TopLeft },
+                        ];
+
+                    default:
+                        throw new ArgumentException(nameof(corner));
+                }
+            }
+
+            return GetUnfiltered()
+                .Where(x => x.X >= 0 && x.Y >= 0 && x.X < 64 && x.Y < 64)
+                .ToArray();
+        }
+
+        private void UpdateNeighboringIdenticalMoveHeightmapValues(CornerType corner, float oldValue, float newValue) {
+            var adjacentCorners = GetAdjacentTilesAtCorner(corner);
+            foreach (var ac in adjacentCorners) {
+                var acTile = _tile.MPD_File.Tiles[ac.X, ac.Y];
+                if (acTile.GetMoveHeightmap(ac.Corner) == oldValue) {
+                    acTile.SetMoveHeightmap(ac.Corner, newValue);
+                    var avgHeight = (float) Math.Round(Enum.GetValues<CornerType>().Average(x => acTile.GetMoveHeightmap(x) * 16f)) / 16f;
+                    acTile.MoveHeight = avgHeight;
+                }
             }
         }
 
