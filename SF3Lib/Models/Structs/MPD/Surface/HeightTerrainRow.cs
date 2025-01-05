@@ -1,5 +1,6 @@
 using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Surface {
     public class HeightTerrainRow : Struct {
@@ -21,10 +22,10 @@ namespace SF3.Models.Structs.MPD.Surface {
         public void SetHeight(int x, float value)
             => this[x] = (this[x] & 0xFF) + (((int) (value * 16f)) << 8);
 
-        public byte GetTerrainType(int x)
-            => (byte) (this[x] & 0xFF);
-        public void SetTerrainType(int x, byte value)
-            => this[x] = (this[x] & 0xFF00) + value;
+        public TerrainType GetTerrainType(int x)
+            => (TerrainType) (this[x] & 0xFF);
+        public void SetTerrainType(int x, TerrainType value)
+            => this[x] = (this[x] & 0xFF00) + (byte) value;
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {
             public TileMetadataAttribute(int x) : base(displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X4", minWidth: 50) { }

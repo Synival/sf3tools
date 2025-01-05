@@ -187,7 +187,7 @@
             nudItemID.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
             nudItemID.Hexadecimal = true;
             nudItemID.Location = new System.Drawing.Point(73, 23);
-            nudItemID.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudItemID.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             nudItemID.Name = "nudItemID";
             nudItemID.Size = new System.Drawing.Size(120, 21);
             nudItemID.TabIndex = 6;
@@ -265,6 +265,7 @@
             // nudModelTextureID
             // 
             nudModelTextureID.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
+            nudModelTextureID.Hexadecimal = true;
             nudModelTextureID.Location = new System.Drawing.Point(73, 20);
             nudModelTextureID.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             nudModelTextureID.Name = "nudModelTextureID";
@@ -284,7 +285,7 @@
             // cbModelRotate
             // 
             cbModelRotate.FormattingEnabled = true;
-            cbModelRotate.Location = new System.Drawing.Point(73, 78);
+            cbModelRotate.Location = new System.Drawing.Point(73, 49);
             cbModelRotate.Name = "cbModelRotate";
             cbModelRotate.Size = new System.Drawing.Size(121, 23);
             cbModelRotate.TabIndex = 9;
@@ -293,7 +294,7 @@
             // labelModelRotate
             // 
             labelModelRotate.AutoSize = true;
-            labelModelRotate.Location = new System.Drawing.Point(6, 81);
+            labelModelRotate.Location = new System.Drawing.Point(6, 52);
             labelModelRotate.Name = "labelModelRotate";
             labelModelRotate.Size = new System.Drawing.Size(44, 15);
             labelModelRotate.TabIndex = 13;
@@ -311,7 +312,7 @@
             // labelModelFlip
             // 
             labelModelFlip.AutoSize = true;
-            labelModelFlip.Location = new System.Drawing.Point(6, 52);
+            labelModelFlip.Location = new System.Drawing.Point(6, 81);
             labelModelFlip.Name = "labelModelFlip";
             labelModelFlip.Size = new System.Drawing.Size(29, 15);
             labelModelFlip.TabIndex = 12;
@@ -329,7 +330,7 @@
             // cbModelFlip
             // 
             cbModelFlip.FormattingEnabled = true;
-            cbModelFlip.Location = new System.Drawing.Point(73, 49);
+            cbModelFlip.Location = new System.Drawing.Point(73, 78);
             cbModelFlip.Name = "cbModelFlip";
             cbModelFlip.Size = new System.Drawing.Size(121, 23);
             cbModelFlip.TabIndex = 8;

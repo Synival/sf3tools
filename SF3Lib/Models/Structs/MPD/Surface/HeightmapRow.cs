@@ -1,5 +1,6 @@
 using System;
 using CommonLib.Attributes;
+using CommonLib.Types;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD.Surface {
@@ -15,6 +16,40 @@ namespace SF3.Models.Structs.MPD.Surface {
         public uint this[int index] {
             get => (uint) Data.GetDouble(xAddress[index]);
             set => Data.SetDouble(xAddress[index], (int) value);
+        }
+
+        public float GetHeight(int x, CornerType corner) {
+            switch (corner) {
+                case CornerType.TopLeft:
+                    return Data.GetByte(xAddress[x] + 2) / 16.0f;
+                case CornerType.TopRight:
+                    return Data.GetByte(xAddress[x] + 3) / 16.0f;
+                case CornerType.BottomRight:
+                    return Data.GetByte(xAddress[x] + 0) / 16.0f;
+                case CornerType.BottomLeft:
+                    return Data.GetByte(xAddress[x] + 1) / 16.0f;
+                default:
+                    throw new ArgumentException(nameof(corner));
+            }
+        }
+
+        public void SetHeight(int x, CornerType corner, float value) {
+            switch (corner) {
+                case CornerType.TopLeft:
+                    Data.SetByte(xAddress[x] + 2, (byte) (value * 16f));
+                    break;
+                case CornerType.TopRight:
+                    Data.SetByte(xAddress[x] + 3, (byte) (value * 16f));
+                    break;
+                case CornerType.BottomRight:
+                    Data.SetByte(xAddress[x] + 0, (byte) (value * 16f));
+                    break;
+                case CornerType.BottomLeft:
+                    Data.SetByte(xAddress[x] + 1, (byte) (value * 16f));
+                    break;
+                default:
+                    throw new ArgumentException(nameof(corner));
+            }
         }
 
         public float[] GetHeights(int x)

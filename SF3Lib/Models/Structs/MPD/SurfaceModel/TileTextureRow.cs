@@ -1,5 +1,7 @@
+using System;
 using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.SurfaceModel {
     public class TileTextureRow : Struct {
@@ -31,6 +33,21 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
             => (byte) (this[x] & 0xFF);
         public void SetTextureID(int x, byte value)
             => this[x] = (this[x] & 0xFF00) + value;
+
+        public TextureRotateType GetRotate(int x)
+            => (TextureRotateType) (GetTextureFlags(x) & 0x03);
+        public void SetRotate(int x, TextureRotateType value)
+            => SetTextureFlags(x, (byte) (GetTextureFlags(x) & ~0x03 | (byte) value));
+
+        public TextureFlipType GetFlip(int x)
+            => (TextureFlipType) (GetTextureFlags(x) & 0x30);
+        public void SetFlip(int x, TextureFlipType value)
+            => SetTextureFlags(x, (byte) (GetTextureFlags(x) & ~0x30 | (byte) value));
+
+        public bool GetUseMoveHeightmapFlag(int x)
+            => (GetTextureFlags(x) & 0x80) == 0x80;
+        public void SetUseMoveHeightmapFlag(int x, bool value)
+            => SetTextureFlags(x, (byte) (GetTextureFlags(x) & ~0x80 | (value ? 0x80 : 0x00)));
 
         public int this[int index] {
             get => Data.GetWord(xAddress[index]);
