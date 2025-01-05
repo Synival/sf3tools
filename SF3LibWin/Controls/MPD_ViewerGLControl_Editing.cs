@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using OpenTK.Graphics.OpenGL;
 using SF3.Win.OpenGL.MPD_File;
@@ -10,16 +11,13 @@ namespace SF3.Win.Controls {
         }
 
         private void OnClickEditing() {
-            if (_tilePos == null)
-                return;
-
-            System.Diagnostics.Debug.WriteLine("Tile: " + _tilePos.ToString());
-            System.Diagnostics.Debug.Write(_surfaceModel.TileDebugText[_tilePos.Value.X, _tilePos.Value.Y]);
+            var tile = (_tilePos == null) ? null : MPD_File.Tiles[_tilePos.Value.X, _tilePos.Value.Y];
+            TilePropertiesControl.Tile = tile;
         }
 
         private void UpdateTilePosition() {
-            // Changing the tile is locked while rotating around a tile.
-            if ((_mouseButtons & c_MouseMiddleRight) == c_MouseMiddleRight)
+            // Don't allow changing tiles while the mouse is down.
+            if (_mouseButtons != 0)
                 return;
 
             if (_mousePos == null) {
@@ -57,5 +55,9 @@ namespace SF3.Win.Controls {
         }
 
         private Point? _tilePos = null;
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public TilePropertiesControl TilePropertiesControl { get; set; } = null;
     }
 }

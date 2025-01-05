@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,6 +12,7 @@ namespace SF3.Win.Controls {
         private void InitControls() {
             MouseMove         += (s, e) => OnMouseMoveControls(e);
             MouseEnter        += (s, e) => OnMouseEnterControls();
+            MouseLeave        += (s, e) => OnMouseLeaveControls();
             MouseDown         += (s, e) => OnMouseDownControls(e);
             MouseUp           += (s, e) => OnMouseUpControls(e);
             MouseWheel        += (s, e) => OnMouseWheelControls(e);
@@ -73,28 +75,58 @@ namespace SF3.Win.Controls {
                 }
             }
 
-            if (e.X < 0 || e.Y < 0 || e.X >= Width || e.Y >= Height)
-                UpdateMousePosition(null);
-            else
-                UpdateMousePosition(e.Location);
-
-            _lastMousePos = e.Location;
+            UpdateMousePosition(e);
         }
 
         private void OnMouseEnterControls() {
+            _mouseIn = true;
             _lastMousePos = null;
             _mouseButtons = MouseButtons.None;
 
             if (_mousePos != null)
-                UpdateMousePosition(null);
+                UpdateMousePosition((Point?) null);
+            else
+                UpdateTilePosition(null);
+        }
+
+        private void OnMouseLeaveControls() {
+            _mouseIn = false;
+            if (_mouseButtons != MouseButtons.None)
+                return;
+
+            _lastMousePos = null;
+            _mouseButtons = MouseButtons.None;
+
+            if (_mousePos != null)
+                UpdateMousePosition((Point?) null);
             else
                 UpdateTilePosition(null);
         }
 
         private void OnMouseDownControls(MouseEventArgs e)
             => _mouseButtons |= e.Button;
-        private void OnMouseUpControls(MouseEventArgs e)
-            => _mouseButtons &= ~e.Button;
+        private void OnMouseUpControls(MouseEventArgs e) {
+            if (_mouseButtons == 0)
+                return;
+
+            _mouseButtons &= ~e.Button;
+            if (_mouseButtons == 0) {
+                if (_mouseIn == false)
+                    OnMouseLeaveControls();
+                else {
+                    UpdateMousePosition(e);
+                    UpdateTilePosition();
+                }
+            }
+        }
+
+        private void UpdateMousePosition(MouseEventArgs e) {
+            if (e.X < 0 || e.Y < 0 || e.X >= Width || e.Y >= Height)
+                UpdateMousePosition((Point?) null);
+            else
+                UpdateMousePosition(e.Location);
+            _lastMousePos = e.Location;
+        }
 
         private void OnMouseWheelControls(MouseEventArgs e)
             => MoveCameraForward(e.Delta / -50 * GetShiftFactor());
@@ -124,7 +156,6 @@ namespace SF3.Win.Controls {
                 case Keys.Left:
                 case Keys.Right:
                     _keysPressed[keyPressed] = true;
-                    System.Diagnostics.Debug.WriteLine(keyPressed);
                     wasProcessed = true;
                 break;
             }
@@ -188,11 +219,13 @@ namespace SF3.Win.Controls {
         private void UpdateMousePosition(Point? pos) {
             if (_mousePos == pos)
                 return;
-
             _mousePos = pos;
-            UpdateTilePosition();
+
+            if (_mouseButtons == 0)
+                UpdateTilePosition();
         }
 
+        private bool _mouseIn = false;
         private Point? _lastMousePos = null;
         private Point? _mousePos = null;
 

@@ -33,7 +33,7 @@
             tsbUpdateLightmapUpdatedMath = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
-            tilePropertyControl1 = new TilePropertyControl();
+            tilePropertyControl1 = new TilePropertiesControl();
             mpdViewerGLControl1 = new MPD_ViewerGLControl();
             toolStrip1.SuspendLayout();
             SuspendLayout();
@@ -124,6 +124,7 @@
             tilePropertyControl1.Name = "tilePropertyControl1";
             tilePropertyControl1.Size = new System.Drawing.Size(207, 446);
             tilePropertyControl1.TabIndex = 2;
+            tilePropertyControl1.Tile = null;
             // 
             // mpdViewerGLControl1
             // 
@@ -168,7 +169,7 @@
         private System.Windows.Forms.ToolStripButton tsbRecalculateLightmapOriginalMath;
         private System.Windows.Forms.ToolStripButton tsbUpdateLightmapUpdatedMath;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private TilePropertyControl tilePropertyControl1;
+        private TilePropertiesControl tilePropertyControl1;
         private MPD_ViewerGLControl mpdViewerGLControl1;
     }
 }

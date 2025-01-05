@@ -7,6 +7,7 @@ namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
         public MPD_ViewerControl() {
             InitializeComponent();
+            GLControl.TilePropertiesControl = tilePropertyControl1;
             Disposed += (s, e) => GLControl.Dispose();
 
             tsbToggleWireframe.Checked = GLControl.DrawWireframe;

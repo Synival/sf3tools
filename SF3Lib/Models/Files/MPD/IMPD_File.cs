@@ -49,5 +49,7 @@ namespace SF3.Models.Files.MPD {
         SurfaceModel SurfaceModel { get; }
         Surface Surface { get; }
         TextureCollection[] TextureCollections { get; }
+
+        Tile[,] Tiles { get; }
     }
 }

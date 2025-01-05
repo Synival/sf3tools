@@ -70,6 +70,7 @@ namespace SF3.Models.Files.MPD {
             tables.AddRange(headerTables);
             tables.AddRange(chunkTables);
 
+            InitTiles();
             return tables;
         }
 
@@ -424,6 +425,12 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
+        private void InitTiles() {
+            for (var x = 0; x < 64; x++)
+                for (var y = 0; y < 64; y++)
+                    Tiles[x, y] = new Tile(this, x, y);
+        }
+
         public override bool IsModified {
             get => base.IsModified | ChunkData.Any(x => x != null && x.IsModified);
             set {
@@ -489,5 +496,7 @@ namespace SF3.Models.Files.MPD {
         public TextureCollection[] TextureCollections { get; private set; }
 
         private int? _surfaceChunkIndex = null;
+
+        public Tile[,] Tiles { get; } = new Tile[64, 64];
     }
 }

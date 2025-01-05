@@ -1,5 +1,5 @@
 ﻿namespace SF3.Win.Controls {
-    partial class TilePropertyControl {
+    partial class TilePropertiesControl {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -50,6 +50,7 @@
             tbModelTextureID = new System.Windows.Forms.TextBox();
             cbModelFlip = new System.Windows.Forms.ComboBox();
             labelTileEdited = new System.Windows.Forms.Label();
+            labelRealCoordinates = new System.Windows.Forms.Label();
             gbMovement.SuspendLayout();
             gbItem.SuspendLayout();
             gbModel.SuspendLayout();
@@ -66,7 +67,7 @@
             gbMovement.Controls.Add(labelMoveHeight);
             gbMovement.Controls.Add(cbMoveTerrain);
             gbMovement.Controls.Add(labelMoveTerrain);
-            gbMovement.Location = new System.Drawing.Point(3, 29);
+            gbMovement.Location = new System.Drawing.Point(3, 53);
             gbMovement.Name = "gbMovement";
             gbMovement.Size = new System.Drawing.Size(200, 163);
             gbMovement.TabIndex = 0;
@@ -153,7 +154,7 @@
             // 
             gbItem.Controls.Add(labelItemID);
             gbItem.Controls.Add(tbItemID);
-            gbItem.Location = new System.Drawing.Point(3, 198);
+            gbItem.Location = new System.Drawing.Point(3, 222);
             gbItem.Name = "gbItem";
             gbItem.Size = new System.Drawing.Size(200, 53);
             gbItem.TabIndex = 1;
@@ -192,7 +193,7 @@
             gbModel.Controls.Add(labelModelTextureID);
             gbModel.Controls.Add(tbModelTextureID);
             gbModel.Controls.Add(cbModelFlip);
-            gbModel.Location = new System.Drawing.Point(3, 257);
+            gbModel.Location = new System.Drawing.Point(3, 281);
             gbModel.Name = "gbModel";
             gbModel.Size = new System.Drawing.Size(200, 212);
             gbModel.TabIndex = 2;
@@ -310,22 +311,32 @@
             labelTileEdited.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point,  0);
             labelTileEdited.Location = new System.Drawing.Point(5, 5);
             labelTileEdited.Name = "labelTileEdited";
-            labelTileEdited.Size = new System.Drawing.Size(75, 15);
+            labelTileEdited.Size = new System.Drawing.Size(69, 15);
             labelTileEdited.TabIndex = 3;
-            labelTileEdited.Text = "Tile (56, 31):";
+            labelTileEdited.Text = "Tile: (none)";
             // 
-            // TilePropertyControl
+            // labelRealCoordinates
+            // 
+            labelRealCoordinates.AutoSize = true;
+            labelRealCoordinates.Location = new System.Drawing.Point(5, 24);
+            labelRealCoordinates.Name = "labelRealCoordinates";
+            labelRealCoordinates.Size = new System.Drawing.Size(99, 15);
+            labelRealCoordinates.TabIndex = 4;
+            labelRealCoordinates.Text = "Real Coordinates:";
+            // 
+            // TilePropertiesControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(labelRealCoordinates);
             Controls.Add(labelTileEdited);
             Controls.Add(gbModel);
             Controls.Add(gbItem);
             Controls.Add(gbMovement);
             MaximumSize = new System.Drawing.Size(207, 10000);
-            MinimumSize = new System.Drawing.Size(207, 473);
-            Name = "TilePropertyControl";
-            Size = new System.Drawing.Size(207, 473);
+            MinimumSize = new System.Drawing.Size(207, 498);
+            Name = "TilePropertiesControl";
+            Size = new System.Drawing.Size(207, 498);
             gbMovement.ResumeLayout(false);
             gbMovement.PerformLayout();
             gbItem.ResumeLayout(false);
@@ -365,5 +376,6 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelTileEdited;
+        private System.Windows.Forms.Label labelRealCoordinates;
     }
 }
