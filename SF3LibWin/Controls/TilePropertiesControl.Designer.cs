@@ -51,6 +51,7 @@
             cbModelFlip = new System.Windows.Forms.ComboBox();
             labelTileEdited = new System.Windows.Forms.Label();
             labelRealCoordinates = new System.Windows.Forms.Label();
+            cbLinkHeightmaps = new System.Windows.Forms.CheckBox();
             gbMovement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBR).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBL).BeginInit();
@@ -355,19 +356,30 @@
             labelRealCoordinates.TabIndex = 4;
             labelRealCoordinates.Text = "Real Coordinates:";
             // 
+            // cbLinkHeightmaps
+            // 
+            cbLinkHeightmaps.AutoSize = true;
+            cbLinkHeightmaps.Location = new System.Drawing.Point(9, 499);
+            cbLinkHeightmaps.Name = "cbLinkHeightmaps";
+            cbLinkHeightmaps.Size = new System.Drawing.Size(190, 19);
+            cbLinkHeightmaps.TabIndex = 11;
+            cbLinkHeightmaps.Text = "Link Heightmaps When Editing";
+            cbLinkHeightmaps.UseVisualStyleBackColor = true;
+            // 
             // TilePropertiesControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(cbLinkHeightmaps);
             Controls.Add(labelRealCoordinates);
             Controls.Add(labelTileEdited);
             Controls.Add(gbModel);
             Controls.Add(gbItem);
             Controls.Add(gbMovement);
             MaximumSize = new System.Drawing.Size(207, 10000);
-            MinimumSize = new System.Drawing.Size(207, 498);
+            MinimumSize = new System.Drawing.Size(207, 524);
             Name = "TilePropertiesControl";
-            Size = new System.Drawing.Size(207, 498);
+            Size = new System.Drawing.Size(207, 524);
             gbMovement.ResumeLayout(false);
             gbMovement.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBR).EndInit();
@@ -419,5 +431,6 @@
         private System.Windows.Forms.NumericUpDown nudModelVertexHeightmapTR;
         private System.Windows.Forms.NumericUpDown nudModelVertexHeightmapTL;
         private System.Windows.Forms.NumericUpDown nudModelTextureID;
+        private System.Windows.Forms.CheckBox cbLinkHeightmaps;
     }
 }

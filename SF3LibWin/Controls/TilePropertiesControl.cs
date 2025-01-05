@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Types;
 using SF3.Models.Files.MPD;
@@ -50,49 +51,101 @@ namespace SF3.Win.Controls {
             cbModelFlip.DataSource   = Enum.GetValues<TextureFlipType>();
 
             // Bind controls to tile.
-            void PerformUpdate(Action action) {
-                if (!_updatingControls)
-                    action();
+            void PerformUpdate(Action action, bool updatesModel = true) {
+                if (_updatingControls > 0)
+                    return;
+
+                action();
+                if (updatesModel)
+                    ModelUpdated?.Invoke(this, EventArgs.Empty);
             }
 
-            cbMoveTerrain.SelectedValueChanged         += (s, e) => PerformUpdate(() => _tile.MoveTerrain = (TerrainType) cbMoveTerrain.SelectedValue);
-            nudMoveHeight.ValueChanged                 += (s, e) => PerformUpdate(() => _tile.MoveHeight = (float) nudMoveHeight.Value);
-            nudMoveHeightmapTL.ValueChanged            += (s, e) => PerformUpdate(() => _tile.SetMoveHeightmap(CornerType.TopLeft, (float) nudMoveHeightmapTL.Value));
-            nudMoveHeightmapTR.ValueChanged            += (s, e) => PerformUpdate(() => _tile.SetMoveHeightmap(CornerType.TopRight, (float) nudMoveHeightmapTR.Value));
-            nudMoveHeightmapBL.ValueChanged            += (s, e) => PerformUpdate(() => _tile.SetMoveHeightmap(CornerType.BottomLeft, (float) nudMoveHeightmapBL.Value));
-            nudMoveHeightmapBR.ValueChanged            += (s, e) => PerformUpdate(() => _tile.SetMoveHeightmap(CornerType.BottomRight, (float) nudMoveHeightmapBR.Value));
+            void SetMoveHeightmap(CornerType corner, float value) {
+                if (_updatingControls > 0)
+                    return;
 
-            nudItemID.ValueChanged                     += (s, e) => PerformUpdate(() => _tile.ItemID = (byte) nudItemID.Value);
+                _updatingControls++;
+                _tile.SetMoveHeightmap(corner, value);
+                SetMoveHeightToAverageMoveHeight();
+
+                if (cbLinkHeightmaps.Checked) {
+                    GetNUDModelVertexHeightmap(corner).Value = (decimal) value;
+                    _tile.SetModelVertexHeightmap(corner, value);
+                }
+                _updatingControls--;
+
+                if (cbLinkHeightmaps.Checked || _tile.ModelUseMoveHeightmap) {
+                    _tile.UpdateAbnormals();
+                    ModelUpdated?.Invoke(this, EventArgs.Empty);
+                }
+            }
+
+            void SetModelVertexHeightmap(CornerType corner, float value) {
+                if (_updatingControls > 0)
+                    return;
+
+                _updatingControls++;
+                _tile.SetModelVertexHeightmap(corner, value);
+                if (cbLinkHeightmaps.Checked) {
+                    GetNUDMoveHeightmap(corner).Value = (decimal) value;
+                    _tile.SetMoveHeightmap(corner, value);
+                    SetMoveHeightToAverageMoveHeight();
+                }
+                _updatingControls--;
+
+                _tile.UpdateAbnormals();
+                ModelUpdated?.Invoke(this, EventArgs.Empty);
+            }
+
+            cbMoveTerrain.SelectedValueChanged         += (s, e) => PerformUpdate(() => _tile.MoveTerrain = (TerrainType) cbMoveTerrain.SelectedValue, false);
+            nudMoveHeight.ValueChanged                 += (s, e) => PerformUpdate(() => _tile.MoveHeight = (float) nudMoveHeight.Value, false);
+            foreach (var corner in Enum.GetValues<CornerType>()) {
+                var nud = GetNUDMoveHeightmap(corner);
+                nud.ValueChanged += (s, e) => PerformUpdate(() => SetMoveHeightmap(corner, (float) nud.Value));
+            }
+            nudMoveHeightmapTR.ValueChanged            += (s, e) => PerformUpdate(() => SetMoveHeightmap(CornerType.TopRight, (float) nudMoveHeightmapTR.Value));
+            nudMoveHeightmapBL.ValueChanged            += (s, e) => PerformUpdate(() => SetMoveHeightmap(CornerType.BottomLeft, (float) nudMoveHeightmapBL.Value));
+            nudMoveHeightmapBR.ValueChanged            += (s, e) => PerformUpdate(() => SetMoveHeightmap(CornerType.BottomRight, (float) nudMoveHeightmapBR.Value));
+
+            nudItemID.ValueChanged                     += (s, e) => PerformUpdate(() => _tile.ItemID = (byte) nudItemID.Value, false);
 
             nudModelTextureID.ValueChanged             += (s, e) => PerformUpdate(() => _tile.ModelTextureID = (byte) nudModelTextureID.Value);
             cbModelRotate.SelectedValueChanged         += (s, e) => PerformUpdate(() => _tile.ModelTextureRotate = (TextureRotateType) cbModelRotate.SelectedValue);
             cbModelFlip.SelectedValueChanged           += (s, e) => PerformUpdate(() => _tile.ModelTextureFlip = (TextureFlipType) cbModelFlip.SelectedValue);
-            cbModelUseMovementHeightmap.CheckedChanged += (s, e) => PerformUpdate(() => _tile.ModelUseMoveHeightmap = cbModelUseMovementHeightmap.Checked);
-            nudModelVertexHeightmapTL.ValueChanged     += (s, e) => PerformUpdate(() => _tile.SetModelVertexHeightmap(CornerType.TopLeft, (float) nudModelVertexHeightmapTL.Value));
-            nudModelVertexHeightmapTR.ValueChanged     += (s, e) => PerformUpdate(() => _tile.SetModelVertexHeightmap(CornerType.TopRight, (float) nudModelVertexHeightmapTR.Value));
-            nudModelVertexHeightmapBL.ValueChanged     += (s, e) => PerformUpdate(() => _tile.SetModelVertexHeightmap(CornerType.BottomLeft, (float) nudModelVertexHeightmapBL.Value));
-            nudModelVertexHeightmapBR.ValueChanged     += (s, e) => PerformUpdate(() => _tile.SetModelVertexHeightmap(CornerType.BottomRight, (float) nudModelVertexHeightmapBR.Value));
+            cbModelUseMovementHeightmap.CheckedChanged += (s, e) => PerformUpdate(() => {
+                _tile.ModelUseMoveHeightmap = cbModelUseMovementHeightmap.Checked;
+                UpdateLinkHeightmapsCheckbox();
+            });
+            foreach (var corner in Enum.GetValues<CornerType>()) {
+                var nud = GetNUDModelVertexHeightmap(corner);
+                nud.ValueChanged += (s, e) => PerformUpdate(() => SetModelVertexHeightmap(corner, (float) nud.Value));
+            }
 
             // Update enabled status, visibility, and default values of controls.
             UpdateControls();
         }
 
-        private bool _updatingControls = false;
+        private int _updatingControls = 0;
 
         private void UpdateControls() {
             // Guard to prevent tiles from being edited while values are being initialized.
-            if (_updatingControls)
+            if (_updatingControls > 0)
                 return;
-            _updatingControls = true;
+
+            _updatingControls++;
 
             // 'Current Tile' group
             if (_tile == null) {
                 labelTileEdited.Text = "Tile: (no tile)";
                 labelRealCoordinates.Text = "";
+                cbLinkHeightmaps.Checked = false;
+                cbLinkHeightmaps.Enabled = false;
             }
             else {
                 labelTileEdited.Text = "Tile: (" + _tile.X + ", " + _tile.Y + ")\n";
                 labelRealCoordinates.Text = "Real coordinates: (" + (_tile.X * 32 + 16) + "," + (_tile.Y * 32 + 16) + ")";
+                UpdateLinkHeightmapsCheckbox();
+                cbLinkHeightmaps.Enabled = _tile.MPD_File.SurfaceModel != null;
             }
 
             void InitNUD(NumericUpDown nud, decimal value) {
@@ -105,18 +158,14 @@ namespace SF3.Win.Controls {
             if (!gbMovement.Enabled) {
                 cbMoveTerrain.SelectedItem = null;
                 nudMoveHeight.Text = "";
-                nudMoveHeightmapTL.Text = "";
-                nudMoveHeightmapTR.Text = "";
-                nudMoveHeightmapBL.Text = "";
-                nudMoveHeightmapBR.Text = "";
+                foreach (var corner in Enum.GetValues<CornerType>())
+                    GetNUDMoveHeightmap(corner).Text = "";
             }
             else {
                 cbMoveTerrain.SelectedItem = _tile.MoveTerrain;
                 InitNUD(nudMoveHeight, (decimal) _tile.MoveHeight);
-                InitNUD(nudMoveHeightmapTL, (decimal) _tile.GetMoveHeightmap(CornerType.TopLeft));
-                InitNUD(nudMoveHeightmapTR, (decimal) _tile.GetMoveHeightmap(CornerType.TopRight));
-                InitNUD(nudMoveHeightmapBL, (decimal) _tile.GetMoveHeightmap(CornerType.BottomLeft));
-                InitNUD(nudMoveHeightmapBR, (decimal) _tile.GetMoveHeightmap(CornerType.BottomRight));
+                foreach (var corner in Enum.GetValues<CornerType>())
+                    InitNUD(GetNUDMoveHeightmap(corner), (decimal) _tile.GetMoveHeightmap(corner));
             }
 
             // 'Item' group
@@ -133,24 +182,67 @@ namespace SF3.Win.Controls {
                 cbModelFlip.SelectedItem = null;
                 cbModelRotate.SelectedItem = null;
                 cbModelUseMovementHeightmap.Checked = false;
-                nudModelVertexHeightmapTL.Text = "";
-                nudModelVertexHeightmapTR.Text = "";
-                nudModelVertexHeightmapBL.Text = "";
-                nudModelVertexHeightmapBR.Text = "";
+                foreach (var corner in Enum.GetValues<CornerType>())
+                    GetNUDModelVertexHeightmap(corner).Text = "";
             }
             else {
                 nudModelTextureID.Value = _tile.ModelTextureID;
                 cbModelFlip.SelectedItem = _tile.ModelTextureFlip;
                 cbModelRotate.SelectedItem = _tile.ModelTextureRotate;
                 cbModelUseMovementHeightmap.Checked = _tile.ModelUseMoveHeightmap;
-                InitNUD(nudModelVertexHeightmapTL, (decimal) _tile.GetModelVertexHeightmap(CornerType.TopLeft));
-                InitNUD(nudModelVertexHeightmapTR, (decimal) _tile.GetModelVertexHeightmap(CornerType.TopRight));
-                InitNUD(nudModelVertexHeightmapBL, (decimal) _tile.GetModelVertexHeightmap(CornerType.BottomLeft));
-                InitNUD(nudModelVertexHeightmapBR, (decimal) _tile.GetModelVertexHeightmap(CornerType.BottomRight));
+                foreach (var corner in Enum.GetValues<CornerType>())
+                    InitNUD(GetNUDModelVertexHeightmap(corner), (decimal) _tile.GetModelVertexHeightmap(corner));
             }
 
-            _updatingControls = false;
+            _updatingControls--;
         }
+
+        private void UpdateLinkHeightmapsCheckbox() {
+            cbLinkHeightmaps.Checked =
+                _tile.MPD_File.SurfaceModel != null &&
+                !_tile.ModelUseMoveHeightmap &&
+                Enum.GetValues<CornerType>().All(x => _tile.GetMoveHeightmap(x) == _tile.GetModelVertexHeightmap(x));
+        }
+
+        private void SetMoveHeightToAverageMoveHeight() {
+            _updatingControls++;
+            var avgHeight = (float) Math.Round(Enum.GetValues<CornerType>().Average(x => _tile.GetMoveHeightmap(x) * 16f)) / 16f;
+            nudMoveHeight.Value = (decimal) avgHeight;
+            _tile.MoveHeight = avgHeight;
+            _updatingControls--;
+        }
+
+        private NumericUpDown GetNUDMoveHeightmap(CornerType corner) {
+            switch (corner) {
+                case CornerType.TopLeft:
+                    return nudMoveHeightmapTL;
+                case CornerType.TopRight:
+                    return nudMoveHeightmapTR;
+                case CornerType.BottomLeft:
+                    return nudMoveHeightmapBL;
+                case CornerType.BottomRight:
+                    return nudMoveHeightmapBR;
+                default:
+                    throw new ArgumentException(nameof(corner));
+            }
+        }
+
+        private NumericUpDown GetNUDModelVertexHeightmap(CornerType corner) {
+            switch (corner) {
+                case CornerType.TopLeft:
+                    return nudModelVertexHeightmapTL;
+                case CornerType.TopRight:
+                    return nudModelVertexHeightmapTR;
+                case CornerType.BottomLeft:
+                    return nudModelVertexHeightmapBL;
+                case CornerType.BottomRight:
+                    return nudModelVertexHeightmapBR;
+                default:
+                    throw new ArgumentException(nameof(corner));
+            }
+        }
+
+        public EventHandler ModelUpdated;
 
         private Tile _tile = null;
 

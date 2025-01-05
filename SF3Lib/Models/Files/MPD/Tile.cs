@@ -1,4 +1,5 @@
-﻿using CommonLib.Types;
+﻿using System;
+using CommonLib.Types;
 using CommonLib.Utils;
 using SF3.Types;
 
@@ -8,6 +9,14 @@ namespace SF3.Models.Files.MPD {
             MPD_File = mpdFile;
             X = x;
             Y = y;
+        }
+
+        public void UpdateAbnormals() {
+            MPD_File.SurfaceModel?.UpdateVertexAbnormals(
+                X, Y,
+                MPD_File.Surface.HeightmapRowTable,
+                POLYGON_NormalCalculationMethod.MostExtremeVerticalTriangle
+            );
         }
 
         public IMPD_File MPD_File { get; }

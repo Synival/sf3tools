@@ -122,7 +122,7 @@
             tilePropertyControl1.MaximumSize = new System.Drawing.Size(207, 10000);
             tilePropertyControl1.MinimumSize = new System.Drawing.Size(207, 446);
             tilePropertyControl1.Name = "tilePropertyControl1";
-            tilePropertyControl1.Size = new System.Drawing.Size(207, 446);
+            tilePropertyControl1.Size = new System.Drawing.Size(207, 545);
             tilePropertyControl1.TabIndex = 2;
             tilePropertyControl1.Tile = null;
             // 
@@ -140,7 +140,7 @@
             mpdViewerGLControl1.Name = "mpdViewerGLControl1";
             mpdViewerGLControl1.Profile = OpenTK.Windowing.Common.ContextProfile.Core;
             mpdViewerGLControl1.SharedContext = null;
-            mpdViewerGLControl1.Size = new System.Drawing.Size(582, 411);
+            mpdViewerGLControl1.Size = new System.Drawing.Size(582, 545);
             mpdViewerGLControl1.TabIndex = 1;
             // 
             // MPD_ViewerControl
@@ -151,7 +151,7 @@
             Controls.Add(tilePropertyControl1);
             Controls.Add(toolStrip1);
             Name = "MPD_ViewerControl";
-            Size = new System.Drawing.Size(789, 442);
+            Size = new System.Drawing.Size(789, 576);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
