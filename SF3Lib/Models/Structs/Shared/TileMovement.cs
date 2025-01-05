@@ -4,7 +4,7 @@ using SF3.ByteData;
 namespace SF3.Models.Structs.Shared {
     public class TileMovement : Struct {
         private readonly int noEntry;
-        private readonly int unknown01;
+        private readonly int air;
         private readonly int grassland;
         private readonly int dirt;
         private readonly int darkGrass;
@@ -13,10 +13,10 @@ namespace SF3.Models.Structs.Shared {
         private readonly int desert;
         private readonly int greyMountain;
 
-        private readonly int unknown09;
+        private readonly int water;
         private readonly int unknown0a;
-        private readonly int unknown0b;
-        private readonly int unknown0c;
+        private readonly int sand;
+        private readonly int enemyOnly;
         private readonly int unknown0d;
         private readonly int unknown0e;
         private readonly int unknown0f;
@@ -24,7 +24,7 @@ namespace SF3.Models.Structs.Shared {
         public TileMovement(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x10) {
             noEntry       = Address;
-            unknown01     = Address + 0x01;
+            air     = Address + 0x01;
             grassland     = Address + 0x02;
             dirt          = Address + 0x03;
             darkGrass     = Address + 0x04;
@@ -33,10 +33,10 @@ namespace SF3.Models.Structs.Shared {
             desert        = Address + 0x07;
             greyMountain  = Address + 0x08;
 
-            unknown09     = Address + 0x09;
+            water     = Address + 0x09;
             unknown0a     = Address + 0x0a;
-            unknown0b     = Address + 0x0b;
-            unknown0c     = Address + 0x0c;
+            sand     = Address + 0x0b;
+            enemyOnly     = Address + 0x0c;
             unknown0d     = Address + 0x0d;
             unknown0e     = Address + 0x0e;
             unknown0f     = Address + 0x0f;
@@ -49,9 +49,9 @@ namespace SF3.Models.Structs.Shared {
         }
 
         [BulkCopy]
-        public int TileUnknown1 {
-            get => Data.GetByte(unknown01);
-            set => Data.SetByte(unknown01, (byte) value);
+        public int TileAir {
+            get => Data.GetByte(air);
+            set => Data.SetByte(air, (byte) value);
         }
 
         [BulkCopy]
@@ -97,9 +97,9 @@ namespace SF3.Models.Structs.Shared {
         }
 
         [BulkCopy]
-        public int TileUnknown9 {
-            get => Data.GetByte(unknown09);
-            set => Data.SetByte(unknown09, (byte) value);
+        public int TileWater {
+            get => Data.GetByte(water);
+            set => Data.SetByte(water, (byte) value);
         }
 
         [BulkCopy]
@@ -109,15 +109,15 @@ namespace SF3.Models.Structs.Shared {
         }
 
         [BulkCopy]
-        public int TileUnknownB {
-            get => Data.GetByte(unknown0b);
-            set => Data.SetByte(unknown0b, (byte) value);
+        public int TileSand {
+            get => Data.GetByte(sand);
+            set => Data.SetByte(sand, (byte) value);
         }
 
         [BulkCopy]
-        public int TileUnknownC {
-            get => Data.GetByte(unknown0c);
-            set => Data.SetByte(unknown0c, (byte) value);
+        public int TileEnemyOnly {
+            get => Data.GetByte(enemyOnly);
+            set => Data.SetByte(enemyOnly, (byte) value);
         }
 
         [BulkCopy]

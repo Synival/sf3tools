@@ -237,7 +237,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcTileDataAir
             // 
-            lvcTileDataAir.AspectName = "TileUnknown1";
+            lvcTileDataAir.AspectName = "TileAir";
             lvcTileDataAir.AspectToStringFormat = "{0:X}";
             lvcTileDataAir.Text = "Air";
             lvcTileDataAir.Width = 40;
@@ -293,7 +293,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcTileDataWater
             // 
-            lvcTileDataWater.AspectName = "TileUnknown9";
+            lvcTileDataWater.AspectName = "TileWater";
             lvcTileDataWater.AspectToStringFormat = "{0:X}";
             lvcTileDataWater.Text = "Water";
             lvcTileDataWater.Width = 65;
@@ -307,16 +307,16 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcTileDataSand
             // 
-            lvcTileDataSand.AspectName = "TileUnknownB";
+            lvcTileDataSand.AspectName = "TileSand";
             lvcTileDataSand.AspectToStringFormat = "{0:X}";
             lvcTileDataSand.Text = "Sand";
             lvcTileDataSand.Width = 45;
             // 
-            // lvcTileDataUnknownC
+            // lvcTileDataEnemyOnly
             // 
-            lvcTileDataUnknownC.AspectName = "TileUnknownC";
+            lvcTileDataUnknownC.AspectName = "TileEnemyOnly";
             lvcTileDataUnknownC.AspectToStringFormat = "{0:X}";
-            lvcTileDataUnknownC.Text = "UnknownC";
+            lvcTileDataUnknownC.Text = "EnemyOnly";
             lvcTileDataUnknownC.Width = 70;
             // 
             // lvcTileDataUnknownD
