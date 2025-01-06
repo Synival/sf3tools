@@ -3,6 +3,7 @@ using System.Drawing;
 using CommonLib;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
+using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class SurfaceEditorResources {
@@ -13,8 +14,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             _isInitialized = true;
 
             Textures = [
-                (TileHoverTexture = new Texture((Bitmap) Image.FromFile("Images/TileHover.bmp"))),
-                (HelpTexture      = new Texture((Bitmap) Image.FromFile("Images/ViewerHelp.bmp"))),
+                (TileHoverTexture = new Texture(Resources.TileHoverBmp)),
+                (HelpTexture      = new Texture(Resources.ViewerHelpBmp)),
             ];
 
             var helpWidth = HelpTexture.Width / HelpTexture.Height;

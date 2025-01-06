@@ -23,7 +23,6 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MPD_ViewerControl));
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             tsbToggleWireframe = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -51,7 +50,7 @@
             // tsbToggleWireframe
             // 
             tsbToggleWireframe.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbToggleWireframe.Image = (System.Drawing.Image) resources.GetObject("tsbToggleWireframe.Image");
+            tsbToggleWireframe.Image = Properties.Resources.IconWireframeBmp;
             tsbToggleWireframe.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbToggleWireframe.Name = "tsbToggleWireframe";
             tsbToggleWireframe.Size = new System.Drawing.Size(28, 28);
@@ -67,7 +66,7 @@
             // tsbToggleNormals
             // 
             tsbToggleNormals.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbToggleNormals.Image = (System.Drawing.Image) resources.GetObject("tsbToggleNormals.Image");
+            tsbToggleNormals.Image = Properties.Resources.NormalsBmp;
             tsbToggleNormals.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbToggleNormals.Name = "tsbToggleNormals";
             tsbToggleNormals.Size = new System.Drawing.Size(28, 28);
@@ -83,7 +82,7 @@
             // tsbRecalculateLightmapOriginalMath
             // 
             tsbRecalculateLightmapOriginalMath.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbRecalculateLightmapOriginalMath.Image = (System.Drawing.Image) resources.GetObject("tsbRecalculateLightmapOriginalMath.Image");
+            tsbRecalculateLightmapOriginalMath.Image = Properties.Resources.LightingOldBmp;
             tsbRecalculateLightmapOriginalMath.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbRecalculateLightmapOriginalMath.Name = "tsbRecalculateLightmapOriginalMath";
             tsbRecalculateLightmapOriginalMath.Size = new System.Drawing.Size(28, 28);
@@ -93,7 +92,7 @@
             // tsbUpdateLightmapUpdatedMath
             // 
             tsbUpdateLightmapUpdatedMath.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbUpdateLightmapUpdatedMath.Image = (System.Drawing.Image) resources.GetObject("tsbUpdateLightmapUpdatedMath.Image");
+            tsbUpdateLightmapUpdatedMath.Image = Properties.Resources.LightingNewBmp;
             tsbUpdateLightmapUpdatedMath.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbUpdateLightmapUpdatedMath.Name = "tsbUpdateLightmapUpdatedMath";
             tsbUpdateLightmapUpdatedMath.Size = new System.Drawing.Size(28, 28);
@@ -108,7 +107,7 @@
             // tsbToggleHelp
             // 
             tsbToggleHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbToggleHelp.Image = (System.Drawing.Image) resources.GetObject("tsbToggleHelp.Image");
+            tsbToggleHelp.Image = Properties.Resources.IconHelpBmp;
             tsbToggleHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbToggleHelp.Name = "tsbToggleHelp";
             tsbToggleHelp.Size = new System.Drawing.Size(28, 28);

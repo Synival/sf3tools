@@ -1,6 +1,6 @@
 using System;
-using System.Drawing;
 using CommonLib;
+using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class WorldResources : IDisposable {
@@ -23,9 +23,9 @@ namespace SF3.Win.OpenGL.MPD_File {
             ];
 
             Textures = [
-                (WhiteTexture         = new Texture((Bitmap) Image.FromFile("Images/White.bmp"))),
-                (TransparentTexture   = new Texture((Bitmap) Image.FromFile("Images/Transparent.bmp"))),
-                (TileWireframeTexture = new Texture((Bitmap) Image.FromFile("Images/TileWireframe.bmp"))),
+                (WhiteTexture         = new Texture(Resources.WhiteBmp)),
+                (TransparentTexture   = new Texture(Resources.TransparentBmp)),
+                (TileWireframeTexture = new Texture(Resources.TileWireframeBmp))
             ];
         }
 
