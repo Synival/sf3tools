@@ -129,7 +129,7 @@ namespace SF3.Win.Controls {
             nudMoveHeightmapBL.ValueChanged            += (s, e) => PerformUpdate(() => SetMoveHeightmap(CornerType.BottomLeft, (float) nudMoveHeightmapBL.Value));
             nudMoveHeightmapBR.ValueChanged            += (s, e) => PerformUpdate(() => SetMoveHeightmap(CornerType.BottomRight, (float) nudMoveHeightmapBR.Value));
 
-            nudItemID.ValueChanged                     += (s, e) => PerformUpdate(() => _tile.ItemID = (byte) nudItemID.Value, false);
+            nudEventID.ValueChanged                    += (s, e) => PerformUpdate(() => _tile.EventID = (byte) nudEventID.Value, false);
 
             nudModelTextureID.ValueChanged             += (s, e) => PerformUpdate(() => _tile.ModelTextureID = (byte) nudModelTextureID.Value);
             cbModelRotate.SelectedValueChanged         += (s, e) => PerformUpdate(() => _tile.ModelTextureRotate = (TextureRotateType) cbModelRotate.SelectedValue);
@@ -171,7 +171,7 @@ namespace SF3.Win.Controls {
 
             void InitNUD(NumericUpDown nud, decimal value) {
                 nud.Value = value;
-                nud.Text = value.ToString();
+                nud.Text = (nud.Hexadecimal) ? ((int) value).ToString("X") : value.ToString();
             }
 
             // 'Movement' group
@@ -189,12 +189,12 @@ namespace SF3.Win.Controls {
                     InitNUD(GetNUDMoveHeightmap(corner), (decimal) _tile.GetMoveHeightmap(corner));
             }
 
-            // 'Item' group
-            gbItem.Enabled = _tile != null;
-            if (!gbItem.Enabled)
-                nudItemID.Text = "";
+            // 'Event' group
+            gbEvent.Enabled = _tile != null;
+            if (!gbEvent.Enabled)
+                nudEventID.Text = "";
             else
-                InitNUD(nudItemID, _tile.ItemID);
+                InitNUD(nudEventID, _tile.EventID);
 
             // 'Model' group
             gbModel.Enabled = _tile != null && _tile.MPD_File.SurfaceModel != null;
@@ -207,7 +207,7 @@ namespace SF3.Win.Controls {
                     GetNUDModelVertexHeightmap(corner).Text = "";
             }
             else {
-                nudModelTextureID.Value = _tile.ModelTextureID;
+                InitNUD(nudModelTextureID, _tile.ModelTextureID);
                 cbModelFlip.SelectedItem = _tile.ModelTextureFlip;
                 cbModelRotate.SelectedItem = _tile.ModelTextureRotate;
                 cbModelUseMovementHeightmap.Checked = _tile.ModelUseMoveHeightmap;

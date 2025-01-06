@@ -38,9 +38,9 @@ namespace SF3.Models.Files.MPD {
         public void SetMoveHeightmap(CornerType corner, float value)
             => MPD_File.Surface.HeightmapRowTable.Rows[Y].SetHeight(X, corner, value);
 
-        public byte ItemID {
-            get => MPD_File.Surface.ItemRowTable.Rows[Y][X];
-            set => MPD_File.Surface.ItemRowTable.Rows[Y][X] = value;
+        public byte EventID {
+            get => MPD_File.Surface.EventIDRowTable.Rows[Y][X];
+            set => MPD_File.Surface.EventIDRowTable.Rows[Y][X] = value;
         }
 
         public byte ModelTextureID {

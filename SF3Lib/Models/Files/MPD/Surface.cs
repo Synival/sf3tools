@@ -23,7 +23,7 @@ namespace SF3.Models.Files.MPD.Objects {
             return new List<ITable>() {
                 (HeightmapRowTable     = HeightmapRowTable.Create    (Data, 0x0000)),
                 (HeightTerrainRowTable = HeightTerrainRowTable.Create(Data, 0x4000)),
-                (ItemRowTable          = ItemRowTable.Create         (Data, 0x6000)),
+                (EventIDRowTable       = EventIDRowTable.Create      (Data, 0x6000)),
             };
         }
 
@@ -39,6 +39,6 @@ namespace SF3.Models.Files.MPD.Objects {
         public HeightTerrainRowTable HeightTerrainRowTable { get; private set; }
 
         [BulkCopyRecurse]
-        public ItemRowTable ItemRowTable { get; private set; }
+        public EventIDRowTable EventIDRowTable { get; private set; }
     }
 }

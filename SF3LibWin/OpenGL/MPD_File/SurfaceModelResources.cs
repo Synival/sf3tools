@@ -113,7 +113,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var surfaceSelectionQuads  = new List<Quad>();
 
             Vector3 GetVertexAbnormal(int tileX, int tileY, CornerType corner) {
-                var locations = GetBlockLocations(tileX, tileY, corner);
+                var locations = GetBlockLocations(tileX, tileY, corner, true);
                 if (locations.Length == 0 || mpdFile.SurfaceModel?.VertexNormalBlockTable?.Rows == null)
                     return new Vector3(0f, 1 / 32768f, 0f);
 
@@ -162,12 +162,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                         untexturedSurfaceQuads.Add(newQuad);
                     }
 
-                    surfaceSelectionQuads.Add(new Quad(vertices, new Vector3(x / (float) WidthInTiles, y / (float) HeightInTiles, 0)));
-                    TileDebugText[x, y] =
-                        "  [" + (x - 0.5) + ", " + (y - 0.5) + "] Pos: " + vertices[0] + ", Normal: " + vertexAbnormals[0] + "\n" +
-                        "  [" + (x + 0.5) + ", " + (y - 0.5) + "] Pos: " + vertices[1] + ", Normal: " + vertexAbnormals[1] + "\n" +
-                        "  [" + (x + 0.5) + ", " + (y + 0.5) + "] Pos: " + vertices[2] + ", Normal: " + vertexAbnormals[2] + "\n" +
-                        "  [" + (x - 0.5) + ", " + (y + 0.5) + "] Pos: " + vertices[3] + ", Normal: " + vertexAbnormals[3] + "\n";
+                    var selectionColor = new Vector3(x / (float) WidthInTiles, y / (float) HeightInTiles, 0);
+                    surfaceSelectionQuads.Add(new Quad(vertices, selectionColor));
                 }
             }
 
@@ -194,7 +190,5 @@ namespace SF3.Win.OpenGL.MPD_File {
         public QuadModel SelectionModel { get; private set; } = null;
 
         public DisposableList<QuadModel> Models { get; private set; } = null;
-
-        public string[,] TileDebugText { get; } = new string[64, 64];
     }
 }

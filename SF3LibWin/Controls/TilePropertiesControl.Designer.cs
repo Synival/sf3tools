@@ -33,9 +33,9 @@
             labelMoveHeight = new System.Windows.Forms.Label();
             cbMoveTerrain = new System.Windows.Forms.ComboBox();
             labelMoveTerrain = new System.Windows.Forms.Label();
-            gbItem = new System.Windows.Forms.GroupBox();
-            nudItemID = new System.Windows.Forms.NumericUpDown();
-            labelItemID = new System.Windows.Forms.Label();
+            gbEvent = new System.Windows.Forms.GroupBox();
+            nudEventID = new System.Windows.Forms.NumericUpDown();
+            labelEventID = new System.Windows.Forms.Label();
             gbModel = new System.Windows.Forms.GroupBox();
             nudModelVertexHeightmapBR = new System.Windows.Forms.NumericUpDown();
             nudModelVertexHeightmapBL = new System.Windows.Forms.NumericUpDown();
@@ -58,8 +58,8 @@
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapTR).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapTL).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeight).BeginInit();
-            gbItem.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) nudItemID).BeginInit();
+            gbEvent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) nudEventID).BeginInit();
             gbModel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) nudModelVertexHeightmapBR).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudModelVertexHeightmapBL).BeginInit();
@@ -172,35 +172,35 @@
             labelMoveTerrain.TabIndex = 3;
             labelMoveTerrain.Text = "Terrain:";
             // 
-            // gbItem
+            // gbEvent
             // 
-            gbItem.Controls.Add(nudItemID);
-            gbItem.Controls.Add(labelItemID);
-            gbItem.Location = new System.Drawing.Point(3, 222);
-            gbItem.Name = "gbItem";
-            gbItem.Size = new System.Drawing.Size(200, 53);
-            gbItem.TabIndex = 1;
-            gbItem.TabStop = false;
-            gbItem.Text = "Item";
+            gbEvent.Controls.Add(nudEventID);
+            gbEvent.Controls.Add(labelEventID);
+            gbEvent.Location = new System.Drawing.Point(3, 222);
+            gbEvent.Name = "gbEvent";
+            gbEvent.Size = new System.Drawing.Size(200, 53);
+            gbEvent.TabIndex = 1;
+            gbEvent.TabStop = false;
+            gbEvent.Text = "Event";
             // 
-            // nudItemID
+            // nudEventID
             // 
-            nudItemID.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            nudItemID.Hexadecimal = true;
-            nudItemID.Location = new System.Drawing.Point(73, 23);
-            nudItemID.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
-            nudItemID.Name = "nudItemID";
-            nudItemID.Size = new System.Drawing.Size(120, 21);
-            nudItemID.TabIndex = 6;
+            nudEventID.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
+            nudEventID.Hexadecimal = true;
+            nudEventID.Location = new System.Drawing.Point(73, 23);
+            nudEventID.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+            nudEventID.Name = "nudEventID";
+            nudEventID.Size = new System.Drawing.Size(120, 21);
+            nudEventID.TabIndex = 6;
             // 
-            // labelItemID
+            // labelEventID
             // 
-            labelItemID.AutoSize = true;
-            labelItemID.Location = new System.Drawing.Point(6, 25);
-            labelItemID.Name = "labelItemID";
-            labelItemID.Size = new System.Drawing.Size(48, 15);
-            labelItemID.TabIndex = 10;
-            labelItemID.Text = "Item ID:";
+            labelEventID.AutoSize = true;
+            labelEventID.Location = new System.Drawing.Point(6, 25);
+            labelEventID.Name = "labelEventID";
+            labelEventID.Size = new System.Drawing.Size(48, 15);
+            labelEventID.TabIndex = 10;
+            labelEventID.Text = "Event ID:";
             // 
             // gbModel
             // 
@@ -374,7 +374,7 @@
             Controls.Add(labelRealCoordinates);
             Controls.Add(labelTileEdited);
             Controls.Add(gbModel);
-            Controls.Add(gbItem);
+            Controls.Add(gbEvent);
             Controls.Add(gbMovement);
             MaximumSize = new System.Drawing.Size(207, 10000);
             MinimumSize = new System.Drawing.Size(207, 524);
@@ -387,9 +387,9 @@
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapTR).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapTL).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeight).EndInit();
-            gbItem.ResumeLayout(false);
-            gbItem.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) nudItemID).EndInit();
+            gbEvent.ResumeLayout(false);
+            gbEvent.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize) nudEventID).EndInit();
             gbModel.ResumeLayout(false);
             gbModel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) nudModelVertexHeightmapBR).EndInit();
@@ -405,12 +405,12 @@
 
         private System.Windows.Forms.GroupBox gbMovement;
         private System.Windows.Forms.Label labelMoveHeight;
-        private System.Windows.Forms.GroupBox gbItem;
+        private System.Windows.Forms.GroupBox gbEvent;
         private System.Windows.Forms.GroupBox gbModel;
         private System.Windows.Forms.Label labelMoveTerrain;
         private System.Windows.Forms.ComboBox cbMoveTerrain;
         private System.Windows.Forms.Label labelMoveHeightmap;
-        private System.Windows.Forms.Label labelItemID;
+        private System.Windows.Forms.Label labelEventID;
         private System.Windows.Forms.Label labelModelFlip;
         private System.Windows.Forms.Label labelModelTextureID;
         private System.Windows.Forms.ComboBox cbModelFlip;
@@ -425,7 +425,7 @@
         private System.Windows.Forms.NumericUpDown nudMoveHeightmapBL;
         private System.Windows.Forms.NumericUpDown nudMoveHeightmapTR;
         private System.Windows.Forms.NumericUpDown nudMoveHeightmapTL;
-        private System.Windows.Forms.NumericUpDown nudItemID;
+        private System.Windows.Forms.NumericUpDown nudEventID;
         private System.Windows.Forms.NumericUpDown nudModelVertexHeightmapBR;
         private System.Windows.Forms.NumericUpDown nudModelVertexHeightmapBL;
         private System.Windows.Forms.NumericUpDown nudModelVertexHeightmapTR;
