@@ -14,12 +14,12 @@ namespace SF3.Win.OpenGL.MPD_File {
             _isInitialized = true;
 
             Shaders = [
-                (TextureShader    = new Shader("Shaders/Texture.vert",    "Shaders/Texture.frag")),
-                (TwoTextureShader = new Shader("Shaders/TwoTexture.vert", "Shaders/TwoTexture.frag")),
-                (SolidShader      = new Shader("Shaders/Solid.vert",      "Shaders/Solid.frag")),
-                (NormalsShader    = new Shader("Shaders/Normals.vert",    "Shaders/Normals.frag")),
-                (WireframeShader  = new Shader("Shaders/Wireframe.vert",  "Shaders/Wireframe.frag")),
-                (ObjectShader     = new Shader("Shaders/Object.vert",     "Shaders/Object.frag")),
+                (TextureShader    = new Shader(Resources.TextureVert,    Resources.TextureFrag)),
+                (TwoTextureShader = new Shader(Resources.TwoTextureVert, Resources.TwoTextureFrag)),
+                (SolidShader      = new Shader(Resources.SolidVert,      Resources.SolidFrag)),
+                (NormalsShader    = new Shader(Resources.NormalsVert,    Resources.NormalsFrag)),
+                (WireframeShader  = new Shader(Resources.WireframeVert,  Resources.WireframeFrag)),
+                (ObjectShader     = new Shader(Resources.ObjectVert,     Resources.ObjectFrag)),
             ];
 
             Textures = [

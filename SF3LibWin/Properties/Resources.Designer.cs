@@ -111,6 +111,196 @@ namespace SF3.Win.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///in vec3 normalFrag;
+        ///
+        ///out vec4 FragColor;
+        ///
+        ///void main() {
+        ///    FragColor = vec4(normalFrag, 1.0);
+        ///}
+        ///.
+        /// </summary>
+        internal static string NormalsFrag {
+            get {
+                return ResourceManager.GetString("NormalsFrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///layout (location = 0) in vec3 position;
+        ///layout (location = 1) in vec3 normal;
+        ///
+        ///uniform mat4 model;
+        ///uniform mat4 view;
+        ///uniform mat4 projection;
+        ///
+        ///out vec3 normalFrag;
+        ///
+        ///void main() {
+        ///    gl_Position = projection * view * model * vec4(position, 1.0);
+        ///    normalFrag = normal * 0.5 + 0.5;
+        ///}
+        ///.
+        /// </summary>
+        internal static string NormalsVert {
+            get {
+                return ResourceManager.GetString("NormalsVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///uniform sampler2D texture0;
+        ///
+        ///in vec3 colorFrag;
+        ///in vec2 texCoord0Frag;
+        ///in vec3 glowFrag;
+        ///in float lightingFrag;
+        ///
+        ///out vec4 FragColor;
+        ///
+        ///void main() {
+        ///    FragColor =
+        ///        texture(texture0, texCoord0Frag) * vec4(colorFrag, 1.0)
+        ///      + vec4(glowFrag, 0.0)
+        ///      + vec4(vec3(1.0, 1.0, 0.5) * lightingFrag * 0.2, 0);
+        ///}
+        ///.
+        /// </summary>
+        internal static string ObjectFrag {
+            get {
+                return ResourceManager.GetString("ObjectFrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///uniform mat4 model;
+        ///uniform mat4 view;
+        ///uniform mat4 projection;
+        ///
+        ///layout (location = 0) in vec3 position;
+        ///layout (location = 1) in vec3 color;
+        ///layout (location = 2) in vec2 texCoord0;
+        ///layout (location = 3) in vec3 glow;
+        ///layout (location = 4) in vec3 normal;
+        ///
+        ///out vec3 colorFrag;
+        ///out vec2 texCoord0Frag;
+        ///out vec3 glowFrag;
+        ///out float lightingFrag;
+        ///
+        ///void main() {
+        ///    gl_Position   = projection * view * model * vec4(position, 1.0);
+        ///    colorFrag     = color;
+        ///    texCoord0Frag [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ObjectVert {
+            get {
+                return ResourceManager.GetString("ObjectVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///in vec3 colorFrag;
+        ///out vec4 FragColor;
+        ///
+        ///void main() {
+        ///    FragColor = vec4(colorFrag, 1.0);
+        ///}
+        ///.
+        /// </summary>
+        internal static string SolidFrag {
+            get {
+                return ResourceManager.GetString("SolidFrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///layout (location = 0) in vec3 position;
+        ///layout (location = 1) in vec3 color;
+        ///
+        ///uniform mat4 model;
+        ///uniform mat4 view;
+        ///uniform mat4 projection;
+        ///
+        ///out vec3 colorFrag;
+        ///
+        ///void main() {
+        ///    gl_Position = projection * view * model * vec4(position, 1.0);
+        ///    colorFrag = color;
+        ///}
+        ///.
+        /// </summary>
+        internal static string SolidVert {
+            get {
+                return ResourceManager.GetString("SolidVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///uniform sampler2D texture0;
+        ///
+        ///in vec3 colorFrag;
+        ///in vec2 texCoord0Frag;
+        ///in vec3 glowFrag;
+        ///
+        ///out vec4 FragColor;
+        ///
+        ///void main() {
+        ///    FragColor = texture(texture0, texCoord0Frag) * vec4(colorFrag, 1.0) + vec4(glowFrag, 0.0);
+        ///}
+        ///.
+        /// </summary>
+        internal static string TextureFrag {
+            get {
+                return ResourceManager.GetString("TextureFrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///layout (location = 0) in vec3 position;
+        ///layout (location = 1) in vec3 color;
+        ///layout (location = 2) in vec2 texCoord0;
+        ///layout (location = 3) in vec3 glow;
+        ///
+        ///uniform mat4 model;
+        ///uniform mat4 view;
+        ///uniform mat4 projection;
+        ///
+        ///out vec3 colorFrag;
+        ///out vec2 texCoord0Frag;
+        ///out vec3 glowFrag;
+        ///
+        ///void main() {
+        ///    gl_Position = projection * view * model * vec4(position, 1.0);
+        ///    colorFrag = color;
+        ///    texCoord0Frag = texCoord0;
+        ///    glowFrag = glow;
+        ///}
+        ///.
+        /// </summary>
+        internal static string TextureVert {
+            get {
+                return ResourceManager.GetString("TextureVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap TileHoverBmp {
@@ -141,6 +331,62 @@ namespace SF3.Win.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///uniform sampler2D texture0;
+        ///uniform sampler2D texture1;
+        ///
+        ///in vec3 colorFrag;
+        ///in vec2 texCoord0Frag;
+        ///in vec2 texCoord1Frag;
+        ///
+        ///out vec4 FragColor;
+        ///
+        ///void main() {
+        ///    vec4 tex1Color = texture(texture1, texCoord1Frag);
+        ///    FragColor = 
+        ///        texture(texture0, texCoord0Frag) * vec4(colorFrag, 1.0) * (1.0 - tex1Color.a) +
+        ///        vec4(tex1Color.rgb * tex1Color.a, tex1Color.a);
+        ///}
+        ///.
+        /// </summary>
+        internal static string TwoTextureFrag {
+            get {
+                return ResourceManager.GetString("TwoTextureFrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///layout (location = 0) in vec3 position;
+        ///layout (location = 1) in vec3 color;
+        ///layout (location = 2) in vec2 texCoord0;
+        ///layout (location = 3) in vec2 texCoord1;
+        ///
+        ///uniform mat4 model;
+        ///uniform mat4 view;
+        ///uniform mat4 projection;
+        ///
+        ///out vec3 colorFrag;
+        ///out vec2 texCoord0Frag;
+        ///out vec2 texCoord1Frag;
+        ///
+        ///void main() {
+        ///    gl_Position = projection * view * model * vec4(position, 1.0);
+        ///    colorFrag = color;
+        ///    texCoord0Frag = texCoord0;
+        ///    texCoord1Frag = texCoord1;
+        ///}
+        ///.
+        /// </summary>
+        internal static string TwoTextureVert {
+            get {
+                return ResourceManager.GetString("TwoTextureVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap ViewerHelpBmp {
@@ -157,6 +403,50 @@ namespace SF3.Win.Properties {
             get {
                 object obj = ResourceManager.GetObject("WhiteBmp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///uniform sampler2D texture1;
+        ///
+        ///in vec2 texCoord1Frag;
+        ///
+        ///out vec4 FragColor;
+        ///
+        ///void main() {
+        ///    FragColor = texture(texture1, texCoord1Frag);
+        ///}
+        ///.
+        /// </summary>
+        internal static string WireframeFrag {
+            get {
+                return ResourceManager.GetString("WireframeFrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///layout (location = 0) in vec3 position;
+        ///layout (location = 1) in vec2 texCoord1;
+        ///
+        ///uniform mat4 model;
+        ///uniform mat4 view;
+        ///uniform mat4 projection;
+        ///
+        ///out vec2 texCoord1Frag;
+        ///
+        ///void main() {
+        ///    gl_Position = projection * view * model * vec4(position, 1.0);
+        ///    texCoord1Frag = texCoord1;
+        ///}
+        ///.
+        /// </summary>
+        internal static string WireframeVert {
+            get {
+                return ResourceManager.GetString("WireframeVert", resourceCulture);
             }
         }
     }

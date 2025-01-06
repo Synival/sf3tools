@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using OpenTK.Graphics.OpenGL;
 
 namespace SF3.Win.OpenGL {
     public class Shader : IDisposable {
-        public Shader(string vertexPath, string fragmentPath) {
-            var vertexShaderSource   = File.ReadAllText(vertexPath);
-            var fragmentShaderSource = File.ReadAllText(fragmentPath);
-
+        public Shader(string vertexShaderSource, string fragmentShaderSource) {
             var vertexShaderHandle = GL.CreateShader(ShaderType.VertexShader);
             GL.ShaderSource(vertexShaderHandle, vertexShaderSource);
 
