@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Types;
+using CommonLib.Utils;
 using SF3.Models.Files.MPD;
 using SF3.Types;
 
@@ -60,14 +61,31 @@ namespace SF3.Win.Controls {
                     ModelUpdated?.Invoke(this, EventArgs.Empty);
             }
 
-            void SetMoveHeightmap(CornerType corner, float value) {
+            void SetMoveHeight(float value) {
+                if (_updatingControls > 0)
+                    return;
+
+                var diff = value - _tile.MoveHeight;
+                _tile.MoveHeight = value;
+
+                foreach (var corner in Enum.GetValues<CornerType>()) {
+                    var height = _tile.GetMoveHeightmap(corner) + diff;
+                    SetMoveHeightmap(corner, height, false);
+                    _updatingControls++;
+                    GetNUDMoveHeightmap(corner).Value = (decimal) height;
+                    _updatingControls--;
+                }
+            }
+
+            void SetMoveHeightmap(CornerType corner, float value, bool adjustMoveHeight = true) {
                 if (_updatingControls > 0)
                     return;
 
                 _updatingControls++;
                 var oldValue = _tile.GetMoveHeightmap(corner);
                 _tile.SetMoveHeightmap(corner, value);
-                SetMoveHeightToAverageMoveHeight();
+                if (adjustMoveHeight)
+                    SetMoveHeightToAverageMoveHeight();
 
                 if (cbLinkHeightmaps.Checked) {
                     GetNUDModelVertexHeightmap(corner).Value = (decimal) value;
@@ -76,8 +94,8 @@ namespace SF3.Win.Controls {
                 }
                 _updatingControls--;
 
-                if (cbLinkHeightmaps.Checked || _tile.ModelUseMoveHeightmap) {
-                    _tile.UpdateAbnormals();
+                if (cbLinkHeightmaps.Checked || (_tile.MPD_File.SurfaceModel != null && _tile.ModelUseMoveHeightmap)) {
+                    UpdateAbnormalsForCorner(corner);
                     ModelUpdated?.Invoke(this, EventArgs.Empty);
                 }
             }
@@ -97,12 +115,12 @@ namespace SF3.Win.Controls {
                 }
                 _updatingControls--;
 
-                _tile.UpdateAbnormals();
+                UpdateAbnormalsForCorner(corner);
                 ModelUpdated?.Invoke(this, EventArgs.Empty);
             }
 
             cbMoveTerrain.SelectedValueChanged         += (s, e) => PerformUpdate(() => _tile.MoveTerrain = (TerrainType) cbMoveTerrain.SelectedValue, false);
-            nudMoveHeight.ValueChanged                 += (s, e) => PerformUpdate(() => _tile.MoveHeight = (float) nudMoveHeight.Value, false);
+            nudMoveHeight.ValueChanged                 += (s, e) => PerformUpdate(() => SetMoveHeight((float) nudMoveHeight.Value), true);
             foreach (var corner in Enum.GetValues<CornerType>()) {
                 var nud = GetNUDMoveHeightmap(corner);
                 nud.ValueChanged += (s, e) => PerformUpdate(() => SetMoveHeightmap(corner, (float) nud.Value));
@@ -201,7 +219,7 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateLinkHeightmapsCheckbox() {
-            cbLinkHeightmaps.Enabled = _tile.MPD_File.SurfaceModel != null & !_tile.ModelUseMoveHeightmap;
+            cbLinkHeightmaps.Enabled = _tile.MPD_File.SurfaceModel != null && !_tile.ModelUseMoveHeightmap;
             cbLinkHeightmaps.Checked = cbLinkHeightmaps.Enabled &&
                 Enum.GetValues<CornerType>().All(x => _tile.GetMoveHeightmap(x) == _tile.GetModelVertexHeightmap(x));
 
@@ -303,6 +321,25 @@ namespace SF3.Win.Controls {
                     acTile.SetMoveHeightmap(ac.Corner, newValue);
                     var avgHeight = (float) Math.Round(Enum.GetValues<CornerType>().Average(x => acTile.GetMoveHeightmap(x) * 16f)) / 16f;
                     acTile.MoveHeight = avgHeight;
+                }
+            }
+        }
+
+        private void UpdateAbnormalsForCorner(CornerType corner) {
+            var surfaceModel = _tile.MPD_File.SurfaceModel;
+            if (surfaceModel == null)
+                return;
+
+            var vxCenter = BlockHelpers.TileToVertexX(_tile.X, corner);
+            var vyCenter = BlockHelpers.TileToVertexY(_tile.Y, corner);
+
+            // Abnormals need to be updated in a 3x3 grid.
+            for (var x = -1; x <= 1; x++) {
+                for (var y = -1; y <= 1; y++) {
+                    var vx = x + vxCenter;
+                    var vy = y + vyCenter;
+                    if (vx >= 0 && vy >= 0 && vx < 65 && vy < 65)
+                        surfaceModel.UpdateVertexAbnormal(vx, vy, _tile.MPD_File.Surface.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles);
                 }
             }
         }
