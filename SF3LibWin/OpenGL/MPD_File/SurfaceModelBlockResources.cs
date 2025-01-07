@@ -81,8 +81,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             var surfaceSelectionQuads  = new List<Quad>();
 
             var textureData = mpdFile.SurfaceModel?.TileTextureRowTable?.Make2DTextureData();
-            for (var y = 0; y < SurfaceModelAllResources.WidthInTiles; y++) {
-                for (var x = 0; x < SurfaceModelAllResources.HeightInTiles; x++) {
+            for (var y = 0; y < SurfaceModelResources.WidthInTiles; y++) {
+                for (var x = 0; x < SurfaceModelResources.HeightInTiles; x++) {
                     var tile = mpdFile.Tiles[x, y];
 
                     TextureAnimation anim = null;
@@ -116,7 +116,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         untexturedSurfaceQuads.Add(newQuad);
                     }
 
-                    var selectionColor = new Vector3(x / (float) SurfaceModelAllResources.WidthInTiles, y / (float) SurfaceModelAllResources.HeightInTiles, 0);
+                    var selectionColor = new Vector3(x / (float) SurfaceModelResources.WidthInTiles, y / (float) SurfaceModelResources.HeightInTiles, 0);
                     surfaceSelectionQuads.Add(new Quad(vertices, selectionColor));
                 }
             }

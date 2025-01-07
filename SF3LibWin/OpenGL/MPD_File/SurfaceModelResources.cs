@@ -2,11 +2,11 @@
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class SurfaceModelAllResources : IDisposable {
+    public class SurfaceModelResources : IDisposable {
         public const int WidthInTiles = 64;
         public const int HeightInTiles = 64;
 
-        public SurfaceModelAllResources() {
+        public SurfaceModelResources() {
             Blocks = [
                 // TODO: all the blocks!
                 new SurfaceModelBlockResources(0)
@@ -51,7 +51,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GC.SuppressFinalize(this);
         }
 
-        ~SurfaceModelAllResources() {
+        ~SurfaceModelResources() {
             if (!disposed)
                 System.Diagnostics.Debug.WriteLine(GetType().Name + ": GPU Resource leak! Did you forget to call Dispose()?");
             Dispose(false);

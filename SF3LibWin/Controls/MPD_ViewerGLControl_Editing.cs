@@ -33,8 +33,8 @@ namespace SF3.Win.Controls {
                 UpdateTilePosition(null);
             else {
                 UpdateTilePosition(new Point(
-                    (int) Math.Round(pixel[0] / (255.0f / SurfaceModelAllResources.WidthInTiles)),
-                    (int) Math.Round(pixel[1] / (255.0f / SurfaceModelAllResources.HeightInTiles))
+                    (int) Math.Round(pixel[0] / (255.0f / SurfaceModelResources.WidthInTiles)),
+                    (int) Math.Round(pixel[1] / (255.0f / SurfaceModelResources.HeightInTiles))
                 ));
             }
         }

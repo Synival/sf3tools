@@ -24,7 +24,7 @@ namespace SF3.Win.Controls {
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             _world         = new WorldResources();
-            _surfaceModel  = new SurfaceModelAllResources();
+            _surfaceModel  = new SurfaceModelResources();
             _surfaceEditor = new SurfaceEditorResources();
 
             _world.Init();
@@ -316,7 +316,7 @@ namespace SF3.Win.Controls {
         private Matrix4 _viewMatrix;
 
         private WorldResources _world = null;
-        private SurfaceModelAllResources _surfaceModel = null;
+        private SurfaceModelResources _surfaceModel = null;
         private SurfaceEditorResources _surfaceEditor = null;
         private Framebuffer _selectFramebuffer;
     }
