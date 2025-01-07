@@ -32,7 +32,7 @@ namespace SF3.Win.Controls {
                 var deltaY = (e.Y - _lastMousePos.Value.Y) * shiftFactor;
 
                 // For middle+right drag, rotate around, keeping the tile over the mouse in place.
-                if ((_mouseButtons & c_MouseMiddleRight) == c_MouseMiddleRight && _tilePos.HasValue) {
+                if ((_mouseButtons & c_MouseMiddleRight) == c_MouseMiddleRight && _tileHoverPos.HasValue) {
                     // TODO: SIMPLYIFY ALL THIS, AND IMPROVE IT!!!
 
                     var targetDist = GetCurrentTileTargetAndDistance().Value;

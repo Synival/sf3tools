@@ -42,7 +42,7 @@ namespace SF3.MPD_Editor.Forms {
                 }
             }
 
-            // Scenario is auto-detected.
+            // Remove "Copy Tables To/From"; that's not a good idea for the MPD Editor!
             foreach (var i in MenuStrip.Items) {
                 if (i is ToolStripDropDownItem tsdd) {
                     var itemsToRemove = new List<ToolStripItem>();

@@ -76,13 +76,8 @@ namespace SF3.Win.Controls {
             FrameTick?.Invoke(this, EventArgs.Empty);
         }
 
-        private void OnTileModified(object sender, EventArgs e) {
-            var tile = (Tile) sender;
-            if (_surfaceModel != null) {
-                _surfaceModel.Blocks[tile.BlockLocation.Num].Invalidate();
-                Invalidate();
-            }
-        }
+        private void OnTileModified(object sender, EventArgs e)
+            => TileModified?.Invoke(sender, e);
 
         private void AttachListeners(IMPD_File mpdFile) {
             for (var x = 0; x < mpdFile.Tiles.GetLength(0); x++)
@@ -125,6 +120,7 @@ namespace SF3.Win.Controls {
         public event EventHandler MiddleDoubleClick;
         public event EventHandler FrameTick;
         public event CmdKeyEventHandler CmdKey;
+        public event EventHandler TileModified;
 
         private int _frame = 0;
         private Timer _timer = null;

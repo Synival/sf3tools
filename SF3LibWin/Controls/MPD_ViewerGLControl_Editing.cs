@@ -1,18 +1,25 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Windows.Forms;
 using OpenTK.Graphics.OpenGL;
 using SF3.Win.OpenGL.MPD_File;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerGLControl {
         private void InitEditing() {
-            Click += (s, e) => OnClickEditing();
+            MouseDown += (s, e) => OnMouseDownEditing(e);
         }
 
-        private void OnClickEditing() {
-            var tile = (_tilePos == null) ? null : MPD_File.Tiles[_tilePos.Value.X, _tilePos.Value.Y];
+        private void OnMouseDownEditing(MouseEventArgs e) {
+            if (e.Button != MouseButtons.Left)
+                return;
+
+            _tileSelectedPos = _tileHoverPos;
+            var tile = (_tileSelectedPos == null) ? null : MPD_File.Tiles[_tileSelectedPos.Value.X, _tileSelectedPos.Value.Y];
             TilePropertiesControl.Tile = tile;
+            _tileSelectedNeedsUpdate = true;
+            Invalidate();
         }
 
         private void UpdateTilePosition() {
@@ -45,16 +52,17 @@ namespace SF3.Win.Controls {
                 pos = null;
 
             // Early exit if no change is necessary.
-            if (_tilePos == pos)
+            if (_tileHoverPos == pos)
                 return;
 
-            _tilePos = pos;
-            _surfaceEditor.UpdateTileModel(MPD_File, _world, _tilePos);
+            _tileHoverPos = pos;
+            _surfaceEditor.UpdateTileHoverModel(MPD_File, _world, _tileHoverPos);
 
             Invalidate();
         }
 
-        private Point? _tilePos = null;
+        private Point? _tileHoverPos = null;
+        private Point? _tileSelectedPos = null;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

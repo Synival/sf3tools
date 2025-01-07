@@ -313,6 +313,16 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap TileSelectedBmp {
+            get {
+                object obj = ResourceManager.GetObject("TileSelectedBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap TileWireframeBmp {
             get {
                 object obj = ResourceManager.GetObject("TileWireframeBmp", resourceCulture);

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SF3.Models.Files.MPD;
 using SF3.Win.OpenGL;
 using SF3.Win.OpenGL.MPD_File;
 
@@ -13,6 +14,7 @@ namespace SF3.Win.Controls {
             Resize    += (s, e) => OnResizeRendering();
             Paint     += (s, e) => OnPaintRendering();
             FrameTick += (s, e) => OnFrameTickRendering();
+            TileModified += (s, e) => OnTileModifiedRendering(s);
         }
 
         private void OnLoadRendering() {
@@ -69,6 +71,11 @@ namespace SF3.Win.Controls {
                 if (block.NeedsUpdate)
                     block.Update(MPD_File);
 
+            if (_tileSelectedNeedsUpdate) {
+                _surfaceEditor.UpdateTileSelectedModel(MPD_File, _world, _tileSelectedPos);
+                _tileSelectedNeedsUpdate = false;
+            }
+
             UpdateViewMatrix();
             foreach (var shader in _world.Shaders)
                 UpdateShaderViewMatrix(shader, _viewMatrix);
@@ -93,6 +100,15 @@ namespace SF3.Win.Controls {
                 _surfaceModelUpdateFrames--;
                 if (_surfaceModelUpdateFrames == 0)
                     UpdateSurfaceModels();
+            }
+        }
+
+        private void OnTileModifiedRendering(object sender) {
+            var tile = (Tile) sender;
+            if (_surfaceModel != null) {
+                _surfaceModel.Blocks[tile.BlockLocation.Num].Invalidate();
+                _tileSelectedNeedsUpdate = true;
+                Invalidate();
             }
         }
 
@@ -197,10 +213,17 @@ namespace SF3.Win.Controls {
             }
 
             using (_world.TextureShader.Use()) {
-                if (_surfaceEditor.TileModel != null) {
+                if (_surfaceEditor.TileSelectedModel != null) {
+                    GL.Disable(EnableCap.DepthTest);
+                    using (_surfaceEditor.TileSelectedTexture.Use())
+                        _surfaceEditor.TileSelectedModel.Draw(_world.TextureShader);
+                    GL.Enable(EnableCap.DepthTest);
+                }
+
+                if (_surfaceEditor.TileHoverModel != null) {
                     GL.Disable(EnableCap.DepthTest);
                     using (_surfaceEditor.TileHoverTexture.Use())
-                        _surfaceEditor.TileModel.Draw(_world.TextureShader);
+                        _surfaceEditor.TileHoverModel.Draw(_world.TextureShader);
                     GL.Enable(EnableCap.DepthTest);
                 }
 
@@ -315,6 +338,7 @@ namespace SF3.Win.Controls {
         }
 
         private int _surfaceModelUpdateFrames = 0;
+        private bool _tileSelectedNeedsUpdate = false;
 
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;
