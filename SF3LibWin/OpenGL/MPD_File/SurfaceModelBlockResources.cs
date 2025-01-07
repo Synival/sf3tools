@@ -12,6 +12,10 @@ namespace SF3.Win.OpenGL.MPD_File {
     public class SurfaceModelBlockResources : IDisposable {
         public SurfaceModelBlockResources(int blockNum) {
             BlockNum = blockNum;
+            TileX1 = (blockNum % 16) * 4;
+            TileY1 = 60 - ((blockNum / 16) * 4);
+            TileX2 = TileX1 + 4;
+            TileY2 = TileY1 + 4;
         }
 
         private bool _isInitialized = false;
@@ -81,8 +85,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             var surfaceSelectionQuads  = new List<Quad>();
 
             var textureData = mpdFile.SurfaceModel?.TileTextureRowTable?.Make2DTextureData();
-            for (var y = 0; y < SurfaceModelResources.WidthInTiles; y++) {
-                for (var x = 0; x < SurfaceModelResources.HeightInTiles; x++) {
+            for (var y = TileY1; y < TileY2; y++) {
+                for (var x = TileX1; x < TileX2; x++) {
                     var tile = mpdFile.Tiles[x, y];
 
                     TextureAnimation anim = null;
@@ -140,6 +144,10 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public int BlockNum { get; }
+        public int TileX1 { get; }
+        public int TileY1 { get; }
+        public int TileX2 { get; }
+        public int TileY2 { get; }
 
         public QuadModel Model { get; private set; } = null;
         public QuadModel UntexturedModel { get; private set; } = null;

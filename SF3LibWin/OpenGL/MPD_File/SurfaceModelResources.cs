@@ -1,4 +1,5 @@
 ﻿using System;
+using CommonLib.Utils;
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.OpenGL.MPD_File {
@@ -7,10 +8,10 @@ namespace SF3.Win.OpenGL.MPD_File {
         public const int HeightInTiles = 64;
 
         public SurfaceModelResources() {
-            Blocks = [
-                // TODO: all the blocks!
-                new SurfaceModelBlockResources(0)
-            ];
+            var numBlocks = 16 * 16;
+            Blocks = new SurfaceModelBlockResources[numBlocks];
+            for (var i = 0; i < numBlocks; i++)
+                Blocks[i] = new SurfaceModelBlockResources(i);
         }
 
         private bool _isInitialized = false;
