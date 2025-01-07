@@ -80,11 +80,9 @@ namespace SF3.Win.Controls {
             foreach (var shader in _world.Shaders)
                 UpdateShaderViewMatrix(shader, _viewMatrix);
 
-            using (_selectFramebuffer.Use(FramebufferTarget.Framebuffer)) {
+            using (_selectFramebuffer.Use()) {
                 GL.ClearColor(1, 1, 1, 1);
-                GL.Enable(EnableCap.CullFace);
                 DrawSelectionScene();
-                GL.Disable(EnableCap.CullFace);
             }
             UpdateTilePosition();
 

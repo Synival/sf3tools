@@ -9,13 +9,13 @@ namespace SF3.Win.OpenGL {
             Handle = GL.GenFramebuffer();
 
             // Attach the textures to the framebuffer.
-            GL.BindFramebuffer(FramebufferTarget.Framebuffer, Handle);
-            GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.ColorAttachment0, TextureTarget.Texture2D, ColorTexture.Handle, 0);
-            GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.StencilAttachment, TextureTarget.Texture2D, DepthStencilTexture.Handle, 0);
-            GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
+            using (Use()) {
+                GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.ColorAttachment0, TextureTarget.Texture2D, ColorTexture.Handle, 0);
+                GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.DepthStencilAttachment, TextureTarget.Texture2D, DepthStencilTexture.Handle, 0);
+            }
         }
 
-        public StackElement Use(FramebufferTarget framebufferTarget) {
+        public StackElement Use() {
             var state = State.GetCurrentState();
             if (state.FramebufferHandle == Handle)
                 return new StackElement();
@@ -23,11 +23,11 @@ namespace SF3.Win.OpenGL {
             var lastHandle = state.FramebufferHandle;
             return new StackElement(
                 () => {
-                    GL.BindFramebuffer(framebufferTarget, Handle);
+                    GL.BindFramebuffer(FramebufferTarget.Framebuffer, Handle);
                     state.FramebufferHandle = Handle;
                 },
                 () => {
-                    GL.BindFramebuffer(framebufferTarget, lastHandle);
+                    GL.BindFramebuffer(FramebufferTarget.Framebuffer, lastHandle);
                     state.FramebufferHandle = lastHandle;
                 }
             );

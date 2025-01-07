@@ -33,7 +33,7 @@ namespace SF3.Win.Controls {
             }
 
             var pixel = new byte[3];
-            using (_selectFramebuffer.Use(FramebufferTarget.ReadFramebuffer))
+            using (_selectFramebuffer.Use())
                 GL.ReadPixels(_mousePos.Value.X, Height - _mousePos.Value.Y - 1, 1, 1, PixelFormat.Rgb, PixelType.UnsignedByte, pixel);
 
             if (pixel[2] == 255)
