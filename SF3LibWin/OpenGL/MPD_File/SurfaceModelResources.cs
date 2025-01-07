@@ -82,16 +82,6 @@ namespace SF3.Win.OpenGL.MPD_File {
             var untexturedSurfaceQuads = new List<Quad>();
             var surfaceSelectionQuads  = new List<Quad>();
 
-            Vector3 GetVertexAbnormal(int tileX, int tileY, CornerType corner) {
-                var locations = GetBlockLocations(tileX, tileY, corner, true);
-                if (locations.Length == 0 || mpdFile.SurfaceModel?.VertexNormalBlockTable?.Rows == null)
-                    return new Vector3(0f, 1 / 32768f, 0f);
-
-                // The vertex abnormals SHOULD be the same, so just use the first one.
-                var loc = locations[0];
-                return mpdFile.SurfaceModel.VertexNormalBlockTable.Rows[loc.Num][loc.X, loc.Y].ToVector3();
-            };
-
             var textureData = mpdFile.SurfaceModel?.TileTextureRowTable?.Make2DTextureData();
             for (var y = 0; y < WidthInTiles; y++) {
                 for (var x = 0; x < HeightInTiles; x++) {
@@ -114,12 +104,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         }
                     }
 
-                    var vertexAbnormals = new Vector3[] {
-                        GetVertexAbnormal(x, y, CornerType.TopLeft),
-                        GetVertexAbnormal(x, y, CornerType.TopRight),
-                        GetVertexAbnormal(x, y, CornerType.BottomRight),
-                        GetVertexAbnormal(x, y, CornerType.BottomLeft),
-                    };
+                    var vertexAbnormals = tile.GetVertex3Abnormals();
                     var abnormalVboData = vertexAbnormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
                     var vertices = tile.GetSurfaceModelVertices();

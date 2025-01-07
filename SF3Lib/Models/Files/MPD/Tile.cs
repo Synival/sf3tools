@@ -1,6 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using CommonLib.SGL;
 using CommonLib.Types;
-using CommonLib.Utils;
 using SF3.Types;
 using static CommonLib.Utils.BlockHelpers;
 
@@ -10,6 +11,13 @@ namespace SF3.Models.Files.MPD {
             MPD_File = mpdFile;
             X = x;
             Y = y;
+            BlockLocation = GetTileBlockLocation(x, y);
+            BlockVertexLocations = ((CornerType[]) Enum.GetValues(typeof(CornerType)))
+                .Select(c => GetVertexBlockLocations(X, Y, c, true)[0])
+                .ToArray();
+            SharedBlockVertexLocations = ((CornerType[]) Enum.GetValues(typeof(CornerType)))
+                .Select(c => GetVertexBlockLocations(X, Y, c, false))
+                .ToArray();
         }
 
         public void UpdateAbnormals() {
@@ -29,20 +37,36 @@ namespace SF3.Models.Files.MPD {
             if (MPD_File.SurfaceModel?.VertexNormalBlockTable == null)
                 return new float[] { 0, 0, 0, 0 };
 
-            var blockLocations = new BlockVertexLocation[] {
-                GetBlockLocations(X, Y, CornerType.TopLeft,     true)[0],
-                GetBlockLocations(X, Y, CornerType.TopRight,    true)[0],
-                GetBlockLocations(X, Y, CornerType.BottomRight, true)[0],
-                GetBlockLocations(X, Y, CornerType.BottomLeft,  true)[0],
-            };
-            return blockLocations
+            return BlockVertexLocations
                 .Select(x => MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[x.Num][x.X, x.Y] / 16.0f)
                 .ToArray();
+        }
+
+        public VECTOR GetVertexAbnormal(CornerType corner) {
+            var locations = SharedBlockVertexLocations[(int) corner];
+            if (locations.Length == 0 || MPD_File.SurfaceModel?.VertexNormalBlockTable?.Rows == null)
+                return new VECTOR(0f, 1 / 32768f, 0f);
+
+            // The vertex abnormals SHOULD be the same, so just use the first one.
+            var loc = locations[0];
+            return MPD_File.SurfaceModel.VertexNormalBlockTable.Rows[loc.Num][loc.X, loc.Y];
+        }
+
+        public VECTOR[] GetVertexAbnormals() {
+            return new VECTOR[] {
+                GetVertexAbnormal(CornerType.TopLeft),
+                GetVertexAbnormal(CornerType.TopRight),
+                GetVertexAbnormal(CornerType.BottomRight),
+                GetVertexAbnormal(CornerType.BottomLeft),
+            };
         }
 
         public IMPD_File MPD_File { get; }
         public int X { get; }
         public int Y { get; }
+        public BlockTileLocation BlockLocation { get; }
+        public BlockVertexLocation[] BlockVertexLocations { get; }
+        public BlockVertexLocation[][] SharedBlockVertexLocations { get; }
 
         public TerrainType MoveTerrain {
             get => MPD_File.Surface.HeightTerrainRowTable.Rows[Y].GetTerrainType(X);
@@ -85,12 +109,12 @@ namespace SF3.Models.Files.MPD {
         }
 
         public float GetModelVertexHeightmap(CornerType corner) {
-            var bl = BlockHelpers.GetBlockLocations(X, Y, corner, true)[0];
+            var bl = BlockVertexLocations[(int) corner];
             return MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[bl.Num][bl.X, bl.Y] / 16f;
         }
 
         public void SetModelVertexHeightmap(CornerType corner, float value) {
-            var bls = BlockHelpers.GetBlockLocations(X, Y, corner, false);
+            var bls = SharedBlockVertexLocations[(int) corner];
             foreach (var bl in bls)
                 MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[bl.Num][bl.X, bl.Y] = (byte) (value * 16f);
         }

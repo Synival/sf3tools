@@ -52,7 +52,7 @@ namespace SF3.Models.Files.MPD.Objects {
                 return;
 
             var abnormal = heightmap.CalculateVertexAbnormal(vertexX, vertexY, calculationMethod);
-            var locations = GetBlockLocations(vertexX, vertexY);
+            var locations = GetVertexBlockLocations(vertexX, vertexY);
             UpdateVertexAbnormals(locations, abnormal);
         }
 
