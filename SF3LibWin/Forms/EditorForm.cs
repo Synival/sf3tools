@@ -31,6 +31,9 @@ namespace SF3.Win.Forms {
             tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
             Globals.UseDropdownsChanged += (s, e) => tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
 
+            tsmiFile_OpenPrevious.ShortcutKeyDisplayString = "Ctrl+Alt+,";
+            tsmiFile_OpenNext.ShortcutKeyDisplayString = "Ctrl+Alt+.";
+
             AttachFileLoader(FileLoader);
         }
 

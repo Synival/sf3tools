@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -38,6 +39,24 @@ namespace SF3.MPD_Editor.Forms {
                 if (tsi.Name == "tsmiScenario") {
                     MenuStrip.Items.Remove(tsi);
                     break;
+                }
+            }
+
+            // Scenario is auto-detected.
+            foreach (var i in MenuStrip.Items) {
+                if (i is ToolStripDropDownItem tsdd) {
+                    var itemsToRemove = new List<ToolStripItem>();
+                    foreach (var j in tsdd.DropDownItems) {
+                        var tsi = (ToolStripItem) j;
+                        if (tsi.Name == "tsmiFile_CopyTablesTo" ||
+                            tsi.Name == "tsmiFile_CopyTablesFrom" ||
+                            tsi.Name == "tsmiFile_CopyTablesSeparator"
+                        ) {
+                            itemsToRemove.Add(tsi);
+                        }
+                    }
+                    foreach (var tsi in itemsToRemove)
+                        tsdd.DropDownItems.Remove(tsi);
                 }
             }
 
