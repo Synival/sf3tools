@@ -9,7 +9,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         public SurfaceModelAllResources() {
             Blocks = [
                 // TODO: all the blocks!
-                new SurfaceModelResources(0)
+                new SurfaceModelBlockResources(0)
             ];
         }
 
@@ -57,6 +57,6 @@ namespace SF3.Win.OpenGL.MPD_File {
             Dispose(false);
         }
 
-        public SurfaceModelResources[] Blocks { get; }
+        public SurfaceModelBlockResources[] Blocks { get; }
     }
 }

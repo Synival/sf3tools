@@ -9,8 +9,8 @@ using SF3.Models.Files.MPD;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class SurfaceModelResources : IDisposable {
-        public SurfaceModelResources(int blockNum) {
+    public class SurfaceModelBlockResources : IDisposable {
+        public SurfaceModelBlockResources(int blockNum) {
             BlockNum = blockNum;
         }
 
@@ -39,7 +39,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GC.SuppressFinalize(this);
         }
 
-        ~SurfaceModelResources() {
+        ~SurfaceModelBlockResources() {
             if (!disposed)
                 System.Diagnostics.Debug.WriteLine(GetType().Name + ": GPU Resource leak! Did you forget to call Dispose()?");
             Dispose(false);
