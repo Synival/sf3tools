@@ -62,6 +62,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             SelectionModel = null;
 
             Models = null;
+
+            NeedsUpdate = false;
         }
 
         public void Update(IMPD_File mpdFile) {
@@ -141,7 +143,11 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
 
             Models = [.. models];
+            NeedsUpdate = false;
         }
+
+        public void Invalidate()
+            => NeedsUpdate = true;
 
         public int BlockNum { get; }
         public int TileX1 { get; }
@@ -154,5 +160,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         public QuadModel SelectionModel { get; private set; } = null;
 
         public DisposableList<QuadModel> Models { get; private set; } = null;
+
+        public bool NeedsUpdate { get; private set; } = true;
     }
 }

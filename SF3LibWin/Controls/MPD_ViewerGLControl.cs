@@ -76,9 +76,48 @@ namespace SF3.Win.Controls {
             FrameTick?.Invoke(this, EventArgs.Empty);
         }
 
+        private void OnTileModified(object sender, EventArgs e) {
+            var tile = (Tile) sender;
+            if (_surfaceModel != null) {
+                _surfaceModel.Blocks[tile.BlockLocation.Num].Invalidate();
+                Invalidate();
+            }
+        }
+
+        private void AttachListeners(IMPD_File mpdFile) {
+            for (var x = 0; x < mpdFile.Tiles.GetLength(0); x++)
+                for (var y = 0; y < mpdFile.Tiles.GetLength(1); y++)
+                    mpdFile.Tiles[x, y].Modified += OnTileModified;
+        }
+
+        private void DetachListeners(IMPD_File mpdFile) {
+            for (var x = 0; x < mpdFile.Tiles.GetLength(0); x++)
+                for (var y = 0; y < mpdFile.Tiles.GetLength(1); y++)
+                    mpdFile.Tiles[x, y].Modified -= OnTileModified;
+        }
+
+        private IMPD_File _mpdFile = null;
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IMPD_File MPD_File { get; set; } = null;
+        public IMPD_File MPD_File {
+            get => _mpdFile;
+            set {
+                if (_mpdFile == value)
+                    return;
+
+                if (_mpdFile != null)
+                    DetachListeners(_mpdFile);
+
+                _mpdFile = value;
+                if (_mpdFile != null) {
+                    AttachListeners(_mpdFile);
+                    _surfaceModel?.Invalidate();
+                }
+
+                Invalidate();
+            }
+        }
 
         public delegate void CmdKeyEventHandler(object sender, ref Message msg, Keys keyData, ref bool wasProcessed);
 

@@ -65,6 +65,10 @@ namespace SF3.Win.Controls {
         private void OnPaintRendering() {
             MakeCurrent();
 
+            foreach (var block in _surfaceModel.Blocks)
+                if (block.NeedsUpdate)
+                    block.Update(MPD_File);
+
             UpdateViewMatrix();
             foreach (var shader in _world.Shaders)
                 UpdateShaderViewMatrix(shader, _viewMatrix);

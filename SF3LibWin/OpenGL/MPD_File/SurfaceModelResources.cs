@@ -34,6 +34,11 @@ namespace SF3.Win.OpenGL.MPD_File {
                 block.Update(mpdFile);
         }
 
+        public void Invalidate() {
+            foreach (var block in Blocks)
+                block.Invalidate();
+        }
+
         private bool disposed = false;
         protected virtual void Dispose(bool disposing) {
             if (disposed)

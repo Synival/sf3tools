@@ -55,10 +55,7 @@ namespace SF3.Win.Controls {
             void PerformUpdate(Action action, bool updatesModel = true) {
                 if (_updatingControls > 0)
                     return;
-
                 action();
-                if (updatesModel)
-                    ModelUpdated?.Invoke(this, EventArgs.Empty);
             }
 
             void SetMoveHeight(float value) {
@@ -94,10 +91,8 @@ namespace SF3.Win.Controls {
                 }
                 _updatingControls--;
 
-                if (cbLinkHeightmaps.Checked || (_tile.MPD_File.SurfaceModel != null && _tile.ModelUseMoveHeightmap)) {
+                if (cbLinkHeightmaps.Checked || (_tile.MPD_File.SurfaceModel != null && _tile.ModelUseMoveHeightmap))
                     UpdateAbnormalsForCorner(corner);
-                    ModelUpdated?.Invoke(this, EventArgs.Empty);
-                }
             }
 
             void SetModelVertexHeightmap(CornerType corner, float value) {
@@ -116,7 +111,6 @@ namespace SF3.Win.Controls {
                 _updatingControls--;
 
                 UpdateAbnormalsForCorner(corner);
-                ModelUpdated?.Invoke(this, EventArgs.Empty);
             }
 
             cbMoveTerrain.SelectedValueChanged         += (s, e) => PerformUpdate(() => _tile.MoveTerrain = (TerrainType) cbMoveTerrain.SelectedValue, false);
@@ -343,8 +337,6 @@ namespace SF3.Win.Controls {
                 }
             }
         }
-
-        public EventHandler ModelUpdated;
 
         private Tile _tile = null;
 

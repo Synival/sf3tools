@@ -9,8 +9,6 @@ namespace SF3.Win.Controls {
             InitializeComponent();
 
             GLControl.TilePropertiesControl = tilePropertyControl1;
-            tilePropertyControl1.ModelUpdated += (s, e) => GLControl.UpdateSurfaceModelsIn(8);
-
             Disposed += (s, e) => GLControl.Dispose();
 
             tsbToggleWireframe.Checked = GLControl.DrawWireframe;
