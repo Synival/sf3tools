@@ -30,7 +30,7 @@ namespace SF3.Models.Files.MPD {
 
         public float[] GetSurfaceModelVertexHeights() {
             // For any tile whose character/texture ID has flag 0x80, the walking heightmap is used.
-            if (MPD_File.Surface?.HeightmapRowTable != null && ModelUseMoveHeightmap)
+            if (MPD_File.Surface?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && ModelUseMoveHeightmap)
                 return MPD_File.Surface?.HeightmapRowTable.Rows[Y].GetHeights(X);
 
             // Otherwise, gather heights from the 5x5 block with the surface mesh's heightmap.
@@ -148,6 +148,9 @@ namespace SF3.Models.Files.MPD {
                 MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[bl.Num][bl.X, bl.Y] = (byte) (value * 16f);
             Modified?.Invoke(this, EventArgs.Empty);
         }
+
+        public float GetAverageHeight()
+            => (float) Math.Round(((CornerType[]) Enum.GetValues(typeof(CornerType))).Average(x => GetMoveHeightmap(x) * 16f)) / 16f;
 
         public EventHandler Modified;
     }
