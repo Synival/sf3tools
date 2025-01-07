@@ -43,12 +43,10 @@ namespace SF3.Models.Files.MPD {
         }
 
         public VECTOR GetVertexAbnormal(CornerType corner) {
-            var locations = SharedBlockVertexLocations[(int) corner];
-            if (locations.Length == 0 || MPD_File.SurfaceModel?.VertexNormalBlockTable?.Rows == null)
+            if (MPD_File.SurfaceModel?.VertexNormalBlockTable?.Rows == null)
                 return new VECTOR(0f, 1 / 32768f, 0f);
 
-            // The vertex abnormals SHOULD be the same, so just use the first one.
-            var loc = locations[0];
+            var loc = BlockVertexLocations[(int) corner];
             return MPD_File.SurfaceModel.VertexNormalBlockTable.Rows[loc.Num][loc.X, loc.Y];
         }
 
@@ -91,6 +89,11 @@ namespace SF3.Models.Files.MPD {
         public byte ModelTextureID {
             get => MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].GetTextureID(X);
             set => MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].SetTextureID(X, value);
+        }
+
+        public byte ModelTextureFlags {
+            get => MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].GetTextureFlags(X);
+            set => MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].SetTextureFlags(X, value);
         }
 
         public TextureFlipType ModelTextureFlip {

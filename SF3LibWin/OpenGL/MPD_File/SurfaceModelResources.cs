@@ -91,11 +91,10 @@ namespace SF3.Win.OpenGL.MPD_File {
                     byte textureFlags = 0;
 
                     if (textureData != null) {
-                        var key = textureData[x, y];
-                        var textureId = textureData[x, y] & 0xFF;
-                        textureFlags = (byte) (textureData[x, y] >> 8 & 0xFF);
-
                         // Get texture. Fetch animated textures if possible.
+                        var textureId = tile.ModelTextureID;
+                        textureFlags = tile.ModelTextureFlags;
+
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
                             if (animationsById.ContainsKey(textureId))
                                 anim = new TextureAnimation(textureId, animationsById[textureId]);
@@ -127,7 +126,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var models = new List<QuadModel>();
 
             if (surfaceQuads.Count > 0) {
-                this.Model = new QuadModel(surfaceQuads.ToArray());
+                Model = new QuadModel(surfaceQuads.ToArray());
                 models.Add(this.Model);
             }
             if (untexturedSurfaceQuads.Count > 0) {
