@@ -24,7 +24,7 @@ namespace SF3.Win.Controls {
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             _world         = new WorldResources();
-            _surfaceModel  = new SurfaceModelResources();
+            _surfaceModel  = new SurfaceModelAllResources();
             _surfaceEditor = new SurfaceEditorResources();
 
             _world.Init();
@@ -158,54 +158,61 @@ namespace SF3.Win.Controls {
         private void DrawScene() {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            if (_surfaceModel.Model != null || _surfaceModel.UntexturedModel != null) {
-                if (_drawNormals) {
-                    using (_world.NormalsShader.Use()) {
-                        _surfaceModel.Model?.Draw(_world.NormalsShader, false);
-                        _surfaceModel.UntexturedModel?.Draw(_world.NormalsShader, false);
+            if (_drawNormals) {
+                using (_world.NormalsShader.Use()) {
+                    foreach (var block in _surfaceModel.Blocks) {
+                        if (block.Model != null || block.UntexturedModel != null) {
+                            block.Model?.Draw(_world.NormalsShader, false);
+                            block.UntexturedModel?.Draw(_world.NormalsShader, false);
+                        }
                     }
                 }
-                else
-                    _surfaceModel.Model?.Draw(_world.ObjectShader);
+            }
+            else {
+                using (_world.ObjectShader.Use())
+                    foreach (var block in _surfaceModel.Blocks)
+                        block.Model?.Draw(_world.ObjectShader);
+            }
 
-                if (DrawWireframe) {
-                    GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-                    GL.DepthFunc(DepthFunction.Lequal);
+            if (DrawWireframe) {
+                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+                GL.DepthFunc(DepthFunction.Lequal);
 
-                    using (_world.WireframeShader.Use())
-                    using (_world.TileWireframeTexture.Use(TextureUnit.Texture1)) {
-                        UpdateShaderModelMatrix(_world.WireframeShader, Matrix4.CreateTranslation(0f, 0.02f, 0f));
-                        _surfaceModel.UntexturedModel?.Draw(_world.WireframeShader, false);
-                        _surfaceModel.Model?.Draw(_world.WireframeShader, false);
-                        UpdateShaderModelMatrix(_world.WireframeShader, Matrix4.Identity);
+                using (_world.WireframeShader.Use())
+                using (_world.TileWireframeTexture.Use(TextureUnit.Texture1)) {
+                    UpdateShaderModelMatrix(_world.WireframeShader, Matrix4.CreateTranslation(0f, 0.02f, 0f));
+                    foreach (var block in _surfaceModel.Blocks) {
+                        block.UntexturedModel?.Draw(_world.WireframeShader, false);
+                        block.Model?.Draw(_world.WireframeShader, false);
                     }
-
-                    GL.DepthFunc(DepthFunction.Less);
-                    GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+                    UpdateShaderModelMatrix(_world.WireframeShader, Matrix4.Identity);
                 }
 
-                using (_world.TextureShader.Use()) {
-                    if (_surfaceEditor.TileModel != null) {
-                        GL.Disable(EnableCap.DepthTest);
-                        using (_surfaceEditor.TileHoverTexture.Use())
-                            _surfaceEditor.TileModel.Draw(_world.TextureShader);
-                        GL.Enable(EnableCap.DepthTest);
-                    }
+                GL.DepthFunc(DepthFunction.Less);
+                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            }
 
-                    if (DrawHelp && _surfaceEditor.HelpModel != null) {
-                        const float c_viewSize = 0.20f;
-                        UpdateShaderViewMatrix(_world.TextureShader,
-                            Matrix4.CreateScale((float) Height / Width * 2f * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
-                            Matrix4.CreateTranslation(1, -1, 0) *
-                            _projectionMatrix.Inverted());
+            using (_world.TextureShader.Use()) {
+                if (_surfaceEditor.TileModel != null) {
+                    GL.Disable(EnableCap.DepthTest);
+                    using (_surfaceEditor.TileHoverTexture.Use())
+                        _surfaceEditor.TileModel.Draw(_world.TextureShader);
+                    GL.Enable(EnableCap.DepthTest);
+                }
 
-                        GL.Disable(EnableCap.DepthTest);
-                        using (_surfaceEditor.HelpTexture.Use())
-                            _surfaceEditor.HelpModel.Draw(_world.TextureShader);
-                        GL.Enable(EnableCap.DepthTest);
+                if (DrawHelp && _surfaceEditor.HelpModel != null) {
+                    const float c_viewSize = 0.20f;
+                    UpdateShaderViewMatrix(_world.TextureShader,
+                        Matrix4.CreateScale((float) Height / Width * 2f * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
+                        Matrix4.CreateTranslation(1, -1, 0) *
+                        _projectionMatrix.Inverted());
 
-                        UpdateShaderViewMatrix(_world.TextureShader, _viewMatrix);
-                    }
+                    GL.Disable(EnableCap.DepthTest);
+                    using (_surfaceEditor.HelpTexture.Use())
+                        _surfaceEditor.HelpModel.Draw(_world.TextureShader);
+                    GL.Enable(EnableCap.DepthTest);
+
+                    UpdateShaderViewMatrix(_world.TextureShader, _viewMatrix);
                 }
             }
 
@@ -232,15 +239,24 @@ namespace SF3.Win.Controls {
 
         private void DrawSelectionScene() {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            if (_surfaceModel.SelectionModel != null)
-                _surfaceModel.SelectionModel.Draw(_world.SolidShader);
+            if (_surfaceModel?.Blocks == null)
+                return;
+            using (_world.SolidShader.Use())
+                foreach (var block in _surfaceModel.Blocks)
+                    if (block.SelectionModel != null)
+                        block.SelectionModel.Draw(_world.SolidShader);
         }
 
         private void UpdateAnimatedTextures() {
+            // The clock is at 60fps, but the animations change at 30fps, so skip every other frame.
             if (_frame % 2 == 0)
                 return;
-            if (_surfaceModel?.Model?.UpdateAnimatedTextures() == true)
-                Invalidate();
+
+            if (_surfaceModel?.Blocks == null)
+                return;
+            foreach (var block in _surfaceModel.Blocks)
+                if (block.Model?.UpdateAnimatedTextures() == true)
+                    Invalidate();
         }
 
         private static bool _drawWireframe = true;
@@ -300,7 +316,7 @@ namespace SF3.Win.Controls {
         private Matrix4 _viewMatrix;
 
         private WorldResources _world = null;
-        private SurfaceModelResources _surfaceModel = null;
+        private SurfaceModelAllResources _surfaceModel = null;
         private SurfaceEditorResources _surfaceEditor = null;
         private Framebuffer _selectFramebuffer;
     }

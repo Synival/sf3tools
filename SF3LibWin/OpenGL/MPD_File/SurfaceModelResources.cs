@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using CommonLib;
 using CommonLib.Extensions;
-using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Win.Extensions;
-using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class SurfaceModelResources {
-        public const int WidthInTiles = 64;
-        public const int HeightInTiles = 64;
+    public class SurfaceModelResources : IDisposable {
+        public SurfaceModelResources(int blockNum) {
+            BlockNum = blockNum;
+        }
 
         private bool _isInitialized = false;
         public void Init() {
@@ -83,8 +81,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             var surfaceSelectionQuads  = new List<Quad>();
 
             var textureData = mpdFile.SurfaceModel?.TileTextureRowTable?.Make2DTextureData();
-            for (var y = 0; y < WidthInTiles; y++) {
-                for (var x = 0; x < HeightInTiles; x++) {
+            for (var y = 0; y < SurfaceModelAllResources.WidthInTiles; y++) {
+                for (var x = 0; x < SurfaceModelAllResources.HeightInTiles; x++) {
                     var tile = mpdFile.Tiles[x, y];
 
                     TextureAnimation anim = null;
@@ -118,7 +116,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         untexturedSurfaceQuads.Add(newQuad);
                     }
 
-                    var selectionColor = new Vector3(x / (float) WidthInTiles, y / (float) HeightInTiles, 0);
+                    var selectionColor = new Vector3(x / (float) SurfaceModelAllResources.WidthInTiles, y / (float) SurfaceModelAllResources.HeightInTiles, 0);
                     surfaceSelectionQuads.Add(new Quad(vertices, selectionColor));
                 }
             }
@@ -140,6 +138,8 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             Models = [.. models];
         }
+
+        public int BlockNum { get; }
 
         public QuadModel Model { get; private set; } = null;
         public QuadModel UntexturedModel { get; private set; } = null;

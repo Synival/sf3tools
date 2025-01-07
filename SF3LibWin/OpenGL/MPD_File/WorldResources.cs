@@ -4,8 +4,8 @@ using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class WorldResources : IDisposable {
-        public const float ModelOffsetX = SurfaceModelResources.WidthInTiles / -2f;
-        public const float ModelOffsetZ = SurfaceModelResources.HeightInTiles / -2f;
+        public const float ModelOffsetX = SurfaceModelAllResources.WidthInTiles / -2f;
+        public const float ModelOffsetZ = SurfaceModelAllResources.HeightInTiles / -2f;
 
         private bool _isInitialized = false;
         public void Init() {

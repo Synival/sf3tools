@@ -7,7 +7,7 @@ using SF3.Win.Extensions;
 using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class SurfaceEditorResources {
+    public class SurfaceEditorResources : IDisposable {
         private bool _isInitialized = false;
         public void Init() {
             if (_isInitialized)
