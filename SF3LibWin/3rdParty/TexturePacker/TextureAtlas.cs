@@ -115,7 +115,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             // TODO: just get the correct dimensinos for this thing...
             Bitmap atlas = new Bitmap(MaxX, MaxY);
             DrawPackedNodes(atlas);
-            return atlas.Trim(true) ?? new Bitmap(16, 16, PixelFormat.Format32bppArgb);
+            return atlas.Trim(true, true) ?? new Bitmap(16, 16, PixelFormat.Format32bppArgb);
         }
 
         public void DrawPackedNodes(Bitmap atlas) {

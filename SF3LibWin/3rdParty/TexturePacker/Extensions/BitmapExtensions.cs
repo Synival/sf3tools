@@ -11,9 +11,10 @@ namespace SF3.Win.ThirdParty.TexturePacker.Extensions {
         /// <summary>
         /// Returns a new Bitmap with trimmed content, or 'null' if no non-zero data is present.
         /// </summary>
+        /// <param name="ignoreTopLeft">Doesn't trim the upper-left corner.</param>
         /// <param name="source">The Bitmap to trim.</param>
         /// <returns>A new Bitmap with trimmed content, or 'null' if no non-zero data is present.</returns>
-        public static Bitmap Trim(this Bitmap source, bool clampToPow2 = false) {
+        public static Bitmap Trim(this Bitmap source, bool ignoreTopLeft, bool clampToPow2) {
             Rectangle srcRect = default;
             BitmapData data = null;
 
@@ -22,9 +23,9 @@ namespace SF3.Win.ThirdParty.TexturePacker.Extensions {
                 byte[] buffer = new byte[data.Height * data.Stride];
                 Marshal.Copy(data.Scan0, buffer, 0, buffer.Length);
 
-                int xMin = int.MaxValue;
+                int xMin = ignoreTopLeft ? 0 : int.MaxValue;
                 int xMax = 0;
-                int yMin = int.MaxValue;
+                int yMin = ignoreTopLeft ? 0 : int.MaxValue;
                 int yMax = 0;
                 for (int y = 0; y < data.Height; y++) {
                     for (int x = 0; x < data.Width; x++) {
