@@ -3,6 +3,7 @@ using System.Drawing;
 using CommonLib;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
+using SF3.Win.Extensions;
 using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD_File {
@@ -72,7 +73,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             TileModel = null;
 
             if (tilePos != null) {
-                var quad = new Quad(SurfaceModelResources.GetTileVertices(mpdFile, tilePos.Value));
+                var tile = mpdFile.Tiles[tilePos.Value.X, tilePos.Value.Y];
+                var quad = new Quad(tile.GetSurfaceModelVertices());
                 Models.Add(TileModel = new QuadModel([quad]));
             }
         }

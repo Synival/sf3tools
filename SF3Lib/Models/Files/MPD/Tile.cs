@@ -1,7 +1,8 @@
-﻿using System;
+﻿using System.Linq;
 using CommonLib.Types;
 using CommonLib.Utils;
 using SF3.Types;
+using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Models.Files.MPD {
     public class Tile {
@@ -17,6 +18,26 @@ namespace SF3.Models.Files.MPD {
                 MPD_File.Surface.HeightmapRowTable,
                 POLYGON_NormalCalculationMethod.MostExtremeVerticalTriangle
             );
+        }
+
+        public float[] GetSurfaceModelVertexHeights() {
+            // For any tile whose character/texture ID has flag 0x80, the walking heightmap is used.
+            if (MPD_File.Surface?.HeightmapRowTable != null && ModelUseMoveHeightmap)
+                return MPD_File.Surface?.HeightmapRowTable.Rows[Y].GetHeights(X);
+
+            // Otherwise, gather heights from the 5x5 block with the surface mesh's heightmap.
+            if (MPD_File.SurfaceModel?.VertexNormalBlockTable == null)
+                return new float[] { 0, 0, 0, 0 };
+
+            var blockLocations = new BlockVertexLocation[] {
+                GetBlockLocations(X, Y, CornerType.TopLeft,     true)[0],
+                GetBlockLocations(X, Y, CornerType.TopRight,    true)[0],
+                GetBlockLocations(X, Y, CornerType.BottomRight, true)[0],
+                GetBlockLocations(X, Y, CornerType.BottomLeft,  true)[0],
+            };
+            return blockLocations
+                .Select(x => MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[x.Num][x.X, x.Y] / 16.0f)
+                .ToArray();
         }
 
         public IMPD_File MPD_File { get; }

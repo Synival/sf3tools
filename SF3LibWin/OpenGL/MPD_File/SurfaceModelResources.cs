@@ -47,36 +47,6 @@ namespace SF3.Win.OpenGL.MPD_File {
             Dispose(false);
         }
 
-        public static Vector3[] GetTileVertices(IMPD_File mpdFile, Point pos) {
-            float[] heights;
-
-            // For any tile whose character/texture ID has flag 0x80, the walking heightmap is used.
-            if (mpdFile.Surface?.HeightmapRowTable != null && (mpdFile.SurfaceModel?.TileTextureRowTable?.Rows[pos.Y]?.GetTextureFlags(pos.X) & 0x80) == 0x80)
-                heights = mpdFile.Surface?.HeightmapRowTable.Rows[pos.Y].GetHeights(pos.X);
-            // Otherwise, gather heights from the 5x5 block with the surface mesh's heightmap.
-            else if (mpdFile.SurfaceModel?.VertexHeightBlockTable != null) {
-                var blockLocations = new BlockVertexLocation[] {
-                    GetBlockLocations(pos.X, pos.Y, CornerType.TopLeft,     true)[0],
-                    GetBlockLocations(pos.X, pos.Y, CornerType.TopRight,    true)[0],
-                    GetBlockLocations(pos.X, pos.Y, CornerType.BottomRight, true)[0],
-                    GetBlockLocations(pos.X, pos.Y, CornerType.BottomLeft,  true)[0],
-                };
-
-                heights = blockLocations
-                    .Select(x => mpdFile.SurfaceModel.VertexHeightBlockTable.Rows[x.Num][x.X, x.Y] / 16.0f)
-                    .ToArray();
-            }
-            else
-                heights = [0, 0, 0, 0];
-
-            return [
-                (pos.X + 0 + WorldResources.ModelOffsetX, heights[0], pos.Y + 0 + WorldResources.ModelOffsetZ),
-                (pos.X + 1 + WorldResources.ModelOffsetX, heights[1], pos.Y + 0 + WorldResources.ModelOffsetZ),
-                (pos.X + 1 + WorldResources.ModelOffsetX, heights[2], pos.Y + 1 + WorldResources.ModelOffsetZ),
-                (pos.X + 0 + WorldResources.ModelOffsetX, heights[3], pos.Y + 1 + WorldResources.ModelOffsetZ)
-            ];
-        }
-
         public void Reset() {
             Models?.Dispose();
             Models?.Clear();
@@ -125,6 +95,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             var textureData = mpdFile.SurfaceModel?.TileTextureRowTable?.Make2DTextureData();
             for (var y = 0; y < WidthInTiles; y++) {
                 for (var x = 0; x < HeightInTiles; x++) {
+                    var tile = mpdFile.Tiles[x, y];
+
                     TextureAnimation anim = null;
                     byte textureFlags = 0;
 
@@ -150,7 +122,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     };
                     var abnormalVboData = vertexAbnormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
-                    var vertices = GetTileVertices(mpdFile, new Point(x, y));
+                    var vertices = tile.GetSurfaceModelVertices();
                     if (anim != null) {
                         var newQuad = new Quad(vertices, anim, textureFlags);
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, abnormalVboData));

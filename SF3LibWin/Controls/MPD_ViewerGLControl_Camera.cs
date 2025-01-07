@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using OpenTK.Mathematics;
+using SF3.Win.Extensions;
 using SF3.Win.OpenGL.MPD_File;
 
 namespace SF3.Win.Controls {
@@ -56,7 +57,8 @@ namespace SF3.Win.Controls {
             if (!_tilePos.HasValue)
                 return null;
 
-            var tileVertices = SurfaceModelResources.GetTileVertices(MPD_File, _tilePos.Value);
+            var tile = MPD_File.Tiles[_tilePos.Value.X, _tilePos.Value.Y];
+            var tileVertices = tile.GetSurfaceModelVertices();
             var target = new Vector3(
                 _tilePos.Value.X + WorldResources.ModelOffsetX + 0.5f,
                 tileVertices.Select(x => x.Y).Average(),

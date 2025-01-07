@@ -259,12 +259,6 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private TextureModel GetTextureModelByID(int textureId) {
-            if (TextureCollections == null)
-                return null;
-            return TextureCollections.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x.Rows).FirstOrDefault(x => x.ID == textureId);
-        }
-
         // TODO: refactor this mess!!
         private void BuildTextureAnimFrameData() {
             if (ChunkData[3] == null)
@@ -276,6 +270,12 @@ namespace SF3.Models.Files.MPD {
                 Chunk3Frames.Clear();
 
             var chunk3Textures = new Dictionary<uint, ITexture>();
+
+            TextureModel GetTextureModelByID(int textureId) {
+                if (TextureCollections == null)
+                    return null;
+                return TextureCollections.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x.Rows).FirstOrDefault(x => x.ID == textureId);
+            }
 
             foreach (var anim in TextureAnimations.Rows) {
                 foreach (var frame in anim.Frames) {
