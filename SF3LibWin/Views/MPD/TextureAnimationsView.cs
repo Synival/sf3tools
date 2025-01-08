@@ -3,15 +3,15 @@ using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
-using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
+using SF3.Models.Tables.MPD;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.MPD {
     public class TextureAnimationsView : ControlSpaceView {
-        public TextureAnimationsView(string name, IMPD_File model, INameGetterContext nameGetterContext) : base(name) {
+        public TextureAnimationsView(string name, TextureAnimationTable model, INameGetterContext nameGetterContext) : base(name) {
             Model       = model;
-            TableView   = new TableView("Animations", model.TextureAnimations, nameGetterContext);
+            TableView   = new TableView("Animations", model, nameGetterContext);
             TextureView = new TextureView("Texture");
 
             _timer = new Timer() { Interval = 250 };
@@ -70,7 +70,7 @@ namespace SF3.Win.Views.MPD {
             _timer.Interval = (int) currentFrame.Duration * 1000 / 30;
         }
 
-        public IMPD_File Model { get; }
+        public TextureAnimationTable Model { get; }
         public TableView TableView { get; private set; }
         public TextureView TextureView { get; private set; }
 

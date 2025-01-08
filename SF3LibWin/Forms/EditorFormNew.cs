@@ -486,14 +486,14 @@ namespace SF3.Win.Forms {
         /// </summary>
         protected virtual bool OnLoad() => true;
 
-        private string _baseTitle;
+        private string _baseTitle = null;
 
         /// <summary>
         /// The title of the Form without the version string, without any loaded file.
         /// </summary>
         public string BaseTitle => _baseTitle;
 
-        private string _versionTitle;
+        private string _versionTitle = null;
 
         /// <summary>
         /// The title of the Form with the version string, without any loaded file.

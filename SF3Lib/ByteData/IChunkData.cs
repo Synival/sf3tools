@@ -5,5 +5,10 @@
         /// When 'false', Recompress() will throw and setting 'NeedsRecompression' to 'true' will throw as well.
         /// </summary>
         bool IsCompressed { get; }
+
+        /// <summary>
+        /// Index of the Chunk in the file.
+        /// </summary>
+        int Index { get; }
     }
 }

@@ -7,14 +7,15 @@ using SF3.Models.Tables.MPD.TextureCollection;
 
 namespace SF3.Models.Files.MPD.Objects {
     public class TextureCollection : TableFile {
-        protected TextureCollection(IByteData data, INameGetterContext nameContext, int address, string name)
+        protected TextureCollection(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex)
         : base(data, nameContext) {
-            Address = address;
-            Name    = name;
+            Address    = address;
+            Name       = name;
+            ChunkIndex = chunkIndex;
         }
 
-        public static TextureCollection Create(IByteData data, INameGetterContext nameContext, int address, string name) {
-            var newFile = new TextureCollection(data, nameContext, address, name);
+        public static TextureCollection Create(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex) {
+            var newFile = new TextureCollection(data, nameContext, address, name, chunkIndex);
             newFile.Init();
             return newFile;
         }
@@ -33,6 +34,7 @@ namespace SF3.Models.Files.MPD.Objects {
         public string Name { get; }
 
         public int Address { get; }
+        public int? ChunkIndex { get; }
 
 
         [BulkCopyRecurse]

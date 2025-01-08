@@ -1,9 +1,9 @@
 ﻿using System.Windows.Forms;
-using SF3.Models.Files.MPD;
+using SF3.Models.Files.MPD.Objects;
 
 namespace SF3.Win.Views.MPD {
     public class SurfaceView : TabView {
-        public SurfaceView(string name, IMPD_File model) : base(name) {
+        public SurfaceView(string name, Surface model) : base(name) {
             Model = model;
         }
 
@@ -12,15 +12,13 @@ namespace SF3.Win.Views.MPD {
                 return null;
 
             var ngc = Model.NameGetterContext;
-
-            CreateChild(new TableView("Textures",              Model.SurfaceModel?.TileTextureRowTable, ngc));
-            CreateChild(new TableView("Heightmap",             Model.Surface?.HeightmapRowTable, ngc));
-            CreateChild(new TableView("Height + Terrain Type", Model.Surface?.HeightTerrainRowTable, ngc));
-            CreateChild(new TableView("Event IDs",             Model.Surface?.EventIDRowTable, ngc));
+            CreateChild(new TableView("Heightmap",             Model.HeightmapRowTable, ngc));
+            CreateChild(new TableView("Height + Terrain Type", Model.HeightTerrainRowTable, ngc));
+            CreateChild(new TableView("Event IDs",             Model.EventIDRowTable, ngc));
 
             return Control;
         }
 
-        public IMPD_File Model { get; }
+        public Surface Model { get; }
     }
 }

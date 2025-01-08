@@ -11,14 +11,15 @@ using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Models.Files.MPD.Objects {
     public class SurfaceModel : TableFile {
-        protected SurfaceModel(IByteData data, INameGetterContext nameContext, int address, string name)
+        protected SurfaceModel(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex)
         : base(data, nameContext) {
-            Address = address;
-            Name    = name;
+            Address    = address;
+            Name       = name;
+            ChunkIndex = chunkIndex;
         }
 
-        public static SurfaceModel Create(IByteData data, INameGetterContext nameContext, int address, string name) {
-            var newFile = new SurfaceModel(data, nameContext, address, name);
+        public static SurfaceModel Create(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex) {
+            var newFile = new SurfaceModel(data, nameContext, address, name, chunkIndex);
             newFile.Init();
             return newFile;
         }
@@ -99,6 +100,7 @@ namespace SF3.Models.Files.MPD.Objects {
         public string Name { get; }
 
         public int Address { get; }
+        public int? ChunkIndex { get; }
 
         [BulkCopyRecurse]
         public TileTextureRowTable TileTextureRowTable { get; private set; }

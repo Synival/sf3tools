@@ -149,9 +149,9 @@ namespace SF3.Models.Files.MPD {
         private IChunkData[] MakeChunkDatas(ChunkHeader[] chunks) {
             ChunkData = new IChunkData[chunks.Length];
 
-            _surfaceChunkIndex = GetSurfaceChunkIndex(chunks);
-            if (_surfaceChunkIndex != null)
-                ChunkData[_surfaceChunkIndex.Value] = MakeChunkData(_surfaceChunkIndex.Value, false);
+            SurfaceModelChunkIndex = GetSurfaceChunkIndex(chunks);
+            if (SurfaceModelChunkIndex != null)
+                ChunkData[SurfaceModelChunkIndex.Value] = MakeChunkData(SurfaceModelChunkIndex.Value, false);
 
             if (chunks[3].Exists)
                 ChunkData[3] = MakeChunkData(3, false, "Individually Compressed");
@@ -178,7 +178,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private IChunkData MakeChunkData(int chunkIndex, bool chunkIsCompressed, string compressionType = null) {
-            var newChunk = new ChunkData(new ByteArraySegment(Data.Data, ChunkHeader.Rows[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader.Rows[chunkIndex].ChunkSize), chunkIsCompressed);
+            var newChunk = new ChunkData(new ByteArraySegment(Data.Data, ChunkHeader.Rows[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader.Rows[chunkIndex].ChunkSize), chunkIsCompressed, chunkIndex);
             var chunkHeader = ChunkHeader.Rows[chunkIndex];
 
             chunkHeader.DecompressedSize = newChunk.DecompressedData.Length;
@@ -234,12 +234,12 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             if (chunkDatas[5] != null) {
-                Surface = Surface.Create(chunkDatas[5].DecompressedData, NameGetterContext, 0x00, "Surface");
+                Surface = Surface.Create(chunkDatas[5].DecompressedData, NameGetterContext, 0x00, "Surface", 5);
                 tables.AddRange(Surface.Tables);
             }
 
             if (surfaceModelChunk != null) {
-                SurfaceModel = SurfaceModel.Create(surfaceModelChunk.DecompressedData, NameGetterContext, 0x00, "SurfaceModel");
+                SurfaceModel = SurfaceModel.Create(surfaceModelChunk.DecompressedData, NameGetterContext, 0x00, "SurfaceModel", surfaceModelChunk.Index);
                 tables.AddRange(SurfaceModel.Tables);
             }
 
@@ -247,7 +247,7 @@ namespace SF3.Models.Files.MPD {
             for (var i = 0; i < TextureCollections.Length; i++) {
                 var chunkIndex = i + 6;
                 if (chunkDatas[chunkIndex]?.Length > 0) {
-                    TextureCollections[i] = TextureCollection.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureCollection" + (i + 1));
+                    TextureCollections[i] = TextureCollection.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureCollection" + (i + 1), chunkIndex);
                     tables.AddRange(TextureCollections[i].Tables);
                 }
             }
@@ -458,7 +458,7 @@ namespace SF3.Models.Files.MPD {
 
         public IChunkData[] ChunkData { get; private set; }
 
-        public IChunkData SurfaceChunkData => (_surfaceChunkIndex.HasValue) ? ChunkData[_surfaceChunkIndex.Value] : null;
+        public IChunkData SurfaceChunkData => (SurfaceModelChunkIndex.HasValue) ? ChunkData[SurfaceModelChunkIndex.Value] : null;
 
         [BulkCopyRecurse]
         public MPDHeaderTable MPDHeader { get; private set; }
@@ -489,13 +489,13 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public Surface Surface { get; private set; }
 
+        public int? SurfaceModelChunkIndex { get; private set; } = null;
+
         [BulkCopyRecurse]
         public SurfaceModel SurfaceModel { get; private set; }
 
         [BulkCopyRecurse]
         public TextureCollection[] TextureCollections { get; private set; }
-
-        private int? _surfaceChunkIndex = null;
 
         public Tile[,] Tiles { get; } = new Tile[64, 64];
     }

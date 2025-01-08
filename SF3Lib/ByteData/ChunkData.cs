@@ -5,11 +5,12 @@ using CommonLib.SGL;
 
 namespace SF3.ByteData {
     public class ChunkData : IChunkData {
-        public ChunkData(IByteArray byteArray, bool chunkIsCompressed) {
+        public ChunkData(IByteArray byteArray, bool chunkIsCompressed, int index) {
             if (byteArray == null)
                 throw new NullReferenceException(nameof(byteArray));
 
             IsCompressed = chunkIsCompressed;
+            Index        = index;
 
             if (chunkIsCompressed) {
                 CompressedData = new CompressedData(byteArray);
@@ -78,6 +79,7 @@ namespace SF3.ByteData {
         }
 
         public bool IsCompressed { get; }
+        public int Index { get; }
         private ICompressedData CompressedData { get; }
         private IByteData ChildData { get; }
         public IByteData DecompressedData { get; }

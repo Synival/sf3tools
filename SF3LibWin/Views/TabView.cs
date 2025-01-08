@@ -20,6 +20,7 @@ namespace SF3.Win.Views {
             tabControl.SuspendLayout();
             tabControl.Name = "tabsControlView" + (s_controlIndex++);
             tabControl.TabIndex = 1;
+            tabControl.Multiline = true;
             tabControl.ResumeLayout();
 
             // Helper function to get a tab page with the same name.
