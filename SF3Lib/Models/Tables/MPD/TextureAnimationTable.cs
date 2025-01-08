@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 
@@ -28,6 +29,8 @@ namespace SF3.Models.Tables.MPD {
                 },
                 (currentRows, model) => model.TextureID != _frameEndId && model.TextureID != _textureEndId, addEndModel: false);
         }
+
+        public IEnumerable<object> Where(Func<object, bool> value) => throw new NotImplementedException();
 
         public bool Is32Bit { get; }
 

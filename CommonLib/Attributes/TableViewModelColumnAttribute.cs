@@ -5,7 +5,7 @@ namespace CommonLib.Attributes {
     public class TableViewModelColumnAttribute : Attribute {
         public TableViewModelColumnAttribute(
             string displayName   = null,
-            int    displayOrder  = 0,
+            float  displayOrder  = 0f,
             string displayFormat = null,
             bool   isPointer     = false,
             int    minWidth      = 0,

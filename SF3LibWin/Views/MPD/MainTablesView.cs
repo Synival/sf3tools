@@ -2,8 +2,8 @@
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
-    public class MPD_MainTablesView : TabView {
-        public MPD_MainTablesView(string name, IMPD_File model) : base(name) {
+    public class MainTablesView : TabView {
+        public MainTablesView(string name, IMPD_File model) : base(name) {
             Model = model;
         }
 

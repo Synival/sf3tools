@@ -2,8 +2,8 @@ using System.Windows.Forms;
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
-    public class MPD_DataView : TabView {
-        public MPD_DataView(string name, IMPD_File model) : base(name) {
+    public class DataView : TabView {
+        public DataView(string name, IMPD_File model) : base(name) {
             Model = model;
         }
 
@@ -11,8 +11,8 @@ namespace SF3.Win.Views.MPD {
             if (base.Create() == null)
                 return null;
 
-            CreateChild(new MPD_MainTablesView("Main Tables", Model));
-            CreateChild(new MPD_ChunksView("Chunks", Model));
+            CreateChild(new MainTablesView("Main Tables", Model));
+            CreateChild(new ChunksView("Chunks", Model));
 
             return Control;
         }

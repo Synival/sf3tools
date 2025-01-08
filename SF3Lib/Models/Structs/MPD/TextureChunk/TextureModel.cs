@@ -12,8 +12,10 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         private readonly int heightAddress;
         private readonly int imageDataOffsetAddress;
 
-        public TextureModel(IByteData data, int id, string name, int address, int? nextImageDataOffset = null)
+        public TextureModel(IByteData data, int id, string name, int address, int? chunkIndex, int? nextImageDataOffset)
         : base(data, id, name, address, GlobalSize) {
+            ChunkIndex = chunkIndex;
+
             widthAddress           = Address;     // 1 byte
             heightAddress          = Address + 1; // 1 byte
             imageDataOffsetAddress = Address + 2; // 2 bytes
@@ -64,6 +66,9 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 return false;
             }
         }
+
+        [TableViewModelColumn(displayOrder: -2.5f, displayName: "Chunk #")]
+        public int? ChunkIndex { get; }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0)]

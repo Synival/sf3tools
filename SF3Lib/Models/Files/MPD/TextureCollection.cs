@@ -26,7 +26,7 @@ namespace SF3.Models.Files.MPD.Objects {
 
             return new List<ITable>() {
                 TextureHeaderTable,
-                (TextureTable = TextureTable.Create(Data, 0x04, header.NumTextures, header.TextureIdStart)),
+                (TextureTable = TextureTable.Create(Data, 0x04, header.NumTextures, header.TextureIdStart, ChunkIndex)),
             };
         }
 

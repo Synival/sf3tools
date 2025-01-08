@@ -5,8 +5,8 @@ using System.Windows.Forms;
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
-    public class MPD_ChunksView : TabView {
-        public MPD_ChunksView(string name, IMPD_File model) : base(name) {
+    public class ChunksView : TabView {
+        public ChunksView(string name, IMPD_File model) : base(name) {
             Model = model;
         }
 

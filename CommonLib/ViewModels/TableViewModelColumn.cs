@@ -1,6 +1,6 @@
 ﻿namespace CommonLib.ViewModels {
     public class TableViewModelColumn {
-        public TableViewModelColumn(string displayName, int displayOrder, string displayFormat, bool isPointer, int minWidth, bool isReadOnly) {
+        public TableViewModelColumn(string displayName, float displayOrder, string displayFormat, bool isPointer, int minWidth, bool isReadOnly) {
             DisplayName   = displayName;
             DisplayOrder  = displayOrder;
             DisplayFormat = displayFormat;
@@ -10,7 +10,7 @@
         }
 
         public string DisplayName { get; }
-        public int DisplayOrder { get; }
+        public float DisplayOrder { get; }
         public string DisplayFormat { get; }
         public bool IsPointer { get; }
         public int MinWidth { get; }

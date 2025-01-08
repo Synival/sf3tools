@@ -20,7 +20,10 @@ namespace SF3.Win.Views.MPD {
 
             TabControl.Selected += UpdateViewer;
 
-            CreateChild(new MPD_DataView("Data", Model));
+            CreateChild(new LightingView("Lighting", Model));
+            CreateChild(new TexturesView("Textures", Model));
+
+            CreateChild(new DataView("Data (only modify if you know what you're doing!)", Model));
 
             return Control;
         }
