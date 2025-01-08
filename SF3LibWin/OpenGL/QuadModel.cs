@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.ThirdParty.TexturePacker;
 
 namespace SF3.Win.OpenGL {
@@ -35,16 +37,17 @@ namespace SF3.Win.OpenGL {
             // Create the VBO.
             var quadAttrs = quads[0].Attributes.Select(x => new VBO_Attribute(x.Elements, x.Type, x.Name)).ToDictionary(x => x.Name);
 
-            var expectedAttrs = new VBO_Attribute[] {
+            var expectedAttrs = new List<VBO_Attribute>() {
                 new VBO_Attribute(1, ActiveAttribType.FloatVec3, "position"),
                 new VBO_Attribute(1, ActiveAttribType.FloatVec3, "color"),
-                new VBO_Attribute(1, ActiveAttribType.FloatVec2, "texCoord0"),
-                new VBO_Attribute(1, ActiveAttribType.FloatVec2, "texCoord1"),
-            }.ToDictionary(x => x.Name);
+                new VBO_Attribute(1, ActiveAttribType.FloatVec2, Shader.GetTextureInfo(TextureUnit.Texture0).TexCoordName),
+                new VBO_Attribute(1, ActiveAttribType.FloatVec2, Shader.GetTextureInfo(TextureUnit.Texture1).TexCoordName),
+            };
+            if (_textureAtlas != null)
+                expectedAttrs.Add(new VBO_Attribute(1, ActiveAttribType.FloatVec2, Shader.GetTextureInfo(MPD_TextureUnit.TextureAtlas).TexCoordName));
 
-            foreach (var ea in expectedAttrs)
-                if (!quadAttrs.ContainsKey(ea.Key))
-                    quadAttrs.Add(ea.Key, ea.Value);
+            foreach (var ea in expectedAttrs.Where(ea => !quadAttrs.ContainsKey(ea.Name)).ToList())
+                quadAttrs.Add(ea.Name, ea);
 
             _vbo = new VBO(quadAttrs.Select(x => x.Value).ToArray());
 
@@ -54,8 +57,8 @@ namespace SF3.Win.OpenGL {
             foreach (var polyAttrName in polyAttrNames)
                 AssignVertexBuffer(polyAttrName);
 
-            for (var i = 0; i < 4; i++)
-                AssignVertexBufferDefaultTexCoords(i);
+            foreach (var texInfo in Shader.TextureInfos)
+                AssignVertexBufferDefaultTexCoords(texInfo);
 
             _ = AssignVertexBufferAtlasTexCoords();
 
@@ -113,7 +116,7 @@ namespace SF3.Win.OpenGL {
             if (_texture == null)
                 return false;
 
-            var vboAttr = _vbo.GetAttributeByName("texCoord0");
+            var vboAttr = _vbo.GetAttributeByName(Shader.GetTextureInfo(MPD_TextureUnit.TextureAtlas).TexCoordName);
             if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
                 return false;
 
@@ -140,8 +143,8 @@ namespace SF3.Win.OpenGL {
             return modified;
         }
 
-        private void AssignVertexBufferDefaultTexCoords(int index) {
-            var vboAttr = _vbo.GetAttributeByName("texCoord" + index);
+        private void AssignVertexBufferDefaultTexCoords(Shader.TextureInfo texInfo) {
+            var vboAttr = _vbo.GetAttributeByName(texInfo.TexCoordName);
             if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
                 return;
 
@@ -181,11 +184,14 @@ namespace SF3.Win.OpenGL {
             return result;
         }
 
-        public void Draw(Shader shader, bool withTextures = true) {
+        public void Draw(Shader shader)
+            => Draw(shader, _texture);
+
+        public void Draw(Shader shader, Texture textureAtlas) {
             using (_vao.Use())
                 shader.AssignAttributes(_vbo);
 
-            using (withTextures ? _texture?.Use() : null)
+            using ((textureAtlas != null) ? textureAtlas.Use(MPD_File.MPD_TextureUnit.TextureAtlas) : null)
             using (_vao.Use())
             using (_ebo.Use(BufferTarget.ElementArrayBuffer))
             using (shader.Use())

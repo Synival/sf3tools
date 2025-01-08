@@ -155,10 +155,10 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized string similar to #version 330 core
         ///
-        ///uniform sampler2D texture0;
+        ///uniform sampler2D textureAtlas;
         ///
         ///in vec3 colorFrag;
-        ///in vec2 texCoord0Frag;
+        ///in vec2 texCoordAtlasFrag;
         ///in vec3 glowFrag;
         ///in float lightingFrag;
         ///
@@ -166,7 +166,7 @@ namespace SF3.Win.Properties {
         ///
         ///void main() {
         ///    FragColor =
-        ///        texture(texture0, texCoord0Frag) * vec4(colorFrag, 1.0)
+        ///        texture(textureAtlas, texCoordAtlasFrag) * vec4(colorFrag, 1.0)
         ///      + vec4(glowFrag, 0.0)
         ///      + vec4(vec3(1.0, 1.0, 0.5) * lightingFrag * 0.2, 0);
         ///}
@@ -187,19 +187,19 @@ namespace SF3.Win.Properties {
         ///
         ///layout (location = 0) in vec3 position;
         ///layout (location = 1) in vec3 color;
-        ///layout (location = 2) in vec2 texCoord0;
+        ///layout (location = 2) in vec2 texCoordAtlas;
         ///layout (location = 3) in vec3 glow;
         ///layout (location = 4) in vec3 normal;
         ///
         ///out vec3 colorFrag;
-        ///out vec2 texCoord0Frag;
+        ///out vec2 texCoordAtlasFrag;
         ///out vec3 glowFrag;
         ///out float lightingFrag;
         ///
         ///void main() {
         ///    gl_Position   = projection * view * model * vec4(position, 1.0);
         ///    colorFrag     = color;
-        ///    texCoord0Frag [rest of string was truncated]&quot;;.
+        ///    texCo [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectVert {
             get {

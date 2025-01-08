@@ -2,9 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenTK.Graphics.OpenGL;
+using SF3.Win.OpenGL.MPD_File;
 
 namespace SF3.Win.OpenGL {
     public class Shader : IDisposable {
+        public class TextureInfo {
+            public TextureInfo(int texIndex, TextureUnit texUnit, string uniformName, string texCoordName) {
+                TexIndex     = texIndex;
+                TexUnit      = texUnit;
+                UniformName  = uniformName;
+                TexCoordName = texCoordName;
+            }
+
+            public int TexIndex { get; }
+            public TextureUnit TexUnit { get; }
+            public string UniformName { get; }
+            public string TexCoordName { get; }
+        };
+
+        public static readonly TextureInfo[] TextureInfos = [
+            new TextureInfo(0, TextureUnit.Texture0, "texture0",           "texCoord0"),
+            new TextureInfo(1, TextureUnit.Texture1, "texture1",           "texCoord1"),
+            new TextureInfo(2, TextureUnit.Texture2, "texture2",           "texCoord2"),
+            new TextureInfo(3, TextureUnit.Texture3, "texture3",           "texCoord3"),
+            new TextureInfo(4, TextureUnit.Texture4, "textureAtlas",       "texCoordAtlas"),
+            new TextureInfo(5, TextureUnit.Texture5, "textureTerrainType", "texCoordTerrainType"),
+            new TextureInfo(6, TextureUnit.Texture6, "textureEventID",     "texCoordEventID"),
+        ];
+
+        public static TextureInfo GetTextureInfo(MPD_TextureUnit texUnit)
+            => GetTextureInfo((TextureUnit) texUnit);
+
+        public static TextureInfo GetTextureInfo(TextureUnit texUnit)
+            => TextureInfos.FirstOrDefault(x => x.TexUnit == texUnit);
+
         public Shader(string vertexShaderSource, string fragmentShaderSource) {
             var vertexShaderHandle = GL.CreateShader(ShaderType.VertexShader);
             GL.ShaderSource(vertexShaderHandle, vertexShaderSource);
@@ -44,10 +75,10 @@ namespace SF3.Win.OpenGL {
 
             using (Use()) {
                 // Texture uniforms need to be set.
-                for (int i = 0; i < 4; i++) {
-                    var handle = GL.GetUniformLocation(Handle, "texture" + i);
+                foreach (var texInfo in TextureInfos) {
+                    var handle = GL.GetUniformLocation(Handle, texInfo.UniformName);
                     if (handle >= 0)
-                        GL.Uniform1(handle, i);
+                        GL.Uniform1(handle, texInfo.TexIndex);
                 }
 
                 // Get all shader attributes.

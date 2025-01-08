@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using OpenTK.Graphics.OpenGL;
+using SF3.Win.OpenGL.MPD_File;
 
 namespace SF3.Win.OpenGL {
     public class Texture : IDisposable {
@@ -60,6 +61,9 @@ namespace SF3.Win.OpenGL {
 
             GL.TexImage2D(TextureTarget.Texture2D, 0, internalFormat, width, height, 0, format, pixelType, 0);
         }
+
+        public StackElement Use(MPD_TextureUnit activeTexture)
+            => Use((TextureUnit) activeTexture);
 
         public StackElement Use(TextureUnit activeTexture = TextureUnit.Texture0) {
             var state = State.GetCurrentState();

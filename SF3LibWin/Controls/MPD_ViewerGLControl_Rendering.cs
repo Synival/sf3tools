@@ -180,8 +180,8 @@ namespace SF3.Win.Controls {
                 using (_world.NormalsShader.Use()) {
                     foreach (var block in _surfaceModel.Blocks) {
                         if (block.Model != null || block.UntexturedModel != null) {
-                            block.Model?.Draw(_world.NormalsShader, false);
-                            block.UntexturedModel?.Draw(_world.NormalsShader, false);
+                            block.Model?.Draw(_world.NormalsShader, null);
+                            block.UntexturedModel?.Draw(_world.NormalsShader, null);
                         }
                     }
                 }
@@ -200,8 +200,8 @@ namespace SF3.Win.Controls {
                 using (_world.TileWireframeTexture.Use(TextureUnit.Texture1)) {
                     UpdateShaderModelMatrix(_world.WireframeShader, Matrix4.CreateTranslation(0f, 0.02f, 0f));
                     foreach (var block in _surfaceModel.Blocks) {
-                        block.UntexturedModel?.Draw(_world.WireframeShader, false);
-                        block.Model?.Draw(_world.WireframeShader, false);
+                        block.UntexturedModel?.Draw(_world.WireframeShader, null);
+                        block.Model?.Draw(_world.WireframeShader, null);
                     }
                     UpdateShaderModelMatrix(_world.WireframeShader, Matrix4.Identity);
                 }
