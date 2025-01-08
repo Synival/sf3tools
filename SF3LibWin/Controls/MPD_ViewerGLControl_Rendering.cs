@@ -351,7 +351,7 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private static bool _drawTerrainTypes = true;
+        private static bool _drawTerrainTypes = false;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -372,7 +372,7 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private static bool _drawEventIds = true;
+        private static bool _drawEventIds = false;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

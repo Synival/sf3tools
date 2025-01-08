@@ -64,9 +64,11 @@ namespace SF3.Win.Controls {
 
         private void InitToolstrip() {
             var state = AppState.RetrieveAppState();
-            _drawWireframe = state.ViewerDrawWireframe;
-            _drawHelp      = state.ViewerDrawHelp;
-            _drawNormals   = state.ViewerDrawNormals;
+            _drawWireframe    = state.ViewerDrawWireframe;
+            _drawHelp         = state.ViewerDrawHelp;
+            _drawNormals      = state.ViewerDrawNormals;
+            _drawTerrainTypes = state.ViewerDrawTerrainTypes;
+            _drawEventIds     = state.ViewerDrawEventIDs;
         }
 
         private void IncrementFrame() {
