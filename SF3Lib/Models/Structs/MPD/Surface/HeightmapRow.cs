@@ -19,22 +19,27 @@ namespace SF3.Models.Structs.MPD.Surface {
         }
 
         public float GetHeight(int x, CornerType corner) {
+            // Heights are clockwise from bottom-right.
             switch (corner) {
+                case CornerType.BottomLeft:
+                    return Data.GetByte(xAddress[x] + 1) / 16.0f;
                 case CornerType.TopLeft:
                     return Data.GetByte(xAddress[x] + 2) / 16.0f;
                 case CornerType.TopRight:
                     return Data.GetByte(xAddress[x] + 3) / 16.0f;
                 case CornerType.BottomRight:
                     return Data.GetByte(xAddress[x] + 0) / 16.0f;
-                case CornerType.BottomLeft:
-                    return Data.GetByte(xAddress[x] + 1) / 16.0f;
                 default:
                     throw new ArgumentException(nameof(corner));
             }
         }
 
         public void SetHeight(int x, CornerType corner, float value) {
+            // Heights are clockwise from bottom-right.
             switch (corner) {
+                case CornerType.BottomLeft:
+                    Data.SetByte(xAddress[x] + 1, (byte) (value * 16f));
+                    break;
                 case CornerType.TopLeft:
                     Data.SetByte(xAddress[x] + 2, (byte) (value * 16f));
                     break;
@@ -44,40 +49,40 @@ namespace SF3.Models.Structs.MPD.Surface {
                 case CornerType.BottomRight:
                     Data.SetByte(xAddress[x] + 0, (byte) (value * 16f));
                     break;
-                case CornerType.BottomLeft:
-                    Data.SetByte(xAddress[x] + 1, (byte) (value * 16f));
-                    break;
                 default:
                     throw new ArgumentException(nameof(corner));
             }
         }
 
-        public float[] GetHeights(int x)
-            => ConvertHeightsToFloatArray(this[x]);
+        public float[] GetQuadHeights(int x)
+            => ConvertQuadHeightsToFloatArray(this[x]);
 
-        public void SetHeights(int x, float[] heights) {
+        public void SetQuadHeights(int x, float[] heights) {
             if (heights.Length != 4)
                 throw new ArgumentException(nameof(heights));
-            this[x] = ConvertFloatArrayToHeights(heights);
+            this[x] = ConvertFloatArrayToQuadHeights(heights);
         }
 
-        public static float[] ConvertHeightsToFloatArray(uint heights) {
+        public static float[] ConvertQuadHeightsToFloatArray(uint heights) {
+            // Heights are clockwise from bottom-right.
             return new[] {
-                ((heights >>  8) & 0xFF) / 16f,
-                ((heights >>  0) & 0xFF) / 16f,
-                ((heights >> 24) & 0xFF) / 16f,
                 ((heights >> 16) & 0xFF) / 16f,
+                ((heights >> 24) & 0xFF) / 16f,
+                ((heights >>  0) & 0xFF) / 16f,
+                ((heights >>  8) & 0xFF) / 16f,
             };
         }
 
-        public static uint ConvertFloatArrayToHeights(float[] heights) {
+        public static uint ConvertFloatArrayToQuadHeights(float[] heights) {
             if (heights.Length != 4)
                 throw new ArgumentException(nameof(heights));
+
+            // Heights are clockwise from bottom-right.
             return
-                ((((uint) (heights[0] * 16f)) & 0xFF) << 8) +
-                ((((uint) (heights[1] * 16f)) & 0xFF) << 0) +
-                ((((uint) (heights[2] * 16f)) & 0xFF) << 24) +
-                ((((uint) (heights[3] * 16f)) & 0xFF) << 16);
+                ((((uint) (heights[0] * 16f)) & 0xFF) << 16) +
+                ((((uint) (heights[1] * 16f)) & 0xFF) << 24) +
+                ((((uint) (heights[2] * 16f)) & 0xFF) <<  0) +
+                ((((uint) (heights[3] * 16f)) & 0xFF) <<  8);
         }
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {

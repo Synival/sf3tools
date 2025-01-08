@@ -18,8 +18,8 @@ namespace SF3.Models.Tables.MPD.SurfaceModel {
             return LoadUntilMax((id, address) => {
                 // Ignore address; this table is in a special order:
                 // [Y:16, X:16][Y:4, X:4]
-                var block = (63 - id) / 4;
-                var y = (63 - id) % 4;
+                var block = id / 4;
+                var y = id % 4;
                 address = Address + (block * 256 + y * 4) * 2;
                 return new TileTextureRow(Data, id, "Y" + id.ToString("D2"), address);
             });

@@ -77,10 +77,10 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             var x2 = node.Rect.Right  / widthf;
             var y2 = node.Rect.Bottom / heightf;
 
-            var tl = new Vector2(x1, y1);
-            var tr = new Vector2(x2, y1);
-            var br = new Vector2(x2, y2);
-            var bl = new Vector2(x1, y2);
+            var tl = new Vector2(x1, y2);
+            var tr = new Vector2(x2, y2);
+            var br = new Vector2(x2, y1);
+            var bl = new Vector2(x1, y1);
 
             // Flip UV coordinates for rotated textures in the TextureAtlas.
             if (node.Rotated)
@@ -105,7 +105,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             else if (flipVert)
                 (tl, tr, br, bl) = (bl, br, tr, tl);
 
-            return [tl, tr, br, bl];
+            return [bl, br, tr, tl];
         }
 
         public Bitmap CreateBitmap() {

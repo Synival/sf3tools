@@ -16,7 +16,7 @@ namespace SF3.Models.Tables.MPD.Surface {
 
         public override bool Load() {
             var size = new HeightTerrainRow(Data, 0, "", Address).Size;
-            return LoadUntilMax((id, address) => new HeightTerrainRow(Data, id, "Y" + id.ToString("D2"), Address + (63 - id) * size));
+            return LoadUntilMax((id, address) => new HeightTerrainRow(Data, id, "Y" + id.ToString("D2"), Address + id * size));
         }
 
         public override int? MaxSize => 64;

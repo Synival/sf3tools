@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using CommonLib.SGL;
@@ -77,11 +78,8 @@ namespace SF3.Models.Files.MPD.Objects {
         public void UpdateVertexAbnormals(int tileX, int tileY, HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod) {
             if (heightmap == null)
                 return;
-
-            UpdateVertexAbnormal(tileX, tileY, CornerType.TopLeft,     heightmap, calculationMethod);
-            UpdateVertexAbnormal(tileX, tileY, CornerType.TopRight,    heightmap, calculationMethod);
-            UpdateVertexAbnormal(tileX, tileY, CornerType.BottomRight, heightmap, calculationMethod);
-            UpdateVertexAbnormal(tileX, tileY, CornerType.BottomLeft,  heightmap, calculationMethod);
+            foreach (var c in (CornerType[]) Enum.GetValues(typeof(CornerType)))
+                UpdateVertexAbnormal(tileX, tileY, c, heightmap, calculationMethod);
         }
 
         /// <summary>

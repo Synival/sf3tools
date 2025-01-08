@@ -74,7 +74,7 @@ namespace SF3.Win.Controls {
         }
 
         private void tsbRecalculateLightmapOriginalMath_Click(object sender, EventArgs e) {
-            MPD_File?.SurfaceModel?.UpdateVertexAbnormals(MPD_File.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.TopLeftTriangle);
+            MPD_File?.SurfaceModel?.UpdateVertexAbnormals(MPD_File.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.TopRightTriangle);
             UpdateModels();
         }
 

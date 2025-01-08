@@ -4,9 +4,9 @@
     /// </summary>
     public enum POLYGON_NormalCalculationMethod {
         /// <summary>
-        /// (Shining Force 3 method) Only uses the top-left triangle.
+        /// (Shining Force 3 method) Only uses the top-right triangle.
         /// </summary>
-        TopLeftTriangle,
+        TopRightTriangle,
 
         /// <summary>
         /// Gathers all corner triangles for each corner, averages them, and normalizes them.

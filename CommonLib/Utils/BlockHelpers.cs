@@ -6,7 +6,6 @@ namespace CommonLib.Utils {
     /// <summary>
     /// Helper functions for dealing with blocks, which have their own coordinate system.
     /// Each block is a 5x5 grid of vertices. The blocks themselves are arranged in a 16x16 grid.
-    /// The Y coordinate is upside-down.
     /// The edges of adjacent blocks (should) have shared values.
     /// </summary>
     public static class BlockHelpers {
@@ -53,7 +52,7 @@ namespace CommonLib.Utils {
         /// <param name="tileY">Y coordinate of the requested tile.</param>
         /// <returns>The block number for the requested tile.</returns>
         public static int TileToBlockNum(int tileX, int tileY)
-            => (tileX / 4) + ((63 - tileY) / 4) * 16;
+            => (tileX / 4) + (tileY / 4) * 16;
 
         /// <summary>
         /// Converts a tile X coordinate and corner to a tile coordinate within a block.
@@ -69,7 +68,7 @@ namespace CommonLib.Utils {
         /// <param name="tileY">Y coordinate of the requested tile.</param>
         /// <returns>A Y coordinate within the block.</returns>
         public static int TileToBlockY(int tileY)
-            => (63 - tileY) % 4;
+            => tileY % 4;
 
         /// <summary>
         /// Converts a tile X coordinate and corner to a vertex coordinate.
@@ -78,7 +77,7 @@ namespace CommonLib.Utils {
         /// <param name="corner">Corner of the tile referenced by 'tileX'.</param>
         /// <returns>A vertex X coordinate.</returns>
         public static int TileToVertexX(int tileX, CornerType corner)
-            => tileX + corner.GetX();
+            => tileX + corner.GetVertexOffsetX();
 
         /// <summary>
         /// Converts a tile Y coordinate and corner to a vertex coordinate.
@@ -87,7 +86,7 @@ namespace CommonLib.Utils {
         /// <param name="corner">Corner of the tile referenced by 'tileY'.</param>
         /// <returns>A vertex Y coordinate.</returns>
         public static int TileToVertexY(int tileY, CornerType corner)
-            => 64 - (tileY + corner.GetY());
+            => tileY + corner.GetVertexOffsetY();
 
         /// <summary>
         /// Converts a tile position to a block location.
@@ -96,7 +95,6 @@ namespace CommonLib.Utils {
         /// <param name="tileY">Y coordinate of a tile.</param>
         /// <returns>A block tile location for the tile.</returns>
         public static BlockTileLocation GetTileBlockLocation(int tileX, int tileY)
-            // Get the vertex position for the entire mesh. Blocks are upside-down, so correct for this.
             => new BlockTileLocation { Num = TileToBlockNum(tileX, tileY), X = TileToBlockX(tileX), Y = TileToBlockY(tileY) };
 
         /// <summary>
@@ -108,8 +106,7 @@ namespace CommonLib.Utils {
         /// <param name="onlyInBlock">If 'true', only the location in the block belonging to 'tileX' and 'tileY' will be returned.</param>
         /// <returns>A set of shared block vertex locations for the tile's corner.</returns>
         public static BlockVertexLocation[] GetVertexBlockLocations(int tileX, int tileY, CornerType corner, bool onlyInBlock = false)
-            // Get the vertex position for the entire mesh. Blocks are upside-down, so correct for this.
-            => GetVertexBlockLocations(tileX + corner.GetX(), 64 - (tileY + corner.GetY()), onlyInBlock ? TileToBlockNum(tileX, tileY) : (int?) null);
+            => GetVertexBlockLocations(tileX + corner.GetVertexOffsetX(), tileY + corner.GetVertexOffsetY(), onlyInBlock ? TileToBlockNum(tileX, tileY) : (int?) null);
 
         /// <summary>
         /// Converts a vertex position to a set of shared block locations.

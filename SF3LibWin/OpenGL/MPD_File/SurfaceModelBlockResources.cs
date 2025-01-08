@@ -13,7 +13,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         public SurfaceModelBlockResources(int blockNum) {
             BlockNum = blockNum;
             TileX1 = (blockNum % 16) * 4;
-            TileY1 = 60 - ((blockNum / 16) * 4);
+            TileY1 = (blockNum / 16) * 4;
             TileX2 = TileX1 + 4;
             TileY2 = TileY1 + 4;
         }
@@ -119,10 +119,10 @@ namespace SF3.Win.OpenGL.MPD_File {
                     var ttX2 = ttX1 + 0.25f;
                     var ttY2 = ttY1 + 0.25f;
                     var terrainTypeVboData = new float[4, 2] {
-                        { ttX1, ttY1 },
-                        { ttX2, ttY1 },
-                        { ttX2, ttY2 },
                         { ttX1, ttY2 },
+                        { ttX2, ttY2 },
+                        { ttX2, ttY1 },
+                        { ttX1, ttY1 },
                     };
 
                     var eventId = (int) tile.EventID;
@@ -131,10 +131,10 @@ namespace SF3.Win.OpenGL.MPD_File {
                     var eidX2 = eidX1 + 0.0625f;
                     var eidY2 = eidY1 + 0.0625f;
                     var eventIdVboData = new float[4, 2] {
-                        { eidX1, eidY1 },
-                        { eidX2, eidY1 },
-                        { eidX2, eidY2 },
                         { eidX1, eidY2 },
+                        { eidX2, eidY2 },
+                        { eidX2, eidY1 },
+                        { eidX1, eidY1 },
                     };
 
                     var vertices = tile.GetSurfaceModelVertices();

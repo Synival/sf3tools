@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.SGL;
 using CommonLib.Types;
@@ -13,11 +14,9 @@ namespace SF3.Models.Files.MPD {
             Y = y;
             BlockLocation = GetTileBlockLocation(x, y);
             BlockVertexLocations = ((CornerType[]) Enum.GetValues(typeof(CornerType)))
-                .Select(c => GetVertexBlockLocations(X, Y, c, true)[0])
-                .ToArray();
+                .ToDictionary(c => c, c => GetVertexBlockLocations(X, Y, c, true)[0]);
             SharedBlockVertexLocations = ((CornerType[]) Enum.GetValues(typeof(CornerType)))
-                .Select(c => GetVertexBlockLocations(X, Y, c, false))
-                .ToArray();
+                .ToDictionary(c => c, c => GetVertexBlockLocations(X, Y, c, false));
         }
 
         public void UpdateAbnormals() {
@@ -31,13 +30,13 @@ namespace SF3.Models.Files.MPD {
         public float[] GetSurfaceModelVertexHeights() {
             // For any tile whose character/texture ID has flag 0x80, the walking heightmap is used.
             if (MPD_File.Surface?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && ModelUseMoveHeightmap)
-                return MPD_File.Surface?.HeightmapRowTable.Rows[Y].GetHeights(X);
+                return MPD_File.Surface?.HeightmapRowTable.Rows[Y].GetQuadHeights(X);
 
             // Otherwise, gather heights from the 5x5 block with the surface mesh's heightmap.
             if (MPD_File.SurfaceModel?.VertexNormalBlockTable == null)
                 return new float[] { 0, 0, 0, 0 };
 
-            return BlockVertexLocations
+            return BlockVertexLocations.Values
                 .Select(x => MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[x.Num][x.X, x.Y] / 16.0f)
                 .ToArray();
         }
@@ -46,25 +45,21 @@ namespace SF3.Models.Files.MPD {
             if (MPD_File.SurfaceModel?.VertexNormalBlockTable?.Rows == null)
                 return new VECTOR(0f, 1 / 32768f, 0f);
 
-            var loc = BlockVertexLocations[(int) corner];
+            var loc = BlockVertexLocations[corner];
             return MPD_File.SurfaceModel.VertexNormalBlockTable.Rows[loc.Num][loc.X, loc.Y];
         }
 
         public VECTOR[] GetVertexAbnormals() {
-            return new VECTOR[] {
-                GetVertexAbnormal(CornerType.TopLeft),
-                GetVertexAbnormal(CornerType.TopRight),
-                GetVertexAbnormal(CornerType.BottomRight),
-                GetVertexAbnormal(CornerType.BottomLeft),
-            };
+            return ((CornerType[]) Enum.GetValues(typeof(CornerType)))
+                .Select(c => GetVertexAbnormal(c)).ToArray();
         }
 
         public IMPD_File MPD_File { get; }
         public int X { get; }
         public int Y { get; }
         public BlockTileLocation BlockLocation { get; }
-        public BlockVertexLocation[] BlockVertexLocations { get; }
-        public BlockVertexLocation[][] SharedBlockVertexLocations { get; }
+        public Dictionary<CornerType, BlockVertexLocation> BlockVertexLocations { get; }
+        public Dictionary<CornerType, BlockVertexLocation[]> SharedBlockVertexLocations { get; }
 
         public TerrainType MoveTerrain {
             get => MPD_File.Surface.HeightTerrainRowTable.Rows[Y].GetTerrainType(X);
@@ -138,15 +133,30 @@ namespace SF3.Models.Files.MPD {
         }
 
         public float GetModelVertexHeightmap(CornerType corner) {
-            var bl = BlockVertexLocations[(int) corner];
+            var bl = BlockVertexLocations[corner];
             return MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[bl.Num][bl.X, bl.Y] / 16f;
         }
 
         public void SetModelVertexHeightmap(CornerType corner, float value) {
-            var bls = SharedBlockVertexLocations[(int) corner];
+            var bls = SharedBlockVertexLocations[corner];
             foreach (var bl in bls)
                 MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[bl.Num][bl.X, bl.Y] = (byte) (value * 16f);
+
+            var otherTileX = X - 1 + corner.GetVertexOffsetX() * 2;
+            var otherTileY = Y - 1 + corner.GetVertexOffsetY() * 2;
+
             Modified?.Invoke(this, EventArgs.Empty);
+
+            void AlsoModified(int x, int y) {
+                if (x < 0 || y < 0 || x > 63 || y > 63)
+                    return;
+                var tile = MPD_File.Tiles[x, y];
+                tile.Modified?.Invoke(tile, EventArgs.Empty);
+            }
+
+            AlsoModified(otherTileX, Y);
+            AlsoModified(X, otherTileY);
+            AlsoModified(otherTileX, otherTileY);
         }
 
         public float GetAverageHeight()

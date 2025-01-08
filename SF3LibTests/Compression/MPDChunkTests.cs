@@ -135,7 +135,7 @@ namespace SF3.Tests.Compression {
                 foreach (var row in mpdFile.Surface.HeightmapRowTable.Rows) {
                     for (var x = 0; x < 64; x++) {
                         rng.NextBytes(rngBytes);
-                        row.SetHeights(x, rngBytes.Select(x => x / 16f).ToArray());
+                        row.SetQuadHeights(x, rngBytes.Select(x => x / 16f).ToArray());
                     }
                 }
 

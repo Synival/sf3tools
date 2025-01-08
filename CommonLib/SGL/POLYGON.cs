@@ -12,25 +12,21 @@ namespace CommonLib.SGL {
 
         public VECTOR GetCornerNormal(CornerType corner) {
             return VECTOR.Cross(
-                Vertices[(2 + (int) corner) % 4] - Vertices[(0 + (int) corner) % 4],
-                Vertices[(1 + (int) corner) % 4] - Vertices[(0 + (int) corner) % 4]
+                Vertices[(1 + (int) corner) % 4] - Vertices[(0 + (int) corner) % 4],
+                Vertices[(3 + (int) corner) % 4] - Vertices[(0 + (int) corner) % 4]
             ).Normalized();
         }
 
         public VECTOR GetNormal(POLYGON_NormalCalculationMethod calculationMethod) {
             switch (calculationMethod) {
-                case POLYGON_NormalCalculationMethod.TopLeftTriangle:
-                    return GetCornerNormal(0);
+                case POLYGON_NormalCalculationMethod.TopRightTriangle:
+                    return GetCornerNormal(CornerType.TopRight);
 
                 case POLYGON_NormalCalculationMethod.AverageOfAllTriangles:
                 case POLYGON_NormalCalculationMethod.MostExtremeVerticalTriangle:
                 case POLYGON_NormalCalculationMethod.WeightedVerticalTriangles:
-                    var vertexNormals = new VECTOR[] {
-                        GetCornerNormal(CornerType.TopLeft),
-                        GetCornerNormal(CornerType.TopRight),
-                        GetCornerNormal(CornerType.BottomRight),
-                        GetCornerNormal(CornerType.BottomLeft),
-                    };
+                    var vertexNormals = ((CornerType[]) Enum.GetValues(typeof(CornerType)))
+                        .Select(c => GetCornerNormal(c)).ToArray();
 
                     switch (calculationMethod) {
                         case POLYGON_NormalCalculationMethod.AverageOfAllTriangles:

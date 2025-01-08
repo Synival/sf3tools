@@ -20,10 +20,10 @@ namespace SF3.Win.Extensions {
             }
 
             return [
-                (tile.X - xzOff + WorldResources.ModelOffsetX, heights[0], tile.Y - xzOff + WorldResources.ModelOffsetZ),
-                (tile.X + xzOff + WorldResources.ModelOffsetX, heights[1], tile.Y - xzOff + WorldResources.ModelOffsetZ),
-                (tile.X + xzOff + WorldResources.ModelOffsetX, heights[2], tile.Y + xzOff + WorldResources.ModelOffsetZ),
-                (tile.X - xzOff + WorldResources.ModelOffsetX, heights[3], tile.Y + xzOff + WorldResources.ModelOffsetZ)
+                (tile.X - xzOff + WorldResources.ModelOffsetX, heights[0], -(tile.Y - xzOff + WorldResources.ModelOffsetZ)),
+                (tile.X + xzOff + WorldResources.ModelOffsetX, heights[1], -(tile.Y - xzOff + WorldResources.ModelOffsetZ)),
+                (tile.X + xzOff + WorldResources.ModelOffsetX, heights[2], -(tile.Y + xzOff + WorldResources.ModelOffsetZ)),
+                (tile.X - xzOff + WorldResources.ModelOffsetX, heights[3], -(tile.Y + xzOff + WorldResources.ModelOffsetZ))
             ];
         }
 

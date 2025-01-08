@@ -20,7 +20,7 @@ namespace SF3.Models.Tables.MPD.Surface {
 
         public override bool Load() {
             var size = new HeightmapRow(Data, 0, "", Address).Size;
-            return LoadUntilMax((id, address) => new HeightmapRow(Data, id, "Y" + id.ToString("D2"), Address + (63 - id) * size));
+            return LoadUntilMax((id, address) => new HeightmapRow(Data, id, "Y" + id.ToString("D2"), Address + id * size));
         }
 
         public override int? MaxSize => 64;
@@ -49,12 +49,12 @@ namespace SF3.Models.Tables.MPD.Surface {
 
             void TryAddQuadNormal(int vx, int vy) {
                 if (vx >= 0 && vy >= 0 && vx <= 63 && vy <= 63) {
-                    var heights = Rows[63 - vy].GetHeights(vx);
+                    var heights = Rows[vy].GetQuadHeights(vx);
                     var quad = new POLYGON(new VECTOR[] {
-                        new VECTOR(0.00f, heights[0], 0.00f),
-                        new VECTOR(1.00f, heights[1], 0.00f),
-                        new VECTOR(1.00f, heights[2], 1.00f),
-                        new VECTOR(0.00f, heights[3], 1.00f)
+                        new VECTOR(0.00f, heights[0], 1.00f),
+                        new VECTOR(1.00f, heights[1], 1.00f),
+                        new VECTOR(1.00f, heights[2], 0.00f),
+                        new VECTOR(0.00f, heights[3], 0.00f)
                     });
                     sumNormals.Add(quad.GetNormal(calculationMethod));
                 }
