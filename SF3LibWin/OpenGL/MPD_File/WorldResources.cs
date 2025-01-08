@@ -23,9 +23,10 @@ namespace SF3.Win.OpenGL.MPD_File {
             ];
 
             Textures = [
-                (WhiteTexture         = new Texture(Resources.WhiteBmp)),
-                (TransparentTexture   = new Texture(Resources.TransparentBmp)),
-                (TileWireframeTexture = new Texture(Resources.TileWireframeBmp))
+                (WhiteTexture            = new Texture(Resources.WhiteBmp)),
+                (TransparentWhiteTexture = new Texture(Resources.TransparentWhiteBmp)),
+                (TransparentBlackTexture = new Texture(Resources.TransparentBlackBmp)),
+                (TileWireframeTexture    = new Texture(Resources.TileWireframeBmp))
             ];
         }
 
@@ -47,7 +48,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                 ObjectShader = null;
 
                 WhiteTexture = null;
-                TransparentTexture = null;
+                TransparentWhiteTexture = null;
+                TransparentBlackTexture = null;
                 TileWireframeTexture = null;
 
                 Shaders = null;
@@ -77,7 +79,8 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         public Texture TileWireframeTexture { get; private set; } = null;
         public Texture WhiteTexture { get; private set; } = null;
-        public Texture TransparentTexture { get; private set; } = null;
+        public Texture TransparentWhiteTexture { get; private set; } = null;
+        public Texture TransparentBlackTexture { get; private set; } = null;
 
         public DisposableList<Shader> Shaders { get; private set; } = null;
         public DisposableList<Texture> Textures { get; private set; } = null;

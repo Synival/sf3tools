@@ -156,21 +156,23 @@ namespace SF3.Win.Properties {
         ///   Looks up a localized string similar to #version 330 core
         ///
         ///uniform sampler2D textureAtlas;
+        ///uniform sampler2D textureTerrainType;
         ///
         ///in vec3 colorFrag;
-        ///in vec2 texCoordAtlasFrag;
         ///in vec3 glowFrag;
         ///in float lightingFrag;
+        ///
+        ///in vec2 texCoordAtlasFrag;
+        ///in vec2 texCoordTerrainTypeFrag;
+        ///in vec2 texCoordEventIDFrag;
         ///
         ///out vec4 FragColor;
         ///
         ///void main() {
-        ///    FragColor =
-        ///        texture(textureAtlas, texCoordAtlasFrag) * vec4(colorFrag, 1.0)
+        ///    vec4 surfaceTex = (texture(textureAtlas, texCoordAtlasFrag) * vec4(colorFrag, 1.0)
         ///      + vec4(glowFrag, 0.0)
-        ///      + vec4(vec3(1.0, 1.0, 0.5) * lightingFrag * 0.2, 0);
-        ///}
-        ///.
+        ///      + vec4(vec3(1.0, 1.0, 0.5) * lightingFrag * 0.2, 0));
+        ///    vec4 terrainTypeTex = texture(textureT [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectFrag {
             get {
@@ -187,19 +189,19 @@ namespace SF3.Win.Properties {
         ///
         ///layout (location = 0) in vec3 position;
         ///layout (location = 1) in vec3 color;
-        ///layout (location = 2) in vec2 texCoordAtlas;
-        ///layout (location = 3) in vec3 glow;
-        ///layout (location = 4) in vec3 normal;
+        ///layout (location = 2) in vec3 glow;
+        ///layout (location = 3) in vec3 normal;
+        ///
+        ///layout (location = 4) in vec2 texCoordAtlas;
+        ///layout (location = 5) in vec2 texCoordTerrainType;
+        ///layout (location = 6) in vec2 texCoordEventID;
         ///
         ///out vec3 colorFrag;
-        ///out vec2 texCoordAtlasFrag;
         ///out vec3 glowFrag;
         ///out float lightingFrag;
         ///
-        ///void main() {
-        ///    gl_Position   = projection * view * model * vec4(position, 1.0);
-        ///    colorFrag     = color;
-        ///    texCo [rest of string was truncated]&quot;;.
+        ///out vec2 texCoordAtlasFrag;
+        ///out vec2 texCoordTer [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectVert {
             get {
@@ -245,6 +247,16 @@ namespace SF3.Win.Properties {
         internal static string SolidVert {
             get {
                 return ResourceManager.GetString("SolidVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TerrainTypesBmp {
+            get {
+                object obj = ResourceManager.GetObject("TerrainTypesBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -333,9 +345,19 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap TransparentBmp {
+        internal static System.Drawing.Bitmap TransparentBlackBmp {
             get {
-                object obj = ResourceManager.GetObject("TransparentBmp", resourceCulture);
+                object obj = ResourceManager.GetObject("TransparentBlackBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TransparentWhiteBmp {
+            get {
+                object obj = ResourceManager.GetObject("TransparentWhiteBmp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

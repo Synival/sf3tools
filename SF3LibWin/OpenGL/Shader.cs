@@ -87,7 +87,7 @@ namespace SF3.Win.OpenGL {
 
                 int stride = 0;
                 for (var i = 0; i < attribCount; i++) {
-                    GL.GetActiveAttrib(Handle, i, 16, out var length, out var size, out var type, out var name);
+                    GL.GetActiveAttrib(Handle, i, 256, out var length, out var size, out var type, out var name);
                     var location = GL.GetAttribLocation(Handle, name);
                     _attributes[i] = new ShaderAttribute(location, size, type, name);
                     stride += _attributes[i].SizeInBytes;

@@ -8,6 +8,86 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Images\IconHelp.bmp" />
+    <None Remove="Images\IconWireframe.bmp" />
+    <None Remove="Images\LightingNew.bmp" />
+    <None Remove="Images\LightingOld.bmp" />
+    <None Remove="Images\Normals.bmp" />
+    <None Remove="Images\TerrainTypes.bmp" />
+    <None Remove="Images\TerrainTypes.xcf" />
+    <None Remove="Images\TileHover.bmp" />
+    <None Remove="Images\TileSelected.bmp" />
+    <None Remove="Images\TileWireframe.bmp" />
+    <None Remove="Images\TransparentBlack.bmp" />
+    <None Remove="Images\TransparentWhite.bmp" />
+    <None Remove="Images\ViewerHelp.bmp" />
+    <None Remove="Images\White.bmp" />
+    <None Remove="Shaders\Normals.frag" />
+    <None Remove="Shaders\Normals.vert" />
+    <None Remove="Shaders\Object.frag" />
+    <None Remove="Shaders\Object.vert" />
+    <None Remove="Shaders\Solid.frag" />
+    <None Remove="Shaders\Solid.vert" />
+    <None Remove="Shaders\Texture.frag" />
+    <None Remove="Shaders\Texture.vert" />
+    <None Remove="Shaders\TwoTexture.frag" />
+    <None Remove="Shaders\TwoTexture.vert" />
+    <None Remove="Shaders\Wireframe.frag" />
+    <None Remove="Shaders\Wireframe.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\IconHelp.bmp" />
+    <EmbeddedResource Include="Images\IconWireframe.bmp" />
+    <EmbeddedResource Include="Images\LightingNew.bmp" />
+    <EmbeddedResource Include="Images\LightingOld.bmp" />
+    <EmbeddedResource Include="Images\Normals.bmp" />
+    <EmbeddedResource Include="Images\TerrainTypes.bmp" />
+    <EmbeddedResource Include="Images\TerrainTypes.xcf" />
+    <EmbeddedResource Include="Images\TileHover.bmp" />
+    <EmbeddedResource Include="Images\TileSelected.bmp" />
+    <EmbeddedResource Include="Images\TileWireframe.bmp" />
+    <EmbeddedResource Include="Images\TransparentBlack.bmp" />
+    <EmbeddedResource Include="Images\TransparentWhite.bmp" />
+    <EmbeddedResource Include="Images\ViewerHelp.bmp" />
+    <EmbeddedResource Include="Images\White.bmp" />
+    <EmbeddedResource Include="Shaders\Normals.frag">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\Normals.vert">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\Object.frag">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\Object.vert">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\Solid.frag">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\Solid.vert">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\Texture.frag">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\Texture.vert">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\TwoTexture.frag">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\TwoTexture.vert">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\Wireframe.frag">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\Wireframe.vert">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="OpenTK.GLControl" Version="4.0.1" />
   </ItemGroup>
@@ -55,43 +135,5 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Shaders\Object.frag">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Shaders\Object.vert">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Shaders\Wireframe.vert">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Shaders\Wireframe.frag">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Shaders\Solid.frag">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Shaders\Solid.vert">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Shaders\Normals.frag">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Shaders\Normals.vert">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Shaders\TwoTexture.frag">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Shaders\TwoTexture.vert">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Shaders\Texture.frag">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Shaders\Texture.vert">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 </Project>

@@ -1,6 +1,8 @@
 ﻿using System;
+using CommonLib;
 using CommonLib.Utils;
 using SF3.Models.Files.MPD;
+using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class SurfaceModelResources : IDisposable {
@@ -22,6 +24,10 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             foreach (var block in Blocks)
                 block.Init();
+
+            Textures = [
+                (TerrainTypeTexture = new Texture(Resources.TerrainTypesBmp))
+            ];
         }
 
         public void Reset() {
@@ -47,6 +53,11 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (disposing) {
                 foreach (var block in Blocks)
                     block.Dispose();
+
+                Textures?.Dispose();
+                TerrainTypeTexture = null;
+                EventIDTexture = null;
+                Textures = null;
             }
 
             disposed = true;
@@ -64,5 +75,10 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public SurfaceModelBlockResources[] Blocks { get; }
+
+        public Texture TerrainTypeTexture { get; private set; } = null;
+        public Texture EventIDTexture { get; private set; } = null;
+
+        public DisposableList<Texture> Textures { get; private set; } = null;
     }
 }

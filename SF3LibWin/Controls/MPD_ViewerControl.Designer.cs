@@ -27,6 +27,8 @@
             tsbToggleWireframe = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleNormals = new System.Windows.Forms.ToolStripButton();
+            tsbToggleTerrainType = new System.Windows.Forms.ToolStripButton();
+            tsbToggleEventID = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             tsbRecalculateLightmapOriginalMath = new System.Windows.Forms.ToolStripButton();
             tsbUpdateLightmapUpdatedMath = new System.Windows.Forms.ToolStripButton();
@@ -40,7 +42,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbToggleWireframe, toolStripSeparator1, tsbToggleNormals, toolStripSeparator2, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator3, tsbToggleHelp });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbToggleWireframe, toolStripSeparator1, tsbToggleNormals, tsbToggleTerrainType, tsbToggleEventID, toolStripSeparator2, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator3, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
@@ -73,6 +75,23 @@
             tsbToggleNormals.Text = "Draw Normal Map";
             tsbToggleNormals.ToolTipText = "Show Normal Map";
             tsbToggleNormals.Click += tsbToggleNormals_Click;
+            // 
+            // tsbToggleTerrainType
+            // 
+            tsbToggleTerrainType.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbToggleTerrainType.Image = Properties.Resources.TerrainTypesBmp;
+            tsbToggleTerrainType.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbToggleTerrainType.Name = "tsbToggleTerrainType";
+            tsbToggleTerrainType.Size = new System.Drawing.Size(28, 28);
+            tsbToggleTerrainType.Text = "Toggle Terrain Type";
+            // 
+            // tsbToggleEventID
+            // 
+            tsbToggleEventID.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbToggleEventID.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbToggleEventID.Name = "tsbToggleEventID";
+            tsbToggleEventID.Size = new System.Drawing.Size(23, 28);
+            tsbToggleEventID.Text = "Toggle Event ID";
             // 
             // toolStripSeparator2
             // 
@@ -170,5 +189,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private TilePropertiesControl tilePropertyControl1;
         private MPD_ViewerGLControl mpdViewerGLControl1;
+        private System.Windows.Forms.ToolStripButton tsbToggleTerrainType;
+        private System.Windows.Forms.ToolStripButton tsbToggleEventID;
     }
 }

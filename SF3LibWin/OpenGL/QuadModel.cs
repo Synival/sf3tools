@@ -47,18 +47,20 @@ namespace SF3.Win.OpenGL {
                 expectedAttrs.Add(new VBO_Attribute(1, ActiveAttribType.FloatVec2, Shader.GetTextureInfo(MPD_TextureUnit.TextureAtlas).TexCoordName));
 
             foreach (var ea in expectedAttrs.Where(ea => !quadAttrs.ContainsKey(ea.Name)).ToList())
-                quadAttrs.Add(ea.Name, ea);
+                if (!quadAttrs.ContainsKey(ea.Name))
+                    quadAttrs.Add(ea.Name, ea);
 
             _vbo = new VBO(quadAttrs.Select(x => x.Value).ToArray());
 
             // Create the vertex buffer with all the data needed for each vertex.
             _vertexBuffer = new float[_vbo.GetSizeInBytes(Quads.Length * 4) / sizeof(float)];
-            var polyAttrNames = Quads.SelectMany(x => x.Attributes).Select(x => x.Name).Distinct().ToArray();
-            foreach (var polyAttrName in polyAttrNames)
-                AssignVertexBuffer(polyAttrName);
 
             foreach (var texInfo in Shader.TextureInfos)
                 AssignVertexBufferDefaultTexCoords(texInfo);
+
+            var polyAttrNames = Quads.SelectMany(x => x.Attributes).Select(x => x.Name).Distinct().ToArray();
+            foreach (var polyAttrName in polyAttrNames)
+                AssignVertexBuffer(polyAttrName);
 
             _ = AssignVertexBufferAtlasTexCoords();
 
@@ -87,6 +89,9 @@ namespace SF3.Win.OpenGL {
             var vboAttr = _vbo.GetAttributeByName(attrName);
             if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
                 return;
+
+            if (attrName == "texCoordTerrainType")
+                ;
 
             var pos = vboAttr.OffsetInBytes.Value / sizeof(float);
             foreach (var quad in Quads) {
@@ -166,7 +171,6 @@ namespace SF3.Win.OpenGL {
         private void AssignVBO_Data() {
             using (_vbo.Use(BufferTarget.ArrayBuffer))
                 GL.BufferData(BufferTarget.ArrayBuffer, _vertexBuffer.Length * sizeof(float), _vertexBuffer, BufferUsageHint.DynamicDraw);
-
         }
 
         private void AssignEBO_Data() {

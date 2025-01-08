@@ -187,9 +187,14 @@ namespace SF3.Win.Controls {
                 }
             }
             else {
-                using (_world.ObjectShader.Use())
-                    foreach (var block in _surfaceModel.Blocks)
+                using (_surfaceModel.TerrainTypeTexture.Use(MPD_TextureUnit.TextureTerrainType))
+                using (_world.ObjectShader.Use()) {
+                    foreach (var block in _surfaceModel.Blocks) {
                         block.Model?.Draw(_world.ObjectShader);
+                        using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
+                            block.UntexturedModel?.Draw(_world.ObjectShader, null);
+                    }
+                }
             }
 
             if (DrawWireframe) {

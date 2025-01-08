@@ -82,6 +82,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                 .ToDictionary(x => (int) x.TextureID, x => x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray())
                 : [];
 
+            var terrainTypeTexInfo = Shader.GetTextureInfo(MPD_TextureUnit.TextureTerrainType);
+            var eventIdTexInfo     = Shader.GetTextureInfo(MPD_TextureUnit.TextureEventID);
+
             var surfaceQuads           = new List<Quad>();
             var untexturedSurfaceQuads = new List<Quad>();
             var surfaceSelectionQuads  = new List<Quad>();
@@ -110,15 +113,43 @@ namespace SF3.Win.OpenGL.MPD_File {
                     var vertexAbnormals = tile.GetVertex3Abnormals();
                     var abnormalVboData = vertexAbnormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
+                    var terrainType = (int) tile.MoveTerrain;
+                    var ttX1 = (terrainType % 4) / 4.0f;
+                    var ttY1 = (terrainType / 4) / 4.0f;
+                    var ttX2 = ttX1 + 0.25f;
+                    var ttY2 = ttY1 + 0.25f;
+                    var terrainTypeVboData = new float[4, 2] {
+                        { ttX1, ttY1 },
+                        { ttX2, ttY1 },
+                        { ttX2, ttY2 },
+                        { ttX1, ttY2 },
+                    };
+
+                    var eventId = (int) tile.EventID;
+                    var eidX1 = (eventId % 16) / 16.0f;
+                    var eidY1 = (eventId / 16) / 16.0f;
+                    var eidX2 = eidX1 + 0.0625f;
+                    var eidY2 = eidY1 + 0.0625f;
+                    var eventIdVboData = new float[4, 2] {
+                        { eidX1, eidY1 },
+                        { eidX2, eidY1 },
+                        { eidX2, eidY2 },
+                        { eidX1, eidY2 },
+                    };
+
                     var vertices = tile.GetSurfaceModelVertices();
                     if (anim != null) {
                         var newQuad = new Quad(vertices, anim, textureFlags);
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, abnormalVboData));
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, terrainTypeTexInfo.TexCoordName, 4, terrainTypeVboData));
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, eventIdTexInfo.TexCoordName, 4, eventIdVboData));
                         surfaceQuads.Add(newQuad);
                     }
                     else {
                         var newQuad = new Quad(vertices);
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, abnormalVboData));
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, terrainTypeTexInfo.TexCoordName, 4, terrainTypeVboData));
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, eventIdTexInfo.TexCoordName, 4, eventIdVboData));
                         untexturedSurfaceQuads.Add(newQuad);
                     }
 
