@@ -85,5 +85,9 @@
 
         public static CompressedFIXED operator +(float lhs, CompressedFIXED rhs) => new CompressedFIXED(lhs + rhs.Float, 0);
         public static CompressedFIXED operator -(float lhs, CompressedFIXED rhs) => new CompressedFIXED(lhs - rhs.Float, 0);
+
+        // Other operations
+        public static CompressedFIXED operator -(CompressedFIXED f) => new CompressedFIXED((short) -f.RawShort);
+
     }
 }

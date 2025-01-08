@@ -97,5 +97,8 @@
 
         public static FIXED operator +(float lhs, FIXED rhs) => new FIXED(lhs + rhs.Float, 0);
         public static FIXED operator -(float lhs, FIXED rhs) => new FIXED(lhs - rhs.Float, 0);
+
+        // Other operations
+        public static FIXED operator -(FIXED f) => new FIXED(-f.RawInt, true);
     }
 }
