@@ -187,7 +187,9 @@ namespace SF3.Win.Controls {
                 }
             }
             else {
-                using (_surfaceModel.TerrainTypeTexture.Use(MPD_TextureUnit.TextureTerrainType))
+                var terrainTypeTexture = DrawTerrainType ? _surfaceModel.TerrainTypeTexture : _world.TransparentWhiteTexture;
+
+                using (terrainTypeTexture.Use(MPD_TextureUnit.TextureTerrainType))
                 using (_world.ObjectShader.Use()) {
                     foreach (var block in _surfaceModel.Blocks) {
                         block.Model?.Draw(_world.ObjectShader);
@@ -332,8 +334,32 @@ namespace SF3.Win.Controls {
             set {
                 if (_drawNormals != value) {
                     _drawNormals = value;
+                    if (_drawNormals == true)
+                        _drawTerrainType = false;
+
                     var state = AppState.RetrieveAppState();
                     state.ViewerDrawNormals = value;
+                    state.Serialize();
+                    Invalidate();
+                }
+            }
+        }
+
+        private static bool _drawTerrainType = true;
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawTerrainType {
+            get => _drawTerrainType;
+            set {
+                if (_drawTerrainType != value) {
+                    _drawTerrainType = value;
+                    if (_drawTerrainType == true)
+                        _drawNormals = false;
+
+                    var state = AppState.RetrieveAppState();
+                    state.ViewerDrawNormals = _drawNormals;
+                    state.ViewerDrawTerrainType = _drawTerrainType;
                     state.Serialize();
                     Invalidate();
                 }

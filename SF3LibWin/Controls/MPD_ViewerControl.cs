@@ -42,7 +42,16 @@ namespace SF3.Win.Controls {
 
         private void tsbToggleNormals_Click(object sender, EventArgs e) {
             GLControl.DrawNormals = !GLControl.DrawNormals;
+
             tsbToggleNormals.Checked = GLControl.DrawNormals;
+            tsbToggleTerrainType.Checked = GLControl.DrawTerrainType;
+        }
+
+        private void tsbToggleTerrainType_Click(object sender, EventArgs e) {
+            GLControl.DrawTerrainType = !GLControl.DrawTerrainType;
+
+            tsbToggleNormals.Checked = GLControl.DrawNormals;
+            tsbToggleTerrainType.Checked = GLControl.DrawTerrainType;
         }
 
         public void UpdateModels() {

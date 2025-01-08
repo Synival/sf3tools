@@ -79,11 +79,12 @@
             // tsbToggleTerrainType
             // 
             tsbToggleTerrainType.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbToggleTerrainType.Image = Properties.Resources.TerrainTypesBmp;
+            tsbToggleTerrainType.Image = Properties.Resources.ShowTerrainTypes;
             tsbToggleTerrainType.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbToggleTerrainType.Name = "tsbToggleTerrainType";
             tsbToggleTerrainType.Size = new System.Drawing.Size(28, 28);
             tsbToggleTerrainType.Text = "Toggle Terrain Type";
+            tsbToggleTerrainType.Click += tsbToggleTerrainType_Click;
             // 
             // tsbToggleEventID
             // 

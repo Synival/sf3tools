@@ -90,9 +90,6 @@ namespace SF3.Win.OpenGL {
             if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
                 return;
 
-            if (attrName == "texCoordTerrainType")
-                ;
-
             var pos = vboAttr.OffsetInBytes.Value / sizeof(float);
             foreach (var quad in Quads) {
                 var polyAttr = quad.GetAttributeByName(attrName);
