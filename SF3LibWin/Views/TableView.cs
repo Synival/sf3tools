@@ -19,7 +19,47 @@ namespace SF3.Win.Views {
             ModelType = (Table == null) ? null : Table.RowObjs.GetType().GetElementType()!;
         }
 
-        private static Dictionary<string, Stack<ObjectListView>> _cachedOLVControls = new Dictionary<string, Stack<ObjectListView>>();
+        /// <summary>
+        /// This exists because of many layers of stupid.
+        /// In short, Winforms provides no way to know when a Control is no longer visible because it's parent (like a tab) has changed.
+        /// The least-worst hack is to continuously check the "Visible" property to know if this is actually visible or not.
+        /// The alternative is to set up an elaborate system of events to *hopefully* inform child controls property.
+        /// Just don't make 1,000 of these things at once, okay?
+        /// </summary>
+        private class EnhancedObjectListView : ObjectListView {
+            public EnhancedObjectListView() {
+                _timer.Interval = 100;
+                _timer.Tick += CheckForVisibility;
+                _timer.Start();
+            }
+
+            protected override void OnVisibleChanged(EventArgs e) {
+                base.OnVisibleChanged(e);
+                if (Items.Count == 0 || !Visible || Parent == null || _wasVisible)
+                    return;
+
+                // If we weren't visible before, refresh.
+                this.RefreshAllItems();
+                _wasVisible = true;
+                _timer.Start();
+            }
+
+            /// <summary>
+            /// Checks to see if we're visible. This is on a timer tick because there are no events to detect for this.
+            /// (This seems oddly deliberate!!!)
+            /// </summary>
+            private void CheckForVisibility(object sender, EventArgs args) {
+                if (Parent == null || !Visible) {
+                    _wasVisible = false;
+                    _timer.Stop();
+                }
+            }
+
+            private bool _wasVisible = true;
+            private Timer _timer = new Timer();
+        }
+
+        private static Dictionary<string, Stack<EnhancedObjectListView>> _cachedOLVControls = new Dictionary<string, Stack<EnhancedObjectListView>>();
 
         private ObjectListView PopCachedOLV() {
             var key = ModelType.AssemblyQualifiedName;
@@ -37,8 +77,8 @@ namespace SF3.Win.Views {
         private void PushCachedOLV() {
             var key = ModelType.AssemblyQualifiedName;
             if (!_cachedOLVControls.ContainsKey(key))
-                _cachedOLVControls.Add(key, new Stack<ObjectListView>());
-            _cachedOLVControls[key].Push(OLVControl);
+                _cachedOLVControls.Add(key, new Stack<EnhancedObjectListView>());
+            _cachedOLVControls[key].Push((EnhancedObjectListView) OLVControl);
         }
 
         private ObjectListView GetOLV() {
@@ -73,7 +113,7 @@ namespace SF3.Win.Views {
                     lvcColumns.Add(lvc);
                 }
 
-                olv = new ObjectListView();
+                olv = new EnhancedObjectListView();
                 olv.SuspendLayout();
                 ((System.ComponentModel.ISupportInitialize) olv).BeginInit();
                 olv.AllowColumnReorder = true;
