@@ -89,10 +89,12 @@
             // tsbToggleEventID
             // 
             tsbToggleEventID.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbToggleEventID.Image = Properties.Resources.ShowEventIDs;
             tsbToggleEventID.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbToggleEventID.Name = "tsbToggleEventID";
-            tsbToggleEventID.Size = new System.Drawing.Size(23, 28);
+            tsbToggleEventID.Size = new System.Drawing.Size(28, 28);
             tsbToggleEventID.Text = "Toggle Event ID";
+            tsbToggleEventID.Click += tsbToggleEventID_Click;
             // 
             // toolStripSeparator2
             // 

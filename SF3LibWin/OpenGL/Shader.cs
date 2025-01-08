@@ -21,13 +21,13 @@ namespace SF3.Win.OpenGL {
         };
 
         public static readonly TextureInfo[] TextureInfos = [
-            new TextureInfo(0, TextureUnit.Texture0, "texture0",           "texCoord0"),
-            new TextureInfo(1, TextureUnit.Texture1, "texture1",           "texCoord1"),
-            new TextureInfo(2, TextureUnit.Texture2, "texture2",           "texCoord2"),
-            new TextureInfo(3, TextureUnit.Texture3, "texture3",           "texCoord3"),
-            new TextureInfo(4, TextureUnit.Texture4, "textureAtlas",       "texCoordAtlas"),
-            new TextureInfo(5, TextureUnit.Texture5, "textureTerrainType", "texCoordTerrainType"),
-            new TextureInfo(6, TextureUnit.Texture6, "textureEventID",     "texCoordEventID"),
+            new TextureInfo(0, TextureUnit.Texture0, "texture0",            "texCoord0"),
+            new TextureInfo(1, TextureUnit.Texture1, "texture1",            "texCoord1"),
+            new TextureInfo(2, TextureUnit.Texture2, "texture2",            "texCoord2"),
+            new TextureInfo(3, TextureUnit.Texture3, "texture3",            "texCoord3"),
+            new TextureInfo(4, TextureUnit.Texture4, "textureAtlas",        "texCoordAtlas"),
+            new TextureInfo(5, TextureUnit.Texture5, "textureTerrainTypes", "texCoordTerrainTypes"),
+            new TextureInfo(6, TextureUnit.Texture6, "textureEventIDs",     "texCoordEventIDs"),
         ];
 
         public static TextureInfo GetTextureInfo(MPD_TextureUnit texUnit)

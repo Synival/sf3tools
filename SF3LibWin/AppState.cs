@@ -71,6 +71,7 @@ namespace SF3.Win {
         public bool ViewerDrawWireframe { get; set; } = true;
         public bool ViewerDrawHelp { get; set; } = true;
         public bool ViewerDrawNormals { get; set; } = false;
-        public bool ViewerDrawTerrainType { get; set; } = false;
+        public bool ViewerDrawTerrainTypes { get; set; } = false;
+        public bool ViewerDrawEventIDs { get; set; } = false;
     }
 }

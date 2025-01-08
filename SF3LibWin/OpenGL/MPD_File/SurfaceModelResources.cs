@@ -26,7 +26,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                 block.Init();
 
             Textures = [
-                (TerrainTypeTexture = new Texture(Resources.TerrainTypesBmp))
+                (TerrainTypesTexture = new Texture(Resources.TerrainTypesBmp)),
+                (EventIDsTexture     = new Texture(Resources.EventIDsBmp))
             ];
         }
 
@@ -55,8 +56,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                     block.Dispose();
 
                 Textures?.Dispose();
-                TerrainTypeTexture = null;
-                EventIDTexture = null;
+                TerrainTypesTexture = null;
+                EventIDsTexture = null;
                 Textures = null;
             }
 
@@ -76,8 +77,8 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         public SurfaceModelBlockResources[] Blocks { get; }
 
-        public Texture TerrainTypeTexture { get; private set; } = null;
-        public Texture EventIDTexture { get; private set; } = null;
+        public Texture TerrainTypesTexture { get; private set; } = null;
+        public Texture EventIDsTexture { get; private set; } = null;
 
         public DisposableList<Texture> Textures { get; private set; } = null;
     }

@@ -11,9 +11,11 @@ namespace SF3.Win.Controls {
             GLControl.TilePropertiesControl = tilePropertyControl1;
             Disposed += (s, e) => GLControl.Dispose();
 
-            tsbToggleWireframe.Checked = GLControl.DrawWireframe;
-            tsbToggleHelp.Checked      = GLControl.DrawHelp;
-            tsbToggleNormals.Checked   = GLControl.DrawNormals;
+            tsbToggleWireframe.Checked   = GLControl.DrawWireframe;
+            tsbToggleHelp.Checked        = GLControl.DrawHelp;
+            tsbToggleNormals.Checked     = GLControl.DrawNormals;
+            tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes;
+            tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
         }
 
         private IMPD_File _mpdFile = null;
@@ -43,15 +45,25 @@ namespace SF3.Win.Controls {
         private void tsbToggleNormals_Click(object sender, EventArgs e) {
             GLControl.DrawNormals = !GLControl.DrawNormals;
 
-            tsbToggleNormals.Checked = GLControl.DrawNormals;
-            tsbToggleTerrainType.Checked = GLControl.DrawTerrainType;
+            tsbToggleNormals.Checked     = GLControl.DrawNormals;
+            tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes;
+            tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
         }
 
         private void tsbToggleTerrainType_Click(object sender, EventArgs e) {
-            GLControl.DrawTerrainType = !GLControl.DrawTerrainType;
+            GLControl.DrawTerrainTypes = !GLControl.DrawTerrainTypes;
 
-            tsbToggleNormals.Checked = GLControl.DrawNormals;
-            tsbToggleTerrainType.Checked = GLControl.DrawTerrainType;
+            tsbToggleNormals.Checked     = GLControl.DrawNormals;
+            tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes;
+            tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
+        }
+
+        private void tsbToggleEventID_Click(object sender, EventArgs e) {
+            GLControl.DrawEventIDs = !GLControl.DrawEventIDs;
+
+            tsbToggleNormals.Checked     = GLControl.DrawNormals;
+            tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes;
+            tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
         }
 
         public void UpdateModels() {

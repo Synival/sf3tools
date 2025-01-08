@@ -63,6 +63,16 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EventIDsBmp {
+            get {
+                object obj = ResourceManager.GetObject("EventIDsBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IconHelpBmp {
             get {
                 object obj = ResourceManager.GetObject("IconHelpBmp", resourceCulture);
@@ -156,23 +166,24 @@ namespace SF3.Win.Properties {
         ///   Looks up a localized string similar to #version 330 core
         ///
         ///uniform sampler2D textureAtlas;
-        ///uniform sampler2D textureTerrainType;
+        ///uniform sampler2D textureTerrainTypes;
+        ///uniform sampler2D textureEventIDs;
         ///
         ///in vec3 colorFrag;
         ///in vec3 glowFrag;
         ///in float lightingFrag;
         ///
         ///in vec2 texCoordAtlasFrag;
-        ///in vec2 texCoordTerrainTypeFrag;
-        ///in vec2 texCoordEventIDFrag;
+        ///in vec2 texCoordTerrainTypesFrag;
+        ///in vec2 texCoordEventIDsFrag;
         ///
         ///out vec4 FragColor;
         ///
         ///void main() {
-        ///    vec4 surfaceTex = (texture(textureAtlas, texCoordAtlasFrag) * vec4(colorFrag, 1.0)
-        ///      + vec4(glowFrag, 0.0)
-        ///      + vec4(vec3(1.0, 1.0, 0.5) * lightingFrag * 0.2, 0));
-        ///    vec4 terrainTypeTex = texture(textureT [rest of string was truncated]&quot;;.
+        ///    vec4 surfaceTex =
+        ///        (texture(textureAtlas, texCoordAtlasFrag) * vec4(colorFrag, 1.0) +
+        ///        vec4(glowFrag, 0.0) +
+        ///        vec4(vec3(1.0, 1.0, 0.5) * lightingFrag * 0 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectFrag {
             get {
@@ -193,19 +204,29 @@ namespace SF3.Win.Properties {
         ///layout (location = 3) in vec3 normal;
         ///
         ///layout (location = 4) in vec2 texCoordAtlas;
-        ///layout (location = 5) in vec2 texCoordTerrainType;
-        ///layout (location = 6) in vec2 texCoordEventID;
+        ///layout (location = 5) in vec2 texCoordTerrainTypes;
+        ///layout (location = 6) in vec2 texCoordEventIDs;
         ///
         ///out vec3 colorFrag;
         ///out vec3 glowFrag;
         ///out float lightingFrag;
         ///
         ///out vec2 texCoordAtlasFrag;
-        ///out vec2 texCoordTer [rest of string was truncated]&quot;;.
+        ///out vec2 texCoordT [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectVert {
             get {
                 return ResourceManager.GetString("ObjectVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShowEventIDs {
+            get {
+                object obj = ResourceManager.GetObject("ShowEventIDs", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

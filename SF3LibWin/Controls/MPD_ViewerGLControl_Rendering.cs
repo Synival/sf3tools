@@ -187,9 +187,11 @@ namespace SF3.Win.Controls {
                 }
             }
             else {
-                var terrainTypeTexture = DrawTerrainType ? _surfaceModel.TerrainTypeTexture : _world.TransparentWhiteTexture;
+                var terrainTypesTexture = DrawTerrainTypes ? _surfaceModel.TerrainTypesTexture : _world.TransparentBlackTexture;
+                var eventIdsTexture     = DrawEventIDs     ? _surfaceModel.EventIDsTexture     : _world.TransparentBlackTexture;
 
-                using (terrainTypeTexture.Use(MPD_TextureUnit.TextureTerrainType))
+                using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
+                using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
                 using (_world.ObjectShader.Use()) {
                     foreach (var block in _surfaceModel.Blocks) {
                         block.Model?.Draw(_world.ObjectShader);
@@ -334,32 +336,57 @@ namespace SF3.Win.Controls {
             set {
                 if (_drawNormals != value) {
                     _drawNormals = value;
-                    if (_drawNormals == true)
-                        _drawTerrainType = false;
+                    if (_drawNormals == true) {
+                        _drawTerrainTypes = false;
+                        _drawEventIds = false;
+                    }
 
                     var state = AppState.RetrieveAppState();
-                    state.ViewerDrawNormals = value;
+                    state.ViewerDrawNormals      = value;
+                    state.ViewerDrawTerrainTypes = _drawTerrainTypes;
+                    state.ViewerDrawEventIDs     = _drawEventIds;
                     state.Serialize();
                     Invalidate();
                 }
             }
         }
 
-        private static bool _drawTerrainType = true;
+        private static bool _drawTerrainTypes = true;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool DrawTerrainType {
-            get => _drawTerrainType;
+        public bool DrawTerrainTypes {
+            get => _drawTerrainTypes;
             set {
-                if (_drawTerrainType != value) {
-                    _drawTerrainType = value;
-                    if (_drawTerrainType == true)
+                if (_drawTerrainTypes != value) {
+                    _drawTerrainTypes = value;
+                    if (_drawTerrainTypes == true)
                         _drawNormals = false;
 
                     var state = AppState.RetrieveAppState();
-                    state.ViewerDrawNormals = _drawNormals;
-                    state.ViewerDrawTerrainType = _drawTerrainType;
+                    state.ViewerDrawNormals      = _drawNormals;
+                    state.ViewerDrawTerrainTypes = _drawTerrainTypes;
+                    state.Serialize();
+                    Invalidate();
+                }
+            }
+        }
+
+        private static bool _drawEventIds = true;
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawEventIDs {
+            get => _drawEventIds;
+            set {
+                if (_drawEventIds != value) {
+                    _drawEventIds = value;
+                    if (_drawEventIds == true)
+                        _drawNormals = false;
+
+                    var state = AppState.RetrieveAppState();
+                    state.ViewerDrawNormals  = _drawNormals;
+                    state.ViewerDrawEventIDs = _drawTerrainTypes;
                     state.Serialize();
                     Invalidate();
                 }

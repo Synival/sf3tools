@@ -82,8 +82,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                 .ToDictionary(x => (int) x.TextureID, x => x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray())
                 : [];
 
-            var terrainTypeTexInfo = Shader.GetTextureInfo(MPD_TextureUnit.TextureTerrainType);
-            var eventIdTexInfo     = Shader.GetTextureInfo(MPD_TextureUnit.TextureEventID);
+            var terrainTypeTexInfo = Shader.GetTextureInfo(MPD_TextureUnit.TextureTerrainTypes);
+            var eventIdTexInfo     = Shader.GetTextureInfo(MPD_TextureUnit.TextureEventIDs);
 
             var surfaceQuads           = new List<Quad>();
             var untexturedSurfaceQuads = new List<Quad>();
