@@ -22,6 +22,18 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new TextureAnimFramesView("Animation Frames", Model, ngc));
             }
 
+            var palettes = Model.TexturePalettes
+                .Select((p, i) => new { Index = i, Palette = p })
+                .Where(x => x.Palette != null)
+                .GroupBy(x => x.Palette.Address)
+                .ToDictionary(x => x.Key, x => x.ToArray());
+
+            foreach (var palette in palettes) {
+                var indices = palette.Value.Select(x => (x.Index + 1).ToString()).ToArray();
+                var name = ((palette.Value.Length == 1) ? "Palette " : "Palettes ") + string.Join('+', indices);
+                CreateChild(new ColorTableView(name, palette.Value[0].Palette, Model.NameGetterContext));
+            }
+
             return Control;
         }
 
