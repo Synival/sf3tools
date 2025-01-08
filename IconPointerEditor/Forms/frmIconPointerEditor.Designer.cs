@@ -31,6 +31,8 @@ namespace SF3.IconPointerEditor.Forms
             menuStrip2 = new System.Windows.Forms.MenuStrip();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_OpenInfo = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip2.SuspendLayout();
             SuspendLayout();
             // 
@@ -41,13 +43,13 @@ namespace SF3.IconPointerEditor.Forms
             menuStrip2.Location = new System.Drawing.Point(0, 0);
             menuStrip2.Name = "menuStrip2";
             menuStrip2.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            menuStrip2.Size = new System.Drawing.Size(53, 24);
+            menuStrip2.Size = new System.Drawing.Size(173, 24);
             menuStrip2.TabIndex = 1;
             menuStrip2.Text = "menuStrip2";
             // 
             // tsmiHelp
             // 
-            tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp_OpenInfo });
+            tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp_OpenInfo, toolStripSeparator1, tsmiHelp_About });
             tsmiHelp.Name = "tsmiHelp";
             tsmiHelp.Size = new System.Drawing.Size(44, 20);
             tsmiHelp.Text = "&Help";
@@ -57,6 +59,18 @@ namespace SF3.IconPointerEditor.Forms
             tsmiHelp_OpenInfo.Name = "tsmiHelp_OpenInfo";
             tsmiHelp_OpenInfo.Size = new System.Drawing.Size(224, 22);
             tsmiHelp_OpenInfo.Text = "Opens X011, X021, X026 Files";
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
+            // 
+            // tsmiHelp_About
+            // 
+            tsmiHelp_About.Name = "tsmiHelp_About";
+            tsmiHelp_About.Size = new System.Drawing.Size(224, 22);
+            tsmiHelp_About.Text = "About...";
+            tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
             // frmIconPointerEditor
             // 
@@ -80,5 +94,7 @@ namespace SF3.IconPointerEditor.Forms
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp_OpenInfo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_About;
     }
 }

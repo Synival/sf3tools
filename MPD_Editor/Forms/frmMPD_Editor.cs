@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CommonLib.NamedValues;
@@ -25,7 +26,7 @@ using static CommonLib.Win.Utils.MessageUtils;
 namespace SF3.MPD_Editor.Forms {
     public partial class frmMPDEditor : EditorFormNew {
         // Used to display version in the application
-        protected override string Version => "0.3";
+        protected override string Version => "0.1 RC1";
 
         public IMPD_File File => ModelLoader.Model as IMPD_File;
 
@@ -274,6 +275,19 @@ namespace SF3.MPD_Editor.Forms {
                 }
                 catch { }
             }
+        }
+
+        private void tsmiHelp_About_Click(object sender, EventArgs e) {
+            var versionInfo = FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location);
+            var legalCopyright = versionInfo.LegalCopyright;
+
+            MessageBox.Show(
+                VersionTitle + "\n\n" +
+                legalCopyright + "\n\n" +
+                "All credit to Agrathejagged for the compression/decompression code:\n" +
+                "https://github.com/Agrathejagged",
+                "About " + BaseTitle
+            );
         }
     }
 }

@@ -48,7 +48,6 @@ namespace SF3.Win.Forms {
             tsmiScenario_Scenario3 = new System.Windows.Forms.ToolStripMenuItem();
             tsmiScenario_PremiumDisk = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiHelp_Version = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -239,16 +238,9 @@ namespace SF3.Win.Forms {
             // 
             // tsmiHelp
             // 
-            tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp_Version });
             tsmiHelp.Name = "tsmiHelp";
             tsmiHelp.Size = new System.Drawing.Size(44, 20);
             tsmiHelp.Text = "&Help";
-            // 
-            // tsmiHelp_Version
-            // 
-            tsmiHelp_Version.Name = "tsmiHelp_Version";
-            tsmiHelp_Version.Size = new System.Drawing.Size(190, 22);
-            tsmiHelp_Version.Text = "Version (set internally)";
             // 
             // EditorFormNew
             // 
@@ -280,7 +272,6 @@ namespace SF3.Win.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiScenario_Scenario3;
         private System.Windows.Forms.ToolStripMenuItem tsmiScenario_PremiumDisk;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
-        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_Version;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_ApplyDFRFile;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_GenerateDFRFile;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_CopyTablesTo;

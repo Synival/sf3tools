@@ -85,8 +85,8 @@ namespace SF3.Win.Forms {
                 Controls.Remove(toolStrip);
             }
 
-            _baseTitle = Text + " v" + Version;
-            tsmiHelp_Version.Text = "Version " + Version;
+            _baseTitle = Text;
+            _versionTitle = Text + " v" + Version;
             Scenario = ScenarioType.Scenario1;
 
             void onScenarioChanged(object obj, EventArgs eargs) {
@@ -488,6 +488,18 @@ namespace SF3.Win.Forms {
 
         private string _baseTitle;
 
+        /// <summary>
+        /// The title of the Form without the version string, without any loaded file.
+        /// </summary>
+        public string BaseTitle => _baseTitle;
+
+        private string _versionTitle;
+
+        /// <summary>
+        /// The title of the Form with the version string, without any loaded file.
+        /// </summary>
+        public string VersionTitle => _versionTitle;
+
         protected virtual string Version => "(unset)";
 
         private ScenarioType _scenario = (ScenarioType) (-1); // Uninitialized value
@@ -524,7 +536,7 @@ namespace SF3.Win.Forms {
         /// The title to set when using UpdateTitle().
         /// </summary>
         /// <returns></returns>
-        protected virtual string MakeTitle() => ModelLoader?.ModelTitle(_baseTitle) ?? _baseTitle;
+        protected virtual string MakeTitle() => ModelLoader?.ModelTitle(VersionTitle) ?? VersionTitle;
 
         /// <summary>
         /// File filter for OpenFileDialog() and SaveFileDialog(). Must be overridden.

@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>dfrtool</AssemblyName>
     <PublishSingleFile>true</PublishSingleFile>
+    <Copyright>Copyright © Synival 2025</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

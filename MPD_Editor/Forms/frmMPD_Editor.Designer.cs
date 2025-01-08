@@ -29,9 +29,7 @@ namespace SF3.MPD_Editor.Forms {
             tsmiTextures_ImportFolder = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTextures_ExportToFolder = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiHelp_Separator1 = new System.Windows.Forms.ToolStripSeparator();
-            tsmiHelp_Credits1 = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiHelp_Credits2 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip2.SuspendLayout();
             SuspendLayout();
             // 
@@ -70,27 +68,17 @@ namespace SF3.MPD_Editor.Forms {
             // 
             // tsmiHelp
             // 
-            tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp_Separator1, tsmiHelp_Credits1, tsmiHelp_Credits2 });
+            tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp_About });
             tsmiHelp.Name = "tsmiHelp";
             tsmiHelp.Size = new System.Drawing.Size(44, 20);
             tsmiHelp.Text = "&Help";
             // 
-            // tsmiHelp_Separator1
+            // tsmiHelp_About
             // 
-            tsmiHelp_Separator1.Name = "tsmiHelp_Separator1";
-            tsmiHelp_Separator1.Size = new System.Drawing.Size(254, 6);
-            // 
-            // tsmiHelp_Credits1
-            // 
-            tsmiHelp_Credits1.Name = "tsmiHelp_Credits1";
-            tsmiHelp_Credits1.Size = new System.Drawing.Size(257, 22);
-            tsmiHelp_Credits1.Text = "All credit to AggroCrag for the";
-            // 
-            // tsmiHelp_Credits2
-            // 
-            tsmiHelp_Credits2.Name = "tsmiHelp_Credits2";
-            tsmiHelp_Credits2.Size = new System.Drawing.Size(257, 22);
-            tsmiHelp_Credits2.Text = "compression/decompression code";
+            tsmiHelp_About.Name = "tsmiHelp_About";
+            tsmiHelp_About.Size = new System.Drawing.Size(180, 22);
+            tsmiHelp_About.Text = "About...";
+            tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
             // frmMPDEditor
             // 
@@ -113,9 +101,7 @@ namespace SF3.MPD_Editor.Forms {
         #endregion
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
-        private System.Windows.Forms.ToolStripSeparator tsmiHelp_Separator1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_Credits1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_Credits2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_About;
         private System.Windows.Forms.ToolStripMenuItem tsmiTextures;
         private System.Windows.Forms.ToolStripMenuItem tsmiTextures_ImportFolder;
         private System.Windows.Forms.ToolStripMenuItem tsmiTextures_ExportToFolder;

@@ -1,3 +1,7 @@
+using System;
+using System.Diagnostics;
+using System.Reflection;
+using System.Windows.Forms;
 using SF3.ModelLoaders;
 using SF3.Models.Files;
 using SF3.Models.Files.IconPointer;
@@ -26,5 +30,15 @@ namespace SF3.IconPointerEditor.Forms {
 
         protected override IView CreateView(IModelFileLoader loader, IBaseFile model)
             => new IconPointerView(loader.Filename, (IconPointerFile) model);
+
+        private void tsmiHelp_About_Click(object sender, EventArgs e) {
+            var versionInfo = FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location);
+            var legalCopyright = versionInfo.LegalCopyright;
+
+            MessageBox.Show(
+                VersionTitle + "\n\n" + legalCopyright,
+                "About " + BaseTitle
+            );
+        }
     }
 }

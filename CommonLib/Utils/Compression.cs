@@ -11,7 +11,7 @@ namespace CommonLib.Utils {
 
         /// <summary>
         /// Takes a compressed byte array and returns its decompressed data.
-        /// All credit to AggroCrag for the original decompression code!
+        /// All credit to Agrathejagged for the decompression code: https://github.com/Agrathejagged
         /// </summary>
         /// <param name="data">The compressed data to decompress.</param>
         /// <returns>A decompressed set of bytes.</returns>
@@ -68,7 +68,7 @@ namespace CommonLib.Utils {
 
         /// <summary>
         /// Takes an uncompressed byte array and returns its compressed data.
-        /// All credit to AggroCrag for the origianl compression code!
+        /// All credit to Agrathejagged for the compression code: https://github.com/Agrathejagged
         /// </summary>
         /// <param name="data">The uncompressed data to compress.</param>
         /// <returns>A compressed set of bytes.</returns>

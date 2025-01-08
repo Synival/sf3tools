@@ -6,7 +6,7 @@ namespace CommonLib.Extensions {
     public static class BinaryReaderExtensions {
         /// <summary>
         /// Reads a 32-bit little endian integer from a BinaryReader
-        /// Credit to AggroCrag for this code!
+        /// Credit to Agrathejagged for this code! https://github.com/Agrathejagged
         /// </summary>
         /// <param name="reader">The BinaryReader from which to read the data</param>
         /// <returns>An integer in native format</returns>
