@@ -16,6 +16,28 @@ namespace SF3.Win.Controls {
             tsbToggleNormals.Checked     = GLControl.DrawNormals;
             tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes;
             tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
+
+            // Make sure certain key events make it to the GLControl.
+            tilePropertyControl1.CmdKey += (object sender, ref Message msg, Keys keyData, ref bool wasProcessed) => {
+                if (wasProcessed)
+                    return;
+
+                bool sendToGLControl = false;
+
+                var keyPressed = (Keys) ((int) keyData & 0xFFFF);
+                switch (keyPressed) {
+                    case Keys.Up:
+                    case Keys.Down:
+                    case Keys.Left:
+                    case Keys.Right:
+                        if (keyData.HasFlag(Keys.Control))
+                            sendToGLControl = true;
+                    break;
+                }
+
+                if (sendToGLControl)
+                    GLControl.RunCmdKeyEvent(sender, ref msg, keyData, ref wasProcessed);
+            };
         }
 
         private IMPD_File _mpdFile = null;

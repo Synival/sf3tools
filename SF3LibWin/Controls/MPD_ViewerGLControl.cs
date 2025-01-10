@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using OpenTK.GLControl;
 using SF3.Models.Files.MPD;
+using static SF3.Win.Utils.EventHandlers;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerGLControl : GLControl {
@@ -53,6 +54,9 @@ namespace SF3.Win.Controls {
             base.OnMouseDown(e);
             Focus();
         }
+
+        public void RunCmdKeyEvent(object sender, ref Message msg, Keys keyData, ref bool wasProcessed)
+            => CmdKey?.Invoke(sender, ref msg, keyData, ref wasProcessed);
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
             bool wasProcessed = false;
@@ -116,8 +120,6 @@ namespace SF3.Win.Controls {
                 Invalidate();
             }
         }
-
-        public delegate void CmdKeyEventHandler(object sender, ref Message msg, Keys keyData, ref bool wasProcessed);
 
         public event EventHandler RightDoubleClick;
         public event EventHandler MiddleDoubleClick;

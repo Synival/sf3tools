@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using OpenTK.Mathematics;
@@ -22,7 +23,7 @@ namespace SF3.Win.Controls {
             _keysPressed[(Keys) ((int) e.KeyCode & 0xFFFF)] = false;
 
         private void OnCmdKeyKeyboardControls(Keys keyData, ref bool wasProcessed) {
-            if (wasProcessed || !Enabled || !Focused || !Visible)
+            if (wasProcessed || !Enabled || !Visible)
                 return;
 
             var keyPressed = (Keys) ((int) keyData & 0xFFFF);
@@ -31,10 +32,46 @@ namespace SF3.Win.Controls {
                 case Keys.Down:
                 case Keys.Left:
                 case Keys.Right:
+                    if (keyData.HasFlag(Keys.Control)) {
+                        ChangeFocusedTile(keyPressed);
+                        wasProcessed = true;
+                        return;
+                    }
+
                     _keysPressed[keyPressed] = true;
                     wasProcessed = true;
                 break;
             }
+        }
+
+        public bool ChangeFocusedTile(Keys keyData) {
+            var keyPressed = (Keys) ((int) keyData & 0xFFFF);
+            switch (keyPressed) {
+                case Keys.Up:
+                    return ChangeFocusedTile(0, 1);
+                case Keys.Down:
+                    return ChangeFocusedTile(0, -1);
+                case Keys.Left:
+                    return ChangeFocusedTile(-1, 0);
+                case Keys.Right:
+                    return ChangeFocusedTile(1, 0);
+                default:
+                    return false;
+            }
+        }
+
+        public bool ChangeFocusedTile(int xDir, int yDir) {
+            var currentTile = TilePropertiesControl.Tile;
+            if (currentTile == null)
+                return false;
+
+            var newTileX = currentTile.X + xDir;
+            var newTileY = currentTile.Y + yDir;
+            if (newTileX < 0 || newTileY < 0 || newTileX > 63 || newTileY > 63)
+                return false;
+
+            SelectTile(new Point(newTileX, newTileY));
+            return true;
         }
 
         private void OnLostFocusKeyboardControls() {

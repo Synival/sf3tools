@@ -14,11 +14,18 @@ namespace SF3.Win.Controls {
         private void OnMouseDownEditing(MouseEventArgs e) {
             if (e.Button != MouseButtons.Left)
                 return;
+            SelectTile(_tileHoverPos);
+        }
 
-            _tileSelectedPos = _tileHoverPos;
+        public void SelectTile(Point? tilePos) {
+            if (_tileSelectedPos == tilePos)
+                return;
+
+            _tileSelectedPos = tilePos;
             var tile = (_tileSelectedPos == null) ? null : MPD_File.Tiles[_tileSelectedPos.Value.X, _tileSelectedPos.Value.Y];
             TilePropertiesControl.Tile = tile;
             _tileSelectedNeedsUpdate = true;
+
             Invalidate();
         }
 

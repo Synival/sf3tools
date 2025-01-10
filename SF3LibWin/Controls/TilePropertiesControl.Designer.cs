@@ -94,7 +94,7 @@
             cbMoveSlope.Location = new System.Drawing.Point(6, 83);
             cbMoveSlope.Name = "cbMoveSlope";
             cbMoveSlope.Size = new System.Drawing.Size(191, 19);
-            cbMoveSlope.TabIndex = 11;
+            cbMoveSlope.TabIndex = 2;
             cbMoveSlope.Text = "Steep Slope (Bad for Centaurs?)";
             cbMoveSlope.UseVisualStyleBackColor = true;
             // 
@@ -106,7 +106,7 @@
             nudMoveHeightmapBR.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
             nudMoveHeightmapBR.Name = "nudMoveHeightmapBR";
             nudMoveHeightmapBR.Size = new System.Drawing.Size(88, 23);
-            nudMoveHeightmapBR.TabIndex = 5;
+            nudMoveHeightmapBR.TabIndex = 6;
             // 
             // nudMoveHeightmapBL
             // 
@@ -116,7 +116,7 @@
             nudMoveHeightmapBL.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
             nudMoveHeightmapBL.Name = "nudMoveHeightmapBL";
             nudMoveHeightmapBL.Size = new System.Drawing.Size(88, 23);
-            nudMoveHeightmapBL.TabIndex = 4;
+            nudMoveHeightmapBL.TabIndex = 5;
             // 
             // nudMoveHeightmapTR
             // 
@@ -126,7 +126,7 @@
             nudMoveHeightmapTR.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
             nudMoveHeightmapTR.Name = "nudMoveHeightmapTR";
             nudMoveHeightmapTR.Size = new System.Drawing.Size(88, 23);
-            nudMoveHeightmapTR.TabIndex = 3;
+            nudMoveHeightmapTR.TabIndex = 4;
             // 
             // nudMoveHeightmapTL
             // 
@@ -136,7 +136,7 @@
             nudMoveHeightmapTL.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
             nudMoveHeightmapTL.Name = "nudMoveHeightmapTL";
             nudMoveHeightmapTL.Size = new System.Drawing.Size(88, 23);
-            nudMoveHeightmapTL.TabIndex = 2;
+            nudMoveHeightmapTL.TabIndex = 3;
             // 
             // nudMoveHeight
             // 
@@ -203,7 +203,7 @@
             nudEventID.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             nudEventID.Name = "nudEventID";
             nudEventID.Size = new System.Drawing.Size(120, 21);
-            nudEventID.TabIndex = 6;
+            nudEventID.TabIndex = 7;
             // 
             // labelEventID
             // 
@@ -243,7 +243,7 @@
             nudModelVertexHeightmapBR.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
             nudModelVertexHeightmapBR.Name = "nudModelVertexHeightmapBR";
             nudModelVertexHeightmapBR.Size = new System.Drawing.Size(88, 23);
-            nudModelVertexHeightmapBR.TabIndex = 14;
+            nudModelVertexHeightmapBR.TabIndex = 15;
             // 
             // nudModelVertexHeightmapBL
             // 
@@ -253,7 +253,7 @@
             nudModelVertexHeightmapBL.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
             nudModelVertexHeightmapBL.Name = "nudModelVertexHeightmapBL";
             nudModelVertexHeightmapBL.Size = new System.Drawing.Size(88, 23);
-            nudModelVertexHeightmapBL.TabIndex = 13;
+            nudModelVertexHeightmapBL.TabIndex = 14;
             // 
             // nudModelVertexHeightmapTR
             // 
@@ -263,7 +263,7 @@
             nudModelVertexHeightmapTR.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
             nudModelVertexHeightmapTR.Name = "nudModelVertexHeightmapTR";
             nudModelVertexHeightmapTR.Size = new System.Drawing.Size(88, 23);
-            nudModelVertexHeightmapTR.TabIndex = 12;
+            nudModelVertexHeightmapTR.TabIndex = 13;
             // 
             // nudModelVertexHeightmapTL
             // 
@@ -273,7 +273,7 @@
             nudModelVertexHeightmapTL.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
             nudModelVertexHeightmapTL.Name = "nudModelVertexHeightmapTL";
             nudModelVertexHeightmapTL.Size = new System.Drawing.Size(88, 23);
-            nudModelVertexHeightmapTL.TabIndex = 11;
+            nudModelVertexHeightmapTL.TabIndex = 12;
             // 
             // nudModelTextureID
             // 
@@ -283,7 +283,7 @@
             nudModelTextureID.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             nudModelTextureID.Name = "nudModelTextureID";
             nudModelTextureID.Size = new System.Drawing.Size(120, 21);
-            nudModelTextureID.TabIndex = 7;
+            nudModelTextureID.TabIndex = 8;
             // 
             // cbModelUseMovementHeightmap
             // 
@@ -291,7 +291,7 @@
             cbModelUseMovementHeightmap.Location = new System.Drawing.Point(6, 107);
             cbModelUseMovementHeightmap.Name = "cbModelUseMovementHeightmap";
             cbModelUseMovementHeightmap.Size = new System.Drawing.Size(169, 19);
-            cbModelUseMovementHeightmap.TabIndex = 10;
+            cbModelUseMovementHeightmap.TabIndex = 11;
             cbModelUseMovementHeightmap.Text = "Use Movement Heightmap";
             cbModelUseMovementHeightmap.UseVisualStyleBackColor = true;
             // 
@@ -346,7 +346,7 @@
             cbModelFlip.Location = new System.Drawing.Point(73, 78);
             cbModelFlip.Name = "cbModelFlip";
             cbModelFlip.Size = new System.Drawing.Size(121, 23);
-            cbModelFlip.TabIndex = 8;
+            cbModelFlip.TabIndex = 10;
             cbModelFlip.Text = "Horizontal";
             // 
             // labelTileEdited
@@ -374,7 +374,7 @@
             cbLinkHeightmaps.Location = new System.Drawing.Point(9, 555);
             cbLinkHeightmaps.Name = "cbLinkHeightmaps";
             cbLinkHeightmaps.Size = new System.Drawing.Size(190, 19);
-            cbLinkHeightmaps.TabIndex = 11;
+            cbLinkHeightmaps.TabIndex = 16;
             cbLinkHeightmaps.Text = "Link Heightmaps When Editing";
             cbLinkHeightmaps.UseVisualStyleBackColor = true;
             // 
