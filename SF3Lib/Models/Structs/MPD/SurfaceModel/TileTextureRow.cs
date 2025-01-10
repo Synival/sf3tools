@@ -44,9 +44,9 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
         public void SetFlip(int x, TextureFlipType value)
             => SetTextureFlags(x, (byte) (GetTextureFlags(x) & ~0x30 | (byte) value));
 
-        public bool GetUseMoveHeightmapFlag(int x)
+        public bool GetIsFlatFlag(int x)
             => (GetTextureFlags(x) & 0x80) == 0x80;
-        public void SetUseMoveHeightmapFlag(int x, bool value)
+        public void SetIsFlatFlag(int x, bool value)
             => SetTextureFlags(x, (byte) (GetTextureFlags(x) & ~0x80 | (value ? 0x80 : 0x00)));
 
         public int this[int index] {

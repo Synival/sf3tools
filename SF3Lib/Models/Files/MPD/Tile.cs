@@ -42,9 +42,11 @@ namespace SF3.Models.Files.MPD {
         }
 
         public float[] GetSurfaceModelVertexHeights() {
-            // For any tile whose character/texture ID has flag 0x80, the walking heightmap is used.
-            if (MPD_File.Surface?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && ModelUseMoveHeightmap)
-                return MPD_File.Surface?.HeightmapRowTable.Rows[Y].GetQuadHeights(X);
+            // For any tile whose character/texture ID has flag 0x80, the bottom-right corner of the walking heightmap is used.
+            if (MPD_File.Surface?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && ModelIsFlat) {
+                var brHeight = MPD_File.Surface.HeightmapRowTable.Rows[Y].GetHeight(X, CornerType.BottomRight);
+                return new float[] { brHeight, brHeight, brHeight, brHeight };
+            }
 
             // Otherwise, gather heights from the 5x5 block with the surface mesh's heightmap.
             if (MPD_File.SurfaceModel?.VertexNormalBlockTable == null)
@@ -146,10 +148,10 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public bool ModelUseMoveHeightmap {
-            get => MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].GetUseMoveHeightmapFlag(X);
+        public bool ModelIsFlat {
+            get => MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].GetIsFlatFlag(X);
             set {
-                MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].SetUseMoveHeightmapFlag(X, value);
+                MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].SetIsFlatFlag(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
             }
         }

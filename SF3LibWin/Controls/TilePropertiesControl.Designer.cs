@@ -38,21 +38,15 @@
             nudEventID = new System.Windows.Forms.NumericUpDown();
             labelEventID = new System.Windows.Forms.Label();
             gbModel = new System.Windows.Forms.GroupBox();
-            nudModelVertexHeightmapBR = new System.Windows.Forms.NumericUpDown();
-            nudModelVertexHeightmapBL = new System.Windows.Forms.NumericUpDown();
-            nudModelVertexHeightmapTR = new System.Windows.Forms.NumericUpDown();
-            nudModelVertexHeightmapTL = new System.Windows.Forms.NumericUpDown();
             nudModelTextureID = new System.Windows.Forms.NumericUpDown();
-            cbModelUseMovementHeightmap = new System.Windows.Forms.CheckBox();
+            cbModelTileIsFlat = new System.Windows.Forms.CheckBox();
             cbModelRotate = new System.Windows.Forms.ComboBox();
             labelModelRotate = new System.Windows.Forms.Label();
-            label1 = new System.Windows.Forms.Label();
             labelModelFlip = new System.Windows.Forms.Label();
             labelModelTextureID = new System.Windows.Forms.Label();
             cbModelFlip = new System.Windows.Forms.ComboBox();
             labelTileEdited = new System.Windows.Forms.Label();
             labelRealCoordinates = new System.Windows.Forms.Label();
-            cbLinkHeightmaps = new System.Windows.Forms.CheckBox();
             gbMovement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBR).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBL).BeginInit();
@@ -62,10 +56,6 @@
             gbEvent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) nudEventID).BeginInit();
             gbModel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) nudModelVertexHeightmapBR).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) nudModelVertexHeightmapBL).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) nudModelVertexHeightmapTR).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) nudModelVertexHeightmapTL).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudModelTextureID).BeginInit();
             SuspendLayout();
             // 
@@ -216,64 +206,19 @@
             // 
             // gbModel
             // 
-            gbModel.Controls.Add(nudModelVertexHeightmapBR);
-            gbModel.Controls.Add(nudModelVertexHeightmapBL);
-            gbModel.Controls.Add(nudModelVertexHeightmapTR);
-            gbModel.Controls.Add(nudModelVertexHeightmapTL);
             gbModel.Controls.Add(nudModelTextureID);
-            gbModel.Controls.Add(cbModelUseMovementHeightmap);
+            gbModel.Controls.Add(cbModelTileIsFlat);
             gbModel.Controls.Add(cbModelRotate);
             gbModel.Controls.Add(labelModelRotate);
-            gbModel.Controls.Add(label1);
             gbModel.Controls.Add(labelModelFlip);
             gbModel.Controls.Add(labelModelTextureID);
             gbModel.Controls.Add(cbModelFlip);
             gbModel.Location = new System.Drawing.Point(3, 337);
             gbModel.Name = "gbModel";
-            gbModel.Size = new System.Drawing.Size(200, 212);
+            gbModel.Size = new System.Drawing.Size(200, 153);
             gbModel.TabIndex = 2;
             gbModel.TabStop = false;
             gbModel.Text = "Model";
-            // 
-            // nudModelVertexHeightmapBR
-            // 
-            nudModelVertexHeightmapBR.DecimalPlaces = 4;
-            nudModelVertexHeightmapBR.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
-            nudModelVertexHeightmapBR.Location = new System.Drawing.Point(105, 182);
-            nudModelVertexHeightmapBR.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
-            nudModelVertexHeightmapBR.Name = "nudModelVertexHeightmapBR";
-            nudModelVertexHeightmapBR.Size = new System.Drawing.Size(88, 23);
-            nudModelVertexHeightmapBR.TabIndex = 15;
-            // 
-            // nudModelVertexHeightmapBL
-            // 
-            nudModelVertexHeightmapBL.DecimalPlaces = 4;
-            nudModelVertexHeightmapBL.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
-            nudModelVertexHeightmapBL.Location = new System.Drawing.Point(6, 182);
-            nudModelVertexHeightmapBL.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
-            nudModelVertexHeightmapBL.Name = "nudModelVertexHeightmapBL";
-            nudModelVertexHeightmapBL.Size = new System.Drawing.Size(88, 23);
-            nudModelVertexHeightmapBL.TabIndex = 14;
-            // 
-            // nudModelVertexHeightmapTR
-            // 
-            nudModelVertexHeightmapTR.DecimalPlaces = 4;
-            nudModelVertexHeightmapTR.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
-            nudModelVertexHeightmapTR.Location = new System.Drawing.Point(106, 153);
-            nudModelVertexHeightmapTR.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
-            nudModelVertexHeightmapTR.Name = "nudModelVertexHeightmapTR";
-            nudModelVertexHeightmapTR.Size = new System.Drawing.Size(88, 23);
-            nudModelVertexHeightmapTR.TabIndex = 13;
-            // 
-            // nudModelVertexHeightmapTL
-            // 
-            nudModelVertexHeightmapTL.DecimalPlaces = 4;
-            nudModelVertexHeightmapTL.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
-            nudModelVertexHeightmapTL.Location = new System.Drawing.Point(6, 153);
-            nudModelVertexHeightmapTL.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
-            nudModelVertexHeightmapTL.Name = "nudModelVertexHeightmapTL";
-            nudModelVertexHeightmapTL.Size = new System.Drawing.Size(88, 23);
-            nudModelVertexHeightmapTL.TabIndex = 12;
             // 
             // nudModelTextureID
             // 
@@ -285,15 +230,16 @@
             nudModelTextureID.Size = new System.Drawing.Size(120, 21);
             nudModelTextureID.TabIndex = 8;
             // 
-            // cbModelUseMovementHeightmap
+            // cbModelTileIsFlat
             // 
-            cbModelUseMovementHeightmap.AutoSize = true;
-            cbModelUseMovementHeightmap.Location = new System.Drawing.Point(6, 107);
-            cbModelUseMovementHeightmap.Name = "cbModelUseMovementHeightmap";
-            cbModelUseMovementHeightmap.Size = new System.Drawing.Size(169, 19);
-            cbModelUseMovementHeightmap.TabIndex = 11;
-            cbModelUseMovementHeightmap.Text = "Use Movement Heightmap";
-            cbModelUseMovementHeightmap.UseVisualStyleBackColor = true;
+            cbModelTileIsFlat.AutoSize = true;
+            cbModelTileIsFlat.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
+            cbModelTileIsFlat.Location = new System.Drawing.Point(6, 111);
+            cbModelTileIsFlat.Name = "cbModelTileIsFlat";
+            cbModelTileIsFlat.Size = new System.Drawing.Size(165, 34);
+            cbModelTileIsFlat.TabIndex = 11;
+            cbModelTileIsFlat.Text = "Tile is Flat and Unlinked to\r\nNeighboring Tiles";
+            cbModelTileIsFlat.UseVisualStyleBackColor = true;
             // 
             // cbModelRotate
             // 
@@ -312,15 +258,6 @@
             labelModelRotate.Size = new System.Drawing.Size(44, 15);
             labelModelRotate.TabIndex = 13;
             labelModelRotate.Text = "Rotate:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(6, 134);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(104, 15);
-            label1.TabIndex = 10;
-            label1.Text = "Vertex Heightmap:";
             // 
             // labelModelFlip
             // 
@@ -368,30 +305,19 @@
             labelRealCoordinates.TabIndex = 4;
             labelRealCoordinates.Text = "Center Real Coordinates:\r\nAddress 1:\r\nAddress 2:";
             // 
-            // cbLinkHeightmaps
-            // 
-            cbLinkHeightmaps.AutoSize = true;
-            cbLinkHeightmaps.Location = new System.Drawing.Point(9, 555);
-            cbLinkHeightmaps.Name = "cbLinkHeightmaps";
-            cbLinkHeightmaps.Size = new System.Drawing.Size(190, 19);
-            cbLinkHeightmaps.TabIndex = 16;
-            cbLinkHeightmaps.Text = "Link Heightmaps When Editing";
-            cbLinkHeightmaps.UseVisualStyleBackColor = true;
-            // 
             // TilePropertiesControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(cbLinkHeightmaps);
             Controls.Add(labelRealCoordinates);
             Controls.Add(labelTileEdited);
             Controls.Add(gbModel);
             Controls.Add(gbEvent);
             Controls.Add(gbMovement);
             MaximumSize = new System.Drawing.Size(207, 10000);
-            MinimumSize = new System.Drawing.Size(207, 582);
+            MinimumSize = new System.Drawing.Size(207, 494);
             Name = "TilePropertiesControl";
-            Size = new System.Drawing.Size(207, 582);
+            Size = new System.Drawing.Size(207, 494);
             gbMovement.ResumeLayout(false);
             gbMovement.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBR).EndInit();
@@ -404,10 +330,6 @@
             ((System.ComponentModel.ISupportInitialize) nudEventID).EndInit();
             gbModel.ResumeLayout(false);
             gbModel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) nudModelVertexHeightmapBR).EndInit();
-            ((System.ComponentModel.ISupportInitialize) nudModelVertexHeightmapBL).EndInit();
-            ((System.ComponentModel.ISupportInitialize) nudModelVertexHeightmapTR).EndInit();
-            ((System.ComponentModel.ISupportInitialize) nudModelVertexHeightmapTL).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudModelTextureID).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -428,8 +350,7 @@
         private System.Windows.Forms.ComboBox cbModelFlip;
         private System.Windows.Forms.ComboBox cbModelRotate;
         private System.Windows.Forms.Label labelModelRotate;
-        private System.Windows.Forms.CheckBox cbModelUseMovementHeightmap;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox cbModelTileIsFlat;
         private System.Windows.Forms.Label labelTileEdited;
         private System.Windows.Forms.Label labelRealCoordinates;
         private System.Windows.Forms.NumericUpDown nudMoveHeight;
@@ -438,12 +359,7 @@
         private System.Windows.Forms.NumericUpDown nudMoveHeightmapTR;
         private System.Windows.Forms.NumericUpDown nudMoveHeightmapTL;
         private System.Windows.Forms.NumericUpDown nudEventID;
-        private System.Windows.Forms.NumericUpDown nudModelVertexHeightmapBR;
-        private System.Windows.Forms.NumericUpDown nudModelVertexHeightmapBL;
-        private System.Windows.Forms.NumericUpDown nudModelVertexHeightmapTR;
-        private System.Windows.Forms.NumericUpDown nudModelVertexHeightmapTL;
         private System.Windows.Forms.NumericUpDown nudModelTextureID;
-        private System.Windows.Forms.CheckBox cbLinkHeightmaps;
         private System.Windows.Forms.CheckBox cbMoveSlope;
     }
 }
