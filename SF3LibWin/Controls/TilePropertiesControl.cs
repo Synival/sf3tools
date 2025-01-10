@@ -19,14 +19,14 @@ namespace SF3.Win.Controls {
                 { CornerType.TopRight,    nudMoveHeightmapTR },
                 { CornerType.BottomRight, nudMoveHeightmapBR },
                 { CornerType.BottomLeft,  nudMoveHeightmapBL },
-            };                
+            };
 
             _nudModelVertexHeightmaps = new Dictionary<CornerType, NumericUpDown>() {
                 { CornerType.TopLeft,     nudModelVertexHeightmapTL },
                 { CornerType.TopRight,    nudModelVertexHeightmapTR },
                 { CornerType.BottomRight, nudModelVertexHeightmapBR },
                 { CornerType.BottomLeft,  nudModelVertexHeightmapBL },
-            };                
+            };
 
             // Enforce validation on height-related NumericUpDown's to round to nearest 16th.
             var heightNumericUpDowns = new List<NumericUpDown>() { nudMoveHeight };
@@ -336,6 +336,9 @@ namespace SF3.Win.Controls {
             set {
                 if (value == _tile)
                     return;
+
+                if (ContainsFocus && !Focused)
+                    Focus();
 
                 _tile = value;
                 UpdateControls();
