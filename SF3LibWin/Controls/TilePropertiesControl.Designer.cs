@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             gbMovement = new System.Windows.Forms.GroupBox();
+            cbMoveSlope = new System.Windows.Forms.CheckBox();
             nudMoveHeightmapBR = new System.Windows.Forms.NumericUpDown();
             nudMoveHeightmapBL = new System.Windows.Forms.NumericUpDown();
             nudMoveHeightmapTR = new System.Windows.Forms.NumericUpDown();
@@ -70,6 +71,7 @@
             // 
             // gbMovement
             // 
+            gbMovement.Controls.Add(cbMoveSlope);
             gbMovement.Controls.Add(nudMoveHeightmapBR);
             gbMovement.Controls.Add(nudMoveHeightmapBL);
             gbMovement.Controls.Add(nudMoveHeightmapTR);
@@ -81,16 +83,26 @@
             gbMovement.Controls.Add(labelMoveTerrain);
             gbMovement.Location = new System.Drawing.Point(3, 77);
             gbMovement.Name = "gbMovement";
-            gbMovement.Size = new System.Drawing.Size(200, 163);
+            gbMovement.Size = new System.Drawing.Size(200, 193);
             gbMovement.TabIndex = 0;
             gbMovement.TabStop = false;
             gbMovement.Text = "Movement";
+            // 
+            // cbMoveSlope
+            // 
+            cbMoveSlope.AutoSize = true;
+            cbMoveSlope.Location = new System.Drawing.Point(6, 83);
+            cbMoveSlope.Name = "cbMoveSlope";
+            cbMoveSlope.Size = new System.Drawing.Size(191, 19);
+            cbMoveSlope.TabIndex = 11;
+            cbMoveSlope.Text = "Steep Slope (Bad for Centaurs?)";
+            cbMoveSlope.UseVisualStyleBackColor = true;
             // 
             // nudMoveHeightmapBR
             // 
             nudMoveHeightmapBR.DecimalPlaces = 4;
             nudMoveHeightmapBR.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
-            nudMoveHeightmapBR.Location = new System.Drawing.Point(105, 130);
+            nudMoveHeightmapBR.Location = new System.Drawing.Point(105, 159);
             nudMoveHeightmapBR.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
             nudMoveHeightmapBR.Name = "nudMoveHeightmapBR";
             nudMoveHeightmapBR.Size = new System.Drawing.Size(88, 23);
@@ -100,7 +112,7 @@
             // 
             nudMoveHeightmapBL.DecimalPlaces = 4;
             nudMoveHeightmapBL.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
-            nudMoveHeightmapBL.Location = new System.Drawing.Point(6, 130);
+            nudMoveHeightmapBL.Location = new System.Drawing.Point(6, 159);
             nudMoveHeightmapBL.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
             nudMoveHeightmapBL.Name = "nudMoveHeightmapBL";
             nudMoveHeightmapBL.Size = new System.Drawing.Size(88, 23);
@@ -110,7 +122,7 @@
             // 
             nudMoveHeightmapTR.DecimalPlaces = 4;
             nudMoveHeightmapTR.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
-            nudMoveHeightmapTR.Location = new System.Drawing.Point(106, 101);
+            nudMoveHeightmapTR.Location = new System.Drawing.Point(106, 130);
             nudMoveHeightmapTR.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
             nudMoveHeightmapTR.Name = "nudMoveHeightmapTR";
             nudMoveHeightmapTR.Size = new System.Drawing.Size(88, 23);
@@ -120,7 +132,7 @@
             // 
             nudMoveHeightmapTL.DecimalPlaces = 4;
             nudMoveHeightmapTL.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
-            nudMoveHeightmapTL.Location = new System.Drawing.Point(6, 101);
+            nudMoveHeightmapTL.Location = new System.Drawing.Point(6, 130);
             nudMoveHeightmapTL.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
             nudMoveHeightmapTL.Name = "nudMoveHeightmapTL";
             nudMoveHeightmapTL.Size = new System.Drawing.Size(88, 23);
@@ -139,7 +151,7 @@
             // labelMoveHeightmap
             // 
             labelMoveHeightmap.AutoSize = true;
-            labelMoveHeightmap.Location = new System.Drawing.Point(6, 83);
+            labelMoveHeightmap.Location = new System.Drawing.Point(6, 112);
             labelMoveHeightmap.Name = "labelMoveHeightmap";
             labelMoveHeightmap.Size = new System.Drawing.Size(70, 15);
             labelMoveHeightmap.TabIndex = 5;
@@ -176,7 +188,7 @@
             // 
             gbEvent.Controls.Add(nudEventID);
             gbEvent.Controls.Add(labelEventID);
-            gbEvent.Location = new System.Drawing.Point(3, 246);
+            gbEvent.Location = new System.Drawing.Point(3, 277);
             gbEvent.Name = "gbEvent";
             gbEvent.Size = new System.Drawing.Size(200, 53);
             gbEvent.TabIndex = 1;
@@ -216,7 +228,7 @@
             gbModel.Controls.Add(labelModelFlip);
             gbModel.Controls.Add(labelModelTextureID);
             gbModel.Controls.Add(cbModelFlip);
-            gbModel.Location = new System.Drawing.Point(3, 305);
+            gbModel.Location = new System.Drawing.Point(3, 337);
             gbModel.Name = "gbModel";
             gbModel.Size = new System.Drawing.Size(200, 212);
             gbModel.TabIndex = 2;
@@ -359,7 +371,7 @@
             // cbLinkHeightmaps
             // 
             cbLinkHeightmaps.AutoSize = true;
-            cbLinkHeightmaps.Location = new System.Drawing.Point(9, 523);
+            cbLinkHeightmaps.Location = new System.Drawing.Point(9, 555);
             cbLinkHeightmaps.Name = "cbLinkHeightmaps";
             cbLinkHeightmaps.Size = new System.Drawing.Size(190, 19);
             cbLinkHeightmaps.TabIndex = 11;
@@ -377,9 +389,9 @@
             Controls.Add(gbEvent);
             Controls.Add(gbMovement);
             MaximumSize = new System.Drawing.Size(207, 10000);
-            MinimumSize = new System.Drawing.Size(207, 546);
+            MinimumSize = new System.Drawing.Size(207, 582);
             Name = "TilePropertiesControl";
-            Size = new System.Drawing.Size(207, 546);
+            Size = new System.Drawing.Size(207, 582);
             gbMovement.ResumeLayout(false);
             gbMovement.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBR).EndInit();
@@ -432,5 +444,6 @@
         private System.Windows.Forms.NumericUpDown nudModelVertexHeightmapTL;
         private System.Windows.Forms.NumericUpDown nudModelTextureID;
         private System.Windows.Forms.CheckBox cbLinkHeightmaps;
+        private System.Windows.Forms.CheckBox cbMoveSlope;
     }
 }

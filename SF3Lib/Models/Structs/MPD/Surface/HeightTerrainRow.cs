@@ -23,9 +23,14 @@ namespace SF3.Models.Structs.MPD.Surface {
             => this[x] = (this[x] & 0xFF) + (((int) (value * 16f)) << 8);
 
         public TerrainType GetTerrainType(int x)
-            => (TerrainType) (this[x] & 0xFF);
+            => (TerrainType) (this[x] & 0x0F);
         public void SetTerrainType(int x, TerrainType value)
-            => this[x] = (this[x] & 0xFF00) + (byte) value;
+            => this[x] = (this[x] & 0xFFF0) + (byte) ((byte) value & 0x0F);
+
+        public TerrainFlags GetTerrainFlags(int x)
+            => (TerrainFlags) (this[x] & 0xF0);
+        public void SetTerrainFlags(int x, TerrainFlags flags)
+            => this[x] = (this[x] & 0xFF0F) + (byte) ((byte) flags & 0xF0);
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {
             public TileMetadataAttribute(int x) : base(displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X4", minWidth: 50) { }

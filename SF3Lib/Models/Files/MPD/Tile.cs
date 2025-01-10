@@ -75,10 +75,18 @@ namespace SF3.Models.Files.MPD {
         public Dictionary<CornerType, BlockVertexLocation> BlockVertexLocations { get; }
         public Dictionary<CornerType, BlockVertexLocation[]> SharedBlockVertexLocations { get; }
 
-        public TerrainType MoveTerrain {
+        public TerrainType MoveTerrainType {
             get => MPD_File.Surface.HeightTerrainRowTable.Rows[Y].GetTerrainType(X);
             set {
                 MPD_File.Surface.HeightTerrainRowTable.Rows[Y].SetTerrainType(X, value);
+                Modified?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        public TerrainFlags MoveTerrainFlags {
+            get => MPD_File.Surface.HeightTerrainRowTable.Rows[Y].GetTerrainFlags(X);
+            set {
+                MPD_File.Surface.HeightTerrainRowTable.Rows[Y].SetTerrainFlags(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
             }
         }

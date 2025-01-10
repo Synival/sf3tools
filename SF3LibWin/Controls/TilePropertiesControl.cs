@@ -44,8 +44,9 @@ namespace SF3.Win.Controls {
             cbModelFlip.DataSource   = Enum.GetValues<TextureFlipType>();
 
             // Event handling for 'Movement' group.
-            cbMoveTerrain.SelectedValueChanged         += (s, e) => DoIfUserInput(() => _tile.MoveTerrain = (TerrainType) cbMoveTerrain.SelectedValue);
+            cbMoveTerrain.SelectedValueChanged         += (s, e) => DoIfUserInput(() => _tile.MoveTerrainType = (TerrainType) cbMoveTerrain.SelectedValue);
             nudMoveHeight.ValueChanged                 += (s, e) => UserSetMoveHeight((float) nudMoveHeight.Value);
+            cbMoveSlope.CheckedChanged                 += (s, e) => DoIfUserInput(() => _tile.MoveTerrainFlags ^= TerrainFlags.SteepSlope);
             foreach (var nud in _nudMoveHeightmaps)
                 nud.Value.ValueChanged                 += (s, e) => UserSetMoveHeightmap(nud.Key, (float) nud.Value.Value);
             nudMoveHeightmapTR.ValueChanged            += (s, e) => UserSetMoveHeightmap(CornerType.TopRight, (float) nudMoveHeightmapTR.Value);
@@ -105,12 +106,14 @@ namespace SF3.Win.Controls {
                 if (!gbMovement.Enabled) {
                     cbMoveTerrain.SelectedItem = null;
                     nudMoveHeight.Text = "";
+                    cbMoveSlope.Checked = false;
                     foreach (var nud in _nudMoveHeightmaps.Values)
                         nud.Text = "";
                 }
                 else {
-                    cbMoveTerrain.SelectedItem = _tile.MoveTerrain;
+                    cbMoveTerrain.SelectedItem = _tile.MoveTerrainType;
                     InitNUD(nudMoveHeight, (decimal) _tile.MoveHeight);
+                    cbMoveSlope.Checked = ((_tile.MoveTerrainFlags & TerrainFlags.SteepSlope) != 0) ? true : false;
                     foreach (var nud in _nudMoveHeightmaps)
                         InitNUD(nud.Value, (decimal) _tile.GetMoveHeightmap(nud.Key));
                 }

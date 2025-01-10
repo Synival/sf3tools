@@ -113,7 +113,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     var vertexAbnormals = tile.GetVertex3Abnormals();
                     var abnormalVboData = vertexAbnormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
-                    var terrainType = (int) tile.MoveTerrain;
+                    var terrainType = (int) tile.MoveTerrainType;
                     var ttX1 = (terrainType % 4) / 4.0f;
                     var ttY1 = (terrainType / 4) / 4.0f;
                     var ttX2 = ttX1 + 0.25f;

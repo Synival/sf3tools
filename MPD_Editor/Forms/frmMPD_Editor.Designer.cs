@@ -76,7 +76,7 @@ namespace SF3.MPD_Editor.Forms {
             // tsmiHelp_About
             // 
             tsmiHelp_About.Name = "tsmiHelp_About";
-            tsmiHelp_About.Size = new System.Drawing.Size(180, 22);
+            tsmiHelp_About.Size = new System.Drawing.Size(116, 22);
             tsmiHelp_About.Text = "About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
@@ -85,7 +85,7 @@ namespace SF3.MPD_Editor.Forms {
             AllowDrop = true;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(891, 616);
+            ClientSize = new System.Drawing.Size(891, 631);
             Controls.Add(menuStrip2);
             Icon = (System.Drawing.Icon) resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
