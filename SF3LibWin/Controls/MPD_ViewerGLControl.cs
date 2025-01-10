@@ -22,7 +22,8 @@ namespace SF3.Win.Controls {
 
             InitToolstrip();
             InitRendering();
-            InitControls();
+            InitKeyboardControls();
+            InitMouseControls();
             InitEditing();
         }
 
