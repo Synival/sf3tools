@@ -1,5 +1,6 @@
 ﻿using CommonLib.Arrays;
 using CommonLib.NamedValues;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
@@ -64,6 +65,31 @@ namespace MPD_Analyzer {
                             var expectedScenario = (scenario == ScenarioType.PremiumDisk) ? ScenarioType.Scenario3 : scenario;
                             if (mpdFile.Scenario != expectedScenario)
                                 Console.WriteLine("  !!! Wrong scenario for this disc! ShouldBe=" + expectedScenario + ", Is=" + mpdFile.Scenario);
+
+                            // This *would* report irregularities in heightmaps, but they don't exist, so they report nothing! :)
+                            if (mpdFile.SurfaceModel != null) {
+                                var corners = Enum.GetValues<CornerType>();
+                                foreach (var tile in mpdFile.Tiles) {
+                                    var moveHeights  = corners.ToDictionary(c => c, tile.GetMoveHeightmap);
+
+                                    if (tile.ModelIsFlat) {
+                                        var br = CornerType.BottomRight;
+                                        foreach (var c in corners) {
+                                            if (c == br)
+                                                continue;
+                                            if (moveHeights[c] != moveHeights[br])
+                                                Console.WriteLine("  Mismatched corner/BR walk mesh heights (" + tile.X + ", " + tile.Y + "), " + c.ToString() + ": " + moveHeights[c] + " != " + moveHeights[br]);
+                                        }
+                                    }
+                                    else {
+                                        var modelHeights = corners.ToDictionary(c => c, tile.GetModelVertexHeightmap);
+                                        foreach (var c in corners) {
+                                            if (moveHeights[c] != modelHeights[c])
+                                                Console.WriteLine("  Mismatched walk/model mesh heights for (" + tile.X + ", " + tile.Y + "), " + c.ToString() + ": " + moveHeights[c] + " != " + modelHeights[c]);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                     catch (Exception e) {
