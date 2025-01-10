@@ -83,13 +83,20 @@ namespace SF3.Win.Controls {
 
                 // 'Current Tile' group
                 if (_tile == null) {
-                    labelTileEdited.Text = "Tile: (no tile)";
+                    labelTileEdited.Text = "No Tile Selected";
                     labelRealCoordinates.Text = "";
                     UpdateLinkHeightmapsCheckbox();
                 }
                 else {
                     labelTileEdited.Text = "Tile: (" + _tile.X + ", " + _tile.Y + ")\n";
-                    labelRealCoordinates.Text = "Real coordinates: (" + (_tile.X * 32 + 16) + "," + (_tile.Y * 32 + 16) + ")";
+
+                    var heightTerrainAddress = 0x060B6000 + (_tile.Y * 64 + _tile.X) * 2;
+                    var eventIdAddress       = 0x060B8000 + (_tile.Y * 64 + _tile.X);
+
+                    labelRealCoordinates.Text =
+                        "Center Real Coordinates: (" + (_tile.X * 32 + 16) + "," + (_tile.Y * 32 + 16) + ")\n" +
+                        "Height/Terrain Address: 0x" + heightTerrainAddress.ToString("X8") + "\n" +
+                        "Event ID Address: 0x" + eventIdAddress.ToString("X8");
                     UpdateLinkHeightmapsCheckbox();
                 }
 

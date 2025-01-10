@@ -79,7 +79,7 @@
             gbMovement.Controls.Add(labelMoveHeight);
             gbMovement.Controls.Add(cbMoveTerrain);
             gbMovement.Controls.Add(labelMoveTerrain);
-            gbMovement.Location = new System.Drawing.Point(3, 53);
+            gbMovement.Location = new System.Drawing.Point(3, 77);
             gbMovement.Name = "gbMovement";
             gbMovement.Size = new System.Drawing.Size(200, 163);
             gbMovement.TabIndex = 0;
@@ -176,7 +176,7 @@
             // 
             gbEvent.Controls.Add(nudEventID);
             gbEvent.Controls.Add(labelEventID);
-            gbEvent.Location = new System.Drawing.Point(3, 222);
+            gbEvent.Location = new System.Drawing.Point(3, 246);
             gbEvent.Name = "gbEvent";
             gbEvent.Size = new System.Drawing.Size(200, 53);
             gbEvent.TabIndex = 1;
@@ -198,7 +198,7 @@
             labelEventID.AutoSize = true;
             labelEventID.Location = new System.Drawing.Point(6, 25);
             labelEventID.Name = "labelEventID";
-            labelEventID.Size = new System.Drawing.Size(48, 15);
+            labelEventID.Size = new System.Drawing.Size(53, 15);
             labelEventID.TabIndex = 10;
             labelEventID.Text = "Event ID:";
             // 
@@ -216,7 +216,7 @@
             gbModel.Controls.Add(labelModelFlip);
             gbModel.Controls.Add(labelModelTextureID);
             gbModel.Controls.Add(cbModelFlip);
-            gbModel.Location = new System.Drawing.Point(3, 281);
+            gbModel.Location = new System.Drawing.Point(3, 305);
             gbModel.Name = "gbModel";
             gbModel.Size = new System.Drawing.Size(200, 212);
             gbModel.TabIndex = 2;
@@ -352,14 +352,14 @@
             labelRealCoordinates.AutoSize = true;
             labelRealCoordinates.Location = new System.Drawing.Point(5, 24);
             labelRealCoordinates.Name = "labelRealCoordinates";
-            labelRealCoordinates.Size = new System.Drawing.Size(99, 15);
+            labelRealCoordinates.Size = new System.Drawing.Size(137, 45);
             labelRealCoordinates.TabIndex = 4;
-            labelRealCoordinates.Text = "Real Coordinates:";
+            labelRealCoordinates.Text = "Center Real Coordinates:\r\nAddress 1:\r\nAddress 2:";
             // 
             // cbLinkHeightmaps
             // 
             cbLinkHeightmaps.AutoSize = true;
-            cbLinkHeightmaps.Location = new System.Drawing.Point(9, 499);
+            cbLinkHeightmaps.Location = new System.Drawing.Point(9, 523);
             cbLinkHeightmaps.Name = "cbLinkHeightmaps";
             cbLinkHeightmaps.Size = new System.Drawing.Size(190, 19);
             cbLinkHeightmaps.TabIndex = 11;
@@ -377,9 +377,9 @@
             Controls.Add(gbEvent);
             Controls.Add(gbMovement);
             MaximumSize = new System.Drawing.Size(207, 10000);
-            MinimumSize = new System.Drawing.Size(207, 524);
+            MinimumSize = new System.Drawing.Size(207, 546);
             Name = "TilePropertiesControl";
-            Size = new System.Drawing.Size(207, 524);
+            Size = new System.Drawing.Size(207, 546);
             gbMovement.ResumeLayout(false);
             gbMovement.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBR).EndInit();

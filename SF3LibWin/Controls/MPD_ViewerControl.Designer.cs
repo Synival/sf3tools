@@ -45,7 +45,7 @@
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbToggleWireframe, toolStripSeparator1, tsbToggleNormals, tsbToggleTerrainType, tsbToggleEventID, toolStripSeparator2, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator3, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new System.Drawing.Size(789, 31);
+            toolStrip1.Size = new System.Drawing.Size(582, 31);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -139,11 +139,11 @@
             // tilePropertyControl1
             // 
             tilePropertyControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            tilePropertyControl1.Location = new System.Drawing.Point(582, 31);
+            tilePropertyControl1.Location = new System.Drawing.Point(582, 0);
             tilePropertyControl1.MaximumSize = new System.Drawing.Size(207, 10000);
             tilePropertyControl1.MinimumSize = new System.Drawing.Size(207, 446);
             tilePropertyControl1.Name = "tilePropertyControl1";
-            tilePropertyControl1.Size = new System.Drawing.Size(207, 545);
+            tilePropertyControl1.Size = new System.Drawing.Size(207, 576);
             tilePropertyControl1.TabIndex = 2;
             tilePropertyControl1.Tile = null;
             // 
@@ -155,22 +155,22 @@
             mpdViewerGLControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             mpdViewerGLControl1.Flags = OpenTK.Windowing.Common.ContextFlags.Default;
             mpdViewerGLControl1.IsEventDriven = true;
-            mpdViewerGLControl1.Location = new System.Drawing.Point(0, 31);
+            mpdViewerGLControl1.Location = new System.Drawing.Point(0, 0);
             mpdViewerGLControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             mpdViewerGLControl1.MinimumSize = new System.Drawing.Size(320, 240);
             mpdViewerGLControl1.Name = "mpdViewerGLControl1";
             mpdViewerGLControl1.Profile = OpenTK.Windowing.Common.ContextProfile.Core;
             mpdViewerGLControl1.SharedContext = null;
-            mpdViewerGLControl1.Size = new System.Drawing.Size(582, 545);
+            mpdViewerGLControl1.Size = new System.Drawing.Size(582, 576);
             mpdViewerGLControl1.TabIndex = 1;
             // 
             // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(toolStrip1);
             Controls.Add(mpdViewerGLControl1);
             Controls.Add(tilePropertyControl1);
-            Controls.Add(toolStrip1);
             Name = "MPD_ViewerControl";
             Size = new System.Drawing.Size(789, 576);
             toolStrip1.ResumeLayout(false);
