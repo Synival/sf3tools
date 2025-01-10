@@ -36,8 +36,8 @@ namespace SF3.Win.Controls {
             foreach (var nc in heightNumericUpDowns)
                 EnforceRoundingToNearest16th(nc);
 
-            // Recursively set behavior for pressing 'Enter'/'Return' on focusable controls.
-            RecursivelyMakeEnterKeyMoveToNextControl(this);
+            // Recursively set behavior for pressing 'Enter'/'Return' on focusable controls, and other things.
+            RecursivelyAttachedEventsToControls(this);
 
             // Set up combo box values.
             cbMoveTerrain.DataSource = Enum.GetValues<TerrainType>();
@@ -262,17 +262,45 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private void RecursivelyMakeEnterKeyMoveToNextControl(Control control) {
+        private Dictionary<NumericUpDown, bool> _nudSelectAll = [];
+
+        private void RecursivelyAttachedEventsToControls(Control control) {
             foreach (var cObj in control.Controls) {
                 if (cObj is not Control c)
                     continue;
 
-                c.KeyUp += (sender, e) => {
+                // Pressing 'Enter' should move on to the next control.
+                c.KeyUp += (s, e) => {
                     if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
                         SelectNextControl(c, true, true, true, true);
                 };
 
-                RecursivelyMakeEnterKeyMoveToNextControl(c);
+                // Selecting the control should highlight all text.
+                if (c is NumericUpDown nud) {
+                    // The NumericUpDown is frustrating. The 'enter' event *on tab* will selects all the text, but not when clicking it.
+                    // The selection is probably overridden on click for some reason. So: select text always, and on MouseDown (which
+                    // happens after 'Enter'), select text again. If the 'KeyUp' event is received (which happens after 'Tab'), disrecard
+                    // the '_nudSelectAll[nud]' flag.
+                    nud.Enter += (s, e) => {
+                        _nudSelectAll[nud] = true;
+                        nud.Select(0, nud.Text.Length);
+                    };
+                    nud.KeyUp += (s, e) => _nudSelectAll[nud] = false;
+                    nud.MouseDown += (s, e) => {
+                        if (_nudSelectAll.TryGetValue(nud, out bool doSelectAll)) {
+                            if (doSelectAll) {
+                                nud.Select(0, nud.Text.Length);
+                                _nudSelectAll[nud] = false;
+                            }
+                        }
+                    };
+                }
+                if (c is TextBox tb)
+                    tb.Enter += (s, e) => tb.SelectAll();
+                else if (c is ComboBox cb)
+                    cb.Enter += (s, e) => cb.Select(0, cb.Text.Length);
+                else
+                    RecursivelyAttachedEventsToControls(c);
             }
         }
 
