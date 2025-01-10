@@ -93,9 +93,9 @@
             cbMoveSlope.AutoSize = true;
             cbMoveSlope.Location = new System.Drawing.Point(6, 83);
             cbMoveSlope.Name = "cbMoveSlope";
-            cbMoveSlope.Size = new System.Drawing.Size(191, 19);
+            cbMoveSlope.Size = new System.Drawing.Size(186, 19);
             cbMoveSlope.TabIndex = 2;
-            cbMoveSlope.Text = "Steep Slope (Bad for Centaurs?)";
+            cbMoveSlope.Text = "Reduced Height Move Penalty";
             cbMoveSlope.UseVisualStyleBackColor = true;
             // 
             // nudMoveHeightmapBR
