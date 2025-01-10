@@ -164,30 +164,30 @@ namespace SF3.Win.Controls {
                 switch (corner) {
                     case CornerType.TopLeft:
                         return [
-                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y - 1, Corner = CornerType.BottomRight },
-                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y - 0, Corner = CornerType.TopRight },
-                            new TileAndCorner { X = _tile.X - 0, Y = _tile.Y - 1, Corner = CornerType.BottomLeft },
+                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y + 1, Corner = CornerType.BottomRight },
+                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y + 0, Corner = CornerType.TopRight },
+                            new TileAndCorner { X = _tile.X - 0, Y = _tile.Y + 1, Corner = CornerType.BottomLeft },
                         ];
 
                     case CornerType.TopRight:
                         return [
-                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y - 1, Corner = CornerType.BottomLeft },
-                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y - 0, Corner = CornerType.TopLeft },
-                            new TileAndCorner { X = _tile.X + 0, Y = _tile.Y - 1, Corner = CornerType.BottomRight },
+                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y + 1, Corner = CornerType.BottomLeft },
+                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y + 0, Corner = CornerType.TopLeft },
+                            new TileAndCorner { X = _tile.X + 0, Y = _tile.Y + 1, Corner = CornerType.BottomRight },
                         ];
 
                     case CornerType.BottomRight:
                         return [
-                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y + 1, Corner = CornerType.TopLeft },
-                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y + 0, Corner = CornerType.BottomLeft },
-                            new TileAndCorner { X = _tile.X + 0, Y = _tile.Y + 1, Corner = CornerType.TopRight },
+                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y - 1, Corner = CornerType.TopLeft },
+                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y - 0, Corner = CornerType.BottomLeft },
+                            new TileAndCorner { X = _tile.X + 0, Y = _tile.Y - 1, Corner = CornerType.TopRight },
                         ];
 
                     case CornerType.BottomLeft:
                         return [
-                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y + 1, Corner = CornerType.TopRight },
-                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y + 0, Corner = CornerType.BottomRight },
-                            new TileAndCorner { X = _tile.X - 0, Y = _tile.Y + 1, Corner = CornerType.TopLeft },
+                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y - 1, Corner = CornerType.TopRight },
+                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y - 0, Corner = CornerType.BottomRight },
+                            new TileAndCorner { X = _tile.X - 0, Y = _tile.Y - 1, Corner = CornerType.TopLeft },
                         ];
 
                     default:
@@ -226,6 +226,18 @@ namespace SF3.Win.Controls {
                     var vy = y + vyCenter;
                     if (vx >= 0 && vy >= 0 && vx < 65 && vy < 65)
                         surfaceModel.UpdateVertexAbnormal(vx, vy, _tile.MPD_File.Surface.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles);
+                }
+            }
+
+            // Updating vertex normals in a 3x3 grid means tiles need to be re-rendered in a 4x4 grid.
+            for (var x = -2; x < 2; x++) {
+                for (var y = -2; y < 2; y++) {
+                    var tx = x + vxCenter;
+                    var ty = y + vyCenter;
+                    if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) {
+                        var tile = _tile.MPD_File.Tiles[tx, ty];
+                        tile.Modified?.Invoke(tile, EventArgs.Empty);
+                    }
                 }
             }
         }

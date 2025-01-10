@@ -19,12 +19,26 @@ namespace SF3.Models.Files.MPD {
                 .ToDictionary(c => c, c => GetVertexBlockLocations(X, Y, c, false));
         }
 
+        private void TriggerNeighborTileModified(int offsetX, int offsetY) {
+            var x = X + offsetX;
+            var y = Y + offsetY;
+
+            if (x >= 0 && y >= 0 && x < 64 && y < 64) {
+                var tile = MPD_File.Tiles[x, y];
+                tile.Modified?.Invoke(tile, EventArgs.Empty);
+            }
+        }
+
         public void UpdateAbnormals() {
             MPD_File.SurfaceModel?.UpdateVertexAbnormals(
                 X, Y,
                 MPD_File.Surface.HeightmapRowTable,
                 POLYGON_NormalCalculationMethod.MostExtremeVerticalTriangle
             );
+
+            for (var y = -1; y <= 1; y++)
+                for (var x = -1; x <= 1; x++)
+                    TriggerNeighborTileModified(x, y);
         }
 
         public float[] GetSurfaceModelVertexHeights() {
@@ -142,21 +156,13 @@ namespace SF3.Models.Files.MPD {
             foreach (var bl in bls)
                 MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[bl.Num][bl.X, bl.Y] = (byte) (value * 16f);
 
-            var otherTileX = X - 1 + corner.GetVertexOffsetX() * 2;
-            var otherTileY = Y - 1 + corner.GetVertexOffsetY() * 2;
-
             Modified?.Invoke(this, EventArgs.Empty);
 
-            void AlsoModified(int x, int y) {
-                if (x < 0 || y < 0 || x > 63 || y > 63)
-                    return;
-                var tile = MPD_File.Tiles[x, y];
-                tile.Modified?.Invoke(tile, EventArgs.Empty);
-            }
-
-            AlsoModified(otherTileX, Y);
-            AlsoModified(X, otherTileY);
-            AlsoModified(otherTileX, otherTileY);
+            var otherTilesOffsetX = corner.GetVertexOffsetX() * 2 - 1;
+            var otherTilesOffsetY = corner.GetVertexOffsetY() * 2 - 1;
+            TriggerNeighborTileModified(otherTilesOffsetX, 0);
+            TriggerNeighborTileModified(0, otherTilesOffsetY);
+            TriggerNeighborTileModified(otherTilesOffsetX, otherTilesOffsetY);
         }
 
         public float GetAverageHeight()
