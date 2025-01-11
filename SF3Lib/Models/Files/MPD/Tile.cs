@@ -50,7 +50,7 @@ namespace SF3.Models.Files.MPD {
 
             // Otherwise, gather heights from the 5x5 block with the surface mesh's heightmap.
             if (MPD_File.SurfaceModel?.VertexNormalBlockTable == null)
-                return new float[] { 0, 0, 0, 0 };
+                return MPD_File.Surface.HeightmapRowTable.Rows[Y].GetQuadHeights(X);
 
             return BlockVertexLocations.Values
                 .Select(x => MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[x.Num][x.X, x.Y] / 16.0f)
