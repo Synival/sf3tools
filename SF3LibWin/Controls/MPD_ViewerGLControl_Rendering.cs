@@ -235,9 +235,9 @@ namespace SF3.Win.Controls {
                 }
 
                 if (DrawHelp && _surfaceEditor.HelpModel != null) {
-                    const float c_viewSize = 0.20f;
+                    const float c_viewSize = 0.40f;
                     UpdateShaderViewMatrix(_world.TextureShader,
-                        Matrix4.CreateScale((float) Height / Width * 2f * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
+                        Matrix4.CreateScale(2f * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
                         Matrix4.CreateTranslation(1, -1, 0) *
                         _projectionMatrix.Inverted());
 

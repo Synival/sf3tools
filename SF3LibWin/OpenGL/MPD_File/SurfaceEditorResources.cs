@@ -24,10 +24,10 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models = [
                 (HelpModel = new QuadModel([
                     new Quad([
-                        new Vector3(-helpWidth,  1, 0),
-                        new Vector3(         0,  1, 0),
+                        new Vector3(-helpWidth,  0, 0),
                         new Vector3(         0,  0, 0),
-                        new Vector3(-helpWidth,  0, 0)
+                        new Vector3(         0,  1, 0),
+                        new Vector3(-helpWidth,  1, 0)
                     ])
                 ]))
             ];
