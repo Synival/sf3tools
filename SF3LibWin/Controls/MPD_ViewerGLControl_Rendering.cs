@@ -219,6 +219,16 @@ namespace SF3.Win.Controls {
                 GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
             }
 
+            // TODO: draw boundaries option
+            if (_surfaceModel.CameraUnknownBox != null || _surfaceModel.CameraBoundaryBox != null) {
+                using (_world.SolidShader.Use()) {
+                    GL.Disable(EnableCap.DepthTest);
+                    _surfaceModel.CameraBoundaryBox?.Draw(_world.SolidShader, null);
+                    _surfaceModel.CameraUnknownBox?.Draw(_world.SolidShader, null);
+                    GL.Enable(EnableCap.DepthTest);
+                }
+            }
+
             using (_world.TextureShader.Use()) {
                 if (_surfaceEditor.TileSelectedModel != null) {
                     GL.Disable(EnableCap.DepthTest);
