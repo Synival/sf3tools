@@ -41,58 +41,58 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Unknown Box X1", displayOrder: 1, displayFormat: "X4")]
-        public ushort UnknownBoxX1 {
-            get => (ushort) Data.GetWord(_unknownBoxX1Addr);
+        [TableViewModelColumn(displayName: "Unknown Box X1", displayOrder: 1)]
+        public short UnknownBoxX1 {
+            get => (short) Data.GetWord(_unknownBoxX1Addr);
             set => Data.SetWord(_unknownBoxX1Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Unknown Box Y1", displayOrder: 2, displayFormat: "X4")]
-        public ushort UnknownBoxY1 {
-            get => (ushort) Data.GetWord(_unknownBoxY1Addr);
+        [TableViewModelColumn(displayName: "Unknown Box Y1", displayOrder: 2)]
+        public short UnknownBoxY1 {
+            get => (short) Data.GetWord(_unknownBoxY1Addr);
             set => Data.SetWord(_unknownBoxY1Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Unknown Box X2", displayOrder: 3, displayFormat: "X4")]
-        public ushort UnknownBoxX2 {
-            get => (ushort) Data.GetWord(_unknownBoxX2Addr);
+        [TableViewModelColumn(displayName: "Unknown Box X2", displayOrder: 3)]
+        public short UnknownBoxX2 {
+            get => (short) Data.GetWord(_unknownBoxX2Addr);
             set => Data.SetWord(_unknownBoxX2Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Unknown Box Y2", displayOrder: 4, displayFormat: "X4")]
-        public ushort UnknownBoxY2 {
-            get => (ushort) Data.GetWord(_unknownBoxY2Addr);
+        [TableViewModelColumn(displayName: "Unknown Box Y2", displayOrder: 4)]
+        public short UnknownBoxY2 {
+            get => (short) Data.GetWord(_unknownBoxY2Addr);
             set => Data.SetWord(_unknownBoxY2Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Camera Boundary X1", displayOrder: 5, displayFormat: "X4")]
-        public ushort CameraBoundaryX1 {
-            get => (ushort) Data.GetWord(_cameraBoundaryX1Addr);
+        [TableViewModelColumn(displayName: "Camera Boundary X1", displayOrder: 5)]
+        public short CameraBoundaryX1 {
+            get => (short) Data.GetWord(_cameraBoundaryX1Addr);
             set => Data.SetWord(_cameraBoundaryX1Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Camera Boundary Y1", displayOrder: 6, displayFormat: "X4")]
-        public ushort CameraBoundaryY1 {
-            get => (ushort) Data.GetWord(_cameraBoundaryY1Addr);
+        [TableViewModelColumn(displayName: "Camera Boundary Y1", displayOrder: 6)]
+        public short CameraBoundaryY1 {
+            get => (short) Data.GetWord(_cameraBoundaryY1Addr);
             set => Data.SetWord(_cameraBoundaryY1Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Camera Boundary X2", displayOrder: 7, displayFormat: "X4")]
-        public ushort CameraBoundaryX2 {
-            get => (ushort) Data.GetWord(_cameraBoundaryX2Addr);
+        [TableViewModelColumn(displayName: "Camera Boundary X2", displayOrder: 7)]
+        public short CameraBoundaryX2 {
+            get => (short) Data.GetWord(_cameraBoundaryX2Addr);
             set => Data.SetWord(_cameraBoundaryX2Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Camera Boundary Y2", displayOrder: 8, displayFormat: "X4")]
-        public ushort CameraBoundaryY2 {
-            get => (ushort) Data.GetWord(_cameraBoundaryY2Addr);
+        [TableViewModelColumn(displayName: "Camera Boundary Y2", displayOrder: 8)]
+        public short CameraBoundaryY2 {
+            get => (short) Data.GetWord(_cameraBoundaryY2Addr);
             set => Data.SetWord(_cameraBoundaryY2Addr, value);
         }
     }
