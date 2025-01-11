@@ -7,17 +7,17 @@ using static CommonLib.Extensions.ArrayExtensions;
 
 namespace SF3.Win.OpenGL {
     public class Quad {
-        private static readonly Vector3 c_white = new Vector3(1, 1, 1);
-        private static readonly Vector3[] c_allWhite = [c_white, c_white, c_white, c_white];
+        private static readonly Vector4 c_white = new Vector4(1, 1, 1, 1);
+        private static readonly Vector4[] c_allWhite = [c_white, c_white, c_white, c_white];
 
         public Quad(Vector3[] vertices) : this(vertices, null, 0, c_white) { }
-        public Quad(Vector3[] vertices, Vector3 color) : this(vertices, null, 0, [color, color, color, color]) { }
-        public Quad(Vector3[] vertices, Vector3[] colors) : this(vertices, null, 0, colors) { }
+        public Quad(Vector3[] vertices, Vector4 color) : this(vertices, null, 0, [color, color, color, color]) { }
+        public Quad(Vector3[] vertices, Vector4[] colors) : this(vertices, null, 0, colors) { }
         public Quad(Vector3[] vertices, TextureAnimation textureAnim, byte textureFlags) : this(vertices, textureAnim, textureFlags, c_allWhite) { }
-        public Quad(Vector3[] vertices, TextureAnimation textureAnim, byte textureFlags, Vector3 color)
+        public Quad(Vector3[] vertices, TextureAnimation textureAnim, byte textureFlags, Vector4 color)
             : this(vertices, textureAnim, textureFlags, [color, color, color, color]) { }
 
-        public Quad(Vector3[] vertices, TextureAnimation textureAnim, byte textureFlags, Vector3[] colors) {
+        public Quad(Vector3[] vertices, TextureAnimation textureAnim, byte textureFlags, Vector4[] colors) {
             if (vertices == null || vertices.Length != 4)
                 throw new ArgumentException(nameof(vertices));
             if (colors == null || colors.Length != 4)
@@ -29,8 +29,8 @@ namespace SF3.Win.OpenGL {
             Attributes = [
                 new PolyAttribute(1, OpenTK.Graphics.OpenGL.ActiveAttribType.FloatVec3, "position", 4,
                     vertices.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3)),
-                new PolyAttribute(1, OpenTK.Graphics.OpenGL.ActiveAttribType.FloatVec3, "color", 4,
-                    colors.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3)),
+                new PolyAttribute(1, OpenTK.Graphics.OpenGL.ActiveAttribType.FloatVec4, "color", 4,
+                    colors.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 4)),
             ];
             _attributesByName = Attributes.ToDictionary(x => x.Name);
         }

@@ -4,7 +4,7 @@ uniform sampler2D textureAtlas;
 uniform sampler2D textureTerrainTypes;
 uniform sampler2D textureEventIDs;
 
-in vec3 colorFrag;
+in vec4 colorFrag;
 in vec3 glowFrag;
 in float lightingFrag;
 
@@ -16,7 +16,7 @@ out vec4 FragColor;
 
 void main() {
     vec4 surfaceTex =
-        (texture(textureAtlas, texCoordAtlasFrag) * vec4(colorFrag, 1.0) +
+        (texture(textureAtlas, texCoordAtlasFrag) * colorFrag +
         vec4(glowFrag, 0.0) +
         vec4(vec3(1.0, 1.0, 0.5) * lightingFrag * 0.2, 0));
 

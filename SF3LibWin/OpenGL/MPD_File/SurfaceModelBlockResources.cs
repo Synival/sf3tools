@@ -153,7 +153,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         untexturedSurfaceQuads.Add(newQuad);
                     }
 
-                    var selectionColor = new Vector3(x / (float) SurfaceModelResources.WidthInTiles, y / (float) SurfaceModelResources.HeightInTiles, 0);
+                    var selectionColor = new Vector4(x / (float) SurfaceModelResources.WidthInTiles, y / (float) SurfaceModelResources.HeightInTiles, 0, 1);
                     surfaceSelectionQuads.Add(new Quad(vertices, selectionColor));
                 }
             }
