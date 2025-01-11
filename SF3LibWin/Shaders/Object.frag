@@ -25,4 +25,6 @@ void main() {
         texture(textureEventIDs,     texCoordEventIDsFrag);
 
     FragColor = vec4(mix(surfaceTex.rgb, overlayTex.rgb, overlayTex.a), surfaceTex.a + overlayTex.a * (1.0 - surfaceTex.a));
+    if (FragColor.a < 0.001)
+        discard;
 }
