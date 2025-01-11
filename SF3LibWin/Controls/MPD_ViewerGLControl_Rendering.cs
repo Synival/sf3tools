@@ -247,8 +247,12 @@ namespace SF3.Win.Controls {
 
                 if (DrawHelp && _surfaceEditor.HelpModel != null) {
                     const float c_viewSize = 0.40f;
+
+                    var viewportRatio = (float) Width / Height;
+                    var textureRatio = (float) _surfaceEditor.HelpTexture.Width / _surfaceEditor.HelpTexture.Height;
+
                     UpdateShaderViewMatrix(_world.TextureShader,
-                        Matrix4.CreateScale(2f * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
+                        Matrix4.CreateScale(2f / viewportRatio * textureRatio * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
                         Matrix4.CreateTranslation(1, -1, 0) *
                         _projectionMatrix.Inverted());
 
