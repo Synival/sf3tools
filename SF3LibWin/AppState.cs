@@ -69,6 +69,7 @@ namespace SF3.Win {
         public string FileFullPath { get; private set; }
 
         public bool ViewerDrawWireframe { get; set; } = true;
+        public bool ViewerDrawBoundaries { get; set; } = false;
         public bool ViewerDrawHelp { get; set; } = true;
         public bool ViewerDrawNormals { get; set; } = false;
         public bool ViewerDrawTerrainTypes { get; set; } = false;

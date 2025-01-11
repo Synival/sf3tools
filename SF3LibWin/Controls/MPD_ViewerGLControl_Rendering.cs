@@ -219,13 +219,14 @@ namespace SF3.Win.Controls {
                 GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
             }
 
-            // TODO: draw boundaries option
-            if (_surfaceModel.CameraUnknownBox != null || _surfaceModel.CameraBoundaryBox != null) {
-                using (_world.SolidShader.Use()) {
-                    GL.Disable(EnableCap.DepthTest);
-                    _surfaceModel.CameraBoundaryBox?.Draw(_world.SolidShader, null);
-                    _surfaceModel.CameraUnknownBox?.Draw(_world.SolidShader, null);
-                    GL.Enable(EnableCap.DepthTest);
+            if (DrawBoundaries) {
+                if (_surfaceModel.CameraUnknownBox != null || _surfaceModel.CameraBoundaryBox != null) {
+                    using (_world.SolidShader.Use()) {
+                        GL.Disable(EnableCap.DepthTest);
+                        _surfaceModel.CameraBoundaryBox?.Draw(_world.SolidShader, null);
+                        _surfaceModel.CameraUnknownBox?.Draw(_world.SolidShader, null);
+                        GL.Enable(EnableCap.DepthTest);
+                    }
                 }
             }
 
@@ -314,6 +315,23 @@ namespace SF3.Win.Controls {
                     _drawWireframe = value;
                     var state = AppState.RetrieveAppState();
                     state.ViewerDrawWireframe = value;
+                    state.Serialize();
+                    Invalidate();
+                }
+            }
+        }
+
+        private static bool _drawBoundaries = false;
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawBoundaries {
+            get => _drawBoundaries;
+            set {
+                if (_drawBoundaries != value) {
+                    _drawBoundaries = value;
+                    var state = AppState.RetrieveAppState();
+                    state.ViewerDrawBoundaries = value;
                     state.Serialize();
                     Invalidate();
                 }

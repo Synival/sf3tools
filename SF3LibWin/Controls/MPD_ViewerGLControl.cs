@@ -70,6 +70,7 @@ namespace SF3.Win.Controls {
         private void InitToolstrip() {
             var state = AppState.RetrieveAppState();
             _drawWireframe    = state.ViewerDrawWireframe;
+            _drawBoundaries   = state.ViewerDrawBoundaries;
             _drawHelp         = state.ViewerDrawHelp;
             _drawNormals      = state.ViewerDrawNormals;
             _drawTerrainTypes = state.ViewerDrawTerrainTypes;

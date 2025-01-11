@@ -12,6 +12,7 @@ namespace SF3.Win.Controls {
             Disposed += (s, e) => GLControl.Dispose();
 
             tsbToggleWireframe.Checked   = GLControl.DrawWireframe;
+            tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries;
             tsbToggleHelp.Checked        = GLControl.DrawHelp;
             tsbToggleNormals.Checked     = GLControl.DrawNormals;
             tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes;
@@ -32,7 +33,7 @@ namespace SF3.Win.Controls {
                     case Keys.Right:
                         if (keyData.HasFlag(Keys.Control))
                             sendToGLControl = true;
-                    break;
+                        break;
                 }
 
                 if (sendToGLControl)
@@ -57,6 +58,11 @@ namespace SF3.Win.Controls {
         private void tsbToggleWireframe_Click(object sender, EventArgs e) {
             GLControl.DrawWireframe = !GLControl.DrawWireframe;
             tsbToggleWireframe.Checked = GLControl.DrawWireframe;
+        }
+
+        private void tsbToggleBoundaries_Click(object sender, EventArgs e) {
+            GLControl.DrawBoundaries = !GLControl.DrawBoundaries;
+            tsbToggleBoundaries.Checked = GLControl.DrawBoundaries;
         }
 
         private void tsbToggleHelp_Click(object sender, EventArgs e) {

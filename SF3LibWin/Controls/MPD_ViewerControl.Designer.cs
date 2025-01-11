@@ -36,13 +36,14 @@
             tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
             tilePropertyControl1 = new TilePropertiesControl();
             mpdViewerGLControl1 = new MPD_ViewerGLControl();
+            tsbToggleBoundaries = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbToggleWireframe, toolStripSeparator1, tsbToggleNormals, tsbToggleTerrainType, tsbToggleEventID, toolStripSeparator2, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator3, tsbToggleHelp });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, toolStripSeparator2, tsbToggleNormals, toolStripSeparator1, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator3, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
@@ -56,7 +57,7 @@
             tsbToggleWireframe.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbToggleWireframe.Name = "tsbToggleWireframe";
             tsbToggleWireframe.Size = new System.Drawing.Size(28, 28);
-            tsbToggleWireframe.Text = "Draw Wireframe";
+            tsbToggleWireframe.Text = "Toggle Wireframe";
             tsbToggleWireframe.ToolTipText = "Show Wireframe";
             tsbToggleWireframe.Click += tsbToggleWireframe_Click;
             // 
@@ -72,7 +73,7 @@
             tsbToggleNormals.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbToggleNormals.Name = "tsbToggleNormals";
             tsbToggleNormals.Size = new System.Drawing.Size(28, 28);
-            tsbToggleNormals.Text = "Draw Normal Map";
+            tsbToggleNormals.Text = "Toggle Normal Map";
             tsbToggleNormals.ToolTipText = "Show Normal Map";
             tsbToggleNormals.Click += tsbToggleNormals_Click;
             // 
@@ -164,6 +165,16 @@
             mpdViewerGLControl1.Size = new System.Drawing.Size(582, 545);
             mpdViewerGLControl1.TabIndex = 1;
             // 
+            // tsbToggleBoundaries
+            // 
+            tsbToggleBoundaries.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbToggleBoundaries.Image = Properties.Resources.ShowCameraBoundaries;
+            tsbToggleBoundaries.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbToggleBoundaries.Name = "tsbToggleBoundaries";
+            tsbToggleBoundaries.Size = new System.Drawing.Size(28, 28);
+            tsbToggleBoundaries.Text = "Toggle Boundaries";
+            tsbToggleBoundaries.Click += tsbToggleBoundaries_Click;
+            // 
             // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -194,5 +205,6 @@
         private MPD_ViewerGLControl mpdViewerGLControl1;
         private System.Windows.Forms.ToolStripButton tsbToggleTerrainType;
         private System.Windows.Forms.ToolStripButton tsbToggleEventID;
+        private System.Windows.Forms.ToolStripButton tsbToggleBoundaries;
     }
 }

@@ -169,7 +169,7 @@ namespace SF3.Win.Properties {
         ///uniform sampler2D textureTerrainTypes;
         ///uniform sampler2D textureEventIDs;
         ///
-        ///in vec3 colorFrag;
+        ///in vec4 colorFrag;
         ///in vec3 glowFrag;
         ///in float lightingFrag;
         ///
@@ -181,9 +181,10 @@ namespace SF3.Win.Properties {
         ///
         ///void main() {
         ///    vec4 surfaceTex =
-        ///        (texture(textureAtlas, texCoordAtlasFrag) * vec4(colorFrag, 1.0) +
+        ///        (texture(textureAtlas, texCoordAtlasFrag) * colorFrag +
         ///        vec4(glowFrag, 0.0) +
-        ///        vec4(vec3(1.0, 1.0, 0.5) * lightingFrag * 0 [rest of string was truncated]&quot;;.
+        ///        vec4(vec3(1.0, 1.0, 0.5) * lightingFrag * 0.2, 0));
+        ///        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectFrag {
             get {
@@ -199,7 +200,7 @@ namespace SF3.Win.Properties {
         ///uniform mat4 projection;
         ///
         ///layout (location = 0) in vec3 position;
-        ///layout (location = 1) in vec3 color;
+        ///layout (location = 1) in vec4 color;
         ///layout (location = 2) in vec3 glow;
         ///layout (location = 3) in vec3 normal;
         ///
@@ -207,7 +208,7 @@ namespace SF3.Win.Properties {
         ///layout (location = 5) in vec2 texCoordTerrainTypes;
         ///layout (location = 6) in vec2 texCoordEventIDs;
         ///
-        ///out vec3 colorFrag;
+        ///out vec4 colorFrag;
         ///out vec3 glowFrag;
         ///out float lightingFrag;
         ///
@@ -217,6 +218,16 @@ namespace SF3.Win.Properties {
         internal static string ObjectVert {
             get {
                 return ResourceManager.GetString("ObjectVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShowCameraBoundaries {
+            get {
+                object obj = ResourceManager.GetObject("ShowCameraBoundaries", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -243,11 +254,11 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized string similar to #version 330 core
         ///
-        ///in vec3 colorFrag;
+        ///in vec4 colorFrag;
         ///out vec4 FragColor;
         ///
         ///void main() {
-        ///    FragColor = vec4(colorFrag, 1.0);
+        ///    FragColor = colorFrag;
         ///}
         ///.
         /// </summary>
@@ -261,13 +272,13 @@ namespace SF3.Win.Properties {
         ///   Looks up a localized string similar to #version 330 core
         ///
         ///layout (location = 0) in vec3 position;
-        ///layout (location = 1) in vec3 color;
+        ///layout (location = 1) in vec4 color;
         ///
         ///uniform mat4 model;
         ///uniform mat4 view;
         ///uniform mat4 projection;
         ///
-        ///out vec3 colorFrag;
+        ///out vec4 colorFrag;
         ///
         ///void main() {
         ///    gl_Position = projection * view * model * vec4(position, 1.0);
@@ -296,14 +307,14 @@ namespace SF3.Win.Properties {
         ///
         ///uniform sampler2D texture0;
         ///
-        ///in vec3 colorFrag;
+        ///in vec4 colorFrag;
         ///in vec2 texCoord0Frag;
         ///in vec3 glowFrag;
         ///
         ///out vec4 FragColor;
         ///
         ///void main() {
-        ///    FragColor = texture(texture0, texCoord0Frag) * vec4(colorFrag, 1.0) + vec4(glowFrag, 0.0);
+        ///    FragColor = texture(texture0, texCoord0Frag) * colorFrag + vec4(glowFrag, 0.0);
         ///}
         ///.
         /// </summary>
@@ -317,7 +328,7 @@ namespace SF3.Win.Properties {
         ///   Looks up a localized string similar to #version 330 core
         ///
         ///layout (location = 0) in vec3 position;
-        ///layout (location = 1) in vec3 color;
+        ///layout (location = 1) in vec4 color;
         ///layout (location = 2) in vec2 texCoord0;
         ///layout (location = 3) in vec3 glow;
         ///
@@ -325,7 +336,7 @@ namespace SF3.Win.Properties {
         ///uniform mat4 view;
         ///uniform mat4 projection;
         ///
-        ///out vec3 colorFrag;
+        ///out vec4 colorFrag;
         ///out vec2 texCoord0Frag;
         ///out vec3 glowFrag;
         ///
@@ -399,7 +410,7 @@ namespace SF3.Win.Properties {
         ///uniform sampler2D texture0;
         ///uniform sampler2D texture1;
         ///
-        ///in vec3 colorFrag;
+        ///in vec4 colorFrag;
         ///in vec2 texCoord0Frag;
         ///in vec2 texCoord1Frag;
         ///
@@ -408,7 +419,7 @@ namespace SF3.Win.Properties {
         ///void main() {
         ///    vec4 tex1Color = texture(texture1, texCoord1Frag);
         ///    FragColor = 
-        ///        texture(texture0, texCoord0Frag) * vec4(colorFrag, 1.0) * (1.0 - tex1Color.a) +
+        ///        texture(texture0, texCoord0Frag) * colorFrag * (1.0 - tex1Color.a) +
         ///        vec4(tex1Color.rgb * tex1Color.a, tex1Color.a);
         ///}
         ///.
@@ -423,7 +434,7 @@ namespace SF3.Win.Properties {
         ///   Looks up a localized string similar to #version 330 core
         ///
         ///layout (location = 0) in vec3 position;
-        ///layout (location = 1) in vec3 color;
+        ///layout (location = 1) in vec4 color;
         ///layout (location = 2) in vec2 texCoord0;
         ///layout (location = 3) in vec2 texCoord1;
         ///
@@ -431,7 +442,7 @@ namespace SF3.Win.Properties {
         ///uniform mat4 view;
         ///uniform mat4 projection;
         ///
-        ///out vec3 colorFrag;
+        ///out vec4 colorFrag;
         ///out vec2 texCoord0Frag;
         ///out vec2 texCoord1Frag;
         ///
