@@ -220,11 +220,11 @@ namespace SF3.Win.Controls {
             }
 
             if (DrawBoundaries) {
-                if (_surfaceModel.CameraUnknownBox != null || _surfaceModel.CameraBoundaryBox != null) {
+                if (_surfaceModel.CameraBoundaryModel != null || _surfaceModel.BattleBoundaryModel != null) {
                     using (_world.SolidShader.Use()) {
                         GL.Disable(EnableCap.DepthTest);
-                        _surfaceModel.CameraBoundaryBox?.Draw(_world.SolidShader, null);
-                        _surfaceModel.CameraUnknownBox?.Draw(_world.SolidShader, null);
+                        _surfaceModel.BattleBoundaryModel?.Draw(_world.SolidShader, null);
+                        _surfaceModel.CameraBoundaryModel?.Draw(_world.SolidShader, null);
                         GL.Enable(EnableCap.DepthTest);
                     }
                 }

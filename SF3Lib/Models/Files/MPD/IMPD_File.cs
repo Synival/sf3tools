@@ -39,7 +39,7 @@ namespace SF3.Models.Files.MPD {
         UnknownUInt16Table Offset3Table { get; }
         Offset4Table Offset4Table { get; }
         TextureAnimationTable TextureAnimations { get; }
-        CameraSettingsTable CameraSettingsTable { get; }
+        BoundariesTable BoundariesTable { get; }
 
         /// <summary>
         /// The compressed data for each texture in Chunk3, paired with an offset.

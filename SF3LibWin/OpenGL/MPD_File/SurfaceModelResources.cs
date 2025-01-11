@@ -38,71 +38,71 @@ namespace SF3.Win.OpenGL.MPD_File {
         public void Reset() {
             foreach (var block in Blocks)
                 block.Reset();
-            ResetCamera();
+            ResetBoundaries();
         }
 
-        public void ResetCamera() {
-            if (CameraUnknownBox != null) {
-                Models.Remove(CameraUnknownBox);
-                CameraUnknownBox.Dispose();
-                CameraUnknownBox = null;
+        public void ResetBoundaries() {
+            if (CameraBoundaryModel != null) {
+                Models.Remove(CameraBoundaryModel);
+                CameraBoundaryModel.Dispose();
+                CameraBoundaryModel = null;
             }
 
-            if (CameraBoundaryBox != null) {
-                Models.Remove(CameraBoundaryBox);
-                CameraBoundaryBox.Dispose();
-                CameraBoundaryBox = null;
+            if (BattleBoundaryModel != null) {
+                Models.Remove(BattleBoundaryModel);
+                BattleBoundaryModel.Dispose();
+                BattleBoundaryModel = null;
             }
         }
 
         public void Update(IMPD_File mpdFile) {
             foreach (var block in Blocks)
                 block.Update(mpdFile);
-            UpdateCamera(mpdFile);
+            UpdateBoundaries(mpdFile);
         }
 
-        public void UpdateCamera(IMPD_File mpdFile) {
-            ResetCamera();
+        public void UpdateBoundaries(IMPD_File mpdFile) {
+            ResetBoundaries();
 
-            var cameraSettings = mpdFile.CameraSettingsTable.Rows[0];
+            var boundaries = mpdFile.BoundariesTable.Rows[0];
 
-            // Unknown coords
-            var ucX1 =  0.0f + cameraSettings.UnknownBoxX1 / 32.00f + WorldResources.ModelOffsetX;
-            var ucY1 = 64.0f - cameraSettings.UnknownBoxY1 / 32.00f + WorldResources.ModelOffsetZ;
-            var ucX2 =  0.0f + cameraSettings.UnknownBoxX2 / 32.00f + WorldResources.ModelOffsetX;
-            var ucY2 = 64.0f - cameraSettings.UnknownBoxY2 / 32.00f + WorldResources.ModelOffsetZ;
+            // Camera boundary coords
+            var ccX1 =  0.0f + boundaries.CameraX1 / 32.00f + WorldResources.ModelOffsetX;
+            var ccY1 = 64.0f - boundaries.CameraY1 / 32.00f + WorldResources.ModelOffsetZ;
+            var ccX2 =  0.0f + boundaries.CameraX2 / 32.00f + WorldResources.ModelOffsetX;
+            var ccY2 = 64.0f - boundaries.CameraY2 / 32.00f + WorldResources.ModelOffsetZ;
 
-            // Boundary coords
-            var bcX1 =  0.0f + cameraSettings.CameraBoundaryX1 / 32.00f + WorldResources.ModelOffsetX;
-            var bcY1 = 64.0f - cameraSettings.CameraBoundaryY1 / 32.00f + WorldResources.ModelOffsetZ;
-            var bcX2 =  0.0f + cameraSettings.CameraBoundaryX2 / 32.00f + WorldResources.ModelOffsetX;
-            var bcY2 = 64.0f - cameraSettings.CameraBoundaryY2 / 32.00f + WorldResources.ModelOffsetZ;
+            // Battle boundary coords
+            var bcX1 =  0.0f + boundaries.BattleX1 / 32.00f + WorldResources.ModelOffsetX;
+            var bcY1 = 64.0f - boundaries.BattleY1 / 32.00f + WorldResources.ModelOffsetZ;
+            var bcX2 =  0.0f + boundaries.BattleX2 / 32.00f + WorldResources.ModelOffsetX;
+            var bcY2 = 64.0f - boundaries.BattleY2 / 32.00f + WorldResources.ModelOffsetZ;
 
             // Fetch minimum height of the world.
             var minHeight = mpdFile.Tiles.To1DArray().SelectMany(x => x.GetSurfaceModelVertexHeights()).Min();
 
-            var unknownQuads = new Quad[] {
+            var cameraQuads = new Quad[] {
                 new Quad([
-                    new Vector3(ucX1, minHeight, ucY1),
-                    new Vector3(ucX2, minHeight, ucY1),
-                    new Vector3(ucX2, minHeight, ucY2),
-                    new Vector3(ucX1, minHeight, ucY2)
+                    new Vector3(ccX1, minHeight, ccY1),
+                    new Vector3(ccX2, minHeight, ccY1),
+                    new Vector3(ccX2, minHeight, ccY2),
+                    new Vector3(ccX1, minHeight, ccY2)
                 ], new Vector4(1.00f, 0.00f, 0.00f, 0.25f))
             };
-            CameraUnknownBox = new QuadModel(unknownQuads);
+            CameraBoundaryModel = new QuadModel(cameraQuads);
 
-            var boundaryQuads = new Quad[] {
+            var battleQuads = new Quad[] {
                 new Quad([
                     new Vector3(bcX1, minHeight, bcY1),
                     new Vector3(bcX2, minHeight, bcY1),
                     new Vector3(bcX2, minHeight, bcY2),
                     new Vector3(bcX1, minHeight, bcY2)
-                ], new Vector4(0.00f, 1.00f, 1.00f, 0.25f))
+                ], new Vector4(0.00f, 0.50f, 1.00f, 0.25f))
             };
-            CameraBoundaryBox = new QuadModel(boundaryQuads);
+            BattleBoundaryModel = new QuadModel(battleQuads);
 
-            Models.Add(CameraUnknownBox);
-            Models.Add(CameraBoundaryBox);
+            Models.Add(CameraBoundaryModel);
+            Models.Add(BattleBoundaryModel);
         }
 
         public void Invalidate() {
@@ -127,8 +127,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                 Textures = null;
 
                 Models?.Dispose();
-                CameraUnknownBox = null;
-                CameraBoundaryBox = null;
+                CameraBoundaryModel = null;
+                BattleBoundaryModel = null;
                 Models = null;
             }
 
@@ -153,8 +153,8 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         public DisposableList<Texture> Textures { get; private set; } = null;
 
-        public QuadModel CameraUnknownBox { get; private set; } = null;
-        public QuadModel CameraBoundaryBox { get; private set; } = null;
+        public QuadModel CameraBoundaryModel { get; private set; } = null;
+        public QuadModel BattleBoundaryModel { get; private set; } = null;
 
         public DisposableList<QuadModel> Models { get; private set; } = null;
     }

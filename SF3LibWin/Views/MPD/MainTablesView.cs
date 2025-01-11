@@ -33,8 +33,8 @@ namespace SF3.Win.Views.MPD {
             if (Model.TextureAnimations != null)
                 CreateChild(new TextureAnimationsView("Texture Animations", Model.TextureAnimations, ngc));
 
-            if (Model.CameraSettingsTable != null)
-                CreateChild(new TableView("Camera Settings", Model.CameraSettingsTable, ngc));
+            if (Model.BoundariesTable != null)
+                CreateChild(new TableView("Boundaries", Model.BoundariesTable, ngc));
 
             return Control;
         }
