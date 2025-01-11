@@ -87,6 +87,7 @@ namespace SF3.Models.Files.MPD {
             tables.AddRange(MakeLightingTables(header));
             tables.AddRange(MakeTexturePaletteTables(header));
             tables.AddRange(MakeTextureAnimationTables(header, areAnimatedTextures32Bit));
+            tables.Add(CameraSettingsTable = CameraSettingsTable.Create(Data, header.OffsetCameraSettings - c_RamOffset));
             tables.AddRange(MakeUnknownTables(header));
 
             return tables.ToArray();
@@ -485,6 +486,9 @@ namespace SF3.Models.Files.MPD {
         public TextureAnimationTable TextureAnimations { get; private set; }
 
         public List<Chunk3Frame> Chunk3Frames { get; private set; }
+
+        [BulkCopyRecurse]
+        public CameraSettingsTable CameraSettingsTable { get; private set; }
 
         [BulkCopyRecurse]
         public Surface Surface { get; private set; }

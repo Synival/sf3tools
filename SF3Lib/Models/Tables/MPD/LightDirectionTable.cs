@@ -15,7 +15,7 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public override bool Load()
-            => LoadUntilMax((id, address) => new LightDirection(Data, id, "Direction", address));
+            => LoadUntilMax((id, address) => new LightDirection(Data, id, "LightDirection", address));
 
         public override int? MaxSize => 1;
     }
