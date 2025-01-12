@@ -87,7 +87,7 @@ namespace SF3.Models.Files.MPD {
             tables.AddRange(MakeLightingTables(header));
             tables.AddRange(MakeTexturePaletteTables(header));
             tables.AddRange(MakeTextureAnimationTables(header, areAnimatedTextures32Bit));
-            tables.Add(BoundariesTable = BoundariesTable.Create(Data, header.OffsetCameraSettings - c_RamOffset));
+            tables.Add(BoundariesTable = BoundariesTable.Create(Data, header.OffsetBoundaries - c_RamOffset));
             tables.AddRange(MakeUnknownTables(header));
 
             return tables.ToArray();
@@ -119,10 +119,10 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeLightingTables(MPDHeaderModel header) {
             var tables = new List<ITable>();
 
-            if (header.OffsetLightPal != 0)
-                tables.Add(LightPalette = ColorTable.Create(Data, header.OffsetLightPal - c_RamOffset, 32));
-            if (header.OffsetLightDir != 0)
-                tables.Add(LightDirectionTable = LightDirectionTable.Create(Data, header.OffsetLightDir - c_RamOffset));
+            if (header.OffsetLightPalette != 0)
+                tables.Add(LightPalette = ColorTable.Create(Data, header.OffsetLightPalette - c_RamOffset, 32));
+            if (header.OffsetLightDirection != 0)
+                tables.Add(LightDirectionTable = LightDirectionTable.Create(Data, header.OffsetLightDirection - c_RamOffset));
 
             return tables.ToArray();
         }

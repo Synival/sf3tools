@@ -5,15 +5,15 @@ namespace SF3.Models.Structs.MPD {
     public class MPDHeaderModel : Struct {
         private readonly int unknown1Address;             // int16  Unknown. Might be map id.
         private readonly int unknown2Address;             // int16  Always zero 0x0000
-        private readonly int offset1Address;              // int32  Always 0x0c. Pointer to 0x20 unknown int16. See (#header-offset-1).
-        private readonly int offset2Address;              // int32  Always 0x4c. pointer to a single unknown int32. See (#header-offset-2).
+        private readonly int offsetLightPaletteAddress;   // int32  Always 0x0c. Pointer to 32 values for light palette. See (#header-offset-1).
+        private readonly int offsetLightDirAddress;       // int32  Always 0x4c. Pointer to light direction. See (#header-offset-2).
         private readonly int offset3Address;              // int32  Always 0x50. pointer to 0x20 unknown int16s at the start of the file. Mostly zero or 0x8000. (#header-offset-3)
         private readonly int unknown3Address;             // int16  Unknown small value. maybe some count?
         private readonly int unknown4Address;             // int16  Always zero
         private readonly int offset4Address;              // int32  Always 0x90. Pointer to unknown structure. See (#header-offset-4)
         private readonly int offsetTextureAnimationsAddress;  // int32  Offset to list of texture groups. See (#texture-groups)
         private readonly int offset6Address;              // int32  Pointer to unknown list.
-        private readonly int offsetCameraAddress;         // int32  Pointer to camera settings.
+        private readonly int offsetBoundariesAddress;     // int32  Pointer to camera settings.
         private readonly int offsetMesh1Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
         private readonly int offsetMesh2Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
         private readonly int offsetMesh3Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
@@ -33,15 +33,15 @@ namespace SF3.Models.Structs.MPD {
         : base(data, id, name, address, 0x58) {
             unknown1Address             = Address;        // 2 bytes
             unknown2Address             = Address + 0x02; // 2 bytes
-            offset1Address              = Address + 0x04; // 4 bytes
-            offset2Address              = Address + 0x08; // 4 bytes
+            offsetLightPaletteAddress   = Address + 0x04; // 4 bytes
+            offsetLightDirAddress       = Address + 0x08; // 4 bytes
             offset3Address              = Address + 0x0C; // 4 bytes
             unknown3Address             = Address + 0x10; // 2 bytes
             unknown4Address             = Address + 0x12; // 2 bytes
             offset4Address              = Address + 0x14; // 4 bytes
             offsetTextureAnimationsAddress = Address + 0x18; // 4 bytes
             offset6Address              = Address + 0x1C; // 4 bytes
-            offsetCameraAddress         = Address + 0x20; // 4 bytes
+            offsetBoundariesAddress     = Address + 0x20; // 4 bytes
             offsetMesh1Address          = Address + 0x24; // 4 bytes
             offsetMesh2Address          = Address + 0x28; // 4 bytes
             offsetMesh3Address          = Address + 0x2C; // 4 bytes
@@ -86,16 +86,16 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 2, isPointer: true)]
-        public int OffsetLightPal {
-            get => Data.GetDouble(offset1Address);
-            set => Data.SetDouble(offset1Address, value);
+        public int OffsetLightPalette {
+            get => Data.GetDouble(offsetLightPaletteAddress);
+            set => Data.SetDouble(offsetLightPaletteAddress, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 3, isPointer: true)]
-        public int OffsetLightDir {
-            get => Data.GetDouble(offset2Address);
-            set => Data.SetDouble(offset2Address, value);
+        public int OffsetLightDirection {
+            get => Data.GetDouble(offsetLightDirAddress);
+            set => Data.SetDouble(offsetLightDirAddress, value);
         }
 
         [BulkCopy]
@@ -142,9 +142,9 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 10, isPointer: true)]
-        public int OffsetCameraSettings {
-            get => Data.GetDouble(offsetCameraAddress);
-            set => Data.SetDouble(offsetCameraAddress, value);
+        public int OffsetBoundaries {
+            get => Data.GetDouble(offsetBoundariesAddress);
+            set => Data.SetDouble(offsetBoundariesAddress, value);
         }
 
         [BulkCopy]
