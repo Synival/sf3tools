@@ -39,34 +39,61 @@ namespace MPD_Analyzer {
                     // Create an MPD file that works with our new ByteData.
                     try {
                         using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts)) {
-                            // Anything Scenario 1 or higher should have Chunk[20].
-                            bool shouldHaveChunk20 = scenario >= ScenarioType.Scenario2;
-                            bool hasChunk20 = mpdFile.ChunkHeader.Rows[20].ChunkAddress > 0;
-                            if (shouldHaveChunk20 != hasChunk20)
-                                Console.WriteLine("  !!! Chunk[20] problem! ShouldHave=" + shouldHaveChunk20 + ", DoesHave=" + hasChunk20);
-                            if (mpdFile.ChunkHeader.Rows[20].ChunkSize > 0)
-                                Console.WriteLine("  Chunk20 exists: " + mpdFile.ChunkHeader.Rows[20].ChunkSize);
-
-                            // Anything Scenario 2 or higher should have Chunk[21].
-                            bool shouldHaveChunk21 = scenario >= ScenarioType.Scenario2;
-                            bool hasChunk21 = mpdFile.ChunkHeader.Rows[21].ChunkAddress > 0;
-                            if (shouldHaveChunk21 != hasChunk21)
-                                Console.WriteLine("  !!! Chunk[21] problem! ShouldHave=" + shouldHaveChunk21 + ", DoesHave=" + hasChunk21);
-                            if (mpdFile.ChunkHeader.Rows[21].ChunkSize > 0)
-                                Console.WriteLine("  Chunk21 exists: " + mpdFile.ChunkHeader.Rows[21].ChunkSize);
-
-                            // Anything Scenario 3 or higher should have Palette3.
-                            bool shouldHavePalette3 = scenario >= ScenarioType.Scenario3;
-                            bool hasPalette3 = mpdFile.MPDHeader.Data.GetWord(mpdFile.MPDHeader.Address + 0x44) == 0x0029;
-                            if (shouldHavePalette3 != hasPalette3)
-                                Console.WriteLine("  !!! Palette3 problem! ShouldHave=" + shouldHavePalette3 + ", DoesHave=" + hasPalette3);
-
                             // Is this MPD file in the wrong format for this scenario? (Scenario 3 and Premium Disk are the same)
+                            // (This actually happens!)
                             var expectedScenario = (scenario == ScenarioType.PremiumDisk) ? ScenarioType.Scenario3 : scenario;
                             if (mpdFile.Scenario != expectedScenario)
                                 Console.WriteLine("  !!! Wrong scenario for this disc! ShouldBe=" + expectedScenario + ", Is=" + mpdFile.Scenario);
 
-                            // This *would* report irregularities in heightmaps, but they don't exist, so they report nothing! :)
+                            // Anything Scenario 2 or higher should have addresses for Chunk[20] and Chunk[21].
+                            bool shouldHaveChunk20_21 = mpdFile.Scenario >= ScenarioType.Scenario2;
+                            bool hasChunk20 = mpdFile.ChunkHeader.Rows[20].ChunkAddress > 0;
+                            bool hasChunk21 = mpdFile.ChunkHeader.Rows[21].ChunkAddress > 0;
+
+                            if (shouldHaveChunk20_21 != hasChunk20)
+                                Console.WriteLine("  !!! Chunk[20] problem! ShouldHave=" + shouldHaveChunk20_21 + ", DoesHave=" + hasChunk20);
+                            if (shouldHaveChunk20_21 != hasChunk21)
+                                Console.WriteLine("  !!! Chunk[21] problem! ShouldHave=" + shouldHaveChunk20_21 + ", DoesHave=" + hasChunk21);
+
+                            // For Scenario 2 onwards, if Chunk 2 is empty, Chunk 20 should probably have the surface data, or nothing at all.
+                            if (mpdFile.Scenario >= ScenarioType.Scenario2) {
+                                if (!mpdFile.ChunkHeader.Rows[2].Exists) {
+                                    var fn = file;
+                                    if (mpdFile.ChunkHeader.Rows[20].Exists)
+                                        ;
+                                    if (mpdFile.ChunkHeader.Rows[20].Exists && mpdFile.ChunkHeader.Rows[20].ChunkSize != 0xCF00)
+                                        Console.WriteLine("  !!! Chunk[2] missing, Chunk[20] present, but not surface data!");
+                                    if (mpdFile.ChunkHeader.Rows[21].Exists)
+                                        Console.WriteLine("  !!! Chunk[2] missing, but Chunk[21] exists??");
+                                }
+                                else {
+                                    if (!mpdFile.ChunkHeader.Rows[20].Exists) {
+                                        // Three valid MPDs in Scenario 3 have Chunk[2] but no Chunk[20], but that's it.
+                                        // This isn't the case in Scenario 2 or the Premium Disk.
+                                        Console.WriteLine("  !!! Chunk[2] exists, but Chunk[20] should exist as well!");
+                                        if (mpdFile.ChunkHeader.Rows[21].Exists)
+                                            Console.WriteLine("  !!! Chunk[2] and Chunk[20] is missing, but Chunk[21] exists??");
+                                    }
+                                }
+                            }
+
+                            // Anything Scenario 3 or higher should have Palette3.
+                            bool shouldHavePalette3 = mpdFile.Scenario >= ScenarioType.Scenario3;
+                            bool hasPalette3 = mpdFile.MPDHeader.Data.GetWord(mpdFile.MPDHeader.Address + 0x44) == 0x0029;
+                            if (shouldHavePalette3 != hasPalette3)
+                                Console.WriteLine("  !!! Palette3 problem! ShouldHave=" + shouldHavePalette3 + ", DoesHave=" + hasPalette3);
+
+                            // If the disc is Scenario 3, all palettes should be present.
+                            if (mpdFile.Scenario >= ScenarioType.Scenario3) {
+                                if (mpdFile.TexturePalettes[0] == null)
+                                    Console.WriteLine("  !!! Scenario3 Palette[0] doesn't exist!");
+                                if (mpdFile.TexturePalettes[1] == null)
+                                    Console.WriteLine("  !!! Scenario3 Palette[1] doesn't exist!");
+                                if (mpdFile.TexturePalettes[2] == null)
+                                    Console.WriteLine("  !!! Scenario3 Palette[2] doesn't exist!");
+                            }
+
+                            // This *would* report irregularities in heightmaps, if the existed :)
                             if (mpdFile.SurfaceModel != null) {
                                 var corners = Enum.GetValues<CornerType>();
                                 foreach (var tile in mpdFile.Tiles) {
