@@ -1,3 +1,48 @@
+## 2025-01-13
+
+This bug update introduces an MPD Editor! MPD files contain 3D map geometry, tiles, textures, terrain types, and much more. In the current version of the MPD Editor, you can view and modify all the tiles of a map, modify their textures, and more!
+
+### MPD Editor
+
+- Compression/decompression code for MPD chunks by Agrathejagged (https://github.com/Agrathejagged)
+- 3D viewer and editor with mouse and keyboard controls
+- Tiles can be selected and their properties can be modified
+- Special overlayed views for terrain types, tile event IDs, and camera/battle boundaries
+- Normal maps can be recalculated using a better method than used in SF3
+- Textures can be viewed, exported, and re-imported
+- Animated textures can be viewed, and their individual frames can be exported and re-imported
+- Light palette and direction can be modified
+- Camera/battle boundaries can be modified
+- Color palettes can be modified
+- Chunk table is automatically re-compressed and rebuilt upon saving
+
+### Sample Projects
+
+- Grayscaler: Opens all MPD files, converts their textures to grayscale, and outputs them to a destination folder.
+- LightPaletteSetter: Opens all MPD files, applies a specified light palette and direction, and outputs them to a destination folder.
+- MPD\_Analyzer: Opens all MPD files across all discs and checks for abnormalities.
+- TextureExtractor: Opens all MPD files and dumps all unique textures to a folder. Textures are identified by MD5 hash.
+
+### All Editors
+
+- Read-only values are now greyed-out
+- Clicking "named values" with combo boxes now automatically expand the combo box (saved you a click!)
+- Fixed several bugs with editing integer values of different sizes and signedness
+
+### Big Code Changes
+
+- Updated all frontend projects to .NET 8.0. Backend projects are still .NET Standard 2.0
+- New editor code, currently only used in MPD Editor and IconPointerEditor:
+    - Tables for data (ObjectListViews) are now automatically created using property annotations
+    - Editors are now components (Views) rather than 'Form's, so multiple editors of different types can be loaded simultaneously
+- Refactored a lot of core stuff for opening and modifying binary files
+- Lots of restructuring of structs, tables, and "files" in SF3Lib
+- Renamed SF3Editor to SF3LibWin -- it's now a library for anything specific to the Windows frontend
+- Migrated a lot of code from individual editor projects to SF3LibWin
+- Introduced 'ByteArray'. This is a wrapper for byte[] that can be renamed and listened-to for "modified" events
+- Introduced 'ByteArraySegment'. This represents a small window of byte[]'s inside a 'ByteArray' that can be resized dynamically, affecting the parent and other neighboring 'ByteArraySegment's.
+- Updated 'ByteData's to use new 'IByteArray' instead of byte[].
+
 ## 2024-11-10
 
 A few nice extra features of quality-of-life changes that deserve to be released
