@@ -85,9 +85,9 @@ namespace Grayscaler {
                     var value = imageData[x, y];
 
                     // Produce a luminance value from RGB channels.
-                    const byte r = 0x0F; // (value >>  0) & 0x1F;
-                    const byte g = 0x0F; // (value >>  5) & 0x1F;
-                    const byte b = 0x0F; // (value >> 10) & 0x1F;
+                    var r = (byte) ((value >>  0) & 0x1F);
+                    var g = (byte) ((value >>  5) & 0x1F);
+                    var b = (byte) ((value >> 10) & 0x1F);
                     var l = Math.Min((int) (0.2126 * r + 0.7152 * g + 0.0722 * b), 0x1F);
 
                     // Update the value, preserving the transparency bit (0x8000).
