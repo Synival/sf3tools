@@ -78,6 +78,7 @@ namespace SF3.Models.Tables.MPD.Surface {
             }
 
             var count = sumNormals.Count;
+                const float maxFloat = 16383 / 16384f;
             return new VECTOR(
                 components[0] / count,
                 components[1] / count,
