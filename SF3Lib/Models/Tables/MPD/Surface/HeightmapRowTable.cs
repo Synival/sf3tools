@@ -50,12 +50,12 @@ namespace SF3.Models.Tables.MPD.Surface {
             void TryAddQuadNormal(int vx, int vy) {
                 if (vx >= 0 && vy >= 0 && vx <= 63 && vy <= 63) {
                     var heights = Rows[vy].GetQuadHeights(vx);
+                    // SF3 intentionally cuts quad height by half when calculating surface vertex normals.
                     var quad = new POLYGON(new VECTOR[] {
-                        // This magic 4.4 number produces the most simular results to what we see in-game.
-                        new VECTOR(0.00f, heights[0], 1.00f),
-                        new VECTOR(1.00f, heights[1], 1.00f),
-                        new VECTOR(1.00f, heights[2], 0.00f),
-                        new VECTOR(0.00f, heights[3], 0.00f)
+                        new VECTOR(0.00f, heights[0] / 2, 1.00f),
+                        new VECTOR(1.00f, heights[1] / 2, 1.00f),
+                        new VECTOR(1.00f, heights[2] / 2, 0.00f),
+                        new VECTOR(0.00f, heights[3] / 2, 0.00f)
                     });
                     sumNormals.Add(quad.GetNormal(calculationMethod));
                 }

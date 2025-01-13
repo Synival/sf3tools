@@ -123,7 +123,7 @@ namespace SF3.ByteData {
         public void SetCompressedFIXED(int location, CompressedFIXED value) {
             // These are *weird* -- the *lowest* bit is the signed bit.
             var uWord = (ushort) value.RawShort;
-            SetWord(location, ((value.RawShort & 0x7FFF) << 2) + ((value.RawShort & 0x8000) >> 15));
+            SetWord(location, ((value.RawShort & 0x7FFF) << 1) + ((value.RawShort & 0x8000) >> 15));
         }
 
         public void SetFIXED(int location, FIXED value) => SetDouble(location, value.RawInt);

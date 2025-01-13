@@ -11,5 +11,5 @@ out vec3 normalFrag;
 
 void main() {
     gl_Position = projection * view * model * vec4(position, 1.0);
-    normalFrag = normal * 0.5 + 0.5;
+    normalFrag = normal * vec3(1.0, 0.0, 1.0) + 0.5;
 }
