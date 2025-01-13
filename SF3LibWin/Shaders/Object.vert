@@ -3,6 +3,7 @@
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+uniform vec3 lightPosition;
 
 layout (location = 0) in vec3 position;
 layout (location = 1) in vec4 color;
@@ -25,9 +26,9 @@ void main() {
     gl_Position   = projection * view * model * vec4(position, 1.0);
     colorFrag     = color;
     glowFrag      = glow;
-    lightingFrag  = normal.x + normal.z + 0.25;
 
-    texCoordAtlasFrag       = texCoordAtlas;
+    lightingFrag             = dot(normal, lightPosition) * 0.50 + 0.50;
+    texCoordAtlasFrag        = texCoordAtlas;
     texCoordTerrainTypesFrag = texCoordTerrainTypes;
     texCoordEventIDsFrag     = texCoordEventIDs;
 }

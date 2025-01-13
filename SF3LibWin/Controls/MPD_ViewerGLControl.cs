@@ -118,6 +118,7 @@ namespace SF3.Win.Controls {
                     _surfaceModel?.Invalidate();
                 }
 
+                UpdateLighting();
                 Invalidate();
             }
         }

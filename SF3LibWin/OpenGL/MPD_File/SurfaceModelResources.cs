@@ -105,6 +105,17 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models.Add(BattleBoundaryModel);
         }
 
+        public void SetLightingTexture(Texture texture) {
+            if (LightingTexture != null) {
+                Textures.Remove(LightingTexture);
+                LightingTexture.Dispose();
+                LightingTexture = null;
+            }
+
+            LightingTexture = texture;
+            Textures.Add(texture);
+        }
+
         public void Invalidate() {
             foreach (var block in Blocks)
                 block.Invalidate();
@@ -124,6 +135,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 Textures?.Dispose();
                 TerrainTypesTexture = null;
                 EventIDsTexture = null;
+                LightingTexture = null;
                 Textures = null;
 
                 Models?.Dispose();
@@ -150,6 +162,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         public Texture TerrainTypesTexture { get; private set; } = null;
         public Texture EventIDsTexture { get; private set; } = null;
+        public Texture LightingTexture { get; private set; } = null;
 
         public DisposableList<Texture> Textures { get; private set; } = null;
 

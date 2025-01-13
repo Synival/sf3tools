@@ -94,11 +94,14 @@ namespace SF3.Win.Controls {
             tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
         }
 
-        public void UpdateModels() {
-            if (MPD_File == null)
-                return;
+        public void UpdateLighting() {
+            if (MPD_File != null)
+                GLControl.UpdateLighting();
+        }
 
-            GLControl.UpdateSurfaceModels();
+        public void UpdateModels() {
+            if (MPD_File != null)
+                GLControl.UpdateSurfaceModels();
         }
 
         private void tsbRecalculateLightmapOriginalMath_Click(object sender, EventArgs e) {

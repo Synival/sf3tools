@@ -28,6 +28,7 @@ namespace SF3.Win.OpenGL {
             new TextureInfo(4, TextureUnit.Texture4, "textureAtlas",        "texCoordAtlas"),
             new TextureInfo(5, TextureUnit.Texture5, "textureTerrainTypes", "texCoordTerrainTypes"),
             new TextureInfo(6, TextureUnit.Texture6, "textureEventIDs",     "texCoordEventIDs"),
+            new TextureInfo(7, TextureUnit.Texture7, "textureLighting",     "texCoordLighting"),
         ];
 
         public static TextureInfo GetTextureInfo(MPD_TextureUnit texUnit)

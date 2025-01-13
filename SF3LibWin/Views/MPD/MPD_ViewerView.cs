@@ -22,7 +22,10 @@ namespace SF3.Win.Views.MPD {
             // TODO: how to refresh???
         }
 
-        public void UpdateMap() => ViewerControl.UpdateModels();
+        public void UpdateMap() {
+            ViewerControl.UpdateLighting();
+            ViewerControl.UpdateModels();
+        }
 
         public IMPD_File Model { get; }
 

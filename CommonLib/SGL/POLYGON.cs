@@ -42,11 +42,11 @@ namespace CommonLib.SGL {
                             return vertexNormals.Aggregate((a, b) => a + b).Normalized();
 
                         case POLYGON_NormalCalculationMethod.MostExtremeVerticalTriangle:
-                            return vertexNormals.OrderBy(x => Math.Abs(x.Y.Float)).First();
+                            return vertexNormals.OrderBy(x => 1.05f - Math.Abs(x.Y.Float)).First();
 
                         case POLYGON_NormalCalculationMethod.WeightedVerticalTriangles:
                             return vertexNormals
-                                .Select(x => x * (1.01f - Math.Abs(x.Y.Float)))
+                                .Select(x => x * (1.05f - Math.Abs(x.Y.Float)))
                                 .Aggregate((a, b) => a + b)
                                 .Normalized();
 

@@ -1,5 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
+using CommonLib.Utils;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
@@ -15,6 +19,38 @@ namespace SF3.Win.Controls {
             Paint     += (s, e) => OnPaintRendering();
             FrameTick += (s, e) => OnFrameTickRendering();
             TileModified += (s, e) => OnTileModifiedRendering(s);
+        }
+
+        public void UpdateLighting() {
+            MakeCurrent();
+            var lightPos = GetLightPosition();
+            foreach (var shader in _world.Shaders) {
+                using (shader.Use())
+                    UpdateShaderLighting(shader, lightPos);
+            }
+
+            var lightPal = MPD_File?.LightPalette?.Rows;
+            if (lightPal != null) {
+                var numColors = lightPal.Length;
+
+                var colorData = new byte[numColors * 4];
+                int pos = 0;
+                foreach (var color in lightPal) {
+                    var channels = PixelConversion.ABGR1555toChannels(color.ColorABGR1555);
+                    colorData[pos++] = channels.b;
+                    colorData[pos++] = channels.g;
+                    colorData[pos++] = channels.r;
+                    colorData[pos++] = 255;
+                }
+
+                using (var textureBitmap = new Bitmap(1, numColors, System.Drawing.Imaging.PixelFormat.Format32bppArgb)) {
+                    var bitmapData = textureBitmap.LockBits(new Rectangle(0, 0, 1, numColors), ImageLockMode.WriteOnly, textureBitmap.PixelFormat);
+                    Marshal.Copy(colorData, 0, bitmapData.Scan0, colorData.Length);
+                    textureBitmap.UnlockBits(bitmapData);
+
+                    _surfaceModel.SetLightingTexture(new Texture(textureBitmap, filterNearest: false));
+                }
+            }
         }
 
         private void OnLoadRendering() {
@@ -35,6 +71,7 @@ namespace SF3.Win.Controls {
 
             SetInitialCameraPosition();
             UpdateSelectFramebuffer();
+            UpdateLighting();
 
             foreach (var shader in _world.Shaders)
                 UpdateShaderModelMatrix(shader, Matrix4.Identity);
@@ -162,15 +199,46 @@ namespace SF3.Win.Controls {
         private void UpdateShaderViewMatrix(Shader shader, Matrix4 matrix) {
             using (shader.Use()) {
                 var handle = GL.GetUniformLocation(shader.Handle, "view");
-                GL.UniformMatrix4(handle, false, ref matrix);
+                if (handle >= 0)
+                    GL.UniformMatrix4(handle, false, ref matrix);
             }
         }
 
         private void UpdateShaderModelMatrix(Shader shader, Matrix4 matrix) {
             using (shader.Use()) {
                 var handle = GL.GetUniformLocation(shader.Handle, "model");
-                GL.UniformMatrix4(handle, false, ref matrix);
+                if (handle >= 0)
+                    GL.UniformMatrix4(handle, false, ref matrix);
             }
+        }
+
+        private void UpdateShaderLighting(Shader shader, Vector3 lightPos) {
+            using (shader.Use()) {
+                var handle = GL.GetUniformLocation(shader.Handle, "lightPosition");
+                if (handle >= 0)
+                    GL.Uniform3(handle, lightPos);
+            }
+        }
+
+        private Vector3 GetLightPosition() {
+            if (MPD_File == null)
+                return new Vector3(0, -1, 0);
+
+            var lightDir   = MPD_File.LightDirectionTable.Rows[0];
+
+            // TODO: Scenario2+ look pretty awful... Need to do more research
+            var pitch = MPD_File.Scenario >= Types.ScenarioType.Scenario2 ? 0x9000 : lightDir.Pitch;
+
+            var pitchInRadians = pitch / 32768f * Math.PI;
+            var pitchSin = Math.Sin(pitchInRadians);
+            var pitchCos = Math.Cos(pitchInRadians);
+
+            var yawInRadians = lightDir.Yaw / 32768f * Math.PI;
+            var x = -Math.Sin(yawInRadians) * pitchCos;
+            var y = pitchSin;
+            var z = -Math.Cos(yawInRadians) * pitchCos;
+
+            return new Vector3((float) x, (float) y, (float) z);
         }
 
         private void DrawScene() {
@@ -189,9 +257,11 @@ namespace SF3.Win.Controls {
             else {
                 var terrainTypesTexture = DrawTerrainTypes ? _surfaceModel.TerrainTypesTexture : _world.TransparentBlackTexture;
                 var eventIdsTexture     = DrawEventIDs     ? _surfaceModel.EventIDsTexture     : _world.TransparentBlackTexture;
+                var lightingTexture     = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
 
                 using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
                 using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
+                using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
                 using (_world.ObjectShader.Use()) {
                     foreach (var block in _surfaceModel.Blocks) {
                         block.Model?.Draw(_world.ObjectShader);
