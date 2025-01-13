@@ -110,8 +110,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                         }
                     }
 
-                    var vertexAbnormals = tile.GetVertex3Abnormals();
-                    var abnormalVboData = vertexAbnormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
+                    var vertexNormals = tile.GetVertex3Normals();
+                    var normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
                     var terrainType = (int) tile.MoveTerrainType;
                     var ttX1 = (terrainType % 4) / 4.0f;
@@ -140,14 +140,14 @@ namespace SF3.Win.OpenGL.MPD_File {
                     var vertices = tile.GetSurfaceModelVertices();
                     if (anim != null) {
                         var newQuad = new Quad(vertices, anim, textureFlags);
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, abnormalVboData));
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, terrainTypeTexInfo.TexCoordName, 4, terrainTypeVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, eventIdTexInfo.TexCoordName, 4, eventIdVboData));
                         surfaceQuads.Add(newQuad);
                     }
                     else {
                         var newQuad = new Quad(vertices);
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, abnormalVboData));
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, terrainTypeTexInfo.TexCoordName, 4, terrainTypeVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, eventIdTexInfo.TexCoordName, 4, eventIdVboData));
                         untexturedSurfaceQuads.Add(newQuad);

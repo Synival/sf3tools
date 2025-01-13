@@ -32,10 +32,9 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
                 );
             }
             set {
-                var abnormalAsCompressedFixed = value.PackageAbnormalForMPDFile();
-                Data.SetCompressedFIXED(normalAddresses[x, y] + 0, abnormalAsCompressedFixed[0]);
-                Data.SetCompressedFIXED(normalAddresses[x, y] + 2, abnormalAsCompressedFixed[1]);
-                Data.SetCompressedFIXED(normalAddresses[x, y] + 4, abnormalAsCompressedFixed[2]);
+                Data.SetCompressedFIXED(normalAddresses[x, y] + 0, new CompressedFIXED(value.X));
+                Data.SetCompressedFIXED(normalAddresses[x, y] + 2, new CompressedFIXED(value.Y));
+                Data.SetCompressedFIXED(normalAddresses[x, y] + 4, new CompressedFIXED(value.Z));
             }
         }
 

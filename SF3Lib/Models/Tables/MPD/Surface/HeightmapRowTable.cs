@@ -26,24 +26,24 @@ namespace SF3.Models.Tables.MPD.Surface {
         public override int? MaxSize => 64;
 
         /// <summary>
-        /// Calculates the "abnormal" for a tile at a given corner.
+        /// Calculates the "normal" for a tile at a given corner.
         /// </summary>
         /// <param name="tileX">X coordinate of the tile.</param>
         /// <param name="tileY">Y coordinate of the tile.</param>
-        /// <param name="corner">Corner of the tile whose vertex abnormal should be calculated.</param>
+        /// <param name="corner">Corner of the tile whose vertex normal should be calculated.</param>
         /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
-        /// <returns>A freshly-calculated abnormal for the vertex requested.</returns>
-        public VECTOR CalculateVertexAbnormal(int tileX, int tileY, CornerType corner, POLYGON_NormalCalculationMethod calculationMethod)
-            => CalculateVertexAbnormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), calculationMethod);
+        /// <returns>A freshly-calculated normal for the vertex requested.</returns>
+        public VECTOR CalculateVertexNormal(int tileX, int tileY, CornerType corner, POLYGON_NormalCalculationMethod calculationMethod)
+            => CalculateVertexNormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), calculationMethod);
 
         /// <summary>
-        /// Calculates the vertex abnormal for a specific vertex of a tile.
+        /// Calculates the vertex normal for a specific vertex of a tile.
         /// </summary>
         /// <param name="vertexX">X coordinate of the vertex.</param>
         /// <param name="vertexY">Y coordinate of the vertex.</param>
         /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
-        /// <returns>A freshly-calculated abnormal for the vertex requested.</returns>
-        public VECTOR CalculateVertexAbnormal(int vertexX, int vertexY, POLYGON_NormalCalculationMethod calculationMethod) {
+        /// <returns>A freshly-calculated normal for the vertex requested.</returns>
+        public VECTOR CalculateVertexNormal(int vertexX, int vertexY, POLYGON_NormalCalculationMethod calculationMethod) {
             // Determine the normals of the 4 quads surrounding the vertex.
             var sumNormals = new List<VECTOR>();
 
@@ -51,6 +51,7 @@ namespace SF3.Models.Tables.MPD.Surface {
                 if (vx >= 0 && vy >= 0 && vx <= 63 && vy <= 63) {
                     var heights = Rows[vy].GetQuadHeights(vx);
                     var quad = new POLYGON(new VECTOR[] {
+                        // This magic 4.4 number produces the most simular results to what we see in-game.
                         new VECTOR(0.00f, heights[0], 1.00f),
                         new VECTOR(1.00f, heights[1], 1.00f),
                         new VECTOR(1.00f, heights[2], 0.00f),
@@ -69,7 +70,19 @@ namespace SF3.Models.Tables.MPD.Surface {
             TryAddQuadNormal(vertexX - 1, vertexY - 0);
 
             // Return the average of each normal (normalized) for Gouraud shading.
-            return VECTOR.GetAbnormalFromNormals(sumNormals.ToArray());
+            var components = new float[3];
+            foreach (var normal in sumNormals) {
+                components[0] += normal.X.Float;
+                components[1] += normal.Y.Float;
+                components[2] += normal.Z.Float;
+            }
+
+            var count = sumNormals.Count;
+            return new VECTOR(
+                components[0] / count,
+                components[1] / count,
+                components[2] / count
+            ).Normalized();
         }
     }
 }

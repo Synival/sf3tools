@@ -29,8 +29,8 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public void UpdateAbnormals() {
-            MPD_File.SurfaceModel?.UpdateVertexAbnormals(
+        public void UpdateNormals() {
+            MPD_File.SurfaceModel?.UpdateVertexNormals(
                 X, Y,
                 MPD_File.Surface.HeightmapRowTable,
                 POLYGON_NormalCalculationMethod.MostExtremeVerticalTriangle
@@ -57,7 +57,7 @@ namespace SF3.Models.Files.MPD {
                 .ToArray();
         }
 
-        public VECTOR GetVertexAbnormal(CornerType corner) {
+        public VECTOR GetVertexNormal(CornerType corner) {
             if (MPD_File.SurfaceModel?.VertexNormalBlockTable?.Rows == null)
                 return new VECTOR(0f, 1 / 32768f, 0f);
 
@@ -65,9 +65,9 @@ namespace SF3.Models.Files.MPD {
             return MPD_File.SurfaceModel.VertexNormalBlockTable.Rows[loc.Num][loc.X, loc.Y];
         }
 
-        public VECTOR[] GetVertexAbnormals() {
+        public VECTOR[] GetVertexNormals() {
             return ((CornerType[]) Enum.GetValues(typeof(CornerType)))
-                .Select(c => GetVertexAbnormal(c)).ToArray();
+                .Select(c => GetVertexNormal(c)).ToArray();
         }
 
         public IMPD_File MPD_File { get; }
@@ -165,6 +165,25 @@ namespace SF3.Models.Files.MPD {
             var bls = SharedBlockVertexLocations[corner];
             foreach (var bl in bls)
                 MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[bl.Num][bl.X, bl.Y] = (byte) (value * 16f);
+
+            Modified?.Invoke(this, EventArgs.Empty);
+
+            var otherTilesOffsetX = corner.GetVertexOffsetX() * 2 - 1;
+            var otherTilesOffsetY = corner.GetVertexOffsetY() * 2 - 1;
+            TriggerNeighborTileModified(otherTilesOffsetX, 0);
+            TriggerNeighborTileModified(0, otherTilesOffsetY);
+            TriggerNeighborTileModified(otherTilesOffsetX, otherTilesOffsetY);
+        }
+
+        public VECTOR GetModelVertexNormal(CornerType corner) {
+            var bl = BlockVertexLocations[corner];
+            return MPD_File.SurfaceModel.VertexNormalBlockTable.Rows[bl.Num][bl.X, bl.Y];
+        }
+
+        public void SetModelVertexNormal(CornerType corner, VECTOR value) {
+            var bls = SharedBlockVertexLocations[corner];
+            foreach (var bl in bls)
+                MPD_File.SurfaceModel.VertexNormalBlockTable.Rows[bl.Num][bl.X, bl.Y] = value;
 
             Modified?.Invoke(this, EventArgs.Empty);
 

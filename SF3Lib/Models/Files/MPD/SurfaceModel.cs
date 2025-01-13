@@ -34,64 +34,64 @@ namespace SF3.Models.Files.MPD.Objects {
         }
 
         /// <summary>
-        /// Updates the vertex abnormal for a specific tile corner.
+        /// Updates the vertex normal for a specific tile corner.
         /// </summary>
         /// <param name="tileX">X coordinate of the tile.</param>
         /// <param name="tileY">Y coordinate of the tile.</param>
         /// <param name="corner">Corner of the tile to update.</param>
         /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
-        public void UpdateVertexAbnormal(int tileX, int tileY, CornerType corner, HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod)
-            => UpdateVertexAbnormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), heightmap, calculationMethod);
+        public void UpdateVertexNormal(int tileX, int tileY, CornerType corner, HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod)
+            => UpdateVertexNormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), heightmap, calculationMethod);
 
         /// <summary>
-        /// Updates the vertex abnormal for a specific vertex in the vertex mesh.
+        /// Updates the vertex normal for a specific vertex in the vertex mesh.
         /// </summary>
         /// <param name="vertexX">X coordinate of the vertex.</param>
         /// <param name="vertexY">Y coordinate of the vertex.</param>
         /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
-        public void UpdateVertexAbnormal(int vertexX, int vertexY, HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod) {
-            if (heightmap == null)
+        public void UpdateVertexNormal(int vertexX, int vertexY, HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod) {
+            if (heightmap == null || vertexX < 0 || vertexY < 0 || vertexX > 64 || vertexY > 64)
                 return;
 
-            var abnormal = heightmap.CalculateVertexAbnormal(vertexX, vertexY, calculationMethod);
+            var normal = heightmap.CalculateVertexNormal(vertexX, vertexY, calculationMethod);
             var locations = GetVertexBlockLocations(vertexX, vertexY);
-            UpdateVertexAbnormals(locations, abnormal);
+            UpdateVertexNormals(locations, normal);
         }
 
         /// <summary>
-        /// Updates the vertex abnormals in several blocks at once.
+        /// Updates the vertex normals in several blocks at once.
         /// </summary>
         /// <param name="locations">The locations of blocks to update.</param>
-        /// <param name="abnormal">The abnormal to be set into each block location.</param>
-        public void UpdateVertexAbnormals(BlockVertexLocation[] locations, VECTOR abnormal) {
+        /// <param name="normal">The normal to be set into each block location.</param>
+        public void UpdateVertexNormals(BlockVertexLocation[] locations, VECTOR normal) {
             var blocks = VertexNormalBlockTable.Rows;
             for (var i = 0; i < locations.Length; i++)
-                blocks[locations[i].Num][locations[i].X, locations[i].Y] = abnormal;
+                blocks[locations[i].Num][locations[i].X, locations[i].Y] = normal;
         }
 
         /// <summary>
-        /// Recalculates vertex "abnormals" for a specific tile.
+        /// Recalculates vertex "normals" for a specific tile.
         /// </summary>
         /// <param name="tileX">X coordinate of the tile.</param>
         /// <param name="tileY">Y coordinate of the tile.</param>
         /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
-        public void UpdateVertexAbnormals(int tileX, int tileY, HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod) {
+        public void UpdateVertexNormals(int tileX, int tileY, HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod) {
             if (heightmap == null)
                 return;
             foreach (var c in (CornerType[]) Enum.GetValues(typeof(CornerType)))
-                UpdateVertexAbnormal(tileX, tileY, c, heightmap, calculationMethod);
+                UpdateVertexNormal(tileX, tileY, c, heightmap, calculationMethod);
         }
 
         /// <summary>
-        /// Recalculates all vertex "abnormals" for all tiles.
+        /// Recalculates all vertex "normals" for all tiles.
         /// </summary>
         /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
-        public void UpdateVertexAbnormals(HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod) {
+        public void UpdateVertexNormals(HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod) {
             if (heightmap == null)
                 return;
             for (var y = 0; y < 65; y++)
                 for (var x = 0; x < 65; x++)
-                    UpdateVertexAbnormal(x, y, CornerType.TopLeft, heightmap, calculationMethod);
+                    UpdateVertexNormal(x, y, CornerType.TopLeft, heightmap, calculationMethod);
         }
 
         [BulkCopyRowName]

@@ -27,10 +27,10 @@ namespace SF3.Win.Extensions {
             ];
         }
 
-        public static Vector3 GetVertex3Abnormal(this Tile tile, CornerType corner)
-            => tile.GetVertexAbnormal(corner).ToVector3();
+        public static Vector3 GetVertex3Normal(this Tile tile, CornerType corner)
+            => tile.GetVertexNormal(corner).ToVector3();
 
-        public static Vector3[] GetVertex3Abnormals(this Tile tile)
-            => tile.GetVertexAbnormals().Select(x => x.ToVector3()).ToArray();
+        public static Vector3[] GetVertex3Normals(this Tile tile)
+            => tile.GetVertexNormals().Select(x => x.ToVector3()).ToArray();
     }
 }

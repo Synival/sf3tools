@@ -221,7 +221,7 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private void UpdateAbnormalsForCorner(CornerType corner) {
+        private void UpdateNormalsForCorner(CornerType corner) {
             var surfaceModel = _tile.MPD_File.SurfaceModel;
             if (surfaceModel == null)
                 return;
@@ -229,13 +229,13 @@ namespace SF3.Win.Controls {
             var vxCenter = BlockHelpers.TileToVertexX(_tile.X, corner);
             var vyCenter = BlockHelpers.TileToVertexY(_tile.Y, corner);
 
-            // Abnormals need to be updated in a 3x3 grid.
+            // Normals need to be updated in a 3x3 grid.
             for (var x = -1; x <= 1; x++) {
                 for (var y = -1; y <= 1; y++) {
                     var vx = x + vxCenter;
                     var vy = y + vyCenter;
                     if (vx >= 0 && vy >= 0 && vx < 65 && vy < 65)
-                        surfaceModel.UpdateVertexAbnormal(vx, vy, _tile.MPD_File.Surface.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles);
+                        surfaceModel.UpdateVertexNormal(vx, vy, _tile.MPD_File.Surface.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles);
                 }
             }
 
@@ -344,7 +344,7 @@ namespace SF3.Win.Controls {
                     // Technically we *could* recalculate normals because the normals of neighboring flat tiles are also included
                     // in the calculations, but the normals of flat tiles are constant, so neighboring tiles' normals never change
                     // when a flat tile moves up or down.
-                    UpdateAbnormalsForCorner(corner);
+                    UpdateNormalsForCorner(corner);
                 }
             }
         }
@@ -365,7 +365,7 @@ namespace SF3.Win.Controls {
                     nud.Value.Value = (decimal) height;
                 }
                 foreach (var corner in corners)
-                    UpdateAbnormalsForCorner(corner);
+                    UpdateNormalsForCorner(corner);
             }
         }
 
@@ -379,7 +379,7 @@ namespace SF3.Win.Controls {
                     CopyHeightToNonFlatTiles(nud.Key);
                 }
                 foreach (var corner in corners)
-                    UpdateAbnormalsForCorner(corner);
+                    UpdateNormalsForCorner(corner);
             }
         }
 

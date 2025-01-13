@@ -11,17 +11,21 @@ namespace CommonLib.SGL {
         }
 
         public VECTOR GetCornerNormal(CornerType corner) {
-            return VECTOR.Cross(
-                Vertices[(1 + (int) corner) % 4] - Vertices[(0 + (int) corner) % 4],
-                Vertices[(3 + (int) corner) % 4] - Vertices[(0 + (int) corner) % 4]
+            // Not sure why the components need to be flipped in every permutation of this function,
+            // but that's how it appears to be...
+            var vec = VECTOR.Cross(
+                Vertices[(3 + (int) corner) % 4] - Vertices[(0 + (int) corner) % 4],
+                Vertices[(1 + (int) corner) % 4] - Vertices[(0 + (int) corner) % 4]
             ).Normalized();
+            vec.X = -vec.X;
+            return vec;
         }
 
         public VECTOR GetNormal(POLYGON_NormalCalculationMethod calculationMethod) {
             // Shortcut for very common flat polygons.
             var height = Vertices[0].Y;
             if (Vertices.Skip(1).All(x => x.Y == height))
-                return new VECTOR(0, 1, 0);
+                return new VECTOR(0, -1, 0);
 
             switch (calculationMethod) {
                 case POLYGON_NormalCalculationMethod.TopRightTriangle:
@@ -53,11 +57,6 @@ namespace CommonLib.SGL {
                 default:
                     throw new ArgumentException(nameof(calculationMethod));
             }
-        }
-
-        public VECTOR GetAbnormal(POLYGON_NormalCalculationMethod calculationMethod) {
-            var quadNormal = GetNormal(calculationMethod);
-            return quadNormal.GetAbnormalFromNormal();
         }
 
         VECTOR[] Vertices { get; }
