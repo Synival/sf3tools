@@ -18,7 +18,7 @@ namespace SF3.Models.Structs.MPD {
         [TableViewModelColumn(displayName: "Yaw", displayFormat: "X4")]
         public ushort Yaw {
             get => (ushort) Data.GetWord(Address + 2);
-            set => Data.SetWord(Address, value);
+            set => Data.SetWord(Address + 2, value);
         }
     }
 }

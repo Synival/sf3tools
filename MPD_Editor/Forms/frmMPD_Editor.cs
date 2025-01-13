@@ -278,7 +278,7 @@ namespace SF3.MPD_Editor.Forms {
         }
 
         private void tsmiHelp_About_Click(object sender, EventArgs e) {
-            var versionInfo = FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location);
+            var versionInfo = FileVersionInfo.GetVersionInfo(Environment.ProcessPath);
             var legalCopyright = versionInfo.LegalCopyright;
 
             MessageBox.Show(

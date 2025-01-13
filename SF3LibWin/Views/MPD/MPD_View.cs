@@ -21,6 +21,7 @@ namespace SF3.Win.Views.MPD {
             TabControl.Selected += UpdateViewer;
 
             CreateChild(new LightingView("Lighting", Model));
+            CreateChild(new TableView("Boundaries", Model.BoundariesTable, Model.NameGetterContext));
             CreateChild(new TexturesView("Textures", Model));
 
             CreateChild(new DataView("Data (only modify if you know what you're doing!)", Model));

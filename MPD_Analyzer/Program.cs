@@ -59,8 +59,6 @@ namespace MPD_Analyzer {
                             if (mpdFile.Scenario >= ScenarioType.Scenario2) {
                                 if (!mpdFile.ChunkHeader.Rows[2].Exists) {
                                     var fn = file;
-                                    if (mpdFile.ChunkHeader.Rows[20].Exists)
-                                        ;
                                     if (mpdFile.ChunkHeader.Rows[20].Exists && mpdFile.ChunkHeader.Rows[20].ChunkSize != 0xCF00)
                                         Console.WriteLine("  !!! Chunk[2] missing, Chunk[20] present, but not surface data!");
                                     if (mpdFile.ChunkHeader.Rows[21].Exists)
