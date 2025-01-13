@@ -78,12 +78,23 @@ namespace SF3.Models.Tables.MPD.Surface {
             }
 
             var count = sumNormals.Count;
-                const float maxFloat = 16383 / 16384f;
-            return new VECTOR(
+            var vec = new VECTOR(
                 components[0] / count,
                 components[1] / count,
                 components[2] / count
             ).Normalized();
+
+            // Prevent numbers from reaching 0.50. There appears to be a bug in SF3 (scenario 1 at least)
+            // where this can be interpreted as an overflow, resulting in very out of place shadows.
+            float Fix(float value) {
+                const float maxFloat = 16383 / 32768f;
+                return Math.Min(value, maxFloat);
+            };
+            vec.X.Float = Fix(vec.X.Float);
+            vec.Y.Float = Fix(vec.Y.Float);
+            vec.Z.Float = Fix(vec.Z.Float);
+
+            return vec;
         }
     }
 }
