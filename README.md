@@ -15,6 +15,9 @@ The editors themselves are written for .NET 8.0 using Winforms.
 
 Can be used to view and modify all .MPD files across all scenarios. Not all data is yet loaded.
 
+| ![image](https://github.com/user-attachments/assets/0cb6cb31-d60c-4f22-aab2-e68a67fa330c) | ![image](https://github.com/user-attachments/assets/db445cf5-6f3f-4082-a014-f111aeb5436e)
+|---|---|
+
 Features:
 
 - 3D viewer and editor with mouse and keyboard controls
