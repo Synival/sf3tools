@@ -84,14 +84,15 @@ namespace SF3.Models.Tables.MPD.Surface {
                 components[2] / count
             ).Normalized();
 
-            // Prevent numbers from reaching 0.50. There appears to be a bug in SF3 (scenario 1 at least)
+            // Clamp X and Z components to [-0.50, 0.50]. There appears to be a bug in SF3
             // where this can be interpreted as an overflow, resulting in very out of place shadows.
             float Fix(float value) {
                 const float maxFloat = 16383 / 32768f;
-                return Math.Min(value, maxFloat);
+                const float minFloat = -maxFloat;
+                return Math.Max(minFloat, Math.Min(value, maxFloat));
             };
             vec.X.Float = Fix(vec.X.Float);
-            vec.Y.Float = Fix(vec.Y.Float);
+            vec.Y.Float = vec.Y.Float;
             vec.Z.Float = Fix(vec.Z.Float);
 
             return vec;

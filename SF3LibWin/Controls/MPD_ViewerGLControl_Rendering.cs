@@ -48,7 +48,7 @@ namespace SF3.Win.Controls {
                     Marshal.Copy(colorData, 0, bitmapData.Scan0, colorData.Length);
                     textureBitmap.UnlockBits(bitmapData);
 
-                    _surfaceModel.SetLightingTexture(new Texture(textureBitmap, filterNearest: false));
+                    _surfaceModel.SetLightingTexture(new Texture(textureBitmap));
                 }
             }
         }
