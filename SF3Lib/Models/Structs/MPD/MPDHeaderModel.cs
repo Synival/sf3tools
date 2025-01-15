@@ -80,8 +80,8 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
         public int Unknown2 {
-            get => Data.GetDouble(unknown2Address);
-            set => Data.SetDouble(unknown2Address, value);
+            get => Data.GetWord(unknown2Address);
+            set => Data.SetWord(unknown2Address, value);
         }
 
         [BulkCopy]
