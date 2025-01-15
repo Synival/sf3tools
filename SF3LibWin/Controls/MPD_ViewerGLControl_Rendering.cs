@@ -227,7 +227,7 @@ namespace SF3.Win.Controls {
             var lightDir   = MPD_File.LightDirectionTable.Rows[0];
 
             // TODO: Scenario2+ look pretty awful... Need to do more research
-            var pitch = MPD_File.Scenario >= Types.ScenarioType.Scenario2 ? 0x9000 : lightDir.Pitch;
+            var pitch = MPD_File.Scenario >= Types.ScenarioType.Scenario2 ? 0xA000 : lightDir.Pitch;
 
             var pitchInRadians = pitch / 32768f * Math.PI;
             var pitchSin = Math.Sin(pitchInRadians);
