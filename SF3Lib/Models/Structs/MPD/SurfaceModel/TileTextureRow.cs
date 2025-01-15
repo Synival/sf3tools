@@ -7,8 +7,10 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
     public class TileTextureRow : Struct {
         private readonly int[] xAddress = new int[64];
 
-        public TileTextureRow(IByteData data, int id, string name, int address)
+        public TileTextureRow(IByteData data, int id, string name, int address, bool hasRotation)
         : base(data, id, name, address, 128) {
+            HasRotation = hasRotation;
+
             for (var i = 0; i < xAddress.Length; i++) {
                 var block = i / 4;
                 var x = i % 4;
@@ -35,9 +37,11 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
             => this[x] = (this[x] & 0xFF00) + value;
 
         public TextureRotateType GetRotate(int x)
-            => (TextureRotateType) (GetTextureFlags(x) & 0x03);
-        public void SetRotate(int x, TextureRotateType value)
-            => SetTextureFlags(x, (byte) (GetTextureFlags(x) & ~0x03 | (byte) value));
+            => HasRotation ? (TextureRotateType) (GetTextureFlags(x) & 0x03) : 0x00;
+        public void SetRotate(int x, TextureRotateType value) {
+            if (HasRotation)
+                SetTextureFlags(x, (byte) (GetTextureFlags(x) & ~0x03 | (byte) value));
+        }
 
         public TextureFlipType GetFlip(int x)
             => (TextureFlipType) (GetTextureFlags(x) & 0x30);
@@ -53,6 +57,8 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
             get => Data.GetWord(xAddress[index]);
             set => Data.SetWord(xAddress[index], value);
         }
+
+        public bool HasRotation { get; }
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {
             public TileMetadataAttribute(int x) : base(displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X4", minWidth: 50) { }

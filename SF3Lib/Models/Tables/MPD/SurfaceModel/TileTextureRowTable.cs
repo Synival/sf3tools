@@ -4,11 +4,12 @@ using SF3.Models.Structs.MPD.SurfaceModel;
 
 namespace SF3.Models.Tables.MPD.SurfaceModel {
     public class TileTextureRowTable : Table<TileTextureRow> {
-        protected TileTextureRowTable(IByteData data, int address) : base(data, address) {
+        protected TileTextureRowTable(IByteData data, int address, bool hasRotation) : base(data, address) {
+            HasRotation = hasRotation;
         }
 
-        public static TileTextureRowTable Create(IByteData data, int address) {
-            var newTable = new TileTextureRowTable(data, address);
+        public static TileTextureRowTable Create(IByteData data, int address, bool hasRotation) {
+            var newTable = new TileTextureRowTable(data, address, hasRotation);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
@@ -21,10 +22,11 @@ namespace SF3.Models.Tables.MPD.SurfaceModel {
                 var block = id / 4;
                 var y = id % 4;
                 address = Address + (block * 256 + y * 4) * 2;
-                return new TileTextureRow(Data, id, "Y" + id.ToString("D2"), address);
+                return new TileTextureRow(Data, id, "Y" + id.ToString("D2"), address, HasRotation);
             });
         }
 
+        public bool HasRotation { get; }
         public override int? MaxSize => 64;
 
         public ushort[,] Make2DTextureData() {

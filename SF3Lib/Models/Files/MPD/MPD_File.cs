@@ -240,7 +240,7 @@ namespace SF3.Models.Files.MPD {
             }
 
             if (surfaceModelChunk != null) {
-                SurfaceModel = SurfaceModel.Create(surfaceModelChunk.DecompressedData, NameGetterContext, 0x00, "SurfaceModel", surfaceModelChunk.Index);
+                SurfaceModel = SurfaceModel.Create(surfaceModelChunk.DecompressedData, NameGetterContext, 0x00, "SurfaceModel", surfaceModelChunk.Index, Scenario);
                 tables.AddRange(SurfaceModel.Tables);
             }
 

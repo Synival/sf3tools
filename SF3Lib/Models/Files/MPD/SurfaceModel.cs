@@ -8,26 +8,28 @@ using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Surface;
 using SF3.Models.Tables.MPD.SurfaceModel;
+using SF3.Types;
 using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Models.Files.MPD.Objects {
     public class SurfaceModel : TableFile {
-        protected SurfaceModel(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex)
+        protected SurfaceModel(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex, ScenarioType scenario)
         : base(data, nameContext) {
             Address    = address;
             Name       = name;
             ChunkIndex = chunkIndex;
+            Scenario   = scenario;
         }
 
-        public static SurfaceModel Create(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex) {
-            var newFile = new SurfaceModel(data, nameContext, address, name, chunkIndex);
+        public static SurfaceModel Create(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex, ScenarioType scenario) {
+            var newFile = new SurfaceModel(data, nameContext, address, name, chunkIndex, scenario);
             newFile.Init();
             return newFile;
         }
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (TileTextureRowTable    = TileTextureRowTable.Create   (Data, 0x0000)),
+                (TileTextureRowTable    = TileTextureRowTable.Create   (Data, 0x0000, Scenario >= ScenarioType.Scenario3)),
                 (VertexNormalBlockTable = VertexNormalBlockTable.Create(Data, 0x2000)),
                 (VertexHeightBlockTable = VertexHeightBlockTable.Create(Data, 0xB600)),
             };
@@ -99,6 +101,7 @@ namespace SF3.Models.Files.MPD.Objects {
 
         public int Address { get; }
         public int? ChunkIndex { get; }
+        public ScenarioType Scenario { get; }
 
         [BulkCopyRecurse]
         public TileTextureRowTable TileTextureRowTable { get; private set; }

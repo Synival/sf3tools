@@ -133,8 +133,10 @@ namespace SF3.Win.Controls {
                 gbModel.Enabled = _tile != null && _tile.MPD_File.SurfaceModel != null;
                 if (!gbModel.Enabled) {
                     nudModelTextureID.Text = "";
-                    cbModelFlip.SelectedItem = null;
                     cbModelRotate.SelectedItem = null;
+                    cbModelRotate.Text = "";
+                    cbModelRotate.Enabled = true;
+                    cbModelFlip.SelectedItem = null;
 
                     if (cbModelTileIsFlat.Checked != false) {
                         cbModelTileIsFlat.Checked = false;
@@ -143,8 +145,18 @@ namespace SF3.Win.Controls {
                 }
                 else {
                     InitNUD(nudModelTextureID, _tile.ModelTextureID);
+
+                    if (_tile.MPD_File.SurfaceModel.TileTextureRowTable.HasRotation) {
+                        cbModelRotate.SelectedItem = _tile.ModelTextureRotate;
+                        cbModelRotate.Enabled = true;
+                    }
+                    else {
+                        cbModelRotate.SelectedItem = -1;
+                        cbModelRotate.Text = "(Scenario 3+ only)";
+                        cbModelRotate.Enabled = false;
+                    }
+
                     cbModelFlip.SelectedItem = _tile.ModelTextureFlip;
-                    cbModelRotate.SelectedItem = _tile.ModelTextureRotate;
 
                     if (cbModelTileIsFlat.Checked != _tile.ModelIsFlat) {
                         cbModelTileIsFlat.Checked = _tile.ModelIsFlat;

@@ -91,12 +91,11 @@ namespace MPD_Analyzer {
                                     Console.WriteLine("  !!! Scenario3 Palette[2] doesn't exist!");
                             }
 
-                            // This *would* report irregularities in heightmaps, if the existed :)
                             if (mpdFile.SurfaceModel != null) {
                                 var corners = Enum.GetValues<CornerType>();
                                 foreach (var tile in mpdFile.Tiles) {
+                                    // This *would* report irregularities in heightmaps, if the existed :)
                                     var moveHeights  = corners.ToDictionary(c => c, tile.GetMoveHeightmap);
-
                                     if (tile.ModelIsFlat) {
                                         var br = CornerType.BottomRight;
                                         foreach (var c in corners) {
@@ -113,6 +112,13 @@ namespace MPD_Analyzer {
                                                 Console.WriteLine("  Mismatched walk/model mesh heights for (" + tile.X + ", " + tile.Y + "), " + c.ToString() + ": " + moveHeights[c] + " != " + modelHeights[c]);
                                         }
                                     }
+
+                                    // Report unknown or unhandled tile flags. Only Scenario 3+ has rotation flags 0x01 and 0x02.
+                                    var weirdTexFlags = tile.ModelTextureFlags & ~0x30 & ~0x80;
+                                    if (mpdFile.Scenario >= ScenarioType.Scenario3)
+                                        weirdTexFlags &= ~0x03;
+                                    if (weirdTexFlags != 0x00)
+                                        Console.WriteLine("  @(" + tile.X + ", " + tile.Y + "): " + weirdTexFlags.ToString("X2"));
                                 }
                             }
                         }
