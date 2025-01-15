@@ -3,11 +3,10 @@
 uniform sampler2D textureAtlas;
 uniform sampler2D textureTerrainTypes;
 uniform sampler2D textureEventIDs;
-uniform sampler2D textureLighting;
 
 in vec4 colorFrag;
 in vec3 glowFrag;
-in float lightingFrag;
+in vec4 lightColorFrag;
 
 in vec2 texCoordAtlasFrag;
 in vec2 texCoordTerrainTypesFrag;
@@ -16,10 +15,7 @@ in vec2 texCoordEventIDsFrag;
 out vec4 FragColor;
 
 void main() {
-    vec4 baseTex = texture(textureAtlas, texCoordAtlasFrag);
-    vec4 lightColor = texture(textureLighting, vec2(0, lightingFrag)) * 2;
-
-    vec4 surfaceTex = baseTex * lightColor * colorFrag + vec4(glowFrag, 0.0);
+    vec4 surfaceTex = texture(textureAtlas, texCoordAtlasFrag) * lightColorFrag * colorFrag + vec4(glowFrag, 0.0);
     vec4 overlayTex =
         texture(textureTerrainTypes, texCoordTerrainTypesFrag) +
         texture(textureEventIDs,     texCoordEventIDsFrag);
