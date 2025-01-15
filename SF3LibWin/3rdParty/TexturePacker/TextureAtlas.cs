@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using OpenTK.Mathematics;
+using SF3.Types;
 using SF3.Win.Extensions;
 using SF3.Win.ThirdParty.TexturePacker.Extensions;
 
@@ -64,7 +65,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             return _nodeByTextureIDFrame.ContainsKey(key) ? _nodeByTextureIDFrame[key] : null;
         }
 
-        public Vector2[] GetUVCoordinatesByTextureIDFrame(int id, int frame, int width, int height, byte textureFlags) {
+        public Vector2[] GetUVCoordinatesByTextureIDFrame(int id, int frame, int width, int height, TextureRotateType rotation, TextureFlipType flip) {
             var node = GetNodeByTextureIDFrame(id, frame);
             if (node == null)
                 throw new ArgumentException(nameof(id) + ", " + nameof(frame));
@@ -86,24 +87,21 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             if (node.Rotated)
                 (tl, tr, br, bl) = (tr, br, bl, tl);
 
-            // Bits 0x03 determine rotation (before flipping).
-            var rotateFlag = textureFlags & 0x03;
-            if (rotateFlag == 1)
+            // Rotation is applied first...
+            if (rotation == TextureRotateType.Rotate270CW)
                 (tl, tr, br, bl) = (tr, br, bl, tl);
-            else if (rotateFlag == 2)
+            else if (rotation == TextureRotateType.Rotate180)
                 (tl, tr, br, bl) = (br, bl, tl, tr);
-            else if (rotateFlag == 3)
+            else if (rotation == TextureRotateType.Rotate90CW)
                 (tl, tr, br, bl) = (bl, tl, tr, br);
 
-            // Bits 0x30 determine flipping (after rotation).
-            bool flipHoriz = (textureFlags & 0x10) != 0;
-            bool flipVert  = (textureFlags & 0x20) != 0;
-            if (flipHoriz && flipVert)
-                (tl, tr, br, bl) = (br, bl, tl, tr);
-            else if (flipHoriz)
+            // ... then flipping.
+            if (flip == TextureFlipType.Horizontal)
                 (tl, tr, br, bl) = (tr, tl, bl, br);
-            else if (flipVert)
+            else if (flip == TextureFlipType.Vertical)
                 (tl, tr, br, bl) = (bl, br, tr, tl);
+            else if (flip == TextureFlipType.Both)
+                (tl, tr, br, bl) = (br, bl, tl, tr);
 
             return [bl, br, tr, tl];
         }

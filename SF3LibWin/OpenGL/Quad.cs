@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenTK.Mathematics;
+using SF3.Types;
 using SF3.Win.Extensions;
 using static CommonLib.Extensions.ArrayExtensions;
 
@@ -10,21 +11,23 @@ namespace SF3.Win.OpenGL {
         private static readonly Vector4 c_white = new Vector4(1, 1, 1, 1);
         private static readonly Vector4[] c_allWhite = [c_white, c_white, c_white, c_white];
 
-        public Quad(Vector3[] vertices) : this(vertices, null, 0, c_white) { }
-        public Quad(Vector3[] vertices, Vector4 color) : this(vertices, null, 0, [color, color, color, color]) { }
-        public Quad(Vector3[] vertices, Vector4[] colors) : this(vertices, null, 0, colors) { }
-        public Quad(Vector3[] vertices, TextureAnimation textureAnim, byte textureFlags) : this(vertices, textureAnim, textureFlags, c_allWhite) { }
-        public Quad(Vector3[] vertices, TextureAnimation textureAnim, byte textureFlags, Vector4 color)
-            : this(vertices, textureAnim, textureFlags, [color, color, color, color]) { }
+        public Quad(Vector3[] vertices) : this(vertices, null, TextureRotateType.NoRotation, TextureFlipType.NoFlip, c_white) { }
+        public Quad(Vector3[] vertices, Vector4 color) : this(vertices, null, TextureRotateType.NoRotation, TextureFlipType.NoFlip, [color, color, color, color]) { }
+        public Quad(Vector3[] vertices, Vector4[] colors) : this(vertices, null, TextureRotateType.NoRotation, TextureFlipType.NoFlip, colors) { }
+        public Quad(Vector3[] vertices, TextureAnimation textureAnim, TextureRotateType rotate, TextureFlipType flip)
+            : this(vertices, textureAnim, rotate, flip, c_allWhite) { }
+        public Quad(Vector3[] vertices, TextureAnimation textureAnim, TextureRotateType rotate, TextureFlipType flip, Vector4 color)
+            : this(vertices, textureAnim, rotate, flip, [color, color, color, color]) { }
 
-        public Quad(Vector3[] vertices, TextureAnimation textureAnim, byte textureFlags, Vector4[] colors) {
+        public Quad(Vector3[] vertices, TextureAnimation textureAnim, TextureRotateType rotate, TextureFlipType flip, Vector4[] colors) {
             if (vertices == null || vertices.Length != 4)
                 throw new ArgumentException(nameof(vertices));
             if (colors == null || colors.Length != 4)
                 throw new ArgumentException(nameof(colors));
 
-            TextureAnim  = textureAnim;
-            TextureFlags = textureFlags;
+            TextureAnim   = textureAnim;
+            TextureRotate = rotate;
+            TextureFlip   = flip;
 
             Attributes = [
                 new PolyAttribute(1, OpenTK.Graphics.OpenGL.ActiveAttribType.FloatVec3, "position", 4,
@@ -49,6 +52,8 @@ namespace SF3.Win.OpenGL {
         private Dictionary<string, PolyAttribute> _attributesByName;
 
         public TextureAnimation TextureAnim { get; }
-        public byte TextureFlags { get; }
+
+        public TextureRotateType TextureRotate { get; }
+        public TextureFlipType TextureFlip { get; }
     }
 }

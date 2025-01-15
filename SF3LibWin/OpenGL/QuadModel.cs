@@ -130,7 +130,7 @@ namespace SF3.Win.OpenGL {
                 var frame = quad.TextureAnim?.GetFrame(_frame);
                 var texCoords = (frame != null)
                     ? _textureAtlas.GetUVCoordinatesByTextureIDFrame(
-                        frame.ID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureFlags)
+                        frame.ID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureRotate, quad.TextureFlip)
                     : c_noTextureCoords;
 
                 for (var vertexIndex = 0; vertexIndex < 4; vertexIndex++) {

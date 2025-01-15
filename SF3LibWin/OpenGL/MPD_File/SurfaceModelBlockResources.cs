@@ -6,6 +6,7 @@ using CommonLib.Extensions;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
+using SF3.Types;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.MPD_File {
@@ -94,13 +95,15 @@ namespace SF3.Win.OpenGL.MPD_File {
                 for (var x = TileX1; x < TileX2; x++) {
                     var tile = mpdFile.Tiles[x, y];
 
-                    TextureAnimation anim = null;
-                    byte textureFlags = 0;
+                    TextureAnimation  anim   = null;
+                    TextureRotateType rotate = TextureRotateType.NoRotation;
+                    TextureFlipType   flip   = TextureFlipType.NoFlip;
 
                     if (textureData != null) {
                         // Get texture. Fetch animated textures if possible.
                         var textureId = tile.ModelTextureID;
-                        textureFlags = tile.ModelTextureFlags;
+                        rotate = tile.ModelTextureRotate;
+                        flip = tile.ModelTextureFlip;
 
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
                             if (animationsById.ContainsKey(textureId))
@@ -139,7 +142,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                     var vertices = tile.GetSurfaceModelVertices();
                     if (anim != null) {
-                        var newQuad = new Quad(vertices, anim, textureFlags);
+                        var newQuad = new Quad(vertices, anim, rotate, flip);
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, terrainTypeTexInfo.TexCoordName, 4, terrainTypeVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, eventIdTexInfo.TexCoordName, 4, eventIdVboData));
