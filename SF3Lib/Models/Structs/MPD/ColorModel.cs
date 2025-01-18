@@ -21,7 +21,7 @@ namespace SF3.Models.Structs.MPD {
             set {
                 if (!IsValidHtmlColor(value))
                     return;
-                ColorABGR1555 = PixelChannels.FromHtmlColor(value).ToABGR1555();
+                ColorABGR1555 = PixelChannels.FromHtmlColor(value, 0).ToABGR1555();
             }
         }
     }

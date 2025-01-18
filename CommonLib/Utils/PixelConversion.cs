@@ -3,21 +3,31 @@
 namespace CommonLib.Utils {
     public static class PixelConversion {
         public struct PixelChannels {
-            public static PixelChannels FromHtmlColor(string htmlColor) {
+            public static PixelChannels FromHtmlColor(string htmlColor, byte defaultAlpha) {
                 if (htmlColor == null)
                     throw new ArgumentNullException(nameof(htmlColor));
 
-                if (htmlColor[0] == '#')
+                if (htmlColor.Length >= 1 && htmlColor[0] == '#')
                     htmlColor = htmlColor.Substring(1);
-                if (htmlColor.Length != 6 && htmlColor.Length != 8)
+                if (htmlColor.Length != 3 && htmlColor.Length != 4 && htmlColor.Length != 6 && htmlColor.Length != 8)
                     throw new ArgumentException(nameof(htmlColor));
 
-                return new PixelChannels {
-                    r = Convert.ToByte(htmlColor.Substring(0, 2), 16),
-                    g = Convert.ToByte(htmlColor.Substring(2, 2), 16),
-                    b = Convert.ToByte(htmlColor.Substring(4, 2), 16),
-                    a = (htmlColor.Length == 6) ? (byte) 255 : Convert.ToByte(htmlColor.Substring(6, 2), 16),
-                };
+                if (htmlColor.Length == 3 || htmlColor.Length == 4) {
+                    return new PixelChannels {
+                        r = Convert.ToByte(new string(htmlColor[0], 2), 16),
+                        g = Convert.ToByte(new string(htmlColor[1], 2), 16),
+                        b = Convert.ToByte(new string(htmlColor[2], 2), 16),
+                        a = (htmlColor.Length == 3) ? defaultAlpha : Convert.ToByte(new string(htmlColor[3], 2), 16),
+                    };
+                }
+                else {
+                    return new PixelChannels {
+                        r = Convert.ToByte(htmlColor.Substring(0, 2), 16),
+                        g = Convert.ToByte(htmlColor.Substring(2, 2), 16),
+                        b = Convert.ToByte(htmlColor.Substring(4, 2), 16),
+                        a = (htmlColor.Length == 6) ? defaultAlpha : Convert.ToByte(htmlColor.Substring(6, 2), 16),
+                    };
+                }
             }
 
             public byte a, r, g, b;
@@ -50,11 +60,11 @@ namespace CommonLib.Utils {
         }
 
         public static bool IsValidHtmlColor(string htmlColor) {
-            if (htmlColor == null)
+            if (htmlColor == null || htmlColor.Length == 0)
                 return false;
             if (htmlColor[0] == '#')
                 htmlColor = htmlColor.Substring(1);
-            return htmlColor.Length == 6 || htmlColor.Length == 8;
+            return htmlColor.Length == 3 || htmlColor.Length == 4 || htmlColor.Length == 6 || htmlColor.Length == 8;
         }
 
         public static ushort ABGR1555toARGB1555(ushort input)

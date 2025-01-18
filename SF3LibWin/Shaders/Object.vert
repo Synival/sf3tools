@@ -38,8 +38,9 @@ void main() {
         // - any polygon not facing the light source (90 degrees or more) always uses the darkest color
         // - the color referenced used intentionally overflows, wrapping once
         // - a wider range of colors is used when the light is directly overhead
-        // - the color used changes more rapidly the more direct the light is due to the ^1.5 exponent
-        : (normalLightDot < 0) ? 0 : pow(normalLightDot, 1.5) * 2;
+        // - the color used changes more rapidly the less direct the light is due to the ^1.5 exponent
+        // - the color never reaches full brightness because of the normalLightDot*0.90 multiplier
+        : (normalLightDot < 0) ? 0 : pow(normalLightDot * 0.90, 1.5) * 2.00;
     lightColorFrag           = texture(textureLighting, vec2(0, lighting)) * 2;
     texCoordAtlasFrag        = texCoordAtlas;
     texCoordTerrainTypesFrag = texCoordTerrainTypes;
