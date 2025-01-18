@@ -1,4 +1,4 @@
-## 2025-01-13
+## 2025-01-19
 
 This bug update introduces an MPD Editor! MPD files contain 3D map geometry, tiles, textures, terrain types, and much more. In this version, you can view and modify all the tiles of a map, modify their textures, tweak lighting (not yet shown visually), and change camera and battle boundaries.
 
