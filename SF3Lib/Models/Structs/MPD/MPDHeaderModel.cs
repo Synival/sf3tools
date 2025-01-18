@@ -23,7 +23,8 @@ namespace SF3.Models.Structs.MPD {
         private readonly int offsetTextureAnimAltAddress; // int32  Pointer to a list of texture indices. These textures are the same images as the "real" texture animations, but these textures are from the normal texture block (and doesn't seems to be used). See (#texture-animation-alternatives)
         private readonly int offsetPal1Address;           // int32  Pointer to 256 rgb16 colors. May be null.
         private readonly int offsetPal2Address;           // int32  Pointer to 256 rgb16 colors. May be null.
-        private readonly int offsetPal3Address; // (scn3+pd) int32  Pointer to 256 rgb16 colors. May be null.
+        private readonly int offsetPal3Address;           // (scn3+pd) int32  Pointer to 256 rgb16 colors. May be null.
+        private readonly int offset8Address;              // (scn3+pd) int32  Pointer to unknown data.
         private readonly int unknown5Address;             // int32  Unknown small value, may be negative.
         private readonly int const3Address;               // int32  Const 0xc000
         private readonly int unknown6Address;             // int32  Unknown. Lower 16 bits often null. May me FIXED.
@@ -57,7 +58,8 @@ namespace SF3.Models.Structs.MPD {
             int address2;
             if (HasPalette3) {
                 offsetPal3Address = Address + 0x44; // 4 bytes
-                address2 = Address + 0x48;
+                offset8Address    = Address + 0x48; // 4 bytes
+                address2 = Address + 0x4C;
             }
             else {
                 offsetPal3Address = -1;
@@ -79,6 +81,8 @@ namespace SF3.Models.Structs.MPD {
             Scenario >= ScenarioType.Scenario2 && (Unknown1 & 0x2000) == 0x2000;
 
         public bool HasPalette3 => Scenario >= ScenarioType.Scenario3;
+
+        public bool HasOffset8 => Scenario >= ScenarioType.Scenario3;
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X4")]
@@ -214,12 +218,22 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 19, isPointer: true)]
+        [TableViewModelColumn(displayName: "OffsetPal3 (Scn3+PD)", displayOrder: 19, isPointer: true)]
         public int OffsetPal3 {
             get => HasPalette3 ? Data.GetDouble(offsetPal3Address) : 0;
             set {
                 if (HasPalette3)
                     Data.SetDouble(offsetPal3Address, value);
+            }
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(displayName: "Offset8 (Scn3+PD)", displayOrder: 19.5f, isPointer: true)]
+        public int Offset8 {
+            get => HasOffset8 ? Data.GetDouble(offset8Address) : 0;
+            set {
+                if (HasOffset8)
+                    Data.SetDouble(offset8Address, value);
             }
         }
 
