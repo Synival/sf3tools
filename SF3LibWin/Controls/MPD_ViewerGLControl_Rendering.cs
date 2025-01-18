@@ -23,34 +23,44 @@ namespace SF3.Win.Controls {
 
         public void UpdateLighting() {
             MakeCurrent();
+            UpdateShaderLighting();
+            using (var textureBitmap = CreateLightPaletteBitmap())
+                _surfaceModel.SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, clampToEdge: false) : null);
+        }
+
+        private void UpdateShaderLighting() {
+            MakeCurrent();
             var lightPos = GetLightPosition();
+            var useNewLighting = (MPD_File == null) ? false : MPD_File.MPDHeader.Rows[0].UseNewLighting;
             foreach (var shader in _world.Shaders) {
                 using (shader.Use())
-                    UpdateShaderLighting(shader, lightPos);
+                    UpdateShaderLighting(shader, lightPos, useNewLighting);
             }
+        }
 
+        private Bitmap CreateLightPaletteBitmap() {
             var lightPal = MPD_File?.LightPalette?.Rows;
-            if (lightPal != null) {
-                var numColors = lightPal.Length;
+            if (lightPal == null)
+                return null;
 
-                var colorData = new byte[numColors * 4];
-                int pos = 0;
-                foreach (var color in lightPal) {
-                    var channels = PixelConversion.ABGR1555toChannels(color.ColorABGR1555);
-                    colorData[pos++] = channels.b;
-                    colorData[pos++] = channels.g;
-                    colorData[pos++] = channels.r;
-                    colorData[pos++] = 255;
-                }
+            var numColors = lightPal.Length;
 
-                using (var textureBitmap = new Bitmap(1, numColors, System.Drawing.Imaging.PixelFormat.Format32bppArgb)) {
-                    var bitmapData = textureBitmap.LockBits(new Rectangle(0, 0, 1, numColors), ImageLockMode.WriteOnly, textureBitmap.PixelFormat);
-                    Marshal.Copy(colorData, 0, bitmapData.Scan0, colorData.Length);
-                    textureBitmap.UnlockBits(bitmapData);
-
-                    _surfaceModel.SetLightingTexture(new Texture(textureBitmap));
-                }
+            var colorData = new byte[numColors * 4];
+            int pos = 0;
+            foreach (var color in lightPal) {
+                var channels = PixelConversion.ABGR1555toChannels(color.ColorABGR1555);
+                colorData[pos++] = channels.b;
+                colorData[pos++] = channels.g;
+                colorData[pos++] = channels.r;
+                colorData[pos++] = 255;
             }
+
+            var textureBitmap = new Bitmap(1, numColors, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            var bitmapData = textureBitmap.LockBits(new Rectangle(0, 0, 1, numColors), ImageLockMode.WriteOnly, textureBitmap.PixelFormat);
+            Marshal.Copy(colorData, 0, bitmapData.Scan0, colorData.Length);
+            textureBitmap.UnlockBits(bitmapData);
+
+            return textureBitmap;
         }
 
         private void OnLoadRendering() {
@@ -183,10 +193,10 @@ namespace SF3.Win.Controls {
             var projectionMatrix = _projectionMatrix;
 
             foreach (var shader in _world.Shaders) {
-                using (shader.Use()) {
-                    var handle = GL.GetUniformLocation(shader.Handle, "projection");
-                    GL.UniformMatrix4(handle, false, ref projectionMatrix);
-                }
+                var handle = GL.GetUniformLocation(shader.Handle, "projection");
+                if (handle >= 0)
+                    using (shader.Use())
+                        GL.UniformMatrix4(handle, false, ref projectionMatrix);
             }
         }
 
@@ -197,26 +207,30 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateShaderViewMatrix(Shader shader, Matrix4 matrix) {
-            using (shader.Use()) {
-                var handle = GL.GetUniformLocation(shader.Handle, "view");
-                if (handle >= 0)
+            var handle = GL.GetUniformLocation(shader.Handle, "view");
+            if (handle >= 0)
+                using (shader.Use())
                     GL.UniformMatrix4(handle, false, ref matrix);
-            }
         }
 
         private void UpdateShaderModelMatrix(Shader shader, Matrix4 matrix) {
-            using (shader.Use()) {
-                var handle = GL.GetUniformLocation(shader.Handle, "model");
-                if (handle >= 0)
+            var handle = GL.GetUniformLocation(shader.Handle, "model");
+            if (handle >= 0)
+                using (shader.Use())
                     GL.UniformMatrix4(handle, false, ref matrix);
-            }
         }
 
-        private void UpdateShaderLighting(Shader shader, Vector3 lightPos) {
-            using (shader.Use()) {
-                var handle = GL.GetUniformLocation(shader.Handle, "lightPosition");
-                if (handle >= 0)
-                    GL.Uniform3(handle, lightPos);
+        private void UpdateShaderLighting(Shader shader, Vector3 lightPos, bool useNewLighting) {
+            var handle1 = GL.GetUniformLocation(shader.Handle, "lightPosition");
+            var handle2 = GL.GetUniformLocation(shader.Handle, "useNewLighting");
+
+            if (handle1 >= 0 || handle2 >= 0) {
+                using (shader.Use()) {
+                    if (handle1 >= 0)
+                        GL.Uniform3(handle1, lightPos);
+                    if (handle2 >= 0)
+                        GL.Uniform1(handle2, useNewLighting ? 1 : 0);
+                }
             }
         }
 
@@ -224,10 +238,8 @@ namespace SF3.Win.Controls {
             if (MPD_File == null)
                 return new Vector3(0, -1, 0);
 
-            var lightDir   = MPD_File.LightDirectionTable.Rows[0];
-
-            // TODO: Scenario2+ look pretty awful... Need to do more research
-            var pitch = MPD_File.Scenario >= Types.ScenarioType.Scenario2 ? 0xA000 : lightDir.Pitch;
+            var lightDir = MPD_File.LightDirectionTable.Rows[0];
+            var pitch = lightDir.Pitch;
 
             var pitchInRadians = pitch / 32768f * Math.PI;
             var pitchSin = Math.Sin(pitchInRadians);

@@ -6,7 +6,7 @@ using SF3.Win.OpenGL.MPD_File;
 
 namespace SF3.Win.OpenGL {
     public class Texture : IDisposable {
-        public Texture(Bitmap image, bool filterNearest = true) {
+        public Texture(Bitmap image, bool filterNearest = true, bool clampToEdge = true) {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
             if (image.PixelFormat != System.Drawing.Imaging.PixelFormat.Format32bppArgb)
@@ -19,14 +19,14 @@ namespace SF3.Win.OpenGL {
             using (Use()) {
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) TextureMinFilter.Linear);
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) (filterNearest ? TextureMagFilter.Nearest : TextureMagFilter.Linear));
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) TextureWrapMode.ClampToEdge);
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) TextureWrapMode.ClampToEdge);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) (clampToEdge ? TextureWrapMode.ClampToEdge : TextureWrapMode.Repeat));
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) (clampToEdge ? TextureWrapMode.ClampToEdge : TextureWrapMode.Repeat));
             }
 
             Update(image);
         }
 
-        public Texture(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType, bool filterNearest = true) {
+        public Texture(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType, bool filterNearest = true, bool clampToEdge = true) {
             Handle = GL.GenTexture();
             Width  = width;
             Height = height;
@@ -34,8 +34,8 @@ namespace SF3.Win.OpenGL {
             using (Use()) {
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) TextureMinFilter.Linear);
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) (filterNearest ? TextureMagFilter.Nearest : TextureMagFilter.Linear));
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) TextureWrapMode.ClampToEdge);
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) TextureWrapMode.ClampToEdge);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) (clampToEdge ? TextureWrapMode.ClampToEdge : TextureWrapMode.Repeat));
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) (clampToEdge ? TextureWrapMode.ClampToEdge : TextureWrapMode.Repeat));
                 Update(width, height, internalFormat, format, pixelType);
             }
         }

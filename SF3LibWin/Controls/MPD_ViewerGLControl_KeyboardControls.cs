@@ -119,6 +119,31 @@ namespace SF3.Win.Controls {
                 if (oldPitch != Pitch)
                     Invalidate();
             }
+
+            // Keys to adjust lighting
+            if (MPD_File?.LightDirectionTable != null) {
+                if (keysDown.Contains(Keys.Oemcomma)) {
+                    MPD_File.LightDirectionTable.Rows[0].Pitch -= (ushort) (0x100 * shiftFactor);
+                    UpdateShaderLighting();
+                    Invalidate();
+                }
+                else if (keysDown.Contains(Keys.OemPeriod)) {
+                    MPD_File.LightDirectionTable.Rows[0].Pitch += (ushort) (0x100 * shiftFactor);
+                    UpdateShaderLighting();
+                    Invalidate();
+                }
+
+                if (keysDown.Contains(Keys.OemOpenBrackets)) {
+                    MPD_File.LightDirectionTable.Rows[0].Yaw -= (ushort) (0x100 * shiftFactor);
+                    UpdateShaderLighting();
+                    Invalidate();
+                }
+                else if (keysDown.Contains(Keys.OemCloseBrackets)) {
+                    MPD_File.LightDirectionTable.Rows[0].Yaw += (ushort) (0x100 * shiftFactor);
+                    UpdateShaderLighting();
+                    Invalidate();
+                }
+            }
         }
 
         private bool KeyIsDown(Keys keyCode)

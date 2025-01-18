@@ -77,7 +77,7 @@ namespace SF3.Models.Files.MPD {
         private MPDHeaderTable MakeHeaderTable() {
             var headerAddrPtr = Data.GetDouble(0x0000) - c_RamOffset;
             var headerAddr = Data.GetDouble(headerAddrPtr) - c_RamOffset;
-            MPDHeader = MPDHeaderTable.Create(Data, headerAddr, hasPalette3: Scenario >= ScenarioType.Scenario3);
+            MPDHeader = MPDHeaderTable.Create(Data, headerAddr, Scenario);
             return MPDHeader;
         }
 

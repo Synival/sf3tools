@@ -5,6 +5,7 @@ uniform mat4 view;
 uniform mat4 projection;
 uniform vec3 lightPosition;
 uniform sampler2D textureLighting;
+uniform bool useNewLighting;
 
 layout (location = 0) in vec3 position;
 layout (location = 1) in vec4 color;
@@ -28,7 +29,17 @@ void main() {
     colorFrag     = color;
     glowFrag      = glow;
 
-    float lighting = dot(normal, lightPosition) * 0.50 + 0.50;
+    float normalLightDot = dot(normal, lightPosition);
+    float lighting = !useNewLighting
+        // Scenario 1 uses a straight-forward lighting method where the dot product directly references the index of
+        // the color palette to use.
+        ? (normalLightDot * 0.5 + 0.5)
+        // Scenario 2 uses this odd exponential function instead, usually at pitch 0xB308. With this formula:
+        // - any polygon not facing the light source (90 degrees or more) always uses the darkest color
+        // - the color referenced used intentionally overflows, wrapping once
+        // - a wider range of colors is used when the light is directly overhead
+        // - the color used changes more rapidly the more direct the light is due to the ^1.5 exponent
+        : (normalLightDot < 0) ? 0 : pow(normalLightDot, 1.5) * 2;
     lightColorFrag           = texture(textureLighting, vec2(0, lighting)) * 2;
     texCoordAtlasFrag        = texCoordAtlas;
     texCoordTerrainTypesFrag = texCoordTerrainTypes;

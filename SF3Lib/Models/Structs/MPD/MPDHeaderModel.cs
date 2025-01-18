@@ -1,5 +1,6 @@
 ﻿using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
     public class MPDHeaderModel : Struct {
@@ -29,8 +30,10 @@ namespace SF3.Models.Structs.MPD {
         private readonly int unknown7Address;             // int32  Unknown. Small value in upper int16, 0x0000 in lower int16. May me FIXED.
         private readonly int offset12Address;             // int32  Pointer to unknown list of exactly 8 uint16 in two block with 4 uint16 each.
 
-        public MPDHeaderModel(IByteData data, int id, string name, int address, bool hasPalette3)
+        public MPDHeaderModel(IByteData data, int id, string name, int address, ScenarioType scenario)
         : base(data, id, name, address, 0x58) {
+            Scenario = scenario;
+
             unknown1Address             = Address;        // 2 bytes
             unknown2Address             = Address + 0x02; // 2 bytes
             offsetLightPaletteAddress   = Address + 0x04; // 4 bytes
@@ -52,7 +55,7 @@ namespace SF3.Models.Structs.MPD {
             offsetPal2Address           = Address + 0x40; // 4 bytes
 
             int address2;
-            if (hasPalette3) {
+            if (HasPalette3) {
                 offsetPal3Address = Address + 0x44; // 4 bytes
                 address2 = Address + 0x48;
             }
@@ -69,6 +72,13 @@ namespace SF3.Models.Structs.MPD {
 
             Size = (offset12Address - Address) + 0x04;
         }
+
+        public ScenarioType Scenario { get; }
+
+        public bool UseNewLighting =>
+            Scenario >= ScenarioType.Scenario2 && (Unknown1 & 0x2000) == 0x2000;
+
+        public bool HasPalette3 => Scenario >= ScenarioType.Scenario3;
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X4")]
@@ -206,9 +216,9 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 19, isPointer: true)]
         public int OffsetPal3 {
-            get => offsetPal3Address >= 0 ? Data.GetDouble(offsetPal3Address) : 0;
+            get => HasPalette3 ? Data.GetDouble(offsetPal3Address) : 0;
             set {
-                if (offsetPal3Address >= 0)
+                if (HasPalette3)
                     Data.SetDouble(offsetPal3Address, value);
             }
         }
