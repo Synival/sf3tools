@@ -64,19 +64,21 @@ namespace SF3.Win.OpenGL.MPD_File {
         public void UpdateBoundaries(IMPD_File mpdFile) {
             ResetBoundaries();
 
-            var boundaries = mpdFile.BoundariesTable.Rows[0];
+            var boundaries = mpdFile.BoundariesTable.Rows;
 
             // Camera boundary coords
-            var ccX1 =  0.0f + boundaries.CameraX1 / 32.00f + WorldResources.ModelOffsetX;
-            var ccY1 = 64.0f - boundaries.CameraY1 / 32.00f + WorldResources.ModelOffsetZ;
-            var ccX2 =  0.0f + boundaries.CameraX2 / 32.00f + WorldResources.ModelOffsetX;
-            var ccY2 = 64.0f - boundaries.CameraY2 / 32.00f + WorldResources.ModelOffsetZ;
+            var camera = boundaries[0];
+            var ccX1 =  0.0f + camera.X1 / 32.00f + WorldResources.ModelOffsetX;
+            var ccY1 = 64.0f - camera.Y1 / 32.00f + WorldResources.ModelOffsetZ;
+            var ccX2 =  0.0f + camera.X2 / 32.00f + WorldResources.ModelOffsetX;
+            var ccY2 = 64.0f - camera.Y2 / 32.00f + WorldResources.ModelOffsetZ;
 
             // Battle boundary coords
-            var bcX1 =  0.0f + boundaries.BattleX1 / 32.00f + WorldResources.ModelOffsetX;
-            var bcY1 = 64.0f - boundaries.BattleY1 / 32.00f + WorldResources.ModelOffsetZ;
-            var bcX2 =  0.0f + boundaries.BattleX2 / 32.00f + WorldResources.ModelOffsetX;
-            var bcY2 = 64.0f - boundaries.BattleY2 / 32.00f + WorldResources.ModelOffsetZ;
+            var battle = boundaries[1];
+            var bcX1 =  0.0f + battle.X1 / 32.00f + WorldResources.ModelOffsetX;
+            var bcY1 = 64.0f - battle.Y1 / 32.00f + WorldResources.ModelOffsetZ;
+            var bcX2 =  0.0f + battle.X2 / 32.00f + WorldResources.ModelOffsetX;
+            var bcY2 = 64.0f - battle.Y2 / 32.00f + WorldResources.ModelOffsetZ;
 
             // Fetch minimum height of the world.
             var minHeight = mpdFile.Tiles.To1DArray().SelectMany(x => x.GetSurfaceModelVertexHeights()).Min();

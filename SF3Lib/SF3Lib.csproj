@@ -7,11 +7,15 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\BoundaryList.xml" />
     <None Remove="Resources\Elements.xml" />
     <None Remove="Resources\FriendshipBonusTypeList.xml" />
     <None Remove="Resources\SpellTargets.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\BoundaryList.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\FriendshipBonusTypeList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

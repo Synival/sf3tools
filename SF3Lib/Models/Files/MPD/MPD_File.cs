@@ -11,6 +11,7 @@ using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.Types;
+using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
@@ -87,7 +88,7 @@ namespace SF3.Models.Files.MPD {
             tables.AddRange(MakeLightingTables(header));
             tables.AddRange(MakeTexturePaletteTables(header));
             tables.AddRange(MakeTextureAnimationTables(header, areAnimatedTextures32Bit));
-            tables.Add(BoundariesTable = BoundariesTable.Create(Data, header.OffsetBoundaries - c_RamOffset));
+            tables.Add(BoundariesTable = BoundaryTable.Create(Data, ResourceFile("BoundaryList.xml"), header.OffsetBoundaries - c_RamOffset));
             tables.AddRange(MakeUnknownTables(header));
 
             return tables.ToArray();
@@ -493,7 +494,7 @@ namespace SF3.Models.Files.MPD {
         public List<Chunk3Frame> Chunk3Frames { get; private set; }
 
         [BulkCopyRecurse]
-        public BoundariesTable BoundariesTable { get; private set; }
+        public BoundaryTable BoundariesTable { get; private set; }
 
         [BulkCopyRecurse]
         public Surface Surface { get; private set; }
