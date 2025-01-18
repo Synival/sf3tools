@@ -42,6 +42,12 @@ namespace SF3.Win.Views {
         private void UpdateBitmap() {
             var colorCount = Table.Rows.Length;
             var width = (int) Math.Ceiling(Math.Sqrt(colorCount));
+
+            var nextPow = 1;
+            while (width > nextPow)
+                nextPow *= 2;
+            width = nextPow;
+
             var height = (int) Math.Ceiling(colorCount / (float) width);
 
             PaletteBitmap = new Bitmap(width, height, PixelFormat.Format32bppArgb);
