@@ -38,6 +38,7 @@ namespace SF3.Models.Files.MPD {
         LightDirectionTable LightDirectionTable { get; }
         UnknownUInt16Table Offset3Table { get; }
         Offset4Table Offset4Table { get; }
+        UnknownUInt8Table Offset7Table { get; }
         TextureAnimationTable TextureAnimations { get; }
         BoundariesTable BoundariesTable { get; }
 

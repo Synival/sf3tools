@@ -140,9 +140,11 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             if (header.Offset3 != 0)
-                tables.Add(Offset3Table = UnknownUInt16Table.Create(Data, header.Offset3 - c_RamOffset, 32));
+                tables.Add(Offset3Table = UnknownUInt16Table.Create(Data, header.Offset3 - c_RamOffset, 32, null));
             if (header.Offset4 != 0)
                 tables.Add(Offset4Table = Offset4Table.Create(Data, header.Offset4 - c_RamOffset));
+            if (header.Offset7 != 0)
+                tables.Add(Offset7Table = UnknownUInt8Table.Create(Data, header.Offset7 - c_RamOffset, null, 0xFF));
 
             return tables.ToArray();
         }
@@ -481,6 +483,9 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public Offset4Table Offset4Table { get; private set; }
+
+        [BulkCopyRecurse]
+        public UnknownUInt8Table Offset7Table { get; private set; }
 
         [BulkCopyRecurse]
         public TextureAnimationTable TextureAnimations { get; private set; }

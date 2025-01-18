@@ -14,7 +14,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int offset4Address;              // int32  Always 0x90. Pointer to unknown structure. See (#header-offset-4)
         private readonly int offsetTextureAnimationsAddress;  // int32  Offset to list of texture groups. See (#texture-groups)
         private readonly int offset6Address;              // int32  Pointer to unknown list.
-        private readonly int offsetBoundariesAddress;     // int32  Pointer to camera settings.
+        private readonly int offset7Address;              // int32  Pointer to unknown list.
         private readonly int offsetMesh1Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
         private readonly int offsetMesh2Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
         private readonly int offsetMesh3Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
@@ -28,7 +28,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int const3Address;               // int32  Const 0xc000
         private readonly int unknown6Address;             // int32  Unknown. Lower 16 bits often null. May me FIXED.
         private readonly int unknown7Address;             // int32  Unknown. Small value in upper int16, 0x0000 in lower int16. May me FIXED.
-        private readonly int offset12Address;             // int32  Pointer to unknown list of exactly 8 uint16 in two block with 4 uint16 each.
+        private readonly int offsetBoundariesAddress;     // int32  Pointer to camera and battle boundaries in real-world coordinates.
 
         public MPDHeaderModel(IByteData data, int id, string name, int address, ScenarioType scenario)
         : base(data, id, name, address, 0x58) {
@@ -44,7 +44,7 @@ namespace SF3.Models.Structs.MPD {
             offset4Address              = Address + 0x14; // 4 bytes
             offsetTextureAnimationsAddress = Address + 0x18; // 4 bytes
             offset6Address              = Address + 0x1C; // 4 bytes
-            offsetBoundariesAddress     = Address + 0x20; // 4 bytes
+            offset7Address              = Address + 0x20; // 4 bytes
             offsetMesh1Address          = Address + 0x24; // 4 bytes
             offsetMesh2Address          = Address + 0x28; // 4 bytes
             offsetMesh3Address          = Address + 0x2C; // 4 bytes
@@ -68,9 +68,9 @@ namespace SF3.Models.Structs.MPD {
             const3Address               = address2 + 0x04; // 4 bytes
             unknown6Address             = address2 + 0x08; // 4 bytes
             unknown7Address             = address2 + 0x0C; // 4 bytes
-            offset12Address             = address2 + 0x10; // 4 bytes
+            offsetBoundariesAddress     = address2 + 0x10; // 4 bytes
 
-            Size = (offset12Address - Address) + 0x04;
+            Size = (offsetBoundariesAddress - Address) + 0x04;
         }
 
         public ScenarioType Scenario { get; }
@@ -152,9 +152,9 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 10, isPointer: true)]
-        public int OffsetBoundaries {
-            get => Data.GetDouble(offsetBoundariesAddress);
-            set => Data.SetDouble(offsetBoundariesAddress, value);
+        public int Offset7 {
+            get => Data.GetDouble(offset7Address);
+            set => Data.SetDouble(offset7Address, value);
         }
 
         [BulkCopy]
@@ -253,9 +253,9 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 24, isPointer: true)]
-        public int Offset12 {
-            get => Data.GetDouble(offset12Address);
-            set => Data.SetDouble(offset12Address, value);
+        public int OffsetBoundaries {
+            get => Data.GetDouble(offsetBoundariesAddress);
+            set => Data.SetDouble(offsetBoundariesAddress, value);
         }
     }
 }
