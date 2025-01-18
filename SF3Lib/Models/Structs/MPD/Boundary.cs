@@ -17,28 +17,28 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0)]
+        [TableViewModelColumn(displayOrder: 0, minWidth: 60)]
         public short X1 {
             get => (short) Data.GetWord(_x1Addr);
             set => Data.SetWord(_x1Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1)]
+        [TableViewModelColumn(displayOrder: 1, minWidth: 60)]
         public short Y1 {
             get => (short) Data.GetWord(_y1Addr);
             set => Data.SetWord(_y1Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 2)]
+        [TableViewModelColumn(displayOrder: 2, minWidth: 60)]
         public short X2 {
             get => (short) Data.GetWord(_x2Addr);
             set => Data.SetWord(_x2Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 3)]
+        [TableViewModelColumn(displayOrder: 3, minWidth: 60)]
         public short Y2 {
             get => (short) Data.GetWord(_y2Addr);
             set => Data.SetWord(_y2Addr, value);
