@@ -15,8 +15,9 @@ The editors themselves are written for .NET 8.0 using Winforms.
 
 Can be used to view and modify all .MPD files across all scenarios. Not all data is yet loaded.
 
-| ![image](https://github.com/user-attachments/assets/0cb6cb31-d60c-4f22-aab2-e68a67fa330c) | ![image](https://github.com/user-attachments/assets/db445cf5-6f3f-4082-a014-f111aeb5436e)
+| ![BTL02_CatchupMountain](https://github.com/user-attachments/assets/6845cf02-a395-4946-91bb-d57ee474f9a2) | ![TOMTOM00_TerrainAndEvents](https://github.com/user-attachments/assets/f8b4a005-5922-451b-a4f4-e32aec455600) |
 |---|---|
+| ![BTL47_PrettyLighting](https://github.com/user-attachments/assets/dc410ccf-9f38-4d9f-9033-f69958b0d332) | ![DORA_LookAtThemDragons](https://github.com/user-attachments/assets/774f48df-811c-4dd3-9ea3-d77429c06841) |
 
 Features:
 
