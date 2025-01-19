@@ -41,7 +41,7 @@ void main() {
         // - the color used changes more rapidly the less direct the light is due to the ^1.5 exponent
         // - the color never reaches full brightness because of the normalLightDot*0.90 multiplier
         : (normalLightDot < 0) ? 0 : pow(normalLightDot * 0.90, 1.5) * 2.00;
-    lightColorFrag           = texture(textureLighting, vec2(0, lighting)) * 2;
+    lightColorFrag           = vec4(clamp(texture(textureLighting, vec2(0, lighting)).xyz - 0.5, -0.5, 0.5), 0);
     texCoordAtlasFrag        = texCoordAtlas;
     texCoordTerrainTypesFrag = texCoordTerrainTypes;
     texCoordEventIDsFrag     = texCoordEventIDs;
