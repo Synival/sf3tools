@@ -33,7 +33,7 @@ void main() {
     float lighting = !useNewLighting
         // Scenario 1 uses a straight-forward lighting method where the dot product directly references the index of
         // the color palette to use.
-        ? (normalLightDot * 0.5 + 0.5)
+        ? (normalLightDot * 0.4995 + 0.4995)
         // Scenario 2 uses this odd exponential function instead, usually at pitch 0xB308. With this formula:
         // - any polygon not facing the light source (90 degrees or more) always uses the darkest color
         // - the color referenced used intentionally overflows, wrapping once
