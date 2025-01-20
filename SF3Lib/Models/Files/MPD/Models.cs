@@ -45,24 +45,30 @@ namespace SF3.Models.Files.MPD {
             PDataTable = PDataTable.Create(Data, pdataAddresses);
 
             var verticesAddresses = PDataTable
-                .Select(x => x.VerticesOffset)
-                .Where(x => x != 0)
-                .Select(x => GetFileAddr(x))
+                .Select(x => new { Offset = GetFileAddr(x.VerticesOffset), Count = x.VertexCount })
+                .Where(x => x.Offset != 0)
+                .GroupBy(x => x.Offset * 0x10000 + x.Count)
                 .Distinct()
-                .OrderBy(x => x)
+                .Select(x => x.First())
+                .OrderBy(x => x.Offset)
+                .ThenBy(x => x.Count)
                 .ToArray();
 
-            VertexTable = VertexTable.Create(Data, verticesAddresses);
+            // TODO: generate more than just the first table
+            VertexTable = VertexTable.Create(Data, verticesAddresses[0].Offset, verticesAddresses[0].Count);
 
             var attrAddresses = PDataTable
-                .Select(x => x.AttributesOffset)
-                .Where(x => x != 0)
-                .Select(x => GetFileAddr(x))
+                .Select(x => new { Offset = GetFileAddr(x.AttributesOffset), Count = x.PolygonCount })
+                .Where(x => x.Offset != 0)
+                .GroupBy(x => x.Offset * 0x10000 + x.Count)
                 .Distinct()
-                .OrderBy(x => x)
+                .Select(x => x.First())
+                .OrderBy(x => x.Offset)
+                .ThenBy(x => x.Count)
                 .ToArray();
 
-            AttrTable = AttrTable.Create(Data, attrAddresses);
+            // TODO: generate more than just the first table
+            AttrTable = AttrTable.Create(Data, attrAddresses[0].Offset, attrAddresses[0].Count);
 
             return new List<IBaseTable>() {
                 ModelsHeaderTable,

@@ -14,8 +14,10 @@ namespace SF3.Win.Views.MPD {
             CreateChild(new TableView("Header", Model.ModelsHeaderTable, ngc));
             CreateChild(new TableView("Models", Model.ModelTable, ngc));
             CreateChild(new TableView("PDATAs", Model.PDataTable, ngc));
-            CreateChild(new TableView("POINTs", Model.VertexTable, ngc));
-            CreateChild(new TableView("ATTRs", Model.AttrTable, ngc));
+            // TODO: TableArrayView for all of them?
+            CreateChild(new TableView("First POINTs", Model.VertexTable, ngc));
+            // TODO: TableArrayView for all of them?
+            CreateChild(new TableView("First ATTRs", Model.AttrTable, ngc));
 
             return Control;
         }
