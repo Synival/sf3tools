@@ -44,39 +44,36 @@ namespace SF3.Models.Files.MPD {
 
             PDataTable = PDataTable.Create(Data, pdataAddresses);
 
-            var verticesAddresses = PDataTable
-                .Select(x => new { Offset = GetFileAddr(x.VerticesOffset), Count = x.VertexCount })
+            VertexTables = PDataTable
+                .Select(x => new OffsetCount { Offset = GetFileAddr(x.VerticesOffset), Count = x.VertexCount })
                 .Where(x => x.Offset != 0)
-                .GroupBy(x => x.Offset * 0x10000 + x.Count)
+                .GroupBy(x => x.GetHashCode())
                 .Distinct()
                 .Select(x => x.First())
                 .OrderBy(x => x.Offset)
                 .ThenBy(x => x.Count)
-                .ToArray();
+                .ToDictionary(x => x, x => VertexTable.Create(Data, x.Offset, x.Count));
 
-            // TODO: generate more than just the first table
-            VertexTable = VertexTable.Create(Data, verticesAddresses[0].Offset, verticesAddresses[0].Count);
-
-            var attrAddresses = PDataTable
-                .Select(x => new { Offset = GetFileAddr(x.AttributesOffset), Count = x.PolygonCount })
+            AttrTables = PDataTable
+                .Select(x => new OffsetCount { Offset = GetFileAddr(x.AttributesOffset), Count = x.PolygonCount })
                 .Where(x => x.Offset != 0)
-                .GroupBy(x => x.Offset * 0x10000 + x.Count)
+                .GroupBy(x => x.GetHashCode())
                 .Distinct()
                 .Select(x => x.First())
                 .OrderBy(x => x.Offset)
                 .ThenBy(x => x.Count)
-                .ToArray();
+                .ToDictionary(x => x, x => AttrTable.Create(Data, x.Offset, x.Count));
 
-            // TODO: generate more than just the first table
-            AttrTable = AttrTable.Create(Data, attrAddresses[0].Offset, attrAddresses[0].Count);
-
-            return new List<IBaseTable>() {
+            var tables = new List<IBaseTable>() {
                 ModelsHeaderTable,
                 ModelTable,
-                PDataTable,
-                VertexTable,
-                AttrTable
+                PDataTable
             };
+
+            tables.AddRange(VertexTables.Values);
+            tables.AddRange(AttrTables.Values);
+
+            return tables;
         }
 
         [BulkCopyRowName]
@@ -93,10 +90,21 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public PDataTable PDataTable { get; private set; }
 
-        [BulkCopyRecurse]
-        public VertexTable VertexTable { get; private set; }
+        public struct OffsetCount {
+            public int Offset;
+            public int Count;
+
+            public override int GetHashCode()
+                => Offset * 0x10000 + Count;
+
+            public override bool Equals(object rhs)
+                => (rhs is OffsetCount oc) ? (Offset == oc.Offset && Count == oc.Count) : base.Equals(rhs);
+        }
 
         [BulkCopyRecurse]
-        public AttrTable AttrTable { get; private set; }
+        public Dictionary<OffsetCount, VertexTable> VertexTables { get; private set; }
+
+        [BulkCopyRecurse]
+        public Dictionary<OffsetCount, AttrTable> AttrTables { get; private set; }
     }
 }
