@@ -31,7 +31,6 @@ namespace MPD_Analyzer {
 
                 foreach (var file in filesKv.Value) {
                     var filename = Path.GetFileNameWithoutExtension(file);
-                    Console.WriteLine(scenario.ToString() + ": " + Path.GetFileName(file) + ":");
 
                     // Get a byte data editing context for the file.
                     var byteData = new ByteData(new ByteArray(File.ReadAllBytes(file)));
@@ -39,6 +38,8 @@ namespace MPD_Analyzer {
                     // Create an MPD file that works with our new ByteData.
                     try {
                         using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts)) {
+                            Console.WriteLine(scenario.ToString() + ": " + Path.GetFileName(file) + ":");
+
                             // Is this MPD file in the wrong format for this scenario? (Scenario 3 and Premium Disk are the same)
                             // (This actually happens!)
                             var expectedScenario = (scenario == ScenarioType.PremiumDisk) ? ScenarioType.Scenario3 : scenario;
@@ -124,7 +125,7 @@ namespace MPD_Analyzer {
                         }
                     }
                     catch (Exception e) {
-                        Console.WriteLine("  !!! Exception: '" + e.Message + "'. Skipping!");
+                        Console.WriteLine("  !!! Exception for '" + filename + "': '" + e.Message + "'. Skipping!");
                     }
                 }
             }
