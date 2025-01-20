@@ -44,16 +44,16 @@ namespace SF3.Models.Files.MPD {
         public float[] GetSurfaceModelVertexHeights() {
             // For any tile whose character/texture ID has flag 0x80, the bottom-right corner of the walking heightmap is used.
             if (MPD_File.Surface?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && ModelIsFlat) {
-                var brHeight = MPD_File.Surface.HeightmapRowTable.Rows[Y].GetHeight(X, CornerType.BottomRight);
+                var brHeight = MPD_File.Surface.HeightmapRowTable[Y].GetHeight(X, CornerType.BottomRight);
                 return new float[] { brHeight, brHeight, brHeight, brHeight };
             }
 
             // Otherwise, gather heights from the 5x5 block with the surface mesh's heightmap.
             if (MPD_File.SurfaceModel?.VertexNormalBlockTable == null)
-                return MPD_File.Surface.HeightmapRowTable.Rows[Y].GetQuadHeights(X);
+                return MPD_File.Surface.HeightmapRowTable[Y].GetQuadHeights(X);
 
             return BlockVertexLocations.Values
-                .Select(x => MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[x.Num][x.X, x.Y] / 16.0f)
+                .Select(x => MPD_File.SurfaceModel.VertexHeightBlockTable[x.Num][x.X, x.Y] / 16.0f)
                 .ToArray();
         }
 
@@ -62,7 +62,7 @@ namespace SF3.Models.Files.MPD {
                 return new VECTOR(0f, 1 / 32768f, 0f);
 
             var loc = BlockVertexLocations[corner];
-            return MPD_File.SurfaceModel.VertexNormalBlockTable.Rows[loc.Num][loc.X, loc.Y];
+            return MPD_File.SurfaceModel.VertexNormalBlockTable[loc.Num][loc.X, loc.Y];
         }
 
         public VECTOR[] GetVertexNormals() {
@@ -78,93 +78,93 @@ namespace SF3.Models.Files.MPD {
         public Dictionary<CornerType, BlockVertexLocation[]> SharedBlockVertexLocations { get; }
 
         public TerrainType MoveTerrainType {
-            get => MPD_File.Surface.HeightTerrainRowTable.Rows[Y].GetTerrainType(X);
+            get => MPD_File.Surface.HeightTerrainRowTable[Y].GetTerrainType(X);
             set {
-                MPD_File.Surface.HeightTerrainRowTable.Rows[Y].SetTerrainType(X, value);
+                MPD_File.Surface.HeightTerrainRowTable[Y].SetTerrainType(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
             }
         }
 
         public TerrainFlags MoveTerrainFlags {
-            get => MPD_File.Surface.HeightTerrainRowTable.Rows[Y].GetTerrainFlags(X);
+            get => MPD_File.Surface.HeightTerrainRowTable[Y].GetTerrainFlags(X);
             set {
-                MPD_File.Surface.HeightTerrainRowTable.Rows[Y].SetTerrainFlags(X, value);
+                MPD_File.Surface.HeightTerrainRowTable[Y].SetTerrainFlags(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
             }
         }
 
         public float MoveHeight {
-            get => MPD_File.Surface.HeightTerrainRowTable.Rows[Y].GetHeight(X);
+            get => MPD_File.Surface.HeightTerrainRowTable[Y].GetHeight(X);
             set {
-                MPD_File.Surface.HeightTerrainRowTable.Rows[Y].SetHeight(X, value);
+                MPD_File.Surface.HeightTerrainRowTable[Y].SetHeight(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
             }
         }
 
         public float GetMoveHeightmap(CornerType corner)
-            => MPD_File.Surface.HeightmapRowTable.Rows[Y].GetHeight(X, corner);
+            => MPD_File.Surface.HeightmapRowTable[Y].GetHeight(X, corner);
         public void SetMoveHeightmap(CornerType corner, float value) {
-            MPD_File.Surface.HeightmapRowTable.Rows[Y].SetHeight(X, corner, value);
+            MPD_File.Surface.HeightmapRowTable[Y].SetHeight(X, corner, value);
             Modified?.Invoke(this, EventArgs.Empty);
         }
 
         public byte EventID {
-            get => MPD_File.Surface.EventIDRowTable.Rows[Y][X];
+            get => MPD_File.Surface.EventIDRowTable[Y][X];
             set {
-                MPD_File.Surface.EventIDRowTable.Rows[Y][X] = value;
+                MPD_File.Surface.EventIDRowTable[Y][X] = value;
                 Modified?.Invoke(this, EventArgs.Empty);
             }
         }
 
         public byte ModelTextureID {
-            get => MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].GetTextureID(X);
+            get => MPD_File.SurfaceModel.TileTextureRowTable[Y].GetTextureID(X);
             set {
-                MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].SetTextureID(X, value);
+                MPD_File.SurfaceModel.TileTextureRowTable[Y].SetTextureID(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
             }
         }
 
         public byte ModelTextureFlags {
-            get => MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].GetTextureFlags(X);
+            get => MPD_File.SurfaceModel.TileTextureRowTable[Y].GetTextureFlags(X);
             set {
-                MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].SetTextureFlags(X, value);
+                MPD_File.SurfaceModel.TileTextureRowTable[Y].SetTextureFlags(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
             }
         }
 
         public TextureFlipType ModelTextureFlip {
-            get => MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].GetFlip(X);
+            get => MPD_File.SurfaceModel.TileTextureRowTable[Y].GetFlip(X);
             set {
-                MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].SetFlip(X, value);
+                MPD_File.SurfaceModel.TileTextureRowTable[Y].SetFlip(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
             }
         }
 
         public TextureRotateType ModelTextureRotate {
-            get => MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].GetRotate(X);
+            get => MPD_File.SurfaceModel.TileTextureRowTable[Y].GetRotate(X);
             set {
-                MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].SetRotate(X, value);
+                MPD_File.SurfaceModel.TileTextureRowTable[Y].SetRotate(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
             }
         }
 
         public bool ModelIsFlat {
-            get => MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].GetIsFlatFlag(X);
+            get => MPD_File.SurfaceModel.TileTextureRowTable[Y].GetIsFlatFlag(X);
             set {
-                MPD_File.SurfaceModel.TileTextureRowTable.Rows[Y].SetIsFlatFlag(X, value);
+                MPD_File.SurfaceModel.TileTextureRowTable[Y].SetIsFlatFlag(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
             }
         }
 
         public float GetModelVertexHeightmap(CornerType corner) {
             var bl = BlockVertexLocations[corner];
-            return MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[bl.Num][bl.X, bl.Y] / 16f;
+            return MPD_File.SurfaceModel.VertexHeightBlockTable[bl.Num][bl.X, bl.Y] / 16f;
         }
 
         public void SetModelVertexHeightmap(CornerType corner, float value) {
             var bls = SharedBlockVertexLocations[corner];
             foreach (var bl in bls)
-                MPD_File.SurfaceModel.VertexHeightBlockTable.Rows[bl.Num][bl.X, bl.Y] = (byte) (value * 16f);
+                MPD_File.SurfaceModel.VertexHeightBlockTable[bl.Num][bl.X, bl.Y] = (byte) (value * 16f);
 
             Modified?.Invoke(this, EventArgs.Empty);
 
@@ -177,13 +177,13 @@ namespace SF3.Models.Files.MPD {
 
         public VECTOR GetModelVertexNormal(CornerType corner) {
             var bl = BlockVertexLocations[corner];
-            return MPD_File.SurfaceModel.VertexNormalBlockTable.Rows[bl.Num][bl.X, bl.Y];
+            return MPD_File.SurfaceModel.VertexNormalBlockTable[bl.Num][bl.X, bl.Y];
         }
 
         public void SetModelVertexNormal(CornerType corner, VECTOR value) {
             var bls = SharedBlockVertexLocations[corner];
             foreach (var bl in bls)
-                MPD_File.SurfaceModel.VertexNormalBlockTable.Rows[bl.Num][bl.X, bl.Y] = value;
+                MPD_File.SurfaceModel.VertexNormalBlockTable[bl.Num][bl.X, bl.Y] = value;
 
             Modified?.Invoke(this, EventArgs.Empty);
 

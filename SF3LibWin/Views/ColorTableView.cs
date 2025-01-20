@@ -55,7 +55,7 @@ namespace SF3.Win.Views {
             using (var g = Graphics.FromImage(PaletteBitmap)) {
                 g.Clear(Color.Transparent);
                 for (var i = 0; i < colorCount; i++) {
-                    var colorChannels = PixelConversion.ABGR1555toChannels(Table.Rows[i].ColorABGR1555);
+                    var colorChannels = PixelConversion.ABGR1555toChannels(Table[i].ColorABGR1555);
                     colorChannels.a = 0xff;
                     var brush = new SolidBrush(Color.FromArgb(colorChannels.a, colorChannels.r, colorChannels.g, colorChannels.b));
                     g.FillRectangle(brush, x, y, 1, 1);

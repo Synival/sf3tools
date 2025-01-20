@@ -24,7 +24,7 @@ namespace SF3.Models.Files.MPD {
 
         public override IEnumerable<ITable> MakeTables() {
             TextureHeaderTable = TextureHeaderTable.Create(Data, 0x00);
-            var header = TextureHeaderTable.Rows[0];
+            var header = TextureHeaderTable[0];
 
             return new List<ITable>() {
                 TextureHeaderTable,

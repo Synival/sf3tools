@@ -24,14 +24,14 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.EnterTable;
 
-            Assert.AreEqual(1472, table.Rows[0].EnterXPos);
-            Assert.AreEqual(480, table.Rows[0].EnterZPos);
+            Assert.AreEqual(1472, table[0].EnterXPos);
+            Assert.AreEqual(480, table[0].EnterZPos);
 
-            Assert.AreEqual(1472, table.Rows[1].EnterXPos);
-            Assert.AreEqual(480, table.Rows[1].EnterZPos);
+            Assert.AreEqual(1472, table[1].EnterXPos);
+            Assert.AreEqual(480, table[1].EnterZPos);
 
-            Assert.AreEqual(1008, table.Rows[2].EnterXPos);
-            Assert.AreEqual(1184, table.Rows[2].EnterZPos);
+            Assert.AreEqual(1008, table[2].EnterXPos);
+            Assert.AreEqual(1184, table[2].EnterZPos);
 
             Assert.AreEqual(7, table.Rows.Length);
         }
@@ -41,13 +41,13 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.NpcTable;
 
-            Assert.AreEqual(0x42, table.Rows[0].SpriteID);
-            Assert.AreEqual(1592, table.Rows[0].NpcXPos);
-            Assert.AreEqual(544, table.Rows[0].NpcZPos);
+            Assert.AreEqual(0x42, table[0].SpriteID);
+            Assert.AreEqual(1592, table[0].NpcXPos);
+            Assert.AreEqual(544, table[0].NpcZPos);
 
-            Assert.AreEqual(0x3E, table.Rows[1].SpriteID);
-            Assert.AreEqual(1568, table.Rows[1].NpcXPos);
-            Assert.AreEqual(448, table.Rows[1].NpcZPos);
+            Assert.AreEqual(0x3E, table[1].SpriteID);
+            Assert.AreEqual(1568, table[1].NpcXPos);
+            Assert.AreEqual(448, table[1].NpcZPos);
 
             Assert.AreEqual(25, table.Rows.Length);
         }
@@ -57,15 +57,15 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.TreasureTable;
 
-            Assert.AreEqual(0xC302, table.Rows[0].Searched);
-            Assert.AreEqual(0xF2D0, table.Rows[0].EventParameter);
-            Assert.AreEqual(0x0201, table.Rows[0].FlagUse);
-            Assert.AreEqual(3, table.Rows[0].EventNumber);
+            Assert.AreEqual(0xC302, table[0].Searched);
+            Assert.AreEqual(0xF2D0, table[0].EventParameter);
+            Assert.AreEqual(0x0201, table[0].FlagUse);
+            Assert.AreEqual(3, table[0].EventNumber);
 
-            Assert.AreEqual(0x0302, table.Rows[1].Searched);
-            Assert.AreEqual(0xF2EC, table.Rows[1].EventParameter);
-            Assert.AreEqual(0x0202, table.Rows[1].FlagUse);
-            Assert.AreEqual(4, table.Rows[1].EventNumber);
+            Assert.AreEqual(0x0302, table[1].Searched);
+            Assert.AreEqual(0xF2EC, table[1].EventParameter);
+            Assert.AreEqual(0x0202, table[1].FlagUse);
+            Assert.AreEqual(4, table[1].EventNumber);
 
             Assert.AreEqual(32, table.Rows.Length);
         }

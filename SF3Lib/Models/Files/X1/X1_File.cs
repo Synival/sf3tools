@@ -88,7 +88,7 @@ namespace SF3.Models.Files.X1 {
                 Battles = new Dictionary<MapLeaderType, Battle>();
                 foreach (var mapLeader in (MapLeaderType[]) Enum.GetValues(typeof(MapLeaderType))) {
                     var mapIndex = (int) mapLeader;
-                    var battleTableAddress = BattlePointersTable.Rows[mapIndex].BattlePointer;
+                    var battleTableAddress = BattlePointersTable[mapIndex].BattlePointer;
                     if (battleTableAddress != 0)
                         Battles.Add(mapLeader, Battle.Create(Data, NameGetterContext, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
                 }

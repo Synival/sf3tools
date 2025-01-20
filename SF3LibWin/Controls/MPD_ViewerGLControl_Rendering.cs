@@ -31,7 +31,7 @@ namespace SF3.Win.Controls {
         private void UpdateShaderLighting() {
             MakeCurrent();
             var lightPos = GetLightPosition();
-            var useNewLighting = (MPD_File == null) ? false : MPD_File.MPDHeader.Rows[0].UseNewLighting;
+            var useNewLighting = (MPD_File == null) ? false : MPD_File.MPDHeader[0].UseNewLighting;
             foreach (var shader in _world.Shaders) {
                 using (shader.Use())
                     UpdateShaderLighting(shader, lightPos, useNewLighting);
@@ -238,7 +238,7 @@ namespace SF3.Win.Controls {
             if (MPD_File == null)
                 return new Vector3(0, -1, 0);
 
-            var lightDir = MPD_File.LightDirectionTable.Rows[0];
+            var lightDir = MPD_File.LightDirectionTable[0];
             var pitch = lightDir.Pitch;
 
             var pitchInRadians = pitch / 32768f * Math.PI;

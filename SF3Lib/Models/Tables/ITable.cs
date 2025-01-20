@@ -13,10 +13,10 @@ namespace SF3.Models.Tables {
         bool Load();
 
         /// <summary>
-        /// Resets all loaded data.
+        /// Unloads all loaded data.
         /// </summary>
         /// <returns>'true' when a reset has occurred or nothing was loaded.</returns>
-        bool Reset();
+        bool Unload();
 
         /// <summary>
         /// The byte data used for this table.
@@ -57,5 +57,12 @@ namespace SF3.Models.Tables {
         /// A mutable array of rows of type T.
         /// </summary>
         T[] Rows { get; }
+
+        /// <summary>
+        /// Retrieves a row.
+        /// </summary>
+        /// <param name="index">Index of the row to retrieve.</param>
+        /// <returns>A row of a concrete type.</returns>
+        T this[int index] { get; }
     }
 }

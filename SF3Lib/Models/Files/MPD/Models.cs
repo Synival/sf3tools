@@ -23,7 +23,7 @@ namespace SF3.Models.Files.MPD {
             ModelsHeaderTable = ModelsHeaderTable.Create(Data, 0x0000);
             return new List<ITable>() {
                 ModelsHeaderTable,
-                (ModelTable = ModelTable.Create(Data, 0x000C, ModelsHeaderTable.Rows[0].NumModels)),
+                (ModelTable = ModelTable.Create(Data, 0x000C, ModelsHeaderTable[0].NumModels)),
             };
         }
 

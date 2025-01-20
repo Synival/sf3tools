@@ -28,7 +28,7 @@ namespace SF3.Models.Tables {
         /// Resets all models loaded from Load().
         /// </summary>
         /// <returns>'true' if successful (or no models are loaded), 'false' on failure.</returns>
-        public abstract bool Reset();
+        public abstract bool Unload();
 
         public IByteData Data { get; }
         public string ResourceFile { get; }
@@ -49,7 +49,7 @@ namespace SF3.Models.Tables {
         protected Table(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 
-        public override bool Reset() {
+        public override bool Unload() {
             _rows = null;
             return true;
         }
@@ -173,6 +173,8 @@ namespace SF3.Models.Tables {
 
         [BulkCopyRecurse]
         public T[] Rows => _rows;
+
+        public T this[int index] => _rows[index];
 
         public override bool IsLoaded => _rows != null;
 

@@ -41,19 +41,19 @@ namespace SF3.Tests.Models.Files {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
 
-                Assert.AreEqual(0x00, file.StatsTable.Rows[0].CharacterClass);
-                Assert.AreEqual(0x00, file.StatsTable.Rows[0].CharacterID);
-                Assert.AreEqual(12, file.StatsTable.Rows[0].HPCurve1);
+                Assert.AreEqual(0x00, file.StatsTable[0].CharacterClass);
+                Assert.AreEqual(0x00, file.StatsTable[0].CharacterID);
+                Assert.AreEqual(12, file.StatsTable[0].HPCurve1);
                 // TODO: maybe more data?
 
-                Assert.AreEqual(0x01, file.StatsTable.Rows[1].CharacterClass);
-                Assert.AreEqual(0x01, file.StatsTable.Rows[1].CharacterID);
-                Assert.AreEqual(13, file.StatsTable.Rows[1].HPCurve1);
+                Assert.AreEqual(0x01, file.StatsTable[1].CharacterClass);
+                Assert.AreEqual(0x01, file.StatsTable[1].CharacterID);
+                Assert.AreEqual(13, file.StatsTable[1].HPCurve1);
                 // TODO: maybe more data?
 
-                Assert.AreEqual(0x04, file.StatsTable.Rows[2].CharacterClass);
-                Assert.AreEqual(0x02, file.StatsTable.Rows[2].CharacterID);
-                Assert.AreEqual(9, file.StatsTable.Rows[2].HPCurve1);
+                Assert.AreEqual(0x04, file.StatsTable[2].CharacterClass);
+                Assert.AreEqual(0x02, file.StatsTable[2].CharacterID);
+                Assert.AreEqual(9, file.StatsTable[2].HPCurve1);
                 // TODO: maybe more data?
 
                 Assert.AreEqual(testCase.ExpectedStatsRows, file.StatsTable.Rows.Length);
@@ -66,25 +66,25 @@ namespace SF3.Tests.Models.Files {
                 var file = testCase.Create();
 
                 if (testCase.Scenario == ScenarioType.Scenario1) {
-                    Assert.AreEqual(0x00, file.InitialInfoTable.Rows[0].CharacterE);
-                    Assert.AreEqual(0x00, file.InitialInfoTable.Rows[0].CharacterClassE);
-                    Assert.AreEqual(1, file.InitialInfoTable.Rows[0].Level);
+                    Assert.AreEqual(0x00, file.InitialInfoTable[0].CharacterE);
+                    Assert.AreEqual(0x00, file.InitialInfoTable[0].CharacterClassE);
+                    Assert.AreEqual(1, file.InitialInfoTable[0].Level);
                     // TODO: maybe more data?
 
-                    Assert.AreEqual(0x01, file.InitialInfoTable.Rows[1].CharacterE);
-                    Assert.AreEqual(0x01, file.InitialInfoTable.Rows[1].CharacterClassE);
-                    Assert.AreEqual(1, file.InitialInfoTable.Rows[1].Level);
+                    Assert.AreEqual(0x01, file.InitialInfoTable[1].CharacterE);
+                    Assert.AreEqual(0x01, file.InitialInfoTable[1].CharacterClassE);
+                    Assert.AreEqual(1, file.InitialInfoTable[1].Level);
                     // TODO: maybe more data?
                 }
                 else {
-                    Assert.AreEqual(0x00, file.InitialInfoTable.Rows[0].CharacterE);
-                    Assert.AreEqual(0x20, file.InitialInfoTable.Rows[0].CharacterClassE);
-                    Assert.AreEqual(15, file.InitialInfoTable.Rows[0].Level);
+                    Assert.AreEqual(0x00, file.InitialInfoTable[0].CharacterE);
+                    Assert.AreEqual(0x20, file.InitialInfoTable[0].CharacterClassE);
+                    Assert.AreEqual(15, file.InitialInfoTable[0].Level);
                     // TODO: maybe more data?
 
-                    Assert.AreEqual(0x01, file.InitialInfoTable.Rows[1].CharacterE);
-                    Assert.AreEqual(0x21, file.InitialInfoTable.Rows[1].CharacterClassE);
-                    Assert.AreEqual(15, file.InitialInfoTable.Rows[1].Level);
+                    Assert.AreEqual(0x01, file.InitialInfoTable[1].CharacterE);
+                    Assert.AreEqual(0x21, file.InitialInfoTable[1].CharacterClassE);
+                    Assert.AreEqual(15, file.InitialInfoTable[1].Level);
                     // TODO: maybe more data?
                 }
 
@@ -97,10 +97,10 @@ namespace SF3.Tests.Models.Files {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
 
-                Assert.AreEqual(70, file.WeaponLevelTable.Rows[0].WLevel1);
-                Assert.AreEqual(150, file.WeaponLevelTable.Rows[0].WLevel2);
-                Assert.AreEqual(250, file.WeaponLevelTable.Rows[0].WLevel3);
-                Assert.AreEqual(9999, file.WeaponLevelTable.Rows[0].WLevel4);
+                Assert.AreEqual(70, file.WeaponLevelTable[0].WLevel1);
+                Assert.AreEqual(150, file.WeaponLevelTable[0].WLevel2);
+                Assert.AreEqual(250, file.WeaponLevelTable[0].WLevel3);
+                Assert.AreEqual(9999, file.WeaponLevelTable[0].WLevel4);
 
                 Assert.AreEqual(1, file.WeaponLevelTable.Rows.Length);
             });

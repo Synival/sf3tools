@@ -99,7 +99,7 @@ namespace LightPaletteSetter {
                     }
                     Console.WriteLine("  Updating Palette[" + palette.Index + "]...");
                     for (var j = 0; j < 256; j++) {
-                        var row = palette.Obj.Rows[j];
+                        var row = palette.Obj[j];
                         if (row.Address + 1 >= headerAddr)
                             break;
 
@@ -114,7 +114,7 @@ namespace LightPaletteSetter {
                 }
 
                 // Update light direction.
-                var lightDirection = mpdFile.LightDirectionTable.Rows[0];
+                var lightDirection = mpdFile.LightDirectionTable[0];
                 if (c_lighting.Pitch.HasValue)
                     lightDirection.Pitch = c_lighting.Pitch.Value;
                 if (c_lighting.Yaw.HasValue)

@@ -51,7 +51,7 @@ namespace SF3.Models.Files.MPD {
             var areAnimatedTextures32Bit = Scenario >= ScenarioType.Scenario3;
 
             // Load root headers
-            var header = MakeHeaderTable().Rows[0];
+            var header = MakeHeaderTable()[0];
             var headerTables = MakeHeaderTables(header, areAnimatedTextures32Bit);
 
             // Load chunks
@@ -183,8 +183,8 @@ namespace SF3.Models.Files.MPD {
         }
 
         private IChunkData MakeChunkData(int chunkIndex, bool chunkIsCompressed, string compressionType = null) {
-            var newChunk = new ChunkData(new ByteArraySegment(Data.Data, ChunkHeader.Rows[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader.Rows[chunkIndex].ChunkSize), chunkIsCompressed, chunkIndex);
-            var chunkHeader = ChunkHeader.Rows[chunkIndex];
+            var newChunk = new ChunkData(new ByteArraySegment(Data.Data, ChunkHeader[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader[chunkIndex].ChunkSize), chunkIsCompressed, chunkIndex);
+            var chunkHeader = ChunkHeader[chunkIndex];
 
             chunkHeader.DecompressedSize = newChunk.DecompressedData.Length;
             newChunk.DecompressedData.Data.RangeModified += (s, a) => {
@@ -197,14 +197,14 @@ namespace SF3.Models.Files.MPD {
                     var byteArraySegment = (ByteArraySegment) newChunk.Data;
 
                     // Figure out how much the offset has changed.
-                    var oldOffset = ChunkHeader.Rows[chunkIndex].ChunkAddress - c_RamOffset;
+                    var oldOffset = ChunkHeader[chunkIndex].ChunkAddress - c_RamOffset;
                     var newOffset = byteArraySegment.Offset;
                     var offsetDelta = newOffset - oldOffset;
                     if (offsetDelta == 0)
                         return;
 
                     // Update the address in the chunk table.
-                    ChunkHeader.Rows[chunkIndex].ChunkAddress = newOffset + c_RamOffset;
+                    ChunkHeader[chunkIndex].ChunkAddress = newOffset + c_RamOffset;
 
                     // Chunks after this one with something assigned to ChunkData[] will have their
                     // ChunkAddress updated automatically. For chunks without a ChunkData[] after this one
@@ -213,7 +213,7 @@ namespace SF3.Models.Files.MPD {
                         if (ChunkData[j] != null)
                             break;
 
-                        var ch = ChunkHeader.Rows[j];
+                        var ch = ChunkHeader[j];
                         if (ch != null && ch.ChunkAddress != 0)
                             ch.ChunkAddress += offsetDelta;
                     }
@@ -433,7 +433,7 @@ namespace SF3.Models.Files.MPD {
             int lastChunkEndRamAddr = expectedRamAddr;
 
             for (var i = 0; i < ChunkData.Length; i++) {
-                var chunk = ChunkHeader.Rows[i];
+                var chunk = ChunkHeader[i];
                 if (chunk.ChunkAddress == 0)
                     continue;
 

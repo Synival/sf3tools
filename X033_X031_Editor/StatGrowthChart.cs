@@ -193,7 +193,7 @@ namespace SF3.X033_X031_Editor {
 
             // Get the stats model for the selected character.
             var index = cbCurveGraphCharacter.SelectedIndex;
-            var stats = (index >= 0 && index < statsTable.Rows.Length) ? statsTable.Rows[index] : null;
+            var stats = (index >= 0 && index < statsTable.Rows.Length) ? statsTable[index] : null;
 
             // We'll need to use some different values depending on the promotion level.
             var promotionLevel = (int?)stats?.PromotionLevel ?? 0;
