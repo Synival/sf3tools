@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using SF3.Models.Files.MPD.Objects;
+using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
     public class SurfaceView : TabView {

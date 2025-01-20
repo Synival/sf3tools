@@ -1,6 +1,5 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.MPD;
-using SF3.Models.Files.MPD.Objects;
 
 namespace SF3.Win.Views.MPD {
     public class SurfaceModelChunkView : TabView {

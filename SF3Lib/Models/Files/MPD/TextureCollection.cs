@@ -6,7 +6,7 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.TextureCollection;
 using SF3.Types;
 
-namespace SF3.Models.Files.MPD.Objects {
+namespace SF3.Models.Files.MPD {
     public class TextureCollection : TableFile {
         protected TextureCollection(IByteData data, INameGetterContext nameContext, int address, string name, TextureCollectionType collection, int? chunkIndex)
         : base(data, nameContext) {

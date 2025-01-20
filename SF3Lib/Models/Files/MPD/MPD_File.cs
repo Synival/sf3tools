@@ -5,7 +5,6 @@ using CommonLib.Arrays;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.ByteData;
-using SF3.Models.Files.MPD.Objects;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.Models.Tables;

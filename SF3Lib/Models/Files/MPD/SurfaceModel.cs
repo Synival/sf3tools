@@ -11,7 +11,7 @@ using SF3.Models.Tables.MPD.SurfaceModel;
 using SF3.Types;
 using static CommonLib.Utils.BlockHelpers;
 
-namespace SF3.Models.Files.MPD.Objects {
+namespace SF3.Models.Files.MPD {
     public class SurfaceModel : TableFile {
         protected SurfaceModel(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex, ScenarioType scenario)
         : base(data, nameContext) {

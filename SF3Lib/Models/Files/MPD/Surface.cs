@@ -5,7 +5,7 @@ using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Surface;
 
-namespace SF3.Models.Files.MPD.Objects {
+namespace SF3.Models.Files.MPD {
     public class Surface : TableFile {
         protected Surface(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex)
         : base(data, nameContext) {
