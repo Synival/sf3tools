@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD.Model;
 
 namespace SF3.Models.Tables.MPD.Model {
-    public class ModelsHeaderTable : Table<ModelsHeaderModel> {
+    public class ModelsHeaderTable : Table<ModelsHeader> {
         protected ModelsHeaderTable(IByteData data, int address) : base(data, address) {}
 
         public static ModelsHeaderTable Create(IByteData data, int address) {
@@ -14,7 +14,7 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public override bool Load()
-            => LoadUntilMax((id, address) => new ModelsHeaderModel(Data, id, "Header", address));
+            => LoadUntilMax((id, address) => new ModelsHeader(Data, id, "Header", address));
 
         public override int? MaxSize => 1;
     }

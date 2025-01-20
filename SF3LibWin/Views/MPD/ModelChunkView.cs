@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
 
 namespace SF3.Win.Views.MPD {
-    public class ModelsView : TabView {
-        public ModelsView(string name, Models.Files.MPD.Models model) : base(name) {
+    public class ModelChunkView : TabView {
+        public ModelChunkView(string name, Models.Files.MPD.Models model) : base(name) {
             Model = model;
         }
 
@@ -12,6 +12,7 @@ namespace SF3.Win.Views.MPD {
 
             var ngc = Model.NameGetterContext;
             CreateChild(new TableView("Header", Model.ModelsHeaderTable, ngc));
+            CreateChild(new TableView("Models", Model.ModelTable, ngc));
 
             return Control;
         }

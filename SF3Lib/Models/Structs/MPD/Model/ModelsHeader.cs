@@ -2,12 +2,12 @@
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class ModelsHeaderModel : Struct {
+    public class ModelsHeader : Struct {
         private readonly int _unknownOffset1Address;
         private readonly int _unknownOffset2Address;
         private readonly int _numModelsAddress;
 
-        public ModelsHeaderModel(IByteData data, int id, string name, int address)
+        public ModelsHeader(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x0C) {
             _unknownOffset1Address = Address + 0x00; // 4 bytes
             _unknownOffset2Address = Address + 0x04; // 4 bytes

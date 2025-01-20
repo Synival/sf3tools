@@ -20,8 +20,10 @@ namespace SF3.Models.Files.MPD {
         }
 
         public override IEnumerable<ITable> MakeTables() {
+            ModelsHeaderTable = ModelsHeaderTable.Create(Data, 0x0000);
             return new List<ITable>() {
-                (ModelsHeaderTable = ModelsHeaderTable.Create(Data, 0x0000)),
+                ModelsHeaderTable,
+                (ModelTable = ModelTable.Create(Data, 0x000C, ModelsHeaderTable.Rows[0].NumModels)),
             };
         }
 
@@ -32,5 +34,8 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public ModelsHeaderTable ModelsHeaderTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public ModelTable ModelTable { get; private set; }
     }
 }
