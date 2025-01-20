@@ -4,7 +4,7 @@ namespace SF3.Models.Tables {
     /// <summary>
     /// Interface for any table of SF3 data that can be modified.
     /// </summary>
-    public interface ITable : IBaseTable {
+    public interface ITerminatedTable : IBaseTable {
         /// <summary>
         /// The maximum allowed size the table can be. Optional.
         /// </summary>
@@ -14,6 +14,6 @@ namespace SF3.Models.Tables {
     /// <summary>
     /// Interface for a specific table of SF3 data that can be modified.
     /// </summary>
-    public interface ITable<T> : ITable, IBaseTable<T> where T : class, IStruct {
+    public interface ITerminatedTable<T> : ITerminatedTable, IBaseTable<T> where T : class, IStruct {
     }
 }

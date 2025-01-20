@@ -6,7 +6,7 @@ using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.TextureAnimation;
 
 namespace SF3.Models.Tables.MPD.TextureAnimation {
-    public class AllFramesTable : Table<FrameModel> {
+    public class AllFramesTable : BaseTable<FrameModel> {
         protected AllFramesTable(IByteData data, int address, IEnumerable<TextureAnimationModel> animations) : base(data, address) {
             Animations = animations;
         }

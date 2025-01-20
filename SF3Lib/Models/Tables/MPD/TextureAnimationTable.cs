@@ -4,7 +4,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
-    public class TextureAnimationTable : Table<TextureAnimationModel> {
+    public class TextureAnimationTable : TerminatedTable<TextureAnimationModel> {
         protected TextureAnimationTable(IByteData data, int address, bool is32Bit) : base(data, address) {
             Is32Bit       = is32Bit;
             _frameEndId   = is32Bit ? 0xFFFF_FFFE : 0xFFFE;
@@ -19,7 +19,7 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public override bool Load() {
-            return LoadUntilMax(
+            return Load(
                 (id, address) => {
                     // For some reason, Scenario 2's SARA23.MPD's final animation has an ID of 0xFFFE instead of 0xFFFF like
                     // everything else. No clue why, but let's consider that the end as well.
@@ -34,7 +34,7 @@ namespace SF3.Models.Tables.MPD {
 
         public bool Is32Bit { get; }
 
-        private uint _frameEndId;
-        private uint _textureEndId;
+        private readonly uint _frameEndId;
+        private readonly uint _textureEndId;
     }
 }

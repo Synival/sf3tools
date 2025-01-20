@@ -4,7 +4,7 @@ using SF3.Models.Structs.X1;
 
 namespace SF3.Models.Tables.X1 {
     public class TreasureTable : ResourceTable<Treasure> {
-        protected TreasureTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected TreasureTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 255) {
         }
 
         public static TreasureTable Create(IByteData data, string resourceFile, int address) {
@@ -15,10 +15,8 @@ namespace SF3.Models.Tables.X1 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile(
+            => Load(
                 (id, name, address) => new Treasure(Data, id, name, address),
                 (rows, model) => model.Searched != 0xFFFF);
-
-        public override int? MaxSize => 255;
     }
 }

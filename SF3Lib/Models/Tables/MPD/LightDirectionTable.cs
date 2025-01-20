@@ -3,8 +3,8 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
-    public class LightDirectionTable : Table<LightDirection> {
-        protected LightDirectionTable(IByteData data, int address) : base(data, address) {
+    public class LightDirectionTable : FixedSizeTable<LightDirection> {
+        protected LightDirectionTable(IByteData data, int address) : base(data, address, 1) {
         }
 
         public static LightDirectionTable Create(IByteData data, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public override bool Load()
-            => LoadUntilMax((id, address) => new LightDirection(Data, id, "LightDirection", address));
-
-        public override int? MaxSize => 1;
+            => Load((id, address) => new LightDirection(Data, id, "LightDirection", address));
     }
 }

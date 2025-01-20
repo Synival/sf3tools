@@ -3,8 +3,8 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
-    public class ChunkHeaderTable : Table<ChunkHeader> {
-        protected ChunkHeaderTable(IByteData data, int address) : base(data, address) {
+    public class ChunkHeaderTable : FixedSizeTable<ChunkHeader> {
+        protected ChunkHeaderTable(IByteData data, int address) : base(data, address, 32) {
         }
 
         public static ChunkHeaderTable Create(IByteData data, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public override bool Load()
-            => LoadUntilMax((id, address) => new ChunkHeader(Data, id, "Chunk" + id.ToString("D2"), address));
-
-        public override int? MaxSize => 32;
+            => Load((id, address) => new ChunkHeader(Data, id, "Chunk" + id.ToString("D2"), address));
     }
 }

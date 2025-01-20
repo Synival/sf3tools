@@ -4,7 +4,7 @@ using SF3.Models.Structs.X033_X031;
 
 namespace SF3.Models.Tables.X033_X031 {
     public class InitialInfoTable : ResourceTable<InitialInfo> {
-        protected InitialInfoTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected InitialInfoTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 100) {
         }
 
         public static InitialInfoTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X033_X031 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new InitialInfo(Data, id, name, address));
-
-        public override int? MaxSize => 100;
+            => Load((id, name, address) => new InitialInfo(Data, id, name, address));
     }
 }

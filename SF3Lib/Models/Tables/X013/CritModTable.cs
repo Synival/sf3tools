@@ -4,7 +4,7 @@ using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
     public class CritModTable : ResourceTable<CritMod> {
-        protected CritModTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected CritModTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 1) {
         }
 
         public static CritModTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new CritMod(Data, id, name, address));
-
-        public override int? MaxSize => 1;
+            => Load((id, name, address) => new CritMod(Data, id, name, address));
     }
 }

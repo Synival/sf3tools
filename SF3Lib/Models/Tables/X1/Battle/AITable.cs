@@ -4,7 +4,7 @@ using SF3.Models.Structs.X1.Battle;
 
 namespace SF3.Models.Tables.X1.Battle {
     public class AITable : ResourceTable<AI> {
-        protected AITable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected AITable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 130) {
         }
 
         public static AITable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X1.Battle {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new AI(Data, id, name, address));
-
-        public override int? MaxSize => 130;
+            => Load((id, name, address) => new AI(Data, id, name, address));
     }
 }

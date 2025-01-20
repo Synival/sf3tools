@@ -4,7 +4,7 @@ using SF3.Models.Structs.X002;
 
 namespace SF3.Models.Tables.X002 {
     public class WeaponSpellTable : ResourceTable<WeaponSpell> {
-        protected WeaponSpellTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected WeaponSpellTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 31) {
         }
 
         public static WeaponSpellTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X002 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new WeaponSpell(Data, id, name, address));
-
-        public override int? MaxSize => 31;
+            => Load((id, name, address) => new WeaponSpell(Data, id, name, address));
     }
 }

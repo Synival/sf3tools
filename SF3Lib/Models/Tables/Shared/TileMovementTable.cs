@@ -4,7 +4,7 @@ using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.Shared {
     public class TileMovementTable : ResourceTable<TileMovement> {
-        protected TileMovementTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected TileMovementTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 31) {
         }
 
         public static TileMovementTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.Shared {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new TileMovement(Data, id, name, address));
-
-        public override int? MaxSize => 31;
+            => Load((id, name, address) => new TileMovement(Data, id, name, address));
     }
 }

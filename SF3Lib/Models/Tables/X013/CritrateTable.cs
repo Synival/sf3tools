@@ -4,7 +4,7 @@ using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
     public class CritrateTable : ResourceTable<Critrate> {
-        protected CritrateTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected CritrateTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 3) {
         }
 
         public static CritrateTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new Critrate(Data, id, name, address));
-
-        public override int? MaxSize => 3;
+            => Load((id, name, address) => new Critrate(Data, id, name, address));
     }
 }

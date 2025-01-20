@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
-    public class Offset4Table : Table<Offset4Model> {
+    public class Offset4Table : TerminatedTable<Offset4Model> {
         protected Offset4Table(IByteData data, int address) : base(data, address) {
         }
 
@@ -15,7 +15,7 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public override bool Load() {
-            return LoadUntilMax(
+            return Load(
                 (id, address) => {
                     var atEnd = (uint) Data.GetDouble(address) == 0xFFFF_FFFF;
                     return new Offset4Model(Data, id, atEnd ? "--" : "Row " + id, address);

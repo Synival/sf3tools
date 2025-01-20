@@ -4,15 +4,13 @@ using SF3.ByteData;
 using SF3.Models.Structs;
 
 namespace SF3.Models.Tables {
-    public class UnknownUInt8Table : Table<UnknownUInt8Struct> {
+    public class UnknownUInt8Table : TerminatedTable<UnknownUInt8Struct> {
         protected UnknownUInt8Table(IByteData data, int address, int? count, int? readUntil)
-        : base(data, address) {
+        : base(data, address, count) {
             if (!count.HasValue && !readUntil.HasValue)
                 throw new ArgumentNullException(nameof(count) + ", " + nameof(readUntil));
 
-            MaxSize = count;
             ReadUntil = readUntil;
-
             FormatString = "X" + MaxSize.ToString().Length;
         }
 
@@ -28,13 +26,10 @@ namespace SF3.Models.Tables {
 
         public override bool Load() {
             var pred = ReadUntil.HasValue ? ContinueReadingPred : (ContinueReadingPredicate) null;
-            return LoadUntilMax((id, address) => new UnknownUInt8Struct(Data, id, "Unknown UInt8 " + id.ToString(FormatString), address), pred, false);
+            return Load((id, address) => new UnknownUInt8Struct(Data, id, "Unknown UInt8 " + id.ToString(FormatString), address), pred, false);
         }
 
-        public override int? MaxSize { get; }
-
         public int? ReadUntil { get; }
-
         private string FormatString { get; }
     }
 }

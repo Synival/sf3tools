@@ -4,7 +4,7 @@ using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
     public class MagicBonusTable : ResourceTable<MagicBonus> {
-        protected MagicBonusTable(IByteData data, string resourceFile, int address, bool has32BitValues) : base(data, resourceFile, address) {
+        protected MagicBonusTable(IByteData data, string resourceFile, int address, bool has32BitValues) : base(data, resourceFile, address, 256) {
             Has32BitValues = has32BitValues;
         }
 
@@ -16,9 +16,7 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new MagicBonus(Data, id, name, address, Has32BitValues));
-
-        public override int? MaxSize => 256;
+            => Load((id, name, address) => new MagicBonus(Data, id, name, address, Has32BitValues));
 
         public bool Has32BitValues { get; }
     }

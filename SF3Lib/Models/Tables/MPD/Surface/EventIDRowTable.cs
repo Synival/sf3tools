@@ -3,8 +3,8 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD.Surface;
 
 namespace SF3.Models.Tables.MPD.Surface {
-    public class EventIDRowTable : Table<EventIDRow> {
-        protected EventIDRowTable(IByteData data, int address) : base(data, address) {
+    public class EventIDRowTable : FixedSizeTable<EventIDRow> {
+        protected EventIDRowTable(IByteData data, int address) : base(data, address, 64) {
         }
 
         public static EventIDRowTable Create(IByteData data, int address) {
@@ -16,9 +16,7 @@ namespace SF3.Models.Tables.MPD.Surface {
 
         public override bool Load() {
             var size = new EventIDRow(Data, 0, "", Address).Size;
-            return LoadUntilMax((id, address) => new EventIDRow(Data, id, "Y" + id.ToString("D2"), Address + id * size));
+            return Load((id, address) => new EventIDRow(Data, id, "Y" + id.ToString("D2"), Address + id * size));
         }
-
-        public override int? MaxSize => 64;
     }
 }

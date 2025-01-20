@@ -4,7 +4,7 @@ using SF3.Models.Structs.X1.Town;
 
 namespace SF3.Models.Tables.X1.Town {
     public class EnterTable : ResourceTable<Enter> {
-        protected EnterTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected EnterTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 100) {
         }
 
         public static EnterTable Create(IByteData data, string resourceFile, int address) {
@@ -15,10 +15,8 @@ namespace SF3.Models.Tables.X1.Town {
         }
 
         public override bool Load()
-            => LoadFromResourceFile(
+            => Load(
                 (id, name, address) => new Enter(Data, id, name, address),
                 (rows, models) => models.Entered != 0xFFFF);
-
-        public override int? MaxSize => 100;
     }
 }

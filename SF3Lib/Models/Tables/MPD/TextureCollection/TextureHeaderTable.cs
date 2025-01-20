@@ -3,8 +3,8 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD.TextureChunk;
 
 namespace SF3.Models.Tables.MPD.TextureCollection {
-    public class TextureHeaderTable : Table<TextureHeader> {
-        protected TextureHeaderTable(IByteData data, int address) : base(data, address) {
+    public class TextureHeaderTable : FixedSizeTable<TextureHeader> {
+        protected TextureHeaderTable(IByteData data, int address) : base(data, address, 1) {
         }
 
         public static TextureHeaderTable Create(IByteData data, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         }
 
         public override bool Load()
-            => LoadUntilMax((id, address) => new TextureHeader(Data, id, "Header", address));
-
-        public override int? MaxSize => 1;
+            => Load((id, address) => new TextureHeader(Data, id, "Header", address));
     }
 }

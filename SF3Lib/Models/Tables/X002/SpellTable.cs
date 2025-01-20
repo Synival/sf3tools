@@ -4,7 +4,7 @@ using SF3.Models.Structs.X002;
 
 namespace SF3.Models.Tables.X002 {
     public class SpellTable : ResourceTable<Spell> {
-        protected SpellTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected SpellTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 78) {
         }
 
         public static SpellTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X002 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new Spell(Data, id, name, address));
-
-        public override int? MaxSize => 78;
+            => Load((id, name, address) => new Spell(Data, id, name, address));
     }
 }

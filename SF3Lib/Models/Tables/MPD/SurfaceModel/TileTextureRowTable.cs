@@ -3,8 +3,8 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD.SurfaceModel;
 
 namespace SF3.Models.Tables.MPD.SurfaceModel {
-    public class TileTextureRowTable : Table<TileTextureRow> {
-        protected TileTextureRowTable(IByteData data, int address, bool hasRotation) : base(data, address) {
+    public class TileTextureRowTable : FixedSizeTable<TileTextureRow> {
+        protected TileTextureRowTable(IByteData data, int address, bool hasRotation) : base(data, address, 64) {
             HasRotation = hasRotation;
         }
 
@@ -16,7 +16,7 @@ namespace SF3.Models.Tables.MPD.SurfaceModel {
         }
 
         public override bool Load() {
-            return LoadUntilMax((id, address) => {
+            return Load((id, address) => {
                 // Ignore address; this table is in a special order:
                 // [Y:16, X:16][Y:4, X:4]
                 var block = id / 4;
@@ -27,7 +27,6 @@ namespace SF3.Models.Tables.MPD.SurfaceModel {
         }
 
         public bool HasRotation { get; }
-        public override int? MaxSize => 64;
 
         public ushort[,] Make2DTextureData() {
             var textureData = new ushort[64, 64];

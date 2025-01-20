@@ -4,7 +4,7 @@ using SF3.Models.Structs.X1.Battle;
 
 namespace SF3.Models.Tables.X1.Battle {
     public class BattleHeaderTable : ResourceTable<BattleHeader> {
-        protected BattleHeaderTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected BattleHeaderTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 31) {
         }
 
         public static BattleHeaderTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X1.Battle {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new BattleHeader(Data, id, name, address));
-
-        public override int? MaxSize => 31;
+            => Load((id, name, address) => new BattleHeader(Data, id, name, address));
     }
 }

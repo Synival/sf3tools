@@ -4,8 +4,8 @@ using SF3.Models.Structs.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Tables.MPD {
-    public class MPDHeaderTable : Table<MPDHeaderModel> {
-        protected MPDHeaderTable(IByteData data, int address, ScenarioType scenario) : base(data, address) {
+    public class MPDHeaderTable : FixedSizeTable<MPDHeaderModel> {
+        protected MPDHeaderTable(IByteData data, int address, ScenarioType scenario) : base(data, address, 1) {
             Scenario = scenario;
         }
 
@@ -17,9 +17,8 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public override bool Load()
-            => LoadUntilMax((id, address) => new MPDHeaderModel(Data, id, "Header", address, Scenario));
+            => Load((id, address) => new MPDHeaderModel(Data, id, "Header", address, Scenario));
 
-        public override int? MaxSize => 1;
         public ScenarioType Scenario { get; }
     }
 }

@@ -11,8 +11,9 @@ namespace SF3.Models.Tables {
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
     public abstract class ResourceTable<T> : BaseTable<T>, IResourceTable<T> where T : class, IStruct {
-        protected ResourceTable(IByteData data, string resourceFile, int address) : base(data, address) {
+        protected ResourceTable(IByteData data, string resourceFile, int address, int? maxSize = null) : base(data, address) {
             ResourceFile = resourceFile;
+            MaxSize = maxSize;
         }
 
         /// <summary>
@@ -20,8 +21,8 @@ namespace SF3.Models.Tables {
         /// </summary>
         /// <param name="makeTFunc">Factory function to make the model.</param>
         /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
-        public bool LoadFromResourceFile(Func<int, string, int, T> makeTFunc)
-            => LoadFromResourceFile(makeTFunc, null);
+        public bool Load(Func<int, string, int, T> makeTFunc)
+            => Load(makeTFunc, null);
 
         /// <summary>
         /// Loads all rows from the resource file, sorted by value.
@@ -30,7 +31,7 @@ namespace SF3.Models.Tables {
         /// <param name="pred">Optional predicate function to check whether or not the reader should continue.</param>
         /// <param name="addEndModel">If 'ture', any new model loaded will still be added if 'pred' returns 'false'.</param>
         /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
-        public bool LoadFromResourceFile(Func<int, string, int, T> makeTFunc, BaseTable<T>.ContinueReadingPredicate pred, bool addEndModel = true) {
+        public bool Load(Func<int, string, int, T> makeTFunc, ContinueReadingPredicate pred, bool addEndModel = true) {
             var rows = new Dictionary<int, T>();
             try {
                 // Get the size of our rows so we can determine the address of elements.
@@ -74,6 +75,6 @@ namespace SF3.Models.Tables {
         }
 
         public string ResourceFile { get; }
-        public virtual int? MaxSize => null;
+        public int? MaxSize { get; }
     }
 }

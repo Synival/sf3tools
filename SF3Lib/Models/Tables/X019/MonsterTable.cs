@@ -4,7 +4,7 @@ using SF3.Models.Structs.X019;
 
 namespace SF3.Models.Tables.X019 {
     public class MonsterTable : ResourceTable<Monster> {
-        protected MonsterTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected MonsterTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 256) {
         }
 
         public static MonsterTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X019 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new Monster(Data, id, name, address));
-
-        public override int? MaxSize => 256;
+            => Load((id, name, address) => new Monster(Data, id, name, address));
     }
 }

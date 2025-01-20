@@ -4,7 +4,7 @@ using SF3.Models.Structs.X002;
 
 namespace SF3.Models.Tables.X002 {
     public class LoadingTable : ResourceTable<Loading> {
-        protected LoadingTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected LoadingTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 300) {
         }
 
         public static LoadingTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X002 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new Loading(Data, id, name, address));
-
-        public override int? MaxSize => 300;
+            => Load((id, name, address) => new Loading(Data, id, name, address));
     }
 }

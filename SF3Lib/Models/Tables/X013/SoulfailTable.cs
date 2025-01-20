@@ -4,7 +4,7 @@ using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
     public class SoulfailTable : ResourceTable<Soulfail> {
-        protected SoulfailTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected SoulfailTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 1) {
         }
 
         public static SoulfailTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new Soulfail(Data, id, name, address));
-
-        public override int? MaxSize => 1;
+            => Load((id, name, address) => new Soulfail(Data, id, name, address));
     }
 }

@@ -7,7 +7,7 @@ using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.Shared {
     public class WarpTable : ResourceTable<Warp> {
-        protected WarpTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected WarpTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 1000) {
         }
 
         public static WarpTable Create(IByteData data, string resourceFile, int address) {
@@ -35,7 +35,5 @@ namespace SF3.Models.Tables.Shared {
             }
             return true;
         }
-
-        public override int? MaxSize => 1000;
     }
 }

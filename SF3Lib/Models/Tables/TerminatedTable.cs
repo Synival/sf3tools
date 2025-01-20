@@ -7,19 +7,10 @@ namespace SF3.Models.Tables {
     /// <summary>
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
-    public abstract class Table<T> : BaseTable<T>, ITable, ITable<T> where T : class, IStruct {
-        protected Table(IByteData data, int address) : base(data, address) {
+    public abstract class TerminatedTable<T> : BaseTable<T>, ITerminatedTable<T> where T : class, IStruct {
+        protected TerminatedTable(IByteData data, int address, int? maxSize = null) : base(data, address) {
+            MaxSize = maxSize;
         }
-
-        public virtual int? MaxSize => null;
-
-        /// <summary>
-        /// Loads all rows until MaxSize is reached.
-        /// </summary>
-        /// <param name="makeTFunc">Factory function to make the model.</param>
-        /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
-        public bool LoadUntilMax(Func<int, int, T> makeTFunc)
-            => LoadUntilMax(makeTFunc, null);
 
         /// <summary>
         /// Loads all rows until MaxSize is reached.
@@ -28,7 +19,7 @@ namespace SF3.Models.Tables {
         /// <param name="pred">Optional predicate function to check whether or not resource adding should continue.</param>
         /// <param name="addEndModel">If 'ture', any new model loaded will still be added if 'pred' returns 'false'.</param>
         /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
-        public bool LoadUntilMax(Func<int, int, T> makeTFunc, ContinueReadingPredicate pred, bool addEndModel = true) {
+        public bool Load(Func<int, int, T> makeTFunc, ContinueReadingPredicate pred, bool addEndModel = true) {
             var rowDict = new Dictionary<int, T>();
             var rows = new List<T>();
 
@@ -60,5 +51,7 @@ namespace SF3.Models.Tables {
             }
             return true;
         }
+
+        public int? MaxSize { get; }
     }
 }

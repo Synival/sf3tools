@@ -4,7 +4,7 @@ using SF3.Models.Structs.X1.Battle;
 
 namespace SF3.Models.Tables.X1.Battle {
     public class SpawnZoneTable : ResourceTable<SpawnZone> {
-        protected SpawnZoneTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected SpawnZoneTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 30) {
         }
 
         public static SpawnZoneTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X1.Battle {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new SpawnZone(Data, id, name, address));
-
-        public override int? MaxSize => 30;
+            => Load((id, name, address) => new SpawnZone(Data, id, name, address));
     }
 }

@@ -4,7 +4,7 @@ using SF3.Models.Structs.X002;
 
 namespace SF3.Models.Tables.X002 {
     public class WeaponRankTable : ResourceTable<WeaponRank> {
-        protected WeaponRankTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected WeaponRankTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 5) {
         }
 
         public static WeaponRankTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X002 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new WeaponRank(Data, id, name, address));
-
-        public override int? MaxSize => 5;
+            => Load((id, name, address) => new WeaponRank(Data, id, name, address));
     }
 }

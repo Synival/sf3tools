@@ -7,8 +7,8 @@ using SF3.Models.Structs.MPD.Surface;
 using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Models.Tables.MPD.Surface {
-    public class HeightmapRowTable : Table<HeightmapRow> {
-        protected HeightmapRowTable(IByteData data, int address) : base(data, address) {
+    public class HeightmapRowTable : FixedSizeTable<HeightmapRow> {
+        protected HeightmapRowTable(IByteData data, int address) : base(data, address, 64) {
         }
 
         public static HeightmapRowTable Create(IByteData data, int address) {
@@ -20,10 +20,8 @@ namespace SF3.Models.Tables.MPD.Surface {
 
         public override bool Load() {
             var size = new HeightmapRow(Data, 0, "", Address).Size;
-            return LoadUntilMax((id, address) => new HeightmapRow(Data, id, "Y" + id.ToString("D2"), Address + id * size));
+            return Load((id, address) => new HeightmapRow(Data, id, "Y" + id.ToString("D2"), Address + id * size));
         }
-
-        public override int? MaxSize => 64;
 
         /// <summary>
         /// Calculates the "normal" for a tile at a given corner.

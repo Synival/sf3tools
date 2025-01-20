@@ -14,6 +14,6 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new Boundary(Data, id, name, address));
+            => Load((id, name, address) => new Boundary(Data, id, name, address));
     }
 }

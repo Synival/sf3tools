@@ -4,7 +4,7 @@ using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
     public class StatusEffectTable : ResourceTable<StatusEffect> {
-        protected StatusEffectTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected StatusEffectTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 1000) {
         }
 
         public static StatusEffectTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new StatusEffect(Data, id, name, address));
-
-        public override int? MaxSize => 1000;
+            => Load((id, name, address) => new StatusEffect(Data, id, name, address));
     }
 }

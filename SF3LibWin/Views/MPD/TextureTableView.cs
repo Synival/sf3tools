@@ -9,7 +9,7 @@ using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.MPD {
     public class TextureTableView : ControlSpaceView {
-        public TextureTableView(string name, Table<TextureModel> model, INameGetterContext ngc) : base(name) {
+        public TextureTableView(string name, IBaseTable<TextureModel> model, INameGetterContext ngc) : base(name) {
             Model = model;
             TexturesView = new TableView("Textures", model, ngc);
             TextureView  = new TextureView("Texture");
@@ -54,7 +54,7 @@ namespace SF3.Win.Views.MPD {
             base.Destroy();
         }
 
-        public Table<TextureModel> Model { get; }
+        public IBaseTable<TextureModel> Model { get; }
         public TableView TexturesView { get; }
         public TextureView TextureView { get; }
 

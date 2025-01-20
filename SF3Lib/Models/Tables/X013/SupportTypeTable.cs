@@ -4,7 +4,7 @@ using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
     public class SupportTypeTable : ResourceTable<SupportType> {
-        protected SupportTypeTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
+        protected SupportTypeTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 120) {
         }
 
         public static SupportTypeTable Create(IByteData data, string resourceFile, int address) {
@@ -15,8 +15,6 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public override bool Load()
-            => LoadFromResourceFile((id, name, address) => new SupportType(Data, id, name, address));
-
-        public override int? MaxSize => 120;
+            => Load((id, name, address) => new SupportType(Data, id, name, address));
     }
 }
