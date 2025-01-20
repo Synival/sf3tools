@@ -3,9 +3,8 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD.Model;
 
 namespace SF3.Models.Tables.MPD.Model {
-    public class AttrTable : FixedSizeTable<AttrModel> {
-        protected AttrTable(IByteData data, int[] addresses) : base(data, 0, addresses.Length) {
-            Addresses = addresses;
+    public class AttrTable : AddressedTable<AttrModel> {
+        protected AttrTable(IByteData data, int[] addresses) : base(data, addresses) {
         }
 
         public static AttrTable Create(IByteData data, int[] addresses) {
@@ -16,8 +15,6 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public override bool Load()
-            => Load((id, address) => new AttrModel(Data, id, "ATTR" + id.ToString("D4"), Addresses[id]));
-
-        public int[] Addresses { get; }
+            => Load((id, address) => new AttrModel(Data, id, "ATTR" + id.ToString("D4"), address));
     }
 }

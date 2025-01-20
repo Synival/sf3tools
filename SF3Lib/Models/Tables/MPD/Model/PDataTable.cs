@@ -3,9 +3,8 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD.Model;
 
 namespace SF3.Models.Tables.MPD.Model {
-    public class PDataTable : FixedSizeTable<PDataModel> {
-        protected PDataTable(IByteData data, int[] addresses) : base(data, 0, addresses.Length) {
-            Addresses = addresses;
+    public class PDataTable : AddressedTable<PDataModel> {
+        protected PDataTable(IByteData data, int[] addresses) : base(data, addresses) {
         }
 
         public static PDataTable Create(IByteData data, int[] addresses) {
@@ -16,8 +15,6 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public override bool Load()
-            => Load((id, address) => new PDataModel(Data, id, "PDATA" + id.ToString("D4"), Addresses[id]));
-
-        public int[] Addresses { get; }
+            => Load((id, address) => new PDataModel(Data, id, "PDATA" + id.ToString("D4"), address));
     }
 }
