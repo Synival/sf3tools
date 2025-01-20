@@ -44,10 +44,21 @@ namespace SF3.Models.Files.MPD {
 
             PDataTable = PDataTable.Create(Data, pdataAddresses);
 
+            var attrAddresses = PDataTable
+                .Select(x => x.AttributesOffset)
+                .Where(x => x != 0)
+                .Select(x => GetFileAddr(x))
+                .Distinct()
+                .OrderBy(x => x)
+                .ToArray();
+
+            AttrTable = AttrTable.Create(Data, attrAddresses);
+
             return new List<IBaseTable>() {
                 ModelsHeaderTable,
                 ModelTable,
-                PDataTable
+                PDataTable,
+                AttrTable
             };
         }
 
@@ -64,5 +75,8 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public PDataTable PDataTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public AttrTable AttrTable { get; private set; }
     }
 }
