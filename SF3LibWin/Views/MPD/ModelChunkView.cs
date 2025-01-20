@@ -13,6 +13,7 @@ namespace SF3.Win.Views.MPD {
             var ngc = Model.NameGetterContext;
             CreateChild(new TableView("Header", Model.ModelsHeaderTable, ngc));
             CreateChild(new TableView("Models", Model.ModelTable, ngc));
+            CreateChild(new TableView("PDATAs", Model.PDataTable, ngc));
 
             return Control;
         }

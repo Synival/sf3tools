@@ -1,4 +1,6 @@
-﻿using CommonLib.Attributes;
+﻿using System.Collections;
+using System.Collections.Generic;
+using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
 
@@ -24,7 +26,7 @@ namespace SF3.Models.Structs.MPD.Model {
 
         public Model(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x3C) {
-            PDatas = new PDataAccessor(this);
+            PDatas = new PDataAccessorCollection(this);
 
             _pdata1Address    = Address + 0x00; // 4 bytes
             _pdata2Address    = Address + 0x04; // 4 bytes
@@ -102,22 +104,49 @@ namespace SF3.Models.Structs.MPD.Model {
             set => Data.SetDouble(_pdata8Address, value);
         }
 
+        public class PDataAccessor {
+            public PDataAccessor(Model model, int index) {
+                Model = model;
+                Index = index;
+            }
+
+            public int Value {
+                get => Model.Data.GetDouble(Model._pdata1Address + Index * 0x04);
+                set => Model.Data.SetDouble(Model._pdata1Address + Index * 0x04, value);
+            }
+
+            public Model Model { get; }
+            public int Index { get; }
+        };
+
         // Helper class to index PData's
         // TODO: This should be the other way around!!!! Make an array first, and let the properties access it
-        public class PDataAccessor {
-            public PDataAccessor(Model model) {
-                _model = model;
+        public class PDataAccessorCollection : IEnumerable<PDataAccessor> {
+            public PDataAccessorCollection(Model model) {
+                _accessors = new PDataAccessor[] {
+                    new PDataAccessor(model, 0),
+                    new PDataAccessor(model, 1),
+                    new PDataAccessor(model, 2),
+                    new PDataAccessor(model, 3),
+                    new PDataAccessor(model, 4),
+                    new PDataAccessor(model, 5),
+                    new PDataAccessor(model, 6),
+                    new PDataAccessor(model, 7),
+                };
             }
-
-            private Model _model;
 
             int this[int index] {
-                get => _model.Data.GetDouble(_model._pdata1Address + index * 0x04);
-                set => _model.Data.SetDouble(_model._pdata1Address + index * 0x04, value);
+                get => _accessors[index].Value;
+                set => _accessors[index].Value = value;
             }
+
+            private PDataAccessor[] _accessors;
+
+            IEnumerator IEnumerable.GetEnumerator() => _accessors.GetEnumerator();
+            public IEnumerator<PDataAccessor> GetEnumerator() => ((IEnumerable<PDataAccessor>) _accessors).GetEnumerator();
         }
 
-        public readonly PDataAccessor PDatas;
+        public readonly PDataAccessorCollection PDatas;
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 8)]

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.ByteData;
@@ -21,9 +22,32 @@ namespace SF3.Models.Files.MPD {
 
         public override IEnumerable<IBaseTable> MakeTables() {
             ModelsHeaderTable = ModelsHeaderTable.Create(Data, 0x0000);
+            ModelTable = ModelTable.Create(Data, 0x000C, ModelsHeaderTable[0].NumModels);
+
+            int GetFileAddr(int addr) {
+                if (addr >= 0x60a0000)
+                    return addr - 0x60a0000 /* TODO: apply actual offset of chunk! */;
+                else if (addr >= 0x290000)
+                    return addr - 0x292100 /* TODO: apply actual offset of chunk! */;
+                else
+                    return addr;
+            }
+
+            var pdataAddresses = ModelTable
+                .SelectMany(x => x.PDatas)
+                .Select(x => x.Value)
+                .Where(x => x != 0)
+                .Select(x => GetFileAddr(x))
+                .Distinct()
+                .OrderBy(x => x)
+                .ToArray();
+
+            PDataTable = PDataTable.Create(Data, pdataAddresses);
+
             return new List<IBaseTable>() {
                 ModelsHeaderTable,
-                (ModelTable = ModelTable.Create(Data, 0x000C, ModelsHeaderTable[0].NumModels)),
+                ModelTable,
+                PDataTable
             };
         }
 
@@ -37,5 +61,8 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public ModelTable ModelTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public PDataTable PDataTable { get; private set; }
     }
 }
