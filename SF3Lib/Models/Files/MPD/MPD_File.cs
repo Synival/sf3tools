@@ -156,6 +156,8 @@ namespace SF3.Models.Files.MPD {
             if (SurfaceModelChunkIndex != null)
                 ChunkData[SurfaceModelChunkIndex.Value] = MakeChunkData(SurfaceModelChunkIndex.Value, false);
 
+            if (chunks[1].Exists)
+                ChunkData[1] = MakeChunkData(1, false);
             if (chunks[3].Exists)
                 ChunkData[3] = MakeChunkData(3, false, "Individually Compressed");
             if (chunks[5].Exists)
@@ -261,6 +263,11 @@ namespace SF3.Models.Files.MPD {
             }
 
             var tables = new List<ITable>();
+
+            if (chunkDatas[1] != null) {
+                Models = Models.Create(chunkDatas[1].DecompressedData, NameGetterContext, 0x00, "Models");
+                tables.AddRange(Models.Tables);
+            }
 
             if (chunkDatas[5] != null) {
                 Surface = Surface.Create(chunkDatas[5].DecompressedData, NameGetterContext, 0x00, "Surface", 5);
@@ -522,6 +529,9 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public BoundaryTable BoundariesTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public Models Models { get; private set; }
 
         [BulkCopyRecurse]
         public Surface Surface { get; private set; }

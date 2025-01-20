@@ -48,6 +48,7 @@ namespace SF3.Models.Files.MPD {
 
         int? SurfaceModelChunkIndex { get; }
         SurfaceModel SurfaceModel { get; }
+        Models Models { get; }
         Surface Surface { get; }
         TextureCollection[] TextureCollections { get; }
 
