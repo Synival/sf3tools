@@ -71,7 +71,7 @@ namespace SF3.Win.Extensions {
         /// If the table doesn't exist, the tab is hidden.
         /// </summary>
         public class PopulateOLVTabConfig : IPopulateTabConfig {
-            public PopulateOLVTabConfig(TabPage tabPage, ObjectListView objectListView, ITable table) {
+            public PopulateOLVTabConfig(TabPage tabPage, ObjectListView objectListView, IBaseTable table) {
                 TabPage = tabPage;
                 ObjectListView = objectListView;
                 Table = table;
@@ -79,7 +79,7 @@ namespace SF3.Win.Extensions {
 
             public TabPage TabPage { get; }
             public ObjectListView ObjectListView { get; }
-            public ITable Table { get; }
+            public IBaseTable Table { get; }
             public object[] RowObjs => Table.RowObjs;
 
             public bool CanPopulate => Table != null;
@@ -88,7 +88,7 @@ namespace SF3.Win.Extensions {
                 ObjectListView?.ClearObjects();
                 if (!Table.IsLoaded && !Table.Load()) {
                     // TODO: we really should be throwing an exception here instead...
-                    ErrorMessage("Could not load " + Table.ResourceFile);
+                    ErrorMessage("Could not load " + Table.GetType().Name);
                     return false;
                 }
                 ObjectListView?.AddObjects(RowObjs);

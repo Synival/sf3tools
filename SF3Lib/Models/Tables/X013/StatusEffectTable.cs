@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
-    public class StatusEffectTable : Table<StatusEffect> {
+    public class StatusEffectTable : ResourceTable<StatusEffect> {
         protected StatusEffectTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

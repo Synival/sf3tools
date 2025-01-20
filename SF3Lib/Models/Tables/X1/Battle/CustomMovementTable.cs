@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X1.Battle;
 
 namespace SF3.Models.Tables.X1.Battle {
-    public class CustomMovementTable : Table<CustomMovement> {
+    public class CustomMovementTable : ResourceTable<CustomMovement> {
         protected CustomMovementTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

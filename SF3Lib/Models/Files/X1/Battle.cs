@@ -22,7 +22,7 @@ namespace SF3.Models.Files.X1 {
             return newFile;
         }
 
-        public override IEnumerable<ITable> MakeTables() {
+        public override IEnumerable<IBaseTable> MakeTables() {
             var enemySpawnTableSize = HasLargeEnemyTable ? 0xe9a : 0xa8a;
 
             // Determine addresses of sub-tables.
@@ -32,7 +32,7 @@ namespace SF3.Models.Files.X1 {
             var aiAddress             = spawnZoneAddress + 0x120;
             var customMovementAddress = aiAddress + 0x84;
 
-            return new List<ITable>() {
+            return new List<IBaseTable>() {
                 (BattleHeaderTable   = BattleHeaderTable.Create  (Data, ResourceFile("X1Top.xml"), headerAddress)),
                 (SlotTable           = SlotTable.Create          (Data, ResourceFile(HasLargeEnemyTable ? "X1List.xml" : "X1OtherList.xml"), slotAddress)),
                 (SpawnZoneTable      = SpawnZoneTable.Create     (Data, ResourceFile("UnknownAIList.xml"), spawnZoneAddress)),

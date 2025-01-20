@@ -20,8 +20,8 @@ namespace SF3.Models.Files.MPD {
             return newFile;
         }
 
-        public override IEnumerable<ITable> MakeTables() {
-            return new List<ITable>() {
+        public override IEnumerable<IBaseTable> MakeTables() {
+            return new List<IBaseTable>() {
                 (HeightmapRowTable     = HeightmapRowTable.Create    (Data, 0x0000)),
                 (HeightTerrainRowTable = HeightTerrainRowTable.Create(Data, 0x4000)),
                 (EventIDRowTable       = EventIDRowTable.Create      (Data, 0x6000)),

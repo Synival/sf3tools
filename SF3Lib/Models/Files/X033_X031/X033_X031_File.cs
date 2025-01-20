@@ -21,7 +21,7 @@ namespace SF3.Models.Files.X033_X031 {
             return newFile;
         }
 
-        public override IEnumerable<ITable> MakeTables() {
+        public override IEnumerable<IBaseTable> MakeTables() {
             var checkType     = Data.GetByte(0x00000009);     //if it's 0x07 we're in a x033.bin
             var checkVersion2 = Data.GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
             var isX033        = checkType == 0x07;
@@ -69,7 +69,7 @@ namespace SF3.Models.Files.X033_X031 {
                     throw new ArgumentException(nameof(Scenario));
             }
 
-            return new List<ITable>() {
+            return new List<IBaseTable>() {
                 (WeaponLevelTable = WeaponLevelTable.Create(Data, ResourceFile("WeaponLevel.xml"), weaponLevelAddress)),
                 (StatsTable       = StatsTable.Create      (Data, ResourceFileForScenario(Scenario, "ClassList.xml"), statsAddress)),
                 (InitialInfoTable = InitialInfoTable.Create(Data, ResourceFileForScenario(Scenario, "ClassEquip.xml"), initialInfoAddress)),

@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
-    public class SoulmateTable : Table<Soulmate> {
+    public class SoulmateTable : ResourceTable<Soulmate> {
         protected SoulmateTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

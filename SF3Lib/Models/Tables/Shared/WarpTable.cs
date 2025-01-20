@@ -6,7 +6,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.Shared {
-    public class WarpTable : Table<Warp> {
+    public class WarpTable : ResourceTable<Warp> {
         protected WarpTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

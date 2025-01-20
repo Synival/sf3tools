@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
-    public class SpecialChanceTable : Table<SpecialChance> {
+    public class SpecialChanceTable : ResourceTable<SpecialChance> {
         protected SpecialChanceTable(IByteData data, string resourceFile, int address, bool hasLargeTable) : base(data, resourceFile, address) {
             HasLargeTable = hasLargeTable;
         }

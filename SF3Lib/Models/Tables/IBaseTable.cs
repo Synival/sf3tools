@@ -39,6 +39,11 @@ namespace SF3.Models.Tables {
         /// An mutable array of rows.
         /// </summary>
         IStruct[] RowObjs { get; }
+
+        /// <summary>
+        /// Number of elements in the table.
+        /// </summary>
+        int Length { get; }
     }
 
     /// <summary>
@@ -56,10 +61,5 @@ namespace SF3.Models.Tables {
         /// <param name="index">Index of the row to retrieve.</param>
         /// <returns>A row of a concrete type.</returns>
         T this[int index] { get; }
-
-        /// <summary>
-        /// Number of elements in the table.
-        /// </summary>
-        int Length { get; }
     }
 }

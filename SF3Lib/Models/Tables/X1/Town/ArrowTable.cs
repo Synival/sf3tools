@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X1.Town;
 
 namespace SF3.Models.Tables.X1.Town {
-    public class ArrowTable : Table<Arrow> {
+    public class ArrowTable : ResourceTable<Arrow> {
         protected ArrowTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

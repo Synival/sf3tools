@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X1.Battle;
 
 namespace SF3.Models.Tables.X1.Battle {
-    public class SlotTable : Table<Slot> {
+    public class SlotTable : ResourceTable<Slot> {
         protected SlotTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

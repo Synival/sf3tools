@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X1.Town;
 
 namespace SF3.Models.Tables.X1.Town {
-    public class NpcTable : Table<Npc> {
+    public class NpcTable : ResourceTable<Npc> {
         protected NpcTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

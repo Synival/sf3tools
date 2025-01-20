@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.Shared {
-    public class TileMovementTable : Table<TileMovement> {
+    public class TileMovementTable : ResourceTable<TileMovement> {
         protected TileMovementTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

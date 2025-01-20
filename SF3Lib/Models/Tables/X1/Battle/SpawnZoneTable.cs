@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X1.Battle;
 
 namespace SF3.Models.Tables.X1.Battle {
-    public class SpawnZoneTable : Table<SpawnZone> {
+    public class SpawnZoneTable : ResourceTable<SpawnZone> {
         protected SpawnZoneTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

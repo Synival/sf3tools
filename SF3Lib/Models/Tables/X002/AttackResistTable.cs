@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X002;
 
 namespace SF3.Models.Tables.X002 {
-    public class AttackResistTable : Table<AttackResist> {
+    public class AttackResistTable : ResourceTable<AttackResist> {
         protected AttackResistTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

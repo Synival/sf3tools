@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X002;
 
 namespace SF3.Models.Tables.X002 {
-    public class LoadedOverrideTable : Table<LoadedOverride> {
+    public class LoadedOverrideTable : ResourceTable<LoadedOverride> {
         protected LoadedOverrideTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

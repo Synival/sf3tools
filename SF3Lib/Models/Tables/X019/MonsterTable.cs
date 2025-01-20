@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X019;
 
 namespace SF3.Models.Tables.X019 {
-    public class MonsterTable : Table<Monster> {
+    public class MonsterTable : ResourceTable<Monster> {
         protected MonsterTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

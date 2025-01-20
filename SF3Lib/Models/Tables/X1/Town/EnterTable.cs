@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X1.Town;
 
 namespace SF3.Models.Tables.X1.Town {
-    public class EnterTable : Table<Enter> {
+    public class EnterTable : ResourceTable<Enter> {
         protected EnterTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

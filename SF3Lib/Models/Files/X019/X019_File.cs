@@ -20,7 +20,7 @@ namespace SF3.Models.Files.X019 {
             return newFile;
         }
 
-        public override IEnumerable<ITable> MakeTables() {
+        public override IEnumerable<IBaseTable> MakeTables() {
             int monsterTableAddress;
             var isPDX044 = Data.GetDouble(0x08) == 0x060780A4;
 
@@ -41,7 +41,7 @@ namespace SF3.Models.Files.X019 {
                     throw new ArgumentException(nameof(Scenario));
             }
 
-            return new List<ITable>() {
+            return new List<IBaseTable>() {
                 (MonsterTable = MonsterTable.Create(Data, ResourceFileForScenario(Scenario, "Monsters.xml"), monsterTableAddress))
             };
         }

@@ -19,9 +19,9 @@ namespace SF3.Models.Files.MPD {
             return newFile;
         }
 
-        public override IEnumerable<ITable> MakeTables() {
+        public override IEnumerable<IBaseTable> MakeTables() {
             ModelsHeaderTable = ModelsHeaderTable.Create(Data, 0x0000);
-            return new List<ITable>() {
+            return new List<IBaseTable>() {
                 ModelsHeaderTable,
                 (ModelTable = ModelTable.Create(Data, 0x000C, ModelsHeaderTable[0].NumModels)),
             };

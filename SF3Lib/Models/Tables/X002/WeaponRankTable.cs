@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X002;
 
 namespace SF3.Models.Tables.X002 {
-    public class WeaponRankTable : Table<WeaponRank> {
+    public class WeaponRankTable : ResourceTable<WeaponRank> {
         protected WeaponRankTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

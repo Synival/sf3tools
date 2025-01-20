@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.IconPointer;
 
 namespace SF3.Models.Tables.IconPointer {
-    public class SpellIconTable : Table<SpellIcon> {
+    public class SpellIconTable : ResourceTable<SpellIcon> {
         protected SpellIconTable(IByteData data, string resourceFile, int address, bool has16BitIconAddr, int realOffsetStart)
         : base(data, resourceFile, address) {
             Has16BitIconAddr = has16BitIconAddr;

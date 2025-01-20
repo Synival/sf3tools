@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X033_X031;
 
 namespace SF3.Models.Tables.X033_X031 {
-    public class InitialInfoTable : Table<InitialInfo> {
+    public class InitialInfoTable : ResourceTable<InitialInfo> {
         protected InitialInfoTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

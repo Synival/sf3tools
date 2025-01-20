@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X033_X031;
 
 namespace SF3.Models.Tables.X033_X031 {
-    public class StatsTable : Table<Stats> {
+    public class StatsTable : ResourceTable<Stats> {
         protected StatsTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) {
         }
 

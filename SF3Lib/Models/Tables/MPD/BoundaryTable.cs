@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
-    public class BoundaryTable : Table<Boundary> {
+    public class BoundaryTable : ResourceTable<Boundary> {
         protected BoundaryTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address) { }
 
         public static BoundaryTable Create(IByteData data, string resourceFile, int address) {

@@ -27,8 +27,8 @@ namespace SF3.Models.Files.MPD {
             return newFile;
         }
 
-        public override IEnumerable<ITable> MakeTables() {
-            return new List<ITable>() {
+        public override IEnumerable<IBaseTable> MakeTables() {
+            return new List<IBaseTable>() {
                 (TileTextureRowTable    = TileTextureRowTable.Create   (Data, 0x0000, Scenario >= ScenarioType.Scenario3)),
                 (VertexNormalBlockTable = VertexNormalBlockTable.Create(Data, 0x2000)),
                 (VertexHeightBlockTable = VertexHeightBlockTable.Create(Data, 0xB600)),

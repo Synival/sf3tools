@@ -9,6 +9,6 @@ namespace SF3.Models.Files {
         /// <summary>
         /// Collection of Tables initialized upon loading.
         /// </summary>
-        IEnumerable<ITable> Tables { get; }
+        IEnumerable<IBaseTable> Tables { get; }
     }
 }
