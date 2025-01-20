@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using SF3.ByteData;
 using SF3.Models.Structs;
 
@@ -5,7 +7,7 @@ namespace SF3.Models.Tables {
     /// <summary>
     /// Interface for any table of SF3 data that can be modified.
     /// </summary>
-    public interface ITable {
+    public interface ITable : IEnumerable {
         /// <summary>
         /// Loads rows from its respective XML file(s).
         /// </summary>
@@ -52,7 +54,7 @@ namespace SF3.Models.Tables {
     /// <summary>
     /// Interface for a specific table of SF3 data that can be modified.
     /// </summary>
-    public interface ITable<T> : ITable where T : class, IStruct {
+    public interface ITable<T> : ITable, IEnumerable<T> where T : class, IStruct {
         /// <summary>
         /// A mutable array of rows of type T.
         /// </summary>
@@ -64,5 +66,10 @@ namespace SF3.Models.Tables {
         /// <param name="index">Index of the row to retrieve.</param>
         /// <returns>A row of a concrete type.</returns>
         T this[int index] { get; }
+
+        /// <summary>
+        /// Number of elements in the table.
+        /// </summary>
+        int Length { get; }
     }
 }

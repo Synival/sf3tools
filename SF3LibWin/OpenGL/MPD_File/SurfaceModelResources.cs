@@ -64,7 +64,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         public void UpdateBoundaries(IMPD_File mpdFile) {
             ResetBoundaries();
 
-            var boundaries = mpdFile.BoundariesTable.Rows;
+            var boundaries = mpdFile.BoundariesTable;
 
             // Camera boundary coords
             var camera = boundaries[0];

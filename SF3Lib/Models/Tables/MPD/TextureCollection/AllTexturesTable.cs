@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         // TODO: We need a kind of "non-addressed" table here that doesn't have its own data or address!
         //       Using base(null, 0) is a horrible hack :( :( :(
         protected AllTexturesTable(IEnumerable<TextureTable> textureTables) : base(null, 0) {
-            Textures = textureTables.SelectMany(x => x.Rows).OrderBy(x => x.ID).ToArray();
+            Textures = textureTables.SelectMany(x => x).OrderBy(x => x.ID).ToArray();
         }
 
         public static AllTexturesTable Create(IEnumerable<TextureTable> textureTables) {

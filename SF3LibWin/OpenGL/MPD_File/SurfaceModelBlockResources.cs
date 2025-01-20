@@ -72,7 +72,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             var texturesById = mpdFile.TextureCollections != null ? mpdFile.TextureCollections
                 .Where(x => x?.TextureTable != null && x.TextureTable.Collection == TextureCollectionType.PrimaryTextures)
-                .SelectMany(x => x.TextureTable.Rows)
+                .SelectMany(x => x.TextureTable)
                 .GroupBy(x => x.ID)
                 .Select(x => x.First())
                 .ToDictionary(x => x.ID, x => x.Texture)

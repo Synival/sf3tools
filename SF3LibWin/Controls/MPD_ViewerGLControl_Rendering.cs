@@ -39,7 +39,7 @@ namespace SF3.Win.Controls {
         }
 
         private Bitmap CreateLightPaletteBitmap() {
-            var lightPal = MPD_File?.LightPalette?.Rows;
+            var lightPal = MPD_File?.LightPalette;
             if (lightPal == null)
                 return null;
 

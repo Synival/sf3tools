@@ -31,7 +31,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(7, table[1].TargetX);
             Assert.AreEqual(12, table[1].TargetY);
 
-            Assert.AreEqual(33, table.Rows.Length);
+            Assert.AreEqual(33, table.Length);
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[2].BattlePointer);
             Assert.AreEqual(0, table[3].BattlePointer);
 
-            Assert.AreEqual(4, table.Rows.Length);
+            Assert.AreEqual(4, table.Length);
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[1].CustomMovementX1);
             Assert.AreEqual(63, table[1].CustomMovementZ1);
 
-            Assert.AreEqual(33, table.Rows.Length);
+            Assert.AreEqual(33, table.Length);
         }
 
         [TestMethod]
@@ -72,7 +72,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[0].SizeUnknown1);
             Assert.AreEqual(16, table[0].TableSize);
 
-            Assert.AreEqual(1, table.Rows.Length);
+            Assert.AreEqual(1, table.Length);
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(8, table[12].EnemyX);
             Assert.AreEqual(13, table[12].EnemyY);
 
-            Assert.AreEqual(52, table.Rows.Length);
+            Assert.AreEqual(52, table.Length);
         }
 
         [TestMethod]
@@ -112,7 +112,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0x3F, table[1].UnknownAI08);
             Assert.AreEqual(0x00, table[1].UnknownAI0A);
 
-            Assert.AreEqual(16, table.Rows.Length);
+            Assert.AreEqual(16, table.Length);
         }
 
         [TestMethod]
@@ -126,7 +126,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[0].FlagUse);
             Assert.AreEqual(0, table[0].EventNumber);
 
-            Assert.AreEqual(1, table.Rows.Length);
+            Assert.AreEqual(1, table.Length);
         }
 
         [TestMethod]
@@ -149,7 +149,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0x25, table[2].TileForest);
             Assert.AreEqual(0xFF, table[2].TileNoEntry);
 
-            Assert.AreEqual(14, table.Rows.Length);
+            Assert.AreEqual(14, table.Length);
         }
 
         [TestMethod]
@@ -163,7 +163,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0x09, table[1].WarpMap);
             Assert.AreEqual(0x82, table[1].WarpType);
 
-            Assert.AreEqual(5, table.Rows.Length);
+            Assert.AreEqual(5, table.Length);
         }
     }
 }

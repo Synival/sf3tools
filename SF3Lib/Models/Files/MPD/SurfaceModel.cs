@@ -66,7 +66,7 @@ namespace SF3.Models.Files.MPD {
         /// <param name="locations">The locations of blocks to update.</param>
         /// <param name="normal">The normal to be set into each block location.</param>
         public void UpdateVertexNormals(BlockVertexLocation[] locations, VECTOR normal) {
-            var blocks = VertexNormalBlockTable.Rows;
+            var blocks = VertexNormalBlockTable;
             for (var i = 0; i < locations.Length; i++)
                 blocks[locations[i].Num][locations[i].X, locations[i].Y] = normal;
         }

@@ -56,7 +56,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(9, file.StatsTable[2].HPCurve1);
                 // TODO: maybe more data?
 
-                Assert.AreEqual(testCase.ExpectedStatsRows, file.StatsTable.Rows.Length);
+                Assert.AreEqual(testCase.ExpectedStatsRows, file.StatsTable.Length);
             });
         }
 
@@ -88,7 +88,7 @@ namespace SF3.Tests.Models.Files {
                     // TODO: maybe more data?
                 }
 
-                Assert.AreEqual(testCase.ExpectedInitialInfoRows, file.InitialInfoTable.Rows.Length);
+                Assert.AreEqual(testCase.ExpectedInitialInfoRows, file.InitialInfoTable.Length);
             });
         }
 
@@ -102,7 +102,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(250, file.WeaponLevelTable[0].WLevel3);
                 Assert.AreEqual(9999, file.WeaponLevelTable[0].WLevel4);
 
-                Assert.AreEqual(1, file.WeaponLevelTable.Rows.Length);
+                Assert.AreEqual(1, file.WeaponLevelTable.Length);
             });
         }
     }

@@ -96,7 +96,7 @@ namespace SF3.Models.Files.MPD {
         private ChunkHeaderTable MakeChunkHeaderTable() {
             // Create chunk data
             ChunkHeader = ChunkHeaderTable.Create(Data, 0x2000);
-            foreach (var chunkHeader in ChunkHeader.Rows)
+            foreach (var chunkHeader in ChunkHeader)
                 chunkHeader.CompressionType = "--";
 
             return ChunkHeader;
@@ -312,10 +312,10 @@ namespace SF3.Models.Files.MPD {
             TextureModel GetTextureModelByID(int textureId) {
                 if (TextureCollections == null)
                     return null;
-                return TextureCollections.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x.Rows).FirstOrDefault(x => x.ID == textureId);
+                return TextureCollections.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == textureId);
             }
 
-            foreach (var anim in TextureAnimations.Rows) {
+            foreach (var anim in TextureAnimations) {
                 foreach (var frame in anim.Frames) {
                     var offset = frame.CompressedTextureOffset;
                     var existingFrame = Chunk3Frames.FirstOrDefault(x => x.Offset == offset);
@@ -406,10 +406,6 @@ namespace SF3.Models.Files.MPD {
 
             // Chunk 3 is made up of several individually-compressed images that need to be recompressed.
             RecompressChunk3Frames(onlyModified);
-
-            // Fetch chunk data. We need to do this before the chunk table is optimized, otherwise we can't fetch
-            // existing data that hasn't been copied into ChunkData[] because the offset will be wrong.
-            var chunks = ChunkHeader.Rows;
 
             // Recompress and update the chunk table.
             RebuildChunkTable(onlyModified);

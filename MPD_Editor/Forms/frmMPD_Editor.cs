@@ -97,7 +97,7 @@ namespace SF3.MPD_Editor.Forms {
 
                 var textures1 = (File.TextureCollections == null) ? [] : File.TextureCollections
                     .Where(x => x != null && x.TextureTable != null)
-                    .SelectMany(x => x.TextureTable.Rows)
+                    .SelectMany(x => x.TextureTable)
                     .Where(x => x.TextureIsLoaded)
                     .ToDictionary(x => x.Name, x => new { Model = (object) x, x.Texture });
 
@@ -177,7 +177,7 @@ namespace SF3.MPD_Editor.Forms {
                                 if (model is TextureModel tm)
                                     tm.RawImageData16Bit = newImageData;
                                 else if (model is FrameModel fm) {
-                                    var referenceTex = File.TextureCollections.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x.Rows).FirstOrDefault(x => x.ID == fm.TextureID)?.Texture;
+                                    var referenceTex = File.TextureCollections.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == fm.TextureID)?.Texture;
                                     _ = fm.UpdateTextureABGR1555(File.Chunk3Frames.First(x => x.Offset == fm.CompressedTextureOffset).Data.DecompressedData, newImageData, referenceTex);
                                 }
                                 else
@@ -219,7 +219,7 @@ namespace SF3.MPD_Editor.Forms {
 
                 var textures1 = (File.TextureCollections == null) ? [] : File.TextureCollections
                     .Where(x => x != null && x.TextureTable != null)
-                    .SelectMany(x => x.TextureTable.Rows)
+                    .SelectMany(x => x.TextureTable)
                     .Where(x => x.TextureIsLoaded)
                     .ToDictionary(x => x.Name, x => x.Texture);
 

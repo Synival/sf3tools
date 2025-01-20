@@ -31,7 +31,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(32, table[1].TargetX);
             Assert.AreEqual(33, table[1].TargetY);
 
-            Assert.AreEqual(33, table.Rows.Length);
+            Assert.AreEqual(33, table.Length);
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[2].BattlePointer);
             Assert.AreEqual(0, table[3].BattlePointer);
 
-            Assert.AreEqual(4, table.Rows.Length);
+            Assert.AreEqual(4, table.Length);
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(32, table[1].CustomMovementX1);
             Assert.AreEqual(31, table[1].CustomMovementZ1);
 
-            Assert.AreEqual(33, table.Rows.Length);
+            Assert.AreEqual(33, table.Length);
         }
 
         [TestMethod]
@@ -71,7 +71,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[0].SizeUnknown1);
             Assert.AreEqual(26, table[0].TableSize);
 
-            Assert.AreEqual(1, table.Rows.Length);
+            Assert.AreEqual(1, table.Length);
         }
 
         [TestMethod]
@@ -88,7 +88,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(29, table[12].EnemyX);
             Assert.AreEqual(43, table[12].EnemyY);
 
-            Assert.AreEqual(72, table.Rows.Length);
+            Assert.AreEqual(72, table.Length);
         }
 
         [TestMethod]
@@ -107,7 +107,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0x20, table[1].UnknownAI04);
             Assert.AreEqual(0x15, table[1].UnknownAI06);
 
-            Assert.AreEqual(16, table.Rows.Length);
+            Assert.AreEqual(16, table.Length);
         }
 
         [TestMethod]
@@ -125,7 +125,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[1].FlagUse);
             Assert.AreEqual(0, table[1].EventNumber);
 
-            Assert.AreEqual(2, table.Rows.Length);
+            Assert.AreEqual(2, table.Length);
         }
     }
 }

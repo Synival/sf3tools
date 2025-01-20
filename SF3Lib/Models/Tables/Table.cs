@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -37,6 +38,10 @@ namespace SF3.Models.Tables {
         public abstract bool IsLoaded { get; }
         public abstract IStruct[] RowObjs { get; }
         public virtual int? MaxSize => null;
+
+        public int Length => RowObjs.Length;
+
+        public IEnumerator GetEnumerator() => RowObjs.GetEnumerator();
     }
 
     /// <summary>
@@ -179,5 +184,7 @@ namespace SF3.Models.Tables {
         public override bool IsLoaded => _rows != null;
 
         protected T[] _rows = null;
+
+        public new IEnumerator<T> GetEnumerator() => ((IEnumerable<T>) _rows).GetEnumerator();
     }
 }

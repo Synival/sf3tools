@@ -33,7 +33,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(528, table[2].EnterXPos);
             Assert.AreEqual(912, table[2].EnterZPos);
 
-            Assert.AreEqual(13, table.Rows.Length);
+            Assert.AreEqual(13, table.Length);
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(368, table[1].NpcXPos);
             Assert.AreEqual(880, table[1].NpcZPos);
 
-            Assert.AreEqual(15, table.Rows.Length);
+            Assert.AreEqual(15, table.Length);
         }
 
         [TestMethod]
@@ -67,7 +67,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0xFFFF, table[1].FlagUse);
             Assert.AreEqual(62, table[1].EventNumber);
 
-            Assert.AreEqual(28, table.Rows.Length);
+            Assert.AreEqual(28, table.Length);
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0x961, table[1].ArrowText);
             Assert.AreEqual(0x23, table[1].ArrowWarp);
 
-            Assert.AreEqual(9, table.Rows.Length);
+            Assert.AreEqual(9, table.Length);
         }
 
         [TestMethod]
@@ -95,7 +95,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0x87, table[1].WarpMap);
             Assert.AreEqual(0x82, table[1].WarpType);
 
-            Assert.AreEqual(14, table.Rows.Length);
+            Assert.AreEqual(14, table.Length);
         }
     }
 }
