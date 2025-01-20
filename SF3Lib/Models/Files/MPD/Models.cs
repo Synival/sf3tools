@@ -44,6 +44,16 @@ namespace SF3.Models.Files.MPD {
 
             PDataTable = PDataTable.Create(Data, pdataAddresses);
 
+            var verticesAddresses = PDataTable
+                .Select(x => x.VerticesOffset)
+                .Where(x => x != 0)
+                .Select(x => GetFileAddr(x))
+                .Distinct()
+                .OrderBy(x => x)
+                .ToArray();
+
+            VertexTable = VertexTable.Create(Data, verticesAddresses);
+
             var attrAddresses = PDataTable
                 .Select(x => x.AttributesOffset)
                 .Where(x => x != 0)
@@ -58,6 +68,7 @@ namespace SF3.Models.Files.MPD {
                 ModelsHeaderTable,
                 ModelTable,
                 PDataTable,
+                VertexTable,
                 AttrTable
             };
         }
@@ -75,6 +86,9 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public PDataTable PDataTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public VertexTable VertexTable { get; private set; }
 
         [BulkCopyRecurse]
         public AttrTable AttrTable { get; private set; }

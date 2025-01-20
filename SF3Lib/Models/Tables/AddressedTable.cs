@@ -18,21 +18,13 @@ namespace SF3.Models.Tables {
         /// <param name="makeTFunc">Factory function to make the model.</param>
         /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
         public bool Load(Func<int, int, T> makeTFunc) {
-            var rowDict = new Dictionary<int, T>();
-            var rows = new List<T>();
-
+            _rows = new T[Addresses.Length];
             try {
-                for (var id = 0; id < Addresses.Length; ++id) {
-                    var newModel = makeTFunc(id, Addresses[id]);
-                    rowDict[id] = newModel;
-                    rows.Add(newModel);
-                }
+                for (var id = 0; id < Addresses.Length; ++id)
+                    _rows[id] = makeTFunc(id, Addresses[id]);
             }
             catch {
                 return false;
-            }
-            finally {
-                _rows = rows.ToArray();
             }
             return true;
         }

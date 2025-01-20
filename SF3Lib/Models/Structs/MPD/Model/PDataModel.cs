@@ -39,7 +39,7 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1)]
+        [TableViewModelColumn(displayOrder: 3)]
         public int PolygonCount {
             get => Data.GetDouble(_polygonCountAddr);
             set => Data.SetDouble(_polygonCountAddr, value);
