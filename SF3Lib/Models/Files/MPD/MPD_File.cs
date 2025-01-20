@@ -162,8 +162,8 @@ namespace SF3.Models.Files.MPD {
             if (chunks[5].Exists)
                 ChunkData[5] = MakeChunkData(5, true);
 
-            // Texture data, in chunks (6...10)
-            for (var i = 6; i <= 10; i++) {
+            // Texture data, in chunks (6...13)
+            for (var i = 6; i <= 13; i++) {
                 try {
                     ChunkData[i] = MakeChunkData(i, true);
                 }
@@ -235,6 +235,32 @@ namespace SF3.Models.Files.MPD {
         }
 
         private ITable[] MakeChunkTables(ChunkHeader[] chunkHeaders, IChunkData[] chunkDatas, IChunkData surfaceModelChunk) {
+            TextureCollectionType TextureCollectionForChunkIndex(int chunkIndex) {
+                switch (chunkIndex) {
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        return TextureCollectionType.PrimaryTextures;
+
+                    case 10:
+                        // TODO: Scn1 Z_AS.mpd has something special going on how. Why? Is there some flag for this?
+                        return chunkDatas[chunkIndex].DecompressedData.GetWord(0x02) == 0
+                            ? TextureCollectionType.SpecialChunk10Textures
+                            : TextureCollectionType.PrimaryTextures;
+
+                    case 11:
+                        return TextureCollectionType.MovableObjects1;
+                    case 12:
+                        return TextureCollectionType.MovableObjects2;
+                    case 13:
+                        return TextureCollectionType.MovableObjects3;
+
+                    default:
+                        throw new Exception("Unhandled case!");
+                }
+            }
+
             var tables = new List<ITable>();
 
             if (chunkDatas[5] != null) {
@@ -247,11 +273,13 @@ namespace SF3.Models.Files.MPD {
                 tables.AddRange(SurfaceModel.Tables);
             }
 
-            TextureCollections = new TextureCollection[5];
+            TextureCollections = new TextureCollection[8];
             for (var i = 0; i < TextureCollections.Length; i++) {
                 var chunkIndex = i + 6;
                 if (chunkDatas[chunkIndex]?.Length > 0) {
-                    TextureCollections[i] = TextureCollection.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureCollection" + (i + 1), chunkIndex);
+                    var collection = TextureCollectionForChunkIndex(chunkIndex);
+
+                    TextureCollections[i] = TextureCollection.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureCollection" + (i + 1), collection, chunkIndex);
                     tables.AddRange(TextureCollections[i].Tables);
                 }
             }

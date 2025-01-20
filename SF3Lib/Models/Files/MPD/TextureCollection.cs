@@ -4,18 +4,20 @@ using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.TextureCollection;
+using SF3.Types;
 
 namespace SF3.Models.Files.MPD.Objects {
     public class TextureCollection : TableFile {
-        protected TextureCollection(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex)
+        protected TextureCollection(IByteData data, INameGetterContext nameContext, int address, string name, TextureCollectionType collection, int? chunkIndex)
         : base(data, nameContext) {
             Address    = address;
             Name       = name;
+            Collection = collection;
             ChunkIndex = chunkIndex;
         }
 
-        public static TextureCollection Create(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex) {
-            var newFile = new TextureCollection(data, nameContext, address, name, chunkIndex);
+        public static TextureCollection Create(IByteData data, INameGetterContext nameContext, int address, string name, TextureCollectionType collection, int? chunkIndex) {
+            var newFile = new TextureCollection(data, nameContext, address, name, collection, chunkIndex);
             newFile.Init();
             return newFile;
         }
@@ -26,7 +28,7 @@ namespace SF3.Models.Files.MPD.Objects {
 
             return new List<ITable>() {
                 TextureHeaderTable,
-                (TextureTable = TextureTable.Create(Data, 0x04, header.NumTextures, header.TextureIdStart, ChunkIndex)),
+                (TextureTable = TextureTable.Create(Data, 0x04, Collection, header.NumTextures, header.TextureIdStart, ChunkIndex)),
             };
         }
 
@@ -34,6 +36,7 @@ namespace SF3.Models.Files.MPD.Objects {
         public string Name { get; }
 
         public int Address { get; }
+        public TextureCollectionType Collection { get; }
         public int? ChunkIndex { get; }
 
 
