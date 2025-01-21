@@ -31,6 +31,11 @@ namespace SF3.Models.Tables {
         int Address { get; }
 
         /// <summary>
+        /// Name of the table.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
         /// Is 'true' when a successful Load() has occurred.
         /// </summary>
         bool IsLoaded { get; }

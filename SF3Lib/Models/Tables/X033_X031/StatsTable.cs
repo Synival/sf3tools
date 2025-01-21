@@ -4,11 +4,11 @@ using SF3.Models.Structs.X033_X031;
 
 namespace SF3.Models.Tables.X033_X031 {
     public class StatsTable : ResourceTable<Stats> {
-        protected StatsTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 300) {
+        protected StatsTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 300) {
         }
 
-        public static StatsTable Create(IByteData data, string resourceFile, int address) {
-            var newTable = new StatsTable(data, resourceFile, address);
+        public static StatsTable Create(IByteData data, string name, string resourceFile, int address) {
+            var newTable = new StatsTable(data, name, resourceFile, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

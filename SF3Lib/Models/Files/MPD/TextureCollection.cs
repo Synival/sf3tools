@@ -23,12 +23,12 @@ namespace SF3.Models.Files.MPD {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            TextureHeaderTable = TextureHeaderTable.Create(Data, 0x00);
+            TextureHeaderTable = TextureHeaderTable.Create(Data, "TexturesHeader", 0x00);
             var header = TextureHeaderTable[0];
 
             return new List<ITable>() {
                 TextureHeaderTable,
-                (TextureTable = TextureTable.Create(Data, 0x04, Collection, header.NumTextures, header.TextureIdStart, ChunkIndex)),
+                (TextureTable = TextureTable.Create(Data, "Textures", 0x04, Collection, header.NumTextures, header.TextureIdStart, ChunkIndex)),
             };
         }
 

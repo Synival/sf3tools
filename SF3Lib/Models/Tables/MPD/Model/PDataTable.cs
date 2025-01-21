@@ -4,14 +4,14 @@ using SF3.Models.Structs.MPD.Model;
 
 namespace SF3.Models.Tables.MPD.Model {
     public class PDataTable : AddressedTable<PDataModel> {
-        protected PDataTable(IByteData data, int[] addresses, int[] refs) : base(data, addresses) {
+        protected PDataTable(IByteData data, string name, int[] addresses, int[] refs) : base(data, name, addresses) {
             if (refs == null && refs.Length != addresses.Length)
                 throw new ArgumentException(nameof(refs));
             Refs = refs;
         }
 
-        public static PDataTable Create(IByteData data, int[] addresses, int[] refs) {
-            var newTable = new PDataTable(data, addresses, refs);
+        public static PDataTable Create(IByteData data, string name, int[] addresses, int[] refs) {
+            var newTable = new PDataTable(data, name, addresses, refs);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

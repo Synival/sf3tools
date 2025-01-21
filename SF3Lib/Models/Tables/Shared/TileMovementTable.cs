@@ -4,11 +4,11 @@ using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.Shared {
     public class TileMovementTable : ResourceTable<TileMovement> {
-        protected TileMovementTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 31) {
+        protected TileMovementTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 31) {
         }
 
-        public static TileMovementTable Create(IByteData data, string resourceFile, int address) {
-            var newTable = new TileMovementTable(data, resourceFile, address);
+        public static TileMovementTable Create(IByteData data, string name, string resourceFile, int address) {
+            var newTable = new TileMovementTable(data, name, resourceFile, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

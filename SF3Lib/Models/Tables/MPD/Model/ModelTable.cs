@@ -3,11 +3,11 @@ using SF3.ByteData;
 
 namespace SF3.Models.Tables.MPD.Model {
     public class ModelTable : FixedSizeTable<Structs.MPD.Model.Model> {
-        protected ModelTable(IByteData data, int address, int count) : base(data, address, count) {
+        protected ModelTable(IByteData data, string name, int address, int count) : base(data, name, address, count) {
         }
 
-        public static ModelTable Create(IByteData data, int address, int count) {
-            var newTable = new ModelTable(data, address, count);
+        public static ModelTable Create(IByteData data, string name, int address, int count) {
+            var newTable = new ModelTable(data, name, address, count);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

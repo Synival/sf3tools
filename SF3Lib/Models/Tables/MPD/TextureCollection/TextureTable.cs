@@ -5,7 +5,7 @@ using SF3.Types;
 
 namespace SF3.Models.Tables.MPD.TextureCollection {
     public class TextureTable : FixedSizeTable<TextureModel> {
-        protected TextureTable(IByteData data, int address, TextureCollectionType collection, int textureCount, int startId, int? chunkIndex) : base(data, address, textureCount) {
+        protected TextureTable(IByteData data, string name, int address, TextureCollectionType collection, int textureCount, int startId, int? chunkIndex) : base(data, name, address, textureCount) {
             if (textureCount > 255)
                 throw new ArgumentOutOfRangeException(nameof(textureCount));
             StartID    = startId;
@@ -13,8 +13,8 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             ChunkIndex = chunkIndex;
         }
 
-        public static TextureTable Create(IByteData data, int address, TextureCollectionType collection, int textureCount, int startId, int? chunkIndex) {
-            var newTable = new TextureTable(data, address, collection, textureCount, startId, chunkIndex);
+        public static TextureTable Create(IByteData data, string name, int address, TextureCollectionType collection, int textureCount, int startId, int? chunkIndex) {
+            var newTable = new TextureTable(data, name, address, collection, textureCount, startId, chunkIndex);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

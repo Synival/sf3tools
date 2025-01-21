@@ -4,10 +4,10 @@ using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
     public class ColorTable : FixedSizeTable<ColorModel> {
-        protected ColorTable(IByteData data, int address, int size) : base(data, address, size) {}
+        protected ColorTable(IByteData data, string name, int address, int size) : base(data, name, address, size) {}
 
-        public static ColorTable Create(IByteData data, int address, int colors) {
-            var newTable = new ColorTable(data, address, colors);
+        public static ColorTable Create(IByteData data, string name, int address, int colors) {
+            var newTable = new ColorTable(data, name, address, colors);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

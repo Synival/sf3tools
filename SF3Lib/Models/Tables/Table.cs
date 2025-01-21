@@ -18,8 +18,9 @@ namespace SF3.Models.Tables {
         /// <returns>'true' if reading should continue, 'false' if reading should not continue.</returns>
         public delegate bool ContinueReadingPredicate(Dictionary<int, T> currentRows, T newModel);
 
-        protected Table(IByteData data, int address) {
+        protected Table(IByteData data, string name, int address) {
             Data = data;
+            Name = name;
             Address = address;
         }
 
@@ -31,6 +32,10 @@ namespace SF3.Models.Tables {
         }
 
         public IByteData Data { get; }
+
+        [BulkCopyRowName]
+        public string Name { get; }
+
         public int Address { get; }
         public bool IsLoaded => _rows != null;
         public IStruct[] RowObjs => _rows;

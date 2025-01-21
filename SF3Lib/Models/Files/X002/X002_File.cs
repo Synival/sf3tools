@@ -91,18 +91,18 @@ namespace SF3.Models.Files.X002 {
             }
 
             var tables = new List<ITable>() {
-                (AttackResistTable   = AttackResistTable.Create  (Data, ResourceFile("AttackResistList.xml"), attackResistAddress)),
-                (ItemTable           = ItemTable.Create          (Data, ResourceFileForScenario(Scenario, "Items.xml"), itemAddress)),
-                (LoadedOverrideTable = LoadedOverrideTable.Create(Data, ResourceFileForScenario(Scenario, "LoadedOverrideList.xml"), loadedOverrideAddress)),
-                (LoadingTable        = LoadingTable.Create       (Data, ResourceFileForScenario(Scenario, "LoadList.xml"), loadingAddress)),
-                (WeaponSpellTable    = WeaponSpellTable.Create   (Data, ResourceFileForScenario(Scenario, "WeaponSpells.xml"), presetAddress)),
-                (SpellTable          = SpellTable.Create         (Data, ResourceFileForScenario(Scenario, "Spells.xml"), spellAddress)),
-                (StatBoostTable      = StatBoostTable.Create     (Data, ResourceFile("X002StatList.xml"), statBoostAddress)),
-                (WeaponRankTable     = WeaponRankTable.Create    (Data, ResourceFile("WeaponRankList.xml"), weaponRankAddress)),
+                (AttackResistTable   = AttackResistTable.Create  (Data, "AttackResist",    ResourceFile("AttackResistList.xml"), attackResistAddress)),
+                (ItemTable           = ItemTable.Create          (Data, "Items",           ResourceFileForScenario(Scenario, "Items.xml"), itemAddress)),
+                (LoadedOverrideTable = LoadedOverrideTable.Create(Data, "LoadedOverrides", ResourceFileForScenario(Scenario, "LoadedOverrideList.xml"), loadedOverrideAddress)),
+                (LoadingTable        = LoadingTable.Create       (Data, "Loading",         ResourceFileForScenario(Scenario, "LoadList.xml"), loadingAddress)),
+                (WeaponSpellTable    = WeaponSpellTable.Create   (Data, "WeaponSpells",    ResourceFileForScenario(Scenario, "WeaponSpells.xml"), presetAddress)),
+                (SpellTable          = SpellTable.Create         (Data, "Spells",          ResourceFileForScenario(Scenario, "Spells.xml"), spellAddress)),
+                (StatBoostTable      = StatBoostTable.Create     (Data, "StatBoosts",      ResourceFile("X002StatList.xml"), statBoostAddress)),
+                (WeaponRankTable     = WeaponRankTable.Create    (Data, "WeaponRanks",     ResourceFile("WeaponRankList.xml"), weaponRankAddress)),
             };
 
             if (Scenario == ScenarioType.Scenario1)
-                tables.Add(WarpTable = WarpTable.Create(Data, ResourceFileForScenario(ScenarioType.Scenario1, "Warps.xml"), warpAddress));
+                tables.Add(WarpTable = WarpTable.Create(Data, "Warps", ResourceFileForScenario(ScenarioType.Scenario1, "Warps.xml"), warpAddress));
 
             return tables;
         }

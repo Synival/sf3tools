@@ -4,11 +4,11 @@ using SF3.Models.Structs.MPD.SurfaceModel;
 
 namespace SF3.Models.Tables.MPD.SurfaceModel {
     public class VertexNormalBlockTable : FixedSizeTable<VertexNormalBlock> {
-        protected VertexNormalBlockTable(IByteData data, int address) : base(data, address, 256) {
+        protected VertexNormalBlockTable(IByteData data, string name, int address) : base(data, name, address, 256) {
         }
 
-        public static VertexNormalBlockTable Create(IByteData data, int address) {
-            var newTable = new VertexNormalBlockTable(data, address);
+        public static VertexNormalBlockTable Create(IByteData data, string name, int address) {
+            var newTable = new VertexNormalBlockTable(data, name, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

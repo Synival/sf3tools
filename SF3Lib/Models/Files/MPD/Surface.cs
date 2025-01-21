@@ -22,9 +22,9 @@ namespace SF3.Models.Files.MPD {
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (HeightmapRowTable     = HeightmapRowTable.Create    (Data, 0x0000)),
-                (HeightTerrainRowTable = HeightTerrainRowTable.Create(Data, 0x4000)),
-                (EventIDRowTable       = EventIDRowTable.Create      (Data, 0x6000)),
+                (HeightmapRowTable     = HeightmapRowTable.Create    (Data, "HeightmapRows",     0x0000)),
+                (HeightTerrainRowTable = HeightTerrainRowTable.Create(Data, "HeightTerrainRows", 0x4000)),
+                (EventIDRowTable       = EventIDRowTable.Create      (Data, "EventIDRows",       0x6000)),
             };
         }
 

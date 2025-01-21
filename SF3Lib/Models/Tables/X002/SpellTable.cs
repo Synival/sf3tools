@@ -4,11 +4,11 @@ using SF3.Models.Structs.X002;
 
 namespace SF3.Models.Tables.X002 {
     public class SpellTable : ResourceTable<Spell> {
-        protected SpellTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 78) {
+        protected SpellTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 78) {
         }
 
-        public static SpellTable Create(IByteData data, string resourceFile, int address) {
-            var newTable = new SpellTable(data, resourceFile, address);
+        public static SpellTable Create(IByteData data, string name, string resourceFile, int address) {
+            var newTable = new SpellTable(data, name, resourceFile, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

@@ -82,7 +82,7 @@ namespace SF3.Models.Files.X1 {
             // If this is a battle, we need to get the addresses for a lot of battle-specific stuff.
             if (IsBattle == true) {
                 // Load the BattlePointersTable early so we can use it to determine the addresses of other tables.
-                BattlePointersTable = BattlePointersTable.Create(Data, ResourceFile("BattlePointersList.xml"), battlePointersAddress);
+                BattlePointersTable = BattlePointersTable.Create(Data, "BattlePointers", ResourceFile("BattlePointersList.xml"), battlePointersAddress);
 
                 // Get the address of the selected battle, or, if it's not available, the first available in the BattlePointersTable.
                 Battles = new Dictionary<MapLeaderType, Battle>();
@@ -129,17 +129,17 @@ namespace SF3.Models.Files.X1 {
             // Add tables present outside of the battle tables.
             var tables = new List<ITable>();
             if (treasureAddress >= 0)
-                tables.Add(TreasureTable = TreasureTable.Create(Data, ResourceFile("X1Treasure.xml"), treasureAddress));
+                tables.Add(TreasureTable = TreasureTable.Create(Data, "Treasure", ResourceFile("X1Treasure.xml"), treasureAddress));
             if (warpAddress >= 0)
-                tables.Add(WarpTable = WarpTable.Create(Data, null, warpAddress));
+                tables.Add(WarpTable = WarpTable.Create(Data, "Warps", null, warpAddress));
             if (battlePointersAddress >= 0)
                 tables.Add(BattlePointersTable);
             if (npcAddress >= 0)
-                tables.Add(NpcTable = NpcTable.Create(Data, ResourceFile("X1Npc.xml"), npcAddress));
+                tables.Add(NpcTable = NpcTable.Create(Data, "NPCs", ResourceFile("X1Npc.xml"), npcAddress));
             if (enterAddress >= 0)
-                tables.Add(EnterTable = EnterTable.Create(Data, ResourceFile("X1Enter.xml"), enterAddress));
+                tables.Add(EnterTable = EnterTable.Create(Data, "Entrances", ResourceFile("X1Enter.xml"), enterAddress));
             if (arrowAddress >= 0)
-                tables.Add(ArrowTable = ArrowTable.Create(Data, ResourceFile("X1Arrow.xml"), arrowAddress));
+                tables.Add(ArrowTable = ArrowTable.Create(Data, "Arrows", ResourceFile("X1Arrow.xml"), arrowAddress));
 
             // Add tables for battle tables.
             if (Battles != null) {
@@ -148,7 +148,7 @@ namespace SF3.Models.Files.X1 {
             }
 
             if (tileMovementAddress >= 0)
-                tables.Add(TileMovementTable = TileMovementTable.Create(Data, ResourceFile("MovementTypes.xml"), tileMovementAddress));
+                tables.Add(TileMovementTable = TileMovementTable.Create(Data, "TileMovement", ResourceFile("MovementTypes.xml"), tileMovementAddress));
 
             return tables;
         }

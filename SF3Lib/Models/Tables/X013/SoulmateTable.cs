@@ -4,11 +4,11 @@ using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
     public class SoulmateTable : ResourceTable<Soulmate> {
-        protected SoulmateTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 1771) {
+        protected SoulmateTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 1771) {
         }
 
-        public static SoulmateTable Create(IByteData data, string resourceFile, int address) {
-            var newTable = new SoulmateTable(data, resourceFile, address);
+        public static SoulmateTable Create(IByteData data, string name, string resourceFile, int address) {
+            var newTable = new SoulmateTable(data, name, resourceFile, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

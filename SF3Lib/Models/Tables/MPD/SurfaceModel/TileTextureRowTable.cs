@@ -4,12 +4,12 @@ using SF3.Models.Structs.MPD.SurfaceModel;
 
 namespace SF3.Models.Tables.MPD.SurfaceModel {
     public class TileTextureRowTable : FixedSizeTable<TileTextureRow> {
-        protected TileTextureRowTable(IByteData data, int address, bool hasRotation) : base(data, address, 64) {
+        protected TileTextureRowTable(IByteData data, string name, int address, bool hasRotation) : base(data, name, address, 64) {
             HasRotation = hasRotation;
         }
 
-        public static TileTextureRowTable Create(IByteData data, int address, bool hasRotation) {
-            var newTable = new TileTextureRowTable(data, address, hasRotation);
+        public static TileTextureRowTable Create(IByteData data, string name, int address, bool hasRotation) {
+            var newTable = new TileTextureRowTable(data, name, address, hasRotation);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

@@ -4,11 +4,11 @@ using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
     public class FriendshipExpTable : ResourceTable<FriendshipExp> {
-        protected FriendshipExpTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 1) {
+        protected FriendshipExpTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 1) {
         }
 
-        public static FriendshipExpTable Create(IByteData data, string resourceFile, int address) {
-            var newTable = new FriendshipExpTable(data, resourceFile, address);
+        public static FriendshipExpTable Create(IByteData data, string name, string resourceFile, int address) {
+            var newTable = new FriendshipExpTable(data, name, resourceFile, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

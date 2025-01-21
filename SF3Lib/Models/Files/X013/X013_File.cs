@@ -134,24 +134,24 @@ namespace SF3.Models.Files.X013 {
             }
 
             var tables = new List<ITable>() {
-                (SpecialsTable        = SpecialTable.Create        (Data, ResourceFileForScenario(Scenario, "Specials.xml"), specialAddress)),
-                (SupportTypeTable     = SupportTypeTable.Create    (Data, ResourceFileForScenario(Scenario, "Characters.xml"), supportTypeAddress)),
-                (FriendshipExpTable   = FriendshipExpTable.Create  (Data, ResourceFile("ExpList.xml"), friendshipExpAddress)),
-                (SupportStatsTable    = SupportStatsTable.Create   (Data, ResourceFile("X013StatList.xml"), supportStatsAddress)),
-                (SoulmateTable        = SoulmateTable.Create       (Data, ResourceFile("SoulmateList.xml"), soulmateAddress)),
-                (SoulfailTable        = SoulfailTable.Create       (Data, ResourceFile("Soulfail.xml"), soulFailAddress)),
-                (MagicBonusTable      = MagicBonusTable.Create     (Data, ResourceFileForScenario(Scenario, "MagicBonus.xml"), magicBonusAddress, Scenario == ScenarioType.Scenario1)),
-                (CritModTable         = CritModTable.Create        (Data, ResourceFile("CritModList.xml"), critModAddress)),
-                (CritrateTable        = CritrateTable.Create       (Data, ResourceFile("CritrateList.xml"), critrateAddress)),
-                (SpecialChanceTable   = SpecialChanceTable.Create  (Data, ResourceFile("SpecialChanceList.xml"), specialChanceAddress, Scenario <= ScenarioType.Scenario2)),
-                (ExpLimitTable        = ExpLimitTable.Create       (Data, ResourceFile("ExpLimitList.xml"), expLimitAddress)),
-                (HealExpTable         = HealExpTable.Create        (Data, ResourceFile("HealExpList.xml"), healExpAddress)),
-                (WeaponSpellRankTable = WeaponSpellRankTable.Create(Data, ResourceFile("WeaponSpellRankList.xml"), weaponSpellRankAddress)),
-                (StatusEffectTable    = StatusEffectTable.Create   (Data, ResourceFile("StatusGroupList.xml"), statusEffectAddress)),
+                (SpecialsTable        = SpecialTable.Create        (Data, "Specials",         ResourceFileForScenario(Scenario, "Specials.xml"), specialAddress)),
+                (SupportTypeTable     = SupportTypeTable.Create    (Data, "SupportTypes",     ResourceFileForScenario(Scenario, "Characters.xml"), supportTypeAddress)),
+                (FriendshipExpTable   = FriendshipExpTable.Create  (Data, "FriendshipExp",    ResourceFile("ExpList.xml"), friendshipExpAddress)),
+                (SupportStatsTable    = SupportStatsTable.Create   (Data, "SupportStats",     ResourceFile("X013StatList.xml"), supportStatsAddress)),
+                (SoulmateTable        = SoulmateTable.Create       (Data, "Soulmate",         ResourceFile("SoulmateList.xml"), soulmateAddress)),
+                (SoulfailTable        = SoulfailTable.Create       (Data, "SoulFail",         ResourceFile("Soulfail.xml"), soulFailAddress)),
+                (MagicBonusTable      = MagicBonusTable.Create     (Data, "MagicBonuses",     ResourceFileForScenario(Scenario, "MagicBonus.xml"), magicBonusAddress, Scenario == ScenarioType.Scenario1)),
+                (CritModTable         = CritModTable.Create        (Data, "CritMods",         ResourceFile("CritModList.xml"), critModAddress)),
+                (CritrateTable        = CritrateTable.Create       (Data, "CritRates",        ResourceFile("CritrateList.xml"), critrateAddress)),
+                (SpecialChanceTable   = SpecialChanceTable.Create  (Data, "SpecialChances",   ResourceFile("SpecialChanceList.xml"), specialChanceAddress, Scenario <= ScenarioType.Scenario2)),
+                (ExpLimitTable        = ExpLimitTable.Create       (Data, "ExpLimit",         ResourceFile("ExpLimitList.xml"), expLimitAddress)),
+                (HealExpTable         = HealExpTable.Create        (Data, "HealExp",          ResourceFile("HealExpList.xml"), healExpAddress)),
+                (WeaponSpellRankTable = WeaponSpellRankTable.Create(Data, "WeaponSpellRanks", ResourceFile("WeaponSpellRankList.xml"), weaponSpellRankAddress)),
+                (StatusEffectTable    = StatusEffectTable.Create   (Data, "StatusEffects",    ResourceFile("StatusGroupList.xml"), statusEffectAddress)),
             };
 
             if (specialEffectAddress >= 0)
-                tables.Add(SpecialEffectTable = SpecialEffectTable.Create(Data, ResourceFile("SpecialEffects.xml"), specialEffectAddress));
+                tables.Add(SpecialEffectTable = SpecialEffectTable.Create(Data, "SpecialEffects", ResourceFile("SpecialEffects.xml"), specialEffectAddress));
 
             return tables;
         }

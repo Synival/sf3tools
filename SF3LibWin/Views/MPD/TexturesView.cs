@@ -7,7 +7,7 @@ namespace SF3.Win.Views.MPD {
     public class TexturesView : TabView {
         public TexturesView(string name, IMPD_File model) : base(name) {
             var allTables = model.TextureCollections.Where(x => x != null).Select(x => x.TextureTable).ToList();
-            AllTexturesTable = AllTexturesTable.Create(allTables);
+            AllTexturesTable = AllTexturesTable.Create("AllTextures", allTables);
             Model = model;
         }
 

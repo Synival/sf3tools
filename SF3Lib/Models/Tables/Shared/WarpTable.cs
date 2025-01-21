@@ -7,11 +7,11 @@ using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.Shared {
     public class WarpTable : ResourceTable<Warp> {
-        protected WarpTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 1000) {
+        protected WarpTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 1000) {
         }
 
-        public static WarpTable Create(IByteData data, string resourceFile, int address) {
-            var newTable = new WarpTable(data, resourceFile, address);
+        public static WarpTable Create(IByteData data, string name, string resourceFile, int address) {
+            var newTable = new WarpTable(data, name, resourceFile, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

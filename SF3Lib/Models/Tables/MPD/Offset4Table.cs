@@ -4,11 +4,11 @@ using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
     public class Offset4Table : TerminatedTable<Offset4Model> {
-        protected Offset4Table(IByteData data, int address) : base(data, address) {
+        protected Offset4Table(IByteData data, string name, int address) : base(data, name, address) {
         }
 
-        public static Offset4Table Create(IByteData data, int address) {
-            var newTable = new Offset4Table(data, address);
+        public static Offset4Table Create(IByteData data, string name, int address) {
+            var newTable = new Offset4Table(data, name, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

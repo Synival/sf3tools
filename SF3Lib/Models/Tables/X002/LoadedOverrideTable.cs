@@ -4,11 +4,11 @@ using SF3.Models.Structs.X002;
 
 namespace SF3.Models.Tables.X002 {
     public class LoadedOverrideTable : ResourceTable<LoadedOverride> {
-        protected LoadedOverrideTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 300) {
+        protected LoadedOverrideTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 300) {
         }
 
-        public static LoadedOverrideTable Create(IByteData data, string resourceFile, int address) {
-            var newTable = new LoadedOverrideTable(data, resourceFile, address);
+        public static LoadedOverrideTable Create(IByteData data, string name, string resourceFile, int address) {
+            var newTable = new LoadedOverrideTable(data, name, resourceFile, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

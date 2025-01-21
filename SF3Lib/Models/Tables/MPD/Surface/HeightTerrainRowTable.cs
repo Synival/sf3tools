@@ -4,11 +4,11 @@ using SF3.Models.Structs.MPD.Surface;
 
 namespace SF3.Models.Tables.MPD.Surface {
     public class HeightTerrainRowTable : FixedSizeTable<HeightTerrainRow> {
-        protected HeightTerrainRowTable(IByteData data, int address) : base(data, address, 64) {
+        protected HeightTerrainRowTable(IByteData data, string name, int address) : base(data, name, address, 64) {
         }
 
-        public static HeightTerrainRowTable Create(IByteData data, int address) {
-            var newTable = new HeightTerrainRowTable(data, address);
+        public static HeightTerrainRowTable Create(IByteData data, string name, int address) {
+            var newTable = new HeightTerrainRowTable(data, name, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

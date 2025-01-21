@@ -4,11 +4,11 @@ using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
     public class SpecialEffectTable : ResourceTable<SpecialEffect> {
-        protected SpecialEffectTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 500) {
+        protected SpecialEffectTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 500) {
         }
 
-        public static SpecialEffectTable Create(IByteData data, string resourceFile, int address) {
-            var newTable = new SpecialEffectTable(data, resourceFile, address);
+        public static SpecialEffectTable Create(IByteData data, string name, string resourceFile, int address) {
+            var newTable = new SpecialEffectTable(data, name, resourceFile, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

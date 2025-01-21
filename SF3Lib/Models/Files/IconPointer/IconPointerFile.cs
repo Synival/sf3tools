@@ -83,8 +83,8 @@ namespace SF3.Models.Files.IconPointer {
             var has16BitIconAddr = Scenario == ScenarioType.Scenario1 && isX026;
 
             return new List<ITable>() {
-                (SpellIconTable = SpellIconTable.Create(Data, ResourceFileForScenario(Scenario, "SpellIcons.xml"), spellIconAddress, has16BitIconAddr, spellIconRealOffsetStart)),
-                (ItemIconTable  = ItemIconTable.Create (Data, ResourceFileForScenario(Scenario, "Items.xml"), itemIconAddress, has16BitIconAddr))
+                (SpellIconTable = SpellIconTable.Create(Data, "SpellIcons", ResourceFileForScenario(Scenario, "SpellIcons.xml"), spellIconAddress, has16BitIconAddr, spellIconRealOffsetStart)),
+                (ItemIconTable  = ItemIconTable.Create (Data, "ItemIcons",  ResourceFileForScenario(Scenario, "Items.xml"), itemIconAddress, has16BitIconAddr))
             };
         }
 

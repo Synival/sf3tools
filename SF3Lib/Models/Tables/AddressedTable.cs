@@ -8,7 +8,7 @@ namespace SF3.Models.Tables {
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
     public abstract class AddressedTable<T> : Table<T>, IAddressedTable<T> where T : class, IStruct {
-        protected AddressedTable(IByteData data, int[] addresses) : base(data, 0 /* TODO: would be nice if we didn't even have this */) {
+        protected AddressedTable(IByteData data, string name, int[] addresses) : base(data, name, 0 /* TODO: would be nice if we didn't even have this */) {
             Addresses = addresses;
         }
 

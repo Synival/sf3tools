@@ -4,12 +4,12 @@ using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
     public class SpecialChanceTable : ResourceTable<SpecialChance> {
-        protected SpecialChanceTable(IByteData data, string resourceFile, int address, bool hasLargeTable) : base(data, resourceFile, address, 1) {
+        protected SpecialChanceTable(IByteData data, string name, string resourceFile, int address, bool hasLargeTable) : base(data, name, resourceFile, address, 1) {
             HasLargeTable = hasLargeTable;
         }
 
-        public static SpecialChanceTable Create(IByteData data, string resourceFile, int address, bool hasLargeTable) {
-            var newTable = new SpecialChanceTable(data, resourceFile, address, hasLargeTable);
+        public static SpecialChanceTable Create(IByteData data, string name, string resourceFile, int address, bool hasLargeTable) {
+            var newTable = new SpecialChanceTable(data, name, resourceFile, address, hasLargeTable);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

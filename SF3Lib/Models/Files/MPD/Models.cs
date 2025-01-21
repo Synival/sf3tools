@@ -21,8 +21,8 @@ namespace SF3.Models.Files.MPD {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            ModelsHeaderTable = ModelsHeaderTable.Create(Data, 0x0000);
-            ModelTable = ModelTable.Create(Data, 0x000C, ModelsHeaderTable[0].NumModels);
+            ModelsHeaderTable = ModelsHeaderTable.Create(Data, "ModelsHeader", 0x0000);
+            ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeaderTable[0].NumModels);
 
             int GetFileAddr(int addr) {
                 if (addr >= 0x60a0000)
@@ -43,7 +43,7 @@ namespace SF3.Models.Files.MPD {
                 .OrderBy(x => x.Offset)
                 .ToArray();
 
-            PDataTable = PDataTable.Create(Data, pdataAddresses.Select(x => x.Offset).ToArray(), pdataAddresses.Select(x => x.Count).ToArray());
+            PDataTable = PDataTable.Create(Data, "PDATAs", pdataAddresses.Select(x => x.Offset).ToArray(), pdataAddresses.Select(x => x.Count).ToArray());
 
             VertexTables = PDataTable
                 .Select(x => new OffsetCount { Offset = GetFileAddr(x.VerticesOffset), Count = x.VertexCount })
@@ -56,7 +56,10 @@ namespace SF3.Models.Files.MPD {
                 })
                 .OrderBy(x => x.Offset)
                 .ThenBy(x => x.Count)
-                .ToDictionary(x => x, x => VertexTable.Create(Data, x.Offset, x.Count));
+                .ToDictionary(
+                    x => x,
+                    x => VertexTable.Create(Data, "POINT[] @ 0x" + x.Offset.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", x.Offset, x.Count)
+                );
 
             PolygonTables = PDataTable
                 .Select(x => new OffsetCount { Offset = GetFileAddr(x.PolygonsOffset), Count = x.PolygonCount })
@@ -69,7 +72,10 @@ namespace SF3.Models.Files.MPD {
                 })
                 .OrderBy(x => x.Offset)
                 .ThenBy(x => x.Count)
-                .ToDictionary(x => x, x => PolygonTable.Create(Data, x.Offset, x.Count));
+                .ToDictionary(
+                    x => x,
+                    x => PolygonTable.Create(Data, "POLYGON[] @ 0x" + x.Offset.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", x.Offset, x.Count)
+                );
 
             AttrTables = PDataTable
                 .Select(x => new OffsetCount { Offset = GetFileAddr(x.AttributesOffset), Count = x.PolygonCount })
@@ -82,7 +88,10 @@ namespace SF3.Models.Files.MPD {
                 })
                 .OrderBy(x => x.Offset)
                 .ThenBy(x => x.Count)
-                .ToDictionary(x => x, x => AttrTable.Create(Data, x.Offset, x.Count));
+                .ToDictionary(
+                    x => x,
+                    x => AttrTable.Create(Data, "ATTR[] @ 0x" + x.Offset.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", x.Offset, x.Count)
+                );
 
             var tables = new List<ITable>() {
                 ModelsHeaderTable,

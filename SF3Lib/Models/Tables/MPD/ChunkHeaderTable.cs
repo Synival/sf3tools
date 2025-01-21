@@ -4,11 +4,11 @@ using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
     public class ChunkHeaderTable : FixedSizeTable<ChunkHeader> {
-        protected ChunkHeaderTable(IByteData data, int address) : base(data, address, 32) {
+        protected ChunkHeaderTable(IByteData data, string name, int address) : base(data, name, address, 32) {
         }
 
-        public static ChunkHeaderTable Create(IByteData data, int address) {
-            var newTable = new ChunkHeaderTable(data, address);
+        public static ChunkHeaderTable Create(IByteData data, string name, int address) {
+            var newTable = new ChunkHeaderTable(data, name, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

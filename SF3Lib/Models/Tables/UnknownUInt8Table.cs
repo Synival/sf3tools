@@ -5,8 +5,8 @@ using SF3.Models.Structs;
 
 namespace SF3.Models.Tables {
     public class UnknownUInt8Table : TerminatedTable<UnknownUInt8Struct> {
-        protected UnknownUInt8Table(IByteData data, int address, int? count, int? readUntil)
-        : base(data, address, count) {
+        protected UnknownUInt8Table(IByteData data, string name, int address, int? count, int? readUntil)
+        : base(data, name, address, count) {
             if (!count.HasValue && !readUntil.HasValue)
                 throw new ArgumentNullException(nameof(count) + ", " + nameof(readUntil));
 
@@ -14,8 +14,8 @@ namespace SF3.Models.Tables {
             FormatString = "X" + MaxSize.ToString().Length;
         }
 
-        public static UnknownUInt8Table Create(IByteData data, int address, int? count, int? readUntil) {
-            var newTable = new UnknownUInt8Table(data, address, count, readUntil);
+        public static UnknownUInt8Table Create(IByteData data, string name, int address, int? count, int? readUntil) {
+            var newTable = new UnknownUInt8Table(data, name, address, count, readUntil);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

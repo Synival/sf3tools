@@ -5,8 +5,8 @@ using SF3.Models.Structs;
 
 namespace SF3.Models.Tables {
     public class UnknownUInt16Table : TerminatedTable<UnknownUInt16Struct> {
-        protected UnknownUInt16Table(IByteData data, int address, int? count, int? readUntil)
-        : base(data, address, count) {
+        protected UnknownUInt16Table(IByteData data, string name, int address, int? count, int? readUntil)
+        : base(data, name, address, count) {
             if (!count.HasValue && !readUntil.HasValue)
                 throw new ArgumentNullException(nameof(count) + ", " + nameof(readUntil));
 
@@ -14,8 +14,8 @@ namespace SF3.Models.Tables {
             FormatString = "X" + MaxSize.ToString().Length;
         }
 
-        public static UnknownUInt16Table Create(IByteData data, int address, int? count, int? readUntil) {
-            var newTable = new UnknownUInt16Table(data, address, count, readUntil);
+        public static UnknownUInt16Table Create(IByteData data, string name, int address, int? count, int? readUntil) {
+            var newTable = new UnknownUInt16Table(data, name, address, count, readUntil);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

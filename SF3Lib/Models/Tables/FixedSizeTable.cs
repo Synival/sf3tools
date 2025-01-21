@@ -8,7 +8,7 @@ namespace SF3.Models.Tables {
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
     public abstract class FixedSizeTable<T> : Table<T>, IFixedSizeTable<T> where T : class, IStruct {
-        protected FixedSizeTable(IByteData data, int address, int size) : base(data, address) {
+        protected FixedSizeTable(IByteData data, string name, int address, int size) : base(data, name, address) {
             Size = size;
         }
 

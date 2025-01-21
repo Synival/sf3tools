@@ -4,11 +4,11 @@ using SF3.Models.Structs.X002;
 
 namespace SF3.Models.Tables.X002 {
     public class LoadingTable : ResourceTable<Loading> {
-        protected LoadingTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 300) {
+        protected LoadingTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 300) {
         }
 
-        public static LoadingTable Create(IByteData data, string resourceFile, int address) {
-            var newTable = new LoadingTable(data, resourceFile, address);
+        public static LoadingTable Create(IByteData data, string name, string resourceFile, int address) {
+            var newTable = new LoadingTable(data, name, resourceFile, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

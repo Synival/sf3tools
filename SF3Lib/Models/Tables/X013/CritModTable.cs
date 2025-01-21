@@ -4,11 +4,11 @@ using SF3.Models.Structs.X013;
 
 namespace SF3.Models.Tables.X013 {
     public class CritModTable : ResourceTable<CritMod> {
-        protected CritModTable(IByteData data, string resourceFile, int address) : base(data, resourceFile, address, 1) {
+        protected CritModTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 1) {
         }
 
-        public static CritModTable Create(IByteData data, string resourceFile, int address) {
-            var newTable = new CritModTable(data, resourceFile, address);
+        public static CritModTable Create(IByteData data, string name, string resourceFile, int address) {
+            var newTable = new CritModTable(data, name, resourceFile, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

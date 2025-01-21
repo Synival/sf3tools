@@ -4,11 +4,11 @@ using SF3.Models.Structs.MPD.SurfaceModel;
 
 namespace SF3.Models.Tables.MPD.SurfaceModel {
     public class VertexHeightBlockTable : FixedSizeTable<VertexHeightBlock> {
-        protected VertexHeightBlockTable(IByteData data, int address) : base(data, address, 256) {
+        protected VertexHeightBlockTable(IByteData data, string name, int address) : base(data, name, address, 256) {
         }
 
-        public static VertexHeightBlockTable Create(IByteData data, int address) {
-            var newTable = new VertexHeightBlockTable(data, address);
+        public static VertexHeightBlockTable Create(IByteData data, string name, int address) {
+            var newTable = new VertexHeightBlockTable(data, name, address);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
