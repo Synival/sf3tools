@@ -8,7 +8,7 @@ namespace SF3.Models.Tables {
     /// <summary>
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
-    public abstract class BaseTable<T> : IBaseTable, IBaseTable<T> where T : class, IStruct {
+    public abstract class Table<T> : ITable, ITable<T> where T : class, IStruct {
         /// <summary>
         /// Function to determine whether or not reading from a table should continue.
         /// If 'false' is returned, the 'currentModel' will not be committed.
@@ -18,7 +18,7 @@ namespace SF3.Models.Tables {
         /// <returns>'true' if reading should continue, 'false' if reading should not continue.</returns>
         public delegate bool ContinueReadingPredicate(Dictionary<int, T> currentRows, T newModel);
 
-        protected BaseTable(IByteData data, int address) {
+        protected Table(IByteData data, int address) {
             Data = data;
             Address = address;
         }

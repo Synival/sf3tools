@@ -21,7 +21,7 @@ namespace SF3.Models.Files.X013 {
             return newFile;
         }
 
-        public override IEnumerable<IBaseTable> MakeTables() {
+        public override IEnumerable<ITable> MakeTables() {
             int critModAddress;
             int critrateAddress;
             int expLimitAddress;
@@ -133,7 +133,7 @@ namespace SF3.Models.Files.X013 {
                     throw new ArgumentException(nameof(Scenario));
             }
 
-            var tables = new List<IBaseTable>() {
+            var tables = new List<ITable>() {
                 (SpecialsTable        = SpecialTable.Create        (Data, ResourceFileForScenario(Scenario, "Specials.xml"), specialAddress)),
                 (SupportTypeTable     = SupportTypeTable.Create    (Data, ResourceFileForScenario(Scenario, "Characters.xml"), supportTypeAddress)),
                 (FriendshipExpTable   = FriendshipExpTable.Create  (Data, ResourceFile("ExpList.xml"), friendshipExpAddress)),

@@ -47,7 +47,7 @@ namespace SF3.Models.Files.MPD {
                 return ScenarioType.Scenario1;
         }
 
-        public override IEnumerable<IBaseTable> MakeTables() {
+        public override IEnumerable<ITable> MakeTables() {
             var areAnimatedTextures32Bit = Scenario >= ScenarioType.Scenario3;
 
             // Load root headers
@@ -63,7 +63,7 @@ namespace SF3.Models.Files.MPD {
             WireChildDataModifiedEvents();
 
             // Build a list of all data tables.
-            var tables = new List<IBaseTable>() {
+            var tables = new List<ITable>() {
                 MPDHeader,
                 ChunkHeader,
             };
@@ -81,8 +81,8 @@ namespace SF3.Models.Files.MPD {
             return MPDHeader;
         }
 
-        private IBaseTable[] MakeHeaderTables(MPDHeaderModel header, bool areAnimatedTextures32Bit) {
-            var tables = new List<IBaseTable>();
+        private ITable[] MakeHeaderTables(MPDHeaderModel header, bool areAnimatedTextures32Bit) {
+            var tables = new List<ITable>();
 
             tables.AddRange(MakeLightingTables(header));
             tables.AddRange(MakeTexturePaletteTables(header));
@@ -102,7 +102,7 @@ namespace SF3.Models.Files.MPD {
             return ChunkHeader;
         }
 
-        private IBaseTable[] MakeTexturePaletteTables(MPDHeaderModel header) {
+        private ITable[] MakeTexturePaletteTables(MPDHeaderModel header) {
             TexturePalettes = new ColorTable[3];
             var headerRamAddr = header.Address + c_RamOffset;
 
@@ -116,8 +116,8 @@ namespace SF3.Models.Files.MPD {
             return TexturePalettes.Where(x => x != null).ToArray();
         }
 
-        private IBaseTable[] MakeLightingTables(MPDHeaderModel header) {
-            var tables = new List<IBaseTable>();
+        private ITable[] MakeLightingTables(MPDHeaderModel header) {
+            var tables = new List<ITable>();
 
             if (header.OffsetLightPalette != 0)
                 tables.Add(LightPalette = ColorTable.Create(Data, header.OffsetLightPalette - c_RamOffset, 32));
@@ -127,8 +127,8 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private IBaseTable[] MakeTextureAnimationTables(MPDHeaderModel header, bool areAnimatedTextures32Bit) {
-            var tables = new List<IBaseTable>();
+        private ITable[] MakeTextureAnimationTables(MPDHeaderModel header, bool areAnimatedTextures32Bit) {
+            var tables = new List<ITable>();
 
             if (header.OffsetTextureAnimations != 0)
                 tables.Add(TextureAnimations = TextureAnimationTable.Create(Data, header.OffsetTextureAnimations - c_RamOffset, areAnimatedTextures32Bit));
@@ -136,8 +136,8 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private IBaseTable[] MakeUnknownTables(MPDHeaderModel header) {
-            var tables = new List<IBaseTable>();
+        private ITable[] MakeUnknownTables(MPDHeaderModel header) {
+            var tables = new List<ITable>();
 
             if (header.Offset3 != 0)
                 tables.Add(Offset3Table = UnknownUInt16Table.Create(Data, header.Offset3 - c_RamOffset, 32, null));
@@ -235,7 +235,7 @@ namespace SF3.Models.Files.MPD {
                 return null;
         }
 
-        private IBaseTable[] MakeChunkTables(ChunkHeader[] chunkHeaders, IChunkData[] chunkDatas, IChunkData surfaceModelChunk) {
+        private ITable[] MakeChunkTables(ChunkHeader[] chunkHeaders, IChunkData[] chunkDatas, IChunkData surfaceModelChunk) {
             TextureCollectionType TextureCollectionForChunkIndex(int chunkIndex) {
                 switch (chunkIndex) {
                     case 6:
@@ -262,7 +262,7 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
-            var tables = new List<IBaseTable>();
+            var tables = new List<ITable>();
 
             if (chunkDatas[1] != null) {
                 Models = Models.Create(chunkDatas[1].DecompressedData, NameGetterContext, 0x00, "Models");

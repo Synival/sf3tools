@@ -10,7 +10,7 @@ namespace SF3.Models.Tables {
     /// <summary>
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
-    public abstract class ResourceTable<T> : BaseTable<T>, IResourceTable<T> where T : class, IStruct {
+    public abstract class ResourceTable<T> : Table<T>, IResourceTable<T> where T : class, IStruct {
         protected ResourceTable(IByteData data, string resourceFile, int address, int? maxSize = null) : base(data, address) {
             ResourceFile = resourceFile;
             MaxSize = maxSize;

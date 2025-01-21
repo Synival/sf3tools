@@ -7,7 +7,7 @@ namespace SF3.Models.Tables {
     /// <summary>
     /// Interface for any table of SF3 data that can be modified.
     /// </summary>
-    public interface IBaseTable : IEnumerable {
+    public interface ITable : IEnumerable {
         /// <summary>
         /// Loads all rows of the table.
         /// </summary>
@@ -49,7 +49,7 @@ namespace SF3.Models.Tables {
     /// <summary>
     /// Interface for a specific table of SF3 data that can be modified.
     /// </summary>
-    public interface IBaseTable<T> : IBaseTable, IEnumerable<T> where T : class, IStruct {
+    public interface ITable<T> : ITable, IEnumerable<T> where T : class, IStruct {
         /// <summary>
         /// A mutable array of rows of type T.
         /// </summary>

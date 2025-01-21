@@ -46,10 +46,10 @@ namespace SF3.Models.Files {
         }
 
         /// <summary>
-        /// Creates a collection of empty IBaseTable's to be populated on LoadFile().
+        /// Creates a collection of empty ITable's to be populated on LoadFile().
         /// </summary>
-        /// <returns>A collection of unloaded IBaseTable's.</returns>
-        public abstract IEnumerable<IBaseTable> MakeTables();
+        /// <returns>A collection of unloaded ITable's.</returns>
+        public abstract IEnumerable<ITable> MakeTables();
 
         /// <summary>
         /// Performs finishing tasks, aborting finishing if 'false' is returned.
@@ -73,7 +73,7 @@ namespace SF3.Models.Files {
 
         public INameGetterContext NameGetterContext { get; }
 
-        public IEnumerable<IBaseTable> Tables { get; private set; }
+        public IEnumerable<ITable> Tables { get; private set; }
 
         public virtual string Title => "";
 

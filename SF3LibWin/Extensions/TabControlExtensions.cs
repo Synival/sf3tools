@@ -71,7 +71,7 @@ namespace SF3.Win.Extensions {
         /// If the table doesn't exist, the tab is hidden.
         /// </summary>
         public class PopulateOLVTabConfig : IPopulateTabConfig {
-            public PopulateOLVTabConfig(TabPage tabPage, ObjectListView objectListView, IBaseTable table) {
+            public PopulateOLVTabConfig(TabPage tabPage, ObjectListView objectListView, ITable table) {
                 TabPage = tabPage;
                 ObjectListView = objectListView;
                 Table = table;
@@ -79,7 +79,7 @@ namespace SF3.Win.Extensions {
 
             public TabPage TabPage { get; }
             public ObjectListView ObjectListView { get; }
-            public IBaseTable Table { get; }
+            public ITable Table { get; }
             public object[] RowObjs => Table.RowObjs;
 
             public bool CanPopulate => Table != null;

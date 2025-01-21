@@ -20,7 +20,7 @@ namespace SF3.Models.Files.MPD {
             return newFile;
         }
 
-        public override IEnumerable<IBaseTable> MakeTables() {
+        public override IEnumerable<ITable> MakeTables() {
             ModelsHeaderTable = ModelsHeaderTable.Create(Data, 0x0000);
             ModelTable = ModelTable.Create(Data, 0x000C, ModelsHeaderTable[0].NumModels);
 
@@ -84,7 +84,7 @@ namespace SF3.Models.Files.MPD {
                 .ThenBy(x => x.Count)
                 .ToDictionary(x => x, x => AttrTable.Create(Data, x.Offset, x.Count));
 
-            var tables = new List<IBaseTable>() {
+            var tables = new List<ITable>() {
                 ModelsHeaderTable,
                 ModelTable,
                 PDataTable

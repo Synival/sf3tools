@@ -22,7 +22,7 @@ namespace SF3.Win.Views {
             DropdownList.DataSource = new BindingSource(TableDict, null);
             DropdownList.DisplayMember = "Key";
             DropdownList.ValueMember = "Value";
-            DropdownList.SelectedValueChanged += (s, e) => TableView.Table = (IBaseTable) DropdownList.SelectedValue;
+            DropdownList.SelectedValueChanged += (s, e) => TableView.Table = (ITable) DropdownList.SelectedValue;
             control.Controls.Add(DropdownList);
 
             CreateChild(TableView, (c) => {}, autoFill: false);

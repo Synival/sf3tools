@@ -7,7 +7,7 @@ namespace SF3.Win.Views {
         /// <summary>
         /// The table that is to be edited.
         /// </summary>
-        IBaseTable Table { get; }
+        ITable Table { get; }
 
         /// <summary>
         /// The name getter context used to fetch named values for viewing and editing.

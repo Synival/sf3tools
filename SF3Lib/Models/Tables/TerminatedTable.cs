@@ -7,7 +7,7 @@ namespace SF3.Models.Tables {
     /// <summary>
     /// Base implementation for a specific table of SF3 data that can be modified.
     /// </summary>
-    public abstract class TerminatedTable<T> : BaseTable<T>, ITerminatedTable<T> where T : class, IStruct {
+    public abstract class TerminatedTable<T> : Table<T>, ITerminatedTable<T> where T : class, IStruct {
         protected TerminatedTable(IByteData data, int address, int? maxSize = null) : base(data, address) {
             MaxSize = maxSize;
         }

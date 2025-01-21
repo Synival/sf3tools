@@ -12,7 +12,7 @@ namespace SF3.Win.Views {
     public class TableView : ViewBase, ITableView {
         private static int s_controlIndex = 1;
 
-        public TableView(string name, IBaseTable table, INameGetterContext nameGetterContext, Type modelType = null)
+        public TableView(string name, ITable table, INameGetterContext nameGetterContext, Type modelType = null)
         : base(name) {
             Table = table;
             NameGetterContext = nameGetterContext;
@@ -183,9 +183,9 @@ namespace SF3.Win.Views {
             OLVControl.RefreshAllItems();
         }
 
-        private IBaseTable _table = null;
+        private ITable _table = null;
 
-        public IBaseTable Table {
+        public ITable Table {
             get => _table;
             set {
                 if (IsCreated) {

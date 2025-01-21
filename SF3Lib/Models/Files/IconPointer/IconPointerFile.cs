@@ -21,7 +21,7 @@ namespace SF3.Models.Files.IconPointer {
             return newFile;
         }
 
-        public override IEnumerable<IBaseTable> MakeTables() {
+        public override IEnumerable<ITable> MakeTables() {
             const int sub_X021 = 0x06068000;
             const int sub_X026 = 0x06078000;
 
@@ -82,7 +82,7 @@ namespace SF3.Models.Files.IconPointer {
             var itemIconAddress  = isX026 ? itemIconAddress_X026  : itemIconAddress_X021;
             var has16BitIconAddr = Scenario == ScenarioType.Scenario1 && isX026;
 
-            return new List<IBaseTable>() {
+            return new List<ITable>() {
                 (SpellIconTable = SpellIconTable.Create(Data, ResourceFileForScenario(Scenario, "SpellIcons.xml"), spellIconAddress, has16BitIconAddr, spellIconRealOffsetStart)),
                 (ItemIconTable  = ItemIconTable.Create (Data, ResourceFileForScenario(Scenario, "Items.xml"), itemIconAddress, has16BitIconAddr))
             };

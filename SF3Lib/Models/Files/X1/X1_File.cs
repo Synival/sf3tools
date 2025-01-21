@@ -25,7 +25,7 @@ namespace SF3.Models.Files.X1 {
             return newFile;
         }
 
-        public override IEnumerable<IBaseTable> MakeTables() {
+        public override IEnumerable<ITable> MakeTables() {
             // TODO: this does soooo much work! Let's try to break it up into subroutines.
             var isScn1OrBTL99 = Scenario == ScenarioType.Scenario1 || IsBTL99;
 
@@ -127,7 +127,7 @@ namespace SF3.Models.Files.X1 {
             }
 
             // Add tables present outside of the battle tables.
-            var tables = new List<IBaseTable>();
+            var tables = new List<ITable>();
             if (treasureAddress >= 0)
                 tables.Add(TreasureTable = TreasureTable.Create(Data, ResourceFile("X1Treasure.xml"), treasureAddress));
             if (warpAddress >= 0)

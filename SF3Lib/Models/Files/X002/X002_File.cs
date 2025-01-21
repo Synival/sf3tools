@@ -22,7 +22,7 @@ namespace SF3.Models.Files.X002 {
             return newFile;
         }
 
-        public override IEnumerable<IBaseTable> MakeTables() {
+        public override IEnumerable<ITable> MakeTables() {
             var checkVersion2 = Data.GetByte(0x000B);
 
             int attackResistAddress;
@@ -90,7 +90,7 @@ namespace SF3.Models.Files.X002 {
                     throw new ArgumentException(nameof(Scenario));
             }
 
-            var tables = new List<IBaseTable>() {
+            var tables = new List<ITable>() {
                 (AttackResistTable   = AttackResistTable.Create  (Data, ResourceFile("AttackResistList.xml"), attackResistAddress)),
                 (ItemTable           = ItemTable.Create          (Data, ResourceFileForScenario(Scenario, "Items.xml"), itemAddress)),
                 (LoadedOverrideTable = LoadedOverrideTable.Create(Data, ResourceFileForScenario(Scenario, "LoadedOverrideList.xml"), loadedOverrideAddress)),
