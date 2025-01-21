@@ -58,6 +58,19 @@ namespace SF3.Models.Files.MPD {
                 .ThenBy(x => x.Count)
                 .ToDictionary(x => x, x => VertexTable.Create(Data, x.Offset, x.Count));
 
+            PolygonTables = PDataTable
+                .Select(x => new OffsetCount { Offset = GetFileAddr(x.PolygonsOffset), Count = x.PolygonCount })
+                .Where(x => x.Offset != 0)
+                .GroupBy(x => x.GetHashCode())
+                .Select(x => {
+                    var first = x.First();
+                    first.Refs = x.Count();
+                    return first;
+                })
+                .OrderBy(x => x.Offset)
+                .ThenBy(x => x.Count)
+                .ToDictionary(x => x, x => PolygonTable.Create(Data, x.Offset, x.Count));
+
             AttrTables = PDataTable
                 .Select(x => new OffsetCount { Offset = GetFileAddr(x.AttributesOffset), Count = x.PolygonCount })
                 .Where(x => x.Offset != 0)
@@ -114,6 +127,9 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public Dictionary<OffsetCount, VertexTable> VertexTables { get; private set; }
+
+        [BulkCopyRecurse]
+        public Dictionary<OffsetCount, PolygonTable> PolygonTables { get; private set; }
 
         [BulkCopyRecurse]
         public Dictionary<OffsetCount, AttrTable> AttrTables { get; private set; }

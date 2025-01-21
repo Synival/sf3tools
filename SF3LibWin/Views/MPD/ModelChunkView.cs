@@ -17,6 +17,7 @@ namespace SF3.Win.Views.MPD {
             CreateChild(new TableView("Models", Model.ModelTable, ngc));
             CreateChild(new TableView("PDATAs", Model.PDataTable, ngc));
             CreateChild(new TableDictionaryView<OffsetCount, VertexTable>("POINT[]s", Model.VertexTables, ngc));
+            CreateChild(new TableDictionaryView<OffsetCount, PolygonTable>("POLYGON[]s", Model.PolygonTables, ngc));
             CreateChild(new TableDictionaryView<OffsetCount, AttrTable>("ATTR[]s", Model.AttrTables, ngc));
 
             return Control;
