@@ -20,24 +20,21 @@ namespace SF3.Models.Files.MPD {
             return newFile;
         }
 
+        private struct ModelElementKey {
+            public int AddressInMemory;
+            public int Count;
+            public int Refs;
+        }
+
         public override IEnumerable<ITable> MakeTables() {
             ModelsHeaderTable = ModelsHeaderTable.Create(Data, "ModelsHeader", 0x0000);
             ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeaderTable[0].NumModels);
-
-            int GetFileAddr(int addr) {
-                if (addr >= 0x60a0000)
-                    return addr - 0x60a0000 /* TODO: apply actual offset of chunk! */;
-                else if (addr >= 0x290000)
-                    return addr - 0x292100 /* TODO: apply actual offset of chunk! */;
-                else
-                    return addr;
-            }
 
             var pdataAddresses = ModelTable
                 .SelectMany(x => x.PDatas)
                 .Select(x => x.Value)
                 .Where(x => x != 0)
-                .Select(x => GetFileAddr(x))
+                .Select(x => GetOffsetInChunk(x))
                 .GroupBy(x => x)
                 .Select(x => new { Offset = x.Key, Count = x.Count() })
                 .OrderBy(x => x.Offset)
@@ -46,51 +43,51 @@ namespace SF3.Models.Files.MPD {
             PDataTable = PDataTable.Create(Data, "PDATAs", pdataAddresses.Select(x => x.Offset).ToArray(), pdataAddresses.Select(x => x.Count).ToArray());
 
             VertexTables = PDataTable
-                .Select(x => new OffsetCount { Offset = GetFileAddr(x.VerticesOffset), Count = x.VertexCount })
-                .Where(x => x.Offset != 0)
-                .GroupBy(x => x.GetHashCode())
+                .Select(x => new ModelElementKey { AddressInMemory = x.VerticesOffset, Count = x.VertexCount })
+                .Where(x => x.AddressInMemory != 0)
+                .GroupBy(x => x.AddressInMemory)
                 .Select(x => {
                     var first = x.First();
                     first.Refs = x.Count();
                     return first;
                 })
-                .OrderBy(x => x.Offset)
+                .OrderBy(x => x.AddressInMemory)
                 .ThenBy(x => x.Count)
                 .ToDictionary(
-                    x => x,
-                    x => VertexTable.Create(Data, "POINT[] @ 0x" + x.Offset.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", x.Offset, x.Count)
+                    x => x.AddressInMemory,
+                    x => VertexTable.Create(Data, "POINTs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
                 );
 
             PolygonTables = PDataTable
-                .Select(x => new OffsetCount { Offset = GetFileAddr(x.PolygonsOffset), Count = x.PolygonCount })
-                .Where(x => x.Offset != 0)
-                .GroupBy(x => x.GetHashCode())
+                .Select(x => new ModelElementKey { AddressInMemory = x.PolygonsOffset, Count = x.PolygonCount })
+                .Where(x => x.AddressInMemory != 0)
+                .GroupBy(x => x.AddressInMemory)
                 .Select(x => {
                     var first = x.First();
                     first.Refs = x.Count();
                     return first;
                 })
-                .OrderBy(x => x.Offset)
+                .OrderBy(x => x.AddressInMemory)
                 .ThenBy(x => x.Count)
                 .ToDictionary(
-                    x => x,
-                    x => PolygonTable.Create(Data, "POLYGON[] @ 0x" + x.Offset.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", x.Offset, x.Count)
+                    x => x.AddressInMemory,
+                    x => PolygonTable.Create(Data, "POLYGONs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
                 );
 
             AttrTables = PDataTable
-                .Select(x => new OffsetCount { Offset = GetFileAddr(x.AttributesOffset), Count = x.PolygonCount })
-                .Where(x => x.Offset != 0)
-                .GroupBy(x => x.GetHashCode())
+                .Select(x => new ModelElementKey { AddressInMemory = x.AttributesOffset, Count = x.PolygonCount })
+                .Where(x => x.AddressInMemory != 0)
+                .GroupBy(x => x.AddressInMemory)
                 .Select(x => {
                     var first = x.First();
                     first.Refs = x.Count();
                     return first;
                 })
-                .OrderBy(x => x.Offset)
+                .OrderBy(x => x.AddressInMemory)
                 .ThenBy(x => x.Count)
                 .ToDictionary(
-                    x => x,
-                    x => AttrTable.Create(Data, "ATTR[] @ 0x" + x.Offset.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", x.Offset, x.Count)
+                    x => x.AddressInMemory,
+                    x => AttrTable.Create(Data, "ATTRs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
                 );
 
             var tables = new List<ITable>() {
@@ -103,6 +100,15 @@ namespace SF3.Models.Files.MPD {
             tables.AddRange(AttrTables.Values);
 
             return tables;
+        }
+
+        public int GetOffsetInChunk(int memoryAddress) {
+            if (memoryAddress >= 0x60a0000)
+                return memoryAddress - 0x60a0000 /* TODO: apply actual offset of chunk! */;
+            else if (memoryAddress >= 0x290000)
+                return memoryAddress - 0x292100 /* TODO: apply actual offset of chunk! */;
+            else
+                return memoryAddress;
         }
 
         [BulkCopyRowName]
@@ -119,28 +125,13 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public PDataTable PDataTable { get; private set; }
 
-        public struct OffsetCount {
-            public int Offset;
-            public int Count;
-            public int Refs;
-
-            public override int GetHashCode()
-                => Offset * 0x10000 + Count;
-
-            public override bool Equals(object rhs)
-                => (rhs is OffsetCount oc) ? (Offset == oc.Offset && Count == oc.Count) : base.Equals(rhs);
-
-            public override string ToString()
-                => "0x" + Offset.ToString("X4") + " (Count = " + Count + ") (Refs = " + Refs + ")";
-        }
+        [BulkCopyRecurse]
+        public Dictionary<int, VertexTable> VertexTables { get; private set; }
 
         [BulkCopyRecurse]
-        public Dictionary<OffsetCount, VertexTable> VertexTables { get; private set; }
+        public Dictionary<int, PolygonTable> PolygonTables { get; private set; }
 
         [BulkCopyRecurse]
-        public Dictionary<OffsetCount, PolygonTable> PolygonTables { get; private set; }
-
-        [BulkCopyRecurse]
-        public Dictionary<OffsetCount, AttrTable> AttrTables { get; private set; }
+        public Dictionary<int, AttrTable> AttrTables { get; private set; }
     }
 }

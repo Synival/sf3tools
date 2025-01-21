@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using CommonLib.NamedValues;
 using SF3.Models.Tables;
 
 namespace SF3.Win.Views {
-    public class TableDictionaryView<TKey, TTable> : ControlSpaceView {
-        public TableDictionaryView(string name, Dictionary<TKey, TTable> tableDict, INameGetterContext nameGetterContext) : base(name) {
-            TableDict = tableDict;
+    public class TableArrayView<TTable> : ControlSpaceView {
+        public TableArrayView(string name, TTable[] tables, INameGetterContext nameGetterContext) : base(name) {
+            Tables = tables;
             var elementType = typeof(TTable).GetProperty("Rows").PropertyType.GetElementType();
             TableView = new TableView("Table", null, nameGetterContext, elementType);
         }
@@ -19,9 +17,8 @@ namespace SF3.Win.Views {
 
             DropdownList = new ComboBox();
             DropdownList.Width = 400;
-            DropdownList.DataSource = new BindingSource(TableDict, null);
-            DropdownList.DisplayMember = "Key";
-            DropdownList.ValueMember = "Value";
+            DropdownList.DataSource = new BindingSource(Tables, null);
+            DropdownList.DisplayMember = "Name";
             DropdownList.SelectedValueChanged += (s, e) => TableView.Table = (ITable) DropdownList.SelectedValue;
             control.Controls.Add(DropdownList);
 
@@ -41,7 +38,7 @@ namespace SF3.Win.Views {
             base.Destroy();
         }
 
-        public Dictionary<TKey, TTable> TableDict { get; }
+        public TTable[] Tables { get; }
 
         public ComboBox DropdownList { get; private set; } = null;
         public TableView TableView { get; }
