@@ -12,11 +12,11 @@ namespace SF3.Win.Views {
     public class TableView : ViewBase, ITableView {
         private static int s_controlIndex = 1;
 
-        public TableView(string name, IBaseTable table, INameGetterContext nameGetterContext)
+        public TableView(string name, IBaseTable table, INameGetterContext nameGetterContext, Type modelType = null)
         : base(name) {
             Table = table;
             NameGetterContext = nameGetterContext;
-            ModelType = (Table == null) ? null : Table.RowObjs.GetType().GetElementType()!;
+            ModelType = modelType ?? ((Table == null) ? null : Table.RowObjs.GetType().GetElementType()!);
         }
 
         /// <summary>
@@ -138,7 +138,8 @@ namespace SF3.Win.Views {
             }
 
             try {
-                olv.AddObjects(Table.RowObjs);
+                if (Table != null)
+                    olv.AddObjects(Table.RowObjs);
             }
             catch {
                 olv.ClearObjects();
@@ -151,7 +152,7 @@ namespace SF3.Win.Views {
         }
 
         public override Control Create() {
-            if (Table == null)
+            if (ModelType == null)
                 return null;
 
             OLVControl = GetOLV();
@@ -182,7 +183,21 @@ namespace SF3.Win.Views {
             OLVControl.RefreshAllItems();
         }
 
-        public IBaseTable Table { get; }
+        private IBaseTable _table = null;
+
+        public IBaseTable Table {
+            get => _table;
+            set {
+                if (IsCreated) {
+                    if (_table != null)
+                        OLVControl.ClearObjects();
+                    if (value != null)
+                        OLVControl.AddObjects(value.RowObjs);
+                }
+                _table = value;
+            }
+        }
+
         public Type ModelType { get; }
         public INameGetterContext NameGetterContext { get; }
         public ObjectListView OLVControl { get; private set; } = null;
