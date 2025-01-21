@@ -40,7 +40,7 @@ namespace SF3.Win.Views {
         }
 
         private void UpdateBitmap() {
-            var colorCount = Table.Rows.Length;
+            var colorCount = Table.Length;
             var width = (int) Math.Ceiling(Math.Sqrt(colorCount));
 
             var nextPow = 1;

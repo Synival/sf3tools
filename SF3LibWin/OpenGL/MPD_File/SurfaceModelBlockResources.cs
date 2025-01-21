@@ -78,7 +78,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 .ToDictionary(x => x.ID, x => x.Texture)
                 : [];
 
-            var animationsById = mpdFile.TextureAnimations != null ? mpdFile.TextureAnimations.Rows
+            var animationsById = mpdFile.TextureAnimations != null ? mpdFile.TextureAnimations
                 .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
                 .ToDictionary(x => (int) x.TextureID, x => x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray())

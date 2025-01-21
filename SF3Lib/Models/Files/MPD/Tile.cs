@@ -58,7 +58,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public VECTOR GetVertexNormal(CornerType corner) {
-            if (MPD_File.SurfaceModel?.VertexNormalBlockTable?.Rows == null)
+            if (MPD_File.SurfaceModel?.VertexNormalBlockTable == null)
                 return new VECTOR(0f, 1 / 32768f, 0f);
 
             var loc = BlockVertexLocations[corner];

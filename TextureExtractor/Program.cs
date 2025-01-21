@@ -94,7 +94,7 @@ namespace TextureExtractor {
                                 continue;
                             }
 
-                            var tileSurfaceCharacterIDs = mpdFile.SurfaceModel.TileTextureRowTable.Rows
+                            var tileSurfaceCharacterIDs = mpdFile.SurfaceModel.TileTextureRowTable
                                 .SelectMany(x => x.GetRowCopy())
                                 .Select(x => x & 0xFF)
                                 .Distinct()
@@ -107,7 +107,7 @@ namespace TextureExtractor {
                                 .Where(x => tileSurfaceCharacterIDs.Contains(x.ID) && x.TextureIsLoaded && x.Texture.PixelFormat == TexturePixelFormat.ABGR1555 && x.Width % 2 == 0 && x.Height % 2 == 0)
                                 .ToArray();
 
-                            var frames = (mpdFile.TextureAnimations == null) ? [] : mpdFile.TextureAnimations.Rows
+                            var frames = (mpdFile.TextureAnimations == null) ? [] : mpdFile.TextureAnimations
                                 .SelectMany(x => x.Frames)
                                 .Where(x => tileSurfaceCharacterIDs.Contains(x.TextureID) && x.TextureIsLoaded && x.Texture.PixelFormat == TexturePixelFormat.ABGR1555 && x.Width % 2 == 0 && x.Height % 2 == 0)
                                 .ToArray();
