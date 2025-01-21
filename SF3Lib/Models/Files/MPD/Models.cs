@@ -38,18 +38,22 @@ namespace SF3.Models.Files.MPD {
                 .Select(x => x.Value)
                 .Where(x => x != 0)
                 .Select(x => GetFileAddr(x))
-                .Distinct()
-                .OrderBy(x => x)
+                .GroupBy(x => x)
+                .Select(x => new { Offset = x.Key, Count = x.Count() })
+                .OrderBy(x => x.Offset)
                 .ToArray();
 
-            PDataTable = PDataTable.Create(Data, pdataAddresses);
+            PDataTable = PDataTable.Create(Data, pdataAddresses.Select(x => x.Offset).ToArray(), pdataAddresses.Select(x => x.Count).ToArray());
 
             VertexTables = PDataTable
                 .Select(x => new OffsetCount { Offset = GetFileAddr(x.VerticesOffset), Count = x.VertexCount })
                 .Where(x => x.Offset != 0)
                 .GroupBy(x => x.GetHashCode())
-                .Distinct()
-                .Select(x => x.First())
+                .Select(x => {
+                    var first = x.First();
+                    first.Refs = x.Count();
+                    return first;
+                })
                 .OrderBy(x => x.Offset)
                 .ThenBy(x => x.Count)
                 .ToDictionary(x => x, x => VertexTable.Create(Data, x.Offset, x.Count));
@@ -58,8 +62,11 @@ namespace SF3.Models.Files.MPD {
                 .Select(x => new OffsetCount { Offset = GetFileAddr(x.AttributesOffset), Count = x.PolygonCount })
                 .Where(x => x.Offset != 0)
                 .GroupBy(x => x.GetHashCode())
-                .Distinct()
-                .Select(x => x.First())
+                .Select(x => {
+                    var first = x.First();
+                    first.Refs = x.Count();
+                    return first;
+                })
                 .OrderBy(x => x.Offset)
                 .ThenBy(x => x.Count)
                 .ToDictionary(x => x, x => AttrTable.Create(Data, x.Offset, x.Count));
@@ -93,12 +100,16 @@ namespace SF3.Models.Files.MPD {
         public struct OffsetCount {
             public int Offset;
             public int Count;
+            public int Refs;
 
             public override int GetHashCode()
                 => Offset * 0x10000 + Count;
 
             public override bool Equals(object rhs)
                 => (rhs is OffsetCount oc) ? (Offset == oc.Offset && Count == oc.Count) : base.Equals(rhs);
+
+            public override string ToString()
+                => "0x" + Offset.ToString("X4") + " (Count = " + Count + ") (Refs = " + Refs + ")";
         }
 
         [BulkCopyRecurse]

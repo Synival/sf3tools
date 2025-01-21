@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using SF3.Models.Tables.MPD.Model;
+using static SF3.Models.Files.MPD.Models;
 
 namespace SF3.Win.Views.MPD {
     public class ModelChunkView : TabView {
@@ -15,10 +16,8 @@ namespace SF3.Win.Views.MPD {
             CreateChild(new TableView("Header", Model.ModelsHeaderTable, ngc));
             CreateChild(new TableView("Models", Model.ModelTable, ngc));
             CreateChild(new TableView("PDATAs", Model.PDataTable, ngc));
-            // TODO: TableArrayView for all of them?
-            CreateChild(new TableView("First POINTs", Model.VertexTables.First().Value, ngc));
-            // TODO: TableArrayView for all of them?
-            CreateChild(new TableView("First ATTRs", Model.AttrTables.First().Value, ngc));
+            CreateChild(new TableDictionaryView<OffsetCount, VertexTable>("POINT[]s", Model.VertexTables, ngc));
+            CreateChild(new TableDictionaryView<OffsetCount, AttrTable>("ATTR[]s", Model.AttrTables, ngc));
 
             return Control;
         }
