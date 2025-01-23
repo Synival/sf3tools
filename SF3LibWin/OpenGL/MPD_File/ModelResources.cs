@@ -123,9 +123,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var twoSided = ((attr.Flag & 0x01) == 0x01) ? 1.0f : 0.0f;
                 var twoSidedVboData = new float[,] {{twoSided}, {twoSided}, {twoSided}, {twoSided}};
 
-                // TODO: Why are the normals backwards???
                 var normal = new Vector3(-polygon.NormalX.Float, -polygon.NormalY.Float, polygon.NormalZ.Float);
-
                 var vertexNormals = new Vector3[] { normal, normal, normal, normal };
                 var normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 

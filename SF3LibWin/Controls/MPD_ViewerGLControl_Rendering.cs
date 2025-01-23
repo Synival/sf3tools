@@ -253,7 +253,7 @@ namespace SF3.Win.Controls {
             var pitchCos = Math.Cos(pitchInRadians);
 
             var yawInRadians = lightPos.Yaw / 32768f * Math.PI;
-            var x = Math.Sin(yawInRadians) * pitchCos;
+            var x = -Math.Sin(yawInRadians) * pitchCos;
             var y = pitchSin;
             var z = Math.Cos(yawInRadians) * pitchCos;
 
