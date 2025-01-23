@@ -10,19 +10,30 @@ namespace SF3.Win.Extensions {
         /// </summary>
         /// <param name="texture">This texture whose Bitmap image should be generated.</param>
         /// <returns>A bitmap image for the texture.</returns>
+        public static byte[] CreateImageData(this ITexture texture) {
+            // Determine what format to use and what data to copy in.
+            if (texture.BytesPerPixel == 2 && texture.BitmapDataARGB1555 != null)
+                return texture.BitmapDataARGB1555;
+            else if (texture.BytesPerPixel == 1 && texture.BitmapDataIndexed != null)
+                return texture.BitmapDataIndexed;
+            else
+                throw new InvalidOperationException("Unhandled bitmap type");
+        }
+
+        /// <summary>
+        /// Creates a bitmap image using an a texture's BitmapDataARGB1555.
+        /// </summary>
+        /// <param name="texture">This texture whose Bitmap image should be generated.</param>
+        /// <returns>A bitmap image for the texture.</returns>
         public static Bitmap CreateBitmap(this ITexture texture) {
-            Bitmap image = null;
-            byte[] imageData = null;
+            var imageData = texture.CreateImageData();
 
             // Determine what format to use and what data to copy in.
-            if (texture.BytesPerPixel == 2 && texture.BitmapDataARGB1555 != null) {
+            Bitmap image = null;
+            if (texture.BytesPerPixel == 2 && texture.BitmapDataARGB1555 != null)
                 image = new Bitmap(texture.Width, texture.Height, PixelFormat.Format16bppArgb1555);
-                imageData = texture.BitmapDataARGB1555;
-            }
-            else if (texture.BytesPerPixel == 1 && texture.BitmapDataIndexed != null) {
+            else if (texture.BytesPerPixel == 1 && texture.BitmapDataIndexed != null)
                 image = new Bitmap(texture.Width, texture.Height, PixelFormat.Format8bppIndexed);
-                imageData = texture.BitmapDataIndexed;
-            }
             else
                 throw new InvalidOperationException("Unhandled bitmap type");
 
