@@ -7,7 +7,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int unknown1Address;             // int16  Unknown. Might be map id.
         private readonly int unknown2Address;             // int16  Always zero 0x0000
         private readonly int offsetLightPaletteAddress;   // int32  Always 0x0c. Pointer to 32 values for light palette. See (#header-offset-1).
-        private readonly int offsetLightDirAddress;       // int32  Always 0x4c. Pointer to light direction. See (#header-offset-2).
+        private readonly int offsetLightPosAddress;       // int32  Always 0x4c. Pointer to light position. See (#header-offset-2).
         private readonly int offset3Address;              // int32  Always 0x50. pointer to 0x20 unknown int16s at the start of the file. Mostly zero or 0x8000. (#header-offset-3)
         private readonly int unknown3Address;             // int16  Unknown small value. maybe some count?
         private readonly int unknown4Address;             // int16  Always zero
@@ -38,7 +38,7 @@ namespace SF3.Models.Structs.MPD {
             unknown1Address             = Address;        // 2 bytes
             unknown2Address             = Address + 0x02; // 2 bytes
             offsetLightPaletteAddress   = Address + 0x04; // 4 bytes
-            offsetLightDirAddress       = Address + 0x08; // 4 bytes
+            offsetLightPosAddress       = Address + 0x08; // 4 bytes
             offset3Address              = Address + 0x0C; // 4 bytes
             unknown3Address             = Address + 0x10; // 2 bytes
             unknown4Address             = Address + 0x12; // 2 bytes
@@ -107,9 +107,9 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 3, isPointer: true)]
-        public int OffsetLightDirection {
-            get => Data.GetDouble(offsetLightDirAddress);
-            set => Data.SetDouble(offsetLightDirAddress, value);
+        public int OffsetLightPosition {
+            get => Data.GetDouble(offsetLightPosAddress);
+            set => Data.SetDouble(offsetLightPosAddress, value);
         }
 
         [BulkCopy]

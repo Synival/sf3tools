@@ -14,8 +14,8 @@ namespace SF3.Win.Views.MPD {
             var ngc = Model.NameGetterContext;
             if (Model.LightPalette != null)
                 CreateChild(new ColorTableView("Palette", Model.LightPalette, Model.NameGetterContext));
-            if (Model.LightDirectionTable != null)
-                CreateChild(new TableView("Direction", Model.LightDirectionTable, ngc));
+            if (Model.LightPositionTable != null)
+                CreateChild(new TableView("Direction", Model.LightPositionTable, ngc));
 
             return Control;
         }

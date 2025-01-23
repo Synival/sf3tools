@@ -121,25 +121,25 @@ namespace SF3.Win.Controls {
             }
 
             // Keys to adjust lighting
-            if (MPD_File?.LightDirectionTable != null) {
+            if (MPD_File?.LightPositionTable != null) {
                 if (keysDown.Contains(Keys.Oemcomma)) {
-                    MPD_File.LightDirectionTable[0].Pitch -= (ushort) (0x080 * shiftFactor);
+                    MPD_File.LightPositionTable[0].Pitch -= (ushort) (0x080 * shiftFactor);
                     UpdateShaderLighting();
                     Invalidate();
                 }
                 else if (keysDown.Contains(Keys.OemPeriod)) {
-                    MPD_File.LightDirectionTable[0].Pitch += (ushort) (0x080 * shiftFactor);
+                    MPD_File.LightPositionTable[0].Pitch += (ushort) (0x080 * shiftFactor);
                     UpdateShaderLighting();
                     Invalidate();
                 }
 
                 if (keysDown.Contains(Keys.OemOpenBrackets)) {
-                    MPD_File.LightDirectionTable[0].Yaw -= (ushort) (0x080 * shiftFactor);
+                    MPD_File.LightPositionTable[0].Yaw -= (ushort) (0x080 * shiftFactor);
                     UpdateShaderLighting();
                     Invalidate();
                 }
                 else if (keysDown.Contains(Keys.OemCloseBrackets)) {
-                    MPD_File.LightDirectionTable[0].Yaw += (ushort) (0x080 * shiftFactor);
+                    MPD_File.LightPositionTable[0].Yaw += (ushort) (0x080 * shiftFactor);
                     UpdateShaderLighting();
                     Invalidate();
                 }

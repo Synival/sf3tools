@@ -2,8 +2,8 @@
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD {
-    public class LightDirection : Struct {
-        public LightDirection(IByteData data, int id, string name, int address)
+    public class LightPosition : Struct {
+        public LightPosition(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x04) {
         }
 

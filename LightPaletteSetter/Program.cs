@@ -113,12 +113,12 @@ namespace LightPaletteSetter {
                     }
                 }
 
-                // Update light direction.
-                var lightDirection = mpdFile.LightDirectionTable[0];
+                // Update light position.
+                var lightPosition = mpdFile.LightPositionTable[0];
                 if (c_lighting.Pitch.HasValue)
-                    lightDirection.Pitch = c_lighting.Pitch.Value;
+                    lightPosition.Pitch = c_lighting.Pitch.Value;
                 if (c_lighting.Yaw.HasValue)
-                    lightDirection.Yaw = c_lighting.Yaw.Value;
+                    lightPosition.Yaw = c_lighting.Yaw.Value;
 
                 // This will compress chunks and update the chunk table header.
                 _ = mpdFile.Finish();

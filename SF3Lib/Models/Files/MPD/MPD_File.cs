@@ -121,8 +121,8 @@ namespace SF3.Models.Files.MPD {
 
             if (header.OffsetLightPalette != 0)
                 tables.Add(LightPalette = ColorTable.Create(Data, "LightPalette", header.OffsetLightPalette - c_RamOffset, 32));
-            if (header.OffsetLightDirection != 0)
-                tables.Add(LightDirectionTable = LightDirectionTable.Create(Data, "LightDirections", header.OffsetLightDirection - c_RamOffset));
+            if (header.OffsetLightPosition != 0)
+                tables.Add(LightPositionTable = LightPositionTable.Create(Data, "LightPositions", header.OffsetLightPosition - c_RamOffset));
 
             return tables.ToArray();
         }
@@ -507,7 +507,7 @@ namespace SF3.Models.Files.MPD {
         public ColorTable LightPalette { get; private set; }
 
         [BulkCopyRecurse]
-        public LightDirectionTable LightDirectionTable { get; private set; }
+        public LightPositionTable LightPositionTable { get; private set; }
 
         [BulkCopyRecurse]
         public UnknownUInt16Table Offset3Table { get; private set; }
