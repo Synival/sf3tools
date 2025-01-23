@@ -141,11 +141,6 @@ namespace SF3.Win.Controls {
 
         private void OnFrameTickRendering() {
             UpdateAnimatedTextures();
-            if (_surfaceModelUpdateFrames > 0) {
-                _surfaceModelUpdateFrames--;
-                if (_surfaceModelUpdateFrames == 0)
-                    UpdateSurfaceModels();
-            }
         }
 
         private void OnTileModifiedRendering(object sender) {
@@ -157,15 +152,7 @@ namespace SF3.Win.Controls {
             }
         }
 
-        public void UpdateSurfaceModelsIn(int frames) {
-            if (frames <= 0)
-                UpdateSurfaceModels();
-            else
-                _surfaceModelUpdateFrames = frames;
-        }
-
         public void UpdateSurfaceModels() {
-            _surfaceModelUpdateFrames = 0;
             if (_surfaceModel == null)
                 return;
 
@@ -507,7 +494,6 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private int _surfaceModelUpdateFrames = 0;
         private bool _tileSelectedNeedsUpdate = false;
 
         private Matrix4 _projectionMatrix;
