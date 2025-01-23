@@ -3,6 +3,7 @@ using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.ByteData;
+using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Model;
 
@@ -34,15 +35,17 @@ namespace SF3.Models.Files.MPD {
                 .SelectMany(x => x.PDatas)
                 .Select(x => x.Value)
                 .Where(x => x != 0)
-                .Select(x => GetOffsetInChunk(x))
                 .GroupBy(x => x)
-                .Select(x => new { Offset = x.Key, Count = x.Count() })
-                .OrderBy(x => x.Offset)
+                .Select(x => new { AddressInMemory = x.Key, Count = x.Count() })
+                .OrderBy(x => x.AddressInMemory)
                 .ToArray();
 
-            PDataTable = PDataTable.Create(Data, "PDATAs", pdataAddresses.Select(x => x.Offset).ToArray(), pdataAddresses.Select(x => x.Count).ToArray());
+            PDataTable = PDataTable.Create(Data, "PDATAs", pdataAddresses.Select(x => GetOffsetInChunk(x.AddressInMemory)).ToArray(), pdataAddresses.Select(x => x.Count).ToArray());
+            PDatasByMemoryAddress = PDataTable
+                .Select((PData, i) => new { PData, pdataAddresses[i].AddressInMemory })
+                .ToDictionary(x => x.AddressInMemory, x => x.PData);
 
-            VertexTables = PDataTable
+            VertexTablesByMemoryAddress = PDataTable
                 .Select(x => new ModelElementKey { AddressInMemory = x.VerticesOffset, Count = x.VertexCount })
                 .Where(x => x.AddressInMemory != 0)
                 .GroupBy(x => x.AddressInMemory)
@@ -58,7 +61,7 @@ namespace SF3.Models.Files.MPD {
                     x => VertexTable.Create(Data, "POINTs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
                 );
 
-            PolygonTables = PDataTable
+            PolygonTablesByMemoryAddress = PDataTable
                 .Select(x => new ModelElementKey { AddressInMemory = x.PolygonsOffset, Count = x.PolygonCount })
                 .Where(x => x.AddressInMemory != 0)
                 .GroupBy(x => x.AddressInMemory)
@@ -74,7 +77,7 @@ namespace SF3.Models.Files.MPD {
                     x => PolygonTable.Create(Data, "POLYGONs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
                 );
 
-            AttrTables = PDataTable
+            AttrTablesByMemoryAddress = PDataTable
                 .Select(x => new ModelElementKey { AddressInMemory = x.AttributesOffset, Count = x.PolygonCount })
                 .Where(x => x.AddressInMemory != 0)
                 .GroupBy(x => x.AddressInMemory)
@@ -96,8 +99,8 @@ namespace SF3.Models.Files.MPD {
                 PDataTable
             };
 
-            tables.AddRange(VertexTables.Values);
-            tables.AddRange(AttrTables.Values);
+            tables.AddRange(VertexTablesByMemoryAddress.Values);
+            tables.AddRange(AttrTablesByMemoryAddress.Values);
 
             return tables;
         }
@@ -125,13 +128,15 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public PDataTable PDataTable { get; private set; }
 
-        [BulkCopyRecurse]
-        public Dictionary<int, VertexTable> VertexTables { get; private set; }
+        public Dictionary<int, PDataModel> PDatasByMemoryAddress { get; private set; }
 
         [BulkCopyRecurse]
-        public Dictionary<int, PolygonTable> PolygonTables { get; private set; }
+        public Dictionary<int, VertexTable> VertexTablesByMemoryAddress { get; private set; }
 
         [BulkCopyRecurse]
-        public Dictionary<int, AttrTable> AttrTables { get; private set; }
+        public Dictionary<int, PolygonTable> PolygonTablesByMemoryAddress { get; private set; }
+
+        [BulkCopyRecurse]
+        public Dictionary<int, AttrTable> AttrTablesByMemoryAddress { get; private set; }
     }
 }

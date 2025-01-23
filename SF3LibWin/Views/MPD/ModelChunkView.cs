@@ -17,9 +17,9 @@ namespace SF3.Win.Views.MPD {
             CreateChild(new TableView("Header", Model.ModelsHeaderTable, ngc));
             CreateChild(new TableView("Models", Model.ModelTable, ngc));
             CreateChild(new TableView("PDATAs", Model.PDataTable, ngc));
-            CreateChild(new TableArrayView<VertexTable>("POINT[]s", Model.VertexTables.Values.ToArray(), ngc));
-            CreateChild(new TableArrayView<PolygonTable>("POLYGON[]s", Model.PolygonTables.Values.ToArray(), ngc));
-            CreateChild(new TableArrayView<AttrTable>("ATTR[]s", Model.AttrTables.Values.ToArray(), ngc));
+            CreateChild(new TableArrayView<VertexTable>("POINT[]s", Model.VertexTablesByMemoryAddress.Values.ToArray(), ngc));
+            CreateChild(new TableArrayView<PolygonTable>("POLYGON[]s", Model.PolygonTablesByMemoryAddress.Values.ToArray(), ngc));
+            CreateChild(new TableArrayView<AttrTable>("ATTR[]s", Model.AttrTablesByMemoryAddress.Values.ToArray(), ngc));
 
             return Control;
         }
