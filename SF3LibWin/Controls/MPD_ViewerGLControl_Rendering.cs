@@ -83,8 +83,10 @@ namespace SF3.Win.Controls {
             UpdateSelectFramebuffer();
             UpdateLighting();
 
-            foreach (var shader in _world.Shaders)
+            foreach (var shader in _world.Shaders) {
                 UpdateShaderModelMatrix(shader, Matrix4.Identity);
+                UpdateShaderNormalMatrix(shader, Matrix3.Identity);
+            }
         }
 
         private void OnDisposeRendering() {
@@ -205,6 +207,13 @@ namespace SF3.Win.Controls {
             if (handle >= 0)
                 using (shader.Use())
                     GL.UniformMatrix4(handle, false, ref matrix);
+        }
+
+        private void UpdateShaderNormalMatrix(Shader shader, Matrix3 matrix) {
+            var handle = GL.GetUniformLocation(shader.Handle, "normalMatrix");
+            if (handle >= 0)
+                using (shader.Use())
+                    GL.UniformMatrix3(handle, false, ref matrix);
         }
 
         private void UpdateShaderLighting(Shader shader, Vector3 lightPos, bool useNewLighting) {

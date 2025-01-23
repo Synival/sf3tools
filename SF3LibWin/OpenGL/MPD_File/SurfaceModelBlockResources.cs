@@ -67,6 +67,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             NeedsUpdate = false;
         }
 
+        private readonly float[,] _twoSidedVboData = new float[,] {{0}, {0}, {0}, {0}};
+
         public void Update(IMPD_File mpdFile) {
             Reset();
 
@@ -160,6 +162,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, terrainTypeTexInfo.TexCoordName, 4, terrainTypeVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, eventIdTexInfo.TexCoordName, 4, eventIdVboData));
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "twoSided", 4, _twoSidedVboData));
                         surfaceQuads.Add(newQuad);
                     }
                     else {
@@ -167,6 +170,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, terrainTypeTexInfo.TexCoordName, 4, terrainTypeVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, eventIdTexInfo.TexCoordName, 4, eventIdVboData));
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "twoSided", 4, _twoSidedVboData));
                         untexturedSurfaceQuads.Add(newQuad);
                     }
 

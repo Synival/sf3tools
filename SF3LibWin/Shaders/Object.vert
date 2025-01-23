@@ -3,6 +3,7 @@
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+uniform mat3 normalMatrix;
 uniform vec3 lightPosition;
 uniform sampler2D textureLighting;
 uniform bool useNewLighting;
@@ -15,6 +16,8 @@ layout (location = 3) in vec3 normal;
 layout (location = 4) in vec2 texCoordAtlas;
 layout (location = 5) in vec2 texCoordTerrainTypes;
 layout (location = 6) in vec2 texCoordEventIDs;
+
+layout (location = 7) in float twoSided;
 
 out vec4 colorFrag;
 out vec3 glowFrag;
@@ -29,7 +32,11 @@ void main() {
     colorFrag     = color;
     glowFrag      = glow;
 
-    float normalLightDot = dot(normal, lightPosition);
+    float prevLength = length(normal);
+    vec3 modelNormal = normalize(normalMatrix * normal) * prevLength;
+    float normalLightDot = dot(modelNormal, lightPosition);
+    normalLightDot = (twoSided > 0.5) ? abs(normalLightDot) : normalLightDot;
+
     float lighting = !useNewLighting
         // Scenario 1 uses a straight-forward lighting method where the dot product directly references the index of
         // the color palette to use.
