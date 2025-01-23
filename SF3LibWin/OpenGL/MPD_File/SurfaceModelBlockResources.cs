@@ -117,7 +117,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                     }
 
                     var vertexNormals = tile.GetVertex3Normals();
-                    var normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
+
+                    // Convert normals to normals understood by the shader -- for same reason, they've negative.
+                    var normalVboData = vertexNormals.SelectMany(x => (-x).ToFloatArray()).ToArray().To2DArray(4, 3);
 
                     // This simulates a bug where normal vector X and Z components >= 0.50 or < -0.50 flip sides, likely
                     // due to a mistake involving the strange compressed FIXED binary format.
@@ -125,9 +127,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                         for (var j = 0; j < normalVboData.GetLength(1); j++) {
                             if (j == 1)
                                 continue;
-                            if (normalVboData[i, j] >= 0.50f)
+                            if (normalVboData[i, j] > 0.50f)
                                 normalVboData[i, j] -= 1.00f;
-                            else if (normalVboData[i, j] < -0.50f)
+                            else if (normalVboData[i, j] <= -0.50f)
                                 normalVboData[i, j] += 1.00f;
                         }
                     }
