@@ -72,6 +72,7 @@ namespace SF3.Win.Controls {
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             _world         = new WorldResources();
+            _models        = new ModelResources();
             _surfaceModel  = new SurfaceModelResources();
             _surfaceEditor = new SurfaceEditorResources();
 
@@ -91,6 +92,7 @@ namespace SF3.Win.Controls {
 
         private void OnDisposeRendering() {
             _world?.Dispose();
+            _models?.Dispose();
             _surfaceModel?.Dispose();
             _surfaceEditor?.Dispose();
             _selectFramebuffer?.Dispose();
@@ -152,6 +154,15 @@ namespace SF3.Win.Controls {
                 _tileSelectedNeedsUpdate = true;
                 Invalidate();
             }
+        }
+
+        public void UpdateModels() {
+            if (_models == null)
+                return;
+
+            MakeCurrent();
+            _models.UpdateModels(MPD_File);
+            Invalidate();
         }
 
         public void UpdateSurfaceModels() {
@@ -277,6 +288,36 @@ namespace SF3.Win.Controls {
                             block.UntexturedModel?.Draw(_world.ObjectShader, null);
                     }
                 }
+
+                using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
+                using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
+                using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
+                using (_world.ObjectShader.Use()) {
+                    if (_models?.Models != null) {
+                        foreach (var model in _models.Models) {
+                            if (model.PData1 == 0 || !_models.ModelsByMemoryAddress.ContainsKey(model.PData1))
+                                continue;
+                            var pdata = _models.ModelsByMemoryAddress[model.PData1];
+
+                            var modelMatrix =
+                                Matrix4.CreateScale(model.ScaleX.Float, model.ScaleY.Float, model.ScaleZ.Float) *
+                                Matrix4.CreateRotationX(model.Angle1.Float * (float) Math.PI * -2.00f) *
+                                Matrix4.CreateRotationY(model.Angle2.Float * (float) Math.PI * -2.00f) *
+                                Matrix4.CreateRotationZ(model.Angle3.Float * (float) Math.PI * 2.00f) *
+                                Matrix4.CreateTranslation(model.PositionX / -32.0f - 32.0f, model.PositionY / -32.0f, model.PositionZ / 32.0f + 32.0f);
+
+                            var normalMatrix = new Matrix3(modelMatrix).Inverted();
+                            normalMatrix.Transpose();
+
+                            UpdateShaderModelMatrix(_world.ObjectShader, modelMatrix);
+                            UpdateShaderNormalMatrix(_world.ObjectShader, normalMatrix);
+                            pdata.Draw(_world.ObjectShader);
+                        }
+                    }
+
+                    UpdateShaderModelMatrix(_world.ObjectShader, Matrix4.Identity);
+                    UpdateShaderNormalMatrix(_world.ObjectShader, Matrix3.Identity);
+                }
             }
 
             if (DrawWireframe) {
@@ -382,6 +423,11 @@ namespace SF3.Win.Controls {
             if (_surfaceModel?.Blocks != null)
                 foreach (var block in _surfaceModel.Blocks)
                     if (block.Model?.UpdateAnimatedTextures() == true)
+                        Invalidate();
+
+            if (_models?.ModelsByMemoryAddress != null)
+                foreach (var model in _models.ModelsByMemoryAddress)
+                    if (model.Value.UpdateAnimatedTextures() == true)
                         Invalidate();
         }
 
@@ -508,6 +554,7 @@ namespace SF3.Win.Controls {
         private Matrix4 _viewMatrix;
 
         private WorldResources _world = null;
+        private ModelResources _models = null;
         private SurfaceModelResources _surfaceModel = null;
         private SurfaceEditorResources _surfaceEditor = null;
         private Framebuffer _selectFramebuffer;

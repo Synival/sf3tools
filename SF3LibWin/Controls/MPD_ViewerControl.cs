@@ -100,8 +100,10 @@ namespace SF3.Win.Controls {
         }
 
         public void UpdateModels() {
-            if (MPD_File != null)
+            if (MPD_File != null) {
+                GLControl.UpdateModels();
                 GLControl.UpdateSurfaceModels();
+            }
         }
 
         private void tsbRecalculateLightmapOriginalMath_Click(object sender, EventArgs e) {
