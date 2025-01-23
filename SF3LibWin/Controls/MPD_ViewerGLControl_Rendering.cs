@@ -370,11 +370,10 @@ namespace SF3.Win.Controls {
             if (_frame % 2 == 0)
                 return;
 
-            if (_surfaceModel?.Blocks == null)
-                return;
-            foreach (var block in _surfaceModel.Blocks)
-                if (block.Model?.UpdateAnimatedTextures() == true)
-                    Invalidate();
+            if (_surfaceModel?.Blocks != null)
+                foreach (var block in _surfaceModel.Blocks)
+                    if (block.Model?.UpdateAnimatedTextures() == true)
+                        Invalidate();
         }
 
         private static bool _drawWireframe = true;
