@@ -50,6 +50,18 @@ namespace CommonLib.Utils {
                            (g << 8)  |
                            (b << 0));
 
+            public uint ToABGR8888()
+                => (uint) ((a << 24) |
+                           (r << 0) |
+                           (g << 8)  |
+                           (b << 16));
+
+            public uint ToBGRA8888()
+                => (uint) ((a << 0) |
+                           (r << 8) |
+                           (g << 16)  |
+                           (b << 24));
+
             public string ToHtmlColor() {
                 return "#" +
                     r.ToString("X2") +
@@ -95,7 +107,16 @@ namespace CommonLib.Utils {
             };
         }
 
-        public static PixelChannels ARGB8888ToChannels(uint input) {
+        public static PixelChannels ABGR8888toChannels(uint input) {
+            return new PixelChannels {
+                a = (byte) ((input >> 24) & 0xFF),
+                r = (byte) ((input >> 0)  & 0xFF),
+                g = (byte) ((input >> 16) & 0xFF),
+                b = (byte) ((input >> 24) & 0xFF),
+            };
+        }
+
+        public static PixelChannels ARGB8888toChannels(uint input) {
             return new PixelChannels {
                 a = (byte) ((input >> 24) & 0xFF),
                 r = (byte) ((input >> 16) & 0xFF),
@@ -103,5 +124,37 @@ namespace CommonLib.Utils {
                 b = (byte) ((input >> 0)  & 0xFF),
             };
         }
+
+        public static PixelChannels BGRA8888toChannels(uint input) {
+            return new PixelChannels {
+                a = (byte) ((input >> 0)  & 0xFF),
+                r = (byte) ((input >> 8)  & 0xFF),
+                g = (byte) ((input >> 16) & 0xFF),
+                b = (byte) ((input >> 24) & 0xFF),
+            };
+        }
+
+        public static uint ABGR1555toABGR8888(ushort input) => ABGR1555toChannels(input).ToABGR8888();
+        public static uint ABGR1555toARGB8888(ushort input) => ABGR1555toChannels(input).ToARGB8888();
+        public static uint ABGR1555toBGRA8888(ushort input) => ABGR1555toChannels(input).ToBGRA8888();
+
+        public static uint ARGB1555toABGR8888(ushort input) => ARGB1555toChannels(input).ToABGR8888();
+        public static uint ARGB1555toARGB8888(ushort input) => ARGB1555toChannels(input).ToARGB8888();
+        public static uint ARGB1555toBGRA8888(ushort input) => ARGB1555toChannels(input).ToBGRA8888();
+
+        public static uint ABGR8888toABGR1555(uint input) => ABGR8888toChannels(input).ToABGR1555();
+        public static uint ABGR8888toARGB1555(uint input) => ABGR8888toChannels(input).ToARGB1555();
+        public static uint ABGR8888toARGB8888(uint input) => ABGR8888toChannels(input).ToARGB8888();
+        public static uint ABGR8888toBGRA8888(uint input) => ABGR8888toChannels(input).ToBGRA8888();
+
+        public static uint ARGB8888toABGR1555(uint input) => ARGB8888toChannels(input).ToABGR1555();
+        public static uint ARGB8888toARGB1555(uint input) => ARGB8888toChannels(input).ToARGB1555();
+        public static uint ARGB8888toABGR8888(uint input) => ARGB8888toChannels(input).ToABGR8888();
+        public static uint ARGB8888toBGRA8888(uint input) => ARGB8888toChannels(input).ToBGRA8888();
+
+        public static uint BGRA8888toABGR1555(uint input) => BGRA8888toChannels(input).ToABGR1555();
+        public static uint BGRA8888toARGB1555(uint input) => BGRA8888toChannels(input).ToARGB1555();
+        public static uint BGRA8888toARGB8888(uint input) => BGRA8888toChannels(input).ToARGB8888();
+        public static uint BGRA8888toABGR8888(uint input) => BGRA8888toChannels(input).ToBGRA8888();
     }
 }

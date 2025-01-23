@@ -42,7 +42,7 @@ namespace CommonLib.Tests.Utils {
         [TestMethod]
         public void ARGB8888toChannels_ReturnsExpectedChannels() {
             var input = 0x44332211u;
-            var channels = ARGB8888ToChannels(input);
+            var channels = ARGB8888toChannels(input);
 
             Assert.AreEqual(0x44, channels.a);
             Assert.AreEqual(0x33, channels.r);
