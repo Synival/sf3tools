@@ -35,7 +35,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
                 textures = textureArray;
 
                 var totalArea = textures.Sum(x => (x.Width + padding) * (x.Height + padding));
-                var minWidth  = textures.Min(x => x.Width) + padding;
+                var minWidth  = textures.Max(x => x.Width) + padding;
 
                 MaxX = Math.Max(minWidth, (int) Math.Sqrt(totalArea));
                 MaxY = textures.Sum(x => x.Height + padding);
@@ -54,9 +54,10 @@ namespace SF3.Win.ThirdParty.TexturePacker {
                 throw new ArgumentException(nameof(tex));
 
             var node = _rootNode.Insert(tex);
-            if (node != null)
-                _nodeByTextureIDFrame[(tex.ID, tex.Frame)] = node;
+            if (node == null)
+                throw new InvalidOperationException("Couldn't fit texture");
 
+            _nodeByTextureIDFrame[(tex.ID, tex.Frame)] = node;
             return node;
         }
 
