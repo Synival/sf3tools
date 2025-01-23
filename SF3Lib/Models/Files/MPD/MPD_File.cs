@@ -15,7 +15,7 @@ using static CommonLib.Utils.ResourceUtils;
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
         private const int c_RamOffset = 0x290000;
-        private const int c_SurfaceChunkSize = 0xCF00;
+        private const int c_SurfaceModelChunkSize = 0xCF00;
 
         protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) : base(data, nameContexts[DetectScenario(data)], DetectScenario(data)) { }
 
@@ -57,7 +57,7 @@ namespace SF3.Models.Files.MPD {
             // Load chunks
             var chunks = MakeChunkHeaderTable().Rows;
             var chunkDatas = MakeChunkDatas(chunks);
-            var chunkTables = MakeChunkTables(chunks, chunkDatas, SurfaceChunkData);
+            var chunkTables = MakeChunkTables(chunks, chunkDatas, ModelsChunkData, SurfaceChunkData);
 
             // Add two-way communication between 'Modified' events from the root IByteData and its children.
             WireChildDataModifiedEvents();
@@ -152,12 +152,14 @@ namespace SF3.Models.Files.MPD {
         private IChunkData[] MakeChunkDatas(ChunkHeader[] chunks) {
             ChunkData = new IChunkData[chunks.Length];
 
-            SurfaceModelChunkIndex = GetSurfaceChunkIndex(chunks);
+            SurfaceModelChunkIndex = GetSurfaceModelChunkIndex(chunks);
             if (SurfaceModelChunkIndex != null)
                 ChunkData[SurfaceModelChunkIndex.Value] = MakeChunkData(SurfaceModelChunkIndex.Value, false);
 
-            if (chunks[1].Exists)
-                ChunkData[1] = MakeChunkData(1, false);
+            ModelsChunkIndex = GetModelsChunkIndex(chunks);
+            if (ModelsChunkIndex != null)
+                ChunkData[ModelsChunkIndex.Value] = MakeChunkData(ModelsChunkIndex.Value, false);
+
             if (chunks[3].Exists)
                 ChunkData[3] = MakeChunkData(3, false, "Individually Compressed");
             if (chunks[5].Exists)
@@ -226,16 +228,26 @@ namespace SF3.Models.Files.MPD {
             return newChunk;
         }
 
-        private int? GetSurfaceChunkIndex(ChunkHeader[] chunks) {
-            if (chunks[2].Exists && chunks[2].ChunkSize == c_SurfaceChunkSize)
-                return 2;
-            else if (chunks[20].Exists && chunks[20].ChunkSize == c_SurfaceChunkSize)
+        private int? GetModelsChunkIndex(ChunkHeader[] chunks) {
+            if (chunks[1].Exists)
+                return 1;
+            else if (chunks[20].Exists && SurfaceModelChunkIndex != 20)
                 return 20;
             else
                 return null;
         }
 
-        private ITable[] MakeChunkTables(ChunkHeader[] chunkHeaders, IChunkData[] chunkDatas, IChunkData surfaceModelChunk) {
+        private int? GetSurfaceModelChunkIndex(ChunkHeader[] chunks) {
+
+            if (chunks[2].Exists && chunks[2].ChunkSize == c_SurfaceModelChunkSize)
+                return 2;
+            else if (chunks[20].Exists && chunks[20].ChunkSize == c_SurfaceModelChunkSize)
+                return 20;
+            else
+                return null;
+        }
+
+        private ITable[] MakeChunkTables(ChunkHeader[] chunkHeaders, IChunkData[] chunkDatas, IChunkData modelsChunk, IChunkData surfaceModelChunk) {
             TextureCollectionType TextureCollectionForChunkIndex(int chunkIndex) {
                 switch (chunkIndex) {
                     case 6:
@@ -264,8 +276,8 @@ namespace SF3.Models.Files.MPD {
 
             var tables = new List<ITable>();
 
-            if (chunkDatas[1] != null) {
-                Models = Models.Create(chunkDatas[1].DecompressedData, NameGetterContext, 0x00, "Models");
+            if (modelsChunk != null) {
+                Models = Models.Create(modelsChunk.DecompressedData, NameGetterContext, 0x00, "Models");
                 tables.AddRange(Models.Tables);
             }
 
@@ -492,6 +504,7 @@ namespace SF3.Models.Files.MPD {
 
         public IChunkData[] ChunkData { get; private set; }
 
+        public IChunkData ModelsChunkData => (ModelsChunkIndex.HasValue) ? ChunkData[ModelsChunkIndex.Value] : null;
         public IChunkData SurfaceChunkData => (SurfaceModelChunkIndex.HasValue) ? ChunkData[SurfaceModelChunkIndex.Value] : null;
 
         [BulkCopyRecurse]
@@ -526,16 +539,18 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public BoundaryTable BoundariesTable { get; private set; }
 
+        public int? SurfaceModelChunkIndex { get; private set; } = null;
+
+        [BulkCopyRecurse]
+        public SurfaceModel SurfaceModel { get; private set; }
+
+        public int? ModelsChunkIndex { get; private set; } = null;
+
         [BulkCopyRecurse]
         public Models Models { get; private set; }
 
         [BulkCopyRecurse]
         public Surface Surface { get; private set; }
-
-        public int? SurfaceModelChunkIndex { get; private set; } = null;
-
-        [BulkCopyRecurse]
-        public SurfaceModel SurfaceModel { get; private set; }
 
         [BulkCopyRecurse]
         public TextureCollection[] TextureCollections { get; private set; }

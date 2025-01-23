@@ -28,6 +28,7 @@ namespace SF3.Models.Files.MPD {
         /// Byte data for (de)compressed data for chunks
         /// </summary>
         IChunkData[] ChunkData { get; }
+        IChunkData ModelsChunkData { get; }
         IChunkData SurfaceChunkData { get; }
 
         MPDHeaderTable MPDHeader { get; }
@@ -48,7 +49,10 @@ namespace SF3.Models.Files.MPD {
 
         int? SurfaceModelChunkIndex { get; }
         SurfaceModel SurfaceModel { get; }
+
+        int? ModelsChunkIndex { get; }
         Models Models { get; }
+
         Surface Surface { get; }
         TextureCollection[] TextureCollections { get; }
 
