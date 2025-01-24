@@ -156,5 +156,27 @@ namespace CommonLib.Utils {
         public static uint BGRA8888toARGB1555(uint input) => BGRA8888toChannels(input).ToARGB1555();
         public static uint BGRA8888toARGB8888(uint input) => BGRA8888toChannels(input).ToARGB8888();
         public static uint BGRA8888toABGR8888(uint input) => BGRA8888toChannels(input).ToBGRA8888();
+
+        // TODO: This is used for TextureAtlases. Please figure out exactly what's going on here!!!
+        public static byte[] ImageDataToSomething(byte[] input) {
+            if (input.Length % 2 != 0)
+                throw new ArgumentException(nameof(input));
+
+            var output = new byte[input.Length * 2];
+            int posIn = 0, posOut = 0;
+            while (posIn < input.Length) {
+                ushort inputPixel = 0;
+                inputPixel |= input[posIn++];
+                inputPixel |= (ushort) (input[posIn++] << 8);
+
+                var outputPixel = ARGB1555toBGRA8888(inputPixel);
+
+                output[posOut++] = (byte) ((outputPixel >> 24) & 0xFF);
+                output[posOut++] = (byte) ((outputPixel >> 16) & 0xFF);
+                output[posOut++] = (byte) ((outputPixel >> 8)  & 0xFF);
+                output[posOut++] = (byte) ((outputPixel >> 0)  & 0xFF);
+            }
+            return output;
+        }
     }
 }

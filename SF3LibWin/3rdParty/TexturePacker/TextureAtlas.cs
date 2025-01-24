@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
+using CommonLib.Utils;
 using OpenTK.Mathematics;
 using SF3.Types;
 using SF3.Win.Extensions;
@@ -118,23 +120,84 @@ namespace SF3.Win.ThirdParty.TexturePacker {
         }
 
         public void DrawPackedNodes(Bitmap atlas) {
-            using (var g = Graphics.FromImage(atlas))
-                DrawPackedNodesSub(atlas, g, _rootNode);
+            DrawPackedNodesSub(atlas, _rootNode);
         }
 
-        private void DrawPackedNodesSub(Bitmap atlas, Graphics graphics, TextureAtlasNode node) {
+        [DllImport("msvcrt.dll",  SetLastError = false)]
+        static extern IntPtr memcpy(IntPtr dest, IntPtr src, int count);
+
+        private void DrawPackedNodesSub(Bitmap atlas, TextureAtlasNode node) {
             if (node == null)
                 return;
 
             if (node.Texture != null) {
-                var image = node.Texture.CreateBitmap();
-                if (node.Rotated)
-                    image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                graphics.DrawImage(image, node.Rect);
+                void CopyImage() {
+                    // Should never happen, but in case it does, fail instead of crashing really hard due to memcpy().
+                    if (atlas.PixelFormat != PixelFormat.Format32bppArgb)
+                        throw new InvalidOperationException();
+
+                    // TODO: support palettes!
+                    if (node.Texture.BytesPerPixel == 1)
+                        return;
+
+                    // Get image data and convert to the format we need for the bitmap buffer.
+                    byte[] imageData = null;
+                    if (node.Texture.BytesPerPixel == 2) {
+                        var imageData1 = node.Texture.CreateImageData();
+                        // TODO: WHAT IS THIS CONVERSION???
+                        imageData = PixelConversion.ImageDataToSomething(node.Texture.CreateImageData());
+                    }
+                    else if (node.Texture.BytesPerPixel == 4)
+                        imageData = node.Texture.CreateImageData();
+
+                    // Rotate the byte array clockwise if 'node.Rotated' is on.
+                    if (node.Rotated) {
+                        var newImageData = new byte[imageData.Length];
+                        var posIn = 0;
+                        for (int inY = 0; inY < node.Texture.Height; inY++) {
+                            var outX = node.Rect.Width - inY - 1;
+                            for (int inX = 0; inX < node.Texture.Width; inX++) {
+                                var outY = inX;
+                                int posOut = (outY * node.Rect.Width + outX) * 4;
+                                for (int c = 0; c < 4; c++)
+                                    newImageData[posOut++] = imageData[posIn++];
+                            }
+                        }
+                        imageData = newImageData;
+                    }
+
+                    // Write to the texture atlas!
+                    var bitmapToData = atlas.LockBits(new Rectangle(0, 0, atlas.Width, atlas.Height), ImageLockMode.WriteOnly, atlas.PixelFormat);
+
+                    // Determine the stride for the output data (the amount of bytes to move per row).
+                    const int bpp = 4;
+                    var strideTo = Math.Abs(bitmapToData.Stride);
+                    if (strideTo != bpp * bitmapToData.Width)
+                        throw new InvalidOperationException();
+
+                    // Determine the stride for the input data.
+                    var strideFrom = node.Rect.Width * 4;
+
+                    // Start writing, row by row.
+                    var posTo = strideTo * node.Rect.Top + (node.Rect.Left * bpp);
+                    unsafe {
+                        fixed (byte* imageDataPtr = imageData) {
+                            nint posFrom = 0;
+                            for (var row = 0; row < node.Rect.Height; row++) {
+                                _ = memcpy(bitmapToData.Scan0 + posTo, (nint) imageDataPtr + posFrom, strideFrom);
+                                posTo += strideTo;
+                                posFrom += strideFrom;
+                            }
+                        }
+                    }
+
+                    atlas.UnlockBits(bitmapToData);
+                }
+                CopyImage();
             }
 
-            DrawPackedNodesSub(atlas, graphics, node.Left);
-            DrawPackedNodesSub(atlas, graphics, node.Right);
+            DrawPackedNodesSub(atlas, node.Left);
+            DrawPackedNodesSub(atlas, node.Right);
         }
 
         private bool disposed = false;

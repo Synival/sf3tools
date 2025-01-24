@@ -17,8 +17,8 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             => Insert(tex, false, TryRotate);
 
         private TextureAtlasNode Insert(ITexture tex, bool rotated, bool tryRotate) {
-            var width  = rotated ? tex.Width  : tex.Height;
-            var height = rotated ? tex.Height : tex.Width;
+            var width  = rotated ? tex.Height : tex.Width;
+            var height = rotated ? tex.Width  : tex.Height;
 
             // If there's no image assigned yet, attempt to add it.
             if (Texture == null) {
@@ -34,6 +34,9 @@ namespace SF3.Win.ThirdParty.TexturePacker {
                     if (Rect.X <= Padding)
                         Left = new TextureAtlasNode(new Rectangle(Padding, Rect.Y + height + Padding, Rect.Width, Rect.Height), Padding, TryRotate);
                     // TODO: else, if there's remaining space below, add that as 'Left'.  we'll need a parent reference for that.
+
+                    if (rotated)
+                        ;
 
                     Rect = new Rectangle(Rect.X, Rect.Y, width, height);
                     Rotated = rotated;
