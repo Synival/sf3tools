@@ -166,7 +166,8 @@ namespace SF3.Win.Extensions {
                 // This needs to happen at a specific point: when the data is populated, and the correct item is selected.
                 // Normally we can wait for a SelectedIndexChanged event, but if the selected index is changed to 0,
                 // no change took place and the event will not trigger. In that case, just trigger on GotFocus.
-                if ((int) e.Value != 0) {
+                var eValueIsNonZero = (e.Value is bool eBool) ? eBool : ((int) e.Value != 0);
+                if (eValueIsNonZero) {
                     void selectedIndexChangedFunc(object sender, EventArgs args) {
                         cb.DroppedDown = true;
                         cb.SelectedIndexChanged -= selectedIndexChangedFunc;
