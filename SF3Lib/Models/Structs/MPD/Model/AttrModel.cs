@@ -1,5 +1,5 @@
-﻿using System;
-using CommonLib.Attributes;
+﻿using CommonLib.Attributes;
+using CommonLib.Types;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD.Model {
@@ -51,68 +51,51 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [TableViewModelColumn(displayOrder: 3.1f, displayName: "MSBon")]
-        public bool Mode_MSBon => (Mode & (1 << 15)) != 0;
+        public bool Mode_MSBon {
+            get => (Mode & (0x01 << 15)) != 0;
+            set => Mode = (ushort) (value ? (Mode | (0x01 << 15)) : (Mode & ~(1 << 15)));
+        }
 
         [TableViewModelColumn(displayOrder: 3.2f, displayName: "WindowMode")]
-        public string Mode_WindowMode {
-            get {
-                var windowMode = (Mode & (3 << 9)) >> 9;
-                switch (windowMode) {
-                    case 0: return "No_Window";
-                    case 1: return "2 (invalid)";
-                    case 2: return "Window_In";
-                    case 3: return "Window_Out";
-                    default: throw new InvalidOperationException("Unreachable code");
-                }
-            }
+        public WindowMode Mode_WindowMode {
+            get => (WindowMode) ((Mode & (0x03 << 9)) >> 9);
+            set => Mode = (ushort) ((Mode & ~(0x03 << 9)) | (((ushort) value & 0x03) << 9));
         }
 
         [TableViewModelColumn(displayOrder: 3.3f, displayName: "HSSon")]
-        public bool Mode_HSSon => (Mode & (1 << 12)) != 0;
+        public bool Mode_HSSon {
+            get => (Mode & (0x01 << 12)) != 0;
+            set => Mode = (ushort) (value ? (Mode | (0x01 << 12)) : (Mode & ~(0x01 << 12)));
+        }
 
         [TableViewModelColumn(displayOrder: 3.4f, displayName: "MESHon")]
-        public bool Mode_MESHon => (Mode & (1 << 8)) != 0;
+        public bool Mode_MESHon {
+            get => (Mode & (0x01 << 8)) != 0;
+            set => Mode = (ushort) (value ? (Mode | (0x01 << 8)) : (Mode & ~(0x01 << 8)));
+        }
 
         [TableViewModelColumn(displayOrder: 3.4f, displayName: "ECdis")]
-        public bool Mode_ECdis => (Mode & (1 << 7)) != 0;
+        public bool Mode_ECdis {
+            get => (Mode & (0x01 << 7)) != 0;
+            set => Mode = (ushort) (value ? (Mode | (0x01 << 7)) : (Mode & ~(0x01 << 7)));
+        }
 
         [TableViewModelColumn(displayOrder: 3.5f, displayName: "SPdis")]
-        public bool Mode_SPdis => (Mode & (1 << 6)) != 0;
+        public bool Mode_SPdis {
+            get => (Mode & (0x01 << 6)) != 0;
+            set => Mode = (ushort) (value ? (Mode | (0x01 << 6)) : (Mode & ~(0x01 << 6)));
+        }
 
         [TableViewModelColumn(displayOrder: 3.6f, displayName: "ColorMode")]
-        public string Mode_ColorMode {
-            get {
-                var colorMode = (Mode & (0x07 << 3)) >> 3;
-                switch (colorMode) {
-                    case 0: return "CL16Bnk";
-                    case 1: return "CL16Look";
-                    case 2: return "CL64Bnk";
-                    case 3: return "CL128Bnk";
-                    case 4: return "CL256Bnk";
-                    case 5: return "CL32KRGB";
-                    case 6: return "6 (invalid)";
-                    case 7: return "7 (invalid)";
-                    default: throw new InvalidOperationException("Unreachable code");
-                }
-            }
+        public ColorMode Mode_ColorMode {
+            get => (ColorMode) ((Mode & (0x07 << 3)) >> 3);
+            set => Mode = (ushort) ((Mode & ~(0x07 << 3)) | (((ushort) value & 0x07) << 3));
         }
 
         [TableViewModelColumn(displayOrder: 3.7f, displayName: "DrawMode")]
-        public string Mode_DrawMode {
-            get {
-                var drawMode = Mode & 0x07;
-                switch (drawMode) {
-                    case 0: return "CL_Replace";
-                    case 1: return "CL_Shadow";
-                    case 2: return "CL_Half";
-                    case 3: return "CL_Trans";
-                    case 4: return "CL_Gouraud";
-                    case 5: return "5 (invalid)";
-                    case 6: return "6 (invalid)";
-                    case 7: return "7 (invalid)";
-                    default: throw new InvalidOperationException("Unreachable code");
-                }
-            }
+        public DrawMode Mode_DrawMode {
+            get => (DrawMode) (Mode & 0x07);
+            set => Mode = (ushort) ((Mode & ~0x07) | ((ushort) value & 0x07));
         }
 
         [BulkCopy]
