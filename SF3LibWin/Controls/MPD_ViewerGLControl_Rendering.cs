@@ -300,10 +300,10 @@ namespace SF3.Win.Controls {
                             var pdata = _models.ModelsByMemoryAddress[model.PData1];
 
                             var modelMatrix =
-                                Matrix4.CreateScale(model.ScaleX.Float, model.ScaleY.Float, model.ScaleZ.Float) *
-                                Matrix4.CreateRotationX(model.Angle1.Float * (float) Math.PI * -2.00f) *
-                                Matrix4.CreateRotationY(model.Angle2.Float * (float) Math.PI * -2.00f) *
-                                Matrix4.CreateRotationZ(model.Angle3.Float * (float) Math.PI * 2.00f) *
+                                Matrix4.CreateScale(model.ScaleX, model.ScaleY, model.ScaleZ) *
+                                Matrix4.CreateRotationX(model.Angle1 * (float) Math.PI * -2.00f) *
+                                Matrix4.CreateRotationY(model.Angle2 * (float) Math.PI * -2.00f) *
+                                Matrix4.CreateRotationZ(model.Angle3 * (float) Math.PI * 2.00f) *
                                 Matrix4.CreateTranslation(model.PositionX / -32.0f - 32.0f, model.PositionY / -32.0f, model.PositionZ / 32.0f + 32.0f);
 
                             var normalMatrix = new Matrix3(modelMatrix).Inverted();

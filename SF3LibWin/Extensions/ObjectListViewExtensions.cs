@@ -239,6 +239,7 @@ namespace SF3.Win.Extensions {
             ObjectListView.EditorRegistry.Register(typeof(ushort), typeof(UInt16UpDownControl));
             ObjectListView.EditorRegistry.Register(typeof(int), typeof(Int32UpDownControl));
             ObjectListView.EditorRegistry.Register(typeof(uint), typeof(UInt32UpDownControl));
+            ObjectListView.EditorRegistry.Register(typeof(float), typeof(FloatUpDownControl));
 
             var typesToHijack = new Type[] {
                 typeof(short),
@@ -246,7 +247,8 @@ namespace SF3.Win.Extensions {
                 typeof(long),
                 typeof(ushort),
                 typeof(uint),
-                typeof(ulong)
+                typeof(ulong),
+                typeof(float)
             };
 
             foreach (var type in typesToHijack) {

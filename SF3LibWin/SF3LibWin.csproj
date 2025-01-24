@@ -100,6 +100,9 @@
     <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Controls\FloatUpDownControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Controls\MPD_ViewerGLControl_MouseControls.cs">
       <SubType>Component</SubType>
     </Compile>

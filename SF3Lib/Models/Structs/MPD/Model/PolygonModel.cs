@@ -24,23 +24,23 @@ namespace SF3.Models.Structs.MPD.Model {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0, minWidth: 75)]
-        public FIXED NormalX {
-            get => Data.GetFIXED(_normalXAddr);
-            set => Data.SetFIXED(_normalXAddr, value);
+        public float NormalX {
+            get => Data.GetFIXED(_normalXAddr).Float;
+            set => Data.SetFIXED(_normalXAddr, new FIXED(value, 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 1, minWidth: 75)]
-        public FIXED NormalY {
-            get => Data.GetFIXED(_normalYAddr);
-            set => Data.SetFIXED(_normalYAddr, value);
+        public float NormalY {
+            get => Data.GetFIXED(_normalYAddr).Float;
+            set => Data.SetFIXED(_normalYAddr, new FIXED(value, 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 2, minWidth: 75)]
-        public FIXED NormalZ {
-            get => Data.GetFIXED(_normalZAddr);
-            set => Data.SetFIXED(_normalZAddr, value);
+        public float NormalZ {
+            get => Data.GetFIXED(_normalZAddr).Float;
+            set => Data.SetFIXED(_normalZAddr, new FIXED(value, 0));
         }
 
         [BulkCopy]

@@ -171,44 +171,44 @@ namespace SF3.Models.Structs.MPD.Model {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 11)]
-        public CompressedFIXED Angle1 {
-            get => Data.GetCompressedFIXED(_angle1Address);
-            set => Data.SetCompressedFIXED(_angle1Address, value);
+        public float Angle1 {
+            get => Data.GetCompressedFIXED(_angle1Address).Float;
+            set => Data.SetCompressedFIXED(_angle1Address, new CompressedFIXED(value, 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 12)]
-        public CompressedFIXED Angle2 {
-            get => Data.GetCompressedFIXED(_angle2Address);
-            set => Data.SetCompressedFIXED(_angle2Address, value);
+        public float Angle2 {
+            get => Data.GetCompressedFIXED(_angle2Address).Float;
+            set => Data.SetCompressedFIXED(_angle2Address, new CompressedFIXED(value, 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 13)]
-        public CompressedFIXED Angle3 {
-            get => Data.GetCompressedFIXED(_angle3Address);
-            set => Data.SetCompressedFIXED(_angle3Address, value);
+        public float Angle3 {
+            get => Data.GetCompressedFIXED(_angle3Address).Float;
+            set => Data.SetCompressedFIXED(_angle3Address, new CompressedFIXED(value, 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 14)]
-        public FIXED ScaleX {
-            get => Data.GetFIXED(_scaleXAddress);
-            set => Data.SetFIXED(_scaleXAddress, value);
+        public float ScaleX {
+            get => Data.GetFIXED(_scaleXAddress).Float;
+            set => Data.SetFIXED(_scaleXAddress, new FIXED(value, 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 15)]
-        public FIXED ScaleY {
-            get => Data.GetFIXED(_scaleYAddress);
-            set => Data.SetFIXED(_scaleYAddress, value);
+        public float ScaleY {
+            get => Data.GetFIXED(_scaleYAddress).Float;
+            set => Data.SetFIXED(_scaleYAddress, new FIXED(value, 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 16)]
-        public FIXED ScaleZ {
-            get => Data.GetFIXED(_scaleZAddress);
-            set => Data.SetFIXED(_scaleZAddress, value);
+        public float ScaleZ {
+            get => Data.GetFIXED(_scaleZAddress).Float;
+            set => Data.SetFIXED(_scaleZAddress, new FIXED(value, 0));
         }
     }
 }
