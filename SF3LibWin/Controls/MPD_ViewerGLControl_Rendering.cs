@@ -2,11 +2,13 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
 using System.Runtime.InteropServices;
 using CommonLib.Utils;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
+using SF3.Models.Structs.MPD.Model;
 using SF3.Win.OpenGL;
 using SF3.Win.OpenGL.MPD_File;
 
@@ -294,25 +296,24 @@ namespace SF3.Win.Controls {
                 using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
                 using (_world.ObjectShader.Use()) {
                     if (_models?.Models != null) {
-                        foreach (var model in _models.Models) {
-                            if (model.PData1 == 0 || !_models.ModelsByMemoryAddress.ContainsKey(model.PData1))
-                                continue;
-                            var pdata = _models.ModelsByMemoryAddress[model.PData1];
+                        var modelsWithGroups = _models.Models
+                            .Select(x => new { Model = x, ModelGroup = _models.ModelsByMemoryAddress.TryGetValue(x.PData1, out ModelGroup pd) ? pd : null })
+                            .Where(x => x.ModelGroup != null)
+                            .ToArray();
 
-                            var modelMatrix =
-                                Matrix4.CreateScale(model.ScaleX, model.ScaleY, model.ScaleZ) *
-                                Matrix4.CreateRotationX(model.Angle1 * (float) Math.PI * -2.00f) *
-                                Matrix4.CreateRotationY(model.Angle2 * (float) Math.PI * -2.00f) *
-                                Matrix4.CreateRotationZ(model.Angle3 * (float) Math.PI * 2.00f) *
-                                Matrix4.CreateTranslation(model.PositionX / -32.0f - 32.0f, model.PositionY / -32.0f, model.PositionZ / 32.0f + 32.0f);
-
-                            var normalMatrix = new Matrix3(modelMatrix).Inverted();
-                            normalMatrix.Transpose();
-
-                            UpdateShaderModelMatrix(_world.ObjectShader, modelMatrix);
-                            UpdateShaderNormalMatrix(_world.ObjectShader, normalMatrix);
-                            pdata.Draw(_world.ObjectShader);
+                        // Draw solid textured models.
+                        foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidTexturedModel != null).ToArray()) {
+                            SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
+                            mwg.ModelGroup.SolidTexturedModel.Draw(_world.ObjectShader);
                         }
+
+                        // Draw semi-transparent textured models.
+                        GL.DepthMask(false);
+                        foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SemiTransparentTexturedModel != null).ToArray()) {
+                            SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
+                            mwg.ModelGroup.SemiTransparentTexturedModel.Draw(_world.ObjectShader);
+                        }
+                        GL.DepthMask(true);
                     }
 
                     UpdateShaderModelMatrix(_world.ObjectShader, Matrix4.Identity);
@@ -405,6 +406,23 @@ namespace SF3.Win.Controls {
 #endif
         }
 
+        private void SetModelAndNormalMatricesForModel(Model model, Shader shader) {
+            // TODO: This can be cached!!
+            var modelMatrix =
+                Matrix4.CreateScale(model.ScaleX, model.ScaleY, model.ScaleZ) *
+                Matrix4.CreateRotationX(model.Angle1 * (float) Math.PI * -2.00f) *
+                Matrix4.CreateRotationY(model.Angle2 * (float) Math.PI * -2.00f) *
+                Matrix4.CreateRotationZ(model.Angle3 * (float) Math.PI * 2.00f) *
+                Matrix4.CreateTranslation(model.PositionX / -32.0f - 32.0f, model.PositionY / -32.0f, model.PositionZ / 32.0f + 32.0f);
+
+            // TODO: This can be cached!!
+            var normalMatrix = new Matrix3(modelMatrix).Inverted();
+            normalMatrix.Transpose();
+
+            UpdateShaderModelMatrix(shader, modelMatrix);
+            UpdateShaderNormalMatrix(shader, normalMatrix);
+        }
+
         private void DrawSelectionScene() {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             if (_surfaceModel?.Blocks == null)
@@ -426,9 +444,10 @@ namespace SF3.Win.Controls {
                         Invalidate();
 
             if (_models?.ModelsByMemoryAddress != null)
-                foreach (var model in _models.ModelsByMemoryAddress)
-                    if (model.Value.UpdateAnimatedTextures() == true)
-                        Invalidate();
+                foreach (var modelGroup in _models.ModelsByMemoryAddress.Values)
+                    foreach (var model in modelGroup.Models)
+                        if (model.UpdateAnimatedTextures() == true)
+                            Invalidate();
         }
 
         private static bool _drawWireframe = true;

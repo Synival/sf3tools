@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
-using CommonLib.Utils;
+using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
@@ -11,7 +11,7 @@ using SF3.Types;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class ModelResources {
+    public class ModelResources : IDisposable {
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing) {
@@ -78,17 +78,15 @@ namespace SF3.Win.OpenGL.MPD_File {
                 .ToDictionary(x => (int) x.TextureID, x => x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray())
                 : [];
 
+            bool modelExists = false;
             var quads = new List<Quad>();
+            var semiTransparentQuads = new List<Quad>();
+
             for (var i = 0; i < polygons.Length; i++) {
                 var polygon = polygons[i];
                 var attr = attrs[i];
 
-                // Skip transparent polygons.
-                if ((attr.ColorNo & 0x8000) == 0x8000)
-                    continue;
-
                 // Get texture. Fetch animated textures if possible.
-                // TODO: is there a way to specify UV coordinates?
                 var textureId = attr.TextureNo;
                 TextureAnimation anim = null;
                 if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
@@ -101,11 +99,14 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var flip = (TextureFlipType) (attr.Dir & 0x00F0);
 
                 var color = new Vector4(1);
-                if (attr.ColorNo != 0) {
-                    var c = PixelConversion.ABGR1555toChannels(attr.ColorNo);
-                    color = new Vector4(c.r / 248.0f, c.g / 248.0f, c.b / 248.0f, 1.0f);
-                }
 
+                // Apply semi-transparency for the appropriate draw mode.
+                if (attr.Mode_DrawMode == DrawMode.CL_Trans)
+                    color[3] /= 2;
+
+                // TODO: Proper color handling!
+
+                // TODO: There isn't always a texture. What to do?
                 if (anim == null)
                     continue;
 
@@ -130,14 +131,27 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var newQuad = new Quad(polyVertices, anim, TextureRotateType.NoRotation, flip, color);
                 newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
                 newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "twoSided", 4, twoSidedVboData));
-                quads.Add(newQuad);
+
+                if (attr.Mode_DrawMode == DrawMode.CL_Trans)
+                    semiTransparentQuads.Add(newQuad);
+                else
+                    quads.Add(newQuad);
+
+                modelExists = true;
             }
 
-            if (quads.Count > 0)
-                ModelsByMemoryAddress[pdataAddressInMemory] = new QuadModel(quads.ToArray());
+            var solidTexturedModel           = (quads.Count > 0)                ? new QuadModel(quads.ToArray()) : null;
+            var semiTransparentTexturedModel = (semiTransparentQuads.Count > 0) ? new QuadModel(semiTransparentQuads.ToArray()) : null;
+
+            if (modelExists) {
+                ModelsByMemoryAddress[pdataAddressInMemory] = new ModelGroup(
+                    solidTexturedModel,
+                    semiTransparentTexturedModel
+                );
+            }
         }
 
-        public Dictionary<int, QuadModel> ModelsByMemoryAddress { get; } = [];
+        public Dictionary<int, ModelGroup> ModelsByMemoryAddress { get; } = [];
         public Model[] Models { get; private set; }
     }
 }
