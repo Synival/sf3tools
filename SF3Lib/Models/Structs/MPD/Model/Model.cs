@@ -23,6 +23,8 @@ namespace SF3.Models.Structs.MPD.Model {
         private readonly int _scaleXAddress;
         private readonly int _scaleYAddress;
         private readonly int _scaleZAddress;
+        private readonly int _modelIdAddress;
+        private readonly int _flagsAddress;
 
         public Model(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x3C) {
@@ -45,7 +47,8 @@ namespace SF3.Models.Structs.MPD.Model {
             _scaleXAddress    = Address + 0x2C; // 4 bytes
             _scaleYAddress    = Address + 0x30; // 4 bytes
             _scaleZAddress    = Address + 0x34; // 4 bytes
-            // (4 bytes of padding)
+            _modelIdAddress   = Address + 0x38; // 2 bytes
+            _flagsAddress     = Address + 0x3A; // 2 bytes
         }
 
         [BulkCopy]
@@ -135,7 +138,7 @@ namespace SF3.Models.Structs.MPD.Model {
                 };
             }
 
-            int this[int index] {
+            public int this[int index] {
                 get => _accessors[index].Value;
                 set => _accessors[index].Value = value;
             }
@@ -209,6 +212,20 @@ namespace SF3.Models.Structs.MPD.Model {
         public float ScaleZ {
             get => Data.GetFIXED(_scaleZAddress).Float;
             set => Data.SetFIXED(_scaleZAddress, new FIXED(value, 0));
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 17)]
+        public ushort ModelID {
+            get => (ushort) Data.GetWord(_modelIdAddress);
+            set => Data.SetWord(_modelIdAddress, value);
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 18, displayFormat: "X4")]
+        public ushort Flags {
+            get => (ushort) Data.GetWord(_flagsAddress);
+            set => Data.SetWord(_flagsAddress, value);
         }
     }
 }
