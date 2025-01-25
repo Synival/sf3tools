@@ -128,9 +128,13 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var vertexNormals = new Vector3[] { normal, normal, normal, normal };
                 var normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
+                var applyLighting = ((attr.Sort & 0x08) == 0x08) ? 1.0f : 0.0f;
+                var applyLightingVboData = new float[,] {{applyLighting}, {applyLighting}, {applyLighting}, {applyLighting}};
+
                 var newQuad = new Quad(polyVertices, anim, TextureRotateType.NoRotation, flip, color);
                 newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
                 newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "twoSided", 4, twoSidedVboData));
+                newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, applyLightingVboData));
 
                 if (attr.Mode_DrawMode == DrawMode.CL_Trans)
                     semiTransparentQuads.Add(newQuad);

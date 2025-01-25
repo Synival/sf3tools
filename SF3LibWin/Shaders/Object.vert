@@ -18,6 +18,7 @@ layout (location = 5) in vec2 texCoordTerrainTypes;
 layout (location = 6) in vec2 texCoordEventIDs;
 
 layout (location = 7) in float twoSided;
+layout (location = 8) in float applyLighting;
 
 out vec4 colorFrag;
 out vec3 glowFrag;
@@ -48,7 +49,7 @@ void main() {
         // - the color used changes more rapidly the less direct the light is due to the exponent
         : (normalLightDot < 0) ? 0 : (0.666 * normalLightDot + 0.334 * pow(normalLightDot, 12)) * 1.999;
 
-    lightColorFrag           = vec4(clamp(texture(textureLighting, vec2(0, lighting)).xyz - 0.5, -0.5, 0.5), 0);
+    lightColorFrag           = (applyLighting > 0.50) ? vec4(clamp(texture(textureLighting, vec2(0, lighting)).xyz - 0.5, -0.5, 0.5), 0) : vec4(0, 0, 0, 0);
     texCoordAtlasFrag        = texCoordAtlas;
     texCoordTerrainTypesFrag = texCoordTerrainTypes;
     texCoordEventIDsFrag     = texCoordEventIDs;
