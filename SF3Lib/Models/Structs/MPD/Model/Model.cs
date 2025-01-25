@@ -17,9 +17,9 @@ namespace SF3.Models.Structs.MPD.Model {
         private readonly int _positionXAddress;
         private readonly int _positionYAddress;
         private readonly int _positionZAddress;
-        private readonly int _angle1Address;
-        private readonly int _angle2Address;
-        private readonly int _angle3Address;
+        private readonly int _angleXAddress;
+        private readonly int _angleYAddress;
+        private readonly int _angleZAddress;
         private readonly int _scaleXAddress;
         private readonly int _scaleYAddress;
         private readonly int _scaleZAddress;
@@ -41,9 +41,9 @@ namespace SF3.Models.Structs.MPD.Model {
             _positionXAddress = Address + 0x20; // 2 bytes
             _positionYAddress = Address + 0x22; // 2 bytes
             _positionZAddress = Address + 0x24; // 2 bytes
-            _angle1Address    = Address + 0x26; // 2 bytes
-            _angle2Address    = Address + 0x28; // 2 bytes
-            _angle3Address    = Address + 0x2A; // 2 bytes
+            _angleXAddress    = Address + 0x26; // 2 bytes
+            _angleYAddress    = Address + 0x28; // 2 bytes
+            _angleZAddress    = Address + 0x2A; // 2 bytes
             _scaleXAddress    = Address + 0x2C; // 4 bytes
             _scaleYAddress    = Address + 0x30; // 4 bytes
             _scaleZAddress    = Address + 0x34; // 4 bytes
@@ -174,23 +174,23 @@ namespace SF3.Models.Structs.MPD.Model {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 11)]
-        public float Angle1 {
-            get => Data.GetCompressedFIXED(_angle1Address).Float;
-            set => Data.SetCompressedFIXED(_angle1Address, new CompressedFIXED(value, 0));
+        public float AngleX {
+            get => Data.GetCompressedFIXED(_angleXAddress).Float;
+            set => Data.SetCompressedFIXED(_angleXAddress, new CompressedFIXED(value, 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 12)]
-        public float Angle2 {
-            get => Data.GetCompressedFIXED(_angle2Address).Float;
-            set => Data.SetCompressedFIXED(_angle2Address, new CompressedFIXED(value, 0));
+        public float AngleY {
+            get => Data.GetCompressedFIXED(_angleYAddress).Float;
+            set => Data.SetCompressedFIXED(_angleYAddress, new CompressedFIXED(value, 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 13)]
-        public float Angle3 {
-            get => Data.GetCompressedFIXED(_angle3Address).Float;
-            set => Data.SetCompressedFIXED(_angle3Address, new CompressedFIXED(value, 0));
+        public float AngleZ {
+            get => Data.GetCompressedFIXED(_angleZAddress).Float;
+            set => Data.SetCompressedFIXED(_angleZAddress, new CompressedFIXED(value, 0));
         }
 
         [BulkCopy]

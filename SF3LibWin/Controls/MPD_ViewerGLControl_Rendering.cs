@@ -413,9 +413,9 @@ namespace SF3.Win.Controls {
             // TODO: This can be cached!!
             var modelMatrix =
                 Matrix4.CreateScale(model.ScaleX, model.ScaleY, model.ScaleZ) *
-                Matrix4.CreateRotationX(model.Angle1 * (float) Math.PI * -2.00f) *
-                Matrix4.CreateRotationY(model.Angle2 * (float) Math.PI * -2.00f + angleYAdjust) *
-                Matrix4.CreateRotationZ(model.Angle3 * (float) Math.PI * 2.00f) *
+                Matrix4.CreateRotationX(model.AngleX * (float) Math.PI * -2.00f) *
+                Matrix4.CreateRotationY(model.AngleY * (float) Math.PI * -2.00f + angleYAdjust) *
+                Matrix4.CreateRotationZ(model.AngleZ * (float) Math.PI * 2.00f) *
                 Matrix4.CreateTranslation(model.PositionX / -32.0f - 32.0f, model.PositionY / -32.0f, model.PositionZ / 32.0f + 32.0f);
 
             // TODO: This can be cached!!
