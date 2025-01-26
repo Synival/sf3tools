@@ -10,7 +10,7 @@
         Desert        = 0x07,
         GreyMountain  = 0x08,
         Water         = 0x09,
-        UnknownA      = 0x0A,
+        CantStay      = 0x0A,
         Sand          = 0x0B,
         EnemyOnly     = 0x0C,
         PlayerOnly    = 0x0D,

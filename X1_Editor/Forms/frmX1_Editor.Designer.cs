@@ -45,7 +45,7 @@ namespace SF3.X1_Editor.Forms
             lvcTileDataDesert = new BrightIdeasSoftware.OLVColumn();
             lvcTileDataGreyMountain = new BrightIdeasSoftware.OLVColumn();
             lvcTileDataWater = new BrightIdeasSoftware.OLVColumn();
-            lvcTileDataUnknownA = new BrightIdeasSoftware.OLVColumn();
+            lvcTileDataCantStay = new BrightIdeasSoftware.OLVColumn();
             lvcTileDataSand = new BrightIdeasSoftware.OLVColumn();
             lvcTileDataEnemyOnly = new BrightIdeasSoftware.OLVColumn();
             lvcTileDataPlayerOnly = new BrightIdeasSoftware.OLVColumn();
@@ -181,7 +181,7 @@ namespace SF3.X1_Editor.Forms
             olvTileData.AllColumns.Add(lvcTileDataDesert);
             olvTileData.AllColumns.Add(lvcTileDataGreyMountain);
             olvTileData.AllColumns.Add(lvcTileDataWater);
-            olvTileData.AllColumns.Add(lvcTileDataUnknownA);
+            olvTileData.AllColumns.Add(lvcTileDataCantStay);
             olvTileData.AllColumns.Add(lvcTileDataSand);
             olvTileData.AllColumns.Add(lvcTileDataEnemyOnly);
             olvTileData.AllColumns.Add(lvcTileDataPlayerOnly);
@@ -190,7 +190,7 @@ namespace SF3.X1_Editor.Forms
             olvTileData.AllowColumnReorder = true;
             olvTileData.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             olvTileData.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            olvTileData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcTileDataName, lvcTileDataID, lvcTileDataAddress, lvcTileDataNoEntry, lvcTileDataAir, lvcTileDataGrassland, lvcTileDataDirt, lvcTileDataDarkGrass, lvcTileDataForest, lvcTileDataBrownMountain, lvcTileDataDesert, lvcTileDataGreyMountain, lvcTileDataWater, lvcTileDataUnknownA, lvcTileDataSand, lvcTileDataEnemyOnly, lvcTileDataPlayerOnly, lvcTileDataUnknownE, lvcTileDataUnknownF });
+            olvTileData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcTileDataName, lvcTileDataID, lvcTileDataAddress, lvcTileDataNoEntry, lvcTileDataAir, lvcTileDataGrassland, lvcTileDataDirt, lvcTileDataDarkGrass, lvcTileDataForest, lvcTileDataBrownMountain, lvcTileDataDesert, lvcTileDataGreyMountain, lvcTileDataWater, lvcTileDataCantStay, lvcTileDataSand, lvcTileDataEnemyOnly, lvcTileDataPlayerOnly, lvcTileDataUnknownE, lvcTileDataUnknownF });
             olvTileData.FullRowSelect = true;
             olvTileData.GridLines = true;
             olvTileData.HasCollapsibleGroups = false;
@@ -298,12 +298,12 @@ namespace SF3.X1_Editor.Forms
             lvcTileDataWater.Text = "Water";
             lvcTileDataWater.Width = 65;
             // 
-            // lvcTileDataUnknownA
+            // lvcTileDataCantStay
             // 
-            lvcTileDataUnknownA.AspectName = "TileUnknownA";
-            lvcTileDataUnknownA.AspectToStringFormat = "{0:X}";
-            lvcTileDataUnknownA.Text = "UnknownA";
-            lvcTileDataUnknownA.Width = 70;
+            lvcTileDataCantStay.AspectName = "TileCantStay";
+            lvcTileDataCantStay.AspectToStringFormat = "{0:X}";
+            lvcTileDataCantStay.Text = "CantStay";
+            lvcTileDataCantStay.Width = 70;
             // 
             // lvcTileDataSand
             // 
@@ -1173,7 +1173,7 @@ namespace SF3.X1_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcTileDataDesert;
         private BrightIdeasSoftware.OLVColumn lvcTileDataGreyMountain;
         private BrightIdeasSoftware.OLVColumn lvcTileDataWater;
-        private BrightIdeasSoftware.OLVColumn lvcTileDataUnknownA;
+        private BrightIdeasSoftware.OLVColumn lvcTileDataCantStay;
         private BrightIdeasSoftware.OLVColumn lvcTileDataSand;
         private BrightIdeasSoftware.OLVColumn lvcTileDataEnemyOnly;
         private BrightIdeasSoftware.OLVColumn lvcTileDataPlayerOnly;
