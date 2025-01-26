@@ -47,8 +47,8 @@ namespace SF3.X1_Editor.Forms
             lvcTileDataWater = new BrightIdeasSoftware.OLVColumn();
             lvcTileDataUnknownA = new BrightIdeasSoftware.OLVColumn();
             lvcTileDataSand = new BrightIdeasSoftware.OLVColumn();
-            lvcTileDataUnknownC = new BrightIdeasSoftware.OLVColumn();
-            lvcTileDataUnknownD = new BrightIdeasSoftware.OLVColumn();
+            lvcTileDataEnemyOnly = new BrightIdeasSoftware.OLVColumn();
+            lvcTileDataPlayerOnly = new BrightIdeasSoftware.OLVColumn();
             lvcTileDataUnknownE = new BrightIdeasSoftware.OLVColumn();
             lvcTileDataUnknownF = new BrightIdeasSoftware.OLVColumn();
             tabWarpTable = new System.Windows.Forms.TabPage();
@@ -183,14 +183,14 @@ namespace SF3.X1_Editor.Forms
             olvTileData.AllColumns.Add(lvcTileDataWater);
             olvTileData.AllColumns.Add(lvcTileDataUnknownA);
             olvTileData.AllColumns.Add(lvcTileDataSand);
-            olvTileData.AllColumns.Add(lvcTileDataUnknownC);
-            olvTileData.AllColumns.Add(lvcTileDataUnknownD);
+            olvTileData.AllColumns.Add(lvcTileDataEnemyOnly);
+            olvTileData.AllColumns.Add(lvcTileDataPlayerOnly);
             olvTileData.AllColumns.Add(lvcTileDataUnknownE);
             olvTileData.AllColumns.Add(lvcTileDataUnknownF);
             olvTileData.AllowColumnReorder = true;
             olvTileData.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             olvTileData.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            olvTileData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcTileDataName, lvcTileDataID, lvcTileDataAddress, lvcTileDataNoEntry, lvcTileDataAir, lvcTileDataGrassland, lvcTileDataDirt, lvcTileDataDarkGrass, lvcTileDataForest, lvcTileDataBrownMountain, lvcTileDataDesert, lvcTileDataGreyMountain, lvcTileDataWater, lvcTileDataUnknownA, lvcTileDataSand, lvcTileDataUnknownC, lvcTileDataUnknownD, lvcTileDataUnknownE, lvcTileDataUnknownF });
+            olvTileData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvcTileDataName, lvcTileDataID, lvcTileDataAddress, lvcTileDataNoEntry, lvcTileDataAir, lvcTileDataGrassland, lvcTileDataDirt, lvcTileDataDarkGrass, lvcTileDataForest, lvcTileDataBrownMountain, lvcTileDataDesert, lvcTileDataGreyMountain, lvcTileDataWater, lvcTileDataUnknownA, lvcTileDataSand, lvcTileDataEnemyOnly, lvcTileDataPlayerOnly, lvcTileDataUnknownE, lvcTileDataUnknownF });
             olvTileData.FullRowSelect = true;
             olvTileData.GridLines = true;
             olvTileData.HasCollapsibleGroups = false;
@@ -314,17 +314,17 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcTileDataEnemyOnly
             // 
-            lvcTileDataUnknownC.AspectName = "TileEnemyOnly";
-            lvcTileDataUnknownC.AspectToStringFormat = "{0:X}";
-            lvcTileDataUnknownC.Text = "EnemyOnly";
-            lvcTileDataUnknownC.Width = 70;
+            lvcTileDataEnemyOnly.AspectName = "TileEnemyOnly";
+            lvcTileDataEnemyOnly.AspectToStringFormat = "{0:X}";
+            lvcTileDataEnemyOnly.Text = "EnemyOnly";
+            lvcTileDataEnemyOnly.Width = 70;
             // 
-            // lvcTileDataUnknownD
+            // lvcTileDataPlayerOnly
             // 
-            lvcTileDataUnknownD.AspectName = "TileUnknownD";
-            lvcTileDataUnknownD.AspectToStringFormat = "{0:X}";
-            lvcTileDataUnknownD.Text = "UnknownD";
-            lvcTileDataUnknownD.Width = 70;
+            lvcTileDataPlayerOnly.AspectName = "TilePlayerOnly";
+            lvcTileDataPlayerOnly.AspectToStringFormat = "{0:X}";
+            lvcTileDataPlayerOnly.Text = "PlayerOnly";
+            lvcTileDataPlayerOnly.Width = 70;
             // 
             // lvcTileDataUnknownE
             // 
@@ -1175,8 +1175,8 @@ namespace SF3.X1_Editor.Forms
         private BrightIdeasSoftware.OLVColumn lvcTileDataWater;
         private BrightIdeasSoftware.OLVColumn lvcTileDataUnknownA;
         private BrightIdeasSoftware.OLVColumn lvcTileDataSand;
-        private BrightIdeasSoftware.OLVColumn lvcTileDataUnknownC;
-        private BrightIdeasSoftware.OLVColumn lvcTileDataUnknownD;
+        private BrightIdeasSoftware.OLVColumn lvcTileDataEnemyOnly;
+        private BrightIdeasSoftware.OLVColumn lvcTileDataPlayerOnly;
         private BrightIdeasSoftware.OLVColumn lvcTileDataUnknownE;
         private BrightIdeasSoftware.OLVColumn lvcTileDataUnknownF;
         private System.Windows.Forms.TabPage tabWarpTable;

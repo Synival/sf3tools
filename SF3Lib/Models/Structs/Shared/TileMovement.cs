@@ -17,7 +17,7 @@ namespace SF3.Models.Structs.Shared {
         private readonly int unknown0a;
         private readonly int sand;
         private readonly int enemyOnly;
-        private readonly int unknown0d;
+        private readonly int playerOnly;
         private readonly int unknown0e;
         private readonly int unknown0f;
 
@@ -33,11 +33,11 @@ namespace SF3.Models.Structs.Shared {
             desert        = Address + 0x07;
             greyMountain  = Address + 0x08;
 
-            water     = Address + 0x09;
+            water         = Address + 0x09;
             unknown0a     = Address + 0x0a;
-            sand     = Address + 0x0b;
+            sand          = Address + 0x0b;
             enemyOnly     = Address + 0x0c;
-            unknown0d     = Address + 0x0d;
+            playerOnly    = Address + 0x0d;
             unknown0e     = Address + 0x0e;
             unknown0f     = Address + 0x0f;
         }
@@ -121,9 +121,9 @@ namespace SF3.Models.Structs.Shared {
         }
 
         [BulkCopy]
-        public int TileUnknownD {
-            get => Data.GetByte(unknown0d);
-            set => Data.SetByte(unknown0d, (byte) value);
+        public int TilePlayerOnly {
+            get => Data.GetByte(playerOnly);
+            set => Data.SetByte(playerOnly, (byte) value);
         }
 
         [BulkCopy]

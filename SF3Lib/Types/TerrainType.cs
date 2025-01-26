@@ -13,7 +13,7 @@
         UnknownA      = 0x0A,
         Sand          = 0x0B,
         EnemyOnly     = 0x0C,
-        UnknownD      = 0x0D,
+        PlayerOnly    = 0x0D,
         UnknownE      = 0x0E,
         UnknownF      = 0x0F,
     }
