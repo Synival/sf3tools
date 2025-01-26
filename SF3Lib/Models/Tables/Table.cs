@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Models.Structs;
@@ -40,6 +41,7 @@ namespace SF3.Models.Tables {
         public bool IsLoaded => _rows != null;
         public IStruct[] RowObjs => _rows;
         public int Length => RowObjs.Length;
+        public int SizeInBytes => IsLoaded ? _rows.Sum(x => x.Size) : 0;
 
         [BulkCopyRecurse]
         public T[] Rows => _rows;

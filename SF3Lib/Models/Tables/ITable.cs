@@ -49,6 +49,11 @@ namespace SF3.Models.Tables {
         /// Number of elements in the table.
         /// </summary>
         int Length { get; }
+
+        /// <summary>
+        /// Returns the number of bytes occupied by all rows together.
+        /// </summary>
+        int SizeInBytes { get; }
     }
 
     /// <summary>
