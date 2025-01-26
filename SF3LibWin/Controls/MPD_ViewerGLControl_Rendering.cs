@@ -408,7 +408,7 @@ namespace SF3.Win.Controls {
 
         private void SetModelAndNormalMatricesForModel(Model model, Shader shader) {
             var faceCameraAlways = (model.Flags & 0x08) == 0x08;
-            var angleYAdjust = faceCameraAlways ? (float) (Yaw / 180.0f * Math.PI) : 0.00f;
+            var angleYAdjust = faceCameraAlways ? (float) ((Yaw + 180.0f) / 180.0f * Math.PI) : 0.00f;
 
             // TODO: This can be cached!!
             var modelMatrix =
