@@ -32,6 +32,7 @@ namespace SF3.Models.Files.MPD {
         IChunkData SurfaceChunkData { get; }
 
         MPDHeaderTable MPDHeader { get; }
+        TextureAnimationAltTable TextureAnimationsAlt { get; }
         ColorTable[] TexturePalettes { get; }
         ChunkHeaderTable ChunkHeader { get; }
         ColorTable LightPalette { get; }

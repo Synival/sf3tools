@@ -132,6 +132,8 @@ namespace SF3.Models.Files.MPD {
 
             if (header.OffsetTextureAnimations != 0)
                 tables.Add(TextureAnimations = TextureAnimationTable.Create(Data, "TextureAnimations", header.OffsetTextureAnimations - c_RamOffset, areAnimatedTextures32Bit));
+            if (header.OffsetTextureAnimAlt != 0)
+                tables.Add(TextureAnimationsAlt = TextureAnimationAltTable.Create(Data, "TextureAnimationsAlt", header.OffsetTextureAnimAlt - c_RamOffset));
 
             return tables.ToArray();
         }
@@ -509,6 +511,9 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public MPDHeaderTable MPDHeader { get; private set; }
+
+        [BulkCopyRecurse]
+        public TextureAnimationAltTable TextureAnimationsAlt { get; private set; }
 
         [BulkCopyRecurse]
         public ColorTable[] TexturePalettes { get; private set; }

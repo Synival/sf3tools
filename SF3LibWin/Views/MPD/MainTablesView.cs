@@ -33,6 +33,9 @@ namespace SF3.Win.Views.MPD {
             if (Model.TextureAnimations != null)
                 CreateChild(new TextureAnimationsView("Texture Animations", Model.TextureAnimations, ngc));
 
+            if (Model.TextureAnimationsAlt != null)
+                CreateChild(new TableView("Texture Animations (Alt)", Model.TextureAnimationsAlt, ngc));
+
             if (Model.Offset7Table != null)
                 CreateChild(new TableView("Offset 7 Table",  Model.Offset7Table, ngc));
 
