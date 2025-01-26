@@ -60,6 +60,9 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public void AddModel(IMPD_File mpdFile, int pdataAddressInMemory) {
+            TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
+                => (flip & ~TextureFlipType.Horizontal) | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
+
             var pdata    = mpdFile.Models.PDatasByMemoryAddress[pdataAddressInMemory];
             var vertices = mpdFile.Models.VertexTablesByMemoryAddress[pdata.VerticesOffset];
             var polygons = mpdFile.Models.PolygonTablesByMemoryAddress[pdata.PolygonsOffset];
@@ -99,7 +102,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 // Get texture flipping. Manually flip them horizontally to account for the weird thing where the X coordinates are reversed.
                 var flip = (TextureFlipType) (attr.Dir & 0x0030);
-                flip = (flip & ~TextureFlipType.Horizontal) | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
+                flip = ToggleHorizontalFlipping(flip);
 
                 var color = new Vector4(1);
 
@@ -124,8 +127,6 @@ namespace SF3.Win.OpenGL.MPD_File {
                     .Select(x => new Vector3(-x.X.Float, -x.Y.Float, x.Z.Float) * new Vector3(1 / 32.0f))
                     .ToArray();
 
-                var twoSided = ((attr.Flag & 0x01) == 0x01) ? 1.0f : 0.0f;
-
                 var normal = new Vector3(-polygon.NormalX, -polygon.NormalY, polygon.NormalZ);
                 var vertexNormals = new Vector3[] { normal, normal, normal, normal };
                 var normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
@@ -133,14 +134,38 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var applyLighting = ((attr.Sort & 0x08) == 0x08) ? 1.0f : 0.0f;
                 var applyLightingVboData = new float[,] {{applyLighting}, {applyLighting}, {applyLighting}, {applyLighting}};
 
-                var newQuad = new Quad(polyVertices, anim, TextureRotateType.NoRotation, flip, color);
-                newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
-                newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, applyLightingVboData));
+                void AddQuad() {
+                    var newQuad = new Quad(polyVertices, anim, TextureRotateType.NoRotation, flip, color);
+                    newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
+                    newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, applyLightingVboData));
 
-                if (attr.Mode_DrawMode == DrawMode.CL_Trans)
-                    semiTransparentQuads.Add(newQuad);
-                else
-                    quads.Add(newQuad);
+                    if (attr.Mode_DrawMode == DrawMode.CL_Trans)
+                        semiTransparentQuads.Add(newQuad);
+                    else
+                        quads.Add(newQuad);
+                }
+
+                // Add quads first...
+                AddQuad();
+
+                // ...then add the other side, if it's there.
+                var twoSided = (attr.Flag & 0x01) == 0x01;
+                if (twoSided) {
+                    // Flip the coordinates in the polygon horizontally.
+                    (polyVertices[0], polyVertices[1], polyVertices[2], polyVertices[3]) =
+                        (polyVertices[1], polyVertices[0], polyVertices[3], polyVertices[2]);
+
+                    // Flip the texture.
+                    flip = ToggleHorizontalFlipping(flip);
+
+                    // Reverse the normal.
+                    normal = -normal;
+                    vertexNormals = [normal, normal, normal, normal];
+                    normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
+
+                    // Add the flipped quad.
+                    AddQuad();
+                }
 
                 modelExists = true;
             }
