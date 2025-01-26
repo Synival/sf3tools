@@ -27,5 +27,14 @@ namespace SF3.Models.Structs.MPD.Model {
             get => Data.GetFIXED(Address + 0x08).Float;
             set => Data.SetFIXED(Address + 0x08, new FIXED(value, 0));
         }
+
+        public VECTOR Vector {
+            get => new VECTOR(X, Y, Z);
+            set {
+                X = value.X.Float;
+                Y = value.Y.Float;
+                Z = value.Z.Float;
+            }
+        }
     }
 }

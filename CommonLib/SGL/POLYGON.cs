@@ -13,9 +13,10 @@ namespace CommonLib.SGL {
         public VECTOR GetCornerNormal(CornerType corner) {
             // Not sure why the components need to be flipped in every permutation of this function,
             // but that's how it appears to be...
+            int cornerV = (int) corner;
             var vec = VECTOR.Cross(
-                Vertices[(3 + (int) corner) % 4] - Vertices[(0 + (int) corner) % 4],
-                Vertices[(1 + (int) corner) % 4] - Vertices[(0 + (int) corner) % 4]
+                Vertices[(3 + cornerV) % 4] - Vertices[(0 + cornerV) % 4],
+                Vertices[(1 + cornerV) % 4] - Vertices[(0 + cornerV) % 4]
             ).Normalized();
             vec.X = -vec.X;
             return vec;
