@@ -37,9 +37,9 @@ namespace SF3.Models.Files.MPD {
         ChunkHeaderTable ChunkHeader { get; }
         ColorTable LightPalette { get; }
         LightPositionTable LightPositionTable { get; }
-        UnknownUInt16Table Offset3Table { get; }
-        Offset4Table Offset4Table { get; }
-        UnknownUInt8Table Offset7Table { get; }
+        UnknownUInt16Table OffsetUnknown1Table { get; }
+        OffsetModelSwitchGroupsTable OffsetModelSwitchGroupsTable { get; }
+        UnknownUInt8Table OffsetScrollScreenAnimationTable { get; }
         TextureAnimationTable TextureAnimations { get; }
         BoundaryTable BoundariesTable { get; }
 

@@ -24,11 +24,11 @@ namespace SF3.Win.Views.MPD {
                 if (Model.TexturePalettes[i] != null)
                     CreateChild(new ColorTableView("Texture Palette " + (i + 1).ToString(), Model.TexturePalettes[i], Model.NameGetterContext));
 
-            if (Model.Offset3Table != null)
-                CreateChild(new TableView("Offset 3 Table",  Model.Offset3Table, ngc));
+            if (Model.OffsetUnknown1Table != null)
+                CreateChild(new TableView("Unknown 1",  Model.OffsetUnknown1Table, ngc));
 
-            if (Model.Offset4Table != null)
-                CreateChild(new TableView("Offset 4 Table",  Model.Offset4Table, ngc));
+            if (Model.OffsetModelSwitchGroupsTable != null)
+                CreateChild(new TableView("Model Switch Groups",  Model.OffsetModelSwitchGroupsTable, ngc));
 
             if (Model.TextureAnimations != null)
                 CreateChild(new TextureAnimationsView("Texture Animations", Model.TextureAnimations, ngc));
@@ -36,8 +36,8 @@ namespace SF3.Win.Views.MPD {
             if (Model.TextureAnimationsAlt != null)
                 CreateChild(new TableView("Texture Animations (Alt)", Model.TextureAnimationsAlt, ngc));
 
-            if (Model.Offset7Table != null)
-                CreateChild(new TableView("Offset 7 Table",  Model.Offset7Table, ngc));
+            if (Model.OffsetScrollScreenAnimationTable != null)
+                CreateChild(new TableView("Scroll Screen Animation",  Model.OffsetScrollScreenAnimationTable, ngc));
 
             if (Model.BoundariesTable != null)
                 CreateChild(new TableView("Boundaries", Model.BoundariesTable, ngc));

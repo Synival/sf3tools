@@ -119,8 +119,14 @@ namespace MPD_Analyzer {
                                     if (mpdFile.Scenario >= ScenarioType.Scenario3)
                                         weirdTexFlags &= ~0x03;
                                     if (weirdTexFlags != 0x00)
-                                        Console.WriteLine("  @(" + tile.X + ", " + tile.Y + "): " + weirdTexFlags.ToString("X2"));
+                                        Console.WriteLine("  Unhandled tile texture flags: @(" + tile.X + ", " + tile.Y + "): " + weirdTexFlags.ToString("X2"));
                                 }
+                            }
+
+                            var header = mpdFile.MPDHeader[0];
+                            if (header.Padding1 != 0 || header.Padding2 != 0 || header.Padding3 != 0 || header.Padding4 != 0) {
+                                Console.WriteLine($"  Padding has non-zero data:");
+                                Console.WriteLine($"    1={header.Padding1}, 2={header.Padding2}, 3={header.Padding3}, 4={header.Padding4}");
                             }
                         }
                     }

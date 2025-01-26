@@ -141,12 +141,12 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeUnknownTables(MPDHeaderModel header) {
             var tables = new List<ITable>();
 
-            if (header.Offset3 != 0)
-                tables.Add(Offset3Table = UnknownUInt16Table.Create(Data, "Offset3", header.Offset3 - c_RamOffset, 32, null));
-            if (header.Offset4 != 0)
-                tables.Add(Offset4Table = Offset4Table.Create(Data, "Offset4", header.Offset4 - c_RamOffset));
-            if (header.Offset7 != 0)
-                tables.Add(Offset7Table = UnknownUInt8Table.Create(Data, "Offset7", header.Offset7 - c_RamOffset, null, 0xFF));
+            if (header.OffsetUnknown1 != 0)
+                tables.Add(OffsetUnknown1Table = UnknownUInt16Table.Create(Data, "OffsetUnknown1", header.OffsetUnknown1 - c_RamOffset, 32, null));
+            if (header.OffsetModelSwitchGroups != 0)
+                tables.Add(OffsetModelSwitchGroupsTable = OffsetModelSwitchGroupsTable.Create(Data, "OffsetModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
+            if (header.OffsetScrollScreenAnimation != 0)
+                tables.Add(OffsetScrollScreenAnimationTable = UnknownUInt8Table.Create(Data, "Offset7", header.OffsetScrollScreenAnimation - c_RamOffset, null, 0xFF));
 
             return tables.ToArray();
         }
@@ -528,13 +528,13 @@ namespace SF3.Models.Files.MPD {
         public LightPositionTable LightPositionTable { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt16Table Offset3Table { get; private set; }
+        public UnknownUInt16Table OffsetUnknown1Table { get; private set; }
 
         [BulkCopyRecurse]
-        public Offset4Table Offset4Table { get; private set; }
+        public OffsetModelSwitchGroupsTable OffsetModelSwitchGroupsTable { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt8Table Offset7Table { get; private set; }
+        public UnknownUInt8Table OffsetScrollScreenAnimationTable { get; private set; }
 
         [BulkCopyRecurse]
         public TextureAnimationTable TextureAnimations { get; private set; }
