@@ -265,6 +265,7 @@ namespace SF3.Win.Controls {
         private void DrawScene() {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
+            GL.Enable(EnableCap.CullFace);
             if (_drawNormals) {
                 using (_world.NormalsShader.Use()) {
                     foreach (var block in _surfaceModel.Blocks) {
@@ -320,6 +321,7 @@ namespace SF3.Win.Controls {
                     UpdateShaderNormalMatrix(_world.ObjectShader, Matrix3.Identity);
                 }
             }
+            GL.Disable(EnableCap.CullFace);
 
             if (DrawWireframe) {
                 GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);

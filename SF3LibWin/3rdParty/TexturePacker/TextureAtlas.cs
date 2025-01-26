@@ -13,6 +13,7 @@ using OpenTK.Mathematics;
 using SF3.Types;
 using SF3.Win.Extensions;
 using SF3.Win.ThirdParty.TexturePacker.Extensions;
+using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.ThirdParty.TexturePacker {
     public class TextureAtlas : IDisposable {
@@ -76,17 +77,18 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             var widthf  = (float) width;
             var heightf = (float) height;
 
+            // Perform calculations in texture coordinates, where (0, 0) is the top-left corner.
             var x1 = node.Rect.Left   / widthf;
             var y1 = node.Rect.Top    / heightf;
             var x2 = node.Rect.Right  / widthf;
             var y2 = node.Rect.Bottom / heightf;
 
-            var tl = new Vector2(x1, y2);
-            var tr = new Vector2(x2, y2);
-            var br = new Vector2(x2, y1);
-            var bl = new Vector2(x1, y1);
+            var tl = new Vector2(x1, y1);
+            var tr = new Vector2(x2, y1);
+            var br = new Vector2(x2, y2);
+            var bl = new Vector2(x1, y2);
 
-            // Flip UV coordinates for rotated textures in the TextureAtlas.
+            // If the node was rotated clockwise, the UV coordinates must be rotated counter-clockwise to reverse it.
             if (node.Rotated)
                 (tl, tr, br, bl) = (tr, br, bl, tl);
 
@@ -106,7 +108,20 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             else if (flip == TextureFlipType.Both)
                 (tl, tr, br, bl) = (br, bl, tl, tr);
 
-            return [bl, br, tr, tl];
+            // Convert coordinates to a grid so we can more easily flip them based on some (0 or 1) constants.
+            Vector2[,] bitmapCoords = new Vector2[2, 2] {
+                        /* y1, y2 */
+                /* x1 */ { tl, bl },
+                /* x2 */ { tr, br }
+            };
+
+            // Return the bitmap coordinates translated into UV coordinates (which may have some flipping).
+            return [
+                bitmapCoords[Corner1UVX, Corner1UVY],
+                bitmapCoords[Corner2UVX, Corner2UVY],
+                bitmapCoords[Corner3UVX, Corner3UVY],
+                bitmapCoords[Corner4UVX, Corner4UVY],
+            ];
         }
 
         public Bitmap CreateBitmap() {

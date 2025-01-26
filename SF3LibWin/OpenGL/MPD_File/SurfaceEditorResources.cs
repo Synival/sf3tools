@@ -5,6 +5,7 @@ using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Win.Extensions;
 using SF3.Win.Properties;
+using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class SurfaceEditorResources : IDisposable {
@@ -24,10 +25,10 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models = [
                 (HelpModel = new QuadModel([
                     new Quad([
-                        new Vector3(-helpWidth,  0, 0),
-                        new Vector3(         0,  0, 0),
-                        new Vector3(         0,  1, 0),
-                        new Vector3(-helpWidth,  1, 0)
+                        new Vector3(helpWidth * (Corner1X - 1),  Corner1Y, 0),
+                        new Vector3(helpWidth * (Corner2X - 1),  Corner2Y, 0),
+                        new Vector3(helpWidth * (Corner3X - 1),  Corner3Y, 0),
+                        new Vector3(helpWidth * (Corner4X - 1),  Corner4Y, 0)
                     ])
                 ]))
             ];

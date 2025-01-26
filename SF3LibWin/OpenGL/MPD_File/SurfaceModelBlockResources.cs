@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib;
 using CommonLib.Extensions;
+using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Types;
 using SF3.Win.Extensions;
+using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class SurfaceModelBlockResources : IDisposable {
@@ -67,7 +69,6 @@ namespace SF3.Win.OpenGL.MPD_File {
             NeedsUpdate = false;
         }
 
-        private readonly float[,] _twoSidedVboData = new float[,] {{0}, {0}, {0}, {0}};
         private readonly float[,] _applyLightingVboData = new float[,] {{1}, {1}, {1}, {1}};
 
         public void Update(IMPD_File mpdFile) {
@@ -136,28 +137,30 @@ namespace SF3.Win.OpenGL.MPD_File {
                     }
 
                     var terrainType = (int) tile.MoveTerrainType;
-                    var ttX1 = (terrainType % 4) / 4.0f;
-                    var ttY1 = (terrainType / 4) / 4.0f;
-                    var ttX2 = ttX1 + 0.25f;
-                    var ttY2 = ttY1 + 0.25f;
-                    var terrainTypeVboData = new float[4, 2] {
-                        { ttX1, ttY2 },
-                        { ttX2, ttY2 },
-                        { ttX2, ttY1 },
-                        { ttX1, ttY1 },
-                    };
+                    var ttX = (terrainType % 4) / 4.0f;
+                    var ttY = (terrainType / 4) / 4.0f;
+                    const float ttWidth = 0.25f;
+                    const float ttHeight = 0.25f;
+
+                    var terrainTypeData = new Vector2[4];
+                    terrainTypeData[(int) CornerType.TopRight]    = new Vector2(ttX + Corner1UVX * ttWidth, ttY + Corner1UVY * ttHeight);
+                    terrainTypeData[(int) CornerType.TopLeft]     = new Vector2(ttX + Corner2UVX * ttWidth, ttY + Corner2UVY * ttHeight);
+                    terrainTypeData[(int) CornerType.BottomLeft]  = new Vector2(ttX + Corner3UVX * ttWidth, ttY + Corner3UVY * ttHeight);
+                    terrainTypeData[(int) CornerType.BottomRight] = new Vector2(ttX + Corner4UVX * ttWidth, ttY + Corner4UVY * ttHeight);
+                    var terrainTypeVboData = terrainTypeData.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 2);
 
                     var eventId = (int) tile.EventID;
-                    var eidX1 = (eventId % 16) / 16.0f;
-                    var eidY1 = (eventId / 16) / 16.0f;
-                    var eidX2 = eidX1 + 0.0625f;
-                    var eidY2 = eidY1 + 0.0625f;
-                    var eventIdVboData = new float[4, 2] {
-                        { eidX1, eidY2 },
-                        { eidX2, eidY2 },
-                        { eidX2, eidY1 },
-                        { eidX1, eidY1 },
-                    };
+                    var eidX = (eventId % 16) / 16.0f;
+                    var eidY = (eventId / 16) / 16.0f;
+                    const float eidWidth = 0.0625f;
+                    const float eidHeight = 0.0625f;
+
+                    var eventIdData = new Vector2[4];
+                    eventIdData[(int) CornerType.TopRight]    = new Vector2(eidX + Corner1UVX * eidWidth, eidY + Corner1UVY * eidHeight);
+                    eventIdData[(int) CornerType.TopLeft]     = new Vector2(eidX + Corner2UVX * eidWidth, eidY + Corner2UVY * eidHeight);
+                    eventIdData[(int) CornerType.BottomLeft]  = new Vector2(eidX + Corner3UVX * eidWidth, eidY + Corner3UVY * eidHeight);
+                    eventIdData[(int) CornerType.BottomRight] = new Vector2(eidX + Corner4UVX * eidWidth, eidY + Corner4UVY * eidHeight);
+                    var eventIdVboData = eventIdData.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 2);
 
                     var vertices = tile.GetSurfaceModelVertices();
                     if (anim != null) {
@@ -165,7 +168,6 @@ namespace SF3.Win.OpenGL.MPD_File {
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, terrainTypeTexInfo.TexCoordName, 4, terrainTypeVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, eventIdTexInfo.TexCoordName, 4, eventIdVboData));
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "twoSided", 4, _twoSidedVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, _applyLightingVboData));
                         surfaceQuads.Add(newQuad);
                     }
@@ -174,7 +176,6 @@ namespace SF3.Win.OpenGL.MPD_File {
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, terrainTypeTexInfo.TexCoordName, 4, terrainTypeVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, eventIdTexInfo.TexCoordName, 4, eventIdVboData));
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "twoSided", 4, _twoSidedVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, _applyLightingVboData));
                         untexturedSurfaceQuads.Add(newQuad);
                     }

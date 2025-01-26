@@ -17,8 +17,7 @@ layout (location = 4) in vec2 texCoordAtlas;
 layout (location = 5) in vec2 texCoordTerrainTypes;
 layout (location = 6) in vec2 texCoordEventIDs;
 
-layout (location = 7) in float twoSided;
-layout (location = 8) in float applyLighting;
+layout (location = 7) in float applyLighting;
 
 out vec4 colorFrag;
 out vec3 glowFrag;
@@ -36,7 +35,6 @@ void main() {
     float prevLength = length(normal);
     vec3 modelNormal = normalize(normalMatrix * normal) * prevLength;
     float normalLightDot = dot(modelNormal, lightPosition);
-    normalLightDot = (twoSided > 0.5) ? abs(normalLightDot) : normalLightDot;
 
     float lighting = !useNewLighting
         // Scenario 1 uses a straight-forward lighting method where the dot product directly references the index of

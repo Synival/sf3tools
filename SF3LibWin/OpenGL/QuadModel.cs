@@ -6,6 +6,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.ThirdParty.TexturePacker;
+using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.OpenGL {
     public class QuadModel : IDisposable {
@@ -72,8 +73,8 @@ namespace SF3.Win.OpenGL {
             _elementBuffer = quads
                 .Select((x, i) => new { Quad = x, StartIndex = (uint) i * 4 })
                 .SelectMany(x => new uint[] {
-                    x.StartIndex + 2, x.StartIndex + 1, x.StartIndex + 0,
-                    x.StartIndex + 3, x.StartIndex + 2, x.StartIndex + 0
+                    x.StartIndex + 0, x.StartIndex + 1, x.StartIndex + 2,
+                    x.StartIndex + 0, x.StartIndex + 2, x.StartIndex + 3
                 })
                 .ToArray();
 
@@ -108,10 +109,10 @@ namespace SF3.Win.OpenGL {
         }
 
         private static readonly Vector2[] c_noTextureCoords = [
-            new Vector2(0, 1),
-            new Vector2(1, 1),
-            new Vector2(1, 0),
-            new Vector2(0, 0)
+            new Vector2(Corner1UVX, Corner1UVY),
+            new Vector2(Corner2UVX, Corner2UVY),
+            new Vector2(Corner3UVX, Corner3UVY),
+            new Vector2(Corner4UVX, Corner4UVY),
         ];
 
         private bool AssignVertexBufferAtlasTexCoords() {
@@ -136,8 +137,8 @@ namespace SF3.Win.OpenGL {
                 for (var vertexIndex = 0; vertexIndex < 4; vertexIndex++) {
                     if (!modified && (_vertexBuffer[pos] != texCoords[vertexIndex].X || _vertexBuffer[pos + 1] != texCoords[vertexIndex].Y))
                         modified = true;
-                    _vertexBuffer[pos + 0] = texCoords[vertexIndex % 4].X;
-                    _vertexBuffer[pos + 1] = texCoords[(vertexIndex + 2) % 4].Y; // Y coordinate is flipped.
+                    _vertexBuffer[pos + 0] = texCoords[vertexIndex].X;
+                    _vertexBuffer[pos + 1] = texCoords[vertexIndex].Y;
                     pos += _vbo.StrideInBytes / sizeof(float);
                 }
             }
@@ -158,10 +159,10 @@ namespace SF3.Win.OpenGL {
             };
 
             foreach (var quad in Quads) {
-                SetTexCoord(0, 1);
-                SetTexCoord(1, 1);
-                SetTexCoord(1, 0);
-                SetTexCoord(0, 0);
+                SetTexCoord(Corner1UVX, Corner1UVY);
+                SetTexCoord(Corner2UVX, Corner2UVY);
+                SetTexCoord(Corner3UVX, Corner3UVY);
+                SetTexCoord(Corner4UVX, Corner4UVY);
             }
         }
 

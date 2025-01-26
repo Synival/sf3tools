@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
+using CommonLib.SGL;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
@@ -96,7 +97,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                         anim = new TextureAnimation(textureId, [texturesById[textureId]]);
                 }
 
-                var flip = (TextureFlipType) (attr.Dir & 0x00F0);
+                // Get texture flipping. Manually flip them horizontally to account for the weird thing where the X coordinates are reversed.
+                var flip = (TextureFlipType) (attr.Dir & 0x0030);
+                flip = (flip & ~TextureFlipType.Horizontal) | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
 
                 var color = new Vector4(1);
 
@@ -110,19 +113,18 @@ namespace SF3.Win.OpenGL.MPD_File {
                 if (anim == null)
                     continue;
 
-                VertexModel[] polyVertexModels = [
-                    vertices[polygon.Vertex4],
-                    vertices[polygon.Vertex3],
-                    vertices[polygon.Vertex2],
-                    vertices[polygon.Vertex1],
+                VECTOR[] polyVertexModels = [
+                    vertices[polygon.Vertex1].Vector,
+                    vertices[polygon.Vertex2].Vector,
+                    vertices[polygon.Vertex3].Vector,
+                    vertices[polygon.Vertex4].Vector,
                 ];
 
                 var polyVertices = polyVertexModels
-                    .Select(x => new Vector3(-x.X, -x.Y, x.Z) * new Vector3(1 / 32.0f))
+                    .Select(x => new Vector3(-x.X.Float, -x.Y.Float, x.Z.Float) * new Vector3(1 / 32.0f))
                     .ToArray();
 
                 var twoSided = ((attr.Flag & 0x01) == 0x01) ? 1.0f : 0.0f;
-                var twoSidedVboData = new float[,] {{twoSided}, {twoSided}, {twoSided}, {twoSided}};
 
                 var normal = new Vector3(-polygon.NormalX, -polygon.NormalY, polygon.NormalZ);
                 var vertexNormals = new Vector3[] { normal, normal, normal, normal };
@@ -133,7 +135,6 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 var newQuad = new Quad(polyVertices, anim, TextureRotateType.NoRotation, flip, color);
                 newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
-                newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "twoSided", 4, twoSidedVboData));
                 newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, applyLightingVboData));
 
                 if (attr.Mode_DrawMode == DrawMode.CL_Trans)

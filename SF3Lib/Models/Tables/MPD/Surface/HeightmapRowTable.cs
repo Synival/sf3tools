@@ -5,6 +5,7 @@ using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD.Surface;
 using static CommonLib.Utils.BlockHelpers;
+using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Models.Tables.MPD.Surface {
     public class HeightmapRowTable : FixedSizeTable<HeightmapRow> {
@@ -50,10 +51,10 @@ namespace SF3.Models.Tables.MPD.Surface {
                     var heights = Rows[vy].GetQuadHeights(vx);
                     // SF3 intentionally cuts quad height by half when calculating surface vertex normals.
                     var quad = new POLYGON(new VECTOR[] {
-                        new VECTOR(0.00f, heights[0] / 2, 1.00f),
-                        new VECTOR(1.00f, heights[1] / 2, 1.00f),
-                        new VECTOR(1.00f, heights[2] / 2, 0.00f),
-                        new VECTOR(0.00f, heights[3] / 2, 0.00f)
+                        new VECTOR(Corner1X, heights[0] / 2, Corner1Z),
+                        new VECTOR(Corner2X, heights[1] / 2, Corner2Z),
+                        new VECTOR(Corner3X, heights[2] / 2, Corner3Z),
+                        new VECTOR(Corner4X, heights[3] / 2, Corner4Z)
                     });
                     sumNormals.Add(quad.GetNormal(calculationMethod));
                 }

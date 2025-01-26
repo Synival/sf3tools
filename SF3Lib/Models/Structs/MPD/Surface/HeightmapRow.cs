@@ -21,14 +21,14 @@ namespace SF3.Models.Structs.MPD.Surface {
         public float GetHeight(int x, CornerType corner) {
             // Heights are clockwise from bottom-right.
             switch (corner) {
+                case CornerType.BottomRight:
+                    return Data.GetByte(xAddress[x] + 0) / 16.0f;
                 case CornerType.BottomLeft:
                     return Data.GetByte(xAddress[x] + 1) / 16.0f;
                 case CornerType.TopLeft:
                     return Data.GetByte(xAddress[x] + 2) / 16.0f;
                 case CornerType.TopRight:
                     return Data.GetByte(xAddress[x] + 3) / 16.0f;
-                case CornerType.BottomRight:
-                    return Data.GetByte(xAddress[x] + 0) / 16.0f;
                 default:
                     throw new ArgumentException(nameof(corner));
             }
@@ -37,6 +37,9 @@ namespace SF3.Models.Structs.MPD.Surface {
         public void SetHeight(int x, CornerType corner, float value) {
             // Heights are clockwise from bottom-right.
             switch (corner) {
+                case CornerType.BottomRight:
+                    Data.SetByte(xAddress[x] + 0, (byte) (value * 16f));
+                    break;
                 case CornerType.BottomLeft:
                     Data.SetByte(xAddress[x] + 1, (byte) (value * 16f));
                     break;
@@ -45,9 +48,6 @@ namespace SF3.Models.Structs.MPD.Surface {
                     break;
                 case CornerType.TopRight:
                     Data.SetByte(xAddress[x] + 3, (byte) (value * 16f));
-                    break;
-                case CornerType.BottomRight:
-                    Data.SetByte(xAddress[x] + 0, (byte) (value * 16f));
                     break;
                 default:
                     throw new ArgumentException(nameof(corner));
@@ -65,12 +65,12 @@ namespace SF3.Models.Structs.MPD.Surface {
 
         public static float[] ConvertQuadHeightsToFloatArray(uint heights) {
             // Heights are clockwise from bottom-right.
-            return new[] {
-                ((heights >> 16) & 0xFF) / 16f,
-                ((heights >> 24) & 0xFF) / 16f,
-                ((heights >>  0) & 0xFF) / 16f,
-                ((heights >>  8) & 0xFF) / 16f,
-            };
+            var floatHeights = new float[4];
+            floatHeights[(int) CornerType.BottomRight] = ((heights >> 24) & 0xFF) / 16f;
+            floatHeights[(int) CornerType.BottomLeft]  = ((heights >> 16) & 0xFF) / 16f;
+            floatHeights[(int) CornerType.TopLeft]     = ((heights >>  8) & 0xFF) / 16f;
+            floatHeights[(int) CornerType.TopRight]    = ((heights >>  0) & 0xFF) / 16f;
+            return floatHeights;
         }
 
         public static uint ConvertFloatArrayToQuadHeights(float[] heights) {
@@ -79,10 +79,10 @@ namespace SF3.Models.Structs.MPD.Surface {
 
             // Heights are clockwise from bottom-right.
             return
-                ((((uint) (heights[0] * 16f)) & 0xFF) << 16) +
-                ((((uint) (heights[1] * 16f)) & 0xFF) << 24) +
-                ((((uint) (heights[2] * 16f)) & 0xFF) <<  0) +
-                ((((uint) (heights[3] * 16f)) & 0xFF) <<  8);
+                ((((uint) (heights[(int) CornerType.BottomRight] * 16f)) & 0xFF) << 24) +
+                ((((uint) (heights[(int) CornerType.BottomLeft]  * 16f)) & 0xFF) << 16) +
+                ((((uint) (heights[(int) CornerType.TopLeft]     * 16f)) & 0xFF) <<  8) +
+                ((((uint) (heights[(int) CornerType.TopRight]    * 16f)) & 0xFF) <<  0);
         }
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {
