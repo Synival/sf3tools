@@ -107,14 +107,14 @@ namespace MPD_Analyzer {
                                             if (c == br)
                                                 continue;
                                             if (moveHeights[c] != moveHeights[br])
-                                                Console.WriteLine("  Mismatched corner/BR walk mesh heights (" + tile.X + ", " + tile.Y + "), " + c.ToString() + ": " + moveHeights[c] + " != " + moveHeights[br]);
+                                                Console.WriteLine("  !!! Mismatched corner/BR walk mesh heights (" + tile.X + ", " + tile.Y + "), " + c.ToString() + ": " + moveHeights[c] + " != " + moveHeights[br]);
                                         }
                                     }
                                     else {
                                         var modelHeights = corners.ToDictionary(c => c, tile.GetModelVertexHeightmap);
                                         foreach (var c in corners) {
                                             if (moveHeights[c] != modelHeights[c])
-                                                Console.WriteLine("  Mismatched walk/model mesh heights for (" + tile.X + ", " + tile.Y + "), " + c.ToString() + ": " + moveHeights[c] + " != " + modelHeights[c]);
+                                                Console.WriteLine("  !!! Mismatched walk/model mesh heights for (" + tile.X + ", " + tile.Y + "), " + c.ToString() + ": " + moveHeights[c] + " != " + modelHeights[c]);
                                         }
                                     }
 
@@ -123,15 +123,21 @@ namespace MPD_Analyzer {
                                     if (mpdFile.Scenario >= ScenarioType.Scenario3)
                                         weirdTexFlags &= ~0x03;
                                     if (weirdTexFlags != 0x00)
-                                        Console.WriteLine("  Unhandled tile texture flags: @(" + tile.X + ", " + tile.Y + "): " + weirdTexFlags.ToString("X2"));
+                                        Console.WriteLine("  !!! Unhandled tile texture flags: @(" + tile.X + ", " + tile.Y + "): " + weirdTexFlags.ToString("X2"));
                                 }
                             }
 
                             var header = mpdFile.MPDHeader[0];
                             if (header.Padding1 != 0 || header.Padding2 != 0 || header.Padding3 != 0 || header.Padding4 != 0) {
-                                Console.WriteLine($"  Padding has non-zero data:");
+                                Console.WriteLine($"  !!! Padding has non-zero data:");
                                 Console.WriteLine($"    1={header.Padding1}, 2={header.Padding2}, 3={header.Padding3}, 4={header.Padding4}");
                             }
+
+                            // Chunk[0] and Chunk[4] should always be empty.
+                            if (mpdFile.ChunkHeader[0].Exists)
+                                Console.WriteLine("  !!! Chunk[0] exists!");
+                            if (mpdFile.ChunkHeader[4].Exists)
+                                Console.WriteLine("  !!! Chunk[4] exists!");
                         }
                     }
                     catch (Exception e) {
