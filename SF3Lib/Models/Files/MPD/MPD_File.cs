@@ -17,7 +17,7 @@ namespace SF3.Models.Files.MPD {
         private const int c_RamOffset = 0x290000;
         private const int c_SurfaceModelChunkSize = 0xCF00;
 
-        protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) : base(data, nameContexts[DetectScenario(data)], DetectScenario(data)) { }
+        protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) : base(data, nameContexts?[DetectScenario(data)], DetectScenario(data)) { }
 
         public static MPD_File Create(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) {
             var newFile = new MPD_File(data, nameContexts);

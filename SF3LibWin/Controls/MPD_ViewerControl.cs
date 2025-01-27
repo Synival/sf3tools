@@ -115,5 +115,45 @@ namespace SF3.Win.Controls {
             MPD_File?.SurfaceModel?.UpdateVertexNormals(MPD_File.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles);
             UpdateModels();
         }
+
+        // TODO: This kinda works, but not completely! Improve, refine, and ship it!!!
+#if false
+        private void WIP_CopyChnuk3FromOtherFile() {
+            var thisMPD = (MPD_File) MPD_File;
+            var otherMPD = Models.Files.MPD.MPD_File.Create(new ByteData.ByteData(new ByteArray(File.ReadAllBytes("E:/S2CHUR.MPD"))), null);
+
+            // 16-bit to 32-bit
+            var oldTableLoc = otherMPD.TextureAnimations.Address;
+            int posIn = oldTableLoc;
+            int posOut = 0x1200;
+            var sizeIn = otherMPD.TextureAnimations.SizeInBytes + 2;
+            int posInMax = sizeIn + oldTableLoc;
+            while (posIn < posInMax) {
+                ushort dataIn = (ushort) otherMPD.Data.GetWord(posIn);
+                uint dataOut = dataIn;
+
+                if (dataOut == 0xFFFF)
+                    dataOut = 0xFFFF_FFFF;
+                else if (dataOut == 0xFFFE)
+                    dataOut = 0xFFFF_FFFE;
+
+                thisMPD.Data.SetDouble(posOut, (int) dataOut);
+
+                posIn += 2;
+                posOut += 4;
+            }
+            thisMPD.MPDHeader[0].OffsetTextureAnimations = 0x291200;
+
+            // Copy Chunk3.
+            var endPos = thisMPD.Data.Length;
+            var chunk3 = otherMPD.ChunkData[3];
+
+            thisMPD.ChunkHeader[3].ChunkAddress = endPos + 0x290000;
+            thisMPD.ChunkHeader[3].ChunkSize = chunk3.Length;
+            thisMPD.Data.Data.SetDataAtTo(endPos, 0, chunk3.Data.GetDataCopy());
+
+            MessageBox.Show("Chunk3 copied! (Don't do this again on the same file D: )");
+        }
+#endif
     }
 }
