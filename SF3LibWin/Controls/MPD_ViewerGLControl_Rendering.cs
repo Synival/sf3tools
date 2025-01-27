@@ -438,21 +438,38 @@ namespace SF3.Win.Controls {
                         block.SelectionModel.Draw(_world.SolidShader);
         }
 
+        private long _startTimeInMs = 0;
+        private long _lastTimeInMs = 0;
+        private float _frameDeltaTimeInMs = 0;
+
         private void UpdateAnimatedTextures() {
-            // The clock is at 60fps, but the animations change at 30fps, so skip every other frame.
-            if (_frame % 2 == 0)
-                return;
+            var now = DateTimeOffset.Now.ToUnixTimeMilliseconds() - _startTimeInMs;
+            if (_startTimeInMs == 0) {
+                _startTimeInMs = now;
+                _lastTimeInMs = 0;
+                now = 0;
+            }
 
-            if (_surfaceModel?.Blocks != null)
-                foreach (var block in _surfaceModel.Blocks)
-                    if (block.Model?.UpdateAnimatedTextures() == true)
-                        Invalidate();
+            const float c_frameDurationInMs = (1000.0f / 30.0f);
 
-            if (_models?.ModelsByMemoryAddress != null)
-                foreach (var modelGroup in _models.ModelsByMemoryAddress.Values)
-                    foreach (var model in modelGroup.Models)
-                        if (model.UpdateAnimatedTextures() == true)
+            _frameDeltaTimeInMs += (now - _lastTimeInMs);
+            if (_frameDeltaTimeInMs >= c_frameDurationInMs) {
+                while (_frameDeltaTimeInMs >= c_frameDurationInMs)
+                    _frameDeltaTimeInMs -= c_frameDurationInMs;
+
+                if (_surfaceModel?.Blocks != null)
+                    foreach (var block in _surfaceModel.Blocks)
+                        if (block.Model?.UpdateAnimatedTextures() == true)
                             Invalidate();
+
+                if (_models?.ModelsByMemoryAddress != null)
+                    foreach (var modelGroup in _models.ModelsByMemoryAddress.Values)
+                        foreach (var model in modelGroup.Models)
+                            if (model.UpdateAnimatedTextures() == true)
+                                Invalidate();
+            }
+
+            _lastTimeInMs = now;
         }
 
         private static bool _drawWireframe = true;
