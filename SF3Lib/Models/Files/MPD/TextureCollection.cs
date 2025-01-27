@@ -8,16 +8,17 @@ using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public class TextureCollection : TableFile {
-        protected TextureCollection(IByteData data, INameGetterContext nameContext, int address, string name, TextureCollectionType collection, int? chunkIndex)
+        protected TextureCollection(IByteData data, INameGetterContext nameContext, int address, string name, TextureCollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats, int? chunkIndex)
         : base(data, nameContext) {
-            Address    = address;
-            Name       = name;
-            Collection = collection;
-            ChunkIndex = chunkIndex;
+            Address      = address;
+            Name         = name;
+            Collection   = collection;
+            PixelFormats = pixelFormats;
+            ChunkIndex   = chunkIndex;
         }
 
-        public static TextureCollection Create(IByteData data, INameGetterContext nameContext, int address, string name, TextureCollectionType collection, int? chunkIndex) {
-            var newFile = new TextureCollection(data, nameContext, address, name, collection, chunkIndex);
+        public static TextureCollection Create(IByteData data, INameGetterContext nameContext, int address, string name, TextureCollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats, int? chunkIndex) {
+            var newFile = new TextureCollection(data, nameContext, address, name, collection, pixelFormats, chunkIndex);
             newFile.Init();
             return newFile;
         }
@@ -28,7 +29,7 @@ namespace SF3.Models.Files.MPD {
 
             return new List<ITable>() {
                 TextureHeaderTable,
-                (TextureTable = TextureTable.Create(Data, "Textures", 0x04, Collection, header.NumTextures, header.TextureIdStart, ChunkIndex)),
+                (TextureTable = TextureTable.Create(Data, "Textures", 0x04, Collection, header.NumTextures, header.TextureIdStart, PixelFormats, ChunkIndex)),
             };
         }
 
@@ -37,6 +38,7 @@ namespace SF3.Models.Files.MPD {
 
         public int Address { get; }
         public TextureCollectionType Collection { get; }
+        public Dictionary<int, TexturePixelFormat> PixelFormats { get; }
         public int? ChunkIndex { get; }
 
 

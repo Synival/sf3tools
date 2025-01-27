@@ -19,7 +19,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         }
 
         public override bool Load() {
-            _rows = Textures;
+            _rows = Textures.OrderBy(x => x.Collection).ThenBy(x => x.ID).ToArray();
             return true;
         }
 

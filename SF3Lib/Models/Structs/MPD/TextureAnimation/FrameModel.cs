@@ -25,11 +25,11 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             _unknownAddress                 = Address + 1 * _bytesPerProperty;
         }
 
-        public void FetchAndCacheTexture(IByteData data, TexturePixelFormat assumedPixelFormat, ITexture referenceTexture) {
-            if (assumedPixelFormat == TexturePixelFormat.ABGR1555)
+        public void FetchAndCacheTexture(IByteData data, TexturePixelFormat pixelFormat, ITexture referenceTexture) {
+            if (pixelFormat == TexturePixelFormat.ABGR1555)
                 FetchAndCacheTextureABGR1555(data, referenceTexture);
             else
-                FetchAndCacheTextureIndexed(data, assumedPixelFormat, referenceTexture);
+                FetchAndCacheTextureIndexed(data, pixelFormat, referenceTexture);
         }
 
         private void FetchAndCacheTextureABGR1555(IByteData data, ITexture referenceTexture) {
@@ -46,14 +46,14 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             Texture = new TextureABGR1555(TextureID, FrameNum, (int) Duration, imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
 
-        private void FetchAndCacheTextureIndexed(IByteData data, TexturePixelFormat assumedPixelFormat, ITexture referenceTexture) {
+        private void FetchAndCacheTextureIndexed(IByteData data, TexturePixelFormat pixelFormat, ITexture referenceTexture) {
             var imageData = new byte[Width, Height];
             var off = 0;
             for (var y = 0; y < Height; y++)
                 for (var x = 0; x < Width; x++)
                     imageData[x, y] = (byte) data.GetByte(off++);
 
-            Texture = new TextureIndexed(TextureID, FrameNum, (int) Duration, imageData, assumedPixelFormat, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
+            Texture = new TextureIndexed(TextureID, FrameNum, (int) Duration, imageData, pixelFormat, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
 
         public ushort[,] UpdateTextureABGR1555(IByteData data, ushort[,] imageData, ITexture referenceTexture) {
@@ -83,7 +83,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
 
         public bool TextureIsLoaded => Texture != null;
 
-        public TexturePixelFormat AssumedPixelFormat => TexturePixelFormat.ABGR1555;
+        public TexturePixelFormat PixelFormat => TexturePixelFormat.ABGR1555;
 
         [TableViewModelColumn(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public int TextureID { get; }

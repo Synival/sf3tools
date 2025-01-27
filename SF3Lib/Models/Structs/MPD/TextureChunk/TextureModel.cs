@@ -12,43 +12,47 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         private readonly int heightAddress;
         private readonly int imageDataOffsetAddress;
 
-        public TextureModel(IByteData data, TextureCollectionType collection, int id, string name, int address, int? chunkIndex, int? nextImageDataOffset)
+        public TextureModel(IByteData data, TextureCollectionType collection, int id, string name, int address, TexturePixelFormat pixelFormat, int? chunkIndex, int? nextImageDataOffset)
         : base(data, id, name, address, GlobalSize) {
-            Collection = collection;
-            ChunkIndex = chunkIndex;
+            Collection  = collection;
+            ChunkIndex  = chunkIndex;
 
             widthAddress           = Address;     // 1 byte
             heightAddress          = Address + 1; // 1 byte
             imageDataOffsetAddress = Address + 2; // 2 bytes
 
-            if (nextImageDataOffset.HasValue && Width > 0 && Height > 0) {
-                var imageDataSize = nextImageDataOffset.Value - ImageDataOffset;
-                var bytesPerPixel =  imageDataSize / (double) Width /  Height;
-                if (bytesPerPixel == 2.00) {
-                    BytesPerPixel = 2;
-                    AssumedPixelFormat = TexturePixelFormat.ABGR1555;
-                }
-                else if (bytesPerPixel == 1.00) {
-                    BytesPerPixel = 1;
-                    AssumedPixelFormat = TexturePixelFormat.UnknownPalette;
-                }
-                else {
-                    try {
-                        throw new ArgumentException("Unhandled bytes per pixel: " + bytesPerPixel.ToString());
-                    }
-                    catch { }
-
-                    BytesPerPixel = 2;
-                    AssumedPixelFormat = TexturePixelFormat.ABGR1555;
-                }
+            if (pixelFormat != TexturePixelFormat.Unknown) {
+                PixelFormatKnown = true;
+                PixelFormat = pixelFormat;
             }
-            else
-                AssumedPixelFormat = TexturePixelFormat.ABGR1555;
+            else {
+                PixelFormatKnown = false;
+                PixelFormat = nextImageDataOffset.HasValue ? GuessPixelFormat(nextImageDataOffset.Value) : TexturePixelFormat.Unknown;
+            }
+            BytesPerPixel = PixelFormat.BytesPerPixel();
 
             _readyForImageData = true;
             _ = FetchAndCacheTexture(null);
         }
 
+        private TexturePixelFormat GuessPixelFormat(int nextImageDataOffset) {
+            if (Width > 0 && Height > 0) {
+                var imageDataSize = nextImageDataOffset - ImageDataOffset;
+                var bytesPerPixel =  imageDataSize / (double) Width /  Height;
+                if (bytesPerPixel == 2.00)
+                    return TexturePixelFormat.ABGR1555;
+                else if (bytesPerPixel == 1.00)
+                    return TexturePixelFormat.UnknownPalette;
+                else {
+                    try {
+                        throw new ArgumentException("Unhandled bytes per pixel: " + bytesPerPixel.ToString());
+                    }
+                    catch { }
+                }
+            }
+
+            return TexturePixelFormat.ABGR1555;
+        }
         public static int GlobalSize => 0x04;
 
         private readonly bool _readyForImageData = false;
@@ -58,7 +62,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 return false;
 
             try {
-                Texture = AssumedPixelFormat == TexturePixelFormat.ABGR1555
+                Texture = PixelFormat == TexturePixelFormat.ABGR1555
                     ? new TextureABGR1555(ID, 0, 0, RawImageData16Bit, tags: tags)
                     : (ITexture) new TextureIndexed(ID, 0, 0, RawImageData8Bit, tags: tags);
                 return true;
@@ -68,7 +72,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             }
         }
 
-        [TableViewModelColumn(displayOrder: -2.66f, displayName: "Collection")]
+        [TableViewModelColumn(displayOrder: -2.66f, displayName: "Collection", minWidth: 110)]
         public TextureCollectionType Collection { get; }
 
         [TableViewModelColumn(displayOrder: -2.33f, displayName: "Chunk #")]
@@ -104,8 +108,11 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             }
         }
 
-        [TableViewModelColumn(displayName: "(Assumed) Pixel Format", displayOrder: 3)]
-        public TexturePixelFormat AssumedPixelFormat { get; }
+        [TableViewModelColumn(displayName: "Pixel Format Known", displayOrder: 2.5f)]
+        public bool PixelFormatKnown { get; }
+
+        [TableViewModelColumn(displayName: "Pixel Format", displayOrder: 3)]
+        public TexturePixelFormat PixelFormat { get; }
 
         [TableViewModelColumn(displayName: "Internal Hash", displayOrder: 4, minWidth: 225)]
         public string Hash => Texture?.Hash ?? "";

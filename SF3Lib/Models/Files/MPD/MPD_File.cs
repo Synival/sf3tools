@@ -295,13 +295,17 @@ namespace SF3.Models.Files.MPD {
                 tables.AddRange(SurfaceModel.Tables);
             }
 
+            // Gather all information about texture picture formats from existing data.
+            var pixelFormats = new Dictionary<int, TexturePixelFormat>();
+            // TODO: actually gather it!!
+
             TextureCollections = new TextureCollection[8];
             for (var i = 0; i < TextureCollections.Length; i++) {
                 var chunkIndex = i + 6;
                 if (chunkDatas[chunkIndex]?.Length > 0) {
                     var collection = TextureCollectionForChunkIndex(chunkIndex);
 
-                    TextureCollections[i] = TextureCollection.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureCollection" + (i + 1), collection, chunkIndex);
+                    TextureCollections[i] = TextureCollection.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureCollection" + (i + 1), collection, pixelFormats, chunkIndex);
                     tables.AddRange(TextureCollections[i].Tables);
                 }
             }
@@ -388,7 +392,7 @@ namespace SF3.Models.Files.MPD {
                         var affectedFrames = TextureAnimations.SelectMany(x => x.Frames).Where(x => x.CompressedTextureOffset == offset).ToArray();
                         foreach (var frame in affectedFrames) {
                             var referenceTex = GetTextureModelByID(frame.TextureID)?.Texture;
-                            frame.FetchAndCacheTexture(c3frame.Data.DecompressedData, frame.AssumedPixelFormat, referenceTex);
+                            frame.FetchAndCacheTexture(c3frame.Data.DecompressedData, frame.PixelFormat, referenceTex);
                         }
                     }
                 };
