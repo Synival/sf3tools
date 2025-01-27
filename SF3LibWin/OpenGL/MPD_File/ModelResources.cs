@@ -131,7 +131,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var vertexNormals = new Vector3[] { normal, normal, normal, normal };
                 var normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
-                var applyLighting = ((attr.Sort & 0x08) == 0x08) ? 1.0f : 0.0f;
+                var applyLighting = attr.ApplyLighting ? 1.0f : 0.0f;
                 var applyLightingVboData = new float[,] {{applyLighting}, {applyLighting}, {applyLighting}, {applyLighting}};
 
                 void AddQuad() {
@@ -149,8 +149,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 AddQuad();
 
                 // ...then add the other side, if it's there.
-                var twoSided = (attr.Flag & 0x01) == 0x01;
-                if (twoSided) {
+                if (attr.TwoSided) {
                     // Flip the coordinates in the polygon horizontally.
                     (polyVertices[0], polyVertices[1], polyVertices[2], polyVertices[3]) =
                         (polyVertices[1], polyVertices[0], polyVertices[3], polyVertices[2]);

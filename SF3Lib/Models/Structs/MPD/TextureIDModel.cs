@@ -2,8 +2,8 @@
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD {
-    public class TextureAnimationAltModel : Struct {
-        public TextureAnimationAltModel(IByteData data, int id, string name, int address)
+    public class TextureIDModel : Struct {
+        public TextureIDModel(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x02) {
         }
 

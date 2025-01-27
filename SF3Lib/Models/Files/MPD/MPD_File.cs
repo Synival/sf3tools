@@ -133,7 +133,7 @@ namespace SF3.Models.Files.MPD {
             if (header.OffsetTextureAnimations != 0)
                 tables.Add(TextureAnimations = TextureAnimationTable.Create(Data, "TextureAnimations", header.OffsetTextureAnimations - c_RamOffset, areAnimatedTextures32Bit));
             if (header.OffsetTextureAnimAlt != 0)
-                tables.Add(TextureAnimationsAlt = TextureAnimationAltTable.Create(Data, "TextureAnimationsAlt", header.OffsetTextureAnimAlt - c_RamOffset));
+                tables.Add(TextureAnimationsAlt = TextureIDTable.Create(Data, "TextureAnimationsAlt", header.OffsetTextureAnimAlt - c_RamOffset));
 
             return tables.ToArray();
         }
@@ -147,8 +147,8 @@ namespace SF3.Models.Files.MPD {
                 tables.Add(OffsetModelSwitchGroupsTable = OffsetModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
             if (header.OffsetScrollScreenAnimation != 0)
                 tables.Add(OffsetScrollScreenAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetScrollScreenAnimation - c_RamOffset, null, 0xFF));
-            if (header.OffsetUnknown3 != 0)
-                tables.Add(OffsetUnknown3Table = UnknownUInt16Table.Create(Data, "Unknown3", header.OffsetUnknown3 - c_RamOffset, null, 0xFFFF));
+            if (header.OffsetIndexedTextures != 0)
+                tables.Add(IndexedTextureTable = TextureIDTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - c_RamOffset));
 
             return tables.ToArray();
         }
@@ -296,8 +296,11 @@ namespace SF3.Models.Files.MPD {
             }
 
             // Gather all information about texture picture formats from existing data.
-            // TODO: make this by collection!!
-            var pixelFormats = new Dictionary<int, TexturePixelFormat>();
+            // Each texture collection needs its own info.
+            var pixelFormats = new Dictionary<TextureCollectionType, Dictionary<int, TexturePixelFormat>>();
+            foreach (var texCollection in (TextureCollectionType[]) Enum.GetValues(typeof(TextureCollectionType)))
+                pixelFormats[texCollection] = new Dictionary<int, TexturePixelFormat>();
+            var primaryPixelFormats = pixelFormats[TextureCollectionType.PrimaryTextures];
 
             // Always ABGR1555 for surface tiles.
             if (SurfaceModel != null) {
@@ -313,10 +316,24 @@ namespace SF3.Models.Files.MPD {
                     .ToArray();
 
                 foreach (var id in textureIds)
-                    pixelFormats[id] = TexturePixelFormat.ABGR1555;
+                    primaryPixelFormats[id] = TexturePixelFormat.ABGR1555;
             }
 
-            // TODO: Textures from models!
+            // Textures in models are ABGR1555.
+            if (Models?.AttrTablesByMemoryAddress != null)
+                foreach (var attrTable in Models.AttrTablesByMemoryAddress.Values)
+                    foreach (var attr in attrTable)
+                        primaryPixelFormats[attr.TextureNo] = TexturePixelFormat.ABGR1555;
+
+            // Textures in the alt animation frames table are ABGR1555.
+            if (TextureAnimationsAlt != null)
+                foreach (var tex in TextureAnimationsAlt)
+                    primaryPixelFormats[tex.TextureID] = TexturePixelFormat.ABGR1555;
+
+            // If the indexed textures table is present (Scenario 3 + PD only), assume Palette1.
+            if (IndexedTextureTable != null)
+                foreach (var tex in IndexedTextureTable)
+                    primaryPixelFormats[tex.TextureID] = TexturePixelFormat.Palette1;
 
             TextureCollections = new TextureCollection[8];
             for (var i = 0; i < TextureCollections.Length; i++) {
@@ -324,7 +341,10 @@ namespace SF3.Models.Files.MPD {
                 if (chunkDatas[chunkIndex]?.Length > 0) {
                     var collection = TextureCollectionForChunkIndex(chunkIndex);
 
-                    TextureCollections[i] = TextureCollection.Create(chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureCollection" + (i + 1), collection, pixelFormats, chunkIndex);
+                    TextureCollections[i] = TextureCollection.Create(
+                        chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureCollection" + (i + 1),
+                        collection, pixelFormats[collection], chunkIndex
+                    );
                     tables.AddRange(TextureCollections[i].Tables);
                 }
             }
@@ -556,13 +576,13 @@ namespace SF3.Models.Files.MPD {
         public UnknownUInt8Table OffsetScrollScreenAnimationTable { get; private set; }
 
         [BulkCopyRecurse]
-        public TextureAnimationAltTable TextureAnimationsAlt { get; private set; }
+        public TextureIDTable TextureAnimationsAlt { get; private set; }
 
         [BulkCopyRecurse]
         public ColorTable[] TexturePalettes { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt16Table OffsetUnknown3Table { get; private set; }
+        public TextureIDTable IndexedTextureTable { get; private set; }
 
         [BulkCopyRecurse]
         public TextureAnimationTable TextureAnimations { get; private set; }

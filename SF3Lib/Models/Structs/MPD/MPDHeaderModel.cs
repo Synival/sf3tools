@@ -28,7 +28,7 @@ namespace SF3.Models.Structs.MPD {
 
         // vvv Screnario 3+ only
         private readonly int offsetPal3Address;           // (scn3+pd) int32  Pointer to 256 rgb16 colors. May be null.
-        private readonly int offsetUnknown3Address;       // (scn3+pd) int32  Pointer to unknown data.
+        private readonly int offsetIndexedTextures;       // (scn3+pd) int32  Pointer to unknown data.
         // ^^^ Screnario 3+ only
 
         private readonly int scrollScreenXAddress;        // int16  X Pos of scroll screen
@@ -70,7 +70,7 @@ namespace SF3.Models.Structs.MPD {
             int address2;
             if (HasPalette3) {
                 offsetPal3Address = Address + 0x44; // 4 bytes
-                offsetUnknown3Address = Address + 0x48; // 4 bytes
+                offsetIndexedTextures = Address + 0x48; // 4 bytes
                 address2 = Address + 0x4C;
             }
             else {
@@ -98,7 +98,7 @@ namespace SF3.Models.Structs.MPD {
 
         public bool HasPalette3 => Scenario >= ScenarioType.Scenario3;
 
-        public bool HasUnknownOffset3 => Scenario >= ScenarioType.Scenario3;
+        public bool HasIndexedTextures => Scenario >= ScenarioType.Scenario3;
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X4")]
@@ -253,12 +253,12 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: nameof(OffsetUnknown3) + " (Scn3+PD)", displayOrder: 19.5f, isPointer: true)]
-        public int OffsetUnknown3 {
-            get => HasUnknownOffset3 ? Data.GetDouble(offsetUnknown3Address) : 0;
+        [TableViewModelColumn(displayName: nameof(OffsetIndexedTextures) + " (Scn3+PD)", displayOrder: 19.5f, isPointer: true)]
+        public int OffsetIndexedTextures {
+            get => HasIndexedTextures ? Data.GetDouble(offsetIndexedTextures) : 0;
             set {
-                if (HasUnknownOffset3)
-                    Data.SetDouble(offsetUnknown3Address, value);
+                if (HasIndexedTextures)
+                    Data.SetDouble(offsetIndexedTextures, value);
             }
         }
 

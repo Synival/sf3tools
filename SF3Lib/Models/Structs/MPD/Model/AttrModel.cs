@@ -4,8 +4,7 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD.Model {
     public class AttrModel : Struct {
-        public int _flagAddr;                // (Uint8) Single-sided or double-sided flag
-        public int _sortAddr;                // (Uint8) Sort reference position and option settings
+        public int _flagsAddr;               // (Uint16) Single/double-sided flag, and other flags
         public int _textureNoAddr;           // (Uint16) Texture number
         public int _modeAddr;                // (Uint16) Mode (bitset)
         public int _colorNoAddr;             // (Uint16) Color number
@@ -13,27 +12,33 @@ namespace SF3.Models.Structs.MPD.Model {
         public int _dirAddr;                 // (Uint16) Texture inversion and function number
 
         public AttrModel(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x0C) {
-            _flagAddr                = Address + 0x00; // 1 byte
-            _sortAddr                = Address + 0x01; // 1 byte
-            _textureNoAddr           = Address + 0x02; // 2 byte
-            _modeAddr                = Address + 0x04; // 2 byte
-            _colorNoAddr             = Address + 0x06; // 2 byte
-            _gouraudShadingTableAddr = Address + 0x08; // 2 byte
-            _dirAddr                 = Address + 0x0A; // 2 byte
+            _flagsAddr               = Address + 0x00; // 2 bytes
+            _textureNoAddr           = Address + 0x02; // 2 bytes
+            _modeAddr                = Address + 0x04; // 2 bytes
+            _colorNoAddr             = Address + 0x06; // 2 bytes
+            _gouraudShadingTableAddr = Address + 0x08; // 2 bytes
+            _dirAddr                 = Address + 0x0A; // 2 bytes
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
-        public byte Flag {
-            get => (byte) Data.GetByte(_flagAddr);
-            set => Data.SetByte(_flagAddr, value);
+        [TableViewModelColumn(displayOrder: 0, displayFormat: "X4")]
+        public ushort Flags {
+            get => (ushort) Data.GetWord(_flagsAddr);
+            set => Data.SetWord(_flagsAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
-        public byte Sort {
-            get => (byte) Data.GetByte(_sortAddr);
-            set => Data.SetByte(_sortAddr, value);
+        [TableViewModelColumn(displayOrder: 0.1f)]
+        public bool ApplyLighting {
+            get => (Flags & 0x0008) == 0x0008;
+            set => Flags = (ushort) ((Flags & ~0x0008) | (value ? 0x0008 : 0));
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 0.2f)]
+        public bool TwoSided {
+            get => (Flags & 0x0100) == 0x0100;
+            set => Flags = (ushort) ((Flags & ~0x0100) | (value ? 0x0100 : 0));
         }
 
         [BulkCopy]
