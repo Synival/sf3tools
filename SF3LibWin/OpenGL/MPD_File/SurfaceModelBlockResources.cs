@@ -85,7 +85,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var animationsById = mpdFile.TextureAnimations != null ? mpdFile.TextureAnimations
                 .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
-                .ToDictionary(x => (int) x.TextureID, x => x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray())
+                .ToDictionary(x => (int) x.TextureID, x => new { Textures = x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray(), x.FrameTimerStart })
                 : [];
 
             var terrainTypeTexInfo = Shader.GetTextureInfo(MPD_TextureUnit.TextureTerrainTypes);
@@ -112,9 +112,9 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
                             if (animationsById.ContainsKey(textureId))
-                                anim = new TextureAnimation(textureId, animationsById[textureId]);
+                                anim = new TextureAnimation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
                             else if (texturesById.ContainsKey(textureId))
-                                anim = new TextureAnimation(textureId, [texturesById[textureId]]);
+                                anim = new TextureAnimation(textureId, [texturesById[textureId]], 0);
                         }
                     }
 

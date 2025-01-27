@@ -3,13 +3,14 @@ using System.Linq;
 
 namespace SF3 {
     public class TextureAnimation {
-        public TextureAnimation(int id, ITexture[] frames) {
+        public TextureAnimation(int id, ITexture[] frames, int frameTimerStart) {
             if (frames == null)
                 throw new ArgumentNullException(nameof(frames));
             if (!frames.All(x => x.ID == id) || frames.Length == 0)
                 throw new ArgumentException(nameof(id));
 
             ID = id;
+            FrameTimerStart = frameTimerStart;
             Frames = frames.OrderBy(x => x.Frame).ToArray();
 
             _frameByTimeFrame = new ITexture[Frames.Sum(x => Math.Max(0, x.Duration))];
@@ -20,10 +21,19 @@ namespace SF3 {
             }
         }
 
+        /// <summary>
+        /// Why do I have to keep re-writing this code???
+        /// </summary>
+        private int YetAnotherModImplementation(int num, int divisor) {
+            int remainder = num % divisor;
+            return remainder < 0 ? remainder + divisor : remainder;
+        }
+
         public ITexture GetFrame(int timeFrame)
-            => _frameByTimeFrame.Length == 0 ? Frames[0] : _frameByTimeFrame[timeFrame % _frameByTimeFrame.Length];
+            => _frameByTimeFrame.Length == 0 ? Frames[0] : _frameByTimeFrame[YetAnotherModImplementation(timeFrame + FrameTimerStart, _frameByTimeFrame.Length)];
 
         public int ID { get; set; }
+        public int FrameTimerStart { get; set; }
         public ITexture[] Frames { get; }
         public readonly ITexture[] _frameByTimeFrame;
     }

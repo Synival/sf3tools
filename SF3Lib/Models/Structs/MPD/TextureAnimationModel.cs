@@ -8,7 +8,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int _textureIdAddress;
         private readonly int _widthAddress;
         private readonly int _heightAddress;
-        private readonly int _unknownAddress;
+        private readonly int _frameTimerStartAddress;
 
         public TextureAnimationModel(IByteData data, int id, string name, int address, bool is32Bit)
         : base(data, id, name, address, 0x0A) {
@@ -21,7 +21,7 @@ namespace SF3.Models.Structs.MPD {
             _textureIdAddress = Address + 0x00 * _bytesPerProperty;
             _widthAddress     = Address + 0x01 * _bytesPerProperty;
             _heightAddress    = Address + 0x02 * _bytesPerProperty;
-            _unknownAddress   = Address + 0x03 * _bytesPerProperty;
+            _frameTimerStartAddress = Address + 0x03 * _bytesPerProperty;
             FramesAddress     = Address + 0x04 * _bytesPerProperty; // variable sizes
 
             // Determine the number of frames. That will determine the size of this animation.
@@ -77,10 +77,10 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Unknown", displayOrder: 3, displayFormat: "X4")]
-        public uint Unknown {
-            get => Data.GetData(_unknownAddress, _bytesPerProperty);
-            set => Data.SetData(_unknownAddress, value, _bytesPerProperty);
+        [TableViewModelColumn(displayName: "Frame Timer Start", displayOrder: 3)]
+        public int FrameTimerStart {
+            get => (int) Data.GetData(_frameTimerStartAddress, _bytesPerProperty);
+            set => Data.SetData(_frameTimerStartAddress, (uint) value, _bytesPerProperty);
         }
 
         [BulkCopy]
