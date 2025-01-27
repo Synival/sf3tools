@@ -32,14 +32,15 @@ namespace SF3.Models.Files.MPD {
         IChunkData SurfaceChunkData { get; }
 
         MPDHeaderTable MPDHeader { get; }
-        TextureAnimationAltTable TextureAnimationsAlt { get; }
-        ColorTable[] TexturePalettes { get; }
         ChunkHeaderTable ChunkHeader { get; }
         ColorTable LightPalette { get; }
         LightPositionTable LightPositionTable { get; }
         UnknownUInt16Table OffsetUnknown1Table { get; }
         OffsetModelSwitchGroupsTable OffsetModelSwitchGroupsTable { get; }
         UnknownUInt8Table OffsetScrollScreenAnimationTable { get; }
+        TextureAnimationAltTable TextureAnimationsAlt { get; }
+        ColorTable[] TexturePalettes { get; }
+        UnknownUInt16Table OffsetUnknown3Table { get; }
         TextureAnimationTable TextureAnimations { get; }
         BoundaryTable BoundariesTable { get; }
 

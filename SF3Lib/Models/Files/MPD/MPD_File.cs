@@ -142,11 +142,13 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             if (header.OffsetUnknown1 != 0)
-                tables.Add(OffsetUnknown1Table = UnknownUInt16Table.Create(Data, "OffsetUnknown1", header.OffsetUnknown1 - c_RamOffset, 32, null));
+                tables.Add(OffsetUnknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, 32, null));
             if (header.OffsetModelSwitchGroups != 0)
-                tables.Add(OffsetModelSwitchGroupsTable = OffsetModelSwitchGroupsTable.Create(Data, "OffsetModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
+                tables.Add(OffsetModelSwitchGroupsTable = OffsetModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
             if (header.OffsetScrollScreenAnimation != 0)
-                tables.Add(OffsetScrollScreenAnimationTable = UnknownUInt8Table.Create(Data, "Offset7", header.OffsetScrollScreenAnimation - c_RamOffset, null, 0xFF));
+                tables.Add(OffsetScrollScreenAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetScrollScreenAnimation - c_RamOffset, null, 0xFF));
+            if (header.OffsetUnknown3 != 0)
+                tables.Add(OffsetUnknown3Table = UnknownUInt16Table.Create(Data, "Unknown3", header.OffsetUnknown3 - c_RamOffset, null, 0xFFFF));
 
             return tables.ToArray();
         }
@@ -513,12 +515,6 @@ namespace SF3.Models.Files.MPD {
         public MPDHeaderTable MPDHeader { get; private set; }
 
         [BulkCopyRecurse]
-        public TextureAnimationAltTable TextureAnimationsAlt { get; private set; }
-
-        [BulkCopyRecurse]
-        public ColorTable[] TexturePalettes { get; private set; }
-
-        [BulkCopyRecurse]
         public ChunkHeaderTable ChunkHeader { get; private set; }
 
         [BulkCopyRecurse]
@@ -535,6 +531,15 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public UnknownUInt8Table OffsetScrollScreenAnimationTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public TextureAnimationAltTable TextureAnimationsAlt { get; private set; }
+
+        [BulkCopyRecurse]
+        public ColorTable[] TexturePalettes { get; private set; }
+
+        [BulkCopyRecurse]
+        public UnknownUInt16Table OffsetUnknown3Table { get; private set; }
 
         [BulkCopyRecurse]
         public TextureAnimationTable TextureAnimations { get; private set; }
