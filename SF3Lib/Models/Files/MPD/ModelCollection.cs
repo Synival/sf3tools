@@ -8,15 +8,16 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Model;
 
 namespace SF3.Models.Files.MPD {
-    public class Models : TableFile {
-        protected Models(IByteData data, INameGetterContext nameContext, int address, string name)
+    public class ModelCollection : TableFile {
+        protected ModelCollection(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex)
         : base(data, nameContext) {
             Address    = address;
             Name       = name;
+            ChunkIndex = chunkIndex;
         }
 
-        public static Models Create(IByteData data, INameGetterContext nameContext, int address, string name) {
-            var newFile = new Models(data, nameContext, address, name);
+        public static ModelCollection Create(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex) {
+            var newFile = new ModelCollection(data, nameContext, address, name, chunkIndex);
             newFile.Init();
             return newFile;
         }
@@ -118,6 +119,7 @@ namespace SF3.Models.Files.MPD {
         public string Name { get; }
 
         public int Address { get; }
+        public int? ChunkIndex { get; }
 
         [BulkCopyRecurse]
         public ModelsHeaderTable ModelsHeaderTable { get; private set; }

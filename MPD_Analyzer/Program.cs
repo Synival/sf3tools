@@ -56,6 +56,10 @@ namespace MPD_Analyzer {
                             if (shouldHaveChunk20_21 != hasChunk21)
                                 Console.WriteLine("  !!! Chunk[21] problem! ShouldHave=" + shouldHaveChunk20_21 + ", DoesHave=" + hasChunk21);
 
+                            // Only a few files have both Chunk[1] and Chunk[20]. Let's log them.
+                            if (mpdFile.ChunkHeader[1].Exists && mpdFile.ChunkHeader[20].Exists && mpdFile.SurfaceModelChunkIndex != 20)
+                                Console.WriteLine("  Has Chunk1 and Chunk20");
+
                             // For Scenario 2 onwards, if Chunk 2 is empty, Chunk 20 should probably have the surface data, or nothing at all.
                             if (mpdFile.Scenario >= ScenarioType.Scenario2) {
                                 if (!mpdFile.ChunkHeader[2].Exists) {

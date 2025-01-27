@@ -25,8 +25,6 @@ namespace SF3.Win.Views.MPD {
                 chunkViews.Add(chunkIndex.Value, newView);
             }
 
-            if (Model.Models != null)
-                AddChunkView(Model.ModelsChunkIndex, "Models", (name) => new ModelChunkView(name, Model.Models));
             if (Model.SurfaceModel != null)
                 AddChunkView(Model.SurfaceModel.ChunkIndex, "Surface Model", (name) => new SurfaceModelChunkView(name, Model.SurfaceModel));
             if (Model.TextureAnimations != null)
@@ -34,9 +32,16 @@ namespace SF3.Win.Views.MPD {
             if (Model.Surface != null)
                 AddChunkView(Model.Surface.ChunkIndex, "Surface", (name) => new SurfaceChunkView(name, Model.Surface));
 
-            foreach (var texCollection in Model.TextureCollections)
-                if (texCollection != null)
-                    AddChunkView(texCollection.ChunkIndex, "Textures", (name) => new TextureChunkView(name, texCollection));
+
+            if (Model.ModelCollections != null)
+                foreach (var modelCollection in Model.ModelCollections)
+                    if (modelCollection != null)
+                        AddChunkView(modelCollection.ChunkIndex, "Models", (name) => new ModelChunkView(name, modelCollection));
+
+            if (Model.TextureCollections != null)
+                foreach (var texCollection in Model.TextureCollections)
+                    if (texCollection != null)
+                        AddChunkView(texCollection.ChunkIndex, "Textures", (name) => new TextureChunkView(name, texCollection));
 
             // Add chunks, sorted by their chunk index.
             var chunkViewArray = chunkViews.OrderBy(x => x.Key).Select(x => x.Value).ToArray();

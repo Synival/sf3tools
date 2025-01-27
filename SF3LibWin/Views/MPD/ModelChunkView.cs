@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
 using SF3.Models.Tables.MPD.Model;
-using static SF3.Models.Files.MPD.Models;
+using static SF3.Models.Files.MPD.ModelCollection;
 
 namespace SF3.Win.Views.MPD {
     public class ModelChunkView : TabView {
-        public ModelChunkView(string name, Models.Files.MPD.Models model) : base(name) {
+        public ModelChunkView(string name, Models.Files.MPD.ModelCollection model) : base(name) {
             Model = model;
         }
 
@@ -24,6 +24,6 @@ namespace SF3.Win.Views.MPD {
             return Control;
         }
 
-        public Models.Files.MPD.Models Model { get; }
+        public Models.Files.MPD.ModelCollection Model { get; }
     }
 }

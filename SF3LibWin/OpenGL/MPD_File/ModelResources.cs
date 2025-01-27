@@ -8,6 +8,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Model;
+using SF3.Models.Tables;
 using SF3.Types;
 using SF3.Win.Extensions;
 
@@ -46,27 +47,50 @@ namespace SF3.Win.OpenGL.MPD_File {
         public void UpdateModels(IMPD_File mpdFile) {
             Reset();
 
-            if (mpdFile.Models?.ModelTable == null)
+            if (mpdFile.ModelCollections == null)
                 return;
 
-            Models = mpdFile.Models.ModelTable.Rows;
-            var uniquePData1Addresses = mpdFile.Models.ModelTable
-                .Select(x => x.PData1)
-                .Where(x => x != 0)
-                .Distinct();
+            var modelsList = new List<Model>();
 
-            foreach (var address in uniquePData1Addresses)
-                AddModel(mpdFile, address);
+            foreach (var models in mpdFile.ModelCollections) {
+                modelsList.AddRange(models.ModelTable.Rows);
+
+                var uniquePData1Addresses = models.ModelTable
+                    .Select(x => x.PData1)
+                    .Where(x => x != 0)
+                    .Distinct();
+
+                foreach (var address in uniquePData1Addresses)
+                    AddModel(mpdFile, address);
+            }
+
+            Models = modelsList.ToArray();
+        }
+
+        private TValue GetFromAnyCollection<TValue>(IMPD_File mpdFile, Func<Models.Files.MPD.ModelCollection, Dictionary<int, TValue>> tableGetter, int address) where TValue : class {
+            foreach (var mc in mpdFile.ModelCollections) {
+                if (mc != null) {
+                    var dict = tableGetter(mc);
+                    if (dict.TryGetValue(address, out TValue value))
+                        return value;
+                }
+            }
+            return null;
         }
 
         public void AddModel(IMPD_File mpdFile, int pdataAddressInMemory) {
             TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
                 => (flip & ~TextureFlipType.Horizontal) | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
 
-            var pdata    = mpdFile.Models.PDatasByMemoryAddress[pdataAddressInMemory];
-            var vertices = mpdFile.Models.VertexTablesByMemoryAddress[pdata.VerticesOffset];
-            var polygons = mpdFile.Models.PolygonTablesByMemoryAddress[pdata.PolygonsOffset];
-            var attrs    = mpdFile.Models.AttrTablesByMemoryAddress[pdata.AttributesOffset];
+            var pdata = GetFromAnyCollection(mpdFile, mc => mc.PDatasByMemoryAddress, pdataAddressInMemory);
+            if (pdata == null)
+                return;
+
+            var vertices = GetFromAnyCollection(mpdFile, mc => mc.VertexTablesByMemoryAddress,  pdata.VerticesOffset);
+            var polygons = GetFromAnyCollection(mpdFile, mc => mc.PolygonTablesByMemoryAddress, pdata.PolygonsOffset);
+            var attrs    = GetFromAnyCollection(mpdFile, mc => mc.AttrTablesByMemoryAddress,    pdata.AttributesOffset);
+            if (vertices == null || polygons == null || attrs == null)
+                return;
 
             var texturesById = mpdFile.TextureCollections != null ? mpdFile.TextureCollections
                 .Where(x => x?.TextureTable != null && x.TextureTable.Collection == TextureCollectionType.PrimaryTextures)
@@ -173,6 +197,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             var semiTransparentTexturedModel = (semiTransparentQuads.Count > 0) ? new QuadModel(semiTransparentQuads.ToArray()) : null;
 
             if (modelExists) {
+                if (ModelsByMemoryAddress.ContainsKey(pdataAddressInMemory))
+                    ;
                 ModelsByMemoryAddress[pdataAddressInMemory] = new ModelGroup(
                     solidTexturedModel,
                     semiTransparentTexturedModel
