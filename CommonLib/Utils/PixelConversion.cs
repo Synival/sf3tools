@@ -79,31 +79,21 @@ namespace CommonLib.Utils {
             return htmlColor.Length == 3 || htmlColor.Length == 4 || htmlColor.Length == 6 || htmlColor.Length == 8;
         }
 
-        public static ushort ABGR1555toARGB1555(ushort input)
-            => ARGB1555toABGR1555(input); // Exact same operation.
-
-        public static ushort ARGB1555toABGR1555(ushort input) {
-            // Return 'input' with swapped red and blue channels.
-            var lowerChannel = input & 0x001F;
-            var upperChannel = input & 0x7F00;
-            return (ushort) ((input & ~0x7C1F) | (lowerChannel << 10) | (upperChannel >> 10));
-        }
-
         public static PixelChannels ABGR1555toChannels(ushort input) {
             return new PixelChannels {
                 a = ((input & 0x8000) != 0) ? (byte) 255 : (byte) 0,
-                r = (byte) (((input >> 0)  & 0x1F) << 3),
-                g = (byte) (((input >> 5)  & 0x1F) << 3),
-                b = (byte) (((input >> 10) & 0x1F) << 3),
+                r = (byte) ((((input >> 0)  & 0x1F) * 255) / 31),
+                g = (byte) ((((input >> 5)  & 0x1F) * 255) / 31),
+                b = (byte) ((((input >> 10) & 0x1F) * 255) / 31),
             };
         }
 
         public static PixelChannels ARGB1555toChannels(ushort input) {
             return new PixelChannels {
                 a = ((input & 0x8000) != 0) ? (byte) 255 : (byte) 0,
-                r = (byte) (((input >> 10) & 0x1F) << 3),
-                g = (byte) (((input >> 5)  & 0x1F) << 3),
-                b = (byte) (((input >> 0)  & 0x1F) << 3),
+                r = (byte) ((((input >> 10) & 0x1F) * 255) / 31),
+                g = (byte) ((((input >> 5)  & 0x1F) * 255) / 31),
+                b = (byte) ((((input >> 0)  & 0x1F) * 255) / 31),
             };
         }
 
@@ -145,10 +135,17 @@ namespace CommonLib.Utils {
             };
         }
 
+        public static ushort ABGR1555toARGB1555(ushort input) {
+            // Return 'input' with swapped red and blue channels.
+            var lowerChannel = input & 0x001F;
+            var upperChannel = input & 0x7F00;
+            return (ushort) ((input & ~0x7C1F) | (lowerChannel << 10) | (upperChannel >> 10));
+        }
         public static uint ABGR1555toABGR8888(ushort input) => ABGR1555toChannels(input).ToABGR8888();
         public static uint ABGR1555toARGB8888(ushort input) => ABGR1555toChannels(input).ToARGB8888();
         public static uint ABGR1555toBGRA8888(ushort input) => ABGR1555toChannels(input).ToBGRA8888();
 
+        public static ushort ARGB1555toABGR1555(ushort input) => ABGR1555toARGB1555(input); // Exact same operation.
         public static uint ARGB1555toABGR8888(ushort input) => ARGB1555toChannels(input).ToABGR8888();
         public static uint ARGB1555toARGB8888(ushort input) => ARGB1555toChannels(input).ToARGB8888();
         public static uint ARGB1555toBGRA8888(ushort input) => ARGB1555toChannels(input).ToBGRA8888();
