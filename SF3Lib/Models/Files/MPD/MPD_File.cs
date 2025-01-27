@@ -296,8 +296,27 @@ namespace SF3.Models.Files.MPD {
             }
 
             // Gather all information about texture picture formats from existing data.
+            // TODO: make this by collection!!
             var pixelFormats = new Dictionary<int, TexturePixelFormat>();
-            // TODO: actually gather it!!
+
+            // Always ABGR1555 for surface tiles.
+            if (SurfaceModel != null) {
+                var textureIds = SurfaceModel.TileTextureRowTable
+                    .SelectMany(row => {
+                        var ids = new byte[64];
+                        for (var x = 0; x < 64; x++)
+                            ids[x] = row.GetTextureID(x);
+                        return ids;
+                    })
+                    .Where(x => x != 0xFF)
+                    .Distinct()
+                    .ToArray();
+
+                foreach (var id in textureIds)
+                    pixelFormats[id] = TexturePixelFormat.ABGR1555;
+            }
+
+            // TODO: Textures from models!
 
             TextureCollections = new TextureCollection[8];
             for (var i = 0; i < TextureCollections.Length; i++) {
