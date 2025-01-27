@@ -13,18 +13,13 @@ namespace SF3 {
             Duration = duration;
 
             _data = data;
+            _hashPrefix = hashPrefix;
             Tags = (tags == null) ? new Dictionary<TagKey, TagValue>() : tags.ToDictionary(x => x.Key, x => x.Value);
-
-            _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToABGR1555BitmapData(data);
-            _bitmapDataARGB8888 = BitmapUtils.ConvertABGR1555DataToABGR8888BitmapData(data);
-
-            using (var md5 = MD5.Create())
-                Hash = (hashPrefix == "" ? "" : (hashPrefix + "-")) + BitConverter.ToString(md5.ComputeHash(_bitmapDataARGB1555)).Replace("-", "").ToLower();
         }
 
         private readonly ushort[,] _data;
-        private readonly byte[] _bitmapDataARGB1555;
-        private readonly byte[] _bitmapDataARGB8888;
+        private byte[] _bitmapDataARGB1555 = null;
+        private byte[] _bitmapDataARGB8888 = null;
 
         public int ID { get; }
         public int Frame { get; }
@@ -38,10 +33,34 @@ namespace SF3 {
         public byte[,] ImageData8Bit => throw new NotSupportedException();
         public ushort[,] ImageData16Bit => (ushort[,]) _data.Clone();
 
-        public byte[] BitmapDataARGB1555 => (byte[]) _bitmapDataARGB1555.Clone();
-        public byte[] BitmapDataARGB8888 => (byte[]) _bitmapDataARGB8888.Clone();
+        public byte[] BitmapDataARGB1555 {
+            get {
+                if (_bitmapDataARGB1555 == null)
+                    _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToABGR1555BitmapData(_data);
+                return _bitmapDataARGB1555;
+            }
+        }
 
-        public string Hash { get; }
+        public byte[] BitmapDataARGB8888 {
+            get {
+                if (_bitmapDataARGB8888 == null)
+                    _bitmapDataARGB8888 = BitmapUtils.ConvertABGR1555DataToABGR8888BitmapData(_data);
+                return _bitmapDataARGB8888;
+            }
+        }
+
+        private string _hash = null;
+        private readonly string _hashPrefix;
+        public string Hash {
+            get {
+                if (_hash == null) {
+                    using (var md5 = MD5.Create())
+                        _hash = (_hashPrefix == "" ? "" : (_hashPrefix + "-")) + BitConverter.ToString(md5.ComputeHash(BitmapDataARGB1555)).Replace("-", "").ToLower();
+                }
+                return _hash;
+            }
+        }
+
         public Dictionary<TagKey, TagValue> Tags { get; }
     }
 }
