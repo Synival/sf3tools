@@ -184,7 +184,7 @@ namespace SF3.Win.Controls {
         private void UpdateProjectionMatrix() {
             _projectionMatrix = Matrix4.CreatePerspectiveFieldOfView(
                 MathHelper.DegreesToRadians(22.50f), (float) ClientSize.Width / ClientSize.Height,
-                0.1f, 300.0f);
+                0.05f, 65536.0f);
         }
 
         private void UpdateProjectionMatrices() {
