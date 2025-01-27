@@ -32,7 +32,7 @@ namespace SF3 {
         public TexturePixelFormat PixelFormat { get; }
 
         public byte[,] ImageData8Bit => (byte[,]) _data.Clone();
-        public byte[] BitmapDataIndexed => _data.To1DArray();
+        public byte[] BitmapDataIndexed => _data.To1DArrayTransposed();
 
         public ushort[,] ImageData16Bit => throw new NotSupportedException();
         public byte[] BitmapDataARGB1555 => throw new NotSupportedException();

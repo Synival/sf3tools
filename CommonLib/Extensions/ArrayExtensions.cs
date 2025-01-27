@@ -66,20 +66,39 @@ namespace CommonLib.Extensions {
         }
 
         /// <summary>
-        /// Returns a copy of a 2D array in row major order converted to a 1D arrray.
+        /// Returns a copy of a 2D array in converted to a 1D array.
         /// </summary>
         /// <typeparam name="T">Type of array to convert.</typeparam>
         /// <param name="array">The 2D array to convert.</param>
-        /// <returns>A new 1D array with data from the input 2D array copied in row major order.</returns>
+        /// <returns>A new 1D array with data from the input 2D array copied.</returns>
         public static T[] To1DArray<T>(this T[,] array) {
-            var width = array.GetLength(0);
-            var height = array.GetLength(1);
+            var len1 = array.GetLength(0);
+            var len2 = array.GetLength(1);
 
-            var newArray = new T[width * height];
+            var newArray = new T[len1 * len2];
             int pos = 0;
-            for (var x = 0; x < width; x++)
-                for (var y = 0; y < height; y++)
-                    newArray[pos++] = array[x, y];
+            for (var i1 = 0; i1 < len1; i1++)
+                for (var i2 = 0; i2 < len2; i2++)
+                    newArray[pos++] = array[i1, i2];
+
+            return newArray;
+        }
+
+        /// <summary>
+        /// Returns a copy of a 2D array in converted to a 1D array with the dimensions swapped.
+        /// </summary>
+        /// <typeparam name="T">Type of array to convert.</typeparam>
+        /// <param name="array">The 2D array to convert.</param>
+        /// <returns>A new 1D array with data from the input 2D array copied with the dimensions wapped.</returns>
+        public static T[] To1DArrayTransposed<T>(this T[,] array) {
+            var len1 = array.GetLength(0);
+            var len2 = array.GetLength(1);
+
+            var newArray = new T[len1 * len2];
+            int pos = 0;
+            for (var i2 = 0; i2 < len2; i2++)
+                for (var i1 = 0; i1 < len1; i1++)
+                    newArray[pos++] = array[i1, i2];
 
             return newArray;
         }
