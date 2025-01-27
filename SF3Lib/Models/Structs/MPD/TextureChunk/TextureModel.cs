@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.Attributes;
+using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Types;
 
@@ -12,8 +13,9 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         private readonly int heightAddress;
         private readonly int imageDataOffsetAddress;
 
-        public TextureModel(IByteData data, TextureCollectionType collection, int id, string name, int address, TexturePixelFormat pixelFormat, int? chunkIndex, int? nextImageDataOffset)
-        : base(data, id, name, address, GlobalSize) {
+        public TextureModel(IByteData data, TextureCollectionType collection, int id, string name, int address,
+            TexturePixelFormat pixelFormat, Palette palette, int? chunkIndex, int? nextImageDataOffset
+        ) : base(data, id, name, address, GlobalSize) {
             Collection  = collection;
             ChunkIndex  = chunkIndex;
 
@@ -29,7 +31,9 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 PixelFormatKnown = false;
                 PixelFormat = nextImageDataOffset.HasValue ? GuessPixelFormat(nextImageDataOffset.Value) : TexturePixelFormat.Unknown;
             }
+
             BytesPerPixel = PixelFormat.BytesPerPixel();
+            Palette = palette;
 
             _readyForImageData = true;
             _ = FetchAndCacheTexture(null);
@@ -64,7 +68,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             try {
                 Texture = PixelFormat == TexturePixelFormat.ABGR1555
                     ? new TextureABGR1555(ID, 0, 0, RawImageData16Bit, tags: tags)
-                    : (ITexture) new TextureIndexed(ID, 0, 0, RawImageData8Bit, tags: tags);
+                    : (ITexture) new TextureIndexed(ID, 0, 0, RawImageData8Bit, PixelFormat, Palette, tags: tags);
                 return true;
             }
             catch {
@@ -114,6 +118,10 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         [TableViewModelColumn(displayName: "Pixel Format", displayOrder: 3)]
         public TexturePixelFormat PixelFormat { get; }
 
+        public int BytesPerPixel { get; }
+
+        public Palette Palette { get; }
+
         [TableViewModelColumn(displayName: "Internal Hash", displayOrder: 4, minWidth: 225)]
         public string Hash => Texture?.Hash ?? "";
 
@@ -121,8 +129,6 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         public string Tags => (Texture.Tags == null) ? "" : string.Join(", ", Texture.Tags.Select(x => x.Key + "|" + x.Value));
 
         public bool TextureIsLoaded => Texture != null;
-
-        public int BytesPerPixel { get; }
 
         public byte[,] RawImageData8Bit {
             get {

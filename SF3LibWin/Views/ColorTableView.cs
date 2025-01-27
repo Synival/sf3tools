@@ -3,8 +3,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using CommonLib.Imaging;
 using CommonLib.NamedValues;
-using CommonLib.Utils;
 using SF3.Models.Tables.MPD;
 using SF3.Win.Controls;
 

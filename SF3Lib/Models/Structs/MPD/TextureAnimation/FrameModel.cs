@@ -2,6 +2,7 @@
 using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.Attributes;
+using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Types;
 
@@ -25,11 +26,11 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             _unknownAddress                 = Address + 1 * _bytesPerProperty;
         }
 
-        public void FetchAndCacheTexture(IByteData data, TexturePixelFormat pixelFormat, ITexture referenceTexture) {
+        public void FetchAndCacheTexture(IByteData data, TexturePixelFormat pixelFormat, Palette palette, ITexture referenceTexture) {
             if (pixelFormat == TexturePixelFormat.ABGR1555)
                 FetchAndCacheTextureABGR1555(data, referenceTexture);
             else
-                FetchAndCacheTextureIndexed(data, pixelFormat, referenceTexture);
+                FetchAndCacheTextureIndexed(data, pixelFormat, palette, referenceTexture);
         }
 
         private void FetchAndCacheTextureABGR1555(IByteData data, ITexture referenceTexture) {
@@ -46,14 +47,15 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             Texture = new TextureABGR1555(TextureID, FrameNum, (int) Duration, imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
 
-        private void FetchAndCacheTextureIndexed(IByteData data, TexturePixelFormat pixelFormat, ITexture referenceTexture) {
+        private void FetchAndCacheTextureIndexed(IByteData data, TexturePixelFormat pixelFormat, Palette palette, ITexture referenceTexture) {
             var imageData = new byte[Width, Height];
             var off = 0;
             for (var y = 0; y < Height; y++)
                 for (var x = 0; x < Width; x++)
                     imageData[x, y] = (byte) data.GetByte(off++);
 
-            Texture = new TextureIndexed(TextureID, FrameNum, (int) Duration, imageData, pixelFormat, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
+            Texture = new TextureIndexed(TextureID, FrameNum, (int) Duration, imageData, pixelFormat, palette,
+                tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
 
         public ushort[,] UpdateTextureABGR1555(IByteData data, ushort[,] imageData, ITexture referenceTexture) {

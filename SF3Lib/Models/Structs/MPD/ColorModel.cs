@@ -1,6 +1,7 @@
 ﻿using CommonLib.Attributes;
+using CommonLib.Imaging;
 using SF3.ByteData;
-using static CommonLib.Utils.PixelConversion;
+using static CommonLib.Imaging.PixelConversion;
 
 namespace SF3.Models.Structs.MPD {
     public class ColorModel : Struct {

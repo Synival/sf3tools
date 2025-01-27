@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
-using CommonLib.Utils;
+using CommonLib.Imaging;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;

@@ -2,7 +2,8 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using static CommonLib.Utils.PixelConversion;
+using CommonLib.Imaging;
+using static CommonLib.Imaging.PixelConversion;
 
 namespace SF3.Win.Extensions {
     public static class BitmapExtensions {

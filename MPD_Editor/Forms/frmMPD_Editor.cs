@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using CommonLib.Imaging;
 using CommonLib.NamedValues;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SF3.ModelLoaders;
@@ -20,7 +21,7 @@ using SF3.Types;
 using SF3.Win.Forms;
 using SF3.Win.Views;
 using SF3.Win.Views.MPD;
-using static CommonLib.Utils.PixelConversion;
+using static CommonLib.Imaging.PixelConversion;
 using static CommonLib.Win.Utils.MessageUtils;
 
 namespace SF3.MPD_Editor.Forms {

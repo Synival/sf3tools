@@ -1,4 +1,5 @@
-﻿using static CommonLib.Utils.PixelConversion;
+﻿using CommonLib.Imaging;
+using static CommonLib.Imaging.PixelConversion;
 
 namespace CommonLib.Tests.Utils {
     [TestClass]
