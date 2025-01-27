@@ -68,15 +68,14 @@ namespace SF3 {
         ushort[,] ImageData16Bit { get; }
 
         /// <summary>
-        /// Image data for 8-bit palette format. Cannot be set; it is based on data from ImageData8Bit. Only usable when BytesPerPixel is 1.
-        /// TODO: actually have a palette!!
-        /// </summary>
-        byte[] BitmapDataIndexed { get; }
-
-        /// <summary>
-        /// Image data for 16-bit ARGB1555 format. Cannot be set; it is based on data from ImageData16Bit. Only usable when BytesPerPixel is 2.
+        /// Image data for 16-bit ARGB1555 format. Cannot be set; it is based on the image data and PixelFormat.
         /// </summary>
         byte[] BitmapDataARGB1555 { get; }
+
+        /// <summary>
+        /// Image data for 32-bit ARGB8888 format. Cannot be set; it is based on the image data and PixelFormat.
+        /// </summary>
+        byte[] BitmapDataARGB8888 { get; }
 
         /// <summary>
         /// Hash for identifying this as a unique texture.

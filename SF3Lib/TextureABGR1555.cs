@@ -14,7 +14,9 @@ namespace SF3 {
 
             _data = data;
             Tags = (tags == null) ? new Dictionary<TagKey, TagValue>() : tags.ToDictionary(x => x.Key, x => x.Value);
+
             _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToABGR1555BitmapData(data);
+            _bitmapDataARGB8888 = BitmapUtils.ConvertABGR1555DataToABGR8888BitmapData(data);
 
             using (var md5 = MD5.Create())
                 Hash = (hashPrefix == "" ? "" : (hashPrefix + "-")) + BitConverter.ToString(md5.ComputeHash(_bitmapDataARGB1555)).Replace("-", "").ToLower();
@@ -22,6 +24,7 @@ namespace SF3 {
 
         private readonly ushort[,] _data;
         private readonly byte[] _bitmapDataARGB1555;
+        private readonly byte[] _bitmapDataARGB8888;
 
         public int ID { get; }
         public int Frame { get; }
@@ -32,11 +35,11 @@ namespace SF3 {
         public int BytesPerPixel => 2;
         public TexturePixelFormat PixelFormat => TexturePixelFormat.ABGR1555;
 
-        public ushort[,] ImageData16Bit => (ushort[,]) _data.Clone();
-        public byte[] BitmapDataARGB1555 => _bitmapDataARGB1555;
-
         public byte[,] ImageData8Bit => throw new NotSupportedException();
-        public byte[] BitmapDataIndexed => throw new NotSupportedException();
+        public ushort[,] ImageData16Bit => (ushort[,]) _data.Clone();
+
+        public byte[] BitmapDataARGB1555 => (byte[]) _bitmapDataARGB1555.Clone();
+        public byte[] BitmapDataARGB8888 => (byte[]) _bitmapDataARGB8888.Clone();
 
         public string Hash { get; }
         public Dictionary<TagKey, TagValue> Tags { get; }

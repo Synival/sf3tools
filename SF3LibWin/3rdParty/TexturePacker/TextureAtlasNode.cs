@@ -35,9 +35,6 @@ namespace SF3.Win.ThirdParty.TexturePacker {
                         Left = new TextureAtlasNode(new Rectangle(Padding, Rect.Y + height + Padding, Rect.Width, Rect.Height), Padding, TryRotate);
                     // TODO: else, if there's remaining space below, add that as 'Left'.  we'll need a parent reference for that.
 
-                    if (rotated)
-                        ;
-
                     Rect = new Rectangle(Rect.X, Rect.Y, width, height);
                     Rotated = rotated;
                     return this;

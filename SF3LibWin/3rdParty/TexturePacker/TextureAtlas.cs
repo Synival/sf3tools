@@ -151,19 +151,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
                     if (atlas.PixelFormat != PixelFormat.Format32bppArgb)
                         throw new InvalidOperationException();
 
-                    // TODO: support palettes!
-                    if (node.Texture.BytesPerPixel == 1)
-                        return;
-
-                    // Get image data and convert to the format we need for the bitmap buffer.
-                    byte[] imageData = null;
-                    if (node.Texture.BytesPerPixel == 2) {
-                        var imageData1 = node.Texture.CreateImageData();
-                        // TODO: WHAT IS THIS CONVERSION???
-                        imageData = PixelConversion.ImageDataToSomething(node.Texture.CreateImageData());
-                    }
-                    else if (node.Texture.BytesPerPixel == 4)
-                        imageData = node.Texture.CreateImageData();
+                    var imageData = node.Texture.BitmapDataARGB8888;
 
                     // Rotate the byte array clockwise if 'node.Rotated' is on.
                     if (node.Rotated) {

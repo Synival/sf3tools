@@ -134,6 +134,17 @@ namespace CommonLib.Utils {
             };
         }
 
+        // TODO: palettes!
+        public static PixelChannels IndexedToChannels(byte input) {
+            // TODO: use proper palette!!
+            return new PixelChannels {
+                a = (byte) ((input == 0) ? 0 : 255),
+                r = input,
+                g = input,
+                b = input
+            };
+        }
+
         public static uint ABGR1555toABGR8888(ushort input) => ABGR1555toChannels(input).ToABGR8888();
         public static uint ABGR1555toARGB8888(ushort input) => ABGR1555toChannels(input).ToARGB8888();
         public static uint ABGR1555toBGRA8888(ushort input) => ABGR1555toChannels(input).ToBGRA8888();
@@ -142,41 +153,25 @@ namespace CommonLib.Utils {
         public static uint ARGB1555toARGB8888(ushort input) => ARGB1555toChannels(input).ToARGB8888();
         public static uint ARGB1555toBGRA8888(ushort input) => ARGB1555toChannels(input).ToBGRA8888();
 
-        public static uint ABGR8888toABGR1555(uint input) => ABGR8888toChannels(input).ToABGR1555();
-        public static uint ABGR8888toARGB1555(uint input) => ABGR8888toChannels(input).ToARGB1555();
+        public static ushort ABGR8888toABGR1555(uint input) => ABGR8888toChannels(input).ToABGR1555();
+        public static ushort ABGR8888toARGB1555(uint input) => ABGR8888toChannels(input).ToARGB1555();
         public static uint ABGR8888toARGB8888(uint input) => ABGR8888toChannels(input).ToARGB8888();
         public static uint ABGR8888toBGRA8888(uint input) => ABGR8888toChannels(input).ToBGRA8888();
 
-        public static uint ARGB8888toABGR1555(uint input) => ARGB8888toChannels(input).ToABGR1555();
-        public static uint ARGB8888toARGB1555(uint input) => ARGB8888toChannels(input).ToARGB1555();
+        public static ushort ARGB8888toABGR1555(uint input) => ARGB8888toChannels(input).ToABGR1555();
+        public static ushort ARGB8888toARGB1555(uint input) => ARGB8888toChannels(input).ToARGB1555();
         public static uint ARGB8888toABGR8888(uint input) => ARGB8888toChannels(input).ToABGR8888();
         public static uint ARGB8888toBGRA8888(uint input) => ARGB8888toChannels(input).ToBGRA8888();
 
-        public static uint BGRA8888toABGR1555(uint input) => BGRA8888toChannels(input).ToABGR1555();
-        public static uint BGRA8888toARGB1555(uint input) => BGRA8888toChannels(input).ToARGB1555();
+        public static ushort BGRA8888toABGR1555(uint input) => BGRA8888toChannels(input).ToABGR1555();
+        public static ushort BGRA8888toARGB1555(uint input) => BGRA8888toChannels(input).ToARGB1555();
         public static uint BGRA8888toARGB8888(uint input) => BGRA8888toChannels(input).ToARGB8888();
         public static uint BGRA8888toABGR8888(uint input) => BGRA8888toChannels(input).ToBGRA8888();
 
-        // TODO: This is used for TextureAtlases. Please figure out exactly what's going on here!!!
-        public static byte[] ImageDataToSomething(byte[] input) {
-            if (input.Length % 2 != 0)
-                throw new ArgumentException(nameof(input));
-
-            var output = new byte[input.Length * 2];
-            int posIn = 0, posOut = 0;
-            while (posIn < input.Length) {
-                ushort inputPixel = 0;
-                inputPixel |= input[posIn++];
-                inputPixel |= (ushort) (input[posIn++] << 8);
-
-                var outputPixel = ARGB1555toBGRA8888(inputPixel);
-
-                output[posOut++] = (byte) ((outputPixel >> 24) & 0xFF);
-                output[posOut++] = (byte) ((outputPixel >> 16) & 0xFF);
-                output[posOut++] = (byte) ((outputPixel >> 8)  & 0xFF);
-                output[posOut++] = (byte) ((outputPixel >> 0)  & 0xFF);
-            }
-            return output;
-        }
+        // TODO: palettes!
+        public static ushort IndexedToABGR1555(byte input) => IndexedToChannels(input).ToABGR1555();
+        public static uint IndexedToABGR8888(byte input) => IndexedToChannels(input).ToABGR8888();
+        public static ushort IndexedToARGB1555(byte input) => IndexedToChannels(input).ToARGB1555();
+        public static uint IndexedToARGB8888(byte input) => IndexedToChannels(input).ToARGB8888();
     }
 }
