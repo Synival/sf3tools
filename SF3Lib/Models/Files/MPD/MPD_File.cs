@@ -104,17 +104,20 @@ namespace SF3.Models.Files.MPD {
         }
 
         private ITable[] MakeTexturePaletteTables(MPDHeaderModel header) {
-            TexturePalettes = new ColorTable[3];
+            PaletteTables = new ColorTable[3];
             var headerRamAddr = header.Address + c_RamOffset;
 
-            if (header.OffsetPal1 >= c_RamOffset && header.OffsetPal1 < headerRamAddr)
-                TexturePalettes[0] = ColorTable.Create(Data, "TexturePalette1", header.OffsetPal1 - c_RamOffset, Math.Min(256, (headerRamAddr - header.OffsetPal1) / 2));
-            if (header.OffsetPal2 >= c_RamOffset && header.OffsetPal2 < headerRamAddr)
-                TexturePalettes[1] = ColorTable.Create(Data, "TexturePalette2", header.OffsetPal2 - c_RamOffset, Math.Min(256, (headerRamAddr - header.OffsetPal2) / 2));
-            if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 >= c_RamOffset && header.OffsetPal3 < headerRamAddr)
-                TexturePalettes[2] = ColorTable.Create(Data, "TexturePalette3", header.OffsetPal3 - c_RamOffset, Math.Min(256, (headerRamAddr - header.OffsetPal3) / 2));
+            // Sometimes palette addresses are placed in an odd place at or just before the header actually begins.
+            // This is most likely an error in the MPD file; it results in garbage data.
+            // Don't load the palettes in these cases.
+            if (header.OffsetPal1 >= c_RamOffset && (headerRamAddr - header.OffsetPal1) / 2 >= 256)
+                PaletteTables[0] = ColorTable.Create(Data, "TexturePalette1", header.OffsetPal1 - c_RamOffset, 256);
+            if (header.OffsetPal2 >= c_RamOffset && (headerRamAddr - header.OffsetPal2) / 2 >= 256)
+                PaletteTables[1] = ColorTable.Create(Data, "TexturePalette2", header.OffsetPal2 - c_RamOffset, 256);
+            if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 >= c_RamOffset && (headerRamAddr - header.OffsetPal3) / 2 >= 256)
+                PaletteTables[2] = ColorTable.Create(Data, "TexturePalette3", header.OffsetPal3 - c_RamOffset, 256);
 
-            return TexturePalettes.Where(x => x != null).ToArray();
+            return PaletteTables.Where(x => x != null).ToArray();
         }
 
         private ITable[] MakeLightingTables(MPDHeaderModel header) {
@@ -386,13 +389,13 @@ namespace SF3.Models.Files.MPD {
 
         private Dictionary<TexturePixelFormat, Palette> CreatePalettesForTextures() {
             var palettes = new Dictionary<TexturePixelFormat, Palette>();
-            if (TexturePalettes != null) {
-                if (TexturePalettes.Length >= 1 && TexturePalettes[0] != null)
-                    palettes[TexturePixelFormat.Palette1] = new Palette(TexturePalettes[0].Select(x => x.ColorABGR1555).ToArray());
-                if (TexturePalettes.Length >= 2 && TexturePalettes[1] != null)
-                    palettes[TexturePixelFormat.Palette2] = new Palette(TexturePalettes[1].Select(x => x.ColorABGR1555).ToArray());
-                if (TexturePalettes.Length >= 3 && TexturePalettes[2] != null)
-                    palettes[TexturePixelFormat.Palette3] = new Palette(TexturePalettes[2].Select(x => x.ColorABGR1555).ToArray());
+            if (PaletteTables != null) {
+                if (PaletteTables.Length >= 1 && PaletteTables[0] != null)
+                    palettes[TexturePixelFormat.Palette1] = new Palette(PaletteTables[0].Select(x => x.ColorABGR1555).ToArray());
+                if (PaletteTables.Length >= 2 && PaletteTables[1] != null)
+                    palettes[TexturePixelFormat.Palette2] = new Palette(PaletteTables[1].Select(x => x.ColorABGR1555).ToArray());
+                if (PaletteTables.Length >= 3 && PaletteTables[2] != null)
+                    palettes[TexturePixelFormat.Palette3] = new Palette(PaletteTables[2].Select(x => x.ColorABGR1555).ToArray());
             }
             return palettes;
         }
@@ -640,7 +643,7 @@ namespace SF3.Models.Files.MPD {
         public TextureIDTable TextureAnimationsAlt { get; private set; }
 
         [BulkCopyRecurse]
-        public ColorTable[] TexturePalettes { get; private set; }
+        public ColorTable[] PaletteTables { get; private set; }
 
         [BulkCopyRecurse]
         public TextureIDTable IndexedTextureTable { get; private set; }

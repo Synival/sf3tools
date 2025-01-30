@@ -39,7 +39,7 @@ namespace SF3.Models.Files.MPD {
         OffsetModelSwitchGroupsTable OffsetModelSwitchGroupsTable { get; }
         UnknownUInt8Table OffsetScrollScreenAnimationTable { get; }
         TextureIDTable TextureAnimationsAlt { get; }
-        ColorTable[] TexturePalettes { get; }
+        ColorTable[] PaletteTables { get; }
         TextureIDTable IndexedTextureTable { get; }
         TextureAnimationTable TextureAnimations { get; }
         BoundaryTable BoundariesTable { get; }

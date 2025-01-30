@@ -29,9 +29,9 @@ namespace SF3.Win.Views.MPD {
             if (Model.TextureAnimations != null)
                 CreateChild(new TextureAnimationsView("Texture Animations", Model.TextureAnimations, ngc));
 
-            for (var i = 0; i < Model.TexturePalettes.Length; i++)
-                if (Model.TexturePalettes[i] != null)
-                    CreateChild(new ColorTableView("Texture Palette " + (i + 1).ToString(), Model.TexturePalettes[i], Model.NameGetterContext));
+            for (var i = 0; i < Model.PaletteTables.Length; i++)
+                if (Model.PaletteTables[i] != null)
+                    CreateChild(new ColorTableView("Texture Palette " + (i + 1).ToString(), Model.PaletteTables[i], Model.NameGetterContext));
 
             if (Model.IndexedTextureTable != null)
                 CreateChild(new TableView("Indexed Textures",  Model.IndexedTextureTable, ngc));

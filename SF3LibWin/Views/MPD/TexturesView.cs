@@ -22,7 +22,7 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new TextureAnimFramesView("Animation Frames", Model, ngc));
             }
 
-            var palettes = Model.TexturePalettes
+            var palettes = Model.PaletteTables
                 .Select((p, i) => new { Index = i, Palette = p })
                 .Where(x => x.Palette != null)
                 .GroupBy(x => x.Palette.Address)

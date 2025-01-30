@@ -56,7 +56,7 @@ namespace SF3.Win.Views.MPD {
 
                     var imageData = chunk.DecompressedData.GetDataCopyAt(0, width * height).To2DArrayColumnMajor(width, height);
 
-                    var uniquePalettes = Model.TexturePalettes.Where(x => x != null).GroupBy(x => x.Address).Select(x => x.First()).ToArray();
+                    var uniquePalettes = Model.PaletteTables.Where(x => x != null).GroupBy(x => x.Address).Select(x => x.First()).ToArray();
                     var palettes = uniquePalettes .Select(x => x != null ? new Palette(x.Select(x => x.ColorABGR1555).ToArray()) : null).ToArray();
                     var bitmapDatas = palettes.Select(x => x != null ? BitmapUtils.ConvertIndexedDataToABGR8888BitmapData(imageData, x, false) : null).ToArray();
                     var bitmapHeight = bitmapDatas.Sum(x => x != null ? height : 0);

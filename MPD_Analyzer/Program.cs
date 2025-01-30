@@ -88,11 +88,11 @@ namespace MPD_Analyzer {
 
                             // If the disc is Scenario 3, all palettes should be present.
                             if (mpdFile.Scenario >= ScenarioType.Scenario3) {
-                                if (mpdFile.TexturePalettes[0] == null)
+                                if (mpdFile.PaletteTables[0] == null)
                                     Console.WriteLine("  !!! Scenario3 Palette[0] doesn't exist!");
-                                if (mpdFile.TexturePalettes[1] == null)
+                                if (mpdFile.PaletteTables[1] == null)
                                     Console.WriteLine("  !!! Scenario3 Palette[1] doesn't exist!");
-                                if (mpdFile.TexturePalettes[2] == null)
+                                if (mpdFile.PaletteTables[2] == null)
                                     Console.WriteLine("  !!! Scenario3 Palette[2] doesn't exist!");
                             }
 
