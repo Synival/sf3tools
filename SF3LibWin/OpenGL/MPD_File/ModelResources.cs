@@ -127,7 +127,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var color = new Vector4(1);
 
                 // Apply semi-transparency for the appropriate draw mode.
-                if (attr.Mode_DrawMode == DrawMode.CL_Trans)
+                var isSemiTransparent = attr.Mode_DrawMode == DrawMode.CL_Trans;
+                if (isSemiTransparent)
                     color[3] /= 2;
 
                 TextureAnimation anim = null;
@@ -172,7 +173,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
                     newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, applyLightingVboData));
 
-                    if (attr.Mode_DrawMode == DrawMode.CL_Trans) {
+                    if (isSemiTransparent) {
                         if (anim != null)
                             semiTransparentTexturedQuads.Add(newQuad);
                         else

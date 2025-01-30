@@ -29,11 +29,26 @@ namespace SF3.Win.OpenGL {
             TextureRotate = rotate;
             TextureFlip   = flip;
 
+            // Determine the largest dimension and consider that our scale.
+            var minCoords = new float[] { vertices[0][0], vertices[0][1], vertices[0][2] };
+            var maxCoords = new float[] { vertices[0][0], vertices[0][1], vertices[0][2] };
+            for (var i = 0; i < 4; i++) {
+                for (var j = 0; j < 3; j++) {
+                    var value = vertices[i][j];
+                    if (value < minCoords[j])
+                        minCoords[j] = value;
+                    if (value > maxCoords[j])
+                        maxCoords[j] = value;
+                }
+            }
+            var scale = Math.Max(Math.Max(maxCoords[2] - minCoords[2], maxCoords[1] - minCoords[1]), maxCoords[0] - minCoords[0]);
+
             // If the center of this quad isn't equal to the sum/average of its opposite corners, add a fifth vertex
-            // that will divide it into 4 triangles rather than 2.
+            // that will divide it into 4 triangles rather than 2. Use a very lenient tolerance to prevent too many
+            // mostly-float polygons from being subdivided.
             var sum1 = vertices[0] + vertices[2];
             var sum2 = vertices[1] + vertices[3];
-            HasCenterVertex = !VerticesAreBasicallyEqual(sum1, sum2);
+            HasCenterVertex = !VerticesAreBasicallyEqual(sum1, sum2, scale / 16.0f);
             Vertices = HasCenterVertex ? 5 : 4;
 
             Attributes = [];
@@ -43,12 +58,12 @@ namespace SF3.Win.OpenGL {
                 colors.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 4)));
         }
 
-        private bool VerticesAreBasicallyEqual(Vector3 lhs, Vector3 rhs) {
-            if (lhs[0] > rhs[0] + 0.0001f || lhs[0] < rhs[0] - 0.0001f)
+        private bool VerticesAreBasicallyEqual(Vector3 lhs, Vector3 rhs, float tolerance) {
+            if (lhs[0] > rhs[0] + tolerance || lhs[0] < rhs[0] - tolerance)
                 return false;
-            if (lhs[1] > rhs[1] + 0.0001f || lhs[1] < rhs[1] - 0.0001f)
+            if (lhs[1] > rhs[1] + tolerance || lhs[1] < rhs[1] - tolerance)
                 return false;
-            if (lhs[2] > rhs[2] + 0.0001f || lhs[2] < rhs[2] - 0.0001f)
+            if (lhs[2] > rhs[2] + tolerance || lhs[2] < rhs[2] - tolerance)
                 return false;
             return true;
         }
