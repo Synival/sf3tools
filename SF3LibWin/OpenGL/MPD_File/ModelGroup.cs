@@ -3,14 +3,20 @@ using CommonLib;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class ModelGroup : IDisposable {
-        public ModelGroup(QuadModel solidTexturedModel, QuadModel semiTransparentTexturedModel) {
-            SolidTexturedModel           = solidTexturedModel;
-            SemiTransparentTexturedModel = semiTransparentTexturedModel;
+        public ModelGroup(QuadModel solidTexturedModel, QuadModel solidUntexturedModel, QuadModel semiTransparentTexturedModel, QuadModel semiTransparentUntexturedModel) {
+            SolidTexturedModel             = solidTexturedModel;
+            SolidUntexturedModel           = solidUntexturedModel;
+            SemiTransparentTexturedModel   = semiTransparentTexturedModel;
+            SemiTransparentUntexturedModel = semiTransparentUntexturedModel;
 
             if (solidTexturedModel != null)
                 Models.Add(solidTexturedModel);
+            if (solidUntexturedModel != null)
+                Models.Add(solidUntexturedModel);
             if (semiTransparentTexturedModel != null)
                 Models.Add(semiTransparentTexturedModel);
+            if (semiTransparentUntexturedModel != null)
+                Models.Add(semiTransparentUntexturedModel);
         }
 
         private bool disposed = false;
@@ -35,7 +41,9 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public QuadModel SolidTexturedModel { get; }
+        public QuadModel SolidUntexturedModel { get; }
         public QuadModel SemiTransparentTexturedModel { get; }
+        public QuadModel SemiTransparentUntexturedModel { get; }
 
         public DisposableList<QuadModel> Models { get; } = new DisposableList<QuadModel>();
     }

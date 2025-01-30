@@ -292,31 +292,52 @@ namespace SF3.Win.Controls {
                     }
                 }
 
-                using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
-                using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
-                using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
-                using (_world.ObjectShader.Use()) {
-                    if (_models?.Models != null) {
+                if (_models?.Models != null) {
+                    using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
+                    using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
+                    using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
+                    using (_world.ObjectShader.Use()) {
                         var modelsWithGroups = _models.Models
                             .Select(x => new { Model = x, ModelGroup = _models.ModelsByMemoryAddress.TryGetValue(x.PData1, out ModelGroup pd) ? pd : null })
                             .Where(x => x.ModelGroup != null)
                             .ToArray();
 
-                        // Draw solid textured models.
+                        // Pass 1: Textured models
                         foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidTexturedModel != null).ToArray()) {
                             SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
                             mwg.ModelGroup.SolidTexturedModel.Draw(_world.ObjectShader);
                         }
 
-                        // Draw semi-transparent textured models.
+                        // Pass 2: Untextured models
+                        using (_world.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
+                            foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidUntexturedModel != null).ToArray()) {
+                                SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
+                                mwg.ModelGroup.SolidUntexturedModel.Draw(_world.ObjectShader, null);
+                            }
+                        }
+
+                        // Draw semi-transparent shaders now. Don't write to the depth buffer.
                         GL.DepthMask(false);
+
+                        // Pass 3: Semi-transparent textured models
                         foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SemiTransparentTexturedModel != null).ToArray()) {
                             SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
                             mwg.ModelGroup.SemiTransparentTexturedModel.Draw(_world.ObjectShader);
                         }
+
+                        // Pass 4: Semi-transparent untextured models
+                        using (_world.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
+                            foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SemiTransparentUntexturedModel != null).ToArray()) {
+                                SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
+                                mwg.ModelGroup.SemiTransparentUntexturedModel.Draw(_world.ObjectShader, null);
+                            }
+                        }
+
+                        // Done drawing semi-transparent shaders now. Write to the depth buffer again.
                         GL.DepthMask(true);
                     }
 
+                    // Reset model matrices to their identity.
                     UpdateShaderModelMatrix(_world.ObjectShader, Matrix4.Identity);
                     UpdateShaderNormalMatrix(_world.ObjectShader, Matrix3.Identity);
                 }

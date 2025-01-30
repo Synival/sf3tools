@@ -108,8 +108,11 @@ namespace SF3.Win.OpenGL.MPD_File {
                 : [];
 
             bool modelExists = false;
-            var quads = new List<Quad>();
-            var semiTransparentQuads = new List<Quad>();
+
+            var solidTexturedQuads             = new List<Quad>();
+            var solidUntexturedQuads           = new List<Quad>();
+            var semiTransparentTexturedQuads   = new List<Quad>();
+            var semiTransparentUntexturedQuads = new List<Quad>();
 
             for (var i = 0; i < polygons.Length; i++) {
                 var polygon = polygons[i];
@@ -117,13 +120,6 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 // Get texture. Fetch animated textures if possible.
                 var textureId = attr.TextureNo;
-                TextureAnimation anim = null;
-                if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
-                    if (animationsById.ContainsKey(textureId))
-                        anim = new TextureAnimation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
-                    else if (texturesById.ContainsKey(textureId))
-                        anim = new TextureAnimation(textureId, [texturesById[textureId]], 0);
-                }
 
                 // Get texture flipping. Manually flip them horizontally to account for the weird thing where the X coordinates are reversed.
                 var flip = (TextureFlipType) (attr.Dir & 0x0030);
@@ -135,14 +131,24 @@ namespace SF3.Win.OpenGL.MPD_File {
                 if (attr.Mode_DrawMode == DrawMode.CL_Trans)
                     color[3] /= 2;
 
+                TextureAnimation anim = null;
+
                 // TODO: wtf do these mean???
                 if (attr.Mode_ECdis && attr.Mode_SPdis) {
                     var colorChannels = PixelConversion.ABGR1555toChannels(attr.ColorNo);
-                    color = new Vector4(colorChannels.r, colorChannels.g, colorChannels.b, 1.0f);
+                    color = new Vector4(colorChannels.r / 255.0f, colorChannels.g / 255.0f, colorChannels.b / 255.0f, 1.0f);
                 }
-                // TODO: There isn't always a texture. What to do?
-                else if (anim == null)
-                    continue;
+                else {
+                    if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
+                        if (animationsById.ContainsKey(textureId))
+                            anim = new TextureAnimation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
+                        else if (texturesById.ContainsKey(textureId))
+                            anim = new TextureAnimation(textureId, [texturesById[textureId]], 0);
+                    }
+                    // TODO: what to do for missing textures?
+                    if (anim == null)
+                        continue;
+                }
 
                 VECTOR[] polyVertexModels = [
                     vertices[polygon.Vertex1].Vector,
@@ -159,7 +165,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var vertexNormals = new Vector3[] { normal, normal, normal, normal };
                 var normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
-                var applyLighting = attr.ApplyLighting ? 1.0f : 0.0f;
+                var applyLighting = (attr.ApplyLighting || anim == null) ? 1.0f : 0.0f;
                 var applyLightingVboData = new float[,] {{applyLighting}, {applyLighting}, {applyLighting}, {applyLighting}};
 
                 void AddQuad() {
@@ -167,10 +173,18 @@ namespace SF3.Win.OpenGL.MPD_File {
                     newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
                     newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, applyLightingVboData));
 
-                    if (attr.Mode_DrawMode == DrawMode.CL_Trans)
-                        semiTransparentQuads.Add(newQuad);
-                    else
-                        quads.Add(newQuad);
+                    if (attr.Mode_DrawMode == DrawMode.CL_Trans) {
+                        if (anim != null)
+                            semiTransparentTexturedQuads.Add(newQuad);
+                        else
+                            semiTransparentUntexturedQuads.Add(newQuad);
+                    }
+                    else {
+                        if (anim != null)
+                            solidTexturedQuads.Add(newQuad);
+                        else
+                            solidUntexturedQuads.Add(newQuad);
+                    }
                 }
 
                 // Add quads first...
@@ -197,13 +211,17 @@ namespace SF3.Win.OpenGL.MPD_File {
                 modelExists = true;
             }
 
-            var solidTexturedModel           = (quads.Count > 0)                ? new QuadModel(quads.ToArray()) : null;
-            var semiTransparentTexturedModel = (semiTransparentQuads.Count > 0) ? new QuadModel(semiTransparentQuads.ToArray()) : null;
+            var solidTexturedModel             = (solidTexturedQuads.Count > 0)             ? new QuadModel(solidTexturedQuads.ToArray())              : null;
+            var solidUntexturedModel           = (solidUntexturedQuads.Count > 0)           ? new QuadModel(solidUntexturedQuads.ToArray())            : null;
+            var semiTransparentTexturedModel   = (semiTransparentTexturedQuads.Count > 0)   ? new QuadModel(semiTransparentTexturedQuads.ToArray())   : null;
+            var semiTransparentUntexturedModel = (semiTransparentUntexturedQuads.Count > 0) ? new QuadModel(semiTransparentUntexturedQuads.ToArray()) : null;
 
             if (modelExists) {
                 ModelsByMemoryAddress[pdataAddressInMemory] = new ModelGroup(
                     solidTexturedModel,
-                    semiTransparentTexturedModel
+                    solidUntexturedModel,
+                    semiTransparentTexturedModel,
+                    semiTransparentUntexturedModel
                 );
             }
         }
